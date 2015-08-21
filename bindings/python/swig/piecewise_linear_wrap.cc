@@ -3459,61 +3459,63 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__PiecewiseLinear swig_types[7]
 #define SWIGTYPE_p_GeoCal__WithParameter swig_types[8]
 #define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[9]
-#define SWIGTYPE_p_allocator_type swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[16]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[17]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[30]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[31]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[32]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[33]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[34]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[35]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[36]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[37]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[38]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[39]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[40]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[41]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t swig_types[42]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[43]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[44]
-#define SWIGTYPE_p_char swig_types[45]
-#define SWIGTYPE_p_char_type swig_types[46]
-#define SWIGTYPE_p_difference_type swig_types[47]
-#define SWIGTYPE_p_fmtflags swig_types[48]
-#define SWIGTYPE_p_int_type swig_types[49]
-#define SWIGTYPE_p_iostate swig_types[50]
-#define SWIGTYPE_p_off_type swig_types[51]
-#define SWIGTYPE_p_openmode swig_types[52]
-#define SWIGTYPE_p_pos_type swig_types[53]
-#define SWIGTYPE_p_seekdir swig_types[54]
-#define SWIGTYPE_p_size_t swig_types[55]
-#define SWIGTYPE_p_size_type swig_types[56]
-#define SWIGTYPE_p_state_type swig_types[57]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[58]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[59]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[60]
-#define SWIGTYPE_p_traits_type swig_types[61]
-#define SWIGTYPE_p_value_type swig_types[62]
-static swig_type_info *swig_types[64];
-static swig_module_info swig_module = {swig_types, 63, 0, 0, 0, 0};
+#define SWIGTYPE_p_Time swig_types[10]
+#define SWIGTYPE_p_allocator_type swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_Time_1_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[29]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[30]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[31]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[32]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[33]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[34]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[35]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[36]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[37]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[38]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[39]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[40]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[41]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[42]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[43]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t swig_types[44]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[45]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[46]
+#define SWIGTYPE_p_char swig_types[47]
+#define SWIGTYPE_p_char_type swig_types[48]
+#define SWIGTYPE_p_difference_type swig_types[49]
+#define SWIGTYPE_p_fmtflags swig_types[50]
+#define SWIGTYPE_p_int_type swig_types[51]
+#define SWIGTYPE_p_iostate swig_types[52]
+#define SWIGTYPE_p_off_type swig_types[53]
+#define SWIGTYPE_p_openmode swig_types[54]
+#define SWIGTYPE_p_pos_type swig_types[55]
+#define SWIGTYPE_p_seekdir swig_types[56]
+#define SWIGTYPE_p_size_t swig_types[57]
+#define SWIGTYPE_p_size_type swig_types[58]
+#define SWIGTYPE_p_state_type swig_types[59]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[60]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[61]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[62]
+#define SWIGTYPE_p_traits_type swig_types[63]
+#define SWIGTYPE_p_value_type swig_types[64]
+static swig_type_info *swig_types[66];
+static swig_module_info swig_module = {swig_types, 65, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5144,6 +5146,9 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -5273,11 +5278,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_PiecewiseLinear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< Time,1 > *arg1 = 0 ;
   GeoCal::ArrayAd< double,1 > *arg2 = 0 ;
   blitz::Array< int,1 > *arg3 = 0 ;
-  blitz::Array< double,1 > a1 ;
-  PythonObject numpy1 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > tempshared2 ;
@@ -5287,17 +5292,14 @@ SWIGINTERN PyObject *_wrap_new_PiecewiseLinear(PyObject *SWIGUNUSEDPARM(self), P
   GeoCal::PiecewiseLinear *result = 0 ;
   
   if (!SWIG_Python_UnpackTuple(args,"new_PiecewiseLinear",3,3,swig_obj)) SWIG_fail;
-  {
-    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
-      a1.reference(to_blitz_array<double, 1>(numpy1));
-      arg1 = &a1;
-    }
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_blitz__ArrayT_Time_1_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PiecewiseLinear" "', argument " "1"" of type '" "blitz::Array< Time,1 > const &""'"); 
   }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PiecewiseLinear" "', argument " "1"" of type '" "blitz::Array< Time,1 > const &""'"); 
+  }
+  arg1 = reinterpret_cast< blitz::Array< Time,1 > * >(argp1);
   {
     int newmem = 0;
     // Added mms
@@ -5336,7 +5338,7 @@ SWIGINTERN PyObject *_wrap_new_PiecewiseLinear(PyObject *SWIGUNUSEDPARM(self), P
   }
   {
     try {
-      result = (GeoCal::PiecewiseLinear *)new GeoCal::PiecewiseLinear((blitz::Array< double,1 > const &)*arg1,(GeoCal::ArrayAd< double,1 > const &)*arg2,(blitz::Array< int,1 > const &)*arg3);
+      result = (GeoCal::PiecewiseLinear *)new GeoCal::PiecewiseLinear((blitz::Array< Time,1 > const &)*arg1,(GeoCal::ArrayAd< double,1 > const &)*arg2,(blitz::Array< int,1 > const &)*arg3);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5347,6 +5349,59 @@ SWIGINTERN PyObject *_wrap_new_PiecewiseLinear(PyObject *SWIGUNUSEDPARM(self), P
     boost::shared_ptr<  GeoCal::PiecewiseLinear > *smartresult = result ? new boost::shared_ptr<  GeoCal::PiecewiseLinear >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PiecewiseLinear_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::PiecewiseLinear *arg1 = (GeoCal::PiecewiseLinear *) 0 ;
+  Time *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear const > tempshared1 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject *swig_obj[2] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"PiecewiseLinear_value",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PiecewiseLinear_value" "', argument " "1"" of type '" "GeoCal::PiecewiseLinear const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      arg1 = const_cast< GeoCal::PiecewiseLinear * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      arg1 = const_cast< GeoCal::PiecewiseLinear * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_Time,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PiecewiseLinear_value" "', argument " "2"" of type '" "Time const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PiecewiseLinear_value" "', argument " "2"" of type '" "Time const &""'"); 
+  }
+  arg2 = reinterpret_cast< Time * >(argp2);
+  {
+    try {
+      result = (double)((GeoCal::PiecewiseLinear const *)arg1)->value((Time const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
   return NULL;
@@ -5454,8 +5509,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"PiecewiseLinear_FunctionType_set", _wrap_PiecewiseLinear_FunctionType_set, METH_VARARGS, NULL},
 	 { (char *)"PiecewiseLinear_FunctionType_get", (PyCFunction)_wrap_PiecewiseLinear_FunctionType_get, METH_O, NULL},
 	 { (char *)"new_PiecewiseLinear", _wrap_new_PiecewiseLinear, METH_VARARGS, (char *)"\n"
-		"PiecewiseLinear::PiecewiseLinear(const blitz::Array< double, 1 > &X, const ArrayAd< double, 1 > &Y,\n"
+		"PiecewiseLinear::PiecewiseLinear(const blitz::Array< Time, 1 > &X, const ArrayAd< double, 1 > &Y,\n"
 		"const blitz::Array< int, 1 > &T)\n"
+		"\n"
+		""},
+	 { (char *)"PiecewiseLinear_value", _wrap_PiecewiseLinear_value, METH_VARARGS, (char *)"\n"
+		"double PiecewiseLinear::value(const Time &x) const\n"
 		"\n"
 		""},
 	 { (char *)"PiecewiseLinear___str__", (PyCFunction)_wrap_PiecewiseLinear___str__, METH_O, NULL},
@@ -5536,7 +5595,9 @@ static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObje
 static swig_type_info _swigt__p_GeoCal__PiecewiseLinear = {"_p_GeoCal__PiecewiseLinear", "GeoCal::PiecewiseLinear *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__WithParameter = {"_p_GeoCal__WithParameter", "GeoCal::WithParameter *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__WithParameterNested = {"_p_GeoCal__WithParameterNested", "GeoCal::WithParameterNested *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Time = {"_p_Time", "Time *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_Time_1_t = {"_p_blitz__ArrayT_Time_1_t", "blitz::Array< Time,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_3_t = {"_p_blitz__ArrayT_bool_3_t", "blitz::Array< bool,3 > *", 0, 0, (void*)0, 0};
@@ -5601,7 +5662,9 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__PiecewiseLinear,
   &_swigt__p_GeoCal__WithParameter,
   &_swigt__p_GeoCal__WithParameterNested,
+  &_swigt__p_Time,
   &_swigt__p_allocator_type,
+  &_swigt__p_blitz__ArrayT_Time_1_t,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
   &_swigt__p_blitz__ArrayT_bool_3_t,
@@ -5666,7 +5729,9 @@ static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal_
 static swig_cast_info _swigc__p_GeoCal__PiecewiseLinear[] = {  {&_swigt__p_GeoCal__PiecewiseLinear, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__WithParameter[] = {  {&_swigt__p_GeoCal__WithParameter, 0, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__PiecewiseLinear, _p_GeoCal__PiecewiseLinearTo_p_GeoCal__WithParameter, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__WithParameterNested[] = {  {&_swigt__p_GeoCal__WithParameterNested, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Time[] = {  {&_swigt__p_Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_Time_1_t[] = {  {&_swigt__p_blitz__ArrayT_Time_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_3_t[] = {  {&_swigt__p_blitz__ArrayT_bool_3_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -5731,7 +5796,9 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__PiecewiseLinear,
   _swigc__p_GeoCal__WithParameter,
   _swigc__p_GeoCal__WithParameterNested,
+  _swigc__p_Time,
   _swigc__p_allocator_type,
+  _swigc__p_blitz__ArrayT_Time_1_t,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,
   _swigc__p_blitz__ArrayT_bool_3_t,

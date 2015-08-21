@@ -137,15 +137,23 @@ class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
     FunctionType = _swig_property(_piecewise_linear.PiecewiseLinear_FunctionType_get, _piecewise_linear.PiecewiseLinear_FunctionType_set)
     def __init__(self, *args): 
         """
-        PiecewiseLinear::PiecewiseLinear(const blitz::Array< double, 1 > &X, const ArrayAd< double, 1 > &Y,
+        PiecewiseLinear::PiecewiseLinear(const blitz::Array< Time, 1 > &X, const ArrayAd< double, 1 > &Y,
         const blitz::Array< int, 1 > &T)
 
         """
         _piecewise_linear.PiecewiseLinear_swiginit(self,_piecewise_linear.new_PiecewiseLinear(*args))
+    def value(self, *args):
+        """
+        double PiecewiseLinear::value(const Time &x) const
+
+        """
+        return _piecewise_linear.PiecewiseLinear_value(self, *args)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _piecewise_linear.delete_PiecewiseLinear
+PiecewiseLinear.value = new_instancemethod(_piecewise_linear.PiecewiseLinear_value,None,PiecewiseLinear)
 PiecewiseLinear.__str__ = new_instancemethod(_piecewise_linear.PiecewiseLinear___str__,None,PiecewiseLinear)
 PiecewiseLinear_swigregister = _piecewise_linear.PiecewiseLinear_swigregister
 PiecewiseLinear_swigregister(PiecewiseLinear)

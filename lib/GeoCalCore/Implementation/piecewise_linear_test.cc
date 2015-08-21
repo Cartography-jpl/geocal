@@ -7,8 +7,9 @@ using namespace blitz;
 BOOST_FIXTURE_TEST_SUITE(piecewise_linear, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic)
 {
-  Array<double, 1> x(7);
-  x = 10,15,20,25,35,40,45;
+  Array<Time, 1> x(7);
+  x = Time::time_pgs(10),Time::time_pgs(15),Time::time_pgs(20),
+    Time::time_pgs(25),Time::time_pgs(35),Time::time_pgs(40),Time::time_pgs(45);
   Array<int, 1> t(7-1);
   t = PiecewiseLinear::CONSTANT, 
     PiecewiseLinear::LINEAR,
@@ -31,8 +32,9 @@ BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())
     return;
-  Array<double, 1> x(7);
-  x = 10,15,20,25,35,40,45;
+  Array<Time, 1> x(7);
+  x = Time::time_pgs(10),Time::time_pgs(15),Time::time_pgs(20),
+    Time::time_pgs(25),Time::time_pgs(35),Time::time_pgs(40),Time::time_pgs(45);
   Array<int, 1> t(7-1);
   t = PiecewiseLinear::CONSTANT, 
     PiecewiseLinear::LINEAR,

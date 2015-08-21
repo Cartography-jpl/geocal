@@ -17,7 +17,7 @@ GEOCAL_IMPLEMENT(PiecewiseLinear);
 #endif
 
 PiecewiseLinear::PiecewiseLinear
-(const blitz::Array<double, 1>& X, 
+(const blitz::Array<Time, 1>& X, 
  const ArrayAd<double, 1>& Y,
  const blitz::Array<int, 1>& T)
   : x_(X.copy()), y_(X.rows(), Y.number_variable()), t_(T.copy())
@@ -70,7 +70,7 @@ ArrayAd<double, 1> PiecewiseLinear::parameter_with_derivative() const
   return res;
 }
 
-double PiecewiseLinear::value(double x) const
+double PiecewiseLinear::value(const Time& x) const
 {
   if(x < x_(0))
     return y_.value()(0);
@@ -92,7 +92,7 @@ double PiecewiseLinear::value(double x) const
 }
 
 AutoDerivative<double> PiecewiseLinear::value_with_derivative
-(const AutoDerivative<double>& x) const
+(const TimeWithDerivative& x) const
 {
   if(x.value() < x_(0))
     return y_.value()(0);

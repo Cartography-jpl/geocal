@@ -1,7 +1,7 @@
 #ifndef PIECEWISE_LINEAR_H
 #define PIECEWISE_LINEAR_H
 #include "with_parameter.h"
-#include "printable.h"
+#include "geocal_time.h"
 #include <blitz/array.h>
 
 namespace GeoCal {
@@ -12,18 +12,18 @@ class PiecewiseLinear : public WithParameter,
 			public Printable<PiecewiseLinear> {
 public:
   enum {LINEAR, CONSTANT, LINEAR_TO_ZERO} FunctionType;
-  PiecewiseLinear(const blitz::Array<double, 1>& X, 
+  PiecewiseLinear(const blitz::Array<Time, 1>& X, 
 		  const ArrayAd<double, 1>& Y,
 		  const blitz::Array<int, 1>& T);
   virtual ~PiecewiseLinear() {}
-  double value(double x) const;
+  double value(const Time& x) const;
   AutoDerivative<double> 
-  value_with_derivative(const AutoDerivative<double>& X) const;
+  value_with_derivative(const TimeWithDerivative& X) const;
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual void print(std::ostream& Os) const;
 private:
-  blitz::Array<double, 1> x_;
+  blitz::Array<Time, 1> x_;
   ArrayAd<double, 1> y_;
   blitz::Array<int, 1> t_;
   int parameter_size_;

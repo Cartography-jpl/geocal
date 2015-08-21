@@ -8,7 +8,7 @@
 
 from sys import version_info
 if version_info >= (3,0,0):
-    new_instancemethod = lambda func, inst, cls: _piecewise_linear.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _orbit_piecewise_correction.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2,6,0):
@@ -17,20 +17,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_piecewise_linear', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_orbit_piecewise_correction', [dirname(__file__)])
         except ImportError:
-            import _piecewise_linear
-            return _piecewise_linear
+            import _orbit_piecewise_correction
+            return _orbit_piecewise_correction
         if fp is not None:
             try:
-                _mod = imp.load_module('_piecewise_linear', fp, pathname, description)
+                _mod = imp.load_module('_orbit_piecewise_correction', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _piecewise_linear = swig_import_helper()
+    _orbit_piecewise_correction = swig_import_helper()
     del swig_import_helper
 else:
-    import _piecewise_linear
+    import _orbit_piecewise_correction
 del version_info
 try:
     _swig_property = property
@@ -88,7 +88,7 @@ except:
     weakref_proxy = lambda x: x
 
 
-SHARED_PTR_DISOWN = _piecewise_linear.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _orbit_piecewise_correction.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -121,41 +121,39 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.with_parameter
+import geocal_swig.orbit_correction
+import geocal_swig.orbit
 import geocal_swig.generic_object
-class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
+import geocal_swig.observer
+import geocal_swig.with_parameter
+class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     """
-    This is a piecewise linear/constant function.
+    This class gives an orbit that tries to correct errors in another
+    underlying orbit.
 
-    C++ includes: piecewise_linear.h 
+    The correction is a piecewise correction to the position, in local ENU
+    coordinate system.
+
+    The underlying orbit should return a QuaternionOrbitData orbit data,
+    since this is currently the only type supported.
+
+    C++ includes: orbit_piecewise_correction.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
-    LINEAR = _piecewise_linear.PiecewiseLinear_LINEAR
-    CONSTANT = _piecewise_linear.PiecewiseLinear_CONSTANT
-    LINEAR_TO_ZERO = _piecewise_linear.PiecewiseLinear_LINEAR_TO_ZERO
-    FunctionType = _swig_property(_piecewise_linear.PiecewiseLinear_FunctionType_get, _piecewise_linear.PiecewiseLinear_FunctionType_set)
     def __init__(self, *args): 
         """
-        GeoCal::PiecewiseLinear::PiecewiseLinear()
+        GeoCal::OrbitPiecewiseCorrection::OrbitPiecewiseCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, const PiecewiseLinear
+        &E_corr, const PiecewiseLinear &N_corr, const PiecewiseLinear &U_corr)
 
         """
-        _piecewise_linear.PiecewiseLinear_swiginit(self,_piecewise_linear.new_PiecewiseLinear(*args))
-    def value(self, *args):
-        """
-        double PiecewiseLinear::value(const Time &x) const
-
-        """
-        return _piecewise_linear.PiecewiseLinear_value(self, *args)
-
+        _orbit_piecewise_correction.OrbitPiecewiseCorrection_swiginit(self,_orbit_piecewise_correction.new_OrbitPiecewiseCorrection(*args))
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-    __swig_destroy__ = _piecewise_linear.delete_PiecewiseLinear
-PiecewiseLinear.value = new_instancemethod(_piecewise_linear.PiecewiseLinear_value,None,PiecewiseLinear)
-PiecewiseLinear.__str__ = new_instancemethod(_piecewise_linear.PiecewiseLinear___str__,None,PiecewiseLinear)
-PiecewiseLinear_swigregister = _piecewise_linear.PiecewiseLinear_swigregister
-PiecewiseLinear_swigregister(PiecewiseLinear)
+    __swig_destroy__ = _orbit_piecewise_correction.delete_OrbitPiecewiseCorrection
+OrbitPiecewiseCorrection_swigregister = _orbit_piecewise_correction.OrbitPiecewiseCorrection_swigregister
+OrbitPiecewiseCorrection_swigregister(OrbitPiecewiseCorrection)
 
 
 

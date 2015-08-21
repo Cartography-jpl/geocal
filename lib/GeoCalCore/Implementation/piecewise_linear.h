@@ -15,6 +15,11 @@ public:
   PiecewiseLinear(const blitz::Array<Time, 1>& X, 
 		  const ArrayAd<double, 1>& Y,
 		  const blitz::Array<int, 1>& T);
+  PiecewiseLinear(const PiecewiseLinear& P)
+    : x_(P.x_.copy()), y_(P.y_.copy()), t_(P.t_.copy()),
+      parameter_size_(P.parameter_size_)
+  { }
+  PiecewiseLinear() {}
   virtual ~PiecewiseLinear() {}
   double value(const Time& x) const;
   AutoDerivative<double> 
@@ -27,7 +32,6 @@ private:
   ArrayAd<double, 1> y_;
   blitz::Array<int, 1> t_;
   int parameter_size_;
-  PiecewiseLinear() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

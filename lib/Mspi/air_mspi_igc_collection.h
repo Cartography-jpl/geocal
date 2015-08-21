@@ -57,6 +57,48 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Change the orbit we are using.
+//-----------------------------------------------------------------------
+
+  void set_orbit(const boost::shared_ptr<Orbit>& Orb)
+  {
+    igc.clear();
+    orbit_ = Orb;
+    clear_object();
+    add_object(camera_);
+    add_object(gimbal_);
+    add_object(orbit_);
+  }
+
+//-----------------------------------------------------------------------
+/// Change the camera we are using.
+//-----------------------------------------------------------------------
+
+  void set_camera(const boost::shared_ptr<MspiCamera>& Cam)
+  {
+    igc.clear();
+    camera_ = Cam;
+    clear_object();
+    add_object(camera_);
+    add_object(gimbal_);
+    add_object(orbit_);
+  }
+
+//-----------------------------------------------------------------------
+/// Change the gimbal we are using.
+//-----------------------------------------------------------------------
+
+  void set_gimbal(const boost::shared_ptr<MspiGimbal>& Gim)
+  {
+    igc.clear();
+    gimbal_ = Gim;
+    clear_object();
+    add_object(camera_);
+    add_object(gimbal_);
+    add_object(orbit_);
+  }
+
+//-----------------------------------------------------------------------
 /// Return specific gimbal we are using, needed for some routines that
 /// depend on the details of MspiGimbal.
 //-----------------------------------------------------------------------

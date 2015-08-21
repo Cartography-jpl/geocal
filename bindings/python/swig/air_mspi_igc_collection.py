@@ -172,6 +172,13 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_orbit(self, *args)
 
+    def set_orbit(self, *args):
+        """
+        void GeoCal::AirMspiIgcCollection::set_orbit(const boost::shared_ptr< Orbit > &Orb)
+        Change the orbit we are using. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_set_orbit(self, *args)
+
     def camera(self, *args):
         """
         boost::shared_ptr<MspiCamera> GeoCal::AirMspiIgcCollection::camera(int Index) const
@@ -180,6 +187,13 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_camera(self, *args)
 
+    def set_camera(self, *args):
+        """
+        void GeoCal::AirMspiIgcCollection::set_camera(const boost::shared_ptr< MspiCamera > &Cam)
+        Change the camera we are using. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_set_camera(self, *args)
+
     def gimbal(self, *args):
         """
         boost::shared_ptr<MspiGimbal> GeoCal::AirMspiIgcCollection::gimbal(int Index) const
@@ -187,6 +201,13 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         depend on the details of MspiGimbal. 
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_gimbal(self, *args)
+
+    def set_gimbal(self, *args):
+        """
+        void GeoCal::AirMspiIgcCollection::set_gimbal(const boost::shared_ptr< MspiGimbal > &Gim)
+        Change the gimbal we are using. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_set_gimbal(self, *args)
 
     def time_table(self, *args):
         """
@@ -267,8 +288,11 @@ AirMspiIgcCollection.config_value_double = new_instancemethod(_air_mspi_igc_coll
 AirMspiIgcCollection.config_value_int = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_config_value_int,None,AirMspiIgcCollection)
 AirMspiIgcCollection.config_value_string = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_config_value_string,None,AirMspiIgcCollection)
 AirMspiIgcCollection.orbit = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_orbit,None,AirMspiIgcCollection)
+AirMspiIgcCollection.set_orbit = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_set_orbit,None,AirMspiIgcCollection)
 AirMspiIgcCollection.camera = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_camera,None,AirMspiIgcCollection)
+AirMspiIgcCollection.set_camera = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_set_camera,None,AirMspiIgcCollection)
 AirMspiIgcCollection.gimbal = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_gimbal,None,AirMspiIgcCollection)
+AirMspiIgcCollection.set_gimbal = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_set_gimbal,None,AirMspiIgcCollection)
 AirMspiIgcCollection.time_table = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_time_table,None,AirMspiIgcCollection)
 AirMspiIgcCollection.number_band = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_number_band,None,AirMspiIgcCollection)
 AirMspiIgcCollection.band = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_band,None,AirMspiIgcCollection)

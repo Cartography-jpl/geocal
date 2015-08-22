@@ -175,10 +175,11 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
     (cam_l, cam_s + 1, sub_l, sub_s, t) (cam_l, cam_s , sub_l, sub_s, t +
     eps)
 
-    There are a few complications: 1. What do we do for the first line of
-    data, when data from time t has not been calculated. 2. What do we do
-    at the egdes of the camera, when cam_s - 1 or cam_s + 1 has not been
-    calculated.
+    There are a few complications: What do we do for the first line of
+    data, when data from time t has not been calculated.
+
+    What do we do at the egdes of the camera, when cam_s - 1 or cam_s + 1
+    has not been calculated.
 
     For (1) we use the length of the ray that intersectes the WGS84 +
     Max_height where Max_height is greater than any height we encounter in
@@ -202,10 +203,10 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
     we have an aftward camera.
 
     Note that this assumes that we continue pointing in the same
-    direction. This is *not* the case for something like AirMSPI running
-    in sweep mode (where we step through a number of camera angles), but
-    for now we just assume that whatever the first pointing is that we use
-    is the pointing that will be used for all lines.
+    direction. This is not the case for something like AirMSPI running in
+    sweep mode (where we step through a number of camera angles), but for
+    now we just assume that whatever the first pointing is that we use is
+    the pointing that will be used for all lines.
 
     Note that we could relax the assumption that we are always going
     forward or aftward in the future by doing a calculation like we do for

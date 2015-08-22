@@ -11143,7 +11143,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RasterImage___str__", (PyCFunction)_wrap_RasterImage___str__, METH_O, NULL},
 	 { (char *)"RasterImage__v_has_map_info", (PyCFunction)_wrap_RasterImage__v_has_map_info, METH_O, (char *)"\n"
 		"virtual bool GeoCal::RasterImage::has_map_info() const\n"
-		"*********************************************************************\n"
 		"Functions available if we have MapInfo data.\n"
 		"\n"
 		"Indicate if we have MapInfo. The default is false, but derived classes\n"
@@ -11151,8 +11150,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage__v_map_info", (PyCFunction)_wrap_RasterImage__v_map_info, METH_O, (char *)"\n"
 		"virtual const MapInfo& GeoCal::RasterImage::map_info() const\n"
-		"----------------------------------------------------------------------\n"
-		"- MapInfo for image. \n"
+		"MapInfo for image. \n"
 		""},
 	 { (char *)"RasterImage_ground_coordinate", _wrap_RasterImage_ground_coordinate, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr<GroundCoordinate> GeoCal::RasterImage::ground_coordinate(double Line, double Sample, const Dem &D) const\n"
@@ -11182,7 +11180,6 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage__v_has_rpc", (PyCFunction)_wrap_RasterImage__v_has_rpc, METH_O, (char *)"\n"
 		"virtual bool GeoCal::RasterImage::has_rpc() const\n"
-		"*********************************************************************\n"
 		"Functions available if we have RPC\n"
 		"\n"
 		"Indicate if we have Rpc. The default is false, but derived classes can\n"
@@ -11190,10 +11187,9 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage__v_rpc", (PyCFunction)_wrap_RasterImage__v_rpc, METH_O, (char *)"\n"
 		"boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const\n"
-		"----------------------------------------------------------------------\n"
-		"- Pointer version of rpc(). This makes python happier.\n"
-		"-----------------------------------------\n"
-		"------------------------------ \n"
+		"Pointer version of rpc().\n"
+		"\n"
+		"This makes python happier. \n"
 		""},
 	 { (char *)"delete_RasterImage", (PyCFunction)_wrap_delete_RasterImage, METH_O, (char *)"\n"
 		"virtual GeoCal::RasterImage::~RasterImage()\n"

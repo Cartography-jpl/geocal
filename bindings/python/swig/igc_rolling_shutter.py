@@ -149,8 +149,8 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
     Note that this class assumes that the orbit data varies smoothly over
     the time that the rolling shutter operates. We speed up the class by
     taking the orbit data at the start and end of the rolling shutter and
-    interpolating. If this is *not* true of the orbit data, then there
-    will be significant errors in the calculations done by this class.
+    interpolating. If this is not true of the orbit data, then there will
+    be significant errors in the calculations done by this class.
 
     C++ includes: igc_rolling_shutter.h 
     """

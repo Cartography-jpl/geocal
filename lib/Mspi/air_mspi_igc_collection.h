@@ -26,6 +26,8 @@ public:
 		       int Dem_resolution = 10,
 		       const std::string& Base_directory = ".");
   virtual ~AirMspiIgcCollection() {}
+  void replace_view_config(const std::string& Master_config_file,
+			   const std::string& L1b1_table);
   virtual void print(std::ostream& Os) const;
   virtual int number_image() const { return (int) view_config_.size(); }
   virtual boost::shared_ptr<ImageGroundConnection> 
@@ -52,6 +54,48 @@ public:
   boost::shared_ptr<MspiCamera> camera(int Index) const
   {
     return air_mspi_igc(Index)->camera();
+  }
+
+//-----------------------------------------------------------------------
+/// Change the orbit we are using.
+//-----------------------------------------------------------------------
+
+  void set_orbit(const boost::shared_ptr<Orbit>& Orb)
+  {
+    igc.clear();
+    orbit_ = Orb;
+    clear_object();
+    add_object(camera_);
+    add_object(gimbal_);
+    add_object(orbit_);
+  }
+
+//-----------------------------------------------------------------------
+/// Change the camera we are using.
+//-----------------------------------------------------------------------
+
+  void set_camera(const boost::shared_ptr<MspiCamera>& Cam)
+  {
+    igc.clear();
+    camera_ = Cam;
+    clear_object();
+    add_object(camera_);
+    add_object(gimbal_);
+    add_object(orbit_);
+  }
+
+//-----------------------------------------------------------------------
+/// Change the gimbal we are using.
+//-----------------------------------------------------------------------
+
+  void set_gimbal(const boost::shared_ptr<MspiGimbal>& Gim)
+  {
+    igc.clear();
+    gimbal_ = Gim;
+    clear_object();
+    add_object(camera_);
+    add_object(gimbal_);
+    add_object(orbit_);
   }
 
 //-----------------------------------------------------------------------

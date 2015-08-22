@@ -124,6 +124,52 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.dem_map_info
 import geocal_swig.dem
 import geocal_swig.generic_object
+import geocal_swig.cart_lab_multifile
+import geocal_swig.raster_multifile
+import geocal_swig.raster_image_variable
+import geocal_swig.raster_image
+class SrtmDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
+    """
+    This is used the read the SRTM data.
+
+    This gets used by SrtmDem. Although you can use this class directly,
+    generally uou'll use this through SrtmDem class.
+
+    C++ includes: srtm_dem.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        SrtmDemData::SrtmDemData(const std::string &Dir, bool No_coverage_is_error=true, int
+        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
+        Number_tile_each_file=4, int Number_file=4, bool
+        Favor_memory_mapped=true, bool Force_area_pixel=true)
+        Constructor.
+
+        You can provide the directory to look for SRTM DEM data, or if you
+        leave this blank we use the value of environment variable ELEV_ROOT.
+
+        The SRTM doesn't cover the whole globe. If you ask for a point outside
+        of the area this can either be treated as an error, or alternatively
+        you can return a value of 0 instead. This is controlled by
+        No_coverage_is_error.
+
+        There are two kinds of tiling going on. At the top level, we have a
+        number of files open at one time, given by Number_file. For each file,
+        we read it with tiles with the given Number_line_per_tile x
+        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
+        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
+        entire file. 
+        """
+        _srtm_dem.SrtmDemData_swiginit(self,_srtm_dem.new_SrtmDemData(*args))
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _srtm_dem.delete_SrtmDemData
+SrtmDemData_swigregister = _srtm_dem.SrtmDemData_swigregister
+SrtmDemData_swigregister(SrtmDemData)
+
 class SrtmDem(geocal_swig.dem_map_info.DemMapInfo):
     """
     This class provides access to the SRTM.
@@ -152,15 +198,14 @@ class SrtmDem(geocal_swig.dem_map_info.DemMapInfo):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        SrtmDem::SrtmDem(const std::string &Db_name="", const std::string &Dirbase="",
-        bool Outside_dem_is_error=true, const boost::shared_ptr< Datum >
-        &D=boost::shared_ptr< Datum >(new DatumGeoid96()))
+        SrtmDem::SrtmDem(const std::string &Dirbase="", bool Outside_dem_is_error=true,
+        const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
+        DatumGeoid96()))
         Constructor.
 
-        You can provide the database file to use and the directory where there
-        data can be found. If you leave this as a blank string, we use
-        ${ELEV_ROOT} as the directory and ${ELEV_ROOT}/L2_dem_db.int as the
-        file. 
+        You can provide the directory where there data can be found. If you
+        leave this as a blank string, we use ${ELEV_ROOT} as the directory and
+        ${ELEV_ROOT}/L2_dem_db.int as the file. 
         """
         _srtm_dem.SrtmDem_swiginit(self,_srtm_dem.new_SrtmDem(*args))
     def elevation(self, *args):
@@ -170,21 +215,10 @@ class SrtmDem(geocal_swig.dem_map_info.DemMapInfo):
         """
         return _srtm_dem.SrtmDem_elevation(self, *args)
 
-    def _v_database_name(self):
-        """
-        const std::string& GeoCal::SrtmDem::database_name() const
-        Database name. 
-        """
-        return _srtm_dem.SrtmDem__v_database_name(self)
-
-    @property
-    def database_name(self):
-        return self._v_database_name()
-
     def _v_directory_base(self):
         """
         const std::string& GeoCal::SrtmDem::directory_base() const
-        Database base directory. 
+        Directory base that we read SRTM data from. 
         """
         return _srtm_dem.SrtmDem__v_directory_base(self)
 
@@ -197,7 +231,6 @@ class SrtmDem(geocal_swig.dem_map_info.DemMapInfo):
 
     __swig_destroy__ = _srtm_dem.delete_SrtmDem
 SrtmDem.elevation = new_instancemethod(_srtm_dem.SrtmDem_elevation,None,SrtmDem)
-SrtmDem._v_database_name = new_instancemethod(_srtm_dem.SrtmDem__v_database_name,None,SrtmDem)
 SrtmDem._v_directory_base = new_instancemethod(_srtm_dem.SrtmDem__v_directory_base,None,SrtmDem)
 SrtmDem_swigregister = _srtm_dem.SrtmDem_swigregister
 SrtmDem_swigregister(SrtmDem)

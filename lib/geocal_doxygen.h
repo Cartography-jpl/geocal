@@ -35,5 +35,5 @@ In addition to a number of standard libraries discussed in the
 <A HREF="./README.developer">
 README.developer</A> file we make use of the less commonly available
 libsdbx library. This supplies a R*-Tree implementation. It is
-documented <A HREF="../../libsdbx/html/index.html">here</A>.
+documented <A HREF="../../libsdbx/index.html">here</A>.
 *******************************************************************/

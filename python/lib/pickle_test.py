@@ -244,7 +244,6 @@ def test_srtm():
     dem = SrtmDem()
     t = cPickle.dumps(dem)
     dem2 = cPickle.loads(t)
-    assert dem.database_name == dem2.database_name
     assert dem.directory_base == dem2.directory_base
 
 def test_gdal_raster_image():

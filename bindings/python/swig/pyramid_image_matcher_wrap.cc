@@ -5177,6 +5177,17 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -5190,6 +5201,13 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+SWIGINTERNINLINE PyObject*
+  SWIG_From_bool  (bool value)
+{
+  return PyBool_FromLong(value ? 1 : 0);
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5200,7 +5218,77 @@ struct SWIG_null_deleter {
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_PyramidImageMatcher(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_PyramidImageMatcher__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::ImageMatcher > *arg1 = 0 ;
+  int arg2 ;
+  bool arg3 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageMatcher > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageMatcher > temp2shared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::PyramidImageMatcher *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PyramidImageMatcher" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::ImageMatcher > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_PyramidImageMatcher" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_PyramidImageMatcher" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = (GeoCal::PyramidImageMatcher *)new GeoCal::PyramidImageMatcher((boost::shared_ptr< GeoCal::ImageMatcher > const &)*arg1,arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::PyramidImageMatcher > *smartresult = result ? new boost::shared_ptr<  GeoCal::PyramidImageMatcher >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PyramidImageMatcher_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_PyramidImageMatcher__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageMatcher > *arg1 = 0 ;
   int arg2 ;
@@ -5210,10 +5298,9 @@ SWIGINTERN PyObject *_wrap_new_PyramidImageMatcher(PyObject *SWIGUNUSEDPARM(self
   boost::shared_ptr< GeoCal::ImageMatcher > temp2shared1 ;
   int val2 ;
   int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
   GeoCal::PyramidImageMatcher *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_PyramidImageMatcher",2,2,swig_obj)) SWIG_fail;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t,  0 , &newmem);
@@ -5263,6 +5350,28 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_PyramidImageMatcher(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_PyramidImageMatcher",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_new_PyramidImageMatcher__SWIG_1(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_new_PyramidImageMatcher__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_PyramidImageMatcher'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::PyramidImageMatcher::PyramidImageMatcher(boost::shared_ptr< GeoCal::ImageMatcher > const &,int,bool)\n"
+    "    GeoCal::PyramidImageMatcher::PyramidImageMatcher(boost::shared_ptr< GeoCal::ImageMatcher > const &,int)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_PyramidImageMatcher__v_start_level(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PyramidImageMatcher *arg1 = (GeoCal::PyramidImageMatcher *) 0 ;
@@ -5300,6 +5409,49 @@ SWIGINTERN PyObject *_wrap_PyramidImageMatcher__v_start_level(PyObject *SWIGUNUS
     }
   }
   resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PyramidImageMatcher__v_only_accept_finest_resolution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::PyramidImageMatcher *arg1 = (GeoCal::PyramidImageMatcher *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PyramidImageMatcher const > tempshared1 ;
+  boost::shared_ptr< GeoCal::PyramidImageMatcher const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PyramidImageMatcher_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PyramidImageMatcher__v_only_accept_finest_resolution" "', argument " "1"" of type '" "GeoCal::PyramidImageMatcher const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PyramidImageMatcher > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::PyramidImageMatcher > * >(argp1);
+      arg1 = const_cast< GeoCal::PyramidImageMatcher * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::PyramidImageMatcher > * >(argp1);
+      arg1 = const_cast< GeoCal::PyramidImageMatcher * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::PyramidImageMatcher const *)arg1)->only_accept_finest_resolution();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
   return NULL;
@@ -5407,12 +5559,23 @@ SWIGINTERN PyObject *PyramidImageMatcher_swiginit(PyObject *SWIGUNUSEDPARM(self)
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_PyramidImageMatcher", _wrap_new_PyramidImageMatcher, METH_VARARGS, (char *)"\n"
-		"GeoCal::PyramidImageMatcher::PyramidImageMatcher(const boost::shared_ptr< ImageMatcher > &Im, int start_level)\n"
-		"Constructor. \n"
+		"GeoCal::PyramidImageMatcher::PyramidImageMatcher(const boost::shared_ptr< ImageMatcher > &Im, int start_level, bool\n"
+		"Only_accept_finest_resolution=false)\n"
+		"Constructor.\n"
+		"\n"
+		"The start level is how coarse to do the initial matching. By default\n"
+		"we accept any level of matching (just with a larger error), but you\n"
+		"can optionally specify that we only accept a point if we can match at\n"
+		"the finest resolution \n"
 		""},
 	 { (char *)"PyramidImageMatcher__v_start_level", (PyCFunction)_wrap_PyramidImageMatcher__v_start_level, METH_O, (char *)"\n"
 		"int GeoCal::PyramidImageMatcher::start_level() const\n"
 		"Starting level, so we average by 2^start_level. \n"
+		""},
+	 { (char *)"PyramidImageMatcher__v_only_accept_finest_resolution", (PyCFunction)_wrap_PyramidImageMatcher__v_only_accept_finest_resolution, METH_O, (char *)"\n"
+		"bool GeoCal::PyramidImageMatcher::only_accept_finest_resolution() const\n"
+		"If true, we only accept points that can be matched at the finest\n"
+		"resolution. \n"
 		""},
 	 { (char *)"PyramidImageMatcher__v_underlying_matcher", (PyCFunction)_wrap_PyramidImageMatcher__v_underlying_matcher, METH_O, (char *)"\n"
 		"boost::shared_ptr<ImageMatcher> GeoCal::PyramidImageMatcher::underlying_matcher() const\n"

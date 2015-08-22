@@ -121,7 +121,10 @@ extern "C" {
   void init_igc_collection_rolling_shutter(void);
   void init_igc_collection_orbit_data(void);
   void init_rolling_shutter_constant_time_table(void);
+  void init_piecewise_linear(void);
+  void init_orbit_correction(void);
   void init_orbit_offset_correction(void);
+  void init_orbit_piecewise_correction(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
   void init_quickbird_camera(void);
@@ -134,6 +137,8 @@ extern "C" {
   void init_doughnut_average(void);
   void init_paint_class(void);
   void init_vicar_lite_file(void);
+  void init_cart_lab_multifile(void);
+  void init_landsat7_panchromatic(void);
   void init_mspi_config_file(void);
   void init_mspi_paraxial_transform(void);
   void init_mspi_camera(void);
@@ -177,7 +182,6 @@ extern "C" {
   void init_vicar_file(void);
   void init_vicar_argument(void);
   void init_vicar_dem(void);
-  void init_vicar_multi_file(void);
   void init_datum_geoid96(void);
   void init_srtm_dem(void);
   void init_vicar_raster_image(void);
@@ -357,7 +361,10 @@ void init_swig_wrap(void)
   init_extension_module(package, "_igc_collection_rolling_shutter", init_igc_collection_rolling_shutter);
   init_extension_module(package, "_igc_collection_orbit_data", init_igc_collection_orbit_data);
   init_extension_module(package, "_rolling_shutter_constant_time_table", init_rolling_shutter_constant_time_table);
+  init_extension_module(package, "_piecewise_linear", init_piecewise_linear);
+  init_extension_module(package, "_orbit_correction", init_orbit_correction);
   init_extension_module(package, "_orbit_offset_correction", init_orbit_offset_correction);
+  init_extension_module(package, "_orbit_piecewise_correction", init_orbit_piecewise_correction);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
   init_extension_module(package, "_quickbird_camera", init_quickbird_camera);
@@ -370,6 +377,8 @@ void init_swig_wrap(void)
   init_extension_module(package, "_doughnut_average", init_doughnut_average);
   init_extension_module(package, "_paint_class", init_paint_class);
   init_extension_module(package, "_vicar_lite_file", init_vicar_lite_file);
+  init_extension_module(package, "_cart_lab_multifile", init_cart_lab_multifile);
+  init_extension_module(package, "_landsat7_panchromatic", init_landsat7_panchromatic);
   init_extension_module(package, "_mspi_config_file", init_mspi_config_file);
   init_extension_module(package, "_mspi_paraxial_transform", init_mspi_paraxial_transform);
   init_extension_module(package, "_mspi_camera", init_mspi_camera);
@@ -413,7 +422,6 @@ void init_swig_wrap(void)
   init_extension_module(package, "_vicar_file", init_vicar_file);
   init_extension_module(package, "_vicar_argument", init_vicar_argument);
   init_extension_module(package, "_vicar_dem", init_vicar_dem);
-  init_extension_module(package, "_vicar_multi_file", init_vicar_multi_file);
   init_extension_module(package, "_datum_geoid96", init_datum_geoid96);
   init_extension_module(package, "_srtm_dem", init_srtm_dem);
   init_extension_module(package, "_vicar_raster_image", init_vicar_raster_image);

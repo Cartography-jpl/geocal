@@ -168,7 +168,7 @@ class Ipi(geocal_swig.generic_object.GenericObject):
         Camera > &Cam, int Band, Time Tmin, Time Tmax, const
         boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),
         double Local_time_window_size=5.0, double Root_min_separation=30.0,
-        double Time_tolerance=40.8e-3 *1.0/16)
+        double Time_tolerance=1e-6)
         Constructor.
 
         If you only want to get the Time from the Ipi and not ImageCoordinate,

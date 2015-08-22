@@ -48,8 +48,11 @@ public:
     { return $self->config_value<std::string>(Index, Key); }
   }
   boost::shared_ptr<Orbit> orbit(int Index) const;
+  void set_orbit(const boost::shared_ptr<Orbit>& Orb);
   boost::shared_ptr<MspiCamera> camera(int Index) const;
+  void set_camera(const boost::shared_ptr<MspiCamera>& Can);
   boost::shared_ptr<MspiGimbal> gimbal(int Index) const;
+  void set_gimbal(const boost::shared_ptr<MspiGimbal>& Gim);
   boost::shared_ptr<TimeTable> time_table(int Index) const;
   int number_band(int Index);
   int band(int Index);
@@ -57,6 +60,8 @@ public:
   int min_l1b1_line(int Index) const;
   int max_l1b1_line(int Index) const;
   int view_number_to_image_index(int View_number) const;
+  void replace_view_config(const std::string& Master_config_file,
+			   const std::string& L1b1_table);
   %pickle_serialization();
 };
 }

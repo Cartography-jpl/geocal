@@ -2,7 +2,7 @@ import math
 import raster_image_extension
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
-from geocal_swig import IgcMapProjected
+from geocal_swig import IgcMapProjected, CartesianFixedLookVector, LnLookVector
 import copy
 import numpy as np
 # Optional support for pandas
@@ -197,6 +197,38 @@ class TiePointCollection(list):
             if(i.is_gcp):
                 cnt += 1
         return cnt
+
+    
+    def gcp_diff(self, tpcol_other):
+        '''This returns a pandas DataFrame that shows how much a GCP
+        has been moved (e.g., by SBA). We represent this is local north
+        coordinates'''
+        ind = [ tp.id for tp in self if tp.is_gcp]
+        lat = [ ]
+        lon = [ ]
+        height = [ ] 
+        e_diff = [ ]
+        n_diff = [ ] 
+        u_diff = [ ]
+        for i, tp in enumerate(self):
+            if(tp.is_gcp):
+                lat.append(tp.ground_location.latitude)
+                lon.append(tp.ground_location.longitude)
+                height.append(tp.ground_location.height_reference_surface)
+                clv = CartesianFixedLookVector(tp.ground_location,
+                                               tpcol_other[i].ground_location)
+                llv = LnLookVector(clv, tp.ground_location)
+                e_diff.append(llv.look_vector[0])
+                n_diff.append(llv.look_vector[1])
+                u_diff.append(llv.look_vector[2])
+        return pd.DataFrame({'latitude' : lat,
+                             'longitude' : lon,
+                             'height' : height,
+                             'e_diff' : e_diff,
+                             'n_diff' : n_diff,
+                             'u_diff' : u_diff},
+                            index=ind)
+        
 
     def data_frame(self, igccol, image_index):
         '''Return a pandas DataFrame for the given image_index.

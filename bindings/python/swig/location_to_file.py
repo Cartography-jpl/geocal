@@ -133,6 +133,11 @@ class LocationToFile(geocal_swig.generic_object.GenericObject):
     abstract out the use of the libsdbx library since this may go away at
     some point.
 
+    Note that boost has added a library "geometry" that looks like it
+    also has a R-* tree (as of version 1.47). There is no compelling
+    reason right now to change to using this, but if libsdx ever becomes
+    an issue we can switch to boost.
+
     C++ includes: location_to_file.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')

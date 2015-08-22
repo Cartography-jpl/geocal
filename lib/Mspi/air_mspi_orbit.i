@@ -63,4 +63,6 @@ public:
     const;
   %pickle_serialization();
 };
+
+  std::string air_mspi_true_file_name(const std::string& Fname);
 }

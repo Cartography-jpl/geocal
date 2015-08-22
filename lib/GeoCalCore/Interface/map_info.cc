@@ -278,6 +278,26 @@ MapInfo MapInfo::subset(int x_index, int y_index, int nx_pixel,
 }
 
 //-----------------------------------------------------------------------
+/// Return a MapInfo for a subset of this map info. Note that it is 
+/// ok for x_index and y_index to be outside the range of the MapInfo,
+/// so you could use this function to get a MapInfo for a larger area
+/// or an area next to this one.
+//-----------------------------------------------------------------------
+
+MapInfo MapInfo::subset(double x_index, double y_index, int nx_pixel,
+			int ny_pixel) const 
+{
+  // This won't be right for rotated coordinate system, we'll come
+  // back to this.
+  MapInfo res(*this);
+  index_to_coordinate(x_index - 0.5, y_index - 0.5, res.param(0), 
+		      res.param(3));
+  res.number_x_pixel_ = nx_pixel;
+  res.number_y_pixel_ = ny_pixel;
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Create a MapInfo that has the same upper left corner, and a pixel
 /// size scaled by the given number of line and samples per
 /// pixel. Note that in general this won't exactly cover this MapInfo,

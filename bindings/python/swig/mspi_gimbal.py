@@ -238,14 +238,21 @@ class MspiGimbal(geocal_swig.with_parameter.WithParameter):
     def parameter_mask(self, value):
       self._v_parameter_mask(value)
 
-    def station_to_sc(self, *args):
+    def station_to_sc_with_derivative(self, *args):
         """
-        boost::math::quaternion< AutoDerivative< double > > MspiGimbal::station_to_sc(const AutoDerivative< double > &Gimbal_pos) const
+        boost::math::quaternion< AutoDerivative< double > > MspiGimbal::station_to_sc_with_derivative(const AutoDerivative< double > &Gimbal_pos) const
         Return the station to spacecraft transformation.
 
         The gimbal position should be in radians. This is inconsistent with
         the other angles used by this class that are in degrees, but this
         matches what AirMSPI navigation data is stored as. 
+        """
+        return _mspi_gimbal.MspiGimbal_station_to_sc_with_derivative(self, *args)
+
+    def station_to_sc(self, *args):
+        """
+        boost::math::quaternion< double > MspiGimbal::station_to_sc(double Gimbal_pos) const
+
         """
         return _mspi_gimbal.MspiGimbal_station_to_sc(self, *args)
 
@@ -261,6 +268,7 @@ MspiGimbal._v_psi_with_derivative = new_instancemethod(_mspi_gimbal.MspiGimbal__
 MspiGimbal._v_theta = new_instancemethod(_mspi_gimbal.MspiGimbal__v_theta,None,MspiGimbal)
 MspiGimbal._v_theta_with_derivative = new_instancemethod(_mspi_gimbal.MspiGimbal__v_theta_with_derivative,None,MspiGimbal)
 MspiGimbal._v_parameter_mask = new_instancemethod(_mspi_gimbal.MspiGimbal__v_parameter_mask,None,MspiGimbal)
+MspiGimbal.station_to_sc_with_derivative = new_instancemethod(_mspi_gimbal.MspiGimbal_station_to_sc_with_derivative,None,MspiGimbal)
 MspiGimbal.station_to_sc = new_instancemethod(_mspi_gimbal.MspiGimbal_station_to_sc,None,MspiGimbal)
 MspiGimbal_swigregister = _mspi_gimbal.MspiGimbal_swigregister
 MspiGimbal_swigregister(MspiGimbal)

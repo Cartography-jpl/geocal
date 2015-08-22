@@ -283,7 +283,7 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     def orbit_data_index(self, *args):
         """
         boost::shared_ptr< QuaternionOrbitData > AirMspiOrbit::orbit_data_index(int Index) const
-        Orbit data for given index. 
+
         """
         return _air_mspi_orbit.AirMspiOrbit_orbit_data_index(self, *args)
 
@@ -311,5 +311,9 @@ AirMspiOrbit.orbit_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_
 AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister
 AirMspiOrbit_swigregister(AirMspiOrbit)
 
+
+def air_mspi_true_file_name(*args):
+  return _air_mspi_orbit.air_mspi_true_file_name(*args)
+air_mspi_true_file_name = _air_mspi_orbit.air_mspi_true_file_name
 
 

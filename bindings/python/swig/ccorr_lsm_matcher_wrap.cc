@@ -5254,8 +5254,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_CcorrLsmMatcher__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::CcorrMatcher > arg1 ;
-  boost::shared_ptr< GeoCal::LsmMatcher > arg2 ;
+  boost::shared_ptr< GeoCal::ImageMatcher > arg1 ;
+  boost::shared_ptr< GeoCal::ImageMatcher > arg2 ;
   bool arg3 ;
   void *argp1 ;
   int res1 = 0 ;
@@ -5268,12 +5268,12 @@ SWIGINTERN PyObject *_wrap_new_CcorrLsmMatcher__SWIG_2(PyObject *SWIGUNUSEDPARM(
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CcorrMatcher_t,  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t,  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CcorrLsmMatcher" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::CcorrMatcher > const""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CcorrLsmMatcher" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::ImageMatcher > const""'"); 
     }
-    if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::CcorrMatcher > * >(argp1));
-    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::CcorrMatcher > * >(argp1);
+    if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp1));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp1);
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -5287,12 +5287,12 @@ SWIGINTERN PyObject *_wrap_new_CcorrLsmMatcher__SWIG_2(PyObject *SWIGUNUSEDPARM(
   }
   {
     int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LsmMatcher_t,  0 , &newmem);
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CcorrLsmMatcher" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::LsmMatcher > const""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CcorrLsmMatcher" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageMatcher > const""'"); 
     }
-    if (argp2) arg2 = *(reinterpret_cast< boost::shared_ptr< GeoCal::LsmMatcher > * >(argp2));
-    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::LsmMatcher > * >(argp2);
+    if (argp2) arg2 = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp2));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp2);
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -5330,8 +5330,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_CcorrLsmMatcher__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::CcorrMatcher > arg1 ;
-  boost::shared_ptr< GeoCal::LsmMatcher > arg2 ;
+  boost::shared_ptr< GeoCal::ImageMatcher > arg1 ;
+  boost::shared_ptr< GeoCal::ImageMatcher > arg2 ;
   void *argp1 ;
   int res1 = 0 ;
   void *argp2 ;
@@ -5341,12 +5341,12 @@ SWIGINTERN PyObject *_wrap_new_CcorrLsmMatcher__SWIG_3(PyObject *SWIGUNUSEDPARM(
   if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CcorrMatcher_t,  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t,  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CcorrLsmMatcher" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::CcorrMatcher > const""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CcorrLsmMatcher" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::ImageMatcher > const""'"); 
     }
-    if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::CcorrMatcher > * >(argp1));
-    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::CcorrMatcher > * >(argp1);
+    if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp1));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp1);
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -5360,12 +5360,12 @@ SWIGINTERN PyObject *_wrap_new_CcorrLsmMatcher__SWIG_3(PyObject *SWIGUNUSEDPARM(
   }
   {
     int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LsmMatcher_t,  0 , &newmem);
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMatcher_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CcorrLsmMatcher" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::LsmMatcher > const""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CcorrLsmMatcher" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageMatcher > const""'"); 
     }
-    if (argp2) arg2 = *(reinterpret_cast< boost::shared_ptr< GeoCal::LsmMatcher > * >(argp2));
-    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::LsmMatcher > * >(argp2);
+    if (argp2) arg2 = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp2));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageMatcher > * >(argp2);
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -5420,8 +5420,8 @@ fail:
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(bool)\n"
     "    GeoCal::CcorrLsmMatcher::CcorrLsmMatcher()\n"
-    "    GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(boost::shared_ptr< GeoCal::CcorrMatcher > const,boost::shared_ptr< GeoCal::LsmMatcher > const,bool)\n"
-    "    GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(boost::shared_ptr< GeoCal::CcorrMatcher > const,boost::shared_ptr< GeoCal::LsmMatcher > const)\n");
+    "    GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(boost::shared_ptr< GeoCal::ImageMatcher > const,boost::shared_ptr< GeoCal::ImageMatcher > const,bool)\n"
+    "    GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(boost::shared_ptr< GeoCal::ImageMatcher > const,boost::shared_ptr< GeoCal::ImageMatcher > const)\n");
   return 0;
 }
 
@@ -5434,7 +5434,7 @@ SWIGINTERN PyObject *_wrap_CcorrLsmMatcher__v_ccorr_matcher(PyObject *SWIGUNUSED
   boost::shared_ptr< GeoCal::CcorrLsmMatcher const > tempshared1 ;
   boost::shared_ptr< GeoCal::CcorrLsmMatcher const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::CcorrMatcher > result;
+  boost::shared_ptr< GeoCal::ImageMatcher > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -5479,7 +5479,7 @@ SWIGINTERN PyObject *_wrap_CcorrLsmMatcher__v_lsm_matcher(PyObject *SWIGUNUSEDPA
   boost::shared_ptr< GeoCal::CcorrLsmMatcher const > tempshared1 ;
   boost::shared_ptr< GeoCal::CcorrLsmMatcher const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::LsmMatcher > result;
+  boost::shared_ptr< GeoCal::ImageMatcher > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -5615,8 +5615,8 @@ SWIGINTERN PyObject *CcorrLsmMatcher_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_CcorrLsmMatcher", _wrap_new_CcorrLsmMatcher, METH_VARARGS, (char *)"\n"
-		"GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(const boost::shared_ptr< CcorrMatcher > &Ccorr, const\n"
-		"boost::shared_ptr< LsmMatcher > &Lsm, bool Accept_ccorr_only=false)\n"
+		"GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(const boost::shared_ptr< ImageMatcher > &Ccorr, const\n"
+		"boost::shared_ptr< ImageMatcher > &Lsm, bool Accept_ccorr_only=false)\n"
 		"Constructor.\n"
 		"\n"
 		"This takes the CcorrMatcher and LsmMatcher, which allows you to use\n"
@@ -5629,11 +5629,11 @@ static PyMethodDef SwigMethods[] = {
 		"matches as the cost of some coverage? \n"
 		""},
 	 { (char *)"CcorrLsmMatcher__v_ccorr_matcher", (PyCFunction)_wrap_CcorrLsmMatcher__v_ccorr_matcher, METH_O, (char *)"\n"
-		"boost::shared_ptr<CcorrMatcher> GeoCal::CcorrLsmMatcher::ccorr_matcher_ptr() const\n"
+		"boost::shared_ptr<ImageMatcher> GeoCal::CcorrLsmMatcher::ccorr_matcher_ptr() const\n"
 		"\n"
 		""},
 	 { (char *)"CcorrLsmMatcher__v_lsm_matcher", (PyCFunction)_wrap_CcorrLsmMatcher__v_lsm_matcher, METH_O, (char *)"\n"
-		"boost::shared_ptr<LsmMatcher> GeoCal::CcorrLsmMatcher::lsm_matcher_ptr() const\n"
+		"boost::shared_ptr<ImageMatcher> GeoCal::CcorrLsmMatcher::lsm_matcher_ptr() const\n"
 		"\n"
 		""},
 	 { (char *)"CcorrLsmMatcher__v_accept_ccorr_only", (PyCFunction)_wrap_CcorrLsmMatcher__v_accept_ccorr_only, METH_O, (char *)"\n"

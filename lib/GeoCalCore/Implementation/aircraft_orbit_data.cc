@@ -161,7 +161,6 @@ AircraftOrbitData::AircraftOrbitData
  VerticalDefinition V)
 : vertical_definition_(V)
 {
-  roll_, pitch_, heading_;
   boost::math::quaternion<double> body_to_ecr = Od.sc_to_cf();
   position_geodetic_ = *Od.position_cf();
   boost::math::quaternion<double> body_to_local_north =

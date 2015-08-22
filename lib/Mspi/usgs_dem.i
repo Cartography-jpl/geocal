@@ -8,12 +8,12 @@
 %}
 
 %base_import(dem_map_info)
-%base_import(raster_multifile)
+%base_import(cart_lab_multifile)
 
 %geocal_shared_ptr(GeoCal::UsgsDemData);
 %geocal_shared_ptr(GeoCal::UsgsDem);
 namespace GeoCal {
-class UsgsDemData: public RasterMultifile {
+class UsgsDemData: public GdalCartLabMultifile {
 public:
   enum {FILL_VALUE=0};
   UsgsDemData(const std::string& Dir,
@@ -21,8 +21,6 @@ public:
 	      int Number_line_per_tile = -1,
 	      int Number_sample_per_tile = -1, 
 	      int Number_tile_each_file = 4, int Number_file = 4);
-protected:
-  virtual RasterMultifileTile get_file(int Line, int Sample) const;
   %pickle_serialization();
 };
 

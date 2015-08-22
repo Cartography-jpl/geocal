@@ -3,14 +3,15 @@
 #include "constant.h"
 #include "aircraft_orbit_data.h"
 #include "geocal_serialize_support.h"
+#include "ecr.h"
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void AirMspiOrbit::serialize(Archive & ar, const unsigned int version)
+void AirMspiOrbit::save(Archive & ar, const unsigned int version) const
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP(data)
+    & GEOCAL_NVP_(file_name)
     & GEOCAL_NVP(tile_number_line)
     & GEOCAL_NVP_(datum)
     & GEOCAL_NVP(gimbal)
@@ -19,7 +20,21 @@ void AirMspiOrbit::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(old_format);
 }
 
-GEOCAL_IMPLEMENT(AirMspiOrbit);
+template<class Archive>
+void AirMspiOrbit::load(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP_(file_name)
+    & GEOCAL_NVP(tile_number_line)
+    & GEOCAL_NVP_(datum)
+    & GEOCAL_NVP(gimbal)
+    & GEOCAL_NVP_(vdef)
+    & GEOCAL_NVP_(tspace)
+    & GEOCAL_NVP(old_format);
+  data.reset(new GdalRasterImage(air_mspi_true_file_name(file_name_)));
+}
+
+GEOCAL_SPLIT_IMPLEMENT(AirMspiOrbit);
 #endif
 
 AirMspiOrbit::AirMspiOrbit() 
@@ -129,16 +144,12 @@ AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
 			   const boost::shared_ptr<MspiGimbal>& Gim,
 			   const boost::shared_ptr<Datum>& D,
 			   AircraftOrbitData::VerticalDefinition Def)
-  : data(new GdalRasterImage(Fname)), 
+  : file_name_(Fname),
     datum_(D),
     vdef_(Def),
     gimbal(Gim)
 {
-  initialize();
-}
-
-void AirMspiOrbit::initialize()
-{
+  data.reset(new GdalRasterImage(air_mspi_true_file_name(file_name_)));
   Time epoch = Time::parse_time(data->metadata<std::string>("epoch"));
   min_tm = epoch + data->metadata<double>("first_time");
   max_tm = epoch + data->metadata<double>("last_time");
@@ -205,14 +216,15 @@ AirMspiNavData AirMspiOrbit::nav_data(Time T) const
 /// Orbit data for given index.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<QuaternionOrbitData> AirMspiOrbit::orbit_data_index(int Index) const
+boost::shared_ptr<QuaternionOrbitData> 
+AirMspiOrbit::orbit_data_index_with_derivative(int Index) const
 {
   range_check(Index, 0, data->number_line() - 1);
   AirMspiNavData n1 = nav_data(Index);
   AirMspiNavData n2 = nav_data(Index + 1);
   // This goes from station to spacecraft
   boost::math::quaternion<AutoDerivative<double> > station_to_sc =
-    gimbal->station_to_sc(n1.gimbal_pos);
+    gimbal->station_to_sc_with_derivative(n1.gimbal_pos);
   // This goes from spacecraft to cf
   AircraftOrbitData od(min_time() + Index * time_spacing(), n1.position,
 		       min_time() + (Index + 1) * time_spacing(), n2.position,
@@ -229,13 +241,39 @@ boost::shared_ptr<QuaternionOrbitData> AirMspiOrbit::orbit_data_index(int Index)
 			     od.sc_to_cf_with_derivative() * station_to_sc));
 }
 
+boost::shared_ptr<QuaternionOrbitData> 
+AirMspiOrbit::orbit_data_index(int Index) const
+{
+  range_check(Index, 0, data->number_line() - 1);
+  AirMspiNavData n1 = nav_data(Index);
+  AirMspiNavData n2 = nav_data(Index + 1);
+  // This goes from station to spacecraft
+  boost::math::quaternion<double> station_to_sc =
+    gimbal->station_to_sc(n1.gimbal_pos);
+  // boost::math::quaternion<double> station_to_sc =
+  //   gimbal->station_to_sc(n1.gimbal_pos);
+  // This goes from spacecraft to cf
+  AircraftOrbitData od(min_time() + Index * time_spacing(), n1.position,
+		       min_time() + (Index + 1) * time_spacing(), n2.position,
+		       n1.ypr[2] * Constant::rad_to_deg,
+		       n1.ypr[1] * Constant::rad_to_deg,
+		       n1.ypr[0] * Constant::rad_to_deg,
+		       vdef_);
+  // Tack these 2 transforms together
+  return boost::shared_ptr<QuaternionOrbitData>
+    (new QuaternionOrbitData(od.time(), 
+  			     od.position_cf(),
+  			     od.velocity_cf(),
+  			     od.sc_to_cf() * station_to_sc));
+}
+
 boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data(Time T) const
 {
   range_check(T, min_time(), max_time());
   int i = (int) floor((T - min_time()) / time_spacing());
   boost::shared_ptr<QuaternionOrbitData> q1 = orbit_data_index(i); 
   boost::shared_ptr<QuaternionOrbitData> q2 = orbit_data_index(i + 1); 
-  return GeoCal::interpolate(*q1, *q2, TimeWithDerivative(T));
+  return GeoCal::interpolate(*q1, *q2, T);
 }
 
 boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data
@@ -243,9 +281,32 @@ boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data
 {
   range_check(T.value(), min_time(), max_time());
   int i = (int) floor((T.value() - min_time()) / time_spacing());
-  boost::shared_ptr<QuaternionOrbitData> q1 = orbit_data_index(i); 
-  boost::shared_ptr<QuaternionOrbitData> q2 = orbit_data_index(i + 1); 
+  boost::shared_ptr<QuaternionOrbitData> q1 = 
+    orbit_data_index_with_derivative(i); 
+  boost::shared_ptr<QuaternionOrbitData> q2 = 
+    orbit_data_index_with_derivative(i + 1); 
   return GeoCal::interpolate(*q1, *q2, T);
+}
+
+boost::shared_ptr<CartesianFixed> AirMspiOrbit::position_cf(Time T) const
+{
+  range_check(T, min_time(), max_time());
+  int i = (int) floor((T- min_time()) / time_spacing());
+  double t = (T - min_time()) - i * time_spacing();
+  boost::array<double, 3> p1 = 
+    nav_data(i).position.convert_to_cf()->position;
+  boost::array<double, 3> p2 = 
+    nav_data(i + 1).position.convert_to_cf()->position;
+  boost::array<double, 3> p3 = 
+    nav_data(i + 2).position.convert_to_cf()->position;
+  boost::array<double, 3> vel1, vel2;
+  for(int i = 0; i < 3; ++i) {
+    vel1[i] = (p2[i] - p1[i]) / time_spacing();
+    vel2[i] = (p3[i] - p2[i]) / time_spacing();
+  }
+  boost::array<double, 3> pres, vres;
+  interpolate(p1, vel1, p2, vel2, t, time_spacing(), pres, vres);
+  return boost::shared_ptr<CartesianFixed>(new Ecr(pres));
 }
 
 void AirMspiOrbit::print(std::ostream& Os) const {

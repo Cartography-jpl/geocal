@@ -16,6 +16,11 @@ namespace GeoCal {
   RTree's interface is a bit different than how we want to access
   this, and because we want to abstract out the use of the libsdbx
   library since this may go away at some point.
+
+  Note that boost has added a library "geometry" that looks like it
+  also has a R-* tree (as of version 1.47). There is no compelling
+  reason right now to change to using this, but if libsdx ever becomes
+  an issue we can switch to boost.
 *******************************************************************/
 
 class LocationToFile : public Printable<LocationToFile> {
@@ -57,6 +62,25 @@ public:
     boost::scoped_ptr<iterator> 
       i(rtree.FindOverlapping(bounds(x, y, x + 1, y + 1)));
     return ((i && !i->end()) ? filename[i->current().value] : "");
+  }
+
+
+//-----------------------------------------------------------------------
+/// Find the filenames that covers a given region. If no filenames
+/// cover the region, then we return a empty vector.
+//-----------------------------------------------------------------------
+
+  std::vector<std::string> find_region(int x, int y, int num_x_pixel,
+				       int num_y_pixel) const
+  {
+    boost::scoped_ptr<iterator> 
+      i(rtree.FindOverlapping(bounds(x, y, x + num_x_pixel, y + num_y_pixel)));
+    std::vector<std::string> res;
+    if(i && ! i->end())
+      do
+	res.push_back(filename[i->current().value]);
+      while(i->next());
+    return res;
   }
 
 //-----------------------------------------------------------------------

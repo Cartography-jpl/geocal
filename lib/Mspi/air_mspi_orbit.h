@@ -6,6 +6,8 @@
 #include "geocal_datum.h"	// Definition of Datum
 #include "aircraft_orbit_data.h"
 				// Definition of VerticalDefinition.
+#include "air_mspi_file.h"
+
 namespace GeoCal {
 /****************************************************************//**
   Simple structure that describes navigation data at a point in time.
@@ -73,7 +75,7 @@ public:
 //-----------------------------------------------------------------------
 
   std::string file_name() const
-  { return data->file_names()[0]; }
+  { return file_name_; }
 
 //-----------------------------------------------------------------------
 /// Datum the raw height is relative to.
@@ -99,6 +101,8 @@ public:
   { return nav_data(T).gimbal_pos * GeoCal::Constant::rad_to_deg; }
     
   boost::shared_ptr<QuaternionOrbitData> orbit_data_index(int Index) const;
+  boost::shared_ptr<QuaternionOrbitData> orbit_data_index_with_derivative(int Index) const;
+  boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
 
 //-----------------------------------------------------------------------
 /// Spacing in time between measurements. This is in seconds.
@@ -122,8 +126,8 @@ public:
   virtual void print(std::ostream& Os) const;
 private:
   blitz::Array<double, 1> raw_data(int Index) const;
-  void initialize();
   boost::shared_ptr<GdalRasterImage> data;
+  std::string file_name_;
   mutable std::vector<blitz::Array<double, 2> > data_cache_;
   mutable std::vector<blitz::Array<double, 2> >::iterator next_swap_;
   int tile_number_line;
@@ -135,7 +139,10 @@ private:
   AirMspiOrbit();
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive& Ar, const unsigned int version);
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
 GEOCAL_EXPORT_KEY(AirMspiOrbit);

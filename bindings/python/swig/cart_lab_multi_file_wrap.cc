@@ -3451,36 +3451,36 @@ namespace Swig {
 
 #define SWIGTYPE_p_GeoCal__AutoDerivativeRefT_double_t swig_types[0]
 #define SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t swig_types[1]
-#define SWIGTYPE_p_GeoCal__CartesianFixed swig_types[2]
-#define SWIGTYPE_p_GeoCal__CartesianFixedLookVector swig_types[3]
-#define SWIGTYPE_p_GeoCal__CartesianFixedLookVectorWithDerivative swig_types[4]
-#define SWIGTYPE_p_GeoCal__CartesianInertial swig_types[5]
-#define SWIGTYPE_p_GeoCal__CartesianInertialLookVector swig_types[6]
-#define SWIGTYPE_p_GeoCal__CartesianInertialLookVectorWithDerivative swig_types[7]
-#define SWIGTYPE_p_GeoCal__CoordinateConverter swig_types[8]
-#define SWIGTYPE_p_GeoCal__DcsLookVector swig_types[9]
-#define SWIGTYPE_p_GeoCal__DcsLookVectorWithDerivative swig_types[10]
-#define SWIGTYPE_p_GeoCal__Dem swig_types[11]
-#define SWIGTYPE_p_GeoCal__GenericObject swig_types[12]
-#define SWIGTYPE_p_GeoCal__GeodeticConverter swig_types[13]
-#define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[14]
-#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[15]
-#define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[16]
-#define SWIGTYPE_p_GeoCal__LnLookVector swig_types[17]
-#define SWIGTYPE_p_GeoCal__LnLookVectorWithDerivative swig_types[18]
-#define SWIGTYPE_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t swig_types[19]
-#define SWIGTYPE_p_GeoCal__LookVectorT_double_t swig_types[20]
-#define SWIGTYPE_p_GeoCal__MapInfo swig_types[21]
-#define SWIGTYPE_p_GeoCal__RasterImage swig_types[22]
-#define SWIGTYPE_p_GeoCal__RasterImageTileIterator swig_types[23]
-#define SWIGTYPE_p_GeoCal__RasterImageVariable swig_types[24]
-#define SWIGTYPE_p_GeoCal__RasterMultifile swig_types[25]
-#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[26]
-#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[27]
-#define SWIGTYPE_p_GeoCal__Time swig_types[28]
-#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[29]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[30]
-#define SWIGTYPE_p_GeoCal__VicarMultiFile swig_types[31]
+#define SWIGTYPE_p_GeoCal__CartLabMultiFile swig_types[2]
+#define SWIGTYPE_p_GeoCal__CartesianFixed swig_types[3]
+#define SWIGTYPE_p_GeoCal__CartesianFixedLookVector swig_types[4]
+#define SWIGTYPE_p_GeoCal__CartesianFixedLookVectorWithDerivative swig_types[5]
+#define SWIGTYPE_p_GeoCal__CartesianInertial swig_types[6]
+#define SWIGTYPE_p_GeoCal__CartesianInertialLookVector swig_types[7]
+#define SWIGTYPE_p_GeoCal__CartesianInertialLookVectorWithDerivative swig_types[8]
+#define SWIGTYPE_p_GeoCal__CoordinateConverter swig_types[9]
+#define SWIGTYPE_p_GeoCal__DcsLookVector swig_types[10]
+#define SWIGTYPE_p_GeoCal__DcsLookVectorWithDerivative swig_types[11]
+#define SWIGTYPE_p_GeoCal__Dem swig_types[12]
+#define SWIGTYPE_p_GeoCal__GenericObject swig_types[13]
+#define SWIGTYPE_p_GeoCal__GeodeticConverter swig_types[14]
+#define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[15]
+#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[16]
+#define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[17]
+#define SWIGTYPE_p_GeoCal__LnLookVector swig_types[18]
+#define SWIGTYPE_p_GeoCal__LnLookVectorWithDerivative swig_types[19]
+#define SWIGTYPE_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t swig_types[20]
+#define SWIGTYPE_p_GeoCal__LookVectorT_double_t swig_types[21]
+#define SWIGTYPE_p_GeoCal__MapInfo swig_types[22]
+#define SWIGTYPE_p_GeoCal__RasterImage swig_types[23]
+#define SWIGTYPE_p_GeoCal__RasterImageTileIterator swig_types[24]
+#define SWIGTYPE_p_GeoCal__RasterImageVariable swig_types[25]
+#define SWIGTYPE_p_GeoCal__RasterMultifile swig_types[26]
+#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[27]
+#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[28]
+#define SWIGTYPE_p_GeoCal__Time swig_types[29]
+#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[30]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[31]
 #define SWIGTYPE_p_allocator_type swig_types[32]
 #define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[33]
 #define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[34]
@@ -3508,36 +3508,36 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[56]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[57]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[58]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[59]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[60]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[61]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[62]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[63]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[64]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[65]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[66]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[67]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[68]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[69]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[70]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[71]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[72]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[73]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[74]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[75]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[76]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[77]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[78]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[79]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t swig_types[80]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[81]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterMultifile_t swig_types[82]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[83]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[84]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[85]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[86]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[87]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t swig_types[88]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t swig_types[59]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[60]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[61]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[62]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[63]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[64]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[65]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[66]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[67]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[68]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[69]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[70]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[71]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[72]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[73]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[74]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[75]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[76]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[77]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[78]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[79]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[80]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t swig_types[81]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[82]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterMultifile_t swig_types[83]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[84]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[85]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[86]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[87]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[88]
 #define SWIGTYPE_p_char swig_types[89]
 #define SWIGTYPE_p_char_type swig_types[90]
 #define SWIGTYPE_p_difference_type swig_types[91]
@@ -3583,16 +3583,16 @@ static swig_module_info swig_module = {swig_types, 107, 0, 0, 0, 0};
 #define SWIG_TypeQuery SWIG_Python_TypeQuery
 
 /*-----------------------------------------------
-              @(target):= _vicar_multi_file.so
+              @(target):= _cart_lab_multi_file.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__vicar_multi_file
+#  define SWIG_init    PyInit__cart_lab_multi_file
 
 #else
-#  define SWIG_init    init_vicar_multi_file
+#  define SWIG_init    init_cart_lab_multi_file
 
 #endif
-#define SWIG_name    "_vicar_multi_file"
+#define SWIG_name    "_cart_lab_multi_file"
 
 #define SWIGVERSION 0x020009 
 #define SWIG_VERSION SWIGVERSION
@@ -5027,7 +5027,7 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
-#include "vicar_multi_file.h"
+#include "raster_multifile.h"
 
 
 SWIGINTERN swig_type_info*
@@ -5041,282 +5041,6 @@ SWIG_pchar_descriptor(void)
   }
   return info;
 }
-
-
-SWIGINTERN int
-SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
-{
-#if PY_VERSION_HEX>=0x03000000
-  if (PyUnicode_Check(obj))
-#else  
-  if (PyString_Check(obj))
-#endif
-  {
-    char *cstr; Py_ssize_t len;
-#if PY_VERSION_HEX>=0x03000000
-    if (!alloc && cptr) {
-        /* We can't allow converting without allocation, since the internal
-           representation of string in Python 3 is UCS-2/UCS-4 but we require
-           a UTF-8 representation.
-           TODO(bhy) More detailed explanation */
-        return SWIG_RuntimeError;
-    }
-    obj = PyUnicode_AsUTF8String(obj);
-    PyBytes_AsStringAndSize(obj, &cstr, &len);
-    if(alloc) *alloc = SWIG_NEWOBJ;
-#else
-    PyString_AsStringAndSize(obj, &cstr, &len);
-#endif
-    if (cptr) {
-      if (alloc) {
-	/* 
-	   In python the user should not be able to modify the inner
-	   string representation. To warranty that, if you define
-	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
-	   buffer is always returned.
-
-	   The default behavior is just to return the pointer value,
-	   so, be careful.
-	*/ 
-#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
-	if (*alloc != SWIG_OLDOBJ) 
-#else
-	if (*alloc == SWIG_NEWOBJ) 
-#endif
-	  {
-	    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
-	    *alloc = SWIG_NEWOBJ;
-	  }
-	else {
-	  *cptr = cstr;
-	  *alloc = SWIG_OLDOBJ;
-	}
-      } else {
-        #if PY_VERSION_HEX>=0x03000000
-        assert(0); /* Should never reach here in Python 3 */
-        #endif
-	*cptr = SWIG_Python_str_AsChar(obj);
-      }
-    }
-    if (psize) *psize = len + 1;
-#if PY_VERSION_HEX>=0x03000000
-    Py_XDECREF(obj);
-#endif
-    return SWIG_OK;
-  } else {
-    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-    if (pchar_descriptor) {
-      void* vptr = 0;
-      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
-	if (cptr) *cptr = (char *) vptr;
-	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
-	if (alloc) *alloc = SWIG_OLDOBJ;
-	return SWIG_OK;
-      }
-    }
-  }
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN int
-SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
-{
-  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
-  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
-    if (buf) {
-      if (val) *val = new std::string(buf, size - 1);
-      if (alloc == SWIG_NEWOBJ) delete[] buf;
-      return SWIG_NEWOBJ;
-    } else {
-      if (val) *val = 0;
-      return SWIG_OLDOBJ;
-    }
-  } else {
-    static int init = 0;
-    static swig_type_info* descriptor = 0;
-    if (!init) {
-      descriptor = SWIG_TypeQuery("std::string" " *");
-      init = 1;
-    }
-    if (descriptor) {
-      std::string *vptr;
-      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
-      if (SWIG_IsOK(res) && val) *val = vptr;
-      return res;
-    }
-  }
-  return SWIG_ERROR;
-}
-
-
-#include <limits.h>
-#if !defined(SWIG_NO_LLONG_MAX)
-# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
-#   define LLONG_MAX __LONG_LONG_MAX__
-#   define LLONG_MIN (-LLONG_MAX - 1LL)
-#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-# endif
-#endif
-
-
-SWIGINTERN int
-SWIG_AsVal_double (PyObject *obj, double *val)
-{
-  int res = SWIG_TypeError;
-  if (PyFloat_Check(obj)) {
-    if (val) *val = PyFloat_AsDouble(obj);
-    return SWIG_OK;
-  } else if (PyInt_Check(obj)) {
-    if (val) *val = PyInt_AsLong(obj);
-    return SWIG_OK;
-  } else if (PyLong_Check(obj)) {
-    double v = PyLong_AsDouble(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_OK;
-    } else {
-      PyErr_Clear();
-    }
-  }
-#ifdef SWIG_PYTHON_CAST_MODE
-  {
-    int dispatch = 0;
-    double d = PyFloat_AsDouble(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = d;
-      return SWIG_AddCast(SWIG_OK);
-    } else {
-      PyErr_Clear();
-    }
-    if (!dispatch) {
-      long v = PyLong_AsLong(obj);
-      if (!PyErr_Occurred()) {
-	if (val) *val = v;
-	return SWIG_AddCast(SWIG_AddCast(SWIG_OK));
-      } else {
-	PyErr_Clear();
-      }
-    }
-  }
-#endif
-  return res;
-}
-
-
-#include <float.h>
-
-
-#include <math.h>
-
-
-SWIGINTERNINLINE int
-SWIG_CanCastAsInteger(double *d, double min, double max) {
-  double x = *d;
-  if ((min <= x && x <= max)) {
-   double fx = floor(x);
-   double cx = ceil(x);
-   double rd =  ((x - fx) < 0.5) ? fx : cx; /* simple rint */
-   if ((errno == EDOM) || (errno == ERANGE)) {
-     errno = 0;
-   } else {
-     double summ, reps, diff;
-     if (rd < x) {
-       diff = x - rd;
-     } else if (rd > x) {
-       diff = rd - x;
-     } else {
-       return 1;
-     }
-     summ = rd + x;
-     reps = diff/summ;
-     if (reps < 8*DBL_EPSILON) {
-       *d = rd;
-       return 1;
-     }
-   }
-  }
-  return 0;
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_long (PyObject *obj, long* val)
-{
-  if (PyInt_Check(obj)) {
-    if (val) *val = PyInt_AsLong(obj);
-    return SWIG_OK;
-  } else if (PyLong_Check(obj)) {
-    long v = PyLong_AsLong(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_OK;
-    } else {
-      PyErr_Clear();
-    }
-  }
-#ifdef SWIG_PYTHON_CAST_MODE
-  {
-    int dispatch = 0;
-    long v = PyInt_AsLong(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_AddCast(SWIG_OK);
-    } else {
-      PyErr_Clear();
-    }
-    if (!dispatch) {
-      double d;
-      int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
-      if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, LONG_MIN, LONG_MAX)) {
-	if (val) *val = (long)(d);
-	return res;
-      }
-    }
-  }
-#endif
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_bool (PyObject *obj, bool *val)
-{
-  int r = PyObject_IsTrue(obj);
-  if (r == -1)
-    return SWIG_ERROR;
-  if (val) *val = r ? true : false;
-  return SWIG_OK;
-}
-
-
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
 SWIGINTERNINLINE PyObject *
@@ -5347,1257 +5071,23 @@ SWIG_From_std_string  (const std::string& s)
 }
 
 
-SWIGINTERNINLINE PyObject*
-  SWIG_From_bool  (bool value)
-{
-  return PyBool_FromLong(value ? 1 : 0);
-}
-
-
 
 /* ---------------------------------------------------
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "vicar_multi_file_wrap.h"
+#include "cart_lab_multi_file_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_CartLabMultiFile__v_directory_base(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  bool arg9 ;
-  bool arg10 ;
-  int arg11 ;
-  bool arg12 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  bool val9 ;
-  int ecode9 = 0 ;
-  bool val10 ;
-  int ecode10 = 0 ;
-  int val11 ;
-  int ecode11 = 0 ;
-  bool val12 ;
-  int ecode12 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 12) || (nobjs > 12)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarMultiFile" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarMultiFile" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarMultiFile" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarMultiFile" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_bool(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_VicarMultiFile" "', argument " "9"" of type '" "bool""'");
-  } 
-  arg9 = static_cast< bool >(val9);
-  ecode10 = SWIG_AsVal_bool(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_VicarMultiFile" "', argument " "10"" of type '" "bool""'");
-  } 
-  arg10 = static_cast< bool >(val10);
-  ecode11 = SWIG_AsVal_int(swig_obj[10], &val11);
-  if (!SWIG_IsOK(ecode11)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "new_VicarMultiFile" "', argument " "11"" of type '" "int""'");
-  } 
-  arg11 = static_cast< int >(val11);
-  ecode12 = SWIG_AsVal_bool(swig_obj[11], &val12);
-  if (!SWIG_IsOK(ecode12)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode12), "in method '" "new_VicarMultiFile" "', argument " "12"" of type '" "bool""'");
-  } 
-  arg12 = static_cast< bool >(val12);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  bool arg9 ;
-  bool arg10 ;
-  int arg11 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  bool val9 ;
-  int ecode9 = 0 ;
-  bool val10 ;
-  int ecode10 = 0 ;
-  int val11 ;
-  int ecode11 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 11) || (nobjs > 11)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarMultiFile" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarMultiFile" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarMultiFile" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarMultiFile" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_bool(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_VicarMultiFile" "', argument " "9"" of type '" "bool""'");
-  } 
-  arg9 = static_cast< bool >(val9);
-  ecode10 = SWIG_AsVal_bool(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_VicarMultiFile" "', argument " "10"" of type '" "bool""'");
-  } 
-  arg10 = static_cast< bool >(val10);
-  ecode11 = SWIG_AsVal_int(swig_obj[10], &val11);
-  if (!SWIG_IsOK(ecode11)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "new_VicarMultiFile" "', argument " "11"" of type '" "int""'");
-  } 
-  arg11 = static_cast< int >(val11);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  bool arg9 ;
-  bool arg10 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  bool val9 ;
-  int ecode9 = 0 ;
-  bool val10 ;
-  int ecode10 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 10) || (nobjs > 10)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarMultiFile" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarMultiFile" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarMultiFile" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarMultiFile" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_bool(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_VicarMultiFile" "', argument " "9"" of type '" "bool""'");
-  } 
-  arg9 = static_cast< bool >(val9);
-  ecode10 = SWIG_AsVal_bool(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_VicarMultiFile" "', argument " "10"" of type '" "bool""'");
-  } 
-  arg10 = static_cast< bool >(val10);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  bool arg9 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  bool val9 ;
-  int ecode9 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 9) || (nobjs > 9)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarMultiFile" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarMultiFile" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarMultiFile" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarMultiFile" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_bool(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_VicarMultiFile" "', argument " "9"" of type '" "bool""'");
-  } 
-  arg9 = static_cast< bool >(val9);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarMultiFile" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarMultiFile" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarMultiFile" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_VicarMultiFile" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4,arg5,arg6,arg7,arg8);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarMultiFile" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarMultiFile" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_VicarMultiFile" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4,arg5,arg6,arg7);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarMultiFile" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_VicarMultiFile" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4,arg5,arg6);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int arg5 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarMultiFile" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4,arg5);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int arg4 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int val4 ;
-  int ecode4 = 0 ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarMultiFile" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,arg4);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  GeoCal::VicarMultiFile *result = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarMultiFile" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::VicarMultiFile *)new GeoCal::VicarMultiFile((std::string const &)*arg1,(std::string const &)*arg2);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::VicarMultiFile > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarMultiFile >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_VicarMultiFile(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[13];
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_VicarMultiFile",0,12,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_new_VicarMultiFile__SWIG_10(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_new_VicarMultiFile__SWIG_9(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_new_VicarMultiFile__SWIG_8(self, argc, argv);
-  }
-  if (argc == 5) {
-    return _wrap_new_VicarMultiFile__SWIG_7(self, argc, argv);
-  }
-  if (argc == 6) {
-    return _wrap_new_VicarMultiFile__SWIG_6(self, argc, argv);
-  }
-  if (argc == 7) {
-    return _wrap_new_VicarMultiFile__SWIG_5(self, argc, argv);
-  }
-  if (argc == 8) {
-    return _wrap_new_VicarMultiFile__SWIG_4(self, argc, argv);
-  }
-  if (argc == 9) {
-    return _wrap_new_VicarMultiFile__SWIG_3(self, argc, argv);
-  }
-  if (argc == 10) {
-    return _wrap_new_VicarMultiFile__SWIG_2(self, argc, argv);
-  }
-  if (argc == 11) {
-    return _wrap_new_VicarMultiFile__SWIG_1(self, argc, argv);
-  }
-  if (argc == 12) {
-    return _wrap_new_VicarMultiFile__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_VicarMultiFile'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int,int,int,int,int,bool,bool,int,bool)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int,int,int,int,int,bool,bool,int)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int,int,int,int,int,bool,bool)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int,int,int,int,int,bool)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int,int,int,int,int)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int,int,int,int)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int,int,int)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int,int)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &,int)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &,std::string const &)\n"
-    "    GeoCal::VicarMultiFile::VicarMultiFile(std::string const &,std::string const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile_write(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
+  GeoCal::CartLabMultiFile *arg1 = (GeoCal::CartLabMultiFile *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  PyObject *swig_obj[4] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"VicarMultiFile_write",4,4,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile_write" "', argument " "1"" of type '" "GeoCal::VicarMultiFile *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VicarMultiFile_write" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "VicarMultiFile_write" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "VicarMultiFile_write" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  {
-    try {
-      (arg1)->write(arg2,arg3,arg4);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_db_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CartLabMultiFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CartLabMultiFile const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   std::string result;
   
@@ -6605,22 +5095,22 @@ SWIGINTERN PyObject *_wrap_VicarMultiFile__v_db_name(PyObject *SWIGUNUSEDPARM(se
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_db_name" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartLabMultiFile__v_directory_base" "', argument " "1"" of type '" "GeoCal::CartLabMultiFile const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::CartLabMultiFile * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::CartLabMultiFile * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = ((GeoCal::VicarMultiFile const *)arg1)->db_name();
+      result = ((GeoCal::CartLabMultiFile const *)arg1)->directory_base();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6634,503 +5124,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_dirbase(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_CartLabMultiFile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
+  GeoCal::CartLabMultiFile *arg1 = (GeoCal::CartLabMultiFile *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_dirbase" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::VicarMultiFile const *)arg1)->dirbase();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_extension(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_extension" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::VicarMultiFile const *)arg1)->extension();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_tile_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_tile_line" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_tile_line();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_tile_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_tile_sample" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_tile_sample();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_line_per_tile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_line_per_tile" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_line_per_tile();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_tile_each_file(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_tile_each_file" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_tile_each_file();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_favor_memory_mapped(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_favor_memory_mapped" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)((GeoCal::VicarMultiFile const *)arg1)->favor_memory_mapped();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_force_area_pixel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_force_area_pixel" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)((GeoCal::VicarMultiFile const *)arg1)->force_area_pixel();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_no_coverage_is_error(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_no_coverage_is_error" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)((GeoCal::VicarMultiFile const *)arg1)->no_coverage_is_error();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_no_coverage_fill_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_no_coverage_fill_value" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::VicarMultiFile const *)arg1)->no_coverage_fill_value();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VicarMultiFile__v_number_tile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarMultiFile__v_number_tile" "', argument " "1"" of type '" "GeoCal::VicarMultiFile const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::VicarMultiFile const *)arg1)->number_tile();
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_VicarMultiFile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VicarMultiFile *arg1 = (GeoCal::VicarMultiFile *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile > tempshared1 ;
-  boost::shared_ptr< GeoCal::VicarMultiFile > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CartLabMultiFile > tempshared1 ;
+  boost::shared_ptr< GeoCal::CartLabMultiFile > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_VicarMultiFile" "', argument " "1"" of type '" "GeoCal::VicarMultiFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CartLabMultiFile" "', argument " "1"" of type '" "GeoCal::CartLabMultiFile *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartLabMultiFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartLabMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::CartLabMultiFile * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarMultiFile > * >(argp1);
-      arg1 = const_cast< GeoCal::VicarMultiFile * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CartLabMultiFile > * >(argp1);
+      arg1 = const_cast< GeoCal::CartLabMultiFile * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -7149,124 +5166,26 @@ fail:
 }
 
 
-SWIGINTERN PyObject *VicarMultiFile_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *CartLabMultiFile_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *VicarMultiFile_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  return SWIG_Python_InitShadowInstance(args);
 }
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"new_VicarMultiFile", _wrap_new_VicarMultiFile, METH_VARARGS, (char *)"\n"
-		"VicarMultiFile::VicarMultiFile(const std::string &Db_name, const std::string &Dirbase, const\n"
-		"std::string &Extension=\"\", int Number_tile_line=10000, int\n"
-		"Number_tile_sample=10000, int Number_line_per_tile=100000, int\n"
-		"Number_tile_each_file=4, int Number_tile=4, bool\n"
-		"Favor_memory_mapped=true, bool No_coverage_is_error=true, int\n"
-		"No_coverage_fill_value=0, bool Force_area_pixel=false)\n"
-		"Constructor.\n"
-		"\n"
-		"This takes the database file (an IBIS file) and the directory that the\n"
-		"files pointed to by the database file are located. The directory is\n"
-		"needed because although the files are often in the same directory as\n"
-		"the database file they aren't always. The database file doesn't\n"
-		"contain directory information, just the file name, so we need to pass\n"
-		"the directory in.\n"
-		"\n"
-		"For some odd reason, the file names also don't always have the\n"
-		"extension on them. For some databases, you need to add something like\n"
-		"\".img\" to get the actual file name. You can pass any extension that\n"
-		"is needed.\n"
-		"\n"
-		"There are two kinds of tiling going on. At the top level, we have a\n"
-		"number of files open at one time, given by Number_tile. For each file,\n"
-		"we read that it tiles with the given Number_line_per_tile and\n"
-		"Number_tile_each_file tiles.\n"
-		"\n"
-		"There are two strategies that can be used to reading a Vicar file. One\n"
-		"reads a tile of a given number of lines and store it in memory. The\n"
-		"other uses memory mapped file io to read data on demand. Often but not\n"
-		"always the memory mapped file is faster, particularly for small files\n"
-		"or for files with a large number of samples where only a portion is\n"
-		"used. You can control which is used by setting Favor_memory_mapped. If\n"
-		"the underlying data uses VICAR compression, then we always use the\n"
-		"VICAR IO routines since memory mapping won't work. This class handles\n"
-		"this case - it checks if the file is compressed before trying to do\n"
-		"memory mapping.\n"
-		"\n"
-		"The Force_area_pixel forces the file to be treated as \"pixel as\n"
-		"area\" rather than \"pixel as point\". This is really just meant as a\n"
-		"work around for the SRTM data, which incorrectly labels the data as\n"
-		"\"point\" rather than \"area\". Since this is a 15 meter difference,\n"
-		"it matters for many applications. Most users should just ignore this\n"
-		"value. \n"
-		""},
-	 { (char *)"VicarMultiFile_write", _wrap_VicarMultiFile_write, METH_VARARGS, NULL},
-	 { (char *)"VicarMultiFile__v_db_name", (PyCFunction)_wrap_VicarMultiFile__v_db_name, METH_O, (char *)"\n"
-		"const std::string& GeoCal::VicarMultiFile::db_name() const\n"
-		"IBIS index file name. \n"
-		""},
-	 { (char *)"VicarMultiFile__v_dirbase", (PyCFunction)_wrap_VicarMultiFile__v_dirbase, METH_O, (char *)"\n"
-		"const std::string& GeoCal::VicarMultiFile::dirbase() const\n"
-		"Directory base, where the underlying files are. \n"
-		""},
-	 { (char *)"VicarMultiFile__v_extension", (PyCFunction)_wrap_VicarMultiFile__v_extension, METH_O, (char *)"\n"
-		"const std::string& GeoCal::VicarMultiFile::extension() const\n"
-		"Extension to add to names in IBIS index file to get file names (e.g.,\n"
-		"\".img\" if it is left out in IBIS index file name) \n"
-		""},
-	 { (char *)"VicarMultiFile__v_number_tile_line", (PyCFunction)_wrap_VicarMultiFile__v_number_tile_line, METH_O, NULL},
-	 { (char *)"VicarMultiFile__v_number_tile_sample", (PyCFunction)_wrap_VicarMultiFile__v_number_tile_sample, METH_O, NULL},
-	 { (char *)"VicarMultiFile__v_number_line_per_tile", (PyCFunction)_wrap_VicarMultiFile__v_number_line_per_tile, METH_O, (char *)"\n"
-		"int GeoCal::VicarMultiFile::number_line_per_tile() const\n"
-		"Number of lines to include in each tile in the underlying VICAR files\n"
-		"we read.\n"
-		"\n"
-		"This doesn't apply if we are doing memory mapping. \n"
-		""},
-	 { (char *)"VicarMultiFile__v_number_tile_each_file", (PyCFunction)_wrap_VicarMultiFile__v_number_tile_each_file, METH_O, (char *)"\n"
-		"int GeoCal::VicarMultiFile::number_tile_each_file() const\n"
-		"Number of tiles to use for each underlying VICAR file.\n"
-		"\n"
-		"This doesn't apply if we are doing memory mapping. \n"
-		""},
-	 { (char *)"VicarMultiFile__v_favor_memory_mapped", (PyCFunction)_wrap_VicarMultiFile__v_favor_memory_mapped, METH_O, (char *)"\n"
-		"bool GeoCal::VicarMultiFile::favor_memory_mapped() const\n"
-		"Whether we use memory mapping or not when reading an uncompressed\n"
-		"files. \n"
-		""},
-	 { (char *)"VicarMultiFile__v_force_area_pixel", (PyCFunction)_wrap_VicarMultiFile__v_force_area_pixel, METH_O, (char *)"\n"
-		"bool GeoCal::VicarMultiFile::force_area_pixel() const\n"
-		"If true, force the file to be treated as \"pixel as area\" rather than\n"
-		"\"pixel as point\".\n"
-		"\n"
-		"This is really just meant as a work around for the SRTM data, which\n"
-		"incorrectly labels the data as \"point\" rather than \"area\". Since\n"
-		"this is a 15 meter difference, it matters for many applications. Most\n"
-		"users should just ignore this value. \n"
-		""},
-	 { (char *)"VicarMultiFile__v_no_coverage_is_error", (PyCFunction)_wrap_VicarMultiFile__v_no_coverage_is_error, METH_O, NULL},
-	 { (char *)"VicarMultiFile__v_no_coverage_fill_value", (PyCFunction)_wrap_VicarMultiFile__v_no_coverage_fill_value, METH_O, NULL},
-	 { (char *)"VicarMultiFile__v_number_tile", (PyCFunction)_wrap_VicarMultiFile__v_number_tile, METH_O, NULL},
-	 { (char *)"delete_VicarMultiFile", (PyCFunction)_wrap_delete_VicarMultiFile, METH_O, (char *)"\n"
-		"virtual GeoCal::VicarMultiFile::~VicarMultiFile()\n"
-		"\n"
-		""},
-	 { (char *)"VicarMultiFile_swigregister", VicarMultiFile_swigregister, METH_VARARGS, NULL},
-	 { (char *)"VicarMultiFile_swiginit", VicarMultiFile_swiginit, METH_VARARGS, NULL},
+	 { (char *)"CartLabMultiFile__v_directory_base", (PyCFunction)_wrap_CartLabMultiFile__v_directory_base, METH_O, NULL},
+	 { (char *)"delete_CartLabMultiFile", (PyCFunction)_wrap_delete_CartLabMultiFile, METH_O, NULL},
+	 { (char *)"CartLabMultiFile_swigregister", CartLabMultiFile_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_GeoCal__VicarMultiFileTo_p_GeoCal__RasterImageVariable(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::RasterImageVariable *) (GeoCal::RasterMultifile *) ((GeoCal::VicarMultiFile *) x));
+static void *_p_GeoCal__CartLabMultiFileTo_p_GeoCal__RasterImageVariable(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::RasterImageVariable *) (GeoCal::RasterMultifile *) ((GeoCal::CartLabMultiFile *) x));
 }
 static void *_p_GeoCal__RasterMultifileTo_p_GeoCal__RasterImageVariable(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::RasterImageVariable *)  ((GeoCal::RasterMultifile *) x));
@@ -7293,13 +5212,13 @@ static void *_p_boost__shared_ptrT_GeoCal__RasterMultifile_tTo_p_boost__shared_p
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::RasterImageVariable >(*(boost::shared_ptr< GeoCal::RasterMultifile > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__VicarMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::RasterImageVariable >(*(boost::shared_ptr< GeoCal::VicarMultiFile > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::RasterImageVariable >(*(boost::shared_ptr< GeoCal::CartLabMultiFile > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__VicarMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterMultifile_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterMultifile_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::RasterMultifile >(*(boost::shared_ptr< GeoCal::VicarMultiFile > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::RasterMultifile >(*(boost::shared_ptr< GeoCal::CartLabMultiFile > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7309,9 +5228,9 @@ static void *_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_d
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__VicarMultiFile_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::VicarMultiFile > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CartLabMultiFile > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__RasterImageVariable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7519,8 +5438,8 @@ static void *_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCa
 static void *_p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::RasterImageTileIterator *) x));
 }
-static void *_p_GeoCal__VicarMultiFileTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::RasterImage *)(GeoCal::RasterImageVariable *)(GeoCal::RasterMultifile *) ((GeoCal::VicarMultiFile *) x));
+static void *_p_GeoCal__CartLabMultiFileTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::RasterImage *)(GeoCal::RasterImageVariable *)(GeoCal::RasterMultifile *) ((GeoCal::CartLabMultiFile *) x));
 }
 static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7557,8 +5476,8 @@ static void *_p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__LookV
 static void *_p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector< GeoCal::AutoDerivative< double > > *)  ((GeoCal::LnLookVectorWithDerivative *) x));
 }
-static void *_p_GeoCal__VicarMultiFileTo_p_GeoCal__RasterMultifile(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::RasterMultifile *)  ((GeoCal::VicarMultiFile *) x));
+static void *_p_GeoCal__CartLabMultiFileTo_p_GeoCal__RasterMultifile(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::RasterMultifile *)  ((GeoCal::CartLabMultiFile *) x));
 }
 static void *_p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7573,8 +5492,8 @@ static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__ba
 static void *_p_GeoCal__GeodeticConverterTo_p_GeoCal__CoordinateConverter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::CoordinateConverter *)  ((GeoCal::GeodeticConverter *) x));
 }
-static void *_p_GeoCal__VicarMultiFileTo_p_GeoCal__RasterImage(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::RasterImage *) (GeoCal::RasterImageVariable *)(GeoCal::RasterMultifile *) ((GeoCal::VicarMultiFile *) x));
+static void *_p_GeoCal__CartLabMultiFileTo_p_GeoCal__RasterImage(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::RasterImage *) (GeoCal::RasterImageVariable *)(GeoCal::RasterMultifile *) ((GeoCal::CartLabMultiFile *) x));
 }
 static void *_p_GeoCal__RasterImageVariableTo_p_GeoCal__RasterImage(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::RasterImage *)  ((GeoCal::RasterImageVariable *) x));
@@ -7586,9 +5505,9 @@ static void *_p_boost__shared_ptrT_GeoCal__RasterMultifile_tTo_p_boost__shared_p
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::RasterImage >(*(boost::shared_ptr< GeoCal::RasterMultifile > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__VicarMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::RasterImage >(*(boost::shared_ptr< GeoCal::VicarMultiFile > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::RasterImage >(*(boost::shared_ptr< GeoCal::CartLabMultiFile > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__RasterImageVariable_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7616,6 +5535,7 @@ static void *_p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT
 }
 static swig_type_info _swigt__p_GeoCal__AutoDerivativeRefT_double_t = {"_p_GeoCal__AutoDerivativeRefT_double_t", "GeoCal::AutoDerivativeRef< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__AutoDerivativeT_double_t = {"_p_GeoCal__AutoDerivativeT_double_t", "GeoCal::AutoDerivative< double > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__CartLabMultiFile = {"_p_GeoCal__CartLabMultiFile", "GeoCal::CartLabMultiFile *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__CartesianFixed = {"_p_GeoCal__CartesianFixed", "GeoCal::CartesianFixed *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__CartesianFixedLookVector = {"_p_GeoCal__CartesianFixedLookVector", "GeoCal::CartesianFixedLookVector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative = {"_p_GeoCal__CartesianFixedLookVectorWithDerivative", "GeoCal::CartesianFixedLookVectorWithDerivative *", 0, 0, (void*)0, 0};
@@ -7645,7 +5565,6 @@ static swig_type_info _swigt__p_GeoCal__ScLookVectorWithDerivative = {"_p_GeoCal
 static swig_type_info _swigt__p_GeoCal__Time = {"_p_GeoCal__Time", "GeoCal::Time *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__TimeWithDerivative = {"_p_GeoCal__TimeWithDerivative", "GeoCal::TimeWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__VicarImageCoordinate = {"_p_GeoCal__VicarImageCoordinate", "GeoCal::VicarImageCoordinate *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__VicarMultiFile = {"_p_GeoCal__VicarMultiFile", "GeoCal::VicarMultiFile *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
@@ -7673,6 +5592,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7
 static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t = {"_p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t", "boost::shared_ptr< GeoCal::CartLabMultiFile > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t", "boost::shared_ptr< GeoCal::CartesianFixedLookVectorWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t = {"_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t", "boost::shared_ptr< GeoCal::CartesianFixedLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t = {"_p_boost__shared_ptrT_GeoCal__CartesianFixed_t", "boost::shared_ptr< GeoCal::CartesianFixed > *", 0, 0, (void*)0, 0};
@@ -7702,7 +5622,6 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t = {"_p
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t", "boost::shared_ptr< GeoCal::TimeWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__shared_ptrT_GeoCal__Time_t", "boost::shared_ptr< GeoCal::Time > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t", "boost::shared_ptr< GeoCal::VicarImageCoordinate > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t = {"_p_boost__shared_ptrT_GeoCal__VicarMultiFile_t", "boost::shared_ptr< GeoCal::VicarMultiFile > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
@@ -7725,6 +5644,7 @@ static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__AutoDerivativeRefT_double_t,
   &_swigt__p_GeoCal__AutoDerivativeT_double_t,
+  &_swigt__p_GeoCal__CartLabMultiFile,
   &_swigt__p_GeoCal__CartesianFixed,
   &_swigt__p_GeoCal__CartesianFixedLookVector,
   &_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative,
@@ -7754,7 +5674,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__Time,
   &_swigt__p_GeoCal__TimeWithDerivative,
   &_swigt__p_GeoCal__VicarImageCoordinate,
-  &_swigt__p_GeoCal__VicarMultiFile,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
@@ -7782,6 +5701,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_8_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t,
@@ -7811,7 +5731,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__Time_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
@@ -7834,6 +5753,7 @@ static swig_type_info *swig_type_initial[] = {
 
 static swig_cast_info _swigc__p_GeoCal__AutoDerivativeRefT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__AutoDerivativeT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__CartLabMultiFile[] = {  {&_swigt__p_GeoCal__CartLabMultiFile, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianFixed[] = {  {&_swigt__p_GeoCal__CartesianFixed, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianFixedLookVector[] = {  {&_swigt__p_GeoCal__CartesianFixedLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianFixedLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
@@ -7844,7 +5764,7 @@ static swig_cast_info _swigc__p_GeoCal__CoordinateConverter[] = {  {&_swigt__p_G
 static swig_cast_info _swigc__p_GeoCal__DcsLookVector[] = {  {&_swigt__p_GeoCal__DcsLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__DcsLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Dem[] = {  {&_swigt__p_GeoCal__Dem, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImage, _p_GeoCal__RasterImageTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageVariable, _p_GeoCal__RasterImageVariableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MapInfo, _p_GeoCal__MapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__RasterMultifile, _p_GeoCal__RasterMultifileTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CoordinateConverter, _p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticConverter, _p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarMultiFile, _p_GeoCal__VicarMultiFileTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageTileIterator, _p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImage, _p_GeoCal__RasterImageTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageVariable, _p_GeoCal__RasterImageVariableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MapInfo, _p_GeoCal__MapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__RasterMultifile, _p_GeoCal__RasterMultifileTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CoordinateConverter, _p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticConverter, _p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartLabMultiFile, _p_GeoCal__CartLabMultiFileTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageTileIterator, _p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GeodeticConverter[] = {  {&_swigt__p_GeoCal__GeodeticConverter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GroundCoordinate[] = {  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinate[] = {  {&_swigt__p_GeoCal__ImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
@@ -7854,16 +5774,15 @@ static swig_cast_info _swigc__p_GeoCal__LnLookVectorWithDerivative[] = {  {&_swi
 static swig_cast_info _swigc__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LookVectorT_double_t[] = {  {&_swigt__p_GeoCal__LookVectorT_double_t, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MapInfo[] = {  {&_swigt__p_GeoCal__MapInfo, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__RasterImage[] = {  {&_swigt__p_GeoCal__VicarMultiFile, _p_GeoCal__VicarMultiFileTo_p_GeoCal__RasterImage, 0, 0},  {&_swigt__p_GeoCal__RasterImageVariable, _p_GeoCal__RasterImageVariableTo_p_GeoCal__RasterImage, 0, 0},  {&_swigt__p_GeoCal__RasterImage, 0, 0, 0},  {&_swigt__p_GeoCal__RasterMultifile, _p_GeoCal__RasterMultifileTo_p_GeoCal__RasterImage, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__RasterImage[] = {  {&_swigt__p_GeoCal__CartLabMultiFile, _p_GeoCal__CartLabMultiFileTo_p_GeoCal__RasterImage, 0, 0},  {&_swigt__p_GeoCal__RasterImageVariable, _p_GeoCal__RasterImageVariableTo_p_GeoCal__RasterImage, 0, 0},  {&_swigt__p_GeoCal__RasterImage, 0, 0, 0},  {&_swigt__p_GeoCal__RasterMultifile, _p_GeoCal__RasterMultifileTo_p_GeoCal__RasterImage, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__RasterImageTileIterator[] = {  {&_swigt__p_GeoCal__RasterImageTileIterator, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__RasterImageVariable[] = {  {&_swigt__p_GeoCal__VicarMultiFile, _p_GeoCal__VicarMultiFileTo_p_GeoCal__RasterImageVariable, 0, 0},  {&_swigt__p_GeoCal__RasterImageVariable, 0, 0, 0},  {&_swigt__p_GeoCal__RasterMultifile, _p_GeoCal__RasterMultifileTo_p_GeoCal__RasterImageVariable, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__RasterMultifile[] = {  {&_swigt__p_GeoCal__VicarMultiFile, _p_GeoCal__VicarMultiFileTo_p_GeoCal__RasterMultifile, 0, 0},  {&_swigt__p_GeoCal__RasterMultifile, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__RasterImageVariable[] = {  {&_swigt__p_GeoCal__CartLabMultiFile, _p_GeoCal__CartLabMultiFileTo_p_GeoCal__RasterImageVariable, 0, 0},  {&_swigt__p_GeoCal__RasterImageVariable, 0, 0, 0},  {&_swigt__p_GeoCal__RasterMultifile, _p_GeoCal__RasterMultifileTo_p_GeoCal__RasterImageVariable, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__RasterMultifile[] = {  {&_swigt__p_GeoCal__CartLabMultiFile, _p_GeoCal__CartLabMultiFileTo_p_GeoCal__RasterMultifile, 0, 0},  {&_swigt__p_GeoCal__RasterMultifile, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVector[] = {  {&_swigt__p_GeoCal__ScLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__TimeWithDerivative[] = {  {&_swigt__p_GeoCal__TimeWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VicarImageCoordinate[] = {  {&_swigt__p_GeoCal__VicarImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__VicarMultiFile[] = {  {&_swigt__p_GeoCal__VicarMultiFile, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7891,6 +5810,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixed_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7901,7 +5821,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CoordinateConverter_t
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Dem_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CoordinateConverter_t, _p_boost__shared_ptrT_GeoCal__CoordinateConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterMultifile_t, _p_boost__shared_ptrT_GeoCal__RasterMultifile_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageVariable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, _p_boost__shared_ptrT_GeoCal__MapInfo_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, _p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, _p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, _p_boost__shared_ptrT_GeoCal__RasterImage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, _p_boost__shared_ptrT_GeoCal__VicarMultiFile_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CoordinateConverter_t, _p_boost__shared_ptrT_GeoCal__CoordinateConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterMultifile_t, _p_boost__shared_ptrT_GeoCal__RasterMultifile_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageVariable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, _p_boost__shared_ptrT_GeoCal__MapInfo_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, _p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, _p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, _p_boost__shared_ptrT_GeoCal__RasterImage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t, _p_boost__shared_ptrT_GeoCal__CartLabMultiFile_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7912,15 +5832,14 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__A
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MapInfo_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, _p_boost__shared_ptrT_GeoCal__VicarMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterMultifile_t, _p_boost__shared_ptrT_GeoCal__RasterMultifile_tTo_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImage_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, _p_boost__shared_ptrT_GeoCal__VicarMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageVariable_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterMultifile_t, _p_boost__shared_ptrT_GeoCal__RasterMultifile_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterMultifile_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, _p_boost__shared_ptrT_GeoCal__VicarMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterMultifile_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterMultifile_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t, _p_boost__shared_ptrT_GeoCal__CartLabMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterMultifile_t, _p_boost__shared_ptrT_GeoCal__RasterMultifile_tTo_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImage_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t, _p_boost__shared_ptrT_GeoCal__CartLabMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageVariable_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterMultifile_t, _p_boost__shared_ptrT_GeoCal__RasterMultifile_tTo_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterMultifile_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t, _p_boost__shared_ptrT_GeoCal__CartLabMultiFile_tTo_p_boost__shared_ptrT_GeoCal__RasterMultifile_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterMultifile_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7943,6 +5862,7 @@ static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__AutoDerivativeRefT_double_t,
   _swigc__p_GeoCal__AutoDerivativeT_double_t,
+  _swigc__p_GeoCal__CartLabMultiFile,
   _swigc__p_GeoCal__CartesianFixed,
   _swigc__p_GeoCal__CartesianFixedLookVector,
   _swigc__p_GeoCal__CartesianFixedLookVectorWithDerivative,
@@ -7972,7 +5892,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__Time,
   _swigc__p_GeoCal__TimeWithDerivative,
   _swigc__p_GeoCal__VicarImageCoordinate,
-  _swigc__p_GeoCal__VicarMultiFile,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,
@@ -8000,6 +5919,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_8_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__CartLabMultiFile_t,
   _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixed_t,
@@ -8029,7 +5949,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__Time_t,
   _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__VicarMultiFile_t,
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
@@ -8734,8 +6653,8 @@ SWIG_init(void) {
   
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::VicarMultiFile))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::VicarMultiFile >("boost::shared_ptr< GeoCal::VicarMultiFile > *"));
+  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartLabMultiFile))] =
+  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartLabMultiFile >("boost::shared_ptr< GeoCal::CartLabMultiFile > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

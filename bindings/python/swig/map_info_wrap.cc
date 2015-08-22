@@ -6552,7 +6552,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MapInfo_subset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MapInfo_subset__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
   int arg2 ;
@@ -6571,10 +6571,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_subset(PyObject *SWIGUNUSEDPARM(self), PyObje
   int ecode4 = 0 ;
   int val5 ;
   int ecode5 = 0 ;
-  PyObject *swig_obj[5] ;
   GeoCal::MapInfo result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MapInfo_subset",5,5,swig_obj)) SWIG_fail;
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
@@ -6626,6 +6625,121 @@ SWIGINTERN PyObject *_wrap_MapInfo_subset(PyObject *SWIGUNUSEDPARM(self), PyObje
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo_subset__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  int arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MapInfo const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  GeoCal::MapInfo result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MapInfo_subset" "', argument " "1"" of type '" "GeoCal::MapInfo const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MapInfo_subset" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MapInfo_subset" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "MapInfo_subset" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "MapInfo_subset" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      result = ((GeoCal::MapInfo const *)arg1)->subset(arg2,arg3,arg4,arg5);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::MapInfo > *smartresult = new boost::shared_ptr<  GeoCal::MapInfo >(new GeoCal::MapInfo((GeoCal::MapInfo &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo_subset(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"MapInfo_subset",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 5) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    return _wrap_MapInfo_subset__SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 5) {
+    return _wrap_MapInfo_subset__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MapInfo_subset'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::MapInfo::subset(int,int,int,int) const\n"
+    "    GeoCal::MapInfo::subset(double,double,int,int) const\n");
+  return 0;
 }
 
 
@@ -7018,7 +7132,7 @@ static PyMethodDef SwigMethods[] = {
 		"them. \n"
 		""},
 	 { (char *)"MapInfo_subset", _wrap_MapInfo_subset, METH_VARARGS, (char *)"\n"
-		"MapInfo MapInfo::subset(int x_index, int y_index, int nx_pixel, int ny_pixel) const\n"
+		"MapInfo MapInfo::subset(double x_index, double y_index, int nx_pixel, int ny_pixel) const\n"
 		"Return a MapInfo for a subset of this map info.\n"
 		"\n"
 		"Note that it is ok for x_index and y_index to be outside the range of\n"

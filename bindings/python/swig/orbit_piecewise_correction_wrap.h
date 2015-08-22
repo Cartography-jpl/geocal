@@ -8,8 +8,8 @@
  * interface file instead. 
  * ----------------------------------------------------------------------------- */
 
-#ifndef SWIG_vicar_multi_file_WRAP_H_
-#define SWIG_vicar_multi_file_WRAP_H_
+#ifndef SWIG_orbit_piecewise_correction_WRAP_H_
+#define SWIG_orbit_piecewise_correction_WRAP_H_
 
 #include <map>
 #include <string>

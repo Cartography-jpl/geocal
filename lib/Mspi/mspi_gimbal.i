@@ -27,7 +27,9 @@ public:
   %python_attribute(theta_with_derivative, AutoDerivative<double>);
   %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);
   boost::math::quaternion<AutoDerivative<double> >  
-  station_to_sc(const AutoDerivative<double>& Gimbal_pos) const;
+  station_to_sc_with_derivative(const AutoDerivative<double>& Gimbal_pos) const;
+  boost::math::quaternion<double>  
+  station_to_sc(double Gimbal_pos) const;
   %pickle_serialization();
 };
 }

@@ -554,6 +554,8 @@ QuaternionOrbitData::QuaternionOrbitData
 ///
 /// The position correction is in CartesianFixed if from_cf() is true,
 /// otherwise it is CartesianInertial.
+///
+/// This version does not include the derivative calculation.
 //-----------------------------------------------------------------------
 
 QuaternionOrbitData::QuaternionOrbitData
@@ -563,48 +565,43 @@ QuaternionOrbitData::QuaternionOrbitData
 {
   tm = Start.tm;
   pos = Start.pos->create(Start.pos->position);
-  pos_with_der = Start.pos_with_der;
   vel_cf = Start.vel_cf;
-  vel_cf_with_der = Start.vel_cf_with_der;
-  sc_to_cf_with_der = Start.sc_to_cf_with_der * conj(Sc_to_sc_corr);
-  normalize(sc_to_cf_with_der);
-  sc_to_cf_ = value(sc_to_cf_with_der);
+  vel_cf_with_der = vel_cf;
+  sc_to_cf_ = Start.sc_to_cf_ * conj(Sc_to_sc_corr);
+  normalize(sc_to_cf_);
+  sc_to_cf_with_der = sc_to_cf_;
   from_cf_ = Start.from_cf_;
   have_ci_to_cf = Start.have_ci_to_cf;
-  if(Start.have_ci_to_cf) {
+  if(have_ci_to_cf) {
     ci_to_cf_ = Start.ci_to_cf_;
-    ci_to_cf_der_ = Start.ci_to_cf_der_;
-    pos_ci = Start.pos_ci->create(Start.pos_ci->position);
-    pos_ci_with_der = Start.pos_ci_with_der;
+    ci_to_cf_der_ = ci_to_cf_;
     vel_ci = Start.vel_ci;
-    vel_ci_with_der = Start.vel_ci_with_der;
+    vel_ci_with_der = vel_ci;
   }
   if(from_cf_) {
     pos->position[0] += Pos_off[0];
     pos->position[1] += Pos_off[1];
     pos->position[2] += Pos_off[2];
-    pos_with_der = boost::math::quaternion<AutoDerivative<double> >
-      (0,pos_with_der.R_component_2() + Pos_off[0],
-       pos_with_der.R_component_3() + Pos_off[1],
-       pos_with_der.R_component_4() + Pos_off[2]);
+    pos_with_der = 
+      boost::math::quaternion<double>(0, pos->position[0], 
+				      pos->position[1], pos->position[2]);
     if(have_ci_to_cf) {
-      pos_ci_with_der = conj(ci_to_cf_with_derivative()) * pos_with_der * 
-	ci_to_cf_with_derivative();
+      pos_ci_with_der = conj(ci_to_cf()) * pos_with_der * 
+	ci_to_cf();
       boost::array<double, 3> p = {{pos_ci_with_der.R_component_2().value(),
 				    pos_ci_with_der.R_component_3().value(),
 				    pos_ci_with_der.R_component_4().value()}};
       pos_ci = pos_ci->create(p);
     }
   } else {
+    pos_ci = Start.pos_ci->create(Start.pos_ci->position);
     pos_ci->position[0] += Pos_off[0];
     pos_ci->position[1] += Pos_off[1];
     pos_ci->position[2] += Pos_off[2];
     pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-      (0,pos_ci_with_der.R_component_2() + Pos_off[0],
-       pos_ci_with_der.R_component_3() + Pos_off[1],
-       pos_ci_with_der.R_component_4() + Pos_off[2]);
-    pos_with_der = ci_to_cf_with_derivative() * pos_ci_with_der * 
-      conj(ci_to_cf_with_derivative());
+      (0,pos_ci->position[0],pos_ci->position[1],pos_ci->position[2]);
+    pos_with_der = ci_to_cf() * pos_ci_with_der * 
+      conj(ci_to_cf());
     boost::array<double, 3> p = {{pos_with_der.R_component_2().value(),
 				  pos_with_der.R_component_3().value(),
 				  pos_with_der.R_component_4().value()}};

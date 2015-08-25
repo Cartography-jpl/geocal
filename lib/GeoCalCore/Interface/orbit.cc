@@ -1244,3 +1244,76 @@ boost::shared_ptr<QuaternionOrbitData>
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
+/// Interpolate between two QuaternionOrbitData for the given time,
+/// without interpolating the derivative stuff.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<QuaternionOrbitData>
+ GeoCal::interpolate(const QuaternionOrbitData& t1, 
+		     const QuaternionOrbitData& t2,
+		     const Time& tm)
+{
+  if(tm < t1.time() || tm > t2.time())
+    throw Exception("tm needs to be between t1 and t2");
+  double tspace = t2.time() - t1.time();
+  double toffset = tm - t1.time();
+  boost::math::quaternion<double> sc_to_cf_ = 
+    interpolate_quaternion(t1.sc_to_cf(), 
+			   t2.sc_to_cf(), toffset, tspace);
+  boost::array<double, 3> pos1, pos2, vel1, vel2, 
+    vel_cf, pos_cf;
+  pos1[0] = t1.pos->position[0];
+  pos1[1] = t1.pos->position[1];
+  pos1[2] = t1.pos->position[2];
+  pos2[0] = t2.pos->position[0];
+  pos2[1] = t2.pos->position[1];
+  pos2[2] = t2.pos->position[2];
+  vel1[0] = t1.vel_cf.R_component_2();
+  vel1[1] = t1.vel_cf.R_component_3();
+  vel1[2] = t1.vel_cf.R_component_4();
+  vel2[0] = t2.vel_cf.R_component_2();
+  vel2[1] = t2.vel_cf.R_component_3();
+  vel2[2] = t2.vel_cf.R_component_4();
+  ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace,
+		pos_cf, vel_cf);
+  boost::shared_ptr<QuaternionOrbitData> res
+    (new QuaternionOrbitData(tm, t1.pos->create(pos_cf),
+			     vel_cf, sc_to_cf_));
+  res->from_cf_ = t1.from_cf_;
+  if(t1.have_ci_to_cf) {
+    t2.fill_in_ci_to_cf();
+    res->have_ci_to_cf = true;
+    res->ci_to_cf_der_ = interpolate_quaternion(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
+    res->ci_to_cf_ = value(res->ci_to_cf_der_);
+    
+    boost::array<double, 3> pos1, pos2, vel1, vel2, 
+      vel_ci, pos_ci;
+    pos1[0] = t1.pos_ci->position[0];
+    pos1[1] = t1.pos_ci->position[1];
+    pos1[2] = t1.pos_ci->position[2];
+    pos2[0] = t2.pos_ci->position[0];
+    pos2[1] = t2.pos_ci->position[1];
+    pos2[2] = t2.pos_ci->position[2];
+    vel1[0] = t1.vel_ci.R_component_2();
+    vel1[1] = t1.vel_ci.R_component_3();
+    vel1[2] = t1.vel_ci.R_component_4();
+    vel2[0] = t2.vel_ci.R_component_2();
+    vel2[1] = t2.vel_ci.R_component_3();
+    vel2[2] = t2.vel_ci.R_component_4();
+    ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace,
+		  pos_ci, vel_ci);
+    res->pos_ci = t1.pos_ci->create(pos_ci);
+    res->pos_ci_with_der = 
+      boost::math::quaternion<double>(0, 
+				      res->pos_ci->position[0],
+				      res->pos_ci->position[1],
+				      res->pos_ci->position[2]);
+    res->vel_ci = boost::math::quaternion<double>
+      (0,vel_ci[0], vel_ci[1], vel_ci[2]);
+    res->vel_ci_with_der = res->vel_ci;
+  }
+  return res;
+}
+

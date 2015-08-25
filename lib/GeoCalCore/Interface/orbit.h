@@ -19,6 +19,11 @@ boost::shared_ptr<QuaternionOrbitData>
 	      const QuaternionOrbitData& t2, 
 	      const TimeWithDerivative& tm);
 
+boost::shared_ptr<QuaternionOrbitData>
+  interpolate(const QuaternionOrbitData& t1, 
+	      const QuaternionOrbitData& t2, 
+	      const Time& tm);
+
 /****************************************************************//**
   This class is used to convert ScLookVector,
   CartesianInertialLookVector and CartesianFixedLookVector to and 
@@ -321,6 +326,10 @@ public:
   GeoCal::interpolate(const QuaternionOrbitData& t1, 
 		      const QuaternionOrbitData& t2, 
 		      const TimeWithDerivative& tm);
+  friend boost::shared_ptr<QuaternionOrbitData>
+  GeoCal::interpolate(const QuaternionOrbitData& t1, 
+		      const QuaternionOrbitData& t2, 
+		      const Time& tm);
 
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian inertial

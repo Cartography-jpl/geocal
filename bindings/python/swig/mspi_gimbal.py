@@ -123,7 +123,31 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.with_parameter
 import geocal_swig.generic_object
-class MspiGimbal(geocal_swig.with_parameter.WithParameter):
+import geocal_swig.observer
+class ObservableMspiGimbal(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _mspi_gimbal.delete_ObservableMspiGimbal
+ObservableMspiGimbal.add_observer_and_keep_reference = new_instancemethod(_mspi_gimbal.ObservableMspiGimbal_add_observer_and_keep_reference,None,ObservableMspiGimbal)
+ObservableMspiGimbal.add_observer = new_instancemethod(_mspi_gimbal.ObservableMspiGimbal_add_observer,None,ObservableMspiGimbal)
+ObservableMspiGimbal.remove_observer = new_instancemethod(_mspi_gimbal.ObservableMspiGimbal_remove_observer,None,ObservableMspiGimbal)
+ObservableMspiGimbal_swigregister = _mspi_gimbal.ObservableMspiGimbal_swigregister
+ObservableMspiGimbal_swigregister(ObservableMspiGimbal)
+
+class ObserverMspiGimbal(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self): 
+        _mspi_gimbal.ObserverMspiGimbal_swiginit(self,_mspi_gimbal.new_ObserverMspiGimbal())
+    __swig_destroy__ = _mspi_gimbal.delete_ObserverMspiGimbal
+ObserverMspiGimbal.notify_update = new_instancemethod(_mspi_gimbal.ObserverMspiGimbal_notify_update,None,ObserverMspiGimbal)
+ObserverMspiGimbal.notify_add = new_instancemethod(_mspi_gimbal.ObserverMspiGimbal_notify_add,None,ObserverMspiGimbal)
+ObserverMspiGimbal.notify_remove = new_instancemethod(_mspi_gimbal.ObserverMspiGimbal_notify_remove,None,ObserverMspiGimbal)
+ObserverMspiGimbal_swigregister = _mspi_gimbal.ObserverMspiGimbal_swigregister
+ObserverMspiGimbal_swigregister(ObserverMspiGimbal)
+
+class MspiGimbal(geocal_swig.with_parameter.WithParameter,ObservableMspiGimbal):
     """
     This handles the AirMSPI gimbal calculations.
 

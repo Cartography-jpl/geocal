@@ -2,6 +2,7 @@
 #define MSPI_GIMBAL_H
 #include "with_parameter.h"
 #include "auto_derivative_quaternion.h"
+#include "observer.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -9,7 +10,8 @@ namespace GeoCal {
 *******************************************************************/
 
 class MspiGimbal : public Printable<MspiGimbal>,
-		   public WithParameter {
+		   public WithParameter,
+		   public Observable<MspiGimbal> {
 public:
 //-----------------------------------------------------------------------
 /// Constructor. The angles should be in degrees.
@@ -29,6 +31,11 @@ public:
 	     const std::string& Extra_config_file = "")
     : parameter_mask_(3), cache_valid(false)
   { parameter_mask_ = true; read_config_file(File_name, Extra_config_file); }
+
+  virtual void add_observer(Observer<MspiGimbal>& Obs) 
+  { add_observer_do(Obs, *this);}
+  virtual void remove_observer(Observer<MspiGimbal>& Obs) 
+  { remove_observer_do(Obs, *this);}
 
   void read_config_file(const std::string& File_name,
 			const std::string& Extra_config_file = "");
@@ -78,6 +85,11 @@ public:
   { return parameter_mask_; }
   virtual void parameter_mask(const blitz::Array<bool, 1>& Pm);
   virtual void print(std::ostream& Os) const;
+protected:
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
 private:
   AutoDerivative<double> epsilon_, psi_, theta_;
   blitz::Array<bool, 1> parameter_mask_;

@@ -237,8 +237,8 @@ protected:
     : RasterImageVariable(M), 
       no_coverage_is_error_(No_coverage_is_error),
       no_coverage_fill_value_(No_coverage_fill_value),
-      tile(Number_tile),
-      number_file_read_(0)
+      number_file_read_(0),
+      tile(Number_tile)
   {
     next_swap = tile.begin();
   }

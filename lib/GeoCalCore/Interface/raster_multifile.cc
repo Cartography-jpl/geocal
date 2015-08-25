@@ -68,6 +68,7 @@ RasterMultifileTile& RasterMultifile::swap(int Line,
   range_check(Line, 0, number_line());
   range_check(Sample, 0, number_sample());
   mt_scratch = get_file(Line, Sample);
+  ++number_file_read_;
   if(mt_scratch.data.get()) {
     *next_swap = mt_scratch;
     ++next_swap;

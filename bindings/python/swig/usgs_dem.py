@@ -124,10 +124,11 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.dem_map_info
 import geocal_swig.dem
 import geocal_swig.generic_object
+import geocal_swig.cart_lab_multifile
 import geocal_swig.raster_multifile
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
-class UsgsDemData(geocal_swig.raster_multifile.RasterMultifile):
+class UsgsDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
     """
     This is used to read the USGS DEM data.
 
@@ -143,7 +144,7 @@ class UsgsDemData(geocal_swig.raster_multifile.RasterMultifile):
     FILL_VALUE = _usgs_dem.UsgsDemData_FILL_VALUE
     def __init__(self, *args): 
         """
-        GeoCal::UsgsDemData::UsgsDemData(const std::string &Dir, bool No_coverage_is_error=true, int
+        UsgsDemData::UsgsDemData(const std::string &Dir, bool No_coverage_is_error=true, int
         Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
         Number_tile_each_file=4, int Number_file=4)
         Constructor.
@@ -158,8 +159,10 @@ class UsgsDemData(geocal_swig.raster_multifile.RasterMultifile):
 
         There are two kinds of tiling going on. At the top level, we have a
         number of files open at one time, given by Number_file. For each file,
-        we read that it tiles with the given Number_line_per_tile x
-        Number_sample_per_tile Number_tile_each_file tiles. 
+        we read it with tiles with the given Number_line_per_tile x
+        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
+        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
+        entire file. 
         """
         _usgs_dem.UsgsDemData_swiginit(self,_usgs_dem.new_UsgsDemData(*args))
     def __reduce__(self):

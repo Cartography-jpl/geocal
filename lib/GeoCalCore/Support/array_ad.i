@@ -150,9 +150,7 @@ def __setitem__(self, index, val):
     void write(int i1, int i2, int i3, int i4, const AutoDerivative<TYPE>& V)
     { (*$self)(i1, i2, i3, i4) = V; }
   }
-  // 1 here is the pickle format version, so we can tell if we try to
-  // read data with a different format version than the code here.
-  %pickle_init(1, self.value, self.jacobian, self.is_constant)
+  %pickle_serialization();
  };
  
 }

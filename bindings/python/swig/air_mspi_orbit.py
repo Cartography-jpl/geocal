@@ -125,6 +125,50 @@ import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
+class AirMspiNavData(geocal_swig.generic_object.GenericObject):
+    """
+    Simple structure that describes navigation data at a point in time.
+
+    C++ includes: air_mspi_orbit.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """
+        AirMspiNavData::AirMspiNavData(const blitz::Array< double, 1 > &Raw_data, const Datum &datum, bool
+        Old_format)
+        Constructor, that takes raw data and create AirMspiNavData from this.
+
+        Note that I'm not sure about the datum here, the height might be
+        relative to WGS-84 already. I'll check with Mike Bull. 
+        """
+        _air_mspi_orbit.AirMspiNavData_swiginit(self,_air_mspi_orbit.new_AirMspiNavData(*args))
+    position = _swig_property(_air_mspi_orbit.AirMspiNavData_position_get, _air_mspi_orbit.AirMspiNavData_position_set)
+    velocity = _swig_property(_air_mspi_orbit.AirMspiNavData_velocity_get, _air_mspi_orbit.AirMspiNavData_velocity_set)
+    ypr = _swig_property(_air_mspi_orbit.AirMspiNavData_ypr_get, _air_mspi_orbit.AirMspiNavData_ypr_set)
+    ypr_rate = _swig_property(_air_mspi_orbit.AirMspiNavData_ypr_rate_get, _air_mspi_orbit.AirMspiNavData_ypr_rate_set)
+    gimbal_pos = _swig_property(_air_mspi_orbit.AirMspiNavData_gimbal_pos_get, _air_mspi_orbit.AirMspiNavData_gimbal_pos_set)
+    gimbal_vel = _swig_property(_air_mspi_orbit.AirMspiNavData_gimbal_vel_get, _air_mspi_orbit.AirMspiNavData_gimbal_vel_set)
+    def interpolate(*args):
+        """
+        AirMspiNavData AirMspiNavData::interpolate(const AirMspiNavData &N1, const AirMspiNavData &N2, double f)
+
+        """
+        return _air_mspi_orbit.AirMspiNavData_interpolate(*args)
+
+    interpolate = staticmethod(interpolate)
+    __swig_destroy__ = _air_mspi_orbit.delete_AirMspiNavData
+AirMspiNavData.__str__ = new_instancemethod(_air_mspi_orbit.AirMspiNavData___str__,None,AirMspiNavData)
+AirMspiNavData_swigregister = _air_mspi_orbit.AirMspiNavData_swigregister
+AirMspiNavData_swigregister(AirMspiNavData)
+
+def AirMspiNavData_interpolate(*args):
+  """
+    AirMspiNavData AirMspiNavData::interpolate(const AirMspiNavData &N1, const AirMspiNavData &N2, double f)
+
+    """
+  return _air_mspi_orbit.AirMspiNavData_interpolate(*args)
+
 class AirMspiOrbit(geocal_swig.orbit.Orbit):
     """
     This reads the AirMSPI orbit file.
@@ -141,11 +185,11 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< Datum >
-        &D=boost::shared_ptr< Datum >(new NoDatum()),
-        AircraftOrbitData::VerticalDefinition
+        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< MspiGimbal > &Gim,
+        const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
+        NoDatum()), AircraftOrbitData::VerticalDefinition
         Def=AircraftOrbitData::GEODETIC_VERTICAL)
-
+        Read the given file. 
         """
         _air_mspi_orbit.AirMspiOrbit_swiginit(self,_air_mspi_orbit.new_AirMspiOrbit(*args))
     def _v_data_version(self):
@@ -192,33 +236,6 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     def flight_description(self):
         return self._v_flight_description()
 
-    def _v_gimbal_angle(self):
-        """
-        blitz::Array<double, 1> GeoCal::AirMspiOrbit::gimbal_angle() const
-        Gimbal angles.
-
-        This is in degrees, and is in the order epsilon, psi, theta. 
-        """
-        return _air_mspi_orbit.AirMspiOrbit__v_gimbal_angle(self)
-
-    @property
-    def gimbal_angle(self):
-        return self._v_gimbal_angle()
-
-    def _v_ypr_corr(self):
-        """
-        blitz::Array<double, 1> GeoCal::AirMspiOrbit::ypr_corr() const
-        YPR correction.
-
-        This is a pretty simple error model, we may modify this is the future.
-        This is in degrees 
-        """
-        return _air_mspi_orbit.AirMspiOrbit__v_ypr_corr(self)
-
-    @property
-    def ypr_corr(self):
-        return self._v_ypr_corr()
-
     def _v_time_spacing(self):
         """
         double GeoCal::AirMspiOrbit::time_spacing() const
@@ -244,10 +261,29 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     def vertical_def(self):
         return self._v_vertical_def()
 
+    def gimbal_position(self, *args):
+        """
+        double GeoCal::AirMspiOrbit::gimbal_position(Time T) const
+        Return the gimbal position at time T in degrees. 
+        """
+        return _air_mspi_orbit.AirMspiOrbit_gimbal_position(self, *args)
+
+    def nav_data(self, *args):
+        """
+        AirMspiNavData AirMspiOrbit::nav_data(Time T) const
+        Nav data at the given time.
+
+        Note that we interpolate the nav data, in a way different than we do
+        for the actual orbit_data. This is meant for use in various reporting
+        tools Mike Bull uses, not for actually calculating the orbit data
+        with. 
+        """
+        return _air_mspi_orbit.AirMspiOrbit_nav_data(self, *args)
+
     def orbit_data_index(self, *args):
         """
         boost::shared_ptr< QuaternionOrbitData > AirMspiOrbit::orbit_data_index(int Index) const
-        Orbit data for given index. 
+
         """
         return _air_mspi_orbit.AirMspiOrbit_orbit_data_index(self, *args)
 
@@ -266,14 +302,18 @@ AirMspiOrbit._v_data_version = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__
 AirMspiOrbit._v_file_name = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_file_name,None,AirMspiOrbit)
 AirMspiOrbit._v_datum = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_datum,None,AirMspiOrbit)
 AirMspiOrbit._v_flight_description = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_flight_description,None,AirMspiOrbit)
-AirMspiOrbit._v_gimbal_angle = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_gimbal_angle,None,AirMspiOrbit)
-AirMspiOrbit._v_ypr_corr = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_ypr_corr,None,AirMspiOrbit)
 AirMspiOrbit._v_time_spacing = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_time_spacing,None,AirMspiOrbit)
 AirMspiOrbit._v_vertical_def = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_vertical_def,None,AirMspiOrbit)
+AirMspiOrbit.gimbal_position = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_gimbal_position,None,AirMspiOrbit)
+AirMspiOrbit.nav_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_nav_data,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data_index = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data_index,None,AirMspiOrbit)
 AirMspiOrbit.orbit_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_data,None,AirMspiOrbit)
 AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister
 AirMspiOrbit_swigregister(AirMspiOrbit)
 
+
+def air_mspi_true_file_name(*args):
+  return _air_mspi_orbit.air_mspi_true_file_name(*args)
+air_mspi_true_file_name = _air_mspi_orbit.air_mspi_true_file_name
 
 

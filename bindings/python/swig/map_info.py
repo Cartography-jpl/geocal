@@ -300,7 +300,7 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
 
     def subset(self, *args):
         """
-        MapInfo MapInfo::subset(int x_index, int y_index, int nx_pixel, int ny_pixel) const
+        MapInfo MapInfo::subset(double x_index, double y_index, int nx_pixel, int ny_pixel) const
         Return a MapInfo for a subset of this map info.
 
         Note that it is ok for x_index and y_index to be outside the range of

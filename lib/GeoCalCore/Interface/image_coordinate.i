@@ -64,6 +64,7 @@ namespace GeoCal {
     ImageCoordinateWithDerivative();
     AutoDerivative<double> line;
     AutoDerivative<double> sample;
+    ImageCoordinate value() const;
     std::string print_to_string() const;
     %pickle_serialization();
   };

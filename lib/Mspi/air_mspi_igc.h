@@ -11,7 +11,8 @@ namespace GeoCal {
 /****************************************************************//**
   This is an ImageGroundConnection for AirMspi.
 *******************************************************************/
-class AirMspiIgc : public virtual IpiImageGroundConnection {
+class AirMspiIgc : public virtual IpiImageGroundConnection,
+		   public virtual WithParameterNested {
 public:
   AirMspiIgc(const std::string& Master_config_file,
 	     const std::string& Orbit_file_name,
@@ -24,6 +25,7 @@ public:
 	     unsigned int Number_tile = 4);
   AirMspiIgc(const boost::shared_ptr<Orbit>& Orb,
 	     const boost::shared_ptr<MspiCamera>& Cam,
+	     const boost::shared_ptr<MspiGimbal>& Gim,
 	     const boost::shared_ptr<Dem>& Dem,
 	     const std::string& L1b1_file_name,
 	     const std::string& Swath_to_use = "660-I",
@@ -48,12 +50,19 @@ public:
   { return boost::dynamic_pointer_cast<MspiCamera>(ipi().camera_ptr()); }
 
 //-----------------------------------------------------------------------
+/// Gimbal we are using.
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<MspiGimbal> gimbal() const
+  { return boost::dynamic_pointer_cast<MspiGimbal>(gimbal_); }
+
+//-----------------------------------------------------------------------
 /// Orbit we are using.
 //-----------------------------------------------------------------------
 
-  boost::shared_ptr<AirMspiOrbit> orbit() const
+  boost::shared_ptr<Orbit> orbit() const
   {
-    return boost::dynamic_pointer_cast<AirMspiOrbit>(ipi().orbit_ptr());
+    return ipi().orbit_ptr();
   }
 
 //-----------------------------------------------------------------------
@@ -75,7 +84,16 @@ public:
   { return "fake_name"; }
 
   virtual void print(std::ostream& Os) const;
+  virtual blitz::Array<double, 1> parameter() const
+  { return WithParameterNested::parameter(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  { WithParameterNested::parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return WithParameterNested::parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { WithParameterNested::parameter_with_derivative(Parm);}
 private:
+  boost::shared_ptr<MspiGimbal> gimbal_;
   AirMspiIgc() {}
   friend class boost::serialization::access;
   template<class Archive>

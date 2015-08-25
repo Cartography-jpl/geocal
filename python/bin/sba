@@ -67,6 +67,15 @@ Options:
        Epsilon to use during the calculation of the tie point Jacobian.
        [default: 1.0]
 
+  --tp-sigma=v
+       By default, the location of the tiepoints (which aren't GCPs) is 
+       not constrained at all. But it can be useful in some case to loosely
+       constrain this (e.g., have a sigma that is 10 * the GCP sigma) to
+       prevent the points from being moved too far. If you supply a 
+       tp-sigma, then we add a GCP constraint equation for points that 
+       aren't marked as GCPs that is this looser value.
+
+
   --verbose
        Print more information as we run.
 
@@ -101,7 +110,8 @@ else:
 
 sba = SimultaneousBundleAdjustment(igc, tpcol, dem, dem_sigma=args.dem_sigma,
                                    gcp_sigma=args.gcp_sigma,
-                                   tp_epsilon=args.tp_epsilon)
+                                   tp_epsilon=args.tp_epsilon,
+                                   tp_sigma=args.tp_sigma)
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 

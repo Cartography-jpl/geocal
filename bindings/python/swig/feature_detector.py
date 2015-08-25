@@ -163,12 +163,8 @@ class InterestPoint(geocal_swig.generic_object.GenericObject):
         _feature_detector.InterestPoint_swiginit(self,_feature_detector.new_InterestPoint(*args))
     image_coordinate = _swig_property(_feature_detector.InterestPoint_image_coordinate_get, _feature_detector.InterestPoint_image_coordinate_set)
     weight = _swig_property(_feature_detector.InterestPoint_weight_get, _feature_detector.InterestPoint_weight_set)
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.image_coordinate,self.weight)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _feature_detector.delete_InterestPoint
 InterestPoint.__str__ = new_instancemethod(_feature_detector.InterestPoint___str__,None,InterestPoint)

@@ -26,6 +26,12 @@ public:
     F.reference((*this)(X));
     Df.reference(df(X));
   }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(VFunctorWithDerivative);
 #endif

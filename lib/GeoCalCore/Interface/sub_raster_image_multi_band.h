@@ -27,7 +27,12 @@ public:
 private:
   boost::shared_ptr<RasterImageMultiBand> rmb;
   int sl, ss, nl, ns;
+  SubRasterImageMultiBand() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+GEOCAL_EXPORT_KEY(SubRasterImageMultiBand);
 #endif

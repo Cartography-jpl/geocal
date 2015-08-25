@@ -20,5 +20,22 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_MATRIX_CLOSE(ad.jacobian()(0,2,Range::all()), grad_expect);
 }
 
+BOOST_AUTO_TEST_CASE(serialize)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<ArrayAd<double, 1> > ad(new ArrayAd<double, 1>(2, 4));
+  (*ad)(0) = AutoDerivative<double>(3, 1, 4);
+  (*ad)(1) = AutoDerivative<double>(5, 2, 4);
+  std::string d = serialize_write_string(ad);
+  if(false)
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<ArrayAd<double, 1> > adr =
+    serialize_read_string<ArrayAd<double, 1> >(d);
+  BOOST_CHECK_MATRIX_CLOSE(adr->value(), ad->value());
+  BOOST_CHECK_MATRIX_CLOSE(adr->jacobian(), ad->jacobian());
+}
+ 
 
 BOOST_AUTO_TEST_SUITE_END()

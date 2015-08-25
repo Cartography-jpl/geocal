@@ -4861,6 +4861,9 @@ namespace swig
 #ifndef DO_IMPORT_ARRAY
 #define NO_IMPORT_ARRAY
 #endif
+// We don't use the deprecated api that was removed in 1.7, so tell
+// numpy not to complain about this.
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
 
@@ -4929,28 +4932,28 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
 template<class T, int D> inline blitz::Array<T, D> 
   to_blitz_array(PyObject* numpy)
 {
-  if(PyArray_NDIM(numpy) != D) {
-    std::cerr << PyArray_NDIM(numpy) << "\n"
+  if(PyArray_NDIM((PyArrayObject *) numpy) != D) {
+    std::cerr << PyArray_NDIM((PyArrayObject *) numpy) << "\n"
 	      << D << "\n";
     throw 
       GeoCal::Exception("Dimension of array is not the expected size");
   }
-  if(PyArray_TYPE(numpy) != type_to_npy<T>()) {
+  if(PyArray_TYPE((PyArrayObject *) numpy) != type_to_npy<T>()) {
     throw 
       GeoCal::Exception("Type of array not the expected type");
   }
   blitz::TinyVector<int, D> shape, stride;
   for(int i = 0; i < D; ++i) {
-    shape(i) = PyArray_DIM(numpy, i);
+    shape(i) = PyArray_DIM((PyArrayObject *) numpy, i);
     // Note numpy stride is in terms of bytes, while blitz in in terms
     // of type T.
-    stride(i) = PyArray_STRIDE(numpy, i) / sizeof(T);
-    if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE(numpy, i)) {
+    stride(i) = PyArray_STRIDE((PyArrayObject *) numpy, i) / sizeof(T);
+    if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE((PyArrayObject *) numpy, i)) {
       throw 
 	GeoCal::Exception("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
     }
   }
-  return blitz::Array<T, D>((T*)PyArray_DATA(numpy), shape, stride, 
+  return blitz::Array<T, D>((T*)PyArray_DATA((PyArrayObject *) numpy), shape, stride, 
 			    blitz::neverDeleteData);
 }
 
@@ -5236,9 +5239,9 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int 
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   return resultobj;
 fail:
@@ -5314,9 +5317,9 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int 
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   return resultobj;
 fail:
@@ -5565,7 +5568,7 @@ SWIGINTERN PyObject *_wrap_gsl_root(PyObject *self, PyObject *args) {
     {
       {
         PythonObject t(to_numpy<double >(argv[1]));
-        _v = (t.obj && PyArray_NDIM(t.obj) ==1 ? 1 : 0);
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
       }
     }
     if (!_v) goto check_2;
@@ -6053,7 +6056,7 @@ static PyMethodDef SwigMethods[] = {
 		"aren't talking about the derivative wrt X here). \n"
 		""},
 	 { (char *)"root_list", _wrap_root_list, METH_VARARGS, (char *)"\n"
-		"std::vector< double > GeoCal::root_list(const DFunctor &F, double Xmin, double Xmax, double\n"
+		"std::vector< AutoDerivative< double > > GeoCal::root_list(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
 		"Root_minimum_spacing, double Eps=1e-6)\n"
 		"This will find a (possible empty) list of roots of a function, where\n"
 		"the roots have a seperation of at least the supplied minimum\n"

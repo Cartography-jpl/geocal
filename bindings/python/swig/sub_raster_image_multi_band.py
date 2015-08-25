@@ -172,12 +172,8 @@ class SubRasterImageMultiBand(geocal_swig.raster_image_multi_band_variable.Raste
     def full_raster_image_multi_band(self):
         return self._v_full_raster_image_multi_band()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.full_raster_image_multi_band,self.start_line,self.start_sample,self.raster_image(0).number_line,self.raster_image(0).number_sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _sub_raster_image_multi_band.delete_SubRasterImageMultiBand
 SubRasterImageMultiBand._v_start_line = new_instancemethod(_sub_raster_image_multi_band.SubRasterImageMultiBand__v_start_line,None,SubRasterImageMultiBand)

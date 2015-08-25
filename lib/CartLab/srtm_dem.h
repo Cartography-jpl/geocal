@@ -2,9 +2,31 @@
 #define SRTM_DEM_H
 #include "dem_map_info.h"
 #include "datum_geoid96.h"
-#include "vicar_multi_file.h"
+#include "cart_lab_multifile.h"
 #include "ostream_pad.h"
 namespace GeoCal {
+/****************************************************************//**
+  This is used the read the SRTM data. This gets used by SrtmDem. 
+  Although you can use this class directly, generally uou'll use this
+  through SrtmDem class.
+*******************************************************************/
+
+class SrtmDemData: public VicarCartLabMultifile {
+public:
+  SrtmDemData(const std::string& Dir,
+	      bool No_coverage_is_error = true,
+	      int Number_line_per_tile = -1,
+	      int Number_sample_per_tile = -1, 
+	      int Number_tile_each_file = 4, int Number_file = 4,
+	      bool Favor_memory_mapped = true, bool Force_area_pixel = true);
+  virtual ~SrtmDemData() { }
+private:
+  SrtmDemData() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+
 /****************************************************************//**
   This class provides access to the SRTM.
 
@@ -29,24 +51,17 @@ namespace GeoCal {
 
 class SrtmDem : public DemMapInfo {
 public:
-  SrtmDem(const std::string& Db_name = "", const std::string& Dirbase ="",
+  SrtmDem(const std::string& Dirbase ="",
 	  bool Outside_dem_is_error = true,
 	  const boost::shared_ptr<Datum>& D = 
 	  boost::shared_ptr<Datum>(new DatumGeoid96()));
   virtual ~SrtmDem() {}
 
-
 //-----------------------------------------------------------------------
-/// Database name
-//-----------------------------------------------------------------------
-
-  const std::string& database_name() const {return dbname;}
-
-//-----------------------------------------------------------------------
-/// Database base directory
+/// Directory base that we read SRTM data from.
 //-----------------------------------------------------------------------
 
-  const std::string& directory_base() const {return dirbase;}
+  const std::string& directory_base() const { return f->directory_base(); }
 
 //-----------------------------------------------------------------------
 /// Return height in meters relative to datum().
@@ -74,15 +89,13 @@ public:
     Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
   }
 private:
-  boost::shared_ptr<VicarMultiFile> f;
+  boost::shared_ptr<SrtmDemData> f;
   std::string dbname, dirbase;
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
-  GEOCAL_SPLIT_MEMBER();
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+GEOCAL_EXPORT_KEY(SrtmDemData);
 GEOCAL_EXPORT_KEY(SrtmDem);
 #endif

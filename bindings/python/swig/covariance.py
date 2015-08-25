@@ -190,6 +190,9 @@ class Covariance(geocal_swig.generic_object.GenericObject):
     def covariance(self):
         return self._v_covariance()
 
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _covariance.delete_Covariance
 Covariance.add = new_instancemethod(_covariance.Covariance_add,None,Covariance)
 Covariance._v_count = new_instancemethod(_covariance.Covariance__v_count,None,Covariance)

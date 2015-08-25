@@ -73,9 +73,10 @@ def test_orbit_offset_pos():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
-    orb.insert_time_point(t1)
-    orb.insert_time_point(t2)
-    orb.insert_time_point(t3)
+    orb.insert_position_time_point(t1)
+    orb.insert_attitude_time_point(t1)
+    orb.insert_attitude_time_point(t2)
+    orb.insert_attitude_time_point(t3)
     assert len(orb.parameter) == 3 + 3 * 3
     orb.parameter = [100, 200, 300, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     assert_almost_equal(orb.parameter[0], 100, 4)
@@ -89,23 +90,24 @@ def test_orbit_offset_pos():
     assert_almost_equal(pdiff[1], 200, 4)
     assert_almost_equal(pdiff[2], 300, 4)
 
-def test_insert_time_point():
+def test_insert_attitude_time_point():
     if(orb_uncorr is None):
         raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
+    orb.insert_position_time_point(t1)
     orb.parameter = [0, 0, 0]
-    orb.insert_time_point(t1)
+    orb.insert_attitude_time_point(t1)
     assert (orb.parameter == [0, 0, 0, 0, 0, 0]).all()
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600]
-    orb.insert_time_point(t3)
+    orb.insert_attitude_time_point(t3)
     npt.assert_almost_equal(orb.parameter,
                            [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600,
                             0, 0, 0])
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, -10, -20, -30]
-    orb.insert_time_point(t2)
+    orb.insert_attitude_time_point(t2)
     npt.assert_almost_equal(orb.parameter,
                            [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 0, 0, 0,
                             -10, -20, -30])
@@ -119,9 +121,10 @@ def test_frame_coordinate():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
-    orb.insert_time_point(t1)
-    orb.insert_time_point(t2)
-    orb.insert_time_point(t3)
+    orb.insert_position_time_point(t1)
+    orb.insert_attitude_time_point(t1)
+    orb.insert_attitude_time_point(t2)
+    orb.insert_attitude_time_point(t3)
     orb.parameter = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30]
     img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
     igc = OrbitDataImageGroundConnection(orb.orbit_data(t1 + 5), 
@@ -140,9 +143,10 @@ def test_observer():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
-    orb.insert_time_point(t1)
-    orb.insert_time_point(t2)
-    orb.insert_time_point(t3)
+    orb.insert_position_time_point(t1)
+    orb.insert_attitude_time_point(t1)
+    orb.insert_attitude_time_point(t2)
+    orb.insert_attitude_time_point(t3)
     orb.parameter = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30]
     img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
     igc = OrbitDataImageGroundConnection(orb, t1 + 5, cam, SimpleDem(), img)
@@ -164,9 +168,10 @@ def test_frame_coordinate_with_der():
     t1 = t2 - 10
     t3 = t2 + 10
     orb = OrbitOffsetCorrection(orb_uncorr)
-    orb.insert_time_point(t1)
-    orb.insert_time_point(t2)
-    orb.insert_time_point(t3)
+    orb.insert_position_time_point(t1)
+    orb.insert_attitude_time_point(t1)
+    orb.insert_attitude_time_point(t2)
+    orb.insert_attitude_time_point(t3)
     orb.parameter = [100, 200, 300, 50, 20, 30, 20, 40, 60, -10, -20, -30]
     img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
     # We have 20 parameters, 8 in the camera 12 in orbit

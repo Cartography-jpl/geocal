@@ -10,6 +10,8 @@ BOOST_FIXTURE_TEST_SUITE(rpc_image_ground_connection, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic)
 {
   Rpc rpc;
+  rpc.error_bias = 0;
+  rpc.error_random = 0;
   rpc.rpc_type = Rpc::RPC_B;
   rpc.line_offset = 2881;
   rpc.line_scale = 2921;
@@ -126,6 +128,8 @@ BOOST_AUTO_TEST_CASE(serialize)
   if(!have_serialize_supported())
     return;
   Rpc rpc;
+  rpc.error_bias = 0;
+  rpc.error_random = 0;
   rpc.rpc_type = Rpc::RPC_B;
   rpc.line_offset = 2881;
   rpc.line_scale = 2921;

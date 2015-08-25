@@ -188,12 +188,8 @@ class PhaseCorrelationMatcher(geocal_swig.image_matcher.ImageMatcher):
     def search_size(self):
         return self._v_search_size()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.template_size,self.search_size)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _phase_correlation_matcher.delete_PhaseCorrelationMatcher
 PhaseCorrelationMatcher._v_template_size = new_instancemethod(_phase_correlation_matcher.PhaseCorrelationMatcher__v_template_size,None,PhaseCorrelationMatcher)

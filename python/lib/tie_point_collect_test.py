@@ -28,8 +28,8 @@ def test_tp():
     ic.line = round(ic.line)
     ic.sample= round(ic.sample)
     tp = tp_collect.tie_point(ic)
-    assert distance(tp.ground_location, Geodetic(36.7731567549,
-                    -116.116742172, 1276.29944154)) < 0.1
+    assert distance(tp.ground_location, Geodetic(36.7731575234,
+                    -116.116743146, 1276.36490196)) < 0.1
 
 def test_tie_point_grid():
     if(not have_serialize_supported()):

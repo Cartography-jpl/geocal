@@ -1,4 +1,5 @@
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_handle.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/ipython.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/safe_matplotlib_import.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/misc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/igc_collection_extension.py
@@ -35,9 +36,7 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/pleides_rpc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/parallel_process.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ibis_file_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_database.py
-if HAVE_PYTHON_OGR
 geocalpkgpython_PYTHON+= @srcpythonlib@/shape_file.py
-endif
 if HAVE_HDF5
 geocalpkgpython_PYTHON+= @srcpythonlib@/air_mspi_igc.py
 endif

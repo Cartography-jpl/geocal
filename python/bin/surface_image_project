@@ -1,0 +1,99 @@
+#! /usr/bin/env python
+#
+# This projects all the images of a IGC collection to a common projection
+# on the surface. This can be used as a first step to generating tiepoints.
+
+from geocal import *
+import multiprocessing
+from multiprocessing import Pool
+
+version = "June 10, 2015"
+usage='''Usage: 
+  surface_image_project [options] <igccol> <basefname> <output>
+  surface_image_project -h | --help
+  surface_image_project -v | --version
+
+This projects all the images of a IGC collection to a common projection
+on the surface. This can be used as a first step to generating tiepoints.
+
+The basefname is used for the base file name to use. If this is "foo" then
+the first index of the igc is sames as foo0.img, the second as foo1.img, etc.
+
+We project the base image at full resolution, and then all the other image 
+index to the same project (and same subset)
+
+Options:
+  -h --help         
+       Print this message
+
+  --base-image-index=n
+       The image to consider the base image in matching. [default: 0]
+
+  --grid-spacing=g
+       Grid spacing to exactly calculate the image ground connection
+       for, doing a linear interpolation in between. This can greatly
+       affect how long the processing takes. If the grid spacing is
+       something like the DEM resolution, usually you get almost as
+       good output but much faster. [default: 10]
+
+  --number-process=n
+       Number of processors to use. [default: 1]
+
+  --ref-image=f
+       Instead of using the resolution of the base image, use the resolution
+       from the supplied reference image. Useful when the reference image is
+       near the base image resolution and we want to also match the reference
+       image to the images for GCPs.
+
+  --scale=f
+       Factor to scale image by. This can be particularly useful when you
+       are mapping float data to an integer type like HALF (e.g., reflectance
+       from 0.0 to 1.0 expressed as a HALF VICAR file).
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+igccol = read_shelve(args.igccol)
+igcbase = igccol.image_ground_connection(args.base_image_index)
+if(args.ref_image):
+    mibase = read_shelve(args.ref_image).map_info
+else:
+    mibase = cib01_mapinfo(igcbase.resolution_meter())
+mi = igcbase.cover(mibase)
+
+class ProjectWrap(object):
+    '''Wrapper to project an image, so we can do this in parallel'''
+    def __init__(self, basefname, igccol, mi, scale, grid_spacing):
+        self.igccol = igccol
+        self.mi = mi
+        self.basefname = basefname
+        self.scale = scale
+        self.grid_spacing = grid_spacing
+    def __call__(self, i):
+        print "Doing %d" % i
+        igc = self.igccol.image_ground_connection(i)
+        if(self.scale is not None):
+            igc = ScaleImageGroundConnection(igc, self.scale)
+        t = IgcMapProjected(self.mi, igc, self.grid_spacing)
+        f = VicarRasterImage("%s%d.img" % (self.basefname, i), t.map_info, 
+                             "HALF")
+        f.close()
+        f = VicarLiteRasterImage("%s%d.img" % (self.basefname, i), 1, 
+                                 VicarLiteFile.UPDATE)
+        copy(t, f)
+        print "Done with %d" % i 
+
+func = ProjectWrap(args.basefname, igccol, mi, args.scale, args.grid_spacing)
+if(args.number_process > 1):
+    pool = Pool(args.number_process)
+    res = pool.map(func, range(igccol.number_image))
+else:
+    res = map(func, range(igccol.number_image))
+
+surface_image = [VicarLiteRasterImage("%s%d.img" % (args.basefname, i)) 
+                 for i in range(igccol.number_image)]
+
+write_shelve(args.output, surface_image)

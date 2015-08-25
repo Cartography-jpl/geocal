@@ -3450,198 +3450,204 @@ namespace Swig {
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_GeoCal__AirMspiIgcCollection swig_types[0]
-#define SWIGTYPE_p_GeoCal__AirMspiOrbit swig_types[1]
-#define SWIGTYPE_p_GeoCal__AircraftOrbitData swig_types[2]
-#define SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t swig_types[3]
-#define SWIGTYPE_p_GeoCal__ArrayAdT_double_2_t swig_types[4]
-#define SWIGTYPE_p_GeoCal__ArrayAdT_double_3_t swig_types[5]
-#define SWIGTYPE_p_GeoCal__ArrayAdT_double_4_t swig_types[6]
-#define SWIGTYPE_p_GeoCal__AutoDerivativeRefT_double_t swig_types[7]
-#define SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t swig_types[8]
-#define SWIGTYPE_p_GeoCal__Camera swig_types[9]
-#define SWIGTYPE_p_GeoCal__CartesianFixed swig_types[10]
-#define SWIGTYPE_p_GeoCal__CartesianFixedLookVector swig_types[11]
-#define SWIGTYPE_p_GeoCal__CartesianFixedLookVectorWithDerivative swig_types[12]
-#define SWIGTYPE_p_GeoCal__CartesianInertial swig_types[13]
-#define SWIGTYPE_p_GeoCal__CartesianInertialLookVector swig_types[14]
-#define SWIGTYPE_p_GeoCal__CartesianInertialLookVectorWithDerivative swig_types[15]
-#define SWIGTYPE_p_GeoCal__CombinedGroundMask swig_types[16]
-#define SWIGTYPE_p_GeoCal__CombinedImageMask swig_types[17]
-#define SWIGTYPE_p_GeoCal__ConstantSpacingTimeTable swig_types[18]
-#define SWIGTYPE_p_GeoCal__ConvergenceFailure swig_types[19]
-#define SWIGTYPE_p_GeoCal__CoordinateConverter swig_types[20]
-#define SWIGTYPE_p_GeoCal__Datum swig_types[21]
-#define SWIGTYPE_p_GeoCal__DcsLookVector swig_types[22]
-#define SWIGTYPE_p_GeoCal__DcsLookVectorWithDerivative swig_types[23]
-#define SWIGTYPE_p_GeoCal__Dem swig_types[24]
-#define SWIGTYPE_p_GeoCal__Exception swig_types[25]
-#define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[26]
-#define SWIGTYPE_p_GeoCal__FrameCoordinateWithDerivative swig_types[27]
-#define SWIGTYPE_p_GeoCal__GenericObject swig_types[28]
-#define SWIGTYPE_p_GeoCal__Geocentric swig_types[29]
-#define SWIGTYPE_p_GeoCal__Geodetic swig_types[30]
-#define SWIGTYPE_p_GeoCal__GeodeticConverter swig_types[31]
-#define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[32]
-#define SWIGTYPE_p_GeoCal__GroundMask swig_types[33]
-#define SWIGTYPE_p_GeoCal__IgcCollection swig_types[34]
-#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[35]
-#define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[36]
-#define SWIGTYPE_p_GeoCal__ImageGroundConnection swig_types[37]
-#define SWIGTYPE_p_GeoCal__ImageGroundConnectionCopy swig_types[38]
-#define SWIGTYPE_p_GeoCal__ImageGroundConnectionFailed swig_types[39]
-#define SWIGTYPE_p_GeoCal__ImageMask swig_types[40]
-#define SWIGTYPE_p_GeoCal__KeplerOrbit swig_types[41]
-#define SWIGTYPE_p_GeoCal__LnLookVector swig_types[42]
-#define SWIGTYPE_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t swig_types[43]
-#define SWIGTYPE_p_GeoCal__LookVectorT_double_t swig_types[44]
-#define SWIGTYPE_p_GeoCal__MapInfo swig_types[45]
-#define SWIGTYPE_p_GeoCal__MeasuredTimeTable swig_types[46]
-#define SWIGTYPE_p_GeoCal__MetadataMissing swig_types[47]
-#define SWIGTYPE_p_GeoCal__MspiCamera swig_types[48]
-#define SWIGTYPE_p_GeoCal__NoCoverage swig_types[49]
-#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__Camera_t swig_types[50]
-#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__Orbit_t swig_types[51]
-#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Camera_t swig_types[52]
-#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Orbit_t swig_types[53]
-#define SWIGTYPE_p_GeoCal__OffsetImageGroundConnection swig_types[54]
-#define SWIGTYPE_p_GeoCal__Orbit swig_types[55]
-#define SWIGTYPE_p_GeoCal__OrbitData swig_types[56]
-#define SWIGTYPE_p_GeoCal__QuaternionCamera swig_types[57]
-#define SWIGTYPE_p_GeoCal__QuaternionOrbitData swig_types[58]
-#define SWIGTYPE_p_GeoCal__RasterImage swig_types[59]
-#define SWIGTYPE_p_GeoCal__RasterImageMultiBand swig_types[60]
-#define SWIGTYPE_p_GeoCal__RasterImageMultiBandVariable swig_types[61]
-#define SWIGTYPE_p_GeoCal__RasterImageTileIterator swig_types[62]
-#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[63]
-#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[64]
-#define SWIGTYPE_p_GeoCal__SimpleCamera swig_types[65]
-#define SWIGTYPE_p_GeoCal__SimpleDatum swig_types[66]
-#define SWIGTYPE_p_GeoCal__Time swig_types[67]
-#define SWIGTYPE_p_GeoCal__TimeTable swig_types[68]
-#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[69]
-#define SWIGTYPE_p_GeoCal__VicarException swig_types[70]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[71]
-#define SWIGTYPE_p_GeoCal__WithParameter swig_types[72]
-#define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[73]
-#define SWIGTYPE_p_allocator_type swig_types[74]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[75]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[76]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[77]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[78]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[79]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[80]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[81]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[82]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[83]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[84]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[85]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[86]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[87]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[88]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[89]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[90]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[91]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[92]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[93]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[94]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[95]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[96]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[97]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[98]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t swig_types[99]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t swig_types[100]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t swig_types[101]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[102]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[103]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[104]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[105]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[106]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[107]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[108]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[109]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[110]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[111]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[112]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[113]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[114]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[115]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[116]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t swig_types[117]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[118]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[119]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Datum_t swig_types[120]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[121]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[122]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[123]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[124]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[125]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[126]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[127]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geocentric_t swig_types[128]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[129]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t swig_types[130]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[131]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[132]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t swig_types[133]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[134]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[135]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[136]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[137]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[138]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[139]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t swig_types[140]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[141]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[142]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[143]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[144]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t swig_types[145]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[146]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t swig_types[147]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[148]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t swig_types[149]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t swig_types[150]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t swig_types[151]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t swig_types[152]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[153]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t swig_types[154]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t swig_types[155]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t swig_types[156]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t swig_types[157]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[158]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[159]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[160]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[161]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[162]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[163]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[164]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleDatum_t swig_types[165]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t swig_types[166]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[167]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[168]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[169]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[170]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[171]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[172]
-#define SWIGTYPE_p_char swig_types[173]
-#define SWIGTYPE_p_char_type swig_types[174]
-#define SWIGTYPE_p_difference_type swig_types[175]
-#define SWIGTYPE_p_fmtflags swig_types[176]
-#define SWIGTYPE_p_int_type swig_types[177]
-#define SWIGTYPE_p_iostate swig_types[178]
-#define SWIGTYPE_p_off_type swig_types[179]
-#define SWIGTYPE_p_openmode swig_types[180]
-#define SWIGTYPE_p_pos_type swig_types[181]
-#define SWIGTYPE_p_seekdir swig_types[182]
-#define SWIGTYPE_p_size_t swig_types[183]
-#define SWIGTYPE_p_size_type swig_types[184]
-#define SWIGTYPE_p_state_type swig_types[185]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[186]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[187]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[188]
-#define SWIGTYPE_p_traits_type swig_types[189]
-#define SWIGTYPE_p_value_type swig_types[190]
-static swig_type_info *swig_types[192];
-static swig_module_info swig_module = {swig_types, 191, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__AirMspiNavData swig_types[1]
+#define SWIGTYPE_p_GeoCal__AirMspiOrbit swig_types[2]
+#define SWIGTYPE_p_GeoCal__AircraftOrbitData swig_types[3]
+#define SWIGTYPE_p_GeoCal__ArrayAdT_double_1_t swig_types[4]
+#define SWIGTYPE_p_GeoCal__ArrayAdT_double_2_t swig_types[5]
+#define SWIGTYPE_p_GeoCal__ArrayAdT_double_3_t swig_types[6]
+#define SWIGTYPE_p_GeoCal__ArrayAdT_double_4_t swig_types[7]
+#define SWIGTYPE_p_GeoCal__AutoDerivativeRefT_double_t swig_types[8]
+#define SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t swig_types[9]
+#define SWIGTYPE_p_GeoCal__Camera swig_types[10]
+#define SWIGTYPE_p_GeoCal__CartesianFixed swig_types[11]
+#define SWIGTYPE_p_GeoCal__CartesianFixedLookVector swig_types[12]
+#define SWIGTYPE_p_GeoCal__CartesianFixedLookVectorWithDerivative swig_types[13]
+#define SWIGTYPE_p_GeoCal__CartesianInertial swig_types[14]
+#define SWIGTYPE_p_GeoCal__CartesianInertialLookVector swig_types[15]
+#define SWIGTYPE_p_GeoCal__CartesianInertialLookVectorWithDerivative swig_types[16]
+#define SWIGTYPE_p_GeoCal__CombinedGroundMask swig_types[17]
+#define SWIGTYPE_p_GeoCal__CombinedImageMask swig_types[18]
+#define SWIGTYPE_p_GeoCal__ConstantSpacingTimeTable swig_types[19]
+#define SWIGTYPE_p_GeoCal__ConvergenceFailure swig_types[20]
+#define SWIGTYPE_p_GeoCal__CoordinateConverter swig_types[21]
+#define SWIGTYPE_p_GeoCal__Datum swig_types[22]
+#define SWIGTYPE_p_GeoCal__DcsLookVector swig_types[23]
+#define SWIGTYPE_p_GeoCal__DcsLookVectorWithDerivative swig_types[24]
+#define SWIGTYPE_p_GeoCal__Dem swig_types[25]
+#define SWIGTYPE_p_GeoCal__Exception swig_types[26]
+#define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[27]
+#define SWIGTYPE_p_GeoCal__FrameCoordinateWithDerivative swig_types[28]
+#define SWIGTYPE_p_GeoCal__GenericObject swig_types[29]
+#define SWIGTYPE_p_GeoCal__Geocentric swig_types[30]
+#define SWIGTYPE_p_GeoCal__Geodetic swig_types[31]
+#define SWIGTYPE_p_GeoCal__GeodeticConverter swig_types[32]
+#define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[33]
+#define SWIGTYPE_p_GeoCal__GroundMask swig_types[34]
+#define SWIGTYPE_p_GeoCal__IgcCollection swig_types[35]
+#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[36]
+#define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[37]
+#define SWIGTYPE_p_GeoCal__ImageGroundConnection swig_types[38]
+#define SWIGTYPE_p_GeoCal__ImageGroundConnectionCopy swig_types[39]
+#define SWIGTYPE_p_GeoCal__ImageGroundConnectionFailed swig_types[40]
+#define SWIGTYPE_p_GeoCal__ImageMask swig_types[41]
+#define SWIGTYPE_p_GeoCal__KeplerOrbit swig_types[42]
+#define SWIGTYPE_p_GeoCal__LnLookVector swig_types[43]
+#define SWIGTYPE_p_GeoCal__LnLookVectorWithDerivative swig_types[44]
+#define SWIGTYPE_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t swig_types[45]
+#define SWIGTYPE_p_GeoCal__LookVectorT_double_t swig_types[46]
+#define SWIGTYPE_p_GeoCal__MapInfo swig_types[47]
+#define SWIGTYPE_p_GeoCal__MeasuredTimeTable swig_types[48]
+#define SWIGTYPE_p_GeoCal__MetadataMissing swig_types[49]
+#define SWIGTYPE_p_GeoCal__MspiCamera swig_types[50]
+#define SWIGTYPE_p_GeoCal__MspiGimbal swig_types[51]
+#define SWIGTYPE_p_GeoCal__NoCoverage swig_types[52]
+#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__Camera_t swig_types[53]
+#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__Orbit_t swig_types[54]
+#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Camera_t swig_types[55]
+#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Orbit_t swig_types[56]
+#define SWIGTYPE_p_GeoCal__OffsetImageGroundConnection swig_types[57]
+#define SWIGTYPE_p_GeoCal__Orbit swig_types[58]
+#define SWIGTYPE_p_GeoCal__OrbitData swig_types[59]
+#define SWIGTYPE_p_GeoCal__QuaternionCamera swig_types[60]
+#define SWIGTYPE_p_GeoCal__QuaternionOrbitData swig_types[61]
+#define SWIGTYPE_p_GeoCal__RasterImage swig_types[62]
+#define SWIGTYPE_p_GeoCal__RasterImageMultiBand swig_types[63]
+#define SWIGTYPE_p_GeoCal__RasterImageMultiBandVariable swig_types[64]
+#define SWIGTYPE_p_GeoCal__RasterImageTileIterator swig_types[65]
+#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[66]
+#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[67]
+#define SWIGTYPE_p_GeoCal__SimpleCamera swig_types[68]
+#define SWIGTYPE_p_GeoCal__SimpleDatum swig_types[69]
+#define SWIGTYPE_p_GeoCal__Time swig_types[70]
+#define SWIGTYPE_p_GeoCal__TimeTable swig_types[71]
+#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[72]
+#define SWIGTYPE_p_GeoCal__VicarException swig_types[73]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[74]
+#define SWIGTYPE_p_GeoCal__WithParameter swig_types[75]
+#define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[76]
+#define SWIGTYPE_p_allocator_type swig_types[77]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[78]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[79]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[80]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[81]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[82]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[83]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[84]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[85]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[86]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[87]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[88]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[89]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[90]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[91]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[92]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[93]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[94]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[95]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[96]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[97]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[98]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[99]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[100]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[101]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t swig_types[102]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiNavData_t swig_types[103]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t swig_types[104]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t swig_types[105]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[106]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[107]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[108]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[109]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[110]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[111]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[112]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[113]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[114]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[115]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[116]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[117]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[118]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[119]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[120]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t swig_types[121]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[122]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[123]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Datum_t swig_types[124]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[125]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[126]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[127]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[128]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[129]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[130]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[131]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geocentric_t swig_types[132]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[133]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t swig_types[134]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[135]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[136]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t swig_types[137]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[138]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[139]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[140]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[141]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[142]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[143]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t swig_types[144]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[145]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[146]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[147]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[148]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[149]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t swig_types[150]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[151]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t swig_types[152]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t swig_types[153]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[154]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t swig_types[155]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t swig_types[156]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t swig_types[157]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t swig_types[158]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[159]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t swig_types[160]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t swig_types[161]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t swig_types[162]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t swig_types[163]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[164]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[165]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[166]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[167]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[168]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[169]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[170]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleDatum_t swig_types[171]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t swig_types[172]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[173]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[174]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[175]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[176]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[177]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[178]
+#define SWIGTYPE_p_char swig_types[179]
+#define SWIGTYPE_p_char_type swig_types[180]
+#define SWIGTYPE_p_difference_type swig_types[181]
+#define SWIGTYPE_p_fmtflags swig_types[182]
+#define SWIGTYPE_p_int_type swig_types[183]
+#define SWIGTYPE_p_iostate swig_types[184]
+#define SWIGTYPE_p_off_type swig_types[185]
+#define SWIGTYPE_p_openmode swig_types[186]
+#define SWIGTYPE_p_pos_type swig_types[187]
+#define SWIGTYPE_p_seekdir swig_types[188]
+#define SWIGTYPE_p_size_t swig_types[189]
+#define SWIGTYPE_p_size_type swig_types[190]
+#define SWIGTYPE_p_state_type swig_types[191]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[192]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[193]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[194]
+#define SWIGTYPE_p_traits_type swig_types[195]
+#define SWIGTYPE_p_value_type swig_types[196]
+static swig_type_info *swig_types[198];
+static swig_module_info swig_module = {swig_types, 197, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4997,6 +5003,9 @@ namespace swig
 #ifndef DO_IMPORT_ARRAY
 #define NO_IMPORT_ARRAY
 #endif
+// We don't use the deprecated api that was removed in 1.7, so tell
+// numpy not to complain about this.
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
 
@@ -5065,28 +5074,28 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
 template<class T, int D> inline blitz::Array<T, D> 
   to_blitz_array(PyObject* numpy)
 {
-  if(PyArray_NDIM(numpy) != D) {
-    std::cerr << PyArray_NDIM(numpy) << "\n"
+  if(PyArray_NDIM((PyArrayObject *) numpy) != D) {
+    std::cerr << PyArray_NDIM((PyArrayObject *) numpy) << "\n"
 	      << D << "\n";
     throw 
       GeoCal::Exception("Dimension of array is not the expected size");
   }
-  if(PyArray_TYPE(numpy) != type_to_npy<T>()) {
+  if(PyArray_TYPE((PyArrayObject *) numpy) != type_to_npy<T>()) {
     throw 
       GeoCal::Exception("Type of array not the expected type");
   }
   blitz::TinyVector<int, D> shape, stride;
   for(int i = 0; i < D; ++i) {
-    shape(i) = PyArray_DIM(numpy, i);
+    shape(i) = PyArray_DIM((PyArrayObject *) numpy, i);
     // Note numpy stride is in terms of bytes, while blitz in in terms
     // of type T.
-    stride(i) = PyArray_STRIDE(numpy, i) / sizeof(T);
-    if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE(numpy, i)) {
+    stride(i) = PyArray_STRIDE((PyArrayObject *) numpy, i) / sizeof(T);
+    if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE((PyArrayObject *) numpy, i)) {
       throw 
 	GeoCal::Exception("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
     }
   }
-  return blitz::Array<T, D>((T*)PyArray_DATA(numpy), shape, stride, 
+  return blitz::Array<T, D>((T*)PyArray_DATA((PyArrayObject *) numpy), shape, stride, 
 			    blitz::neverDeleteData);
 }
 
@@ -5842,11 +5851,12 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg3 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *arg4 = 0 ;
-  std::string *arg5 = 0 ;
-  int arg6 ;
-  std::string *arg7 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  int arg7 ;
+  std::string *arg8 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
@@ -5857,13 +5867,212 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
   boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
   void *argp3 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared3 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared3 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
   int res5 = SWIG_OLDOBJ ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int res7 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int val7 ;
+  int ecode7 = 0 ;
+  int res8 = SWIG_OLDOBJ ;
+  GeoCal::AirMspiIgcCollection *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiIgcCollection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AirMspiIgcCollection" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::MspiCamera > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
+    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
+    res5 = swig::asptr(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AirMspiIgcCollection" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  {
+    std::string *ptr = (std::string *)0;
+    res8 = SWIG_AsPtr_std_string(swig_obj[7], &ptr);
+    if (!SWIG_IsOK(res8)) {
+      SWIG_exception_fail(SWIG_ArgError(res8), "in method '" "new_AirMspiIgcCollection" "', argument " "8"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "8"" of type '" "std::string const &""'"); 
+    }
+    arg8 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6,arg7,(std::string const &)*arg8);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res8)) delete arg8;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res8)) delete arg8;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  int arg7 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera > tempshared2 ;
+  boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared3 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int val7 ;
+  int ecode7 = 0 ;
   GeoCal::AirMspiIgcCollection *result = 0 ;
   
   if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
@@ -5919,16 +6128,16 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
   }
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -5943,46 +6152,60 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
     }
   }
   {
-    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
     }
-    arg4 = ptr;
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
+    res5 = swig::asptr(swig_obj[4], &ptr);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     arg5 = ptr;
   }
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
   {
     std::string *ptr = (std::string *)0;
-    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
-    if (!SWIG_IsOK(res7)) {
-      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_AirMspiIgcCollection" "', argument " "7"" of type '" "std::string const &""'"); 
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "7"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
     }
-    arg7 = ptr;
+    arg6 = ptr;
   }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AirMspiIgcCollection" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
   {
     try {
-      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::Dem > const &)*arg3,(std::vector< std::string,std::allocator< std::string > > const &)*arg4,(std::string const &)*arg5,arg6,(std::string const &)*arg7);
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6,arg7);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -5993,26 +6216,24 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *SWIGUNUSED
     boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res7)) delete arg7;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res7)) delete arg7;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg3 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *arg4 = 0 ;
-  std::string *arg5 = 0 ;
-  int arg6 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg5 = 0 ;
+  std::string *arg6 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
@@ -6023,12 +6244,14 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSED
   boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
   void *argp3 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared3 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared3 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
   int res5 = SWIG_OLDOBJ ;
-  int val6 ;
-  int ecode6 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
   GeoCal::AirMspiIgcCollection *result = 0 ;
   
   if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
@@ -6084,16 +6307,16 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSED
   }
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -6108,35 +6331,55 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSED
     }
   }
   {
-    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
     }
-    arg4 = ptr;
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
+    res5 = swig::asptr(swig_obj[4], &ptr);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     arg5 = ptr;
   }
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
   {
     try {
-      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::Dem > const &)*arg3,(std::vector< std::string,std::allocator< std::string > > const &)*arg4,(std::string const &)*arg5,arg6);
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6147,23 +6390,23 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *SWIGUNUSED
     boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg3 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *arg4 = 0 ;
-  std::string *arg5 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg5 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
@@ -6174,9 +6417,12 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSED
   boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
   void *argp3 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared3 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared3 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
   int res5 = SWIG_OLDOBJ ;
   GeoCal::AirMspiIgcCollection *result = 0 ;
   
@@ -6233,16 +6479,16 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSED
   }
   {
     int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3);
       arg3 = &tempshared3;
     } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp3) : &tempshared3;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -6257,30 +6503,44 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSED
     }
   }
   {
-    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
     }
-    arg4 = ptr;
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
+    res5 = swig::asptr(swig_obj[4], &ptr);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "5"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
     }
     arg5 = ptr;
   }
   {
     try {
-      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::Dem > const &)*arg3,(std::vector< std::string,std::allocator< std::string > > const &)*arg4,(std::string const &)*arg5);
+      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6291,180 +6551,23 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *SWIGUNUSED
     boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
   if (SWIG_IsNewObj(res5)) delete arg5;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > *arg3 = 0 ;
-  std::vector< std::string,std::allocator< std::string > > *arg4 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
-  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::MspiCamera > tempshared2 ;
-  boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem > tempshared3 ;
-  boost::shared_ptr< GeoCal::Dem > temp2shared3 ;
-  int res4 = SWIG_OLDOBJ ;
-  GeoCal::AirMspiIgcCollection *result = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiIgcCollection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
-      arg1 = &tempshared1;
-    } else {
-      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg1 = &temp2shared1;
-    }
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AirMspiIgcCollection" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::MspiCamera > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2) : &tempshared2;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AirMspiIgcCollection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    std::vector<std::string,std::allocator< std::string > > *ptr = (std::vector<std::string,std::allocator< std::string > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiIgcCollection" "', argument " "4"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::Dem > const &)*arg3,(std::vector< std::string,std::allocator< std::string > > const &)*arg4);
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::AirMspiIgcCollection > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiIgcCollection >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[8];
+  PyObject *argv[9];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AirMspiIgcCollection",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AirMspiIgcCollection",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 3) {
     return _wrap_new_AirMspiIgcCollection__SWIG_2(self, argc, argv);
   }
-  if (argc == 4) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    {
-      int res = swig::asptr(argv[3], (std::vector<std::string,std::allocator< std::string > >**)(0));
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    return _wrap_new_AirMspiIgcCollection__SWIG_6(self, argc, argv);
-  }
-check_2:
-  
   if (argc == 4) {
     return _wrap_new_AirMspiIgcCollection__SWIG_1(self, argc, argv);
   }
@@ -6474,33 +6577,41 @@ check_2:
       int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
+    if (!_v) goto check_3;
     {
       int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
+    if (!_v) goto check_3;
     {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
+    if (!_v) goto check_3;
     {
-      int res = swig::asptr(argv[3], (std::vector<std::string,std::allocator< std::string > >**)(0));
+      int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
-    return _wrap_new_AirMspiIgcCollection__SWIG_5(self, argc, argv);
+    if (!_v) goto check_3;
+    {
+      int res = swig::asptr(argv[4], (std::vector<std::string,std::allocator< std::string > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_AirMspiIgcCollection__SWIG_6(self, argc, argv);
   }
-check_4:
+check_3:
   
   if (argc == 5) {
     return _wrap_new_AirMspiIgcCollection__SWIG_0(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_AirMspiIgcCollection__SWIG_4(self, argc, argv);
+    return _wrap_new_AirMspiIgcCollection__SWIG_5(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_AirMspiIgcCollection__SWIG_4(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_AirMspiIgcCollection__SWIG_3(self, argc, argv);
   }
   
@@ -6510,10 +6621,10 @@ fail:
     "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(std::string const &,std::string const &,std::string const &)\n"
-    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &,int,std::string const &)\n"
-    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &,int)\n"
-    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &)\n"
-    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &)\n");
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::MspiGimbal > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &,int,std::string const &)\n"
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::MspiGimbal > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &,int)\n"
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::MspiGimbal > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &,std::string const &)\n"
+    "    GeoCal::AirMspiIgcCollection::AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::MspiCamera > const &,boost::shared_ptr< GeoCal::MspiGimbal > const &,boost::shared_ptr< GeoCal::Dem > const &,std::vector< std::string,std::allocator< std::string > > const &)\n");
   return 0;
 }
 
@@ -6841,7 +6952,7 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_orbit(PyObject *SWIGUNUSEDPARM(s
   int val2 ;
   int ecode2 = 0 ;
   PyObject *swig_obj[2] ;
-  boost::shared_ptr< GeoCal::AirMspiOrbit > result;
+  boost::shared_ptr< GeoCal::Orbit > result;
   
   if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_orbit",2,2,swig_obj)) SWIG_fail;
   {
@@ -6876,6 +6987,77 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_orbit(PyObject *SWIGUNUSEDPARM(s
   {
     resultobj = GeoCal::swig_to_python(result);
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_set_orbit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  boost::shared_ptr< GeoCal::Orbit > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > tempshared2 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_set_orbit",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_set_orbit" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AirMspiIgcCollection_set_orbit" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      (arg1)->set_orbit((boost::shared_ptr< GeoCal::Orbit > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -6928,6 +7110,200 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_camera(PyObject *SWIGUNUSEDPARM(
   {
     resultobj = GeoCal::swig_to_python(result);
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_set_camera(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MspiCamera > tempshared2 ;
+  boost::shared_ptr< GeoCal::MspiCamera > temp2shared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_set_camera",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_set_camera" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AirMspiIgcCollection_set_camera" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::MspiCamera > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiCamera > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      (arg1)->set_camera((boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_gimbal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  boost::shared_ptr< GeoCal::MspiGimbal > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_gimbal",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_gimbal" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "AirMspiIgcCollection_gimbal" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::AirMspiIgcCollection const *)arg1)->gimbal(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_set_gimbal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > tempshared2 ;
+  boost::shared_ptr< GeoCal::MspiGimbal > temp2shared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_set_gimbal",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_set_gimbal" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AirMspiIgcCollection_set_gimbal" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::MspiGimbal > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      (arg1)->set_gimbal((boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -7313,6 +7689,77 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_replace_view_config(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > tempshared1 ;
+  boost::shared_ptr< GeoCal::AirMspiIgcCollection > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"AirMspiIgcCollection_replace_view_config",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "1"" of type '" "GeoCal::AirMspiIgcCollection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::AirMspiIgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::AirMspiIgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AirMspiIgcCollection_replace_view_config" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      (arg1)->replace_view_config((std::string const &)*arg2,(std::string const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_AirMspiIgcCollection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::AirMspiIgcCollection *arg1 = (GeoCal::AirMspiIgcCollection *) 0 ;
@@ -7370,10 +7817,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_AirMspiIgcCollection", _wrap_new_AirMspiIgcCollection, METH_VARARGS, (char *)"\n"
 		"AirMspiIgcCollection::AirMspiIgcCollection(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<\n"
-		"MspiCamera > &Cam, const boost::shared_ptr< Dem > &D, const\n"
-		"std::vector< std::string > &L1b1_file_name, const std::string\n"
-		"&Swath_to_use=\"660-I\", int Dem_resolution=10, const std::string\n"
-		"&Base_directory=\".\")\n"
+		"MspiCamera > &Cam, const boost::shared_ptr< MspiGimbal > &Gim, const\n"
+		"boost::shared_ptr< Dem > &D, const std::vector< std::string >\n"
+		"&L1b1_file_name, const std::string &Swath_to_use=\"660-I\", int\n"
+		"Dem_resolution=10, const std::string &Base_directory=\".\")\n"
 		"This create a AirMspiIgcCollection by directly giving the various\n"
 		"pieces needed to construct it. \n"
 		""},
@@ -7389,14 +7836,30 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AirMspiIgcCollection_config_value_int", _wrap_AirMspiIgcCollection_config_value_int, METH_VARARGS, NULL},
 	 { (char *)"AirMspiIgcCollection_config_value_string", _wrap_AirMspiIgcCollection_config_value_string, METH_VARARGS, NULL},
 	 { (char *)"AirMspiIgcCollection_orbit", _wrap_AirMspiIgcCollection_orbit, METH_VARARGS, (char *)"\n"
-		"boost::shared_ptr<AirMspiOrbit> GeoCal::AirMspiIgcCollection::orbit(int Index) const\n"
-		"Return specific orbit we are using, needed for some routines that\n"
-		"depend on the details of AirMspiOrbit. \n"
+		"boost::shared_ptr<Orbit> GeoCal::AirMspiIgcCollection::orbit(int Index) const\n"
+		"Return specific orbit we are using. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_set_orbit", _wrap_AirMspiIgcCollection_set_orbit, METH_VARARGS, (char *)"\n"
+		"void GeoCal::AirMspiIgcCollection::set_orbit(const boost::shared_ptr< Orbit > &Orb)\n"
+		"Change the orbit we are using. \n"
 		""},
 	 { (char *)"AirMspiIgcCollection_camera", _wrap_AirMspiIgcCollection_camera, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr<MspiCamera> GeoCal::AirMspiIgcCollection::camera(int Index) const\n"
 		"Return specific camera we are using, needed for some routines that\n"
 		"depend on the details of MspiCamera. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_set_camera", _wrap_AirMspiIgcCollection_set_camera, METH_VARARGS, (char *)"\n"
+		"void GeoCal::AirMspiIgcCollection::set_camera(const boost::shared_ptr< MspiCamera > &Cam)\n"
+		"Change the camera we are using. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_gimbal", _wrap_AirMspiIgcCollection_gimbal, METH_VARARGS, (char *)"\n"
+		"boost::shared_ptr<MspiGimbal> GeoCal::AirMspiIgcCollection::gimbal(int Index) const\n"
+		"Return specific gimbal we are using, needed for some routines that\n"
+		"depend on the details of MspiGimbal. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_set_gimbal", _wrap_AirMspiIgcCollection_set_gimbal, METH_VARARGS, (char *)"\n"
+		"void GeoCal::AirMspiIgcCollection::set_gimbal(const boost::shared_ptr< MspiGimbal > &Gim)\n"
+		"Change the gimbal we are using. \n"
 		""},
 	 { (char *)"AirMspiIgcCollection_time_table", _wrap_AirMspiIgcCollection_time_table, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr<TimeTable> GeoCal::AirMspiIgcCollection::time_table(int Index) const\n"
@@ -7433,6 +7896,18 @@ static PyMethodDef SwigMethods[] = {
 		"int AirMspiIgcCollection::view_number_to_image_index(int View_number) const\n"
 		"Go from view number (found in the l1b1 table file) to the index number\n"
 		"matching it. \n"
+		""},
+	 { (char *)"AirMspiIgcCollection_replace_view_config", _wrap_AirMspiIgcCollection_replace_view_config, METH_VARARGS, (char *)"\n"
+		"void AirMspiIgcCollection::replace_view_config(const std::string &Master_config_file, const std::string &L1b1_table)\n"
+		"There is various metadata needed by the airmspi programs that is only\n"
+		"available once a master config and l1b1_table file are created.\n"
+		"\n"
+		"This is created as part of AirMspiMapInfoProcessor (a python class\n"
+		"found in the MSPI-Ground software, not here in GeoCal). We need to be\n"
+		"able to add in this metadata to an existing IgcCollection. This\n"
+		"function does this. Because we may also have direction to process only\n"
+		"a subset of the data, this also recalculates the minimum and maximum\n"
+		"L1B1 lines to use. \n"
 		""},
 	 { (char *)"delete_AirMspiIgcCollection", (PyCFunction)_wrap_delete_AirMspiIgcCollection, METH_O, (char *)"\n"
 		"virtual GeoCal::AirMspiIgcCollection::~AirMspiIgcCollection()\n"
@@ -7495,6 +7970,10 @@ static void *_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boo
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > >(*(boost::shared_ptr< GeoCal::DcsLookVectorWithDerivative > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > >(*(boost::shared_ptr< GeoCal::LnLookVectorWithDerivative > *)x);
+}
 static void *_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > >(*(boost::shared_ptr< GeoCal::CartesianInertialLookVectorWithDerivative > *)x);
@@ -7553,10 +8032,6 @@ static void *_p_boost__shared_ptrT_GeoCal__SimpleDatum_tTo_p_boost__shared_ptrT_
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::Datum >(*(boost::shared_ptr< GeoCal::SimpleDatum > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_tTo_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::QuaternionOrbitData >(*(boost::shared_ptr< GeoCal::AircraftOrbitData > *)x);
-}
 static void *_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shared_ptrT_GeoCal__OrbitData_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::OrbitData >(*(boost::shared_ptr< GeoCal::QuaternionOrbitData > *)x);
@@ -7564,6 +8039,10 @@ static void *_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shar
 static void *_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_tTo_p_boost__shared_ptrT_GeoCal__OrbitData_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::OrbitData >(*(boost::shared_ptr< GeoCal::AircraftOrbitData > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_tTo_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::QuaternionOrbitData >(*(boost::shared_ptr< GeoCal::AircraftOrbitData > *)x);
 }
 static void *_p_GeoCal__QuaternionCameraTo_p_GeoCal__Camera(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Camera *)  ((GeoCal::QuaternionCamera *) x));
@@ -7635,6 +8114,9 @@ static void *_p_GeoCal__TimeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDP
 }
 static void *_p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageCoordinateWithDerivative *) x));
+}
+static void *_p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) ((GeoCal::LnLookVectorWithDerivative *) x));
 }
 static void *_p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) ((GeoCal::CartesianFixedLookVectorWithDerivative *) x));
@@ -7738,6 +8220,9 @@ static void *_p_GeoCal__GroundMaskTo_p_GeoCal__GenericObject(void *x, int *SWIGU
 static void *_p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::GroundMask *) ((GeoCal::CombinedGroundMask *) x));
 }
+static void *_p_GeoCal__MspiGimbalTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::MspiGimbal *) x));
+}
 static void *_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) x));
 }
@@ -7785,6 +8270,9 @@ static void *_p_GeoCal__DatumTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSED
 }
 static void *_p_GeoCal__OrbitTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::Observable< GeoCal::Orbit > *) ((GeoCal::Orbit *) x));
+}
+static void *_p_GeoCal__AirMspiNavDataTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AirMspiNavData *) x));
 }
 static void *_p_GeoCal__ObservableT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::Observable< GeoCal::Orbit > *) x));
@@ -7933,6 +8421,10 @@ static void *_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_tTo_p_boost__shared
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AircraftOrbitData > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__AirMspiNavData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AirMspiNavData > *)x);
+}
 static void *_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Observer< GeoCal::Camera > > *)x);
@@ -8013,6 +8505,10 @@ static void *_p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_pt
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CartesianFixed > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::LnLookVectorWithDerivative > *)x);
+}
 static void *_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::ScLookVectorWithDerivative > *)x);
@@ -8056,6 +8552,10 @@ static void *_p_boost__shared_ptrT_GeoCal__SimpleDatum_tTo_p_boost__shared_ptrT_
 static void *_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Observer< GeoCal::Orbit > > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__MspiGimbal_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::MspiGimbal > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -8105,57 +8605,61 @@ static void *_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_tTo_p_boost__sha
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::RasterImageMultiBand > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__AirMspiOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::WithParameterNested > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::ImageGroundConnectionCopy > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__IgcCollection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::IgcCollection > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::ImageGroundConnection > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::OffsetImageGroundConnection > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::AirMspiIgcCollection > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::Orbit > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::AirMspiOrbit > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::KeplerOrbit > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__AirMspiOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::AirMspiOrbit > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::Orbit > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::Camera > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::WithParameterNested > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__MspiGimbal_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::SimpleCamera > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::MspiGimbal > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::ImageGroundConnectionCopy > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__MspiCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::MspiCamera > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__QuaternionCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::QuaternionCamera > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__MspiCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::MspiCamera > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::SimpleCamera > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::Camera > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::AirMspiIgcCollection > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::ImageGroundConnection > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__IgcCollection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::IgcCollection > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::OffsetImageGroundConnection > *)x);
 }
 static void *_p_GeoCal__ImageGroundConnectionFailedTo_p_GeoCal__Exception(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Exception *)  ((GeoCal::ImageGroundConnectionFailed *) x));
@@ -8187,6 +8691,9 @@ static void *_p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoC
 }
 static void *_p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::LookVector< GeoCal::AutoDerivative< double > > *)  ((GeoCal::CartesianFixedLookVectorWithDerivative *) x));
+}
+static void *_p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::LookVector< GeoCal::AutoDerivative< double > > *)  ((GeoCal::LnLookVectorWithDerivative *) x));
 }
 static void *_p_GeoCal__CameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Observable< GeoCal::Camera > *)  ((GeoCal::Camera *) x));
@@ -8235,44 +8742,47 @@ static void *_p_GeoCal__AirMspiOrbitTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDP
 static void *_p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GroundMask(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GroundMask *)  ((GeoCal::CombinedGroundMask *) x));
 }
-static void *_p_GeoCal__KeplerOrbitTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *) ((GeoCal::KeplerOrbit *) x));
-}
-static void *_p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *)  ((GeoCal::WithParameterNested *) x));
-}
-static void *_p_GeoCal__OrbitTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *)  ((GeoCal::Orbit *) x));
-}
-static void *_p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::ImageGroundConnection *) ((GeoCal::ImageGroundConnectionCopy *) x));
-}
-static void *_p_GeoCal__CameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *)  ((GeoCal::Camera *) x));
-}
-static void *_p_GeoCal__AirMspiOrbitTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *) ((GeoCal::AirMspiOrbit *) x));
-}
-static void *_p_GeoCal__QuaternionCameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::Camera *) ((GeoCal::QuaternionCamera *) x));
-}
-static void *_p_GeoCal__IgcCollectionTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *)  ((GeoCal::IgcCollection *) x));
-}
-static void *_p_GeoCal__ImageGroundConnectionTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *)  ((GeoCal::ImageGroundConnection *) x));
+static void *_p_GeoCal__AirMspiIgcCollectionTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *) (GeoCal::IgcCollection *) ((GeoCal::AirMspiIgcCollection *) x));
 }
 static void *_p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *) (GeoCal::ImageGroundConnection *) ((GeoCal::OffsetImageGroundConnection *) x));
 }
-static void *_p_GeoCal__SimpleCameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::Camera *) ((GeoCal::SimpleCamera *) x));
+static void *_p_GeoCal__ImageGroundConnectionTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *)  ((GeoCal::ImageGroundConnection *) x));
+}
+static void *_p_GeoCal__IgcCollectionTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *)  ((GeoCal::IgcCollection *) x));
+}
+static void *_p_GeoCal__AirMspiOrbitTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *) ((GeoCal::AirMspiOrbit *) x));
+}
+static void *_p_GeoCal__OrbitTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *)  ((GeoCal::Orbit *) x));
+}
+static void *_p_GeoCal__MspiGimbalTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *)  ((GeoCal::MspiGimbal *) x));
 }
 static void *_p_GeoCal__MspiCameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *) (GeoCal::Camera *)(GeoCal::QuaternionCamera *) ((GeoCal::MspiCamera *) x));
 }
-static void *_p_GeoCal__AirMspiIgcCollectionTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::IgcCollection *) ((GeoCal::AirMspiIgcCollection *) x));
+static void *_p_GeoCal__SimpleCameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *) (GeoCal::Camera *) ((GeoCal::SimpleCamera *) x));
+}
+static void *_p_GeoCal__KeplerOrbitTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *) ((GeoCal::KeplerOrbit *) x));
+}
+static void *_p_GeoCal__QuaternionCameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *) (GeoCal::Camera *) ((GeoCal::QuaternionCamera *) x));
+}
+static void *_p_GeoCal__CameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *)  ((GeoCal::Camera *) x));
+}
+static void *_p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *) (GeoCal::ImageGroundConnection *) ((GeoCal::ImageGroundConnectionCopy *) x));
+}
+static void *_p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *)  ((GeoCal::WithParameterNested *) x));
 }
 static void *_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -8328,6 +8838,7 @@ static void *_p_GeoCal__CombinedImageMaskTo_p_GeoCal__ImageMask(void *x, int *SW
     return (void *)((GeoCal::ImageMask *)  ((GeoCal::CombinedImageMask *) x));
 }
 static swig_type_info _swigt__p_GeoCal__AirMspiIgcCollection = {"_p_GeoCal__AirMspiIgcCollection", "GeoCal::AirMspiIgcCollection *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__AirMspiNavData = {"_p_GeoCal__AirMspiNavData", "GeoCal::AirMspiNavData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__AirMspiOrbit = {"_p_GeoCal__AirMspiOrbit", "GeoCal::AirMspiOrbit *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__AircraftOrbitData = {"_p_GeoCal__AircraftOrbitData", "GeoCal::AircraftOrbitData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ArrayAdT_double_1_t = {"_p_GeoCal__ArrayAdT_double_1_t", "GeoCal::ArrayAd< double,1 > *", 0, 0, (void*)0, 0};
@@ -8370,12 +8881,14 @@ static swig_type_info _swigt__p_GeoCal__ImageGroundConnectionFailed = {"_p_GeoCa
 static swig_type_info _swigt__p_GeoCal__ImageMask = {"_p_GeoCal__ImageMask", "GeoCal::ImageMask *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__KeplerOrbit = {"_p_GeoCal__KeplerOrbit", "GeoCal::KeplerOrbit *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__LnLookVector = {"_p_GeoCal__LnLookVector", "GeoCal::LnLookVector *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__LnLookVectorWithDerivative = {"_p_GeoCal__LnLookVectorWithDerivative", "GeoCal::LnLookVectorWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t = {"_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t", "GeoCal::LookVector< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__LookVectorT_double_t = {"_p_GeoCal__LookVectorT_double_t", "GeoCal::LookVector< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__MapInfo = {"_p_GeoCal__MapInfo", "GeoCal::MapInfo *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__MeasuredTimeTable = {"_p_GeoCal__MeasuredTimeTable", "GeoCal::MeasuredTimeTable *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__MetadataMissing = {"_p_GeoCal__MetadataMissing", "GeoCal::MetadataMissing *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__MspiCamera = {"_p_GeoCal__MspiCamera", "GeoCal::MspiCamera *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__MspiGimbal = {"_p_GeoCal__MspiGimbal", "GeoCal::MspiGimbal *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__NoCoverage = {"_p_GeoCal__NoCoverage", "GeoCal::NoCoverage *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ObservableT_GeoCal__Camera_t = {"_p_GeoCal__ObservableT_GeoCal__Camera_t", "GeoCal::Observable< GeoCal::Camera > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t = {"_p_GeoCal__ObservableT_GeoCal__Orbit_t", "GeoCal::Observable< GeoCal::Orbit > *", 0, 0, (void*)0, 0};
@@ -8427,6 +8940,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6
 static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t = {"_p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t", "boost::shared_ptr< GeoCal::AirMspiIgcCollection > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AirMspiNavData_t = {"_p_boost__shared_ptrT_GeoCal__AirMspiNavData_t", "boost::shared_ptr< GeoCal::AirMspiNavData > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t = {"_p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t", "boost::shared_ptr< GeoCal::AirMspiOrbit > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t = {"_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t", "boost::shared_ptr< GeoCal::AircraftOrbitData > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,1 > > *", 0, 0, (void*)0, 0};
@@ -8468,6 +8982,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t = {"_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t", "boost::shared_ptr< GeoCal::ImageGroundConnection > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t = {"_p_boost__shared_ptrT_GeoCal__ImageMask_t", "boost::shared_ptr< GeoCal::ImageMask > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t = {"_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t", "boost::shared_ptr< GeoCal::KeplerOrbit > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t", "boost::shared_ptr< GeoCal::LnLookVectorWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t = {"_p_boost__shared_ptrT_GeoCal__LnLookVector_t", "boost::shared_ptr< GeoCal::LnLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t = {"_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t", "boost::shared_ptr< GeoCal::LookVector< GeoCal::AutoDerivative< double > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t", "boost::shared_ptr< GeoCal::LookVector< double > > *", 0, 0, (void*)0, 0};
@@ -8475,6 +8990,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t = {"_p_boos
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t = {"_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t", "boost::shared_ptr< GeoCal::MeasuredTimeTable > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t = {"_p_boost__shared_ptrT_GeoCal__MetadataMissing_t", "boost::shared_ptr< GeoCal::MetadataMissing > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MspiCamera_t = {"_p_boost__shared_ptrT_GeoCal__MspiCamera_t", "boost::shared_ptr< GeoCal::MspiCamera > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MspiGimbal_t = {"_p_boost__shared_ptrT_GeoCal__MspiGimbal_t", "boost::shared_ptr< GeoCal::MspiGimbal > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t = {"_p_boost__shared_ptrT_GeoCal__NoCoverage_t", "boost::shared_ptr< GeoCal::NoCoverage > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t = {"_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t", "boost::shared_ptr< GeoCal::Observable< GeoCal::Camera > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t = {"_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t", "boost::shared_ptr< GeoCal::Observable< GeoCal::Orbit > > *", 0, 0, (void*)0, 0};
@@ -8521,6 +9037,7 @@ static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__AirMspiIgcCollection,
+  &_swigt__p_GeoCal__AirMspiNavData,
   &_swigt__p_GeoCal__AirMspiOrbit,
   &_swigt__p_GeoCal__AircraftOrbitData,
   &_swigt__p_GeoCal__ArrayAdT_double_1_t,
@@ -8563,12 +9080,14 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__ImageMask,
   &_swigt__p_GeoCal__KeplerOrbit,
   &_swigt__p_GeoCal__LnLookVector,
+  &_swigt__p_GeoCal__LnLookVectorWithDerivative,
   &_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t,
   &_swigt__p_GeoCal__LookVectorT_double_t,
   &_swigt__p_GeoCal__MapInfo,
   &_swigt__p_GeoCal__MeasuredTimeTable,
   &_swigt__p_GeoCal__MetadataMissing,
   &_swigt__p_GeoCal__MspiCamera,
+  &_swigt__p_GeoCal__MspiGimbal,
   &_swigt__p_GeoCal__NoCoverage,
   &_swigt__p_GeoCal__ObservableT_GeoCal__Camera_t,
   &_swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t,
@@ -8620,6 +9139,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_7_t,
   &_swigt__p_blitz__ArrayT_int_8_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__AirMspiNavData_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
@@ -8661,6 +9181,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t,
@@ -8668,6 +9189,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__MspiCamera_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__MspiGimbal_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t,
@@ -8714,6 +9236,7 @@ static swig_type_info *swig_type_initial[] = {
 };
 
 static swig_cast_info _swigc__p_GeoCal__AirMspiIgcCollection[] = {  {&_swigt__p_GeoCal__AirMspiIgcCollection, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__AirMspiNavData[] = {  {&_swigt__p_GeoCal__AirMspiNavData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__AirMspiOrbit[] = {  {&_swigt__p_GeoCal__AirMspiOrbit, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__AircraftOrbitData[] = {  {&_swigt__p_GeoCal__AircraftOrbitData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ArrayAdT_double_1_t[] = {  {&_swigt__p_GeoCal__ArrayAdT_double_1_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -8741,7 +9264,7 @@ static swig_cast_info _swigc__p_GeoCal__Dem[] = {  {&_swigt__p_GeoCal__Dem, 0, 0
 static swig_cast_info _swigc__p_GeoCal__Exception[] = {  {&_swigt__p_GeoCal__ImageGroundConnectionFailed, _p_GeoCal__ImageGroundConnectionFailedTo_p_GeoCal__Exception, 0, 0},  {&_swigt__p_GeoCal__Exception, 0, 0, 0},  {&_swigt__p_GeoCal__VicarException, _p_GeoCal__VicarExceptionTo_p_GeoCal__Exception, 0, 0},  {&_swigt__p_GeoCal__NoCoverage, _p_GeoCal__NoCoverageTo_p_GeoCal__Exception, 0, 0},  {&_swigt__p_GeoCal__MetadataMissing, _p_GeoCal__MetadataMissingTo_p_GeoCal__Exception, 0, 0},  {&_swigt__p_GeoCal__ConvergenceFailure, _p_GeoCal__ConvergenceFailureTo_p_GeoCal__Exception, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__FrameCoordinate[] = {  {&_swigt__p_GeoCal__FrameCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__FrameCoordinateWithDerivative[] = {  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ConvergenceFailure, _p_GeoCal__ConvergenceFailureTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionCopy, _p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBandVariable, _p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionFailed, _p_GeoCal__ImageGroundConnectionFailedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__Orbit_t, _p_GeoCal__ObserverT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t, _p_GeoCal__ObservableT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBand, _p_GeoCal__RasterImageMultiBandTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__NoCoverage, _p_GeoCal__NoCoverageTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, _p_GeoCal__FrameCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeTable, _p_GeoCal__TimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OffsetImageGroundConnection, _p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnection, _p_GeoCal__ImageGroundConnectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__IgcCollection, _p_GeoCal__IgcCollectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AirMspiIgcCollection, _p_GeoCal__AirMspiIgcCollectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MapInfo, _p_GeoCal__MapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__QuaternionCamera, _p_GeoCal__QuaternionCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitData, _p_GeoCal__OrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__QuaternionOrbitData, _p_GeoCal__QuaternionOrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AircraftOrbitData, _p_GeoCal__AircraftOrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Geocentric, _p_GeoCal__GeocentricTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageTileIterator, _p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleDatum, _p_GeoCal__SimpleDatumTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundMask, _p_GeoCal__GroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedGroundMask, _p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageMask, _p_GeoCal__ImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Exception, _p_GeoCal__ExceptionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarException, _p_GeoCal__VicarExceptionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AirMspiOrbit, _p_GeoCal__AirMspiOrbitTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MspiCamera, _p_GeoCal__MspiCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameter, _p_GeoCal__WithParameterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MetadataMissing, _p_GeoCal__MetadataMissingTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Camera_t, _p_GeoCal__ObservableT_GeoCal__Camera_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__Camera_t, _p_GeoCal__ObserverT_GeoCal__Camera_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Datum, _p_GeoCal__DatumTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Geodetic, _p_GeoCal__GeodeticTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticConverter, _p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CoordinateConverter, _p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImage, _p_GeoCal__RasterImageTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ConvergenceFailure, _p_GeoCal__ConvergenceFailureTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionCopy, _p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBandVariable, _p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionFailed, _p_GeoCal__ImageGroundConnectionFailedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__Orbit_t, _p_GeoCal__ObserverT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t, _p_GeoCal__ObservableT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBand, _p_GeoCal__RasterImageMultiBandTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__NoCoverage, _p_GeoCal__NoCoverageTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, _p_GeoCal__FrameCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeTable, _p_GeoCal__TimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnection, _p_GeoCal__ImageGroundConnectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OffsetImageGroundConnection, _p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__IgcCollection, _p_GeoCal__IgcCollectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AirMspiIgcCollection, _p_GeoCal__AirMspiIgcCollectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MapInfo, _p_GeoCal__MapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__QuaternionCamera, _p_GeoCal__QuaternionCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitData, _p_GeoCal__OrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__QuaternionOrbitData, _p_GeoCal__QuaternionOrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AircraftOrbitData, _p_GeoCal__AircraftOrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Geocentric, _p_GeoCal__GeocentricTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageTileIterator, _p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleDatum, _p_GeoCal__SimpleDatumTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundMask, _p_GeoCal__GroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedGroundMask, _p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MspiGimbal, _p_GeoCal__MspiGimbalTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageMask, _p_GeoCal__ImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Exception, _p_GeoCal__ExceptionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarException, _p_GeoCal__VicarExceptionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AirMspiOrbit, _p_GeoCal__AirMspiOrbitTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MspiCamera, _p_GeoCal__MspiCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameter, _p_GeoCal__WithParameterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MetadataMissing, _p_GeoCal__MetadataMissingTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Camera_t, _p_GeoCal__ObservableT_GeoCal__Camera_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__Camera_t, _p_GeoCal__ObserverT_GeoCal__Camera_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AirMspiNavData, _p_GeoCal__AirMspiNavDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Datum, _p_GeoCal__DatumTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Geodetic, _p_GeoCal__GeodeticTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticConverter, _p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CoordinateConverter, _p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImage, _p_GeoCal__RasterImageTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Geocentric[] = {  {&_swigt__p_GeoCal__Geocentric, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Geodetic[] = {  {&_swigt__p_GeoCal__Geodetic, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GeodeticConverter[] = {  {&_swigt__p_GeoCal__GeodeticConverter, 0, 0, 0},{0, 0, 0, 0}};
@@ -8756,12 +9279,14 @@ static swig_cast_info _swigc__p_GeoCal__ImageGroundConnectionFailed[] = {  {&_sw
 static swig_cast_info _swigc__p_GeoCal__ImageMask[] = {  {&_swigt__p_GeoCal__ImageMask, 0, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__ImageMask, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__KeplerOrbit[] = {  {&_swigt__p_GeoCal__KeplerOrbit, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LnLookVector[] = {  {&_swigt__p_GeoCal__LnLookVector, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__LnLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LookVectorT_double_t[] = {  {&_swigt__p_GeoCal__LookVectorT_double_t, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MapInfo[] = {  {&_swigt__p_GeoCal__MapInfo, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MeasuredTimeTable[] = {  {&_swigt__p_GeoCal__MeasuredTimeTable, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MetadataMissing[] = {  {&_swigt__p_GeoCal__MetadataMissing, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MspiCamera[] = {  {&_swigt__p_GeoCal__MspiCamera, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__MspiGimbal[] = {  {&_swigt__p_GeoCal__MspiGimbal, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__NoCoverage[] = {  {&_swigt__p_GeoCal__NoCoverage, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ObservableT_GeoCal__Camera_t[] = {  {&_swigt__p_GeoCal__ObservableT_GeoCal__Camera_t, 0, 0, 0},  {&_swigt__p_GeoCal__QuaternionCamera, _p_GeoCal__QuaternionCameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t, 0, 0},  {&_swigt__p_GeoCal__MspiCamera, _p_GeoCal__MspiCameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ObservableT_GeoCal__Orbit_t[] = {  {&_swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__AirMspiOrbit, _p_GeoCal__AirMspiOrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},{0, 0, 0, 0}};
@@ -8785,7 +9310,7 @@ static swig_cast_info _swigc__p_GeoCal__TimeTable[] = {  {&_swigt__p_GeoCal__Tim
 static swig_cast_info _swigc__p_GeoCal__TimeWithDerivative[] = {  {&_swigt__p_GeoCal__TimeWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VicarException[] = {  {&_swigt__p_GeoCal__VicarException, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VicarImageCoordinate[] = {  {&_swigt__p_GeoCal__VicarImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__WithParameter[] = {  {&_swigt__p_GeoCal__IgcCollection, _p_GeoCal__IgcCollectionTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnection, _p_GeoCal__ImageGroundConnectionTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OffsetImageGroundConnection, _p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__AirMspiIgcCollection, _p_GeoCal__AirMspiIgcCollectionTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__AirMspiOrbit, _p_GeoCal__AirMspiOrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__WithParameter, 0, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__MspiCamera, _p_GeoCal__MspiCameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__QuaternionCamera, _p_GeoCal__QuaternionCameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionCopy, _p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__WithParameter[] = {  {&_swigt__p_GeoCal__OffsetImageGroundConnection, _p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnection, _p_GeoCal__ImageGroundConnectionTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__AirMspiIgcCollection, _p_GeoCal__AirMspiIgcCollectionTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__IgcCollection, _p_GeoCal__IgcCollectionTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__AirMspiOrbit, _p_GeoCal__AirMspiOrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__WithParameter, 0, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__MspiGimbal, _p_GeoCal__MspiGimbalTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__MspiCamera, _p_GeoCal__MspiCameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__QuaternionCamera, _p_GeoCal__QuaternionCameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionCopy, _p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__WithParameterNested[] = {  {&_swigt__p_GeoCal__WithParameterNested, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -8813,6 +9338,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AirMspiNavData_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiNavData_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -8840,7 +9366,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Dem_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Exception_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t, _p_boost__shared_ptrT_GeoCal__NoCoverage_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarException_t, _p_boost__shared_ptrT_GeoCal__VicarException_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t, _p_boost__shared_ptrT_GeoCal__ConvergenceFailure_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t, _p_boost__shared_ptrT_GeoCal__MetadataMissing_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t, _p_boost__shared_ptrT_GeoCal__AirMspiOrbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__IgcCollection_t, _p_boost__shared_ptrT_GeoCal__IgcCollection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, _p_boost__shared_ptrT_GeoCal__RasterImage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t, _p_boost__shared_ptrT_GeoCal__MetadataMissing_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CoordinateConverter_t, _p_boost__shared_ptrT_GeoCal__CoordinateConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Geocentric_t, _p_boost__shared_ptrT_GeoCal__Geocentric_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t, _p_boost__shared_ptrT_GeoCal__ConvergenceFailure_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, _p_boost__shared_ptrT_GeoCal__WithParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, _p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarException_t, _p_boost__shared_ptrT_GeoCal__VicarException_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Exception_t, _p_boost__shared_ptrT_GeoCal__Exception_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, _p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, _p_boost__shared_ptrT_GeoCal__AircraftOrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitData_t, _p_boost__shared_ptrT_GeoCal__OrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, _p_boost__shared_ptrT_GeoCal__CombinedGroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundMask_t, _p_boost__shared_ptrT_GeoCal__GroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, _p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, _p_boost__shared_ptrT_GeoCal__MapInfo_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, _p_boost__shared_ptrT_GeoCal__QuaternionCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiCamera_t, _p_boost__shared_ptrT_GeoCal__MspiCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t, _p_boost__shared_ptrT_GeoCal__NoCoverage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, _p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Geodetic_t, _p_boost__shared_ptrT_GeoCal__Geodetic_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, _p_boost__shared_ptrT_GeoCal__ImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, _p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Datum_t, _p_boost__shared_ptrT_GeoCal__Datum_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleDatum_t, _p_boost__shared_ptrT_GeoCal__SimpleDatum_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiGimbal_t, _p_boost__shared_ptrT_GeoCal__MspiGimbal_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t, _p_boost__shared_ptrT_GeoCal__AirMspiOrbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__IgcCollection_t, _p_boost__shared_ptrT_GeoCal__IgcCollection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, _p_boost__shared_ptrT_GeoCal__RasterImage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t, _p_boost__shared_ptrT_GeoCal__MetadataMissing_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CoordinateConverter_t, _p_boost__shared_ptrT_GeoCal__CoordinateConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Geocentric_t, _p_boost__shared_ptrT_GeoCal__Geocentric_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t, _p_boost__shared_ptrT_GeoCal__ConvergenceFailure_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, _p_boost__shared_ptrT_GeoCal__WithParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, _p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarException_t, _p_boost__shared_ptrT_GeoCal__VicarException_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Exception_t, _p_boost__shared_ptrT_GeoCal__Exception_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, _p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, _p_boost__shared_ptrT_GeoCal__AircraftOrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiNavData_t, _p_boost__shared_ptrT_GeoCal__AirMspiNavData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitData_t, _p_boost__shared_ptrT_GeoCal__OrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, _p_boost__shared_ptrT_GeoCal__CombinedGroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundMask_t, _p_boost__shared_ptrT_GeoCal__GroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, _p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, _p_boost__shared_ptrT_GeoCal__MapInfo_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiCamera_t, _p_boost__shared_ptrT_GeoCal__MspiCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, _p_boost__shared_ptrT_GeoCal__QuaternionCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t, _p_boost__shared_ptrT_GeoCal__NoCoverage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, _p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Geodetic_t, _p_boost__shared_ptrT_GeoCal__Geodetic_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, _p_boost__shared_ptrT_GeoCal__ImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, _p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Datum_t, _p_boost__shared_ptrT_GeoCal__Datum_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleDatum_t, _p_boost__shared_ptrT_GeoCal__SimpleDatum_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Geocentric_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Geocentric_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Geodetic_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Geodetic_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -8854,13 +9380,15 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageGroundConnection
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageMask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__ImageMask_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LnLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MapInfo_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MetadataMissing_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MspiCamera_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MspiGimbal_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiGimbal_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__NoCoverage_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, _p_boost__shared_ptrT_GeoCal__QuaternionCamera_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiCamera_t, _p_boost__shared_ptrT_GeoCal__MspiCamera_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t, _p_boost__shared_ptrT_GeoCal__AirMspiOrbit_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},{0, 0, 0, 0}};
@@ -8885,7 +9413,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swig
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarException_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarException_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameterNested_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, _p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, _p_boost__shared_ptrT_GeoCal__QuaternionCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiCamera_t, _p_boost__shared_ptrT_GeoCal__MspiCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__IgcCollection_t, _p_boost__shared_ptrT_GeoCal__IgcCollection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t, _p_boost__shared_ptrT_GeoCal__AirMspiOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t, _p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiGimbal_t, _p_boost__shared_ptrT_GeoCal__MspiGimbal_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiCamera_t, _p_boost__shared_ptrT_GeoCal__MspiCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionCamera_t, _p_boost__shared_ptrT_GeoCal__QuaternionCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__IgcCollection_t, _p_boost__shared_ptrT_GeoCal__IgcCollection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t, _p_boost__shared_ptrT_GeoCal__AirMspiOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -8907,6 +9435,7 @@ static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__AirMspiIgcCollection,
+  _swigc__p_GeoCal__AirMspiNavData,
   _swigc__p_GeoCal__AirMspiOrbit,
   _swigc__p_GeoCal__AircraftOrbitData,
   _swigc__p_GeoCal__ArrayAdT_double_1_t,
@@ -8949,12 +9478,14 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__ImageMask,
   _swigc__p_GeoCal__KeplerOrbit,
   _swigc__p_GeoCal__LnLookVector,
+  _swigc__p_GeoCal__LnLookVectorWithDerivative,
   _swigc__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t,
   _swigc__p_GeoCal__LookVectorT_double_t,
   _swigc__p_GeoCal__MapInfo,
   _swigc__p_GeoCal__MeasuredTimeTable,
   _swigc__p_GeoCal__MetadataMissing,
   _swigc__p_GeoCal__MspiCamera,
+  _swigc__p_GeoCal__MspiGimbal,
   _swigc__p_GeoCal__NoCoverage,
   _swigc__p_GeoCal__ObservableT_GeoCal__Camera_t,
   _swigc__p_GeoCal__ObservableT_GeoCal__Orbit_t,
@@ -9006,6 +9537,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_7_t,
   _swigc__p_blitz__ArrayT_int_8_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AirMspiIgcCollection_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__AirMspiNavData_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AirMspiOrbit_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
@@ -9047,6 +9579,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ImageMask_t,
   _swigc__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__LnLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t,
@@ -9054,6 +9587,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t,
   _swigc__p_boost__shared_ptrT_GeoCal__MetadataMissing_t,
   _swigc__p_boost__shared_ptrT_GeoCal__MspiCamera_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__MspiGimbal_t,
   _swigc__p_boost__shared_ptrT_GeoCal__NoCoverage_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t,

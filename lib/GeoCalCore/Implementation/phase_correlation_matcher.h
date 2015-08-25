@@ -79,7 +79,17 @@ private:
   void refine(float corr[3][3],float* vloff,float* vsoff,int *ireferr) const;
   void lsqfit(double * a, double * r, int m, int n, double * x, double eps, 
 	      int * ierror ) const;
+
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 
 }
+
+GEOCAL_EXPORT_KEY(PhaseCorrelationMatcher);
+
 #endif

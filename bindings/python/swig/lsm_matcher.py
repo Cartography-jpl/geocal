@@ -272,12 +272,8 @@ class LsmMatcher(geocal_swig.image_matcher.ImageMatcher):
     def precision_min_rad_goal(self):
         return self._v_precision_min_rad_goal()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.number_line,self.number_sample,self.border_size,self.precision_goal,self.precision_requirement,self.max_sigma,self.rad_uncertainty_factor,self.precision_min_geo_goal,self.precision_min_rad_goal)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _lsm_matcher.delete_LsmMatcher
 LsmMatcher._v_number_line = new_instancemethod(_lsm_matcher.LsmMatcher__v_number_line,None,LsmMatcher)

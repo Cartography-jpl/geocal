@@ -43,6 +43,8 @@ class PythonOrbit(Orbit):
         return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 def test_director_serialize():
+    if(not have_serialize_supported()):
+        raise SkipTest
     orb = PythonOrbit()
     t = serialize_write_string(orb)
     print t
@@ -50,6 +52,8 @@ def test_director_serialize():
     print orb2.min_time
 
 def test_director_pickle():
+    if(not have_serialize_supported()):
+        raise SkipTest
     orb = PythonOrbit()
     t = cPickle.dumps(orb)
     print t

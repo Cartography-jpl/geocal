@@ -21,6 +21,7 @@ public:
   %python_attribute(mean2, double)
   %python_attribute(covariance, double)
   std::string print_to_string() const;
+  %pickle_serialization();
 };
 }
 

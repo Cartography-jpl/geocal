@@ -43,6 +43,10 @@ public:
   double weight;
 
   void print(std::ostream& Os) const;
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 /** \defgroup Miscellaneous Miscellaneous routines. **/
 
@@ -117,8 +121,14 @@ private:
   ip_grid(const RasterImage& Img, const GroundMask* M,
 	  int i, int j, int Number_grid_line, int Number_grid_sample,
 	  int Border) const;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(InterestPoint);
+GEOCAL_EXPORT_KEY(FeatureDetector);
 #endif
 

@@ -32,7 +32,7 @@ class SimultaneousBundleAdjustment(object):
     the tiepoints.'''
     def __init__(self, igc_coll, tpcol,
                  dem, dem_sigma = 10, gcp_sigma = 10, tp_sigma = None, 
-                 tp_epsilon = 1):
+                 tp_epsilon = 1, p0 = None, psigma = None):
         '''Constructor. This takes a IgcCollection, and a 
         TiePointCollection. The camera order used in each TiePoint 
         should match the order of IgcCollection.
@@ -53,6 +53,11 @@ class SimultaneousBundleAdjustment(object):
         We calculate the jacobians with respect to moving the tiepoint on
         the surface numerically, the tp_epsilon used for the CartesianFixed 
         coordinates can be optionally supplied.
+
+        The parameters are constrained to p0, with a scaling of psigma. If 
+        these aren't specified the initial value of the igc_coll parameter 
+        is used, with a scaling of 10. You can change this after the 
+        constructor by changing self.p0 and/or self.psigma.
         '''
         self.igc_coll = igc_coll
         self.tpcol = tpcol
@@ -61,6 +66,15 @@ class SimultaneousBundleAdjustment(object):
         self.gcp_sigma = gcp_sigma
         self.tp_epsilon = tp_epsilon
         self.tp_sigma = tp_sigma
+        if(p0 is None):
+            self.p0 = self.igc_coll.parameter_subset.copy()
+        else:
+            self.p0 = p0
+        if(psigma is None):
+            self.psigma = np.zeros(self.p0.shape)
+            self.psigma[:] = 10
+        else:
+            self.psigma = psigma
         self.niloc = 0
         for tp in self.tpcol: 
             self.niloc += tp.number_image_location
@@ -77,6 +91,37 @@ class SimultaneousBundleAdjustment(object):
     def tp_offset_slice(self):
         '''The portion of parameter that gives the tie point offsets'''
         return slice(0, len(self.tp_offset))
+
+    @property
+    def surface_constraint_slice(self):
+        '''The portion of the sba equations that gives the surface constraint'''
+        len_surf= len(self.tpcol)
+        return slice(0, len_surf)
+        
+    @property
+    def gcp_constraint_slice(self):
+        '''The portion of sba equation that gives the GCP constraint'''
+        len_surf= len(self.tpcol)
+        len_gcp = self.tpcol.number_gcp * 3
+        return slice(len_surf, len_surf + len_gcp)
+
+    @property
+    def collinearity_constraint_slice(self):
+        '''The portion of the sba equations that gives the collinearity 
+        constraint'''
+        len_surf= len(self.tpcol)
+        len_gcp = self.tpcol.number_gcp * 3
+        len_coll = self.niloc * 2
+        return slice(len_surf + len_gcp, len_surf + len_gcp + len_coll)
+
+    @property
+    def parameter_constraint_slice(self):
+        '''The portion of the sba equations that gives the parameter
+        constraint'''
+        len_surf= len(self.tpcol)
+        len_gcp = self.tpcol.number_gcp * 3
+        len_coll = self.niloc * 2
+        return slice(len_surf + len_gcp + len_coll, None)
 
     @property
     def igc_coll_param_slice(self):
@@ -134,9 +179,10 @@ class SimultaneousBundleAdjustment(object):
         else:
             len_gcp_constraint = self.tpcol.number_gcp * 3
         len_collinearity = self.niloc * 2
+        len_igc_parameter = self.igc_coll.parameter_subset.shape[0]
         len_parameter = len(self.parameter)
         res = _coo_helper((len_surface_constraint + len_gcp_constraint +
-                           len_collinearity + len_parameter,
+                           len_collinearity + len_igc_parameter,
                            len_parameter))
         self.row_index = 0
         self.__surface_constraint_jacobian(res)
@@ -262,9 +308,10 @@ class SimultaneousBundleAdjustment(object):
         '''Calculate the parameter constraint. This is the penalty for
         moving a particular parameter from its initial value.'''
         # This needs to be scaled, but for now just do this
-        return np.array(self.parameter) / 10.0
+        return (self.igc_coll.parameter_subset - self.p0) / self.psigma
     
     def __parameter_constraint_jacobian(self, res):
-        istart = (len(self.tpcol) + self.tpcol.number_gcp * 3 + self.niloc * 2)
-        for i in range(len(self.parameter)):
-            res[istart + i, i] = 1 / 10.0
+        istart = self.parameter_constraint_slice.start
+        jstart = self.igc_coll_param_slice.start
+        for i in range(self.igc_coll.parameter_subset.shape[0]):
+            res[istart + i, jstart + i] = 1 / self.psigma[i]

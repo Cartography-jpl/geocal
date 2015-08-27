@@ -45,4 +45,18 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_WARN_MESSAGE(false, "Skipping AirMspiIgcCollection test, because we haven't build with MSPI_SHARED support");
 #endif
 }
+
+BOOST_AUTO_TEST_CASE(timing)
+{
+  // Don't normally run this. Used this while speeding up MSPI
+  // code. We'll leave this in place in case we need to return to
+  // this, but isn't a normal unit test.
+  return;
+  // Temporary test case to look at timing.
+  boost::shared_ptr<IgcCollection> igc =
+    serialize_read<IgcCollection>("/data/smyth/MSPI-Ground/scripts_test/2013-01-31/sba/AirMSPI_ER2_CA-Mojave_SBA_20130131_211051-1_V010-test1/igccol_initial.xml");
+  boost::shared_ptr<GroundCoordinate> gc = igc->ground_coordinate(0, ImageCoordinate(100,100));
+  for(int i = 0; i < 40000; ++i)
+    ImageCoordinate ic = igc->image_coordinate(0, *gc);
+}
 BOOST_AUTO_TEST_SUITE_END()

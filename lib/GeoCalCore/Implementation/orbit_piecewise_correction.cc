@@ -118,7 +118,7 @@ blitz::Array<bool, 1> OrbitPiecewiseCorrection::parameter_mask() const
   int s2 = n_corr.parameter().rows();
   int s3 = u_corr.parameter().rows();
   blitz::Array<bool, 1> res(s1 + s2 + s3);
-  res = false;
+  res = true;
   return res;
 }
 

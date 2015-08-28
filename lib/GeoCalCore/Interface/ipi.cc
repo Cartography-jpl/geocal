@@ -125,6 +125,37 @@ void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate& Gp,
   }
 }
 
+void Ipi::image_coordinate_with_derivative_extended
+(const GroundCoordinate& Gp, 
+ const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+ ImageCoordinateWithDerivative& Ic, bool& Success) const
+{
+  TimeWithDerivative tres;
+  FrameCoordinateWithDerivative fres;
+  time_with_derivative(Gp, Gp_with_der, tres, fres, Success);
+  if(Success) {
+    if(tres.value() >= tt->min_time() && tres.value() < tt->max_time())
+      Ic = tt->image_coordinate_with_derivative(tres, fres);
+    else if(tres.value() < tt->min_time()) {
+      TimeWithDerivative t1, t2;
+      FrameCoordinateWithDerivative fc;
+      tt->time_with_derivative(ImageCoordinateWithDerivative(tt->min_line(), fres.sample), t1, fc);
+      tt->time_with_derivative(ImageCoordinateWithDerivative(tt->min_line() + 1, fres.sample), t2, fc);
+      AutoDerivative<double> tspace = t2 - t1;
+      Ic.sample = fres.sample;
+      Ic.line = (tres - tt->min_time()) / tspace + tt->min_line();
+    } else {
+      TimeWithDerivative t1, t2;
+      FrameCoordinateWithDerivative fc;
+      tt->time_with_derivative(ImageCoordinateWithDerivative(tt->max_line() - 2, fres.sample), t1, fc);
+      tt->time_with_derivative(ImageCoordinateWithDerivative(tt->max_line() - 1, fres.sample), t2, fc);
+      AutoDerivative<double> tspace = t2 - t1;
+      Ic.sample = fres.sample;
+      Ic.line = (tres - tt->max_time()) / tspace + tt->max_line();
+    }
+  }
+}
+
 //-----------------------------------------------------------------------
 /// Look for the image location that a point is seen. Note that unlike
 /// time, if a point is seen only outside of the sample range of the
@@ -154,6 +185,24 @@ void Ipi::image_coordinate_with_derivative(const GroundCoordinate& Gp, ImageCoor
   TimeWithDerivative tres;
   FrameCoordinateWithDerivative fres;
   time_with_derivative(Gp, tres, fres, Success);
+  if(Success) {
+    if(fres.sample.value() < 0 || fres.sample.value() >= cam->number_sample(band_) ||
+       tres.value() < tt->min_time() || tres.value() >= tt->max_time())
+      Success = false;
+    else
+      Ic = tt->image_coordinate_with_derivative(tres, fres);
+  }
+}
+
+void Ipi::image_coordinate_with_derivative
+(const GroundCoordinate& Gp, 
+ const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+ ImageCoordinateWithDerivative& Ic,
+ bool& Success) const
+{
+  TimeWithDerivative tres;
+  FrameCoordinateWithDerivative fres;
+  time_with_derivative(Gp, Gp_with_der, tres, fres, Success);
   if(Success) {
     if(fres.sample.value() < 0 || fres.sample.value() >= cam->number_sample(band_) ||
        tres.value() < tt->min_time() || tres.value() >= tt->max_time())
@@ -292,6 +341,21 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 void Ipi::time_with_derivative
 (const GroundCoordinate& Gp, TimeWithDerivative& Tres, 
 FrameCoordinateWithDerivative& Fres,
+ bool& Success) const
+{
+  boost::shared_ptr<CartesianFixed> p = Gp.convert_to_cf();
+  boost::array<AutoDerivative<double>, 3>  pd;
+  pd[0] = p->position[0];
+  pd[1] = p->position[1];
+  pd[2] = p->position[2];
+  time_with_derivative(*p, pd, Tres, Fres, Success);
+}
+
+void Ipi::time_with_derivative
+(const GroundCoordinate& Gp, 
+ const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+ TimeWithDerivative& Tres, 
+ FrameCoordinateWithDerivative& Fres,
  bool& Success) const
 {
   class IpiEq: public DFunctorWithDerivative {

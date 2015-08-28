@@ -196,7 +196,8 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     def image_coordinate_with_derivative(self, *args):
         """
-        void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool
+        void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, const boost::array< AutoDerivative<
+        double >, 3 > &Gp_with_der, ImageCoordinateWithDerivative &Ic, bool
         &Success) const
 
         """
@@ -204,7 +205,8 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     def image_coordinate_with_derivative_extended(self, *args):
         """
-        void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool
+        void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, const boost::array< AutoDerivative<
+        double >, 3 > &Gp_with_der, ImageCoordinateWithDerivative &Ic, bool
         &Success) const
 
         """
@@ -232,7 +234,8 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     def time_with_derivative(self, *args):
         """
-        void Ipi::time_with_derivative(const GroundCoordinate &Gp, TimeWithDerivative &Tres,
+        void Ipi::time_with_derivative(const GroundCoordinate &Gp, const boost::array< AutoDerivative<
+        double >, 3 > &Gp_with_der, TimeWithDerivative &Tres,
         FrameCoordinateWithDerivative &Fres, bool &Success) const
 
         """

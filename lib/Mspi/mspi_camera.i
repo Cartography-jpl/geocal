@@ -26,11 +26,12 @@ public:
   %python_attribute(yaw, double);
   %python_attribute(pitch, double);
   %python_attribute(roll, double);
+  %python_attribute(yaw_with_derivative, AutoDerivative<double>);
+  %python_attribute(pitch_with_derivative, AutoDerivative<double>);
+  %python_attribute(roll_with_derivative, AutoDerivative<double>);
   %python_attribute(boresight_angle, double);
   %python_attribute(inversion, bool);
-  %python_attribute(gimbal_epsilon, double);
-  %python_attribute(gimbal_psi, double);
-  %python_attribute(gimbal_theta, double);
+  %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);
   double angular_separation(int Reference_band, int Target_band) const;
   void paraxial_offset(int Band,
 		       const FrameCoordinate& F,

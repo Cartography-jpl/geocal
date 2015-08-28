@@ -13,15 +13,11 @@ public:
     // This corresponds to what the DidDem returns. We hardcode this, so
     // the unit test isn't dependent on having the DidDem available.
     boost::shared_ptr<Datum> datum(new SimpleDatum(-26));
-    blitz::Array<double, 1> gimbal_angle(3);
-    blitz::Array<double, 1> ypr_corr(3);
-    gimbal_angle = 0, 0, 0;
-    ypr_corr = 0, 0, 0;
+    boost::shared_ptr<MspiGimbal> gimbal(new MspiGimbal(0,0,0));
     try {
       // This might fail if GDAL doesn't support hdf
       orb.reset(new AirMspiOrbit(test_data_dir() + "airmspi_orbit_file_test.hdf", 
-				 gimbal_angle, ypr_corr,
-				 datum));
+				 gimbal, datum));
     } catch(Exception& E) {
       return;
     }

@@ -70,7 +70,12 @@ private:
   double sum_product;		///< Sum of the product of the two
 				///values.
   int count_;			///< Number of items that have been added.
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(Covariance);
 #endif
 

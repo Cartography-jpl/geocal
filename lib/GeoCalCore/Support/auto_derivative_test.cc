@@ -1,6 +1,3 @@
-#include <boost/archive/polymorphic_xml_iarchive.hpp>
-#include <boost/archive/polymorphic_xml_oarchive.hpp>
-#include "geocal_serialize_support.h"
 #include "unit_test_support.h"
 #include "auto_derivative.h"
 
@@ -142,47 +139,19 @@ BOOST_AUTO_TEST_CASE(array_assignment)
 
 BOOST_AUTO_TEST_CASE(serialize)
 {
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-  AutoDerivative<double> x(3, 0, 2);
-  AutoDerivative<double> y(11);
-  std::ostringstream os;
-  boost::archive::polymorphic_xml_oarchive oa(os);
-  oa << GEOCAL_NVP(x) << GEOCAL_NVP(y);
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<AutoDerivative<double> > 
+    x(new AutoDerivative<double>(3, 0, 2));
+  std::string d = serialize_write_string(x);
   if(false)
     // Can dump to screen, if we want to see the text
-    std::cerr << os.str();
-
-  std::istringstream is(os.str());
-  boost::archive::polymorphic_xml_iarchive ia(is);
-  AutoDerivative<double> xr, yr;
-  ia >> GEOCAL_NVP(xr) >> GEOCAL_NVP(yr);
-  BOOST_CHECK_CLOSE(xr.value(), x.value(), 1e-8);
-  BOOST_CHECK_CLOSE(yr.value(), y.value(), 1e-8);
-  BOOST_CHECK(yr.is_constant());
-  BOOST_CHECK_EQUAL(xr.number_variable(), x.number_variable());
-  BOOST_CHECK_MATRIX_CLOSE(xr.gradient(), x.gradient());
-#endif
-}
-
-BOOST_AUTO_TEST_CASE(serialize_blitz_array)
-{
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-  blitz::Array<double, 1> d(3);
-  d = 1, 2, 3;
-  std::ostringstream os;
-  boost::archive::polymorphic_xml_oarchive oa(os);
-  oa << GEOCAL_NVP(d);
-  if(false)
-    // Can dump to screen, if we want to see the text
-    std::cerr << os.str();
-
-  std::istringstream is(os.str());
-  boost::archive::polymorphic_xml_iarchive ia(is);
-  blitz::Array<double, 1> dr;
-  ia >> GEOCAL_NVP(dr);
-  BOOST_CHECK_EQUAL(d.rows(), dr.rows());
-  BOOST_CHECK_MATRIX_CLOSE(d, dr);
-#endif
+    std::cerr << d;
+  boost::shared_ptr<AutoDerivative<double> > xr =
+    serialize_read_string<AutoDerivative<double> >(d);
+  BOOST_CHECK_CLOSE(xr->value(), x->value(), 1e-8);
+  BOOST_CHECK_EQUAL(xr->number_variable(), x->number_variable());
+  BOOST_CHECK_MATRIX_CLOSE(xr->gradient(), x->gradient());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

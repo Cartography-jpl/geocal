@@ -30,6 +30,7 @@ libgeocal_la_SOURCES+= @srcimplementation@/magnify_replicate.cc
 geocalinc_HEADERS+= @srcimplementation@/smooth_image.h
 libgeocal_la_SOURCES+= @srcimplementation@/smooth_image.cc
 geocalinc_HEADERS+= @srcimplementation@/raster_image_tiled_file.h
+libgeocal_la_SOURCES+= @srcimplementation@/raster_image_tiled_file.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_tiled_file.h
 geocalinc_HEADERS+= @srcimplementation@/memory_dem.h
 libgeocal_la_SOURCES+= @srcimplementation@/map_reprojected_image.cc
@@ -85,12 +86,16 @@ geocalinc_HEADERS+= @srcimplementation@/igc_rolling_shutter.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_rolling_shutter.cc
 geocalinc_HEADERS+= @srcimplementation@/igc_array.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_array.cc
+geocalinc_HEADERS+= @srcimplementation@/igc_multiple_pass.h
+libgeocal_la_SOURCES+= @srcimplementation@/igc_multiple_pass.cc
 geocalinc_HEADERS+= @srcimplementation@/igc_collection_rolling_shutter.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_collection_rolling_shutter.cc
 geocalinc_HEADERS+= @srcimplementation@/igc_collection_orbit_data.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_collection_orbit_data.cc
 geocalinc_HEADERS+= @srcimplementation@/rolling_shutter_constant_time_table.h
 libgeocal_la_SOURCES+= @srcimplementation@/rolling_shutter_constant_time_table.cc
+geocalinc_HEADERS+= @srcimplementation@/piecewise_linear.h
+libgeocal_la_SOURCES+= @srcimplementation@/piecewise_linear.cc
 if HAVE_FFTW
 geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
 libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc
@@ -103,8 +108,12 @@ if HAVE_HDF5
 geocalinc_HEADERS+= @srcimplementation@/hdf_orbit.h
 libgeocal_la_SOURCES+= @srcimplementation@/hdf_orbit.cc
 endif
+geocalinc_HEADERS+= @srcimplementation@/orbit_correction.h
+libgeocal_la_SOURCES+= @srcimplementation@/orbit_correction.cc
 geocalinc_HEADERS+= @srcimplementation@/orbit_offset_correction.h
 libgeocal_la_SOURCES+= @srcimplementation@/orbit_offset_correction.cc
+geocalinc_HEADERS+= @srcimplementation@/orbit_piecewise_correction.h
+libgeocal_la_SOURCES+= @srcimplementation@/orbit_piecewise_correction.cc
 geocalinc_HEADERS+= @srcimplementation@/igc_ray_caster.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_ray_caster.cc
 
@@ -206,10 +215,14 @@ SWIG_SRC += @swigsrc@/planet_coordinate_wrap.cc
 SWIG_SRC += @swigsrc@/igc_ray_caster_wrap.cc
 SWIG_SRC += @swigsrc@/igc_rolling_shutter_wrap.cc
 SWIG_SRC += @swigsrc@/igc_array_wrap.cc
+SWIG_SRC += @swigsrc@/igc_multiple_pass_wrap.cc
 SWIG_SRC += @swigsrc@/igc_collection_rolling_shutter_wrap.cc
 SWIG_SRC += @swigsrc@/igc_collection_orbit_data_wrap.cc
 SWIG_SRC += @swigsrc@/rolling_shutter_constant_time_table_wrap.cc
+SWIG_SRC += @swigsrc@/piecewise_linear_wrap.cc
+SWIG_SRC += @swigsrc@/orbit_correction_wrap.cc
 SWIG_SRC += @swigsrc@/orbit_offset_correction_wrap.cc
+SWIG_SRC += @swigsrc@/orbit_piecewise_correction_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
 SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
 # Test files
@@ -251,9 +264,12 @@ geocal_test_all_SOURCES+= @srcimplementation@/geometric_model_image_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_ray_caster_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_rolling_shutter_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_array_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/igc_multiple_pass_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_collection_rolling_shutter_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/piecewise_linear_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_collection_orbit_data_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_offset_correction_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/orbit_piecewise_correction_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

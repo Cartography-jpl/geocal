@@ -45,6 +45,7 @@ public:
     virtual boost::shared_ptr< GeoCal::CartesianFixed > position_cf(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::OrbitData > orbit_data(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::OrbitData > orbit_data(GeoCal::TimeWithDerivative const &T) const;
+    virtual std::string print_to_string();
     using GeoCal::Orbit::notify_update_do;
     using GeoCal::Orbit::interpolate;
 
@@ -80,7 +81,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[25];
+    mutable swig::SwigVar_PyObject vtable[26];
 #endif
 
 };

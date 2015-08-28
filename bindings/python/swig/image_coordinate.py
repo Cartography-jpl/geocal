@@ -227,10 +227,18 @@ class ImageCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
         _image_coordinate.ImageCoordinateWithDerivative_swiginit(self,_image_coordinate.new_ImageCoordinateWithDerivative(*args))
     line = _swig_property(_image_coordinate.ImageCoordinateWithDerivative_line_get, _image_coordinate.ImageCoordinateWithDerivative_line_set)
     sample = _swig_property(_image_coordinate.ImageCoordinateWithDerivative_sample_get, _image_coordinate.ImageCoordinateWithDerivative_sample_set)
+    def value(self):
+        """
+        ImageCoordinate GeoCal::ImageCoordinateWithDerivative::value() const
+        Strip off derivative information and return ImageCoordinate. 
+        """
+        return _image_coordinate.ImageCoordinateWithDerivative_value(self)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_coordinate.delete_ImageCoordinateWithDerivative
+ImageCoordinateWithDerivative.value = new_instancemethod(_image_coordinate.ImageCoordinateWithDerivative_value,None,ImageCoordinateWithDerivative)
 ImageCoordinateWithDerivative.__str__ = new_instancemethod(_image_coordinate.ImageCoordinateWithDerivative___str__,None,ImageCoordinateWithDerivative)
 ImageCoordinateWithDerivative_swigregister = _image_coordinate.ImageCoordinateWithDerivative_swigregister
 ImageCoordinateWithDerivative_swigregister(ImageCoordinateWithDerivative)

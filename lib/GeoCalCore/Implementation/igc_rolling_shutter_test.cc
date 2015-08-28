@@ -5,7 +5,9 @@
 #include "simple_dem.h"
 #include "memory_raster_image.h"
 #include "ecr.h"
+#ifdef HAVE_HDF5
 #include "hdf_orbit.h"
+#endif
 #include "eci_tod.h"
 #include "orbit_offset_correction.h"
 #include "igc_collection.h"
@@ -30,8 +32,9 @@ public:
 #ifdef HAVE_HDF5
     boost::shared_ptr<Orbit> orb_uncorr(new HdfOrbit<EciTod, TimeAcsCreator>(fname));
     orb.reset(new OrbitOffsetCorrection(orb_uncorr));
-    orb->insert_time_point(tmin);
-    orb->insert_time_point(tmin + 10);
+    orb->insert_position_time_point(tmin);
+    orb->insert_attitude_time_point(tmin);
+    orb->insert_attitude_time_point(tmin + 10);
 #endif
     cam.reset(new QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
 				   3375, 3648, 1.0 / 2500000, 1.0 / 2500000,

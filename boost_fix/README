@@ -1,0 +1,13 @@
+Boost unfortunately had a rather serious bug in the boost serialization
+introduced in boost version 1.56-1.58. The bug is described in the 
+ticket #10727 found at https://svn.boost.org/trac/boost/ticket/10727.
+
+This was fixed as https://github.com/boostorg/serialization/commit/a32549c25fa983fea2b5dfeaf97fbb465eb2bea0, and I believe this will be in 1.59.
+
+Note that this fix is to the header files only, but unfortunately there is
+no easy external fix. Since we don't want the users to have to patch their
+system headers, I've checked out each of the include/boost/archive for 
+each of the version 1.56, 1.57 and 1.58. The configuration has been set
+up to shuffle the include line to pick up this patched copy of the header
+files.
+

@@ -12,6 +12,13 @@
 #include <vector>
 
 namespace GeoCal {
+
+class QuaternionOrbitData;
+boost::shared_ptr<QuaternionOrbitData>
+  interpolate(const QuaternionOrbitData& t1, 
+	      const QuaternionOrbitData& t2, 
+	      const TimeWithDerivative& tm);
+
 /****************************************************************//**
   This class is used to convert ScLookVector,
   CartesianInertialLookVector and CartesianFixedLookVector to and 
@@ -191,10 +198,10 @@ private:
   you can avoid the need of using one of these toolkits.
 
   Note that we allow most pieces of this to be AutoDerivative, useful
-  for propagating jacobians.   We do *not* support time being a
-  AutoDerivative, so supporting things like time offset isn't
-  currently in here. We probably could do this, we'd just need to
-  think through how to support this.
+  for propagating jacobians. By convention an Orbit uses the
+  AutoDerivative if orbit_data is called with a TimeWithDerivative,
+  but doesn't if it isn't. This means the AutoDerivative can be
+  available, but if not needed we save time by not calculating these. 
 *******************************************************************/
 
 class QuaternionOrbitData : public OrbitData {
@@ -202,6 +209,10 @@ public:
   QuaternionOrbitData(const QuaternionOrbitData& Start,
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
 		      const boost::math::quaternion<AutoDerivative<double> >&
+		      Sc_to_sc_corr);
+  QuaternionOrbitData(const QuaternionOrbitData& Start,
+		      const boost::array<double, 3>& Pos_off,
+		      const boost::math::quaternion<double>&
 		      Sc_to_sc_corr);
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
@@ -611,10 +622,20 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return OrbitData for the given time. We should have min_time() <=
-/// T < max_time().
+/// T < max_time(). Note for orbit models that you do *not* need to 
+/// include the derivative information for this version of orbit_data
+/// (which can be a great speed up). Users that want that information
+/// should call the TimeWithDerivative version.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
+
+//-----------------------------------------------------------------------
+/// Return OrbitData for the given time. We should have min_time() <=
+/// T < max_time(). This version *should* include any AutoDerivative
+/// information if the orbit model has parameters.
+//-----------------------------------------------------------------------
+
   virtual boost::shared_ptr<OrbitData> 
   orbit_data(const TimeWithDerivative& T) const  = 0;
   virtual void print(std::ostream& Os) const { Os << "Orbit"; }
@@ -856,10 +877,6 @@ private:
   void serialize(Archive & ar, const unsigned int version);
 };
 
-  boost::shared_ptr<QuaternionOrbitData>
-  interpolate(const QuaternionOrbitData& t1, 
-	      const QuaternionOrbitData& t2, 
-	      const TimeWithDerivative& tm);
 }
 
 GEOCAL_EXPORT_KEY(QuaternionOrbitData);

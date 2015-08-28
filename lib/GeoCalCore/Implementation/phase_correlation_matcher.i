@@ -24,7 +24,7 @@ public:
 			  bool &OUTPUT, int *OUTPUT) const;
   %python_attribute(template_size, int)
   %python_attribute(search_size, int)
-  %pickle_init(1, self.template_size, self.search_size)
+  %pickle_serialization();
 };
 }
 

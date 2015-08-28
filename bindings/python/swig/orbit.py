@@ -353,10 +353,10 @@ class QuaternionOrbitData(OrbitData):
     you can avoid the need of using one of these toolkits.
 
     Note that we allow most pieces of this to be AutoDerivative, useful
-    for propagating jacobians. We do not support time being a
-    AutoDerivative, so supporting things like time offset isn't currently
-    in here. We probably could do this, we'd just need to think through
-    how to support this.
+    for propagating jacobians. By convention an Orbit uses the
+    AutoDerivative if orbit_data is called with a TimeWithDerivative, but
+    doesn't if it isn't. This means the AutoDerivative can be available,
+    but if not needed we save time by not calculating these.
 
     C++ includes: orbit.h 
     """
@@ -664,7 +664,11 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
     def orbit_data(self, *args):
         """
         virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0
+        Return OrbitData for the given time.
 
+        We should have min_time() <= T < max_time(). This version should
+        include any AutoDerivative information if the orbit model has
+        parameters. 
         """
         return _orbit.Orbit_orbit_data(self, *args)
 
@@ -775,7 +779,11 @@ class KeplerOrbit(Orbit):
     def orbit_data(self, *args):
         """
         boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(const TimeWithDerivative &T) const
+        Return OrbitData for the given time.
 
+        We should have min_time() <= T < max_time(). This version should
+        include any AutoDerivative information if the orbit model has
+        parameters. 
         """
         return _orbit.KeplerOrbit_orbit_data(self, *args)
 

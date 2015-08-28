@@ -43,8 +43,8 @@ public:
 /// want the best possible matches as the cost of some coverage?
 //-----------------------------------------------------------------------
 
-  CcorrLsmMatcher(const boost::shared_ptr<CcorrMatcher>& Ccorr,
-		  const boost::shared_ptr<LsmMatcher>& Lsm,
+  CcorrLsmMatcher(const boost::shared_ptr<ImageMatcher>& Ccorr,
+		  const boost::shared_ptr<ImageMatcher>& Lsm,
 		  bool Accept_ccorr_only = false) 
     : accept_ccorr_only_(Accept_ccorr_only),
       ccorr_matcher_(Ccorr),
@@ -57,18 +57,18 @@ public:
   virtual ~CcorrLsmMatcher() {}
 
 //-----------------------------------------------------------------------
-/// CcorrMatcher used.
+/// ImageMatcher used.
 //-----------------------------------------------------------------------
   
-  const CcorrMatcher& ccorr_matcher() const {return *ccorr_matcher_;}
-  boost::shared_ptr<CcorrMatcher> ccorr_matcher_ptr() const 
+  const ImageMatcher& ccorr_matcher() const {return *ccorr_matcher_;}
+  boost::shared_ptr<ImageMatcher> ccorr_matcher_ptr() const 
   {return ccorr_matcher_;}
 //-----------------------------------------------------------------------
 /// LsmMatcher used.
 //-----------------------------------------------------------------------
   
-  const LsmMatcher& lsm_matcher() const {return *lsm_matcher_;}
-  boost::shared_ptr<LsmMatcher> lsm_matcher_ptr() const 
+  const ImageMatcher& lsm_matcher() const {return *lsm_matcher_;}
+  boost::shared_ptr<ImageMatcher> lsm_matcher_ptr() const 
   {return lsm_matcher_;}
   virtual void match_mask(const RasterImage& Ref, const ImageMask& Ref_mask,
 			  const RasterImage& New, 
@@ -94,10 +94,15 @@ public:
   bool accept_ccorr_only() const { return accept_ccorr_only_; }
 private:
   bool accept_ccorr_only_;
-  boost::shared_ptr<CcorrMatcher> ccorr_matcher_;
-  boost::shared_ptr<LsmMatcher> lsm_matcher_;
+  boost::shared_ptr<ImageMatcher> ccorr_matcher_;
+  boost::shared_ptr<ImageMatcher> lsm_matcher_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(CcorrLsmMatcher);
 #endif
 

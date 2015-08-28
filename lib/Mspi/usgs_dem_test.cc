@@ -1,5 +1,7 @@
 #include "unit_test_support.h"
 #include "usgs_dem.h"
+#include "gdal_dem.h"
+#include "gdal_raster_image.h"
 #include <boost/filesystem.hpp>
 #include <iostream>
 
@@ -84,18 +86,39 @@ BOOST_AUTO_TEST_CASE(usgs_dem_real_database)
 {
   // Old unit test, requires that we have actual database. If we don't
   // then just skip this test.
-  if(boost::filesystem::is_directory("/data/bank/anc/DEM/USA10M/database")) {
-    // DatumGeoid96 might not be available, so for the test just use a
-    // SimpleDatum.
-    boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
-    UsgsDem d("/data/bank/anc/DEM/USA10M/database", false, datum);
-    double latitude = 34.904444;
-    double longitude = -119.263411;
-    double lat = (latitude + (1.0 / 10800.0));
-    double lon = (longitude + (.5 / 10800.0));
-    BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(lat, lon)),
-		      1460.255, 1e-2);
-  }
+  if(!boost::filesystem::is_directory("/data/bank/anc/DEM/USA10M/database"))
+    return;
+  // DatumGeoid96 might not be available, so for the test just use a
+  // SimpleDatum.
+  boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
+  UsgsDem d("/data/bank/anc/DEM/USA10M/database", false, datum);
+  double latitude = 34.904444;
+  double longitude = -119.263411;
+  double lat = (latitude + (1.0 / 10800.0));
+  double lon = (longitude + (.5 / 10800.0));
+  BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(lat, lon)),
+		    1460.255, 1e-2);
+}
+
+BOOST_AUTO_TEST_CASE(create_subset_file)
+{
+  // Don't normally run this test, it takes a bit of time to run
+  return;
+  if(!boost::filesystem::is_directory("/data/bank/anc/DEM/USA10M/database"))
+    return;
+  UsgsDemData d("/data/bank/anc/DEM/USA10M/database");
+  std::vector<boost::shared_ptr<GroundCoordinate> > pt;
+  pt.push_back(boost::shared_ptr<GroundCoordinate>(new Geodetic(40.5, -110.5)));
+  pt.push_back(boost::shared_ptr<GroundCoordinate>(new Geodetic(37.5, -106.7)));
+  d.create_subset_file("test_dem.tif", "gtiff", pt);
+
+  boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
+  UsgsDem dtrue("/data/bank/anc/DEM/USA10M/database", false, datum);
+  GdalRasterImage d2("test_dem.tif");
+  GdalDem dcreated("test_dem.tif", datum);
+  Geodetic g(38, -108);
+  BOOST_CHECK_CLOSE(dtrue.height_reference_surface(g),
+		    dcreated.height_reference_surface(g), 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

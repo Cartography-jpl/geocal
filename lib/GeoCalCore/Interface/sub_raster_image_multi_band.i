@@ -18,9 +18,6 @@ public:
   %python_attribute(start_sample, int)
   %python_attribute(full_raster_image_multi_band, 
 		    boost::shared_ptr<RasterImageMultiBand>)
-  %pickle_init(1, self.full_raster_image_multi_band,
-	       self.start_line, self.start_sample,
-	       self.raster_image(0).number_line,
-	       self.raster_image(0).number_sample)
+  %pickle_serialization();
 };
 }

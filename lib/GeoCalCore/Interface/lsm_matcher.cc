@@ -1,10 +1,50 @@
 #include "lsm_matcher.h"
+#include "geocal_serialize_support.h"
 #include <blitz/array.h>
 #include <iostream>
 #include "gsl/gsl_linalg.h"
 #include "geocal_gsl_matrix.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void LsmMatcher::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(ImageMatcher);
+  GEOCAL_BASE(LsmMatcher, ImageMatcher);
+  ar & GEOCAL_NVP_(number_line) & GEOCAL_NVP_(number_sample)
+    & GEOCAL_NVP_(border_size) & GEOCAL_NVP_(precision_goal)
+    & GEOCAL_NVP_(precision_requirement) & GEOCAL_NVP_(max_sigma)
+    & GEOCAL_NVP_(rad_uncertainty_factor)
+    & GEOCAL_NVP_(precision_min_geo_goal)
+    & GEOCAL_NVP_(precision_min_rad_goal)
+    & GEOCAL_NVP(line_offset)
+    & GEOCAL_NVP(sample_offset);
+}
+
+template<class Archive>
+void LsmMatcher::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ImageMatcher);
+  GEOCAL_BASE(LsmMatcher, ImageMatcher);
+  ar & GEOCAL_NVP_(number_line) & GEOCAL_NVP_(number_sample)
+    & GEOCAL_NVP_(border_size) & GEOCAL_NVP_(precision_goal)
+    & GEOCAL_NVP_(precision_requirement) & GEOCAL_NVP_(max_sigma)
+    & GEOCAL_NVP_(rad_uncertainty_factor)
+    & GEOCAL_NVP_(precision_min_geo_goal)
+    & GEOCAL_NVP_(precision_min_rad_goal)
+    & GEOCAL_NVP(line_offset)
+    & GEOCAL_NVP(sample_offset);
+  target_res.resize(number_line_, number_sample_);
+  grad_x.resize(target_res.shape());
+  grad_y.resize(target_res.shape());
+  v.resize(8);
+}
+
+
+GEOCAL_SPLIT_IMPLEMENT(LsmMatcher);
+#endif
 
 //-----------------------------------------------------------------------
 /// Wrapper around DGESV, which solves the linear system y = A * x. On
@@ -409,6 +449,8 @@ void LsmMatcher::match_mask
       return;
     }
   }
+  if(Diagnostic)
+    *Diagnostic = EXCEED_MAX_ITERATION;
 }
 
 //-----------------------------------------------------------------------

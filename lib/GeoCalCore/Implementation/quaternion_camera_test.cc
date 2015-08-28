@@ -45,11 +45,7 @@ BOOST_AUTO_TEST_CASE(jac_test)
     for(int i = 0; i < cam.parameter().rows(); ++i)
       std::cerr << i << ": " << cam.parameter()(i)
 		<< " " << cam.parameter_name()[i] << "\n";
-  ArrayAd<double, 1> p2(cam.parameter());
-  p2.resize_number_variable(p2.rows());
-  for(int i = 0; i < p2.rows(); ++i)
-    p2.jacobian()(i,i) = 1.0;
-  cam.parameter_with_derivative(p2);
+  cam.add_identity_gradient();
   FrameCoordinate fc(3375, 3648);
   ScLookVector slv = cam.sc_look_vector(fc, 0);
   ScLookVectorWithDerivative slvwd = 

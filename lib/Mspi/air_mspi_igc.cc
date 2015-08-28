@@ -14,7 +14,11 @@ using namespace GeoCal;
 template<class Archive>
 void AirMspiIgc::serialize(Archive & ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection);
+  GEOCAL_GENERIC_BASE(WithParameterNested);
+  GEOCAL_BASE(AirMspiIgc, WithParameterNested);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection)
+    & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested)
+    & GEOCAL_NVP_(gimbal);
 }
 
 GEOCAL_IMPLEMENT(AirMspiIgc);
@@ -33,9 +37,13 @@ AirMspiIgc::AirMspiIgc
 (const std::string& Master_config_file,
  const std::string& Orbit_file_name,
  const std::string& L1b1_file_name,
- int Band,
+ const std::string& Swath_to_use,
  const std::string& Base_directory,
- const std::string& Title)
+ const std::string& Title,
+ int Tile_number_line,
+ int Tile_number_sample, 
+ unsigned int Number_tile
+)
 {
   MspiConfigFile c(Master_config_file);
   // Get camera set up
@@ -49,6 +57,7 @@ AirMspiIgc::AirMspiIgc
       extra_config = Base_directory + "/" + extra_config;
   }
   boost::shared_ptr<MspiCamera> cam(new MspiCamera(fname, extra_config));
+  gimbal_.reset(new MspiGimbal(fname, extra_config));
 
   // Get orbit set up
   // Not sure if we still need the "static gimbal", but we don't
@@ -56,12 +65,8 @@ AirMspiIgc::AirMspiIgc
   // requested. We can modify the code to support this if needed.
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
-  blitz::Array<double, 1> gimbal_angle(3);
-  gimbal_angle = cam->gimbal_epsilon(),
-    cam->gimbal_psi(),
-    cam->gimbal_theta();
   boost::shared_ptr<AirMspiOrbit> 
-    orb(new AirMspiOrbit(Orbit_file_name, gimbal_angle));
+    orb(new AirMspiOrbit(Orbit_file_name, gimbal_));
 
   // Get DEM set up
   boost::shared_ptr<Dem> dem;
@@ -79,20 +84,22 @@ AirMspiIgc::AirMspiIgc
   }
 
   // Get the time table and L1B1 data.
-  fname = c.value<std::string>("instrument_info_config");
-  if(fname[0] != '/')
-    fname = Base_directory + "/" + fname;
-  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name,
-						       fname));
+  boost::shared_ptr<AirMspiTimeTable> 
+    tt(new AirMspiTimeTable(L1b1_file_name, Swath_to_use));
   Time tmin = std::max(orb->min_time(), tt->min_time());
   Time tmax = std::min(orb->max_time(), tt->max_time());
+  int band = cam->band_number(tt->l1b1_file()->row_number_to_use());
 
-  // Short term, have image empty.
-  boost::shared_ptr<RasterImage> img;
+  boost::shared_ptr<RasterImage> img
+    (new AirMspiL1b1(tt->l1b1_file(), Tile_number_line, Tile_number_sample,
+		     Number_tile));
 
   // Ready now to initialize ipi and Igc
-  boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, Band, tmin, tmax, tt));
+  boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, band, tmin, tmax, tt));
   initialize(ipi, dem, img, Title, dem_resolution);
+  add_object(cam);
+  add_object(gimbal_);
+  add_object(orb);
 }
 
 //-----------------------------------------------------------------------
@@ -103,24 +110,44 @@ AirMspiIgc::AirMspiIgc
 
 AirMspiIgc::AirMspiIgc
 (const boost::shared_ptr<Orbit>& Orb,
- const boost::shared_ptr<Camera>& Cam,
+ const boost::shared_ptr<MspiCamera>& Cam,
+ const boost::shared_ptr<MspiGimbal>& Gim,
  const boost::shared_ptr<Dem>& Dem,
  const std::string& L1b1_file_name,
- int Reference_row,
- int Band,
+ const std::string& Swath_to_use,
  const std::string& Title,
- int Dem_resolution)
+ int Dem_resolution,
+ int Tile_number_line,
+ int Tile_number_sample, 
+ unsigned int Number_tile
+ )
+  : gimbal_(Gim)
 {
-
-  // Short term, have image empty.
-  boost::shared_ptr<RasterImage> img;
-
-  boost::shared_ptr<TimeTable> tt(new AirMspiTimeTable(L1b1_file_name,
-						       Reference_row));
+  boost::shared_ptr<AirMspiTimeTable> 
+    tt(new AirMspiTimeTable(L1b1_file_name, Swath_to_use));
+  boost::shared_ptr<RasterImage> img
+    (new AirMspiL1b1(tt->l1b1_file(), Tile_number_line, Tile_number_sample,
+		     Number_tile));
   Time tmin = std::max(Orb->min_time(), tt->min_time());
   Time tmax = std::min(Orb->max_time(), tt->max_time());
-  boost::shared_ptr<Ipi> ipi(new Ipi(Orb, Cam, Band, tmin, tmax, tt));
+  int bandn = Cam->band_number(tt->l1b1_file()->row_number_to_use());
+  boost::shared_ptr<Ipi> ipi(new Ipi(Orb, Cam, bandn, tmin, tmax, tt));
   initialize(ipi, Dem, img, Title, Dem_resolution);
+  add_object(Cam);
+  add_object(gimbal_);
+  add_object(Orb);
+}
+
+//-----------------------------------------------------------------------
+/// Set band that we are using.
+//-----------------------------------------------------------------------
+
+void AirMspiIgc::band(int B) 
+{ 
+  ipi_ptr()->band(B);
+  int rind = 
+    time_table()->l1b1_file()->row_number_to_row_index(camera()->row_number(B));
+  time_table()->l1b1_file()->row_index_to_use(rind);
 }
 
 void AirMspiIgc::print(std::ostream& Os) const 

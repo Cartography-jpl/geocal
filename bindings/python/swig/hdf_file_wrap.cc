@@ -3654,6 +3654,52 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "geocal_serialize_function.h"
+#include "geocal_exception.h"
+// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
+std::string parse_python_exception();
+
+
+//--------------------------------------------------------------
+/// Support routines for calling cPickle.dumps from C
+//--------------------------------------------------------------
+
+inline PyObject* cpickle_module()
+{
+  static PyObject* mod = 0;
+  if(!mod)
+    mod = PyImport_ImportModule("cPickle");
+  return mod;
+}
+
+inline std::string cpickle_dumps(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(cpickle_module(),
+					     PyString_FromString("dumps"),
+					     obj, NULL);
+  if(PyErr_Occurred()) {
+    GeoCal::Exception e;
+    e << "Python error occurred:\n"
+      << parse_python_exception();
+    throw e;
+  }
+  return std::string(PyString_AsString(res));
+}
+
+inline PyObject* cpickle_loads(const std::string& S)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(cpickle_module(),
+					     PyString_FromString("loads"),
+					     PyString_FromString(S.c_str()), 
+					     NULL);
+  if(PyErr_Occurred()) {
+    GeoCal::Exception e;
+    e << "Python error occurred:\n"
+      << parse_python_exception();
+    throw e;
+  }
+  return res;
+}
+
 
 
   #include <stddef.h>
@@ -4807,6 +4853,9 @@ namespace swig
 #ifndef DO_IMPORT_ARRAY
 #define NO_IMPORT_ARRAY
 #endif
+// We don't use the deprecated api that was removed in 1.7, so tell
+// numpy not to complain about this.
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
 
@@ -4875,28 +4924,28 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
 template<class T, int D> inline blitz::Array<T, D> 
   to_blitz_array(PyObject* numpy)
 {
-  if(PyArray_NDIM(numpy) != D) {
-    std::cerr << PyArray_NDIM(numpy) << "\n"
+  if(PyArray_NDIM((PyArrayObject *) numpy) != D) {
+    std::cerr << PyArray_NDIM((PyArrayObject *) numpy) << "\n"
 	      << D << "\n";
     throw 
       GeoCal::Exception("Dimension of array is not the expected size");
   }
-  if(PyArray_TYPE(numpy) != type_to_npy<T>()) {
+  if(PyArray_TYPE((PyArrayObject *) numpy) != type_to_npy<T>()) {
     throw 
       GeoCal::Exception("Type of array not the expected type");
   }
   blitz::TinyVector<int, D> shape, stride;
   for(int i = 0; i < D; ++i) {
-    shape(i) = PyArray_DIM(numpy, i);
+    shape(i) = PyArray_DIM((PyArrayObject *) numpy, i);
     // Note numpy stride is in terms of bytes, while blitz in in terms
     // of type T.
-    stride(i) = PyArray_STRIDE(numpy, i) / sizeof(T);
-    if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE(numpy, i)) {
+    stride(i) = PyArray_STRIDE((PyArrayObject *) numpy, i) / sizeof(T);
+    if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE((PyArrayObject *) numpy, i)) {
       throw 
 	GeoCal::Exception("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
     }
   }
-  return blitz::Array<T, D>((T*)PyArray_DATA(numpy), shape, stride, 
+  return blitz::Array<T, D>((T*)PyArray_DATA((PyArrayObject *) numpy), shape, stride, 
 			    blitz::neverDeleteData);
 }
 
@@ -5585,9 +5634,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_1d(PyObject *SWIGUNUSEDPARM(self)
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -5656,9 +5705,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_2d(PyObject *SWIGUNUSEDPARM(self)
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_2_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -5727,9 +5776,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_3d(PyObject *SWIGUNUSEDPARM(self)
     resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 3>* t = new blitz::Array<double, 3>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_3_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -5798,9 +5847,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_4d(PyObject *SWIGUNUSEDPARM(self)
     resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<double, 4>* t = new blitz::Array<double, 4>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_double_4_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_4_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -5869,9 +5918,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_1d(PyObject *SWIGUNUSEDPARM(self), P
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<int >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<int, 1>* t = new blitz::Array<int, 1>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_int_1_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_int_1_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -5940,9 +5989,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_2d(PyObject *SWIGUNUSEDPARM(self), P
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<int >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<int, 2>* t = new blitz::Array<int, 2>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_int_2_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_int_2_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -6011,9 +6060,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_3d(PyObject *SWIGUNUSEDPARM(self), P
     resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<int >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<int, 3>* t = new blitz::Array<int, 3>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_int_3_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_int_3_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -6082,9 +6131,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_4d(PyObject *SWIGUNUSEDPARM(self), P
     resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<int >(), 
       stride, (&result)->data(), 0, 0, 0);
     blitz::Array<int, 4>* t = new blitz::Array<int, 4>(result);
-    PyArray_BASE(resultobj) = SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-      SWIGTYPE_p_blitz__ArrayT_int_4_t, 
-      SWIG_POINTER_NEW | 0 );
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_int_4_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;

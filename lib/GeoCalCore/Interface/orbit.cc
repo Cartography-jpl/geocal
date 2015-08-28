@@ -423,7 +423,7 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
   pos(2) = 0;
   vel(0) = rdot * ctheta - r * stheta * thetadot;
   vel(1) = rdot * stheta + r * ctheta * thetadot;
-  vel(2) = rdot * stheta + r * ctheta * thetadot;
+  vel(2) = 0;
 
 //-----------------------------------------------------------------------
 // Rotate to proper inclination and longitude of ascending node.
@@ -450,7 +450,7 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
   boost::shared_ptr<CartesianInertial> 
     pci(new Eci(p(0).value(), p(1).value(), p(2).value())) ;
   boost::array<AutoDerivative<double>, 3> pci_der = {{p(0), p(1), p(2)}};
-  boost::array<AutoDerivative<double>, 3> v2 = {{vel(0), vel(1), vel(2)}};
+  boost::array<AutoDerivative<double>, 3> v2 = {{v(0), v(1), v(2)}};
   return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pci, pci_der,
 		      v2, 
    		      matrix_to_quaternion(sc_to_ci)));
@@ -531,6 +531,74 @@ QuaternionOrbitData::QuaternionOrbitData
     pos_ci->position[0] += Pos_off[0].value();
     pos_ci->position[1] += Pos_off[1].value();
     pos_ci->position[2] += Pos_off[2].value();
+    pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
+      (0,pos_ci_with_der.R_component_2() + Pos_off[0],
+       pos_ci_with_der.R_component_3() + Pos_off[1],
+       pos_ci_with_der.R_component_4() + Pos_off[2]);
+    pos_with_der = ci_to_cf_with_derivative() * pos_ci_with_der * 
+      conj(ci_to_cf_with_derivative());
+    boost::array<double, 3> p = {{pos_with_der.R_component_2().value(),
+				  pos_with_der.R_component_3().value(),
+				  pos_with_der.R_component_4().value()}};
+    pos = pos->create(p);
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Constructor.
+/// This make an perturbation to an existing QuaternionOrbitData. We
+/// take an offset to add to the position, and a rotation matrix that
+/// takes us from the original sc coordinate system to the "corrected"
+/// coordinate system, e.g., small correction to the yaw, roll and
+/// pitch of the original quaternion.
+///
+/// The position correction is in CartesianFixed if from_cf() is true,
+/// otherwise it is CartesianInertial.
+//-----------------------------------------------------------------------
+
+QuaternionOrbitData::QuaternionOrbitData
+(const QuaternionOrbitData& Start,
+ const boost::array<double, 3>& Pos_off,
+ const boost::math::quaternion<double>& Sc_to_sc_corr)
+{
+  tm = Start.tm;
+  pos = Start.pos->create(Start.pos->position);
+  pos_with_der = Start.pos_with_der;
+  vel_cf = Start.vel_cf;
+  vel_cf_with_der = Start.vel_cf_with_der;
+  sc_to_cf_with_der = Start.sc_to_cf_with_der * conj(Sc_to_sc_corr);
+  normalize(sc_to_cf_with_der);
+  sc_to_cf_ = value(sc_to_cf_with_der);
+  from_cf_ = Start.from_cf_;
+  have_ci_to_cf = Start.have_ci_to_cf;
+  if(Start.have_ci_to_cf) {
+    ci_to_cf_ = Start.ci_to_cf_;
+    ci_to_cf_der_ = Start.ci_to_cf_der_;
+    pos_ci = Start.pos_ci->create(Start.pos_ci->position);
+    pos_ci_with_der = Start.pos_ci_with_der;
+    vel_ci = Start.vel_ci;
+    vel_ci_with_der = Start.vel_ci_with_der;
+  }
+  if(from_cf_) {
+    pos->position[0] += Pos_off[0];
+    pos->position[1] += Pos_off[1];
+    pos->position[2] += Pos_off[2];
+    pos_with_der = boost::math::quaternion<AutoDerivative<double> >
+      (0,pos_with_der.R_component_2() + Pos_off[0],
+       pos_with_der.R_component_3() + Pos_off[1],
+       pos_with_der.R_component_4() + Pos_off[2]);
+    if(have_ci_to_cf) {
+      pos_ci_with_der = conj(ci_to_cf_with_derivative()) * pos_with_der * 
+	ci_to_cf_with_derivative();
+      boost::array<double, 3> p = {{pos_ci_with_der.R_component_2().value(),
+				    pos_ci_with_der.R_component_3().value(),
+				    pos_ci_with_der.R_component_4().value()}};
+      pos_ci = pos_ci->create(p);
+    }
+  } else {
+    pos_ci->position[0] += Pos_off[0];
+    pos_ci->position[1] += Pos_off[1];
+    pos_ci->position[2] += Pos_off[2];
     pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
       (0,pos_ci_with_der.R_component_2() + Pos_off[0],
        pos_ci_with_der.R_component_3() + Pos_off[1],

@@ -274,3 +274,63 @@ std::vector<double> GeoCal::root_list(const DFunctor& F,
   }
   return res;
 }
+
+//-----------------------------------------------------------------------
+/// \ingroup GSL
+/// This will find a (possible empty) list of roots of a function,
+/// where the roots have a seperation of at least the supplied minimum
+/// separation. 
+///
+/// This function is useful for finding roots when you don't know how
+/// many solutions there are in the given range. It will find all
+/// roots, provided that they have a seperation larger then
+/// Root_minimum_spacing, and return the list of solutions. This list
+/// is ordered from smallest to greatest.
+///
+/// This function works by sampling the Functor with a spacing of
+/// Root_minimum_spacing. If the function changes sign between one
+/// spacing and the next, the routine root is called between those
+/// spacings and the results is added to the root list.
+///
+/// This will not finds roots that are closer together then the
+/// supplied minimum spacing. (Limitation)
+//-----------------------------------------------------------------------
+
+std::vector<AutoDerivative<double> > GeoCal::root_list(const DFunctorWithDerivative& F, 
+	        double Xmin, double Xmax, double Root_minimum_spacing,
+		double Eps)
+{
+  range_max_check(Xmin, Xmax);
+  range_max_check(0.0, Root_minimum_spacing);
+  std::vector<AutoDerivative<double> > res;
+  double a = Xmin;
+  double last_root = a - 10 * Eps;
+				// Last root found.
+  for(double b = a + Root_minimum_spacing; b < Xmax; 
+      b += Root_minimum_spacing) {
+    if(F(a) * F(b) <= 0.0) {
+      AutoDerivative<double> rt = gsl_root_with_derivative(F, a, b, Eps);
+      if(fabs(rt.value() - last_root) > Eps) {
+				// Reject root if it is too close to
+				// the last root. We have trouble
+				// finding roots twice near the boundary 
+				// [a, b] & [b, c] with rt close to b
+	res.push_back(rt);
+	last_root = rt.value();
+      }
+    }
+    a = b;
+  }
+  if(F(a) * F(Xmax) <= 0.0) {
+    AutoDerivative<double> rt = gsl_root_with_derivative(F, a, Xmax, Eps);
+    if(fabs(rt.value() - last_root) > Eps) {
+				// Reject root if it is too close to
+				// the last root. We have trouble
+				// finding roots twice near the boundary 
+				// [a, b] & [b, c] with rt close to b
+      res.push_back(rt);
+      last_root = rt.value();
+    }
+  }
+  return res;
+}

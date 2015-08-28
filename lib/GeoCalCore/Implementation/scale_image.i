@@ -8,8 +8,10 @@
 %}
 %base_import(calc_raster)
 %base_import(calc_raster_multi_band)
+%base_import(image_ground_connection)
 %geocal_shared_ptr(GeoCal::ScaleImage);
 %geocal_shared_ptr(GeoCal::ScaleImageMultiBand);
+%geocal_shared_ptr(GeoCal::ScaleImageGroundConnection);
 
 namespace GeoCal {
 class ScaleImage : public CalcRaster {
@@ -32,6 +34,12 @@ public:
   %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+};
+
+class ScaleImageGroundConnection: public ImageGroundConnectionCopy {
+public:
+  ScaleImageGroundConnection(const boost::shared_ptr<ImageGroundConnection>& Igc, double Scale_factor);
+  %pickle_serialization();
 };
 
 }

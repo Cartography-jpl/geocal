@@ -174,6 +174,13 @@ public:
 //-----------------------------------------------------------------------
 
   AutoDerivative<double> sample;
+
+//-----------------------------------------------------------------------
+/// Strip off derivative information and return ImageCoordinate.
+//-----------------------------------------------------------------------
+  ImageCoordinate value() const
+  { return ImageCoordinate(line.value(), sample.value()); }
+
   void print(std::ostream& Os) const;
 private:
   friend class boost::serialization::access;

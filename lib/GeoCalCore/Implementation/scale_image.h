@@ -2,6 +2,7 @@
 #define SCALE_IMAGE_H
 #include "calc_raster.h"
 #include "calc_raster_multi_band.h"
+#include "image_ground_connection.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -73,8 +74,22 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };
+
+class ScaleImageGroundConnection: public virtual ImageGroundConnectionCopy {
+public:
+  ScaleImageGroundConnection(const boost::shared_ptr<ImageGroundConnection>& Igc, double Scale_factor);
+  virtual ~ScaleImageGroundConnection() {}
+  virtual void print(std::ostream& Os) const;
+protected:
+  ScaleImageGroundConnection() {}
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 }
 
 GEOCAL_EXPORT_KEY(ScaleImage);
 GEOCAL_EXPORT_KEY(ScaleImageMultiBand);
+GEOCAL_EXPORT_KEY(ScaleImageGroundConnection);
 #endif

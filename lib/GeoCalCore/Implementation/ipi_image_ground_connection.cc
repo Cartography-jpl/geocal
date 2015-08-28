@@ -2,6 +2,7 @@
 #include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
@@ -95,4 +96,25 @@ IpiImageGroundConnection::cf_look_vector_arr
 	}
   }
   return res;
+}
+
+blitz::Array<double, 2> 
+IpiImageGroundConnection::image_coordinate_jac_parm(const GroundCoordinate& Gc) const
+{
+  ImageCoordinateWithDerivative ic;
+  bool success;
+  ipi_->image_coordinate_with_derivative_extended(Gc, ic, success);
+  if(!success)
+    throw ImageGroundConnectionFailed();
+  Array<double, 2> res(2, std::max(ic.line.number_variable(), 
+				   ic.sample.number_variable()));
+  if(!ic.line.is_constant())
+    res(0, Range::all()) = ic.line.gradient();
+  else
+    res(0, Range::all()) = 0;
+  if(!ic.sample.is_constant())
+    res(1, Range::all()) = ic.sample.gradient();
+  else
+    res(1, Range::all()) = 0;
+  return res; 
 }

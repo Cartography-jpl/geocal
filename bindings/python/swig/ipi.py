@@ -168,7 +168,7 @@ class Ipi(geocal_swig.generic_object.GenericObject):
         Camera > &Cam, int Band, Time Tmin, Time Tmax, const
         boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),
         double Local_time_window_size=5.0, double Root_min_separation=30.0,
-        double Time_tolerance=40.8e-3 *1.0/16)
+        double Time_tolerance=1e-6)
         Constructor.
 
         If you only want to get the Time from the Ipi and not ImageCoordinate,
@@ -194,21 +194,21 @@ class Ipi(geocal_swig.generic_object.GenericObject):
         """
         return _ipi.Ipi_image_coordinate(self, *args)
 
-    def image_coordinate_extended(self, *args):
+    def image_coordinate_with_derivative(self, *args):
         """
-        void Ipi::image_coordinate_extended(const GroundCoordinate &Gp, ImageCoordinate &Ic, bool &Success) const
-        This is like image_coordinate, by we try to handle points out of the
-        time and sample range of the data (so this returns line and samples
-        outside of the range of the TimeTable and Camera).
+        void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool
+        &Success) const
 
-        In some cases this is more useful than having image_coordinate fail.
-        Note that we still might have Success false, if for example the point
-        is outside the range of the Orbit.
-
-        For points outside of the TimeTable range, we just extrapolate the
-        last two lines in the time table. 
         """
-        return _ipi.Ipi_image_coordinate_extended(self, *args)
+        return _ipi.Ipi_image_coordinate_with_derivative(self, *args)
+
+    def image_coordinate_with_derivative_extended(self, *args):
+        """
+        void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool
+        &Success) const
+
+        """
+        return _ipi.Ipi_image_coordinate_with_derivative_extended(self, *args)
 
     def time(self, *args):
         """
@@ -229,6 +229,14 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
         """
         return _ipi.Ipi_time(self, *args)
+
+    def time_with_derivative(self, *args):
+        """
+        void Ipi::time_with_derivative(const GroundCoordinate &Gp, TimeWithDerivative &Tres,
+        FrameCoordinateWithDerivative &Fres, bool &Success) const
+
+        """
+        return _ipi.Ipi_time_with_derivative(self, *args)
 
     def footprint(self, *args):
         """
@@ -370,8 +378,10 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _ipi.delete_Ipi
 Ipi.image_coordinate = new_instancemethod(_ipi.Ipi_image_coordinate,None,Ipi)
-Ipi.image_coordinate_extended = new_instancemethod(_ipi.Ipi_image_coordinate_extended,None,Ipi)
+Ipi.image_coordinate_with_derivative = new_instancemethod(_ipi.Ipi_image_coordinate_with_derivative,None,Ipi)
+Ipi.image_coordinate_with_derivative_extended = new_instancemethod(_ipi.Ipi_image_coordinate_with_derivative_extended,None,Ipi)
 Ipi.time = new_instancemethod(_ipi.Ipi_time,None,Ipi)
+Ipi.time_with_derivative = new_instancemethod(_ipi.Ipi_time_with_derivative,None,Ipi)
 Ipi.footprint = new_instancemethod(_ipi.Ipi_footprint,None,Ipi)
 Ipi._v_resolution_meter = new_instancemethod(_ipi.Ipi__v_resolution_meter,None,Ipi)
 Ipi.__str__ = new_instancemethod(_ipi.Ipi___str__,None,Ipi)

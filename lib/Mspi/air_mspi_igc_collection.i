@@ -20,12 +20,14 @@ public:
   AirMspiIgcCollection(const std::string& Master_config_file,
 		       const std::string& Orbit_file_name,
 		       const std::string& L1b1_table,
+		       const std::string& Swath_to_use = "660-I",
 		       const std::string& Base_directory = ".");
   AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
-   		       const boost::shared_ptr<Camera>& Cam,
+   		       const boost::shared_ptr<MspiCamera>& Cam,
+   		       const boost::shared_ptr<MspiGimbal>& Gim,
    		       const boost::shared_ptr<Dem>& D,
    		       const std::vector<std::string>& L1b1_file_name,
-		       int Reference_row,
+		       const std::string& Swath_to_use = "660-I",
 		       int Dem_resolution = 10,
 		       const std::string& Base_directory = ".");
   %python_attribute(number_image, virtual int);
@@ -45,8 +47,12 @@ public:
     std::string config_value_string(int Index, const std::string& Key) const
     { return $self->config_value<std::string>(Index, Key); }
   }
-  boost::shared_ptr<AirMspiOrbit> orbit(int Index) const;
+  boost::shared_ptr<Orbit> orbit(int Index) const;
+  void set_orbit(const boost::shared_ptr<Orbit>& Orb);
   boost::shared_ptr<MspiCamera> camera(int Index) const;
+  void set_camera(const boost::shared_ptr<MspiCamera>& Can);
+  boost::shared_ptr<MspiGimbal> gimbal(int Index) const;
+  void set_gimbal(const boost::shared_ptr<MspiGimbal>& Gim);
   boost::shared_ptr<TimeTable> time_table(int Index) const;
   int number_band(int Index);
   int band(int Index);
@@ -54,5 +60,8 @@ public:
   int min_l1b1_line(int Index) const;
   int max_l1b1_line(int Index) const;
   int view_number_to_image_index(int View_number) const;
+  void replace_view_config(const std::string& Master_config_file,
+			   const std::string& L1b1_table);
+  %pickle_serialization();
 };
 }

@@ -5,6 +5,14 @@
 
 %{
 #include "orbit.h"
+// #include "geocal_serialize_function.h"
+// #include "geocal_serialize_support.h"
+// #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+// #include <boost/archive/polymorphic_xml_iarchive.hpp>
+// #include <boost/archive/polymorphic_xml_oarchive.hpp>
+// #include <boost/archive/polymorphic_binary_iarchive.hpp>
+// #include <boost/archive/polymorphic_binary_oarchive.hpp>
+// #endif
 %}
 %base_import(generic_object)
 %base_import(observer)
@@ -267,7 +275,7 @@ public:
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const = 0;
-  std::string print_to_string();
+  virtual std::string print_to_string();
   %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
   %python_attribute_with_set_virtual(parameter_with_derivative, 
 			     ArrayAd<double, 1>);
@@ -277,6 +285,29 @@ public:
 			     ArrayAd<double, 1>);
   %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
   %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
+//   %extend {
+//     std::string serialize_base_class() const
+//     {
+// #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+//       std::ostringstream os;
+//       boost::archive::polymorphic_binary_oarchive oa(os);
+//       oa << boost::serialization::make_nvp("Orbit", boost::serialization::base_object<Orbit>(*this));
+//       return os.str();
+// #else
+//       throw GeoCal::Exception("GeoCal was not built with boost::serialization support");
+// #endif
+//     }
+//     void serialize_base_class(const std::string& Data) const
+//     {
+// #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+//       std::istringstream is(Data);
+//       boost::archive::polymorphic_binary_iarchive ia(is);
+//       oa >> boost::serialization::make_nvp("Orbit", boost::serialization::base_object<Orbit>(*this));
+// #else
+//       throw GeoCal::Exception("GeoCal was not built with boost::serialization support");
+// #endif
+//     }
+//   }
 protected:
   void notify_update_do(const Orbit& Self);
   boost::math::quaternion<double> interpolate(
@@ -288,6 +319,86 @@ protected:
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
 	      const AutoDerivative<double>& toffset, double tspace) const;
 };
+
+%{
+#include "geocal_serialize_support.h"
+#include "orbit_wrap.h"
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+
+namespace boost {
+  namespace serialization {
+    template<class Archive>
+    void serialize(Archive& ar, SwigDirector_Orbit& Orb, const unsigned int version) {
+      std::cerr << "In serialize\n";
+      ar & boost::serialization::make_nvp(BOOST_PP_STRINGIZE(Orbit),
+					  boost::serialization::base_object<GeoCal::Orbit>(Orb));
+      std::cerr << "Orb min time: " << Orb.min_time() << "\n";
+    }
+    template<class Archive> 
+    void save_construct_data(Archive & ar, const SwigDirector_Orbit* d, 
+			     const unsigned int version)
+    {
+      PyObject* obj = PyObject_CallMethodObjArgs(d->swig_get_self(),
+			PyString_FromString("__boost_serialize_save__"),
+			NULL);
+      if(PyErr_Occurred()) {
+	GeoCal::Exception e;
+	e << "Python error occurred:\n"
+	  << parse_python_exception();
+	throw e;
+      }
+      std::string python_object = PyString_AsString(obj);
+      ar & GEOCAL_NVP(python_object);
+    }
+    template<class Archive>
+    void load_construct_data(Archive & ar, SwigDirector_Orbit* d,
+			     const unsigned int version)
+    {
+      std::string python_object;
+      ar & GEOCAL_NVP(python_object);
+      PyObject* lis = cpickle_loads(python_object);
+      PyObject* func = PyTuple_GetItem(lis, 0);
+      if(PyErr_Occurred()) {
+	GeoCal::Exception e;
+	e << "Python error occurred:\n"
+	  << parse_python_exception();
+	throw e;
+      }
+      PyObject* arg = PyTuple_GetItem(lis, 1);
+      if(PyErr_Occurred()) {
+	GeoCal::Exception e;
+	e << "Python error occurred:\n"
+	  << parse_python_exception();
+	throw e;
+      }
+      PyObject* obj = PyObject_Call(func, arg, NULL);
+      if(PyErr_Occurred()) {
+	GeoCal::Exception e;
+	e << "Python error occurred:\n"
+	  << parse_python_exception();
+	throw e;
+      }
+      ::new(d)SwigDirector_Orbit(obj);
+    }
+  }
+}
+BOOST_CLASS_EXPORT_KEY(SwigDirector_Orbit);
+BOOST_CLASS_EXPORT_IMPLEMENT(SwigDirector_Orbit);
+ template void boost::serialization::serialize(boost::archive::polymorphic_oarchive& ar, SwigDirector_Orbit& Orb, const unsigned int version);
+ template void boost::serialization::serialize(boost::archive::polymorphic_iarchive& ar, SwigDirector_Orbit& Orb, const unsigned int version);
+template
+
+void boost::serialization::save_construct_data
+(polymorphic_oarchive & ar, const SwigDirector_Orbit* d, 
+ const unsigned int version);
+
+template
+void boost::serialization::load_construct_data
+(polymorphic_iarchive & ar, SwigDirector_Orbit* d, const unsigned int version);
+
+#endif  
+%}
 
 class KeplerOrbit : public Orbit {
 public:

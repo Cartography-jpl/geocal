@@ -13,6 +13,7 @@
 %geocal_shared_ptr(GeoCal::CartesianFixed);
 %geocal_shared_ptr(GeoCal::CartesianInertial);
 %geocal_shared_ptr(GeoCal::LnLookVector);
+%geocal_shared_ptr(GeoCal::LnLookVectorWithDerivative);
 %geocal_shared_ptr(GeoCal::CartesianFixedLookVector);
 
 namespace GeoCal {
@@ -81,8 +82,28 @@ public:
       enu_to_cf(const GroundCoordinate& Ref_pt);
   static LnLookVector solar_look_vector(const Time& T, 
 					const GroundCoordinate& Ref_pt);
-  %pickle_init(1, self.look_vector[0], self.look_vector[1],
-	       self.look_vector[2])
+  %python_attribute(view_azimuth, double)
+  %python_attribute(view_zenith, double)
+  %pickle_serialization();
+};
+
+// Note this is from look_vector.h, but it is placed here to break
+// a circular dependency with swig.
+class LnLookVectorWithDerivative : public GeoCal::LookVector<AutoDerivative<double> > {
+public:
+  LnLookVectorWithDerivative();
+  LnLookVectorWithDerivative(const CartesianFixedLookVectorWithDerivative& Lv, 
+	       const GroundCoordinate& Ref_pt);
+  LnLookVectorWithDerivative(const AutoDerivative<double>& x, 
+			     const AutoDerivative<double>& y, 
+			     const AutoDerivative<double>& z);
+  LnLookVectorWithDerivative(const boost::array<AutoDerivative<double>, 3>& Lv);
+  CartesianFixedLookVectorWithDerivative 
+  to_cf(const GroundCoordinate& Ref_pt) const;
+  std::string print_to_string() const;
+  %python_attribute(view_azimuth, AutoDerivative<double>)
+  %python_attribute(view_zenith, AutoDerivative<double>)
+  %pickle_serialization();
 };
 
 // Handle returns as a argout

@@ -10,7 +10,7 @@ void IgcCollectionOrbitData::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(IgcCollection);
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(IgcCollection, WithParameter);
-  GEOCAL_BASE(IgcCollection, IgcCollection);
+  GEOCAL_BASE(IgcCollectionOrbitData, IgcCollection);
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested);
   ar & GEOCAL_NVP(orb) & GEOCAL_NVP(cam) & GEOCAL_NVP_(dem)
     & GEOCAL_NVP(img_list) & GEOCAL_NVP(tm_list)

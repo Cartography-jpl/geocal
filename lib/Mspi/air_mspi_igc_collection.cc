@@ -5,6 +5,7 @@
 #include "usgs_dem.h"
 #include "simple_dem.h"
 #include "geocal_serialize_support.h"
+#include <boost/lexical_cast.hpp>
 
 using namespace GeoCal;
 
@@ -14,12 +15,16 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IgcCollection);
   GEOCAL_BASE(AirMspiIgcCollection, IgcCollection);
-  ar & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution)
+  GEOCAL_GENERIC_BASE(WithParameterNested);
+  GEOCAL_BASE(AirMspiIgcCollection, WithParameterNested);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested)
+    & GEOCAL_NVP(dem) & GEOCAL_NVP(dem_resolution)
     & GEOCAL_NVP_(camera) 
+    & GEOCAL_NVP_(gimbal) 
     & GEOCAL_NVP_(orbit)
     & GEOCAL_NVP_(view_config)
-    & GEOCAL_NVP_(reference_row)
     & GEOCAL_NVP(base_directory)
+    & GEOCAL_NVP(swath_to_use)
     & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line);
 }
 
@@ -33,19 +38,24 @@ GEOCAL_IMPLEMENT(AirMspiIgcCollection);
 
 AirMspiIgcCollection::AirMspiIgcCollection
 (const boost::shared_ptr<Orbit>& Orb,
- const boost::shared_ptr<Camera>& Cam,
+ const boost::shared_ptr<MspiCamera>& Cam,
+ const boost::shared_ptr<MspiGimbal>& Gim,
  const boost::shared_ptr<Dem>& D,
  const std::vector<std::string>& L1b1_file_name,
- int Reference_row,
+ const std::string& Swath_to_use,
  int Dem_resolution,
  const std::string& Base_directory)
-  : base_directory(Base_directory),
-    camera_(Cam),
-    orbit_(Orb),
-    reference_row_(Reference_row),
-    dem(D),
-    dem_resolution(Dem_resolution)
+  :  dem(D),
+     dem_resolution(Dem_resolution),
+     camera_(Cam),
+     gimbal_(Gim),
+     orbit_(Orb),
+     base_directory(Base_directory),
+     swath_to_use(Swath_to_use)
 {
+  add_object(Cam);
+  add_object(Gim);
+  add_object(Orb);
   BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
     MspiConfigFile vc;
     vc.add("l1b1_file", fname);
@@ -66,41 +76,35 @@ AirMspiIgcCollection::AirMspiIgcCollection
  const std::string& Master_config_file,
  const std::string& Orbit_file_name,
  const std::string& L1b1_table,
+ const std::string& Swath_to_use,
  const std::string& Base_directory
 )
-  : base_directory(Base_directory)
+  : base_directory(Base_directory),
+    swath_to_use(Swath_to_use)
 {
   MspiConfigFile c(Master_config_file);
 
   // Get camera set up
   std::string fname = c.value<std::string>("camera_model_config");
   if(fname[0] != '/')
-    fname = Base_directory + "/" + fname;
+    fname = base_directory + "/" + fname;
   std::string extra_config = "";
   if(c.have_key("extra_camera_model_config")) {
     extra_config = c.value<std::string>("extra_camera_model_config");
     if(extra_config[0] != '/')
-      extra_config = Base_directory + "/" + extra_config;
+      extra_config = base_directory + "/" + extra_config;
   }
   boost::shared_ptr<MspiCamera> mspi_camera(new MspiCamera(fname, extra_config));
+  boost::shared_ptr<MspiGimbal> mspi_gimbal(new MspiGimbal(fname, extra_config));
   camera_ = mspi_camera;
+  gimbal_ = mspi_gimbal;
 
   // Not sure if we still need the "static gimbal", but we don't
   // currently support this. So check, and issue an error if this is
   // requested. We can modify the code to support this if needed.
   if(c.value<bool>("use_static_gimbal"))
     throw Exception("We don't currently support static gimbals");
-  blitz::Array<double, 1> gimbal_angle(3);
-  gimbal_angle = mspi_camera->gimbal_epsilon(),
-    mspi_camera->gimbal_psi(),
-    mspi_camera->gimbal_theta();
-  orbit_.reset(new AirMspiOrbit(Orbit_file_name, gimbal_angle));
-
-  // Get reference row needed by AirMspiTimeTable.
-  fname = c.value<std::string>("instrument_info_config");
-  if(fname[0] != '/')
-    fname = Base_directory + "/" + fname;
-  reference_row_ = AirMspiTimeTable::reference_row_calc(fname);
+  orbit_.reset(new AirMspiOrbit(Orbit_file_name, mspi_gimbal));
 
   // Get DEM set up
   if(c.value<std::string>("dem_type") == "usgs") {
@@ -115,6 +119,31 @@ AirMspiIgcCollection::AirMspiIgcCollection
     dem_resolution = 10.0;
   }
 
+  replace_view_config(Master_config_file, L1b1_table);
+
+  add_object(camera_);
+  add_object(gimbal_);
+  add_object(orbit_);
+}
+
+//-----------------------------------------------------------------------
+/// There is various metadata needed by the airmspi programs that is
+/// only available once a master config and l1b1_table file are
+/// created. This is created as part of AirMspiMapInfoProcessor (a
+/// python class found in the MSPI-Ground software, not here in
+/// GeoCal). We need to be able to add in this metadata to an existing 
+/// IgcCollection. This function does this. Because we may also have
+/// direction to process only a subset of the data, this also
+/// recalculates the minimum and maximum L1B1 lines to use.
+//-----------------------------------------------------------------------
+
+void AirMspiIgcCollection::replace_view_config
+(const std::string& Master_config_file,
+ const std::string& L1b1_table)
+{
+  view_config_.clear();
+  MspiConfigFile c(Master_config_file);
+
   // Set up view information
   MspiConfigFile vconfig(L1b1_table);
   MspiConfigTable vtab(vconfig, "L1B1");
@@ -124,7 +153,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
       std::string fname = vtab.value<std::string>(i, "extra_config_file");
       if(fname != "-") {
 	if(fname[0] != '/')
-	  fname = Base_directory + "/" + fname;
+	  fname = base_directory + "/" + fname;
 	vc.add_file(fname);
       }
     }
@@ -138,6 +167,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
   calc_min_max_l1b1_line();
 }
 
+
 //-----------------------------------------------------------------------
 /// Go through and fill in min and max l1b1 lines that we need to read
 /// the l1b1 file for.
@@ -145,7 +175,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
 void AirMspiIgcCollection::calc_min_max_l1b1_line()
 {
   for(int i = 0; i < number_image(); ++i) {
-    AirMspiTimeTable tt(l1b1_file_name(i), reference_row_);
+    AirMspiTimeTable tt(l1b1_file_name(i), swath_to_use);
     view_config_[i].add("l1b1_granule_id", tt.l1b1_granule_id());
     int min_ln = tt.min_line();
     int max_ln = tt.max_line();
@@ -186,11 +216,11 @@ AirMspiIgcCollection::air_mspi_igc(int Image_index) const
   if(!igc[Image_index]) {
     igc[Image_index].reset(new AirMspiIgc(orbit_,
 					  camera_,
+					  gimbal_,
 					  dem,
 					  l1b1_file_name(Image_index), 
-					  reference_row_,
-					  0,
-					  "Image",
+					  swath_to_use,
+					  "Image " + boost::lexical_cast<std::string>(Image_index),
 					  dem_resolution));
   }
   return igc[Image_index];
@@ -207,7 +237,28 @@ AirMspiIgcCollection::subset(const std::vector<int>& Index_set) const
 // see base class for description.
 void AirMspiIgcCollection::print(std::ostream& Os) const 
 {
+  OstreamPad opad(Os, "    ");  
   Os << "AirMspiIgcCollection:\n";
+  Os << "  Dem:\n";
+  opad << *dem;
+  opad.strict_sync();
+  Os << "  Dem resolution: " << dem_resolution << "\n"
+     << "  Camera:\n";
+  opad << *camera_;
+  opad.strict_sync();
+  Os << "  Gimbal:\n";
+  opad << *gimbal_;
+  opad.strict_sync();
+  Os << "  Orbit:\n";
+  opad << *orbit_;
+  opad.strict_sync();
+  Os << "  Base directory: " << base_directory << "\n"
+     << "  Swath to use: " << swath_to_use << "\n"
+     << "  Parameter:\n";
+  blitz::Array<double, 1> p = parameter_subset();
+  std::vector<std::string> pname = parameter_name_subset();
+  for(int i = 0; i < p.rows(); ++i)
+    Os << "    " << pname[i] << ": " << p(i) << "\n";
 }
 
 
@@ -231,9 +282,10 @@ AirMspiIgcCollection::AirMspiIgcCollection
   dem = Original.dem;
   dem_resolution = Original.dem_resolution;
   camera_ = Original.camera_;
+  gimbal_ = Original.gimbal_;
   orbit_ = Original.orbit_;
-  reference_row_ = Original.reference_row_;
   base_directory = Original.base_directory;
+  swath_to_use = Original.swath_to_use;
   BOOST_FOREACH(int i, Index_set) {
     view_config_.push_back(MspiConfigFile(Original.view_config_[i]));
     min_l1b1_line_.push_back(Original.min_l1b1_line_[i]);

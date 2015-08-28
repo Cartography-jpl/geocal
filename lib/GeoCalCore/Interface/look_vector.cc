@@ -1,11 +1,95 @@
 #include "look_vector.h"
 #include "geocal_exception.h"
 #include "ground_coordinate.h"
+#include "geocal_serialize_support.h"
 #include "ecr.h"
 #include "constant.h"
 #include <cmath>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void ScLookVector::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ScLookVector);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void ScLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ScLookVectorWithDerivative);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void CartesianInertialLookVector::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(CartesianInertialLookVector);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void CartesianInertialLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(CartesianInertialLookVectorWithDerivative);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void CartesianFixedLookVector::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(CartesianFixedLookVector);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void CartesianFixedLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(CartesianFixedLookVectorWithDerivative);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void LnLookVector::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(LnLookVector);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void LnLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(LnLookVectorWithDerivative);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void DcsLookVector::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(DcsLookVector);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+template<class Archive>
+void DcsLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(DcsLookVectorWithDerivative);
+  ar & GEOCAL_NVP(look_vector);
+}
+
+GEOCAL_IMPLEMENT(ScLookVector);
+GEOCAL_IMPLEMENT(ScLookVectorWithDerivative);
+GEOCAL_IMPLEMENT(CartesianInertialLookVector);
+GEOCAL_IMPLEMENT(CartesianInertialLookVectorWithDerivative);
+GEOCAL_IMPLEMENT(CartesianFixedLookVector);
+GEOCAL_IMPLEMENT(CartesianFixedLookVectorWithDerivative);
+GEOCAL_IMPLEMENT(LnLookVector);
+GEOCAL_IMPLEMENT(LnLookVectorWithDerivative);
+GEOCAL_IMPLEMENT(DcsLookVector);
+GEOCAL_IMPLEMENT(DcsLookVectorWithDerivative);
+#endif
 
 //-----------------------------------------------------------------------
 /// Print to given stream.
@@ -86,6 +170,18 @@ void CartesianFixedLookVectorWithDerivative::print(std::ostream& Os) const
 void LnLookVector::print(std::ostream& Os) const
 {
   boost::array<double, 3> d = direction();
+  Os << "Look vector in local north coordinates: \n"
+     << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
+     << "  length: " << length() << " m\n";
+}
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+void LnLookVectorWithDerivative::print(std::ostream& Os) const
+{
+  boost::array<AutoDerivative<double>, 3> d = direction();
   Os << "Look vector in local north coordinates: \n"
      << "  dir:    (" << d[0] << ", " << d[1] << ", " << d[2] << ")\n"
      << "  length: " << length() << " m\n";

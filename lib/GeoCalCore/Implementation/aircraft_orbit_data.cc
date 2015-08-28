@@ -59,6 +59,21 @@ void AircraftOrbitData::initialize(const Time& Tm,
 // identical to Applanix, but they are pretty similar with navigation data.
 //-----------------------------------------------------------------------
 
+// Pretty sure about the order here, this seems to be the standard
+// order used by aircrafts.
+
+  boost::math::quaternion<double> body_to_local_north = 
+    quat_rot("ZYX", Heading * Constant::deg_to_rad, 
+	     Pitch * Constant::deg_to_rad, Roll * Constant::deg_to_rad);
+  boost::math::quaternion<double> body_to_ecr =
+    local_north_to_ecr() * body_to_local_north;
+  
+  QuaternionOrbitData::initialize(Tm, Position.convert_to_cf(), 
+				  Vel_fixed, body_to_ecr);
+}
+
+boost::math::quaternion<double> AircraftOrbitData::local_north_to_ecr() const
+{
 //-----------------------------------------------------------------------
 // Determine aircraft coordinates z axis, which is in vertical direction,
 // pointed downward. Also, determine S/N and E/W direction, This
@@ -108,7 +123,7 @@ void AircraftOrbitData::initialize(const Time& Tm,
     latitude = position_geodetic_.latitude();
     longitude = position_geodetic_.longitude();
   } else {
-    Geocentric pos_geoc(Position);
+    Geocentric pos_geoc(position_geodetic_);
     latitude = pos_geoc.latitude();
     longitude = pos_geoc.longitude();
   }
@@ -131,19 +146,32 @@ void AircraftOrbitData::initialize(const Time& Tm,
   m[0][0] = m[1][1] * m[2][2] - m[2][1] * m[1][2];
   m[1][0] = m[2][1] * m[0][2] - m[0][1] * m[2][2];
   m[2][0] = m[0][1] * m[1][2] - m[1][1] * m[0][2];
-  boost::math::quaternion<double> local_north_to_ecr = matrix_to_quaternion(m);
+  return matrix_to_quaternion(m);
+}
 
-// Pretty sure about the order here, this seems to be the standard
-// order used by aircrafts.
+//-----------------------------------------------------------------------
+/// Convert a more general QuaternionOrbitData to a
+/// AircraftOrbitData. This is useful if you want to report things
+/// in terms of aircraft heading etc., but didn't get the original
+/// navigation data in that format.
+//-----------------------------------------------------------------------
 
-  boost::math::quaternion<double> body_to_local_north = 
-    quat_rot("ZYX", Heading * Constant::deg_to_rad, 
-	     Pitch * Constant::deg_to_rad, Roll * Constant::deg_to_rad);
-  boost::math::quaternion<double> body_to_ecr;
-  body_to_ecr = local_north_to_ecr * body_to_local_north;
-  
-  QuaternionOrbitData::initialize(Tm, Position.convert_to_cf(), 
-				  Vel_fixed, body_to_ecr);
+AircraftOrbitData::AircraftOrbitData
+(const QuaternionOrbitData& Od,
+ VerticalDefinition V)
+: vertical_definition_(V)
+{
+  boost::math::quaternion<double> body_to_ecr = Od.sc_to_cf();
+  position_geodetic_ = *Od.position_cf();
+  boost::math::quaternion<double> body_to_local_north =
+    conj(local_north_to_ecr()) * body_to_ecr;
+  quat_to_euler(body_to_local_north, heading_, pitch_, roll_);
+  heading_ *= Constant::rad_to_deg;
+  pitch_ *= Constant::rad_to_deg;
+  roll_ *= Constant::rad_to_deg;
+  QuaternionOrbitData::initialize(Od.time(), 
+				  Od.position_cf(),
+				  Od.velocity_cf(), body_to_ecr);
 }
 
 //-----------------------------------------------------------------------

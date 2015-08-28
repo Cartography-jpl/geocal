@@ -46,7 +46,9 @@ def test_time():
         igc_coll.orbit.insert_time_point(tm)
         parameter_true.extend([100,4 + 0.1 * i, 3 - 0.1 * i])
 
-    igc_coll.fit_position = False
+    igc_coll.fit_position_x = False
+    igc_coll.fit_position_y = False
+    igc_coll.fit_position_z = False
     igc_coll.fit_yaw = False
     nl = igc_coll.camera.number_line(0)
     ns = igc_coll.camera.number_sample(0)

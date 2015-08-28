@@ -137,8 +137,8 @@ class CcorrLsmMatcher(geocal_swig.image_matcher.ImageMatcher):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(const boost::shared_ptr< CcorrMatcher > &Ccorr, const
-        boost::shared_ptr< LsmMatcher > &Lsm, bool Accept_ccorr_only=false)
+        GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(const boost::shared_ptr< ImageMatcher > &Ccorr, const
+        boost::shared_ptr< ImageMatcher > &Lsm, bool Accept_ccorr_only=false)
         Constructor.
 
         This takes the CcorrMatcher and LsmMatcher, which allows you to use
@@ -153,7 +153,7 @@ class CcorrLsmMatcher(geocal_swig.image_matcher.ImageMatcher):
         _ccorr_lsm_matcher.CcorrLsmMatcher_swiginit(self,_ccorr_lsm_matcher.new_CcorrLsmMatcher(*args))
     def _v_ccorr_matcher(self):
         """
-        boost::shared_ptr<CcorrMatcher> GeoCal::CcorrLsmMatcher::ccorr_matcher_ptr() const
+        boost::shared_ptr<ImageMatcher> GeoCal::CcorrLsmMatcher::ccorr_matcher_ptr() const
 
         """
         return _ccorr_lsm_matcher.CcorrLsmMatcher__v_ccorr_matcher(self)
@@ -164,7 +164,7 @@ class CcorrLsmMatcher(geocal_swig.image_matcher.ImageMatcher):
 
     def _v_lsm_matcher(self):
         """
-        boost::shared_ptr<LsmMatcher> GeoCal::CcorrLsmMatcher::lsm_matcher_ptr() const
+        boost::shared_ptr<ImageMatcher> GeoCal::CcorrLsmMatcher::lsm_matcher_ptr() const
 
         """
         return _ccorr_lsm_matcher.CcorrLsmMatcher__v_lsm_matcher(self)
@@ -191,12 +191,8 @@ class CcorrLsmMatcher(geocal_swig.image_matcher.ImageMatcher):
     def accept_ccorr_only(self):
         return self._v_accept_ccorr_only()
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.ccorr_matcher,self.lsm_matcher,self.accept_ccorr_only)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ccorr_lsm_matcher.delete_CcorrLsmMatcher
 CcorrLsmMatcher._v_ccorr_matcher = new_instancemethod(_ccorr_lsm_matcher.CcorrLsmMatcher__v_ccorr_matcher,None,CcorrLsmMatcher)

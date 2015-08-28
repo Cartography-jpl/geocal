@@ -59,6 +59,8 @@ BOOST_AUTO_TEST_CASE(generate_rpc_test)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   Rpc rpc;
+  rpc.error_bias = 0;
+  rpc.error_random = 0;
   rpc.rpc_type = Rpc::RPC_B;
   rpc.line_offset = 2881;
   rpc.line_scale = 2921;
@@ -245,6 +247,8 @@ BOOST_AUTO_TEST_CASE(inverse_fails)
   // more detail and see what it is going on here.
 
   Rpc rpc;
+  rpc.error_bias = 0;
+  rpc.error_random = 0;
   rpc.rpc_type = Rpc::RPC_B;
   rpc.line_offset = 23669;
   rpc.line_scale = 23670;
@@ -317,6 +321,8 @@ BOOST_AUTO_TEST_CASE(serialize)
   if(!have_serialize_supported())
     return;
   boost::shared_ptr<Rpc> rpc(new Rpc());
+  rpc->error_bias = 0;
+  rpc->error_random = 0;
   rpc->rpc_type = Rpc::RPC_B;
   rpc->line_offset = 2881;
   rpc->line_scale = 2921;

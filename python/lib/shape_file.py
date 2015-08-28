@@ -1,10 +1,18 @@
-import ogr
-import osr
+try:
+    # Depending of the build options, this might be missing. Just skip 
+    # ShapeFile if we don't have this.
+    import ogr
+    import osr
+    have_shape_file = True
+except ImportError:
+    have_shape_file = False
+
 import os.path
 import collections
 import weakref
 
-class ShapeFile(collections.Mapping):
+if(have_shape_file):
+  class ShapeFile(collections.Mapping):
     '''library OGR. You can see supported formats at 
     http://gdal.org/ogr/ogr_formats.html. This only supports a subset of the
     available functions, but it gives a simpler interface. You can also just
@@ -48,7 +56,7 @@ class ShapeFile(collections.Mapping):
 
     def __iter__(self):
         return self.layers.__iter__()
-    
+
     def __getitem__(self, key):
         return self.layers.__getitem__(key)
 
@@ -65,10 +73,10 @@ class ShapeFile(collections.Mapping):
         '''Add a layer of the given geometry type with the given fields.
 
         For example:
-          t.add_layer("out", ogr.wkbPolygon,
-             [["File", ogr.OFTString, 100],
-             ["Row", ogr.OFTInteger],])
-   
+            t.add_layer("out", ogr.wkbPolygon,
+                [["File", ogr.OFTString, 100],
+                ["Row", ogr.OFTInteger],])
+
         Each field has a name, type, optionally a width, and optionally a
         precision.
 
@@ -86,7 +94,7 @@ class ShapeFile(collections.Mapping):
         self.layers[lay.name] = lay
         return lay
 
-class ShapeLayer(collections.Sequence):
+  class ShapeLayer(collections.Sequence):
     '''This class handles access to a single layers in a Shapefile.'''
     def __init__(self, shape_file, index):
         '''Create ShapeLayer for given ShapeFile and index. This isn't 

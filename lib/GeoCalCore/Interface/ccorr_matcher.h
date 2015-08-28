@@ -79,8 +79,13 @@ private:
   int template_number_line_;
   int template_number_sample_;
   mutable blitz::Array<int, 2> templ, target;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(CcorrMatcher);
 #endif
 

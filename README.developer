@@ -172,14 +172,19 @@ License for this is a HDF 5 specific license, which is BSD like.
 Libsdx (Included)
 -----------------
 
-Surprisingly, I couldn't find any "standard" libraries that support 
-R*-trees. This is a small library that has a template library to 
-support R*-trees. This has very "boost" feel, but it isn't actually part
-of the boost library. You can read more about this library at
-http://www.virtualroadside.com/blog/index.php/2008/10/04/r-tree-implementation-for-cpp/, the actual code comes from https://roadnav.svn.sourceforge.net/svnroot/roadnav/libsdbx/trunk.
+Surprisingly, when I initially looked for it I couldn't find any
+"standard" libraries that support R*-trees. This is a small library
+that has a template library to support R*-trees. This has very "boost"
+feel, but it isn't actually part of the boost library. You can read
+more about this library at
+http://www.virtualroadside.com/blog/index.php/2008/10/04/r-tree-implementation-for-cpp/,
+the actual code comes from
+https://roadnav.svn.sourceforge.net/svnroot/roadnav/libsdbx/trunk.
 
-This library can be replaced with a R*-tree library if we happen to find 
-one (e.g., a library gets added to boost).
+Note that boost now has a library "geometry" that looks like it includes a 
+R*-tree (as of version 1.47 of boost). We haven't changed our code to use
+the boost library, there isn't any compelling reason to do so now. But if
+Libsdx ever becomes an issue we can consider switching to boost. 
 
 The library is LGPL
 

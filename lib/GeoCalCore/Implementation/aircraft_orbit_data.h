@@ -46,6 +46,9 @@ public:
 		    double Roll, double Pitch,
 		    double Heading,
 		    VerticalDefinition V = GEODETIC_VERTICAL);
+  AircraftOrbitData(const QuaternionOrbitData& Od,
+		    VerticalDefinition V = GEODETIC_VERTICAL);
+
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -98,6 +101,7 @@ private:
   double roll_, pitch_, heading_;
   VerticalDefinition vertical_definition_;
   Geodetic position_geodetic_;
+  boost::math::quaternion<double> local_north_to_ecr() const;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

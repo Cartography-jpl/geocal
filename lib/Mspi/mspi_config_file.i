@@ -27,6 +27,8 @@ public:
     { return $self->value<int>(Key); }
     std::string value_string(const std::string& Key) const
     { return $self->value<std::string>(Key); }
+    bool value_bool(const std::string& Key) const
+    { return $self->value<bool>(Key); }
   }
   std::string print_to_string() const;
   %pickle_serialization();

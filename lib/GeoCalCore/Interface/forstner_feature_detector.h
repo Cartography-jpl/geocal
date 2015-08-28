@@ -70,8 +70,13 @@ private:
   /// Threshold for detecting points.
 
   double weight_threshold_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(ForstnerFeatureDetector);
 #endif
 

@@ -13,7 +13,7 @@ BOOST_AUTO_TEST_CASE(chain_test)
     igc(test_data_dir() + "/mspi/3.master.config", 
 	test_data_dir() + "/mspi/3.nav_gimbal.hdf4",
 	test_data_dir() + "/mspi/3.l1b1.hdf5",
-	1, 
+	"660-I", 
 	test_data_dir() + "/mspi");
 #else
   BOOST_WARN_MESSAGE(false, "Skipping AirMspiIgc test, because we haven't build ith MSPI_SHARED support");
@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(serialization)
     igc(new AirMspiIgc(test_data_dir() + "/mspi/3.master.config", 
 		       test_data_dir() + "/mspi/3.nav_gimbal.hdf4",
 		       test_data_dir() + "/mspi/3.l1b1.hdf5",
-		       1, 
+		       "660-I", 
 		       test_data_dir() + "/mspi"));
   std::string d = serialize_write_string(igc);
   if(false)

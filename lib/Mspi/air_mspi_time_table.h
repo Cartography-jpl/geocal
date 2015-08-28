@@ -1,5 +1,6 @@
 #ifndef AIR_MSPI_TIME_TABLE_H
 #define AIR_MSPI_TIME_TABLE_H
+#include "air_mspi_l1b1.h"
 #include "time_table.h"
 
 namespace GeoCal {
@@ -10,32 +11,30 @@ namespace GeoCal {
 class AirMspiTimeTable : public MeasuredTimeTable {
 public:
   AirMspiTimeTable(const std::string& L1b1_file_name, 
-		   const std::string& Instrument_config_file_name);
-  AirMspiTimeTable(const std::string& L1b1_file_name, 
-		   int Reference_row);
+		   const std::string& Swath_to_use = "660-I");
   virtual ~AirMspiTimeTable() {}
   virtual void print(std::ostream& Os) const;
-  int reference_row() const { return refrow; }
 
 //-----------------------------------------------------------------------
 /// The file name we are using.
 //-----------------------------------------------------------------------
 
-  const std::string& l1b1_file_name() const { return l1b1_file_name_; }
+  std::string l1b1_file_name() const { return l1b1_file_->file_name(); }
 
 //-----------------------------------------------------------------------
 /// The file granule id we are using.
 //-----------------------------------------------------------------------
 
-  const std::string& l1b1_granule_id() const { return l1b1_granule_id_; }
+  std::string l1b1_granule_id() const { return l1b1_file_->granule_id(); }
 
-  static int 
-  reference_row_calc(const std::string& Instrument_config_file_name);
- 
+//-----------------------------------------------------------------------
+/// Underlying L1b1File.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<AirMspiL1b1File>& l1b1_file() const 
+  { return l1b1_file_; } 
 private:
-  std::string l1b1_file_name_;
-  std::string l1b1_granule_id_;
-  int refrow;
+  boost::shared_ptr<AirMspiL1b1File> l1b1_file_;
   void read_data();
   AirMspiTimeTable() {}
   friend class boost::serialization::access;

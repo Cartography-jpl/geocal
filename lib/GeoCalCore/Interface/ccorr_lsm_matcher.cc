@@ -1,5 +1,22 @@
 #include "ccorr_lsm_matcher.h"
+#include "geocal_serialize_support.h"
+#include "ostream_pad.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void CcorrLsmMatcher::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ImageMatcher);
+  GEOCAL_BASE(CcorrLsmMatcher, ImageMatcher);
+  ar & GEOCAL_NVP_(accept_ccorr_only)
+    & GEOCAL_NVP_(ccorr_matcher)
+    & GEOCAL_NVP_(lsm_matcher);
+}
+
+
+GEOCAL_IMPLEMENT(CcorrLsmMatcher);
+#endif
 
 //-----------------------------------------------------------------------
 /// Match a point found in the reference image with a point in the new
@@ -49,9 +66,14 @@ void CcorrLsmMatcher::match_mask
 
 void CcorrLsmMatcher::print(std::ostream& Os) const
 {
+  OstreamPad opad(Os, "    ");
   Os << "Cross correlation + least squares matcher:\n"
      << "  Accept Ccorr only: " << (accept_ccorr_only_ ? "true" : "false") 
      << "\n"
-     << "  Cross correlation matcher: \n" << *ccorr_matcher_
-     << "  Least squares matcher:\n" << *lsm_matcher_;
+     << "  Cross correlation matcher: \n";
+  opad << *ccorr_matcher_;
+  opad.strict_sync();
+  Os << "  Least squares matcher:\n";
+  opad << *lsm_matcher_;
+  opad.strict_sync();
 }

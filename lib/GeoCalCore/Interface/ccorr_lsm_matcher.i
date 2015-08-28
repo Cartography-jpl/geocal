@@ -15,8 +15,8 @@ namespace GeoCal {
 class CcorrLsmMatcher: public ImageMatcher {
 public:
   CcorrLsmMatcher(bool Accept_ccorr_only = false);
-  CcorrLsmMatcher(const boost::shared_ptr<CcorrMatcher> Ccorr,
-		  const boost::shared_ptr<LsmMatcher> LsmMatcher,
+  CcorrLsmMatcher(const boost::shared_ptr<ImageMatcher> Ccorr,
+		  const boost::shared_ptr<ImageMatcher> LsmMatcher,
 		  bool Accept_ccorr_only = false);
   virtual void match_mask(const RasterImage& Ref, 
 			  const ImageMask& Ref_mask,
@@ -28,12 +28,11 @@ public:
 			  double &OUTPUT, double &OUTPUT,
 			  bool &OUTPUT, int *OUTPUT) const;
   %python_attribute2(ccorr_matcher, ccorr_matcher_ptr, 
-		     boost::shared_ptr<CcorrMatcher>)
+		     boost::shared_ptr<ImageMatcher>)
   %python_attribute2(lsm_matcher, lsm_matcher_ptr, 
-		     boost::shared_ptr<LsmMatcher>)
+		     boost::shared_ptr<ImageMatcher>)
   %python_attribute(accept_ccorr_only, bool)
-  %pickle_init(1, self.ccorr_matcher, self.lsm_matcher, 
-	       self.accept_ccorr_only)
+  %pickle_serialization();
 };
 }
 

@@ -60,6 +60,8 @@ BOOST_AUTO_TEST_CASE(vicar_label)
   std::string fname = "test_out/vicar_copy.img";
   VicarRasterImage r(fname, 1, VicarFile::UPDATE);
   Rpc rpc;
+  rpc.error_bias = 0;
+  rpc.error_random = 0;
   rpc.rpc_type = Rpc::RPC_B;
   rpc.line_offset = 2881;
   rpc.line_scale = 2921;

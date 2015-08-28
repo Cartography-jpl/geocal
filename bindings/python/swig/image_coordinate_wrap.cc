@@ -4036,6 +4036,52 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "geocal_serialize_function.h"
+#include "geocal_exception.h"
+// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
+std::string parse_python_exception();
+
+
+//--------------------------------------------------------------
+/// Support routines for calling cPickle.dumps from C
+//--------------------------------------------------------------
+
+inline PyObject* cpickle_module()
+{
+  static PyObject* mod = 0;
+  if(!mod)
+    mod = PyImport_ImportModule("cPickle");
+  return mod;
+}
+
+inline std::string cpickle_dumps(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(cpickle_module(),
+					     PyString_FromString("dumps"),
+					     obj, NULL);
+  if(PyErr_Occurred()) {
+    GeoCal::Exception e;
+    e << "Python error occurred:\n"
+      << parse_python_exception();
+    throw e;
+  }
+  return std::string(PyString_AsString(res));
+}
+
+inline PyObject* cpickle_loads(const std::string& S)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(cpickle_module(),
+					     PyString_FromString("loads"),
+					     PyString_FromString(S.c_str()), 
+					     NULL);
+  if(PyErr_Occurred()) {
+    GeoCal::Exception e;
+    e << "Python error occurred:\n"
+      << parse_python_exception();
+    throw e;
+  }
+  return res;
+}
+
 
 
 namespace swig {  
@@ -5059,6 +5105,9 @@ namespace swig
 #ifndef DO_IMPORT_ARRAY
 #define NO_IMPORT_ARRAY
 #endif
+// We don't use the deprecated api that was removed in 1.7, so tell
+// numpy not to complain about this.
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 #include "geocal_exception.h"
 
@@ -5127,28 +5176,28 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
 template<class T, int D> inline blitz::Array<T, D> 
   to_blitz_array(PyObject* numpy)
 {
-  if(PyArray_NDIM(numpy) != D) {
-    std::cerr << PyArray_NDIM(numpy) << "\n"
+  if(PyArray_NDIM((PyArrayObject *) numpy) != D) {
+    std::cerr << PyArray_NDIM((PyArrayObject *) numpy) << "\n"
 	      << D << "\n";
     throw 
       GeoCal::Exception("Dimension of array is not the expected size");
   }
-  if(PyArray_TYPE(numpy) != type_to_npy<T>()) {
+  if(PyArray_TYPE((PyArrayObject *) numpy) != type_to_npy<T>()) {
     throw 
       GeoCal::Exception("Type of array not the expected type");
   }
   blitz::TinyVector<int, D> shape, stride;
   for(int i = 0; i < D; ++i) {
-    shape(i) = PyArray_DIM(numpy, i);
+    shape(i) = PyArray_DIM((PyArrayObject *) numpy, i);
     // Note numpy stride is in terms of bytes, while blitz in in terms
     // of type T.
-    stride(i) = PyArray_STRIDE(numpy, i) / sizeof(T);
-    if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE(numpy, i)) {
+    stride(i) = PyArray_STRIDE((PyArrayObject *) numpy, i) / sizeof(T);
+    if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE((PyArrayObject *) numpy, i)) {
       throw 
 	GeoCal::Exception("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
     }
   }
-  return blitz::Array<T, D>((T*)PyArray_DATA(numpy), shape, stride, 
+  return blitz::Array<T, D>((T*)PyArray_DATA((PyArrayObject *) numpy), shape, stride, 
 			    blitz::neverDeleteData);
 }
 
@@ -7430,6 +7479,52 @@ SWIGINTERN PyObject *_wrap_ImageCoordinateWithDerivative_sample_get(PyObject *SW
   {
     boost::shared_ptr< const GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr< const GeoCal::AutoDerivative<double> >(result SWIG_NO_NULL_DELETER_0);
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ImageCoordinateWithDerivative_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageCoordinateWithDerivative *arg1 = (GeoCal::ImageCoordinateWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::ImageCoordinate result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageCoordinateWithDerivative_value" "', argument " "1"" of type '" "GeoCal::ImageCoordinateWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageCoordinateWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinateWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageCoordinateWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::ImageCoordinateWithDerivative const *)arg1)->value();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -11907,6 +12002,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ImageCoordinateWithDerivative_line_get", (PyCFunction)_wrap_ImageCoordinateWithDerivative_line_get, METH_O, NULL},
 	 { (char *)"ImageCoordinateWithDerivative_sample_set", _wrap_ImageCoordinateWithDerivative_sample_set, METH_VARARGS, NULL},
 	 { (char *)"ImageCoordinateWithDerivative_sample_get", (PyCFunction)_wrap_ImageCoordinateWithDerivative_sample_get, METH_O, NULL},
+	 { (char *)"ImageCoordinateWithDerivative_value", (PyCFunction)_wrap_ImageCoordinateWithDerivative_value, METH_O, (char *)"\n"
+		"ImageCoordinate GeoCal::ImageCoordinateWithDerivative::value() const\n"
+		"Strip off derivative information and return ImageCoordinate. \n"
+		""},
 	 { (char *)"ImageCoordinateWithDerivative___str__", (PyCFunction)_wrap_ImageCoordinateWithDerivative___str__, METH_O, NULL},
 	 { (char *)"delete_ImageCoordinateWithDerivative", (PyCFunction)_wrap_delete_ImageCoordinateWithDerivative, METH_O, (char *)"\n"
 		"virtual GeoCal::ImageCoordinateWithDerivative::~ImageCoordinateWithDerivative()\n"

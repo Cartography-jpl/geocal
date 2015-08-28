@@ -147,8 +147,9 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
 import geocal_swig.geocal_time
-class TimeTable(geocal_swig.generic_object.GenericObject):
+class TimeTable(geocal_swig.with_parameter.WithParameter):
     """
     This class is used to relate time to image line number and vice versa.
 
@@ -236,6 +237,50 @@ class TimeTable(geocal_swig.generic_object.GenericObject):
     def max_time(self):
         return self._v_max_time()
 
+    @property
+    def parameter(self):
+        return self._v_parameter()
+
+    @parameter.setter
+    def parameter(self, value):
+      self._v_parameter(value)
+
+    @property
+    def parameter_with_derivative(self):
+        return self._v_parameter_with_derivative()
+
+    @parameter_with_derivative.setter
+    def parameter_with_derivative(self, value):
+      self._v_parameter_with_derivative(value)
+
+    @property
+    def parameter_name(self):
+        return self._v_parameter_name()
+
+    @property
+    def parameter_subset(self):
+        return self._v_parameter_subset()
+
+    @parameter_subset.setter
+    def parameter_subset(self, value):
+      self._v_parameter_subset(value)
+
+    @property
+    def parameter_with_derivative_subset(self):
+        return self._v_parameter_with_derivative_subset()
+
+    @parameter_with_derivative_subset.setter
+    def parameter_with_derivative_subset(self, value):
+      self._v_parameter_with_derivative_subset(value)
+
+    @property
+    def parameter_name_subset(self):
+        return self._v_parameter_name_subset()
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
+
     __swig_destroy__ = _time_table.delete_TimeTable
 TimeTable.image_coordinate = new_instancemethod(_time_table.TimeTable_image_coordinate,None,TimeTable)
 TimeTable.image_coordinate_with_derivative = new_instancemethod(_time_table.TimeTable_image_coordinate_with_derivative,None,TimeTable)
@@ -245,6 +290,10 @@ TimeTable._v_min_line = new_instancemethod(_time_table.TimeTable__v_min_line,Non
 TimeTable._v_max_line = new_instancemethod(_time_table.TimeTable__v_max_line,None,TimeTable)
 TimeTable._v_min_time = new_instancemethod(_time_table.TimeTable__v_min_time,None,TimeTable)
 TimeTable._v_max_time = new_instancemethod(_time_table.TimeTable__v_max_time,None,TimeTable)
+TimeTable._v_parameter = new_instancemethod(_time_table.TimeTable__v_parameter,None,TimeTable)
+TimeTable._v_parameter_with_derivative = new_instancemethod(_time_table.TimeTable__v_parameter_with_derivative,None,TimeTable)
+TimeTable._v_parameter_subset = new_instancemethod(_time_table.TimeTable__v_parameter_subset,None,TimeTable)
+TimeTable._v_parameter_with_derivative_subset = new_instancemethod(_time_table.TimeTable__v_parameter_with_derivative_subset,None,TimeTable)
 TimeTable.__str__ = new_instancemethod(_time_table.TimeTable___str__,None,TimeTable)
 TimeTable_swigregister = _time_table.TimeTable_swigregister
 TimeTable_swigregister(TimeTable)

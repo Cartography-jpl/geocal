@@ -59,6 +59,21 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
+/// parameters.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_parm(int Image_index, const CartesianFixed& Gc) 
+    const
+  { return image_ground_connection(Image_index)->image_coordinate_jac_parm(Gc); }
+
+
+virtual blitz::Array<double, 2> 
+image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed& Gc,
+			     const blitz::Array<double, 1> Pstep) const;
+
+//-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
 /// X, Y, and Z components of the CartesianFixed ground location. 
 //-----------------------------------------------------------------------
 
@@ -66,6 +81,18 @@ public:
   image_coordinate_jac_cf(int Image_index, const CartesianFixed& Gc) 
     const
   { return image_ground_connection(Image_index)->image_coordinate_jac_cf(Gc); }
+
+//-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
+/// X, Y, and Z components of the CartesianFixed ground location.
+/// Calculated as a finite difference with the given step size.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_cf_fd(int Image_index, const CartesianFixed& Gc,
+			     double Step_size) 
+    const
+  { return image_ground_connection(Image_index)->image_coordinate_jac_cf_fd(Gc, Step_size); }
 
 //-----------------------------------------------------------------------
 /// Title that we can use to describe the image. This can be any

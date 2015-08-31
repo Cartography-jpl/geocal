@@ -52,8 +52,18 @@ public:
   virtual ImageCoordinate image_coordinate(int Image_index,
 					   const GroundCoordinate& Gc) 
     const;
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_parm(int Image_index, const CartesianFixed& Gc) 
+    const;
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed& Gc,
+			       const blitz::Array<double, 1> Pstep) const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(int Image_index,
 					  const CartesianFixed& Gc) const;
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_cf_fd(int Image_index, const CartesianFixed& Gc,
+			     double Step_size) 
+    const;
   virtual std::string title(int Image_index) const;
   virtual boost::shared_ptr<RasterImage> image(int Image_index) const;
   virtual boost::shared_ptr<ImageGroundConnection> 

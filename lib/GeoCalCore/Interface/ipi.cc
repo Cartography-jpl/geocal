@@ -363,9 +363,11 @@ void Ipi::time_with_derivative
     IpiEq(const boost::shared_ptr<Camera>& Cam,
 	  const boost::shared_ptr<Orbit>& Orb,
 	  const boost::shared_ptr<CartesianFixed> P,
+	  const boost::array<AutoDerivative<double>, 3>& P_with_der,
 	  Time Tmin,
 	  int Band)
-      : cam(Cam), orb(Orb), p(P), band(Band), tmin(Tmin)
+      : cam(Cam), orb(Orb), p(P), p_with_der(P_with_der),
+	band(Band), tmin(Tmin)
     {
       height = p->height_reference_surface();
     }
@@ -429,24 +431,24 @@ void Ipi::time_with_derivative
     CartesianFixedLookVectorWithDerivative look_vector_with_derivative
     (const boost::shared_ptr<OrbitData>& Od) const
     {
-      boost::array<double, 3> p1 = p->position;
       boost::array<AutoDerivative<double>, 3> p2 = Od->position_cf_with_derivative();
       CartesianFixedLookVectorWithDerivative lv;
-      lv.look_vector[0] = p1[0] - p2[0];
-      lv.look_vector[1] = p1[1] - p2[1];
-      lv.look_vector[2] = p1[2] - p2[2];
+      lv.look_vector[0] = p_with_der[0] - p2[0];
+      lv.look_vector[1] = p_with_der[1] - p2[1];
+      lv.look_vector[2] = p_with_der[2] - p2[2];
       return lv;
     }
   private:
     boost::shared_ptr<Camera> cam;
     boost::shared_ptr<Orbit> orb;
     boost::shared_ptr<CartesianFixed> p;
+    boost::array<AutoDerivative<double>, 3> p_with_der;
     int band;
     Time tmin;
     double height;
   };
 
-  IpiEq eq(cam, orb, Gp.convert_to_cf(), min_time_, band_);
+  IpiEq eq(cam, orb, Gp.convert_to_cf(), Gp_with_der, min_time_, band_);
   std::vector<AutoDerivative<double> > sol = 
     root_list(eq, min_time_guess() - min_time_, max_time_guess() - min_time_,
 	      root_min_separation_, time_tolerance_);

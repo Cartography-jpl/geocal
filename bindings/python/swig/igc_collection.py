@@ -182,6 +182,25 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
         """
         return _igc_collection.IgcCollection_image_coordinate(self, *args)
 
+    def image_coordinate_jac_parm_fd(self, *args):
+        """
+        blitz::Array< double, 2 > IgcCollection::image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed &Gc, const blitz::Array<
+        double, 1 > Pstep) const
+        Return the Jacobian of the image coordinates with respect to the
+        parameters, calculated by taking a finite difference. 
+        """
+        return _igc_collection.IgcCollection_image_coordinate_jac_parm_fd(self, *args)
+
+    def image_coordinate_jac_cf_fd(self, *args):
+        """
+        virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_cf_fd(int Image_index, const CartesianFixed &Gc, double Step_size) const
+        Return the Jacobian of the image coordinates with respect to the X, Y,
+        and Z components of the CartesianFixed ground location.
+
+        Calculated as a finite difference with the given step size. 
+        """
+        return _igc_collection.IgcCollection_image_coordinate_jac_cf_fd(self, *args)
+
     def title(self, *args):
         """
         virtual std::string GeoCal::IgcCollection::title(int Image_index) const
@@ -293,7 +312,10 @@ IgcCollection.__ground_coordinate = new_instancemethod(_igc_collection.IgcCollec
 IgcCollection.ground_coordinate_dem = new_instancemethod(_igc_collection.IgcCollection_ground_coordinate_dem,None,IgcCollection)
 IgcCollection.dem = new_instancemethod(_igc_collection.IgcCollection_dem,None,IgcCollection)
 IgcCollection.image_coordinate = new_instancemethod(_igc_collection.IgcCollection_image_coordinate,None,IgcCollection)
+IgcCollection.image_coordinate_jac_parm = new_instancemethod(_igc_collection.IgcCollection_image_coordinate_jac_parm,None,IgcCollection)
+IgcCollection.image_coordinate_jac_parm_fd = new_instancemethod(_igc_collection.IgcCollection_image_coordinate_jac_parm_fd,None,IgcCollection)
 IgcCollection.image_coordinate_jac_cf = new_instancemethod(_igc_collection.IgcCollection_image_coordinate_jac_cf,None,IgcCollection)
+IgcCollection.image_coordinate_jac_cf_fd = new_instancemethod(_igc_collection.IgcCollection_image_coordinate_jac_cf_fd,None,IgcCollection)
 IgcCollection.title = new_instancemethod(_igc_collection.IgcCollection_title,None,IgcCollection)
 IgcCollection.image = new_instancemethod(_igc_collection.IgcCollection_image,None,IgcCollection)
 IgcCollection.image_ground_connection = new_instancemethod(_igc_collection.IgcCollection_image_ground_connection,None,IgcCollection)

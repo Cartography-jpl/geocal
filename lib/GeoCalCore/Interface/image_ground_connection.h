@@ -281,6 +281,8 @@ public:
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
 
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf_fd(const CartesianFixed& Gc, double Step_size) const;
+
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
 /// parameters.

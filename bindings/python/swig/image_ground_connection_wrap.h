@@ -42,6 +42,7 @@ public:
     virtual GeoCal::ImageCoordinate image_coordinate(GeoCal::GroundCoordinate const &Gc) const;
     virtual void image_coordinate_with_status(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate &OUTPUT2, bool &OUTPUT) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_cf(GeoCal::CartesianFixed const &Gc) const;
+    virtual blitz::Array< double,2 > image_coordinate_jac_cf_fd(GeoCal::CartesianFixed const &Gc, double Step_size) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_parm(GeoCal::GroundCoordinate const &Gc) const;
     virtual int number_line() const;
     virtual int number_sample() const;
@@ -83,7 +84,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[29];
+    mutable swig::SwigVar_PyObject vtable[30];
 #endif
 
 };

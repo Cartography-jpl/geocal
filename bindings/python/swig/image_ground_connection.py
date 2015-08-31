@@ -298,6 +298,16 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         """
         return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf(self, *args)
 
+    def image_coordinate_jac_cf_fd(self, *args):
+        """
+        blitz::Array< double, 2 > ImageGroundConnection::image_coordinate_jac_cf_fd(const CartesianFixed &Gc, double Step_size) const
+        Return the Jacobian of the image coordinates with respect to the X, Y,
+        and Z components of the CartesianFixed ground location.
+
+        This is calculated by a finite difference of the given size. 
+        """
+        return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf_fd(self, *args)
+
     def image_coordinate_jac_parm(self, *args):
         """
         virtual blitz::Array<double, 2> GeoCal::ImageGroundConnection::image_coordinate_jac_parm(const GroundCoordinate &Gc) const
@@ -591,6 +601,7 @@ ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_imag
 ImageGroundConnection.image_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_with_status = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_with_status,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_cf = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf,None,ImageGroundConnection)
+ImageGroundConnection.image_coordinate_jac_cf_fd = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf_fd,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm,None,ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover,None,ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image,None,ImageGroundConnection)

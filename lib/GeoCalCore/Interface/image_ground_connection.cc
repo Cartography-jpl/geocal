@@ -143,6 +143,28 @@ blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf
 }
 
 //-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
+/// X, Y, and Z components of the CartesianFixed ground location. This 
+/// is calculated by a finite difference of the given size.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf_fd
+(const CartesianFixed& Gc, double Step_size) const
+{
+  blitz::Array<double, 2> res(2, 3);
+  ImageCoordinate ic0 = image_coordinate(Gc);
+  boost::shared_ptr<CartesianFixed> gcx = Gc.convert_to_cf();
+  for(int i = 0; i < 3; ++i) {
+    gcx->position[i] += Step_size;
+    ImageCoordinate ic = image_coordinate(*gcx);
+    res(0, i) = (ic.line - ic0.line) / Step_size;
+    res(1, i) = (ic.sample - ic0.sample) / Step_size;
+    gcx->position[i] = Gc.position[i];
+  }
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Return ground coordinate that is nearly the given height above
 /// the reference surface. This is exact in the sense that the
 /// returned point matches the image coordinate (to 

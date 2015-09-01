@@ -26,6 +26,15 @@ def test_old_mspi_format():
     fname = mspi_test_data + "old_tie_point/tie_point_211051000.dat"
     t = TiePoint(5)
     tp = TiePoint.read_old_mspi_format(fname)
+    assert tp.id == 211051000
+    assert not tp.is_gcp
+    assert distance(tp.ground_location, Ecr(-2.47279636204959126e+06, -4.61999558631069399e+06, 3.62513840793766454e+06)) < 1
+    assert tp.number_image_location == 3
+    tpcol = TiePointCollection.read_old_mspi_format(mspi_test_data + 
+                                                    "old_tie_point")
+    assert len(tpcol) == 165
+    assert tpcol.number_gcp == 18
+
 
 def test_create_multiple_pass():
     '''Test create_multiple_pass'''

@@ -2,9 +2,13 @@ import math
 import raster_image_extension
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
-from geocal_swig import IgcMapProjected, CartesianFixedLookVector, LnLookVector
+from geocal_swig import IgcMapProjected, CartesianFixedLookVector, \
+    LnLookVector, Ecr, ImageCoordinate
 import copy
 import numpy as np
+import re
+import os
+
 # Optional support for pandas
 try:
     import pandas as pd
@@ -109,7 +113,27 @@ class TiePoint(object):
         ingest old test cases, but is probably not of much use other than 
         that. This is a simple ASCII format file, see the test example for
         examples of how this works.'''
-        print "hi there"
+        with open(filename, 'r') as f:
+            ln = f.readline()
+            m = re.search('ground_loc(\d+)', ln)
+            id = int(m.group(1))
+            x, y, z, c11, c12, c13, c21, c22, c23, c31, c32, c33, \
+                is_gcp, numcam, trash = ln.split(" ", 14)
+            tp = TiePoint(int(numcam))
+            tp.id = id
+            tp.ground_location = Ecr(float(x),float(y),float(z))
+            tp.is_gcp = (int(is_gcp) == 1)
+            # We don't currently do anything with the covariance
+            for i in range(tp.number_image):
+                ln = f.readline()
+                l,s,c11,c12,c21,c22,available, trash = \
+                    ln.split(" ", 7)
+                if(int(available) == 1):
+                    tp.image_location[i] = \
+                        ImageCoordinate(float(l), float(s)), \
+                        math.sqrt(float(c11)),math.sqrt(float(c22))
+        return tp
+            
 
     def display(self, igc_coll, sz = 500, ref_image = None, number_row = None,
                 map_info = None, surface_image = None):
@@ -167,6 +191,20 @@ class TiePoint(object):
                 d = np.zeros((sz, sz))
                 plt.imshow(d, cmap=plt.cm.gray,vmin=-1,vmax=0,
                            extent = [0,sz,0,sz])
+
+    def __str__(self):
+        res =  "TiePoint\n"
+        res += "  Id:              %d\n" % self.id
+        res += "  Is Gcp:          %s\n" % ("True" if self.is_gcp else "False")
+        res += "  Ground location: %s\n" % self.ground_location
+        res += "  Image coordinates:\n"
+        for iloc in self.image_location:
+            if(iloc is None):
+                res += "     None\n"
+            else:
+                res += "     %s, %f, %f\n" % (iloc[0], iloc[1], iloc[2])
+        return res
+
 
 class TiePointCollection(list):
     '''This is just a list of TiePoint, with a few useful functions defined'''
@@ -297,6 +335,21 @@ class TiePointCollection(list):
         for i in range(self[0].number_image):
             d["image_%d" % i] = self.data_frame(igccol, i)
         return pd.Panel(d)
+
+    @classmethod
+    def read_old_mspi_format(self, directory):
+        '''This reads the old MSPI tie-point format. This can be used to
+        ingest old test cases, but is probably not of much use other than 
+        that. This is a simple ASCII format file, see the test example for
+        examples of how this works.
+ 
+        This reads all the files in the given directory.'''
+        m = re.compile(r'tie_point_\d+\.dat$')
+        lst = [directory + "/" + f for f in os.listdir(directory) if m.match(f)]
+        tpcol = TiePointCollection()
+        for f in lst:
+            tpcol.append(TiePoint.read_old_mspi_format(f))
+        return tpcol
 
     def __str__(self):
         res =  "TiePointCollection\n"

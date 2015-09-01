@@ -94,6 +94,12 @@ public:
   cf_look_vector_lv(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<CartesianFixed>
   cf_look_vector_pos(const ImageCoordinate& Ic) const;
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
   virtual boost::shared_ptr<GroundCoordinate> 
     ground_coordinate(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 

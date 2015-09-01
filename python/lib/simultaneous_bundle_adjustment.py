@@ -33,8 +33,10 @@ class SimultaneousBundleAdjustment(object):
 
     Note that you often want to use the automatically calculated Jacobians
     (done using the chain rule). However, there are cases where you do
-    *not* want to do this. In particular, the IpiImageGroundConnection
-    can have points where the Jacobain is very noisy, so small changes in 
+    *not* want to do this. 
+
+    We initially ran into this with the IpiImageGroundConnection
+    can have points where the Jacobian is very noisy, so small changes in 
     a parameter can cause a relatively large change in the line/sample (e.g.,
     a minor tweak causes the line/sample to jump by 0.1 or 0.2 pixels). These
     changes are small in relation to anything that really matters (e..g, 1/3
@@ -48,6 +50,12 @@ class SimultaneousBundleAdjustment(object):
     are close to each other you can use the real Jacobian. I've never seen
     an issue with a frame camera, just with the Ipi for a push broom (and in
     that case for a aircraft which has much larger jumps in attitude).
+
+    Note that the IpiImageGroundConnection problem was solved in a 
+    different manner (adding collinearity constraint that uses FrameCoor at
+    a fixed time), so the finite difference is not needed for this particular 
+    ImageGroundConnection. But we've left the finite difference in place if
+    this is useful in other circumstances.
 
     To support the finite difference, you can supply the step size to use the
     collinearity ECR jacobian, and/or a separate array for the step size to

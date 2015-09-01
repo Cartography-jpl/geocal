@@ -144,6 +144,30 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
     def number_image(self):
         return self._v_number_image()
 
+    def collinearity_residual(self, *args):
+        """
+        virtual blitz::Array<double, 1> GeoCal::IgcCollection::collinearity_residual(int Image_index, const GroundCoordinate &Gc, const ImageCoordinate
+        &Ic_actual) const
+        Return collinearity residual for given Image_index (see
+        ImageGroundConnection for details on this. 
+        """
+        return _igc_collection.IgcCollection_collinearity_residual(self, *args)
+
+    def collinearity_residual_jacobian(self, *args):
+        """
+        virtual blitz::Array<double, 2> GeoCal::IgcCollection::collinearity_residual_jacobian(int Image_index, const GroundCoordinate &Gc, const ImageCoordinate
+        &Ic_actual) const
+        Return jacobian of collinearity_residual.
+
+        The parameters for this class should already have AutoDerivative
+        extended for the jacobian (e.g., call add_identity_gradient()).
+
+        We add the derivative wrt the CartesianFixed coordinates of the
+        Ground_coor (X, Y, Z in that order), at the end of the Jacobian. So
+        the total Jacobian is 2 x (number parameter + 3). 
+        """
+        return _igc_collection.IgcCollection_collinearity_residual_jacobian(self, *args)
+
     def __ground_coordinate(self, *args):
         """
         virtual boost::shared_ptr<GroundCoordinate> GeoCal::IgcCollection::ground_coordinate(int Image_index, const ImageCoordinate &Ic) const
@@ -308,6 +332,8 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
         _igc_collection.disown_IgcCollection(self)
         return weakref_proxy(self)
 IgcCollection._v_number_image = new_instancemethod(_igc_collection.IgcCollection__v_number_image,None,IgcCollection)
+IgcCollection.collinearity_residual = new_instancemethod(_igc_collection.IgcCollection_collinearity_residual,None,IgcCollection)
+IgcCollection.collinearity_residual_jacobian = new_instancemethod(_igc_collection.IgcCollection_collinearity_residual_jacobian,None,IgcCollection)
 IgcCollection.__ground_coordinate = new_instancemethod(_igc_collection.IgcCollection___ground_coordinate,None,IgcCollection)
 IgcCollection.ground_coordinate_dem = new_instancemethod(_igc_collection.IgcCollection_ground_coordinate_dem,None,IgcCollection)
 IgcCollection.dem = new_instancemethod(_igc_collection.IgcCollection_dem,None,IgcCollection)

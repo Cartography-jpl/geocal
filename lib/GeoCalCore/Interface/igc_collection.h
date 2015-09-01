@@ -14,6 +14,37 @@ public:
   virtual int number_image() const { return 0; }
 
 //-----------------------------------------------------------------------
+/// Return collinearity residual for given Image_index (see
+/// ImageGroundConnection for details on this.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(int Image_index,
+			const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const
+  {
+    return image_ground_connection(Image_index)->collinearity_residual(Gc, Ic_actual);
+  }
+
+//-----------------------------------------------------------------------
+/// Return jacobian of collinearity_residual. The parameters for this
+/// class should already have AutoDerivative extended for the jacobian
+/// (e.g., call add_identity_gradient()).
+/// 
+/// We add the derivative wrt the CartesianFixed coordinates of the
+/// Ground_coor (X, Y, Z in that order), at the end of the
+/// Jacobian. So the total Jacobian is 2 x (number parameter + 3).
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(int Image_index,
+  		        const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const
+  {
+    return image_ground_connection(Image_index)->collinearity_residual_jacobian(Gc, Ic_actual);
+  }
+
+//-----------------------------------------------------------------------
 /// Return ground coordinate that goes with a particular image
 /// coordinate. 
 //-----------------------------------------------------------------------

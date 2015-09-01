@@ -226,6 +226,42 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         """
         return _image_ground_connection.ImageGroundConnection_cf_look_vector_pos(self, *args)
 
+    def collinearity_residual(self, *args):
+        """
+        blitz::Array< double, 1 > ImageGroundConnection::collinearity_residual(const GroundCoordinate &Gc, const ImageCoordinate &Ic_actual) const
+        Return an array (size 2) that gives the collinearity constraint.
+
+        This is the difference between the predicted location where the
+        Ground_coor is seen in the image and the "actual" image coordinates
+        (e.g., determined from image matching).
+
+        There is a bit of freedom in what these exact equations are. This is
+        used by the Simultaneous Bundle Adjustment, and we just try to vary
+        parameters to minimize this. So this should return [0, 0] if we
+        exactly predict the location of Ic_actual for Ground_coor, and should
+        grow in size as we do a worse and worse prediction.
+
+        The default implementation is just this->image_coordinate(Gc) -
+        Ic_actual, however derived classes might use something that is
+        simpler/faster to calculate or is more stable (e.g.
+        IpiImageGroundConnection finds the difference in frame coordinates. 
+        """
+        return _image_ground_connection.ImageGroundConnection_collinearity_residual(self, *args)
+
+    def collinearity_residual_jacobian(self, *args):
+        """
+        blitz::Array< double, 2 > ImageGroundConnection::collinearity_residual_jacobian(const GroundCoordinate &Gc, const ImageCoordinate &Ic_actual) const
+        Return jacobian of collinearity_residual.
+
+        The parameters for this class should already have AutoDerivative
+        extended for the jacobian (e.g., call add_identity_gradient()).
+
+        We add the derivative wrt the CartesianFixed coordinates of the
+        Ground_coor (X, Y, Z in that order), at the end of the Jacobian. So
+        the total Jacobian is 2 x (number parameter + 3). 
+        """
+        return _image_ground_connection.ImageGroundConnection_collinearity_residual_jacobian(self, *args)
+
     def __ground_coordinate(self, *args):
         """
         virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate(const ImageCoordinate &Ic) const
@@ -595,6 +631,8 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
 ImageGroundConnection.initialize = new_instancemethod(_image_ground_connection.ImageGroundConnection_initialize,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_lv = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_lv,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_pos = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_pos,None,ImageGroundConnection)
+ImageGroundConnection.collinearity_residual = new_instancemethod(_image_ground_connection.ImageGroundConnection_collinearity_residual,None,ImageGroundConnection)
+ImageGroundConnection.collinearity_residual_jacobian = new_instancemethod(_image_ground_connection.ImageGroundConnection_collinearity_residual_jacobian,None,ImageGroundConnection)
 ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection___ground_coordinate,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height,None,ImageGroundConnection)

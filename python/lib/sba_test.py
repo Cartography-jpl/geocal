@@ -113,6 +113,55 @@ def test_jac():
     print np.max(np.abs(t2))
     print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
 
+def test_mspi_sba3():
+    igccol = read_shelve(test_data + "/igccol_initial_geocentric.xml")
+    x = []
+    t = []
+    for i in range(igccol.number_image):
+        x.append(igccol.time_table(i).min_time)
+        x.append(igccol.time_table(i).max_time)
+        t.append(PiecewiseLinear.LINEAR)
+        if(i < igccol.number_image - 1):
+            t.append(PiecewiseLinear.CONSTANT)
+    e_corr = PiecewiseLinear(x, t)
+    n_corr = PiecewiseLinear(x, t)
+    x = [igccol.time_table(0).min_time, 
+         igccol.time_table(igccol.number_image-1).max_time]
+    t = [PiecewiseLinear.CONSTANT]
+    u_corr = PiecewiseLinear(x, t)
+    orb = OrbitPiecewiseCorrection(igccol.orbit(0).orbit_uncorrected,
+                                   e_corr, n_corr, u_corr)
+    igccol.set_orbit(orb)
+    tpcol = TiePointCollection.read_old_mspi_format("/data/smyth/AirMSPISbaOldExample/podex/2013-01-31/tie_point/AirMSPI_ER2_CA-Mojave_TIE_POINTS_20130131_211051-1_L1B1_Vsba-1")
+    dem = igccol.dem(0)
+    parameter_fd_step_size = np.zeros(igccol.parameter_subset.shape)
+    parameter_fd_step_size[:] = 10
+    parameter_fd_step_size[0:5]=0.1
+    #sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5)
+    sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5,
+                             ecr_fd_step_size = 10,
+                             parameter_fd_step_size = parameter_fd_step_size)
+    v = sba.sba_eq(sba.parameter)
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+    print "Chisq", chisq
+    parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
+    v = sba.sba_eq(sba.parameter)
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+    print "Chisq", chisq
+    print igccol.parameter_subset
+    print igccol.orbit(0)
+    print igccol.camera(0)
+    tpcol2 = TiePointCollection()
+    for i in range(len(tpcol)):
+        tp = TiePoint(tpcol[i].number_image)
+        tp.is_gcp = tpcol[i].is_gcp
+        tp.id = tpcol[i].id
+        tp.image_location = tpcol[i].image_location
+        tp.ground_location = sba.ground_location(i)
+        tpcol2.append(tp)
+    generate_diagnostic(igccol, tpcol, tpcol2)
+
+    
 
 def test_mspi_sba2():
     raise SkipTest()

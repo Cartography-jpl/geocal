@@ -43,6 +43,14 @@ class IgcCollection: public WithParameter {
 public:
   virtual ~IgcCollection() {}
   %python_attribute(number_image, virtual int);
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(int Image_index,
+			const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(int Image_index,
+				 const GroundCoordinate& Gc,
+				 const ImageCoordinate& Ic_actual) const;
   virtual boost::shared_ptr<GroundCoordinate> 
     ground_coordinate(int Image_index, const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 

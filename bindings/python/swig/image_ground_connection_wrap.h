@@ -36,6 +36,8 @@ public:
     virtual blitz::Array< bool,1 > parameter_mask() const;
     virtual boost::shared_ptr< GeoCal::CartesianFixedLookVector > cf_look_vector_lv(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::CartesianFixed > cf_look_vector_pos(GeoCal::ImageCoordinate const &Ic) const;
+    virtual blitz::Array< double,1 > collinearity_residual(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const;
+    virtual blitz::Array< double,2 > collinearity_residual_jacobian(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_dem(GeoCal::ImageCoordinate const &Ic, GeoCal::Dem const &D) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_approx_height(GeoCal::ImageCoordinate const &Ic, double H) const;
@@ -84,7 +86,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[30];
+    mutable swig::SwigVar_PyObject vtable[32];
 #endif
 
 };

@@ -151,6 +151,13 @@ public:
     cf_look_vector(Ic, lv, p);
     return p;
   }
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  
     
 //-----------------------------------------------------------------------
 /// Return ground coordinate that goes with a particular image

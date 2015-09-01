@@ -39,39 +39,8 @@ def sol_iteration(sba, parm, lam):
     print "Chisq", chisq
     return pnew
 
-def test_jac_cf():
-    igccol = read_shelve(test_data + "/igccol_initial.xml")
-    tpcol = read_shelve(test_data + "/tp_data.db:tpcol")
-    tpcol2 = TiePointCollection()
-    for tp in tpcol:
-        if(tp.is_gcp):
-            tpcol2.append(tp)
-    igc = igccol.image_ground_connection(0)
-    print igc.image_coordinate_jac_cf(tpcol2[31].ground_location)
-    for i in range(3):
-        gp = Ecr(tpcol2[31].ground_location)
-        print igc.image_coordinate(gp)
-        p = gp.position.copy()
-        p[i] -= 0.1
-        gp.position = p
-        print igc.image_coordinate(gp)
-    for i in range(3):
-        gp = Ecr(tpcol2[31].ground_location)
-        print igc.image_coordinate(gp)
-        p = gp.position.copy()
-        p[i] += 0.01
-        gp.position = p
-        print igc.image_coordinate(gp)
-    for i in range(3):
-        gp = Ecr(tpcol2[31].ground_location)
-        print igc.image_coordinate(gp)
-        p = gp.position.copy()
-        p[i] += 1.0
-        gp.position = p
-        print igc.image_coordinate(gp)
-
 def test_jac():
-    #raise SkipTest()
+    raise SkipTest()
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     x = []
     t = []
@@ -146,6 +115,7 @@ def test_jac():
 
 
 def test_mspi_sba2():
+    raise SkipTest()
     # Try fitting the camera parameter only using nadir, followed by more
     # full fit.
     #igccol = read_shelve(test_data + "/igccol_initial.xml")
@@ -317,6 +287,7 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
     pdf.savefig()
 
 def test_mspi_sba():
+    raise SkipTest()
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     x = []
     t = []

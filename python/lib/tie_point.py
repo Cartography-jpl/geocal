@@ -103,6 +103,14 @@ class TiePoint(object):
         '''Difference between observed and predicted image coordinates'''
         return self.ic - self.ic_pred(igccol)
 
+    @classmethod
+    def read_old_mspi_format(self, filename):
+        '''This reads the old MSPI tie-point format. This can be used to
+        ingest old test cases, but is probably not of much use other than 
+        that. This is a simple ASCII format file, see the test example for
+        examples of how this works.'''
+        print "hi there"
+
     def display(self, igc_coll, sz = 500, ref_image = None, number_row = None,
                 map_info = None, surface_image = None):
         '''This executes plt.imshow for the images that make up this

@@ -29,10 +29,36 @@ class SimultaneousBundleAdjustment(object):
     We then vary the ground location the tie points and the parameters
     of the ImageGroundConnection to minimize the difference between the
     predicted image locations and the actual image locations given by
-    the tiepoints.'''
+    the tiepoints.
+
+    Note that you often want to use the automatically calculated Jacobians
+    (done using the chain rule). However, there are cases where you do
+    *not* want to do this. In particular, the IpiImageGroundConnection
+    can have points where the Jacobain is very noisy, so small changes in 
+    a parameter can cause a relatively large change in the line/sample (e.g.,
+    a minor tweak causes the line/sample to jump by 0.1 or 0.2 pixels). These
+    changes are small in relation to anything that really matters (e..g, 1/3
+    pixel), but can cause very large spikes in the Jacobian. For these cases,
+    you may want to use a finite difference approximation, where the step 
+    size is something like what you expect meaningful parameter change to be.
+    This has the effect of replacing the real Jacobian with the Jacobian of
+    smoothed version of the Ipi equations w/o these sudden jumps. Not sure
+    when you might want to do this, perhaps a good test if you aren't sure 
+    is to compare the real Jacobain with the finite difference one and if they
+    are close to each other you can use the real Jacobian. I've never seen
+    an issue with a frame camera, just with the Ipi for a push broom (and in
+    that case for a aircraft which has much larger jumps in attitude).
+
+    To support the finite difference, you can supply the step size to use the
+    collinearity ECR jacobian, and/or a separate array for the step size to
+    use in the collinearity parameter jacobian. The other jacobians (GCP, 
+    surface, parameter) are all simple enough that there is never any reason
+    to resort to finite differences for these.
+    '''
     def __init__(self, igc_coll, tpcol,
                  dem, dem_sigma = 10, gcp_sigma = 10, tp_sigma = None, 
-                 tp_epsilon = 1, p0 = None, psigma = None):
+                 tp_epsilon = 1, p0 = None, psigma = None, 
+                 ecr_fd_step_size = None, parameter_fd_step_size= None):
         '''Constructor. This takes a IgcCollection, and a 
         TiePointCollection. The camera order used in each TiePoint 
         should match the order of IgcCollection.
@@ -58,6 +84,12 @@ class SimultaneousBundleAdjustment(object):
         these aren't specified the initial value of the igc_coll parameter 
         is used, with a scaling of 10. You can change this after the 
         constructor by changing self.p0 and/or self.psigma.
+
+        You can optionally supply the step size to use for a finite differene
+        jacobian of the collinearity ecr and/or the collinearity parameter
+        jacobian. See the class description for why you might want to use
+        finite difference instead of the true jacobian calculation in some
+        cases.
         '''
         self.igc_coll = igc_coll
         self.tpcol = tpcol
@@ -66,6 +98,8 @@ class SimultaneousBundleAdjustment(object):
         self.gcp_sigma = gcp_sigma
         self.tp_epsilon = tp_epsilon
         self.tp_sigma = tp_sigma
+        self.ecr_fd_step_size = ecr_fd_step_size
+        self.parameter_fd_step_size = parameter_fd_step_size
         if(p0 is None):
             self.p0 = self.igc_coll.parameter_subset.copy()
         else:
@@ -281,6 +315,10 @@ class SimultaneousBundleAdjustment(object):
 
     def __collinearity_constraint_jacobian(self, res):
         '''Calculate the Jacobian of the collinearity constraint equations.'''
+        pstep = np.zeros(self.igc_coll.parameter_subset.shape)
+        pstep[:] = 10
+        #pstep[0:5]=[0.1,0.01,0.1,0.01,0.1]
+        pstep[0:5]=0.1
         ind = self.row_index
         for i, tp in enumerate(self.tpcol):
             gp = self.ground_location(i)
@@ -288,15 +326,21 @@ class SimultaneousBundleAdjustment(object):
                 if(il):
                     ictp, lsigma, ssigma = il
                     try:
-                        jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
+                        if(self.ecr_fd_step_size is not None):
+                            jac = self.igc_coll.image_coordinate_jac_cf_fd(j, gp, self.ecr_fd_step_size)
+                        else:
+                            jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
                         # We have "-" because equation if measured - predicted
                         ts = self.tp_slice[i].start
                         for k in range(3):
                             res[ind, ts + k] = -jac[0,k] / lsigma
                             res[ind + 1, ts + k] = -jac[1,k] / ssigma
-                        self.igc_coll.image_coordinate_jac_parm(j, gp, res, ind,
-                            self.igc_coll_param_slice.start, -1.0 / lsigma,
-                            -1.0 / ssigma)
+                        if(self.parameter_fd_step_size is not None):
+                            self.igc_coll.image_coordinate_jac_parm_fd_sparse(j, gp, res, ind,
+                            self.igc_coll_param_slice.start, self.parameter_fd_step_size, -1.0 / lsigma, -1.0 / ssigma)
+                        else:
+                            self.igc_coll.image_coordinate_jac_parm_sparse(j, gp, res, ind,
+                            self.igc_coll_param_slice.start, -1.0 / lsigma, -1.0 / ssigma)
                     except RuntimeError as e:
                         if(str(e) != "ImageGroundConnectionFailed"):
                             raise e

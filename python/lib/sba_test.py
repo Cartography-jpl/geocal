@@ -97,7 +97,13 @@ def test_jac():
             tpcol2.append(tp)
 
     dem = igccol.dem(0)
-    sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5)
+    # Use FD for now
+    parameter_fd_step_size = np.zeros(igccol.parameter_subset.shape)
+    parameter_fd_step_size[:] = 10
+    parameter_fd_step_size[0:5]=0.1
+    sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5,
+                             ecr_fd_step_size = 10, 
+                             parameter_fd_step_size = parameter_fd_step_size)
     p0 = sba.parameter
     jac = sba.sba_jacobian(p0);
     eps = np.zeros((p0.shape[0]))
@@ -180,7 +186,13 @@ def test_mspi_sba2():
             tp2.image_location[0] = tp.image_location[4]
             tpcol2.append(tp2)
     dem = igccol2.dem(0)
-    sba = SimultaneousBundleAdjustment(igccol2, tpcol2, dem, gcp_sigma = 5)
+    # Use FD for now
+    parameter_fd_step_size = np.zeros(igccol2.parameter_subset.shape)
+    parameter_fd_step_size[:] = 10
+    parameter_fd_step_size[0:5]=0.1
+    sba = SimultaneousBundleAdjustment(igccol2, tpcol2, dem, gcp_sigma = 5,
+                             ecr_fd_step_size = 10,
+                             parameter_fd_step_size = parameter_fd_step_size)
     print igccol2.parameter_subset
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
@@ -339,8 +351,14 @@ def test_mspi_sba():
             tpcol2.append(tp)
     tpcol2 = tpcol
     dem = igccol.dem(0)
+    # Use FD for now
+    parameter_fd_step_size = np.zeros(igccol.parameter_subset.shape)
+    parameter_fd_step_size[:] = 10
+    parameter_fd_step_size[0:5]=0.1
     #sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5)
-    sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 0.1)
+    sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 0.1,
+                             ecr_fd_step_size = 10,
+                             parameter_fd_step_size = parameter_fd_step_size)
     t = sba.psigma.copy()
     t[0:5] = 1.0
     t[5:] = 1e8

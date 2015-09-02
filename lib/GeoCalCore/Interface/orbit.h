@@ -514,7 +514,8 @@ public:
 //-----------------------------------------------------------------------
 
   FrameCoordinateWithDerivative 
-  frame_coordinate_with_derivative(Time T, const GroundCoordinate& Gc, 
+  frame_coordinate_with_derivative(const TimeWithDerivative& T, 
+				   const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const
   { return orbit_data(T)->frame_coordinate_with_derivative(Gc, C, Band);}
 

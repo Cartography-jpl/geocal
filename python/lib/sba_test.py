@@ -40,7 +40,6 @@ def sol_iteration(sba, parm, lam):
     return pnew
 
 def test_jac():
-    raise SkipTest()
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     x = []
     t = []
@@ -66,13 +65,7 @@ def test_jac():
             tpcol2.append(tp)
 
     dem = igccol.dem(0)
-    # Use FD for now
-    parameter_fd_step_size = np.zeros(igccol.parameter_subset.shape)
-    parameter_fd_step_size[:] = 10
-    parameter_fd_step_size[0:5]=0.1
-    sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5,
-                             ecr_fd_step_size = 10, 
-                             parameter_fd_step_size = parameter_fd_step_size)
+    sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5)
     p0 = sba.parameter
     jac = sba.sba_jacobian(p0);
     eps = np.zeros((p0.shape[0]))
@@ -87,6 +80,7 @@ def test_jac():
         jac_calc[:,i] = (y - y0) / eps[i]
 
     t = jac - jac_calc
+    assert np.max(np.abs(t)) < 0.02
     print "Surface constraint:"
     t2 = t[sba.surface_constraint_slice, :]
     print np.max(np.abs(t2))
@@ -101,20 +95,17 @@ def test_jac():
     print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
     print "Collinearity constraint, tp offset part:"
     t2 = t[sba.collinearity_constraint_slice, sba.tp_offset_slice]
-    print jac.todense()[sba.collinearity_constraint_slice, sba.tp_offset_slice][228,49]
-    print jac_calc[sba.collinearity_constraint_slice, sba.tp_offset_slice][228,49]
-    print np.max(np.abs(jac.todense()[sba.collinearity_constraint_slice, sba.tp_offset_slice]))
+    # If we need to print a value out, do something like this:
+    #print jac.todense()[sba.collinearity_constraint_slice, sba.tp_offset_slice][88,23]
+    #print jac_calc[sba.collinearity_constraint_slice, sba.tp_offset_slice][88,23]
     print np.max(np.abs(t2))
     print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
     print "Collineariy constraint, parm part:"
     t2 = t[sba.collinearity_constraint_slice, sba.igc_coll_param_slice]
-    print jac.todense()[sba.collinearity_constraint_slice, sba.igc_coll_param_slice][420,0]
-    print jac_calc[sba.collinearity_constraint_slice, sba.igc_coll_param_slice][420,0]
     print np.max(np.abs(t2))
     print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
 
 def test_mspi_sba3():
-    raise SkipTest()
     igccol = read_shelve(test_data + "/igccol_initial_geocentric.xml")
     x = []
     t = []
@@ -135,13 +126,7 @@ def test_mspi_sba3():
     igccol.set_orbit(orb)
     tpcol = TiePointCollection.read_old_mspi_format("/data/smyth/AirMSPISbaOldExample/podex/2013-01-31/tie_point/AirMSPI_ER2_CA-Mojave_TIE_POINTS_20130131_211051-1_L1B1_Vsba-1")
     dem = igccol.dem(0)
-    parameter_fd_step_size = np.zeros(igccol.parameter_subset.shape)
-    parameter_fd_step_size[:] = 10
-    parameter_fd_step_size[0:5]=0.1
-    #sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5)
-    sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5,
-                             ecr_fd_step_size = 10,
-                             parameter_fd_step_size = parameter_fd_step_size)
+    sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print "Chisq", chisq

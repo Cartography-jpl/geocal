@@ -61,7 +61,12 @@ public:
 		     int nsubpixel_line = 1, 
 		     int nsubpixel_sample = 1,
 		     int nintegration_step = 1) const;
-  
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic,
 			const Dem& D) const

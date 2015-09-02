@@ -187,7 +187,7 @@ def test_frame_coordinate_with_der():
                                          cam, SimpleDem(), img)
     ic = ImageCoordinate(100, 200)
     gp = igc.ground_coordinate(ic)
-    ic0 = orb.frame_coordinate_with_derivative(t1 + 5, gp, cam)
+    ic0 = orb.frame_coordinate_with_derivative(TimeWithDerivative(t1 + 5), gp, cam)
     assert_almost_equal(ic.line, ic0.line.value, 4)
     assert_almost_equal(ic.sample, ic0.sample.value, 4)
     # Do camera differences first. This checks correct propagation

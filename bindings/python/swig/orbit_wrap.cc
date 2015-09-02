@@ -14589,7 +14589,7 @@ fail:
 SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = (GeoCal::Orbit *) 0 ;
-  GeoCal::Time arg2 ;
+  GeoCal::TimeWithDerivative *arg2 = 0 ;
   GeoCal::GroundCoordinate *arg3 = 0 ;
   GeoCal::Camera *arg4 = 0 ;
   int arg5 ;
@@ -14597,8 +14597,9 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_0(PyObje
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::Orbit const > *smartarg1 = 0 ;
-  void *argp2 ;
+  void *argp2 = 0 ;
   int res2 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared2 ;
   void *argp3 = 0 ;
   int res3 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
@@ -14627,15 +14628,27 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_0(PyObje
   }
   {
     int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Orbit_frame_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::Time""'"); 
-    }
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Orbit_frame_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::Time""'");
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::TimeWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__TimeWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
     } else {
-      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2)->get());
-      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2);
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Orbit_frame_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Orbit_frame_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::TimeWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::TimeWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2)->get());
+      }
     }
   }
   {
@@ -14695,7 +14708,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_0(PyObje
   arg5 = static_cast< int >(val5);
   {
     try {
-      result = ((GeoCal::Orbit const *)arg1)->frame_coordinate_with_derivative(arg2,(GeoCal::GroundCoordinate const &)*arg3,(GeoCal::Camera const &)*arg4,arg5);
+      result = ((GeoCal::Orbit const *)arg1)->frame_coordinate_with_derivative((GeoCal::TimeWithDerivative const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(GeoCal::Camera const &)*arg4,arg5);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -14715,15 +14728,16 @@ fail:
 SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = (GeoCal::Orbit *) 0 ;
-  GeoCal::Time arg2 ;
+  GeoCal::TimeWithDerivative *arg2 = 0 ;
   GeoCal::GroundCoordinate *arg3 = 0 ;
   GeoCal::Camera *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
   boost::shared_ptr< GeoCal::Orbit const > *smartarg1 = 0 ;
-  void *argp2 ;
+  void *argp2 = 0 ;
   int res2 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared2 ;
   void *argp3 = 0 ;
   int res3 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
@@ -14750,15 +14764,27 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_1(PyObje
   }
   {
     int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Orbit_frame_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::Time""'"); 
-    }
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Orbit_frame_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::Time""'");
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::TimeWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__TimeWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
     } else {
-      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2)->get());
-      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2);
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Orbit_frame_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Orbit_frame_coordinate_with_derivative" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::TimeWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::TimeWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2)->get());
+      }
     }
   }
   {
@@ -14813,7 +14839,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_1(PyObje
   }
   {
     try {
-      result = ((GeoCal::Orbit const *)arg1)->frame_coordinate_with_derivative(arg2,(GeoCal::GroundCoordinate const &)*arg3,(GeoCal::Camera const &)*arg4);
+      result = ((GeoCal::Orbit const *)arg1)->frame_coordinate_with_derivative((GeoCal::TimeWithDerivative const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(GeoCal::Camera const &)*arg4);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -14846,8 +14872,8 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative(PyObject *self
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Orbit_frame_coordinate_with_derivative'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Orbit::frame_coordinate_with_derivative(GeoCal::Time,GeoCal::GroundCoordinate const &,GeoCal::Camera const &,int) const\n"
-    "    GeoCal::Orbit::frame_coordinate_with_derivative(GeoCal::Time,GeoCal::GroundCoordinate const &,GeoCal::Camera const &) const\n");
+    "    GeoCal::Orbit::frame_coordinate_with_derivative(GeoCal::TimeWithDerivative const &,GeoCal::GroundCoordinate const &,GeoCal::Camera const &,int) const\n"
+    "    GeoCal::Orbit::frame_coordinate_with_derivative(GeoCal::TimeWithDerivative const &,GeoCal::GroundCoordinate const &,GeoCal::Camera const &) const\n");
   return 0;
 }
 
@@ -21667,8 +21693,8 @@ static PyMethodDef SwigMethods[] = {
 		"seen. \n"
 		""},
 	 { (char *)"Orbit_frame_coordinate_with_derivative", _wrap_Orbit_frame_coordinate_with_derivative, METH_VARARGS, (char *)"\n"
-		"FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(Time T, const GroundCoordinate &Gc, const Camera &C, int Band=0)\n"
-		"const\n"
+		"FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(const TimeWithDerivative &T, const GroundCoordinate &Gc, const Camera\n"
+		"&C, int Band=0) const\n"
 		"Give the frame coordinates that a particular point on the ground is\n"
 		"seen. \n"
 		""},

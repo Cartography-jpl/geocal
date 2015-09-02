@@ -39,8 +39,7 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
         jtj = j.transpose() * j
         chisqold = chisq
         for k in range(max_iteration):
-            c = jtj + sp.spdiags(jtj.diagonal() * lam, 0, jtj.shape[0],
-                                 jtj.shape[1], format="csr")
+            c = jtj + lam * sp.eye(jtj.shape[0], jtj.shape[1], format="csr")
             jtres = j.transpose() * res
             t1 = time.clock()
             # Note permc_spec has *no* effect on umfpack library, but we put 

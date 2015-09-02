@@ -358,6 +358,7 @@ class SimultaneousBundleAdjustment(object):
             for j, il in enumerate(tp.image_location):
                 if(il):
                     ictp, lsigma, ssigma = il
+                    weight = [[1.0/lsigma], [1.0/ssigma]]
                     try:
                         if(self.ecr_fd_step_size is not None):
                             jac = self.igc_coll.image_coordinate_jac_cf_fd(j, gp, self.ecr_fd_step_size)
@@ -365,8 +366,8 @@ class SimultaneousBundleAdjustment(object):
                             jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
                         # We have "-" because equation if measured - predicted
                         ts = self.tp_slice[i]
-                        res[ind, ts] = -jac[0,:] / lsigma
-                        res[ind + 1, ts] = -jac[1,:] / ssigma
+                        rs = slice(ind, ind + 2)
+                        res[rs, ts] = -jac * weight
                         if(self.parameter_fd_step_size is not None):
                             self.igc_coll.image_coordinate_jac_parm_fd_sparse(j, gp, res, ind,
                             self.igc_coll_param_slice.start, self.parameter_fd_step_size, -1.0 / lsigma, -1.0 / ssigma)

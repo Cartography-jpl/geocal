@@ -83,7 +83,7 @@ class TestClass:
             write_shelve("simultaneous_bundle_adjustment_test.db:eq_expect", 
                          sba.sba_eq(sba.parameter))
         # Can compare results if we are diagnosing issue
-        if True:
+        if False:
             rexpect = read_shelve("simultaneous_bundle_adjustment_test.db:eq_expect")
             npt.assert_almost_equal(sba.sba_eq(sba.parameter), rexpect)
 
@@ -96,7 +96,7 @@ class TestClass:
             write_shelve("simultaneous_bundle_adjustment_test.db:jac_expect", 
                          t.todense())
         # Can compare results if we are diagnosing issue
-        if True:
+        if False:
             rexpect = read_shelve("simultaneous_bundle_adjustment_test.db:jac_expect")
             npt.assert_almost_equal(t.todense(), rexpect)
 

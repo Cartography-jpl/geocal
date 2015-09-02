@@ -114,6 +114,7 @@ def test_jac():
     print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
 
 def test_mspi_sba3():
+    raise SkipTest()
     igccol = read_shelve(test_data + "/igccol_initial_geocentric.xml")
     x = []
     t = []

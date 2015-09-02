@@ -133,6 +133,9 @@ class SimultaneousBundleAdjustment(object):
         self.tp_sigma = tp_sigma
         self.ecr_fd_step_size = ecr_fd_step_size
         self.parameter_fd_step_size = parameter_fd_step_size
+        if(self.ecr_fd_step_size is not None or 
+           self.parameter_fd_step_size is not None):
+            raise RuntimeError("Don't currently support finite difference jacobians")
         if(p0 is None):
             self.p0 = self.igc_coll.parameter_subset.copy()
         else:
@@ -334,10 +337,11 @@ class SimultaneousBundleAdjustment(object):
             for j, il in enumerate(tp.image_location):
                 if(il):
                     try:
-                        ic = self.igc_coll.image_coordinate(j, gp)
                         ictp, lsigma, ssigma = il
-                        res[ind] = (ictp.line - ic.line) / lsigma
-                        res[ind + 1] = (ictp.sample - ic.sample) / ssigma
+                        weight = [1.0/lsigma, 1.0/ssigma]
+                        cres = self.igc_coll.collinearity_residual(j, gp, ictp)
+                        rs = slice(ind, ind + 2)
+                        res[rs] = cres * weight
                     except RuntimeError as e:
                         if(str(e) != "ImageGroundConnectionFailed"):
                             raise e
@@ -348,10 +352,7 @@ class SimultaneousBundleAdjustment(object):
 
     def __collinearity_constraint_jacobian(self, res):
         '''Calculate the Jacobian of the collinearity constraint equations.'''
-        pstep = np.zeros(self.igc_coll.parameter_subset.shape)
-        pstep[:] = 10
-        #pstep[0:5]=[0.1,0.01,0.1,0.01,0.1]
-        pstep[0:5]=0.1
+        self.igc_coll.add_identity_gradient()
         ind = self.row_index
         for i, tp in enumerate(self.tpcol):
             gp = self.ground_location(i)
@@ -360,20 +361,15 @@ class SimultaneousBundleAdjustment(object):
                     ictp, lsigma, ssigma = il
                     weight = [[1.0/lsigma], [1.0/ssigma]]
                     try:
-                        if(self.ecr_fd_step_size is not None):
-                            jac = self.igc_coll.image_coordinate_jac_cf_fd(j, gp, self.ecr_fd_step_size)
-                        else:
-                            jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
-                        # We have "-" because equation if measured - predicted
+                        jac = self.igc_coll.collinearity_residual_jacobian(j, 
+                                                                gp, ictp)
                         ts = self.tp_slice[i]
+                        ts2 = slice(-3,None)
                         rs = slice(ind, ind + 2)
-                        res[rs, ts] = -jac * weight
-                        if(self.parameter_fd_step_size is not None):
-                            self.igc_coll.image_coordinate_jac_parm_fd_sparse(j, gp, res, ind,
-                            self.igc_coll_param_slice.start, self.parameter_fd_step_size, -1.0 / lsigma, -1.0 / ssigma)
-                        else:
-                            self.igc_coll.image_coordinate_jac_parm_sparse(j, gp, res, ind,
-                            self.igc_coll_param_slice.start, -1.0 / lsigma, -1.0 / ssigma)
+                        res[rs, ts] = jac[:,ts2] * weight
+                        ps = self.igc_coll_param_slice
+                        ps2 = slice(None,-3)
+                        res[rs, ps] = jac[:,ps2] * weight
                     except RuntimeError as e:
                         if(str(e) != "ImageGroundConnectionFailed"):
                             raise e

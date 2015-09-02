@@ -14,10 +14,35 @@ class _coo_helper(object):
         self.shape = shape
 
     def __setitem__(self, key, value):
-        if(value != 0.0):
-            self.row.append(key[0])
-            self.col.append(key[1])
-            self.data.append(value)
+        if type(key[0]) is slice:
+            r0 = range(*key[0].indices(self.shape[0]))
+            if type(key[1]) is slice:
+                r1 = range(*key[1].indices(self.shape[1]))
+                for i1, i2 in enumerate(r0):
+                    for j1, j2 in enumerate(r1):
+                        if(value[i1, j1] != 0.0):
+                            self.row.append(i2)
+                            self.col.append(j2)
+                            self.data.append(value[i1, j1])
+            else:
+                for i1, i2 in enumerate(r0):
+                    if(value[i1] != 0.0):
+                        self.row.append(i2)
+                        self.col.append(key[1])
+                        self.data.append(value[i1])
+        else:
+            if type(key[1]) is slice:
+                r1 = range(*key[1].indices(self.shape[1]))
+                for j1, j2 in enumerate(r1):
+                    if(value[j1] != 0.0):
+                        self.row.append(key[0])
+                        self.col.append(j2)
+                        self.data.append(value[j1])
+            else:
+                if(value != 0.0):
+                    self.row.append(key[0])
+                    self.col.append(key[1])
+                    self.data.append(value)
 
     def coo_matrix(self):
         return scipy.sparse.coo_matrix((self.data, (self.row, self.col)),
@@ -339,10 +364,9 @@ class SimultaneousBundleAdjustment(object):
                         else:
                             jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
                         # We have "-" because equation if measured - predicted
-                        ts = self.tp_slice[i].start
-                        for k in range(3):
-                            res[ind, ts + k] = -jac[0,k] / lsigma
-                            res[ind + 1, ts + k] = -jac[1,k] / ssigma
+                        ts = self.tp_slice[i]
+                        res[ind, ts] = -jac[0,:] / lsigma
+                        res[ind + 1, ts] = -jac[1,:] / ssigma
                         if(self.parameter_fd_step_size is not None):
                             self.igc_coll.image_coordinate_jac_parm_fd_sparse(j, gp, res, ind,
                             self.igc_coll_param_slice.start, self.parameter_fd_step_size, -1.0 / lsigma, -1.0 / ssigma)

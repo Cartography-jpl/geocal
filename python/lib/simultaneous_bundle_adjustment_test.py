@@ -79,7 +79,7 @@ class TestClass:
         assert len(sba.parameter_constraint()) == 6
         assert len(sba.sba_eq(sba.parameter)) == 95 + 6 + 548 + 6
         # Can save results if we are diagnosing an issue
-        if True:
+        if False:
             write_shelve("simultaneous_bundle_adjustment_test.db:eq_expect", 
                          sba.sba_eq(sba.parameter))
         # Can compare results if we are diagnosing issue
@@ -92,7 +92,7 @@ class TestClass:
         assert t.shape[0] == 95 + 6 + 548 + 6
         assert t.shape[1] == 291
         # Can save results if we are diagnosing an issue
-        if True:
+        if False:
             write_shelve("simultaneous_bundle_adjustment_test.db:jac_expect", 
                          t.todense())
         # Can compare results if we are diagnosing issue

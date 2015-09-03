@@ -150,6 +150,12 @@ public:
 					    bool& Success) const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
   virtual blitz::Array<double, 7> 
   cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
 		     int nsubpixel_line = 1, 
@@ -313,6 +319,9 @@ private:
   }
   boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const Time& Tm) const
+  { return interpolate(*od1, *od2, Tm); }
+  boost::shared_ptr<QuaternionOrbitData> 
+  orbit_data(const TimeWithDerivative& Tm) const
   { return interpolate(*od1, *od2, Tm); }
   boost::shared_ptr<TimeTable> time_table_;
   boost::shared_ptr<Camera> cam;

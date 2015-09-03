@@ -249,7 +249,7 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
 
 def test_mspi_sba():
     '''Directly run MSPI SBA case, and generate diagnostic output.'''
-    #raise SkipTest
+    raise SkipTest
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     x = []
     t = []

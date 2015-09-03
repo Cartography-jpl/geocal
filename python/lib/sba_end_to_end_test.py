@@ -55,5 +55,6 @@ def test_sba_end_to_end():
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     print len(igccol.parameter_subset)
     print igccol.parameter_subset
+    print ptrue
 
 

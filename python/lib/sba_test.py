@@ -113,7 +113,7 @@ def test_jac():
 def test_mspi_old_sba():
     '''This matches an old SBA run done using the old version of GeoCal.
     See if we can match this.'''
-    #raise SkipTest()
+    raise SkipTest()
     # The old run used geocentric coordinates to define the attitude
     # axis. We manually edited this xml file to have vdef go from 0
     # (geodetic) to 1.
@@ -269,8 +269,16 @@ def test_mspi_sba():
                                    e_corr, n_corr, u_corr)
     igccol.set_orbit(orb)
     tpcol_original = read_shelve(test_data + "/tp_data.db:tpcol")
+    if False:
+        tpcol_old = TiePointCollection.read_old_mspi_format("/data/smyth/AirMSPISbaOldExample/podex/2013-01-31/tie_point/AirMSPI_ER2_CA-Mojave_TIE_POINTS_20130131_211051-1_L1B1_Vsba-1")
+        tpcol = TiePointCollection([tp for tp in tpcol_original if not tp.is_gcp])
+        tpcol.extend([tp for tp in tpcol_old if tp.is_gcp])
+    if False:
+        tpcol = read_shelve("play_data.db:tpsim")
+    tpcol = TiePointCollection([tp for tp in tpcol_original if not tp.id in (12, 13)])
+    #tpcol_original.write_old_mspi_format("old_mspi_tp")
     #tpcol = TiePointCollection([tp for tp in tpcol_original if tp.is_gcp])
-    tpcol = tpcol_original
+    #tpcol = tpcol_original
     dem = igccol.dem(0)
     sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
     print sba.parameter
@@ -280,8 +288,8 @@ def test_mspi_sba():
     print "Change position: ", distance(tpcol[10].ground_location,
                                         sba.ground_location(10))
     print igccol.parameter_subset
-    sol_iteration(sba, sba.parameter, 0.1)
-    return
+    #sol_iteration(sba, sba.parameter, 0.1)
+    #return
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
@@ -291,6 +299,84 @@ def test_mspi_sba():
     print igccol.parameter_subset
     print orb
     print sba.parameter
+    tpcol2 = TiePointCollection()
+    for i in range(len(tpcol)):
+        tp = TiePoint(tpcol[i].number_image)
+        tp.is_gcp = tpcol[i].is_gcp
+        tp.id = tpcol[i].id
+        tp.image_location = tpcol[i].image_location
+        tp.ground_location = sba.ground_location(i)
+        tpcol2.append(tp)
+    generate_diagnostic(igccol, tpcol, tpcol2)
+    if(False):
+        tpsim = TiePointCollection()
+        for tp in tpcol_original:
+            if(not tp.is_gcp):
+                tpsim.append(tp)
+            else:
+                tp.ground_location = igccol.ground_coordinate(4, tp.image_location[4][0])
+                tpsim.append(tp)
+        write_shelve("play_data.db:tpsim", tpsim)
+
+def test_mspi_sba_subset():
+    '''Run SBA on a subset of views, to see if results are improved'''
+    # Try fitting the camera parameter only using nadir, followed by more
+    # full fit.
+    raise SkipTest
+    igccol = read_shelve(test_data + "/igccol_initial.xml")
+    t = vector_int()
+    t.push_back(3)
+    t.push_back(4)
+    t.push_back(5)
+    igccol = igccol.subset(t)
+
+    x = []
+    t = []
+    for i in range(igccol.number_image):
+        x.append(igccol.time_table(i).min_time)
+        x.append(igccol.time_table(i).max_time)
+        t.append(PiecewiseLinear.LINEAR)
+        if(i < igccol.number_image - 1):
+            t.append(PiecewiseLinear.CONSTANT)
+    e_corr = PiecewiseLinear(x, t)
+    n_corr = PiecewiseLinear(x, t)
+    x = [igccol.time_table(0).min_time, 
+         igccol.time_table(igccol.number_image-1).max_time]
+    t = [PiecewiseLinear.CONSTANT]
+    u_corr = PiecewiseLinear(x, t)
+    orb = OrbitPiecewiseCorrection(igccol.orbit(0).orbit_uncorrected,
+                                   e_corr, n_corr, u_corr)
+
+    #igccol.set_orbit(igccol.orbit(0).orbit_uncorrected)
+    igccol.set_orbit(orb)
+    tpcol_initial = read_shelve(test_data + "/tp_data.db:tpcol")
+    tpcol = TiePointCollection()
+    for tp in tpcol_initial:
+        tp2 = TiePoint(3)
+        tp2.ground_location = tp.ground_location
+        tp2.is_gcp = tp.is_gcp
+        tp2.id = tp.id
+        tp2.image_location[0] = tp.image_location[3]
+        tp2.image_location[1] = tp.image_location[4]
+        tp2.image_location[2] = tp.image_location[5]
+        if(tp2.number_image_location > 1):
+            tpcol.append(tp2)
+    dem = igccol.dem(0)
+    sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
+    print igccol.parameter_subset
+    v = sba.sba_eq(sba.parameter)
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+    print "Chisq", chisq
+    print "Change position: ", distance(tpcol[10].ground_location,
+                                        sba.ground_location(10))
+    parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
+    v = sba.sba_eq(sba.parameter)
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+    print "Chisq", chisq
+    print "Change position: ", distance(tpcol[10].ground_location,
+                                        sba.ground_location(10))
+    print igccol.parameter_subset
+
     tpcol2 = TiePointCollection()
     for i in range(len(tpcol)):
         tp = TiePoint(tpcol[i].number_image)

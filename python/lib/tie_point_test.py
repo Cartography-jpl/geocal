@@ -6,6 +6,7 @@ from ray_intersect import *
 from feature_detector_extension import *
 from sqlite_shelf import *
 from nose.plugins.skip import Skip, SkipTest
+import shutil
 
 # Data is way too big to check into source, so we put it here. This means
 # we have tests that can only be run on pistol. We may fold this into
@@ -34,6 +35,11 @@ def test_old_mspi_format():
                                                     "old_tie_point")
     assert len(tpcol) == 165
     assert tpcol.number_gcp == 18
+    try:
+        shutil.rmtree("old_mpsi_tp")
+    except OSError:
+        pass
+    tpcol.write_old_mspi_format("old_mspi_tp")
 
 
 def test_create_multiple_pass():

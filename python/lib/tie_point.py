@@ -2,6 +2,7 @@ import math
 import raster_image_extension
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
+from misc import makedirs_p
 from geocal_swig import IgcMapProjected, CartesianFixedLookVector, \
     LnLookVector, Ecr, ImageCoordinate
 import copy
@@ -133,7 +134,21 @@ class TiePoint(object):
                         ImageCoordinate(float(l), float(s)), \
                         math.sqrt(float(c11)),math.sqrt(float(c22))
         return tp
-            
+
+    def write_old_mspi_format(self, dirname, gcp_sigma = 5):
+        '''This writes the old MSPI tie-point format. This can be used to
+        compare with the old SBA code. The file name is fixed by the
+        tiepoint id, but you specify the dirname to put the file.'''
+        filename = "%s/tie_point_%03d.dat" % (dirname, self.id)
+        with open(filename, 'w') as f:
+            tp_cov = gcp_sigma * gcp_sigma if self.is_gcp else 1e8
+            f.write("%0.17e %0.17e %0.17e %0.17e 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 %0.17e 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 %0.17e %d %d : ground_loc%d # %0.6f N %0.6f E\n" % (self.ground_location.position[0], self.ground_location.position[1], self.ground_location.position[2], tp_cov, tp_cov, tp_cov, 1 if self.is_gcp else 0, self.number_image, self.id, self.ground_location.latitude, self.ground_location.longitude))
+            for i,v in enumerate(self.image_location):
+                if(v is None):
+                    f.write("0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0 : image_loc%d_view%d\n" % (self.id, i))
+                else:
+                    ic, ln_sigma, smp_sigma = v
+                    f.write("%0.17e %0.17e %0.17e 0.00000000000000000e+00 0.00000000000000000e+00 %0.17e 1 : image_loc%d_view%d\n" % (ic.line, ic.sample, ln_sigma * ln_sigma, smp_sigma * smp_sigma, self.id, i))
 
     def display(self, igc_coll, sz = 500, ref_image = None, number_row = None,
                 map_info = None, surface_image = None):
@@ -350,6 +365,15 @@ class TiePointCollection(list):
         for f in lst:
             tpcol.append(TiePoint.read_old_mspi_format(f))
         return tpcol
+
+    def write_old_mspi_format(self, dirname, gcp_sigma = 5):
+        '''This writes the old MSPI tie-point format. This can be used to
+        compare with the old SBA code. The file name is fixed by the
+        tiepoint id, but you specify the dirname to put the file. We write
+        one file per tiepoint'''
+        makedirs_p(dirname)
+        for tp in self:
+            tp.write_old_mspi_format(dirname, gcp_sigma)
 
     def __str__(self):
         res =  "TiePointCollection\n"

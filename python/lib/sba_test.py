@@ -30,16 +30,21 @@ def sol_iteration(sba, parm, lam):
     print "Chisq", chisq
     j = sba.sba_jacobian(parm).tocsr()
     jtj = j.transpose() * j
-    c = jtj + sp.spdiags(jtj.diagonal() * lam, 0, jtj.shape[0],
-                                 jtj.shape[1], format="csr")
+    # Think this is wrong
+    c = jtj + lam * sp.eye(jtj.shape[0], jtj.shape[1], format="csr")
     jtres = j.transpose() * residual
     pnew = parm - sp.linalg.spsolve(c, jtres, use_umfpack=True)
     residual = sba.sba_eq(pnew)
     chisq = np.inner(residual, residual) / (len(residual) - len(sba.parameter))
     print "Chisq", chisq
+    print pnew
+    print sba.gcp_constraint()
     return pnew
 
 def test_jac():
+    '''Check the calculation of the jacobian against a finite difference
+    calculation.'''
+    raise SkipTest()
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     x = []
     t = []
@@ -105,7 +110,13 @@ def test_jac():
     print np.max(np.abs(t2))
     print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
 
-def test_mspi_sba3():
+def test_mspi_old_sba():
+    '''This matches an old SBA run done using the old version of GeoCal.
+    See if we can match this.'''
+    #raise SkipTest()
+    # The old run used geocentric coordinates to define the attitude
+    # axis. We manually edited this xml file to have vdef go from 0
+    # (geodetic) to 1.
     igccol = read_shelve(test_data + "/igccol_initial_geocentric.xml")
     x = []
     t = []
@@ -130,6 +141,8 @@ def test_mspi_sba3():
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print "Chisq", chisq
+    #sol_iteration(sba, sba.parameter, 0.1)
+    #return
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
@@ -148,93 +161,6 @@ def test_mspi_sba3():
     generate_diagnostic(igccol, tpcol, tpcol2)
 
     
-
-def test_mspi_sba2():
-    raise SkipTest()
-    # Try fitting the camera parameter only using nadir, followed by more
-    # full fit.
-    #igccol = read_shelve(test_data + "/igccol_initial.xml")
-    igccol = read_shelve(test_data + "/igccol_initial_geocentric.xml")
-    t = vector_int()
-    t.push_back(4)
-    igccol2 = igccol.subset(t)
-
-    x = []
-    t = []
-    for i in range(igccol2.number_image):
-        x.append(igccol2.time_table(i).min_time)
-        x.append(igccol2.time_table(i).max_time)
-        t.append(PiecewiseLinear.LINEAR)
-        if(i < igccol2.number_image - 1):
-            t.append(PiecewiseLinear.CONSTANT)
-    e_corr = PiecewiseLinear(x, t)
-    n_corr = PiecewiseLinear(x, t)
-    x = [igccol.time_table(0).min_time, 
-         igccol.time_table(igccol.number_image-1).max_time]
-    t = [PiecewiseLinear.CONSTANT]
-    u_corr = PiecewiseLinear(x, t)
-    orb = OrbitPiecewiseCorrection(igccol.orbit(0).orbit_uncorrected,
-                                   e_corr, n_corr, u_corr)
-
-    #igccol2.set_orbit(igccol2.orbit(0).orbit_uncorrected)
-    igccol2.set_orbit(orb)
-    igccol2.gimbal(0).parameter_mask = [True, False, True]
-    tpcol = read_shelve(test_data + "/tp_data.db:tpcol")
-    #tpcol = read_shelve(test_data + "/tp_data_new.db:tpcol")
-    tpcol2 = TiePointCollection()
-    for tp in tpcol:
-        if(tp.is_gcp and tp.image_location[4] is not None):
-            tp2 = TiePoint(1)
-            tp2.ground_location = tp.ground_location
-            tp2.is_gcp = True
-            tp2.id = tp.id
-            tp2.image_location[0] = tp.image_location[4]
-            tpcol2.append(tp2)
-    dem = igccol2.dem(0)
-    # Use FD for now
-    parameter_fd_step_size = np.zeros(igccol2.parameter_subset.shape)
-    parameter_fd_step_size[:] = 10
-    parameter_fd_step_size[0:5]=0.1
-    sba = SimultaneousBundleAdjustment(igccol2, tpcol2, dem, gcp_sigma = 5,
-                             ecr_fd_step_size = 10,
-                             parameter_fd_step_size = parameter_fd_step_size)
-    print igccol2.parameter_subset
-    v = sba.sba_eq(sba.parameter)
-    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print "Change position: ", distance(tpcol2[10].ground_location,
-                                        sba.ground_location(10))
-    parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
-    v = sba.sba_eq(sba.parameter)
-    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print "Change position: ", distance(tpcol2[10].ground_location,
-                                        sba.ground_location(10))
-    print igccol2.parameter_subset
-
-    #sba = SimultaneousBundleAdjustment(igccol2, tpcol2, dem, gcp_sigma = 5)
-    print igccol2.parameter_subset
-    v = sba.sba_eq(sba.parameter)
-    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print "Change position: ", distance(tpcol2[10].ground_location,
-                                        sba.ground_location(10))
-    #parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
-    tpcol3 = TiePointCollection()
-    for i in range(len(tpcol2)):
-        tp = TiePoint(tpcol2[i].number_image)
-        tp.is_gcp = tpcol2[i].is_gcp
-        tp.id = tpcol2[i].id
-        tp.image_location = tpcol2[i].image_location
-        tp.ground_location = sba.ground_location(i)
-        tpcol3.append(tp)
-    v = sba.sba_eq(sba.parameter)
-    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print "Change position: ", distance(tpcol2[10].ground_location,
-                                        sba.ground_location(10))
-    print igccol2.parameter_subset
-    generate_diagnostic(igccol2, tpcol2, tpcol3)
 
 def generate_diagnostic(igc, tpcol_original, tpcol_sba):
     '''Generate diagnostic plots.'''
@@ -322,7 +248,8 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
     pdf.savefig()
 
 def test_mspi_sba():
-    raise SkipTest()
+    '''Directly run MSPI SBA case, and generate diagnostic output.'''
+    #raise SkipTest
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     x = []
     t = []
@@ -341,80 +268,37 @@ def test_mspi_sba():
     orb = OrbitPiecewiseCorrection(igccol.orbit(0).orbit_uncorrected,
                                    e_corr, n_corr, u_corr)
     igccol.set_orbit(orb)
-    tpcol = read_shelve(test_data + "/tp_data.db:tpcol")
-    for tp in tpcol:
-        for i,ic in enumerate(tp.image_location):
-            if(ic is not None):
-                if(ic[1] < 0.3):
-                    ic = (ic[0], 0.3, ic[2])
-                if(ic[2] < 0.3):
-                    ic = (ic[0], ic[1], 0.3)
-                tp.image_location[i] = ic
-
-    tpcol2 = TiePointCollection()
-    for tp in tpcol:
-        if(tp.is_gcp):
-            tpcol2.append(tp)
-    tpcol2 = tpcol
+    tpcol_original = read_shelve(test_data + "/tp_data.db:tpcol")
+    #tpcol = TiePointCollection([tp for tp in tpcol_original if tp.is_gcp])
+    tpcol = tpcol_original
     dem = igccol.dem(0)
-    # Use FD for now
-    parameter_fd_step_size = np.zeros(igccol.parameter_subset.shape)
-    parameter_fd_step_size[:] = 10
-    parameter_fd_step_size[0:5]=0.1
-    #sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5)
-    sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 0.1,
-                             ecr_fd_step_size = 10,
-                             parameter_fd_step_size = parameter_fd_step_size)
-    t = sba.psigma.copy()
-    t[0:5] = 1.0
-    t[5:] = 1e8
-    sba.psigma = t
+    sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
+    print sba.parameter
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print "Chisq", chisq
-    print "Change position: ", distance(tpcol2[10].ground_location,
+    print "Change position: ", distance(tpcol[10].ground_location,
                                         sba.ground_location(10))
     print igccol.parameter_subset
+    sol_iteration(sba, sba.parameter, 0.1)
+    return
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print "Chisq", chisq
-    print "Change position: ", distance(tpcol2[10].ground_location,
+    print "Change position: ", distance(tpcol[10].ground_location,
                                         sba.ground_location(10))
     print igccol.parameter_subset
     print orb
-    tpcol3 = TiePointCollection()
-    for i in range(len(tpcol2)):
-        tp = TiePoint(tpcol2[i].number_image)
-        tp.is_gcp = tpcol2[i].is_gcp
-        tp.id = tpcol2[i].id
-        tp.image_location = tpcol2[i].image_location
+    print sba.parameter
+    tpcol2 = TiePointCollection()
+    for i in range(len(tpcol)):
+        tp = TiePoint(tpcol[i].number_image)
+        tp.is_gcp = tpcol[i].is_gcp
+        tp.id = tpcol[i].id
+        tp.image_location = tpcol[i].image_location
         tp.ground_location = sba.ground_location(i)
-        tpcol3.append(tp)
-    generate_diagnostic(igccol, tpcol2, tpcol3)
-    
-    if(False):
-        pstart = sba.parameter
-        sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma = 5)
-        print "Chisq", chisq
-        print "Change position: ", distance(tpcol2[10].ground_location,
-                                            sba.ground_location(10))
-        parm = lm_optimize(sba.sba_eq, pstart, sba.sba_jacobian)
-        v = sba.sba_eq(sba.parameter)
-        chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-        print "Chisq", chisq
-        print "Change position: ", distance(tpcol2[10].ground_location,
-                                            sba.ground_location(10))
-
-    if(False):
-        for i,tp in enumerate(tpcol):
-            if(tp.is_gcp):
-                print i
-#    lam = 0.1
-#    print igccol.parameter_subset
-#    sol_iteration(sba, sba.parameter, lam)
-#    print "Change position: ", distance(tpcol[10].ground_location,
-#                                        sba.ground_location(10))
-#    print igccol.parameter_subset
+        tpcol2.append(tp)
+    generate_diagnostic(igccol, tpcol, tpcol2)
 
 

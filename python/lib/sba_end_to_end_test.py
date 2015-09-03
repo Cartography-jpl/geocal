@@ -17,6 +17,7 @@ console.setLevel(logging.INFO)
 logging.getLogger("geocal-python").addHandler(console)
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
+geocal_test_data = "/data/geocal_test_data/"
 
 # Note the test data igccol_rolling_shutter.xml is created in 
 # igc_collection_extension_test.py, in case you need to regenerate it
@@ -38,7 +39,7 @@ def test_sba_end_to_end():
     We generate the input data, and then run the sba to make sure we can
     retrieve the "truth".'''
     raise SkipTest
-    igccol = read_shelve(test_data + "igccol_rolling_shutter.xml")
+    igccol = read_shelve(geocal_test_data + "igccol_rolling_shutter.xml")
     poriginal = igccol.parameter_subset
     ptrue = np.random.randn(poriginal.shape[0]) * 5
     igccol.parameter_subset = ptrue

@@ -294,6 +294,7 @@ MspiGimbal._v_theta_with_derivative = new_instancemethod(_mspi_gimbal.MspiGimbal
 MspiGimbal._v_parameter_mask = new_instancemethod(_mspi_gimbal.MspiGimbal__v_parameter_mask,None,MspiGimbal)
 MspiGimbal.station_to_sc_with_derivative = new_instancemethod(_mspi_gimbal.MspiGimbal_station_to_sc_with_derivative,None,MspiGimbal)
 MspiGimbal.station_to_sc = new_instancemethod(_mspi_gimbal.MspiGimbal_station_to_sc,None,MspiGimbal)
+MspiGimbal.__str__ = new_instancemethod(_mspi_gimbal.MspiGimbal___str__,None,MspiGimbal)
 MspiGimbal_swigregister = _mspi_gimbal.MspiGimbal_swigregister
 MspiGimbal_swigregister(MspiGimbal)
 

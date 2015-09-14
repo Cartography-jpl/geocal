@@ -21,7 +21,7 @@ public:
 			   const PiecewiseLinear& N_corr,
 			   const PiecewiseLinear& U_corr)
     : OrbitCorrection(Orb_uncorr),
-      e_corr(E_corr), n_corr(N_corr), u_corr(U_corr)
+      e_corr_(E_corr), n_corr_(N_corr), u_corr_(U_corr)
   { }
   virtual ~OrbitPiecewiseCorrection() {}
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
@@ -29,6 +29,24 @@ public:
   virtual std::vector<std::string> parameter_name() const;
   virtual blitz::Array<bool, 1> parameter_mask() const;
   virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Correction in local east direction.
+//-----------------------------------------------------------------------
+  
+  const PiecewiseLinear& e_corr() const { return e_corr_; }
+
+//-----------------------------------------------------------------------
+/// Correction in local north direction.
+//-----------------------------------------------------------------------
+  
+  const PiecewiseLinear& n_corr() const { return n_corr_; }
+
+//-----------------------------------------------------------------------
+/// Correction in local up direction.
+//-----------------------------------------------------------------------
+  
+  const PiecewiseLinear& u_corr() const { return u_corr_; }
 protected:
   virtual void notify_update()
   {
@@ -47,7 +65,7 @@ protected:
   acorr(const Time& T) const
   { return boost::math::quaternion<double>(1,0,0,0); }
 private:
-  PiecewiseLinear e_corr, n_corr, u_corr;
+  PiecewiseLinear e_corr_, n_corr_, u_corr_;
   OrbitPiecewiseCorrection() {}
   friend class boost::serialization::access;
   template<class Archive>

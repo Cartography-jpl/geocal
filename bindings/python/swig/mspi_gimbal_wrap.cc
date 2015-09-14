@@ -5172,6 +5172,34 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6562,6 +6590,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiGimbal___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiGimbal *arg1 = (GeoCal::MspiGimbal *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiGimbal const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiGimbal const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiGimbal_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiGimbal___str__" "', argument " "1"" of type '" "GeoCal::MspiGimbal const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiGimbal > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiGimbal > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiGimbal * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiGimbal > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiGimbal * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::MspiGimbal const *)arg1)->print_to_string();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_MspiGimbal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiGimbal *arg1 = (GeoCal::MspiGimbal *) 0 ;
@@ -6690,6 +6761,7 @@ static PyMethodDef SwigMethods[] = {
 		"boost::math::quaternion< double > MspiGimbal::station_to_sc(double Gimbal_pos) const\n"
 		"\n"
 		""},
+	 { (char *)"MspiGimbal___str__", (PyCFunction)_wrap_MspiGimbal___str__, METH_O, NULL},
 	 { (char *)"delete_MspiGimbal", (PyCFunction)_wrap_delete_MspiGimbal, METH_O, NULL},
 	 { (char *)"MspiGimbal_swigregister", MspiGimbal_swigregister, METH_VARARGS, NULL},
 	 { (char *)"MspiGimbal_swiginit", MspiGimbal_swiginit, METH_VARARGS, NULL},

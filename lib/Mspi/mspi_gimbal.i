@@ -42,6 +42,7 @@ public:
   station_to_sc_with_derivative(const AutoDerivative<double>& Gimbal_pos) const;
   boost::math::quaternion<double>  
   station_to_sc(double Gimbal_pos) const;
+  std::string print_to_string() const;
   %pickle_serialization();
 protected:
   void notify_update_do(const MspiGimbal& Self);

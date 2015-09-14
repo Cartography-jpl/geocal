@@ -148,10 +148,46 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
 
         """
         _orbit_piecewise_correction.OrbitPiecewiseCorrection_swiginit(self,_orbit_piecewise_correction.new_OrbitPiecewiseCorrection(*args))
+    def _v_e_corr(self):
+        """
+        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::e_corr() const
+        Correction in local east direction. 
+        """
+        return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_e_corr(self)
+
+    @property
+    def e_corr(self):
+        return self._v_e_corr()
+
+    def _v_n_corr(self):
+        """
+        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::n_corr() const
+        Correction in local north direction. 
+        """
+        return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_n_corr(self)
+
+    @property
+    def n_corr(self):
+        return self._v_n_corr()
+
+    def _v_u_corr(self):
+        """
+        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::u_corr() const
+        Correction in local up direction. 
+        """
+        return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_u_corr(self)
+
+    @property
+    def u_corr(self):
+        return self._v_u_corr()
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_piecewise_correction.delete_OrbitPiecewiseCorrection
+OrbitPiecewiseCorrection._v_e_corr = new_instancemethod(_orbit_piecewise_correction.OrbitPiecewiseCorrection__v_e_corr,None,OrbitPiecewiseCorrection)
+OrbitPiecewiseCorrection._v_n_corr = new_instancemethod(_orbit_piecewise_correction.OrbitPiecewiseCorrection__v_n_corr,None,OrbitPiecewiseCorrection)
+OrbitPiecewiseCorrection._v_u_corr = new_instancemethod(_orbit_piecewise_correction.OrbitPiecewiseCorrection__v_u_corr,None,OrbitPiecewiseCorrection)
 OrbitPiecewiseCorrection_swigregister = _orbit_piecewise_correction.OrbitPiecewiseCorrection_swigregister
 OrbitPiecewiseCorrection_swigregister(OrbitPiecewiseCorrection)
 

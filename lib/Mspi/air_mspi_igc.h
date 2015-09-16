@@ -28,6 +28,8 @@ public:
 	     const boost::shared_ptr<MspiGimbal>& Gim,
 	     const boost::shared_ptr<Dem>& Dem,
 	     const std::string& L1b1_file_name,
+	     int Min_l1b1_line,
+	     int Max_l1b1_line,
 	     const std::string& Swath_to_use = "660-I",
 	     const std::string& Title = "Image",
 	     int Dem_resolution = 10,

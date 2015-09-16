@@ -35,8 +35,10 @@ GEOCAL_SPLIT_IMPLEMENT(AirMspiTimeTable);
 
 AirMspiTimeTable::AirMspiTimeTable
 (const std::string& L1b1_file_name, 
- const std::string& Swath_to_use)
-  : l1b1_file_(new AirMspiL1b1File(L1b1_file_name, Swath_to_use))
+ const std::string& Swath_to_use,
+ int Min_l1b1_line,
+ int Max_l1b1_line)
+  : l1b1_file_(new AirMspiL1b1File(L1b1_file_name, Swath_to_use, Min_l1b1_line, Max_l1b1_line))
 {
   read_data();
 }

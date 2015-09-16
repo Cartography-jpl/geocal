@@ -172,6 +172,10 @@ public:
 /// to process. This looks at the both the l1b1 file itself and also
 /// the coverage of the navigation file. It can also be shrunk by the
 /// user supplying the range in the configuration files.
+///
+/// Note that the images etc returned by this class have *already*
+/// been subsetted, you don't need to use min_l1b1_line or
+/// max_l1b1_line directly. This is provided just as metadata.
 //-----------------------------------------------------------------------
 
   int min_l1b1_line(int Index) const
@@ -185,6 +189,10 @@ public:
 /// to process. This looks at the both the l1b1 file itself and also
 /// the coverage of the navigation file. It can also be shrunk by the
 /// user supplying the range in the configuration files.
+///
+/// Note that the images etc. returned by this class have *already*
+/// been subsetted, you don't need to use min_l1b1_line or
+/// max_l1b1_line directly. This is provided just as metadata.
 //-----------------------------------------------------------------------
 
   int max_l1b1_line(int Index) const

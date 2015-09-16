@@ -15,6 +15,8 @@ class AirMspiL1b1File: public GenericObject {
 public:
   AirMspiL1b1File(const std::string& Fname, 
 		  const std::string& Swath_to_use = "660-I",
+		  int Min_l1b1_line = 0,
+		  int Max_l1b1_line = -1,
 		  int Tile_number_line = -1,
 		  int Tile_number_sample = -1, 
 		  unsigned int Number_tile = 4);

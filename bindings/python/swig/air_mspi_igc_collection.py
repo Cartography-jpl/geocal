@@ -239,7 +239,11 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
 
         This looks at the both the l1b1 file itself and also the coverage of
         the navigation file. It can also be shrunk by the user supplying the
-        range in the configuration files. 
+        range in the configuration files.
+
+        Note that the images etc returned by this class have already been
+        subsetted, you don't need to use min_l1b1_line or max_l1b1_line
+        directly. This is provided just as metadata. 
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_min_l1b1_line(self, *args)
 
@@ -251,7 +255,11 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
 
         This looks at the both the l1b1 file itself and also the coverage of
         the navigation file. It can also be shrunk by the user supplying the
-        range in the configuration files. 
+        range in the configuration files.
+
+        Note that the images etc. returned by this class have already been
+        subsetted, you don't need to use min_l1b1_line or max_l1b1_line
+        directly. This is provided just as metadata. 
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_max_l1b1_line(self, *args)
 

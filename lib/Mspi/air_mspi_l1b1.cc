@@ -13,6 +13,7 @@ template<class Archive>
 void AirMspiL1b1File::save(Archive & ar, const unsigned int version) const
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiledFile_float_2)
+    & GEOCAL_NVP(min_l1b1_line)
     & GEOCAL_NVP(fname)
     & GEOCAL_NVP_(row_index_to_use);
 
@@ -22,6 +23,7 @@ template<class Archive>
 void AirMspiL1b1File::load(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiledFile_float_2)
+    & GEOCAL_NVP(min_l1b1_line)
     & GEOCAL_NVP(fname)
     & GEOCAL_NVP_(row_index_to_use);
 #ifdef HAVE_MSPI_SHARED
@@ -49,11 +51,14 @@ GEOCAL_SPLIT_IMPLEMENT(AirMspiL1b1File);
 AirMspiL1b1File::AirMspiL1b1File
 (const std::string& Fname, 
  const std::string& Swath_to_use,
+ int Min_l1b1_line,
+ int Max_l1b1_line,
  int Tile_number_line,
  int Tile_number_sample,
  unsigned int Number_tile
 )
-  : fname(Fname)
+  : fname(Fname),
+    min_l1b1_line(Min_l1b1_line)
 {
 #ifdef HAVE_MSPI_SHARED
   fname = Fname;
@@ -70,7 +75,10 @@ AirMspiL1b1File::AirMspiL1b1File
   typedef TiledFile<float, 2>::index index;
   boost::array<index, 2> file_size;
   boost::array<index, 2> tile_size;
-  file_size[0] = l1b1_reader->number_frame(row_number_to_use());
+  file_size[0] = l1b1_reader->number_frame(row_number_to_use()) - min_l1b1_line;
+  if(Max_l1b1_line > -1 &&
+     file_size[0] > Max_l1b1_line - min_l1b1_line + 1)
+    file_size[0] = Max_l1b1_line - min_l1b1_line + 1;
   file_size[1] = l1b1_reader->number_pixel();
   if(Tile_number_line < 0)
     tile_size[0] = file_size[0];
@@ -157,7 +165,7 @@ void AirMspiL1b1File::read_tile(const boost::array<index, 2>& Min_index,
 {
 #ifdef HAVE_MSPI_SHARED
   boost::multi_array<float, 2> d = 
-    l1b1_reader->read_data(row_number_to_use(), "I", Min_index[0],
+    l1b1_reader->read_data(row_number_to_use(), "I", Min_index[0] + min_l1b1_line,
 			   Max_index[0] - Min_index[0]);
   for(int i = 0; i < (int) d.shape()[0]; ++i)
     for(int j = Min_index[1]; j < Max_index[1]; ++j, ++Res)
@@ -176,7 +184,7 @@ std::vector<Time> AirMspiL1b1File::time() const
 #ifdef HAVE_MSPI_SHARED
   Time tepoch = Time::parse_time(l1b1_reader->epoch());
   std::vector<double> toffset =
-    l1b1_reader->read_time(row_number_to_use(), 0, 
+    l1b1_reader->read_time(row_number_to_use(), min_l1b1_line, 
 			   size()[0]);
   std::vector<Time> tlist;
   BOOST_FOREACH(double toff, toffset)

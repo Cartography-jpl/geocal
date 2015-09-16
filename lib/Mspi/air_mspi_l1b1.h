@@ -25,6 +25,8 @@ class AirMspiL1b1File: public TiledFile<float, 2> {
 public:
   AirMspiL1b1File(const std::string& Fname, 
 		  const std::string& Swath_to_use = "660-I",
+		  int Min_l1b1_line = 0,
+		  int Max_l1b1_line = -1,
 		  int Tile_number_line = -1,
 		  int Tile_number_sample = -1, 
 		  unsigned int Number_tile = 4);
@@ -95,6 +97,7 @@ private:
   mutable std::vector<int> row_number_;
   void fill_in_row_number() const;
   std::string fname;
+  int min_l1b1_line;
   boost::shared_ptr<MSPI::Shared::L1B1Reader> l1b1_reader;
   AirMspiL1b1File() {}
   friend class boost::serialization::access;

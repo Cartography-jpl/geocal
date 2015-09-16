@@ -144,8 +144,8 @@ class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args): 
         """
         AirMspiL1b1File::AirMspiL1b1File(const std::string &Fname, const std::string &Swath_to_use="660-I",
-        int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int
-        Number_tile=4)
+        int Min_l1b1_line=0, int Max_l1b1_line=-1, int Tile_number_line=-1,
+        int Tile_number_sample=-1, unsigned int Number_tile=4)
         Constructor. 
         """
         _air_mspi_l1b1.AirMspiL1b1File_swiginit(self,_air_mspi_l1b1.new_AirMspiL1b1File(*args))

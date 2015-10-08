@@ -1,6 +1,7 @@
 #include "unit_test_support.h"
 #include "simple_dem.h"
 #include "geocal_datum.h"
+#include "ecr.h"
 #include <cmath>
 
 using namespace GeoCal;
@@ -60,6 +61,17 @@ BOOST_AUTO_TEST_CASE(serialization_datum)
   boost::shared_ptr<Datum> datumr = serialize_read_string<Datum>(d);
   Geodetic g(60, 30, 100);
   BOOST_CHECK(fabs(datumr->undulation(g) - 0) < 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(failure_case)
+{
+  Ecr cf(-2476218.3081625318, -4239788.305709024, 4088301.3991399906);
+  CartesianFixedLookVector lv(-16.508420817465716, 21.316931438730403, 12.989757605481763);
+  SimpleDem dem;
+  BOOST_CHECK_THROW(dem.intersect(cf, lv, 100),
+		    ConvergenceFailure);
+  BOOST_CHECK_THROW(dem.intersect_start_length(cf, lv, 100, 29597.700365968903),
+		    ConvergenceFailure);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

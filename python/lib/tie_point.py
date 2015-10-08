@@ -4,7 +4,7 @@ import safe_matplotlib_import
 import matplotlib.pyplot as plt
 from misc import makedirs_p
 from geocal_swig import IgcMapProjected, CartesianFixedLookVector, \
-    LnLookVector, Ecr, ImageCoordinate
+    LnLookVector, Ecr, ImageCoordinate, distance
 import copy
 import numpy as np
 import re
@@ -271,6 +271,7 @@ class TiePointCollection(list):
         e_diff = [ ]
         n_diff = [ ] 
         u_diff = [ ]
+        move_distance = [ ]
         for i, tp in enumerate(self):
             if(tp.is_gcp):
                 lat.append(tp.ground_location.latitude)
@@ -282,12 +283,14 @@ class TiePointCollection(list):
                 e_diff.append(llv.look_vector[0])
                 n_diff.append(llv.look_vector[1])
                 u_diff.append(llv.look_vector[2])
+                move_distance.append(distance(tp.ground_location, tpcol_other[i].ground_location))
         return pd.DataFrame({'latitude' : lat,
                              'longitude' : lon,
                              'height' : height,
                              'e_diff' : e_diff,
                              'n_diff' : n_diff,
-                             'u_diff' : u_diff},
+                             'u_diff' : u_diff,
+                             'move_distance': move_distance},
                             index=ind)
         
 

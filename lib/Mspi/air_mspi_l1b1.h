@@ -98,14 +98,11 @@ private:
   void fill_in_row_number() const;
   std::string fname;
   int min_l1b1_line;
-  boost::shared_ptr<MSPI::Shared::L1B1Reader> l1b1_reader;
+  boost::shared_ptr<MSPI::Shared::L1B1Reader> l1b1_reader() const;
   AirMspiL1b1File() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
-  GEOCAL_SPLIT_MEMBER();
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 class AirMspiL1b1: public RasterImageTiledFile {

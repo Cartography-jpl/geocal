@@ -90,7 +90,7 @@ ArrayAd<double, 1> PiecewiseLinear::parameter_with_derivative() const
 
 double PiecewiseLinear::value(const Time& x) const
 {
-  if(x < x_(0))
+  if(x <= x_(0))
     return y_.value()(0);
   if(x >= x_(x_.rows() - 1))
     return y_.value()(x_.rows() - 1);
@@ -112,7 +112,7 @@ double PiecewiseLinear::value(const Time& x) const
 AutoDerivative<double> PiecewiseLinear::value_with_derivative
 (const TimeWithDerivative& x) const
 {
-  if(x.value() < x_(0))
+  if(x.value() <= x_(0))
     return y_.value()(0);
   if(x.value() >= x_(x_.rows() - 1))
     return y_.value()(x_.rows() - 1);

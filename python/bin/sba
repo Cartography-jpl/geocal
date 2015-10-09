@@ -53,6 +53,12 @@ Options:
   --gcp-sigma=v
        Weighting to give GCP constraint [default: 10.0]
 
+  --hold-gcp-fixed
+      Hold GCP completely fixed, not allowing them to be moved at all. 
+      This can be useful in some cases where the SBA is moving the GCPs 
+      too far to account for other errors, particularly 
+      when the GCP locations are more certain than other sources of errors. 
+
   --log-file=f
        File name to use as a log file.
 
@@ -109,6 +115,7 @@ else:
     dem = igc.dem(0)
 
 sba = SimultaneousBundleAdjustment(igc, tpcol, dem, dem_sigma=args.dem_sigma,
+                                   hold_gcp_fixed=args.hold_gcp_fixed,
                                    gcp_sigma=args.gcp_sigma,
                                    tp_epsilon=args.tp_epsilon,
                                    tp_sigma=args.tp_sigma)

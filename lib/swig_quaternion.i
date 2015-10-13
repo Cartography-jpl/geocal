@@ -50,6 +50,10 @@ namespace boost {
       %pickle_init(1, self.R_component_1,
 		   self.R_component_2, self.R_component_3,
 		   self.R_component_4);
+%pythoncode {
+def __str__(self):
+    return "Quaternion (" + str(self.R_component_1) + ", " + str(self.R_component_2) + ", " + str(self.R_component_3) + ", " + str(self.R_component_4) + ")"
+}
     };
     template<class T> T abs(const boost::math::quaternion<T>&);
     %template(Quaternion_double) quaternion<double>;

@@ -1095,7 +1095,7 @@ boost::math::quaternion<double> Orbit::interpolate(
               const boost::math::quaternion<double>& Q2,
 	      double toffset, double tspace) const
 {
-  return interpolate_quaternion(Q1, Q2, toffset, tspace);
+  return interpolate_quaternion_rotation(Q1, Q2, toffset, tspace);
 }
 
 boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
@@ -1103,7 +1103,7 @@ boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
 	      const AutoDerivative<double>& toffset, double tspace) const
 {
-  return interpolate_quaternion(Q1, Q2, toffset, tspace);
+  return interpolate_quaternion_rotation(Q1, Q2, toffset, tspace);
 }
 
 //-----------------------------------------------------------------------
@@ -1179,7 +1179,7 @@ boost::shared_ptr<QuaternionOrbitData>
   double tspace = t2.time() - t1.time();
   AutoDerivative<double> toffset = tm - t1.time_with_derivative();
   boost::math::quaternion<AutoDerivative<double> > sc_to_cf_ = 
-    interpolate_quaternion(t1.sc_to_cf_with_derivative(), 
+    interpolate_quaternion_rotation(t1.sc_to_cf_with_derivative(), 
 			   t2.sc_to_cf_with_derivative(), toffset, tspace);
   boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, 
     vel_cf, pos_cf;
@@ -1208,7 +1208,7 @@ boost::shared_ptr<QuaternionOrbitData>
   if(t1.have_ci_to_cf) {
     t2.fill_in_ci_to_cf();
     res->have_ci_to_cf = true;
-    res->ci_to_cf_der_ = interpolate_quaternion(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
+    res->ci_to_cf_der_ = interpolate_quaternion_rotation(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
     res->ci_to_cf_ = value(res->ci_to_cf_der_);
     
     boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, 
@@ -1257,7 +1257,7 @@ boost::shared_ptr<QuaternionOrbitData>
   double tspace = t2.time() - t1.time();
   double toffset = tm - t1.time();
   boost::math::quaternion<double> sc_to_cf_ = 
-    interpolate_quaternion(t1.sc_to_cf(), 
+    interpolate_quaternion_rotation(t1.sc_to_cf(), 
 			   t2.sc_to_cf(), toffset, tspace);
   boost::array<double, 3> pos1, pos2, vel1, vel2, 
     vel_cf, pos_cf;
@@ -1282,7 +1282,7 @@ boost::shared_ptr<QuaternionOrbitData>
   if(t1.have_ci_to_cf) {
     t2.fill_in_ci_to_cf();
     res->have_ci_to_cf = true;
-    res->ci_to_cf_der_ = interpolate_quaternion(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
+    res->ci_to_cf_der_ = interpolate_quaternion_rotation(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
     res->ci_to_cf_ = value(res->ci_to_cf_der_);
     
     boost::array<double, 3> pos1, pos2, vel1, vel2, 

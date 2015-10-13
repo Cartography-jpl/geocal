@@ -50,7 +50,7 @@ namespace GeoCal {
       Time tmin;
       double tspace;
     };
-    // Helper class that does a fast interpolation of quaternion.
+    // Helper class that does a fast interpolation of quaternion rotations
     class QuaternionInterpolate {
     public:
       QuaternionInterpolate() {}
@@ -60,7 +60,7 @@ namespace GeoCal {
 			    double Tspace)
 	: q1(Q1), q2(Q2), tmin(Tmin), tspace(Tspace) {}
       boost::math::quaternion<double> operator()(const Time& Tm) const
-      { return interpolate_quaternion(q1, q2, Tm - tmin, tspace); }
+      { return interpolate_quaternion_rotation(q1, q2, Tm - tmin, tspace); }
     private:
       boost::math::quaternion<double> q1, q2;
       Time tmin;

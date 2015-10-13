@@ -57,7 +57,15 @@ Options:
       Hold GCP completely fixed, not allowing them to be moved at all. 
       This can be useful in some cases where the SBA is moving the GCPs 
       too far to account for other errors, particularly 
-      when the GCP locations are more certain than other sources of errors. 
+      when the GCP locations are more certain than other sources of errors.
+      See also --initial-hold-gcp-fixed.
+
+  --initial-hold-gcp-fixed
+      This is like the option --hold-gcp-fixed, but after the initial SBA
+      solution we then do a *second* solution starting with the final values
+      and then doing a second solution where the GCP are allowed to vary.
+      This is useful when the initial solution is pulling the GCP too far,
+      where we get close to the final solution before letting the GCP vary.
 
   --log-file=f
        File name to use as a log file.
@@ -114,8 +122,12 @@ if(args.dem):
 else:
     dem = igc.dem(0)
 
+if(args.hold_gcp_fixed or args.initial_hold_gcp_fixed):
+    hold_gcp_fixed = True
+else: 
+    hold_gcp_fixed = False
 sba = SimultaneousBundleAdjustment(igc, tpcol, dem, dem_sigma=args.dem_sigma,
-                                   hold_gcp_fixed=args.hold_gcp_fixed,
+                                   hold_gcp_fixed=hold_gcp_fixed,
                                    gcp_sigma=args.gcp_sigma,
                                    tp_epsilon=args.tp_epsilon,
                                    tp_sigma=args.tp_sigma)
@@ -130,7 +142,31 @@ sba.parameter = parm
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 log.info("Final Chisq: %f" % chisq)
+tpcol = sba.tpcol
+for i in range(len(tpcol)):
+    tpcol[i].ground_location = sba.ground_location(i)
 
+if(args.initial_hold_gcp_fixed):
+    sba = SimultaneousBundleAdjustment(igc, tpcol, dem, 
+                                       dem_sigma=args.dem_sigma,
+                                       hold_gcp_fixed=False,
+                                       gcp_sigma=args.gcp_sigma,
+                                       tp_epsilon=args.tp_epsilon,
+                                       tp_sigma=args.tp_sigma)
+    v = sba.sba_eq(sba.parameter)
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+    log.info("Initial Chisq: %f" % chisq)
+    parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian,
+                       min_chisqr = args.min_chisqr, 
+                       stopping_criteria = args.stopping_criteria)
+    sba.parameter = parm
+    v = sba.sba_eq(sba.parameter)
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+    log.info("Final Chisq: %f" % chisq)
+    tpcol = sba.tpcol
+    for i in range(len(tpcol)):
+        tpcol[i].ground_location = sba.ground_location(i)
+    
 if(args.dem_height_block_adjust):
     d = sba.igc_coll.dem(0)
     sdiff = [ d.distance_to_surface(sba.ground_location(i)) 
@@ -144,9 +180,6 @@ if(args.dem_height_block_adjust):
         sba.igc_coll.image_ground_connection(i).dem = d
 
 write_shelve(args.igc_out, sba.igc_coll)
-tpcol = sba.tpcol
-for i in range(len(tpcol)):
-    tpcol[i].ground_location = sba.ground_location(i)
 write_shelve(args.tpcol_out, tpcol)
 logging.shutdown()
 

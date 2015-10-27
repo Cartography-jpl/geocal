@@ -1295,7 +1295,8 @@ am__geocalpkgpython_PYTHON_DIST = @srcpython@/init/__init__.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \
-	@srcpythonlib@/tie_point.py @srcpythonlib@/vicar_interface.py \
+	@srcpythonlib@/orbit_extension.py @srcpythonlib@/tie_point.py \
+	@srcpythonlib@/vicar_interface.py \
 	@srcpythonlib@/image_to_image_connection.py \
 	@srcpythonlib@/doc_inherit.py @srcpythonlib@/tre_struct.py \
 	@srcpythonlib@/dem_generate.py \
@@ -2669,7 +2670,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \
-	@srcpythonlib@/tie_point.py @srcpythonlib@/vicar_interface.py \
+	@srcpythonlib@/orbit_extension.py @srcpythonlib@/tie_point.py \
+	@srcpythonlib@/vicar_interface.py \
 	@srcpythonlib@/image_to_image_connection.py \
 	@srcpythonlib@/doc_inherit.py @srcpythonlib@/tre_struct.py \
 	@srcpythonlib@/dem_generate.py \

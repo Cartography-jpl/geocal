@@ -125,6 +125,7 @@ extern "C" {
   void init_orbit_correction(void);
   void init_orbit_offset_correction(void);
   void init_orbit_piecewise_correction(void);
+  void init_tle_orbit(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
   void init_quickbird_camera(void);
@@ -365,6 +366,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_orbit_correction", init_orbit_correction);
   init_extension_module(package, "_orbit_offset_correction", init_orbit_offset_correction);
   init_extension_module(package, "_orbit_piecewise_correction", init_orbit_piecewise_correction);
+  init_extension_module(package, "_tle_orbit", init_tle_orbit);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
   init_extension_module(package, "_quickbird_camera", init_quickbird_camera);

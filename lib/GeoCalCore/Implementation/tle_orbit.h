@@ -38,6 +38,7 @@ public:
 
   const std::string& tle() const { return tle_;}
 private:
+  static double geophs[8];
   std::string tle_;
   mutable bool elem_filled_in;
   mutable double elems[10];

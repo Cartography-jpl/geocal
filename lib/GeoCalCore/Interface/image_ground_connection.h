@@ -354,6 +354,26 @@ public:
 				    double &Line_resolution_meter, 
 				    double &Sample_resolution_meter) const;
 
+//-----------------------------------------------------------------------
+/// SWIG/python doesn't like returning 2 items through a director, so
+/// we implement cf_look_vector in 2 parts. In general, C++ should
+/// override footprint_resolution rather than these 2 functions (although it
+/// could do these 2 if useful for some reason.
+//-----------------------------------------------------------------------
+
+  virtual double footprint_resolution_line(int Line, int Sample) const
+  { 
+    double lres, sres;
+    footprint_resolution(Line, Sample, lres, sres);
+    return lres;
+  }
+
+  virtual double footprint_resolution_sample(int Line, int Sample) const
+  { 
+    double lres, sres;
+    footprint_resolution(Line, Sample, lres, sres);
+    return sres;
+  }
 
 //-----------------------------------------------------------------------
 /// DEM used by ground_coordinate.

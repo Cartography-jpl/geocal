@@ -8,7 +8,10 @@ def _kepler_orbit_from_tle(self, tle):
     the Kepler orbit completely ignores the sorts of perturbation that
     a simplified perturbation model (e.g., SDP4) models, so this isn't
     particularly accurate. But can be nice for unit tests since this
-    is independent of SPICE toolkit.'''
+    is independent of SPICE toolkit.
+
+    Compare this to the TleOrbit, which does use the full model but 
+    depends on the SPICE toolkit'''
     tle_arr = tle.split()
     t = tle_arr[3]
     # Note we assume year is for 20xx. We'd need to add handling for

@@ -1,5 +1,7 @@
 #include "unit_test_support.h"
 #include "tle_orbit.h"
+#include "spice_helper.h"
+#include "geodetic.h"
 
 using namespace GeoCal;
 
@@ -13,11 +15,22 @@ BOOST_FIXTURE_TEST_SUITE(tle_orbit, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(basic)
 {
+  if(!SpiceHelper::spice_available()) {
+    BOOST_WARN_MESSAGE(false, "Not configured to use SPICE library, so skipping Spice tests.");
+    return;
+  }
   TleOrbit orb(test_tle);
+  Time t = Time::parse_time("2015-10-27T00:05:10Z");
+  Geodetic pexpect(-51.7532613384, 20.0670430907, 425523.669914);
+  BOOST_CHECK(distance(*orb.position_cf(t), pexpect) < 1.0);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+  if(!SpiceHelper::spice_available()) {
+    BOOST_WARN_MESSAGE(false, "Not configured to use SPICE library, so skipping Spice tests.");
+    return;
+  }
   if(!have_serialize_supported())
     return;
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");

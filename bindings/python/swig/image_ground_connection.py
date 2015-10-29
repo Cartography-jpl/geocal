@@ -553,6 +553,25 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def parameter_mask(self):
         return self._v_parameter_mask()
 
+    def footprint_resolution_line(self, *args):
+        """
+        virtual double GeoCal::ImageGroundConnection::footprint_resolution_line(int Line, int Sample) const
+        SWIG/python doesn't like returning 2 items through a director, so we
+        implement cf_look_vector in 2 parts.
+
+        In general, C++ should override footprint_resolution rather than these
+        2 functions (although it could do these 2 if useful for some reason.
+
+        """
+        return _image_ground_connection.ImageGroundConnection_footprint_resolution_line(self, *args)
+
+    def footprint_resolution_sample(self, *args):
+        """
+        virtual double GeoCal::ImageGroundConnection::footprint_resolution_sample(int Line, int Sample) const
+
+        """
+        return _image_ground_connection.ImageGroundConnection_footprint_resolution_sample(self, *args)
+
     def cf_look_vector_arr(self, *args):
         """
         blitz::Array< double, 7 > ImageGroundConnection::cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp, int
@@ -616,6 +635,10 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def cf_look_vector(self, ic):
       return (self.cf_look_vector_lv(ic), self.cf_look_vector_pos(ic))
 
+    def footprint_resolution(self, line, sample):
+      return (self.footprint_resolution_line(line, sample), 
+    	  self.footprint_resolution_sample(line, sample))
+
     def ground_coordinate(self, ic, dem = None):
       '''Return ground coordinate for the given image coordinate. You can specify
        a dem to use, or we use the dem associated with the class.'''
@@ -660,6 +683,8 @@ ImageGroundConnection._v_parameter_subset = new_instancemethod(_image_ground_con
 ImageGroundConnection._v_parameter_with_derivative_subset = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_with_derivative_subset,None,ImageGroundConnection)
 ImageGroundConnection._v_parameter_name_subset = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_name_subset,None,ImageGroundConnection)
 ImageGroundConnection._v_parameter_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_mask,None,ImageGroundConnection)
+ImageGroundConnection.footprint_resolution_line = new_instancemethod(_image_ground_connection.ImageGroundConnection_footprint_resolution_line,None,ImageGroundConnection)
+ImageGroundConnection.footprint_resolution_sample = new_instancemethod(_image_ground_connection.ImageGroundConnection_footprint_resolution_sample,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_arr = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_arr,None,ImageGroundConnection)
 ImageGroundConnection._v_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_dem,None,ImageGroundConnection)
 ImageGroundConnection.__dem = new_instancemethod(_image_ground_connection.ImageGroundConnection___dem,None,ImageGroundConnection)

@@ -5488,7 +5488,7 @@ static PyMethodDef SwigMethods[] = {
 		"file (e.g., we have a test xml file that is delivered with the source,\n"
 		"where the absolute path might changes). So before doing the object\n"
 		"creation, we change to the local directory of the xml file. These\n"
-		"means paths are relative to the xml file, *not* our current directory.\n"
+		"means paths are relative to the xml file, not our current directory.\n"
 		"\n"
 		""},
 	 { (char *)"serialize_read_generic_string", (PyCFunction)_wrap_serialize_read_generic_string, METH_O, (char *)"\n"

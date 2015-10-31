@@ -172,7 +172,7 @@ def serialize_read_generic(*args):
     file (e.g., we have a test xml file that is delivered with the source,
     where the absolute path might changes). So before doing the object
     creation, we change to the local directory of the xml file. These
-    means paths are relative to the xml file, *not* our current directory.
+    means paths are relative to the xml file, not our current directory.
 
     """
   return _geocal_serialize_function.serialize_read_generic(*args)

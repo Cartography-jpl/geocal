@@ -6053,7 +6053,7 @@ static PyMethodDef SwigMethods[] = {
 		"Eps=1e-6, double Eps_abs=1e-8)\n"
 		"This finds the root of a function, and propagates the derivative of\n"
 		"the solution with respect to any parameters in the function (i.e., we\n"
-		"*aren't* talking about the derivative wrt X here). \n"
+		"aren't talking about the derivative wrt X here). \n"
 		""},
 	 { (char *)"root_list", _wrap_root_list, METH_VARARGS, (char *)"\n"
 		"std::vector< AutoDerivative< double > > GeoCal::root_list(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"

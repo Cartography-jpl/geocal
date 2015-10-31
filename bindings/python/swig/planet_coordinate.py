@@ -328,8 +328,8 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     This is Planet coordinates as Planetocentric latitude, longitude, and
     height above the reference ellipsoid.
 
-    This is the planet equivalent of Geocentric (*not* Geodetic). Height
-    is relative to the ellipsoid, but latitude is relative to center of
+    This is the planet equivalent of Geocentric ( not Geodetic). Height is
+    relative to the ellipsoid, but latitude is relative to center of
     planet rather than normal of ellipsoid.
 
     Note that "Planet" also includes "Moon of planet", basically
@@ -621,8 +621,8 @@ class EuropaPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     This is Planet coordinates as Planetocentric latitude, longitude, and
     height above the reference ellipsoid.
 
-    This is the planet equivalent of Geocentric (*not* Geodetic). Height
-    is relative to the ellipsoid, but latitude is relative to center of
+    This is the planet equivalent of Geocentric ( not Geodetic). Height is
+    relative to the ellipsoid, but latitude is relative to center of
     planet rather than normal of ellipsoid.
 
     Note that "Planet" also includes "Moon of planet", basically

@@ -12597,7 +12597,7 @@ static PyMethodDef SwigMethods[] = {
 		"Calculate matrix that can be used to convert CartesianInertial to\n"
 		"CartesianFixed at the given Time, including velocity.\n"
 		"\n"
-		"Note that unlike the 3x3 matrix, this is *not* orthogonal so the\n"
+		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
 		"transpose is not the inverse. \n"
 		""},
 	 { (char *)"CartesianInertial_ci_to_cf_quat", _wrap_CartesianInertial_ci_to_cf_quat, METH_VARARGS, (char *)"\n"
@@ -12646,7 +12646,7 @@ static PyMethodDef SwigMethods[] = {
 		"Calculate matrix that can be used to convert CartesianFixed to\n"
 		"CartesianInertial at the given Time, including velocity.\n"
 		"\n"
-		"Note that unlike the 3x3 matrix, this is *not* orthogonal so the\n"
+		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
 		"transpose is not the inverse. \n"
 		""},
 	 { (char *)"CartesianFixed_ci_to_cf_quat", _wrap_CartesianFixed_ci_to_cf_quat, METH_VARARGS, (char *)"\n"

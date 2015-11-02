@@ -635,6 +635,8 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+BUILD_AFIDS_FALSE
+BUILD_AFIDS_TRUE
 WITH_DOCUMENTATION_FALSE
 WITH_DOCUMENTATION_TRUE
 LIBM
@@ -650,6 +652,7 @@ HAVE_SWIG_FALSE
 HAVE_SWIG_TRUE
 SWIG_LIB
 SWIG
+etcafidspythondir
 installafidspythondir
 afidspythonvdevdir
 geocalpkgpythondir
@@ -20957,6 +20960,8 @@ afidspythonvdevdir=\${prefix}/afids/vdev
 
 installafidspythondir=\${prefix}
 
+etcafidspythondir=\${prefix}/etc/afids
+
 
 
 #=================================================================
@@ -21353,6 +21358,16 @@ You can try specifying the location using --with-doxygen if configure
 couldn't find this. Or you can turn off the use of swig using
 --without-swig." "$LINENO" 5
 fi
+
+ if false; then
+  BUILD_AFIDS_TRUE=
+  BUILD_AFIDS_FALSE='#'
+else
+  BUILD_AFIDS_TRUE='#'
+  BUILD_AFIDS_FALSE=
+fi
+
+
 ac_config_files="$ac_config_files Makefile"
 
 cat >confcache <<\_ACEOF
@@ -21698,6 +21713,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${WITH_DOCUMENTATION_TRUE}" && test -z "${WITH_DOCUMENTATION_FALSE}"; then
   as_fn_error $? "conditional \"WITH_DOCUMENTATION\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_AFIDS_TRUE}" && test -z "${BUILD_AFIDS_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_AFIDS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 

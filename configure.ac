@@ -155,6 +155,9 @@ You can try specifying the location using --with-doxygen if configure
 couldn't find this. Or you can turn off the use of swig using 
 --without-swig.])
 fi
+
+AM_CONDITIONAL([BUILD_AFIDS], [false])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

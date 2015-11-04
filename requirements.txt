@@ -1,0 +1,10 @@
+numpy>=1.7.0
+scipy>=0.10.1
+matplotlib>=1.0.1
+h5py
+sphinx
+nose
+ipython
+scikit-umfpack
+seaborn
+pandas

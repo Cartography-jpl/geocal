@@ -102,15 +102,22 @@ int boundary)
   number_tile_line_ = Raster_image->number_tile_line();
   number_tile_sample_ = Raster_image->number_tile_sample();
 
-  ImageCoordinate ulc = Raster_image->coordinate(*Mi.ground_coordinate(0,0));
+  std::vector<boost::shared_ptr<GroundCoordinate> > pt;
+  pt.push_back(Mi.ground_coordinate(0,0));
+  pt.push_back(Mi.ground_coordinate(Mi.number_x_pixel() - 1,0));
+  pt.push_back(Mi.ground_coordinate(0,Mi.number_y_pixel() - 1));
+  pt.push_back(Mi.ground_coordinate(Mi.number_x_pixel() - 1,
+				 Mi.number_y_pixel() - 1));
+  MapInfo m = Raster_image->map_info().cover(pt, boundary);
+  ImageCoordinate ulc = Raster_image->coordinate(*m.ground_coordinate(0,0));
   ImageCoordinate lrc = Raster_image->coordinate
-    (*Mi.ground_coordinate(Mi.number_x_pixel() - 1,
-			  Mi.number_y_pixel() - 1));
-  start_line_ = (int) round(std::max(ulc.line - boundary, 0.0));
-  int eline = (int) round(std::min(lrc.line + boundary, 
+    (*m.ground_coordinate(m.number_x_pixel() - 1,
+			  m.number_y_pixel() - 1));
+  start_line_ = (int) round(std::max(ulc.line, 0.0));
+  int eline = (int) round(std::min(lrc.line, 
 				   Raster_image->number_line() - 1.0));
-  start_sample_ = (int) round(std::max(ulc.sample - boundary, 0.0));
-  int esamp = (int) round(std::min(lrc.sample + boundary, 
+  start_sample_ = (int) round(std::max(ulc.sample, 0.0));
+  int esamp = (int) round(std::min(lrc.sample, 
 				   Raster_image->number_sample() - 1.0));
   number_line_ = eline - start_line_ + 1;
   number_sample_ = esamp - start_sample_ + 1;

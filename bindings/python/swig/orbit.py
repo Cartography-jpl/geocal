@@ -594,8 +594,8 @@ class Orbit(ObservableOrbit,geocal_swig.with_parameter.WithParameter):
 
     def frame_coordinate_with_derivative(self, *args):
         """
-        FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(Time T, const GroundCoordinate &Gc, const Camera &C, int Band=0)
-        const
+        FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(const TimeWithDerivative &T, const GroundCoordinate &Gc, const Camera
+        &C, int Band=0) const
         Give the frame coordinates that a particular point on the ground is
         seen. 
         """

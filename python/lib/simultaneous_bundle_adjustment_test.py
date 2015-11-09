@@ -4,15 +4,17 @@ from tie_point_collect import *
 from image_ground_connection import *
 from simultaneous_bundle_adjustment import *
 from lm_optimize import *
+from sqlite_shelf import *
 import scipy.optimize
 import cPickle
 import numpy as np
 from nose.plugins.skip import Skip, SkipTest
 import logging
 import sys
+import numpy.testing as npt
 
 console = logging.StreamHandler(stream=sys.stdout)
-console.setLevel(logging.INFO)
+console.setLevel(logging.WARNING)
 logging.getLogger("geocal-python").addHandler(console)
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
@@ -41,14 +43,21 @@ tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin)
 tpcol[0].is_gcp = True
 tpcol[5].is_gcp = True
 sba = SimultaneousBundleAdjustment(igc_coll, tpcol, demin)
+sba_constant_gcp = SimultaneousBundleAdjustment(igc_coll, tpcol, demin,
+                                                hold_gcp_fixed = True)
 parm0 = sba.parameter
-print igc_coll.parameter_mask
-print igc_coll.parameter_subset
-print igc_coll.parameter_name_subset
+parm0_constant_gcp = sba_constant_gcp.parameter
+
+# This is really verbose, so we don't in general want to see this
+log_python = logging.getLogger("geocal-python")
+log_python.setLevel(logging.INFO)
+log_optimize = logging.getLogger("geocal-python.lm_optimize")
+log_optimize.setLevel(logging.WARNING)
 
 class TestClass:
     def setUp(self):
         sba.parameter = parm0
+        sba_constant_gcp.parameter = parm0_constant_gcp
 
     def test_parameter(self):
         p = sba.parameter
@@ -59,6 +68,10 @@ class TestClass:
         assert_almost_equal(sba.parameter[-1], 5)
         assert_almost_equal(igc3.rpc.sample_numerator[0], 5)
 
+    def test_parameter_constant_gcp(self):
+        p = sba_constant_gcp.parameter
+        assert len(p) == 291 - 3 * 2
+
     def test_ground_location(self):
         gp = sba.ground_location(10)
         p = sba.parameter
@@ -67,29 +80,88 @@ class TestClass:
         gp2 = sba.ground_location(10)
         assert_almost_equal(distance(gp, gp2), 20)
 
+    def test_ground_location_constant_gcp(self):
+        gp = sba_constant_gcp.ground_location(10)
+        p = sba_constant_gcp.parameter
+        p[(10 - 2) * 3] += 20
+        sba_constant_gcp.parameter = p
+        gp2 = sba_constant_gcp.ground_location(10)
+        assert_almost_equal(distance(gp, gp2), 20)
+
     def test_sba_eq(self):
         assert len(sba.surface_constraint()) == 95
         assert len(sba.gcp_constraint()) == 6
         assert len(sba.collinearity_constraint()) == 548
-        assert len(sba.parameter_constraint()) == 291
-        assert len(sba.sba_eq(sba.parameter)) == 95 + 6 + 548 + 291
+        assert len(sba.parameter_constraint()) == 6
+        assert len(sba.sba_eq(sba.parameter)) == 95 + 6 + 548 + 6
+        # Can save results if we are diagnosing an issue
+        if False:
+            write_shelve("simultaneous_bundle_adjustment_test.db:eq_expect", 
+                         sba.sba_eq(sba.parameter))
+        # Can compare results if we are diagnosing issue
+        if False:
+            rexpect = read_shelve("simultaneous_bundle_adjustment_test.db:eq_expect")
+            npt.assert_almost_equal(sba.sba_eq(sba.parameter), rexpect)
+
+    def test_sba_eq_constant_gcp(self):
+        assert len(sba_constant_gcp.surface_constraint()) == 95 - 2
+        assert len(sba_constant_gcp.gcp_constraint()) == 0
+        assert len(sba_constant_gcp.collinearity_constraint()) == 548
+        assert len(sba_constant_gcp.parameter_constraint()) == 6
+        assert len(sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)) == 95 - 2 + 6 + 548 + 6 - 3 * 2
 
     def test_sba_jacobian(self):
         t = sba.sba_jacobian(sba.parameter)
-        assert t.shape[0] == 95 + 6 + 548 + 291
+        assert t.shape[0] == 95 + 6 + 548 + 6
         assert t.shape[1] == 291
+        # Can save results if we are diagnosing an issue
+        if False:
+            write_shelve("simultaneous_bundle_adjustment_test.db:jac_expect", 
+                         t.todense())
+        # Can compare results if we are diagnosing issue
+        if False:
+            rexpect = read_shelve("simultaneous_bundle_adjustment_test.db:jac_expect")
+            npt.assert_almost_equal(t.todense(), rexpect)
 
     def test_solve_lm(self):
-        v = sba.sba_eq(sba.parameter)
-        chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-        assert chisq > 50
-        print "Chisq", chisq
-        parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
-        sba.parameter = parm
-        v = sba.sba_eq(sba.parameter)
-        chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-        print "Chisq", chisq
-        assert chisq < 2
+        # For this test, want to see lm_optimize diagnostic messages
+        log_optimize = logging.getLogger("geocal-python.lm_optimize")
+        log_optimize.setLevel(logging.INFO)
+        try:
+            v = sba.sba_eq(sba.parameter)
+            chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+            assert chisq > 50
+            print "Chisq", chisq
+            parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
+            sba.parameter = parm
+            v = sba.sba_eq(sba.parameter)
+            chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+            print "Chisq", chisq
+            assert chisq < 2
+        finally:
+            log_optimize = logging.getLogger("geocal-python.lm_optimize")
+            log_optimize.setLevel(logging.WARNING)
+
+    def test_solve_lm_constant_gcp(self):
+        # For this test, want to see lm_optimize diagnostic messages
+        log_optimize = logging.getLogger("geocal-python.lm_optimize")
+        log_optimize.setLevel(logging.INFO)
+        try:
+            v = sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)
+            chisq = np.inner(v, v) / (len(v) - len(sba_constant_gcp.parameter))
+            assert chisq > 50
+            print "Chisq", chisq
+            parm = lm_optimize(sba_constant_gcp.sba_eq, 
+                               sba_constant_gcp.parameter, 
+                               sba_constant_gcp.sba_jacobian)
+            sba_constant_gcp.parameter = parm
+            v = sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)
+            chisq = np.inner(v, v) / (len(v) - len(sba_constant_gcp.parameter))
+            print "Chisq", chisq
+            assert chisq < 2
+        finally:
+            log_optimize = logging.getLogger("geocal-python.lm_optimize")
+            log_optimize.setLevel(logging.WARNING)
 
     def test_solve(self):
         raise SkipTest

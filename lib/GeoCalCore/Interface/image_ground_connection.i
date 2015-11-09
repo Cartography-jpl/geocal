@@ -94,6 +94,12 @@ public:
   cf_look_vector_lv(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<CartesianFixed>
   cf_look_vector_pos(const ImageCoordinate& Ic) const;
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
   virtual boost::shared_ptr<GroundCoordinate> 
     ground_coordinate(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 
@@ -108,6 +114,7 @@ public:
  					    bool& OUTPUT) const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf_fd(const CartesianFixed& Gc, double Step_size) const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
@@ -135,11 +142,13 @@ public:
   %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
   %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
 
-  // SWIG Director doesn't like this. For now, just don't pass this to
-  // python. If this ever becomes an issue we can split this up like
-  // we did with cf_look_vector_pos and cf_look_vector_lv.
+  // Having multiple return values seriously confuses SWIG director
+  // stuff. Just leave this function out, so SWIG doesn't know about
+  // this at all. We'll create a python equivalent 
   // virtual void footprint_resolution(int Line, int Sample, 
   //			    double &OUTPUT, double &OUTPUT);
+  virtual double footprint_resolution_line(int Line, int Sample) const;
+  virtual double footprint_resolution_sample(int Line, int Sample) const;
   virtual blitz::Array<double, 7> 
   cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
 		     int nsubpixel_line = 1, 
@@ -154,6 +163,10 @@ def dem(self, value):
 
 def cf_look_vector(self, ic):
   return (self.cf_look_vector_lv(ic), self.cf_look_vector_pos(ic))
+
+def footprint_resolution(self, line, sample):
+  return (self.footprint_resolution_line(line, sample), 
+	  self.footprint_resolution_sample(line, sample))
 
 def ground_coordinate(self, ic, dem = None):
   '''Return ground coordinate for the given image coordinate. You can specify

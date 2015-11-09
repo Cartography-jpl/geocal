@@ -32,11 +32,16 @@ public:
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
     virtual blitz::Array< bool,1 > parameter_mask() const;
     virtual int number_image() const;
+    virtual blitz::Array< double,1 > collinearity_residual(int Image_index, GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const;
+    virtual blitz::Array< double,2 > collinearity_residual_jacobian(int Image_index, GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate(int Image_index, GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_dem(int Image_index, GeoCal::ImageCoordinate const &Ic, GeoCal::Dem const &D) const;
     virtual boost::shared_ptr< GeoCal::Dem > dem(int Image_index) const;
     virtual GeoCal::ImageCoordinate image_coordinate(int Image_index, GeoCal::GroundCoordinate const &Gc) const;
+    virtual blitz::Array< double,2 > image_coordinate_jac_parm(int Image_index, GeoCal::CartesianFixed const &Gc) const;
+    virtual blitz::Array< double,2 > image_coordinate_jac_parm_fd(int Image_index, GeoCal::CartesianFixed const &Gc, blitz::Array< double,1 > const Pstep) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_cf(int Image_index, GeoCal::CartesianFixed const &Gc) const;
+    virtual blitz::Array< double,2 > image_coordinate_jac_cf_fd(int Image_index, GeoCal::CartesianFixed const &Gc, double Step_size) const;
     virtual std::string title(int Image_index) const;
     virtual boost::shared_ptr< GeoCal::RasterImage > image(int Image_index) const;
     virtual boost::shared_ptr< GeoCal::ImageGroundConnection > image_ground_connection(int Image_index) const;
@@ -74,7 +79,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[21];
+    mutable swig::SwigVar_PyObject vtable[26];
 #endif
 
 };

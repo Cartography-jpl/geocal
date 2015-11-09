@@ -106,6 +106,64 @@ boost::shared_ptr<GroundCoordinate> IgcRollingShutter::ground_coordinate_dem
   return orbit_data(t)->surface_intersect(*cam, f, D, res, b, max_h);
 }
 
+blitz::Array<double, 1> 
+IgcRollingShutter::collinearity_residual
+(const GroundCoordinate& Gc,
+ const ImageCoordinate& Ic_actual) const
+{
+  // Instead of the difference in ImageCoordinates returned by the
+  // Ipi, use the difference in the FrameCoordinate for the time
+  // associated with Ic_actual. This is faster to calculate, and the
+  // Jacobian is much better behaved.
+  Time t;
+  FrameCoordinate fc_actual;
+  time_table_->time(Ic_actual, t, fc_actual);
+  FrameCoordinate fc_predict = 
+    orbit_data(t)->frame_coordinate(Gc, *cam, b);
+  Array<double, 1> res(2);
+  res(0) = fc_predict.line - fc_actual.line;
+  res(1) = fc_predict.sample - fc_actual.sample;
+  return res;
+}
+
+blitz::Array<double, 2> 
+IgcRollingShutter::collinearity_residual_jacobian
+(const GroundCoordinate& Gc,
+ const ImageCoordinate& Ic_actual) const
+{
+  TimeWithDerivative t;
+  FrameCoordinateWithDerivative fc_actual;
+  ImageCoordinateWithDerivative ica(Ic_actual.line, Ic_actual.sample);
+  time_table_->time_with_derivative(ica, t, fc_actual);
+  FrameCoordinateWithDerivative fc_predict = 
+    orbit_data(t)->frame_coordinate_with_derivative(Gc, *cam, b);
+  Array<double, 2> res(2, fc_predict.line.number_variable() + 3);
+  res(0, Range(0, res.cols() - 4)) = 
+    (fc_predict.line - fc_actual.line).gradient();
+  res(1, Range(0, res.cols() - 4)) = 
+    (fc_predict.sample - fc_actual.sample).gradient();
+
+  // Part of jacobian for cf coordinates.
+  boost::shared_ptr<OrbitData> od = orbit_data(t.value());
+  boost::shared_ptr<CartesianFixed> p1 = od->position_cf();
+  boost::shared_ptr<CartesianFixed> p2 = Gc.convert_to_cf();
+  CartesianFixedLookVectorWithDerivative lv;
+  for(int i = 0; i < 3; ++i) {
+    AutoDerivative<double> p(p2->position[i], i, 3);
+    lv.look_vector[i] = p - p1->position[i];
+  }
+  ScLookVectorWithDerivative sl = od->sc_look_vector(lv);
+  boost::shared_ptr<Camera> c = cam;
+  ArrayAd<double, 1> poriginal = c->parameter_with_derivative();
+  c->parameter_with_derivative(c->parameter());
+  FrameCoordinateWithDerivative fc_gc =
+    cam->frame_coordinate_with_derivative(sl, b);
+  c->parameter_with_derivative(poriginal);
+  res(0, Range(res.cols() - 3, toEnd)) = fc_gc.line.gradient();
+  res(1, Range(res.cols() - 3, toEnd)) = fc_gc.sample.gradient();
+  return res;
+}
+
 // See base class for description
 
 boost::shared_ptr<GroundCoordinate> 
@@ -413,9 +471,9 @@ void IgcRollingShutter::orbit(const boost::shared_ptr<Orbit>& Orb)
 void IgcRollingShutter::notify_update(const Orbit& Orb)
 {
   od1 = boost::dynamic_pointer_cast<QuaternionOrbitData>
-    (orbit_->orbit_data(time_table_->min_time()));
+    (orbit_->orbit_data(TimeWithDerivative(time_table_->min_time())));
   od2 = boost::dynamic_pointer_cast<QuaternionOrbitData>
-    (orbit_->orbit_data(time_table_->max_time()));
+    (orbit_->orbit_data(TimeWithDerivative(time_table_->max_time())));
   if(!od1 || !od2)
     throw Exception("This class only works with QuaternionOrbitData");
   pinterp = IgcRollingShutterHelper::PositionInterpolate

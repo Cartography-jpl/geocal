@@ -69,7 +69,7 @@ matrix_to_quaternion(const blitz::Array<AutoDerivative<double> , 2>& m)
   }
 }
 
-inline boost::math::quaternion<AutoDerivative<double> > interpolate_quaternion
+inline boost::math::quaternion<AutoDerivative<double> > interpolate_quaternion_rotation
 (const boost::math::quaternion<AutoDerivative<double> >& Q1, 
  const boost::math::quaternion<AutoDerivative<double> >& Q2,
  const AutoDerivative<double>& toffset, double tspace)
@@ -78,6 +78,12 @@ inline boost::math::quaternion<AutoDerivative<double> > interpolate_quaternion
   AutoDerivative<double> t = delta_quat.R_component_1();
   // Handle t being slightly out of range due to round off.
   t.value() = (t.value() > 1 ? 1 : (t.value() < -1 ? -1 : t.value())); 
+  if(t.value() < 0) {
+    // Switch sign of Q2 to give same rotation, but easier to
+    // interpolate. 
+    delta_quat = -delta_quat;
+    t = -t;
+  }
   AutoDerivative<double> delta_ang = 2.0 * std::acos(t);
   AutoDerivative<double> d_ang = delta_ang * toffset / tspace;
   // Handle degenerate case of Q1 and Q2 almost the same.

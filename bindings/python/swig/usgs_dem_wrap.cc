@@ -6048,6 +6048,91 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_UsgsDem__v_number_file_read(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::UsgsDem *arg1 = (GeoCal::UsgsDem *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::UsgsDem const > tempshared1 ;
+  boost::shared_ptr< GeoCal::UsgsDem const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__UsgsDem_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "UsgsDem__v_number_file_read" "', argument " "1"" of type '" "GeoCal::UsgsDem const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::UsgsDem > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::UsgsDem > * >(argp1);
+      arg1 = const_cast< GeoCal::UsgsDem * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::UsgsDem > * >(argp1);
+      arg1 = const_cast< GeoCal::UsgsDem * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::UsgsDem const *)arg1)->number_file_read();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_UsgsDem_reset_number_file_read(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::UsgsDem *arg1 = (GeoCal::UsgsDem *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::UsgsDem > tempshared1 ;
+  boost::shared_ptr< GeoCal::UsgsDem > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__UsgsDem_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "UsgsDem_reset_number_file_read" "', argument " "1"" of type '" "GeoCal::UsgsDem *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::UsgsDem > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::UsgsDem > * >(argp1);
+      arg1 = const_cast< GeoCal::UsgsDem * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::UsgsDem > * >(argp1);
+      arg1 = const_cast< GeoCal::UsgsDem * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->reset_number_file_read();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_UsgsDem(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::UsgsDem *arg1 = (GeoCal::UsgsDem *) 0 ;
@@ -6146,6 +6231,14 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"UsgsDem__v_directory_base", (PyCFunction)_wrap_UsgsDem__v_directory_base, METH_O, (char *)"\n"
 		"const std::string& GeoCal::UsgsDem::directory_base() const\n"
 		"Database base directory. \n"
+		""},
+	 { (char *)"UsgsDem__v_number_file_read", (PyCFunction)_wrap_UsgsDem__v_number_file_read, METH_O, (char *)"\n"
+		"int GeoCal::UsgsDem::number_file_read() const\n"
+		"Number of files we have read. \n"
+		""},
+	 { (char *)"UsgsDem_reset_number_file_read", (PyCFunction)_wrap_UsgsDem_reset_number_file_read, METH_O, (char *)"\n"
+		"void GeoCal::UsgsDem::reset_number_file_read()\n"
+		"Set number of files we have read back to zero. \n"
 		""},
 	 { (char *)"delete_UsgsDem", (PyCFunction)_wrap_delete_UsgsDem, METH_O, (char *)"\n"
 		"virtual GeoCal::UsgsDem::~UsgsDem()\n"

@@ -63,6 +63,19 @@ public:
     return DemMapInfo::height_reference_surface(g);
   }
 
+//-----------------------------------------------------------------------
+/// Number of files we have read.
+//-----------------------------------------------------------------------
+
+  int number_file_read() const { return f->number_file_read(); }
+
+//-----------------------------------------------------------------------
+/// Set number of files we have read back to zero.
+//-----------------------------------------------------------------------
+
+  void reset_number_file_read() { f->reset_number_file_read(); }
+
+  virtual void print(std::ostream& Os) const;
 protected:
 //-----------------------------------------------------------------------
 /// Return height in meters relative to datum().
@@ -72,7 +85,6 @@ protected:
   { 
     return f->unchecked_read(Y_index, X_index);
   }
-  virtual void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<UsgsDemData> f;
   UsgsDem() {}

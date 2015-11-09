@@ -151,6 +151,17 @@ class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
+    def __init__(self, x, t):
+        
+        
+        if(isinstance(x, geocal_swig.Vector_Time)):
+             xv = x
+        else:
+            xv = geocal_swig.Vector_Time()
+            for xi in x:
+                xv.push_back(xi)
+        _piecewise_linear.PiecewiseLinear_swiginit(self, _piecewise_linear.new_PiecewiseLinear(xv, t))
+
     __swig_destroy__ = _piecewise_linear.delete_PiecewiseLinear
 PiecewiseLinear.value = new_instancemethod(_piecewise_linear.PiecewiseLinear_value,None,PiecewiseLinear)
 PiecewiseLinear.__str__ = new_instancemethod(_piecewise_linear.PiecewiseLinear___str__,None,PiecewiseLinear)

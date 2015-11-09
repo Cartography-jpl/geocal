@@ -3,6 +3,7 @@ from igc_collection_extension import *
 from tie_point import *
 from ray_intersect import *
 from feature_detector_extension import *
+from misc import *
 import math
 import itertools
 import multiprocessing
@@ -92,9 +93,7 @@ class TiePointCollect(object):
         "use_intersection"
 
         Can supply a reference image. If present, we use this as ground
-        truth and generate GCPs if we can. Note that this pretty much
-        duplicates what GcpTiePointCollect does. I think we may eventually 
-        do away with GcpTiePointCollect.
+        truth and generate GCPs if we can. 
         '''
         if(image_matcher is None):
             self.image_matcher = CcorrLsmMatcher()
@@ -276,156 +275,6 @@ class TiePointCollect(object):
                 return tp
         return self.ri.ray_intersect(tp)
 
-class GcpTiePointCollect(object):
-    '''Given a IgcCollection and a reference image, collect GCPs by 
-    image matching.
-
-    Note that this somewhat duplicates what TiePointCollect does, I think
-    we may do away with this as a separate class at some point.
-    '''
-    def __init__(self, ref_image, dem, igc_collection,
-                 avg_level = 0, use_intersection = False,
-                 image_matcher = None,
-                 surface_image = None,
-                 scale_factor = None,
-                 grid_spacing = 1):
-        '''This sets up for doing a tie point collection with a reference
-        image. A IgcCollection and reference image needs to be supplied
-
-        You can optionally specify avg_level to use. If supplied, we
-        use a PyramidImageMatcher on top of the CcorrLsmMatcher, useful for
-        difficult to match imagery.
-
-        You can optionally pass in the grid spacing to use if we are
-        projecting to the surface. This has a significant effect on
-        how long this process takes. If the underlying DEM is coarse, 
-        there is no reason to do the ImageGroundConnection calculation 
-        at every point.
-
-        You can optionally pass in a scale factor. This is applied to
-        the raster data before image matching. This is useful for
-        example AirMSPI data where the image is a reflectance value
-        between 0.0 and 1.0. Since the image matchers expect integer
-        data, you want get any results unless you scale to a different
-        range.
-        
-        You can pass a list of surface projected images to match with.
-        These should be the projection of the igc_collection, and can
-        be used as an alternative to doing the projection on the fly.
-        This should be the same resolution/map projection as the reference
-        image (but doesn't have to have the same coverage).
-
-        There is a trade off between getting the largest coverage (by
-        taking a union of all the igc on the surface} and the
-        strongest points (by looking at places seen by all the
-        cameras). You may want to do both - so generate a set of GCPs
-        using the largest coverage first and then the intersection
-        second.
-        '''
-        if(image_matcher is None):
-            self.image_matcher = CcorrLsmMatcher()
-            if(avg_level > 0):
-                self.image_matcher = PyramidImageMatcher(self.image_matcher, avg_level)
-        else:
-            self.image_matcher = image_matcher
-        self.avg_level = avg_level
-        self.igc_collection = igc_collection
-        self.dem = dem
-        self.ref_image = ref_image
-        self.surface_image = surface_image
-        # Find an area that covers all the ground projected images
-        mi = self.igc_collection.image_ground_connection(0).\
-            cover(ref_image.map_info)
-        for i in range(igc_collection.number_image):
-            igc = igc_collection.image_ground_connection(i)
-            if(use_intersection):
-                mi = mi.intersection(igc.cover(mi))
-            else:
-                mi = mi.map_union(igc.cover(mi))
-        # Subset ref image to cover as much of that as possible
-        mi = ref_image.map_info.intersection(mi)
-        vg = Vector_GroundCoordinate()
-        vg.push_back(mi.ground_coordinate(0, 0))
-        vg.push_back(mi.ground_coordinate(mi.number_x_pixel, mi.number_y_pixel))
-        self.sub_ref_image = SubRasterImage(ref_image, vg)
-        self.ref_igc = MapInfoImageGroundConnection(self.sub_ref_image, 
-                       dem, "Reference Image")
-        self.itoim = [None]*self.igc_collection.number_image 
-        for j in range(self.igc_collection.number_image):
-            igc2 = self.igc_collection.image_ground_connection(j)
-            if(scale_factor is not None):
-                igc2 = ScaleImageGroundConnection(igc2, scale_factor)
-            if(surface_image is None):
-                self.itoim[j] = SurfaceImageToImageMatch(self.ref_igc, igc2,
-                              mi, self.image_matcher, grid_spacing)
-            else:
-                self.itoim[j] = \
-                    SurfaceImageToImageMatch(self.ref_igc, self.ref_image,
-                                             igc2, surface_image[j],
-                                             self.image_matcher)
-                
-
-    def __getstate__(self):
-        return {"ref_image" : self.ref_image,
-                "dem" : self.dem,
-                "image_matcher" : self.image_matcher,
-                "surface_image" : self.surface_image,
-                "igc_collection" : self.igc_collection,
-                "avg_level" : self.avg_level,
-                }
-
-    def __setstate__(self, dict):
-        self.__init__(dict["ref_image"], dict["dem"], dict["igc_collection"],
-                      image_matcher = dict["image_matcher"],
-                      surface_image = dict["surface_image"],
-                      avg_level = dict["avg_level"])
-
-    @property
-    def number_image(self):
-        return self.igc_collection.number_image
-
-    def tie_point_grid(self, num_x, num_y, border = 100, pool = None):
-        tstart = time.time()
-        log = logging.getLogger("geocal-python.tie_point_collect")
-        log.info("Starting interest point")
-        log.info("Time: %f" % (time.time() - tstart))
-        fd = ForstnerFeatureDetector()
-        iplist = fd.interest_point_grid(self.sub_ref_image, num_y, num_x, 
-                                        border, pool = pool)
-        log.info("Done with interest point")
-        log.info("Time: %f" % (time.time() - tstart))
-        log.info("Starting matching")
-        func = TiePointWrap(self)
-        if(pool):
-            res = pool.map(func, iplist, 
-               len(iplist) / multiprocessing.cpu_count())
-        else:
-            res = map(func, iplist)
-        log.info("Done with matching")
-        log.info("Time: %f" % (time.time() - tstart))
-        res = TiePointCollection(
-            filter(lambda i : i is not None and i.number_image_location > 0,
-                   res))
-        log.info("Total number tp: %d" % len(res))
-        log.info("Number GCPs:     %d" % res.number_gcp)
-        return res
-
-    def tie_point(self, ic1):
-        '''Return a tie point that is roughly at the given location in the
-        reference image. Note that we try matching all the other images to the
-        first image, i.e., we don\'t chain by map 2 to 3 and 3 to 4. 
-        If we aren't successful at matching, this returns None.'''
-        tp = TiePoint(self.number_image)
-        tp.is_gcp = True
-        tp.ground_location = \
-            Ecr(self.sub_ref_image.ground_coordinate(ic1, self.dem))
-        for i in range(self.number_image):
-            ic2, lsigma, ssigma, success, diagnostic = \
-                self.itoim[i].match(ic1)
-            if(success):
-                tp.image_location[i] = ic2, lsigma, ssigma
-        return tp
-
 class TiePointCollectFM(object):
     '''Given a IgcCollection, collect tiepoints by feature matching. This is
     very similar to TiePointCollect, except we use feature matching.
@@ -436,7 +285,13 @@ class TiePointCollectFM(object):
     Note also that feature matching can have much larger blunders than
     we typically see for image matching (since it can match any 2 features
     in an image). You will want to do some kind of outlier rejection after
-    using this class to determine tiepoints (e.g., outlier_reject_ransac).'''
+    using this class to determine tiepoints (e.g., outlier_reject_ransac).
+
+    I have not had much success with using this class to generate tie points, 
+    the accuracy of the feature matching tends to be pretty poor. We will 
+    leave this is place for now, perhaps this will be of some use in the 
+    future. 
+    '''
     def __init__(self, igc_collection, max_ground_covariance = 20 * 20,
                  ref_image = None,
                  number_feature = 500, number_octave_levels = 4,
@@ -573,20 +428,20 @@ class TiePointCollectFM(object):
         log.info("Time: %f" % (time.time() - tstart))
         return res
                                                      
-def _point_list(ind1, ind2_or_ref_img, tpcol):
+def _point_list(ind1, ind2_or_ref_image, tpcol):
     '''Internal function, gives list of points between 2 images.'''
     pt1 = []
     pt2 = []
     ind = []
     for i, tp in enumerate(tpcol):
         ic1 = tp.image_location[ind1]
-        if(isinstance(ind2_or_ref_img,RasterImage)):
+        if(isinstance(ind2_or_ref_image,RasterImage)):
             if(tp.is_gcp):
-                ic2 = [ind2_or_ref_img.coordinate(tp.ground_location), 0.5, 0.5]
+                ic2 = [ind2_or_ref_image.coordinate(tp.ground_location), 0.5, 0.5]
             else:
                 ic2 = None
         else:
-            ic2 = tp.image_location[ind2_or_ref_img]
+            ic2 = tp.image_location[ind2_or_ref_image]
         if(ic1 is not None and
            ic2 is not None):
             pt1.append([ic1[0].line, ic1[0].sample])
@@ -594,19 +449,57 @@ def _point_list(ind1, ind2_or_ref_img, tpcol):
             ind.append(i)
     return [np.array(pt1), np.array(pt2), np.array(ind)]
 
-def _outlier_reject_ransac(ind1, ind2_or_ref_img, tpcol, threshold):
+def _point_list_surface_proj(ind1, ind2_or_ref_image, tpcol, 
+                             igc1, igc2, ref_image):
+    '''Internal function, gives list of points between 2 images. This version
+    uses the supplied igc and reference image to first project to the surface,
+    and then collect points in the reference image space. This is useful for 
+    images where the differences with a frame camera are too great (e.g., 
+    aircraft data).'''
+    pt1 = []
+    pt2 = []
+    ind = []
+    for i, tp in enumerate(tpcol):
+        if(tp.image_location[ind1] is not None):
+            ic1 = ref_image.coordinate(igc1.ground_coordinate(tp.image_location[ind1][0]))
+        else:
+            ic1 = None
+        if(isinstance(ind2_or_ref_image,RasterImage)):
+            if(tp.is_gcp):
+                ic2 = ref_image.coordinate(tp.ground_location)
+            else:
+                ic2 = None
+        else:
+            if(tp.image_location[ind2_or_ref_image] is not None):
+                ic2 = ref_image.coordinate(igc2.ground_coordinate(tp.image_location[ind2_or_ref_image][0]))
+            else:
+                ic1 = None
+        if(ic1 is not None and
+           ic2 is not None):
+            pt1.append([ic1.line, ic1.sample])
+            pt2.append([ic2.line, ic2.sample])
+            ind.append(i)
+    return [np.array(pt1), np.array(pt2), np.array(ind)]
+
+def _outlier_reject_ransac(ind1, ind2_or_ref_image, tpcol, threshold,
+                           igc1 = None, igc2 = None, ref_image = None):
     '''Internal function used to filter bad points between 2 images.'''
     if(not have_cv2):
         raise RuntimeError("This function requires the openCV python library cv2, which is not available.")
-    pt1, pt2, ind = _point_list(ind1, ind2_or_ref_img, tpcol)
+    if(igc1 is None):
+        pt1, pt2, ind = _point_list(ind1, ind2_or_ref_image, tpcol)
+    else:
+        pt1, pt2, ind = _point_list_surface_proj(ind1, ind2_or_ref_image, tpcol,
+                                                 igc1, igc2, ref_image)
     if(pt1.shape[0] < 1):
         return tpcol
-    m, mask = cv2.findFundamentalMat(pt1, pt2, threshold)
+    m, mask = cv2.findFundamentalMat(pt1, pt2, cv2.FM_RANSAC, threshold)
     m = (mask == 0)
     bad_pt = ind[m[:,0]]
     return [tp for i, tp in enumerate(tpcol) if i not in bad_pt]
 
-def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3):
+def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3.0,
+                          igccol = None):
     '''This remove outliers from a TiePointCollection. This fits the
     tiepoints between pairs of images to create the Fundamental Matrix, 
     rejecting outliers using Random sample consensus (RANSAC).
@@ -618,20 +511,47 @@ def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3):
     for outliers.
 
     If a reference image is passed in, we also look at rejecting GCPs that
-    are outliers.'''
+    are outliers.
+
+    If the Igccol is passed in, then we use that to project to the surface 
+    first before looking for outliers. This can be useful for Igcs that are 
+    too far from a frame camera, e.g., aircraft data'''
     nimg = len(tpcol[0].image_location)
     res = tpcol
     log = logging.getLogger("geocal-python.tie_point_collect")
     log.info("Starting using RANSAC to reject outliers")
+    if(igccol is not None):
+        log.info("Projecting to surface first")
     len1 = len(tpcol)
     log.info("Starting %s" % tpcol)
     for i in range(nimg):
         for j in range(i + 1, nimg):
-            res = _outlier_reject_ransac(i, j, res, threshold)
+            if(igccol is None):
+                res = _outlier_reject_ransac(i, j, res, threshold)
+            else:
+                igc1 = igccol.image_ground_connection(i)
+                igc2 = igccol.image_ground_connection(j)
+                if(ref_image is not None):
+                    rimg = ref_image
+                else:
+                    mibase = cib01_mapinfo(igc1.resolution_meter())
+                    mi = igc1.cover(mibase)
+                    rimg = MemoryRasterImage(mi);
+                res = _outlier_reject_ransac(i, j, res, threshold,
+                                             igc1 = igc1, igc2 = igc2,
+                                             ref_image = rimg)
     len2 = len(res)
     for i in range(nimg):
         if(ref_image is not None):
-            res = _outlier_reject_ransac(i, ref_image, res, threshold)
+            if(igccol is None):
+                res = _outlier_reject_ransac(i, ref_image, res, threshold)
+            else:
+                igc1 = igccol.image_ground_connection(i)
+                igc2 = None
+                res = _outlier_reject_ransac(i, ref_image, res, threshold,
+                                             igc1 = igc1, igc2 = igc2,
+                                             ref_image = ref_image)
+                
     len3 = len(res)
     res = TiePointCollection(res)
     log.info("Removed %d tiepoints" % (len1 - len2))

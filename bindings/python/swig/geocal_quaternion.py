@@ -176,6 +176,9 @@ class Quaternion_AutoDerivative_double(object):
     def __reduce__(self):
       return _new_from_init, (self.__class__, 1, self.R_component_1,self.R_component_2,self.R_component_3,self.R_component_4)
 
+    def __str__(self):
+        return "Quaternion (" + str(self.R_component_1) + ", " + str(self.R_component_2) + ", " + str(self.R_component_3) + ", " + str(self.R_component_4) + ")"
+
     __swig_destroy__ = _geocal_quaternion.delete_Quaternion_AutoDerivative_double
 Quaternion_AutoDerivative_double._v_R_component_1 = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double__v_R_component_1,None,Quaternion_AutoDerivative_double)
 Quaternion_AutoDerivative_double._v_R_component_2 = new_instancemethod(_geocal_quaternion.Quaternion_AutoDerivative_double__v_R_component_2,None,Quaternion_AutoDerivative_double)

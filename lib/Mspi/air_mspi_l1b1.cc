@@ -10,25 +10,12 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void AirMspiL1b1File::save(Archive & ar, const unsigned int version) const
+void AirMspiL1b1File::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiledFile_float_2)
+    & GEOCAL_NVP(min_l1b1_line)
     & GEOCAL_NVP(fname)
     & GEOCAL_NVP_(row_index_to_use);
-
-}
-
-template<class Archive>
-void AirMspiL1b1File::load(Archive & ar, const unsigned int version)
-{
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiledFile_float_2)
-    & GEOCAL_NVP(fname)
-    & GEOCAL_NVP_(row_index_to_use);
-#ifdef HAVE_MSPI_SHARED
-  l1b1_reader.reset(new MSPI::Shared::L1B1Reader(air_mspi_true_file_name(fname)));
-#else
-  throw Exception("This class requires that MSPI Shared library be available");
-#endif
 }
 
 template<class Archive>
@@ -39,8 +26,25 @@ void AirMspiL1b1::serialize(Archive & ar, const unsigned int version)
 }
 
 GEOCAL_IMPLEMENT(AirMspiL1b1);
-GEOCAL_SPLIT_IMPLEMENT(AirMspiL1b1File);
+GEOCAL_IMPLEMENT(AirMspiL1b1File);
 #endif
+
+//-----------------------------------------------------------------------
+/// Open file for reading. We do this on demand, because there is a
+/// limit to the number of HDF swaths that can be opened at one time,
+/// which is easily exceeded by opening just a few sequences.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<MSPI::Shared::L1B1Reader> 
+AirMspiL1b1File::l1b1_reader() const
+{
+#ifdef HAVE_MSPI_SHARED
+  return boost::shared_ptr<MSPI::Shared::L1B1Reader>
+    (new MSPI::Shared::L1B1Reader(air_mspi_true_file_name(fname)));
+#else
+  throw Exception("This class requires that MSPI Shared library be available");
+#endif
+}
 
 //-----------------------------------------------------------------------
 /// Constructor. 
@@ -49,15 +53,18 @@ GEOCAL_SPLIT_IMPLEMENT(AirMspiL1b1File);
 AirMspiL1b1File::AirMspiL1b1File
 (const std::string& Fname, 
  const std::string& Swath_to_use,
+ int Min_l1b1_line,
+ int Max_l1b1_line,
  int Tile_number_line,
  int Tile_number_sample,
  unsigned int Number_tile
 )
-  : fname(Fname)
+  : fname(Fname),
+    min_l1b1_line(Min_l1b1_line)
 {
 #ifdef HAVE_MSPI_SHARED
   fname = Fname;
-  l1b1_reader.reset(new MSPI::Shared::L1B1Reader(air_mspi_true_file_name(Fname)));
+  boost::shared_ptr<MSPI::Shared::L1B1Reader> l1read = l1b1_reader();
   row_index_to_use_ = -1;
   for(int i = 0; i < number_row_index(); ++i)
     if(swath_name(i) == Swath_to_use)
@@ -70,8 +77,11 @@ AirMspiL1b1File::AirMspiL1b1File
   typedef TiledFile<float, 2>::index index;
   boost::array<index, 2> file_size;
   boost::array<index, 2> tile_size;
-  file_size[0] = l1b1_reader->number_frame(row_number_to_use());
-  file_size[1] = l1b1_reader->number_pixel();
+  file_size[0] = l1read->number_frame(row_number_to_use()) - min_l1b1_line;
+  if(Max_l1b1_line > -1 &&
+     file_size[0] > Max_l1b1_line - min_l1b1_line + 1)
+    file_size[0] = Max_l1b1_line - min_l1b1_line + 1;
+  file_size[1] = l1read->number_pixel();
   if(Tile_number_line < 0)
     tile_size[0] = file_size[0];
   else
@@ -119,7 +129,7 @@ void AirMspiL1b1File::fill_in_row_number() const
   if(row_number_.size() > 0)
     return;
 #ifdef HAVE_MSPI_SHARED
-  row_number_ = l1b1_reader->row_numbers();
+  row_number_ = l1b1_reader()->row_numbers();
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
@@ -132,7 +142,7 @@ void AirMspiL1b1File::fill_in_row_number() const
 std::vector<std::string> AirMspiL1b1File::field_names(int Row_index) const
 { 
 #ifdef HAVE_MSPI_SHARED
-  return l1b1_reader->field_names(row_index_to_row_number(Row_index));
+  return l1b1_reader()->field_names(row_index_to_row_number(Row_index));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
@@ -145,7 +155,7 @@ std::vector<std::string> AirMspiL1b1File::field_names(int Row_index) const
 std::string AirMspiL1b1File::granule_id() const
 {
 #ifdef HAVE_MSPI_SHARED
-  return l1b1_reader->granule_id();
+  return l1b1_reader()->granule_id();
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
@@ -157,7 +167,7 @@ void AirMspiL1b1File::read_tile(const boost::array<index, 2>& Min_index,
 {
 #ifdef HAVE_MSPI_SHARED
   boost::multi_array<float, 2> d = 
-    l1b1_reader->read_data(row_number_to_use(), "I", Min_index[0],
+    l1b1_reader()->read_data(row_number_to_use(), "I", Min_index[0] + min_l1b1_line,
 			   Max_index[0] - Min_index[0]);
   for(int i = 0; i < (int) d.shape()[0]; ++i)
     for(int j = Min_index[1]; j < Max_index[1]; ++j, ++Res)
@@ -174,9 +184,10 @@ void AirMspiL1b1File::read_tile(const boost::array<index, 2>& Min_index,
 std::vector<Time> AirMspiL1b1File::time() const
 {
 #ifdef HAVE_MSPI_SHARED
-  Time tepoch = Time::parse_time(l1b1_reader->epoch());
+  boost::shared_ptr<MSPI::Shared::L1B1Reader> l1read = l1b1_reader();
+  Time tepoch = Time::parse_time(l1read->epoch());
   std::vector<double> toffset =
-    l1b1_reader->read_time(row_number_to_use(), 0, 
+    l1read->read_time(row_number_to_use(), min_l1b1_line, 
 			   size()[0]);
   std::vector<Time> tlist;
   BOOST_FOREACH(double toff, toffset)
@@ -194,7 +205,7 @@ std::vector<Time> AirMspiL1b1File::time() const
 float AirMspiL1b1File::wavelength(int Row_index) const
 { 
 #ifdef HAVE_MSPI_SHARED
-  return l1b1_reader->wavelength(row_index_to_row_number(Row_index));
+  return l1b1_reader()->wavelength(row_index_to_row_number(Row_index));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
@@ -208,7 +219,7 @@ float AirMspiL1b1File::wavelength(int Row_index) const
 float AirMspiL1b1File::polarization_angle(int Row_index) const
 { 
 #ifdef HAVE_MSPI_SHARED
-  return l1b1_reader->polarization_angle(row_index_to_row_number(Row_index));
+  return l1b1_reader()->polarization_angle(row_index_to_row_number(Row_index));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
@@ -221,7 +232,7 @@ float AirMspiL1b1File::polarization_angle(int Row_index) const
 std::string AirMspiL1b1File::swath_name(int Row_index) const
 { 
 #ifdef HAVE_MSPI_SHARED
-  return l1b1_reader->swath_name(row_index_to_row_number(Row_index));
+  return l1b1_reader()->swath_name(row_index_to_row_number(Row_index));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif

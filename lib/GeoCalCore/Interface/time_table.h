@@ -4,6 +4,7 @@
 #include "geocal_time.h"
 #include "frame_coordinate.h"
 #include "image_coordinate.h"
+#include "with_parameter.h"
 #include <vector>
 
 namespace GeoCal {
@@ -17,7 +18,7 @@ namespace GeoCal {
   (e.g., missing lines, drift in spacing).
 *******************************************************************/
 
-class TimeTable : public Printable<TimeTable> {
+class TimeTable : public Printable<TimeTable>, public WithParameter {
 public:
 //-----------------------------------------------------------------------
 /// Default constructor.

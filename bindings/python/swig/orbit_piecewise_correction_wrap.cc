@@ -5207,6 +5207,144 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_e_corr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitPiecewiseCorrection *arg1 = (GeoCal::OrbitPiecewiseCorrection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< GeoCal::PiecewiseLinear > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitPiecewiseCorrection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitPiecewiseCorrection__v_e_corr" "', argument " "1"" of type '" "GeoCal::OrbitPiecewiseCorrection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitPiecewiseCorrection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitPiecewiseCorrection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OrbitPiecewiseCorrection const *)arg1)->e_corr();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::PiecewiseLinear > *smartresult = new boost::shared_ptr<  GeoCal::PiecewiseLinear >(new GeoCal::PiecewiseLinear((GeoCal::PiecewiseLinear &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_n_corr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitPiecewiseCorrection *arg1 = (GeoCal::OrbitPiecewiseCorrection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< GeoCal::PiecewiseLinear > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitPiecewiseCorrection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitPiecewiseCorrection__v_n_corr" "', argument " "1"" of type '" "GeoCal::OrbitPiecewiseCorrection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitPiecewiseCorrection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitPiecewiseCorrection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OrbitPiecewiseCorrection const *)arg1)->n_corr();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::PiecewiseLinear > *smartresult = new boost::shared_ptr<  GeoCal::PiecewiseLinear >(new GeoCal::PiecewiseLinear((GeoCal::PiecewiseLinear &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_u_corr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitPiecewiseCorrection *arg1 = (GeoCal::OrbitPiecewiseCorrection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< GeoCal::PiecewiseLinear > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitPiecewiseCorrection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitPiecewiseCorrection__v_u_corr" "', argument " "1"" of type '" "GeoCal::OrbitPiecewiseCorrection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitPiecewiseCorrection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitPiecewiseCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitPiecewiseCorrection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OrbitPiecewiseCorrection const *)arg1)->u_corr();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::PiecewiseLinear > *smartresult = new boost::shared_ptr<  GeoCal::PiecewiseLinear >(new GeoCal::PiecewiseLinear((GeoCal::PiecewiseLinear &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_OrbitPiecewiseCorrection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitPiecewiseCorrection *arg1 = (GeoCal::OrbitPiecewiseCorrection *) 0 ;
@@ -5266,6 +5404,18 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::OrbitPiecewiseCorrection::OrbitPiecewiseCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, const PiecewiseLinear\n"
 		"&E_corr, const PiecewiseLinear &N_corr, const PiecewiseLinear &U_corr)\n"
 		"\n"
+		""},
+	 { (char *)"OrbitPiecewiseCorrection__v_e_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_e_corr, METH_O, (char *)"\n"
+		"const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::e_corr() const\n"
+		"Correction in local east direction. \n"
+		""},
+	 { (char *)"OrbitPiecewiseCorrection__v_n_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_n_corr, METH_O, (char *)"\n"
+		"const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::n_corr() const\n"
+		"Correction in local north direction. \n"
+		""},
+	 { (char *)"OrbitPiecewiseCorrection__v_u_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_u_corr, METH_O, (char *)"\n"
+		"const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::u_corr() const\n"
+		"Correction in local up direction. \n"
 		""},
 	 { (char *)"delete_OrbitPiecewiseCorrection", (PyCFunction)_wrap_delete_OrbitPiecewiseCorrection, METH_O, (char *)"\n"
 		"virtual GeoCal::OrbitPiecewiseCorrection::~OrbitPiecewiseCorrection()\n"

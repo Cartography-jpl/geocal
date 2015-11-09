@@ -114,6 +114,8 @@ AirMspiIgc::AirMspiIgc
  const boost::shared_ptr<MspiGimbal>& Gim,
  const boost::shared_ptr<Dem>& Dem,
  const std::string& L1b1_file_name,
+ int Min_l1b1_line,
+ int Max_l1b1_line,
  const std::string& Swath_to_use,
  const std::string& Title,
  int Dem_resolution,
@@ -124,10 +126,9 @@ AirMspiIgc::AirMspiIgc
   : gimbal_(Gim)
 {
   boost::shared_ptr<AirMspiTimeTable> 
-    tt(new AirMspiTimeTable(L1b1_file_name, Swath_to_use));
+    tt(new AirMspiTimeTable(L1b1_file_name, Swath_to_use, Min_l1b1_line, Max_l1b1_line));
   boost::shared_ptr<RasterImage> img
-    (new AirMspiL1b1(tt->l1b1_file(), Tile_number_line, Tile_number_sample,
-		     Number_tile));
+    (new AirMspiL1b1(tt->l1b1_file(), Tile_number_line, Tile_number_sample, Number_tile));
   Time tmin = std::max(Orb->min_time(), tt->min_time());
   Time tmax = std::min(Orb->max_time(), tt->max_time());
   int bandn = Cam->band_number(tt->l1b1_file()->row_number_to_use());

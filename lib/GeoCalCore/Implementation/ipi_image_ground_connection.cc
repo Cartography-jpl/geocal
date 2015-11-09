@@ -118,3 +118,62 @@ IpiImageGroundConnection::image_coordinate_jac_parm(const GroundCoordinate& Gc) 
     res(1, Range::all()) = 0;
   return res; 
 }
+
+blitz::Array<double, 1> 
+IpiImageGroundConnection::collinearity_residual
+(const GroundCoordinate& Gc,
+ const ImageCoordinate& Ic_actual) const
+{
+  // Instead of the difference in ImageCoordinates returned by the
+  // Ipi, use the difference in the FrameCoordinate for the time
+  // associated with Ic_actual. This is faster to calculate, and the
+  // Jacobian is much better behaved.
+  Time t;
+  FrameCoordinate fc_actual;
+  ipi_->time_table().time(Ic_actual, t, fc_actual);
+  FrameCoordinate fc_predict = 
+    ipi_->orbit().frame_coordinate(t, Gc, ipi_->camera(), ipi_->band());
+  Array<double, 1> res(2);
+  res(0) = fc_predict.line - fc_actual.line;
+  res(1) = fc_predict.sample - fc_actual.sample;
+  return res;
+}
+
+blitz::Array<double, 2> 
+IpiImageGroundConnection::collinearity_residual_jacobian
+(const GroundCoordinate& Gc,
+ const ImageCoordinate& Ic_actual) const
+{
+  TimeWithDerivative t;
+  FrameCoordinateWithDerivative fc_actual;
+  ImageCoordinateWithDerivative ica(Ic_actual.line, Ic_actual.sample);
+  ipi_->time_table().time_with_derivative(ica, t, fc_actual);
+  FrameCoordinateWithDerivative fc_predict = 
+    ipi_->orbit().frame_coordinate_with_derivative(t, Gc, ipi_->camera(),
+						    ipi_->band());
+  Array<double, 2> res(2, fc_predict.line.number_variable() + 3);
+  res(0, Range(0, res.cols() - 4)) = 
+    (fc_predict.line - fc_actual.line).gradient();
+  res(1, Range(0, res.cols() - 4)) = 
+    (fc_predict.sample - fc_actual.sample).gradient();
+
+  // Part of jacobian for cf coordinates.
+  boost::shared_ptr<OrbitData> od = ipi_->orbit().orbit_data(t.value());
+  boost::shared_ptr<CartesianFixed> p1 = od->position_cf();
+  boost::shared_ptr<CartesianFixed> p2 = Gc.convert_to_cf();
+  CartesianFixedLookVectorWithDerivative lv;
+  for(int i = 0; i < 3; ++i) {
+    AutoDerivative<double> p(p2->position[i], i, 3);
+    lv.look_vector[i] = p - p1->position[i];
+  }
+  ScLookVectorWithDerivative sl = od->sc_look_vector(lv);
+  boost::shared_ptr<Camera> c = ipi_->camera_ptr();
+  ArrayAd<double, 1> poriginal = c->parameter_with_derivative();
+  c->parameter_with_derivative(c->parameter());
+  FrameCoordinateWithDerivative fc_gc =
+    ipi_->camera().frame_coordinate_with_derivative(sl, ipi_->band());
+  c->parameter_with_derivative(poriginal);
+  res(0, Range(res.cols() - 3, toEnd)) = fc_gc.line.gradient();
+  res(1, Range(res.cols() - 3, toEnd)) = fc_gc.sample.gradient();
+  return res;
+}

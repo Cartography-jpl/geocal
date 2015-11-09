@@ -36,18 +36,23 @@ public:
     virtual blitz::Array< bool,1 > parameter_mask() const;
     virtual boost::shared_ptr< GeoCal::CartesianFixedLookVector > cf_look_vector_lv(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::CartesianFixed > cf_look_vector_pos(GeoCal::ImageCoordinate const &Ic) const;
+    virtual blitz::Array< double,1 > collinearity_residual(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const;
+    virtual blitz::Array< double,2 > collinearity_residual_jacobian(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_dem(GeoCal::ImageCoordinate const &Ic, GeoCal::Dem const &D) const;
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_approx_height(GeoCal::ImageCoordinate const &Ic, double H) const;
     virtual GeoCal::ImageCoordinate image_coordinate(GeoCal::GroundCoordinate const &Gc) const;
     virtual void image_coordinate_with_status(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate &OUTPUT2, bool &OUTPUT) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_cf(GeoCal::CartesianFixed const &Gc) const;
+    virtual blitz::Array< double,2 > image_coordinate_jac_cf_fd(GeoCal::CartesianFixed const &Gc, double Step_size) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_parm(GeoCal::GroundCoordinate const &Gc) const;
     virtual int number_line() const;
     virtual int number_sample() const;
     virtual int number_band() const;
     virtual double resolution_meter(GeoCal::ImageCoordinate const &Ic) const;
     virtual double resolution_meter() const;
+    virtual double footprint_resolution_line(int Line, int Sample) const;
+    virtual double footprint_resolution_sample(int Line, int Sample) const;
     virtual blitz::Array< double,7 > cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp, int nsubpixel_line = 1, int nsubpixel_sample = 1, int nintegration_step = 1) const;
     using GeoCal::ImageGroundConnection::initialize;
 
@@ -83,7 +88,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[29];
+    mutable swig::SwigVar_PyObject vtable[34];
 #endif
 
 };

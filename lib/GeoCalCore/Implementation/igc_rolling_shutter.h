@@ -50,7 +50,7 @@ namespace GeoCal {
       Time tmin;
       double tspace;
     };
-    // Helper class that does a fast interpolation of quaternion.
+    // Helper class that does a fast interpolation of quaternion rotations
     class QuaternionInterpolate {
     public:
       QuaternionInterpolate() {}
@@ -60,7 +60,7 @@ namespace GeoCal {
 			    double Tspace)
 	: q1(Q1), q2(Q2), tmin(Tmin), tspace(Tspace) {}
       boost::math::quaternion<double> operator()(const Time& Tm) const
-      { return interpolate_quaternion(q1, q2, Tm - tmin, tspace); }
+      { return interpolate_quaternion_rotation(q1, q2, Tm - tmin, tspace); }
     private:
       boost::math::quaternion<double> q1, q2;
       Time tmin;
@@ -150,6 +150,12 @@ public:
 					    bool& Success) const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
   virtual blitz::Array<double, 7> 
   cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
 		     int nsubpixel_line = 1, 
@@ -313,6 +319,9 @@ private:
   }
   boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const Time& Tm) const
+  { return interpolate(*od1, *od2, Tm); }
+  boost::shared_ptr<QuaternionOrbitData> 
+  orbit_data(const TimeWithDerivative& Tm) const
   { return interpolate(*od1, *od2, Tm); }
   boost::shared_ptr<TimeTable> time_table_;
   boost::shared_ptr<Camera> cam;

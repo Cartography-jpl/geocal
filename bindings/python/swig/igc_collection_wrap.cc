@@ -5507,6 +5507,9 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 namespace swig {
   template <> struct traits<int > {
     typedef value_category category;
@@ -6017,6 +6020,100 @@ int SwigDirector_IgcCollection::number_image() const {
 }
 
 
+blitz::Array< double,1 > SwigDirector_IgcCollection::collinearity_residual(int Image_index, GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const {
+  PythonObject numpy ;
+  
+  blitz::Array< double,1 > c_result;
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(Image_index));
+  swig::SwigVar_PyObject obj1;
+  {
+    boost::shared_ptr< const GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::GroundCoordinate >((GeoCal::GroundCoordinate *)&Gc, SWIG_null_deleter());
+    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN);
+  }
+  swig::SwigVar_PyObject obj2;
+  {
+    boost::shared_ptr< const GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::ImageCoordinate >((GeoCal::ImageCoordinate *)&Ic_actual, SWIG_null_deleter());
+    obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+  }
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 12;
+  const char * const swig_method_name = "collinearity_residual";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"collinearity_residual");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    PythonObject t(to_numpy<double >(result));
+    c_result.reference(to_blitz_array<double, 1>(t).copy());
+  }
+  return (blitz::Array< double,1 >) c_result;
+}
+
+
+blitz::Array< double,2 > SwigDirector_IgcCollection::collinearity_residual_jacobian(int Image_index, GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const {
+  PythonObject numpy ;
+  
+  blitz::Array< double,2 > c_result;
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(Image_index));
+  swig::SwigVar_PyObject obj1;
+  {
+    boost::shared_ptr< const GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::GroundCoordinate >((GeoCal::GroundCoordinate *)&Gc, SWIG_null_deleter());
+    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN);
+  }
+  swig::SwigVar_PyObject obj2;
+  {
+    boost::shared_ptr< const GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::ImageCoordinate >((GeoCal::ImageCoordinate *)&Ic_actual, SWIG_null_deleter());
+    obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+  }
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 13;
+  const char * const swig_method_name = "collinearity_residual_jacobian";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"collinearity_residual_jacobian");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    PythonObject t(to_numpy<double >(result));
+    c_result.reference(to_blitz_array<double, 2>(t).copy());
+  }
+  return (blitz::Array< double,2 >) c_result;
+}
+
+
 boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground_coordinate(int Image_index, GeoCal::ImageCoordinate const &Ic) const {
   void *swig_argp ;
   int swig_res = 0 ;
@@ -6033,7 +6130,7 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 12;
+  const size_t swig_method_index = 14;
   const char * const swig_method_name = "__ground_coordinate";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
@@ -6094,7 +6191,7 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 13;
+  const size_t swig_method_index = 15;
   const char * const swig_method_name = "ground_coordinate_dem";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
@@ -6145,7 +6242,7 @@ boost::shared_ptr< GeoCal::Dem > SwigDirector_IgcCollection::dem(int Image_index
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 14;
+  const size_t swig_method_index = 16;
   const char * const swig_method_name = "dem";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -6201,7 +6298,7 @@ GeoCal::ImageCoordinate SwigDirector_IgcCollection::image_coordinate(int Image_i
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 15;
+  const size_t swig_method_index = 17;
   const char * const swig_method_name = "image_coordinate";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
@@ -6231,6 +6328,92 @@ GeoCal::ImageCoordinate SwigDirector_IgcCollection::image_coordinate(int Image_i
 }
 
 
+blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_parm(int Image_index, GeoCal::CartesianFixed const &Gc) const {
+  PythonObject numpy ;
+  
+  blitz::Array< double,2 > c_result;
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(Image_index));
+  swig::SwigVar_PyObject obj1;
+  {
+    boost::shared_ptr< const GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixed >((GeoCal::CartesianFixed *)&Gc, SWIG_null_deleter());
+    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN);
+  }
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 18;
+  const char * const swig_method_name = "image_coordinate_jac_parm";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"image_coordinate_jac_parm");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    PythonObject t(to_numpy<double >(result));
+    c_result.reference(to_blitz_array<double, 2>(t).copy());
+  }
+  return (blitz::Array< double,2 >) c_result;
+}
+
+
+blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_parm_fd(int Image_index, GeoCal::CartesianFixed const &Gc, blitz::Array< double,1 > const Pstep) const {
+  PythonObject numpy ;
+  
+  blitz::Array< double,2 > c_result;
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(Image_index));
+  swig::SwigVar_PyObject obj1;
+  {
+    boost::shared_ptr< const GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixed >((GeoCal::CartesianFixed *)&Gc, SWIG_null_deleter());
+    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN);
+  }
+  swig::SwigVar_PyObject obj2;
+  obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(&Pstep), SWIGTYPE_p_blitz__ArrayT_double_1_t,  0 );
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 19;
+  const char * const swig_method_name = "image_coordinate_jac_parm_fd";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"image_coordinate_jac_parm_fd");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    PythonObject t(to_numpy<double >(result));
+    c_result.reference(to_blitz_array<double, 2>(t).copy());
+  }
+  return (blitz::Array< double,2 >) c_result;
+}
+
+
 blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_cf(int Image_index, GeoCal::CartesianFixed const &Gc) const {
   PythonObject numpy ;
   
@@ -6246,13 +6429,57 @@ blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_cf(int
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 16;
+  const size_t swig_method_index = 20;
   const char * const swig_method_name = "image_coordinate_jac_cf";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
 #else
   swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"image_coordinate_jac_cf");
   swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        GeoCal::Exception e;
+        e << "Python error occured:\n"
+        << parse_python_exception();
+        throw e;
+      }
+    }
+  }
+  {
+    PythonObject t(to_numpy<double >(result));
+    c_result.reference(to_blitz_array<double, 2>(t).copy());
+  }
+  return (blitz::Array< double,2 >) c_result;
+}
+
+
+blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_cf_fd(int Image_index, GeoCal::CartesianFixed const &Gc, double Step_size) const {
+  PythonObject numpy ;
+  
+  blitz::Array< double,2 > c_result;
+  swig::SwigVar_PyObject obj0;
+  obj0 = SWIG_From_int(static_cast< int >(Image_index));
+  swig::SwigVar_PyObject obj1;
+  {
+    boost::shared_ptr< const GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixed >((GeoCal::CartesianFixed *)&Gc, SWIG_null_deleter());
+    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN);
+  }
+  swig::SwigVar_PyObject obj2;
+  obj2 = SWIG_From_double(static_cast< double >(Step_size));
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 21;
+  const char * const swig_method_name = "image_coordinate_jac_cf_fd";
+  PyObject* method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar((char *)"image_coordinate_jac_cf_fd");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2, NULL);
 #endif
   if (!result) {
     PyObject *error = PyErr_Occurred();
@@ -6281,7 +6508,7 @@ std::string SwigDirector_IgcCollection::title(int Image_index) const {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 17;
+  const size_t swig_method_index = 22;
   const char * const swig_method_name = "title";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -6322,7 +6549,7 @@ boost::shared_ptr< GeoCal::RasterImage > SwigDirector_IgcCollection::image(int I
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 18;
+  const size_t swig_method_index = 23;
   const char * const swig_method_name = "image";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -6373,7 +6600,7 @@ boost::shared_ptr< GeoCal::ImageGroundConnection > SwigDirector_IgcCollection::i
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 19;
+  const size_t swig_method_index = 24;
   const char * const swig_method_name = "image_ground_connection";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -6424,7 +6651,7 @@ boost::shared_ptr< GeoCal::IgcCollection > SwigDirector_IgcCollection::subset(st
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 20;
+  const size_t swig_method_index = 25;
   const char * const swig_method_name = "subset";
   PyObject* method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -6558,6 +6785,274 @@ SWIGINTERN PyObject *_wrap_IgcCollection__v_number_image(PyObject *SWIGUNUSEDPAR
     SWIG_fail;
   }
   resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcCollection_collinearity_residual(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcCollection *arg1 = (GeoCal::IgcCollection *) 0 ;
+  int arg2 ;
+  GeoCal::GroundCoordinate *arg3 = 0 ;
+  GeoCal::ImageCoordinate *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared4 ;
+  PyObject *swig_obj[4] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"IgcCollection_collinearity_residual",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcCollection_collinearity_residual" "', argument " "1"" of type '" "GeoCal::IgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IgcCollection_collinearity_residual" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "IgcCollection_collinearity_residual" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcCollection_collinearity_residual" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "IgcCollection_collinearity_residual" "', argument " "4"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcCollection_collinearity_residual" "', argument " "4"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::ImageCoordinate * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp4)->get());
+      }
+    }
+  }
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::collinearity_residual(arg2,(GeoCal::GroundCoordinate const &)*arg3,(GeoCal::ImageCoordinate const &)*arg4);
+        } else {
+          result = ((GeoCal::IgcCollection const *)arg1)->collinearity_residual(arg2,(GeoCal::GroundCoordinate const &)*arg3,(GeoCal::ImageCoordinate const &)*arg4);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcCollection_collinearity_residual_jacobian(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcCollection *arg1 = (GeoCal::IgcCollection *) 0 ;
+  int arg2 ;
+  GeoCal::GroundCoordinate *arg3 = 0 ;
+  GeoCal::ImageCoordinate *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared4 ;
+  PyObject *swig_obj[4] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"IgcCollection_collinearity_residual_jacobian",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcCollection_collinearity_residual_jacobian" "', argument " "1"" of type '" "GeoCal::IgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IgcCollection_collinearity_residual_jacobian" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "IgcCollection_collinearity_residual_jacobian" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcCollection_collinearity_residual_jacobian" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "IgcCollection_collinearity_residual_jacobian" "', argument " "4"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcCollection_collinearity_residual_jacobian" "', argument " "4"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::ImageCoordinate * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp4)->get());
+      }
+    }
+  }
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::collinearity_residual_jacobian(arg2,(GeoCal::GroundCoordinate const &)*arg3,(GeoCal::ImageCoordinate const &)*arg4);
+        } else {
+          result = ((GeoCal::IgcCollection const *)arg1)->collinearity_residual_jacobian(arg2,(GeoCal::GroundCoordinate const &)*arg3,(GeoCal::ImageCoordinate const &)*arg4);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
   return resultobj;
 fail:
   return NULL;
@@ -6937,6 +7432,224 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_parm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcCollection *arg1 = (GeoCal::IgcCollection *) 0 ;
+  int arg2 ;
+  GeoCal::CartesianFixed *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > tempshared3 ;
+  PyObject *swig_obj[3] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"IgcCollection_image_coordinate_jac_parm",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcCollection_image_coordinate_jac_parm" "', argument " "1"" of type '" "GeoCal::IgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IgcCollection_image_coordinate_jac_parm" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixed *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixed,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "IgcCollection_image_coordinate_jac_parm" "', argument " "3"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcCollection_image_coordinate_jac_parm" "', argument " "3"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3);
+        arg3 = const_cast< GeoCal::CartesianFixed * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::CartesianFixed * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3)->get());
+      }
+    }
+  }
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::image_coordinate_jac_parm(arg2,(GeoCal::CartesianFixed const &)*arg3);
+        } else {
+          result = ((GeoCal::IgcCollection const *)arg1)->image_coordinate_jac_parm(arg2,(GeoCal::CartesianFixed const &)*arg3);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_parm_fd(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcCollection *arg1 = (GeoCal::IgcCollection *) 0 ;
+  int arg2 ;
+  GeoCal::CartesianFixed *arg3 = 0 ;
+  SwigValueWrapper< blitz::Array< double,1 > > arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > tempshared3 ;
+  PythonObject numpy4 ;
+  PyObject *swig_obj[4] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"IgcCollection_image_coordinate_jac_parm_fd",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcCollection_image_coordinate_jac_parm_fd" "', argument " "1"" of type '" "GeoCal::IgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IgcCollection_image_coordinate_jac_parm_fd" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixed *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixed,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "IgcCollection_image_coordinate_jac_parm_fd" "', argument " "3"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcCollection_image_coordinate_jac_parm_fd" "', argument " "3"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3);
+        arg3 = const_cast< GeoCal::CartesianFixed * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::CartesianFixed * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    numpy4.obj = to_numpy<double >(swig_obj[3]);
+    if(!numpy4.obj)
+    return NULL;
+    arg4 = to_blitz_array<double, 1>(numpy4);
+  }
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::image_coordinate_jac_parm_fd(arg2,(GeoCal::CartesianFixed const &)*arg3,arg4);
+        } else {
+          result = ((GeoCal::IgcCollection const *)arg1)->image_coordinate_jac_parm_fd(arg2,(GeoCal::CartesianFixed const &)*arg3,arg4);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_cf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcCollection *arg1 = (GeoCal::IgcCollection *) 0 ;
@@ -7011,6 +7724,119 @@ SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_cf(PyObject *SWIGU
           result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::image_coordinate_jac_cf(arg2,(GeoCal::CartesianFixed const &)*arg3);
         } else {
           result = ((GeoCal::IgcCollection const *)arg1)->image_coordinate_jac_cf(arg2,(GeoCal::CartesianFixed const &)*arg3);
+        }
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      }
+    }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_cf_fd(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcCollection *arg1 = (GeoCal::IgcCollection *) 0 ;
+  int arg2 ;
+  GeoCal::CartesianFixed *arg3 = 0 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcCollection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > tempshared3 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"IgcCollection_image_coordinate_jac_cf_fd",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcCollection_image_coordinate_jac_cf_fd" "', argument " "1"" of type '" "GeoCal::IgcCollection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IgcCollection_image_coordinate_jac_cf_fd" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixed *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixed,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "IgcCollection_image_coordinate_jac_cf_fd" "', argument " "3"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcCollection_image_coordinate_jac_cf_fd" "', argument " "3"" of type '" "GeoCal::CartesianFixed const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3);
+        arg3 = const_cast< GeoCal::CartesianFixed * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::CartesianFixed * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "IgcCollection_image_coordinate_jac_cf_fd" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = ((GeoCal::IgcCollection const *)arg1)->GeoCal::IgcCollection::image_coordinate_jac_cf_fd(arg2,(GeoCal::CartesianFixed const &)*arg3,arg4);
+        } else {
+          result = ((GeoCal::IgcCollection const *)arg1)->image_coordinate_jac_cf_fd(arg2,(GeoCal::CartesianFixed const &)*arg3,arg4);
         }
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8247,6 +9073,24 @@ static PyMethodDef SwigMethods[] = {
 		"virtual int GeoCal::IgcCollection::number_image() const\n"
 		"\n"
 		""},
+	 { (char *)"IgcCollection_collinearity_residual", _wrap_IgcCollection_collinearity_residual, METH_VARARGS, (char *)"\n"
+		"virtual blitz::Array<double, 1> GeoCal::IgcCollection::collinearity_residual(int Image_index, const GroundCoordinate &Gc, const ImageCoordinate\n"
+		"&Ic_actual) const\n"
+		"Return collinearity residual for given Image_index (see\n"
+		"ImageGroundConnection for details on this. \n"
+		""},
+	 { (char *)"IgcCollection_collinearity_residual_jacobian", _wrap_IgcCollection_collinearity_residual_jacobian, METH_VARARGS, (char *)"\n"
+		"virtual blitz::Array<double, 2> GeoCal::IgcCollection::collinearity_residual_jacobian(int Image_index, const GroundCoordinate &Gc, const ImageCoordinate\n"
+		"&Ic_actual) const\n"
+		"Return jacobian of collinearity_residual.\n"
+		"\n"
+		"The parameters for this class should already have AutoDerivative\n"
+		"extended for the jacobian (e.g., call add_identity_gradient()).\n"
+		"\n"
+		"We add the derivative wrt the CartesianFixed coordinates of the\n"
+		"Ground_coor (X, Y, Z in that order), at the end of the Jacobian. So\n"
+		"the total Jacobian is 2 x (number parameter + 3). \n"
+		""},
 	 { (char *)"IgcCollection___ground_coordinate", _wrap_IgcCollection___ground_coordinate, METH_VARARGS, (char *)"\n"
 		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::IgcCollection::ground_coordinate(int Image_index, const ImageCoordinate &Ic) const\n"
 		"Return ground coordinate that goes with a particular image coordinate.\n"
@@ -8273,7 +9117,21 @@ static PyMethodDef SwigMethods[] = {
 		"the image_coordinate. Callers can catch this exception if they have\n"
 		"some way of handling no image coordinate data. \n"
 		""},
+	 { (char *)"IgcCollection_image_coordinate_jac_parm", _wrap_IgcCollection_image_coordinate_jac_parm, METH_VARARGS, NULL},
+	 { (char *)"IgcCollection_image_coordinate_jac_parm_fd", _wrap_IgcCollection_image_coordinate_jac_parm_fd, METH_VARARGS, (char *)"\n"
+		"blitz::Array< double, 2 > IgcCollection::image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed &Gc, const blitz::Array<\n"
+		"double, 1 > Pstep) const\n"
+		"Return the Jacobian of the image coordinates with respect to the\n"
+		"parameters, calculated by taking a finite difference. \n"
+		""},
 	 { (char *)"IgcCollection_image_coordinate_jac_cf", _wrap_IgcCollection_image_coordinate_jac_cf, METH_VARARGS, NULL},
+	 { (char *)"IgcCollection_image_coordinate_jac_cf_fd", _wrap_IgcCollection_image_coordinate_jac_cf_fd, METH_VARARGS, (char *)"\n"
+		"virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_cf_fd(int Image_index, const CartesianFixed &Gc, double Step_size) const\n"
+		"Return the Jacobian of the image coordinates with respect to the X, Y,\n"
+		"and Z components of the CartesianFixed ground location.\n"
+		"\n"
+		"Calculated as a finite difference with the given step size. \n"
+		""},
 	 { (char *)"IgcCollection_title", _wrap_IgcCollection_title, METH_VARARGS, (char *)"\n"
 		"virtual std::string GeoCal::IgcCollection::title(int Image_index) const\n"
 		"Title that we can use to describe the image.\n"

@@ -151,6 +151,13 @@ public:
     cf_look_vector(Ic, lv, p);
     return p;
   }
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const;
+  
     
 //-----------------------------------------------------------------------
 /// Return ground coordinate that goes with a particular image
@@ -281,6 +288,8 @@ public:
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
 
+  virtual blitz::Array<double, 2> image_coordinate_jac_cf_fd(const CartesianFixed& Gc, double Step_size) const;
+
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
 /// parameters.
@@ -345,6 +354,26 @@ public:
 				    double &Line_resolution_meter, 
 				    double &Sample_resolution_meter) const;
 
+//-----------------------------------------------------------------------
+/// SWIG/python doesn't like returning 2 items through a director, so
+/// we implement cf_look_vector in 2 parts. In general, C++ should
+/// override footprint_resolution rather than these 2 functions (although it
+/// could do these 2 if useful for some reason.
+//-----------------------------------------------------------------------
+
+  virtual double footprint_resolution_line(int Line, int Sample) const
+  { 
+    double lres, sres;
+    footprint_resolution(Line, Sample, lres, sres);
+    return lres;
+  }
+
+  virtual double footprint_resolution_sample(int Line, int Sample) const
+  { 
+    double lres, sres;
+    footprint_resolution(Line, Sample, lres, sres);
+    return sres;
+  }
 
 //-----------------------------------------------------------------------
 /// DEM used by ground_coordinate.

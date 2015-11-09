@@ -32,6 +32,8 @@ void AirMspiOrbit::load(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(tspace)
     & GEOCAL_NVP(old_format);
   data.reset(new GdalRasterImage(air_mspi_true_file_name(file_name_)));
+  gimbal->add_observer(*this);
+  empty_cache();
 }
 
 GEOCAL_SPLIT_IMPLEMENT(AirMspiOrbit);
@@ -162,6 +164,19 @@ AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
     data_cache_.push_back(empty);
   next_swap_ = data_cache_.begin();
   tile_number_line = 10000;
+  gimbal->add_observer(*this);
+  empty_cache();
+}
+
+//-----------------------------------------------------------------------
+/// Empty out the cache, and initialize to the right size.
+//-----------------------------------------------------------------------
+
+void AirMspiOrbit::empty_cache() 
+{
+  std::vector<boost::shared_ptr<QuaternionOrbitData> > 
+    new_cache(data->number_line());
+  cache_.swap(new_cache);
 }
 
 //-----------------------------------------------------------------------
@@ -245,26 +260,28 @@ boost::shared_ptr<QuaternionOrbitData>
 AirMspiOrbit::orbit_data_index(int Index) const
 {
   range_check(Index, 0, data->number_line() - 1);
-  AirMspiNavData n1 = nav_data(Index);
-  AirMspiNavData n2 = nav_data(Index + 1);
-  // This goes from station to spacecraft
-  boost::math::quaternion<double> station_to_sc =
-    gimbal->station_to_sc(n1.gimbal_pos);
-  // boost::math::quaternion<double> station_to_sc =
-  //   gimbal->station_to_sc(n1.gimbal_pos);
-  // This goes from spacecraft to cf
-  AircraftOrbitData od(min_time() + Index * time_spacing(), n1.position,
-		       min_time() + (Index + 1) * time_spacing(), n2.position,
-		       n1.ypr[2] * Constant::rad_to_deg,
-		       n1.ypr[1] * Constant::rad_to_deg,
-		       n1.ypr[0] * Constant::rad_to_deg,
-		       vdef_);
-  // Tack these 2 transforms together
-  return boost::shared_ptr<QuaternionOrbitData>
-    (new QuaternionOrbitData(od.time(), 
-  			     od.position_cf(),
-  			     od.velocity_cf(),
-  			     od.sc_to_cf() * station_to_sc));
+  if(!cache_[Index]) {
+    AirMspiNavData n1 = nav_data(Index);
+    AirMspiNavData n2 = nav_data(Index + 1);
+    // This goes from station to spacecraft
+    boost::math::quaternion<double> station_to_sc =
+      gimbal->station_to_sc(n1.gimbal_pos);
+    // boost::math::quaternion<double> station_to_sc =
+    //   gimbal->station_to_sc(n1.gimbal_pos);
+    // This goes from spacecraft to cf
+    AircraftOrbitData od(min_time() + Index * time_spacing(), n1.position,
+			 min_time() + (Index + 1) * time_spacing(), n2.position,
+			 n1.ypr[2] * Constant::rad_to_deg,
+			 n1.ypr[1] * Constant::rad_to_deg,
+			 n1.ypr[0] * Constant::rad_to_deg,
+			 vdef_);
+    // Tack these 2 transforms together
+    cache_[Index].reset(new QuaternionOrbitData(od.time(), 
+						od.position_cf(),
+						od.velocity_cf(),
+						od.sc_to_cf() * station_to_sc));
+  }
+  return cache_[Index];
 }
 
 boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data(Time T) const

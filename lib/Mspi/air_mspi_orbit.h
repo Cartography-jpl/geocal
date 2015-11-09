@@ -48,7 +48,7 @@ private:
   is no reason other than convenience to use GDAL here.
 *******************************************************************/
 
-class AirMspiOrbit : public Orbit {
+class AirMspiOrbit : public Orbit, public Observer<MspiGimbal> {
 public:
   AirMspiOrbit(const std::string& Fname, 
 	       const boost::shared_ptr<MspiGimbal>& Gim,
@@ -124,10 +124,14 @@ public:
   orbit_data(const TimeWithDerivative& T) const;
 
   virtual void print(std::ostream& Os) const;
+
+  virtual void notify_update(const MspiGimbal& G) 
+  { empty_cache(); };
 private:
   blitz::Array<double, 1> raw_data(int Index) const;
   boost::shared_ptr<GdalRasterImage> data;
   std::string file_name_;
+  mutable std::vector<boost::shared_ptr<QuaternionOrbitData> > cache_;
   mutable std::vector<blitz::Array<double, 2> > data_cache_;
   mutable std::vector<blitz::Array<double, 2> >::iterator next_swap_;
   int tile_number_line;
@@ -136,6 +140,7 @@ private:
   double tspace_;
   bool old_format;
   boost::shared_ptr<MspiGimbal> gimbal;
+  void empty_cache();
   AirMspiOrbit();
   friend class boost::serialization::access;
   template<class Archive>

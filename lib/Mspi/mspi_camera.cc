@@ -259,7 +259,10 @@ MspiCamera::focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp,
 void MspiCamera::print(std::ostream& Os) const
 {
   Os << "MspiCamera:\n"
-     << "  File name: " << file_name() << "\n";
+     << "  File name: " << file_name() << "\n"
+     << "  Yaw:       " << yaw() << " degrees\n"
+     << "  Pitch:     " << pitch() << " degrees\n"
+     << "  Roll:      " << roll() << " degrees\n";
 }
 
 //-----------------------------------------------------------------------

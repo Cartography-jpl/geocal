@@ -27,6 +27,9 @@ public:
   RasterImageMultiBandVariable overview(int Min_number_sample) const;
 };
 
+  // The name "copy" causes problems in python, because this matches
+  // the module name copy. So rename this to avoid conflicts
+%rename(copy_raster) copy;
 void copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
 void copy(const RasterImageMultiBand& Img_in, RasterImageMultiBand& Img_out, 
 	  bool Log_progress = false);

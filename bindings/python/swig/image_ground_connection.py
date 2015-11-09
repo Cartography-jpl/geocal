@@ -226,6 +226,42 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         """
         return _image_ground_connection.ImageGroundConnection_cf_look_vector_pos(self, *args)
 
+    def collinearity_residual(self, *args):
+        """
+        blitz::Array< double, 1 > ImageGroundConnection::collinearity_residual(const GroundCoordinate &Gc, const ImageCoordinate &Ic_actual) const
+        Return an array (size 2) that gives the collinearity constraint.
+
+        This is the difference between the predicted location where the
+        Ground_coor is seen in the image and the "actual" image coordinates
+        (e.g., determined from image matching).
+
+        There is a bit of freedom in what these exact equations are. This is
+        used by the Simultaneous Bundle Adjustment, and we just try to vary
+        parameters to minimize this. So this should return [0, 0] if we
+        exactly predict the location of Ic_actual for Ground_coor, and should
+        grow in size as we do a worse and worse prediction.
+
+        The default implementation is just this->image_coordinate(Gc) -
+        Ic_actual, however derived classes might use something that is
+        simpler/faster to calculate or is more stable (e.g.
+        IpiImageGroundConnection finds the difference in frame coordinates. 
+        """
+        return _image_ground_connection.ImageGroundConnection_collinearity_residual(self, *args)
+
+    def collinearity_residual_jacobian(self, *args):
+        """
+        blitz::Array< double, 2 > ImageGroundConnection::collinearity_residual_jacobian(const GroundCoordinate &Gc, const ImageCoordinate &Ic_actual) const
+        Return jacobian of collinearity_residual.
+
+        The parameters for this class should already have AutoDerivative
+        extended for the jacobian (e.g., call add_identity_gradient()).
+
+        We add the derivative wrt the CartesianFixed coordinates of the
+        Ground_coor (X, Y, Z in that order), at the end of the Jacobian. So
+        the total Jacobian is 2 x (number parameter + 3). 
+        """
+        return _image_ground_connection.ImageGroundConnection_collinearity_residual_jacobian(self, *args)
+
     def __ground_coordinate(self, *args):
         """
         virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate(const ImageCoordinate &Ic) const
@@ -297,6 +333,16 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         and Z components of the CartesianFixed ground location. 
         """
         return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf(self, *args)
+
+    def image_coordinate_jac_cf_fd(self, *args):
+        """
+        blitz::Array< double, 2 > ImageGroundConnection::image_coordinate_jac_cf_fd(const CartesianFixed &Gc, double Step_size) const
+        Return the Jacobian of the image coordinates with respect to the X, Y,
+        and Z components of the CartesianFixed ground location.
+
+        This is calculated by a finite difference of the given size. 
+        """
+        return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf_fd(self, *args)
 
     def image_coordinate_jac_parm(self, *args):
         """
@@ -507,6 +553,25 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def parameter_mask(self):
         return self._v_parameter_mask()
 
+    def footprint_resolution_line(self, *args):
+        """
+        virtual double GeoCal::ImageGroundConnection::footprint_resolution_line(int Line, int Sample) const
+        SWIG/python doesn't like returning 2 items through a director, so we
+        implement cf_look_vector in 2 parts.
+
+        In general, C++ should override footprint_resolution rather than these
+        2 functions (although it could do these 2 if useful for some reason.
+
+        """
+        return _image_ground_connection.ImageGroundConnection_footprint_resolution_line(self, *args)
+
+    def footprint_resolution_sample(self, *args):
+        """
+        virtual double GeoCal::ImageGroundConnection::footprint_resolution_sample(int Line, int Sample) const
+
+        """
+        return _image_ground_connection.ImageGroundConnection_footprint_resolution_sample(self, *args)
+
     def cf_look_vector_arr(self, *args):
         """
         blitz::Array< double, 7 > ImageGroundConnection::cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp, int
@@ -570,6 +635,10 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def cf_look_vector(self, ic):
       return (self.cf_look_vector_lv(ic), self.cf_look_vector_pos(ic))
 
+    def footprint_resolution(self, line, sample):
+      return (self.footprint_resolution_line(line, sample), 
+    	  self.footprint_resolution_sample(line, sample))
+
     def ground_coordinate(self, ic, dem = None):
       '''Return ground coordinate for the given image coordinate. You can specify
        a dem to use, or we use the dem associated with the class.'''
@@ -585,12 +654,15 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
 ImageGroundConnection.initialize = new_instancemethod(_image_ground_connection.ImageGroundConnection_initialize,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_lv = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_lv,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_pos = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_pos,None,ImageGroundConnection)
+ImageGroundConnection.collinearity_residual = new_instancemethod(_image_ground_connection.ImageGroundConnection_collinearity_residual,None,ImageGroundConnection)
+ImageGroundConnection.collinearity_residual_jacobian = new_instancemethod(_image_ground_connection.ImageGroundConnection_collinearity_residual_jacobian,None,ImageGroundConnection)
 ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection___ground_coordinate,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem,None,ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_with_status = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_with_status,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_cf = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf,None,ImageGroundConnection)
+ImageGroundConnection.image_coordinate_jac_cf_fd = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf_fd,None,ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm,None,ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover,None,ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image,None,ImageGroundConnection)
@@ -611,6 +683,8 @@ ImageGroundConnection._v_parameter_subset = new_instancemethod(_image_ground_con
 ImageGroundConnection._v_parameter_with_derivative_subset = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_with_derivative_subset,None,ImageGroundConnection)
 ImageGroundConnection._v_parameter_name_subset = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_name_subset,None,ImageGroundConnection)
 ImageGroundConnection._v_parameter_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter_mask,None,ImageGroundConnection)
+ImageGroundConnection.footprint_resolution_line = new_instancemethod(_image_ground_connection.ImageGroundConnection_footprint_resolution_line,None,ImageGroundConnection)
+ImageGroundConnection.footprint_resolution_sample = new_instancemethod(_image_ground_connection.ImageGroundConnection_footprint_resolution_sample,None,ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_arr = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_arr,None,ImageGroundConnection)
 ImageGroundConnection._v_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_dem,None,ImageGroundConnection)
 ImageGroundConnection.__dem = new_instancemethod(_image_ground_connection.ImageGroundConnection___dem,None,ImageGroundConnection)

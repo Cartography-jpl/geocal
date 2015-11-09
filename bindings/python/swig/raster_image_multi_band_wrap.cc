@@ -5720,7 +5720,7 @@ SWIGINTERN PyObject *RasterImageMultiBand_swigregister(PyObject *SWIGUNUSEDPARM(
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_copy__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_copy_raster__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = 0 ;
   GeoCal::RasterImage *arg2 = 0 ;
@@ -5752,10 +5752,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
@@ -5777,10 +5777,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
@@ -5793,17 +5793,17 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobj
   }
   ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy" "', argument " "3"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy_raster" "', argument " "3"" of type '" "bool""'");
   } 
   arg3 = static_cast< bool >(val3);
   ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "copy" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "copy_raster" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
   ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "copy" "', argument " "5"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "copy_raster" "', argument " "5"" of type '" "int""'");
   } 
   arg5 = static_cast< int >(val5);
   {
@@ -5822,7 +5822,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_copy__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_copy_raster__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = 0 ;
   GeoCal::RasterImage *arg2 = 0 ;
@@ -5851,10 +5851,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
@@ -5876,10 +5876,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
@@ -5892,12 +5892,12 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobj
   }
   ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy" "', argument " "3"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy_raster" "', argument " "3"" of type '" "bool""'");
   } 
   arg3 = static_cast< bool >(val3);
   ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "copy" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "copy_raster" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
   {
@@ -5916,7 +5916,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_copy__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_copy_raster__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = 0 ;
   GeoCal::RasterImage *arg2 = 0 ;
@@ -5942,10 +5942,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
@@ -5967,10 +5967,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
@@ -5983,7 +5983,7 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobj
   }
   ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy" "', argument " "3"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy_raster" "', argument " "3"" of type '" "bool""'");
   } 
   arg3 = static_cast< bool >(val3);
   {
@@ -6002,7 +6002,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_copy__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_copy_raster__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = 0 ;
   GeoCal::RasterImage *arg2 = 0 ;
@@ -6025,10 +6025,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
@@ -6050,10 +6050,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
@@ -6080,7 +6080,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_copy__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_copy_raster__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImageMultiBand *arg1 = 0 ;
   GeoCal::RasterImageMultiBand *arg2 = 0 ;
@@ -6106,10 +6106,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageMultiBand > * >(argp1);
@@ -6131,10 +6131,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageMultiBand > * >(argp2);
@@ -6147,7 +6147,7 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobj
   }
   ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy" "', argument " "3"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy_raster" "', argument " "3"" of type '" "bool""'");
   } 
   arg3 = static_cast< bool >(val3);
   {
@@ -6166,7 +6166,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_copy__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_copy_raster__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImageMultiBand *arg1 = 0 ;
   GeoCal::RasterImageMultiBand *arg2 = 0 ;
@@ -6189,10 +6189,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageMultiBand > * >(argp1);
@@ -6214,10 +6214,10 @@ SWIGINTERN PyObject *_wrap_copy__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobj
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_raster" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageMultiBand > * >(argp2);
@@ -6244,11 +6244,11 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_copy(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_copy_raster(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[6];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"copy",0,5,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"copy_raster",0,5,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
     int _v = 0;
@@ -6262,12 +6262,12 @@ SWIGINTERN PyObject *_wrap_copy(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_1;
-    return _wrap_copy__SWIG_3(self, argc, argv);
+    return _wrap_copy_raster__SWIG_3(self, argc, argv);
   }
 check_1:
   
   if (argc == 2) {
-    return _wrap_copy__SWIG_5(self, argc, argv);
+    return _wrap_copy_raster__SWIG_5(self, argc, argv);
   }
   if (argc == 3) {
     int _v = 0;
@@ -6281,22 +6281,22 @@ check_1:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_3;
-    return _wrap_copy__SWIG_4(self, argc, argv);
+    return _wrap_copy_raster__SWIG_4(self, argc, argv);
   }
 check_3:
   
   if (argc == 3) {
-    return _wrap_copy__SWIG_2(self, argc, argv);
+    return _wrap_copy_raster__SWIG_2(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_copy__SWIG_1(self, argc, argv);
+    return _wrap_copy_raster__SWIG_1(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_copy__SWIG_0(self, argc, argv);
+    return _wrap_copy_raster__SWIG_0(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'copy'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'copy_raster'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::copy(GeoCal::RasterImage const &,GeoCal::RasterImage &,bool,int,int)\n"
     "    GeoCal::copy(GeoCal::RasterImage const &,GeoCal::RasterImage &,bool,int)\n"
@@ -6354,7 +6354,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"RasterImageMultiBand_swigregister", RasterImageMultiBand_swigregister, METH_VARARGS, NULL},
-	 { (char *)"copy", _wrap_copy, METH_VARARGS, (char *)"\n"
+	 { (char *)"copy_raster", _wrap_copy_raster, METH_VARARGS, (char *)"\n"
 		"void GeoCal::copy(const RasterImageMultiBand &Img_in, RasterImageMultiBand &Img_out,\n"
 		"bool Log_progress=false)\n"
 		"This copies one multiband image to another.\n"

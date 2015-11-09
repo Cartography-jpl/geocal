@@ -5592,14 +5592,194 @@ SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_0(PyObject *SWIGUNUSEDPARM(
   std::string *arg2 = 0 ;
   int arg3 ;
   int arg4 ;
-  unsigned int arg5 ;
+  int arg5 ;
+  int arg6 ;
+  unsigned int arg7 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int val3 ;
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  unsigned int val5 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  unsigned int val7 ;
+  int ecode7 = 0 ;
+  GeoCal::AirMspiL1b1File *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiL1b1File" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiL1b1File" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AirMspiL1b1File" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiL1b1File" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_AirMspiL1b1File" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_AirMspiL1b1File" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_AirMspiL1b1File" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AirMspiL1b1File" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_unsigned_SS_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AirMspiL1b1File" "', argument " "7"" of type '" "unsigned int""'");
+  } 
+  arg7 = static_cast< unsigned int >(val7);
+  {
+    try {
+      result = (GeoCal::AirMspiL1b1File *)new GeoCal::AirMspiL1b1File((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiL1b1File > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiL1b1File >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::AirMspiL1b1File *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AirMspiL1b1File" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiL1b1File" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AirMspiL1b1File" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AirMspiL1b1File" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_AirMspiL1b1File" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_AirMspiL1b1File" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_AirMspiL1b1File" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AirMspiL1b1File" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      result = (GeoCal::AirMspiL1b1File *)new GeoCal::AirMspiL1b1File((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AirMspiL1b1File > *smartresult = result ? new boost::shared_ptr<  GeoCal::AirMspiL1b1File >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiL1b1File_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
   int ecode5 = 0 ;
   GeoCal::AirMspiL1b1File *result = 0 ;
   
@@ -5636,11 +5816,11 @@ SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_0(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_AirMspiL1b1File" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_unsigned_SS_int(swig_obj[4], &val5);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_AirMspiL1b1File" "', argument " "5"" of type '" "unsigned int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_AirMspiL1b1File" "', argument " "5"" of type '" "int""'");
   } 
-  arg5 = static_cast< unsigned int >(val5);
+  arg5 = static_cast< int >(val5);
   {
     try {
       result = (GeoCal::AirMspiL1b1File *)new GeoCal::AirMspiL1b1File((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5);
@@ -5664,7 +5844,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -5734,7 +5914,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -5796,7 +5976,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -5850,7 +6030,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -5891,30 +6071,38 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_AirMspiL1b1File(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[6];
+  PyObject *argv[8];
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AirMspiL1b1File",0,5,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AirMspiL1b1File",0,7,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_AirMspiL1b1File__SWIG_4(self, argc, argv);
+    return _wrap_new_AirMspiL1b1File__SWIG_6(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_AirMspiL1b1File__SWIG_3(self, argc, argv);
+    return _wrap_new_AirMspiL1b1File__SWIG_5(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_AirMspiL1b1File__SWIG_2(self, argc, argv);
+    return _wrap_new_AirMspiL1b1File__SWIG_4(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_AirMspiL1b1File__SWIG_1(self, argc, argv);
+    return _wrap_new_AirMspiL1b1File__SWIG_3(self, argc, argv);
   }
   if (argc == 5) {
+    return _wrap_new_AirMspiL1b1File__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_new_AirMspiL1b1File__SWIG_1(self, argc, argv);
+  }
+  if (argc == 7) {
     return _wrap_new_AirMspiL1b1File__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_AirMspiL1b1File'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::AirMspiL1b1File::AirMspiL1b1File(std::string const &,std::string const &,int,int,unsigned int)\n"
+    "    GeoCal::AirMspiL1b1File::AirMspiL1b1File(std::string const &,std::string const &,int,int,int,int,unsigned int)\n"
+    "    GeoCal::AirMspiL1b1File::AirMspiL1b1File(std::string const &,std::string const &,int,int,int,int)\n"
+    "    GeoCal::AirMspiL1b1File::AirMspiL1b1File(std::string const &,std::string const &,int,int,int)\n"
     "    GeoCal::AirMspiL1b1File::AirMspiL1b1File(std::string const &,std::string const &,int,int)\n"
     "    GeoCal::AirMspiL1b1File::AirMspiL1b1File(std::string const &,std::string const &,int)\n"
     "    GeoCal::AirMspiL1b1File::AirMspiL1b1File(std::string const &,std::string const &)\n"
@@ -7311,8 +7499,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_AirMspiL1b1File", _wrap_new_AirMspiL1b1File, METH_VARARGS, (char *)"\n"
 		"AirMspiL1b1File::AirMspiL1b1File(const std::string &Fname, const std::string &Swath_to_use=\"660-I\",\n"
-		"int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int\n"
-		"Number_tile=4)\n"
+		"int Min_l1b1_line=0, int Max_l1b1_line=-1, int Tile_number_line=-1,\n"
+		"int Tile_number_sample=-1, unsigned int Number_tile=4)\n"
 		"Constructor. \n"
 		""},
 	 { (char *)"AirMspiL1b1File__v_number_row_index", (PyCFunction)_wrap_AirMspiL1b1File__v_number_row_index, METH_O, (char *)"\n"

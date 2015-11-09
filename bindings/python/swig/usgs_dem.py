@@ -206,11 +206,31 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
     def directory_base(self):
         return self._v_directory_base()
 
+    def _v_number_file_read(self):
+        """
+        int GeoCal::UsgsDem::number_file_read() const
+        Number of files we have read. 
+        """
+        return _usgs_dem.UsgsDem__v_number_file_read(self)
+
+    @property
+    def number_file_read(self):
+        return self._v_number_file_read()
+
+    def reset_number_file_read(self):
+        """
+        void GeoCal::UsgsDem::reset_number_file_read()
+        Set number of files we have read back to zero. 
+        """
+        return _usgs_dem.UsgsDem_reset_number_file_read(self)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _usgs_dem.delete_UsgsDem
 UsgsDem._v_directory_base = new_instancemethod(_usgs_dem.UsgsDem__v_directory_base,None,UsgsDem)
+UsgsDem._v_number_file_read = new_instancemethod(_usgs_dem.UsgsDem__v_number_file_read,None,UsgsDem)
+UsgsDem.reset_number_file_read = new_instancemethod(_usgs_dem.UsgsDem_reset_number_file_read,None,UsgsDem)
 UsgsDem_swigregister = _usgs_dem.UsgsDem_swigregister
 UsgsDem_swigregister(UsgsDem)
 

@@ -86,7 +86,7 @@ def test_igc_array():
         test_igc_array_with_igc_collection below. We manually ran this 
         and compared the results'''
         jac = scipy.sparse.lil_matrix((len(igc_coll.parameter_subset), len(igc_coll.parameter_subset)))
-        igc_coll.image_coordinate_jac_parm(2, gp, jac, 0, 0)
+        igc_coll.image_coordinate_jac_parm_sparse(2, gp, jac, 0, 0)
         print jac
 
 # We don't support this anymore. I don't think we actually need this, but
@@ -142,7 +142,7 @@ def test_igc_array_with_igc_collection():
                             "10MAY21-3.img"
     jac = scipy.sparse.lil_matrix((len(igc_coll.parameter_subset), 
                                    len(igc_coll.parameter_subset)))
-    igc_coll.image_coordinate_jac_parm(2, gp, jac, 0, 0)
+    igc_coll.image_coordinate_jac_parm_sparse(2, gp, jac, 0, 0)
     # We got the result we expect from running the igc_array test above
     assert_almost_equal(jac[0, 4], 15387.7492279, 2)
     assert_almost_equal(jac[1, 5], 17633.137014, 2)

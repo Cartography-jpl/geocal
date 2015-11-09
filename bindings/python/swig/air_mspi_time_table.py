@@ -123,6 +123,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.time_table
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
 import geocal_swig.geocal_time
 import geocal_swig.raster_image_tiled_file
 import geocal_swig.raster_image_variable
@@ -138,7 +139,7 @@ class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
     def __init__(self, *args): 
         """
         AirMspiTimeTable::AirMspiTimeTable(const std::string &L1b1_file_name, const std::string
-        &Swath_to_use="660-I")
+        &Swath_to_use="660-I", int Min_l1b1_line=0, int Max_l1b1_line=-1)
         Constructor. 
         """
         _air_mspi_time_table.AirMspiTimeTable_swiginit(self,_air_mspi_time_table.new_AirMspiTimeTable(*args))

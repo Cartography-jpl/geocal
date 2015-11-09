@@ -12,6 +12,8 @@
 namespace GeoCal {
 %nodefaultctor RasterMultifile;
 class RasterMultifile : public RasterImageVariable {
+  %python_attribute(number_file_read, int);
+  void reset_number_file_read();
 public:
 };
 }

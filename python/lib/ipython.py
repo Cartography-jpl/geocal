@@ -1,5 +1,9 @@
 # This contains ipython magic extensions. To load you can execute
-# %load_ext geocal.ipython. You can add this to your ipython configuration
+# %load_ext geocal.ipython. 
+# You may well want
+# %matplotlib inline 
+# also
+# You can add this to your ipython configuration
 # file to always load by setting "c.InteractiveShellApp.extension =  ['geocal.ipython']"
 
 from geocal import *

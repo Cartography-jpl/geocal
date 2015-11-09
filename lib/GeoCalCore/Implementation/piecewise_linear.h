@@ -15,6 +15,8 @@ public:
   PiecewiseLinear(const blitz::Array<Time, 1>& X, 
 		  const ArrayAd<double, 1>& Y,
 		  const blitz::Array<int, 1>& T);
+  PiecewiseLinear(const std::vector<Time>& X,
+		  const blitz::Array<int, 1>& T);
   PiecewiseLinear(const PiecewiseLinear& P)
     : x_(P.x_.copy()), y_(P.y_.copy()), t_(P.t_.copy()),
       parameter_size_(P.parameter_size_)

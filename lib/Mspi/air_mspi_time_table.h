@@ -11,7 +11,9 @@ namespace GeoCal {
 class AirMspiTimeTable : public MeasuredTimeTable {
 public:
   AirMspiTimeTable(const std::string& L1b1_file_name, 
-		   const std::string& Swath_to_use = "660-I");
+		   const std::string& Swath_to_use = "660-I",
+		   int Min_l1b1_line = 0,
+		   int Max_l1b1_line = -1);
   virtual ~AirMspiTimeTable() {}
   virtual void print(std::ostream& Os) const;
 

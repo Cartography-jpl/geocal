@@ -252,7 +252,8 @@ public:
   FrameCoordinate frame_coordinate(Time T, const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
   FrameCoordinateWithDerivative 
-  frame_coordinate_with_derivative(Time T, const GroundCoordinate& Gc, 
+  frame_coordinate_with_derivative(const TimeWithDerivative& T, 
+				   const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(Time T, const Camera& C, 

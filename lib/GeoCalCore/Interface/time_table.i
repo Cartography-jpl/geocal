@@ -9,6 +9,7 @@
 %}
 %base_import(generic_object)
 %import "image_coordinate.i"
+%base_import(with_parameter)
 %base_import(geocal_time)
 %import "frame_coordinate.i"
 %geocal_shared_ptr(GeoCal::TimeTable);
@@ -16,7 +17,7 @@
 %geocal_shared_ptr(GeoCal::MeasuredTimeTable);
 
 namespace GeoCal {
-class TimeTable : public GenericObject {
+class TimeTable : public WithParameter {
 public:
   TimeTable();
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
@@ -34,6 +35,15 @@ public:
   %python_attribute(max_line, virtual int)
   %python_attribute(min_time, virtual Time)
   %python_attribute(max_time, virtual Time)
+  %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name, virtual std::vector<std::string>);
+  %python_attribute_with_set_virtual(parameter_subset, blitz::Array<double, 1>);
+  %python_attribute_with_set_virtual(parameter_with_derivative_subset, 
+			     ArrayAd<double, 1>);
+  %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
+  %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
   std::string print_to_string() const;
 };
 class ConstantSpacingTimeTable : public TimeTable {

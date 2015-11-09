@@ -148,6 +148,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.time_table
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
 import geocal_swig.geocal_time
 class RollingShutterConstantTimeTable(geocal_swig.time_table.TimeTable):
     """

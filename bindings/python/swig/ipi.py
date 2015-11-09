@@ -135,6 +135,20 @@ class Ipi(geocal_swig.generic_object.GenericObject):
     perfectly happy to find points seen by looking straight through the
     earth (since it does not account for an obstructed view).
 
+    These "false" solutions have nothing to do with the obscuration
+    "looking being a mountain" sorts of problems. This actually is a
+    different problem. When you run the IPI you can get solutions that are
+    on the other side of earth, so looking at when a ground point in the
+    United State is seen you can get a solution that returns a time for
+    when the spacecraft is flying over China. This is not the "behind a
+    mountain" issue, but the fact that a line of sight intersects a
+    sphere twice on opposite sides of the Earth. The "false solutions"
+    tries to throw these "other side of the earth" solutions out. But
+    the IPI does nothing for simple obscuration of the "behind a
+    mountain" sorts. The IPI assumes that the point it is given is not
+    obscured by terrain. If you need to calculate obscuration, you should
+    use a full ray caster (e.g., IgcRayCaster).
+
     We also get "false" solutions if the camera model diverges (i.e, we
     pass in a look vector parallel to the camera CCD plane, so the point
     is not seen by the camera). This is because the root finder doesn't
@@ -196,7 +210,8 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     def image_coordinate_with_derivative(self, *args):
         """
-        void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool
+        void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, const boost::array< AutoDerivative<
+        double >, 3 > &Gp_with_der, ImageCoordinateWithDerivative &Ic, bool
         &Success) const
 
         """
@@ -204,7 +219,8 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     def image_coordinate_with_derivative_extended(self, *args):
         """
-        void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool
+        void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, const boost::array< AutoDerivative<
+        double >, 3 > &Gp_with_der, ImageCoordinateWithDerivative &Ic, bool
         &Success) const
 
         """
@@ -232,7 +248,8 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     def time_with_derivative(self, *args):
         """
-        void Ipi::time_with_derivative(const GroundCoordinate &Gp, TimeWithDerivative &Tres,
+        void Ipi::time_with_derivative(const GroundCoordinate &Gp, const boost::array< AutoDerivative<
+        double >, 3 > &Gp_with_der, TimeWithDerivative &Tres,
         FrameCoordinateWithDerivative &Fres, bool &Success) const
 
         """

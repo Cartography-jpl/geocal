@@ -151,6 +151,10 @@ class RasterMultifile(geocal_swig.raster_image_variable.RasterImageVariable):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
+    @property
+    def number_file_read(self):
+        return self._v_number_file_read()
+
     __swig_destroy__ = _raster_multifile.delete_RasterMultifile
 RasterMultifile_swigregister = _raster_multifile.RasterMultifile_swigregister
 RasterMultifile_swigregister(RasterMultifile)

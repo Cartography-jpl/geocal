@@ -203,7 +203,7 @@ RasterImageMultiBand_swigregister = _raster_image_multi_band.RasterImageMultiBan
 RasterImageMultiBand_swigregister(RasterImageMultiBand)
 
 
-def copy(*args):
+def copy_raster(*args):
   """
     void GeoCal::copy(const RasterImageMultiBand &Img_in, RasterImageMultiBand &Img_out,
     bool Log_progress=false)
@@ -215,6 +215,6 @@ def copy(*args):
     Setting Diagnostic to true causes messages to be printed as we do the
     copying. 
     """
-  return _raster_image_multi_band.copy(*args)
+  return _raster_image_multi_band.copy_raster(*args)
 
 

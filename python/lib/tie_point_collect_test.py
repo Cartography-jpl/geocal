@@ -21,7 +21,6 @@ gaoi = VicarLiteRasterImage(test_data + "aoi.img").map_info
 ref_img = VicarLiteRasterImage(test_data + "nevada_doq_aoi.img")
 
 tp_collect = TiePointCollect(igc_coll)
-gtp_collect = GcpTiePointCollect(ref_img, demin, igc_coll)
 
 def test_tp():
     ic = igc1.image_coordinate(demin.surface_point(gaoi.ground_coordinate(550, 550)))
@@ -39,31 +38,16 @@ def test_tie_point_grid():
                                       pool = pool)
     assert len(tpcol) == 95
 
-def test_gp_point_grid():
-    if(not have_serialize_supported()):
-        raise SkipTest
-    pool = Pool()
-    tpcol = gtp_collect.tie_point_grid(10, 10, pool = pool)
-    assert len(tpcol) == 57
-
 def test_pickle():
     if(not have_serialize_supported()):
         raise SkipTest
     t = cPickle.dumps(tp_collect)
-    t = cPickle.dumps(gtp_collect)
 
 def test_show_image():
     raise SkipTest
     tp = tp_collect.tie_point(ImageCoordinate(500, 500))
     tp.display(igc_coll)
     plt.show()
-
-def test_show_ref_image():
-    raise SkipTest
-    tp = gtp_collect.tie_point_grid(10, 10)
-    tp[0].display(igc_coll, ref_image = gtp_collect.sub_ref_image)
-    plt.show()
-
 
 # Data is way too big to check into source, so we put it here. This means
 # we can only tests that depend on this on pistol. We may fold this into

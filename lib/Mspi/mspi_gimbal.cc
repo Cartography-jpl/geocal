@@ -96,6 +96,7 @@ void MspiGimbal::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
   psi_ = Parm(1);
   theta_ = Parm(2);
   cache_valid = false;
+  notify_update();
 }
 
 // See base class for description

@@ -16,7 +16,12 @@ public:
 	       int Start_line = 0,
 	       int Number_line = -1,
 	       int Number_integration_step = 2, double Resolution = 100,
-	       double Max_height = 10e3);
+	       double Max_height = 10e3,
+	       int Start_sample = 0,
+	       int Number_sample = -1
+	       );
   virtual blitz::Array<double, 6> next_position();
+  %python_attribute(start_sample, int);
+  %python_attribute(number_sample, int);
 };
 }

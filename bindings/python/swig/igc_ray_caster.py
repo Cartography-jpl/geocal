@@ -229,7 +229,8 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
         """
         IgcRayCaster::IgcRayCaster(const boost::shared_ptr< ImageGroundConnection > &Igc, int
         Start_line=0, int Number_line=-1, int Number_integration_step=2,
-        double Resolution=100, double Max_height=10e3)
+        double Resolution=100, double Max_height=10e3, int Start_sample=0, int
+        Number_sample=-1)
         Constructor.
 
         You can pass the starting line to use and the number of lines to
@@ -237,10 +238,38 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
         resolution is the desired accuracy, we use this both to figure out the
         number of subpixels to use and the accuracy that we do the
         intersection with the DEM. The Max_height should be larger than the
-        greatest height we will encounter in the Dem belonging to the Igc. 
+        greatest height we will encounter in the Dem belonging to the Igc.
+
+        For larger cameras, it might be more convenient to pass in start
+        sample and number of samples to process, the default is to do the full
+        camera. 
         """
         _igc_ray_caster.IgcRayCaster_swiginit(self,_igc_ray_caster.new_IgcRayCaster(*args))
+    def _v_start_sample(self):
+        """
+        int GeoCal::IgcRayCaster::start_sample() const
+
+        """
+        return _igc_ray_caster.IgcRayCaster__v_start_sample(self)
+
+    @property
+    def start_sample(self):
+        return self._v_start_sample()
+
+    def _v_number_sample(self):
+        """
+        int GeoCal::IgcRayCaster::number_sample() const
+
+        """
+        return _igc_ray_caster.IgcRayCaster__v_number_sample(self)
+
+    @property
+    def number_sample(self):
+        return self._v_number_sample()
+
     __swig_destroy__ = _igc_ray_caster.delete_IgcRayCaster
+IgcRayCaster._v_start_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_start_sample,None,IgcRayCaster)
+IgcRayCaster._v_number_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_sample,None,IgcRayCaster)
 IgcRayCaster_swigregister = _igc_ray_caster.IgcRayCaster_swigregister
 IgcRayCaster_swigregister(IgcRayCaster)
 

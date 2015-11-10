@@ -384,6 +384,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/ground_mask_wrap.cc @swigsrc@/image_mask_wrap.cc \
 	@swigsrc@/geocal_datum_wrap.cc @swigsrc@/simple_dem_wrap.cc \
 	@swigsrc@/memory_raster_image_wrap.cc \
+	@swigsrc@/constant_raster_image_wrap.cc \
 	@swigsrc@/dem_map_info_wrap.cc \
 	@swigsrc@/feature_detector_wrap.cc \
 	@swigsrc@/forstner_feature_detector_wrap.cc \
@@ -530,6 +531,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_datum_wrap.lo \
 	@swigsrc@/_swig_wrap_la-simple_dem_wrap.lo \
 	@swigsrc@/_swig_wrap_la-memory_raster_image_wrap.lo \
+	@swigsrc@/_swig_wrap_la-constant_raster_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-dem_map_info_wrap.lo \
 	@swigsrc@/_swig_wrap_la-feature_detector_wrap.lo \
 	@swigsrc@/_swig_wrap_la-forstner_feature_detector_wrap.lo \
@@ -985,6 +987,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcsupport@/covariance_test.cc @srcsupport@/statistic_test.cc \
 	@srcsupport@/blitz_array_serialize_support_test.cc \
 	@srcsupport@/geocal_fftw_test.cc @srcsupport@/hdf_file_test.cc \
+	@srcinterface@/constant_raster_image_test.cc \
 	@srcinterface@/memory_raster_image_test.cc \
 	@srcinterface@/sub_raster_image_test.cc \
 	@srcinterface@/ground_coordinate_test.cc \
@@ -1130,6 +1133,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcsupport@/geocal_test_all-statistic_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-blitz_array_serialize_support_test.$(OBJEXT) \
 	$(am__objects_23) $(am__objects_24) \
+	@srcinterface@/geocal_test_all-constant_raster_image_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-memory_raster_image_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-sub_raster_image_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-ground_coordinate_test.$(OBJEXT) \
@@ -1377,6 +1381,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcinterface@/geocal_datum.h @srcinterface@/simple_dem.h \
 	@srcinterface@/map_info.h @srcinterface@/orbit.h \
 	@srcinterface@/memory_raster_image.h \
+	@srcinterface@/constant_raster_image.h \
 	@srcinterface@/dem_map_info.h \
 	@srcinterface@/feature_detector.h \
 	@srcinterface@/forstner_feature_detector.h \
@@ -2256,6 +2261,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/ground_mask_wrap.cc @swigsrc@/image_mask_wrap.cc \
 	@swigsrc@/geocal_datum_wrap.cc @swigsrc@/simple_dem_wrap.cc \
 	@swigsrc@/memory_raster_image_wrap.cc \
+	@swigsrc@/constant_raster_image_wrap.cc \
 	@swigsrc@/dem_map_info_wrap.cc \
 	@swigsrc@/feature_detector_wrap.cc \
 	@swigsrc@/forstner_feature_detector_wrap.cc \
@@ -2410,6 +2416,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcinterface@/geocal_datum.h @srcinterface@/simple_dem.h \
 	@srcinterface@/map_info.h @srcinterface@/orbit.h \
 	@srcinterface@/memory_raster_image.h \
+	@srcinterface@/constant_raster_image.h \
 	@srcinterface@/dem_map_info.h \
 	@srcinterface@/feature_detector.h \
 	@srcinterface@/forstner_feature_detector.h \
@@ -2516,6 +2523,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/covariance_test.cc @srcsupport@/statistic_test.cc \
 	@srcsupport@/blitz_array_serialize_support_test.cc \
 	$(am__append_17) $(am__append_18) \
+	@srcinterface@/constant_raster_image_test.cc \
 	@srcinterface@/memory_raster_image_test.cc \
 	@srcinterface@/sub_raster_image_test.cc \
 	@srcinterface@/ground_coordinate_test.cc \
@@ -2986,6 +2994,8 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-simple_dem_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-memory_raster_image_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-constant_raster_image_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-dem_map_info_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -3837,6 +3847,9 @@ clean-checkPROGRAMS:
 @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT):  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/geocal_test_all-constant_raster_image_test.$(OBJEXT):  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/geocal_test_all-memory_raster_image_test.$(OBJEXT):  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
@@ -4399,6 +4412,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-constant_raster_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-coordinate_converter_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-dem_map_info_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-feature_detector_test.Po@am__quote@
@@ -4549,6 +4563,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-cart_lab_multifile_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ccorr_lsm_matcher_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ccorr_matcher_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-coordinate_converter_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-covariance_wrap.Plo@am__quote@
@@ -5085,6 +5100,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/memory_raster_image_wrap.cc' object='@swigsrc@/_swig_wrap_la-memory_raster_image_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-memory_raster_image_wrap.lo `test -f '@swigsrc@/memory_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/memory_raster_image_wrap.cc
+
+@swigsrc@/_swig_wrap_la-constant_raster_image_wrap.lo: @swigsrc@/constant_raster_image_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-constant_raster_image_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_raster_image_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-constant_raster_image_wrap.lo `test -f '@swigsrc@/constant_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/constant_raster_image_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_raster_image_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-constant_raster_image_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/constant_raster_image_wrap.cc' object='@swigsrc@/_swig_wrap_la-constant_raster_image_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-constant_raster_image_wrap.lo `test -f '@swigsrc@/constant_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/constant_raster_image_wrap.cc
 
 @swigsrc@/_swig_wrap_la-dem_map_info_wrap.lo: @swigsrc@/dem_map_info_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-dem_map_info_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-dem_map_info_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-dem_map_info_wrap.lo `test -f '@swigsrc@/dem_map_info_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/dem_map_info_wrap.cc
@@ -7318,6 +7340,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/hdf_file_test.cc' object='@srcsupport@/geocal_test_all-hdf_file_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-hdf_file_test.obj `if test -f '@srcsupport@/hdf_file_test.cc'; then $(CYGPATH_W) '@srcsupport@/hdf_file_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/hdf_file_test.cc'; fi`
+
+@srcinterface@/geocal_test_all-constant_raster_image_test.o: @srcinterface@/constant_raster_image_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-constant_raster_image_test.o -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-constant_raster_image_test.Tpo -c -o @srcinterface@/geocal_test_all-constant_raster_image_test.o `test -f '@srcinterface@/constant_raster_image_test.cc' || echo '$(srcdir)/'`@srcinterface@/constant_raster_image_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/geocal_test_all-constant_raster_image_test.Tpo @srcinterface@/$(DEPDIR)/geocal_test_all-constant_raster_image_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/constant_raster_image_test.cc' object='@srcinterface@/geocal_test_all-constant_raster_image_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/geocal_test_all-constant_raster_image_test.o `test -f '@srcinterface@/constant_raster_image_test.cc' || echo '$(srcdir)/'`@srcinterface@/constant_raster_image_test.cc
+
+@srcinterface@/geocal_test_all-constant_raster_image_test.obj: @srcinterface@/constant_raster_image_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-constant_raster_image_test.obj -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-constant_raster_image_test.Tpo -c -o @srcinterface@/geocal_test_all-constant_raster_image_test.obj `if test -f '@srcinterface@/constant_raster_image_test.cc'; then $(CYGPATH_W) '@srcinterface@/constant_raster_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcinterface@/constant_raster_image_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/geocal_test_all-constant_raster_image_test.Tpo @srcinterface@/$(DEPDIR)/geocal_test_all-constant_raster_image_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/constant_raster_image_test.cc' object='@srcinterface@/geocal_test_all-constant_raster_image_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/geocal_test_all-constant_raster_image_test.obj `if test -f '@srcinterface@/constant_raster_image_test.cc'; then $(CYGPATH_W) '@srcinterface@/constant_raster_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcinterface@/constant_raster_image_test.cc'; fi`
 
 @srcinterface@/geocal_test_all-memory_raster_image_test.o: @srcinterface@/memory_raster_image_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-memory_raster_image_test.o -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-memory_raster_image_test.Tpo -c -o @srcinterface@/geocal_test_all-memory_raster_image_test.o `test -f '@srcinterface@/memory_raster_image_test.cc' || echo '$(srcdir)/'`@srcinterface@/memory_raster_image_test.cc

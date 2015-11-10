@@ -59,6 +59,7 @@ geocalinc_HEADERS+= @srcinterface@/orbit.h
 libgeocal_la_SOURCES+= @srcinterface@/orbit.cc
 geocalinc_HEADERS+= @srcinterface@/memory_raster_image.h
 libgeocal_la_SOURCES+= @srcinterface@/memory_raster_image.cc
+geocalinc_HEADERS+= @srcinterface@/constant_raster_image.h
 geocalinc_HEADERS+= @srcinterface@/dem_map_info.h
 libgeocal_la_SOURCES+= @srcinterface@/dem_map_info.cc
 geocalinc_HEADERS+= @srcinterface@/feature_detector.h
@@ -120,6 +121,7 @@ SWIG_SRC += @swigsrc@/image_mask_wrap.cc
 SWIG_SRC += @swigsrc@/geocal_datum_wrap.cc
 SWIG_SRC += @swigsrc@/simple_dem_wrap.cc
 SWIG_SRC += @swigsrc@/memory_raster_image_wrap.cc
+SWIG_SRC += @swigsrc@/constant_raster_image_wrap.cc
 SWIG_SRC += @swigsrc@/dem_map_info_wrap.cc
 SWIG_SRC += @swigsrc@/feature_detector_wrap.cc
 SWIG_SRC += @swigsrc@/forstner_feature_detector_wrap.cc
@@ -137,6 +139,7 @@ SWIG_SRC += @swigsrc@/raster_multifile_wrap.cc
 
 # Test files
 EXTRA_DIST += @srcinterface@/matcher_fixture.h
+geocal_test_all_SOURCES+= @srcinterface@/constant_raster_image_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/memory_raster_image_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/sub_raster_image_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/ground_coordinate_test.cc

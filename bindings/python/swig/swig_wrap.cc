@@ -61,6 +61,7 @@ extern "C" {
   void init_geocal_datum(void);
   void init_simple_dem(void);
   void init_memory_raster_image(void);
+  void init_constant_raster_image(void);
   void init_dem_map_info(void);
   void init_feature_detector(void);
   void init_forstner_feature_detector(void);
@@ -302,6 +303,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_datum", init_geocal_datum);
   init_extension_module(package, "_simple_dem", init_simple_dem);
   init_extension_module(package, "_memory_raster_image", init_memory_raster_image);
+  init_extension_module(package, "_constant_raster_image", init_constant_raster_image);
   init_extension_module(package, "_dem_map_info", init_dem_map_info);
   init_extension_module(package, "_feature_detector", init_feature_detector);
   init_extension_module(package, "_forstner_feature_detector", init_forstner_feature_detector);

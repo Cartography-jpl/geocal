@@ -2046,7 +2046,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/spice/geocal.ker \
 	@geocalunittestdata@/spice/lsk/naif0007.tls \
 	@geocalunittestdata@/spice/lsk/naif0010.tls \
-	@geocalunittestdata@/spice/pck/earth_000101_140721_140429.bpc \
+	@geocalunittestdata@/spice/pck/earth_000101_160116_151025.bpc \
 	@geocalunittestdata@/spice/pck/earth_720101_070426.bpc \
 	@geocalunittestdata@/spice/pck/pck00010.tpc \
 	@geocalunittestdata@/spice/spk/planets/de432s.bsp \

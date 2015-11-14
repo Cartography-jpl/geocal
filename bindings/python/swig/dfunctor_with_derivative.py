@@ -88,6 +88,31 @@ except:
     weakref_proxy = lambda x: x
 
 
+class SwigPyIterator(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _dfunctor_with_derivative.delete_SwigPyIterator
+    def __iter__(self): return self
+SwigPyIterator.value = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_value,None,SwigPyIterator)
+SwigPyIterator.incr = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_incr,None,SwigPyIterator)
+SwigPyIterator.decr = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_decr,None,SwigPyIterator)
+SwigPyIterator.distance = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_distance,None,SwigPyIterator)
+SwigPyIterator.equal = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_equal,None,SwigPyIterator)
+SwigPyIterator.copy = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_copy,None,SwigPyIterator)
+SwigPyIterator.next = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_next,None,SwigPyIterator)
+SwigPyIterator.__next__ = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator___next__,None,SwigPyIterator)
+SwigPyIterator.previous = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_previous,None,SwigPyIterator)
+SwigPyIterator.advance = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator_advance,None,SwigPyIterator)
+SwigPyIterator.__eq__ = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator___eq__,None,SwigPyIterator)
+SwigPyIterator.__ne__ = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator___ne__,None,SwigPyIterator)
+SwigPyIterator.__iadd__ = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator___iadd__,None,SwigPyIterator)
+SwigPyIterator.__isub__ = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator___isub__,None,SwigPyIterator)
+SwigPyIterator.__add__ = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator___add__,None,SwigPyIterator)
+SwigPyIterator.__sub__ = new_instancemethod(_dfunctor_with_derivative.SwigPyIterator___sub__,None,SwigPyIterator)
+SwigPyIterator_swigregister = _dfunctor_with_derivative.SwigPyIterator_swigregister
+SwigPyIterator_swigregister(SwigPyIterator)
+
 SHARED_PTR_DISOWN = _dfunctor_with_derivative.SHARED_PTR_DISOWN
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the

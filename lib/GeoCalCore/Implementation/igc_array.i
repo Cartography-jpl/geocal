@@ -19,20 +19,6 @@ public:
   virtual boost::shared_ptr<IgcCollection> 
   subset(const std::vector<int>& Index_set) const;
   %pickle_serialization()
-%pythoncode {
-def __init__(self, igc_list):
-    # We can probably eventually fix the automatic swig conversion to
-    # vector, but right now this doesn not work correctly. So we just
-    # replace init with a version that checks for this
-    if(isinstance(igc_list, geocal_swig.Vector_ImageGroundConnection)):
-        t = igc_list
-    else:
-        t = geocal_swig.Vector_ImageGroundConnection()
-        for igc in igc_list:
-            t.push_back(igc)
-    _igc_array.IgcArray_swiginit(self,_igc_array.new_IgcArray(t))
-  
-}
 };
 }
 

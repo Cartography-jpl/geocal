@@ -19,18 +19,6 @@ public:
   double value(const Time& x) const;
   %pickle_serialization();
   std::string print_to_string() const;
-%pythoncode {
-def __init__(self, x, t):
-    # vector, but right now this doesn not work correctly. So we just
-    # replace init with a version that checks for this
-    if(isinstance(x, geocal_swig.Vector_Time)):
-         xv = x
-    else:
-        xv = geocal_swig.Vector_Time()
-        for xi in x:
-            xv.push_back(xi)
-    _piecewise_linear.PiecewiseLinear_swiginit(self, _piecewise_linear.new_PiecewiseLinear(xv, t))
-}
 };
 
 }

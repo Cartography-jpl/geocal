@@ -21279,7 +21279,7 @@ srcraw=${geocal_topdir}/thirdparty/libraw
 
 pythondocdir=\${prefix}/share/doc/geocal/python
 
-geocalpkgpythondir=\${prefix}/${pythondir}/geocal
+geocalpkgpythondir=\${prefix}/\${pythondir}/geocal
 
 afidspythonvdevdir=\${prefix}/afids/vdev
 

@@ -270,6 +270,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ac_hdfeos5.m4 \
 	$(top_srcdir)/config/m4/ac_is_mac.m4 \
 	$(top_srcdir)/config/m4/ac_mspi_shared.m4 \
+	$(top_srcdir)/config/m4/ac_perl_module.m4 \
 	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
 	$(top_srcdir)/config/m4/ac_python.m4 \
 	$(top_srcdir)/config/m4/ac_python_module_with_version.m4 \
@@ -1756,6 +1757,7 @@ GSL_CFLAGS = @GSL_CFLAGS@
 GSL_LIBS = @GSL_LIBS@
 HAVE_CSH = @HAVE_CSH@
 HAVE_CXX = @HAVE_CXX@
+HAVE_M4 = @HAVE_M4@
 HAVE_PATCH = @HAVE_PATCH@
 HAVE_PERL = @HAVE_PERL@
 HAVE_VICAR_GDALPLUGIN = @HAVE_VICAR_GDALPLUGIN@

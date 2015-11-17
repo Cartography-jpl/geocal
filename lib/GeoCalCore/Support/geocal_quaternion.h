@@ -421,5 +421,27 @@ determine_quat_rot(const boost::array<T, 3>& V1, const boost::array<T, 3>& V2)
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// Return a blitz array with the quaternion elements. This is mostly
+/// useful for python.
+//-----------------------------------------------------------------------
+
+template<class T> inline blitz::Array<T, 1>
+quaternion_to_array(const boost::math::quaternion<T>& qin)
+{
+  blitz::Array<T, 1> res(4);
+  res = qin.R_component_1(), qin.R_component_2(), qin.R_component_3(),
+    qin.R_component_4();
+  return res;
+}
+
+template<class T> inline boost::math::quaternion<T> 
+array_to_quaternion(const blitz::Array<T, 1>& m)
+{
+  if(m.rows() != 4)
+    throw GeoCal::Exception("Array must be size 4");
+  return boost::math::quaternion<T>(m(0), m(1), m(2), m(3));
+}
+
 }
 #endif

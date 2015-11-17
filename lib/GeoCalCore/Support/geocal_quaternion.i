@@ -42,6 +42,10 @@ namespace GeoCal {
   quaternion_to_matrix(const boost::math::quaternion<double>& q);
   boost::math::quaternion<double> 
   matrix_to_quaternion(const blitz::Array<double, 2>& m);
+  blitz::Array<double, 1> 
+  quaternion_to_array(const boost::math::quaternion<double>& q);
+  boost::math::quaternion<double> 
+  array_to_quaternion(const blitz::Array<double, 1>& m);
   void quat_to_ypr(const boost::math::quaternion<double>& qin, 
 		   double& OUTPUT, double& OUTPUT, double& OUTPUT);
   void quat_to_euler(const boost::math::quaternion<double>& qin, 

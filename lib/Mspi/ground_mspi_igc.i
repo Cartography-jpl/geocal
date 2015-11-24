@@ -19,7 +19,7 @@ public:
 		double Azimuth,
 		double Start_elevation_angle,
 		double Rotation_rate,
-		const std::vector<Time>& Time_tag,
+		const std::vector<boost::shared_ptr<Time> >& Time_tag,
 		const std::string& Camera_config,
 		int Band);
   GroundMspiIgc(const Time& Start_time,
@@ -27,7 +27,7 @@ public:
 		double Azimuth,
 		double Start_elevation_angle,
 		double Rotation_rate,
-		const std::vector<Time>& Time_tag,
+		const std::vector<boost::shared_ptr<Time> >& Time_tag,
 		const boost::shared_ptr<QuaternionCamera>& Cam,
 		int Band);
   DcsLookVector solar_look(int Line_number) const;

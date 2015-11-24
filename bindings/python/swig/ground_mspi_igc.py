@@ -164,8 +164,8 @@ class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnec
         """
         GroundMspiIgc::GroundMspiIgc(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,
         double Azimuth, double Start_elevation_angle, double Rotation_rate,
-        const std::vector< Time > &Time_tag, const boost::shared_ptr<
-        QuaternionCamera > &Cam, int Band)
+        const std::vector< boost::shared_ptr< Time > > &Time_tag, const
+        boost::shared_ptr< QuaternionCamera > &Cam, int Band)
 
         """
         _ground_mspi_igc.GroundMspiIgc_swiginit(self,_ground_mspi_igc.new_GroundMspiIgc(*args))

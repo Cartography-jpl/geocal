@@ -5316,9 +5316,9 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 
 
   namespace swig {
-    template <>  struct traits<GeoCal::Time > {
+    template <>  struct traits<boost::shared_ptr< GeoCal::Time > > {
       typedef pointer_category category;
-      static const char* type_name() { return"GeoCal::Time"; }
+      static const char* type_name() { return"boost::shared_ptr< GeoCal::Time >"; }
     };
   }
 
@@ -5422,10 +5422,10 @@ namespace swig {
 
 
       namespace swig {
-	template <>  struct traits<std::vector<GeoCal::Time, std::allocator< GeoCal::Time > > > {
+	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::Time >, std::allocator< boost::shared_ptr< GeoCal::Time > > > > {
 	  typedef pointer_category category;
 	  static const char* type_name() {
-	    return "std::vector<" "GeoCal::Time" "," "std::allocator< GeoCal::Time >" " >";
+	    return "std::vector<" "boost::shared_ptr< GeoCal::Time >" "," "std::allocator< boost::shared_ptr< GeoCal::Time > >" " >";
 	  }
 	};
       }
@@ -6346,7 +6346,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_PiecewiseLinear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg1 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg1 = 0 ;
   blitz::Array< int,1 > *arg2 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   blitz::Array< int,1 > a2 ;
@@ -6356,13 +6356,13 @@ SWIGINTERN PyObject *_wrap_new_PiecewiseLinear(PyObject *SWIGUNUSEDPARM(self), P
   
   if (!SWIG_Python_UnpackTuple(args,"new_PiecewiseLinear",2,2,swig_obj)) SWIG_fail;
   {
-    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
+    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
     res1 = swig::asptr(swig_obj[0], &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PiecewiseLinear" "', argument " "1"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PiecewiseLinear" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PiecewiseLinear" "', argument " "1"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PiecewiseLinear" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
     }
     arg1 = ptr;
   }
@@ -6379,7 +6379,7 @@ SWIGINTERN PyObject *_wrap_new_PiecewiseLinear(PyObject *SWIGUNUSEDPARM(self), P
   }
   {
     try {
-      result = (GeoCal::PiecewiseLinear *)new GeoCal::PiecewiseLinear((std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg1,(blitz::Array< int,1 > const &)*arg2);
+      result = (GeoCal::PiecewiseLinear *)new GeoCal::PiecewiseLinear((std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)*arg1,(blitz::Array< int,1 > const &)*arg2);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {

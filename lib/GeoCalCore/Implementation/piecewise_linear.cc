@@ -51,6 +51,24 @@ PiecewiseLinear::PiecewiseLinear
       throw Exception("X must be sorted.");
 }
 
+PiecewiseLinear::PiecewiseLinear
+(const std::vector<boost::shared_ptr<Time> >& X, 
+ const blitz::Array<int, 1>& T)
+  : x_((int) X.size()), y_((int) X.size(), 0), t_(T.copy())
+{
+  if(t_.rows() != x_.rows() - 1)
+    throw Exception("T must have number rows = X rows - 1");
+  for(int i = 0; i < x_.rows(); ++i)
+    x_(i) = *X[i];
+  parameter_size_ = std::count(t_.begin(), t_.end(), (int) LINEAR) + 1;
+  blitz::Array<double, 1> y(parameter_size_);
+  y = 0;
+  parameter(y);
+  for(int i = 0; i < x_.rows() - 1; ++i)
+    if(x_(i) >= x_(i+1))
+      throw Exception("X must be sorted.");
+}
+
 void PiecewiseLinear::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
 {
   if(Parm.rows() != parameter_size_)

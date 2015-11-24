@@ -194,26 +194,11 @@ class SpotOrbit(geocal_swig.orbit.Orbit):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        SpotOrbit::SpotOrbit(const std::vector< Time > &Ephemeris_time, const blitz::Array<
-        double, 2 > &Ephemeris, const std::vector< Time > &Attitude_time,
-        const blitz::Array< double, 2 > &Ypr)
-        Constructor.
+        SpotOrbit::SpotOrbit(const std::vector< boost::shared_ptr< Time > > &Ephemeris_time, const
+        blitz::Array< double, 2 > &Ephemeris, const std::vector<
+        boost::shared_ptr< Time > > &Attitude_time, const blitz::Array<
+        double, 2 > &Ypr)
 
-        Parameters:
-        -----------
-
-        Ephemeris_time:  Time of each ephemeris point
-
-        Ephemeris:  Ephemeris at each time. This is a number_eph_time x 6
-        array. Each row has the position x, y, z and velocity x, y, z. This is
-        in meters and meter/second, in ECR coordinates.
-
-        Attitude_time:  Time of each attitude point.
-
-        Ypr:  Attitude. This is a number_att_time x 3 array. Each row has the
-        yaw, pitch and roll. This is in radians. This is YPR reported by SPOT
-        in the DIMAP file, and uses the conventions described in "SPOT
-        Geometry Handbook" 
         """
         _spot_orbit.SpotOrbit_swiginit(self,_spot_orbit.new_SpotOrbit(*args))
     def orbit_data(self, *args):

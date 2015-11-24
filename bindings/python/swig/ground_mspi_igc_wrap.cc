@@ -5404,9 +5404,9 @@ namespace swig {
 
 
   namespace swig {
-    template <>  struct traits<GeoCal::Time > {
+    template <>  struct traits<boost::shared_ptr< GeoCal::Time > > {
       typedef pointer_category category;
-      static const char* type_name() { return"GeoCal::Time"; }
+      static const char* type_name() { return"boost::shared_ptr< GeoCal::Time >"; }
     };
   }
 
@@ -5510,10 +5510,10 @@ namespace swig {
 
 
       namespace swig {
-	template <>  struct traits<std::vector<GeoCal::Time, std::allocator< GeoCal::Time > > > {
+	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::Time >, std::allocator< boost::shared_ptr< GeoCal::Time > > > > {
 	  typedef pointer_category category;
 	  static const char* type_name() {
-	    return "std::vector<" "GeoCal::Time" "," "std::allocator< GeoCal::Time >" " >";
+	    return "std::vector<" "boost::shared_ptr< GeoCal::Time >" "," "std::allocator< boost::shared_ptr< GeoCal::Time > >" " >";
 	  }
 	};
       }
@@ -6465,7 +6465,7 @@ SWIGINTERN PyObject *_wrap_new_GroundMspiIgc__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   double arg3 ;
   double arg4 ;
   double arg5 ;
-  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg6 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg6 = 0 ;
   std::string *arg7 = 0 ;
   int arg8 ;
   void *argp1 = 0 ;
@@ -6554,13 +6554,13 @@ SWIGINTERN PyObject *_wrap_new_GroundMspiIgc__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   } 
   arg5 = static_cast< double >(val5);
   {
-    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
+    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
     res6 = swig::asptr(swig_obj[5], &ptr);
     if (!SWIG_IsOK(res6)) {
-      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
     }
     arg6 = ptr;
   }
@@ -6582,7 +6582,7 @@ SWIGINTERN PyObject *_wrap_new_GroundMspiIgc__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   arg8 = static_cast< int >(val8);
   {
     try {
-      result = (GeoCal::GroundMspiIgc *)new GeoCal::GroundMspiIgc((GeoCal::Time const &)*arg1,*arg2,arg3,arg4,arg5,(std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg6,(std::string const &)*arg7,arg8);
+      result = (GeoCal::GroundMspiIgc *)new GeoCal::GroundMspiIgc((GeoCal::Time const &)*arg1,*arg2,arg3,arg4,arg5,(std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)*arg6,(std::string const &)*arg7,arg8);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6610,7 +6610,7 @@ SWIGINTERN PyObject *_wrap_new_GroundMspiIgc__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   double arg3 ;
   double arg4 ;
   double arg5 ;
-  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg6 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg6 = 0 ;
   boost::shared_ptr< GeoCal::QuaternionCamera > *arg7 = 0 ;
   int arg8 ;
   void *argp1 = 0 ;
@@ -6702,13 +6702,13 @@ SWIGINTERN PyObject *_wrap_new_GroundMspiIgc__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   } 
   arg5 = static_cast< double >(val5);
   {
-    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
+    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
     res6 = swig::asptr(swig_obj[5], &ptr);
     if (!SWIG_IsOK(res6)) {
-      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GroundMspiIgc" "', argument " "6"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
     }
     arg6 = ptr;
   }
@@ -6744,7 +6744,7 @@ SWIGINTERN PyObject *_wrap_new_GroundMspiIgc__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   arg8 = static_cast< int >(val8);
   {
     try {
-      result = (GeoCal::GroundMspiIgc *)new GeoCal::GroundMspiIgc((GeoCal::Time const &)*arg1,*arg2,arg3,arg4,arg5,(std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg6,(boost::shared_ptr< GeoCal::QuaternionCamera > const &)*arg7,arg8);
+      result = (GeoCal::GroundMspiIgc *)new GeoCal::GroundMspiIgc((GeoCal::Time const &)*arg1,*arg2,arg3,arg4,arg5,(std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)*arg6,(boost::shared_ptr< GeoCal::QuaternionCamera > const &)*arg7,arg8);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6787,8 +6787,8 @@ check_1:
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_GroundMspiIgc'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::GroundMspiIgc::GroundMspiIgc(GeoCal::Time const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double,double,double,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &,std::string const &,int)\n"
-    "    GeoCal::GroundMspiIgc::GroundMspiIgc(GeoCal::Time const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double,double,double,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &,boost::shared_ptr< GeoCal::QuaternionCamera > const &,int)\n");
+    "    GeoCal::GroundMspiIgc::GroundMspiIgc(GeoCal::Time const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double,double,double,std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &,std::string const &,int)\n"
+    "    GeoCal::GroundMspiIgc::GroundMspiIgc(GeoCal::Time const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double,double,double,std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &,boost::shared_ptr< GeoCal::QuaternionCamera > const &,int)\n");
   return 0;
 }
 
@@ -7141,8 +7141,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_GroundMspiIgc", _wrap_new_GroundMspiIgc, METH_VARARGS, (char *)"\n"
 		"GroundMspiIgc::GroundMspiIgc(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,\n"
 		"double Azimuth, double Start_elevation_angle, double Rotation_rate,\n"
-		"const std::vector< Time > &Time_tag, const boost::shared_ptr<\n"
-		"QuaternionCamera > &Cam, int Band)\n"
+		"const std::vector< boost::shared_ptr< Time > > &Time_tag, const\n"
+		"boost::shared_ptr< QuaternionCamera > &Cam, int Band)\n"
 		"\n"
 		""},
 	 { (char *)"GroundMspiIgc_solar_look", _wrap_GroundMspiIgc_solar_look, METH_VARARGS, (char *)"\n"

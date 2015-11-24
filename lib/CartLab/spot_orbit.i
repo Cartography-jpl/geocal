@@ -11,10 +11,10 @@
 namespace GeoCal {
 class SpotOrbit : public Orbit {
 public:
-  SpotOrbit(const std::vector<Time>& Ephemeris_time, 
-	    const blitz::Array<double, 2>& Ephemeris,
-	    const std::vector<Time>& Attitude_time,
-	    const blitz::Array<double, 2>& Ypr);
+SpotOrbit::SpotOrbit(const std::vector<boost::shared_ptr<Time> >& Ephemeris_time, 
+		     const blitz::Array<double, 2>& Ephemeris,
+		     const std::vector<boost::shared_ptr<Time> >& Attitude_time,
+		     const blitz::Array<double, 2>& Ypr);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;

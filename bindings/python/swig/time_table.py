@@ -345,11 +345,9 @@ class MeasuredTimeTable(TimeTable):
     __repr__ = _swig_repr
     def __init__(self, *args): 
         """
-        MeasuredTimeTable::MeasuredTimeTable(const std::vector< Time > &Time_list, int Min_line=0)
-        Constructor.
+        MeasuredTimeTable::MeasuredTimeTable(const std::vector< boost::shared_ptr< Time > > &Time_list, int
+        Min_line=0)
 
-        This gives the time for every line. This list should be strictly
-        ordered. The first time is for the given Min_line (default of 0). 
         """
         _time_table.MeasuredTimeTable_swiginit(self,_time_table.new_MeasuredTimeTable(*args))
     def _v_size_time_list(self):

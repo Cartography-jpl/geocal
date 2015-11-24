@@ -2,6 +2,7 @@
 #include "geocal_exception.h"
 #include <cmath>
 #include <algorithm>
+#include <boost/foreach.hpp>
 #include "geocal_serialize_support.h"
 
 using namespace GeoCal;
@@ -132,6 +133,18 @@ MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
 : min_line_(Min_line),
   tlist(Time_list)
 {
+  for(int i = 0; i < (int) tlist.size() - 1; ++i) {
+    if(tlist[i + 1] <= tlist[i])
+      throw Exception("Time_list needs to be strictly ordered");
+  }
+}
+
+MeasuredTimeTable::MeasuredTimeTable(const std::vector<boost::shared_ptr<Time> >& Time_list,
+		    int Min_line)
+: min_line_(Min_line)
+{
+  BOOST_FOREACH(const boost::shared_ptr<Time>& t, Time_list)
+    tlist.push_back(*t);
   for(int i = 0; i < (int) tlist.size() - 1; ++i) {
     if(tlist[i + 1] <= tlist[i])
       throw Exception("Time_list needs to be strictly ordered");

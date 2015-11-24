@@ -5510,18 +5510,18 @@ namespace swig {
     
 
   namespace swig {
-    template <>  struct traits<GeoCal::Time > {
+    template <>  struct traits<boost::shared_ptr< GeoCal::Time > > {
       typedef pointer_category category;
-      static const char* type_name() { return"GeoCal::Time"; }
+      static const char* type_name() { return"boost::shared_ptr< GeoCal::Time >"; }
     };
   }
 
 
       namespace swig {
-	template <>  struct traits<std::vector<GeoCal::Time, std::allocator< GeoCal::Time > > > {
+	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::Time >, std::allocator< boost::shared_ptr< GeoCal::Time > > > > {
 	  typedef pointer_category category;
 	  static const char* type_name() {
-	    return "std::vector<" "GeoCal::Time" "," "std::allocator< GeoCal::Time >" " >";
+	    return "std::vector<" "boost::shared_ptr< GeoCal::Time >" "," "std::allocator< boost::shared_ptr< GeoCal::Time > >" " >";
 	  }
 	};
       }
@@ -6545,7 +6545,7 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
 SWIGINTERN PyObject *_wrap_new_IgcCollectionOrbitData__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *arg1 = 0 ;
-  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg2 = 0 ;
   std::vector< std::string,std::allocator< std::string > > *arg3 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > *arg4 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg5 = 0 ;
@@ -6580,13 +6580,13 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionOrbitData__SWIG_0(PyObject *SWIGUNUS
     arg1 = ptr;
   }
   {
-    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
+    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
     res2 = swig::asptr(swig_obj[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IgcCollectionOrbitData" "', argument " "2"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IgcCollectionOrbitData" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcCollectionOrbitData" "', argument " "2"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcCollectionOrbitData" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
     }
     arg2 = ptr;
   }
@@ -6678,7 +6678,7 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionOrbitData__SWIG_0(PyObject *SWIGUNUS
   }
   {
     try {
-      result = (GeoCal::IgcCollectionOrbitData *)new GeoCal::IgcCollectionOrbitData((std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)*arg1,(std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg2,(std::vector< std::string,std::allocator< std::string > > const &)*arg3,(boost::shared_ptr< GeoCal::Orbit > const &)*arg4,(boost::shared_ptr< GeoCal::Camera > const &)*arg5,(boost::shared_ptr< GeoCal::Dem > const &)*arg6);
+      result = (GeoCal::IgcCollectionOrbitData *)new GeoCal::IgcCollectionOrbitData((std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)*arg1,(std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)*arg2,(std::vector< std::string,std::allocator< std::string > > const &)*arg3,(boost::shared_ptr< GeoCal::Orbit > const &)*arg4,(boost::shared_ptr< GeoCal::Camera > const &)*arg5,(boost::shared_ptr< GeoCal::Dem > const &)*arg6);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6831,7 +6831,7 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionOrbitData(PyObject *self, PyObject *
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IgcCollectionOrbitData'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData(std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &,std::vector< std::string,std::allocator< std::string > > const &,boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &)\n"
+    "    GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData(std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &,std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &,std::vector< std::string,std::allocator< std::string > > const &,boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &)\n"
     "    GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &)\n");
   return 0;
 }

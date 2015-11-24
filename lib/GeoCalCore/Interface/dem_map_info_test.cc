@@ -26,9 +26,9 @@ BOOST_AUTO_TEST_CASE(dem_map_info_test)
   double height1 = 100;
   Geodetic g1(81, 56, height1);
   double height_expect = 46.5;
-  BOOST_CHECK_CLOSE(d.height_datum(g1), height_expect, 1-4);
+  BOOST_CHECK_CLOSE(d.height_datum(g1), height_expect, 1e-4);
   BOOST_CHECK_CLOSE(d.height_reference_surface(g1), 
-		    height_expect + 10, 1-4);
+		    height_expect + 10, 1e-4);
   BOOST_CHECK_CLOSE(d.distance_to_surface(g1), height1 - (height_expect + 10), 
 		    1e-4);
   Geodetic g1_expect(g1.latitude(), g1.longitude(), height_expect + 10);

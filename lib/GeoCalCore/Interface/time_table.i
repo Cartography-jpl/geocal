@@ -11,6 +11,7 @@
 %import "image_coordinate.i"
 %base_import(with_parameter)
 %base_import(geocal_time)
+%include "geocal_time_include.i"
 %import "frame_coordinate.i"
 %geocal_shared_ptr(GeoCal::TimeTable);
 %geocal_shared_ptr(GeoCal::ConstantSpacingTimeTable);

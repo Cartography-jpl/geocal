@@ -14,6 +14,7 @@
 %import "image_coordinate.i"
 %import "frame_coordinate.i"
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 
 %geocal_shared_ptr(GeoCal::Ipi);
 

@@ -7,6 +7,8 @@
 #include "spot_orbit.h"
 %}
 %base_import(orbit)
+%import "geocal_time.i"
+%include "geocal_time_include.i"
 %geocal_shared_ptr(GeoCal::SpotOrbit);
 namespace GeoCal {
 class SpotOrbit : public Orbit {

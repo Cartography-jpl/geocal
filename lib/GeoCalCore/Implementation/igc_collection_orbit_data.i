@@ -12,6 +12,7 @@
 %import "camera.i"
 %import "dem.i"
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 %import "raster_image.i"
 %geocal_shared_ptr(GeoCal::IgcCollectionOrbitData);
 namespace GeoCal {

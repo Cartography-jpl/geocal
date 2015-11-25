@@ -9,6 +9,7 @@
 %base_import(ground_coordinate)
 %import "eci.i"
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 %geocal_shared_ptr(GeoCal::EciTod);
 namespace GeoCal {
 class EciTod : public CartesianInertial {

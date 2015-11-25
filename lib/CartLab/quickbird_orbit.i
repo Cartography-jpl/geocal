@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %base_import(orbit)
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 %geocal_shared_ptr(GeoCal::QuickBirdEphemeris);
 %geocal_shared_ptr(GeoCal::QuickBirdAttitude);
 %geocal_shared_ptr(GeoCal::QuickBirdOrbit);

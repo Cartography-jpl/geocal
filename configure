@@ -721,20 +721,31 @@ HAVE_GDAL_FALSE
 HAVE_GDAL_TRUE
 BUILD_OPENJPEG_FALSE
 BUILD_OPENJPEG_TRUE
-BUILD_EXPAT_FALSE
-BUILD_EXPAT_TRUE
-BUILD_OGDI_FALSE
-BUILD_OGDI_TRUE
-BUILD_GEOS_FALSE
-BUILD_GEOS_TRUE
 HAVE_OPENJPEG_FALSE
 HAVE_OPENJPEG_TRUE
+OPENJPEG_PREFIX
+OPENJPEG_LIBS
+OPENJPEG_CFLAGS
+BUILD_EXPAT_FALSE
+BUILD_EXPAT_TRUE
 HAVE_EXPAT_FALSE
 HAVE_EXPAT_TRUE
+EXPAT_PREFIX
+EXPAT_LIBS
+EXPAT_CFLAGS
+BUILD_OGDI_FALSE
+BUILD_OGDI_TRUE
 HAVE_OGDI_FALSE
 HAVE_OGDI_TRUE
+OGDI_PREFIX
+OGDI_LIBS
+OGDI_CFLAGS
+BUILD_GEOS_FALSE
+BUILD_GEOS_TRUE
 HAVE_GEOS_FALSE
 HAVE_GEOS_TRUE
+GEOS_LIBS
+GEOS_CFLAGS
 GDAL_LIBS
 GDAL_CFLAGS
 BUILD_FFTW_FALSE
@@ -977,6 +988,10 @@ with_spice
 with_doxygen
 with_fftw
 with_gdal
+with_geos
+with_ogdi
+with_expat
+with_openjpeg
 with_vicar_gdalplugin
 with_afids
 with_carto
@@ -1019,6 +1034,14 @@ FFTW_CFLAGS
 FFTW_LIBS
 GDAL_CFLAGS
 GDAL_LIBS
+GEOS_CFLAGS
+GEOS_LIBS
+OGDI_CFLAGS
+OGDI_LIBS
+EXPAT_CFLAGS
+EXPAT_LIBS
+OPENJPEG_CFLAGS
+OPENJPEG_LIBS
 CARTO_CFLAGS
 CARTO_LIBS
 PYTHON
@@ -1702,6 +1725,15 @@ Optional Packages:
                           to specify the root directory for fftw (optional).
   --with-gdal[=DIR]       use GDAL (default is yes if found) - it is possible
                           to specify the root directory for GDAL (optional).
+  --with-geos[=DIR]       use Geos (default is yes if found) - it is possible
+                          to specify the root directory for Geos (optional).
+  --with-ogdi[=DIR]       use ogdi (default is yes if found) - it is possible
+                          to specify the root directory for ogdi (optional).
+  --with-expat[=DIR]      use expat (default is yes if found) - it is possible
+                          to specify the root directory for expat (optional).
+  --with-openjpeg[=DIR]   use openjpeg (default is yes if found) - it is
+                          possible to specify the root directory for openjpeg
+                          (optional).
   --with-vicar-gdalplugin[=DIR]
                           use VICAR GDAL Plugin (default is yes if found) - it
                           is possible to specify the root directory for VICAR
@@ -1772,6 +1804,17 @@ Some influential environment variables:
   FFTW_LIBS   linker flags for FFTW, overriding pkg-config
   GDAL_CFLAGS C compiler flags for GDAL, overriding pkg-config
   GDAL_LIBS   linker flags for GDAL, overriding pkg-config
+  GEOS_CFLAGS C compiler flags for GEOS, overriding pkg-config
+  GEOS_LIBS   linker flags for GEOS, overriding pkg-config
+  OGDI_CFLAGS C compiler flags for OGDI, overriding pkg-config
+  OGDI_LIBS   linker flags for OGDI, overriding pkg-config
+  EXPAT_CFLAGS
+              C compiler flags for EXPAT, overriding pkg-config
+  EXPAT_LIBS  linker flags for EXPAT, overriding pkg-config
+  OPENJPEG_CFLAGS
+              C compiler flags for OPENJPEG, overriding pkg-config
+  OPENJPEG_LIBS
+              linker flags for OPENJPEG, overriding pkg-config
   CARTO_CFLAGS
               C compiler flags for CARTO, overriding pkg-config
   CARTO_LIBS  linker flags for CARTO, overriding pkg-config
@@ -19428,8 +19471,7 @@ if test "x$want_gdal" = "xyes"; then
 $as_echo_n "checking for GDAL library... " >&6; }
         succeeded=no
         if test "$ac_gdal_path" != ""; then
-            GDAL_LIBS="-R$ac_gdal_path/lib -L$ac_gdal_path/lib -lgdal"
-            GDAL_CFLAGS="-I$ac_gdal_path/include"
+            GDAL_PREFIX="$ac_gdal_path"
             succeeded=yes
         else
 
@@ -19540,6 +19582,8 @@ $as_echo "no" >&6; }
 $as_echo "yes" >&6; }
 	fi
         if test "$succeeded" = "yes" -a "$build_gdal" = "no"; then
+                GDAL_LIBS="`$GDAL_PREFIX/gdal-config --libs` `$GDAL_PREFIX/gdal-config --dep-libs`"
+                GDAL_CFLAGS=`$GDAL_PREFIX/gdal-config --cflags`
 	        { $as_echo "$as_me:${as_lineno-$LINENO}: checking version GDAL library is new enough" >&5
 $as_echo_n "checking version GDAL library is new enough... " >&6; }
 
@@ -19641,14 +19685,778 @@ $as_echo "#define HAVE_GDAL /**/" >>confdefs.h
                 have_gdal="yes"
         fi
 fi
-# We never build this in GeoCal, so leave this out so the configure
-# message isn't confusing
-#if test "$build_gdal" = "yes"; then
-#  AC_GEOS(required, cannot_build, default_search)
-#  AC_OGDI(required, cannot_build, default_search)
-#  AC_EXPAT(required, cannot_build, default_search)
-#  AC_OPENJPEG(required, cannot_build, default_search)
-#else # Not building GDAL
+if test "$build_gdal" = "yes"; then
+
+
+have_geos="no"
+build_geos="no"
+
+# Check whether --with-geos was given.
+if test "${with_geos+set}" = set; then :
+  withval=$with_geos;
+    if test "$withval" = "no"; then
+        want_geos="no"
+    elif test "$withval" = "yes"; then
+        want_geos="yes"
+        ac_geos_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-geos" "$LINENO" 5
+        fi
+        want_geos="yes"
+        build_geos="yes"
+        ac_geos_path="\${prefix}"
+    else
+        want_geos="yes"
+        ac_geos_path="$withval"
+    fi
+
+else
+
+    want_geos="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_geos="yes"
+        build_geos="yes"
+        ac_geos_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_geos" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS library" >&5
+$as_echo_n "checking for GEOS library... " >&6; }
+        succeeded=no
+        if test "$ac_geos_path" != ""; then
+            GEOS_CFLAGS="-I$ac_geos_path/include"
+            GEOS_LIBS="-R$ac_geos_path/lib -L$ac_geos_path/lib -lgeos"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS" >&5
+$as_echo_n "checking for GEOS... " >&6; }
+
+if test -n "$GEOS_CFLAGS"; then
+    pkg_cv_GEOS_CFLAGS="$GEOS_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GEOS_CFLAGS=`$PKG_CONFIG --cflags "geos" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$GEOS_LIBS"; then
+    pkg_cv_GEOS_LIBS="$GEOS_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GEOS_LIBS=`$PKG_CONFIG --libs "geos" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        GEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "geos" 2>&1`
+        else
+	        GEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors "geos" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$GEOS_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	GEOS_CFLAGS=$pkg_cv_GEOS_CFLAGS
+	GEOS_LIBS=$pkg_cv_GEOS_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     GEOS_PREFIX=`$PKG_CONFIG --variable=prefix "geos" 2>/dev/null`
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/geos.h" && test -r "$ac_path_tmp/include/geos.h"; then
+          GEOS_PREFIX=$ac_path_tmp
+          GEOS_CFLAGS="-I$ac_path_tmp/include/"
+          if test -e "$ac_path_tmp/lib/libgeos.so"; then
+             GEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgeos"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libgeos.dylib"; then
+             GEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgeos"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libgeos.so"; then
+             GEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgeos"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libgeos.dylib"; then
+             GEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgeos"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+$as_echo "#define HAVE_GEOS /**/" >>confdefs.h
+
+                have_geos="yes"
+        fi
+fi
+ if test "$have_geos" = "yes"; then
+  HAVE_GEOS_TRUE=
+  HAVE_GEOS_FALSE='#'
+else
+  HAVE_GEOS_TRUE='#'
+  HAVE_GEOS_FALSE=
+fi
+
+ if test "$build_geos" = "yes"; then
+  BUILD_GEOS_TRUE=
+  BUILD_GEOS_FALSE='#'
+else
+  BUILD_GEOS_TRUE='#'
+  BUILD_GEOS_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_geos" = "no"; then
+     as_fn_error $? "
+The Geos library is required by GeoCal. Try specifying
+location using --with-geos if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+
+have_ogdi="no"
+build_ogdi="no"
+
+# Check whether --with-ogdi was given.
+if test "${with_ogdi+set}" = set; then :
+  withval=$with_ogdi;
+    if test "$withval" = "no"; then
+        want_ogdi="no"
+    elif test "$withval" = "yes"; then
+        want_ogdi="yes"
+        ac_ogdi_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-ogdi" "$LINENO" 5
+        fi
+        want_ogdi="yes"
+        build_ogdi="yes"
+        ac_ogdi_path="\${prefix}"
+    else
+        want_ogdi="yes"
+        ac_ogdi_path="$withval"
+    fi
+
+else
+
+    want_ogdi="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_ogdi="yes"
+        build_ogdi="yes"
+        ac_ogdi_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_ogdi" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Ogdi library" >&5
+$as_echo_n "checking for Ogdi library... " >&6; }
+        succeeded=no
+        if test "$ac_ogdi_path" != ""; then
+            OGDI_LIBS="-L$ac_ogdi_path/lib -logdi"
+            OGDI_CFLAGS="-I$ac_ogdi_path/include"
+	    OGDI_PREFIX="$ac_ogdi_path"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OGDI" >&5
+$as_echo_n "checking for OGDI... " >&6; }
+
+if test -n "$OGDI_CFLAGS"; then
+    pkg_cv_OGDI_CFLAGS="$OGDI_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OGDI_CFLAGS=`$PKG_CONFIG --cflags "ogdi" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$OGDI_LIBS"; then
+    pkg_cv_OGDI_LIBS="$OGDI_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OGDI_LIBS=`$PKG_CONFIG --libs "ogdi" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        OGDI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "ogdi" 2>&1`
+        else
+	        OGDI_PKG_ERRORS=`$PKG_CONFIG --print-errors "ogdi" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$OGDI_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	OGDI_CFLAGS=$pkg_cv_OGDI_CFLAGS
+	OGDI_LIBS=$pkg_cv_OGDI_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     OGDI_PREFIX=`$PKG_CONFIG --variable=prefix "ogdi" 2>/dev/null`
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/ecs.h" && test -r "$ac_path_tmp/include/ecs.h"; then
+          OGDI_PREFIX=$ac_path_tmp
+          OGDI_CFLAGS="-I$ac_path_tmp/include/"
+          if test -e "$ac_path_tmp/lib/libogdi.so"; then
+             OGDI_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -logdi"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libogdi.dylib"; then
+             OGDI_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -logdi"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libogdi.so"; then
+             OGDI_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -logdi"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libogdi.dylib"; then
+             OGDI_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -logdi"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_OGDI /**/" >>confdefs.h
+
+                have_ogdi="yes"
+        fi
+fi
+ if test "$have_ogdi" = "yes"; then
+  HAVE_OGDI_TRUE=
+  HAVE_OGDI_FALSE='#'
+else
+  HAVE_OGDI_TRUE='#'
+  HAVE_OGDI_FALSE=
+fi
+
+ if test "$build_ogdi" = "yes"; then
+  BUILD_OGDI_TRUE=
+  BUILD_OGDI_FALSE='#'
+else
+  BUILD_OGDI_TRUE='#'
+  BUILD_OGDI_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_ogdi" = "no"; then
+     as_fn_error $? "
+The ogdi library is required by GeoCal. Try specifying
+location using --with-ogdi if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+
+have_expat="no"
+build_expat="no"
+
+# Check whether --with-expat was given.
+if test "${with_expat+set}" = set; then :
+  withval=$with_expat;
+    if test "$withval" = "no"; then
+        want_expat="no"
+    elif test "$withval" = "yes"; then
+        want_expat="yes"
+        ac_expat_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-expat" "$LINENO" 5
+        fi
+        want_expat="yes"
+        build_expat="yes"
+        ac_expat_path="\${prefix}"
+    else
+        want_expat="yes"
+        ac_expat_path="$withval"
+    fi
+
+else
+
+    want_expat="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_expat="yes"
+        build_expat="yes"
+        ac_expat_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_expat" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for expat library" >&5
+$as_echo_n "checking for expat library... " >&6; }
+        succeeded=no
+        if test "$ac_expat_path" != ""; then
+            EXPAT_LIBS="-L$ac_expat_path/lib -lexpat"
+            EXPAT_CFLAGS="-I$ac_expat_path/include"
+	    EXPAT_PREFIX="$ac_expat_path"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for EXPAT" >&5
+$as_echo_n "checking for EXPAT... " >&6; }
+
+if test -n "$EXPAT_CFLAGS"; then
+    pkg_cv_EXPAT_CFLAGS="$EXPAT_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"expat\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "expat") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_EXPAT_CFLAGS=`$PKG_CONFIG --cflags "expat" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$EXPAT_LIBS"; then
+    pkg_cv_EXPAT_LIBS="$EXPAT_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"expat\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "expat") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_EXPAT_LIBS=`$PKG_CONFIG --libs "expat" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        EXPAT_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "expat" 2>&1`
+        else
+	        EXPAT_PKG_ERRORS=`$PKG_CONFIG --print-errors "expat" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$EXPAT_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	EXPAT_CFLAGS=$pkg_cv_EXPAT_CFLAGS
+	EXPAT_LIBS=$pkg_cv_EXPAT_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     EXPAT_PREFIX=`$PKG_CONFIG --variable=prefix "expat" 2>/dev/null`
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/expat.h" && test -r "$ac_path_tmp/include/expat.h"; then
+          EXPAT_PREFIX=$ac_path_tmp
+          EXPAT_CFLAGS="-I$ac_path_tmp/include/"
+          if test -e "$ac_path_tmp/lib/libexpat.so"; then
+             EXPAT_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lexpat"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libexpat.dylib"; then
+             EXPAT_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lexpat"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libexpat.so"; then
+             EXPAT_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lexpat"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libexpat.dylib"; then
+             EXPAT_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lexpat"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_EXPAT /**/" >>confdefs.h
+
+                have_expat="yes"
+        fi
+fi
+ if test "$have_expat" = "yes"; then
+  HAVE_EXPAT_TRUE=
+  HAVE_EXPAT_FALSE='#'
+else
+  HAVE_EXPAT_TRUE='#'
+  HAVE_EXPAT_FALSE=
+fi
+
+ if test "$build_expat" = "yes"; then
+  BUILD_EXPAT_TRUE=
+  BUILD_EXPAT_FALSE='#'
+else
+  BUILD_EXPAT_TRUE='#'
+  BUILD_EXPAT_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_expat" = "no"; then
+     as_fn_error $? "
+The expat library is required by GeoCal. Try specifying
+location using --with-expat if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+
+have_openjpeg="no"
+build_openjpeg="no"
+
+# Check whether --with-openjpeg was given.
+if test "${with_openjpeg+set}" = set; then :
+  withval=$with_openjpeg;
+    if test "$withval" = "no"; then
+        want_openjpeg="no"
+    elif test "$withval" = "yes"; then
+        want_openjpeg="yes"
+        ac_openjpeg_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-openjpeg" "$LINENO" 5
+        fi
+        want_openjpeg="yes"
+        build_openjpeg="yes"
+        ac_openjpeg_path="\${prefix}"
+    else
+        want_openjpeg="yes"
+        ac_openjpeg_path="$withval"
+    fi
+
+else
+
+    want_openjpeg="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_openjpeg="yes"
+        build_openjpeg="yes"
+        ac_openjpeg_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_openjpeg" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for openjpeg library" >&5
+$as_echo_n "checking for openjpeg library... " >&6; }
+        succeeded=no
+        if test "$ac_openjpeg_path" != ""; then
+            OPENJPEG_LIBS="-L$ac_openjpeg_path/lib -lopenjp2"
+            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.0"
+	    OPENJPEG_PREFIX="$ac_openjpeg_path"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OPENJPEG" >&5
+$as_echo_n "checking for OPENJPEG... " >&6; }
+
+if test -n "$OPENJPEG_CFLAGS"; then
+    pkg_cv_OPENJPEG_CFLAGS="$OPENJPEG_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"openjpeg\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "openjpeg") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OPENJPEG_CFLAGS=`$PKG_CONFIG --cflags "openjpeg" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$OPENJPEG_LIBS"; then
+    pkg_cv_OPENJPEG_LIBS="$OPENJPEG_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"openjpeg\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "openjpeg") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OPENJPEG_LIBS=`$PKG_CONFIG --libs "openjpeg" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "openjpeg" 2>&1`
+        else
+	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --print-errors "openjpeg" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$OPENJPEG_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	OPENJPEG_CFLAGS=$pkg_cv_OPENJPEG_CFLAGS
+	OPENJPEG_LIBS=$pkg_cv_OPENJPEG_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     OPENJPEG_PREFIX=`$PKG_CONFIG --variable=prefix "openjpeg" 2>/dev/null`
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/openjpeg-2.0/openjpeg.h" && test -r "$ac_path_tmp/include/openjpeg-2.0/openjpeg.h"; then
+          OPENJPEG_PREFIX=$ac_path_tmp
+          OPENJPEG_CFLAGS="-I$ac_path_tmp/include/openjpeg-2.0/"
+          if test -e "$ac_path_tmp/lib/libopenjp2.so"; then
+             OPENJPEG_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -openjp2"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libopenjp2.dylib"; then
+             OPENJPEG_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -openjp2"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libopenjp2.so"; then
+             OPENJPEG_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -openjp2"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libopenjp2.dylib"; then
+             OPENJPEG_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -openjp2"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_OPENJPEG /**/" >>confdefs.h
+
+                have_openjpeg="yes"
+        fi
+fi
+ if test "$have_openjpeg" = "yes"; then
+  HAVE_OPENJPEG_TRUE=
+  HAVE_OPENJPEG_FALSE='#'
+else
+  HAVE_OPENJPEG_TRUE='#'
+  HAVE_OPENJPEG_FALSE=
+fi
+
+ if test "$build_openjpeg" = "yes"; then
+  BUILD_OPENJPEG_TRUE=
+  BUILD_OPENJPEG_FALSE='#'
+else
+  BUILD_OPENJPEG_TRUE='#'
+  BUILD_OPENJPEG_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_openjpeg" = "no"; then
+     as_fn_error $? "
+The openjpeg library is required by GeoCal. Try specifying
+location using --with-openjpeg if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+else # Not building GDAL
    if false; then
   HAVE_GEOS_TRUE=
   HAVE_GEOS_FALSE='#'
@@ -19717,7 +20525,7 @@ fi
   build_ogdi="no"
   build_expat="no"
   build_openjpeg="yes"
-#fi # End if/else building GDAL
+fi # End if/else building GDAL
  if test "$have_gdal" = "yes"; then
   HAVE_GDAL_TRUE=
   HAVE_GDAL_FALSE='#'
@@ -21938,6 +22746,38 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_FFTW_TRUE}" && test -z "${BUILD_FFTW_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_FFTW\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_GEOS_TRUE}" && test -z "${HAVE_GEOS_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_GEOS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_GEOS_TRUE}" && test -z "${BUILD_GEOS_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_GEOS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_OGDI_TRUE}" && test -z "${HAVE_OGDI_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_OGDI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_OGDI_TRUE}" && test -z "${BUILD_OGDI_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_OGDI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_EXPAT_TRUE}" && test -z "${HAVE_EXPAT_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_EXPAT\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_EXPAT_TRUE}" && test -z "${BUILD_EXPAT_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_EXPAT\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_OPENJPEG_TRUE}" && test -z "${HAVE_OPENJPEG_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_OPENJPEG\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_OPENJPEG_TRUE}" && test -z "${BUILD_OPENJPEG_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_OPENJPEG\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_GEOS_TRUE}" && test -z "${HAVE_GEOS_FALSE}"; then

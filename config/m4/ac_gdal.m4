@@ -29,8 +29,8 @@ if test "x$want_gdal" = "xyes"; then
                 AC_MSG_RESULT([yes])
 	fi
         if test "$succeeded" = "yes" -a "$build_gdal" = "no"; then
-                GDAL_LIBS="`$GDAL_PREFIX/gdal-config --libs` `$GDAL_PREFIX/gdal-config --dep-libs`"
-                GDAL_CFLAGS=`$GDAL_PREFIX/gdal-config --cflags`
+                GDAL_LIBS="`$GDAL_PREFIX/bin/gdal-config --libs` `$GDAL_PREFIX/bin/gdal-config --dep-libs`"
+                GDAL_CFLAGS=`$GDAL_PREFIX/bin/gdal-config --cflags`
 	        AC_MSG_CHECKING([version GDAL library is new enough])
 		AC_REQUIRE([AC_PROG_CC])
 		CPPFLAGS_SAVED="$CPPFLAGS"

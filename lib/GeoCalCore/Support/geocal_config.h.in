@@ -1,7 +1,21 @@
-/* lib/GeoCalCore/Support/geocal_config.h.in.  Generated from configure.ac by autoheader.  */
+/* geocal/lib/GeoCalCore/Support/geocal_config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Disable assertions in boost */
 #undef BOOST_DISABLE_ASSERTS
+
+/* Define to dummy `main' function (if any) required to link to the Fortran
+   libraries. */
+#undef F77_DUMMY_MAIN
+
+/* Define to a macro mangling the given C identifier (in lower and upper
+   case), which must not contain underscores, for linking with Fortran. */
+#undef F77_FUNC
+
+/* As F77_FUNC, but for C identifiers containing underscores. */
+#undef F77_FUNC_
+
+/* Define if F77 and FC dummy `main' functions are identical. */
+#undef FC_DUMMY_MAIN_EQ_F77
 
 /* Defined if we have boost serialization */
 #undef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -21,14 +35,29 @@
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
+/* Defined if we have Expat */
+#undef HAVE_EXPAT
+
 /* Defined if we have FFTW */
 #undef HAVE_FFTW
+
+/* Defined if we have FREETYPE */
+#undef HAVE_FREETYPE
 
 /* Defined if we have GDAL */
 #undef HAVE_GDAL
 
+/* Defined if we have GEOS */
+#undef HAVE_GEOS
+
+/* Defined if we have Geotiff */
+#undef HAVE_GEOTIFF
+
 /* Defined if we have GSL */
 #undef HAVE_GSL
+
+/* Defined if we have HDF4 */
+#undef HAVE_HDF4
 
 /* Defined if we have HDF5 */
 #undef HAVE_HDF5
@@ -36,14 +65,35 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
+/* Defined if we have JPEG */
+#undef HAVE_JPEG
+
+/* If we have lib xp */
+#undef HAVE_LIB_XP
+
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
+
+/* If we have motif */
+#undef HAVE_MOTIF
 
 /* Defined if we have MSPI-Shared */
 #undef HAVE_MSPI_SHARED
 
 /* Define if you have ncurses.h */
 #undef HAVE_NCURSES_H
+
+/* Defined if we have Ogdi */
+#undef HAVE_OGDI
+
+/* Defined if we have Openjpeg */
+#undef HAVE_OPENJPEG
+
+/* Defined if we have OPENSSL */
+#undef HAVE_OPENSSL
+
+/* Define if you have POSIX threads libraries and header files. */
+#undef HAVE_PTHREAD
 
 /* Define to 1 if you have the `sincos' function. */
 #undef HAVE_SINCOS
@@ -69,11 +119,29 @@
 /* Define to 1 if you have the <sys/types.h> header file. */
 #undef HAVE_SYS_TYPES_H
 
+/* Defined if we have Tcl */
+#undef HAVE_TCL
+
+/* Defined if we have Tiff */
+#undef HAVE_TIFF
+
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
 /* Defined if we have VICAR RTL */
 #undef HAVE_VICAR_RTL
+
+/* Define to 1 if you have the <X11/Xlib.h> header file. */
+#undef HAVE_X11_XLIB_H
+
+/* Define to 1 if you have the <X11/xpm.h> header file. */
+#undef HAVE_X11_XPM_H
+
+/* Define to 1 if you have the <Xm/Xm.h> header file. */
+#undef HAVE_XM_XM_H
+
+/* Include AFIDS A stuff */
+#undef INCLUDE_AFIDS_A
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
@@ -103,8 +171,15 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
+/* Define to necessary symbol if this constant uses a non-standard name on
+   your system. */
+#undef PTHREAD_CREATE_JOINABLE
+
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
 /* Version number of package */
 #undef VERSION
+
+/* Define to 1 if the X Window System is missing or not being used. */
+#undef X_DISPLAY_MISSING

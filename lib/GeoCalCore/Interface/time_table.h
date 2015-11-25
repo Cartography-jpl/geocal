@@ -155,8 +155,6 @@ class MeasuredTimeTable : public TimeTable {
 public:
   MeasuredTimeTable(const std::vector<Time>& Time_list,
 		    int Min_line = 0);
-  MeasuredTimeTable(const std::vector<boost::shared_ptr<Time> >& Time_list,
-		    int Min_line = 0);
   virtual ~MeasuredTimeTable() {}
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
     const;

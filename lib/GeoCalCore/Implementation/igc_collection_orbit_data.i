@@ -19,7 +19,7 @@ class IgcCollectionOrbitData: public IgcCollection {
 public:
   IgcCollectionOrbitData
   (const std::vector<boost::shared_ptr<RasterImage> >& Img_list, 
-   const std::vector<boost::shared_ptr<Time> >& Tm_list,
+   const std::vector<Time>& Tm_list,
    const std::vector<std::string>& Title_list,
     const boost::shared_ptr<Orbit>& Orb,
    const boost::shared_ptr<Camera>& Cam,

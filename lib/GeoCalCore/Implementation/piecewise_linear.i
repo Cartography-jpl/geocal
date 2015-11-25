@@ -14,7 +14,7 @@ namespace GeoCal {
 class PiecewiseLinear : public WithParameter {
 public:
   enum {LINEAR, CONSTANT, LINEAR_TO_ZERO} FunctionType;
-  PiecewiseLinear(const std::vector<boost::shared_ptr<Time> >& X,
+  PiecewiseLinear(const std::vector<Time>& X,
 		  const blitz::Array<int, 1>& T);
   double value(const Time& x) const;
   %pickle_serialization();

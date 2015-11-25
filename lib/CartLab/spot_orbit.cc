@@ -57,45 +57,6 @@ SpotOrbit::SpotOrbit(const std::vector<Time>& Ephemeris_time,
   max_tm = std::min(teph.back(), sc_to_orb.rbegin()->first);
 }
 
-SpotOrbit::SpotOrbit(const std::vector<boost::shared_ptr<Time> >& Ephemeris_time, 
-		     const blitz::Array<double, 2>& Ephemeris,
-		     const std::vector<boost::shared_ptr<Time> >& Attitude_time,
-		     const blitz::Array<double, 2>& Ypr)
-{
-  if((int) Ephemeris_time.size() != Ephemeris.shape()[0])
-    throw Exception("Ephemeris_time and Empheris need to be the same size");
-  if(Ephemeris.shape()[1] != 6)
-    throw Exception("Ephemeris needs to have 6 columns");
-  if((int) Attitude_time.size() != Ypr.shape()[0])
-    throw Exception("Attitude_time and Ypr need to be the same size");
-  if(Ypr.shape()[1] != 3)
-    throw Exception("Ypr needs to have 3 columns");
-  for(int i = 0; i < Ephemeris.shape()[0]; ++i) {
-    if(i > 0 &&
-       *Ephemeris_time[i] < *Ephemeris_time[i - 1])
-      throw Exception("Time needs to be sorted");
-    teph.push_back(*Ephemeris_time[i]);
-    posvel.push_back(Ephemeris(i, blitz::Range::all()).copy());
-  }
-
-//-----------------------------------------------------------------------
-// For historical reasons (according to "SPOT Geometry Guide"), the
-// pitch and roll are about -X and -Y. So we need to change the sign
-// of Roll and Pitch, but not yaw, here.
-//
-//-----------------------------------------------------------------------
-
-  for(int i = 0; i < Ypr.shape()[0]; ++i) {
-    double yaw = Ypr(i,0);
-    double pitch = Ypr(i,1);
-    double roll = Ypr(i,2);
-    sc_to_orb[*Attitude_time[i]] = quat_rot_x(-pitch) * quat_rot_y(-roll) * 
-      quat_rot_z(yaw);
-  }
-  min_tm = std::max(teph.front(), sc_to_orb.begin()->first);
-  max_tm = std::min(teph.back(), sc_to_orb.rbegin()->first);
-}
-
 //-----------------------------------------------------------------------
 /// Return orbit data for the given time.
 //-----------------------------------------------------------------------

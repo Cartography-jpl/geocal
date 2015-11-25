@@ -272,5 +272,7 @@ public:
 
 }
 
-%template(Vector_Time) std::vector<boost::shared_ptr<GeoCal::Time> >;
-%template(Vector_Time2) std::vector<GeoCal::Time>;
+%template(Vector_Time) std::vector<GeoCal::Time>;
+%extend std::vector<GeoCal::Time> {
+  %pickle_serialization();
+};

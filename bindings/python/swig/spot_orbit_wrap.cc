@@ -5346,9 +5346,9 @@ namespace swig {
 
 
   namespace swig {
-    template <>  struct traits<boost::shared_ptr< GeoCal::Time > > {
+    template <>  struct traits<GeoCal::Time > {
       typedef pointer_category category;
-      static const char* type_name() { return"boost::shared_ptr< GeoCal::Time >"; }
+      static const char* type_name() { return"GeoCal::Time"; }
     };
   }
 
@@ -5452,10 +5452,10 @@ namespace swig {
 
 
       namespace swig {
-	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::Time >, std::allocator< boost::shared_ptr< GeoCal::Time > > > > {
+	template <>  struct traits<std::vector<GeoCal::Time, std::allocator< GeoCal::Time > > > {
 	  typedef pointer_category category;
 	  static const char* type_name() {
-	    return "std::vector<" "boost::shared_ptr< GeoCal::Time >" "," "std::allocator< boost::shared_ptr< GeoCal::Time > >" " >";
+	    return "std::vector<" "GeoCal::Time" "," "std::allocator< GeoCal::Time >" " >";
 	  }
 	};
       }
@@ -6256,9 +6256,9 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
 
 SWIGINTERN PyObject *_wrap_new_SpotOrbit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg1 = 0 ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg1 = 0 ;
   blitz::Array< double,2 > *arg2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg3 = 0 ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg3 = 0 ;
   blitz::Array< double,2 > *arg4 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   blitz::Array< double,2 > a2 ;
@@ -6271,13 +6271,13 @@ SWIGINTERN PyObject *_wrap_new_SpotOrbit(PyObject *SWIGUNUSEDPARM(self), PyObjec
   
   if (!SWIG_Python_UnpackTuple(args,"new_SpotOrbit",4,4,swig_obj)) SWIG_fail;
   {
-    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
+    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
     res1 = swig::asptr(swig_obj[0], &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SpotOrbit" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SpotOrbit" "', argument " "1"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpotOrbit" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpotOrbit" "', argument " "1"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
     }
     arg1 = ptr;
   }
@@ -6293,13 +6293,13 @@ SWIGINTERN PyObject *_wrap_new_SpotOrbit(PyObject *SWIGUNUSEDPARM(self), PyObjec
     }
   }
   {
-    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
+    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
     res3 = swig::asptr(swig_obj[2], &ptr);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_SpotOrbit" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_SpotOrbit" "', argument " "3"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpotOrbit" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpotOrbit" "', argument " "3"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
     }
     arg3 = ptr;
   }
@@ -6316,7 +6316,7 @@ SWIGINTERN PyObject *_wrap_new_SpotOrbit(PyObject *SWIGUNUSEDPARM(self), PyObjec
   }
   {
     try {
-      result = (GeoCal::SpotOrbit *)new GeoCal::SpotOrbit((std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)*arg3,(blitz::Array< double,2 > const &)*arg4);
+      result = (GeoCal::SpotOrbit *)new GeoCal::SpotOrbit((std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg3,(blitz::Array< double,2 > const &)*arg4);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     } catch (Swig::DirectorException &e) {
@@ -6572,11 +6572,26 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_SpotOrbit", _wrap_new_SpotOrbit, METH_VARARGS, (char *)"\n"
-		"SpotOrbit::SpotOrbit(const std::vector< boost::shared_ptr< Time > > &Ephemeris_time, const\n"
-		"blitz::Array< double, 2 > &Ephemeris, const std::vector<\n"
-		"boost::shared_ptr< Time > > &Attitude_time, const blitz::Array<\n"
-		"double, 2 > &Ypr)\n"
+		"SpotOrbit::SpotOrbit(const std::vector< Time > &Ephemeris_time, const blitz::Array<\n"
+		"double, 2 > &Ephemeris, const std::vector< Time > &Attitude_time,\n"
+		"const blitz::Array< double, 2 > &Ypr)\n"
+		"Constructor.\n"
 		"\n"
+		"Parameters:\n"
+		"-----------\n"
+		"\n"
+		"Ephemeris_time:  Time of each ephemeris point\n"
+		"\n"
+		"Ephemeris:  Ephemeris at each time. This is a number_eph_time x 6\n"
+		"array. Each row has the position x, y, z and velocity x, y, z. This is\n"
+		"in meters and meter/second, in ECR coordinates.\n"
+		"\n"
+		"Attitude_time:  Time of each attitude point.\n"
+		"\n"
+		"Ypr:  Attitude. This is a number_att_time x 3 array. Each row has the\n"
+		"yaw, pitch and roll. This is in radians. This is YPR reported by SPOT\n"
+		"in the DIMAP file, and uses the conventions described in \"SPOT\n"
+		"Geometry Handbook\" \n"
 		""},
 	 { (char *)"SpotOrbit_orbit_data", _wrap_SpotOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"boost::shared_ptr< OrbitData > SpotOrbit::orbit_data(const TimeWithDerivative &T) const\n"

@@ -29,23 +29,6 @@ public:
       throw Exception("All the lists need to be the same size.");
   }
   IgcCollectionOrbitData
-  (const std::vector<boost::shared_ptr<RasterImage> >& Img_list, 
-   const std::vector<boost::shared_ptr<Time> >& Tm_list, 
-   const std::vector<std::string>& Title_list,
-   const boost::shared_ptr<Orbit>& Orb,
-   const boost::shared_ptr<Camera>& Cam,
-   const boost::shared_ptr<Dem>& D)
-    : orb(Orb), cam(Cam), dem_(D), img_list(Img_list),
-      title_list(Title_list)
-  {
-    add_object(Orb);
-    add_object(Cam);
-    BOOST_FOREACH(const boost::shared_ptr<Time>& t, Tm_list)
-      tm_list.push_back(*t);
-    if(img_list.size() != title_list.size())
-      throw Exception("All the lists need to be the same size.");
-  }
-  IgcCollectionOrbitData
   (const boost::shared_ptr<Orbit>& Orb,
    const boost::shared_ptr<Camera>& Cam,
    const boost::shared_ptr<Dem>& D)

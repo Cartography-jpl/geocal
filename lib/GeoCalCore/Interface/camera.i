@@ -54,9 +54,19 @@ public:
 
 class SimpleCamera : public Camera {
 public:
-  SimpleCamera(double Beta=58*Constant::deg_to_rad, double
-     Delta=-2.7*Constant::deg_to_rad, double Epsilon=0, 
-     double Focal=123.8e-3, double
+  // swig 3.0.7 doesn't seem to support expressions in the
+  // default argument value (this use to work in the older swig 2.x series).
+  // As an easy workaround, just have multiple versions of this w/o
+  // the default values.
+  // SimpleCamera(double Beta=58*Constant::deg_to_rad, double
+  //    Delta=-2.7*Constant::deg_to_rad, double Epsilon=0, 
+  //    double Focal=123.8e-3, double
+  // 	       Pitch_line=18e-6, double Pitch_sample=21e-6, int Number_line = 1,
+  // 	       int Number_sample=1504);
+  SimpleCamera();
+  SimpleCamera(double Beta);
+  SimpleCamera(double Beta, double Delta, double Epsilon=0, 
+	       double Focal=123.8e-3, double
 	       Pitch_line=18e-6, double Pitch_sample=21e-6, int Number_line = 1,
 	       int Number_sample=1504);
   virtual int number_line(int Band) const;

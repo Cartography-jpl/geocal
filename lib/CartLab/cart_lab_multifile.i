@@ -26,9 +26,6 @@ public:
   %pickle_serialization();
 %pythoncode {
 def create_subset_file(self, Oname, Driver, Pt, Options = "", Boundary = 0):
-    # We can probably eventually fix the automatic swig conversion to
-    # vector, but right now this doesn not work correctly. So we just
-    # replace with a version that checks for this
     if(isinstance(Pt, geocal_swig.Vector_GroundCoordinate)):
         t = Pt
     else:

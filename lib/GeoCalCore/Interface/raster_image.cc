@@ -307,3 +307,25 @@ RasterImage::read_double(int Lstart, int Sstart, int Number_line,
   res = cast<double>(dataint);
   return res;
 }
+
+//-----------------------------------------------------------------------
+/// Translate a number of points at once. This is really meant for use
+/// with python, where this is faster than the normal interface.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> 
+RasterImage::coordinate(const blitz::Array<double, 1>& Lat,
+			const blitz::Array<double, 1>& Lon) const
+{
+  if(Lat.rows() != Lon.rows())
+    throw Exception("Lat and Lon need to be the sampe size.");
+  Array<double, 2> res(Lat.rows(), 2);
+  for(int i = 0; i < Lat.rows(); ++i) {
+    ImageCoordinate ic = coordinate(Geodetic(Lat(i), Lon(i)));
+    res(i, 0) = ic.line;
+    res(i, 1) = ic.sample;
+  }
+  return res;
+}
+
+

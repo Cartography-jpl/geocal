@@ -3506,20 +3506,26 @@ namespace Swig {
 #define SWIGTYPE_p_iostate swig_types[54]
 #define SWIGTYPE_p_off_type swig_types[55]
 #define SWIGTYPE_p_openmode swig_types[56]
-#define SWIGTYPE_p_pos_type swig_types[57]
-#define SWIGTYPE_p_seekdir swig_types[58]
-#define SWIGTYPE_p_size_t swig_types[59]
-#define SWIGTYPE_p_size_type swig_types[60]
-#define SWIGTYPE_p_state_type swig_types[61]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[62]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[63]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[64]
-#define SWIGTYPE_p_std__invalid_argument swig_types[65]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[66]
-#define SWIGTYPE_p_traits_type swig_types[67]
-#define SWIGTYPE_p_value_type swig_types[68]
-static swig_type_info *swig_types[70];
-static swig_module_info swig_module = {swig_types, 69, 0, 0, 0, 0};
+#define SWIGTYPE_p_p_PyObject swig_types[57]
+#define SWIGTYPE_p_pos_type swig_types[58]
+#define SWIGTYPE_p_seekdir swig_types[59]
+#define SWIGTYPE_p_size_t swig_types[60]
+#define SWIGTYPE_p_size_type swig_types[61]
+#define SWIGTYPE_p_state_type swig_types[62]
+#define SWIGTYPE_p_std__allocatorT_GeoCal__Time_t swig_types[63]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t swig_types[64]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[65]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[66]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[67]
+#define SWIGTYPE_p_std__invalid_argument swig_types[68]
+#define SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t swig_types[69]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[70]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t swig_types[71]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[72]
+#define SWIGTYPE_p_traits_type swig_types[73]
+#define SWIGTYPE_p_value_type swig_types[74]
+static swig_type_info *swig_types[76];
+static swig_module_info swig_module = {swig_types, 75, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5289,30 +5295,7 @@ namespace swig {
 #include "piecewise_linear.h"
 
 
-#include <limits.h>
-#if !defined(SWIG_NO_LLONG_MAX)
-# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
-#   define LLONG_MAX __LONG_LONG_MAX__
-#   define LLONG_MIN (-LLONG_MAX - 1LL)
-#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-# endif
-#endif
-
-
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
+#include "geocal_time.h"
 
 
   namespace swig {
@@ -5430,6 +5413,99 @@ namespace swig {
 	};
       }
     
+SWIGINTERN swig::SwigPyIterator *std_vector_Sl_GeoCal_Time_Sg__iterator(std::vector< GeoCal::Time > *self,PyObject **PYTHON_SELF){
+      return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
+    }
+SWIGINTERN bool std_vector_Sl_GeoCal_Time_Sg____nonzero__(std::vector< GeoCal::Time > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN bool std_vector_Sl_GeoCal_Time_Sg____bool__(std::vector< GeoCal::Time > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN std::vector< GeoCal::Time >::size_type std_vector_Sl_GeoCal_Time_Sg____len__(std::vector< GeoCal::Time > const *self){
+      return self->size();
+    }
+
+SWIGINTERNINLINE PyObject* 
+SWIG_From_unsigned_SS_long  (unsigned long value)
+{
+  return (value > LONG_MAX) ?
+    PyLong_FromUnsignedLong(value) : PyLong_FromLong(static_cast< long >(value)); 
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_size_t  (size_t value)
+{    
+  return SWIG_From_unsigned_SS_long  (static_cast< unsigned long >(value));
+}
+
+SWIGINTERN std::vector< GeoCal::Time >::value_type std_vector_Sl_GeoCal_Time_Sg__pop(std::vector< GeoCal::Time > *self){
+      if (self->size() == 0)
+	throw std::out_of_range("pop from empty container");
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::value_type x = self->back();
+      self->pop_back();
+      return x;
+    }
+SWIGINTERN std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *std_vector_Sl_GeoCal_Time_Sg____getslice__(std::vector< GeoCal::Time > *self,std::vector< GeoCal::Time >::difference_type i,std::vector< GeoCal::Time >::difference_type j){
+      return swig::getslice(self, i, j, 1);
+    }
+SWIGINTERN void std_vector_Sl_GeoCal_Time_Sg____setslice____SWIG_0(std::vector< GeoCal::Time > *self,std::vector< GeoCal::Time >::difference_type i,std::vector< GeoCal::Time >::difference_type j,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &v=std::vector< GeoCal::Time,std::allocator< GeoCal::Time > >()){
+      swig::setslice(self, i, j, 1, v);
+    }
+SWIGINTERN void std_vector_Sl_GeoCal_Time_Sg____delslice__(std::vector< GeoCal::Time > *self,std::vector< GeoCal::Time >::difference_type i,std::vector< GeoCal::Time >::difference_type j){
+      swig::delslice(self, i, j, 1);
+    }
+SWIGINTERN void std_vector_Sl_GeoCal_Time_Sg____delitem____SWIG_0(std::vector< GeoCal::Time > *self,std::vector< GeoCal::Time >::difference_type i){
+      self->erase(swig::getpos(self,i));
+    }
+SWIGINTERN std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *std_vector_Sl_GeoCal_Time_Sg____getitem____SWIG_0(std::vector< GeoCal::Time > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return NULL;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::difference_type id = i;
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::difference_type jd = j;
+      return swig::getslice(self, id, jd, step);
+    }
+SWIGINTERN void std_vector_Sl_GeoCal_Time_Sg____setitem____SWIG_0(std::vector< GeoCal::Time > *self,PySliceObject *slice,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &v){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::difference_type id = i;
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::difference_type jd = j;
+      swig::setslice(self, id, jd, step, v);
+    }
+SWIGINTERN void std_vector_Sl_GeoCal_Time_Sg____setitem____SWIG_1(std::vector< GeoCal::Time > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::difference_type id = i;
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::difference_type jd = j;
+      swig::delslice(self, id, jd, step);
+    }
+SWIGINTERN void std_vector_Sl_GeoCal_Time_Sg____delitem____SWIG_1(std::vector< GeoCal::Time > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::difference_type id = i;
+      std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >::difference_type jd = j;
+      swig::delslice(self, id, jd, step);
+    }
+SWIGINTERN std::vector< GeoCal::Time >::value_type const &std_vector_Sl_GeoCal_Time_Sg____getitem____SWIG_1(std::vector< GeoCal::Time > const *self,std::vector< GeoCal::Time >::difference_type i){
+      return *(swig::cgetpos(self, i));
+    }
 
 struct SWIG_null_deleter {
   void operator() (void const *) const {
@@ -5442,6 +5518,194 @@ struct SWIG_null_deleter {
 
 
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+SWIGINTERN void std_vector_Sl_GeoCal_Time_Sg____setitem____SWIG_2(std::vector< GeoCal::Time > *self,std::vector< GeoCal::Time >::difference_type i,std::vector< GeoCal::Time >::value_type const &x){
+      *(swig::getpos(self,i)) = x;
+    }
+SWIGINTERN void std_vector_Sl_GeoCal_Time_Sg__append(std::vector< GeoCal::Time > *self,std::vector< GeoCal::Time >::value_type const &x){
+      self->push_back(x);
+    }
+
+  namespace swig {
+    template <>  struct traits<boost::shared_ptr< GeoCal::Time > > {
+      typedef pointer_category category;
+      static const char* type_name() { return"boost::shared_ptr< GeoCal::Time >"; }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::Time >, std::allocator< boost::shared_ptr< GeoCal::Time > > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "boost::shared_ptr< GeoCal::Time >" "," "std::allocator< boost::shared_ptr< GeoCal::Time > >" " >";
+	  }
+	};
+      }
+    
+SWIGINTERN swig::SwigPyIterator *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg__iterator(std::vector< boost::shared_ptr< GeoCal::Time > > *self,PyObject **PYTHON_SELF){
+      return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
+    }
+SWIGINTERN bool std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____nonzero__(std::vector< boost::shared_ptr< GeoCal::Time > > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN bool std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____bool__(std::vector< boost::shared_ptr< GeoCal::Time > > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Time > >::size_type std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____len__(std::vector< boost::shared_ptr< GeoCal::Time > > const *self){
+      return self->size();
+    }
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Time > >::value_type std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg__pop(std::vector< boost::shared_ptr< GeoCal::Time > > *self){
+      if (self->size() == 0)
+	throw std::out_of_range("pop from empty container");
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::value_type x = self->back();
+      self->pop_back();
+      return x;
+    }
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____getslice__(std::vector< boost::shared_ptr< GeoCal::Time > > *self,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j){
+      return swig::getslice(self, i, j, 1);
+    }
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setslice____SWIG_0(std::vector< boost::shared_ptr< GeoCal::Time > > *self,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j,std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &v=std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >()){
+      swig::setslice(self, i, j, 1, v);
+    }
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____delslice__(std::vector< boost::shared_ptr< GeoCal::Time > > *self,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j){
+      swig::delslice(self, i, j, 1);
+    }
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____delitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::Time > > *self,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i){
+      self->erase(swig::getpos(self,i));
+    }
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____getitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::Time > > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return NULL;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::difference_type id = i;
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::difference_type jd = j;
+      return swig::getslice(self, id, jd, step);
+    }
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::Time > > *self,PySliceObject *slice,std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &v){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::difference_type id = i;
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::difference_type jd = j;
+      swig::setslice(self, id, jd, step, v);
+    }
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::Time > > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::difference_type id = i;
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::difference_type jd = j;
+      swig::delslice(self, id, jd, step);
+    }
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____delitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::Time > > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::difference_type id = i;
+      std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >::difference_type jd = j;
+      swig::delslice(self, id, jd, step);
+    }
+SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____getitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::Time > > const *self,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i){
+      return *(swig::cgetpos(self, i));
+    }
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setitem____SWIG_2(std::vector< boost::shared_ptr< GeoCal::Time > > *self,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &x){
+      *(swig::getpos(self,i)) = x;
+    }
+SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg__append(std::vector< boost::shared_ptr< GeoCal::Time > > *self,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &x){
+      self->push_back(x);
+    }
+
+namespace swig {
+  template <>
+  struct traits_asptr<std::vector<GeoCal::Time> >  {
+    static int asptr(PyObject *obj, 
+		     std::vector<GeoCal::Time> **vec) {
+      // Long name, so shorten
+      typedef std::vector<GeoCal::Time> vtype;
+      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
+	vtype *p;
+	if (::SWIG_ConvertPtr(obj,(void**)&p,
+			      swig::type_info<vtype>(),0) == SWIG_OK) {
+	  if (vec) *vec = p;
+	  return SWIG_OLDOBJ;
+	}
+      } else if (PySequence_Check(obj)) {
+	try {
+	  if (vec) {
+	    vtype *pseq = new vtype();
+	    PyObject *iterator = PyObject_GetIter(obj);
+	    while(PyObject *item = PyIter_Next(iterator)) {
+	      boost::shared_ptr<GeoCal::Time> *itemp;
+	      int newmem = 0;
+	      int res = SWIG_ConvertPtrAndOwn(item, (void**) &itemp, 
+					      swig::type_info<boost::shared_ptr<GeoCal::Time> >(),  0, &newmem);
+	      if(!SWIG_IsOK(res)) {
+		Py_DECREF(item);
+		Py_DECREF(iterator);
+		return SWIG_ERROR;
+	      }
+	      pseq->push_back(**itemp);
+	      Py_DECREF(item);
+	    }
+	    Py_DECREF(iterator);
+	    *vec = pseq;
+	    return SWIG_NEWOBJ;
+	  } else {
+	    SwigPySequence_Cont<boost::shared_ptr<GeoCal::Time> > swigpyseq(obj);
+	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
+	  }
+	} catch (std::exception& e) {
+	  if (vec) {
+	    if (!PyErr_Occurred()) {
+	      PyErr_SetString(PyExc_TypeError, e.what());
+	    }
+	  }
+	  return SWIG_ERROR;
+	}
+      }
+      return SWIG_ERROR;
+    }
+  };
+}
+
+
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
 
 
   #define SWIG_From_double   PyFloat_FromDouble 
@@ -6268,6 +6532,4322 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_Vector_Time_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  PyObject **arg2 = (PyObject **) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  swig::SwigPyIterator *result = 0 ;
+  
+  arg2 = &swig_obj[0];
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_iterator" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (swig::SwigPyIterator *)std_vector_Sl_GeoCal_Time_Sg__iterator(arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___nonzero__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (bool)std_vector_Sl_GeoCal_Time_Sg____nonzero__((std::vector< GeoCal::Time > const *)arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___bool__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (bool)std_vector_Sl_GeoCal_Time_Sg____bool__((std::vector< GeoCal::Time > const *)arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::size_type result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___len__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = std_vector_Sl_GeoCal_Time_Sg____len__((std::vector< GeoCal::Time > const *)arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::value_type result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_pop" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      try {
+        result = std_vector_Sl_GeoCal_Time_Sg__pop(arg1);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new std::vector< GeoCal::Time >::value_type((std::vector< GeoCal::Time >::value_type &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::difference_type arg2 ;
+  std::vector< GeoCal::Time >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time___getslice__",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___getslice__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time___getslice__" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time___getslice__" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< GeoCal::Time >::difference_type >(val3);
+  {
+    try {
+      try {
+        result = (std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *)std_vector_Sl_GeoCal_Time_Sg____getslice__(arg1,arg2,arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::difference_type arg2 ;
+  std::vector< GeoCal::Time >::difference_type arg3 ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___setslice__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time___setslice__" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time___setslice__" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< GeoCal::Time >::difference_type >(val3);
+  {
+    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
+    res4 = swig::asptr(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_Time___setslice__" "', argument " "4"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time___setslice__" "', argument " "4"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_GeoCal_Time_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg4);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::difference_type arg2 ;
+  std::vector< GeoCal::Time >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___setslice__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time___setslice__" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time___setslice__" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< GeoCal::Time >::difference_type >(val3);
+  {
+    try {
+      try {
+        std_vector_Sl_GeoCal_Time_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___setslice__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time___setslice__",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_Vector_Time___setslice____SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_Vector_Time___setslice____SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time___setslice__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< GeoCal::Time >::__setslice__(std::vector< GeoCal::Time >::difference_type,std::vector< GeoCal::Time >::difference_type,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)\n"
+    "    std::vector< GeoCal::Time >::__setslice__(std::vector< GeoCal::Time >::difference_type,std::vector< GeoCal::Time >::difference_type)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::difference_type arg2 ;
+  std::vector< GeoCal::Time >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time___delslice__",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___delslice__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time___delslice__" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time___delslice__" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< GeoCal::Time >::difference_type >(val3);
+  {
+    try {
+      try {
+        std_vector_Sl_GeoCal_Time_Sg____delslice__(arg1,arg2,arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___delitem__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time___delitem__" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::difference_type >(val2);
+  {
+    try {
+      try {
+        std_vector_Sl_GeoCal_Time_Sg____delitem____SWIG_0(arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___getitem__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    if (!PySlice_Check(swig_obj[1])) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) swig_obj[1];
+  }
+  {
+    try {
+      try {
+        result = (std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *)std_vector_Sl_GeoCal_Time_Sg____getitem____SWIG_0(arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___setitem__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    if (!PySlice_Check(swig_obj[1])) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) swig_obj[1];
+  }
+  {
+    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
+    res3 = swig::asptr(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time___setitem__" "', argument " "3"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time___setitem__" "', argument " "3"" of type '" "std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_GeoCal_Time_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)*arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___setitem__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    if (!PySlice_Check(swig_obj[1])) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) swig_obj[1];
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_GeoCal_Time_Sg____setitem____SWIG_1(arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___delitem__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    if (!PySlice_Check(swig_obj[1])) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) swig_obj[1];
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_GeoCal_Time_Sg____delitem____SWIG_1(arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___delitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time___delitem__",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+    }
+    if (!_v) goto check_1;
+    return _wrap_Vector_Time___delitem____SWIG_1(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_Vector_Time___delitem____SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time___delitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< GeoCal::Time >::__delitem__(std::vector< GeoCal::Time >::difference_type)\n"
+    "    std::vector< GeoCal::Time >::__delitem__(PySliceObject *)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  std::vector< GeoCal::Time >::value_type *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___getitem__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time___getitem__" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::difference_type >(val2);
+  {
+    try {
+      try {
+        result = (std::vector< GeoCal::Time >::value_type *) &std_vector_Sl_GeoCal_Time_Sg____getitem____SWIG_1((std::vector< GeoCal::Time > const *)arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr< const GeoCal::Time > *smartresult = new boost::shared_ptr< const GeoCal::Time >(result SWIG_NO_NULL_DELETER_0);
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___getitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time___getitem__",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+    }
+    if (!_v) goto check_1;
+    return _wrap_Vector_Time___getitem____SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_Vector_Time___getitem____SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time___getitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< GeoCal::Time >::__getitem__(PySliceObject *)\n"
+    "    std::vector< GeoCal::Time >::__getitem__(std::vector< GeoCal::Time >::difference_type) const\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::difference_type arg2 ;
+  std::vector< GeoCal::Time >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time___setitem__" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time___setitem__" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::difference_type >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time___setitem__" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time___setitem__" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< std::vector< GeoCal::Time >::value_type * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< std::vector< GeoCal::Time >::value_type * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_GeoCal_Time_Sg____setitem____SWIG_2(arg1,arg2,(GeoCal::Time const &)*arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time___setitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time___setitem__",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_Vector_Time___setitem____SWIG_1(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      int res = swig::asptr(argv[2], (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    return _wrap_Vector_Time___setitem____SWIG_0(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 3) {
+    return _wrap_Vector_Time___setitem____SWIG_2(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time___setitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< GeoCal::Time >::__setitem__(PySliceObject *,std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > const &)\n"
+    "    std::vector< GeoCal::Time >::__setitem__(PySliceObject *)\n"
+    "    std::vector< GeoCal::Time >::__setitem__(std::vector< GeoCal::Time >::difference_type,std::vector< GeoCal::Time >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time_append",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_append" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Time_append" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time_append" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< std::vector< GeoCal::Time >::value_type * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< std::vector< GeoCal::Time >::value_type * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      std_vector_Sl_GeoCal_Time_Sg__append(arg1,(GeoCal::Time const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *result = 0 ;
+  
+  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
+  {
+    try {
+      result = (std::vector< GeoCal::Time > *)new std::vector< GeoCal::Time >();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  std::vector< GeoCal::Time > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *ptr = (std::vector<GeoCal::Time,std::allocator< GeoCal::Time > > *)0;
+    res1 = swig::asptr(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Vector_Time" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Vector_Time" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = (std::vector< GeoCal::Time > *)new std::vector< GeoCal::Time >((std::vector< GeoCal::Time > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_empty" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (bool)((std::vector< GeoCal::Time > const *)arg1)->empty();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::size_type result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_size" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = ((std::vector< GeoCal::Time > const *)arg1)->size();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_clear" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      (arg1)->clear();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time_swap",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_swap" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Time_swap" "', argument " "2"" of type '" "std::vector< GeoCal::Time > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time_swap" "', argument " "2"" of type '" "std::vector< GeoCal::Time > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp2);
+  {
+    try {
+      (arg1)->swap(*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< std::allocator< GeoCal::Time > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_get_allocator" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = ((std::vector< GeoCal::Time > const *)arg1)->get_allocator();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new std::vector< GeoCal::Time >::allocator_type(static_cast< const std::vector< GeoCal::Time >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::iterator result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_begin" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (arg1)->begin();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< GeoCal::Time >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::iterator result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_end" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (arg1)->end();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< GeoCal::Time >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::reverse_iterator result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_rbegin" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (arg1)->rbegin();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< GeoCal::Time >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::reverse_iterator result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_rend" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (arg1)->rend();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< GeoCal::Time >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time >::size_type arg1 ;
+  size_t val1 ;
+  int ecode1 = 0 ;
+  std::vector< GeoCal::Time > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_Time" "', argument " "1"" of type '" "std::vector< GeoCal::Time >::size_type""'");
+  } 
+  arg1 = static_cast< std::vector< GeoCal::Time >::size_type >(val1);
+  {
+    try {
+      result = (std::vector< GeoCal::Time > *)new std::vector< GeoCal::Time >(arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_pop_back" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      (arg1)->pop_back();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::size_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_resize" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time_resize" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::size_type >(val2);
+  {
+    try {
+      (arg1)->resize(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::iterator arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  std::vector< GeoCal::Time >::iterator result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_erase" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_erase" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_erase" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+    }
+  }
+  {
+    try {
+      result = (arg1)->erase(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< GeoCal::Time >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::iterator arg2 ;
+  std::vector< GeoCal::Time >::iterator arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  swig::SwigPyIterator *iter3 = 0 ;
+  int res3 ;
+  std::vector< GeoCal::Time >::iterator result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_erase" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_erase" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_erase" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+    }
+  }
+  res3 = SWIG_ConvertPtr(swig_obj[2], SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res3) || !iter3) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_erase" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *>(iter3);
+    if (iter_t) {
+      arg3 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_erase" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+    }
+  }
+  {
+    try {
+      result = (arg1)->erase(arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< GeoCal::Time >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_erase(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time_erase",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_Vector_Time_erase__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_Vector_Time_erase__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time_erase'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< GeoCal::Time >::erase(std::vector< GeoCal::Time >::iterator)\n"
+    "    std::vector< GeoCal::Time >::erase(std::vector< GeoCal::Time >::iterator,std::vector< GeoCal::Time >::iterator)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time >::size_type arg1 ;
+  std::vector< GeoCal::Time >::value_type *arg2 = 0 ;
+  size_t val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  std::vector< GeoCal::Time > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_Time" "', argument " "1"" of type '" "std::vector< GeoCal::Time >::size_type""'");
+  } 
+  arg1 = static_cast< std::vector< GeoCal::Time >::size_type >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Vector_Time" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Vector_Time" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< std::vector< GeoCal::Time >::value_type * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< std::vector< GeoCal::Time >::value_type * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (std::vector< GeoCal::Time > *)new std::vector< GeoCal::Time >(arg1,(std::vector< GeoCal::Time >::value_type const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_Vector_Time",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 0) {
+    return _wrap_new_Vector_Time__SWIG_0(self, argc, argv);
+  }
+  if (argc == 1) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_size_t(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_2;
+    return _wrap_new_Vector_Time__SWIG_2(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 1) {
+    return _wrap_new_Vector_Time__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_Vector_Time__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Vector_Time'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< GeoCal::Time >::vector()\n"
+    "    std::vector< GeoCal::Time >::vector(std::vector< GeoCal::Time > const &)\n"
+    "    std::vector< GeoCal::Time >::vector(std::vector< GeoCal::Time >::size_type)\n"
+    "    std::vector< GeoCal::Time >::vector(std::vector< GeoCal::Time >::size_type,std::vector< GeoCal::Time >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time_push_back",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_push_back" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Time_push_back" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time_push_back" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< std::vector< GeoCal::Time >::value_type * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< std::vector< GeoCal::Time >::value_type * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->push_back((std::vector< GeoCal::Time >::value_type const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::value_type *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_front" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (std::vector< GeoCal::Time >::value_type *) &((std::vector< GeoCal::Time > const *)arg1)->front();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr< const GeoCal::Time > *smartresult = new boost::shared_ptr< const GeoCal::Time >(result SWIG_NO_NULL_DELETER_0);
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::value_type *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_back" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = (std::vector< GeoCal::Time >::value_type *) &((std::vector< GeoCal::Time > const *)arg1)->back();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    boost::shared_ptr< const GeoCal::Time > *smartresult = new boost::shared_ptr< const GeoCal::Time >(result SWIG_NO_NULL_DELETER_0);
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::size_type arg2 ;
+  std::vector< GeoCal::Time >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time_assign",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_assign" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time_assign" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::size_type >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time_assign" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time_assign" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< std::vector< GeoCal::Time >::value_type * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< std::vector< GeoCal::Time >::value_type * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->assign(arg2,(std::vector< GeoCal::Time >::value_type const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::size_type arg2 ;
+  std::vector< GeoCal::Time >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_resize" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time_resize" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::size_type >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time_resize" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time_resize" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< std::vector< GeoCal::Time >::value_type * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< std::vector< GeoCal::Time >::value_type * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->resize(arg2,(std::vector< GeoCal::Time >::value_type const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_resize(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time_resize",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_Vector_Time_resize__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_Vector_Time_resize__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time_resize'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< GeoCal::Time >::resize(std::vector< GeoCal::Time >::size_type)\n"
+    "    std::vector< GeoCal::Time >::resize(std::vector< GeoCal::Time >::size_type,std::vector< GeoCal::Time >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::iterator arg2 ;
+  std::vector< GeoCal::Time >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  std::vector< GeoCal::Time >::iterator result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_insert" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_insert" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_insert" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time_insert" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time_insert" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< std::vector< GeoCal::Time >::value_type * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< std::vector< GeoCal::Time >::value_type * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (arg1)->insert(arg2,(std::vector< GeoCal::Time >::value_type const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< GeoCal::Time >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::iterator arg2 ;
+  std::vector< GeoCal::Time >::size_type arg3 ;
+  std::vector< GeoCal::Time >::value_type *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  size_t val3 ;
+  int ecode3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared4 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_insert" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_insert" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< GeoCal::Time >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time_insert" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::iterator""'");
+    }
+  }
+  ecode3 = SWIG_AsVal_size_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time_insert" "', argument " "3"" of type '" "std::vector< GeoCal::Time >::size_type""'");
+  } 
+  arg3 = static_cast< std::vector< GeoCal::Time >::size_type >(val3);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_Time_insert" "', argument " "4"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time_insert" "', argument " "4"" of type '" "std::vector< GeoCal::Time >::value_type const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp4);
+        arg4 = const_cast< std::vector< GeoCal::Time >::value_type * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< std::vector< GeoCal::Time >::value_type * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->insert(arg2,arg3,(std::vector< GeoCal::Time >::value_type const &)*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_insert(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time_insert",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_Vector_Time_insert__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_Vector_Time_insert__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time_insert'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< GeoCal::Time >::insert(std::vector< GeoCal::Time >::iterator,std::vector< GeoCal::Time >::value_type const &)\n"
+    "    std::vector< GeoCal::Time >::insert(std::vector< GeoCal::Time >::iterator,std::vector< GeoCal::Time >::size_type,std::vector< GeoCal::Time >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_reserve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  std::vector< GeoCal::Time >::size_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time_reserve",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_reserve" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time_reserve" "', argument " "2"" of type '" "std::vector< GeoCal::Time >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< GeoCal::Time >::size_type >(val2);
+  {
+    try {
+      (arg1)->reserve(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time_capacity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time >::size_type result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time_capacity" "', argument " "1"" of type '" "std::vector< GeoCal::Time > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      result = ((std::vector< GeoCal::Time > const *)arg1)->capacity();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Vector_Time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< GeoCal::Time > *arg1 = (std::vector< GeoCal::Time > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Vector_Time" "', argument " "1"" of type '" "std::vector< GeoCal::Time > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< GeoCal::Time > * >(argp1);
+  {
+    try {
+      delete arg1;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Vector_Time_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *Vector_Time_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  PyObject **arg2 = (PyObject **) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  swig::SwigPyIterator *result = 0 ;
+  
+  arg2 = &swig_obj[0];
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_iterator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg__iterator(arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___nonzero__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___bool__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___len__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_pop" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      try {
+        result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg__pop(arg1);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time2___getslice__",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___getslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2___getslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time2___getslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val3);
+  {
+    try {
+      try {
+        result = (std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____getslice__(arg1,arg2,arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg3 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2___setslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time2___setslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val3);
+  {
+    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
+    res4 = swig::asptr(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_Time2___setslice__" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time2___setslice__" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)*arg4);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2___setslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time2___setslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val3);
+  {
+    try {
+      try {
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___setslice__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time2___setslice__",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_Vector_Time2___setslice____SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_Vector_Time2___setslice____SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time2___setslice__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__setslice__(std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type,std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__setslice__(std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type,std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time2___delslice__",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___delslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2___delslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time2___delslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val3);
+  {
+    try {
+      try {
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____delslice__(arg1,arg2,arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2___delitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val2);
+  {
+    try {
+      try {
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____delitem____SWIG_0(arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    if (!PySlice_Check(swig_obj[1])) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) swig_obj[1];
+  }
+  {
+    try {
+      try {
+        result = (std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____getitem____SWIG_0(arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    if (!PySlice_Check(swig_obj[1])) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) swig_obj[1];
+  }
+  {
+    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
+    res3 = swig::asptr(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time2___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time2___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setitem____SWIG_0(arg1,arg2,(std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)*arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    if (!PySlice_Check(swig_obj[1])) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) swig_obj[1];
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setitem____SWIG_1(arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    if (!PySlice_Check(swig_obj[1])) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) swig_obj[1];
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____delitem____SWIG_1(arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      catch(std::invalid_argument &_e) {
+        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___delitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time2___delitem__",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+    }
+    if (!_v) goto check_1;
+    return _wrap_Vector_Time2___delitem____SWIG_1(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_Vector_Time2___delitem____SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time2___delitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__delitem__(std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__delitem__(PySliceObject *)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2___getitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val2);
+  {
+    try {
+      try {
+        result = (std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *) &std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____getitem____SWIG_1((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1,arg2);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___getitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time2___getitem__",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+    }
+    if (!_v) goto check_1;
+    return _wrap_Vector_Time2___getitem____SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_Vector_Time2___getitem____SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time2___getitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__getitem__(PySliceObject *)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__getitem__(std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type) const\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type tempshared3 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type temp2shared3 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2___setitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type >(val2);
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time2___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    try {
+      try {
+        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg____setitem____SWIG_2(arg1,arg2,(boost::shared_ptr< GeoCal::Time > const &)*arg3);
+      }
+      catch(std::out_of_range &_e) {
+        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+      }
+      
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2___setitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time2___setitem__",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_Vector_Time2___setitem____SWIG_1(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      int res = swig::asptr(argv[2], (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    return _wrap_Vector_Time2___setitem____SWIG_0(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 3) {
+    return _wrap_Vector_Time2___setitem____SWIG_2(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time2___setitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__setitem__(PySliceObject *,std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > const &)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__setitem__(PySliceObject *)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::__setitem__(std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type tempshared2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type temp2shared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time2_append",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_append" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Time2_append" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::Time > const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *result = 0 ;
+  
+  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
+  {
+    try {
+      result = (std::vector< boost::shared_ptr< GeoCal::Time > > *)new std::vector< boost::shared_ptr< GeoCal::Time > >();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *)0;
+    res1 = swig::asptr(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Vector_Time2" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Vector_Time2" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = (std::vector< boost::shared_ptr< GeoCal::Time > > *)new std::vector< boost::shared_ptr< GeoCal::Time > >((std::vector< boost::shared_ptr< GeoCal::Time > > const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_empty" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (bool)((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1)->empty();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_size" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = ((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1)->size();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_clear" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      (arg1)->clear();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time2_swap",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_swap" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Time2_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_Time2_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp2);
+  {
+    try {
+      (arg1)->swap(*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< std::allocator< boost::shared_ptr< GeoCal::Time > > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_get_allocator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = ((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1)->get_allocator();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new std::vector< boost::shared_ptr< GeoCal::Time > >::allocator_type(static_cast< const std::vector< boost::shared_ptr< GeoCal::Time > >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_begin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (arg1)->begin();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Time > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_end" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (arg1)->end();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Time > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_rbegin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (arg1)->rbegin();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_rend" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (arg1)->rend();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type arg1 ;
+  size_t val1 ;
+  int ecode1 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_Time2" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::size_type""'");
+  } 
+  arg1 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::size_type >(val1);
+  {
+    try {
+      result = (std::vector< boost::shared_ptr< GeoCal::Time > > *)new std::vector< boost::shared_ptr< GeoCal::Time > >(arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_pop_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      (arg1)->pop_back();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2_resize" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::size_type >(val2);
+  {
+    try {
+      (arg1)->resize(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+    }
+  }
+  {
+    try {
+      result = (arg1)->erase(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Time > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  swig::SwigPyIterator *iter3 = 0 ;
+  int res3 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+    }
+  }
+  res3 = SWIG_ConvertPtr(swig_obj[2], SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res3) || !iter3) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_erase" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *>(iter3);
+    if (iter_t) {
+      arg3 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_erase" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+    }
+  }
+  {
+    try {
+      result = (arg1)->erase(arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Time > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_erase(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time2_erase",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_Vector_Time2_erase__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_Vector_Time2_erase__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time2_erase'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::erase(std::vector< boost::shared_ptr< GeoCal::Time > >::iterator)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::erase(std::vector< boost::shared_ptr< GeoCal::Time > >::iterator,std::vector< boost::shared_ptr< GeoCal::Time > >::iterator)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type arg1 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *arg2 = 0 ;
+  size_t val1 ;
+  int ecode1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type tempshared2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type temp2shared2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_Time2" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::size_type""'");
+  } 
+  arg1 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::size_type >(val1);
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Vector_Time2" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      result = (std::vector< boost::shared_ptr< GeoCal::Time > > *)new std::vector< boost::shared_ptr< GeoCal::Time > >(arg1,(std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Vector_Time2(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_Vector_Time2",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 0) {
+    return _wrap_new_Vector_Time2__SWIG_0(self, argc, argv);
+  }
+  if (argc == 1) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_size_t(argv[0], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_2;
+    return _wrap_new_Vector_Time2__SWIG_2(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 1) {
+    return _wrap_new_Vector_Time2__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_Vector_Time2__SWIG_3(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Vector_Time2'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::vector()\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::vector(std::vector< boost::shared_ptr< GeoCal::Time > > const &)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::vector(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::vector(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type tempshared2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type temp2shared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time2_push_back",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_push_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_Time2_push_back" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_front" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1)->front();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = (std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1)->back();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type tempshared3 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type temp2shared3 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time2_assign",3,3,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_assign" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2_assign" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::size_type >(val2);
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time2_assign" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    try {
+      (arg1)->assign(arg2,(std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type tempshared3 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type temp2shared3 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2_resize" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::size_type >(val2);
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time2_resize" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    try {
+      (arg1)->resize(arg2,(std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_resize(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time2_resize",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_Vector_Time2_resize__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_Vector_Time2_resize__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time2_resize'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::resize(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::resize(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type tempshared3 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type temp2shared3 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+    }
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_Time2_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    try {
+      result = (arg1)->insert(arg2,(std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::Time > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::iterator arg2 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type arg3 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  size_t val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type tempshared4 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::value_type temp2shared4 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::Time > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_Time2_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::iterator""'");
+    }
+  }
+  ecode3 = SWIG_AsVal_size_t(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_Time2_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::size_type""'");
+  } 
+  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::size_type >(val3);
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_Time2_insert" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp4);
+      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
+    try {
+      (arg1)->insert(arg2,arg3,(std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)*arg4);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_insert(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_Time2_insert",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_Vector_Time2_insert__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_Vector_Time2_insert__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_Time2_insert'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::insert(std::vector< boost::shared_ptr< GeoCal::Time > >::iterator,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)\n"
+    "    std::vector< boost::shared_ptr< GeoCal::Time > >::insert(std::vector< boost::shared_ptr< GeoCal::Time > >::iterator,std::vector< boost::shared_ptr< GeoCal::Time > >::size_type,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_reserve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Vector_Time2_reserve",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_reserve" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_Time2_reserve" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::size_type >(val2);
+  {
+    try {
+      (arg1)->reserve(arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Vector_Time2_capacity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< boost::shared_ptr< GeoCal::Time > >::size_type result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_Time2_capacity" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      result = ((std::vector< boost::shared_ptr< GeoCal::Time > > const *)arg1)->capacity();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Vector_Time2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::Time > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::Time > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Vector_Time2" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::Time > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > > * >(argp1);
+  {
+    try {
+      delete arg1;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Vector_Time2_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *Vector_Time2_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 SWIGINTERN PyObject *_wrap_PiecewiseLinear_FunctionType_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PiecewiseLinear *arg1 = (GeoCal::PiecewiseLinear *) 0 ;
@@ -6585,6 +11165,76 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_iterator", (PyCFunction)_wrap_Vector_Time_iterator, METH_O, NULL},
+	 { (char *)"Vector_Time___nonzero__", (PyCFunction)_wrap_Vector_Time___nonzero__, METH_O, NULL},
+	 { (char *)"Vector_Time___bool__", (PyCFunction)_wrap_Vector_Time___bool__, METH_O, NULL},
+	 { (char *)"Vector_Time___len__", (PyCFunction)_wrap_Vector_Time___len__, METH_O, NULL},
+	 { (char *)"Vector_Time_pop", (PyCFunction)_wrap_Vector_Time_pop, METH_O, NULL},
+	 { (char *)"Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_empty", (PyCFunction)_wrap_Vector_Time_empty, METH_O, NULL},
+	 { (char *)"Vector_Time_size", (PyCFunction)_wrap_Vector_Time_size, METH_O, NULL},
+	 { (char *)"Vector_Time_clear", (PyCFunction)_wrap_Vector_Time_clear, METH_O, NULL},
+	 { (char *)"Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_get_allocator", (PyCFunction)_wrap_Vector_Time_get_allocator, METH_O, NULL},
+	 { (char *)"Vector_Time_begin", (PyCFunction)_wrap_Vector_Time_begin, METH_O, NULL},
+	 { (char *)"Vector_Time_end", (PyCFunction)_wrap_Vector_Time_end, METH_O, NULL},
+	 { (char *)"Vector_Time_rbegin", (PyCFunction)_wrap_Vector_Time_rbegin, METH_O, NULL},
+	 { (char *)"Vector_Time_rend", (PyCFunction)_wrap_Vector_Time_rend, METH_O, NULL},
+	 { (char *)"Vector_Time_pop_back", (PyCFunction)_wrap_Vector_Time_pop_back, METH_O, NULL},
+	 { (char *)"Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, NULL},
+	 { (char *)"new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_front", (PyCFunction)_wrap_Vector_Time_front, METH_O, NULL},
+	 { (char *)"Vector_Time_back", (PyCFunction)_wrap_Vector_Time_back, METH_O, NULL},
+	 { (char *)"Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_capacity", (PyCFunction)_wrap_Vector_Time_capacity, METH_O, NULL},
+	 { (char *)"delete_Vector_Time", (PyCFunction)_wrap_delete_Vector_Time, METH_O, NULL},
+	 { (char *)"Vector_Time_swigregister", Vector_Time_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time_swiginit", Vector_Time_swiginit, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_iterator", (PyCFunction)_wrap_Vector_Time2_iterator, METH_O, NULL},
+	 { (char *)"Vector_Time2___nonzero__", (PyCFunction)_wrap_Vector_Time2___nonzero__, METH_O, NULL},
+	 { (char *)"Vector_Time2___bool__", (PyCFunction)_wrap_Vector_Time2___bool__, METH_O, NULL},
+	 { (char *)"Vector_Time2___len__", (PyCFunction)_wrap_Vector_Time2___len__, METH_O, NULL},
+	 { (char *)"Vector_Time2_pop", (PyCFunction)_wrap_Vector_Time2_pop, METH_O, NULL},
+	 { (char *)"Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_empty", (PyCFunction)_wrap_Vector_Time2_empty, METH_O, NULL},
+	 { (char *)"Vector_Time2_size", (PyCFunction)_wrap_Vector_Time2_size, METH_O, NULL},
+	 { (char *)"Vector_Time2_clear", (PyCFunction)_wrap_Vector_Time2_clear, METH_O, NULL},
+	 { (char *)"Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_get_allocator", (PyCFunction)_wrap_Vector_Time2_get_allocator, METH_O, NULL},
+	 { (char *)"Vector_Time2_begin", (PyCFunction)_wrap_Vector_Time2_begin, METH_O, NULL},
+	 { (char *)"Vector_Time2_end", (PyCFunction)_wrap_Vector_Time2_end, METH_O, NULL},
+	 { (char *)"Vector_Time2_rbegin", (PyCFunction)_wrap_Vector_Time2_rbegin, METH_O, NULL},
+	 { (char *)"Vector_Time2_rend", (PyCFunction)_wrap_Vector_Time2_rend, METH_O, NULL},
+	 { (char *)"Vector_Time2_pop_back", (PyCFunction)_wrap_Vector_Time2_pop_back, METH_O, NULL},
+	 { (char *)"Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, NULL},
+	 { (char *)"new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_front", (PyCFunction)_wrap_Vector_Time2_front, METH_O, NULL},
+	 { (char *)"Vector_Time2_back", (PyCFunction)_wrap_Vector_Time2_back, METH_O, NULL},
+	 { (char *)"Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_capacity", (PyCFunction)_wrap_Vector_Time2_capacity, METH_O, NULL},
+	 { (char *)"delete_Vector_Time2", (PyCFunction)_wrap_delete_Vector_Time2, METH_O, NULL},
+	 { (char *)"Vector_Time2_swigregister", Vector_Time2_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
 	 { (char *)"PiecewiseLinear_FunctionType_set", _wrap_PiecewiseLinear_FunctionType_set, METH_VARARGS, NULL},
 	 { (char *)"PiecewiseLinear_FunctionType_get", (PyCFunction)_wrap_PiecewiseLinear_FunctionType_get, METH_O, NULL},
 	 { (char *)"new_PiecewiseLinear", _wrap_new_PiecewiseLinear, METH_VARARGS, (char *)"\n"
@@ -6608,47 +11258,6 @@ static PyMethodDef SwigMethods[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::WithParameterNested > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::PiecewiseLinear > *)x);
-}
-static void *_p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *)  ((GeoCal::WithParameterNested *) x));
-}
-static void *_p_GeoCal__PiecewiseLinearTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *)  ((GeoCal::PiecewiseLinear *) x));
-}
-static void *_p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::TimeWithDerivative *) x));
-}
-static void *_p_GeoCal__WithParameterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::WithParameter *) x));
-}
-static void *_p_GeoCal__WithParameterNestedTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::WithParameterNested *) x));
-}
-static void *_p_GeoCal__TimeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Time *) x));
-}
-static void *_p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivative< double > *) x));
-}
-static void *_p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivativeRef< double > *) x));
-}
-static void *_p_GeoCal__PiecewiseLinearTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::PiecewiseLinear *) x));
-}
-static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
-}
-static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
-}
 static void *_p_boost__shared_ptrT_GeoCal__WithParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::WithParameter > *)x);
@@ -6676,6 +11285,47 @@ static void *_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__share
 static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *)x);
+}
+static void *_p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::TimeWithDerivative *) x));
+}
+static void *_p_GeoCal__WithParameterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::WithParameter *) x));
+}
+static void *_p_GeoCal__WithParameterNestedTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::WithParameterNested *) x));
+}
+static void *_p_GeoCal__TimeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Time *) x));
+}
+static void *_p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivative< double > *) x));
+}
+static void *_p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivativeRef< double > *) x));
+}
+static void *_p_GeoCal__PiecewiseLinearTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::PiecewiseLinear *) x));
+}
+static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
+}
+static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
+}
+static void *_p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::WithParameterNested > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::PiecewiseLinear > *)x);
+}
+static void *_p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *)  ((GeoCal::WithParameterNested *) x));
+}
+static void *_p_GeoCal__PiecewiseLinearTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::WithParameter *)  ((GeoCal::PiecewiseLinear *) x));
 }
 static swig_type_info _swigt__p_GeoCal__ArrayAdT_double_1_t = {"_p_GeoCal__ArrayAdT_double_1_t", "GeoCal::ArrayAd< double,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ArrayAdT_double_2_t = {"_p_GeoCal__ArrayAdT_double_2_t", "GeoCal::ArrayAd< double,2 > *", 0, 0, (void*)0, 0};
@@ -6734,15 +11384,21 @@ static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_off_type = {"_p_off_type", "off_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_openmode = {"_p_openmode", "openmode *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_p_PyObject = {"_p_p_PyObject", "PyObject **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_pos_type = {"_p_pos_type", "pos_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_seekdir = {"_p_seekdir", "seekdir *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_t = {"_p_size_t", "std::streamsize *|size_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_state_type = {"_p_state_type", "state_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__allocatorT_GeoCal__Time_t = {"_p_std__allocatorT_GeoCal__Time_t", "std::allocator< GeoCal::Time > *|std::vector< GeoCal::Time >::allocator_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t = {"_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t", "std::vector< boost::shared_ptr< GeoCal::Time > >::allocator_type *|std::allocator< boost::shared_ptr< GeoCal::Time > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t", "std::basic_iostream< char,std::char_traits< char > > *|std::iostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_istreamT_char_std__char_traitsT_char_t_t", "std::basic_istream< char,std::char_traits< char > > *|std::istream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t", "std::basic_ostream< char,std::char_traits< char > > *|std::ostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t = {"_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t", "std::vector< GeoCal::Time > *|std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT__Tp__Alloc_t = {"_p_std__vectorT__Tp__Alloc_t", "std::vector< _Tp,_Alloc > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t = {"_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t", "std::vector< boost::shared_ptr< GeoCal::Time > > *|std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
@@ -6805,15 +11461,21 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iostate,
   &_swigt__p_off_type,
   &_swigt__p_openmode,
+  &_swigt__p_p_PyObject,
   &_swigt__p_pos_type,
   &_swigt__p_seekdir,
   &_swigt__p_size_t,
   &_swigt__p_size_type,
   &_swigt__p_state_type,
+  &_swigt__p_std__allocatorT_GeoCal__Time_t,
+  &_swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t,
   &_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__invalid_argument,
+  &_swigt__p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t,
+  &_swigt__p_std__vectorT__Tp__Alloc_t,
+  &_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_traits_type,
   &_swigt__p_value_type,
@@ -6876,15 +11538,21 @@ static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_off_type[] = {  {&_swigt__p_off_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_openmode[] = {  {&_swigt__p_openmode, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_p_PyObject[] = {  {&_swigt__p_p_PyObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_pos_type[] = {  {&_swigt__p_pos_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_seekdir[] = {  {&_swigt__p_seekdir, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_t[] = {  {&_swigt__p_size_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_state_type[] = {  {&_swigt__p_state_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__allocatorT_GeoCal__Time_t[] = {  {&_swigt__p_std__allocatorT_GeoCal__Time_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t[] = {  {&_swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t[] = {  {&_swigt__p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT__Tp__Alloc_t[] = {  {&_swigt__p_std__vectorT__Tp__Alloc_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t[] = {  {&_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -6947,15 +11615,21 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iostate,
   _swigc__p_off_type,
   _swigc__p_openmode,
+  _swigc__p_p_PyObject,
   _swigc__p_pos_type,
   _swigc__p_seekdir,
   _swigc__p_size_t,
   _swigc__p_size_type,
   _swigc__p_state_type,
+  _swigc__p_std__allocatorT_GeoCal__Time_t,
+  _swigc__p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t,
   _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__invalid_argument,
+  _swigc__p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t,
+  _swigc__p_std__vectorT__Tp__Alloc_t,
+  _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_traits_type,
   _swigc__p_value_type,

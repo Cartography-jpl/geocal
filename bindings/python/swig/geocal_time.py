@@ -507,49 +507,5 @@ def TimeWithDerivative_time_gps(*args):
     """
   return _geocal_time.TimeWithDerivative_time_gps(*args)
 
-class Vector_Time(object):
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-    def __iter__(self): return self.iterator()
-    def __init__(self, *args): 
-        _geocal_time.Vector_Time_swiginit(self,_geocal_time.new_Vector_Time(*args))
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-    __swig_destroy__ = _geocal_time.delete_Vector_Time
-Vector_Time.iterator = new_instancemethod(_geocal_time.Vector_Time_iterator,None,Vector_Time)
-Vector_Time.__nonzero__ = new_instancemethod(_geocal_time.Vector_Time___nonzero__,None,Vector_Time)
-Vector_Time.__bool__ = new_instancemethod(_geocal_time.Vector_Time___bool__,None,Vector_Time)
-Vector_Time.__len__ = new_instancemethod(_geocal_time.Vector_Time___len__,None,Vector_Time)
-Vector_Time.pop = new_instancemethod(_geocal_time.Vector_Time_pop,None,Vector_Time)
-Vector_Time.__getslice__ = new_instancemethod(_geocal_time.Vector_Time___getslice__,None,Vector_Time)
-Vector_Time.__setslice__ = new_instancemethod(_geocal_time.Vector_Time___setslice__,None,Vector_Time)
-Vector_Time.__delslice__ = new_instancemethod(_geocal_time.Vector_Time___delslice__,None,Vector_Time)
-Vector_Time.__delitem__ = new_instancemethod(_geocal_time.Vector_Time___delitem__,None,Vector_Time)
-Vector_Time.__getitem__ = new_instancemethod(_geocal_time.Vector_Time___getitem__,None,Vector_Time)
-Vector_Time.__setitem__ = new_instancemethod(_geocal_time.Vector_Time___setitem__,None,Vector_Time)
-Vector_Time.append = new_instancemethod(_geocal_time.Vector_Time_append,None,Vector_Time)
-Vector_Time.empty = new_instancemethod(_geocal_time.Vector_Time_empty,None,Vector_Time)
-Vector_Time.size = new_instancemethod(_geocal_time.Vector_Time_size,None,Vector_Time)
-Vector_Time.clear = new_instancemethod(_geocal_time.Vector_Time_clear,None,Vector_Time)
-Vector_Time.swap = new_instancemethod(_geocal_time.Vector_Time_swap,None,Vector_Time)
-Vector_Time.get_allocator = new_instancemethod(_geocal_time.Vector_Time_get_allocator,None,Vector_Time)
-Vector_Time.begin = new_instancemethod(_geocal_time.Vector_Time_begin,None,Vector_Time)
-Vector_Time.end = new_instancemethod(_geocal_time.Vector_Time_end,None,Vector_Time)
-Vector_Time.rbegin = new_instancemethod(_geocal_time.Vector_Time_rbegin,None,Vector_Time)
-Vector_Time.rend = new_instancemethod(_geocal_time.Vector_Time_rend,None,Vector_Time)
-Vector_Time.pop_back = new_instancemethod(_geocal_time.Vector_Time_pop_back,None,Vector_Time)
-Vector_Time.erase = new_instancemethod(_geocal_time.Vector_Time_erase,None,Vector_Time)
-Vector_Time.push_back = new_instancemethod(_geocal_time.Vector_Time_push_back,None,Vector_Time)
-Vector_Time.front = new_instancemethod(_geocal_time.Vector_Time_front,None,Vector_Time)
-Vector_Time.back = new_instancemethod(_geocal_time.Vector_Time_back,None,Vector_Time)
-Vector_Time.assign = new_instancemethod(_geocal_time.Vector_Time_assign,None,Vector_Time)
-Vector_Time.resize = new_instancemethod(_geocal_time.Vector_Time_resize,None,Vector_Time)
-Vector_Time.insert = new_instancemethod(_geocal_time.Vector_Time_insert,None,Vector_Time)
-Vector_Time.reserve = new_instancemethod(_geocal_time.Vector_Time_reserve,None,Vector_Time)
-Vector_Time.capacity = new_instancemethod(_geocal_time.Vector_Time_capacity,None,Vector_Time)
-Vector_Time_swigregister = _geocal_time.Vector_Time_swigregister
-Vector_Time_swigregister(Vector_Time)
-
 
 

@@ -8,6 +8,7 @@
 %}
 %base_import(with_parameter)
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 %geocal_shared_ptr(GeoCal::PiecewiseLinear);
 
 namespace GeoCal {

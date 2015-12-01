@@ -7,6 +7,8 @@
 #include "air_mspi_l1b1.h"
 %}
 %base_import(raster_image_tiled_file)
+%import "geocal_time.i"
+%include "geocal_time_include.i"
 %geocal_shared_ptr(GeoCal::AirMspiL1b1File);
 %geocal_shared_ptr(GeoCal::AirMspiL1b1);
 

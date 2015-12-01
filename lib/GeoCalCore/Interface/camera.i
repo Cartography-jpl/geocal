@@ -13,6 +13,7 @@
 %import "frame_coordinate.i"
 %import "look_vector.i"
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 %import "array_ad.i"
 %geocal_shared_ptr(GeoCal::Camera);
 %geocal_shared_ptr(GeoCal::SimpleCamera);

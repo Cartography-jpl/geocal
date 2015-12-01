@@ -14,6 +14,7 @@
 %}
 %import "geocal_quaternion.i"
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 namespace GeoCal {
 class SpiceHelper  {
 public:

@@ -262,14 +262,19 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ac_copy_dir.m4 \
 	$(top_srcdir)/config/m4/ac_doxygen.m4 \
 	$(top_srcdir)/config/m4/ac_enable_debug.m4 \
+	$(top_srcdir)/config/m4/ac_expat.m4 \
 	$(top_srcdir)/config/m4/ac_fftw.m4 \
 	$(top_srcdir)/config/m4/ac_gdal.m4 \
+	$(top_srcdir)/config/m4/ac_geos.m4 \
 	$(top_srcdir)/config/m4/ac_gsl.m4 \
 	$(top_srcdir)/config/m4/ac_handle_with_arg.m4 \
 	$(top_srcdir)/config/m4/ac_hdf5.m4 \
 	$(top_srcdir)/config/m4/ac_hdfeos5.m4 \
 	$(top_srcdir)/config/m4/ac_is_mac.m4 \
 	$(top_srcdir)/config/m4/ac_mspi_shared.m4 \
+	$(top_srcdir)/config/m4/ac_ogdi.m4 \
+	$(top_srcdir)/config/m4/ac_openjpeg.m4 \
+	$(top_srcdir)/config/m4/ac_perl_module.m4 \
 	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
 	$(top_srcdir)/config/m4/ac_python.m4 \
 	$(top_srcdir)/config/m4/ac_python_module_with_version.m4 \
@@ -1746,16 +1751,22 @@ ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
+EXPAT_CFLAGS = @EXPAT_CFLAGS@
+EXPAT_LIBS = @EXPAT_LIBS@
+EXPAT_PREFIX = @EXPAT_PREFIX@
 FFTW_CFLAGS = @FFTW_CFLAGS@
 FFTW_LIBS = @FFTW_LIBS@
 FGREP = @FGREP@
 GDAL_CFLAGS = @GDAL_CFLAGS@
 GDAL_LIBS = @GDAL_LIBS@
+GEOS_CFLAGS = @GEOS_CFLAGS@
+GEOS_LIBS = @GEOS_LIBS@
 GREP = @GREP@
 GSL_CFLAGS = @GSL_CFLAGS@
 GSL_LIBS = @GSL_LIBS@
 HAVE_CSH = @HAVE_CSH@
 HAVE_CXX = @HAVE_CXX@
+HAVE_M4 = @HAVE_M4@
 HAVE_PATCH = @HAVE_PATCH@
 HAVE_PERL = @HAVE_PERL@
 HAVE_VICAR_GDALPLUGIN = @HAVE_VICAR_GDALPLUGIN@
@@ -1791,6 +1802,12 @@ NMEDIT = @NMEDIT@
 NOSETESTS = @NOSETESTS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
+OGDI_CFLAGS = @OGDI_CFLAGS@
+OGDI_LIBS = @OGDI_LIBS@
+OGDI_PREFIX = @OGDI_PREFIX@
+OPENJPEG_CFLAGS = @OPENJPEG_CFLAGS@
+OPENJPEG_LIBS = @OPENJPEG_LIBS@
+OPENJPEG_PREFIX = @OPENJPEG_PREFIX@
 OTOOL = @OTOOL@
 OTOOL64 = @OTOOL64@
 PACKAGE = @PACKAGE@

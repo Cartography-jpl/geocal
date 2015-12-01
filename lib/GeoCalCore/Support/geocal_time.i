@@ -272,7 +272,4 @@ public:
 
 }
 
-%template(Vector_Time) std::vector<GeoCal::Time>;
-%extend std::vector<GeoCal::Time> {
-  %pickle_serialization();
-};
+

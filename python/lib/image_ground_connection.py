@@ -24,7 +24,7 @@ class GdalImageGroundConnection(geocal_swig.RpcImageGroundConnection):
     the RPC if desired, just change the values of the attribute
     rpc'''
     def __init__(self, fname, dem, rpc = None, title=None, image_mask=None,
-                 ground_mask=None, fit_height_offset=None):
+                 ground_mask=None, fit_height_offset=False):
         self.fname = fname
         img = GdalMultiBand(fname)
         if(not rpc):
@@ -58,7 +58,7 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
     the RPC if desired, just change the values of the attribute
     rpc'''
     def __init__(self, fname, dem, rpc = None, title=None, image_mask=None,
-                 ground_mask=None, fit_height_offset=None):
+                 ground_mask=None, fit_height_offset=False):
         self.fname = fname
         # Check for multiple bands
         m = re.match(r'(.*)(\d+):(\d+)(.*)', fname)

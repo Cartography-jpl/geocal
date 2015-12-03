@@ -19,6 +19,8 @@ if test "x$want_gdal" = "xyes"; then
         succeeded=no
         if test "$ac_gdal_path" != ""; then
             GDAL_PREFIX="$ac_gdal_path"
+            GDAL_LIBS="-L$ac_gdal_path/lib -lgdal"
+            GDAL_CFLAGS="-I$ac_gdal_path/include"
             succeeded=yes
         else
 	    AC_SEARCH_LIB([GDAL], [gdal], , [gdal.h], , [libgdal], [-lgdal])

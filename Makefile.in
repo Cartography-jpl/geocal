@@ -1907,6 +1907,7 @@ prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
 pyexecdir = @pyexecdir@
+python_bin_name = @python_bin_name@
 pythondir = @pythondir@
 pythondocdir = @pythondocdir@
 pythonswigsrc = @pythonswigsrc@

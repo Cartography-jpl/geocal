@@ -18,11 +18,11 @@ if test "x$want_openjpeg" = "xyes"; then
         succeeded=no
         if test "$ac_openjpeg_path" != ""; then
             OPENJPEG_LIBS="-L$ac_openjpeg_path/lib -lopenjp2"
-            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.0"
+            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.1"
 	    OPENJPEG_PREFIX="$ac_openjpeg_path"
             succeeded=yes
         else
-	    AC_SEARCH_LIB([OPENJPEG], [openjpeg], [openjpeg-2.0/], 
+	    AC_SEARCH_LIB([OPENJPEG], [openjpeg], [openjpeg-2.1/], 
 	                  [openjpeg.h], ,[libopenjp2], [-openjp2])
         fi
 

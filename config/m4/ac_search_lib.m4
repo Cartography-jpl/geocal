@@ -13,7 +13,9 @@ AC_DEFUN([AC_SEARCH_LIB],
 [
   PKG_CHECK_MODULES([$1], [$2], [succeeded=yes], [succeeded=no])
   if test "$succeeded" = "yes"; then
-     [$1][_PREFIX]=`$PKG_CONFIG --variable=prefix "$2" 2>/dev/null`
+     if test -z "$[$1][_PREFIX]"; then
+        [$1][_PREFIX]=`$PKG_CONFIG --variable=prefix "$2" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do

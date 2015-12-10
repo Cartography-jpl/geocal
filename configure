@@ -17185,7 +17185,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     VICAR_RTL_PREFIX=`$PKG_CONFIG --variable=prefix "vicar-rtl" 2>/dev/null`
+     if test -z "$VICAR_RTL_PREFIX"; then
+        VICAR_RTL_PREFIX=`$PKG_CONFIG --variable=prefix "vicar-rtl" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -17467,7 +17469,7 @@ if test "x$want_hdf5" = "xyes"; then
 $as_echo_n "checking for HDF5 library... " >&6; }
         succeeded=no
         if test "$ac_hdf5_path" != ""; then
-            HDF5HOME=$ac_hdf5_path
+            HDF5HOME="$ac_hdf5_path"
             HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
             HDF5_CFLAGS="-I$ac_hdf5_path/include"
             succeeded=yes
@@ -17543,7 +17545,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+     if test -z "$HDF5_PREFIX"; then
+        HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -17571,14 +17575,14 @@ fi
      done
   fi
 
-            HDF5HOME=$HDF5_PREFIX
+            HDF5HOME="$HDF5_PREFIX"
         fi
 
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
         else
-                HDF5_BIN=$HDF5HOME/bin
+                HDF5_BIN="$HDF5HOME/bin"
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 
@@ -17703,7 +17707,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     if test -z "$HDFEOS5_PREFIX"; then
+        HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -17803,7 +17809,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     if test -z "$HDFEOS5_PREFIX"; then
+        HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18446,7 +18454,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     BLITZ_PREFIX=`$PKG_CONFIG --variable=prefix "blitz" 2>/dev/null`
+     if test -z "$BLITZ_PREFIX"; then
+        BLITZ_PREFIX=`$PKG_CONFIG --variable=prefix "blitz" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18638,7 +18648,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     GSL_PREFIX=`$PKG_CONFIG --variable=prefix "gsl" 2>/dev/null`
+     if test -z "$GSL_PREFIX"; then
+        GSL_PREFIX=`$PKG_CONFIG --variable=prefix "gsl" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18836,7 +18848,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     SPICE_PREFIX=`$PKG_CONFIG --variable=prefix "spice" 2>/dev/null`
+     if test -z "$SPICE_PREFIX"; then
+        SPICE_PREFIX=`$PKG_CONFIG --variable=prefix "spice" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18953,7 +18967,7 @@ if test "x$want_hdf5" = "xyes"; then
 $as_echo_n "checking for HDF5 library... " >&6; }
         succeeded=no
         if test "$ac_hdf5_path" != ""; then
-            HDF5HOME=$ac_hdf5_path
+            HDF5HOME="$ac_hdf5_path"
             HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
             HDF5_CFLAGS="-I$ac_hdf5_path/include"
             succeeded=yes
@@ -19029,7 +19043,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+     if test -z "$HDF5_PREFIX"; then
+        HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -19057,14 +19073,14 @@ fi
      done
   fi
 
-            HDF5HOME=$HDF5_PREFIX
+            HDF5HOME="$HDF5_PREFIX"
         fi
 
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
         else
-                HDF5_BIN=$HDF5HOME/bin
+                HDF5_BIN="$HDF5HOME/bin"
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 
@@ -19357,7 +19373,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     FFTW_PREFIX=`$PKG_CONFIG --variable=prefix "fftw3" 2>/dev/null`
+     if test -z "$FFTW_PREFIX"; then
+        FFTW_PREFIX=`$PKG_CONFIG --variable=prefix "fftw3" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -19554,7 +19572,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     GDAL_PREFIX=`$PKG_CONFIG --variable=prefix "gdal" 2>/dev/null`
+     if test -z "$GDAL_PREFIX"; then
+        GDAL_PREFIX=`$PKG_CONFIG --variable=prefix "gdal" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -19814,7 +19834,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     GEOS_PREFIX=`$PKG_CONFIG --variable=prefix "geos" 2>/dev/null`
+     if test -z "$GEOS_PREFIX"; then
+        GEOS_PREFIX=`$PKG_CONFIG --variable=prefix "geos" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -20006,7 +20028,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     OGDI_PREFIX=`$PKG_CONFIG --variable=prefix "ogdi" 2>/dev/null`
+     if test -z "$OGDI_PREFIX"; then
+        OGDI_PREFIX=`$PKG_CONFIG --variable=prefix "ogdi" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -20199,7 +20223,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     EXPAT_PREFIX=`$PKG_CONFIG --variable=prefix "expat" 2>/dev/null`
+     if test -z "$EXPAT_PREFIX"; then
+        EXPAT_PREFIX=`$PKG_CONFIG --variable=prefix "expat" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -20317,7 +20343,7 @@ $as_echo_n "checking for openjpeg library... " >&6; }
         succeeded=no
         if test "$ac_openjpeg_path" != ""; then
             OPENJPEG_LIBS="-L$ac_openjpeg_path/lib -lopenjp2"
-            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.0"
+            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.1"
 	    OPENJPEG_PREFIX="$ac_openjpeg_path"
             succeeded=yes
         else
@@ -20392,13 +20418,15 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     OPENJPEG_PREFIX=`$PKG_CONFIG --variable=prefix "openjpeg" 2>/dev/null`
+     if test -z "$OPENJPEG_PREFIX"; then
+        OPENJPEG_PREFIX=`$PKG_CONFIG --variable=prefix "openjpeg" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
-       if test -e "$ac_path_tmp/include/openjpeg-2.0/openjpeg.h" && test -r "$ac_path_tmp/include/openjpeg-2.0/openjpeg.h"; then
+       if test -e "$ac_path_tmp/include/openjpeg-2.1/openjpeg.h" && test -r "$ac_path_tmp/include/openjpeg-2.1/openjpeg.h"; then
           OPENJPEG_PREFIX=$ac_path_tmp
-          OPENJPEG_CFLAGS="-I$ac_path_tmp/include/openjpeg-2.0/"
+          OPENJPEG_CFLAGS="-I$ac_path_tmp/include/openjpeg-2.1/"
           if test -e "$ac_path_tmp/lib/libopenjp2.so"; then
              OPENJPEG_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -openjp2"
              succeeded=yes
@@ -20887,7 +20915,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     CARTO_PREFIX=`$PKG_CONFIG --variable=prefix "carto" 2>/dev/null`
+     if test -z "$CARTO_PREFIX"; then
+        CARTO_PREFIX=`$PKG_CONFIG --variable=prefix "carto" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do

@@ -1,4 +1,23 @@
+# Note that if various libraries you use are in nonstandard placed, you can
+# generally pass in environment variable describing the locations. In 
+# particular, I often specify something like:
+#
+# HDF5_DIR=/pkg/afids/afids_latest \
+# BLAS=/pkg/afids/afids_latest/lib/libfblas.a \
+# LAPACK=/pkg/afids/afids_latest/lib/libflapack.a \
+# UMFPACK=/pkg/afids/afids_latest/lib/libumfpack.a \
+# CFLAGS="-I/pkg/afids/afids_latest/include" \
+# pip install -r ~/GeoCal/requirements.txt
+# 
+# (change to actual location). No reason to do this if things are in a place
+# python distutils already looks at (e.g., /usr/lib).
+
+# Note, you may need to add --global-option to get gfortran selected.
+# See gentoo bug 335908 at https://bugs.gentoo.org/show_bug.cgi?id=335908 for
+# details on this issue. The specific options would be something like:
+# numpy>=1.7.0 --global-option="config_fc" --global-option="--fcompiler=gnu95"
 numpy>=1.7.0
+
 scipy>=0.10.1
 matplotlib>=1.0.1
 h5py

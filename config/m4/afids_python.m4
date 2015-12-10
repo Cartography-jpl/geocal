@@ -67,7 +67,7 @@ if test "x$want_python" = "xyes"; then
      AM_CONDITIONAL([HAVE_NOSETESTS], [true])
    else
      if test "$1" == "required"; then
-        if test "with_python3" == "yes"; then
+        if test "$with_python3" == "yes"; then
 	        AC_PYTHON3_DEVEL
 	else
 	        AC_PYTHON_DEVEL([>= '2.6.1'])
@@ -78,9 +78,9 @@ if test "x$want_python" = "xyes"; then
         AC_PYTHON_MODULE(h5py, 1)
         AC_PYTHON_MODULE(sphinx, 1)
         AC_PYTHON_MODULE(sqlite3, 1)
-        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
-        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
-        PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print '-I' + ' -I'.join(get_numpy_include_dirs())"`
+        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
+        PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print('-I' + ' -I'.join(get_numpy_include_dirs()))"`
         AC_SUBST([PYTHON_NUMPY_CPPFLAGS])
         AC_SUBST([platpythondir])
         AC_PROG_SPHINX
@@ -94,13 +94,13 @@ if test "x$want_python" = "xyes"; then
         succeeded=yes
         have_python=yes
     else
-        if test "with_python3" == "yes"; then
+        if test "$with_python3" == "yes"; then
 	        AC_PYTHON3_DEVEL
 	else
 	        AC_PYTHON_DEVEL([>= '2.6.1'])
 	fi
-        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
-        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
+        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
         AC_SUBST([platpythondir])
 	AM_CONDITIONAL([HAVE_SPHINX], [false])
         AM_CONDITIONAL([HAVE_NOSETESTS], [false])

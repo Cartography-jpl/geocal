@@ -122,7 +122,7 @@ AC_MSG_CHECKING([Checking for python3-config])
 AC_PATH_TOOL([PYTHON_CONFIG], [python3-config])
 if test -n "$PYTHON_CONFIG" ; then
     AC_MSG_RESULT([yes])
-    PYTHON_VERSION=$(python3 -c "import sys;print '.'.join(map(str, sys.version_info@<:@:2@:>@))")
+    PYTHON_VERSION=$(python3 -c "import sys;print('.'.join(map(str, sys.version_info@<:@:2@:>@)))")
 else
   AC_MSG_RESULT([no])
 fi

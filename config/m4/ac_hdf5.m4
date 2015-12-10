@@ -34,20 +34,20 @@ if test "x$want_hdf5" = "xyes"; then
         AC_MSG_CHECKING([for HDF5 library])
         succeeded=no
         if test "$ac_hdf5_path" != ""; then
-            HDF5HOME=$ac_hdf5_path
+            HDF5HOME="$ac_hdf5_path"
             HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
             HDF5_CFLAGS="-I$ac_hdf5_path/include"
             succeeded=yes
         else
 	    AC_SEARCH_LIB([HDF5], [hdf5], , [hdf5.h], ,
                           [libhdf5_cpp], [-lhdf5_cpp -lhdf5_hl -lhdf5 -lz])
-            HDF5HOME=$HDF5_PREFIX
+            HDF5HOME="$HDF5_PREFIX"
         fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])
         else
-                HDF5_BIN=$HDF5HOME/bin
+                HDF5_BIN="$HDF5HOME/bin"
                 AC_MSG_RESULT([yes])
                 AC_SUBST(HDF5_CFLAGS)
                 AC_SUBST(HDF5_LIBS)

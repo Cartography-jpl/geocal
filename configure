@@ -698,6 +698,9 @@ PYTHON_EXEC_PREFIX
 PYTHON_PREFIX
 PYTHON_VERSION
 PYTHON
+python_bin_name
+WITH_PYTHON3_FALSE
+WITH_PYTHON3_TRUE
 BUILD_CARTO_FALSE
 BUILD_CARTO_TRUE
 HAVE_CARTO_FALSE
@@ -996,6 +999,7 @@ with_vicar_gdalplugin
 with_afids
 with_carto
 with_python
+with_python3
 with_swig
 with_boost_serialization
 with_documentation
@@ -1747,6 +1751,9 @@ Optional Packages:
                           (optional). You can also specify "build" if you want
                           to build your own local copy. See also THIRDPARTY
                           variable described below.
+  --with-python3          Build python 3 rather than python 2. This is still
+                          in testing, which is why we have a separate option
+                          for this
   --without-swig          Bypass running SWIG to update SWIG wrappers. The
                           SWIG wrappers can take a bit of time to create and
                           compile, so if you aren't working directly with them
@@ -21008,6 +21015,34 @@ fi
 
 
 
+# Option to build new python 3 code. This is still in testing,
+# which is why we have this separate.
+
+# Check whether --with-python3 was given.
+if test "${with_python3+set}" = set; then :
+  withval=$with_python3; with_python3=yes
+	   python_lib_path=python3.5
+	   python_inc_path=python3.5m
+           python_bin_name=python3
+
+else
+  with_python3=no
+	    python_lib_path=python2.7
+	    python_inc_path=python2.7
+           python_bin_name=python
+
+fi
+
+ if test x$with_python3 = xyes; then
+  WITH_PYTHON3_TRUE=
+  WITH_PYTHON3_FALSE='#'
+else
+  WITH_PYTHON3_TRUE='#'
+  WITH_PYTHON3_FALSE=
+fi
+
+
+
 if test "x$want_python" = "xyes"; then
    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for python" >&5
 $as_echo_n "checking for python... " >&6; }
@@ -21221,10 +21256,10 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
 
 
      PYTHON=`pwd`"/external/python_wrap.sh"
-     PYTHON_CPPFLAGS="-I\${prefix}/include/python2.7"
-     PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/python2.7/site-packages/numpy/core/include"
-     pythondir="lib/python2.7/site-packages"
-     platpythondir="lib/python2.7/site-packages"
+     PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
+     PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"
+     pythondir="lib/${python_lib_path}/site-packages"
+     platpythondir="lib/${python_lib_path}/site-packages"
      succeeded=yes
      have_python=yes
 
@@ -21250,6 +21285,245 @@ fi
 
    else
      if test "required" == "required"; then
+        if test "$with_python3" == "yes"; then
+	        if test -z "$PYTHON_VERSION"; then
+   PYTHON_VERSION="3"
+fi
+
+# Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
+set dummy python$PYTHON_VERSION; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON="$PYTHON" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON=$ac_cv_path_PYTHON
+if test -n "$PYTHON"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON" >&5
+$as_echo "$PYTHON" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+if test -z "$PYTHON"; then
+   as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
+   PYTHON_VERSION=""
+fi
+#
+# if the macro parameter ``version'' is set, honour it
+#
+if test -n ""; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python " >&5
+$as_echo_n "checking for a version of Python ... " >&6; }
+   ac_supports_python_ver=`$PYTHON -c "import sys; \
+	ver = sys.version.split ()[0]; \
+	print (ver )"`
+   if test "$ac_supports_python_ver" = "True"; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+   else
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+      as_fn_error $? "this package requires Python .
+If you have it installed, but it isn't the default Python
+interpreter in your system path, please pass the PYTHON_VERSION
+variable to configure. See \`\`configure --help'' for reference.
+" "$LINENO" 5
+      PYTHON_VERSION=""
+   fi
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking for python3-config" >&5
+$as_echo_n "checking Checking for python3-config... " >&6; }
+if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}python3-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}python3-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON_CONFIG="$PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON_CONFIG=$ac_cv_path_PYTHON_CONFIG
+if test -n "$PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_CONFIG" >&5
+$as_echo "$PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+fi
+if test -z "$ac_cv_path_PYTHON_CONFIG"; then
+  ac_pt_PYTHON_CONFIG=$PYTHON_CONFIG
+  # Extract the first word of "python3-config", so it can be a program name with args.
+set dummy python3-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_ac_pt_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $ac_pt_PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PYTHON_CONFIG="$ac_pt_PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_ac_pt_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+ac_pt_PYTHON_CONFIG=$ac_cv_path_ac_pt_PYTHON_CONFIG
+if test -n "$ac_pt_PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PYTHON_CONFIG" >&5
+$as_echo "$ac_pt_PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+  if test "x$ac_pt_PYTHON_CONFIG" = x; then
+    PYTHON_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PYTHON_CONFIG=$ac_pt_PYTHON_CONFIG
+  fi
+else
+  PYTHON_CONFIG="$ac_cv_path_PYTHON_CONFIG"
+fi
+
+if test -n "$PYTHON_CONFIG" ; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+    PYTHON_VERSION=$(python3 -c "import sys;print('.'.join(map(str, sys.version_info[:2])))")
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+if test -z "$PYTHON_CONFIG" ; then
+  as_fn_error $? "no python3-config found." "$LINENO" 5
+fi
+
+PYTHON_CPPFLAGS="$("$PYTHON_CONFIG" --includes)"
+PYTHON_LDFLAGS="$("$PYTHON_CONFIG" --ldflags)"
+
+ac_save_CPPFLAGS="$CPPFLAGS"
+ac_save_LIBS="$LIBS"
+CPPFLAGS="$LIBS $PYTHON_CPPFLAGS"
+LIBS="$LIBS $PYTHON_LIBS"
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking if python-config results are accurate" >&5
+$as_echo_n "checking Checking if python-config results are accurate... " >&6; }
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+  #include <Python.h>
+int
+main ()
+{
+Py_Initialize();
+  ;
+  return 0;
+}
+
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+   as_fn_error $? "$PYTHON_CONFIG output is not usable" "$LINENO" 5
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+CPPFLAGS="$ac_save_CPPFLAGS"
+LIBS="$ac_save_LIBS"
+
+
+
+
+
+
+	else
 
 
 # Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
@@ -21485,6 +21759,7 @@ LIBS="$ac_save_LIBS"
 
 
 
+	fi
 
     if test -z $PYTHON;
     then
@@ -21623,9 +21898,9 @@ $as_echo "no" >&6; }
 		fi
 	fi
 
-        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
-        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
-        PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print '-I' + ' -I'.join(get_numpy_include_dirs())"`
+        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
+        PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print('-I' + ' -I'.join(get_numpy_include_dirs()))"`
 
 
 
@@ -21762,6 +22037,245 @@ fi
         succeeded=yes
         have_python=yes
     else
+        if test "$with_python3" == "yes"; then
+	        if test -z "$PYTHON_VERSION"; then
+   PYTHON_VERSION="3"
+fi
+
+# Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
+set dummy python$PYTHON_VERSION; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON="$PYTHON" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON=$ac_cv_path_PYTHON
+if test -n "$PYTHON"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON" >&5
+$as_echo "$PYTHON" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+if test -z "$PYTHON"; then
+   as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
+   PYTHON_VERSION=""
+fi
+#
+# if the macro parameter ``version'' is set, honour it
+#
+if test -n ""; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python " >&5
+$as_echo_n "checking for a version of Python ... " >&6; }
+   ac_supports_python_ver=`$PYTHON -c "import sys; \
+	ver = sys.version.split ()[0]; \
+	print (ver )"`
+   if test "$ac_supports_python_ver" = "True"; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+   else
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+      as_fn_error $? "this package requires Python .
+If you have it installed, but it isn't the default Python
+interpreter in your system path, please pass the PYTHON_VERSION
+variable to configure. See \`\`configure --help'' for reference.
+" "$LINENO" 5
+      PYTHON_VERSION=""
+   fi
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking for python3-config" >&5
+$as_echo_n "checking Checking for python3-config... " >&6; }
+if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}python3-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}python3-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON_CONFIG="$PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON_CONFIG=$ac_cv_path_PYTHON_CONFIG
+if test -n "$PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_CONFIG" >&5
+$as_echo "$PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+fi
+if test -z "$ac_cv_path_PYTHON_CONFIG"; then
+  ac_pt_PYTHON_CONFIG=$PYTHON_CONFIG
+  # Extract the first word of "python3-config", so it can be a program name with args.
+set dummy python3-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_ac_pt_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $ac_pt_PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PYTHON_CONFIG="$ac_pt_PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_ac_pt_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+ac_pt_PYTHON_CONFIG=$ac_cv_path_ac_pt_PYTHON_CONFIG
+if test -n "$ac_pt_PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PYTHON_CONFIG" >&5
+$as_echo "$ac_pt_PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+  if test "x$ac_pt_PYTHON_CONFIG" = x; then
+    PYTHON_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PYTHON_CONFIG=$ac_pt_PYTHON_CONFIG
+  fi
+else
+  PYTHON_CONFIG="$ac_cv_path_PYTHON_CONFIG"
+fi
+
+if test -n "$PYTHON_CONFIG" ; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+    PYTHON_VERSION=$(python3 -c "import sys;print('.'.join(map(str, sys.version_info[:2])))")
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+if test -z "$PYTHON_CONFIG" ; then
+  as_fn_error $? "no python3-config found." "$LINENO" 5
+fi
+
+PYTHON_CPPFLAGS="$("$PYTHON_CONFIG" --includes)"
+PYTHON_LDFLAGS="$("$PYTHON_CONFIG" --ldflags)"
+
+ac_save_CPPFLAGS="$CPPFLAGS"
+ac_save_LIBS="$LIBS"
+CPPFLAGS="$LIBS $PYTHON_CPPFLAGS"
+LIBS="$LIBS $PYTHON_LIBS"
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking if python-config results are accurate" >&5
+$as_echo_n "checking Checking if python-config results are accurate... " >&6; }
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+  #include <Python.h>
+int
+main ()
+{
+Py_Initialize();
+  ;
+  return 0;
+}
+
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+   as_fn_error $? "$PYTHON_CONFIG output is not usable" "$LINENO" 5
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+CPPFLAGS="$ac_save_CPPFLAGS"
+LIBS="$ac_save_LIBS"
+
+
+
+
+
+
+	else
 
 
 # Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
@@ -21997,8 +22511,9 @@ LIBS="$ac_save_LIBS"
 
 
 
-        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
-        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
+	fi
+        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
 
 	 if false; then
   HAVE_SPHINX_TRUE=
@@ -22840,6 +23355,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_CARTO_TRUE}" && test -z "${BUILD_CARTO_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_CARTO\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${WITH_PYTHON3_TRUE}" && test -z "${WITH_PYTHON3_FALSE}"; then
+  as_fn_error $? "conditional \"WITH_PYTHON3\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then

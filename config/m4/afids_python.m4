@@ -28,16 +28,34 @@ AC_DEFUN([AFIDS_PYTHON],
 [
 AC_HANDLE_WITH_ARG([python], [python], [Python], $2, $3)
 
+# Option to build new python 3 code. This is still in testing,
+# which is why we have this separate.
+AC_ARG_WITH([python3],
+           [AS_HELP_STRING([--with-python3],
+             [Build python 3 rather than python 2. This is still in testing, which is why we have a separate option for this])],
+           [with_python3=yes
+	   python_lib_path=python3.5
+	   python_inc_path=python3.5m
+           python_bin_name=python3
+	   ],
+           [with_python3=no
+	    python_lib_path=python2.7
+	    python_inc_path=python2.7
+           python_bin_name=python
+	   ])
+AM_CONDITIONAL([WITH_PYTHON3], [test x$with_python3 = xyes])
+AC_SUBST(python_bin_name)
+
 if test "x$want_python" = "xyes"; then
    AC_MSG_CHECKING([for python])
    succeeded=no
    if test "$build_python" == "yes"; then
      AM_PATH_PYTHON(,, [:])
      PYTHON=`pwd`"/external/python_wrap.sh" 
-     PYTHON_CPPFLAGS="-I\${prefix}/include/python2.7"
-     PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/python2.7/site-packages/numpy/core/include"
-     pythondir="lib/python2.7/site-packages" 
-     platpythondir="lib/python2.7/site-packages" 
+     PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
+     PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"
+     pythondir="lib/${python_lib_path}/site-packages" 
+     platpythondir="lib/${python_lib_path}/site-packages" 
      succeeded=yes
      have_python=yes
      AC_SUBST(PYTHON_CPPFLAGS)
@@ -49,16 +67,20 @@ if test "x$want_python" = "xyes"; then
      AM_CONDITIONAL([HAVE_NOSETESTS], [true])
    else
      if test "$1" == "required"; then
-        AC_PYTHON_DEVEL([>= '2.6.1'])
+        if test "$with_python3" == "yes"; then
+	        AC_PYTHON3_DEVEL
+	else
+	        AC_PYTHON_DEVEL([>= '2.6.1'])
+	fi
         AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.7.0], [numpy.version.version])
         AC_PYTHON_MODULE_WITH_VERSION(scipy, [0.10.1], [scipy.version.version])
         AC_PYTHON_MODULE_WITH_VERSION(matplotlib, [1.0.1], [matplotlib.__version__])
         AC_PYTHON_MODULE(h5py, 1)
         AC_PYTHON_MODULE(sphinx, 1)
         AC_PYTHON_MODULE(sqlite3, 1)
-        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
-        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
-        PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print '-I' + ' -I'.join(get_numpy_include_dirs())"`
+        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
+        PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print('-I' + ' -I'.join(get_numpy_include_dirs()))"`
         AC_SUBST([PYTHON_NUMPY_CPPFLAGS])
         AC_SUBST([platpythondir])
         AC_PROG_SPHINX
@@ -72,9 +94,13 @@ if test "x$want_python" = "xyes"; then
         succeeded=yes
         have_python=yes
     else
-        AC_PYTHON_DEVEL([>= '2.6.1'])
-        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
-        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
+        if test "$with_python3" == "yes"; then
+	        AC_PYTHON3_DEVEL
+	else
+	        AC_PYTHON_DEVEL([>= '2.6.1'])
+	fi
+        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
         AC_SUBST([platpythondir])
 	AM_CONDITIONAL([HAVE_SPHINX], [false])
         AM_CONDITIONAL([HAVE_NOSETESTS], [false])

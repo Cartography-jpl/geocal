@@ -193,8 +193,8 @@ public:
     // of type T.
     stride[i] = $1->stride(i) * sizeof(TYPE);
   }
-  $result = PyArray_New(&PyArray_Type, DIM, dims, type_to_npy<TYPE >(), 
-			stride, $1->data(), 0, NPY_ARRAY_WRITEABLE, 0);
+  $result = PyArray_New(&PyArray_Type, DIM, dims, type_to_npy<TYPE>(), 
+			stride, $1->data(), 0, 0, 0);
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
   PyArray_SetBaseObject((PyArrayObject*)$result, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 

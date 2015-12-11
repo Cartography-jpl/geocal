@@ -16,8 +16,8 @@
 # See gentoo bug 335908 at https://bugs.gentoo.org/show_bug.cgi?id=335908 for
 # details on this issue. The specific options would be something like:
 # numpy>=1.7.0 --global-option="config_fc" --global-option="--fcompiler=gnu95"
-numpy>=1.7.0 @pip_fortran_option@
-scipy>=0.10.1 @pip_fortran_option@
+numpy>=1.7.0
+scipy>=0.10.1
 matplotlib>=1.0.1
 h5py
 sphinx

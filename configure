@@ -644,6 +644,9 @@ IS_MAC64_FALSE
 IS_MAC64_TRUE
 IS_MAC_FALSE
 IS_MAC_TRUE
+pip_fortran_option
+HAVE_GFORTRAN_FALSE
+HAVE_GFORTRAN_TRUE
 HAVE_G77_FALSE
 HAVE_G77_TRUE
 SWIG_PYTHON_CPPFLAGS
@@ -2811,6 +2814,8 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 
 
 ac_config_files="$ac_config_files script/setup_afids_python.csh script/setup_afids_python.sh"
+
+ac_config_files="$ac_config_files requirements.txt.in"
 
 ac_config_files="$ac_config_files lib/GeoCalCore/Support/global_fixture_default.cc"
 
@@ -22798,6 +22803,20 @@ else
   HAVE_G77_FALSE=
 fi
 
+ if test `expr "${F77}" : '.*gfortran'` != "0"; then
+  HAVE_GFORTRAN_TRUE=
+  HAVE_GFORTRAN_FALSE='#'
+else
+  HAVE_GFORTRAN_TRUE='#'
+  HAVE_GFORTRAN_FALSE=
+fi
+
+if test `expr "${F77}" : '.*gfortran'` != "0"; then
+   pip_fortran_option='--global-option="config_fc" --global-option="--fcompiler=gnu95"'
+else
+   pip_fortran_option=''
+fi
+
 
 #=================================================================
 # We have a few Make rules that need to be different on the Mac. This
@@ -23425,6 +23444,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_G77_TRUE}" && test -z "${HAVE_G77_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_G77\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_GFORTRAN_TRUE}" && test -z "${HAVE_GFORTRAN_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_GFORTRAN\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${IS_MAC_TRUE}" && test -z "${IS_MAC_FALSE}"; then
@@ -24414,6 +24437,7 @@ do
   case $ac_config_target in
     "script/setup_afids_python.csh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.csh" ;;
     "script/setup_afids_python.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.sh" ;;
+    "requirements.txt.in") CONFIG_FILES="$CONFIG_FILES requirements.txt.in" ;;
     "lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES lib/GeoCalCore/Support/global_fixture_default.cc" ;;
     "lib/GeoCalCore/Support/geocal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_config.h" ;;
     "lib/GeoCalCore/Support/geocal_internal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_internal_config.h" ;;

@@ -1,23 +1,46 @@
 from nose.tools import *
 from geocal_swig import *
-from image_ground_connection import *
 from tie_point import *
+from image_ground_connection import *
 from ray_intersect import *
 from feature_detector_extension import *
 from sqlite_shelf import *
 from nose.plugins.skip import Skip, SkipTest
+import shutil
 
 # Data is way too big to check into source, so we put it here. This means
-# we can only tests that depend on this on pistol. We may fold this into
+# we have tests that can only be run on pistol. We may fold this into
 # the afids data area at some point.
 geocal_test_igc = "/data/geocal_test_data/igccol_rolling_shutter.xml"
 geocal_test_igc_sim_error = "/data/geocal_test_data/igccol_rolling_shutter_simulated_error.xml"
 geocal_test_tpcol = "/data/geocal_test_data/data.db:tpcol"
+mspi_test_data = os.path.dirname(__file__) + "/../../unit_test_data/mspi/"
+
 
 def test_basic():
     '''Basic test of tiepoint'''
     t = TiePoint(5)
     assert t.number_image, 5
+
+def test_old_mspi_format():
+    '''Test for reading the old MSPI format.'''
+    fname = mspi_test_data + "old_tie_point/tie_point_211051000.dat"
+    t = TiePoint(5)
+    tp = TiePoint.read_old_mspi_format(fname)
+    assert tp.id == 211051000
+    assert not tp.is_gcp
+    assert distance(tp.ground_location, Ecr(-2.47279636204959126e+06, -4.61999558631069399e+06, 3.62513840793766454e+06)) < 1
+    assert tp.number_image_location == 3
+    tpcol = TiePointCollection.read_old_mspi_format(mspi_test_data + 
+                                                    "old_tie_point")
+    assert len(tpcol) == 165
+    assert tpcol.number_gcp == 18
+    try:
+        shutil.rmtree("old_mpsi_tp")
+    except OSError:
+        pass
+    tpcol.write_old_mspi_format("old_mspi_tp")
+
 
 def test_create_multiple_pass():
     '''Test create_multiple_pass'''
@@ -57,7 +80,9 @@ def test_tie_point():
 
 # If you run this, make sure to include this import. Otherwise the namespace
 # for the tiepoint isn't correct in the TiePointCollection shelf
-from geocal import *
+# But don't have this uncommented out when running unit test or we will be
+# looking at the wrong place for testing
+#from geocal import *
 def generate_tie_point_collection():
     '''This creates a "simulated" version of the igccol_rolling_shutter.xml.
     We generate tiepoints based on the "truth".

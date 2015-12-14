@@ -33,6 +33,24 @@ PiecewiseLinear::PiecewiseLinear
       throw Exception("X must be sorted.");
 }
 
+PiecewiseLinear::PiecewiseLinear
+(const std::vector<Time>& X, 
+ const blitz::Array<int, 1>& T)
+  : x_((int) X.size()), y_((int) X.size(), 0), t_(T.copy())
+{
+  if(t_.rows() != x_.rows() - 1)
+    throw Exception("T must have number rows = X rows - 1");
+  for(int i = 0; i < x_.rows(); ++i)
+    x_(i) = X[i];
+  parameter_size_ = std::count(t_.begin(), t_.end(), (int) LINEAR) + 1;
+  blitz::Array<double, 1> y(parameter_size_);
+  y = 0;
+  parameter(y);
+  for(int i = 0; i < x_.rows() - 1; ++i)
+    if(x_(i) >= x_(i+1))
+      throw Exception("X must be sorted.");
+}
+
 void PiecewiseLinear::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
 {
   if(Parm.rows() != parameter_size_)
@@ -72,19 +90,19 @@ ArrayAd<double, 1> PiecewiseLinear::parameter_with_derivative() const
 
 double PiecewiseLinear::value(const Time& x) const
 {
-  if(x < x_(0))
+  if(x <= x_(0))
     return y_.value()(0);
   if(x >= x_(x_.rows() - 1))
     return y_.value()(x_.rows() - 1);
   int i = std::lower_bound(x_.data(), x_.data() + x_.rows(), x) - x_.data();
-  switch(t_(i)) {
+  switch(t_(i-1)) {
   case CONSTANT:
-    return y_.value()(i);
+    return y_.value()(i-1);
     break;
   case LINEAR:
   case LINEAR_TO_ZERO:
-    return y_.value()(i) + (y_.value()(i+1) -y_.value()(i)) *
-      (x - x_(i)) / (x_(i + 1) - x_(i));
+    return y_.value()(i-1) + (y_.value()(i) -y_.value()(i-1)) *
+      (x - x_(i-1)) / (x_(i) - x_(i-1));
     break;
   default:
     throw Exception("This should be impossible");
@@ -94,20 +112,20 @@ double PiecewiseLinear::value(const Time& x) const
 AutoDerivative<double> PiecewiseLinear::value_with_derivative
 (const TimeWithDerivative& x) const
 {
-  if(x.value() < x_(0))
+  if(x.value() <= x_(0))
     return y_.value()(0);
   if(x.value() >= x_(x_.rows() - 1))
     return y_.value()(x_.rows() - 1);
   int i = std::lower_bound(x_.data(), x_.data() + x_.rows(), x.value()) - 
     x_.data();
-  switch(t_(i)) {
+  switch(t_(i-1)) {
   case CONSTANT:
-    return y_(i);
+    return y_(i-1);
     break;
   case LINEAR:
   case LINEAR_TO_ZERO:
-    return y_(i) + (y_(i+1) -y_(i)) *
-      (x - x_(i)) / (x_(i + 1) - x_(i));
+    return y_(i-1) + (y_(i) -y_(i-1)) *
+      (x - x_(i-1)) / (x_(i) - x_(i-1));
     break;
   default:
     throw Exception("This should be impossible");
@@ -117,8 +135,8 @@ AutoDerivative<double> PiecewiseLinear::value_with_derivative
 void PiecewiseLinear::print(std::ostream& Os) const
 {
   Os << "PiecewiseLinear:\n";
-  Os << "        X         Y     Function Type\n";
-  Os << "   --------- ---------  -------------\n";
+  Os << "            X                        Y     Function Type\n";
+  Os << "       ---------                ---------  -------------\n";
   for(int i = 0; i < x_.rows(); ++i)
     Os << std::setw(10) << x_(i) << " " 
        << std::setw(10) << y_.value()(i) << " "

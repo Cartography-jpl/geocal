@@ -87,7 +87,9 @@ public:
 	       int Start_line = 0,
 	       int Number_line = -1,
 	       int Number_integration_step = 2, double Resolution = 100,
-	       double Max_height = 10e3);
+	       double Max_height = 10e3,
+	       int Start_sample = 0,
+	       int Number_sample = -1);
   virtual ~IgcRayCaster() {}
   virtual int start_position() const { return start_position_;}
   virtual int number_position() const { return npos_;}
@@ -103,9 +105,12 @@ public:
   {
     Os << "IgcRayCaster";
   }
+  int start_sample() const {return start_sample_;}
+  int number_sample() const {return number_sample_;}
 private:
   boost::shared_ptr<ImageGroundConnection> igc;
-  int start_position_, npos_, ind, nintegration_step, nsub_line, nsub_sample;
+  int start_position_, npos_, ind, nintegration_step, nsub_line, nsub_sample,
+	  start_sample_, number_sample_;
   bool is_forward;
   double resolution, max_height;
   // Results from the last call to next_position. We save this both to 

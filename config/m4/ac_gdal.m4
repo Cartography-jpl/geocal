@@ -18,7 +18,8 @@ if test "x$want_gdal" = "xyes"; then
         AC_MSG_CHECKING([for GDAL library])
         succeeded=no
         if test "$ac_gdal_path" != ""; then
-            GDAL_LIBS="-R$ac_gdal_path/lib -L$ac_gdal_path/lib -lgdal"
+            GDAL_PREFIX="$ac_gdal_path"
+            GDAL_LIBS="-L$ac_gdal_path/lib -lgdal"
             GDAL_CFLAGS="-I$ac_gdal_path/include"
             succeeded=yes
         else
@@ -30,6 +31,8 @@ if test "x$want_gdal" = "xyes"; then
                 AC_MSG_RESULT([yes])
 	fi
         if test "$succeeded" = "yes" -a "$build_gdal" = "no"; then
+                GDAL_LIBS="`$GDAL_PREFIX/bin/gdal-config --libs` `$GDAL_PREFIX/bin/gdal-config --dep-libs`"
+                GDAL_CFLAGS=`$GDAL_PREFIX/bin/gdal-config --cflags`
 	        AC_MSG_CHECKING([version GDAL library is new enough])
 		AC_REQUIRE([AC_PROG_CC])
 		CPPFLAGS_SAVED="$CPPFLAGS"
@@ -57,14 +60,12 @@ if test "x$want_gdal" = "xyes"; then
                 have_gdal="yes"
         fi
 fi
-# We never build this in GeoCal, so leave this out so the configure
-# message isn't confusing
-#if test "$build_gdal" = "yes"; then
-#  AC_GEOS(required, $2, default_search)
-#  AC_OGDI(required, $2, default_search)
-#  AC_EXPAT(required, $2, default_search)
-#  AC_OPENJPEG(required, $2, default_search)
-#else # Not building GDAL
+if test "$build_gdal" = "yes"; then
+  AC_GEOS(required, $2, default_search)
+  AC_OGDI(required, $2, default_search)
+  AC_EXPAT(required, $2, default_search)
+  AC_OPENJPEG(required, $2, default_search)
+else # Not building GDAL
   AM_CONDITIONAL([HAVE_GEOS], [false])
   AM_CONDITIONAL([HAVE_OGDI], [false])
   AM_CONDITIONAL([HAVE_EXPAT], [false])
@@ -77,7 +78,7 @@ fi
   build_ogdi="no"
   build_expat="no"
   build_openjpeg="yes"
-#fi # End if/else building GDAL
+fi # End if/else building GDAL
 AM_CONDITIONAL([HAVE_GDAL], [test "$have_gdal" = "yes"])
 AM_CONDITIONAL([BUILD_GDAL], [test "$build_gdal" = "yes"])
 

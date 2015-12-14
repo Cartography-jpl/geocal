@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %base_import(look_vector)
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 %geocal_shared_ptr(GeoCal::GroundCoordinate);
 %geocal_shared_ptr(GeoCal::CartesianFixed);
 %geocal_shared_ptr(GeoCal::CartesianInertial);

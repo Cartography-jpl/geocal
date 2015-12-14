@@ -4,3 +4,7 @@ Note that the python is code is tested by "installcheck". This is because
 we need to install the python module before we can test it. You can also
 run the python check directly as "make python_check".
 
+If you need to install needed python libraries (e.g., you are building a 
+virtual environment), there is a requirements.txt file
+that can be used with pip by "pip install -r requirements.txt"
+

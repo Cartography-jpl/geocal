@@ -14,6 +14,37 @@ public:
   virtual int number_image() const { return 0; }
 
 //-----------------------------------------------------------------------
+/// Return collinearity residual for given Image_index (see
+/// ImageGroundConnection for details on this.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 1> 
+  collinearity_residual(int Image_index,
+			const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const
+  {
+    return image_ground_connection(Image_index)->collinearity_residual(Gc, Ic_actual);
+  }
+
+//-----------------------------------------------------------------------
+/// Return jacobian of collinearity_residual. The parameters for this
+/// class should already have AutoDerivative extended for the jacobian
+/// (e.g., call add_identity_gradient()).
+/// 
+/// We add the derivative wrt the CartesianFixed coordinates of the
+/// Ground_coor (X, Y, Z in that order), at the end of the
+/// Jacobian. So the total Jacobian is 2 x (number parameter + 3).
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(int Image_index,
+  		        const GroundCoordinate& Gc,
+			const ImageCoordinate& Ic_actual) const
+  {
+    return image_ground_connection(Image_index)->collinearity_residual_jacobian(Gc, Ic_actual);
+  }
+
+//-----------------------------------------------------------------------
 /// Return ground coordinate that goes with a particular image
 /// coordinate. 
 //-----------------------------------------------------------------------
@@ -59,6 +90,21 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
+/// parameters.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_parm(int Image_index, const CartesianFixed& Gc) 
+    const
+  { return image_ground_connection(Image_index)->image_coordinate_jac_parm(Gc); }
+
+
+virtual blitz::Array<double, 2> 
+image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed& Gc,
+			     const blitz::Array<double, 1> Pstep) const;
+
+//-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
 /// X, Y, and Z components of the CartesianFixed ground location. 
 //-----------------------------------------------------------------------
 
@@ -66,6 +112,18 @@ public:
   image_coordinate_jac_cf(int Image_index, const CartesianFixed& Gc) 
     const
   { return image_ground_connection(Image_index)->image_coordinate_jac_cf(Gc); }
+
+//-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
+/// X, Y, and Z components of the CartesianFixed ground location.
+/// Calculated as a finite difference with the given step size.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<double, 2> 
+  image_coordinate_jac_cf_fd(int Image_index, const CartesianFixed& Gc,
+			     double Step_size) 
+    const
+  { return image_ground_connection(Image_index)->image_coordinate_jac_cf_fd(Gc, Step_size); }
 
 //-----------------------------------------------------------------------
 /// Title that we can use to describe the image. This can be any

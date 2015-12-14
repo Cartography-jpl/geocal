@@ -83,7 +83,7 @@ class ProjectWrap(object):
         f.close()
         f = VicarLiteRasterImage("%s%d.img" % (self.basefname, i), 1, 
                                  VicarLiteFile.UPDATE)
-        copy(t, f)
+        copy_raster(t, f)
         print "Done with %d" % i 
 
 func = ProjectWrap(args.basefname, igccol, mi, args.scale, args.grid_spacing)

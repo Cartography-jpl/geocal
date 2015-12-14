@@ -136,10 +136,10 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   BOOST_CHECK_CLOSE(roll, parm(6 + 2),1e-4);
   // Check in between time points case.
   boost::math::quaternion<AutoDerivative<double> > qexpect =
-    interpolate_quaternion(sc_to_sc_corr_with_derivative(t - 5), 
-			   sc_to_sc_corr_with_derivative(t + 15), 
-			   AutoDerivative<double>(3.0), 
-			   10.0);
+    interpolate_quaternion_rotation(sc_to_sc_corr_with_derivative(t - 5), 
+				    sc_to_sc_corr_with_derivative(t + 15), 
+				    AutoDerivative<double>(3.0), 
+				    10.0);
   AutoDerivative<double> yaw_expect, pitch_expect, roll_expect;
   quat_to_ypr(qexpect, yaw_expect, pitch_expect, roll_expect);
   yaw_expect /= Constant::arcsecond_to_rad; 

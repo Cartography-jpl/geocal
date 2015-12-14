@@ -75,7 +75,19 @@ Dem::intersect_start_length
   double lcurr = Start_length;
   double llast;
   int sign = (hcurr > 0 ? 1 : -1);
+  int count = 0;
+  double  hlast_at_count = hcurr;
   do {
+    // Attempt to tell if we are not going to find a solution. This
+    // is not perfect, but we assume that if the height doesn't reduce
+    // after 100000 steps we aren't going to converge.
+    count++;
+    if(count > 100000) {
+      if(fabs(hcurr) > fabs(hlast_at_count))
+	throw ConvergenceFailure("Dem::intersect_start_length failed to converge. Often this is due to invalid data (e.g., look vector doesn't intersect the surface)");
+      hlast_at_count = hcurr;
+      count = 0;
+    }
     llast = lcurr;
     lcurr += sign * step_size;
     hlast = hcurr;

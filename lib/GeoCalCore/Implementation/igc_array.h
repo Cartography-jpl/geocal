@@ -33,6 +33,11 @@ public:
   { return WithParameterNested::parameter_with_derivative(); }
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
   { WithParameterNested::parameter_with_derivative(Parm);}
+  void add_identity_gradient();
+  virtual blitz::Array<double, 2> 
+  collinearity_residual_jacobian(int Image_index,
+				 const GroundCoordinate& Gc,
+				 const ImageCoordinate& Ic_actual) const;
 private:
   std::vector<boost::shared_ptr<ImageGroundConnection> > igc_list;
   IgcArray() {}

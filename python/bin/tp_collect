@@ -131,6 +131,11 @@ Options:
        we are close enough that we can still used this approximation to look
        for outliers.
 
+   --outlier-reject-ransac-surface-project
+       Like "--outlier-reject-ransac", but project the points first to the 
+       surface. This is useful for data that isn't sufficiently close to a
+       frame camera (e.g., aircraft data).
+
    --outlier-reject-ransac-threshold=d
        Threshold to use in rejecting outliers using "--outlier-reject-ransac"
        [default: 3]
@@ -312,6 +317,9 @@ else:
 if(args.outlier_reject_ransac):
     tparr = outlier_reject_ransac(tparr, ref_image = refimg, 
                            threshold = args.outlier_reject_ransac_threshold)
+if(args.outlier_reject_ransac_surface_project):
+    tparr = outlier_reject_ransac(tparr, ref_image = refimg, 
+               igccol = igc, threshold = args.outlier_reject_ransac_threshold)
 
 try:
     # Ok if this fails, it just means args.output doesn't exist yet

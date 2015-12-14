@@ -14,10 +14,35 @@ class _coo_helper(object):
         self.shape = shape
 
     def __setitem__(self, key, value):
-        if(value != 0.0):
-            self.row.append(key[0])
-            self.col.append(key[1])
-            self.data.append(value)
+        if type(key[0]) is slice:
+            r0 = range(*key[0].indices(self.shape[0]))
+            if type(key[1]) is slice:
+                r1 = range(*key[1].indices(self.shape[1]))
+                for i1, i2 in enumerate(r0):
+                    for j1, j2 in enumerate(r1):
+                        if(value[i1, j1] != 0.0):
+                            self.row.append(i2)
+                            self.col.append(j2)
+                            self.data.append(value[i1, j1])
+            else:
+                for i1, i2 in enumerate(r0):
+                    if(value[i1] != 0.0):
+                        self.row.append(i2)
+                        self.col.append(key[1])
+                        self.data.append(value[i1])
+        else:
+            if type(key[1]) is slice:
+                r1 = range(*key[1].indices(self.shape[1]))
+                for j1, j2 in enumerate(r1):
+                    if(value[j1] != 0.0):
+                        self.row.append(key[0])
+                        self.col.append(j2)
+                        self.data.append(value[j1])
+            else:
+                if(value != 0.0):
+                    self.row.append(key[0])
+                    self.col.append(key[1])
+                    self.data.append(value)
 
     def coo_matrix(self):
         return scipy.sparse.coo_matrix((self.data, (self.row, self.col)),
@@ -29,10 +54,45 @@ class SimultaneousBundleAdjustment(object):
     We then vary the ground location the tie points and the parameters
     of the ImageGroundConnection to minimize the difference between the
     predicted image locations and the actual image locations given by
-    the tiepoints.'''
+    the tiepoints.
+
+    Note that you often want to use the automatically calculated Jacobians
+    (done using the chain rule). However, there are cases where you do
+    *not* want to do this. 
+
+    We initially ran into this with the IpiImageGroundConnection
+    can have points where the Jacobian is very noisy, so small changes in 
+    a parameter can cause a relatively large change in the line/sample (e.g.,
+    a minor tweak causes the line/sample to jump by 0.1 or 0.2 pixels). These
+    changes are small in relation to anything that really matters (e..g, 1/3
+    pixel), but can cause very large spikes in the Jacobian. For these cases,
+    you may want to use a finite difference approximation, where the step 
+    size is something like what you expect meaningful parameter change to be.
+    This has the effect of replacing the real Jacobian with the Jacobian of
+    smoothed version of the Ipi equations w/o these sudden jumps. Not sure
+    when you might want to do this, perhaps a good test if you aren't sure 
+    is to compare the real Jacobain with the finite difference one and if they
+    are close to each other you can use the real Jacobian. I've never seen
+    an issue with a frame camera, just with the Ipi for a push broom (and in
+    that case for a aircraft which has much larger jumps in attitude).
+
+    Note that the IpiImageGroundConnection problem was solved in a 
+    different manner (adding collinearity constraint that uses FrameCoor at
+    a fixed time), so the finite difference is not needed for this particular 
+    ImageGroundConnection. But we've left the finite difference in place if
+    this is useful in other circumstances.
+
+    To support the finite difference, you can supply the step size to use the
+    collinearity ECR jacobian, and/or a separate array for the step size to
+    use in the collinearity parameter jacobian. The other jacobians (GCP, 
+    surface, parameter) are all simple enough that there is never any reason
+    to resort to finite differences for these.
+    '''
     def __init__(self, igc_coll, tpcol,
                  dem, dem_sigma = 10, gcp_sigma = 10, tp_sigma = None, 
-                 tp_epsilon = 1):
+                 tp_epsilon = 1, p0 = None, psigma = None, 
+                 hold_gcp_fixed = False,
+                 ecr_fd_step_size = None, parameter_fd_step_size= None):
         '''Constructor. This takes a IgcCollection, and a 
         TiePointCollection. The camera order used in each TiePoint 
         should match the order of IgcCollection.
@@ -50,33 +110,120 @@ class SimultaneousBundleAdjustment(object):
         tp_sigma, then we add a GCP constraint equation for points that 
         aren't marked as GCPs that is this looser value.
 
+        You can optionally hold GCP completely fixed, not allowing them to be
+        moved at all. This can be useful in some cases where the SBA is
+        moving the GCPs too far to account for other errors, particularly 
+        when the GCP locations are more certain than other sources of errors. 
+
         We calculate the jacobians with respect to moving the tiepoint on
         the surface numerically, the tp_epsilon used for the CartesianFixed 
         coordinates can be optionally supplied.
+
+        The parameters are constrained to p0, with a scaling of psigma. If 
+        these aren't specified the initial value of the igc_coll parameter 
+        is used, with a scaling of 10. You can change this after the 
+        constructor by changing self.p0 and/or self.psigma.
+
+        You can optionally supply the step size to use for a finite differene
+        jacobian of the collinearity ecr and/or the collinearity parameter
+        jacobian. See the class description for why you might want to use
+        finite difference instead of the true jacobian calculation in some
+        cases.
         '''
         self.igc_coll = igc_coll
         self.tpcol = tpcol
         self.dem = dem
         self.dem_sigma = dem_sigma
         self.gcp_sigma = gcp_sigma
+        self.hold_gcp_fixed = hold_gcp_fixed
         self.tp_epsilon = tp_epsilon
         self.tp_sigma = tp_sigma
+        self.ecr_fd_step_size = ecr_fd_step_size
+        self.parameter_fd_step_size = parameter_fd_step_size
+        if(self.ecr_fd_step_size is not None or 
+           self.parameter_fd_step_size is not None):
+            raise RuntimeError("Don't currently support finite difference jacobians")
+        if(p0 is None):
+            self.p0 = self.igc_coll.parameter_subset.copy()
+        else:
+            self.p0 = p0
+        if(psigma is None):
+            self.psigma = np.zeros(self.p0.shape)
+            self.psigma[:] = 10
+        else:
+            self.psigma = psigma
         self.niloc = 0
         for tp in self.tpcol: 
             self.niloc += tp.number_image_location
-        self.tp_offset = np.zeros(3 * len(self.tpcol))
+        if(self.hold_gcp_fixed):
+            self.tp_offset = np.zeros(3 * (len(self.tpcol) - 
+                                           self.tpcol.number_gcp))
+        else:
+            self.tp_offset = np.zeros(3 * len(self.tpcol))
 
         # Determine the slices for each of the parameter types. We have
         # the location each tiepoint first, followed by the parameters for
         # igc_coll.
         self.tp_slice = []
-        for i in range(len(self.tpcol)):
-            self.tp_slice.append(slice(3 * i, 3 * i + 3))
+        j = 0
+        for i, tp in enumerate(self.tpcol):
+            if(not self.hold_gcp_fixed or not tp.is_gcp):
+                self.tp_slice.append(slice(j, j + 3))
+                j += 3
+            else:
+                self.tp_slice.append(None)
 
     @property
     def tp_offset_slice(self):
         '''The portion of parameter that gives the tie point offsets'''
         return slice(0, len(self.tp_offset))
+
+    @property
+    def len_surface_constraint(self):
+        res = len(self.tpcol)
+        if(self.hold_gcp_fixed):
+            res -= self.tpcol.number_gcp
+        return res
+
+    @property
+    def surface_constraint_slice(self):
+        '''The portion of the sba equations that gives the surface constraint'''
+        return slice(0, self.len_surface_constraint)
+
+    @property
+    def len_gcp_constraint(self):
+        if(self.tp_sigma is not None):
+            res = len(self.tpcol) * 3
+        else:
+            res = self.tpcol.number_gcp * 3
+        if(self.hold_gcp_fixed):
+            res -= self.tpcol.number_gcp * 3
+        return res
+        
+    @property
+    def gcp_constraint_slice(self):
+        '''The portion of sba equation that gives the GCP constraint'''
+        return slice(self.len_surface_constraint, 
+                     self.len_surface_constraint + len_gcp_constraint)
+
+    @property
+    def len_collinearity_constraint(self):
+        return self.niloc * 2
+
+    @property
+    def collinearity_constraint_slice(self):
+        '''The portion of the sba equations that gives the collinearity 
+        constraint'''
+        return slice(self.len_surface_constraint + self.len_gcp_constraint, 
+                     self.len_surface_constraint + self.len_gcp_constraint + 
+                     self.len_collinearity_constraint)
+
+    @property
+    def parameter_constraint_slice(self):
+        '''The portion of the sba equations that gives the parameter
+        constraint'''
+        return slice(self.len_surface_constraint + self.len_gcp_constraint + 
+                     self.len_collinearity_constraint, None)
 
     @property
     def igc_coll_param_slice(self):
@@ -97,12 +244,19 @@ class SimultaneousBundleAdjustment(object):
 
     def index_to_tp_offset(self, tp_index):
         '''Return the tp offset for the given tie point index number.'''
-        return self.tp_offset[self.tp_slice[tp_index]]
+        t = self.tp_slice[tp_index]
+        if(t is None):
+            return None
+        return self.tp_offset[t]
 
     def tp_index_to_parameter_index(self, tp_index):
         '''Return the first index in the parameter for the tp offset
         corresponding to the tiepoint tp_index'''
-        return 3 * tp_index
+        res = 0
+        for i in range(tp_index):
+            if(not self.hold_gcp_fixed or not self.tpcol[i].is_gcp):
+                res += 3
+        return res
 
     def ground_location(self, tp_index):
         '''Using the current value of the parameters, determine
@@ -114,7 +268,10 @@ class SimultaneousBundleAdjustment(object):
         gp = self.tpcol[tp_index].ground_location
         gl = gp.position
         t = self.index_to_tp_offset(tp_index)
-        pt = gp.create([gl[0] + t[0], gl[1] + t[1], gl[2] + t[2]])
+        if(t is not None):
+            pt = gp.create([gl[0] + t[0], gl[1] + t[1], gl[2] + t[2]])
+        else:
+            pt = gp
         return pt
 
     def sba_eq(self, parm):
@@ -128,16 +285,12 @@ class SimultaneousBundleAdjustment(object):
     def sba_jacobian(self, parm):
         '''Return Jacobian for SBA equation'''
         self.parameter = parm
-        len_surface_constraint = len(self.tpcol)
-        if(self.tp_sigma is not None):
-            len_gcp_constraint = len(self.tpcol) * 3
-        else:
-            len_gcp_constraint = self.tpcol.number_gcp * 3
-        len_collinearity = self.niloc * 2
+        len_igc_parameter = self.igc_coll.parameter_subset.shape[0]
         len_parameter = len(self.parameter)
-        res = _coo_helper((len_surface_constraint + len_gcp_constraint +
-                           len_collinearity + len_parameter,
-                           len_parameter))
+        res = _coo_helper((self.len_surface_constraint + 
+                           self.len_gcp_constraint +
+                           self.len_collinearity_constraint + 
+                           len_igc_parameter, len_parameter))
         self.row_index = 0
         self.__surface_constraint_jacobian(res)
         self.__gcp_constraint_jacobian(res)
@@ -149,17 +302,15 @@ class SimultaneousBundleAdjustment(object):
         '''Calculate the GCP constraint equations. This is the penalty
         we get from placing a tiepoint somewhere other than the location
         given by the GCP'''
-        if(self.tp_sigma is not None):
-            len_gcp_constraint = len(self.tpcol) * 3
-        else:
-            len_gcp_constraint = self.tpcol.number_gcp * 3
-        res = np.empty(len_gcp_constraint)
+        res = np.empty(self.len_gcp_constraint)
         i = 0
         for tp_index, tp in enumerate(self.tpcol):
-            if(tp.is_gcp):
+            if(tp.is_gcp and not self.hold_gcp_fixed):
                 res[i:(i+3)] = (self.index_to_tp_offset(tp_index) / 
                                 self.gcp_sigma)
                 i += 3
+            elif(tp.is_gcp and self.hold_gcp_fixed):
+                pass
             elif(self.tp_sigma is not None):
                 res[i:(i+3)] = (self.index_to_tp_offset(tp_index) / 
                                 self.tp_sigma)
@@ -171,11 +322,13 @@ class SimultaneousBundleAdjustment(object):
         matrix to fill in, and row to start at. The row gets updated to
         just past the end of what we fill out'''
         for tp_index, tp in enumerate(self.tpcol):
-            if(tp.is_gcp):
+            if(tp.is_gcp and not self.hold_gcp_fixed):
                 pind = self.tp_index_to_parameter_index(tp_index)
                 for j in range(3):
                     res[self.row_index + j, pind + j] = 1.0 / self.gcp_sigma
                 self.row_index += 3
+            elif(tp.is_gcp and self.hold_gcp_fixed):
+                pass
             elif(self.tp_sigma is not None):
                 pind = self.tp_index_to_parameter_index(tp_index)
                 for j in range(3):
@@ -186,9 +339,12 @@ class SimultaneousBundleAdjustment(object):
         '''Calculate all the surface constraint equations. This is
         the penalty we get from placing a tiepoint somewhere other than
         the surface given by the Dem.'''
-        res = np.zeros(len(self.tpcol))
-        for i in range(len(self.tpcol)):
-            res[i] = self.dem.distance_to_surface(self.ground_location(i))
+        res = np.zeros(self.len_surface_constraint)
+        j = 0
+        for i, tp in enumerate(self.tpcol):
+            if(not self.hold_gcp_fixed or not tp.is_gcp):
+                res[j] = self.dem.distance_to_surface(self.ground_location(i))
+                j += 1
         res /= self.dem_sigma
         return res
     
@@ -196,19 +352,20 @@ class SimultaneousBundleAdjustment(object):
         '''Calculate the Jacobian of the surface constraint equations. Takes
         matrix to fill in, and row to start at. The row gets updated to
         just past the end of what we fill out'''
-        for i in range(len(self.tpcol)):
-            gp = self.ground_location(i)
-            pind = self.tp_index_to_parameter_index(i)
-            x0 = self.dem.distance_to_surface(gp) / self.dem_sigma
-            p0 = gp.position
-            for j in range(3):
-                p = p0.copy()
-                p[j] += self.tp_epsilon
-                gp.position = p
-                x = self.dem.distance_to_surface(gp) / self.dem_sigma
-                res[self.row_index + i, pind + j] = (x - x0) / self.tp_epsilon
-            gp.position = p0
-        self.row_index += len(self.tpcol)
+        for i, tp in enumerate(self.tpcol):
+            if(not self.hold_gcp_fixed or not tp.is_gcp):
+                gp = self.ground_location(i)
+                pind = self.tp_index_to_parameter_index(i)
+                x0 = self.dem.distance_to_surface(gp) / self.dem_sigma
+                p0 = gp.position
+                for j in range(3):
+                    p = p0.copy()
+                    p[j] += self.tp_epsilon
+                    gp.position = p
+                    x = self.dem.distance_to_surface(gp) / self.dem_sigma
+                    res[self.row_index, pind + j] = (x - x0) / self.tp_epsilon
+                gp.position = p0
+                self.row_index += 1
         
     def collinearity_constraint(self):
         '''Calculate the collinearity constraint equations. This is
@@ -221,10 +378,11 @@ class SimultaneousBundleAdjustment(object):
             for j, il in enumerate(tp.image_location):
                 if(il):
                     try:
-                        ic = self.igc_coll.image_coordinate(j, gp)
                         ictp, lsigma, ssigma = il
-                        res[ind] = (ictp.line - ic.line) / lsigma
-                        res[ind + 1] = (ictp.sample - ic.sample) / ssigma
+                        weight = [1.0/lsigma, 1.0/ssigma]
+                        cres = self.igc_coll.collinearity_residual(j, gp, ictp)
+                        rs = slice(ind, ind + 2)
+                        res[rs] = cres * weight
                     except RuntimeError as e:
                         if(str(e) != "ImageGroundConnectionFailed"):
                             raise e
@@ -235,22 +393,25 @@ class SimultaneousBundleAdjustment(object):
 
     def __collinearity_constraint_jacobian(self, res):
         '''Calculate the Jacobian of the collinearity constraint equations.'''
+        self.igc_coll.add_identity_gradient()
         ind = self.row_index
         for i, tp in enumerate(self.tpcol):
             gp = self.ground_location(i)
             for j, il in enumerate(tp.image_location):
                 if(il):
                     ictp, lsigma, ssigma = il
+                    weight = [[1.0/lsigma], [1.0/ssigma]]
                     try:
-                        jac = self.igc_coll.image_coordinate_jac_cf(j, gp)
-                        # We have "-" because equation if measured - predicted
-                        ts = self.tp_slice[i].start
-                        for k in range(3):
-                            res[ind, ts + k] = -jac[0,k] / lsigma
-                            res[ind + 1, ts + k] = -jac[1,k] / ssigma
-                        self.igc_coll.image_coordinate_jac_parm(j, gp, res, ind,
-                            self.igc_coll_param_slice.start, -1.0 / lsigma,
-                            -1.0 / ssigma)
+                        jac = self.igc_coll.collinearity_residual_jacobian(j, 
+                                                                gp, ictp)
+                        rs = slice(ind, ind + 2)
+                        ts = self.tp_slice[i]
+                        if(ts is not None):
+                            ts2 = slice(-3,None)
+                            res[rs, ts] = jac[:,ts2] * weight
+                        ps = self.igc_coll_param_slice
+                        ps2 = slice(None,-3)
+                        res[rs, ps] = jac[:,ps2] * weight
                     except RuntimeError as e:
                         if(str(e) != "ImageGroundConnectionFailed"):
                             raise e
@@ -262,9 +423,10 @@ class SimultaneousBundleAdjustment(object):
         '''Calculate the parameter constraint. This is the penalty for
         moving a particular parameter from its initial value.'''
         # This needs to be scaled, but for now just do this
-        return np.array(self.parameter) / 10.0
+        return (self.igc_coll.parameter_subset - self.p0) / self.psigma
     
     def __parameter_constraint_jacobian(self, res):
-        istart = (len(self.tpcol) + self.tpcol.number_gcp * 3 + self.niloc * 2)
-        for i in range(len(self.parameter)):
-            res[istart + i, i] = 1 / 10.0
+        istart = self.parameter_constraint_slice.start
+        jstart = self.igc_coll_param_slice.start
+        for i in range(self.igc_coll.parameter_subset.shape[0]):
+            res[istart + i, jstart + i] = 1 / self.psigma[i]

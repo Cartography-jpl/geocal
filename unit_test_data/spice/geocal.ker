@@ -15,7 +15,7 @@ KERNELS_TO_LOAD = (
   'lsk/naif0010.tls',
   'pck/pck00010.tpc',
   'pck/earth_720101_070426.bpc',
-  'pck/earth_000101_140721_140429.bpc',
+  'pck/earth_000101_160116_151025.bpc',
   'fk/planets/earth_assoc_itrf93.tf',
   'fk/planets/eci_tod.tf',
   'spk/planets/de432s.bsp'

@@ -1,1 +1,5 @@
+if BUILD_AFIDS
+else
 installafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
+endif
+etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh

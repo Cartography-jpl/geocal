@@ -635,6 +635,8 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+BUILD_AFIDS_FALSE
+BUILD_AFIDS_TRUE
 WITH_DOCUMENTATION_FALSE
 WITH_DOCUMENTATION_TRUE
 LIBM
@@ -642,6 +644,8 @@ IS_MAC64_FALSE
 IS_MAC64_TRUE
 IS_MAC_FALSE
 IS_MAC_TRUE
+HAVE_GFORTRAN_FALSE
+HAVE_GFORTRAN_TRUE
 HAVE_G77_FALSE
 HAVE_G77_TRUE
 SWIG_PYTHON_CPPFLAGS
@@ -650,6 +654,7 @@ HAVE_SWIG_FALSE
 HAVE_SWIG_TRUE
 SWIG_LIB
 SWIG
+etcafidspythondir
 installafidspythondir
 afidspythonvdevdir
 geocalpkgpythondir
@@ -695,6 +700,9 @@ PYTHON_EXEC_PREFIX
 PYTHON_PREFIX
 PYTHON_VERSION
 PYTHON
+python_bin_name
+WITH_PYTHON3_FALSE
+WITH_PYTHON3_TRUE
 BUILD_CARTO_FALSE
 BUILD_CARTO_TRUE
 HAVE_CARTO_FALSE
@@ -718,20 +726,31 @@ HAVE_GDAL_FALSE
 HAVE_GDAL_TRUE
 BUILD_OPENJPEG_FALSE
 BUILD_OPENJPEG_TRUE
-BUILD_EXPAT_FALSE
-BUILD_EXPAT_TRUE
-BUILD_OGDI_FALSE
-BUILD_OGDI_TRUE
-BUILD_GEOS_FALSE
-BUILD_GEOS_TRUE
 HAVE_OPENJPEG_FALSE
 HAVE_OPENJPEG_TRUE
+OPENJPEG_PREFIX
+OPENJPEG_LIBS
+OPENJPEG_CFLAGS
+BUILD_EXPAT_FALSE
+BUILD_EXPAT_TRUE
 HAVE_EXPAT_FALSE
 HAVE_EXPAT_TRUE
+EXPAT_PREFIX
+EXPAT_LIBS
+EXPAT_CFLAGS
+BUILD_OGDI_FALSE
+BUILD_OGDI_TRUE
 HAVE_OGDI_FALSE
 HAVE_OGDI_TRUE
+OGDI_PREFIX
+OGDI_LIBS
+OGDI_CFLAGS
+BUILD_GEOS_FALSE
+BUILD_GEOS_TRUE
 HAVE_GEOS_FALSE
 HAVE_GEOS_TRUE
+GEOS_LIBS
+GEOS_CFLAGS
 GDAL_LIBS
 GDAL_CFLAGS
 BUILD_FFTW_FALSE
@@ -896,6 +915,7 @@ INSTALL_SCRIPT
 INSTALL_PROGRAM
 HAVE_CSH
 HAVE_PATCH
+HAVE_M4
 HAVE_PERL
 HAVE_CXX
 ac_ct_CXX
@@ -973,10 +993,15 @@ with_spice
 with_doxygen
 with_fftw
 with_gdal
+with_geos
+with_ogdi
+with_expat
+with_openjpeg
 with_vicar_gdalplugin
 with_afids
 with_carto
 with_python
+with_python3
 with_swig
 with_boost_serialization
 with_documentation
@@ -1015,6 +1040,14 @@ FFTW_CFLAGS
 FFTW_LIBS
 GDAL_CFLAGS
 GDAL_LIBS
+GEOS_CFLAGS
+GEOS_LIBS
+OGDI_CFLAGS
+OGDI_LIBS
+EXPAT_CFLAGS
+EXPAT_LIBS
+OPENJPEG_CFLAGS
+OPENJPEG_LIBS
 CARTO_CFLAGS
 CARTO_LIBS
 PYTHON
@@ -1698,6 +1731,15 @@ Optional Packages:
                           to specify the root directory for fftw (optional).
   --with-gdal[=DIR]       use GDAL (default is yes if found) - it is possible
                           to specify the root directory for GDAL (optional).
+  --with-geos[=DIR]       use Geos (default is yes if found) - it is possible
+                          to specify the root directory for Geos (optional).
+  --with-ogdi[=DIR]       use ogdi (default is yes if found) - it is possible
+                          to specify the root directory for ogdi (optional).
+  --with-expat[=DIR]      use expat (default is yes if found) - it is possible
+                          to specify the root directory for expat (optional).
+  --with-openjpeg[=DIR]   use openjpeg (default is yes if found) - it is
+                          possible to specify the root directory for openjpeg
+                          (optional).
   --with-vicar-gdalplugin[=DIR]
                           use VICAR GDAL Plugin (default is yes if found) - it
                           is possible to specify the root directory for VICAR
@@ -1711,6 +1753,9 @@ Optional Packages:
                           (optional). You can also specify "build" if you want
                           to build your own local copy. See also THIRDPARTY
                           variable described below.
+  --with-python3          Build python 3 rather than python 2. This is still
+                          in testing, which is why we have a separate option
+                          for this
   --without-swig          Bypass running SWIG to update SWIG wrappers. The
                           SWIG wrappers can take a bit of time to create and
                           compile, so if you aren't working directly with them
@@ -1768,6 +1813,17 @@ Some influential environment variables:
   FFTW_LIBS   linker flags for FFTW, overriding pkg-config
   GDAL_CFLAGS C compiler flags for GDAL, overriding pkg-config
   GDAL_LIBS   linker flags for GDAL, overriding pkg-config
+  GEOS_CFLAGS C compiler flags for GEOS, overriding pkg-config
+  GEOS_LIBS   linker flags for GEOS, overriding pkg-config
+  OGDI_CFLAGS C compiler flags for OGDI, overriding pkg-config
+  OGDI_LIBS   linker flags for OGDI, overriding pkg-config
+  EXPAT_CFLAGS
+              C compiler flags for EXPAT, overriding pkg-config
+  EXPAT_LIBS  linker flags for EXPAT, overriding pkg-config
+  OPENJPEG_CFLAGS
+              C compiler flags for OPENJPEG, overriding pkg-config
+  OPENJPEG_LIBS
+              linker flags for OPENJPEG, overriding pkg-config
   CARTO_CFLAGS
               C compiler flags for CARTO, overriding pkg-config
   CARTO_LIBS  linker flags for CARTO, overriding pkg-config
@@ -8064,7 +8120,7 @@ if test "$HAVE_CXX" = "no"; then
    as_fn_error $? "Could not find a c++ compiler" "$LINENO" 5;
 fi
 
-# We check for the very basic programs perl and patch. Surprising if not
+# We check for the very basic programs m4, perl and patch. Surprising if not
 # found, but possible, so we check.
 # Extract the first word of "perl", so it can be a program name with args.
 set dummy perl; ac_word=$2
@@ -8105,7 +8161,48 @@ fi
 
 
 if test "$HAVE_PERL" = "no"; then
-   as_fn_error $? "Could not find a perl, which is required for install" "$LINENO" 5;
+   as_fn_error $? "Could not find perl, which is required for install" "$LINENO" 5;
+fi
+# Extract the first word of "m4", so it can be a program name with args.
+set dummy m4; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_prog_HAVE_M4+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test -n "$HAVE_M4"; then
+  ac_cv_prog_HAVE_M4="$HAVE_M4" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_prog_HAVE_M4="yes"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  test -z "$ac_cv_prog_HAVE_M4" && ac_cv_prog_HAVE_M4="no"
+fi
+fi
+HAVE_M4=$ac_cv_prog_HAVE_M4
+if test -n "$HAVE_M4"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $HAVE_M4" >&5
+$as_echo "$HAVE_M4" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+if test "$HAVE_M4" = "no"; then
+   as_fn_error $? "Could not find m4, which is required for install" "$LINENO" 5;
 fi
 # Extract the first word of "patch", so it can be a program name with args.
 set dummy patch; ac_word=$2
@@ -8146,8 +8243,32 @@ fi
 
 
 if test "$HAVE_PATCH" = "no"; then
-   as_fn_error $? "Could not find a patch, which is required for install" "$LINENO" 5;
+   as_fn_error $? "Could not find patch, which is required for install" "$LINENO" 5;
 fi
+# Make sure we have perl module Data::Dumper which is used by some
+# installed programs. This is actually a separate install on centos 7,
+# so make sure it is there.
+
+    if test -z $PERL;
+    then
+        PERL="perl"
+    fi
+    PERL_NAME=`basename $PERL`
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking $PERL_NAME module: Data::Dumper" >&5
+$as_echo_n "checking $PERL_NAME module: Data::Dumper... " >&6; }
+    $PERL "-MData::Dumper" -e exit > /dev/null 2>&1
+	if test $? -eq 0;
+	then
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	else
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+		as_fn_error $? "failed to find required module Data::Dumper" "$LINENO" 5
+		exit 1
+	fi
+
+
 
 # We need to have csh to run things like vicarb
 # Extract the first word of "csh", so it can be a program name with args.
@@ -17066,7 +17187,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     VICAR_RTL_PREFIX=`$PKG_CONFIG --variable=prefix "vicar-rtl" 2>/dev/null`
+     if test -z "$VICAR_RTL_PREFIX"; then
+        VICAR_RTL_PREFIX=`$PKG_CONFIG --variable=prefix "vicar-rtl" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -17348,7 +17471,7 @@ if test "x$want_hdf5" = "xyes"; then
 $as_echo_n "checking for HDF5 library... " >&6; }
         succeeded=no
         if test "$ac_hdf5_path" != ""; then
-            HDF5HOME=$ac_hdf5_path
+            HDF5HOME="$ac_hdf5_path"
             HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
             HDF5_CFLAGS="-I$ac_hdf5_path/include"
             succeeded=yes
@@ -17424,7 +17547,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+     if test -z "$HDF5_PREFIX"; then
+        HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -17452,14 +17577,14 @@ fi
      done
   fi
 
-            HDF5HOME=$HDF5_PREFIX
+            HDF5HOME="$HDF5_PREFIX"
         fi
 
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
         else
-                HDF5_BIN=$HDF5HOME/bin
+                HDF5_BIN="$HDF5HOME/bin"
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 
@@ -17584,7 +17709,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     if test -z "$HDFEOS5_PREFIX"; then
+        HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -17684,7 +17811,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     if test -z "$HDFEOS5_PREFIX"; then
+        HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18327,7 +18456,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     BLITZ_PREFIX=`$PKG_CONFIG --variable=prefix "blitz" 2>/dev/null`
+     if test -z "$BLITZ_PREFIX"; then
+        BLITZ_PREFIX=`$PKG_CONFIG --variable=prefix "blitz" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18519,7 +18650,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     GSL_PREFIX=`$PKG_CONFIG --variable=prefix "gsl" 2>/dev/null`
+     if test -z "$GSL_PREFIX"; then
+        GSL_PREFIX=`$PKG_CONFIG --variable=prefix "gsl" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18717,7 +18850,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     SPICE_PREFIX=`$PKG_CONFIG --variable=prefix "spice" 2>/dev/null`
+     if test -z "$SPICE_PREFIX"; then
+        SPICE_PREFIX=`$PKG_CONFIG --variable=prefix "spice" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18834,7 +18969,7 @@ if test "x$want_hdf5" = "xyes"; then
 $as_echo_n "checking for HDF5 library... " >&6; }
         succeeded=no
         if test "$ac_hdf5_path" != ""; then
-            HDF5HOME=$ac_hdf5_path
+            HDF5HOME="$ac_hdf5_path"
             HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
             HDF5_CFLAGS="-I$ac_hdf5_path/include"
             succeeded=yes
@@ -18910,7 +19045,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+     if test -z "$HDF5_PREFIX"; then
+        HDF5_PREFIX=`$PKG_CONFIG --variable=prefix "hdf5" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -18938,14 +19075,14 @@ fi
      done
   fi
 
-            HDF5HOME=$HDF5_PREFIX
+            HDF5HOME="$HDF5_PREFIX"
         fi
 
         if test "$succeeded" != "yes" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
         else
-                HDF5_BIN=$HDF5HOME/bin
+                HDF5_BIN="$HDF5HOME/bin"
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 
@@ -19238,7 +19375,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     FFTW_PREFIX=`$PKG_CONFIG --variable=prefix "fftw3" 2>/dev/null`
+     if test -z "$FFTW_PREFIX"; then
+        FFTW_PREFIX=`$PKG_CONFIG --variable=prefix "fftw3" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -19359,7 +19498,8 @@ if test "x$want_gdal" = "xyes"; then
 $as_echo_n "checking for GDAL library... " >&6; }
         succeeded=no
         if test "$ac_gdal_path" != ""; then
-            GDAL_LIBS="-R$ac_gdal_path/lib -L$ac_gdal_path/lib -lgdal"
+            GDAL_PREFIX="$ac_gdal_path"
+            GDAL_LIBS="-L$ac_gdal_path/lib -lgdal"
             GDAL_CFLAGS="-I$ac_gdal_path/include"
             succeeded=yes
         else
@@ -19434,7 +19574,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     GDAL_PREFIX=`$PKG_CONFIG --variable=prefix "gdal" 2>/dev/null`
+     if test -z "$GDAL_PREFIX"; then
+        GDAL_PREFIX=`$PKG_CONFIG --variable=prefix "gdal" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -19471,6 +19613,8 @@ $as_echo "no" >&6; }
 $as_echo "yes" >&6; }
 	fi
         if test "$succeeded" = "yes" -a "$build_gdal" = "no"; then
+                GDAL_LIBS="`$GDAL_PREFIX/bin/gdal-config --libs` `$GDAL_PREFIX/bin/gdal-config --dep-libs`"
+                GDAL_CFLAGS=`$GDAL_PREFIX/bin/gdal-config --cflags`
 	        { $as_echo "$as_me:${as_lineno-$LINENO}: checking version GDAL library is new enough" >&5
 $as_echo_n "checking version GDAL library is new enough... " >&6; }
 
@@ -19572,14 +19716,786 @@ $as_echo "#define HAVE_GDAL /**/" >>confdefs.h
                 have_gdal="yes"
         fi
 fi
-# We never build this in GeoCal, so leave this out so the configure
-# message isn't confusing
-#if test "$build_gdal" = "yes"; then
-#  AC_GEOS(required, cannot_build, default_search)
-#  AC_OGDI(required, cannot_build, default_search)
-#  AC_EXPAT(required, cannot_build, default_search)
-#  AC_OPENJPEG(required, cannot_build, default_search)
-#else # Not building GDAL
+if test "$build_gdal" = "yes"; then
+
+
+have_geos="no"
+build_geos="no"
+
+# Check whether --with-geos was given.
+if test "${with_geos+set}" = set; then :
+  withval=$with_geos;
+    if test "$withval" = "no"; then
+        want_geos="no"
+    elif test "$withval" = "yes"; then
+        want_geos="yes"
+        ac_geos_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-geos" "$LINENO" 5
+        fi
+        want_geos="yes"
+        build_geos="yes"
+        ac_geos_path="\${prefix}"
+    else
+        want_geos="yes"
+        ac_geos_path="$withval"
+    fi
+
+else
+
+    want_geos="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_geos="yes"
+        build_geos="yes"
+        ac_geos_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_geos" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS library" >&5
+$as_echo_n "checking for GEOS library... " >&6; }
+        succeeded=no
+        if test "$ac_geos_path" != ""; then
+            GEOS_CFLAGS="-I$ac_geos_path/include"
+            GEOS_LIBS="-R$ac_geos_path/lib -L$ac_geos_path/lib -lgeos"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS" >&5
+$as_echo_n "checking for GEOS... " >&6; }
+
+if test -n "$GEOS_CFLAGS"; then
+    pkg_cv_GEOS_CFLAGS="$GEOS_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GEOS_CFLAGS=`$PKG_CONFIG --cflags "geos" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$GEOS_LIBS"; then
+    pkg_cv_GEOS_LIBS="$GEOS_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GEOS_LIBS=`$PKG_CONFIG --libs "geos" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        GEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "geos" 2>&1`
+        else
+	        GEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors "geos" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$GEOS_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	GEOS_CFLAGS=$pkg_cv_GEOS_CFLAGS
+	GEOS_LIBS=$pkg_cv_GEOS_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     if test -z "$GEOS_PREFIX"; then
+        GEOS_PREFIX=`$PKG_CONFIG --variable=prefix "geos" 2>/dev/null`
+     fi
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/geos.h" && test -r "$ac_path_tmp/include/geos.h"; then
+          GEOS_PREFIX=$ac_path_tmp
+          GEOS_CFLAGS="-I$ac_path_tmp/include/"
+          if test -e "$ac_path_tmp/lib/libgeos.so"; then
+             GEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgeos"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libgeos.dylib"; then
+             GEOS_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lgeos"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libgeos.so"; then
+             GEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgeos"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libgeos.dylib"; then
+             GEOS_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lgeos"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+$as_echo "#define HAVE_GEOS /**/" >>confdefs.h
+
+                have_geos="yes"
+        fi
+fi
+ if test "$have_geos" = "yes"; then
+  HAVE_GEOS_TRUE=
+  HAVE_GEOS_FALSE='#'
+else
+  HAVE_GEOS_TRUE='#'
+  HAVE_GEOS_FALSE=
+fi
+
+ if test "$build_geos" = "yes"; then
+  BUILD_GEOS_TRUE=
+  BUILD_GEOS_FALSE='#'
+else
+  BUILD_GEOS_TRUE='#'
+  BUILD_GEOS_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_geos" = "no"; then
+     as_fn_error $? "
+The Geos library is required by GeoCal. Try specifying
+location using --with-geos if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+
+have_ogdi="no"
+build_ogdi="no"
+
+# Check whether --with-ogdi was given.
+if test "${with_ogdi+set}" = set; then :
+  withval=$with_ogdi;
+    if test "$withval" = "no"; then
+        want_ogdi="no"
+    elif test "$withval" = "yes"; then
+        want_ogdi="yes"
+        ac_ogdi_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-ogdi" "$LINENO" 5
+        fi
+        want_ogdi="yes"
+        build_ogdi="yes"
+        ac_ogdi_path="\${prefix}"
+    else
+        want_ogdi="yes"
+        ac_ogdi_path="$withval"
+    fi
+
+else
+
+    want_ogdi="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_ogdi="yes"
+        build_ogdi="yes"
+        ac_ogdi_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_ogdi" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Ogdi library" >&5
+$as_echo_n "checking for Ogdi library... " >&6; }
+        succeeded=no
+        if test "$ac_ogdi_path" != ""; then
+            OGDI_LIBS="-L$ac_ogdi_path/lib -logdi"
+            OGDI_CFLAGS="-I$ac_ogdi_path/include"
+	    OGDI_PREFIX="$ac_ogdi_path"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OGDI" >&5
+$as_echo_n "checking for OGDI... " >&6; }
+
+if test -n "$OGDI_CFLAGS"; then
+    pkg_cv_OGDI_CFLAGS="$OGDI_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OGDI_CFLAGS=`$PKG_CONFIG --cflags "ogdi" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$OGDI_LIBS"; then
+    pkg_cv_OGDI_LIBS="$OGDI_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OGDI_LIBS=`$PKG_CONFIG --libs "ogdi" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        OGDI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "ogdi" 2>&1`
+        else
+	        OGDI_PKG_ERRORS=`$PKG_CONFIG --print-errors "ogdi" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$OGDI_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	OGDI_CFLAGS=$pkg_cv_OGDI_CFLAGS
+	OGDI_LIBS=$pkg_cv_OGDI_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     if test -z "$OGDI_PREFIX"; then
+        OGDI_PREFIX=`$PKG_CONFIG --variable=prefix "ogdi" 2>/dev/null`
+     fi
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/ecs.h" && test -r "$ac_path_tmp/include/ecs.h"; then
+          OGDI_PREFIX=$ac_path_tmp
+          OGDI_CFLAGS="-I$ac_path_tmp/include/"
+          if test -e "$ac_path_tmp/lib/libogdi.so"; then
+             OGDI_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -logdi"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libogdi.dylib"; then
+             OGDI_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -logdi"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libogdi.so"; then
+             OGDI_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -logdi"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libogdi.dylib"; then
+             OGDI_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -logdi"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_OGDI /**/" >>confdefs.h
+
+                have_ogdi="yes"
+        fi
+fi
+ if test "$have_ogdi" = "yes"; then
+  HAVE_OGDI_TRUE=
+  HAVE_OGDI_FALSE='#'
+else
+  HAVE_OGDI_TRUE='#'
+  HAVE_OGDI_FALSE=
+fi
+
+ if test "$build_ogdi" = "yes"; then
+  BUILD_OGDI_TRUE=
+  BUILD_OGDI_FALSE='#'
+else
+  BUILD_OGDI_TRUE='#'
+  BUILD_OGDI_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_ogdi" = "no"; then
+     as_fn_error $? "
+The ogdi library is required by GeoCal. Try specifying
+location using --with-ogdi if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+
+have_expat="no"
+build_expat="no"
+
+# Check whether --with-expat was given.
+if test "${with_expat+set}" = set; then :
+  withval=$with_expat;
+    if test "$withval" = "no"; then
+        want_expat="no"
+    elif test "$withval" = "yes"; then
+        want_expat="yes"
+        ac_expat_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-expat" "$LINENO" 5
+        fi
+        want_expat="yes"
+        build_expat="yes"
+        ac_expat_path="\${prefix}"
+    else
+        want_expat="yes"
+        ac_expat_path="$withval"
+    fi
+
+else
+
+    want_expat="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_expat="yes"
+        build_expat="yes"
+        ac_expat_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_expat" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for expat library" >&5
+$as_echo_n "checking for expat library... " >&6; }
+        succeeded=no
+        if test "$ac_expat_path" != ""; then
+            EXPAT_LIBS="-L$ac_expat_path/lib -lexpat"
+            EXPAT_CFLAGS="-I$ac_expat_path/include"
+	    EXPAT_PREFIX="$ac_expat_path"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for EXPAT" >&5
+$as_echo_n "checking for EXPAT... " >&6; }
+
+if test -n "$EXPAT_CFLAGS"; then
+    pkg_cv_EXPAT_CFLAGS="$EXPAT_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"expat\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "expat") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_EXPAT_CFLAGS=`$PKG_CONFIG --cflags "expat" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$EXPAT_LIBS"; then
+    pkg_cv_EXPAT_LIBS="$EXPAT_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"expat\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "expat") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_EXPAT_LIBS=`$PKG_CONFIG --libs "expat" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        EXPAT_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "expat" 2>&1`
+        else
+	        EXPAT_PKG_ERRORS=`$PKG_CONFIG --print-errors "expat" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$EXPAT_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	EXPAT_CFLAGS=$pkg_cv_EXPAT_CFLAGS
+	EXPAT_LIBS=$pkg_cv_EXPAT_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     if test -z "$EXPAT_PREFIX"; then
+        EXPAT_PREFIX=`$PKG_CONFIG --variable=prefix "expat" 2>/dev/null`
+     fi
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/expat.h" && test -r "$ac_path_tmp/include/expat.h"; then
+          EXPAT_PREFIX=$ac_path_tmp
+          EXPAT_CFLAGS="-I$ac_path_tmp/include/"
+          if test -e "$ac_path_tmp/lib/libexpat.so"; then
+             EXPAT_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lexpat"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libexpat.dylib"; then
+             EXPAT_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lexpat"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libexpat.so"; then
+             EXPAT_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lexpat"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libexpat.dylib"; then
+             EXPAT_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lexpat"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_EXPAT /**/" >>confdefs.h
+
+                have_expat="yes"
+        fi
+fi
+ if test "$have_expat" = "yes"; then
+  HAVE_EXPAT_TRUE=
+  HAVE_EXPAT_FALSE='#'
+else
+  HAVE_EXPAT_TRUE='#'
+  HAVE_EXPAT_FALSE=
+fi
+
+ if test "$build_expat" = "yes"; then
+  BUILD_EXPAT_TRUE=
+  BUILD_EXPAT_FALSE='#'
+else
+  BUILD_EXPAT_TRUE='#'
+  BUILD_EXPAT_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_expat" = "no"; then
+     as_fn_error $? "
+The expat library is required by GeoCal. Try specifying
+location using --with-expat if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+
+
+have_openjpeg="no"
+build_openjpeg="no"
+
+# Check whether --with-openjpeg was given.
+if test "${with_openjpeg+set}" = set; then :
+  withval=$with_openjpeg;
+    if test "$withval" = "no"; then
+        want_openjpeg="no"
+    elif test "$withval" = "yes"; then
+        want_openjpeg="yes"
+        ac_openjpeg_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-openjpeg" "$LINENO" 5
+        fi
+        want_openjpeg="yes"
+        build_openjpeg="yes"
+        ac_openjpeg_path="\${prefix}"
+    else
+        want_openjpeg="yes"
+        ac_openjpeg_path="$withval"
+    fi
+
+else
+
+    want_openjpeg="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_openjpeg="yes"
+        build_openjpeg="yes"
+        ac_openjpeg_path="\${prefix}"
+      fi
+    fi
+
+fi
+
+
+if test "x$want_openjpeg" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for openjpeg library" >&5
+$as_echo_n "checking for openjpeg library... " >&6; }
+        succeeded=no
+        if test "$ac_openjpeg_path" != ""; then
+            OPENJPEG_LIBS="-L$ac_openjpeg_path/lib -lopenjp2"
+            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.1"
+	    OPENJPEG_PREFIX="$ac_openjpeg_path"
+            succeeded=yes
+        else
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OPENJPEG" >&5
+$as_echo_n "checking for OPENJPEG... " >&6; }
+
+if test -n "$OPENJPEG_CFLAGS"; then
+    pkg_cv_OPENJPEG_CFLAGS="$OPENJPEG_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"openjpeg\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "openjpeg") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OPENJPEG_CFLAGS=`$PKG_CONFIG --cflags "openjpeg" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$OPENJPEG_LIBS"; then
+    pkg_cv_OPENJPEG_LIBS="$OPENJPEG_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"openjpeg\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "openjpeg") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OPENJPEG_LIBS=`$PKG_CONFIG --libs "openjpeg" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "openjpeg" 2>&1`
+        else
+	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --print-errors "openjpeg" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$OPENJPEG_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	OPENJPEG_CFLAGS=$pkg_cv_OPENJPEG_CFLAGS
+	OPENJPEG_LIBS=$pkg_cv_OPENJPEG_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     if test -z "$OPENJPEG_PREFIX"; then
+        OPENJPEG_PREFIX=`$PKG_CONFIG --variable=prefix "openjpeg" 2>/dev/null`
+     fi
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/openjpeg-2.1/openjpeg.h" && test -r "$ac_path_tmp/include/openjpeg-2.1/openjpeg.h"; then
+          OPENJPEG_PREFIX=$ac_path_tmp
+          OPENJPEG_CFLAGS="-I$ac_path_tmp/include/openjpeg-2.1/"
+          if test -e "$ac_path_tmp/lib/libopenjp2.so"; then
+             OPENJPEG_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -openjp2"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libopenjp2.dylib"; then
+             OPENJPEG_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -openjp2"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libopenjp2.so"; then
+             OPENJPEG_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -openjp2"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libopenjp2.dylib"; then
+             OPENJPEG_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -openjp2"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+        fi
+
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_OPENJPEG /**/" >>confdefs.h
+
+                have_openjpeg="yes"
+        fi
+fi
+ if test "$have_openjpeg" = "yes"; then
+  HAVE_OPENJPEG_TRUE=
+  HAVE_OPENJPEG_FALSE='#'
+else
+  HAVE_OPENJPEG_TRUE='#'
+  HAVE_OPENJPEG_FALSE=
+fi
+
+ if test "$build_openjpeg" = "yes"; then
+  BUILD_OPENJPEG_TRUE=
+  BUILD_OPENJPEG_FALSE='#'
+else
+  BUILD_OPENJPEG_TRUE='#'
+  BUILD_OPENJPEG_FALSE=
+fi
+
+
+
+if test "required" = "required"; then
+  if test "$have_openjpeg" = "no"; then
+     as_fn_error $? "
+The openjpeg library is required by GeoCal. Try specifying
+location using --with-openjpeg if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+else # Not building GDAL
    if false; then
   HAVE_GEOS_TRUE=
   HAVE_GEOS_FALSE='#'
@@ -19648,7 +20564,7 @@ fi
   build_ogdi="no"
   build_expat="no"
   build_openjpeg="yes"
-#fi # End if/else building GDAL
+fi # End if/else building GDAL
  if test "$have_gdal" = "yes"; then
   HAVE_GDAL_TRUE=
   HAVE_GDAL_FALSE='#'
@@ -20001,7 +20917,9 @@ $as_echo "yes" >&6; }
 	succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
-     CARTO_PREFIX=`$PKG_CONFIG --variable=prefix "carto" 2>/dev/null`
+     if test -z "$CARTO_PREFIX"; then
+        CARTO_PREFIX=`$PKG_CONFIG --variable=prefix "carto" 2>/dev/null`
+     fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
@@ -20125,6 +21043,34 @@ else
       fi
     fi
 
+fi
+
+
+
+# Option to build new python 3 code. This is still in testing,
+# which is why we have this separate.
+
+# Check whether --with-python3 was given.
+if test "${with_python3+set}" = set; then :
+  withval=$with_python3; with_python3=yes
+	   python_lib_path=python3.5
+	   python_inc_path=python3.5m
+           python_bin_name=python3
+
+else
+  with_python3=no
+	    python_lib_path=python2.7
+	    python_inc_path=python2.7
+           python_bin_name=python
+
+fi
+
+ if test x$with_python3 = xyes; then
+  WITH_PYTHON3_TRUE=
+  WITH_PYTHON3_FALSE='#'
+else
+  WITH_PYTHON3_TRUE='#'
+  WITH_PYTHON3_FALSE=
 fi
 
 
@@ -20342,10 +21288,10 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
 
 
      PYTHON=`pwd`"/external/python_wrap.sh"
-     PYTHON_CPPFLAGS="-I\${prefix}/include/python2.7"
-     PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/python2.7/site-packages/numpy/core/include"
-     pythondir="lib/python2.7/site-packages"
-     platpythondir="lib/python2.7/site-packages"
+     PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
+     PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"
+     pythondir="lib/${python_lib_path}/site-packages"
+     platpythondir="lib/${python_lib_path}/site-packages"
      succeeded=yes
      have_python=yes
 
@@ -20370,6 +21316,246 @@ else
 fi
 
    else
+     if test "required" == "required"; then
+        if test "$with_python3" == "yes"; then
+	        if test -z "$PYTHON_VERSION"; then
+   PYTHON_VERSION="3"
+fi
+
+# Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
+set dummy python$PYTHON_VERSION; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON="$PYTHON" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON=$ac_cv_path_PYTHON
+if test -n "$PYTHON"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON" >&5
+$as_echo "$PYTHON" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+if test -z "$PYTHON"; then
+   as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
+   PYTHON_VERSION=""
+fi
+#
+# if the macro parameter ``version'' is set, honour it
+#
+if test -n ""; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python " >&5
+$as_echo_n "checking for a version of Python ... " >&6; }
+   ac_supports_python_ver=`$PYTHON -c "import sys; \
+	ver = sys.version.split ()[0]; \
+	print (ver )"`
+   if test "$ac_supports_python_ver" = "True"; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+   else
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+      as_fn_error $? "this package requires Python .
+If you have it installed, but it isn't the default Python
+interpreter in your system path, please pass the PYTHON_VERSION
+variable to configure. See \`\`configure --help'' for reference.
+" "$LINENO" 5
+      PYTHON_VERSION=""
+   fi
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking for python3-config" >&5
+$as_echo_n "checking Checking for python3-config... " >&6; }
+if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}python3-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}python3-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON_CONFIG="$PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON_CONFIG=$ac_cv_path_PYTHON_CONFIG
+if test -n "$PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_CONFIG" >&5
+$as_echo "$PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+fi
+if test -z "$ac_cv_path_PYTHON_CONFIG"; then
+  ac_pt_PYTHON_CONFIG=$PYTHON_CONFIG
+  # Extract the first word of "python3-config", so it can be a program name with args.
+set dummy python3-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_ac_pt_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $ac_pt_PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PYTHON_CONFIG="$ac_pt_PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_ac_pt_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+ac_pt_PYTHON_CONFIG=$ac_cv_path_ac_pt_PYTHON_CONFIG
+if test -n "$ac_pt_PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PYTHON_CONFIG" >&5
+$as_echo "$ac_pt_PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+  if test "x$ac_pt_PYTHON_CONFIG" = x; then
+    PYTHON_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PYTHON_CONFIG=$ac_pt_PYTHON_CONFIG
+  fi
+else
+  PYTHON_CONFIG="$ac_cv_path_PYTHON_CONFIG"
+fi
+
+if test -n "$PYTHON_CONFIG" ; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+    PYTHON_VERSION=$(python3 -c "import sys;print('.'.join(map(str, sys.version_info[:2])))")
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+if test -z "$PYTHON_CONFIG" ; then
+  as_fn_error $? "no python3-config found." "$LINENO" 5
+fi
+
+PYTHON_CPPFLAGS="$("$PYTHON_CONFIG" --includes)"
+PYTHON_LDFLAGS="$("$PYTHON_CONFIG" --ldflags)"
+
+ac_save_CPPFLAGS="$CPPFLAGS"
+ac_save_LIBS="$LIBS"
+CPPFLAGS="$LIBS $PYTHON_CPPFLAGS"
+LIBS="$LIBS $PYTHON_LIBS"
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking if python-config results are accurate" >&5
+$as_echo_n "checking Checking if python-config results are accurate... " >&6; }
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+  #include <Python.h>
+int
+main ()
+{
+Py_Initialize();
+  ;
+  return 0;
+}
+
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+   as_fn_error $? "$PYTHON_CONFIG output is not usable" "$LINENO" 5
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+CPPFLAGS="$ac_save_CPPFLAGS"
+LIBS="$ac_save_LIBS"
+
+
+
+
+
+
+	else
 
 
 # Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
@@ -20605,6 +21791,7 @@ LIBS="$ac_save_LIBS"
 
 
 
+	fi
 
     if test -z $PYTHON;
     then
@@ -20743,9 +21930,9 @@ $as_echo "no" >&6; }
 		fi
 	fi
 
-     pythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(False,False,'')"`
-     platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print get_python_lib(True,False,'')"`
-     PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print '-I' + ' -I'.join(get_numpy_include_dirs())"`
+        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
+        PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print('-I' + ' -I'.join(get_numpy_include_dirs()))"`
 
 
 
@@ -20872,15 +22059,513 @@ else
 fi
 
 
-     if test -z "$NOSETESTS" ; then
-        as_fn_error $? "required program nosetests not found" "$LINENO" 5
-        exit 1
-     fi
-     pkgpythondir=\${prefix}/\${pythondir}/$PACKAGE
+        if test -z "$NOSETESTS" ; then
+           as_fn_error $? "required program nosetests not found" "$LINENO" 5
+           exit 1
+        fi
+        pkgpythondir=\${prefix}/\${pythondir}/$PACKAGE
 
 
-     succeeded=yes
-     have_python=yes
+        succeeded=yes
+        have_python=yes
+    else
+        if test "$with_python3" == "yes"; then
+	        if test -z "$PYTHON_VERSION"; then
+   PYTHON_VERSION="3"
+fi
+
+# Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
+set dummy python$PYTHON_VERSION; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON="$PYTHON" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON=$ac_cv_path_PYTHON
+if test -n "$PYTHON"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON" >&5
+$as_echo "$PYTHON" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+if test -z "$PYTHON"; then
+   as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
+   PYTHON_VERSION=""
+fi
+#
+# if the macro parameter ``version'' is set, honour it
+#
+if test -n ""; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python " >&5
+$as_echo_n "checking for a version of Python ... " >&6; }
+   ac_supports_python_ver=`$PYTHON -c "import sys; \
+	ver = sys.version.split ()[0]; \
+	print (ver )"`
+   if test "$ac_supports_python_ver" = "True"; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+   else
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+      as_fn_error $? "this package requires Python .
+If you have it installed, but it isn't the default Python
+interpreter in your system path, please pass the PYTHON_VERSION
+variable to configure. See \`\`configure --help'' for reference.
+" "$LINENO" 5
+      PYTHON_VERSION=""
+   fi
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking for python3-config" >&5
+$as_echo_n "checking Checking for python3-config... " >&6; }
+if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}python3-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}python3-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON_CONFIG="$PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON_CONFIG=$ac_cv_path_PYTHON_CONFIG
+if test -n "$PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_CONFIG" >&5
+$as_echo "$PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+fi
+if test -z "$ac_cv_path_PYTHON_CONFIG"; then
+  ac_pt_PYTHON_CONFIG=$PYTHON_CONFIG
+  # Extract the first word of "python3-config", so it can be a program name with args.
+set dummy python3-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_ac_pt_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $ac_pt_PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PYTHON_CONFIG="$ac_pt_PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_ac_pt_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+ac_pt_PYTHON_CONFIG=$ac_cv_path_ac_pt_PYTHON_CONFIG
+if test -n "$ac_pt_PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PYTHON_CONFIG" >&5
+$as_echo "$ac_pt_PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+  if test "x$ac_pt_PYTHON_CONFIG" = x; then
+    PYTHON_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PYTHON_CONFIG=$ac_pt_PYTHON_CONFIG
+  fi
+else
+  PYTHON_CONFIG="$ac_cv_path_PYTHON_CONFIG"
+fi
+
+if test -n "$PYTHON_CONFIG" ; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+    PYTHON_VERSION=$(python3 -c "import sys;print('.'.join(map(str, sys.version_info[:2])))")
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+if test -z "$PYTHON_CONFIG" ; then
+  as_fn_error $? "no python3-config found." "$LINENO" 5
+fi
+
+PYTHON_CPPFLAGS="$("$PYTHON_CONFIG" --includes)"
+PYTHON_LDFLAGS="$("$PYTHON_CONFIG" --ldflags)"
+
+ac_save_CPPFLAGS="$CPPFLAGS"
+ac_save_LIBS="$LIBS"
+CPPFLAGS="$LIBS $PYTHON_CPPFLAGS"
+LIBS="$LIBS $PYTHON_LIBS"
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking if python-config results are accurate" >&5
+$as_echo_n "checking Checking if python-config results are accurate... " >&6; }
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+  #include <Python.h>
+int
+main ()
+{
+Py_Initialize();
+  ;
+  return 0;
+}
+
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+   as_fn_error $? "$PYTHON_CONFIG output is not usable" "$LINENO" 5
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+CPPFLAGS="$ac_save_CPPFLAGS"
+LIBS="$ac_save_LIBS"
+
+
+
+
+
+
+	else
+
+
+# Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
+set dummy python$PYTHON_VERSION; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON="$PYTHON" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON=$ac_cv_path_PYTHON
+if test -n "$PYTHON"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON" >&5
+$as_echo "$PYTHON" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+if test -z "$PYTHON"; then
+   as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
+   PYTHON_VERSION=""
+fi
+#
+# if the macro parameter ``version'' is set, honour it
+#
+if test -n ">= '2.6.1'"; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python >= '2.6.1'" >&5
+$as_echo_n "checking for a version of Python >= '2.6.1'... " >&6; }
+   ac_supports_python_ver=`$PYTHON -c "import sys; \
+	ver = sys.version.split ()[0]; \
+	print (ver >= '2.6.1')"`
+   if test "$ac_supports_python_ver" = "True"; then
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+   else
+      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+      as_fn_error $? "this package requires Python >= '2.6.1'.
+If you have it installed, but it isn't the default Python
+interpreter in your system path, please pass the PYTHON_VERSION
+variable to configure. See \`\`configure --help'' for reference.
+" "$LINENO" 5
+      PYTHON_VERSION=""
+   fi
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking for python-config" >&5
+$as_echo_n "checking Checking for python-config... " >&6; }
+if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}python-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}python-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PYTHON_CONFIG="$PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PYTHON_CONFIG=$ac_cv_path_PYTHON_CONFIG
+if test -n "$PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTHON_CONFIG" >&5
+$as_echo "$PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+fi
+if test -z "$ac_cv_path_PYTHON_CONFIG"; then
+  ac_pt_PYTHON_CONFIG=$PYTHON_CONFIG
+  # Extract the first word of "python-config", so it can be a program name with args.
+set dummy python-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_ac_pt_PYTHON_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $ac_pt_PYTHON_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PYTHON_CONFIG="$ac_pt_PYTHON_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_ac_pt_PYTHON_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+ac_pt_PYTHON_CONFIG=$ac_cv_path_ac_pt_PYTHON_CONFIG
+if test -n "$ac_pt_PYTHON_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PYTHON_CONFIG" >&5
+$as_echo "$ac_pt_PYTHON_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+  if test "x$ac_pt_PYTHON_CONFIG" = x; then
+    PYTHON_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PYTHON_CONFIG=$ac_pt_PYTHON_CONFIG
+  fi
+else
+  PYTHON_CONFIG="$ac_cv_path_PYTHON_CONFIG"
+fi
+
+if test -n "$PYTHON_CONFIG" ; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+    PYTHON_VERSION=$(python -c "import sys;print '.'.join(map(str, sys.version_info[:2]))")
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+if test -z "$PYTHON_CONFIG" ; then
+  as_fn_error $? "no python-config found." "$LINENO" 5
+fi
+
+PYTHON_CPPFLAGS="$("$PYTHON_CONFIG" --includes)"
+PYTHON_LDFLAGS="$("$PYTHON_CONFIG" --ldflags)"
+
+ac_save_CPPFLAGS="$CPPFLAGS"
+ac_save_LIBS="$LIBS"
+CPPFLAGS="$LIBS $PYTHON_CPPFLAGS"
+LIBS="$LIBS $PYTHON_LIBS"
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking Checking if python-config results are accurate" >&5
+$as_echo_n "checking Checking if python-config results are accurate... " >&6; }
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+  #include <Python.h>
+int
+main ()
+{
+Py_Initialize();
+  ;
+  return 0;
+}
+
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+   as_fn_error $? "$PYTHON_CONFIG output is not usable" "$LINENO" 5
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+CPPFLAGS="$ac_save_CPPFLAGS"
+LIBS="$ac_save_LIBS"
+
+
+
+
+
+
+	fi
+        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
+
+	 if false; then
+  HAVE_SPHINX_TRUE=
+  HAVE_SPHINX_FALSE='#'
+else
+  HAVE_SPHINX_TRUE='#'
+  HAVE_SPHINX_FALSE=
+fi
+
+         if false; then
+  HAVE_NOSETESTS_TRUE=
+  HAVE_NOSETESTS_FALSE='#'
+else
+  HAVE_NOSETESTS_TRUE='#'
+  HAVE_NOSETESTS_FALSE=
+fi
+
+        succeeded=yes
+        have_python=no
+    fi
    fi
 fi
  if test "$build_python" = "yes"; then
@@ -20951,11 +22636,13 @@ srcraw=${geocal_topdir}/thirdparty/libraw
 
 pythondocdir=\${prefix}/share/doc/geocal/python
 
-geocalpkgpythondir=\${prefix}/${pythondir}/geocal
+geocalpkgpythondir=\${prefix}/\${pythondir}/geocal
 
 afidspythonvdevdir=\${prefix}/afids/vdev
 
 installafidspythondir=\${prefix}
+
+etcafidspythondir=\${prefix}/etc/afids
 
 
 
@@ -21017,7 +22704,7 @@ fi
                 { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot find 'swig' program. You should look at http://www.swig.org" >&5
 $as_echo "$as_me: WARNING: cannot find 'swig' program. You should look at http://www.swig.org" >&2;}
                 SWIG='echo "Error: SWIG is not installed. You should look at http://www.swig.org" ; false'
-        elif test -n "2.0.4" ; then
+        elif test -n "3.0.7" ; then
                 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for SWIG version" >&5
 $as_echo_n "checking for SWIG version... " >&6; }
                 swig_version=`$SWIG -version 2>&1 | grep 'SWIG Version' | sed 's/.*\([0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\).*/\1/g'`
@@ -21025,7 +22712,7 @@ $as_echo_n "checking for SWIG version... " >&6; }
 $as_echo "$swig_version" >&6; }
                 if test -n "$swig_version" ; then
                         # Calculate the required version number components
-                        required=2.0.4
+                        required=3.0.7
                         required_major=`echo $required | sed 's/[^0-9].*//'`
                         if test -z "$required_major" ; then
                                 required_major=0
@@ -21059,9 +22746,9 @@ $as_echo "$swig_version" >&6; }
                         if test $available_major -ne $required_major \
                                 -o $available_minor -ne $required_minor \
                                 -o $available_patch -lt $required_patch ; then
-                                { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: SWIG version >= 2.0.4 is required.  You have $swig_version.  You should look at http://www.swig.org" >&5
-$as_echo "$as_me: WARNING: SWIG version >= 2.0.4 is required.  You have $swig_version.  You should look at http://www.swig.org" >&2;}
-                                SWIG='echo "Error: SWIG version >= 2.0.4 is required.  You have '"$swig_version"'.  You should look at http://www.swig.org" ; false'
+                                { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: SWIG version >= 3.0.7 is required.  You have $swig_version.  You should look at http://www.swig.org" >&5
+$as_echo "$as_me: WARNING: SWIG version >= 3.0.7 is required.  You have $swig_version.  You should look at http://www.swig.org" >&2;}
+                                SWIG='echo "Error: SWIG version >= 3.0.7 is required.  You have '"$swig_version"'.  You should look at http://www.swig.org" ; false'
                         else
 			        have_swig=yes
                                 { $as_echo "$as_me:${as_lineno-$LINENO}: SWIG executable is '$SWIG'" >&5
@@ -21111,6 +22798,14 @@ fi
 else
   HAVE_G77_TRUE='#'
   HAVE_G77_FALSE=
+fi
+
+ if test `expr "${F77}" : '.*gfortran'` != "0"; then
+  HAVE_GFORTRAN_TRUE=
+  HAVE_GFORTRAN_FALSE='#'
+else
+  HAVE_GFORTRAN_TRUE='#'
+  HAVE_GFORTRAN_FALSE=
 fi
 
 
@@ -21353,6 +23048,16 @@ You can try specifying the location using --with-doxygen if configure
 couldn't find this. Or you can turn off the use of swig using
 --without-swig." "$LINENO" 5
 fi
+
+ if false; then
+  BUILD_AFIDS_TRUE=
+  BUILD_AFIDS_FALSE='#'
+else
+  BUILD_AFIDS_TRUE='#'
+  BUILD_AFIDS_FALSE=
+fi
+
+
 ac_config_files="$ac_config_files Makefile"
 
 cat >confcache <<\_ACEOF
@@ -21604,6 +23309,38 @@ if test -z "${HAVE_GEOS_TRUE}" && test -z "${HAVE_GEOS_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_GEOS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${BUILD_GEOS_TRUE}" && test -z "${BUILD_GEOS_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_GEOS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_OGDI_TRUE}" && test -z "${HAVE_OGDI_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_OGDI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_OGDI_TRUE}" && test -z "${BUILD_OGDI_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_OGDI\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_EXPAT_TRUE}" && test -z "${HAVE_EXPAT_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_EXPAT\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_EXPAT_TRUE}" && test -z "${BUILD_EXPAT_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_EXPAT\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_OPENJPEG_TRUE}" && test -z "${HAVE_OPENJPEG_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_OPENJPEG\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_OPENJPEG_TRUE}" && test -z "${BUILD_OPENJPEG_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_OPENJPEG\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_GEOS_TRUE}" && test -z "${HAVE_GEOS_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_GEOS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${HAVE_OGDI_TRUE}" && test -z "${HAVE_OGDI_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_OGDI\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -21660,6 +23397,18 @@ if test -z "${BUILD_CARTO_TRUE}" && test -z "${BUILD_CARTO_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_CARTO\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${WITH_PYTHON3_TRUE}" && test -z "${WITH_PYTHON3_FALSE}"; then
+  as_fn_error $? "conditional \"WITH_PYTHON3\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_SPHINX\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_NOSETESTS_TRUE}" && test -z "${HAVE_NOSETESTS_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_NOSETESTS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_SPHINX\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -21688,6 +23437,10 @@ if test -z "${HAVE_G77_TRUE}" && test -z "${HAVE_G77_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_G77\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${HAVE_GFORTRAN_TRUE}" && test -z "${HAVE_GFORTRAN_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_GFORTRAN\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${IS_MAC_TRUE}" && test -z "${IS_MAC_FALSE}"; then
   as_fn_error $? "conditional \"IS_MAC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -21698,6 +23451,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${WITH_DOCUMENTATION_TRUE}" && test -z "${WITH_DOCUMENTATION_FALSE}"; then
   as_fn_error $? "conditional \"WITH_DOCUMENTATION\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_AFIDS_TRUE}" && test -z "${BUILD_AFIDS_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_AFIDS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 

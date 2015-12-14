@@ -8,14 +8,14 @@
 %}
 %base_import(with_parameter)
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 %geocal_shared_ptr(GeoCal::PiecewiseLinear);
 
 namespace GeoCal {
 class PiecewiseLinear : public WithParameter {
 public:
   enum {LINEAR, CONSTANT, LINEAR_TO_ZERO} FunctionType;
-  PiecewiseLinear(const blitz::Array<Time, 1>& X, 
-		  const ArrayAd<double, 1>& Y,
+  PiecewiseLinear(const std::vector<Time>& X,
 		  const blitz::Array<int, 1>& T);
   double value(const Time& x) const;
   %pickle_serialization();

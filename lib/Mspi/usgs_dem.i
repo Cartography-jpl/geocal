@@ -33,6 +33,8 @@ public:
 	  const boost::shared_ptr<Datum>& D);
 
   %python_attribute(directory_base, std::string);
+  %python_attribute(number_file_read, int);
+  void reset_number_file_read();
   %pickle_serialization();
 protected:
   virtual double elevation(int Y_index, int X_index) const;

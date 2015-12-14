@@ -125,6 +125,37 @@ void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate& Gp,
   }
 }
 
+void Ipi::image_coordinate_with_derivative_extended
+(const GroundCoordinate& Gp, 
+ const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+ ImageCoordinateWithDerivative& Ic, bool& Success) const
+{
+  TimeWithDerivative tres;
+  FrameCoordinateWithDerivative fres;
+  time_with_derivative(Gp, Gp_with_der, tres, fres, Success);
+  if(Success) {
+    if(tres.value() >= tt->min_time() && tres.value() < tt->max_time())
+      Ic = tt->image_coordinate_with_derivative(tres, fres);
+    else if(tres.value() < tt->min_time()) {
+      TimeWithDerivative t1, t2;
+      FrameCoordinateWithDerivative fc;
+      tt->time_with_derivative(ImageCoordinateWithDerivative(tt->min_line(), fres.sample), t1, fc);
+      tt->time_with_derivative(ImageCoordinateWithDerivative(tt->min_line() + 1, fres.sample), t2, fc);
+      AutoDerivative<double> tspace = t2 - t1;
+      Ic.sample = fres.sample;
+      Ic.line = (tres - tt->min_time()) / tspace + tt->min_line();
+    } else {
+      TimeWithDerivative t1, t2;
+      FrameCoordinateWithDerivative fc;
+      tt->time_with_derivative(ImageCoordinateWithDerivative(tt->max_line() - 2, fres.sample), t1, fc);
+      tt->time_with_derivative(ImageCoordinateWithDerivative(tt->max_line() - 1, fres.sample), t2, fc);
+      AutoDerivative<double> tspace = t2 - t1;
+      Ic.sample = fres.sample;
+      Ic.line = (tres - tt->max_time()) / tspace + tt->max_line();
+    }
+  }
+}
+
 //-----------------------------------------------------------------------
 /// Look for the image location that a point is seen. Note that unlike
 /// time, if a point is seen only outside of the sample range of the
@@ -154,6 +185,24 @@ void Ipi::image_coordinate_with_derivative(const GroundCoordinate& Gp, ImageCoor
   TimeWithDerivative tres;
   FrameCoordinateWithDerivative fres;
   time_with_derivative(Gp, tres, fres, Success);
+  if(Success) {
+    if(fres.sample.value() < 0 || fres.sample.value() >= cam->number_sample(band_) ||
+       tres.value() < tt->min_time() || tres.value() >= tt->max_time())
+      Success = false;
+    else
+      Ic = tt->image_coordinate_with_derivative(tres, fres);
+  }
+}
+
+void Ipi::image_coordinate_with_derivative
+(const GroundCoordinate& Gp, 
+ const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+ ImageCoordinateWithDerivative& Ic,
+ bool& Success) const
+{
+  TimeWithDerivative tres;
+  FrameCoordinateWithDerivative fres;
+  time_with_derivative(Gp, Gp_with_der, tres, fres, Success);
   if(Success) {
     if(fres.sample.value() < 0 || fres.sample.value() >= cam->number_sample(band_) ||
        tres.value() < tt->min_time() || tres.value() >= tt->max_time())
@@ -294,14 +343,31 @@ void Ipi::time_with_derivative
 FrameCoordinateWithDerivative& Fres,
  bool& Success) const
 {
+  boost::shared_ptr<CartesianFixed> p = Gp.convert_to_cf();
+  boost::array<AutoDerivative<double>, 3>  pd;
+  pd[0] = p->position[0];
+  pd[1] = p->position[1];
+  pd[2] = p->position[2];
+  time_with_derivative(*p, pd, Tres, Fres, Success);
+}
+
+void Ipi::time_with_derivative
+(const GroundCoordinate& Gp, 
+ const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+ TimeWithDerivative& Tres, 
+ FrameCoordinateWithDerivative& Fres,
+ bool& Success) const
+{
   class IpiEq: public DFunctorWithDerivative {
   public:
     IpiEq(const boost::shared_ptr<Camera>& Cam,
 	  const boost::shared_ptr<Orbit>& Orb,
 	  const boost::shared_ptr<CartesianFixed> P,
+	  const boost::array<AutoDerivative<double>, 3>& P_with_der,
 	  Time Tmin,
 	  int Band)
-      : cam(Cam), orb(Orb), p(P), band(Band), tmin(Tmin)
+      : cam(Cam), orb(Orb), p(P), p_with_der(P_with_der),
+	band(Band), tmin(Tmin)
     {
       height = p->height_reference_surface();
     }
@@ -365,24 +431,24 @@ FrameCoordinateWithDerivative& Fres,
     CartesianFixedLookVectorWithDerivative look_vector_with_derivative
     (const boost::shared_ptr<OrbitData>& Od) const
     {
-      boost::array<double, 3> p1 = p->position;
       boost::array<AutoDerivative<double>, 3> p2 = Od->position_cf_with_derivative();
       CartesianFixedLookVectorWithDerivative lv;
-      lv.look_vector[0] = p1[0] - p2[0];
-      lv.look_vector[1] = p1[1] - p2[1];
-      lv.look_vector[2] = p1[2] - p2[2];
+      lv.look_vector[0] = p_with_der[0] - p2[0];
+      lv.look_vector[1] = p_with_der[1] - p2[1];
+      lv.look_vector[2] = p_with_der[2] - p2[2];
       return lv;
     }
   private:
     boost::shared_ptr<Camera> cam;
     boost::shared_ptr<Orbit> orb;
     boost::shared_ptr<CartesianFixed> p;
+    boost::array<AutoDerivative<double>, 3> p_with_der;
     int band;
     Time tmin;
     double height;
   };
 
-  IpiEq eq(cam, orb, Gp.convert_to_cf(), min_time_, band_);
+  IpiEq eq(cam, orb, Gp.convert_to_cf(), Gp_with_der, min_time_, band_);
   std::vector<AutoDerivative<double> > sol = 
     root_list(eq, min_time_guess() - min_time_, max_time_guess() - min_time_,
 	      root_min_separation_, time_tolerance_);

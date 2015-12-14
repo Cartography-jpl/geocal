@@ -2,6 +2,15 @@
 #include <iostream>
 #include "swig_type_mapper_base.h"
 
+// Python 2 and 3 do strings differently, so we have a simple macro to 
+// keep from having lots of ifdefs spread around. See 
+// https://wiki.python.org/moin/PortingExtensionModulesToPy3k for details on
+// this.
+#if PY_MAJOR_VERSION > 2
+#define Text_FromUTF8(str) PyUnicode_FromString(str)
+#else
+#define Text_FromUTF8(str) PyString_FromString(str)
+#endif
 using namespace GeoCal;
 // Map used between type_index and object to map this to python.
 std::map<type_index, boost::shared_ptr<SwigTypeMapperBase> > 
@@ -61,6 +70,7 @@ extern "C" {
   void init_geocal_datum(void);
   void init_simple_dem(void);
   void init_memory_raster_image(void);
+  void init_constant_raster_image(void);
   void init_dem_map_info(void);
   void init_feature_detector(void);
   void init_forstner_feature_detector(void);
@@ -125,6 +135,7 @@ extern "C" {
   void init_orbit_correction(void);
   void init_orbit_offset_correction(void);
   void init_orbit_piecewise_correction(void);
+  void init_tle_orbit(void);
   void init_argus_camera(void);
   void init_argus_orbit(void);
   void init_quickbird_camera(void);
@@ -196,18 +207,25 @@ std::string parse_python_exception() {
   PyObject* err_str_list = NULL;
   if(tb)
     err_str_list = PyObject_CallMethodObjArgs(mod,
-	      PyString_FromString("format_exception"), type, value, tb, NULL);
+	      Text_FromUTF8("format_exception"), type, value, tb, NULL);
   std::string ret = "Python error that I can't parse";
   if(err_str_list) {
     PyObject* err_str = 
-      PyObject_CallMethodObjArgs(PyString_FromString(""),
-				 PyString_FromString("join"), 
+      PyObject_CallMethodObjArgs(Text_FromUTF8(""),
+				 Text_FromUTF8("join"), 
 				 err_str_list, NULL);
-    if(err_str)
-      ret = PyString_AsString(err_str);
+    if(err_str) {
+        PyObject * temp_bytes = PyUnicode_AsEncodedString(err_str, "ASCII", 
+	"strict");
+        ret = PyBytes_AS_STRING(temp_bytes); // Borrowed pointer
+        Py_DECREF(temp_bytes);
+    }
     Py_XDECREF(err_str);
   } else if(value) {
-    ret = PyString_AsString(value);
+    PyObject * temp_bytes = PyUnicode_AsEncodedString(value, "ASCII", 
+	"strict");
+    ret = PyBytes_AS_STRING(temp_bytes); // Borrowed pointer
+    Py_DECREF(temp_bytes);
   }
   Py_XDECREF(mod);
   Py_XDECREF(err_str_list);
@@ -234,19 +252,91 @@ static void init_extension_module(PyObject* package, const char *modulename,
   initfunction();
 }
 
-void init_swig_wrap(void) 
+// This next blob of code comes from 
+// https://wiki.python.org/moin/PortingExtensionModulesToPy3k
+
+struct module_state {
+    PyObject *error;
+};
+
+#if PY_MAJOR_VERSION >= 3
+#define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
+#else
+#define GETSTATE(m) (&_state)
+static struct module_state _state;
+#endif
+
+static PyObject *
+error_out(PyObject *m) {
+    struct module_state *st = GETSTATE(m);
+    PyErr_SetString(st->error, "something bad happened");
+    return NULL;
+}
+
+static PyMethodDef swig_wrap_methods[] = {
+    {"error_out", (PyCFunction)error_out, METH_NOARGS, NULL},
+    {NULL, NULL}
+};
+
+#if PY_MAJOR_VERSION >= 3
+
+static int swig_wrap_traverse(PyObject *m, visitproc visit, void *arg) {
+    Py_VISIT(GETSTATE(m)->error);
+    return 0;
+}
+
+static int swig_wrap_clear(PyObject *m) {
+    Py_CLEAR(GETSTATE(m)->error);
+    return 0;
+}
+
+
+static struct PyModuleDef moduledef = {
+        PyModuleDef_HEAD_INIT,
+        "_swig_wrap",
+        NULL,
+        sizeof(struct module_state),
+        swig_wrap_methods,
+        NULL,
+        swig_wrap_traverse,
+        swig_wrap_clear,
+        NULL
+};
+
+#define INITERROR return NULL
+
+PyObject *
+PyInit_swig_wrap(void)
+
+#else
+#define INITERROR return
+
+void
+init_swig_wrap(void)
+#endif
 {
-  // Initialise this module
-  PyObject* module = Py_InitModule("_swig_wrap", NULL); // NULL only
-  if(!module) {
-    std::cerr << "Initialization failed\n";
-    return;
-  }
+#if PY_MAJOR_VERSION >= 3
+    PyObject *module = PyModule_Create(&moduledef);
+#else
+    PyObject *module = Py_InitModule("_swig_wrap", swig_wrap_methods);
+#endif
+
+    if (module == NULL) {
+        std::cerr << "Initialization failed\n";
+        INITERROR;
+    }
+    struct module_state *st = GETSTATE(module);
+
+    st->error = PyErr_NewException("swig_wrap.Error", NULL, NULL);
+    if (st->error == NULL) {
+        Py_DECREF(module);
+        INITERROR;
+    }
 
   PyObject *package = PyImport_AddModule((char *)"new_full_physics");
   if(!package) {
-    std::cerr << "Initialization failed\n";
-    return;
+      std::cerr << "Initialization failed\n";
+      INITERROR;
   }
   
   init_extension_module(package, "_swig_std", init_swig_std);
@@ -301,6 +391,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_geocal_datum", init_geocal_datum);
   init_extension_module(package, "_simple_dem", init_simple_dem);
   init_extension_module(package, "_memory_raster_image", init_memory_raster_image);
+  init_extension_module(package, "_constant_raster_image", init_constant_raster_image);
   init_extension_module(package, "_dem_map_info", init_dem_map_info);
   init_extension_module(package, "_feature_detector", init_feature_detector);
   init_extension_module(package, "_forstner_feature_detector", init_forstner_feature_detector);
@@ -365,6 +456,7 @@ void init_swig_wrap(void)
   init_extension_module(package, "_orbit_correction", init_orbit_correction);
   init_extension_module(package, "_orbit_offset_correction", init_orbit_offset_correction);
   init_extension_module(package, "_orbit_piecewise_correction", init_orbit_piecewise_correction);
+  init_extension_module(package, "_tle_orbit", init_tle_orbit);
   init_extension_module(package, "_argus_camera", init_argus_camera);
   init_extension_module(package, "_argus_orbit", init_argus_orbit);
   init_extension_module(package, "_quickbird_camera", init_quickbird_camera);
@@ -426,4 +518,10 @@ void init_swig_wrap(void)
   init_extension_module(package, "_srtm_dem", init_srtm_dem);
   init_extension_module(package, "_vicar_raster_image", init_vicar_raster_image);
 #endif
+
+#if PY_MAJOR_VERSION >= 3
+    return module;
+#endif
 }
+
+

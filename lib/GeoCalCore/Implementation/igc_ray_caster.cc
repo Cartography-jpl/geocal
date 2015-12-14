@@ -13,6 +13,10 @@ inline double sqr(double x) { return x * x; }
 /// that we do the intersection with the DEM. The Max_height should be
 /// larger than the greatest height we will encounter in the Dem
 /// belonging to the Igc.
+///
+/// For larger cameras, it might be more convenient to pass in start
+/// sample and number of samples to process, the default is to do the
+/// full camera.
 //-----------------------------------------------------------------------
 
 IgcRayCaster::IgcRayCaster
@@ -21,13 +25,18 @@ IgcRayCaster::IgcRayCaster
  int Number_line,
  int Number_integration_step, 
  double Resolution,
- double Max_height
+ double Max_height,
+ int Start_sample,
+ int Number_sample
 )
   : igc(Igc),
     start_position_(Start_line),
     npos_(Number_line > 0 ? Number_line : Igc->number_line() - Start_line),
     ind(-1),
     nintegration_step(Number_integration_step),
+    start_sample_(Start_sample),
+    number_sample_(Number_sample > 0 ? Number_sample : 
+		   Igc->number_sample() - Start_sample),
     resolution(Resolution),
     max_height(Max_height)
 {
@@ -53,7 +62,7 @@ IgcRayCaster::IgcRayCaster
   igc->footprint_resolution(0, 0, line_res, samp_res);
   nsub_line = (int) ceil(line_res / Resolution);
   nsub_sample = (int) ceil(samp_res / Resolution);
-  result_cache.resize(1, igc->number_sample(), nsub_line, nsub_sample,
+  result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
 		      nintegration_step,3);
 }
 
@@ -67,7 +76,8 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
     throw Exception("next_position called when we have already reached the last position");
   ++ind;
   Array<double, 7> cf_lv = 
-    igc->cf_look_vector_arr(current_position(), 0, 1, igc->number_sample(),
+    igc->cf_look_vector_arr(current_position(), start_sample(), 1, 
+			    number_sample(),
 			    nsub_line, nsub_sample, nintegration_step);
   Array<double, 4> dist(result_cache.shape()[1], result_cache.shape()[2],
 			result_cache.shape()[3], result_cache.shape()[4]);

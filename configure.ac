@@ -87,7 +87,7 @@ AC_ARG_WITH([swig],
            [SWIG=/fake_so_fail],
            [])
 
-AC_PROG_SWIG(2.0.4)
+AC_PROG_SWIG(3.0.7)
 SWIG_ENABLE_CXX
 SWIG_PYTHON
 
@@ -97,6 +97,7 @@ SWIG_PYTHON
 #=================================================================
 
 AM_CONDITIONAL([HAVE_G77], [test `expr "${F77}" : '.*g77'` != "0"])
+AM_CONDITIONAL([HAVE_GFORTRAN], [test `expr "${F77}" : '.*gfortran'` != "0"])
 
 #=================================================================
 # We have a few Make rules that need to be different on the Mac. This
@@ -155,6 +156,9 @@ You can try specifying the location using --with-doxygen if configure
 couldn't find this. Or you can turn off the use of swig using 
 --without-swig.])
 fi
+
+AM_CONDITIONAL([BUILD_AFIDS], [false])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

@@ -21,16 +21,25 @@ if test "$HAVE_CXX" = "no"; then
    AC_MSG_ERROR([Could not find a c++ compiler]);
 fi
 
-# We check for the very basic programs perl and patch. Surprising if not
+# We check for the very basic programs m4, perl and patch. Surprising if not
 # found, but possible, so we check.
 AC_CHECK_PROG(HAVE_PERL, perl, yes, no)
 if test "$HAVE_PERL" = "no"; then
-   AC_MSG_ERROR([Could not find a perl, which is required for install]);
+   AC_MSG_ERROR([Could not find perl, which is required for install]);
+fi
+AC_CHECK_PROG(HAVE_M4, m4, yes, no)
+if test "$HAVE_M4" = "no"; then
+   AC_MSG_ERROR([Could not find m4, which is required for install]);
 fi
 AC_CHECK_PROG(HAVE_PATCH, patch, yes, no)
 if test "$HAVE_PATCH" = "no"; then
-   AC_MSG_ERROR([Could not find a patch, which is required for install]);
+   AC_MSG_ERROR([Could not find patch, which is required for install]);
 fi
+# Make sure we have perl module Data::Dumper which is used by some
+# installed programs. This is actually a separate install on centos 7,
+# so make sure it is there.
+AC_PERL_MODULE(Data::Dumper)
+
 
 # We need to have csh to run things like vicarb
 AC_CHECK_PROG(HAVE_CSH, csh, yes, no)

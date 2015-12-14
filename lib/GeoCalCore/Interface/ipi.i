@@ -14,6 +14,7 @@
 %import "image_coordinate.i"
 %import "frame_coordinate.i"
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 
 %geocal_shared_ptr(GeoCal::Ipi);
 
@@ -33,12 +34,28 @@ public:
 			bool &OUTPUT) const;
   void image_coordinate_with_derivative(const GroundCoordinate& Gp, ImageCoordinateWithDerivative &OUTPUT,
 			bool &OUTPUT) const;
+  void image_coordinate_with_derivative(const GroundCoordinate& Gp, 
+				const boost::array<AutoDerivative<double>, 3>&
+				Gp_with_der,
+				ImageCoordinateWithDerivative& OUTPUT,
+				bool& OUTPUT) const;
+  void image_coordinate_with_derivative_extended(const GroundCoordinate& Gp, 
+				const boost::array<AutoDerivative<double>, 3>&
+				Gp_with_der,
+				 ImageCoordinateWithDerivative &OUTPUT,
+				 bool &OUTPUT) const;
   void image_coordinate_with_derivative_extended(const GroundCoordinate& Gp, 
 				 ImageCoordinateWithDerivative &OUTPUT,
 				 bool &OUTPUT) const;
   void time(const GroundCoordinate& Gp, Time &OUTPUT, FrameCoordinate &OUTPUT,
 	    bool &OUTPUT) const;
   void time_with_derivative(const GroundCoordinate& Gp, 
+			    TimeWithDerivative& OUTPUT, 
+			    FrameCoordinateWithDerivative& OUTPUT,
+			    bool& OUTPUT) const;
+  void time_with_derivative(const GroundCoordinate& Gp, 
+			    const boost::array<AutoDerivative<double>, 3>&
+			    Gp_with_der,
 			    TimeWithDerivative& OUTPUT, 
 			    FrameCoordinateWithDerivative& OUTPUT,
 			    bool& OUTPUT) const;

@@ -218,7 +218,9 @@ AirMspiIgcCollection::air_mspi_igc(int Image_index) const
 					  camera_,
 					  gimbal_,
 					  dem,
-					  l1b1_file_name(Image_index), 
+					  l1b1_file_name(Image_index),
+					  min_l1b1_line(Image_index),
+					  max_l1b1_line(Image_index),
 					  swath_to_use,
 					  "Image " + boost::lexical_cast<std::string>(Image_index),
 					  dem_resolution));

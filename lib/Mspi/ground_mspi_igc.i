@@ -9,6 +9,8 @@
 
 %base_import(ipi_image_ground_connection)
 %import "quaternion_camera.i"
+%import "geocal_time.i"
+%include "geocal_time_include.i"
 
 %geocal_shared_ptr(GeoCal::GroundMspiIgc);
 namespace GeoCal {

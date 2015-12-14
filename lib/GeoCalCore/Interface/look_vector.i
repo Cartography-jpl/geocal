@@ -9,6 +9,7 @@
 %}
 %base_import(generic_object)
 %import "geocal_time.i"
+%include "geocal_time_include.i"
 %import "auto_derivative.i"
 
 %geocal_shared_ptr(GeoCal::ScLookVector);

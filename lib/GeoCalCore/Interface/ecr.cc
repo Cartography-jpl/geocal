@@ -222,7 +222,10 @@ Ecr::reference_surface_intersect_approximate(
   pci[1] = position[1] / aph;
   pci[2] = position[2] / bph;
   double ddotp = dot(dirci, pci);
-  double dl = -ddotp - sqrt(ddotp * ddotp + (1 - dot(pci, pci)));
+  t = ddotp * ddotp + (1 - dot(pci, pci));
+  if(t < 0)
+    throw ConvergenceFailure("Ecr::reference_surface_intersect_approximate failed to find a solution, often this is cause from a look vector that doesn't intersect the surface");
+  double dl = -ddotp - sqrt(t);
   boost::array<double, 3> res;
   res[0] = (pci[0] + dirci[0] * dl) * aph;
   res[1] = (pci[1] + dirci[1] * dl) * aph;

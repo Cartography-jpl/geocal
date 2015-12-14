@@ -358,10 +358,16 @@ matrix_to_quaternion(const T m[3][3])
 }
 
 //-----------------------------------------------------------------------
-/// Interpolate between 2 quaternions.
+/// Interpolate between 2 quaternions rotations. This often goes by
+/// the name "Slerp". Note that the
+/// quaternion rotations are double values, a rotation with Q and -Q
+/// gives the same rotation. However when we interpolate we want to 
+/// rotate the smallest angle. So if Q2 and Q1 have a larger angle
+/// than pi, we switch the sign of Q2. You can see a discussion of
+/// this in wikipedia https://en.wikipedia.org/wiki/Slerp.
 //-----------------------------------------------------------------------
 
-inline boost::math::quaternion<double> interpolate_quaternion
+inline boost::math::quaternion<double> interpolate_quaternion_rotation
 (const boost::math::quaternion<double>& Q1, 
  const boost::math::quaternion<double>& Q2,
  const double& toffset, double tspace)
@@ -369,7 +375,14 @@ inline boost::math::quaternion<double> interpolate_quaternion
   boost::math::quaternion<double> delta_quat = Q2 * conj(Q1);
   double t = delta_quat.R_component_1();
   t = (t > 1 ? 1 : (t < -1 ? -1 : t)); // Handle t being slightly
-  // out of range due to round off.
+                                       // out of range due to round
+                                       // off.
+  if(t < 0) {
+    // Switch sign of Q2 to give same rotation, but easier to
+    // interpolate. 
+    delta_quat = -delta_quat;
+    t = -t;
+  }
   double delta_ang = 2.0 * std::acos(t);
   if(delta_ang < 1e-8)	// Handle degenerate case of Q1 and Q2
     // almost the same.

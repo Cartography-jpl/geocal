@@ -100,6 +100,61 @@ blitz::Array<double, 7> ImageGroundConnection::cf_look_vector_arr
 }
 
 //-----------------------------------------------------------------------
+/// Return an array (size 2) that gives the collinearity
+/// constraint. This is the difference between the predicted location
+/// where the Ground_coor is seen in the image and the "actual" image
+/// coordinates (e.g., determined from image matching).
+///
+/// There is a bit of freedom in what these exact equations are. This
+/// is used by the Simultaneous Bundle Adjustment, and we just try to
+/// vary parameters to minimize this. So this should return [0, 0] if
+/// we exactly predict the location of Ic_actual for Ground_coor, and
+/// should grow in size as we do a worse and worse prediction.
+///
+/// The default implementation is just this->image_coordinate(Gc) -
+/// Ic_actual, however derived classes might use something that is
+/// simpler/faster to calculate or is more stable
+/// (e.g. IpiImageGroundConnection finds the difference in frame
+/// coordinates.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 1> 
+ImageGroundConnection::collinearity_residual
+(const GroundCoordinate& Gc,
+ const ImageCoordinate& Ic_actual) const
+{
+  ImageCoordinate ic_pred = image_coordinate(Gc);
+  Array<double, 1> res(2);
+  res(0) = ic_pred.line - Ic_actual.line;
+  res(1) = ic_pred.sample - Ic_actual.sample;
+  return res;
+}
+
+
+//-----------------------------------------------------------------------
+/// Return jacobian of collinearity_residual. The parameters for this
+/// class should already have AutoDerivative extended for the jacobian
+/// (e.g., call add_identity_gradient()).
+/// 
+/// We add the derivative wrt the CartesianFixed coordinates of the
+/// Ground_coor (X, Y, Z in that order), at the end of the
+/// Jacobian. So the total Jacobian is 2 x (number parameter + 3).
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> 
+ImageGroundConnection::collinearity_residual_jacobian
+(const GroundCoordinate& Gc,
+ const ImageCoordinate& Ic_actual) const
+{
+  Array<double, 2> res =
+    image_coordinate_jac_parm(Gc);
+  res.resizeAndPreserve(2, res.cols() + 3);
+  res(Range::all(), Range(res.cols() - 3, toEnd)) = 
+    image_coordinate_jac_cf(*Gc.convert_to_cf());
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Find a MapInfo that covers the ground coordinate of this 
 /// ImageGroundConnection. We calculate the ground coordinate of the
 /// four corners, then find the MapInfo that covers those corners,
@@ -137,6 +192,28 @@ blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf
     ImageCoordinate ic = image_coordinate(*gcx);
     res(0, i) = (ic.line - ic0.line) / eps;
     res(1, i) = (ic.sample - ic0.sample) / eps;
+    gcx->position[i] = Gc.position[i];
+  }
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
+/// X, Y, and Z components of the CartesianFixed ground location. This 
+/// is calculated by a finite difference of the given size.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf_fd
+(const CartesianFixed& Gc, double Step_size) const
+{
+  blitz::Array<double, 2> res(2, 3);
+  ImageCoordinate ic0 = image_coordinate(Gc);
+  boost::shared_ptr<CartesianFixed> gcx = Gc.convert_to_cf();
+  for(int i = 0; i < 3; ++i) {
+    gcx->position[i] += Step_size;
+    ImageCoordinate ic = image_coordinate(*gcx);
+    res(0, i) = (ic.line - ic0.line) / Step_size;
+    res(1, i) = (ic.sample - ic0.sample) / Step_size;
     gcx->position[i] = Gc.position[i];
   }
   return res;

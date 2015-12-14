@@ -17,6 +17,9 @@ public:
 			   const PiecewiseLinear& E_corr,
 			   const PiecewiseLinear& N_corr,
 			   const PiecewiseLinear& U_corr);
+  %python_attribute(e_corr, PiecewiseLinear);
+  %python_attribute(n_corr, PiecewiseLinear);
+  %python_attribute(u_corr, PiecewiseLinear);
   %pickle_serialization();
 };
 }

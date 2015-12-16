@@ -17,6 +17,7 @@ public:
   MemoryRasterImage(const RasterImage& Img, int Number_line_to_read = -1, 
 	int Number_sample_to_read = -1);
   MemoryRasterImage(const MapInfo& Mi);
+  %pickle_serialization();
 };
 
 }

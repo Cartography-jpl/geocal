@@ -277,12 +277,8 @@ class RasterAveraged(geocal_swig.calc_raster.CalcRaster):
         return self._v_ignore_zero()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.high_resolution_image,self.number_line_per_pixel,self.number_sample_per_pixel,self.ignore_zero)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _raster_averaged.delete_RasterAveraged
 RasterAveraged._v_high_resolution_image = new_instancemethod(_raster_averaged.RasterAveraged__v_high_resolution_image, None, RasterAveraged)
@@ -384,12 +380,8 @@ class RasterAveragedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMulti
         return self._v_ignore_zero()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.high_resolution_image,self.number_line_per_pixel,self.number_sample_per_pixel,self.ignore_zero)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _raster_averaged.delete_RasterAveragedMultiBand
 RasterAveragedMultiBand._v_high_resolution_image = new_instancemethod(_raster_averaged.RasterAveragedMultiBand__v_high_resolution_image, None, RasterAveragedMultiBand)
@@ -465,12 +457,8 @@ class ImageMaskAveraged(geocal_swig.image_mask.ImageMask):
         return self._v_number_sample_per_pixel()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.high_resolution_image_mask,self.number_line_per_pixel,self.number_sample_per_pixel)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _raster_averaged.delete_ImageMaskAveraged
 ImageMaskAveraged._v_high_resolution_image_mask = new_instancemethod(_raster_averaged.ImageMaskAveraged__v_high_resolution_image_mask, None, ImageMaskAveraged)
@@ -581,12 +569,8 @@ class AveragedImageGroundConnection(geocal_swig.image_ground_connection.ImageGro
         return self._v_in_memory()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.original_image_ground_connection,self.number_line_per_pixel,self.number_sample_per_pixel,self.in_memory,self.ignore_zero)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _raster_averaged.delete_AveragedImageGroundConnection
 AveragedImageGroundConnection._v_original_image_ground_connection = new_instancemethod(_raster_averaged.AveragedImageGroundConnection__v_original_image_ground_connection, None, AveragedImageGroundConnection)

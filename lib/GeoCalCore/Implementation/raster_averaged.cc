@@ -2,8 +2,72 @@
 #include "memory_raster_image.h"
 #include "memory_multi_band.h"
 #include "ostream_pad.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void RasterAveraged::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster)
+    & GEOCAL_NVP_(raw_data)
+    & GEOCAL_NVP_(ignore_zero)
+    & GEOCAL_NVP_(number_line_per_pixel)
+    & GEOCAL_NVP_(number_sample_per_pixel);
+}
+
+template<class Archive>
+void RasterAveragedMultiBand::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRasterMultiBand)
+    & GEOCAL_NVP_(raw_data)
+    & GEOCAL_NVP_(ignore_zero)
+    & GEOCAL_NVP_(number_line_per_pixel)
+    & GEOCAL_NVP_(number_sample_per_pixel);
+}
+
+template<class Archive>
+void ImageMaskAveraged::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageMask)
+    & GEOCAL_NVP_(data)
+    & GEOCAL_NVP_(number_line_per_pixel)
+    & GEOCAL_NVP_(number_sample_per_pixel);
+}
+
+template<class Archive>
+void AveragedImageGroundConnection::save(Archive & ar, const unsigned int version) const
+{
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(ImageGroundConnection, WithParameter);
+  GEOCAL_BASE(AveragedImageGroundConnection, ImageGroundConnection);
+  ar & GEOCAL_NVP_(ig)
+   & GEOCAL_NVP_(number_line_per_pixel)
+   & GEOCAL_NVP_(number_sample_per_pixel)
+   & GEOCAL_NVP_(in_memory)
+   & GEOCAL_NVP_(ignore_zero);
+}
+
+template<class Archive>
+void AveragedImageGroundConnection::load(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(ImageGroundConnection, WithParameter);
+  GEOCAL_BASE(AveragedImageGroundConnection, ImageGroundConnection);
+  ar & GEOCAL_NVP_(ig)
+   & GEOCAL_NVP_(number_line_per_pixel)
+   & GEOCAL_NVP_(number_sample_per_pixel)
+   & GEOCAL_NVP_(in_memory)
+   & GEOCAL_NVP_(ignore_zero);
+  init();
+}
+
+GEOCAL_IMPLEMENT(RasterAveraged);
+GEOCAL_IMPLEMENT(RasterAveragedMultiBand);
+GEOCAL_IMPLEMENT(ImageMaskAveraged);
+GEOCAL_SPLIT_IMPLEMENT(AveragedImageGroundConnection);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor.
@@ -180,7 +244,12 @@ AveragedImageGroundConnection::AveragedImageGroundConnection
   : ig_(Igc), number_line_per_pixel_(Number_line_per_pixel),
     number_sample_per_pixel_(Number_sample_per_pixel),
     in_memory_(In_memory), ignore_zero_(Ignore_zero) 
-{ 
+{					       
+  init();
+}
+
+void AveragedImageGroundConnection::init()
+{
   dem_ = ig_->dem_ptr();
   if(ig_->image()) {
     boost::shared_ptr<RasterImage> ra

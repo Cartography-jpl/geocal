@@ -76,6 +76,10 @@ private:
   bool ignore_zero_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;
+  RasterAveraged() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -150,6 +154,10 @@ private:
   bool ignore_zero_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;
+  RasterAveragedMultiBand() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -208,6 +216,10 @@ private:
   boost::shared_ptr<ImageMask> data_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;
+  ImageMaskAveraged() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -217,7 +229,7 @@ private:
   have it done once and kept in memory.
 *******************************************************************/
 
-class AveragedImageGroundConnection : public ImageGroundConnection {
+class AveragedImageGroundConnection : public virtual ImageGroundConnection {
 public:
   AveragedImageGroundConnection
   (const boost::shared_ptr<ImageGroundConnection> Igc,
@@ -331,12 +343,25 @@ public:
   }
 
 private:
+  void init();
   boost::shared_ptr<ImageGroundConnection> ig_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;
   bool in_memory_;
   bool ignore_zero_;
+  AveragedImageGroundConnection() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+  GEOCAL_SPLIT_MEMBER();
 };
 }
+
+GEOCAL_EXPORT_KEY(RasterAveraged);
+GEOCAL_EXPORT_KEY(RasterAveragedMultiBand);
+GEOCAL_EXPORT_KEY(ImageMaskAveraged);
+GEOCAL_EXPORT_KEY(AveragedImageGroundConnection);
 #endif
 

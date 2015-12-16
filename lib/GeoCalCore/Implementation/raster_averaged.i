@@ -27,9 +27,7 @@ public:
   %python_attribute(number_line_per_pixel, int)
   %python_attribute(number_sample_per_pixel, int)
   %python_attribute(ignore_zero, bool)
-  %pickle_init(1, self.high_resolution_image,
-	       self.number_line_per_pixel, self.number_sample_per_pixel,
-	       self.ignore_zero)
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 };
@@ -45,9 +43,7 @@ public:
   %python_attribute(number_line_per_pixel, int)
   %python_attribute(number_sample_per_pixel, int)
   %python_attribute(ignore_zero, bool)
-  %pickle_init(1, self.high_resolution_image,
-	       self.number_line_per_pixel, self.number_sample_per_pixel,
-	       self.ignore_zero)
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 };
@@ -62,9 +58,7 @@ public:
   %python_attribute(number_line_per_pixel, int)
   %python_attribute(number_sample_per_pixel, int)
   virtual bool mask(int Line, int Sample) const;
-  %pickle_init(1, self.high_resolution_image_mask,
-	       self.number_line_per_pixel, 
-	       self.number_sample_per_pixel)
+  %pickle_serialization();
 };
 
 class AveragedImageGroundConnection: public ImageGroundConnection {
@@ -85,9 +79,6 @@ public:
   %python_attribute(number_sample_per_pixel, int)
   %python_attribute(ignore_zero, bool)
   %python_attribute(in_memory, bool)
-  %pickle_init(1, self.original_image_ground_connection, 
-	       self.number_line_per_pixel, 
-	       self.number_sample_per_pixel,
-	       self.in_memory, self.ignore_zero);
+  %pickle_serialization();
 };
 }

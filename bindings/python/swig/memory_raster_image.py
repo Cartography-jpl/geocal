@@ -198,6 +198,10 @@ class MemoryRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
         Construct a MemoryRasterImage of the given MapInfo. 
         """
         _memory_raster_image.MemoryRasterImage_swiginit(self, _memory_raster_image.new_MemoryRasterImage(*args))
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _memory_raster_image.delete_MemoryRasterImage
 MemoryRasterImage_swigregister = _memory_raster_image.MemoryRasterImage_swigregister
 MemoryRasterImage_swigregister(MemoryRasterImage)

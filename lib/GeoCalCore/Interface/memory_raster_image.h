@@ -1,7 +1,7 @@
 #ifndef MEMORY_RASTER_IMAGE_H
 #define MEMORY_RASTER_IMAGE_H
 #include "raster_image_variable.h"
-#include <boost/shared_ptr.hpp>
+#include <blitz/array.h>
 #include <vector>
 
 namespace GeoCal {
@@ -21,7 +21,7 @@ public:
 
   MemoryRasterImage(int Number_line = 0, int Number_sample = 0)
     : RasterImageVariable(Number_line, Number_sample),
-      data_(boost::extents[Number_line][Number_sample])
+      data_(Number_line, Number_sample)
     {
     }
 
@@ -34,7 +34,7 @@ public:
 
   MemoryRasterImage(const MapInfo& Mi)
     : RasterImageVariable(Mi),
-      data_(boost::extents[number_line()][number_sample()])
+      data_(number_line(), number_sample())
   { }
 
   virtual ~MemoryRasterImage() {}
@@ -43,22 +43,22 @@ public:
 /// Underlying data.
 //-----------------------------------------------------------------------
 
-  boost::multi_array<int, 2>& data() {return  data_;}
+  blitz::Array<int, 2>& data() {return  data_;}
 
 //-----------------------------------------------------------------------
 /// Underlying data.
 //-----------------------------------------------------------------------
 
-  const boost::multi_array<int, 2>& data() const {return  data_;}
+  const blitz::Array<int, 2>& data() const {return  data_;}
 
 
   virtual int unchecked_read(int Line, int Sample) const
   {
-    return data_[Line][Sample];
+    return data_(Line,Sample);
   }
   virtual double unchecked_read_double(int Line, int Sample) const
   {
-    return (double) data_[Line][Sample];
+    return (double) data_(Line,Sample);
   }
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const
@@ -67,15 +67,18 @@ public:
     range_check(Sstart, 0, number_sample() - (Number_sample - 1));
     for(int i = Lstart; i < Lstart + Number_line; ++i)
       for(int j = Sstart; j < Sstart + Number_sample; ++j, ++Res)
-	*Res = data_[i][j];
+	*Res = data_(i,j);
   }
   virtual void unchecked_write(int Line, int Sample, int Val)
   {
-    data_[Line][Sample] = Val;
+    data_(Line, Sample) = Val;
   }
   virtual void print(std::ostream& Os) const;
  private:
-  boost::multi_array<int, 2> data_; ///< Underlying data.
+  blitz::Array<int, 2> data_; ///< Underlying data.
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -180,4 +183,6 @@ public:
 };
 
 }
+
+GEOCAL_EXPORT_KEY(MemoryRasterImage);
 #endif

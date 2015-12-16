@@ -382,11 +382,11 @@ void ArgusOrbitData::mosaic(const
   boost::shared_ptr<MemoryRasterImage> m1(new MemoryRasterImage(Mi));
   boost::shared_ptr<MemoryRasterImage> m2(new MemoryRasterImage(Mi));
   boost::shared_ptr<MemoryRasterImage> m3(new MemoryRasterImage(Mi));
-  std::fill(m1->data().data(), m1->data().data() + m1->data().num_elements(), 
+  std::fill(m1->data().data(), m1->data().data() + m1->data().numElements(), 
 	    0);
-  std::fill(m2->data().data(), m2->data().data() + m2->data().num_elements(), 
+  std::fill(m2->data().data(), m2->data().data() + m2->data().numElements(), 
 	    0);
-  std::fill(m3->data().data(), m3->data().data() + m3->data().num_elements(), 
+  std::fill(m3->data().data(), m3->data().data() + m3->data().numElements(), 
 	    0);
   BOOST_FOREACH(const boost::shared_ptr<ArgusOrbitData>& odv, Od) {
     std::cerr << "  Processing " << odv->file_name() << "\n";

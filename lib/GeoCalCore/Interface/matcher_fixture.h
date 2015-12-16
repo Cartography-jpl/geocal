@@ -26,8 +26,11 @@ public:
 		     std::ios::binary);
     ref.read((char*) ref_d.data(), 64 * 64);
     nw.read((char*) new_d.data(), 64 * 64);
-    ref_img.data() = ref_d;
-    new_img.data() = new_d;
+    for(int i = 0; i < ref_img.number_line(); ++i)
+      for(int j = 0; j < ref_img.number_sample(); ++j) {
+	ref_img.write(i, j, ref_d[i][j]);
+	new_img.write(i, j, new_d[i][j]);
+      }
   }
   MemoryRasterImage ref_img, new_img;
   ImageCoordinate ref_ic, new_ic;

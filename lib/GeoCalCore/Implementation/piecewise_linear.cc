@@ -1,6 +1,5 @@
 #include "piecewise_linear.h"
 #include "geocal_serialize_support.h"
-#include "blitz_array_serialize_support.h"
 
 using namespace GeoCal;
 

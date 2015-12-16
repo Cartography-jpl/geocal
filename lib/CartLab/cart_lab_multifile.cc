@@ -198,7 +198,7 @@ RasterMultifileTile GdalCartLabMultifile::get_file(int Line, int Sample) const
 RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
 {
   std::string fname = loc_to_file.find(Line, Sample);
-  if(fname =="")
+  if(fname =="") {
     if(!no_coverage_is_error_) {
       boost::shared_ptr<RasterImage> cf
 	(new ConstantRasterImage(mi_ref.number_y_pixel(), mi_ref.number_x_pixel(),
@@ -206,9 +206,10 @@ RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
       int ln = (Line / cf->number_line()) * cf->number_line();
       int smp = (Sample / cf->number_sample()) * cf->number_sample();
       return RasterMultifileTile(cf, ln, smp);
-    } else
+    } else {
       return RasterMultifileTile();
-
+    }
+  }
   //-----------------------------------------------------------------------
   // If we are using memory mapped io by preference, try that first.
   // We allow this to fail, the file might be too large to do memory

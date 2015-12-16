@@ -1,6 +1,18 @@
 #include "memory_raster_image.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void MemoryRasterImage::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)
+    & GEOCAL_NVP_(data);
+}
+
+GEOCAL_IMPLEMENT(MemoryRasterImage);
+#endif
 
 //-----------------------------------------------------------------------
 /// Copy another RasterImage into memory. This can be useful to read a
@@ -16,7 +28,7 @@ MemoryRasterImage::MemoryRasterImage(const RasterImage& Img,
 				     int Number_line_to_read, 
 				     int Number_sample_to_read)
 : RasterImageVariable(Img),
-  data_(boost::extents[Img.number_line()][Img.number_sample()])
+  data_(Img.number_line(),Img.number_sample())
 {
   if(Number_line_to_read == -1)
     Number_line_to_read = Img.number_tile_line();
@@ -35,8 +47,10 @@ MemoryRasterImage::MemoryRasterImage(const RasterImage& Img,
       std::cerr << "Memory raster image reading (" << i << ", " << j 
 		<< ") to (" << i + nline << ", " << j + nsamp << ")\n";
 #endif
-      data_[boost::indices[range(i, i + nline)][range(j, j + nsamp)]]
-	= Img.read_array(i, j, nline, nsamp);
+      boost::multi_array<int, 2> d = Img.read_array(i, j, nline, nsamp);
+      for(int ii = 0; ii < nline; ++ii)
+	for(int jj = 0; jj < nsamp; ++jj)
+	  data_(i + ii, j + jj) = d[ii][jj];
     }
   }
 }

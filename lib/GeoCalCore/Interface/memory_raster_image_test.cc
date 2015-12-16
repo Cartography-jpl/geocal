@@ -116,5 +116,28 @@ BOOST_AUTO_TEST_CASE(memory_map_projected_image)
   //   }
 }
 
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  std::string fname = test_data_dir() + "cib_sample.img";
+  boost::shared_ptr<RasterImage> img(new MemoryRasterImage(5, 10));
+  int val = 0;
+  for(int i = 0; i < img->number_line(); ++i)
+    for(int j = 0; j < img->number_sample(); ++j, ++val)
+      img->write(i, j, val);
+  std::string d = serialize_write_string(img);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<RasterImage> imgr = serialize_read_string<RasterImage>(d);
+  BOOST_CHECK_EQUAL(imgr->number_line(), 5);
+  BOOST_CHECK_EQUAL(imgr->number_sample(), 10);
+  val = 0;
+  for(int i = 0; i < imgr->number_line(); ++i)
+    for(int j = 0; j < imgr->number_sample(); ++j, ++val)
+      BOOST_CHECK_EQUAL((*imgr)(i, j), val);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

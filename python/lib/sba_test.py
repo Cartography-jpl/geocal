@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from geocal_swig import *
 from tie_point_collect import *
@@ -27,7 +28,7 @@ test_data = "/data/smyth/MSPI-Ground/scripts_test/2013-01-31/sba/AirMSPI_ER2_CA-
 def sol_iteration(sba, parm, lam):
     residual = sba.sba_eq(parm)
     chisq = np.inner(residual, residual) / (len(residual) - len(sba.parameter))
-    print "Chisq", chisq
+    print("Chisq", chisq)
     j = sba.sba_jacobian(parm).tocsr()
     jtj = j.transpose() * j
     # Think this is wrong
@@ -36,9 +37,9 @@ def sol_iteration(sba, parm, lam):
     pnew = parm - sp.linalg.spsolve(c, jtres, use_umfpack=True)
     residual = sba.sba_eq(pnew)
     chisq = np.inner(residual, residual) / (len(residual) - len(sba.parameter))
-    print "Chisq", chisq
-    print pnew
-    print sba.gcp_constraint()
+    print("Chisq", chisq)
+    print(pnew)
+    print(sba.gcp_constraint())
     return pnew
 
 def test_jac():
@@ -86,29 +87,29 @@ def test_jac():
 
     t = jac - jac_calc
     assert np.max(np.abs(t)) < 0.02
-    print "Surface constraint:"
+    print("Surface constraint:")
     t2 = t[sba.surface_constraint_slice, :]
-    print np.max(np.abs(t2))
-    print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
-    print "GCP constraint:"
+    print(np.max(np.abs(t2)))
+    print(np.unravel_index(np.argmax(np.abs(t2)), t2.shape))
+    print("GCP constraint:")
     t2 = t[sba.gcp_constraint_slice, :]
-    print np.max(np.abs(t2))
-    print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
-    print "Parameter constraint:"
+    print(np.max(np.abs(t2)))
+    print(np.unravel_index(np.argmax(np.abs(t2)), t2.shape))
+    print("Parameter constraint:")
     t2 = t[sba.parameter_constraint_slice, :]
-    print np.max(np.abs(t2))
-    print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
-    print "Collinearity constraint, tp offset part:"
+    print(np.max(np.abs(t2)))
+    print(np.unravel_index(np.argmax(np.abs(t2)), t2.shape))
+    print("Collinearity constraint, tp offset part:")
     t2 = t[sba.collinearity_constraint_slice, sba.tp_offset_slice]
     # If we need to print a value out, do something like this:
     #print jac.todense()[sba.collinearity_constraint_slice, sba.tp_offset_slice][88,23]
     #print jac_calc[sba.collinearity_constraint_slice, sba.tp_offset_slice][88,23]
-    print np.max(np.abs(t2))
-    print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
-    print "Collineariy constraint, parm part:"
+    print(np.max(np.abs(t2)))
+    print(np.unravel_index(np.argmax(np.abs(t2)), t2.shape))
+    print("Collineariy constraint, parm part:")
     t2 = t[sba.collinearity_constraint_slice, sba.igc_coll_param_slice]
-    print np.max(np.abs(t2))
-    print np.unravel_index(np.argmax(np.abs(t2)), t2.shape)
+    print(np.max(np.abs(t2)))
+    print(np.unravel_index(np.argmax(np.abs(t2)), t2.shape))
 
 def test_mspi_old_sba():
     '''This matches an old SBA run done using the old version of GeoCal.
@@ -140,16 +141,16 @@ def test_mspi_old_sba():
     sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
+    print("Chisq", chisq)
     #sol_iteration(sba, sba.parameter, 0.1)
     #return
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print igccol.parameter_subset
-    print igccol.orbit(0)
-    print igccol.camera(0)
+    print("Chisq", chisq)
+    print(igccol.parameter_subset)
+    print(igccol.orbit(0))
+    print(igccol.camera(0))
     tpcol2 = TiePointCollection()
     for i in range(len(tpcol)):
         tp = TiePoint(tpcol[i].number_image)
@@ -281,24 +282,24 @@ def test_mspi_sba():
     #tpcol = tpcol_original
     dem = igccol.dem(0)
     sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
-    print sba.parameter
+    print(sba.parameter)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print "Change position: ", distance(tpcol[10].ground_location,
-                                        sba.ground_location(10))
-    print igccol.parameter_subset
+    print("Chisq", chisq)
+    print("Change position: ", distance(tpcol[10].ground_location,
+                                        sba.ground_location(10)))
+    print(igccol.parameter_subset)
     #sol_iteration(sba, sba.parameter, 0.1)
     #return
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print "Change position: ", distance(tpcol[10].ground_location,
-                                        sba.ground_location(10))
-    print igccol.parameter_subset
-    print orb
-    print sba.parameter
+    print("Chisq", chisq)
+    print("Change position: ", distance(tpcol[10].ground_location,
+                                        sba.ground_location(10)))
+    print(igccol.parameter_subset)
+    print(orb)
+    print(sba.parameter)
     tpcol2 = TiePointCollection()
     for i in range(len(tpcol)):
         tp = TiePoint(tpcol[i].number_image)
@@ -363,19 +364,19 @@ def test_mspi_sba_subset():
             tpcol.append(tp2)
     dem = igccol.dem(0)
     sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
-    print igccol.parameter_subset
+    print(igccol.parameter_subset)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print "Change position: ", distance(tpcol[10].ground_location,
-                                        sba.ground_location(10))
+    print("Chisq", chisq)
+    print("Change position: ", distance(tpcol[10].ground_location,
+                                        sba.ground_location(10)))
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print "Chisq", chisq
-    print "Change position: ", distance(tpcol[10].ground_location,
-                                        sba.ground_location(10))
-    print igccol.parameter_subset
+    print("Chisq", chisq)
+    print("Change position: ", distance(tpcol[10].ground_location,
+                                        sba.ground_location(10)))
+    print(igccol.parameter_subset)
 
     tpcol2 = TiePointCollection()
     for i in range(len(tpcol)):

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 from geocal_swig import *
@@ -38,7 +39,7 @@ def test_height_grid():
         raise SkipTest
     pool = Pool()
 #    pool = None
-    print dgen.height_grid(pool = pool)
+    print(dgen.height_grid(pool = pool))
 #    dgen.plot_res()
 
 def test_height_grid_surf():
@@ -46,7 +47,7 @@ def test_height_grid_surf():
         raise SkipTest
     pool = Pool()
 #    pool = None
-    print dgen_surf.height_grid(pool = pool)
+    print(dgen_surf.height_grid(pool = pool))
 #    dgen.plot_res()
 
 def test_pickle():

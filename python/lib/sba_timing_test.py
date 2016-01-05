@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from geocal_swig import *
 from tie_point import *
@@ -78,7 +79,7 @@ def test_time():
 #    res = sba.sba_jacobian(sba.parameter)
 #    print res.tolil()
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
-    print len(igc_coll.parameter_subset)
-    print igc_coll.parameter_subset
-    print igc_coll.parameter_mask
+    print(len(igc_coll.parameter_subset))
+    print(igc_coll.parameter_subset)
+    print(igc_coll.parameter_mask)
 

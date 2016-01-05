@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from geocal_swig import *
 from tie_point_collect import *
@@ -131,12 +132,12 @@ class TestClass:
             v = sba.sba_eq(sba.parameter)
             chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
             assert chisq > 50
-            print "Chisq", chisq
+            print("Chisq", chisq)
             parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
             sba.parameter = parm
             v = sba.sba_eq(sba.parameter)
             chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-            print "Chisq", chisq
+            print("Chisq", chisq)
             assert chisq < 2
         finally:
             log_optimize = logging.getLogger("geocal-python.lm_optimize")
@@ -150,14 +151,14 @@ class TestClass:
             v = sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)
             chisq = np.inner(v, v) / (len(v) - len(sba_constant_gcp.parameter))
             assert chisq > 50
-            print "Chisq", chisq
+            print("Chisq", chisq)
             parm = lm_optimize(sba_constant_gcp.sba_eq, 
                                sba_constant_gcp.parameter, 
                                sba_constant_gcp.sba_jacobian)
             sba_constant_gcp.parameter = parm
             v = sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)
             chisq = np.inner(v, v) / (len(v) - len(sba_constant_gcp.parameter))
-            print "Chisq", chisq
+            print("Chisq", chisq)
             assert chisq < 2
         finally:
             log_optimize = logging.getLogger("geocal-python.lm_optimize")
@@ -169,14 +170,14 @@ class TestClass:
         # have above
         v = sba.sba_eq(sba.parameter)
         chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-        print "Chisq", chisq
+        print("Chisq", chisq)
         assert chisq > 50
         parm, res = scipy.optimize.leastsq(sba.sba_eq, sba.parameter,
                                            Dfun = lambda x: sba.sba_jacobian(x).todense())
         sba.parameter = parm
         v = sba.sba_eq(sba.parameter)
         chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-        print "Chisq", chisq
+        print("Chisq", chisq)
         assert chisq < 2
         out = open(test_data + "rpc_sba.pkl", "wb")
         cPickle.dump(igc1.rpc, out, cPickle.HIGHEST_PROTOCOL)

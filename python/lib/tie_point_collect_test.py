@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from geocal_swig import *
 from tie_point_collect import *
@@ -72,4 +73,4 @@ def test_fm():
     # Parallel doesn't work yet.
     pool = None
     tpcol = tp_collect.tie_point_list(pool = pool)
-    print tpcol
+    print(tpcol)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from instrument_reflectance import *
 import xml.etree.ElementTree as ET
 import math
@@ -46,7 +47,7 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
         self.genericMetaDataParser(filename, 'pan');
 
     def printMetadata(self):
-        print "Peter, fill this in."
+        print("Peter, fill this in.")
 
     def genericMetaDataParser(self, filename, type):
         tree = ET.parse(filename);

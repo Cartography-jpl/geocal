@@ -1,3 +1,4 @@
+from __future__ import print_function
 from geocal_swig import *
 from instrument_reflectance import *
 import math
@@ -229,19 +230,19 @@ class WorldView2Reflectance(InstrumentReflectance):
               (self.esun[band]*math.cos(self.pan_solarZenithAngleInRadians))
 
    def printMetadata(self):
-      print "Metadata:"
-      print "========="
-      print "datetime: ", self.year, self.month, self.day, self.hh, self.mm, self.ssdd
-      print "solar elevation/zenith: ", self.solarElevation, self.solarZenithAngle
-      print "solar distance: ", self.solarDist
+      print("Metadata:")
+      print("=========")
+      print("datetime: ", self.year, self.month, self.day, self.hh, self.mm, self.ssdd)
+      print("solar elevation/zenith: ", self.solarElevation, self.solarZenithAngle)
+      print("solar distance: ", self.solarDist)
 
-      print "pan ssdd: ", self.pan_ssdd
-      print "pan solar elevation/zenith: ", self.pan_solarElevation, self.pan_solarZenithAngle
-      print "pan solar distance: ", self.pan_solarDist
+      print("pan ssdd: ", self.pan_ssdd)
+      print("pan solar elevation/zenith: ", self.pan_solarElevation, self.pan_solarZenithAngle)
+      print("pan solar distance: ", self.pan_solarDist)
 
       for i in range(9):
-         print "-------"
-         print "Band: ", i+1
-         print "abscalfactor: ", self.absCalFactors[i]
-         print "effectiveBandwidth: ", self.effectiveBandwidths[i]
+         print("-------")
+         print("Band: ", i+1)
+         print("abscalfactor: ", self.absCalFactors[i])
+         print("effectiveBandwidth: ", self.effectiveBandwidths[i])
 

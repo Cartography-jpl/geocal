@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import pickle
 import sqlite3
@@ -73,7 +74,7 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)''',
                          pickle.dumps(job_to_run)))
         self.db.commit()
         with open(log_file, "a") as fh:
-            print >>fh, "%s INFO:geocal-python.job_database Added job %d to the job queue" % (datetime.datetime.now().isoformat(), cur.lastrowid)
+            print("%s INFO:geocal-python.job_database Added job %d to the job queue" % (datetime.datetime.now().isoformat(), cur.lastrowid), file=fh)
         if(start_if_available):
             subprocess.call("job_database_check_and_run %s %s &" %
                             (self.db_name, log_file), shell = True)

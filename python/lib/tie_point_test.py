@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from geocal_swig import *
 from tie_point import *
@@ -69,14 +70,14 @@ def test_tie_point():
     igccol = read_shelve(geocal_test_igc)
     tpcol = read_shelve(geocal_test_tpcol)
     tp = tpcol[0]
-    print tp.ic
+    print(tp.ic)
     tp.image_location[5] = None
-    print tp.ic
-    print tp.ic_sigma
-    print tp.ic_pred(igccol)
-    print tp.ic_diff(igccol)
-    print tpcol.data_frame(igccol, 0)
-    print tpcol.panel(igccol)
+    print(tp.ic)
+    print(tp.ic_sigma)
+    print(tp.ic_pred(igccol))
+    print(tp.ic_diff(igccol))
+    print(tpcol.data_frame(igccol, 0))
+    print(tpcol.panel(igccol))
 
 # If you run this, make sure to include this import. Otherwise the namespace
 # for the tiepoint isn't correct in the TiePointCollection shelf

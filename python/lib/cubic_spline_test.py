@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from cubic_spline import *
 
@@ -8,6 +9,6 @@ def test_spline():
     cs.add_knot(15)
     cs.add_knot(20)
     cs.parameter = [10, 20, 5, 30]
-    print cs.value(10)
-    print cs.value(15)
-    print cs.value(20)
+    print(cs.value(10))
+    print(cs.value(15))
+    print(cs.value(20))

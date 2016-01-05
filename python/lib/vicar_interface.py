@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import shutil
 import tempfile
@@ -128,10 +129,10 @@ class VicarInterface:
     
         if(self.timing):
             time_start = time.time()
-            print "Starting " + self.title
+            print("Starting " + self.title)
         if(self.debug):
-            print "Vicar command:"
-            print self.cmd
+            print("Vicar command:")
+            print(self.cmd)
         d = None
         curdir = None
         successfully_done = False
@@ -171,19 +172,19 @@ end-proc
                                               stderr=subprocess.STDOUT,
                                               stdout=f)
             except subprocess.CalledProcessError as ex:
-                print "Vicar call failed. Log of VICAR:"
+                print("Vicar call failed. Log of VICAR:")
                 with open("run.log") as f:
                     for line in f:
-                        print line,
+                        print(line, end=' ')
                     raise
             for f in outabs:
                 shutil.move(os.path.basename(f), f)
             self.post_run()
             if(not self.debug and self.print_output):
-                print "Vicar output:"
+                print("Vicar output:")
                 with open("run.log") as f:
                     for line in f:
-                        print line,
+                        print(line, end=' ')
             successfully_done = True
         finally:
             if(self.log_file):
@@ -195,8 +196,8 @@ end-proc
                 not self.debug)):
                 shutil.rmtree(d)
         if(self.timing):
-            print "Done with " + self.title +". Time: ", \
-                time.time() - time_start
+            print("Done with " + self.title +". Time: ", \
+                time.time() - time_start)
 
 
 class __VicarToNarray(VicarInterface):

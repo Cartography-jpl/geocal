@@ -1,3 +1,4 @@
+from __future__ import print_function
 from geocal_swig import *
 import string
 import re
@@ -202,9 +203,9 @@ def tre_use00a_to_gdal(fin, fout):
 def tre_use00a_pretty_print(f):
     '''Pretty print of TRE'''
     if(f.has_use00a):
-        print "Use00A tre:"
+        print("Use00A tre:")
         s = re.sub(r"^", "  ",str(f.use00a),flags=re.M)
-        print s
+        print(s)
     
 def tre_use00a(fin, fout, creation_option):
     '''Function that copies the use00a structure from fin to a TRE in the

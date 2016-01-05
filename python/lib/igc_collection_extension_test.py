@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from geocal_swig import *
 from image_ground_connection import *
@@ -87,7 +88,7 @@ def test_igc_array():
         and compared the results'''
         jac = scipy.sparse.lil_matrix((len(igc_coll.parameter_subset), len(igc_coll.parameter_subset)))
         igc_coll.image_coordinate_jac_parm_sparse(2, gp, jac, 0, 0)
-        print jac
+        print(jac)
 
 # We don't support this anymore. I don't think we actually need this, but
 # leave the test in place in case we need to come back to this.
@@ -218,9 +219,9 @@ def create_igc_collection_rolling_shutter():
         ras = VicarLiteRasterImage(geocal_test_data + "igc_rolling_shutter_image%d.img" % i)
         igccol_final.add_image(ras, tt, title)
     write_shelve(geocal_test_data + "igccol_rolling_shutter.xml", igccol_final)
-    print '''You should manually edit igccol_rolling_shutter.xml to use 
+    print('''You should manually edit igccol_rolling_shutter.xml to use 
 relative paths. You can just edit the text file in emacs.
-'''
+''')
     
 def test_igc_collection_rolling_shutter():
     '''Test IgcCollectionRollingShutter.'''

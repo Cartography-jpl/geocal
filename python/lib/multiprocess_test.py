@@ -1,3 +1,4 @@
+from __future__ import print_function
 import multiprocessing
 from multiprocessing import Pool
 from nose.plugins.skip import Skip, SkipTest
@@ -8,8 +9,8 @@ def f(x):
 
 def test_basic():
     pool = Pool()
-    print multiprocessing.cpu_count()
-    print pool.map(f, range(100), 100 / multiprocessing.cpu_count())
+    print(multiprocessing.cpu_count())
+    print(pool.map(f, range(100), 100 / multiprocessing.cpu_count()))
 
 def g(x, y):
     return x * y
@@ -22,4 +23,4 @@ def test_partial():
     # class, so this isn't too big of a deal
     pool = Pool()
     g2 = functools.partial(g, 10)
-    print pool.map(g2, range(100), 100 / multiprocessing.cpu_count())
+    print(pool.map(g2, range(100), 100 / multiprocessing.cpu_count()))

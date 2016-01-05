@@ -1,3 +1,4 @@
+from __future__ import print_function
 from instrument_reflectance import *
 import math
 
@@ -56,15 +57,15 @@ class IkonosReflectance(InstrumentReflectance):
             continue         
 
    def printMetadata(self):
-      print "Metadata:"
-      print "========="
-      print "datetime: ", self.year, self.month, self.day, self.hh, self.mm, self.ssdd
-      print "solar elevation/zenith: ", self.solarElevation, self.solarZenithAngle
-      print "solar distance: ", self.solarDist
+      print("Metadata:")
+      print("=========")
+      print("datetime: ", self.year, self.month, self.day, self.hh, self.mm, self.ssdd)
+      print("solar elevation/zenith: ", self.solarElevation, self.solarZenithAngle)
+      print("solar distance: ", self.solarDist)
 
       for i in range(5):
-         print "-------"
-         print "Band: ", i+1
-         print "abscalfactor: ", self.absCalFactors[i]
-         print "effectiveBandwidth: ", self.effectiveBandwidths[i]
+         print("-------")
+         print("Band: ", i+1)
+         print("abscalfactor: ", self.absCalFactors[i])
+         print("effectiveBandwidth: ", self.effectiveBandwidths[i])
 

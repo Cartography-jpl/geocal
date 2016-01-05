@@ -20,7 +20,7 @@ def tile_iterator(data):
 
     while(not t.end):
         yield t
-        t.next()
+        next(t)
 
 def read_iterator(data):
     """
@@ -46,5 +46,5 @@ def read_iterator(data):
     while(not t.end):
         yield data.read(t.istart, t.jstart, t.number_line,
                         t.number_sample)
-        t.next()
+        next(t)
 

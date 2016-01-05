@@ -1,3 +1,4 @@
+from __future__ import print_function
 import numpy as np
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
@@ -45,23 +46,21 @@ class PlyFile(object):
         else:
             have_color = False
         with open(self.filename, "w") as fh:
-            print >>fh, "ply"
+            print("ply", file=fh)
             if(self.binary_format):
-                print >>fh, "format binary_little_endian 1.0"
+                print("format binary_little_endian 1.0", file=fh)
             else:
-                print >>fh, "format ascii 1.0"
-            print >>fh, \
-'''element vertex %d
+                print("format ascii 1.0", file=fh)
+            print('''element vertex %d
 property float x
 property float y
-property float z''' % self.vertex.shape[0]
+property float z''' % self.vertex.shape[0], file=fh)
             if(have_color):
-                print >>fh, \
-'''property uchar red
+                print('''property uchar red
 property uchar green
 property uchar blue
-property uchar alpha'''
-            print >>fh, "end_header"
+property uchar alpha''', file=fh)
+            print("end_header", file=fh)
             if(self.binary_format):
                 for i in range (self.vertex.shape[0]):
                     fh.write(struct.pack("<3f", *self.vertex[i,0:3]))
@@ -69,12 +68,12 @@ property uchar alpha'''
                         fh.write(struct.pack("<4B", *cdata[i,:]))
             else:
                 for i in range (self.vertex.shape[0]):
-                    print >>fh, self.vertex[i,0], \
-                        self.vertex[i,1], self.vertex[i, 2],
+                    print(self.vertex[i,0], \
+                        self.vertex[i,1], self.vertex[i, 2], end=' ', file=fh)
                     if(have_color):
-                        print >>fh, cdata[i,0], cdata[i,1], cdata[i,2], \
-                            cdata[i, 3],
-                    print >>fh, ""
+                        print(cdata[i,0], cdata[i,1], cdata[i,2], \
+                            cdata[i, 3], end=' ', file=fh)
+                    print("", file=fh)
         self.is_closed = True
     
     def __enter__(self):

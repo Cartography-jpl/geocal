@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from geocal_swig import *
 from igc_collection_extension import *
@@ -53,8 +54,8 @@ def test_sba_end_to_end():
     igc.parameter_subset = poriginal
     sba = SimultaneousBundleAdjustment(igccol, tparr, igc.dem)
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
-    print len(igccol.parameter_subset)
-    print igccol.parameter_subset
-    print ptrue
+    print(len(igccol.parameter_subset))
+    print(igccol.parameter_subset)
+    print(ptrue)
 
 

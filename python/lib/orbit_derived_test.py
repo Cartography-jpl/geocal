@@ -1,3 +1,4 @@
+from __future__ import print_function
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 from geocal_swig import *
@@ -24,9 +25,9 @@ class PythonOrbit(Orbit):
         self.korb = KeplerOrbit()
 
     def __init_base__(self):
-        print "In init_base"
+        print("In init_base")
         Orbit.__init__(self)
-        print self.min_time
+        print(self.min_time)
 
     def __str__(self):
         return "PythonOrbit"
@@ -47,17 +48,17 @@ def test_director_serialize():
         raise SkipTest
     orb = PythonOrbit()
     t = serialize_write_string(orb)
-    print t
+    print(t)
     orb2 = serialize_read_generic_string(t)
-    print orb2.min_time
+    print(orb2.min_time)
 
 def test_director_pickle():
     if(not have_serialize_supported()):
         raise SkipTest
     orb = PythonOrbit()
     t = cPickle.dumps(orb)
-    print t
+    print(t)
     orb2 = cPickle.loads(t)
-    print orb2.min_time
+    print(orb2.min_time)
 
 

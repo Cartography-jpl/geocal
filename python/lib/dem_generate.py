@@ -1,3 +1,4 @@
+from __future__ import print_function
 from geocal_swig import *
 import math
 import scipy.interpolate
@@ -336,7 +337,7 @@ class DemGenerate:
                                                          method = interpolate_method,
                                                          fill_value = fill_value) 
             except RuntimeError as e:
-                print "Got exception %s" % e
+                print("Got exception %s" % e)
                 if(not re.search("Qhull", str(e))):
                     raise e
                 # May fail because we have too few points, or they are in

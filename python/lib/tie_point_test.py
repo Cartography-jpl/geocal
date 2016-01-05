@@ -1,4 +1,5 @@
 from __future__ import print_function
+from builtins import range
 from nose.tools import *
 from geocal_swig import *
 from tie_point import *

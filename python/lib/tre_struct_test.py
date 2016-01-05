@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import range
 from geocal_swig import *
 from nose.tools import *
 from tre_struct import *

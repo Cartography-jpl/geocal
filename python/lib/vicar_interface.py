@@ -1,4 +1,6 @@
 from __future__ import print_function
+from builtins import str
+from builtins import object
 import os
 import shutil
 import tempfile
@@ -7,7 +9,7 @@ import time
 import geocal_swig
 from misc import makedirs_p
 
-class VicarInterface:
+class VicarInterface(object):
     '''This provides a basic interface for calling a vicar routine 
     from Python. This include several helper routines for building up
     and running a command.'''
@@ -57,7 +59,7 @@ class VicarInterface:
         '''This build up a single argument, handling quotes and processing
         arrays'''
         if(getattr(self.__dict__[arg], '__iter__', False)):
-            arg2 = map(lambda x: str(x), self.__dict__[arg])
+            arg2 = [str(x) for x in self.__dict__[arg]]
             if(len(arg2) ==0): return ""
             if(isinstance(self.__dict__[arg][0], int) or
                isinstance(self.__dict__[arg][0], float)):
@@ -140,7 +142,7 @@ class VicarInterface:
             d = tempfile.mkdtemp(dir='./')
             for i in self.input:
                 os.symlink(os.path.abspath(i), d + "/" + os.path.basename(i))
-            outabs = map(lambda x : os.path.abspath(x), self.output)
+            outabs = [os.path.abspath(x) for x in self.output]
             if(self.log_file): 
                 self.log_file = os.path.abspath(self.log_file)
             curdir = os.getcwd()

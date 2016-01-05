@@ -1,6 +1,12 @@
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from past.utils import old_div
 # This contains various tests to make sure pickling of low level GeoCal objects
 # work correctly.
-import cPickle
+import pickle
 from geocal_swig import *
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
@@ -17,8 +23,8 @@ def test_time_pickle():
     if(not have_serialize_supported()):
         raise SkipTest
     tm = Time.time_j2000(100.0)
-    t = cPickle.dumps(tm, cPickle.HIGHEST_PROTOCOL)
-    tm2 = cPickle.loads(t)
+    t = pickle.dumps(tm, pickle.HIGHEST_PROTOCOL)
+    tm2 = pickle.loads(t)
     assert tm == tm2
 
 # Test pickling of ImageCoordinate
@@ -26,8 +32,8 @@ def test_image_coordinate_pickle():
     if(not have_serialize_supported()):
         raise SkipTest
     ic = ImageCoordinate(1, 2)
-    t = cPickle.dumps(ic, cPickle.HIGHEST_PROTOCOL)
-    x = cPickle.loads(t)
+    t = pickle.dumps(ic, pickle.HIGHEST_PROTOCOL)
+    x = pickle.loads(t)
     assert_almost_equal(ic.line, x.line)
     assert_almost_equal(ic.sample, x.sample)
 
@@ -72,8 +78,8 @@ def test_rpc_pickle():
      -1.47985e-05, -4.23457e-06, 1.44009e-08, -1.07213e-06,
      1.1059e-07, 4.10217e-08, -1.69482e-07, 1.08104e-06,
       1e-9, -2.33038e-07, 1.86413e-08, -1.35637e-08]
-    t = cPickle.dumps(rpc, cPickle.HIGHEST_PROTOCOL)
-    x = cPickle.loads(t)
+    t = pickle.dumps(rpc, pickle.HIGHEST_PROTOCOL)
+    x = pickle.loads(t)
     assert str(rpc) == str(x)
     assert_almost_equal(rpc.height_offset, x.height_offset)
     assert_almost_equal(rpc.height_scale, x.height_scale)
@@ -100,16 +106,16 @@ def test_quaternion_camera_pickle():
         raise SkipTest
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
-                           1.0 / 2500000,
-                           1.0 / 2500000,
+                           old_div(1.0, 2500000),
+                           old_div(1.0, 2500000),
                            1.0,
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
-    t = cPickle.dumps(cam, cPickle.HIGHEST_PROTOCOL)
-    cam2 = cPickle.loads(t)
+    t = pickle.dumps(cam, pickle.HIGHEST_PROTOCOL)
+    cam2 = pickle.loads(t)
     assert_almost_equal(cam.focal_length, 1.0, 4)
-    assert_almost_equal(cam.line_pitch,   1.0 / 2500000, 4)
-    assert_almost_equal(cam.sample_pitch,   1.0 / 2500000, 4)
+    assert_almost_equal(cam.line_pitch,   old_div(1.0, 2500000), 4)
+    assert_almost_equal(cam.sample_pitch,   old_div(1.0, 2500000), 4)
     assert_almost_equal(cam.principal_point(0).line, 1688, 4)
     assert_almost_equal(cam.principal_point(0).sample, 1824.5, 4)
     assert cam.number_line(0) == 3375
@@ -120,8 +126,8 @@ def test_quaternion_pickle():
     '''Make sure we can pickle quaternions'''
     if(not have_serialize_supported()):
         raise SkipTest
-    t = cPickle.dumps(Quaternion_double(1, 2, 3, 4), cPickle.HIGHEST_PROTOCOL)
-    q = cPickle.loads(t)
+    t = pickle.dumps(Quaternion_double(1, 2, 3, 4), pickle.HIGHEST_PROTOCOL)
+    q = pickle.loads(t)
     assert_almost_equal(q.R_component_1, 1, 4)
     assert_almost_equal(q.R_component_2, 2, 4)
     assert_almost_equal(q.R_component_3, 3, 4)
@@ -168,7 +174,7 @@ def create_rpc_sample():
      1.1059e-07, 4.10217e-08, -1.69482e-07, 1.08104e-06,
       1e-9, -2.33038e-07, 1.86413e-08, -1.35637e-08]
     out = open(test_data + "rpc_example.pkl", "wb")
-    t = cPickle.dump(rpc, out, cPickle.HIGHEST_PROTOCOL)
+    t = pickle.dump(rpc, out, pickle.HIGHEST_PROTOCOL)
 
 #create_rpc_sample()
 
@@ -177,12 +183,12 @@ def test_mapinfo_pickle():
         raise SkipTest
     r = GdalRasterImage(test_data + "dem_foot.tif")
     m = r.map_info
-    cPickle.dumps(m.transform)
-    cPickle.dumps(m.number_x_pixel)
-    cPickle.dumps(m.number_y_pixel)
-    cPickle.dumps(m.coordinate_converter)
-    t = cPickle.dumps(m, cPickle.HIGHEST_PROTOCOL)
-    m2 = cPickle.loads(t)
+    pickle.dumps(m.transform)
+    pickle.dumps(m.number_x_pixel)
+    pickle.dumps(m.number_y_pixel)
+    pickle.dumps(m.coordinate_converter)
+    t = pickle.dumps(m, pickle.HIGHEST_PROTOCOL)
+    m2 = pickle.loads(t)
     assert m2.number_x_pixel == m.number_x_pixel
     assert m2.number_y_pixel == m.number_y_pixel
     assert distance(m2.ground_coordinate(0, 0), 
@@ -195,8 +201,8 @@ def test_vicar_lite_file():
     if(not have_serialize_supported()):
         raise SkipTest
     f = VicarLiteFile(test_data + "vicar.img")
-    t = cPickle.dumps(f)
-    x = cPickle.loads(t)
+    t = pickle.dumps(f)
+    x = pickle.loads(t)
     assert f.file_name == x.file_name
 
 # Test pickle of VicarLiteRasterImage
@@ -204,8 +210,8 @@ def test_vicar_lite_raster_image():
     if(not have_serialize_supported()):
         raise SkipTest
     f = VicarLiteRasterImage(test_data + "vicar.img")
-    t = cPickle.dumps(f)
-    x = cPickle.loads(t)
+    t = pickle.dumps(f)
+    x = pickle.loads(t)
     assert f.file.file_name == x.file.file_name
 
 # Test pickle of VicarLiteDem
@@ -213,8 +219,8 @@ def test_vicar_lite_dem():
     if(not have_serialize_supported()):
         raise SkipTest
     f = VicarLiteDem(test_data + "vicar.img")
-    t = cPickle.dumps(f)
-    x = cPickle.loads(t)
+    t = pickle.dumps(f)
+    x = pickle.loads(t)
     assert f.file.file_name == x.file.file_name
 
 # Test pickle of VicarRasterImage
@@ -228,8 +234,8 @@ def test_vicar_raster_image():
     except NameError:
         raise SkipTest
     f = VicarRasterImage(test_data + "vicar.img")
-    t = cPickle.dumps(f)
-    x = cPickle.loads(t)
+    t = pickle.dumps(f)
+    x = pickle.loads(t)
     assert f.vicar_file.file_name == x.vicar_file.file_name
 
 def test_srtm():
@@ -242,16 +248,16 @@ def test_srtm():
     except NameError:
         raise SkipTest
     dem = SrtmDem()
-    t = cPickle.dumps(dem)
-    dem2 = cPickle.loads(t)
+    t = pickle.dumps(dem)
+    dem2 = pickle.loads(t)
     assert dem.directory_base == dem2.directory_base
 
 def test_gdal_raster_image():
     if(not have_serialize_supported()):
         raise SkipTest
     r = GdalRasterImage(test_data + "rpc.ntf")
-    t = cPickle.dumps(r)
-    r2 = cPickle.loads(t)
+    t = pickle.dumps(r)
+    r2 = pickle.loads(t)
     assert r.number_line == r2.number_line
     assert r.number_sample == r2.number_sample
     assert r.number_tile_line == r2.number_tile_line
@@ -261,16 +267,16 @@ def test_simple_dem():
     if(not have_serialize_supported()):
         raise SkipTest
     d = SimpleDem(10.0)
-    t = cPickle.dumps(d)
-    d2 = cPickle.loads(t)
+    t = pickle.dumps(d)
+    d2 = pickle.loads(t)
     assert_almost_equal(d.h, d2.h)
 
 def test_forstner_feature_detector():
     if(not have_serialize_supported()):
         raise SkipTest
     f = ForstnerFeatureDetector()
-    t = cPickle.dumps(f)
-    f2 = cPickle.loads(t)
+    t = pickle.dumps(f)
+    f2 = pickle.loads(t)
     assert f.basic_ip_large_number == f2.basic_ip_large_number
     assert f.maximum_weight_threshold == f2.maximum_weight_threshold
     assert f.forstner_max_window_large_size == f2.forstner_max_window_large_size
@@ -285,8 +291,8 @@ def test_gdal_dem():
         raise SkipTest
     # Datum is nonsense, but we want to make sure it gets restored correctly
     d = GdalDem(test_data + "dem_foot.tif", SimpleDatum(10.0))
-    t = cPickle.dumps(d)
-    d2 = cPickle.loads(t)
+    t = pickle.dumps(d)
+    d2 = pickle.loads(t)
     assert d.file_name == d2.file_name
     assert d.band_id == d2.band_id
     assert_almost_equal(d.datum.u, d2.datum.u)
@@ -302,24 +308,24 @@ def test_ipi():
     cam = SimpleCamera()
     tt = ConstantSpacingTimeTable(tmin, tmax)
     ipi = Ipi(orb, cam, 0, tmin, tmax, tt)
-    t = cPickle.dumps(ipi.orbit)
+    t = pickle.dumps(ipi.orbit)
     # t = cPickle.dumps(ipi.camera)
-    t = cPickle.dumps(ipi.band)
-    t = cPickle.dumps(ipi.min_time)
-    t = cPickle.dumps(ipi.max_time)
+    t = pickle.dumps(ipi.band)
+    t = pickle.dumps(ipi.min_time)
+    t = pickle.dumps(ipi.max_time)
     # t = cPickle.dumps(ipi.time_table)
-    t = cPickle.dumps(ipi.local_time_window_size)
-    t = cPickle.dumps(ipi.root_min_separation)
-    t = cPickle.dumps(ipi.time_tolerance)
-    t = cPickle.dumps(ipi)
-    ipi2 = cPickle.loads(t)
+    t = pickle.dumps(ipi.local_time_window_size)
+    t = pickle.dumps(ipi.root_min_separation)
+    t = pickle.dumps(ipi.time_tolerance)
+    t = pickle.dumps(ipi)
+    ipi2 = pickle.loads(t)
 
 def test_simple_camera():
     if(not have_serialize_supported()):
         raise SkipTest
     c = SimpleCamera()
-    t = cPickle.dumps(c)
-    c2 = cPickle.loads(t)
+    t = pickle.dumps(c)
+    c2 = pickle.loads(t)
     assert_almost_equal(c.beta, c2.beta)
     assert_almost_equal(c.delta, c2.delta)
     assert_almost_equal(c.epsilon, c2.epsilon)
@@ -332,8 +338,8 @@ def test_kepler_orbit():
     if(not have_serialize_supported()):
         raise SkipTest
     orb = KeplerOrbit()
-    t = cPickle.dumps(orb)
-    orb2 = cPickle.loads(t)
+    t = pickle.dumps(orb)
+    orb2 = pickle.loads(t)
     assert orb.min_time == orb2.min_time
     assert orb.max_time == orb2.max_time
     assert orb.epoch == orb2.epoch

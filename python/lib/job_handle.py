@@ -48,7 +48,7 @@ class JobHandle(mp.Process):
     def wait():
         '''Wait until the next job finishes.'''
         while(True):
-            for id, obj in JobHandle.pool.iteritems():
+            for id, obj in JobHandle.pool.items():
                 if(not obj.is_alive()):
                     del JobHandle.pool[id]
                     if(obj.exitcode != 0):

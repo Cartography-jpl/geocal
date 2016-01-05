@@ -1,3 +1,8 @@
+from __future__ import division
+from builtins import str
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import math
 import raster_image_extension
 import safe_matplotlib_import
@@ -174,7 +179,7 @@ class TiePoint(object):
             nimg = nimg + 1
         if(not number_row):
             number_row = int(math.ceil(math.sqrt(nimg)))
-        number_col = int(math.ceil(nimg / float(number_row)))
+        number_col = int(math.ceil(old_div(nimg, float(number_row))))
         plt.clf()
         for i in range(self.number_image):
             if(self.image_location[i] is None):

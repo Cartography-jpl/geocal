@@ -1,8 +1,10 @@
+from future import standard_library
+standard_library.install_aliases()
 from nose.tools import *
 from image_to_image_connection import *
 from geocal_swig import *
 import os
-import cPickle
+import pickle
 from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
@@ -15,9 +17,9 @@ def test_rpc_image_ground_connection():
     # values. Note that this gets created in pickle_test.py if you need to
     # regenerate this for some reason
     with open(test_data + "rpc_example.pkl") as f:
-        rpc1 = cPickle.load(f)
+        rpc1 = pickle.load(f)
     with open(test_data + "rpc_example.pkl") as f:
-        rpc2 = cPickle.load(f)
+        rpc2 = pickle.load(f)
     rpc2.line_offset += 2
     rpc2.sample_offset += 3
     dem = SimpleDem()

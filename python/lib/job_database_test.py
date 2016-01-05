@@ -6,7 +6,7 @@ from nose.plugins.skip import Skip, SkipTest
 
 def test_job_database():
     jdb = JobDatabase("test.db")
-    for jid in jdb.keys():
+    for jid in list(jdb.keys()):
         del jdb[jid]
     jid = jdb.add_job("job_database_dir", "user", "key", "job_database.log",
                       ["ls"], start_if_available = False)
@@ -16,7 +16,7 @@ def test_job_database():
 
 def test_handle_running_job():
     jdb = JobDatabase("test.db")
-    for jid in jdb.keys():
+    for jid in list(jdb.keys()):
         del jdb[jid]
     jid_running = jdb.add_job("job_database_dir", "user", "key", 
                               "job_database.log",
@@ -31,7 +31,7 @@ def test_handle_running_job():
 
 def test_handle_interrupted_job():
     jdb = JobDatabase("test.db")
-    for jid in jdb.keys():
+    for jid in list(jdb.keys()):
         del jdb[jid]
     jid_running = jdb.add_job("job_database_dir", "user", "key",
                               "job_database.log",
@@ -51,7 +51,7 @@ def test_handle_interrupted_job():
 
 def test_handle_failed_job():
     jdb = JobDatabase("test.db")
-    for jid in jdb.keys():
+    for jid in list(jdb.keys()):
         del jdb[jid]
     jid = jdb.add_job("job_database_dir", "user", "key", "job_database.log",
                       ["ls", "--bad-argument"],

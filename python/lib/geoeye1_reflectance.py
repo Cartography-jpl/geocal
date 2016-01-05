@@ -1,4 +1,7 @@
 from __future__ import print_function
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 from instrument_reflectance import *
 import math
 
@@ -80,7 +83,7 @@ class Geoeye1Reflectance(InstrumentReflectance):
          if line.find("firstLineElevationAngle = ") != -1:
             self.solarElevation = float(line.split()[2].split(";")[0])
             self.solarZenithAngle = 90. - self.solarElevation
-            self.solarZenithAngleInRadians = self.solarZenithAngle*(math.pi/180.)
+            self.solarZenithAngleInRadians = self.solarZenithAngle*(old_div(math.pi,180.))
             continue         
 
 

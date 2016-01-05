@@ -1,3 +1,4 @@
+from builtins import object
 from docopt import docopt
 import re
 

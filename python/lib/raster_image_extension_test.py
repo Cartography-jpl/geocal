@@ -1,3 +1,4 @@
+from builtins import range
 from geocal_swig import *
 from raster_image_extension import *
 import numpy as np

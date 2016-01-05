@@ -1,3 +1,4 @@
+from builtins import object
 # This is tempdir from https://pypi.python.org/pypi/tempdir. Just include
 # source because it is small, and not worth adding as a requirement.
 #

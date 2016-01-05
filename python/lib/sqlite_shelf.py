@@ -1,3 +1,4 @@
+from past.builtins import basestring
 # The Shelve package is a very useful way to easily implement persistence.
 # But it has the disadvantage that depending on the system we are on different
 # databases will be available (e.g., not every system has berkely db).
@@ -17,7 +18,7 @@ import geocal_swig
 def to_db_type(value):
     """If value's type is supported natively in SQLite, return value.
     Otherwise, return a pickled representation. """
-    if value is None or isinstance(value, (int, long, float,
+    if value is None or isinstance(value, (int, int, float,
                                            basestring)):
         return value
     else:
@@ -59,7 +60,7 @@ def read_shelve(f):
         if(dirn):
             os.chdir(dirn)
         t = SQLiteShelf(f, "r")
-        if("_extra_python_init" in t.keys()):
+        if("_extra_python_init" in list(t.keys())):
             exec(t["_extra_python_init"])
         return t[key]
     finally:

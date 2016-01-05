@@ -1,4 +1,6 @@
 from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 from geocal_swig import *
@@ -6,7 +8,7 @@ from dem_generate import *
 from image_ground_connection import *
 import multiprocessing
 from multiprocessing import Pool
-import cPickle
+import pickle
 from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
@@ -53,8 +55,8 @@ def test_height_grid_surf():
 def test_pickle():
     if(not have_serialize_supported()):
         raise SkipTest
-    t = cPickle.dumps(dgen)
-    dgen2 = cPickle.loads(t)
+    t = pickle.dumps(dgen)
+    dgen2 = pickle.loads(t)
     r = dgen2.surface_point(550, 550, 551, 551, False)
     assert_almost_equal(r[0][0], 36.77545375201947, 3)
     assert_almost_equal(r[0][1], -116.11898159763552, 3)

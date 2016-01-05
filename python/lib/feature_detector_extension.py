@@ -1,3 +1,6 @@
+from builtins import map
+from builtins import range
+from builtins import object
 from geocal_swig import *
 from itertools import chain
 import multiprocessing
@@ -49,7 +52,7 @@ def interest_point_grid(self, img, number_grid_line, number_grid_sample,
     collect these points in parallel.
     '''
     res = []
-    index_list = range(number_grid_line)
+    index_list = list(range(number_grid_line))
     tstart = time.time()
     func = InterestPointGridRawWrap(self, img, mask,
                                     number_grid_line, number_grid_sample, 
@@ -57,7 +60,7 @@ def interest_point_grid(self, img, number_grid_line, number_grid_sample,
     if(pool):
         res = pool.map(func, index_list)
     else:
-        res = map(func, index_list)
+        res = list(map(func, index_list))
     # This next command flattens the list
     return list(chain.from_iterable(res))
 

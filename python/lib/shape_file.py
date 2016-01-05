@@ -1,3 +1,4 @@
+from builtins import range
 try:
     # Depending of the build options, this might be missing. Just skip 
     # ShapeFile if we don't have this.
@@ -146,7 +147,7 @@ if(have_shape_file):
         As a convenience, this returns this object, so you can add multiple 
         features in a row'''
         f = ogr.Feature(self.layer.GetLayerDefn())
-        for name, value in d.items():
+        for name, value in list(d.items()):
             if(name =="Geometry"):
                 f.SetGeometry(value)
             elif(name =="Style"):
@@ -218,7 +219,7 @@ class ShapeFeature(collections.Mapping):
         return res
 
     def __iter__(self):
-        for k in self.keys():
+        for k in list(self.keys()):
             yield k
         return
 

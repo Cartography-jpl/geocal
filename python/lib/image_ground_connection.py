@@ -1,3 +1,6 @@
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 from geocal_swig import *
 from math import *
 import numpy as np
@@ -127,8 +130,8 @@ def _view_angle(self, image_coordinate = None, delta_h = 100):
     The zenith and azimuth angles are return in that order, in degrees.
     '''
     if(image_coordinate is None):
-        image_coordinate = ImageCoordinate(self.number_line / 2.0,
-                                           self.number_sample / 2.0)
+        image_coordinate = ImageCoordinate(old_div(self.number_line, 2.0),
+                                           old_div(self.number_sample, 2.0))
     gc1 = self.ground_coordinate(image_coordinate)
     h = gc1.height_reference_surface
     d = SimpleDem(h + delta_h)
@@ -147,11 +150,11 @@ def _view_angle(self, image_coordinate = None, delta_h = 100):
     lv = np.array([e2.position[0] - e1.position[0],
                    e2.position[1] - e1.position[1],
                    e2.position[2] - e1.position[2]])
-    lv = lv / sqrt(np.dot(lv, lv))
+    lv = old_div(lv, sqrt(np.dot(lv, lv)))
     lc_dir = to_lc.dot(lv)
     az = degrees(atan2(lc_dir[1], lc_dir[0]))
     if(az < 0) : az += 360
-    zen = 180 - degrees(acos(lc_dir[2] / sqrt(np.dot(lc_dir, lc_dir))))
+    zen = 180 - degrees(acos(old_div(lc_dir[2], sqrt(np.dot(lc_dir, lc_dir)))))
     return zen, az
 
 geocal_swig.ImageGroundConnection.view_angle = _view_angle

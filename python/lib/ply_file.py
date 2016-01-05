@@ -1,4 +1,8 @@
 from __future__ import print_function
+from __future__ import division
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import numpy as np
 import safe_matplotlib_import
 import matplotlib.pyplot as plt
@@ -40,8 +44,8 @@ class PlyFile(object):
         if(self.vertex.shape[1] == 4):
             # Need to apply color map
             have_color = True
-            cdata = self.color_map((self.vertex[:,3] - self.vmin) / 
-                                   (self.vmax - self.vmin))
+            cdata = self.color_map(old_div((self.vertex[:,3] - self.vmin), 
+                                   (self.vmax - self.vmin)))
             cdata = (np.round(cdata * 255)).astype(np.uint8)
         else:
             have_color = False

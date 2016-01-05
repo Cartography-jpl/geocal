@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import range
 # This contains ipython magic extensions. To load you can execute
 # %load_ext geocal.ipython. 
 # You may well want
@@ -30,7 +32,7 @@ def tie_point_display(tpcol, igccol, surface_image=None, ref_image=None,
         tp.display(igccol, int(size), surface_image = surface_image,
                    ref_image = ref_image)
         plt.show()
-        ind = range(tp.number_image)
+        ind = list(range(tp.number_image))
         residual = tp.ic_diff(igccol)
         sigma = tp.ic_sigma
         plt.rcParams["figure.figsize"] = (6, 4)

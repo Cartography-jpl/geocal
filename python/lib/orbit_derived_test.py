@@ -1,8 +1,10 @@
 from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 from geocal_swig import *
-import cPickle
+import pickle
 
 def _new_from_serialization(data):
     return geocal_swig.serialize_read_binary(data)
@@ -38,7 +40,7 @@ class PythonOrbit(Orbit):
     def __boost_serialize_save__(self):
         d = self.__dict__.copy()
         del d['this']
-        return cPickle.dumps((_boost_serialize_load, (self.__class__, self.__serialize_format_version__(), d)))
+        return pickle.dumps((_boost_serialize_load, (self.__class__, self.__serialize_format_version__(), d)))
 
     def __reduce__(self):
         return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
@@ -56,9 +58,9 @@ def test_director_pickle():
     if(not have_serialize_supported()):
         raise SkipTest
     orb = PythonOrbit()
-    t = cPickle.dumps(orb)
+    t = pickle.dumps(orb)
     print(t)
-    orb2 = cPickle.loads(t)
+    orb2 = pickle.loads(t)
     print(orb2.min_time)
 
 

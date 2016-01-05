@@ -1,3 +1,6 @@
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 from geocal_swig import *
 import bisect
 
@@ -72,5 +75,5 @@ class CubicSpline(WithParameter):
             (self.dy[i] + 2 * self.dy[i-1]) * (self.knot[i] - self.knot[i - 1])
         c3 = -2 * (self.y[i] - self.y[i - 1]) + \
             (self.dy[i] + self.dy[i-1]) * (self.knot[i] - self.knot[i - 1])
-        t = (x - self.knot[i - 1]) / ((self.knot[i] - self.knot[i - 1]))
+        t = old_div((x - self.knot[i - 1]), ((self.knot[i] - self.knot[i - 1])))
         return c0 + (c1 + (c2 + c3 * t) * t) * t

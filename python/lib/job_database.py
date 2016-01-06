@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from builtins import str
 from builtins import object
 import os
@@ -7,7 +8,7 @@ import sqlite3
 import time 
 import signal
 import subprocess
-from misc import pid_exists, makedirs_p
+from .misc import pid_exists, makedirs_p
 import logging
 import datetime
 

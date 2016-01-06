@@ -1,5 +1,6 @@
 from __future__ import print_function
 from __future__ import division
+from __future__ import absolute_import
 from builtins import str
 from builtins import range
 from past.utils import old_div
@@ -7,16 +8,16 @@ from builtins import object
 from geocal_swig import *
 import math
 import scipy.interpolate
-from image_to_image_connection import *
-from ray_intersect import *
+from .image_to_image_connection import *
+from .ray_intersect import *
 import itertools
 import multiprocessing
 from multiprocessing import Pool
 import numpy as np
 import numpy.linalg as la
-from igc_collection_extension import *
-from ply_file import *
-import safe_matplotlib_import
+from .igc_collection_extension import *
+from .ply_file import *
+from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 import logging
 import re

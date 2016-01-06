@@ -1,4 +1,5 @@
 from __future__ import division
+from __future__ import absolute_import
 from builtins import str
 from builtins import range
 from builtins import object
@@ -7,7 +8,7 @@ from geocal_swig import *
 import numpy as np
 import numpy.linalg as la
 import math
-from lm_optimize import *
+from .lm_optimize import *
 from scipy.sparse import block_diag
 
 class RayIntersect2(object):

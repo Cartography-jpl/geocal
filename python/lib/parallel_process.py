@@ -1,8 +1,9 @@
+from __future__ import absolute_import
 from builtins import map
 from builtins import range
 # This contains support for doing parallel processing.
 
-from sqlite_shelf import write_shelve
+from .sqlite_shelf import write_shelve
 from functools import partial
 import numpy as np
 import geocal_swig

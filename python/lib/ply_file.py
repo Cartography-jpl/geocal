@@ -1,10 +1,11 @@
 from __future__ import print_function
 from __future__ import division
+from __future__ import absolute_import
 from builtins import range
 from builtins import object
 from past.utils import old_div
 import numpy as np
-import safe_matplotlib_import
+from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 import struct
 

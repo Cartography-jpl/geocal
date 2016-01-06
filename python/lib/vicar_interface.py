@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from builtins import str
 from builtins import object
 import os
@@ -7,7 +8,7 @@ import tempfile
 import subprocess
 import time
 import geocal_swig
-from misc import makedirs_p
+from .misc import makedirs_p
 
 class VicarInterface(object):
     '''This provides a basic interface for calling a vicar routine 

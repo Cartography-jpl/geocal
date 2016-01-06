@@ -1,4 +1,5 @@
 from __future__ import division
+from __future__ import absolute_import
 from builtins import range
 from past.utils import old_div
 from geocal_swig import *
@@ -6,7 +7,7 @@ from math import *
 import numpy as np
 import os.path
 import re
-from shape_file import *
+from .shape_file import *
 
 def _new_from_init(cls, version, *args):
     '''Handle older versions'''

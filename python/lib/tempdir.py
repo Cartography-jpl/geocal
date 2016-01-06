@@ -1,3 +1,4 @@
+from __future__ import with_statement
 from builtins import object
 # This is tempdir from https://pypi.python.org/pypi/tempdir. Just include
 # source because it is small, and not worth adding as a requirement.
@@ -13,7 +14,6 @@ from builtins import object
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
-from __future__ import with_statement
 import os
 import tempfile
 import shutil

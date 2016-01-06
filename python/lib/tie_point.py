@@ -1,13 +1,14 @@
 from __future__ import division
+from __future__ import absolute_import
 from builtins import str
 from builtins import range
 from builtins import object
 from past.utils import old_div
 import math
-import raster_image_extension
-import safe_matplotlib_import
+from .raster_image_extension import *
+from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
-from misc import makedirs_p
+from .misc import makedirs_p
 from geocal_swig import IgcMapProjected, CartesianFixedLookVector, \
     LnLookVector, Ecr, ImageCoordinate, distance
 import copy

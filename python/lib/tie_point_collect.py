@@ -1,14 +1,15 @@
 from __future__ import division
+from __future__ import absolute_import
 from builtins import map
 from builtins import range
 from past.utils import old_div
 from builtins import object
 from geocal_swig import *
-from igc_collection_extension import *
-from tie_point import *
-from ray_intersect import *
-from feature_detector_extension import *
-from misc import *
+from .igc_collection_extension import *
+from .tie_point import *
+from .ray_intersect import *
+from .feature_detector_extension import *
+from .misc import *
 import math
 import itertools
 import multiprocessing

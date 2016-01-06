@@ -1,9 +1,10 @@
 from __future__ import print_function
+from __future__ import absolute_import
 from __future__ import division
 from builtins import range
 from past.utils import old_div
 from geocal_swig import *
-from instrument_reflectance import *
+from .instrument_reflectance import *
 import math
 import re
 

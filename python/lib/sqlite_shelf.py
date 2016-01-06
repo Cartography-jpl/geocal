@@ -9,7 +9,13 @@ from past.builtins import basestring
 #
 # This class gives a Shelve like interface to sqlite.
 
-import UserDict
+# UserDict goes away in python 3 (but is largely the same as collections). Try
+# the python 2 import first, then fall back to python 3
+try:
+    from UserDict import DictMixin
+except ImportError:
+    from collections import MutableMapping as DictMixin
+
 import pickle
 import sqlite3
 import os.path
@@ -111,7 +117,7 @@ def write_shelve(f, val):
     d[key] = val
     d.close()
 
-class SQLiteShelf(UserDict.DictMixin):
+class SQLiteShelf(DictMixin):
     """Shelf implementation using an SQLite3 database. """
     def __init__(self, filename, mode = "r+"):
         '''Open an existing file, or create a new one if it doesn't exist.
@@ -185,4 +191,11 @@ class SQLiteShelf(UserDict.DictMixin):
             self._database.commit()
             self._database.close()
             self._database = None 
+
+    # These are needed by python 3, but not python 2
+    def __len__(self):
+        raise RuntimeError("Not implemented yet")
+
+    def __iter__(self):
+        raise RuntimeError("Not implemented yet")
 

@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 from builtins import object
-from . import docopt
+from .docopt import *
 import re
 
 class DocOptSimple(object):

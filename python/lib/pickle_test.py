@@ -20,7 +20,7 @@ have_afid_data = "AFIDS_VDEV_DATA" in os.environ
 
 # Test picking of Time
 def test_time_pickle():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -31,7 +31,7 @@ def test_time_pickle():
 
 # Test pickling of ImageCoordinate
 def test_image_coordinate_pickle():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -43,7 +43,7 @@ def test_image_coordinate_pickle():
 
 # Test pickling of RPC
 def test_rpc_pickle():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     # A sample RPC. Nothing special about this, these are just reasonable
     # values
@@ -108,7 +108,7 @@ def test_rpc_pickle():
 
 def test_quaternion_camera_pickle():
     '''Test pickling of QuaternionCamera'''
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -132,7 +132,7 @@ def test_quaternion_camera_pickle():
 
 def test_quaternion_pickle():
     '''Make sure we can pickle quaternions'''
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -189,7 +189,7 @@ def create_rpc_sample():
 #create_rpc_sample()
 
 def test_mapinfo_pickle():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -210,7 +210,7 @@ def test_mapinfo_pickle():
 
 # Test pickle of VicarLiteFile
 def test_vicar_lite_file():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -221,7 +221,7 @@ def test_vicar_lite_file():
 
 # Test pickle of VicarLiteRasterImage
 def test_vicar_lite_raster_image():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -232,7 +232,7 @@ def test_vicar_lite_raster_image():
 
 # Test pickle of VicarLiteDem
 def test_vicar_lite_dem():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -243,7 +243,7 @@ def test_vicar_lite_dem():
 
 # Test pickle of VicarRasterImage
 def test_vicar_raster_image():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -259,7 +259,7 @@ def test_vicar_raster_image():
     assert f.vicar_file.file_name == x.vicar_file.file_name
 
 def test_srtm():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -275,7 +275,7 @@ def test_srtm():
     assert dem.directory_base == dem2.directory_base
 
 def test_gdal_raster_image():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -288,7 +288,7 @@ def test_gdal_raster_image():
     assert r.number_tile_sample == r2.number_tile_sample
 
 def test_simple_dem():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -298,7 +298,7 @@ def test_simple_dem():
     assert_almost_equal(d.h, d2.h)
 
 def test_forstner_feature_detector():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -315,7 +315,7 @@ def test_forstner_feature_detector():
     assert_almost_equal(f.basic_robert_threshold, f2.basic_robert_threshold)
     
 def test_gdal_dem():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -330,7 +330,7 @@ def test_gdal_dem():
     assert d.number_tile == d2.number_tile
     
 def test_ipi():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -353,7 +353,7 @@ def test_ipi():
     ipi2 = pickle.loads(t)
 
 def test_simple_camera():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
@@ -369,7 +369,7 @@ def test_simple_camera():
     assert_almost_equal(c.number_sample(0), c2.number_sample(0))
 
 def test_kepler_orbit():
-    # Temporary, parallel stuff doesn't seem to work yet
+    # Temporary, parallel and pickle stuff doesn't seem to work yet
     raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest

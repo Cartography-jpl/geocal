@@ -1835,7 +1835,7 @@ Some influential environment variables:
   SPHINXBUILD Override the Sphinx build executable to use, the default is just
               'sphinx-build'
   NOSETESTS   Override the nosetests executable to use, the default is just
-              'nosetests'
+              'nosetests-${PYTHON_VERSION}'
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -22001,7 +22001,7 @@ fi
         have_nosetests=no
 
         if test "$NOSETESTS" == ""; then
-           NOSETESTS=nosetests
+           NOSETESTS="nosetests-${PYTHON_VERSION}"
         fi
         # Extract the first word of "$NOSETESTS", so it can be a program name with args.
 set dummy $NOSETESTS; ac_word=$2

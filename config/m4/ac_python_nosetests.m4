@@ -17,9 +17,9 @@
 AC_DEFUN([AC_PROG_NOSETESTS],[
         have_nosetests=no
         AC_ARG_VAR([NOSETESTS], [Override the nosetests executable to use,
-           the default is just 'nosetests'])
+           the default is just 'nosetests-${PYTHON_VERSION}'])
         if test "$NOSETESTS" == ""; then
-           NOSETESTS=nosetests
+           NOSETESTS="nosetests-${PYTHON_VERSION}"
         fi
         AC_PATH_PROG([NOSETESTS],[$NOSETESTS])
         if test -z "$NOSETESTS" ; then

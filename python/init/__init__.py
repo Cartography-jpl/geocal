@@ -8,7 +8,6 @@ from geocal_swig import *
 
 from .safe_matplotlib_import import *
 
-
 for i in glob.glob(os.path.dirname(__file__) + "/*.py"):
     mname = os.path.basename(i).split('.')[0]
     # Don't load ipython, which is ipython magic extensions

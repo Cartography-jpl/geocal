@@ -184,8 +184,8 @@ class TleOrbit(geocal_swig.orbit.Orbit):
     This is an orbit that does the calculation based on a two-line element
     set (TLE, seehttps://en.wikipedia.org/wiki/Two-line_element_set).
 
-    You can get TLE for a particular satellite and time fromhttps://www
-    .space-track.org.
+    You can get TLE for a particular satellite and time
+    fromhttps://www.space-track.org.
 
     C++ includes: tle_orbit.h 
     """

@@ -24,8 +24,8 @@ for i in sys.argv[2:]:
             end_count += 1
     # Handle everything else
     else:
-        prototypes.append("  void init_%s(void);" % i)
-        initcmd .append("  init_extension_module(package, \"_%s\", init_%s);" % (i, i))
+        prototypes.append("  SWIG_INIT_TYPE SWIG_INIT_FUNC(%s)(void);" % i)
+        initcmd .append("  SWIG_INIT_MODULE(package, \"_%s\", SWIG_INIT_FUNC(%s));" % (i, i))
 # Make sure we close all the conditions
 for c in range(end_count):
     prototypes.append("#endif")

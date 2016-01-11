@@ -1,0 +1,8 @@
+This just shuffles things around so we have direct access to the python library
+w/o doing an install. Just a convenience when debugging/testing, this isn't
+actually used in the delivered version.
+
+To use this in testing, should add python to PYTHON search path, e.g.:
+
+pistol% source setup_env_with_afids.sh
+pistol% export PYTHONPATH=/home/smyth/Local/geocal-repo/python:${PYTHONPATH}

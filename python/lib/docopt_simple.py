@@ -16,12 +16,9 @@ class DocOptSimple(object):
     a float. If we don't otherwise recognize it, we return this as a string.'''
     def __init__(self, doc, argv=None, help=True, version=None, 
                  options_first=False):
-        print argv
-        print doc
         self.args = docopt(doc, argv=argv, help=help, version=version, 
                            options_first=options_first)
     def __getattr__(self, name):
-        print self.args
         for key in (name, 
                     "<" + name + ">", 
                     "--" + name,

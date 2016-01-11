@@ -3,14 +3,14 @@ from future import standard_library
 standard_library.install_aliases()
 from nose.tools import *
 from geocal_swig import *
-from tie_point_collect import *
-from image_ground_connection import *
-from sqlite_shelf import *
+from geocal.tie_point_collect import *
+from geocal.image_ground_connection import *
+from geocal.sqlite_shelf import *
 import multiprocessing
 from multiprocessing import Pool
 from nose.plugins.skip import Skip, SkipTest
 import pickle
-import safe_matplotlib_import
+import geocal.safe_matplotlib_import
 import matplotlib.pyplot as plt
 from nose.plugins.skip import Skip, SkipTest
 

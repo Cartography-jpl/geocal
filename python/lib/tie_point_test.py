@@ -2,11 +2,11 @@ from __future__ import print_function
 from builtins import range
 from nose.tools import *
 from geocal_swig import *
-from tie_point import *
-from image_ground_connection import *
-from ray_intersect import *
-from feature_detector_extension import *
-from sqlite_shelf import *
+from geocal.tie_point import *
+from geocal.image_ground_connection import *
+from geocal.ray_intersect import *
+from geocal.feature_detector_extension import *
+from geocal.sqlite_shelf import *
 from nose.plugins.skip import Skip, SkipTest
 import shutil
 

@@ -249,8 +249,9 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(INCLUDE_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@HAVE_VICAR_RTL_TRUE@am__append_44 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@HAVE_HDF5_TRUE@am__append_45 = @srcpythonlib@/air_mspi_igc.py
+@WITH_PYTHON3_TRUE@am__append_44 = replace_python_shebang
+@HAVE_VICAR_RTL_TRUE@am__append_45 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@HAVE_HDF5_TRUE@am__append_46 = @srcpythonlib@/air_mspi_igc.py
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -2114,6 +2115,7 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
+INSTALL_EXEC_HOOK = $(am__append_44)
 INSTALL_DATA_HOOK = $(am__append_10)
 UNINSTALL_HOOK = $(am__append_11) clean_install_python_doc
 CLEAN_HOOK = clean_unit_test $(am__append_12)
@@ -2737,7 +2739,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
-	$(am__append_45)
+	$(am__append_46)
 @HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}
 @HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
@@ -2745,7 +2747,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
 dist_afidspythonvdev_SCRIPTS =  \
-	$(srcdir)/$(srcpythonbin)/sample_vicar_python $(am__append_44)
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python $(am__append_45)
 dist_afidspythonvdev_DATA =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
@@ -9770,7 +9772,8 @@ install-dvi-am:
 
 install-exec-am: install-binPROGRAMS install-dist_binSCRIPTS \
 	install-libLTLIBRARIES
-
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) install-exec-hook
 install-html: install-html-am
 
 install-html-am:
@@ -9825,7 +9828,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-dist_afidspythonvdevDATA \
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
 .MAKE: all check check-am install install-am install-data-am \
-	install-strip uninstall-am
+	install-exec-am install-strip uninstall-am
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--refresh check check-TESTS \
 	check-am clean clean-binPROGRAMS clean-checkPROGRAMS \
@@ -9843,20 +9846,21 @@ uninstall-am: uninstall-binPROGRAMS uninstall-dist_afidspythonvdevDATA \
 	install-dist_afidspythonvdevSCRIPTS install-dist_binSCRIPTS \
 	install-dist_geocalpkgpythonDATA install-dist_sdbxdocDATA \
 	install-dvi install-dvi-am install-etcafidspythonDATA \
-	install-exec install-exec-am install-geocalincHEADERS \
-	install-geocalpkgpythonPYTHON install-html install-html-am \
-	install-includeHEADERS install-info install-info-am \
-	install-installafidspythonDATA install-libLTLIBRARIES \
-	install-librawHEADERS install-man install-pdf install-pdf-am \
-	install-pkgconfigDATA install-pkgpythonswigLTLIBRARIES \
-	install-pkgpythonswigPYTHON install-ps install-ps-am \
-	install-sdbxHEADERS install-sdbxbtreeHEADERS \
-	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS \
-	install-strip installcheck installcheck-am installcheck-local \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am recheck tags tags-am \
-	uninstall uninstall-am uninstall-binPROGRAMS \
+	install-exec install-exec-am install-exec-hook \
+	install-geocalincHEADERS install-geocalpkgpythonPYTHON \
+	install-html install-html-am install-includeHEADERS \
+	install-info install-info-am install-installafidspythonDATA \
+	install-libLTLIBRARIES install-librawHEADERS install-man \
+	install-pdf install-pdf-am install-pkgconfigDATA \
+	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
+	install-ps install-ps-am install-sdbxHEADERS \
+	install-sdbxbtreeHEADERS install-sdbxrtreeHEADERS \
+	install-sdbxsupportHEADERS install-strip installcheck \
+	installcheck-am installcheck-local installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am recheck tags tags-am uninstall \
+	uninstall-am uninstall-binPROGRAMS \
 	uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
 	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
@@ -9870,6 +9874,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-dist_afidspythonvdevDATA \
 	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
 	uninstall-sdbxsupportHEADERS
 
+install-exec-hook: $(INSTALL_EXEC_HOOK)
 install-data-hook: $(INSTALL_DATA_HOOK)
 uninstall-hook: $(UNINSTALL_HOOK)
 clean-local: $(CLEAN_HOOK)
@@ -10047,6 +10052,17 @@ python_check:
         $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \
         $(NOSETESTS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ 
+
+# This should be temporary
+@WITH_PYTHON3_TRUE@replace_python_shebang: install-dist_binSCRIPTS
+@WITH_PYTHON3_TRUE@	flist=`grep --binary-files=without-match '#!' -R $(bindir) | grep python | sed s/:.*//g` ; \
+@WITH_PYTHON3_TRUE@        for i in $$flist; do \
+@WITH_PYTHON3_TRUE@          mv -f $$i $$i.old; \
+@WITH_PYTHON3_TRUE@          echo "#!$(PYTHON)" > $$i; \
+@WITH_PYTHON3_TRUE@          chmod --reference=$$i.old $$i; \
+@WITH_PYTHON3_TRUE@          tail -n +2 $$i.old >> $$i ; \
+@WITH_PYTHON3_TRUE@          rm -f $$i.old ; \
+@WITH_PYTHON3_TRUE@        done
 # Used to short circuit tests that would otherwise run.
 @HAVE_VICAR_GDALPLUGIN_FALSE@export NO_VICAR_GDALPLUGIN=t
 

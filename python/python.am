@@ -28,3 +28,18 @@ python_check:
         $(NOSETESTS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ 
 
 INSTALLCHECK_HOOK+= python_check
+
+if WITH_PYTHON3
+# This should be temporary
+replace_python_shebang: install-dist_binSCRIPTS
+	flist=`grep --binary-files=without-match '#!' -R $(bindir) | grep python | sed s/:.*//g` ; \
+        for i in $$flist; do \
+          mv -f $$i $$i.old; \
+          echo "#!$(PYTHON)" > $$i; \
+          chmod --reference=$$i.old $$i; \
+          tail -n +2 $$i.old >> $$i ; \
+          rm -f $$i.old ; \
+        done
+
+INSTALL_EXEC_HOOK+= replace_python_shebang
+endif

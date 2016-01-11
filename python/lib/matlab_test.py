@@ -6,7 +6,7 @@ import os
 
 # Optional support for running matlab from python
 try:
-    from pymatbridge import Matlab
+    from geocal.pymatbridge import Matlab
     have_matlab = True
 except ImportError:
     have_matlab = False

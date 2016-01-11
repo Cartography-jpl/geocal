@@ -1,5 +1,5 @@
 from nose.tools import *
-from geocal import docopt_simple
+from geocal.docopt_simple import *
 
 def test_docopt_simple():
     '''Test of docopt_simple'''

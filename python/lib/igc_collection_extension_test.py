@@ -4,8 +4,8 @@ from builtins import range
 from past.utils import old_div
 from nose.tools import *
 from geocal_swig import *
-from image_ground_connection import *
-from igc_collection_extension import *
+from geocal.image_ground_connection import *
+from geocal.igc_collection_extension import *
 from nose.plugins.skip import Skip, SkipTest
 import scipy
 import scipy.optimize

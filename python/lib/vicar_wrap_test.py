@@ -1,7 +1,7 @@
 from __future__ import division
 from past.utils import old_div
 from geocal_swig import *
-from vicar_wrap import *
+from geocal.vicar_wrap import *
 from nose.tools import *
 import math
 from nose.plugins.skip import Skip, SkipTest

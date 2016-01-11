@@ -1,7 +1,7 @@
 from future import standard_library
 standard_library.install_aliases()
 from nose.tools import *
-from image_to_image_connection import *
+from geocal.image_to_image_connection import *
 from geocal_swig import *
 import os
 import pickle

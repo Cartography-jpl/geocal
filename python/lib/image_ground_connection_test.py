@@ -3,7 +3,7 @@ from future import standard_library
 standard_library.install_aliases()
 from past.utils import old_div
 from nose.tools import *
-from image_ground_connection import *
+from geocal.image_ground_connection import *
 import pickle
 from nose.plugins.skip import Skip, SkipTest
 

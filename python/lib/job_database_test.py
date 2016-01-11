@@ -1,6 +1,6 @@
 from nose.tools import *
-from job_database import *
-from misc import *
+from geocal.job_database import *
+from geocal.misc import *
 import logging
 from nose.plugins.skip import Skip, SkipTest
 

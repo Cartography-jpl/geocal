@@ -1,6 +1,6 @@
 from __future__ import print_function
 from nose.tools import *
-from cubic_spline import *
+from geocal.cubic_spline import *
 
 def test_spline():
     '''Test CubicSpline'''

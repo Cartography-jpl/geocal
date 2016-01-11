@@ -3,7 +3,7 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import range
 from past.utils import old_div
-from mmap_file import *
+from geocal.mmap_file import *
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 import pickle

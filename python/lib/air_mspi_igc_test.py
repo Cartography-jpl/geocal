@@ -2,7 +2,7 @@ from future import standard_library
 standard_library.install_aliases()
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
-from air_mspi_igc import *
+from geocal.air_mspi_igc import *
 import os.path
 import pickle
 

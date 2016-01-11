@@ -1,7 +1,7 @@
 from __future__ import print_function
 from builtins import range
 from nose.tools import *
-from world_view2_reflectance import *
+from geocal.world_view2_reflectance import *
 import os
 import numpy as np
 import numpy.testing as nptest

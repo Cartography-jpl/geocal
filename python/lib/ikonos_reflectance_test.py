@@ -1,5 +1,5 @@
 from nose.tools import *
-from ikonos_reflectance import *
+from geocal.ikonos_reflectance import *
 import os
 import numpy as np
 import numpy.testing as nptest

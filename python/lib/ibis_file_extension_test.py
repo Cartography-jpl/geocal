@@ -1,5 +1,5 @@
 from geocal_swig import *
-from ibis_file_extension import *
+from geocal.ibis_file_extension import *
 from nose.plugins.skip import Skip, SkipTest
 
 def test_ibis():

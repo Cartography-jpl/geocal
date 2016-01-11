@@ -1,5 +1,5 @@
 from geocal_swig import *
-from feature_detector_extension import *
+from geocal.feature_detector_extension import *
 from pprint import *
 from multiprocessing import Pool
 from nose.plugins.skip import Skip, SkipTest

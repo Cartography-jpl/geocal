@@ -25,7 +25,7 @@ python_check:
         $(setup_afids_data) && \
         $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \
-        $(NOSETESTS) $(srcdir)/@srcpython@/*/ 
+        $(NOSETESTS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ 
 
 INSTALLCHECK_HOOK+= python_check
 

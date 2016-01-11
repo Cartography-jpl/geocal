@@ -6,8 +6,7 @@ import os
 import glob
 from geocal_swig import *
 
-from . import safe_matplotlib_import
-
+from .safe_matplotlib_import import *
 
 for i in glob.glob(os.path.dirname(__file__) + "/*.py"):
     mname = os.path.basename(i).split('.')[0]

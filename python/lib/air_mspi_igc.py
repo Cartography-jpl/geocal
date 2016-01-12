@@ -6,6 +6,14 @@ from math import *
 import numpy as np
 import scipy.optimize
 
+try:
+    # Depending on the options used when building, this class might
+    # be available
+    HdfFile
+    have_hdf = true
+except NameError:
+    have_hdf = false
+
 class AirMspiIgc(ImageGroundConnection):
     '''This is an AirMSPI Ellipsoid projected file as a ImageGroundConnection.
     We scale the data from a float (range 0 to 1.0) to a 16 bit integer
@@ -16,6 +24,8 @@ class AirMspiIgc(ImageGroundConnection):
     def __init__(self, fname, title = "Image", ellipsoid_height = 0,
                  group_name = "555nm_band", data_field = "I", 
                  data_scale = 32767.0):
+        if(not have_hdf):
+            raise RuntimeError("Must have HDF installed to use this class")
         ImageGroundConnection.__init__(self)
         # Save initial state, so we can pickle this.
         self.fname = fname

@@ -10,9 +10,9 @@ try:
     # Depending on the options used when building, this class might
     # be available
     HdfFile
-    have_hdf = true
+    have_hdf = True
 except NameError:
-    have_hdf = false
+    have_hdf = False
 
 class AirMspiIgc(ImageGroundConnection):
     '''This is an AirMSPI Ellipsoid projected file as a ImageGroundConnection.

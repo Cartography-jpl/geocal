@@ -37,8 +37,6 @@ def test_range_img1():
     assert send == 577
 
 def test_height_grid():
-    # Temporary, parallel and pickle stuff doesn't seem to work yet
-    raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
     pool = Pool()
@@ -47,8 +45,6 @@ def test_height_grid():
 #    dgen.plot_res()
 
 def test_height_grid_surf():
-    # Temporary, parallel and pickle stuff doesn't seem to work yet
-    raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
     pool = Pool()
@@ -57,8 +53,6 @@ def test_height_grid_surf():
 #    dgen.plot_res()
 
 def test_pickle():
-    # Temporary, parallel and pickle stuff doesn't seem to work yet
-    raise SkipTest
     if(not have_serialize_supported()):
         raise SkipTest
     t = pickle.dumps(dgen)

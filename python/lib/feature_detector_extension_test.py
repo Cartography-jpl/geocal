@@ -8,8 +8,6 @@ test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 img = VicarLiteRasterImage(test_data + "10MAY21-2.img")
 
 def test_feature_detector():
-    # Temporary, parallel and pickle stuff doesn't seem to work yet
-    raise SkipTest
     fd = ForstnerFeatureDetector()
     if(have_serialize_supported()):
         p = Pool()

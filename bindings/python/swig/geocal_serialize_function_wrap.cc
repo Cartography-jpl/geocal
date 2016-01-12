@@ -6481,8 +6481,11 @@ SWIGINTERN PyObject *_wrap_serialize_read_binary(PyObject *SWIGUNUSEDPARM(self),
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
-    if(!PyByteArray_Check(swig_obj[0]))
-    return NULL;
+    if(!PyByteArray_Check(swig_obj[0])) {
+      PyErr_Clear();
+      PyErr_SetString(PyExc_TypeError,"not a bytearray");
+      return NULL;
+    }
     arg1 = new std::string(PyByteArray_AS_STRING(swig_obj[0]), PyByteArray_GET_SIZE(swig_obj[0]));
   }
   {

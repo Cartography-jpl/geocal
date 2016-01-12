@@ -26,8 +26,11 @@ serialize_read_generic_string(const std::string& Data);
 }
 
 %typemap(in) const std::string& {
-  if(!PyByteArray_Check($input))
+  if(!PyByteArray_Check($input)) {
+    PyErr_Clear();
+    PyErr_SetString(PyExc_TypeError,"not a bytearray");
     return NULL;
+  }
   $1 = new std::string(PyByteArray_AS_STRING($input), PyByteArray_GET_SIZE($input));
 }
 

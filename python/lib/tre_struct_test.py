@@ -52,7 +52,7 @@ sun_az        : 131.3"""
     tre2.max_lp_seg = 6287
     tre2.sun_el = 68.5
     tre2.sun_az = 131.3
-    assert tre2.string_value == tre_string
+    assert tre2.bytes_value == tre_string
 
 def test_nitf_use00a_create():
     '''Create a nitf from existing VICAR data, adding a TRE for use00a'''

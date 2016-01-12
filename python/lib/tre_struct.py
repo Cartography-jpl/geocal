@@ -5,6 +5,7 @@ from builtins import object
 from geocal_swig import *
 import string
 import re
+import six
 
 class _GdalRasterImageHelper(object):
     def __init__(self, tre_name, tre_class):
@@ -15,7 +16,7 @@ class _GdalRasterImageHelper(object):
     def exists(self, d):
         return d.has_metadata(self.tre_name, "TRE")
     def __set__(self, d, val):
-        d["TRE", self.tre_name] = val.string_value
+        d["TRE", self.tre_name] = val.bytes_value
     
 class _TREVal(object):
     def __init__(self, sl, ty, frmt):
@@ -38,7 +39,7 @@ class _TREVal(object):
         if(v is None):
             d._data[self.sl] = ' ' * self.size
         else:
-            if(isinstance(self.frmt, str)):
+            if(isinstance(self.frmt, six.string_types)):
                 t = self.fstring.format(self.frmt % v)
             else:
                 t = self.fstring.format(self.frmt(v))
@@ -55,7 +56,7 @@ class _TREStruct(object):
         self._data = bytearray()
         for i in range(self.size): self._data.append(' ')
         if(value):
-            self.string_value = value
+            self.bytes_value = value
     def __str__(self):
         '''Text description of structure, e.g., something you can print
         out.'''
@@ -66,13 +67,13 @@ class _TREStruct(object):
         return "\n".join(res)
 
     @property
-    def string_value(self):
+    def bytes_value(self):
         '''The ASCII string representing the TRE. This is the raw data stored
         in the NITF file, this isn't something you would normally print
         out.'''
-        return str(self._data)
-    @string_value.setter
-    def string_value(self, value):
+        return bytes(self._data)
+    @bytes_value.setter
+    def bytes_value(self, value):
         if(len(value) != len(self._data)):
             raise RuntimeError("Length of value must be exactly %d" %
                                len(self._data))
@@ -114,7 +115,7 @@ def create_tre(name, tre_name, raster_name, help_desc, description):
     for field_name, len, ty, frmt in description:
         if(field_name):
             d[field_name] = _TREVal(slice(start, start + len), ty, frmt)
-            d[field_name + "_string"] = _TREVal(slice(start, start + len), str,
+            d[field_name + "_bytes"] = _TREVal(slice(start, start + len), bytes,
                                                 frmt)
             d["field_list"].append(field_name)
             d["field_type"][field_name] = ty
@@ -185,14 +186,14 @@ def _use00a_to_vicar(self, f):
     for field in self.field_list:
         # Special handling for this field, since we rename it to
         # give a better interface for frame_packet_time.
-        f["GEOTIFF", "NITF_" + string.upper(field)] = getattr(self, field + "_string")
+        f["GEOTIFF", "NITF_" + string.upper(field)] = getattr(self, field + "_bytes")
 
 def _use00a_to_gdal(self, f):
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
     for field in self.field_list:
-        if(getattr(self, field + "_string")):
-            f["TRE_NITF_" + string.upper(field)] = getattr(self, field + "_string")
+        if(getattr(self, field + "_bytes")):
+            f["TRE_NITF_" + string.upper(field)] = getattr(self, field + "_bytes")
 
 TreUSE00A.from_gdal = _use00a_from_gdal
 TreUSE00A.to_vicar = _use00a_to_vicar

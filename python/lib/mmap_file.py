@@ -12,9 +12,12 @@ def _new_memmap(version, args, kwargs):
 class memmap_wrap(np.memmap):
     '''This adds a wrapper for being able to pickle this object'''
     def __init__(self, *args, **kwargs):
+        # Note we don't need to call np.memmap __init__, because there
+        # isn't one. Instead the class has __new__ that sets things up
+        # We don't override __new__, so nothing special needs to be done
+        # by us to ensure the np.memmap base class is created.
         self.__args_save = args
         self.__kwargs_save = kwargs
-        np.memmap.__init__(self, *args, **kwargs)
         
     @classmethod
     def pickle_format_version(cls):

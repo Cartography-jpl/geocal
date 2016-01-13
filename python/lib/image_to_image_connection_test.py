@@ -16,9 +16,9 @@ def test_rpc_image_ground_connection():
     # A sample RPC. Nothing special about this, these are just reasonable
     # values. Note that this gets created in pickle_test.py if you need to
     # regenerate this for some reason
-    with open(test_data + "rpc_example.pkl") as f:
+    with open(test_data + "rpc_example.pkl", "rb") as f:
         rpc1 = pickle.load(f)
-    with open(test_data + "rpc_example.pkl") as f:
+    with open(test_data + "rpc_example.pkl", "rb") as f:
         rpc2 = pickle.load(f)
     rpc2.line_offset += 2
     rpc2.sample_offset += 3

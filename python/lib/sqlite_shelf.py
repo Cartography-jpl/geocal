@@ -1,4 +1,5 @@
 from past.builtins import basestring
+import sys
 # The Shelve package is a very useful way to easily implement persistence.
 # But it has the disadvantage that depending on the system we are on different
 # databases will be available (e.g., not every system has berkely db).
@@ -28,14 +29,23 @@ def to_db_type(value):
                                            basestring)):
         return value
     else:
-        return buffer(pickle.dumps(value))
+        # Note the types really are different for python 2 vs. 3. This is 
+        # because bytes isn't really different than str in python 2, but is 
+        # in 3
+        if sys.version_info > (3,):
+            return bytes(pickle.dumps(value))
+        else:
+            return buffer(pickle.dumps(value))
 
 def from_db_type(value):
     """ Converts a value from the database to a Python object. """
-    if isinstance(value, buffer):
-        return pickle.loads(value)
+    if sys.version_info > (3,):
+        if isinstance(value, bytes):
+            return pickle.loads(value)
     else:
-        return value
+        if isinstance(value, buffer):
+            return pickle.loads(value)
+    return value
 
 def read_shelve(f):
     '''This handles reading a value from a shelve file. The string f should

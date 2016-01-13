@@ -1,4 +1,3 @@
-from builtins import next
 from geocal_swig import *
 
 def tile_iterator(data):
@@ -21,7 +20,7 @@ def tile_iterator(data):
 
     while(not t.end):
         yield t
-        next(t)
+        t.next()
 
 def read_iterator(data):
     """
@@ -47,5 +46,5 @@ def read_iterator(data):
     while(not t.end):
         yield data.read(t.istart, t.jstart, t.number_line,
                         t.number_sample)
-        next(t)
+        t.next()
 

@@ -184,8 +184,8 @@ jid=`qsub -d {work_dir} -V -j oe -o {log_dir}/qsub.log -N write_image -t 0-{max_
                      max_array_num=number_job,
                      work_dir = os.path.abspath(os.path.dirname(shelve_name)),
                      ))
-    os.chmod(base_name + ".job_script", 0755)
-    print "Run %s to submit jobs to torque" % (base_name + ".job_script")
+    os.chmod(base_name + ".job_script", 0o755)
+    print("Run %s to submit jobs to torque" % (base_name + ".job_script"))
 
 if(args.gnu_parallel):
 # Create a script that can submit these jobs
@@ -197,8 +197,8 @@ seq 0 {max_num} | parallel --gnu -u shelve_job_run {shelve_name} {{}}
                     (shelve_name=shelve_name,
                      max_num=number_job - 1,
                      ))
-    os.chmod(base_name + ".sh", 0755)
-    print "Run %s to jobs using gnu parallel" % (base_name + ".sh")
+    os.chmod(base_name + ".sh", 0o755)
+    print("Run %s to jobs using gnu parallel" % (base_name + ".sh"))
 
 logging.shutdown()
 

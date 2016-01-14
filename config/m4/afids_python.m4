@@ -32,7 +32,7 @@ AC_HANDLE_WITH_ARG([python], [python], [Python], $2, $3)
 # which is why we have this separate.
 AC_ARG_WITH([python3],
            [AS_HELP_STRING([--with-python3],
-             [Build python 3 rather than python 2. This is still in testing, which is why we have a separate option for this])],
+             [This is a special option used while developing the python 3 code, where we have a mixed environment with both python 2 and 3. Normally you don't need to use this, just make sure "python" in your environment points to python 3 (e.g., this is the system setting, or you have set up your own virtualenv). You don't normally want to use this option.])],
            [with_python3=yes
 	   python_lib_path=python3.5
 	   python_inc_path=python3.5m

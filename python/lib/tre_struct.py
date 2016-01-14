@@ -1,11 +1,14 @@
 from __future__ import print_function
-from builtins import str
 from builtins import range
 from builtins import object
 from geocal_swig import *
-import string
 import re
 import six
+import sys
+
+# Note that the string here is *always* ASCII, or UTF-8 (since we only use
+# the ASCII subset). So the encoding etc. we do with python 3 isn't really
+# something we want to support here.
 
 # The ASCII code for space is 32
 _SPACE = 32
@@ -19,8 +22,7 @@ class _GdalRasterImageHelper(object):
     def exists(self, d):
         return d.has_metadata(self.tre_name, "TRE")
     def __set__(self, d, val):
-        #d["TRE", self.tre_name] = val.bytes_value.decode('utf-8')
-        d["TRE", self.tre_name] = val.bytes_value
+        d["TRE", self.tre_name] = val.string_value
     
 class _TREVal(object):
     def __init__(self, sl, ty, frmt):
@@ -38,7 +40,10 @@ class _TREVal(object):
     def __get__(self, d, cls):
         if(d._data[self.sl] == bytearray([_SPACE] * self.size)):
             return None
-        return self.ty(d._data[self.sl].rstrip())
+        if sys.version_info > (3,) and self.ty == bytes:
+            return self.ty(d._data[self.sl].rstrip()).decode('utf-8')
+        else:
+            return self.ty(d._data[self.sl].rstrip())
     def __set__(self, d, v):
         if(v is None):
             d._data[self.sl] = [_SPACE] * self.size
@@ -60,7 +65,7 @@ class _TREStruct(object):
         self._data = bytearray()
         for i in range(self.size): self._data.append(_SPACE)
         if(value):
-            self.bytes_value = value
+            self.string_value = value
     def __str__(self):
         '''Text description of structure, e.g., something you can print
         out.'''
@@ -71,17 +76,23 @@ class _TREStruct(object):
         return "\n".join(res)
 
     @property
-    def bytes_value(self):
+    def string_value(self):
         '''The ASCII string representing the TRE. This is the raw data stored
         in the NITF file, this isn't something you would normally print
         out.'''
-        return bytes(self._data)
-    @bytes_value.setter
-    def bytes_value(self, value):
+        if sys.version_info > (3,):
+            return self._data.decode('utf-8')
+        else:
+            return str(self._data)
+    @string_value.setter
+    def string_value(self, value):
         if(len(value) != len(self._data)):
             raise RuntimeError("Length of value must be exactly %d" %
                                len(self._data))
-        self._data[:] = value
+        if sys.version_info > (3,):
+            self._data[:] = value.encode('utf-8')
+        else:
+            self._data[:] = value
 
 def create_tre(name, tre_name, raster_name, help_desc, description):
     '''This create a class to handle a specific NITF TRE (a extension of
@@ -119,7 +130,7 @@ def create_tre(name, tre_name, raster_name, help_desc, description):
     for field_name, len, ty, frmt in description:
         if(field_name):
             d[field_name] = _TREVal(slice(start, start + len), ty, frmt)
-            d[field_name + "_bytes"] = _TREVal(slice(start, start + len), bytes,
+            d[field_name + "_string"] = _TREVal(slice(start, start + len), bytes,
                                                 frmt)
             d["field_list"].append(field_name)
             d["field_type"][field_name] = ty
@@ -188,16 +199,14 @@ def _use00a_to_vicar(self, f):
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
     for field in self.field_list:
-        # Special handling for this field, since we rename it to
-        # give a better interface for frame_packet_time.
-        f["GEOTIFF", "NITF_" + field.upper()] = getattr(self, field + "_bytes")
+        f["GEOTIFF", "NITF_" + field.upper()] = getattr(self, field + "_string")
 
 def _use00a_to_gdal(self, f):
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
     for field in self.field_list:
-        if(getattr(self, field + "_bytes")):
-            f["TRE_NITF_" + field.upper()] = getattr(self, field + "_bytes")
+        if(getattr(self, field + "_string")):
+            f["TRE_NITF_" + field.upper()] =  getattr(self, field + "_string")
 
 TreUSE00A.from_gdal = _use00a_from_gdal
 TreUSE00A.to_vicar = _use00a_to_vicar

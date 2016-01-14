@@ -5,6 +5,7 @@ from nose.tools import *
 from tre_struct import *
 import subprocess
 from nose.plugins.skip import Skip, SkipTest
+import sys
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 test_data2 = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
@@ -17,7 +18,7 @@ def test_tre_struct():
     # tre_string = t.metadata("USEOOA", "TRE")
     
     tre_string = "270105.2 02047       34.12-21.15                                     0003317001006287            +68.5131.3"
-    tre = TreUSE00A(tre_string.encode('utf-8'))
+    tre = TreUSE00A(tre_string)
     assert str(tre) == """angle_to_north: 270
 mean_gsd      : 105.2
 dynamic_range : 2047
@@ -52,7 +53,7 @@ sun_az        : 131.3"""
     tre2.max_lp_seg = 6287
     tre2.sun_el = 68.5
     tre2.sun_az = 131.3
-    assert tre2.bytes_value == tre_string
+    assert tre2.string_value == tre_string
 
 def test_nitf_use00a_create():
     '''Create a nitf from existing VICAR data, adding a TRE for use00a'''

@@ -17,7 +17,7 @@ def test_tre_struct():
     # tre_string = t.metadata("USEOOA", "TRE")
     
     tre_string = "270105.2 02047       34.12-21.15                                     0003317001006287            +68.5131.3"
-    tre = TreUSE00A(tre_string)
+    tre = TreUSE00A(tre_string.encode('utf-8'))
     assert str(tre) == """angle_to_north: 270
 mean_gsd      : 105.2
 dynamic_range : 2047

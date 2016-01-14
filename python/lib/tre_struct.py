@@ -7,6 +7,9 @@ import string
 import re
 import six
 
+# The ASCII code for space is 32
+_SPACE = 32
+
 class _GdalRasterImageHelper(object):
     def __init__(self, tre_name, tre_class):
         self.tre_name = tre_name
@@ -16,6 +19,7 @@ class _GdalRasterImageHelper(object):
     def exists(self, d):
         return d.has_metadata(self.tre_name, "TRE")
     def __set__(self, d, val):
+        #d["TRE", self.tre_name] = val.bytes_value.decode('utf-8')
         d["TRE", self.tre_name] = val.bytes_value
     
 class _TREVal(object):
@@ -32,12 +36,12 @@ class _TREVal(object):
         self.fstring = "{:%ds}" % self.size
         self.frmt = frmt
     def __get__(self, d, cls):
-        if(d._data[self.sl] == ' ' * self.size):
+        if(d._data[self.sl] == bytearray([_SPACE] * self.size)):
             return None
         return self.ty(d._data[self.sl].rstrip())
     def __set__(self, d, v):
         if(v is None):
-            d._data[self.sl] = ' ' * self.size
+            d._data[self.sl] = [_SPACE] * self.size
         else:
             if(isinstance(self.frmt, six.string_types)):
                 t = self.fstring.format(self.frmt % v)
@@ -45,7 +49,7 @@ class _TREVal(object):
                 t = self.fstring.format(self.frmt(v))
             if(len(t) > self.size):
                 raise RuntimeError("Formatting error. String '%s' is too long" % t)
-            d._data[self.sl] = t[0:self.size]
+            d._data[self.sl] = t[0:self.size].encode('utf-8')
 
 class _TREStruct(object):
     def __init__(self, value = None):
@@ -54,7 +58,7 @@ class _TREStruct(object):
         set. Otherwise all the strings are initialized to the empty
         string and numbers are initialized to 0.'''
         self._data = bytearray()
-        for i in range(self.size): self._data.append(' ')
+        for i in range(self.size): self._data.append(_SPACE)
         if(value):
             self.bytes_value = value
     def __str__(self):
@@ -171,12 +175,12 @@ def _use00a_from_gdal(self, f):
         # or as NITF_<blah>. Support both ways.
         # We might not have all the tags in an particular VICAR file.
         # If not, then default to a blank value.
-        if(f.has_metadata("NITF_USE00A_" + string.upper(field))):
+        if(f.has_metadata("NITF_USE00A_" + field.upper())):
             setattr(self, field, self.field_type[field](
-                    f["NITF_USE00A_" + string.upper(field)]))
-        elif(f.has_metadata("NITF_" + string.upper(field))):
+                    f["NITF_USE00A_" + field.upper()]))
+        elif(f.has_metadata("NITF_" + field.upper())):
             setattr(self, field, self.field_type[field](
-                    f["NITF_" + string.upper(field)]))
+                    f["NITF_" + field.upper()]))
         else:
             setattr(self, field, None)
 
@@ -186,14 +190,14 @@ def _use00a_to_vicar(self, f):
     for field in self.field_list:
         # Special handling for this field, since we rename it to
         # give a better interface for frame_packet_time.
-        f["GEOTIFF", "NITF_" + string.upper(field)] = getattr(self, field + "_bytes")
+        f["GEOTIFF", "NITF_" + field.upper()] = getattr(self, field + "_bytes")
 
 def _use00a_to_gdal(self, f):
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
     for field in self.field_list:
         if(getattr(self, field + "_bytes")):
-            f["TRE_NITF_" + string.upper(field)] = getattr(self, field + "_bytes")
+            f["TRE_NITF_" + field.upper()] = getattr(self, field + "_bytes")
 
 TreUSE00A.from_gdal = _use00a_from_gdal
 TreUSE00A.to_vicar = _use00a_to_vicar

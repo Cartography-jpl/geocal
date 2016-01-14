@@ -41,5 +41,16 @@ replace_python_shebang: install-dist_binSCRIPTS
           rm -f $$i.old ; \
         done
 
+replace_python_shebang2: install-dist_afidspythonvdevSCRIPTS
+	flist=`grep --binary-files=without-match '#!' -R $(afidspythonvdevdir) | grep python | sed s/:.*//g` ; \
+        for i in $$flist; do \
+          mv -f $$i $$i.old; \
+          echo "#!$(PYTHON)" > $$i; \
+          chmod --reference=$$i.old $$i; \
+          tail -n +2 $$i.old >> $$i ; \
+          rm -f $$i.old ; \
+        done
+
 INSTALL_EXEC_HOOK+= replace_python_shebang
+INSTALL_DATA_HOOK+= replace_python_shebang2
 endif

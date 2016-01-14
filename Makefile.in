@@ -163,8 +163,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py README.developer \
 @WITH_DOCUMENTATION_TRUE@	INSTALL
-@WITH_DOCUMENTATION_TRUE@am__append_10 = install_doxygen_doc \
-@WITH_DOCUMENTATION_TRUE@	install_python_doc
+@WITH_DOCUMENTATION_TRUE@am__append_10 = install_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_11 = clean_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_12 = clean_doxygen_generate
 @HAVE_FFTW_TRUE@am__append_13 = @srcsupport@/geocal_fftw.h
@@ -249,7 +248,9 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(INCLUDE_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
 @WITH_PYTHON3_TRUE@am__append_44 = replace_python_shebang
-@HAVE_VICAR_RTL_TRUE@am__append_45 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_PYTHON3_TRUE@am__append_45 = replace_python_shebang2
+@HAVE_VICAR_RTL_TRUE@am__append_46 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_47 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -2081,7 +2082,7 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = $(am__append_44)
-INSTALL_DATA_HOOK = $(am__append_10)
+INSTALL_DATA_HOOK = $(am__append_10) $(am__append_45) $(am__append_47)
 UNINSTALL_HOOK = $(am__append_11) clean_install_python_doc
 CLEAN_HOOK = clean_unit_test $(am__append_12)
 INSTALLCHECK_HOOK = python_check
@@ -2712,7 +2713,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
 dist_afidspythonvdev_SCRIPTS =  \
-	$(srcdir)/$(srcpythonbin)/sample_vicar_python $(am__append_45)
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python $(am__append_46)
 dist_afidspythonvdev_DATA =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
@@ -10021,6 +10022,16 @@ python_check:
 # This should be temporary
 @WITH_PYTHON3_TRUE@replace_python_shebang: install-dist_binSCRIPTS
 @WITH_PYTHON3_TRUE@	flist=`grep --binary-files=without-match '#!' -R $(bindir) | grep python | sed s/:.*//g` ; \
+@WITH_PYTHON3_TRUE@        for i in $$flist; do \
+@WITH_PYTHON3_TRUE@          mv -f $$i $$i.old; \
+@WITH_PYTHON3_TRUE@          echo "#!$(PYTHON)" > $$i; \
+@WITH_PYTHON3_TRUE@          chmod --reference=$$i.old $$i; \
+@WITH_PYTHON3_TRUE@          tail -n +2 $$i.old >> $$i ; \
+@WITH_PYTHON3_TRUE@          rm -f $$i.old ; \
+@WITH_PYTHON3_TRUE@        done
+
+@WITH_PYTHON3_TRUE@replace_python_shebang2: install-dist_afidspythonvdevSCRIPTS
+@WITH_PYTHON3_TRUE@	flist=`grep --binary-files=without-match '#!' -R $(afidspythonvdevdir) | grep python | sed s/:.*//g` ; \
 @WITH_PYTHON3_TRUE@        for i in $$flist; do \
 @WITH_PYTHON3_TRUE@          mv -f $$i $$i.old; \
 @WITH_PYTHON3_TRUE@          echo "#!$(PYTHON)" > $$i; \

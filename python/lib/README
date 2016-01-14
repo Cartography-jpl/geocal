@@ -1,0 +1,7 @@
+Note if you want to run tests locally (useful when you are initially running
+code), there is a directory ../geocal that makes this uninstalled .py files
+look like a module. You can set up for testing by adding this to your
+python search path, e.g.,:
+
+pistol% source setup_env_with_afids.sh
+pistol% export PYTHONPATH=/home/smyth/Local/geocal-repo/python:${PYTHONPATH}

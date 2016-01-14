@@ -1,5 +1,5 @@
 from nose.tools import *
-from ply_file import *
+from geocal.ply_file import *
 
 def test_ply_file():
     with PlyFile("test.ply") as f:

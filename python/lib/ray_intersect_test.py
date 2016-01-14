@@ -1,8 +1,8 @@
 from nose.tools import *
-from igc_collection_extension import *
-from ray_intersect import *
-from image_ground_connection import *
-from tie_point import *
+from geocal.igc_collection_extension import *
+from geocal.ray_intersect import *
+from geocal.image_ground_connection import *
+from geocal.tie_point import *
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 

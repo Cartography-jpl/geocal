@@ -19,7 +19,7 @@ def test_read():
         raise SkipTest
     sf = ShapeFile(test_data + "FRST_POIof090514.shp")
     assert sf.file_name, test_data + "FRST_POIof090514.shp"
-    assert sf.keys() == ["FRST_POIof090514"]
+    assert list(sf.keys()) == ["FRST_POIof090514"]
     assert sf["FRST_POIof090514"].name == "FRST_POIof090514"
     assert sf["FRST_POIof090514"].field_list == ["GM_LAYER", "GM_TYPE", "NAME", "LAYER"]
     assert len(sf["FRST_POIof090514"]) == 11

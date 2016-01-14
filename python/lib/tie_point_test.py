@@ -1,10 +1,12 @@
+from __future__ import print_function
+from builtins import range
 from nose.tools import *
 from geocal_swig import *
-from tie_point import *
-from image_ground_connection import *
-from ray_intersect import *
-from feature_detector_extension import *
-from sqlite_shelf import *
+from geocal.tie_point import *
+from geocal.image_ground_connection import *
+from geocal.ray_intersect import *
+from geocal.feature_detector_extension import *
+from geocal.sqlite_shelf import *
 from nose.plugins.skip import Skip, SkipTest
 import shutil
 
@@ -69,14 +71,14 @@ def test_tie_point():
     igccol = read_shelve(geocal_test_igc)
     tpcol = read_shelve(geocal_test_tpcol)
     tp = tpcol[0]
-    print tp.ic
+    print(tp.ic)
     tp.image_location[5] = None
-    print tp.ic
-    print tp.ic_sigma
-    print tp.ic_pred(igccol)
-    print tp.ic_diff(igccol)
-    print tpcol.data_frame(igccol, 0)
-    print tpcol.panel(igccol)
+    print(tp.ic)
+    print(tp.ic_sigma)
+    print(tp.ic_pred(igccol))
+    print(tp.ic_diff(igccol))
+    print(tpcol.data_frame(igccol, 0))
+    print(tpcol.panel(igccol))
 
 # If you run this, make sure to include this import. Otherwise the namespace
 # for the tiepoint isn't correct in the TiePointCollection shelf
@@ -90,7 +92,7 @@ def generate_tie_point_collection():
     igccol = read_shelve(geocal_test_igc)
     igccol_original = read_shelve(geocal_test_igc)
     igccol.orbit.fit_yaw = False
-    igccol.parameter_subset =  [0,0,0,1.0,0.5, 1, 0.5, 1, -0.5, -1, -0.5, 1.2, -0.4, -0.9, 0.3, 0.8, 0.4, 0.7, 0.3, 0.8, 1.4, 1.0, 0.2]
+    igccol.parameter_subset =  [1.0,0.5, 1, 0.5, 1, -0.5, -1, -0.5, 1.2, -0.4, -0.9, 0.3, 0.8, 0.4, 0.7, 0.3, 0.8, 1.4, 1.0, 0.2]
     # We pretend that igccol_original is the "truth", and igccol has
     # uncorrected errors
     write_shelve(geocal_test_igc_sim_error, igccol)

@@ -1,3 +1,6 @@
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 import numpy as np
 import scipy.sparse as sp
 import scipy.sparse.linalg
@@ -28,7 +31,7 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
     log.info("Done with residual.")
     log.info("  Total time: %f " % (time.clock() - start_time))
     log.info("  Delta time: %f" % (time.clock() - t1))
-    chisq = np.inner(res, res) / (len(res) - len(x0))
+    chisq = old_div(np.inner(res, res), (len(res) - len(x0)))
     lam = lambda_initial
     for i in range(max_iteration):
         t1 = time.clock()
@@ -56,7 +59,7 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
             log.info("Done with residual.")
             log.info("  Total time: %f " % (time.clock() - start_time))
             log.info("  Delta time: %f" % (time.clock() - t1))
-            chisq = np.inner(resnew, resnew) / (len(resnew) - len(x0))
+            chisq = old_div(np.inner(resnew, resnew), (len(resnew) - len(x0)))
             if(chisq < chisqold):
                 x = xnew
                 lam /= drop
@@ -68,7 +71,7 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
         else:
             raise RuntimeError("Exceeded maximum number of iterators")
         if(chisq < min_chisqr or
-           (chisqold - chisq) / chisq < stopping_criteria):
+           old_div((chisqold - chisq), chisq) < stopping_criteria):
             break
         log.info("Done with iteration %d, chisq %f" % (i, chisq))
     else:

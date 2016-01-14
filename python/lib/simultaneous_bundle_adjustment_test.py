@@ -1,12 +1,18 @@
+from __future__ import print_function
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
+from past.utils import old_div
 from nose.tools import *
 from geocal_swig import *
-from tie_point_collect import *
-from image_ground_connection import *
-from simultaneous_bundle_adjustment import *
-from lm_optimize import *
-from sqlite_shelf import *
+from geocal.tie_point_collect import *
+from geocal.image_ground_connection import *
+from geocal.simultaneous_bundle_adjustment import *
+from geocal.lm_optimize import *
+from geocal.sqlite_shelf import *
 import scipy.optimize
-import cPickle
+import pickle
 import numpy as np
 from nose.plugins.skip import Skip, SkipTest
 import logging
@@ -54,7 +60,7 @@ log_python.setLevel(logging.INFO)
 log_optimize = logging.getLogger("geocal-python.lm_optimize")
 log_optimize.setLevel(logging.WARNING)
 
-class TestClass:
+class TestClass(object):
     def setUp(self):
         sba.parameter = parm0
         sba_constant_gcp.parameter = parm0_constant_gcp
@@ -129,14 +135,14 @@ class TestClass:
         log_optimize.setLevel(logging.INFO)
         try:
             v = sba.sba_eq(sba.parameter)
-            chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
+            chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
             assert chisq > 50
-            print "Chisq", chisq
+            print("Chisq", chisq)
             parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
             sba.parameter = parm
             v = sba.sba_eq(sba.parameter)
-            chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-            print "Chisq", chisq
+            chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+            print("Chisq", chisq)
             assert chisq < 2
         finally:
             log_optimize = logging.getLogger("geocal-python.lm_optimize")
@@ -148,16 +154,16 @@ class TestClass:
         log_optimize.setLevel(logging.INFO)
         try:
             v = sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)
-            chisq = np.inner(v, v) / (len(v) - len(sba_constant_gcp.parameter))
+            chisq = old_div(np.inner(v, v), (len(v) - len(sba_constant_gcp.parameter)))
             assert chisq > 50
-            print "Chisq", chisq
+            print("Chisq", chisq)
             parm = lm_optimize(sba_constant_gcp.sba_eq, 
                                sba_constant_gcp.parameter, 
                                sba_constant_gcp.sba_jacobian)
             sba_constant_gcp.parameter = parm
             v = sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)
-            chisq = np.inner(v, v) / (len(v) - len(sba_constant_gcp.parameter))
-            print "Chisq", chisq
+            chisq = old_div(np.inner(v, v), (len(v) - len(sba_constant_gcp.parameter)))
+            print("Chisq", chisq)
             assert chisq < 2
         finally:
             log_optimize = logging.getLogger("geocal-python.lm_optimize")
@@ -168,20 +174,20 @@ class TestClass:
         # Don't normally run this. It is much slower then the lm_solve we
         # have above
         v = sba.sba_eq(sba.parameter)
-        chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-        print "Chisq", chisq
+        chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+        print("Chisq", chisq)
         assert chisq > 50
         parm, res = scipy.optimize.leastsq(sba.sba_eq, sba.parameter,
                                            Dfun = lambda x: sba.sba_jacobian(x).todense())
         sba.parameter = parm
         v = sba.sba_eq(sba.parameter)
-        chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-        print "Chisq", chisq
+        chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+        print("Chisq", chisq)
         assert chisq < 2
         out = open(test_data + "rpc_sba.pkl", "wb")
-        cPickle.dump(igc1.rpc, out, cPickle.HIGHEST_PROTOCOL)
-        cPickle.dump(igc2.rpc, out, cPickle.HIGHEST_PROTOCOL)
-        cPickle.dump(igc3.rpc, out, cPickle.HIGHEST_PROTOCOL)
+        pickle.dump(igc1.rpc, out, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(igc2.rpc, out, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(igc3.rpc, out, pickle.HIGHEST_PROTOCOL)
 
         
 

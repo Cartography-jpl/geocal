@@ -1,4 +1,9 @@
-from instrument_reflectance import *
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import division
+from builtins import range
+from past.utils import old_div
+from .instrument_reflectance import *
 import xml.etree.ElementTree as ET
 import math
 
@@ -37,7 +42,7 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
         raise RuntimeError("This method should not be called... use dn2TOARadiance directly")
 
     def dn2TOARadiance(self, tile, band):
-        return tile/self.gain[band] + self.bias[band];
+        return old_div(tile,self.gain[band]) + self.bias[band];
 
     def readMetaData(self, filename):
         self.genericMetaDataParser(filename, 'multi');
@@ -46,7 +51,7 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
         self.genericMetaDataParser(filename, 'pan');
 
     def printMetadata(self):
-        print "Peter, fill this in."
+        print("Peter, fill this in.")
 
     def genericMetaDataParser(self, filename, type):
         tree = ET.parse(filename);
@@ -91,9 +96,9 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
             if type == 'multi':
                 self.solarElevation = float(locGeo.find('Solar_Incidences').find('SUN_ELEVATION').text);
                 self.solarZenithAngle = 90 - self.solarElevation;
-                self.solarZenithAngleInRadians = self.solarZenithAngle*(math.pi/180);
+                self.solarZenithAngleInRadians = self.solarZenithAngle*(old_div(math.pi,180));
             elif type == 'pan':
                 self.pan_solarElevation = float(locGeo.find('Solar_Incidences').find('SUN_ELEVATION').text);
                 self.pan_solarZenithAngle = 90 - self.pan_solarElevation;
-                self.pan_solarZenithAngleInRadians = self.pan_solarZenithAngle*(math.pi/180);
+                self.pan_solarZenithAngleInRadians = self.pan_solarZenithAngle*(old_div(math.pi,180));
 

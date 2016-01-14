@@ -1,8 +1,11 @@
+from builtins import str
+from builtins import range
 from geocal_swig import *
 from nose.tools import *
 from tre_struct import *
 import subprocess
 from nose.plugins.skip import Skip, SkipTest
+import sys
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 test_data2 = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"

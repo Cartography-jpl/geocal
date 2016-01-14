@@ -1753,9 +1753,14 @@ Optional Packages:
                           (optional). You can also specify "build" if you want
                           to build your own local copy. See also THIRDPARTY
                           variable described below.
-  --with-python3          Build python 3 rather than python 2. This is still
-                          in testing, which is why we have a separate option
-                          for this
+  --with-python3          This is a special option used while developing the
+                          python 3 code, where we have a mixed environment
+                          with both python 2 and 3. Normally you don't need to
+                          use this, just make sure "python" in your
+                          environment points to python 3 (e.g., this is the
+                          system setting, or you have set up your own
+                          virtualenv). You don't normally want to use this
+                          option.
   --without-swig          Bypass running SWIG to update SWIG wrappers. The
                           SWIG wrappers can take a bit of time to create and
                           compile, so if you aren't working directly with them
@@ -1835,7 +1840,7 @@ Some influential environment variables:
   SPHINXBUILD Override the Sphinx build executable to use, the default is just
               'sphinx-build'
   NOSETESTS   Override the nosetests executable to use, the default is just
-              'nosetests'
+              'nosetests-${PYTHON_VERSION}'
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -21729,7 +21734,7 @@ fi
 if test -n "$PYTHON_CONFIG" ; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-    PYTHON_VERSION=$(python -c "import sys;print '.'.join(map(str, sys.version_info[:2]))")
+    PYTHON_VERSION=$(python -c "import sys;print('.'.join(map(str, sys.version_info[:2])))")
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
@@ -22001,7 +22006,7 @@ fi
         have_nosetests=no
 
         if test "$NOSETESTS" == ""; then
-           NOSETESTS=nosetests
+           NOSETESTS="nosetests-${PYTHON_VERSION}"
         fi
         # Extract the first word of "$NOSETESTS", so it can be a program name with args.
 set dummy $NOSETESTS; ac_word=$2
@@ -22481,7 +22486,7 @@ fi
 if test -n "$PYTHON_CONFIG" ; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-    PYTHON_VERSION=$(python -c "import sys;print '.'.join(map(str, sys.version_info[:2]))")
+    PYTHON_VERSION=$(python -c "import sys;print('.'.join(map(str, sys.version_info[:2])))")
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }

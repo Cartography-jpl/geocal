@@ -1,4 +1,4 @@
-from misc import *
+from geocal.misc import *
 import os.path
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest

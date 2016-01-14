@@ -1,3 +1,5 @@
+from past.builtins import basestring
+import sys
 # The Shelve package is a very useful way to easily implement persistence.
 # But it has the disadvantage that depending on the system we are on different
 # databases will be available (e.g., not every system has berkely db).
@@ -8,7 +10,13 @@
 #
 # This class gives a Shelve like interface to sqlite.
 
-import UserDict
+# UserDict goes away in python 3 (but is largely the same as collections). Try
+# the python 2 import first, then fall back to python 3
+try:
+    from UserDict import DictMixin
+except ImportError:
+    from collections import MutableMapping as DictMixin
+
 import pickle
 import sqlite3
 import os.path
@@ -17,18 +25,27 @@ import geocal_swig
 def to_db_type(value):
     """If value's type is supported natively in SQLite, return value.
     Otherwise, return a pickled representation. """
-    if value is None or isinstance(value, (int, long, float,
+    if value is None or isinstance(value, (int, int, float,
                                            basestring)):
         return value
     else:
-        return buffer(pickle.dumps(value))
+        # Note the types really are different for python 2 vs. 3. This is 
+        # because bytes isn't really different than str in python 2, but is 
+        # in 3
+        if sys.version_info > (3,):
+            return bytes(pickle.dumps(value))
+        else:
+            return buffer(pickle.dumps(value))
 
 def from_db_type(value):
     """ Converts a value from the database to a Python object. """
-    if isinstance(value, buffer):
-        return pickle.loads(value)
+    if sys.version_info > (3,):
+        if isinstance(value, bytes):
+            return pickle.loads(value)
     else:
-        return value
+        if isinstance(value, buffer):
+            return pickle.loads(value)
+    return value
 
 def read_shelve(f):
     '''This handles reading a value from a shelve file. The string f should
@@ -59,7 +76,7 @@ def read_shelve(f):
         if(dirn):
             os.chdir(dirn)
         t = SQLiteShelf(f, "r")
-        if("_extra_python_init" in t.keys()):
+        if("_extra_python_init" in list(t.keys())):
             exec(t["_extra_python_init"])
         return t[key]
     finally:
@@ -110,7 +127,7 @@ def write_shelve(f, val):
     d[key] = val
     d.close()
 
-class SQLiteShelf(UserDict.DictMixin):
+class SQLiteShelf(DictMixin):
     """Shelf implementation using an SQLite3 database. """
     def __init__(self, filename, mode = "r+"):
         '''Open an existing file, or create a new one if it doesn't exist.
@@ -184,4 +201,11 @@ class SQLiteShelf(UserDict.DictMixin):
             self._database.commit()
             self._database.close()
             self._database = None 
+
+    # These are needed by python 3, but not python 2
+    def __len__(self):
+        raise RuntimeError("Not implemented yet")
+
+    def __iter__(self):
+        raise RuntimeError("Not implemented yet")
 

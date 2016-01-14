@@ -11,13 +11,28 @@
 #else
 #define Text_FromUTF8(str) PyString_FromString(str)
 #endif
+
+// Python 2 and 3 have different name for their swig init functions
+#if PY_MAJOR_VERSION > 2
+#define SWIG_INIT_FUNC(S) PyInit__ ## S
+#define SWIG_INIT_TYPE PyObject *
+#define SWIG_INIT_MODULE init_extension_module3
+#else
+#define SWIG_INIT_FUNC(S) init_ ## S
+#define SWIG_INIT_TYPE void
+#define SWIG_INIT_MODULE init_extension_module2
+#endif
 using namespace GeoCal;
 // Map used between type_index and object to map this to python.
 std::map<type_index, boost::shared_ptr<SwigTypeMapperBase> > 
   GeoCal::swig_type_map;
 
 extern "C" {{
+#if PY_MAJOR_VERSION > 2
+  PyObject * PyInit__swig_wrap(void);
+#else
   void init_swig_wrap(void);
+#endif
 {prototypes}
 }}
 
@@ -57,7 +72,23 @@ std::string parse_python_exception() {{
   return ret;
 }}
 
-static void init_extension_module(PyObject* package, const char *modulename,
+#if PY_MAJOR_VERSION > 2
+// Version for python 3
+static void init_extension_module3(PyObject* package, const char *modulename,
+				  PyObject * (*initfunction)(void)) {{
+  PyObject *module = initfunction();
+  PyObject *module_dic = PyImport_GetModuleDict();
+  PyDict_SetItem(module_dic, Text_FromUTF8(modulename), module);
+  if(PyModule_AddObject(package, (char *)modulename, module)) {{
+    std::cerr << "Initialisation in PyImport_AddObject failed for module "
+	      << modulename << "\n";
+    return;
+  }}
+  Py_INCREF(module);
+}}
+#else 
+// Version for python 2
+static void init_extension_module2(PyObject* package, const char *modulename,
 				  void (*initfunction)(void)) {{
   PyObject *module = PyImport_AddModule((char *)modulename);
   if(!module) {{
@@ -73,6 +104,8 @@ static void init_extension_module(PyObject* package, const char *modulename,
   Py_INCREF(module);
   initfunction();
 }}
+#endif
+
 
 // This next blob of code comes from 
 // https://wiki.python.org/moin/PortingExtensionModulesToPy3k
@@ -128,7 +161,7 @@ static struct PyModuleDef moduledef = {{
 #define INITERROR return NULL
 
 PyObject *
-PyInit_swig_wrap(void)
+PyInit__swig_wrap(void)
 
 #else
 #define INITERROR return
@@ -155,7 +188,7 @@ init_swig_wrap(void)
         INITERROR;
     }}
 
-  PyObject *package = PyImport_AddModule((char *)"new_full_physics");
+  PyObject *package = PyImport_AddModule((char *)"new_geocal");
   if(!package) {{
       std::cerr << "Initialization failed\n";
       INITERROR;

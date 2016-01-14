@@ -1,6 +1,10 @@
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from past.utils import old_div
 from nose.tools import *
-from image_ground_connection import *
-import cPickle
+from geocal.image_ground_connection import *
+import pickle
 from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
@@ -11,13 +15,13 @@ def test_rpc_image_ground_pickle():
         raise SkipTest
     img = VicarLiteRasterImage(test_data + "10MAY21-1.img")
     ig = RpcImageGroundConnection(img.rpc, dem, img)
-    t = cPickle.dumps(ig.rpc)
-    t = cPickle.dumps(ig.dem)
-    t = cPickle.dumps(ig.title)
-    t = cPickle.dumps(img)
-    t = cPickle.dumps(ig.image)
-    t = cPickle.dumps(ig)
-    ig2 = cPickle.loads(t)
+    t = pickle.dumps(ig.rpc)
+    t = pickle.dumps(ig.dem)
+    t = pickle.dumps(ig.title)
+    t = pickle.dumps(img)
+    t = pickle.dumps(ig.image)
+    t = pickle.dumps(ig)
+    ig2 = pickle.loads(t)
 
 def test_vicar_image_ground_connection():
     if(not have_serialize_supported()):
@@ -27,8 +31,8 @@ def test_vicar_image_ground_connection():
     t[0] = True
     igc1.rpc.fit_line_numerator = t
     igc1.rpc.fit_sample_numerator = t
-    t = cPickle.dumps(igc1)
-    igc2 = cPickle.loads(t)
+    t = pickle.dumps(igc1)
+    igc2 = pickle.loads(t)
     assert_almost_equal(igc2.parameter_subset[0], 0.003954957)
     assert_almost_equal(igc2.parameter_subset[1], 0.0007519057)
     assert_almost_equal(igc2.rpc.line_numerator[0], 0.003954957)
@@ -43,13 +47,13 @@ def test_gdal_image_ground_connection():
     if(not have_serialize_supported()):
         raise SkipTest
     igc1 = GdalImageGroundConnection(test_data + "10MAY21-1.tif", dem)
-    t = cPickle.dumps(igc1)
-    igc2 = cPickle.loads(t)
+    t = pickle.dumps(igc1)
+    igc2 = pickle.loads(t)
 
 def test_view_angle():
     igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", dem)
-    ic = ImageCoordinate(igc1.image.number_line / 2.0,
-                         igc1.image.number_sample / 2.0)
+    ic = ImageCoordinate(old_div(igc1.image.number_line, 2.0),
+                         old_div(igc1.image.number_sample, 2.0))
     zen, azm = igc1.view_angle(ic)
     assert_almost_equal(zen, 33.2911, 2)
     assert_almost_equal(azm, 7.2390, 2)

@@ -1,4 +1,6 @@
-from docopt import docopt
+from __future__ import absolute_import
+from builtins import object
+from geocal.docopt import *
 import re
 
 class DocOptSimple(object):

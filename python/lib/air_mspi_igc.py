@@ -1,7 +1,18 @@
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 from geocal_swig import *
 from math import *
 import numpy as np
 import scipy.optimize
+
+try:
+    # Depending on the options used when building, this class might
+    # be available
+    HdfFile
+    have_hdf = True
+except NameError:
+    have_hdf = False
 
 class AirMspiIgc(ImageGroundConnection):
     '''This is an AirMSPI Ellipsoid projected file as a ImageGroundConnection.
@@ -13,6 +24,8 @@ class AirMspiIgc(ImageGroundConnection):
     def __init__(self, fname, title = "Image", ellipsoid_height = 0,
                  group_name = "555nm_band", data_field = "I", 
                  data_scale = 32767.0):
+        if(not have_hdf):
+            raise RuntimeError("Must have HDF installed to use this class")
         ImageGroundConnection.__init__(self)
         # Save initial state, so we can pickle this.
         self.fname = fname
@@ -148,8 +161,8 @@ class AirMspiIgc(ImageGroundConnection):
             gc2 = self.ground_coordinate_dem(ic, 
                           SimpleDem(gc.height_reference_surface))
             return [gc.latitude - gc2.latitude, gc.longitude - gc2.longitude]
-        xsol = scipy.optimize.root(func, [self.number_line / 2.0,
-                                          self.number_sample / 2.0],
+        xsol = scipy.optimize.root(func, [old_div(self.number_line, 2.0),
+                                          old_div(self.number_sample, 2.0)],
                                    args=(self, gc), tol = 0.01)
         if(not xsol['success']):
             raise RuntimeError("Couldn't find solution")

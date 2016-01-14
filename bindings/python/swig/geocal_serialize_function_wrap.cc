@@ -6463,7 +6463,9 @@ SWIGINTERN PyObject *_wrap_serialize_write_binary(PyObject *SWIGUNUSEDPARM(self)
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  {
+    resultobj = PyByteArray_FromStringAndSize((&result)->data(), (&result)->size());
+  }
   return resultobj;
 fail:
   return NULL;
@@ -6473,22 +6475,18 @@ fail:
 SWIGINTERN PyObject *_wrap_serialize_read_binary(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
   PyObject *swig_obj[1] ;
   boost::shared_ptr< GeoCal::GenericObject > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "serialize_read_binary" "', argument " "1"" of type '" "std::string const &""'"); 
+    if(!PyByteArray_Check(swig_obj[0])) {
+      PyErr_Clear();
+      PyErr_SetString(PyExc_TypeError,"not a bytearray");
+      return NULL;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "serialize_read_binary" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
+    arg1 = new std::string(PyByteArray_AS_STRING(swig_obj[0]), PyByteArray_GET_SIZE(swig_obj[0]));
   }
   {
     try {
@@ -6502,10 +6500,14 @@ SWIGINTERN PyObject *_wrap_serialize_read_binary(PyObject *SWIGUNUSEDPARM(self),
   {
     resultobj = GeoCal::swig_to_python_or_none(result);
   }
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  {
+    delete arg1;
+  }
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  {
+    delete arg1;
+  }
   return NULL;
 }
 

@@ -174,7 +174,9 @@ def create_rpc_sample():
      1.1059e-07, 4.10217e-08, -1.69482e-07, 1.08104e-06,
       1e-9, -2.33038e-07, 1.86413e-08, -1.35637e-08]
     out = open(test_data + "rpc_example.pkl", "wb")
-    t = pickle.dump(rpc, out, pickle.HIGHEST_PROTOCOL)
+    # Use protocol 0, since it is the most portable. This is just a small test
+    # example, so size/efficiency isn't any kind of an issue.
+    t = pickle.dump(rpc, out, 0)
 
 #create_rpc_sample()
 

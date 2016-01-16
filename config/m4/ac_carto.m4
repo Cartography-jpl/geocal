@@ -37,15 +37,16 @@ if test "x$want_carto" = "xyes"; then
         if test "$build_carto" == "yes"; then
             CARTO_LIBS="libcarto.la"
 	    CARTO_BUILD_DEPEND="libcarto.la"
-            CARTO_CFLAGS="-I$srcdir/carto/inc $VICAR_RTL_CFLAGS $GSL_CFLAGS"
+            CARTO_CFLAGS="-I$srcdir/carto/inc \$(VICAR_RTL_CFLAGS) \$(GSL_CFLAGS)"
             succeeded=yes
         elif test "$ac_carto_path" != ""; then
-            CARTO_LIBS="-R$ac_carto_path/lib -L$ac_carto_path/lib -lcarto $VICAR_RTL_LIBS $GSL_LIBS"
-            CARTO_CFLAGS="-I$ac_carto_path/include/carto -I$ac_carto_path/include $VICAR_RTL_CFLAGS $GSL_CFLAGS"
+            CARTO_LIBS="-R$ac_carto_path/lib -L$ac_carto_path/lib -lcarto \$(VICAR_RTL_LIBS) \$(GSL_LIBS)"
+            CARTO_CFLAGS="-I$ac_carto_path/include/carto -I$ac_carto_path/include \$(VICAR_RTL_CFLAGS) \$(GSL_CFLAGS)"
             succeeded=yes
         else
 	    AC_SEARCH_LIB([CARTO], [carto], [carto/], [burl.h], ,
-                          [libcarto], [-lcarto $VICAR_RTL_CFLAGS])
+                          [libcarto], [-lcarto])
+	    CARTO_LIBS="$CARTO_LIBS \$(VICAR_RTL_LIBS) \$(GSL_LIBS)"
         fi
 
 # We can only use the carto library if we also have vicar and gsl

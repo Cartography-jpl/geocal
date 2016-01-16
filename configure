@@ -17117,7 +17117,7 @@ $as_echo_n "checking for VICAR RTL library... " >&6; }
             VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
             succeeded=yes
         elif test "$ac_vicar_rtl_path" != ""; then
-            VICAR_RTL_LIBS="-R$ac_vicar_rtl_path/lib -L$ac_vicar_rtl_path/lib -lvicar_rtl"
+            VICAR_RTL_LIBS="-R$ac_vicar_rtl_path/lib -L$ac_vicar_rtl_path/lib -lvicar_rtl \$(CURSES_LIB) \$(FLIBS)"
             VICAR_RTL_CFLAGS="-I$ac_vicar_rtl_path/include/vicar_rtl"
             succeeded=yes
         else
@@ -17222,6 +17222,7 @@ fi
      done
   fi
 
+	    VICAR_RTL_LIBS="${VICAR_RTL_LIBS} \$(CURSES_LIB) \$(FLIBS)"
         fi
 
         if test "$succeeded" != "yes" ; then
@@ -17635,11 +17636,11 @@ fi
 $as_echo_n "checking for Hdfeos5 library... " >&6; }
         succeeded=no
         if test "$build_hdfeos5" == "yes"; then
-            HDFEOS5_LIBS="libhe5_hdfeos.la ${HDF5_LIBS}"
+            HDFEOS5_LIBS="libhe5_hdfeos.la"
             HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.15/include"
             succeeded=yes
         elif test "$ac_hdfeos5_path" != ""; then
-            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
+            HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp"
             HDFEOS5_CFLAGS="-I$ac_hdfeos5_path/include/hdfeos5"
             succeeded=yes
         else
@@ -17724,19 +17725,19 @@ fi
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
           if test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS} "
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
              succeeded=yes
              break;
           fi
@@ -17826,19 +17827,19 @@ fi
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
           if test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp ${HDF5_LIBS}"
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
              succeeded=yes
              break;
           fi
@@ -17859,7 +17860,8 @@ $as_echo "no" >&6; }
 		HDFEOS5_LIBS=""
 		have_hdfeos5="no"
         else
-                HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS $HDF5_CFLAGS"
+                HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS \$(HDF5_CFLAGS)"
+		HDFEOS5_LIBS="$HDFEOS5_LIBS \$(HDF5_LIBS)"
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 
@@ -20844,11 +20846,11 @@ $as_echo_n "checking for Carto library... " >&6; }
         if test "$build_carto" == "yes"; then
             CARTO_LIBS="libcarto.la"
 	    CARTO_BUILD_DEPEND="libcarto.la"
-            CARTO_CFLAGS="-I$srcdir/carto/inc $VICAR_RTL_CFLAGS $GSL_CFLAGS"
+            CARTO_CFLAGS="-I$srcdir/carto/inc \$(VICAR_RTL_CFLAGS) \$(GSL_CFLAGS)"
             succeeded=yes
         elif test "$ac_carto_path" != ""; then
-            CARTO_LIBS="-R$ac_carto_path/lib -L$ac_carto_path/lib -lcarto $VICAR_RTL_LIBS $GSL_LIBS"
-            CARTO_CFLAGS="-I$ac_carto_path/include/carto -I$ac_carto_path/include $VICAR_RTL_CFLAGS $GSL_CFLAGS"
+            CARTO_LIBS="-R$ac_carto_path/lib -L$ac_carto_path/lib -lcarto \$(VICAR_RTL_LIBS) \$(GSL_LIBS)"
+            CARTO_CFLAGS="-I$ac_carto_path/include/carto -I$ac_carto_path/include \$(VICAR_RTL_CFLAGS) \$(GSL_CFLAGS)"
             succeeded=yes
         else
 
@@ -20932,19 +20934,19 @@ fi
           CARTO_PREFIX=$ac_path_tmp
           CARTO_CFLAGS="-I$ac_path_tmp/include/carto/"
           if test -e "$ac_path_tmp/lib/libcarto.so"; then
-             CARTO_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcarto $VICAR_RTL_CFLAGS"
+             CARTO_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcarto"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib/libcarto.dylib"; then
-             CARTO_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcarto $VICAR_RTL_CFLAGS"
+             CARTO_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lcarto"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libcarto.so"; then
-             CARTO_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lcarto $VICAR_RTL_CFLAGS"
+             CARTO_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lcarto"
              succeeded=yes
              break;
           elif test -e "$ac_path_tmp/lib64/libcarto.dylib"; then
-             CARTO_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lcarto $VICAR_RTL_CFLAGS"
+             CARTO_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lcarto"
              succeeded=yes
              break;
           fi
@@ -20952,6 +20954,7 @@ fi
      done
   fi
 
+	    CARTO_LIBS="$CARTO_LIBS \$(VICAR_RTL_LIBS) \$(GSL_LIBS)"
         fi
 
 # We can only use the carto library if we also have vicar and gsl

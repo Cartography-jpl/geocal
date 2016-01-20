@@ -28,24 +28,6 @@ AC_DEFUN([AFIDS_PYTHON],
 [
 AC_HANDLE_WITH_ARG([python], [python], [Python], $2, $3)
 
-# Option to build new python 3 code. This is still in testing,
-# which is why we have this separate.
-AC_ARG_WITH([python3],
-           [AS_HELP_STRING([--with-python3],
-             [This is a special option used while developing the python 3 code, where we have a mixed environment with both python 2 and 3. Normally you don't need to use this, just make sure "python" in your environment points to python 3 (e.g., this is the system setting, or you have set up your own virtualenv). You don't normally want to use this option.])],
-           [with_python3=yes
-	   python_lib_path=python3.5
-	   python_inc_path=python3.5m
-           python_bin_name=python3
-	   ],
-           [with_python3=no
-	    python_lib_path=python2.7
-	    python_inc_path=python2.7
-           python_bin_name=python
-	   ])
-AM_CONDITIONAL([WITH_PYTHON3], [test x$with_python3 = xyes])
-AC_SUBST(python_bin_name)
-
 if test "x$want_python" = "xyes"; then
    AC_MSG_CHECKING([for python])
    succeeded=no
@@ -67,11 +49,8 @@ if test "x$want_python" = "xyes"; then
      AM_CONDITIONAL([HAVE_NOSETESTS], [true])
    else
      if test "$1" == "required"; then
-        if test "$with_python3" == "yes"; then
-	        AC_PYTHON3_DEVEL
-	else
-	        AC_PYTHON_DEVEL([>= '2.6.1'])
-	fi
+        # Not sure if python 3.0 is usable. We've tested with 3.5
+        AC_PYTHON_DEVEL([>= '3.0.0'])
         AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.7.0], [numpy.version.version])
         AC_PYTHON_MODULE_WITH_VERSION(scipy, [0.10.1], [scipy.version.version])
         AC_PYTHON_MODULE_WITH_VERSION(matplotlib, [1.0.1], [matplotlib.__version__])
@@ -94,11 +73,7 @@ if test "x$want_python" = "xyes"; then
         succeeded=yes
         have_python=yes
     else
-        if test "$with_python3" == "yes"; then
-	        AC_PYTHON3_DEVEL
-	else
-	        AC_PYTHON_DEVEL([>= '2.6.1'])
-	fi
+        AC_PYTHON_DEVEL([>= '2.6.1'])
         pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
         platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
         AC_SUBST([platpythondir])

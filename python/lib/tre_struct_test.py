@@ -244,3 +244,18 @@ def noruntest_nitf_rpc():
 
     
 
+# None the TREs we have defined include a string type, so add that in to
+# test.
+TreTEST = create_tre("TreTest", "TEST", "test", "test metadata",
+                     [["field1", 20, bytes, "%s"],
+                      ["field2", 10, bytes, "%s"]])
+
+def test_tre_string():
+    '''Test handling of string types in a TRE.'''
+    tre = TreTEST()
+    tre.field1 = "data1"
+    tre.field2 = "data2"
+    assert tre.field1 == "data1"
+    assert tre.field2 == "data2"
+    assert tre.string_value == "data1               data2     "
+

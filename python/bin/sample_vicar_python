@@ -18,9 +18,9 @@ from geocal import *
 import sys
 t = VicarArgument(sys.argv)
 # Returns an array
-print t["inp"]
+print(t["inp"])
 # Return a single value
-print t["out"]
+print(t["out"])
 # Set a output value
 t["ret"] = 101
 

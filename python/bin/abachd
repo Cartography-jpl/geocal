@@ -105,6 +105,10 @@ if(args.post_ms):
     post_ms_raw = os.path.abspath(args.post_ms)
 else:
     post_ms_raw = None
+if(args.dem_file):
+    dem_file = os.path.abspath(args.dem_file)
+else:
+    dem_file = None
 
 # Few things that appear often enough that it is worth stashing.
 dbfile = "end_to_end.db"
@@ -268,8 +272,8 @@ if(args.verbose):
 
 
 # 2. Initial DEM
-if(args.dem_file):
-    subprocess.check_call(["shelve_dem", args.dem_file, 
+if(dem_file):
+    subprocess.check_call(["shelve_dem", dem_file, 
                            dbfile + ":dem_initial"])
 else:
     subprocess.check_call(["shelve_dem", "--srtm", dbfile + ":dem_initial"])

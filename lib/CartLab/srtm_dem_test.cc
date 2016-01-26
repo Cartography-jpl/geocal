@@ -28,6 +28,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<Dem> dem;
   try {
     dem.reset(new SrtmDem());
+    dem->height_reference_surface(Geodetic(34.2,-118.03));
   } catch(const Exception&) {
     // Don't worry if we can't find the data, just skip test.
     BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");

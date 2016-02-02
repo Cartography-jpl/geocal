@@ -1828,7 +1828,7 @@ Some influential environment variables:
   SPHINXBUILD Override the Sphinx build executable to use, the default is just
               'sphinx-build'
   NOSETESTS   Override the nosetests executable to use, the default is just
-              'nosetests-${PYTHON_VERSION}'
+              'nosetests'
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -21255,6 +21255,9 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
   fi
 
 
+     # Will need to update this if we change the version we are building
+     python_inc_path=python3.5m
+     python_lib_path=python3.5
      PYTHON=`pwd`"/external/python_wrap.sh"
      PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
      PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"
@@ -21729,7 +21732,7 @@ fi
         have_nosetests=no
 
         if test "$NOSETESTS" == ""; then
-           NOSETESTS="nosetests-${PYTHON_VERSION}"
+           NOSETESTS=nosetests
         fi
         # Extract the first word of "$NOSETESTS", so it can be a program name with args.
 set dummy $NOSETESTS; ac_word=$2

@@ -253,6 +253,24 @@ def matrix_to_quaternion(m):
     """
     return _geocal_quaternion.matrix_to_quaternion(m)
 
+def quaternion_to_array(q):
+    """
+
+    blitz::Array<T, 1> GeoCal::quaternion_to_array(const boost::math::quaternion< T > &qin)
+    Return a blitz array with the quaternion elements.
+
+    This is mostly useful for python. 
+    """
+    return _geocal_quaternion.quaternion_to_array(q)
+
+def array_to_quaternion(m):
+    """
+
+    boost::math::quaternion<T> GeoCal::array_to_quaternion(const blitz::Array< T, 1 > &m)
+
+    """
+    return _geocal_quaternion.array_to_quaternion(m)
+
 def quat_to_ypr(qin):
     """
 

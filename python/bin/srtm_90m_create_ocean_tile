@@ -1,0 +1,56 @@
+#! /usr/bin/env python
+#
+# This creates a SRTM_90m DEM tile that has a height relative to the datum
+# of 0 everywhere, i.e., an ocean tile.
+
+from geocal import *
+import re
+import numpy as np
+
+version = "February 1, 2016"
+usage='''Usage: 
+  srtm_90m_create_ocean_tile [options] <tile_coordinate>
+  srtm_90m_create_ocean_tile -h | --help
+  srtm_90m_create_ocean_tile -v | --version
+
+This creates a SRTM 90m DEM tile that has a height relative to the datum
+of 0 everywhere, i.e., an ocean tile. The tile coordinate should be 
+in the same format at the SRTM 90m tiles, e.g, "n33w135".
+
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+# Get the upper left corner. Note that there is actually 0.5 pixel border around
+# this, but we start initially with this value.
+m = re.match(r'([ns])(\d+)([ew])(\d+)',args.tile_coordinate)
+if(not m):
+    raise RuntimeError("Coordinate is not in the right format. Should be like 'n35w120' or 's34e23'")
+lat = int(m.group(2))
+if(m.group(1) == 's'):
+    lat = -lat
+lon = int(m.group(4))
+if(m.group(3) == 'w'):
+    lon = -lon
+
+# We just looked at one of the tile to get this full coordinate system
+ogr = OgrWrapper('GEOGCS["unknown",DATUM["unknown",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]]],PRIMEM["Greenwich",0],UNIT[,0.0174532925199433]]')
+cconv = OgrCoordinateConverter(ogr)
+
+# All 90m DEM files have corners at 0.5 seconds offset from lat/lon in the file name; 
+# all files have pixel size = (0.000832870755900,-0.000832870755900)
+# So, we can represent this 0.5 sec offset in degree of longitude and degree of latitude:
+offsetLon = 0.5/3600
+offsetLat = -0.5/3600
+minfo = MapInfo(cconv, lon-offsetLon, lat+1-offsetLat, lon + 1+offsetLon, lat+offsetLat, 1201, 1201)
+# Add border
+#minfo = minfo.subset(-0.5, -0.5, 1201,1201)
+f = GdalRasterImage("%s_L1.tif" % args.tile_coordinate, "gtiff", minfo, 1, 
+                    GdalRasterImage.Int16, "COMPRESS=LZW")
+f.write(0, 0, np.zeros((1201,1201), dtype=np.int16))

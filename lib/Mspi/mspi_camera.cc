@@ -48,10 +48,8 @@ void MspiCamera::read_config_file(const std::string& File_name,
 // Some hardcoded values that we don't expect to change.
 //-------------------------------------------------------
 
-  sample_pitch_ = 0.010; // center-to-center sample spacing (millimeters)
-  line_pitch_ = 0.010;  // pixel size in along row axis (millimeters)
-  double dy = 0.016;    // center-to-center row spacing (millimeters)
-  int nrow = 64;	// Number of rows in CCD
+  sample_pitch_ = c.value<double>("sample_pitch"); // pixel size along sample axis (millimeters)
+  line_pitch_ = c.value<double>("line_pitch");  // pixel size along row axis (millimeters)
   frame_convention_ = QuaternionCamera::LINE_IS_Y;
 
 //-------------------------------------------------------
@@ -63,14 +61,13 @@ void MspiCamera::read_config_file(const std::string& File_name,
   pitch_ = c.value<double>("camera_pitch");
   roll_ = c.value<double>("camera_roll");
   focal_length_ = c.value<double>("focal_length");
-  double s_origin = c.value<double>("origin");
   nline_ = 1;
   nsamp_ = c.value<int>("number_sample");
   nband_ = c.value<int>("number_band");
-  line_direction_ = (c.value<int>("direction") == 1 ?
+  line_direction_ = (c.value<int>("line_direction") == -1 ?
 		       QuaternionCamera::INCREASE_IS_NEGATIVE :
 		       QuaternionCamera::INCREASE_IS_POSITIVE);
-  sample_direction_ = (c.value<int>("pixel_order") == 1 ? 
+  sample_direction_ = (c.value<int>("sample_direction") == -1 ? 
 		       QuaternionCamera::INCREASE_IS_NEGATIVE :
 		       QuaternionCamera::INCREASE_IS_POSITIVE);
   inversion_ = c.value<int>("inversion");
@@ -90,10 +87,11 @@ void MspiCamera::read_config_file(const std::string& File_name,
 //--------------------------------------------------------------------------
 
   for(int b = 0; b < number_band(); ++b) {
-    double l_origin = line_dir() * dy * 
-      (row_number_[b] + 0.5 - (nrow / 2.0)) / line_pitch();
-    principal_point_.push_back(FrameCoordinate(l_origin,
-					       s_origin));
+    std::string row = boost::lexical_cast<std::string>(row_number_[b]);
+    blitz::Array<double, 1> coor = c.value<blitz::Array<double, 1> >("origin" + row);
+    double l_origin = coor(0);
+    double s_origin = coor(1);
+    principal_point_.push_back(FrameCoordinate(l_origin, s_origin));
   }
   
 //--------------------------------------------------------------------------

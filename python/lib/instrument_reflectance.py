@@ -1,3 +1,6 @@
+from __future__ import division
+from builtins import object
+from past.utils import old_div
 import math
 
 #################################################################################
@@ -38,9 +41,9 @@ class InstrumentReflectance(object):
       if self.solarDist == -999. or self.solarZenithAngleInRadians == -999.:
          raise ValueError("Solar Distance and/or solar angle not set.")
       
-      return (self.dn2TOARadiance_factor(band) * 
-              math.pow(self.solarDist, 2.)*math.pi)/\
-              (self.esun[band]*math.cos(self.solarZenithAngleInRadians))
+      return old_div((self.dn2TOARadiance_factor(band) * 
+              math.pow(self.solarDist, 2.)*math.pi),\
+              (self.esun[band]*math.cos(self.solarZenithAngleInRadians)))
  
    def dn2TOARadiance(self, tile, band):
       '''Convert from DN passed in as tile to TOA radiance'''
@@ -55,17 +58,17 @@ class InstrumentReflectance(object):
       if self.year == -999 or self.month == -999 or self.day == -999 or \
              self.hh == -999 or self.mm == -999 or self.ssdd == -999:
          raise ValueError("Metadata for date time is not set")
-      ut = self.hh + self.mm/60.0 + self.ssdd/3600.0
+      ut = self.hh + old_div(self.mm,60.0) + old_div(self.ssdd,3600.0)
       if self.month == 1.0 or self.month == 2.0:
          self.year = self.year - 1
          self.month = self.month + 12
 
-      A = int(self.year/100)
-      B = 2 - A + int(A/4)
-      JD = int(365.25*(self.year + 4716)) + int(30.6001*(self.month + 1)) + self.day + ut/24.0 + B - 1524.5
+      A = int(old_div(self.year,100))
+      B = 2 - A + int(old_div(A,4))
+      JD = int(365.25*(self.year + 4716)) + int(30.6001*(self.month + 1)) + self.day + old_div(ut,24.0) + B - 1524.5
       D = JD - 2451545.0
       g = 357.529 + 0.98560028*D
-      radg = g*(math.pi/180.)
+      radg = g*(old_div(math.pi,180.))
       self.solarDist = 1.00014 - 0.01671*math.cos(radg) - 0.00014*math.cos(2*radg)
 
       if self.solarDist < 0.983 or self.solarDist > 1.017:
@@ -95,17 +98,17 @@ class PanInstrumentReflectance(object):
       if self.pan_year == -999 or self.pan_month == -999 or self.pan_day == -999 or \
              self.pan_hh == -999 or self.pan_mm == -999 or self.pan_ssdd == -999:
          raise ValueError("Metadata for date time is not set")
-      ut = self.pan_hh + self.pan_mm/60.0 + self.pan_ssdd/3600.0
+      ut = self.pan_hh + old_div(self.pan_mm,60.0) + old_div(self.pan_ssdd,3600.0)
       if self.pan_month == 1.0 or self.pan_month == 2.0:
          self.pan_year = self.pan_year - 1
          self.pan_month = self.pan_month + 12
 
-      A = int(self.pan_year/100)
-      B = 2 - A + int(A/4)
-      JD = int(365.25*(self.pan_year + 4716)) + int(30.6001*(self.pan_month + 1)) + self.pan_day + ut/24.0 + B - 1524.5
+      A = int(old_div(self.pan_year,100))
+      B = 2 - A + int(old_div(A,4))
+      JD = int(365.25*(self.pan_year + 4716)) + int(30.6001*(self.pan_month + 1)) + self.pan_day + old_div(ut,24.0) + B - 1524.5
       D = JD - 2451545.0
       g = 357.529 + 0.98560028*D
-      radg = g*(math.pi/180.)
+      radg = g*(old_div(math.pi,180.))
       self.pan_solarDist = 1.00014 - 0.01671*math.cos(radg) - 0.00014*math.cos(2*radg)
 
       if self.pan_solarDist < 0.983 or self.pan_solarDist > 1.017:

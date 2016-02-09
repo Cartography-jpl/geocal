@@ -6263,6 +6263,7 @@ SWIGINTERN PyObject *_wrap_CalcRaster__v_data(PyObject *SWIGUNUSEDPARM(self), Py
     }
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double>(), 
       stride, result->data(), 0, 0, 0);
+    PyArray_UpdateFlags((PyArrayObject*)resultobj, NPY_ARRAY_WRITEABLE);
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 

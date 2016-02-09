@@ -1,16 +1,23 @@
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import str
+from builtins import range
+from past.utils import old_div
+from builtins import object
 from geocal_swig import *
 import math
 import scipy.interpolate
-from image_to_image_connection import *
-from ray_intersect import *
+from .image_to_image_connection import *
+from .ray_intersect import *
 import itertools
 import multiprocessing
 from multiprocessing import Pool
 import numpy as np
 import numpy.linalg as la
-from igc_collection_extension import *
-from ply_file import *
-import safe_matplotlib_import
+from .igc_collection_extension import *
+from .ply_file import *
+from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 import logging
 import re
@@ -80,7 +87,7 @@ class SurfacePointWrap(object):
     def __call__(self, it):
         return self.demg.surface_point(*it)
 
-class DemGenerate:
+class DemGenerate(object):
     '''This uses image matching between two images to determine a surface
     Dem. The aoi should be a MapInfo giving the desired ground coverage.
 
@@ -126,8 +133,8 @@ class DemGenerate:
         self.ri = RayIntersect(self.igc1, self.igc2)
         self.aoi = aoi
         self.dem_match = DemMatch(self.itoim, self.ri, self.max_dist_good_point)
-        self.stride = int(round(self.aoi.resolution_meter / 
-                                self.igc1.resolution_meter()))
+        self.stride = int(round(old_div(self.aoi.resolution_meter, 
+                                self.igc1.resolution_meter())))
         self.h = None
         self.r = None
 
@@ -256,22 +263,22 @@ class DemGenerate:
             numy = self.aoi.number_y_pixel
             numx = self.aoi.number_x_pixel
             if(numx > numy):
-                xstep = numx / multiprocessing.cpu_count()
+                xstep = old_div(numx, multiprocessing.cpu_count())
                 ystep = numy
             else:
                 xstep = numx
-                ystep = numy / multiprocessing.cpu_count()
+                ystep = old_div(numy, multiprocessing.cpu_count())
             for x in range(0, numx, xstep):
                 for y in range(0, numy, ystep):
                     arg.append([self.aoi.subset(x, y, xstep, ystep),
                                 include_image])
         else:
             if(lstart > sstart):
-                lstep = (lend - lstart) / multiprocessing.cpu_count()
+                lstep = old_div((lend - lstart), multiprocessing.cpu_count())
                 sstep = send - sstart
             else:
                 lstep = lend - lstart
-                sstep = (send - sstart) / multiprocessing.cpu_count()
+                sstep = old_div((send - sstart), multiprocessing.cpu_count())
             for ls in range(lstart, lend, lstep):
                 for ss in range(sstart, send, sstep):
                     arg.append([ls, ss, min(ls + lstep, lend),
@@ -336,7 +343,7 @@ class DemGenerate:
                                                          method = interpolate_method,
                                                          fill_value = fill_value) 
             except RuntimeError as e:
-                print "Got exception %s" % e
+                print("Got exception %s" % e)
                 if(not re.search("Qhull", str(e))):
                     raise e
                 # May fail because we have too few points, or they are in

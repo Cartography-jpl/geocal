@@ -1,12 +1,17 @@
+from __future__ import print_function
+from __future__ import absolute_import
+from builtins import str
+from builtins import object
 import os
 import shutil
 import tempfile
 import subprocess
 import time
 import geocal_swig
-from misc import makedirs_p
+from .misc import makedirs_p
+import six
 
-class VicarInterface:
+class VicarInterface(object):
     '''This provides a basic interface for calling a vicar routine 
     from Python. This include several helper routines for building up
     and running a command.'''
@@ -56,7 +61,10 @@ class VicarInterface:
         '''This build up a single argument, handling quotes and processing
         arrays'''
         if(getattr(self.__dict__[arg], '__iter__', False)):
-            arg2 = map(lambda x: str(x), self.__dict__[arg])
+            if(isinstance(self.__dict__[arg], six.string_types)):
+                arg2 = [self.__dict__[arg]]
+            else:
+                arg2 = [str(x) for x in self.__dict__[arg]]
             if(len(arg2) ==0): return ""
             if(isinstance(self.__dict__[arg][0], int) or
                isinstance(self.__dict__[arg][0], float)):
@@ -128,10 +136,10 @@ class VicarInterface:
     
         if(self.timing):
             time_start = time.time()
-            print "Starting " + self.title
+            print("Starting " + self.title)
         if(self.debug):
-            print "Vicar command:"
-            print self.cmd
+            print("Vicar command:")
+            print(self.cmd)
         d = None
         curdir = None
         successfully_done = False
@@ -139,7 +147,7 @@ class VicarInterface:
             d = tempfile.mkdtemp(dir='./')
             for i in self.input:
                 os.symlink(os.path.abspath(i), d + "/" + os.path.basename(i))
-            outabs = map(lambda x : os.path.abspath(x), self.output)
+            outabs = [os.path.abspath(x) for x in self.output]
             if(self.log_file): 
                 self.log_file = os.path.abspath(self.log_file)
             curdir = os.getcwd()
@@ -171,19 +179,19 @@ end-proc
                                               stderr=subprocess.STDOUT,
                                               stdout=f)
             except subprocess.CalledProcessError as ex:
-                print "Vicar call failed. Log of VICAR:"
+                print("Vicar call failed. Log of VICAR:")
                 with open("run.log") as f:
                     for line in f:
-                        print line,
+                        print(line, end=' ')
                     raise
             for f in outabs:
                 shutil.move(os.path.basename(f), f)
             self.post_run()
             if(not self.debug and self.print_output):
-                print "Vicar output:"
+                print("Vicar output:")
                 with open("run.log") as f:
                     for line in f:
-                        print line,
+                        print(line, end=' ')
             successfully_done = True
         finally:
             if(self.log_file):
@@ -195,8 +203,8 @@ end-proc
                 not self.debug)):
                 shutil.rmtree(d)
         if(self.timing):
-            print "Done with " + self.title +". Time: ", \
-                time.time() - time_start
+            print("Done with " + self.title +". Time: ", \
+                time.time() - time_start)
 
 
 class __VicarToNarray(VicarInterface):

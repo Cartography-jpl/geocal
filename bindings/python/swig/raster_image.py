@@ -514,13 +514,17 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         return _raster_image.RasterImage_ground_coordinate(self, *args)
 
 
-    def coordinate(self, Gc):
+    def coordinate(self, *args):
         """
 
-        ImageCoordinate GeoCal::RasterImage::coordinate(const Geodetic &Gc) const
+        blitz::Array< double, 2 > RasterImage::coordinate(const blitz::Array< double, 1 > &Lat, const blitz::Array< double, 1 >
+        &Lon) const
+        Translate a number of points at once.
 
+        This is really meant for use with python, where this is faster than
+        the normal interface. 
         """
-        return _raster_image.RasterImage_coordinate(self, Gc)
+        return _raster_image.RasterImage_coordinate(self, *args)
 
 
     def _v_grid_center_line_resolution(self):

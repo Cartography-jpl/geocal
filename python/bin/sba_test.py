@@ -1,3 +1,4 @@
+from __future__ import print_function
 from geocal import *
 import subprocess
 import os
@@ -35,7 +36,7 @@ def test_sba():
     sba = SimultaneousBundleAdjustment(igc, tpcol, dem);
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
-    print chisq
+    print(chisq)
     assert chisq < 2.5
 
 

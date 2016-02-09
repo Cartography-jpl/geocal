@@ -1,6 +1,6 @@
 from nose.tools import *
 from geocal_swig import *
-from vicar_interface import *
+from geocal.vicar_interface import *
 from nose.plugins.skip import Skip, SkipTest
 import os
 

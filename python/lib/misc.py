@@ -1,8 +1,12 @@
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from past.utils import old_div
 import os
 import errno
 import sys
 from geocal_swig import *
-import cPickle
+import pickle
 
 # This contains miscellenous routines that don't really belong anywhere else.
 
@@ -37,8 +41,8 @@ def cib01_mapinfo(desired_resolution = None):
                                              "/cib01_mapinfo.xml")
     if(desired_resolution):
         resbase = res.resolution_meter
-        res = res.scale(desired_resolution / resbase,
-                        desired_resolution / resbase)
+        res = res.scale(old_div(desired_resolution, resbase),
+                        old_div(desired_resolution, resbase))
     return res
 
 

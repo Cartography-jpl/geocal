@@ -1,9 +1,15 @@
+from __future__ import division
+from __future__ import absolute_import
+from builtins import map
+from builtins import range
+from past.utils import old_div
+from builtins import object
 from geocal_swig import *
-from igc_collection_extension import *
-from tie_point import *
-from ray_intersect import *
-from feature_detector_extension import *
-from misc import *
+from .igc_collection_extension import *
+from .tie_point import *
+from .ray_intersect import *
+from .feature_detector_extension import *
+from .misc import *
 import math
 import itertools
 import multiprocessing
@@ -215,8 +221,8 @@ class TiePointCollect(object):
         if(aoi):
             nline = aoi.number_y_pixel
             nsamp = aoi.number_x_pixel
-            step_line = max(int(math.floor((nline - 2 * border) / num_y)), 1)
-            step_samp = max(int(math.floor((nsamp - 2 * border) / num_x)), 1)
+            step_line = max(int(math.floor(old_div((nline - 2 * border), num_y))), 1)
+            step_samp = max(int(math.floor(old_div((nsamp - 2 * border), num_x))), 1)
             iplist = []
             for ln in range(border, nline - border, step_line):
                 for smp in range(border, nsamp - border, step_samp):
@@ -242,12 +248,12 @@ class TiePointCollect(object):
         func = TiePointWrap(self)
         if(pool):
             res = pool.map(func, iplist, 
-               len(iplist) / multiprocessing.cpu_count())
+               old_div(len(iplist), multiprocessing.cpu_count()))
         else:
-            res = map(func, iplist)
+            res = list(map(func, iplist))
         log.info("Done with matching")
         log.info("Time: %f" % (time.time() - tstart))
-        res = TiePointCollection(filter(lambda i : i is not None, res))
+        res = TiePointCollection([i for i in res if i is not None])
         log.info("Total number tp: %d" % len(res))
         log.info("Number GCPs:     %d" % res.number_gcp)
         return res
@@ -417,7 +423,7 @@ class TiePointCollectFM(object):
         log.info("Starting feature matching")
         for i in range(len(self.raster_image)):
             tpl = self.tp_list(kp_and_desc, kp_and_desc_ref, i)
-            for tp in tpl.itervalues():
+            for tp in tpl.values():
                 if(not tp.is_gcp):
                     tp2 = self.ri.ray_intersect(tp)
                     if(tp2 is not None):

@@ -1,5 +1,7 @@
+from __future__ import print_function
+from builtins import range
 from nose.tools import *
-from world_view2_reflectance import *
+from geocal.world_view2_reflectance import *
 import os
 import numpy as np
 import numpy.testing as nptest
@@ -49,8 +51,8 @@ def test_nitf():
     # Test data only has a few bands
     for i in range(9):
         if(wv2_imd.absCalFactors[i] > -999):
-            print wv2_imd.dn2TOAReflectance_factor(i)
-            print wv2_nitf.dn2TOAReflectance_factor(i)
+            print(wv2_imd.dn2TOAReflectance_factor(i))
+            print(wv2_nitf.dn2TOAReflectance_factor(i))
             assert_almost_equal(wv2_imd.dn2TOAReflectance_factor(i),
                                 wv2_nitf.dn2TOAReflectance_factor(i))
 

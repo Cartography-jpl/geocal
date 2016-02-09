@@ -3,7 +3,7 @@ from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 import subprocess
 import os
-import string
+import sys
 
 def cmd_exists(cmd):
     '''Check if a cmd exists by using type, which returns a nonzero status if
@@ -23,7 +23,9 @@ def test_call_sample_vicar_python():
         # verbage
         res = subprocess.check_output(["vicarb", 
                                        "call_sample_vicar_python.pdf"])
-        assert string.find(res, "ret=101") != -1
+        if sys.version_info > (3,):
+            res = res.decode("utf-8")
+        assert res.find("ret=101") != -1
     finally:
         if(curdir):
             os.chdir(curdir)

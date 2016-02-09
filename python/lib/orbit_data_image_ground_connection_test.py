@@ -1,3 +1,5 @@
+from __future__ import division
+from past.utils import old_div
 from geocal_swig import *
 from nose.tools import *
 
@@ -12,6 +14,6 @@ def test_odgc():
     assert_almost_equal(igc.resolution, 30, 2)
     assert igc.band == 0
     assert_almost_equal(igc.max_height, 9000, 2)
-    g = igc.ground_coordinate(ImageCoordinate(1, 1504 / 2))
+    g = igc.ground_coordinate(ImageCoordinate(1, old_div(1504, 2)))
     assert_almost_equal(g.latitude, -4.840663932844596, 2)
     assert_almost_equal(g.longitude, 165.5531678459437, 2)

@@ -1,13 +1,16 @@
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 from nose.tools import *
 from geocal_swig import *
-from tie_point_collect import *
-from image_ground_connection import *
-from sqlite_shelf import *
+from geocal.tie_point_collect import *
+from geocal.image_ground_connection import *
+from geocal.sqlite_shelf import *
 import multiprocessing
 from multiprocessing import Pool
 from nose.plugins.skip import Skip, SkipTest
-import cPickle
-import safe_matplotlib_import
+import pickle
+import geocal.safe_matplotlib_import
 import matplotlib.pyplot as plt
 from nose.plugins.skip import Skip, SkipTest
 
@@ -41,7 +44,7 @@ def test_tie_point_grid():
 def test_pickle():
     if(not have_serialize_supported()):
         raise SkipTest
-    t = cPickle.dumps(tp_collect)
+    t = pickle.dumps(tp_collect)
 
 def test_show_image():
     raise SkipTest
@@ -72,4 +75,4 @@ def test_fm():
     # Parallel doesn't work yet.
     pool = None
     tpcol = tp_collect.tie_point_list(pool = pool)
-    print tpcol
+    print(tpcol)

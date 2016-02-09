@@ -1,6 +1,6 @@
 from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
-from spot_reflectance import *
+from geocal.spot_reflectance import *
 import os
 import numpy as np
 import numpy.testing as nptest

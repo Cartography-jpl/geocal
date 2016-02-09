@@ -69,12 +69,23 @@ public:
   
 #ifdef SWIGPYTHON
   %extend {
-     int __cmp__(const Time& T2) {
-        if(*$self < T2)
-         return -1;
-        if(T2 < *$self)
-         return 1;
-        return 0;
+     bool __lt__(const Time& T2) {
+       return *$self < T2;
+     }
+     bool __le__(const Time& T2) {
+       return *$self <= T2;
+     }
+     bool __eq__(const Time& T2) {
+       return !(*$self < T2 || *$self > T2);
+     }
+     bool __ne__(const Time& T2) {
+       return (*$self < T2 || *$self > T2);
+     }
+     bool __gt__(const Time& T2) {
+       return *$self > T2;
+     }
+     bool __ge__(const Time& T2) {
+       return *$self >= T2;
      }
      Time __add__(double T) { return *$self + T; }
      Time __radd__(double T) { return *$self + T; }

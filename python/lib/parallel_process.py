@@ -1,6 +1,9 @@
+from __future__ import absolute_import
+from builtins import map
+from builtins import range
 # This contains support for doing parallel processing.
 
-from sqlite_shelf import write_shelve
+from .sqlite_shelf import write_shelve
 from functools import partial
 import numpy as np
 import geocal_swig
@@ -78,7 +81,7 @@ def parallel_process_image(img_in, out, process_nline, process_nsamp,
             process_list.append(job)
     if(shelve_name is None):
         if(number_process ==1):
-            res = map(do_parallel_process, process_list)
+            res = list(map(do_parallel_process, process_list))
         else:
             pool = Pool(number_process)
             res = pool.map(do_parallel_process, process_list)

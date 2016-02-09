@@ -1,11 +1,13 @@
+from __future__ import print_function
+from builtins import range
 from nose.tools import *
 from geocal_swig import *
-from igc_collection_extension import *
-from tie_point import *
-from image_ground_connection import *
-from igc_collection_extension import *
-from simultaneous_bundle_adjustment import *
-from lm_optimize import *
+from geocal.igc_collection_extension import *
+from geocal.tie_point import *
+from geocal.image_ground_connection import *
+from geocal.igc_collection_extension import *
+from geocal.simultaneous_bundle_adjustment import *
+from geocal.lm_optimize import *
 from nose.plugins.skip import Skip, SkipTest
 from sqlite_shelf import write_shelve, read_shelve
 import numpy as np
@@ -53,8 +55,8 @@ def test_sba_end_to_end():
     igc.parameter_subset = poriginal
     sba = SimultaneousBundleAdjustment(igccol, tparr, igc.dem)
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
-    print len(igccol.parameter_subset)
-    print igccol.parameter_subset
-    print ptrue
+    print(len(igccol.parameter_subset))
+    print(igccol.parameter_subset)
+    print(ptrue)
 
 

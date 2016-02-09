@@ -195,6 +195,7 @@ public:
   }
   $result = PyArray_New(&PyArray_Type, DIM, dims, type_to_npy<TYPE>(), 
 			stride, $1->data(), 0, 0, 0);
+  PyArray_UpdateFlags((PyArrayObject*)$result, NPY_ARRAY_WRITEABLE);
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
   PyArray_SetBaseObject((PyArrayObject*)$result, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 

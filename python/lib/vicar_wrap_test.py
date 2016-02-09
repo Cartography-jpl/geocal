@@ -1,5 +1,7 @@
+from __future__ import division
+from past.utils import old_div
 from geocal_swig import *
-from vicar_wrap import *
+from geocal.vicar_wrap import *
 from nose.tools import *
 import math
 from nose.plugins.skip import Skip, SkipTest
@@ -77,8 +79,8 @@ def test_compare_sc2rpc():
     sc2calc = lambda ic : sc2rpc(od, EciTodBurl.get_delta_ut1(), 
                                  leapsecond_file, ic,
                                  0.0, sc_to_cam, 2500000, 2500000)
-    cam = QuaternionCamera(sc_to_cam, 3376, 3649, 1.0 / 2500000, 
-                           1.0 / 2500000, 1.0, FrameCoordinate(1688.0,1824.5),
+    cam = QuaternionCamera(sc_to_cam, 3376, 3649, old_div(1.0, 2500000), 
+                           old_div(1.0, 2500000), 1.0, FrameCoordinate(1688.0,1824.5),
                            QuaternionCamera.LINE_IS_Y)
     ic = ImageCoordinate(1, 1)
     gc_sc2rpc = sc2calc(ic)

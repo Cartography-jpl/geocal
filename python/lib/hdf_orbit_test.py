@@ -1,9 +1,14 @@
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import range
+from past.utils import old_div
 import h5py
 import numpy as np
 import os
 from geocal_swig import *
 from nose.plugins.skip import Skip, SkipTest
-import cPickle
+import pickle
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
@@ -66,8 +71,8 @@ def test_sc2rpc():
     orb = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
-                           1.0 / 2500000,
-                           1.0 / 2500000,
+                           old_div(1.0, 2500000),
+                           old_div(1.0, 2500000),
                            1.0,
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
@@ -88,12 +93,12 @@ def test_pickle():
     if(not have_serialize_supported()):
         raise SkipTest
     orb = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
-    t = cPickle.dumps(orb, cPickle.HIGHEST_PROTOCOL)
-    orb2 = cPickle.loads(t)
+    t = pickle.dumps(orb, pickle.HIGHEST_PROTOCOL)
+    orb2 = pickle.loads(t)
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
-                           1.0 / 2500000,
-                           1.0 / 2500000,
+                           old_div(1.0, 2500000),
+                           old_div(1.0, 2500000),
                            1.0,
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
@@ -102,8 +107,8 @@ def test_pickle():
     pt2 = orb2.reference_surface_intersect_approximate(t, cam, FrameCoordinate(3375, 3648))
     assert distance(pt, pt2) < 0.01
     od1 = orb.orbit_data(t)
-    pick = cPickle.dumps(od1, cPickle.HIGHEST_PROTOCOL)
-    od2 = cPickle.loads(pick)
+    pick = pickle.dumps(od1, pickle.HIGHEST_PROTOCOL)
+    od2 = pickle.loads(pick)
     pt = od1.reference_surface_intersect_approximate(cam, FrameCoordinate(3375, 3648))
     pt2 = od2.reference_surface_intersect_approximate(cam, FrameCoordinate(3375, 3648))
     assert distance(pt, pt2) < 0.01

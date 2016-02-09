@@ -3,6 +3,7 @@ import subprocess
 import os
 from nose.plugins.skip import Skip, SkipTest
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
+import sys
 
 def test_shelve_igccol():
     '''Create a simple GDAL based Igc, and then make sure we can list it'''
@@ -21,4 +22,6 @@ def test_shelve_igccol():
                            test_data + "10MAY21-2.img", "Image 2",
                            test_data + "10MAY21-3.img", "Image 3"])
     lst = subprocess.check_output(["shelve_dir", "sqlite_shelf.db"])
+    if sys.version_info > (3,):
+        lst = lst.decode("utf-8")
     assert lst == "dem_initial\nigc\n"

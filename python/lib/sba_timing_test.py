@@ -1,10 +1,14 @@
+from __future__ import print_function
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 from nose.tools import *
 from geocal_swig import *
-from tie_point import *
-from image_ground_connection import *
-from igc_collection_extension import *
-from simultaneous_bundle_adjustment import *
-from lm_optimize import *
+from geocal.tie_point import *
+from geocal.image_ground_connection import *
+from geocal.igc_collection_extension import *
+from geocal.simultaneous_bundle_adjustment import *
+from geocal.lm_optimize import *
 from nose.plugins.skip import Skip, SkipTest
 import logging
 import sys
@@ -21,8 +25,8 @@ def test_time():
     orb = OrbitOffsetCorrection(orb_uncorr)
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
-                           1.0 / 2500000,
-                           1.0 / 2500000,
+                           old_div(1.0, 2500000),
+                           old_div(1.0, 2500000),
                            1.0,
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
@@ -57,16 +61,16 @@ def test_time():
     igc_coll.orbit.parameter = parameter_true
     tplist = []
     ntogether = 6
-    for basecam in range(ntogether / 2, nimg, ntogether / 2):
+    for basecam in range(old_div(ntogether, 2), nimg, old_div(ntogether, 2)):
         for ln in range(border, nl - border, 
-                        int(math.ceil((nl - border * 2) / 10.0))):
+                        int(math.ceil(old_div((nl - border * 2), 10.0)))):
             for smp in range(border, ns - border, 
-                             int(math.ceil((ns - border * 2) / 10.0))):
+                             int(math.ceil(old_div((ns - border * 2), 10.0)))):
                 ic = ImageCoordinate(ln, smp)
                 gp = igc_coll.ground_coordinate(basecam, ic)
                 tp = TiePoint(nimg)
-                for i in range(basecam - ntogether / 2,
-                               min(basecam + ntogether  / 2, nimg)):
+                for i in range(basecam - old_div(ntogether, 2),
+                               min(basecam + old_div(ntogether, 2), nimg)):
                     tp.image_location[i] = igc_coll.image_coordinate(i, gp), \
                                            0.05, 0.05
                 tp.ground_location = gp
@@ -78,7 +82,7 @@ def test_time():
 #    res = sba.sba_jacobian(sba.parameter)
 #    print res.tolil()
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
-    print len(igc_coll.parameter_subset)
-    print igc_coll.parameter_subset
-    print igc_coll.parameter_mask
+    print(len(igc_coll.parameter_subset))
+    print(igc_coll.parameter_subset)
+    print(igc_coll.parameter_mask)
 

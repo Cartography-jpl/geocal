@@ -1,4 +1,9 @@
-from instrument_reflectance import *
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import range
+from past.utils import old_div
+from .instrument_reflectance import *
 import math
 
 class Geoeye1Reflectance(InstrumentReflectance):
@@ -79,20 +84,20 @@ class Geoeye1Reflectance(InstrumentReflectance):
          if line.find("firstLineElevationAngle = ") != -1:
             self.solarElevation = float(line.split()[2].split(";")[0])
             self.solarZenithAngle = 90. - self.solarElevation
-            self.solarZenithAngleInRadians = self.solarZenithAngle*(math.pi/180.)
+            self.solarZenithAngleInRadians = self.solarZenithAngle*(old_div(math.pi,180.))
             continue         
 
 
    def printMetadata(self):
-      print "Metadata:"
-      print "========="
-      print "datetime: ", self.year, self.month, self.day, self.hh, self.mm, self.ssdd
-      print "solar elevation/zenith: ", self.solarElevation, self.solarZenithAngle
-      print "solar distance: ", self.solarDist
+      print("Metadata:")
+      print("=========")
+      print("datetime: ", self.year, self.month, self.day, self.hh, self.mm, self.ssdd)
+      print("solar elevation/zenith: ", self.solarElevation, self.solarZenithAngle)
+      print("solar distance: ", self.solarDist)
 
       for i in range(5):
-         print "-------"
-         print "Band: ", i+1
-         print "gain: ", self.gain[i], "offset: ", self.offset[i]
-         print "effectiveBandwidth: ", self.effectiveBandwidths[i]
+         print("-------")
+         print("Band: ", i+1)
+         print("gain: ", self.gain[i], "offset: ", self.offset[i])
+         print("effectiveBandwidth: ", self.effectiveBandwidths[i])
 

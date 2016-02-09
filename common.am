@@ -54,6 +54,9 @@ endif
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 
+INSTALL_EXEC_HOOK=
+install-exec-hook: $(INSTALL_EXEC_HOOK)
+
 INSTALL_DATA_HOOK=
 install-data-hook: $(INSTALL_DATA_HOOK)
 

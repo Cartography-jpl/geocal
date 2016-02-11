@@ -8365,7 +8365,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RasterImage_coordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
   GeoCal::GroundCoordinate *arg2 = 0 ;
@@ -8376,10 +8376,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_coordinate(PyObject *SWIGUNUSEDPARM(self)
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
-  PyObject *swig_obj[2] ;
   GeoCal::ImageCoordinate result;
   
-  if (!SWIG_Python_UnpackTuple(args,"RasterImage_coordinate",2,2,swig_obj)) SWIG_fail;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
@@ -8436,6 +8435,113 @@ SWIGINTERN PyObject *_wrap_RasterImage_coordinate(PyObject *SWIGUNUSEDPARM(self)
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  blitz::Array< double,1 > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,1 > a3 ;
+  PythonObject numpy3 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_coordinate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj)
+      return NULL;
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj)
+      return NULL;
+      a3.reference(to_blitz_array<double, 1>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RasterImage const *)arg1)->coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RasterImage_coordinate(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RasterImage_coordinate",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_RasterImage_coordinate__SWIG_0(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_RasterImage_coordinate__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RasterImage_coordinate'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RasterImage::coordinate(GeoCal::GroundCoordinate const &) const\n"
+    "    GeoCal::RasterImage::coordinate(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &) const\n");
+  return 0;
 }
 
 
@@ -11275,8 +11381,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage_coordinate", _wrap_RasterImage_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"ImageCoordinate GeoCal::RasterImage::coordinate(const Geodetic &Gc) const\n"
+		"blitz::Array< double, 2 > RasterImage::coordinate(const blitz::Array< double, 1 > &Lat, const blitz::Array< double, 1 >\n"
+		"&Lon) const\n"
+		"Translate a number of points at once.\n"
 		"\n"
+		"This is really meant for use with python, where this is faster than\n"
+		"the normal interface. \n"
 		""},
 	 { (char *)"RasterImage__v_grid_center_line_resolution", (PyCFunction)_wrap_RasterImage__v_grid_center_line_resolution, METH_O, (char *)"\n"
 		"\n"

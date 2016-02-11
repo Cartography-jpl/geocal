@@ -76,7 +76,8 @@ public:
   // SubMapProjectedImage cover(const 
   //      std::vector<boost::shared_ptr<GroundCoordinate> >& Pt,
   //      int boundary = 0) const;
-
+  blitz::Array<double, 2> coordinate(const blitz::Array<double, 1>& Lat,
+				     const blitz::Array<double, 1>& Lon) const;
   %python_attribute(grid_center_line_resolution, double)
   %python_attribute(grid_center_sample_resolution, double)
   %python_attribute(has_rpc, bool)

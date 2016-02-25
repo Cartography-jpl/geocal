@@ -43,7 +43,8 @@ public:
   void print(std::ostream& Os) const;
   void write_out(const std::string& Keyword, int Val);
   void write_out(const std::string& Keyword, double Val);
-  void write_out(const std::string& Keyword, const std::string& Val);
+  void write_out(const std::string& Keyword, const std::string& Val, 
+		 int Max_len = 250);
 
   static int zvpw(char *name, void *value, int *count);
   static int zvparmw(char *name, void *value, int *count, int *def,

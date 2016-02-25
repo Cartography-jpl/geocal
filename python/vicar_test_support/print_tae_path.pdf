@@ -1,0 +1,8 @@
+process help=*
+end-proc
+.HELP
+This is a quick program that prints out the TAE_PATH environment 
+variable. This is a bit convoluted, but it lets us get the TAE_PATH
+used by vicarb without needing to make any assumptions about where the
+setup file is for this.
+.END

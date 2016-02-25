@@ -231,7 +231,7 @@ class VicarArgument(geocal_swig.generic_object.GenericObject):
     def write_out(self, *args):
         """
 
-        void VicarArgument::write_out(const std::string &Keyword, const std::string &Val)
+        void VicarArgument::write_out(const std::string &Keyword, const std::string &Val, int Max_len=250)
 
         """
         return _vicar_argument.VicarArgument_write_out(self, *args)

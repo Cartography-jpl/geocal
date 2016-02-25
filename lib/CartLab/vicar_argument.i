@@ -17,7 +17,8 @@ public:
   VicarArgument(int ARGC, char** ARGV, bool copy_primary_input_label = false);
   void write_out(const std::string& Keyword, int Val);
   void write_out(const std::string& Keyword, double Val);
-  void write_out(const std::string& Keyword, const std::string& Val);
+  void write_out(const std::string& Keyword, const std::string& Val,
+		 int Max_lin = 250);
   %extend {
     static std::string type_string(const std::string& Keyword)
     { std::string res1("b"); int res2;

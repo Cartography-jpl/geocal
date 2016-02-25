@@ -197,7 +197,7 @@ void VicarArgument::write_out(const std::string& Keyword,
   struct PARBLK parblk; 
 
   q_init(&parblk, 500, P_ABORT);
-  if(Val.size() > max_string_len - 1)
+  if(Val.size() > (size_t) (Max_len - 1))
     throw Exception("string value is too long");
   const char* v[1];
   v[0] = Val.c_str();

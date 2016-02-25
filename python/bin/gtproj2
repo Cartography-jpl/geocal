@@ -1,0 +1,11 @@
+#! /usr/bin/env python
+#
+# This implements the gtproj2 routine. This is a replacement for gtproj
+# which adds support for more map projections.
+
+#from geocal_swig._swig_wrap import *
+from geocal import *
+#import sys
+#t = VicarArgument(sys.argv)
+print("hi there")
+

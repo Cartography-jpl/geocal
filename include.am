@@ -26,4 +26,5 @@ include python/python.am
 include python/bin/bin.am
 include python/lib/lib.am
 include python/doc/doc_python.am
+include python/vicar_test_support/vicar_test_support.am
 

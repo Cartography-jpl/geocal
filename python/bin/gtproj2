@@ -3,9 +3,44 @@
 # This implements the gtproj2 routine. This is a replacement for gtproj
 # which adds support for more map projections.
 
-#from geocal_swig._swig_wrap import *
 from geocal import *
-#import sys
-#t = VicarArgument(sys.argv)
-print("hi there")
+import sys
 
+t = VicarArgument(sys.argv)
+
+ibfname,labfname1,labfname2 = t["inp"]
+f = IbisFile(ibfname, IbisFile.UPDATE)
+cin = VicarLiteRasterImage(labfname1).map_info.coordinate_converter
+cout = VicarLiteRasterImage(labfname2).map_info.coordinate_converter
+
+# Get input and output columns. The z column might be given, or might not.
+# If missing, then we always have a height of 0.
+if(len(t["incol"]) == 2):
+    ix,iy = t["incol"]
+    ix -= 1
+    iy -= 1
+    iz = None
+else:
+    ix,iy,iz = t["incol"]
+    ix -= 1
+    iy -= 1
+    iz -= 1
+if(len(t["outcol"]) == 2):
+    ox,oy = t["outcol"]
+    ox -= 1
+    oy -= 1
+    oz = None
+else:
+    ox,oy,oz = t["outcol"]
+    ox -= 1
+    oy -= 1
+    oz -= 1
+
+for r in range(f.number_row):
+    if(iz):
+        x,y,z = f[r,ix],f[r,iy],f[r,iz]
+    else:
+        x,y,z = f[r,ix],f[r,iy],0.0
+    f[r,ox],f[r,oy],zmaybe = cout.convert_to_coordinate(cin.convert_from_coordinate(x,y,z))
+    if(oz):
+        f[r,oz] = zmaybe

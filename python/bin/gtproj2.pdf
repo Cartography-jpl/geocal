@@ -43,7 +43,7 @@ The original gtproj had an optional EP_PAR parameter. This
 doesn't seem to actually be used anywhere, so we don't support
 this in gtproj2. We could if this ended up being an issue.
 
-The 'EPSOC and 'TEC keywords sare used in gtproj to alternative 
+The 'EPSOC and 'TEC keywords are used in gtproj to select alternative 
 mapping packages. For compatibility we accept this keyword (so old
 code doesn't break), but this doesn't actually do anything. In all
 cases we use geocal to do the coordinate conversions.

@@ -42,14 +42,17 @@ namespace GeoCal {
   with to map VICAR and GDAL together. 
 *******************************************************************/
 
-class VicarOgr {
+class VicarOgr : public Printable<VicarOgr> {
 public:
   VicarOgr();
+  void vicar_to_gtiff(const VicarFile& F, const std::string& Fname);
+  void vicar_to_gtiff(const VicarLiteFile& F, const std::string& Fname);
   MapInfo from_vicar(const VicarFile& F);
   MapInfo from_vicar(const VicarLiteFile& F);
   void to_vicar(const MapInfo& Mi, VicarFile& F);
 private:
   template<class T> MapInfo from_vicar_template(const T& F);
+  template<class T> void vicar_to_gtiff_template(const T& F, const char* Fname);
   std::vector<int> geotiff_tag_ascii;
   std::vector<int> geotiff_tag_double;
   std::vector<int> geotiff_tag_short;

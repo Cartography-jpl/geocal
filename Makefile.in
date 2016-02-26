@@ -456,7 +456,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/worldview2_cloudmask_wrap.cc \
 	@swigsrc@/doughnut_average_wrap.cc \
 	@swigsrc@/paint_class_wrap.cc \
-	@swigsrc@/vicar_lite_file_wrap.cc \
+	@swigsrc@/vicar_lite_file_wrap.cc @swigsrc@/vicar_ogr_wrap.cc \
 	@swigsrc@/cart_lab_multifile_wrap.cc \
 	@swigsrc@/landsat7_panchromatic_wrap.cc \
 	@swigsrc@/mspi_config_file_wrap.cc \
@@ -614,6 +614,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-doughnut_average_wrap.lo \
 	@swigsrc@/_swig_wrap_la-paint_class_wrap.lo \
 	@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo \
+	@swigsrc@/_swig_wrap_la-vicar_ogr_wrap.lo \
 	@swigsrc@/_swig_wrap_la-cart_lab_multifile_wrap.lo \
 	@swigsrc@/_swig_wrap_la-landsat7_panchromatic_wrap.lo \
 	@swigsrc@/_swig_wrap_la-mspi_config_file_wrap.lo \
@@ -1241,6 +1242,7 @@ geocal_test_all_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(geocal_test_all_LDFLAGS) \
 	$(LDFLAGS) -o $@
 am__dist_afidspythonvdev_SCRIPTS_DIST =  \
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
@@ -2315,7 +2317,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/worldview2_cloudmask_wrap.cc \
 	@swigsrc@/doughnut_average_wrap.cc \
 	@swigsrc@/paint_class_wrap.cc \
-	@swigsrc@/vicar_lite_file_wrap.cc \
+	@swigsrc@/vicar_lite_file_wrap.cc @swigsrc@/vicar_ogr_wrap.cc \
 	@swigsrc@/cart_lab_multifile_wrap.cc \
 	@swigsrc@/landsat7_panchromatic_wrap.cc \
 	@swigsrc@/mspi_config_file_wrap.cc \
@@ -2713,9 +2715,12 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
-dist_afidspythonvdev_SCRIPTS = $(srcdir)/$(srcpythonbin)/gtproj2 \
-	$(am__append_44)
-dist_afidspythonvdev_DATA = $(srcdir)/$(srcpythonbin)/gtproj2.pdf \
+dist_afidspythonvdev_SCRIPTS =  \
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
+	$(srcdir)/$(srcpythonbin)/gtproj2 $(am__append_44)
+dist_afidspythonvdev_DATA =  \
+	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
+	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
@@ -3137,6 +3142,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-vicar_ogr_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-cart_lab_multifile_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-landsat7_panchromatic_wrap.lo:  \
@@ -4694,6 +4701,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_lite_file_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_ogr_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo@am__quote@
@@ -5632,6 +5640,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_lite_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_lite_file_wrap.lo `test -f '@swigsrc@/vicar_lite_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_lite_file_wrap.cc
+
+@swigsrc@/_swig_wrap_la-vicar_ogr_wrap.lo: @swigsrc@/vicar_ogr_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_ogr_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_ogr_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_ogr_wrap.lo `test -f '@swigsrc@/vicar_ogr_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_ogr_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_ogr_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_ogr_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/vicar_ogr_wrap.cc' object='@swigsrc@/_swig_wrap_la-vicar_ogr_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-vicar_ogr_wrap.lo `test -f '@swigsrc@/vicar_ogr_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_ogr_wrap.cc
 
 @swigsrc@/_swig_wrap_la-cart_lab_multifile_wrap.lo: @swigsrc@/cart_lab_multifile_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-cart_lab_multifile_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-cart_lab_multifile_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-cart_lab_multifile_wrap.lo `test -f '@swigsrc@/cart_lab_multifile_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/cart_lab_multifile_wrap.cc

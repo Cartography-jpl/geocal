@@ -73,11 +73,7 @@ Srtm90mData::Srtm90mData
 		       No_coverage_is_error,
 		       FILL_VALUE)
 {
-  file_name_end = "_L1.tif";
-
-// All 90m DEM files have corners at 0.5 seconds offset from lat/lon in the file name;
-// all files have pixel size = (0.000832870755900,-0.000832870755900)
-// So, we can represent this 0.5 sec offset in degree of longitude and degree of latitude:
+  file_name_end = "_L2.tif";
 
   lat_ref = 47,
   lon_ref = -87;

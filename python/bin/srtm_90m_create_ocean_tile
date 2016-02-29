@@ -43,14 +43,13 @@ if(m.group(3) == 'w'):
 ogr = OgrWrapper('GEOGCS["unknown",DATUM["unknown",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]]],PRIMEM["Greenwich",0],UNIT[,0.0174532925199433]]')
 cconv = OgrCoordinateConverter(ogr)
 
-# All 90m DEM files have corners at 0.5 seconds offset from lat/lon in the file name; 
-# all files have pixel size = (0.000832870755900,-0.000832870755900)
-# So, we can represent this 0.5 sec offset in degree of longitude and degree of latitude:
-offsetLon = 0.5/3600
-offsetLat = -0.5/3600
-minfo = MapInfo(cconv, lon-offsetLon, lat+1-offsetLat, lon + 1+offsetLon, lat+offsetLat, 1201, 1201)
-# Add border
-#minfo = minfo.subset(-0.5, -0.5, 1201,1201)
+# Create the mapinfo that goes with this set
+minfo = MapInfo(cconv,
+               lon, lat + 1, lon + 1, lat, 1200,
+               1200);
+# Add borde
+minfo = minfo.subset(-0.5,-0.5,1201,1201);
+
 f = GdalRasterImage("%s_L1.tif" % args.tile_coordinate, "gtiff", minfo, 1, 
                     GdalRasterImage.Int16, "COMPRESS=LZW")
 f.write(0, 0, np.zeros((1201,1201), dtype=np.int16))

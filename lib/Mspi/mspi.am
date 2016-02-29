@@ -53,6 +53,7 @@ geocal_test_all_SOURCES+= @srcmspi@/air_mspi_orbit_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/ground_mspi_orbit_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/ground_mspi_igc_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/usgs_dem_test.cc
+geocal_test_all_SOURCES+= @srcmspi@/srtm_90m_dem_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/air_mspi_time_table_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/air_mspi_l1b1_test.cc
 geocal_test_all_SOURCES+= @srcmspi@/air_mspi_igc_test.cc

@@ -209,6 +209,7 @@ VicarOgr::VicarOgr()
   geotiff_tag_double.push_back(ProjLinearUnitSizeGeoKey);
   geotiff_tag_double.push_back(ProjNatOriginLatGeoKey);
   geotiff_tag_double.push_back(ProjOriginLatGeoKey);
+  geotiff_tag_double.push_back(ProjOriginLongGeoKey);
   geotiff_tag_double.push_back(ProjNatOriginLongGeoKey);
   geotiff_tag_double.push_back(ProjRectifiedGridAngleGeoKey);
   geotiff_tag_double.push_back(ProjScaleAtNatOriginGeoKey);

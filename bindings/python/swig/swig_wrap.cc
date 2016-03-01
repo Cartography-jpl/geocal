@@ -174,6 +174,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_mspi_orbit)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_mspi_igc)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(usgs_dem)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(srtm_90m_dem)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_time_table)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_l1b1)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_igc)(void);
@@ -514,6 +515,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_ground_mspi_orbit", SWIG_INIT_FUNC(ground_mspi_orbit));
   SWIG_INIT_MODULE(package, "_ground_mspi_igc", SWIG_INIT_FUNC(ground_mspi_igc));
   SWIG_INIT_MODULE(package, "_usgs_dem", SWIG_INIT_FUNC(usgs_dem));
+  SWIG_INIT_MODULE(package, "_srtm_90m_dem", SWIG_INIT_FUNC(srtm_90m_dem));
   SWIG_INIT_MODULE(package, "_air_mspi_time_table", SWIG_INIT_FUNC(air_mspi_time_table));
   SWIG_INIT_MODULE(package, "_air_mspi_l1b1", SWIG_INIT_FUNC(air_mspi_l1b1));
   SWIG_INIT_MODULE(package, "_air_mspi_igc", SWIG_INIT_FUNC(air_mspi_igc));

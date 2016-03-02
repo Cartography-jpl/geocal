@@ -2067,7 +2067,9 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mspi/3.mspi_camera_model.config \
 	@geocalunittestdata@/mspi/3.instrument_info.config \
 	@geocalunittestdata@/mspi/3.l1b1_table \
-	@geocalunittestdata@/image_coordinate_test.xml @docpythonsrc@ \
+	@geocalunittestdata@/image_coordinate_test.xml \
+	@geocalunittestdata@/srtm_90m_dem/n34w120_L2.tif \
+	@geocalunittestdata@/srtm_90m_dem/n43w69_L2.tif @docpythonsrc@ \
 	@vicartestsupportsrc@ $(am__empty)
 pkgconfig_DATA = 
 

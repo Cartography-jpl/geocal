@@ -151,6 +151,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_offset_correction)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_piecewise_correction)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(tle_orbit)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_ogr)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_camera)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_orbit)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(quickbird_camera)(void);
@@ -163,7 +164,6 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(doughnut_average)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(paint_class)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_lite_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_ogr)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(cart_lab_multifile)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(landsat7_panchromatic)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(mspi_config_file)(void);
@@ -492,6 +492,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_orbit_offset_correction", SWIG_INIT_FUNC(orbit_offset_correction));
   SWIG_INIT_MODULE(package, "_orbit_piecewise_correction", SWIG_INIT_FUNC(orbit_piecewise_correction));
   SWIG_INIT_MODULE(package, "_tle_orbit", SWIG_INIT_FUNC(tle_orbit));
+  SWIG_INIT_MODULE(package, "_vicar_ogr", SWIG_INIT_FUNC(vicar_ogr));
   SWIG_INIT_MODULE(package, "_argus_camera", SWIG_INIT_FUNC(argus_camera));
   SWIG_INIT_MODULE(package, "_argus_orbit", SWIG_INIT_FUNC(argus_orbit));
   SWIG_INIT_MODULE(package, "_quickbird_camera", SWIG_INIT_FUNC(quickbird_camera));
@@ -504,7 +505,6 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_doughnut_average", SWIG_INIT_FUNC(doughnut_average));
   SWIG_INIT_MODULE(package, "_paint_class", SWIG_INIT_FUNC(paint_class));
   SWIG_INIT_MODULE(package, "_vicar_lite_file", SWIG_INIT_FUNC(vicar_lite_file));
-  SWIG_INIT_MODULE(package, "_vicar_ogr", SWIG_INIT_FUNC(vicar_ogr));
   SWIG_INIT_MODULE(package, "_cart_lab_multifile", SWIG_INIT_FUNC(cart_lab_multifile));
   SWIG_INIT_MODULE(package, "_landsat7_panchromatic", SWIG_INIT_FUNC(landsat7_panchromatic));
   SWIG_INIT_MODULE(package, "_mspi_config_file", SWIG_INIT_FUNC(mspi_config_file));

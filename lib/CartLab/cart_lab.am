@@ -48,6 +48,7 @@ if HAVE_GDAL
   geocalinc_HEADERS+= @srccartlab@/vicar_ogr.h
   libgeocal_la_SOURCES+= @srccartlab@/vicar_ogr.cc
   geocal_test_all_SOURCES+= @srccartlab@/vicar_ogr_test.cc
+   SWIG_SRC += @swigsrc@/vicar_ogr_wrap.cc
 endif # End HAVE_GDAL
 endif # End HAVE_VICAR_RTL
 
@@ -63,7 +64,6 @@ SWIG_SRC += @swigsrc@/worldview2_cloudmask_wrap.cc
 SWIG_SRC += @swigsrc@/doughnut_average_wrap.cc
 SWIG_SRC += @swigsrc@/paint_class_wrap.cc
 SWIG_SRC += @swigsrc@/vicar_lite_file_wrap.cc
-SWIG_SRC += @swigsrc@/vicar_ogr_wrap.cc
 SWIG_SRC += @swigsrc@/cart_lab_multifile_wrap.cc
 SWIG_SRC += @swigsrc@/landsat7_panchromatic_wrap.cc
 SWIG_SRC_VICAR_RTL += @swigsrc@/material_detect_wrap.cc

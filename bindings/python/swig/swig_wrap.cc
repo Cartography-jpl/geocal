@@ -151,7 +151,6 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_offset_correction)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_piecewise_correction)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(tle_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_ogr)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_camera)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_orbit)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(quickbird_camera)(void);
@@ -213,6 +212,9 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(datum_geoid96)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(srtm_dem)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_raster_image)(void);
+#endif
+#ifdef HAVE_GDAL_VICAR_RTL
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_ogr)(void);
 #endif
 }
 
@@ -492,7 +494,6 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_orbit_offset_correction", SWIG_INIT_FUNC(orbit_offset_correction));
   SWIG_INIT_MODULE(package, "_orbit_piecewise_correction", SWIG_INIT_FUNC(orbit_piecewise_correction));
   SWIG_INIT_MODULE(package, "_tle_orbit", SWIG_INIT_FUNC(tle_orbit));
-  SWIG_INIT_MODULE(package, "_vicar_ogr", SWIG_INIT_FUNC(vicar_ogr));
   SWIG_INIT_MODULE(package, "_argus_camera", SWIG_INIT_FUNC(argus_camera));
   SWIG_INIT_MODULE(package, "_argus_orbit", SWIG_INIT_FUNC(argus_orbit));
   SWIG_INIT_MODULE(package, "_quickbird_camera", SWIG_INIT_FUNC(quickbird_camera));
@@ -554,6 +555,9 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_datum_geoid96", SWIG_INIT_FUNC(datum_geoid96));
   SWIG_INIT_MODULE(package, "_srtm_dem", SWIG_INIT_FUNC(srtm_dem));
   SWIG_INIT_MODULE(package, "_vicar_raster_image", SWIG_INIT_FUNC(vicar_raster_image));
+#endif
+#ifdef HAVE_GDAL_VICAR_RTL
+  SWIG_INIT_MODULE(package, "_vicar_ogr", SWIG_INIT_FUNC(vicar_ogr));
 #endif
 
 #if PY_MAJOR_VERSION >= 3

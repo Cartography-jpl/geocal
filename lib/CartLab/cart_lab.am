@@ -63,7 +63,6 @@ SWIG_SRC += @swigsrc@/worldview2_cloudmask_wrap.cc
 SWIG_SRC += @swigsrc@/doughnut_average_wrap.cc
 SWIG_SRC += @swigsrc@/paint_class_wrap.cc
 SWIG_SRC += @swigsrc@/vicar_lite_file_wrap.cc
-SWIG_SRC += @swigsrc@/vicar_ogr_wrap.cc
 SWIG_SRC += @swigsrc@/cart_lab_multifile_wrap.cc
 SWIG_SRC += @swigsrc@/landsat7_panchromatic_wrap.cc
 SWIG_SRC_VICAR_RTL += @swigsrc@/material_detect_wrap.cc
@@ -74,6 +73,7 @@ SWIG_SRC_VICAR_RTL += @swigsrc@/vicar_dem_wrap.cc
 SWIG_SRC_VICAR_RTL += @swigsrc@/datum_geoid96_wrap.cc
 SWIG_SRC_VICAR_RTL += @swigsrc@/srtm_dem_wrap.cc
 SWIG_SRC_VICAR_RTL += @swigsrc@/vicar_raster_image_wrap.cc
+SWIG_SRC_GDAL_VICAR_RTL += @swigsrc@/vicar_ogr_wrap.cc
 
 geocal_test_all_SOURCES+= @srccartlab@/argus_camera_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/argus_orbit_test.cc

@@ -20692,6 +20692,20 @@ fi
 
 
 #=================================================================
+# Have a little bit of code that depends on having both GDAL
+# and VICAR available, so add a test for that
+
+ if test "$have_vicar_rtl" = "yes" -a "$have_gdal" = "yes"; then
+  HAVE_VICAR_RTL_TRUE=
+  HAVE_VICAR_RTL_FALSE='#'
+else
+  HAVE_VICAR_RTL_TRUE='#'
+  HAVE_VICAR_RTL_FALSE=
+fi
+
+
+
+#=================================================================
 # We have some unit tests that make use of vicarb if it is available.
 # It is fine if it isn't, we just skip these tests.
 
@@ -22877,6 +22891,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_VICAR_GDALPLUGIN_TRUE}" && test -z "${BUILD_VICAR_GDALPLUGIN_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_VICAR_GDALPLUGIN\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_VICAR_RTL_TRUE}" && test -z "${HAVE_VICAR_RTL_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_VICAR_RTL\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_AFIDS_TRUE}" && test -z "${HAVE_AFIDS_FALSE}"; then

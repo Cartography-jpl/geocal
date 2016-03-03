@@ -3,6 +3,7 @@
 #include "mspi_config_file.h"
 #include "did_datum.h"
 #include "usgs_dem.h"
+#include "srtm_90m_dem.h"
 #include "simple_dem.h"
 #include "geocal_serialize_support.h"
 #include <boost/lexical_cast.hpp>
@@ -112,7 +113,12 @@ AirMspiIgcCollection::AirMspiIgcCollection
       datum(new DidDatum(c.value<std::string>("MSL_DATA")));
     dem.reset(new UsgsDem(c.value<std::string>("USGSDATA"), true, datum));
     dem_resolution = 10.0;
-  } else {
+  } else if (c.value<std::string>("dem_type") == "srtm_90m"){
+	boost::shared_ptr<Datum>
+	datum(new DidDatum(c.value<std::string>("MSL_DATA")));
+	dem.reset(new Srtm90mDem(c.value<std::string>("USGSDATA"), false, datum));
+	dem_resolution = 90.0;
+  }else{
     double h = (c.have_key("simple_dem_height") ?
 		c.value<double>("simple_dem_height") : 0);
     dem.reset(new SimpleDem(h));

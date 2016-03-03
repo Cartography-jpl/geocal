@@ -711,6 +711,8 @@ CARTO_CFLAGS
 HAVE_AFIDS_FALSE
 HAVE_AFIDS_TRUE
 AFIDS_PREFIX
+HAVE_GDAL_VICAR_RTL_FALSE
+HAVE_GDAL_VICAR_RTL_TRUE
 BUILD_VICAR_GDALPLUGIN_FALSE
 BUILD_VICAR_GDALPLUGIN_TRUE
 HAVE_VICAR_GDALPLUGIN_FALSE
@@ -20696,11 +20698,11 @@ fi
 # and VICAR available, so add a test for that
 
  if test "$have_vicar_rtl" = "yes" -a "$have_gdal" = "yes"; then
-  HAVE_VICAR_RTL_TRUE=
-  HAVE_VICAR_RTL_FALSE='#'
+  HAVE_GDAL_VICAR_RTL_TRUE=
+  HAVE_GDAL_VICAR_RTL_FALSE='#'
 else
-  HAVE_VICAR_RTL_TRUE='#'
-  HAVE_VICAR_RTL_FALSE=
+  HAVE_GDAL_VICAR_RTL_TRUE='#'
+  HAVE_GDAL_VICAR_RTL_FALSE=
 fi
 
 
@@ -22893,8 +22895,8 @@ if test -z "${BUILD_VICAR_GDALPLUGIN_TRUE}" && test -z "${BUILD_VICAR_GDALPLUGIN
   as_fn_error $? "conditional \"BUILD_VICAR_GDALPLUGIN\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${HAVE_VICAR_RTL_TRUE}" && test -z "${HAVE_VICAR_RTL_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_VICAR_RTL\" was never defined.
+if test -z "${HAVE_GDAL_VICAR_RTL_TRUE}" && test -z "${HAVE_GDAL_VICAR_RTL_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_GDAL_VICAR_RTL\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_AFIDS_TRUE}" && test -z "${HAVE_AFIDS_FALSE}"; then

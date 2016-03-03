@@ -61,7 +61,7 @@ AC_VICAR_GDALPLUGIN(optional, cannot_build, default_search)
 # Have a little bit of code that depends on having both GDAL
 # and VICAR available, so add a test for that
 
-AM_CONDITIONAL([HAVE_VICAR_RTL], [test "$have_vicar_rtl" = "yes" -a "$have_gdal" = "yes"])
+AM_CONDITIONAL([HAVE_GDAL_VICAR_RTL], [test "$have_vicar_rtl" = "yes" -a "$have_gdal" = "yes"])
 
 
 #=================================================================

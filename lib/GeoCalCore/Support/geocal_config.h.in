@@ -47,6 +47,9 @@
 /* Defined if we have GDAL */
 #undef HAVE_GDAL
 
+/* Defined if we have GDAL and VICAR RTL */
+#undef HAVE_GDAL_VICAR_RTL
+
 /* Defined if we have GEOS */
 #undef HAVE_GEOS
 

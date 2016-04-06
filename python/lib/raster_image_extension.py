@@ -76,12 +76,28 @@ def _read_all(self):
 
 geocal_swig.RasterImage.read_all = _read_all
 
+def _read_all2(self):
+    '''Do a read for the whole image. We do this often enough that it is
+    nice to have a function for this.'''
+    return self.read(0,0,self.raster_image(0).number_line, 
+                     self.raster_image(0).number_sample)
+
+geocal_swig.RasterImageMultiBand.read_all = _read_all2
+
 def _read_all_double(self):
     '''Do a read for the whole image. We do this often enough that it is
     nice to have a function for this.'''
     return self.read_double(0,0,self.number_line, self.number_sample)
 
 geocal_swig.RasterImage.read_all_double = _read_all_double
+
+def _read_all_double2(self):
+    '''Do a read for the whole image. We do this often enough that it is
+    nice to have a function for this.'''
+    return self.read_double(0,0,self.raster_image(0).number_line, 
+                            self.raster_image(0).number_sample)
+
+geocal_swig.RasterImageMultiBand.read_all_double = _read_all_double2
 
 def _read_all_byte_scale(self):
     '''OpenCV has some functions that only work with byte data. This function
@@ -92,6 +108,7 @@ def _read_all_byte_scale(self):
     return (d / float(d.max()) * 255).round().astype(np.uint8)
 
 geocal_swig.RasterImage.read_all_byte_scale = _read_all_byte_scale
+geocal_swig.RasterImageMultiBand.read_all_byte_scale = _read_all_byte_scale
 
 def _footprint_geometry(self, cconver = geocal_swig.GeodeticConverter()):
     '''Return a ogr Geometry object describing the footprint of the 

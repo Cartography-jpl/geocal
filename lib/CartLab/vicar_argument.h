@@ -29,9 +29,10 @@ class VicarArgument : public Printable<VicarArgument> {
 public:
   VicarArgument(int Argc, char** Argv, bool copy_primary_input_label = false); 
 
-  static void type(const std::string& Keyword, std::string& Type, 
+  bool has_keyword(const std::string& Keyword);
+  void type(const std::string& Keyword, std::string& Type, 
 		   int& Count);
-  static void type(const std::string& Keyword, std::string& Type, 
+  void type(const std::string& Keyword, std::string& Type, 
 		   int& Count, int& Maxlen);
 
 //-----------------------------------------------------------------------
@@ -39,17 +40,17 @@ public:
 /// version of the Vicar RTL zvp call.
 //-----------------------------------------------------------------------
 
-  template<class T> static T arg(const std::string& Keyword);
+  template<class T> T arg(const std::string& Keyword);
   void print(std::ostream& Os) const;
   void write_out(const std::string& Keyword, int Val);
   void write_out(const std::string& Keyword, double Val);
   void write_out(const std::string& Keyword, const std::string& Val, 
 		 int Max_len = 250);
 
-  static int zvpw(char *name, void *value, int *count);
-  static int zvparmw(char *name, void *value, int *count, int *def,
+  int zvpw(char *name, void *value, int *count);
+  int zvparmw(char *name, void *value, int *count, int *def,
 		    int maxcnt, int length);
-  static int zvparmdw(char *name, void *value, int *count, int *def,
+  int zvparmdw(char *name, void *value, int *count, int *def,
 		     int maxcnt, int length);
 };
 

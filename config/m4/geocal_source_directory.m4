@@ -4,6 +4,7 @@
 
 AC_DEFUN([GEOCAL_SOURCE_DIRECTORY],[
 AC_SUBST([libgeocal], [${geocal_topdir}/lib])
+AC_SUBST([srcgeocalbin], [${geocal_topdir}/bin])
 AC_SUBST([srcpython], [${geocal_topdir}/python])
 AC_SUBST([srcpythonlib], [${srcpython}/lib])
 AC_SUBST([srcpythonbin], [${srcpython}/bin])

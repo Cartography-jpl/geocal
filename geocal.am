@@ -9,6 +9,9 @@ SWIG_SRC_GDAL=
 SWIG_SRC_VICAR_RTL=
 SWIG_SRC_GDAL_VICAR_RTL=
 libgeocal_la_LDFLAGS =
+afidspythonvdev_PROGRAMS = 
+dist_afidspythonvdev_SCRIPTS = 
+dist_afidspythonvdev_DATA = 
 SWIG_FLAG = 
 
 geocalincdir = @includedir@/geocal

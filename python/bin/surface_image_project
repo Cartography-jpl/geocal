@@ -91,7 +91,7 @@ if(args.number_process > 1):
     pool = Pool(args.number_process)
     res = pool.map(func, range(igccol.number_image))
 else:
-    res = map(func, range(igccol.number_image))
+    res = list(map(func, range(igccol.number_image)))
 
 surface_image = [VicarLiteRasterImage("%s%d.img" % (args.basefname, i)) 
                  for i in range(igccol.number_image)]

@@ -13,6 +13,7 @@ include thirdparty/thirdparty.am
 include thirdparty/libsdbx/sdbx.am
 include thirdparty/libraw/libraw.am
 include lib/lib.am
+include bin/bin.am
 include lib/GeoCalCore/geocal_core.am
 include lib/GeoCalCore/Support/support.am
 include lib/GeoCalCore/Interface/interface.am

@@ -17,7 +17,7 @@ def setup():
 def teardown():
     set_original_env(original_env)
     # Clean up the various temporary files
-    if False:
+    if True:
         subprocess.run("rm %s*" % prefix, shell=True,
                        stdout=subprocess.PIPE,
                        stderr=subprocess.PIPE)

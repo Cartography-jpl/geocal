@@ -17,7 +17,7 @@ using namespace GeoCal;
 
 struct VicarFixture : public GlobalFixture {
   std::string fname, fname2, fname3, fname4, fname5, fname6, fname7, fname8;
-  static bool done;
+  static boost::shared_ptr<VicarArgument> va;
   VicarFixture()
   {
     if(!VicarFile::vicar_available())
@@ -31,7 +31,7 @@ struct VicarFixture : public GlobalFixture {
     fname7 = "test_out/vicar_write4.img";
     fname8 = "test_out/vicar_write5.img";
     
-    if(done)
+    if(va)
       return;
     std::string t = "INP=" + fname + "," + fname;
     std::string t2 = "OUT=" + fname3;
@@ -46,12 +46,11 @@ struct VicarFixture : public GlobalFixture {
     argv[6] = const_cast<char*>("RLV=1.1,2.2,3.3");
     argv[7] = const_cast<char*>("IN=10");
     argv[8] = const_cast<char*>("INV=11,12,13");
-    VicarFile::zvzinitw(9, argv);
-    done = true;
+    va.reset(new VicarArgument(9, argv));
   }
 };
 
-bool VicarFixture::done = false;
+boost::shared_ptr<VicarArgument> VicarFixture::va;
 
 BOOST_FIXTURE_TEST_SUITE(vicar, VicarFixture)
 
@@ -64,43 +63,43 @@ BOOST_AUTO_TEST_CASE(vicar_argument)
   }
   std::string tp;
   int count;
-  VicarArgument::type("STR", tp, count);
+  va->type("STR", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("STRING"));
   BOOST_CHECK_EQUAL(count,1);
-  VicarArgument::type("STRV", tp, count);
+  va->type("STRV", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("STRING"));
   BOOST_CHECK_EQUAL(count,3);
-  VicarArgument::type("RL", tp, count);
+  va->type("RL", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("REAL"));
   BOOST_CHECK_EQUAL(count,1);
-  VicarArgument::type("RLV", tp, count);
+  va->type("RLV", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("REAL"));
   BOOST_CHECK_EQUAL(count,3);
-  VicarArgument::type("IN", tp, count);
+  va->type("IN", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("INT"));
   BOOST_CHECK_EQUAL(count,1);
-  VicarArgument::type("INV", tp, count);
+  va->type("INV", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("INT"));
   BOOST_CHECK_EQUAL(count,3);
-  BOOST_CHECK_EQUAL(VicarArgument::arg<std::string>("STR"), 
+  BOOST_CHECK_EQUAL(va->arg<std::string>("STR"), 
 		    std::string("test1"));
-  BOOST_CHECK_EQUAL(VicarArgument::arg<std::vector<std::string> >("STRV")[0], 
+  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string> >("STRV")[0], 
 		    std::string("test2"));
-  BOOST_CHECK_EQUAL(VicarArgument::arg<std::vector<std::string> >("STRV")[1], 
+  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string> >("STRV")[1], 
 		    std::string("test3"));
-  BOOST_CHECK_EQUAL(VicarArgument::arg<std::vector<std::string> >("STRV")[2], 
+  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string> >("STRV")[2], 
 		    std::string("test4"));
-  BOOST_CHECK_CLOSE(VicarArgument::arg<double>("RL"), 1.23456789011, 1e-12);
-  BOOST_CHECK_CLOSE(VicarArgument::arg<std::vector<double> >("RLV")[0], 
+  BOOST_CHECK_CLOSE(va->arg<double>("RL"), 1.23456789011, 1e-12);
+  BOOST_CHECK_CLOSE(va->arg<std::vector<double> >("RLV")[0], 
 		    1.1, 1e-4);
-  BOOST_CHECK_CLOSE(VicarArgument::arg<std::vector<double> >("RLV")[1], 
+  BOOST_CHECK_CLOSE(va->arg<std::vector<double> >("RLV")[1], 
 		    2.2, 1e-4);
-  BOOST_CHECK_CLOSE(VicarArgument::arg<std::vector<double> >("RLV")[2], 
+  BOOST_CHECK_CLOSE(va->arg<std::vector<double> >("RLV")[2], 
 		    3.3, 1e-4);
-  BOOST_CHECK_EQUAL(VicarArgument::arg<int>("IN"), 10);
-  BOOST_CHECK_EQUAL(VicarArgument::arg<std::vector<int> >("INV")[0], 11);
-  BOOST_CHECK_EQUAL(VicarArgument::arg<std::vector<int> >("INV")[1], 12);
-  BOOST_CHECK_EQUAL(VicarArgument::arg<std::vector<int> >("INV")[2], 13);
+  BOOST_CHECK_EQUAL(va->arg<int>("IN"), 10);
+  BOOST_CHECK_EQUAL(va->arg<std::vector<int> >("INV")[0], 11);
+  BOOST_CHECK_EQUAL(va->arg<std::vector<int> >("INV")[1], 12);
+  BOOST_CHECK_EQUAL(va->arg<std::vector<int> >("INV")[2], 13);
 }
 
 BOOST_AUTO_TEST_CASE(vicar_file)

@@ -20,23 +20,23 @@ public:
   void write_out(const std::string& Keyword, const std::string& Val,
 		 int Max_lin = 250);
   %extend {
-    static std::string type_string(const std::string& Keyword)
+    std::string type_string(const std::string& Keyword)
     { std::string res1("b"); int res2;
-      GeoCal::VicarArgument::type(Keyword, res1, res2);
+      $self->type(Keyword, res1, res2);
       return res1;
     }
-    static int type_count(const std::string& Keyword)
+    int type_count(const std::string& Keyword)
     { std::string res1("b"); int res2;
-      GeoCal::VicarArgument::type(Keyword, res1, res2);
+      $self->type(Keyword, res1, res2);
       return res2;
     }
 
-     static std::vector<std::string> arg_str(const std::string& Keyword)
-     { return GeoCal::VicarArgument::arg<std::vector<std::string> >(Keyword); }
-     static std::vector<int> arg_int(const std::string& Keyword)
-     { return GeoCal::VicarArgument::arg<std::vector<int> >(Keyword); }
-     static std::vector<double> arg_real(const std::string& Keyword)
-     { return GeoCal::VicarArgument::arg<std::vector<double> >(Keyword); }
+     std::vector<std::string> arg_str(const std::string& Keyword)
+     { return $self->arg<std::vector<std::string> >(Keyword); }
+     std::vector<int> arg_int(const std::string& Keyword)
+     { return $self->arg<std::vector<int> >(Keyword); }
+     std::vector<double> arg_real(const std::string& Keyword)
+     { return $self->arg<std::vector<double> >(Keyword); }
   }
   std::string print_to_string() const;
 #ifdef SWIGPYTHON

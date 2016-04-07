@@ -1,11 +1,12 @@
 // This is picmtch4 code. We will slowly convert this to C++/geocal,
 // but right now this is pretty much just cleaned up for C++
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
+#include "vicar_argument.h"
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <cctype>
+#include <zvproto.h>
 
-#include "vicmain_c.h"
 #include "applic.h"
 
 #include "fftw3.h"
@@ -31,7 +32,7 @@ extern "C" {
 #endif
 
 /************************************************************************/
-/* program picmtch4                                                     */
+/* program picmtch5                                                     */
 /*  image to image correlation, including gcp option  A. Zobrist 9/9/00 */
 /************************************************************************/
 /*  00-09 ...alz... initial version                                     */
@@ -328,7 +329,7 @@ extracts a subimage from an image.  the subimage is specified by
 a linear transformation and the point that (when transformed) becomes
 the center of the subimage.  ndim can be used to obtain only the
 central part of the array if the outer border is not needed, for
-example when picmtch4 has narrowed a search.
+example when picmtch5 has narrowed a search.
 
 
 arguments:
@@ -580,10 +581,11 @@ void throwout(int* throwcount,float** a,float** b,int* neq,int neqmax)
    return;
 }
 
-void main44(void)
+int main(int Argc, char *Argv[])
 {
    int   geocord1,geocord2,minsrch,nohpftae,subpix,getw,getr;
-   int   nretry,gcpf,search,ffthalf,elvcor,zerothr;
+   bool gcpf, elvcor;
+   int   nretry,search,ffthalf,zerothr;
    double itie[6],otie[6],rmagtae[2],rmagmin[2],rmcor,rretry,tretry,thr_res;
    float zerolim,zerolim2;
    
@@ -607,12 +609,14 @@ void main44(void)
    float retryparm[3];
    char *labelstr,magshrk[2];
    
-   zifmessage((char*)"picmtch4 version Thu Dec 22 2011");
+   GeoCal::VicarArgument va(Argc, Argv);
+
+   zifmessage((char*)"picmtch5 version Wed Apr 08 2016");
    
    /* get the basic parameters */
    
-   gcpf = zvptst((char*)"gcpf");
-   elvcor = zvptst((char*)"elvcor");
+   gcpf = va.has_keyword("gcpf");
+   elvcor = va.has_keyword("elvcor");
    zvparmd((char*)"itie",itie,&itiecount,&pdef,6,0);
    zvparmd((char*)"otie",otie,&otiecount,&pdef,6,0);
    if (itiecount!=otiecount) zmabend((char*)"itie count must equal otie count");
@@ -1209,5 +1213,7 @@ void main44(void)
       }
    
    status = IBISFileClose(ibis,0);
-   return;
+   // Oddly, it is a VICAR convention to return a 1 for success
+   // (rather than the normal 0 used in most unix programs).
+   return 1;
 }

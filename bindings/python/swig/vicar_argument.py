@@ -236,11 +236,6 @@ class VicarArgument(geocal_swig.generic_object.GenericObject):
         """
         return _vicar_argument.VicarArgument_write_out(self, *args)
 
-    type_string = staticmethod(_vicar_argument.VicarArgument_type_string)
-    type_count = staticmethod(_vicar_argument.VicarArgument_type_count)
-    arg_str = staticmethod(_vicar_argument.VicarArgument_arg_str)
-    arg_int = staticmethod(_vicar_argument.VicarArgument_arg_int)
-    arg_real = staticmethod(_vicar_argument.VicarArgument_arg_real)
 
     def __getitem__(self, key):
       k = str(key).upper()
@@ -268,29 +263,14 @@ class VicarArgument(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _vicar_argument.delete_VicarArgument
 VicarArgument.write_out = new_instancemethod(_vicar_argument.VicarArgument_write_out, None, VicarArgument)
+VicarArgument.type_string = new_instancemethod(_vicar_argument.VicarArgument_type_string, None, VicarArgument)
+VicarArgument.type_count = new_instancemethod(_vicar_argument.VicarArgument_type_count, None, VicarArgument)
+VicarArgument.arg_str = new_instancemethod(_vicar_argument.VicarArgument_arg_str, None, VicarArgument)
+VicarArgument.arg_int = new_instancemethod(_vicar_argument.VicarArgument_arg_int, None, VicarArgument)
+VicarArgument.arg_real = new_instancemethod(_vicar_argument.VicarArgument_arg_real, None, VicarArgument)
 VicarArgument.__str__ = new_instancemethod(_vicar_argument.VicarArgument___str__, None, VicarArgument)
 VicarArgument_swigregister = _vicar_argument.VicarArgument_swigregister
 VicarArgument_swigregister(VicarArgument)
-
-def VicarArgument_type_string(Keyword):
-    return _vicar_argument.VicarArgument_type_string(Keyword)
-VicarArgument_type_string = _vicar_argument.VicarArgument_type_string
-
-def VicarArgument_type_count(Keyword):
-    return _vicar_argument.VicarArgument_type_count(Keyword)
-VicarArgument_type_count = _vicar_argument.VicarArgument_type_count
-
-def VicarArgument_arg_str(Keyword):
-    return _vicar_argument.VicarArgument_arg_str(Keyword)
-VicarArgument_arg_str = _vicar_argument.VicarArgument_arg_str
-
-def VicarArgument_arg_int(Keyword):
-    return _vicar_argument.VicarArgument_arg_int(Keyword)
-VicarArgument_arg_int = _vicar_argument.VicarArgument_arg_int
-
-def VicarArgument_arg_real(Keyword):
-    return _vicar_argument.VicarArgument_arg_real(Keyword)
-VicarArgument_arg_real = _vicar_argument.VicarArgument_arg_real
 
 
 

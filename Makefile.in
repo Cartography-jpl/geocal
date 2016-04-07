@@ -170,8 +170,8 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @WITH_DOCUMENTATION_TRUE@	install_python_doc
 @WITH_DOCUMENTATION_TRUE@am__append_11 = clean_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_12 = clean_doxygen_generate
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_13 = picmtch5
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_14 = $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_13 = picmtch5
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_14 = $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
 @HAVE_FFTW_TRUE@am__append_15 = @srcsupport@/geocal_fftw.h
 @HAVE_FFTW_TRUE@am__append_16 = @srcsupport@/geocal_fftw.cc
 @HAVE_HDF5_TRUE@am__append_17 = @srcsupport@/hdf_file.h
@@ -992,8 +992,7 @@ am_libraw_la_OBJECTS = @srcraw@/libraw_la-dcraw_common.lo \
 	@srcraw@/libraw_la-libraw_c_api.lo \
 	@srcraw@/libraw_la-libraw_cxx.lo
 libraw_la_OBJECTS = $(am_libraw_la_OBJECTS)
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@am__EXEEXT_1 =  \
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@	picmtch5$(EXEEXT)
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__EXEEXT_1 = picmtch5$(EXEEXT)
 PROGRAMS = $(afidspythonvdev_PROGRAMS) $(bin_PROGRAMS)
 am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
@@ -1265,11 +1264,9 @@ geocal_test_all_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(geocal_test_all_LDFLAGS) \
 	$(LDFLAGS) -o $@
 am__picmtch5_SOURCES_DIST = @srcgeocalbin@/picmtch5.cc
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@am_picmtch5_OBJECTS = @srcgeocalbin@/picmtch5-picmtch5.$(OBJEXT)
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am_picmtch5_OBJECTS = @srcgeocalbin@/picmtch5-picmtch5.$(OBJEXT)
 picmtch5_OBJECTS = $(am_picmtch5_OBJECTS)
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_DEPENDENCIES =  \
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@	$(am__DEPENDENCIES_1) \
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@	$(am__DEPENDENCIES_1)
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_DEPENDENCIES = libgeocal.la
 am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
@@ -2742,10 +2739,19 @@ libraw_la_SOURCES = @srcraw@/dcraw_common.cpp \
 	@srcraw@/libraw_c_api.cpp @srcraw@/libraw_cxx.cpp \
 	@srcraw@/libraw_defines.h @srcraw@/var_defines.h
 libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_SOURCES = @srcgeocalbin@/picmtch5.cc
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_LDADD = $(FFTW_LIBS) $(CARTO_LIBS) 
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_CPPFLAGS = $(AM_CPPFLAGS) $(CARTO_CFLAGS) $(FFTW_CFLAGS)
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_SOURCES = @srcgeocalbin@/picmtch5.cc
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf $(CARTO_BUILD_DEPEND)
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_LDADD = libgeocal.la 
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_CPPFLAGS = $(AM_CPPFLAGS) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(VICAR_RTL_CFLAGS) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(BOOST_CPPFLAGS) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(SPICE_CFLAGS) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(FFTW_CPPFLAGS) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	-I$(srcdir)/$(srcraw) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(BLITZ_CFLAGS) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(CARTO_CFLAGS) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(GDAL_CFLAGS) \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(HDF5_CFLAGS)
 pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py $(patsubst \
 	%_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
@@ -10163,8 +10169,8 @@ vpath %.i $(srcdir)/@libgeocal@
 # of the executable in the directory we build in. This isn't
 # used for anything by us, but it means that the user can execute,
 # debug, etc. the program where it is built.
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5.pdf:
-@HAVE_CARTO_TRUE@@HAVE_VICAR_RTL_TRUE@	ln -s $(srcdir)/$(srcgeocalbin)/picmtch5.pdf .
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5.pdf:
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	ln -s $(srcdir)/$(srcgeocalbin)/picmtch5.pdf .
 
 # Allow searchs for .i, .h. and .cc files in this directory
 vpath %.cc $(srcdir)/@srcsupport@

@@ -5479,8 +5479,8 @@ SWIG_AsVal_int (PyObject * obj, int *val)
   return res;
 }
 
-SWIGINTERN std::string GeoCal_VicarArgument_type_string(std::string const &Keyword){ std::string res1("b"); int res2;
-      GeoCal::VicarArgument::type(Keyword, res1, res2);
+SWIGINTERN std::string GeoCal_VicarArgument_type_string(GeoCal::VicarArgument *self,std::string const &Keyword){ std::string res1("b"); int res2;
+      self->type(Keyword, res1, res2);
       return res1;
     }
 
@@ -5515,11 +5515,11 @@ SWIG_From_std_string  (const std::string& s)
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
 
-SWIGINTERN int GeoCal_VicarArgument_type_count(std::string const &Keyword){ std::string res1("b"); int res2;
-      GeoCal::VicarArgument::type(Keyword, res1, res2);
+SWIGINTERN int GeoCal_VicarArgument_type_count(GeoCal::VicarArgument *self,std::string const &Keyword){ std::string res1("b"); int res2;
+      self->type(Keyword, res1, res2);
       return res2;
     }
-SWIGINTERN std::vector< std::string,std::allocator< std::string > > GeoCal_VicarArgument_arg_str(std::string const &Keyword){ return GeoCal::VicarArgument::arg<std::vector<std::string> >(Keyword); }
+SWIGINTERN std::vector< std::string,std::allocator< std::string > > GeoCal_VicarArgument_arg_str(GeoCal::VicarArgument *self,std::string const &Keyword){ return self->arg<std::vector<std::string> >(Keyword); }
 
 SWIGINTERN int
 SWIG_AsVal_std_string (PyObject * obj, std::string *val)
@@ -5666,7 +5666,7 @@ namespace swig {
 	};
       }
     
-SWIGINTERN std::vector< int,std::allocator< int > > GeoCal_VicarArgument_arg_int(std::string const &Keyword){ return GeoCal::VicarArgument::arg<std::vector<int> >(Keyword); }
+SWIGINTERN std::vector< int,std::allocator< int > > GeoCal_VicarArgument_arg_int(GeoCal::VicarArgument *self,std::string const &Keyword){ return self->arg<std::vector<int> >(Keyword); }
 
 namespace swig {
   template <> struct traits<int > {
@@ -5697,7 +5697,7 @@ namespace swig {
 	};
       }
     
-SWIGINTERN std::vector< double,std::allocator< double > > GeoCal_VicarArgument_arg_real(std::string const &Keyword){ return GeoCal::VicarArgument::arg<std::vector<double> >(Keyword); }
+SWIGINTERN std::vector< double,std::allocator< double > > GeoCal_VicarArgument_arg_real(GeoCal::VicarArgument *self,std::string const &Keyword){ return self->arg<std::vector<double> >(Keyword); }
 
   #define SWIG_From_double   PyFloat_FromDouble 
 
@@ -6993,27 +6993,46 @@ fail:
 
 SWIGINTERN PyObject *_wrap_VicarArgument_type_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
+  GeoCal::VicarArgument *arg1 = (GeoCal::VicarArgument *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarArgument > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarArgument > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
   std::string result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"VicarArgument_type_string",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarArgument_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_type_string" "', argument " "1"" of type '" "GeoCal::VicarArgument *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_type_string" "', argument " "1"" of type '" "std::string const &""'"); 
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VicarArgument_type_string" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_type_string" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_type_string" "', argument " "2"" of type '" "std::string const &""'"); 
     }
-    arg1 = ptr;
+    arg2 = ptr;
   }
   {
     try {
-      result = GeoCal_VicarArgument_type_string((std::string const &)*arg1);
+      result = GeoCal_VicarArgument_type_string(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7021,37 +7040,56 @@ SWIGINTERN PyObject *_wrap_VicarArgument_type_string(PyObject *SWIGUNUSEDPARM(se
     }
   }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_VicarArgument_type_count(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
+  GeoCal::VicarArgument *arg1 = (GeoCal::VicarArgument *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarArgument > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarArgument > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
   int result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"VicarArgument_type_count",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarArgument_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_type_count" "', argument " "1"" of type '" "GeoCal::VicarArgument *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_type_count" "', argument " "1"" of type '" "std::string const &""'"); 
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VicarArgument_type_count" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_type_count" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_type_count" "', argument " "2"" of type '" "std::string const &""'"); 
     }
-    arg1 = ptr;
+    arg2 = ptr;
   }
   {
     try {
-      result = (int)GeoCal_VicarArgument_type_count((std::string const &)*arg1);
+      result = (int)GeoCal_VicarArgument_type_count(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7059,37 +7097,56 @@ SWIGINTERN PyObject *_wrap_VicarArgument_type_count(PyObject *SWIGUNUSEDPARM(sel
     }
   }
   resultobj = SWIG_From_int(static_cast< int >(result));
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_VicarArgument_arg_str(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
+  GeoCal::VicarArgument *arg1 = (GeoCal::VicarArgument *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarArgument > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarArgument > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
   std::vector< std::string,std::allocator< std::string > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"VicarArgument_arg_str",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarArgument_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_arg_str" "', argument " "1"" of type '" "GeoCal::VicarArgument *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_arg_str" "', argument " "1"" of type '" "std::string const &""'"); 
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VicarArgument_arg_str" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_arg_str" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_arg_str" "', argument " "2"" of type '" "std::string const &""'"); 
     }
-    arg1 = ptr;
+    arg2 = ptr;
   }
   {
     try {
-      result = GeoCal_VicarArgument_arg_str((std::string const &)*arg1);
+      result = GeoCal_VicarArgument_arg_str(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7097,37 +7154,56 @@ SWIGINTERN PyObject *_wrap_VicarArgument_arg_str(PyObject *SWIGUNUSEDPARM(self),
     }
   }
   resultobj = swig::from(static_cast< std::vector<std::string,std::allocator< std::string > > >(result));
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_VicarArgument_arg_int(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
+  GeoCal::VicarArgument *arg1 = (GeoCal::VicarArgument *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarArgument > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarArgument > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
   std::vector< int,std::allocator< int > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"VicarArgument_arg_int",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarArgument_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_arg_int" "', argument " "1"" of type '" "GeoCal::VicarArgument *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_arg_int" "', argument " "1"" of type '" "std::string const &""'"); 
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VicarArgument_arg_int" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_arg_int" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_arg_int" "', argument " "2"" of type '" "std::string const &""'"); 
     }
-    arg1 = ptr;
+    arg2 = ptr;
   }
   {
     try {
-      result = GeoCal_VicarArgument_arg_int((std::string const &)*arg1);
+      result = GeoCal_VicarArgument_arg_int(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7135,37 +7211,56 @@ SWIGINTERN PyObject *_wrap_VicarArgument_arg_int(PyObject *SWIGUNUSEDPARM(self),
     }
   }
   resultobj = swig::from(static_cast< std::vector<int,std::allocator< int > > >(result));
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_VicarArgument_arg_real(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
+  GeoCal::VicarArgument *arg1 = (GeoCal::VicarArgument *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarArgument > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarArgument > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
   std::vector< double,std::allocator< double > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"VicarArgument_arg_real",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarArgument_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_arg_real" "', argument " "1"" of type '" "GeoCal::VicarArgument *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarArgument > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarArgument * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarArgument_arg_real" "', argument " "1"" of type '" "std::string const &""'"); 
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VicarArgument_arg_real" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_arg_real" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VicarArgument_arg_real" "', argument " "2"" of type '" "std::string const &""'"); 
     }
-    arg1 = ptr;
+    arg2 = ptr;
   }
   {
     try {
-      result = GeoCal_VicarArgument_arg_real((std::string const &)*arg1);
+      result = GeoCal_VicarArgument_arg_real(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7173,10 +7268,10 @@ SWIGINTERN PyObject *_wrap_VicarArgument_arg_real(PyObject *SWIGUNUSEDPARM(self)
     }
   }
   resultobj = swig::from(static_cast< std::vector<double,std::allocator< double > > >(result));
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
@@ -7328,11 +7423,11 @@ static PyMethodDef SwigMethods[] = {
 		"void VicarArgument::write_out(const std::string &Keyword, const std::string &Val, int Max_len=250)\n"
 		"\n"
 		""},
-	 { (char *)"VicarArgument_type_string", (PyCFunction)_wrap_VicarArgument_type_string, METH_O, NULL},
-	 { (char *)"VicarArgument_type_count", (PyCFunction)_wrap_VicarArgument_type_count, METH_O, NULL},
-	 { (char *)"VicarArgument_arg_str", (PyCFunction)_wrap_VicarArgument_arg_str, METH_O, NULL},
-	 { (char *)"VicarArgument_arg_int", (PyCFunction)_wrap_VicarArgument_arg_int, METH_O, NULL},
-	 { (char *)"VicarArgument_arg_real", (PyCFunction)_wrap_VicarArgument_arg_real, METH_O, NULL},
+	 { (char *)"VicarArgument_type_string", _wrap_VicarArgument_type_string, METH_VARARGS, NULL},
+	 { (char *)"VicarArgument_type_count", _wrap_VicarArgument_type_count, METH_VARARGS, NULL},
+	 { (char *)"VicarArgument_arg_str", _wrap_VicarArgument_arg_str, METH_VARARGS, NULL},
+	 { (char *)"VicarArgument_arg_int", _wrap_VicarArgument_arg_int, METH_VARARGS, NULL},
+	 { (char *)"VicarArgument_arg_real", _wrap_VicarArgument_arg_real, METH_VARARGS, NULL},
 	 { (char *)"VicarArgument___str__", (PyCFunction)_wrap_VicarArgument___str__, METH_O, NULL},
 	 { (char *)"delete_VicarArgument", (PyCFunction)_wrap_delete_VicarArgument, METH_O, NULL},
 	 { (char *)"VicarArgument_swigregister", VicarArgument_swigregister, METH_VARARGS, NULL},

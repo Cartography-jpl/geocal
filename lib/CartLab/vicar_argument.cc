@@ -58,6 +58,19 @@ VicarArgument::VicarArgument(int Argc, char** Argv,
 }
 
 //-----------------------------------------------------------------------
+/// Return true if we have the given keyword, false otherwise.
+//-----------------------------------------------------------------------
+
+bool VicarArgument::has_keyword(const std::string& Keyword)
+{
+#ifdef HAVE_VICAR_RTL
+  return zvptst(const_cast<char*>(Keyword.c_str()));
+#else
+  throw VicarNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Return the type and count for the given keyword.
 //-----------------------------------------------------------------------
 

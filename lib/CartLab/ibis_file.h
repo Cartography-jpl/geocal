@@ -189,6 +189,34 @@ public:
   int ibis_fh() const;
 
 //-----------------------------------------------------------------------
+/// Mark whole file as updated. No need to do this if you open the
+/// file as "WRITE", but for "UPDATE" we only update columns
+/// explicitly marked as updated (so we don't write out unchanged
+/// column). This routine marks all the columns as updated and needing
+/// to be written to disk.
+//-----------------------------------------------------------------------
+
+  void mark_updated()
+  {
+    for(int i = 0; i < number_col(); ++i)
+      col[i]->update = true;
+  }
+
+//-----------------------------------------------------------------------
+/// Mark whole file as updated. No need to do this if you open the
+/// file as "WRITE", but for "UPDATE" we only update columns
+/// explicitly marked as updated (so we don't write out unchanged
+/// column). This routine marks the specific columns as updated and needing
+/// to be written to disk.
+//-----------------------------------------------------------------------
+
+  void mark_updated(int I)
+  {
+    range_check(I, 0, number_col());
+    col[I]->update = true;
+  }
+
+//-----------------------------------------------------------------------
 /// Number of rows in the file
 //-----------------------------------------------------------------------
 

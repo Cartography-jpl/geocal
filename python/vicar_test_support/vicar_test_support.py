@@ -29,6 +29,8 @@ def vicarb_run(cmd):
     cmd2 = re.sub(r'"',"\\\"", cmd2)
     res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,check=True,
                          stdout = subprocess.PIPE)
+    if(False):
+        print(res.stdout.decode('utf-8'))
     return res
     
 def vicarb_tae_path():

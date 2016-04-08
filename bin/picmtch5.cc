@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include "vicar_argument.h"
+#include "ibis_file.h"
 #include "constant.h"
 
 extern "C" {
@@ -145,7 +146,7 @@ double getzvl(const std::vector<double>& a,int n, double coord[2],int nw,int nr)
        sum += val;
      }
    if (ire<=nr) 
-     return(sum/(double)((nw-1)*(nw-1)));
+     return(sum/((nw-1)*(nw-1)));
    else 
      return(-9999.0);
 }
@@ -243,7 +244,7 @@ void rfit(int ilin,int jsmp,double* vmax,double* vloff,double* vsoff,
 	  afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][1];
 	bij1 = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][1]-
 	  afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][0];
-	v = sqrt((double)(bij*bij+bij1*bij1));
+	v = sqrt(bij*bij+bij1*bij1);
 	if (v<1.e-6) v = 1.e-6;
 	bfftin[j*srchdim+i][0] = bij/v;
 	bfftin[j*srchdim+i][1] = bij1/v;
@@ -276,7 +277,7 @@ void rfit(int ilin,int jsmp,double* vmax,double* vloff,double* vsoff,
    
    /* normalized for varying footprints by three lines below */
    
-   double ttemp = log10((double)srchdim)/log10((double)2.0);
+   double ttemp = log10(srchdim)/log10(2.0);
    ttemp = ttemp*ttemp;
    *vmax = tvmax*10.0/(srchdim*ttemp*ttemp);
    *vloff = jxmax-quadmark;
@@ -395,10 +396,10 @@ void getgrid(int filenum,std::vector<double>& chip,int narray,
        chip[i] = 0.; 
        (*chop)++; 
      } else {
-       double dvecl0 = (double)(imbuf[iline-slbx][isamp-ssbx]);
-       double dvecl1 = (double)(imbuf[iline-slbx][isamp-ssbx+1]);
-       double dvecu0 = (double)(imbuf[iline-slbx+1][isamp-ssbx]);
-       double dvecu1 = (double)(imbuf[iline-slbx+1][isamp-ssbx+1]);
+       double dvecl0 = imbuf[iline-slbx][isamp-ssbx];
+       double dvecl1 = imbuf[iline-slbx][isamp-ssbx+1];
+       double dvecu0 = imbuf[iline-slbx+1][isamp-ssbx];
+       double dvecu1 = imbuf[iline-slbx+1][isamp-ssbx+1];
        double rlfac = rline-iline-0.5;
        double rsfac = rsamp-isamp-0.5;
        double vl = (1.0-rsfac)*dvecl0+rsfac*dvecl1;
@@ -507,7 +508,6 @@ int main(int Argc, char *Argv[])
 try {
   int   minsrch;
    
-  float **c_data;
   double **a,**b;
 
   int ierror;
@@ -520,7 +520,7 @@ try {
   double dline,dsamp;
   double soln[12],solninv[12];
 
-  int unit,status,ibis,parmcnt,o_unit;
+  int status,parmcnt,o_unit;
   const double eps = 1e-7;
   
   VicarArgument va(Argc, Argv);
@@ -574,8 +574,8 @@ try {
    
   std::vector<double> retryparm = va.arg<std::vector<double> >("retry");
   int nretry = (int)retryparm[0]+1;
-  double rretry = (double)retryparm[1];
-  double tretry = (double)retryparm[2];
+  double rretry = retryparm[1];
+  double tretry = retryparm[2];
   int ffthalf = va.arg<int>("ffthalf");
   if (ffthalf>0) {
     if (nretry>1) 
@@ -603,54 +603,55 @@ try {
   /* open the ibis interface file */
 
   // Come back to this and replace with IbisFile
-  status = zvunit(&unit,(char*)"inp",3,NULL);
-  status = IBISFileOpen(unit,&ibis,(char*)"update",0,0,0,0);
-  if (status!=1) IBISSignalU(unit,status,1);
-  int tablen;
-  IBISFileGet(ibis,(char*)"nr",&tablen,1,1,0);
-  int ncol;
-  IBISFileGet(ibis,(char*)"nc",&ncol,1,1,0);
-  if (ncol<11) throw Exception("ibis file needs 11 columns");
-   
-   /* malloc arrays, read in the cols (if not gcpf) */
+  std::vector<std::string> inpfname = va.arg<std::vector<std::string> >("inp");
+  IbisFile ifile(inpfname[2], IbisFile::UPDATE);
+  if (ifile.number_col()<11) throw Exception("ibis file needs 11 columns");
+  // Give columns name, to make it clearer what we are doing here.
+  std::vector<double>& first_line_or_east = ifile.column<double>(0).data;
+  std::vector<double>& first_samp_or_west = ifile.column<double>(1).data;
+  std::vector<double>& first_line = ifile.column<double>(2).data;
+  std::vector<double>& first_samp = ifile.column<double>(3).data;
+  std::vector<double>& first_z = ifile.column<double>(4).data;
+  std::vector<double>& second_line = ifile.column<double>(5).data;
+  std::vector<double>& second_samp = ifile.column<double>(6).data;
+  std::vector<double>& second_z = ifile.column<double>(7).data;
+  std::vector<double>& corr_val = ifile.column<double>(8).data;
+  std::vector<double>& line_res = ifile.column<double>(9).data;
+  std::vector<double>& samp_res = ifile.column<double>(10).data;
 
-   if (gcpf) throw Exception("ground control point file not implemented yet");
-   mz_alloc2((unsigned char ***)&c_data,15,tablen,sizeof(float));
-   int neqmax = tablen+3+nredo;
-   std::vector<double> aa(neqmax*6);
-   std::vector<double> bb(neqmax);
-   // May want to replace with blitz array, or some other structure.
-   mz_alloc2((unsigned char ***)&a,2,neqmax,sizeof(double));
-   mz_alloc2((unsigned char ***)&b,2,neqmax,sizeof(double));
-   chip1.resize(fftsize*fftsize);
-   asrch.resize(search*search);
-   
-   afftin = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
-   afftout = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
-   bfftin = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
-   bfftout = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
-   
-   for(int iii=0;iii<2;iii++) {
-     status = IBISColumnSet(ibis,(char*)"U_FORMAT",(void*)"REAL",iii+1);
-     if (status!=1) IBISSignal(ibis,status,1);
-     status = IBISColumnRead(ibis,(char*)(c_data[iii]),iii+1,1,tablen);
-     if (status!=1) IBISSignal(ibis,status,1);
-   }
-   
-   for(int iii=11;iii<13;iii++) {
-     if (elvcor) {
-       status = IBISColumnSet(ibis,(char*)"U_FORMAT",(void*)"REAL",iii+1);
-       if (status!=1) IBISSignal(ibis,status,1);
-       status = IBISColumnRead(ibis,(char*)(c_data[iii]),iii+1,1,tablen);
-       if (status!=1) IBISSignal(ibis,status,1);
-     } else 
-       for(int jjj=0;jjj<tablen;jjj++) 
-	 c_data[iii][jjj] = 0.0;
-   }
-   for(int jjj=0;jjj<tablen;jjj++) {
-     c_data[13][jjj] = 0.0;
-     c_data[14][jjj] = 0.0;
-   }
+  // Mark file as updated, so we know to write this out at the end
+  ifile.mark_updated();
+
+  // Get elevation offset, which is either read from the ibis file are
+  // set to zero.
+  blitz::Array<double, 2> elvoff(ifile.number_row(), 2);
+  if(elvcor) {
+    const std::vector<double>& line_elv_offset = ifile.column<double>(11).data;
+    const std::vector<double>& samp_elv_offset = ifile.column<double>(12).data;
+    for(int i = 0; i < elvoff.rows(); ++i) {
+      elvoff(i, 0) = line_elv_offset[i];
+      elvoff(i, 1) = samp_elv_offset[i];
+    }
+  } else
+    elvoff = 0.0;
+  // Second input line/sample, after doing height correction.
+  blitz::Array<double, 2> second_hcorr(ifile.number_row(), 2);
+  second_hcorr = 0.0;
+
+  if (gcpf) throw Exception("ground control point file not implemented yet");
+  int neqmax = ifile.number_row()+3+nredo;
+  std::vector<double> aa(neqmax*6);
+  std::vector<double> bb(neqmax);
+  // May want to replace with blitz array, or some other structure.
+  mz_alloc2((unsigned char ***)&a,2,neqmax,sizeof(double));
+  mz_alloc2((unsigned char ***)&b,2,neqmax,sizeof(double));
+  chip1.resize(fftsize*fftsize);
+  asrch.resize(search*search);
+
+  afftin = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
+  afftout = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
+  bfftin = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
+  bfftout = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
    
    /* is an output requested */
    
@@ -658,13 +659,13 @@ try {
    picout = parmcnt>0;
    if (picout) {
      status=zvunit( &o_unit,(char*)"OUT",1,NULL);
-     status=zvopen( o_unit,"U_NL",32,"U_NS",tablen*32,
+     status=zvopen( o_unit,"U_NL",32,"U_NS",ifile.number_row()*32,
 		    "OP","WRITE","OPEN_ACT","SA","IO_ACT","SA",NULL);
    }
    
    /* map points to line-samp according to image corners
       and parms, also convert itie */
-
+ 
    double t[6], tinv[6];
    if (!geocord1) {
      for(int iii=0;iii<6;iii++) { t[iii] = 0.; tinv[iii] = 0.; }
@@ -690,26 +691,26 @@ try {
      itie.resize(6);
      itie[0] = 1.0;
      itie[1] = 1.0;
-     itie[2] = (double)labnl;
+     itie[2] = labnl;
      itie[3] = 1.0;
      itie[4] = 1.0;
-     itie[5] = (double)labns;
+     itie[5] = labns;
    }
-   for(int iii=0;iii<tablen;iii++) {
-     dline = tinv[0]*(double)(c_data[0][iii])+
-       tinv[1]*(double)(c_data[1][iii])+tinv[2];
-     dsamp = tinv[3]*(double)(c_data[0][iii])+
-       tinv[4]*(double)(c_data[1][iii])+tinv[5];
-     c_data[2][iii] = (float)dline;
-     c_data[3][iii] = (float)dsamp;
+   for(int iii=0;iii<ifile.number_row();iii++) {
+     dline = tinv[0]*first_line_or_east[iii]+ 
+       tinv[1]*first_samp_or_west[iii]+tinv[2];
+     dsamp = tinv[3]*first_line_or_east[iii]+
+       tinv[4]*first_samp_or_west[iii]+tinv[5];
+     first_line[iii] = dline;
+     first_samp[iii] = dsamp;
    }
    for(int iii=0;iii<6;iii+=2) {
      if (!geotie) {
-       dline = tinv[0]*(double)(itie[iii])+tinv[1]*(double)(itie[iii+1])+tinv[2];
-       dsamp = tinv[3]*(double)(itie[iii])+tinv[4]*(double)(itie[iii+1])+tinv[5];
+       dline = tinv[0]*itie[iii]+tinv[1]*itie[iii+1]+tinv[2];
+       dsamp = tinv[3]*itie[iii]+tinv[4]*itie[iii+1]+tinv[5];
      } else {
-       dline = (double)itie[iii];
-       dsamp = (double)itie[iii+1];
+       dline = itie[iii];
+       dsamp = itie[iii+1];
      }
      a[0][iii/2] = dline;
      a[1][iii/2] = dsamp;
@@ -747,8 +748,8 @@ try {
      }
      otie.resize(6);
      for(int iii=0;iii<6;iii+=2) {
-       dline = t[0]*(double)(itie[iii])+t[1]*(double)(itie[iii+1])+t[2];
-       dsamp = t[3]*(double)(itie[iii])+t[4]*(double)(itie[iii+1])+t[5];
+       dline = t[0]*itie[iii]+t[1]*itie[iii+1]+t[2];
+       dsamp = t[3]*itie[iii]+t[4]*itie[iii+1]+t[5];
        otie[iii] = uinv[0]*dline+uinv[1]*dsamp+uinv[2];
        otie[iii+1] = uinv[3]*dline+uinv[4]*dsamp+uinv[5];
        b[0][iii/2] = otie[iii];
@@ -756,10 +757,8 @@ try {
      }
    } else 
      for(int iii=0;iii<6;iii+=2) {
-       dline = uinv[0]*(double)(otie[iii])+uinv[1]*(double)(otie[iii+1])+
-	 uinv[2];
-       dsamp = uinv[3]*(double)(otie[iii])+uinv[4]*(double)(otie[iii+1])+
-	 uinv[5];
+       dline = uinv[0]*otie[iii]+uinv[1]*otie[iii+1]+uinv[2];
+       dsamp = uinv[3]*otie[iii]+uinv[4]*otie[iii+1]+uinv[5];
        b[0][iii/2] = dline;
        b[1][iii/2] = dsamp;
      }
@@ -795,19 +794,19 @@ try {
    int msrchw = msrc-fftsize; 
    bool solved = false; 
    double vmaxfac = 0.9;
-   int maxredo = std::min(nredo,tablen); 
+   int maxredo = std::min(nredo,ifile.number_row()); 
    double thr_resp = 4.0*thr_res;
    int neqmin = std::max(autofit/2+4,9);
    printf("  seq             point     srch       convergence     corr\n");
-   for(int ibigx=0;ibigx<(tablen+maxredo);ibigx++) {
-     int ibig = ibigx%tablen;
-     c_data[4][ibig] = -9999.;
-     c_data[5][ibig] = -9999.;
-     c_data[6][ibig] = -9999.;
-     c_data[7][ibig] = -9999.;
-     c_data[8][ibig] = -9999.;
-     c_data[9][ibig] = 0.;
-     c_data[10][ibig] = -9999.;
+   for(int ibigx=0;ibigx<(ifile.number_row()+maxredo);ibigx++) {
+     int ibig = ibigx%ifile.number_row();
+     first_z[ibig] = -9999.;
+     second_line[ibig] = -9999.;
+     second_samp[ibig] = -9999.;
+     second_z[ibig] = -9999.;
+     corr_val[ibig] = -9999.;
+     line_res[ibig] = 0.;
+     samp_res[ibig] = -9999.;
       
      int ifftsize = fftsize;  
      int ffthset = 0;
@@ -869,8 +868,8 @@ try {
        int choplimit1 = (int)(ifftsize*ifftsize*zerolim);
        int choplimit2 = (int)(ifftsize*ifftsize*zerolim2);
        int bigchoplimit2 = search*search/2;   /* see zerolimit in rfit */
-       double xlt = c_data[2][ibig]+rretry*rvecl[jbig];
-       double xst = c_data[3][ibig]+rretry*rvecs[jbig];
+       double xlt = first_line[ibig]+rretry*rvecl[jbig];
+       double xst = first_samp[ibig]+rretry*rvecs[jbig];
        double pcntr[2], centr[2];
        pcntr[0] = (int)(xlt+0.5);
        pcntr[1] = (int)(xst+0.5);
@@ -888,7 +887,7 @@ try {
        ndim = std::min(search,srchw+ifftsize+2);
        if (ndim%2==1) ndim++;
        getgrid(2,asrch,search,ndim,soln,pcntr[0],pcntr[1],rmag,&chop,
-               c_data[11][ibig],c_data[12][ibig],zerothr);
+               elvoff(ibig,0),elvoff(ibig,1),zerothr);
        if((chop>bigchoplimit2)||((srchw==0)&&(chop>choplimit2))) {
 	 if(jbig==nretry-1) printf("point outside second image\n");
 	 continue;
@@ -922,49 +921,48 @@ try {
        vloff *= rmag[0];
        vsoff *= rmag[1];
        if (refinerr!=0) { printf("refine err 2\n"); continue; }
-       ocentr[0] = ((double)ilin-(search-srchdim)*0.5)*rmag[0]+vloff;
-       ocentr[1] = ((double)jsmp-(search-srchdim)*0.5)*rmag[1]+vsoff;
+       ocentr[0] = (ilin-(search-srchdim)*0.5)*rmag[0]+vloff;
+       ocentr[1] = (jsmp-(search-srchdim)*0.5)*rmag[1]+vsoff;
        double wl = xlt+ocentr[0];
        double ws = xst+ocentr[1];
 
-       c_data[5][ibig] = (float) (soln[0]*wl+soln[1]*ws+soln[2]+soln[3]*wl*wl+
-				  soln[4]*ws*ws+soln[5]*wl*ws);
-       c_data[6][ibig] = (float) (soln[6]*wl+soln[7]*ws+soln[8]+soln[9]*wl*wl+
-				  soln[10]*ws*ws+soln[11]*wl*ws);
-       c_data[8][ibig] = (float) vmax;
+       second_line[ibig] = (soln[0]*wl+soln[1]*ws+soln[2]+soln[3]*wl*wl+
+			    soln[4]*ws*ws+soln[5]*wl*ws);
+       second_samp[ibig] = (soln[6]*wl+soln[7]*ws+soln[8]+soln[9]*wl*wl+
+			    soln[10]*ws*ws+soln[11]*wl*ws);
+       corr_val[ibig] = vmax;
          
-       wl += c_data[11][ibig];
-       ws += c_data[12][ibig];
-       c_data[13][ibig] = (float) (soln[0]*wl+soln[1]*ws+soln[2]+
-				   soln[3]*wl*wl+ soln[4]*ws*ws+
-				   soln[5]*wl*ws);
-       c_data[14][ibig] = (float) (soln[6]*wl+soln[7]*ws+soln[8]+
-				   soln[9]*wl*wl+
-				   soln[10]*ws*ws+soln[11]*wl*ws);
+       wl += elvoff(ibig, 0);
+       ws += elvoff(ibig, 1);
+       
+       second_hcorr(ibig, 0) = soln[0]*wl+soln[1]*ws+soln[2]+
+	 soln[3]*wl*wl+ soln[4]*ws*ws+ soln[5]*wl*ws;
+       second_hcorr(ibig, 1) = soln[6]*wl+soln[7]*ws+soln[8]+
+	 soln[9]*wl*wl+soln[10]*ws*ws+soln[11]*wl*ws;
 	
-       c_data[4][ibig] = (float) getzvl(chip1,ifftsize,centr,getw,getr);
-       if (c_data[4][ibig]<-998.0) { printf("z val err\n"); continue; }
+       first_z[ibig] = getzvl(chip1,ifftsize,centr,getw,getr);
+       if (first_z[ibig]<-998.0) { printf("z val err\n"); continue; }
        acentr[0] = search/2.0+0.5+vloff;
        acentr[1] = search/2.0+0.5+vsoff;
-       c_data[7][ibig] = (float) getzvl(asrch,search,acentr,getw,getr);
-       if (c_data[7][ibig]<-998.0) { printf("z val err\n"); continue; }
+       second_z[ibig] = getzvl(asrch,search,acentr,getw,getr);
+       if (second_z[ibig]<-998.0) { printf("z val err\n"); continue; }
 	 
        resl = fabs(ocentr[0]);
        ress = fabs(ocentr[1]);
-       res = sqrt((double)(resl*resl+ress*ress));
+       res = sqrt(resl*resl+ress*ress);
        if (res>thr_resp&&solved) {
 	 printf(" (%7.1f,%7.1f)  %7.3f*\n",ocentr[0],ocentr[1],vmax);
 	 continue;
        }
        if (solved) thr_resp = std::max(thr_resp*0.95,thr_res);
-       c_data[9][ibig] = 1.;
+       line_res[ibig] = 1.;
        if(jbig>0&&ffthalf==0) { /* this is a resetting for the retry case */
-	 c_data[2][ibig] = (float) xlt;
-	 c_data[3][ibig] = (float) xst;
-	 dline = t[0]*(double)xlt+t[1]*(double)xst+t[2];
-	 dsamp = t[3]*(double)xlt+t[4]*(double)xst+t[5];
-	 c_data[0][ibig] = (float)dline;
-	 c_data[1][ibig] = (float)dsamp;
+	 first_line[ibig] = xlt;
+	 first_samp[ibig] = xst;
+	 dline = t[0]*xlt+t[1]*xst+t[2];
+	 dsamp = t[3]*xlt+t[4]*xst+t[5];
+	 first_line_or_east[ibig] = dline;
+	 first_samp_or_west[ibig] = dline;
        }
 
        printf(" (%7.1f,%7.1f)  %7.3f\n",ocentr[0],ocentr[1],vmax);
@@ -981,22 +979,22 @@ try {
 	 for(int ie=0;ie<autoix;ie++) {
 	   if (vmaxvec[ie]>rmcor) {
 	     int ibigt = vmaxix[ie]-1;
-	     c_data[9][ibigt] = 2.;
-	     a[0][neq] = c_data[2][ibigt];
-	     a[1][neq] = c_data[3][ibigt];
-	     b[0][neq] = c_data[5][ibigt];
-	     b[1][neq++] = c_data[6][ibigt];
+	     line_res[ibigt] = 2.;
+	     a[0][neq] = first_line[ibigt];
+	     a[1][neq] = first_samp[ibigt];
+	     b[0][neq] = second_line[ibigt];
+	     b[1][neq++] = second_samp[ibigt];
 	   }
 	 }
 	 break;
        }
        if (autoix<autofit) break;
        if (vmax<rmcor) break;
-       c_data[9][ibig] = 2.;
+       line_res[ibig] = 2.;
        a[0][neq] = xlt;
        a[1][neq] = xst;
-       b[0][neq] = c_data[5][ibig];
-       b[1][neq++] = c_data[6][ibig];
+       b[0][neq] = second_line[ibig];
+       b[1][neq++] = second_samp[ibig];
        if (neq<neqmin) break;
        if (srchw>msrchw) vmaxfac = vmaxfac*1.05;
        if (rmag[0]>rmagmin[0]) vmaxfac = std::max(0.50,vmaxfac*0.9825);
@@ -1013,20 +1011,20 @@ try {
 
    /* print results of final fit */
 
-   for(int iii=0;iii<tablen;iii++) {
-     if (c_data[9][iii]>0.5) {
-       c_data[9][iii] = (float) (c_data[5][iii]-
-		 (c_data[2][iii]*soln[0]+c_data[3][iii]*soln[1]+soln[2]+
-		  c_data[2][iii]*c_data[2][iii]*soln[3]+
-		  c_data[3][iii]*c_data[3][iii]*soln[4]+
-		  c_data[2][iii]*c_data[3][iii]*soln[5]));
-       c_data[10][iii] = (float) (c_data[6][iii]-
-		 (c_data[2][iii]*soln[6]+c_data[3][iii]*soln[7]+soln[8]+
-		 c_data[2][iii]*c_data[2][iii]*soln[9]+
-		 c_data[3][iii]*c_data[3][iii]*soln[10]+
-		  c_data[2][iii]*c_data[3][iii]*soln[11]));
+   for(int iii=0;iii<ifile.number_row();iii++) {
+     if (line_res[iii]>0.5) {
+       line_res[iii] = second_line[iii]- 
+	 (first_line[iii]*soln[0]+first_samp[iii]*soln[1]+soln[2]+
+	  first_line[iii]*first_line[iii]*soln[3]+ 
+	  first_samp[iii]*first_samp[iii]*soln[4]+
+	  first_line[iii]*first_samp[iii]*soln[5]);
+       samp_res[iii] = second_samp[iii]- 
+	 (first_line[iii]*soln[6]+ first_samp[iii]*soln[7]+ soln[8]+
+	  first_line[iii]*first_line[iii]*soln[9]+
+	  first_samp[iii]*first_samp[iii]*soln[10]+
+	  first_line[iii]*first_samp[iii]*soln[11]);
      } else 
-       c_data[9][iii] = -9999.;
+       line_res[iii] = -9999.;
    }
    for(int ix=0;ix<2;ix++) {
      for(int iii=0;iii<neq;iii++) {
@@ -1059,21 +1057,10 @@ try {
    
    /* correct columns 6,7 for the predictor elevation offset (elvcor) */
 
-   for(int jjj=0;jjj<tablen;jjj++) {
-     c_data[5][jjj] = c_data[13][jjj];
-     c_data[6][jjj] = c_data[14][jjj];
+   for(int jjj=0;jjj<ifile.number_row();jjj++) {
+     second_line[jjj] = second_hcorr(jjj, 0);
+     second_samp[jjj] = second_hcorr(jjj, 1);
    }
-   
-   /* output the table columns */
-   
-   for(int iii=0;iii<11;iii++) {
-     status = IBISColumnSet(ibis,(char*)"U_FORMAT",(void*)"REAL",iii+1);
-     if (status!=1) IBISSignal(ibis,status,1);
-     status = IBISColumnWrite(ibis,(char*)(c_data[iii]),iii+1,1,tablen);
-     if (status!=1) IBISSignal(ibis,status,1);
-   }
-   
-   status = IBISFileClose(ibis,0);
    // Oddly, it is a VICAR convention to return a 1 for success
    // (rather than the normal 0 used in most unix programs).
    return 1;

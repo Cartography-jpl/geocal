@@ -806,6 +806,20 @@ class IbisFile(geocal_swig.generic_object.GenericObject):
         return self._v_unit()
 
 
+    def mark_updated(self, *args):
+        """
+
+        void GeoCal::IbisFile::mark_updated(int I)
+        Mark whole file as updated.
+
+        No need to do this if you open the file as "WRITE", but for
+        "UPDATE" we only update columns explicitly marked as updated (so we
+        don't write out unchanged column). This routine marks the specific
+        columns as updated and needing to be written to disk. 
+        """
+        return _ibis_file.IbisFile_mark_updated(self, *args)
+
+
     def flush(self):
         """
 
@@ -829,6 +843,7 @@ IbisFile._v_ibis_fh = new_instancemethod(_ibis_file.IbisFile__v_ibis_fh, None, I
 IbisFile._v_number_row = new_instancemethod(_ibis_file.IbisFile__v_number_row, None, IbisFile)
 IbisFile._v_number_col = new_instancemethod(_ibis_file.IbisFile__v_number_col, None, IbisFile)
 IbisFile._v_unit = new_instancemethod(_ibis_file.IbisFile__v_unit, None, IbisFile)
+IbisFile.mark_updated = new_instancemethod(_ibis_file.IbisFile_mark_updated, None, IbisFile)
 IbisFile.flush = new_instancemethod(_ibis_file.IbisFile_flush, None, IbisFile)
 IbisFile.__str__ = new_instancemethod(_ibis_file.IbisFile___str__, None, IbisFile)
 IbisFile.column_byte = new_instancemethod(_ibis_file.IbisFile_column_byte, None, IbisFile)

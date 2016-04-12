@@ -305,6 +305,8 @@ public:
   ImageCoordinate coordinate(const Geodetic& Gc) const
   { ImageCoordinate ic; map_info().coordinate(Gc, ic.sample, ic.line);
     return ic;}
+  blitz::Array<double, 2> coordinate(const blitz::Array<double, 1>& Lat,
+				     const blitz::Array<double, 1>& Lon) const;
   
   double grid_center_line_resolution() const;
   double grid_center_sample_resolution() const;

@@ -1,4 +1,5 @@
-class ImageToImageConnection:
+from builtins import object
+class ImageToImageConnection(object):
     '''This provides a connection between two images. Right now, we have one
     implementation that uses a ImageGroundConnection to do this. If we end 
     up having other methods, we may want to set up a class

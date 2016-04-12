@@ -73,6 +73,7 @@ SWIG_SRC_VICAR_RTL += @swigsrc@/vicar_dem_wrap.cc
 SWIG_SRC_VICAR_RTL += @swigsrc@/datum_geoid96_wrap.cc
 SWIG_SRC_VICAR_RTL += @swigsrc@/srtm_dem_wrap.cc
 SWIG_SRC_VICAR_RTL += @swigsrc@/vicar_raster_image_wrap.cc
+SWIG_SRC_GDAL_VICAR_RTL += @swigsrc@/vicar_ogr_wrap.cc
 
 geocal_test_all_SOURCES+= @srccartlab@/argus_camera_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/argus_orbit_test.cc

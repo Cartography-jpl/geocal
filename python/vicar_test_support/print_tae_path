@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+#
+# Print out the TAE environment variable
+import os
+print(os.environ['TAE_PATH'])

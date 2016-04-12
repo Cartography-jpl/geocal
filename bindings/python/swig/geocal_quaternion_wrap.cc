@@ -7729,6 +7729,91 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_quaternion_to_array(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quaternion_to_array" "', argument " "1"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quaternion_to_array" "', argument " "1"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  {
+    try {
+      result = GeoCal::quaternion_to_array((boost::math::quaternion< double > const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_array_to_quaternion(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< boost::math::quaternion< double > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj)
+      return NULL;
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    try {
+      result = GeoCal::array_to_quaternion((blitz::Array< double,1 > const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< double >(static_cast< const boost::math::quaternion< double >& >(result))), SWIGTYPE_p_boost__math__quaternionT_double_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_quat_to_ypr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   boost::math::quaternion< double > *arg1 = 0 ;
@@ -7891,6 +7976,39 @@ SWIGINTERN PyObject *_wrap_determine_quat_rot(PyObject *SWIGUNUSEDPARM(self), Py
     }
   }
   resultobj = SWIG_NewPointerObj((new boost::math::quaternion< double >(static_cast< const boost::math::quaternion< double >& >(result))), SWIGTYPE_p_boost__math__quaternionT_double_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_quat_normalize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quat_normalize" "', argument " "1"" of type '" "boost::math::quaternion< double > &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quat_normalize" "', argument " "1"" of type '" "boost::math::quaternion< double > &""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  {
+    try {
+      GeoCal::normalize(*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -9490,6 +9608,18 @@ static PyMethodDef SwigMethods[] = {
 		"boost::math::quaternion<T> GeoCal::matrix_to_quaternion(const T m[3][3])\n"
 		"\n"
 		""},
+	 { (char *)"quaternion_to_array", (PyCFunction)_wrap_quaternion_to_array, METH_O, (char *)"\n"
+		"\n"
+		"blitz::Array<T, 1> GeoCal::quaternion_to_array(const boost::math::quaternion< T > &qin)\n"
+		"Return a blitz array with the quaternion elements.\n"
+		"\n"
+		"This is mostly useful for python. \n"
+		""},
+	 { (char *)"array_to_quaternion", (PyCFunction)_wrap_array_to_quaternion, METH_O, (char *)"\n"
+		"\n"
+		"boost::math::quaternion<T> GeoCal::array_to_quaternion(const blitz::Array< T, 1 > &m)\n"
+		"\n"
+		""},
 	 { (char *)"quat_to_ypr", (PyCFunction)_wrap_quat_to_ypr, METH_O, (char *)"\n"
 		"\n"
 		"void GeoCal::quat_to_ypr(const boost::math::quaternion< T > &qin, T &yaw, T &pitch, T &roll)\n"
@@ -9510,6 +9640,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"Note that this isn't actually unique, but this is the 'shortest arc'\n"
 		"solution. \n"
+		""},
+	 { (char *)"quat_normalize", (PyCFunction)_wrap_quat_normalize, METH_O, (char *)"\n"
+		"\n"
+		"void GeoCal::normalize(boost::math::quaternion< double > &Q)\n"
+		"Normalize a quaternion. \n"
 		""},
 	 { (char *)"quat_rot_x", _wrap_quat_rot_x, METH_VARARGS, (char *)"\n"
 		"\n"

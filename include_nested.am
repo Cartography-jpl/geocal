@@ -13,6 +13,7 @@ include geocal/thirdparty/thirdparty.am
 include geocal/thirdparty/libsdbx/sdbx.am
 include geocal/thirdparty/libraw/libraw.am
 include geocal/lib/lib.am
+include geocal/bin/bin.am
 include geocal/lib/GeoCalCore/geocal_core.am
 include geocal/lib/GeoCalCore/Support/support.am
 include geocal/lib/GeoCalCore/Interface/interface.am
@@ -26,4 +27,5 @@ include geocal/python/python.am
 include geocal/python/bin/bin.am
 include geocal/python/lib/lib.am
 include geocal/python/doc/doc_python.am
+include geocal/python/vicar_test_support/vicar_test_support.am
 

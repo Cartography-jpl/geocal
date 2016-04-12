@@ -1,8 +1,10 @@
-from docopt import docopt
+from __future__ import absolute_import
+from builtins import object
+from geocal.docopt import *
 import re
 
 class DocOptSimple(object):
-    '''The package docopt (http://docopt.org) is a nice piece package,
+    '''The package docopt (http://docopt.org) is a nice package,
     but it has the disadvantage that getting the options etc. from it
     uses a somewhat unnatural interface (e.g., --my-opt=n comes as
     int(d["--my-opt"]) rather than OptionParser cleaner sort of
@@ -16,6 +18,16 @@ class DocOptSimple(object):
                  options_first=False):
         self.args = docopt(doc, argv=argv, help=help, version=version, 
                            options_first=options_first)
+
+    def __contains__(self, name):
+        for key in (name, 
+                    "<" + name + ">", 
+                    "--" + name,
+                    "--" + name.replace("_", "-")):
+            if(key in self.args):
+                return True
+        return False
+
     def __getattr__(self, name):
         for key in (name, 
                     "<" + name + ">", 
@@ -39,7 +51,7 @@ class DocOptSimple(object):
 
 def docopt_simple(doc, argv=None, help=True, version=None, 
                  options_first=False):
-    '''The package docopt (http://docopt.org) is a nice piece package,
+    '''The package docopt (http://docopt.org) is a nice package,
     but it has the disadvantage that getting the options etc. from it
     uses a somewhat unnatural interface. This gives a simpler interface
     sufficient for many programs. See DocOptSimple class for details

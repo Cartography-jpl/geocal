@@ -188,7 +188,8 @@ void VicarArgument::write_out(const std::string& Keyword, double Val)
 }
 
 void VicarArgument::write_out(const std::string& Keyword, 
-			      const std::string& Val)
+			      const std::string& Val,
+			      int Max_len)
 {
 #ifdef HAVE_VICAR_RTL
   // This is copied directly from cartoTaeUtils.c. We have a copy here so
@@ -196,8 +197,11 @@ void VicarArgument::write_out(const std::string& Keyword,
   struct PARBLK parblk; 
 
   q_init(&parblk, 500, P_ABORT);
-  const char* v = Val.c_str();
-  q_string(&parblk, Keyword.c_str(), 1, &v, P_ADD);
+  if(Val.size() > (size_t) (Max_len - 1))
+    throw Exception("string value is too long");
+  const char* v[1];
+  v[0] = Val.c_str();
+  q_string(&parblk, Keyword.c_str(), 1, v, P_ADD);
   zvq_out(&parblk);
 #else
   throw VicarNotAvailableException();

@@ -1,3 +1,4 @@
+from builtins import range
 from geocal_swig import *
 from xml.etree.cElementTree import parse
 

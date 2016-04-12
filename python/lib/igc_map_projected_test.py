@@ -1,5 +1,5 @@
 from nose.tools import *
-from image_ground_connection import *
+from geocal.image_ground_connection import *
 from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"

@@ -4,10 +4,12 @@
 
 AC_DEFUN([GEOCAL_SOURCE_DIRECTORY],[
 AC_SUBST([libgeocal], [${geocal_topdir}/lib])
+AC_SUBST([srcgeocalbin], [${geocal_topdir}/bin])
 AC_SUBST([srcpython], [${geocal_topdir}/python])
 AC_SUBST([srcpythonlib], [${srcpython}/lib])
 AC_SUBST([srcpythonbin], [${srcpython}/bin])
 AC_SUBST([docpythonsrc], [${srcpython}/doc])
+AC_SUBST([vicartestsupportsrc], [${srcpython}/vicar_test_support])
 AC_SUBST([geocalunittestdata], [${geocal_topdir}/unit_test_data])
 AC_SUBST([srcgeocalcore], [${libgeocal}/GeoCalCore])
 AC_SUBST([srcimplementation], [${srcgeocalcore}/Implementation])

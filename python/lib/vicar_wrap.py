@@ -1,6 +1,7 @@
+from __future__ import absolute_import
 from geocal_swig import *
-from vicar_interface import *
-from ibis_file_extension import *
+from .vicar_interface import *
+from .ibis_file_extension import *
 import numpy as np
 import math
 

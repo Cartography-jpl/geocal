@@ -1,5 +1,5 @@
 from nose.tools import *
-from quick_bird_reflectance import *
+from geocal.quick_bird_reflectance import *
 import os
 import numpy as np
 import numpy.testing as nptest

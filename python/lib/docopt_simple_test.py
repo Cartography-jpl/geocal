@@ -1,5 +1,5 @@
 from nose.tools import *
-from docopt_simple import docopt_simple
+from geocal.docopt_simple import *
 
 def test_docopt_simple():
     '''Test of docopt_simple'''
@@ -25,6 +25,8 @@ Options:
      Print program version
 '''
     d = docopt_simple(usage, argv=["a1", "a2", "o3"])
+    assert "in1" in d
+    assert "foo" not in d
     assert d.in1 == "a1"
     assert d.in2 == "a2"
     assert d.out == "o3"

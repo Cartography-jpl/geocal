@@ -27,6 +27,12 @@ if HAVE_VICAR_RTL
 INCLUDE_SWIG_SRC += $(SWIG_SRC_VICAR_RTL)
 endif
 FULL_SWIG_SRC += $(SWIG_SRC_VICAR_RTL)
+if HAVE_GDAL
+if HAVE_VICAR_RTL
+INCLUDE_SWIG_SRC += $(SWIG_SRC_GDAL_VICAR_RTL)
+endif
+endif
+FULL_SWIG_SRC += $(SWIG_SRC_GDAL_VICAR_RTL)
 EXTRA_DIST+= $(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC))
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la
@@ -77,7 +83,7 @@ $(swigsrc)/%_wrap.Pcc : %.i $(SWIG_TARGET)
 	rm $@.tmp
 
 $(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile $(PYTHON_TARGET)
-	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL)))
+	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL))) HAVE_GDAL_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL_VICAR_RTL)))
 
 $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET) $(SWIG_TARGET)
 	mkdir -p $*_doc

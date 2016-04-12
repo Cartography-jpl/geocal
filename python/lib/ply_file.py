@@ -1,5 +1,11 @@
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import numpy as np
-import safe_matplotlib_import
+from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 import struct
 
@@ -39,29 +45,36 @@ class PlyFile(object):
         if(self.vertex.shape[1] == 4):
             # Need to apply color map
             have_color = True
-            cdata = self.color_map((self.vertex[:,3] - self.vmin) / 
-                                   (self.vmax - self.vmin))
+            cdata = self.color_map(old_div((self.vertex[:,3] - self.vmin), 
+                                   (self.vmax - self.vmin)))
             cdata = (np.round(cdata * 255)).astype(np.uint8)
         else:
             have_color = False
-        with open(self.filename, "w") as fh:
-            print >>fh, "ply"
+        if(self.binary_format):
+            filemode = "wb"
+        else:
+            filemode = "w"
+        with open(self.filename, filemode) as fh:
+            h = "ply\n"
             if(self.binary_format):
-                print >>fh, "format binary_little_endian 1.0"
+                h += "format binary_little_endian 1.0\n"
             else:
-                print >>fh, "format ascii 1.0"
-            print >>fh, \
-'''element vertex %d
+                h += "format ascii 1.0\n"
+            h += '''element vertex %d
 property float x
 property float y
-property float z''' % self.vertex.shape[0]
+property float z\n''' % self.vertex.shape[0]
             if(have_color):
-                print >>fh, \
-'''property uchar red
+                h += '''property uchar red
 property uchar green
 property uchar blue
-property uchar alpha'''
-            print >>fh, "end_header"
+property uchar alpha\n'''
+            h += "end_header"
+            if(self.binary_format):
+                h += "\n"
+                fh.write(h.encode("utf-8"))
+            else:
+                print(h, file=fh)
             if(self.binary_format):
                 for i in range (self.vertex.shape[0]):
                     fh.write(struct.pack("<3f", *self.vertex[i,0:3]))
@@ -69,12 +82,12 @@ property uchar alpha'''
                         fh.write(struct.pack("<4B", *cdata[i,:]))
             else:
                 for i in range (self.vertex.shape[0]):
-                    print >>fh, self.vertex[i,0], \
-                        self.vertex[i,1], self.vertex[i, 2],
+                    print(self.vertex[i,0], \
+                        self.vertex[i,1], self.vertex[i, 2], end=' ', file=fh)
                     if(have_color):
-                        print >>fh, cdata[i,0], cdata[i,1], cdata[i,2], \
-                            cdata[i, 3],
-                    print >>fh, ""
+                        print(cdata[i,0], cdata[i,1], cdata[i,2], \
+                            cdata[i, 3], end=' ', file=fh)
+                    print("", file=fh)
         self.is_closed = True
     
     def __enter__(self):

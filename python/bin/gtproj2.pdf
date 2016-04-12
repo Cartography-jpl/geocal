@@ -1,0 +1,100 @@
+PROCESS       HELP=*
+PARM INP    TYPE=(STRING) COUNT=3
+PARM INCOL  TYPE=INTEGER COUNT=2:3 
+PARM OUTCOL TYPE=INTEGER COUNT=2:3
+PARM ALTMAP TYPE=KEYWORD COUNT=0:1 VALID=(EPOSC,TEC) DEFAULT=TEC
+END-PROC
+.TITLE
+VICAR/IBIS Program "gtproj2"
+.HELP
+PURPOSE
+
+   This is an updated version of "gtproj", which extends the 
+number of map projections supported. In particular, this adds
+support for projections on other planets (e.g., mars). This is 
+intended to be a drop in replacement, acting the same for map 
+projections already support by gtproj and working seamlessly 
+with other projections.
+
+   "gtproj2" converts map coordinates from one map projection 
+to another.  The input can either by (x,y) or (x,y,z) columns
+in an IBIS file.  If two columns are specified (the x,y case), 
+then an all-zero z column is generated.  Similarly, if no z 
+column is provided for output, then the z output is ignored.  
+The name of the IBIS file is the first element of the
+INP parameter.
+
+   The map coordinate specifications for both input and output
+must be in the headers of two files which are the second and 
+third elements of the INP parameter. The original "gtproj"
+program required these files to be VICAR files, but "gtproj2" 
+can work with any file GDAL can read (e.g., tif). These files 
+must have map projection information, so in the case of VICAR
+thte GeoTIFF state labels.
+
+If zero or one datum is given, then the conversion will assume
+same datum for input and output.  If both input and output have
+a datum, then datum conversion will take place as well.
+ 
+The columns in the IBIS file for coordinate I/O are given
+by the parameters INCOL and OUTCOL.
+
+The original gtproj had an optional EP_PAR parameter. This 
+doesn't seem to actually be used anywhere, so we don't support
+this in gtproj2. We could if this ended up being an issue.
+
+The 'EPSOC and 'TEC keywords are used in gtproj to select alternative 
+mapping packages. For compatibility we accept this keyword (so old
+code doesn't break), but this doesn't actually do anything. In all
+cases we use geocal to do the coordinate conversions.
+
+EXAMPLE
+
+gtproj2 (myibisfile,img_lambert,img_albers) incol=(2,3,4) outcol=(5,6,7)
+
+
+RESTRICTIONS
+
+None.  The IBIS column length is dynamically allocated. 
+
+WRITTEN BY:            Mike Smyth	Feb 2016
+
+COGNIZANT PROGRAMMER:  Mike Smyth
+
+.LEVEL1
+.VARIABLE INP
+ IBIS interface file, the
+ input GeoTIFF ref header,
+ and the output GeoTIFF
+ ref header
+.VARIABLE INCOL
+ (x,y) or (x,y,z) to be mapped
+.VARIABLE OUTCOL
+ (x,y) or (x,y,z) output
+.VARIABLE ALTMAP
+ 'EPOSC - accepted for backwards compatiblity,
+          doesn't do anything
+ 'TEC - accepted for backwards compatiblity,
+          doesn't do anything
+
+.LEVEL2
+.VARIABLE INP
+All three files are required.  The GeoTIFF references are
+in the state part of the VICAR header for VICAR files.
+
+See VICAR routine GTGEN for methods of creating GeoTIFF header
+files.
+.VARIABLE INCOL
+If a z column is not provided by the user, the program will
+provide a zero filled z column for input to the mapping
+routines.
+
+It would be unusual, but it is allowed to have (x,y) input and 
+(x,y,z) output, or vice-versa.
+.VARIABLE OUTCOL
+If a z column is not provided by the user, the program will
+discard the z column from the mapping routines.
+
+It would be unusual, but it is allowed to have (x,y) input and 
+(x,y,z) output, or vice-versa.
+.END

@@ -6,6 +6,7 @@ import logging
 import time
 from contextlib import contextmanager
 import glob
+import sys
 
 version = "October 29, 2013"
 usage='''Usage:
@@ -105,6 +106,10 @@ if(args.post_ms):
     post_ms_raw = os.path.abspath(args.post_ms)
 else:
     post_ms_raw = None
+if(args.dem_file):
+    dem_file = os.path.abspath(args.dem_file)
+else:
+    dem_file = None
 
 # Few things that appear often enough that it is worth stashing.
 dbfile = "end_to_end.db"
@@ -169,6 +174,14 @@ def determine_subset(fname):
         ss = max(int(floor(ulc.sample)), 0)
         el = min(int(ceil(lrc.line)), igc2.number_line - 1)
         es = min(int(ceil(lrc.sample)), igc2.number_sample - 1)
+        if(sl > el):
+            t = sl
+            sl = el
+            el = t
+        if(ss > es):
+            t = ss
+            ss = es
+            es = t
         igc1 = None
         igc2 = None
         subset = [sl, ss, el - sl + 1, es - ss + 1]
@@ -268,8 +281,8 @@ if(args.verbose):
 
 
 # 2. Initial DEM
-if(args.dem_file):
-    subprocess.check_call(["shelve_dem", args.dem_file, 
+if(dem_file):
+    subprocess.check_call(["shelve_dem", dem_file, 
                            dbfile + ":dem_initial"])
 else:
     subprocess.check_call(["shelve_dem", "--srtm", dbfile + ":dem_initial"])
@@ -448,6 +461,8 @@ if(args.diagnostic):
                                        "fftsize=128", "outnl=1200", 
                                        "remap=n", "seq=qr",  'echo=n',
                                        "labeladd=y", "rmscrit=90.0"])
+        if sys.version_info > (3,):
+            res = res.decode('utf-8')
         for ln in res.split('\n'):
             if(re.match(r'^MSG', ln)):
                 log.info(ln)

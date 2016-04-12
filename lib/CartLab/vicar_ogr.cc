@@ -149,12 +149,12 @@ public:
 
 class Tif {
 public:
-  Tif(const TempFile& Tf, const char* mode)
+  Tif(const char* Fname, const char* mode)
   {
-    tif = XTIFFOpen(Tf.temp_fname, mode);
+    tif = XTIFFOpen(Fname, mode);
     if(!tif) {
       Exception e("Trouble opening the temporary file ");
-      e << Tf.temp_fname;
+      e << Fname;
       throw e;
     }
   }
@@ -191,6 +191,9 @@ VicarOgr::VicarOgr()
 
   geotiff_tag_ascii.push_back(GTCitationGeoKey);
   geotiff_tag_ascii.push_back(GeogCitationGeoKey);
+  geotiff_tag_ascii.push_back(PCSCitationGeoKey);
+  geotiff_tag_ascii.push_back(VerticalCitationGeoKey);
+
   geotiff_tag_double.push_back(GeogInvFlatteningGeoKey);
   geotiff_tag_double.push_back(GeogSemiMajorAxisGeoKey);
   geotiff_tag_double.push_back(GeogSemiMinorAxisGeoKey);
@@ -205,13 +208,23 @@ VicarOgr::VicarOgr()
   geotiff_tag_double.push_back(ProjFalseOriginNorthingGeoKey);
   geotiff_tag_double.push_back(ProjLinearUnitSizeGeoKey);
   geotiff_tag_double.push_back(ProjNatOriginLatGeoKey);
+  geotiff_tag_double.push_back(ProjOriginLatGeoKey);
+  geotiff_tag_double.push_back(ProjOriginLongGeoKey);
   geotiff_tag_double.push_back(ProjNatOriginLongGeoKey);
   geotiff_tag_double.push_back(ProjRectifiedGridAngleGeoKey);
   geotiff_tag_double.push_back(ProjScaleAtNatOriginGeoKey);
+  geotiff_tag_double.push_back(ProjScaleAtOriginGeoKey);
   geotiff_tag_double.push_back(ProjStdParallel1GeoKey);
   geotiff_tag_double.push_back(ProjStdParallel2GeoKey);
   geotiff_tag_double.push_back(ProjStdParallelGeoKey);
   geotiff_tag_double.push_back(ProjStraightVertPoleLongGeoKey);
+  geotiff_tag_double.push_back(GeogLinearUnitSizeGeoKey);
+  geotiff_tag_double.push_back(GeogAngularUnitSizeGeoKey);
+  geotiff_tag_double.push_back(GeogPrimeMeridianLongGeoKey);
+  geotiff_tag_double.push_back(ProjCenterEastingGeoKey);
+  geotiff_tag_double.push_back(ProjCenterNorthingGeoKey);
+  geotiff_tag_double.push_back(ProjScaleAtCenterGeoKey);
+
   geotiff_tag_short.push_back(GTModelTypeGeoKey);
   geotiff_tag_short.push_back(GTRasterTypeGeoKey);
   geotiff_tag_short.push_back(GeogAngularUnitsGeoKey);
@@ -222,7 +235,13 @@ VicarOgr::VicarOgr()
   geotiff_tag_short.push_back(ProjLinearUnitsGeoKey);
   geotiff_tag_short.push_back(ProjectedCSTypeGeoKey);
   geotiff_tag_short.push_back(ProjectionGeoKey);
-  
+  geotiff_tag_short.push_back(GeogPrimeMeridianGeoKey);
+  geotiff_tag_short.push_back(GeogLinearUnitsGeoKey);
+  geotiff_tag_short.push_back(GeogAzimuthUnitsGeoKey);
+  geotiff_tag_short.push_back(VerticalCSTypeGeoKey);
+  geotiff_tag_short.push_back(VerticalDatumGeoKey);
+  geotiff_tag_short.push_back(VerticalUnitsGeoKey);
+
   BOOST_FOREACH(int t, geotiff_tag_ascii) {
     std::string kn = GTIFKeyName((geokey_t) t);
     boost::to_upper(kn);
@@ -244,6 +263,127 @@ VicarOgr::VicarOgr()
 }
 
 //-----------------------------------------------------------------------
+/// We can use the same code to create a gtiff file with the same
+/// labels as either a VicarFile or a VicarLiteFile. We use a template
+/// so we don't need to replace the code.
+//-----------------------------------------------------------------------
+
+template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*Fname) 
+{
+  using namespace VicarOgrNsp;
+  // Write out all of the keys we find in the VICAR file into the
+  // temporary file.
+  Tif tf(Fname, "w");
+  Gtif g(tf);
+  BOOST_FOREACH(int t, geotiff_tag_short) {
+    if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
+      std::string tv = F.label_string(tag_to_vicar_name[t],
+				      "GEOTIFF");
+      int v = atoi(tv.c_str());
+      // Special handling to override GTRASTERTYPEGEOKEY and force
+      // pixel is area. This is a workaround for an error in SRTM
+      // data, see VicarFile force_area_pixel description for details.
+      if(F.force_area_pixel() &&
+	 tag_to_vicar_name[t] == "GTRASTERTYPEGEOKEY")
+	v = 1;		// Force RasterPixelIsArea, which is
+      // code 1.
+      GTIFKeySet(g.gtif, (geokey_t) t, TYPE_SHORT, 1, (geocode_t) v);
+    }
+  }
+  BOOST_FOREACH(int t, geotiff_tag_double) {
+    if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
+      std::string tv = F.label_string(tag_to_vicar_name[t],
+				      "GEOTIFF");
+      double v = atof(tv.c_str());
+      GTIFKeySet(g.gtif, (geokey_t) t, TYPE_DOUBLE, 1, v);
+    }
+  }
+  BOOST_FOREACH(int t, geotiff_tag_ascii) {
+    if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
+      std::string v = F.label_string(tag_to_vicar_name[t], "GEOTIFF");
+      GTIFKeySet(g.gtif, (geokey_t) t, TYPE_ASCII, 0, v.c_str());
+    }
+  }
+  if(F.has_label("GEOTIFF MODELPIXELSCALETAG")) {
+    std::string vs = F.label_string("MODELPIXELSCALETAG", "GEOTIFF");
+    BOOST_FOREACH(char& c, vs)
+      if(c == '(' || c == ')' || c == ',')
+	c = ' ';
+    size_t istart = 0;
+    size_t iend = 0;
+    double v[3];
+    for(int i = 0; i < 3; ++i) {
+      istart = vs.find_first_not_of(" ", iend);
+      iend = vs.find_first_of(" ", istart);
+      v[i] = atof(vs.substr(istart, iend - istart).c_str());
+    }
+    TIFFSetField(tf.tif, TIFFTAG_GEOPIXELSCALE, 3, v);
+  }
+  if(F.has_label("GEOTIFF MODELTIEPOINTTAG")) {
+    std::string vs = F.label_string("MODELTIEPOINTTAG", "GEOTIFF");
+    BOOST_FOREACH(char& c, vs)
+      if(c == '(' || c == ')' || c == ',')
+	c = ' ';
+    size_t istart = 0;
+    size_t iend = 0;
+    double v[6];
+    for(int i = 0; i < 6; ++i) {
+      istart = vs.find_first_not_of(" ", iend);
+      iend = vs.find_first_of(" ", istart);
+      v[i] = atof(vs.substr(istart, iend - istart).c_str());
+    }
+    TIFFSetField(tf.tif, TIFFTAG_GEOTIEPOINTS, 6, v);
+  }
+  if(F.has_label("GEOTIFF MODELTRANSFORMATIONTAG")) {
+    std::string vs = F.label_string("MODELTRANSFORMATIONTAG", "GEOTIFF");
+    BOOST_FOREACH(char& c, vs)
+      if(c == '(' || c == ')' || c == ',')
+	c = ' ';
+    size_t istart = 0;
+    size_t iend = 0;
+    double v[16];
+    for(int i = 0; i < 16; ++i) {
+      istart = vs.find_first_not_of(" ", iend);
+      iend = vs.find_first_of(" ", istart);
+      v[i] = atof(vs.substr(istart, iend - istart).c_str());
+    }
+    TIFFSetField(tf.tif, TIFFTAG_GEOTRANSMATRIX, 16, v);
+  }
+
+  //----------------------------------------------------------------
+  // Special handling for the Geographic case. VICAR files sometimes
+  // leave off the GeographicTypeGeoKey in the Geographic case. This 
+  // is required by GDAL to know what to do with the file. So check
+  // if we have a geographic model w/o the GeographicTypeGeoKey
+  // specified, and if so add a WGS84 key. The Key is "4326", and
+  // this corresponds to "GCS_WGS_84".
+  //----------------------------------------------------------------
+
+  if(!F.has_label("GEOTIFF GEOGRAPHICTYPEGEOKEY") &&
+     F.has_label("GEOTIFF GTMODELTYPEGEOKEY") &&
+     atoi(F.label_string("GTMODELTYPEGEOKEY", "GEOTIFF").c_str()) 
+     == 2)
+    GTIFKeySet(g.gtif, GeographicTypeGeoKey, TYPE_SHORT, 1, 
+	       (geocode_t) 4326); 
+  
+  //----------------------------------------------------------------
+  // Set other tags needed to make a valid file, and write data.
+  // This is just a 1x1 file.
+  //----------------------------------------------------------------
+  
+  TIFFSetField(tf.tif, TIFFTAG_IMAGEWIDTH, 1);
+  TIFFSetField(tf.tif, TIFFTAG_IMAGELENGTH, 1);
+  TIFFSetField(tf.tif, TIFFTAG_COMPRESSION, COMPRESSION_NONE);
+  TIFFSetField(tf.tif, TIFFTAG_PLANARCONFIG, PLANARCONFIG_CONTIG);
+  TIFFSetField(tf.tif, TIFFTAG_PHOTOMETRIC, PHOTOMETRIC_MINISBLACK);
+  TIFFSetField(tf.tif, TIFFTAG_BITSPERSAMPLE, 8);
+  TIFFSetField(tf.tif, TIFFTAG_SAMPLESPERPIXEL, 1);
+  char c = '\0';
+  TIFFWriteEncodedStrip(tf.tif, 0, &c, 1);
+  GTIFWriteKeys(g.gtif);
+}
+
+//-----------------------------------------------------------------------
 /// We can use the same code to get MapInfo for either a VicarFile or
 /// a VicarLiteFile. We use a template here so we don't need to repeat
 /// our code
@@ -253,111 +393,7 @@ template<class T> MapInfo VicarOgr::from_vicar_template(const T& F)
 {
   using namespace VicarOgrNsp;
   TempFile f;
-  {
-    // Write out all of the keys we find in the VICAR file into the
-    // temporary file.
-    Tif tf(f, "w");
-    Gtif g(tf);
-    BOOST_FOREACH(int t, geotiff_tag_short) {
-      if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
-	std::string tv = F.label_string(tag_to_vicar_name[t],
-					     "GEOTIFF");
-	int v = atoi(tv.c_str());
-	// Special handling to override GTRASTERTYPEGEOKEY and force
-	// pixel is area. This is a workaround for an error in SRTM
-	// data, see VicarFile force_area_pixel description for details.
-	if(F.force_area_pixel() &&
-	   tag_to_vicar_name[t] == "GTRASTERTYPEGEOKEY")
-	  v = 1;		// Force RasterPixelIsArea, which is
-				// code 1.
-	GTIFKeySet(g.gtif, (geokey_t) t, TYPE_SHORT, 1, (geocode_t) v);
-      }
-    }
-    BOOST_FOREACH(int t, geotiff_tag_ascii) {
-      if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
-	std::string v = F.label_string(tag_to_vicar_name[t], "GEOTIFF");
-	GTIFKeySet(g.gtif, (geokey_t) t, TYPE_ASCII, 0, v.c_str());
-      }
-    }
-    if(F.has_label("GEOTIFF MODELPIXELSCALETAG")) {
-      std::string vs = F.label_string("MODELPIXELSCALETAG", "GEOTIFF");
-      BOOST_FOREACH(char& c, vs)
-	if(c == '(' || c == ')' || c == ',')
-	  c = ' ';
-      size_t istart = 0;
-      size_t iend = 0;
-      double v[3];
-      for(int i = 0; i < 3; ++i) {
-	istart = vs.find_first_not_of(" ", iend);
-	iend = vs.find_first_of(" ", istart);
-	v[i] = atof(vs.substr(istart, iend - istart).c_str());
-      }
-      TIFFSetField(tf.tif, TIFFTAG_GEOPIXELSCALE, 3, v);
-    }
-    if(F.has_label("GEOTIFF MODELTIEPOINTTAG")) {
-      std::string vs = F.label_string("MODELTIEPOINTTAG", "GEOTIFF");
-      BOOST_FOREACH(char& c, vs)
-	if(c == '(' || c == ')' || c == ',')
-	  c = ' ';
-      size_t istart = 0;
-      size_t iend = 0;
-      double v[6];
-      for(int i = 0; i < 6; ++i) {
-	istart = vs.find_first_not_of(" ", iend);
-	iend = vs.find_first_of(" ", istart);
-	v[i] = atof(vs.substr(istart, iend - istart).c_str());
-      }
-      TIFFSetField(tf.tif, TIFFTAG_GEOTIEPOINTS, 6, v);
-    }
-    if(F.has_label("GEOTIFF MODELTRANSFORMATIONTAG")) {
-      std::string vs = F.label_string("MODELTRANSFORMATIONTAG", "GEOTIFF");
-      BOOST_FOREACH(char& c, vs)
-	if(c == '(' || c == ')' || c == ',')
-	  c = ' ';
-      size_t istart = 0;
-      size_t iend = 0;
-      double v[16];
-      for(int i = 0; i < 16; ++i) {
-	istart = vs.find_first_not_of(" ", iend);
-	iend = vs.find_first_of(" ", istart);
-	v[i] = atof(vs.substr(istart, iend - istart).c_str());
-      }
-      TIFFSetField(tf.tif, TIFFTAG_GEOTRANSMATRIX, 16, v);
-    }
-
-    //----------------------------------------------------------------
-    // Special handling for the Geographic case. VICAR files sometimes
-    // leave off the GeographicTypeGeoKey in the Geographic case. This 
-    // is required by GDAL to know what to do with the file. So check
-    // if we have a geographic model w/o the GeographicTypeGeoKey
-    // specified, and if so add a WGS84 key. The Key is "4326", and
-    // this corresponds to "GCS_WGS_84".
-    //----------------------------------------------------------------
-
-    if(!F.has_label("GEOTIFF GEOGRAPHICTYPEGEOKEY") &&
-       F.has_label("GEOTIFF GTMODELTYPEGEOKEY") &&
-       atoi(F.label_string("GTMODELTYPEGEOKEY", "GEOTIFF").c_str()) 
-       == 2)
-      GTIFKeySet(g.gtif, GeographicTypeGeoKey, TYPE_SHORT, 1, 
-		 (geocode_t) 4326); 
-       
-    //----------------------------------------------------------------
-    // Set other tags needed to make a valid file, and write data.
-    // This is just a 1x1 file.
-    //----------------------------------------------------------------
-
-
-    TIFFSetField(tf.tif, TIFFTAG_IMAGEWIDTH, 1);
-    TIFFSetField(tf.tif, TIFFTAG_IMAGELENGTH, 1);
-    TIFFSetField(tf.tif, TIFFTAG_COMPRESSION, COMPRESSION_NONE);
-    TIFFSetField(tf.tif, TIFFTAG_PLANARCONFIG, PLANARCONFIG_CONTIG);
-    TIFFSetField(tf.tif, TIFFTAG_PHOTOMETRIC, PHOTOMETRIC_MINISBLACK);
-    TIFFSetField(tf.tif, TIFFTAG_BITSPERSAMPLE, 8);
-    TIFFSetField(tf.tif, TIFFTAG_SAMPLESPERPIXEL, 1);
-    char c = '\0';
-    TIFFWriteEncodedStrip(tf.tif, 0, &c, 1);
-    GTIFWriteKeys(g.gtif);
-  } // Destructor called, which flushes data to disk.
+  vicar_to_gtiff_template(F, f.temp_fname);
 
   GdalRasterImage gd(f.temp_fname);
   MapInfo m = gd.map_info();
@@ -371,6 +407,26 @@ template<class T> MapInfo VicarOgr::from_vicar_template(const T& F)
   return m.subset(0, 0, F.number_sample(), F.number_line());
 }
 
+
+//-----------------------------------------------------------------------
+/// Create a 1 pixel geotiff file that contains all the geotiff labels
+/// from the Vicar file.
+//-----------------------------------------------------------------------
+
+void VicarOgr::vicar_to_gtiff(const VicarFile& F, const std::string& Fname)
+{
+  vicar_to_gtiff_template(F, Fname.c_str());
+}
+
+//-----------------------------------------------------------------------
+/// Create a 1 pixel geotiff file that contains all the geotiff labels
+/// from the Vicar file.
+//-----------------------------------------------------------------------
+
+void VicarOgr::vicar_to_gtiff(const VicarLiteFile& F, const std::string& Fname)
+{
+  vicar_to_gtiff_template(F, Fname.c_str());
+}
 
 //-----------------------------------------------------------------------
 /// Read the metadata from a Vicar File, and use to create a MapInfo
@@ -415,7 +471,7 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
   // Now open the file back as a GeoTIFF file and copy keys we find to
   // VICAR.
 
-  Tif tf(ft, "r");
+  Tif tf(ft.temp_fname, "r");
   Gtif g(tf);
   const int bufsize = 1000;
   char buf[bufsize];

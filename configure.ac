@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(geocal, 1.05)
+AC_INIT(geocal, 1.18)
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([config/m4])
 AC_CONFIG_FILES([script/setup_afids_python.csh script/setup_afids_python.sh])
@@ -56,6 +56,14 @@ AC_FFTW(optional, cannot_build, default_search)
 # VicarLite files, but we won't do that yet.
 AC_GDAL(required, cannot_build, default_search)
 AC_VICAR_GDALPLUGIN(optional, cannot_build, default_search)
+
+#=================================================================
+# Have a little bit of code that depends on having both GDAL
+# and VICAR available, so add a test for that
+
+if test "$have_vicar_rtl" = "yes" -a "$have_gdal" = "yes"; then
+   AC_DEFINE(HAVE_GDAL_VICAR_RTL,,[Defined if we have GDAL and VICAR RTL])
+fi
 
 #=================================================================
 # We have some unit tests that make use of vicarb if it is available.

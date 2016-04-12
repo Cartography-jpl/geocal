@@ -31,12 +31,29 @@ if have_ibis_file:
     IbisFile.column = _column
 
 def _getitem(self, index):
+    if isinstance(index[1], slice):
+        r = range(*index[1].indices(self.number_col))
+        if isinstance(index[0], slice):
+            r2 = range(*index[0].indices(self.number_row))
+            return [ [self.column(i)[j] for i in r] for j in r2]
+        return [self.column(i)[index[0]] for i in r]
     return self.column(index[1])[index[0]]
 
 if have_ibis_file:
     IbisFile.__getitem__ = _getitem
 
 def _setitem(self, index, value):
+    if isinstance(index[1], slice):
+        r = range(*index[1].indices(self.number_col))
+        if isinstance(index[0], slice):
+            r2 = range(*index[0].indices(self.number_row))
+            for i2,j2 in enumerate(r2):
+                for i1, j1 in enumerate(r):
+                    self.column(j1)[j2] = value[i2][i1]
+            return 
+        for i1, j1 in enumerate(r):
+            self.column(j1)[index[0]] = value[i1]
+        return
     self.column(index[1])[index[0]] = value
 
 if have_ibis_file:
@@ -59,4 +76,13 @@ def _exit(self, type, value, traceback):
 
 if have_ibis_file:
     IbisFile.__exit__ = _exit
+
+def _create(fname, data, type="DOUB"):
+    '''Create a ibis file that exactly contains the given array, all of 
+    the given type.'''
+    with IbisFile(fname, data.shape[0], [type] * data.shape[1]) as f:
+        f[:,:] = data
+
+if have_ibis_file:
+    IbisFile.create = staticmethod(_create)
 

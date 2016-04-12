@@ -72,12 +72,12 @@ AirMspiIgc::AirMspiIgc
   // Get DEM set up
   boost::shared_ptr<Dem> dem;
   double dem_resolution;
-  if(c.value<std::string>("dem_type") == "usgs") {
+  if(c.value<std::string>("terrain_dem_type") == "usgs") {
     boost::shared_ptr<Datum> 
       datum(new DidDatum(c.value<std::string>("MSL_DATA")));
     dem.reset(new UsgsDem(c.value<std::string>("USGSDATA"), true, datum));
     dem_resolution = 10.0;
-  } else if (c.value<std::string>("dem_type") == "srtm_90m"){
+  } else if (c.value<std::string>("terrain_dem_type") == "srtm_90m"){
 	boost::shared_ptr<Datum>
 	datum(new DidDatum(c.value<std::string>("MSL_DATA")));
 	dem.reset(new Srtm90mDem(c.value<std::string>("USGSDATA"), true, datum));

@@ -108,12 +108,12 @@ AirMspiIgcCollection::AirMspiIgcCollection
   orbit_.reset(new AirMspiOrbit(Orbit_file_name, mspi_gimbal));
 
   // Get DEM set up
-  if(c.value<std::string>("dem_type") == "usgs") {
+  if(c.value<std::string>("terrain_dem_type") == "usgs") {
     boost::shared_ptr<Datum> 
       datum(new DidDatum(c.value<std::string>("MSL_DATA")));
     dem.reset(new UsgsDem(c.value<std::string>("USGSDATA"), true, datum));
     dem_resolution = 10.0;
-  } else if (c.value<std::string>("dem_type") == "srtm_90m"){
+  } else if (c.value<std::string>("terrain_dem_type") == "srtm_90m"){
 	boost::shared_ptr<Datum>
 	datum(new DidDatum(c.value<std::string>("MSL_DATA")));
 	dem.reset(new Srtm90mDem(c.value<std::string>("USGSDATA"), false, datum));

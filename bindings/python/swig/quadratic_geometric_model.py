@@ -218,7 +218,7 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     def _v_transformation(self):
         """
 
-        const blitz::Array<double, 1> GeoCal::QuadraticGeometricModel::transformation() const
+        const blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::transformation() const
         Transformation, which is the coefficients of the polynomial.
 
         We have
@@ -236,32 +236,40 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
         return self._v_transformation()
 
 
-    def _v_magnify_line(self):
+    def _v_magnify_line(self, *args):
         """
 
-        double GeoCal::QuadraticGeometricModel::magnify_line() const
-        Magnification factor to apply in line direction. 
+        void GeoCal::QuadraticGeometricModel::magnify_line(double v)
+
         """
-        return _quadratic_geometric_model.QuadraticGeometricModel__v_magnify_line(self)
+        return _quadratic_geometric_model.QuadraticGeometricModel__v_magnify_line(self, *args)
 
 
     @property
     def magnify_line(self):
         return self._v_magnify_line()
 
+    @magnify_line.setter
+    def magnify_line(self, value):
+      self._v_magnify_line(value)
 
-    def _v_magnify_sample(self):
+
+    def _v_magnify_sample(self, *args):
         """
 
-        double GeoCal::QuadraticGeometricModel::magnify_sample() const
-        Magnification factor to apply sample direction. 
+        void GeoCal::QuadraticGeometricModel::magnify_sample(double v)
+
         """
-        return _quadratic_geometric_model.QuadraticGeometricModel__v_magnify_sample(self)
+        return _quadratic_geometric_model.QuadraticGeometricModel__v_magnify_sample(self, *args)
 
 
     @property
     def magnify_sample(self):
         return self._v_magnify_sample()
+
+    @magnify_sample.setter
+    def magnify_sample(self, value):
+      self._v_magnify_sample(value)
 
 
     def _v_fit_type(self):

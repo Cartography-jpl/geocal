@@ -37,19 +37,21 @@ public:
 ///     trans(10)*py*py+trans(11)*px*py
 //-----------------------------------------------------------------------
   
-  const blitz::Array<double, 1> transformation() const {return trans;}
+  const blitz::Array<double, 1>& transformation() const {return trans;}
 
 //-----------------------------------------------------------------------
 /// Magnification factor to apply in line direction.
 //-----------------------------------------------------------------------
 
   double magnify_line() const {return mag_ln;}
+  void magnify_line(double v) {mag_ln = v;}
 
 //-----------------------------------------------------------------------
 /// Magnification factor to apply sample direction.
 //-----------------------------------------------------------------------
 
   double magnify_sample() const {return mag_smp;}
+  void magnify_sample(double v) {mag_smp = v;}
 
 //-----------------------------------------------------------------------
 /// Type of fit to do.

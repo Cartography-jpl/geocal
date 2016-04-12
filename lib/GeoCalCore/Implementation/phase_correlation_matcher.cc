@@ -558,3 +558,59 @@ void PhaseCorrelationMatcher::lsqfit
    *ierror = -1;
    return;
 }
+
+//-----------------------------------------------------------------------
+/// getzvl
+/// 
+/// gets a z value from a matrix by averaging over a window
+/// and uses bilinear interpolation for fractional pixel
+/// location
+///
+/// \parm a: input, double *a;
+///	two dimensional square array stored as
+///	one dimensional (as in fortran)
+/// \parm n: input, int n;
+///	array a is n x n
+/// \parm coord: input, double coord[2];
+///	the pixel location to obtain z value
+/// \parm nw: input, int nw;
+///	the window size to average over (must be odd)
+/// \parm nr: input, int nr;
+///	the allowable number of zero values in the
+///	window; if exceeded -9999.0 is returned
+//-----------------------------------------------------------------------
+
+double PhaseCorrelationMatcher::getzvl
+(const std::vector<double>& a,int n, 
+ const VicarImageCoordinate& coord,int nw,int nr) const
+{
+   int iline = (int)(coord.line-.5);
+   int isamp = (int)(coord.sample-.5);
+   int ill = iline-nw/2;
+   int jsl = isamp-nw/2;
+   double flu = coord.line-iline-.5;
+   double fsu = coord.sample-isamp-.5;
+   double fll = 1.0-flu;
+   double fsl = 1.0-fsu;
+   int ilu = ill+nw;
+   int jsu = jsl+nw;
+   if (ill<0||ilu>n) return(0.);
+   if (jsl<0||jsu>n) return(0.);
+
+   int ire = 0;
+   double sum = 0.;
+   for(int i=ill;i<ilu;i++)
+     for(int j=jsl;j<jsu;j++) {
+       double val = a[i*n+j];
+       if (val<0.5) ire++;
+       if (i==ill) val *= fll;
+       if (i==(ilu-1)) val *= flu;
+       if (j==jsl) val *= fsl;
+       if (j==(jsu-1)) val *= fsu;
+       sum += val;
+     }
+   if (ire<=nr) 
+     return(sum/((nw-1)*(nw-1)));
+   else 
+     return(-9999.0);
+}

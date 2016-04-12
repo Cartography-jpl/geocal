@@ -10,7 +10,7 @@
 #include "ibis_file.h"
 #include "constant.h"
 #include "phase_correlation_matcher.h"
-#include "vicar_image_coordinate.h"
+#include "quadratic_geometric_model.h"
 
 extern "C" {
 #include "carto/cartoMemUtils.h"
@@ -36,63 +36,6 @@ double ident[12] = {1.,0.,0.,0.,0.,0.,0.,1.,0.,0.,0.,0.};
 
 // Temporary, this will go away in a bit.
 boost::shared_ptr<PhaseCorrelationMatcher> matcher;
-
-/*=====================================================================
-
-getzvl
-
-gets a z value from a matrix by averaging over a window
-and uses bilinear interpolation for fractional pixel
-location
-
-arguments:
-
-     1. a: input, double *a;
-	two dimensional square array stored as
-	one dimensional (as in fortran)
-     2. n: input, int n;
-	array a is n x n
-     3. coord: input, double coord[2];
-	the pixel location to obtain z value
-     4. nw: input, int nw;
-	the window size to average over (must be odd)
-     5. nr: input, int nr;
-	the allowable number of zero values in the
-	window; if exceeded -9999.0 is returned
-*/
-
-double getzvl(const std::vector<double>& a,int n, double coord[2],int nw,int nr)
-{
-   int iline = (int)(coord[0]-.5);
-   int isamp = (int)(coord[1]-.5);
-   int ill = iline-nw/2;
-   int jsl = isamp-nw/2;
-   double flu = coord[0]-iline-.5;
-   double fsu = coord[1]-isamp-.5;
-   double fll = 1.0-flu;
-   double fsl = 1.0-fsu;
-   int ilu = ill+nw;
-   int jsu = jsl+nw;
-   if (ill<0||ilu>n) return(0.);
-   if (jsl<0||jsu>n) return(0.);
-
-   int ire = 0;
-   double sum = 0.;
-   for(int i=ill;i<ilu;i++)
-     for(int j=jsl;j<jsu;j++) {
-       double val = a[i*n+j];
-       if (val<0.5) ire++;
-       if (i==ill) val *= fll;
-       if (i==(ilu-1)) val *= flu;
-       if (j==jsl) val *= fsl;
-       if (j==(jsu-1)) val *= fsu;
-       sum += val;
-     }
-   if (ire<=nr) 
-     return(sum/((nw-1)*(nw-1)));
-   else 
-     return(-9999.0);
-}
 
 /*=====================================================================
 
@@ -137,7 +80,8 @@ arguments:
 
 void getgrid(int filenum,std::vector<double>& chip,int narray,
 	     int ndim,double trans[12],
-	     double centrx,double centry,double rmag[2],int* chop,
+	     const VicarImageCoordinate& Centr, 
+	     const QuadraticGeometricModel& Gmodel,int* chop,
 	     double pcl,double pcs,int zerothr)
 {
    /* the line,samp calcs are based on a .5 centered pixel, however,
@@ -161,8 +105,8 @@ void getgrid(int filenum,std::vector<double>& chip,int narray,
    double ymin = 99999999.0; double ymax = -99999999.0;
    for(int i=0;i<ndim;i++)
      for(int j=0;j<ndim;j++) {
-       double px = centrx+rmag[0]*((i-ndim/2)+1.0)+pcl;
-       double py = centry+rmag[1]*((j-ndim/2)+1.0)+pcs;
+       double px = Centr.line+Gmodel.magnify_line()*((i-ndim/2)+1.0)+pcl;
+       double py = Centr.sample+Gmodel.magnify_sample()*((j-ndim/2)+1.0)+pcs;
        gridx[i*ndim+j] = trans[0]*px+trans[1]*py+trans[2]+trans[3]*px*px+
 	 trans[4]*py*py+trans[5]*px*py;
        gridy[i*ndim+j] = trans[6]*px+trans[7]*py+trans[8]+trans[9]*px*px+
@@ -400,8 +344,8 @@ try {
     vmaxix.resize(autofit);
   }
  
-  double rmag[2];
-  rmag[0] = rmagtae[0]; rmag[1] = rmagtae[1];
+  QuadraticGeometricModel gm1(QuadraticGeometricModel::LINEAR, 
+			      rmagtae[0], rmagtae[1]);
   if (getw%2==0) throw Exception("zwind must be odd");
   retry = (nretry>1);
   if (retry&&gcpf) throw Exception("can't retry gcpf");
@@ -674,12 +618,10 @@ try {
        int bigchoplimit2 = search*search/2;   /* see zerolimit in rfit */
        double xlt = first_line[ibig]+rretry*rvecl[jbig];
        double xst = first_samp[ibig]+rretry*rvecs[jbig];
-       double pcntr[2], centr[2];
-       pcntr[0] = (int)(xlt+0.5);
-       pcntr[1] = (int)(xst+0.5);
-       VicarImageCoordinate centr(xlt-pcntr[0]+ifftsize/2.0+.5,
-				  xst-pcntr[1]+ifftsize/2.0+.5);
-       getgrid(1,chip1,ifftsize,ifftsize,ident,pcntr[0],pcntr[1],rmag,&chop,
+       VicarImageCoordinate pcntr((int)(xlt+0.5), (int)(xst+0.5));
+       VicarImageCoordinate centr(xlt-pcntr.line+ifftsize/2.0+.5,
+				  xst-pcntr.sample+ifftsize/2.0+.5);
+       getgrid(1,chip1,ifftsize,ifftsize,ident,pcntr,gm1,&chop,
                0.0,0.0,zerothr);
        if (chop>choplimit1) {
 	 if (jbig==nretry-1) printf("point outside first image\n");
@@ -690,7 +632,7 @@ try {
 
        ndim = std::min(search,srchw+ifftsize+2);
        if (ndim%2==1) ndim++;
-       getgrid(2,asrch,search,ndim,soln,pcntr[0],pcntr[1],rmag,&chop,
+       getgrid(2,asrch,search,ndim,soln,pcntr,gm1,&chop,
                elvoff(ibig,0),elvoff(ibig,1),zerothr);
        if((chop>bigchoplimit2)||((srchw==0)&&(chop>choplimit2))) {
 	 if(jbig==nretry-1) printf("point outside second image\n");
@@ -698,7 +640,8 @@ try {
        }
        ffthset = 1;
        printf("%5d (%7.1f %7.1f)%5dx%3.1f",
-	      ibig+1,pcntr[0],pcntr[1],srchw+ifftsize,rmag[1]);
+	      ibig+1,pcntr.line,pcntr.sample,srchw+ifftsize,
+	      gm1.magnify_sample());
          
        if (srchw>0&&ifftsize<fftsize) {
 	 printf("#\n");
@@ -729,11 +672,11 @@ try {
        refinerr = 0;
        if(subpix) 
 	 matcher->refine(corr,&vloff,&vsoff,&refinerr);
-       vloff *= rmag[0];
-       vsoff *= rmag[1];
+       vloff *= gm1.magnify_line();
+       vsoff *= gm1.magnify_sample();
        if (refinerr!=0) { printf("refine err 2\n"); continue; }
-       ocentr[0] = (ilin-(search-srchdim)*0.5)*rmag[0]+vloff;
-       ocentr[1] = (jsmp-(search-srchdim)*0.5)*rmag[1]+vsoff;
+       ocentr[0] = (ilin-(search-srchdim)*0.5)*gm1.magnify_line()+vloff;
+       ocentr[1] = (jsmp-(search-srchdim)*0.5)*gm1.magnify_sample()+vsoff;
        double wl = xlt+ocentr[0];
        double ws = xst+ocentr[1];
 
@@ -751,11 +694,11 @@ try {
        second_hcorr(ibig, 1) = soln[6]*wl+soln[7]*ws+soln[8]+
 	 soln[9]*wl*wl+soln[10]*ws*ws+soln[11]*wl*ws;
 	
-       first_z[ibig] = getzvl(chip1,ifftsize,centr,getw,getr);
+       first_z[ibig] = matcher->getzvl(chip1,ifftsize,centr,getw,getr);
        if (first_z[ibig]<-998.0) { printf("z val err\n"); continue; }
        VicarImageCoordinate acentr(search/2.0+0.5+vloff,
 				   search/2.0+0.5+vsoff);
-       second_z[ibig] = getzvl(asrch,search,acentr,getw,getr);
+       second_z[ibig] = matcher->getzvl(asrch,search,acentr,getw,getr);
        if (second_z[ibig]<-998.0) { printf("z val err\n"); continue; }
 	 
        resl = fabs(ocentr[0]);
@@ -808,14 +751,15 @@ try {
        b[1][neq++] = second_samp[ibig];
        if (neq<neqmin) break;
        if (srchw>msrchw) vmaxfac = vmaxfac*1.05;
-       if (rmag[0]>rmagmin[0]) vmaxfac = std::max(0.50,vmaxfac*0.9825);
+       if (gm1.magnify_line() > rmagmin[0]) 
+	 vmaxfac = std::max(0.50,vmaxfac*0.9825);
        srchw = std::min(std::max(msrchw,(4*srchw+2*(int)res)/5),srchw);
        if (srchw%2==1) srchw++;
        if (10*srchw<(11*msrchw+ifftsize)) srchw = msrchw;
-       if (magshrk[0]=='y'&&rmag[0]>rmagmin[0]) 
-	 rmag[0] = std::max(rmag[0]*0.9,rmagmin[0]);
-       if (magshrk[0]=='y'&&rmag[1]>rmagmin[1]) 
-	 rmag[1] = std::max(rmag[1]*0.9,rmagmin[1]);
+       if (magshrk[0]=='y' && gm1.magnify_line() > rmagmin[0]) 
+	 gm1.magnify_line(std::max(gm1.magnify_line()*0.9,rmagmin[0]));
+       if (magshrk[0]=='y' && gm1.magnify_sample() >rmagmin[1]) 
+	 gm1.magnify_sample(std::max(gm1.magnify_sample()*0.9,rmagmin[1]));
        break;
      }
    }

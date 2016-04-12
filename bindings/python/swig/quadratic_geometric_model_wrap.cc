@@ -6666,18 +6666,16 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_line__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuadraticGeometricModel const > tempshared1 ;
   boost::shared_ptr< GeoCal::QuadraticGeometricModel const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   double result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, 0 |  0 , &newmem);
@@ -6709,18 +6707,90 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_line__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
+  double *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel > *smartarg1 = 0 ;
+  double temp2 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuadraticGeometricModel__v_magnify_line" "', argument " "1"" of type '" "GeoCal::QuadraticGeometricModel *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::QuadraticGeometricModel > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "QuadraticGeometricModel__v_magnify_line" "', argument " "2"" of type '" "double""'");
+  } 
+  temp2 = static_cast< double >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->magnify_line((double const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_line(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"QuadraticGeometricModel__v_magnify_line",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_QuadraticGeometricModel__v_magnify_line__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_QuadraticGeometricModel__v_magnify_line__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuadraticGeometricModel__v_magnify_line'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::QuadraticGeometricModel::magnify_line() const\n"
+    "    GeoCal::QuadraticGeometricModel::magnify_line(double const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_sample__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuadraticGeometricModel const > tempshared1 ;
   boost::shared_ptr< GeoCal::QuadraticGeometricModel const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   double result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, 0 |  0 , &newmem);
@@ -6749,6 +6819,80 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_sample(PyObject *S
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_sample__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
+  double *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel > *smartarg1 = 0 ;
+  double temp2 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuadraticGeometricModel__v_magnify_sample" "', argument " "1"" of type '" "GeoCal::QuadraticGeometricModel *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::QuadraticGeometricModel > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "QuadraticGeometricModel__v_magnify_sample" "', argument " "2"" of type '" "double""'");
+  } 
+  temp2 = static_cast< double >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->magnify_sample((double const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_sample(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"QuadraticGeometricModel__v_magnify_sample",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_QuadraticGeometricModel__v_magnify_sample__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_QuadraticGeometricModel__v_magnify_sample__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuadraticGeometricModel__v_magnify_sample'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::QuadraticGeometricModel::magnify_sample() const\n"
+    "    GeoCal::QuadraticGeometricModel::magnify_sample(double const &)\n");
+  return 0;
 }
 
 
@@ -6890,7 +7034,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"QuadraticGeometricModel__v_transformation", (PyCFunction)_wrap_QuadraticGeometricModel__v_transformation, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<double, 1> GeoCal::QuadraticGeometricModel::transformation() const\n"
+		"const blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::transformation() const\n"
 		"Transformation, which is the coefficients of the polynomial.\n"
 		"\n"
 		"We have\n"
@@ -6900,15 +7044,15 @@ static PyMethodDef SwigMethods[] = {
 		"trans(6)*px+trans(7)*py+trans(8)+trans(9)*px*px+\n"
 		"trans(10)*py*py+trans(11)*px*py \n"
 		""},
-	 { (char *)"QuadraticGeometricModel__v_magnify_line", (PyCFunction)_wrap_QuadraticGeometricModel__v_magnify_line, METH_O, (char *)"\n"
+	 { (char *)"QuadraticGeometricModel__v_magnify_line", _wrap_QuadraticGeometricModel__v_magnify_line, METH_VARARGS, (char *)"\n"
 		"\n"
-		"double GeoCal::QuadraticGeometricModel::magnify_line() const\n"
-		"Magnification factor to apply in line direction. \n"
+		"void GeoCal::QuadraticGeometricModel::magnify_line(double v)\n"
+		"\n"
 		""},
-	 { (char *)"QuadraticGeometricModel__v_magnify_sample", (PyCFunction)_wrap_QuadraticGeometricModel__v_magnify_sample, METH_O, (char *)"\n"
+	 { (char *)"QuadraticGeometricModel__v_magnify_sample", _wrap_QuadraticGeometricModel__v_magnify_sample, METH_VARARGS, (char *)"\n"
 		"\n"
-		"double GeoCal::QuadraticGeometricModel::magnify_sample() const\n"
-		"Magnification factor to apply sample direction. \n"
+		"void GeoCal::QuadraticGeometricModel::magnify_sample(double v)\n"
+		"\n"
 		""},
 	 { (char *)"QuadraticGeometricModel__v_fit_type", (PyCFunction)_wrap_QuadraticGeometricModel__v_fit_type, METH_O, (char *)"\n"
 		"\n"

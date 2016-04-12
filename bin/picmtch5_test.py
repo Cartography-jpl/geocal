@@ -16,6 +16,10 @@ prefix = "picmtch5_xx"
 def setup():
     check_vicarb()
     add_tae_path(os.path.abspath(os.getcwd()), original_env)
+    # Check for picmtch5. Depending on how we are built we may or may not
+    # have this available. If not available, then just skip these tests.
+    if not check_for_proc("picmtch5"):
+        raise SkipTest
     vicarb_run("gen picmtch5_xxim0 nl=300 ns=310")
     vicarb_run("f2 inp=picmtch5_xxim0 out=picmtch5_xxim1 func=\"(line*327+samp*193+line*samp)%256\"")
     vicarb_run('''+

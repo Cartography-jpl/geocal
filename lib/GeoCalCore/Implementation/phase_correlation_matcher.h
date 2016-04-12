@@ -68,17 +68,19 @@ public:
   double correlation_last_match() const { return vmax; }
 
   virtual void print(std::ostream& Os) const;
-private:
+  // Temporarily expose this. This is so we can refactor picmtch5,
+  // we'll move this back to private shortly.
+  //private:
   int fftsize, search;
   fftw_complex *afftin,*afftout,*bfftin,*bfftout;
   bool nohpf; // If true, shut off high pass filter.
   bool subpix; // If true, then get subpixel accuracy.
   mutable double vmax;
   void rfit(int ilin,int jsmp, double* vloff, double* vsoff,
-	    double corr[3][3],int srchdim, double *chip1, double* asrch) const;
+  	    double corr[3][3],int srchdim, double *chip1, double* asrch) const;
   void refine(double corr[3][3],double* vloff,double* vsoff,int *ireferr) const;
   void lsqfit(double * a, double * r, int m, int n, double * x, double eps, 
-	      int * ierror ) const;
+  	      int * ierror ) const;
 
   friend class boost::serialization::access;
   template<class Archive>

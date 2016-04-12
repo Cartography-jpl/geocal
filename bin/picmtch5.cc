@@ -9,10 +9,11 @@
 #include "vicar_argument.h"
 #include "ibis_file.h"
 #include "constant.h"
+#include "phase_correlation_matcher.h"
+#include "vicar_image_coordinate.h"
 
 extern "C" {
 #include "carto/cartoMemUtils.h"
-#include "carto/cartoLsqUtils.h"
 #include "carto/cartoGtUtils.h"
 #include "carto/cartoSortUtils.h"
 }
@@ -28,71 +29,13 @@ using namespace GeoCal;
 
 int lnlg[2],lnsg[2],i_unit[2];
 std::vector<double> chip1, asrch;
-fftw_complex *afftin,*afftout,*bfftin,*bfftout;
 
 double rvecl[5] = {0.,1.,-1.,1.,-1.};
 double rvecs[5] = {0.,1.,-1.,-1.,1.};
 double ident[12] = {1.,0.,0.,0.,0.,0.,0.,1.,0.,0.,0.,0.};
 
-/*=====================================================================
-
-refine
-
-refines the match produced by routine rfit
-
-uses the 3 x 3 center of the fft correlation matrix and fits
-a general quadratic (least squares), then sets the partial
-derivatives in x and y to zero to find the max.  The max
-must be within 0.7 pixels of the center to qualify (otherwise
-the center itself is returned).
-
-arguments:
-
-     1. corr: input, double corr[3][3];
-	center of the correlation matrix as
-	returned by rfit
-     2. vloff: input,output, double *vloff;
-	the match produced by routine rfit at
-	the exact center of the 3 x 3, output
-	is the refined value
-     3. vsoff: input,output, double *vsoff;
-	the match produced by routine rfit at
-	the exact center of the 3 x 3, output
-	is the refined value
-     4. ireferr: input,output, int *ireferr;
-	error return, 0 if OK, 1 if error
-*/
-
-void refine(double corr[3][3],double* vloff,double* vsoff,int* ireferr)
-{
-   int iq,ierror;
-   double a[9*6],b[9],s[6],jvar,ivar,imx,jmx;
-   const double eps = 1e-7;
-   *ireferr = 0;
-   for(int i=0;i<3;i++) {
-     ivar = i-1.0;
-     for(int j=0;j<3;j++) {
-       jvar = j-1.0;
-       iq = i*3+j;
-       a[iq] = jvar*jvar;
-       a[iq+9] = jvar*ivar;
-       a[iq+18] = ivar*ivar;
-       a[iq+27] = jvar;
-       a[iq+36] = ivar;
-       a[iq+45] = 1.;
-       b[iq] = corr[i][j];
-     }
-   }
-   lsqfit(a,b,9,6,s,eps,&ierror);
-   if (ierror!=0 || s[0]==0 || (4.0*s[2]*s[0]==s[1]*s[1]))
-     { printf("sing rfit"); *ireferr = 1; return; }
-   imx = (s[1]*s[3]-2.0*s[4]*s[0])/(4.0*s[2]*s[0]-s[1]*s[1]);
-   jmx = -(s[1]*imx+s[3])/(2.0*s[0]);
-   if (imx*imx+jmx*jmx>=2.0) { *ireferr = 1; return; }
-   *vloff = *vloff+imx;
-   *vsoff = *vsoff+jmx;
-   return;
-}
+// Temporary, this will go away in a bit.
+boost::shared_ptr<PhaseCorrelationMatcher> matcher;
 
 /*=====================================================================
 
@@ -149,142 +92,6 @@ double getzvl(const std::vector<double>& a,int n, double coord[2],int nw,int nr)
      return(sum/((nw-1)*(nw-1)));
    else 
      return(-9999.0);
-}
-
-/*=====================================================================
-
-rfit
-
-uses fft to compute correlation function on two images stored
-in the specific global arrays chip1 and asrch.  Chip1 is a fixed
-fftsize x fftsize array and asrch is a larger array for correlation
-matching.  The correlation area is a srchdim x srchdim subset of the
-larger array.
-
-the method is fftinverse(fft(a) * conj(fft(b))
-
-arguments:
-
-     1. ilin: input, int ilin;
-	line offset into asrch (the larger array)
-     2. jsmp: input, int jsmp;
-	sample offset into asrch (the larger array)
-     3. vmax: output, double *vmax;
-	the max correlation value
-     4. vloff: output, double *vloff;
-	the line offset of the peak match relative to the
-	center of chip1 (16.0,16.0)
-     5. vsoff: output, double *vsoff;
-	the sample offset of the peak match relative to the
-	center of chip1 (16.0,16.0)
-     6. corr: output, double corr[3][3]
-	the 3 x 3 part of the correlation centered at the
-	peak, for use in subpixel refinement
-     7. nohpf: input, int nohpf;
-	if user sets to one, shuts off high pass filter
-     8. srchdim: input, int srchdim;
-	The current size of the search area in chip 2
-     9. fftsize: input, int fftsiz
-	the dimension of the fft. usually 32, 64, 128 or 256
-    10. search: input, int search
-        the dimension of the array containing the second
-        chip
-
-*/
-
-void rfit(int ilin,int jsmp,double* vmax,double* vloff,double* vsoff,
-	  double corr[3][3],int nohpf,int srchdim,int fftsize,int search)
-{
-   double t,v,bij,bij1,rv;
-   
-   int quadmark = srchdim/2;
-   int mincor = fftsize/6-1;
-   int maxcor = srchdim-mincor;
-   
-   double avg = 0.0;
-   for(int i=0;i<fftsize;i++)
-      for(int j=0;j<fftsize;j++)
-	avg += chip1[j*fftsize+i];
-   avg /= (fftsize*fftsize);
-   
-   for(int i=0;i<srchdim;i++)
-     for(int j=0;j<srchdim;j++) {
-       bfftin[j*srchdim+i][0] = asrch[(ilin+j)*search+(jsmp+i)];
-       bfftin[j*srchdim+i][1] = 0.0;
-       afftin[j*srchdim+i][0] = avg;
-       afftin[j*srchdim+i][1] = 0.0;
-     }
-   int koff = (srchdim-fftsize)/2;
-   for(int i=0;i<fftsize;i++)
-     for(int j=0;j<fftsize;j++)
-       afftin[(j+koff)*srchdim+i+koff][0] = chip1[j*fftsize+i];
-   fftw_plan p = fftw_plan_dft_2d(srchdim,srchdim,afftin,afftout,FFTW_FORWARD,
-				  FFTW_ESTIMATE);
-   fftw_execute(p);
-   fftw_destroy_plan(p);
-   
-   p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_FORWARD,
-			FFTW_ESTIMATE);
-   fftw_execute(p);
-   fftw_destroy_plan(p);
-      
-   afftout[0][0] = 0.;
-   afftout[0][1] = 0.;
-   if (!nohpf) 
-     for(int i=1;i<srchdim;i++) {
-       afftout[i][0] = 0.;
-       afftout[i][1] = 0.;
-       afftout[i*srchdim][0] = 0.;
-       afftout[i*srchdim][1] = 0.;
-     }
-   
-   for(int i=0;i<srchdim;i++)
-      for(int j=0;j<srchdim;j++) {
-	bij = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][0]+
-	  afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][1];
-	bij1 = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][1]-
-	  afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][0];
-	v = sqrt(bij*bij+bij1*bij1);
-	if (v<1.e-6) v = 1.e-6;
-	bfftin[j*srchdim+i][0] = bij/v;
-	bfftin[j*srchdim+i][1] = bij1/v;
-      }
-   p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_BACKWARD,
-			FFTW_ESTIMATE);
-   fftw_execute(p);
-   fftw_destroy_plan(p);
-
-   /* quadrant swap */
-   
-   for(int i=0;i<quadmark;i++)
-      for(int j=0;j<quadmark;j++) {
-	t = bfftout[i*srchdim+j][0];
-	bfftout[i*srchdim+j][0] = bfftout[(i+quadmark)*srchdim+j+quadmark][0];
-	bfftout[(i+quadmark)*srchdim+j+quadmark][0] = t;
-	t = bfftout[(i+quadmark)*srchdim+j][0];
-	bfftout[(i+quadmark)*srchdim+j][0] = bfftout[i*srchdim+j+quadmark][0];
-	bfftout[i*srchdim+j+quadmark][0] = t;
-      }
-
-   double tvmax = -1.e20;
-   int ixmax = mincor; int jxmax = mincor;
-   for(int i=mincor;i<maxcor;i++)
-      for(int j=mincor;j<maxcor;j++) {
-	rv = bfftout[j*srchdim+i][0];
-	if (rv>tvmax) { tvmax = rv; ixmax = i; jxmax = j; }
-      }
-   if (tvmax<0.0) tvmax = 0.0;
-   
-   /* normalized for varying footprints by three lines below */
-   
-   double ttemp = log10(srchdim)/log10(2.0);
-   ttemp = ttemp*ttemp;
-   *vmax = tvmax*10.0/(srchdim*ttemp*ttemp);
-   *vloff = jxmax-quadmark;
-   *vsoff = ixmax-quadmark;
-   for(int i=0;i<3;i++)
-      for(int j=0;j<3;j++)
-	corr[j][i] = bfftout[(jxmax+j-1)*srchdim+ixmax+i-1][0];
 }
 
 /*=====================================================================
@@ -470,7 +277,7 @@ void throwout(int* throwcount,double** a,double** b,int* neq,int neqmax)
       aa[i+5*(*neq)] = a[0][i]*a[1][i];
       bb[i] = b[ix][i];
     }
-    lsqfit(&aa[0],&bb[0],(*neq),3,&soln[ix*6],eps,&ierror);
+    matcher->lsqfit(&aa[0],&bb[0],(*neq),3,&soln[ix*6],eps,&ierror);
     for(int j=3;j<6;j++) soln[ix*6+j] = 0.0;
   }
    
@@ -513,9 +320,8 @@ try {
   int ierror;
   int chop,picout,srchdim;
   int retry,refinerr,ndim;
-  double vmax;
   double vloff, vsoff;
-  double acentr[2],resl,ress,res,corr[3][3];
+  double resl,ress,res,corr[3][3];
   double ocentr[2];
   double dline,dsamp;
   double soln[12],solninv[12];
@@ -558,7 +364,7 @@ try {
   if (msrc<fftsize) msrc = fftsize;
   if (search<fftsize) search = fftsize;
   if (search<msrc) search = msrc;
-  
+
   bool nohpf = va.has_keyword("nohpf");
   bool subpix = !va.has_keyword("nosubpix");
   bool geocord1 = va.has_keyword("geocord1");
@@ -647,11 +453,9 @@ try {
   mz_alloc2((unsigned char ***)&b,2,neqmax,sizeof(double));
   chip1.resize(fftsize*fftsize);
   asrch.resize(search*search);
-
-  afftin = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
-  afftout = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
-  bfftin = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
-  bfftout = (fftw_complex *)fftw_malloc(sizeof(fftw_complex)*search*search);
+  matcher.reset(new PhaseCorrelationMatcher(fftsize,search));
+  // Tempory, this should be done in constructor
+  matcher->nohpf = nohpf;
    
    /* is an output requested */
    
@@ -856,9 +660,9 @@ try {
 	     bb[iii] = b[ix][iii];
 	   }
 	   if (predfunc&&neq>11)
-	     lsqfit(&aa[0],&bb[0],neq,6,&soln[ix*6],eps,&ierror);
+	     matcher->lsqfit(&aa[0],&bb[0],neq,6,&soln[ix*6],eps,&ierror);
 	   else {
-	     lsqfit(&aa[0],&bb[0],neq,3,&soln[ix*6],eps,&ierror);
+	     matcher->lsqfit(&aa[0],&bb[0],neq,3,&soln[ix*6],eps,&ierror);
 	     for(int jjj=3;jjj<6;jjj++) soln[ix*6+jjj] = 0.0;
 	   }
 	 }
@@ -873,8 +677,8 @@ try {
        double pcntr[2], centr[2];
        pcntr[0] = (int)(xlt+0.5);
        pcntr[1] = (int)(xst+0.5);
-       centr[0] = xlt-pcntr[0]+ifftsize/2.0+.5;
-       centr[1] = xst-pcntr[1]+ifftsize/2.0+.5;
+       VicarImageCoordinate centr(xlt-pcntr[0]+ifftsize/2.0+.5,
+				  xst-pcntr[1]+ifftsize/2.0+.5);
        getgrid(1,chip1,ifftsize,ifftsize,ident,pcntr[0],pcntr[1],rmag,&chop,
                0.0,0.0,zerothr);
        if (chop>choplimit1) {
@@ -905,8 +709,14 @@ try {
        int ilin = (search-srchdim)/2;
        int jsmp = ilin;
 	 
-       rfit(ilin,jsmp,&vmax,&vloff,&vsoff,corr,nohpf,srchdim,ifftsize,search);
-         
+
+       // Temporary, I imagine we'll pass this in constructor
+       matcher->fftsize = ifftsize;
+       matcher->search = search;
+       matcher->rfit(ilin,jsmp,&vloff,&vsoff,corr,srchdim,&chip1[0],&asrch[0]);
+
+       double vmax = matcher->correlation_last_match();
+
        if(vmax<0.00001) { printf("refine err 1a\n"); continue; }
        if(vmax<tretry) { printf("  low correlation\n"); continue; }
          
@@ -917,7 +727,8 @@ try {
        }
 	 
        refinerr = 0;
-       if(subpix) refine(corr,&vloff,&vsoff,&refinerr);
+       if(subpix) 
+	 matcher->refine(corr,&vloff,&vsoff,&refinerr);
        vloff *= rmag[0];
        vsoff *= rmag[1];
        if (refinerr!=0) { printf("refine err 2\n"); continue; }
@@ -942,8 +753,8 @@ try {
 	
        first_z[ibig] = getzvl(chip1,ifftsize,centr,getw,getr);
        if (first_z[ibig]<-998.0) { printf("z val err\n"); continue; }
-       acentr[0] = search/2.0+0.5+vloff;
-       acentr[1] = search/2.0+0.5+vsoff;
+       VicarImageCoordinate acentr(search/2.0+0.5+vloff,
+				   search/2.0+0.5+vsoff);
        second_z[ibig] = getzvl(asrch,search,acentr,getw,getr);
        if (second_z[ibig]<-998.0) { printf("z val err\n"); continue; }
 	 
@@ -1037,10 +848,10 @@ try {
        bb[iii] = a[ix][iii];
      }
      if (predfunc&&neq>11)
-       lsqfit(&aa[0],&bb[0],neq,6,&solninv[ix*6],eps,&ierror);
+       matcher->lsqfit(&aa[0],&bb[0],neq,6,&solninv[ix*6],eps,&ierror);
      else 
        if (neq>=neqmin) {
-	 lsqfit(&aa[0],&bb[0],neq,3,&solninv[ix*6],eps,&ierror);
+	 matcher->lsqfit(&aa[0],&bb[0],neq,3,&solninv[ix*6],eps,&ierror);
 	 for(int jjj=3;jjj<6;jjj++) solninv[ix*6+jjj] = 0.0;
        }
    }

@@ -74,9 +74,9 @@ private:
   bool nohpf; // If true, shut off high pass filter.
   bool subpix; // If true, then get subpixel accuracy.
   mutable double vmax;
-  void rfit(int ilin,int jsmp, float* vloff,float* vsoff,
-	    float corr[3][3],int srchdim, float *chip1, float* asrch) const;
-  void refine(float corr[3][3],float* vloff,float* vsoff,int *ireferr) const;
+  void rfit(int ilin,int jsmp, double* vloff, double* vsoff,
+	    double corr[3][3],int srchdim, double *chip1, double* asrch) const;
+  void refine(double corr[3][3],double* vloff,double* vsoff,int *ireferr) const;
   void lsqfit(double * a, double * r, int m, int n, double * x, double eps, 
 	      int * ierror ) const;
 

@@ -131,16 +131,13 @@ void PhaseCorrelationMatcher::match_mask
 					   template_size(), template_size());
   Array<double, 2> asrch = New.read_double(new_line, new_sample,
 					   search_size(), search_size());
-  Array<float, 2> chip1f(chip1.shape()), asrchf(asrch.shape());
-  chip1f = cast<float>(chip1);
-  asrchf = cast<float>(asrch);
   // This can be smaller than search, but we don't support that yet.
   int srchdim = search;
   int ilin = (search - srchdim) / 2;
   int jsmp = ilin;
-  float vloff, vsoff, corr[3][3];
-  rfit(ilin, jsmp, &vloff, &vsoff, corr, srchdim, chip1f.data(), 
-       asrchf.data());
+  double vloff, vsoff, corr[3][3];
+  rfit(ilin, jsmp, &vloff, &vsoff, corr, srchdim, chip1.data(), 
+       asrch.data());
   int referr = 0;
   if(subpix)
     refine(corr, &vloff, &vsoff, &referr);
@@ -188,13 +185,13 @@ void PhaseCorrelationMatcher::print(std::ostream& Os) const
 ///	line offset into asrch (the larger array)
 /// \param jsmp: input, int jsmp;
 ///	sample offset into asrch (the larger array)
-/// \param vloff: output, float *vloff;
+/// \param vloff: output, double *vloff;
 ///	the line offset of the peak match relative to the
 ///	center of chip1 (16.0,16.0)
-/// \param vsoff: output, float *vsoff;
+/// \param vsoff: output, double *vsoff;
 ///	the sample offset of the peak match relative to the
 ///	center of chip1 (16.0,16.0)
-/// \param corr: output, float corr[3][3]
+/// \param corr: output, double corr[3][3]
 ///	the 3 x 3 part of the correlation centered at the
 ///	peak, for use in subpixel refinement
 /// \param srchdim: input, int srchdim;
@@ -205,115 +202,104 @@ void PhaseCorrelationMatcher::print(std::ostream& Os) const
 //-----------------------------------------------------------------------
 
 void PhaseCorrelationMatcher::rfit
-(int ilin,int jsmp,float* vloff,float* vsoff,float corr[3][3],
- int srchdim, float *chip1, float* asrch) const
+(int ilin,int jsmp,double* vloff,double* vsoff,double corr[3][3],
+ int srchdim, double *chip1, double* asrch) const
 {
-   int i,j,ixmax,jxmax,koff;
-   int quadmark,mincor,maxcor;
-   float t,v,bij,bij1,tvmax,rv,ttemp,avg;
-   fftw_plan p;
-
-   quadmark = srchdim/2;
-   mincor = fftsize/6-1;
-   maxcor = srchdim-mincor;
+  int quadmark = srchdim/2;
+  int mincor = fftsize/6-1;
+  int maxcor = srchdim-mincor;
    
-   avg = 0.0;
-   for (i=0;i<fftsize;i++)
-      for (j=0;j<fftsize;j++)
-	 avg += chip1[j*fftsize+i];
-   avg /= (float)(fftsize*fftsize);
+  double avg = 0.0;
+  for(int i=0;i<fftsize;i++)
+    for(int j=0;j<fftsize;j++)
+      avg += chip1[j*fftsize+i];
+  avg /= (fftsize*fftsize);
    
-   /*printf("ZERO DETECT CODE ON:ilin %d\n",ilin);  save for debugging*/
-   for (i=0;i<srchdim;i++)
-      for (j=0;j<srchdim;j++)
-	 {
-	 bfftin[j*srchdim+i][0] = asrch[(ilin+j)*search+(jsmp+i)];
-         /*if (bfftin[j*srchdim+i][0]<120&&(i>56)&&(j>56)&&(i<72)&&(j<72))
-            printf("B-ZERO:i,j,bfftin[j*srchdim+i][0] %d %d %7.1f\n",
-               i,j,bfftin[j*srchdim+i][0]);*/
-	 bfftin[j*srchdim+i][1] = 0.0;
-	 afftin[j*srchdim+i][0] = avg;
-	 afftin[j*srchdim+i][1] = 0.0;
-	 }
-   koff = (srchdim-fftsize)/2;
-   for (i=0;i<fftsize;i++)
-      for (j=0;j<fftsize;j++)
-         {
-	 afftin[(j+koff)*srchdim+i+koff][0] = chip1[j*fftsize+i];
-         /*if (chip1[j*fftsize+i]==0) printf("A-ZERO:i,j %d %d\n",i,j);*/
-         }
+  for(int i=0;i<srchdim;i++)
+    for(int j=0;j<srchdim;j++) {
+      bfftin[j*srchdim+i][0] = asrch[(ilin+j)*search+(jsmp+i)];
+      bfftin[j*srchdim+i][1] = 0.0;
+      afftin[j*srchdim+i][0] = avg;
+      afftin[j*srchdim+i][1] = 0.0;
+    }
+  int koff = (srchdim-fftsize)/2;
+  for(int i=0;i<fftsize;i++)
+    for(int j=0;j<fftsize;j++)
+      afftin[(j+koff)*srchdim+i+koff][0] = chip1[j*fftsize+i];
    
-   p = fftw_plan_dft_2d(srchdim,srchdim,afftin,afftout,FFTW_FORWARD,FFTW_ESTIMATE);
-   fftw_execute(p);
-   fftw_destroy_plan(p);
+  fftw_plan p = fftw_plan_dft_2d(srchdim,srchdim,afftin,afftout,FFTW_FORWARD,
+				 FFTW_ESTIMATE);
+  fftw_execute(p);
+  fftw_destroy_plan(p);
    
-   p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_FORWARD,FFTW_ESTIMATE);
-   fftw_execute(p);
-   fftw_destroy_plan(p);
+  p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_FORWARD,
+		       FFTW_ESTIMATE);
+  fftw_execute(p);
+  fftw_destroy_plan(p);
       
-   afftout[0][0] = 0.;
-   afftout[0][1] = 0.;
-   if (!nohpf) for (i=1;i<srchdim;i++)
-      {
+  afftout[0][0] = 0.;
+  afftout[0][1] = 0.;
+  if(!nohpf) 
+    for(int i=1;i<srchdim;i++) {
       afftout[i][0] = 0.;
       afftout[i][1] = 0.;
       afftout[i*srchdim][0] = 0.;
       afftout[i*srchdim][1] = 0.;
+    }
+   
+  for(int i=0;i<srchdim;i++)
+    for(int j=0;j<srchdim;j++) {
+      double bij = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][0]+
+	afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][1];
+      double bij1 = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][1]-
+	afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][0];
+      double v = sqrt(bij*bij+bij1*bij1);
+      if(v<1.e-6) 
+	v = 1.e-6;
+      bfftin[j*srchdim+i][0] = bij/v;
+      bfftin[j*srchdim+i][1] = bij1/v;
+    }
+  p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_BACKWARD,
+		       FFTW_ESTIMATE);
+  fftw_execute(p);
+  fftw_destroy_plan(p);
+
+  /* quadrant swap */
+   
+  for(int i=0;i<quadmark;i++)
+    for(int j=0;j<quadmark;j++) {
+      double t = bfftout[i*srchdim+j][0];
+      bfftout[i*srchdim+j][0] = bfftout[(i+quadmark)*srchdim+j+quadmark][0];
+      bfftout[(i+quadmark)*srchdim+j+quadmark][0] = t;
+      t = bfftout[(i+quadmark)*srchdim+j][0];
+      bfftout[(i+quadmark)*srchdim+j][0] = bfftout[i*srchdim+j+quadmark][0];
+      bfftout[i*srchdim+j+quadmark][0] = t;
+    }
+
+   double tvmax = -1.e20;
+   int ixmax = mincor; 
+   int jxmax = mincor;
+   for(int i=mincor;i<maxcor;i++)
+      for(int j=mincor;j<maxcor;j++) {
+	double rv = bfftout[j*srchdim+i][0];
+	if(rv>tvmax) { 
+	  tvmax = rv; 
+	  ixmax = i; 
+	  jxmax = j; 
+	}
       }
-   
-   for (i=0;i<srchdim;i++)
-      for (j=0;j<srchdim;j++)
-	 {
-	 bij = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][0]+
-               afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][1];
-	 bij1 = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][1]-
-               afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][0];
-	 v = sqrt((double)(bij*bij+bij1*bij1));
-	 if (v<1.e-6) v = 1.e-6;
-	 bfftin[j*srchdim+i][0] = bij/v;
-	 bfftin[j*srchdim+i][1] = bij1/v;
-	 }
-   p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_BACKWARD,FFTW_ESTIMATE);
-   fftw_execute(p);
-   fftw_destroy_plan(p);
-
-   /* quadrant swap */
-   
-   for (i=0;i<quadmark;i++)
-      for (j=0;j<quadmark;j++)
-	 {
-	 t = bfftout[i*srchdim+j][0];
-	 bfftout[i*srchdim+j][0] = bfftout[(i+quadmark)*srchdim+j+quadmark][0];
-	 bfftout[(i+quadmark)*srchdim+j+quadmark][0] = t;
-	 t = bfftout[(i+quadmark)*srchdim+j][0];
-	 bfftout[(i+quadmark)*srchdim+j][0] = bfftout[i*srchdim+j+quadmark][0];
-	 bfftout[i*srchdim+j+quadmark][0] = t;
-	 }
-
-   tvmax = -1.e20;
-   ixmax = mincor; jxmax = mincor;
-   for (i=mincor;i<maxcor;i++)
-      for (j=mincor;j<maxcor;j++)
-	 {
-	 rv = bfftout[j*srchdim+i][0];
-	 if (rv>tvmax) { tvmax = rv; ixmax = i; jxmax = j; }
-	 }
    if (tvmax<0.0) tvmax = 0.0;
    
    /* normalized for varying footprints by three lines below */
    
-   ttemp = log10((double)srchdim)/log10((double)2.0);
+   double ttemp = log10((double)srchdim)/log10(2.0);
    ttemp = ttemp*ttemp;
    vmax = tvmax*10.0/(srchdim*ttemp*ttemp);
-   *vloff = (float)jxmax-quadmark;
-   *vsoff = (float)ixmax-quadmark;
-   /*printf("ilin,srchdim,*vloff,*vsoff,quadmark,koff %d %d %7.1f %7.1f %d %d\n",
-           ilin,srchdim,*vloff,*vsoff,quadmark,koff);*/
-   
-   for (i=0;i<3;i++)
-      for (j=0;j<3;j++)
-	 corr[j][i] = bfftout[(jxmax+j-1)*srchdim+ixmax+i-1][0];
-
+   *vloff = jxmax-quadmark;
+   *vsoff = ixmax-quadmark;
+   for(int i=0;i<3;i++)
+     for(int j=0;j<3;j++)
+       corr[j][i] = bfftout[(jxmax+j-1)*srchdim+ixmax+i-1][0];
    return;
 }
 
@@ -328,14 +314,14 @@ void PhaseCorrelationMatcher::rfit
 /// must be within 0.7 pixels of the center to qualify (otherwise
 /// the center itself is returned).
 ///
-/// \param corr: input, float corr[3][3];
+/// \param corr: input, double corr[3][3];
 ///	center of the correlation matrix as
 ///	returned by rfit
-/// \param vloff: input,output, float *vloff;
+/// \param vloff: input,output, double *vloff;
 ///	the match produced by routine rfit at
 ///	the exact center of the 3 x 3, output
 ///	is the refined value
-/// \param vsoff: input,output, float *vsoff;
+/// \param vsoff: input,output, double *vsoff;
 ///	the match produced by routine rfit at
 ///	the exact center of the 3 x 3, output
 ///	is the refined value
@@ -343,39 +329,43 @@ void PhaseCorrelationMatcher::rfit
 ///	error return, 0 if OK, 1 if error
 //-----------------------------------------------------------------------
 
-void PhaseCorrelationMatcher::refine(float corr[3][3],float* vloff,
-				     float* vsoff,int * ireferr) const
+void PhaseCorrelationMatcher::refine(double corr[3][3],double* vloff,
+				     double* vsoff,int * ireferr) const
 {
-   int i,j,iq,ierror;
-   double a[54],b[9],s[6],jvar,ivar,imx,jmx,eps;
-   
-   *ireferr = 0;
-   for (i=0;i<3;i++)
-      {
-      ivar = (float)i-1.0;
-      for (j=0;j<3;j++)
-	 {
-	 jvar = (float)j-1.0;
-	 iq = i*3+j;
-	 a[iq] = jvar*jvar;
-	 a[iq+9] = jvar*ivar;
-	 a[iq+18] = ivar*ivar;
-	 a[iq+27] = jvar;
-	 a[iq+36] = ivar;
-	 a[iq+45] = 1.;
-	 b[iq] = corr[i][j];
-	 }
-      }
-   eps=1.e-7;
-   lsqfit(a,b,9,6,s,eps,&ierror);
-   if (ierror!=0 || s[0]==0 || (4.0*s[2]*s[0]==s[1]*s[1]))
-      { printf("sing rfit"); *ireferr = 1; return; }
-   imx = (s[1]*s[3]-2.0*s[4]*s[0])/(4.0*s[2]*s[0]-s[1]*s[1]);
-   jmx = -(s[1]*imx+s[3])/(2.0*s[0]);
-   if (imx*imx+jmx*jmx>=2.0) { *ireferr = 1; return; }
-   *vloff = *vloff+imx;
-   *vsoff = *vsoff+jmx;
-   return;
+  double a[9*6],b[9],s[6];
+  const double eps = 1e-7;
+
+  *ireferr = 0;
+  for(int i=0;i<3;i++) {
+    double ivar = i-1.0;
+    for(int j=0;j<3;j++) {
+      double jvar = j-1.0;
+      int iq = i*3+j;
+      a[iq] = jvar*jvar;
+      a[iq+9] = jvar*ivar;
+      a[iq+18] = ivar*ivar;
+      a[iq+27] = jvar;
+      a[iq+36] = ivar;
+      a[iq+45] = 1.;
+      b[iq] = corr[i][j];
+    }
+  }
+  int ierror;
+  lsqfit(a,b,9,6,s,eps,&ierror);
+  if(ierror!=0 || s[0]==0 || (4.0*s[2]*s[0]==s[1]*s[1])) { 
+    printf("sing rfit"); 
+    *ireferr = 1; 
+    return; 
+  }
+  double imx = (s[1]*s[3]-2.0*s[4]*s[0])/(4.0*s[2]*s[0]-s[1]*s[1]);
+  double jmx = -(s[1]*imx+s[3])/(2.0*s[0]);
+  if (imx*imx+jmx*jmx>=2.0) { 
+    *ireferr = 1; 
+    return; 
+  }
+  *vloff = *vloff+imx;
+  *vsoff = *vsoff+jmx;
+  return;
 }
 
 //-----------------------------------------------------------------------
@@ -402,7 +392,9 @@ void PhaseCorrelationMatcher::refine(float corr[3][3],float* vloff,
 ///	-1=zero matrix a; -2=m<n
 //-----------------------------------------------------------------------
 
-void PhaseCorrelationMatcher::lsqfit( double * a, double * r, int m, int n, double * x, double eps, int * ierror ) const
+void PhaseCorrelationMatcher::lsqfit
+(double * a, double * r, int m, int n, double * x, double eps, 
+ int * ierror ) const
 {
    double *buf,*alznorm; int *ipiv;
    int i,j,k,il,iu,kpiv=0,id,jl,ii,kl;

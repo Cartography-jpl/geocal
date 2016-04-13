@@ -79,10 +79,9 @@ arguments:
 */
 
 void getgrid(int filenum,std::vector<double>& chip,int narray,
-	     int ndim,double trans[12],
-	     const VicarImageCoordinate& Centr, 
+	     int ndim, const ImageCoordinate& Centr, 
 	     const QuadraticGeometricModel& Gmodel,int* chop,
-	     double pcl,double pcs,int zerothr)
+	     int zerothr)
 {
    /* the line,samp calcs are based on a .5 centered pixel, however,
    the main program also passes a .5 centered request.  These cancel
@@ -103,14 +102,14 @@ void getgrid(int filenum,std::vector<double>& chip,int narray,
    
    double xmin = 99999999.0; double xmax = -99999999.0;
    double ymin = 99999999.0; double ymax = -99999999.0;
+   blitz::Array<double, 1> trans = Gmodel.transformation();
    for(int i=0;i<ndim;i++)
      for(int j=0;j<ndim;j++) {
-       double px = Centr.line+Gmodel.magnify_line()*((i-ndim/2)+1.0)+pcl;
-       double py = Centr.sample+Gmodel.magnify_sample()*((j-ndim/2)+1.0)+pcs;
-       gridx[i*ndim+j] = trans[0]*px+trans[1]*py+trans[2]+trans[3]*px*px+
-	 trans[4]*py*py+trans[5]*px*py;
-       gridy[i*ndim+j] = trans[6]*px+trans[7]*py+trans[8]+trans[9]*px*px+
-	 trans[10]*py*py+trans[11]*px*py;
+       ImageCoordinate ic = Gmodel.original_image_coordinate
+	 (ImageCoordinate(Centr.line+ ((i-ndim/2)+1.0),
+			  Centr.sample+((j-ndim/2)+1.0)));
+       gridx[i*ndim+j] = ic.line;
+       gridy[i*ndim+j] = ic.sample;
        xmin = std::min(xmin,gridx[i*ndim+j]);
        ymin = std::min(ymin,gridy[i*ndim+j]);
        xmax = std::max(xmax,gridx[i*ndim+j]);
@@ -268,7 +267,6 @@ try {
   double resl,ress,res,corr[3][3];
   double ocentr[2];
   double dline,dsamp;
-  double soln[12],solninv[12];
 
   int status,parmcnt,o_unit;
   const double eps = 1e-7;
@@ -346,6 +344,11 @@ try {
  
   QuadraticGeometricModel gm1(QuadraticGeometricModel::LINEAR, 
 			      rmagtae[0], rmagtae[1]);
+  QuadraticGeometricModel gm2(QuadraticGeometricModel::LINEAR, 
+			      rmagtae[0], rmagtae[1]);
+  // Temporary, we should replace everything using this with gm2 stuff.
+  blitz::Array<double, 1>& soln = gm2.transformation();
+  blitz::Array<double, 1>& solninv = gm2.inverse_transformation();
   if (getw%2==0) throw Exception("zwind must be odd");
   retry = (nretry>1);
   if (retry&&gcpf) throw Exception("can't retry gcpf");
@@ -604,10 +607,10 @@ try {
 	     bb[iii] = b[ix][iii];
 	   }
 	   if (predfunc&&neq>11)
-	     matcher->lsqfit(&aa[0],&bb[0],neq,6,&soln[ix*6],eps,&ierror);
+	     matcher->lsqfit(&aa[0],&bb[0],neq,6,&soln(ix*6),eps,&ierror);
 	   else {
-	     matcher->lsqfit(&aa[0],&bb[0],neq,3,&soln[ix*6],eps,&ierror);
-	     for(int jjj=3;jjj<6;jjj++) soln[ix*6+jjj] = 0.0;
+	     matcher->lsqfit(&aa[0],&bb[0],neq,3,&soln(ix*6),eps,&ierror);
+	     for(int jjj=3;jjj<6;jjj++) soln(ix*6+jjj) = 0.0;
 	   }
 	 }
        }
@@ -618,11 +621,13 @@ try {
        int bigchoplimit2 = search*search/2;   /* see zerolimit in rfit */
        double xlt = first_line[ibig]+rretry*rvecl[jbig];
        double xst = first_samp[ibig]+rretry*rvecs[jbig];
-       VicarImageCoordinate pcntr((int)(xlt+0.5), (int)(xst+0.5));
-       VicarImageCoordinate centr(xlt-pcntr.line+ifftsize/2.0+.5,
-				  xst-pcntr.sample+ifftsize/2.0+.5);
-       getgrid(1,chip1,ifftsize,ifftsize,ident,pcntr,gm1,&chop,
-               0.0,0.0,zerothr);
+       // Not sure if this is ImageCoordinate or VicarImageCoordinate
+       ImageCoordinate pcntr((int)(xlt+0.5), (int)(xst+0.5));
+       ImageCoordinate pcntr2 = gm1.resampled_image_coordinate(pcntr);
+       ImageCoordinate centr(xlt-pcntr.line+ifftsize/2.0+.5,
+			     xst-pcntr.sample+ifftsize/2.0+.5);
+       getgrid(1,chip1,ifftsize,ifftsize,pcntr2,gm1,&chop,
+               zerothr);
        if (chop>choplimit1) {
 	 if (jbig==nretry-1) printf("point outside first image\n");
 	 continue;
@@ -632,8 +637,10 @@ try {
 
        ndim = std::min(search,srchw+ifftsize+2);
        if (ndim%2==1) ndim++;
-       getgrid(2,asrch,search,ndim,soln,pcntr,gm1,&chop,
-               elvoff(ibig,0),elvoff(ibig,1),zerothr);
+       ImageCoordinate pcntr3 = gm1.resampled_image_coordinate
+	 (ImageCoordinate(pcntr.line + elvoff(ibig,0),
+			  pcntr.sample + elvoff(ibig,1)));
+       getgrid(2,asrch,search,ndim,pcntr3,gm2,&chop,zerothr);
        if((chop>bigchoplimit2)||((srchw==0)&&(chop>choplimit2))) {
 	 if(jbig==nretry-1) printf("point outside second image\n");
 	 continue;
@@ -680,23 +687,23 @@ try {
        double wl = xlt+ocentr[0];
        double ws = xst+ocentr[1];
 
-       second_line[ibig] = (soln[0]*wl+soln[1]*ws+soln[2]+soln[3]*wl*wl+
-			    soln[4]*ws*ws+soln[5]*wl*ws);
-       second_samp[ibig] = (soln[6]*wl+soln[7]*ws+soln[8]+soln[9]*wl*wl+
-			    soln[10]*ws*ws+soln[11]*wl*ws);
+       second_line[ibig] = (soln(0)*wl+soln(1)*ws+soln(2)+soln(3)*wl*wl+
+			    soln(4)*ws*ws+soln(5)*wl*ws);
+       second_samp[ibig] = (soln(6)*wl+soln(7)*ws+soln(8)+soln(9)*wl*wl+
+			    soln(10)*ws*ws+soln(11)*wl*ws);
        corr_val[ibig] = vmax;
          
        wl += elvoff(ibig, 0);
        ws += elvoff(ibig, 1);
        
-       second_hcorr(ibig, 0) = soln[0]*wl+soln[1]*ws+soln[2]+
-	 soln[3]*wl*wl+ soln[4]*ws*ws+ soln[5]*wl*ws;
-       second_hcorr(ibig, 1) = soln[6]*wl+soln[7]*ws+soln[8]+
-	 soln[9]*wl*wl+soln[10]*ws*ws+soln[11]*wl*ws;
+       second_hcorr(ibig, 0) = soln(0)*wl+soln(1)*ws+soln(2)+
+	 soln(3)*wl*wl+ soln(4)*ws*ws+ soln(5)*wl*ws;
+       second_hcorr(ibig, 1) = soln(6)*wl+soln(7)*ws+soln(8)+
+	 soln(9)*wl*wl+soln(10)*ws*ws+soln(11)*wl*ws;
 	
        first_z[ibig] = matcher->getzvl(chip1,ifftsize,centr,getw,getr);
        if (first_z[ibig]<-998.0) { printf("z val err\n"); continue; }
-       VicarImageCoordinate acentr(search/2.0+0.5+vloff,
+       ImageCoordinate acentr(search/2.0+0.5+vloff,
 				   search/2.0+0.5+vsoff);
        second_z[ibig] = matcher->getzvl(asrch,search,acentr,getw,getr);
        if (second_z[ibig]<-998.0) { printf("z val err\n"); continue; }
@@ -756,10 +763,14 @@ try {
        srchw = std::min(std::max(msrchw,(4*srchw+2*(int)res)/5),srchw);
        if (srchw%2==1) srchw++;
        if (10*srchw<(11*msrchw+ifftsize)) srchw = msrchw;
-       if (magshrk[0]=='y' && gm1.magnify_line() > rmagmin[0]) 
+       if (magshrk[0]=='y' && gm1.magnify_line() > rmagmin[0]) {
 	 gm1.magnify_line(std::max(gm1.magnify_line()*0.9,rmagmin[0]));
-       if (magshrk[0]=='y' && gm1.magnify_sample() >rmagmin[1]) 
+	 gm2.magnify_line(gm1.magnify_line());
+       }
+       if (magshrk[0]=='y' && gm1.magnify_sample() >rmagmin[1]) {
 	 gm1.magnify_sample(std::max(gm1.magnify_sample()*0.9,rmagmin[1]));
+	 gm2.magnify_sample(gm1.magnify_sample());
+       }
        break;
      }
    }
@@ -769,15 +780,15 @@ try {
    for(int iii=0;iii<ifile.number_row();iii++) {
      if (line_res[iii]>0.5) {
        line_res[iii] = second_line[iii]- 
-	 (first_line[iii]*soln[0]+first_samp[iii]*soln[1]+soln[2]+
-	  first_line[iii]*first_line[iii]*soln[3]+ 
-	  first_samp[iii]*first_samp[iii]*soln[4]+
-	  first_line[iii]*first_samp[iii]*soln[5]);
+	 (first_line[iii]*soln(0)+first_samp[iii]*soln(1)+soln(2)+
+	  first_line[iii]*first_line[iii]*soln(3)+ 
+	  first_samp[iii]*first_samp[iii]*soln(4)+
+	  first_line[iii]*first_samp[iii]*soln(5));
        samp_res[iii] = second_samp[iii]- 
-	 (first_line[iii]*soln[6]+ first_samp[iii]*soln[7]+ soln[8]+
-	  first_line[iii]*first_line[iii]*soln[9]+
-	  first_samp[iii]*first_samp[iii]*soln[10]+
-	  first_line[iii]*first_samp[iii]*soln[11]);
+	 (first_line[iii]*soln(6)+ first_samp[iii]*soln(7)+ soln(8)+
+	  first_line[iii]*first_line[iii]*soln(9)+
+	  first_samp[iii]*first_samp[iii]*soln(10)+
+	  first_line[iii]*first_samp[iii]*soln(11));
      } else 
        line_res[iii] = -9999.;
    }
@@ -792,22 +803,22 @@ try {
        bb[iii] = a[ix][iii];
      }
      if (predfunc&&neq>11)
-       matcher->lsqfit(&aa[0],&bb[0],neq,6,&solninv[ix*6],eps,&ierror);
+       matcher->lsqfit(&aa[0],&bb[0],neq,6,&solninv(ix*6),eps,&ierror);
      else 
        if (neq>=neqmin) {
-	 matcher->lsqfit(&aa[0],&bb[0],neq,3,&solninv[ix*6],eps,&ierror);
-	 for(int jjj=3;jjj<6;jjj++) solninv[ix*6+jjj] = 0.0;
+	 matcher->lsqfit(&aa[0],&bb[0],neq,3,&solninv(ix*6),eps,&ierror);
+	 for(int jjj=3;jjj<6;jjj++) solninv(ix*6+jjj) = 0.0;
        }
    }
    printf("\n\nfinal line fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n",
-	  soln[0],soln[1],soln[2],soln[3],soln[4],soln[5]);
+	  soln(0),soln(1),soln(2),soln(3),soln(4),soln(5));
    printf("final samp fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n",
-	  soln[6],soln[7],soln[8],soln[9],soln[10],soln[11]);
+	  soln(6),soln(7),soln(8),soln(9),soln(10),soln(11));
    if(neq>=neqmin) {
      printf("inv line fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n",
-	    solninv[0],solninv[1],solninv[2],solninv[3],solninv[4],solninv[5]);
+	    solninv(0),solninv(1),solninv(2),solninv(3),solninv(4),solninv(5));
      printf("inv samp fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n\n",
-	    solninv[6],solninv[7],solninv[8],solninv[9],solninv[10],solninv[11]);
+	    solninv(6),solninv(7),solninv(8),solninv(9),solninv(10),solninv(11));
    }
    
    /* correct columns 6,7 for the predictor elevation offset (elvcor) */

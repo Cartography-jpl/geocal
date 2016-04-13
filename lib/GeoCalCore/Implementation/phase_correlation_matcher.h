@@ -82,7 +82,7 @@ public:
   void lsqfit(double * a, double * r, int m, int n, double * x, double eps, 
   	      int * ierror ) const;
   double getzvl(const std::vector<double>& a,int n, 
-		const VicarImageCoordinate& coord,int nw,int nr) const;
+		const ImageCoordinate& coord,int nw,int nr) const;
 
   friend class boost::serialization::access;
   template<class Archive>

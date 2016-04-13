@@ -192,8 +192,9 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     def __init__(self, *args):
         """
 
-        QuadraticGeometricModel::QuadraticGeometricModel(const blitz::Array< double, 1 > &Transformation, FitType ft=LINEAR,
-        double Magnify_line=1.0, double Magnify_sample=1.0)
+        QuadraticGeometricModel::QuadraticGeometricModel(const blitz::Array< double, 1 > &Transformation, const blitz::Array<
+        double, 1 > &Inverse_ransformation, FitType ft=LINEAR, double
+        Magnify_line=1.0, double Magnify_sample=1.0)
         Constructor.
 
         The transform gives the coefficients of the quadratic transform, it
@@ -218,15 +219,8 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     def _v_transformation(self):
         """
 
-        const blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::transformation() const
-        Transformation, which is the coefficients of the polynomial.
+        blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::transformation()
 
-        We have
-
-        x = trans(0)*px+trans(1)*py+trans(2)+trans(3)*px*px+
-        trans(4)*py*py+trans(5)*px*py y =
-        trans(6)*px+trans(7)*py+trans(8)+trans(9)*px*px+
-        trans(10)*py*py+trans(11)*px*py 
         """
         return _quadratic_geometric_model.QuadraticGeometricModel__v_transformation(self)
 
@@ -234,6 +228,20 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     @property
     def transformation(self):
         return self._v_transformation()
+
+
+    def _v_inverse_transformation(self):
+        """
+
+        blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::inverse_transformation()
+
+        """
+        return _quadratic_geometric_model.QuadraticGeometricModel__v_inverse_transformation(self)
+
+
+    @property
+    def inverse_transformation(self):
+        return self._v_inverse_transformation()
 
 
     def _v_magnify_line(self, *args):
@@ -296,6 +304,7 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     __swig_destroy__ = _quadratic_geometric_model.delete_QuadraticGeometricModel
 QuadraticGeometricModel.fit_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel_fit_transformation, None, QuadraticGeometricModel)
 QuadraticGeometricModel._v_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_transformation, None, QuadraticGeometricModel)
+QuadraticGeometricModel._v_inverse_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_inverse_transformation, None, QuadraticGeometricModel)
 QuadraticGeometricModel._v_magnify_line = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_magnify_line, None, QuadraticGeometricModel)
 QuadraticGeometricModel._v_magnify_sample = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_magnify_sample, None, QuadraticGeometricModel)
 QuadraticGeometricModel._v_fit_type = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_fit_type, None, QuadraticGeometricModel)

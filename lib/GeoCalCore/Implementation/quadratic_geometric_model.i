@@ -18,11 +18,13 @@ public:
 			  double Magnify_line = 1.0, 
 			  double Magnify_sample = 1.0);
   QuadraticGeometricModel(const blitz::Array<double, 1>& Transformation,
+			  const blitz::Array<double, 1>& Inverse_transformation,
 			  FitType ft = LINEAR,
 			  double Magnify_line = 1.0, 
 			  double Magnify_sample = 1.0);
   void fit_transformation(const GeometricTiePoints& Tp);
   %python_attribute(transformation, blitz::Array<double, 1>)
+  %python_attribute(inverse_transformation, blitz::Array<double, 1>)
   %python_attribute_with_set(magnify_line, double)
   %python_attribute_with_set(magnify_sample, double)
   %python_attribute(fit_type, FitType)

@@ -24,5 +24,6 @@ void GeometricModelImage::calc(int Lstart, int Sstart) const
   for(int i = 0; i < data.rows(); ++i)
     for(int j = 0; j < data.cols(); ++j)
       data(i, j) = raw_data_->interpolate
-	(model->image_coordinate(ImageCoordinate(i + Lstart, j + Sstart)));
+	(model->original_image_coordinate(ImageCoordinate(i + Lstart, 
+							  j + Sstart)));
 }

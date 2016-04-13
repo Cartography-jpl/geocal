@@ -16,8 +16,10 @@ namespace GeoCal {
 
 class GeometricModel: public GenericObject {
 public:
-  virtual ImageCoordinate image_coordinate(const ImageCoordinate& Resampled_ic)
-    const;
+  virtual ImageCoordinate original_image_coordinate
+  (const ImageCoordinate& Resampled_ic) const;
+  virtual ImageCoordinate resampled_image_coordinate
+  (const ImageCoordinate& Resampled_ic) const;
   std::string print_to_string() const;
 };
 

@@ -331,6 +331,10 @@ try {
     nretry = ffthalf+1;
   }
 
+  // Note, with the old picmtch4 the default value for fitmin was
+  // 0.19. But for some bizarre reason, zvp used by picmtch4 returned
+  // 0.0. To match the old behavior, we've replaced the defualt fitmin
+  // with 0.0. 
   double rmcor = va.arg<double>("fitmin");
   int autofit = va.arg<int>("autofit");
   if (autofit>0&&autofit<12)

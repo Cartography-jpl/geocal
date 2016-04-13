@@ -264,8 +264,7 @@ try {
   int chop,picout,srchdim;
   int retry,refinerr,ndim;
   double vloff, vsoff;
-  double resl,ress,res,corr[3][3];
-  double ocentr[2];
+  double res,corr[3][3];
   double dline,dsamp;
 
   int status,parmcnt,o_unit;
@@ -381,16 +380,13 @@ try {
 
   // Get elevation offset, which is either read from the ibis file are
   // set to zero.
-  blitz::Array<double, 2> elvoff(ifile.number_row(), 2);
+  std::vector<ImageCoordinate> elvoff(ifile.number_row(), ImageCoordinate(0,0));
   if(elvcor) {
     const std::vector<double>& line_elv_offset = ifile.column<double>(11).data;
     const std::vector<double>& samp_elv_offset = ifile.column<double>(12).data;
-    for(int i = 0; i < elvoff.rows(); ++i) {
-      elvoff(i, 0) = line_elv_offset[i];
-      elvoff(i, 1) = samp_elv_offset[i];
-    }
-  } else
-    elvoff = 0.0;
+    for(int i = 0; i < ifile.number_row(); ++i)
+      elvoff[i] = ImageCoordinate(line_elv_offset[i], samp_elv_offset[i]);
+  }
   // Second input line/sample, after doing height correction.
   blitz::Array<double, 2> second_hcorr(ifile.number_row(), 2);
   second_hcorr = 0.0;
@@ -622,14 +618,17 @@ try {
          
        int choplimit1 = (int)(ifftsize*ifftsize*zerolim);
        int choplimit2 = (int)(ifftsize*ifftsize*zerolim2);
-       int bigchoplimit2 = search*search/2;   /* see zerolimit in rfit */
-       double xlt = first_line[ibig]+rretry*rvecl[jbig];
-       double xst = first_samp[ibig]+rretry*rvecs[jbig];
+       int bigchoplimit2 = search*search/2;   /* see zerolimit in rfit
+						 */
+       // Perhaps this should be VicarImageCoordinate?
+       ImageCoordinate first_ic(first_line[ibig]+rretry*rvecl[jbig],
+				first_samp[ibig]+rretry*rvecs[jbig]);
        // Not sure if this is ImageCoordinate or VicarImageCoordinate
-       ImageCoordinate pcntr((int)(xlt+0.5), (int)(xst+0.5));
+       ImageCoordinate pcntr((int)(first_ic.line+0.5), 
+			     (int)(first_ic.sample+0.5));
        ImageCoordinate pcntr2 = gm1.resampled_image_coordinate(pcntr);
-       ImageCoordinate centr(xlt-pcntr.line+ifftsize/2.0+.5,
-			     xst-pcntr.sample+ifftsize/2.0+.5);
+       ImageCoordinate centr(first_ic.line-pcntr.line+ifftsize/2.0+.5,
+			     first_ic.sample-pcntr.sample+ifftsize/2.0+.5);
        getgrid(1,chip1,ifftsize,ifftsize,pcntr2,gm1,&chop,
                zerothr);
        if (chop>choplimit1) {
@@ -642,8 +641,8 @@ try {
        ndim = std::min(search,srchw+ifftsize+2);
        if (ndim%2==1) ndim++;
        ImageCoordinate pcntr3 = gm1.resampled_image_coordinate
-	 (ImageCoordinate(pcntr.line + elvoff(ibig,0),
-			  pcntr.sample + elvoff(ibig,1)));
+	 (ImageCoordinate(pcntr.line + elvoff[ibig].line,
+			  pcntr.sample + elvoff[ibig].sample));
        getgrid(2,asrch,search,ndim,pcntr3,gm2,&chop,zerothr);
        if((chop>bigchoplimit2)||((srchw==0)&&(chop>choplimit2))) {
 	 if(jbig==nretry-1) printf("point outside second image\n");
@@ -683,54 +682,63 @@ try {
        refinerr = 0;
        if(subpix) 
 	 matcher->refine(corr,&vloff,&vsoff,&refinerr);
-       vloff *= gm1.magnify_line();
-       vsoff *= gm1.magnify_sample();
        if (refinerr!=0) { printf("refine err 2\n"); continue; }
-       ocentr[0] = (ilin-(search-srchdim)*0.5)*gm1.magnify_line()+vloff;
-       ocentr[1] = (jsmp-(search-srchdim)*0.5)*gm1.magnify_sample()+vsoff;
-       double wl = xlt+ocentr[0];
-       double ws = xst+ocentr[1];
+       ImageCoordinate 
+	 second_ic_offset_resampled(ilin-(search-srchdim)*0.5+vloff,
+				    jsmp-(search-srchdim)*0.5+vsoff);
+       ImageCoordinate
+	 first_ic_resampled = gm1.resampled_image_coordinate(first_ic);
+       ImageCoordinate
+	 second_ic = gm2.original_image_coordinate(ImageCoordinate
+           (first_ic_resampled.line + second_ic_offset_resampled.line,
+	    first_ic_resampled.sample + second_ic_offset_resampled.sample));
 
-       second_line[ibig] = (soln(0)*wl+soln(1)*ws+soln(2)+soln(3)*wl*wl+
-			    soln(4)*ws*ws+soln(5)*wl*ws);
-       second_samp[ibig] = (soln(6)*wl+soln(7)*ws+soln(8)+soln(9)*wl*wl+
-			    soln(10)*ws*ws+soln(11)*wl*ws);
+       second_line[ibig] = second_ic.line;
+       second_samp[ibig] = second_ic.sample;
+
        corr_val[ibig] = vmax;
-         
-       wl += elvoff(ibig, 0);
-       ws += elvoff(ibig, 1);
+
+       ImageCoordinate elvoff_resampled = 
+	 gm1.resampled_image_coordinate(elvoff[ibig]);
+       ImageCoordinate
+	 second_ic_hcorr = gm2.original_image_coordinate(ImageCoordinate
+           (first_ic_resampled.line + second_ic_offset_resampled.line +
+	    elvoff_resampled.line,
+	    first_ic_resampled.sample + second_ic_offset_resampled.sample +
+	    elvoff_resampled.sample));
        
-       second_hcorr(ibig, 0) = soln(0)*wl+soln(1)*ws+soln(2)+
-	 soln(3)*wl*wl+ soln(4)*ws*ws+ soln(5)*wl*ws;
-       second_hcorr(ibig, 1) = soln(6)*wl+soln(7)*ws+soln(8)+
-	 soln(9)*wl*wl+soln(10)*ws*ws+soln(11)*wl*ws;
+       second_hcorr(ibig, 0) = second_ic_hcorr.line;
+       second_hcorr(ibig, 1) = second_ic_hcorr.sample;
 	
        first_z[ibig] = matcher->getzvl(chip1,ifftsize,centr,getw,getr);
        if (first_z[ibig]<-998.0) { printf("z val err\n"); continue; }
-       ImageCoordinate acentr(search/2.0+0.5+vloff,
-				   search/2.0+0.5+vsoff);
+       ImageCoordinate acentr(search/2.0+0.5+vloff*gm1.magnify_line(),
+				   search/2.0+0.5+vsoff*gm1.magnify_sample());
        second_z[ibig] = matcher->getzvl(asrch,search,acentr,getw,getr);
        if (second_z[ibig]<-998.0) { printf("z val err\n"); continue; }
 	 
-       resl = fabs(ocentr[0]);
-       ress = fabs(ocentr[1]);
-       res = sqrt(resl*resl+ress*ress);
+       ImageCoordinate second_ic_offset = 
+	 gm1.original_image_coordinate(second_ic_offset_resampled);
+       res = sqrt(second_ic_offset.line * second_ic_offset.line +
+		  second_ic_offset.sample * second_ic_offset.sample);
        if (res>thr_resp&&solved) {
-	 printf(" (%7.1f,%7.1f)  %7.3f*\n",ocentr[0],ocentr[1],vmax);
+	 printf(" (%7.1f,%7.1f)  %7.3f*\n",second_ic_offset.line,
+		second_ic_offset.sample,vmax);
 	 continue;
        }
        if (solved) thr_resp = std::max(thr_resp*0.95,thr_res);
        line_res[ibig] = 1.;
        if(jbig>0&&ffthalf==0) { /* this is a resetting for the retry case */
-	 first_line[ibig] = xlt;
-	 first_samp[ibig] = xst;
-	 dline = t[0]*xlt+t[1]*xst+t[2];
-	 dsamp = t[3]*xlt+t[4]*xst+t[5];
+	 first_line[ibig] = first_ic.line;
+	 first_samp[ibig] = first_ic.sample;
+	 dline = t[0]*first_ic.line+t[1]*first_ic.sample+t[2];
+	 dsamp = t[3]*first_ic.line+t[4]*first_ic.sample+t[5];
 	 first_line_or_east[ibig] = dline;
 	 first_samp_or_west[ibig] = dline;
        }
 
-       printf(" (%7.1f,%7.1f)  %7.3f\n",ocentr[0],ocentr[1],vmax);
+       printf(" (%7.1f,%7.1f)  %7.3f\n",second_ic_offset.line,
+	      second_ic_offset.sample,vmax);
        if (autoix<autofit) {
 	 vmaxvec[autoix] = vmax;
 	 vmaxix[autoix++] = ibig+1;
@@ -756,8 +764,8 @@ try {
        if (autoix<autofit) break;
        if (vmax<rmcor) break;
        line_res[ibig] = 2.;
-       a[0][neq] = xlt;
-       a[1][neq] = xst;
+       a[0][neq] = first_ic.line;
+       a[1][neq] = first_ic.sample;
        b[0][neq] = second_line[ibig];
        b[1][neq++] = second_samp[ibig];
        if (neq<neqmin) break;
@@ -783,16 +791,12 @@ try {
 
    for(int iii=0;iii<ifile.number_row();iii++) {
      if (line_res[iii]>0.5) {
-       line_res[iii] = second_line[iii]- 
-	 (first_line[iii]*soln(0)+first_samp[iii]*soln(1)+soln(2)+
-	  first_line[iii]*first_line[iii]*soln(3)+ 
-	  first_samp[iii]*first_samp[iii]*soln(4)+
-	  first_line[iii]*first_samp[iii]*soln(5));
-       samp_res[iii] = second_samp[iii]- 
-	 (first_line[iii]*soln(6)+ first_samp[iii]*soln(7)+ soln(8)+
-	  first_line[iii]*first_line[iii]*soln(9)+
-	  first_samp[iii]*first_samp[iii]*soln(10)+
-	  first_line[iii]*first_samp[iii]*soln(11));
+       ImageCoordinate first_ic_resampled = gm1.resampled_image_coordinate
+	 (ImageCoordinate(first_line[iii], first_samp[iii]));
+       ImageCoordinate second_pred = 
+	 gm2.original_image_coordinate(first_ic_resampled);
+       line_res[iii] = second_line[iii]-second_pred.line;
+       samp_res[iii] = second_samp[iii]-second_pred.sample; 
      } else 
        line_res[iii] = -9999.;
    }

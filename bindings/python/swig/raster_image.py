@@ -442,6 +442,20 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         return _raster_image.RasterImage_unchecked_read_double(self, Line, Sample)
 
 
+    def read_with_pad(self, Lstart, Sstart, Number_line, Number_sample, Fill_value=0):
+        """
+
+        blitz::Array< int, 2 > RasterImage::read_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample, int
+        Fill_value=0) const
+        Return a subset of the image.
+
+        This variation of read allows the data read to extend past the actual
+        RasterImage (e.g., negative start line). In this case, we return the
+        given fill value for the outside area. 
+        """
+        return _raster_image.RasterImage_read_with_pad(self, Lstart, Sstart, Number_line, Number_sample, Fill_value)
+
+
     def read_double(self, Lstart, Sstart, Number_line, Number_sample):
         """
 
@@ -454,6 +468,20 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         but derived classes can override this. 
         """
         return _raster_image.RasterImage_read_double(self, Lstart, Sstart, Number_line, Number_sample)
+
+
+    def read_double_with_pad(self, Lstart, Sstart, Number_line, Number_sample, Fill_value=0.0):
+        """
+
+        blitz::Array< double, 2 > RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample, double
+        Fill_value=0.0) const
+        Return a subset of the image.
+
+        This variation of read allows the data read to extend past the actual
+        RasterImage (e.g., negative start line). In this case, we return the
+        given fill value for the outside area. 
+        """
+        return _raster_image.RasterImage_read_double_with_pad(self, Lstart, Sstart, Number_line, Number_sample, Fill_value)
 
 
     def read(self, *args):
@@ -605,7 +633,9 @@ RasterImage._v_number_sample = new_instancemethod(_raster_image.RasterImage__v_n
 RasterImage._v_number_tile_line = new_instancemethod(_raster_image.RasterImage__v_number_tile_line, None, RasterImage)
 RasterImage._v_number_tile_sample = new_instancemethod(_raster_image.RasterImage__v_number_tile_sample, None, RasterImage)
 RasterImage.unchecked_read_double = new_instancemethod(_raster_image.RasterImage_unchecked_read_double, None, RasterImage)
+RasterImage.read_with_pad = new_instancemethod(_raster_image.RasterImage_read_with_pad, None, RasterImage)
 RasterImage.read_double = new_instancemethod(_raster_image.RasterImage_read_double, None, RasterImage)
+RasterImage.read_double_with_pad = new_instancemethod(_raster_image.RasterImage_read_double_with_pad, None, RasterImage)
 RasterImage.read = new_instancemethod(_raster_image.RasterImage_read, None, RasterImage)
 RasterImage.write = new_instancemethod(_raster_image.RasterImage_write, None, RasterImage)
 RasterImage.__str__ = new_instancemethod(_raster_image.RasterImage___str__, None, RasterImage)

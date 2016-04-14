@@ -196,11 +196,17 @@ public:
   read(int Lstart, int Sstart, int Number_line, int Number_sample) 
     const;
   blitz::Array<int, 2>
+  read_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample,
+		int Fill_value = 0) const;
+  blitz::Array<int, 2>
   read(const RasterImageTileIterator& Ti) const; 
 
   virtual blitz::Array<double, 2> 
   read_double(int Lstart, int Sstart, int Number_line, 
 	      int Number_sample) const;
+  blitz::Array<double, 2>
+  read_double_with_pad(int Lstart, int Sstart, int Number_line, 
+		       int Number_sample, double Fill_value = 0.0) const;
 
 //-----------------------------------------------------------------------
 /// Write the pixel value to the given location.

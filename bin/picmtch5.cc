@@ -11,6 +11,8 @@
 #include "constant.h"
 #include "phase_correlation_matcher.h"
 #include "quadratic_geometric_model.h"
+#include "vicar_raster_image.h"
+#include "geometric_model_image.h"
 
 extern "C" {
 #include "carto/cartoMemUtils.h"
@@ -36,6 +38,8 @@ double ident[12] = {1.,0.,0.,0.,0.,0.,0.,1.,0.,0.,0.,0.};
 
 // Temporary, this will go away in a bit.
 boost::shared_ptr<PhaseCorrelationMatcher> matcher;
+bool print_chips = false;
+bool do_get_grid = false;
 
 /*=====================================================================
 
@@ -108,6 +112,11 @@ void getgrid(int filenum,std::vector<double>& chip,int narray,
        ImageCoordinate ic = Gmodel.original_image_coordinate
 	 (ImageCoordinate(Centr.line+ ((i-ndim/2)+1.0),
 			  Centr.sample+((j-ndim/2)+1.0)));
+       if(i == 0 && j == 0)
+	 std::cerr << "hi there: " 
+		   << ImageCoordinate(Centr.line+ ((i-ndim/2)+1.0),
+				      Centr.sample+((j-ndim/2)+1.0))
+		   << "  " << ic << "\n";
        gridx[i*ndim+j] = ic.line;
        gridy[i*ndim+j] = ic.sample;
        xmin = std::min(xmin,gridx[i*ndim+j]);
@@ -345,13 +354,15 @@ try {
     vmaxix.resize(autofit);
   }
  
-  QuadraticGeometricModel gm1(QuadraticGeometricModel::LINEAR, 
-			      rmagtae[0], rmagtae[1]);
-  QuadraticGeometricModel gm2(QuadraticGeometricModel::LINEAR, 
-			      rmagtae[0], rmagtae[1]);
+  boost::shared_ptr<QuadraticGeometricModel> gm1
+    (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
+				 rmagtae[0], rmagtae[1]));
+  boost::shared_ptr<QuadraticGeometricModel> gm2
+    (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
+				 rmagtae[0], rmagtae[1]));
   // Temporary, we should replace everything using this with gm2 stuff.
-  blitz::Array<double, 1>& soln = gm2.transformation();
-  blitz::Array<double, 1>& solninv = gm2.inverse_transformation();
+  blitz::Array<double, 1>& soln = gm2->transformation();
+  blitz::Array<double, 1>& solninv = gm2->inverse_transformation();
   if (getw%2==0) throw Exception("zwind must be odd");
   retry = (nretry>1);
   if (retry&&gcpf) throw Exception("can't retry gcpf");
@@ -391,6 +402,14 @@ try {
   blitz::Array<double, 2> second_hcorr(ifile.number_row(), 2);
   second_hcorr = 0.0;
 
+  boost::shared_ptr<RasterImage> img1 = vicar_open(inpfname[0]);
+  boost::shared_ptr<RasterImage> img2 = vicar_open(inpfname[1]);
+  GeometricModelImage gimg1(img1, gm1, 
+	    (int) floor(img1->number_line() * gm1->magnify_line() + 0.5),
+	    (int) floor(img1->number_sample() * gm1->magnify_sample() + 0.5));
+  GeometricModelImage gimg2(img2, gm2, 
+	    (int) floor(img2->number_line() * gm2->magnify_line() + 0.5),
+	    (int) floor(img2->number_sample() * gm2->magnify_sample() + 0.5));
   if (gcpf) throw Exception("ground control point file not implemented yet");
   int neqmax = ifile.number_row()+3+nredo;
   std::vector<double> aa(neqmax*6);
@@ -434,18 +453,13 @@ try {
    }
    bool geotie = (itie.size()==0);
    if (geotie) {
-     char* labelstr;
-     int labnl, labns;
-     if (!geocord1) status = gtgetlab((char*)"inp",1,&labelstr,&labnl,&labns);
-     if (!geocord1&&status!=1)
-       throw Exception("Failed to get GeoTIFF label, first input");
      itie.resize(6);
      itie[0] = 1.0;
      itie[1] = 1.0;
-     itie[2] = labnl;
+     itie[2] = img1->number_line();
      itie[3] = 1.0;
      itie[4] = 1.0;
-     itie[5] = labns;
+     itie[5] = img1->number_sample();
    }
    for(int iii=0;iii<ifile.number_row();iii++) {
      dline = tinv[0]*first_line_or_east[iii]+ 
@@ -515,7 +529,7 @@ try {
      }
    
    /* open the first image file */
-   
+   // this should go away.
    status = zvunit(&i_unit[0],(char*)"INP",1,NULL);
    status = zvopen(i_unit[0],"OPEN_ACT","SA","IO_ACT","SA",
 			"U_FORMAT","HALF",NULL);
@@ -626,11 +640,33 @@ try {
        // Not sure if this is ImageCoordinate or VicarImageCoordinate
        ImageCoordinate pcntr((int)(first_ic.line+0.5), 
 			     (int)(first_ic.sample+0.5));
-       ImageCoordinate pcntr2 = gm1.resampled_image_coordinate(pcntr);
+       ImageCoordinate pcntr2 = gm1->resampled_image_coordinate(pcntr);
        ImageCoordinate centr(first_ic.line-pcntr.line+ifftsize/2.0+.5,
 			     first_ic.sample-pcntr.sample+ifftsize/2.0+.5);
-       getgrid(1,chip1,ifftsize,ifftsize,pcntr2,gm1,&chop,
-               zerothr);
+       blitz::Array<double, 2> chip1_n =
+	 gimg1.interpolate(pcntr.line - ifftsize / 2,
+			   pcntr.sample - ifftsize / 2,
+			   ifftsize, ifftsize);
+       if(do_get_grid)
+	 getgrid(1,chip1,ifftsize,ifftsize,pcntr2,*gm1,&chop,
+		 zerothr);
+       else
+	 chop = blitz::count(chip1_n < zerothr);
+       if(print_chips) {
+	 blitz::Array<double, 2> chip(ifftsize, ifftsize);
+	 int ii = 0;
+	 for(int i = 0; i < chip.rows(); ++i)
+	   for(int j = 0; j < chip.cols(); ++j, ++ii)
+	     chip(i,j) = chip1[ii];
+	 std::cerr << pcntr << "\n"
+		   << chip(0,0) << "\n"
+		   << chip(0,1) << "\n"
+		   << chip << "\n"
+		   << "\n"
+		   << "-------------------\n"
+		   << "\n"
+		   << chip1_n << "\n";
+       }
        if (chop>choplimit1) {
 	 if (jbig==nretry-1) printf("point outside first image\n");
 	 continue;
@@ -640,10 +676,33 @@ try {
 
        ndim = std::min(search,srchw+ifftsize+2);
        if (ndim%2==1) ndim++;
-       ImageCoordinate pcntr3 = gm1.resampled_image_coordinate
+       ImageCoordinate pcntr3 = gm1->resampled_image_coordinate
 	 (ImageCoordinate(pcntr.line + elvoff[ibig].line,
 			  pcntr.sample + elvoff[ibig].sample));
-       getgrid(2,asrch,search,ndim,pcntr3,gm2,&chop,zerothr);
+       blitz::Array<double, 2> asrch_n =
+	 gimg2.interpolate(pcntr3.line - search / 2,
+			   pcntr3.sample - search / 2,
+			   search, search);
+       if(do_get_grid)
+	 getgrid(2,asrch,search,ndim,pcntr3,*gm2,&chop,zerothr);
+       else 
+	 chop = blitz::count(asrch_n < zerothr);
+       if(print_chips) {
+	 blitz::Array<double, 2> chipb(search, search);
+	 int ii = 0;
+	 for(int i = 0; i < chipb.rows(); ++i)
+	   for(int j = 0; j < chipb.cols(); ++j, ++ii)
+	     chipb(i,j) = asrch[ii];
+	 std::cerr << pcntr3 << "\n"
+		   << ndim << "\n"
+		   << chipb(0,0) << "\n"
+		   << chipb(0,1) << "\n"
+		   << chipb << "\n"
+		   << "\n"
+		   << "-------------------\n"
+		   << "\n"
+		   << asrch_n << "\n";
+       }
        if((chop>bigchoplimit2)||((srchw==0)&&(chop>choplimit2))) {
 	 if(jbig==nretry-1) printf("point outside second image\n");
 	 continue;
@@ -651,7 +710,7 @@ try {
        ffthset = 1;
        printf("%5d (%7.1f %7.1f)%5dx%3.1f",
 	      ibig+1,pcntr.line,pcntr.sample,srchw+ifftsize,
-	      gm1.magnify_sample());
+	      gm1->magnify_sample());
          
        if (srchw>0&&ifftsize<fftsize) {
 	 printf("#\n");
@@ -666,7 +725,11 @@ try {
        // Temporary, I imagine we'll pass this in constructor
        matcher->fftsize = ifftsize;
        matcher->search = search;
-       matcher->rfit(ilin,jsmp,&vloff,&vsoff,corr,srchdim,&chip1[0],&asrch[0]);
+       if(do_get_grid)
+	 matcher->rfit(ilin,jsmp,&vloff,&vsoff,corr,srchdim,&chip1[0],&asrch[0]);
+       else 
+	 matcher->rfit(ilin,jsmp,&vloff,&vsoff,corr,srchdim,chip1_n.data(),
+		       asrch_n.data());
 
        double vmax = matcher->correlation_last_match();
 
@@ -687,9 +750,9 @@ try {
 	 second_ic_offset_resampled(ilin-(search-srchdim)*0.5+vloff,
 				    jsmp-(search-srchdim)*0.5+vsoff);
        ImageCoordinate
-	 first_ic_resampled = gm1.resampled_image_coordinate(first_ic);
+	 first_ic_resampled = gm1->resampled_image_coordinate(first_ic);
        ImageCoordinate
-	 second_ic = gm2.original_image_coordinate(ImageCoordinate
+	 second_ic = gm2->original_image_coordinate(ImageCoordinate
            (first_ic_resampled.line + second_ic_offset_resampled.line,
 	    first_ic_resampled.sample + second_ic_offset_resampled.sample));
 
@@ -699,9 +762,9 @@ try {
        corr_val[ibig] = vmax;
 
        ImageCoordinate elvoff_resampled = 
-	 gm1.resampled_image_coordinate(elvoff[ibig]);
+	 gm1->resampled_image_coordinate(elvoff[ibig]);
        ImageCoordinate
-	 second_ic_hcorr = gm2.original_image_coordinate(ImageCoordinate
+	 second_ic_hcorr = gm2->original_image_coordinate(ImageCoordinate
            (first_ic_resampled.line + second_ic_offset_resampled.line +
 	    elvoff_resampled.line,
 	    first_ic_resampled.sample + second_ic_offset_resampled.sample +
@@ -710,15 +773,21 @@ try {
        second_hcorr(ibig, 0) = second_ic_hcorr.line;
        second_hcorr(ibig, 1) = second_ic_hcorr.sample;
 	
-       first_z[ibig] = matcher->getzvl(chip1,ifftsize,centr,getw,getr);
+       if(do_get_grid)
+	 first_z[ibig] = matcher->getzvl(chip1,ifftsize,centr,getw,getr);
+       else
+	 first_z[ibig] = matcher->getzvl(chip1_n,centr,getw,getr);
        if (first_z[ibig]<-998.0) { printf("z val err\n"); continue; }
-       ImageCoordinate acentr(search/2.0+0.5+vloff*gm1.magnify_line(),
-				   search/2.0+0.5+vsoff*gm1.magnify_sample());
-       second_z[ibig] = matcher->getzvl(asrch,search,acentr,getw,getr);
+       ImageCoordinate acentr(search/2.0+0.5+vloff*gm1->magnify_line(),
+				   search/2.0+0.5+vsoff*gm1->magnify_sample());
+       if(do_get_grid)
+	 second_z[ibig] = matcher->getzvl(asrch,search,acentr,getw,getr);
+       else
+	 second_z[ibig] = matcher->getzvl(asrch_n,acentr,getw,getr);
        if (second_z[ibig]<-998.0) { printf("z val err\n"); continue; }
 	 
        ImageCoordinate second_ic_offset = 
-	 gm1.original_image_coordinate(second_ic_offset_resampled);
+	 gm1->original_image_coordinate(second_ic_offset_resampled);
        res = sqrt(second_ic_offset.line * second_ic_offset.line +
 		  second_ic_offset.sample * second_ic_offset.sample);
        if (res>thr_resp&&solved) {
@@ -770,18 +839,18 @@ try {
        b[1][neq++] = second_samp[ibig];
        if (neq<neqmin) break;
        if (srchw>msrchw) vmaxfac = vmaxfac*1.05;
-       if (gm1.magnify_line() > rmagmin[0]) 
+       if (gm1->magnify_line() > rmagmin[0]) 
 	 vmaxfac = std::max(0.50,vmaxfac*0.9825);
        srchw = std::min(std::max(msrchw,(4*srchw+2*(int)res)/5),srchw);
        if (srchw%2==1) srchw++;
        if (10*srchw<(11*msrchw+ifftsize)) srchw = msrchw;
-       if (magshrk[0]=='y' && gm1.magnify_line() > rmagmin[0]) {
-	 gm1.magnify_line(std::max(gm1.magnify_line()*0.9,rmagmin[0]));
-	 gm2.magnify_line(gm1.magnify_line());
+       if (magshrk[0]=='y' && gm1->magnify_line() > rmagmin[0]) {
+	 gm1->magnify_line(std::max(gm1->magnify_line()*0.9,rmagmin[0]));
+	 gm2->magnify_line(gm1->magnify_line());
        }
-       if (magshrk[0]=='y' && gm1.magnify_sample() >rmagmin[1]) {
-	 gm1.magnify_sample(std::max(gm1.magnify_sample()*0.9,rmagmin[1]));
-	 gm2.magnify_sample(gm1.magnify_sample());
+       if (magshrk[0]=='y' && gm1->magnify_sample() >rmagmin[1]) {
+	 gm1->magnify_sample(std::max(gm1->magnify_sample()*0.9,rmagmin[1]));
+	 gm2->magnify_sample(gm1->magnify_sample());
        }
        break;
      }
@@ -791,10 +860,10 @@ try {
 
    for(int iii=0;iii<ifile.number_row();iii++) {
      if (line_res[iii]>0.5) {
-       ImageCoordinate first_ic_resampled = gm1.resampled_image_coordinate
+       ImageCoordinate first_ic_resampled = gm1->resampled_image_coordinate
 	 (ImageCoordinate(first_line[iii], first_samp[iii]));
        ImageCoordinate second_pred = 
-	 gm2.original_image_coordinate(first_ic_resampled);
+	 gm2->original_image_coordinate(first_ic_resampled);
        line_res[iii] = second_line[iii]-second_pred.line;
        samp_res[iii] = second_samp[iii]-second_pred.sample; 
      } else 

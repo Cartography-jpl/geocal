@@ -83,6 +83,8 @@ public:
   	      int * ierror ) const;
   double getzvl(const std::vector<double>& a,int n, 
 		const ImageCoordinate& coord,int nw,int nr) const;
+  double getzvl(const blitz::Array<double, 2>& a,
+		const ImageCoordinate& coord,int nw,int nr) const;
 
   friend class boost::serialization::access;
   template<class Archive>

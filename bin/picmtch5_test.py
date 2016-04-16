@@ -11,6 +11,7 @@ from vicar_test_support import *
 # Setup and teardown called automatically by nosetest for whole module.
 # We assume that picmtch5 is in current directory, which is true if we
 # call nosetest from the build directory
+do_cleanup = False
 original_env = None
 prefix = "picmtch5_xx"
 def setup():
@@ -36,7 +37,7 @@ gtgen inp=picmtch5_xxim1 'tiecnvrt +
 def teardown():
     set_original_env(original_env)
     # Clean up the various temporary files
-    if True:
+    if do_cleanup:
         subprocess.run("rm %s*" % prefix, shell=True,
                        stdout=subprocess.PIPE,
                        stderr=subprocess.PIPE)

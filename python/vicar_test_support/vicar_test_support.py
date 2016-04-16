@@ -29,7 +29,7 @@ def check_for_proc(proc):
         return False
     return True
 
-def vicarb_run(cmd):
+def vicarb_run(cmd, print_results = False):
     '''Wrapper for running vicarb. Returns results from subprocess.run if you
     need to access stdout or other variables.
 
@@ -39,7 +39,7 @@ def vicarb_run(cmd):
     cmd2 = re.sub(r'"',"\\\"", cmd2)
     res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,check=True,
                          stdout = subprocess.PIPE)
-    if(False):
+    if(print_results):
         print(res.stdout.decode('utf-8'))
     return res
     

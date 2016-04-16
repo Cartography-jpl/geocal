@@ -64,18 +64,20 @@ RasterImageTileIterator& RasterImageTileIterator::operator++()
 
 //-----------------------------------------------------------------------
 /// Interpolate a region, starting with the given fractional line and
-/// sample. This is a bilinear interpolation.
+/// sample. This is a bilinear interpolation. This does padding with
+/// the given fill value.
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 2> RasterImage::interpolate(double Line, double Sample, 
-    int Number_line, int Number_sample) const
+	 int Number_line, int Number_sample, double Fill_value) const
 {
   int lint = (int) floor(Line);
   int sint = (int) floor(Sample);
   double lfrac = Line - lint;
   double sfrac = Sample - sint;
-  blitz::Array<double, 2> data = read_double(lint, sint, Number_line + 1, 
-					     Number_sample + 1);
+  blitz::Array<double, 2> data = 
+    read_double_with_pad(lint, sint, Number_line + 1, 
+			 Number_sample + 1, Fill_value);
   blitz::Array<double, 2> res(Number_line, Number_sample);
   blitz::Range r1(0, Number_line - 1);
   blitz::Range r1p1(1, Number_line);

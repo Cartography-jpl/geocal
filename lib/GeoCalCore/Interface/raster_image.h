@@ -106,8 +106,8 @@ public:
     return res;
   }
 
-  blitz::Array<double, 2> interpolate(double Line, double Sample, 
-				      int Number_line, int Number_sample) const;
+  virtual blitz::Array<double, 2> interpolate(double Line, double Sample, 
+      int Number_line, int Number_sample, double Fill_value = 0.0) const;
 
 //-----------------------------------------------------------------------
 /// This does a bilinear interpolation of the data for fractional

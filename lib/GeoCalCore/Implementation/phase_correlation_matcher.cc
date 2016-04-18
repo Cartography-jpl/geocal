@@ -131,13 +131,8 @@ void PhaseCorrelationMatcher::match_mask
 					   template_size(), template_size());
   Array<double, 2> asrch = New.read_double(new_line, new_sample,
 					   search_size(), search_size());
-  // This can be smaller than search, but we don't support that yet.
-  int srchdim = search;
-  int ilin = (search - srchdim) / 2;
-  int jsmp = ilin;
   double vloff, vsoff, corr[3][3];
-  rfit(ilin, jsmp, &vloff, &vsoff, corr, srchdim, chip1.data(), 
-       asrch.data());
+  rfit(&vloff, &vsoff, corr, chip1, asrch);
   int referr = 0;
   if(subpix)
     refine(corr, &vloff, &vsoff, &referr);
@@ -175,16 +170,11 @@ void PhaseCorrelationMatcher::print(std::ostream& Os) const
 //-----------------------------------------------------------------------
 /// rfit
 /// 
-/// uses fft to compute correlation function on two images stored
-/// in the specific global arrays chip1 and asrch.  Chip1 is a fixed
-/// fftsize x fftsize array and asrch is a larger array for correlation
-/// matching.  The correlation area is a srchdim x srchdim subset of the
-/// larger array.
-/// the method is fftinverse(fft(a) * conj(fft(b))
-/// \param ilin: input, int ilin;
-///	line offset into asrch (the larger array)
-/// \param jsmp: input, int jsmp;
-///	sample offset into asrch (the larger array)
+/// uses fft to compute correlation function on two images stored in
+/// chip1 and asrch.  Chip1 is a fixed fftsize x fftsize array and
+/// asrch is a possibly larger array for correlation matching.  the
+/// method is fftinverse(fft(a) * conj(fft(b))
+///
 /// \param vloff: output, double *vloff;
 ///	the line offset of the peak match relative to the
 ///	center of chip1 (16.0,16.0)
@@ -194,130 +184,26 @@ void PhaseCorrelationMatcher::print(std::ostream& Os) const
 /// \param corr: output, double corr[3][3]
 ///	the 3 x 3 part of the correlation centered at the
 ///	peak, for use in subpixel refinement
-/// \param srchdim: input, int srchdim;
-///	The current size of the search area in chip 2
 /// \param chip1: input
 ///     The first chip
 /// \param asrch: input
 //-----------------------------------------------------------------------
 
 void PhaseCorrelationMatcher::rfit
-(int ilin,int jsmp,double* vloff,double* vsoff,double corr[3][3],
- int srchdim, double *chip1, double* asrch) const
-{
-  int quadmark = srchdim/2;
-  int mincor = fftsize/6-1;
-  int maxcor = srchdim-mincor;
-   
-  double avg = 0.0;
-  for(int i=0;i<fftsize;i++)
-    for(int j=0;j<fftsize;j++)
-      avg += chip1[j*fftsize+i];
-  avg /= (fftsize*fftsize);
-   
-  for(int i=0;i<srchdim;i++)
-    for(int j=0;j<srchdim;j++) {
-      bfftin[j*srchdim+i][0] = asrch[(ilin+j)*search+(jsmp+i)];
-      bfftin[j*srchdim+i][1] = 0.0;
-      afftin[j*srchdim+i][0] = avg;
-      afftin[j*srchdim+i][1] = 0.0;
-    }
-  int koff = (srchdim-fftsize)/2;
-  for(int i=0;i<fftsize;i++)
-    for(int j=0;j<fftsize;j++)
-      afftin[(j+koff)*srchdim+i+koff][0] = chip1[j*fftsize+i];
-   
-  fftw_plan p = fftw_plan_dft_2d(srchdim,srchdim,afftin,afftout,FFTW_FORWARD,
-				 FFTW_ESTIMATE);
-  fftw_execute(p);
-  fftw_destroy_plan(p);
-   
-  p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_FORWARD,
-		       FFTW_ESTIMATE);
-  fftw_execute(p);
-  fftw_destroy_plan(p);
-      
-  afftout[0][0] = 0.;
-  afftout[0][1] = 0.;
-  if(!nohpf) 
-    for(int i=1;i<srchdim;i++) {
-      afftout[i][0] = 0.;
-      afftout[i][1] = 0.;
-      afftout[i*srchdim][0] = 0.;
-      afftout[i*srchdim][1] = 0.;
-    }
-   
-  for(int i=0;i<srchdim;i++)
-    for(int j=0;j<srchdim;j++) {
-      double bij = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][0]+
-	afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][1];
-      double bij1 = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][1]-
-	afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][0];
-      double v = sqrt(bij*bij+bij1*bij1);
-      if(v<1.e-6) 
-	v = 1.e-6;
-      bfftin[j*srchdim+i][0] = bij/v;
-      bfftin[j*srchdim+i][1] = bij1/v;
-    }
-  p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_BACKWARD,
-		       FFTW_ESTIMATE);
-  fftw_execute(p);
-  fftw_destroy_plan(p);
-
-  /* quadrant swap */
-   
-  for(int i=0;i<quadmark;i++)
-    for(int j=0;j<quadmark;j++) {
-      double t = bfftout[i*srchdim+j][0];
-      bfftout[i*srchdim+j][0] = bfftout[(i+quadmark)*srchdim+j+quadmark][0];
-      bfftout[(i+quadmark)*srchdim+j+quadmark][0] = t;
-      t = bfftout[(i+quadmark)*srchdim+j][0];
-      bfftout[(i+quadmark)*srchdim+j][0] = bfftout[i*srchdim+j+quadmark][0];
-      bfftout[i*srchdim+j+quadmark][0] = t;
-    }
-
-   double tvmax = -1.e20;
-   int ixmax = mincor; 
-   int jxmax = mincor;
-   for(int i=mincor;i<maxcor;i++)
-      for(int j=mincor;j<maxcor;j++) {
-	double rv = bfftout[j*srchdim+i][0];
-	if(rv>tvmax) { 
-	  tvmax = rv; 
-	  ixmax = i; 
-	  jxmax = j; 
-	}
-      }
-   if (tvmax<0.0) tvmax = 0.0;
-   
-   /* normalized for varying footprints by three lines below */
-   
-   double ttemp = log10((double)srchdim)/log10(2.0);
-   ttemp = ttemp*ttemp;
-   vmax = tvmax*10.0/(srchdim*ttemp*ttemp);
-   *vloff = jxmax-quadmark;
-   *vsoff = ixmax-quadmark;
-   for(int i=0;i<3;i++)
-     for(int j=0;j<3;j++)
-       corr[j][i] = bfftout[(jxmax+j-1)*srchdim+ixmax+i-1][0];
-   return;
-}
-
-void PhaseCorrelationMatcher::rfit
-(int ilin,int jsmp,double* vloff,double* vsoff,double corr[3][3],
- int srchdim, 
+(double* vloff,double* vsoff,double corr[3][3],
  const blitz::Array<double, 2>& chip1, 
  const blitz::Array<double, 2>& asrch) const
 {
+  int srchdim = asrch.rows();
   int quadmark = srchdim/2;
   int mincor = fftsize/6-1;
   int maxcor = srchdim-mincor;
    
   double avg = sum(chip1) / (fftsize*fftsize);
-   
+
   for(int i=0;i<srchdim;i++)
     for(int j=0;j<srchdim;j++) {
-      bfftin[j*srchdim+i][0] = asrch((ilin+j),(jsmp+i));
+      bfftin[j*srchdim+i][0] = asrch(j,i);
       bfftin[j*srchdim+i][1] = 0.0;
       afftin[j*srchdim+i][0] = avg;
       afftin[j*srchdim+i][1] = 0.0;

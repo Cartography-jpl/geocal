@@ -5353,6 +5353,9 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6150,7 +6153,115 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GeometricModelImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_GeometricModelImage__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricModel > *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  double arg5 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricModel > tempshared2 ;
+  boost::shared_ptr< GeoCal::GeometricModel > temp2shared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  GeoCal::GeometricModelImage *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GeometricModelImage" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricModel_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_GeometricModelImage" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::GeometricModel > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::GeometricModel > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::GeometricModel > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::GeometricModel > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GeometricModelImage" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_GeometricModelImage" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_GeometricModelImage" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    try {
+      result = (GeoCal::GeometricModelImage *)new GeoCal::GeometricModelImage((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,(boost::shared_ptr< GeoCal::GeometricModel > const &)*arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GeometricModelImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GeometricModelImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricModelImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GeometricModelImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::GeometricModel > *arg2 = 0 ;
@@ -6168,10 +6279,9 @@ SWIGINTERN PyObject *_wrap_new_GeometricModelImage(PyObject *SWIGUNUSEDPARM(self
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  PyObject *swig_obj[4] ;
   GeoCal::GeometricModelImage *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_GeometricModelImage",4,4,swig_obj)) SWIG_fail;
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
@@ -6248,6 +6358,30 @@ SWIGINTERN PyObject *_wrap_new_GeometricModelImage(PyObject *SWIGUNUSEDPARM(self
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GeometricModelImage(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_GeometricModelImage",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    return _wrap_new_GeometricModelImage__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_GeometricModelImage__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_GeometricModelImage'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::GeometricModelImage::GeometricModelImage(boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::GeometricModel > const &,int,int,double)\n"
+    "    GeoCal::GeometricModelImage::GeometricModelImage(boost::shared_ptr< GeoCal::RasterImage > const &,boost::shared_ptr< GeoCal::GeometricModel > const &,int,int)\n");
+  return 0;
 }
 
 
@@ -6341,6 +6475,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GeometricModelImage__v_fill_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeometricModelImage *arg1 = (GeoCal::GeometricModelImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricModelImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeometricModelImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricModelImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeometricModelImage__v_fill_value" "', argument " "1"" of type '" "GeoCal::GeometricModelImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricModelImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricModelImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricModelImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricModelImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricModelImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::GeometricModelImage const *)arg1)->fill_value();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_GeometricModelImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeometricModelImage *arg1 = (GeoCal::GeometricModelImage *) 0 ;
@@ -6419,7 +6596,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"GeoCal::GeometricModelImage::GeometricModelImage(const boost::shared_ptr< RasterImage > &Data, const\n"
 		"boost::shared_ptr< GeometricModel > &Geom_model, int Number_line, int\n"
-		"Number_sample)\n"
+		"Number_sample, double Fill_value=0.0)\n"
 		"Constructor.\n"
 		"\n"
 		"This takes underlying data, and a geometric model to use to resample\n"
@@ -6436,6 +6613,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"GeometricModelImage__v_geometric_model", (PyCFunction)_wrap_GeometricModelImage__v_geometric_model, METH_O, (char *)"\n"
 		"\n"
 		"const boost::shared_ptr<GeometricModel>& GeoCal::GeometricModelImage::geometric_model() const\n"
+		"\n"
+		""},
+	 { (char *)"GeometricModelImage__v_fill_value", (PyCFunction)_wrap_GeometricModelImage__v_fill_value, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::GeometricModelImage::fill_value() const\n"
 		"\n"
 		""},
 	 { (char *)"delete_GeometricModelImage", (PyCFunction)_wrap_delete_GeometricModelImage, METH_O, (char *)"\n"

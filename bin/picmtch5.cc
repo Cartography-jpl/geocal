@@ -38,146 +38,6 @@ double ident[12] = {1.,0.,0.,0.,0.,0.,0.,1.,0.,0.,0.,0.};
 
 // Temporary, this will go away in a bit.
 boost::shared_ptr<PhaseCorrelationMatcher> matcher;
-bool print_chips = false;
-bool do_get_grid = false;
-
-/*=====================================================================
-
-getgrid
-
-extracts a subimage from an image.  the subimage is specified by
-a linear transformation and the point that (when transformed) becomes
-the center of the subimage.  ndim can be used to obtain only the
-central part of the array if the outer border is not needed, for
-example when picmtch5 has narrowed a search.
-
-
-arguments:
-
-     1. filenum: input, int filenum;
-	the filenumber returned by mc_open
-     2. chip: output, double *chip;
-	holds the ndim x ndim subimage as a
-	one dimensional (fortran-like) array
-	always floating format
-     3. narray: input, int narray;
-	the dimension of the chip array
-     4. ndim: input, int ndim;
-	how much data to put into the chip
-	center; ndim <= narray, both are even
-     5. trans: input, double trans[12];
-	the quadratic transformation that shapes
-	the grid.
-     6. centrx: input, double centrx;
-	trans(centrx,centry) will be the center
-	of the sampled grid
-     7. centry: input, double centry;
-	trans(centrx,centry) will be the center
-	of the sampled grid
-     8. rmag: input, int rmag;
-	applied to grid to obtain a larger (or
-	smaller) area chip
-     9. chop: output, int *chop;
-	number of subimage points outside of
-	input image plus zero points
-*/
-
-void getgrid(int filenum,std::vector<double>& chip,int narray,
-	     int ndim, const ImageCoordinate& Centr, 
-	     const QuadraticGeometricModel& Gmodel,int* chop,
-	     int zerothr)
-{
-  printf("filenum: %d narray: %d ndim: %d\n", filenum, narray, ndim);
-   /* the line,samp calcs are based on a .5 centered pixel, however,
-   the main program also passes a .5 centered request.  These cancel
-   and the pixels are centered like VICAR pixels.  Since both arrays
-   are offset the same amount, there is no error introduced - alz */
-   
-   /* get the file dimensions */
-
-   if (narray%2==1||ndim%2==1) throw Exception("getgrid error");
-   int lnl = lnlg[filenum-1];
-   int lns = lnsg[filenum-1];
-   
-   /* generate the grid */
-
-   int ndim2 = ndim*ndim;
-   std::vector<double> gridx(ndim2);
-   std::vector<double> gridy(ndim2);
-   
-   double xmin = 99999999.0; double xmax = -99999999.0;
-   double ymin = 99999999.0; double ymax = -99999999.0;
-   blitz::Array<double, 1> trans = Gmodel.transformation();
-   for(int i=0;i<ndim;i++)
-     for(int j=0;j<ndim;j++) {
-       ImageCoordinate ic = Gmodel.original_image_coordinate
-	 (ImageCoordinate(Centr.line+ ((i-ndim/2)+1.0),
-			  Centr.sample+((j-ndim/2)+1.0)));
-       gridx[i*ndim+j] = ic.line;
-       gridy[i*ndim+j] = ic.sample;
-       xmin = std::min(xmin,gridx[i*ndim+j]);
-       ymin = std::min(ymin,gridy[i*ndim+j]);
-       xmax = std::max(xmax,gridx[i*ndim+j]);
-       ymax = std::max(ymax,gridy[i*ndim+j]);
-     }
-   
-   /* malloc an input rectangle as bounding box, don't have to go outside image */
-
-   int slbx = std::max(0,std::min(lnl-2,(int)(xmin-1.0)));
-   int ssbx = std::max(0,std::min(lns-2,(int)(ymin-1.0)));
-   int elbx = std::max(1,std::min(lnl-1,(int)(xmax+1.0)));
-   int esbx = std::max(1,std::min(lns-1,(int)(ymax+1.0)));
-   int nlbx = elbx-slbx+1;
-   int nsbx = esbx-ssbx+1;
-   short int **imbuf;
-   mz_alloc2((unsigned char ***)&imbuf,nlbx,nsbx,sizeof(short int));
-   
-   /* read the image into the bounding box, outside immaterial */
-   
-   for(int i=0;i<nlbx;i++)
-     zvread(i_unit[filenum-1],imbuf[i],
-	    "LINE",slbx+i+1,"SAMP",ssbx+1,"NSAMPS",nsbx,NULL);
-   
-   /* now look up the image values, outside box is intercepted */
-
-   *chop = 0;
-   double fzerothr = zerothr+0.01;
-   for(int i=0;i<ndim2;i++) {
-     double rline = gridx[i]-0.5;
-     double rsamp = gridy[i]-0.5;
-     int iline = (int) (rline-0.5);
-     int isamp = (int) (rsamp-0.5);
-     if (iline<0 || iline>=lnl-1 || isamp<0 || isamp>=lns-1) { 
-       chip[i] = 0.; 
-       (*chop)++; 
-     } else {
-       double dvecl0 = imbuf[iline-slbx][isamp-ssbx];
-       double dvecl1 = imbuf[iline-slbx][isamp-ssbx+1];
-       double dvecu0 = imbuf[iline-slbx+1][isamp-ssbx];
-       double dvecu1 = imbuf[iline-slbx+1][isamp-ssbx+1];
-       double rlfac = rline-iline-0.5;
-       double rsfac = rsamp-isamp-0.5;
-       double vl = (1.0-rsfac)*dvecl0+rsfac*dvecl1;
-       double vu = (1.0-rsfac)*dvecu0+rsfac*dvecu1;
-       chip[i] =((1.0-rlfac)*vl+rlfac*vu);
-       if (chip[i]<fzerothr) 
-	 (*chop)++;
-     }
-   }
-   
-   /* free storage */
-
-   mz_free2((unsigned char **)imbuf,nlbx);
-   
-   /* now center in the grid, save the prints below for getgrid verif */
-
-   if (narray==ndim) return;
-   int bord = (narray-ndim)/2;
-   for(int i=ndim-1;i>=0;i--)
-     for(int j=0;j<ndim;j++)
-       chip[(i+bord)*narray+bord+j] = chip[i*ndim+j];
-}
-
 
 /*=====================================================================
 
@@ -267,7 +127,7 @@ try {
 
   int ierror;
   int chop,picout,srchdim;
-  int retry,refinerr,ndim;
+  int retry,refinerr;
   double vloff, vsoff;
   double res,corr[3][3];
   double dline,dsamp;
@@ -643,28 +503,7 @@ try {
 	 gimg1.interpolate(pcntr2.line - ifftsize / 2,
 			   pcntr2.sample - ifftsize / 2,
 			   ifftsize, ifftsize);
-       if(do_get_grid)
-	 getgrid(1,chip1,ifftsize,ifftsize,pcntr2,*gm1,&chop,
-		 zerothr);
-       else
-	 chop = blitz::count(chip1_n < zerothr + 0.01);
-       if(ifftsize == 128 && print_chips) {
-	 blitz::Array<double, 2> chip(ifftsize, ifftsize);
-	 int ii = 0;
-	 for(int i = 0; i < chip.rows(); ++i)
-	   for(int j = 0; j < chip.cols(); ++j, ++ii)
-	     chip(i,j) = chip1[ii];
-	 std::cerr << pcntr << "\n"
-		   << chip(0,0) << "\n"
-		   << chip(0,1) << "\n"
-		   << chip << "\n"
-		   << "\n"
-		   << "-------------------\n"
-		   << "\n"
-		   << chip1_n << "\n"
-		   << "-------------------\n"
-		   << blitz::max(blitz::abs(chip - chip1_n)) << "\n";
-       }
+       chop = blitz::count(chip1_n < zerothr + 0.01);
        if (chop>choplimit1) {
 	 if (jbig==nretry-1) printf("point outside first image\n");
 	 continue;
@@ -672,9 +511,10 @@ try {
 
    /* get the second grid and do correlation, 2d grid can be larger */
 
-       if (ifftsize==fftsize) srchdim = fftsize+srchw; else srchdim = ifftsize;
-       ndim = std::min(search,srchw+ifftsize+2);
-       if (ndim%2==1) ndim++;
+       if(ifftsize==fftsize) 
+	 srchdim = fftsize+srchw; 
+       else 
+	 srchdim = ifftsize;
        ImageCoordinate pcntr3 = gm1->resampled_image_coordinate
 	 (ImageCoordinate(pcntr.line + elvoff[ibig].line,
 			  pcntr.sample + elvoff[ibig].sample));
@@ -682,28 +522,7 @@ try {
 	 gimg2.interpolate(pcntr3.line - srchdim / 2,
 			   pcntr3.sample - srchdim / 2,
 			   srchdim, srchdim);
-       if(do_get_grid)
-	 getgrid(2,asrch,search,ndim,pcntr3,*gm2,&chop,zerothr);
-       else 
-	 chop = blitz::count(asrch_n < zerothr + 0.01);
-       if(ndim == 130 && print_chips) {
-	 blitz::Array<double, 2> chipb(search, search);
-	 int ii = 0;
-	 for(int i = 0; i < chipb.rows(); ++i)
-	   for(int j = 0; j < chipb.cols(); ++j, ++ii)
-	     chipb(i,j) = asrch[ii];
-	 std::cerr << pcntr3 << "\n"
-		   << ndim << "\n"
-		   << chipb(0,0) << "\n"
-		   << chipb(0,1) << "\n"
-		   << chipb << "\n"
-		   << "\n"
-		   << "-------------------\n"
-		   << "\n"
-		   << asrch_n << "\n"
-		   << "-------------------\n"
-		   << blitz::max(blitz::abs(chipb - asrch_n)) << "\n";
-       }
+       chop = blitz::count(asrch_n < zerothr + 0.01);
        if((chop>bigchoplimit2)||((srchw==0)&&(chop>choplimit2))) {
 	 if(jbig==nretry-1) printf("point outside second image\n");
 	 continue;
@@ -718,24 +537,10 @@ try {
 	 continue;
        }
 	 
-       if (ifftsize==fftsize) srchdim = fftsize+srchw; else srchdim = ifftsize;
-       int ilin = (search-srchdim)/2;
-       int jsmp = ilin;
-	 
-
        // Temporary, I imagine we'll pass this in constructor
        matcher->fftsize = ifftsize;
        matcher->search = search;
-       if(do_get_grid) {
-	 matcher->rfit(ilin,jsmp,&vloff,&vsoff,corr,srchdim,&chip1[0],&asrch[0]);
-	 printf("ilin: %d jsmp: %d vloff: %lf vsoff: %lf\n",
-		ilin, jsmp, vloff, vsoff);
-       } else  {
-	 matcher->rfit(0, 0,&vloff,&vsoff,corr,srchdim,chip1_n,
-		       asrch_n);
-	 // printf("ilin: %d jsmp: %d vloff: %lf vsoff: %lf\n",
-	 // 	0, 0, vloff, vsoff);
-       }
+       matcher->rfit(&vloff,&vsoff,corr,chip1_n, asrch_n);
        double vmax = matcher->correlation_last_match();
 
        if(vmax<0.00001) { printf("refine err 1a\n"); continue; }
@@ -751,13 +556,7 @@ try {
        if(subpix) 
 	 matcher->refine(corr,&vloff,&vsoff,&refinerr);
        if (refinerr!=0) { printf("refine err 2\n"); continue; }
-       ImageCoordinate second_ic_offset_resampled;
-       if(do_get_grid)
-	 second_ic_offset_resampled = 
-	   ImageCoordinate(ilin-(search-srchdim)*0.5+vloff,
-			   jsmp-(search-srchdim)*0.5+vsoff);
-       else
-	 second_ic_offset_resampled = ImageCoordinate(vloff, vsoff);
+       ImageCoordinate second_ic_offset_resampled(vloff, vsoff);
 
        ImageCoordinate
 	 first_ic_resampled = gm1->resampled_image_coordinate(first_ic);
@@ -783,19 +582,18 @@ try {
        second_hcorr(ibig, 0) = second_ic_hcorr.line;
        second_hcorr(ibig, 1) = second_ic_hcorr.sample;
 	
-       if(do_get_grid)
-	 first_z[ibig] = matcher->getzvl(chip1,ifftsize,centr,getw,getr);
-       else
-	 first_z[ibig] = matcher->getzvl(chip1_n,centr,getw,getr);
-       if (first_z[ibig]<-998.0) { printf("z val err\n"); continue; }
+       first_z[ibig] = matcher->getzvl(chip1_n,centr,getw,getr);
+       if (first_z[ibig]<-998.0) { 
+	 printf("z val err\n"); 
+	 continue; 
+       }
        ImageCoordinate acentr(search/2.0+0.5+vloff*gm1->magnify_line(),
 				   search/2.0+0.5+vsoff*gm1->magnify_sample());
-       if(do_get_grid)
-	 second_z[ibig] = matcher->getzvl(asrch,search,acentr,getw,getr);
-       else
-	 second_z[ibig] = matcher->getzvl(asrch_n,acentr,getw,getr);
-       if (second_z[ibig]<-998.0) { printf("z val err\n"); continue; }
-	 
+       second_z[ibig] = matcher->getzvl(asrch_n,acentr,getw,getr);
+       if (second_z[ibig]<-998.0) { 
+	 printf("z val err\n"); 
+	 continue; 
+       }
        ImageCoordinate second_ic_offset = 
 	 gm1->original_image_coordinate(second_ic_offset_resampled);
        res = sqrt(second_ic_offset.line * second_ic_offset.line +

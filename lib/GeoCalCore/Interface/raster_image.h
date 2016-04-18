@@ -68,8 +68,8 @@ public:
 
   double unchecked_interpolate(double Line, double Sample) const
   {
-    int i = (int) floor(Line);
-    int j = (int) floor(Sample);
+    int i = (int) Line;
+    int j = (int) Sample;
     double t1 = unchecked_read_double(i, j);
     double t2 = unchecked_read_double(i, j + 1);
     double t3 = unchecked_read_double(i + 1, j);
@@ -88,8 +88,8 @@ public:
   boost::array<double, 2> interpolate_derivative(double Line, double Sample) 
     const
   {
-    int i = (int) floor(Line);
-    int j = (int) floor(Sample);
+    int i = (int) Line;
+    int j = (int) Sample;
     range_check(i, 0, number_line() - 1);
     range_check(j, 0, number_sample() - 1);
     double t1 = unchecked_read_double(i, j);

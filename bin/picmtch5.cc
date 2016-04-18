@@ -497,8 +497,6 @@ try {
        ImageCoordinate pcntr((int)(first_ic.line+0.5), 
 			     (int)(first_ic.sample+0.5));
        ImageCoordinate pcntr2 = gm1->resampled_image_coordinate(pcntr);
-       ImageCoordinate centr(first_ic.line-pcntr.line+ifftsize/2.0+.5,
-			     first_ic.sample-pcntr.sample+ifftsize/2.0+.5);
        blitz::Array<double, 2> chip1_n =
 	 gimg1.interpolate(pcntr2.line - ifftsize / 2,
 			   pcntr2.sample - ifftsize / 2,
@@ -582,13 +580,15 @@ try {
        second_hcorr(ibig, 0) = second_ic_hcorr.line;
        second_hcorr(ibig, 1) = second_ic_hcorr.sample;
 	
+       ImageCoordinate centr(first_ic.line-pcntr.line+ifftsize/2.0+.5,
+			     first_ic.sample-pcntr.sample+ifftsize/2.0+.5);
        first_z[ibig] = matcher->getzvl(chip1_n,centr,getw,getr);
        if (first_z[ibig]<-998.0) { 
 	 printf("z val err\n"); 
 	 continue; 
        }
        ImageCoordinate acentr(search/2.0+0.5+vloff*gm1->magnify_line(),
-				   search/2.0+0.5+vsoff*gm1->magnify_sample());
+			      search/2.0+0.5+vsoff*gm1->magnify_sample());
        second_z[ibig] = matcher->getzvl(asrch_n,acentr,getw,getr);
        if (second_z[ibig]<-998.0) { 
 	 printf("z val err\n"); 

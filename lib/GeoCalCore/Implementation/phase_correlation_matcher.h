@@ -78,6 +78,10 @@ public:
   mutable double vmax;
   void rfit(int ilin,int jsmp, double* vloff, double* vsoff,
   	    double corr[3][3],int srchdim, double *chip1, double* asrch) const;
+  void rfit(int ilin,int jsmp,double* vloff,double* vsoff,
+	    double corr[3][3], int srchdim, 
+	    const blitz::Array<double, 2>& chip1, 
+	    const blitz::Array<double, 2>& asrch) const;
   void refine(double corr[3][3],double* vloff,double* vsoff,int *ireferr) const;
   void lsqfit(double * a, double * r, int m, int n, double * x, double eps, 
   	      int * ierror ) const;

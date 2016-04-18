@@ -11,7 +11,7 @@ from vicar_test_support import *
 # Setup and teardown called automatically by nosetest for whole module.
 # We assume that picmtch5 is in current directory, which is true if we
 # call nosetest from the build directory
-do_cleanup = False
+do_cleanup = True
 original_env = None
 prefix = "picmtch5_xx"
 def setup():

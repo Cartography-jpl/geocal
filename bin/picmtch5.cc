@@ -87,6 +87,7 @@ void getgrid(int filenum,std::vector<double>& chip,int narray,
 	     const QuadraticGeometricModel& Gmodel,int* chop,
 	     int zerothr)
 {
+  printf("filenum: %d narray: %d ndim: %d\n", filenum, narray, ndim);
    /* the line,samp calcs are based on a .5 centered pixel, however,
    the main program also passes a .5 centered request.  These cancel
    and the pixels are centered like VICAR pixels.  Since both arrays
@@ -112,11 +113,6 @@ void getgrid(int filenum,std::vector<double>& chip,int narray,
        ImageCoordinate ic = Gmodel.original_image_coordinate
 	 (ImageCoordinate(Centr.line+ ((i-ndim/2)+1.0),
 			  Centr.sample+((j-ndim/2)+1.0)));
-       if(i == 0 && j == 0)
-	 std::cerr << "hi there: " 
-		   << ImageCoordinate(Centr.line+ ((i-ndim/2)+1.0),
-				      Centr.sample+((j-ndim/2)+1.0))
-		   << "  " << ic << "\n";
        gridx[i*ndim+j] = ic.line;
        gridy[i*ndim+j] = ic.sample;
        xmin = std::min(xmin,gridx[i*ndim+j]);
@@ -652,7 +648,7 @@ try {
 		 zerothr);
        else
 	 chop = blitz::count(chip1_n < zerothr + 0.01);
-       if(print_chips) {
+       if(ifftsize == 128 && print_chips) {
 	 blitz::Array<double, 2> chip(ifftsize, ifftsize);
 	 int ii = 0;
 	 for(int i = 0; i < chip.rows(); ++i)
@@ -665,7 +661,9 @@ try {
 		   << "\n"
 		   << "-------------------\n"
 		   << "\n"
-		   << chip1_n << "\n";
+		   << chip1_n << "\n"
+		   << "-------------------\n"
+		   << blitz::max(blitz::abs(chip - chip1_n)) << "\n";
        }
        if (chop>choplimit1) {
 	 if (jbig==nretry-1) printf("point outside first image\n");
@@ -674,20 +672,21 @@ try {
 
    /* get the second grid and do correlation, 2d grid can be larger */
 
+       if (ifftsize==fftsize) srchdim = fftsize+srchw; else srchdim = ifftsize;
        ndim = std::min(search,srchw+ifftsize+2);
        if (ndim%2==1) ndim++;
        ImageCoordinate pcntr3 = gm1->resampled_image_coordinate
 	 (ImageCoordinate(pcntr.line + elvoff[ibig].line,
 			  pcntr.sample + elvoff[ibig].sample));
        blitz::Array<double, 2> asrch_n =
-	 gimg2.interpolate(pcntr3.line - search / 2,
-			   pcntr3.sample - search / 2,
-			   search, search);
+	 gimg2.interpolate(pcntr3.line - srchdim / 2,
+			   pcntr3.sample - srchdim / 2,
+			   srchdim, srchdim);
        if(do_get_grid)
 	 getgrid(2,asrch,search,ndim,pcntr3,*gm2,&chop,zerothr);
        else 
 	 chop = blitz::count(asrch_n < zerothr + 0.01);
-       if(print_chips) {
+       if(ndim == 130 && print_chips) {
 	 blitz::Array<double, 2> chipb(search, search);
 	 int ii = 0;
 	 for(int i = 0; i < chipb.rows(); ++i)
@@ -701,7 +700,9 @@ try {
 		   << "\n"
 		   << "-------------------\n"
 		   << "\n"
-		   << asrch_n << "\n";
+		   << asrch_n << "\n"
+		   << "-------------------\n"
+		   << blitz::max(blitz::abs(chipb - asrch_n)) << "\n";
        }
        if((chop>bigchoplimit2)||((srchw==0)&&(chop>choplimit2))) {
 	 if(jbig==nretry-1) printf("point outside second image\n");
@@ -725,12 +726,16 @@ try {
        // Temporary, I imagine we'll pass this in constructor
        matcher->fftsize = ifftsize;
        matcher->search = search;
-       if(do_get_grid)
+       if(do_get_grid) {
 	 matcher->rfit(ilin,jsmp,&vloff,&vsoff,corr,srchdim,&chip1[0],&asrch[0]);
-       else 
-	 matcher->rfit(ilin,jsmp,&vloff,&vsoff,corr,srchdim,chip1_n.data(),
-		       asrch_n.data());
-
+	 printf("ilin: %d jsmp: %d vloff: %lf vsoff: %lf\n",
+		ilin, jsmp, vloff, vsoff);
+       } else  {
+	 matcher->rfit(0, 0,&vloff,&vsoff,corr,srchdim,chip1_n,
+		       asrch_n);
+	 // printf("ilin: %d jsmp: %d vloff: %lf vsoff: %lf\n",
+	 // 	0, 0, vloff, vsoff);
+       }
        double vmax = matcher->correlation_last_match();
 
        if(vmax<0.00001) { printf("refine err 1a\n"); continue; }
@@ -746,9 +751,14 @@ try {
        if(subpix) 
 	 matcher->refine(corr,&vloff,&vsoff,&refinerr);
        if (refinerr!=0) { printf("refine err 2\n"); continue; }
-       ImageCoordinate 
-	 second_ic_offset_resampled(ilin-(search-srchdim)*0.5+vloff,
-				    jsmp-(search-srchdim)*0.5+vsoff);
+       ImageCoordinate second_ic_offset_resampled;
+       if(do_get_grid)
+	 second_ic_offset_resampled = 
+	   ImageCoordinate(ilin-(search-srchdim)*0.5+vloff,
+			   jsmp-(search-srchdim)*0.5+vsoff);
+       else
+	 second_ic_offset_resampled = ImageCoordinate(vloff, vsoff);
+
        ImageCoordinate
 	 first_ic_resampled = gm1->resampled_image_coordinate(first_ic);
        ImageCoordinate

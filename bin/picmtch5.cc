@@ -644,14 +644,14 @@ try {
        ImageCoordinate centr(first_ic.line-pcntr.line+ifftsize/2.0+.5,
 			     first_ic.sample-pcntr.sample+ifftsize/2.0+.5);
        blitz::Array<double, 2> chip1_n =
-	 gimg1.interpolate(pcntr.line - ifftsize / 2,
-			   pcntr.sample - ifftsize / 2,
+	 gimg1.interpolate(pcntr2.line - ifftsize / 2,
+			   pcntr2.sample - ifftsize / 2,
 			   ifftsize, ifftsize);
        if(do_get_grid)
 	 getgrid(1,chip1,ifftsize,ifftsize,pcntr2,*gm1,&chop,
 		 zerothr);
        else
-	 chop = blitz::count(chip1_n < zerothr);
+	 chop = blitz::count(chip1_n < zerothr + 0.01);
        if(print_chips) {
 	 blitz::Array<double, 2> chip(ifftsize, ifftsize);
 	 int ii = 0;
@@ -686,7 +686,7 @@ try {
        if(do_get_grid)
 	 getgrid(2,asrch,search,ndim,pcntr3,*gm2,&chop,zerothr);
        else 
-	 chop = blitz::count(asrch_n < zerothr);
+	 chop = blitz::count(asrch_n < zerothr + 0.01);
        if(print_chips) {
 	 blitz::Array<double, 2> chipb(search, search);
 	 int ii = 0;

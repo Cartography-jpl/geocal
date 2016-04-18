@@ -33,15 +33,12 @@ GeometricModelImage::interpolate
 							 j + Sample + 1));
       ic.line -= 1;
       ic.sample -= 1;
-      
-      if(false && i == 0 && j == 0)
-	std::cerr << "hi there2: " << ImageCoordinate(i + Line, j + Sample)
-		  << "  " << ic << "\n";
+
       if(ic.line < 0 || ic.line >= raw_data_->number_line() - 1 ||
 	 ic.sample < 0 || ic.sample >= raw_data_->number_sample() - 1)
 	res(i,j) = Fill_value;
       else
-	res(i, j) = raw_data_->interpolate(ic);
+	res(i, j) = raw_data_->unchecked_interpolate(ic.line, ic.sample);
     }
   return res;
 }

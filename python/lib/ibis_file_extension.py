@@ -3,11 +3,7 @@
 from geocal_swig import *
 
 # We might not have IbisFile defined
-try:
-    IbisFile
-    have_ibis_file = True
-except NameError:
-    have_ibis_file = False
+have_ibis_file = VicarFile.vicar_available()
 
 def _column(self, cindex):
     '''Return the proper IbisColumn<T> type for the given column index.'''

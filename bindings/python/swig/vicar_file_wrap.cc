@@ -7873,6 +7873,27 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VicarFile_vicar_available(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"VicarFile_vicar_available",0,0,0)) SWIG_fail;
+  {
+    try {
+      result = (bool)GeoCal::VicarFile::vicar_available();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_VicarFile__v_access(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarFile *arg1 = (GeoCal::VicarFile *) 0 ;
@@ -10002,6 +10023,15 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"VicarFile::~VicarFile()\n"
 		"Destructor, closes file. \n"
+		""},
+	 { (char *)"VicarFile_vicar_available", (PyCFunction)_wrap_VicarFile_vicar_available, METH_NOARGS, (char *)"\n"
+		"\n"
+		"bool VicarFile::vicar_available()\n"
+		"Return true if vicar functionality is available, otherwise return\n"
+		"false.\n"
+		"\n"
+		"We have vicar functionality of the library was configured to use the\n"
+		"VICAR library. \n"
 		""},
 	 { (char *)"VicarFile__v_access", (PyCFunction)_wrap_VicarFile__v_access, METH_O, (char *)"\n"
 		"\n"

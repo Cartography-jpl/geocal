@@ -14,11 +14,7 @@ def test_read_write():
     # stepping through
         
     # Dummy MapInfo
-    try:
-        # Depending on the options used when building, this class might
-        # not be available. If not, then just skip this test.
-        VicarRasterImage
-    except NameError:
+    if(not VicarFile.vicar_available()):
         raise SkipTest
     ulc_x = 50
     ulc_y = 60

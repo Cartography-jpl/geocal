@@ -251,6 +251,20 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
         _vicar_file.VicarFile_swiginit(self, _vicar_file.new_VicarFile(*args))
     __swig_destroy__ = _vicar_file.delete_VicarFile
 
+    def vicar_available():
+        """
+
+        bool VicarFile::vicar_available()
+        Return true if vicar functionality is available, otherwise return
+        false.
+
+        We have vicar functionality of the library was configured to use the
+        VICAR library. 
+        """
+        return _vicar_file.VicarFile_vicar_available()
+
+    vicar_available = staticmethod(vicar_available)
+
     def _v_access(self):
         """
 
@@ -534,6 +548,18 @@ VicarFile.label_list = new_instancemethod(_vicar_file.VicarFile_label_list, None
 VicarFile.property_list = new_instancemethod(_vicar_file.VicarFile_property_list, None, VicarFile)
 VicarFile_swigregister = _vicar_file.VicarFile_swigregister
 VicarFile_swigregister(VicarFile)
+
+def VicarFile_vicar_available():
+    """
+
+    bool VicarFile::vicar_available()
+    Return true if vicar functionality is available, otherwise return
+    false.
+
+    We have vicar functionality of the library was configured to use the
+    VICAR library. 
+    """
+    return _vicar_file.VicarFile_vicar_available()
 
 def VicarFile_is_vicar_file(Fname):
     """

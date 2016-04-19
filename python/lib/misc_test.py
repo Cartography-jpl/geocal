@@ -33,9 +33,7 @@ def test_makedirs_p():
 def test_cib01_data():
     if(not have_afid_data):
         raise SkipTest
-    try:
-        VicarMultiFile
-    except NameError:
+    if(not VicarFile.vicar_available()):
         raise SkipTest
     if(not os.path.exists(os.environ["CIB1_ROOT"] + "/cib01_db.int")):
         raise SkipTest

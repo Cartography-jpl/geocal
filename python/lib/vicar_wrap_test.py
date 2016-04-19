@@ -16,12 +16,6 @@ try:
 except NameError:
     have_carto = False
 
-try:
-    VicarRasterImage
-    have_vicar_rtl = True
-except NameError:
-    have_vicar_rtl = False
-
 if(have_carto):
     EciTodBurl.set_delta_ut1(0.1128609)
 
@@ -29,7 +23,7 @@ def test_scinterp():
     '''This was pulled from tstscinterp.pdf. This isn't actually a very
     good test, since we don't actually interpolate anything. But we want
     to include this test since it is what the underlying pdf file uses.'''
-    if(not have_carto or not have_vicar_rtl):
+    if(not have_carto or not VicarFile.vicar_available()):
         raise SkipTest
     pos = EciTodBurl(3722048.0,4126137.9,3955545.4)
     tpos = Time.time_acs(31556737.5)
@@ -51,7 +45,7 @@ def test_scinterp():
 
 def test_sc2rpc():
     '''Test data from devsc2rpc'''
-    if(not have_carto or not have_vicar_rtl):
+    if(not have_carto or not VicarFile.vicar_available()):
         raise SkipTest
     od = QuaternionOrbitData(Time.time_acs(215077459.471879),
                              EciTodBurl(3435100.496, 945571.538, -6053387.573),
@@ -67,7 +61,7 @@ def test_sc2rpc():
 
 def test_compare_sc2rpc():
     '''Calculate using my code, and see how close we are to sc2rpc'''
-    if(not have_carto or not have_vicar_rtl):
+    if(not have_carto or not VicarFile.vicar_available()):
         raise SkipTest
     od = QuaternionOrbitData(Time.time_acs(215077459.471879),
                              EciTodBurl(3435100.496, 945571.538, -6053387.573),

@@ -51,10 +51,10 @@ void GeometricModelImage::calc(int Lstart, int Sstart) const
       ImageCoordinate ic =
 	model->original_image_coordinate(ImageCoordinate(i + Lstart, 
 							 j + Sstart));
-      if(ic.line < 0 || ic.line >= raw_data_->number_line() ||
-	 ic.sample < 0 || ic.sample >= raw_data_->number_sample())
+      if(ic.line < 0 || ic.line >= raw_data_->number_line() - 1 ||
+	 ic.sample < 0 || ic.sample >= raw_data_->number_sample() - 1)
 	data(i,j) = fill_value_;
       else
-	data(i, j) = raw_data_->interpolate(ic);
+	data(i, j) = raw_data_->unchecked_interpolate(ic.line, ic.sample);
     }
 }

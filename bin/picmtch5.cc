@@ -30,11 +30,9 @@ using namespace GeoCal;
 /************************************************************************/
 
 int lnlg[2],lnsg[2],i_unit[2];
-std::vector<double> chip1, asrch;
 
 double rvecl[5] = {0.,1.,-1.,1.,-1.};
 double rvecs[5] = {0.,1.,-1.,-1.,1.};
-double ident[12] = {1.,0.,0.,0.,0.,0.,0.,1.,0.,0.,0.,0.};
 
 // Temporary, this will go away in a bit.
 boost::shared_ptr<PhaseCorrelationMatcher> matcher;
@@ -273,8 +271,6 @@ try {
   // May want to replace with blitz array, or some other structure.
   mz_alloc2((unsigned char ***)&a,2,neqmax,sizeof(double));
   mz_alloc2((unsigned char ***)&b,2,neqmax,sizeof(double));
-  chip1.resize(fftsize*fftsize);
-  asrch.resize(search*search);
   matcher.reset(new PhaseCorrelationMatcher(fftsize,search));
   // Tempory, this should be done in constructor
   matcher->nohpf = nohpf;

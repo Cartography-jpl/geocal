@@ -194,12 +194,12 @@ class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Data, Geom_model, Number_line, Number_sample):
+    def __init__(self, Data, Geom_model, Number_line, Number_sample, Fill_value=0.0):
         """
 
         GeoCal::GeometricModelImage::GeometricModelImage(const boost::shared_ptr< RasterImage > &Data, const
         boost::shared_ptr< GeometricModel > &Geom_model, int Number_line, int
-        Number_sample)
+        Number_sample, double Fill_value=0.0)
         Constructor.
 
         This takes underlying data, and a geometric model to use to resample
@@ -208,7 +208,7 @@ class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
         Because we fill in data outside of the original image with O's this
         image can be any size. So the size desired needs to be passed in. 
         """
-        _geometric_model_image.GeometricModelImage_swiginit(self, _geometric_model_image.new_GeometricModelImage(Data, Geom_model, Number_line, Number_sample))
+        _geometric_model_image.GeometricModelImage_swiginit(self, _geometric_model_image.new_GeometricModelImage(Data, Geom_model, Number_line, Number_sample, Fill_value))
 
     def _v_raw_data(self):
         """
@@ -238,16 +238,31 @@ class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
         return self._v_geometric_model()
 
 
+    def _v_fill_value(self):
+        """
+
+        double GeoCal::GeometricModelImage::fill_value() const
+
+        """
+        return _geometric_model_image.GeometricModelImage__v_fill_value(self)
+
+
+    @property
+    def fill_value(self):
+        return self._v_fill_value()
+
+
     @classmethod
     def pickle_format_version(cls):
       return 1
 
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.raw_data,self.geometric_model,self.number_line,self.number_sample)
+      return _new_from_init, (self.__class__, 1, self.raw_data,self.geometric_model,self.number_line,self.number_sample,self.fill_value)
 
     __swig_destroy__ = _geometric_model_image.delete_GeometricModelImage
 GeometricModelImage._v_raw_data = new_instancemethod(_geometric_model_image.GeometricModelImage__v_raw_data, None, GeometricModelImage)
 GeometricModelImage._v_geometric_model = new_instancemethod(_geometric_model_image.GeometricModelImage__v_geometric_model, None, GeometricModelImage)
+GeometricModelImage._v_fill_value = new_instancemethod(_geometric_model_image.GeometricModelImage__v_fill_value, None, GeometricModelImage)
 GeometricModelImage_swigregister = _geometric_model_image.GeometricModelImage_swigregister
 GeometricModelImage_swigregister(GeometricModelImage)
 

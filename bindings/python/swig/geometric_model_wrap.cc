@@ -6117,7 +6117,7 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
-SWIGINTERN PyObject *_wrap_GeometricModel_image_coordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GeometricModel_original_image_coordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeometricModel *arg1 = (GeoCal::GeometricModel *) 0 ;
   GeoCal::ImageCoordinate *arg2 = 0 ;
@@ -6131,12 +6131,12 @@ SWIGINTERN PyObject *_wrap_GeometricModel_image_coordinate(PyObject *SWIGUNUSEDP
   PyObject *swig_obj[2] ;
   GeoCal::ImageCoordinate result;
   
-  if (!SWIG_Python_UnpackTuple(args,"GeometricModel_image_coordinate",2,2,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"GeometricModel_original_image_coordinate",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricModel_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeometricModel_image_coordinate" "', argument " "1"" of type '" "GeoCal::GeometricModel const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeometricModel_original_image_coordinate" "', argument " "1"" of type '" "GeoCal::GeometricModel const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricModel > * >(argp1);
@@ -6158,10 +6158,10 @@ SWIGINTERN PyObject *_wrap_GeometricModel_image_coordinate(PyObject *SWIGUNUSEDP
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GeometricModel_image_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GeometricModel_original_image_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GeometricModel_image_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GeometricModel_original_image_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
@@ -6174,7 +6174,81 @@ SWIGINTERN PyObject *_wrap_GeometricModel_image_coordinate(PyObject *SWIGUNUSEDP
   }
   {
     try {
-      result = ((GeoCal::GeometricModel const *)arg1)->image_coordinate((GeoCal::ImageCoordinate const &)*arg2);
+      result = ((GeoCal::GeometricModel const *)arg1)->original_image_coordinate((GeoCal::ImageCoordinate const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GeometricModel_resampled_image_coordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeometricModel *arg1 = (GeoCal::GeometricModel *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricModel const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeometricModel const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  GeoCal::ImageCoordinate result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"GeometricModel_resampled_image_coordinate",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricModel_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeometricModel_resampled_image_coordinate" "', argument " "1"" of type '" "GeoCal::GeometricModel const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricModel > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricModel * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricModel * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GeometricModel_resampled_image_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GeometricModel_resampled_image_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::GeometricModel const *)arg1)->resampled_image_coordinate((GeoCal::ImageCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6637,10 +6711,21 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
-	 { (char *)"GeometricModel_image_coordinate", _wrap_GeometricModel_image_coordinate, METH_VARARGS, (char *)"\n"
+	 { (char *)"GeometricModel_original_image_coordinate", _wrap_GeometricModel_original_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::image_coordinate(const ImageCoordinate &Resampled_ic) const =0\n"
-		"Map image coordinates to an underlying set of image coordinates. \n"
+		"virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const =0\n"
+		"Map image coordinates to an underlying set of image coordinates.\n"
+		"\n"
+		"This takes the image coordinates of the resampled image (magnified,\n"
+		"rotated, whatever) and returns the corresponding coordinate in the\n"
+		"original image. \n"
+		""},
+	 { (char *)"GeometricModel_resampled_image_coordinate", _wrap_GeometricModel_resampled_image_coordinate, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const =0\n"
+		"This is the inversion of original_image_coordinate, taking the\n"
+		"original image coordinates and returning the resampled image\n"
+		"coordinates. \n"
 		""},
 	 { (char *)"GeometricModel___str__", (PyCFunction)_wrap_GeometricModel___str__, METH_O, NULL},
 	 { (char *)"delete_GeometricModel", (PyCFunction)_wrap_delete_GeometricModel, METH_O, (char *)"\n"

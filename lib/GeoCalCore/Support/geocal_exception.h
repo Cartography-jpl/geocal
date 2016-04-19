@@ -43,6 +43,7 @@ public:
 //-----------------------------------------------------------------------
 
   Exception(const Exception& E)
+    : boost::backtrace(E)
   {
     try {
       std::string cp(E.s_.str());

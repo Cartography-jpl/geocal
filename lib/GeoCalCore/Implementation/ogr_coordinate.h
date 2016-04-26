@@ -98,40 +98,22 @@ public:
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 		const Geodetic& G);
 
-  Geodetic to_geodetic() const;
-
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
   virtual ~OgrCoordinate() {}
 
-//-----------------------------------------------------------------------
-/// Return latitude in degrees. Latitude is -90 to 90.
-//-----------------------------------------------------------------------
-
-  virtual double latitude() const { return to_geodetic().latitude(); }
-
-//-----------------------------------------------------------------------
-/// Return longitude in degrees. Longitude is -180 to 180.
-//-----------------------------------------------------------------------
-
-  virtual double longitude() const 
-  { return to_geodetic().longitude(); }
-
-//-----------------------------------------------------------------------
-/// Height above ellipsoid, in meters.
-//-----------------------------------------------------------------------
-
-  virtual double height_reference_surface() const
-  { return to_geodetic().height_reference_surface(); }
+  virtual double latitude() const;
+  virtual double longitude() const;
+  virtual double height_reference_surface() const;
 
 //-----------------------------------------------------------------------
 /// Convert to CartesianFixed.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const
-  { return to_geodetic().convert_to_cf(); }
+  { return Geodetic(latitude(), longitude(), height_reference_surface()).convert_to_cf(); }
   virtual void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------

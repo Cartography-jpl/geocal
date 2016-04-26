@@ -7054,52 +7054,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OgrCoordinate_to_geodetic(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::OgrCoordinate *arg1 = (GeoCal::OgrCoordinate *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::OgrCoordinate const > tempshared1 ;
-  boost::shared_ptr< GeoCal::OgrCoordinate const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  GeoCal::Geodetic result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrCoordinate_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrCoordinate_to_geodetic" "', argument " "1"" of type '" "GeoCal::OgrCoordinate const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OgrCoordinate > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OgrCoordinate > * >(argp1);
-      arg1 = const_cast< GeoCal::OgrCoordinate * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OgrCoordinate > * >(argp1);
-      arg1 = const_cast< GeoCal::OgrCoordinate * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::OgrCoordinate const *)arg1)->to_geodetic();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::Geodetic > *smartresult = new boost::shared_ptr<  GeoCal::Geodetic >(new GeoCal::Geodetic((GeoCal::Geodetic &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_OgrCoordinate__v_ogr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OgrCoordinate *arg1 = (GeoCal::OgrCoordinate *) 0 ;
@@ -8031,11 +7985,6 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const Geodetic &G)\n"
 		"Convert from Geodetic to the coordinate system given by Ogr. \n"
-		""},
-	 { (char *)"OgrCoordinate_to_geodetic", (PyCFunction)_wrap_OgrCoordinate_to_geodetic, METH_O, (char *)"\n"
-		"\n"
-		"Geodetic OgrCoordinate::to_geodetic() const\n"
-		"Convert to Geodetic coordinates. \n"
 		""},
 	 { (char *)"OgrCoordinate__v_ogr", (PyCFunction)_wrap_OgrCoordinate__v_ogr, METH_O, (char *)"\n"
 		"\n"

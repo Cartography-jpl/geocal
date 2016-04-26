@@ -396,15 +396,6 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
         """
         _ogr_coordinate.OgrCoordinate_swiginit(self, _ogr_coordinate.new_OgrCoordinate(*args))
 
-    def to_geodetic(self):
-        """
-
-        Geodetic OgrCoordinate::to_geodetic() const
-        Convert to Geodetic coordinates. 
-        """
-        return _ogr_coordinate.OgrCoordinate_to_geodetic(self)
-
-
     def _v_ogr(self):
         """
 
@@ -457,7 +448,6 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ogr_coordinate.delete_OgrCoordinate
-OgrCoordinate.to_geodetic = new_instancemethod(_ogr_coordinate.OgrCoordinate_to_geodetic, None, OgrCoordinate)
 OgrCoordinate._v_ogr = new_instancemethod(_ogr_coordinate.OgrCoordinate__v_ogr, None, OgrCoordinate)
 OgrCoordinate._v_utm_zone = new_instancemethod(_ogr_coordinate.OgrCoordinate__v_utm_zone, None, OgrCoordinate)
 OgrCoordinate_swigregister = _ogr_coordinate.OgrCoordinate_swigregister

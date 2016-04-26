@@ -225,10 +225,10 @@ std::string OgrWrapper::pcs_citation_geo_key() const
 }
 
 //-----------------------------------------------------------------------
-/// Convert to Geodetic coordinates.
+/// Return latitude in degrees. Latitude is -90 to 90.
 //-----------------------------------------------------------------------
 
-Geodetic OgrCoordinate::to_geodetic() const
+double OgrCoordinate::latitude() const
 {
   double xr = x, yr = y , zr = z;
   // Note that operation Transform really is const, this just doesn't
@@ -237,7 +237,39 @@ Geodetic OgrCoordinate::to_geodetic() const
     Transform(1, &xr, &yr, &zr);
   if(!status)
     throw Exception("Call to OGR Transform failed");
-  return Geodetic(yr, xr, zr);
+  return yr;
+}
+
+//-----------------------------------------------------------------------
+/// Return longitude in degrees. Longitude is -180 to 180.
+//-----------------------------------------------------------------------
+
+double OgrCoordinate::longitude() const
+{
+  double xr = x, yr = y , zr = z;
+  // Note that operation Transform really is const, this just doesn't
+  // have the right signature in GDAL.
+  int status = const_cast<OGRCoordinateTransformation&>(ogr_->transform()).
+    Transform(1, &xr, &yr, &zr);
+  if(!status)
+    throw Exception("Call to OGR Transform failed");
+  return xr;
+}
+
+//-----------------------------------------------------------------------
+/// Height above ellipsoid, in meters.
+//-----------------------------------------------------------------------
+
+double OgrCoordinate::height_reference_surface() const
+{
+  double xr = x, yr = y , zr = z;
+  // Note that operation Transform really is const, this just doesn't
+  // have the right signature in GDAL.
+  int status = const_cast<OGRCoordinateTransformation&>(ogr_->transform()).
+    Transform(1, &xr, &yr, &zr);
+  if(!status)
+    throw Exception("Call to OGR Transform failed");
+  return zr;
 }
 
 //-----------------------------------------------------------------------

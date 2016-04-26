@@ -246,7 +246,7 @@ Geodetic OgrCoordinate::to_geodetic() const
 
 void OgrCoordinate::print(std::ostream& Os) const
 {
-  Os << "OgrCoordinate: (" << x << ", " << y << ", " << z << ")";
+  Os << "OgrCoordinate: " << ogr_->pcs_citation_geo_key() << " : (" << x << ", " << y << ", " << z << ")";
 }
 
 //-----------------------------------------------------------------------

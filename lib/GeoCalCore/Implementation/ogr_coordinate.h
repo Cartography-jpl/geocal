@@ -107,6 +107,8 @@ public:
   virtual double latitude() const;
   virtual double longitude() const;
   virtual double height_reference_surface() const;
+  virtual void lat_lon_height(double& Latitude, double& Longitude, 
+			      double& Height_reference_surface) const; 
 
 //-----------------------------------------------------------------------
 /// Convert to CartesianFixed.

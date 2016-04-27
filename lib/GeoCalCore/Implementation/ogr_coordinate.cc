@@ -272,6 +272,21 @@ double OgrCoordinate::height_reference_surface() const
   return zr;
 }
 
+void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude, 
+				   double& Height_reference_surface) const
+{
+  double xr = x, yr = y , zr = z;
+  // Note that operation Transform really is const, this just doesn't
+  // have the right signature in GDAL.
+  int status = const_cast<OGRCoordinateTransformation&>(ogr_->transform()).
+    Transform(1, &xr, &yr, &zr);
+  if(!status)
+    throw Exception("Call to OGR Transform failed");
+  Latitude = yr;
+  Longitude = xr;
+  Height_reference_surface = zr;
+}
+
 //-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------

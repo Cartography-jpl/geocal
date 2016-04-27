@@ -226,12 +226,42 @@ class TleOrbit(geocal_swig.orbit.Orbit):
         return self._v_tle()
 
 
+    def _v_epoch(self):
+        """
+
+        const Time& GeoCal::TleOrbit::epoch() const
+        The epoch for the TLE. 
+        """
+        return _tle_orbit.TleOrbit__v_epoch(self)
+
+
+    @property
+    def epoch(self):
+        return self._v_epoch()
+
+
+    def _v_revolution_number_at_epoch(self):
+        """
+
+        int TleOrbit::revolution_number_at_epoch() const
+        Return the revolution number at the epoch. 
+        """
+        return _tle_orbit.TleOrbit__v_revolution_number_at_epoch(self)
+
+
+    @property
+    def revolution_number_at_epoch(self):
+        return self._v_revolution_number_at_epoch()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _tle_orbit.delete_TleOrbit
 TleOrbit.orbit_data = new_instancemethod(_tle_orbit.TleOrbit_orbit_data, None, TleOrbit)
 TleOrbit._v_tle = new_instancemethod(_tle_orbit.TleOrbit__v_tle, None, TleOrbit)
+TleOrbit._v_epoch = new_instancemethod(_tle_orbit.TleOrbit__v_epoch, None, TleOrbit)
+TleOrbit._v_revolution_number_at_epoch = new_instancemethod(_tle_orbit.TleOrbit__v_revolution_number_at_epoch, None, TleOrbit)
 TleOrbit_swigregister = _tle_orbit.TleOrbit_swigregister
 TleOrbit_swigregister(TleOrbit)
 

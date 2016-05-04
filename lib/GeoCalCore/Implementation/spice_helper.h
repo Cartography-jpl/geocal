@@ -70,6 +70,7 @@ public:
   static void spice_setup(const std::string& Kernel = "geocal.ker");
   static void add_kernel(const std::string& Kernel_dir, 
 			 const std::string& Kernel);
+  static void add_kernel(const std::string& Kernel);
   static void spice_error_check();
   static boost::math::quaternion<double> 
   conversion_quaternion(const std::string& From,

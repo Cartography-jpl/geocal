@@ -151,6 +151,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_offset_correction)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_piecewise_correction)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(tle_orbit)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(spice_orbit)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_camera)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_orbit)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(quickbird_camera)(void);
@@ -494,6 +495,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_orbit_offset_correction", SWIG_INIT_FUNC(orbit_offset_correction));
   SWIG_INIT_MODULE(package, "_orbit_piecewise_correction", SWIG_INIT_FUNC(orbit_piecewise_correction));
   SWIG_INIT_MODULE(package, "_tle_orbit", SWIG_INIT_FUNC(tle_orbit));
+  SWIG_INIT_MODULE(package, "_spice_orbit", SWIG_INIT_FUNC(spice_orbit));
   SWIG_INIT_MODULE(package, "_argus_camera", SWIG_INIT_FUNC(argus_camera));
   SWIG_INIT_MODULE(package, "_argus_orbit", SWIG_INIT_FUNC(argus_orbit));
   SWIG_INIT_MODULE(package, "_quickbird_camera", SWIG_INIT_FUNC(quickbird_camera));

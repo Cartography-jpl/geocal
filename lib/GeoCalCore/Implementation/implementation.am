@@ -118,6 +118,8 @@ geocalinc_HEADERS+= @srcimplementation@/igc_ray_caster.h
 libgeocal_la_SOURCES+= @srcimplementation@/igc_ray_caster.cc
 geocalinc_HEADERS+= @srcimplementation@/tle_orbit.h
 libgeocal_la_SOURCES+= @srcimplementation@/tle_orbit.cc
+geocalinc_HEADERS+= @srcimplementation@/spice_orbit.h
+libgeocal_la_SOURCES+= @srcimplementation@/spice_orbit.cc
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -228,6 +230,7 @@ SWIG_SRC += @swigsrc@/orbit_piecewise_correction_wrap.cc
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
 SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
 SWIG_SRC += @swigsrc@/tle_orbit_wrap.cc
+SWIG_SRC += @swigsrc@/spice_orbit_wrap.cc
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
@@ -274,6 +277,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/igc_collection_orbit_data_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_offset_correction_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_piecewise_correction_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/tle_orbit_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/spice_orbit_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

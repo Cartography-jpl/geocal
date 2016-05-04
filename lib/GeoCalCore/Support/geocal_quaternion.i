@@ -54,7 +54,8 @@ namespace GeoCal {
   determine_quat_rot(const boost::array<double, 3>& V1, 
 		     const boost::array<double, 3>& V2);
 
-  %name(quat_normalize) void normalize(boost::math::quaternion<double>& Q);
+  %rename(quat_normalize) normalize(boost::math::quaternion<double>& Q);
+  void normalize(boost::math::quaternion<double>& Q);
 
   boost::math::quaternion<AutoDerivative<double> > quat_rot_x(const AutoDerivative<double>& A);
   boost::math::quaternion<AutoDerivative<double> > quat_rot_y(const AutoDerivative<double>& A);

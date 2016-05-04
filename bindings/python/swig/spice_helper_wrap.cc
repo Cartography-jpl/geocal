@@ -11149,15 +11149,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"SpiceHelper_add_kernel",2,2,swig_obj)) SWIG_fail;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -11197,6 +11196,65 @@ fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceHelper_add_kernel" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_add_kernel" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      GeoCal::SpiceHelper::add_kernel((std::string const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"SpiceHelper_add_kernel",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_SpiceHelper_add_kernel__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_SpiceHelper_add_kernel__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SpiceHelper_add_kernel'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpiceHelper::add_kernel(std::string const &,std::string const &)\n"
+    "    GeoCal::SpiceHelper::add_kernel(std::string const &)\n");
+  return 0;
 }
 
 
@@ -11460,12 +11518,9 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"SpiceHelper_add_kernel", _wrap_SpiceHelper_add_kernel, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void SpiceHelper::add_kernel(const std::string &Kernel_dir, const std::string &Kernel)\n"
+		"void SpiceHelper::add_kernel(const std::string &Kernel)\n"
 		"Add an additional kernel, after the one we automatically get (i.e.,\n"
-		"$SPICEDATA/geocal.ker).\n"
-		"\n"
-		"We change to the given Kernel_dir, so you can use relative paths if\n"
-		"desired for the kernel names. \n"
+		"$SPICEDATA/geocal.ker). \n"
 		""},
 	 { (char *)"SpiceHelper_conversion_quaternion", _wrap_SpiceHelper_conversion_quaternion, METH_VARARGS, (char *)"\n"
 		"\n"

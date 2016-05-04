@@ -1,7 +1,7 @@
 KPL/FK
 
 This adds in the galileo scan platform as a frame. For some
-reason, the Galileo project doesn't have this already. Some
+reason, the Galileo project doesn't have this already. So
 I've written this (Mike Smyth).
 
 I believe the this is the same frame as needed by the solid

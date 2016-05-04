@@ -327,17 +327,14 @@ class SpiceHelper(object):
 
     spice_setup = staticmethod(spice_setup)
 
-    def add_kernel(Kernel_dir, Kernel):
+    def add_kernel(*args):
         """
 
-        void SpiceHelper::add_kernel(const std::string &Kernel_dir, const std::string &Kernel)
+        void SpiceHelper::add_kernel(const std::string &Kernel)
         Add an additional kernel, after the one we automatically get (i.e.,
-        $SPICEDATA/geocal.ker).
-
-        We change to the given Kernel_dir, so you can use relative paths if
-        desired for the kernel names. 
+        $SPICEDATA/geocal.ker). 
         """
-        return _spice_helper.SpiceHelper_add_kernel(Kernel_dir, Kernel)
+        return _spice_helper.SpiceHelper_add_kernel(*args)
 
     add_kernel = staticmethod(add_kernel)
 
@@ -394,17 +391,14 @@ def SpiceHelper_spice_setup(*args):
     """
     return _spice_helper.SpiceHelper_spice_setup(*args)
 
-def SpiceHelper_add_kernel(Kernel_dir, Kernel):
+def SpiceHelper_add_kernel(*args):
     """
 
-    void SpiceHelper::add_kernel(const std::string &Kernel_dir, const std::string &Kernel)
+    void SpiceHelper::add_kernel(const std::string &Kernel)
     Add an additional kernel, after the one we automatically get (i.e.,
-    $SPICEDATA/geocal.ker).
-
-    We change to the given Kernel_dir, so you can use relative paths if
-    desired for the kernel names. 
+    $SPICEDATA/geocal.ker). 
     """
-    return _spice_helper.SpiceHelper_add_kernel(Kernel_dir, Kernel)
+    return _spice_helper.SpiceHelper_add_kernel(*args)
 
 def SpiceHelper_conversion_quaternion(From, To, T):
     """

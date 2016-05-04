@@ -1,0 +1,11 @@
+List of kernels we need for working with ISS data. 
+
+As a convention, we always change to the directory this file is located
+in before loading this top level kernel. That means that we can use
+relative paths from the file location to specify other kernels that
+should be loaded.
+
+\begindata
+KERNELS_TO_LOAD = (
+  'spk/iss_2015.bsp'
+)

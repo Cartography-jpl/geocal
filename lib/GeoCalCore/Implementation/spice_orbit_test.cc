@@ -14,15 +14,13 @@ BOOST_AUTO_TEST_CASE(basic)
     return;
   }
   SpiceOrbit orb(SpiceOrbit::ISS_ID, test_data_dir() + "iss_kernel/iss.ker");
-  // This expected results comes from the TleOrbit test.
   Time t = Time::parse_time("2015-10-27T00:05:10Z");
-  Geodetic pexpect(-51.7532613384, 20.0670430907, 425523.669914);
-  std::cerr << Geodetic(*orb.position_cf(t)) << "\n";
-  std::cerr << distance(*orb.position_cf(t), pexpect) << "\n";
+  Geodetic pexpect(-51.7997916687, 19.9590219329, 425544.770209);
+  BOOST_CHECK(distance(*orb.position_cf(t), pexpect) < 1.0);
   SimpleCamera ncam(0,0,0);
   FrameCoordinate fc(0.5,1504.0/2);
-  std::cerr << ncam.sc_look_vector(fc, 0) << "\n";
-  std::cerr << Geodetic(*orb.reference_surface_intersect_approximate(t, ncam, fc)) << "\n";
+  Geodetic pexpect2(-51.8115033677, 19.9588707388);
+  BOOST_CHECK(distance(*orb.reference_surface_intersect_approximate(t, ncam, fc), pexpect2) < 1.0);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

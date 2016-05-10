@@ -8882,6 +8882,118 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IbisFile_mark_updated__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::IbisFile *arg1 = (GeoCal::IbisFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IbisFile > tempshared1 ;
+  boost::shared_ptr< GeoCal::IbisFile > *smartarg1 = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IbisFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisFile_mark_updated" "', argument " "1"" of type '" "GeoCal::IbisFile *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::IbisFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::IbisFile > * >(argp1);
+      arg1 = const_cast< GeoCal::IbisFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::IbisFile > * >(argp1);
+      arg1 = const_cast< GeoCal::IbisFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->mark_updated();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IbisFile_mark_updated__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::IbisFile *arg1 = (GeoCal::IbisFile *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IbisFile > tempshared1 ;
+  boost::shared_ptr< GeoCal::IbisFile > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IbisFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IbisFile_mark_updated" "', argument " "1"" of type '" "GeoCal::IbisFile *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::IbisFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::IbisFile > * >(argp1);
+      arg1 = const_cast< GeoCal::IbisFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::IbisFile > * >(argp1);
+      arg1 = const_cast< GeoCal::IbisFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IbisFile_mark_updated" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      (arg1)->mark_updated(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IbisFile_mark_updated(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"IbisFile_mark_updated",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_IbisFile_mark_updated__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_IbisFile_mark_updated__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'IbisFile_mark_updated'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::IbisFile::mark_updated()\n"
+    "    GeoCal::IbisFile::mark_updated(int)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_IbisFile_flush(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IbisFile *arg1 = (GeoCal::IbisFile *) 0 ;
@@ -9590,6 +9702,16 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"int GeoCal::IbisFile::unit() const\n"
 		"Unit number for VicarFile. \n"
+		""},
+	 { (char *)"IbisFile_mark_updated", _wrap_IbisFile_mark_updated, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::IbisFile::mark_updated(int I)\n"
+		"Mark whole file as updated.\n"
+		"\n"
+		"No need to do this if you open the file as \"WRITE\", but for\n"
+		"\"UPDATE\" we only update columns explicitly marked as updated (so we\n"
+		"don't write out unchanged column). This routine marks the specific\n"
+		"columns as updated and needing to be written to disk. \n"
 		""},
 	 { (char *)"IbisFile_flush", (PyCFunction)_wrap_IbisFile_flush, METH_O, (char *)"\n"
 		"\n"

@@ -1,9 +1,7 @@
 #include "cart_lab_multifile.h"
-#include "vicar_lite_file.h"
 #include "gdal_raster_image.h"
 #include "constant_raster_image.h"
 #include "geocal_serialize_support.h"
-#include "geocal_internal_config.h"
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
@@ -11,9 +9,7 @@
 #include <boost/foreach.hpp>
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
-#ifdef HAVE_VICAR_RTL
 #include "vicar_raster_image.h"
-#endif
 
 using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -210,35 +206,16 @@ RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
       return RasterMultifileTile();
     }
   }
+
   //-----------------------------------------------------------------------
   // If we are using memory mapped io by preference, try that first.
   // We allow this to fail, the file might be too large to do memory
   // mapped io (particular on the mac, which is limited to 2G).
   //-----------------------------------------------------------------------
 
-  boost::shared_ptr<RasterImage> f;
-  try {
-    if(favor_memory_mapped) {
-      boost::shared_ptr<VicarLiteRasterImage> 
-	f2(new VicarLiteRasterImage(fname, 1, VicarLiteFile::READ,
-				    -1, -1, force_area_pixel));
-      if(!f2->is_compressed())  // Can only use memory mapped for
-				// uncompressed files.
-	f = f2;
-    }
-  } catch(const Exception& E) {
-    // Ignore errors, we drop down to using the Vicar routines below.
-  }
-  if(!f.get()) {
-#ifdef HAVE_VICAR_RTL
-    f.reset(new VicarRasterImage(fname, 1, VicarFile::READ,
-				 number_line_per_tile, 
-				 number_tile_each_file, force_area_pixel));
-#else
-    throw Exception("Wasn't compiled with support for VICAR RTL. If you need thsi functionality, install the VICAR RTL and rebuild GeoCal");
-#endif
-  }
-
+  boost::shared_ptr<RasterImage> f = 
+    vicar_open(fname, 1, VicarFile::READ, favor_memory_mapped,
+	       number_line_per_tile, number_tile_each_file, force_area_pixel);
   ImageCoordinate ic = 
     coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
   ImageCoordinate ic2 = 

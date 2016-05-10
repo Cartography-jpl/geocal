@@ -27,17 +27,24 @@ public:
 
   GeometricModelImage(const boost::shared_ptr<RasterImage>& Data,
 		      const boost::shared_ptr<GeometricModel>& Geom_model,
-		      int Number_line, int Number_sample)
-    : CalcRaster(Number_line, Number_sample), raw_data_(Data),
+		      int Number_line, int Number_sample,
+		      double Fill_value = 0.0)
+    : CalcRaster(Number_line, Number_sample), 
+      fill_value_(Fill_value), 
+      raw_data_(Data),
       model(Geom_model) {}
   virtual ~GeometricModelImage() {}
   virtual void print(std::ostream& Os) const;
+  double fill_value() const {return fill_value_;}
   const boost::shared_ptr<RasterImage>& raw_data() const {return raw_data_;}
   const boost::shared_ptr<GeometricModel>& geometric_model() const 
   {return model;}
+  virtual blitz::Array<double, 2> interpolate(double Line, double Sample, 
+      int Number_line, int Number_sample, double Fill_value = 0.0) const;
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:
+  double fill_value_;
   boost::shared_ptr<RasterImage> raw_data_;
   boost::shared_ptr<GeometricModel> model;
 };

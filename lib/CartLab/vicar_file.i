@@ -36,6 +36,7 @@ public:
 	    const std::string& Org = "BSQ",
 	    compression C = NONE);
   ~VicarFile();
+  static bool vicar_available();
   %python_attribute(access, access_type)
   %python_attribute(force_area_pixel, bool)
   %python_attribute(file_name, std::string)

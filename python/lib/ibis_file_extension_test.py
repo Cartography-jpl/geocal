@@ -5,11 +5,7 @@ import numpy.testing as npt
 
 def test_ibis():
     '''Basic test of reading and writing an ibis file.'''
-    try:
-        # Depending on the options used when building, this class might
-        # not be available. If not, then just skip this test.
-        IbisFile
-    except NameError:
+    if(not VicarFile.vicar_available()):
         raise SkipTest
     
     with IbisFile("ibis.img", 10, 
@@ -43,11 +39,7 @@ def test_ibis():
 
 def test_ibis_create():
     '''Test IbisFile.create'''
-    try:
-        # Depending on the options used when building, this class might
-        # not be available. If not, then just skip this test.
-        IbisFile
-    except NameError:
+    if(not VicarFile.vicar_available()):
         raise SkipTest
 
     d = np.array([[1.0,2,3],[4,5,6]])

@@ -190,16 +190,32 @@ class GeometricModel(geocal_swig.generic_object.GenericObject):
         raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
 
-    def image_coordinate(self, Resampled_ic):
+    def original_image_coordinate(self, Resampled_ic):
         """
 
-        virtual ImageCoordinate GeoCal::GeometricModel::image_coordinate(const ImageCoordinate &Resampled_ic) const =0
-        Map image coordinates to an underlying set of image coordinates. 
+        virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const =0
+        Map image coordinates to an underlying set of image coordinates.
+
+        This takes the image coordinates of the resampled image (magnified,
+        rotated, whatever) and returns the corresponding coordinate in the
+        original image. 
         """
-        return _geometric_model.GeometricModel_image_coordinate(self, Resampled_ic)
+        return _geometric_model.GeometricModel_original_image_coordinate(self, Resampled_ic)
+
+
+    def resampled_image_coordinate(self, Resampled_ic):
+        """
+
+        virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const =0
+        This is the inversion of original_image_coordinate, taking the
+        original image coordinates and returning the resampled image
+        coordinates. 
+        """
+        return _geometric_model.GeometricModel_resampled_image_coordinate(self, Resampled_ic)
 
     __swig_destroy__ = _geometric_model.delete_GeometricModel
-GeometricModel.image_coordinate = new_instancemethod(_geometric_model.GeometricModel_image_coordinate, None, GeometricModel)
+GeometricModel.original_image_coordinate = new_instancemethod(_geometric_model.GeometricModel_original_image_coordinate, None, GeometricModel)
+GeometricModel.resampled_image_coordinate = new_instancemethod(_geometric_model.GeometricModel_resampled_image_coordinate, None, GeometricModel)
 GeometricModel.__str__ = new_instancemethod(_geometric_model.GeometricModel___str__, None, GeometricModel)
 GeometricModel_swigregister = _geometric_model.GeometricModel_swigregister
 GeometricModel_swigregister(GeometricModel)

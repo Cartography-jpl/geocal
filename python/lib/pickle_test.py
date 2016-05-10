@@ -229,11 +229,7 @@ def test_vicar_lite_dem():
 def test_vicar_raster_image():
     if(not have_serialize_supported()):
         raise SkipTest
-    try:
-        # Depending on the options used when building, this class might
-        # not be available. If not, then just skip this test.
-        VicarRasterImage
-    except NameError:
+    if(not VicarFile.vicar_available()):
         raise SkipTest
     f = VicarRasterImage(test_data + "vicar.img")
     t = pickle.dumps(f)
@@ -245,10 +241,9 @@ def test_srtm():
         raise SkipTest
     if(not have_afid_data):
         raise SkipTest
-    try:
-        SrtmDem
-    except NameError:
+    if(not VicarFile.vicar_available()):
         raise SkipTest
+
     dem = SrtmDem()
     t = pickle.dumps(dem)
     dem2 = pickle.loads(t)

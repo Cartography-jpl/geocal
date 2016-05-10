@@ -20,9 +20,12 @@ BOOST_AUTO_TEST_CASE(basic)
     return;
   }
   TleOrbit orb(test_tle);
+  Time tepoch_expect = Time::parse_time("2015-10-26T21:46:11.793215Z");
+  BOOST_CHECK(fabs(orb.epoch() - tepoch_expect)  < 1.0);
   Time t = Time::parse_time("2015-10-27T00:05:10Z");
   Geodetic pexpect(-51.7532613384, 20.0670430907, 425523.669914);
   BOOST_CHECK(distance(*orb.position_cf(t), pexpect) < 1.0);
+  BOOST_CHECK_EQUAL(orb.revolution_number_at_epoch(), 96853);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

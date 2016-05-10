@@ -104,13 +104,9 @@ def test_nitf_use00a_create():
     assert tre.sun_az == 129.6
     subprocess.check_call(["nitf_to_vicar", "-q",
                            "use00a.ntf", "use00a.img"])
-    try:
-        # Depending on the options used when building, this class might
-        # not be available. If not, then just skip this test.
+    if(VicarFile.vicar_available()):
         t = VicarRasterImage("use00a.img")
         assert t["GEOTIFF", "NITF_USE00A_ANGLE_TO_NORTH"][0] == "270"
-    except NameError:
-        pass
     
 # Check that GdalRasterImage got extended
 def test_gdal_raster():

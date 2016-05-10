@@ -1,0 +1,24 @@
+if HAVE_VICAR_RTL
+if HAVE_FFTW
+if HAVE_CARTO
+afidspythonvdev_PROGRAMS+= picmtch5
+picmtch5_SOURCES = @srcgeocalbin@/picmtch5.cc
+EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf $(CARTO_BUILD_DEPEND)
+picmtch5_LDADD = libgeocal.la 
+picmtch5_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS)
+picmtch5_CPPFLAGS+=  $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
+picmtch5_CPPFLAGS+= $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
+picmtch5_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS)
+
+#=============================================
+# To make debugging easier, we link in the PDF file for each
+# of the executable in the directory we build in. This isn't
+# used for anything by us, but it means that the user can execute,
+# debug, etc. the program where it is built.
+picmtch5.pdf:
+	ln -s $(srcdir)/$(srcgeocalbin)/picmtch5.pdf .
+
+dist_afidspythonvdev_DATA+= $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
+endif
+endif
+endif

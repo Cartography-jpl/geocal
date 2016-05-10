@@ -2,6 +2,7 @@ from nose.plugins.skip import Skip, SkipTest
 import subprocess
 import os
 import sys
+import re
 
 def cmd_exists(cmd):
     '''Check if a cmd exists by using type, which returns a nonzero status if
@@ -18,11 +19,28 @@ def check_vicarb():
     if sys.version_info < (3,5):
         raise SkipTest()
 
-def vicarb_run(cmd):
-    '''Wrapper for running vicarb. Returns results from subprocess.run if you
-    need to access stdout or other variables.'''
-    res = subprocess.run("vicarb %s" % cmd, shell=True,check=True,
+def check_for_proc(proc):
+    '''Check for the existence of a vicar/AFIDS proc.'''
+    cmd2 = re.sub(r'\+?\n',"", proc)
+    cmd2 = re.sub(r'"',"\\\"", cmd2)
+    res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,
                          stdout = subprocess.PIPE)
+    if re.search(b"\[TAE-NOPROC\]", res.stdout):
+        return False
+    return True
+
+def vicarb_run(cmd, print_results = False):
+    '''Wrapper for running vicarb. Returns results from subprocess.run if you
+    need to access stdout or other variables.
+
+    Note you can use the standard tae "+\n" to have multiple lines, useful 
+    if you are cutting and pasting from an existing VICAR test script'''
+    cmd2 = re.sub(r'\+?\n',"", cmd)
+    cmd2 = re.sub(r'"',"\\\"", cmd2)
+    res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,check=True,
+                         stdout = subprocess.PIPE)
+    if(print_results):
+        print(res.stdout.decode('utf-8'))
     return res
     
 def vicarb_tae_path():

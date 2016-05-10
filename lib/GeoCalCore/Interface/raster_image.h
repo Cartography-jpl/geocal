@@ -68,8 +68,8 @@ public:
 
   double unchecked_interpolate(double Line, double Sample) const
   {
-    int i = (int) floor(Line);
-    int j = (int) floor(Sample);
+    int i = (int) Line;
+    int j = (int) Sample;
     double t1 = unchecked_read_double(i, j);
     double t2 = unchecked_read_double(i, j + 1);
     double t3 = unchecked_read_double(i + 1, j);
@@ -88,8 +88,8 @@ public:
   boost::array<double, 2> interpolate_derivative(double Line, double Sample) 
     const
   {
-    int i = (int) floor(Line);
-    int j = (int) floor(Sample);
+    int i = (int) Line;
+    int j = (int) Sample;
     range_check(i, 0, number_line() - 1);
     range_check(j, 0, number_sample() - 1);
     double t1 = unchecked_read_double(i, j);
@@ -106,8 +106,8 @@ public:
     return res;
   }
 
-  blitz::Array<double, 2> interpolate(double Line, double Sample, 
-				      int Number_line, int Number_sample) const;
+  virtual blitz::Array<double, 2> interpolate(double Line, double Sample, 
+      int Number_line, int Number_sample, double Fill_value = 0.0) const;
 
 //-----------------------------------------------------------------------
 /// This does a bilinear interpolation of the data for fractional
@@ -196,11 +196,17 @@ public:
   read(int Lstart, int Sstart, int Number_line, int Number_sample) 
     const;
   blitz::Array<int, 2>
+  read_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample,
+		int Fill_value = 0) const;
+  blitz::Array<int, 2>
   read(const RasterImageTileIterator& Ti) const; 
 
   virtual blitz::Array<double, 2> 
   read_double(int Lstart, int Sstart, int Number_line, 
 	      int Number_sample) const;
+  blitz::Array<double, 2>
+  read_double_with_pad(int Lstart, int Sstart, int Number_line, 
+		       int Number_sample, double Fill_value = 0.0) const;
 
 //-----------------------------------------------------------------------
 /// Write the pixel value to the given location.

@@ -165,6 +165,14 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_lite_file)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(cart_lab_multifile)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(landsat7_panchromatic)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(material_detect)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(ibis_file)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_file)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_argument)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_dem)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(datum_geoid96)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(srtm_dem)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_raster_image)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(mspi_config_file)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(mspi_paraxial_transform)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(mspi_camera)(void);
@@ -202,19 +210,11 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(gdal_multi_band)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(image_point_display)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(ogr_coordinate)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_ogr)(void);
 #endif
 #ifdef HAVE_VICAR_RTL
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(material_detect)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ibis_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_argument)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(datum_geoid96)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(srtm_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_raster_image)(void);
 #endif
 #ifdef HAVE_GDAL_VICAR_RTL
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_ogr)(void);
 #endif
 }
 
@@ -508,6 +508,14 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_vicar_lite_file", SWIG_INIT_FUNC(vicar_lite_file));
   SWIG_INIT_MODULE(package, "_cart_lab_multifile", SWIG_INIT_FUNC(cart_lab_multifile));
   SWIG_INIT_MODULE(package, "_landsat7_panchromatic", SWIG_INIT_FUNC(landsat7_panchromatic));
+  SWIG_INIT_MODULE(package, "_material_detect", SWIG_INIT_FUNC(material_detect));
+  SWIG_INIT_MODULE(package, "_ibis_file", SWIG_INIT_FUNC(ibis_file));
+  SWIG_INIT_MODULE(package, "_vicar_file", SWIG_INIT_FUNC(vicar_file));
+  SWIG_INIT_MODULE(package, "_vicar_argument", SWIG_INIT_FUNC(vicar_argument));
+  SWIG_INIT_MODULE(package, "_vicar_dem", SWIG_INIT_FUNC(vicar_dem));
+  SWIG_INIT_MODULE(package, "_datum_geoid96", SWIG_INIT_FUNC(datum_geoid96));
+  SWIG_INIT_MODULE(package, "_srtm_dem", SWIG_INIT_FUNC(srtm_dem));
+  SWIG_INIT_MODULE(package, "_vicar_raster_image", SWIG_INIT_FUNC(vicar_raster_image));
   SWIG_INIT_MODULE(package, "_mspi_config_file", SWIG_INIT_FUNC(mspi_config_file));
   SWIG_INIT_MODULE(package, "_mspi_paraxial_transform", SWIG_INIT_FUNC(mspi_paraxial_transform));
   SWIG_INIT_MODULE(package, "_mspi_camera", SWIG_INIT_FUNC(mspi_camera));
@@ -545,19 +553,11 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_gdal_multi_band", SWIG_INIT_FUNC(gdal_multi_band));
   SWIG_INIT_MODULE(package, "_image_point_display", SWIG_INIT_FUNC(image_point_display));
   SWIG_INIT_MODULE(package, "_ogr_coordinate", SWIG_INIT_FUNC(ogr_coordinate));
+  SWIG_INIT_MODULE(package, "_vicar_ogr", SWIG_INIT_FUNC(vicar_ogr));
 #endif
 #ifdef HAVE_VICAR_RTL
-  SWIG_INIT_MODULE(package, "_material_detect", SWIG_INIT_FUNC(material_detect));
-  SWIG_INIT_MODULE(package, "_ibis_file", SWIG_INIT_FUNC(ibis_file));
-  SWIG_INIT_MODULE(package, "_vicar_file", SWIG_INIT_FUNC(vicar_file));
-  SWIG_INIT_MODULE(package, "_vicar_argument", SWIG_INIT_FUNC(vicar_argument));
-  SWIG_INIT_MODULE(package, "_vicar_dem", SWIG_INIT_FUNC(vicar_dem));
-  SWIG_INIT_MODULE(package, "_datum_geoid96", SWIG_INIT_FUNC(datum_geoid96));
-  SWIG_INIT_MODULE(package, "_srtm_dem", SWIG_INIT_FUNC(srtm_dem));
-  SWIG_INIT_MODULE(package, "_vicar_raster_image", SWIG_INIT_FUNC(vicar_raster_image));
 #endif
 #ifdef HAVE_GDAL_VICAR_RTL
-  SWIG_INIT_MODULE(package, "_vicar_ogr", SWIG_INIT_FUNC(vicar_ogr));
 #endif
 
 #if PY_MAJOR_VERSION >= 3

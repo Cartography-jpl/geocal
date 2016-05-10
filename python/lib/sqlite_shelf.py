@@ -22,6 +22,15 @@ import sqlite3
 import os.path
 import geocal_swig
 
+# Allow jsonpickle to be used, if available.
+try:
+    import jsonpickle
+    have_jsonpickle = True
+    jsonpickle.set_encoder_options('json', sort_keys=True, 
+                                   indent=4, separators=(',', ': '))
+except ImportError:
+    have_jsonpickle = False
+
 def to_db_type(value):
     """If value's type is supported natively in SQLite, return value.
     Otherwise, return a pickled representation. """
@@ -57,6 +66,11 @@ def read_shelve(f):
     So we also support xml files, we key off of the file name and if it 
     is something like "foo.xml" we read that rather than a shelve file.
 
+    We also support files with the extension "foo.json" as json pickle 
+    files. This doesn't have any functionality over the sqlite python,
+    but it does make for more human readable files that are sometimes
+    preferable. We use jsonpickle for reading these files.
+
     Note that it can be useful to execute python code before using
     a shelve file, e.g., we are using python modules not already 
     included in AFIDS. If the special key "_extra_python_init" is 
@@ -69,6 +83,11 @@ def read_shelve(f):
     '''
     if(os.path.splitext(f)[1] == ".xml"):
         return geocal_swig.serialize_read_generic(f)
+    if(os.path.splitext(f)[1] == ".json"):
+        if(have_jsonpickle):
+            return jsonpickle.decode(open(f).read())
+        else:
+            raise RuntimeError("Use of .json file requires jsonpickle package to be installed")
     fname, key = f.split(':')
     dirn, f = os.path.split(fname)
     curdir = os.getcwd()
@@ -122,6 +141,13 @@ def write_shelve(f, val):
     if(os.path.splitext(f)[1] == ".xml"):
         geocal_swig.serialize_write(f, val)
         return
+    if(os.path.splitext(f)[1] == ".json"):
+        if(have_jsonpickle):
+            with open(f, "w") as fh:
+                fh.write(jsonpickle.encode(val))
+            return 
+        else:
+            raise RuntimeError("Use of .json file requires jsonpickle package to be installed")
     fname, key = f.split(':')
     d = SQLiteShelf(fname)
     d[key] = val

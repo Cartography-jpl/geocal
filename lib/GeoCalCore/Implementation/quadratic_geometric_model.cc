@@ -13,9 +13,11 @@ QuadraticGeometricModel::QuadraticGeometricModel
 (FitType Ft,
  double Magnify_line, 
  double Magnify_sample)
-  : trans(12), mag_ln(Magnify_line), mag_smp(Magnify_sample), ft(Ft)
+  : trans(12), inv_trans(12), mag_ln(Magnify_line), 
+    mag_smp(Magnify_sample), ft(Ft)
 {
   trans = 1,0,0,0,0,0,0,1,0,0,0,0;
+  inv_trans = 1,0,0,0,0,0,0,1,0,0,0,0;
 }
 
 //-----------------------------------------------------------------------
@@ -29,19 +31,23 @@ QuadraticGeometricModel::QuadraticGeometricModel
 
 QuadraticGeometricModel::QuadraticGeometricModel
 ( const blitz::Array<double, 1>& Transformation,
+  const blitz::Array<double, 1>& Inverse_transformation,
   FitType Ft,
   double Magnify_line, 
   double Magnify_sample
 )
-  : trans(Transformation.copy()), mag_ln(Magnify_line), mag_smp(Magnify_sample),
+  : trans(Transformation.copy()), inv_trans(Inverse_transformation.copy()),
+    mag_ln(Magnify_line), mag_smp(Magnify_sample),
     ft(Ft)
 {
   if(trans.rows() != 12)
     throw Exception("Transformation needs to be size 12");
+  if(inv_trans.rows() != 12)
+    throw Exception("Transformation needs to be size 12");
 }
 
-ImageCoordinate QuadraticGeometricModel::image_coordinate(
-const ImageCoordinate& Resampled_ic) const
+ImageCoordinate QuadraticGeometricModel::original_image_coordinate
+(const ImageCoordinate& Resampled_ic) const
 {
   double px = Resampled_ic.line * mag_ln;
   double py = Resampled_ic.sample * mag_smp;
@@ -53,6 +59,21 @@ const ImageCoordinate& Resampled_ic) const
   return res;
 }
 
+ImageCoordinate QuadraticGeometricModel::resampled_image_coordinate
+(const ImageCoordinate& Original_ic) const
+{
+  double px = Original_ic.line;
+  double py = Original_ic.sample;
+  ImageCoordinate res;
+  res.line = inv_trans(0)*px+inv_trans(1)*py+inv_trans(2)+inv_trans(3)*px*px+
+    inv_trans(4)*py*py+inv_trans(5)*px*py;
+  res.sample = inv_trans(6)*px+inv_trans(7)*py+inv_trans(8)+inv_trans(9)*px*px+
+    inv_trans(10)*py*py+inv_trans(11)*px*py;
+  res.line /= mag_ln;
+  res.sample /= mag_smp;
+  return res;
+}
+
 //-----------------------------------------------------------------------
 /// Fit the transformation in the least squares sense to match the
 /// given set of tiepoints.
@@ -60,9 +81,22 @@ const ImageCoordinate& Resampled_ic) const
 
 void QuadraticGeometricModel::fit_transformation(const GeometricTiePoints& Tp)
 {
-  Range ra = Range::all();
   Array<double, 2> x = Tp.x();
   Array<double, 2> y = Tp.y();
+  fit_single(x, y, trans);
+  fit_single(y, x, inv_trans);
+}
+
+//-----------------------------------------------------------------------
+/// transformation and inverse transformation fit the same way, so
+/// pull this out into a simple function we call twice.
+//-----------------------------------------------------------------------
+
+void QuadraticGeometricModel::fit_single(const blitz::Array<double, 2>& x,
+		const blitz::Array<double, 2>& y,
+		blitz::Array<double, 1>& tr)
+{
+  Range ra = Range::all();
   Array<double, 1> px(x(ra, 0));
   Array<double, 1> py(x(ra, 1));
   Array<double, 2> mat(x.rows(), (fit_type() == LINEAR ? 3 : 6));
@@ -82,16 +116,16 @@ void QuadraticGeometricModel::fit_transformation(const GeometricTiePoints& Tp)
   GslMatrix cov;
   gsl_fit(gsl_mat, gsl_ln, coeff, cov, chisq);
   if(fit_type() == LINEAR) {
-    trans(Range(0, 2)) = coeff.blitz_array();
-    trans(Range(3, 5)) = 0;
+    tr(Range(0, 2)) = coeff.blitz_array();
+    tr(Range(3, 5)) = 0;
   } else
-    trans(Range(0, 5)) = coeff.blitz_array();
+    tr(Range(0, 5)) = coeff.blitz_array();
   gsl_fit(gsl_mat, gsl_smp, coeff, cov, chisq);
   if(fit_type() == LINEAR) {
-    trans(Range(6, 8)) = coeff.blitz_array();
-    trans(Range(9, 11)) = 0;
+    tr(Range(6, 8)) = coeff.blitz_array();
+    tr(Range(9, 11)) = 0;
   } else
-    trans(Range(6, 11)) = coeff.blitz_array();
+    tr(Range(6, 11)) = coeff.blitz_array();
 }
 
 // Print to stream.
@@ -105,6 +139,9 @@ void QuadraticGeometricModel::print(std::ostream& Os) const
      << "  magnify_sample: " << magnify_sample() << "\n"
      << "  transformation: \n";
   opad << transformation() << "\n";
+  opad.strict_sync();
+  Os << "  inverse_transformation: \n";
+  opad << inverse_transformation() << "\n";
   opad.strict_sync();
 }
 

@@ -677,6 +677,7 @@ docpythonsrc
 srcpythonbin
 srcpythonlib
 srcpython
+srcgeocalbin
 libgeocal
 BUILD_PYTHON_FALSE
 BUILD_PYTHON_TRUE
@@ -22809,6 +22810,8 @@ fi
 # Location of all the source code directories
 
 libgeocal=${geocal_topdir}/lib
+
+srcgeocalbin=${geocal_topdir}/bin
 
 srcpython=${geocal_topdir}/python
 

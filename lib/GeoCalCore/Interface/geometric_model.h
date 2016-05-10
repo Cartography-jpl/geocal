@@ -16,11 +16,23 @@ public:
   virtual ~GeometricModel() {}
 
 //-----------------------------------------------------------------------
-/// Map image coordinates to an underlying set of image coordinates.
+/// Map image coordinates to an underlying set of image
+/// coordinates. This takes the image coordinates of the resampled
+/// image (magnified, rotated, whatever) and returns the corresponding 
+/// coordinate in the original image.
 //-----------------------------------------------------------------------
 
-  virtual ImageCoordinate image_coordinate(const ImageCoordinate& Resampled_ic)
-    const = 0;
+  virtual ImageCoordinate original_image_coordinate
+  (const ImageCoordinate& Resampled_ic) const = 0;
+
+//-----------------------------------------------------------------------
+/// This is the inversion of original_image_coordinate, taking the
+/// original image coordinates and returning the resampled image
+/// coordinates. 
+//-----------------------------------------------------------------------
+
+  virtual ImageCoordinate resampled_image_coordinate
+  (const ImageCoordinate& Original_ic) const = 0;
 
 //-----------------------------------------------------------------------
 /// Print to stream.

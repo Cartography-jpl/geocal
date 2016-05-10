@@ -16,6 +16,8 @@ public:
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) const;
   %python_attribute(tle, std::string)
+  %python_attribute(epoch, Time)
+  %python_attribute(revolution_number_at_epoch, int)
   %pickle_serialization();
 };
 }

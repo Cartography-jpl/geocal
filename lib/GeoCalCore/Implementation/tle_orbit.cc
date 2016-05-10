@@ -5,6 +5,7 @@
 #include "geocal_internal_config.h"
 #include "spice_helper.h"
 #include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast.hpp>
 #ifdef HAVE_SPICE
 extern "C" {
 #include "SpiceUsr.h"
@@ -58,11 +59,13 @@ template<class T> inline blitz::Array<T, 1> cross2
   return res;
 }
 
-// See base class for description
-boost::shared_ptr<OrbitData> TleOrbit::orbit_data(Time T) const
-{
-  range_check(T, min_time(), max_time());
 
+//-----------------------------------------------------------------------
+/// Fill in the elems and epoch, if not already done.
+//-----------------------------------------------------------------------
+
+void TleOrbit::fill_in_elems() const
+{
   if(!elem_filled_in) {
     std::vector<std::string> svec;
     boost::split(svec, tle_, boost::is_any_of("\n"));
@@ -75,11 +78,19 @@ boost::shared_ptr<OrbitData> TleOrbit::orbit_data(Time T) const
     double epoch;
     getelm_c(1957, lineln, (void*) &(*line.begin()), &epoch, elems);
     SpiceHelper::spice_error_check();
+    epoch_ = Time::time_et(epoch);
 #else
     throw SpiceNotAvailableException();
 #endif
     elem_filled_in = true;
   }
+}
+
+// See base class for description
+boost::shared_ptr<OrbitData> TleOrbit::orbit_data(Time T) const
+{
+  range_check(T, min_time(), max_time());
+  fill_in_elems();
   double state[6];
 #ifdef HAVE_SPICE
   double et = T.et();
@@ -111,6 +122,19 @@ boost::shared_ptr<OrbitData> TleOrbit::orbit_data(Time T) const
   boost::array<double, 3> v2 = {{v(0), v(1), v(2)}};
   return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pci, v2, 
 		      matrix_to_quaternion(sc_to_ci)));
+}
+
+//-----------------------------------------------------------------------
+/// Return the revolution number at the epoch.
+//-----------------------------------------------------------------------
+
+int TleOrbit::revolution_number_at_epoch() const
+{
+  // Find second line
+  size_t i = tle_.find("\n2");
+  // These positions are fixed. See
+  // https://celestrak.com/columns/v04n03/
+  return boost::lexical_cast<int>(tle_.substr(i + 64, 5));
 }
 
 void TleOrbit::print(std::ostream& Os) const

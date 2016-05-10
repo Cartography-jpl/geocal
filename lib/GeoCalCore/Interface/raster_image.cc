@@ -64,18 +64,20 @@ RasterImageTileIterator& RasterImageTileIterator::operator++()
 
 //-----------------------------------------------------------------------
 /// Interpolate a region, starting with the given fractional line and
-/// sample. This is a bilinear interpolation.
+/// sample. This is a bilinear interpolation. This does padding with
+/// the given fill value.
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 2> RasterImage::interpolate(double Line, double Sample, 
-    int Number_line, int Number_sample) const
+	 int Number_line, int Number_sample, double Fill_value) const
 {
   int lint = (int) floor(Line);
   int sint = (int) floor(Sample);
   double lfrac = Line - lint;
   double sfrac = Sample - sint;
-  blitz::Array<double, 2> data = read_double(lint, sint, Number_line + 1, 
-					     Number_sample + 1);
+  blitz::Array<double, 2> data = 
+    read_double_with_pad(lint, sint, Number_line + 1, 
+			 Number_sample + 1, Fill_value);
   blitz::Array<double, 2> res(Number_line, Number_sample);
   blitz::Range r1(0, Number_line - 1);
   blitz::Range r1p1(1, Number_line);
@@ -114,6 +116,51 @@ RasterImage::read(int Lstart, int Sstart, int Number_line,
   return res;
 }
 
+
+//-----------------------------------------------------------------------
+/// Return a subset of the image. This variation of read allows the
+/// data read to extend past the actual RasterImage (e.g., negative
+/// start line). In this case, we return the given fill value for the
+/// outside area.
+//-----------------------------------------------------------------------
+
+blitz::Array<int, 2>
+RasterImage::read_with_pad(int Lstart, int Sstart, int Number_line, 
+			   int Number_sample, int Fill_value) const
+{
+  range_min_check(Number_line, 1);
+  range_min_check(Number_sample, 1);
+  blitz::Array<int, 2> res(Number_line, Number_sample);
+  res = Fill_value;
+  if(Lstart >= number_line() ||
+     Sstart >= number_sample() ||
+     Lstart + Number_line <= 0 ||
+     Sstart + Number_sample <= 0)
+    return res;
+  int lind = 0;
+  int rline = Lstart;
+  int sind = 0;
+  int rsamp = Sstart;
+  int nlind = Number_line;
+  int nsind = Number_sample;
+  if(Lstart < 0) {
+    lind = -Lstart;
+    nlind -= lind;
+    rline = 0;
+  }
+  if(Sstart < 0) {
+    sind = -Sstart;
+    nsind -= sind;
+    rsamp = 0;
+  }
+  if(nlind > number_line() - rline)
+    nlind = number_line() - rline;
+  if(nsind > number_sample() - rsamp)
+    nsind = number_sample() - rsamp;
+  res(blitz::Range(lind, lind + nlind-1), blitz::Range(sind, sind + nsind-1)) =
+    read(rline, rsamp, nlind, nsind);
+  return res;
+}
 
 //-----------------------------------------------------------------------
 /// Return a subset of the image.
@@ -305,6 +352,51 @@ RasterImage::read_double(int Lstart, int Sstart, int Number_line,
   Array<int, 2> dataint = read(Lstart, Sstart, Number_line, Number_sample);
   Array<double, 2> res(dataint.shape());
   res = cast<double>(dataint);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Return a subset of the image. This variation of read allows the
+/// data read to extend past the actual RasterImage (e.g., negative
+/// start line). In this case, we return the given fill value for the
+/// outside area.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2>
+RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line, 
+				  int Number_sample, double Fill_value) const
+{
+  range_min_check(Number_line, 1);
+  range_min_check(Number_sample, 1);
+  blitz::Array<double, 2> res(Number_line, Number_sample);
+  res = Fill_value;
+  if(Lstart >= number_line() ||
+     Sstart >= number_sample() ||
+     Lstart + Number_line <= 0 ||
+     Sstart + Number_sample <= 0)
+    return res;
+  int lind = 0;
+  int rline = Lstart;
+  int sind = 0;
+  int rsamp = Sstart;
+  int nlind = Number_line;
+  int nsind = Number_sample;
+  if(Lstart < 0) {
+    lind = -Lstart;
+    nlind -= lind;
+    rline = 0;
+  }
+  if(Sstart < 0) {
+    sind = -Sstart;
+    nsind -= sind;
+    rsamp = 0;
+  }
+  if(nlind > number_line() - rline)
+    nlind = number_line() - rline;
+  if(nsind > number_sample() - rsamp)
+    nsind = number_sample() - rsamp;
+  res(blitz::Range(lind, lind + nlind-1), blitz::Range(sind, sind + nsind-1)) =
+    read_double(rline, rsamp, nlind, nsind);
   return res;
 }
 

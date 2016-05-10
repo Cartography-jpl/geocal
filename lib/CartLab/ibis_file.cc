@@ -83,6 +83,11 @@ IbisColumnBase::IbisColumnBase(IbisFile& F, int Index, int Size_byte)
 
 //-----------------------------------------------------------------------
 /// Open given file for read or update.
+///
+/// Note for UPDATE, we do *not* write out updated data unless you
+/// mark the column or entire file as updated. This is done to prevent
+/// writing out unchanged data. You can use the function
+/// "mark_updated" to do this.
 //-----------------------------------------------------------------------
 
 IbisFile::IbisFile(const std::string& Fname, access_type Access)

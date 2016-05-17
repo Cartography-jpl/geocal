@@ -2100,7 +2100,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/ground_mspi_camera_test.config \
 	@geocalunittestdata@/usgs_dem/n44w069_10m.tif \
 	@geocalunittestdata@/iss_kernel/iss.ker \
-	@geocalunittestdata@/iss_kernel/spk/iss_2015.bs \
+	@geocalunittestdata@/iss_kernel/spk/iss_2015.bsp \
 	@geocalunittestdata@/galileo_kernel/galileo.ker \
 	@geocalunittestdata@/galileo_kernel/ik/gll36001.ti \
 	@geocalunittestdata@/galileo_kernel/sclk/mk00062a.tsc \

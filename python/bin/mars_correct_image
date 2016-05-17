@@ -1,0 +1,178 @@
+#! /usr/bin/env python
+#
+# This takes a pair of mars images and used the first to correct the
+# second
+import osgeo.gdal as gdal
+import math
+import tempfile
+import subprocess
+import sys
+import re
+from geocal import *
+
+version = "May 17,2016"
+usage='''Usage:
+  mars_correct_image [options] <ref_image> <ref_base_name> 
+            <ref_image_resolution_name> <image> <image_base_name> 
+            <image_resolution_name>
+  mars_correct_image -h | --help
+  mars_correct_image -v | --version
+
+This imports the 2 images into VICAR, resamples the reference image to
+the same projection as the second image, and then uses the reference
+image to correct the second image. The images are resampled both to the
+resolution of the original image as well as the reference image. Names
+for the resolution can be anything you like, e.g., "5m", "res1". It is
+used for form the output name.
+
+We name the images by the base names. So for example:
+
+  mars_correct_image P14_006644_1747_XI_05S222W_8bit.tif ctx 5m \
+      ESP_025012_1745_RED_8bitrender.tif hirise 0.25m
+
+Would result in ctx_5m.img ctx_0.25m.img hirise_corr_5m.img and 
+hirise_corr_0.25m.img.
+
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+# We probably want to add a little bit of padding, but skip that for now.
+
+def resample_proj(fin, fref, fout, resize=False):
+    '''Project fin to same projection as fref. If resize if False, 
+    leave fin in whatever its original resolution is. If resize it 
+    True, also resize to the same resolution as fref.'''
+    d = gdal.Open(fref, gdal.GA_ReadOnly)
+    g = d.GetGeoTransform()
+    cmd= ["gdalwarp", "-of", "VICAR"]
+    x_size, y_size = d.RasterXSize, d.RasterYSize
+    min_x, max_y, pix_size_x, pix_size_y = g[0], g[3], g[1], g[5]
+    max_x = min_x + (x_size * pix_size_x)
+    min_y = max_y + (y_size * pix_size_y)
+    cmd.extend(["-te", repr(min_x), repr(min_y), repr(max_x), repr(max_y)])
+    if(resize):
+        cmd.extend(["-r", "bilinear"])
+        cmd.extend(["-tr", repr(pix_size_x), repr(pix_size_y)])
+        # Note that we shouldn't have wm larger than 2GB because we get
+        # an internal error in gdal with an integer overflow
+        cmd.extend(["-multi", "-wo", "NUM_THREADS=20", "-wm", "2000"])
+    with tempfile.NamedTemporaryFile() as f:
+        f.write(d.GetProjection().encode("utf-8"))
+        f.flush()
+        cmd.append("-t_srs")
+        cmd.append(f.name)
+        cmd.append("-overwrite")
+        cmd.append(fin)
+        cmd.append(fout)
+        subprocess.run(cmd, check=True)
+
+def check_intersection(f1, f2):
+    '''Returns True if there is some overlap between the 2 images, False 
+    otherwise. This is purposely coarse, we just check the corners of the 
+    image. So if this returns False the images definitely don't overlap,
+    but True might still not overlap if it happens that all the intersection
+    is in the gore of an image.'''
+    t = GdalRasterImage(f1).map_info.intersection(GdalRasterImage(f2).map_info)
+    if(t.number_x_pixel == 0 or t.number_y_pixel == 0):
+        return False
+    return True
+
+def import_file(fin, fout):
+    '''Import an image into vicar format, leaving in original projection.'''
+    subprocess.run(["gdal_translate", "-of", "VICAR", fin, fout], check=True)
+
+# Not sure about triangulation. Maybe try quad
+def gtpwarp(fin, fref, fref_res, fout):
+    '''gtpwarp, using Tom's usual parameters.'''
+    subprocess.run(["vicarb", "gtpwarp", fin, fout, fref, fref_res,
+                    "nav=1000", "nah=1000",
+                    "fftgrid=(42,42)",  "fftsize=256", "magnify=4.0",
+                    "magmin=2.0",
+                    "toler=1.5", 
+                    'polyfit=""',  
+                    'ref_lowres=y',
+                    "redo=36", "ffthalf=2",
+                    "seed=562", 
+                    "accoff=y", "'bilin", 
+                    "'coverref",
+                    "ref_res=%s" % fref_res,
+                    ], check=True)
+    # For some reason, gtpwarp doesn't set all the geotiff metadata. Not
+    # sure why, we may try fixing this at some point. But for now, just
+    # update this. Note this is pretty much the same at gtgenup call, just
+    # easier to do this in python here.
+    t = VicarRasterImage(fout, 1, VicarFile.UPDATE)
+    t.set_map_info(VicarRasterImage(fin).map_info)
+    t.close()
+
+def accck(fin,fref):
+    '''Run accuracy check. We assume stuff in is in the same projection
+    (e.g., all geodetic)'''
+    subprocess.run(["vicarb", "accck", fin, fref, "wmask=n",
+                    "fftsize=256", "magnif=2", "remap=n", "echo=no",
+                    "zerolim=10.0", "zerolim2=10.0"],
+                   check=True)
+
+def fix_projection(fin, fout):
+    '''There are potential issues with some of the map projections with 
+    Mars, errors or missing pieces. This create a VRT file that fixes any 
+    of these problems.'''
+    subprocess.run(["gdal_translate", "-of", "VRT", fin, fout],
+                   check=True)
+    f = gdal.Open(fout, gdal.GA_Update)
+    p = str(f.GetProjectionRef())
+    # The PolarSterographic can have the wrong scale factor of 0. This
+    # appears to be an error in ISIS, they don't actually set the scale
+    # factor and assume it defaults to 1, when actually it defaults to 0. 
+    # See https://trac.osgeo.org/gdal/ticket/4499. Fix this if this is the 
+    # projection. 
+    if(re.search("Polar_Stereographic", p)):
+        p = re.sub('PARAMETER\["scale_factor",0\]', 
+                   'PARAMETER["scale_factor",1]', p)
+        f.SetProjection(p)
+    # Force close/flush
+    f = None
+
+# Various output names
+refimg_fixed = "%s.vrt" % (args.ref_base_name)
+refimg_res1 = "%s_%s.img" % (args.ref_base_name, args.ref_image_resolution_name)
+refimg_res2 = "%s_%s.img" % (args.ref_base_name, args.image_resolution_name)
+img_fixed = "%s.vrt" % (args.image_base_name)
+img_res1 = "%s_%s.img" % (args.image_base_name, args.ref_image_resolution_name)
+img_res2 = "%s_%s.img" % (args.image_base_name, args.image_resolution_name)
+cimg_res1 = "%s_corr_%s.img" % (args.image_base_name, 
+                                args.ref_image_resolution_name)
+cimg_res2 = "%s_corr_%s.img" % (args.image_base_name, 
+                                args.image_resolution_name)
+
+fix_projection(args.ref_image, refimg_fixed)
+fix_projection(args.image, img_fixed)
+if(not check_intersection(refimg_fixed, img_fixed)):
+    raise RuntimeError("The two images have no area of intersection")
+resample_proj(refimg_fixed, img_fixed, refimg_res1)
+if(args.ref_image_resolution_name != args.image_resolution_name):
+    resample_proj(refimg_res1, img_fixed, refimg_res2, resize=True)
+import_file(img_fixed, img_res2)
+if(args.ref_image_resolution_name != args.image_resolution_name):
+    resample_proj(img_res2, refimg_res1, img_res1, resize=True)
+print("MSG:----------------------------------------------------\n")
+print("MSG: Before correcting\n")
+print("MSG: Each pixels is %s" % args.ref_image_resolution_name)
+sys.stdout.flush()
+accck(img_res1, refimg_res1)
+gtpwarp(img_res2, refimg_res1, refimg_res2, cimg_res2)
+if(args.ref_image_resolution_name != args.image_resolution_name):
+    resample_proj(cimg_res2, refimg_res1, cimg_res1, resize=True)
+print("MSG:----------------------------------------------------\n")
+print("MSG: After correcting\n")
+print("MSG: Each pixels is %s" % args.ref_image_resolution_name)
+sys.stdout.flush()
+accck(cimg_res1, refimg_res1)
+print("MSG:----------------------------------------------------\n")

@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sys/types.h>
 #include <dirent.h>
+#include <boost/filesystem.hpp>
 #ifdef HAVE_SPICE
 extern "C" {
 #include "SpiceUsr.h"
@@ -64,6 +65,28 @@ void SpiceHelper::add_kernel(const std::string& Kernel_dir,
   furnsh_c(Kernel.c_str());
   spice_error_check();
 #else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Add an additional kernel, after the one we automatically get
+/// (i.e., $SPICEDATA/geocal.ker).
+//-----------------------------------------------------------------------
+
+void SpiceHelper::add_kernel(const std::string& Kernel)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  boost::filesystem::path p(Kernel);
+  std::string dir = p.parent_path().string();
+  std::string fname = p.filename().string();
+  if(dir == "")
+    dir = ".";
+  DirChange d(dir);
+  furnsh_c(fname.c_str());
+  spice_error_check();
+#else 
   throw SpiceNotAvailableException();
 #endif
 }

@@ -6535,6 +6535,95 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TleOrbit__v_epoch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TleOrbit *arg1 = (GeoCal::TleOrbit *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TleOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TleOrbit const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::Time result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TleOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TleOrbit__v_epoch" "', argument " "1"" of type '" "GeoCal::TleOrbit const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TleOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TleOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::TleOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TleOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::TleOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::TleOrbit const *)arg1)->epoch();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TleOrbit__v_revolution_number_at_epoch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TleOrbit *arg1 = (GeoCal::TleOrbit *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TleOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TleOrbit const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TleOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TleOrbit__v_revolution_number_at_epoch" "', argument " "1"" of type '" "GeoCal::TleOrbit const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TleOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TleOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::TleOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TleOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::TleOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::TleOrbit const *)arg1)->revolution_number_at_epoch();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_TleOrbit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::TleOrbit *arg1 = (GeoCal::TleOrbit *) 0 ;
@@ -6626,6 +6715,16 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"const std::string& GeoCal::TleOrbit::tle() const\n"
 		"The TLE that this orbit is using. \n"
+		""},
+	 { (char *)"TleOrbit__v_epoch", (PyCFunction)_wrap_TleOrbit__v_epoch, METH_O, (char *)"\n"
+		"\n"
+		"const Time& GeoCal::TleOrbit::epoch() const\n"
+		"The epoch for the TLE. \n"
+		""},
+	 { (char *)"TleOrbit__v_revolution_number_at_epoch", (PyCFunction)_wrap_TleOrbit__v_revolution_number_at_epoch, METH_O, (char *)"\n"
+		"\n"
+		"int TleOrbit::revolution_number_at_epoch() const\n"
+		"Return the revolution number at the epoch. \n"
 		""},
 	 { (char *)"delete_TleOrbit", (PyCFunction)_wrap_delete_TleOrbit, METH_O, (char *)"\n"
 		"\n"

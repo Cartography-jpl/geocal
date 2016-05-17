@@ -10,7 +10,7 @@
 
 from sys import version_info
 if version_info >= (3, 0, 0):
-    new_instancemethod = lambda func, inst, cls: _tle_orbit.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _spice_orbit.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2, 6, 0):
@@ -19,20 +19,20 @@ if version_info >= (2, 6, 0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_tle_orbit', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_spice_orbit', [dirname(__file__)])
         except ImportError:
-            import _tle_orbit
-            return _tle_orbit
+            import _spice_orbit
+            return _spice_orbit
         if fp is not None:
             try:
-                _mod = imp.load_module('_tle_orbit', fp, pathname, description)
+                _mod = imp.load_module('_spice_orbit', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _tle_orbit = swig_import_helper()
+    _spice_orbit = swig_import_helper()
     del swig_import_helper
 else:
-    import _tle_orbit
+    import _spice_orbit
 del version_info
 try:
     _swig_property = property
@@ -116,31 +116,31 @@ class SwigPyIterator(object):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    __swig_destroy__ = _tle_orbit.delete_SwigPyIterator
+    __swig_destroy__ = _spice_orbit.delete_SwigPyIterator
     def __iter__(self):
         return self
-SwigPyIterator.value = new_instancemethod(_tle_orbit.SwigPyIterator_value, None, SwigPyIterator)
-SwigPyIterator.incr = new_instancemethod(_tle_orbit.SwigPyIterator_incr, None, SwigPyIterator)
-SwigPyIterator.decr = new_instancemethod(_tle_orbit.SwigPyIterator_decr, None, SwigPyIterator)
-SwigPyIterator.distance = new_instancemethod(_tle_orbit.SwigPyIterator_distance, None, SwigPyIterator)
-SwigPyIterator.equal = new_instancemethod(_tle_orbit.SwigPyIterator_equal, None, SwigPyIterator)
-SwigPyIterator.copy = new_instancemethod(_tle_orbit.SwigPyIterator_copy, None, SwigPyIterator)
-SwigPyIterator.next = new_instancemethod(_tle_orbit.SwigPyIterator_next, None, SwigPyIterator)
-SwigPyIterator.__next__ = new_instancemethod(_tle_orbit.SwigPyIterator___next__, None, SwigPyIterator)
-SwigPyIterator.previous = new_instancemethod(_tle_orbit.SwigPyIterator_previous, None, SwigPyIterator)
-SwigPyIterator.advance = new_instancemethod(_tle_orbit.SwigPyIterator_advance, None, SwigPyIterator)
-SwigPyIterator.__eq__ = new_instancemethod(_tle_orbit.SwigPyIterator___eq__, None, SwigPyIterator)
-SwigPyIterator.__ne__ = new_instancemethod(_tle_orbit.SwigPyIterator___ne__, None, SwigPyIterator)
-SwigPyIterator.__iadd__ = new_instancemethod(_tle_orbit.SwigPyIterator___iadd__, None, SwigPyIterator)
-SwigPyIterator.__isub__ = new_instancemethod(_tle_orbit.SwigPyIterator___isub__, None, SwigPyIterator)
-SwigPyIterator.__add__ = new_instancemethod(_tle_orbit.SwigPyIterator___add__, None, SwigPyIterator)
-SwigPyIterator.__sub__ = new_instancemethod(_tle_orbit.SwigPyIterator___sub__, None, SwigPyIterator)
-SwigPyIterator_swigregister = _tle_orbit.SwigPyIterator_swigregister
+SwigPyIterator.value = new_instancemethod(_spice_orbit.SwigPyIterator_value, None, SwigPyIterator)
+SwigPyIterator.incr = new_instancemethod(_spice_orbit.SwigPyIterator_incr, None, SwigPyIterator)
+SwigPyIterator.decr = new_instancemethod(_spice_orbit.SwigPyIterator_decr, None, SwigPyIterator)
+SwigPyIterator.distance = new_instancemethod(_spice_orbit.SwigPyIterator_distance, None, SwigPyIterator)
+SwigPyIterator.equal = new_instancemethod(_spice_orbit.SwigPyIterator_equal, None, SwigPyIterator)
+SwigPyIterator.copy = new_instancemethod(_spice_orbit.SwigPyIterator_copy, None, SwigPyIterator)
+SwigPyIterator.next = new_instancemethod(_spice_orbit.SwigPyIterator_next, None, SwigPyIterator)
+SwigPyIterator.__next__ = new_instancemethod(_spice_orbit.SwigPyIterator___next__, None, SwigPyIterator)
+SwigPyIterator.previous = new_instancemethod(_spice_orbit.SwigPyIterator_previous, None, SwigPyIterator)
+SwigPyIterator.advance = new_instancemethod(_spice_orbit.SwigPyIterator_advance, None, SwigPyIterator)
+SwigPyIterator.__eq__ = new_instancemethod(_spice_orbit.SwigPyIterator___eq__, None, SwigPyIterator)
+SwigPyIterator.__ne__ = new_instancemethod(_spice_orbit.SwigPyIterator___ne__, None, SwigPyIterator)
+SwigPyIterator.__iadd__ = new_instancemethod(_spice_orbit.SwigPyIterator___iadd__, None, SwigPyIterator)
+SwigPyIterator.__isub__ = new_instancemethod(_spice_orbit.SwigPyIterator___isub__, None, SwigPyIterator)
+SwigPyIterator.__add__ = new_instancemethod(_spice_orbit.SwigPyIterator___add__, None, SwigPyIterator)
+SwigPyIterator.__sub__ = new_instancemethod(_spice_orbit.SwigPyIterator___sub__, None, SwigPyIterator)
+SwigPyIterator_swigregister = _spice_orbit.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
 
-_tle_orbit.SHARED_PTR_DISOWN_swigconstant(_tle_orbit)
-SHARED_PTR_DISOWN = _tle_orbit.SHARED_PTR_DISOWN
+_spice_orbit.SHARED_PTR_DISOWN_swigconstant(_spice_orbit)
+SHARED_PTR_DISOWN = _spice_orbit.SHARED_PTR_DISOWN
 
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
@@ -178,92 +178,74 @@ import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
-class TleOrbit(geocal_swig.orbit.Orbit):
+class SpiceOrbit(geocal_swig.orbit.Orbit):
     """
 
-    This is an orbit that does the calculation based on a two-line element
-    set (TLE, seehttps://en.wikipedia.org/wiki/Two-line_element_set).
+    This is an orbit that uses a SPICE kernel as the underlying
+    implementation.
 
-    You can get TLE for a particular satellite and time
-    fromhttps://www.space-track.org.
-
-    C++ includes: tle_orbit.h 
+    C++ includes: spice_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    ISS_ID = _spice_orbit.SpiceOrbit_ISS_ID
 
-    def __init__(self, Tle):
+    def __init__(self, *args):
         """
 
-        GeoCal::TleOrbit::TleOrbit(const std::string &Tle)
-        Constructor.
+        SpiceOrbit::SpiceOrbit(int Satellite_id, const std::string &Kernel_name="", int
+        Body_id=Ecr::EARTH_NAIF_CODE)
+        Create a orbit based on SPICE data.
 
-        The TLE should be in the standard two-line element set format
-        (seehttps://en.wikipedia.org/wiki/Two-line_element_set). 
+        This takes the satellite ID, which is the number used to generate the
+        ID the SPICE toolkit uses, for example the TLE spacecraft code. Note
+        that the SPICE number is actually -100000 - satellite ID
+
+        You need to make sure the spice kernel describing this satellite has
+        been loaded. Often you will have a single kernel that you want used,
+        in that case you can pass this to the constructor and that kernel will
+        be loaded.
+
+        Note that if you pass a kernel name, we save that and make sure it is
+        loaded when we create this class from serialization. 
         """
-        _tle_orbit.TleOrbit_swiginit(self, _tle_orbit.new_TleOrbit(Tle))
+        _spice_orbit.SpiceOrbit_swiginit(self, _spice_orbit.new_SpiceOrbit(*args))
 
     def orbit_data(self, *args):
         """
 
-        virtual boost::shared_ptr<OrbitData> GeoCal::TleOrbit::orbit_data(const TimeWithDerivative &T) const
+        virtual boost::shared_ptr<OrbitData> GeoCal::SpiceOrbit::orbit_data(const TimeWithDerivative &T) const
 
         """
-        return _tle_orbit.TleOrbit_orbit_data(self, *args)
+        return _spice_orbit.SpiceOrbit_orbit_data(self, *args)
 
 
-    def _v_tle(self):
+    def _v_satellite_id(self):
         """
 
-        const std::string& GeoCal::TleOrbit::tle() const
-        The TLE that this orbit is using. 
+        int GeoCal::SpiceOrbit::satellite_id() const
+        The satellite ID.
+
+        This is used to generate the number that the SPICE toolkit uses, for
+        example the TLE spacecraft code. Note that the SPICE number is
+        actually -100000 - satellite ID 
         """
-        return _tle_orbit.TleOrbit__v_tle(self)
+        return _spice_orbit.SpiceOrbit__v_satellite_id(self)
 
 
     @property
-    def tle(self):
-        return self._v_tle()
-
-
-    def _v_epoch(self):
-        """
-
-        const Time& GeoCal::TleOrbit::epoch() const
-        The epoch for the TLE. 
-        """
-        return _tle_orbit.TleOrbit__v_epoch(self)
-
-
-    @property
-    def epoch(self):
-        return self._v_epoch()
-
-
-    def _v_revolution_number_at_epoch(self):
-        """
-
-        int TleOrbit::revolution_number_at_epoch() const
-        Return the revolution number at the epoch. 
-        """
-        return _tle_orbit.TleOrbit__v_revolution_number_at_epoch(self)
-
-
-    @property
-    def revolution_number_at_epoch(self):
-        return self._v_revolution_number_at_epoch()
+    def satellite_id(self):
+        return self._v_satellite_id()
 
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-    __swig_destroy__ = _tle_orbit.delete_TleOrbit
-TleOrbit.orbit_data = new_instancemethod(_tle_orbit.TleOrbit_orbit_data, None, TleOrbit)
-TleOrbit._v_tle = new_instancemethod(_tle_orbit.TleOrbit__v_tle, None, TleOrbit)
-TleOrbit._v_epoch = new_instancemethod(_tle_orbit.TleOrbit__v_epoch, None, TleOrbit)
-TleOrbit._v_revolution_number_at_epoch = new_instancemethod(_tle_orbit.TleOrbit__v_revolution_number_at_epoch, None, TleOrbit)
-TleOrbit_swigregister = _tle_orbit.TleOrbit_swigregister
-TleOrbit_swigregister(TleOrbit)
+    __swig_destroy__ = _spice_orbit.delete_SpiceOrbit
+SpiceOrbit.orbit_data = new_instancemethod(_spice_orbit.SpiceOrbit_orbit_data, None, SpiceOrbit)
+SpiceOrbit._v_satellite_id = new_instancemethod(_spice_orbit.SpiceOrbit__v_satellite_id, None, SpiceOrbit)
+SpiceOrbit_swigregister = _spice_orbit.SpiceOrbit_swigregister
+SpiceOrbit_swigregister(SpiceOrbit)
 
 
 

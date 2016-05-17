@@ -1,23 +1,22 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%include <std_vector.i>
 %include "common.i"
 
 %{
-#include "tle_orbit.h"
+#include "spice_orbit.h"
 %}
 %base_import(orbit)
-%geocal_shared_ptr(GeoCal::TleOrbit);
+%geocal_shared_ptr(GeoCal::SpiceOrbit);
 
 namespace GeoCal {
-class TleOrbit : public Orbit {
+class SpiceOrbit : public Orbit {
 public:
-  TleOrbit(const std::string& Tle);
+  enum {ISS_ID = 25544};
+  SpiceOrbit(int Satellite_id, const std::string& Kernel_name="",
+	     int Body_id = Ecr::EARTH_NAIF_CODE);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) const;
-  %python_attribute(tle, std::string)
-  %python_attribute(epoch, Time)
-  %python_attribute(revolution_number_at_epoch, int)
+  %python_attribute(satellite_id, int)
   %pickle_serialization();
 };
 }

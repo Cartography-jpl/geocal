@@ -27,6 +27,8 @@ BOOST_AUTO_TEST_CASE(basic)
 
 BOOST_AUTO_TEST_CASE(vicar_ogr_point_vs_area)
 {
+  if(!VicarFile::vicar_available())
+    return;
   // Check correct handling of pixel area vs point.
   
   // These 2 files have the same tiepoint, but in one case this is 

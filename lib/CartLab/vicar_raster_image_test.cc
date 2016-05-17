@@ -34,6 +34,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(create)
 {
+  if(!VicarFile::vicar_available())
+    return;
   VicarRasterImage out("vicar_out.img", "BYTE", 10, 11, 1);
   int val = 0;
   for(int i = 9; i >= 0; --i)
@@ -120,6 +122,8 @@ BOOST_AUTO_TEST_CASE(vicar_label)
 
 BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
 {
+  if(!VicarFile::vicar_available())
+    return;
   // Check correct handling of pixel area vs point.
   
   // These 2 files have the same tiepoint, but in one case this is 
@@ -151,6 +155,8 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+  if(!VicarFile::vicar_available())
+    return;
 #ifdef HAVE_BOOST_SERIALIZATON
   std::ostringstream os;
   boost::archive::xml_oarchive oa(os);

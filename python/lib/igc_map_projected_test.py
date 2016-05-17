@@ -5,11 +5,7 @@ from nose.plugins.skip import Skip, SkipTest
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_igc_write():
-    try:
-        # Depending on the options used when building, this class might
-        # not be available. If not, then just skip this test.
-        VicarRasterImage
-    except NameError:
+    if(not VicarFile.vicar_available()):
         raise SkipTest
     dem = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
     igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", dem)

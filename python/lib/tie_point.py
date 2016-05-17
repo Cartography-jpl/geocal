@@ -265,7 +265,56 @@ class TiePointCollection(list):
                 cnt += 1
         return cnt
 
+    def tp_info(self):
+        '''Return a pandas DataFrame with all the tiepoint information'''
+        ind = [ tp.id for tp in self ]
+        is_gcp = [ tp.is_gcp for tp in self ]
+        nimgloc = [ tp.number_image_location for tp in self ]
+        cols = ["Is GCP", "Number Image Location"]
+        d = {"Is GCP": is_gcp, "Number Image Location" : nimgloc }
+        for i in range(self[0].number_image):
+            d["Line View %d" % (i+1)] = \
+                [tp.image_location[i][0].line if tp.image_location[i] else None 
+                 for tp in self]
+            d["Sample View %d" % (i+1)] = \
+                [tp.image_location[i][0].sample if tp.image_location[i] else None 
+                 for tp in self]
+            cols.append("Line View %d" % (i+1))
+            cols.append("Sample View %d" % (i+1))
+        return pd.DataFrame(d, index=ind), cols
     
+    def tp_res(self, igccol):
+        '''Return a pandas DataFrame with all the tiepoint residual information'''
+        ind = [ tp.id for tp in self ]
+        is_gcp = [ tp.is_gcp for tp in self ]
+        nimgloc = [ tp.number_image_location for tp in self ]
+        cols = ["Is GCP", "Number Image Location", "Max Residual (m)"]
+        d = {"Is GCP": is_gcp, "Number Image Location" : nimgloc }
+        max_res = np.zeros(len(self))
+        for i in range(self[0].number_image):
+            igc = igccol.image_ground_connection(i)
+            ps = igc.resolution_meter()
+            lres = np.full((len(self),), np.NaN)
+            sres = np.full((len(self),), np.NaN)
+            for j, tp in enumerate(self):
+                iloc = tp.image_location[i]
+                if(iloc):
+                    try:
+                        icpred = igc.image_coordinate(tp.ground_location)
+                        lres[j] = (iloc[0].line - icpred.line) * ps
+                        sres[j] = (iloc[0].sample - icpred.sample) * ps
+                        max_res[j] = max(abs(lres[j]),abs(sres[j]),max_res[j])
+                    except RuntimeError as e:
+                        if(str(e) != "ImageGroundConnectionFailed"):
+                            raise e
+            d["Line Res %d (m)" % (i+1)] = lres
+            d["Samp Res %d (m)" % (i+1)] = sres
+            cols.append("Line Res %d (m)" % (i+1))
+            cols.append("Samp Res %d (m)" % (i+1))
+        d["Max Residual (m)"] = max_res
+        return pd.DataFrame(d, index=ind), cols
+        
+        
     def gcp_diff(self, tpcol_other):
         '''This returns a pandas DataFrame that shows how much a GCP
         has been moved (e.g., by SBA). We represent this is local north

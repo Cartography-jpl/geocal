@@ -37,11 +37,21 @@ public:
 //-----------------------------------------------------------------------
 
   const std::string& tle() const { return tle_;}
+
+//-----------------------------------------------------------------------
+/// The epoch for the TLE
+//-----------------------------------------------------------------------
+
+  const Time& epoch() const { fill_in_elems(); return epoch_; }
+
+  int revolution_number_at_epoch() const;
 private:
   static double geophs[8];
   std::string tle_;
   mutable bool elem_filled_in;
   mutable double elems[10];
+  mutable Time epoch_;
+  void fill_in_elems() const;
   TleOrbit() : elem_filled_in(false) {}
   friend class boost::serialization::access;
   template<class Archive>

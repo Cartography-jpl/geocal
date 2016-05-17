@@ -39,7 +39,6 @@ public:
 		double x, double y, double z);
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 		const Geodetic& G);
-  Geodetic to_geodetic() const;
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   %python_attribute2(ogr, ogr_ptr, boost::shared_ptr<OgrWrapper>);
   %python_attribute(utm_zone, int);

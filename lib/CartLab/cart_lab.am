@@ -26,7 +26,6 @@ geocalinc_HEADERS+= @srccartlab@/cart_lab_multifile.h
 libgeocal_la_SOURCES+= @srccartlab@/cart_lab_multifile.cc
 geocalinc_HEADERS+= @srccartlab@/landsat7_panchromatic.h
 libgeocal_la_SOURCES+= @srccartlab@/landsat7_panchromatic.cc
-if HAVE_VICAR_RTL
 geocalinc_HEADERS+= @srccartlab@/material_detect.h
 libgeocal_la_SOURCES+= @srccartlab@/material_detect.cc
 geocalinc_HEADERS+= @srccartlab@/ibis_file.h
@@ -49,7 +48,6 @@ if HAVE_GDAL
   libgeocal_la_SOURCES+= @srccartlab@/vicar_ogr.cc
   geocal_test_all_SOURCES+= @srccartlab@/vicar_ogr_test.cc
 endif # End HAVE_GDAL
-endif # End HAVE_VICAR_RTL
 
 SWIG_SRC += @swigsrc@/argus_camera_wrap.cc
 SWIG_SRC += @swigsrc@/argus_orbit_wrap.cc
@@ -65,15 +63,15 @@ SWIG_SRC += @swigsrc@/paint_class_wrap.cc
 SWIG_SRC += @swigsrc@/vicar_lite_file_wrap.cc
 SWIG_SRC += @swigsrc@/cart_lab_multifile_wrap.cc
 SWIG_SRC += @swigsrc@/landsat7_panchromatic_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/material_detect_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/ibis_file_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/vicar_file_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/vicar_argument_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/vicar_dem_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/datum_geoid96_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/srtm_dem_wrap.cc
-SWIG_SRC_VICAR_RTL += @swigsrc@/vicar_raster_image_wrap.cc
-SWIG_SRC_GDAL_VICAR_RTL += @swigsrc@/vicar_ogr_wrap.cc
+SWIG_SRC += @swigsrc@/material_detect_wrap.cc
+SWIG_SRC += @swigsrc@/ibis_file_wrap.cc
+SWIG_SRC += @swigsrc@/vicar_file_wrap.cc
+SWIG_SRC += @swigsrc@/vicar_argument_wrap.cc
+SWIG_SRC += @swigsrc@/vicar_dem_wrap.cc
+SWIG_SRC += @swigsrc@/datum_geoid96_wrap.cc
+SWIG_SRC += @swigsrc@/srtm_dem_wrap.cc
+SWIG_SRC += @swigsrc@/vicar_raster_image_wrap.cc
+SWIG_SRC_GDAL += @swigsrc@/vicar_ogr_wrap.cc
 
 geocal_test_all_SOURCES+= @srccartlab@/argus_camera_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/argus_orbit_test.cc
@@ -86,7 +84,6 @@ geocal_test_all_SOURCES+= @srccartlab@/vicar_lite_file_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/pos_export_orbit_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/doughnut_average_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/landsat7_panchromatic_test.cc
-if HAVE_VICAR_RTL
 geocal_test_all_SOURCES+= @srccartlab@/material_detect_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/ibis_file_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/vicar_dem_test.cc
@@ -94,7 +91,6 @@ geocal_test_all_SOURCES+= @srccartlab@/vicar_file_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/vicar_raster_image_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/vicar_tiled_file_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/datum_geoid96_test.cc
-endif
 
 AM_CPPFLAGS+= -I$(srcdir)/@srccartlab@
 

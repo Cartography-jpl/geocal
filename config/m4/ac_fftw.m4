@@ -38,6 +38,13 @@ if test "x$want_fftw" = "xyes"; then
         else
 	    AC_SEARCH_LIB([FFTW], [fftw3], , [fftw3.h], , [libfftw3], [-lfftw3])
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_fftw" == "xyes" ; then
+            build_fftw="yes"
+            ac_fftw_path="\${prefix}"
+            FFTW_LIBS="-L$ac_fftw_path/lib -lfftw3"
+            FFTW_CFLAGS="-I$ac_fftw_path/include"
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

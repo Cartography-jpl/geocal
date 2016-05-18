@@ -43,6 +43,14 @@ if test "x$want_hdf5" = "xyes"; then
                           [libhdf5_cpp], [-lhdf5_cpp -lhdf5_hl -lhdf5 -lz])
             HDF5HOME="$HDF5_PREFIX"
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_hdf5" == "xyes" ; then
+            build_hdf5="yes"
+            ac_hdf5_path="\${prefix}"
+            HDF5HOME="$ac_hdf5_path"
+            HDF5_LIBS="$ac_hdf5_path/lib/libhdf5_cpp.la $ac_hdf5_path/lib/libhdf5_hl.la $ac_hdf5_path/lib/libhdf5.la -L$ac_hdf5_path/lib -lz"
+            HDF5_CFLAGS="-I$ac_hdf5_path/include"
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])
@@ -59,6 +67,12 @@ if test "x$want_hdf5" = "xyes"; then
 fi
 AM_CONDITIONAL([HAVE_HDF5], [test "$have_hdf5" = "yes"])
 AM_CONDITIONAL([BUILD_HDF5], [test "$build_hdf5" = "yes"])
+
+# For right now, build netcdf if we are building hdf5. Might want
+# more complicated logic at some point, but this is sufficient for
+# now.
+
+AM_CONDITIONAL([BUILD_NETCDF], [test "$build_hdf5" = "yes"])
 
 AC_CHECK_FOUND([hdf5], [hdf5],[HDF 5],$1,$2)
 

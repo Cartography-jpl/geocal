@@ -43,6 +43,12 @@ if test "x$want_afids_data" = "xyes"; then
                fi
            done
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_afids_data" == "xyes" ; then
+            build_afids_data="yes"
+            ac_afids_data_path="\${prefix}"
+            AFIDS_DATA="$ac_afids_data_path/data"
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

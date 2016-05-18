@@ -45,6 +45,13 @@ if test "x$want_spice" = "xyes"; then
 	    AC_SEARCH_LIB([SPICE], [spice], , [SpiceCK.h], ,
                           [libcspice], [-lcspice])
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_spice" == "xyes" ; then
+            build_spice="yes"
+            ac_spice_path="\${prefix}"
+            SPICE_LIBS="-R$ac_spice_path/lib -L$ac_spice_path/lib -lcspice"
+            SPICE_CFLAGS="-I$srcdir/spice/cspice/incude"
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

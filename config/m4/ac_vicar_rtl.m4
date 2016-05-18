@@ -50,6 +50,14 @@ if test "x$want_vicar_rtl" = "xyes"; then
                           [zvproto.h], , [libvicar_rtl], [-lvicar_rtl])
 	    VICAR_RTL_LIBS="${VICAR_RTL_LIBS} \$(CURSES_LIB) \$(FLIBS)"
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_vicar_rtl" == "xyes" ; then
+            build_vicar_rtl="yes"
+            ac_vicar_rtl_path="\${prefix}"
+            VICAR_RTL_LIBS="libvicar_rtl.la"
+            VICAR_RTL_BUILD_DEPEND="libvicar_rtl.la"
+            VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

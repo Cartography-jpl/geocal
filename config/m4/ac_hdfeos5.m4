@@ -49,6 +49,13 @@ if test "x$want_hdfeos5" = "xyes"; then
                              [libhe5_hdfeos], [-lhe5_hdfeos -lGctp])
             fi
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_hdfeos5" == "xyes" ; then
+            build_hdfeos5="yes"
+            ac_hdfeos5_path="\${prefix}"
+            HDFEOS5_LIBS="libhe5_hdfeos.la"
+            HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.15/include"
+            succeeded=yes
+        fi
 	if test "$have_hdf5" == "no"; then
             succeeded=no
         fi

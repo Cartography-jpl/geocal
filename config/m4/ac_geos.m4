@@ -24,6 +24,13 @@ if test "x$want_geos" = "xyes"; then
 	    AC_SEARCH_LIB([GEOS], [geos], , [geos.h], ,
                           [libgeos], [-lgeos])
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_geos" == "xyes" ; then
+            build_geos="yes"
+            ac_geos_path="\${prefix}"
+            GEOS_CFLAGS="-I$ac_geos_path/include"
+            GEOS_LIBS="-R$ac_geos_path/lib -L$ac_geos_path/lib -lgeos"
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

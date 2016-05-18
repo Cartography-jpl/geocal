@@ -48,6 +48,14 @@ if test "x$want_carto" = "xyes"; then
                           [libcarto], [-lcarto])
 	    CARTO_LIBS="$CARTO_LIBS \$(VICAR_RTL_LIBS) \$(GSL_LIBS)"
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_carto" == "xyes" ; then
+            build_carto="yes"
+            ac_carto_path="\${prefix}"
+            CARTO_LIBS="libcarto.la"
+	    CARTO_BUILD_DEPEND="libcarto.la"
+            CARTO_CFLAGS="-I$srcdir/carto/inc \$(VICAR_RTL_CFLAGS) \$(GSL_CFLAGS)"
+            succeeded=yes
+        fi
 
 # We can only use the carto library if we also have vicar and gsl
         if test "$have_gsl" != "yes"; then

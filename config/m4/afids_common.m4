@@ -84,7 +84,7 @@ AM_CONDITIONAL([HAVE_GCC], [test "$GCC" = yes])
 
 PKG_PROG_PKG_CONFIG
 
-if test "x$THIRDPARTY" = x -o "$THIRDPARTY" = "build" ; then
+if test "x$THIRDPARTY" = x -o "$THIRDPARTY" = "build" -o "$THIRDPARTY" = "build_needed"; then
   pkg_extra_path=\${prefix}/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
 else
   pkg_extra_path=\${prefix}/lib/pkgconfig:$THIRDPARTY/lib/pkgconfig:/opt/afids_support/lib/pkgconfig

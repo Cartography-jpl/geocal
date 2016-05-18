@@ -25,6 +25,14 @@ if test "x$want_expat" = "xyes"; then
 	    AC_SEARCH_LIB([EXPAT], [expat], , [expat.h], ,
 	                  [libexpat], [-lexpat])
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_expat" == "xyes" ; then
+            build_expat="yes"
+            ac_expat_path="\${prefix}"
+            EXPAT_LIBS="-L$ac_expat_path/lib -lexpat"
+            EXPAT_CFLAGS="-I$ac_expat_path/include"
+	    EXPAT_PREFIX="$ac_expat_path"
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

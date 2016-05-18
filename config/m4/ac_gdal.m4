@@ -5,7 +5,11 @@
 # DESCRIPTION
 #
 # This looks for the GDAL libraries. If we find them, we set the Makefile
-# conditional HAVE_GDAL. We as set GDAL_CFLAGS and GDAL_LIBS
+# conditional HAVE_GDAL. We as set GDAL_CFLAGS and GDAL_LIBS.
+#
+# The variable GDAL_EXTRA_ARG is set with anything extra to pass to the
+# GDAL configure line when building (e.g., specify location of extra libraries
+# to use such as Kakadu)
 # 
 # To allow users to build there own copy of GDAL, we also define
 # BUILD_GDAL
@@ -13,6 +17,27 @@
 AC_DEFUN([AC_GDAL],
 [
 AC_HANDLE_WITH_ARG([gdal], [gdal], [GDAL], $2, $3)
+AC_ARG_WITH([extra-gdal-arg],
+            [AS_HELP_STRING([--with-extra-gdal-arg],
+             [Extra argument to add when building gdal. Useful to specify local libraries that you might want to use, such as ECW or Kakadu. This string is passed directly to the GDAL configuration, so for example you might specify --with-extra-gdal-arg="--with-ecw=<directory> --with-kakadu=<directory2>"])],
+            [GDAL_EXTRA_ARG="$withval"],
+            [GDAL_EXTRA_ARG=""])
+AC_ARG_WITH([ecw-plugin],
+	    [AS_HELP_STRING([--with-ecw-plugin][@<:@=DIR@:>@],[Build the ECW library as a plugin, rather than building directly into GDAL. Can supply the directory with ECW library (default /opt/local/ecw/ERDAS-ECW_JPEG_2000_SDK-5.1.1/Desktop_Read-Only)])],
+	    [
+              if test "$withval" = "no"; then
+                 build_ecw_plugin="no"
+              elif test "$withval" = "yes"; then
+                 build_ecw_plugin="yes"
+		 ecw_dir="/opt/local/ecw/ERDAS-ECW_JPEG_2000_SDK-5.1.1/Desktop_Read-Only"
+              else
+                 build_ecw_plugin="yes"
+		 ecw_dir="$withval"
+               fi
+	   ],
+           [ build_ecw_plugin="no"
+           ]
+	   )
 
 if test "x$want_gdal" = "xyes"; then
         AC_MSG_CHECKING([for GDAL library])
@@ -24,6 +49,14 @@ if test "x$want_gdal" = "xyes"; then
             succeeded=yes
         else
 	    AC_SEARCH_LIB([GDAL], [gdal], , [gdal.h], , [libgdal], [-lgdal])
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_gdal" == "xyes" ; then
+            build_gdal="yes"
+            ac_gdal_path="\${prefix}"
+            GDAL_PREFIX="$ac_gdal_path"
+            GDAL_LIBS="-L$ac_gdal_path/lib -lgdal"
+            GDAL_CFLAGS="-I$ac_gdal_path/include"
+            succeeded=yes
         fi
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])
@@ -56,6 +89,7 @@ if test "x$want_gdal" = "xyes"; then
         if test "$succeeded" = "yes" ; then
                 AC_SUBST(GDAL_CFLAGS)
                 AC_SUBST(GDAL_LIBS)
+		AC_SUBST(GDAL_EXTRA_ARG)
                 AC_DEFINE(HAVE_GDAL,,[Defined if we have GDAL])
                 have_gdal="yes"
         fi
@@ -84,4 +118,12 @@ AM_CONDITIONAL([BUILD_GDAL], [test "$build_gdal" = "yes"])
 
 AC_CHECK_FOUND([gdal], [gdal],[Gdal],$1,$2)
 
+if test "$build_ecw_plugin" = "yes"; then
+    ECW_CFLAGS="-I$ecw_dir/include"
+    ECW_LIBS="-R$ecw_dir/lib/x64/release -L$ecw_dir/lib/x64/release -lNCSEcw"
+    AC_SUBST(ECW_CFLAGS)
+    AC_SUBST(ECW_LIBS)
+fi
+
+AM_CONDITIONAL([BUILD_ECW_PLUGIN], [test "$build_ecw_plugin" = "yes"])
 ])

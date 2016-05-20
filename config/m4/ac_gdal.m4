@@ -87,6 +87,7 @@ if test "x$want_gdal" = "xyes"; then
 		    succeeded=no])
 	fi
         if test "$succeeded" = "yes" ; then
+                AC_SUBST(GDAL_PREFIX)
                 AC_SUBST(GDAL_CFLAGS)
                 AC_SUBST(GDAL_LIBS)
 		AC_SUBST(GDAL_EXTRA_ARG)

@@ -755,6 +755,7 @@ HAVE_GEOS_TRUE
 GEOS_LIBS
 GEOS_CFLAGS
 GDAL_EXTRA_ARG
+GDAL_PREFIX
 GDAL_LIBS
 GDAL_CFLAGS
 BUILD_FFTW_FALSE
@@ -20625,6 +20626,7 @@ $as_echo "$as_me: WARNING: We require GDAL version to be >= 1.9.2. There are bug
 
 	fi
         if test "$succeeded" = "yes" ; then
+
 
 
 

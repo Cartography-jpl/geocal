@@ -41,6 +41,12 @@ if test "x$want_doxygen" = "xyes"; then
               succeeded=yes
             fi
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_doxygen" == "xyes" ; then
+            build_doxygen="yes"
+            ac_doxygen_path="\${prefix}"
+	    DOXYGEN=$ac_doxygen_path/bin/doxygen
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

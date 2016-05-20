@@ -1766,6 +1766,8 @@ DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
+ECW_CFLAGS = @ECW_CFLAGS@
+ECW_LIBS = @ECW_LIBS@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 EXPAT_CFLAGS = @EXPAT_CFLAGS@
@@ -1775,7 +1777,9 @@ FFTW_CFLAGS = @FFTW_CFLAGS@
 FFTW_LIBS = @FFTW_LIBS@
 FGREP = @FGREP@
 GDAL_CFLAGS = @GDAL_CFLAGS@
+GDAL_EXTRA_ARG = @GDAL_EXTRA_ARG@
 GDAL_LIBS = @GDAL_LIBS@
+GDAL_PREFIX = @GDAL_PREFIX@
 GEOS_CFLAGS = @GEOS_CFLAGS@
 GEOS_LIBS = @GEOS_LIBS@
 GREP = @GREP@
@@ -1998,6 +2002,7 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/pan_to_ms_igc \
 	$(srcdir)/$(srcpythonbin)/job_database_check_and_run \
 	$(srcdir)/$(srcpythonbin)/usgs_create_ocean_tile \
+	$(srcdir)/$(srcpythonbin)/srtm_90m_create_ocean_tile \
 	$(srcdir)/$(srcpythonbin)/surface_image_project
 AM_LDFLAGS = 
 
@@ -2808,8 +2813,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
 	@srcpythonlib@/air_mspi_igc.py
-@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}
-@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}
+@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${GDAL_PREFIX}/bin:${PATH}
+@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${GDAL_PREFIX}/bin:${PATH}
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :

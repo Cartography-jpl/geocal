@@ -86,6 +86,29 @@ if test "x$want_python" = "xyes"; then
     fi
    fi
 fi
+if test "$succeeded" != "yes" -a "x$build_needed_python" == "xyes" ; then
+     build_python="yes"
+     ac_python_path="\${prefix}"
+     AM_PATH_PYTHON(,, [:])
+     # Will need to update this if we change the version we are building
+     python_inc_path=python3.5m
+     python_lib_path=python3.5
+     PYTHON=`pwd`"/external/python_wrap.sh" 
+     PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
+     PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"
+     pythondir="lib/${python_lib_path}/site-packages" 
+     platpythondir="lib/${python_lib_path}/site-packages" 
+     succeeded=yes
+     have_python=yes
+     AC_SUBST(PYTHON_CPPFLAGS)
+     AC_SUBST(PYTHON_NUMPY_CPPFLAGS)
+     AC_SUBST([platpythondir])
+     SPHINXBUILD="\${prefix}/bin/sphinx-build"
+     NOSETESTS="\${prefix}/bin/nosetests"
+     AM_CONDITIONAL([HAVE_SPHINX], [true])
+     AM_CONDITIONAL([HAVE_NOSETESTS], [true])
+fi
+
 AM_CONDITIONAL([BUILD_PYTHON], [test "$build_python" = "yes"])
 
 AC_CHECK_FOUND([python], [python],[Python],$1,$2)

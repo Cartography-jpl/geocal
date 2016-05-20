@@ -27,6 +27,7 @@ dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/airmspi_dem
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/pan_to_ms_igc
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/job_database_check_and_run
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/usgs_create_ocean_tile
+dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/srtm_90m_create_ocean_tile
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/surface_image_project
 dist_afidspythonvdev_SCRIPTS += $(srcdir)/$(srcpythonbin)/sample_vicar_python
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf

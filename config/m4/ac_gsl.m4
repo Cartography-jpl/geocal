@@ -39,6 +39,13 @@ if test "x$want_gsl" = "xyes"; then
 	    AC_SEARCH_LIB([GSL], [gsl], , [gsl/gsl_blas.h], ,
                           [libgsl], [-lgsl -lgslcblas])
         fi
+	if test "$succeeded" != "yes" -a "x$build_needed_gsl" == "xyes" ; then
+            build_gsl="yes"
+            ac_gsl_path="\${prefix}"
+            GSL_LIBS="-L$ac_gsl_path/lib -lgsl -lgslcblas"
+            GSL_CFLAGS="-I$ac_gsl_path/include"
+            succeeded=yes
+        fi
 
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])

@@ -2813,8 +2813,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
 	@srcpythonlib@/air_mspi_igc.py
-@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${GDAL_PREFIX}/bin:${PATH}
-@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${GDAL_PREFIX}/bin:${PATH}
+@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
+@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :

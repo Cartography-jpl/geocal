@@ -4,9 +4,9 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py
 install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 
 if HAVE_AFIDS
-PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${GDAL_PREFIX}/bin:${PATH}
+PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
 else
-PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):${GDAL_PREFIX}/bin:${PATH}
+PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
 endif
 
 if HAVE_AFIDS_DATA

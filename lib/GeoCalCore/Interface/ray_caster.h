@@ -4,6 +4,8 @@
 #include <blitz/array.h>
 
 namespace GeoCal {
+  class RasterImage;		// Forward declaration.
+
 /****************************************************************//**
   This class is used to do ray casting, determining what in instrument
   is looking at on the ground (e.g., a camera at a particular
@@ -71,12 +73,16 @@ public:
   
   virtual blitz::Array<double, 6> next_position() = 0;
 
+  blitz::Array<double, 2> next_radiance(const RasterImage& Surface_rad,
+					double Fill_value = 0.0);
+
 //-----------------------------------------------------------------------
 /// Print to a stream.
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
 private:
+  blitz::Array<double, 2> rad;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

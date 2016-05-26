@@ -28,7 +28,7 @@
 
 AC_DEFUN([AC_HDF5],
 [
-AC_HANDLE_WITH_ARG([hdf5], [hdf5], [HDF 5], $2, $3)
+AC_HANDLE_WITH_ARG([hdf5], [hdf5], [HDF 5], $2, $3, $1)
 
 if test "x$want_hdf5" = "xyes"; then
         AC_MSG_CHECKING([for HDF5 library])

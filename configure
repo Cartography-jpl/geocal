@@ -17790,6 +17790,8 @@ fi
 have_vicar_rtl="no"
 build_vicar_rtl="no"
 build_neededvicar_rtl="no"
+want_vicar_rtl="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-vicar-rtl was given.
 if test "${with_vicar_rtl+set}" = set; then :
@@ -17827,6 +17829,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_vicar_rtl" = "xyes"; then
@@ -18026,6 +18029,8 @@ fi
 have_afids_data="no"
 build_afids_data="no"
 build_neededafids_data="no"
+want_afids_data="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-afids-data was given.
 if test "${with_afids_data+set}" = set; then :
@@ -18063,6 +18068,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_afids_data" = "xyes"; then
@@ -18138,6 +18144,8 @@ fi
 have_hdfeos5="no"
 build_hdfeos5="no"
 build_neededhdfeos5="no"
+want_hdfeos5="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-hdfeos5 was given.
 if test "${with_hdfeos5+set}" = set; then :
@@ -18175,6 +18183,7 @@ else
 
 fi
 
+fi
 
 if test "x$want_hdfeos5" = "xyes"; then
 
@@ -18182,6 +18191,8 @@ if test "x$want_hdfeos5" = "xyes"; then
 have_hdf5="no"
 build_hdf5="no"
 build_neededhdf5="no"
+want_hdf5="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-hdf5 was given.
 if test "${with_hdf5+set}" = set; then :
@@ -18219,6 +18230,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_hdf5" = "xyes"; then
@@ -18681,6 +18693,8 @@ fi
 have_mspi_shared="no"
 build_mspi_shared="no"
 build_neededmspi_shared="no"
+want_mspi_shared="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-mspi-shared was given.
 if test "${with_mspi_shared+set}" = set; then :
@@ -18718,6 +18732,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_mspi_shared" = "xyes"; then
@@ -18801,6 +18816,8 @@ fi
 have_boost="no"
 build_boost="no"
 build_neededboost="no"
+want_boost="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-boost was given.
 if test "${with_boost+set}" = set; then :
@@ -18838,6 +18855,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_boost" = "xyes"; then
@@ -19141,6 +19159,8 @@ fi
 have_blitz="no"
 build_blitz="no"
 build_neededblitz="no"
+want_blitz="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-blitz was given.
 if test "${with_blitz+set}" = set; then :
@@ -19178,6 +19198,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_blitz" = "xyes"; then
@@ -19346,6 +19367,8 @@ fi
 have_gsl="no"
 build_gsl="no"
 build_neededgsl="no"
+want_gsl="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-gsl was given.
 if test "${with_gsl+set}" = set; then :
@@ -19383,6 +19406,7 @@ else
 
 fi
 
+fi
 
 if test "x$want_gsl" = "xyes"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for GSL library" >&5
@@ -19552,6 +19576,8 @@ fi
 have_spice="no"
 build_spice="no"
 build_neededspice="no"
+want_spice="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-spice was given.
 if test "${with_spice+set}" = set; then :
@@ -19589,6 +19615,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_spice" = "xyes"; then
@@ -19761,6 +19788,8 @@ fi
 have_hdf5="no"
 build_hdf5="no"
 build_neededhdf5="no"
+want_hdf5="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-hdf5 was given.
 if test "${with_hdf5+set}" = set; then :
@@ -19798,6 +19827,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_hdf5" = "xyes"; then
@@ -19986,6 +20016,8 @@ fi
 have_doxygen="no"
 build_doxygen="no"
 build_neededdoxygen="no"
+want_doxygen="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-doxygen was given.
 if test "${with_doxygen+set}" = set; then :
@@ -20023,6 +20055,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_doxygen" = "xyes"; then
@@ -20128,6 +20161,8 @@ fi
 have_fftw="no"
 build_fftw="no"
 build_neededfftw="no"
+want_fftw="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-fftw was given.
 if test "${with_fftw+set}" = set; then :
@@ -20165,6 +20200,7 @@ else
 
 fi
 
+fi
 
 if test "x$want_fftw" = "xyes"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Fftw library" >&5
@@ -20336,6 +20372,8 @@ fi
 have_gdal="no"
 build_gdal="no"
 build_neededgdal="no"
+want_gdal="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-gdal was given.
 if test "${with_gdal+set}" = set; then :
@@ -20373,6 +20411,7 @@ else
 
 fi
 
+fi
 
 
 # Check whether --with-extra-gdal-arg was given.
@@ -20642,6 +20681,8 @@ if test "$build_gdal" = "yes"; then
 have_geos="no"
 build_geos="no"
 build_neededgeos="no"
+want_geos="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-geos was given.
 if test "${with_geos+set}" = set; then :
@@ -20679,6 +20720,7 @@ else
 
 fi
 
+fi
 
 if test "x$want_geos" = "xyes"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS library" >&5
@@ -20846,6 +20888,8 @@ fi
 have_ogdi="no"
 build_ogdi="no"
 build_neededogdi="no"
+want_ogdi="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-ogdi was given.
 if test "${with_ogdi+set}" = set; then :
@@ -20883,6 +20927,7 @@ else
 
 fi
 
+fi
 
 if test "x$want_ogdi" = "xyes"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Ogdi library" >&5
@@ -21053,6 +21098,8 @@ fi
 have_expat="no"
 build_expat="no"
 build_neededexpat="no"
+want_expat="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-expat was given.
 if test "${with_expat+set}" = set; then :
@@ -21090,6 +21137,7 @@ else
 
 fi
 
+fi
 
 if test "x$want_expat" = "xyes"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for expat library" >&5
@@ -21260,6 +21308,8 @@ fi
 have_openjpeg="no"
 build_openjpeg="no"
 build_neededopenjpeg="no"
+want_openjpeg="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-openjpeg was given.
 if test "${with_openjpeg+set}" = set; then :
@@ -21297,6 +21347,7 @@ else
 
 fi
 
+fi
 
 if test "x$want_openjpeg" = "xyes"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for openjpeg library" >&5
@@ -21581,6 +21632,8 @@ fi
 have_vicar_gdalplugin="no"
 build_vicar_gdalplugin="no"
 build_neededvicar_gdalplugin="no"
+want_vicar_gdalplugin="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-vicar-gdalplugin was given.
 if test "${with_vicar_gdalplugin+set}" = set; then :
@@ -21618,6 +21671,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_vicar_gdalplugin" = "xyes"; then
@@ -21705,6 +21759,8 @@ fi
 have_afids="no"
 build_afids="no"
 build_neededafids="no"
+want_afids="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-afids was given.
 if test "${with_afids+set}" = set; then :
@@ -21742,6 +21798,7 @@ else
 
 fi
 
+fi
 
 if test "x$want_afids" = "xyes"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking for AFIDS programs" >&5
@@ -21808,6 +21865,8 @@ fi
 have_carto="no"
 build_carto="no"
 build_neededcarto="no"
+want_carto="no"
+if test "optional" != "do_not_use"; then
 
 # Check whether --with-carto was given.
 if test "${with_carto+set}" = set; then :
@@ -21845,6 +21904,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_carto" = "xyes"; then
@@ -22037,6 +22097,8 @@ fi
 have_python="no"
 build_python="no"
 build_neededpython="no"
+want_python="no"
+if test "required" != "do_not_use"; then
 
 # Check whether --with-python was given.
 if test "${with_python+set}" = set; then :
@@ -22074,6 +22136,7 @@ else
 
 fi
 
+fi
 
 
 if test "x$want_python" = "xyes"; then

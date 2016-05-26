@@ -12,7 +12,7 @@
 
 AC_DEFUN([AC_OPENJPEG],
 [
-AC_HANDLE_WITH_ARG([openjpeg], [openjpeg], [openjpeg], $2, $3)
+AC_HANDLE_WITH_ARG([openjpeg], [openjpeg], [openjpeg], $2, $3, $1)
 if test "x$want_openjpeg" = "xyes"; then
         AC_MSG_CHECKING([for openjpeg library])
         succeeded=no

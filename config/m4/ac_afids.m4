@@ -15,7 +15,7 @@
 
 AC_DEFUN([AC_AFIDS],
 [
-AC_HANDLE_WITH_ARG([afids], [afids], [AFIDS], [cannot_build], [default_search])
+AC_HANDLE_WITH_ARG([afids], [afids], [AFIDS], [cannot_build], [default_search], $1)
 if test "x$want_afids" = "xyes"; then
         AC_MSG_CHECKING([for AFIDS programs])
         succeeded=no

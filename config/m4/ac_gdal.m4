@@ -16,7 +16,7 @@
 
 AC_DEFUN([AC_GDAL],
 [
-AC_HANDLE_WITH_ARG([gdal], [gdal], [GDAL], $2, $3)
+AC_HANDLE_WITH_ARG([gdal], [gdal], [GDAL], $2, $3, $1)
 AC_ARG_WITH([extra-gdal-arg],
             [AS_HELP_STRING([--with-extra-gdal-arg],
              [Extra argument to add when building gdal. Useful to specify local libraries that you might want to use, such as ECW or Kakadu. This string is passed directly to the GDAL configuration, so for example you might specify --with-extra-gdal-arg="--with-ecw=<directory> --with-kakadu=<directory2>"])],

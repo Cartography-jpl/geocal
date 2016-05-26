@@ -28,7 +28,7 @@
 
 AC_DEFUN([AC_HDFEOS5],
 [
-AC_HANDLE_WITH_ARG([hdfeos5], [hdfeos5], [Hdfeos5 library], $2, $3)
+AC_HANDLE_WITH_ARG([hdfeos5], [hdfeos5], [Hdfeos5 library], $2, $3, $1)
 if test "x$want_hdfeos5" = "xyes"; then
         AC_HDF5($1, $2, default_search)
         AC_MSG_CHECKING([for Hdfeos5 library])

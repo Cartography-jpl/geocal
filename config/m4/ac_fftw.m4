@@ -27,7 +27,7 @@
 
 AC_DEFUN([AC_FFTW],
 [
-AC_HANDLE_WITH_ARG([fftw], [fftw], [fftw], $2, $3)
+AC_HANDLE_WITH_ARG([fftw], [fftw], [fftw], $2, $3, $1)
 if test "x$want_fftw" = "xyes"; then
         AC_MSG_CHECKING([for Fftw library])
         succeeded=no

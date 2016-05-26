@@ -28,7 +28,7 @@
 
 AC_DEFUN([AC_VICAR_GDALPLUGIN],
 [
-AC_HANDLE_WITH_ARG([vicar_gdalplugin], [vicar-gdalplugin], [VICAR GDAL Plugin], $2, $3)
+AC_HANDLE_WITH_ARG([vicar_gdalplugin], [vicar-gdalplugin], [VICAR GDAL Plugin], $2, $3, $1)
 
 if test "x$want_vicar_gdalplugin" = "xyes"; then
         AC_MSG_CHECKING([for GDAL VICAR Plugin])

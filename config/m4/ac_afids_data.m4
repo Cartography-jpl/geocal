@@ -26,7 +26,7 @@
 
 AC_DEFUN([AC_AFIDS_DATA],
 [
-AC_HANDLE_WITH_ARG([afids_data], [afids-data], [AFIDS data], $2, $3)
+AC_HANDLE_WITH_ARG([afids_data], [afids-data], [AFIDS data], $2, $3, $1)
 
 if test "x$want_afids_data" = "xyes"; then
         AC_MSG_CHECKING([for AFIDS data])

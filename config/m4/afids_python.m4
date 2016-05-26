@@ -26,7 +26,7 @@
 
 AC_DEFUN([AFIDS_PYTHON],
 [
-AC_HANDLE_WITH_ARG([python], [python], [Python], $2, $3)
+AC_HANDLE_WITH_ARG([python], [python], [Python], $2, $3, $1)
 
 if test "x$want_python" = "xyes"; then
    AC_MSG_CHECKING([for python])

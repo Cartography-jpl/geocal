@@ -27,7 +27,7 @@
 
 AC_DEFUN([AC_BLITZ],
 [
-AC_HANDLE_WITH_ARG([blitz], [blitz], [Blitz++], $2, $3)
+AC_HANDLE_WITH_ARG([blitz], [blitz], [Blitz++], $2, $3, $1)
 
 if test "x$want_blitz" = "xyes"; then
         AC_MSG_CHECKING([for Blitz library])

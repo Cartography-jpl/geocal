@@ -19139,17 +19139,17 @@ fi
 
 if test "required" = "required"; then
   if test "$have_boost" = "no"; then
-     as_fn_error or THIRDPARTY=build_needed to
-build a local copy all all the libraries/programs we don not otherwise
-find on the system.
- "
+     as_fn_error $? "
 The BOOST library is required by GeoCal. Try specifying
 location using --with-boost if configure could't find the
 library. You can specify --with-boost=build if you want to build your
 own local copy of BOOST.
 
 You can also specify THIRDPARTY=build if you want to build a local
-copy of all the libraries/programs" "$LINENO" 5
+copy of all the libraries/programs or THIRDPARTY=build_needed to
+build a local copy all all the libraries/programs we do not otherwise
+find on the system.
+" "$LINENO" 5
   fi
 fi
 
@@ -23410,17 +23410,17 @@ fi
 
 if test "required" = "required"; then
   if test "$have_python" = "no"; then
-     as_fn_error or THIRDPARTY=build_needed to
-build a local copy all all the libraries/programs we don not otherwise
-find on the system.
- "
+     as_fn_error $? "
 The Python library is required by GeoCal. Try specifying
 location using --with-python if configure could't find the
 library. You can specify --with-python=build if you want to build your
 own local copy of Python.
 
 You can also specify THIRDPARTY=build if you want to build a local
-copy of all the libraries/programs" "$LINENO" 5
+copy of all the libraries/programs or THIRDPARTY=build_needed to
+build a local copy all all the libraries/programs we do not otherwise
+find on the system.
+" "$LINENO" 5
   fi
 fi
 

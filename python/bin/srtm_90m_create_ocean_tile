@@ -50,6 +50,6 @@ minfo = MapInfo(cconv,
 # Add borde
 minfo = minfo.subset(-0.5,-0.5,1201,1201);
 
-f = GdalRasterImage("%s_L1.tif" % args.tile_coordinate, "gtiff", minfo, 1, 
+f = GdalRasterImage("%s_L2.tif" % args.tile_coordinate, "gtiff", minfo, 1, 
                     GdalRasterImage.Int16, "COMPRESS=LZW")
 f.write(0, 0, np.zeros((1201,1201), dtype=np.int16))

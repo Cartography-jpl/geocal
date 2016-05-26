@@ -27,7 +27,7 @@
 
 AC_DEFUN([AC_BLITZ],
 [
-AC_HANDLE_WITH_ARG([blitz], [blitz], [Blitz++], $2, $3)
+AC_HANDLE_WITH_ARG([blitz], [blitz], [Blitz++], $2, $3, $1)
 
 if test "x$want_blitz" = "xyes"; then
         AC_MSG_CHECKING([for Blitz library])
@@ -40,7 +40,13 @@ if test "x$want_blitz" = "xyes"; then
 	    AC_SEARCH_LIB([BLITZ], [blitz], [blitz/], [blitz.h], ,
                           [libblitz], [-lblitz])
         fi
-
+	if test "$succeeded" != "yes" -a "x$build_needed_blitz" == "xyes" ; then
+            build_blitz="yes"
+            ac_blitz_path="\${prefix}"
+            BLITZ_LIBS="-L$ac_blitz_path/lib -lblitz"
+            BLITZ_CFLAGS="-I$ac_blitz_path/include"
+            succeeded=yes
+        fi
         if test "$succeeded" != "yes" ; then
                 AC_MSG_RESULT([no])
         else

@@ -26,7 +26,7 @@
 
 AC_DEFUN([AC_AFIDS_DATA],
 [
-AC_HANDLE_WITH_ARG([afids_data], [afids-data], [AFIDS data], $2, $3)
+AC_HANDLE_WITH_ARG([afids_data], [afids-data], [AFIDS data], $2, $3, $1)
 
 if test "x$want_afids_data" = "xyes"; then
         AC_MSG_CHECKING([for AFIDS data])
@@ -42,6 +42,12 @@ if test "x$want_afids_data" = "xyes"; then
                   break;
                fi
            done
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_afids_data" == "xyes" ; then
+            build_afids_data="yes"
+            ac_afids_data_path="\${prefix}"
+            AFIDS_DATA="$ac_afids_data_path/data"
+            succeeded=yes
         fi
 
         if test "$succeeded" != "yes" ; then

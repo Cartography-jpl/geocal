@@ -30,7 +30,7 @@
 
 AC_DEFUN([AC_VICAR_RTL],
 [
-AC_HANDLE_WITH_ARG([vicar_rtl], [vicar-rtl], [VICAR RTL], $2, $3)
+AC_HANDLE_WITH_ARG([vicar_rtl], [vicar-rtl], [VICAR RTL], $2, $3, $1)
 
 if test "x$want_vicar_rtl" = "xyes"; then
         AC_MSG_CHECKING([for VICAR RTL library])
@@ -49,6 +49,14 @@ if test "x$want_vicar_rtl" = "xyes"; then
 	    AC_SEARCH_LIB([VICAR_RTL], [vicar-rtl], [vicar_rtl/], 
                           [zvproto.h], , [libvicar_rtl], [-lvicar_rtl])
 	    VICAR_RTL_LIBS="${VICAR_RTL_LIBS} \$(CURSES_LIB) \$(FLIBS)"
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_vicar_rtl" == "xyes" ; then
+            build_vicar_rtl="yes"
+            ac_vicar_rtl_path="\${prefix}"
+            VICAR_RTL_LIBS="libvicar_rtl.la"
+            VICAR_RTL_BUILD_DEPEND="libvicar_rtl.la"
+            VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
+            succeeded=yes
         fi
 
         if test "$succeeded" != "yes" ; then

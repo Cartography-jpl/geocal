@@ -27,7 +27,7 @@
 
 AC_DEFUN([AC_DOXYGEN],
 [
-AC_HANDLE_WITH_ARG([doxygen], [doxygen], [Doxygen], $2, $3)
+AC_HANDLE_WITH_ARG([doxygen], [doxygen], [Doxygen], $2, $3, $1)
 
 if test "x$want_doxygen" = "xyes"; then
         AC_MSG_CHECKING([for Doxygen])
@@ -40,6 +40,12 @@ if test "x$want_doxygen" = "xyes"; then
 	    if test -n "$DOXYGEN" ; then
               succeeded=yes
             fi
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_doxygen" == "xyes" ; then
+            build_doxygen="yes"
+            ac_doxygen_path="\${prefix}"
+	    DOXYGEN=$ac_doxygen_path/bin/doxygen
+            succeeded=yes
         fi
 
         if test "$succeeded" != "yes" ; then

@@ -12,7 +12,7 @@
 
 AC_DEFUN([AC_OGDI],
 [
-AC_HANDLE_WITH_ARG([ogdi], [ogdi], [ogdi], $2, $3)
+AC_HANDLE_WITH_ARG([ogdi], [ogdi], [ogdi], $2, $3, $1)
 if test "x$want_ogdi" = "xyes"; then
         AC_MSG_CHECKING([for Ogdi library])
         succeeded=no
@@ -24,6 +24,14 @@ if test "x$want_ogdi" = "xyes"; then
         else
 	    AC_SEARCH_LIB([OGDI], [ogdi], , [ecs.h], ,
 	                  [libogdi], [-logdi])
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_ogdi" == "xyes" ; then
+            build_ogdi="yes"
+            ac_ogdi_path="\${prefix}"
+            OGDI_LIBS="-L$ac_ogdi_path/lib -logdi"
+            OGDI_CFLAGS="-I$ac_ogdi_path/include"
+	    OGDI_PREFIX="$ac_ogdi_path"
+            succeeded=yes
         fi
 
         if test "$succeeded" != "yes" ; then

@@ -27,7 +27,7 @@
 
 AC_DEFUN([AC_FFTW],
 [
-AC_HANDLE_WITH_ARG([fftw], [fftw], [fftw], $2, $3)
+AC_HANDLE_WITH_ARG([fftw], [fftw], [fftw], $2, $3, $1)
 if test "x$want_fftw" = "xyes"; then
         AC_MSG_CHECKING([for Fftw library])
         succeeded=no
@@ -37,6 +37,13 @@ if test "x$want_fftw" = "xyes"; then
             succeeded=yes
         else
 	    AC_SEARCH_LIB([FFTW], [fftw3], , [fftw3.h], , [libfftw3], [-lfftw3])
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_fftw" == "xyes" ; then
+            build_fftw="yes"
+            ac_fftw_path="\${prefix}"
+            FFTW_LIBS="-L$ac_fftw_path/lib -lfftw3"
+            FFTW_CFLAGS="-I$ac_fftw_path/include"
+            succeeded=yes
         fi
 
         if test "$succeeded" != "yes" ; then

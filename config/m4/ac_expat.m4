@@ -12,7 +12,7 @@
 
 AC_DEFUN([AC_EXPAT],
 [
-AC_HANDLE_WITH_ARG([expat], [expat], [expat], $2, $3)
+AC_HANDLE_WITH_ARG([expat], [expat], [expat], $2, $3, $1)
 if test "x$want_expat" = "xyes"; then
         AC_MSG_CHECKING([for expat library])
         succeeded=no
@@ -24,6 +24,14 @@ if test "x$want_expat" = "xyes"; then
         else
 	    AC_SEARCH_LIB([EXPAT], [expat], , [expat.h], ,
 	                  [libexpat], [-lexpat])
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_expat" == "xyes" ; then
+            build_expat="yes"
+            ac_expat_path="\${prefix}"
+            EXPAT_LIBS="-L$ac_expat_path/lib -lexpat"
+            EXPAT_CFLAGS="-I$ac_expat_path/include"
+	    EXPAT_PREFIX="$ac_expat_path"
+            succeeded=yes
         fi
 
         if test "$succeeded" != "yes" ; then

@@ -34,7 +34,7 @@
 
 AC_DEFUN([AC_BOOST],
 [
-AC_HANDLE_WITH_ARG([boost], [boost], [BOOST], $2, $3)
+AC_HANDLE_WITH_ARG([boost], [boost], [BOOST], $2, $3, $1)
 
 if test "x$want_boost" = "xyes"; then
         boost_lib_version_req=ifelse([$4], ,1.20.0,$4)
@@ -61,6 +61,12 @@ if test "x$want_boost" = "xyes"; then
                       break;
                   fi
             done
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_boost" == "xyes" ; then
+            build_boost="yes"
+            ac_boost_path="\${prefix}"
+            BOOST_CPPFLAGS="-I$ac_boost_path/include"
+            succeeded=yes
         fi
         boost_version_check_needed=no
         if test "$succeeded" = "yes" ; then

@@ -28,7 +28,7 @@
 
 AC_DEFUN([AC_HDFEOS5],
 [
-AC_HANDLE_WITH_ARG([hdfeos5], [hdfeos5], [Hdfeos5 library], $2, $3)
+AC_HANDLE_WITH_ARG([hdfeos5], [hdfeos5], [Hdfeos5 library], $2, $3, $1)
 if test "x$want_hdfeos5" = "xyes"; then
         AC_HDF5($1, $2, default_search)
         AC_MSG_CHECKING([for Hdfeos5 library])
@@ -48,6 +48,13 @@ if test "x$want_hdfeos5" = "xyes"; then
  	       AC_SEARCH_LIB([HDFEOS5], [hdfeos5], , [HE5_HdfEosDef.h], ,
                              [libhe5_hdfeos], [-lhe5_hdfeos -lGctp])
             fi
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_hdfeos5" == "xyes" ; then
+            build_hdfeos5="yes"
+            ac_hdfeos5_path="\${prefix}"
+            HDFEOS5_LIBS="libhe5_hdfeos.la"
+            HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.15/include"
+            succeeded=yes
         fi
 	if test "$have_hdf5" == "no"; then
             succeeded=no

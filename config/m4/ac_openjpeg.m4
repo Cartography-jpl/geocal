@@ -12,7 +12,7 @@
 
 AC_DEFUN([AC_OPENJPEG],
 [
-AC_HANDLE_WITH_ARG([openjpeg], [openjpeg], [openjpeg], $2, $3)
+AC_HANDLE_WITH_ARG([openjpeg], [openjpeg], [openjpeg], $2, $3, $1)
 if test "x$want_openjpeg" = "xyes"; then
         AC_MSG_CHECKING([for openjpeg library])
         succeeded=no
@@ -24,6 +24,14 @@ if test "x$want_openjpeg" = "xyes"; then
         else
 	    AC_SEARCH_LIB([OPENJPEG], [openjpeg], [openjpeg-2.1/], 
 	                  [openjpeg.h], ,[libopenjp2], [-openjp2])
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_openjpeg" == "xyes" ; then
+            build_openjpeg="yes"
+            ac_openjpeg_path="\${prefix}"
+            OPENJPEG_LIBS="-L$ac_openjpeg_path/lib -lopenjp2"
+            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.1"
+	    OPENJPEG_PREFIX="$ac_openjpeg_path"
+            succeeded=yes
         fi
 
         if test "$succeeded" != "yes" ; then

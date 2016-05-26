@@ -16,7 +16,7 @@
 
 AC_DEFUN([AC_MSPI_SHARED],
 [
-AC_HANDLE_WITH_ARG([mspi_shared], [mspi-shared], [MSPI-Shared], [cannot_build], [default_search])
+AC_HANDLE_WITH_ARG([mspi_shared], [mspi-shared], [MSPI-Shared], [cannot_build], [default_search], $1)
 
 if test "x$want_mspi_shared" = "xyes"; then
         AC_MSG_CHECKING([for MSPI-Shared library])

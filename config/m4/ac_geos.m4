@@ -12,7 +12,7 @@
 
 AC_DEFUN([AC_GEOS],
 [
-AC_HANDLE_WITH_ARG([geos], [geos], [Geos], $2, $3)
+AC_HANDLE_WITH_ARG([geos], [geos], [Geos], $2, $3, $1)
 if test "x$want_geos" = "xyes"; then
         AC_MSG_CHECKING([for GEOS library])
         succeeded=no
@@ -23,6 +23,13 @@ if test "x$want_geos" = "xyes"; then
         else
 	    AC_SEARCH_LIB([GEOS], [geos], , [geos.h], ,
                           [libgeos], [-lgeos])
+        fi
+	if test "$succeeded" != "yes" -a "x$build_needed_geos" == "xyes" ; then
+            build_geos="yes"
+            ac_geos_path="\${prefix}"
+            GEOS_CFLAGS="-I$ac_geos_path/include"
+            GEOS_LIBS="-R$ac_geos_path/lib -L$ac_geos_path/lib -lgeos"
+            succeeded=yes
         fi
 
         if test "$succeeded" != "yes" ; then

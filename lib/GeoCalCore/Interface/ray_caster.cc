@@ -39,7 +39,7 @@ blitz::Array<double, 2> RayCaster::next_radiance(const RasterImage& Surface_rad,
       double sum = 0.0;
       for(int i1 = 0; i1 < np.shape()[2]; ++i1)
 	for(int i2 = 0; i2 < np.shape()[3]; ++i2)
-	  for(int i3 = 0; i3 < np.shape()[3]; ++i3) {
+	  for(int i3 = 0; i3 < np.shape()[4]; ++i3) {
 	    Ecr e(np(i,j,i1,i2,i3,0),np(i,j,i1,i2,i3,1),np(i,j,i1,i2,i3,2));
 	    ImageCoordinate ic = Surface_rad.coordinate(e);
 	    if(ic.line >= 0 && ic.line < Surface_rad.number_line() - 1 &&

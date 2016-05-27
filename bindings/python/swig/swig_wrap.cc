@@ -116,6 +116,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(pyramid_image_matcher)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_map_projected)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_simulated)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_simulated_ray_caster)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_image_to_image_match)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(surface_image_to_image_match)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(location_to_file)(void);
@@ -460,6 +461,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_pyramid_image_matcher", SWIG_INIT_FUNC(pyramid_image_matcher));
   SWIG_INIT_MODULE(package, "_igc_map_projected", SWIG_INIT_FUNC(igc_map_projected));
   SWIG_INIT_MODULE(package, "_igc_simulated", SWIG_INIT_FUNC(igc_simulated));
+  SWIG_INIT_MODULE(package, "_igc_simulated_ray_caster", SWIG_INIT_FUNC(igc_simulated_ray_caster));
   SWIG_INIT_MODULE(package, "_igc_image_to_image_match", SWIG_INIT_FUNC(igc_image_to_image_match));
   SWIG_INIT_MODULE(package, "_surface_image_to_image_match", SWIG_INIT_FUNC(surface_image_to_image_match));
   SWIG_INIT_MODULE(package, "_location_to_file", SWIG_INIT_FUNC(location_to_file));

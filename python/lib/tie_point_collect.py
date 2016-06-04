@@ -500,6 +500,10 @@ def _outlier_reject_ransac(ind1, ind2_or_ref_image, tpcol, threshold,
     if(pt1.shape[0] < 1):
         return tpcol
     m, mask = cv2.findFundamentalMat(pt1, pt2, cv2.FM_RANSAC, threshold)
+    # if we have too few points, we don't get a result. Can't filter
+    # tiepoints then
+    if(mask is None):
+        return tpcol
     m = (mask == 0)
     bad_pt = ind[m[:,0]]
     return [tp for i, tp in enumerate(tpcol) if i not in bad_pt]

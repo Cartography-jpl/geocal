@@ -358,7 +358,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/geocal_gsl_root_wrap.cc \
 	@swigsrc@/geocal_time_wrap.cc @swigsrc@/tiled_file_wrap.cc \
 	@swigsrc@/geocal_serialize_function_wrap.cc \
-	@swigsrc@/image_coordinate_wrap.cc \
+	@swigsrc@/image_coordinate_wrap.cc @swigsrc@/tie_point_wrap.cc \
 	@swigsrc@/with_parameter_wrap.cc @swigsrc@/look_vector_wrap.cc \
 	@swigsrc@/ground_coordinate_wrap.cc \
 	@swigsrc@/coordinate_converter_wrap.cc @swigsrc@/ecr_wrap.cc \
@@ -499,6 +499,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-tiled_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geocal_serialize_function_wrap.lo \
 	@swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo \
+	@swigsrc@/_swig_wrap_la-tie_point_wrap.lo \
 	@swigsrc@/_swig_wrap_la-with_parameter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-look_vector_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_coordinate_wrap.lo \
@@ -692,7 +693,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcinterface@/raster_image_multi_band.cc \
 	@srcinterface@/raster_image_multi_band_variable.cc \
 	@srcinterface@/sub_raster_image_multi_band.cc \
-	@srcinterface@/image_coordinate.cc \
+	@srcinterface@/image_coordinate.cc @srcinterface@/tie_point.cc \
 	@srcinterface@/ground_coordinate.cc \
 	@srcinterface@/ground_mask.cc @srcinterface@/image_mask.cc \
 	@srcinterface@/frame_coordinate.cc \
@@ -841,6 +842,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcinterface@/libgeocal_la-raster_image_multi_band_variable.lo \
 	@srcinterface@/libgeocal_la-sub_raster_image_multi_band.lo \
 	@srcinterface@/libgeocal_la-image_coordinate.lo \
+	@srcinterface@/libgeocal_la-tie_point.lo \
 	@srcinterface@/libgeocal_la-ground_coordinate.lo \
 	@srcinterface@/libgeocal_la-ground_mask.lo \
 	@srcinterface@/libgeocal_la-image_mask.lo \
@@ -1008,6 +1010,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcinterface@/camera_test.cc \
 	@srcinterface@/image_coordinate_test.cc \
 	@srcinterface@/image_coordinate_test_support.cc \
+	@srcinterface@/tie_point_test.cc \
 	@srcinterface@/coordinate_converter_test.cc \
 	@srcinterface@/simple_dem_test.cc \
 	@srcinterface@/look_vector_test.cc \
@@ -1151,6 +1154,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcinterface@/geocal_test_all-camera_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-image_coordinate_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-image_coordinate_test_support.$(OBJEXT) \
+	@srcinterface@/geocal_test_all-tie_point_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-coordinate_converter_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-simple_dem_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-look_vector_test.$(OBJEXT) \
@@ -1365,7 +1369,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcinterface@/raster_image_multi_band.h \
 	@srcinterface@/raster_image_multi_band_variable.h \
 	@srcinterface@/sub_raster_image_multi_band.h \
-	@srcinterface@/image_coordinate.h \
+	@srcinterface@/image_coordinate.h @srcinterface@/tie_point.h \
 	@srcinterface@/ground_coordinate.h \
 	@srcinterface@/ground_mask.h @srcinterface@/image_mask.h \
 	@srcinterface@/frame_coordinate.h @srcinterface@/time_table.h \
@@ -2183,7 +2187,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcinterface@/raster_image_multi_band.cc \
 	@srcinterface@/raster_image_multi_band_variable.cc \
 	@srcinterface@/sub_raster_image_multi_band.cc \
-	@srcinterface@/image_coordinate.cc \
+	@srcinterface@/image_coordinate.cc @srcinterface@/tie_point.cc \
 	@srcinterface@/ground_coordinate.cc \
 	@srcinterface@/ground_mask.cc @srcinterface@/image_mask.cc \
 	@srcinterface@/frame_coordinate.cc \
@@ -2304,7 +2308,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/geocal_gsl_root_wrap.cc \
 	@swigsrc@/geocal_time_wrap.cc @swigsrc@/tiled_file_wrap.cc \
 	@swigsrc@/geocal_serialize_function_wrap.cc \
-	@swigsrc@/image_coordinate_wrap.cc \
+	@swigsrc@/image_coordinate_wrap.cc @swigsrc@/tie_point_wrap.cc \
 	@swigsrc@/with_parameter_wrap.cc @swigsrc@/look_vector_wrap.cc \
 	@swigsrc@/ground_coordinate_wrap.cc \
 	@swigsrc@/coordinate_converter_wrap.cc @swigsrc@/ecr_wrap.cc \
@@ -2480,7 +2484,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcinterface@/raster_image_multi_band.h \
 	@srcinterface@/raster_image_multi_band_variable.h \
 	@srcinterface@/sub_raster_image_multi_band.h \
-	@srcinterface@/image_coordinate.h \
+	@srcinterface@/image_coordinate.h @srcinterface@/tie_point.h \
 	@srcinterface@/ground_coordinate.h \
 	@srcinterface@/ground_mask.h @srcinterface@/image_mask.h \
 	@srcinterface@/frame_coordinate.h @srcinterface@/time_table.h \
@@ -2617,6 +2621,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcinterface@/camera_test.cc \
 	@srcinterface@/image_coordinate_test.cc \
 	@srcinterface@/image_coordinate_test_support.cc \
+	@srcinterface@/tie_point_test.cc \
 	@srcinterface@/coordinate_converter_test.cc \
 	@srcinterface@/simple_dem_test.cc \
 	@srcinterface@/look_vector_test.cc \
@@ -3032,6 +3037,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-tie_point_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-look_vector_wrap.lo:  \
@@ -3420,6 +3427,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-image_coordinate.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-tie_point.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/libgeocal_la-ground_coordinate.lo:  \
@@ -4043,6 +4053,9 @@ clean-checkPROGRAMS:
 @srcinterface@/geocal_test_all-image_coordinate_test_support.$(OBJEXT):  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/geocal_test_all-tie_point_test.$(OBJEXT):  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcinterface@/geocal_test_all-coordinate_converter_test.$(OBJEXT):  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
@@ -4623,6 +4636,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-rpc_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-simple_dem_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-sub_raster_image_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-tie_point_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-time_table_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-camera.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-ccorr_lsm_matcher.Plo@am__quote@
@@ -4662,6 +4676,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image_multi_band.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-tie_point.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-time_table.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-with_parameter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/geocal_test_all-air_mspi_igc_collection_test.Po@am__quote@
@@ -4895,6 +4910,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_quaternion_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_std_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-tie_point_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-tiled_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-time_table_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo@am__quote@
@@ -5094,6 +5110,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/image_coordinate_wrap.cc' object='@swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-image_coordinate_wrap.lo `test -f '@swigsrc@/image_coordinate_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/image_coordinate_wrap.cc
+
+@swigsrc@/_swig_wrap_la-tie_point_wrap.lo: @swigsrc@/tie_point_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-tie_point_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-tie_point_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-tie_point_wrap.lo `test -f '@swigsrc@/tie_point_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/tie_point_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-tie_point_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-tie_point_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/tie_point_wrap.cc' object='@swigsrc@/_swig_wrap_la-tie_point_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-tie_point_wrap.lo `test -f '@swigsrc@/tie_point_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/tie_point_wrap.cc
 
 @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo: @swigsrc@/with_parameter_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-with_parameter_wrap.lo `test -f '@swigsrc@/with_parameter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/with_parameter_wrap.cc
@@ -6312,6 +6335,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/image_coordinate.cc' object='@srcinterface@/libgeocal_la-image_coordinate.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-image_coordinate.lo `test -f '@srcinterface@/image_coordinate.cc' || echo '$(srcdir)/'`@srcinterface@/image_coordinate.cc
+
+@srcinterface@/libgeocal_la-tie_point.lo: @srcinterface@/tie_point.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-tie_point.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-tie_point.Tpo -c -o @srcinterface@/libgeocal_la-tie_point.lo `test -f '@srcinterface@/tie_point.cc' || echo '$(srcdir)/'`@srcinterface@/tie_point.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-tie_point.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-tie_point.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/tie_point.cc' object='@srcinterface@/libgeocal_la-tie_point.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-tie_point.lo `test -f '@srcinterface@/tie_point.cc' || echo '$(srcdir)/'`@srcinterface@/tie_point.cc
 
 @srcinterface@/libgeocal_la-ground_coordinate.lo: @srcinterface@/ground_coordinate.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-ground_coordinate.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-ground_coordinate.Tpo -c -o @srcinterface@/libgeocal_la-ground_coordinate.lo `test -f '@srcinterface@/ground_coordinate.cc' || echo '$(srcdir)/'`@srcinterface@/ground_coordinate.cc
@@ -7740,6 +7770,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/image_coordinate_test_support.cc' object='@srcinterface@/geocal_test_all-image_coordinate_test_support.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/geocal_test_all-image_coordinate_test_support.obj `if test -f '@srcinterface@/image_coordinate_test_support.cc'; then $(CYGPATH_W) '@srcinterface@/image_coordinate_test_support.cc'; else $(CYGPATH_W) '$(srcdir)/@srcinterface@/image_coordinate_test_support.cc'; fi`
+
+@srcinterface@/geocal_test_all-tie_point_test.o: @srcinterface@/tie_point_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-tie_point_test.o -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-tie_point_test.Tpo -c -o @srcinterface@/geocal_test_all-tie_point_test.o `test -f '@srcinterface@/tie_point_test.cc' || echo '$(srcdir)/'`@srcinterface@/tie_point_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/geocal_test_all-tie_point_test.Tpo @srcinterface@/$(DEPDIR)/geocal_test_all-tie_point_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/tie_point_test.cc' object='@srcinterface@/geocal_test_all-tie_point_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/geocal_test_all-tie_point_test.o `test -f '@srcinterface@/tie_point_test.cc' || echo '$(srcdir)/'`@srcinterface@/tie_point_test.cc
+
+@srcinterface@/geocal_test_all-tie_point_test.obj: @srcinterface@/tie_point_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-tie_point_test.obj -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-tie_point_test.Tpo -c -o @srcinterface@/geocal_test_all-tie_point_test.obj `if test -f '@srcinterface@/tie_point_test.cc'; then $(CYGPATH_W) '@srcinterface@/tie_point_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcinterface@/tie_point_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/geocal_test_all-tie_point_test.Tpo @srcinterface@/$(DEPDIR)/geocal_test_all-tie_point_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/tie_point_test.cc' object='@srcinterface@/geocal_test_all-tie_point_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/geocal_test_all-tie_point_test.obj `if test -f '@srcinterface@/tie_point_test.cc'; then $(CYGPATH_W) '@srcinterface@/tie_point_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcinterface@/tie_point_test.cc'; fi`
 
 @srcinterface@/geocal_test_all-coordinate_converter_test.o: @srcinterface@/coordinate_converter_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/geocal_test_all-coordinate_converter_test.o -MD -MP -MF @srcinterface@/$(DEPDIR)/geocal_test_all-coordinate_converter_test.Tpo -c -o @srcinterface@/geocal_test_all-coordinate_converter_test.o `test -f '@srcinterface@/coordinate_converter_test.cc' || echo '$(srcdir)/'`@srcinterface@/coordinate_converter_test.cc

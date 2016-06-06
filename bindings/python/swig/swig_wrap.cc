@@ -56,6 +56,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(tiled_file)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_serialize_function)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(image_coordinate)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(tie_point)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(with_parameter)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(look_vector)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_coordinate)(void);
@@ -401,6 +402,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_tiled_file", SWIG_INIT_FUNC(tiled_file));
   SWIG_INIT_MODULE(package, "_geocal_serialize_function", SWIG_INIT_FUNC(geocal_serialize_function));
   SWIG_INIT_MODULE(package, "_image_coordinate", SWIG_INIT_FUNC(image_coordinate));
+  SWIG_INIT_MODULE(package, "_tie_point", SWIG_INIT_FUNC(tie_point));
   SWIG_INIT_MODULE(package, "_with_parameter", SWIG_INIT_FUNC(with_parameter));
   SWIG_INIT_MODULE(package, "_look_vector", SWIG_INIT_FUNC(look_vector));
   SWIG_INIT_MODULE(package, "_ground_coordinate", SWIG_INIT_FUNC(ground_coordinate));

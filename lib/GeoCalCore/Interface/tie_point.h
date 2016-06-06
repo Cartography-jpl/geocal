@@ -1,6 +1,7 @@
 #ifndef TIE_POINT_H
 #define TIE_POINT_H
 #include "image_coordinate.h"
+#include "igc_collection.h"
 #include "ground_coordinate.h"
 #include "geocal_exception.h"
 #include <blitz/array.h>
@@ -8,6 +9,20 @@
 namespace GeoCal {
 /****************************************************************//**
     This is a tiepoint. This is little more than a structure.
+
+    Note that we previously had TiePoint a python only object, and
+    stored it as a python pickled object. The primary motivation for
+    moving this to C++ is to be able to use the boost XML
+    serialization, which is more stable and can support old
+    versions. If you have an older tiepoint data using the old pickle
+    format, you can either rerun the process that generated the tie
+    points, or you can run the old version of the code, write the
+    tiepoints out as the old MSPI format (write_old_mspi_format
+    defined in python), and the read the old MSPI format using the new
+    version of the code with the tiepoints in C++. This is just a
+    temporary fix, going forward the intention is that the tiepoints
+    will use the boost format and will automatically support older
+    versions. 
 *******************************************************************/
 
 class TiePoint : public Printable<TiePoint> {
@@ -112,6 +127,11 @@ public:
     range_check(Image_index, 0, number_image());
     return sample_sigma_(Image_index);
   }
+
+  blitz::Array<double, 2> ic() const;
+  blitz::Array<double, 2> ic_sigma() const;
+  blitz::Array<double, 2> ic_pred(const IgcCollection& Igccol) const;
+  blitz::Array<double, 2> ic_diff(const IgcCollection& Igccol) const;
   
   virtual void print(std::ostream& Os) const;
 private:

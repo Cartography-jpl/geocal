@@ -3,7 +3,7 @@ from builtins import range
 from nose.tools import *
 from geocal_swig import *
 from geocal.igc_collection_extension import *
-from geocal.tie_point import *
+from geocal.tie_point_extension import *
 from geocal.image_ground_connection import *
 from geocal.igc_collection_extension import *
 from geocal.simultaneous_bundle_adjustment import *

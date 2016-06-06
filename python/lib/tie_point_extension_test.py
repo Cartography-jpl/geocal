@@ -2,7 +2,7 @@ from __future__ import print_function
 from builtins import range
 from nose.tools import *
 from geocal_swig import *
-from geocal.tie_point import *
+from geocal.tie_point_extension import *
 from geocal.image_ground_connection import *
 from geocal.ray_intersect import *
 from geocal.feature_detector_extension import *
@@ -72,7 +72,7 @@ def test_tie_point():
     tpcol = read_shelve(geocal_test_tpcol)
     tp = tpcol[0]
     print(tp.ic)
-    tp.image_location[5] = None
+    tp.image_coordinate(5, None)
     print(tp.ic)
     print(tp.ic_sigma)
     print(tp.ic_pred(igccol))
@@ -84,7 +84,7 @@ def test_tie_point():
 # for the tiepoint isn't correct in the TiePointCollection shelf
 # But don't have this uncommented out when running unit test or we will be
 # looking at the wrong place for testing
-#from geocal import *
+from geocal import *
 def generate_tie_point_collection():
     '''This creates a "simulated" version of the igccol_rolling_shutter.xml.
     We generate tiepoints based on the "truth".
@@ -102,6 +102,7 @@ def generate_tie_point_collection():
     # see.
 
     nimg = np.array([igccol_original.image_ground_connection(i).view_angle()[0] for i in range(igccol.number_image)]).argmin()
+    nimg = int(nimg)
     fd = ForstnerFeatureDetector()
     iplist = fd.interest_point_grid(igccol_original.image(nimg), 20, 20)
     tpcol = TiePointCollection()
@@ -111,8 +112,7 @@ def generate_tie_point_collection():
         tp.id = i
         gc = igccol_original.ground_coordinate(nimg, ip)
         for i in range(igccol_original.number_image):
-            tp.image_location[i] = (igccol_original.image_coordinate(i, gc),
-                                    0.1, 0.1)
+            tp.image_coordinate(i, igccol_original.image_coordinate(i, gc))
         tp = ri.ray_intersect(tp)
         if(tp):
             tpcol.append(tp)

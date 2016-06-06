@@ -380,10 +380,12 @@ class SimultaneousBundleAdjustment(object):
         ind = 0
         for i, tp in enumerate(self.tpcol):
             gp = self.ground_location(i)
-            for j, il in enumerate(tp.image_location):
-                if(il):
+            for j in range(tp.number_image):
+                if(tp.image_coordinate(j)):
                     try:
-                        ictp, lsigma, ssigma = il
+                        ictp = tp.image_coordinate(j)
+                        lsigma = tp.line_sigma(j)
+                        ssigma = tp.sample_sigma(j)
                         weight = [old_div(1.0,lsigma), old_div(1.0,ssigma)]
                         cres = self.igc_coll.collinearity_residual(j, gp, ictp)
                         rs = slice(ind, ind + 2)
@@ -402,9 +404,11 @@ class SimultaneousBundleAdjustment(object):
         ind = self.row_index
         for i, tp in enumerate(self.tpcol):
             gp = self.ground_location(i)
-            for j, il in enumerate(tp.image_location):
-                if(il):
-                    ictp, lsigma, ssigma = il
+            for j in range(tp.number_image):
+                if(tp.image_coordinate(j)):
+                    ictp = tp.image_coordinate(j)
+                    lsigma = tp.line_sigma(j)
+                    ssigma = tp.sample_sigma(j)
                     weight = [[old_div(1.0,lsigma)], [old_div(1.0,ssigma)]]
                     try:
                         jac = self.igc_coll.collinearity_residual_jacobian(j, 

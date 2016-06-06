@@ -176,20 +176,49 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 import geocal_swig.look_vector
-class TiePoint(object):
+import geocal_swig.with_parameter
+import geocal_swig.geocal_exception
+class TiePoint(geocal_swig.generic_object.GenericObject):
     """
 
     This is a tiepoint.
 
     This is little more than a structure.
 
+    Note that we previously had TiePoint a python only object, and stored
+    it as a python pickled object. The primary motivation for moving this
+    to C++ is to be able to use the boost XML serialization, which is more
+    stable and can support old versions. If you have an older tiepoint
+    data using the old pickle format, you can either rerun the process
+    that generated the tie points, or you can run the old version of the
+    code, write the tiepoints out as the old MSPI format
+    (write_old_mspi_format defined in python), and the read the old MSPI
+    format using the new version of the code with the tiepoints in C++.
+    This is just a temporary fix, going forward the intention is that the
+    tiepoints will use the boost format and will automatically support
+    older versions.
+
     C++ includes: tie_point.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
+
+    def __init__(self, Number_image):
+        """
+
+        GeoCal::TiePoint::TiePoint(int Number_image)
+        Constructor. 
+        """
+        _tie_point.TiePoint_swiginit(self, _tie_point.new_TiePoint(Number_image))
+
+    def _v_id(self, *args):
+        """
+
+        void GeoCal::TiePoint::id(int V)
+
+        """
+        return _tie_point.TiePoint__v_id(self, *args)
+
 
     @property
     def id(self):
@@ -198,6 +227,15 @@ class TiePoint(object):
     @id.setter
     def id(self, value):
       self._v_id(value)
+
+
+    def _v_is_gcp(self, *args):
+        """
+
+        void GeoCal::TiePoint::is_gcp(bool V)
+
+        """
+        return _tie_point.TiePoint__v_is_gcp(self, *args)
 
 
     @property
@@ -209,6 +247,15 @@ class TiePoint(object):
       self._v_is_gcp(value)
 
 
+    def _v_ground_location(self, *args):
+        """
+
+        void GeoCal::TiePoint::ground_location(const boost::shared_ptr< GroundCoordinate > &Gc)
+
+        """
+        return _tie_point.TiePoint__v_ground_location(self, *args)
+
+
     @property
     def ground_location(self):
         return self._v_ground_location()
@@ -218,9 +265,27 @@ class TiePoint(object):
       self._v_ground_location(value)
 
 
+    def _v_number_image(self):
+        """
+
+        int GeoCal::TiePoint::number_image() const
+        Number of images covered by the tie point. 
+        """
+        return _tie_point.TiePoint__v_number_image(self)
+
+
     @property
     def number_image(self):
         return self._v_number_image()
+
+
+    def _v_number_image_location(self):
+        """
+
+        int GeoCal::TiePoint::number_image_location() const
+
+        """
+        return _tie_point.TiePoint__v_number_image_location(self)
 
 
     @property
@@ -228,10 +293,106 @@ class TiePoint(object):
         return self._v_number_image_location()
 
 
+    def image_coordinate(self, *args):
+        """
+
+        void GeoCal::TiePoint::image_coordinate(int Image_index, const boost::shared_ptr< ImageCoordinate > &Ic,
+        double Line_sigma=0.1, double Sample_sigma=0.1)
+
+        """
+        return _tie_point.TiePoint_image_coordinate(self, *args)
+
+
+    def line_sigma(self, Image_index):
+        """
+
+        double GeoCal::TiePoint::line_sigma(int Image_index) const
+        Line sigma. 
+        """
+        return _tie_point.TiePoint_line_sigma(self, Image_index)
+
+
+    def sample_sigma(self, Image_index):
+        """
+
+        double GeoCal::TiePoint::sample_sigma(int Image_index) const
+        Sample sigma. 
+        """
+        return _tie_point.TiePoint_sample_sigma(self, Image_index)
+
+
+    def _v_ic(self):
+        """
+
+        blitz::Array< double, 2 > TiePoint::ic() const
+        This repackages the image_coordinate, in a better way for doing such
+        things as plotting.
+
+        We return a 2D array with the first row being the image line and the
+        second the image sample. The columns are the image indexes. For image
+        locations that are missing, we return a NaN.
+
+        This is really intended for use by python, I'm not sure this would be
+        of much use in C++. 
+        """
+        return _tie_point.TiePoint__v_ic(self)
+
+
+    @property
+    def ic(self):
+        return self._v_ic()
+
+
+    def _v_ic_sigma(self):
+        """
+
+        blitz::Array< double, 2 > TiePoint::ic_sigma() const
+        Like ic, but return line and sample sigma. 
+        """
+        return _tie_point.TiePoint__v_ic_sigma(self)
+
+
+    @property
+    def ic_sigma(self):
+        return self._v_ic_sigma()
+
+
+    def ic_pred(self, Igccol):
+        """
+
+        blitz::Array< double, 2 > TiePoint::ic_pred(const IgcCollection &Igccol) const
+        Like ic, but uses the supplied igccol to predict the image location
+        given our current ground position. 
+        """
+        return _tie_point.TiePoint_ic_pred(self, Igccol)
+
+
+    def ic_diff(self, Igccol):
+        """
+
+        blitz::Array< double, 2 > TiePoint::ic_diff(const IgcCollection &Igccol) const
+        Difference between observed and predicted image coordinates. 
+        """
+        return _tie_point.TiePoint_ic_diff(self, Igccol)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _tie_point.delete_TiePoint
+TiePoint._v_id = new_instancemethod(_tie_point.TiePoint__v_id, None, TiePoint)
+TiePoint._v_is_gcp = new_instancemethod(_tie_point.TiePoint__v_is_gcp, None, TiePoint)
+TiePoint._v_ground_location = new_instancemethod(_tie_point.TiePoint__v_ground_location, None, TiePoint)
+TiePoint._v_number_image = new_instancemethod(_tie_point.TiePoint__v_number_image, None, TiePoint)
+TiePoint._v_number_image_location = new_instancemethod(_tie_point.TiePoint__v_number_image_location, None, TiePoint)
+TiePoint.image_coordinate = new_instancemethod(_tie_point.TiePoint_image_coordinate, None, TiePoint)
+TiePoint.line_sigma = new_instancemethod(_tie_point.TiePoint_line_sigma, None, TiePoint)
+TiePoint.sample_sigma = new_instancemethod(_tie_point.TiePoint_sample_sigma, None, TiePoint)
+TiePoint.__str__ = new_instancemethod(_tie_point.TiePoint___str__, None, TiePoint)
+TiePoint._v_ic = new_instancemethod(_tie_point.TiePoint__v_ic, None, TiePoint)
+TiePoint._v_ic_sigma = new_instancemethod(_tie_point.TiePoint__v_ic_sigma, None, TiePoint)
+TiePoint.ic_pred = new_instancemethod(_tie_point.TiePoint_ic_pred, None, TiePoint)
+TiePoint.ic_diff = new_instancemethod(_tie_point.TiePoint_ic_diff, None, TiePoint)
 TiePoint_swigregister = _tie_point.TiePoint_swigregister
 TiePoint_swigregister(TiePoint)
 

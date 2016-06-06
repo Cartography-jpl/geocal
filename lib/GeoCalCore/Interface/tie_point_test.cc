@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   tp->image_coordinate(1, boost::make_shared<ImageCoordinate>(3, 4), 0.25,
 		       0.35);
   std::string d = serialize_write_string(tp);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<TiePoint> tp2 = 
     serialize_read_string<TiePoint>(d);

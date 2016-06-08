@@ -15,7 +15,7 @@ import shutil
 # the afids data area at some point.
 geocal_test_igc = "/data/geocal_test_data/igccol_rolling_shutter.xml"
 geocal_test_igc_sim_error = "/data/geocal_test_data/igccol_rolling_shutter_simulated_error.xml"
-geocal_test_tpcol = "/data/geocal_test_data/data.db:tpcol"
+geocal_test_tpcol = "/data/geocal_test_data/tpcol.xml"
 mspi_test_data = os.path.dirname(__file__) + "/../../unit_test_data/mspi/"
 
 

@@ -206,8 +206,8 @@ class TiePoint(geocal_swig.generic_object.GenericObject):
     def __init__(self, Number_image):
         """
 
-        GeoCal::TiePoint::TiePoint(int Number_image)
-        Constructor. 
+        TiePoint::TiePoint(const TiePoint &Tp)
+        Copy constructor. We make a deep copy of everything. 
         """
         _tie_point.TiePoint_swiginit(self, _tie_point.new_TiePoint(Number_image))
 
@@ -395,6 +395,90 @@ TiePoint.ic_pred = new_instancemethod(_tie_point.TiePoint_ic_pred, None, TiePoin
 TiePoint.ic_diff = new_instancemethod(_tie_point.TiePoint_ic_diff, None, TiePoint)
 TiePoint_swigregister = _tie_point.TiePoint_swigregister
 TiePoint_swigregister(TiePoint)
+
+class TiePointVector(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __iter__(self):
+        return self.iterator()
+
+    def __init__(self, *args):
+        _tie_point.TiePointVector_swiginit(self, _tie_point.new_TiePointVector(*args))
+    __swig_destroy__ = _tie_point.delete_TiePointVector
+TiePointVector.iterator = new_instancemethod(_tie_point.TiePointVector_iterator, None, TiePointVector)
+TiePointVector.__nonzero__ = new_instancemethod(_tie_point.TiePointVector___nonzero__, None, TiePointVector)
+TiePointVector.__bool__ = new_instancemethod(_tie_point.TiePointVector___bool__, None, TiePointVector)
+TiePointVector.__len__ = new_instancemethod(_tie_point.TiePointVector___len__, None, TiePointVector)
+TiePointVector.pop = new_instancemethod(_tie_point.TiePointVector_pop, None, TiePointVector)
+TiePointVector.__getslice__ = new_instancemethod(_tie_point.TiePointVector___getslice__, None, TiePointVector)
+TiePointVector.__setslice__ = new_instancemethod(_tie_point.TiePointVector___setslice__, None, TiePointVector)
+TiePointVector.__delslice__ = new_instancemethod(_tie_point.TiePointVector___delslice__, None, TiePointVector)
+TiePointVector.__delitem__ = new_instancemethod(_tie_point.TiePointVector___delitem__, None, TiePointVector)
+TiePointVector.__getitem__ = new_instancemethod(_tie_point.TiePointVector___getitem__, None, TiePointVector)
+TiePointVector.__setitem__ = new_instancemethod(_tie_point.TiePointVector___setitem__, None, TiePointVector)
+TiePointVector.append = new_instancemethod(_tie_point.TiePointVector_append, None, TiePointVector)
+TiePointVector.empty = new_instancemethod(_tie_point.TiePointVector_empty, None, TiePointVector)
+TiePointVector.size = new_instancemethod(_tie_point.TiePointVector_size, None, TiePointVector)
+TiePointVector.clear = new_instancemethod(_tie_point.TiePointVector_clear, None, TiePointVector)
+TiePointVector.swap = new_instancemethod(_tie_point.TiePointVector_swap, None, TiePointVector)
+TiePointVector.get_allocator = new_instancemethod(_tie_point.TiePointVector_get_allocator, None, TiePointVector)
+TiePointVector.begin = new_instancemethod(_tie_point.TiePointVector_begin, None, TiePointVector)
+TiePointVector.end = new_instancemethod(_tie_point.TiePointVector_end, None, TiePointVector)
+TiePointVector.rbegin = new_instancemethod(_tie_point.TiePointVector_rbegin, None, TiePointVector)
+TiePointVector.rend = new_instancemethod(_tie_point.TiePointVector_rend, None, TiePointVector)
+TiePointVector.pop_back = new_instancemethod(_tie_point.TiePointVector_pop_back, None, TiePointVector)
+TiePointVector.erase = new_instancemethod(_tie_point.TiePointVector_erase, None, TiePointVector)
+TiePointVector.push_back = new_instancemethod(_tie_point.TiePointVector_push_back, None, TiePointVector)
+TiePointVector.front = new_instancemethod(_tie_point.TiePointVector_front, None, TiePointVector)
+TiePointVector.back = new_instancemethod(_tie_point.TiePointVector_back, None, TiePointVector)
+TiePointVector.assign = new_instancemethod(_tie_point.TiePointVector_assign, None, TiePointVector)
+TiePointVector.resize = new_instancemethod(_tie_point.TiePointVector_resize, None, TiePointVector)
+TiePointVector.insert = new_instancemethod(_tie_point.TiePointVector_insert, None, TiePointVector)
+TiePointVector.reserve = new_instancemethod(_tie_point.TiePointVector_reserve, None, TiePointVector)
+TiePointVector.capacity = new_instancemethod(_tie_point.TiePointVector_capacity, None, TiePointVector)
+TiePointVector_swigregister = _tie_point.TiePointVector_swigregister
+TiePointVector_swigregister(TiePointVector)
+
+class TiePointCollection(geocal_swig.generic_object.GenericObject, TiePointVector):
+    """
+
+    This is a list of TiePoints with a few useful functions added.
+
+    C++ includes: tie_point.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+        GeoCal::TiePointCollection::TiePointCollection(const TiePointVector &Tlist)
+        Constructor with an initial list of TiePoints. 
+        """
+        _tie_point.TiePointCollection_swiginit(self, _tie_point.new_TiePointCollection(*args))
+
+    def _v_number_gcp(self):
+        """
+
+        int TiePointCollection::number_gcp() const
+        Number of gcps. 
+        """
+        return _tie_point.TiePointCollection__v_number_gcp(self)
+
+
+    @property
+    def number_gcp(self):
+        return self._v_number_gcp()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _tie_point.delete_TiePointCollection
+TiePointCollection._v_number_gcp = new_instancemethod(_tie_point.TiePointCollection__v_number_gcp, None, TiePointCollection)
+TiePointCollection.__str__ = new_instancemethod(_tie_point.TiePointCollection___str__, None, TiePointCollection)
+TiePointCollection_swigregister = _tie_point.TiePointCollection_swigregister
+TiePointCollection_swigregister(TiePointCollection)
 
 
 

@@ -14,8 +14,50 @@ void TiePoint::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(ic) & GEOCAL_NVP_(line_sigma) & GEOCAL_NVP_(sample_sigma);
 }
 
+template<class Archive>
+void TiePointCollection::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(TiePointCollection);
+  GEOCAL_BASE(TiePointCollection, TiePointVector);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiePointVector);
+}
+
 GEOCAL_IMPLEMENT(TiePoint);
+GEOCAL_IMPLEMENT(TiePointCollection);
 #endif
+
+//-----------------------------------------------------------------------
+/// Copy constructor. We make a deep copy of everything.
+//-----------------------------------------------------------------------
+
+TiePoint::TiePoint(const TiePoint& Tp)
+  : id_(Tp.id_),
+    is_gcp_(Tp.is_gcp_),
+    ground_location_(Tp.ground_location_->convert_to_cf()),
+    ic_(Tp.ic_.size()),
+    line_sigma_(Tp.line_sigma_.copy()),
+    sample_sigma_(Tp.sample_sigma_.copy())
+{
+  for(int i = 0; i < (int) ic_.size(); ++i)
+    ic_[i] = boost::make_shared<ImageCoordinate>(*Tp.ic_[i]);
+}
+
+//-----------------------------------------------------------------------
+/// Assignment. We make a deep copy of everything.
+//-----------------------------------------------------------------------
+
+TiePoint& TiePoint::operator=(const TiePoint& Tp)
+{
+  id_ = Tp.id_;
+  is_gcp_ = Tp.is_gcp_;
+  ground_location_ = Tp.ground_location_->convert_to_cf();
+  ic_.resize(Tp.ic_.size());
+  line_sigma_.reference(Tp.line_sigma_.copy());
+  sample_sigma_.reference(Tp.sample_sigma_.copy());
+  for(int i = 0; i < (int) ic_.size(); ++i)
+    ic_[i] = boost::make_shared<ImageCoordinate>(*Tp.ic_[i]);
+  return *this;
+}
 
 //-----------------------------------------------------------------------
 /// Print to a stream.
@@ -121,4 +163,27 @@ blitz::Array<double, 2> TiePoint::ic_diff
   return res;
 }
 
+
+//-----------------------------------------------------------------------
+/// Number of gcps.
+//-----------------------------------------------------------------------
+int TiePointCollection::number_gcp() const
+{
+  int res = 0;
+  BOOST_FOREACH(const boost::shared_ptr<TiePoint>& tp, *this)
+    if(tp->is_gcp())
+      ++res;
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Print to a stream.
+//-----------------------------------------------------------------------
+
+void TiePointCollection::print(std::ostream& Os) const
+{
+  Os << "TiePointCollection\n"
+     << "  Total number tp: " << size() << "\n"
+     << "  Number GCPs:     " << number_gcp() << "\n";
+}
 

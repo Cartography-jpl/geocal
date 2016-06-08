@@ -39,6 +39,7 @@ def test_tie_point_grid():
     pool = Pool()
     tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin,
                                       pool = pool)
+    print(tpcol)
     assert len(tpcol) == 95
 
 def test_pickle():

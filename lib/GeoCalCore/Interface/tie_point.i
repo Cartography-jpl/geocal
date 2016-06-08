@@ -11,6 +11,8 @@
 %import "ground_coordinate.i"
 %import "igc_collection.i"
 %geocal_shared_ptr(GeoCal::TiePoint);
+%geocal_shared_ptr(GeoCal::TiePointCollection);
+%geocal_shared_ptr(std::vector<boost::shared_ptr<GeoCal::TiePoint> >);
 namespace GeoCal {
 class TiePoint : public GenericObject {
 public:
@@ -32,6 +34,19 @@ public:
   %python_attribute(ic_sigma, blitz::Array<double, 2>);
   blitz::Array<double, 2> ic_pred(const IgcCollection& Igccol) const;
   blitz::Array<double, 2> ic_diff(const IgcCollection& Igccol) const;
+  %pickle_serialization();
+};
+}
+%template(TiePointVector) std::vector<boost::shared_ptr<GeoCal::TiePoint> >;
+namespace GeoCal {
+class TiePointCollection : public GenericObject,
+		   public std::vector<boost::shared_ptr<GeoCal::TiePoint> > {
+public:
+  TiePointCollection();
+  TiePointCollection(const std::vector<boost::shared_ptr<GeoCal::TiePoint> >&
+		     Tpv);
+  %python_attribute(number_gcp, int);
+  std::string print_to_string() const;
   %pickle_serialization();
 };
 }

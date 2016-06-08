@@ -253,10 +253,11 @@ class TiePointCollect(object):
             res = list(map(func, iplist))
         log.info("Done with matching")
         log.info("Time: %f" % (time.time() - tstart))
-        res = TiePointCollection([i for i in res if i is not None])
-        log.info("Total number tp: %d" % len(res))
-        log.info("Number GCPs:     %d" % res.number_gcp)
-        return res
+        res2 = TiePointCollection()
+        res2.extend([i for i in res if i is not None])
+        log.info("Total number tp: %d" % len(res2))
+        log.info("Number GCPs:     %d" % res2.number_gcp)
+        return res2
 
     def tie_point(self, ic1):
         '''Return a tie point that is roughly at the given location in the
@@ -564,10 +565,11 @@ def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3.0,
                                              ref_image = ref_image)
                 
     len3 = len(res)
-    res = TiePointCollection(res)
+    res2 = TiePointCollection()
+    res2.extend(res)
     log.info("Removed %d tiepoints" % (len1 - len2))
     log.info("Removed %d more GCPs" % (len2 - len3))
-    log.info("Ending %s" % res)
+    log.info("Ending %s" % res2)
     log.info("Completed using RANSAC to reject outliers")
-    return res
+    return res2
 

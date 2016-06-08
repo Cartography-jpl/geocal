@@ -28,6 +28,25 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(tp.sample_sigma(1), 0.35, 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(tiepoint_collection_test)
+{
+  TiePointCollection tpcol;
+  TiePoint tp(5);
+  tp.ground_location(boost::shared_ptr<GroundCoordinate>(new Ecr(1, 2, 3)));
+  tp.id(10);
+  tp.is_gcp(true);
+  tp.image_coordinate(3, boost::make_shared<ImageCoordinate>(1, 2), 0.2, 0.3);
+  tp.image_coordinate(1, boost::make_shared<ImageCoordinate>(3, 4), 0.25, 0.35);
+  tpcol.push_back(tp);
+  tp.id(11);
+  tpcol.push_back(tp);
+  tp.id(12);
+  tp.is_gcp(false);
+  tpcol.push_back(tp);
+  BOOST_CHECK_EQUAL((int) tpcol.size(), 3);
+  BOOST_CHECK_EQUAL(tpcol.number_gcp(), 2);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())
@@ -56,6 +75,32 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_CLOSE(tp2->line_sigma(1), 0.25, 1e-4);
   BOOST_CHECK_CLOSE(tp2->sample_sigma(3), 0.3, 1e-4);
   BOOST_CHECK_CLOSE(tp2->sample_sigma(1), 0.35, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_coll)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<TiePointCollection> tpcol(new TiePointCollection);
+  TiePoint tp(5);
+  tp.ground_location(boost::shared_ptr<GroundCoordinate>(new Ecr(1, 2, 3)));
+  tp.id(10);
+  tp.is_gcp(true);
+  tp.image_coordinate(3, boost::make_shared<ImageCoordinate>(1, 2), 0.2, 0.3);
+  tp.image_coordinate(1, boost::make_shared<ImageCoordinate>(3, 4), 0.25, 0.35);
+  tpcol->push_back(tp);
+  tp.id(11);
+  tpcol->push_back(tp);
+  tp.id(12);
+  tp.is_gcp(false);
+  tpcol->push_back(tp);
+  std::string d = serialize_write_string(tpcol);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<TiePointCollection> tpcol2 = 
+    serialize_read_string<TiePointCollection>(d);
+  BOOST_CHECK_EQUAL((int) tpcol2->size(), 3);
+  BOOST_CHECK_EQUAL(tpcol2->number_gcp(), 2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

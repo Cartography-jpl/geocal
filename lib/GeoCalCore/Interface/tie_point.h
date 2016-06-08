@@ -43,6 +43,14 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Default constructor
+//-----------------------------------------------------------------------
+
+  TiePoint() {}
+  TiePoint(const TiePoint& Tp);
+  TiePoint& operator=(const TiePoint& Tp);
+  
+//-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
@@ -141,7 +149,45 @@ private:
   std::vector<boost::shared_ptr<ImageCoordinate> > ic_;
   blitz::Array<double, 1> line_sigma_;
   blitz::Array<double, 1> sample_sigma_;
-  TiePoint() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+
+typedef std::vector<boost::shared_ptr<TiePoint> > TiePointVector;
+
+/****************************************************************//**
+  This is a list of TiePoints with a few useful functions added.
+*******************************************************************/
+
+class TiePointCollection: public TiePointVector,
+			  public Printable<TiePointCollection> {
+public:
+//-----------------------------------------------------------------------
+/// Default constructor.
+//-----------------------------------------------------------------------
+
+  TiePointCollection() {}
+
+//-----------------------------------------------------------------------
+/// Constructor with an initial list of TiePoints.
+//-----------------------------------------------------------------------
+  TiePointCollection(const TiePointVector& Tlist)
+    : TiePointVector(Tlist)
+  {}
+
+//-----------------------------------------------------------------------
+/// Destructor
+//-----------------------------------------------------------------------
+  virtual ~TiePointCollection() {}
+
+//-----------------------------------------------------------------------
+/// Number of gcps.
+//-----------------------------------------------------------------------
+  int number_gcp() const;
+  
+  virtual void print(std::ostream& Os) const;
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -149,4 +195,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(TiePoint);
+GEOCAL_EXPORT_KEY(TiePointVector);
+GEOCAL_EXPORT_KEY(TiePointCollection);
 #endif

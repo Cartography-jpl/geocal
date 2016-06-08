@@ -39,7 +39,8 @@ TiePoint::TiePoint(const TiePoint& Tp)
     sample_sigma_(Tp.sample_sigma_.copy())
 {
   for(int i = 0; i < (int) ic_.size(); ++i)
-    ic_[i] = boost::make_shared<ImageCoordinate>(*Tp.ic_[i]);
+    if(Tp.ic_[i])
+      ic_[i] = boost::make_shared<ImageCoordinate>(*Tp.ic_[i]);
 }
 
 //-----------------------------------------------------------------------
@@ -55,7 +56,8 @@ TiePoint& TiePoint::operator=(const TiePoint& Tp)
   line_sigma_.reference(Tp.line_sigma_.copy());
   sample_sigma_.reference(Tp.sample_sigma_.copy());
   for(int i = 0; i < (int) ic_.size(); ++i)
-    ic_[i] = boost::make_shared<ImageCoordinate>(*Tp.ic_[i]);
+    if(Tp.ic_[i])
+      ic_[i] = boost::make_shared<ImageCoordinate>(*Tp.ic_[i]);
   return *this;
 }
 

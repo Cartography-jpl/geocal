@@ -37,12 +37,12 @@ BOOST_AUTO_TEST_CASE(tiepoint_collection_test)
   tp.is_gcp(true);
   tp.image_coordinate(3, boost::make_shared<ImageCoordinate>(1, 2), 0.2, 0.3);
   tp.image_coordinate(1, boost::make_shared<ImageCoordinate>(3, 4), 0.25, 0.35);
-  tpcol.push_back(tp);
+  tpcol.push_back(boost::make_shared<TiePoint>(tp));
   tp.id(11);
-  tpcol.push_back(tp);
+  tpcol.push_back(boost::make_shared<TiePoint>(tp));
   tp.id(12);
   tp.is_gcp(false);
-  tpcol.push_back(tp);
+  tpcol.push_back(boost::make_shared<TiePoint>(tp));
   BOOST_CHECK_EQUAL((int) tpcol.size(), 3);
   BOOST_CHECK_EQUAL(tpcol.number_gcp(), 2);
 }
@@ -88,12 +88,12 @@ BOOST_AUTO_TEST_CASE(serialization_coll)
   tp.is_gcp(true);
   tp.image_coordinate(3, boost::make_shared<ImageCoordinate>(1, 2), 0.2, 0.3);
   tp.image_coordinate(1, boost::make_shared<ImageCoordinate>(3, 4), 0.25, 0.35);
-  tpcol->push_back(tp);
+  tpcol->push_back(boost::make_shared<TiePoint>(tp));
   tp.id(11);
-  tpcol->push_back(tp);
+  tpcol->push_back(boost::make_shared<TiePoint>(tp));
   tp.id(12);
   tp.is_gcp(false);
-  tpcol->push_back(tp);
+  tpcol->push_back(boost::make_shared<TiePoint>(tp));
   std::string d = serialize_write_string(tpcol);
   if(false)
     std::cerr << d;

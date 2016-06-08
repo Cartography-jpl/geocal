@@ -15,6 +15,8 @@ do_cleanup = True
 original_env = None
 prefix = "picmtch5_xx"
 def setup():
+    if(not VicarFile.vicar_available()):
+        raise SkipTest
     check_vicarb()
     add_tae_path(os.path.abspath(os.getcwd()), original_env)
     # Check for picmtch5. Depending on how we are built we may or may not

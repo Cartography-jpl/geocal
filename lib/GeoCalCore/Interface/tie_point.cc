@@ -1,6 +1,7 @@
 #include "tie_point.h"
 #include "geocal_quaternion.h"
 #include "geocal_serialize_support.h"
+#include <boost/make_shared.hpp>
 #include <cmath>
 
 using namespace GeoCal;

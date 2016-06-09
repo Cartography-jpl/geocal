@@ -12,7 +12,7 @@
 
 AC_DEFUN([AC_GEOS],
 [
-AC_HANDLE_WITH_ARG([geos], [geos], [Geos], $2, $3)
+AC_HANDLE_WITH_ARG([geos], [geos], [Geos], $2, $3, $1)
 if test "x$want_geos" = "xyes"; then
         AC_MSG_CHECKING([for GEOS library])
         succeeded=no

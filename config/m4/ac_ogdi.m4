@@ -12,7 +12,7 @@
 
 AC_DEFUN([AC_OGDI],
 [
-AC_HANDLE_WITH_ARG([ogdi], [ogdi], [ogdi], $2, $3)
+AC_HANDLE_WITH_ARG([ogdi], [ogdi], [ogdi], $2, $3, $1)
 if test "x$want_ogdi" = "xyes"; then
         AC_MSG_CHECKING([for Ogdi library])
         succeeded=no

@@ -6,7 +6,7 @@ from past.utils import old_div
 from builtins import object
 from geocal_swig import *
 from .igc_collection_extension import *
-from .tie_point import *
+from .tie_point_extension import *
 from .ray_intersect import *
 from .feature_detector_extension import *
 from .misc import *
@@ -253,10 +253,11 @@ class TiePointCollect(object):
             res = list(map(func, iplist))
         log.info("Done with matching")
         log.info("Time: %f" % (time.time() - tstart))
-        res = TiePointCollection([i for i in res if i is not None])
-        log.info("Total number tp: %d" % len(res))
-        log.info("Number GCPs:     %d" % res.number_gcp)
-        return res
+        res2 = TiePointCollection()
+        res2.extend([i for i in res if i is not None])
+        log.info("Total number tp: %d" % len(res2))
+        log.info("Number GCPs:     %d" % res2.number_gcp)
+        return res2
 
     def tie_point(self, ic1):
         '''Return a tie point that is roughly at the given location in the
@@ -264,13 +265,13 @@ class TiePointCollect(object):
         first image, i.e., we don\'t chain by map 2 to 3 and 3 to 4. 
         If we aren't successful at matching, this returns None.'''
         tp = TiePoint(self.number_image)
-        tp.image_location[self.base_image_index] = ic1, 0.05, 0.05
+        tp.image_coordinate(self.base_image_index, ic1, 0.05, 0.05)
         for i in range(self.start_image_index, self.end_image_index):
             if(i != self.base_image_index):
                 ic2, lsigma, ssigma, success, diagnostic = \
                     self.itoim[i].match(ic1)
                 if(success):
-                    tp.image_location[i] = ic2, lsigma, ssigma
+                    tp.image_coordinate(i, ic2, lsigma, ssigma)
         if(self.ref_image is not None):
             i = self.igc_collection.number_image
             ic2, lsigma, ssigma, success, diagnostic = \
@@ -389,8 +390,8 @@ class TiePointCollectFM(object):
                     tp = res[idx]
                 else:
                     tp = TiePoint(len(self.raster_image))
-                    tp.image_location[ind] = (ic1, 0.5, 0.5)
-                tp.image_location[i] = (ic2, 0.5, 0.5)
+                    tp.image_coordinate(ind, ic1, 0.5, 0.5)
+                tp.image_coordinate(i, ic2, 0.5, 0.5)
                 res[idx] = tp
         if(kp_and_desc_ref is not None):
             good = self.match_feature_ref(kp_and_desc, kp_and_desc_ref, ind)
@@ -399,7 +400,7 @@ class TiePointCollectFM(object):
                     tp = res[idx]
                 else:
                     tp = TiePoint(len(self.raster_image))
-                    tp.image_location[ind] = (ic1, 0.5, 0.5)
+                    tp.image_coordinate(ind, ic1, 0.5, 0.5)
                 tp.is_gcp = True
                 tp.ground_location = Ecr(self.ref_image.ground_coordinate(ic2))
                 res[idx] = tp
@@ -440,18 +441,18 @@ def _point_list(ind1, ind2_or_ref_image, tpcol):
     pt2 = []
     ind = []
     for i, tp in enumerate(tpcol):
-        ic1 = tp.image_location[ind1]
+        ic1 = tp.image_coordinate(ind1)
         if(isinstance(ind2_or_ref_image,RasterImage)):
             if(tp.is_gcp):
-                ic2 = [ind2_or_ref_image.coordinate(tp.ground_location), 0.5, 0.5]
+                ic2 = ind2_or_ref_image.coordinate(tp.ground_location)
             else:
                 ic2 = None
         else:
             ic2 = tp.image_location[ind2_or_ref_image]
         if(ic1 is not None and
            ic2 is not None):
-            pt1.append([ic1[0].line, ic1[0].sample])
-            pt2.append([ic2[0].line, ic2[0].sample])
+            pt1.append([ic1.line, ic1.sample])
+            pt2.append([ic2.line, ic2.sample])
             ind.append(i)
     return [np.array(pt1), np.array(pt2), np.array(ind)]
 
@@ -466,8 +467,8 @@ def _point_list_surface_proj(ind1, ind2_or_ref_image, tpcol,
     pt2 = []
     ind = []
     for i, tp in enumerate(tpcol):
-        if(tp.image_location[ind1] is not None):
-            ic1 = ref_image.coordinate(igc1.ground_coordinate(tp.image_location[ind1][0]))
+        if(tp.image_coordinate(ind1) is not None):
+            ic1 = ref_image.coordinate(igc1.ground_coordinate(tp.image_coordinate(ind1)))
         else:
             ic1 = None
         if(isinstance(ind2_or_ref_image,RasterImage)):
@@ -476,8 +477,8 @@ def _point_list_surface_proj(ind1, ind2_or_ref_image, tpcol,
             else:
                 ic2 = None
         else:
-            if(tp.image_location[ind2_or_ref_image] is not None):
-                ic2 = ref_image.coordinate(igc2.ground_coordinate(tp.image_location[ind2_or_ref_image][0]))
+            if(tp.image_coordinate(ind2_or_ref_image) is not None):
+                ic2 = ref_image.coordinate(igc2.ground_coordinate(tp.image_coordiante(ind2_or_ref_image)))
             else:
                 ic1 = None
         if(ic1 is not None and
@@ -500,8 +501,13 @@ def _outlier_reject_ransac(ind1, ind2_or_ref_image, tpcol, threshold,
     if(pt1.shape[0] < 1):
         return tpcol
     m, mask = cv2.findFundamentalMat(pt1, pt2, cv2.FM_RANSAC, threshold)
-    m = (mask == 0)
-    bad_pt = ind[m[:,0]]
+    # if we have too few points, we don't get a result. Really shouldn't
+    # keep any of the tiepoints then
+    if(mask is None):
+        bad_pt = ind
+    else:
+        m = (mask == 0)
+        bad_pt = ind[m[:,0]]
     return [tp for i, tp in enumerate(tpcol) if i not in bad_pt]
 
 def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3.0,
@@ -522,7 +528,7 @@ def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3.0,
     If the Igccol is passed in, then we use that to project to the surface 
     first before looking for outliers. This can be useful for Igcs that are 
     too far from a frame camera, e.g., aircraft data'''
-    nimg = len(tpcol[0].image_location)
+    nimg = tpcol[0].number_image
     res = tpcol
     log = logging.getLogger("geocal-python.tie_point_collect")
     log.info("Starting using RANSAC to reject outliers")
@@ -559,10 +565,11 @@ def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3.0,
                                              ref_image = ref_image)
                 
     len3 = len(res)
-    res = TiePointCollection(res)
+    res2 = TiePointCollection()
+    res2.extend(res)
     log.info("Removed %d tiepoints" % (len1 - len2))
     log.info("Removed %d more GCPs" % (len2 - len3))
-    log.info("Ending %s" % res)
+    log.info("Ending %s" % res2)
     log.info("Completed using RANSAC to reject outliers")
-    return res
+    return res2
 

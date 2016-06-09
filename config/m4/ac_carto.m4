@@ -28,7 +28,7 @@
 
 AC_DEFUN([AC_CARTO],
 [
-AC_HANDLE_WITH_ARG([carto], [carto], [Carto], $2, $3)
+AC_HANDLE_WITH_ARG([carto], [carto], [Carto], $2, $3, $1)
 
 if test "x$want_carto" = "xyes"; then
         AC_MSG_CHECKING([for Carto library])

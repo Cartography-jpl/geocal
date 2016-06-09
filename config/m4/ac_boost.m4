@@ -34,7 +34,7 @@
 
 AC_DEFUN([AC_BOOST],
 [
-AC_HANDLE_WITH_ARG([boost], [boost], [BOOST], $2, $3)
+AC_HANDLE_WITH_ARG([boost], [boost], [BOOST], $2, $3, $1)
 
 if test "x$want_boost" = "xyes"; then
         boost_lib_version_req=ifelse([$4], ,1.20.0,$4)

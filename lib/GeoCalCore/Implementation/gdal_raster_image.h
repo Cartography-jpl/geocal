@@ -66,6 +66,25 @@ public:
   { return gdal_data_base().file_names(); }
   int band_id() const 
   { return const_cast<GDALRasterBand*>(&raster_band())->GetBand(); }
+
+//-----------------------------------------------------------------------
+/// Return offset, if any to apply to data to get underlying values.
+//-----------------------------------------------------------------------
+  double offset() const
+  { return const_cast<GDALRasterBand*>(&raster_band())->GetOffset();}
+
+//-----------------------------------------------------------------------
+/// Return scale, if any to apply to data to get underlying values.
+//-----------------------------------------------------------------------
+  double scale() const
+  { return const_cast<GDALRasterBand*>(&raster_band())->GetScale();}
+
+//-----------------------------------------------------------------------
+/// Return unit type of underlying values.
+//-----------------------------------------------------------------------
+  std::string unit_type() const
+  { return const_cast<GDALRasterBand*>(&raster_band())->GetUnitType();}
+
   bool update() const
   { return const_cast<GDALRasterBand*>(&raster_band())->GetAccess() == GA_Update; }
 

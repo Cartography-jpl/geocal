@@ -275,12 +275,32 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
         """
         return _ray_caster.RayCaster_next_position(self)
 
+
+    def next_radiance(self, Surface_rad, Fill_value=0.0):
+        """
+
+        blitz::Array< double, 2 > RayCaster::next_radiance(const RasterImage &Surface_rad, double Fill_value=0.0)
+        Frequently you are using a ray caster to simulate what would be seen
+        by a particular camera/measurement device.
+
+        This takes the results of a call to next_position() and uses it to
+        look up what the surface radiance would be. We average over the
+        radiance for the sub pixels and number of integration steps. Pixels
+        that lie outside the range of Surface_rad get assigned a fill value.
+
+        The returned array should be considered "owned" by this class, code
+        calling this class should copy this data if it wants to make any
+        modifications to the underlying data. 
+        """
+        return _ray_caster.RayCaster_next_radiance(self, Surface_rad, Fill_value)
+
     __swig_destroy__ = _ray_caster.delete_RayCaster
 RayCaster._v_start_position = new_instancemethod(_ray_caster.RayCaster__v_start_position, None, RayCaster)
 RayCaster._v_number_position = new_instancemethod(_ray_caster.RayCaster__v_number_position, None, RayCaster)
 RayCaster._v_last_position = new_instancemethod(_ray_caster.RayCaster__v_last_position, None, RayCaster)
 RayCaster._v_current_position = new_instancemethod(_ray_caster.RayCaster__v_current_position, None, RayCaster)
 RayCaster.next_position = new_instancemethod(_ray_caster.RayCaster_next_position, None, RayCaster)
+RayCaster.next_radiance = new_instancemethod(_ray_caster.RayCaster_next_radiance, None, RayCaster)
 RayCaster.__str__ = new_instancemethod(_ray_caster.RayCaster___str__, None, RayCaster)
 RayCaster_swigregister = _ray_caster.RayCaster_swigregister
 RayCaster_swigregister(RayCaster)

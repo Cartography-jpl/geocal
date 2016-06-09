@@ -70,6 +70,10 @@ public:
   %python_attribute(file_names, std::vector<std::string>)
   boost::shared_ptr<MapInfo> map_info_from_nitf_corner(bool Approx_ok = false) const;
   %python_attribute(band_id, int)
+  %python_attribute(offset, double)
+  %python_attribute(scale, double)
+  %python_attribute(unit_type, std::string)
+
   %python_attribute(update, bool)
   %python_attribute(rpc, Rpc)
   %python_attribute(map_info, MapInfo)

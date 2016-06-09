@@ -2,7 +2,7 @@ from nose.tools import *
 from geocal.igc_collection_extension import *
 from geocal.ray_intersect import *
 from geocal.image_ground_connection import *
-from geocal.tie_point import *
+from geocal.tie_point_extension import *
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
@@ -27,9 +27,9 @@ def test_tp():
     igc_coll = IgcArray([igc1, igc2, igc3])
     ri = RayIntersect2(igc_coll)
     tp = TiePoint(3)
-    tp.image_location[0] = ImageCoordinate(944, 916), 0.1, 0.1
-    tp.image_location[1] = ImageCoordinate(975.65, 934.365), 0.1, 0.1
-    tp.image_location[2] = ImageCoordinate(1007.83, 950.128), 0.1, 0.1
+    tp.image_coordinate(0, ImageCoordinate(944, 916), 0.1, 0.1)
+    tp.image_coordinate(1, ImageCoordinate(975.65, 934.365), 0.1, 0.1)
+    tp.image_coordinate(2, ImageCoordinate(1007.83, 950.128), 0.1, 0.1)
     ri.ray_intersect(tp)
     assert distance(tp.ground_location, Geodetic(36.7731550801,
                                                  -116.116742412, 1276.05)) < 1
@@ -42,9 +42,9 @@ def test_ray_intersect3():
     igc_coll = IgcArray([igc1, igc2, igc3])
     ri = RayIntersect3(igc_coll)
     tp = TiePoint(3)
-    tp.image_location[0] = ImageCoordinate(944, 916), 0.1, 0.1
-    tp.image_location[1] = ImageCoordinate(975.65, 934.365), 0.1, 0.1
-    tp.image_location[2] = ImageCoordinate(1007.83, 950.128), 0.1, 0.1
+    tp.image_coordinate(0, ImageCoordinate(944, 916), 0.1, 0.1)
+    tp.image_coordinate(1, ImageCoordinate(975.65, 934.365), 0.1, 0.1)
+    tp.image_coordinate(2, ImageCoordinate(1007.83, 950.128), 0.1, 0.1)
     ri.ray_intersect(tp)
     assert distance(tp.ground_location, Geodetic(36.7731550801,
                                                  -116.116742412, 1276.05)) < 1

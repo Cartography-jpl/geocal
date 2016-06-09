@@ -5741,6 +5741,9 @@ namespace swig {
 	};
       }
     
+
+  #define SWIG_From_double   PyFloat_FromDouble 
+
 SWIGINTERN std::string GeoCal_GdalRasterImage_metadata__SWIG_0(GeoCal::GdalRasterImage const *self,std::string const &Metadata_item){
         return self->metadata<std::string>(Metadata_item);
      }
@@ -10518,6 +10521,135 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GdalRasterImage__v_offset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_offset" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::GdalRasterImage const *)arg1)->offset();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GdalRasterImage__v_scale(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_scale" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::GdalRasterImage const *)arg1)->scale();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GdalRasterImage__v_unit_type(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GdalRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_unit_type" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::GdalRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::GdalRasterImage const *)arg1)->unit_type();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GdalRasterImage__v_update(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GdalRasterImage *arg1 = (GeoCal::GdalRasterImage *) 0 ;
@@ -13399,6 +13531,21 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"int GeoCal::GdalRasterImage::band_id() const\n"
 		"\n"
+		""},
+	 { (char *)"GdalRasterImage__v_offset", (PyCFunction)_wrap_GdalRasterImage__v_offset, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::GdalRasterImage::offset() const\n"
+		"Return offset, if any to apply to data to get underlying values. \n"
+		""},
+	 { (char *)"GdalRasterImage__v_scale", (PyCFunction)_wrap_GdalRasterImage__v_scale, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::GdalRasterImage::scale() const\n"
+		"Return scale, if any to apply to data to get underlying values. \n"
+		""},
+	 { (char *)"GdalRasterImage__v_unit_type", (PyCFunction)_wrap_GdalRasterImage__v_unit_type, METH_O, (char *)"\n"
+		"\n"
+		"std::string GeoCal::GdalRasterImage::unit_type() const\n"
+		"Return unit type of underlying values. \n"
 		""},
 	 { (char *)"GdalRasterImage__v_update", (PyCFunction)_wrap_GdalRasterImage__v_update, METH_O, (char *)"\n"
 		"\n"

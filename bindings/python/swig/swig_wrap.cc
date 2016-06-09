@@ -56,6 +56,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(tiled_file)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_serialize_function)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(image_coordinate)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(tie_point)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(with_parameter)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(look_vector)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_coordinate)(void);
@@ -116,6 +117,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(pyramid_image_matcher)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_map_projected)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_simulated)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_simulated_ray_caster)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_image_to_image_match)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(surface_image_to_image_match)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(location_to_file)(void);
@@ -400,6 +402,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_tiled_file", SWIG_INIT_FUNC(tiled_file));
   SWIG_INIT_MODULE(package, "_geocal_serialize_function", SWIG_INIT_FUNC(geocal_serialize_function));
   SWIG_INIT_MODULE(package, "_image_coordinate", SWIG_INIT_FUNC(image_coordinate));
+  SWIG_INIT_MODULE(package, "_tie_point", SWIG_INIT_FUNC(tie_point));
   SWIG_INIT_MODULE(package, "_with_parameter", SWIG_INIT_FUNC(with_parameter));
   SWIG_INIT_MODULE(package, "_look_vector", SWIG_INIT_FUNC(look_vector));
   SWIG_INIT_MODULE(package, "_ground_coordinate", SWIG_INIT_FUNC(ground_coordinate));
@@ -460,6 +463,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_pyramid_image_matcher", SWIG_INIT_FUNC(pyramid_image_matcher));
   SWIG_INIT_MODULE(package, "_igc_map_projected", SWIG_INIT_FUNC(igc_map_projected));
   SWIG_INIT_MODULE(package, "_igc_simulated", SWIG_INIT_FUNC(igc_simulated));
+  SWIG_INIT_MODULE(package, "_igc_simulated_ray_caster", SWIG_INIT_FUNC(igc_simulated_ray_caster));
   SWIG_INIT_MODULE(package, "_igc_image_to_image_match", SWIG_INIT_FUNC(igc_image_to_image_match));
   SWIG_INIT_MODULE(package, "_surface_image_to_image_match", SWIG_INIT_FUNC(surface_image_to_image_match));
   SWIG_INIT_MODULE(package, "_location_to_file", SWIG_INIT_FUNC(location_to_file));

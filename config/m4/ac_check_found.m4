@@ -28,8 +28,8 @@ library.] m4_bmatch([$5],[can_build], [You can specify --with-][$2][=build if yo
 own local copy of ][$3][.
 
 You can also specify THIRDPARTY=build if you want to build a local
-copy of all the libraries/programs, or THIRDPARTY=build_needed to
-build a local copy all all the libraries/programs we don not otherwise
+copy of all the libraries/programs or THIRDPARTY=build_needed to
+build a local copy all all the libraries/programs we do not otherwise
 find on the system.
 ]))
   fi

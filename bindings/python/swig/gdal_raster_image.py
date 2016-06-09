@@ -357,6 +357,48 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
         return self._v_band_id()
 
 
+    def _v_offset(self):
+        """
+
+        double GeoCal::GdalRasterImage::offset() const
+        Return offset, if any to apply to data to get underlying values. 
+        """
+        return _gdal_raster_image.GdalRasterImage__v_offset(self)
+
+
+    @property
+    def offset(self):
+        return self._v_offset()
+
+
+    def _v_scale(self):
+        """
+
+        double GeoCal::GdalRasterImage::scale() const
+        Return scale, if any to apply to data to get underlying values. 
+        """
+        return _gdal_raster_image.GdalRasterImage__v_scale(self)
+
+
+    @property
+    def scale(self):
+        return self._v_scale()
+
+
+    def _v_unit_type(self):
+        """
+
+        std::string GeoCal::GdalRasterImage::unit_type() const
+        Return unit type of underlying values. 
+        """
+        return _gdal_raster_image.GdalRasterImage__v_unit_type(self)
+
+
+    @property
+    def unit_type(self):
+        return self._v_unit_type()
+
+
     def _v_update(self):
         """
 
@@ -512,6 +554,9 @@ GdalRasterImage.set_metadata = new_instancemethod(_gdal_raster_image.GdalRasterI
 GdalRasterImage._v_file_names = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_file_names, None, GdalRasterImage)
 GdalRasterImage.map_info_from_nitf_corner = new_instancemethod(_gdal_raster_image.GdalRasterImage_map_info_from_nitf_corner, None, GdalRasterImage)
 GdalRasterImage._v_band_id = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_band_id, None, GdalRasterImage)
+GdalRasterImage._v_offset = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_offset, None, GdalRasterImage)
+GdalRasterImage._v_scale = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_scale, None, GdalRasterImage)
+GdalRasterImage._v_unit_type = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_unit_type, None, GdalRasterImage)
 GdalRasterImage._v_update = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_update, None, GdalRasterImage)
 GdalRasterImage._v_rpc = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_rpc, None, GdalRasterImage)
 GdalRasterImage._v_map_info = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_map_info, None, GdalRasterImage)

@@ -37,13 +37,13 @@ class RayIntersect2(object):
         cnt = 0
         max_dist = 0
         for i1 in range(self.igccol.number_image):
-            if(not tie_point.image_location[i1]): continue
+            if(not tie_point.image_coordinate(i1)): continue
             for i2 in range(i1 + 1, self.igccol.number_image):
-                if(tie_point.image_location[i2]): break
+                if(tie_point.image_coordinate(i2)): break
             else:
                 break
-            t, skew = self.two_ray_intersect(tie_point.image_location[i1][0],
-                                             tie_point.image_location[i2][0],
+            t, skew = self.two_ray_intersect(tie_point.image_coordinate(i1),
+                                             tie_point.image_coordinate(i2),
                                              i1, i2)
             max_dist = max(abs(skew), max_dist)
             t = np.array([t.position[0], t.position[1], t.position[2]])
@@ -91,12 +91,14 @@ class RayIntersect3(object):
         j = 0
         pt = Ecr(x[0], x[1], x[2])
         for i in range(self.tp.number_image):
-            if(self.tp.image_location[i]):
-                ic, lsigma, ssigma = self.tp.image_location[i]
+            if(self.tp.image_coordinate(i)):
+                ic = self.tp.image_coordinate(i)
                 try:
                     icpred = self.igccol.image_coordinate(i, pt)
-                    res[j] = old_div((ic.line - icpred.line), lsigma)
-                    res[j + 1] = old_div((ic.sample - icpred.sample), ssigma)
+                    res[j] = old_div((ic.line - icpred.line),
+                                     self.tp.line_sigma(i))
+                    res[j + 1] = old_div((ic.sample - icpred.sample),
+                                         self.tp.sample_sigma(i))
                 except RuntimeError as e:
                     if(str(e) != "ImageGroundConnectionFailed"):
                         raise e
@@ -110,12 +112,14 @@ class RayIntersect3(object):
         j = 0
         pt = Ecr(x[0], x[1], x[2])
         for i in range(self.tp.number_image):
-            if(self.tp.image_location[i]):
-                ic, lsigma, ssigma = self.tp.image_location[i]
+            if(self.tp.image_coordinate(i)):
+                ic = self.tp.image_coordinate(i)
                 try:
                     jac = self.igccol.image_coordinate_jac_cf(i, pt)
-                    res[j, :] = old_div(-jac[0,:], lsigma)
-                    res[j + 1, :] = old_div(-jac[1,:], ssigma)
+                    res[j, :] = old_div(-jac[0,:],
+                                        self.tp.line_sigma(i))
+                    res[j + 1, :] = old_div(-jac[1,:],
+                                            self.tp.sample_sigma(i))
                 except RuntimeError as e:
                     if(str(e) != "ImageGroundConnectionFailed"):
                         raise e

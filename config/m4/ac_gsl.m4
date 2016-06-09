@@ -27,7 +27,7 @@
 
 AC_DEFUN([AC_GSL],
 [
-AC_HANDLE_WITH_ARG([gsl], [gsl], [GSL], $2, $3)
+AC_HANDLE_WITH_ARG([gsl], [gsl], [GSL], $2, $3, $1)
 if test "x$want_gsl" = "xyes"; then
         AC_MSG_CHECKING([for GSL library])
         succeeded=no

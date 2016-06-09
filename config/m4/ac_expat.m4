@@ -12,7 +12,7 @@
 
 AC_DEFUN([AC_EXPAT],
 [
-AC_HANDLE_WITH_ARG([expat], [expat], [expat], $2, $3)
+AC_HANDLE_WITH_ARG([expat], [expat], [expat], $2, $3, $1)
 if test "x$want_expat" = "xyes"; then
         AC_MSG_CHECKING([for expat library])
         succeeded=no

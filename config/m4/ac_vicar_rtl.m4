@@ -30,7 +30,7 @@
 
 AC_DEFUN([AC_VICAR_RTL],
 [
-AC_HANDLE_WITH_ARG([vicar_rtl], [vicar-rtl], [VICAR RTL], $2, $3)
+AC_HANDLE_WITH_ARG([vicar_rtl], [vicar-rtl], [VICAR RTL], $2, $3, $1)
 
 if test "x$want_vicar_rtl" = "xyes"; then
         AC_MSG_CHECKING([for VICAR RTL library])

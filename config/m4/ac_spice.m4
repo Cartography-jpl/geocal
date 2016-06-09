@@ -28,7 +28,7 @@
 
 AC_DEFUN([AC_SPICE],
 [
-AC_HANDLE_WITH_ARG([spice], [spice], [SPICE], $2, $3)
+AC_HANDLE_WITH_ARG([spice], [spice], [SPICE], $2, $3, $1)
 
 if test "x$want_spice" = "xyes"; then
         AC_MSG_CHECKING([for SPICE library])

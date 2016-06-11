@@ -1,6 +1,6 @@
 from future import standard_library
 standard_library.install_aliases()
-from nose.tools import *
+from numpy.testing import assert_almost_equal
 from nose.plugins.skip import Skip, SkipTest
 from geocal.air_mspi_igc import *
 import os.path

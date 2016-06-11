@@ -1,4 +1,3 @@
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 import numpy as np
 import numpy.testing as npt

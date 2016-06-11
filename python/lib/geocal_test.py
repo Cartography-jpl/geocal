@@ -1,5 +1,5 @@
-from nose.tools import *
 from geocal_swig import *
+from numpy.testing import assert_almost_equal
 import datetime
 
 # Unit tests for geocal python code

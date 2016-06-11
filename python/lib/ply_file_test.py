@@ -1,4 +1,3 @@
-from nose.tools import *
 from geocal.ply_file import *
 
 def test_ply_file():

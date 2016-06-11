@@ -1,4 +1,3 @@
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 try:
     from shape_file import *

@@ -258,7 +258,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
 	$(top_srcdir)/config/m4/ac_python.m4 \
 	$(top_srcdir)/config/m4/ac_python_module_with_version.m4 \
-	$(top_srcdir)/config/m4/ac_python_nosetests.m4 \
+	$(top_srcdir)/config/m4/ac_python_pytest.m4 \
 	$(top_srcdir)/config/m4/ac_python_sphinx.m4 \
 	$(top_srcdir)/config/m4/ac_search_lib.m4 \
 	$(top_srcdir)/config/m4/ac_spice.m4 \
@@ -1833,7 +1833,6 @@ MSPI_SHARED_CFLAGS = @MSPI_SHARED_CFLAGS@
 MSPI_SHARED_LIBS = @MSPI_SHARED_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
-NOSETESTS = @NOSETESTS@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OGDI_CFLAGS = @OGDI_CFLAGS@
@@ -1855,6 +1854,7 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
+PYTEST = @PYTEST@
 PYTHON = @PYTHON@
 PYTHON_CONFIG = @PYTHON_CONFIG@
 PYTHON_CPPFLAGS = @PYTHON_CPPFLAGS@
@@ -2836,6 +2836,12 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
+# Number of jobs to run at once. Default is to automatically determine this,
+# but you can specify a different number.
+#PYTEST_NJOB=auto
+PYTEST_NJOB = 1
+PYTEST_EXTRAFLAGS = 
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -10393,13 +10399,14 @@ install-python: all
 
 # Backdoor rule to do a quick install when we are just varying python
 install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
+
 python_check:
 	export PYTHONPATH=$(prefix)/$(platpythondir):$(prefix)/$(pythondir):${PYTHONPATH} && \
         export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         $(setup_afids_data) && \
         $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \
-        $(NOSETESTS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
+        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
 
 # We don't actually replace the shebang, this was done for a short time
 # when we were porting to python 3. But go ahead and leave this in commented

@@ -4,7 +4,6 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import object
 from past.utils import old_div
-from nose.tools import *
 from geocal_swig import *
 from geocal.tie_point_collect import *
 from geocal.image_ground_connection import *
@@ -17,7 +16,7 @@ import numpy as np
 from nose.plugins.skip import Skip, SkipTest
 import logging
 import sys
-import numpy.testing as npt
+from numpy.testing import assert_almost_equal
 
 console = logging.StreamHandler(stream=sys.stdout)
 console.setLevel(logging.WARNING)
@@ -107,7 +106,7 @@ class TestClass(object):
         # Can compare results if we are diagnosing issue
         if False:
             rexpect = read_shelve("simultaneous_bundle_adjustment_test.db:eq_expect")
-            npt.assert_almost_equal(sba.sba_eq(sba.parameter), rexpect)
+            assert_almost_equal(sba.sba_eq(sba.parameter), rexpect)
 
     def test_sba_eq_constant_gcp(self):
         assert len(sba_constant_gcp.surface_constraint()) == 95 - 2
@@ -127,7 +126,7 @@ class TestClass(object):
         # Can compare results if we are diagnosing issue
         if False:
             rexpect = read_shelve("simultaneous_bundle_adjustment_test.db:jac_expect")
-            npt.assert_almost_equal(t.todense(), rexpect)
+            assert_almost_equal(t.todense(), rexpect)
 
     def test_solve_lm(self):
         # For this test, want to see lm_optimize diagnostic messages

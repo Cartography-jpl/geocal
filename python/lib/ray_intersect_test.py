@@ -1,8 +1,8 @@
-from nose.tools import *
 from geocal.igc_collection_extension import *
 from geocal.ray_intersect import *
 from geocal.image_ground_connection import *
 from geocal.tie_point_extension import *
+from numpy.testing import assert_almost_equal
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 

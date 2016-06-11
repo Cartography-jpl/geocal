@@ -1,9 +1,9 @@
-from nose.tools import *
 from sqlite_shelf import *
 import os
 import time
 from geocal_swig import ImageCoordinate, have_serialize_supported
 from nose.plugins.skip import Skip, SkipTest
+from numpy.testing import assert_almost_equal
 
 def test_sqlite_shelf():
     try:

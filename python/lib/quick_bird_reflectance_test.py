@@ -1,4 +1,3 @@
-from nose.tools import *
 from geocal.quick_bird_reflectance import *
 import os
 import numpy as np

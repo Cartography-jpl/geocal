@@ -1,7 +1,6 @@
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 from geocal_swig import *
 import pickle

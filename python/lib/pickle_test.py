@@ -8,8 +8,8 @@ from past.utils import old_div
 # work correctly.
 import pickle
 from geocal_swig import *
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
+from numpy.testing import assert_almost_equal
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 

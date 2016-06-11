@@ -682,12 +682,12 @@ libgeocal
 BUILD_PYTHON_FALSE
 BUILD_PYTHON_TRUE
 build_python
-NOSETESTS
+PYTEST
 SPHINXBUILD
 PYTHON_LDFLAGS
 PYTHON_CONFIG
-HAVE_NOSETESTS_FALSE
-HAVE_NOSETESTS_TRUE
+HAVE_PYTEST_FALSE
+HAVE_PYTEST_TRUE
 HAVE_SPHINX_FALSE
 HAVE_SPHINX_TRUE
 platpythondir
@@ -1064,7 +1064,7 @@ CARTO_LIBS
 PYTHON
 PYTHON_VERSION
 SPHINXBUILD
-NOSETESTS'
+PYTEST'
 
 
 # Initialize some variables set by options.
@@ -1858,8 +1858,8 @@ Some influential environment variables:
               name.
   SPHINXBUILD Override the Sphinx build executable to use, the default is just
               'sphinx-build'
-  NOSETESTS   Override the nosetests executable to use, the default is just
-              'nosetests'
+  PYTEST      Override the pytest executable to use, the default is just
+              'py.test'
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -22365,7 +22365,7 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
 
 
      SPHINXBUILD="\${prefix}/bin/sphinx-build"
-     NOSETESTS="\${prefix}/bin/nosetests"
+     PYTEST="\${prefix}/bin/py.test"
       if true; then
   HAVE_SPHINX_TRUE=
   HAVE_SPHINX_FALSE='#'
@@ -22375,11 +22375,11 @@ else
 fi
 
       if true; then
-  HAVE_NOSETESTS_TRUE=
-  HAVE_NOSETESTS_FALSE='#'
+  HAVE_PYTEST_TRUE=
+  HAVE_PYTEST_FALSE='#'
 else
-  HAVE_NOSETESTS_TRUE='#'
-  HAVE_NOSETESTS_FALSE=
+  HAVE_PYTEST_TRUE='#'
+  HAVE_PYTEST_FALSE=
 fi
 
    else
@@ -22825,21 +22825,21 @@ fi
 
 
 
-        have_nosetests=no
+        have_pytest=no
 
-        if test "$NOSETESTS" == ""; then
-           NOSETESTS=nosetests
+        if test "$PYTEST" == ""; then
+           PYTEST=py.test
         fi
-        # Extract the first word of "$NOSETESTS", so it can be a program name with args.
-set dummy $NOSETESTS; ac_word=$2
+        # Extract the first word of "$PYTEST", so it can be a program name with args.
+set dummy $PYTEST; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_path_NOSETESTS+:} false; then :
+if ${ac_cv_path_PYTEST+:} false; then :
   $as_echo_n "(cached) " >&6
 else
-  case $NOSETESTS in
+  case $PYTEST in
   [\\/]* | ?:[\\/]*)
-  ac_cv_path_NOSETESTS="$NOSETESTS" # Let the user override the test with a path.
+  ac_cv_path_PYTEST="$PYTEST" # Let the user override the test with a path.
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
@@ -22849,7 +22849,7 @@ do
   test -z "$as_dir" && as_dir=.
     for ac_exec_ext in '' $ac_executable_extensions; do
   if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_NOSETESTS="$as_dir/$ac_word$ac_exec_ext"
+    ac_cv_path_PYTEST="$as_dir/$ac_word$ac_exec_ext"
     $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
     break 2
   fi
@@ -22860,34 +22860,34 @@ IFS=$as_save_IFS
   ;;
 esac
 fi
-NOSETESTS=$ac_cv_path_NOSETESTS
-if test -n "$NOSETESTS"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $NOSETESTS" >&5
-$as_echo "$NOSETESTS" >&6; }
+PYTEST=$ac_cv_path_PYTEST
+if test -n "$PYTEST"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PYTEST" >&5
+$as_echo "$PYTEST" >&6; }
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 fi
 
 
-        if test -z "$NOSETESTS" ; then
-           { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot find 'nosetests' program." >&5
-$as_echo "$as_me: WARNING: cannot find 'nosetests' program." >&2;}
-           NOSETESTS='echo "Error: nosetests is not installed. " ; false'
+        if test -z "$PYTEST" ; then
+           { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot find 'py.test' program." >&5
+$as_echo "$as_me: WARNING: cannot find 'py.test' program." >&2;}
+           PYTEST='echo "Error: pytest is not installed. " ; false'
         else
-          have_nosetests=yes
+          have_pytest=yes
         fi
- if test "$have_nosetests" = "yes"; then
-  HAVE_NOSETESTS_TRUE=
-  HAVE_NOSETESTS_FALSE='#'
+ if test "$have_pytest" = "yes"; then
+  HAVE_PYTEST_TRUE=
+  HAVE_PYTEST_FALSE='#'
 else
-  HAVE_NOSETESTS_TRUE='#'
-  HAVE_NOSETESTS_FALSE=
+  HAVE_PYTEST_TRUE='#'
+  HAVE_PYTEST_FALSE=
 fi
 
 
-        if test -z "$NOSETESTS" ; then
-           as_fn_error $? "required program nosetests not found" "$LINENO" 5
+        if test -z "$PYTEST" ; then
+           as_fn_error $? "required program py.test not found" "$LINENO" 5
            exit 1
         fi
         pkgpythondir=\${prefix}/\${pythondir}/$PACKAGE
@@ -23143,11 +23143,11 @@ else
 fi
 
          if false; then
-  HAVE_NOSETESTS_TRUE=
-  HAVE_NOSETESTS_FALSE='#'
+  HAVE_PYTEST_TRUE=
+  HAVE_PYTEST_FALSE='#'
 else
-  HAVE_NOSETESTS_TRUE='#'
-  HAVE_NOSETESTS_FALSE=
+  HAVE_PYTEST_TRUE='#'
+  HAVE_PYTEST_FALSE=
 fi
 
         succeeded=yes
@@ -23379,7 +23379,7 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
 
 
      SPHINXBUILD="\${prefix}/bin/sphinx-build"
-     NOSETESTS="\${prefix}/bin/nosetests"
+     PYTEST="\${prefix}/bin/py.test"
       if true; then
   HAVE_SPHINX_TRUE=
   HAVE_SPHINX_FALSE='#'
@@ -23389,11 +23389,11 @@ else
 fi
 
       if true; then
-  HAVE_NOSETESTS_TRUE=
-  HAVE_NOSETESTS_FALSE='#'
+  HAVE_PYTEST_TRUE=
+  HAVE_PYTEST_FALSE='#'
 else
-  HAVE_NOSETESTS_TRUE='#'
-  HAVE_NOSETESTS_FALSE=
+  HAVE_PYTEST_TRUE='#'
+  HAVE_PYTEST_FALSE=
 fi
 
 fi
@@ -24249,32 +24249,32 @@ if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_SPHINX\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${HAVE_NOSETESTS_TRUE}" && test -z "${HAVE_NOSETESTS_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_NOSETESTS\" was never defined.
+if test -z "${HAVE_PYTEST_TRUE}" && test -z "${HAVE_PYTEST_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_PYTEST\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_SPHINX\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${HAVE_NOSETESTS_TRUE}" && test -z "${HAVE_NOSETESTS_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_NOSETESTS\" was never defined.
+if test -z "${HAVE_PYTEST_TRUE}" && test -z "${HAVE_PYTEST_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_PYTEST\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_SPHINX\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${HAVE_NOSETESTS_TRUE}" && test -z "${HAVE_NOSETESTS_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_NOSETESTS\" was never defined.
+if test -z "${HAVE_PYTEST_TRUE}" && test -z "${HAVE_PYTEST_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_PYTEST\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_SPHINX_TRUE}" && test -z "${HAVE_SPHINX_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_SPHINX\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
-if test -z "${HAVE_NOSETESTS_TRUE}" && test -z "${HAVE_NOSETESTS_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_NOSETESTS\" was never defined.
+if test -z "${HAVE_PYTEST_TRUE}" && test -z "${HAVE_PYTEST_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_PYTEST\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_PYTHON_TRUE}" && test -z "${BUILD_PYTHON_FALSE}"; then

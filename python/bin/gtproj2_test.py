@@ -1,5 +1,4 @@
 from geocal import *
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 import subprocess
 import os

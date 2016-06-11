@@ -1,10 +1,8 @@
 from __future__ import print_function
 from builtins import range
-from nose.tools import *
 from geocal.world_view2_reflectance import *
 import os
-import numpy as np
-import numpy.testing as nptest
+from numpy.testing import assert_almost_equal
 from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
@@ -27,8 +25,8 @@ def test_refl():
     ref_expect = np.array([[ 0.18104724,  0.17321347,  0.16450928],
                            [ 0.18931623,  0.17538952,  0.16059239],
                            [ 0.19062186,  0.17800078,  0.16320365]])
-    nptest.assert_almost_equal(wv2.dn2TOAReflectance(dn, 8), 
-                               ref_expect, 8) 
+    assert_almost_equal(wv2.dn2TOAReflectance(dn, 8), 
+                        ref_expect, 8) 
 
 nitf_test_data = "/raid10/sba_gold/mali_cosi/"
 def test_nitf():

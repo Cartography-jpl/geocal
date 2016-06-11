@@ -1,4 +1,3 @@
-from nose.tools import *
 from geocal.job_database import *
 from geocal.misc import *
 import logging

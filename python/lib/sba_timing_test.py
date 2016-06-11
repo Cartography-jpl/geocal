@@ -2,7 +2,6 @@ from __future__ import print_function
 from __future__ import division
 from builtins import range
 from past.utils import old_div
-from nose.tools import *
 from geocal_swig import *
 from geocal.tie_point_extension import *
 from geocal.image_ground_connection import *

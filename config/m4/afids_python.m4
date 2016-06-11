@@ -47,9 +47,9 @@ if test "x$want_python" = "xyes"; then
      AC_SUBST(PYTHON_NUMPY_CPPFLAGS)
      AC_SUBST([platpythondir])
      SPHINXBUILD="\${prefix}/bin/sphinx-build"
-     NOSETESTS="\${prefix}/bin/nosetests"
+     PYTEST="\${prefix}/bin/py.test"
      AM_CONDITIONAL([HAVE_SPHINX], [true])
-     AM_CONDITIONAL([HAVE_NOSETESTS], [true])
+     AM_CONDITIONAL([HAVE_PYTEST], [true])
    else
      if test "$1" == "required"; then
 	AC_PYTHON_DEVEL([>= '2.6.1'])
@@ -65,9 +65,9 @@ if test "x$want_python" = "xyes"; then
         AC_SUBST([PYTHON_NUMPY_CPPFLAGS])
         AC_SUBST([platpythondir])
         AC_PROG_SPHINX
-        AC_PROG_NOSETESTS
-        if test -z "$NOSETESTS" ; then
-           AC_MSG_ERROR(required program nosetests not found)
+        AC_PROG_PYTEST
+        if test -z "$PYTEST" ; then
+           AC_MSG_ERROR(required program py.test not found)
            exit 1
         fi     
         AC_SUBST([pkgpythondir], [\${prefix}/\${pythondir}/$PACKAGE])
@@ -80,7 +80,7 @@ if test "x$want_python" = "xyes"; then
         platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
         AC_SUBST([platpythondir])
 	AM_CONDITIONAL([HAVE_SPHINX], [false])
-        AM_CONDITIONAL([HAVE_NOSETESTS], [false])
+        AM_CONDITIONAL([HAVE_PYTEST], [false])
         succeeded=yes
         have_python=no
     fi
@@ -104,9 +104,9 @@ if test "$succeeded" != "yes" -a "x$build_needed_python" == "xyes" ; then
      AC_SUBST(PYTHON_NUMPY_CPPFLAGS)
      AC_SUBST([platpythondir])
      SPHINXBUILD="\${prefix}/bin/sphinx-build"
-     NOSETESTS="\${prefix}/bin/nosetests"
+     PYTEST="\${prefix}/bin/py.test"
      AM_CONDITIONAL([HAVE_SPHINX], [true])
-     AM_CONDITIONAL([HAVE_NOSETESTS], [true])
+     AM_CONDITIONAL([HAVE_PYTEST], [true])
 fi
 
 AM_CONDITIONAL([BUILD_PYTHON], [test "$build_python" = "yes"])

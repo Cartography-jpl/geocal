@@ -1,6 +1,5 @@
 from geocal.misc import *
 import os.path
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 
 # Simple test to see if we have AFIDS data available. We check for the

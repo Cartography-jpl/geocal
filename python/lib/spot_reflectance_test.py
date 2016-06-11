@@ -1,4 +1,3 @@
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 from geocal.spot_reflectance import *
 import os

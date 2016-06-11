@@ -1,4 +1,3 @@
-from nose.tools import *
 from geocal.image_ground_connection import *
 from nose.plugins.skip import Skip, SkipTest
 

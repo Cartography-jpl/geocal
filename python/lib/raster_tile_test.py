@@ -1,6 +1,5 @@
 from geocal_swig import *
 from raster_tile import *
-from nose.tools import *
 import os
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"

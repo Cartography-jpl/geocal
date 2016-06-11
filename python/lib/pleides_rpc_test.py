@@ -1,7 +1,7 @@
 from builtins import str
 from builtins import range
-from nose.tools import *
 from pleides_rpc import *
+from numpy.testing import assert_almost_equal
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 xml_fname = test_data + "RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML"

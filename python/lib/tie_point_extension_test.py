@@ -1,6 +1,5 @@
 from __future__ import print_function
 from builtins import range
-from nose.tools import *
 from geocal_swig import *
 from geocal.tie_point_extension import *
 from geocal.image_ground_connection import *

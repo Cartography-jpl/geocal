@@ -1,4 +1,3 @@
-from nose.tools import *
 from geocal.ikonos_reflectance import *
 import os
 import numpy as np

@@ -1,10 +1,9 @@
 from __future__ import division
 from builtins import range
 from past.utils import old_div
-from nose.tools import *
 from geocal_swig import *
 from nose.plugins.skip import Skip, SkipTest
-import numpy.testing as npt
+from numpy.testing import assert_almost_equal
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
@@ -106,12 +105,12 @@ def test_insert_attitude_time_point():
     assert (orb.parameter == [0, 0, 0, 0, 0, 0]).all()
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600]
     orb.insert_attitude_time_point(t3)
-    npt.assert_almost_equal(orb.parameter,
+    assert_almost_equal(orb.parameter,
                            [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600,
                             0, 0, 0])
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, -10, -20, -30]
     orb.insert_attitude_time_point(t2)
-    npt.assert_almost_equal(orb.parameter,
+    assert_almost_equal(orb.parameter,
                            [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 0, 0, 0,
                             -10, -20, -30])
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 20, 40, 

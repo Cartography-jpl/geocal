@@ -2,9 +2,9 @@ from __future__ import division
 from past.utils import old_div
 from geocal_swig import *
 from geocal.vicar_wrap import *
-from nose.tools import *
 import math
 from nose.plugins.skip import Skip, SkipTest
+from numpy.testing import assert_almost_equal
 import os
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"

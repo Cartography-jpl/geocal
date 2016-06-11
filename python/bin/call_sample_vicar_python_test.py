@@ -1,5 +1,4 @@
 from geocal import *
-from nose.tools import *
 from vicar_test_support import *
 import subprocess
 import os

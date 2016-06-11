@@ -1,4 +1,3 @@
-from nose.tools import *
 from geocal.docopt_simple import *
 
 def test_docopt_simple():

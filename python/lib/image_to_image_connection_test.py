@@ -1,10 +1,10 @@
 from future import standard_library
 standard_library.install_aliases()
-from nose.tools import *
 from geocal.image_to_image_connection import *
 from geocal_swig import *
 import os
 import pickle
+from numpy.testing import assert_almost_equal
 from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/"

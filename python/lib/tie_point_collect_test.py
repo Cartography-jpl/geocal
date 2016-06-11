@@ -1,7 +1,6 @@
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
-from nose.tools import *
 from geocal_swig import *
 from geocal.tie_point_collect import *
 from geocal.image_ground_connection import *

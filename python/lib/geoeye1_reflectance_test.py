@@ -1,4 +1,3 @@
-from nose.tools import *
 from geocal.geoeye1_reflectance import *
 import os
 import numpy as np

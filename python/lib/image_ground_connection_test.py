@@ -2,9 +2,9 @@ from __future__ import division
 from future import standard_library
 standard_library.install_aliases()
 from past.utils import old_div
-from nose.tools import *
 from geocal.image_ground_connection import *
 import pickle
+from numpy.testing import assert_almost_equal
 from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"

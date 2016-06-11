@@ -1,8 +1,9 @@
 from geocal import *
-from nose.tools import *
 import subprocess
 import os
 from nose.plugins.skip import Skip, SkipTest
+from numpy.testing import assert_almost_equal
+
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 def test_gdal_to_nitf():

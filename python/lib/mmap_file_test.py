@@ -4,8 +4,8 @@ standard_library.install_aliases()
 from builtins import range
 from past.utils import old_div
 from geocal.mmap_file import *
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
+from numpy.testing import assert_almost_equal
 import pickle
 
 def test_read_write():

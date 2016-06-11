@@ -2,7 +2,6 @@ from __future__ import print_function
 from __future__ import division
 from builtins import range
 from past.utils import old_div
-from nose.tools import *
 from geocal_swig import *
 from geocal.image_ground_connection import *
 from geocal.igc_collection_extension import *
@@ -12,6 +11,7 @@ import scipy.optimize
 import numpy.testing as npt
 from sqlite_shelf import write_shelve, read_shelve
 from multiprocessing import Pool
+from numpy.testing import assert_almost_equal
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 

@@ -1,7 +1,6 @@
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
-from nose.tools import *
 from nose.plugins.skip import Skip, SkipTest
 from geocal_swig import *
 from geocal.dem_generate import *
@@ -9,6 +8,7 @@ from geocal.image_ground_connection import *
 import multiprocessing
 from multiprocessing import Pool
 import pickle
+from numpy.testing import assert_almost_equal
 from nose.plugins.skip import Skip, SkipTest
 
 test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"

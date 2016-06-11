@@ -1,4 +1,3 @@
-from nose.tools import *
 from geocal_swig import *
 from orbit_extension import *
 from nose.plugins.skip import Skip, SkipTest

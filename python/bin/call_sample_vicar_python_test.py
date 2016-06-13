@@ -4,16 +4,8 @@ import subprocess
 import os
 import sys
 
-# Setup and teardown called automatically by nosetest for whole module
-original_env = None
-def setup():
-    check_vicarb()
-    add_tae_path(os.path.dirname(__file__), original_env)
-
-def teardown():
-    set_original_env(original_env)
-
-def test_call_sample_vicar_python():
+@require_vicarb    
+def test_call_sample_vicar_python(vicarb_env):
     '''Class the sample vicar program.'''
     # This should return the string "ret=101", along with the normal VICAR
     # verbage

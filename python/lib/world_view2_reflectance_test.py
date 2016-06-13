@@ -1,24 +1,22 @@
 from __future__ import print_function
 from builtins import range
 from geocal.world_view2_reflectance import *
-import os
-from numpy.testing import assert_almost_equal
-from nose.plugins.skip import Skip, SkipTest
-
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-
-wv2 = WorldView2Reflectance(test_data + 
-                         "10MAY07185751-M1BS-052360785020_01_P001.IMD",
-                         test_data + 
-                         "10MAY07185751-P1BS-052360785020_01_P001.IMD"
-                         )
+from test_support import *
 
 def test_print():
     '''Test printing of metadata'''
+    wv2 = WorldView2Reflectance(unit_test_data +
+                                "10MAY07185751-M1BS-052360785020_01_P001.IMD",
+                                unit_test_data +
+                                "10MAY07185751-P1BS-052360785020_01_P001.IMD")
     wv2.printMetadata()
 
 def test_refl():
     '''Test reflectance calculation.'''
+    wv2 = WorldView2Reflectance(unit_test_data +
+                                "10MAY07185751-M1BS-052360785020_01_P001.IMD",
+                                unit_test_data +
+                                "10MAY07185751-P1BS-052360785020_01_P001.IMD")
     dn = np.array([[416, 398, 378], 
                    [435, 403, 369], 
                    [438, 409, 375]])
@@ -28,12 +26,12 @@ def test_refl():
     assert_almost_equal(wv2.dn2TOAReflectance(dn, 8), 
                         ref_expect, 8) 
 
-nitf_test_data = "/raid10/sba_gold/mali_cosi/"
+# This test doesn't actually work. Turns out the absCalFactors aren't
+# constant. Talked to Steve, and in the short term we'll just need
+# to pretend these are constant.
+@skip
 def test_nitf():
-    # This test doesn't actually work. Turns out the absCalFactors aren't
-    # constant. Talked to Steve, and in the short term we'll just need
-    # to pretend these are constant.
-    raise SkipTest
+    nitf_test_data = "/raid10/sba_gold/mali_cosi/"
     # We can  only do this if data is available. If it isn't, just skip
     # the test.
     if(not os.path.exists(nitf_test_data)):

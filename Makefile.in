@@ -2135,7 +2135,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/image_coordinate_test.xml \
 	@geocalunittestdata@/srtm_90m_dem/n34w120_L2.tif \
 	@geocalunittestdata@/srtm_90m_dem/n43w69_L2.tif \
-	@srcpythonbin@/*_test.py @srcpythonlib@/test_support.py \
+	@srcpythonbin@/*_test.py @srcpythonlib@/conftest.py \
 	@srcpythonlib@/*_test.py @docpythonsrc@ @vicartestsupportsrc@
 pkgconfig_DATA = 
 
@@ -2839,8 +2839,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
 # Number of jobs to run at once. Default is to automatically determine this,
 # but you can specify a different number.
-#PYTEST_NJOB=auto
-PYTEST_NJOB = 1
+PYTEST_NJOB = auto
 PYTEST_EXTRAFLAGS = 
 PYTEST_FLAGS = -q -n $(PYTEST_NJOB)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml

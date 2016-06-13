@@ -1,12 +1,9 @@
-from geocal_swig import *
 from raster_tile import *
-import os
-
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
+from test_support import *
 
 # Nothing special about this data, it is just a reasonable size for
 # stepping through
-f = GdalRasterImage(test_data + "egm96.img")
+f = GdalRasterImage(unit_test_data + "egm96.img")
 
 def test_tile_iterator():
     tot_size = 0

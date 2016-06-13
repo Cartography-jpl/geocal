@@ -1,5 +1,4 @@
-from geocal_swig import *
-from numpy.testing import assert_almost_equal
+from test_support import *
 
 class WithParameterTest(WithParameter):
     def __init__(self):

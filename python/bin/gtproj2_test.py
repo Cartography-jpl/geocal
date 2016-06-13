@@ -1,25 +1,6 @@
 from geocal import *
-from nose.plugins.skip import Skip, SkipTest
-import subprocess
-import os
-import sys
 import re
 from vicar_test_support import *
-
-# Setup and teardown called automatically by nosetest for whole module
-original_env = None
-prefix = "gtproj2_xxx"
-def setup():
-    check_vicarb()
-    add_tae_path(os.path.dirname(__file__), original_env)
-
-def teardown():
-    set_original_env(original_env)
-    # Clean up the various temporary files
-    if True:
-        subprocess.run("rm %s*" % prefix, shell=True,
-                       stdout=subprocess.PIPE,
-                       stderr=subprocess.PIPE)
 
 def gtgen(filename, label):
     '''This runs the gtgen program. This is used in the original gtproj unit
@@ -35,7 +16,8 @@ def gtgen(filename, label):
     if(res.returncode != 1):
         raise RuntimeError("Call to gtgen failed with:\n%s" % res.stdout)
 
-def test_gtproj2_1():
+@require_vicarb    
+def test_gtproj2_1(vicarb_env):
     '''This corresponds to the test labeled 
     "basic case, geogr-projective, lambert" in the original tstgtproj'''
     # We can't actually run these tests. This are really, really outdated.

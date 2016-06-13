@@ -1,19 +1,17 @@
 from __future__ import division
 from builtins import range
 from past.utils import old_div
-from geocal_swig import *
-from nose.plugins.skip import Skip, SkipTest
-from numpy.testing import assert_almost_equal
-
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
+from test_support import *
 
 try:
     # Depending on the options used when building, this class might
     # not be available. If not, then just skip this test.
-    HdfOrbit_EciTod_TimeAcs
-    orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
+    orb_uncorr = HdfOrbit_EciTod_TimeAcs(unit_test_data + "sample_orbit.h5")
 except NameError:
     orb_uncorr = None
+
+require_orb_uncorr = pytest.mark.skipif(not orb_uncorr,
+                                   reason = "Need to have HDF orbit to run.")
 
 cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        3375, 3648,
@@ -23,9 +21,8 @@ cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        FrameCoordinate(1688.0, 1824.5),
                        QuaternionCamera.LINE_IS_Y)
 
+@require_orb_uncorr
 def test_time():
-    if orb_uncorr is None:
-        raise SkipTest
     t = Time.time_acs(215077459.472);
     img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
     igc = OrbitDataImageGroundConnection(orb_uncorr.orbit_data(t),
@@ -35,12 +32,11 @@ def test_time():
     for i in range(100000):
         t = igc.image_coordinate(gp)
 
+@require_orb_uncorr
 def test_time_rolling():
     '''Test that uses a rolling shutter. This hits the orbit data much more
     than a OrbitDataImageGroundConnection, so we'll check the timing for 
     this.'''
-    if orb_uncorr is None:
-        raise SkipTest
     #orb = OrbitOffsetCorrection(orb_uncorr)
     orb = orb_uncorr
     t = Time.time_acs(215077459.472);
@@ -55,11 +51,10 @@ def test_time_rolling():
     for i in range(1000):
         t = igc.image_coordinate(gp)
     
+@require_orb_uncorr
 def test_orbit_offset_unchanged():
     '''Test orbit where we just forward everything. This makes sure that
     passing through python and C++ works correctly'''
-    if(orb_uncorr is None):
-        raise SkipTest
     orb = OrbitOffsetCorrection(orb_uncorr)
     t = Time.time_acs(215077459.472);
     pt = orb.reference_surface_intersect_approximate(t, cam, 
@@ -68,9 +63,8 @@ def test_orbit_offset_unchanged():
                                         FrameCoordinate(3375, 3648))
     assert distance(pt, pt2) < 0.01
 
+@require_orb_uncorr
 def test_orbit_offset_pos():
-    if(orb_uncorr is None):
-        raise SkipTest
     t2 = Time.time_acs(215077459.472)
     t1 = t2 - 10
     t3 = t2 + 10
@@ -92,9 +86,8 @@ def test_orbit_offset_pos():
     assert_almost_equal(pdiff[1], 200, 4)
     assert_almost_equal(pdiff[2], 300, 4)
 
+@require_orb_uncorr
 def test_insert_attitude_time_point():
-    if(orb_uncorr is None):
-        raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10
@@ -116,9 +109,8 @@ def test_insert_attitude_time_point():
     orb.parameter = [0, 0, 0, 50 * 3600, 20 * 3600, 30 * 3600, 20, 40, 
                      60, -10, -20, -30]
 
+@require_orb_uncorr
 def test_frame_coordinate():
-    if(orb_uncorr is None):
-        raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10
@@ -137,10 +129,9 @@ def test_frame_coordinate():
     assert_almost_equal(ic.line, i0.line, 4)
     assert_almost_equal(ic.sample, i0.sample, 4)
 
+@require_orb_uncorr
 def test_observer():
     '''Check that we properly notify other objects when parameter changes'''
-    if(orb_uncorr is None):
-        raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10
@@ -163,9 +154,8 @@ def test_observer():
     assert_almost_equal(ic.line, i0.line, 4)
     assert_almost_equal(ic.sample, i0.sample, 4)
     
+@require_orb_uncorr
 def test_frame_coordinate_with_der():
-    if(orb_uncorr is None):
-        raise SkipTest
     t2 = Time.time_acs(215077459.472);
     t1 = t2 - 10
     t3 = t2 + 10

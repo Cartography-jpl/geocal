@@ -15,11 +15,6 @@ from multiprocessing import Pool
 raster_source = "/data/smyth/LADem/12SEP-01_proj.img"
 raster_aoi_pt = Geodetic(34.10426496, -117.929771)
 
-# Data is way too big to check into source, so we put it here. This means
-# we can only tests that depend on this on pistol. We may fold this into
-# the afids data area at some point.
-geocal_test_data = "/data/geocal_test_data/"
-
 def test_connection_igc():
     '''Note that this also tests the inheritance in python of a C++ class
     ImageGroundConnection, and passing this back to C++ (the generate_rpc

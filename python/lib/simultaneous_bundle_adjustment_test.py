@@ -4,7 +4,6 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import object
 from past.utils import old_div
-from geocal_swig import *
 from geocal.tie_point_collect import *
 from geocal.image_ground_connection import *
 from geocal.simultaneous_bundle_adjustment import *
@@ -12,8 +11,7 @@ from geocal.lm_optimize import *
 from geocal.sqlite_shelf import *
 import scipy.optimize
 import pickle
-import numpy as np
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 import logging
 import sys
 from numpy.testing import assert_almost_equal
@@ -22,25 +20,23 @@ console = logging.StreamHandler(stream=sys.stdout)
 console.setLevel(logging.WARNING)
 logging.getLogger("geocal-python").addHandler(console)
 
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
-
-demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
-igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
+demin = VicarLiteDem(stereo_unit_test_data + "nevada_elv_aoi.img", True)
+igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img", demin)
 t = [False] * 20
 t[0] = True
 igc1.rpc.fit_line_numerator = t
 igc1.rpc.fit_sample_numerator = t
-igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
+igc2 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-2.img", demin)
 igc2.rpc.fit_line_numerator = t
 t2 = [False] * 20
 t2[0] = True
 igc2.rpc.fit_sample_numerator = t2
-igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
+igc3 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-3.img", demin)
 igc3.rpc.fit_line_numerator = t
 t2 = [False] * 20
 t2[0] = True
 igc3.rpc.fit_sample_numerator = t2
-gaoi = VicarLiteRasterImage(test_data + "aoi.img").map_info
+gaoi = VicarLiteRasterImage(stereo_unit_test_data + "aoi.img").map_info
 igc_coll = IgcArray([igc1, igc2, igc3])
 tp_collect = TiePointCollect(igc_coll)
 tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin)
@@ -168,10 +164,10 @@ class TestClass(object):
             log_optimize = logging.getLogger("geocal-python.lm_optimize")
             log_optimize.setLevel(logging.WARNING)
 
+    # Don't normally run this. It is much slower then the lm_solve we
+    # have above
+    @skip
     def test_solve(self):
-        raise SkipTest
-        # Don't normally run this. It is much slower then the lm_solve we
-        # have above
         v = sba.sba_eq(sba.parameter)
         chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
         print("Chisq", chisq)
@@ -183,7 +179,7 @@ class TestClass(object):
         chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
         print("Chisq", chisq)
         assert chisq < 2
-        out = open(test_data + "rpc_sba.pkl", "wb")
+        out = open(stereo_unit_test_data + "rpc_sba.pkl", "wb")
         pickle.dump(igc1.rpc, out, pickle.HIGHEST_PROTOCOL)
         pickle.dump(igc2.rpc, out, pickle.HIGHEST_PROTOCOL)
         pickle.dump(igc3.rpc, out, pickle.HIGHEST_PROTOCOL)

@@ -21,8 +21,7 @@ setup_spice = :
 endif
 # Number of jobs to run at once. Default is to automatically determine this,
 # but you can specify a different number.
-#PYTEST_NJOB=auto
-PYTEST_NJOB=1
+PYTEST_NJOB=auto
 
 PYTEST_EXTRAFLAGS=
 PYTEST_FLAGS= -q -n $(PYTEST_NJOB)

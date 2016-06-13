@@ -25,8 +25,9 @@ def test_makedirs_p(isolated_dir):
 
 @require_afids_data
 @require_vicar
+# Doesn't currently work, we'll need to fix this
+@skip
 def test_cib01_data():
-    raise SkipTest              # Doesn't currently work, we'll need to fix this
     if(not os.path.exists(os.environ["CIB1_ROOT"] + "/cib01_db.int")):
         raise SkipTest
     cib01 = cib01_data()

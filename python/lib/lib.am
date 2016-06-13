@@ -44,6 +44,6 @@ else
 # Used to short circuit tests that would otherwise run.
 export NO_VICAR_GDALPLUGIN=t
 endif
-EXTRA_DIST+=@srcpythonlib@/test_support.py
+EXTRA_DIST+=@srcpythonlib@/conftest.py
 EXTRA_DIST+=@srcpythonlib@/*_test.py
 

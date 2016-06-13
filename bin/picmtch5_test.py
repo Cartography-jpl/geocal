@@ -1,9 +1,5 @@
 from geocal import *
-from nose.plugins.skip import Skip, SkipTest
-from numpy.testing import assert_almost_equal
 import subprocess
-import os
-import sys
 import re
 from vicar_test_support import *
 

@@ -1,18 +1,13 @@
 from geocal import *
-import subprocess
-import os
-from nose.plugins.skip import Skip, SkipTest
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
-def test_shelve_image():
+@require_serialize
+def test_shelve_image(isolated_dir):
     '''Create simple GDAL based image.'''
-    if(not have_serialize_supported()):
-        raise SkipTest
     try:
         os.remove("sqlite_shelf.db")
     except OSError as exc:
         pass                    # Ok if doesn't exist
     subprocess.check_call(["shelve_image", 
-                           test_data + "nevada_doq_aoi.img",
+                           stereo_unit_test_data + "nevada_doq_aoi.img",
                            "sqlite_shelf.db:ref_image"])
 

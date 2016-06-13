@@ -1,5 +1,6 @@
 from geocal import *
 import subprocess
+from test_support import *
 
 @require_serialize
 def test_shelve_igccol(isolated_dir):

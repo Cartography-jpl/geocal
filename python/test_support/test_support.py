@@ -1,6 +1,6 @@
 # This contains support routines for unit tests.
 import numpy as np
-from numpy.testing import assert_almost_equal
+from numpy.testing import assert_almost_equal, assert_approx_equal
 from unittest import SkipTest
 from geocal_swig import *
 import geocal_swig

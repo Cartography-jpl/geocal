@@ -1,5 +1,5 @@
 from geocal import *
-from geocal.test_support import *
+from test_support import *
 
 # Simple test to see if we have AFIDS data available. We check for the
 # presence of one of the AFIDS environment variables, and if there

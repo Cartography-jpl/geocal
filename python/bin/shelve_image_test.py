@@ -1,4 +1,5 @@
 from geocal import *
+from test_support import *
 
 @require_serialize
 def test_shelve_image(isolated_dir):

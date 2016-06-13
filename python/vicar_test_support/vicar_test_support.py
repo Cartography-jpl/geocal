@@ -1,5 +1,5 @@
 import re
-from geocal.test_support import *
+from test_support import *
 
 def check_for_proc(proc):
     '''Check for the existence of a vicar/AFIDS proc.'''

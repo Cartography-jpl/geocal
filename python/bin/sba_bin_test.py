@@ -1,5 +1,6 @@
 from __future__ import print_function
 from geocal import *
+from test_support import *
 import subprocess
 
 @require_serialize

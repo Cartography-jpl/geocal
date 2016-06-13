@@ -1,6 +1,6 @@
 from geocal import *
 import subprocess
-from geocal.test_support import *
+from test_support import *
 
 @require_vicar_gdalplugin
 def test_gdal_to_nitf(isolated_dir):

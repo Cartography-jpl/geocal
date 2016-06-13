@@ -672,6 +672,7 @@ pythonswigsrc
 srcimplementation
 srcgeocalcore
 geocalunittestdata
+testsupportsrc
 vicartestsupportsrc
 docpythonsrc
 srcpythonbin
@@ -23443,6 +23444,8 @@ srcpythonbin=${srcpython}/bin
 docpythonsrc=${srcpython}/doc
 
 vicartestsupportsrc=${srcpython}/vicar_test_support
+
+testsupportsrc=${srcpython}/test_support
 
 geocalunittestdata=${geocal_topdir}/unit_test_data
 

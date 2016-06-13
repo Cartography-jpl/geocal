@@ -1,4 +1,5 @@
 from geocal import *
+from test_support import *
 
 expected_dir = unit_test_data + "expected_results/pan_sharpen/"
 

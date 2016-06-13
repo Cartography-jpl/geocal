@@ -100,11 +100,10 @@ export SPICEDATA=/data/linux_ops/AIRMSPI/tools_03232015/install_fedora20/data/cs
 
 (This is not needed to build or run the unit tests).
 
-The python version should be 2.7, we don't support python 3 yet. In addition
-to python, you should have the python libraries numpy, scipy, matplotlib,
-h5py, nose, sphinx, and recommended by not required ipython. I often install
-these in a virtual environment, which you can do if you don't want to 
-install these at the system level.
+The python version should be 2.7, or python >= 3.5. In addition to
+python, you should have the libraries listed in requirements.txt. I
+often install these in a virtual environment, which you can do if you
+don't want to install these at the system level.
 
 ## Optional dependencies
 

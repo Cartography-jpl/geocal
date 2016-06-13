@@ -2134,8 +2134,9 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mspi/3.l1b1_table \
 	@geocalunittestdata@/image_coordinate_test.xml \
 	@geocalunittestdata@/srtm_90m_dem/n34w120_L2.tif \
-	@geocalunittestdata@/srtm_90m_dem/n43w69_L2.tif @docpythonsrc@ \
-	@vicartestsupportsrc@ $(am__empty)
+	@geocalunittestdata@/srtm_90m_dem/n43w69_L2.tif \
+	@srcpythonbin@/*_test.py @srcpythonlib@/test_support.py \
+	@srcpythonlib@/*_test.py @docpythonsrc@ @vicartestsupportsrc@
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories

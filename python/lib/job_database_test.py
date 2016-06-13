@@ -1,9 +1,9 @@
 from geocal.job_database import *
 from geocal.misc import *
 import logging
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 
-def test_job_database():
+def test_job_database(isolated_dir):
     jdb = JobDatabase("test.db")
     for jid in list(jdb.keys()):
         del jdb[jid]
@@ -13,7 +13,7 @@ def test_job_database():
     assert jdb[jid]["status"] == "success"
     assert jdb.get_by_key("key")["status"] == "success"
 
-def test_handle_running_job():
+def test_handle_running_job(isolated_dir):
     jdb = JobDatabase("test.db")
     for jid in list(jdb.keys()):
         del jdb[jid]
@@ -28,7 +28,7 @@ def test_handle_running_job():
                                 start_if_available = False)
     assert not jdb.check_and_run()
 
-def test_handle_interrupted_job():
+def test_handle_interrupted_job(isolated_dir):
     jdb = JobDatabase("test.db")
     for jid in list(jdb.keys()):
         del jdb[jid]
@@ -48,7 +48,7 @@ def test_handle_interrupted_job():
     assert jdb[jid_running]["status"] == "interrupted"
     assert jdb[jid_could_run]["status"] == "success"
 
-def test_handle_failed_job():
+def test_handle_failed_job(isolated_dir):
     jdb = JobDatabase("test.db")
     for jid in list(jdb.keys()):
         del jdb[jid]
@@ -58,8 +58,8 @@ def test_handle_failed_job():
     assert jdb.check_and_run()
     assert jdb[jid]["status"] == "failure"
 
-def test_abcd_job():
-    raise SkipTest
+@skip    
+def test_abcd_job(isolated_dir):
     jdb = JobDatabase("test.db")
     jdb.abcd_job("mali_cosi_sub", "user", "key", "job_database.log", 
                  "/raid10/sba_gold/mali_cosi/12MAR10105443-P1BS-052683561010_04_P007.NTF", 
@@ -67,9 +67,9 @@ def test_abcd_job():
                  number_process=24,
                  subset = [10000,10000,1000,1000])
 
-def test_abcd_no_imd_job():
-    # copied data local, but don't have IMD file. Make sure we still work.
-    raise SkipTest
+@skip    
+def test_abcd_no_imd_job(isolated_dir):
+    '''copied data local, but don't have IMD file. Make sure we still work.'''
     jdb = JobDatabase("test.db")
     jdb.abcd_job("mali_cosi_sub", "user", "key", "job_database.log", 
                  "12MAR10105443-P1BS-052683561010_04_P007.NTF", 

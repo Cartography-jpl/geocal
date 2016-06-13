@@ -1,11 +1,9 @@
 from geocal_swig import *
 from geocal.feature_detector_extension import *
-from pprint import *
+from test_support import *
 from multiprocessing import Pool
-from nose.plugins.skip import Skip, SkipTest
 
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
-img = VicarLiteRasterImage(test_data + "10MAY21-2.img")
+img = VicarLiteRasterImage(stereo_unit_test_data + "10MAY21-2.img")
 
 def test_feature_detector():
     fd = ForstnerFeatureDetector()

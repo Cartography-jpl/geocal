@@ -2,18 +2,13 @@ from __future__ import print_function
 from __future__ import division
 from builtins import range
 from past.utils import old_div
-from geocal_swig import *
+from test_support import *
 from geocal.image_ground_connection import *
 from geocal.igc_collection_extension import *
-from nose.plugins.skip import Skip, SkipTest
 import scipy
 import scipy.optimize
-import numpy.testing as npt
 from sqlite_shelf import write_shelve, read_shelve
 from multiprocessing import Pool
-from numpy.testing import assert_almost_equal
-
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 # Some test data we have on pistol, along with a point of 
 # "interesting features"
@@ -29,10 +24,13 @@ def test_connection_igc():
     '''Note that this also tests the inheritance in python of a C++ class
     ImageGroundConnection, and passing this back to C++ (the generate_rpc
     command)'''
-    demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
-    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
-    igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
-    igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
+    demin = VicarLiteDem(stereo_unit_test_data + "nevada_elv_aoi.img", True)
+    igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
+                                      demin)
+    igc2 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-2.img",
+                                      demin)
+    igc3 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-3.img",
+                                      demin)
     igc_coll = IgcArray([igc1, igc2, igc3])
     igc = igc_coll.image_ground_connection(2)
     ic = ImageCoordinate(100, 200)
@@ -45,12 +43,15 @@ def test_connection_igc():
     assert_almost_equal(rpc.image_coordinate(gp).line, ic.line, 2)
     assert_almost_equal(rpc.image_coordinate(gp).sample, ic.sample, 2)
 
+@skip    
 def test_time():
-    raise SkipTest
-    demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
-    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
-    igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
-    igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
+    demin = VicarLiteDem(stereo_unit_test_data + "nevada_elv_aoi.img", True)
+    igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
+                                      demin)
+    igc2 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-2.img",
+                                      demin)
+    igc3 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-3.img",
+                                      demin)
     igc_coll = IgcArray([igc1, igc2, igc3])
     ic = ImageCoordinate(100, 200)
     gp = igc_coll.ground_coordinate(2, ic)
@@ -58,16 +59,19 @@ def test_time():
         t = igc_coll.image_coordinate(2, gp)
 
 def test_igc_array():
-    demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
-    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
+    demin = VicarLiteDem(stereo_unit_test_data + "nevada_elv_aoi.img", True)
+    igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
+                                      demin)
     t = [False] * 20
     t[0] = True
     igc1.rpc.fit_line_numerator = t
     igc1.rpc.fit_sample_numerator = t
-    igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
+    igc2 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-2.img",
+                                      demin)
     igc2.rpc.fit_line_numerator = t
     igc2.rpc.fit_sample_numerator = t
-    igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
+    igc3 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-3.img",
+                                      demin)
     igc3.rpc.fit_line_numerator = t
     igc3.rpc.fit_sample_numerator = t
     igc_coll = IgcArray([igc1, igc2, igc3])
@@ -95,19 +99,22 @@ def test_igc_array():
 
 # We don't support this anymore. I don't think we actually need this, but
 # leave the test in place in case we need to come back to this.
+@skip
 def test_igc_array_with_igc_collection():
     '''Test a IgcArray when one of the entries is a IgcCollection.'''
-    raise SkipTest
-    demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
-    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
+    demin = VicarLiteDem(stereo_unit_test_data + "nevada_elv_aoi.img", True)
+    igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
+                                      demin)
     t = [False] * 20
     t[0] = True
     igc1.rpc.fit_line_numerator = t
     igc1.rpc.fit_sample_numerator = t
-    igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
+    igc2 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-2.img",
+                                      demin)
     igc2.rpc.fit_line_numerator = t
     igc2.rpc.fit_sample_numerator = t
-    igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
+    igc3 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-3.img",
+                                      demin)
     igc3.rpc.fit_line_numerator = t
     igc3.rpc.fit_sample_numerator = t
     igc_coll_sub = IgcArray([igc2, igc3])

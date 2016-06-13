@@ -1,8 +1,5 @@
-from geocal_swig import *
-from numpy.testing import assert_almost_equal
+from test_support import *
 import datetime
-
-# Unit tests for geocal python code
 
 # Test time. Note that we check for pickling in the pickle_test.py
 def test_time():

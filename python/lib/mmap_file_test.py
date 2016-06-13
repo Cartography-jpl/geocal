@@ -4,18 +4,16 @@ standard_library.install_aliases()
 from builtins import range
 from past.utils import old_div
 from geocal.mmap_file import *
-from nose.plugins.skip import Skip, SkipTest
-from numpy.testing import assert_almost_equal
+from test_support import *
 import pickle
 
-def test_read_write():
-    # Basic read and write test.
+@require_vicar
+def test_read_write(isolated_dir):
+    '''Basic read and write test.'''
+
     # Nothing special about this data, it is just a reasonable size for
     # stepping through
-        
     # Dummy MapInfo
-    if(not VicarFile.vicar_available()):
-        raise SkipTest
     ulc_x = 50
     ulc_y = 60
     x_pixel_res = 0.25

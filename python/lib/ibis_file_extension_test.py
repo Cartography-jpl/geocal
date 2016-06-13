@@ -1,13 +1,9 @@
-from geocal_swig import *
 from geocal.ibis_file_extension import *
-from nose.plugins.skip import Skip, SkipTest
-import numpy.testing as npt
+from test_support import *
 
-def test_ibis():
+@require_vicar
+def test_ibis(isolated_dir):
     '''Basic test of reading and writing an ibis file.'''
-    if(not VicarFile.vicar_available()):
-        raise SkipTest
-    
     with IbisFile("ibis.img", 10, 
                   ["BYTE", "HALF", "FULL", "REAL", "DOUB", "A10"]) as f:
         for i in range(10):
@@ -37,12 +33,10 @@ def test_ibis():
     f[3:5,0:3] = [[25,11,2],[26,12,3]]
     assert f[3:5,0:3] == [[25,11,2],[26,12,3]]
 
-def test_ibis_create():
+@require_vicar
+def test_ibis_create(isolated_dir):
     '''Test IbisFile.create'''
-    if(not VicarFile.vicar_available()):
-        raise SkipTest
-
     d = np.array([[1.0,2,3],[4,5,6]])
     IbisFile.create("ibis.img", d)
     f = IbisFile("ibis.img")
-    npt.assert_almost_equal(np.array(f[:,:]), d)
+    assert_almost_equal(np.array(f[:,:]), d)

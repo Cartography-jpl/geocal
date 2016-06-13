@@ -1,7 +1,4 @@
-from nose.plugins.skip import Skip, SkipTest
-import numpy as np
-import numpy.testing as npt
-import os
+from test_support import *
 
 # Optional support for running matlab from python
 try:

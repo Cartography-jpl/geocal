@@ -69,8 +69,7 @@ def vicarb_env(isolated_dir):
     have the proper TAEPATH, and we also set up to run in an isolated 
     directory so we capture all the files vicar tends to vomit.'''
     original_env = None
-    add_tae_path(os.path.dirname(__file__) + "/../bin", original_env)
-    add_tae_path(os.path.dirname(__file__) + "/../../bin", None)
+    add_tae_path(isolated_dir, original_env)
     yield
     set_original_env(original_env)
     

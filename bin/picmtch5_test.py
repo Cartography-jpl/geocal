@@ -1,7 +1,7 @@
 from geocal import *
 import subprocess
 import re
-from vicar_test_support import *
+from test_support import *
 
 # Setup and teardown called automatically by nosetest for whole module.
 # We assume that picmtch5 is in current directory, which is true if we

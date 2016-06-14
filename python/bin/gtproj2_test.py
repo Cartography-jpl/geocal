@@ -1,6 +1,6 @@
 from geocal import *
 import re
-from vicar_test_support import *
+from test_support import *
 
 def gtgen(filename, label):
     '''This runs the gtgen program. This is used in the original gtproj unit

@@ -22,4 +22,3 @@ dist_afidspythonvdev_DATA+= $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
 endif
 endif
 endif
-EXTRA_DIST+=@srcgeocalbin@/test_support

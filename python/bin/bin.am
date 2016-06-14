@@ -40,7 +40,6 @@ dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
 if HAVE_VICAR_RTL
 dist_afidspythonvdev_SCRIPTS += $(srcdir)/$(srcpythonbin)/pan_sharpen
 endif
-EXTRA_DIST+=@srcpythonbin@/test_support
 EXTRA_DIST+=@srcpythonbin@/call_sample_vicar_python_test.py
 EXTRA_DIST+=@srcpythonbin@/gdal_to_nitf_test.py
 EXTRA_DIST+=@srcpythonbin@/gtproj2_test.py

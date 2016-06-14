@@ -3,21 +3,14 @@ import subprocess
 import re
 from test_support import *
 
-# Setup and teardown called automatically by nosetest for whole module.
-# We assume that picmtch5 is in current directory, which is true if we
-# call nosetest from the build directory
-do_cleanup = True
-original_env = None
-prefix = "picmtch5_xx"
-def setup():
-    if(not VicarFile.vicar_available()):
-        raise SkipTest
-    check_vicarb()
-    add_tae_path(os.path.abspath(os.getcwd()), original_env)
-    # Check for picmtch5. Depending on how we are built we may or may not
-    # have this available. If not available, then just skip these tests.
-    if not check_for_proc("picmtch5"):
-        raise SkipTest
+# Depending on how we build, picmtch5 may or may not be available.
+require_picmtch5 = pytest.mark.skipif(not check_for_proc("picmtch5"),
+    reason="need a pictmtch5 build to run")
+
+# Setup for picmtch5 tests. We do normal vicar setup, and then generate
+# some test data input files.
+@pytest.yield_fixture(scope="function")
+def picmtch5_env(vicarb_env):
     vicarb_run("gen picmtch5_xxim0 nl=300 ns=310")
     vicarb_run("f2 inp=picmtch5_xxim0 out=picmtch5_xxim1 func=\"(line*327+samp*193+line*samp)%256\"")
     vicarb_run('''+
@@ -30,16 +23,12 @@ gtgen inp=picmtch5_xxim1 'tiecnvrt +
           "GeogEllipsoidGeoKey=7030(Ellipse_WGS84)") +
 ''')
     vicarb_run("gtcopy picmtch5_xxim1 picmtch5_xxim2 size=(5,6,295,304)")
+    yield
 
-def teardown():
-    set_original_env(original_env)
-    # Clean up the various temporary files
-    if do_cleanup:
-        subprocess.run("rm %s*" % prefix, shell=True,
-                       stdout=subprocess.PIPE,
-                       stderr=subprocess.PIPE)
-
-def test_perfect_predictor():
+@require_vicarb
+@require_vicar
+@require_picmtch5
+def test_perfect_predictor(picmtch5_env):
     '''Test with a perfect predictor.'''
     IbisFile.create("picmtch5_xxa", np.array([[150.0,150,0,0,0,0,0,0,0,0,0]]))
     vicarb_run('''+
@@ -58,7 +47,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) +
     assert_approx_equal(z2, 124.4722)
     assert corr_val > 0.4
 
-def test_off_predictor_scale_ok():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_off_predictor_scale_ok(picmtch5_env):
     '''Have predictor off by 6+ pixel, but scale ok'''
     IbisFile.create("picmtch5_xxa", np.array([[150.0,150,0,0,0,0,0,0,0,0,0]]))
     vicarb_run('''+
@@ -77,7 +69,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) +
     assert_approx_equal(z2, 124.2989)
     assert corr_val > 0.25
 
-def test_scale_off():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_scale_off(picmtch5_env):
     '''Have predictor off by scale, but close at the point.'''
     IbisFile.create("picmtch5_xxa", np.array([[150.0,150,0,0,0,0,0,0,0,0,0]]))
     vicarb_run('''+
@@ -96,7 +91,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) +
     assert_approx_equal(z2, 124.2038)
     assert corr_val > 0.08
 
-def test_perfect_predictor_geographic():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_perfect_predictor_geographic(picmtch5_env):
     '''Test with a perfect predictor. This is test_perfect_predictor but
     using geographic coordinates.'''
     IbisFile.create("picmtch5_xxa", np.array([[0.45,0.44,0,0,0,0,0,0,0,0,0]]))
@@ -116,7 +114,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) 'geocord1 'geocord2 +
     assert_approx_equal(z2, 125.5278)
     assert corr_val > 0.4
 
-def test_magnify():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_magnify(picmtch5_env):
     '''Magnify case'''
     IbisFile.create("picmtch5_xxa", np.array([[150.0,150,0,0,0,0,0,0,0,0,0]]))
     vicarb_run('''+
@@ -135,7 +136,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) +
     assert_approx_equal(z2, 136.0278)
     assert corr_val > 0.4
 
-def test_64x64():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_64x64(picmtch5_env):
     '''64x64 case'''
     IbisFile.create("picmtch5_xxa", np.array([[150.0,150,0,0,0,0,0,0,0,0,0]]))
     vicarb_run('''+
@@ -154,7 +158,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) +
     assert_approx_equal(z2, 124.6039)
     assert corr_val > 0.3
 
-def test_no_itie_otie():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_no_itie_otie(picmtch5_env):
     '''no itie-otie case'''
     IbisFile.create("picmtch5_xxa", np.array([[150.0,150,0,0,0,0,0,0,0,0,0]]))
     vicarb_run('''+
@@ -172,7 +179,10 @@ SEARCH=96 fftsize=64 minsrch=96 redo=0
     assert_approx_equal(z2, 124.5224)
     assert corr_val > 0.25
 
-def test_no_itie_otie_geocord():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_no_itie_otie_geocord(picmtch5_env):
     '''no itie-otie case with geocord keywords'''
     IbisFile.create("picmtch5_xxa", np.array([[0.45,0.44,0,0,0,0,0,0,0,0,0]]))
     vicarb_run('''+
@@ -191,7 +201,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) +
     assert_approx_equal(z2, 125.5278)
     assert corr_val > 0.4
 
-def test_no_itie_otie_rotated_geocord():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_no_itie_otie_rotated_geocord(picmtch5_env):
     '''no itie-otie case with rotated 2d image and geocord'''
     vicarb_run("gtrot picmtch5_xxim2 picmtch5_xxim3 rot=2")
     IbisFile.create("picmtch5_xxa", np.array([[0.45,0.44,0,0,0,0,0,0,0,0,0]]))
@@ -211,7 +224,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim3,picmtch5_xxa) +
     assert_approx_equal(z2, 125.5278)
     assert corr_val > 0.4
 
-def test_redo():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_redo(picmtch5_env):
     '''no itie-otie case with rotated 2d image, pixel data; also redo case'''
     vicarb_run("gtrot picmtch5_xxim2 picmtch5_xxim3 rot=2")
     IbisFile.create("picmtch5_xxa", np.array([[140.0,130,0,0,0,0,0,0,0,0,0]]))
@@ -230,7 +246,10 @@ SEARCH=64 fftsize=64 minsrch=64 redo=1
     assert_approx_equal(z2, 128.3611)
     assert corr_val > 0.4
 
-def test_edge_case():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_edge_case(picmtch5_env):
     '''the four edge cases for getgrid'''
     d = np.zeros((5,11))
     d[:,0:2] = [[240,238],
@@ -279,7 +298,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) +
     assert corr_val3 == -9999.0
     assert corr_val4 > 0.4
 
-def test_autothresh():
+@require_vicarb    
+@require_vicar
+@require_picmtch5
+def test_autothresh(picmtch5_env):
     '''autothresh case'''
     vicarb_run('''+
 gengrid2 out=picmtch5_xxa ncol=11 nah=5 nav=7 +

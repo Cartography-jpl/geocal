@@ -2032,8 +2032,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	$(srcdir)/$(libgeocal)/*.i @libgeocal@/swig_to_python.h \
 	@libgeocal@/swig_type_mapper_base.h \
 	@libgeocal@/swig_type_mapper.h @libgeocal@/dummy.pdf \
-	@libgeocal@/geocal_doxygen.h @srcsupport@/unit_test_support.h \
-	@srcsupport@/global_fixture.h \
+	@libgeocal@/geocal_doxygen.h @srcgeocalbin@/test_support \
+	@srcsupport@/unit_test_support.h @srcsupport@/global_fixture.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/blitz_array_serialize_support.h \
 	@srcinterface@/matcher_fixture.h $(patsubst %_wrap.cc, %.py, \
@@ -2135,8 +2135,62 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/image_coordinate_test.xml \
 	@geocalunittestdata@/srtm_90m_dem/n34w120_L2.tif \
 	@geocalunittestdata@/srtm_90m_dem/n43w69_L2.tif \
-	@srcpythonbin@/*_test.py @srcpythonlib@/conftest.py \
-	@srcpythonlib@/*_test.py @docpythonsrc@ @testsupportsrc@
+	@srcpythonbin@/test_support \
+	@srcpythonbin@/call_sample_vicar_python_test.py \
+	@srcpythonbin@/gdal_to_nitf_test.py \
+	@srcpythonbin@/gtproj2_test.py \
+	@srcpythonbin@/pan_sharpen_test.py \
+	@srcpythonbin@/sba_bin_test.py \
+	@srcpythonbin@/shelve_dem_test.py \
+	@srcpythonbin@/shelve_dir_test.py \
+	@srcpythonbin@/shelve_igccol_test.py \
+	@srcpythonbin@/shelve_image_test.py \
+	@srcpythonbin@/tp_collect_test.py \
+	@srcpythonbin@/write_image_test.py @srcpythonlib@/test_support \
+	@srcpythonlib@/air_mspi_igc_test.py \
+	@srcpythonlib@/dem_generate_test.py \
+	@srcpythonlib@/docopt_simple_test.py \
+	@srcpythonlib@/feature_detector_extension_test.py \
+	@srcpythonlib@/geocal_test.py \
+	@srcpythonlib@/geoeye1_reflectance_test.py \
+	@srcpythonlib@/hdf_orbit_test.py \
+	@srcpythonlib@/ibis_file_extension_test.py \
+	@srcpythonlib@/igc_collection_extension_test.py \
+	@srcpythonlib@/igc_map_projected_test.py \
+	@srcpythonlib@/ikonos_reflectance_test.py \
+	@srcpythonlib@/image_ground_connection_test.py \
+	@srcpythonlib@/image_to_image_connection_test.py \
+	@srcpythonlib@/job_database_test.py \
+	@srcpythonlib@/lm_optimize_test.py \
+	@srcpythonlib@/matlab_test.py @srcpythonlib@/misc_test.py \
+	@srcpythonlib@/mmap_file_test.py \
+	@srcpythonlib@/multiprocess_test.py \
+	@srcpythonlib@/orbit_data_image_ground_connection_test.py \
+	@srcpythonlib@/orbit_derived_test.py \
+	@srcpythonlib@/orbit_extension_test.py \
+	@srcpythonlib@/orbit_offset_correction_test.py \
+	@srcpythonlib@/pickle_test.py \
+	@srcpythonlib@/pleides_rpc_test.py \
+	@srcpythonlib@/ply_file_test.py \
+	@srcpythonlib@/quick_bird_reflectance_test.py \
+	@srcpythonlib@/raster_image_extension_test.py \
+	@srcpythonlib@/raster_tile_test.py \
+	@srcpythonlib@/ray_intersect_test.py \
+	@srcpythonlib@/sba_end_to_end_test.py \
+	@srcpythonlib@/sba_test.py @srcpythonlib@/sba_timing_test.py \
+	@srcpythonlib@/shape_file_test.py \
+	@srcpythonlib@/simultaneous_bundle_adjustment_test.py \
+	@srcpythonlib@/spot_reflectance_test.py \
+	@srcpythonlib@/sqlite_shelf_test.py \
+	@srcpythonlib@/tie_point_collect_test.py \
+	@srcpythonlib@/tie_point_extension_test.py \
+	@srcpythonlib@/tre_struct_test.py \
+	@srcpythonlib@/vector_test.py \
+	@srcpythonlib@/vicar_interface_test.py \
+	@srcpythonlib@/vicar_wrap_test.py \
+	@srcpythonlib@/with_parameter_test.py \
+	@srcpythonlib@/world_view2_reflectance_test.py @docpythonsrc@ \
+	@testsupportsrc@ $(am__empty)
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories

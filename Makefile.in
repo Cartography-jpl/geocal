@@ -2039,6 +2039,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcinterface@/matcher_fixture.h $(patsubst %_wrap.cc, %.py, \
 	$(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h \
+	@geocalunittestdata@/RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML \
 	@geocalunittestdata@/mspi_config_file_test.txt \
 	@geocalunittestdata@/mspi_config_file_test2.txt \
 	@geocalunittestdata@/mspi_camera_test.config2 \
@@ -2059,6 +2060,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/FRST_POIof090514.shp \
 	@geocalunittestdata@/PCF @geocalunittestdata@/cib_sample.img \
 	@geocalunittestdata@/Stereo/10MAY21-1.img \
+	@geocalunittestdata@/Stereo/10MAY21-1_A.img \
+	@geocalunittestdata@/Stereo/10MAY21-1.tif \
 	@geocalunittestdata@/Stereo/10MAY21-1_projected.tif \
 	@geocalunittestdata@/Stereo/10MAY21-2.img \
 	@geocalunittestdata@/Stereo/10MAY21-2_projected.tif \
@@ -2067,6 +2070,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/Stereo/aoi.img \
 	@geocalunittestdata@/Stereo/generate_proj.py \
 	@geocalunittestdata@/Stereo/nevada_elv_aoi.img \
+	@geocalunittestdata@/Stereo/nevada_doq_aoi.img \
 	@geocalunittestdata@/Stereo/rpc_sba.pkl \
 	@geocalunittestdata@/argus.csv @geocalunittestdata@/argus.ibis \
 	@geocalunittestdata@/argus_camera6.jpg \

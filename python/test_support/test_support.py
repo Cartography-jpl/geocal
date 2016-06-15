@@ -34,7 +34,7 @@ def check_vicarb():
     '''Check for existence of vicarb program. If not found, return False'''
     if(not cmd_exists("vicarb")):
         return False
-    # AFIDS uses python 3.5, so don't both supporting python 2 with this code.
+    # AFIDS uses python 3.5, so don't bother supporting python 2 with this code.
     # We just skip all the tests if we are using python 2.
     if sys.version_info < (3,5):
         return False

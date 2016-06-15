@@ -3,6 +3,10 @@ from test_support import *
 
 def check_for_proc(proc):
     '''Check for the existence of a vicar/AFIDS proc.'''
+    # AFIDS uses python 3.5, so don't bother supporting python 2 with this code.
+    # We just skip all the tests if we are using python 2.
+    if sys.version_info < (3,5):
+        return False
     cmd2 = re.sub(r'\+?\n',"", proc)
     cmd2 = re.sub(r'"',"\\\"", cmd2)
     res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,

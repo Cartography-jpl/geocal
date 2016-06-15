@@ -66,7 +66,7 @@
 
 AC_DEFUN([AC_PROG_SWIG],[
         have_swig=no
-        AC_PATH_PROG([SWIG],[swig])
+        AC_PATH_PROG([SWIG],[swig], [], [$THIRDPARTY/bin:$PATH])
         if test -z "$SWIG" ; then
                 AC_MSG_WARN([cannot find 'swig' program. You should look at http://www.swig.org])
                 SWIG='echo "Error: SWIG is not installed. You should look at http://www.swig.org" ; false'

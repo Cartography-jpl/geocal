@@ -20079,7 +20079,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22399,7 +22400,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22426,6 +22428,53 @@ $as_echo "no" >&6; }
 fi
 
 
+PYTHON_ABS=`eval echo ${PYTHON}`
+PYTHON_PREFIX=`$as_dirname -- "$PYTHON_ABS" ||
+$as_expr X"$PYTHON_ABS" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$PYTHON_ABS" : 'X\(//\)[^/]' \| \
+	 X"$PYTHON_ABS" : 'X\(//\)$' \| \
+	 X"$PYTHON_ABS" : 'X\(/\)' \| . 2>/dev/null ||
+$as_echo X"$PYTHON_ABS" |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)[^/].*/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\).*/{
+	    s//\1/
+	    q
+	  }
+	  s/.*/./; q'`
+PYTHON_PREFIX=`$as_dirname -- "$PYTHON_PREFIX" ||
+$as_expr X"$PYTHON_PREFIX" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$PYTHON_PREFIX" : 'X\(//\)[^/]' \| \
+	 X"$PYTHON_PREFIX" : 'X\(//\)$' \| \
+	 X"$PYTHON_PREFIX" : 'X\(/\)' \| . 2>/dev/null ||
+$as_echo X"$PYTHON_PREFIX" |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)[^/].*/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\).*/{
+	    s//\1/
+	    q
+	  }
+	  s/.*/./; q'`
 if test -z "$PYTHON"; then
    as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
    PYTHON_VERSION=""
@@ -22436,7 +22485,7 @@ fi
 if test -n ">= '2.6.1'"; then
    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python >= '2.6.1'" >&5
 $as_echo_n "checking for a version of Python >= '2.6.1'... " >&6; }
-   ac_supports_python_ver=`$PYTHON -c "import sys; \
+   ac_supports_python_ver=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64 $PYTHON -c "import sys; \
 	ver = sys.version.split ()[0]; \
 	print (ver >= '2.6.1')"`
    if test "$ac_supports_python_ver" = "True"; then
@@ -22470,7 +22519,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22513,7 +22563,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22557,7 +22608,6 @@ fi
 if test -n "$PYTHON_CONFIG" ; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-    PYTHON_VERSION=$(python -c "import sys;print('.'.join(map(str, sys.version_info[:2])))")
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
@@ -22781,7 +22831,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22843,7 +22894,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22911,7 +22963,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22938,6 +22991,53 @@ $as_echo "no" >&6; }
 fi
 
 
+PYTHON_ABS=`eval echo ${PYTHON}`
+PYTHON_PREFIX=`$as_dirname -- "$PYTHON_ABS" ||
+$as_expr X"$PYTHON_ABS" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$PYTHON_ABS" : 'X\(//\)[^/]' \| \
+	 X"$PYTHON_ABS" : 'X\(//\)$' \| \
+	 X"$PYTHON_ABS" : 'X\(/\)' \| . 2>/dev/null ||
+$as_echo X"$PYTHON_ABS" |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)[^/].*/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\).*/{
+	    s//\1/
+	    q
+	  }
+	  s/.*/./; q'`
+PYTHON_PREFIX=`$as_dirname -- "$PYTHON_PREFIX" ||
+$as_expr X"$PYTHON_PREFIX" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$PYTHON_PREFIX" : 'X\(//\)[^/]' \| \
+	 X"$PYTHON_PREFIX" : 'X\(//\)$' \| \
+	 X"$PYTHON_PREFIX" : 'X\(/\)' \| . 2>/dev/null ||
+$as_echo X"$PYTHON_PREFIX" |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)[^/].*/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\/\)$/{
+	    s//\1/
+	    q
+	  }
+	  /^X\(\/\).*/{
+	    s//\1/
+	    q
+	  }
+	  s/.*/./; q'`
 if test -z "$PYTHON"; then
    as_fn_error $? "Cannot find python$PYTHON_VERSION in your system path" "$LINENO" 5
    PYTHON_VERSION=""
@@ -22948,7 +23048,7 @@ fi
 if test -n ">= '2.6.1'"; then
    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python >= '2.6.1'" >&5
 $as_echo_n "checking for a version of Python >= '2.6.1'... " >&6; }
-   ac_supports_python_ver=`$PYTHON -c "import sys; \
+   ac_supports_python_ver=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64 $PYTHON -c "import sys; \
 	ver = sys.version.split ()[0]; \
 	print (ver >= '2.6.1')"`
    if test "$ac_supports_python_ver" = "True"; then
@@ -22982,7 +23082,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -23025,7 +23126,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -23069,7 +23171,6 @@ fi
 if test -n "$PYTHON_CONFIG" ; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-    PYTHON_VERSION=$(python -c "import sys;print('.'.join(map(str, sys.version_info[:2])))")
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
@@ -23509,7 +23610,8 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+as_dummy="$THIRDPARTY/bin:$PATH"
+for as_dir in $as_dummy
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.

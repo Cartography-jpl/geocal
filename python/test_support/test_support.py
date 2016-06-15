@@ -11,7 +11,7 @@ import subprocess
 import pytest
 
 # Location of test data that is part of source
-unit_test_data = os.path.abspath(os.path.dirname(__file__) + "/../../../unit_test_data/") + "/"
+unit_test_data = os.path.abspath(os.path.dirname(__file__) + "/../../unit_test_data/") + "/"
 stereo_unit_test_data = unit_test_data + "Stereo/"
 mspi_test_data = unit_test_data + "mspi/"
 shiva_test_data = unit_test_data + "shiva_test_case/"

@@ -1,24 +1,18 @@
 from future import standard_library
 standard_library.install_aliases()
-from nose.tools import *
 from geocal.image_to_image_connection import *
-from geocal_swig import *
-import os
 import pickle
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-
-# Basic test of Rpc
+@require_serialize
 def test_rpc_image_ground_connection():
-    if(not have_serialize_supported()):
-        raise SkipTest
+    '''Basic test of Rpc'''
     # A sample RPC. Nothing special about this, these are just reasonable
     # values. Note that this gets created in pickle_test.py if you need to
     # regenerate this for some reason
-    with open(test_data + "rpc_example.pkl", "rb") as f:
+    with open(unit_test_data + "rpc_example.pkl", "rb") as f:
         rpc1 = pickle.load(f)
-    with open(test_data + "rpc_example.pkl", "rb") as f:
+    with open(unit_test_data + "rpc_example.pkl", "rb") as f:
         rpc2 = pickle.load(f)
     rpc2.line_offset += 2
     rpc2.sample_offset += 3

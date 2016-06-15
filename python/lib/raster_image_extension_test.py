@@ -1,13 +1,10 @@
 from builtins import range
-from geocal_swig import *
 from geocal.raster_image_extension import *
-import numpy as np
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 import geocal.safe_matplotlib_import
 import matplotlib.pyplot as plt
 
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-img = VicarLiteRasterImage(test_data + "vicar.img")
+img = VicarLiteRasterImage(unit_test_data + "vicar.img")
 d = img.read(0, 0, 10, 10)
 
 def test_past_edge():
@@ -47,14 +44,14 @@ def test_no_image():
     t = img.read_with_pad(15, 15, 10, 10)
     assert (t == np.zeros((10, 10), dtype = np.int)).all()
 
+@skip    
 def test_display():
-    raise SkipTest
     img = VicarLiteRasterImage(test_data + "Stereo/10MAY21-1.img")
     img.display(ImageCoordinate(300, 300), 20)
     plt.show()
 
+@skip    
 def test_display2():
-    raise SkipTest
     img = VicarLiteRasterImage(test_data + "Stereo/10MAY21-1.img")
     img.display(ImageCoordinate(100, 50), 500)
     plt.show()

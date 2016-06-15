@@ -1,16 +1,16 @@
-from nose.tools import *
 from geocal.igc_collection_extension import *
 from geocal.ray_intersect import *
 from geocal.image_ground_connection import *
 from geocal.tie_point_extension import *
-
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
+from test_support import *
 
 def test_ray_intersect():
     initial_height = 1291
     dem = SimpleDem(initial_height)
-    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", dem)
-    igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", dem)
+    igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
+                                      dem)
+    igc2 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-2.img",
+                                      dem)
     igc_coll = IgcArray([igc1, igc2])
     ri = RayIntersect2(igc_coll)
     ic1 = ImageCoordinate(550, 550)
@@ -20,10 +20,13 @@ def test_ray_intersect():
     assert distance(p, Geodetic(36.7754303197, -116.118981291, 1290.64)) < 0.01
 
 def test_tp():
-    demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
-    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
-    igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
-    igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
+    demin = VicarLiteDem(stereo_unit_test_data + "nevada_elv_aoi.img", True)
+    igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
+                                      demin)
+    igc2 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-2.img",
+                                      demin)
+    igc3 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-3.img",
+                                      demin)
     igc_coll = IgcArray([igc1, igc2, igc3])
     ri = RayIntersect2(igc_coll)
     tp = TiePoint(3)
@@ -35,10 +38,13 @@ def test_tp():
                                                  -116.116742412, 1276.05)) < 1
 
 def test_ray_intersect3():
-    demin = VicarLiteDem(test_data + "nevada_elv_aoi.img", True)
-    igc1 = VicarImageGroundConnection(test_data + "10MAY21-1.img", demin)
-    igc2 = VicarImageGroundConnection(test_data + "10MAY21-2.img", demin)
-    igc3 = VicarImageGroundConnection(test_data + "10MAY21-3.img", demin)
+    demin = VicarLiteDem(stereo_unit_test_data + "nevada_elv_aoi.img", True)
+    igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
+                                      demin)
+    igc2 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-2.img",
+                                      demin)
+    igc3 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-3.img",
+                                      demin)
     igc_coll = IgcArray([igc1, igc2, igc3])
     ri = RayIntersect3(igc_coll)
     tp = TiePoint(3)

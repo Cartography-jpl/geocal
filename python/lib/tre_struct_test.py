@@ -1,14 +1,9 @@
 from builtins import str
 from builtins import range
-from geocal_swig import *
-from nose.tools import *
 from tre_struct import *
 import subprocess
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 import sys
-
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-test_data2 = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
 
 # Basic test of tre_struct
 def test_tre_struct():
@@ -55,11 +50,9 @@ sun_az        : 131.3"""
     tre2.sun_az = 131.3
     assert tre2.string_value == tre_string
 
-def test_nitf_use00a_create():
+@require_vicar_gdalplugin    
+def test_nitf_use00a_create(isolated_dir):
     '''Create a nitf from existing VICAR data, adding a TRE for use00a'''
-    # Skip if we don't have support for VICAR in GDAL
-    if(os.environ.get("NO_VICAR_GDALPLUGIN")):
-        raise SkipTest
     try:
         os.remove("use00a.vrt")
     except OSError as exc:
@@ -69,7 +62,7 @@ def test_nitf_use00a_create():
     except OSError as exc:
         pass                    # Ok if doesn't exist
     subprocess.check_call(["gdal_translate", "-of", "VRT", "-q",
-                           test_data + "vicar.img", "use00a.vrt"])
+                           unit_test_data + "vicar.img", "use00a.vrt"])
     t = GdalRasterImage("use00a.vrt")
     tre = TreUSE00A()
     tre.angle_to_north = 270
@@ -88,7 +81,7 @@ def test_nitf_use00a_create():
     assert t.has_use00a
     t.close()
     subprocess.check_call(["gdal_to_nitf", "-q",
-                           test_data + "vicar.img", "use00a.ntf"])
+                           unit_test_data + "vicar.img", "use00a.ntf"])
     t = GdalRasterImage("use00a.ntf")
     tre = t.use00a
     assert tre.angle_to_north == 270
@@ -110,7 +103,7 @@ def test_nitf_use00a_create():
     
 # Check that GdalRasterImage got extended
 def test_gdal_raster():
-    t = GdalRasterImage(test_data + "test_use00a.ntf")
+    t = GdalRasterImage(unit_test_data + "test_use00a.ntf")
     tre = t.use00a
     assert tre.angle_to_north == 270
     assert tre.mean_gsd == 105.2
@@ -126,7 +119,7 @@ def test_gdal_raster():
 
 def test_tre_rpc():
     '''Test reading and writing a RPC'''
-    rpc = VicarLiteRasterImage(test_data2 + "10MAY21-1.img").rpc
+    rpc = VicarLiteRasterImage(stereo_unit_test_data + "10MAY21-1.img").rpc
     rpc_a = rpc.rpc_type_a()
     tb = TreRPC00B()
     ta = TreRPC00A()

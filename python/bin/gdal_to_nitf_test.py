@@ -1,27 +1,22 @@
 from geocal import *
-from nose.tools import *
 import subprocess
-import os
-from nose.plugins.skip import Skip, SkipTest
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
+from test_support import *
 
-def test_gdal_to_nitf():
+@require_vicar_gdalplugin
+def test_gdal_to_nitf(isolated_dir):
     '''Create a simple NITF from gdal_to_nitf, and check that everything is
     ok'''
-    # Skip we GDAL can't read VICAR.
-    if(os.environ.get("NO_VICAR_GDALPLUGIN")):
-        raise SkipTest
     try:
         os.remove("gdal_to_nitf.ntf")
     except OSError as exc:
         pass                    # Ok if doesn't exist
     
-    subprocess.check_call(["gdal_to_nitf", "-q", test_data + "10MAY21-1.img", 
+    subprocess.check_call(["gdal_to_nitf", "-q", stereo_unit_test_data + "10MAY21-1.img", 
                            "gdal_to_nitf.ntf"])
 
     # Check that NITF was created correctly
     f1 = GdalRasterImage("gdal_to_nitf.ntf")
-    f2 = GdalRasterImage(test_data + "10MAY21-1.img")
+    f2 = GdalRasterImage(stereo_unit_test_data + "10MAY21-1.img")
     rpc = f1.rpc
     rpc2 = f2.rpc
     assert_almost_equal(rpc.error_bias, rpc2.error_bias, 5)
@@ -50,12 +45,10 @@ def test_gdal_to_nitf():
     # way to test this, so just make sure IGEOLO is the same
     assert f1["NITF_IGEOLO"] == "364644N1160720W364645N1160642W364611N1160641W364609N1160720W"
 
-def test_gdal_to_nitf_a():
+@require_vicar_gdalplugin    
+def test_gdal_to_nitf_a(isolated_dir):
     '''Create a simple NITF from gdal_to_nitf, and check that everything is
     ok'''
-    # Skip we GDAL can't read VICAR.
-    if(os.environ.get("NO_VICAR_GDALPLUGIN")):
-        raise SkipTest
     try:
         os.remove("gdal_to_nitf.ntf")
     except OSError as exc:
@@ -64,12 +57,12 @@ def test_gdal_to_nitf_a():
     # This is the same data as previous test, except we have changed the
     # RPC to a "A" type. Note that this isn't a real RPC, just some play
     # data we can use to check everything out.
-    subprocess.check_call(["gdal_to_nitf", "-q", test_data + "10MAY21-1_A.img", 
+    subprocess.check_call(["gdal_to_nitf", "-q", stereo_unit_test_data + "10MAY21-1_A.img", 
                            "gdal_to_nitf.ntf"])
 
     # Check that NITF was created correctly
     f1 = GdalRasterImage("gdal_to_nitf.ntf")
-    f2 = GdalRasterImage(test_data + "10MAY21-1_A.img")
+    f2 = GdalRasterImage(stereo_unit_test_data + "10MAY21-1_A.img")
     # GDAL NITF always returns the RPC as type B. Go ahead an explicitly 
     # convert both, so can directly compare
     rpc = f1.rpc.rpc_type_b()
@@ -100,17 +93,15 @@ def test_gdal_to_nitf_a():
     # way to test this, so just make sure IGEOLO is the same
     assert f1["NITF_IGEOLO"] == "364644N1160720W364645N1160642W364611N1160641W364609N1160720W"
 
-def test_gda1_to_nitf_no_rpc():
+@require_vicar_gdalplugin    
+def test_gda1_to_nitf_no_rpc(isolated_dir):
     '''Create a simple NITF from gda1_to_nitf, and check that everything is
     ok. This input data does not have an RPC, so we can check that is handled
     correct1y.'''
-    # Skip we GDAL can't read VICAR.
-    if(os.environ.get("NO_VICAR_GDALPLUGIN")):
-        raise SkipTest
     try:
         os.remove("gdal_to_nitf.ntf")
     except OSError:
         pass # Ok if doesn't exist
     subprocess.check_call(["gdal_to_nitf", "-q",
-                           test_data + "../test_pixel_is_point.img",
+                           stereo_unit_test_data + "../test_pixel_is_point.img",
                            "gdal_to_nitf.ntf"])

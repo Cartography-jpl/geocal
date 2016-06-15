@@ -1,30 +1,16 @@
 from __future__ import division
 from past.utils import old_div
-from geocal_swig import *
 from geocal.vicar_wrap import *
-from nose.tools import *
 import math
-from nose.plugins.skip import Skip, SkipTest
-import os
+from test_support import *
 
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-try:
-    # Depending on the options used when building, this class might not
-    # be available. If not, just skip the tests
-    EciTodBurl
-    have_carto = True
-except NameError:
-    have_carto = False
-
-if(have_carto):
-    EciTodBurl.set_delta_ut1(0.1128609)
-
+@require_vicar
+@require_carto
 def test_scinterp():
     '''This was pulled from tstscinterp.pdf. This isn't actually a very
     good test, since we don't actually interpolate anything. But we want
     to include this test since it is what the underlying pdf file uses.'''
-    if(not have_carto or not VicarFile.vicar_available()):
-        raise SkipTest
+    EciTodBurl.set_delta_ut1(0.1128609)
     pos = EciTodBurl(3722048.0,4126137.9,3955545.4)
     tpos = Time.time_acs(31556737.5)
     att = Quaternion_double(0.06938316945407,0.20331591888905,
@@ -43,32 +29,34 @@ def test_scinterp():
     assert_almost_equal(res.sc_to_ci.R_component_4, att.R_component_4, 
                         6)
 
+@require_vicar
+@require_carto
 def test_sc2rpc():
     '''Test data from devsc2rpc'''
-    if(not have_carto or not VicarFile.vicar_available()):
-        raise SkipTest
+    EciTodBurl.set_delta_ut1(0.1128609)
     od = QuaternionOrbitData(Time.time_acs(215077459.471879),
                              EciTodBurl(3435100.496, 945571.538, -6053387.573),
                              [0,0,0],
                              Quaternion_double(0.946366, 0.0, -0.323096813, 
                                                0.0))
-    leapsecond_file = test_data + "leapsecond.dat"
+    leapsecond_file = unit_test_data + "leapsecond.dat"
     res = sc2rpc(od, EciTodBurl.get_delta_ut1(), leapsecond_file, 
                  ImageCoordinate(1,1),
                  0.0, Quaternion_double(1,0,0,0), 2500000, 2500000)
     expected = Geodetic(-60.3268510235, 47.235039309, 0)
     assert distance(res, expected) < 0.1
 
+@require_vicar
+@require_carto
 def test_compare_sc2rpc():
     '''Calculate using my code, and see how close we are to sc2rpc'''
-    if(not have_carto or not VicarFile.vicar_available()):
-        raise SkipTest
+    EciTodBurl.set_delta_ut1(0.1128609)
     od = QuaternionOrbitData(Time.time_acs(215077459.471879),
                              EciTodBurl(3435100.496, 945571.538, -6053387.573),
                              [0,0,0],
                              Quaternion_double(0.946366, 0.0, -0.323096813, 
                                                0.0))
-    leapsecond_file = test_data + "leapsecond.dat"
+    leapsecond_file = unit_test_data + "leapsecond.dat"
     sc_to_cam = Quaternion_double(0.98,0,0.2,0)
     sc2calc = lambda ic : sc2rpc(od, EciTodBurl.get_delta_ut1(), 
                                  leapsecond_file, ic,

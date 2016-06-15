@@ -4,20 +4,15 @@ standard_library.install_aliases()
 from builtins import range
 from past.utils import old_div
 import h5py
-import numpy as np
-import os
-from geocal_swig import *
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 import pickle
-
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
 
 def create_sample_file():
     '''This create a HDF 5 file that contains orbit information. We can use
     this is a base for converting from some other format to HDF 5 (e.g., 
     reading Level 0).'''
     # Create file, overwriting any existing file
-    f = h5py.File(test_data + "sample_orbit.h5", "w")
+    f = h5py.File(unit_test_data + "sample_orbit.h5", "w")
     # Create group, so we could have other things in the HDF 5 if we wanted
     # without worrying about possible name classes
     g = f.create_group("Orbit")
@@ -55,20 +50,14 @@ def create_sample_file():
 
 # create_sample_file()
 
+@require_hdf5
 def test_sc2rpc():
     '''This attempts to match the results of the sc2rpc unit tests.
     **NOTE** We get results that are about 7 meters different than what
     sc2rpc gets. This was tracked down to what I believe is a more
     accurate calculation the spice toolkit for J2000 to ECEF.  We allow
     a 10 meter error in comparing to sc2rpc.'''
-    try:
-        # Depending on the options used when building, this class might
-        # not be available. If not, then just skip this test.
-        HdfOrbit_EciTod_TimeAcs
-    except NameError:
-        raise SkipTest
-
-    orb = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
+    orb = HdfOrbit_EciTod_TimeAcs(unit_test_data + "sample_orbit.h5")
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
                            old_div(1.0, 2500000),
@@ -77,22 +66,16 @@ def test_sc2rpc():
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
     t = Time.time_acs(215077459.472);
-    pt = orb.reference_surface_intersect_approximate(t, cam, FrameCoordinate(3375, 3648))
+    pt = orb.reference_surface_intersect_approximate(t, cam,
+                                            FrameCoordinate(3375, 3648))
     pt_geod = Geodetic(-60.3162137, 47.2465154)
     assert distance(pt_geod, pt) < 10.0
     
-    
+
+@require_serialize
+@require_hdf5
 def test_pickle():
-    try:
-        # Depending on the options used when building, this class might
-        # not be available. If not, then just skip this test.
-        HdfOrbit_EciTod_TimeAcs
-    except NameError:
-        raise SkipTest
-    # Only run if we have serialization support in geocal
-    if(not have_serialize_supported()):
-        raise SkipTest
-    orb = HdfOrbit_EciTod_TimeAcs(test_data + "sample_orbit.h5")
+    orb = HdfOrbit_EciTod_TimeAcs(unit_test_data + "sample_orbit.h5")
     t = pickle.dumps(orb, pickle.HIGHEST_PROTOCOL)
     orb2 = pickle.loads(t)
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),

@@ -4,7 +4,7 @@ from builtins import range
 from past.utils import old_div
 import multiprocessing
 from multiprocessing import Pool
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 import functools
 
 def f(x):
@@ -18,8 +18,8 @@ def test_basic():
 def g(x, y):
     return x * y
 
+@skip
 def test_partial():
-    raise SkipTest
     # This doesn't actually work with python 2.6, although it seems
     # to work with 2.7. For now, we just avoid using partial with 
     # multiprocessing. We can always rewrite this in terms of a helper

@@ -40,8 +40,8 @@ else:
     fname = os.environ["SHELVE_DATABASE_FILE"]
     job_index = int(os.environ["PBS_ARRAYID"])
 
-print "Starting job %d from %s" % (job_index, fname)
+print("Starting job %d from %s" % (job_index, fname))
 f = read_shelve(fname + ":job_%d" % job_index)
 f()
-print "Done with job %d from %s" % (job_index, fname)
+print("Done with job %d from %s" % (job_index, fname))
 

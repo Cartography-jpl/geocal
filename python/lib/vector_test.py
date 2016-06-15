@@ -1,6 +1,4 @@
-from nose.tools import *
-from nose.plugins.skip import Skip, SkipTest
-from geocal_swig import *
+from test_support import *
 
 def convert_vector_test():
     '''Historically passing a sequence to something expected at std::vector

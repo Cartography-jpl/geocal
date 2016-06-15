@@ -2,14 +2,12 @@ from __future__ import print_function
 from __future__ import division
 from builtins import range
 from past.utils import old_div
-from nose.tools import *
-from geocal_swig import *
 from geocal.tie_point_extension import *
 from geocal.image_ground_connection import *
 from geocal.igc_collection_extension import *
 from geocal.simultaneous_bundle_adjustment import *
 from geocal.lm_optimize import *
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 import logging
 import sys
 
@@ -17,11 +15,9 @@ console = logging.StreamHandler(stream=sys.stdout)
 console.setLevel(logging.INFO)
 logging.getLogger("geocal-python").addHandler(console)
 
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/Stereo/"
-
+@skip
 def test_time():
-    raise SkipTest
-    orb_uncorr = HdfOrbit_EciTod_TimeAcs(test_data + "../sample_orbit.h5")
+    orb_uncorr = HdfOrbit_EciTod_TimeAcs(unit_test_data + "../sample_orbit.h5")
     orb = OrbitOffsetCorrection(orb_uncorr)
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,

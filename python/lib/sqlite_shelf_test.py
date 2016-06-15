@@ -1,11 +1,8 @@
-from nose.tools import *
 from sqlite_shelf import *
-import os
 import time
-from geocal_swig import ImageCoordinate, have_serialize_supported
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 
-def test_sqlite_shelf():
+def test_sqlite_shelf(isolated_dir):
     try:
         os.remove("sqlite_shelf.db")
     except OSError as exc:
@@ -24,8 +21,10 @@ def test_sqlite_shelf():
     assert d["value1"] == 1
     assert d["value2"] == [1, 2, 3, "blah"]
     assert d["value3"] == 4
-    assert_raises(KeyError, d.__getitem__, "value4")
-    assert_raises(RuntimeError, d.__setitem__, "value4", 1)
+    with pytest.raises(KeyError) as e_info:
+        d["value4"]
+    with pytest.raises(RuntimeError) as e_info:
+        d["value4"] = 1
     # This should be close to 0.1 seconds. But don't depend on that for
     # a test, instead just say we are ordered
     #print d.update_time_unix("value2") - d.update_time_unix("value1")
@@ -40,7 +39,7 @@ def test_sqlite_shelf():
     d = SQLiteShelf("sqlite_shelf.db", "r")
     assert d.update_time_julian("value1") > d.update_time_julian("value2")
 
-def test_read_write_shelf():
+def test_read_write_shelf(isolated_dir):
     try:
         os.remove("sqlite_shelf.db")
     except OSError as exc:
@@ -52,9 +51,8 @@ def test_read_write_shelf():
     assert read_shelve("sqlite_shelf.db:value1") == 3
     assert read_shelve("sqlite_shelf.db:value2") == [1, 2, 3, "blah"]
 
-def test_read_write_xml():
-    if(not have_serialize_supported()):
-        raise SkipTest
+@require_serialize    
+def test_read_write_xml(isolated_dir):
     try:
         os.remove("sqlite_shelf_test.xml")
     except OSError as exc:

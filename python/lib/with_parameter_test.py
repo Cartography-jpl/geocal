@@ -1,6 +1,4 @@
-from nose.tools import *
-from geocal_swig import *
-import numpy.testing as npt
+from test_support import *
 
 class WithParameterTest(WithParameter):
     def __init__(self):
@@ -41,10 +39,10 @@ def test_parameter_name():
 def test_parameter_subset():
     '''Test parameters subsetting.'''
     t = WithParameterTest()
-    npt.assert_almost_equal(t.parameter, [1,2,3])
-    npt.assert_almost_equal(t.parameter_subset, [2])
+    assert_almost_equal(t.parameter, [1,2,3])
+    assert_almost_equal(t.parameter_subset, [2])
     assert t.parameter_subset == [2]
     t.parameter_subset = [4]
-    npt.assert_almost_equal(t.parameter, [1,4,3])
-    npt.assert_almost_equal(t.parameter_subset, [4])
+    assert_almost_equal(t.parameter, [1,4,3])
+    assert_almost_equal(t.parameter_subset, [4])
     

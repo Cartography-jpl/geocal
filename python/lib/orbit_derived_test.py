@@ -1,9 +1,7 @@
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
-from nose.tools import *
-from nose.plugins.skip import Skip, SkipTest
-from geocal_swig import *
+from test_support import *
 import pickle
 
 def _new_from_serialization(data):
@@ -45,22 +43,20 @@ class PythonOrbit(Orbit):
     def __reduce__(self):
         return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
+# Temporary, parallel and pickle stuff doesn't seem to work yet
+@skip
+@require_serialize
 def test_director_serialize():
-    # Temporary, parallel and pickle stuff doesn't seem to work yet
-    raise SkipTest
-    if(not have_serialize_supported()):
-        raise SkipTest
     orb = PythonOrbit()
     t = serialize_write_string(orb)
     print(t)
     orb2 = serialize_read_generic_string(t)
     print(orb2.min_time)
 
+# Temporary, parallel and pickle stuff doesn't seem to work yet
+@skip
+@require_serialize
 def test_director_pickle():
-    # Temporary, parallel and pickle stuff doesn't seem to work yet
-    raise SkipTest
-    if(not have_serialize_supported()):
-        raise SkipTest
     orb = PythonOrbit()
     t = pickle.dumps(orb)
     print(t)

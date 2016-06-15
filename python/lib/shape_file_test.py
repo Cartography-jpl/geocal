@@ -1,23 +1,19 @@
-from nose.tools import *
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 try:
     from shape_file import *
 except ImportError:
     pass                        # Let this fail, it just means we can't 
                                 # run the unit test
-import os
 import shutil
 
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-
+@skip
 def test_read():
     '''Test basic reading'''
-    raise SkipTest
     try:
         ShapeFile
     except NameError:
         raise SkipTest
-    sf = ShapeFile(test_data + "FRST_POIof090514.shp")
+    sf = ShapeFile(unit_test_data + "FRST_POIof090514.shp")
     assert sf.file_name, test_data + "FRST_POIof090514.shp"
     assert list(sf.keys()) == ["FRST_POIof090514"]
     assert sf["FRST_POIof090514"].name == "FRST_POIof090514"
@@ -25,9 +21,9 @@ def test_read():
     assert len(sf["FRST_POIof090514"]) == 11
     assert sf["FRST_POIof090514"][3]["NAME"] == "Point_4"
 
+@skip    
 def test_footprint_poi_intersect():
     '''Test finding footprints that match a particular POI set.'''
-    raise SkipTest
     try:
         ShapeFile
     except NameError:
@@ -40,9 +36,9 @@ def test_footprint_poi_intersect():
     ly.set_attribute_filter("Camera = 1")
     assert len(ly), 30
 
+@skip    
 def test_write():
     '''Test basic writing'''
-    raise SkipTest
     try:
         ShapeFile
     except NameError:

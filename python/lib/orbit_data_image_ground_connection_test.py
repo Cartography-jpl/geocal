@@ -1,7 +1,6 @@
 from __future__ import division
 from past.utils import old_div
-from geocal_swig import *
-from nose.tools import *
+from test_support import *
 
 def test_odgc():
     orb = KeplerOrbit()

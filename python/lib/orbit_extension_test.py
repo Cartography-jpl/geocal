@@ -1,7 +1,5 @@
-from nose.tools import *
-from geocal_swig import *
 from orbit_extension import *
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 
 def test_orbit_from_tle():
     # TLE comes from http://www.n2yo.com/satellite/?s=25544, and this is

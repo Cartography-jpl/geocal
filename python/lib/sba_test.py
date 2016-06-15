@@ -2,8 +2,6 @@ from __future__ import print_function
 from __future__ import division
 from builtins import range
 from past.utils import old_div
-from nose.tools import *
-from geocal_swig import *
 from geocal.tie_point_collect import *
 from geocal.image_ground_connection import *
 from geocal.simultaneous_bundle_adjustment import *
@@ -12,13 +10,12 @@ from geocal.lm_optimize import *
 import scipy.optimize
 import scipy.sparse as sp
 import scipy.sparse.linalg
-from nose.plugins.skip import Skip, SkipTest
 import matplotlib.pylab as plt
 import matplotlib as mpl
 import pandas as pd
 import seaborn as sns
 from matplotlib.backends.backend_pdf import PdfPages
-
+from test_support import *
 import logging
 import sys
 
@@ -45,10 +42,10 @@ def sol_iteration(sba, parm, lam):
     print(sba.gcp_constraint())
     return pnew
 
+@skip
 def test_jac():
     '''Check the calculation of the jacobian against a finite difference
     calculation.'''
-    raise SkipTest()
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     x = []
     t = []
@@ -114,10 +111,10 @@ def test_jac():
     print(np.max(np.abs(t2)))
     print(np.unravel_index(np.argmax(np.abs(t2)), t2.shape))
 
+@skip    
 def test_mspi_old_sba():
     '''This matches an old SBA run done using the old version of GeoCal.
     See if we can match this.'''
-    raise SkipTest()
     # The old run used geocentric coordinates to define the attitude
     # axis. We manually edited this xml file to have vdef go from 0
     # (geodetic) to 1.
@@ -251,9 +248,9 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
     plt.ylabel("Sample residual")
     pdf.savefig()
 
+@skip    
 def test_mspi_sba():
     '''Directly run MSPI SBA case, and generate diagnostic output.'''
-    raise SkipTest
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     x = []
     t = []
@@ -322,11 +319,11 @@ def test_mspi_sba():
                 tpsim.append(tp)
         write_shelve("play_data.db:tpsim", tpsim)
 
+@skip        
 def test_mspi_sba_subset():
     '''Run SBA on a subset of views, to see if results are improved'''
     # Try fitting the camera parameter only using nadir, followed by more
     # full fit.
-    raise SkipTest
     igccol = read_shelve(test_data + "/igccol_initial.xml")
     t = vector_int()
     t.push_back(3)

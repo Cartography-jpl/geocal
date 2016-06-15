@@ -1,30 +1,19 @@
 from __future__ import print_function
 from builtins import range
-from nose.tools import *
-from geocal_swig import *
 from geocal.tie_point_extension import *
 from geocal.image_ground_connection import *
 from geocal.ray_intersect import *
 from geocal.feature_detector_extension import *
 from geocal.sqlite_shelf import *
-from nose.plugins.skip import Skip, SkipTest
+from test_support import *
 import shutil
-
-# Data is way too big to check into source, so we put it here. This means
-# we have tests that can only be run on pistol. We may fold this into
-# the afids data area at some point.
-geocal_test_igc = "/data/geocal_test_data/igccol_rolling_shutter.xml"
-geocal_test_igc_sim_error = "/data/geocal_test_data/igccol_rolling_shutter_simulated_error.xml"
-geocal_test_tpcol = "/data/geocal_test_data/tpcol.xml"
-mspi_test_data = os.path.dirname(__file__) + "/../../unit_test_data/mspi/"
-
 
 def test_basic():
     '''Basic test of tiepoint'''
     t = TiePoint(5)
     assert t.number_image, 5
 
-def test_old_mspi_format():
+def test_old_mspi_format(isolated_dir):
     '''Test for reading the old MSPI format.'''
     fname = mspi_test_data + "old_tie_point/tie_point_211051000.dat"
     t = TiePoint(5)
@@ -44,12 +33,10 @@ def test_old_mspi_format():
     tpcol.write_old_mspi_format("old_mspi_tp")
 
 
+@require_serialize
+@require_geocal_test_data
 def test_create_multiple_pass():
     '''Test create_multiple_pass'''
-    if(not os.path.exists(geocal_test_igc)):
-        raise SkipTest
-    if(not have_serialize_supported()):
-        raise SkipTest
     tpcol1 = read_shelve(geocal_test_tpcol)
     igccol1 = read_shelve(geocal_test_igc)
     tpcol2 = read_shelve(geocal_test_tpcol)
@@ -61,13 +48,11 @@ def test_create_multiple_pass():
     assert igccol.number_image == tpcol[0].number_image
     
 
+@require_serialize
+@require_geocal_test_data
 def test_tie_point():
     '''Further testing of tiepoint, requires access to the geocal_test_data
     '''
-    if(not os.path.exists(geocal_test_igc)):
-        raise SkipTest
-    if(not have_serialize_supported()):
-        raise SkipTest
     igccol = read_shelve(geocal_test_igc)
     tpcol = read_shelve(geocal_test_tpcol)
     tp = tpcol[0]
@@ -80,11 +65,6 @@ def test_tie_point():
     print(tpcol.data_frame(igccol, 0))
     print(tpcol.panel(igccol))
 
-# If you run this, make sure to include this import. Otherwise the namespace
-# for the tiepoint isn't correct in the TiePointCollection shelf
-# But don't have this uncommented out when running unit test or we will be
-# looking at the wrong place for testing
-from geocal import *
 def generate_tie_point_collection():
     '''This creates a "simulated" version of the igccol_rolling_shutter.xml.
     We generate tiepoints based on the "truth".

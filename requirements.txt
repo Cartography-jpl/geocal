@@ -21,7 +21,8 @@ scipy>=0.10.1
 matplotlib>=1.0.1
 h5py
 sphinx
-nose
+pytest
+pytest-xdist
 ipython[all]
 scikit-umfpack
 seaborn

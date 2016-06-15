@@ -1,26 +1,12 @@
-from nose.plugins.skip import Skip, SkipTest
-import subprocess
-import os
-import sys
 import re
-
-def cmd_exists(cmd):
-    '''Check if a cmd exists by using type, which returns a nonzero status if
-    the program isn't found'''
-    return subprocess.call("type " + cmd, shell=True, 
-                           stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
-
-def check_vicarb():
-    '''Check for existence of vicarb program. If not found, raise SkipTest.'''
-    if(not cmd_exists("vicarb")):
-        raise SkipTest()
-    # AFIDS uses python 3.5, so don't both supporting python 2 with this code.
-    # We just skip all the tests if we are using python 2.
-    if sys.version_info < (3,5):
-        raise SkipTest()
+from test_support import *
 
 def check_for_proc(proc):
     '''Check for the existence of a vicar/AFIDS proc.'''
+    # AFIDS uses python 3.5, so don't bother supporting python 2 with this code.
+    # We just skip all the tests if we are using python 2.
+    if sys.version_info < (3,5):
+        return False
     cmd2 = re.sub(r'\+?\n',"", proc)
     cmd2 = re.sub(r'"',"\\\"", cmd2)
     res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,
@@ -79,3 +65,15 @@ def set_original_env(original_env):
     else:
         if 'TAE_PATH' in os.environ:
             del os.environ['TAE_PATH']
+
+
+@pytest.yield_fixture(scope="function")
+def vicarb_env(isolated_dir):
+    '''This sets up for a test of our own pdf files. We make sure that we
+    have the proper TAEPATH, and we also set up to run in an isolated 
+    directory so we capture all the files vicar tends to vomit.'''
+    original_env = None
+    add_tae_path(isolated_dir, original_env)
+    yield
+    set_original_env(original_env)
+    

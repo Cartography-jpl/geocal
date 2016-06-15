@@ -1,21 +1,19 @@
 from geocal import *
-from nose.tools import *
-from vicar_test_support import *
+from test_support import *
 import subprocess
 import os
 import sys
 
-# Setup and teardown called automatically by nosetest for whole module
-original_env = None
-def setup():
-    check_vicarb()
-    add_tae_path(os.path.dirname(__file__), original_env)
+local_dir = os.path.abspath(os.path.dirname(__file__))
 
-def teardown():
-    set_original_env(original_env)
-
-def test_call_sample_vicar_python():
+@require_vicarb    
+def test_call_sample_vicar_python(vicarb_env):
     '''Class the sample vicar program.'''
+    # Want to run from local directory. Note that vicarb resets TAE_PATH
+    # when we are done with this test, so we don't need to worry about
+    # cleaning this up here.
+    os.environ['TAE_PATH'] = local_dir + ":" + os.environ['TAE_PATH']
+
     # This should return the string "ret=101", along with the normal VICAR
     # verbage
     res = subprocess.check_output(["vicarb", 

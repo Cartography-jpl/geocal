@@ -7,3 +7,4 @@ create_delta.bundle
 *.pyc
 *.o
 *.lo
+.cache

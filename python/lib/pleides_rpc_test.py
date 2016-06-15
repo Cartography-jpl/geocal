@@ -1,11 +1,10 @@
 from builtins import str
 from builtins import range
-from nose.tools import *
 from pleides_rpc import *
+from test_support import *
 
-test_data = os.path.dirname(__file__) + "/../../unit_test_data/"
-xml_fname = test_data + "RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML"
 def test_pleides_rpc():
+    xml_fname = unit_test_data + "RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML"
     rpc = pleides_rpc(xml_fname)
     # Expected value here comes from directly copying from the XML file
     rpc_e = Rpc()
@@ -120,8 +119,6 @@ def test_pleides_rpc():
                             rpc_e.sample_denominator[i])
         assert_almost_equal(rpc.sample_numerator[i], 
                             rpc_e.sample_numerator[i])
-        assert_almost_equal(rpc.fit_line_numerator[i], 
-                            rpc_e.fit_line_numerator[i])
-        assert_almost_equal(rpc.fit_sample_numerator[i],
-                            rpc_e.fit_sample_numerator[i])
+        assert rpc.fit_line_numerator[i] == rpc_e.fit_line_numerator[i]
+        assert rpc.fit_sample_numerator[i] == rpc_e.fit_sample_numerator[i]
 

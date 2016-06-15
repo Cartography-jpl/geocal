@@ -27,5 +27,5 @@ include geocal/python/python.am
 include geocal/python/bin/bin.am
 include geocal/python/lib/lib.am
 include geocal/python/doc/doc_python.am
-include geocal/python/vicar_test_support/vicar_test_support.am
+include geocal/python/test_support/test_support.am
 

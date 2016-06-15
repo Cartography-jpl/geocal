@@ -36,7 +36,7 @@ if test "x$want_doxygen" = "xyes"; then
             succeeded=yes
 	    DOXYGEN=$ac_doxygen_path/bin/doxygen
         else
-            AC_PATH_PROG([DOXYGEN], [doxygen])
+            AC_PATH_PROG([DOXYGEN], [doxygen], [], [$THIRDPARTY/bin:$PATH])
 	    if test -n "$DOXYGEN" ; then
               succeeded=yes
             fi

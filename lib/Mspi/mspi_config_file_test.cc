@@ -73,7 +73,16 @@ BOOST_AUTO_TEST_CASE(basic_test2)
   BOOST_CHECK(config.value<int>("last_unshielded") == 1434);
   BOOST_CHECK(config.value<std::string>("epoch") == "1601-01-01T:00:00:00:000000Z");
 }
-    
+
+BOOST_AUTO_TEST_CASE(base_version_override)
+{
+  // Test having a file with a "base_version" entry, for doing
+  // cascading configuration files.
+  MspiConfigFile config(test_data_dir() + "mspi_config_file_test4.txt");
+  BOOST_CHECK(config.value<int>("polarization_angle_Q") == 100);
+  BOOST_CHECK(config.value<int>("last_unshielded") == 1434);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())

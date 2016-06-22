@@ -62,12 +62,15 @@ void MspiConfigFile::add_file(const std::string& Fname)
   // Now break up into keyword/value pairs
   std::string s = buf.str();
   boost::sregex_iterator i(s.begin(), s.end(), 
-			   boost::regex("^((?:[^:]|\\n)*):\\s*([[:word:]\\-\\.]+)\\s*$"));
+			   boost::regex("^((?:\".*\")?(?:[^:]|\\n)*):\\s*([[:word:]\\-\\.]+)\\s*$"));
   boost::sregex_iterator iend;
   for(; i != iend; ++i) {
     std::string key = (*i)[2];
     std::string val = (*i)[1];
     boost::trim(val);
+    // Strip of leading and trailing '"' if this is in the string.
+    if(val[0] == '"' && val[val.length()-1] == '"')
+      val = val.substr(1, val.length() - 2);
     // Check to see if this is a duplicate. By convention, this is
     // treated as an error.
     if(new_key.count(key) != 0) {

@@ -3465,11 +3465,12 @@ namespace Swig {
 #define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[46]
 #define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[47]
 #define SWIGTYPE_p_std__invalid_argument swig_types[48]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[49]
-#define SWIGTYPE_p_traits_type swig_types[50]
-#define SWIGTYPE_p_value_type swig_types[51]
-static swig_type_info *swig_types[53];
-static swig_module_info swig_module = {swig_types, 52, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t swig_types[49]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[50]
+#define SWIGTYPE_p_traits_type swig_types[51]
+#define SWIGTYPE_p_value_type swig_types[52]
+static swig_type_info *swig_types[54];
+static swig_module_info swig_module = {swig_types, 53, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5388,7 +5389,193 @@ SWIGINTERN double GeoCal_MspiConfigFile_value_double(GeoCal::MspiConfigFile cons
 
   #define SWIG_From_double   PyFloat_FromDouble 
 
+SWIGINTERN std::vector< double,std::allocator< double > > GeoCal_MspiConfigFile_value_vector_double(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<std::vector<double> >(Key); }
+
+namespace swig {
+  template <> struct traits<double > {
+    typedef value_category category;
+    static const char* type_name() { return"double"; }
+  };  
+  template <>  struct traits_asval<double > {   
+    typedef double value_type;
+    static int asval(PyObject *obj, value_type *val) { 
+      return SWIG_AsVal_double (obj, val);
+    }
+  };
+  template <>  struct traits_from<double > {
+    typedef double value_type;
+    static PyObject *from(const value_type& val) {
+      return SWIG_From_double  (val);
+    }
+  };
+}
+
+
+namespace swig {
+  template <class SwigPySeq, class Seq>
+  inline void
+  assign(const SwigPySeq& swigpyseq, Seq* seq) {
+    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
+    typedef typename SwigPySeq::value_type value_type;
+    typename SwigPySeq::const_iterator it = swigpyseq.begin();
+    for (;it != swigpyseq.end(); ++it) {
+      seq->insert(seq->end(),(value_type)(*it));
+    }
+  }
+
+  template <class Seq, class T = typename Seq::value_type >
+  struct traits_asptr_stdseq {
+    typedef Seq sequence;
+    typedef T value_type;
+
+    static int asptr(PyObject *obj, sequence **seq) {
+      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
+	sequence *p;
+	if (::SWIG_ConvertPtr(obj,(void**)&p,
+			      swig::type_info<sequence>(),0) == SWIG_OK) {
+	  if (seq) *seq = p;
+	  return SWIG_OLDOBJ;
+	}
+      } else if (PySequence_Check(obj)) {
+	try {
+	  SwigPySequence_Cont<value_type> swigpyseq(obj);
+	  if (seq) {
+	    sequence *pseq = new sequence();
+	    assign(swigpyseq, pseq);
+	    *seq = pseq;
+	    return SWIG_NEWOBJ;
+	  } else {
+	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
+	  }
+	} catch (std::exception& e) {
+	  if (seq) {
+	    if (!PyErr_Occurred()) {
+	      PyErr_SetString(PyExc_TypeError, e.what());
+	    }
+	  }
+	  return SWIG_ERROR;
+	}
+      }
+      return SWIG_ERROR;
+    }
+  };
+
+  template <class Seq, class T = typename Seq::value_type >
+  struct traits_from_stdseq {
+    typedef Seq sequence;
+    typedef T value_type;
+    typedef typename Seq::size_type size_type;
+    typedef typename sequence::const_iterator const_iterator;
+
+    static PyObject *from(const sequence& seq) {
+#ifdef SWIG_PYTHON_EXTRA_NATIVE_CONTAINERS
+      swig_type_info *desc = swig::type_info<sequence>();
+      if (desc && desc->clientdata) {
+	return SWIG_NewPointerObj(new sequence(seq), desc, SWIG_POINTER_OWN);
+      }
+#endif
+      size_type size = seq.size();
+      if (size <= (size_type)INT_MAX) {
+	PyObject *obj = PyTuple_New((int)size);
+	int i = 0;
+	for (const_iterator it = seq.begin();
+	     it != seq.end(); ++it, ++i) {
+	  PyTuple_SetItem(obj,i,swig::from<value_type>(*it));
+	}
+	return obj;
+      } else {
+	PyErr_SetString(PyExc_OverflowError,"sequence size not valid in python");
+	return NULL;
+      }
+    }
+  };
+}
+
+
+  namespace swig {
+    template <class T>
+    struct traits_asptr<std::vector<T> >  {
+      static int asptr(PyObject *obj, std::vector<T> **vec) {
+	return traits_asptr_stdseq<std::vector<T> >::asptr(obj, vec);
+      }
+    };
+    
+    template <class T>
+    struct traits_from<std::vector<T> > {
+      static PyObject *from(const std::vector<T>& vec) {
+	return traits_from_stdseq<std::vector<T> >::from(vec);
+      }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<double, std::allocator< double > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "double" "," "std::allocator< double >" " >";
+	  }
+	};
+      }
+    
 SWIGINTERN int GeoCal_MspiConfigFile_value_int(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<int>(Key); }
+SWIGINTERN std::vector< int,std::allocator< int > > GeoCal_MspiConfigFile_value_vector_int(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<std::vector<int> >(Key); }
+
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
+namespace swig {
+  template <> struct traits<int > {
+    typedef value_category category;
+    static const char* type_name() { return"int"; }
+  };  
+  template <>  struct traits_asval<int > {   
+    typedef int value_type;
+    static int asval(PyObject *obj, value_type *val) { 
+      return SWIG_AsVal_int (obj, val);
+    }
+  };
+  template <>  struct traits_from<int > {
+    typedef int value_type;
+    static PyObject *from(const value_type& val) {
+      return SWIG_From_int  (val);
+    }
+  };
+}
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<int, std::allocator< int > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "int" "," "std::allocator< int >" " >";
+	  }
+	};
+      }
+    
 SWIGINTERN std::string GeoCal_MspiConfigFile_value_string(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<std::string>(Key); }
 
 SWIGINTERNINLINE PyObject *
@@ -5422,33 +5609,57 @@ SWIG_From_std_string  (const std::string& s)
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
 
-SWIGINTERN bool GeoCal_MspiConfigFile_value_bool(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<bool>(Key); }
-
-#include <limits.h>
-#if !defined(SWIG_NO_LLONG_MAX)
-# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
-#   define LLONG_MAX __LONG_LONG_MAX__
-#   define LLONG_MIN (-LLONG_MAX - 1LL)
-#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-# endif
-#endif
-
+SWIGINTERN std::vector< std::string,std::allocator< std::string > > GeoCal_MspiConfigFile_value_vector_string(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<std::vector<std::string> >(Key); }
 
 SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
+SWIG_AsVal_std_string (PyObject * obj, std::string *val)
 {
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
+  std::string* v = (std::string *) 0;
+  int res = SWIG_AsPtr_std_string (obj, &v);
+  if (!SWIG_IsOK(res)) return res;
+  if (v) {
+    if (val) *val = *v;
+    if (SWIG_IsNewObj(res)) {
+      delete v;
+      res = SWIG_DelNewMask(res);
     }
-  }  
-  return res;
+    return res;
+  }
+  return SWIG_ERROR;
 }
 
+
+namespace swig {
+  template <> struct traits<std::string > {
+    typedef value_category category;
+    static const char* type_name() { return"std::string"; }
+  };  
+  template <>  struct traits_asval<std::string > {   
+    typedef std::string value_type;
+    static int asval(PyObject *obj, value_type *val) { 
+      return SWIG_AsVal_std_string (obj, val);
+    }
+  };
+  template <>  struct traits_from<std::string > {
+    typedef std::string value_type;
+    static PyObject *from(const value_type& val) {
+      return SWIG_From_std_string  (val);
+    }
+  };
+}
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<std::string, std::allocator< std::string > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "std::string" "," "std::allocator< std::string >" " >";
+	  }
+	};
+      }
+    
+SWIGINTERN bool GeoCal_MspiConfigFile_value_bool(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<bool>(Key); }
+SWIGINTERN std::vector< bool,std::allocator< bool > > GeoCal_MspiConfigFile_value_vector_bool(GeoCal::MspiConfigFile const *self,std::string const &Key){ return self->value<std::vector<bool> >(Key); }
 SWIGINTERN double GeoCal_MspiConfigTable_value_double(GeoCal::MspiConfigTable const *self,int Index,std::string const &Column){ return self->value<double>(Index, Column); }
 SWIGINTERN int GeoCal_MspiConfigTable_value_int(GeoCal::MspiConfigTable const *self,int Index,std::string const &Column){ return self->value<int>(Index, Column); }
 SWIGINTERN std::string GeoCal_MspiConfigTable_value_string(GeoCal::MspiConfigTable const *self,int Index,std::string const &Column){ return self->value<std::string>(Index, Column); }
@@ -6532,6 +6743,63 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiConfigFile_value_vector_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  std::vector< double,std::allocator< double > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MspiConfigFile_value_vector_double",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiConfigFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiConfigFile_value_vector_double" "', argument " "1"" of type '" "GeoCal::MspiConfigFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MspiConfigFile_value_vector_double" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiConfigFile_value_vector_double" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      result = GeoCal_MspiConfigFile_value_vector_double((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector<double,std::allocator< double > > >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MspiConfigFile_value_int(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
@@ -6581,6 +6849,63 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_int(PyObject *SWIGUNUSEDPARM(sel
     }
   }
   resultobj = SWIG_From_int(static_cast< int >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MspiConfigFile_value_vector_int(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  std::vector< int,std::allocator< int > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MspiConfigFile_value_vector_int",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiConfigFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiConfigFile_value_vector_int" "', argument " "1"" of type '" "GeoCal::MspiConfigFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MspiConfigFile_value_vector_int" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiConfigFile_value_vector_int" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      result = GeoCal_MspiConfigFile_value_vector_int((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector<int,std::allocator< int > > >(result));
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
@@ -6646,6 +6971,63 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiConfigFile_value_vector_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  std::vector< std::string,std::allocator< std::string > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MspiConfigFile_value_vector_string",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiConfigFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiConfigFile_value_vector_string" "', argument " "1"" of type '" "GeoCal::MspiConfigFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MspiConfigFile_value_vector_string" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiConfigFile_value_vector_string" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      result = GeoCal_MspiConfigFile_value_vector_string((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector<std::string,std::allocator< std::string > > >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MspiConfigFile_value_bool(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
@@ -6695,6 +7077,63 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_bool(PyObject *SWIGUNUSEDPARM(se
     }
   }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MspiConfigFile_value_vector_bool(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiConfigFile *arg1 = (GeoCal::MspiConfigFile *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiConfigFile const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  SwigValueWrapper< std::vector< bool,std::allocator< bool > > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MspiConfigFile_value_vector_bool",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiConfigFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiConfigFile_value_vector_bool" "', argument " "1"" of type '" "GeoCal::MspiConfigFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiConfigFile > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiConfigFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MspiConfigFile_value_vector_bool" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiConfigFile_value_vector_bool" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      result = GeoCal_MspiConfigFile_value_vector_bool((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new std::vector< bool,std::allocator< bool > >(static_cast< const std::vector< bool,std::allocator< bool > >& >(result))), SWIGTYPE_p_std__vectorT_bool_std__allocatorT_bool_t_t, SWIG_POINTER_OWN |  0 );
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
@@ -7248,9 +7687,13 @@ static PyMethodDef SwigMethods[] = {
 		"True if we have a value for the given keyword. \n"
 		""},
 	 { (char *)"MspiConfigFile_value_double", _wrap_MspiConfigFile_value_double, METH_VARARGS, NULL},
+	 { (char *)"MspiConfigFile_value_vector_double", _wrap_MspiConfigFile_value_vector_double, METH_VARARGS, NULL},
 	 { (char *)"MspiConfigFile_value_int", _wrap_MspiConfigFile_value_int, METH_VARARGS, NULL},
+	 { (char *)"MspiConfigFile_value_vector_int", _wrap_MspiConfigFile_value_vector_int, METH_VARARGS, NULL},
 	 { (char *)"MspiConfigFile_value_string", _wrap_MspiConfigFile_value_string, METH_VARARGS, NULL},
+	 { (char *)"MspiConfigFile_value_vector_string", _wrap_MspiConfigFile_value_vector_string, METH_VARARGS, NULL},
 	 { (char *)"MspiConfigFile_value_bool", _wrap_MspiConfigFile_value_bool, METH_VARARGS, NULL},
+	 { (char *)"MspiConfigFile_value_vector_bool", _wrap_MspiConfigFile_value_vector_bool, METH_VARARGS, NULL},
 	 { (char *)"MspiConfigFile___str__", (PyCFunction)_wrap_MspiConfigFile___str__, METH_O, NULL},
 	 { (char *)"delete_MspiConfigFile", (PyCFunction)_wrap_delete_MspiConfigFile, METH_O, (char *)"\n"
 		"\n"
@@ -7365,6 +7808,7 @@ static swig_type_info _swigt__p_std__basic_iostreamT_char_std__char_traitsT_char
 static swig_type_info _swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_istreamT_char_std__char_traitsT_char_t_t", "std::basic_istream< char,std::char_traits< char > > *|std::istream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t", "std::basic_ostream< char,std::char_traits< char > > *|std::ostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t = {"_p_std__vectorT_bool_std__allocatorT_bool_t_t", "std::vector< bool,std::allocator< bool > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
@@ -7419,6 +7863,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__invalid_argument,
+  &_swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_traits_type,
   &_swigt__p_value_type,
@@ -7473,6 +7918,7 @@ static swig_cast_info _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char
 static swig_cast_info _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_bool_std__allocatorT_bool_t_t[] = {  {&_swigt__p_std__vectorT_bool_std__allocatorT_bool_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7527,6 +7973,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__invalid_argument,
+  _swigc__p_std__vectorT_bool_std__allocatorT_bool_t_t,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_traits_type,
   _swigc__p_value_type,

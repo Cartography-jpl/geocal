@@ -20066,6 +20066,11 @@ $as_echo_n "checking for Doxygen... " >&6; }
             succeeded=yes
 	    DOXYGEN=$ac_doxygen_path/bin/doxygen
         else
+	    if test "x$THIRDPARTY" = x ; then
+              doxygen_search_path=$PATH
+            else
+              doxygen_search_path=$THIRDPARTY/bin:$PATH
+            fi
             # Extract the first word of "doxygen", so it can be a program name with args.
 set dummy doxygen; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
@@ -20079,8 +20084,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $doxygen_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22387,6 +22391,11 @@ fi
      if test "required" == "required"; then
 
 
+if test "x$THIRDPARTY" = x ; then
+   python_search_path=$PATH
+else
+   python_search_path=$THIRDPARTY/bin:$PATH
+fi
 # Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
 set dummy python$PYTHON_VERSION; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
@@ -22400,8 +22409,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $python_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22485,7 +22493,7 @@ fi
 if test -n ">= '2.6.1'"; then
    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python >= '2.6.1'" >&5
 $as_echo_n "checking for a version of Python >= '2.6.1'... " >&6; }
-   ac_supports_python_ver=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64 $PYTHON -c "import sys; \
+   ac_supports_python_ver=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:$LD_LIBRARY_PATH $PYTHON -c "import sys; \
 	ver = sys.version.split ()[0]; \
 	print (ver >= '2.6.1')"`
    if test "$ac_supports_python_ver" = "True"; then
@@ -22519,8 +22527,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $python_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22563,8 +22570,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $python_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22831,8 +22837,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $python_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22894,8 +22899,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $python_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -22950,6 +22954,11 @@ fi
     else
 
 
+if test "x$THIRDPARTY" = x ; then
+   python_search_path=$PATH
+else
+   python_search_path=$THIRDPARTY/bin:$PATH
+fi
 # Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
 set dummy python$PYTHON_VERSION; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
@@ -22963,8 +22972,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $python_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -23048,7 +23056,7 @@ fi
 if test -n ">= '2.6.1'"; then
    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for a version of Python >= '2.6.1'" >&5
 $as_echo_n "checking for a version of Python >= '2.6.1'... " >&6; }
-   ac_supports_python_ver=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64 $PYTHON -c "import sys; \
+   ac_supports_python_ver=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:$LD_LIBRARY_PATH $PYTHON -c "import sys; \
 	ver = sys.version.split ()[0]; \
 	print (ver >= '2.6.1')"`
    if test "$ac_supports_python_ver" = "True"; then
@@ -23082,8 +23090,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $python_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -23126,8 +23133,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $python_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -23597,6 +23603,11 @@ fi
 
 
         have_swig=no
+        if test "x$THIRDPARTY" = x ; then
+           swig_search_path=$PATH
+        else
+           swig_search_path=$THIRDPARTY/bin:$PATH
+        fi
         # Extract the first word of "swig", so it can be a program name with args.
 set dummy swig; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
@@ -23610,8 +23621,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-as_dummy="$THIRDPARTY/bin:$PATH"
-for as_dir in $as_dummy
+for as_dir in $swig_search_path
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.

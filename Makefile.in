@@ -2042,6 +2042,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML \
 	@geocalunittestdata@/mspi_config_file_test.txt \
 	@geocalunittestdata@/mspi_config_file_test2.txt \
+	@geocalunittestdata@/mspi_config_file_test3.txt \
+	@geocalunittestdata@/mspi_config_file_test4.txt \
 	@geocalunittestdata@/mspi_camera_test.config2 \
 	@geocalunittestdata@/mspi_camera_test.config \
 	@geocalunittestdata@/GndMSPI_CONFIG_CAMERA_MODEL_V004.config \

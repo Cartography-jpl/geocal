@@ -1,0 +1,53 @@
+granule_MSPI-Ground/L0/Instrument/src/instrument_info_test.config : granule_id
+"1601-01-01T:00:00:00:000000Z" : epoch # Epoch for timestamps
+80000000 : hardware_clock_rate # Hardware clock frequency in cycles per second
+0  : polarization_angle_Q # Nomimal polarization angle of Q channel in degrees (integer)
+1  : polarization_sign_Q # Polarization sign based on the orientation of polarizer (integer)
+45 : polarization_angle_U # Nomimal polarization angle of U channel in degrees (integer)
+-1 : polarization_sign_U # Polarization sign based on the orientation of polarizer (integer)
+0.1 : D # Estimate of the retardance amplitude mismatch between the PEMs.
+0.2 : eta  # Estimated phase of the beat modulation pattern within a frame.
+
+8 : number_band # Number of wavelengths
+    1     10    3     4     5     6     7     8 : band_numbers  # Band numbers (1-based)
+  355    380  445   470   555   660   865   935 : wavelengths   # Wavelength for each band (nanometers)
+0.076 0.077 0.078 0.079 0.080 0.081 0.082 0.083 : delta_lambda_over_lambda 
+                                                     # Spectral bandwidth divided by central
+		                                     # wavelength for each band.
+
+6.87887 6.42632 5.48764 5.19574 4.40000 3.70000 2.82312 2.61176 : delta0_estimate 
+                                                     # Estimated mean retardance amplitude of PEMs.
+
+16 : number_row # Number of active rows.
+63 58 53 48 43 38 33 28 23 18 13 12  7  6  1  0 : row_numbers # Active row numbers (0-based),
+                                                              # in order they occur in the 
+							      # L0 data stream.
+ I  I  I  Q  U  I  I  Q  U  I  Q  Q  U  U  I  I : row_types   # Row types
+ 1  10  3  4  4  5  6  6  6  7  7  7  7  7  8  8 : band  # Band associated with each row
+
+# Level-0 file configuration
+# Offsets are in bytes.
+18 : l0_number_row
+63 58 53 48 43 38 33 28 23 18 13 12  7  6  4  3  1  0 : l0_row_numbers # Row numbers including processed rows.
+                           # IMPORTANT: "l0_row_numbers" must be in the order they occur in the L0 file.
+3120 : subframe_row_size   # Length in bytes of a subframe row in the L0 data stream.
+0  : lc1_offset
+2  : lc2_offset
+4  : dn_offset
+1536 : number_dn           # Number of dn's per row.
+3076 : p1_offset
+3078 : p2_offset
+3080 : subframe_counter_offset
+3084 : f1_offset
+3088 : f2_offset
+3092 : lf_phase_offset  # ?
+3094 : probe_in_phase_offset # (int16)
+3096 : probe_quadrature_offset # (int16) should be near zero
+3098 : hf_phase_cal_offset # (uint16 or int16?)
+3100 : lf_phase_cal_offset # (uint16 or int16?)
+3102 : pem1_offset
+3104 : pem2_offset
+3112 : hardware_timestamp_offset # Note: Hardware timestamp is recorded only in the last row
+                                 # of a subframe.
+0 : first_unshielded   # index of first unshielded pixel  (0-based)
+1434 : last_unshielded # index of last unshielded pixel (0-based)

@@ -3,6 +3,9 @@
 #include <sstream>
 #include <set>
 #include <boost/foreach.hpp>
+// This won't be needed once version 3 becomes the default for boost filesystem
+#define BOOST_FILESYSTEM_VERSION 3
+#include <boost/filesystem.hpp>
 #include "geocal_serialize_support.h"
 
 using namespace GeoCal;
@@ -43,9 +46,31 @@ MspiConfigFile::MspiConfigFile(const std::string& Fname)
 
 void MspiConfigFile::add_file(const std::string& Fname)
 {
+  std::map<std::string, std::string> key_to_value_new = 
+    add_file_skip_base_version(Fname);
+  if(key_to_value_new.count("base_version") != 0) {
+    boost::filesystem::path p(Fname);
+    p = p.parent_path();
+    p /= key_to_value_new["base_version"];
+    add_file(p.string());
+  }
+  typedef std::map<std::string, std::string>::value_type itype;
+  BOOST_FOREACH(itype i, key_to_value_new)
+    key_to_value[i.first] = i.second;
+}
+
+//-----------------------------------------------------------------------
+/// Add a file, replacing any keywords already in this class from
+/// earlier files. Skips the base version logic.
+//-----------------------------------------------------------------------
+
+std::map<std::string, std::string>
+MspiConfigFile::add_file_skip_base_version(const std::string& Fname)
+{
   // We use this to look for duplicates.
   std::set<std::string> new_key;
-
+  std::map<std::string, std::string> key_to_value_new;
+  
   // Read in the whole file. We could do this line by line, but these
   // files tend to be short and it is easier just to read
   // everything. IfstreamCs strips off all the comments, so we don't
@@ -62,12 +87,15 @@ void MspiConfigFile::add_file(const std::string& Fname)
   // Now break up into keyword/value pairs
   std::string s = buf.str();
   boost::sregex_iterator i(s.begin(), s.end(), 
-			   boost::regex("^((?:[^:]|\\n)*):\\s*([[:word:]\\-\\.]+)\\s*$"));
+			   boost::regex("^((?:\".*\")?(?:[^:]|\\n)*):\\s*([[:word:]\\-\\.]+)\\s*$"));
   boost::sregex_iterator iend;
   for(; i != iend; ++i) {
     std::string key = (*i)[2];
     std::string val = (*i)[1];
     boost::trim(val);
+    // Strip of leading and trailing '"' if this is in the string.
+    if(val[0] == '"' && val[val.length()-1] == '"')
+      val = val.substr(1, val.length() - 2);
     // Check to see if this is a duplicate. By convention, this is
     // treated as an error.
     if(new_key.count(key) != 0) {
@@ -77,8 +105,9 @@ void MspiConfigFile::add_file(const std::string& Fname)
       throw e;
     }
     new_key.insert(key);
-    key_to_value[key] = val;
+    key_to_value_new[key] = val;
   }
+  return key_to_value_new;
 }
 
 //-----------------------------------------------------------------------

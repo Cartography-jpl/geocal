@@ -64,6 +64,25 @@ BOOST_AUTO_TEST_CASE(table_test)
   BOOST_CHECK_EQUAL(tab.value<std::string>(1, "l1b1_file"), "file2.hdf");
 }
 
+BOOST_AUTO_TEST_CASE(basic_test2)
+{
+  // This is a second configuration file that we had trouble reading
+  // at one point. Have this test in place to illustrate the problem
+  // and that we have fixed it.
+  MspiConfigFile config(test_data_dir() + "mspi_config_file_test3.txt");
+  BOOST_CHECK(config.value<int>("last_unshielded") == 1434);
+  BOOST_CHECK(config.value<std::string>("epoch") == "1601-01-01T:00:00:00:000000Z");
+}
+
+BOOST_AUTO_TEST_CASE(base_version_override)
+{
+  // Test having a file with a "base_version" entry, for doing
+  // cascading configuration files.
+  MspiConfigFile config(test_data_dir() + "mspi_config_file_test4.txt");
+  BOOST_CHECK(config.value<int>("polarization_angle_Q") == 100);
+  BOOST_CHECK(config.value<int>("last_unshielded") == 1434);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())

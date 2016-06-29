@@ -23,12 +23,20 @@ public:
   %extend {
     double value_double(const std::string& Key) const
     { return $self->value<double>(Key); }
+    std::vector<double> value_vector_double(const std::string& Key) const
+    { return $self->value<std::vector<double> >(Key); }
     int value_int(const std::string& Key) const
     { return $self->value<int>(Key); }
+    std::vector<int> value_vector_int(const std::string& Key) const
+    { return $self->value<std::vector<int> >(Key); }
     std::string value_string(const std::string& Key) const
     { return $self->value<std::string>(Key); }
+    std::vector<std::string> value_vector_string(const std::string& Key) const
+    { return $self->value<std::vector<std::string> >(Key); }
     bool value_bool(const std::string& Key) const
     { return $self->value<bool>(Key); }
+    std::vector<bool> value_vector_bool(const std::string& Key) const
+    { return $self->value<std::vector<bool> >(Key); }
   }
   std::string print_to_string() const;
   %pickle_serialization();

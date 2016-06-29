@@ -62,6 +62,8 @@ public:
 
   void add_file(const std::string& Fname);
 private:
+  std::map<std::string, std::string>
+  add_file_skip_base_version(const std::string& Fname);
   const std::string& value_string(const std::string& Keyword) const;
   std::map<std::string, std::string> key_to_value;
   friend class boost::serialization::access;
@@ -182,13 +184,27 @@ public:
     boost::to_lower(scopy);
     if(scopy =="t" || 
        scopy =="true" ||
-       scopy ==".true.")
+       scopy ==".true." ||
+       scopy == "1")
       return true;
     if(scopy =="f" || 
        scopy =="false" ||
-       scopy ==".false.")
+       scopy ==".false." ||
+       scopy == "0")
       return false;
     throw Exception("Can't convert to boolean.");
+  }
+};
+
+//-----------------------------------------------------------------------
+/// Specialization for signed long long.
+//-----------------------------------------------------------------------
+
+template <> class MspiConfigFilePartialHelper<signed long long> {
+public:
+  signed long long parse_string(const std::string& S) const
+  {
+    return atoll(S.c_str());
   }
 };
 

@@ -5,6 +5,8 @@
 EXTRA_DIST+= @geocalunittestdata@/RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML
 EXTRA_DIST+= @geocalunittestdata@/mspi_config_file_test.txt
 EXTRA_DIST+= @geocalunittestdata@/mspi_config_file_test2.txt
+EXTRA_DIST+= @geocalunittestdata@/mspi_config_file_test3.txt
+EXTRA_DIST+= @geocalunittestdata@/mspi_config_file_test4.txt
 EXTRA_DIST+= @geocalunittestdata@/mspi_camera_test.config2
 EXTRA_DIST+= @geocalunittestdata@/mspi_camera_test.config
 EXTRA_DIST+= @geocalunittestdata@/GndMSPI_CONFIG_CAMERA_MODEL_V004.config

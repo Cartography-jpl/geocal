@@ -35,6 +35,12 @@ class DocOptSimple(object):
         return False
 
     def __getattr__(self, name):
+        # Don't normally get called with "args", but can before object is
+        # fully initialized. So catch this an return an empty dict, without
+        # this handling we can enter an infinite recursion
+        if name == "args":
+            self.args = {}
+            return self.args
         for key in (name, 
                     "<" + name + ">", 
                     "--" + name,

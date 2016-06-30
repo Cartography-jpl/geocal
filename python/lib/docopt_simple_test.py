@@ -1,8 +1,7 @@
 from geocal.docopt_simple import *
+import pickle
 
-def test_docopt_simple():
-    '''Test of docopt_simple'''
-    usage= '''
+usage= '''
 Usage: my_test [options] <in1> <in2> <out>
        my_test -h | --help
        my_test --version
@@ -23,6 +22,9 @@ Options:
   -v --version
      Print program version
 '''
+
+def test_docopt_simple():
+    '''Test of docopt_simple'''
     d = docopt_simple(usage, argv=["a1", "a2", "o3"])
     assert "in1" in d
     assert "foo" not in d
@@ -54,5 +56,12 @@ Options:
     assert d2.my_float == 1e3
 
     
-
+def test_docopt_simple_pickle():
+    '''Test of docopt_simple pickling'''
+    d = docopt_simple(usage, argv=["a1", "a2", "o3"])
+    t = pickle.dumps(d, pickle.HIGHEST_PROTOCOL)
+    d2 = pickle.loads(t)
+    assert d2.in1 == "a1"
+    assert d2.in2 == "a2"
+    assert d2.out == "o3"
 

@@ -19,6 +19,12 @@ class DocOptSimple(object):
         self.args = docopt(doc, argv=argv, help=help, version=version, 
                            options_first=options_first)
 
+    def __getstate__(self):
+        return { "args" : self.args }
+
+    def __setstate__(self,dict):
+        self.args = dict["args"]
+        
     def __contains__(self, name):
         for key in (name, 
                     "<" + name + ">", 

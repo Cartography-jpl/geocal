@@ -5,52 +5,154 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
 #include <cstdlib>
-
+#include <iostream>
 using namespace GeoCal;
-// Define to print out diagnostic messages to make sure we are reading
-// cached data where we expect to.
-//#define AIR_MSPI_DIAGNOSTIC
+using namespace boost::filesystem;
+
+//-----------------------------------------------------------------------
+/// We can't use canonical_path to normalize paths, because the file
+/// pointed to might not exist, and canonical_path follows symbolic
+/// links which we don't actually want.
+///
+/// Starting in boost 1.61, there is a lexically_normal
+/// function. However we don't want to depend on that
+/// new a version of boost, at least for now (2016). So we've copied
+/// this function from boost 1.61, and massaged it a bit to be a free
+/// function. This can go away in the future when boost 1.61 isn't
+/// that new.
+//-----------------------------------------------------------------------
+
+inline path lexically_normal(const path& p)
+{
+  const char dot = '.';
+  const char separator = '/';
+  if(p.empty())
+    return p;
+  path temp;
+  path::iterator start(p.begin());
+  path::iterator last(p.end());
+  path::iterator stop(last--);
+  for(path::iterator itr(start); itr != stop; ++itr) {
+    // ignore "." except at start and last
+    if (itr->native().size() == 1
+        && (itr->native())[0] == dot
+        && itr != start
+        && itr != last) continue;
+
+    // ignore a name and following ".."
+    if (!temp.empty()
+        && itr->native().size() == 2
+        && (itr->native())[0] == dot
+        && (itr->native())[1] == dot) {
+      std::string lf(temp.filename().native());  
+      if (lf.size() > 0  
+          && (lf.size() != 1
+	      || (lf[0] != dot
+		  && lf[0] != separator))
+          && (lf.size() != 2 
+	      || (lf[0] != dot
+		  && lf[1] != dot)
+	      )
+          ) {
+	temp.remove_filename();
+	path::iterator next(itr);
+	if (temp.empty() && ++next != stop
+            && next == last && *last == detail::dot_path())
+	  temp /= detail::dot_path();
+	continue;
+      }
+    }
+
+    temp /= *itr;
+  };
+
+  if (temp.empty())
+    temp /= detail::dot_path();
+  return temp;
+}
+
+
+//-----------------------------------------------------------------------
+/// Returns true if second path contains the first
+//-----------------------------------------------------------------------
+
+inline bool has_path(const path& p1,
+		     const path& p2)
+{
+  path::iterator i2(p2.begin());
+  for(path::iterator i1(p1.begin()); i1 != p1.end(); ++i1, ++i2) {
+    if(i2 == p2.end())
+      return false;
+    if(i1->compare(*i2) != 0)
+      return false;
+  }
+  return true;
+}
+
+//-----------------------------------------------------------------------
+/// Removes second path from the first if it is present.
+//-----------------------------------------------------------------------
+
+inline path remove_path(const path& p1,
+			const path& p2)
+{
+  if(!has_path(p1, p2))
+    return p2;
+  path::iterator i2(p2.begin());
+  for(path::iterator i1(p1.begin()); i1 != p1.end(); ++i1, ++i2)
+    ;
+  path res("/");
+  for(;i2 != p2.end(); ++i2)
+    res /= *i2;
+  return res;
+}
 
 //-----------------------------------------------------------------------
 /// AirMSPI uses a file caching mechanism to speed up the processing
 /// by copying files to a local disk before running executables. What
 /// this means in practice is that a file can either be found in its
 /// original location, or possibly in the directory pointed to by
-/// MSPI_TEMP_DIR environment variable. This routine handles the logic
-/// of this, either returning the file name passed in or a local
-/// cached version if it is available.
+/// MSPI_TEMP_DIR environment variable.
+///
+/// This routine handles the logic of determining the permanent file
+/// name if given either a permanent file name or a local file name
+/// (e.g., it strips off the MSPI_TEMP_DIR part).
 //-----------------------------------------------------------------------
 
-std::string GeoCal::air_mspi_true_file_name(const std::string& Fname)
+std::string GeoCal::air_mspi_permanent_file_name(const std::string& Fname)
 {
-  std::string res = Fname;
-  bool changed = false;
+  path res = lexically_normal(absolute(Fname));
   if(getenv("MSPI_TEMP_DIR")) {
-    boost::filesystem::path p(Fname);
-    std::string bname = boost::filesystem::basename(p);
-    std::string t = getenv("MSPI_TEMP_DIR");
-    std::vector<std::string> sv;
-    boost::split(sv, t, boost::is_any_of(":"), boost::token_compress_on);
-    BOOST_FOREACH(const std::string& s, sv) {
-      boost::filesystem::path p2(s);
-      p2 /= p.filename();
-      if(boost::filesystem::exists(p2)) {
-	res = p2.string();
-	changed = true;
-	break;
-      }
-    }
+    path t = lexically_normal(absolute(getenv("MSPI_TEMP_DIR")));
+    res = remove_path(t, res);
   }
-#ifdef  AIR_MSPI_DIAGNOSTIC
+  return res.string();
+}
+
+//-----------------------------------------------------------------------
+/// AirMSPI uses a file caching mechanism to speed up the processing
+/// by copying files to a local disk before running executables. What
+/// this means in practice is that a file can either be found in its
+/// original location, or possibly in the directory pointed to by
+/// MSPI_TEMP_DIR environment variable.
+///
+/// This routine handles the logic of determining the local file
+/// name if given either a permanent file name or a local file name
+/// (e.g., it adds the MSPI_TEMP_DIR part).
+///
+/// Since the file might not have been copied to the MSPI_TEMP_DIR, we
+/// check if the file exists. If it doesn't we return the permanent
+/// name instead.
+//-----------------------------------------------------------------------
+
+std::string GeoCal::air_mspi_local_file_name(const std::string& Fname)
+{
+  path res(air_mspi_permanent_file_name(Fname));
   if(getenv("MSPI_TEMP_DIR")) {
-    std::cout << "MSPI_TEMP_DIR: " << std::string(getenv("MSPI_TEMP_DIR")) << "\n";
-  } else {
-    std::cout << "MSPI_TEMP_DIR is not defined\n";
+    path t = lexically_normal(absolute(getenv("MSPI_TEMP_DIR")));
+    t /= res;
+    if(exists(t))
+      res = t;
   }
-  if(changed)
-    std::cout << "Mapped file " << Fname << " to " << res << "\n";
-  else
-    std::cout << "Did not map file " << Fname << " to a cached version.\n";
-#endif
-  return res;
+  return res.string();
 }

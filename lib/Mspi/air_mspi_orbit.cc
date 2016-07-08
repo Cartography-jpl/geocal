@@ -31,7 +31,7 @@ void AirMspiOrbit::load(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(vdef)
     & GEOCAL_NVP_(tspace)
     & GEOCAL_NVP(old_format);
-  data.reset(new GdalRasterImage(air_mspi_true_file_name(file_name_)));
+  data.reset(new GdalRasterImage(air_mspi_local_file_name(file_name_)));
   gimbal->add_observer(*this);
   empty_cache();
 }
@@ -146,12 +146,12 @@ AirMspiOrbit::AirMspiOrbit(const std::string& Fname,
 			   const boost::shared_ptr<MspiGimbal>& Gim,
 			   const boost::shared_ptr<Datum>& D,
 			   AircraftOrbitData::VerticalDefinition Def)
-  : file_name_(Fname),
+  : file_name_(air_mspi_permanent_file_name(Fname)),
     datum_(D),
     vdef_(Def),
     gimbal(Gim)
 {
-  data.reset(new GdalRasterImage(air_mspi_true_file_name(file_name_)));
+  data.reset(new GdalRasterImage(air_mspi_local_file_name(file_name_)));
   Time epoch = Time::parse_time(data->metadata<std::string>("epoch"));
   min_tm = epoch + data->metadata<double>("first_time");
   max_tm = epoch + data->metadata<double>("last_time");

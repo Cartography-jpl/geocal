@@ -8,6 +8,7 @@
 #include <boost/multi_array.hpp>
 #include <boost/shared_ptr.hpp>
 #include <blitz/array.h>
+#include <vector>
 #include <cmath>
 
 namespace GeoCal {
@@ -348,6 +349,51 @@ private:
   void serialize(Archive & ar, const unsigned int version);
 };
 
+/****************************************************************//**
+  This is a array of Raster Image. This isn't much more than a 
+  std::vector, but we do have added support in python of being able to
+  serialize this.
+*******************************************************************/
+
+class ArrayRasterImage : public Printable<ArrayRasterImage> {
+public:
+//-----------------------------------------------------------------------
+/// Create an empty array.
+//-----------------------------------------------------------------------
+  
+  ArrayRasterImage() {}
+  virtual ~ArrayRasterImage() {}
+  
+//-----------------------------------------------------------------------
+/// Add to the array.
+//-----------------------------------------------------------------------
+  void push_back(const boost::shared_ptr<RasterImage>& Img)
+  { img_.push_back(Img); }
+
+//-----------------------------------------------------------------------
+/// Return size
+//-----------------------------------------------------------------------
+  int size() const {return int(img_.size()); }
+
+//-----------------------------------------------------------------------
+/// Return value at given index
+//-----------------------------------------------------------------------
+  const boost::shared_ptr<RasterImage>& operator()(int I) const
+  { range_check(I, 0, size()); return img_[I];}
+
+  boost::shared_ptr<RasterImage>& operator()(int I)
+  { range_check(I, 0, size()); return img_[I];}
+
+  void print(std::ostream& Os) const
+  {
+    Os << "ArrayRasterImage of " << size() << " images";
+  }
+private:
+  std::vector<boost::shared_ptr<RasterImage> > img_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};  
 
 void copy(const RasterImage& Img_in, RasterImage& Img_out, bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
 void copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
@@ -396,6 +442,7 @@ private:
 
 }
 
+GEOCAL_EXPORT_KEY(ArrayRasterImage);
 GEOCAL_EXPORT_KEY(RasterImage);
 #endif
 

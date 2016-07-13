@@ -12,7 +12,15 @@ void RasterImage::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(RasterImage);
 }
 
+template<class Archive>
+void ArrayRasterImage::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ArrayRasterImage);
+  ar & GEOCAL_NVP_(img);
+}
+
 GEOCAL_IMPLEMENT(RasterImage);
+GEOCAL_IMPLEMENT(ArrayRasterImage);
 #endif
 
 //-----------------------------------------------------------------------

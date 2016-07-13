@@ -13,7 +13,7 @@ When you do a
     make install
 
 we create doxygen documentation for the C++ code.
-This will appear in the directory <install prefix>/share/doc/geocal.
+This will appear in the directory \<install prefix\>/share/doc/geocal.
 
 The documentation can also be viewed from a version pushed into
 [Github Pages](https://github.jpl.nasa.gov/pages/Cartography/geocal).

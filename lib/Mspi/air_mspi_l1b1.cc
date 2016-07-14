@@ -40,7 +40,7 @@ AirMspiL1b1File::l1b1_reader() const
 {
 #ifdef HAVE_MSPI_SHARED
   return boost::shared_ptr<MSPI::Shared::L1B1Reader>
-    (new MSPI::Shared::L1B1Reader(air_mspi_local_file_name(fname)));
+    (new MSPI::Shared::L1B1Reader(fname));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
@@ -59,7 +59,7 @@ AirMspiL1b1File::AirMspiL1b1File
  int Tile_number_sample,
  unsigned int Number_tile
 )
-  : fname(air_mspi_permanent_file_name(Fname)),
+  : fname(Fname),
     min_l1b1_line(Min_l1b1_line)
 {
 #ifdef HAVE_MSPI_SHARED

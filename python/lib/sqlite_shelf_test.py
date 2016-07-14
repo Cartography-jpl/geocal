@@ -1,4 +1,4 @@
-from sqlite_shelf import *
+from geocal.sqlite_shelf import *
 import time
 from test_support import *
 

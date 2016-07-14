@@ -81,23 +81,23 @@ def read_shelve(f):
     the same directory as the database file (if different than the current
     one). We change back to the current directory when done.
     '''
-    if(os.path.splitext(f)[1] == ".xml"):
-        return geocal_swig.serialize_read_generic(f)
-    if(os.path.splitext(f)[1] == ".json"):
-        if(have_jsonpickle):
-            return jsonpickle.decode(open(f).read())
-        else:
-            raise RuntimeError("Use of .json file requires jsonpickle package to be installed")
-    fname, key = f.split(':')
-    dirn, f = os.path.split(fname)
+    fname, *key = f.split(':')
+    dirn, fb = os.path.split(fname)
     curdir = os.getcwd()
     try:
         if(dirn):
             os.chdir(dirn)
-        t = SQLiteShelf(f, "r")
+        if(os.path.splitext(f)[1] == ".xml"):
+            return geocal_swig.serialize_read_generic(f)
+        if(os.path.splitext(f)[1] == ".json"):
+            if(have_jsonpickle):
+                return jsonpickle.decode(open(f).read())
+            else:
+                raise RuntimeError("Use of .json file requires jsonpickle package to be installed")
+        t = SQLiteShelf(fb, "r")
         if("_extra_python_init" in list(t.keys())):
             exec(t["_extra_python_init"])
-        return t[key]
+        return t[key[0]]
     finally:
         os.chdir(curdir)
 

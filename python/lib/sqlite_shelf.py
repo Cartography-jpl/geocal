@@ -88,10 +88,10 @@ def read_shelve(f):
         if(dirn):
             os.chdir(dirn)
         if(os.path.splitext(f)[1] == ".xml"):
-            return geocal_swig.serialize_read_generic(f)
+            return geocal_swig.serialize_read_generic(fb)
         if(os.path.splitext(f)[1] == ".json"):
             if(have_jsonpickle):
-                return jsonpickle.decode(open(f).read())
+                return jsonpickle.decode(open(fb).read())
             else:
                 raise RuntimeError("Use of .json file requires jsonpickle package to be installed")
         t = SQLiteShelf(fb, "r")

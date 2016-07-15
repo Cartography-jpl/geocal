@@ -60,6 +60,8 @@ inline PyObject* cpickle_loads(const std::string& S)
 //--------------------------------------------------------------
 
 %pythoncode {
+import os
+
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -72,6 +74,15 @@ def _new_from_init(cls, version, *args):
 def _new_from_serialization(data):
     return geocal_swig.serialize_read_binary(data)
 
+def _new_from_serialization_dir(dir, data):
+    curdir = os.getcwd()
+    try:
+      os.chdir(dir)
+      return geocal_swig.serialize_read_binary(data)
+    finally:
+      os.chdir(curdir)
+	
+	
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
     if(cls.pickle_format_version() != version):
@@ -108,6 +119,13 @@ def __reduce__(self):
   %pythoncode {
 def __reduce__(self):
   return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+}
+%enddef
+
+%define %pickle_serialization_dir()
+  %pythoncode {
+def __reduce__(self):
+  return _new_from_serialization_dir, (os.getcwd(), geocal_swig.serialize_write_binary(self),)
 }
 %enddef
 

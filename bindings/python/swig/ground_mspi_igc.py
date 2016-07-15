@@ -142,6 +142,8 @@ SwigPyIterator_swigregister(SwigPyIterator)
 _ground_mspi_igc.SHARED_PTR_DISOWN_swigconstant(_ground_mspi_igc)
 SHARED_PTR_DISOWN = _ground_mspi_igc.SHARED_PTR_DISOWN
 
+import os
+
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -153,6 +155,15 @@ def _new_from_init(cls, version, *args):
 
 def _new_from_serialization(data):
     return geocal_swig.serialize_read_binary(data)
+
+def _new_from_serialization_dir(dir, data):
+    curdir = os.getcwd()
+    try:
+      os.chdir(dir)
+      return geocal_swig.serialize_read_binary(data)
+    finally:
+      os.chdir(curdir)
+
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -247,7 +258,7 @@ class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnec
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+      return _new_from_serialization_dir, (os.getcwd(), geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_mspi_igc.delete_GroundMspiIgc
 GroundMspiIgc.solar_look = new_instancemethod(_ground_mspi_igc.GroundMspiIgc_solar_look, None, GroundMspiIgc)

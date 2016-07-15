@@ -25,6 +25,15 @@ public:
 		       const std::string& Swath_to_use = "660-I",
 		       int Dem_resolution = 10,
 		       const std::string& Base_directory = ".");
+  AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
+   		       const boost::shared_ptr<MspiCamera>& Cam,
+   		       const boost::shared_ptr<MspiGimbal>& Gim,
+   		       const boost::shared_ptr<Dem>& D,
+		       const std::string& Master_config_file,
+   		       const std::vector<std::string>& L1b1_file_name,
+		       const std::string& Swath_to_use = "660-I",
+		       int Dem_resolution = 10,
+		       const std::string& Base_directory = ".");
   virtual ~AirMspiIgcCollection() {}
   void replace_view_config(const std::string& Master_config_file,
 			   const std::string& L1b1_table);
@@ -157,6 +166,17 @@ public:
     return view_config_[Index].value<T>(Keyword);
   }
 
+//-----------------------------------------------------------------------
+/// Set Configuration value for given view number.
+//-----------------------------------------------------------------------
+
+  void set_config_value(int Index, const std::string& Keyword,
+			const std::string& Value)
+  {
+    range_check(Index, 0, number_image());
+    view_config_[Index].add(Keyword, Value);
+  }
+  
 //-----------------------------------------------------------------------
 /// Return L1B1 file name.
 //-----------------------------------------------------------------------

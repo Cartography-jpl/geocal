@@ -30,6 +30,15 @@ public:
 		       const std::string& Swath_to_use = "660-I",
 		       int Dem_resolution = 10,
 		       const std::string& Base_directory = ".");
+  AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
+   		       const boost::shared_ptr<MspiCamera>& Cam,
+   		       const boost::shared_ptr<MspiGimbal>& Gim,
+   		       const boost::shared_ptr<Dem>& D,
+		       const std::string& Master_config_file,
+   		       const std::vector<std::string>& L1b1_file_name,
+		       const std::string& Swath_to_use = "660-I",
+		       int Dem_resolution = 10,
+		       const std::string& Base_directory = ".");
   %python_attribute(number_image, virtual int);
   virtual boost::shared_ptr<ImageGroundConnection> 
   image_ground_connection(int Image_index) const;
@@ -47,7 +56,10 @@ public:
     std::string config_value_string(int Index, const std::string& Key) const
     { return $self->config_value<std::string>(Index, Key); }
   }
+  void set_config_value(int Index, const std::string& Keyword,
+			const std::string& Value);
   boost::shared_ptr<Orbit> orbit(int Index) const;
+  std::string l1b1_file_name(int Index) const;
   void set_orbit(const boost::shared_ptr<Orbit>& Orb);
   boost::shared_ptr<MspiCamera> camera(int Index) const;
   void set_camera(const boost::shared_ptr<MspiCamera>& Can);
@@ -62,6 +74,13 @@ public:
   int view_number_to_image_index(int View_number) const;
   void replace_view_config(const std::string& Master_config_file,
 			   const std::string& L1b1_table);
-  %pickle_serialization();
+%pickle_serialization_dir();
+%pythoncode {
+def __getitem__(self, i):
+  self.config_value_string(*i)
+
+def __setitem__(self, i, v):
+  self.set_config_value(*i, v)
+}
 };
 }

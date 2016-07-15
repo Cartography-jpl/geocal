@@ -21,6 +21,6 @@ public:
   %python_attribute(l1b1_file_name, std::string);
   %python_attribute(l1b1_granule_id, std::string);
   %python_attribute(l1b1_file, boost::shared_ptr<AirMspiL1b1File>);
-  %pickle_serialization();
+  %pickle_serialization_dir();
 };
 }

@@ -35,7 +35,7 @@ public:
   std::string swath_name(int Row_index) const;
   int row_index_to_row_number(int Row_index) const;
   int row_number_to_row_index(int Row_number) const;
-  %pickle_serialization();
+  %pickle_serialization_dir();
 };
 
 class AirMspiL1b1: public RasterImageTiledFile {
@@ -49,6 +49,6 @@ public:
 	      int Tile_number_line = -1,
 	      int Tile_number_sample = -1, 
 	      unsigned int Number_tile = 4);
-  %pickle_serialization();
+  %pickle_serialization_dir();
 };
 }

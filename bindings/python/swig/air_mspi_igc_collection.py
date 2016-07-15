@@ -142,6 +142,8 @@ SwigPyIterator_swigregister(SwigPyIterator)
 _air_mspi_igc_collection.SHARED_PTR_DISOWN_swigconstant(_air_mspi_igc_collection)
 SHARED_PTR_DISOWN = _air_mspi_igc_collection.SHARED_PTR_DISOWN
 
+import os
+
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -153,6 +155,15 @@ def _new_from_init(cls, version, *args):
 
 def _new_from_serialization(data):
     return geocal_swig.serialize_read_binary(data)
+
+def _new_from_serialization_dir(dir, data):
+    curdir = os.getcwd()
+    try:
+      os.chdir(dir)
+      return geocal_swig.serialize_read_binary(data)
+    finally:
+      os.chdir(curdir)
+
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -196,9 +207,10 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
 
         AirMspiIgcCollection::AirMspiIgcCollection(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
         MspiCamera > &Cam, const boost::shared_ptr< MspiGimbal > &Gim, const
-        boost::shared_ptr< Dem > &D, const std::vector< std::string >
-        &L1b1_file_name, const std::string &Swath_to_use="660-I", int
-        Dem_resolution=10, const std::string &Base_directory=".")
+        boost::shared_ptr< Dem > &D, const std::string &Master_config_file,
+        const std::vector< std::string > &L1b1_file_name, const std::string
+        &Swath_to_use="660-I", int Dem_resolution=10, const std::string
+        &Base_directory=".")
         This create a AirMspiIgcCollection by directly giving the various
         pieces needed to construct it. 
         """
@@ -227,6 +239,15 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         return _air_mspi_igc_collection.AirMspiIgcCollection_have_config(self, Index, Keyword)
 
 
+    def set_config_value(self, Index, Keyword, Value):
+        """
+
+        void GeoCal::AirMspiIgcCollection::set_config_value(int Index, const std::string &Keyword, const std::string &Value)
+        Set Configuration value for given view number. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_set_config_value(self, Index, Keyword, Value)
+
+
     def orbit(self, Index):
         """
 
@@ -234,6 +255,15 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
         Return specific orbit we are using. 
         """
         return _air_mspi_igc_collection.AirMspiIgcCollection_orbit(self, Index)
+
+
+    def l1b1_file_name(self, Index):
+        """
+
+        std::string GeoCal::AirMspiIgcCollection::l1b1_file_name(int Index) const
+        Return L1B1 file name. 
+        """
+        return _air_mspi_igc_collection.AirMspiIgcCollection_l1b1_file_name(self, Index)
 
 
     def set_orbit(self, Orb):
@@ -375,7 +405,14 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+      return _new_from_serialization_dir, (os.getcwd(), geocal_swig.serialize_write_binary(self),)
+
+
+    def __getitem__(self, i):
+      self.config_value_string(*i)
+
+    def __setitem__(self, i, v):
+      self.set_config_value(*i, v)
 
     __swig_destroy__ = _air_mspi_igc_collection.delete_AirMspiIgcCollection
 AirMspiIgcCollection.image_ground_connection = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_image_ground_connection, None, AirMspiIgcCollection)
@@ -383,7 +420,9 @@ AirMspiIgcCollection.have_config = new_instancemethod(_air_mspi_igc_collection.A
 AirMspiIgcCollection.config_value_double = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_config_value_double, None, AirMspiIgcCollection)
 AirMspiIgcCollection.config_value_int = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_config_value_int, None, AirMspiIgcCollection)
 AirMspiIgcCollection.config_value_string = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_config_value_string, None, AirMspiIgcCollection)
+AirMspiIgcCollection.set_config_value = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_set_config_value, None, AirMspiIgcCollection)
 AirMspiIgcCollection.orbit = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_orbit, None, AirMspiIgcCollection)
+AirMspiIgcCollection.l1b1_file_name = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_l1b1_file_name, None, AirMspiIgcCollection)
 AirMspiIgcCollection.set_orbit = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_set_orbit, None, AirMspiIgcCollection)
 AirMspiIgcCollection.camera = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_camera, None, AirMspiIgcCollection)
 AirMspiIgcCollection.set_camera = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_set_camera, None, AirMspiIgcCollection)

@@ -66,6 +66,41 @@ AirMspiIgcCollection::AirMspiIgcCollection
 }
 
 //-----------------------------------------------------------------------
+/// This create a AirMspiIgcCollection by directly giving the various
+/// pieces needed to construct it.
+//-----------------------------------------------------------------------
+
+AirMspiIgcCollection::AirMspiIgcCollection
+(const boost::shared_ptr<Orbit>& Orb,
+ const boost::shared_ptr<MspiCamera>& Cam,
+ const boost::shared_ptr<MspiGimbal>& Gim,
+ const boost::shared_ptr<Dem>& D,
+ const std::string& Master_config_file,
+ const std::vector<std::string>& L1b1_file_name,
+ const std::string& Swath_to_use,
+ int Dem_resolution,
+ const std::string& Base_directory)
+  :  dem(D),
+     dem_resolution(Dem_resolution),
+     camera_(Cam),
+     gimbal_(Gim),
+     orbit_(Orb),
+     base_directory(Base_directory),
+     swath_to_use(Swath_to_use)
+{
+  add_object(Cam);
+  add_object(Gim);
+  add_object(Orb);
+  MspiConfigFile c(Master_config_file);
+  BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
+    MspiConfigFile vc(c);
+    vc.add("l1b1_file", fname);
+    view_config_.push_back(vc);
+  }
+  calc_min_max_l1b1_line();
+}
+
+//-----------------------------------------------------------------------
 /// This creates a AirMspiIgcCollection by reading the given master
 /// config file. Various files found in the input files can have
 /// relative paths. You can specify the base directory these paths are
@@ -180,6 +215,8 @@ void AirMspiIgcCollection::replace_view_config
 //-----------------------------------------------------------------------
 void AirMspiIgcCollection::calc_min_max_l1b1_line()
 {
+  min_l1b1_line_.clear();
+  max_l1b1_line_.clear();
   for(int i = 0; i < number_image(); ++i) {
     AirMspiTimeTable tt(l1b1_file_name(i), swath_to_use);
     view_config_[i].add("l1b1_granule_id", tt.l1b1_granule_id());

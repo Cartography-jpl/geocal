@@ -12,6 +12,23 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
+void AirMspiIgcCollection::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void AirMspiIgcCollection::load(Archive & ar, const unsigned int version)
+{
+  // We set this up when we load the class, because the directory we
+  // load from may be different than later when we look up directory
+  // names. This doesn't matter except when using relative paths in
+  // the file names.
+  base_directory_canonical =
+    lexically_normal(boost::filesystem::absolute(base_directory)).string();
+}
+
+template<class Archive>
 void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IgcCollection);
@@ -27,6 +44,7 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(base_directory)
     & GEOCAL_NVP(swath_to_use)
     & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line);
+  boost::serialization::split_member(ar, *this, version);
 }
 
 GEOCAL_IMPLEMENT(AirMspiIgcCollection);
@@ -54,6 +72,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
      base_directory(Base_directory),
      swath_to_use(Swath_to_use)
 {
+  base_directory_canonical =
+    lexically_normal(boost::filesystem::absolute(base_directory)).string();
   add_object(Cam);
   add_object(Gim);
   add_object(Orb);
@@ -88,6 +108,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
      base_directory(Base_directory),
      swath_to_use(Swath_to_use)
 {
+  base_directory_canonical =
+    lexically_normal(boost::filesystem::absolute(base_directory)).string();
   add_object(Cam);
   add_object(Gim);
   add_object(Orb);
@@ -118,6 +140,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
   : base_directory(Base_directory),
     swath_to_use(Swath_to_use)
 {
+  base_directory_canonical =
+    lexically_normal(boost::filesystem::absolute(base_directory)).string();
   MspiConfigFile c(Master_config_file);
 
   // Get camera set up
@@ -330,6 +354,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
   gimbal_ = Original.gimbal_;
   orbit_ = Original.orbit_;
   base_directory = Original.base_directory;
+  base_directory_canonical = Original.base_directory_canonical;
   swath_to_use = Original.swath_to_use;
   BOOST_FOREACH(int i, Index_set) {
     view_config_.push_back(MspiConfigFile(Original.view_config_[i]));

@@ -19,10 +19,10 @@ using namespace boost::filesystem;
 /// new a version of boost, at least for now (2016). So we've copied
 /// this function from boost 1.61, and massaged it a bit to be a free
 /// function. This can go away in the future when boost 1.61 isn't
-/// that new.
+/// so new.
 //-----------------------------------------------------------------------
 
-inline path lexically_normal(const path& p)
+path GeoCal::lexically_normal(const path& p)
 {
   const char dot = '.';
   const char separator = '/';

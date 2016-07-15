@@ -2,6 +2,7 @@
 #define AIRMSPI_IGC_COLLECTION_H
 #include "igc_collection.h"
 #include "air_mspi_igc.h"
+#include "air_mspi_file.h"
 #include "mspi_config_file.h"
 
 namespace GeoCal {
@@ -237,6 +238,7 @@ private:
   boost::shared_ptr<Orbit> orbit_;
   std::vector<MspiConfigFile> view_config_;
   std::string base_directory;
+  std::string base_directory_canonical;
   std::string swath_to_use;
   std::vector<int> min_l1b1_line_, max_l1b1_line_;
 
@@ -259,7 +261,7 @@ private:
   {
     std::string res = F;
     if(res[0] != '/')
-      res = base_directory + "/" + res;
+      res = lexically_normal(base_directory_canonical + "/" + res).string();
     return res;
   }
 
@@ -267,6 +269,10 @@ private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 }
 

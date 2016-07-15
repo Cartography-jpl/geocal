@@ -80,7 +80,7 @@ def __getitem__(self, i):
   self.config_value_string(*i)
 
 def __setitem__(self, i, v):
-  self.set_config_value(*i, v)
+  self.set_config_value(i[0], i[1], v)
 }
 };
 }

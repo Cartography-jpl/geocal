@@ -412,7 +412,7 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
       self.config_value_string(*i)
 
     def __setitem__(self, i, v):
-      self.set_config_value(*i, v)
+      self.set_config_value(i[0], i[1], v)
 
     __swig_destroy__ = _air_mspi_igc_collection.delete_AirMspiIgcCollection
 AirMspiIgcCollection.image_ground_connection = new_instancemethod(_air_mspi_igc_collection.AirMspiIgcCollection_image_ground_connection, None, AirMspiIgcCollection)

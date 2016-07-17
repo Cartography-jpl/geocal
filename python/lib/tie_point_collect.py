@@ -478,7 +478,7 @@ def _point_list_surface_proj(ind1, ind2_or_ref_image, tpcol,
                 ic2 = None
         else:
             if(tp.image_coordinate(ind2_or_ref_image) is not None):
-                ic2 = ref_image.coordinate(igc2.ground_coordinate(tp.image_coordiante(ind2_or_ref_image)))
+                ic2 = ref_image.coordinate(igc2.ground_coordinate(tp.image_coordinate(ind2_or_ref_image)))
             else:
                 ic1 = None
         if(ic1 is not None and

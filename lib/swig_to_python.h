@@ -17,8 +17,10 @@ swig_to_python(const boost::shared_ptr<T>& V)
 // If pointer is Null, return None.
 //-----------------------------------------------------------------------
 
-  if(!V)
+  if(!V) {
+    Py_INCREF(Py_None);
     return Py_None;
+  }
 
 //-----------------------------------------------------------------------
 // If underlying object is a python object wrapped in a
@@ -67,8 +69,10 @@ swig_to_python_or_none(const boost::shared_ptr<GenericObject>& V)
 // If pointer is Null, return None.
 //-----------------------------------------------------------------------
 
-  if(!V)
+  if(!V) {
+    Py_INCREF(Py_None);
     return Py_None;
+  }
 
 //-----------------------------------------------------------------------
 // If underlying object is a python object wrapped in a
@@ -107,6 +111,7 @@ swig_to_python_or_none(const boost::shared_ptr<GenericObject>& V)
 #ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
   std::cerr << "Returning None\n";
 #endif
+  Py_INCREF(Py_None);
   return Py_None;
 }
 

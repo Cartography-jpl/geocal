@@ -23,6 +23,6 @@ Options:
 args = docopt_simple(usage, version=version)
 
 t = read_shelve(args.shelve_object)
-print t
+print(t)
 
 

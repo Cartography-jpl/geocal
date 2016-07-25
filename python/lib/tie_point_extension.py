@@ -151,11 +151,15 @@ def _tpcol_create_multiple_pass(cls, *args):
     for tpcol in args:
         ncam += tpcol[0].number_image
     ioff = 0
+    tp_id = 1
     for tpcol in args:
         for tp in tpcol:
             mytp = TiePoint(ncam)
-            mytp.id = tp.id
+            mytp.id = tp_id
+            tp_id += 1
             mytp.is_gcp = tp.is_gcp
+            if(tp.ground_location):
+                mytp.ground_location = tp.ground_location
             for i in range(tp.number_image):
                 ic = tp.image_coordinate(i)
                 if(ic):

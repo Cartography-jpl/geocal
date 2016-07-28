@@ -133,13 +133,13 @@ void OrbitPiecewiseCorrection::print(std::ostream& Os) const
   opad << *orbit_uncorrected() << "\n";
   opad.strict_sync();
   Os << "  E correction:\n";
-  opad << e_corr() << "\n";
+  opad << *e_corr() << "\n";
   opad.strict_sync();
   Os << "  N correction:\n";
-  opad << n_corr() << "\n";
+  opad << *n_corr() << "\n";
   opad.strict_sync();
   Os << "  U correction:\n";
-  opad << u_corr() << "\n";
+  opad << *u_corr() << "\n";
   opad.strict_sync();
 }
 

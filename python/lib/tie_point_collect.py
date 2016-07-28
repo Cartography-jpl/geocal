@@ -280,7 +280,10 @@ class TiePointCollect(object):
                 tp.ground_location = Ecr(self.ref_igc.ground_coordinate(ic2))
                 tp.is_gcp = True
                 return tp
-        return self.ri.ray_intersect(tp)
+        if(self.igc_collection.number_image > 1):
+            return self.ri.ray_intersect(tp)
+        else:
+            return None
 
 class TiePointCollectFM(object):
     '''Given a IgcCollection, collect tiepoints by feature matching. This is

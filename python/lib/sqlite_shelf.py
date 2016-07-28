@@ -101,7 +101,7 @@ def read_shelve(f):
         if("_extra_python_init" in list(t.keys())):
             exec(t["_extra_python_init"])
         key = f.split(':')[1]
-        return t[key[0]]
+        return t[key]
     finally:
         os.chdir(curdir)
 

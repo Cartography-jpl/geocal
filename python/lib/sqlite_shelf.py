@@ -100,6 +100,7 @@ def read_shelve(f):
         t = SQLiteShelf(fb, "r")
         if("_extra_python_init" in list(t.keys())):
             exec(t["_extra_python_init"])
+        key = f.split(':')[1]
         return t[key[0]]
     finally:
         os.chdir(curdir)

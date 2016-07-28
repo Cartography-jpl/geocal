@@ -120,7 +120,7 @@ blitz::Array<bool, 1> OrbitPiecewiseCorrection::parameter_mask() const
   blitz::Array<bool, 1> res(s1 + s2 + s3);
   res(blitz::Range(0, s1 - 1)) = e_corr_->parameter_mask();
   res(blitz::Range(s1, s1 + s2 - 1)) = n_corr_->parameter_mask();
-  res(blitz::Range(s1 + s2, s1 + s2 + s3 - 1)) = n_corr_->parameter_mask();
+  res(blitz::Range(s1 + s2, s1 + s2 + s3 - 1)) = u_corr_->parameter_mask();
   return res;
 }
 

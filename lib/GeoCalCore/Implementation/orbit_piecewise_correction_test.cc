@@ -43,6 +43,7 @@ BOOST_AUTO_TEST_CASE(basic)
   Array<double, 1> parm(6);
   parm = 10, 20, 10, 20, 10, 20;
   orb->parameter(parm);
+  std::cerr << orb->parameter_mask() << "\n";
 }
 
 

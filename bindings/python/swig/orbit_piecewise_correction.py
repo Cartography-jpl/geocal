@@ -219,8 +219,8 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     def _v_e_corr(self):
         """
 
-        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::e_corr() const
-        Correction in local east direction. 
+        PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::e_corr()
+
         """
         return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_e_corr(self)
 
@@ -233,8 +233,8 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     def _v_n_corr(self):
         """
 
-        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::n_corr() const
-        Correction in local north direction. 
+        PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::n_corr()
+
         """
         return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_n_corr(self)
 
@@ -247,8 +247,8 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     def _v_u_corr(self):
         """
 
-        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::u_corr() const
-        Correction in local up direction. 
+        PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::u_corr()
+
         """
         return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_u_corr(self)
 

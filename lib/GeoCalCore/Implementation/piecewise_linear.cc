@@ -5,11 +5,33 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
+void PiecewiseLinear::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void PiecewiseLinear::load(Archive & ar, const unsigned int version)
+{
+  // Older version did not have parameter mask, this was assumed to be
+  // all true
+  if(version == 0) {
+    pm_.resize(parameter_size_);
+    pm_ = true;
+  }
+}
+
+template<class Archive>
 void PiecewiseLinear::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(PiecewiseLinear);
   ar & GEOCAL_NVP_(x) & GEOCAL_NVP_(y) & GEOCAL_NVP_(t)
     & GEOCAL_NVP_(parameter_size);
+  // Older version didn't have parameter mask saved, it was assumed
+  // this was all true
+  if(version > 0)
+    ar & GEOCAL_NVP_(pm);
+  boost::serialization::split_member(ar, *this, version);
 }
 
 GEOCAL_IMPLEMENT(PiecewiseLinear);
@@ -30,6 +52,8 @@ PiecewiseLinear::PiecewiseLinear
   for(int i = 0; i < X.rows() - 1; ++i)
     if(X(i) >= X(i+1))
       throw Exception("X must be sorted.");
+  pm_.resize(parameter_size_);
+  pm_ = true;
 }
 
 PiecewiseLinear::PiecewiseLinear
@@ -48,6 +72,8 @@ PiecewiseLinear::PiecewiseLinear
   for(int i = 0; i < x_.rows() - 1; ++i)
     if(x_(i) >= x_(i+1))
       throw Exception("X must be sorted.");
+  pm_.resize(parameter_size_);
+  pm_ = true;
 }
 
 void PiecewiseLinear::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
@@ -129,6 +155,14 @@ AutoDerivative<double> PiecewiseLinear::value_with_derivative
   default:
     throw Exception("This should be impossible");
   }
+}
+
+// See base class for description
+void PiecewiseLinear::parameter_mask(const blitz::Array<bool, 1>& Pm) 
+{
+  if(Pm.rows() != pm_.rows())
+    throw Exception("Parameter mask not the expected size");
+  pm_ = Pm;
 }
 
 void PiecewiseLinear::print(std::ostream& Os) const

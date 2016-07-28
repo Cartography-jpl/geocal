@@ -35,18 +35,21 @@ public:
 //-----------------------------------------------------------------------
   
   const PiecewiseLinear& e_corr() const { return e_corr_; }
+  PiecewiseLinear& e_corr() { return e_corr_; }
 
 //-----------------------------------------------------------------------
 /// Correction in local north direction.
 //-----------------------------------------------------------------------
   
   const PiecewiseLinear& n_corr() const { return n_corr_; }
+  PiecewiseLinear& n_corr() { return n_corr_; }
 
 //-----------------------------------------------------------------------
 /// Correction in local up direction.
 //-----------------------------------------------------------------------
   
   const PiecewiseLinear& u_corr() const { return u_corr_; }
+  PiecewiseLinear& u_corr() { return u_corr_; }
 protected:
   virtual void notify_update()
   {

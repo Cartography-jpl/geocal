@@ -6494,18 +6494,18 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitPiecewiseCorrection__v_e_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_e_corr, METH_O, (char *)"\n"
 		"\n"
-		"const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::e_corr() const\n"
-		"Correction in local east direction. \n"
+		"PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::e_corr()\n"
+		"\n"
 		""},
 	 { (char *)"OrbitPiecewiseCorrection__v_n_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_n_corr, METH_O, (char *)"\n"
 		"\n"
-		"const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::n_corr() const\n"
-		"Correction in local north direction. \n"
+		"PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::n_corr()\n"
+		"\n"
 		""},
 	 { (char *)"OrbitPiecewiseCorrection__v_u_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_u_corr, METH_O, (char *)"\n"
 		"\n"
-		"const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::u_corr() const\n"
-		"Correction in local up direction. \n"
+		"PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::u_corr()\n"
+		"\n"
 		""},
 	 { (char *)"delete_OrbitPiecewiseCorrection", (PyCFunction)_wrap_delete_OrbitPiecewiseCorrection, METH_O, (char *)"\n"
 		"\n"

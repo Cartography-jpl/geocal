@@ -57,8 +57,8 @@ path GeoCal::lexically_normal(const path& p)
 	temp.remove_filename();
 	path::iterator next(itr);
 	if (temp.empty() && ++next != stop
-            && next == last && *last == detail::dot_path())
-	  temp /= detail::dot_path();
+            && next == last && *last == ".")
+	  temp /= ".";
 	continue;
       }
     }
@@ -67,7 +67,7 @@ path GeoCal::lexically_normal(const path& p)
   };
 
   if (temp.empty())
-    temp /= detail::dot_path();
+    temp /= ".";
   return temp;
 }
 

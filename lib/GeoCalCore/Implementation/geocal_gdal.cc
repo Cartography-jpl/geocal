@@ -128,8 +128,7 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
   // Right now we don't support planetary coordinate systems. I think 
   // GDAL actually can, it has some support for PDS. But for now, just
   // skip the mapinfo if it is for a planet.
-  else if(const EuropaPlanetocentricConverter* pc =
-	  dynamic_cast<const EuropaPlanetocentricConverter*>(&M.coordinate_converter())) {
+  else if(dynamic_cast<const EuropaPlanetocentricConverter*>(&M.coordinate_converter())) {
     std::cerr << "Warning, skipping EuropaPlanetocentric map info writing because we don't currently support this.";
     return;
   } else if(const OgrCoordinateConverter* ogrconv =

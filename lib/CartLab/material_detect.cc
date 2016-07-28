@@ -196,8 +196,8 @@ blitz::Array<double, 2> MaterialDetect::closest_material_dif(int Lstart, int Sst
   Array<double, 2> res(Number_line, Number_sample);
   for(int ln = 0; ln < data.rows(); ++ln)
     for(int smp = 0; smp < data.cols(); ++smp) {
-      int best_match = 0;
-      int best_priority = -999;
+      int best_match __attribute__((unused)) = 0;
+      int best_priority __attribute__((unused)) = -999;
       double best_sdist = 1e20;
       BOOST_FOREACH(const MaterialClass& mc, material) {
 	double sdist = 0;

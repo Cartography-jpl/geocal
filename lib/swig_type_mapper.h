@@ -24,6 +24,7 @@ public:
     return SWIG_NewPointerObj(SWIG_as_voidptr(v3), sinfo, 
 			      SWIG_POINTER_OWN);
   }
+  virtual ~SwigTypeMapper() {}
 private:
   swig_type_info* sinfo;
 };

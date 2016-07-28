@@ -18,10 +18,11 @@ void ImagePointDisplay::initialize()
   GDALColorEntry startc = {0, 0, 255, 255};
   GDALColorEntry endc = {255, 0, 0, 255};
   for(int i = 0; i < nstep; ++i) {
-    GDALColorEntry ce = {(endc.c1 - startc.c1) * i / (nstep - 1) + startc.c1,
-			 (endc.c2 - startc.c2) * i / (nstep - 1) + startc.c2,
-			 (endc.c3 - startc.c3) * i / (nstep - 1) + startc.c3,
-			 (endc.c4 - startc.c4) * i / (nstep - 1) + startc.c4};
+    GDALColorEntry ce = 
+      {(short int)((endc.c1 - startc.c1) * i / (nstep - 1) + startc.c1),
+       (short int)((endc.c2 - startc.c2) * i / (nstep - 1) + startc.c2),
+       (short int)((endc.c3 - startc.c3) * i / (nstep - 1) + startc.c3),
+       (short int)((endc.c4 - startc.c4) * i / (nstep - 1) + startc.c4)};
     ct.SetColorEntry(i + 1, &ce);
   }
   {

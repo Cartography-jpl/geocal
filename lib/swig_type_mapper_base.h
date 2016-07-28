@@ -17,6 +17,7 @@ namespace GeoCal {
 class SwigTypeMapperBase {
 public:
   virtual PyObject* to_python(const boost::shared_ptr<GeoCal::GenericObject>& V) = 0;
+  virtual ~SwigTypeMapperBase() {}
 };
 
 //-----------------------------------------------------------------------

@@ -6143,20 +6143,23 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 SWIGINTERN PyObject *_wrap_new_OrbitPiecewiseCorrection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > arg1 ;
-  GeoCal::PiecewiseLinear *arg2 = 0 ;
-  GeoCal::PiecewiseLinear *arg3 = 0 ;
-  GeoCal::PiecewiseLinear *arg4 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > *arg2 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > *arg4 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
+  void *argp2 ;
   int res2 = 0 ;
-  boost::shared_ptr< GeoCal::PiecewiseLinear const > tempshared2 ;
-  void *argp3 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > tempshared2 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > temp2shared2 ;
+  void *argp3 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::PiecewiseLinear const > tempshared3 ;
-  void *argp4 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > tempshared3 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > temp2shared3 ;
+  void *argp4 ;
   int res4 = 0 ;
-  boost::shared_ptr< GeoCal::PiecewiseLinear const > tempshared4 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > tempshared4 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > temp2shared4 ;
   PyObject *swig_obj[4] ;
   GeoCal::OrbitPiecewiseCorrection *result = 0 ;
   
@@ -6182,82 +6185,82 @@ SWIGINTERN PyObject *_wrap_new_OrbitPiecewiseCorrection(PyObject *SWIGUNUSEDPARM
   }
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::PiecewiseLinear *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__PiecewiseLinear,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_OrbitPiecewiseCorrection" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::PiecewiseLinear > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp2);
+      arg2 = &tempshared2;
     } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_OrbitPiecewiseCorrection" "', argument " "2"" of type '" "GeoCal::PiecewiseLinear const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitPiecewiseCorrection" "', argument " "2"" of type '" "GeoCal::PiecewiseLinear const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp2);
-        arg2 = const_cast< GeoCal::PiecewiseLinear * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::PiecewiseLinear * >(reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp2)->get());
-      }
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
     }
   }
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::PiecewiseLinear *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__PiecewiseLinear,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_OrbitPiecewiseCorrection" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::PiecewiseLinear > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp3);
+      arg3 = &tempshared3;
     } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_OrbitPiecewiseCorrection" "', argument " "3"" of type '" "GeoCal::PiecewiseLinear const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitPiecewiseCorrection" "', argument " "3"" of type '" "GeoCal::PiecewiseLinear const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp3);
-        arg3 = const_cast< GeoCal::PiecewiseLinear * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::PiecewiseLinear * >(reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp3)->get());
-      }
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
     }
   }
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::PiecewiseLinear *ptr;
-    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__PiecewiseLinear,  0 , &newmem);
-    if (SWIG_IsOK(res4)) {
-      arg4 = ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_OrbitPiecewiseCorrection" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::PiecewiseLinear > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp4);
+      arg4 = &tempshared4;
     } else {
-      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t,  0 , &newmem);
-      if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_OrbitPiecewiseCorrection" "', argument " "4"" of type '" "GeoCal::PiecewiseLinear const &""'"); 
-      }
-      if (!argp4) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitPiecewiseCorrection" "', argument " "4"" of type '" "GeoCal::PiecewiseLinear const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp4);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp4);
-        arg4 = const_cast< GeoCal::PiecewiseLinear * >(tempshared4.get());
-      } else {
-        arg4 = const_cast< GeoCal::PiecewiseLinear * >(reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp4)->get());
-      }
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::PiecewiseLinear > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
     }
   }
   {
     try {
-      result = (GeoCal::OrbitPiecewiseCorrection *)new GeoCal::OrbitPiecewiseCorrection(arg1,(GeoCal::PiecewiseLinear const &)*arg2,(GeoCal::PiecewiseLinear const &)*arg3,(GeoCal::PiecewiseLinear const &)*arg4);
+      result = (GeoCal::OrbitPiecewiseCorrection *)new GeoCal::OrbitPiecewiseCorrection(arg1,(boost::shared_ptr< GeoCal::PiecewiseLinear > const &)*arg2,(boost::shared_ptr< GeoCal::PiecewiseLinear > const &)*arg3,(boost::shared_ptr< GeoCal::PiecewiseLinear > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6282,7 +6285,7 @@ SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_e_corr(PyObject *SWIGUNUS
   boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > tempshared1 ;
   boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  SwigValueWrapper< GeoCal::PiecewiseLinear > result;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -6311,8 +6314,7 @@ SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_e_corr(PyObject *SWIGUNUS
     }
   }
   {
-    boost::shared_ptr<  GeoCal::PiecewiseLinear > *smartresult = new boost::shared_ptr<  GeoCal::PiecewiseLinear >(new GeoCal::PiecewiseLinear((GeoCal::PiecewiseLinear &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, SWIG_POINTER_OWN);
+    resultobj = GeoCal::swig_to_python(result);
   }
   return resultobj;
 fail:
@@ -6328,7 +6330,7 @@ SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_n_corr(PyObject *SWIGUNUS
   boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > tempshared1 ;
   boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  SwigValueWrapper< GeoCal::PiecewiseLinear > result;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -6357,8 +6359,7 @@ SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_n_corr(PyObject *SWIGUNUS
     }
   }
   {
-    boost::shared_ptr<  GeoCal::PiecewiseLinear > *smartresult = new boost::shared_ptr<  GeoCal::PiecewiseLinear >(new GeoCal::PiecewiseLinear((GeoCal::PiecewiseLinear &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, SWIG_POINTER_OWN);
+    resultobj = GeoCal::swig_to_python(result);
   }
   return resultobj;
 fail:
@@ -6374,7 +6375,7 @@ SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_u_corr(PyObject *SWIGUNUS
   boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > tempshared1 ;
   boost::shared_ptr< GeoCal::OrbitPiecewiseCorrection const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  SwigValueWrapper< GeoCal::PiecewiseLinear > result;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -6403,8 +6404,7 @@ SWIGINTERN PyObject *_wrap_OrbitPiecewiseCorrection__v_u_corr(PyObject *SWIGUNUS
     }
   }
   {
-    boost::shared_ptr<  GeoCal::PiecewiseLinear > *smartresult = new boost::shared_ptr<  GeoCal::PiecewiseLinear >(new GeoCal::PiecewiseLinear((GeoCal::PiecewiseLinear &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, SWIG_POINTER_OWN);
+    resultobj = GeoCal::swig_to_python(result);
   }
   return resultobj;
 fail:
@@ -6488,24 +6488,25 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"new_OrbitPiecewiseCorrection", _wrap_new_OrbitPiecewiseCorrection, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::OrbitPiecewiseCorrection::OrbitPiecewiseCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, const PiecewiseLinear\n"
-		"&E_corr, const PiecewiseLinear &N_corr, const PiecewiseLinear &U_corr)\n"
+		"GeoCal::OrbitPiecewiseCorrection::OrbitPiecewiseCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, const boost::shared_ptr<\n"
+		"PiecewiseLinear > &E_corr, const boost::shared_ptr< PiecewiseLinear >\n"
+		"&N_corr, const boost::shared_ptr< PiecewiseLinear > &U_corr)\n"
 		"\n"
 		""},
 	 { (char *)"OrbitPiecewiseCorrection__v_e_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_e_corr, METH_O, (char *)"\n"
 		"\n"
-		"PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::e_corr()\n"
-		"\n"
+		"const boost::shared_ptr<PiecewiseLinear>& GeoCal::OrbitPiecewiseCorrection::e_corr() const\n"
+		"Correction in local east direction. \n"
 		""},
 	 { (char *)"OrbitPiecewiseCorrection__v_n_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_n_corr, METH_O, (char *)"\n"
 		"\n"
-		"PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::n_corr()\n"
-		"\n"
+		"const boost::shared_ptr<PiecewiseLinear>& GeoCal::OrbitPiecewiseCorrection::n_corr() const\n"
+		"Correction in local north direction. \n"
 		""},
 	 { (char *)"OrbitPiecewiseCorrection__v_u_corr", (PyCFunction)_wrap_OrbitPiecewiseCorrection__v_u_corr, METH_O, (char *)"\n"
 		"\n"
-		"PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::u_corr()\n"
-		"\n"
+		"const boost::shared_ptr<PiecewiseLinear>& GeoCal::OrbitPiecewiseCorrection::u_corr() const\n"
+		"Correction in local up direction. \n"
 		""},
 	 { (char *)"delete_OrbitPiecewiseCorrection", (PyCFunction)_wrap_delete_OrbitPiecewiseCorrection, METH_O, (char *)"\n"
 		"\n"

@@ -11019,6 +11019,139 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_PiecewiseLinear__v_parameter_mask__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::PiecewiseLinear *arg1 = (GeoCal::PiecewiseLinear *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear const > tempshared1 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear const > *smartarg1 = 0 ;
+  SwigValueWrapper< blitz::Array< bool,1 > > result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PiecewiseLinear__v_parameter_mask" "', argument " "1"" of type '" "GeoCal::PiecewiseLinear const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      arg1 = const_cast< GeoCal::PiecewiseLinear * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::PiecewiseLinear > * >(argp1);
+      arg1 = const_cast< GeoCal::PiecewiseLinear * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::PiecewiseLinear const *)arg1)->parameter_mask();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(bool);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<bool >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<bool, 1>* t = new blitz::Array<bool, 1>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_bool_1_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PiecewiseLinear__v_parameter_mask__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::PiecewiseLinear *arg1 = (GeoCal::PiecewiseLinear *) 0 ;
+  blitz::Array< bool,1 > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > tempshared1 ;
+  boost::shared_ptr< GeoCal::PiecewiseLinear > *smartarg1 = 0 ;
+  blitz::Array< bool,1 > a2 ;
+  PythonObject numpy2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PiecewiseLinear__v_parameter_mask" "', argument " "1"" of type '" "GeoCal::PiecewiseLinear *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
+      arg1 = const_cast< GeoCal::PiecewiseLinear * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
+      arg1 = const_cast< GeoCal::PiecewiseLinear * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_bool_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<bool >(swig_obj[1]);
+      if(!numpy2.obj)
+      return NULL;
+      a2.reference(to_blitz_array<bool, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    try {
+      (arg1)->parameter_mask((blitz::Array< bool,1 > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PiecewiseLinear__v_parameter_mask(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"PiecewiseLinear__v_parameter_mask",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_PiecewiseLinear__v_parameter_mask__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_PiecewiseLinear__v_parameter_mask__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'PiecewiseLinear__v_parameter_mask'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::PiecewiseLinear::parameter_mask() const\n"
+    "    GeoCal::PiecewiseLinear::parameter_mask(blitz::Array< bool,1 > const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_PiecewiseLinear_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PiecewiseLinear *arg1 = (GeoCal::PiecewiseLinear *) 0 ;
@@ -11282,6 +11415,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_PiecewiseLinear", _wrap_new_PiecewiseLinear, METH_VARARGS, (char *)"\n"
 		"\n"
 		"GeoCal::PiecewiseLinear::PiecewiseLinear()\n"
+		"\n"
+		""},
+	 { (char *)"PiecewiseLinear__v_parameter_mask", _wrap_PiecewiseLinear__v_parameter_mask, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void PiecewiseLinear::parameter_mask(const blitz::Array< bool, 1 > &Pm)\n"
 		"\n"
 		""},
 	 { (char *)"PiecewiseLinear_value", _wrap_PiecewiseLinear_value, METH_VARARGS, (char *)"\n"

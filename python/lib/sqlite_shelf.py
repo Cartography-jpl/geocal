@@ -58,18 +58,20 @@ def from_db_type(value):
 
 def read_shelve(f):
     '''This handles reading a value from a shelve file. The string f should
-    be of the form file_name:key. We open the given file, and read the
-    value for the given key.
+    be of the form file_name:key, file_name.xml, or file_name.json. We 
+    open the given file, and read the value for the given key.
 
-    A problem with the shelve files is that it can't communicate directly 
-    with a C++ program, and also the files aren't human readable or portable.
-    So we also support xml files, we key off of the file name and if it 
-    is something like "foo.xml" we read that rather than a shelve file.
+    A problem with the python shelve/pickle files is that it can't
+    communicate directly with a C++ program, and also the files aren't
+    human readable or portable.  So we also support xml files, we key
+    off of the file name and if it is something like "foo.xml" we read
+    that rather than a shelve file.
 
-    We also support files with the extension "foo.json" as json pickle 
-    files. This doesn't have any functionality over the sqlite python,
-    but it does make for more human readable files that are sometimes
-    preferable. We use jsonpickle for reading these files.
+    We also support files with the extension "foo.json" as json pickle
+    files. This doesn't have any additional functionality over the
+    sqlite python, but it does make for more human readable files that
+    are sometimes preferable. We use jsonpickle for reading these
+    files.
 
     Note that it can be useful to execute python code before using
     a shelve file, e.g., we are using python modules not already 
@@ -80,8 +82,9 @@ def read_shelve(f):
     Because we often use relative names for files, we first chdir to 
     the same directory as the database file (if different than the current
     one). We change back to the current directory when done.
+
     '''
-    fname, *key = f.split(':')
+    fname = f.split(':')[0]
     dirn, fb = os.path.split(fname)
     curdir = os.getcwd()
     try:

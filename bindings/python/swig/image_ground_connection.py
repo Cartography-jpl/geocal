@@ -585,6 +585,17 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         return self._v_has_time()
 
 
+    def pixel_time(self, Ic):
+        """
+
+        virtual Time GeoCal::ImageGroundConnection::pixel_time(const ImageCoordinate &Ic) const
+        Time associated with the given pixel.
+
+        This will throw an exception if has_time is false. 
+        """
+        return _image_ground_connection.ImageGroundConnection_pixel_time(self, Ic)
+
+
     def resolution_meter(self, *args):
         """
 
@@ -796,6 +807,7 @@ ImageGroundConnection._v_number_sample = new_instancemethod(_image_ground_connec
 ImageGroundConnection._v_number_band = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_number_band, None, ImageGroundConnection)
 ImageGroundConnection._v_title = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_title, None, ImageGroundConnection)
 ImageGroundConnection._v_has_time = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_has_time, None, ImageGroundConnection)
+ImageGroundConnection.pixel_time = new_instancemethod(_image_ground_connection.ImageGroundConnection_pixel_time, None, ImageGroundConnection)
 ImageGroundConnection.__str__ = new_instancemethod(_image_ground_connection.ImageGroundConnection___str__, None, ImageGroundConnection)
 ImageGroundConnection.resolution_meter = new_instancemethod(_image_ground_connection.ImageGroundConnection_resolution_meter, None, ImageGroundConnection)
 ImageGroundConnection._v_parameter = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_parameter, None, ImageGroundConnection)

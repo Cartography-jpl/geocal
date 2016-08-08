@@ -128,6 +128,7 @@ public:
   %python_attribute(number_band, virtual int)
   %python_attribute_with_set(title, std::string)
   %python_attribute(has_time, bool)
+  virtual Time pixel_time(const ImageCoordinate& Ic) const;
   std::string print_to_string() const;
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
   virtual double resolution_meter() const;

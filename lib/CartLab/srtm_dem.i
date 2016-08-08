@@ -10,6 +10,7 @@
 %base_import(cart_lab_multifile)
 %geocal_shared_ptr(GeoCal::SrtmDem);
 %geocal_shared_ptr(GeoCal::SrtmDemData);
+%geocal_shared_ptr(GeoCal::SrtmLwmData);
 
 namespace GeoCal {
 class SrtmDemData: public VicarCartLabMultifile {
@@ -23,6 +24,17 @@ public:
   %pickle_serialization()
 };
 
+class SrtmLwmData: public VicarCartLabMultifile {
+public:
+  SrtmLwmData(const std::string& Dir,
+	      bool No_coverage_is_error = true,
+	      int Number_line_per_tile = -1,
+	      int Number_sample_per_tile = -1, 
+	      int Number_tile_each_file = 4, int Number_file = 4,
+	      bool Favor_memory_mapped = true, bool Force_area_pixel = true);
+  %pickle_serialization()
+};
+  
 class SrtmDem : public DemMapInfo {
 public:
   SrtmDem(const std::string& Dirbase ="",

@@ -238,6 +238,48 @@ class SrtmDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
 SrtmDemData_swigregister = _srtm_dem.SrtmDemData_swigregister
 SrtmDemData_swigregister(SrtmDemData)
 
+class SrtmLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
+    """
+
+    This is used the read the SRTM LWM data.
+
+    C++ includes: srtm_dem.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4, Favor_memory_mapped=True, Force_area_pixel=True):
+        """
+
+        SrtmLwmData::SrtmLwmData(const std::string &Dir, bool No_coverage_is_error=true, int
+        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
+        Number_tile_each_file=4, int Number_file=4, bool
+        Favor_memory_mapped=true, bool Force_area_pixel=true)
+        Constructor.
+
+        You provide the directory to look for SRTM LWM data.
+
+        The SRTM doesn't cover the whole globe. If you ask for a point outside
+        of the area this can either be treated as an error, or alternatively
+        you can return a value of 0 instead. This is controlled by
+        No_coverage_is_error.
+
+        There are two kinds of tiling going on. At the top level, we have a
+        number of files open at one time, given by Number_file. For each file,
+        we read it with tiles with the given Number_line_per_tile x
+        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
+        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
+        entire file. 
+        """
+        _srtm_dem.SrtmLwmData_swiginit(self, _srtm_dem.new_SrtmLwmData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file, Favor_memory_mapped, Force_area_pixel))
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _srtm_dem.delete_SrtmLwmData
+SrtmLwmData_swigregister = _srtm_dem.SrtmLwmData_swigregister
+SrtmLwmData_swigregister(SrtmLwmData)
+
 class SrtmDem(geocal_swig.dem_map_info.DemMapInfo):
     """
 

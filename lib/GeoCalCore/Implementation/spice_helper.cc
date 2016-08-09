@@ -97,8 +97,8 @@ void SpiceHelper::add_kernel(const std::string& Kernel)
 
 void SpiceHelper::spice_setup(const std::string& Kernel)
 {
+  static int already_done = 0;
 #ifdef HAVE_SPICE
-  static bool already_done = false;
   if(!already_done) {
     errprt_c(const_cast<char*>("SET"), 10, const_cast<char*>("NONE"));
     erract_c(const_cast<char*>("SET"), 10, const_cast<char*>("RETURN"));
@@ -107,7 +107,7 @@ void SpiceHelper::spice_setup(const std::string& Kernel)
     DirChange dc(getenv("SPICEDATA"));
     furnsh_c(Kernel.c_str());
     spice_error_check();
-    already_done = true;
+    already_done = 1;
   }
 #else
   throw SpiceNotAvailableException();

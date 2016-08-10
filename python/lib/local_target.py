@@ -41,6 +41,10 @@ class InLocalTarget(Target):
         '''Return true if the target exists already, false otherwise'''
         return os.path.exists(self.filename())
 
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return os.path.exists(self.filename() + ".error")
+
     def filename(self):
         '''The real, permanent name of the file.'''
         return self.fname
@@ -84,6 +88,10 @@ class OutLocalTarget(Target):
     def exists(self):
         '''Return true if the target exists already, false otherwise'''
         return os.path.exists(self.filename())
+
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return os.path.exists(self.filename() + ".error")
 
     def filename(self):
         '''The real, permanent name of the file.'''
@@ -152,6 +160,10 @@ class OutTempLocalTarget(Target):
         if needed.'''
         return os.path.exists(self.lfname)
 
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return os.path.exists(self.lfname() + ".error")
+
     def filename(self):
         '''The real, permanent name of the file. We never actually create
         this file.'''
@@ -219,6 +231,11 @@ class OutTempDirLocalTarget(Target):
         I think that is what we want, but we can rethink the logic of this
         if needed.'''
         return os.path.exists(self.lfname)
+
+
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return os.path.exists(self.lfname + ".error")
 
     def filename(self):
         '''The real, permanent name of the file. We never actually create
@@ -293,6 +310,10 @@ class GeneratedOutLocalTarget(Target):
 
     def exists(self):
         return os.path.exists(self.filename())
+
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return os.path.exists(self.filename() + ".error")
 
     def filename(self):
         return self.fname
@@ -382,6 +403,10 @@ class XmlLocalTarget(Target):
     def exists(self):
         '''Return true if the target exists already, false otherwise'''
         return os.path.exists(self.filename())
+
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return os.path.exists(self.filename() + ".error")
 
     def filename(self):
         '''The real, permanent name of the file.'''

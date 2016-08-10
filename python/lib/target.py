@@ -26,6 +26,10 @@ class Target(object):
         '''Return true if the target exists already, false otherwise'''
         return False
 
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return False
+
     def remove(self):
         '''Delete all the files associated with the target. Normally an input
         target will only delete possibly cached versions of these (leaving the
@@ -77,6 +81,10 @@ class InFileTarget(Target):
         '''Return true if the target exists already, false otherwise'''
         return os.path.exists(self.filename())
     
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return os.path.exists(self.filename() + ".error")
+
     def filename(self):
         '''The real, permanent name of the file.'''
         return self.fname
@@ -115,6 +123,10 @@ class OutFileTarget(Target):
     def exists(self):
         '''Return true if the target exists already, false otherwise'''
         return os.path.exists(self.filename())
+
+    def error_exists(self):
+        '''Return true if an error version of the output exists.'''
+        return os.path.exists(self.filename() + ".error")
 
     def filename(self):
         '''The real, permanent name of the file.'''

@@ -104,6 +104,14 @@ class Task(object):
                 return False
         return True
 
+    def output_error_exists(self):
+        '''Return True if any of the possible output exists in error form, 
+        False otherwise'''
+        for target in self.output():
+            if target.error_exists():
+                return True
+        return False
+
     def task_need_run(self):
         '''Return True if the task needs to be run. Default is just to
         run this unless the output_exists'''

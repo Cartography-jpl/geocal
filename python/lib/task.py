@@ -76,6 +76,11 @@ class Task(object):
         '''
         return []
 
+    def remove_output(self):
+        '''Remove all output.'''
+        for f in self.output():
+            f.remove()
+
     def remove_process_level(self, level):
         '''Remove all output from a given process level on. Currently this
         just supports 'sba', which cleans the results of the sba and 

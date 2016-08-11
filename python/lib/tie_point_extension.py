@@ -196,12 +196,11 @@ def _tpcol_tp_res(self, igccol):
     ind = [ tp.id for tp in self ]
     is_gcp = [ tp.is_gcp for tp in self ]
     nimgloc = [ tp.number_image_location for tp in self ]
-    cols = ["Is GCP", "Number Image Location", "Max Residual (m)"]
+    cols = ["Is GCP", "Number Image Location", "Max Residual"]
     d = {"Is GCP": is_gcp, "Number Image Location" : nimgloc }
     max_res = np.zeros(len(self))
     for i in range(self[0].number_image):
         igc = igccol.image_ground_connection(i)
-        ps = igc.resolution_meter()
         lres = np.full((len(self),), np.NaN)
         sres = np.full((len(self),), np.NaN)
         for j, tp in enumerate(self):
@@ -209,17 +208,17 @@ def _tpcol_tp_res(self, igccol):
             if(iloc):
                 try:
                     icpred = igc.image_coordinate(tp.ground_location)
-                    lres[j] = (iloc.line - icpred.line) * ps
-                    sres[j] = (iloc.sample - icpred.sample) * ps
+                    lres[j] = (iloc.line - icpred.line)
+                    sres[j] = (iloc.sample - icpred.sample)
                     max_res[j] = max(abs(lres[j]),abs(sres[j]),max_res[j])
                 except RuntimeError as e:
                     if(str(e) != "ImageGroundConnectionFailed"):
                         raise e
-        d["Line Res %d (m)" % (i+1)] = lres
-        d["Samp Res %d (m)" % (i+1)] = sres
-        cols.append("Line Res %d (m)" % (i+1))
-        cols.append("Samp Res %d (m)" % (i+1))
-    d["Max Residual (m)"] = max_res
+        d["Line Res %d" % (i+1)] = lres
+        d["Samp Res %d" % (i+1)] = sres
+        cols.append("Line Res %d" % (i+1))
+        cols.append("Samp Res %d" % (i+1))
+    d["Max Residual"] = max_res
     return pd.DataFrame(d, index=ind), cols
         
 TiePointCollection.tp_res = _tpcol_tp_res

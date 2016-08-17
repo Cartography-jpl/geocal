@@ -4,6 +4,8 @@ import subprocess
 import sys
 import os
 from queue import Queue
+import traceback
+from io import StringIO
 
 class Task(object):
     '''This class is a interface class describing a 'Task'. This is inspired
@@ -152,12 +154,18 @@ class Task(object):
                 f.finish()
             return self.task_unique_name(), self.tasks_to_run_after()
         except BaseException as e:
+            tp, v, tb = sys.exc_info()
             for f in self.output():
                 try:
                     f.finish_error()
                 except BaseException:
                     pass        # Ignore errors in cleaning up error
+            fh = StringIO()
+            traceback.print_exception(tp, v, tb, file=fh)
             e.task_unique_name = self.task_unique_name()
+            # For some reason, __traceback__ doesn't go through when called
+            # by pool. Save this information
+            e.print_exception_string = fh.getvalue()
             raise e
 
 class TaskRunner(object):
@@ -179,7 +187,7 @@ class TaskRunner(object):
         self.pool = pool
         # How often we check if we can run a new job
         self.polling_time = 0.1
-        self.error = None
+        self.error = []
 
     def requires_satisfied(self, task):
         '''True if all the required input has been generated, False 
@@ -233,7 +241,12 @@ class TaskRunner(object):
     def run_callback_error(self, e):
         self.tasks_to_run[e.task_unique_name]["state"] = "error"
         self.tasks_to_run[e.task_unique_name]["exception"] = e
-        self.error = e
+        self.error.append(e)
+        print("======== Task failed =======")
+        print("Failure while trying to generate %s" % e.task_unique_name)
+        print("Error:")
+        print(e.print_exception_string)
+        print("======= Waiting for pipeline to finish =======")
         
     def run_next_tasks(self):
         task = self.next_task_to_process()
@@ -241,6 +254,7 @@ class TaskRunner(object):
         # running
         if(task is None and self.number_task_running() == 0):
             #raise RuntimeError("Pipeline can't be completed. Task_to_run: %s" % self.tasks_to_run)
+            print("======= Pipeline can't be completed =======")
             raise RuntimeError("Pipeline can't be completed.")
 
         # Just run the task, if we don't have a pool
@@ -269,21 +283,28 @@ class TaskRunner(object):
             while(not self.number_task_left() ==0):
                 if(nleft != self.number_task_left()):
                     nleft = self.number_task_left()
-                    if(self.error):
-                        if(self.number_task_running() == 0):
-                            raise self.error
                     self.run_next_tasks()
                 time.sleep(self.polling_time)
                 while(not self.new_or_updated_task.empty()):
                     self.process_task(self.new_or_updated_task.get(),
                                       force_update=True)
                     nleft = -1
-            if(self.error):
-                raise self.error
         finally:
+            if(len(self.error) > 0):
+                print("======= Pipeline failed =======")
+                print("Summary of errors:")
+                for i, e in enumerate(self.error):
+                    print("Error %d" % (i + 1))
+                    print("------------------------")
+                    print("Failure while trying to generate %s" % e.task_unique_name)
+                    print(e.print_exception_string)
+                    print("------------------------")
             for task in self.task_list:
                 if(task.local_dir is not None):
                     # Leave in place if we end on an error and user
                     # requests this not to be cleaned up
-                    if(not self.skip_cleanup_on_error or self.error is None):
+                    if(not self.skip_cleanup_on_error or len(self.error) == 0):
                         shutil.rmtree(task.local_dir, True)
+            if(len(self.error) > 0):
+                raise RuntimeError("Pipeline failed")
+

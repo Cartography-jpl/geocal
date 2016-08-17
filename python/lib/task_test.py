@@ -98,6 +98,8 @@ class TaskDFailed(Task):
                                            self.local_dir))
         self.require_list.append(TaskAFailed("./output/a_failed.out",
                                              self.local_dir))
+        self.require_list.append(TaskAFailed("./output/a_failed2.out",
+                                             self.local_dir))
 
     def requires(self):
         return self.require_list
@@ -163,6 +165,7 @@ def test_pool_failed2(isolated_dir):
     *not* cleanup the test data'''
     task = TaskDFailed()
     pool = Pool(3)
+    pool = None
     with pytest.raises(RuntimeError) as e_info:
         task.run_pipeline(pool = pool, skip_cleanup_on_error = True)
     assert os.path.exists("./local_dir")

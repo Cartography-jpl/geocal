@@ -145,13 +145,19 @@ def fix_projection(fin, fout):
         p = re.sub('PARAMETER\["scale_factor",0\]', 
                    'PARAMETER["scale_factor",1]', p)
         f.SetProjection(p)
-    # The standard_parallel_1 and latitude_of_origin can be swapped for
-    # HiRISE. Not sure if this is always the case, or just with some data.
+    # The standard_parallel_1 and latitude_of_origin is sometimes swapped for
+    # HiRISE. Examples I've seen have standard_parallel_1 0, so also possible
+    # this is just a mislabeling of standard_parallel_1 as latitude_of_origin,
+    # combined with gdal or some other tool filling in the missing standard_parallel_1
+    # with default value of 0. In any case, we swap both values since this doesn't
+    # hurt even if standard_parallel_1 is always zero.
+    #
+    # Not sure if this swap/misname is always the case, or just with some data.
     # The ticket https://trac.osgeo.org/gdal/ticket/2706 seems to talk about
     # this to some level. We have a heuristic here which checks to a name
     # "Equirectangular MARS" or "Equirectangular_MARS", and if found we swap
     # the standard_parallel_1 and latitude_of_origin. Since I'm not sure that
-    # this won't correct some actually good data, we only do this if the
+    # this won't corrupt some actually good data, we only do this if the
     # user selected the --hirise-correction option
     if(args.hirise_correction and
        re.search("Equirectangular[_ ]MARS", p)):

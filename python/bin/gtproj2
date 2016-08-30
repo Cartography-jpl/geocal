@@ -6,11 +6,9 @@
 from geocal import *
 import sys
 
-print(sys.argv)
 t = VicarArgument(sys.argv)
 
 ibfname,labfname1,labfname2 = t["inp"]
-print(t["coordtype"])
 
 f = IbisFile(ibfname, IbisFile.UPDATE)
 imgin = VicarLiteRasterImage(labfname1)

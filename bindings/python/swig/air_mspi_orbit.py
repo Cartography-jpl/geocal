@@ -142,6 +142,8 @@ SwigPyIterator_swigregister(SwigPyIterator)
 _air_mspi_orbit.SHARED_PTR_DISOWN_swigconstant(_air_mspi_orbit)
 SHARED_PTR_DISOWN = _air_mspi_orbit.SHARED_PTR_DISOWN
 
+import os
+
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -153,6 +155,15 @@ def _new_from_init(cls, version, *args):
 
 def _new_from_serialization(data):
     return geocal_swig.serialize_read_binary(data)
+
+def _new_from_serialization_dir(dir, data):
+    curdir = os.getcwd()
+    try:
+      os.chdir(dir)
+      return geocal_swig.serialize_read_binary(data)
+    finally:
+      os.chdir(curdir)
+
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -384,7 +395,7 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+      return _new_from_serialization_dir, (os.getcwd(), geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _air_mspi_orbit.delete_AirMspiOrbit
 AirMspiOrbit._v_data_version = new_instancemethod(_air_mspi_orbit.AirMspiOrbit__v_data_version, None, AirMspiOrbit)
@@ -400,9 +411,5 @@ AirMspiOrbit.orbit_data = new_instancemethod(_air_mspi_orbit.AirMspiOrbit_orbit_
 AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister
 AirMspiOrbit_swigregister(AirMspiOrbit)
 
-
-def air_mspi_true_file_name(Fname):
-    return _air_mspi_orbit.air_mspi_true_file_name(Fname)
-air_mspi_true_file_name = _air_mspi_orbit.air_mspi_true_file_name
 
 

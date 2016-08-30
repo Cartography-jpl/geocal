@@ -1,4 +1,8 @@
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_handle.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/output_cache.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/target.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/local_target.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/task.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ipython.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/safe_matplotlib_import.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/misc.py

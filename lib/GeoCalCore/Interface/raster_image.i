@@ -11,6 +11,7 @@
 %import "map_info.i"
 %import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::RasterImage);
+%geocal_shared_ptr(GeoCal::ArrayRasterImage);
 %geocal_shared_ptr(GeoCal::RasterImageTileIterator);
 
 namespace GeoCal {
@@ -88,6 +89,32 @@ public:
   %python_attribute(grid_center_sample_resolution, double)
   %python_attribute(has_rpc, bool)
   %python_attribute2(rpc, rpc_ptr, boost::shared_ptr<Rpc>)
+};
+
+class ArrayRasterImage: public GenericObject {
+public:
+  ArrayRasterImage();
+  %rename(append) push_back;
+  void push_back(const boost::shared_ptr<RasterImage>& Img);
+  int size() const;
+  %extend {
+    boost::shared_ptr<GeoCal::RasterImage> get(int i) const
+    { return (*$self)(i); }
+    void set(int i, const boost::shared_ptr<GeoCal::RasterImage>& V) 
+    { (*$self)(i) = V; }
+  }
+%pythoncode %{
+def __getitem__(self, index):
+  return self.get(index)
+
+def __setitem__(self, index, val):
+  self.set(index, val)
+
+def __len__(self):
+  return self.size()
+%}
+  std::string print_to_string() const;
+  %pickle_serialization();
 };
 
 // Move this to raster_image_multi_band.i so SWIG can do the

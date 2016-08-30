@@ -75,7 +75,8 @@ void PosExportOrbit::init(const std::string& Fname, const Time& Epoch)
 void PosExportOrbit::process_line(const Time& Epoch, const std::string& ln,
 				  Geodetic& Last_pt, Time& Last_tm)
 {
-  double tm, trash, lat, lon, h, roll, pitch, heading;
+  double tm, lat, lon, h, roll, pitch, heading;
+  double trash __attribute__((unused));
   // Nothing wrong with the following code, but on Mac 10.6 code that
   // uses istringstream or ostringstream fails when called through
   // Ruby. I have no idea why, I've tried tracking the reason down but

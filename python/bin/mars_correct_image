@@ -10,7 +10,7 @@ import sys
 import re
 from geocal import *
 
-version = "May 17,2016"
+version = "August 26,2016"
 usage='''Usage:
   mars_correct_image [options] <ref_image> <ref_base_name> 
             <ref_image_resolution_name> <image> <image_base_name> 
@@ -36,6 +36,14 @@ hirise_corr_0.25m.img.
 Options:
   -h --help         
        Print this message
+
+  --hirise-correction
+       Hirise imagery in equirectangular appears to have the 
+       latitude_of_origin and standard_parallel_1 swapped, at least for
+       some data. Not sure how to recognize this, and not sure if this
+       always occurs. So this option turns on some heuristics to try to
+       identify and correct this. If this is left off, we don't do this
+       correction.
 
   -v --version      
        Print program version
@@ -106,7 +114,7 @@ def gtpwarp(fin, fref, fref_res, fout):
                     ], check=True)
     # For some reason, gtpwarp doesn't set all the geotiff metadata. Not
     # sure why, we may try fixing this at some point. But for now, just
-    # update this. Note this is pretty much the same at gtgenup call, just
+    # update this. Note this is pretty much the same as a gtgenup call, just
     # easier to do this in python here.
     t = VicarRasterImage(fout, 1, VicarFile.UPDATE)
     t.set_map_info(VicarRasterImage(fin).map_info)
@@ -137,6 +145,35 @@ def fix_projection(fin, fout):
         p = re.sub('PARAMETER\["scale_factor",0\]', 
                    'PARAMETER["scale_factor",1]', p)
         f.SetProjection(p)
+    # The standard_parallel_1 and latitude_of_origin is sometimes swapped for
+    # HiRISE. Examples I've seen have standard_parallel_1 0, so also possible
+    # this is just a mislabeling of standard_parallel_1 as latitude_of_origin,
+    # combined with gdal or some other tool filling in the missing standard_parallel_1
+    # with default value of 0. In any case, we swap both values since this doesn't
+    # hurt even if standard_parallel_1 is always zero.
+    #
+    # Not sure if this swap/misname is always the case, or just with some data.
+    # The ticket https://trac.osgeo.org/gdal/ticket/2706 seems to talk about
+    # this to some level. We have a heuristic here which checks to a name
+    # "Equirectangular MARS" or "Equirectangular_MARS", and if found we swap
+    # the standard_parallel_1 and latitude_of_origin. Since I'm not sure that
+    # this won't corrupt some actually good data, we only do this if the
+    # user selected the --hirise-correction option
+    if(args.hirise_correction and
+       re.search("Equirectangular[_ ]MARS", p)):
+        m1 = re.search('PARAMETER\["latitude_of_origin",([\\d\\.]+)\]', p)
+        m2 = re.search('PARAMETER\["standard_parallel_1",([\\d\\.]+)\]', p)
+        if(m1 and m2 and m1.group(1) != m2.group(1)):
+            print("MSG:----------------------------------------------------\n")
+            print("MSG: Doing HiRISE correction of swapping latitude_of_origin and standard_parallel_1 for the Equirectangular projection")
+            p = re.sub('PARAMETER\["latitude_of_origin",[\\d\\.]+\]',
+                       'PARAMETER\["latitude_of_origin",' + m2.group(1) + ']',
+                       p)
+            p = re.sub('PARAMETER\["standard_parallel_1",[\\d\\.]+\]',
+                       'PARAMETER\["standard_parallel_1",' + m1.group(1) + ']',
+                       p)
+            f.SetProjection(p)
+            
     # Force close/flush
     f = None
 

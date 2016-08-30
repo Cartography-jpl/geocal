@@ -23,9 +23,11 @@ public:
     tp = PiecewiseLinear::LINEAR, PiecewiseLinear::LINEAR_TO_ZERO;
     Array<double, 1> y(2);
     y = 0, 0;
-    PiecewiseLinear corr(x, y, tp);
+    boost::shared_ptr<PiecewiseLinear> corr1(new PiecewiseLinear(x, y, tp));
+    boost::shared_ptr<PiecewiseLinear> corr2(new PiecewiseLinear(x, y, tp));
+    boost::shared_ptr<PiecewiseLinear> corr3(new PiecewiseLinear(x, y, tp));
     if(orb_uncorr) {
-      orb.reset(new OrbitPiecewiseCorrection(orb_uncorr, corr, corr, corr));
+      orb.reset(new OrbitPiecewiseCorrection(orb_uncorr, corr1, corr2, corr3));
     }
   }
   boost::shared_ptr<Orbit> orb_uncorr;

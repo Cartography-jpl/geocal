@@ -78,8 +78,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   // skip test if we are missing orb.
   if(!orb)
     return;
-  BOOST_CHECK(orb->file_name() == test_data_dir() + 
-	      "airmspi_orbit_file_test.hdf");
+  BOOST_CHECK(orb->file_name() ==
+	      test_data_dir() + "airmspi_orbit_file_test.hdf");
   BOOST_CHECK(orb->flight_description() == "This is a dummy flight description");
   BOOST_CHECK(orb->data_version() == "v1");
   BOOST_CHECK_CLOSE(orb->time_spacing(), 0.015625, 1e-4);
@@ -282,8 +282,8 @@ BOOST_AUTO_TEST_CASE(serialization)
     std::cerr << d;
   boost::shared_ptr<AirMspiOrbit> orbr = 
     serialize_read_string<AirMspiOrbit>(d);
-  BOOST_CHECK(orb->file_name() == test_data_dir() + 
-	      "airmspi_orbit_file_test.hdf");
+  BOOST_CHECK(orb->file_name() ==
+	      test_data_dir() + "airmspi_orbit_file_test.hdf");
   BOOST_CHECK(orbr->flight_description() == "This is a dummy flight description");
   BOOST_CHECK(orbr->data_version() == "v1");
   BOOST_CHECK_CLOSE(orbr->time_spacing(), 0.015625, 1e-4);

@@ -44,6 +44,6 @@ public:
   %python_attribute(camera, boost::shared_ptr<MspiCamera>);
   %python_attribute(gimbal, boost::shared_ptr<MspiGimbal>);
   %python_attribute(l1b1_file_name, std::string);
-  %pickle_serialization();
+  %pickle_serialization_dir();
 };
 }

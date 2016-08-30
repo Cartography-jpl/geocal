@@ -40,7 +40,7 @@ AirMspiL1b1File::l1b1_reader() const
 {
 #ifdef HAVE_MSPI_SHARED
   return boost::shared_ptr<MSPI::Shared::L1B1Reader>
-    (new MSPI::Shared::L1B1Reader(air_mspi_true_file_name(fname)));
+    (new MSPI::Shared::L1B1Reader(fname));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
@@ -63,7 +63,6 @@ AirMspiL1b1File::AirMspiL1b1File
     min_l1b1_line(Min_l1b1_line)
 {
 #ifdef HAVE_MSPI_SHARED
-  fname = Fname;
   boost::shared_ptr<MSPI::Shared::L1B1Reader> l1read = l1b1_reader();
   row_index_to_use_ = -1;
   for(int i = 0; i < number_row_index(); ++i)

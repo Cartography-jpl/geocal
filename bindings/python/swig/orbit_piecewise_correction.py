@@ -142,6 +142,8 @@ SwigPyIterator_swigregister(SwigPyIterator)
 _orbit_piecewise_correction.SHARED_PTR_DISOWN_swigconstant(_orbit_piecewise_correction)
 SHARED_PTR_DISOWN = _orbit_piecewise_correction.SHARED_PTR_DISOWN
 
+import os
+
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -153,6 +155,15 @@ def _new_from_init(cls, version, *args):
 
 def _new_from_serialization(data):
     return geocal_swig.serialize_read_binary(data)
+
+def _new_from_serialization_dir(dir, data):
+    curdir = os.getcwd()
+    try:
+      os.chdir(dir)
+      return geocal_swig.serialize_read_binary(data)
+    finally:
+      os.chdir(curdir)
+
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -199,8 +210,9 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     def __init__(self, Orb_uncorr, E_corr, N_corr, U_corr):
         """
 
-        GeoCal::OrbitPiecewiseCorrection::OrbitPiecewiseCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, const PiecewiseLinear
-        &E_corr, const PiecewiseLinear &N_corr, const PiecewiseLinear &U_corr)
+        GeoCal::OrbitPiecewiseCorrection::OrbitPiecewiseCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, const boost::shared_ptr<
+        PiecewiseLinear > &E_corr, const boost::shared_ptr< PiecewiseLinear >
+        &N_corr, const boost::shared_ptr< PiecewiseLinear > &U_corr)
 
         """
         _orbit_piecewise_correction.OrbitPiecewiseCorrection_swiginit(self, _orbit_piecewise_correction.new_OrbitPiecewiseCorrection(Orb_uncorr, E_corr, N_corr, U_corr))
@@ -208,7 +220,7 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     def _v_e_corr(self):
         """
 
-        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::e_corr() const
+        const boost::shared_ptr<PiecewiseLinear>& GeoCal::OrbitPiecewiseCorrection::e_corr() const
         Correction in local east direction. 
         """
         return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_e_corr(self)
@@ -222,7 +234,7 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     def _v_n_corr(self):
         """
 
-        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::n_corr() const
+        const boost::shared_ptr<PiecewiseLinear>& GeoCal::OrbitPiecewiseCorrection::n_corr() const
         Correction in local north direction. 
         """
         return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_n_corr(self)
@@ -236,7 +248,7 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     def _v_u_corr(self):
         """
 
-        const PiecewiseLinear& GeoCal::OrbitPiecewiseCorrection::u_corr() const
+        const boost::shared_ptr<PiecewiseLinear>& GeoCal::OrbitPiecewiseCorrection::u_corr() const
         Correction in local up direction. 
         """
         return _orbit_piecewise_correction.OrbitPiecewiseCorrection__v_u_corr(self)

@@ -5,7 +5,6 @@
 #include "geocal_serialize_support.h"
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
 #include <boost/lexical_cast.hpp>
-#include <boost/filesystem.hpp>
 #ifdef HAVE_VICAR_RTL
 #ifdef HAVE_GDAL
 #define USE_VICAR_OGR /**/
@@ -102,7 +101,7 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
 			       bool Force_area_pixel)
 {
   access_ = Access;
-  fname_ = boost::filesystem::absolute(Fname).string();
+  fname_ = Fname;
   force_area_pixel_ = Force_area_pixel;
   f_.reset(new std::fstream(fname_.c_str(), (Access ==READ ? std::ios_base::in :
            std::ios_base::in | std::ios_base::out)));

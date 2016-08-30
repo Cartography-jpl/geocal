@@ -61,8 +61,6 @@ public:
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;
-  %pickle_serialization();
+  %pickle_serialization_dir();
 };
-
-  std::string air_mspi_true_file_name(const std::string& Fname);
 }

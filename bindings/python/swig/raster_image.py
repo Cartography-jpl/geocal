@@ -142,6 +142,8 @@ SwigPyIterator_swigregister(SwigPyIterator)
 _raster_image.SHARED_PTR_DISOWN_swigconstant(_raster_image)
 SHARED_PTR_DISOWN = _raster_image.SHARED_PTR_DISOWN
 
+import os
+
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -153,6 +155,15 @@ def _new_from_init(cls, version, *args):
 
 def _new_from_serialization(data):
     return geocal_swig.serialize_read_binary(data)
+
+def _new_from_serialization_dir(dir, data):
+    curdir = os.getcwd()
+    try:
+      os.chdir(dir)
+      return geocal_swig.serialize_read_binary(data)
+    finally:
+      os.chdir(curdir)
+
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -649,6 +660,67 @@ RasterImage._v_has_rpc = new_instancemethod(_raster_image.RasterImage__v_has_rpc
 RasterImage._v_rpc = new_instancemethod(_raster_image.RasterImage__v_rpc, None, RasterImage)
 RasterImage_swigregister = _raster_image.RasterImage_swigregister
 RasterImage_swigregister(RasterImage)
+
+class ArrayRasterImage(geocal_swig.generic_object.GenericObject):
+    """
+
+    This is a array of Raster Image.
+
+    This isn't much more than a std::vector, but we do have added support
+    in python of being able to serialize this.
+
+    C++ includes: raster_image.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        """
+
+        GeoCal::ArrayRasterImage::ArrayRasterImage()
+        Create an empty array. 
+        """
+        _raster_image.ArrayRasterImage_swiginit(self, _raster_image.new_ArrayRasterImage())
+
+    def append(self, Img):
+        """
+
+        void GeoCal::ArrayRasterImage::push_back(const boost::shared_ptr< RasterImage > &Img)
+        Add to the array. 
+        """
+        return _raster_image.ArrayRasterImage_append(self, Img)
+
+
+    def size(self):
+        """
+
+        int GeoCal::ArrayRasterImage::size() const
+        Return size. 
+        """
+        return _raster_image.ArrayRasterImage_size(self)
+
+
+    def __getitem__(self, index):
+      return self.get(index)
+
+    def __setitem__(self, index, val):
+      self.set(index, val)
+
+    def __len__(self):
+      return self.size()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _raster_image.delete_ArrayRasterImage
+ArrayRasterImage.append = new_instancemethod(_raster_image.ArrayRasterImage_append, None, ArrayRasterImage)
+ArrayRasterImage.size = new_instancemethod(_raster_image.ArrayRasterImage_size, None, ArrayRasterImage)
+ArrayRasterImage.get = new_instancemethod(_raster_image.ArrayRasterImage_get, None, ArrayRasterImage)
+ArrayRasterImage.set = new_instancemethod(_raster_image.ArrayRasterImage_set, None, ArrayRasterImage)
+ArrayRasterImage.__str__ = new_instancemethod(_raster_image.ArrayRasterImage___str__, None, ArrayRasterImage)
+ArrayRasterImage_swigregister = _raster_image.ArrayRasterImage_swigregister
+ArrayRasterImage_swigregister(ArrayRasterImage)
 
 
 def copy_no_fill(Img_in, Img_out, Fill_value=0, diagnostic=False):

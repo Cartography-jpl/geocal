@@ -325,7 +325,7 @@ try:
     # Ok if this fails, it just means args.output doesn't exist yet
     if(args.add_tp):
         tparr.extend(read_shelve(args.output))
-except KeyError:
+except (KeyError, RuntimeError):
     pass
 
 for i in range(len(tparr)):

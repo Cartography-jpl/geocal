@@ -17,9 +17,9 @@ namespace GeoCal {
 class OrbitPiecewiseCorrection: public OrbitCorrection {
 public:
   OrbitPiecewiseCorrection(const boost::shared_ptr<Orbit> Orb_uncorr,
-			   const PiecewiseLinear& E_corr,
-			   const PiecewiseLinear& N_corr,
-			   const PiecewiseLinear& U_corr)
+			   const boost::shared_ptr<PiecewiseLinear>& E_corr,
+			   const boost::shared_ptr<PiecewiseLinear>& N_corr,
+			   const boost::shared_ptr<PiecewiseLinear>& U_corr)
     : OrbitCorrection(Orb_uncorr),
       e_corr_(E_corr), n_corr_(N_corr), u_corr_(U_corr)
   { }
@@ -34,19 +34,19 @@ public:
 /// Correction in local east direction.
 //-----------------------------------------------------------------------
   
-  const PiecewiseLinear& e_corr() const { return e_corr_; }
+  const boost::shared_ptr<PiecewiseLinear>& e_corr() const { return e_corr_; }
 
 //-----------------------------------------------------------------------
 /// Correction in local north direction.
 //-----------------------------------------------------------------------
   
-  const PiecewiseLinear& n_corr() const { return n_corr_; }
+  const boost::shared_ptr<PiecewiseLinear>& n_corr() const { return n_corr_; }
 
 //-----------------------------------------------------------------------
 /// Correction in local up direction.
 //-----------------------------------------------------------------------
   
-  const PiecewiseLinear& u_corr() const { return u_corr_; }
+  const boost::shared_ptr<PiecewiseLinear>& u_corr() const { return u_corr_; }
 protected:
   virtual void notify_update()
   {
@@ -65,7 +65,7 @@ protected:
   acorr(const Time& T) const
   { return boost::math::quaternion<double>(1,0,0,0); }
 private:
-  PiecewiseLinear e_corr_, n_corr_, u_corr_;
+  boost::shared_ptr<PiecewiseLinear> e_corr_, n_corr_, u_corr_;
   OrbitPiecewiseCorrection() {}
   friend class boost::serialization::access;
   template<class Archive>

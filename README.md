@@ -6,6 +6,27 @@ The software is made up of a core C++ library, python wrappers that allows
 the library to be used through python, and a number of support executables. 
 Most programs are written in python.
 
+## Documentation
+
+When you do a
+
+    make install
+
+we create doxygen documentation for the C++ code.
+This will appear in the directory \<install prefix\>/share/doc/geocal.
+
+The documentation can also be viewed from a version pushed into
+[Github Pages](https://github.jpl.nasa.gov/pages/Cartography/geocal).
+If you work on documentation, you can rebuild the version in Github using
+the command
+
+    make blah_blah_need_to_implement
+
+We also generate python documentation for all of the python code. This
+is available in for example in ipython using the normal "help(class)".
+
+We will generate html documentation of geocal python "real soon now".
+
 ## Building
 
 This uses the standard autotools build (the configure/make cycle common
@@ -19,12 +40,10 @@ is less commonly known, so I wanted to point this out. The various python
 unit tests can only be tested after an install. So a full test cycle would
 be:
 
-'''
-make -j 20 all
-make -j 20 check
-make install
-make -j 20 installcheck
-''''
+    make -j 20 all
+    make -j 20 check
+    make install
+    make -j 20 installcheck
 
 Replace -j 20 with whatever is reasonable on your system. Also note that
 the install step can't be done in parallel, again this is pretty standard
@@ -94,9 +113,7 @@ but contact Mike.M.Smyth@jpl.nasa.gov to give you just the data files.
 When using the CSPICE library, you'll need to set the environment variable
 SPICEDATA to point to the location of the data, e.g.,:
 
-```
-export SPICEDATA=/data/linux_ops/AIRMSPI/tools_03232015/install_fedora20/data/cspice
-```
+    export SPICEDATA=/data/linux_ops/AIRMSPI/tools_03232015/install_fedora20/data/cspice
 
 (This is not needed to build or run the unit tests).
 

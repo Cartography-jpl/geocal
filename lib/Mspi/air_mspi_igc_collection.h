@@ -2,6 +2,7 @@
 #define AIRMSPI_IGC_COLLECTION_H
 #include "igc_collection.h"
 #include "air_mspi_igc.h"
+#include "air_mspi_file.h"
 #include "mspi_config_file.h"
 
 namespace GeoCal {
@@ -21,6 +22,15 @@ public:
    		       const boost::shared_ptr<MspiCamera>& Cam,
    		       const boost::shared_ptr<MspiGimbal>& Gim,
    		       const boost::shared_ptr<Dem>& D,
+   		       const std::vector<std::string>& L1b1_file_name,
+		       const std::string& Swath_to_use = "660-I",
+		       int Dem_resolution = 10,
+		       const std::string& Base_directory = ".");
+  AirMspiIgcCollection(const boost::shared_ptr<Orbit>& Orb,
+   		       const boost::shared_ptr<MspiCamera>& Cam,
+   		       const boost::shared_ptr<MspiGimbal>& Gim,
+   		       const boost::shared_ptr<Dem>& D,
+		       const std::string& Master_config_file,
    		       const std::vector<std::string>& L1b1_file_name,
 		       const std::string& Swath_to_use = "660-I",
 		       int Dem_resolution = 10,
@@ -158,6 +168,17 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Set Configuration value for given view number.
+//-----------------------------------------------------------------------
+
+  void set_config_value(int Index, const std::string& Keyword,
+			const std::string& Value)
+  {
+    range_check(Index, 0, number_image());
+    view_config_[Index].add(Keyword, Value);
+  }
+  
+//-----------------------------------------------------------------------
 /// Return L1B1 file name.
 //-----------------------------------------------------------------------
 
@@ -217,6 +238,7 @@ private:
   boost::shared_ptr<Orbit> orbit_;
   std::vector<MspiConfigFile> view_config_;
   std::string base_directory;
+  std::string base_directory_canonical;
   std::string swath_to_use;
   std::vector<int> min_l1b1_line_, max_l1b1_line_;
 
@@ -239,7 +261,7 @@ private:
   {
     std::string res = F;
     if(res[0] != '/')
-      res = base_directory + "/" + res;
+      res = lexically_normal(base_directory_canonical + "/" + res).string();
     return res;
   }
 
@@ -247,6 +269,10 @@ private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 }
 

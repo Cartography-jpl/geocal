@@ -6,12 +6,17 @@
 from geocal import *
 import sys
 
+print(sys.argv)
 t = VicarArgument(sys.argv)
 
 ibfname,labfname1,labfname2 = t["inp"]
+print(t["coordtype"])
+
 f = IbisFile(ibfname, IbisFile.UPDATE)
-cin = VicarLiteRasterImage(labfname1).map_info.coordinate_converter
-cout = VicarLiteRasterImage(labfname2).map_info.coordinate_converter
+imgin = VicarLiteRasterImage(labfname1)
+imgout = VicarLiteRasterImage(labfname2)
+cin = imgin.map_info.coordinate_converter
+cout = imgout.map_info.coordinate_converter
 
 # Get input and output columns. The z column might be given, or might not.
 # If missing, then we always have a height of 0.
@@ -41,6 +46,19 @@ for r in range(f.number_row):
         x,y,z = f[r,ix],f[r,iy],f[r,iz]
     else:
         x,y,z = f[r,ix],f[r,iy],0.0
-    f[r,ox],f[r,oy],zmaybe = cout.convert_to_coordinate(cin.convert_from_coordinate(x,y,z))
+    if(t["coordtype"] == "MAP"):
+        f[r,ox],f[r,oy],zmaybe = cout.convert_to_coordinate(cin.convert_from_coordinate(x,y,z))
+    elif(t["coordtype"] == "IMAGE"):
+        ic = ImageCoordinate(VicarImageCoordinate(x, y))
+        print('In:', VicarImageCoordinate(x, y))
+        gc = imgin.ground_coordinate(ic, SimpleDem(z))
+        if(oz):
+            zmaybe = cout.convert_to_coordinate(gc)[2]
+        ic = VicarImageCoordinate(imgout.coordinate(gc))
+        print('Out:', ic)
+        f[r,ox] = ic.line
+        f[r,oy] = ic.sample
+    else:
+        raise RuntimeError("This shouldn't be able to happen")
     if(oz):
         f[r,oz] = zmaybe

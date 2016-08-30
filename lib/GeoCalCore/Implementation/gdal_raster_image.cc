@@ -549,12 +549,14 @@ do_read_all(const GdalRasterImage& d)
   int n = d.gdal_data_base().data_set()->GetRasterCount();
   boost::shared_ptr<std::vector<T> > 
     buf(new std::vector<T>(d.number_line() * d.number_sample() * n));
-  d.gdal_data_base().data_set()->RasterIO(GF_Read, 0,0,d.number_sample(), 
+  int status = d.gdal_data_base().data_set()->RasterIO(GF_Read, 0,0,d.number_sample(), 
 				  d.number_line(),
 				  (void*) &(*buf->begin()), 
 				  d.number_sample(), d.number_line(),
 				  (GDALDataType) GdalType::gdal_data_type<T>(), 
 				  n, 0, 0, 0, 0);
+  if(status ==CE_Failure)
+    throw Exception("RasterIO failed");
   std::vector<boost::shared_ptr<RasterImage> > res;
   for(int i = 0; i < n; ++i)
     res.push_back(boost::shared_ptr<RasterImage>(

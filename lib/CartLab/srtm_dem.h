@@ -28,6 +28,26 @@ private:
 };
 
 /****************************************************************//**
+  This is used the read the SRTM LWM data.
+*******************************************************************/
+
+class SrtmLwmData: public VicarCartLabMultifile {
+public:
+  SrtmLwmData(const std::string& Dir,
+	      bool No_coverage_is_error = true,
+	      int Number_line_per_tile = -1,
+	      int Number_sample_per_tile = -1, 
+	      int Number_tile_each_file = 4, int Number_file = 4,
+	      bool Favor_memory_mapped = true, bool Force_area_pixel = true);
+  virtual ~SrtmLwmData() { }
+private:
+  SrtmLwmData() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+  
+/****************************************************************//**
   This class provides access to the SRTM.
 
   Note comment from Tom about this data:
@@ -97,5 +117,6 @@ private:
 };
 }
 GEOCAL_EXPORT_KEY(SrtmDemData);
+GEOCAL_EXPORT_KEY(SrtmLwmData);
 GEOCAL_EXPORT_KEY(SrtmDem);
 #endif

@@ -17,9 +17,10 @@ public:
   enum {LINEAR, CONSTANT, LINEAR_TO_ZERO} FunctionType;
   PiecewiseLinear(const std::vector<Time>& X,
 		  const blitz::Array<int, 1>& T);
+  %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);
   double value(const Time& x) const;
-  %pickle_serialization();
   std::string print_to_string() const;
+  %pickle_serialization();
 };
 
 }

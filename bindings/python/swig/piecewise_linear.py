@@ -142,6 +142,8 @@ SwigPyIterator_swigregister(SwigPyIterator)
 _piecewise_linear.SHARED_PTR_DISOWN_swigconstant(_piecewise_linear)
 SHARED_PTR_DISOWN = _piecewise_linear.SHARED_PTR_DISOWN
 
+import os
+
 def _new_from_init(cls, version, *args):
     '''For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile'''
@@ -153,6 +155,15 @@ def _new_from_init(cls, version, *args):
 
 def _new_from_serialization(data):
     return geocal_swig.serialize_read_binary(data)
+
+def _new_from_serialization_dir(dir, data):
+    curdir = os.getcwd()
+    try:
+      os.chdir(dir)
+      return geocal_swig.serialize_read_binary(data)
+    finally:
+      os.chdir(curdir)
+
 
 def _new_vector(cls, version, lst):
     '''Create a vector from a list.'''
@@ -288,6 +299,24 @@ class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
         """
         _piecewise_linear.PiecewiseLinear_swiginit(self, _piecewise_linear.new_PiecewiseLinear(X, T))
 
+    def _v_parameter_mask(self, *args):
+        """
+
+        void PiecewiseLinear::parameter_mask(const blitz::Array< bool, 1 > &Pm)
+
+        """
+        return _piecewise_linear.PiecewiseLinear__v_parameter_mask(self, *args)
+
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
+
+    @parameter_mask.setter
+    def parameter_mask(self, value):
+      self._v_parameter_mask(value)
+
+
     def value(self, x):
         """
 
@@ -301,6 +330,7 @@ class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _piecewise_linear.delete_PiecewiseLinear
+PiecewiseLinear._v_parameter_mask = new_instancemethod(_piecewise_linear.PiecewiseLinear__v_parameter_mask, None, PiecewiseLinear)
 PiecewiseLinear.value = new_instancemethod(_piecewise_linear.PiecewiseLinear_value, None, PiecewiseLinear)
 PiecewiseLinear.__str__ = new_instancemethod(_piecewise_linear.PiecewiseLinear___str__, None, PiecewiseLinear)
 PiecewiseLinear_swigregister = _piecewise_linear.PiecewiseLinear_swigregister

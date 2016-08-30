@@ -12,6 +12,23 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
+void AirMspiIgcCollection::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void AirMspiIgcCollection::load(Archive & ar, const unsigned int version)
+{
+  // We set this up when we load the class, because the directory we
+  // load from may be different than later when we look up directory
+  // names. This doesn't matter except when using relative paths in
+  // the file names.
+  base_directory_canonical =
+    lexically_normal(boost::filesystem::absolute(base_directory)).string();
+}
+
+template<class Archive>
 void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IgcCollection);
@@ -27,6 +44,7 @@ void AirMspiIgcCollection::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(base_directory)
     & GEOCAL_NVP(swath_to_use)
     & GEOCAL_NVP_(min_l1b1_line) & GEOCAL_NVP_(max_l1b1_line);
+  boost::serialization::split_member(ar, *this, version);
 }
 
 GEOCAL_IMPLEMENT(AirMspiIgcCollection);
@@ -54,11 +72,50 @@ AirMspiIgcCollection::AirMspiIgcCollection
      base_directory(Base_directory),
      swath_to_use(Swath_to_use)
 {
+  base_directory_canonical =
+    lexically_normal(boost::filesystem::absolute(base_directory)).string();
   add_object(Cam);
   add_object(Gim);
   add_object(Orb);
   BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
     MspiConfigFile vc;
+    vc.add("l1b1_file", fname);
+    view_config_.push_back(vc);
+  }
+  calc_min_max_l1b1_line();
+}
+
+//-----------------------------------------------------------------------
+/// This create a AirMspiIgcCollection by directly giving the various
+/// pieces needed to construct it.
+//-----------------------------------------------------------------------
+
+AirMspiIgcCollection::AirMspiIgcCollection
+(const boost::shared_ptr<Orbit>& Orb,
+ const boost::shared_ptr<MspiCamera>& Cam,
+ const boost::shared_ptr<MspiGimbal>& Gim,
+ const boost::shared_ptr<Dem>& D,
+ const std::string& Master_config_file,
+ const std::vector<std::string>& L1b1_file_name,
+ const std::string& Swath_to_use,
+ int Dem_resolution,
+ const std::string& Base_directory)
+  :  dem(D),
+     dem_resolution(Dem_resolution),
+     camera_(Cam),
+     gimbal_(Gim),
+     orbit_(Orb),
+     base_directory(Base_directory),
+     swath_to_use(Swath_to_use)
+{
+  base_directory_canonical =
+    lexically_normal(boost::filesystem::absolute(base_directory)).string();
+  add_object(Cam);
+  add_object(Gim);
+  add_object(Orb);
+  MspiConfigFile c(Master_config_file);
+  BOOST_FOREACH(const std::string& fname, L1b1_file_name) {
+    MspiConfigFile vc(c);
     vc.add("l1b1_file", fname);
     view_config_.push_back(vc);
   }
@@ -83,6 +140,8 @@ AirMspiIgcCollection::AirMspiIgcCollection
   : base_directory(Base_directory),
     swath_to_use(Swath_to_use)
 {
+  base_directory_canonical =
+    lexically_normal(boost::filesystem::absolute(base_directory)).string();
   MspiConfigFile c(Master_config_file);
 
   // Get camera set up
@@ -180,6 +239,8 @@ void AirMspiIgcCollection::replace_view_config
 //-----------------------------------------------------------------------
 void AirMspiIgcCollection::calc_min_max_l1b1_line()
 {
+  min_l1b1_line_.clear();
+  max_l1b1_line_.clear();
   for(int i = 0; i < number_image(); ++i) {
     AirMspiTimeTable tt(l1b1_file_name(i), swath_to_use);
     view_config_[i].add("l1b1_granule_id", tt.l1b1_granule_id());
@@ -293,6 +354,7 @@ AirMspiIgcCollection::AirMspiIgcCollection
   gimbal_ = Original.gimbal_;
   orbit_ = Original.orbit_;
   base_directory = Original.base_directory;
+  base_directory_canonical = Original.base_directory_canonical;
   swath_to_use = Original.swath_to_use;
   BOOST_FOREACH(int i, Index_set) {
     view_config_.push_back(MspiConfigFile(Original.view_config_[i]));

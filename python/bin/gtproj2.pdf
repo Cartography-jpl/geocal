@@ -3,6 +3,7 @@ PARM INP    TYPE=(STRING) COUNT=3
 PARM INCOL  TYPE=INTEGER COUNT=2:3 
 PARM OUTCOL TYPE=INTEGER COUNT=2:3
 PARM ALTMAP TYPE=KEYWORD COUNT=0:1 VALID=(EPOSC,TEC) DEFAULT=TEC
+PARM COORDTYPE TYPE=KEYWORD COUNT=0:1 VALID=(MAP,IMAGE) DEFAULT=MAP
 END-PROC
 .TITLE
 VICAR/IBIS Program "gtproj2"
@@ -58,7 +59,9 @@ RESTRICTIONS
 None.  The IBIS column length is dynamically allocated. 
 
 WRITTEN BY:            Mike Smyth	Feb 2016
-
+Last Update:           Mike Smyth       August 2016   Option to use image
+                                                      coordinates instead of
+						      map coordinates
 COGNIZANT PROGRAMMER:  Mike Smyth
 
 .LEVEL1
@@ -76,6 +79,9 @@ COGNIZANT PROGRAMMER:  Mike Smyth
           doesn't do anything
  'TEC - accepted for backwards compatiblity,
           doesn't do anything
+.VARIABLE COORDTYPE
+ 'MAP - coordinates are in map coordiantes
+ 'IMAGE - coordinate are in image coordinates
 
 .LEVEL2
 .VARIABLE INP

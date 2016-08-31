@@ -167,6 +167,7 @@ def fix_projection(fin, fout):
         if(m1 and m2 and m1.group(1) != m2.group(1)):
             print("MSG:----------------------------------------------------\n")
             print("MSG: Doing HiRISE correction of swapping latitude_of_origin and standard_parallel_1 for the Equirectangular projection")
+            sys.stdout.flush()
             p = re.sub('PARAMETER\["latitude_of_origin",[\\d\\.]+\]',
                        'PARAMETER\["latitude_of_origin",' + m2.group(1) + ']',
                        p)

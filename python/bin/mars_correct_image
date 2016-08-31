@@ -148,9 +148,10 @@ def fix_projection(fin, fout):
     # The standard_parallel_1 and latitude_of_origin is sometimes swapped for
     # HiRISE. Examples I've seen have standard_parallel_1 0, so also possible
     # this is just a mislabeling of standard_parallel_1 as latitude_of_origin,
-    # combined with gdal or some other tool filling in the missing standard_parallel_1
-    # with default value of 0. In any case, we swap both values since this doesn't
-    # hurt even if standard_parallel_1 is always zero.
+    # combined with gdal or some other tool filling in the missing
+    # standard_parallel_1 with default value of 0. In any case, we swap
+    # both values since this doesn't hurt even if standard_parallel_1 is
+    # always zero.
     #
     # Not sure if this swap/misname is always the case, or just with some data.
     # The ticket https://trac.osgeo.org/gdal/ticket/2706 seems to talk about

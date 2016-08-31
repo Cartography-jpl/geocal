@@ -10,6 +10,13 @@ t = VicarArgument(sys.argv)
 
 ibfname,labfname1,labfname2 = t["inp"]
 
+if(t["coordtype"] == "MAP"):
+    do_map = True
+elif(t["coordtype"] == "IMAGE"):
+    do_map = False
+else:
+    raise RuntimeError("This shouldn't be able to happen")
+
 f = IbisFile(ibfname, IbisFile.UPDATE)
 imgin = VicarLiteRasterImage(labfname1)
 imgout = VicarLiteRasterImage(labfname2)
@@ -39,22 +46,36 @@ else:
     oy -= 1
     oz -= 1
 
+# We sometimes call this will lots of points (e.g., 1 million). For speed,
+# we directly work with the ibis data. This is a little more obscure than
+# just saying f[r, ix], but it is faster.
+fix = f.column(ix).data
+fiy = f.column(iy).data
+if(iz):
+    fiz = f.column(iz).data
+fox = f.column(ox).data
+f.column(ox).update = True
+foy = f.column(oy).data
+f.column(oy).update = True
+if(oz):
+    foz = f.column(oz).data
+    f.column(oz).update = True
+
 for r in range(f.number_row):
     if(iz):
-        x,y,z = f[r,ix],f[r,iy],f[r,iz]
+        x,y,z = fix[r],fiy[r],fiz[r]
     else:
-        x,y,z = f[r,ix],f[r,iy],0.0
-    if(t["coordtype"] == "MAP"):
-        f[r,ox],f[r,oy],zmaybe = cout.convert_to_coordinate(cin.convert_from_coordinate(x,y,z))
-    elif(t["coordtype"] == "IMAGE"):
-        ic = ImageCoordinate(VicarImageCoordinate(x, y))
-        gc = imgin.ground_coordinate(ic, SimpleDem(z))
+        x,y,z = fix[r],fiy[r],0.0
+    if(do_map):
+        fox[r],foy[r],zmaybe = cout.convert_to_coordinate(cin.convert_from_coordinate(x,y,z))
         if(oz):
-            zmaybe = cout.convert_to_coordinate(gc)[2]
-        ic = VicarImageCoordinate(imgout.coordinate(gc))
-        f[r,ox] = ic.line
-        f[r,oy] = ic.sample
+            foz[r] = zmaybe
     else:
-        raise RuntimeError("This shouldn't be able to happen")
-    if(oz):
-        f[r,oz] = zmaybe
+        if(oz):
+            gc = imgin.ground_coordinate(x - 1, y - 1, SimpleDem(z))
+            foz[r] = cout.convert_to_coordinate(gc)[2]
+        else:
+            gc = imgin.ground_coordinate(x - 1, y - 1)
+        ic = imgout.coordinate(gc)
+        fox[r] = ic.line + 1
+        foy[r] = ic.sample + 1

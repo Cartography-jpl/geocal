@@ -81,6 +81,16 @@ def resample_proj(fin, fref, fout, resize=False):
         cmd.append(fout)
         subprocess.run(cmd, check=True)
 
+def check_same_projection(f1, f2):
+    '''Check  that the 2 images have identical projection and resolution.'''
+    gf1 = GdalRasterImage(f1)
+    gf2 = GdalRasterImage(f2)
+    if(not gf1.map_info.coordinate_converter.is_same(gf2.map_info.coordinate_converter)):
+        return False
+    if(not (gf1.map_info.transform == gf2.map_info.transform).all()):
+        return False
+    return True
+
 def check_intersection(f1, f2):
     '''Returns True if there is some overlap between the 2 images, False 
     otherwise. This is purposely coarse, we just check the corners of the 
@@ -201,6 +211,10 @@ if(args.ref_image_resolution_name != args.image_resolution_name):
 import_file(img_fixed, img_res2)
 if(args.ref_image_resolution_name != args.image_resolution_name):
     resample_proj(img_res2, refimg_res1, img_res1, resize=True)
+# Check that datasets are consistent
+if(not check_same_projection(img_res1, refimg_res1) or
+   not check_same_projection(img_res2, refimg_res2)):
+    raise RuntimeError("The files %s and %s or %s and %s aren't the same projection and/or resolution. This might be because you passed in the same resolution name for the reference image and image but they aren't identical resolution." % (img_res1, refimg_res1, img_res2, refimg_res2))
 print("MSG:----------------------------------------------------\n")
 print("MSG: Before correcting\n")
 print("MSG: Each pixels is %s" % args.ref_image_resolution_name)

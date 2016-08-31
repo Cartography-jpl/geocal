@@ -23,10 +23,29 @@ def vicarb_run(cmd, print_results = False):
     if you are cutting and pasting from an existing VICAR test script'''
     cmd2 = re.sub(r'\+?\n',"", cmd)
     cmd2 = re.sub(r'"',"\\\"", cmd2)
-    res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,check=True,
-                         stdout = subprocess.PIPE)
-    if(print_results):
-        print(res.stdout.decode('utf-8'))
+    if(not print_results):
+        res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,check=True,
+                             stdout = subprocess.PIPE, stderr=subprocess.STDOUT)
+        return res
+    # This is a little more complicated than just subprocess.run
+    # because we want to print the output as it is generated, not
+    # all bunched up at the end - so a long running process will have
+    # output while we wait
+    process = subprocess.Popen("vicarb \"%s\"" % cmd2, shell=True,
+                               stdout = subprocess.PIPE,
+                               stderr=subprocess.STDOUT)
+    res = b''
+    while(True):
+        output = process.stdout.readline()
+        if output == b'' and process.poll() is not None:
+            break
+        if output:
+            res = res + output
+            print(output.strip().decode('utf-8'))
+    if(process.poll() != 0):
+        raise subprocess.CalledProcessError(process.poll(),
+                                            "vicarb \"%s\"" % cmd2,
+                                            output=res)
     return res
     
 def vicarb_tae_path():

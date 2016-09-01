@@ -315,6 +315,20 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
         return self._v_pcs_citation_geo_key()
 
 
+    def _v_geogcs_name(self):
+        """
+
+        std::string OgrWrapper::geogcs_name() const
+        The name of the GEOGCS. 
+        """
+        return _ogr_coordinate.OgrWrapper__v_geogcs_name(self)
+
+
+    @property
+    def geogcs_name(self):
+        return self._v_geogcs_name()
+
+
     def _v_wkt(self):
         """
 
@@ -343,6 +357,20 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
         return self._v_pretty_wkt()
 
 
+    def _v_naif_code(self):
+        """
+
+        int GeoCal::OgrWrapper::naif_code() const
+        Return the NAIF code for the planet this coordinate is for. 
+        """
+        return _ogr_coordinate.OgrWrapper__v_naif_code(self)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -352,8 +380,10 @@ OgrWrapper._v_transform = new_instancemethod(_ogr_coordinate.OgrWrapper__v_trans
 OgrWrapper._v_inverse_transform = new_instancemethod(_ogr_coordinate.OgrWrapper__v_inverse_transform, None, OgrWrapper)
 OgrWrapper._v_projected_cs_type_geo_key = new_instancemethod(_ogr_coordinate.OgrWrapper__v_projected_cs_type_geo_key, None, OgrWrapper)
 OgrWrapper._v_pcs_citation_geo_key = new_instancemethod(_ogr_coordinate.OgrWrapper__v_pcs_citation_geo_key, None, OgrWrapper)
+OgrWrapper._v_geogcs_name = new_instancemethod(_ogr_coordinate.OgrWrapper__v_geogcs_name, None, OgrWrapper)
 OgrWrapper._v_wkt = new_instancemethod(_ogr_coordinate.OgrWrapper__v_wkt, None, OgrWrapper)
 OgrWrapper._v_pretty_wkt = new_instancemethod(_ogr_coordinate.OgrWrapper__v_pretty_wkt, None, OgrWrapper)
+OgrWrapper._v_naif_code = new_instancemethod(_ogr_coordinate.OgrWrapper__v_naif_code, None, OgrWrapper)
 OgrWrapper.__str__ = new_instancemethod(_ogr_coordinate.OgrWrapper___str__, None, OgrWrapper)
 OgrWrapper_swigregister = _ogr_coordinate.OgrWrapper_swigregister
 OgrWrapper_swigregister(OgrWrapper)

@@ -4,6 +4,7 @@
 #include "constant.h"
 #include "wgs84_constant.h"
 #include "geocal_serialize_support.h"
+#include "ogr_coordinate.h"
 #include <cmath>
 
 using namespace GeoCal;
@@ -39,6 +40,12 @@ GEOCAL_IMPLEMENT(Geocentric);
 
 Geodetic::Geodetic(const GroundCoordinate& Gc)
 {
+  const OgrCoordinate* ogr = dynamic_cast<const OgrCoordinate*>(&Gc);
+  if(ogr && ogr->ogr().naif_code() != Ecr::EARTH_NAIF_CODE) {
+    Exception e;
+    e << "Can't convert coordinate to Geodetic. Naif_code for the coordinate is " << ogr->ogr().naif_code();
+    throw e;
+  }
   Gc.lat_lon_height(lat_, lon_, height_ellipsoid_);
 }
 

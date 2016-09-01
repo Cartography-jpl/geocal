@@ -27,8 +27,10 @@ public:
   %python_attribute(inverse_transform, const OGRCoordinateTransformation&)
   %python_attribute(projected_cs_type_geo_key, std::string)
   %python_attribute(pcs_citation_geo_key, std::string)
+  %python_attribute(geogcs_name, std::string)
   %python_attribute(wkt, std::string)
   %python_attribute(pretty_wkt, std::string)
+  %python_attribute(naif_code, int)
   std::string print_to_string() const;
   %pickle_serialization();
 };

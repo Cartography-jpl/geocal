@@ -55,13 +55,24 @@ public:
   void print(std::ostream& Os) const;  
   std::string projected_cs_type_geo_key() const;
   std::string pcs_citation_geo_key() const;
+  std::string geogcs_name() const;
+
+//-----------------------------------------------------------------------
+/// Return the NAIF code for the planet this coordinate is for.
+//-----------------------------------------------------------------------
+
+  int naif_code() const { return naif_code_; }
 private:
   void init(const boost::shared_ptr<OGRSpatialReference>& Ogr);
   void init(const std::string& Wkt);
   boost::shared_ptr<OGRSpatialReference> ogr_;
   OGRCoordinateTransformation* ogr_transform_;
   OGRCoordinateTransformation* ogr_inverse_transform_;
+  int naif_code_;
+  // Right now we have a fixed list of planets. If this becomes and
+  // issue, we can come up with something more flexible.
   static boost::scoped_ptr<OGRSpatialReference> ogr_geodetic;
+  static boost::scoped_ptr<OGRSpatialReference> ogr_mars_planetocentric;
   OgrWrapper() {}
   friend class boost::serialization::access;
   template<class Archive>
@@ -114,8 +125,7 @@ public:
 /// Convert to CartesianFixed.
 //-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const
-  { return Geodetic(latitude(), longitude(), height_reference_surface()).convert_to_cf(); }
+  virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   virtual void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------

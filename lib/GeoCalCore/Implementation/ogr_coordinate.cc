@@ -1,5 +1,7 @@
 #include "ogr_coordinate.h"
+#include "planet_coordinate.h"
 #include "geocal_serialize_support.h"
+#include "ecr.h"
 
 using namespace GeoCal;
 
@@ -97,12 +99,20 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
     ogr_geodetic.reset(new OGRSpatialReference);
     ogr_geodetic->SetWellKnownGeogCS("WGS84");
   }
-  ogr_transform_ = OGRCreateCoordinateTransformation(ogr_.get(), 
-						     ogr_geodetic.get());
+  OGRSpatialReference * og;
+  if(geogcs_name() == "GCS_MARS") {
+    naif_code_ = MarsConstant::naif_code();
+    // This isn't right, we'll come back to this
+    og = ogr_geodetic.get();
+  } else {
+    naif_code_ = Ecr::EARTH_NAIF_CODE;
+    og = ogr_geodetic.get();
+  }
+    
+  ogr_transform_ = OGRCreateCoordinateTransformation(ogr_.get(), og);
   if(!ogr_transform_)
     throw Exception("Couldn't create transformation to geodetic coordinate system");
-  ogr_inverse_transform_ = OGRCreateCoordinateTransformation(ogr_geodetic.get(),
-							     ogr_.get());
+  ogr_inverse_transform_ = OGRCreateCoordinateTransformation(og, ogr_.get());
   if(!ogr_inverse_transform_) {
     delete ogr_transform_;
     throw Exception("Couldn't create transformation from geodetic coordinate system");
@@ -225,6 +235,15 @@ std::string OgrWrapper::pcs_citation_geo_key() const
 }
 
 //-----------------------------------------------------------------------
+/// The name of the GEOGCS.
+//-----------------------------------------------------------------------
+
+std::string OgrWrapper::geogcs_name() const
+{
+  return ogr_->GetAttrValue("GEOGCS");
+}
+
+//-----------------------------------------------------------------------
 /// Return latitude in degrees. Latitude is -90 to 90.
 //-----------------------------------------------------------------------
 
@@ -285,6 +304,21 @@ void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude,
   Latitude = yr;
   Longitude = xr;
   Height_reference_surface = zr;
+}
+
+//-----------------------------------------------------------------------
+/// Convert to CartesianFixed.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
+{
+  if(ogr().naif_code() == Ecr::EARTH_NAIF_CODE)
+    return Geodetic(latitude(), longitude(), height_reference_surface()).convert_to_cf();
+  if(ogr().naif_code() == MarsConstant::naif_code())
+    return MarsPlanetocentric(latitude(), longitude(), height_reference_surface()).convert_to_cf();
+  Exception e;
+  e << "Don't recognize the naif code " << ogr().naif_code();
+  throw e;
 }
 
 //-----------------------------------------------------------------------

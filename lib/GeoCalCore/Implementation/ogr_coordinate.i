@@ -23,8 +23,10 @@ public:
   static boost::shared_ptr<OgrWrapper> 
   from_proj4(const std::string& Proj4_string);
   %python_attribute2(ogr, ogr_ptr, boost::shared_ptr<OGRSpatialReference>)
-  %python_attribute(transform, const OGRCoordinateTransformation&)
-  %python_attribute(inverse_transform, const OGRCoordinateTransformation&)
+  %python_attribute(transform, const OGRCoordinateTransformation*)
+  %python_attribute(inverse_transform, const OGRCoordinateTransformation*)
+  %python_attribute(cf_transform, const OGRCoordinateTransformation*)
+  %python_attribute(cf_inverse_transform, const OGRCoordinateTransformation*)
   %python_attribute(projected_cs_type_geo_key, std::string)
   %python_attribute(pcs_citation_geo_key, std::string)
   %python_attribute(geogcs_name, std::string)

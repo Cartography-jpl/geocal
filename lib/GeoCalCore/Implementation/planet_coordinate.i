@@ -19,10 +19,12 @@ public:
   // class properties to work is a bit involved in python. Not really 
   // worth doing, although we can always come back to this if it becomes
   // an issue.
-  static double planet_a();
-  static double planet_b();
-  static double planet_esq();
-  static std::string planet_name();
+  static double a();
+  static double b();
+  static double esq();
+  static double flattening();
+  static double inverse_flattening();
+  static std::string name();
   static int naif_code();
 };
 

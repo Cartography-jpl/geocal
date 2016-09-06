@@ -3,10 +3,10 @@ using namespace GeoCal;
 
 // Constants for Mars
 template<> SpicePlanetConstant MarsConstant::h(MarsConstant::NAIF_CODE);
-template<> const char* MarsConstant::name = "Mars";
+template<> const char* MarsConstant::name_ = "Mars";
 
 // Constants for Europa
 template<> SpicePlanetConstant EuropaConstant::h(EuropaConstant::NAIF_CODE);
-template<> const char* EuropaConstant::name = "Europa";
+template<> const char* EuropaConstant::name_ = "Europa";
 
 

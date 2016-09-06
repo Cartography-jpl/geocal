@@ -6544,7 +6544,7 @@ SWIGINTERN PyObject *_wrap_OgrWrapper__v_transform(PyObject *SWIGUNUSEDPARM(self
   }
   {
     try {
-      result = (OGRCoordinateTransformation *) &((GeoCal::OgrWrapper const *)arg1)->transform();
+      result = (OGRCoordinateTransformation *)((GeoCal::OgrWrapper const *)arg1)->transform();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6587,7 +6587,93 @@ SWIGINTERN PyObject *_wrap_OgrWrapper__v_inverse_transform(PyObject *SWIGUNUSEDP
   }
   {
     try {
-      result = (OGRCoordinateTransformation *) &((GeoCal::OgrWrapper const *)arg1)->inverse_transform();
+      result = (OGRCoordinateTransformation *)((GeoCal::OgrWrapper const *)arg1)->inverse_transform();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_OGRCoordinateTransformation, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper__v_cf_transform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OgrWrapper *arg1 = (GeoCal::OgrWrapper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  OGRCoordinateTransformation *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrWrapper_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrWrapper__v_cf_transform" "', argument " "1"" of type '" "GeoCal::OgrWrapper const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (OGRCoordinateTransformation *)((GeoCal::OgrWrapper const *)arg1)->cf_transform();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_OGRCoordinateTransformation, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper__v_cf_inverse_transform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OgrWrapper *arg1 = (GeoCal::OgrWrapper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  OGRCoordinateTransformation *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrWrapper_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrWrapper__v_cf_inverse_transform" "', argument " "1"" of type '" "GeoCal::OgrWrapper const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (OGRCoordinateTransformation *)((GeoCal::OgrWrapper const *)arg1)->cf_inverse_transform();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8022,16 +8108,29 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OgrWrapper__v_transform", (PyCFunction)_wrap_OgrWrapper__v_transform, METH_O, (char *)"\n"
 		"\n"
-		"const OGRCoordinateTransformation& GeoCal::OgrWrapper::transform() const\n"
+		"const OGRCoordinateTransformation* GeoCal::OgrWrapper::transform() const\n"
 		"Return transformation that takes us from our coordinate system to\n"
 		"Geodetic. \n"
 		""},
 	 { (char *)"OgrWrapper__v_inverse_transform", (PyCFunction)_wrap_OgrWrapper__v_inverse_transform, METH_O, (char *)"\n"
 		"\n"
-		"const OGRCoordinateTransformation& GeoCal::OgrWrapper::inverse_transform() const\n"
+		"const OGRCoordinateTransformation* GeoCal::OgrWrapper::inverse_transform() const\n"
 		"Return inverse of transform().\n"
 		"\n"
 		"This goes from Geodetic to our coordinate system. \n"
+		""},
+	 { (char *)"OgrWrapper__v_cf_transform", (PyCFunction)_wrap_OgrWrapper__v_cf_transform, METH_O, (char *)"\n"
+		"\n"
+		"const OGRCoordinateTransformation* GeoCal::OgrWrapper::cf_transform() const\n"
+		"Return transformation that takes us from our coordinate system to\n"
+		"CartesianFixed. \n"
+		""},
+	 { (char *)"OgrWrapper__v_cf_inverse_transform", (PyCFunction)_wrap_OgrWrapper__v_cf_inverse_transform, METH_O, (char *)"\n"
+		"\n"
+		"const OGRCoordinateTransformation* GeoCal::OgrWrapper::cf_inverse_transform() const\n"
+		"Return inverse of cf_transform().\n"
+		"\n"
+		"This goes from CartesianFixed to our coordinate system. \n"
 		""},
 	 { (char *)"OgrWrapper__v_projected_cs_type_geo_key", (PyCFunction)_wrap_OgrWrapper__v_projected_cs_type_geo_key, METH_O, (char *)"\n"
 		"\n"

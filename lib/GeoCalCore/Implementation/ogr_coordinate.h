@@ -40,15 +40,31 @@ public:
 /// Geodetic.
 //-----------------------------------------------------------------------
 
-  const OGRCoordinateTransformation& transform() const {return *ogr_transform_;}
+  const OGRCoordinateTransformation* transform() const {return ogr_transform_;}
 
 //-----------------------------------------------------------------------
 /// Return inverse of transform(). This goes from Geodetic to our
 /// coordinate system.
 //-----------------------------------------------------------------------
 
-  const OGRCoordinateTransformation& inverse_transform() const 
-  {return *ogr_inverse_transform_;}
+  const OGRCoordinateTransformation* inverse_transform() const 
+  {return ogr_inverse_transform_;}
+
+//-----------------------------------------------------------------------
+/// Return transformation that takes us from our coordinate system to
+/// CartesianFixed.
+//-----------------------------------------------------------------------
+
+  const OGRCoordinateTransformation* cf_transform() const
+  {return ogr_cf_transform_;}
+
+//-----------------------------------------------------------------------
+/// Return inverse of cf_transform(). This goes from CartesianFixed to our
+/// coordinate system.
+//-----------------------------------------------------------------------
+
+  const OGRCoordinateTransformation* cf_inverse_transform() const 
+  {return ogr_cf_inverse_transform_;}
 
   std::string pretty_wkt() const;
   std::string wkt() const;
@@ -68,11 +84,14 @@ private:
   boost::shared_ptr<OGRSpatialReference> ogr_;
   OGRCoordinateTransformation* ogr_transform_;
   OGRCoordinateTransformation* ogr_inverse_transform_;
+  OGRCoordinateTransformation* ogr_cf_transform_;
+  OGRCoordinateTransformation* ogr_cf_inverse_transform_;
   int naif_code_;
   // Right now we have a fixed list of planets. If this becomes and
   // issue, we can come up with something more flexible.
   static boost::scoped_ptr<OGRSpatialReference> ogr_geodetic;
-  static boost::scoped_ptr<OGRSpatialReference> ogr_mars_planetocentric;
+  static boost::scoped_ptr<OGRSpatialReference> ogr_ecr;
+  static boost::scoped_ptr<OGRSpatialReference> ogr_mars_cf;
   OgrWrapper() {}
   friend class boost::serialization::access;
   template<class Archive>

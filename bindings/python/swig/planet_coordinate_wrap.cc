@@ -6326,14 +6326,14 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_planet_a(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MarsConstant_a(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_planet_a",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_a",0,0,0)) SWIG_fail;
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR planet_a();
+      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR a();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6347,14 +6347,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_planet_b(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MarsConstant_b(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_planet_b",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_b",0,0,0)) SWIG_fail;
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR planet_b();
+      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR b();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6368,14 +6368,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_planet_esq(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MarsConstant_esq(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_planet_esq",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_esq",0,0,0)) SWIG_fail;
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR planet_esq();
+      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR esq();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6389,14 +6389,56 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_planet_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MarsConstant_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_flattening",0,0,0)) SWIG_fail;
+  {
+    try {
+      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR flattening();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MarsConstant_inverse_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_inverse_flattening",0,0,0)) SWIG_fail;
+  {
+    try {
+      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR inverse_flattening();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MarsConstant_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_planet_name",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_name",0,0,0)) SWIG_fail;
   {
     try {
-      result = GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR planet_name();
+      result = GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8306,14 +8348,14 @@ SWIGINTERN PyObject *MarsPlanetocentricConverter_swiginit(PyObject *SWIGUNUSEDPA
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN PyObject *_wrap_EuropaConstant_planet_a(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_EuropaConstant_a(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_planet_a",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_a",0,0,0)) SWIG_fail;
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR planet_a();
+      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR a();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8327,14 +8369,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_EuropaConstant_planet_b(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_EuropaConstant_b(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_planet_b",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_b",0,0,0)) SWIG_fail;
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR planet_b();
+      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR b();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8348,14 +8390,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_EuropaConstant_planet_esq(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_EuropaConstant_esq(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_planet_esq",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_esq",0,0,0)) SWIG_fail;
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR planet_esq();
+      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR esq();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8369,14 +8411,56 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_EuropaConstant_planet_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_EuropaConstant_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_flattening",0,0,0)) SWIG_fail;
+  {
+    try {
+      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR flattening();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_EuropaConstant_inverse_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_inverse_flattening",0,0,0)) SWIG_fail;
+  {
+    try {
+      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR inverse_flattening();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_EuropaConstant_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string result;
   
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_planet_name",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_name",0,0,0)) SWIG_fail;
   {
     try {
-      result = GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR planet_name();
+      result = GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -10307,24 +10391,34 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
-	 { (char *)"MarsConstant_planet_a", (PyCFunction)_wrap_MarsConstant_planet_a, METH_NOARGS, (char *)"\n"
+	 { (char *)"MarsConstant_a", (PyCFunction)_wrap_MarsConstant_a, METH_NOARGS, (char *)"\n"
 		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::planet_a()\n"
-		"\n"
-		""},
-	 { (char *)"MarsConstant_planet_b", (PyCFunction)_wrap_MarsConstant_planet_b, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::planet_b()\n"
+		"static double GeoCal::PlanetConstant< NCODE >::a()\n"
 		"\n"
 		""},
-	 { (char *)"MarsConstant_planet_esq", (PyCFunction)_wrap_MarsConstant_planet_esq, METH_NOARGS, (char *)"\n"
+	 { (char *)"MarsConstant_b", (PyCFunction)_wrap_MarsConstant_b, METH_NOARGS, (char *)"\n"
 		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::planet_esq()\n"
+		"static double GeoCal::PlanetConstant< NCODE >::b()\n"
 		"\n"
 		""},
-	 { (char *)"MarsConstant_planet_name", (PyCFunction)_wrap_MarsConstant_planet_name, METH_NOARGS, (char *)"\n"
+	 { (char *)"MarsConstant_esq", (PyCFunction)_wrap_MarsConstant_esq, METH_NOARGS, (char *)"\n"
 		"\n"
-		"static std::string GeoCal::PlanetConstant< NCODE >::planet_name()\n"
+		"static double GeoCal::PlanetConstant< NCODE >::esq()\n"
+		"\n"
+		""},
+	 { (char *)"MarsConstant_flattening", (PyCFunction)_wrap_MarsConstant_flattening, METH_NOARGS, (char *)"\n"
+		"\n"
+		"static double GeoCal::PlanetConstant< NCODE >::flattening()\n"
+		"Calculate flattening. \n"
+		""},
+	 { (char *)"MarsConstant_inverse_flattening", (PyCFunction)_wrap_MarsConstant_inverse_flattening, METH_NOARGS, (char *)"\n"
+		"\n"
+		"static double GeoCal::PlanetConstant< NCODE >::inverse_flattening()\n"
+		"Calculate inverse flattening. \n"
+		""},
+	 { (char *)"MarsConstant_name", (PyCFunction)_wrap_MarsConstant_name, METH_NOARGS, (char *)"\n"
+		"\n"
+		"static std::string GeoCal::PlanetConstant< NCODE >::name()\n"
 		"\n"
 		""},
 	 { (char *)"MarsConstant_naif_code", (PyCFunction)_wrap_MarsConstant_naif_code, METH_NOARGS, (char *)"\n"
@@ -10443,24 +10537,34 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"MarsPlanetocentricConverter_swigregister", MarsPlanetocentricConverter_swigregister, METH_VARARGS, NULL},
 	 { (char *)"MarsPlanetocentricConverter_swiginit", MarsPlanetocentricConverter_swiginit, METH_VARARGS, NULL},
-	 { (char *)"EuropaConstant_planet_a", (PyCFunction)_wrap_EuropaConstant_planet_a, METH_NOARGS, (char *)"\n"
+	 { (char *)"EuropaConstant_a", (PyCFunction)_wrap_EuropaConstant_a, METH_NOARGS, (char *)"\n"
 		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::planet_a()\n"
-		"\n"
-		""},
-	 { (char *)"EuropaConstant_planet_b", (PyCFunction)_wrap_EuropaConstant_planet_b, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::planet_b()\n"
+		"static double GeoCal::PlanetConstant< NCODE >::a()\n"
 		"\n"
 		""},
-	 { (char *)"EuropaConstant_planet_esq", (PyCFunction)_wrap_EuropaConstant_planet_esq, METH_NOARGS, (char *)"\n"
+	 { (char *)"EuropaConstant_b", (PyCFunction)_wrap_EuropaConstant_b, METH_NOARGS, (char *)"\n"
 		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::planet_esq()\n"
+		"static double GeoCal::PlanetConstant< NCODE >::b()\n"
 		"\n"
 		""},
-	 { (char *)"EuropaConstant_planet_name", (PyCFunction)_wrap_EuropaConstant_planet_name, METH_NOARGS, (char *)"\n"
+	 { (char *)"EuropaConstant_esq", (PyCFunction)_wrap_EuropaConstant_esq, METH_NOARGS, (char *)"\n"
 		"\n"
-		"static std::string GeoCal::PlanetConstant< NCODE >::planet_name()\n"
+		"static double GeoCal::PlanetConstant< NCODE >::esq()\n"
+		"\n"
+		""},
+	 { (char *)"EuropaConstant_flattening", (PyCFunction)_wrap_EuropaConstant_flattening, METH_NOARGS, (char *)"\n"
+		"\n"
+		"static double GeoCal::PlanetConstant< NCODE >::flattening()\n"
+		"Calculate flattening. \n"
+		""},
+	 { (char *)"EuropaConstant_inverse_flattening", (PyCFunction)_wrap_EuropaConstant_inverse_flattening, METH_NOARGS, (char *)"\n"
+		"\n"
+		"static double GeoCal::PlanetConstant< NCODE >::inverse_flattening()\n"
+		"Calculate inverse flattening. \n"
+		""},
+	 { (char *)"EuropaConstant_name", (PyCFunction)_wrap_EuropaConstant_name, METH_NOARGS, (char *)"\n"
+		"\n"
+		"static std::string GeoCal::PlanetConstant< NCODE >::name()\n"
 		"\n"
 		""},
 	 { (char *)"EuropaConstant_naif_code", (PyCFunction)_wrap_EuropaConstant_naif_code, METH_NOARGS, (char *)"\n"

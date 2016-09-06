@@ -4,7 +4,12 @@ import hashlib
 import shutil
 import subprocess
 import glob
-from contextlib import suppress
+# This is python 3 only
+try:
+    from contextlib import suppress
+except ImportError:
+    # Don't fail, we just can't use target with python 2
+    pass
 
 class OutputCache(object):
     '''This class is used to manage a 'output cache'. This is used to support

@@ -80,6 +80,17 @@ require_vicar_gdalplugin = pytest.mark.skipif(os.environ.get("NO_VICAR_GDALPLUGI
 # reason.
 skip = pytest.mark.skip
 
+# Some code depends on rsync. We don't want to make this a strict requirement
+# for geocal, just have the code fail if rsync isn't found. So skip tests
+# that depend on this.
+require_rsync = pytest.mark.skipif(not cmd_exists("rsync")
+       reason = "need rsync on system to run.")
+
+# Some tests are python 3 only. Don't want the python 2 tests to fail for
+# python code that we know can't be run
+require_python3 = pytest.mark.skipif(not sys.version_info > (3,),
+       reason = "require python 3 to run")                                     
+
 @pytest.yield_fixture(scope="function")
 def isolated_dir(tmpdir):
     '''This is a fixture that creates a temporary directory, and uses this

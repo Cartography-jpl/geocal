@@ -1,6 +1,7 @@
 from geocal.target import *
 from test_support import *
 
+@require_rsync
 def test_input_file_target(isolated_dir):
     '''Test a input file target'''
     ft = InFileTarget("test.txt")
@@ -15,6 +16,7 @@ def test_input_file_target(isolated_dir):
     ft.remove()
     assert os.path.exists("test.txt")
 
+@require_rsync
 def test_input_file_target_error(isolated_dir):
     '''Test a input file target when an error occurs'''
     ft = InFileTarget("test.txt")
@@ -27,6 +29,7 @@ def test_input_file_target_error(isolated_dir):
     assert os.path.exists("test.txt")
     assert ft.exists()
 
+@require_rsync
 def test_output_file_target(isolated_dir):
     '''Test a output file target'''
     ft = OutFileTarget("test.txt")
@@ -48,6 +51,7 @@ def test_output_file_target(isolated_dir):
     ft.remove()
     assert not os.path.exists("test.txt.generating")
     
+@require_rsync
 def test_output_file_target_error(isolated_dir):
     '''Test a output file target when an error occurs'''
     ft = OutFileTarget("test.txt")

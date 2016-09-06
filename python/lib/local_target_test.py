@@ -2,6 +2,7 @@ from geocal.local_target import *
 from test_support import *
 
 @require_rsync
+@require_python3
 @pytest.yield_fixture(scope="function")
 def input_local_data(isolated_dir):
     '''Generate some input test data so we can check that it works.'''
@@ -53,6 +54,7 @@ def test_input_local_target_error(input_local_data):
     assert os.path.exists(ldir + input_local_data)
 
 @require_rsync
+@require_python3
 def test_output_local_target(isolated_dir):
     '''Test local output file target'''
     fname = os.path.abspath("./test_output/temp.txt")
@@ -73,6 +75,7 @@ def test_output_local_target(isolated_dir):
     assert not os.path.exists(fname)
     
 @require_rsync
+@require_python3
 def test_output_local_target_error(isolated_dir):
     '''Test a local output file target when an error occurs'''
     fname = os.path.abspath("./test_output/temp.txt")
@@ -90,6 +93,7 @@ def test_output_local_target_error(isolated_dir):
     assert not ft.exists()
 
 @require_rsync
+@require_python3
 def test_output_temp_local_target(isolated_dir):
     '''Test local output file target'''
     fname = os.path.abspath("./test_output/temp.txt")
@@ -116,6 +120,7 @@ def test_output_temp_local_target(isolated_dir):
     assert not os.path.exists("./local_directory" + fname + ".generating")
     
 @require_rsync
+@require_python3
 def test_output_temp_dir_local_target(isolated_dir):
     '''Test local output file target'''
     fname = os.path.abspath("./test_output/dir")
@@ -144,6 +149,7 @@ def test_output_temp_dir_local_target(isolated_dir):
     assert not ft.exists()
 
 @require_rsync
+@require_python3
 def test_output_temp_dir_local_target_error(isolated_dir):
     '''Test local output file target'''
     fname = os.path.abspath("./test_output/dir")

@@ -1,8 +1,10 @@
+from __future__ import print_function
 from geocal.output_cache import *
 from geocal.local_target import *
 from test_support import *
 import shutil
 
+@require_python3
 def test_output_cache(isolated_dir):
     '''Test the use of the OutputCache.'''
     fname1 = os.path.abspath("./test_output/temp.txt")
@@ -27,6 +29,7 @@ def test_output_cache(isolated_dir):
     assert os.path.exists(ft2.local_filename())
     assert stdout == b'fake stdout\nSecond fake line\n'
 
+@require_python3
 def test_output_cache_dir(isolated_dir):
     '''Test the use of OutputCache with a directory'''
     ft1 = OutTempDirLocalTarget("./test_output/data", "./local_directory")

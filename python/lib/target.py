@@ -1,6 +1,11 @@
 from .misc import makedirs_p
 import os
-from contextlib import suppress
+# This is python 3 only
+try:
+    from contextlib import suppress
+except ImportError:
+    # Don't fail, we just can't use target with python 2
+    pass
 
 class Target(object):
     '''A Target is a generalization of a file, it has a permanent

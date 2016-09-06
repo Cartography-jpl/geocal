@@ -6687,6 +6687,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OgrWrapper__v_geogcs_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OgrWrapper *arg1 = (GeoCal::OgrWrapper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrWrapper_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrWrapper__v_geogcs_name" "', argument " "1"" of type '" "GeoCal::OgrWrapper const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OgrWrapper const *)arg1)->geogcs_name();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_OgrWrapper__v_wkt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OgrWrapper *arg1 = (GeoCal::OgrWrapper *) 0 ;
@@ -6767,6 +6810,49 @@ SWIGINTERN PyObject *_wrap_OgrWrapper__v_pretty_wkt(PyObject *SWIGUNUSEDPARM(sel
     }
   }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper__v_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OgrWrapper *arg1 = (GeoCal::OgrWrapper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrWrapper_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrWrapper__v_naif_code" "', argument " "1"" of type '" "GeoCal::OgrWrapper const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::OgrWrapper const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -7963,6 +8049,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This is a short text description of the projection. \n"
 		""},
+	 { (char *)"OgrWrapper__v_geogcs_name", (PyCFunction)_wrap_OgrWrapper__v_geogcs_name, METH_O, (char *)"\n"
+		"\n"
+		"std::string OgrWrapper::geogcs_name() const\n"
+		"The name of the GEOGCS. \n"
+		""},
 	 { (char *)"OgrWrapper__v_wkt", (PyCFunction)_wrap_OgrWrapper__v_wkt, METH_O, (char *)"\n"
 		"\n"
 		"std::string OgrWrapper::wkt() const\n"
@@ -7972,6 +8063,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"std::string OgrWrapper::pretty_wkt() const\n"
 		"Write out a prettified version of the WKT for ogr_. \n"
+		""},
+	 { (char *)"OgrWrapper__v_naif_code", (PyCFunction)_wrap_OgrWrapper__v_naif_code, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::OgrWrapper::naif_code() const\n"
+		"Return the NAIF code for the planet this coordinate is for. \n"
 		""},
 	 { (char *)"OgrWrapper___str__", (PyCFunction)_wrap_OgrWrapper___str__, METH_O, NULL},
 	 { (char *)"delete_OgrWrapper", (PyCFunction)_wrap_delete_OgrWrapper, METH_O, (char *)"\n"

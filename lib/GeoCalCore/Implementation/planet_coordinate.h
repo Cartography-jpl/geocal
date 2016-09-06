@@ -23,6 +23,13 @@ public:
   static double planet_b() {return h.planet_b(); }
   static double planet_esq() {return h.planet_esq(); }
   static std::string planet_name() { return name;}
+
+
+//-----------------------------------------------------------------------
+/// Return NAIF code.
+//-----------------------------------------------------------------------
+  
+  static int naif_code() {return NCODE;}
 private:
   static SpicePlanetConstant h;
   static const char* name;
@@ -190,6 +197,12 @@ public:
     return create(res);
   }
 
+//-----------------------------------------------------------------------
+/// Return NAIF code.
+//-----------------------------------------------------------------------
+  
+  static int naif_code() {return NAIF_CODE;}
+  
   virtual void print(std::ostream& Os) const
   {
     Os << PlanetConstant<NAIF_CODE>::planet_name()
@@ -344,6 +357,12 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Return NAIF code.
+//-----------------------------------------------------------------------
+  
+  static int naif_code() {return NAIF_CODE;}
+  
+//-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
@@ -403,6 +422,12 @@ public:
        << height_reference_surface() << " m)";
   }
 
+//-----------------------------------------------------------------------
+/// Return NAIF code.
+//-----------------------------------------------------------------------
+  
+  static int naif_code() {return NAIF_CODE;}
+  
 //-----------------------------------------------------------------------
 /// Make an Planetocentric with the given latitude, longitude, and height.
 /// Latitude and longitude are in degrees, height is in meters.
@@ -542,6 +567,12 @@ public:
     Y = gd.latitude();
     Height = gd.height_reference_surface();
   }
+
+//-----------------------------------------------------------------------
+/// Return NAIF code.
+//-----------------------------------------------------------------------
+  
+  static int naif_code() { return NAIF_CODE; }
 
 //-----------------------------------------------------------------------
 /// Print to given stream.

@@ -7202,6 +7202,89 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_OgrCoordinate__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::OgrWrapper > *arg1 = 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OgrWrapper > tempshared1 ;
+  boost::shared_ptr< GeoCal::OgrWrapper > temp2shared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  GeoCal::OgrCoordinate *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrWrapper_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OgrCoordinate" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::OgrWrapper > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::OgrWrapper > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::OgrWrapper > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::OgrWrapper > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_OgrCoordinate" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OgrCoordinate" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (GeoCal::OgrCoordinate *)new GeoCal::OgrCoordinate((boost::shared_ptr< GeoCal::OgrWrapper > const &)*arg1,(GeoCal::GroundCoordinate const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OgrCoordinate > *smartresult = result ? new boost::shared_ptr<  GeoCal::OgrCoordinate >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrCoordinate_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_OgrCoordinate(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[5] = {
@@ -7211,7 +7294,18 @@ SWIGINTERN PyObject *_wrap_new_OgrCoordinate(PyObject *self, PyObject *args) {
   if (!(argc = SWIG_Python_UnpackTuple(args,"new_OgrCoordinate",0,4,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
     return _wrap_new_OgrCoordinate__SWIG_1(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_new_OgrCoordinate__SWIG_2(self, argc, argv);
   }
   if (argc == 4) {
     return _wrap_new_OgrCoordinate__SWIG_0(self, argc, argv);
@@ -7221,7 +7315,8 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_OgrCoordinate'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::OgrCoordinate::OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const &,double,double,double)\n"
-    "    GeoCal::OgrCoordinate::OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const &,GeoCal::Geodetic const &)\n");
+    "    GeoCal::OgrCoordinate::OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const &,GeoCal::Geodetic const &)\n"
+    "    GeoCal::OgrCoordinate::OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const &,GeoCal::GroundCoordinate const &)\n");
   return 0;
 }
 
@@ -8110,14 +8205,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"const OGRCoordinateTransformation* GeoCal::OgrWrapper::transform() const\n"
 		"Return transformation that takes us from our coordinate system to\n"
-		"Geodetic. \n"
+		"Geodetic.\n"
+		"\n"
+		"Is null for other planets (where Geodetic doesn't make sense). \n"
 		""},
 	 { (char *)"OgrWrapper__v_inverse_transform", (PyCFunction)_wrap_OgrWrapper__v_inverse_transform, METH_O, (char *)"\n"
 		"\n"
 		"const OGRCoordinateTransformation* GeoCal::OgrWrapper::inverse_transform() const\n"
 		"Return inverse of transform().\n"
 		"\n"
-		"This goes from Geodetic to our coordinate system. \n"
+		"This goes from Geodetic to our coordinate system. Is null for other\n"
+		"planets (where Geodetic doesn't make sense). \n"
 		""},
 	 { (char *)"OgrWrapper__v_cf_transform", (PyCFunction)_wrap_OgrWrapper__v_cf_transform, METH_O, (char *)"\n"
 		"\n"
@@ -8178,8 +8276,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OgrWrapper_swiginit", OgrWrapper_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_OgrCoordinate", _wrap_new_OgrCoordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const Geodetic &G)\n"
-		"Convert from Geodetic to the coordinate system given by Ogr. \n"
+		"OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const GroundCoordinate\n"
+		"&G)\n"
+		"Convert from GroundCoordinate to the coordinate system given by Ogr.\n"
+		"\n"
 		""},
 	 { (char *)"OgrCoordinate__v_ogr", (PyCFunction)_wrap_OgrCoordinate__v_ogr, METH_O, (char *)"\n"
 		"\n"

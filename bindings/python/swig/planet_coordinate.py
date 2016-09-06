@@ -400,16 +400,6 @@ class MarsFixed(geocal_swig.ground_coordinate.CartesianFixed):
 
     orbit_data = staticmethod(orbit_data)
 
-    def naif_code():
-        """
-
-        static int GeoCal::PlanetFixed< NAIF_CODE >::naif_code()
-        Return NAIF code. 
-        """
-        return _planet_coordinate.MarsFixed_naif_code()
-
-    naif_code = staticmethod(naif_code)
-
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -442,14 +432,6 @@ def MarsFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T):
     """
     return _planet_coordinate.MarsFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T)
 
-def MarsFixed_naif_code():
-    """
-
-    static int GeoCal::PlanetFixed< NAIF_CODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.MarsFixed_naif_code()
-
 class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """
 
@@ -481,15 +463,14 @@ class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
         return _planet_coordinate.MarsInertial_reference_surface_intersect_approximate(self, Cl, Height_reference_surface)
 
 
-    def naif_code():
+    def naif_code(self):
         """
 
-        static int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()
+        int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()
         Return NAIF code. 
         """
-        return _planet_coordinate.MarsInertial_naif_code()
+        return _planet_coordinate.MarsInertial_naif_code(self)
 
-    naif_code = staticmethod(naif_code)
 
     @classmethod
     def pickle_format_version(cls):
@@ -500,16 +481,9 @@ class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
 
     __swig_destroy__ = _planet_coordinate.delete_MarsInertial
 MarsInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.MarsInertial_reference_surface_intersect_approximate, None, MarsInertial)
+MarsInertial.naif_code = new_instancemethod(_planet_coordinate.MarsInertial_naif_code, None, MarsInertial)
 MarsInertial_swigregister = _planet_coordinate.MarsInertial_swigregister
 MarsInertial_swigregister(MarsInertial)
-
-def MarsInertial_naif_code():
-    """
-
-    static int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.MarsInertial_naif_code()
 
 class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     """
@@ -537,15 +511,14 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
         """
         _planet_coordinate.MarsPlanetocentric_swiginit(self, _planet_coordinate.new_MarsPlanetocentric(*args))
 
-    def naif_code():
+    def naif_code(self):
         """
 
-        static int GeoCal::Planetocentric< NAIF_CODE >::naif_code()
+        int GeoCal::Planetocentric< NAIF_CODE >::naif_code()
         Return NAIF code. 
         """
-        return _planet_coordinate.MarsPlanetocentric_naif_code()
+        return _planet_coordinate.MarsPlanetocentric_naif_code(self)
 
-    naif_code = staticmethod(naif_code)
 
     @property
     def height_reference_surface(self):
@@ -570,16 +543,9 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
       return _new_from_init, (self.__class__, 1, self.latitude,self.longitude,self.height_reference_surface)
 
     __swig_destroy__ = _planet_coordinate.delete_MarsPlanetocentric
+MarsPlanetocentric.naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentric_naif_code, None, MarsPlanetocentric)
 MarsPlanetocentric_swigregister = _planet_coordinate.MarsPlanetocentric_swigregister
 MarsPlanetocentric_swigregister(MarsPlanetocentric)
-
-def MarsPlanetocentric_naif_code():
-    """
-
-    static int GeoCal::Planetocentric< NAIF_CODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.MarsPlanetocentric_naif_code()
 
 class MarsSimpleDem(geocal_swig.dem.Dem):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -627,15 +593,14 @@ class MarsPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateCon
         return _planet_coordinate.MarsPlanetocentricConverter_convert_from_coordinate(self, X, Y, Height)
 
 
-    def naif_code():
+    def naif_code(self):
         """
 
-        static int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()
+        int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()
         Return NAIF code. 
         """
-        return _planet_coordinate.MarsPlanetocentricConverter_naif_code()
+        return _planet_coordinate.MarsPlanetocentricConverter_naif_code(self)
 
-    naif_code = staticmethod(naif_code)
 
     @classmethod
     def pickle_format_version(cls):
@@ -649,16 +614,9 @@ class MarsPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateCon
         _planet_coordinate.MarsPlanetocentricConverter_swiginit(self, _planet_coordinate.new_MarsPlanetocentricConverter())
     __swig_destroy__ = _planet_coordinate.delete_MarsPlanetocentricConverter
 MarsPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter_convert_from_coordinate, None, MarsPlanetocentricConverter)
+MarsPlanetocentricConverter.naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter_naif_code, None, MarsPlanetocentricConverter)
 MarsPlanetocentricConverter_swigregister = _planet_coordinate.MarsPlanetocentricConverter_swigregister
 MarsPlanetocentricConverter_swigregister(MarsPlanetocentricConverter)
-
-def MarsPlanetocentricConverter_naif_code():
-    """
-
-    static int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.MarsPlanetocentricConverter_naif_code()
 
 class EuropaConstant(object):
     """
@@ -868,16 +826,6 @@ class EuropaFixed(geocal_swig.ground_coordinate.CartesianFixed):
 
     orbit_data = staticmethod(orbit_data)
 
-    def naif_code():
-        """
-
-        static int GeoCal::PlanetFixed< NAIF_CODE >::naif_code()
-        Return NAIF code. 
-        """
-        return _planet_coordinate.EuropaFixed_naif_code()
-
-    naif_code = staticmethod(naif_code)
-
     @classmethod
     def pickle_format_version(cls):
       return 1
@@ -910,14 +858,6 @@ def EuropaFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T):
     """
     return _planet_coordinate.EuropaFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T)
 
-def EuropaFixed_naif_code():
-    """
-
-    static int GeoCal::PlanetFixed< NAIF_CODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.EuropaFixed_naif_code()
-
 class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """
 
@@ -949,15 +889,14 @@ class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
         return _planet_coordinate.EuropaInertial_reference_surface_intersect_approximate(self, Cl, Height_reference_surface)
 
 
-    def naif_code():
+    def naif_code(self):
         """
 
-        static int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()
+        int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()
         Return NAIF code. 
         """
-        return _planet_coordinate.EuropaInertial_naif_code()
+        return _planet_coordinate.EuropaInertial_naif_code(self)
 
-    naif_code = staticmethod(naif_code)
 
     @classmethod
     def pickle_format_version(cls):
@@ -968,16 +907,9 @@ class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
 
     __swig_destroy__ = _planet_coordinate.delete_EuropaInertial
 EuropaInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.EuropaInertial_reference_surface_intersect_approximate, None, EuropaInertial)
+EuropaInertial.naif_code = new_instancemethod(_planet_coordinate.EuropaInertial_naif_code, None, EuropaInertial)
 EuropaInertial_swigregister = _planet_coordinate.EuropaInertial_swigregister
 EuropaInertial_swigregister(EuropaInertial)
-
-def EuropaInertial_naif_code():
-    """
-
-    static int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.EuropaInertial_naif_code()
 
 class EuropaPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     """
@@ -1005,15 +937,14 @@ class EuropaPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
         """
         _planet_coordinate.EuropaPlanetocentric_swiginit(self, _planet_coordinate.new_EuropaPlanetocentric(*args))
 
-    def naif_code():
+    def naif_code(self):
         """
 
-        static int GeoCal::Planetocentric< NAIF_CODE >::naif_code()
+        int GeoCal::Planetocentric< NAIF_CODE >::naif_code()
         Return NAIF code. 
         """
-        return _planet_coordinate.EuropaPlanetocentric_naif_code()
+        return _planet_coordinate.EuropaPlanetocentric_naif_code(self)
 
-    naif_code = staticmethod(naif_code)
 
     @property
     def height_reference_surface(self):
@@ -1038,16 +969,9 @@ class EuropaPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
       return _new_from_init, (self.__class__, 1, self.latitude,self.longitude,self.height_reference_surface)
 
     __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentric
+EuropaPlanetocentric.naif_code = new_instancemethod(_planet_coordinate.EuropaPlanetocentric_naif_code, None, EuropaPlanetocentric)
 EuropaPlanetocentric_swigregister = _planet_coordinate.EuropaPlanetocentric_swigregister
 EuropaPlanetocentric_swigregister(EuropaPlanetocentric)
-
-def EuropaPlanetocentric_naif_code():
-    """
-
-    static int GeoCal::Planetocentric< NAIF_CODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.EuropaPlanetocentric_naif_code()
 
 class EuropaSimpleDem(geocal_swig.dem.Dem):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -1095,15 +1019,14 @@ class EuropaPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateC
         return _planet_coordinate.EuropaPlanetocentricConverter_convert_from_coordinate(self, X, Y, Height)
 
 
-    def naif_code():
+    def naif_code(self):
         """
 
-        static int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()
+        int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()
         Return NAIF code. 
         """
-        return _planet_coordinate.EuropaPlanetocentricConverter_naif_code()
+        return _planet_coordinate.EuropaPlanetocentricConverter_naif_code(self)
 
-    naif_code = staticmethod(naif_code)
 
     @classmethod
     def pickle_format_version(cls):
@@ -1117,16 +1040,9 @@ class EuropaPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateC
         _planet_coordinate.EuropaPlanetocentricConverter_swiginit(self, _planet_coordinate.new_EuropaPlanetocentricConverter())
     __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentricConverter
 EuropaPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.EuropaPlanetocentricConverter_convert_from_coordinate, None, EuropaPlanetocentricConverter)
+EuropaPlanetocentricConverter.naif_code = new_instancemethod(_planet_coordinate.EuropaPlanetocentricConverter_naif_code, None, EuropaPlanetocentricConverter)
 EuropaPlanetocentricConverter_swigregister = _planet_coordinate.EuropaPlanetocentricConverter_swigregister
 EuropaPlanetocentricConverter_swigregister(EuropaPlanetocentricConverter)
-
-def EuropaPlanetocentricConverter_naif_code():
-    """
-
-    static int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.EuropaPlanetocentricConverter_naif_code()
 
 
 

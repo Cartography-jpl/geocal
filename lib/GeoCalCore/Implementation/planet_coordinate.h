@@ -212,8 +212,8 @@ public:
 //-----------------------------------------------------------------------
 /// Return NAIF code.
 //-----------------------------------------------------------------------
-  
-  static int naif_code() {return NAIF_CODE;}
+
+  virtual int naif_code() const {return NAIF_CODE;}
   
   virtual void print(std::ostream& Os) const
   {
@@ -372,7 +372,7 @@ public:
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  static int naif_code() {return NAIF_CODE;}
+  int naif_code() {return NAIF_CODE;}
   
 //-----------------------------------------------------------------------
 /// Print to given stream.
@@ -438,7 +438,7 @@ public:
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  static int naif_code() {return NAIF_CODE;}
+  int naif_code() {return NAIF_CODE;}
   
 //-----------------------------------------------------------------------
 /// Make an Planetocentric with the given latitude, longitude, and height.
@@ -584,7 +584,7 @@ public:
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  static int naif_code() { return NAIF_CODE; }
+  int naif_code() { return NAIF_CODE; }
 
 //-----------------------------------------------------------------------
 /// Print to given stream.

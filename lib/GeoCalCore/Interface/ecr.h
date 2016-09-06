@@ -79,6 +79,7 @@ public:
       (EARTH_NAIF_CODE, T, Cf_to_ci); 
   }
 
+  virtual int naif_code() const {return EARTH_NAIF_CODE;}
   virtual void lat_lon_height(double& Latitude, double& Longitude, 
 			      double& Height_reference_surface) const;
   virtual double height_reference_surface() const;

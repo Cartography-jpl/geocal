@@ -7123,27 +7123,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsFixed_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"MarsFixed_naif_code",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (int)GeoCal::PlanetFixed< 499 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_MarsFixed(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PlanetFixed< 499 > *arg1 = (GeoCal::PlanetFixed< 499 > *) 0 ;
@@ -7509,12 +7488,34 @@ fail:
 
 SWIGINTERN PyObject *_wrap_MarsInertial_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GeoCal::PlanetInertial< 499 > *arg1 = (GeoCal::PlanetInertial< 499 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PlanetInertial< 499 > > tempshared1 ;
+  boost::shared_ptr< GeoCal::PlanetInertial< 499 > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
   int result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsInertial_naif_code",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MarsInertial_naif_code" "', argument " "1"" of type '" "GeoCal::PlanetInertial< 499 > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetInertial<499> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetInertial<499> > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetInertial< 499 > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetInertial<499> > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetInertial< 499 > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     try {
-      result = (int)GeoCal::PlanetInertial< 499 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
+      result = (int)(arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7780,12 +7781,34 @@ fail:
 
 SWIGINTERN PyObject *_wrap_MarsPlanetocentric_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GeoCal::Planetocentric< 499 > *arg1 = (GeoCal::Planetocentric< 499 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Planetocentric< 499 > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Planetocentric< 499 > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
   int result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsPlanetocentric_naif_code",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricT_499_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MarsPlanetocentric_naif_code" "', argument " "1"" of type '" "GeoCal::Planetocentric< 499 > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Planetocentric<499> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Planetocentric<499> > * >(argp1);
+      arg1 = const_cast< GeoCal::Planetocentric< 499 > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Planetocentric<499> > * >(argp1);
+      arg1 = const_cast< GeoCal::Planetocentric< 499 > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     try {
-      result = (int)GeoCal::Planetocentric< 499 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
+      result = (int)(arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8252,12 +8275,34 @@ fail:
 
 SWIGINTERN PyObject *_wrap_MarsPlanetocentricConverter_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GeoCal::PlanetocentricConverter< 499 > *arg1 = (GeoCal::PlanetocentricConverter< 499 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PlanetocentricConverter< 499 > > tempshared1 ;
+  boost::shared_ptr< GeoCal::PlanetocentricConverter< 499 > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
   int result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsPlanetocentricConverter_naif_code",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricConverterT_499_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MarsPlanetocentricConverter_naif_code" "', argument " "1"" of type '" "GeoCal::PlanetocentricConverter< 499 > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetocentricConverter<499> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetocentricConverter<499> > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetocentricConverter< 499 > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetocentricConverter<499> > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetocentricConverter< 499 > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     try {
-      result = (int)GeoCal::PlanetocentricConverter< 499 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
+      result = (int)(arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -9145,27 +9190,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_EuropaFixed_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"EuropaFixed_naif_code",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (int)GeoCal::PlanetFixed< 502 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_EuropaFixed(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PlanetFixed< 502 > *arg1 = (GeoCal::PlanetFixed< 502 > *) 0 ;
@@ -9531,12 +9555,34 @@ fail:
 
 SWIGINTERN PyObject *_wrap_EuropaInertial_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GeoCal::PlanetInertial< 502 > *arg1 = (GeoCal::PlanetInertial< 502 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PlanetInertial< 502 > > tempshared1 ;
+  boost::shared_ptr< GeoCal::PlanetInertial< 502 > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
   int result;
   
-  if (!SWIG_Python_UnpackTuple(args,"EuropaInertial_naif_code",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetInertialT_502_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "EuropaInertial_naif_code" "', argument " "1"" of type '" "GeoCal::PlanetInertial< 502 > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetInertial<502> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetInertial<502> > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetInertial< 502 > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetInertial<502> > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetInertial< 502 > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     try {
-      result = (int)GeoCal::PlanetInertial< 502 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
+      result = (int)(arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -9802,12 +9848,34 @@ fail:
 
 SWIGINTERN PyObject *_wrap_EuropaPlanetocentric_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GeoCal::Planetocentric< 502 > *arg1 = (GeoCal::Planetocentric< 502 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Planetocentric< 502 > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Planetocentric< 502 > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
   int result;
   
-  if (!SWIG_Python_UnpackTuple(args,"EuropaPlanetocentric_naif_code",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricT_502_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "EuropaPlanetocentric_naif_code" "', argument " "1"" of type '" "GeoCal::Planetocentric< 502 > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Planetocentric<502> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Planetocentric<502> > * >(argp1);
+      arg1 = const_cast< GeoCal::Planetocentric< 502 > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Planetocentric<502> > * >(argp1);
+      arg1 = const_cast< GeoCal::Planetocentric< 502 > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     try {
-      result = (int)GeoCal::Planetocentric< 502 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
+      result = (int)(arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -10274,12 +10342,34 @@ fail:
 
 SWIGINTERN PyObject *_wrap_EuropaPlanetocentricConverter_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GeoCal::PlanetocentricConverter< 502 > *arg1 = (GeoCal::PlanetocentricConverter< 502 > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PlanetocentricConverter< 502 > > tempshared1 ;
+  boost::shared_ptr< GeoCal::PlanetocentricConverter< 502 > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
   int result;
   
-  if (!SWIG_Python_UnpackTuple(args,"EuropaPlanetocentricConverter_naif_code",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricConverterT_502_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "EuropaPlanetocentricConverter_naif_code" "', argument " "1"" of type '" "GeoCal::PlanetocentricConverter< 502 > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetocentricConverter<502> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetocentricConverter<502> > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetocentricConverter< 502 > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetocentricConverter<502> > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetocentricConverter< 502 > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
   {
     try {
-      result = (int)GeoCal::PlanetocentricConverter< 502 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
+      result = (int)(arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -10459,11 +10549,6 @@ static PyMethodDef SwigMethods[] = {
 		"Return orbit data for the given target and spacecraft reference frame.\n"
 		"\n"
 		""},
-	 { (char *)"MarsFixed_naif_code", (PyCFunction)_wrap_MarsFixed_naif_code, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static int GeoCal::PlanetFixed< NAIF_CODE >::naif_code()\n"
-		"Return NAIF code. \n"
-		""},
 	 { (char *)"delete_MarsFixed", (PyCFunction)_wrap_delete_MarsFixed, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::PlanetFixed< NAIF_CODE >::~PlanetFixed()\n"
@@ -10482,9 +10567,9 @@ static PyMethodDef SwigMethods[] = {
 		"Height_reference_surface=0) const\n"
 		"\n"
 		""},
-	 { (char *)"MarsInertial_naif_code", (PyCFunction)_wrap_MarsInertial_naif_code, METH_NOARGS, (char *)"\n"
+	 { (char *)"MarsInertial_naif_code", (PyCFunction)_wrap_MarsInertial_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"static int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()\n"
+		"int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()\n"
 		"Return NAIF code. \n"
 		""},
 	 { (char *)"delete_MarsInertial", (PyCFunction)_wrap_delete_MarsInertial, METH_O, (char *)"\n"
@@ -10499,9 +10584,9 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::Planetocentric< NAIF_CODE >::Planetocentric()\n"
 		"Default constructor. \n"
 		""},
-	 { (char *)"MarsPlanetocentric_naif_code", (PyCFunction)_wrap_MarsPlanetocentric_naif_code, METH_NOARGS, (char *)"\n"
+	 { (char *)"MarsPlanetocentric_naif_code", (PyCFunction)_wrap_MarsPlanetocentric_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"static int GeoCal::Planetocentric< NAIF_CODE >::naif_code()\n"
+		"int GeoCal::Planetocentric< NAIF_CODE >::naif_code()\n"
 		"Return NAIF code. \n"
 		""},
 	 { (char *)"delete_MarsPlanetocentric", (PyCFunction)_wrap_delete_MarsPlanetocentric, METH_O, (char *)"\n"
@@ -10524,9 +10609,9 @@ static PyMethodDef SwigMethods[] = {
 		"X and Y are longitude and latitude in degrees, and height is in\n"
 		"meters. \n"
 		""},
-	 { (char *)"MarsPlanetocentricConverter_naif_code", (PyCFunction)_wrap_MarsPlanetocentricConverter_naif_code, METH_NOARGS, (char *)"\n"
+	 { (char *)"MarsPlanetocentricConverter_naif_code", (PyCFunction)_wrap_MarsPlanetocentricConverter_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"static int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()\n"
+		"int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()\n"
 		"Return NAIF code. \n"
 		""},
 	 { (char *)"new_MarsPlanetocentricConverter", (PyCFunction)_wrap_new_MarsPlanetocentricConverter, METH_NOARGS, NULL},
@@ -10605,11 +10690,6 @@ static PyMethodDef SwigMethods[] = {
 		"Return orbit data for the given target and spacecraft reference frame.\n"
 		"\n"
 		""},
-	 { (char *)"EuropaFixed_naif_code", (PyCFunction)_wrap_EuropaFixed_naif_code, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static int GeoCal::PlanetFixed< NAIF_CODE >::naif_code()\n"
-		"Return NAIF code. \n"
-		""},
 	 { (char *)"delete_EuropaFixed", (PyCFunction)_wrap_delete_EuropaFixed, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::PlanetFixed< NAIF_CODE >::~PlanetFixed()\n"
@@ -10628,9 +10708,9 @@ static PyMethodDef SwigMethods[] = {
 		"Height_reference_surface=0) const\n"
 		"\n"
 		""},
-	 { (char *)"EuropaInertial_naif_code", (PyCFunction)_wrap_EuropaInertial_naif_code, METH_NOARGS, (char *)"\n"
+	 { (char *)"EuropaInertial_naif_code", (PyCFunction)_wrap_EuropaInertial_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"static int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()\n"
+		"int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()\n"
 		"Return NAIF code. \n"
 		""},
 	 { (char *)"delete_EuropaInertial", (PyCFunction)_wrap_delete_EuropaInertial, METH_O, (char *)"\n"
@@ -10645,9 +10725,9 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::Planetocentric< NAIF_CODE >::Planetocentric()\n"
 		"Default constructor. \n"
 		""},
-	 { (char *)"EuropaPlanetocentric_naif_code", (PyCFunction)_wrap_EuropaPlanetocentric_naif_code, METH_NOARGS, (char *)"\n"
+	 { (char *)"EuropaPlanetocentric_naif_code", (PyCFunction)_wrap_EuropaPlanetocentric_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"static int GeoCal::Planetocentric< NAIF_CODE >::naif_code()\n"
+		"int GeoCal::Planetocentric< NAIF_CODE >::naif_code()\n"
 		"Return NAIF code. \n"
 		""},
 	 { (char *)"delete_EuropaPlanetocentric", (PyCFunction)_wrap_delete_EuropaPlanetocentric, METH_O, (char *)"\n"
@@ -10670,9 +10750,9 @@ static PyMethodDef SwigMethods[] = {
 		"X and Y are longitude and latitude in degrees, and height is in\n"
 		"meters. \n"
 		""},
-	 { (char *)"EuropaPlanetocentricConverter_naif_code", (PyCFunction)_wrap_EuropaPlanetocentricConverter_naif_code, METH_NOARGS, (char *)"\n"
+	 { (char *)"EuropaPlanetocentricConverter_naif_code", (PyCFunction)_wrap_EuropaPlanetocentricConverter_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"static int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()\n"
+		"int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()\n"
 		"Return NAIF code. \n"
 		""},
 	 { (char *)"new_EuropaPlanetocentricConverter", (PyCFunction)_wrap_new_EuropaPlanetocentricConverter, METH_NOARGS, NULL},

@@ -50,7 +50,7 @@ public:
   static boost::shared_ptr<QuaternionOrbitData> orbit_data
   (const std::string& Target_name, 
    const std::string& Spacecraft_reference_frame_name, const Time& T);
-  static int naif_code();
+  virtual int naif_code() const;
   %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 
@@ -60,7 +60,7 @@ public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   Planetocentric(double Latitude, double Longitude, double Height_ellipsoid = 0);
   Planetocentric();
-  static int naif_code();
+  int naif_code();
   %python_attribute(height_reference_surface, double);
   %python_attribute(latitude, double);
   %python_attribute(longitude, double);
@@ -82,7 +82,7 @@ public:
   reference_surface_intersect_approximate(
   const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
     const;
-  static int naif_code();
+  int naif_code();
   %pickle_init(1, self.position[0], self.position[1], self.position[2])
 };
 
@@ -92,7 +92,7 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
-  static int naif_code();
+  int naif_code();
   %pickle_init(1);
 };
 

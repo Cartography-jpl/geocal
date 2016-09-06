@@ -255,7 +255,9 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
 
         const OGRCoordinateTransformation* GeoCal::OgrWrapper::transform() const
         Return transformation that takes us from our coordinate system to
-        Geodetic. 
+        Geodetic.
+
+        Is null for other planets (where Geodetic doesn't make sense). 
         """
         return _ogr_coordinate.OgrWrapper__v_transform(self)
 
@@ -271,7 +273,8 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
         const OGRCoordinateTransformation* GeoCal::OgrWrapper::inverse_transform() const
         Return inverse of transform().
 
-        This goes from Geodetic to our coordinate system. 
+        This goes from Geodetic to our coordinate system. Is null for other
+        planets (where Geodetic doesn't make sense). 
         """
         return _ogr_coordinate.OgrWrapper__v_inverse_transform(self)
 
@@ -465,8 +468,10 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     def __init__(self, *args):
         """
 
-        OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const Geodetic &G)
-        Convert from Geodetic to the coordinate system given by Ogr. 
+        OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const GroundCoordinate
+        &G)
+        Convert from GroundCoordinate to the coordinate system given by Ogr.
+
         """
         _ogr_coordinate.OgrCoordinate_swiginit(self, _ogr_coordinate.new_OgrCoordinate(*args))
 

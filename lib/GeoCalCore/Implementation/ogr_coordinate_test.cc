@@ -1,5 +1,7 @@
 #include "unit_test_support.h"
 #include "ogr_coordinate.h"
+#include "ecr.h"
+#include "planet_coordinate.h"
 
 using namespace GeoCal;
 BOOST_FIXTURE_TEST_SUITE(ogr_coordinate, GlobalFixture)
@@ -30,6 +32,46 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_CLOSE(c3.y, 995452.6722696, 1e-6);
   BOOST_CHECK_CLOSE(c3.z, 0.0, 1e-6);
   BOOST_CHECK(c3.utm_zone() == 29);
+  // Compare a direct convert of Geodetic to Ecr (which uses different
+  // code unrelated to Ogr) to going through UTM. Results should be
+  // close to the same.
+  Geodetic gp(10,20,100);
+  Ecr e1(gp);
+  OgrCoordinate c4 = OgrCoordinate::to_utm(gp);
+  boost::shared_ptr<CartesianFixed> e2 = c4.convert_to_cf();
+  BOOST_CHECK(distance(e1, *e2) < 1);
+}
+
+BOOST_AUTO_TEST_CASE(mars_coordinate)
+{
+  // Test mars coordinates
+  std::string mars_wkt="PROJCS[\"SINUSOIDAL MARS\",\
+    GEOGCS[\"GCS_MARS\",\
+        DATUM[\"D_MARS\",\
+            SPHEROID[\"MARS\",3396000,0]],\
+        PRIMEM[\"Reference_Meridian\",0],\
+        UNIT[\"degree\",0.0174532925199433]],\
+    PROJECTION[\"Sinusoidal\"],\
+    PARAMETER[\"longitude_of_center\",340],\
+    PARAMETER[\"false_easting\",0],\
+    PARAMETER[\"false_northing\",0],\
+    UNIT[\"metre\",1,\
+        AUTHORITY[\"EPSG\",\"9001\"]]]";
+  boost::shared_ptr<OgrWrapper> mars_sinusoidal(new OgrWrapper(mars_wkt));
+  OgrCoordinate c(mars_sinusoidal, -39781.25, 1656201.25, 100.0);
+  boost::shared_ptr<CartesianFixed> cf = c.convert_to_cf();
+  MarsFixed mf(2809164.6332301, -1064843.66585431, 1574812.3299872);
+  BOOST_CHECK(distance(mf, *cf) < 1.0);
+  BOOST_CHECK_CLOSE(c.latitude(), 27.663583380357668, 1e-4);
+  BOOST_CHECK_CLOSE(c.longitude(), -20.759744758052218, 1e-4);
+  // Not exactly 100.0 because the coordinates use a sphere, but we
+  // use a spheroid for defining the reference surface. Not a big
+  // difference between the 2, but it is present.
+  BOOST_CHECK_CLOSE(c.height_reference_surface(), 100.00118645606562, 1e-4);
+  OgrCoordinate c2(mars_sinusoidal, mf);
+  BOOST_CHECK_CLOSE(c2.x, -39781.25, 1e-4);
+  BOOST_CHECK_CLOSE(c2.y, 1656201.25, 1e-4);
+  BOOST_CHECK_CLOSE(c2.z, 100.0, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(ogr_wrapper)

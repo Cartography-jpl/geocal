@@ -3,6 +3,7 @@ from geocal.local_target import *
 from test_support import *
 import shutil
 from multiprocessing import Pool
+from __future__ import print_function
 
 class TaskA(Task):
     def __init__(self, fname, local_dir):
@@ -113,7 +114,6 @@ class TaskDFailed(Task):
         
         
 @require_rsync
-@require_python3
 def test_1task_pipeline(isolated_dir):
     '''Test a pipeline with a single task in it.'''
     task = TaskA("./output/a_out.txt", "./local_dir")
@@ -122,7 +122,6 @@ def test_1task_pipeline(isolated_dir):
     assert not os.path.exists("./local_dir")
 
 @require_rsync
-@require_python3
 def test_2task_pipeline(isolated_dir):
     '''Test a pipeline with a task that depends on another task in it.'''
     task = TaskB("./output/a_out.txt", "./output/b_out.txt", "./local_dir")
@@ -131,7 +130,6 @@ def test_2task_pipeline(isolated_dir):
     assert not os.path.exists("./local_dir")
     
 @require_rsync
-@require_python3
 def test_complicated_pipeline(isolated_dir):
     '''Test a more complicated task with a longer dependency chain, including
     duplicate tasks.'''
@@ -146,7 +144,6 @@ def test_complicated_pipeline(isolated_dir):
     assert not os.path.exists("./local_dir")
 
 @require_rsync
-@require_python3
 def test_pool(isolated_dir):
     '''Test a more complicated task with a longer dependency chain, including
     duplicate tasks, using a pool to do the processing.'''
@@ -158,7 +155,6 @@ def test_pool(isolated_dir):
 
 
 @require_rsync
-@require_python3
 def test_pool_failed(isolated_dir):
     '''Test where we have lots of tasks, one of which fails. Make sure
     we catch that failure.'''
@@ -170,7 +166,6 @@ def test_pool_failed(isolated_dir):
     assert os.path.exists("./output/a_failed.out.error")
 
 @require_rsync
-@require_python3
 def test_pool_failed2(isolated_dir):
     '''Test where we have lots of tasks, one of which fails. Make sure
     we catch that failure. This variation uses skip_cleanup_on_error to

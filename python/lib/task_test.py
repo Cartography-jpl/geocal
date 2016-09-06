@@ -1,9 +1,9 @@
+from __future__ import print_function
 from geocal.task import *
 from geocal.local_target import *
 from test_support import *
 import shutil
 from multiprocessing import Pool
-from __future__ import print_function
 
 class TaskA(Task):
     def __init__(self, fname, local_dir):

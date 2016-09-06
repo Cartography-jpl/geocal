@@ -1,6 +1,6 @@
+from __future__ import print_function
 from geocal.target import *
 from test_support import *
-from __future__ import print_function
 
 @require_rsync
 def test_input_file_target(isolated_dir):

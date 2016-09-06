@@ -1,6 +1,6 @@
+from __future__ import print_function
 from geocal.local_target import *
 from test_support import *
-from __future__ import print_function
 
 @require_rsync
 @pytest.yield_fixture(scope="function")

@@ -1,8 +1,8 @@
+from __future__ import print_function
 from geocal.output_cache import *
 from geocal.local_target import *
 from test_support import *
 import shutil
-from __future__ import print_function
 
 def test_output_cache(isolated_dir):
     '''Test the use of the OutputCache.'''

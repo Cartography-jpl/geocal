@@ -49,6 +49,8 @@ GEOCAL_SPLIT_IMPLEMENT(OgrWrapper);
 //-----------------------------------------------------------------------
 
 boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_geodetic;
+boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_ecr;
+boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_mars_cf;
 
 //-----------------------------------------------------------------------
 /// Constructor that creates a OGRSpatialReference from a WKT (Well
@@ -97,25 +99,90 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
   ogr_ = Ogr;
   if(!ogr_geodetic.get()) {
     ogr_geodetic.reset(new OGRSpatialReference);
-    ogr_geodetic->SetWellKnownGeogCS("WGS84");
+    OGRErr status = ogr_geodetic->SetWellKnownGeogCS("WGS84");
+    if(status != OGRERR_NONE)
+      throw Exception("Call to SetWellKnownGeogCS failed");
+  }
+  if(!ogr_ecr.get()) {
+    // Look this up http://spatialreference.org/ref/epsg/4328/
+    ogr_ecr.reset(new OGRSpatialReference);
+    OGRErr status = ogr_ecr->importFromEPSG(4328);
+    if(status != OGRERR_NONE)
+      throw Exception("Call to importFromEPSG failed");
+  }
+  if(!ogr_mars_cf.get()) {
+    // Look this up http://spatialreference.org/ref/iau2000/49901/
+    ogr_mars_cf.reset(new OGRSpatialReference);
+    const char *wkt = "GEOCCS[\"Mars 2000\",\
+    DATUM[\"D_Mars_2000\",\
+        SPHEROID[\"Mars_2000_IAU_IAG\",3396190.0,169.89444722361179]],\
+    PRIMEM[\"Greenwich\",0,\
+        AUTHORITY[\"EPSG\",\"8901\"]],\
+    UNIT[\"metre\",1,\
+        AUTHORITY[\"EPSG\",\"9001\"]],\
+    AXIS[\"Geocentric X\",OTHER],\
+    AXIS[\"Geocentric Y\",OTHER],\
+    AXIS[\"Geocentric Z\",NORTH]]";
+    char * wkt_str = const_cast<char*>(wkt);
+    OGRErr status = ogr_mars_cf->importFromWkt(&wkt_str);
+    if(status != OGRERR_NONE) {
+      Exception e;
+      e << "Create of OGRSpatialReference failed. "
+	<< "The WKT (Well Known Text) was:\n"
+	<< wkt;
+      throw e;
+    }
   }
   OGRSpatialReference * og;
+  OGRSpatialReference * og_cf;
   if(geogcs_name() == "GCS_MARS") {
     naif_code_ = MarsConstant::naif_code();
     // This isn't right, we'll come back to this
-    og = ogr_geodetic.get();
+    og = 0;
+    og_cf = ogr_mars_cf.get();
   } else {
     naif_code_ = Ecr::EARTH_NAIF_CODE;
     og = ogr_geodetic.get();
+    og_cf = ogr_ecr.get();
   }
-    
-  ogr_transform_ = OGRCreateCoordinateTransformation(ogr_.get(), og);
-  if(!ogr_transform_)
-    throw Exception("Couldn't create transformation to geodetic coordinate system");
-  ogr_inverse_transform_ = OGRCreateCoordinateTransformation(og, ogr_.get());
-  if(!ogr_inverse_transform_) {
+  ogr_transform_ = 0;
+  ogr_inverse_transform_ = 0;
+  ogr_cf_transform_ = 0;
+  ogr_cf_inverse_transform_ = 0;
+
+  if(og) {
+    ogr_transform_ = OGRCreateCoordinateTransformation(ogr_.get(), og);
+    if(!ogr_transform_) {
+      delete ogr_transform_;
+      delete ogr_inverse_transform_;
+      delete ogr_cf_transform_;
+      delete ogr_cf_inverse_transform_;
+      throw Exception("Couldn't create transformation to geodetic coordinate system");
+    }
+    ogr_inverse_transform_ = OGRCreateCoordinateTransformation(og, ogr_.get());
+    if(!ogr_inverse_transform_) {
+      delete ogr_transform_;
+      delete ogr_inverse_transform_;
+      delete ogr_cf_transform_;
+      delete ogr_cf_inverse_transform_;
+      throw Exception("Couldn't create transformation from geodetic coordinate system");
+    }
+  }
+  ogr_cf_transform_ = OGRCreateCoordinateTransformation(ogr_.get(), og_cf);
+  if(!ogr_cf_transform_) {
     delete ogr_transform_;
-    throw Exception("Couldn't create transformation from geodetic coordinate system");
+    delete ogr_inverse_transform_;
+    delete ogr_cf_transform_;
+    delete ogr_cf_inverse_transform_;
+    throw Exception("Couldn't create transformation to cartesian fixed coordinate system");
+  }
+  ogr_cf_inverse_transform_ = OGRCreateCoordinateTransformation(og_cf, ogr_.get());
+  if(!ogr_cf_inverse_transform_) {
+    delete ogr_transform_;
+    delete ogr_inverse_transform_;
+    delete ogr_cf_transform_;
+    delete ogr_cf_inverse_transform_;
+    throw Exception("Couldn't create transformation to cartesian fixed coordinate system");
   }
 }
 
@@ -127,16 +194,22 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 			     const Geodetic& G)
   : ogr_(Ogr)
 {
+  if(ogr_->naif_code() != Ecr::EARTH_NAIF_CODE)
+    throw Exception("Can't convert from Geodetic");
   x = G.longitude(); 
   y = G.latitude();
   z = G.height_reference_surface();
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
-  int status = 
-    const_cast<OGRCoordinateTransformation&>(ogr_->inverse_transform()).
-    Transform(1, &x, &y, &z);
-  if(!status)
-    throw Exception("Call to OGR Transform failed");
+  if(ogr_->inverse_transform()) {
+    int status = 
+      const_cast<OGRCoordinateTransformation&>(*ogr_->inverse_transform()).
+      Transform(1, &x, &y, &z);
+    if(!status)
+      throw Exception("Call to OGR Transform failed");
+    return;
+  }
+  throw Exception("Not implemented yet");
 }
 
 //-----------------------------------------------------------------------
@@ -169,8 +242,11 @@ boost::shared_ptr<OgrWrapper> OgrWrapper::from_proj4(const std::string& Proj4_st
 
 OgrWrapper::~OgrWrapper()
 {
+  // Note, it is fine of pointers are null, C++ allows deleting null pointers.
   delete ogr_transform_;
   delete ogr_inverse_transform_;
+  delete ogr_cf_transform_;
+  delete ogr_cf_inverse_transform_;
 }
 
 //-----------------------------------------------------------------------
@@ -231,7 +307,11 @@ std::string OgrWrapper::projected_cs_type_geo_key() const
 
 std::string OgrWrapper::pcs_citation_geo_key() const
 {
-  return ogr_->GetAttrValue("PROJCS");
+  const char* t = ogr_->GetAttrValue("PROJCS");
+  if(t)
+    return t;
+  else
+    return "";
 }
 
 //-----------------------------------------------------------------------
@@ -240,7 +320,11 @@ std::string OgrWrapper::pcs_citation_geo_key() const
 
 std::string OgrWrapper::geogcs_name() const
 {
-  return ogr_->GetAttrValue("GEOGCS");
+  const char* t =ogr_->GetAttrValue("GEOGCS");
+  if(t)
+    return t;
+  else
+    return "";
 }
 
 //-----------------------------------------------------------------------
@@ -252,11 +336,14 @@ double OgrCoordinate::latitude() const
   double xr = x, yr = y , zr = z;
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
-  int status = const_cast<OGRCoordinateTransformation&>(ogr_->transform()).
-    Transform(1, &xr, &yr, &zr);
-  if(!status)
-    throw Exception("Call to OGR Transform failed");
-  return yr;
+  if(ogr_->transform()) {
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform()).
+      Transform(1, &xr, &yr, &zr);
+    if(!status)
+      throw Exception("Call to OGR Transform failed");
+    return yr;
+  }
+  throw Exception("Not implemented yet");
 }
 
 //-----------------------------------------------------------------------
@@ -268,11 +355,14 @@ double OgrCoordinate::longitude() const
   double xr = x, yr = y , zr = z;
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
-  int status = const_cast<OGRCoordinateTransformation&>(ogr_->transform()).
-    Transform(1, &xr, &yr, &zr);
-  if(!status)
-    throw Exception("Call to OGR Transform failed");
-  return xr;
+  if(ogr_->transform()) {
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform()).
+      Transform(1, &xr, &yr, &zr);
+    if(!status)
+      throw Exception("Call to OGR Transform failed");
+    return xr;
+  }
+  throw Exception("Not implemented yet");
 }
 
 //-----------------------------------------------------------------------
@@ -284,11 +374,14 @@ double OgrCoordinate::height_reference_surface() const
   double xr = x, yr = y , zr = z;
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
-  int status = const_cast<OGRCoordinateTransformation&>(ogr_->transform()).
-    Transform(1, &xr, &yr, &zr);
-  if(!status)
-    throw Exception("Call to OGR Transform failed");
-  return zr;
+  if(ogr_->transform()) {
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform()).
+      Transform(1, &xr, &yr, &zr);
+    if(!status)
+      throw Exception("Call to OGR Transform failed");
+    return zr;
+  }
+  throw Exception("Not implemented yet");
 }
 
 void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude, 
@@ -297,13 +390,17 @@ void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude,
   double xr = x, yr = y , zr = z;
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
-  int status = const_cast<OGRCoordinateTransformation&>(ogr_->transform()).
-    Transform(1, &xr, &yr, &zr);
-  if(!status)
-    throw Exception("Call to OGR Transform failed");
-  Latitude = yr;
-  Longitude = xr;
-  Height_reference_surface = zr;
+  if(ogr_->transform()) {
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform()).
+      Transform(1, &xr, &yr, &zr);
+    if(!status)
+      throw Exception("Call to OGR Transform failed");
+    Latitude = yr;
+    Longitude = xr;
+    Height_reference_surface = zr;
+    return;
+  }
+  throw Exception("Not implemented yet");
 }
 
 //-----------------------------------------------------------------------
@@ -312,10 +409,17 @@ void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude,
 
 boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
 {
+  double xr = x, yr = y , zr = z;
+  // Note that operation Transform really is const, this just doesn't
+  // have the right signature in GDAL.
+  int status = const_cast<OGRCoordinateTransformation&>(*ogr_->cf_transform()).
+    Transform(1, &xr, &yr, &zr);
+  if(!status)
+    throw Exception("Call to OGR Transform failed");
   if(ogr().naif_code() == Ecr::EARTH_NAIF_CODE)
-    return Geodetic(latitude(), longitude(), height_reference_surface()).convert_to_cf();
+    return boost::shared_ptr<CartesianFixed>(new Ecr(xr, yr, xr));
   if(ogr().naif_code() == MarsConstant::naif_code())
-    return MarsPlanetocentric(latitude(), longitude(), height_reference_surface()).convert_to_cf();
+    return boost::shared_ptr<CartesianFixed>(new MarsFixed(xr, yr, xr));
   Exception e;
   e << "Don't recognize the naif code " << ogr().naif_code();
   throw e;

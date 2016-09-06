@@ -19,11 +19,23 @@ template<int NAIF_CODE> class Planetocentric;
 template<int NCODE> class PlanetConstant {
 public:
   enum {NAIF_CODE = NCODE };
-  static double planet_a() {return h.planet_a();}
-  static double planet_b() {return h.planet_b(); }
-  static double planet_esq() {return h.planet_esq(); }
-  static std::string planet_name() { return name;}
+  static double a() {return h.planet_a();}
+  static double b() {return h.planet_b(); }
+  static double esq() {return h.planet_esq(); }
+  static std::string name() { return name_;}
 
+//-----------------------------------------------------------------------
+/// Calculate flattening
+//-----------------------------------------------------------------------
+
+  static double flattening()
+  { return (PlanetConstant<NAIF_CODE>::a() - PlanetConstant<NAIF_CODE>::b()) / PlanetConstant<NAIF_CODE>::a(); }
+  
+//-----------------------------------------------------------------------
+/// Calculate inverse flattening.
+//-----------------------------------------------------------------------
+  static double inverse_flattening()
+  { return 1.0 / PlanetConstant<NAIF_CODE>::flattening(); }    
 
 //-----------------------------------------------------------------------
 /// Return NAIF code.
@@ -32,7 +44,7 @@ public:
   static int naif_code() {return NCODE;}
 private:
   static SpicePlanetConstant h;
-  static const char* name;
+  static const char* name_;
 };
 
 /****************************************************************//**
@@ -60,7 +72,7 @@ public:
     if(!mf) {
       Exception e;
       e << "Cannot convert ground coordinate to "
-	<< PlanetConstant<NAIF_CODE>::planet_name()<< "Fixed\n"
+	<< PlanetConstant<NAIF_CODE>::name()<< "Fixed\n"
 	<< "Coordinate: " << Gc << "\n";
       throw e;
     }
@@ -139,8 +151,8 @@ public:
   virtual double height_reference_surface() const;
   virtual double min_radius_reference_surface() const
   {
-    return std::min(PlanetConstant<NAIF_CODE>::planet_a(), 
-		    PlanetConstant<NAIF_CODE>::planet_b());
+    return std::min(PlanetConstant<NAIF_CODE>::a(), 
+		    PlanetConstant<NAIF_CODE>::b());
   }
 
 //-----------------------------------------------------------------------
@@ -172,9 +184,9 @@ public:
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0)
   const
   {
-    double aph = PlanetConstant<NAIF_CODE>::planet_a() + 
+    double aph = PlanetConstant<NAIF_CODE>::a() + 
       Height_reference_surface;
-    double bph = PlanetConstant<NAIF_CODE>::planet_b() + 
+    double bph = PlanetConstant<NAIF_CODE>::b() + 
       Height_reference_surface;
     boost::array<double, 3> dirci;
     dirci[0] = Cl.look_vector[0]/ aph;
@@ -205,7 +217,7 @@ public:
   
   virtual void print(std::ostream& Os) const
   {
-    Os << PlanetConstant<NAIF_CODE>::planet_name()
+    Os << PlanetConstant<NAIF_CODE>::name()
        << "Fixed (" << position[0] << " m, " << position[1] << " m, "
        << position[2] << "m)";
   }
@@ -331,9 +343,9 @@ public:
   const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
   const
   {
-    double aph = PlanetConstant<NAIF_CODE>::planet_a() + 
+    double aph = PlanetConstant<NAIF_CODE>::a() + 
       Height_reference_surface;
-    double bph = PlanetConstant<NAIF_CODE>::planet_b() + 
+    double bph = PlanetConstant<NAIF_CODE>::b() + 
       Height_reference_surface;
     boost::array<double, 3> dirci;
     dirci[0] = Cl.look_vector[0]/ aph;
@@ -368,7 +380,7 @@ public:
 
   virtual void print(std::ostream& Os) const
   {
-    Os << PlanetConstant<NAIF_CODE>::planet_name()
+    Os << PlanetConstant<NAIF_CODE>::name()
        << "Inertial (" << position[0] << " m, " << position[1] << " m, "
        << position[2] << "m)";
   }
@@ -416,7 +428,7 @@ public:
   }
   virtual void print(std::ostream& Os) const
   {
-    Os << PlanetConstant<NAIF_CODE>::planet_name()
+    Os << PlanetConstant<NAIF_CODE>::name()
        << "Planetocentric: (" << latitude() << " deg, " 
        << longitude() << " deg, "
        << height_reference_surface() << " m)";
@@ -485,8 +497,8 @@ private:
   double planet_radius(double Latitude_radians) const
   {
     double clat = cos(Latitude_radians);
-    return PlanetConstant<NAIF_CODE>::planet_b() / 
-      sqrt(1 - PlanetConstant<NAIF_CODE>::planet_esq() * clat * clat);
+    return PlanetConstant<NAIF_CODE>::b() / 
+      sqrt(1 - PlanetConstant<NAIF_CODE>::esq() * clat * clat);
   }
 };
 
@@ -579,7 +591,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << PlanetConstant<NAIF_CODE>::planet_name()
+  { Os << PlanetConstant<NAIF_CODE>::name()
        << "Planetocentric Converter"; }
 };
 

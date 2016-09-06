@@ -253,7 +253,7 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
     def _v_transform(self):
         """
 
-        const OGRCoordinateTransformation& GeoCal::OgrWrapper::transform() const
+        const OGRCoordinateTransformation* GeoCal::OgrWrapper::transform() const
         Return transformation that takes us from our coordinate system to
         Geodetic. 
         """
@@ -268,7 +268,7 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
     def _v_inverse_transform(self):
         """
 
-        const OGRCoordinateTransformation& GeoCal::OgrWrapper::inverse_transform() const
+        const OGRCoordinateTransformation* GeoCal::OgrWrapper::inverse_transform() const
         Return inverse of transform().
 
         This goes from Geodetic to our coordinate system. 
@@ -279,6 +279,37 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
     @property
     def inverse_transform(self):
         return self._v_inverse_transform()
+
+
+    def _v_cf_transform(self):
+        """
+
+        const OGRCoordinateTransformation* GeoCal::OgrWrapper::cf_transform() const
+        Return transformation that takes us from our coordinate system to
+        CartesianFixed. 
+        """
+        return _ogr_coordinate.OgrWrapper__v_cf_transform(self)
+
+
+    @property
+    def cf_transform(self):
+        return self._v_cf_transform()
+
+
+    def _v_cf_inverse_transform(self):
+        """
+
+        const OGRCoordinateTransformation* GeoCal::OgrWrapper::cf_inverse_transform() const
+        Return inverse of cf_transform().
+
+        This goes from CartesianFixed to our coordinate system. 
+        """
+        return _ogr_coordinate.OgrWrapper__v_cf_inverse_transform(self)
+
+
+    @property
+    def cf_inverse_transform(self):
+        return self._v_cf_inverse_transform()
 
 
     def _v_projected_cs_type_geo_key(self):
@@ -378,6 +409,8 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
 OgrWrapper._v_ogr = new_instancemethod(_ogr_coordinate.OgrWrapper__v_ogr, None, OgrWrapper)
 OgrWrapper._v_transform = new_instancemethod(_ogr_coordinate.OgrWrapper__v_transform, None, OgrWrapper)
 OgrWrapper._v_inverse_transform = new_instancemethod(_ogr_coordinate.OgrWrapper__v_inverse_transform, None, OgrWrapper)
+OgrWrapper._v_cf_transform = new_instancemethod(_ogr_coordinate.OgrWrapper__v_cf_transform, None, OgrWrapper)
+OgrWrapper._v_cf_inverse_transform = new_instancemethod(_ogr_coordinate.OgrWrapper__v_cf_inverse_transform, None, OgrWrapper)
 OgrWrapper._v_projected_cs_type_geo_key = new_instancemethod(_ogr_coordinate.OgrWrapper__v_projected_cs_type_geo_key, None, OgrWrapper)
 OgrWrapper._v_pcs_citation_geo_key = new_instancemethod(_ogr_coordinate.OgrWrapper__v_pcs_citation_geo_key, None, OgrWrapper)
 OgrWrapper._v_geogcs_name = new_instancemethod(_ogr_coordinate.OgrWrapper__v_geogcs_name, None, OgrWrapper)

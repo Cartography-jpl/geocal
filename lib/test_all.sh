@@ -7,12 +7,26 @@
 echo "==========================================================="
 echo "Can specify run_test=<exp> on command line to run subset of"
 echo "unit tests. See boost unit test documentation for details"
+echo ""
+echo "If log_test is defined, add verbose information as each"
+echo "test is run."
+echo ""
+echo "If valgrind is defined, then we run the test with valgrind."
+echo ""
 echo "==========================================================="
 
-if [ ${log_test} ] ; then
-    ./geocal_test_all --log_level=test_suite --run_test=${run_test}
+if [ ${valgrind} ] ; then
+    tool_command="valgrind --max-stackframe=5000000 --error-exitcode=1 --track-origins=yes --suppressions=$(dirname $0)/../config/valgrind.suppressions"
+elif [ ${gdb} ]; then
+    tool_command="gdb --args"
 else
-    ./geocal_test_all --show_progress --run_test=${run_test}
+    tool_command=""
+fi
+
+if [ ${log_test} ] ; then
+    ${tool_command} ./geocal_test_all --log_level=test_suite --run_test=${run_test}
+else
+    ${tool_command} ./geocal_test_all --show_progress --run_test=${run_test}
 fi
 
 # Valgrind version of test run. 

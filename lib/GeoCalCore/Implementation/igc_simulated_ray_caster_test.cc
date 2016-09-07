@@ -51,7 +51,7 @@ public:
     MapInfo mi2 = mi.scale(scl, scl);
     MapInfo mi3 = igc->cover(mi2);
     gimg.reset(new MemoryRasterImage(mi3));
-    int val = 0;
+    val = 0;
     for(int i = 0; i < gimg->number_line(); ++i)
       for(int j = 0; j < gimg->number_sample(); ++j, ++val)
 	gimg->write(i, j, val);

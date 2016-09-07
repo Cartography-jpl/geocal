@@ -179,10 +179,10 @@ def fix_projection(fin, fout):
             print("MSG: Doing HiRISE correction of swapping latitude_of_origin and standard_parallel_1 for the Equirectangular projection")
             sys.stdout.flush()
             p = re.sub('PARAMETER\["latitude_of_origin",[\\d\\.]+\]',
-                       'PARAMETER\["latitude_of_origin",' + m2.group(1) + ']',
+                       'PARAMETER["latitude_of_origin",' + m2.group(1) + ']',
                        p)
             p = re.sub('PARAMETER\["standard_parallel_1",[\\d\\.]+\]',
-                       'PARAMETER\["standard_parallel_1",' + m1.group(1) + ']',
+                       'PARAMETER["standard_parallel_1",' + m1.group(1) + ']',
                        p)
             f.SetProjection(p)
             

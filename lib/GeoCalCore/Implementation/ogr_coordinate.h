@@ -37,14 +37,15 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return transformation that takes us from our coordinate system to
-/// Geodetic.
+/// Geodetic. Is null for other planets (where Geodetic doesn't make sense).
 //-----------------------------------------------------------------------
 
   const OGRCoordinateTransformation* transform() const {return ogr_transform_;}
 
 //-----------------------------------------------------------------------
 /// Return inverse of transform(). This goes from Geodetic to our
-/// coordinate system.
+/// coordinate system. Is null for other planets (where Geodetic
+/// doesn't make sense). 
 //-----------------------------------------------------------------------
 
   const OGRCoordinateTransformation* inverse_transform() const 
@@ -127,6 +128,8 @@ public:
   {}
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 		const Geodetic& G);
+  OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
+		const GroundCoordinate& G);
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -253,7 +256,7 @@ public:
       Height = ogr_c->z;
       return;
     }
-    OgrCoordinate c(ogr_, Geodetic(Gc));
+    OgrCoordinate c(ogr_, Gc);
     X = c.x; 
     Y = c.y; 
     Height = c.z;

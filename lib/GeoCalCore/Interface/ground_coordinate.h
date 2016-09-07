@@ -26,6 +26,13 @@ class CartesianInertial;	// Forward declaration, defined below.
   first to CartesianFixed, and then convert to latitude, longitude or
   height_reference_surface, but derived classes can supply more
   efficient versions of this if desired.
+
+  Note that for the earth, the latitude is the standard geodetic
+  latitude. However, by convention other planets use Planetocentric
+  latitude, the equivalent of geocentric latitude for the other
+  planet. This is handled transparently and consistently by the
+  various coordinate classes (e.g., PlanetConstant, OgrCoordinate),
+  but you should be aware of this difference.
 *******************************************************************/
 
 class GroundCoordinate : public Printable<GroundCoordinate> {
@@ -41,6 +48,13 @@ public:
 /// single call. By default, just convert to CartesianFixed and then
 /// get latitude, longitude, and height_reference_surface. but derived
 /// classes can do something more efficient.
+///
+/// Note that for the earth, the latitude is the standard geodetic
+/// latitude. However, by convention other planets use Planetocentric
+/// latitude, the equivalent of geocentric latitude for the other
+/// planet. This is handled transparently and consistently by the
+/// various coordinate classes (e.g., PlanetConstant, OgrCoordinate),
+/// but you should be aware of this difference.
 //-----------------------------------------------------------------------
 
   inline virtual void lat_lon_height(double& Latitude, double& Longitude, 
@@ -50,6 +64,13 @@ public:
 /// Return latitude in degrees. By default we just convert to 
 /// CartesianFixed and then to latitude, but derived classes can supply
 /// more efficient versions of these if needed. Latitude is -90 to 90.
+///
+/// Note that for the earth, the latitude is the standard geodetic
+/// latitude. However, by convention other planets use Planetocentric
+/// latitude, the equivalent of geocentric latitude for the other
+/// planet. This is handled transparently and consistently by the
+/// various coordinate classes (e.g., PlanetConstant, OgrCoordinate),
+/// but you should be aware of this difference.
 //-----------------------------------------------------------------------
 
   inline virtual double latitude() const;
@@ -196,6 +217,12 @@ public:
 //-----------------------------------------------------------------------
   virtual ~CartesianFixed() {}
 
+//-----------------------------------------------------------------------
+/// Naif code for planet
+//-----------------------------------------------------------------------
+
+  virtual int naif_code() const = 0;
+  
 //-----------------------------------------------------------------------
 /// Calculate matrix that can be used to convert CartesianFixed to
 /// CartesianInertial at the given Time. The matrix for going from

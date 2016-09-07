@@ -212,8 +212,8 @@ public:
 //-----------------------------------------------------------------------
 /// Return NAIF code.
 //-----------------------------------------------------------------------
-  
-  static int naif_code() {return NAIF_CODE;}
+
+  virtual int naif_code() const {return NAIF_CODE;}
   
   virtual void print(std::ostream& Os) const
   {
@@ -254,6 +254,10 @@ public:
           SpiceHelper::conversion_quaternion(Spacecraft_reference_frame_name, 
 	     SpiceHelper::fixed_frame_name(NAIF_CODE), T)));
   }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -372,7 +376,7 @@ public:
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  static int naif_code() {return NAIF_CODE;}
+  int naif_code() {return NAIF_CODE;}
   
 //-----------------------------------------------------------------------
 /// Print to given stream.
@@ -384,6 +388,10 @@ public:
        << "Inertial (" << position[0] << " m, " << position[1] << " m, "
        << position[2] << "m)";
   }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -438,7 +446,7 @@ public:
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  static int naif_code() {return NAIF_CODE;}
+  int naif_code() {return NAIF_CODE;}
   
 //-----------------------------------------------------------------------
 /// Make an Planetocentric with the given latitude, longitude, and height.
@@ -500,6 +508,9 @@ private:
     return PlanetConstant<NAIF_CODE>::b() / 
       sqrt(1 - PlanetConstant<NAIF_CODE>::esq() * clat * clat);
   }
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 template<int NAIF_CODE> inline boost::shared_ptr<CartesianInertial> 
@@ -584,7 +595,7 @@ public:
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  static int naif_code() { return NAIF_CODE; }
+  int naif_code() { return NAIF_CODE; }
 
 //-----------------------------------------------------------------------
 /// Print to given stream.
@@ -593,6 +604,10 @@ public:
   virtual void print(std::ostream& Os) const
   { Os << PlanetConstant<NAIF_CODE>::name()
        << "Planetocentric Converter"; }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 typedef PlanetConstant<499> MarsConstant;
@@ -610,4 +625,13 @@ typedef SimpleDemT<EuropaPlanetocentric> EuropaSimpleDem;
 typedef PlanetocentricConverter<502> EuropaPlanetocentricConverter;
 
 }
+
+GEOCAL_EXPORT_KEY(MarsFixed);
+GEOCAL_EXPORT_KEY(MarsInertial);
+GEOCAL_EXPORT_KEY(MarsPlanetocentric);
+GEOCAL_EXPORT_KEY(MarsPlanetocentricConverter);
+GEOCAL_EXPORT_KEY(EuropaFixed);
+GEOCAL_EXPORT_KEY(EuropaInertial);
+GEOCAL_EXPORT_KEY(EuropaPlanetocentric);
+GEOCAL_EXPORT_KEY(EuropaPlanetocentricConverter);
 #endif

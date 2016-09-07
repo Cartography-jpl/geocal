@@ -51,6 +51,7 @@ class CartesianFixed : public GroundCoordinate {
 public:
   virtual boost::shared_ptr<CartesianInertial> convert_to_ci(const Time& T) 
     const = 0;
+  virtual int naif_code() const = 0;
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   virtual boost::shared_ptr<CartesianFixed> 
     create(boost::array<double, 3> P) const = 0;

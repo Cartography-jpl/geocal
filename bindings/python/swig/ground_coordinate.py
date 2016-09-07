@@ -202,6 +202,13 @@ class GroundCoordinate(geocal_swig.generic_object.GenericObject):
     height_reference_surface, but derived classes can supply more
     efficient versions of this if desired.
 
+    Note that for the earth, the latitude is the standard geodetic
+    latitude. However, by convention other planets use Planetocentric
+    latitude, the equivalent of geocentric latitude for the other planet.
+    This is handled transparently and consistently by the various
+    coordinate classes (e.g., PlanetConstant, OgrCoordinate), but you
+    should be aware of this difference.
+
     C++ includes: ground_coordinate.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -218,7 +225,14 @@ class GroundCoordinate(geocal_swig.generic_object.GenericObject):
 
         By default we just convert to CartesianFixed and then to latitude, but
         derived classes can supply more efficient versions of these if needed.
-        Latitude is -90 to 90. 
+        Latitude is -90 to 90.
+
+        Note that for the earth, the latitude is the standard geodetic
+        latitude. However, by convention other planets use Planetocentric
+        latitude, the equivalent of geocentric latitude for the other planet.
+        This is handled transparently and consistently by the various
+        coordinate classes (e.g., PlanetConstant, OgrCoordinate), but you
+        should be aware of this difference. 
         """
         return _ground_coordinate.GroundCoordinate__v_latitude(self)
 
@@ -421,6 +435,15 @@ class CartesianFixed(GroundCoordinate):
         return _ground_coordinate.CartesianFixed_convert_to_ci(self, T)
 
 
+    def naif_code(self):
+        """
+
+        virtual int GeoCal::CartesianFixed::naif_code() const =0
+        Naif code for planet. 
+        """
+        return _ground_coordinate.CartesianFixed_naif_code(self)
+
+
     def create(self, P):
         """
 
@@ -506,6 +529,7 @@ class CartesianFixed(GroundCoordinate):
 
     __swig_destroy__ = _ground_coordinate.delete_CartesianFixed
 CartesianFixed.convert_to_ci = new_instancemethod(_ground_coordinate.CartesianFixed_convert_to_ci, None, CartesianFixed)
+CartesianFixed.naif_code = new_instancemethod(_ground_coordinate.CartesianFixed_naif_code, None, CartesianFixed)
 CartesianFixed.create = new_instancemethod(_ground_coordinate.CartesianFixed_create, None, CartesianFixed)
 CartesianFixed.ci_to_cf = new_instancemethod(_ground_coordinate.CartesianFixed_ci_to_cf, None, CartesianFixed)
 CartesianFixed.cf_to_ci_with_vel = new_instancemethod(_ground_coordinate.CartesianFixed_cf_to_ci_with_vel, None, CartesianFixed)

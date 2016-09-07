@@ -116,10 +116,8 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
     const char *wkt = "GEOCCS[\"Mars 2000\",\
     DATUM[\"D_Mars_2000\",\
         SPHEROID[\"Mars_2000_IAU_IAG\",3396190.0,169.89444722361179]],\
-    PRIMEM[\"Greenwich\",0,\
-        AUTHORITY[\"EPSG\",\"8901\"]],\
-    UNIT[\"metre\",1,\
-        AUTHORITY[\"EPSG\",\"9001\"]],\
+    PRIMEM[\"Reference_Meridian\",0],\
+    UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],\
     AXIS[\"Geocentric X\",OTHER],\
     AXIS[\"Geocentric Y\",OTHER],\
     AXIS[\"Geocentric Z\",NORTH]]";
@@ -210,6 +208,32 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
     return;
   }
   throw Exception("Not implemented yet");
+}
+
+//-----------------------------------------------------------------------
+/// Convert from GroundCoordinate to the coordinate system given by Ogr.
+//-----------------------------------------------------------------------
+
+OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
+			     const GroundCoordinate& G)
+  : ogr_(Ogr)
+{
+  boost::shared_ptr<CartesianFixed> cf = G.convert_to_cf();
+  if(ogr_->naif_code() != cf->naif_code()) {
+    Exception e;
+    e << "Inconsistent NAIF codes.\n"
+      << "  G:    " << cf->naif_code() << "\n"
+      << "  ogr_: " << ogr_->naif_code();
+    throw e;
+  }
+  x = cf->position[0];
+  y = cf->position[1];
+  z = cf->position[2];
+  int status = 
+    const_cast<OGRCoordinateTransformation&>(*ogr_->cf_inverse_transform()).
+    Transform(1, &x, &y, &z);
+  if(!status)
+    throw Exception("Call to OGR Transform failed");
 }
 
 //-----------------------------------------------------------------------
@@ -329,6 +353,13 @@ std::string OgrWrapper::geogcs_name() const
 
 //-----------------------------------------------------------------------
 /// Return latitude in degrees. Latitude is -90 to 90.
+///
+/// Note that for the earth, the latitude is the standard geodetic
+/// latitude. However, by convention other planets use Planetocentric
+/// latitude, the equivalent of geocentric latitude for the other
+/// planet. This is handled transparently and consistently by the
+/// various coordinate classes (e.g., PlanetConstant, OgrCoordinate),
+/// but you should be aware of this difference.
 //-----------------------------------------------------------------------
 
 double OgrCoordinate::latitude() const
@@ -343,7 +374,10 @@ double OgrCoordinate::latitude() const
       throw Exception("Call to OGR Transform failed");
     return yr;
   }
-  throw Exception("Not implemented yet");
+  // Might be able to do this more efficiently, but for now just go
+  // through CartesianFixed coordinates.
+  boost::shared_ptr<CartesianFixed> cf = convert_to_cf();
+  return cf->latitude();
 }
 
 //-----------------------------------------------------------------------
@@ -362,7 +396,10 @@ double OgrCoordinate::longitude() const
       throw Exception("Call to OGR Transform failed");
     return xr;
   }
-  throw Exception("Not implemented yet");
+  // Might be able to do this more efficiently, but for now just go
+  // through CartesianFixed coordinates.
+  boost::shared_ptr<CartesianFixed> cf = convert_to_cf();
+  return cf->longitude();
 }
 
 //-----------------------------------------------------------------------
@@ -381,7 +418,10 @@ double OgrCoordinate::height_reference_surface() const
       throw Exception("Call to OGR Transform failed");
     return zr;
   }
-  throw Exception("Not implemented yet");
+  // Might be able to do this more efficiently, but for now just go
+  // through CartesianFixed coordinates.
+  boost::shared_ptr<CartesianFixed> cf = convert_to_cf();
+  return cf->height_reference_surface();
 }
 
 void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude, 
@@ -400,7 +440,12 @@ void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude,
     Height_reference_surface = zr;
     return;
   }
-  throw Exception("Not implemented yet");
+  // Might be able to do this more efficiently, but for now just go
+  // through CartesianFixed coordinates.
+  boost::shared_ptr<CartesianFixed> cf = convert_to_cf();
+  Latitude = cf->latitude();
+  Longitude = cf->longitude();
+  Height_reference_surface = cf->height_reference_surface();
 }
 
 //-----------------------------------------------------------------------
@@ -417,9 +462,9 @@ boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
   if(!status)
     throw Exception("Call to OGR Transform failed");
   if(ogr().naif_code() == Ecr::EARTH_NAIF_CODE)
-    return boost::shared_ptr<CartesianFixed>(new Ecr(xr, yr, xr));
+    return boost::shared_ptr<CartesianFixed>(new Ecr(xr, yr, zr));
   if(ogr().naif_code() == MarsConstant::naif_code())
-    return boost::shared_ptr<CartesianFixed>(new MarsFixed(xr, yr, xr));
+    return boost::shared_ptr<CartesianFixed>(new MarsFixed(xr, yr, zr));
   Exception e;
   e << "Don't recognize the naif code " << ogr().naif_code();
   throw e;

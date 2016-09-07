@@ -44,6 +44,7 @@ public:
     boost::shared_ptr<GeoCal::Geodetic> convert_to_geodetic() const
     { return boost::shared_ptr<GeoCal::Geodetic>(new GeoCal::Geodetic($self->convert_to_geodetic())); }
   }
+  virtual int naif_code() const;
   virtual boost::shared_ptr<CartesianFixed>
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0) 

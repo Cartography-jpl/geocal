@@ -60,8 +60,12 @@ public:
     leapsecond_table[16.0 * one_yr] = 6.0;
     // June 30, 2012
     leapsecond_table[19.5 * one_yr] = 7.0;
+    // June 30, 2015
+    leapsecond_table[22.5 * one_yr] = 8.0;
+    // Dec 31, 2016
+    leapsecond_table[24.0 * one_yr] = 9.0;
     // Far in the future, as an easy endpoint
-    leapsecond_table[1e6 * one_yr] = 8.0;
+    leapsecond_table[1e6 * one_yr] = 10.0;
     typedef std::pair<double, int> ptype;
     BOOST_FOREACH(ptype i, leapsecond_table) {
       unleapsecond_table[i.first + i.second] = -i.second;
@@ -127,7 +131,8 @@ public:
     std::ostringstream ss;
     ss << std::fixed << std::setprecision(6) << frac_sec;
     boost::smatch m;
-    if(boost::regex_search(ss.str(), m, boost::regex("(\\.\\d+)")))
+    std::string ssstr = ss.str();
+    if(boost::regex_search(ssstr, m, boost::regex("(\\.\\d+)")))
       res += m[1];
     else
       res += ".000000";

@@ -237,35 +237,14 @@ private:
     if(vicar_file_->has_rpc())
       rpc_.reset(new Rpc(vicar_file_->rpc()));
   }
-
-#ifdef USE_BOOST_SERIALIZATON
   VicarRasterImage() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const
-  {
-    using boost::serialization::make_nvp;
-    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImage);
-    int ntile = number_tile();
-    ar << GEOCAL_NVP_(vicar_file)
-       << GEOCAL_NVP_(band_id)
-       << GEOCAL_NVP_(number_tile_line)
-       << make_nvp("number_tile", ntile);
-  }
+  void serialize(Archive & ar, const unsigned int version);
   template<class Archive>
-  void load(Archive & ar, const unsigned int version)
-  {
-    using boost::serialization::make_nvp;
-    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImage);
-    int ntile;
-    ar >> GEOCAL_NVP_(vicar_file) 
-       >> GEOCAL_NVP_(band_id)
-       >> GEOCAL_NVP_(number_tile_line)
-       >> make_nvp("number_tile", ntile);;
-    initialize(band_id_, number_tile_line_, ntile);
-  }
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
-#endif  
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 
 boost::shared_ptr<RasterImage> 
@@ -276,5 +255,7 @@ boost::shared_ptr<RasterImage>
 	     int Number_tile = 4,
 	     bool Force_area_pixel = false);
 }
+
+GEOCAL_EXPORT_KEY(VicarRasterImage);
 
 #endif

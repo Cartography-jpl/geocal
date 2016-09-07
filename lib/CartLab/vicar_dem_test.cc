@@ -17,26 +17,20 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
+  if(!have_serialize_supported())
+    return;
   if(!VicarFile::vicar_available())
     return;
-  std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
-
   std::string fname = test_data_dir() + "vicar.img";
-  boost::shared_ptr<Dem> d(new VicarDem(fname));
-  oa << GEOCAL_NVP(d);
+  boost::shared_ptr<VicarDem> f(new VicarDem(fname));
+  std::string d = serialize_write_string(f);
   if(false)
-    std::cerr << os.str();
-
-  std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
-  boost::shared_ptr<Dem> dr;
-  ia >> GEOCAL_NVP(dr);
-
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<VicarDem> fr =
+    serialize_read_string<VicarDem>(d);
   Geodetic g1(35.9, 44.800, 100);
-  BOOST_CHECK_CLOSE(dr->height_reference_surface(g1), 1.0, 1e-4);
-#endif
+  BOOST_CHECK_CLOSE(fr->height_reference_surface(g1), 1.0, 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

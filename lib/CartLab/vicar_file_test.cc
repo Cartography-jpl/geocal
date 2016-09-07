@@ -225,6 +225,8 @@ BOOST_AUTO_TEST_CASE(serialization_vicar_file)
 {
   if(!have_serialize_supported())
     return;
+  if(!VicarFile::vicar_available())
+    return;
   boost::shared_ptr<VicarFile> f(new VicarFile(fname));
   std::string d = serialize_write_string(f);
   if(false)

@@ -35,8 +35,6 @@ public:
 	   const boost::shared_ptr<Datum>& D);
   %python_attribute2(vicar_file, vicar_file_ptr, boost::shared_ptr<VicarFile>)
   virtual double elevation(int Y_index, int X_index) const;
-  %pickle_init(1, self.vicar_file.file_name, self.outside_dem_is_error,
-	       self.number_line_per_tile, self.number_tile,
-	       self.datum)
+  %pickle_serialization();
 };
 }

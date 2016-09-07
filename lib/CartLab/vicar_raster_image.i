@@ -65,10 +65,7 @@ public:
   %python_attribute(band_id, int)
   %python_attribute(rpc, Rpc)
   %python_attribute(map_info, MapInfo)
-  %pickle_init(2, self.vicar_file.file_name, self.band_id,
-	       self.vicar_file.access,
-	       self.number_tile_line, self.number_tile, 
-	       self.vicar_file.force_area_pixel)
+  %pickle_serialization();
   %pythoncode {
 @rpc.setter
 def rpc(self, val):

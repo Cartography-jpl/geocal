@@ -311,12 +311,8 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
         return self._v_map_info()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 2
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 2, self.vicar_file.file_name,self.band_id,self.vicar_file.access,self.number_tile_line,self.number_tile,self.vicar_file.force_area_pixel)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 
     @rpc.setter

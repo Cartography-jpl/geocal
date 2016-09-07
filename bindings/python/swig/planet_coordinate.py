@@ -400,12 +400,8 @@ class MarsFixed(geocal_swig.ground_coordinate.CartesianFixed):
 
     orbit_data = staticmethod(orbit_data)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_MarsFixed
 MarsFixed.convert_to_planetocentric = new_instancemethod(_planet_coordinate.MarsFixed_convert_to_planetocentric, None, MarsFixed)
@@ -472,12 +468,8 @@ class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
         return _planet_coordinate.MarsInertial_naif_code(self)
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_MarsInertial
 MarsInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.MarsInertial_reference_surface_intersect_approximate, None, MarsInertial)
@@ -535,12 +527,8 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
         return self._v_longitude()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.latitude,self.longitude,self.height_reference_surface)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_MarsPlanetocentric
 MarsPlanetocentric.naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentric_naif_code, None, MarsPlanetocentric)
@@ -602,12 +590,8 @@ class MarsPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateCon
         return _planet_coordinate.MarsPlanetocentricConverter_naif_code(self)
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, )
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 
     def __init__(self):
@@ -826,12 +810,8 @@ class EuropaFixed(geocal_swig.ground_coordinate.CartesianFixed):
 
     orbit_data = staticmethod(orbit_data)
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_EuropaFixed
 EuropaFixed.convert_to_planetocentric = new_instancemethod(_planet_coordinate.EuropaFixed_convert_to_planetocentric, None, EuropaFixed)
@@ -898,12 +878,8 @@ class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
         return _planet_coordinate.EuropaInertial_naif_code(self)
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.position[0],self.position[1],self.position[2])
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_EuropaInertial
 EuropaInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.EuropaInertial_reference_surface_intersect_approximate, None, EuropaInertial)
@@ -961,12 +937,8 @@ class EuropaPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
         return self._v_longitude()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.latitude,self.longitude,self.height_reference_surface)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentric
 EuropaPlanetocentric.naif_code = new_instancemethod(_planet_coordinate.EuropaPlanetocentric_naif_code, None, EuropaPlanetocentric)
@@ -1028,12 +1000,8 @@ class EuropaPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateC
         return _planet_coordinate.EuropaPlanetocentricConverter_naif_code(self)
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, )
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 
     def __init__(self):

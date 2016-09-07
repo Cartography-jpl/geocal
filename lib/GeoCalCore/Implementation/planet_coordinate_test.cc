@@ -95,6 +95,64 @@ BOOST_AUTO_TEST_CASE(mars_planetocentric)
   BOOST_CHECK(distance(mp, mp2) < 1e-8);
   BOOST_CHECK(distance(mf, mf2) < 1e-8);
 }
+
+BOOST_AUTO_TEST_CASE(serialization_mars_fixed)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<MarsFixed> mf(new MarsFixed(100, 200, 300));
+  std::string d = serialize_write_string(mf);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<MarsFixed> mfr = 
+    serialize_read_string<MarsFixed>(d);
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(mf->position[i], mfr->position[i], 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_mars_inertial)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<MarsInertial> mi(new MarsInertial(100, 200, 300));
+  std::string d = serialize_write_string(mi);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<MarsInertial> mir = 
+    serialize_read_string<MarsInertial>(d);
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(mi->position[i], mir->position[i], 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_mars_planetocentric)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<MarsPlanetocentric> gp(new MarsPlanetocentric(10, 20, 100));
+  std::string d = serialize_write_string(gp);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<MarsPlanetocentric> gpr = 
+    serialize_read_string<MarsPlanetocentric>(d);
+  BOOST_CHECK_CLOSE(gp->latitude(), gpr->latitude(), 1e-4);
+  BOOST_CHECK_CLOSE(gp->longitude(), gpr->longitude(), 1e-4);
+  BOOST_CHECK_CLOSE(gp->height_reference_surface(),
+		    gpr->height_reference_surface(), 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_mars_planetocentric_converter)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<MarsPlanetocentricConverter> conv(new MarsPlanetocentricConverter());
+  std::string d = serialize_write_string(conv);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<MarsPlanetocentricConverter> convr = 
+    serialize_read_string<MarsPlanetocentricConverter>(d);
+  BOOST_CHECK(convr->is_same(*conv));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 class GalileoFixture: public GlobalFixture {
@@ -191,6 +249,63 @@ BOOST_AUTO_TEST_CASE(orbit_data)
 				// more directly compare
   BOOST_CHECK_CLOSE(ic_planet_center.line, -3932.85756, 1e-4);
   BOOST_CHECK_CLOSE(ic_planet_center.sample, 11478.387, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_europa_fixed)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<EuropaFixed> ef(new EuropaFixed(100, 200, 300));
+  std::string d = serialize_write_string(ef);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<EuropaFixed> efr = 
+    serialize_read_string<EuropaFixed>(d);
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(ef->position[i], efr->position[i], 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_europa_inertial)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<EuropaInertial> ei(new EuropaInertial(100, 200, 300));
+  std::string d = serialize_write_string(ei);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<EuropaInertial> eir = 
+    serialize_read_string<EuropaInertial>(d);
+  for(int i = 0; i < 3; ++i)
+    BOOST_CHECK_CLOSE(ei->position[i], eir->position[i], 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_europa_planetocentric)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<EuropaPlanetocentric> gp(new EuropaPlanetocentric(10, 20, 100));
+  std::string d = serialize_write_string(gp);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<EuropaPlanetocentric> gpr = 
+    serialize_read_string<EuropaPlanetocentric>(d);
+  BOOST_CHECK_CLOSE(gp->latitude(), gpr->latitude(), 1e-4);
+  BOOST_CHECK_CLOSE(gp->longitude(), gpr->longitude(), 1e-4);
+  BOOST_CHECK_CLOSE(gp->height_reference_surface(),
+		    gpr->height_reference_surface(), 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_europa_planetocentric_converter)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<EuropaPlanetocentricConverter> conv(new EuropaPlanetocentricConverter());
+  std::string d = serialize_write_string(conv);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<EuropaPlanetocentricConverter> convr = 
+    serialize_read_string<EuropaPlanetocentricConverter>(d);
+  BOOST_CHECK(convr->is_same(*conv));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

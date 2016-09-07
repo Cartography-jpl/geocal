@@ -51,7 +51,7 @@ public:
   (const std::string& Target_name, 
    const std::string& Spacecraft_reference_frame_name, const Time& T);
   virtual int naif_code() const;
-  %pickle_init(1, self.position[0], self.position[1], self.position[2])
+  %pickle_serialization();
 };
 
 template<int NAIF_CODE> class Planetocentric : public GroundCoordinate {
@@ -64,7 +64,7 @@ public:
   %python_attribute(height_reference_surface, double);
   %python_attribute(latitude, double);
   %python_attribute(longitude, double);
-  %pickle_init(1, self.latitude, self.longitude, self.height_reference_surface)
+  %pickle_serialization();
 };
 
 template<int NAIF_CODE> class PlanetInertial : public CartesianInertial {
@@ -83,7 +83,7 @@ public:
   const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
     const;
   int naif_code();
-  %pickle_init(1, self.position[0], self.position[1], self.position[2])
+  %pickle_serialization();
 };
 
 template<int NAIF_CODE> class PlanetocentricConverter : public CoordinateConverter {
@@ -93,7 +93,7 @@ public:
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
   int naif_code();
-  %pickle_init(1);
+  %pickle_serialization();
 };
 
 }

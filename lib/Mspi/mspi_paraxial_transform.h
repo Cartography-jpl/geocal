@@ -4,9 +4,6 @@
 #include "auto_derivative.h"
 #include <blitz/array.h>
 #include <map>
-#ifdef USE_BOOST_SERIALIZATON
-#include <boost/serialization/map.hpp>
-#endif
 
 namespace GeoCal {
 /****************************************************************//**

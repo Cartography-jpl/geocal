@@ -113,6 +113,6 @@ def __setitem__(self, key, v):
     else:
       self.label_set(key, v)
   }
-  %pickle_init(1, self.file_name, self.access, self.force_area_pixel)
+  %pickle_serialization();
 };
 }

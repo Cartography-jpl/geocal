@@ -221,25 +221,18 @@ BOOST_AUTO_TEST_CASE(ibis_file_create)
   BOOST_CHECK_CLOSE(f.column<VicarDouble>(4).data[8], 5.0, 1e-4);
 }
 
-BOOST_AUTO_TEST_CASE(serialization)
+BOOST_AUTO_TEST_CASE(serialization_vicar_file)
 {
-#ifdef HAVE_BOOST_SERIALIZATON
-  std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
-
-  boost::shared_ptr<GenericObject> f(new VicarFile(fname));
-  oa << GEOCAL_NVP(f);
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<VicarFile> f(new VicarFile(fname));
+  std::string d = serialize_write_string(f);
   if(false)
-    std::cerr << os.str();
-
-  std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
-  boost::shared_ptr<GenericObject> fr;
-  ia >> GEOCAL_NVP(fr);
-  boost::shared_ptr<VicarFile> fr2 = boost::dynamic_pointer_cast<VicarFile>(fr);
-
-  BOOST_CHECK_EQUAL(fr2->file_name(), fname);
-#endif
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<VicarFile> fr = 
+    serialize_read_string<VicarFile>(d);
+  BOOST_CHECK_EQUAL(fr->file_name(), fname);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

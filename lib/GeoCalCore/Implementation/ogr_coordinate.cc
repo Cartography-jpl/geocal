@@ -2,6 +2,7 @@
 #include "planet_coordinate.h"
 #include "geocal_serialize_support.h"
 #include "ecr.h"
+#include <boost/algorithm/string.hpp>
 
 using namespace GeoCal;
 
@@ -133,9 +134,14 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
   }
   OGRSpatialReference * og;
   OGRSpatialReference * og_cf;
-  if(geogcs_name() == "GCS_MARS") {
+  std::string gname = geogcs_name();
+  if(gname == "")
+    gname = geoccs_name();
+  boost::algorithm::to_lower(gname);
+  // We may need a more sophisticated way of handling this, but for
+  // now just search for "mars" in the GCS name
+  if(gname.find("mars") != std::string::npos) {
     naif_code_ = MarsConstant::naif_code();
-    // This isn't right, we'll come back to this
     og = 0;
     og_cf = ogr_mars_cf.get();
   } else {
@@ -345,6 +351,19 @@ std::string OgrWrapper::pcs_citation_geo_key() const
 std::string OgrWrapper::geogcs_name() const
 {
   const char* t =ogr_->GetAttrValue("GEOGCS");
+  if(t)
+    return t;
+  else
+    return "";
+}
+
+//-----------------------------------------------------------------------
+/// The name of the GEOCCS.
+//-----------------------------------------------------------------------
+
+std::string OgrWrapper::geoccs_name() const
+{
+  const char* t =ogr_->GetAttrValue("GEOCCS");
   if(t)
     return t;
   else

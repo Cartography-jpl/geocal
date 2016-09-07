@@ -73,6 +73,7 @@ public:
   std::string projected_cs_type_geo_key() const;
   std::string pcs_citation_geo_key() const;
   std::string geogcs_name() const;
+  std::string geoccs_name() const;
 
 //-----------------------------------------------------------------------
 /// Return the NAIF code for the planet this coordinate is for.

@@ -382,7 +382,7 @@ protected:
 /// finishing their constructor.
 //-----------------------------------------------------------------------
 
-  QuaternionOrbitData() {}
+  QuaternionOrbitData() : have_ci_to_cf(false) {}
 
   void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
     const boost::array<double, 3>& vel_fixed, const 

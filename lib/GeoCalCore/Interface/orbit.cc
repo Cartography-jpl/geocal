@@ -717,6 +717,7 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
    const boost::shared_ptr<CartesianInertial>& pos_ci,
    const boost::array<double, 3>& vel_inertial,
    const boost::math::quaternion<double>& sc_to_ci_q)
+: have_ci_to_cf(false)
 { 
   initialize(Tm, pos_ci, vel_inertial, sc_to_ci_q);
 }
@@ -733,6 +734,7 @@ QuaternionOrbitData::QuaternionOrbitData
  const boost::array<AutoDerivative<double>, 3>& vel_inertial,
  const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q
 )
+: have_ci_to_cf(false)
 { 
   initialize(Tm, pos_ci, pos_ci_with_der, vel_inertial, sc_to_ci_q);
 }

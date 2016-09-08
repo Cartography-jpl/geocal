@@ -275,10 +275,10 @@ def feature_match_tp_collect(args, igc, refimg, pool):
     
 
 args = docopt_simple(usage, version=version)
-if(args.verbose):
-    logging.basicConfig(level = logging.INFO)
 if(args.debug):
     logging.basicConfig(level = logging.DEBUG)
+elif(args.verbose):
+    logging.basicConfig(level = logging.INFO)
 log = logging.getLogger("geocal-python.tp_collect")
 # This is really verbose, so we don't in general want to see this
 log_optimize = logging.getLogger("geocal-python.lm_optimize")

@@ -35,12 +35,12 @@ class TiePointWrap(object):
         for h in logging.getLogger("geocal-python").handlers:
             h.flush()
         try:
-            tp = self.tp_collect.tie_point(ic)
+            tp, diag = self.tp_collect.tie_point(ic)
             if(tp is None):
                 log.debug("Got 0 matches")
             else:
                 log.debug("Got %d matches" % tp.number_image_location)
-            return tp
+            return tp, diag
         except RuntimeError:
         # We may try to find points that don't actually intersect
         # the ground (e.g., we are at a steep angle and above
@@ -254,7 +254,7 @@ class TiePointCollect(object):
         log.info("Done with matching")
         log.info("Time: %f" % (time.time() - tstart))
         res2 = TiePointCollection()
-        res2.extend([i for i in res if i is not None])
+        res2.extend([i for i, diag in res if i is not None])
         log.info("Total number tp: %d" % len(res2))
         log.info("Number GCPs:     %d" % res2.number_gcp)
         return res2
@@ -263,27 +263,55 @@ class TiePointCollect(object):
         '''Return a tie point that is roughly at the given location in the
         first image. Note that we try matching all the other images to the
         first image, i.e., we don\'t chain by map 2 to 3 and 3 to 4. 
-        If we aren't successful at matching, this returns None.'''
+        If we aren't successful at matching, this returns None.
+
+        In addition to the tiepoint, this returns a diagnostic array for 
+        determining why matching might have failed, or the tiepoint was 
+        rejected.  This is number_image+1 in size. For image i, we return
+        the diagnostic code from the matcher. This is 0 for success, or a
+        positive number indicating why it failed in not. Just to keep things
+        straight, we return -1 if we skipped the image (e.g., it is the base
+        image we are matching to). This can be used to not count matching as
+        successful if we didn't do it.
+        
+        The last entry in diagnostic array is 0 if we successfully created
+        a tie point, 1 if we dropped it because it had only one match so we 
+        can't determine the intersection (not and issue for GCPs), or 2 if
+        dropped because the point was rejected by RayIntersect3 because of
+        the max_ground_covariance test.
+        '''
         tp = TiePoint(self.number_image)
+        diag = np.zeros((self.number_image+1,),dtype=int)
         tp.image_coordinate(self.base_image_index, ic1, 0.05, 0.05)
         for i in range(self.start_image_index, self.end_image_index):
             if(i != self.base_image_index):
                 ic2, lsigma, ssigma, success, diagnostic = \
                     self.itoim[i].match(ic1)
+                diag[i] = diagnostic
                 if(success):
                     tp.image_coordinate(i, ic2, lsigma, ssigma)
+            else:
+                diag[i] = -1
         if(self.ref_image is not None):
             i = self.igc_collection.number_image
             ic2, lsigma, ssigma, success, diagnostic = \
                 self.itoim[i].match(ic1)
+            diag[i] = diagnostic
             if(success):
                 tp.ground_location = Ecr(self.ref_igc.ground_coordinate(ic2))
                 tp.is_gcp = True
-                return tp
+                return tp, diag
         if(self.igc_collection.number_image > 1):
-            return self.ri.ray_intersect(tp)
+            r = self.ri.ray_intersect(tp)
+            # Indicate why we may throw the tiepoint away
+            if(r is None):
+                if(tp.number_image_location == 1):
+                    diag[-1] = 1
+                elif(tp.number_image_location > 1):
+                    diag[-1] = 2
+            return r, diag
         else:
-            return None
+            return None, diag
 
 class TiePointCollectFM(object):
     '''Given a IgcCollection, collect tiepoints by feature matching. This is

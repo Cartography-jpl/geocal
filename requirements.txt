@@ -29,6 +29,7 @@ seaborn
 pandas
 numpydoc
 jsonpickle
+tabulate
 # Needed while we support both python 2 and 3
 future
 six

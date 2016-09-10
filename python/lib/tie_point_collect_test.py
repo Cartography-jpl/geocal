@@ -33,9 +33,10 @@ def test_tp():
 @require_serialize    
 def test_tie_point_grid():
     pool = Pool()
-    tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin,
+    tpcol, diag = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin,
                                       pool = pool)
     print(tpcol)
+    diag.print_report()
     assert len(tpcol) == 95
 
 @require_serialize    

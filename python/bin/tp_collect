@@ -6,7 +6,7 @@ from geocal import *
 from multiprocessing import Pool
 import logging
 
-version = "February 4, 2013"
+version = "September 9, 2016"
 usage="""Usage: 
   tp_collect [options] <igc> <output>
   tp_collect --gcp [options] <igc> <reference_image> <output>
@@ -79,6 +79,9 @@ Options:
        Can pass the matcher to use as a shelve or xml file. Useful when
        you want to use a different matcher (e.g., phase correlation matcher)
        or different parameters for the standard ccorr/lsm matcher.
+
+  --matching-qa-file=f
+       Write matching QA summary to the given file.
 
   --gcp-matcher=f
        Can pass in a matcher to use for matching to the reference image.
@@ -256,13 +259,15 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
     numx = min(args.number_x, maxnumx)
     numy = min(args.number_y, maxnumy)
     tparr = TiePointCollection()
-
+    diag = None
     for i, tpcol in enumerate(tpcollect):
         log.info("---------------------------------------------------------")
         log.info(msg[i])
         log.info("---------------------------------------------------------")
-        tparr.extend(tpcol.tie_point_grid(numx, numy, pool = pool))
-    return tparr
+        tpres, diag = tpcol.tie_point_grid(numx, numy, pool = pool,
+                                           diagnostic=diag)
+        tparr.extend(tpres)
+    return tparr, diag
 
 def feature_match_tp_collect(args, igc, refimg, pool):
     tp_collect = TiePointCollectFM(igc, ref_image = refimg,
@@ -311,16 +316,24 @@ if(args.feature_match):
         log.warning("Parallel processing for feature matching doesn't currently work.")
     pool = None
     tparr = feature_match_tp_collect(args, igc, refimg, pool)
+    diag = None                 # Don't have yet for feature match
 else:
-    tparr = image_match_tp_collect(args, igc, mi, refimg, pool)
+    tparr, diag = image_match_tp_collect(args, igc, mi, refimg, pool)
 
 if(args.outlier_reject_ransac):
     tparr = outlier_reject_ransac(tparr, ref_image = refimg, 
-                           threshold = args.outlier_reject_ransac_threshold)
+               threshold = args.outlier_reject_ransac_threshold,
+               diagnostic = diag)
 if(args.outlier_reject_ransac_surface_project):
     tparr = outlier_reject_ransac(tparr, ref_image = refimg, 
-               igccol = igc, threshold = args.outlier_reject_ransac_threshold)
+               igccol = igc, threshold = args.outlier_reject_ransac_threshold,
+               diagnostic = diag)
 
+if(diag is not None):
+    diag.print_report(log = log)
+    if(args.matching_qa_file):
+        with open(args.matching_qa_file, "w") as fh:
+            diag.print_report(fh=fh)
 try:
     # Ok if this fails, it just means args.output doesn't exist yet
     if(args.add_tp):

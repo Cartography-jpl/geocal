@@ -39,7 +39,7 @@ igc3.rpc.fit_sample_numerator = t2
 gaoi = VicarLiteRasterImage(stereo_unit_test_data + "aoi.img").map_info
 igc_coll = IgcArray([igc1, igc2, igc3])
 tp_collect = TiePointCollect(igc_coll)
-tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin)
+tpcol, diag = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin)
 # Arbitrarily pick 2 points and pretend like they are GCPs
 tpcol[0].is_gcp = True
 tpcol[5].is_gcp = True

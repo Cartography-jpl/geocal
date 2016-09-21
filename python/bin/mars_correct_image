@@ -37,6 +37,29 @@ Options:
   -h --help         
        Print this message
 
+  --autofit=d
+       Set the FITMIN threshold automatically using the first n correlations.
+       [default: 14]
+
+  --band-ref=d
+       The band number to use for the reference image (if multiple bands 
+       present) [default: 1]
+
+  --band-image=d
+       The band number to use for the image we are correcting (if multiple 
+       bands present) [default: 1]
+
+  --fftsize=d
+       FFT window size. Default should generally work, but sometimes you
+       have a narrow overlap and need to settle for a smaller window so 
+       you have enough imagery to match (e.g., very different matching size
+       such as viking 232 meter data to 50 meter HRSC data).
+       [default: 256]
+
+  --fftgrid=s
+       How many FFT points to match, in line x sample order
+       [default: (42, 42)]
+
   --hirise-correction
        Hirise imagery in equirectangular appears to have the 
        latitude_of_origin and standard_parallel_1 swapped, at least for
@@ -44,6 +67,51 @@ Options:
        always occurs. So this option turns on some heuristics to try to
        identify and correct this. If this is left off, we don't do this
        correction.
+
+  --magnify=f
+       We initially magnify the area we try matching on, so we search in
+       a larger area to get the initial match points. This gives that
+       factor. [default: 4.0]
+
+   --magmin=f
+       Once we have a few points matched, we shrink the magnification factor
+       we use on the window size to this value. [default: 2.0]
+
+  --nah=d
+       Number of grid cells in the sample direction to use warping final image.
+       [default: 1000]
+
+  --nav=d
+       Number of grid cells in the line direction to use warping final image.
+       [default: 1000]
+
+  --polyfit=s
+        When warping the image to the reference image to correct it, we 
+        can either use triangulation on each matched points, or we can
+        constrain the mapping to a LINEAR, KEYSTONE, QUAD, or CUBIC 
+        polynomial fit. See the VICAR Proc "tieconv" for more details on
+        this. [default: ]
+
+  --redo=d
+       At the end of processing, this number of points will be redone.
+       [default: 36]   
+
+  --seed=d
+       Seed number to use when selecting points to match. Normally you don't
+       need to modify this, but if you get bad accuracy results when doing
+       a correction you can try selecting a different seed to a different
+       set of match points are selected. [default: 562]
+   
+  --thr-res=f
+       Prevent offset correlations further than this value from the 
+       predicted location from entering into the model fit of the 
+       reference to image we are correcting. This is to prevent gross 
+       blunders. Note that this is in the resolution of the reference 
+       image (which is typically coarser). [default: 10.0]
+
+  --toler=f
+       Tolerance we use when rejected matched points as blunders. 
+       [default: 1.5]
 
   -v --version      
        Print program version
@@ -112,16 +180,21 @@ def import_file(fin, fout):
 def gtpwarp(fin, fref, fref_res, fout):
     '''gtpwarp, using Tom's usual parameters.'''
     subprocess.run(["vicarb", "gtpwarp", fin, fout, fref, fref_res,
-                    "nav=1000", "nah=1000",
-                    "fftgrid=(42,42)",  "fftsize=256", "magnify=4.0",
-                    "magmin=2.0",
-                    "toler=1.5", 
-                    'polyfit=""',  
+                    "nav=%d" % args.nav, "nah=%d" % args.nah,
+                    "fftgrid=%s" % args.fftgrid,
+                    "fftsize=%d" % args.fftsize,
+                    "magnify=%f" % args.magnify,
+                    "magmin=%f" % args.magmin,
+                    "toler=%f" % args.toler, 
+                    "polyfit=\"%s\"" % args.polyfit,
+                    "autofit=%d" % args.autofit,
                     'ref_lowres=y',
-                    "redo=36", "ffthalf=2",
-                    "seed=562", 
+                    "redo=%d" % args.redo,
+                    "ffthalf=2",
+                    "seed=%d" % args.seed, 
                     "accoff=y", "'bilin", 
                     "'coverref",
+                    "thr_res=%f" % args.thr_res,
                     "ref_res=%s" % fref_res,
                     ], check=True)
     # For some reason, gtpwarp doesn't set all the geotiff metadata. Not
@@ -136,15 +209,17 @@ def accck(fin,fref):
     '''Run accuracy check. We assume stuff in is in the same projection
     (e.g., all geodetic)'''
     subprocess.run(["vicarb", "accck", fin, fref, "wmask=n",
-                    "fftsize=256", "magnif=2", "remap=n", "echo=no",
+                    "fftsize=%d" % args.fftsize,
+                    "magnif=2", "remap=n", "echo=no",
                     "zerolim=10.0", "zerolim2=10.0"],
                    check=True)
 
-def fix_projection(fin, fout):
+def fix_projection(fin, fout, band):
     '''There are potential issues with some of the map projections with 
     Mars, errors or missing pieces. This create a VRT file that fixes any 
     of these problems.'''
-    subprocess.run(["gdal_translate", "-of", "VRT", fin, fout],
+    subprocess.run(["gdal_translate", "-of", "VRT", "-b", str(band),
+                    fin, fout],
                    check=True)
     f = gdal.Open(fout, gdal.GA_Update)
     p = str(f.GetProjectionRef())
@@ -203,8 +278,8 @@ cimg_res1 = "%s_corr_%s.img" % (args.image_base_name,
 cimg_res2 = "%s_corr_%s.img" % (args.image_base_name, 
                                 args.image_resolution_name)
 
-fix_projection(args.ref_image, refimg_fixed)
-fix_projection(args.image, img_fixed)
+fix_projection(args.ref_image, refimg_fixed, args.band_ref)
+fix_projection(args.image, img_fixed, args.band_image)
 if(not check_intersection(refimg_fixed, img_fixed)):
     raise RuntimeError("The two images have no area of intersection")
 resample_proj(refimg_fixed, img_fixed, refimg_res1)

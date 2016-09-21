@@ -59,7 +59,8 @@ def resample_proj(fin, fref, fout, resize=False):
     True, also resize to the same resolution as fref.'''
     d = gdal.Open(fref, gdal.GA_ReadOnly)
     g = d.GetGeoTransform()
-    cmd= ["gdalwarp", "-of", "VICAR"]
+    # Not 100% sure that all data should be Int16, but for now we assume this
+    cmd= ["gdalwarp", "-of", "VICAR", "-ot", "Int16"]
     x_size, y_size = d.RasterXSize, d.RasterYSize
     min_x, max_y, pix_size_x, pix_size_y = g[0], g[3], g[1], g[5]
     max_x = min_x + (x_size * pix_size_x)
@@ -104,7 +105,8 @@ def check_intersection(f1, f2):
 
 def import_file(fin, fout):
     '''Import an image into vicar format, leaving in original projection.'''
-    subprocess.run(["gdal_translate", "-of", "VICAR", fin, fout], check=True)
+    # Not 100% sure that all data should be Int16, but for now we assume this
+    subprocess.run(["gdal_translate", "-of", "VICAR", "-ot", "Int16", fin, fout], check=True)
 
 # Not sure about triangulation. Maybe try quad
 def gtpwarp(fin, fref, fref_res, fout):

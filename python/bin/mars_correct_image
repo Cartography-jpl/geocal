@@ -119,6 +119,13 @@ Options:
 
 args = docopt_simple(usage, version=version)
 
+# Small wrapper around running command, so we can print this to screen
+def run_cmd(cmd):
+    print("Executing command:")
+    print("  " + " ".join(cmd))
+    sys.stdout.flush()
+    subprocess.run(cmd, check=True)
+    
 # We probably want to add a little bit of padding, but skip that for now.
 
 def resample_proj(fin, fref, fout, resize=False):
@@ -148,7 +155,7 @@ def resample_proj(fin, fref, fout, resize=False):
         cmd.append("-overwrite")
         cmd.append(fin)
         cmd.append(fout)
-        subprocess.run(cmd, check=True)
+        run_cmd(cmd)
 
 def check_same_projection(f1, f2):
     '''Check  that the 2 images have identical projection and resolution.'''
@@ -174,12 +181,13 @@ def check_intersection(f1, f2):
 def import_file(fin, fout):
     '''Import an image into vicar format, leaving in original projection.'''
     # Not 100% sure that all data should be Int16, but for now we assume this
-    subprocess.run(["gdal_translate", "-of", "VICAR", "-ot", "Int16", fin, fout], check=True)
+    cmd = ["gdal_translate", "-of", "VICAR", "-ot", "Int16", fin, fout]
+    run_cmd(cmd)
 
 # Not sure about triangulation. Maybe try quad
 def gtpwarp(fin, fref, fref_res, fout):
     '''gtpwarp, using Tom's usual parameters.'''
-    subprocess.run(["vicarb", "gtpwarp", fin, fout, fref, fref_res,
+    cmd = ["vicarb", "gtpwarp", fin, fout, fref, fref_res,
                     "nav=%d" % args.nav, "nah=%d" % args.nah,
                     "fftgrid=%s" % args.fftgrid,
                     "fftsize=%d" % args.fftsize,
@@ -196,7 +204,8 @@ def gtpwarp(fin, fref, fref_res, fout):
                     "'coverref",
                     "thr_res=%f" % args.thr_res,
                     "ref_res=%s" % fref_res,
-                    ], check=True)
+                    ]
+    run_cmd(cmd)
     # For some reason, gtpwarp doesn't set all the geotiff metadata. Not
     # sure why, we may try fixing this at some point. But for now, just
     # update this. Note this is pretty much the same as a gtgenup call, just
@@ -208,19 +217,18 @@ def gtpwarp(fin, fref, fref_res, fout):
 def accck(fin,fref):
     '''Run accuracy check. We assume stuff in is in the same projection
     (e.g., all geodetic)'''
-    subprocess.run(["vicarb", "accck", fin, fref, "wmask=n",
-                    "fftsize=%d" % args.fftsize,
-                    "magnif=2", "remap=n", "echo=no",
-                    "zerolim=10.0", "zerolim2=10.0"],
-                   check=True)
+    cmd = ["vicarb", "accck", fin, fref, "wmask=n",
+           "fftsize=%d" % args.fftsize,
+           "magnif=2", "remap=n", "echo=no",
+           "zerolim=10.0", "zerolim2=10.0"]
+    run_cmd(cmd)
 
 def fix_projection(fin, fout, band):
     '''There are potential issues with some of the map projections with 
     Mars, errors or missing pieces. This create a VRT file that fixes any 
     of these problems.'''
-    subprocess.run(["gdal_translate", "-of", "VRT", "-b", str(band),
-                    fin, fout],
-                   check=True)
+    cmd = ["gdal_translate", "-of", "VRT", "-b", str(band), fin, fout]
+    run_cmd(cmd)
     f = gdal.Open(fout, gdal.GA_Update)
     p = str(f.GetProjectionRef())
     # The PolarSterographic can have the wrong scale factor of 0. This

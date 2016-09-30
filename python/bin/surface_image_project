@@ -73,7 +73,7 @@ class ProjectWrap(object):
         self.scale = scale
         self.grid_spacing = grid_spacing
     def __call__(self, i):
-        print "Doing %d" % i
+        print("Doing %d" % i)
         igc = self.igccol.image_ground_connection(i)
         if(self.scale is not None):
             igc = ScaleImageGroundConnection(igc, self.scale)
@@ -84,7 +84,7 @@ class ProjectWrap(object):
         f = VicarLiteRasterImage("%s%d.img" % (self.basefname, i), 1, 
                                  VicarLiteFile.UPDATE)
         copy_raster(t, f)
-        print "Done with %d" % i 
+        print("Done with %d" % i)
 
 func = ProjectWrap(args.basefname, igccol, mi, args.scale, args.grid_spacing)
 if(args.number_process > 1):

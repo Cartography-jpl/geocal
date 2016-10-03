@@ -361,6 +361,9 @@ AirMspiIgcCollection::AirMspiIgcCollection
     min_l1b1_line_.push_back(Original.min_l1b1_line_[i]);
     max_l1b1_line_.push_back(Original.max_l1b1_line_[i]);
   }
+  add_object(camera_);
+  add_object(gimbal_);
+  add_object(orbit_);
 }
 
 //-----------------------------------------------------------------------

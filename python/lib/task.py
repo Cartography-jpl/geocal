@@ -251,8 +251,10 @@ class TaskRunner(object):
     def run_next_tasks(self):
         task = self.next_task_to_process()
         # Make sure we have at least one task to process, or still
-        # running
-        if(task is None and self.number_task_running() == 0):
+        # running, or we haven't finished processing the queue of completed
+        # tasks
+        if(task is None and self.new_or_updated_task.empty() and
+           self.number_task_running() == 0):
             #raise RuntimeError("Pipeline can't be completed. Task_to_run: %s" % self.tasks_to_run)
             print("======= Pipeline can't be completed =======")
             raise RuntimeError("Pipeline can't be completed.")

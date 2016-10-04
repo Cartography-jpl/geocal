@@ -322,7 +322,7 @@ class TiePointCollect(object):
         if(diagnostic is not None):
             diagsum = diagnostic
         else:
-            diagsum = TiePointDiagnostic(res2[0].number_image)
+            diagsum = TiePointDiagnostic(self.number_image)
         for i, diag in res:
             if(diag is not None):
                 diagsum.add_tp_diag(diag)

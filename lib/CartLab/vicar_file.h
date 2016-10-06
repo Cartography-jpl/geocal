@@ -292,32 +292,14 @@ private:
 				/// unique for each file.
   void open_unit();
   void set_type(const std::string& Type);
-#ifdef USE_BOOST_SERIALIZATON
   VicarFile() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const
-  {
-    ar << BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    std::string fname = file_name();
-    ar << GEOCAL_NVP_(fname)
-       << GEOCAL_NVP_(access)
-       << GEOCAL_NVP_(force_area_pixel);
-  }
+  void serialize(Archive & ar, const unsigned int version);
   template<class Archive>
-  void load(Archive & ar, const unsigned int version)
-  {
-    unit_ = -1;
-    ar >> BOOST_SERIALIZATION_BASE_OBJECT_NVP(GenericObject);
-    ar >> GEOCAL_NVP_(fname)
-       >> GEOCAL_NVP_(access)
-       >> GEOCAL_NVP_(force_area_pixel);
-    unit_ = file_name_to_unit(fname_);
-    open_unit();
-  }
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
-#endif
-
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 
 //-----------------------------------------------------------------------
@@ -516,4 +498,7 @@ inline std::string VicarFile::label_string(const std::string& F,
 				  const std::string& Property) const
 { return label<std::string>(F, Property); }
 }
+
+GEOCAL_EXPORT_KEY(VicarFile);
+
 #endif

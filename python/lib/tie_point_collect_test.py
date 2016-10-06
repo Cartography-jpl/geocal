@@ -26,16 +26,17 @@ def test_tp():
     ic = igc1.image_coordinate(demin.surface_point(gaoi.ground_coordinate(550, 550)))
     ic.line = round(ic.line)
     ic.sample= round(ic.sample)
-    tp = tp_collect.tie_point(ic)
+    tp,diag = tp_collect.tie_point(ic)
     assert distance(tp.ground_location, Geodetic(36.7731575234,
                     -116.116743146, 1276.36490196)) < 0.1
 
 @require_serialize    
 def test_tie_point_grid():
     pool = Pool()
-    tpcol = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin,
+    tpcol, diag = tp_collect.tie_point_grid(10, 10, aoi = gaoi, dem = demin,
                                       pool = pool)
     print(tpcol)
+    diag.print_report()
     assert len(tpcol) == 95
 
 @require_serialize    
@@ -44,7 +45,7 @@ def test_pickle():
 
 @skip    
 def test_show_image():
-    tp = tp_collect.tie_point(ImageCoordinate(500, 500))
+    tp,diag = tp_collect.tie_point(ImageCoordinate(500, 500))
     tp.display(igc_coll)
     plt.show()
 

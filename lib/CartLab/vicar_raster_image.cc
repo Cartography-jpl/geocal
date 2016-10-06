@@ -1,8 +1,41 @@
 #include "vicar_raster_image.h"
 #include "vicar_lite_file.h"
 #include "geocal_internal_config.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void VicarRasterImage::save(Archive & ar, const unsigned int version) const
+{
+  unsigned int ntile = number_tile();
+  int tile_number_line = number_tile_line();
+  ar & GEOCAL_NVP2("number_tile", ntile)
+    & GEOCAL_NVP(tile_number_line);
+}
+
+template<class Archive>
+void VicarRasterImage::load(Archive & ar, const unsigned int version)
+{
+  unsigned int ntile;
+  int tile_number_line;
+  ar & GEOCAL_NVP2("number_tile", ntile)
+    & GEOCAL_NVP(tile_number_line);
+  initialize(band_id_, tile_number_line, ntile);
+}
+
+template<class Archive>
+void VicarRasterImage::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImage)
+    & GEOCAL_NVP_(vicar_file)
+    & GEOCAL_NVP_(band_id);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+GEOCAL_IMPLEMENT(VicarRasterImage);
+#endif
 
 //-----------------------------------------------------------------------
 /// Initialize the class, once vicar_file_ has been filled in.

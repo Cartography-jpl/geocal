@@ -529,12 +529,8 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
           self.label_set(key, v)
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.file_name,self.access,self.force_area_pixel)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 VicarFile._v_access = new_instancemethod(_vicar_file.VicarFile__v_access, None, VicarFile)
 VicarFile._v_force_area_pixel = new_instancemethod(_vicar_file.VicarFile__v_force_area_pixel, None, VicarFile)

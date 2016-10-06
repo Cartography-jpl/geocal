@@ -3,13 +3,13 @@ from __future__ import absolute_import
 from builtins import str
 from builtins import range
 from builtins import object
-from past.utils import old_div
 from geocal_swig import *
 import numpy as np
 import numpy.linalg as la
 import math
 from .lm_optimize import *
 from scipy.sparse import block_diag
+import logging
 
 class RayIntersect2(object):
     '''This class is used to find the intersection of two or more rays
@@ -52,14 +52,15 @@ class RayIntersect2(object):
             cnt +=1
         if(cnt < 1):
             return None
-        mean = old_div(mean, cnt)
+        mean = mean /  cnt
         if(cnt > 1):
-            var = old_div((var - (mean * mean) * cnt), (cnt - 1))
+            var = (var - (mean * mean) * cnt) / (cnt - 1)
         else:
             var = np.array([0.0,0,0])
         var = [max(v, max_dist * max_dist) for v in var]
         for v in var:
             if(v > self.max_ground_covariance):
+                logging.getLogger("geocal-python.ray_intersect").debug("Point with %d matches rejected by ray intersect, sqrt variance %f" % (cnt, math.sqrt(v)))
                 return None
         tie_point.ground_location = Ecr(mean[0], mean[1], mean[2])
         return tie_point
@@ -95,10 +96,8 @@ class RayIntersect3(object):
                 ic = self.tp.image_coordinate(i)
                 try:
                     icpred = self.igccol.image_coordinate(i, pt)
-                    res[j] = old_div((ic.line - icpred.line),
-                                     self.tp.line_sigma(i))
-                    res[j + 1] = old_div((ic.sample - icpred.sample),
-                                         self.tp.sample_sigma(i))
+                    res[j] = (ic.line - icpred.line) / self.tp.line_sigma(i)
+                    res[j + 1] = (ic.sample - icpred.sample) / self.tp.sample_sigma(i)
                 except RuntimeError as e:
                     if(str(e) != "ImageGroundConnectionFailed"):
                         raise e
@@ -116,10 +115,8 @@ class RayIntersect3(object):
                 ic = self.tp.image_coordinate(i)
                 try:
                     jac = self.igccol.image_coordinate_jac_cf(i, pt)
-                    res[j, :] = old_div(-jac[0,:],
-                                        self.tp.line_sigma(i))
-                    res[j + 1, :] = old_div(-jac[1,:],
-                                            self.tp.sample_sigma(i))
+                    res[j, :] = -jac[0,:] / self.tp.line_sigma(i)
+                    res[j + 1, :] = -jac[1,:] / self.tp.sample_sigma(i)
                 except RuntimeError as e:
                     if(str(e) != "ImageGroundConnectionFailed"):
                         raise e

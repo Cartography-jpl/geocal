@@ -32,6 +32,7 @@ libgeocal_la_SOURCES+= @srcimplementation@/smooth_image.cc
 geocalinc_HEADERS+= @srcimplementation@/raster_image_tiled_file.h
 libgeocal_la_SOURCES+= @srcimplementation@/raster_image_tiled_file.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_tiled_file.h
+libgeocal_la_SOURCES+= @srcimplementation@/dem_tiled_file.cc
 geocalinc_HEADERS+= @srcimplementation@/memory_dem.h
 libgeocal_la_SOURCES+= @srcimplementation@/map_reprojected_image.cc
 geocalinc_HEADERS+= @srcimplementation@/map_reprojected_image.h

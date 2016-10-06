@@ -28,8 +28,13 @@ public:
     int band = 0;
     boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, band, tmin, tmax, tt));
     boost::shared_ptr<Dem> dem(new SimpleDem());
-    boost::shared_ptr<RasterImage> img(new MemoryRasterImage(100,
+    boost::shared_ptr<MemoryRasterImage> img(new MemoryRasterImage(100,
 					   cam->number_sample(0)));
+    
+    int val = 0;
+    for(int i = 0; i < img->number_line(); ++i)
+      for(int j = 0; j < img->number_sample(); ++j, ++val)
+	img->write(i, j, val);
     igc.reset(new IpiImageGroundConnection(ipi, dem, img));
     double ulc_x = 50;
     double ulc_y = 60;
@@ -46,7 +51,7 @@ public:
     MapInfo mi2 = mi.scale(scl, scl);
     MapInfo mi3 = igc->cover(mi2);
     gimg.reset(new MemoryRasterImage(mi3));
-    int val = 0;
+    val = 0;
     for(int i = 0; i < gimg->number_line(); ++i)
       for(int j = 0; j < gimg->number_sample(); ++j, ++val)
 	gimg->write(i, j, val);

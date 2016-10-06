@@ -4,6 +4,7 @@
 #include "vicar_ogr.h"
 #endif
 #include "geocal_exception.h"
+#include "geocal_serialize_support.h"
 #include "simple_dem.h"
 #include <string>
 #include <boost/foreach.hpp>
@@ -20,6 +21,34 @@
 #include <iomanip>
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void VicarFile::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void VicarFile::load(Archive & ar, const unsigned int version)
+{
+  unit_ = -1;
+  unit_ = file_name_to_unit(fname_);
+  open_unit();
+}
+
+template<class Archive>
+void VicarFile::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(VicarFile);
+  ar & GEOCAL_NVP_(fname)
+    & GEOCAL_NVP_(force_area_pixel)
+    & GEOCAL_NVP_(access);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+GEOCAL_IMPLEMENT(VicarFile);
+#endif
 
 int VicarFile::instance = 1;
 

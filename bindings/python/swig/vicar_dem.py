@@ -235,12 +235,8 @@ class VicarDem(geocal_swig.dem_tiled_file.DemTiledFile):
         return self._v_vicar_file()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.vicar_file.file_name,self.outside_dem_is_error,self.number_line_per_tile,self.number_tile,self.datum)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _vicar_dem.delete_VicarDem
 VicarDem._v_vicar_file = new_instancemethod(_vicar_dem.VicarDem__v_vicar_file, None, VicarDem)

@@ -155,27 +155,22 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+  if(!have_serialize_supported())
+    return;
   if(!VicarFile::vicar_available())
     return;
-#ifdef HAVE_BOOST_SERIALIZATON
-  std::ostringstream os;
-  boost::archive::xml_oarchive oa(os);
-
   std::string fname = test_data_dir() + "vicar.img";
-  boost::shared_ptr<RasterImage> img(new VicarRasterImage(fname));
-  oa << GEOCAL_NVP(img);
+  boost::shared_ptr<VicarRasterImage> f(new VicarRasterImage(fname));
+  std::string d = serialize_write_string(f);
   if(false)
-    std::cerr << os.str();
-  
-  std::istringstream is(os.str());
-  boost::archive::xml_iarchive ia(is);
-  boost::shared_ptr<RasterImage> imgr;
-  ia >> GEOCAL_NVP(imgr);
-  BOOST_CHECK_EQUAL(imgr->number_line(), 10);
-  BOOST_CHECK_EQUAL(imgr->number_sample(), 10);
-  BOOST_CHECK_EQUAL(imgr->number_tile_line(), 10);
-  BOOST_CHECK_EQUAL(imgr->number_tile_sample(), 10);
-#endif
+    // Can dump to screen, if we want to see the text
+    std::cerr << d;
+  boost::shared_ptr<VicarRasterImage> fr =
+    serialize_read_string<VicarRasterImage>(d);
+  BOOST_CHECK_EQUAL(fr->number_line(), 10);
+  BOOST_CHECK_EQUAL(fr->number_sample(), 10);
+  BOOST_CHECK_EQUAL(fr->number_tile_line(), 10);
+  BOOST_CHECK_EQUAL(fr->number_tile_sample(), 10);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

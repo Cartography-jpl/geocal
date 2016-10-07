@@ -23,7 +23,8 @@ h5py
 sphinx
 pytest
 pytest-xdist
-ipython[all]
+ipython
+jupyter
 scikit-umfpack
 seaborn
 pandas

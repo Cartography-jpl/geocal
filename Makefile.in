@@ -2201,7 +2201,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/vicar_wrap_test.py \
 	@srcpythonlib@/with_parameter_test.py \
 	@srcpythonlib@/world_view2_reflectance_test.py @docpythonsrc@ \
-	@testsupportsrc@ $(am__empty)
+	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
+	@testsupportsrc@/print_tae_path.pdf \
+	@testsupportsrc@/test_support.py \
+	@testsupportsrc@/vicar_test_support.py @testsupportsrc@/README
 pkgconfig_DATA = 
 
 # Allow fils to be include in other directories

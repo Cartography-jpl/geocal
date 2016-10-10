@@ -114,6 +114,12 @@ Options:
        Tolerance we use when rejected matched points as blunders. 
        [default: 1.5]
 
+  --use-projection=f
+       The default is to leave the image in its original projection, so
+       we try to minimize what we do with the image. However it can be
+       useful to bring everything to a common projection. This option says
+       to use the projection found in this file.
+
   --use-ref-image-projection
        The default is to leave the image in its original projection, so
        we try to minimize what we do with the image. However it can be
@@ -296,11 +302,19 @@ cimg_res2 = "%s_corr_%s.img" % (args.image_base_name,
 
 fix_projection(args.ref_image, refimg_fixed, args.band_ref)
 fix_projection(args.image, img_fixed, args.band_image)
+if(args.use_projection):
+    use_projection_fixed = "%s_proj.vrt" % (args.image_base_name)
+    fix_projection(args.use_projection, use_projection_fixed, 1)
 if(not check_intersection(refimg_fixed, img_fixed)):
     raise RuntimeError("The two images have no area of intersection")
 if(args.use_ref_image_projection):
     img_fixed_reproj = "%s_reproj.img" % (args.image_base_name)
     resample_proj(img_fixed, refimg_fixed, img_fixed_reproj, fit_fref=False)
+    img_fixed = img_fixed_reproj
+if(args.use_projection):
+    img_fixed_reproj = "%s_reproj.img" % (args.image_base_name)
+    resample_proj(img_fixed, use_projection_fixed, img_fixed_reproj,
+                  fit_fref=False)
     img_fixed = img_fixed_reproj
 resample_proj(refimg_fixed, img_fixed, refimg_res1)
 if(args.ref_image_resolution_name != args.image_resolution_name):

@@ -6270,7 +6270,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"VFunctorWithDerivative_df", _wrap_VFunctorWithDerivative_df, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual blitz::Array<double, 2> GeoCal::VFunctorWithDerivative::df(const blitz::Array< double, 1 > &X) const =0\n"
+		"virtual blitz::Array<double, 2> GeoCal::VFunctorWithDerivative::df(const blitz::Array< double, 1 > &X) const  =0\n"
 		"Return jacobian. J_ij = Df_i / dx_j. \n"
 		""},
 	 { (char *)"VFunctorWithDerivative_f_and_df", _wrap_VFunctorWithDerivative_f_and_df, METH_VARARGS, (char *)"\n"

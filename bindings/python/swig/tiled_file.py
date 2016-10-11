@@ -263,7 +263,7 @@ class TiledFileBase_2(object):
     def get_int(self, Index):
         """
 
-        virtual int GeoCal::TiledFileBase< D >::get_int(const boost::array< index, D > &Index) const =0
+        virtual int GeoCal::TiledFileBase< D >::get_int(const boost::array< index, D > &Index) const  =0
         Get data an convert to integer. 
         """
         return _tiled_file.TiledFileBase_2_get_int(self, Index)
@@ -272,7 +272,7 @@ class TiledFileBase_2(object):
     def get_double(self, Index):
         """
 
-        virtual double GeoCal::TiledFileBase< D >::get_double(const boost::array< index, D > &Index) const =0
+        virtual double GeoCal::TiledFileBase< D >::get_double(const boost::array< index, D > &Index) const  =0
         Get data an convert to double. 
         """
         return _tiled_file.TiledFileBase_2_get_double(self, Index)
@@ -282,7 +282,7 @@ class TiledFileBase_2(object):
         """
 
         virtual void GeoCal::TiledFileBase< D >::read_int(const boost::array< index, D > &Min_index, const boost::array< index,
-        D > &Max_index, int *Res) const =0
+        D > &Max_index, int *Res) const  =0
         Read a subset of the data, and convert to int. 
         """
         return _tiled_file.TiledFileBase_2_read_int(self, Min_index, Max_index, Res)
@@ -292,7 +292,7 @@ class TiledFileBase_2(object):
         """
 
         virtual void GeoCal::TiledFileBase< D >::read_double(const boost::array< index, D > &Min_index, const boost::array< index,
-        D > &Max_index, double *Res) const =0
+        D > &Max_index, double *Res) const  =0
         Read a subset of the data, and convert to double. 
         """
         return _tiled_file.TiledFileBase_2_read_double(self, Min_index, Max_index, Res)

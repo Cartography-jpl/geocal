@@ -9781,7 +9781,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"InterestPoint_swiginit", InterestPoint_swiginit, METH_VARARGS, NULL},
 	 { (char *)"FeatureDetector_interest_point_detect", _wrap_FeatureDetector_interest_point_detect, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual std::vector<InterestPoint> GeoCal::FeatureDetector::interest_point_detect(const RasterImage &Img) const =0\n"
+		"virtual std::vector<InterestPoint> GeoCal::FeatureDetector::interest_point_detect(const RasterImage &Img) const  =0\n"
 		"Go through a RasterImage, and return a list of InterstPoints for it.\n"
 		"\n"
 		"The list isn't in any particular order, but note that InterstPoints\n"

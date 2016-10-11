@@ -207,7 +207,7 @@ class ImageToImageMatch(geocal_swig.generic_object.GenericObject):
         """
 
         virtual void GeoCal::ImageToImageMatch::match(const ImageCoordinate &Ic1, ImageCoordinate &Ic2, double &Line_sigma,
-        double &Sample_sigma, bool &Success, int *Diagnostic=0) const =0
+        double &Sample_sigma, bool &Success, int *Diagnostic=0) const  =0
         Match point Ic1 in the first image with the second image.
 
         We return the location in the second image along with the uncertainty

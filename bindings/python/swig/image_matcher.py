@@ -231,7 +231,7 @@ class ImageMatcher(geocal_swig.generic_object.GenericObject):
         &New, const ImageMask &New_mask, const ImageCoordinate &Ref_loc, const
         ImageCoordinate &New_guess, ImageCoordinate &New_res, double
         &Line_sigma, double &Sample_sigma, bool &Success, int *Diagnostic=0)
-        const =0
+        const  =0
         Match a point found in the reference image with a point in the new
         image.
 

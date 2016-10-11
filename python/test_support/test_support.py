@@ -67,6 +67,9 @@ require_carto = pytest.mark.skipif(not hasattr(geocal_swig, "EciTodBurl"),
 require_afids_data = pytest.mark.skipif(not "AFIDS_VDEV_DATA" in os.environ,
     reason="need to have AFIDS data available to run.")
 
+require_srtm_data = pytest.mark.skipif(not "ELEV_ROOT" in os.environ or not os.path.exists(os.environ["ELEV_ROOT"]),
+    reason="need to have SRTM data available to run.")
+
 # Marker that test requires the geocal test data in /data/geocal_test_data
 require_geocal_test_data = pytest.mark.skipif(not os.path.exists(geocal_test_igc),
     reason="need to have geocal test data (/data/geocal_test_data) available to run.")

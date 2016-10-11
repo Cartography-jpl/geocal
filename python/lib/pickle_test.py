@@ -222,6 +222,7 @@ def test_vicar_raster_image():
 
 @require_serialize    
 @require_afids_data
+@require_srtm_data
 @require_vicar
 def test_srtm():
     dem = SrtmDem()

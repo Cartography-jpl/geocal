@@ -1,0 +1,4 @@
+if( -e @geocalsupportdir@/setup_afids_support.csh ) then
+    source @geocalsupportdir@/setup_afids_support.csh
+endif
+source @prefix@//etc/afids/setup_afids_python.csh

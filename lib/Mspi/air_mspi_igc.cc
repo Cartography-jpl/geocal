@@ -48,12 +48,12 @@ AirMspiIgc::AirMspiIgc
 {
   MspiConfigFile c(Master_config_file);
   // Get camera set up
-  std::string fname = c.value<std::string>("camera_model_config");
+  std::string fname = c.value<std::string>("initial_camera_model");
   if(fname[0] != '/')
     fname = Base_directory + "/" + fname;
   std::string extra_config = "";
-  if(c.have_key("extra_camera_model_config")) {
-    extra_config = c.value<std::string>("extra_camera_model_config");
+  if(c.have_key("extra_initial_camera_model")) {
+    extra_config = c.value<std::string>("extra_initial_camera_model");
     if(extra_config[0] != '/')
       extra_config = Base_directory + "/" + extra_config;
   }

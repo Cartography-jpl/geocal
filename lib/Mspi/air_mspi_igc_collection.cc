@@ -145,12 +145,12 @@ AirMspiIgcCollection::AirMspiIgcCollection
   MspiConfigFile c(Master_config_file);
 
   // Get camera set up
-  std::string fname = c.value<std::string>("camera_model_config");
+  std::string fname = c.value<std::string>("initial_camera_model");
   if(fname[0] != '/')
     fname = base_directory + "/" + fname;
   std::string extra_config = "";
-  if(c.have_key("extra_camera_model_config")) {
-    extra_config = c.value<std::string>("extra_camera_model_config");
+  if(c.have_key("extra_initial_camera_model")) {
+    extra_config = c.value<std::string>("extra_initial_camera_model");
     if(extra_config[0] != '/')
       extra_config = base_directory + "/" + extra_config;
   }
@@ -361,6 +361,9 @@ AirMspiIgcCollection::AirMspiIgcCollection
     min_l1b1_line_.push_back(Original.min_l1b1_line_[i]);
     max_l1b1_line_.push_back(Original.max_l1b1_line_[i]);
   }
+  add_object(camera_);
+  add_object(gimbal_);
+  add_object(orbit_);
 }
 
 //-----------------------------------------------------------------------

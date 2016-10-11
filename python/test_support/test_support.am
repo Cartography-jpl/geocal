@@ -1,1 +1,7 @@
-EXTRA_DIST+= @testsupportsrc@
+EXTRA_DIST+= @testsupportsrc@/__init__.py
+EXTRA_DIST+= @testsupportsrc@/print_tae_path
+EXTRA_DIST+= @testsupportsrc@/print_tae_path.pdf
+EXTRA_DIST+= @testsupportsrc@/test_support.py
+EXTRA_DIST+= @testsupportsrc@/vicar_test_support.py
+EXTRA_DIST+= @testsupportsrc@/README
+

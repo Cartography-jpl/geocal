@@ -37,6 +37,30 @@ Options:
   -h --help         
        Print this message
 
+  --autofit=d
+       Set the FITMIN threshold automatically using the first n correlations.
+       [default: 14]
+
+  --band-ref=d
+       The band number to use for the reference image (if multiple bands 
+       present) [default: 1]
+
+  --band-image=d
+       The band number to use for the image we are correcting (if multiple 
+       bands present) [default: 1]
+
+  --fftsize=d
+       FFT window size. Default should generally work, but sometimes you
+       have a narrow overlap and need to settle for a smaller window so 
+       you have enough imagery to match (e.g., very different matching size
+       such as viking 232 meter data to 50 meter HRSC data).
+       [default: 256]
+
+  --fftgrid=s
+       How many FFT points to match, in line x sample order. Note that to
+       pass this you need to use quotes, e.g., --fftgrid="(42,42)".
+       [default: (42, 42)]
+
   --hirise-correction
        Hirise imagery in equirectangular appears to have the 
        latitude_of_origin and standard_parallel_1 swapped, at least for
@@ -45,32 +69,98 @@ Options:
        identify and correct this. If this is left off, we don't do this
        correction.
 
+  --magnify=f
+       We initially magnify the area we try matching on, so we search in
+       a larger area to get the initial match points. This gives that
+       factor. [default: 4.0]
+
+   --magmin=f
+       Once we have a few points matched, we shrink the magnification factor
+       we use on the window size to this value. [default: 2.0]
+
+  --nah=d
+       Number of grid cells in the sample direction to use warping final image.
+       [default: 1000]
+
+  --nav=d
+       Number of grid cells in the line direction to use warping final image.
+       [default: 1000]
+
+  --polyfit=s
+        When warping the image to the reference image to correct it, we 
+        can either use triangulation on each matched points, or we can
+        constrain the mapping to a LINEAR, KEYSTONE, QUAD, or CUBIC 
+        polynomial fit. See the VICAR Proc "tieconv" for more details on
+        this. [default: ]
+
+  --redo=d
+       At the end of processing, this number of points will be redone.
+       [default: 36]   
+
+  --seed=d
+       Seed number to use when selecting points to match. Normally you don't
+       need to modify this, but if you get bad accuracy results when doing
+       a correction you can try selecting a different seed to a different
+       set of match points are selected. [default: 562]
+   
+  --thr-res=f
+       Prevent offset correlations further than this value from the 
+       predicted location from entering into the model fit of the 
+       reference to image we are correcting. This is to prevent gross 
+       blunders. Note that this is in the resolution of the reference 
+       image (which is typically coarser). [default: 10.0]
+
+  --toler=f
+       Tolerance we use when rejected matched points as blunders. 
+       [default: 1.5]
+
+  --use-projection=f
+       The default is to leave the image in its original projection, so
+       we try to minimize what we do with the image. However it can be
+       useful to bring everything to a common projection. This option says
+       to use the projection found in this file.
+
+  --use-ref-image-projection
+       The default is to leave the image in its original projection, so
+       we try to minimize what we do with the image. However it can be
+       useful to bring everything to a common projection. This option says
+       to use the reference image projection rather than image projection.
+
   -v --version      
        Print program version
 '''
 
 args = docopt_simple(usage, version=version)
 
+# Small wrapper around running command, so we can print this to screen
+def run_cmd(cmd):
+    print("Executing command:")
+    print("  " + " ".join(cmd))
+    sys.stdout.flush()
+    subprocess.run(cmd, check=True)
+    
 # We probably want to add a little bit of padding, but skip that for now.
 
-def resample_proj(fin, fref, fout, resize=False):
+def resample_proj(fin, fref, fout, resize=False, fit_fref = True):
     '''Project fin to same projection as fref. If resize if False, 
     leave fin in whatever its original resolution is. If resize it 
     True, also resize to the same resolution as fref.'''
     d = gdal.Open(fref, gdal.GA_ReadOnly)
     g = d.GetGeoTransform()
-    cmd= ["gdalwarp", "-of", "VICAR"]
+    # Not 100% sure that all data should be Int16, but for now we assume this
+    cmd= ["gdalwarp", "-of", "VICAR", "-ot", "Int16"]
     x_size, y_size = d.RasterXSize, d.RasterYSize
     min_x, max_y, pix_size_x, pix_size_y = g[0], g[3], g[1], g[5]
     max_x = min_x + (x_size * pix_size_x)
     min_y = max_y + (y_size * pix_size_y)
-    cmd.extend(["-te", repr(min_x), repr(min_y), repr(max_x), repr(max_y)])
+    if(fit_fref):
+        cmd.extend(["-te", repr(min_x), repr(min_y), repr(max_x), repr(max_y)])
     if(resize):
-        cmd.extend(["-r", "bilinear"])
         cmd.extend(["-tr", repr(pix_size_x), repr(pix_size_y)])
         # Note that we shouldn't have wm larger than 2GB because we get
         # an internal error in gdal with an integer overflow
-        cmd.extend(["-multi", "-wo", "NUM_THREADS=20", "-wm", "2000"])
+    cmd.extend(["-r", "bilinear"])
+    cmd.extend(["-multi", "-wo", "NUM_THREADS=20", "-wm", "2000"])
     with tempfile.NamedTemporaryFile() as f:
         f.write(d.GetProjection().encode("utf-8"))
         f.flush()
@@ -79,7 +169,7 @@ def resample_proj(fin, fref, fout, resize=False):
         cmd.append("-overwrite")
         cmd.append(fin)
         cmd.append(fout)
-        subprocess.run(cmd, check=True)
+        run_cmd(cmd)
 
 def check_same_projection(f1, f2):
     '''Check  that the 2 images have identical projection and resolution.'''
@@ -104,24 +194,32 @@ def check_intersection(f1, f2):
 
 def import_file(fin, fout):
     '''Import an image into vicar format, leaving in original projection.'''
-    subprocess.run(["gdal_translate", "-of", "VICAR", fin, fout], check=True)
+    # Not 100% sure that all data should be Int16, but for now we assume this
+    cmd = ["gdal_translate", "-of", "VICAR", "-ot", "Int16", fin, fout]
+    run_cmd(cmd)
 
 # Not sure about triangulation. Maybe try quad
 def gtpwarp(fin, fref, fref_res, fout):
     '''gtpwarp, using Tom's usual parameters.'''
-    subprocess.run(["vicarb", "gtpwarp", fin, fout, fref, fref_res,
-                    "nav=1000", "nah=1000",
-                    "fftgrid=(42,42)",  "fftsize=256", "magnify=4.0",
-                    "magmin=2.0",
-                    "toler=1.5", 
-                    'polyfit=""',  
+    cmd = ["vicarb", "gtpwarp", fin, fout, fref, fref_res,
+                    "nav=%d" % args.nav, "nah=%d" % args.nah,
+                    "fftgrid=%s" % args.fftgrid,
+                    "fftsize=%d" % args.fftsize,
+                    "magnify=%f" % args.magnify,
+                    "magmin=%f" % args.magmin,
+                    "toler=%f" % args.toler, 
+                    "polyfit=\"%s\"" % args.polyfit,
+                    "autofit=%d" % args.autofit,
                     'ref_lowres=y',
-                    "redo=36", "ffthalf=2",
-                    "seed=562", 
+                    "redo=%d" % args.redo,
+                    "ffthalf=2",
+                    "seed=%d" % args.seed, 
                     "accoff=y", "'bilin", 
                     "'coverref",
+                    "thr_res=%f" % args.thr_res,
                     "ref_res=%s" % fref_res,
-                    ], check=True)
+                    ]
+    run_cmd(cmd)
     # For some reason, gtpwarp doesn't set all the geotiff metadata. Not
     # sure why, we may try fixing this at some point. But for now, just
     # update this. Note this is pretty much the same as a gtgenup call, just
@@ -133,17 +231,18 @@ def gtpwarp(fin, fref, fref_res, fout):
 def accck(fin,fref):
     '''Run accuracy check. We assume stuff in is in the same projection
     (e.g., all geodetic)'''
-    subprocess.run(["vicarb", "accck", fin, fref, "wmask=n",
-                    "fftsize=256", "magnif=2", "remap=n", "echo=no",
-                    "zerolim=10.0", "zerolim2=10.0"],
-                   check=True)
+    cmd = ["vicarb", "accck", fin, fref, "wmask=n",
+           "fftsize=%d" % args.fftsize,
+           "magnif=%f" % args.magmin, "remap=n", "echo=no",
+           "zerolim=10.0", "zerolim2=10.0"]
+    run_cmd(cmd)
 
-def fix_projection(fin, fout):
+def fix_projection(fin, fout, band):
     '''There are potential issues with some of the map projections with 
     Mars, errors or missing pieces. This create a VRT file that fixes any 
     of these problems.'''
-    subprocess.run(["gdal_translate", "-of", "VRT", fin, fout],
-                   check=True)
+    cmd = ["gdal_translate", "-of", "VRT", "-b", str(band), fin, fout]
+    run_cmd(cmd)
     f = gdal.Open(fout, gdal.GA_Update)
     p = str(f.GetProjectionRef())
     # The PolarSterographic can have the wrong scale factor of 0. This
@@ -201,10 +300,22 @@ cimg_res1 = "%s_corr_%s.img" % (args.image_base_name,
 cimg_res2 = "%s_corr_%s.img" % (args.image_base_name, 
                                 args.image_resolution_name)
 
-fix_projection(args.ref_image, refimg_fixed)
-fix_projection(args.image, img_fixed)
+fix_projection(args.ref_image, refimg_fixed, args.band_ref)
+fix_projection(args.image, img_fixed, args.band_image)
+if(args.use_projection):
+    use_projection_fixed = "%s_proj.vrt" % (args.image_base_name)
+    fix_projection(args.use_projection, use_projection_fixed, 1)
 if(not check_intersection(refimg_fixed, img_fixed)):
     raise RuntimeError("The two images have no area of intersection")
+if(args.use_ref_image_projection):
+    img_fixed_reproj = "%s_reproj.img" % (args.image_base_name)
+    resample_proj(img_fixed, refimg_fixed, img_fixed_reproj, fit_fref=False)
+    img_fixed = img_fixed_reproj
+if(args.use_projection):
+    img_fixed_reproj = "%s_reproj.img" % (args.image_base_name)
+    resample_proj(img_fixed, use_projection_fixed, img_fixed_reproj,
+                  fit_fref=False)
+    img_fixed = img_fixed_reproj
 resample_proj(refimg_fixed, img_fixed, refimg_res1)
 if(args.ref_image_resolution_name != args.image_resolution_name):
     resample_proj(refimg_res1, img_fixed, refimg_res2, resize=True)

@@ -86,8 +86,10 @@ PKG_PROG_PKG_CONFIG
 
 if test "x$THIRDPARTY" = x -o "$THIRDPARTY" = "build" -o "$THIRDPARTY" = "build_needed"; then
   pkg_extra_path=\${prefix}/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
+  geocal_support_path=${prefix}
 else
   pkg_extra_path=\${prefix}/lib/pkgconfig:$THIRDPARTY/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
+  geocal_support_path=$THIRDPARTY
 fi
 if test "x$PKG_CONFIG_PATH" = x; then
   PKG_CONFIG_PATH=$pkg_extra_path
@@ -97,5 +99,5 @@ fi
 export PKG_CONFIG_PATH
 
 AC_SUBST([pkgconfigdir], [${libdir}/pkgconfig])
-
+AC_SUBST([geocalsupportdir], [$geocal_support_path])
 ])

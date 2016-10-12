@@ -202,7 +202,7 @@ class VFunctorWithDerivative(geocal_swig.functor.VFunctor):
     def df(self, X):
         """
 
-        virtual blitz::Array<double, 2> GeoCal::VFunctorWithDerivative::df(const blitz::Array< double, 1 > &X) const =0
+        virtual blitz::Array<double, 2> GeoCal::VFunctorWithDerivative::df(const blitz::Array< double, 1 > &X) const  =0
         Return jacobian. J_ij = Df_i / dx_j. 
         """
         return _vfunctor_with_derivative.VFunctorWithDerivative_df(self, X)

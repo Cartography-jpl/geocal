@@ -9041,7 +9041,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"GroundMask_mask", _wrap_GroundMask_mask, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual bool GeoCal::GroundMask::mask(const GroundCoordinate &Gc) const =0\n"
+		"virtual bool GeoCal::GroundMask::mask(const GroundCoordinate &Gc) const  =0\n"
 		"Indicate if a particular point is masked.\n"
 		"\n"
 		"If true, the point is masked and should not be used in processing\n"
@@ -9049,7 +9049,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GroundMask_region_masked", _wrap_GroundMask_region_masked, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual bool GeoCal::GroundMask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const =0\n"
+		"virtual bool GeoCal::GroundMask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const  =0\n"
 		"Indicated if a region is all masked or not.\n"
 		"\n"
 		"See the discussion in the comments of GroundMask for detailed\n"

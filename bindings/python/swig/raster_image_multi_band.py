@@ -202,7 +202,7 @@ class RasterImageMultiBand(geocal_swig.generic_object.GenericObject):
     def _v_number_band(self):
         """
 
-        virtual int GeoCal::RasterImageMultiBand::number_band() const =0
+        virtual int GeoCal::RasterImageMultiBand::number_band() const  =0
         Return number of bands. 
         """
         return _raster_image_multi_band.RasterImageMultiBand__v_number_band(self)
@@ -216,7 +216,7 @@ class RasterImageMultiBand(geocal_swig.generic_object.GenericObject):
     def raster_image(self, band):
         """
 
-        virtual boost::shared_ptr<RasterImage> GeoCal::RasterImageMultiBand::raster_image_ptr(int band) const =0
+        virtual boost::shared_ptr<RasterImage> GeoCal::RasterImageMultiBand::raster_image_ptr(int band) const  =0
 
         """
         return _raster_image_multi_band.RasterImageMultiBand_raster_image(self, band)

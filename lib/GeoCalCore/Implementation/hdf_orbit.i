@@ -22,3 +22,5 @@ public:
 
 %geocal_shared_ptr(GeoCal::HdfOrbit<GeoCal::EciTod, GeoCal::TimeAcsCreator>);
 %template(HdfOrbit_EciTod_TimeAcs) GeoCal::HdfOrbit<GeoCal::EciTod, GeoCal::TimeAcsCreator>;
+%geocal_shared_ptr(GeoCal::HdfOrbit<GeoCal::Eci, GeoCal::TimePgsCreator>);
+%template(HdfOrbit_Eci_TimePgs) GeoCal::HdfOrbit<GeoCal::Eci, GeoCal::TimePgsCreator>;

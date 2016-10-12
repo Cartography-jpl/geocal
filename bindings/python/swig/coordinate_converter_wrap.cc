@@ -6812,7 +6812,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"CoordinateConverter_convert_from_coordinate", _wrap_CoordinateConverter_convert_from_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::CoordinateConverter::convert_from_coordinate(double X, double Y, double Height=0) const =0\n"
+		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::CoordinateConverter::convert_from_coordinate(double X, double Y, double Height=0) const  =0\n"
 		"This converts from a particular coordinate system, returning a ground\n"
 		"coordinate for the given coordinates.\n"
 		"\n"
@@ -6821,7 +6821,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CoordinateConverter_convert_to_coordinate", _wrap_CoordinateConverter_convert_to_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Height) const =0\n"
+		"virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Height) const  =0\n"
 		"Specialization that converts from Geodetic.\n"
 		"\n"
 		"Because much of our data is in Geodetic coordinates this is an\n"
@@ -6829,7 +6829,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CoordinateConverter_is_same", _wrap_CoordinateConverter_is_same, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual bool GeoCal::CoordinateConverter::is_same(const CoordinateConverter &Conv) const =0\n"
+		"virtual bool GeoCal::CoordinateConverter::is_same(const CoordinateConverter &Conv) const  =0\n"
 		"Test if two CoordinateConverters are the same coordinate system. \n"
 		""},
 	 { (char *)"CoordinateConverter___str__", (PyCFunction)_wrap_CoordinateConverter___str__, METH_O, NULL},

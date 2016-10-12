@@ -197,7 +197,9 @@ inline boost::shared_ptr<QuaternionOrbitData> HdfOrbit<PositionType, TimeCreator
 }
 
 typedef HdfOrbit<EciTod, TimeAcsCreator> HdfOrbit_EciTod_TimeAcs;
+typedef HdfOrbit<Eci, TimePgsCreator> HdfOrbit_Eci_TimePgs;
 }
 
 GEOCAL_EXPORT_KEY(HdfOrbit_EciTod_TimeAcs);
+GEOCAL_EXPORT_KEY(HdfOrbit_Eci_TimePgs);
 #endif

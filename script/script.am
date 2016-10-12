@@ -1,5 +1,5 @@
 if BUILD_AFIDS
 else
-installafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
+installafidspython_DATA = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
 endif
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh

@@ -9071,7 +9071,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"ImageMask_mask", _wrap_ImageMask_mask, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual bool GeoCal::ImageMask::mask(int Line, int Sample) const =0\n"
+		"virtual bool GeoCal::ImageMask::mask(int Line, int Sample) const  =0\n"
 		"Indicate if a particular point is masked.\n"
 		"\n"
 		"If true, the point is masked and should not be used in processing\n"

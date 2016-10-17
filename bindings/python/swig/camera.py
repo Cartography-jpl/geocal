@@ -255,7 +255,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def _v_number_band(self):
         """
 
-        virtual int GeoCal::Camera::number_band() const  =0
+        virtual int GeoCal::Camera::number_band() const =0
         Number of bands in camera. 
         """
         return _camera.Camera__v_number_band(self)
@@ -269,7 +269,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def number_line(self, Band):
         """
 
-        virtual int GeoCal::Camera::number_line(int Band) const  =0
+        virtual int GeoCal::Camera::number_line(int Band) const =0
         Number of lines in camera for given band. 
         """
         return _camera.Camera_number_line(self, Band)
@@ -278,7 +278,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def number_sample(self, Band):
         """
 
-        virtual int GeoCal::Camera::number_sample(int Band) const  =0
+        virtual int GeoCal::Camera::number_sample(int Band) const =0
         Number of samples in camera for given band. 
         """
         return _camera.Camera_number_sample(self, Band)
@@ -287,7 +287,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def frame_coordinate(self, Sl, Band):
         """
 
-        virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const  =0
+        virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const =0
         This converts from ScLookVector to FrameCoordinate for a given band.
 
         Note that the FrameCoordinate may be outside of the range (0,
@@ -301,7 +301,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def frame_coordinate_with_derivative(self, Sl, Band):
         """
 
-        virtual FrameCoordinateWithDerivative GeoCal::Camera::frame_coordinate_with_derivative(const ScLookVectorWithDerivative &Sl, int Band) const  =0
+        virtual FrameCoordinateWithDerivative GeoCal::Camera::frame_coordinate_with_derivative(const ScLookVectorWithDerivative &Sl, int Band) const =0
         Variation of frame_coordinate that both propagate derivative
         information in the ScLookVector and adds in any derivatives from the
         parameters. 
@@ -331,7 +331,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def sc_look_vector(self, F, Band):
         """
 
-        virtual ScLookVector GeoCal::Camera::sc_look_vector(const FrameCoordinate &F, int Band) const  =0
+        virtual ScLookVector GeoCal::Camera::sc_look_vector(const FrameCoordinate &F, int Band) const =0
         Convert from FrameCoordinate to ScLookVector.
 
         It is perfectly allowable for F.line to be outside the range (0,
@@ -345,7 +345,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def sc_look_vector_with_derivative(self, F, Band):
         """
 
-        virtual ScLookVectorWithDerivative GeoCal::Camera::sc_look_vector_with_derivative(const FrameCoordinateWithDerivative &F, int Band) const  =0
+        virtual ScLookVectorWithDerivative GeoCal::Camera::sc_look_vector_with_derivative(const FrameCoordinateWithDerivative &F, int Band) const =0
         Variation of sc_look_vector that both propagate derivative information
         in the FrameCoordinate and adds in any derivatives from the
         parameters. 

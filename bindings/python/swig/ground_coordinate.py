@@ -282,7 +282,7 @@ class GroundCoordinate(geocal_swig.generic_object.GenericObject):
     def convert_to_cf(self):
         """
 
-        virtual boost::shared_ptr<CartesianFixed> GeoCal::GroundCoordinate::convert_to_cf() const  =0
+        virtual boost::shared_ptr<CartesianFixed> GeoCal::GroundCoordinate::convert_to_cf() const =0
         Convert to CartesianFixed. 
         """
         return _ground_coordinate.GroundCoordinate_convert_to_cf(self)
@@ -316,7 +316,7 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
     def convert_to_cf(self, T):
         """
 
-        virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianInertial::convert_to_cf(const Time &T) const  =0
+        virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianInertial::convert_to_cf(const Time &T) const =0
         Convert to a CartesianFixed. 
         """
         return _ground_coordinate.CartesianInertial_convert_to_cf(self, T)
@@ -325,7 +325,7 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
     def ci_to_cf(self, T, Ci_to_cf):
         """
 
-        virtual void GeoCal::CartesianInertial::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const  =0
+        virtual void GeoCal::CartesianInertial::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0
         Calculate matrix that can be used to convert CartesianFixed to
         CartesianInertial at the given Time.
 
@@ -338,7 +338,7 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
     def ci_to_cf_with_vel(self, T, Ci_to_cf):
         """
 
-        virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const  =0
+        virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0
         Calculate matrix that can be used to convert CartesianInertial to
         CartesianFixed at the given Time, including velocity.
 
@@ -361,7 +361,7 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
     def create(self, P):
         """
 
-        virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianInertial::create(boost::array< double, 3 > P) const  =0
+        virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianInertial::create(boost::array< double, 3 > P) const =0
         Create an instance of whatever type of CartesianInertial this is. 
         """
         return _ground_coordinate.CartesianInertial_create(self, P)
@@ -371,7 +371,7 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
         """
 
         virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianInertial::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double
-        Height_reference_surface=0) const  =0
+        Height_reference_surface=0) const =0
         Find the intersection with the surface at the given height starting at
         this point and looking in the given direction.
 
@@ -429,7 +429,7 @@ class CartesianFixed(GroundCoordinate):
     def convert_to_ci(self, T):
         """
 
-        virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianFixed::convert_to_ci(const Time &T) const  =0
+        virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianFixed::convert_to_ci(const Time &T) const =0
         Convert to CartesianInertial. 
         """
         return _ground_coordinate.CartesianFixed_convert_to_ci(self, T)
@@ -438,7 +438,7 @@ class CartesianFixed(GroundCoordinate):
     def naif_code(self):
         """
 
-        virtual int GeoCal::CartesianFixed::naif_code() const  =0
+        virtual int GeoCal::CartesianFixed::naif_code() const =0
         Naif code for planet. 
         """
         return _ground_coordinate.CartesianFixed_naif_code(self)
@@ -447,7 +447,7 @@ class CartesianFixed(GroundCoordinate):
     def create(self, P):
         """
 
-        virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianFixed::create(boost::array< double, 3 > P) const  =0
+        virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianFixed::create(boost::array< double, 3 > P) const =0
         Create an instance of whatever type of CartesianFixed this is. 
         """
         return _ground_coordinate.CartesianFixed_create(self, P)
@@ -456,7 +456,7 @@ class CartesianFixed(GroundCoordinate):
     def ci_to_cf(self, T, Ci_to_cf):
         """
 
-        virtual void GeoCal::CartesianFixed::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const  =0
+        virtual void GeoCal::CartesianFixed::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0
         Calculate matrix that can be used to convert CartesianFixed to
         CartesianInertial at the given Time.
 
@@ -469,7 +469,7 @@ class CartesianFixed(GroundCoordinate):
     def cf_to_ci_with_vel(self, T, Cf_to_ci):
         """
 
-        virtual void GeoCal::CartesianFixed::cf_to_ci_with_vel(const Time &T, double Cf_to_ci[6][6]) const  =0
+        virtual void GeoCal::CartesianFixed::cf_to_ci_with_vel(const Time &T, double Cf_to_ci[6][6]) const =0
         Calculate matrix that can be used to convert CartesianFixed to
         CartesianInertial at the given Time, including velocity.
 
@@ -493,7 +493,7 @@ class CartesianFixed(GroundCoordinate):
         """
 
         virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double
-        Height_reference_surface=0) const  =0
+        Height_reference_surface=0) const =0
         Find the intersection with the surface at the given height starting at
         this point and looking in the given direction.
 
@@ -506,7 +506,7 @@ class CartesianFixed(GroundCoordinate):
     def _v_min_radius_reference_surface(self):
         """
 
-        virtual double GeoCal::CartesianFixed::min_radius_reference_surface() const  =0
+        virtual double GeoCal::CartesianFixed::min_radius_reference_surface() const =0
         This is the radius of the largest sphere that fits completely into the
         reference surface (e.g., radius for a reference sphere, minimum of a
         and b for a ellipsoid). 

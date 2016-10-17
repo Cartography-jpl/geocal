@@ -202,7 +202,7 @@ class Dem(geocal_swig.generic_object.GenericObject):
     def distance_to_surface(self, Gp):
         """
 
-        virtual double GeoCal::Dem::distance_to_surface(const GroundCoordinate &Gp) const  =0
+        virtual double GeoCal::Dem::distance_to_surface(const GroundCoordinate &Gp) const =0
         Return distance to surface directly above/below the given point.
 
         Distance is in meters. Positive means Gp is above the surface,
@@ -214,7 +214,7 @@ class Dem(geocal_swig.generic_object.GenericObject):
     def height_reference_surface(self, Gp):
         """
 
-        virtual double GeoCal::Dem::height_reference_surface(const GroundCoordinate &Gp) const  =0
+        virtual double GeoCal::Dem::height_reference_surface(const GroundCoordinate &Gp) const =0
         Return height of surface above/below the reference surface (e.g.,
         WGS-84 for the earth).
 
@@ -263,7 +263,7 @@ class Dem(geocal_swig.generic_object.GenericObject):
     def surface_point(self, Gp):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::Dem::surface_point(const GroundCoordinate &Gp) const  =0
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::Dem::surface_point(const GroundCoordinate &Gp) const =0
         Return a GroundCoordinate on the surface directly above or below the
         given point. 
         """

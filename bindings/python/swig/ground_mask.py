@@ -237,7 +237,7 @@ class GroundMask(geocal_swig.generic_object.GenericObject):
     def mask(self, Gc):
         """
 
-        virtual bool GeoCal::GroundMask::mask(const GroundCoordinate &Gc) const  =0
+        virtual bool GeoCal::GroundMask::mask(const GroundCoordinate &Gc) const =0
         Indicate if a particular point is masked.
 
         If true, the point is masked and should not be used in processing
@@ -249,7 +249,7 @@ class GroundMask(geocal_swig.generic_object.GenericObject):
     def region_masked(self, Ulc, Lrc):
         """
 
-        virtual bool GeoCal::GroundMask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const  =0
+        virtual bool GeoCal::GroundMask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const =0
         Indicated if a region is all masked or not.
 
         See the discussion in the comments of GroundMask for detailed

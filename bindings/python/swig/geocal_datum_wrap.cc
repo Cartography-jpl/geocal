@@ -6510,7 +6510,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"Datum_undulation", _wrap_Datum_undulation, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const  =0\n"
+		"virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const =0\n"
 		"Specialization for Gc being Geodetic.\n"
 		"\n"
 		"Since many of our Datums are in geodetic coordinates, this is an\n"

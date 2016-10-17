@@ -236,7 +236,7 @@ class FeatureDetector(geocal_swig.generic_object.GenericObject):
     def interest_point_detect(self, Img):
         """
 
-        virtual std::vector<InterestPoint> GeoCal::FeatureDetector::interest_point_detect(const RasterImage &Img) const  =0
+        virtual std::vector<InterestPoint> GeoCal::FeatureDetector::interest_point_detect(const RasterImage &Img) const =0
         Go through a RasterImage, and return a list of InterstPoints for it.
 
         The list isn't in any particular order, but note that InterstPoints

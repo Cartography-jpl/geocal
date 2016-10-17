@@ -12661,44 +12661,44 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
 	 { (char *)"TimeTable_image_coordinate", _wrap_TimeTable_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::TimeTable::image_coordinate(Time T, const FrameCoordinate &F) const  =0\n"
+		"virtual ImageCoordinate GeoCal::TimeTable::image_coordinate(Time T, const FrameCoordinate &F) const =0\n"
 		"Convert from Time and FrameCoordinate to ImageCoordinate. \n"
 		""},
 	 { (char *)"TimeTable_image_coordinate_with_derivative", _wrap_TimeTable_image_coordinate_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual ImageCoordinateWithDerivative GeoCal::TimeTable::image_coordinate_with_derivative(const TimeWithDerivative &T, const FrameCoordinateWithDerivative &F)\n"
-		"const  =0\n"
+		"const =0\n"
 		"Convert from Time and FrameCoordinate to ImageCoordinate. \n"
 		""},
 	 { (char *)"TimeTable_time", _wrap_TimeTable_time, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const  =0\n"
+		"virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const =0\n"
 		"Convert from ImageCoordinate to Time and FrameCoordinate. \n"
 		""},
 	 { (char *)"TimeTable_time_with_derivative", _wrap_TimeTable_time_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual void GeoCal::TimeTable::time_with_derivative(const ImageCoordinateWithDerivative &Ic, TimeWithDerivative &T,\n"
-		"FrameCoordinateWithDerivative &F) const  =0\n"
+		"FrameCoordinateWithDerivative &F) const =0\n"
 		"Convert from ImageCoordinate to Time and FrameCoordinate. \n"
 		""},
 	 { (char *)"TimeTable__v_min_line", (PyCFunction)_wrap_TimeTable__v_min_line, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::TimeTable::min_line() const  =0\n"
+		"virtual int GeoCal::TimeTable::min_line() const =0\n"
 		"Minimum line table is valid for. \n"
 		""},
 	 { (char *)"TimeTable__v_max_line", (PyCFunction)_wrap_TimeTable__v_max_line, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::TimeTable::max_line() const  =0\n"
+		"virtual int GeoCal::TimeTable::max_line() const =0\n"
 		"Maximum line table is valid for. \n"
 		""},
 	 { (char *)"TimeTable__v_min_time", (PyCFunction)_wrap_TimeTable__v_min_time, METH_O, (char *)"\n"
 		"\n"
-		"virtual Time GeoCal::TimeTable::min_time() const  =0\n"
+		"virtual Time GeoCal::TimeTable::min_time() const =0\n"
 		"Minimum time table is valid for. \n"
 		""},
 	 { (char *)"TimeTable__v_max_time", (PyCFunction)_wrap_TimeTable__v_max_time, METH_O, (char *)"\n"
 		"\n"
-		"virtual Time GeoCal::TimeTable::max_time() const  =0\n"
+		"virtual Time GeoCal::TimeTable::max_time() const =0\n"
 		"Maximum time table is valid for. \n"
 		""},
 	 { (char *)"TimeTable__v_parameter", _wrap_TimeTable__v_parameter, METH_VARARGS, NULL},

@@ -7290,12 +7290,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"RasterImageMultiBand__v_number_band", (PyCFunction)_wrap_RasterImageMultiBand__v_number_band, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::RasterImageMultiBand::number_band() const  =0\n"
+		"virtual int GeoCal::RasterImageMultiBand::number_band() const =0\n"
 		"Return number of bands. \n"
 		""},
 	 { (char *)"RasterImageMultiBand_raster_image", _wrap_RasterImageMultiBand_raster_image, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<RasterImage> GeoCal::RasterImageMultiBand::raster_image_ptr(int band) const  =0\n"
+		"virtual boost::shared_ptr<RasterImage> GeoCal::RasterImageMultiBand::raster_image_ptr(int band) const =0\n"
 		"\n"
 		""},
 	 { (char *)"RasterImageMultiBand_read", _wrap_RasterImageMultiBand_read, METH_VARARGS, (char *)"\n"

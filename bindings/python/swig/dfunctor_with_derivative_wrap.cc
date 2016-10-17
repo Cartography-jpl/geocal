@@ -6233,12 +6233,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"DFunctorWithDerivative_df", _wrap_DFunctorWithDerivative_df, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::DFunctorWithDerivative::df(double X) const  =0\n"
+		"virtual double GeoCal::DFunctorWithDerivative::df(double X) const =0\n"
 		"Return df / dx. \n"
 		""},
 	 { (char *)"DFunctorWithDerivative_f_with_derivative", _wrap_DFunctorWithDerivative_f_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual AutoDerivative<double> GeoCal::DFunctorWithDerivative::f_with_derivative(double X) const  =0\n"
+		"virtual AutoDerivative<double> GeoCal::DFunctorWithDerivative::f_with_derivative(double X) const =0\n"
 		"Return df / dp_i as a AutoDerivative. \n"
 		""},
 	 { (char *)"delete_DFunctorWithDerivative", (PyCFunction)_wrap_delete_DFunctorWithDerivative, METH_O, NULL},

@@ -387,7 +387,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def _v_number_line(self):
         """
 
-        virtual int GeoCal::RasterImage::number_line() const  =0
+        virtual int GeoCal::RasterImage::number_line() const =0
         Return number of lines in the image. 
         """
         return _raster_image.RasterImage__v_number_line(self)
@@ -401,7 +401,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def _v_number_sample(self):
         """
 
-        virtual int GeoCal::RasterImage::number_sample() const  =0
+        virtual int GeoCal::RasterImage::number_sample() const =0
         Return number of samples in the image. 
         """
         return _raster_image.RasterImage__v_number_sample(self)
@@ -447,7 +447,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def unchecked_read_double(self, Line, Sample):
         """
 
-        virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const  =0
+        virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const =0
 
         """
         return _raster_image.RasterImage_unchecked_read_double(self, Line, Sample)

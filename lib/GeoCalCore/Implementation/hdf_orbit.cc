@@ -31,4 +31,20 @@ template void HdfOrbit<EciTod, TimeAcsCreator>::save
 
 template void HdfOrbit<EciTod, TimeAcsCreator>::load
 (polymorphic_iarchive& ar, const unsigned version);
+
+BOOST_CLASS_EXPORT_IMPLEMENT(HdfOrbit_Eci_TimePgs);
+
+template void HdfOrbit<Eci, TimePgsCreator>::save
+(polymorphic_oarchive& ar, const unsigned version) const;
+
+template void HdfOrbit<Eci, TimePgsCreator>::load
+(polymorphic_iarchive& ar, const unsigned version);
+
+BOOST_CLASS_EXPORT_IMPLEMENT(HdfOrbit_Eci_TimeJ2000);
+
+template void HdfOrbit<Eci, TimeJ2000Creator>::save
+(polymorphic_oarchive& ar, const unsigned version) const;
+
+template void HdfOrbit<Eci, TimeJ2000Creator>::load
+(polymorphic_iarchive& ar, const unsigned version);
 #endif

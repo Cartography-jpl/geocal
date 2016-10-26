@@ -344,5 +344,82 @@ HdfOrbit_Eci_TimePgs._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_Eci_
 HdfOrbit_Eci_TimePgs_swigregister = _hdf_orbit.HdfOrbit_Eci_TimePgs_swigregister
 HdfOrbit_Eci_TimePgs_swigregister(HdfOrbit_Eci_TimePgs)
 
+class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
+    """
+
+    This is an implementation of an Orbit that reads position, velocity,
+    and attitude quaternion from an HDF file.
+
+    For times that fall between the values given in the file, we
+    interpolate to get the OrbitData.
+
+    The file should have the following fields:
+
+    <Base group>="">/Attitude/Time - natt in size, time of attitude
+    measurement as doubles. <Base group>="">/Attitude/Quaternion - natt
+    x 4 in size, quaternion to take same coordinate system as Position
+    (e.g., ECI) <Base group>="">/Ephemeris/Time - neph in size, time of
+    ephemeris measurement as doubles <Base group>="">/Ephemeris/Position
+    - neph x 3 in size, position measurement as doubles in meters <Base
+    group>="">/Ephemeris/Velocity - neph x 3 in size, velocity
+    measurement as doubles in meter/second
+
+    Because it is useful, we allow the type of position measurement and
+    time to be changed. The measurement class is passed in, e.g., Eci, as
+    is a small wrapper to give the conversion to Time.
+
+    C++ includes: hdf_orbit.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit")
+        Read the given orbit data file.
+
+        You can optional pass the base group of the HDF file, the default is
+        "/Orbit" 
+        """
+        _hdf_orbit.HdfOrbit_Eci_TimeJ2000_swiginit(self, _hdf_orbit.new_HdfOrbit_Eci_TimeJ2000(*args))
+
+    def _v_file_name(self):
+        """
+
+        const std::string& GeoCal::HdfOrbit< PositionType, TimeCreatorType >::file_name() const
+        Return the file name. 
+        """
+        return _hdf_orbit.HdfOrbit_Eci_TimeJ2000__v_file_name(self)
+
+
+    @property
+    def file_name(self):
+        return self._v_file_name()
+
+
+    def _v_base_group(self):
+        """
+
+        const std::string& GeoCal::HdfOrbit< PositionType, TimeCreatorType >::base_group() const
+        Return the base group. 
+        """
+        return _hdf_orbit.HdfOrbit_Eci_TimeJ2000__v_base_group(self)
+
+
+    @property
+    def base_group(self):
+        return self._v_base_group()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _hdf_orbit.delete_HdfOrbit_Eci_TimeJ2000
+HdfOrbit_Eci_TimeJ2000._v_file_name = new_instancemethod(_hdf_orbit.HdfOrbit_Eci_TimeJ2000__v_file_name, None, HdfOrbit_Eci_TimeJ2000)
+HdfOrbit_Eci_TimeJ2000._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_Eci_TimeJ2000__v_base_group, None, HdfOrbit_Eci_TimeJ2000)
+HdfOrbit_Eci_TimeJ2000_swigregister = _hdf_orbit.HdfOrbit_Eci_TimeJ2000_swigregister
+HdfOrbit_Eci_TimeJ2000_swigregister(HdfOrbit_Eci_TimeJ2000)
+
 
 

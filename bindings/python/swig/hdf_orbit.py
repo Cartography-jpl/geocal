@@ -222,7 +222,12 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionL
     def __init__(self, *args):
         """
 
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit")
+        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit",
+        const std::string &Eph_time="/Ephemeris/Time", const std::string
+        &Eph_pos="/Ephemeris/Position", const std::string
+        &Eph_vel="/Ephemeris/Velocity", const std::string
+        &Att_time="/Attitude/Time", const std::string
+        &Att_quat="/Attitude/Quaternion")
         Read the given orbit data file.
 
         You can optional pass the base group of the HDF file, the default is
@@ -299,7 +304,12 @@ class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList
     def __init__(self, *args):
         """
 
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit")
+        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit",
+        const std::string &Eph_time="/Ephemeris/Time", const std::string
+        &Eph_pos="/Ephemeris/Position", const std::string
+        &Eph_vel="/Ephemeris/Velocity", const std::string
+        &Att_time="/Attitude/Time", const std::string
+        &Att_quat="/Attitude/Quaternion")
         Read the given orbit data file.
 
         You can optional pass the base group of the HDF file, the default is
@@ -376,7 +386,12 @@ class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionLi
     def __init__(self, *args):
         """
 
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit")
+        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit",
+        const std::string &Eph_time="/Ephemeris/Time", const std::string
+        &Eph_pos="/Ephemeris/Position", const std::string
+        &Eph_vel="/Ephemeris/Velocity", const std::string
+        &Att_time="/Attitude/Time", const std::string
+        &Att_quat="/Attitude/Quaternion")
         Read the given orbit data file.
 
         You can optional pass the base group of the HDF file, the default is

@@ -39,9 +39,20 @@ public:
 /// group of the HDF file, the default is "/Orbit"
 //-----------------------------------------------------------------------
 
-  HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit")
+  HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit",
+	   const std::string& Eph_time = "/Ephemeris/Time",
+	   const std::string& Eph_pos = "/Ephemeris/Position",
+	   const std::string& Eph_vel = "/Ephemeris/Velocity",
+	   const std::string& Att_time = "/Attitude/Time",
+	   const std::string& Att_quat = "/Attitude/Quaternion"
+	   )
     : fname(Fname),
-      bgroup(Base_group)
+      bgroup(Base_group),
+      eph_time(Eph_time),
+      eph_pos(Eph_pos),
+      eph_vel(Eph_vel),
+      att_time(Att_time),
+      att_quat(Att_quat)
   { init(); }
   virtual ~HdfOrbit() {}
 
@@ -75,7 +86,7 @@ private:
   // Separate out initialization to make serialization a little easier
   void init();
   std::string fname;
-  std::string bgroup;
+  std::string bgroup, eph_time, eph_pos, eph_vel, att_time, att_quat;
   typedef std::map<Time, boost::math::quaternion<double> > 
   time_attmap;
   time_attmap att_map;
@@ -102,11 +113,11 @@ void HdfOrbit<PositionType, TimeCreatorType>::init()
   TimeCreatorType tc;
   HdfFile f(fname);
   Array<double, 1> tdouble = 
-    f.read_field<double, 1>(bgroup + "/Ephemeris/Time");
+    f.read_field<double, 1>(bgroup + eph_time);
   Array<double, 2> pos = 
-    f.read_field<double, 2>(bgroup + "/Ephemeris/Position");
+    f.read_field<double, 2>(bgroup + eph_pos);
   Array<double, 2> vel = 
-    f.read_field<double, 2>(bgroup + "/Ephemeris/Velocity");
+    f.read_field<double, 2>(bgroup + eph_vel);
   if(tdouble.rows() != pos.rows() || 
      tdouble.rows() != vel.rows()) {
     Exception e("Need to have the same size data for time, position and velocity\n");
@@ -128,9 +139,9 @@ void HdfOrbit<PositionType, TimeCreatorType>::init()
     pos_map[t] = posvel(p, v);
   }
   Array<double, 1> tdouble2 = 
-    f.read_field<double, 1>(bgroup + "/Attitude/Time");
+    f.read_field<double, 1>(bgroup + att_time);
   Array<double, 2> quat = 
-    f.read_field<double, 2>(bgroup + "/Attitude/Quaternion");
+    f.read_field<double, 2>(bgroup + att_quat);
   if(tdouble2.rows() != quat.rows()) {
     Exception e("Need to have the same size data for time, and attitude\n");
     e << "  File:       " << fname << "\n"
@@ -204,4 +215,7 @@ typedef HdfOrbit<Eci, TimeJ2000Creator> HdfOrbit_Eci_TimeJ2000;
 GEOCAL_EXPORT_KEY(HdfOrbit_EciTod_TimeAcs);
 GEOCAL_EXPORT_KEY(HdfOrbit_Eci_TimePgs);
 GEOCAL_EXPORT_KEY(HdfOrbit_Eci_TimeJ2000);
+GEOCAL_CLASS_VERSION(HdfOrbit_EciTod_TimeAcs, 1);
+GEOCAL_CLASS_VERSION(HdfOrbit_Eci_TimePgs, 1);
+GEOCAL_CLASS_VERSION(HdfOrbit_Eci_TimeJ2000, 1);
 #endif

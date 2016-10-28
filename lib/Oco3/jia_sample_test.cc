@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "jia_sample.h"
+#include <iostream>
 
 using namespace GeoCal;
 
@@ -10,7 +11,9 @@ BOOST_AUTO_TEST_CASE(basic)
 {
   JiaSample js(10);
   BOOST_CHECK_EQUAL(js.blah(), 10);
-  js.jia_func();
+  if(false)			// Normally skip so we don't have unit
+				// test output written out.
+    js.jia_func();
 }
 
 BOOST_AUTO_TEST_CASE(serialization)
@@ -19,7 +22,7 @@ BOOST_AUTO_TEST_CASE(serialization)
     return;
   boost::shared_ptr<JiaSample> js(new JiaSample(10));
   std::string d = serialize_write_string(js);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<JiaSample> jsr = 
     serialize_read_string<JiaSample>(d);

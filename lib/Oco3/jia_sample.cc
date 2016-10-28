@@ -1,5 +1,6 @@
 #include "jia_sample.h"
 #include "geocal_serialize_support.h"
+#include <iostream>
 
 using namespace GeoCal;
 

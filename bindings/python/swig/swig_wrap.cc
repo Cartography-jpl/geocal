@@ -191,6 +191,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_l1b1)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_igc)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_igc_collection)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(jia_sample)(void);
 #ifdef HAVE_CARTO
   SWIG_INIT_TYPE SWIG_INIT_FUNC(eci_tod_burl)(void);
 #endif
@@ -539,6 +540,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_air_mspi_l1b1", SWIG_INIT_FUNC(air_mspi_l1b1));
   SWIG_INIT_MODULE(package, "_air_mspi_igc", SWIG_INIT_FUNC(air_mspi_igc));
   SWIG_INIT_MODULE(package, "_air_mspi_igc_collection", SWIG_INIT_FUNC(air_mspi_igc_collection));
+  SWIG_INIT_MODULE(package, "_jia_sample", SWIG_INIT_FUNC(jia_sample));
 #ifdef HAVE_CARTO
   SWIG_INIT_MODULE(package, "_eci_tod_burl", SWIG_INIT_FUNC(eci_tod_burl));
 #endif

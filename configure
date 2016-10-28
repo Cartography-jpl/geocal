@@ -662,6 +662,7 @@ pythondocdir
 srcraw
 srcsdbx
 srcpythonscript
+srcoco3
 srcmspi
 srccartlab
 srcinterface
@@ -23576,6 +23577,8 @@ srcinterface=${srcgeocalcore}/Interface
 srccartlab=${libgeocal}/CartLab
 
 srcmspi=${libgeocal}/Mspi
+
+srcoco3=${libgeocal}/Oco3
 
 srcpythonscript=${geocal_topdir}/script
 

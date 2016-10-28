@@ -1,6 +1,7 @@
 #include "orbit_time_shift.h"
 #include "geocal_serialize_support.h"
 #include "ostream_pad.h"
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 

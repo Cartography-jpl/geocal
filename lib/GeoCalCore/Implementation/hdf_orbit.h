@@ -174,7 +174,7 @@ void HdfOrbit<PositionType, TimeCreatorType>::init()
 template<class PositionType, class TimeCreatorType>
 inline boost::shared_ptr<QuaternionOrbitData> HdfOrbit<PositionType, TimeCreatorType>::orbit_data_create(Time T) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
   time_attmap::const_iterator i = att_map.lower_bound(T);
   boost::math::quaternion<double> att;
   if(i->first - T == 0.0)

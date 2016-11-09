@@ -6287,18 +6287,16 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_file_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_file_name__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
   boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   std::string result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
@@ -6327,6 +6325,85 @@ SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_file_name(PyObject *SWIGUNUS
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_file_name__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform__v_file_name" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MspiParaxialTransform__v_file_name" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform__v_file_name" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      (arg1)->file_name((std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_file_name(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"MspiParaxialTransform__v_file_name",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_MspiParaxialTransform__v_file_name__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_MspiParaxialTransform__v_file_name__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MspiParaxialTransform__v_file_name'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::MspiParaxialTransform::file_name() const\n"
+    "    GeoCal::MspiParaxialTransform::file_name(std::string const &)\n");
+  return 0;
 }
 
 
@@ -7047,10 +7124,10 @@ static PyMethodDef SwigMethods[] = {
 		"Constructor that reads the given file for the transform coefficients.\n"
 		"\n"
 		""},
-	 { (char *)"MspiParaxialTransform__v_file_name", (PyCFunction)_wrap_MspiParaxialTransform__v_file_name, METH_O, (char *)"\n"
+	 { (char *)"MspiParaxialTransform__v_file_name", _wrap_MspiParaxialTransform__v_file_name, METH_VARARGS, (char *)"\n"
 		"\n"
-		"const std::string& GeoCal::MspiParaxialTransform::file_name() const\n"
-		"File name for MspiConfigFile. \n"
+		"void GeoCal::MspiParaxialTransform::file_name(const std::string &Fname) const\n"
+		"\n"
 		""},
 	 { (char *)"MspiParaxialTransform_paraxial_to_real", _wrap_MspiParaxialTransform_paraxial_to_real, METH_VARARGS, (char *)"\n"
 		"\n"

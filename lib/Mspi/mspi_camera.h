@@ -44,7 +44,8 @@ public:
 //-----------------------------------------------------------------------
 
   const std::string& file_name() const {return fname;}
-  void file_name(const std::string& Fname) {fname = Fname;}
+  void file_name(const std::string& Fname)
+  {fname = Fname; paraxial_transform_->file_name(Fname); }
 
 //-----------------------------------------------------------------------
 /// Granule ID. This is metadata, found in the configuration file.

@@ -48,7 +48,7 @@ public:
 //-----------------------------------------------------------------------
 
   const std::string& file_name() const {return fname;}
-  void file_name(const std::string& Fname) const {fname = Fname;}
+  void file_name(const std::string& Fname) {fname = Fname;}
 
 //-----------------------------------------------------------------------
 /// True if we have the given row.

@@ -219,7 +219,7 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
     def _v_file_name(self, *args):
         """
 
-        void GeoCal::MspiParaxialTransform::file_name(const std::string &Fname) const
+        void GeoCal::MspiParaxialTransform::file_name(const std::string &Fname)
 
         """
         return _mspi_paraxial_transform.MspiParaxialTransform__v_file_name(self, *args)

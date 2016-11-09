@@ -7126,7 +7126,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"MspiParaxialTransform__v_file_name", _wrap_MspiParaxialTransform__v_file_name, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::MspiParaxialTransform::file_name(const std::string &Fname) const\n"
+		"void GeoCal::MspiParaxialTransform::file_name(const std::string &Fname)\n"
 		"\n"
 		""},
 	 { (char *)"MspiParaxialTransform_paraxial_to_real", _wrap_MspiParaxialTransform_paraxial_to_real, METH_VARARGS, (char *)"\n"

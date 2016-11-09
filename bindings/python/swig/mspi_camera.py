@@ -225,32 +225,40 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         return _mspi_camera.MspiCamera_read_config_file(self, File_name)
 
 
-    def _v_file_name(self):
+    def _v_file_name(self, *args):
         """
 
-        const std::string& GeoCal::MspiCamera::file_name() const
-        File name for MspiConfigFile. 
+        void GeoCal::MspiCamera::file_name(const std::string &Fname)
+
         """
-        return _mspi_camera.MspiCamera__v_file_name(self)
+        return _mspi_camera.MspiCamera__v_file_name(self, *args)
 
 
     @property
     def file_name(self):
         return self._v_file_name()
 
+    @file_name.setter
+    def file_name(self, value):
+      self._v_file_name(value)
 
-    def _v_granule_id(self):
+
+    def _v_granule_id(self, *args):
         """
 
-        const std::string& GeoCal::MspiCamera::granule_id() const
-        Granule ID. This is metadata, found in the configuration file. 
+        void GeoCal::MspiCamera::granule_id(const std::string &Gid)
+
         """
-        return _mspi_camera.MspiCamera__v_granule_id(self)
+        return _mspi_camera.MspiCamera__v_granule_id(self, *args)
 
 
     @property
     def granule_id(self):
         return self._v_granule_id()
+
+    @granule_id.setter
+    def granule_id(self, value):
+      self._v_granule_id(value)
 
 
     def _v_epsilon(self):

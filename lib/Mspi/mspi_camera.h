@@ -44,12 +44,14 @@ public:
 //-----------------------------------------------------------------------
 
   const std::string& file_name() const {return fname;}
+  void file_name(const std::string& Fname) {fname = Fname;}
 
 //-----------------------------------------------------------------------
 /// Granule ID. This is metadata, found in the configuration file.
 //-----------------------------------------------------------------------
 
   const std::string& granule_id() const {return granule_id_;}
+  void granule_id(const std::string& Gid) {granule_id_ = Gid;}
 
 //-----------------------------------------------------------------------
 /// Epsilon angle, in degrees.

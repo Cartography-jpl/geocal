@@ -18,8 +18,8 @@ public:
 	     const std::string& Extra_config_file = "");
   MspiCamera(const std::string& Fname, const blitz::Array<double, 1>& Param);
   void read_config_file(const std::string& File_name);
-  %python_attribute(file_name, std::string);
-  %python_attribute(granule_id, std::string);
+  %python_attribute_with_set(file_name, std::string);
+  %python_attribute_with_set(granule_id, std::string);
   %python_attribute(epsilon, double);
   %python_attribute(psi, double);
   %python_attribute(theta, double);

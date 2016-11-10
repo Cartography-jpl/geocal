@@ -437,8 +437,9 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/orbit_correction_wrap.cc \
 	@swigsrc@/orbit_offset_correction_wrap.cc \
 	@swigsrc@/orbit_piecewise_correction_wrap.cc \
-	@swigsrc@/tle_orbit_wrap.cc @swigsrc@/spice_orbit_wrap.cc \
-	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
+	@swigsrc@/orbit_time_shift_wrap.cc @swigsrc@/tle_orbit_wrap.cc \
+	@swigsrc@/spice_orbit_wrap.cc @swigsrc@/argus_camera_wrap.cc \
+	@swigsrc@/argus_orbit_wrap.cc \
 	@swigsrc@/quickbird_camera_wrap.cc \
 	@swigsrc@/spot_camera_wrap.cc @swigsrc@/spot_orbit_wrap.cc \
 	@swigsrc@/quickbird_orbit_wrap.cc \
@@ -465,7 +466,8 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/air_mspi_time_table_wrap.cc \
 	@swigsrc@/air_mspi_l1b1_wrap.cc @swigsrc@/air_mspi_igc_wrap.cc \
 	@swigsrc@/air_mspi_igc_collection_wrap.cc \
-	@swigsrc@/eci_tod_burl_wrap.cc @swigsrc@/geocal_fftw_wrap.cc \
+	@swigsrc@/jia_sample_wrap.cc @swigsrc@/eci_tod_burl_wrap.cc \
+	@swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc \
 	@swigsrc@/hdf_file_wrap.cc @swigsrc@/hdf_orbit_wrap.cc \
 	@swigsrc@/hdf_orbit_carto_wrap.cc \
@@ -596,6 +598,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_correction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_offset_correction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_piecewise_correction_wrap.lo \
+	@swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo \
 	@swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-spice_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-argus_camera_wrap.lo \
@@ -633,7 +636,8 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-air_mspi_time_table_wrap.lo \
 	@swigsrc@/_swig_wrap_la-air_mspi_l1b1_wrap.lo \
 	@swigsrc@/_swig_wrap_la-air_mspi_igc_wrap.lo \
-	@swigsrc@/_swig_wrap_la-air_mspi_igc_collection_wrap.lo
+	@swigsrc@/_swig_wrap_la-air_mspi_igc_collection_wrap.lo \
+	@swigsrc@/_swig_wrap_la-jia_sample_wrap.lo
 am__objects_2 = @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo
 @HAVE_CARTO_TRUE@am__objects_3 = $(am__objects_2)
 am__objects_4 = @swigsrc@/_swig_wrap_la-geocal_fftw_wrap.lo \
@@ -768,6 +772,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/orbit_correction.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
 	@srcimplementation@/orbit_piecewise_correction.cc \
+	@srcimplementation@/orbit_time_shift.cc \
 	@srcimplementation@/igc_ray_caster.cc \
 	@srcimplementation@/tle_orbit.cc \
 	@srcimplementation@/spice_orbit.cc \
@@ -801,7 +806,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcmspi@/ground_mspi_orbit.cc @srcmspi@/ground_mspi_igc.cc \
 	@srcmspi@/usgs_dem.cc @srcmspi@/srtm_90m_dem.cc \
 	@srcmspi@/air_mspi_time_table.cc @srcmspi@/air_mspi_l1b1.cc \
-	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc
+	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc \
+	@srcoco3@/jia_sample.cc
 @HAVE_FFTW_TRUE@am__objects_16 =  \
 @HAVE_FFTW_TRUE@	@srcsupport@/libgeocal_la-geocal_fftw.lo
 @HAVE_HDF5_TRUE@am__objects_17 =  \
@@ -928,6 +934,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-orbit_correction.lo \
 	@srcimplementation@/libgeocal_la-orbit_offset_correction.lo \
 	@srcimplementation@/libgeocal_la-orbit_piecewise_correction.lo \
+	@srcimplementation@/libgeocal_la-orbit_time_shift.lo \
 	@srcimplementation@/libgeocal_la-igc_ray_caster.lo \
 	@srcimplementation@/libgeocal_la-tle_orbit.lo \
 	@srcimplementation@/libgeocal_la-spice_orbit.lo \
@@ -970,7 +977,8 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcmspi@/libgeocal_la-air_mspi_time_table.lo \
 	@srcmspi@/libgeocal_la-air_mspi_l1b1.lo \
 	@srcmspi@/libgeocal_la-air_mspi_igc.lo \
-	@srcmspi@/libgeocal_la-air_mspi_igc_collection.lo
+	@srcmspi@/libgeocal_la-air_mspi_igc_collection.lo \
+	@srcoco3@/libgeocal_la-jia_sample.lo
 libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
 libgeocal_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -1078,6 +1086,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/igc_collection_orbit_data_test.cc \
 	@srcimplementation@/orbit_offset_correction_test.cc \
 	@srcimplementation@/orbit_piecewise_correction_test.cc \
+	@srcimplementation@/orbit_time_shift_test.cc \
 	@srcimplementation@/tle_orbit_test.cc \
 	@srcimplementation@/spice_orbit_test.cc \
 	@srccartlab@/vicar_ogr_test.cc \
@@ -1108,7 +1117,8 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcmspi@/srtm_90m_dem_test.cc @srcmspi@/air_mspi_file_test.cc \
 	@srcmspi@/air_mspi_time_table_test.cc \
 	@srcmspi@/air_mspi_l1b1_test.cc @srcmspi@/air_mspi_igc_test.cc \
-	@srcmspi@/air_mspi_igc_collection_test.cc
+	@srcmspi@/air_mspi_igc_collection_test.cc \
+	@srcoco3@/jia_sample_test.cc
 @HAVE_FFTW_TRUE@am__objects_23 = @srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT)
 @HAVE_HDF5_TRUE@am__objects_24 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
 @HAVE_GDAL_TRUE@am__objects_25 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
@@ -1215,6 +1225,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-igc_collection_orbit_data_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_offset_correction_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_piecewise_correction_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-orbit_time_shift_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-tle_orbit_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-spice_orbit_test.$(OBJEXT) \
 	$(am__objects_29) \
@@ -1250,7 +1261,8 @@ am_geocal_test_all_OBJECTS =  \
 	@srcmspi@/geocal_test_all-air_mspi_time_table_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-air_mspi_l1b1_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-air_mspi_igc_test.$(OBJEXT) \
-	@srcmspi@/geocal_test_all-air_mspi_igc_collection_test.$(OBJEXT)
+	@srcmspi@/geocal_test_all-air_mspi_igc_collection_test.$(OBJEXT) \
+	@srcoco3@/geocal_test_all-jia_sample_test.$(OBJEXT)
 geocal_test_all_OBJECTS = $(am_geocal_test_all_OBJECTS)
 geocal_test_all_DEPENDENCIES = libgeocal.la $(am__DEPENDENCIES_1) \
 	libraw.la $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -1456,6 +1468,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/orbit_correction.h \
 	@srcimplementation@/orbit_offset_correction.h \
 	@srcimplementation@/orbit_piecewise_correction.h \
+	@srcimplementation@/orbit_time_shift.h \
 	@srcimplementation@/igc_ray_caster.h \
 	@srcimplementation@/tle_orbit.h \
 	@srcimplementation@/spice_orbit.h \
@@ -1489,7 +1502,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcmspi@/ground_mspi_orbit.h @srcmspi@/ground_mspi_igc.h \
 	@srcmspi@/usgs_dem.h @srcmspi@/srtm_90m_dem.h \
 	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_l1b1.h \
-	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h
+	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
+	@srcoco3@/jia_sample.h
 HEADERS = $(geocalinc_HEADERS) $(include_HEADERS) $(libraw_HEADERS) \
 	$(sdbx_HEADERS) $(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
 	$(sdbxsupport_HEADERS)
@@ -1698,9 +1712,10 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(srcdir)/lib/GeoCalCore/Interface/interface.am \
 	$(srcdir)/lib/GeoCalCore/Support/support.am \
 	$(srcdir)/lib/GeoCalCore/geocal_core.am \
-	$(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/lib.am \
-	$(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am \
-	$(srcdir)/python/lib/lib.am $(srcdir)/python/python.am \
+	$(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am \
+	$(srcdir)/lib/lib.am $(srcdir)/python/bin/bin.am \
+	$(srcdir)/python/doc/doc_python.am $(srcdir)/python/lib/lib.am \
+	$(srcdir)/python/python.am \
 	$(srcdir)/python/test_support/test_support.am \
 	$(srcdir)/script/script.am \
 	$(srcdir)/thirdparty/libraw/libraw.am \
@@ -1961,6 +1976,7 @@ srcgeocalcore = @srcgeocalcore@
 srcimplementation = @srcimplementation@
 srcinterface = @srcinterface@
 srcmspi = @srcmspi@
+srcoco3 = @srcoco3@
 srcpython = @srcpython@
 srcpythonbin = @srcpythonbin@
 srcpythonlib = @srcpythonlib@
@@ -2217,7 +2233,7 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 	-I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost \
 	-I@srcsupport@ -I$(srcdir)/@srcinterface@ \
 	-I$(srcdir)/@srcimplementation@ -I$(srcdir)/@srccartlab@ \
-	-I$(srcdir)/@srcmspi@
+	-I$(srcdir)/@srcmspi@ -I$(srcdir)/@srcoco3@
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -2330,6 +2346,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/orbit_correction.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
 	@srcimplementation@/orbit_piecewise_correction.cc \
+	@srcimplementation@/orbit_time_shift.cc \
 	@srcimplementation@/igc_ray_caster.cc \
 	@srcimplementation@/tle_orbit.cc \
 	@srcimplementation@/spice_orbit.cc $(am__append_28) \
@@ -2356,7 +2373,8 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcmspi@/ground_mspi_orbit.cc @srcmspi@/ground_mspi_igc.cc \
 	@srcmspi@/usgs_dem.cc @srcmspi@/srtm_90m_dem.cc \
 	@srcmspi@/air_mspi_time_table.cc @srcmspi@/air_mspi_l1b1.cc \
-	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc
+	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc \
+	@srcoco3@/jia_sample.cc
 
 # Files that contain SWIG wrapper information.
 
@@ -2460,8 +2478,9 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/orbit_correction_wrap.cc \
 	@swigsrc@/orbit_offset_correction_wrap.cc \
 	@swigsrc@/orbit_piecewise_correction_wrap.cc \
-	@swigsrc@/tle_orbit_wrap.cc @swigsrc@/spice_orbit_wrap.cc \
-	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
+	@swigsrc@/orbit_time_shift_wrap.cc @swigsrc@/tle_orbit_wrap.cc \
+	@swigsrc@/spice_orbit_wrap.cc @swigsrc@/argus_camera_wrap.cc \
+	@swigsrc@/argus_orbit_wrap.cc \
 	@swigsrc@/quickbird_camera_wrap.cc \
 	@swigsrc@/spot_camera_wrap.cc @swigsrc@/spot_orbit_wrap.cc \
 	@swigsrc@/quickbird_orbit_wrap.cc \
@@ -2487,7 +2506,8 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/srtm_90m_dem_wrap.cc @swigsrc@/air_mspi_file_wrap.cc \
 	@swigsrc@/air_mspi_time_table_wrap.cc \
 	@swigsrc@/air_mspi_l1b1_wrap.cc @swigsrc@/air_mspi_igc_wrap.cc \
-	@swigsrc@/air_mspi_igc_collection_wrap.cc
+	@swigsrc@/air_mspi_igc_collection_wrap.cc \
+	@swigsrc@/jia_sample_wrap.cc
 SWIG_SRC_CARTO = @swigsrc@/eci_tod_burl_wrap.cc
 SWIG_SRC_FFTW = @swigsrc@/geocal_fftw_wrap.cc \
 	@swigsrc@/phase_correlation_matcher_wrap.cc
@@ -2637,6 +2657,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/orbit_correction.h \
 	@srcimplementation@/orbit_offset_correction.h \
 	@srcimplementation@/orbit_piecewise_correction.h \
+	@srcimplementation@/orbit_time_shift.h \
 	@srcimplementation@/igc_ray_caster.h \
 	@srcimplementation@/tle_orbit.h \
 	@srcimplementation@/spice_orbit.h $(am__append_27) \
@@ -2663,7 +2684,8 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcmspi@/ground_mspi_orbit.h @srcmspi@/ground_mspi_igc.h \
 	@srcmspi@/usgs_dem.h @srcmspi@/srtm_90m_dem.h \
 	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_l1b1.h \
-	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h
+	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
+	@srcoco3@/jia_sample.h
 # Test files
 geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
@@ -2748,6 +2770,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/igc_collection_orbit_data_test.cc \
 	@srcimplementation@/orbit_offset_correction_test.cc \
 	@srcimplementation@/orbit_piecewise_correction_test.cc \
+	@srcimplementation@/orbit_time_shift_test.cc \
 	@srcimplementation@/tle_orbit_test.cc \
 	@srcimplementation@/spice_orbit_test.cc $(am__append_35) \
 	@srccartlab@/argus_camera_test.cc \
@@ -2777,7 +2800,8 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcmspi@/srtm_90m_dem_test.cc @srcmspi@/air_mspi_file_test.cc \
 	@srcmspi@/air_mspi_time_table_test.cc \
 	@srcmspi@/air_mspi_l1b1_test.cc @srcmspi@/air_mspi_igc_test.cc \
-	@srcmspi@/air_mspi_igc_collection_test.cc
+	@srcmspi@/air_mspi_igc_collection_test.cc \
+	@srcoco3@/jia_sample_test.cc
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
@@ -2925,7 +2949,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -2947,7 +2971,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__empty):
+$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -3315,6 +3339,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_piecewise_correction_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-spice_orbit_wrap.lo:  \
@@ -3391,6 +3417,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-air_mspi_igc_collection_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-jia_sample_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_fftw_wrap.lo:  \
@@ -3766,6 +3794,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-orbit_piecewise_correction.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-orbit_time_shift.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-igc_ray_caster.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -3907,6 +3938,14 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/libgeocal_la-air_mspi_igc_collection.lo:  \
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcoco3@/$(am__dirstamp):
+	@$(MKDIR_P) @srcoco3@
+	@: > @srcoco3@/$(am__dirstamp)
+@srcoco3@/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) @srcoco3@/$(DEPDIR)
+	@: > @srcoco3@/$(DEPDIR)/$(am__dirstamp)
+@srcoco3@/libgeocal_la-jia_sample.lo: @srcoco3@/$(am__dirstamp) \
+	@srcoco3@/$(DEPDIR)/$(am__dirstamp)
 
 libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libgeocal_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libgeocal_la_LINK) -rpath $(libdir) $(libgeocal_la_OBJECTS) $(libgeocal_la_LIBADD) $(LIBS)
@@ -4342,6 +4381,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-orbit_piecewise_correction_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-orbit_time_shift_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-tle_orbit_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -4435,6 +4477,8 @@ clean-checkPROGRAMS:
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/geocal_test_all-air_mspi_igc_collection_test.$(OBJEXT):  \
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
+@srcoco3@/geocal_test_all-jia_sample_test.$(OBJEXT):  \
+	@srcoco3@/$(am__dirstamp) @srcoco3@/$(DEPDIR)/$(am__dirstamp)
 
 geocal_test_all$(EXEEXT): $(geocal_test_all_OBJECTS) $(geocal_test_all_DEPENDENCIES) $(EXTRA_geocal_test_all_DEPENDENCIES) 
 	@rm -f geocal_test_all$(EXEEXT)
@@ -4535,6 +4579,8 @@ mostlyclean-compile:
 	-rm -f @srcinterface@/*.lo
 	-rm -f @srcmspi@/*.$(OBJEXT)
 	-rm -f @srcmspi@/*.lo
+	-rm -f @srcoco3@/*.$(OBJEXT)
+	-rm -f @srcoco3@/*.lo
 	-rm -f @srcraw@/*.$(OBJEXT)
 	-rm -f @srcraw@/*.lo
 	-rm -f @srcsupport@/*.$(OBJEXT)
@@ -4627,6 +4673,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_offset_correction_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_piecewise_correction_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_time_shift_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-pan_sharpen_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-phase_correlation_matcher_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-piecewise_linear_test.Po@am__quote@
@@ -4685,6 +4732,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_offset_correction.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_piecewise_correction.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_time_shift.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pan_sharpen.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-piecewise_linear.Plo@am__quote@
@@ -4803,6 +4851,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-mspi_paraxial_transform.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-srtm_90m_dem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-usgs_dem.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcoco3@/$(DEPDIR)/libgeocal_la-jia_sample.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-foveon.Plo@am__quote@
@@ -4937,6 +4987,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_to_image_match_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_image_ground_connection_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-jia_sample_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-landsat7_panchromatic_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-location_to_file_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-look_vector_wrap.Plo@am__quote@
@@ -4961,6 +5012,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_offset_correction_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_piecewise_correction_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_time_shift_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-paint_class_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pan_sharpen_wrap.Plo@am__quote@
@@ -5879,6 +5931,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_piecewise_correction_wrap.lo `test -f '@swigsrc@/orbit_piecewise_correction_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_piecewise_correction_wrap.cc
 
+@swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo: @swigsrc@/orbit_time_shift_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_time_shift_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo `test -f '@swigsrc@/orbit_time_shift_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_time_shift_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_time_shift_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_time_shift_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_time_shift_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo `test -f '@swigsrc@/orbit_time_shift_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_time_shift_wrap.cc
+
 @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo: @swigsrc@/tle_orbit_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo `test -f '@swigsrc@/tle_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/tle_orbit_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo
@@ -6144,6 +6203,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/air_mspi_igc_collection_wrap.cc' object='@swigsrc@/_swig_wrap_la-air_mspi_igc_collection_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-air_mspi_igc_collection_wrap.lo `test -f '@swigsrc@/air_mspi_igc_collection_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/air_mspi_igc_collection_wrap.cc
+
+@swigsrc@/_swig_wrap_la-jia_sample_wrap.lo: @swigsrc@/jia_sample_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-jia_sample_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-jia_sample_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-jia_sample_wrap.lo `test -f '@swigsrc@/jia_sample_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/jia_sample_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-jia_sample_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-jia_sample_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/jia_sample_wrap.cc' object='@swigsrc@/_swig_wrap_la-jia_sample_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-jia_sample_wrap.lo `test -f '@swigsrc@/jia_sample_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/jia_sample_wrap.cc
 
 @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo: @swigsrc@/eci_tod_burl_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-eci_tod_burl_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-eci_tod_burl_wrap.lo `test -f '@swigsrc@/eci_tod_burl_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/eci_tod_burl_wrap.cc
@@ -7020,6 +7086,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-orbit_piecewise_correction.lo `test -f '@srcimplementation@/orbit_piecewise_correction.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_piecewise_correction.cc
 
+@srcimplementation@/libgeocal_la-orbit_time_shift.lo: @srcimplementation@/orbit_time_shift.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-orbit_time_shift.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_time_shift.Tpo -c -o @srcimplementation@/libgeocal_la-orbit_time_shift.lo `test -f '@srcimplementation@/orbit_time_shift.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_time_shift.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_time_shift.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_time_shift.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/orbit_time_shift.cc' object='@srcimplementation@/libgeocal_la-orbit_time_shift.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-orbit_time_shift.lo `test -f '@srcimplementation@/orbit_time_shift.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_time_shift.cc
+
 @srcimplementation@/libgeocal_la-igc_ray_caster.lo: @srcimplementation@/igc_ray_caster.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-igc_ray_caster.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Tpo -c -o @srcimplementation@/libgeocal_la-igc_ray_caster.lo `test -f '@srcimplementation@/igc_ray_caster.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_ray_caster.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Plo
@@ -7369,6 +7442,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcmspi@/air_mspi_igc_collection.cc' object='@srcmspi@/libgeocal_la-air_mspi_igc_collection.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/libgeocal_la-air_mspi_igc_collection.lo `test -f '@srcmspi@/air_mspi_igc_collection.cc' || echo '$(srcdir)/'`@srcmspi@/air_mspi_igc_collection.cc
+
+@srcoco3@/libgeocal_la-jia_sample.lo: @srcoco3@/jia_sample.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcoco3@/libgeocal_la-jia_sample.lo -MD -MP -MF @srcoco3@/$(DEPDIR)/libgeocal_la-jia_sample.Tpo -c -o @srcoco3@/libgeocal_la-jia_sample.lo `test -f '@srcoco3@/jia_sample.cc' || echo '$(srcdir)/'`@srcoco3@/jia_sample.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcoco3@/$(DEPDIR)/libgeocal_la-jia_sample.Tpo @srcoco3@/$(DEPDIR)/libgeocal_la-jia_sample.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcoco3@/jia_sample.cc' object='@srcoco3@/libgeocal_la-jia_sample.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcoco3@/libgeocal_la-jia_sample.lo `test -f '@srcoco3@/jia_sample.cc' || echo '$(srcdir)/'`@srcoco3@/jia_sample.cc
 
 @srcraw@/libraw_la-dcraw_common.lo: @srcraw@/dcraw_common.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-dcraw_common.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Tpo -c -o @srcraw@/libraw_la-dcraw_common.lo `test -f '@srcraw@/dcraw_common.cpp' || echo '$(srcdir)/'`@srcraw@/dcraw_common.cpp
@@ -8805,6 +8885,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-orbit_piecewise_correction_test.obj `if test -f '@srcimplementation@/orbit_piecewise_correction_test.cc'; then $(CYGPATH_W) '@srcimplementation@/orbit_piecewise_correction_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/orbit_piecewise_correction_test.cc'; fi`
 
+@srcimplementation@/geocal_test_all-orbit_time_shift_test.o: @srcimplementation@/orbit_time_shift_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-orbit_time_shift_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_time_shift_test.Tpo -c -o @srcimplementation@/geocal_test_all-orbit_time_shift_test.o `test -f '@srcimplementation@/orbit_time_shift_test.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_time_shift_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_time_shift_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_time_shift_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/orbit_time_shift_test.cc' object='@srcimplementation@/geocal_test_all-orbit_time_shift_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-orbit_time_shift_test.o `test -f '@srcimplementation@/orbit_time_shift_test.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_time_shift_test.cc
+
+@srcimplementation@/geocal_test_all-orbit_time_shift_test.obj: @srcimplementation@/orbit_time_shift_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-orbit_time_shift_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_time_shift_test.Tpo -c -o @srcimplementation@/geocal_test_all-orbit_time_shift_test.obj `if test -f '@srcimplementation@/orbit_time_shift_test.cc'; then $(CYGPATH_W) '@srcimplementation@/orbit_time_shift_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/orbit_time_shift_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_time_shift_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_time_shift_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/orbit_time_shift_test.cc' object='@srcimplementation@/geocal_test_all-orbit_time_shift_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-orbit_time_shift_test.obj `if test -f '@srcimplementation@/orbit_time_shift_test.cc'; then $(CYGPATH_W) '@srcimplementation@/orbit_time_shift_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/orbit_time_shift_test.cc'; fi`
+
 @srcimplementation@/geocal_test_all-tle_orbit_test.o: @srcimplementation@/tle_orbit_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-tle_orbit_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Tpo -c -o @srcimplementation@/geocal_test_all-tle_orbit_test.o `test -f '@srcimplementation@/tle_orbit_test.cc' || echo '$(srcdir)/'`@srcimplementation@/tle_orbit_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po
@@ -9309,6 +9403,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcmspi@/geocal_test_all-air_mspi_igc_collection_test.obj `if test -f '@srcmspi@/air_mspi_igc_collection_test.cc'; then $(CYGPATH_W) '@srcmspi@/air_mspi_igc_collection_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcmspi@/air_mspi_igc_collection_test.cc'; fi`
 
+@srcoco3@/geocal_test_all-jia_sample_test.o: @srcoco3@/jia_sample_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcoco3@/geocal_test_all-jia_sample_test.o -MD -MP -MF @srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Tpo -c -o @srcoco3@/geocal_test_all-jia_sample_test.o `test -f '@srcoco3@/jia_sample_test.cc' || echo '$(srcdir)/'`@srcoco3@/jia_sample_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Tpo @srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcoco3@/jia_sample_test.cc' object='@srcoco3@/geocal_test_all-jia_sample_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcoco3@/geocal_test_all-jia_sample_test.o `test -f '@srcoco3@/jia_sample_test.cc' || echo '$(srcdir)/'`@srcoco3@/jia_sample_test.cc
+
+@srcoco3@/geocal_test_all-jia_sample_test.obj: @srcoco3@/jia_sample_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcoco3@/geocal_test_all-jia_sample_test.obj -MD -MP -MF @srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Tpo -c -o @srcoco3@/geocal_test_all-jia_sample_test.obj `if test -f '@srcoco3@/jia_sample_test.cc'; then $(CYGPATH_W) '@srcoco3@/jia_sample_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcoco3@/jia_sample_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Tpo @srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcoco3@/jia_sample_test.cc' object='@srcoco3@/geocal_test_all-jia_sample_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcoco3@/geocal_test_all-jia_sample_test.obj `if test -f '@srcoco3@/jia_sample_test.cc'; then $(CYGPATH_W) '@srcoco3@/jia_sample_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcoco3@/jia_sample_test.cc'; fi`
+
 @srcgeocalbin@/picmtch5-picmtch5.o: @srcgeocalbin@/picmtch5.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(picmtch5_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcgeocalbin@/picmtch5-picmtch5.o -MD -MP -MF @srcgeocalbin@/$(DEPDIR)/picmtch5-picmtch5.Tpo -c -o @srcgeocalbin@/picmtch5-picmtch5.o `test -f '@srcgeocalbin@/picmtch5.cc' || echo '$(srcdir)/'`@srcgeocalbin@/picmtch5.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcgeocalbin@/$(DEPDIR)/picmtch5-picmtch5.Tpo @srcgeocalbin@/$(DEPDIR)/picmtch5-picmtch5.Po
@@ -9356,6 +9464,7 @@ clean-libtool:
 	-rm -rf @srcimplementation@/.libs @srcimplementation@/_libs
 	-rm -rf @srcinterface@/.libs @srcinterface@/_libs
 	-rm -rf @srcmspi@/.libs @srcmspi@/_libs
+	-rm -rf @srcoco3@/.libs @srcoco3@/_libs
 	-rm -rf @srcraw@/.libs @srcraw@/_libs
 	-rm -rf @srcsupport@/.libs @srcsupport@/_libs
 	-rm -rf @srcsupport@/boost/.libs @srcsupport@/boost/_libs
@@ -10174,6 +10283,8 @@ distclean-generic:
 	-rm -f @srcinterface@/$(am__dirstamp)
 	-rm -f @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @srcmspi@/$(am__dirstamp)
+	-rm -f @srcoco3@/$(DEPDIR)/$(am__dirstamp)
+	-rm -f @srcoco3@/$(am__dirstamp)
 	-rm -f @srcraw@/$(DEPDIR)/$(am__dirstamp)
 	-rm -f @srcraw@/$(am__dirstamp)
 	-rm -f @srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -10196,7 +10307,7 @@ clean-am: clean-afidspythonvdevPROGRAMS clean-binPROGRAMS \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcgeocalbin@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcmspi@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
+	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcgeocalbin@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcmspi@/$(DEPDIR) @srcoco3@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags
@@ -10257,7 +10368,7 @@ installcheck-am: installcheck-local
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcgeocalbin@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcmspi@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
+	-rm -rf @libgeocal@/$(DEPDIR) @srccartlab@/$(DEPDIR) @srcgeocalbin@/$(DEPDIR) @srcimplementation@/$(DEPDIR) @srcinterface@/$(DEPDIR) @srcmspi@/$(DEPDIR) @srcoco3@/$(DEPDIR) @srcraw@/$(DEPDIR) @srcsupport@/$(DEPDIR) @srcsupport@/boost/$(DEPDIR) @swigsrc@/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -10460,6 +10571,11 @@ vpath %.i $(srcdir)/@srccartlab@
 vpath %.cc $(srcdir)/@srcmspi@
 vpath %.h $(srcdir)/@srcmspi@
 vpath %.i $(srcdir)/@srcmspi@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcoco3@
+vpath %.h $(srcdir)/@srcoco3@
+vpath %.i $(srcdir)/@srcoco3@
 
 install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)

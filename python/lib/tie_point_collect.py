@@ -81,24 +81,28 @@ class TiePointDiagnostic(object):
             self.log.info(v)
         else:
             print(v, file=self.fh)
+    def _print_tab_helper(self, a, b):
+        '''In python 3, this is just [a, *b]. But we can not do that in
+        python 2, so use this simple helper function.'''
+        return list(itertools.chain([a], b))
+    
     def print_report(self, fh=None, log=None):
         self.log = log
         self.fh = fh
         d = self.image_match_diagnostic
         self._print_or_log("        Tiepoint Matching")
-        tp_tab = [["Reason", *range(d.shape[0])]]
-        tp_tab.append(["Good Match", *d[:,0]])
-        tp_tab.append(["Image masked", *d[:,1]])
-        tp_tab.append(["Too close to edge", *d[:,2]])
-        tp_tab.append(["Variance too low", *d[:,3]])
-        tp_tab.append(["Correlation too low", *d[:,4]])
-        tp_tab.append(["Exceed Max Sigma", *d[:,5]])
-        tp_tab.append(["Exceed max radiance variance", *d[:,6]])
-        tp_tab.append(["Exceed precision requirement", *d[:,7]])
-        tp_tab.append(["Move past target", *d[:,8]])
-        tp_tab.append(["Solve failed", *d[:,9]])
-        tp_tab.append(["Exceed max iteration", *d[:,10]])
-        tp_tab.append(["Other", *d[:,11]])
+        tp_tab = [self._print_tab_helper("Reason", range(d.shape[0]))]
+        for i, v in enumerate(["Good Match", "Image masked",
+                               "Too close to edge", "Variance too low",
+                               "Correlation too low", 
+                               "Exceed Max Sigma", 
+                               "Exceed max radiance variance", 
+                               "Exceed precision requirement", 
+                               "Move past target", 
+                               "Solve failed", 
+                               "Exceed max iteration", 
+                               "Other"]):
+            tp_tab.append(self._print_tab_helper(v, d[:,i]))
         self._print_or_log(tabulate(tp_tab, headers="firstrow"))
         self._print_or_log("\n")
 

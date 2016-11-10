@@ -1,0 +1,13 @@
+geocalinc_HEADERS+= @srcoco3@/jia_sample.h
+libgeocal_la_SOURCES+= @srcoco3@/jia_sample.cc
+
+SWIG_SRC += @swigsrc@/jia_sample_wrap.cc
+
+geocal_test_all_SOURCES+= @srcoco3@/jia_sample_test.cc
+
+AM_CPPFLAGS+= -I$(srcdir)/@srcoco3@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcoco3@
+vpath %.h $(srcdir)/@srcoco3@
+vpath %.i $(srcdir)/@srcoco3@

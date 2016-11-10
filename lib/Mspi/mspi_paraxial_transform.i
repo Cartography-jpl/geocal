@@ -15,7 +15,7 @@ namespace GeoCal {
 class MspiParaxialTransform : public GenericObject {
 public:
   MspiParaxialTransform(const std::string& Fname);
-  %python_attribute(file_name, std::string);
+  %python_attribute_with_set(file_name, std::string);
   void paraxial_to_real(int Row_number, double Paraxial_x,
 			double Paraxial_y, double& OUTPUT,
 			double& OUTPUT);

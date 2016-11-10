@@ -152,6 +152,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_correction)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_offset_correction)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_piecewise_correction)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_time_shift)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(tle_orbit)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(spice_orbit)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_camera)(void);
@@ -190,6 +191,7 @@ extern "C" {
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_l1b1)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_igc)(void);
   SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_igc_collection)(void);
+  SWIG_INIT_TYPE SWIG_INIT_FUNC(jia_sample)(void);
 #ifdef HAVE_CARTO
   SWIG_INIT_TYPE SWIG_INIT_FUNC(eci_tod_burl)(void);
 #endif
@@ -499,6 +501,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_orbit_correction", SWIG_INIT_FUNC(orbit_correction));
   SWIG_INIT_MODULE(package, "_orbit_offset_correction", SWIG_INIT_FUNC(orbit_offset_correction));
   SWIG_INIT_MODULE(package, "_orbit_piecewise_correction", SWIG_INIT_FUNC(orbit_piecewise_correction));
+  SWIG_INIT_MODULE(package, "_orbit_time_shift", SWIG_INIT_FUNC(orbit_time_shift));
   SWIG_INIT_MODULE(package, "_tle_orbit", SWIG_INIT_FUNC(tle_orbit));
   SWIG_INIT_MODULE(package, "_spice_orbit", SWIG_INIT_FUNC(spice_orbit));
   SWIG_INIT_MODULE(package, "_argus_camera", SWIG_INIT_FUNC(argus_camera));
@@ -537,6 +540,7 @@ init_swig_wrap(void)
   SWIG_INIT_MODULE(package, "_air_mspi_l1b1", SWIG_INIT_FUNC(air_mspi_l1b1));
   SWIG_INIT_MODULE(package, "_air_mspi_igc", SWIG_INIT_FUNC(air_mspi_igc));
   SWIG_INIT_MODULE(package, "_air_mspi_igc_collection", SWIG_INIT_FUNC(air_mspi_igc_collection));
+  SWIG_INIT_MODULE(package, "_jia_sample", SWIG_INIT_FUNC(jia_sample));
 #ifdef HAVE_CARTO
   SWIG_INIT_MODULE(package, "_eci_tod_burl", SWIG_INIT_FUNC(eci_tod_burl));
 #endif

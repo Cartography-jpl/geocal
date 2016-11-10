@@ -3416,63 +3416,58 @@ namespace Swig {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_GeoCal__AutoDerivativeRefT_double_t swig_types[0]
-#define SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t swig_types[1]
-#define SWIGTYPE_p_GeoCal__GenericObject swig_types[2]
-#define SWIGTYPE_p_GeoCal__MspiParaxialTransform swig_types[3]
-#define SWIGTYPE_p_allocator_type swig_types[4]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[5]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[6]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[7]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[16]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[17]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[28]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[29]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[30]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[31]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t swig_types[32]
-#define SWIGTYPE_p_char swig_types[33]
-#define SWIGTYPE_p_char_type swig_types[34]
-#define SWIGTYPE_p_difference_type swig_types[35]
-#define SWIGTYPE_p_double swig_types[36]
-#define SWIGTYPE_p_fmtflags swig_types[37]
-#define SWIGTYPE_p_int_type swig_types[38]
-#define SWIGTYPE_p_iostate swig_types[39]
-#define SWIGTYPE_p_off_type swig_types[40]
-#define SWIGTYPE_p_openmode swig_types[41]
-#define SWIGTYPE_p_pos_type swig_types[42]
-#define SWIGTYPE_p_seekdir swig_types[43]
-#define SWIGTYPE_p_size_t swig_types[44]
-#define SWIGTYPE_p_size_type swig_types[45]
-#define SWIGTYPE_p_state_type swig_types[46]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[47]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[48]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[49]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[50]
-#define SWIGTYPE_p_std__invalid_argument swig_types[51]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[52]
-#define SWIGTYPE_p_traits_type swig_types[53]
-#define SWIGTYPE_p_value_type swig_types[54]
-static swig_type_info *swig_types[56];
-static swig_module_info swig_module = {swig_types, 55, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__GenericObject swig_types[0]
+#define SWIGTYPE_p_GeoCal__JiaSample swig_types[1]
+#define SWIGTYPE_p_allocator_type swig_types[2]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[3]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[4]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[5]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[6]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[7]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[8]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[26]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[27]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__JiaSample_t swig_types[28]
+#define SWIGTYPE_p_char swig_types[29]
+#define SWIGTYPE_p_char_type swig_types[30]
+#define SWIGTYPE_p_difference_type swig_types[31]
+#define SWIGTYPE_p_fmtflags swig_types[32]
+#define SWIGTYPE_p_int_type swig_types[33]
+#define SWIGTYPE_p_iostate swig_types[34]
+#define SWIGTYPE_p_off_type swig_types[35]
+#define SWIGTYPE_p_openmode swig_types[36]
+#define SWIGTYPE_p_pos_type swig_types[37]
+#define SWIGTYPE_p_seekdir swig_types[38]
+#define SWIGTYPE_p_size_t swig_types[39]
+#define SWIGTYPE_p_size_type swig_types[40]
+#define SWIGTYPE_p_state_type swig_types[41]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[42]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[43]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[44]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[45]
+#define SWIGTYPE_p_std__invalid_argument swig_types[46]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[47]
+#define SWIGTYPE_p_traits_type swig_types[48]
+#define SWIGTYPE_p_value_type swig_types[49]
+static swig_type_info *swig_types[51];
+static swig_module_info swig_module = {swig_types, 50, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3498,16 +3493,16 @@ static swig_module_info swig_module = {swig_types, 55, 0, 0, 0, 0};
 #define SWIG_TypeQuery SWIG_Python_TypeQuery
 
 /*-----------------------------------------------
-              @(target):= _mspi_paraxial_transform.so
+              @(target):= _jia_sample.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__mspi_paraxial_transform
+#  define SWIG_init    PyInit__jia_sample
 
 #else
-#  define SWIG_init    init_mspi_paraxial_transform
+#  define SWIG_init    init_jia_sample
 
 #endif
-#define SWIG_name    "_mspi_paraxial_transform"
+#define SWIG_name    "_jia_sample"
 
 #define SWIGVERSION 0x030007 
 #define SWIG_VERSION SWIGVERSION
@@ -5252,126 +5247,32 @@ namespace swig {
 }
 
 
-#include "mspi_paraxial_transform.h"
+#include "jia_sample.h"
 
 
-SWIGINTERN swig_type_info*
-SWIG_pchar_descriptor(void)
-{
-  static int init = 0;
-  static swig_type_info* info = 0;
-  if (!init) {
-    info = SWIG_TypeQuery("_p_char");
-    init = 1;
-  }
-  return info;
-}
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
 
 
 SWIGINTERN int
-SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
+SWIG_AsVal_int (PyObject * obj, int *val)
 {
-#if PY_VERSION_HEX>=0x03000000
-  if (PyUnicode_Check(obj))
-#else  
-  if (PyString_Check(obj))
-#endif
-  {
-    char *cstr; Py_ssize_t len;
-#if PY_VERSION_HEX>=0x03000000
-    if (!alloc && cptr) {
-        /* We can't allow converting without allocation, since the internal
-           representation of string in Python 3 is UCS-2/UCS-4 but we require
-           a UTF-8 representation.
-           TODO(bhy) More detailed explanation */
-        return SWIG_RuntimeError;
-    }
-    obj = PyUnicode_AsUTF8String(obj);
-    PyBytes_AsStringAndSize(obj, &cstr, &len);
-    if(alloc) *alloc = SWIG_NEWOBJ;
-#else
-    PyString_AsStringAndSize(obj, &cstr, &len);
-#endif
-    if (cptr) {
-      if (alloc) {
-	/* 
-	   In python the user should not be able to modify the inner
-	   string representation. To warranty that, if you define
-	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
-	   buffer is always returned.
-
-	   The default behavior is just to return the pointer value,
-	   so, be careful.
-	*/ 
-#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
-	if (*alloc != SWIG_OLDOBJ) 
-#else
-	if (*alloc == SWIG_NEWOBJ) 
-#endif
-	  {
-	    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
-	    *alloc = SWIG_NEWOBJ;
-	  }
-	else {
-	  *cptr = cstr;
-	  *alloc = SWIG_OLDOBJ;
-	}
-      } else {
-        #if PY_VERSION_HEX>=0x03000000
-        assert(0); /* Should never reach here in Python 3 */
-        #endif
-	*cptr = SWIG_Python_str_AsChar(obj);
-      }
-    }
-    if (psize) *psize = len + 1;
-#if PY_VERSION_HEX>=0x03000000
-    Py_XDECREF(obj);
-#endif
-    return SWIG_OK;
-  } else {
-    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-    if (pchar_descriptor) {
-      void* vptr = 0;
-      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
-	if (cptr) *cptr = (char *) vptr;
-	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
-	if (alloc) *alloc = SWIG_OLDOBJ;
-	return SWIG_OK;
-      }
-    }
-  }
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN int
-SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
-{
-  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
-  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
-    if (buf) {
-      if (val) *val = new std::string(buf, size - 1);
-      if (alloc == SWIG_NEWOBJ) delete[] buf;
-      return SWIG_NEWOBJ;
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
     } else {
-      if (val) *val = 0;
-      return SWIG_OLDOBJ;
+      if (val) *val = static_cast< int >(v);
     }
-  } else {
-    static int init = 0;
-    static swig_type_info* descriptor = 0;
-    if (!init) {
-      descriptor = SWIG_TypeQuery("std::string" " *");
-      init = 1;
-    }
-    if (descriptor) {
-      std::string *vptr;
-      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
-      if (SWIG_IsOK(res) && val) *val = vptr;
-      return res;
-    }
-  }
-  return SWIG_ERROR;
+  }  
+  return res;
 }
 
 
@@ -5386,6 +5287,19 @@ struct SWIG_null_deleter {
 
 
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
 
 
 SWIGINTERNINLINE PyObject *
@@ -5420,41 +5334,12 @@ SWIG_From_std_string  (const std::string& s)
 }
 
 
-#include <limits.h>
-#if !defined(SWIG_NO_LLONG_MAX)
-# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
-#   define LLONG_MAX __LONG_LONG_MAX__
-#   define LLONG_MIN (-LLONG_MAX - 1LL)
-#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-# endif
-#endif
-
-
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
-
-
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
 
 /* ---------------------------------------------------
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "mspi_paraxial_transform_wrap.h"
+#include "jia_sample_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -6246,29 +6131,24 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
-SWIGINTERN PyObject *_wrap_new_MspiParaxialTransform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_JiaSample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
   PyObject *swig_obj[1] ;
-  GeoCal::MspiParaxialTransform *result = 0 ;
+  GeoCal::JiaSample *result = 0 ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MspiParaxialTransform" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MspiParaxialTransform" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_JiaSample" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
   {
     try {
-      result = (GeoCal::MspiParaxialTransform *)new GeoCal::MspiParaxialTransform((std::string const &)*arg1);
+      result = (GeoCal::JiaSample *)new GeoCal::JiaSample(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6276,45 +6156,87 @@ SWIGINTERN PyObject *_wrap_new_MspiParaxialTransform(PyObject *SWIGUNUSEDPARM(se
     }
   }
   {
-    boost::shared_ptr<  GeoCal::MspiParaxialTransform > *smartresult = result ? new boost::shared_ptr<  GeoCal::MspiParaxialTransform >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::JiaSample > *smartresult = result ? new boost::shared_ptr<  GeoCal::JiaSample >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__JiaSample_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_file_name__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_JiaSample_jia_func(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
+  GeoCal::JiaSample *arg1 = (GeoCal::JiaSample *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
-  std::string result;
+  boost::shared_ptr< GeoCal::JiaSample const > tempshared1 ;
+  boost::shared_ptr< GeoCal::JiaSample const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
   
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__JiaSample_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform__v_file_name" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "JiaSample_jia_func" "', argument " "1"" of type '" "GeoCal::JiaSample const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      arg1 = const_cast< GeoCal::JiaSample * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      arg1 = const_cast< GeoCal::JiaSample * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = ((GeoCal::MspiParaxialTransform const *)arg1)->file_name();
+      ((GeoCal::JiaSample const *)arg1)->jia_func();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_JiaSample___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::JiaSample *arg1 = (GeoCal::JiaSample *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::JiaSample const > tempshared1 ;
+  boost::shared_ptr< GeoCal::JiaSample const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__JiaSample_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "JiaSample___str__" "', argument " "1"" of type '" "GeoCal::JiaSample const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      arg1 = const_cast< GeoCal::JiaSample * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      arg1 = const_cast< GeoCal::JiaSample * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::JiaSample const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6328,746 +6250,73 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_file_name__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_JiaSample__v_blah(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
-  std::string *arg2 = 0 ;
+  GeoCal::JiaSample *arg1 = (GeoCal::JiaSample *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform > *smartarg1 = 0 ;
-  int res2 = SWIG_OLDOBJ ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform__v_file_name" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MspiParaxialTransform__v_file_name" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform__v_file_name" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    try {
-      (arg1)->file_name((std::string const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_file_name(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"MspiParaxialTransform__v_file_name",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 1) {
-    return _wrap_MspiParaxialTransform__v_file_name__SWIG_0(self, argc, argv);
-  }
-  if (argc == 2) {
-    return _wrap_MspiParaxialTransform__v_file_name__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MspiParaxialTransform__v_file_name'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::MspiParaxialTransform::file_name() const\n"
-    "    GeoCal::MspiParaxialTransform::file_name(std::string const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform_paraxial_to_real__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
-  int arg2 ;
-  double arg3 ;
-  double arg4 ;
-  double *arg5 = 0 ;
-  double *arg6 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double temp5 ;
-  int res5 = SWIG_TMPOBJ ;
-  double temp6 ;
-  int res6 = SWIG_TMPOBJ ;
-  
-  arg5 = &temp5;
-  arg6 = &temp6;
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  {
-    try {
-      (arg1)->paraxial_to_real(arg2,arg3,arg4,*arg5,*arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  if (SWIG_IsTmpObj(res5)) {
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
-  } else {
-    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
-  }
-  if (SWIG_IsTmpObj(res6)) {
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg6)));
-  } else {
-    int new_flags = SWIG_IsNewObj(res6) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg6), SWIGTYPE_p_double, new_flags));
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform_paraxial_to_real__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
-  int arg2 ;
-  GeoCal::AutoDerivative< double > *arg3 = 0 ;
-  GeoCal::AutoDerivative< double > *arg4 = 0 ;
-  GeoCal::AutoDerivative< double > *arg5 = 0 ;
-  GeoCal::AutoDerivative< double > *arg6 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
-  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared4 ;
-  void *argp5 = 0 ;
-  int res5 = 0 ;
-  boost::shared_ptr< GeoCal::AutoDerivative< double > > tempshared5 ;
-  void *argp6 = 0 ;
-  int res6 = 0 ;
-  boost::shared_ptr< GeoCal::AutoDerivative< double > > tempshared6 ;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::AutoDerivative<double> *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
-        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::AutoDerivative<double> *ptr;
-    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
-    if (SWIG_IsOK(res4)) {
-      arg4 = ptr;
-    } else {
-      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
-      if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
-      }
-      if (!argp4) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
-        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared4.get());
-      } else {
-        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::AutoDerivative<double> *ptr;
-    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
-    if (SWIG_IsOK(res5)) {
-      arg5 = ptr;
-    } else {
-      res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
-      if (!SWIG_IsOK(res5)) {
-        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > &""'"); 
-      }
-      if (!argp5) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared5 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp5);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp5);
-        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared5.get());
-      } else {
-        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp5)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::AutoDerivative<double> *ptr;
-    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
-    if (SWIG_IsOK(res6)) {
-      arg6 = ptr;
-    } else {
-      res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
-      if (!SWIG_IsOK(res6)) {
-        SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > &""'"); 
-      }
-      if (!argp6) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform_paraxial_to_real" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared6 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp6);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp6);
-        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared6.get());
-      } else {
-        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp6)->get());
-      }
-    }
-  }
-  {
-    try {
-      ((GeoCal::MspiParaxialTransform const *)arg1)->paraxial_to_real(arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,*arg5,*arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform_paraxial_to_real(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[7] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"MspiParaxialTransform_paraxial_to_real",0,6,argv))) SWIG_fail;
-  --argc;
-  if (argc == 4) {
-    return _wrap_MspiParaxialTransform_paraxial_to_real__SWIG_0(self, argc, argv);
-  }
-  if (argc == 6) {
-    return _wrap_MspiParaxialTransform_paraxial_to_real__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MspiParaxialTransform_paraxial_to_real'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::MspiParaxialTransform::paraxial_to_real(int,double,double,double &,double &)\n"
-    "    GeoCal::MspiParaxialTransform::paraxial_to_real(int,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > &,GeoCal::AutoDerivative< double > &) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform_real_to_paraxial__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
-  int arg2 ;
-  double arg3 ;
-  double arg4 ;
-  double *arg5 = 0 ;
-  double *arg6 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double temp5 ;
-  int res5 = SWIG_TMPOBJ ;
-  double temp6 ;
-  int res6 = SWIG_TMPOBJ ;
-  
-  arg5 = &temp5;
-  arg6 = &temp6;
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  {
-    try {
-      (arg1)->real_to_paraxial(arg2,arg3,arg4,*arg5,*arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  if (SWIG_IsTmpObj(res5)) {
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
-  } else {
-    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
-  }
-  if (SWIG_IsTmpObj(res6)) {
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg6)));
-  } else {
-    int new_flags = SWIG_IsNewObj(res6) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
-    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg6), SWIGTYPE_p_double, new_flags));
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform_real_to_paraxial__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
-  int arg2 ;
-  GeoCal::AutoDerivative< double > *arg3 = 0 ;
-  GeoCal::AutoDerivative< double > *arg4 = 0 ;
-  GeoCal::AutoDerivative< double > *arg5 = 0 ;
-  GeoCal::AutoDerivative< double > *arg6 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
-  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared4 ;
-  void *argp5 = 0 ;
-  int res5 = 0 ;
-  boost::shared_ptr< GeoCal::AutoDerivative< double > > tempshared5 ;
-  void *argp6 = 0 ;
-  int res6 = 0 ;
-  boost::shared_ptr< GeoCal::AutoDerivative< double > > tempshared6 ;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::AutoDerivative<double> *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
-        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::AutoDerivative<double> *ptr;
-    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
-    if (SWIG_IsOK(res4)) {
-      arg4 = ptr;
-    } else {
-      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
-      if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
-      }
-      if (!argp4) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
-        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared4.get());
-      } else {
-        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::AutoDerivative<double> *ptr;
-    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
-    if (SWIG_IsOK(res5)) {
-      arg5 = ptr;
-    } else {
-      res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
-      if (!SWIG_IsOK(res5)) {
-        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > &""'"); 
-      }
-      if (!argp5) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double > &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared5 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp5);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp5);
-        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared5.get());
-      } else {
-        arg5 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp5)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::AutoDerivative<double> *ptr;
-    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
-    if (SWIG_IsOK(res6)) {
-      arg6 = ptr;
-    } else {
-      res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
-      if (!SWIG_IsOK(res6)) {
-        SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > &""'"); 
-      }
-      if (!argp6) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MspiParaxialTransform_real_to_paraxial" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double > &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared6 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp6);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp6);
-        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared6.get());
-      } else {
-        arg6 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp6)->get());
-      }
-    }
-  }
-  {
-    try {
-      ((GeoCal::MspiParaxialTransform const *)arg1)->real_to_paraxial(arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,*arg5,*arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform_real_to_paraxial(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[7] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"MspiParaxialTransform_real_to_paraxial",0,6,argv))) SWIG_fail;
-  --argc;
-  if (argc == 4) {
-    return _wrap_MspiParaxialTransform_real_to_paraxial__SWIG_0(self, argc, argv);
-  }
-  if (argc == 6) {
-    return _wrap_MspiParaxialTransform_real_to_paraxial__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MspiParaxialTransform_real_to_paraxial'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::MspiParaxialTransform::real_to_paraxial(int,double,double,double &,double &)\n"
-    "    GeoCal::MspiParaxialTransform::real_to_paraxial(int,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > const &,GeoCal::AutoDerivative< double > &,GeoCal::AutoDerivative< double > &) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform_has_row(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
-  bool result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"MspiParaxialTransform_has_row",2,2,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform_has_row" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MspiParaxialTransform_has_row" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  {
-    try {
-      result = (bool)((GeoCal::MspiParaxialTransform const *)arg1)->has_row(arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MspiParaxialTransform___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::JiaSample const > tempshared1 ;
+  boost::shared_ptr< GeoCal::JiaSample const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::string result;
+  int result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__JiaSample_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform___str__" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "JiaSample__v_blah" "', argument " "1"" of type '" "GeoCal::JiaSample const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      arg1 = const_cast< GeoCal::JiaSample * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::JiaSample > * >(argp1);
+      arg1 = const_cast< GeoCal::JiaSample * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      result = ((GeoCal::MspiParaxialTransform const *)arg1)->print_to_string();
+      result = (int)((GeoCal::JiaSample const *)arg1)->blah();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_MspiParaxialTransform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_JiaSample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
+  GeoCal::JiaSample *arg1 = (GeoCal::JiaSample *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiParaxialTransform > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::JiaSample > tempshared1 ;
+  boost::shared_ptr< GeoCal::JiaSample > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__JiaSample_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MspiParaxialTransform" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_JiaSample" "', argument " "1"" of type '" "GeoCal::JiaSample *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::JiaSample > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::JiaSample > * >(argp1);
+      arg1 = const_cast< GeoCal::JiaSample * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::MspiParaxialTransform > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::JiaSample > * >(argp1);
+      arg1 = const_cast< GeoCal::JiaSample * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -7086,14 +6335,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *MspiParaxialTransform_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *JiaSample_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__JiaSample_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *MspiParaxialTransform_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *JiaSample_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -7118,44 +6367,30 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
-	 { (char *)"new_MspiParaxialTransform", (PyCFunction)_wrap_new_MspiParaxialTransform, METH_O, (char *)"\n"
+	 { (char *)"new_JiaSample", (PyCFunction)_wrap_new_JiaSample, METH_O, (char *)"\n"
 		"\n"
-		"MspiParaxialTransform::MspiParaxialTransform(const std::string &File_name)\n"
-		"Constructor that reads the given file for the transform coefficients.\n"
-		"\n"
-		""},
-	 { (char *)"MspiParaxialTransform__v_file_name", _wrap_MspiParaxialTransform__v_file_name, METH_VARARGS, (char *)"\n"
-		"\n"
-		"void GeoCal::MspiParaxialTransform::file_name(const std::string &Fname)\n"
+		"GeoCal::JiaSample::JiaSample(int Blah)\n"
 		"\n"
 		""},
-	 { (char *)"MspiParaxialTransform_paraxial_to_real", _wrap_MspiParaxialTransform_paraxial_to_real, METH_VARARGS, (char *)"\n"
+	 { (char *)"JiaSample_jia_func", (PyCFunction)_wrap_JiaSample_jia_func, METH_O, (char *)"\n"
 		"\n"
-		"void MspiParaxialTransform::paraxial_to_real(int Row_number, const AutoDerivative< double > &Paraxial_x, const\n"
-		"AutoDerivative< double > &Paraxial_y, AutoDerivative< double >\n"
-		"&Real_x, AutoDerivative< double > &Real_y) const\n"
+		"void JiaSample::jia_func() const\n"
+		"Sample jia function. \n"
+		""},
+	 { (char *)"JiaSample___str__", (PyCFunction)_wrap_JiaSample___str__, METH_O, NULL},
+	 { (char *)"JiaSample__v_blah", (PyCFunction)_wrap_JiaSample__v_blah, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::JiaSample::blah() const\n"
+		"Sample \"accessor\" function, we'll put this in as a python attribute\n"
+		"in swig. \n"
+		""},
+	 { (char *)"delete_JiaSample", (PyCFunction)_wrap_delete_JiaSample, METH_O, (char *)"\n"
+		"\n"
+		"virtual GeoCal::JiaSample::~JiaSample()\n"
 		"\n"
 		""},
-	 { (char *)"MspiParaxialTransform_real_to_paraxial", _wrap_MspiParaxialTransform_real_to_paraxial, METH_VARARGS, (char *)"\n"
-		"\n"
-		"void MspiParaxialTransform::real_to_paraxial(int Row_number, const AutoDerivative< double > &Real_x, const\n"
-		"AutoDerivative< double > &Real_y, AutoDerivative< double >\n"
-		"&Paraxial_x, AutoDerivative< double > &Paraxial_y) const\n"
-		"\n"
-		""},
-	 { (char *)"MspiParaxialTransform_has_row", _wrap_MspiParaxialTransform_has_row, METH_VARARGS, (char *)"\n"
-		"\n"
-		"bool GeoCal::MspiParaxialTransform::has_row(int Row_number) const\n"
-		"True if we have the given row. \n"
-		""},
-	 { (char *)"MspiParaxialTransform___str__", (PyCFunction)_wrap_MspiParaxialTransform___str__, METH_O, NULL},
-	 { (char *)"delete_MspiParaxialTransform", (PyCFunction)_wrap_delete_MspiParaxialTransform, METH_O, (char *)"\n"
-		"\n"
-		"virtual GeoCal::MspiParaxialTransform::~MspiParaxialTransform()\n"
-		"\n"
-		""},
-	 { (char *)"MspiParaxialTransform_swigregister", MspiParaxialTransform_swigregister, METH_VARARGS, NULL},
-	 { (char *)"MspiParaxialTransform_swiginit", MspiParaxialTransform_swiginit, METH_VARARGS, NULL},
+	 { (char *)"JiaSample_swigregister", JiaSample_swigregister, METH_VARARGS, NULL},
+	 { (char *)"JiaSample_swiginit", JiaSample_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -7171,14 +6406,8 @@ static void *_p_std__basic_istreamT_char_std__char_traitsT_char_t_tTo_p_std__bas
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_iosT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ios< char,std::char_traits< char > > *) (std::basic_istream< char > *) ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
-static void *_p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivative< double > *) x));
-}
-static void *_p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivativeRef< double > *) x));
-}
-static void *_p_GeoCal__MspiParaxialTransformTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::MspiParaxialTransform *) x));
+static void *_p_GeoCal__JiaSampleTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::JiaSample *) x));
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_istream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
@@ -7186,22 +6415,12 @@ static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__ba
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
-static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+static void *_p_boost__shared_ptrT_GeoCal__JiaSample_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivative< double > > *)x);
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::JiaSample > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::MspiParaxialTransform > *)x);
-}
-static swig_type_info _swigt__p_GeoCal__AutoDerivativeRefT_double_t = {"_p_GeoCal__AutoDerivativeRefT_double_t", "GeoCal::AutoDerivativeRef< double > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__AutoDerivativeT_double_t = {"_p_GeoCal__AutoDerivativeT_double_t", "GeoCal::AutoDerivative< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__MspiParaxialTransform = {"_p_GeoCal__MspiParaxialTransform", "GeoCal::MspiParaxialTransform *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__JiaSample = {"_p_GeoCal__JiaSample", "GeoCal::JiaSample *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
@@ -7227,14 +6446,11 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_5_t = {"_p_blitz__ArrayT_int_5
 static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6_t", "blitz::Array< int,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t = {"_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t", "boost::shared_ptr< GeoCal::MspiParaxialTransform > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__JiaSample_t = {"_p_boost__shared_ptrT_GeoCal__JiaSample_t", "boost::shared_ptr< GeoCal::JiaSample > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
@@ -7255,10 +6471,8 @@ static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *"
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_GeoCal__AutoDerivativeRefT_double_t,
-  &_swigt__p_GeoCal__AutoDerivativeT_double_t,
   &_swigt__p_GeoCal__GenericObject,
-  &_swigt__p_GeoCal__MspiParaxialTransform,
+  &_swigt__p_GeoCal__JiaSample,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
@@ -7284,14 +6498,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_6_t,
   &_swigt__p_blitz__ArrayT_int_7_t,
   &_swigt__p_blitz__ArrayT_int_8_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__JiaSample_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
-  &_swigt__p_double,
   &_swigt__p_fmtflags,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
@@ -7312,10 +6523,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_value_type,
 };
 
-static swig_cast_info _swigc__p_GeoCal__AutoDerivativeRefT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__AutoDerivativeT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__MspiParaxialTransform, _p_GeoCal__MspiParaxialTransformTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__MspiParaxialTransform[] = {  {&_swigt__p_GeoCal__MspiParaxialTransform, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__JiaSample, _p_GeoCal__JiaSampleTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__JiaSample[] = {  {&_swigt__p_GeoCal__JiaSample, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7341,14 +6550,11 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_5_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, _p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__JiaSample_t, _p_boost__shared_ptrT_GeoCal__JiaSample_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__JiaSample_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__JiaSample_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
@@ -7369,10 +6575,8 @@ static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_GeoCal__AutoDerivativeRefT_double_t,
-  _swigc__p_GeoCal__AutoDerivativeT_double_t,
   _swigc__p_GeoCal__GenericObject,
-  _swigc__p_GeoCal__MspiParaxialTransform,
+  _swigc__p_GeoCal__JiaSample,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,
@@ -7398,14 +6602,11 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_6_t,
   _swigc__p_blitz__ArrayT_int_7_t,
   _swigc__p_blitz__ArrayT_int_8_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__JiaSample_t,
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
-  _swigc__p_double,
   _swigc__p_fmtflags,
   _swigc__p_int_type,
   _swigc__p_iostate,
@@ -8110,8 +7311,8 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::MspiParaxialTransform))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::MspiParaxialTransform >("boost::shared_ptr< GeoCal::MspiParaxialTransform > *"));
+  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::JiaSample))] =
+  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::JiaSample >("boost::shared_ptr< GeoCal::JiaSample > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

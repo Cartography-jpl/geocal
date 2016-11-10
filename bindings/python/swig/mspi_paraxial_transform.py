@@ -216,18 +216,22 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
         """
         _mspi_paraxial_transform.MspiParaxialTransform_swiginit(self, _mspi_paraxial_transform.new_MspiParaxialTransform(Fname))
 
-    def _v_file_name(self):
+    def _v_file_name(self, *args):
         """
 
-        const std::string& GeoCal::MspiParaxialTransform::file_name() const
-        File name for MspiConfigFile. 
+        void GeoCal::MspiParaxialTransform::file_name(const std::string &Fname)
+
         """
-        return _mspi_paraxial_transform.MspiParaxialTransform__v_file_name(self)
+        return _mspi_paraxial_transform.MspiParaxialTransform__v_file_name(self, *args)
 
 
     @property
     def file_name(self):
         return self._v_file_name()
+
+    @file_name.setter
+    def file_name(self, value):
+      self._v_file_name(value)
 
 
     def paraxial_to_real(self, *args):

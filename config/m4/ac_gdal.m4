@@ -16,6 +16,8 @@
 
 AC_DEFUN([AC_GDAL],
 [
+# Guard against running twice
+if test "x$done_gdal" = "x"; then
 AC_HANDLE_WITH_ARG([gdal], [gdal], [GDAL], $2, $3, $1)
 AC_ARG_WITH([extra-gdal-arg],
             [AS_HELP_STRING([--with-extra-gdal-arg],
@@ -50,7 +52,7 @@ if test "x$want_gdal" = "xyes"; then
         else
 	    AC_SEARCH_LIB([GDAL], [gdal], , [gdal.h], , [libgdal], [-lgdal])
         fi
-	if test "$succeeded" != "yes" -a "x$build_needed_gdal" == "xyes" ; then
+	if test "$succeeded" != "yes" -a "x$build_needed_gdal" = "xyes" ; then
             build_gdal="yes"
             ac_gdal_path="\${prefix}"
             GDAL_PREFIX="$ac_gdal_path"
@@ -87,6 +89,12 @@ if test "x$want_gdal" = "xyes"; then
 		    succeeded=no])
 	fi
         if test "$succeeded" = "yes" ; then
+	        # If we are building, then use AFIDSTOP here instead. prefix
+		# is fine in the makefile, but GDAL_PREFIX is used in the
+		# setup_env file.
+ 	        if test "$build_gdal" = "yes"; then
+	            GDAL_PREFIX="\${AFIDSTOP}"
+		fi
                 AC_SUBST(GDAL_PREFIX)
                 AC_SUBST(GDAL_CFLAGS)
                 AC_SUBST(GDAL_LIBS)
@@ -127,4 +135,6 @@ if test "$build_ecw_plugin" = "yes"; then
 fi
 
 AM_CONDITIONAL([BUILD_ECW_PLUGIN], [test "$build_ecw_plugin" = "yes"])
+done_gdal="yes"
+fi
 ])

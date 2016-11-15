@@ -20426,6 +20426,8 @@ fi
 # unit tests depend on this. We could switch to having most tests use
 # VicarLite files, but we won't do that yet.
 
+# Guard against running twice
+if test "x$done_gdal" = "x"; then
 
 have_gdal="no"
 build_gdal="no"
@@ -20612,7 +20614,7 @@ fi
   fi
 
         fi
-	if test "$succeeded" != "yes" -a "x$build_needed_gdal" == "xyes" ; then
+	if test "$succeeded" != "yes" -a "x$build_needed_gdal" = "xyes" ; then
             build_gdal="yes"
             ac_gdal_path="\${prefix}"
             GDAL_PREFIX="$ac_gdal_path"
@@ -20723,6 +20725,12 @@ $as_echo "$as_me: WARNING: We require GDAL version to be >= 1.9.2. There are bug
 
 	fi
         if test "$succeeded" = "yes" ; then
+	        # If we are building, then use AFIDSTOP here instead. prefix
+		# is fine in the makefile, but GDAL_PREFIX is used in the
+		# setup_env file.
+ 	        if test "$build_gdal" = "yes"; then
+	            GDAL_PREFIX="\${AFIDSTOP}"
+		fi
 
 
 
@@ -21700,6 +21708,8 @@ else
   BUILD_ECW_PLUGIN_FALSE=
 fi
 
+done_gdal="yes"
+fi
 
 
 # Guard against running twice

@@ -27,6 +27,8 @@
 
 AC_DEFUN([AC_FFTW],
 [
+# Guard against running twice
+if test "x$done_fftw" = "x"; then
 AC_HANDLE_WITH_ARG([fftw], [fftw], [fftw], $2, $3, $1)
 if test "x$want_fftw" = "xyes"; then
         AC_MSG_CHECKING([for Fftw library])
@@ -61,4 +63,6 @@ AM_CONDITIONAL([BUILD_FFTW], [test "$build_fftw" = "yes"])
 
 AC_CHECK_FOUND([fftw], [fftw],[fftw],$1,$2)
 
+done_fftw="yes"
+fi
 ])

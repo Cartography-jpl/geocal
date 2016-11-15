@@ -26,6 +26,8 @@
 
 AC_DEFUN([AC_AFIDS_DATA],
 [
+# Guard against running twice
+if test "x$done_afids_data" = "x"; then
 AC_HANDLE_WITH_ARG([afids_data], [afids-data], [AFIDS data], $2, $3, $1)
 
 if test "x$want_afids_data" = "xyes"; then
@@ -64,5 +66,6 @@ AM_CONDITIONAL([HAVE_AFIDS_DATA], [test "$have_afids_data" = "yes"])
 AM_CONDITIONAL([BUILD_AFIDS_DATA], [test "$build_afids_data" = "yes"])
 
 AC_CHECK_FOUND([afids_data], [afids-data],[AFIDS Data],$1,$2)
-
+done_afids_data=yes
+fi
 ])

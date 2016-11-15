@@ -27,6 +27,8 @@
 
 AC_DEFUN([AC_GSL],
 [
+# Guard against running twice
+if test "x$done_gsl" = "x"; then
 AC_HANDLE_WITH_ARG([gsl], [gsl], [GSL], $2, $3, $1)
 if test "x$want_gsl" = "xyes"; then
         AC_MSG_CHECKING([for GSL library])
@@ -62,4 +64,6 @@ AM_CONDITIONAL([BUILD_GSL], [test "$build_gsl" = "yes"])
 
 AC_CHECK_FOUND([gsl], [gsl],[GSL],$1,$2)
 
+done_gsl="yes"
+fi
 ])

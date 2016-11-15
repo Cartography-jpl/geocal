@@ -28,6 +28,8 @@
 
 AC_DEFUN([AC_VICAR_GDALPLUGIN],
 [
+# Guard against running twice
+if test "x$done_vicar_gdalplugin" = "x"; then
 AC_HANDLE_WITH_ARG([vicar_gdalplugin], [vicar-gdalplugin], [VICAR GDAL Plugin], $2, $3, $1)
 
 if test "x$want_vicar_gdalplugin" = "xyes"; then
@@ -69,4 +71,6 @@ AM_CONDITIONAL([BUILD_VICAR_GDALPLUGIN], [test "$build_vicar_gdalplugin" = "yes"
 
 AC_CHECK_FOUND([vicar_gdalplugin], [vicar-gdalplugin],[VICAR GDAL Plugin],$1,$2)
 
+done_vicar_gdalplugin="yes"
+fi
 ])

@@ -28,6 +28,8 @@
 
 AC_DEFUN([AC_HDFEOS5],
 [
+# Guard against running twice
+if test "x$done_hdfeos5" = "x"; then
 AC_HANDLE_WITH_ARG([hdfeos5], [hdfeos5], [Hdfeos5 library], $2, $3, $1)
 if test "x$want_hdfeos5" = "xyes"; then
         AC_HDF5($1, $2, default_search)
@@ -79,4 +81,6 @@ AM_CONDITIONAL([BUILD_HDFEOS5], [test "$build_hdfeos5" = "yes"])
 
 AC_CHECK_FOUND([hdfeos5], [hdfeos5],[Hdfeos5 library],$1,$2)
 
+done_hdfeos5="yes"
+fi
 ])

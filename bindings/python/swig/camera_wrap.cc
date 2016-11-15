@@ -10736,22 +10736,22 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Camera__v_number_band", (PyCFunction)_wrap_Camera__v_number_band, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_band() const =0\n"
+		"virtual int GeoCal::Camera::number_band() const  =0\n"
 		"Number of bands in camera. \n"
 		""},
 	 { (char *)"Camera_number_line", _wrap_Camera_number_line, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_line(int Band) const =0\n"
+		"virtual int GeoCal::Camera::number_line(int Band) const  =0\n"
 		"Number of lines in camera for given band. \n"
 		""},
 	 { (char *)"Camera_number_sample", _wrap_Camera_number_sample, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_sample(int Band) const =0\n"
+		"virtual int GeoCal::Camera::number_sample(int Band) const  =0\n"
 		"Number of samples in camera for given band. \n"
 		""},
 	 { (char *)"Camera_frame_coordinate", _wrap_Camera_frame_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const =0\n"
+		"virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const  =0\n"
 		"This converts from ScLookVector to FrameCoordinate for a given band.\n"
 		"\n"
 		"Note that the FrameCoordinate may be outside of the range (0,\n"
@@ -10761,7 +10761,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Camera_frame_coordinate_with_derivative", _wrap_Camera_frame_coordinate_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual FrameCoordinateWithDerivative GeoCal::Camera::frame_coordinate_with_derivative(const ScLookVectorWithDerivative &Sl, int Band) const =0\n"
+		"virtual FrameCoordinateWithDerivative GeoCal::Camera::frame_coordinate_with_derivative(const ScLookVectorWithDerivative &Sl, int Band) const  =0\n"
 		"Variation of frame_coordinate that both propagate derivative\n"
 		"information in the ScLookVector and adds in any derivatives from the\n"
 		"parameters. \n"
@@ -10783,7 +10783,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Camera_sc_look_vector", _wrap_Camera_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVector GeoCal::Camera::sc_look_vector(const FrameCoordinate &F, int Band) const =0\n"
+		"virtual ScLookVector GeoCal::Camera::sc_look_vector(const FrameCoordinate &F, int Band) const  =0\n"
 		"Convert from FrameCoordinate to ScLookVector.\n"
 		"\n"
 		"It is perfectly allowable for F.line to be outside the range (0,\n"
@@ -10793,7 +10793,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Camera_sc_look_vector_with_derivative", _wrap_Camera_sc_look_vector_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::Camera::sc_look_vector_with_derivative(const FrameCoordinateWithDerivative &F, int Band) const =0\n"
+		"virtual ScLookVectorWithDerivative GeoCal::Camera::sc_look_vector_with_derivative(const FrameCoordinateWithDerivative &F, int Band) const  =0\n"
 		"Variation of sc_look_vector that both propagate derivative information\n"
 		"in the FrameCoordinate and adds in any derivatives from the\n"
 		"parameters. \n"

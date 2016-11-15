@@ -213,7 +213,7 @@ class ImageMask(geocal_swig.generic_object.GenericObject):
     def mask(self, Line, Sample):
         """
 
-        virtual bool GeoCal::ImageMask::mask(int Line, int Sample) const =0
+        virtual bool GeoCal::ImageMask::mask(int Line, int Sample) const  =0
         Indicate if a particular point is masked.
 
         If true, the point is masked and should not be used in processing

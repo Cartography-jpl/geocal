@@ -6769,7 +6769,7 @@ static PyMethodDef SwigMethods[] = {
 		"&New, const ImageMask &New_mask, const ImageCoordinate &Ref_loc, const\n"
 		"ImageCoordinate &New_guess, ImageCoordinate &New_res, double\n"
 		"&Line_sigma, double &Sample_sigma, bool &Success, int *Diagnostic=0)\n"
-		"const =0\n"
+		"const  =0\n"
 		"Match a point found in the reference image with a point in the new\n"
 		"image.\n"
 		"\n"

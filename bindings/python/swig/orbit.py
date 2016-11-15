@@ -221,7 +221,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def ci_look_vector(self, *args):
         """
 
-        virtual CartesianInertialLookVector GeoCal::OrbitData::ci_look_vector(const ScLookVector &Sl) const =0
+        virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const  =0
         Convert from ScLookVector to CartesianInertialLookVector. 
         """
         return _orbit.OrbitData_ci_look_vector(self, *args)
@@ -230,7 +230,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def cf_look_vector(self, *args):
         """
 
-        virtual CartesianFixedLookVector GeoCal::OrbitData::cf_look_vector(const ScLookVector &Sl) const =0
+        virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const  =0
         Convert from ScLookVector to CartesianFixedLookVector. 
         """
         return _orbit.OrbitData_cf_look_vector(self, *args)
@@ -239,7 +239,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def sc_look_vector(self, *args):
         """
 
-        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const =0
+        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const  =0
         Convert from CartesianFixedLookVector to ScLookVector. 
         """
         return _orbit.OrbitData_sc_look_vector(self, *args)
@@ -284,7 +284,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def _v_position_ci(self):
         """
 
-        virtual boost::shared_ptr<CartesianInertial> GeoCal::OrbitData::position_ci() const =0
+        virtual boost::shared_ptr<CartesianInertial> GeoCal::OrbitData::position_ci() const  =0
         Return position as a pointer. 
         """
         return _orbit.OrbitData__v_position_ci(self)
@@ -298,7 +298,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def _v_position_cf(self):
         """
 
-        virtual boost::shared_ptr<CartesianFixed> GeoCal::OrbitData::position_cf() const =0
+        virtual boost::shared_ptr<CartesianFixed> GeoCal::OrbitData::position_cf() const  =0
         Return position as a pointer. 
         """
         return _orbit.OrbitData__v_position_cf(self)
@@ -355,7 +355,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def _v_time(self):
         """
 
-        virtual Time GeoCal::OrbitData::time() const =0
+        virtual Time GeoCal::OrbitData::time() const  =0
         Return Time of OrbitData. 
         """
         return _orbit.OrbitData__v_time(self)
@@ -369,7 +369,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def _v_time_with_derivative(self):
         """
 
-        virtual TimeWithDerivative GeoCal::OrbitData::time_with_derivative() const =0
+        virtual TimeWithDerivative GeoCal::OrbitData::time_with_derivative() const  =0
         Return TimeWithDerivative of OrbitData. 
         """
         return _orbit.OrbitData__v_time_with_derivative(self)
@@ -455,7 +455,7 @@ class QuaternionOrbitData(OrbitData):
     def ci_look_vector(self, *args):
         """
 
-        CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const
+        CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const
         Convert to CartesianInertialLookVector. 
         """
         return _orbit.QuaternionOrbitData_ci_look_vector(self, *args)
@@ -464,7 +464,7 @@ class QuaternionOrbitData(OrbitData):
     def cf_look_vector(self, *args):
         """
 
-        CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const
+        CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const
         Convert to CartesianFixedLookVector. 
         """
         return _orbit.QuaternionOrbitData_cf_look_vector(self, *args)
@@ -796,7 +796,7 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def orbit_data(self, *args):
         """
 
-        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0
+        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const  =0
         Return OrbitData for the given time.
 
         We should have min_time() <= T < max_time(). This version should

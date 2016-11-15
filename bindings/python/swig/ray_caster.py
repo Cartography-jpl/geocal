@@ -216,7 +216,7 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
     def _v_start_position(self):
         """
 
-        virtual int GeoCal::RayCaster::start_position() const =0
+        virtual int GeoCal::RayCaster::start_position() const  =0
         The smallest position covered by this class. 
         """
         return _ray_caster.RayCaster__v_start_position(self)
@@ -230,7 +230,7 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
     def _v_number_position(self):
         """
 
-        virtual int GeoCal::RayCaster::number_position() const =0
+        virtual int GeoCal::RayCaster::number_position() const  =0
         The number of position covered by this class. 
         """
         return _ray_caster.RayCaster__v_number_position(self)
@@ -244,7 +244,7 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
     def _v_last_position(self):
         """
 
-        virtual bool GeoCal::RayCaster::last_position() const =0
+        virtual bool GeoCal::RayCaster::last_position() const  =0
         Returns true when we have stepped through all positions from
         start_position() to start_position() + number_position() - 1. 
         """
@@ -259,7 +259,7 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
     def _v_current_position(self):
         """
 
-        virtual int GeoCal::RayCaster::current_position() const =0
+        virtual int GeoCal::RayCaster::current_position() const  =0
         The position that was last returned by next_position. 
         """
         return _ray_caster.RayCaster__v_current_position(self)

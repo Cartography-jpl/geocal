@@ -6695,23 +6695,23 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"RayCaster__v_start_position", (PyCFunction)_wrap_RayCaster__v_start_position, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::RayCaster::start_position() const =0\n"
+		"virtual int GeoCal::RayCaster::start_position() const  =0\n"
 		"The smallest position covered by this class. \n"
 		""},
 	 { (char *)"RayCaster__v_number_position", (PyCFunction)_wrap_RayCaster__v_number_position, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::RayCaster::number_position() const =0\n"
+		"virtual int GeoCal::RayCaster::number_position() const  =0\n"
 		"The number of position covered by this class. \n"
 		""},
 	 { (char *)"RayCaster__v_last_position", (PyCFunction)_wrap_RayCaster__v_last_position, METH_O, (char *)"\n"
 		"\n"
-		"virtual bool GeoCal::RayCaster::last_position() const =0\n"
+		"virtual bool GeoCal::RayCaster::last_position() const  =0\n"
 		"Returns true when we have stepped through all positions from\n"
 		"start_position() to start_position() + number_position() - 1. \n"
 		""},
 	 { (char *)"RayCaster__v_current_position", (PyCFunction)_wrap_RayCaster__v_current_position, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::RayCaster::current_position() const =0\n"
+		"virtual int GeoCal::RayCaster::current_position() const  =0\n"
 		"The position that was last returned by next_position. \n"
 		""},
 	 { (char *)"RayCaster_next_position", (PyCFunction)_wrap_RayCaster_next_position, METH_O, (char *)"\n"

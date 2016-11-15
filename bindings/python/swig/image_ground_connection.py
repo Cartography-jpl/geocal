@@ -328,7 +328,7 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def ground_coordinate_dem(self, Ic, D):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate_dem(const ImageCoordinate &Ic, const Dem &D) const =0
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate_dem(const ImageCoordinate &Ic, const Dem &D) const  =0
         Return ground coordinate that goes with a particular image coordinate.
 
         This version supplies a Dem to use. 
@@ -357,7 +357,7 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def image_coordinate(self, Gc):
         """
 
-        virtual ImageCoordinate GeoCal::ImageGroundConnection::image_coordinate(const GroundCoordinate &Gc) const =0
+        virtual ImageCoordinate GeoCal::ImageGroundConnection::image_coordinate(const GroundCoordinate &Gc) const  =0
         Return image coordinate that goes with a particular GroundCoordinate.
 
         For some types of ImageGroundConnection, we might not be able to

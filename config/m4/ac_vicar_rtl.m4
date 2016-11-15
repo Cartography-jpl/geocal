@@ -30,13 +30,15 @@
 
 AC_DEFUN([AC_VICAR_RTL],
 [
+# Guard against running twice
+if test "x$done_vicar_rtl" = "x"; then
 AC_HANDLE_WITH_ARG([vicar_rtl], [vicar-rtl], [VICAR RTL], $2, $3, $1)
 
 if test "x$want_vicar_rtl" = "xyes"; then
         AC_MSG_CHECKING([for VICAR RTL library])
         succeeded=no
 	VICAR_RTL_BUILD_DEPEND=""
-        if test "$build_vicar_rtl" == "yes"; then
+        if test "$build_vicar_rtl" = "yes"; then
             VICAR_RTL_LIBS="libvicar_rtl.la"
             VICAR_RTL_BUILD_DEPEND="libvicar_rtl.la"
             VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
@@ -50,7 +52,7 @@ if test "x$want_vicar_rtl" = "xyes"; then
                           [zvproto.h], , [libvicar_rtl], [-lvicar_rtl])
 	    VICAR_RTL_LIBS="${VICAR_RTL_LIBS} \$(CURSES_LIB) \$(FLIBS)"
         fi
-	if test "$succeeded" != "yes" -a "x$build_needed_vicar_rtl" == "xyes" ; then
+	if test "$succeeded" != "yes" -a "x$build_needed_vicar_rtl" = "xyes" ; then
             build_vicar_rtl="yes"
             ac_vicar_rtl_path="\${prefix}"
             VICAR_RTL_LIBS="libvicar_rtl.la"
@@ -87,4 +89,6 @@ AM_CONDITIONAL([HAVE_VICAR_RTL], [test "$have_vicar_rtl" = "yes"])
 AM_CONDITIONAL([BUILD_VICAR_RTL], [test "$build_vicar_rtl" = "yes"])
 
 AC_CHECK_FOUND([vicar_rtl], [vicar-rtl],[VICAR RTL],$1,$2)
+done_vicar_rtl="yes"
+fi
 ])

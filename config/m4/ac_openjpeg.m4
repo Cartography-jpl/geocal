@@ -12,6 +12,8 @@
 
 AC_DEFUN([AC_OPENJPEG],
 [
+# Guard against running twice
+if test "x$done_openjpeg" = "x"; then
 AC_HANDLE_WITH_ARG([openjpeg], [openjpeg], [openjpeg], $2, $3, $1)
 if test "x$want_openjpeg" = "xyes"; then
         AC_MSG_CHECKING([for openjpeg library])
@@ -49,4 +51,6 @@ AM_CONDITIONAL([HAVE_OPENJPEG], [test "$have_openjpeg" = "yes"])
 AM_CONDITIONAL([BUILD_OPENJPEG], [test "$build_openjpeg" = "yes"])
 
 AC_CHECK_FOUND([openjpeg], [openjpeg],[openjpeg],$1,$2)
+done_openjpeg="yes"
+fi
 ])

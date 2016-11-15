@@ -34,6 +34,8 @@
 
 AC_DEFUN([AC_BOOST],
 [
+# Guard against running twice
+if test "x$done_boost" = "x"; then
 AC_HANDLE_WITH_ARG([boost], [boost], [BOOST], $2, $3, $1)
 
 if test "x$want_boost" = "xyes"; then
@@ -220,4 +222,6 @@ AM_CONDITIONAL([HAVE_BOOST], [test "$have_boost" = "yes"])
 AM_CONDITIONAL([BUILD_BOOST], [test "$build_boost" = "yes"])
 
 AC_CHECK_FOUND([boost], [boost],[BOOST],$1,$2)
+done_boost="yes"
+fi
 ])

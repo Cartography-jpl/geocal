@@ -28,6 +28,8 @@
 
 AC_DEFUN([AC_SPICE],
 [
+# Guard against running twice
+if test "x$done_spice" = "x"; then
 AC_HANDLE_WITH_ARG([spice], [spice], [SPICE], $2, $3, $1)
 
 if test "x$want_spice" = "xyes"; then
@@ -67,4 +69,6 @@ AM_CONDITIONAL([HAVE_SPICE], [test "$have_spice" = "yes"])
 AM_CONDITIONAL([BUILD_SPICE], [test "$build_spice" = "yes"])
 
 AC_CHECK_FOUND([spice], [spice],[SPICE],$1,$2)
+done_spice="yes"
+fi
 ])

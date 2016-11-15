@@ -28,6 +28,8 @@
 
 AC_DEFUN([AC_CARTO],
 [
+# Guard against running twice
+if test "x$done_carto" = "x"; then
 AC_HANDLE_WITH_ARG([carto], [carto], [Carto], $2, $3, $1)
 
 if test "x$want_carto" = "xyes"; then
@@ -83,4 +85,6 @@ AM_CONDITIONAL([HAVE_CARTO], [test "$have_carto" = "yes"])
 AM_CONDITIONAL([BUILD_CARTO], [test "$build_carto" = "yes"])
 
 AC_CHECK_FOUND([carto], [carto],[Carto],$1,$2)
+done_carto="yes"
+fi
 ])

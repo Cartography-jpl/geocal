@@ -26,6 +26,8 @@
 
 AC_DEFUN([AFIDS_PYTHON],
 [
+# Guard against running twice
+if test "x$done_python" = "x"; then
 AC_HANDLE_WITH_ARG([python], [python], [Python], $2, $3, $1)
 
 if test "x$want_python" = "xyes"; then
@@ -48,41 +50,55 @@ if test "x$want_python" = "xyes"; then
      AC_SUBST([platpythondir])
      SPHINXBUILD="\${prefix}/bin/sphinx-build"
      PYTEST="\${prefix}/bin/py.test"
+     PYTHON_LDPATH=""
+     AC_SUBST(PYTHON_LDPATH)
      AM_CONDITIONAL([HAVE_SPHINX], [true])
      AM_CONDITIONAL([HAVE_PYTEST], [true])
    else
      if test "$1" == "required"; then
 	AC_PYTHON_DEVEL([>= '2.6.1'])
+	old_ld_library_path="$LD_LIBRARY_PATH"
+	PYTHON_LDPATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64
+	export LD_LIBRARY_PATH=$PYTHON_LDPATH:$LD_LIBRARY_PATH
         AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.7.0], [numpy.version.version])
         AC_PYTHON_MODULE_WITH_VERSION(scipy, [0.10.1], [scipy.version.version])
         AC_PYTHON_MODULE_WITH_VERSION(matplotlib, [1.0.1], [matplotlib.__version__])
-        AC_PYTHON_MODULE(h5py, 1)
-        AC_PYTHON_MODULE(sphinx, 1)
-        AC_PYTHON_MODULE(sqlite3, 1)
-        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
-        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
-        PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print('-I' + ' -I'.join(get_numpy_include_dirs()))"`
+	
+        AC_PYTHON_MODULE(h5py)
+        AC_PYTHON_MODULE_WITH_VERSION(sphinx)
+        AC_PYTHON_MODULE_WITH_VERSION(sqlite3)
+	if test "x$PYTHON" != "x"; then
+          pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+          platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
+          PYTHON_NUMPY_CPPFLAGS=`$PYTHON -c "from numpy.distutils.misc_util import *; print('-I' + ' -I'.join(get_numpy_include_dirs()))"`
+	fi
+	LD_LIBRARY_PATH=$old_ld_library_path
         AC_SUBST([PYTHON_NUMPY_CPPFLAGS])
         AC_SUBST([platpythondir])
         AC_PROG_SPHINX
         AC_PROG_PYTEST
         if test -z "$PYTEST" ; then
-           AC_MSG_ERROR(required program py.test not found)
-           exit 1
-        fi     
-        AC_SUBST([pkgpythondir], [\${prefix}/\${pythondir}/$PACKAGE])
-        AC_SUBST(build_python)
-        succeeded=yes
-        have_python=yes
+           AC_MSG_WARN(required program py.test not found)
+           PYTHON=""
+        fi
+        if test "x$PYTHON" != "x"; then
+          AC_SUBST([pkgpythondir], [\${prefix}/\${pythondir}/$PACKAGE])
+          AC_SUBST(build_python)
+          AC_SUBST(PYTHON_LDPATH)
+          succeeded=yes
+          have_python=yes
+	fi
     else
         AC_PYTHON_DEVEL([>= '2.6.1'])
-        pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
-        platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
-        AC_SUBST([platpythondir])
-	AM_CONDITIONAL([HAVE_SPHINX], [false])
-        AM_CONDITIONAL([HAVE_PYTEST], [false])
-        succeeded=yes
-        have_python=no
+        if test "x$PYTHON" != "x"; then
+           pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
+           platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
+           AC_SUBST([platpythondir])
+   	   AM_CONDITIONAL([HAVE_SPHINX], [false])
+           AM_CONDITIONAL([HAVE_PYTEST], [false])
+           succeeded=yes
+           have_python=no
+	fi
     fi
    fi
 fi
@@ -96,12 +112,14 @@ if test "$succeeded" != "yes" -a "x$build_needed_python" == "xyes" ; then
      PYTHON=`pwd`"/external/python_wrap.sh" 
      PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
      PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"
+     PYTHON_LDPATH="\${prefix}/lib:\${prefix}/lib64"
      pythondir="lib/${python_lib_path}/site-packages" 
      platpythondir="lib/${python_lib_path}/site-packages" 
      succeeded=yes
      have_python=yes
      AC_SUBST(PYTHON_CPPFLAGS)
      AC_SUBST(PYTHON_NUMPY_CPPFLAGS)
+     AC_SUBST(PYTHON_LDPATH)
      AC_SUBST([platpythondir])
      SPHINXBUILD="\${prefix}/bin/sphinx-build"
      PYTEST="\${prefix}/bin/py.test"
@@ -113,4 +131,6 @@ AM_CONDITIONAL([BUILD_PYTHON], [test "$build_python" = "yes"])
 
 AC_CHECK_FOUND([python], [python],[Python],$1,$2)
 
+done_python="yes"
+fi
 ])

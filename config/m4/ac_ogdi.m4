@@ -12,6 +12,8 @@
 
 AC_DEFUN([AC_OGDI],
 [
+# Guard against running twice
+if test "x$done_ogdi" = "x"; then
 AC_HANDLE_WITH_ARG([ogdi], [ogdi], [ogdi], $2, $3, $1)
 if test "x$want_ogdi" = "xyes"; then
         AC_MSG_CHECKING([for Ogdi library])
@@ -49,4 +51,6 @@ AM_CONDITIONAL([HAVE_OGDI], [test "$have_ogdi" = "yes"])
 AM_CONDITIONAL([BUILD_OGDI], [test "$build_ogdi" = "yes"])
 
 AC_CHECK_FOUND([ogdi], [ogdi],[ogdi],$1,$2)
+done_ogdi="yes"
+fi
 ])

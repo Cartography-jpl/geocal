@@ -12,6 +12,8 @@
 
 AC_DEFUN([AC_GEOS],
 [
+# Guard against running twice
+if test "x$done_geos" = "x"; then
 AC_HANDLE_WITH_ARG([geos], [geos], [Geos], $2, $3, $1)
 if test "x$want_geos" = "xyes"; then
         AC_MSG_CHECKING([for GEOS library])
@@ -46,4 +48,6 @@ AM_CONDITIONAL([HAVE_GEOS], [test "$have_geos" = "yes"])
 AM_CONDITIONAL([BUILD_GEOS], [test "$build_geos" = "yes"])
 
 AC_CHECK_FOUND([geos], [geos],[Geos],$1,$2)
+done_geos="yes"
+fi
 ])

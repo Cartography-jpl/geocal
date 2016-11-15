@@ -27,6 +27,8 @@
 
 AC_DEFUN([AC_BLITZ],
 [
+# Guard against running twice
+if test "x$done_blitz" = "x"; then
 AC_HANDLE_WITH_ARG([blitz], [blitz], [Blitz++], $2, $3, $1)
 
 if test "x$want_blitz" = "xyes"; then
@@ -62,4 +64,6 @@ AM_CONDITIONAL([BUILD_BLITZ], [test "$build_blitz" = "yes"])
 
 AC_CHECK_FOUND([blitz], [blitz],[Blitz++],$1,$2)
 
+done_blitz="yes"
+fi
 ])

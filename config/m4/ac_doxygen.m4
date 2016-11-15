@@ -27,6 +27,8 @@
 
 AC_DEFUN([AC_DOXYGEN],
 [
+# Guard against running twice
+if test "x$done_doxygen" = "x"; then
 AC_HANDLE_WITH_ARG([doxygen], [doxygen], [Doxygen], $2, $3, $1)
 
 if test "x$want_doxygen" = "xyes"; then
@@ -66,4 +68,6 @@ AM_CONDITIONAL([BUILD_DOXYGEN], [test "$build_doxygen" = "yes"])
 
 AC_CHECK_FOUND([doxygen], [doxygen],[Doxygen],$1,$2)
 
+done_doxygen="yes"
+fi
 ])

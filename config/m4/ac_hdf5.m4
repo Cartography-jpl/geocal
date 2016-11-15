@@ -28,6 +28,8 @@
 
 AC_DEFUN([AC_HDF5],
 [
+# Guard against running twice
+if test "x$done_hdf5" = "x"; then
 AC_HANDLE_WITH_ARG([hdf5], [hdf5], [HDF 5], $2, $3, $1)
 
 if test "x$want_hdf5" = "xyes"; then
@@ -75,5 +77,6 @@ AM_CONDITIONAL([BUILD_HDF5], [test "$build_hdf5" = "yes"])
 AM_CONDITIONAL([BUILD_NETCDF], [test "$build_hdf5" = "yes"])
 
 AC_CHECK_FOUND([hdf5], [hdf5],[HDF 5],$1,$2)
-
+done_hdf5="yes"
+fi
 ])

@@ -12,6 +12,8 @@
 
 AC_DEFUN([AC_EXPAT],
 [
+# Guard against running twice
+if test "x$done_expat" = "x"; then
 AC_HANDLE_WITH_ARG([expat], [expat], [expat], $2, $3, $1)
 if test "x$want_expat" = "xyes"; then
         AC_MSG_CHECKING([for expat library])
@@ -49,4 +51,6 @@ AM_CONDITIONAL([HAVE_EXPAT], [test "$have_expat" = "yes"])
 AM_CONDITIONAL([BUILD_EXPAT], [test "$build_expat" = "yes"])
 
 AC_CHECK_FOUND([expat], [expat],[expat],$1,$2)
+done_expat="yes"
+fi
 ])

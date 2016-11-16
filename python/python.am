@@ -3,6 +3,11 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py
 # Backdoor rule to do a quick install when we are just varying python
 install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 
+# We need to override the default py_compile to make sure the LD_LIBRARY_PATH
+# is set if needed
+
+am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(SHELL) $(py_compile)
+
 if HAVE_AFIDS
 PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
 else
@@ -28,7 +33,7 @@ PYTEST_FLAGS= -q -n $(PYTEST_NJOB)
 
 python_check:
 	export PYTHONPATH=$(prefix)/$(platpythondir):$(prefix)/$(pythondir):$(abs_srcdir)/@srcpython@:${PYTHONPATH} && \
-        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
         $(setup_afids_data) && \
         $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \

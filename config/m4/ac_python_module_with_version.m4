@@ -1,6 +1,6 @@
 # SYNOPSIS
 #
-#   AC_PYTHON_MODULE_WITH_VERSION(modname, required_version, module version)
+#   AC_PYTHON_MODULE_WITH_VERSION(modname, required_version, module version, is_required)
 #
 # Variation of AC_PYTHON_MODULE that also tests the version of a module.
 #
@@ -25,13 +25,14 @@ AC_DEFUN([AC_PYTHON_MODULE_WITH_VERSION],[
 		AC_MSG_RESULT(yes)
   	  else
 		AC_MSG_RESULT(no)
-                if test -n "$2"
-		then
-		   AC_MSG_WARN(failed to find required module $1 with version >= $2)
-		else
-		   AC_MSG_WARN(failed to find required module $1)
+		if test "$4" = "required"; then
+                  if test -n "$2"; then
+		    AC_MSG_WARN(failed to find required module $1 with version >= $2)
+		  else
+		     AC_MSG_WARN(failed to find required module $1)
+		  fi
+		  PYTHON=""
 		fi
-		PYTHON=""
 	  fi
     fi	  
 ])

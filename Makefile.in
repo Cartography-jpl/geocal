@@ -2933,12 +2933,14 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed
 am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(SHELL) $(py_compile)
-@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
-@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
+@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
+@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
+@BUILD_AFIDS_FALSE@setup_geocal = source $(DESTDIR)$(prefix)/setup_afids_env.sh
+@BUILD_AFIDS_TRUE@setup_geocal = $(setup_afids_data) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
 # Number of jobs to run at once. Default is to automatically determine this,
 # but you can specify a different number.
 PYTEST_NJOB = 10
@@ -10640,11 +10642,9 @@ install-python: all
 install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 
 python_check:
-	export PYTHONPATH=$(prefix)/$(platpythondir):$(prefix)/$(pythondir):$(abs_srcdir)/@srcpython@:${PYTHONPATH} && \
-        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-        $(setup_afids_data) && \
-        $(setup_spice) && \
-        export PATH=$(PYTHON_CHECK_PATH) && \
+	export PATH=$(PYTHON_CHECK_PATH) && \
+        export PYTHONPATH=$(abs_srcdir)/$(srcpython):${PYTHONPATH} && \
+        $(setup_geocal) && \
         $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
 
 # We don't actually replace the shebang, this was done for a short time

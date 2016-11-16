@@ -267,7 +267,6 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/afids_common.m4 \
 	$(top_srcdir)/config/m4/afids_python.m4 \
 	$(top_srcdir)/config/m4/ax_compare_version.m4 \
-	$(top_srcdir)/config/m4/ax_python_module.m4 \
 	$(top_srcdir)/config/m4/geocal_source_directory.m4 \
 	$(top_srcdir)/config/m4/libtool.m4 \
 	$(top_srcdir)/config/m4/loc_msg.m4 \
@@ -1344,7 +1343,6 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 am__pep3147_tweak = \
   sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
 py_compile = $(top_srcdir)/config/py-compile
@@ -2931,6 +2929,10 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
 	@srcpythonlib@/air_mspi_igc.py
+
+# We need to override the default py_compile to make sure the LD_LIBRARY_PATH
+# is set if needed
+am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 @HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
 @HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
@@ -10606,12 +10608,14 @@ install-python: all
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
 
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl $(pythonswigsrc)/create_swig_wrap.py Makefile $(PYTHON_TARGET)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL))) HAVE_GDAL_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL_VICAR_RTL)))
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/$(pythonswigsrc)/create_swig_wrap.py $@ $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL))) HAVE_GDAL_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL_VICAR_RTL)))
 
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET) $(SWIG_TARGET)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm -r $*_doc
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "%include \"$*.i\"" >> $*_doc.i
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
@@ -10620,7 +10624,8 @@ install-python: all
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h $(DOXYGEN_TARGET) $(SWIG_TARGET)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm -r $*_doc
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "%include \"$*.i\"" >> $*_doc.i
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
@@ -10636,7 +10641,7 @@ install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpytho
 
 python_check:
 	export PYTHONPATH=$(prefix)/$(platpythondir):$(prefix)/$(pythondir):$(abs_srcdir)/@srcpython@:${PYTHONPATH} && \
-        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
         $(setup_afids_data) && \
         $(setup_spice) && \
         export PATH=$(PYTHON_CHECK_PATH) && \
@@ -10669,7 +10674,7 @@ python_check:
 
 install_python_doc: 
 	export PATH=$(bindir):$$PATH && \
-        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
         export PYTHONPATH="" && \
         $(SPHINXBUILD) -b html $(srcdir)/$(docpythonsrc) "$(DESTDIR)$(pythondocdir)"
 
@@ -10678,7 +10683,7 @@ clean_install_python_doc:
 
 pythondoctest:
 	export PATH=$(bindir):$$PATH && \
-        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
         $(SPHINXBUILD) -b doctest $(srcdir)/$(docpythonsrc) doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in doctest/output.txt."

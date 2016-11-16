@@ -29,7 +29,6 @@ AC_DEFUN([AFIDS_PYTHON],
 # Guard against running twice
 if test "x$done_python" = "x"; then
 AC_HANDLE_WITH_ARG([python], [python], [Python], $2, $3, $1)
-
 if test "x$want_python" = "xyes"; then
    AC_MSG_CHECKING([for python])
    succeeded=no
@@ -56,17 +55,20 @@ if test "x$want_python" = "xyes"; then
      AM_CONDITIONAL([HAVE_PYTEST], [true])
    else
      if test "$1" == "required"; then
+        if test "x$PYTHON" = "x" -a "x$ac_python_path" != "x"; then
+            PYTHON=$ac_python_path
+	fi
 	AC_PYTHON_DEVEL([>= '2.6.1'])
 	old_ld_library_path="$LD_LIBRARY_PATH"
-	PYTHON_LDPATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64
-	export LD_LIBRARY_PATH=$PYTHON_LDPATH:$LD_LIBRARY_PATH
-        AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.7.0], [numpy.version.version])
-        AC_PYTHON_MODULE_WITH_VERSION(scipy, [0.10.1], [scipy.version.version])
-        AC_PYTHON_MODULE_WITH_VERSION(matplotlib, [1.0.1], [matplotlib.__version__])
+	PYTHON_LDPATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:
+	export LD_LIBRARY_PATH=$PYTHON_LDPATH$LD_LIBRARY_PATH
+        AC_PYTHON_MODULE_WITH_VERSION(numpy, [1.7.0], [numpy.version.version], [required])
+        AC_PYTHON_MODULE_WITH_VERSION(scipy, [0.10.1], [scipy.version.version], [required])
+        AC_PYTHON_MODULE_WITH_VERSION(matplotlib, [1.0.1], [matplotlib.__version__], [required])
 	
-        AC_PYTHON_MODULE(h5py)
-        AC_PYTHON_MODULE_WITH_VERSION(sphinx)
-        AC_PYTHON_MODULE_WITH_VERSION(sqlite3)
+        AC_PYTHON_MODULE_WITH_VERSION(h5py, , , [not_required])
+        AC_PYTHON_MODULE_WITH_VERSION(sphinx, , , [required])
+        AC_PYTHON_MODULE_WITH_VERSION(sqlite3, , , [required])
 	if test "x$PYTHON" != "x"; then
           pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
           platpythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(True,False,''))"`
@@ -77,7 +79,7 @@ if test "x$want_python" = "xyes"; then
         AC_SUBST([platpythondir])
         AC_PROG_SPHINX
         AC_PROG_PYTEST
-        if test -z "$PYTEST" ; then
+        if test "x$have_pytest" != "xyes" ; then
            AC_MSG_WARN(required program py.test not found)
            PYTHON=""
         fi
@@ -89,6 +91,9 @@ if test "x$want_python" = "xyes"; then
           have_python=yes
 	fi
     else
+        if test "x$PYTHON" = "x" -a "x$ac_python_path" != "x"; then
+            PYTHON=$ac_python_path
+	fi
         AC_PYTHON_DEVEL([>= '2.6.1'])
         if test "x$PYTHON" != "x"; then
            pythondir=`$PYTHON -c "from distutils.sysconfig import *; print(get_python_lib(False,False,''))"`
@@ -112,7 +117,7 @@ if test "$succeeded" != "yes" -a "x$build_needed_python" == "xyes" ; then
      PYTHON=`pwd`"/external/python_wrap.sh" 
      PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
      PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"
-     PYTHON_LDPATH="\${prefix}/lib:\${prefix}/lib64"
+     PYTHON_LDPATH="\${prefix}/lib:\${prefix}/lib64:"
      pythondir="lib/${python_lib_path}/site-packages" 
      platpythondir="lib/${python_lib_path}/site-packages" 
      succeeded=yes

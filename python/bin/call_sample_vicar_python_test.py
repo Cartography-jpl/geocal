@@ -6,7 +6,8 @@ import sys
 
 local_dir = os.path.abspath(os.path.dirname(__file__))
 
-@require_vicarb    
+@require_vicarb
+@require_vicar
 def test_call_sample_vicar_python(vicarb_env):
     '''Class the sample vicar program.'''
     # Want to run from local directory. Note that vicarb resets TAE_PATH

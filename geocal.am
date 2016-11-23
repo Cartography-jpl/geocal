@@ -13,13 +13,13 @@ afidspythonvdev_PROGRAMS =
 dist_afidspythonvdev_SCRIPTS = 
 dist_afidspythonvdev_DATA = 
 SWIG_FLAG = 
-
+pkgconfig_DATA+= geocal.pc
 geocalincdir = @includedir@/geocal
 geocalinc_HEADERS =
 geocal_test_all_SOURCES = 
 
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS)
-libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
+libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw)
 libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS)
 
 EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND)
@@ -90,7 +90,7 @@ geocal_test_all_LDADD += $(GDAL_LIBS)
 geocal_test_all_LDFLAGS = -no-install 
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS)
 geocal_test_all_CPPFLAGS+=  $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
-geocal_test_all_CPPFLAGS+= $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)
+geocal_test_all_CPPFLAGS+= $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw)
 geocal_test_all_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS)
 TESTS+= @libgeocal@/test_all.sh
 EXTRA_DIST+= @libgeocal@/test_all.sh

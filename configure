@@ -2845,6 +2845,8 @@ ac_config_files="$ac_config_files script/setup_geocal.csh script/setup_geocal.sh
 
 ac_config_files="$ac_config_files lib/GeoCalCore/Support/global_fixture_default.cc"
 
+ac_config_files="$ac_config_files geocal.pc"
+
 ac_config_headers="$ac_config_headers lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_internal_config.h"
 
 # We have the top directory for GeoCal as a variable. This allows the
@@ -25596,6 +25598,7 @@ do
     "script/setup_geocal.csh") CONFIG_FILES="$CONFIG_FILES script/setup_geocal.csh" ;;
     "script/setup_geocal.sh") CONFIG_FILES="$CONFIG_FILES script/setup_geocal.sh" ;;
     "lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES lib/GeoCalCore/Support/global_fixture_default.cc" ;;
+    "geocal.pc") CONFIG_FILES="$CONFIG_FILES geocal.pc" ;;
     "lib/GeoCalCore/Support/geocal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_config.h" ;;
     "lib/GeoCalCore/Support/geocal_internal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_internal_config.h" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;

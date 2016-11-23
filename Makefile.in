@@ -297,7 +297,7 @@ CONFIG_HEADER =  \
 CONFIG_CLEAN_FILES = script/setup_afids_python.csh \
 	script/setup_afids_python.sh script/setup_geocal.csh \
 	script/setup_geocal.sh \
-	lib/GeoCalCore/Support/global_fixture_default.cc
+	lib/GeoCalCore/Support/global_fixture_default.cc geocal.pc
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -1704,8 +1704,8 @@ TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
 	$(TEST_LOG_FLAGS)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(srcdir)/bindings/python/python.am $(srcdir)/common.am \
-	$(srcdir)/geocal.am $(srcdir)/include.am \
-	$(srcdir)/lib/CartLab/cart_lab.am \
+	$(srcdir)/geocal.am $(srcdir)/geocal.pc.in \
+	$(srcdir)/include.am $(srcdir)/lib/CartLab/cart_lab.am \
 	$(srcdir)/lib/GeoCalCore/Implementation/implementation.am \
 	$(srcdir)/lib/GeoCalCore/Interface/interface.am \
 	$(srcdir)/lib/GeoCalCore/Support/support.am \
@@ -2224,7 +2224,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@testsupportsrc@/print_tae_path.pdf \
 	@testsupportsrc@/test_support.py \
 	@testsupportsrc@/vicar_test_support.py @testsupportsrc@/README
-pkgconfig_DATA = 
+pkgconfig_DATA = geocal.pc
 
 # Allow fils to be include in other directories
 # To pick up generated geocal_config.h file
@@ -2802,7 +2802,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcmspi@/air_mspi_igc_collection_test.cc \
 	@srcoco3@/jia_sample_test.cc
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
-	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) \
+	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
 	$(am__append_2) $(am__append_4) $(am__append_6) \
 	$(am__append_8)
@@ -2814,7 +2814,7 @@ geocal_test_all_LDADD = libgeocal.la $(CARTO_LIBS) libraw.la \
 	$(VICAR_RTL_LIBS) $(SPICE_LIBS) $(GDAL_LIBS)
 geocal_test_all_LDFLAGS = -no-install 
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
-	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) \
+	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
 	$(GDAL_CFLAGS) $(HDF5_CFLAGS)
 @BUILD_VICAR_GDALPLUGIN_TRUE@EXTRA_geocal_test_all_DEPENDENCIES = install_vicar_gdalplugin_early
@@ -3018,6 +3018,8 @@ script/setup_geocal.csh: $(top_builddir)/config.status $(top_srcdir)/script/setu
 script/setup_geocal.sh: $(top_builddir)/config.status $(top_srcdir)/script/setup_geocal.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 lib/GeoCalCore/Support/global_fixture_default.cc: $(top_builddir)/config.status $(top_srcdir)/lib/GeoCalCore/Support/global_fixture_default.cc.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+geocal.pc: $(top_builddir)/config.status $(srcdir)/geocal.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 
 install-libLTLIBRARIES: $(lib_LTLIBRARIES)

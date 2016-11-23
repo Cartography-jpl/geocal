@@ -6,6 +6,7 @@ AC_CONFIG_MACRO_DIR([config/m4])
 AC_CONFIG_FILES([script/setup_afids_python.csh script/setup_afids_python.sh])
 AC_CONFIG_FILES([script/setup_geocal.csh script/setup_geocal.sh])
 AC_CONFIG_FILES([lib/GeoCalCore/Support/global_fixture_default.cc])
+AC_CONFIG_FILES([geocal.pc])
 AC_CONFIG_HEADERS([lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_internal_config.h])
 # We have the top directory for GeoCal as a variable. This allows the
 # full AFIDS system to include this in a subdirectory. For this standalone

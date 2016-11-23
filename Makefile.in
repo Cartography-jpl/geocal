@@ -2224,7 +2224,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@testsupportsrc@/print_tae_path.pdf \
 	@testsupportsrc@/test_support.py \
 	@testsupportsrc@/vicar_test_support.py @testsupportsrc@/README
-pkgconfig_DATA = geocal.pc
+pkgconfig_DATA = @libgeocal@/../geocal.pc
 
 # Allow fils to be include in other directories
 # To pick up generated geocal_config.h file

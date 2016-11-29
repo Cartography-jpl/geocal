@@ -285,9 +285,10 @@ DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
 	$(dist_bin_SCRIPTS) $(geocalpkgpython_PYTHON) \
 	$(pkgpythonswig_PYTHON) $(am__dist_afidspythonvdev_DATA_DIST) \
 	$(dist_geocalpkgpython_DATA) $(dist_sdbxdoc_DATA) \
-	$(am__geocalinc_HEADERS_DIST) $(include_HEADERS) \
-	$(libraw_HEADERS) $(sdbx_HEADERS) $(sdbxbtree_HEADERS) \
-	$(sdbxrtree_HEADERS) $(sdbxsupport_HEADERS) $(am__DIST_COMMON)
+	$(am__geocalinc_HEADERS_DIST) $(geocalswiginc_HEADERS) \
+	$(include_HEADERS) $(libraw_HEADERS) $(sdbx_HEADERS) \
+	$(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
+	$(sdbxsupport_HEADERS) $(am__DIST_COMMON)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
@@ -337,9 +338,10 @@ am__installdirs = "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(etcafidspythondir)" \
 	"$(DESTDIR)$(installafidspythondir)" \
 	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" \
-	"$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" \
-	"$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" \
-	"$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"
+	"$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" \
+	"$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" \
+	"$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" \
+	"$(DESTDIR)$(sdbxsupportdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES) \
 	$(pkgpythonswig_LTLIBRARIES)
 _swig_wrap_la_DEPENDENCIES = libgeocal.la
@@ -1502,8 +1504,9 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_l1b1.h \
 	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
 	@srcoco3@/jia_sample.h
-HEADERS = $(geocalinc_HEADERS) $(include_HEADERS) $(libraw_HEADERS) \
-	$(sdbx_HEADERS) $(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
+HEADERS = $(geocalinc_HEADERS) $(geocalswiginc_HEADERS) \
+	$(include_HEADERS) $(libraw_HEADERS) $(sdbx_HEADERS) \
+	$(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
 	$(sdbxsupport_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -2052,11 +2055,8 @@ include_HEADERS =
 # Test files
 EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	$(am__append_9) @srcsdbx@/README @srcsdbx@/StorageConcepts.txt \
-	$(srcdir)/$(libgeocal)/*.i @libgeocal@/swig_to_python.h \
-	@libgeocal@/swig_type_mapper_base.h \
-	@libgeocal@/swig_type_mapper.h @libgeocal@/dummy.pdf \
-	@libgeocal@/geocal_doxygen.h @srcsupport@/unit_test_support.h \
-	@srcsupport@/global_fixture.h \
+	@libgeocal@/dummy.pdf @libgeocal@/geocal_doxygen.h \
+	@srcsupport@/unit_test_support.h @srcsupport@/global_fixture.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/blitz_array_serialize_support.h \
 	@srcinterface@/matcher_fixture.h $(patsubst %_wrap.cc, %.py, \
@@ -2226,7 +2226,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@testsupportsrc@/vicar_test_support.py @testsupportsrc@/README
 pkgconfig_DATA = @libgeocal@/../geocal.pc
 
-# Allow fils to be include in other directories
+# Allow files to be include in other directories
 # To pick up generated geocal_config.h file
 AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 	-I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost \
@@ -2378,13 +2378,12 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 # Files that contain SWIG wrapper information.
 
 # Files that contain SWIG wrapper information.
-# This is a deprecated class. We almost certainly do want to use this
+# This is a deprecated class. We almost certainly don't want to use this
 # in python. If we have a need for it for some odd reason, we can
 # uncomment this.
 #SWIG_SRC += @swigsrc@/rpc_image_wrap.cc
 
 # Files that contain SWIG wrapper information.
-#  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
 SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/swig_boost_array_wrap.cc \
 	@swigsrc@/swig_quaternion_wrap.cc @swigsrc@/constant_wrap.cc \
@@ -2548,6 +2547,7 @@ dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
 SWIG_FLAG = -O
 geocalincdir = @includedir@/geocal
+geocalswigincdir = @prefix@/share/geocal/swig
 
 # Source files for library
 geocalinc_HEADERS = @srcsupport@/geocal_config.h \
@@ -2685,6 +2685,151 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_l1b1.h \
 	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
 	@srcoco3@/jia_sample.h
+#  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
+geocalswiginc_HEADERS = @libgeocal@/common.i \
+	@libgeocal@/geocal_shared_ptr.i @libgeocal@/my_shared_ptr.i \
+	@libgeocal@/swig_array.i @libgeocal@/swig_array_inc.i \
+	@libgeocal@/swig_boost_array.i \
+	@libgeocal@/swig_boost_array_inc.i \
+	@libgeocal@/swig_exception.i @libgeocal@/swig_pickle.i \
+	@libgeocal@/swig_print.i @libgeocal@/swig_python_attribute.i \
+	@libgeocal@/swig_quaternion.i @libgeocal@/swig_std.i \
+	@libgeocal@/swig_to_python.h \
+	@libgeocal@/swig_type_mapper_base.h \
+	@libgeocal@/swig_type_mapper.h @srcsupport@/constant.i \
+	@srcsupport@/generic_object.i @srcsupport@/auto_derivative.i \
+	@srcsupport@/array_ad.i @srcsupport@/observer.i \
+	@srcsupport@/geocal_quaternion.i @srcsupport@/covariance.i \
+	@srcsupport@/wgs84_constant.i @srcsupport@/geocal_exception.i \
+	@srcsupport@/functor.i @srcsupport@/vfunctor_with_derivative.i \
+	@srcsupport@/dfunctor_with_derivative.i \
+	@srcsupport@/statistic.i @srcsupport@/geocal_gsl_fit.i \
+	@srcsupport@/geocal_gsl_root.i @srcsupport@/geocal_time.i \
+	@srcsupport@/tiled_file.i \
+	@srcsupport@/geocal_serialize_function.i \
+	@srcsupport@/geocal_fftw.i @srcsupport@/hdf_file.i \
+	@srcinterface@/image_coordinate.i @srcinterface@/tie_point.i \
+	@srcinterface@/with_parameter.i @srcinterface@/look_vector.i \
+	@srcinterface@/ground_coordinate.i \
+	@srcinterface@/coordinate_converter.i @srcinterface@/ecr.i \
+	@srcinterface@/eci.i @srcinterface@/geodetic.i \
+	@srcinterface@/dem.i @srcinterface@/map_info.i \
+	@srcinterface@/geocal_rpc.i @srcinterface@/raster_image.i \
+	@srcinterface@/image_ground_connection.i \
+	@srcinterface@/igc_collection.i \
+	@srcinterface@/frame_coordinate.i @srcinterface@/camera.i \
+	@srcinterface@/ray_caster.i @srcinterface@/orbit.i \
+	@srcinterface@/time_table.i @srcinterface@/ipi.i \
+	@srcinterface@/raster_image_variable.i \
+	@srcinterface@/sub_raster_image.i \
+	@srcinterface@/raster_image_multi_band.i \
+	@srcinterface@/raster_image_multi_band_variable.i \
+	@srcinterface@/sub_raster_image_multi_band.i \
+	@srcinterface@/ground_mask.i @srcinterface@/image_mask.i \
+	@srcinterface@/geocal_datum.i @srcinterface@/simple_dem.i \
+	@srcinterface@/memory_raster_image.i \
+	@srcinterface@/constant_raster_image.i \
+	@srcinterface@/dem_map_info.i \
+	@srcinterface@/feature_detector.i \
+	@srcinterface@/forstner_feature_detector.i \
+	@srcinterface@/image_matcher.i \
+	@srcinterface@/image_to_image_match.i \
+	@srcinterface@/ccorr_matcher.i @srcinterface@/lsm_matcher.i \
+	@srcinterface@/ccorr_lsm_matcher.i \
+	@srcinterface@/geometric_model.i \
+	@srcinterface@/raster_multifile.i \
+	@srcimplementation@/did_datum.i \
+	@srcimplementation@/dem_map_info_offset.i \
+	@srcimplementation@/map_info_image_ground_connection.i \
+	@srcimplementation@/ground_mask_image.i \
+	@srcimplementation@/image_mask_image.i \
+	@srcimplementation@/raster_averaged.i \
+	@srcimplementation@/raster_subsample.i \
+	@srcimplementation@/calc_raster.i \
+	@srcimplementation@/dem_to_raster.i \
+	@srcimplementation@/calc_raster_multi_band.i \
+	@srcimplementation@/magnify_bilinear.i \
+	@srcimplementation@/magnify_replicate.i \
+	@srcimplementation@/smooth_image.i \
+	@srcimplementation@/raster_image_tiled_file.i \
+	@srcimplementation@/dem_tiled_file.i \
+	@srcimplementation@/memory_dem.i \
+	@srcimplementation@/map_reprojected_image.i \
+	@srcimplementation@/pyramid_image_matcher.i \
+	@srcimplementation@/igc_map_projected.i \
+	@srcimplementation@/igc_simulated.i \
+	@srcimplementation@/igc_simulated_ray_caster.i \
+	@srcimplementation@/igc_image_to_image_match.i \
+	@srcimplementation@/surface_image_to_image_match.i \
+	@srcimplementation@/location_to_file.i \
+	@srcimplementation@/ray_intersect.i \
+	@srcimplementation@/dem_match.i \
+	@srcimplementation@/phase_correlation_matcher.i \
+	@srcimplementation@/quadratic_geometric_model.i \
+	@srcimplementation@/geometric_model_image.i \
+	@srcimplementation@/geocal_gdal.i \
+	@srcimplementation@/gdal_raster_image.i \
+	@srcimplementation@/gdal_datum.i \
+	@srcimplementation@/gdal_dem.i \
+	@srcimplementation@/gdal_multi_band.i \
+	@srcimplementation@/image_point_display.i \
+	@srcimplementation@/ogr_coordinate.i \
+	@srcimplementation@/gdal_multi_file.i \
+	@srcimplementation@/memory_multi_band.i \
+	@srcimplementation@/spice_helper.i \
+	@srcimplementation@/raw_raster_image.i \
+	@srcimplementation@/aircraft_orbit_data.i \
+	@srcimplementation@/orbit_quaternion_list.i \
+	@srcimplementation@/pan_sharpen.i \
+	@srcimplementation@/scale_image.i \
+	@srcimplementation@/apply_mask.i \
+	@srcimplementation@/rpc_image_ground_connection.i \
+	@srcimplementation@/ipi_image_ground_connection.i \
+	@srcimplementation@/eci_tod.i \
+	@srcimplementation@/eci_tod_burl.i \
+	@srcimplementation@/quaternion_camera.i \
+	@srcimplementation@/galileo_camera.i \
+	@srcimplementation@/refraction.i \
+	@srcimplementation@/orbit_data_image_ground_connection.i \
+	@srcimplementation@/planet_coordinate.i \
+	@srcimplementation@/igc_ray_caster.i \
+	@srcimplementation@/igc_rolling_shutter.i \
+	@srcimplementation@/igc_array.i \
+	@srcimplementation@/igc_multiple_pass.i \
+	@srcimplementation@/igc_collection_rolling_shutter.i \
+	@srcimplementation@/igc_collection_orbit_data.i \
+	@srcimplementation@/rolling_shutter_constant_time_table.i \
+	@srcimplementation@/piecewise_linear.i \
+	@srcimplementation@/orbit_correction.i \
+	@srcimplementation@/orbit_offset_correction.i \
+	@srcimplementation@/orbit_piecewise_correction.i \
+	@srcimplementation@/orbit_time_shift.i \
+	@srcimplementation@/hdf_orbit.i \
+	@srcimplementation@/hdf_orbit_carto.i \
+	@srcimplementation@/tle_orbit.i \
+	@srcimplementation@/spice_orbit.i @srccartlab@/argus_camera.i \
+	@srccartlab@/argus_orbit.i @srccartlab@/quickbird_camera.i \
+	@srccartlab@/spot_camera.i @srccartlab@/spot_orbit.i \
+	@srccartlab@/quickbird_orbit.i \
+	@srccartlab@/quickbird_time_table.i \
+	@srccartlab@/pos_export_orbit.i \
+	@srccartlab@/worldview2_cloudmask.i \
+	@srccartlab@/doughnut_average.i @srccartlab@/paint_class.i \
+	@srccartlab@/vicar_lite_file.i \
+	@srccartlab@/cart_lab_multifile.i \
+	@srccartlab@/landsat7_panchromatic.i \
+	@srccartlab@/material_detect.i @srccartlab@/ibis_file.i \
+	@srccartlab@/vicar_file.i @srccartlab@/vicar_argument.i \
+	@srccartlab@/vicar_dem.i @srccartlab@/datum_geoid96.i \
+	@srccartlab@/srtm_dem.i @srccartlab@/vicar_raster_image.i \
+	@srccartlab@/vicar_ogr.i @srcmspi@/mspi_config_file.i \
+	@srcmspi@/mspi_paraxial_transform.i @srcmspi@/mspi_camera.i \
+	@srcmspi@/mspi_gimbal.i @srcmspi@/air_mspi_orbit.i \
+	@srcmspi@/ground_mspi_orbit.i @srcmspi@/ground_mspi_igc.i \
+	@srcmspi@/usgs_dem.i @srcmspi@/srtm_90m_dem.i \
+	@srcmspi@/air_mspi_file.i @srcmspi@/air_mspi_time_table.i \
+	@srcmspi@/air_mspi_l1b1.i @srcmspi@/air_mspi_igc.i \
+	@srcmspi@/air_mspi_igc_collection.i @srcoco3@/jia_sample.i
 # Test files
 geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
@@ -9722,6 +9867,27 @@ uninstall-geocalincHEADERS:
 	@list='$(geocalinc_HEADERS)'; test -n "$(geocalincdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(geocalincdir)'; $(am__uninstall_files_from_dir)
+install-geocalswigincHEADERS: $(geocalswiginc_HEADERS)
+	@$(NORMAL_INSTALL)
+	@list='$(geocalswiginc_HEADERS)'; test -n "$(geocalswigincdir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(geocalswigincdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(geocalswigincdir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(geocalswigincdir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(geocalswigincdir)" || exit $$?; \
+	done
+
+uninstall-geocalswigincHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(geocalswiginc_HEADERS)'; test -n "$(geocalswigincdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(geocalswigincdir)'; $(am__uninstall_files_from_dir)
 install-includeHEADERS: $(include_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \
@@ -10244,7 +10410,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -10336,12 +10502,12 @@ install-data-am: install-afidspythonvdevPROGRAMS \
 	install-dist_afidspythonvdevSCRIPTS \
 	install-dist_geocalpkgpythonDATA install-dist_sdbxdocDATA \
 	install-etcafidspythonDATA install-geocalincHEADERS \
-	install-geocalpkgpythonPYTHON install-includeHEADERS \
-	install-installafidspythonDATA install-librawHEADERS \
-	install-pkgconfigDATA install-pkgpythonswigLTLIBRARIES \
-	install-pkgpythonswigPYTHON install-sdbxHEADERS \
-	install-sdbxbtreeHEADERS install-sdbxrtreeHEADERS \
-	install-sdbxsupportHEADERS
+	install-geocalpkgpythonPYTHON install-geocalswigincHEADERS \
+	install-includeHEADERS install-installafidspythonDATA \
+	install-librawHEADERS install-pkgconfigDATA \
+	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
+	install-sdbxHEADERS install-sdbxbtreeHEADERS \
+	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 install-dvi: install-dvi-am
@@ -10398,9 +10564,10 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
 	uninstall-dist_sdbxdocDATA uninstall-etcafidspythonDATA \
 	uninstall-geocalincHEADERS uninstall-geocalpkgpythonPYTHON \
-	uninstall-includeHEADERS uninstall-installafidspythonDATA \
-	uninstall-libLTLIBRARIES uninstall-librawHEADERS \
-	uninstall-pkgconfigDATA uninstall-pkgpythonswigLTLIBRARIES \
+	uninstall-geocalswigincHEADERS uninstall-includeHEADERS \
+	uninstall-installafidspythonDATA uninstall-libLTLIBRARIES \
+	uninstall-librawHEADERS uninstall-pkgconfigDATA \
+	uninstall-pkgpythonswigLTLIBRARIES \
 	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
 	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
 	uninstall-sdbxsupportHEADERS
@@ -10427,28 +10594,28 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	install-dvi install-dvi-am install-etcafidspythonDATA \
 	install-exec install-exec-am install-exec-hook \
 	install-geocalincHEADERS install-geocalpkgpythonPYTHON \
-	install-html install-html-am install-includeHEADERS \
-	install-info install-info-am install-installafidspythonDATA \
-	install-libLTLIBRARIES install-librawHEADERS install-man \
-	install-pdf install-pdf-am install-pkgconfigDATA \
-	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
-	install-ps install-ps-am install-sdbxHEADERS \
-	install-sdbxbtreeHEADERS install-sdbxrtreeHEADERS \
-	install-sdbxsupportHEADERS install-strip installcheck \
-	installcheck-am installcheck-local installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am recheck tags tags-am uninstall \
-	uninstall-afidspythonvdevPROGRAMS uninstall-am \
+	install-geocalswigincHEADERS install-html install-html-am \
+	install-includeHEADERS install-info install-info-am \
+	install-installafidspythonDATA install-libLTLIBRARIES \
+	install-librawHEADERS install-man install-pdf install-pdf-am \
+	install-pkgconfigDATA install-pkgpythonswigLTLIBRARIES \
+	install-pkgpythonswigPYTHON install-ps install-ps-am \
+	install-sdbxHEADERS install-sdbxbtreeHEADERS \
+	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS \
+	install-strip installcheck installcheck-am installcheck-local \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am recheck tags tags-am \
+	uninstall uninstall-afidspythonvdevPROGRAMS uninstall-am \
 	uninstall-binPROGRAMS uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
 	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
 	uninstall-dist_sdbxdocDATA uninstall-etcafidspythonDATA \
 	uninstall-geocalincHEADERS uninstall-geocalpkgpythonPYTHON \
-	uninstall-hook uninstall-includeHEADERS \
-	uninstall-installafidspythonDATA uninstall-libLTLIBRARIES \
-	uninstall-librawHEADERS uninstall-pkgconfigDATA \
-	uninstall-pkgpythonswigLTLIBRARIES \
+	uninstall-geocalswigincHEADERS uninstall-hook \
+	uninstall-includeHEADERS uninstall-installafidspythonDATA \
+	uninstall-libLTLIBRARIES uninstall-librawHEADERS \
+	uninstall-pkgconfigDATA uninstall-pkgpythonswigLTLIBRARIES \
 	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
 	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
 	uninstall-sdbxsupportHEADERS

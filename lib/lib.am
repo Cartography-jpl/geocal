@@ -6,15 +6,27 @@ SWIG_SRC += @swigsrc@/swig_array_wrap.cc
 SWIG_SRC += @swigsrc@/swig_boost_array_wrap.cc
 SWIG_SRC += @swigsrc@/swig_quaternion_wrap.cc
 
-EXTRA_DIST+= $(srcdir)/$(libgeocal)/*.i 
-EXTRA_DIST+= @libgeocal@/swig_to_python.h
-EXTRA_DIST+= @libgeocal@/swig_type_mapper_base.h
-EXTRA_DIST+= @libgeocal@/swig_type_mapper.h
+geocalswiginc_HEADERS += @libgeocal@/common.i
+geocalswiginc_HEADERS += @libgeocal@/geocal_shared_ptr.i
+geocalswiginc_HEADERS += @libgeocal@/my_shared_ptr.i
+geocalswiginc_HEADERS += @libgeocal@/swig_array.i
+geocalswiginc_HEADERS += @libgeocal@/swig_array_inc.i
+geocalswiginc_HEADERS += @libgeocal@/swig_boost_array.i
+geocalswiginc_HEADERS += @libgeocal@/swig_boost_array_inc.i
+geocalswiginc_HEADERS += @libgeocal@/swig_exception.i
+geocalswiginc_HEADERS += @libgeocal@/swig_pickle.i
+geocalswiginc_HEADERS += @libgeocal@/swig_print.i
+geocalswiginc_HEADERS += @libgeocal@/swig_python_attribute.i
+geocalswiginc_HEADERS += @libgeocal@/swig_quaternion.i
+geocalswiginc_HEADERS += @libgeocal@/swig_std.i
+geocalswiginc_HEADERS += @libgeocal@/swig_to_python.h
+geocalswiginc_HEADERS += @libgeocal@/swig_type_mapper_base.h
+geocalswiginc_HEADERS += @libgeocal@/swig_type_mapper.h
 
 EXTRA_DIST += @libgeocal@/dummy.pdf
 EXTRA_DIST += @libgeocal@/geocal_doxygen.h
 
-# Allow fils to be include in other directories
+# Allow files to be include in other directories
 AM_CPPFLAGS+= -I$(srcdir)/@libgeocal@
 
 # Allow searchs for .i in this directory

@@ -15,7 +15,9 @@ dist_afidspythonvdev_DATA =
 SWIG_FLAG = 
 pkgconfig_DATA+= @libgeocal@/../geocal.pc
 geocalincdir = @includedir@/geocal
+geocalswigincdir = @prefix@/share/geocal/swig
 geocalinc_HEADERS =
+geocalswiginc_HEADERS =
 geocal_test_all_SOURCES = 
 
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS)

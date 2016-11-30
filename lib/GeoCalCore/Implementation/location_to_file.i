@@ -1,7 +1,7 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "location_to_file.h"

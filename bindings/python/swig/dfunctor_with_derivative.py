@@ -202,7 +202,7 @@ class DFunctorWithDerivative(geocal_swig.functor.DFunctor):
     def df(self, X):
         """
 
-        virtual double GeoCal::DFunctorWithDerivative::df(double X) const  =0
+        virtual double GeoCal::DFunctorWithDerivative::df(double X) const =0
         Return df / dx. 
         """
         return _dfunctor_with_derivative.DFunctorWithDerivative_df(self, X)
@@ -211,7 +211,7 @@ class DFunctorWithDerivative(geocal_swig.functor.DFunctor):
     def f_with_derivative(self, X):
         """
 
-        virtual AutoDerivative<double> GeoCal::DFunctorWithDerivative::f_with_derivative(double X) const  =0
+        virtual AutoDerivative<double> GeoCal::DFunctorWithDerivative::f_with_derivative(double X) const =0
         Return df / dp_i as a AutoDerivative. 
         """
         return _dfunctor_with_derivative.DFunctorWithDerivative_f_with_derivative(self, X)

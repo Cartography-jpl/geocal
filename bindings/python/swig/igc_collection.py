@@ -287,16 +287,6 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
         return _igc_collection.IgcCollection_image_coordinate(self, Image_index, Gc)
 
 
-    def image_coordinate_jac_parm(self, Image_index, Gc):
-        """
-
-        virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_parm(int Image_index, const CartesianFixed &Gc) const
-        Return the Jacobian of the image coordinates with respect to the
-        parameters. 
-        """
-        return _igc_collection.IgcCollection_image_coordinate_jac_parm(self, Image_index, Gc)
-
-
     def image_coordinate_jac_parm_fd(self, Image_index, Gc, Pstep):
         """
 
@@ -306,16 +296,6 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
         parameters, calculated by taking a finite difference. 
         """
         return _igc_collection.IgcCollection_image_coordinate_jac_parm_fd(self, Image_index, Gc, Pstep)
-
-
-    def image_coordinate_jac_cf(self, Image_index, Gc):
-        """
-
-        virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_cf(int Image_index, const CartesianFixed &Gc) const
-        Return the Jacobian of the image coordinates with respect to the X, Y,
-        and Z components of the CartesianFixed ground location. 
-        """
-        return _igc_collection.IgcCollection_image_coordinate_jac_cf(self, Image_index, Gc)
 
 
     def image_coordinate_jac_cf_fd(self, Image_index, Gc, Step_size):
@@ -353,7 +333,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
     def image_ground_connection(self, Image_index):
         """
 
-        virtual boost::shared_ptr<ImageGroundConnection> GeoCal::IgcCollection::image_ground_connection(int Image_index) const  =0
+        virtual boost::shared_ptr<ImageGroundConnection> GeoCal::IgcCollection::image_ground_connection(int Image_index) const =0
         Image ground connection for given image index. 
         """
         return _igc_collection.IgcCollection_image_ground_connection(self, Image_index)
@@ -362,7 +342,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
     def subset(self, Index_set):
         """
 
-        virtual boost::shared_ptr<IgcCollection> GeoCal::IgcCollection::subset(const std::vector< int > &Index_set) const  =0
+        virtual boost::shared_ptr<IgcCollection> GeoCal::IgcCollection::subset(const std::vector< int > &Index_set) const =0
         Return IgcCollection for a subset of the data. 
         """
         return _igc_collection.IgcCollection_subset(self, Index_set)

@@ -6,7 +6,7 @@ SWIG_SRC += @swigsrc@/swig_array_wrap.cc
 SWIG_SRC += @swigsrc@/swig_boost_array_wrap.cc
 SWIG_SRC += @swigsrc@/swig_quaternion_wrap.cc
 
-geocalswiginc_HEADERS += @libgeocal@/common.i
+geocalswiginc_HEADERS += @libgeocal@/geocal_common.i
 geocalswiginc_HEADERS += @libgeocal@/geocal_shared_ptr.i
 geocalswiginc_HEADERS += @libgeocal@/my_shared_ptr.i
 geocalswiginc_HEADERS += @libgeocal@/swig_array.i

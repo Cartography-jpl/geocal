@@ -3,7 +3,7 @@
 // This goes with geocal_time.i. This should be %include rather than
 // %import
 %include <std_vector.i>
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "geocal_time.h"

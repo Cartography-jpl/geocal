@@ -1,7 +1,7 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "srtm_90m_dem.h"

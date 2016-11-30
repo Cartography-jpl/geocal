@@ -16301,7 +16301,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ImageGroundConnection_ground_coordinate_dem", _wrap_ImageGroundConnection_ground_coordinate_dem, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate_dem(const ImageCoordinate &Ic, const Dem &D) const  =0\n"
+		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate_dem(const ImageCoordinate &Ic, const Dem &D) const =0\n"
 		"Return ground coordinate that goes with a particular image coordinate.\n"
 		"\n"
 		"This version supplies a Dem to use. \n"
@@ -16322,7 +16322,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ImageGroundConnection_image_coordinate", _wrap_ImageGroundConnection_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::ImageGroundConnection::image_coordinate(const GroundCoordinate &Gc) const  =0\n"
+		"virtual ImageCoordinate GeoCal::ImageGroundConnection::image_coordinate(const GroundCoordinate &Gc) const =0\n"
 		"Return image coordinate that goes with a particular GroundCoordinate.\n"
 		"\n"
 		"For some types of ImageGroundConnection, we might not be able to\n"

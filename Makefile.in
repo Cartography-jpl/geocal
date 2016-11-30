@@ -2686,7 +2686,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
 	@srcoco3@/jia_sample.h
 #  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
-geocalswiginc_HEADERS = @libgeocal@/common.i \
+geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@libgeocal@/geocal_shared_ptr.i @libgeocal@/my_shared_ptr.i \
 	@libgeocal@/swig_array.i @libgeocal@/swig_array_inc.i \
 	@libgeocal@/swig_boost_array.i \

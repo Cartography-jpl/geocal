@@ -12094,12 +12094,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage__v_number_line", (PyCFunction)_wrap_RasterImage__v_number_line, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_line() const  =0\n"
+		"virtual int GeoCal::RasterImage::number_line() const =0\n"
 		"Return number of lines in the image. \n"
 		""},
 	 { (char *)"RasterImage__v_number_sample", (PyCFunction)_wrap_RasterImage__v_number_sample, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_sample() const  =0\n"
+		"virtual int GeoCal::RasterImage::number_sample() const =0\n"
 		"Return number of samples in the image. \n"
 		""},
 	 { (char *)"RasterImage__v_number_tile_line", (PyCFunction)_wrap_RasterImage__v_number_tile_line, METH_O, (char *)"\n"
@@ -12118,7 +12118,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage_unchecked_read_double", _wrap_RasterImage_unchecked_read_double, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const  =0\n"
+		"virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const =0\n"
 		"\n"
 		""},
 	 { (char *)"RasterImage_read_with_pad", _wrap_RasterImage_read_with_pad, METH_VARARGS, (char *)"\n"

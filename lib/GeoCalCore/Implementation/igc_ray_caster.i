@@ -1,7 +1,7 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 %include <std_vector.i>
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "igc_ray_caster.h"

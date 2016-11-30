@@ -203,7 +203,7 @@ class Datum(geocal_swig.generic_object.GenericObject):
     def undulation(self, Gc):
         """
 
-        virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const  =0
+        virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const =0
         Specialization for Gc being Geodetic.
 
         Since many of our Datums are in geodetic coordinates, this is an

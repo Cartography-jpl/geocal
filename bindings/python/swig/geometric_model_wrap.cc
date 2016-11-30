@@ -6713,7 +6713,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"GeometricModel_original_image_coordinate", _wrap_GeometricModel_original_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const  =0\n"
+		"virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const =0\n"
 		"Map image coordinates to an underlying set of image coordinates.\n"
 		"\n"
 		"This takes the image coordinates of the resampled image (magnified,\n"
@@ -6722,7 +6722,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GeometricModel_resampled_image_coordinate", _wrap_GeometricModel_resampled_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const  =0\n"
+		"virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const =0\n"
 		"This is the inversion of original_image_coordinate, taking the\n"
 		"original image coordinates and returning the resampled image\n"
 		"coordinates. \n"

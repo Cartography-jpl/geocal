@@ -2705,7 +2705,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcsupport@/dfunctor_with_derivative.i \
 	@srcsupport@/statistic.i @srcsupport@/geocal_gsl_fit.i \
 	@srcsupport@/geocal_gsl_root.i @srcsupport@/geocal_time.i \
-	@srcsupport@/tiled_file.i \
+	@srcsupport@/geocal_time_include.i @srcsupport@/tiled_file.i \
 	@srcsupport@/geocal_serialize_function.i \
 	@srcsupport@/geocal_fftw.i @srcsupport@/hdf_file.i \
 	@srcinterface@/image_coordinate.i @srcinterface@/tie_point.i \

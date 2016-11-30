@@ -96,6 +96,7 @@ SWIG_SRC += @swigsrc@/geocal_gsl_root_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/geocal_gsl_root.i
 SWIG_SRC += @swigsrc@/geocal_time_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/geocal_time.i
+geocalswiginc_HEADERS += @srcsupport@/geocal_time_include.i
 SWIG_SRC += @swigsrc@/tiled_file_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/tiled_file.i
 SWIG_SRC += @swigsrc@/geocal_serialize_function_wrap.cc

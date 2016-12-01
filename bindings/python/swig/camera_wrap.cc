@@ -4049,6 +4049,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -12242,20 +12243,16 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Camera))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Camera >("boost::shared_ptr< GeoCal::Camera > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Camera), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Camera > > ("boost::shared_ptr< GeoCal::Camera > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::SimpleCamera))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::SimpleCamera >("boost::shared_ptr< GeoCal::SimpleCamera > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::SimpleCamera), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::SimpleCamera > > ("boost::shared_ptr< GeoCal::SimpleCamera > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Observable<GeoCal::Camera>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Observable<GeoCal::Camera> >("boost::shared_ptr< GeoCal::Observable<GeoCal::Camera> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observable<GeoCal::Camera>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observable<GeoCal::Camera> > > ("boost::shared_ptr< GeoCal::Observable<GeoCal::Camera> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Observer<GeoCal::Camera>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Camera> >("boost::shared_ptr< GeoCal::Observer<GeoCal::Camera> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observer<GeoCal::Camera>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Camera> > > ("boost::shared_ptr< GeoCal::Observer<GeoCal::Camera> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

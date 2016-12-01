@@ -4079,6 +4079,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -23691,28 +23692,22 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::OrbitData))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::OrbitData >("boost::shared_ptr< GeoCal::OrbitData > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OrbitData), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OrbitData > > ("boost::shared_ptr< GeoCal::OrbitData > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::QuaternionOrbitData))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::QuaternionOrbitData >("boost::shared_ptr< GeoCal::QuaternionOrbitData > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::QuaternionOrbitData), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::QuaternionOrbitData > > ("boost::shared_ptr< GeoCal::QuaternionOrbitData > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Orbit))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Orbit >("boost::shared_ptr< GeoCal::Orbit > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Orbit), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Orbit > > ("boost::shared_ptr< GeoCal::Orbit > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::KeplerOrbit))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::KeplerOrbit >("boost::shared_ptr< GeoCal::KeplerOrbit > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::KeplerOrbit), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::KeplerOrbit > > ("boost::shared_ptr< GeoCal::KeplerOrbit > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Observable<GeoCal::Orbit>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Observable<GeoCal::Orbit> >("boost::shared_ptr< GeoCal::Observable<GeoCal::Orbit> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observable<GeoCal::Orbit>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observable<GeoCal::Orbit> > > ("boost::shared_ptr< GeoCal::Observable<GeoCal::Orbit> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Observer<GeoCal::Orbit>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Orbit> >("boost::shared_ptr< GeoCal::Observer<GeoCal::Orbit> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observer<GeoCal::Orbit>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Orbit> > > ("boost::shared_ptr< GeoCal::Observer<GeoCal::Orbit> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

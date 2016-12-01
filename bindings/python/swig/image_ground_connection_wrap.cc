@@ -4100,6 +4100,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -18428,20 +18429,16 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageGroundConnection))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnection >("boost::shared_ptr< GeoCal::ImageGroundConnection > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageGroundConnection), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnection > > ("boost::shared_ptr< GeoCal::ImageGroundConnection > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::OffsetImageGroundConnection))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::OffsetImageGroundConnection >("boost::shared_ptr< GeoCal::OffsetImageGroundConnection > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OffsetImageGroundConnection), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OffsetImageGroundConnection > > ("boost::shared_ptr< GeoCal::OffsetImageGroundConnection > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageGroundConnectionFailed))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnectionFailed >("boost::shared_ptr< GeoCal::ImageGroundConnectionFailed > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageGroundConnectionFailed), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnectionFailed > > ("boost::shared_ptr< GeoCal::ImageGroundConnectionFailed > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageGroundConnectionCopy))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnectionCopy >("boost::shared_ptr< GeoCal::ImageGroundConnectionCopy > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageGroundConnectionCopy), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnectionCopy > > ("boost::shared_ptr< GeoCal::ImageGroundConnectionCopy > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

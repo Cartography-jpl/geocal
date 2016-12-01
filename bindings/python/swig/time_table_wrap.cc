@@ -4037,6 +4037,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -13971,16 +13972,13 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::TimeTable))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::TimeTable >("boost::shared_ptr< GeoCal::TimeTable > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::TimeTable), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::TimeTable > > ("boost::shared_ptr< GeoCal::TimeTable > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ConstantSpacingTimeTable))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ConstantSpacingTimeTable >("boost::shared_ptr< GeoCal::ConstantSpacingTimeTable > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ConstantSpacingTimeTable), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ConstantSpacingTimeTable > > ("boost::shared_ptr< GeoCal::ConstantSpacingTimeTable > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::MeasuredTimeTable))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::MeasuredTimeTable >("boost::shared_ptr< GeoCal::MeasuredTimeTable > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::MeasuredTimeTable), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::MeasuredTimeTable > > ("boost::shared_ptr< GeoCal::MeasuredTimeTable > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

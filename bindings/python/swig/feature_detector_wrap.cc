@@ -4065,6 +4065,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -11345,12 +11346,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::InterestPoint))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::InterestPoint >("boost::shared_ptr< GeoCal::InterestPoint > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::InterestPoint), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::InterestPoint > > ("boost::shared_ptr< GeoCal::InterestPoint > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::FeatureDetector))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::FeatureDetector >("boost::shared_ptr< GeoCal::FeatureDetector > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::FeatureDetector), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::FeatureDetector > > ("boost::shared_ptr< GeoCal::FeatureDetector > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

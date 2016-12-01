@@ -4012,6 +4012,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -8207,8 +8208,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::QuadraticGeometricModel))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::QuadraticGeometricModel >("boost::shared_ptr< GeoCal::QuadraticGeometricModel > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::QuadraticGeometricModel), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::QuadraticGeometricModel > > ("boost::shared_ptr< GeoCal::QuadraticGeometricModel > *"));
   
   SWIG_Python_SetConstant(d, "QuadraticGeometricModel_LINEAR",SWIG_From_int(static_cast< int >(GeoCal::QuadraticGeometricModel::LINEAR)));
   SWIG_Python_SetConstant(d, "QuadraticGeometricModel_QUADRATIC",SWIG_From_int(static_cast< int >(GeoCal::QuadraticGeometricModel::QUADRATIC)));

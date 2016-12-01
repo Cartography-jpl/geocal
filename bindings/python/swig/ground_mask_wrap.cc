@@ -4041,6 +4041,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -10428,12 +10429,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::GroundMask))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::GroundMask >("boost::shared_ptr< GeoCal::GroundMask > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::GroundMask), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::GroundMask > > ("boost::shared_ptr< GeoCal::GroundMask > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CombinedGroundMask))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CombinedGroundMask >("boost::shared_ptr< GeoCal::CombinedGroundMask > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CombinedGroundMask), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CombinedGroundMask > > ("boost::shared_ptr< GeoCal::CombinedGroundMask > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

@@ -4079,6 +4079,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -8944,8 +8945,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::AircraftOrbitData))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::AircraftOrbitData >("boost::shared_ptr< GeoCal::AircraftOrbitData > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::AircraftOrbitData), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::AircraftOrbitData > > ("boost::shared_ptr< GeoCal::AircraftOrbitData > *"));
   
   SWIG_Python_SetConstant(d, "AircraftOrbitData_GEODETIC_VERTICAL",SWIG_From_int(static_cast< int >(GeoCal::AircraftOrbitData::GEODETIC_VERTICAL)));
   SWIG_Python_SetConstant(d, "AircraftOrbitData_GEOCENTRIC_VERTICAL",SWIG_From_int(static_cast< int >(GeoCal::AircraftOrbitData::GEOCENTRIC_VERTICAL)));

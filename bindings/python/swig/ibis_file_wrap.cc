@@ -4010,6 +4010,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -10702,8 +10703,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::IbisFile))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::IbisFile >("boost::shared_ptr< GeoCal::IbisFile > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IbisFile), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IbisFile > > ("boost::shared_ptr< GeoCal::IbisFile > *"));
   
   SWIG_Python_SetConstant(d, "IbisFile_READ",SWIG_From_int(static_cast< int >(GeoCal::IbisFile::READ)));
   SWIG_Python_SetConstant(d, "IbisFile_WRITE",SWIG_From_int(static_cast< int >(GeoCal::IbisFile::WRITE)));

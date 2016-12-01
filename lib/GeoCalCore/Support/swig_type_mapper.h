@@ -6,18 +6,22 @@
 namespace GeoCal {
 
 /****************************************************************//**
-  This is the implementation of SwigTypeMapperBase
+  This is the implementation of SwigTypeMapperBase.
+
+  Important - you can only include this header file if you have
+  included the swig header stuff, e.g. normally only if you are using
+  this in swig code. For geocal, this just gets included by
+  geocal_shared_ptr.i. If you try to include this in normal C++ you
+  will likely get an error since things like SWIG_TypeQuery aren't
+  defined. 
 *******************************************************************/
 
 template<class T> class SwigTypeMapper : public SwigTypeMapperBase {
 public:
   SwigTypeMapper(const char* Typename) {
     sinfo = SWIG_TypeQuery(Typename);
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-    std::cerr << "sinfo - " << sinfo->str << "\n";
-#endif
   }
-  virtual PyObject* to_python(const boost::shared_ptr<GenericObject>& V) 
+  virtual void* to_python(const boost::shared_ptr<GenericObject>& V) 
   {
     boost::shared_ptr<T> v2 = boost::dynamic_pointer_cast<T>(V);
     boost::shared_ptr<T> *v3 = v2 ? new boost::shared_ptr<T>(v2) : 0;

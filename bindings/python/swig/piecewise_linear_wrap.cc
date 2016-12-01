@@ -4023,6 +4023,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -12511,8 +12512,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PiecewiseLinear))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PiecewiseLinear >("boost::shared_ptr< GeoCal::PiecewiseLinear > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PiecewiseLinear), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PiecewiseLinear > > ("boost::shared_ptr< GeoCal::PiecewiseLinear > *"));
   
   SWIG_Python_SetConstant(d, "PiecewiseLinear_LINEAR",SWIG_From_int(static_cast< int >(GeoCal::PiecewiseLinear::LINEAR)));
   SWIG_Python_SetConstant(d, "PiecewiseLinear_CONSTANT",SWIG_From_int(static_cast< int >(GeoCal::PiecewiseLinear::CONSTANT)));

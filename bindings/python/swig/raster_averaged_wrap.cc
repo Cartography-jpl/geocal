@@ -4110,6 +4110,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -9955,20 +9956,16 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::RasterAveraged))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::RasterAveraged >("boost::shared_ptr< GeoCal::RasterAveraged > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::RasterAveraged), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::RasterAveraged > > ("boost::shared_ptr< GeoCal::RasterAveraged > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::RasterAveragedMultiBand))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::RasterAveragedMultiBand >("boost::shared_ptr< GeoCal::RasterAveragedMultiBand > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::RasterAveragedMultiBand), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::RasterAveragedMultiBand > > ("boost::shared_ptr< GeoCal::RasterAveragedMultiBand > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageMaskAveraged))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageMaskAveraged >("boost::shared_ptr< GeoCal::ImageMaskAveraged > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageMaskAveraged), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageMaskAveraged > > ("boost::shared_ptr< GeoCal::ImageMaskAveraged > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::AveragedImageGroundConnection))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::AveragedImageGroundConnection >("boost::shared_ptr< GeoCal::AveragedImageGroundConnection > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::AveragedImageGroundConnection), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::AveragedImageGroundConnection > > ("boost::shared_ptr< GeoCal::AveragedImageGroundConnection > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

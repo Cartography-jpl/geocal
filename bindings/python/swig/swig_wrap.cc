@@ -1,222 +1,192 @@
-#include <Python.h>
-#include <iostream>
-#include "swig_type_mapper_base.h"
-
-// Python 2 and 3 do strings differently, so we have a simple macro to 
-// keep from having lots of ifdefs spread around. See 
-// https://wiki.python.org/moin/PortingExtensionModulesToPy3k for details on
-// this.
-#if PY_MAJOR_VERSION > 2
-#define Text_FromUTF8(str) PyUnicode_FromString(str)
-#else
-#define Text_FromUTF8(str) PyString_FromString(str)
-#endif
-
-// Python 2 and 3 have different name for their swig init functions
-#if PY_MAJOR_VERSION > 2
-#define SWIG_INIT_FUNC(S) PyInit__ ## S
-#define SWIG_INIT_TYPE PyObject *
-#define SWIG_INIT_MODULE init_extension_module3
-#else
-#define SWIG_INIT_FUNC(S) init_ ## S
-#define SWIG_INIT_TYPE void
-#define SWIG_INIT_MODULE init_extension_module2
-#endif
-using namespace GeoCal;
-// Map used between type_index and object to map this to python.
-std::map<type_index, boost::shared_ptr<SwigTypeMapperBase> > 
-  GeoCal::swig_type_map;
+#define PYTHON_MODULE_NAME _swig_wrap
+#include "python_lib_init.h"
+#include "geocal_config.h"
 
 extern "C" {
-#if PY_MAJOR_VERSION > 2
-  PyObject * PyInit__swig_wrap(void);
-#else
-  void init_swig_wrap(void);
-#endif
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(swig_std)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(swig_array)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(swig_boost_array)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(swig_quaternion)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(constant)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(generic_object)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(auto_derivative)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(array_ad)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(observer)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_quaternion)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(covariance)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(wgs84_constant)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_exception)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(functor)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vfunctor_with_derivative)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(dfunctor_with_derivative)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(statistic)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_gsl_fit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_gsl_root)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_time)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(tiled_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_serialize_function)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(image_coordinate)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(tie_point)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(with_parameter)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(look_vector)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_coordinate)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(coordinate_converter)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ecr)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(eci)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geodetic)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(map_info)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_rpc)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raster_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(image_ground_connection)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_collection)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(frame_coordinate)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(camera)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ray_caster)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(time_table)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ipi)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raster_image_variable)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(sub_raster_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raster_image_multi_band)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raster_image_multi_band_variable)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(sub_raster_image_multi_band)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_mask)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(image_mask)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_datum)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(simple_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(memory_raster_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(constant_raster_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(dem_map_info)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(feature_detector)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(forstner_feature_detector)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(image_matcher)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(image_to_image_match)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ccorr_matcher)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(lsm_matcher)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ccorr_lsm_matcher)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geometric_model)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raster_multifile)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(did_datum)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(dem_map_info_offset)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(map_info_image_ground_connection)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_mask_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(image_mask_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raster_averaged)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raster_subsample)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(calc_raster)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(dem_to_raster)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(calc_raster_multi_band)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(magnify_bilinear)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(magnify_replicate)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(smooth_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raster_image_tiled_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(dem_tiled_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(memory_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(map_reprojected_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(pyramid_image_matcher)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_map_projected)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_simulated)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_simulated_ray_caster)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_image_to_image_match)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(surface_image_to_image_match)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(location_to_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ray_intersect)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(dem_match)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(quadratic_geometric_model)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geometric_model_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(memory_multi_band)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(spice_helper)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(raw_raster_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(aircraft_orbit_data)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_quaternion_list)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(pan_sharpen)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(scale_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(apply_mask)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(rpc_image_ground_connection)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ipi_image_ground_connection)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(eci_tod)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(quaternion_camera)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(galileo_camera)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(refraction)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_data_image_ground_connection)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(planet_coordinate)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_ray_caster)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_rolling_shutter)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_array)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_multiple_pass)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_collection_rolling_shutter)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(igc_collection_orbit_data)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(rolling_shutter_constant_time_table)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(piecewise_linear)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_correction)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_offset_correction)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_piecewise_correction)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(orbit_time_shift)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(tle_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(spice_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_camera)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(argus_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(quickbird_camera)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(spot_camera)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(spot_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(quickbird_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(quickbird_time_table)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(pos_export_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(worldview2_cloudmask)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(doughnut_average)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(paint_class)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_lite_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(cart_lab_multifile)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(landsat7_panchromatic)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(material_detect)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ibis_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_argument)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(datum_geoid96)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(srtm_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_raster_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(mspi_config_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(mspi_paraxial_transform)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(mspi_camera)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(mspi_gimbal)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_mspi_orbit)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ground_mspi_igc)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(usgs_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(srtm_90m_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_time_table)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_l1b1)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_igc)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(air_mspi_igc_collection)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(jia_sample)(void);
+  INIT_TYPE INIT_FUNC(swig_std)(void);
+  INIT_TYPE INIT_FUNC(swig_array)(void);
+  INIT_TYPE INIT_FUNC(swig_boost_array)(void);
+  INIT_TYPE INIT_FUNC(swig_quaternion)(void);
+  INIT_TYPE INIT_FUNC(constant)(void);
+  INIT_TYPE INIT_FUNC(generic_object)(void);
+  INIT_TYPE INIT_FUNC(auto_derivative)(void);
+  INIT_TYPE INIT_FUNC(array_ad)(void);
+  INIT_TYPE INIT_FUNC(observer)(void);
+  INIT_TYPE INIT_FUNC(geocal_quaternion)(void);
+  INIT_TYPE INIT_FUNC(covariance)(void);
+  INIT_TYPE INIT_FUNC(wgs84_constant)(void);
+  INIT_TYPE INIT_FUNC(geocal_exception)(void);
+  INIT_TYPE INIT_FUNC(functor)(void);
+  INIT_TYPE INIT_FUNC(vfunctor_with_derivative)(void);
+  INIT_TYPE INIT_FUNC(dfunctor_with_derivative)(void);
+  INIT_TYPE INIT_FUNC(statistic)(void);
+  INIT_TYPE INIT_FUNC(geocal_gsl_fit)(void);
+  INIT_TYPE INIT_FUNC(geocal_gsl_root)(void);
+  INIT_TYPE INIT_FUNC(geocal_time)(void);
+  INIT_TYPE INIT_FUNC(tiled_file)(void);
+  INIT_TYPE INIT_FUNC(geocal_serialize_function)(void);
+  INIT_TYPE INIT_FUNC(image_coordinate)(void);
+  INIT_TYPE INIT_FUNC(tie_point)(void);
+  INIT_TYPE INIT_FUNC(with_parameter)(void);
+  INIT_TYPE INIT_FUNC(look_vector)(void);
+  INIT_TYPE INIT_FUNC(ground_coordinate)(void);
+  INIT_TYPE INIT_FUNC(coordinate_converter)(void);
+  INIT_TYPE INIT_FUNC(ecr)(void);
+  INIT_TYPE INIT_FUNC(eci)(void);
+  INIT_TYPE INIT_FUNC(geodetic)(void);
+  INIT_TYPE INIT_FUNC(dem)(void);
+  INIT_TYPE INIT_FUNC(map_info)(void);
+  INIT_TYPE INIT_FUNC(geocal_rpc)(void);
+  INIT_TYPE INIT_FUNC(raster_image)(void);
+  INIT_TYPE INIT_FUNC(image_ground_connection)(void);
+  INIT_TYPE INIT_FUNC(igc_collection)(void);
+  INIT_TYPE INIT_FUNC(frame_coordinate)(void);
+  INIT_TYPE INIT_FUNC(camera)(void);
+  INIT_TYPE INIT_FUNC(ray_caster)(void);
+  INIT_TYPE INIT_FUNC(orbit)(void);
+  INIT_TYPE INIT_FUNC(time_table)(void);
+  INIT_TYPE INIT_FUNC(ipi)(void);
+  INIT_TYPE INIT_FUNC(raster_image_variable)(void);
+  INIT_TYPE INIT_FUNC(sub_raster_image)(void);
+  INIT_TYPE INIT_FUNC(raster_image_multi_band)(void);
+  INIT_TYPE INIT_FUNC(raster_image_multi_band_variable)(void);
+  INIT_TYPE INIT_FUNC(sub_raster_image_multi_band)(void);
+  INIT_TYPE INIT_FUNC(ground_mask)(void);
+  INIT_TYPE INIT_FUNC(image_mask)(void);
+  INIT_TYPE INIT_FUNC(geocal_datum)(void);
+  INIT_TYPE INIT_FUNC(simple_dem)(void);
+  INIT_TYPE INIT_FUNC(memory_raster_image)(void);
+  INIT_TYPE INIT_FUNC(constant_raster_image)(void);
+  INIT_TYPE INIT_FUNC(dem_map_info)(void);
+  INIT_TYPE INIT_FUNC(feature_detector)(void);
+  INIT_TYPE INIT_FUNC(forstner_feature_detector)(void);
+  INIT_TYPE INIT_FUNC(image_matcher)(void);
+  INIT_TYPE INIT_FUNC(image_to_image_match)(void);
+  INIT_TYPE INIT_FUNC(ccorr_matcher)(void);
+  INIT_TYPE INIT_FUNC(lsm_matcher)(void);
+  INIT_TYPE INIT_FUNC(ccorr_lsm_matcher)(void);
+  INIT_TYPE INIT_FUNC(geometric_model)(void);
+  INIT_TYPE INIT_FUNC(raster_multifile)(void);
+  INIT_TYPE INIT_FUNC(did_datum)(void);
+  INIT_TYPE INIT_FUNC(dem_map_info_offset)(void);
+  INIT_TYPE INIT_FUNC(map_info_image_ground_connection)(void);
+  INIT_TYPE INIT_FUNC(ground_mask_image)(void);
+  INIT_TYPE INIT_FUNC(image_mask_image)(void);
+  INIT_TYPE INIT_FUNC(raster_averaged)(void);
+  INIT_TYPE INIT_FUNC(raster_subsample)(void);
+  INIT_TYPE INIT_FUNC(calc_raster)(void);
+  INIT_TYPE INIT_FUNC(dem_to_raster)(void);
+  INIT_TYPE INIT_FUNC(calc_raster_multi_band)(void);
+  INIT_TYPE INIT_FUNC(magnify_bilinear)(void);
+  INIT_TYPE INIT_FUNC(magnify_replicate)(void);
+  INIT_TYPE INIT_FUNC(smooth_image)(void);
+  INIT_TYPE INIT_FUNC(raster_image_tiled_file)(void);
+  INIT_TYPE INIT_FUNC(dem_tiled_file)(void);
+  INIT_TYPE INIT_FUNC(memory_dem)(void);
+  INIT_TYPE INIT_FUNC(map_reprojected_image)(void);
+  INIT_TYPE INIT_FUNC(pyramid_image_matcher)(void);
+  INIT_TYPE INIT_FUNC(igc_map_projected)(void);
+  INIT_TYPE INIT_FUNC(igc_simulated)(void);
+  INIT_TYPE INIT_FUNC(igc_simulated_ray_caster)(void);
+  INIT_TYPE INIT_FUNC(igc_image_to_image_match)(void);
+  INIT_TYPE INIT_FUNC(surface_image_to_image_match)(void);
+  INIT_TYPE INIT_FUNC(location_to_file)(void);
+  INIT_TYPE INIT_FUNC(ray_intersect)(void);
+  INIT_TYPE INIT_FUNC(dem_match)(void);
+  INIT_TYPE INIT_FUNC(quadratic_geometric_model)(void);
+  INIT_TYPE INIT_FUNC(geometric_model_image)(void);
+  INIT_TYPE INIT_FUNC(memory_multi_band)(void);
+  INIT_TYPE INIT_FUNC(spice_helper)(void);
+  INIT_TYPE INIT_FUNC(raw_raster_image)(void);
+  INIT_TYPE INIT_FUNC(aircraft_orbit_data)(void);
+  INIT_TYPE INIT_FUNC(orbit_quaternion_list)(void);
+  INIT_TYPE INIT_FUNC(pan_sharpen)(void);
+  INIT_TYPE INIT_FUNC(scale_image)(void);
+  INIT_TYPE INIT_FUNC(apply_mask)(void);
+  INIT_TYPE INIT_FUNC(rpc_image_ground_connection)(void);
+  INIT_TYPE INIT_FUNC(ipi_image_ground_connection)(void);
+  INIT_TYPE INIT_FUNC(eci_tod)(void);
+  INIT_TYPE INIT_FUNC(quaternion_camera)(void);
+  INIT_TYPE INIT_FUNC(galileo_camera)(void);
+  INIT_TYPE INIT_FUNC(refraction)(void);
+  INIT_TYPE INIT_FUNC(orbit_data_image_ground_connection)(void);
+  INIT_TYPE INIT_FUNC(planet_coordinate)(void);
+  INIT_TYPE INIT_FUNC(igc_ray_caster)(void);
+  INIT_TYPE INIT_FUNC(igc_rolling_shutter)(void);
+  INIT_TYPE INIT_FUNC(igc_array)(void);
+  INIT_TYPE INIT_FUNC(igc_multiple_pass)(void);
+  INIT_TYPE INIT_FUNC(igc_collection_rolling_shutter)(void);
+  INIT_TYPE INIT_FUNC(igc_collection_orbit_data)(void);
+  INIT_TYPE INIT_FUNC(rolling_shutter_constant_time_table)(void);
+  INIT_TYPE INIT_FUNC(piecewise_linear)(void);
+  INIT_TYPE INIT_FUNC(orbit_correction)(void);
+  INIT_TYPE INIT_FUNC(orbit_offset_correction)(void);
+  INIT_TYPE INIT_FUNC(orbit_piecewise_correction)(void);
+  INIT_TYPE INIT_FUNC(orbit_time_shift)(void);
+  INIT_TYPE INIT_FUNC(tle_orbit)(void);
+  INIT_TYPE INIT_FUNC(spice_orbit)(void);
+  INIT_TYPE INIT_FUNC(argus_camera)(void);
+  INIT_TYPE INIT_FUNC(argus_orbit)(void);
+  INIT_TYPE INIT_FUNC(quickbird_camera)(void);
+  INIT_TYPE INIT_FUNC(spot_camera)(void);
+  INIT_TYPE INIT_FUNC(spot_orbit)(void);
+  INIT_TYPE INIT_FUNC(quickbird_orbit)(void);
+  INIT_TYPE INIT_FUNC(quickbird_time_table)(void);
+  INIT_TYPE INIT_FUNC(pos_export_orbit)(void);
+  INIT_TYPE INIT_FUNC(worldview2_cloudmask)(void);
+  INIT_TYPE INIT_FUNC(doughnut_average)(void);
+  INIT_TYPE INIT_FUNC(paint_class)(void);
+  INIT_TYPE INIT_FUNC(vicar_lite_file)(void);
+  INIT_TYPE INIT_FUNC(cart_lab_multifile)(void);
+  INIT_TYPE INIT_FUNC(landsat7_panchromatic)(void);
+  INIT_TYPE INIT_FUNC(material_detect)(void);
+  INIT_TYPE INIT_FUNC(ibis_file)(void);
+  INIT_TYPE INIT_FUNC(vicar_file)(void);
+  INIT_TYPE INIT_FUNC(vicar_argument)(void);
+  INIT_TYPE INIT_FUNC(vicar_dem)(void);
+  INIT_TYPE INIT_FUNC(datum_geoid96)(void);
+  INIT_TYPE INIT_FUNC(srtm_dem)(void);
+  INIT_TYPE INIT_FUNC(vicar_raster_image)(void);
+  INIT_TYPE INIT_FUNC(mspi_config_file)(void);
+  INIT_TYPE INIT_FUNC(mspi_paraxial_transform)(void);
+  INIT_TYPE INIT_FUNC(mspi_camera)(void);
+  INIT_TYPE INIT_FUNC(mspi_gimbal)(void);
+  INIT_TYPE INIT_FUNC(air_mspi_orbit)(void);
+  INIT_TYPE INIT_FUNC(ground_mspi_orbit)(void);
+  INIT_TYPE INIT_FUNC(ground_mspi_igc)(void);
+  INIT_TYPE INIT_FUNC(usgs_dem)(void);
+  INIT_TYPE INIT_FUNC(srtm_90m_dem)(void);
+  INIT_TYPE INIT_FUNC(air_mspi_file)(void);
+  INIT_TYPE INIT_FUNC(air_mspi_time_table)(void);
+  INIT_TYPE INIT_FUNC(air_mspi_l1b1)(void);
+  INIT_TYPE INIT_FUNC(air_mspi_igc)(void);
+  INIT_TYPE INIT_FUNC(air_mspi_igc_collection)(void);
+  INIT_TYPE INIT_FUNC(jia_sample)(void);
 #ifdef HAVE_CARTO
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(eci_tod_burl)(void);
+  INIT_TYPE INIT_FUNC(eci_tod_burl)(void);
 #endif
 #ifdef HAVE_FFTW
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_fftw)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(phase_correlation_matcher)(void);
+  INIT_TYPE INIT_FUNC(geocal_fftw)(void);
+  INIT_TYPE INIT_FUNC(phase_correlation_matcher)(void);
 #endif
 #ifdef HAVE_HDF5
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(hdf_file)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(hdf_orbit)(void);
+  INIT_TYPE INIT_FUNC(hdf_file)(void);
+  INIT_TYPE INIT_FUNC(hdf_orbit)(void);
 #endif
 #ifdef HAVE_HDF5
 #ifdef HAVE_CARTO
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(hdf_orbit_carto)(void);
+  INIT_TYPE INIT_FUNC(hdf_orbit_carto)(void);
 #endif
 #endif
 #ifdef HAVE_GDAL
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(geocal_gdal)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(gdal_raster_image)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(gdal_datum)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(gdal_dem)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(gdal_multi_band)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(image_point_display)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(ogr_coordinate)(void);
-  SWIG_INIT_TYPE SWIG_INIT_FUNC(vicar_ogr)(void);
+  INIT_TYPE INIT_FUNC(geocal_gdal)(void);
+  INIT_TYPE INIT_FUNC(gdal_raster_image)(void);
+  INIT_TYPE INIT_FUNC(gdal_datum)(void);
+  INIT_TYPE INIT_FUNC(gdal_dem)(void);
+  INIT_TYPE INIT_FUNC(gdal_multi_band)(void);
+  INIT_TYPE INIT_FUNC(image_point_display)(void);
+  INIT_TYPE INIT_FUNC(ogr_coordinate)(void);
+  INIT_TYPE INIT_FUNC(vicar_ogr)(void);
 #endif
 #ifdef HAVE_VICAR_RTL
 #endif
@@ -224,356 +194,196 @@ extern "C" {
 #endif
 }
 
-// Used throughout SWIG wrapper, define here because it is convenient.
-std::string parse_python_exception() {
-  PyObject *type = NULL, *value = NULL, *tb = NULL;
-  PyErr_Fetch(&type, &value, &tb);
-  PyObject* mod = PyImport_ImportModule("traceback");
-  PyObject* err_str_list = NULL;
-  if(tb)
-    err_str_list = PyObject_CallMethodObjArgs(mod,
-	      Text_FromUTF8("format_exception"), type, value, tb, NULL);
-  std::string ret = "Python error that I can't parse";
-  if(err_str_list) {
-    PyObject* err_str = 
-      PyObject_CallMethodObjArgs(Text_FromUTF8(""),
-				 Text_FromUTF8("join"), 
-				 err_str_list, NULL);
-    if(err_str) {
-        PyObject * temp_bytes = PyUnicode_AsEncodedString(err_str, "ASCII", 
-	"strict");
-        ret = PyBytes_AS_STRING(temp_bytes); // Borrowed pointer
-        Py_DECREF(temp_bytes);
-    }
-    Py_XDECREF(err_str);
-  } else if(value) {
-    PyObject * temp_bytes = PyUnicode_AsEncodedString(value, "ASCII", 
-	"strict");
-    ret = PyBytes_AS_STRING(temp_bytes); // Borrowed pointer
-    Py_DECREF(temp_bytes);
-  }
-  Py_XDECREF(mod);
-  Py_XDECREF(err_str_list);
-  Py_XDECREF(type);
-  Py_XDECREF(value);
-  Py_XDECREF(tb);
-  return ret;
-}
-
-#if PY_MAJOR_VERSION > 2
-// Version for python 3
-static void init_extension_module3(PyObject* package, const char *modulename,
-				  PyObject * (*initfunction)(void)) {
-  PyObject *module = initfunction();
-  PyObject *module_dic = PyImport_GetModuleDict();
-  PyDict_SetItem(module_dic, Text_FromUTF8(modulename), module);
-  if(PyModule_AddObject(package, (char *)modulename, module)) {
-    std::cerr << "Initialisation in PyImport_AddObject failed for module "
-	      << modulename << "\n";
-    return;
-  }
-  Py_INCREF(module);
-}
-#else 
-// Version for python 2
-static void init_extension_module2(PyObject* package, const char *modulename,
-				  void (*initfunction)(void)) {
-  PyObject *module = PyImport_AddModule((char *)modulename);
-  if(!module) {
-    std::cerr << "Initialisation in PyImport_AddModule failed for module "
-	      << modulename << "\n";
-    return;
-  }
-  if(PyModule_AddObject(package, (char *)modulename, module)) {
-    std::cerr << "Initialisation in PyImport_AddObject failed for module "
-	      << modulename << "\n";
-    return;
-  }
-  Py_INCREF(module);
-  initfunction();
-}
-#endif
-
-
-// This next blob of code comes from 
-// https://wiki.python.org/moin/PortingExtensionModulesToPy3k
-
-struct module_state {
-    PyObject *error;
-};
-
-#if PY_MAJOR_VERSION >= 3
-#define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
-#else
-#define GETSTATE(m) (&_state)
-static struct module_state _state;
-#endif
-
-static PyObject *
-error_out(PyObject *m) {
-    struct module_state *st = GETSTATE(m);
-    PyErr_SetString(st->error, "something bad happened");
-    return NULL;
-}
-
-static PyMethodDef swig_wrap_methods[] = {
-    {"error_out", (PyCFunction)error_out, METH_NOARGS, NULL},
-    {NULL, NULL}
-};
-
-#if PY_MAJOR_VERSION >= 3
-
-static int swig_wrap_traverse(PyObject *m, visitproc visit, void *arg) {
-    Py_VISIT(GETSTATE(m)->error);
-    return 0;
-}
-
-static int swig_wrap_clear(PyObject *m) {
-    Py_CLEAR(GETSTATE(m)->error);
-    return 0;
-}
-
-
-static struct PyModuleDef moduledef = {
-        PyModuleDef_HEAD_INIT,
-        "_swig_wrap",
-        NULL,
-        sizeof(struct module_state),
-        swig_wrap_methods,
-        NULL,
-        swig_wrap_traverse,
-        swig_wrap_clear,
-        NULL
-};
-
-#define INITERROR return NULL
-
-PyObject *
-PyInit__swig_wrap(void)
-
-#else
-#define INITERROR return
-
-void
-init_swig_wrap(void)
-#endif
+static void module_init(PyObject* module)
 {
-#if PY_MAJOR_VERSION >= 3
-    PyObject *module = PyModule_Create(&moduledef);
-#else
-    PyObject *module = Py_InitModule("_swig_wrap", swig_wrap_methods);
-#endif
-
-    if (module == NULL) {
-        std::cerr << "Initialization failed\n";
-        INITERROR;
-    }
-    struct module_state *st = GETSTATE(module);
-
-    st->error = PyErr_NewException("swig_wrap.Error", NULL, NULL);
-    if (st->error == NULL) {
-        Py_DECREF(module);
-        INITERROR;
-    }
-
-  PyObject *package = PyImport_AddModule((char *)"new_geocal");
-  if(!package) {
-      std::cerr << "Initialization failed\n";
-      INITERROR;
-  }
-  
-  SWIG_INIT_MODULE(package, "_swig_std", SWIG_INIT_FUNC(swig_std));
-  SWIG_INIT_MODULE(package, "_swig_array", SWIG_INIT_FUNC(swig_array));
-  SWIG_INIT_MODULE(package, "_swig_boost_array", SWIG_INIT_FUNC(swig_boost_array));
-  SWIG_INIT_MODULE(package, "_swig_quaternion", SWIG_INIT_FUNC(swig_quaternion));
-  SWIG_INIT_MODULE(package, "_constant", SWIG_INIT_FUNC(constant));
-  SWIG_INIT_MODULE(package, "_generic_object", SWIG_INIT_FUNC(generic_object));
-  SWIG_INIT_MODULE(package, "_auto_derivative", SWIG_INIT_FUNC(auto_derivative));
-  SWIG_INIT_MODULE(package, "_array_ad", SWIG_INIT_FUNC(array_ad));
-  SWIG_INIT_MODULE(package, "_observer", SWIG_INIT_FUNC(observer));
-  SWIG_INIT_MODULE(package, "_geocal_quaternion", SWIG_INIT_FUNC(geocal_quaternion));
-  SWIG_INIT_MODULE(package, "_covariance", SWIG_INIT_FUNC(covariance));
-  SWIG_INIT_MODULE(package, "_wgs84_constant", SWIG_INIT_FUNC(wgs84_constant));
-  SWIG_INIT_MODULE(package, "_geocal_exception", SWIG_INIT_FUNC(geocal_exception));
-  SWIG_INIT_MODULE(package, "_functor", SWIG_INIT_FUNC(functor));
-  SWIG_INIT_MODULE(package, "_vfunctor_with_derivative", SWIG_INIT_FUNC(vfunctor_with_derivative));
-  SWIG_INIT_MODULE(package, "_dfunctor_with_derivative", SWIG_INIT_FUNC(dfunctor_with_derivative));
-  SWIG_INIT_MODULE(package, "_statistic", SWIG_INIT_FUNC(statistic));
-  SWIG_INIT_MODULE(package, "_geocal_gsl_fit", SWIG_INIT_FUNC(geocal_gsl_fit));
-  SWIG_INIT_MODULE(package, "_geocal_gsl_root", SWIG_INIT_FUNC(geocal_gsl_root));
-  SWIG_INIT_MODULE(package, "_geocal_time", SWIG_INIT_FUNC(geocal_time));
-  SWIG_INIT_MODULE(package, "_tiled_file", SWIG_INIT_FUNC(tiled_file));
-  SWIG_INIT_MODULE(package, "_geocal_serialize_function", SWIG_INIT_FUNC(geocal_serialize_function));
-  SWIG_INIT_MODULE(package, "_image_coordinate", SWIG_INIT_FUNC(image_coordinate));
-  SWIG_INIT_MODULE(package, "_tie_point", SWIG_INIT_FUNC(tie_point));
-  SWIG_INIT_MODULE(package, "_with_parameter", SWIG_INIT_FUNC(with_parameter));
-  SWIG_INIT_MODULE(package, "_look_vector", SWIG_INIT_FUNC(look_vector));
-  SWIG_INIT_MODULE(package, "_ground_coordinate", SWIG_INIT_FUNC(ground_coordinate));
-  SWIG_INIT_MODULE(package, "_coordinate_converter", SWIG_INIT_FUNC(coordinate_converter));
-  SWIG_INIT_MODULE(package, "_ecr", SWIG_INIT_FUNC(ecr));
-  SWIG_INIT_MODULE(package, "_eci", SWIG_INIT_FUNC(eci));
-  SWIG_INIT_MODULE(package, "_geodetic", SWIG_INIT_FUNC(geodetic));
-  SWIG_INIT_MODULE(package, "_dem", SWIG_INIT_FUNC(dem));
-  SWIG_INIT_MODULE(package, "_map_info", SWIG_INIT_FUNC(map_info));
-  SWIG_INIT_MODULE(package, "_geocal_rpc", SWIG_INIT_FUNC(geocal_rpc));
-  SWIG_INIT_MODULE(package, "_raster_image", SWIG_INIT_FUNC(raster_image));
-  SWIG_INIT_MODULE(package, "_image_ground_connection", SWIG_INIT_FUNC(image_ground_connection));
-  SWIG_INIT_MODULE(package, "_igc_collection", SWIG_INIT_FUNC(igc_collection));
-  SWIG_INIT_MODULE(package, "_frame_coordinate", SWIG_INIT_FUNC(frame_coordinate));
-  SWIG_INIT_MODULE(package, "_camera", SWIG_INIT_FUNC(camera));
-  SWIG_INIT_MODULE(package, "_ray_caster", SWIG_INIT_FUNC(ray_caster));
-  SWIG_INIT_MODULE(package, "_orbit", SWIG_INIT_FUNC(orbit));
-  SWIG_INIT_MODULE(package, "_time_table", SWIG_INIT_FUNC(time_table));
-  SWIG_INIT_MODULE(package, "_ipi", SWIG_INIT_FUNC(ipi));
-  SWIG_INIT_MODULE(package, "_raster_image_variable", SWIG_INIT_FUNC(raster_image_variable));
-  SWIG_INIT_MODULE(package, "_sub_raster_image", SWIG_INIT_FUNC(sub_raster_image));
-  SWIG_INIT_MODULE(package, "_raster_image_multi_band", SWIG_INIT_FUNC(raster_image_multi_band));
-  SWIG_INIT_MODULE(package, "_raster_image_multi_band_variable", SWIG_INIT_FUNC(raster_image_multi_band_variable));
-  SWIG_INIT_MODULE(package, "_sub_raster_image_multi_band", SWIG_INIT_FUNC(sub_raster_image_multi_band));
-  SWIG_INIT_MODULE(package, "_ground_mask", SWIG_INIT_FUNC(ground_mask));
-  SWIG_INIT_MODULE(package, "_image_mask", SWIG_INIT_FUNC(image_mask));
-  SWIG_INIT_MODULE(package, "_geocal_datum", SWIG_INIT_FUNC(geocal_datum));
-  SWIG_INIT_MODULE(package, "_simple_dem", SWIG_INIT_FUNC(simple_dem));
-  SWIG_INIT_MODULE(package, "_memory_raster_image", SWIG_INIT_FUNC(memory_raster_image));
-  SWIG_INIT_MODULE(package, "_constant_raster_image", SWIG_INIT_FUNC(constant_raster_image));
-  SWIG_INIT_MODULE(package, "_dem_map_info", SWIG_INIT_FUNC(dem_map_info));
-  SWIG_INIT_MODULE(package, "_feature_detector", SWIG_INIT_FUNC(feature_detector));
-  SWIG_INIT_MODULE(package, "_forstner_feature_detector", SWIG_INIT_FUNC(forstner_feature_detector));
-  SWIG_INIT_MODULE(package, "_image_matcher", SWIG_INIT_FUNC(image_matcher));
-  SWIG_INIT_MODULE(package, "_image_to_image_match", SWIG_INIT_FUNC(image_to_image_match));
-  SWIG_INIT_MODULE(package, "_ccorr_matcher", SWIG_INIT_FUNC(ccorr_matcher));
-  SWIG_INIT_MODULE(package, "_lsm_matcher", SWIG_INIT_FUNC(lsm_matcher));
-  SWIG_INIT_MODULE(package, "_ccorr_lsm_matcher", SWIG_INIT_FUNC(ccorr_lsm_matcher));
-  SWIG_INIT_MODULE(package, "_geometric_model", SWIG_INIT_FUNC(geometric_model));
-  SWIG_INIT_MODULE(package, "_raster_multifile", SWIG_INIT_FUNC(raster_multifile));
-  SWIG_INIT_MODULE(package, "_did_datum", SWIG_INIT_FUNC(did_datum));
-  SWIG_INIT_MODULE(package, "_dem_map_info_offset", SWIG_INIT_FUNC(dem_map_info_offset));
-  SWIG_INIT_MODULE(package, "_map_info_image_ground_connection", SWIG_INIT_FUNC(map_info_image_ground_connection));
-  SWIG_INIT_MODULE(package, "_ground_mask_image", SWIG_INIT_FUNC(ground_mask_image));
-  SWIG_INIT_MODULE(package, "_image_mask_image", SWIG_INIT_FUNC(image_mask_image));
-  SWIG_INIT_MODULE(package, "_raster_averaged", SWIG_INIT_FUNC(raster_averaged));
-  SWIG_INIT_MODULE(package, "_raster_subsample", SWIG_INIT_FUNC(raster_subsample));
-  SWIG_INIT_MODULE(package, "_calc_raster", SWIG_INIT_FUNC(calc_raster));
-  SWIG_INIT_MODULE(package, "_dem_to_raster", SWIG_INIT_FUNC(dem_to_raster));
-  SWIG_INIT_MODULE(package, "_calc_raster_multi_band", SWIG_INIT_FUNC(calc_raster_multi_band));
-  SWIG_INIT_MODULE(package, "_magnify_bilinear", SWIG_INIT_FUNC(magnify_bilinear));
-  SWIG_INIT_MODULE(package, "_magnify_replicate", SWIG_INIT_FUNC(magnify_replicate));
-  SWIG_INIT_MODULE(package, "_smooth_image", SWIG_INIT_FUNC(smooth_image));
-  SWIG_INIT_MODULE(package, "_raster_image_tiled_file", SWIG_INIT_FUNC(raster_image_tiled_file));
-  SWIG_INIT_MODULE(package, "_dem_tiled_file", SWIG_INIT_FUNC(dem_tiled_file));
-  SWIG_INIT_MODULE(package, "_memory_dem", SWIG_INIT_FUNC(memory_dem));
-  SWIG_INIT_MODULE(package, "_map_reprojected_image", SWIG_INIT_FUNC(map_reprojected_image));
-  SWIG_INIT_MODULE(package, "_pyramid_image_matcher", SWIG_INIT_FUNC(pyramid_image_matcher));
-  SWIG_INIT_MODULE(package, "_igc_map_projected", SWIG_INIT_FUNC(igc_map_projected));
-  SWIG_INIT_MODULE(package, "_igc_simulated", SWIG_INIT_FUNC(igc_simulated));
-  SWIG_INIT_MODULE(package, "_igc_simulated_ray_caster", SWIG_INIT_FUNC(igc_simulated_ray_caster));
-  SWIG_INIT_MODULE(package, "_igc_image_to_image_match", SWIG_INIT_FUNC(igc_image_to_image_match));
-  SWIG_INIT_MODULE(package, "_surface_image_to_image_match", SWIG_INIT_FUNC(surface_image_to_image_match));
-  SWIG_INIT_MODULE(package, "_location_to_file", SWIG_INIT_FUNC(location_to_file));
-  SWIG_INIT_MODULE(package, "_ray_intersect", SWIG_INIT_FUNC(ray_intersect));
-  SWIG_INIT_MODULE(package, "_dem_match", SWIG_INIT_FUNC(dem_match));
-  SWIG_INIT_MODULE(package, "_quadratic_geometric_model", SWIG_INIT_FUNC(quadratic_geometric_model));
-  SWIG_INIT_MODULE(package, "_geometric_model_image", SWIG_INIT_FUNC(geometric_model_image));
-  SWIG_INIT_MODULE(package, "_memory_multi_band", SWIG_INIT_FUNC(memory_multi_band));
-  SWIG_INIT_MODULE(package, "_spice_helper", SWIG_INIT_FUNC(spice_helper));
-  SWIG_INIT_MODULE(package, "_raw_raster_image", SWIG_INIT_FUNC(raw_raster_image));
-  SWIG_INIT_MODULE(package, "_aircraft_orbit_data", SWIG_INIT_FUNC(aircraft_orbit_data));
-  SWIG_INIT_MODULE(package, "_orbit_quaternion_list", SWIG_INIT_FUNC(orbit_quaternion_list));
-  SWIG_INIT_MODULE(package, "_pan_sharpen", SWIG_INIT_FUNC(pan_sharpen));
-  SWIG_INIT_MODULE(package, "_scale_image", SWIG_INIT_FUNC(scale_image));
-  SWIG_INIT_MODULE(package, "_apply_mask", SWIG_INIT_FUNC(apply_mask));
-  SWIG_INIT_MODULE(package, "_rpc_image_ground_connection", SWIG_INIT_FUNC(rpc_image_ground_connection));
-  SWIG_INIT_MODULE(package, "_ipi_image_ground_connection", SWIG_INIT_FUNC(ipi_image_ground_connection));
-  SWIG_INIT_MODULE(package, "_eci_tod", SWIG_INIT_FUNC(eci_tod));
-  SWIG_INIT_MODULE(package, "_quaternion_camera", SWIG_INIT_FUNC(quaternion_camera));
-  SWIG_INIT_MODULE(package, "_galileo_camera", SWIG_INIT_FUNC(galileo_camera));
-  SWIG_INIT_MODULE(package, "_refraction", SWIG_INIT_FUNC(refraction));
-  SWIG_INIT_MODULE(package, "_orbit_data_image_ground_connection", SWIG_INIT_FUNC(orbit_data_image_ground_connection));
-  SWIG_INIT_MODULE(package, "_planet_coordinate", SWIG_INIT_FUNC(planet_coordinate));
-  SWIG_INIT_MODULE(package, "_igc_ray_caster", SWIG_INIT_FUNC(igc_ray_caster));
-  SWIG_INIT_MODULE(package, "_igc_rolling_shutter", SWIG_INIT_FUNC(igc_rolling_shutter));
-  SWIG_INIT_MODULE(package, "_igc_array", SWIG_INIT_FUNC(igc_array));
-  SWIG_INIT_MODULE(package, "_igc_multiple_pass", SWIG_INIT_FUNC(igc_multiple_pass));
-  SWIG_INIT_MODULE(package, "_igc_collection_rolling_shutter", SWIG_INIT_FUNC(igc_collection_rolling_shutter));
-  SWIG_INIT_MODULE(package, "_igc_collection_orbit_data", SWIG_INIT_FUNC(igc_collection_orbit_data));
-  SWIG_INIT_MODULE(package, "_rolling_shutter_constant_time_table", SWIG_INIT_FUNC(rolling_shutter_constant_time_table));
-  SWIG_INIT_MODULE(package, "_piecewise_linear", SWIG_INIT_FUNC(piecewise_linear));
-  SWIG_INIT_MODULE(package, "_orbit_correction", SWIG_INIT_FUNC(orbit_correction));
-  SWIG_INIT_MODULE(package, "_orbit_offset_correction", SWIG_INIT_FUNC(orbit_offset_correction));
-  SWIG_INIT_MODULE(package, "_orbit_piecewise_correction", SWIG_INIT_FUNC(orbit_piecewise_correction));
-  SWIG_INIT_MODULE(package, "_orbit_time_shift", SWIG_INIT_FUNC(orbit_time_shift));
-  SWIG_INIT_MODULE(package, "_tle_orbit", SWIG_INIT_FUNC(tle_orbit));
-  SWIG_INIT_MODULE(package, "_spice_orbit", SWIG_INIT_FUNC(spice_orbit));
-  SWIG_INIT_MODULE(package, "_argus_camera", SWIG_INIT_FUNC(argus_camera));
-  SWIG_INIT_MODULE(package, "_argus_orbit", SWIG_INIT_FUNC(argus_orbit));
-  SWIG_INIT_MODULE(package, "_quickbird_camera", SWIG_INIT_FUNC(quickbird_camera));
-  SWIG_INIT_MODULE(package, "_spot_camera", SWIG_INIT_FUNC(spot_camera));
-  SWIG_INIT_MODULE(package, "_spot_orbit", SWIG_INIT_FUNC(spot_orbit));
-  SWIG_INIT_MODULE(package, "_quickbird_orbit", SWIG_INIT_FUNC(quickbird_orbit));
-  SWIG_INIT_MODULE(package, "_quickbird_time_table", SWIG_INIT_FUNC(quickbird_time_table));
-  SWIG_INIT_MODULE(package, "_pos_export_orbit", SWIG_INIT_FUNC(pos_export_orbit));
-  SWIG_INIT_MODULE(package, "_worldview2_cloudmask", SWIG_INIT_FUNC(worldview2_cloudmask));
-  SWIG_INIT_MODULE(package, "_doughnut_average", SWIG_INIT_FUNC(doughnut_average));
-  SWIG_INIT_MODULE(package, "_paint_class", SWIG_INIT_FUNC(paint_class));
-  SWIG_INIT_MODULE(package, "_vicar_lite_file", SWIG_INIT_FUNC(vicar_lite_file));
-  SWIG_INIT_MODULE(package, "_cart_lab_multifile", SWIG_INIT_FUNC(cart_lab_multifile));
-  SWIG_INIT_MODULE(package, "_landsat7_panchromatic", SWIG_INIT_FUNC(landsat7_panchromatic));
-  SWIG_INIT_MODULE(package, "_material_detect", SWIG_INIT_FUNC(material_detect));
-  SWIG_INIT_MODULE(package, "_ibis_file", SWIG_INIT_FUNC(ibis_file));
-  SWIG_INIT_MODULE(package, "_vicar_file", SWIG_INIT_FUNC(vicar_file));
-  SWIG_INIT_MODULE(package, "_vicar_argument", SWIG_INIT_FUNC(vicar_argument));
-  SWIG_INIT_MODULE(package, "_vicar_dem", SWIG_INIT_FUNC(vicar_dem));
-  SWIG_INIT_MODULE(package, "_datum_geoid96", SWIG_INIT_FUNC(datum_geoid96));
-  SWIG_INIT_MODULE(package, "_srtm_dem", SWIG_INIT_FUNC(srtm_dem));
-  SWIG_INIT_MODULE(package, "_vicar_raster_image", SWIG_INIT_FUNC(vicar_raster_image));
-  SWIG_INIT_MODULE(package, "_mspi_config_file", SWIG_INIT_FUNC(mspi_config_file));
-  SWIG_INIT_MODULE(package, "_mspi_paraxial_transform", SWIG_INIT_FUNC(mspi_paraxial_transform));
-  SWIG_INIT_MODULE(package, "_mspi_camera", SWIG_INIT_FUNC(mspi_camera));
-  SWIG_INIT_MODULE(package, "_mspi_gimbal", SWIG_INIT_FUNC(mspi_gimbal));
-  SWIG_INIT_MODULE(package, "_air_mspi_orbit", SWIG_INIT_FUNC(air_mspi_orbit));
-  SWIG_INIT_MODULE(package, "_ground_mspi_orbit", SWIG_INIT_FUNC(ground_mspi_orbit));
-  SWIG_INIT_MODULE(package, "_ground_mspi_igc", SWIG_INIT_FUNC(ground_mspi_igc));
-  SWIG_INIT_MODULE(package, "_usgs_dem", SWIG_INIT_FUNC(usgs_dem));
-  SWIG_INIT_MODULE(package, "_srtm_90m_dem", SWIG_INIT_FUNC(srtm_90m_dem));
-  SWIG_INIT_MODULE(package, "_air_mspi_file", SWIG_INIT_FUNC(air_mspi_file));
-  SWIG_INIT_MODULE(package, "_air_mspi_time_table", SWIG_INIT_FUNC(air_mspi_time_table));
-  SWIG_INIT_MODULE(package, "_air_mspi_l1b1", SWIG_INIT_FUNC(air_mspi_l1b1));
-  SWIG_INIT_MODULE(package, "_air_mspi_igc", SWIG_INIT_FUNC(air_mspi_igc));
-  SWIG_INIT_MODULE(package, "_air_mspi_igc_collection", SWIG_INIT_FUNC(air_mspi_igc_collection));
-  SWIG_INIT_MODULE(package, "_jia_sample", SWIG_INIT_FUNC(jia_sample));
+  INIT_MODULE(module, "_swig_std", INIT_FUNC(swig_std));
+  INIT_MODULE(module, "_swig_array", INIT_FUNC(swig_array));
+  INIT_MODULE(module, "_swig_boost_array", INIT_FUNC(swig_boost_array));
+  INIT_MODULE(module, "_swig_quaternion", INIT_FUNC(swig_quaternion));
+  INIT_MODULE(module, "_constant", INIT_FUNC(constant));
+  INIT_MODULE(module, "_generic_object", INIT_FUNC(generic_object));
+  INIT_MODULE(module, "_auto_derivative", INIT_FUNC(auto_derivative));
+  INIT_MODULE(module, "_array_ad", INIT_FUNC(array_ad));
+  INIT_MODULE(module, "_observer", INIT_FUNC(observer));
+  INIT_MODULE(module, "_geocal_quaternion", INIT_FUNC(geocal_quaternion));
+  INIT_MODULE(module, "_covariance", INIT_FUNC(covariance));
+  INIT_MODULE(module, "_wgs84_constant", INIT_FUNC(wgs84_constant));
+  INIT_MODULE(module, "_geocal_exception", INIT_FUNC(geocal_exception));
+  INIT_MODULE(module, "_functor", INIT_FUNC(functor));
+  INIT_MODULE(module, "_vfunctor_with_derivative", INIT_FUNC(vfunctor_with_derivative));
+  INIT_MODULE(module, "_dfunctor_with_derivative", INIT_FUNC(dfunctor_with_derivative));
+  INIT_MODULE(module, "_statistic", INIT_FUNC(statistic));
+  INIT_MODULE(module, "_geocal_gsl_fit", INIT_FUNC(geocal_gsl_fit));
+  INIT_MODULE(module, "_geocal_gsl_root", INIT_FUNC(geocal_gsl_root));
+  INIT_MODULE(module, "_geocal_time", INIT_FUNC(geocal_time));
+  INIT_MODULE(module, "_tiled_file", INIT_FUNC(tiled_file));
+  INIT_MODULE(module, "_geocal_serialize_function", INIT_FUNC(geocal_serialize_function));
+  INIT_MODULE(module, "_image_coordinate", INIT_FUNC(image_coordinate));
+  INIT_MODULE(module, "_tie_point", INIT_FUNC(tie_point));
+  INIT_MODULE(module, "_with_parameter", INIT_FUNC(with_parameter));
+  INIT_MODULE(module, "_look_vector", INIT_FUNC(look_vector));
+  INIT_MODULE(module, "_ground_coordinate", INIT_FUNC(ground_coordinate));
+  INIT_MODULE(module, "_coordinate_converter", INIT_FUNC(coordinate_converter));
+  INIT_MODULE(module, "_ecr", INIT_FUNC(ecr));
+  INIT_MODULE(module, "_eci", INIT_FUNC(eci));
+  INIT_MODULE(module, "_geodetic", INIT_FUNC(geodetic));
+  INIT_MODULE(module, "_dem", INIT_FUNC(dem));
+  INIT_MODULE(module, "_map_info", INIT_FUNC(map_info));
+  INIT_MODULE(module, "_geocal_rpc", INIT_FUNC(geocal_rpc));
+  INIT_MODULE(module, "_raster_image", INIT_FUNC(raster_image));
+  INIT_MODULE(module, "_image_ground_connection", INIT_FUNC(image_ground_connection));
+  INIT_MODULE(module, "_igc_collection", INIT_FUNC(igc_collection));
+  INIT_MODULE(module, "_frame_coordinate", INIT_FUNC(frame_coordinate));
+  INIT_MODULE(module, "_camera", INIT_FUNC(camera));
+  INIT_MODULE(module, "_ray_caster", INIT_FUNC(ray_caster));
+  INIT_MODULE(module, "_orbit", INIT_FUNC(orbit));
+  INIT_MODULE(module, "_time_table", INIT_FUNC(time_table));
+  INIT_MODULE(module, "_ipi", INIT_FUNC(ipi));
+  INIT_MODULE(module, "_raster_image_variable", INIT_FUNC(raster_image_variable));
+  INIT_MODULE(module, "_sub_raster_image", INIT_FUNC(sub_raster_image));
+  INIT_MODULE(module, "_raster_image_multi_band", INIT_FUNC(raster_image_multi_band));
+  INIT_MODULE(module, "_raster_image_multi_band_variable", INIT_FUNC(raster_image_multi_band_variable));
+  INIT_MODULE(module, "_sub_raster_image_multi_band", INIT_FUNC(sub_raster_image_multi_band));
+  INIT_MODULE(module, "_ground_mask", INIT_FUNC(ground_mask));
+  INIT_MODULE(module, "_image_mask", INIT_FUNC(image_mask));
+  INIT_MODULE(module, "_geocal_datum", INIT_FUNC(geocal_datum));
+  INIT_MODULE(module, "_simple_dem", INIT_FUNC(simple_dem));
+  INIT_MODULE(module, "_memory_raster_image", INIT_FUNC(memory_raster_image));
+  INIT_MODULE(module, "_constant_raster_image", INIT_FUNC(constant_raster_image));
+  INIT_MODULE(module, "_dem_map_info", INIT_FUNC(dem_map_info));
+  INIT_MODULE(module, "_feature_detector", INIT_FUNC(feature_detector));
+  INIT_MODULE(module, "_forstner_feature_detector", INIT_FUNC(forstner_feature_detector));
+  INIT_MODULE(module, "_image_matcher", INIT_FUNC(image_matcher));
+  INIT_MODULE(module, "_image_to_image_match", INIT_FUNC(image_to_image_match));
+  INIT_MODULE(module, "_ccorr_matcher", INIT_FUNC(ccorr_matcher));
+  INIT_MODULE(module, "_lsm_matcher", INIT_FUNC(lsm_matcher));
+  INIT_MODULE(module, "_ccorr_lsm_matcher", INIT_FUNC(ccorr_lsm_matcher));
+  INIT_MODULE(module, "_geometric_model", INIT_FUNC(geometric_model));
+  INIT_MODULE(module, "_raster_multifile", INIT_FUNC(raster_multifile));
+  INIT_MODULE(module, "_did_datum", INIT_FUNC(did_datum));
+  INIT_MODULE(module, "_dem_map_info_offset", INIT_FUNC(dem_map_info_offset));
+  INIT_MODULE(module, "_map_info_image_ground_connection", INIT_FUNC(map_info_image_ground_connection));
+  INIT_MODULE(module, "_ground_mask_image", INIT_FUNC(ground_mask_image));
+  INIT_MODULE(module, "_image_mask_image", INIT_FUNC(image_mask_image));
+  INIT_MODULE(module, "_raster_averaged", INIT_FUNC(raster_averaged));
+  INIT_MODULE(module, "_raster_subsample", INIT_FUNC(raster_subsample));
+  INIT_MODULE(module, "_calc_raster", INIT_FUNC(calc_raster));
+  INIT_MODULE(module, "_dem_to_raster", INIT_FUNC(dem_to_raster));
+  INIT_MODULE(module, "_calc_raster_multi_band", INIT_FUNC(calc_raster_multi_band));
+  INIT_MODULE(module, "_magnify_bilinear", INIT_FUNC(magnify_bilinear));
+  INIT_MODULE(module, "_magnify_replicate", INIT_FUNC(magnify_replicate));
+  INIT_MODULE(module, "_smooth_image", INIT_FUNC(smooth_image));
+  INIT_MODULE(module, "_raster_image_tiled_file", INIT_FUNC(raster_image_tiled_file));
+  INIT_MODULE(module, "_dem_tiled_file", INIT_FUNC(dem_tiled_file));
+  INIT_MODULE(module, "_memory_dem", INIT_FUNC(memory_dem));
+  INIT_MODULE(module, "_map_reprojected_image", INIT_FUNC(map_reprojected_image));
+  INIT_MODULE(module, "_pyramid_image_matcher", INIT_FUNC(pyramid_image_matcher));
+  INIT_MODULE(module, "_igc_map_projected", INIT_FUNC(igc_map_projected));
+  INIT_MODULE(module, "_igc_simulated", INIT_FUNC(igc_simulated));
+  INIT_MODULE(module, "_igc_simulated_ray_caster", INIT_FUNC(igc_simulated_ray_caster));
+  INIT_MODULE(module, "_igc_image_to_image_match", INIT_FUNC(igc_image_to_image_match));
+  INIT_MODULE(module, "_surface_image_to_image_match", INIT_FUNC(surface_image_to_image_match));
+  INIT_MODULE(module, "_location_to_file", INIT_FUNC(location_to_file));
+  INIT_MODULE(module, "_ray_intersect", INIT_FUNC(ray_intersect));
+  INIT_MODULE(module, "_dem_match", INIT_FUNC(dem_match));
+  INIT_MODULE(module, "_quadratic_geometric_model", INIT_FUNC(quadratic_geometric_model));
+  INIT_MODULE(module, "_geometric_model_image", INIT_FUNC(geometric_model_image));
+  INIT_MODULE(module, "_memory_multi_band", INIT_FUNC(memory_multi_band));
+  INIT_MODULE(module, "_spice_helper", INIT_FUNC(spice_helper));
+  INIT_MODULE(module, "_raw_raster_image", INIT_FUNC(raw_raster_image));
+  INIT_MODULE(module, "_aircraft_orbit_data", INIT_FUNC(aircraft_orbit_data));
+  INIT_MODULE(module, "_orbit_quaternion_list", INIT_FUNC(orbit_quaternion_list));
+  INIT_MODULE(module, "_pan_sharpen", INIT_FUNC(pan_sharpen));
+  INIT_MODULE(module, "_scale_image", INIT_FUNC(scale_image));
+  INIT_MODULE(module, "_apply_mask", INIT_FUNC(apply_mask));
+  INIT_MODULE(module, "_rpc_image_ground_connection", INIT_FUNC(rpc_image_ground_connection));
+  INIT_MODULE(module, "_ipi_image_ground_connection", INIT_FUNC(ipi_image_ground_connection));
+  INIT_MODULE(module, "_eci_tod", INIT_FUNC(eci_tod));
+  INIT_MODULE(module, "_quaternion_camera", INIT_FUNC(quaternion_camera));
+  INIT_MODULE(module, "_galileo_camera", INIT_FUNC(galileo_camera));
+  INIT_MODULE(module, "_refraction", INIT_FUNC(refraction));
+  INIT_MODULE(module, "_orbit_data_image_ground_connection", INIT_FUNC(orbit_data_image_ground_connection));
+  INIT_MODULE(module, "_planet_coordinate", INIT_FUNC(planet_coordinate));
+  INIT_MODULE(module, "_igc_ray_caster", INIT_FUNC(igc_ray_caster));
+  INIT_MODULE(module, "_igc_rolling_shutter", INIT_FUNC(igc_rolling_shutter));
+  INIT_MODULE(module, "_igc_array", INIT_FUNC(igc_array));
+  INIT_MODULE(module, "_igc_multiple_pass", INIT_FUNC(igc_multiple_pass));
+  INIT_MODULE(module, "_igc_collection_rolling_shutter", INIT_FUNC(igc_collection_rolling_shutter));
+  INIT_MODULE(module, "_igc_collection_orbit_data", INIT_FUNC(igc_collection_orbit_data));
+  INIT_MODULE(module, "_rolling_shutter_constant_time_table", INIT_FUNC(rolling_shutter_constant_time_table));
+  INIT_MODULE(module, "_piecewise_linear", INIT_FUNC(piecewise_linear));
+  INIT_MODULE(module, "_orbit_correction", INIT_FUNC(orbit_correction));
+  INIT_MODULE(module, "_orbit_offset_correction", INIT_FUNC(orbit_offset_correction));
+  INIT_MODULE(module, "_orbit_piecewise_correction", INIT_FUNC(orbit_piecewise_correction));
+  INIT_MODULE(module, "_orbit_time_shift", INIT_FUNC(orbit_time_shift));
+  INIT_MODULE(module, "_tle_orbit", INIT_FUNC(tle_orbit));
+  INIT_MODULE(module, "_spice_orbit", INIT_FUNC(spice_orbit));
+  INIT_MODULE(module, "_argus_camera", INIT_FUNC(argus_camera));
+  INIT_MODULE(module, "_argus_orbit", INIT_FUNC(argus_orbit));
+  INIT_MODULE(module, "_quickbird_camera", INIT_FUNC(quickbird_camera));
+  INIT_MODULE(module, "_spot_camera", INIT_FUNC(spot_camera));
+  INIT_MODULE(module, "_spot_orbit", INIT_FUNC(spot_orbit));
+  INIT_MODULE(module, "_quickbird_orbit", INIT_FUNC(quickbird_orbit));
+  INIT_MODULE(module, "_quickbird_time_table", INIT_FUNC(quickbird_time_table));
+  INIT_MODULE(module, "_pos_export_orbit", INIT_FUNC(pos_export_orbit));
+  INIT_MODULE(module, "_worldview2_cloudmask", INIT_FUNC(worldview2_cloudmask));
+  INIT_MODULE(module, "_doughnut_average", INIT_FUNC(doughnut_average));
+  INIT_MODULE(module, "_paint_class", INIT_FUNC(paint_class));
+  INIT_MODULE(module, "_vicar_lite_file", INIT_FUNC(vicar_lite_file));
+  INIT_MODULE(module, "_cart_lab_multifile", INIT_FUNC(cart_lab_multifile));
+  INIT_MODULE(module, "_landsat7_panchromatic", INIT_FUNC(landsat7_panchromatic));
+  INIT_MODULE(module, "_material_detect", INIT_FUNC(material_detect));
+  INIT_MODULE(module, "_ibis_file", INIT_FUNC(ibis_file));
+  INIT_MODULE(module, "_vicar_file", INIT_FUNC(vicar_file));
+  INIT_MODULE(module, "_vicar_argument", INIT_FUNC(vicar_argument));
+  INIT_MODULE(module, "_vicar_dem", INIT_FUNC(vicar_dem));
+  INIT_MODULE(module, "_datum_geoid96", INIT_FUNC(datum_geoid96));
+  INIT_MODULE(module, "_srtm_dem", INIT_FUNC(srtm_dem));
+  INIT_MODULE(module, "_vicar_raster_image", INIT_FUNC(vicar_raster_image));
+  INIT_MODULE(module, "_mspi_config_file", INIT_FUNC(mspi_config_file));
+  INIT_MODULE(module, "_mspi_paraxial_transform", INIT_FUNC(mspi_paraxial_transform));
+  INIT_MODULE(module, "_mspi_camera", INIT_FUNC(mspi_camera));
+  INIT_MODULE(module, "_mspi_gimbal", INIT_FUNC(mspi_gimbal));
+  INIT_MODULE(module, "_air_mspi_orbit", INIT_FUNC(air_mspi_orbit));
+  INIT_MODULE(module, "_ground_mspi_orbit", INIT_FUNC(ground_mspi_orbit));
+  INIT_MODULE(module, "_ground_mspi_igc", INIT_FUNC(ground_mspi_igc));
+  INIT_MODULE(module, "_usgs_dem", INIT_FUNC(usgs_dem));
+  INIT_MODULE(module, "_srtm_90m_dem", INIT_FUNC(srtm_90m_dem));
+  INIT_MODULE(module, "_air_mspi_file", INIT_FUNC(air_mspi_file));
+  INIT_MODULE(module, "_air_mspi_time_table", INIT_FUNC(air_mspi_time_table));
+  INIT_MODULE(module, "_air_mspi_l1b1", INIT_FUNC(air_mspi_l1b1));
+  INIT_MODULE(module, "_air_mspi_igc", INIT_FUNC(air_mspi_igc));
+  INIT_MODULE(module, "_air_mspi_igc_collection", INIT_FUNC(air_mspi_igc_collection));
+  INIT_MODULE(module, "_jia_sample", INIT_FUNC(jia_sample));
 #ifdef HAVE_CARTO
-  SWIG_INIT_MODULE(package, "_eci_tod_burl", SWIG_INIT_FUNC(eci_tod_burl));
+  INIT_MODULE(module, "_eci_tod_burl", INIT_FUNC(eci_tod_burl));
 #endif
 #ifdef HAVE_FFTW
-  SWIG_INIT_MODULE(package, "_geocal_fftw", SWIG_INIT_FUNC(geocal_fftw));
-  SWIG_INIT_MODULE(package, "_phase_correlation_matcher", SWIG_INIT_FUNC(phase_correlation_matcher));
+  INIT_MODULE(module, "_geocal_fftw", INIT_FUNC(geocal_fftw));
+  INIT_MODULE(module, "_phase_correlation_matcher", INIT_FUNC(phase_correlation_matcher));
 #endif
 #ifdef HAVE_HDF5
-  SWIG_INIT_MODULE(package, "_hdf_file", SWIG_INIT_FUNC(hdf_file));
-  SWIG_INIT_MODULE(package, "_hdf_orbit", SWIG_INIT_FUNC(hdf_orbit));
+  INIT_MODULE(module, "_hdf_file", INIT_FUNC(hdf_file));
+  INIT_MODULE(module, "_hdf_orbit", INIT_FUNC(hdf_orbit));
 #endif
 #ifdef HAVE_HDF5
 #ifdef HAVE_CARTO
-  SWIG_INIT_MODULE(package, "_hdf_orbit_carto", SWIG_INIT_FUNC(hdf_orbit_carto));
+  INIT_MODULE(module, "_hdf_orbit_carto", INIT_FUNC(hdf_orbit_carto));
 #endif
 #endif
 #ifdef HAVE_GDAL
-  SWIG_INIT_MODULE(package, "_geocal_gdal", SWIG_INIT_FUNC(geocal_gdal));
-  SWIG_INIT_MODULE(package, "_gdal_raster_image", SWIG_INIT_FUNC(gdal_raster_image));
-  SWIG_INIT_MODULE(package, "_gdal_datum", SWIG_INIT_FUNC(gdal_datum));
-  SWIG_INIT_MODULE(package, "_gdal_dem", SWIG_INIT_FUNC(gdal_dem));
-  SWIG_INIT_MODULE(package, "_gdal_multi_band", SWIG_INIT_FUNC(gdal_multi_band));
-  SWIG_INIT_MODULE(package, "_image_point_display", SWIG_INIT_FUNC(image_point_display));
-  SWIG_INIT_MODULE(package, "_ogr_coordinate", SWIG_INIT_FUNC(ogr_coordinate));
-  SWIG_INIT_MODULE(package, "_vicar_ogr", SWIG_INIT_FUNC(vicar_ogr));
+  INIT_MODULE(module, "_geocal_gdal", INIT_FUNC(geocal_gdal));
+  INIT_MODULE(module, "_gdal_raster_image", INIT_FUNC(gdal_raster_image));
+  INIT_MODULE(module, "_gdal_datum", INIT_FUNC(gdal_datum));
+  INIT_MODULE(module, "_gdal_dem", INIT_FUNC(gdal_dem));
+  INIT_MODULE(module, "_gdal_multi_band", INIT_FUNC(gdal_multi_band));
+  INIT_MODULE(module, "_image_point_display", INIT_FUNC(image_point_display));
+  INIT_MODULE(module, "_ogr_coordinate", INIT_FUNC(ogr_coordinate));
+  INIT_MODULE(module, "_vicar_ogr", INIT_FUNC(vicar_ogr));
 #endif
 #ifdef HAVE_VICAR_RTL
 #endif
 #ifdef HAVE_GDAL_VICAR_RTL
-#endif
-
-#if PY_MAJOR_VERSION >= 3
-    return module;
 #endif
 }
 

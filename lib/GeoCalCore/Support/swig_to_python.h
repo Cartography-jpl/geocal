@@ -2,9 +2,16 @@
 #define SWIG_TO_PYTHON_H
 #include "swig_type_mapper_base.h"
 
-// Define this to get diagnostic messages printed out
-//#define SWIG_TYPE_MAPPER_DIAGNOSTIC
 namespace GeoCal {
+/****************************************************************//**
+  Important - you can only include this header file if you have
+  included the swig header stuff, e.g. normally only if you are using
+  this in swig code. For geocal, this just gets included by
+  geocal_shared_ptr.i. If you try to include this in normal C++ you
+  will likely get an error since things like Swig::Director aren't
+  defined. 
+*******************************************************************/
+
 //-----------------------------------------------------------------------
 /// Function to map from a shared point to a python object.
 //-----------------------------------------------------------------------
@@ -28,38 +35,23 @@ swig_to_python(const boost::shared_ptr<T>& V)
 //-----------------------------------------------------------------------
 
   Swig::Director* d = dynamic_cast<Swig::Director*>(V.get());
-  if(d) {
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-    std::cerr << "Return underlying python object\n";
-#endif
+  if(d)
     return d->swig_get_self();
-  }
 
 //-----------------------------------------------------------------------
 // See if underlying type is registered in swig_type_map. If so, return the
 // underlying type
 //-----------------------------------------------------------------------
 
-  T& t(*V.get());
-  type_index tid(typeid(t));
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-  std::cerr << tid.name() << "\n";
-#endif
-  if(swig_type_map.count(tid) != 0) {
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-    std::cerr << "Trying to_python for " << tid.name() << "\n";
-#endif
-    return swig_type_map[tid]->to_python(V);
-  }
+  void *p = SwigTypeMapperBase::map_to_python(V);
+  if(p)
+    return (PyObject*) p;
 
 //-----------------------------------------------------------------------
 // Otherwise, fall back to returning the type T.
 //-----------------------------------------------------------------------
 
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-  std::cerr << "Returning most general type\n";
-#endif
-  return swig_type_map[typeid(T)]->to_python(V);
+  return (PyObject*) SwigTypeMapperBase::map_to_python(V, typeid(T));
 }
 
 inline PyObject* 
@@ -80,37 +72,22 @@ swig_to_python_or_none(const boost::shared_ptr<GenericObject>& V)
 //-----------------------------------------------------------------------
 
   Swig::Director* d = dynamic_cast<Swig::Director*>(V.get());
-  if(d) {
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-    std::cerr << "Return underlying python object\n";
-#endif
+  if(d) 
     return d->swig_get_self();
-  }
 
 //-----------------------------------------------------------------------
 // See if underlying type is registered in swig_type_map. If so, return the
 // underlying type
 //-----------------------------------------------------------------------
 
-  GenericObject& t(*V.get());
-  type_index tid(typeid(t));
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-  std::cerr << tid.name() << "\n";
-#endif
-  if(swig_type_map.count(tid) != 0) {
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-    std::cerr << "Trying to_python for " << tid.name() << "\n";
-#endif
-    return swig_type_map[tid]->to_python(V);
-  }
+  void *p = SwigTypeMapperBase::map_to_python(V);
+  if(p)
+    return (PyObject*) p;
 
 //-----------------------------------------------------------------------
 // Otherwise, return Py_None
 //-----------------------------------------------------------------------
 
-#ifdef SWIG_TYPE_MAPPER_DIAGNOSTIC    
-  std::cerr << "Returning None\n";
-#endif
   Py_INCREF(Py_None);
   return Py_None;
 }

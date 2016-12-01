@@ -4061,6 +4061,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -8153,8 +8154,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageMaskImage))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageMaskImage >("boost::shared_ptr< GeoCal::ImageMaskImage > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageMaskImage), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageMaskImage > > ("boost::shared_ptr< GeoCal::ImageMaskImage > *"));
   
   SWIG_Python_SetConstant(d, "ImageMaskImage_OUTSIDE_MASKED",SWIG_From_int(static_cast< int >(GeoCal::ImageMaskImage::OUTSIDE_MASKED)));
   SWIG_Python_SetConstant(d, "ImageMaskImage_OUTSIDE_NOT_MASKED",SWIG_From_int(static_cast< int >(GeoCal::ImageMaskImage::OUTSIDE_NOT_MASKED)));

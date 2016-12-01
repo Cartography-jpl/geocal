@@ -19,9 +19,6 @@ geocalswiginc_HEADERS += @libgeocal@/swig_print.i
 geocalswiginc_HEADERS += @libgeocal@/swig_python_attribute.i
 geocalswiginc_HEADERS += @libgeocal@/swig_quaternion.i
 geocalswiginc_HEADERS += @libgeocal@/swig_std.i
-geocalswiginc_HEADERS += @libgeocal@/swig_to_python.h
-geocalswiginc_HEADERS += @libgeocal@/swig_type_mapper_base.h
-geocalswiginc_HEADERS += @libgeocal@/swig_type_mapper.h
 
 EXTRA_DIST += @libgeocal@/dummy.pdf
 EXTRA_DIST += @libgeocal@/geocal_doxygen.h

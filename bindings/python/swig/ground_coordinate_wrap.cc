@@ -4042,6 +4042,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -14226,28 +14227,22 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::GroundCoordinate))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::GroundCoordinate >("boost::shared_ptr< GeoCal::GroundCoordinate > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::GroundCoordinate), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::GroundCoordinate > > ("boost::shared_ptr< GeoCal::GroundCoordinate > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartesianFixed))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartesianFixed >("boost::shared_ptr< GeoCal::CartesianFixed > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CartesianFixed), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CartesianFixed > > ("boost::shared_ptr< GeoCal::CartesianFixed > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartesianInertial))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartesianInertial >("boost::shared_ptr< GeoCal::CartesianInertial > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CartesianInertial), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CartesianInertial > > ("boost::shared_ptr< GeoCal::CartesianInertial > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::LnLookVector))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::LnLookVector >("boost::shared_ptr< GeoCal::LnLookVector > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::LnLookVector), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::LnLookVector > > ("boost::shared_ptr< GeoCal::LnLookVector > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::LnLookVectorWithDerivative))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::LnLookVectorWithDerivative >("boost::shared_ptr< GeoCal::LnLookVectorWithDerivative > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::LnLookVectorWithDerivative), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::LnLookVectorWithDerivative > > ("boost::shared_ptr< GeoCal::LnLookVectorWithDerivative > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartesianFixedLookVector))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartesianFixedLookVector >("boost::shared_ptr< GeoCal::CartesianFixedLookVector > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CartesianFixedLookVector), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CartesianFixedLookVector > > ("boost::shared_ptr< GeoCal::CartesianFixedLookVector > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

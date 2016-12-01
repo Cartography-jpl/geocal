@@ -4130,6 +4130,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -11186,8 +11187,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::IgcRollingShutter))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::IgcRollingShutter >("boost::shared_ptr< GeoCal::IgcRollingShutter > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IgcRollingShutter), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IgcRollingShutter > > ("boost::shared_ptr< GeoCal::IgcRollingShutter > *"));
   
   SWIG_Python_SetConstant(d, "IgcRollingShutter_ROLL_LINE_DIRECTION",SWIG_From_int(static_cast< int >(GeoCal::IgcRollingShutter::ROLL_LINE_DIRECTION)));
   SWIG_Python_SetConstant(d, "IgcRollingShutter_ROLL_SAMPLE_DIRECTION",SWIG_From_int(static_cast< int >(GeoCal::IgcRollingShutter::ROLL_SAMPLE_DIRECTION)));

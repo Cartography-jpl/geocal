@@ -4115,6 +4115,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -11548,16 +11549,13 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::VicarLiteFile))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::VicarLiteFile >("boost::shared_ptr< GeoCal::VicarLiteFile > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::VicarLiteFile), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::VicarLiteFile > > ("boost::shared_ptr< GeoCal::VicarLiteFile > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::VicarLiteRasterImage))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::VicarLiteRasterImage >("boost::shared_ptr< GeoCal::VicarLiteRasterImage > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::VicarLiteRasterImage), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::VicarLiteRasterImage > > ("boost::shared_ptr< GeoCal::VicarLiteRasterImage > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::VicarLiteDem))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::VicarLiteDem >("boost::shared_ptr< GeoCal::VicarLiteDem > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::VicarLiteDem), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::VicarLiteDem > > ("boost::shared_ptr< GeoCal::VicarLiteDem > *"));
   
   SWIG_Python_SetConstant(d, "VicarLiteFile_VICAR_BYTE",SWIG_From_int(static_cast< int >(GeoCal::VicarLiteFile::VICAR_BYTE)));
   SWIG_Python_SetConstant(d, "VicarLiteFile_VICAR_HALF",SWIG_From_int(static_cast< int >(GeoCal::VicarLiteFile::VICAR_HALF)));

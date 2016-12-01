@@ -682,6 +682,7 @@ libgeocal_la_DEPENDENCIES = $(am__DEPENDENCIES_1) libraw.la \
 	$(am__DEPENDENCIES_1)
 am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcsupport@/auto_derivative.cc @srcsupport@/array_ad.cc \
+	@srcsupport@/swig_type_mapper_base.cc \
 	@srcsupport@/tiled_file.cc @srcsupport@/geocal_quaternion.cc \
 	@srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_gsl_matrix.cc \
@@ -829,6 +830,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcsupport@/libgeocal_la-auto_derivative.lo \
 	@srcsupport@/libgeocal_la-array_ad.lo \
+	@srcsupport@/libgeocal_la-swig_type_mapper_base.lo \
 	@srcsupport@/libgeocal_la-tiled_file.lo \
 	@srcsupport@/libgeocal_la-geocal_quaternion.lo \
 	@srcsupport@/boost/libgeocal_la-backtrace.lo \
@@ -1364,7 +1366,10 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcsupport@/auto_derivative.h \
 	@srcsupport@/auto_derivative_quaternion.h \
 	@srcsupport@/array_ad.h @srcsupport@/observer.h \
-	@srcsupport@/geocal_type_index.h @srcsupport@/dir_change.h \
+	@srcsupport@/geocal_type_index.h \
+	@srcsupport@/swig_type_mapper_base.h \
+	@srcsupport@/swig_type_mapper.h @srcsupport@/python_lib_init.h \
+	@srcsupport@/swig_to_python.h @srcsupport@/dir_change.h \
 	@srcsupport@/null_deleter.h @srcsupport@/ostream_pad.h \
 	@srcsupport@/wgs84_constant.h @srcsupport@/printable.h \
 	@srcsupport@/geocal_exception.h @srcsupport@/tile.h \
@@ -2258,6 +2263,7 @@ check_DATA =
 # Source files for library
 libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcsupport@/auto_derivative.cc @srcsupport@/array_ad.cc \
+	@srcsupport@/swig_type_mapper_base.cc \
 	@srcsupport@/tiled_file.cc @srcsupport@/geocal_quaternion.cc \
 	@srcsupport@/boost/backtrace.cpp \
 	@srcsupport@/geocal_gsl_matrix.cc \
@@ -2555,7 +2561,10 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/auto_derivative.h \
 	@srcsupport@/auto_derivative_quaternion.h \
 	@srcsupport@/array_ad.h @srcsupport@/observer.h \
-	@srcsupport@/geocal_type_index.h @srcsupport@/dir_change.h \
+	@srcsupport@/geocal_type_index.h \
+	@srcsupport@/swig_type_mapper_base.h \
+	@srcsupport@/swig_type_mapper.h @srcsupport@/python_lib_init.h \
+	@srcsupport@/swig_to_python.h @srcsupport@/dir_change.h \
 	@srcsupport@/null_deleter.h @srcsupport@/ostream_pad.h \
 	@srcsupport@/wgs84_constant.h @srcsupport@/printable.h \
 	@srcsupport@/geocal_exception.h @srcsupport@/tile.h \
@@ -2694,14 +2703,12 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@libgeocal@/swig_exception.i @libgeocal@/swig_pickle.i \
 	@libgeocal@/swig_print.i @libgeocal@/swig_python_attribute.i \
 	@libgeocal@/swig_quaternion.i @libgeocal@/swig_std.i \
-	@libgeocal@/swig_to_python.h \
-	@libgeocal@/swig_type_mapper_base.h \
-	@libgeocal@/swig_type_mapper.h @srcsupport@/constant.i \
-	@srcsupport@/generic_object.i @srcsupport@/auto_derivative.i \
-	@srcsupport@/array_ad.i @srcsupport@/observer.i \
-	@srcsupport@/geocal_quaternion.i @srcsupport@/covariance.i \
-	@srcsupport@/wgs84_constant.i @srcsupport@/geocal_exception.i \
-	@srcsupport@/functor.i @srcsupport@/vfunctor_with_derivative.i \
+	@srcsupport@/constant.i @srcsupport@/generic_object.i \
+	@srcsupport@/auto_derivative.i @srcsupport@/array_ad.i \
+	@srcsupport@/observer.i @srcsupport@/geocal_quaternion.i \
+	@srcsupport@/covariance.i @srcsupport@/wgs84_constant.i \
+	@srcsupport@/geocal_exception.i @srcsupport@/functor.i \
+	@srcsupport@/vfunctor_with_derivative.i \
 	@srcsupport@/dfunctor_with_derivative.i \
 	@srcsupport@/statistic.i @srcsupport@/geocal_gsl_fit.i \
 	@srcsupport@/geocal_gsl_root.i @srcsupport@/geocal_time.i \
@@ -3617,6 +3624,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/libgeocal_la-array_ad.lo: @srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/libgeocal_la-swig_type_mapper_base.lo:  \
+	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/libgeocal_la-tiled_file.lo: @srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -5048,6 +5058,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-geocal_time.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-hdf_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-statistic.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo@am__quote@
@@ -6488,6 +6499,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/array_ad.cc' object='@srcsupport@/libgeocal_la-array_ad.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-array_ad.lo `test -f '@srcsupport@/array_ad.cc' || echo '$(srcdir)/'`@srcsupport@/array_ad.cc
+
+@srcsupport@/libgeocal_la-swig_type_mapper_base.lo: @srcsupport@/swig_type_mapper_base.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-swig_type_mapper_base.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Tpo -c -o @srcsupport@/libgeocal_la-swig_type_mapper_base.lo `test -f '@srcsupport@/swig_type_mapper_base.cc' || echo '$(srcdir)/'`@srcsupport@/swig_type_mapper_base.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Tpo @srcsupport@/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/swig_type_mapper_base.cc' object='@srcsupport@/libgeocal_la-swig_type_mapper_base.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/libgeocal_la-swig_type_mapper_base.lo `test -f '@srcsupport@/swig_type_mapper_base.cc' || echo '$(srcdir)/'`@srcsupport@/swig_type_mapper_base.cc
 
 @srcsupport@/libgeocal_la-tiled_file.lo: @srcsupport@/tiled_file.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/libgeocal_la-tiled_file.lo -MD -MP -MF @srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Tpo -c -o @srcsupport@/libgeocal_la-tiled_file.lo `test -f '@srcsupport@/tiled_file.cc' || echo '$(srcdir)/'`@srcsupport@/tiled_file.cc

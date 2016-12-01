@@ -4104,6 +4104,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -12024,8 +12025,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::VicarFile))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::VicarFile >("boost::shared_ptr< GeoCal::VicarFile > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::VicarFile), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::VicarFile > > ("boost::shared_ptr< GeoCal::VicarFile > *"));
   
   SWIG_Python_SetConstant(d, "VicarFile_VICAR_INT",SWIG_From_int(static_cast< int >(GeoCal::VicarFile::VICAR_INT)));
   SWIG_Python_SetConstant(d, "VicarFile_VICAR_REAL",SWIG_From_int(static_cast< int >(GeoCal::VicarFile::VICAR_REAL)));

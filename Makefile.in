@@ -1943,6 +1943,7 @@ etcafidspythondir = @etcafidspythondir@
 exec_prefix = @exec_prefix@
 geocalpkgpythondir = @geocalpkgpythondir@
 geocalsupportdir = @geocalsupportdir@
+geocalswigincdir = @geocalswigincdir@
 geocalunittestdata = @geocalunittestdata@
 host = @host@
 host_alias = @host_alias@
@@ -2553,7 +2554,6 @@ dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
 SWIG_FLAG = -O
 geocalincdir = @includedir@/geocal
-geocalswigincdir = @prefix@/share/geocal/swig
 
 # Source files for library
 geocalinc_HEADERS = @srcsupport@/geocal_config.h \

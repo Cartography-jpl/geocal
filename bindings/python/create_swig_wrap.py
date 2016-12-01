@@ -7,7 +7,7 @@ import sys
 import re
 
 tmpl_dir = os.path.dirname(sys.argv[0]) + "/"
-swig_wrap_template = open(tmpl_dir + "swig_wrap.tmpl").read()
+wrap_template = open(tmpl_dir + "swig_wrap.tmpl").read()
 prototypes = []
 initcmd = []
 end_count = 0
@@ -24,14 +24,14 @@ for i in sys.argv[2:]:
             end_count += 1
     # Handle everything else
     else:
-        prototypes.append("  INIT_TYPE INIT_FUNC(%s)(void);" % i)
-        initcmd .append("  INIT_MODULE(module, \"_%s\", INIT_FUNC(%s));" % (i, i))
+        prototypes.append("  INIT_TYPE INIT_FUNC(_%s)(void);" % i)
+        initcmd .append("  INIT_MODULE(module, \"_%s\", INIT_FUNC(_%s));" % (i, i))
 # Make sure we close all the conditions
 for c in range(end_count):
     prototypes.append("#endif")
     initcmd.append("#endif")
-with open(sys.argv[1], 'w') as swig_wrap_fo:
-    swig_wrap_fo.write(swig_wrap_template.format(prototypes="\n".join(prototypes),
-                                                 initcmd="\n".join(initcmd)))
+with open(sys.argv[1], 'w') as wrap_fo:
+    wrap_fo.write(wrap_template.format(prototypes="\n".join(prototypes),
+                                       initcmd="\n".join(initcmd)))
 
 

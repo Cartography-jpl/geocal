@@ -19,6 +19,11 @@
 // {
 //    INIT_MODULE(package, "_swig_std", INIT_FUNC(swig_std));
 // }
+//
+// Initializing cython code is almost the same, so we include it in
+// this header. Just define DO_CYTHON for the difference. Rather than
+// putting all the modules into a parent package, we put them into a
+// python list. 
 
 #include <Python.h>
 #include <iostream>
@@ -51,7 +56,7 @@ static void module_init(PyObject* module);
 
 // Python 2 and 3 have different name for their swig init functions
 #if PY_MAJOR_VERSION > 2
-#define INIT_FUNC(S) PyInit__ ## S
+#define INIT_FUNC(S) PyInit_ ## S
 #define INIT_TYPE PyObject *
 #define INIT_MODULE init_extension_module3
 #else
@@ -111,12 +116,17 @@ static void init_extension_module3(PyObject* package, const char *modulename,
   PyObject *module = initfunction();
   PyObject *module_dic = PyImport_GetModuleDict();
   PyDict_SetItem(module_dic, Text_FromUTF8(modulename), module);
+#ifdef DO_CYTHON
+  // For cython, we create list rather than add to a package
+  PyList_Append(package, Text_FromUTF8(modulename));
+#else  
   if(PyModule_AddObject(package, (char *)modulename, module)) {
     std::cerr << "Initialisation in PyImport_AddObject failed for module "
 	      << modulename << "\n";
     return;
   }
   Py_INCREF(module);
+#endif
 }
 #else 
 // Version for python 2
@@ -128,12 +138,17 @@ static void init_extension_module2(PyObject* package, const char *modulename,
 	      << modulename << "\n";
     return;
   }
+#ifdef DO_CYTHON
+  // For cython, we create list rather than add to a package
+  PyList_Append(package, Text_FromUTF8(modulename));
+#else  
   if(PyModule_AddObject(package, (char *)modulename, module)) {
     std::cerr << "Initialisation in PyImport_AddObject failed for module "
 	      << modulename << "\n";
     return;
   }
   Py_INCREF(module);
+#endif
   initfunction();
 }
 #endif

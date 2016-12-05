@@ -1281,6 +1281,7 @@ picmtch5_OBJECTS = $(am_picmtch5_OBJECTS)
 am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
+	$(srcdir)/$(srcpythonbin)/mars_correct_image \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -1354,6 +1355,7 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcgeocalbin)/picmtch5.pdf \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_correct_image.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
@@ -2544,10 +2546,12 @@ libgeocal_la_LDFLAGS = $(am__append_1) -R $(BOOST_LIBDIR) \
 	$(SDP_LDFLAGS)
 dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
-	$(srcdir)/$(srcpythonbin)/gtproj2 $(am__append_44)
+	$(srcdir)/$(srcpythonbin)/gtproj2 \
+	$(srcdir)/$(srcpythonbin)/mars_correct_image $(am__append_44)
 dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_correct_image.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \

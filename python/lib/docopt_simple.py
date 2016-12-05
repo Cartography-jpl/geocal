@@ -1,7 +1,10 @@
 from __future__ import absolute_import
 from builtins import object
 from geocal.docopt import *
+from geocal_swig import VicarArgument
+import sys
 import re
+import os
 
 class DocOptSimple(object):
     '''The package docopt (http://docopt.org) is a nice package,
@@ -61,6 +64,33 @@ class DocOptSimple(object):
                 return float(v)
         return v
 
+class DocOptSimpleVicar(object):
+    '''Make VicarArgument look like DocOptSimple.'''
+    def __init__(self, argv):
+        if(argv is None):
+            argv = sys.argv
+        self.argv = argv
+        self.va = VicarArgument(argv)
+
+    def __getstate__(self):
+        return { "argv" : self.argv }
+
+    def __setstate__(self,dict):
+        self.argv = dict["argv"]
+        self.va = VicarArgument(self.argv)
+        
+    def __contains__(self, name):
+        try:
+            t = self.va(name)
+            return True
+        except RuntimeError as e:
+            if(e.args[0] == "Call to zvpstat failed"):
+                return False
+            raise
+
+    def __getattr__(self, name):
+        return self.va[name]
+    
 def docopt_simple(doc, argv=None, help=True, version=None, 
                  options_first=False):
     '''The package docopt (http://docopt.org) is a nice package,
@@ -68,6 +98,17 @@ def docopt_simple(doc, argv=None, help=True, version=None,
     uses a somewhat unnatural interface. This gives a simpler interface
     sufficient for many programs. See DocOptSimple class for details
     on the interface.'''
+    # Test for being called as a VICAR proc. We assume we have been if:
+    #
+    # 1. We get only one command line argument (the name of the script)
+    # 2. There is a .pdf file next to the script
+    #
+    # Note this isn't full proof, but I'm not sure what else to check
+    if(argv is None):
+        argv = sys.argv
+    if(len(argv) == 1 and os.path.exists(argv[0] + ".pdf")):
+        return DocOptSimpleVicar(argv)
+    # Otherwise, we use the normal docopt parsing of the command line
     return DocOptSimple(doc, argv=argv, help=help, version=version, 
                         options_first=options_first)
 

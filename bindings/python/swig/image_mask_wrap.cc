@@ -4013,6 +4013,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -9071,7 +9072,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"ImageMask_mask", _wrap_ImageMask_mask, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual bool GeoCal::ImageMask::mask(int Line, int Sample) const  =0\n"
+		"virtual bool GeoCal::ImageMask::mask(int Line, int Sample) const =0\n"
 		"Indicate if a particular point is masked.\n"
 		"\n"
 		"If true, the point is masked and should not be used in processing\n"
@@ -10178,12 +10179,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageMask))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageMask >("boost::shared_ptr< GeoCal::ImageMask > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageMask), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageMask > > ("boost::shared_ptr< GeoCal::ImageMask > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CombinedImageMask))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CombinedImageMask >("boost::shared_ptr< GeoCal::CombinedImageMask > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CombinedImageMask), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CombinedImageMask > > ("boost::shared_ptr< GeoCal::CombinedImageMask > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

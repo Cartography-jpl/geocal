@@ -2,6 +2,7 @@ geocalinc_HEADERS+= @srcoco3@/jia_sample.h
 libgeocal_la_SOURCES+= @srcoco3@/jia_sample.cc
 
 SWIG_SRC += @swigsrc@/jia_sample_wrap.cc
+geocalswiginc_HEADERS += @srcoco3@/jia_sample.i
 
 geocal_test_all_SOURCES+= @srcoco3@/jia_sample_test.cc
 

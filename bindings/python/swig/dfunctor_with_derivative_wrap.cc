@@ -4006,6 +4006,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -6233,12 +6234,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"DFunctorWithDerivative_df", _wrap_DFunctorWithDerivative_df, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::DFunctorWithDerivative::df(double X) const  =0\n"
+		"virtual double GeoCal::DFunctorWithDerivative::df(double X) const =0\n"
 		"Return df / dx. \n"
 		""},
 	 { (char *)"DFunctorWithDerivative_f_with_derivative", _wrap_DFunctorWithDerivative_f_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual AutoDerivative<double> GeoCal::DFunctorWithDerivative::f_with_derivative(double X) const  =0\n"
+		"virtual AutoDerivative<double> GeoCal::DFunctorWithDerivative::f_with_derivative(double X) const =0\n"
 		"Return df / dp_i as a AutoDerivative. \n"
 		""},
 	 { (char *)"delete_DFunctorWithDerivative", (PyCFunction)_wrap_delete_DFunctorWithDerivative, METH_O, NULL},
@@ -7230,8 +7231,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::DFunctorWithDerivative))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::DFunctorWithDerivative >("boost::shared_ptr< GeoCal::DFunctorWithDerivative > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::DFunctorWithDerivative), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::DFunctorWithDerivative > > ("boost::shared_ptr< GeoCal::DFunctorWithDerivative > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

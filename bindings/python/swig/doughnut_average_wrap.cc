@@ -4070,6 +4070,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -9205,16 +9206,13 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::DoughnutAverage))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::DoughnutAverage >("boost::shared_ptr< GeoCal::DoughnutAverage > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::DoughnutAverage), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::DoughnutAverage > > ("boost::shared_ptr< GeoCal::DoughnutAverage > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::RasterImageWrapPandif))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::RasterImageWrapPandif >("boost::shared_ptr< GeoCal::RasterImageWrapPandif > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::RasterImageWrapPandif), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::RasterImageWrapPandif > > ("boost::shared_ptr< GeoCal::RasterImageWrapPandif > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::RasterImageWrapCvdNorm))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::RasterImageWrapCvdNorm >("boost::shared_ptr< GeoCal::RasterImageWrapCvdNorm > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::RasterImageWrapCvdNorm), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::RasterImageWrapCvdNorm > > ("boost::shared_ptr< GeoCal::RasterImageWrapCvdNorm > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

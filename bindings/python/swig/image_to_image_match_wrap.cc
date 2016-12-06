@@ -4011,6 +4011,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -6343,7 +6344,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ImageToImageMatch_match", _wrap_ImageToImageMatch_match, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual void GeoCal::ImageToImageMatch::match(const ImageCoordinate &Ic1, ImageCoordinate &Ic2, double &Line_sigma,\n"
-		"double &Sample_sigma, bool &Success, int *Diagnostic=0) const  =0\n"
+		"double &Sample_sigma, bool &Success, int *Diagnostic=0) const =0\n"
 		"Match point Ic1 in the first image with the second image.\n"
 		"\n"
 		"We return the location in the second image along with the uncertainty\n"
@@ -7370,8 +7371,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageToImageMatch))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageToImageMatch >("boost::shared_ptr< GeoCal::ImageToImageMatch > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageToImageMatch), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageToImageMatch > > ("boost::shared_ptr< GeoCal::ImageToImageMatch > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

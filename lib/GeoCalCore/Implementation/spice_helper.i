@@ -5,7 +5,7 @@
   // Need this before blitz gets included.
 #include "auto_derivative.h"
 %}
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "spice_helper.h"

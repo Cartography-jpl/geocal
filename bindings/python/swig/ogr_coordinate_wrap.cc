@@ -4050,6 +4050,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -9763,16 +9764,13 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::OgrWrapper))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::OgrWrapper >("boost::shared_ptr< GeoCal::OgrWrapper > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OgrWrapper), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OgrWrapper > > ("boost::shared_ptr< GeoCal::OgrWrapper > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::OgrCoordinate))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::OgrCoordinate >("boost::shared_ptr< GeoCal::OgrCoordinate > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OgrCoordinate), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OgrCoordinate > > ("boost::shared_ptr< GeoCal::OgrCoordinate > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::OgrCoordinateConverter))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::OgrCoordinateConverter >("boost::shared_ptr< GeoCal::OgrCoordinateConverter > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OgrCoordinateConverter), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OgrCoordinateConverter > > ("boost::shared_ptr< GeoCal::OgrCoordinateConverter > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

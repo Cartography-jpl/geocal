@@ -1,7 +1,7 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "image_to_image_match.h"

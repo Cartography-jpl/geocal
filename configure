@@ -658,6 +658,7 @@ etcafidspythondir
 installafidspythondir
 afidspythonvdevdir
 geocalpkgpythondir
+geocalswigincdir
 pythondocdir
 srcraw
 srcsdbx
@@ -23808,6 +23809,8 @@ srcsdbx=${geocal_topdir}/thirdparty/libsdbx
 srcraw=${geocal_topdir}/thirdparty/libraw
 
 pythondocdir=\${prefix}/share/doc/geocal/python
+
+geocalswigincdir=\${prefix}/share/geocal/swig
 
 geocalpkgpythondir=\${prefix}/\${pythondir}/geocal
 

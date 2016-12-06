@@ -4088,6 +4088,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -10861,8 +10862,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Ipi))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Ipi >("boost::shared_ptr< GeoCal::Ipi > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Ipi), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Ipi > > ("boost::shared_ptr< GeoCal::Ipi > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

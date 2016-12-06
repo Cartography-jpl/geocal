@@ -220,7 +220,7 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     def convert_from_coordinate(self, X, Y, Height=0):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::CoordinateConverter::convert_from_coordinate(double X, double Y, double Height=0) const  =0
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::CoordinateConverter::convert_from_coordinate(double X, double Y, double Height=0) const =0
         This converts from a particular coordinate system, returning a ground
         coordinate for the given coordinates.
 
@@ -233,7 +233,7 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     def convert_to_coordinate(self, Gc):
         """
 
-        virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Height) const  =0
+        virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Height) const =0
         Specialization that converts from Geodetic.
 
         Because much of our data is in Geodetic coordinates this is an
@@ -245,7 +245,7 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     def is_same(self, Conv):
         """
 
-        virtual bool GeoCal::CoordinateConverter::is_same(const CoordinateConverter &Conv) const  =0
+        virtual bool GeoCal::CoordinateConverter::is_same(const CoordinateConverter &Conv) const =0
         Test if two CoordinateConverters are the same coordinate system. 
         """
         return _coordinate_converter.CoordinateConverter_is_same(self, Conv)

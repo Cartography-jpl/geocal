@@ -4063,6 +4063,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -6769,7 +6770,7 @@ static PyMethodDef SwigMethods[] = {
 		"&New, const ImageMask &New_mask, const ImageCoordinate &Ref_loc, const\n"
 		"ImageCoordinate &New_guess, ImageCoordinate &New_res, double\n"
 		"&Line_sigma, double &Sample_sigma, bool &Success, int *Diagnostic=0)\n"
-		"const  =0\n"
+		"const =0\n"
 		"Match a point found in the reference image with a point in the new\n"
 		"image.\n"
 		"\n"
@@ -8279,8 +8280,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageMatcher))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageMatcher >("boost::shared_ptr< GeoCal::ImageMatcher > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageMatcher), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageMatcher > > ("boost::shared_ptr< GeoCal::ImageMatcher > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

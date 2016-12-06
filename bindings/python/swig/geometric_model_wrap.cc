@@ -4010,6 +4010,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -6713,7 +6714,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"GeometricModel_original_image_coordinate", _wrap_GeometricModel_original_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const  =0\n"
+		"virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const =0\n"
 		"Map image coordinates to an underlying set of image coordinates.\n"
 		"\n"
 		"This takes the image coordinates of the resampled image (magnified,\n"
@@ -6722,7 +6723,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GeometricModel_resampled_image_coordinate", _wrap_GeometricModel_resampled_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const  =0\n"
+		"virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const =0\n"
 		"This is the inversion of original_image_coordinate, taking the\n"
 		"original image coordinates and returning the resampled image\n"
 		"coordinates. \n"
@@ -7775,12 +7776,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::GeometricModel))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::GeometricModel >("boost::shared_ptr< GeoCal::GeometricModel > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::GeometricModel), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::GeometricModel > > ("boost::shared_ptr< GeoCal::GeometricModel > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::GeometricTiePoints))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::GeometricTiePoints >("boost::shared_ptr< GeoCal::GeometricTiePoints > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::GeometricTiePoints), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::GeometricTiePoints > > ("boost::shared_ptr< GeoCal::GeometricTiePoints > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

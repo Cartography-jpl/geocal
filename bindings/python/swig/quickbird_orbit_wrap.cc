@@ -4080,6 +4080,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -9117,16 +9118,13 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::QuickBirdEphemeris))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::QuickBirdEphemeris >("boost::shared_ptr< GeoCal::QuickBirdEphemeris > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::QuickBirdEphemeris), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::QuickBirdEphemeris > > ("boost::shared_ptr< GeoCal::QuickBirdEphemeris > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::QuickBirdAttitude))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::QuickBirdAttitude >("boost::shared_ptr< GeoCal::QuickBirdAttitude > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::QuickBirdAttitude), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::QuickBirdAttitude > > ("boost::shared_ptr< GeoCal::QuickBirdAttitude > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::QuickBirdOrbit))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::QuickBirdOrbit >("boost::shared_ptr< GeoCal::QuickBirdOrbit > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::QuickBirdOrbit), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::QuickBirdOrbit > > ("boost::shared_ptr< GeoCal::QuickBirdOrbit > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

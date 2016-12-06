@@ -4065,6 +4065,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -9781,7 +9782,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"InterestPoint_swiginit", InterestPoint_swiginit, METH_VARARGS, NULL},
 	 { (char *)"FeatureDetector_interest_point_detect", _wrap_FeatureDetector_interest_point_detect, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual std::vector<InterestPoint> GeoCal::FeatureDetector::interest_point_detect(const RasterImage &Img) const  =0\n"
+		"virtual std::vector<InterestPoint> GeoCal::FeatureDetector::interest_point_detect(const RasterImage &Img) const =0\n"
 		"Go through a RasterImage, and return a list of InterstPoints for it.\n"
 		"\n"
 		"The list isn't in any particular order, but note that InterstPoints\n"
@@ -11345,12 +11346,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::InterestPoint))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::InterestPoint >("boost::shared_ptr< GeoCal::InterestPoint > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::InterestPoint), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::InterestPoint > > ("boost::shared_ptr< GeoCal::InterestPoint > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::FeatureDetector))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::FeatureDetector >("boost::shared_ptr< GeoCal::FeatureDetector > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::FeatureDetector), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::FeatureDetector > > ("boost::shared_ptr< GeoCal::FeatureDetector > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

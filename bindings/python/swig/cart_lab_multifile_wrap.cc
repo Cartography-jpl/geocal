@@ -4064,6 +4064,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -8579,16 +8580,13 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartLabMultifile))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartLabMultifile >("boost::shared_ptr< GeoCal::CartLabMultifile > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CartLabMultifile), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CartLabMultifile > > ("boost::shared_ptr< GeoCal::CartLabMultifile > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::GdalCartLabMultifile))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::GdalCartLabMultifile >("boost::shared_ptr< GeoCal::GdalCartLabMultifile > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::GdalCartLabMultifile), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::GdalCartLabMultifile > > ("boost::shared_ptr< GeoCal::GdalCartLabMultifile > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::VicarCartLabMultifile))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::VicarCartLabMultifile >("boost::shared_ptr< GeoCal::VicarCartLabMultifile > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::VicarCartLabMultifile), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::VicarCartLabMultifile > > ("boost::shared_ptr< GeoCal::VicarCartLabMultifile > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

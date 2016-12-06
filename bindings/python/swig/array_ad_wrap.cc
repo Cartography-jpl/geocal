@@ -4012,6 +4012,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -16371,20 +16372,16 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ArrayAd<double,1>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ArrayAd<double,1> >("boost::shared_ptr< GeoCal::ArrayAd<double,1> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ArrayAd<double,1>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ArrayAd<double,1> > > ("boost::shared_ptr< GeoCal::ArrayAd<double,1> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ArrayAd<double,2>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ArrayAd<double,2> >("boost::shared_ptr< GeoCal::ArrayAd<double,2> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ArrayAd<double,2>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ArrayAd<double,2> > > ("boost::shared_ptr< GeoCal::ArrayAd<double,2> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ArrayAd<double,3>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ArrayAd<double,3> >("boost::shared_ptr< GeoCal::ArrayAd<double,3> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ArrayAd<double,3>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ArrayAd<double,3> > > ("boost::shared_ptr< GeoCal::ArrayAd<double,3> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ArrayAd<double,4>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ArrayAd<double,4> >("boost::shared_ptr< GeoCal::ArrayAd<double,4> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ArrayAd<double,4>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ArrayAd<double,4> > > ("boost::shared_ptr< GeoCal::ArrayAd<double,4> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

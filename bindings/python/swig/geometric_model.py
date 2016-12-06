@@ -204,7 +204,7 @@ class GeometricModel(geocal_swig.generic_object.GenericObject):
     def original_image_coordinate(self, Resampled_ic):
         """
 
-        virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const  =0
+        virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const =0
         Map image coordinates to an underlying set of image coordinates.
 
         This takes the image coordinates of the resampled image (magnified,
@@ -217,7 +217,7 @@ class GeometricModel(geocal_swig.generic_object.GenericObject):
     def resampled_image_coordinate(self, Resampled_ic):
         """
 
-        virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const  =0
+        virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const =0
         This is the inversion of original_image_coordinate, taking the
         original image coordinates and returning the resampled image
         coordinates. 

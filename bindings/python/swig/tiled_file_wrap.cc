@@ -3999,6 +3999,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -6577,24 +6578,24 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"TiledFileBase_2_get_int", _wrap_TiledFileBase_2_get_int, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::TiledFileBase< D >::get_int(const boost::array< index, D > &Index) const  =0\n"
+		"virtual int GeoCal::TiledFileBase< D >::get_int(const boost::array< index, D > &Index) const =0\n"
 		"Get data an convert to integer. \n"
 		""},
 	 { (char *)"TiledFileBase_2_get_double", _wrap_TiledFileBase_2_get_double, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::TiledFileBase< D >::get_double(const boost::array< index, D > &Index) const  =0\n"
+		"virtual double GeoCal::TiledFileBase< D >::get_double(const boost::array< index, D > &Index) const =0\n"
 		"Get data an convert to double. \n"
 		""},
 	 { (char *)"TiledFileBase_2_read_int", _wrap_TiledFileBase_2_read_int, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual void GeoCal::TiledFileBase< D >::read_int(const boost::array< index, D > &Min_index, const boost::array< index,\n"
-		"D > &Max_index, int *Res) const  =0\n"
+		"D > &Max_index, int *Res) const =0\n"
 		"Read a subset of the data, and convert to int. \n"
 		""},
 	 { (char *)"TiledFileBase_2_read_double", _wrap_TiledFileBase_2_read_double, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual void GeoCal::TiledFileBase< D >::read_double(const boost::array< index, D > &Min_index, const boost::array< index,\n"
-		"D > &Max_index, double *Res) const  =0\n"
+		"D > &Max_index, double *Res) const =0\n"
 		"Read a subset of the data, and convert to double. \n"
 		""},
 	 { (char *)"TiledFileBase_2_write_int", _wrap_TiledFileBase_2_write_int, METH_VARARGS, (char *)"\n"

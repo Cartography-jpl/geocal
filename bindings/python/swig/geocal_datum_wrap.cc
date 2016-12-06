@@ -4038,6 +4038,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -6510,7 +6511,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"Datum_undulation", _wrap_Datum_undulation, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const  =0\n"
+		"virtual double GeoCal::Datum::undulation(const Geodetic &Gc) const =0\n"
 		"Specialization for Gc being Geodetic.\n"
 		"\n"
 		"Since many of our Datums are in geodetic coordinates, this is an\n"
@@ -7844,12 +7845,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Datum))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Datum >("boost::shared_ptr< GeoCal::Datum > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Datum), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Datum > > ("boost::shared_ptr< GeoCal::Datum > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::SimpleDatum))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::SimpleDatum >("boost::shared_ptr< GeoCal::SimpleDatum > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::SimpleDatum), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::SimpleDatum > > ("boost::shared_ptr< GeoCal::SimpleDatum > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

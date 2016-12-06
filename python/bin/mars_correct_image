@@ -130,7 +130,21 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+# Mapping between long name and shorter vicar name
+long_name_to_vicar = { "ref_image" : "refimg",
+                       "ref_base_name" : "refbase",
+                       "ref_image_resolution_name" : "refresname",
+                       "image" : "img",
+                       "image_base_name" : "imgbase",
+                       "image_resolution_name" : "imgresname",
+                       "band_ref" : "bandref",
+                       "band_image" : "bandimg",
+                       "hirise_correction" : "hirisecorr",
+                       "use_projection" : "useproj",
+                       "use_ref_image_projection" : "userefproj"}
+
+args = docopt_simple(usage, version=version,
+                     long_name_to_vicar=long_name_to_vicar)
 
 # Small wrapper around running command, so we can print this to screen
 def run_cmd(cmd):

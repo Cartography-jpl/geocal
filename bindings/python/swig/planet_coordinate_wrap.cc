@@ -4109,6 +4109,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -12736,52 +12737,40 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PlanetConstant<499>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PlanetConstant<499> >("boost::shared_ptr< GeoCal::PlanetConstant<499> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetConstant<499>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetConstant<499> > > ("boost::shared_ptr< GeoCal::PlanetConstant<499> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PlanetFixed<499>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PlanetFixed<499> >("boost::shared_ptr< GeoCal::PlanetFixed<499> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetFixed<499>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetFixed<499> > > ("boost::shared_ptr< GeoCal::PlanetFixed<499> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PlanetInertial<499>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PlanetInertial<499> >("boost::shared_ptr< GeoCal::PlanetInertial<499> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetInertial<499>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetInertial<499> > > ("boost::shared_ptr< GeoCal::PlanetInertial<499> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Planetocentric<499>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Planetocentric<499> >("boost::shared_ptr< GeoCal::Planetocentric<499> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Planetocentric<499>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Planetocentric<499> > > ("boost::shared_ptr< GeoCal::Planetocentric<499> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::SimpleDemT<GeoCal::Planetocentric<499> > >("boost::shared_ptr< GeoCal::SimpleDemT<GeoCal::Planetocentric<499> > > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::SimpleDemT<GeoCal::Planetocentric<499> > > > ("boost::shared_ptr< GeoCal::SimpleDemT<GeoCal::Planetocentric<499> > > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PlanetocentricConverter<499>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PlanetocentricConverter<499> >("boost::shared_ptr< GeoCal::PlanetocentricConverter<499> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetocentricConverter<499>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetocentricConverter<499> > > ("boost::shared_ptr< GeoCal::PlanetocentricConverter<499> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PlanetConstant<502>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PlanetConstant<502> >("boost::shared_ptr< GeoCal::PlanetConstant<502> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetConstant<502>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetConstant<502> > > ("boost::shared_ptr< GeoCal::PlanetConstant<502> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PlanetFixed<502>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PlanetFixed<502> >("boost::shared_ptr< GeoCal::PlanetFixed<502> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetFixed<502>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetFixed<502> > > ("boost::shared_ptr< GeoCal::PlanetFixed<502> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PlanetInertial<502>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PlanetInertial<502> >("boost::shared_ptr< GeoCal::PlanetInertial<502> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetInertial<502>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetInertial<502> > > ("boost::shared_ptr< GeoCal::PlanetInertial<502> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Planetocentric<502>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Planetocentric<502> >("boost::shared_ptr< GeoCal::Planetocentric<502> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Planetocentric<502>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Planetocentric<502> > > ("boost::shared_ptr< GeoCal::Planetocentric<502> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::SimpleDemT<GeoCal::Planetocentric<502> > >("boost::shared_ptr< GeoCal::SimpleDemT<GeoCal::Planetocentric<502> > > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::SimpleDemT<GeoCal::Planetocentric<502> > > > ("boost::shared_ptr< GeoCal::SimpleDemT<GeoCal::Planetocentric<502> > > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::PlanetocentricConverter<502>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::PlanetocentricConverter<502> >("boost::shared_ptr< GeoCal::PlanetocentricConverter<502> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetocentricConverter<502>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetocentricConverter<502> > > ("boost::shared_ptr< GeoCal::PlanetocentricConverter<502> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

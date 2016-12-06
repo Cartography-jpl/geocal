@@ -1,7 +1,10 @@
 from __future__ import absolute_import
 from builtins import object
 from geocal.docopt import *
+from geocal_swig import VicarArgument
+import sys
 import re
+import os
 
 class DocOptSimple(object):
     '''The package docopt (http://docopt.org) is a nice package,
@@ -61,13 +64,69 @@ class DocOptSimple(object):
                 return float(v)
         return v
 
+class DocOptSimpleVicar(object):
+    '''Make VicarArgument look like DocOptSimple.'''
+    def __init__(self, argv, long_name_to_vicar):
+        if(argv is None):
+            argv = sys.argv
+        self.argv = argv
+        self.long_name_to_vicar = long_name_to_vicar
+        self.va = VicarArgument(argv)
+
+    def __getstate__(self):
+        return { "argv" : self.argv,
+                 "long_name_to_vicar" : self.long_name_to_vicar }
+
+    def __setstate__(self,dict):
+        self.argv = dict["argv"]
+        self.long_name_to_vicar = dict["long_name_to_vicar"]
+        self.va = VicarArgument(self.argv)
+        
+    def __contains__(self, name):
+        if(self.long_name_to_vicar and name in self.long_name_to_vicar):
+            name = self.long_name_to_vicar[name]
+        try:
+            t = self.va[name]
+            return True
+        except RuntimeError as e:
+            if(e.args[0] == "Call to zvpstat failed"):
+                return False
+            raise
+
+    def __getattr__(self, name):
+        if(self.long_name_to_vicar and name in self.long_name_to_vicar):
+            name = self.long_name_to_vicar[name]
+        t = self.va[name]
+        # Treat "" or "n" as false
+        if(t == "" or t == "n"):
+            return False
+        return t
+    
 def docopt_simple(doc, argv=None, help=True, version=None, 
-                 options_first=False):
+                  options_first=False, long_name_to_vicar = None):
     '''The package docopt (http://docopt.org) is a nice package,
     but it has the disadvantage that getting the options etc. from it
     uses a somewhat unnatural interface. This gives a simpler interface
     sufficient for many programs. See DocOptSimple class for details
-    on the interface.'''
+    on the interface.
+
+    This can work with either a VICAR call or a normal unix call, if we
+    have a VICAR .pdf file supplied. Because VICAR has a much shorter name
+    constraint (default 15 characters), you can supply a mapping between the
+    longer more readable name and the VICAR name used in the PDF file. This
+    allows programs to be agnostic about if we get arguments from VICAR 
+    or from unix'''
+    # Test for being called as a VICAR proc. We assume we have been if:
+    #
+    # 1. We get only one command line argument (the name of the script)
+    # 2. There is a .pdf file next to the script
+    #
+    # Note this isn't full proof, but I'm not sure what else to check
+    if(argv is None):
+        argv = sys.argv
+    if(len(argv) == 1 and os.path.exists(argv[0] + ".pdf")):
+        return DocOptSimpleVicar(argv, long_name_to_vicar)
+    # Otherwise, we use the normal docopt parsing of the command line
     return DocOptSimple(doc, argv=argv, help=help, version=version, 
                         options_first=options_first)
 

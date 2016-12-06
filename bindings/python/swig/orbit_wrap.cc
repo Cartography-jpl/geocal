@@ -4079,6 +4079,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -21673,17 +21674,17 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitData_ci_look_vector", _wrap_OrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const  =0\n"
+		"virtual CartesianInertialLookVector GeoCal::OrbitData::ci_look_vector(const ScLookVector &Sl) const =0\n"
 		"Convert from ScLookVector to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"OrbitData_cf_look_vector", _wrap_OrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const  =0\n"
+		"virtual CartesianFixedLookVector GeoCal::OrbitData::cf_look_vector(const ScLookVector &Sl) const =0\n"
 		"Convert from ScLookVector to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"OrbitData_sc_look_vector", _wrap_OrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const  =0\n"
+		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const =0\n"
 		"Convert from CartesianFixedLookVector to ScLookVector. \n"
 		""},
 	 { (char *)"OrbitData_frame_coordinate", _wrap_OrbitData_frame_coordinate, METH_VARARGS, (char *)"\n"
@@ -21712,12 +21713,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitData__v_position_ci", (PyCFunction)_wrap_OrbitData__v_position_ci, METH_O, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<CartesianInertial> GeoCal::OrbitData::position_ci() const  =0\n"
+		"virtual boost::shared_ptr<CartesianInertial> GeoCal::OrbitData::position_ci() const =0\n"
 		"Return position as a pointer. \n"
 		""},
 	 { (char *)"OrbitData__v_position_cf", (PyCFunction)_wrap_OrbitData__v_position_cf, METH_O, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<CartesianFixed> GeoCal::OrbitData::position_cf() const  =0\n"
+		"virtual boost::shared_ptr<CartesianFixed> GeoCal::OrbitData::position_cf() const =0\n"
 		"Return position as a pointer. \n"
 		""},
 	 { (char *)"OrbitData_footprint", _wrap_OrbitData_footprint, METH_VARARGS, (char *)"\n"
@@ -21744,12 +21745,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitData__position_cf_with_derivative", (PyCFunction)_wrap_OrbitData__position_cf_with_derivative, METH_O, NULL},
 	 { (char *)"OrbitData__v_time", (PyCFunction)_wrap_OrbitData__v_time, METH_O, (char *)"\n"
 		"\n"
-		"virtual Time GeoCal::OrbitData::time() const  =0\n"
+		"virtual Time GeoCal::OrbitData::time() const =0\n"
 		"Return Time of OrbitData. \n"
 		""},
 	 { (char *)"OrbitData__v_time_with_derivative", (PyCFunction)_wrap_OrbitData__v_time_with_derivative, METH_O, (char *)"\n"
 		"\n"
-		"virtual TimeWithDerivative GeoCal::OrbitData::time_with_derivative() const  =0\n"
+		"virtual TimeWithDerivative GeoCal::OrbitData::time_with_derivative() const =0\n"
 		"Return TimeWithDerivative of OrbitData. \n"
 		""},
 	 { (char *)"OrbitData___str__", (PyCFunction)_wrap_OrbitData___str__, METH_O, NULL},
@@ -21773,12 +21774,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"QuaternionOrbitData_ci_look_vector", _wrap_QuaternionOrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
+		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const\n"
 		"Convert to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_cf_look_vector", _wrap_QuaternionOrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
+		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const\n"
 		"Convert to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_sc_look_vector", _wrap_QuaternionOrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
@@ -21929,7 +21930,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit_orbit_data", _wrap_Orbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const  =0\n"
+		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0\n"
 		"Return OrbitData for the given time.\n"
 		"\n"
 		"We should have min_time() <= T < max_time(). This version should\n"
@@ -23691,28 +23692,22 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::OrbitData))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::OrbitData >("boost::shared_ptr< GeoCal::OrbitData > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OrbitData), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OrbitData > > ("boost::shared_ptr< GeoCal::OrbitData > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::QuaternionOrbitData))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::QuaternionOrbitData >("boost::shared_ptr< GeoCal::QuaternionOrbitData > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::QuaternionOrbitData), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::QuaternionOrbitData > > ("boost::shared_ptr< GeoCal::QuaternionOrbitData > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Orbit))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Orbit >("boost::shared_ptr< GeoCal::Orbit > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Orbit), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Orbit > > ("boost::shared_ptr< GeoCal::Orbit > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::KeplerOrbit))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::KeplerOrbit >("boost::shared_ptr< GeoCal::KeplerOrbit > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::KeplerOrbit), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::KeplerOrbit > > ("boost::shared_ptr< GeoCal::KeplerOrbit > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Observable<GeoCal::Orbit>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Observable<GeoCal::Orbit> >("boost::shared_ptr< GeoCal::Observable<GeoCal::Orbit> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observable<GeoCal::Orbit>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observable<GeoCal::Orbit> > > ("boost::shared_ptr< GeoCal::Observable<GeoCal::Orbit> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Observer<GeoCal::Orbit>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Orbit> >("boost::shared_ptr< GeoCal::Observer<GeoCal::Orbit> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observer<GeoCal::Orbit>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Orbit> > > ("boost::shared_ptr< GeoCal::Observer<GeoCal::Orbit> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

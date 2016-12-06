@@ -5,7 +5,7 @@
 #include "auto_derivative.h"
 %}
 %include <std_vector.i>
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "geocal_autoderivative_quaternion.h"

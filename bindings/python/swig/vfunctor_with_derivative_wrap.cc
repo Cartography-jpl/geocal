@@ -4002,6 +4002,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -6270,7 +6271,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"VFunctorWithDerivative_df", _wrap_VFunctorWithDerivative_df, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual blitz::Array<double, 2> GeoCal::VFunctorWithDerivative::df(const blitz::Array< double, 1 > &X) const  =0\n"
+		"virtual blitz::Array<double, 2> GeoCal::VFunctorWithDerivative::df(const blitz::Array< double, 1 > &X) const =0\n"
 		"Return jacobian. J_ij = Df_i / dx_j. \n"
 		""},
 	 { (char *)"VFunctorWithDerivative_f_and_df", _wrap_VFunctorWithDerivative_f_and_df, METH_VARARGS, (char *)"\n"
@@ -7241,8 +7242,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::VFunctorWithDerivative))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::VFunctorWithDerivative >("boost::shared_ptr< GeoCal::VFunctorWithDerivative > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::VFunctorWithDerivative), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::VFunctorWithDerivative > > ("boost::shared_ptr< GeoCal::VFunctorWithDerivative > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

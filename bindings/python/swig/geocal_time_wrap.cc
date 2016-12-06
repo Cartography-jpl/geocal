@@ -4004,6 +4004,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -9655,12 +9656,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Time))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Time >("boost::shared_ptr< GeoCal::Time > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Time), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Time > > ("boost::shared_ptr< GeoCal::Time > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::TimeWithDerivative))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::TimeWithDerivative >("boost::shared_ptr< GeoCal::TimeWithDerivative > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::TimeWithDerivative), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::TimeWithDerivative > > ("boost::shared_ptr< GeoCal::TimeWithDerivative > *"));
   
   PyDict_SetItemString(md,(char*)"cvar", SWIG_globals());
   SWIG_addvarlink(SWIG_globals(),(char*)"Time_min_valid_time",Swig_var_Time_min_valid_time_get, Swig_var_Time_min_valid_time_set);

@@ -2,7 +2,7 @@
 // (Not really c++, but closest emacs mode)
 
 %include <std_vector.i>
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "image_ground_connection.h"

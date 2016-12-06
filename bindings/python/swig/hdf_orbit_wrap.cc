@@ -4084,6 +4084,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -10540,16 +10541,13 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeAcsCreator>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeAcsCreator> >("boost::shared_ptr< GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeAcsCreator> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeAcsCreator>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeAcsCreator> > > ("boost::shared_ptr< GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeAcsCreator> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimePgsCreator>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimePgsCreator> >("boost::shared_ptr< GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimePgsCreator> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimePgsCreator>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimePgsCreator> > > ("boost::shared_ptr< GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimePgsCreator> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimeJ2000Creator>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimeJ2000Creator> >("boost::shared_ptr< GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimeJ2000Creator> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimeJ2000Creator>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimeJ2000Creator> > > ("boost::shared_ptr< GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimeJ2000Creator> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

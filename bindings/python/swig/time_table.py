@@ -299,7 +299,7 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
     def image_coordinate(self, T, F):
         """
 
-        virtual ImageCoordinate GeoCal::TimeTable::image_coordinate(Time T, const FrameCoordinate &F) const  =0
+        virtual ImageCoordinate GeoCal::TimeTable::image_coordinate(Time T, const FrameCoordinate &F) const =0
         Convert from Time and FrameCoordinate to ImageCoordinate. 
         """
         return _time_table.TimeTable_image_coordinate(self, T, F)
@@ -309,7 +309,7 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
         """
 
         virtual ImageCoordinateWithDerivative GeoCal::TimeTable::image_coordinate_with_derivative(const TimeWithDerivative &T, const FrameCoordinateWithDerivative &F)
-        const  =0
+        const =0
         Convert from Time and FrameCoordinate to ImageCoordinate. 
         """
         return _time_table.TimeTable_image_coordinate_with_derivative(self, T, F)
@@ -318,7 +318,7 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
     def time(self, Ic):
         """
 
-        virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const  =0
+        virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const =0
         Convert from ImageCoordinate to Time and FrameCoordinate. 
         """
         return _time_table.TimeTable_time(self, Ic)
@@ -328,7 +328,7 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
         """
 
         virtual void GeoCal::TimeTable::time_with_derivative(const ImageCoordinateWithDerivative &Ic, TimeWithDerivative &T,
-        FrameCoordinateWithDerivative &F) const  =0
+        FrameCoordinateWithDerivative &F) const =0
         Convert from ImageCoordinate to Time and FrameCoordinate. 
         """
         return _time_table.TimeTable_time_with_derivative(self, Ic)
@@ -337,7 +337,7 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
     def _v_min_line(self):
         """
 
-        virtual int GeoCal::TimeTable::min_line() const  =0
+        virtual int GeoCal::TimeTable::min_line() const =0
         Minimum line table is valid for. 
         """
         return _time_table.TimeTable__v_min_line(self)
@@ -351,7 +351,7 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
     def _v_max_line(self):
         """
 
-        virtual int GeoCal::TimeTable::max_line() const  =0
+        virtual int GeoCal::TimeTable::max_line() const =0
         Maximum line table is valid for. 
         """
         return _time_table.TimeTable__v_max_line(self)
@@ -365,7 +365,7 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
     def _v_min_time(self):
         """
 
-        virtual Time GeoCal::TimeTable::min_time() const  =0
+        virtual Time GeoCal::TimeTable::min_time() const =0
         Minimum time table is valid for. 
         """
         return _time_table.TimeTable__v_min_time(self)
@@ -379,7 +379,7 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
     def _v_max_time(self):
         """
 
-        virtual Time GeoCal::TimeTable::max_time() const  =0
+        virtual Time GeoCal::TimeTable::max_time() const =0
         Maximum time table is valid for. 
         """
         return _time_table.TimeTable__v_max_time(self)

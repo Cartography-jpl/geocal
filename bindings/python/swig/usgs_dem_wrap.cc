@@ -4074,6 +4074,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -8968,12 +8969,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::UsgsDemData))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::UsgsDemData >("boost::shared_ptr< GeoCal::UsgsDemData > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::UsgsDemData), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::UsgsDemData > > ("boost::shared_ptr< GeoCal::UsgsDemData > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::UsgsDem))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::UsgsDem >("boost::shared_ptr< GeoCal::UsgsDem > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::UsgsDem), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::UsgsDem > > ("boost::shared_ptr< GeoCal::UsgsDem > *"));
   
   SWIG_Python_SetConstant(d, "UsgsDemData_FILL_VALUE",SWIG_From_int(static_cast< int >(GeoCal::UsgsDemData::FILL_VALUE)));
 #if PY_VERSION_HEX >= 0x03000000

@@ -1,6 +1,6 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
-%include "common.i"
+%include "geocal_common.i"
 
 %{
 #include "raster_image_multi_band_variable.h"

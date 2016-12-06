@@ -4036,6 +4036,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -6831,7 +6832,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"Dem_distance_to_surface", _wrap_Dem_distance_to_surface, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::Dem::distance_to_surface(const GroundCoordinate &Gp) const  =0\n"
+		"virtual double GeoCal::Dem::distance_to_surface(const GroundCoordinate &Gp) const =0\n"
 		"Return distance to surface directly above/below the given point.\n"
 		"\n"
 		"Distance is in meters. Positive means Gp is above the surface,\n"
@@ -6839,7 +6840,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Dem_height_reference_surface", _wrap_Dem_height_reference_surface, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::Dem::height_reference_surface(const GroundCoordinate &Gp) const  =0\n"
+		"virtual double GeoCal::Dem::height_reference_surface(const GroundCoordinate &Gp) const =0\n"
 		"Return height of surface above/below the reference surface (e.g.,\n"
 		"WGS-84 for the earth).\n"
 		"\n"
@@ -6876,7 +6877,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Dem_surface_point", _wrap_Dem_surface_point, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::Dem::surface_point(const GroundCoordinate &Gp) const  =0\n"
+		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::Dem::surface_point(const GroundCoordinate &Gp) const =0\n"
 		"Return a GroundCoordinate on the surface directly above or below the\n"
 		"given point. \n"
 		""},
@@ -8169,8 +8170,7 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Dem))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Dem >("boost::shared_ptr< GeoCal::Dem > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Dem), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Dem > > ("boost::shared_ptr< GeoCal::Dem > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

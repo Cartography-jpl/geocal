@@ -13,13 +13,13 @@
 
 %{
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 %}
 
 %define %geocal_shared_ptr(TYPE...)
 %shared_ptr(TYPE)
 %init {
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(TYPE))] =
-    boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< TYPE >("boost::shared_ptr< TYPE > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(TYPE), boost::make_shared<GeoCal::SwigTypeMapper< TYPE > > ("boost::shared_ptr< TYPE > *"));
 }
 
 %typemap(out) const boost::shared_ptr< TYPE >& {

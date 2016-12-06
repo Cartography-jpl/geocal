@@ -4100,6 +4100,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -16301,7 +16302,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ImageGroundConnection_ground_coordinate_dem", _wrap_ImageGroundConnection_ground_coordinate_dem, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate_dem(const ImageCoordinate &Ic, const Dem &D) const  =0\n"
+		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::ImageGroundConnection::ground_coordinate_dem(const ImageCoordinate &Ic, const Dem &D) const =0\n"
 		"Return ground coordinate that goes with a particular image coordinate.\n"
 		"\n"
 		"This version supplies a Dem to use. \n"
@@ -16322,7 +16323,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ImageGroundConnection_image_coordinate", _wrap_ImageGroundConnection_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::ImageGroundConnection::image_coordinate(const GroundCoordinate &Gc) const  =0\n"
+		"virtual ImageCoordinate GeoCal::ImageGroundConnection::image_coordinate(const GroundCoordinate &Gc) const =0\n"
 		"Return image coordinate that goes with a particular GroundCoordinate.\n"
 		"\n"
 		"For some types of ImageGroundConnection, we might not be able to\n"
@@ -18428,20 +18429,16 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageGroundConnection))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnection >("boost::shared_ptr< GeoCal::ImageGroundConnection > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageGroundConnection), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnection > > ("boost::shared_ptr< GeoCal::ImageGroundConnection > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::OffsetImageGroundConnection))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::OffsetImageGroundConnection >("boost::shared_ptr< GeoCal::OffsetImageGroundConnection > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OffsetImageGroundConnection), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OffsetImageGroundConnection > > ("boost::shared_ptr< GeoCal::OffsetImageGroundConnection > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageGroundConnectionFailed))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnectionFailed >("boost::shared_ptr< GeoCal::ImageGroundConnectionFailed > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageGroundConnectionFailed), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnectionFailed > > ("boost::shared_ptr< GeoCal::ImageGroundConnectionFailed > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ImageGroundConnectionCopy))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnectionCopy >("boost::shared_ptr< GeoCal::ImageGroundConnectionCopy > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageGroundConnectionCopy), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageGroundConnectionCopy > > ("boost::shared_ptr< GeoCal::ImageGroundConnectionCopy > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

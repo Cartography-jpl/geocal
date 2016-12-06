@@ -4008,6 +4008,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -14540,12 +14541,10 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::AutoDerivative<double>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::AutoDerivative<double> >("boost::shared_ptr< GeoCal::AutoDerivative<double> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::AutoDerivative<double>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::AutoDerivative<double> > > ("boost::shared_ptr< GeoCal::AutoDerivative<double> > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::AutoDerivativeRef<double>))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::AutoDerivativeRef<double> >("boost::shared_ptr< GeoCal::AutoDerivativeRef<double> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::AutoDerivativeRef<double>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::AutoDerivativeRef<double> > > ("boost::shared_ptr< GeoCal::AutoDerivativeRef<double> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

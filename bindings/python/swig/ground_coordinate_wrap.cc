@@ -4042,6 +4042,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -12724,7 +12725,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GroundCoordinate_convert_to_cf", (PyCFunction)_wrap_GroundCoordinate_convert_to_cf, METH_O, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<CartesianFixed> GeoCal::GroundCoordinate::convert_to_cf() const  =0\n"
+		"virtual boost::shared_ptr<CartesianFixed> GeoCal::GroundCoordinate::convert_to_cf() const =0\n"
 		"Convert to CartesianFixed. \n"
 		""},
 	 { (char *)"GroundCoordinate___str__", (PyCFunction)_wrap_GroundCoordinate___str__, METH_O, NULL},
@@ -12736,12 +12737,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"GroundCoordinate_swigregister", GroundCoordinate_swigregister, METH_VARARGS, NULL},
 	 { (char *)"CartesianInertial_convert_to_cf", _wrap_CartesianInertial_convert_to_cf, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianInertial::convert_to_cf(const Time &T) const  =0\n"
+		"virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianInertial::convert_to_cf(const Time &T) const =0\n"
 		"Convert to a CartesianFixed. \n"
 		""},
 	 { (char *)"CartesianInertial_ci_to_cf", _wrap_CartesianInertial_ci_to_cf, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual void GeoCal::CartesianInertial::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const  =0\n"
+		"virtual void GeoCal::CartesianInertial::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0\n"
 		"Calculate matrix that can be used to convert CartesianFixed to\n"
 		"CartesianInertial at the given Time.\n"
 		"\n"
@@ -12750,7 +12751,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CartesianInertial_ci_to_cf_with_vel", _wrap_CartesianInertial_ci_to_cf_with_vel, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const  =0\n"
+		"virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0\n"
 		"Calculate matrix that can be used to convert CartesianInertial to\n"
 		"CartesianFixed at the given Time, including velocity.\n"
 		"\n"
@@ -12765,13 +12766,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CartesianInertial_create", _wrap_CartesianInertial_create, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianInertial::create(boost::array< double, 3 > P) const  =0\n"
+		"virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianInertial::create(boost::array< double, 3 > P) const =0\n"
 		"Create an instance of whatever type of CartesianInertial this is. \n"
 		""},
 	 { (char *)"CartesianInertial_reference_surface_intersect_approximate", _wrap_CartesianInertial_reference_surface_intersect_approximate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianInertial::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double\n"
-		"Height_reference_surface=0) const  =0\n"
+		"Height_reference_surface=0) const =0\n"
 		"Find the intersection with the surface at the given height starting at\n"
 		"this point and looking in the given direction.\n"
 		"\n"
@@ -12788,22 +12789,22 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CartesianInertial_swigregister", CartesianInertial_swigregister, METH_VARARGS, NULL},
 	 { (char *)"CartesianFixed_convert_to_ci", _wrap_CartesianFixed_convert_to_ci, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianFixed::convert_to_ci(const Time &T) const  =0\n"
+		"virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianFixed::convert_to_ci(const Time &T) const =0\n"
 		"Convert to CartesianInertial. \n"
 		""},
 	 { (char *)"CartesianFixed_naif_code", (PyCFunction)_wrap_CartesianFixed_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"virtual int GeoCal::CartesianFixed::naif_code() const  =0\n"
+		"virtual int GeoCal::CartesianFixed::naif_code() const =0\n"
 		"Naif code for planet. \n"
 		""},
 	 { (char *)"CartesianFixed_create", _wrap_CartesianFixed_create, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianFixed::create(boost::array< double, 3 > P) const  =0\n"
+		"virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianFixed::create(boost::array< double, 3 > P) const =0\n"
 		"Create an instance of whatever type of CartesianFixed this is. \n"
 		""},
 	 { (char *)"CartesianFixed_ci_to_cf", _wrap_CartesianFixed_ci_to_cf, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual void GeoCal::CartesianFixed::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const  =0\n"
+		"virtual void GeoCal::CartesianFixed::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0\n"
 		"Calculate matrix that can be used to convert CartesianFixed to\n"
 		"CartesianInertial at the given Time.\n"
 		"\n"
@@ -12812,7 +12813,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CartesianFixed_cf_to_ci_with_vel", _wrap_CartesianFixed_cf_to_ci_with_vel, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual void GeoCal::CartesianFixed::cf_to_ci_with_vel(const Time &T, double Cf_to_ci[6][6]) const  =0\n"
+		"virtual void GeoCal::CartesianFixed::cf_to_ci_with_vel(const Time &T, double Cf_to_ci[6][6]) const =0\n"
 		"Calculate matrix that can be used to convert CartesianFixed to\n"
 		"CartesianInertial at the given Time, including velocity.\n"
 		"\n"
@@ -12828,7 +12829,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CartesianFixed_reference_surface_intersect_approximate", _wrap_CartesianFixed_reference_surface_intersect_approximate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual boost::shared_ptr<CartesianFixed> GeoCal::CartesianFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double\n"
-		"Height_reference_surface=0) const  =0\n"
+		"Height_reference_surface=0) const =0\n"
 		"Find the intersection with the surface at the given height starting at\n"
 		"this point and looking in the given direction.\n"
 		"\n"
@@ -12837,7 +12838,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CartesianFixed__v_min_radius_reference_surface", (PyCFunction)_wrap_CartesianFixed__v_min_radius_reference_surface, METH_O, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::CartesianFixed::min_radius_reference_surface() const  =0\n"
+		"virtual double GeoCal::CartesianFixed::min_radius_reference_surface() const =0\n"
 		"This is the radius of the largest sphere that fits completely into the\n"
 		"reference surface (e.g., radius for a reference sphere, minimum of a\n"
 		"and b for a ellipsoid). \n"
@@ -14226,28 +14227,22 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::GroundCoordinate))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::GroundCoordinate >("boost::shared_ptr< GeoCal::GroundCoordinate > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::GroundCoordinate), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::GroundCoordinate > > ("boost::shared_ptr< GeoCal::GroundCoordinate > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartesianFixed))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartesianFixed >("boost::shared_ptr< GeoCal::CartesianFixed > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CartesianFixed), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CartesianFixed > > ("boost::shared_ptr< GeoCal::CartesianFixed > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartesianInertial))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartesianInertial >("boost::shared_ptr< GeoCal::CartesianInertial > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CartesianInertial), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CartesianInertial > > ("boost::shared_ptr< GeoCal::CartesianInertial > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::LnLookVector))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::LnLookVector >("boost::shared_ptr< GeoCal::LnLookVector > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::LnLookVector), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::LnLookVector > > ("boost::shared_ptr< GeoCal::LnLookVector > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::LnLookVectorWithDerivative))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::LnLookVectorWithDerivative >("boost::shared_ptr< GeoCal::LnLookVectorWithDerivative > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::LnLookVectorWithDerivative), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::LnLookVectorWithDerivative > > ("boost::shared_ptr< GeoCal::LnLookVectorWithDerivative > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::CartesianFixedLookVector))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::CartesianFixedLookVector >("boost::shared_ptr< GeoCal::CartesianFixedLookVector > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CartesianFixedLookVector), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CartesianFixedLookVector > > ("boost::shared_ptr< GeoCal::CartesianFixedLookVector > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

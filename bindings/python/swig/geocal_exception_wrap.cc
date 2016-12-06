@@ -4006,6 +4006,7 @@ SWIGINTERNINLINE PyObject*
 
 
 #include "swig_type_mapper.h"
+#include <boost/make_shared.hpp>
 
 
   // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
@@ -8060,24 +8061,19 @@ SWIG_init(void) {
   GeoCal::no_gsl_abort();
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::Exception))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::Exception >("boost::shared_ptr< GeoCal::Exception > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Exception), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Exception > > ("boost::shared_ptr< GeoCal::Exception > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::ConvergenceFailure))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::ConvergenceFailure >("boost::shared_ptr< GeoCal::ConvergenceFailure > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ConvergenceFailure), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ConvergenceFailure > > ("boost::shared_ptr< GeoCal::ConvergenceFailure > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::NoCoverage))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::NoCoverage >("boost::shared_ptr< GeoCal::NoCoverage > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::NoCoverage), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::NoCoverage > > ("boost::shared_ptr< GeoCal::NoCoverage > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::MetadataMissing))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::MetadataMissing >("boost::shared_ptr< GeoCal::MetadataMissing > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::MetadataMissing), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::MetadataMissing > > ("boost::shared_ptr< GeoCal::MetadataMissing > *"));
   
   
-  GeoCal::swig_type_map[GeoCal::type_index(typeid(GeoCal::VicarException))] =
-  boost::shared_ptr<GeoCal::SwigTypeMapperBase>(new GeoCal::SwigTypeMapper< GeoCal::VicarException >("boost::shared_ptr< GeoCal::VicarException > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::VicarException), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::VicarException > > ("boost::shared_ptr< GeoCal::VicarException > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

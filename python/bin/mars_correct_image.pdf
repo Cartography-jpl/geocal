@@ -42,6 +42,22 @@ We name the images by the base names. So for example:
 Would result in ctx_5m.img ctx_0.25m.img hirise_corr_5m.img and 
 hirise_corr_0.25m.img.
 .LEVEL1
+.variable refimg
+Reference image to import into VICAR. Can be any file type GDAL
+can read (including VICAR).
+.variable refbase
+Base name to use when forming the various reference image files.
+.variable refresname
+Name for the original resolution, e.g., "5m", "res1". Used to form
+output file name.
+.variable img
+Image to import into VICAR. Can be any file type GDAL
+can read (including VICAR).
+.variable imgbase
+Base name to use when forming the various image files.
+.variable imgresname
+Name for the original resolution, e.g., "5m", "res1". Used to form
+output file name.
 .VARIABLE autofit
 Set the FITMIN threshold automatically using the first n correlations.
 .variable bandref

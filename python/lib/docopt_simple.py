@@ -122,9 +122,8 @@ def docopt_simple(doc, argv=None, help=True, version=None,
     # 2. There is a .pdf file next to the script
     #
     # Note this isn't full proof, but I'm not sure what else to check
-    if(argv is None):
-        argv = sys.argv
-    if(len(argv) == 1 and os.path.exists(argv[0] + ".pdf")):
+    if(argv is None and len(sys.argv) == 1 and
+       os.path.exists(sys.argv[0] + ".pdf")):
         return DocOptSimpleVicar(argv, long_name_to_vicar)
     # Otherwise, we use the normal docopt parsing of the command line
     return DocOptSimple(doc, argv=argv, help=help, version=version, 

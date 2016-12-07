@@ -60,7 +60,7 @@ static void module_init(PyObject* module);
 #define INIT_TYPE PyObject *
 #define INIT_MODULE init_extension_module3
 #else
-#define INIT_FUNC(S) init_ ## S
+#define INIT_FUNC(S) init ## S
 #define INIT_TYPE void
 #define INIT_MODULE init_extension_module2
 #endif

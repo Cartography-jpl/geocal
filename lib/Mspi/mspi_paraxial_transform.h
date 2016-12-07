@@ -56,10 +56,19 @@ public:
   bool has_row(int Row_number) const
   { return row_to_index.count(Row_number) > 0; }
   virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Parameters for Paraxial transform
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 2>& a() const {return a_; }
+  const blitz::Array<double, 2>& b() const {return b_; }
+  const blitz::Array<double, 2>& c() const {return c_; }
+  const blitz::Array<double, 2>& d() const {return d_; }
 private:
   std::string fname;
   std::map<int, int> row_to_index;
-  blitz::Array<double, 2> a, b, c, d;
+  blitz::Array<double, 2> a_, b_, c_, d_;
   MspiParaxialTransform() {}
   friend class boost::serialization::access;
   template<class Archive>

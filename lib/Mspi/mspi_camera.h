@@ -48,6 +48,13 @@ public:
   {fname = Fname; paraxial_transform_->file_name(Fname); }
 
 //-----------------------------------------------------------------------
+/// Paraxial transform
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<MspiParaxialTransform> paraxial_transform() const
+  { return paraxial_transform_; }
+  
+//-----------------------------------------------------------------------
 /// Granule ID. This is metadata, found in the configuration file.
 //-----------------------------------------------------------------------
 

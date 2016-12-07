@@ -34,6 +34,10 @@ public:
 			AutoDerivative<double>& OUTPUT) const;
   bool has_row(int Row_number) const;
   std::string print_to_string() const;
+  %python_attribute(a, blitz::Array<double, 2>);
+  %python_attribute(b, blitz::Array<double, 2>);
+  %python_attribute(c, blitz::Array<double, 2>);
+  %python_attribute(d, blitz::Array<double, 2>);
   %pickle_serialization();
 };
 }

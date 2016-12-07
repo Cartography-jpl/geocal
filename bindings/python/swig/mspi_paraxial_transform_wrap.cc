@@ -7045,6 +7045,234 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_a(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform__v_a" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::MspiParaxialTransform const *)arg1)->a();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_b(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform__v_b" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::MspiParaxialTransform const *)arg1)->b();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_c(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform__v_c" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::MspiParaxialTransform const *)arg1)->c();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_d(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform__v_d" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::MspiParaxialTransform const *)arg1)->d();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_MspiParaxialTransform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiParaxialTransform *arg1 = (GeoCal::MspiParaxialTransform *) 0 ;
@@ -7150,6 +7378,26 @@ static PyMethodDef SwigMethods[] = {
 		"True if we have the given row. \n"
 		""},
 	 { (char *)"MspiParaxialTransform___str__", (PyCFunction)_wrap_MspiParaxialTransform___str__, METH_O, NULL},
+	 { (char *)"MspiParaxialTransform__v_a", (PyCFunction)_wrap_MspiParaxialTransform__v_a, METH_O, (char *)"\n"
+		"\n"
+		"const blitz::Array<double, 2>& GeoCal::MspiParaxialTransform::a() const\n"
+		"Parameters for Paraxial transform. \n"
+		""},
+	 { (char *)"MspiParaxialTransform__v_b", (PyCFunction)_wrap_MspiParaxialTransform__v_b, METH_O, (char *)"\n"
+		"\n"
+		"const blitz::Array<double, 2>& GeoCal::MspiParaxialTransform::b() const\n"
+		"\n"
+		""},
+	 { (char *)"MspiParaxialTransform__v_c", (PyCFunction)_wrap_MspiParaxialTransform__v_c, METH_O, (char *)"\n"
+		"\n"
+		"const blitz::Array<double, 2>& GeoCal::MspiParaxialTransform::c() const\n"
+		"\n"
+		""},
+	 { (char *)"MspiParaxialTransform__v_d", (PyCFunction)_wrap_MspiParaxialTransform__v_d, METH_O, (char *)"\n"
+		"\n"
+		"const blitz::Array<double, 2>& GeoCal::MspiParaxialTransform::d() const\n"
+		"\n"
+		""},
 	 { (char *)"delete_MspiParaxialTransform", (PyCFunction)_wrap_delete_MspiParaxialTransform, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::MspiParaxialTransform::~MspiParaxialTransform()\n"

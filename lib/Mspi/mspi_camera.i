@@ -9,6 +9,7 @@
 %}
 
 %base_import(quaternion_camera)
+%import "mspi_paraxial_transform.i"
 
 %geocal_shared_ptr(GeoCal::MspiCamera);
 namespace GeoCal {
@@ -32,6 +33,7 @@ public:
   %python_attribute(boresight_angle, double);
   %python_attribute(inversion, bool);
   %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);
+  %python_attribute(paraxial_transform, boost::shared_ptr<MspiParaxialTransform>);
   double angular_separation(int Reference_band, int Target_band) const;
   void paraxial_offset(int Band,
 		       const FrameCoordinate& F,

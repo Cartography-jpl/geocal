@@ -14,10 +14,10 @@ void MspiParaxialTransform::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(MspiParaxialTransform);
   ar & GEOCAL_NVP(fname) 
     & GEOCAL_NVP(row_to_index)
-    & GEOCAL_NVP(a)
-    & GEOCAL_NVP(b)
-    & GEOCAL_NVP(c)
-    & GEOCAL_NVP(d);
+    & GEOCAL_NVP_(a)
+    & GEOCAL_NVP_(b)
+    & GEOCAL_NVP_(c)
+    & GEOCAL_NVP_(d);
 }
 
 GEOCAL_IMPLEMENT(MspiParaxialTransform);
@@ -46,32 +46,32 @@ MspiParaxialTransform::MspiParaxialTransform(const std::string& File_name)
   }
   for(int i = 0; i < (int) row_numbers.size(); ++i)
     row_to_index[row_numbers[i]] = i;
-  a.resize((int) row_numbers.size(), number_a_parameter);
-  b.resize(a.shape());
-  c.resize(a.rows(), number_c_parameter);
-  d.resize(c.shape());
+  a_.resize((int) row_numbers.size(), number_a_parameter);
+  b_.resize(a_.shape());
+  c_.resize(a_.rows(), number_c_parameter);
+  d_.resize(c_.shape());
   Array<double, 1> scratch;
-  for(int i = 0; i < a.rows(); ++i) {
+  for(int i = 0; i < a_.rows(); ++i) {
     std::string lbl = boost::lexical_cast<std::string>(row_numbers[i]);
     scratch.reference(config.value<Array<double, 1> >("a" + lbl));
-    if(scratch.rows() != a.cols())
+    if(scratch.rows() != a_.cols())
       throw Exception("Coefficient is the wrong size");
-    a(i, ra) = scratch;
+    a_(i, ra) = scratch;
 
     scratch.reference(config.value<Array<double, 1> >("b" + lbl));
-    if(scratch.rows() != b.cols())
+    if(scratch.rows() != b_.cols())
       throw Exception("Coefficient is the wrong size");
-    b(i, ra) = scratch;
+    b_(i, ra) = scratch;
 
     scratch.reference(config.value<Array<double, 1> >("c" + lbl));
-    if(scratch.rows() != c.cols())
+    if(scratch.rows() != c_.cols())
       throw Exception("Coefficient is the wrong size");
-    c(i, ra) = scratch;
+    c_(i, ra) = scratch;
 
     scratch.reference(config.value<Array<double, 1> >("d" + lbl));
-    if(scratch.rows() != d.cols())
+    if(scratch.rows() != d_.cols())
       throw Exception("Coefficient is the wrong size");
-    d(i, ra) = scratch;
+    d_(i, ra) = scratch;
   }
 }
 
@@ -90,8 +90,8 @@ void MspiParaxialTransform::paraxial_to_real
     throw e;
   }
   int index = row_to_index.find(Row_number)->second;
-  Array<double, 1> cf = c(index, ra);
-  Array<double, 1> df = d(index, ra);
+  Array<double, 1> cf = c_(index, ra);
+  Array<double, 1> df = d_(index, ra);
 
   double xf = Paraxial_x;
   double yf = Paraxial_y;
@@ -142,8 +142,8 @@ void MspiParaxialTransform::paraxial_to_real
     throw e;
   }
   int index = row_to_index.find(Row_number)->second;
-  Array<double, 1> cf = c(index, ra);
-  Array<double, 1> df = d(index, ra);
+  Array<double, 1> cf = c_(index, ra);
+  Array<double, 1> df = d_(index, ra);
 
   AutoDerivative<double> xf = Paraxial_x;
   AutoDerivative<double> yf = Paraxial_y;
@@ -196,8 +196,8 @@ void MspiParaxialTransform::real_to_paraxial
     throw e;
   }
   int index = row_to_index.find(Row_number)->second;
-  Array<double, 1> af = a(index, ra);
-  Array<double, 1> bf = b(index, ra);
+  Array<double, 1> af = a_(index, ra);
+  Array<double, 1> bf = b_(index, ra);
 
   double xfp = Real_x;
   double yfp = Real_y;
@@ -233,8 +233,8 @@ void MspiParaxialTransform::real_to_paraxial
     throw e;
   }
   int index = row_to_index.find(Row_number)->second;
-  Array<double, 1> af = a(index, ra);
-  Array<double, 1> bf = b(index, ra);
+  Array<double, 1> af = a_(index, ra);
+  Array<double, 1> bf = b_(index, ra);
 
   AutoDerivative<double> xfp = Real_x;
   AutoDerivative<double> yfp = Real_y;

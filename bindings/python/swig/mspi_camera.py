@@ -434,6 +434,20 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
       self._v_parameter_mask(value)
 
 
+    def _v_paraxial_transform(self):
+        """
+
+        boost::shared_ptr<MspiParaxialTransform> GeoCal::MspiCamera::paraxial_transform() const
+        Paraxial transform. 
+        """
+        return _mspi_camera.MspiCamera__v_paraxial_transform(self)
+
+
+    @property
+    def paraxial_transform(self):
+        return self._v_paraxial_transform()
+
+
     def angular_separation(self, Reference_band, Target_band):
         """
 
@@ -502,6 +516,7 @@ MspiCamera._v_roll_with_derivative = new_instancemethod(_mspi_camera.MspiCamera_
 MspiCamera._v_boresight_angle = new_instancemethod(_mspi_camera.MspiCamera__v_boresight_angle, None, MspiCamera)
 MspiCamera._v_inversion = new_instancemethod(_mspi_camera.MspiCamera__v_inversion, None, MspiCamera)
 MspiCamera._v_parameter_mask = new_instancemethod(_mspi_camera.MspiCamera__v_parameter_mask, None, MspiCamera)
+MspiCamera._v_paraxial_transform = new_instancemethod(_mspi_camera.MspiCamera__v_paraxial_transform, None, MspiCamera)
 MspiCamera.angular_separation = new_instancemethod(_mspi_camera.MspiCamera_angular_separation, None, MspiCamera)
 MspiCamera.paraxial_offset = new_instancemethod(_mspi_camera.MspiCamera_paraxial_offset, None, MspiCamera)
 MspiCamera.row_number = new_instancemethod(_mspi_camera.MspiCamera_row_number, None, MspiCamera)

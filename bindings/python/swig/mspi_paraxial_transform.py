@@ -265,6 +265,62 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
         return _mspi_paraxial_transform.MspiParaxialTransform_has_row(self, Row_number)
 
 
+    def _v_a(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::MspiParaxialTransform::a() const
+        Parameters for Paraxial transform. 
+        """
+        return _mspi_paraxial_transform.MspiParaxialTransform__v_a(self)
+
+
+    @property
+    def a(self):
+        return self._v_a()
+
+
+    def _v_b(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::MspiParaxialTransform::b() const
+
+        """
+        return _mspi_paraxial_transform.MspiParaxialTransform__v_b(self)
+
+
+    @property
+    def b(self):
+        return self._v_b()
+
+
+    def _v_c(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::MspiParaxialTransform::c() const
+
+        """
+        return _mspi_paraxial_transform.MspiParaxialTransform__v_c(self)
+
+
+    @property
+    def c(self):
+        return self._v_c()
+
+
+    def _v_d(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::MspiParaxialTransform::d() const
+
+        """
+        return _mspi_paraxial_transform.MspiParaxialTransform__v_d(self)
+
+
+    @property
+    def d(self):
+        return self._v_d()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -274,6 +330,10 @@ MspiParaxialTransform.paraxial_to_real = new_instancemethod(_mspi_paraxial_trans
 MspiParaxialTransform.real_to_paraxial = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform_real_to_paraxial, None, MspiParaxialTransform)
 MspiParaxialTransform.has_row = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform_has_row, None, MspiParaxialTransform)
 MspiParaxialTransform.__str__ = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform___str__, None, MspiParaxialTransform)
+MspiParaxialTransform._v_a = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform__v_a, None, MspiParaxialTransform)
+MspiParaxialTransform._v_b = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform__v_b, None, MspiParaxialTransform)
+MspiParaxialTransform._v_c = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform__v_c, None, MspiParaxialTransform)
+MspiParaxialTransform._v_d = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform__v_d, None, MspiParaxialTransform)
 MspiParaxialTransform_swigregister = _mspi_paraxial_transform.MspiParaxialTransform_swigregister
 MspiParaxialTransform_swigregister(MspiParaxialTransform)
 

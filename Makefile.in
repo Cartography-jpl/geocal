@@ -1386,6 +1386,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	@srcsupport@/geocal_serialize_function.h \
+	@srcsupport@/geocal_serialize_support.h \
+	@srcsupport@/blitz_array_serialize_support.h \
 	@srcsupport@/geocal_fftw.h @srcsupport@/hdf_file.h \
 	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
@@ -2065,8 +2067,6 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	$(am__append_9) @srcsdbx@/README @srcsdbx@/StorageConcepts.txt \
 	@libgeocal@/dummy.pdf @libgeocal@/geocal_doxygen.h \
 	@srcsupport@/unit_test_support.h @srcsupport@/global_fixture.h \
-	@srcsupport@/geocal_serialize_support.h \
-	@srcsupport@/blitz_array_serialize_support.h \
 	@srcinterface@/matcher_fixture.h $(patsubst %_wrap.cc, %.py, \
 	$(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h \
@@ -2582,7 +2582,9 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/geocal_gsl_root.h @srcsupport@/geocal_time.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
-	@srcsupport@/geocal_serialize_function.h $(am__append_15) \
+	@srcsupport@/geocal_serialize_function.h \
+	@srcsupport@/geocal_serialize_support.h \
+	@srcsupport@/blitz_array_serialize_support.h $(am__append_15) \
 	$(am__append_17) @srcinterface@/raster_image.h \
 	@srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \

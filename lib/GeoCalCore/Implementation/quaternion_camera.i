@@ -68,6 +68,16 @@ public:
   virtual FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
 		   int Band) const;
+  virtual FrameCoordinate focal_plane_to_fc(int Band, double Xfp, double Yfp)
+    const;
+  virtual FrameCoordinateWithDerivative focal_plane_to_fc
+  (int Band, const AutoDerivative<double>& Xfp,
+   const AutoDerivative<double>& Yfp) const;
+  virtual void fc_to_focal_plane(const FrameCoordinate& Fc, int Band,
+				 double& OUTPUT, double& OUTPUT) const;
+  virtual void fc_to_focal_plane(const FrameCoordinateWithDerivative& Fc,
+    int Band,
+    AutoDerivative<double>& OUTPUT, AutoDerivative<double>& OUTPUT) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
   virtual ScLookVectorWithDerivative 
@@ -87,21 +97,20 @@ public:
   void fit_principal_point_line(bool V, int Band = 0);
   bool fit_principal_point_sample(int Band = 0) const;
   void fit_principal_point_sample(bool V, int Band = 0);
-protected:
-  QuaternionCamera();
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<double>& Dcs,
-				  double& Xfp, double& Yfp) const;
+				  double& OUTPUT, double& OUTPUT) const;
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<AutoDerivative<double> >& Dcs,
-				  AutoDerivative<double>& Xfp, 
-				  AutoDerivative<double>& Yfp) const;
+				  AutoDerivative<double>& OUTPUT, 
+				  AutoDerivative<double>& OUTPUT) const;
   virtual boost::math::quaternion<double> 
   focal_plane_to_dcs(int Band, double Xfp, double Yfp) const;
   virtual boost::math::quaternion<AutoDerivative<double> > 
   focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
 		     const AutoDerivative<double>& Yfp) const;
-
+protected:
+  QuaternionCamera();
   %pickle_serialization()
 };
 }

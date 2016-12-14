@@ -101,19 +101,7 @@ FrameCoordinate QuaternionCamera::frame_coordinate(const ScLookVector& Sl,
     conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
   double xfp, yfp;
   dcs_to_focal_plane(Band, dcs, xfp, yfp);
-  FrameCoordinate fc;
-  if(frame_convention_ == LINE_IS_Y) {
-    fc.sample = principal_point(Band).sample + 
-      xfp / sample_pitch() * samp_dir();
-    fc.line = principal_point(Band).line +
-      yfp / line_pitch() * line_dir();
-  } else {
-    fc.sample = principal_point(Band).sample +
-      yfp / sample_pitch() * samp_dir();
-    fc.line = principal_point(Band).line +
-      xfp / line_pitch() * line_dir();
-  }
-  return fc;
+  return focal_plane_to_fc(Band, xfp, yfp);
 }
 
 FrameCoordinateWithDerivative QuaternionCamera::frame_coordinate_with_derivative
@@ -128,19 +116,7 @@ FrameCoordinateWithDerivative QuaternionCamera::frame_coordinate_with_derivative
     frame_to_sc_with_derivative();
   AutoDerivative<double> xfp, yfp;
   dcs_to_focal_plane(Band, dcs, xfp, yfp);
-  FrameCoordinateWithDerivative fc;
-  if(frame_convention_ == LINE_IS_Y) {
-    fc.sample = principal_point_with_derivative(Band).sample + 
-      xfp / sample_pitch_with_derivative() * samp_dir();
-    fc.line = principal_point_with_derivative(Band).line +
-      yfp / line_pitch_with_derivative() * line_dir();
-  } else {
-    fc.sample = principal_point_with_derivative(Band).sample +
-      yfp / sample_pitch_with_derivative() * samp_dir();
-    fc.line = principal_point_with_derivative(Band).line +
-      xfp / line_pitch_with_derivative() * line_dir();
-  }
-  return fc;
+  return focal_plane_to_fc(Band, xfp, yfp);
 }
 
 //-----------------------------------------------------------------------
@@ -156,17 +132,7 @@ DcsLookVector QuaternionCamera::dcs_look_vector(const FrameCoordinate& F,
 {
   range_check(Band, 0, number_band());
   double xfp, yfp;
-  if(frame_convention_ == LINE_IS_Y) {
-    xfp = (F.sample - principal_point(Band).sample) * sample_pitch() * 
-      samp_dir();
-    yfp = (F.line - principal_point(Band).line) * line_pitch()
-      * line_dir();
-  } else {
-    yfp = (F.sample - principal_point(Band).sample) * sample_pitch() * 
-      samp_dir();
-    xfp = (F.line - principal_point(Band).line) * line_pitch()
-      * line_dir();
-  }
+  fc_to_focal_plane(F, Band, xfp, yfp);
   return DcsLookVector(focal_plane_to_dcs(Band, xfp, yfp));
 }
 
@@ -176,18 +142,98 @@ QuaternionCamera::dcs_look_vector(const FrameCoordinateWithDerivative& F,
 {
   range_check(Band, 0, number_band());
   AutoDerivative<double> xfp, yfp;
+  fc_to_focal_plane(F, Band, xfp, yfp);
+  return DcsLookVectorWithDerivative(focal_plane_to_dcs(Band, xfp, yfp));
+}
+
+//-----------------------------------------------------------------------
+/// Convert focal plane coordinates to FrameCoordinate
+//-----------------------------------------------------------------------
+
+FrameCoordinate QuaternionCamera::focal_plane_to_fc(int Band, double Xfp,
+						    double Yfp) const
+{
+  range_check(Band, 0, number_band());
+  FrameCoordinate fc;
   if(frame_convention_ == LINE_IS_Y) {
-    xfp = (F.sample - principal_point_with_derivative(Band).sample) * 
+    fc.sample = principal_point(Band).sample + 
+      Xfp / sample_pitch() * samp_dir();
+    fc.line = principal_point(Band).line +
+      Yfp / line_pitch() * line_dir();
+  } else {
+    fc.sample = principal_point(Band).sample +
+      Yfp / sample_pitch() * samp_dir();
+    fc.line = principal_point(Band).line +
+      Xfp / line_pitch() * line_dir();
+  }
+  return fc;
+}
+
+//-----------------------------------------------------------------------
+/// Convert focal plane coordinates to FrameCoordinateWithDerivative
+//-----------------------------------------------------------------------
+
+FrameCoordinateWithDerivative QuaternionCamera::focal_plane_to_fc
+(int Band, const AutoDerivative<double>& Xfp,
+ const AutoDerivative<double>& Yfp) const
+{
+  range_check(Band, 0, number_band());
+  FrameCoordinateWithDerivative fc;
+  if(frame_convention_ == LINE_IS_Y) {
+    fc.sample = principal_point_with_derivative(Band).sample + 
+      Xfp / sample_pitch_with_derivative() * samp_dir();
+    fc.line = principal_point_with_derivative(Band).line +
+      Yfp / line_pitch_with_derivative() * line_dir();
+  } else {
+    fc.sample = principal_point_with_derivative(Band).sample +
+      Yfp / sample_pitch_with_derivative() * samp_dir();
+    fc.line = principal_point_with_derivative(Band).line +
+      Xfp / line_pitch_with_derivative() * line_dir();
+  }
+  return fc;
+}
+  
+//-----------------------------------------------------------------------
+/// Convert FrameCoordinate to focal plane coordinates.
+//-----------------------------------------------------------------------
+
+void QuaternionCamera::fc_to_focal_plane(const FrameCoordinate& Fc, int Band,
+					 double& Xfp, double& Yfp) const
+{
+  range_check(Band, 0, number_band());
+  if(frame_convention_ == LINE_IS_Y) {
+    Xfp = (Fc.sample - principal_point(Band).sample) * sample_pitch() * 
+      samp_dir();
+    Yfp = (Fc.line - principal_point(Band).line) * line_pitch()
+      * line_dir();
+  } else {
+    Yfp = (Fc.sample - principal_point(Band).sample) * sample_pitch() * 
+      samp_dir();
+    Xfp = (Fc.line - principal_point(Band).line) * line_pitch()
+      * line_dir();
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Convert FrameCoordinateWithDerivative to focal plane coordinates.
+//-----------------------------------------------------------------------
+
+void QuaternionCamera::fc_to_focal_plane
+(const FrameCoordinateWithDerivative& Fc, int Band,
+ AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
+{
+  range_check(Band, 0, number_band());
+  if(frame_convention_ == LINE_IS_Y) {
+    Xfp = (Fc.sample - principal_point_with_derivative(Band).sample) * 
       sample_pitch_with_derivative() * samp_dir();
-    yfp = (F.line - principal_point_with_derivative(Band).line) * 
+    Yfp = (Fc.line - principal_point_with_derivative(Band).line) * 
       line_pitch_with_derivative() * line_dir();
   } else {
-    yfp = (F.sample - principal_point_with_derivative(Band).sample) * 
+    Yfp = (Fc.sample - principal_point_with_derivative(Band).sample) * 
       sample_pitch_with_derivative() * samp_dir();
-    xfp = (F.line - principal_point_with_derivative(Band).line) * 
+    Xfp = (Fc.line - principal_point_with_derivative(Band).line) * 
       line_pitch_with_derivative() * line_dir();
   }
-  return DcsLookVectorWithDerivative(focal_plane_to_dcs(Band, xfp, yfp));
 }
 
 //-----------------------------------------------------------------------

@@ -219,6 +219,18 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     increasing line go in the positive direction or negative direction.
     Likewise for sample.
 
+    The conversion goes:
+
+    FrameCoordinate -> focal plane xfp, yfp -> DcsLookVector ->
+    ScLookVector
+
+    The focal plane coordinates are on the actual CCD (so offset from an
+    origin in mm). The conversion to DcsLookVector capture any non-
+    linearity, if gives the look version in the detector coordinate system
+    for the given location on the focal plane. The conversion to
+    ScLookVector captures the angle orientation of the camera relative to
+    the space craft.
+
     C++ includes: quaternion_camera.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -520,6 +532,26 @@ class QuaternionCamera(geocal_swig.camera.Camera):
       self._v_euler_with_derivative(value)
 
 
+    def focal_plane_to_fc(self, *args):
+        """
+
+        FrameCoordinateWithDerivative QuaternionCamera::focal_plane_to_fc(int Band, const AutoDerivative< double > &Xfp, const AutoDerivative<
+        double > &Yfp) const
+        Convert focal plane coordinates to FrameCoordinateWithDerivative. 
+        """
+        return _quaternion_camera.QuaternionCamera_focal_plane_to_fc(self, *args)
+
+
+    def fc_to_focal_plane(self, *args):
+        """
+
+        void QuaternionCamera::fc_to_focal_plane(const FrameCoordinateWithDerivative &Fc, int Band, AutoDerivative<
+        double > &Xfp, AutoDerivative< double > &Yfp) const
+        Convert FrameCoordinateWithDerivative to focal plane coordinates. 
+        """
+        return _quaternion_camera.QuaternionCamera_fc_to_focal_plane(self, *args)
+
+
     def sc_look_vector(self, *args):
         """
 
@@ -664,6 +696,27 @@ class QuaternionCamera(geocal_swig.camera.Camera):
         return _quaternion_camera.QuaternionCamera_fit_principal_point_sample(self, *args)
 
 
+    def dcs_to_focal_plane(self, *args):
+        """
+
+        void QuaternionCamera::dcs_to_focal_plane(int Band, const boost::math::quaternion< AutoDerivative< double > >
+        &Dcs, AutoDerivative< double > &Xfp, AutoDerivative< double > &Yfp)
+        const
+
+        """
+        return _quaternion_camera.QuaternionCamera_dcs_to_focal_plane(self, *args)
+
+
+    def focal_plane_to_dcs(self, *args):
+        """
+
+        boost::math::quaternion< AutoDerivative< double > > QuaternionCamera::focal_plane_to_dcs(int Band, const AutoDerivative< double > &Xfp, const AutoDerivative<
+        double > &Yfp) const
+
+        """
+        return _quaternion_camera.QuaternionCamera_focal_plane_to_dcs(self, *args)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -697,6 +750,8 @@ QuaternionCamera._v_ypr = new_instancemethod(_quaternion_camera.QuaternionCamera
 QuaternionCamera._v_ypr_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_ypr_with_derivative, None, QuaternionCamera)
 QuaternionCamera._v_euler = new_instancemethod(_quaternion_camera.QuaternionCamera__v_euler, None, QuaternionCamera)
 QuaternionCamera._v_euler_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_euler_with_derivative, None, QuaternionCamera)
+QuaternionCamera.focal_plane_to_fc = new_instancemethod(_quaternion_camera.QuaternionCamera_focal_plane_to_fc, None, QuaternionCamera)
+QuaternionCamera.fc_to_focal_plane = new_instancemethod(_quaternion_camera.QuaternionCamera_fc_to_focal_plane, None, QuaternionCamera)
 QuaternionCamera.sc_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_sc_look_vector, None, QuaternionCamera)
 QuaternionCamera.dcs_look_vector = new_instancemethod(_quaternion_camera.QuaternionCamera_dcs_look_vector, None, QuaternionCamera)
 QuaternionCamera._v_fit_epsilon = new_instancemethod(_quaternion_camera.QuaternionCamera__v_fit_epsilon, None, QuaternionCamera)
@@ -707,6 +762,8 @@ QuaternionCamera._v_fit_sample_pitch = new_instancemethod(_quaternion_camera.Qua
 QuaternionCamera._v_fit_focal_length = new_instancemethod(_quaternion_camera.QuaternionCamera__v_fit_focal_length, None, QuaternionCamera)
 QuaternionCamera.fit_principal_point_line = new_instancemethod(_quaternion_camera.QuaternionCamera_fit_principal_point_line, None, QuaternionCamera)
 QuaternionCamera.fit_principal_point_sample = new_instancemethod(_quaternion_camera.QuaternionCamera_fit_principal_point_sample, None, QuaternionCamera)
+QuaternionCamera.dcs_to_focal_plane = new_instancemethod(_quaternion_camera.QuaternionCamera_dcs_to_focal_plane, None, QuaternionCamera)
+QuaternionCamera.focal_plane_to_dcs = new_instancemethod(_quaternion_camera.QuaternionCamera_focal_plane_to_dcs, None, QuaternionCamera)
 QuaternionCamera_swigregister = _quaternion_camera.QuaternionCamera_swigregister
 QuaternionCamera_swigregister(QuaternionCamera)
 

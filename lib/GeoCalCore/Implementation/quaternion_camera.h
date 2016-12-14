@@ -34,6 +34,18 @@ namespace GeoCal {
   In addition to either x or y direction for line, we can have
   increasing line go in the positive direction or negative direction.
   Likewise for sample.
+
+  The conversion goes:
+
+  FrameCoordinate -> focal plane xfp, yfp -> DcsLookVector ->
+     ScLookVector
+
+  The focal plane coordinates are on the actual CCD (so offset from an
+  origin in mm). The conversion to DcsLookVector capture any
+  non-linearity, if gives the look version in the detector coordinate
+  system for the given location on the focal plane. The conversion to
+  ScLookVector captures the angle orientation of the camera relative
+  to the space craft.
 *******************************************************************/
 class QuaternionCamera : public Camera {
 public:
@@ -429,7 +441,19 @@ public:
   virtual FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
 				   int Band) const;
+  virtual FrameCoordinate focal_plane_to_fc(int Band, double Xfp, double Yfp)
+    const;
+  virtual FrameCoordinateWithDerivative focal_plane_to_fc
+  (int Band, const AutoDerivative<double>& Xfp,
+   const AutoDerivative<double>& Yfp) const;
+  virtual void fc_to_focal_plane(const FrameCoordinate& Fc, int Band,
+				 double& Xfp, double& Yfp) const;
+  virtual void fc_to_focal_plane
+  (const FrameCoordinateWithDerivative& Fc, int Band,
+   AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const;
 
+  
+  
 //-----------------------------------------------------------------------
 /// Convert Spacecraft look vector to the look vector in Detector
 /// Coordinate System.
@@ -540,12 +564,6 @@ public:
   void fit_principal_point_sample(bool V, int Band = 0)
   {range_check(Band,0, number_band());
     parameter_mask_(7 + 2 * Band) = V;}
-protected:
-//-----------------------------------------------------------------------
-// Constructor for use by derived classes. Derived classes should make
-// sure to fill in all the values
-//-----------------------------------------------------------------------
-  QuaternionCamera() {}
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<double>& Dcs,
 				  double& Xfp, double& Yfp) const;
@@ -558,6 +576,12 @@ protected:
   virtual boost::math::quaternion<AutoDerivative<double> > 
   focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
 		     const AutoDerivative<double>& Yfp) const;
+protected:
+//-----------------------------------------------------------------------
+// Constructor for use by derived classes. Derived classes should make
+// sure to fill in all the values
+//-----------------------------------------------------------------------
+  QuaternionCamera() {}
   AutoDerivative<double> focal_length_;	
 				// Focal length, in mm.
   int nband_;			// Number of bands in camera.

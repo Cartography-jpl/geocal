@@ -23,6 +23,7 @@ h5py
 sphinx
 pytest
 pytest-xdist
+pytest-cov
 ipython
 jupyter
 scikit-umfpack

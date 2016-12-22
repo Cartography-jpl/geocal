@@ -140,6 +140,22 @@ if test "$with_boost_serialization" = "yes"; then
 fi
 
 #=================================================================
+# Option to include code coverage in unit test runs.
+
+AC_ARG_ENABLE([code_coverage],
+	AS_HELP_STRING([-enable-code-coverage],
+	[Add code coverage to unit tests. If you do this, you almost certainly also want --enable-debug, since the optimizer can combine lines or skip lines of code that actually get executed.]),
+[if test "$enableval" = yes; then
+    AC_MSG_RESULT([yes])
+    code_coverage=yes
+ fi
+],
+[ AC_MSG_RESULT([no])
+ code_coverage=no
+])
+AM_CONDITIONAL([WITH_CODE_COVERAGE], [test x$code_coverage = xyes])
+
+#=================================================================
 # Option to bypass running doxygen to update documentation. This is useful
 # for a build environment that is used for development, but you'll want all
 # of your "real" build environments to also update the documentation.

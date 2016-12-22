@@ -58,7 +58,9 @@ libgeocal_la_SOURCES+= @srcsupport@/statistic.cc
 geocalinc_HEADERS+= @srcsupport@/statistic.h
 geocalinc_HEADERS+=@srcsupport@/geocal_serialize_function.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_serialize_function.cc
+geocalinc_HEADERS+=@srcsupport@/geocal_serialize_support.h
 libgeocal_la_SOURCES+= @srcsupport@/blitz_array_serialize_support.cc
+geocalinc_HEADERS+=@srcsupport@/blitz_array_serialize_support.h
 if HAVE_FFTW
 geocalinc_HEADERS+= @srcsupport@/geocal_fftw.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_fftw.cc
@@ -113,8 +115,6 @@ geocalswiginc_HEADERS += @srcsupport@/hdf_file.i
 # Test files
 EXTRA_DIST += @srcsupport@/unit_test_support.h
 EXTRA_DIST += @srcsupport@/global_fixture.h
-EXTRA_DIST += @srcsupport@/geocal_serialize_support.h
-EXTRA_DIST += @srcsupport@/blitz_array_serialize_support.h
 geocal_test_all_SOURCES += @srcsupport@/global_fixture.cc
 geocal_test_all_SOURCES += @srcsupport@/global_fixture_default.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_exception_test.cc 

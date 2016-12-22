@@ -639,6 +639,8 @@ BUILD_AFIDS_FALSE
 BUILD_AFIDS_TRUE
 WITH_DOCUMENTATION_FALSE
 WITH_DOCUMENTATION_TRUE
+WITH_CODE_COVERAGE_FALSE
+WITH_CODE_COVERAGE_TRUE
 LIBM
 IS_MAC64_FALSE
 IS_MAC64_TRUE
@@ -1018,6 +1020,7 @@ with_carto
 with_python
 with_swig
 with_boost_serialization
+enable_code_coverage
 with_documentation
 '
       ac_precious_vars='build_alias
@@ -1702,6 +1705,10 @@ Optional Features:
                           optimize for fast installation [default=yes]
   --disable-libtool-lock  avoid locking (might break parallel builds)
   --enable-debug          Enable compiler debugging flags
+  -enable-code-coverage   Add code coverage to unit tests. If you do this, you
+                          almost certainly also want --enable-debug, since the
+                          optimizer can combine lines or skip lines of code
+                          that actually get executed.
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -24193,6 +24200,33 @@ $as_echo "#define GEOCAL_HAVE_BOOST_SERIALIZATION /**/" >>confdefs.h
 fi
 
 #=================================================================
+# Option to include code coverage in unit test runs.
+
+# Check whether --enable-code_coverage was given.
+if test "${enable_code_coverage+set}" = set; then :
+  enableval=$enable_code_coverage; if test "$enableval" = yes; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+    code_coverage=yes
+ fi
+
+else
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+ code_coverage=no
+
+fi
+
+ if test x$code_coverage = xyes; then
+  WITH_CODE_COVERAGE_TRUE=
+  WITH_CODE_COVERAGE_FALSE='#'
+else
+  WITH_CODE_COVERAGE_TRUE='#'
+  WITH_CODE_COVERAGE_FALSE=
+fi
+
+
+#=================================================================
 # Option to bypass running doxygen to update documentation. This is useful
 # for a build environment that is used for development, but you'll want all
 # of your "real" build environments to also update the documentation.
@@ -24644,6 +24678,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${IS_MAC64_TRUE}" && test -z "${IS_MAC64_FALSE}"; then
   as_fn_error $? "conditional \"IS_MAC64\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${WITH_CODE_COVERAGE_TRUE}" && test -z "${WITH_CODE_COVERAGE_FALSE}"; then
+  as_fn_error $? "conditional \"WITH_CODE_COVERAGE\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${WITH_DOCUMENTATION_TRUE}" && test -z "${WITH_DOCUMENTATION_FALSE}"; then

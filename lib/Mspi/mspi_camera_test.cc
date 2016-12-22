@@ -296,7 +296,6 @@ BOOST_AUTO_TEST_CASE(serialization)
     }
   }
 }
-
 BOOST_AUTO_TEST_CASE(jac_test)
 {
   // Compare finite difference jacobian to what we calculate using

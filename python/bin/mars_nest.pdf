@@ -25,99 +25,171 @@ parm useproj type=string count=1 default=""
 parm userefproj type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC
 .TITLE
-Mars correct image
+Mars_Nest
 .HELP
-This imports the 2 images into VICAR, resamples the reference image to
-the same projection as the second image, and then uses the reference
-image to correct the second image. The images are resampled both to the
-resolution of the original image as well as the reference image. Names
-for the resolution can be anything you like, e.g., "5m", "res1". It is
-used for form the output name.
+mars_nest co-registers two mars orbital images with map/georeferences.
+The two input images are imported into VICAR using GDAL, and the out-
+put is VICAR-GT (georeferenced) which can be converted (separately) to
+GeoTIFF or other user-desired format. The first image is the Reference
+to which the Second image will be co-registered/warped. If the pixel
+resolutions are not the same, the Reference image should be the lower
+resolution of the two images. The default is for the output to assume
+the Second image's projection although this can be changed via the
+"userefproj" parameter. The images are resampled and output at both the
+resolution of the Second image as well as the Reference image. Output
+filenames are created by the program using the user-supplied
+"refbase" and "refresname" parameters, and then "imgbase" and
+"imgresname" parameters. The warped Second image output has the
+additional suffix "corr" added to the filename. All the output files
+are provided as VICAR-GT ".img" files. The resolution name parameters 
+(refresname/imgresname) can be any text, e.g., "5m", "res1", but they
+must be different text if the resolutions are different.
 
-We name the images by the base names. So for example:
+Example filenames:
+ mars_nest  refimg=P14_006644_1747_XI_05S222W_8bit.tif +
+            refbase=ctx refres=5m +
+            img=ESP_025012_1745_RED_8bitrender.tif +
+            imgbase=hirise imgres=0.25m
+Would result in: ctx_5m.img ctx_0.25m.img hirise_corr_5m.img and 
+hirise_corr_0.25m.img
 
-  mars_nest P14_006644_1747_XI_05S222W_8bit.tif ctx 5m \
-      ESP_025012_1745_RED_8bitrender.tif hirise 0.25m
+General usage example:
+parm input1 string def="h1154_0000.nd4.53_hrsc_stereo.tif"
+parm input2 string def="h3663_0000.nd4.50_hrsc_sin.tif"
 
-Would result in ctx_5m.img ctx_0.25m.img hirise_corr_5m.img and 
-hirise_corr_0.25m.img.
+mars_nest   refimg=&input1 refbase=hrsc1154 refres=50m +
+            img=&input2 imgbase=hrsc3663 imgres=12m +
+            fftsize=256 fftgrid=(42,42) magnify=4 magmin=2 +
+            userefpr="y"
+xvd         (hrsc1154_50m.img,hrsc3663_corr_50m.img,hrsc3663_corr_50m.img)
+
+
 .LEVEL1
 .variable refimg
-Reference image to import into VICAR. Can be any file type GDAL
-can read (including VICAR).
+Reference image to import into
+VICAR. Can be any file type
+GDAL can read (or VICAR).
 .variable refbase
-Base name to use when forming the various reference image files.
+Name to use when forming the
+first part of the output
+Reference filename.
 .variable refresname
-Name for the original resolution, e.g., "5m", "res1". Used to form
-output file name.
+Name describing the original
+resolution of the Reference
+image, e.g., "5m", "res1".
+Used to form the second part of
+the output filename.
 .variable img
-Image to import into VICAR. Can be any file type GDAL
-can read (including VICAR).
+Second image to import into
+VICAR. It is the image that will
+be warped. Can be any file type
+GDAL can read (including VICAR).
 .variable imgbase
-Base name to use when forming the various image files.
+Name to use when forming the
+first part of the output Second
+filename.
 .variable imgresname
-Name for the original resolution, e.g., "5m", "res1". Used to form
-output file name.
+Name describing the original
+resolution of the Second image,
+e.g., "0.25m", "res2". Used to
+form the second part of the
+output filename.
 .VARIABLE autofit
-Set the FITMIN threshold automatically using the first n correlations.
+Sets the FITMIN threshold
+automatically using the first
+n correlations.
 .variable bandref
-The band number to use for the image we are correcting (if multiple 
-bands present)
+The band number to use if the
+input Reference image contains
+multiple bands.
+.variable bandimg
+The band number to use if the
+input Second image contains
+multiple bands.
 .variable fftsize
-FFT window size. Default should generally work, but sometimes you
-have a narrow overlap and need to settle for a smaller window so 
-you have enough imagery to match (e.g., very different matching size
-such as viking 232 meter data to 50 meter HRSC data).
+FFT window size. Default should
+generally work, but if the over-
+lap is very narrow, a smaller
+window will be needed. Or use a
+larger window if the two images
+have very different resolutions
+(e.g., Viking 232m vs 50m HRSC).
 .variable fftgrid
-How many FFT points to match, in line x sample order. Note that to
-pass this you need to use quotes, e.g., fftgrid="(42,42)".
+Grid dimensions of FFTs to match
+in line x sample order. Example:
+fftgrid=(42,42)
 .variable  hirisecorr
-Hirise imagery in equirectangular appears to have the 
-latitude_of_origin and standard_parallel_1 swapped, at least for
-some data. Not sure how to recognize this, and not sure if this
-always occurs. So this option turns on some heuristics to try to
-identify and correct this. If this is left off, we don't do this
+Hirise imagery in equirectan-
+gular projection appears to have
+the latitude_of_origin and
+standard_parallel_1 swapped for
+some cases. This option turns on
+heuristics to identify and
+correct the problem. Default is
+"n". Enter "y" to perform the
 correction.
 .variable magnify
-We initially magnify the area we try matching on, so we search in
-a larger area to get the initial match points. This gives that
-factor.
+Magnify the FFT size to search a
+larger area to obtain better
+initial match points. 1 means
+no magnification.
 .variable magmin
-Once we have a few points matched, we shrink the magnification factor
-we use on the window size to this value.
+Shrink the Magnify factor to
+this size after successful
+initial matching. Will increase
+the number of (smaller) FFTs
+fitting inside the image overlap
 .variable nah
-Number of grid cells in the sample direction to use warping final image.
+Number of grid cells in the
+Sample direction used for
+warping the final image.
 .variable nav
-Number of grid cells in the line direction to use warping final image.
+Number of grid cells in the Line
+direction used for warping the
+final image.
 .variable polyfit
-When warping the image to the reference image to correct it, we 
-can either use triangulation on each matched points, or we can
-constrain the mapping to a LINEAR, KEYSTONE, QUAD, or CUBIC 
-polynomial fit. See the VICAR Proc "tieconv" for more details on
-this.
+When warping the Second image to
+the Reference image, the default
+is to triangulate using each
+FFT match point. Optionally, the
+mapping can be constrained to a
+LINEAR, KEYSTONE, QUAD, or CUBIC
+polynomial fit. See the VICAR
+Proc "tieconv" for more details.
 .variable redo
-At the end of processing, this number of points will be redone.
+At the end of processing, this
+number of the first FFT match
+points will be redone.
 .variable seed
-Seed number to use when selecting points to match. Normally you don't
-need to modify this, but if you get bad accuracy results when doing
-a correction you can try selecting a different seed to a different
-set of match points are selected.
+Number that controls the
+positions of the first FFT
+match points. Use a different
+number if the first image 
+matching points results in poor
+registration accuracy.
 .variable thr_res
-Prevent offset correlations further than this value from the 
-predicted location from entering into the model fit of the 
-reference to image we are correcting. This is to prevent gross 
-blunders. Note that this is in the resolution of the reference 
-image (which is typically coarser).
+Prevent offset correlations
+further than this value from the
+predicted location from entering
+into the model fit. Prevents
+gross blunders. Note this is in
+the (lower) resolution of the
+Reference image.
 .variable toler
-Tolerance we use when rejected matched points as blunders. 
+Tolerance used to reject matched
+points as blunders. 
 .variable useproj
-The default is to leave the image in its original projection, so
-we try to minimize what we do with the image. However it can be
-useful to bring everything to a common projection. This option says
-to use the projection found in this file.
+Specifies an image with a
+projection georeference to be
+used for the output registered
+products instead of the pro-
+jection of the input Reference
+or Second images. Can be useful
+for bringing everything to a
+common projection.
 .variable userefproj
-The default is to leave the image in its original projection, so
-we try to minimize what we do with the image. However it can be
-useful to bring everything to a common projection. This option says
-to use the reference image projection rather than image projection.
+Use the input Reference image's
+projection for the output
+images instead of the default
+Second image's projection.
 .END

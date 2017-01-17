@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 #
-# This takes a pair of mars images and used the first to correct the
-# second
+# This takes a pair of mars map images and co-registers the second
+# image to the first.
+
 import osgeo.gdal as gdal
 import math
 import tempfile
@@ -12,119 +13,140 @@ from geocal import *
 
 version = "August 26,2016"
 usage='''Usage:
-  mars_correct_image [options] <ref_image> <ref_base_name> 
+  mars_nest [options] <ref_image> <ref_base_name> 
             <ref_image_resolution_name> <image> <image_base_name> 
             <image_resolution_name>
-  mars_correct_image -h | --help
-  mars_correct_image -v | --version
+  mars_nest -h | --help
+  mars_nest -v | --version
 
-This imports the 2 images into VICAR, resamples the reference image to
-the same projection as the second image, and then uses the reference
-image to correct the second image. The images are resampled both to the
-resolution of the original image as well as the reference image. Names
-for the resolution can be anything you like, e.g., "5m", "res1". It is
-used for form the output name.
+mars_nest co-registers two mars orbital images (with map/georeference).
+The two input images are imported into VICAR using GDAL, and the output
+is VICAR-GT (georeferenced) which can be converted (separately) to
+GeoTIFF or other user-desired format. The first image is the Reference
+to which the Second image will be co-registered/warped. If the pixel
+resolutions are not the same, the Reference image should be the lower
+resolution of the two images. The default is for the output to assume
+the Second image's projection although this can be changed via the
+"userefproj" parameter. The images are resampled and output at both the
+resolution of the Second image as well as the Reference image. Output
+filenames are created by the program using the user-supplied
+"refbase" and "refresname" parameters, and then "imgbase" and
+"imgresname" parameters. The warped Second image output has the
+additional suffix "corr" added to the filename. All the output files
+are provided as VICAR-GT ".img" files. The resolution name parameters 
+(refresname/imgresname) can be any text, e.g., "5m", "res1", but they
+must be different text if the resolutions are different.
 
-We name the images by the base names. So for example:
+Example filenames:
+ mars_nest  refimg=P14_006644_1747_XI_05S222W_8bit.tif +
+            refbase=ctx refres=5m +
+            img=ESP_025012_1745_RED_8bitrender.tif +
+            imgbase=hirise imgres=0.25m
+Would result in: ctx_5m.img ctx_0.25m.img hirise_corr_5m.img and 
+hirise_corr_0.25m.img
 
-  mars_correct_image P14_006644_1747_XI_05S222W_8bit.tif ctx 5m \
-      ESP_025012_1745_RED_8bitrender.tif hirise 0.25m
+General usage example:
+parm input1 string def="h1154_0000.nd4.53_hrsc_stereo.tif"
+parm input2 string def="h3663_0000.nd4.50_hrsc_sin.tif"
 
-Would result in ctx_5m.img ctx_0.25m.img hirise_corr_5m.img and 
-hirise_corr_0.25m.img.
+mars_nest   refimg=&input1 refbase=hrsc1154 refres=50m +
+            img=&input2 imgbase=hrsc3663 imgres=12m +
+            fftsize=256 fftgrid=(42,42) magnify=4 magmin=2 +
+            userefpr="y"
+xvd (hrsc1154_50m.img,hrsc3663_corr_50m.img,hrsc3663_corr_50m.img)
 
 Options:
   -h --help         
        Print this message
 
   --autofit=d
-       Set the FITMIN threshold automatically using the first n correlations.
-       [default: 14]
+       Sets the FITMIN threshold automatically using the first n
+       correlations. [default: 14]
 
   --band-ref=d
-       The band number to use for the reference image (if multiple bands 
-       present) [default: 1]
+       The band number to use if the input Reference image contains
+       multiple bands. [default: 1]
 
   --band-image=d
-       The band number to use for the image we are correcting (if multiple 
-       bands present) [default: 1]
+       The band number to use if the input Second image contains
+       multiple bands. [default: 1]
 
   --fftsize=d
-       FFT window size. Default should generally work, but sometimes you
-       have a narrow overlap and need to settle for a smaller window so 
-       you have enough imagery to match (e.g., very different matching size
-       such as viking 232 meter data to 50 meter HRSC data).
+       FFT window size. Default should generally work, but if the
+       overlap is very narrow, a smaller window will be needed. Or
+       use a larger window if the two images have very different
+       resolutions (e.g., Viking 232m vs 50m HRSC).
        [default: 256]
 
   --fftgrid=s
-       How many FFT points to match, in line x sample order. Note that to
-       pass this you need to use quotes, e.g., --fftgrid="(42,42)".
+       Grid dimensions of FFTs to match in line x sample order.
+       Note that to pass this you need to use quotes, e.g.,
+       --fftgrid="(42,42)".
        [default: (42, 42)]
 
   --hirise-correction
-       Hirise imagery in equirectangular appears to have the 
-       latitude_of_origin and standard_parallel_1 swapped, at least for
-       some data. Not sure how to recognize this, and not sure if this
-       always occurs. So this option turns on some heuristics to try to
-       identify and correct this. If this is left off, we don't do this
-       correction.
+       Hirise imagery in equirectangular projection appears to have
+       the latitude_of_origin and standard_parallel_1 swapped for some
+       cases. This option turns on heuristics to identify and correct
+       the problem. Specify this parameter to turn on the heuristics.
 
   --magnify=f
-       We initially magnify the area we try matching on, so we search in
-       a larger area to get the initial match points. This gives that
-       factor. [default: 4.0]
+       Magnify the FFT size to search a larger area to obtain better
+       initial match points. 1.0 means no magnification.
+       [default: 4.0]
 
    --magmin=f
-       Once we have a few points matched, we shrink the magnification factor
-       we use on the window size to this value. [default: 2.0]
+       Shrink the Magnify factor to this size after successful initial
+       matching. Will increase the number of (smaller) FFTs fitting
+       inside the image overlap.
+       [default: 2.0]
 
   --nah=d
-       Number of grid cells in the sample direction to use warping final image.
-       [default: 1000]
+       Number of grid cells in the Sample direction used for warping
+       the final image. [default: 1000]
 
   --nav=d
-       Number of grid cells in the line direction to use warping final image.
-       [default: 1000]
+       Number of grid cells in the Line direction used for warping
+       the final image. [default: 1000]
 
   --polyfit=s
-        When warping the image to the reference image to correct it, we 
-        can either use triangulation on each matched points, or we can
-        constrain the mapping to a LINEAR, KEYSTONE, QUAD, or CUBIC 
-        polynomial fit. See the VICAR Proc "tieconv" for more details on
-        this. [default: ]
+        When warping the Second image to the Reference image, the
+        default is to triangulate using each FFT match point.
+        Optionally, the mapping can be constrained to a LINEAR,
+        KEYSTONE, QUAD, or CUBIC polynomial fit. See the VICAR Proc
+        "tieconv" for more details.
+        [default: ]
 
   --redo=d
-       At the end of processing, this number of points will be redone.
+       At the end of processing, this number of the first FFT match
+       points will be redone.
        [default: 36]   
 
   --seed=d
-       Seed number to use when selecting points to match. Normally you don't
-       need to modify this, but if you get bad accuracy results when doing
-       a correction you can try selecting a different seed to a different
-       set of match points are selected. [default: 562]
+       Number that controls the positions of the first FFT match
+       points. Use a different number if the first image matching
+       points result in poor registration accuracy.
+       [default: 562]
    
   --thr-res=f
-       Prevent offset correlations further than this value from the 
-       predicted location from entering into the model fit of the 
-       reference to image we are correcting. This is to prevent gross 
-       blunders. Note that this is in the resolution of the reference 
-       image (which is typically coarser). [default: 10.0]
+       Prevent offset correlations further than this value from the
+       predicted location from entering into the model fit. Prevents
+       gross blunders. Note this is in the (lower) resolution of the
+       Reference image. [default: 10.0]
 
   --toler=f
-       Tolerance we use when rejected matched points as blunders. 
+       Tolerance used to reject matched points as blunders.
        [default: 1.5]
 
   --use-projection=f
-       The default is to leave the image in its original projection, so
-       we try to minimize what we do with the image. However it can be
-       useful to bring everything to a common projection. This option says
-       to use the projection found in this file.
+       Specifies an image with a projection georeference to be used
+       for the output registered products instead of the pro-
+       jection of the input Reference or Second images. Can be useful
+       for bringing everything to a common projection.
 
   --use-ref-image-projection
-       The default is to leave the image in its original projection, so
-       we try to minimize what we do with the image. However it can be
-       useful to bring everything to a common projection. This option says
-       to use the reference image projection rather than image projection.
+       Use the input Reference image's projection for the output
+       images instead of the default Second image's projection.
 
   -v --version      
        Print program version
@@ -156,8 +178,8 @@ def run_cmd(cmd):
 # We probably want to add a little bit of padding, but skip that for now.
 
 def resample_proj(fin, fref, fout, resize=False, fit_fref = True):
-    '''Project fin to same projection as fref. If resize if False, 
-    leave fin in whatever its original resolution is. If resize it 
+    '''Project fin to same projection as fref. If resize is False, 
+    leave fin in whatever its original resolution is. If resize is 
     True, also resize to the same resolution as fref.'''
     d = gdal.Open(fref, gdal.GA_ReadOnly)
     g = d.GetGeoTransform()
@@ -186,7 +208,7 @@ def resample_proj(fin, fref, fout, resize=False, fit_fref = True):
         run_cmd(cmd)
 
 def check_same_projection(f1, f2):
-    '''Check  that the 2 images have identical projection and resolution.'''
+    '''Check that the 2 images have identical projection and resolution.'''
     gf1 = GdalRasterImage(f1)
     gf2 = GdalRasterImage(f2)
     if(not gf1.map_info.coordinate_converter.is_same(gf2.map_info.coordinate_converter)):
@@ -212,7 +234,7 @@ def import_file(fin, fout):
     cmd = ["gdal_translate", "-of", "VICAR", "-ot", "Int16", fin, fout]
     run_cmd(cmd)
 
-# Not sure about triangulation. Maybe try quad
+# Not sure about triangulation. Maybe try quad.
 def gtpwarp(fin, fref, fref_res, fout):
     '''gtpwarp, using Tom's usual parameters.'''
     cmd = ["vicarb", "gtpwarp", fin, fout, fref, fref_res,
@@ -243,7 +265,7 @@ def gtpwarp(fin, fref, fref_res, fout):
     t.close()
 
 def accck(fin,fref):
-    '''Run accuracy check. We assume stuff in is in the same projection
+    '''Run accuracy check. We assume images are in the same projection
     (e.g., all geodetic)'''
     cmd = ["vicarb", "accck", fin, fref, "wmask=n",
            "fftsize=%d" % args.fftsize,
@@ -268,7 +290,7 @@ def fix_projection(fin, fout, band):
         p = re.sub('PARAMETER\["scale_factor",0\]', 
                    'PARAMETER["scale_factor",1]', p)
         f.SetProjection(p)
-    # The standard_parallel_1 and latitude_of_origin is sometimes swapped for
+    # The standard_parallel_1 and latitude_of_origin are sometimes swapped for
     # HiRISE. Examples I've seen have standard_parallel_1 0, so also possible
     # this is just a mislabeling of standard_parallel_1 as latitude_of_origin,
     # combined with gdal or some other tool filling in the missing

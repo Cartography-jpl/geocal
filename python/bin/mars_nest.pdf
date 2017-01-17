@@ -36,7 +36,7 @@ used for form the output name.
 
 We name the images by the base names. So for example:
 
-  mars_correct_image P14_006644_1747_XI_05S222W_8bit.tif ctx 5m \
+  mars_nest P14_006644_1747_XI_05S222W_8bit.tif ctx 5m \
       ESP_025012_1745_RED_8bitrender.tif hirise 0.25m
 
 Would result in ctx_5m.img ctx_0.25m.img hirise_corr_5m.img and 

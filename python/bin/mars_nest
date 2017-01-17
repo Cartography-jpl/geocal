@@ -12,11 +12,11 @@ from geocal import *
 
 version = "August 26,2016"
 usage='''Usage:
-  mars_correct_image [options] <ref_image> <ref_base_name> 
+  mars_nest [options] <ref_image> <ref_base_name> 
             <ref_image_resolution_name> <image> <image_base_name> 
             <image_resolution_name>
-  mars_correct_image -h | --help
-  mars_correct_image -v | --version
+  mars_nest -h | --help
+  mars_nest -v | --version
 
 This imports the 2 images into VICAR, resamples the reference image to
 the same projection as the second image, and then uses the reference
@@ -27,7 +27,7 @@ used for form the output name.
 
 We name the images by the base names. So for example:
 
-  mars_correct_image P14_006644_1747_XI_05S222W_8bit.tif ctx 5m \
+  mars_nest P14_006644_1747_XI_05S222W_8bit.tif ctx 5m \
       ESP_025012_1745_RED_8bitrender.tif hirise 0.25m
 
 Would result in ctx_5m.img ctx_0.25m.img hirise_corr_5m.img and 

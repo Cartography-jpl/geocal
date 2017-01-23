@@ -2215,6 +2215,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/raster_image_extension_test.py \
 	@srcpythonlib@/raster_tile_test.py \
 	@srcpythonlib@/ray_intersect_test.py \
+	@srcpythonlib@/rsm_polynomial_test.py \
 	@srcpythonlib@/sba_end_to_end_test.py \
 	@srcpythonlib@/sba_test.py @srcpythonlib@/sba_timing_test.py \
 	@srcpythonlib@/shape_file_test.py \
@@ -3086,7 +3087,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/pleides_rpc.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/ibis_file_extension.py \
-	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
+	@srcpythonlib@/job_database.py \
+	@srcpythonlib@/rsm_polynomial.py @srcpythonlib@/shape_file.py \
 	@srcpythonlib@/air_mspi_igc.py
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH

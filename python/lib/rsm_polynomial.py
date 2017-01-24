@@ -7,9 +7,7 @@ class RsmPolynomial(object):
     '''This is a polynomial, already working in the scaled XYZ coordinate
     system.'''
     def __init__(self, NP_X, NP_Y, NP_Z):
-        # By convention, the coefficients are ordered in row major/fortran
-        # order.
-        self.coefficient = np.zeros((NP_X+1, NP_Y+1, NP_Z+1), order='C')
+        self.coefficient = np.zeros((NP_X+1, NP_Y+1, NP_Z+1))
 
     def rpc_coeff_set(self, coeff):
         '''Set the subset of self.coefficient that corresponds to the RPC
@@ -39,6 +37,31 @@ class RsmPolynomial(object):
                     res += self.coefficient[i,j,k] * xp[i] * yp[j] * zp[k]
         return res;
 
+    def poly_jac(self, x, y, z):
+        '''Return the derivative of the polynomial with each coefficient. 
+        This is just the xp etc. without the coefficient. We return this
+        as the same shape of self.coefficient, but you may want to flatten 
+        this.'''
+        x_is_array = False
+        if(hasattr(x, 'shape')):
+            x_is_array = True
+        if(x_is_array):
+            res = np.zeros(self.coefficient.shape + x.shape)
+        else:
+            res = np.zeros(self.coefficient.shape)
+        xp = [ x**i for i in range(self.coefficient.shape[0]) ]
+        yp = [ y**i for i in range(self.coefficient.shape[1]) ]
+        zp = [ z**i for i in range(self.coefficient.shape[2]) ]
+        # I'm sure we can do this faster, but for now have a clean
+        # way of calculating this
+        for i in range(self.coefficient.shape[0]):
+            for j in range(self.coefficient.shape[1]):
+                for k in range(self.coefficient.shape[2]):
+                    if(x_is_array):
+                        res[i,j,k,...] = xp[i] * yp[j] * zp[k]
+                    else:
+                        res[i,j,k] = xp[i] * yp[j] * zp[k]
+        return res
 
 class RsmRationalPolynomial(object):
     def __init__(self, NP_X, NP_Y, NP_Z):
@@ -88,4 +111,71 @@ class RsmRationalPolynomial(object):
         f4 = self.sample_den(x,y,z)
         return [f1 / f2 * self. line_scale + self.line_offset,
                 f3 / f4 * self.sample_scale + self.sample_offset]
-    
+
+    def fit_offset_and_scale(self, nline, nsample, min_height, max_height,
+                             latitude, longitude):
+        '''Set line_offset, line_scale etc to cover the range for each
+        of the set of data provided.'''
+        self.height_offset = (max_height + min_height) / 2.0
+        self.height_scale = (max_height - min_height) / 2.0
+        self.line_offset = nline / 2.0
+        self.line_scale = nline / 2.0
+        self.sample_offset = nsample / 2.0
+        self.sample_scale = nsample / 2.0
+        min_lat = latitude.min()
+        max_lat = latitude.max()
+        min_lon = longitude.min()
+        max_lon = longitude.max()
+        self.latitude_offset = (max_lat + min_lat) / 2
+        self.latitude_scale = (max_lat - min_lat) / 2
+        self.longitude_offset = (max_lon + min_lon) / 2
+        self.longitude_scale = (max_lon - min_lon) / 2
+
+    def fit(self, line, sample, latitude, longitude, height):
+        ln_lhs = (line - self.line_offset) / self.line_scale
+        smp_lhs = (sample - self.sample_offset) / self.sample_offset
+        x = (latitude - self.latitude_offset) / self.latitude_scale
+        y = (longitude - self.longitude_offset) / self.longitude_scale
+        z = (height - self.height_offset) / self.height_scale
+        ljac1 = self.line_num.poly_jac(x, y, z)
+        ljac1 = ljac1.reshape(ljac1.shape[0] * ljac1.shape[1] * ljac1.shape[2],
+                              ljac1.shape[3])
+        ljac1 = np.transpose(ljac1)
+        ljac2 = self.line_den.poly_jac(x, y, z)
+        ljac2 = ljac2.reshape(ljac2.shape[0] * ljac2.shape[1] * ljac2.shape[2],
+                              ljac2.shape[3])
+        ljac2 = -ln_lhs * ljac2
+        ljac2 = np.transpose(ljac2[1:,:])
+        ljac = np.concatenate((ljac1, ljac2), axis=1)
+        sjac1 = self.sample_num.poly_jac(x, y, z)
+        sjac1 = sjac1.reshape(sjac1.shape[0] * sjac1.shape[1] * sjac1.shape[2],
+                              sjac1.shape[3])
+        sjac1 = np.transpose(sjac1)
+        sjac2 = self.sample_den.poly_jac(x, y, z)
+        sjac2 = sjac2.reshape(sjac2.shape[0] * sjac2.shape[1] * sjac2.shape[2],
+                              sjac2.shape[3])
+        sjac2 = -smp_lhs * sjac2
+        sjac2 = np.transpose(sjac2[1:,:])
+        sjac = np.concatenate((sjac1, sjac2), axis=1)
+        lnpar = np.linalg.lstsq(ljac, ln_lhs)[0]
+        smpar = np.linalg.lstsq(sjac, smp_lhs)[0]
+        nx = self.line_num.coefficient.shape[0]
+        ny = self.line_num.coefficient.shape[1]
+        nz = self.line_num.coefficient.shape[2]
+        self.line_num.coefficient[:,:,:] = \
+            lnpar[0:nx*ny*nz].reshape((nx,ny,nz))
+        nx2 = self.line_den.coefficient.shape[0]
+        ny2 = self.line_den.coefficient.shape[1]
+        nz2 = self.line_den.coefficient.shape[2]
+        self.line_den.coefficient[:,:,:] = \
+            np.concatenate(([1.0,], lnpar[nx*ny*nz:])).reshape(nx2,ny2,nz2)
+        nx = self.sample_num.coefficient.shape[0]
+        ny = self.sample_num.coefficient.shape[1]
+        nz = self.sample_num.coefficient.shape[2]
+        self.sample_num.coefficient[:,:,:] = \
+            smpar[0:nx*ny*nz].reshape((nx,ny,nz))
+        nx2 = self.sample_den.coefficient.shape[0]
+        ny2 = self.sample_den.coefficient.shape[1]
+        nz2 = self.sample_den.coefficient.shape[2]
+        self.sample_den.coefficient[:,:,:] = \
+            np.concatenate(([1.0,], smpar[nx*ny*nz:])).reshape(nx2,ny2,nz2)

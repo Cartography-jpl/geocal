@@ -13,6 +13,7 @@ def test_rsm_polynomial():
     assert r(2, 3, 4) == 10 + 1 * 2 * 3 * 4 + 2 * 2**2 * 3 * 4 + \
         3 * 2**3 * 3 * 4 +  4 * 2**2 * 3**2 * 4 + 5 * 2**2 * 3**2 * 4**3
     
+@require_serialize
 def test_rsm_rational_polynomial():
     r = RsmRationalPolynomial(3,3,3)
     with open(unit_test_data + "rpc_example.pkl", "rb") as f:
@@ -25,6 +26,7 @@ def test_rsm_rational_polynomial():
     assert abs(ic_rpc.line - ic_rsm[0]) < 0.01
     assert abs(ic_rpc.sample - ic_rsm[1]) < 0.01
     
+@require_serialize
 def test_rsm_fit():
     r = RsmRationalPolynomial(3,3,3)
     with open(unit_test_data + "rpc_example.pkl", "rb") as f:

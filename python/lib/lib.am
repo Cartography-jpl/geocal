@@ -41,6 +41,7 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/pleides_rpc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/parallel_process.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ibis_file_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_database.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/rsm_polynomial.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/shape_file.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/air_mspi_igc.py
 if HAVE_VICAR_GDALPLUGIN
@@ -78,6 +79,7 @@ EXTRA_DIST+=@srcpythonlib@/quick_bird_reflectance_test.py
 EXTRA_DIST+=@srcpythonlib@/raster_image_extension_test.py
 EXTRA_DIST+=@srcpythonlib@/raster_tile_test.py
 EXTRA_DIST+=@srcpythonlib@/ray_intersect_test.py
+EXTRA_DIST+=@srcpythonlib@/rsm_polynomial_test.py
 EXTRA_DIST+=@srcpythonlib@/sba_end_to_end_test.py
 EXTRA_DIST+=@srcpythonlib@/sba_test.py
 EXTRA_DIST+=@srcpythonlib@/sba_timing_test.py

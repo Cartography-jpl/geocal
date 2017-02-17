@@ -54,7 +54,7 @@ if test "$_cv_gnu_make_command" = "" ; then
 fi
 
 AC_COPYRIGHT(
-[Copyright 2016, California Institute of Technology. 
+[Copyright 2017, California Institute of Technology. 
 ALL RIGHTS RESERVED. U.S. Government Sponsorship acknowledged.])
 # The obscure looking tar-pax here sets automake to allow file names longer
 # than 99 characters to be included in the dist tar. See

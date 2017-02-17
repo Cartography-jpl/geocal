@@ -28,10 +28,7 @@ double Fill_value
 {
   if(avg_factor_ < 0)
     avg_factor_ = 
-      (int) floor(Map_projected_image->map_info().resolution_meter() /
-		  Igc->resolution_meter
-		  (ImageCoordinate(Igc->number_line() / 2.0,
-				   Igc->number_sample() / 2.0)));
+      (int) floor(Igc->resolution_meter() / Map_projected_image->map_info().resolution_meter());
   if(avg_factor_ > 1)
     img_avg_.reset(new RasterAveraged(img_, avg_factor_, avg_factor_));
   else

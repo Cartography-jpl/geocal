@@ -25,6 +25,7 @@ from __future__ import print_function
 import copy
 import io,six
 from collections import defaultdict
+import sys
 
 # Add a bunch of debugging if you are diagnosing a problem
 DEBUG = False
@@ -119,8 +120,8 @@ class _FieldValue(object):
         '''Return bytes version of this value, formatted and padded as
         NITF will store this.'''
         v = self.get(parent_obj, key)
-        # Don't format bytes
-        if(self.ty == bytes):
+        # Don't format bytes if we have python 3
+        if sys.version_info > (3,) and self.ty == bytes:
             t = v
         elif(isinstance(self.frmt, str)):
             t = self.fstring.format(self.frmt % v)

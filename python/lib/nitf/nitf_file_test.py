@@ -38,8 +38,14 @@ def test_basic_write(isolated_dir):
         #
         # gdalinfo is part of GDAL, show_nitf++ is part of Nitro
         if(cmd_exists("gdalinfo")):
-            subprocess.run(["gdalinfo", "z.ntf"])
+            if sys.version_info > (3,):
+                subprocess.run(["gdalinfo", "z.ntf"])
+            else:
+                subprocess.call(["gdalinfo", "z.ntf"])
         if(cmd_exists("show_nitf++")):
-            subprocess.run(["show_nitf++", "z.ntf"])
-    
+            if sys.version_info > (3,):
+                subprocess.run(["show_nitf++", "z.ntf"])
+            else:
+                subprocess.call(["show_nitf++", "z.ntf"])
+                
     

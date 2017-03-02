@@ -139,4 +139,43 @@ def test_nested_loop():
     assert str(t) == str(t2)
 
 def test_conditional():
-    pass
+    TestField = create_nitf_field_structure("TestField",
+        [["fhdr", 4, str, {"default" : "NITF"}],
+         ["udhdl", 5, int],
+         ["udhofl", 3, int, {"condition" : "f.udhdl != 0"}]])
+    t = TestField()
+    with pytest.raises(RuntimeError):
+        t.udhofl = 1
+    fh = six.BytesIO()
+    t.write_to_file(fh)
+    assert fh.getvalue() == b'NITF00000'
+    assert t.udhofl is None
+    t.udhdl = 10
+    t.udhofl = 20
+    fh = six.BytesIO()
+    t.write_to_file(fh)
+    assert fh.getvalue() == b'NITF00010020'
+    assert t.udhofl == 20
+    
+def test_loop_conditional():
+    # udhdl doesn't really loop in a nitf file header, but we'll pretend it
+    # does to test a looping conditional
+    TestField = create_nitf_field_structure("TestField",
+        [["fhdr", 4, str, {"default" : "NITF"}],
+         ["numi", 3, int],
+         [["loop", "f.numi"],
+          ["udhdl", 5, int],
+          ["udhofl", 3, int, {"condition" : "f.udhdl[i1] != 0"}]]
+         ])
+    t = TestField()
+    t.numi = 3
+    t.udhdl[1] = 10
+    t.udhdl[2] = 20
+    assert list(t.udhofl) == [None, 0, 0]
+    t.udhofl[1] = 30
+    t.udhofl[2] = 40
+    assert list(t.udhofl) == [None, 30, 40]
+    fh = six.BytesIO()
+    t.write_to_file(fh)
+    assert fh.getvalue() == b'NITF003000000001003000020040'
+    

@@ -36,27 +36,23 @@ desc = [['im', 2, str],
         ['abpp', 2, int, {'default' : 8}],
         ['pjust', 1, str, {'default' : 'R'}],
         ['icords', 1, str],
-        # Conditional
-        # ['igeolo', 60, str],
+        ['igeolo', 60, str, {'condition' : "f.icords.rstrip() != ''"}],
         ['nicom', 1, int],
         [["loop", "f.nicom"],
          ["icom", 80, str]],
         ['ic', 2, str, {'default' : 'NC'}],
-        # Conditional
-        # ['comrat',4, str], 
+        ['comrat', 4, str, {'condition' : "f.ic not in ('NC', 'NM')"}], 
         ['nbands', 1, int, {'default' : 1}],
-        # Conditional
-        # ['xbands', 5, int],
+        ['xbands', 5, int, {'condition' : "f.nbands == 0"}],
         [["loop", "f.nbands if f.nbands > 0 else f.xbands"],
          ['irepband', 2, str, {'default' : 'M'}],
          ['isubcat', 6, str],
          ['ifc', 1, str],
          ['imflt', 3, str],
          ['nluts', 1, int],
-         # Conditional
-         # ['nelut', 5, int],
+         ['nelut', 5, int, {'condition' : "f.nluts[i1] != 0"}],
          #[["loop", "f.nluts[i1]"],
-          # Need to have variable size
+          # Need to have variable size for this
           #['lutd', 'f.nelut[i1]', int]
           #]
          ],
@@ -72,12 +68,12 @@ desc = [['im', 2, str],
         ['iloc', 10, str, {'default' : '0000000000'}],
         ['imag', 4, str, {'default' : '1.0'}],
         ['udidl', 5, int],
-        # Conditional
-        #['udofl', 3, int],
+        ['udofl', 3, int, {'condition' : 'f.udidl != 0'}],
+        # Need to have variable size for this
         #['udid', , str],
         ['ixshdl', 5, int],
-        # Conditional
-        # ['ixofl', 3, int],
+        ['ixofl', 3, int, {'condition' : 'f.ixshdl != 0'}],
+        # Need to have variable size for this
         # ['ixshd', , int]
         ]
 

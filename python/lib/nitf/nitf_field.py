@@ -86,24 +86,46 @@ class _FieldValue(object):
         if(ty == int):
             self.fstring = "{:0>%ds}" % self.size
             self.frmt = "%s"
-        if('frmt' in options):
-            self.frmt = options['frmt']
-        self.default = None
-        if('default' in options):
-            self.default = options['default']
+        if("frmt" in options):
+            self.frmt = options["frmt"]
+        self.default = options.get("default", None)
+        self.condition = options.get("condition", None)
 
     def value(self,parent_obj):
         if(self.field_name not in parent_obj.value):
             if(self.default is not None):
                 parent_obj.value[self.field_name] = defaultdict(lambda : self.default)
             elif(self.ty == str):
-                parent_obj.value[self.field_name] = defaultdict(lambda : ' ' * self.size)
+                parent_obj.value[self.field_name] = defaultdict(lambda : " " * self.size)
             else:
                 parent_obj.value[self.field_name] = defaultdict(lambda : 0)
         return parent_obj.value[self.field_name]
+    def get_print(self, parent_obj, key):
+        '''Return string suitable for printing. This is either the 
+        value of this field, or "Not used" if the condition isn't met.'''
+        t = self.get(parent_obj,key)
+        if(t is None):
+            t = "Not used"
+        return str(t)
+    def check_condition(self, parent_obj, key):
+        '''Evaluate the condition (if present) and return False if it isn't
+        met, True if it is or if there is no condition'''
+        if(self.condition is None):
+            return True
+        f = parent_obj
+        if(len(key) > 0):
+            i1 = key[0]
+        if(len(key) > 1):
+            i2 = key[1]
+        if(DEBUG):
+            print("Condition: " + self.condition)
+            print("eval: " + str(eval(self.condition)))
+        return eval(self.condition)
     def get(self,parent_obj,key):
         if(self.loop is not None):
             self.loop.check_index(parent_obj, key)
+        if(not self.check_condition(parent_obj, key)):
+            return None
         if(hasattr(parent_obj, self.field_name + "_value")):
             if(self.loop is None):
                 return getattr(parent_obj, self.field_name + "_value")()
@@ -113,6 +135,8 @@ class _FieldValue(object):
     def set(self,parent_obj,key,v):
         if(self.loop is not None):
             self.loop.check_index(parent_obj, key)
+        if(not self.check_condition(parent_obj, key)):
+            raise RuntimeError("Can't set value for field %s because the condition '%s' isn't met" % (self.field_name, self.condition))
         if(hasattr(parent_obj, self.field_name + "_value")):
             raise RuntimeError("Can't set value for field " + self.field_name)
         self.value(parent_obj)[key] = v
@@ -134,12 +158,19 @@ class _FieldValue(object):
         else:
             return t.encode("utf-8")
     def write_to_file(self, parent_obj, key, fh):
+        if(not self.check_condition(parent_obj, key)):
+            return
         if(DEBUG):
             print("Writing: ", self.field_name)
         parent_obj.fh_loc[self.field_name][key] = fh.tell()
         fh.write(self.bytes(parent_obj,key))
     def update_file(self, parent_obj, key, fh):
         '''Rewrite to a file after the value of this field has been updated'''
+        # Not sure if updating a field that doesn't meet the condition should
+        # just be a noop, or an error. For now treat as an error but we can
+        # change this behavior is needed.
+        if(not self.check_condition(parent_obj, key)):
+            raise RuntimeError("Can't update value for field %s because the condition '%s' isn't met" % (self.field_name, self.condition))
         if(DEBUG):
             print("Updating: ", self.field_name)
         last_pos = fh.tell()
@@ -147,13 +178,15 @@ class _FieldValue(object):
         fh.write(self.bytes(parent_obj,key))
         fh.seek(last_pos)           
     def read_from_file(self, parent_obj, key, fh):
+        if(not self.check_condition(parent_obj, key)):
+            return
         if(DEBUG):
             print("Reading: ", self.field_name)
         t = fh.read(self.size)
         if(len(t) != self.size):
             raise RuntimeError("Not enough bytes left to read %d bytes for field %s" % (self.size, self.field_name))
         if(self.ty == str):
-            self.value(parent_obj)[key] = t.rstrip().decode('utf-8')
+            self.value(parent_obj)[key] = t.rstrip().decode("utf-8")
         else:
             self.value(parent_obj)[key] = self.ty(t.rstrip())
 
@@ -206,7 +239,7 @@ class _FieldLoopStruct(object):
                     for i1 in range(maxi1):
                         print(lead + "  " +
                               ("%s[%d]" % (f.field_name, i1)).ljust(maxlen) +
-                              ": " + str(f.get(parent_object,(i1,))),
+                              ": " + f.get_print(parent_object,(i1,)),
                               file=res)
                 elif(len(self.size) == 2):
                     for i1 in range(maxi1):
@@ -214,7 +247,7 @@ class _FieldLoopStruct(object):
                         for i2 in range(maxi2):
                             print(lead + "  " +
                                   ("%s[%d, %d]" % (f.field_name, i1, i2)).ljust(maxlen) +
-                                  ": " + str(f.get(parent_object,(i1,i2))),
+                                  ": " +  f.get_print(parent_object,(i1,i2)),
                                   file=res)
             else:
                 print(f.desc(parent_object), file=res)
@@ -255,7 +288,7 @@ class _FieldStruct(object):
         res = six.StringIO()
         for f in self.field_value_list:
             if(isinstance(f, _FieldValue)):
-                print(f.field_name.ljust(maxlen) + ": " + str(f.get(self,())),
+                print(f.field_name.ljust(maxlen) + ": " + f.get_print(self,()),
                       file=res)
             else:
                 print(f.desc(self), file=res, end='')
@@ -322,6 +355,8 @@ def create_nitf_field_structure(name, description, hlp = None):
     frmt    - A format string or function
     default - The default value to use when writing. If not specified, the
               default is all spaces for a str and 0 for a number type.
+    condition - An expression used to determine if the field is included
+              or not.
 
     The type might be something like 'int', 'float' or 'str'. We
     convert the NITF string to and from this type.

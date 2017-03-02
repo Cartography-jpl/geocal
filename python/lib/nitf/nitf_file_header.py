@@ -58,12 +58,12 @@ desc = [['fhdr', 4, str],
          ['lresh', 4, int],
          ['lre', 7, int]],
         ['udhdl', 5, int],
-        # Have some conditionals here. We don't support these yet,
-        # so leave out for now. But we should come back and put in
-        #['udhofl', 3, int],
+        ["udhofl", 3, int, {"condition" : "f.udhdl != 0"}],
+        # Don't have handling yet for variable size field
         # udhd
         ['xhdl', 5, int],
-        # xhdlofl
+        ["xhdlofl", 3, int, {"condition" : "f.xhdl != 0"}],
+        # Don't have handling yet for variable size field
         # xhd
         ]
 

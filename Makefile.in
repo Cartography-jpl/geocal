@@ -2179,6 +2179,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/image_coordinate_test.xml \
 	@geocalunittestdata@/srtm_90m_dem/n34w120_L2.tif \
 	@geocalunittestdata@/srtm_90m_dem/n43w69_L2.tif \
+	@geocalunittestdata@/sample.ntf \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
 	@srcpythonbin@/gdal_to_nitf_test.py \
 	@srcpythonbin@/gtproj2_test.py \

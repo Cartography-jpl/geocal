@@ -1,10 +1,13 @@
-from .nitf_field import create_nitf_field_structure
+from .nitf_field import create_nitf_field_structure, FieldData
+
 hlp = '''This is a NITF image subheader. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
 (MIL-STD-2500C, available at http://www.gwg.nga.mil/ntb/baseline/docs/2500c/2500C.pdf).
 
 The NITF image subheader is described in Table A-3, starting page 78.
 '''
+
+    
 desc = [['im', 2, str],
         ['iid1', 10, str],
         ['idatim', 14, str],
@@ -51,11 +54,10 @@ desc = [['im', 2, str],
          ['imflt', 3, str],
          ['nluts', 1, int],
          ['nelut', 5, int, {'condition' : "f.nluts[i1] != 0"}],
-         #[["loop", "f.nluts[i1]"],
-          # Need to have variable size for this
-          #['lutd', 'f.nelut[i1]', int]
-          #]
+         [["loop", "f.nluts[i1]"],
+          ['lutd', 'nelut', None, {'field_value_class' : FieldData}]
          ],
+        ],
         ['isync', 1, int],
         ['imode', 1, str, {'default' : 'S'}],
         ['nbpr', 4, int, {'default' : 1 }],
@@ -69,13 +71,13 @@ desc = [['im', 2, str],
         ['imag', 4, str, {'default' : '1.0'}],
         ['udidl', 5, int],
         ['udofl', 3, int, {'condition' : 'f.udidl != 0'}],
-        # Need to have variable size for this
-        #['udid', , str],
+        ['udid', 'udidl', None, {'field_value_class' : FieldData,
+                                   'size_offset' : 3}],
         ['ixshdl', 5, int],
         ['ixofl', 3, int, {'condition' : 'f.ixshdl != 0'}],
-        # Need to have variable size for this
-        # ['ixshd', , int]
-        ]
+        ['ixshd', 'ixshdl', None, {'field_value_class' : FieldData,
+                                   'size_offset' : 3}]
+]
 
 NitfImageSubheader = create_nitf_field_structure("NitfImageSubheader", desc)
 

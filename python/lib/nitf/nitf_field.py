@@ -226,15 +226,19 @@ class _FieldLoopStruct(object):
     def desc(self, parent_object):
         '''Text description of structure, e.g., something you can print
         out.'''
-        maxlen = max(len(f.field_name) for f in self.field_value_list
-                     if isinstance(f, _FieldValue))
+        try:
+            maxlen = max(len(f.field_name) for f in self.field_value_list
+                         if not isinstance(f, _FieldLoopStruct))
+        except ValueError:
+            # We have no _FieldValue, so just set maxlen to a fixed value
+            maxlen = 10
         maxi1 = self.shape(parent_object)
         maxlen += 2 + len(str(maxi1))
         res = six.StringIO()
         lead = "  " * (len(self.size) - 1)
         print(lead + "Loop - " + self.size[-1], file=res)
         for f in self.field_value_list:
-            if(isinstance(f, _FieldValue)):
+            if(not isinstance(f, _FieldLoopStruct)):
                 if(len(self.size) == 1):
                     for i1 in range(maxi1):
                         print(lead + "  " +
@@ -283,17 +287,69 @@ class _FieldStruct(object):
     def __str__(self):
         '''Text description of structure, e.g., something you can print
         out.'''
-        maxlen = max(len(f.field_name) for f in self.field_value_list
-                     if isinstance(f, _FieldValue))
+        try:
+            maxlen = max(len(f.field_name) for f in self.field_value_list
+                         if not isinstance(f, _FieldLoopStruct))
+        except ValueError:
+            # We have no _FieldValue, so just set maxlen to a fixed value
+            maxlen = 10
         res = six.StringIO()
         for f in self.field_value_list:
-            if(isinstance(f, _FieldValue)):
+            if(not isinstance(f, _FieldLoopStruct)):
                 print(f.field_name.ljust(maxlen) + ": " + f.get_print(self,()),
                       file=res)
             else:
                 print(f.desc(self), file=res, end='')
         return res.getvalue()
 
+class FieldData(object):
+    '''Class to handle generic variable size data. We might add more
+    specific classes, but for now just have this one generic one.'''
+    def __init__(self, field_name, size_field, ty, loop, options):
+        '''Note options can contains 'size_offset' to give the offset in
+        the size variable.'''
+        self.field_name = field_name
+        self.loop = loop
+        self.size_offset = options.get("size_offset", 0)
+        # This isn't exactly the size. Rather it is the expression that
+        # we either use to read or set the size, e.g., "ixshdl". Note
+        # that in standard NITF bizarreness this isn't actually the size,
+        # but rather size_offset + the size
+        self.size_field = size_field
+    def value(self, parent_obj):
+        if(self.field_name not in parent_obj.value):
+            parent_obj.value[self.field_name] = defaultdict(lambda : b'')
+        return parent_obj.value[self.field_name]
+    def get(self,parent_obj,key):
+        return self.value(parent_obj)[key]
+    def set(self,parent_obj,key,v):
+        self.value(parent_obj)[key] = v
+        if(len(key) > 0):
+            raise RuntimeError("Need key support here")
+        if(len(v) == 0):
+            setattr(parent_obj, self.size_field, 0)
+        else:
+            setattr(parent_obj, self.size_field, len(self.data) +
+                    self.size_offset)
+    def write_to_file(self, parent_obj, key, fh):
+        if(len(self.value(parent_obj)[key]) == 0):
+            return
+        parent_obj.fh_loc[self.field_name][key] = fh.tell()
+        fh.write(self.value(parent_obj)[key])
+    def read_from_file(self, parent_obj, key, fh):
+        if(len(key) > 0):
+            raise RuntimeError("Need key support here")
+        sz = getattr(parent_obj, self.size_field)
+        if(sz == 0):
+            self.value(parent_obj)[key] = b''
+            return
+        self.value(parent_obj)[key] = fh.read(sz - self.size_offset)
+    def get_print(self, parent_obj,key):
+        t = self.get(parent_obj,key)
+        if(len(t) == 0):
+            t = "Not used"
+        return "Data length %s" % len(t)
+        
 class _create_nitf_field_structure(object):
     # The __dict__ is at class level
     def __init__(self):
@@ -325,7 +381,11 @@ class _create_nitf_field_structure(object):
         options = {}
         if(len(rest) > 0):
             options = rest[0]
-        fv = _FieldValue(field_name, ln, ty, loop, options)
+        if('field_value_class' in options):
+            fv = options["field_value_class"](field_name, ln, ty, loop,
+                                              options)
+        else:
+            fv = _FieldValue(field_name, ln, ty, loop, options)
         self.d[field_name] = _FieldValueAccess(fv)
         self.d["field_map"][field_name] = fv
         field_value_list.append(fv)
@@ -357,6 +417,14 @@ def create_nitf_field_structure(name, description, hlp = None):
               default is all spaces for a str and 0 for a number type.
     condition - An expression used to determine if the field is included
               or not.
+    field_value_class - Most fields can be handled by our internal _FieldValue
+              class. However there are some special cases (e.g., IXSHD used
+              for image segment level TREs). If we need to change this,
+              we can supply the class to use here. This class should supply
+              a fieldname, get, set, loop, write_to_file, read_from_file, 
+              and get_print function because these are the things we call. 
+              Note that we have a generic FieldData class here, which might 
+              be sufficient.
 
     The type might be something like 'int', 'float' or 'str'. We
     convert the NITF string to and from this type.

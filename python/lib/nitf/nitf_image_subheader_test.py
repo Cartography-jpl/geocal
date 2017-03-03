@@ -77,3 +77,14 @@ def test_basic():
     assert t2.ixshdl == 0
     
     
+def test_tre_read():
+    '''Read a file that has a TRE in it'''
+    t = NitfFileHeader()
+    t2 = NitfImageSubheader()
+    with open(unit_test_data + "test_use00a.ntf", 'rb') as fh:
+        t.read_from_file(fh)
+        t2.read_from_file(fh)
+        t3 = fh.read(121-3)
+    print(t)
+    print(t2)
+    print(t2.ixshd)

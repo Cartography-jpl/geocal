@@ -1,4 +1,5 @@
-from .nitf_field import create_nitf_field_structure
+from .nitf_field import create_nitf_field_structure, FieldData
+
 hlp = '''This is a NITF File header. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
 (MIL-STD-2500C, available at http://www.gwg.nga.mil/ntb/baseline/docs/2500c/2500C.pdf).
@@ -59,12 +60,12 @@ desc = [['fhdr', 4, str],
          ['lre', 7, int]],
         ['udhdl', 5, int],
         ["udhofl", 3, int, {"condition" : "f.udhdl != 0"}],
-        # Don't have handling yet for variable size field
-        # udhd
+        ['udhd', 'udhdl', None, {'field_value_class' : FieldData,
+                                   'size_offset' : 3}],
         ['xhdl', 5, int],
         ["xhdlofl", 3, int, {"condition" : "f.xhdl != 0"}],
-        # Don't have handling yet for variable size field
-        # xhd
+        ['xhd', 'xhdl', None, {'field_value_class' : FieldData,
+                               'size_offset' : 3}],
         ]
 
 NitfFileHeader = create_nitf_field_structure("NitfFileHeader", desc, hlp=hlp)

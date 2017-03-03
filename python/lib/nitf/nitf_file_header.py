@@ -1,4 +1,4 @@
-from .nitf_field import create_nitf_field_structure, FieldData
+from .nitf_field import *
 
 hlp = '''This is a NITF File header. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
@@ -69,14 +69,6 @@ desc = [['fhdr', 4, str],
         ]
 
 NitfFileHeader = create_nitf_field_structure("NitfFileHeader", desc, hlp=hlp)
-# We need to update fl, hl, lish, lin
-
-# Hardcoded values
-def hardcoded_value(v):
-    def f(self):
-        return v
-    return f
-
 NitfFileHeader.fhdr_value = hardcoded_value("NITF")
 NitfFileHeader.fver_value = hardcoded_value("02.10")
 NitfFileHeader.stype_value = hardcoded_value("BF01")

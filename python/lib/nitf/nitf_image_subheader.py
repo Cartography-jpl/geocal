@@ -1,4 +1,4 @@
-from .nitf_field import create_nitf_field_structure, FieldData
+from .nitf_field import *
 
 hlp = '''This is a NITF image subheader. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
@@ -81,16 +81,6 @@ desc = [['im', 2, str],
 
 NitfImageSubheader = create_nitf_field_structure("NitfImageSubheader", desc)
 
-def hardcoded_value(v):
-    def f(self):
-        return v
-    return f
-
-def hardcoded_value1(v):
-    def f(self, key):
-        return v
-    return f
-
-NitfImageSubheader.ifc_value = hardcoded_value1("N")
-NitfImageSubheader.imflt_value = hardcoded_value1("   ")
+NitfImageSubheader.ifc_value = hardcoded_value("N")
+NitfImageSubheader.imflt_value = hardcoded_value("   ")
 NitfImageSubheader.isync_value = hardcoded_value(0)

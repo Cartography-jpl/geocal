@@ -4,11 +4,14 @@
 # The class structure is a little complicated, so you can look and the UML
 # file doc/Nitf_file.xmi (e.g., use umbrello) to see the design.
 #
-# As an external user, the only thing that is exported if
-# create_nitf_field_structure, all the other classes in here can be ignored.
-# The created class has functions to read and write each of the NITF fields,
+# As an external user, the main thing that is exported is
+# create_nitf_field_structure, The created class has functions to read
+# and write each of the NITF fields,
 # a write_to_file and read_from_file function, and a __str__() to give a
 # printable description of the contents of the structure.
+#
+# A few support classes/routines are also exported. This includes
+# FieldData (for things like TREs), hardcoded_value, and hardcoded_value1
 #
 # Note what might be slightly confusing using these classes, we do all this
 # to setup a NitfField class, not a particular object. These means that all
@@ -92,6 +95,8 @@ class _FieldValue(object):
         self.condition = options.get("condition", None)
 
     def value(self,parent_obj):
+        if(self.field_name is None):
+            return ''
         if(self.field_name not in parent_obj.value):
             if(self.default is not None):
                 parent_obj.value[self.field_name] = defaultdict(lambda : self.default)
@@ -122,6 +127,8 @@ class _FieldValue(object):
             print("eval: " + str(eval(self.condition)))
         return eval(self.condition)
     def get(self,parent_obj,key):
+        if(self.field_name is None):
+            return ''
         if(self.loop is not None):
             self.loop.check_index(parent_obj, key)
         if(not self.check_condition(parent_obj, key)):
@@ -133,6 +140,8 @@ class _FieldValue(object):
                 return getattr(parent_obj, self.field_name + "_value")(*key)
         return self.ty(self.value(parent_obj)[key])
     def set(self,parent_obj,key,v):
+        if(self.field_name is None):
+            raise RuntimeError("Can't set a reserved field")
         if(self.loop is not None):
             self.loop.check_index(parent_obj, key)
         if(not self.check_condition(parent_obj, key)):
@@ -160,9 +169,10 @@ class _FieldValue(object):
     def write_to_file(self, parent_obj, key, fh):
         if(not self.check_condition(parent_obj, key)):
             return
-        if(DEBUG):
-            print("Writing: ", self.field_name)
-        parent_obj.fh_loc[self.field_name][key] = fh.tell()
+        if(self.field_name is not None):
+            if(DEBUG):
+                print("Writing: ", self.field_name)
+            parent_obj.fh_loc[self.field_name][key] = fh.tell()
         fh.write(self.bytes(parent_obj,key))
     def update_file(self, parent_obj, key, fh):
         '''Rewrite to a file after the value of this field has been updated'''
@@ -180,15 +190,16 @@ class _FieldValue(object):
     def read_from_file(self, parent_obj, key, fh):
         if(not self.check_condition(parent_obj, key)):
             return
-        if(DEBUG):
+        if(DEBUG and self.field_name is not None):
             print("Reading: ", self.field_name)
         t = fh.read(self.size)
         if(len(t) != self.size):
             raise RuntimeError("Not enough bytes left to read %d bytes for field %s" % (self.size, self.field_name))
-        if(self.ty == str):
-            self.value(parent_obj)[key] = t.rstrip().decode("utf-8")
-        else:
-            self.value(parent_obj)[key] = self.ty(t.rstrip())
+        if(self.field_name is not None):
+            if(self.ty == str):
+                self.value(parent_obj)[key] = t.rstrip().decode("utf-8")
+            else:
+                self.value(parent_obj)[key] = self.ty(t.rstrip())
 
 class _FieldLoopStruct(object):
     # The __dict__ is at class level
@@ -228,7 +239,8 @@ class _FieldLoopStruct(object):
         out.'''
         try:
             maxlen = max(len(f.field_name) for f in self.field_value_list
-                         if not isinstance(f, _FieldLoopStruct))
+                         if not isinstance(f, _FieldLoopStruct) and
+                         f.field_name is not None)
         except ValueError:
             # We have no _FieldValue, so just set maxlen to a fixed value
             maxlen = 10
@@ -239,7 +251,9 @@ class _FieldLoopStruct(object):
         print(lead + "Loop - " + self.size[-1], file=res)
         for f in self.field_value_list:
             if(not isinstance(f, _FieldLoopStruct)):
-                if(len(self.size) == 1):
+                if(f.field_name is None):
+                    pass
+                elif(len(self.size) == 1):
                     for i1 in range(maxi1):
                         print(lead + "  " +
                               ("%s[%d]" % (f.field_name, i1)).ljust(maxlen) +
@@ -289,13 +303,14 @@ class _FieldStruct(object):
         out.'''
         try:
             maxlen = max(len(f.field_name) for f in self.field_value_list
-                         if not isinstance(f, _FieldLoopStruct))
+                         if not isinstance(f, _FieldLoopStruct) and
+                         f.field_name is not None)
         except ValueError:
             # We have no _FieldValue, so just set maxlen to a fixed value
             maxlen = 10
         res = six.StringIO()
         for f in self.field_value_list:
-            if(not isinstance(f, _FieldLoopStruct)):
+            if(not isinstance(f, _FieldLoopStruct) and f.field_name is not None):
                 print(f.field_name.ljust(maxlen) + ": " + f.get_print(self,()),
                       file=res)
             else:
@@ -386,10 +401,55 @@ class _create_nitf_field_structure(object):
                                               options)
         else:
             fv = _FieldValue(field_name, ln, ty, loop, options)
-        self.d[field_name] = _FieldValueAccess(fv)
-        self.d["field_map"][field_name] = fv
+        if(field_name is not None):
+            self.d[field_name] = _FieldValueAccess(fv)
+            self.d["field_map"][field_name] = fv
         field_value_list.append(fv)
         
+def hardcoded_value(v):
+    '''Create a function that returns a fixed value, useful for creating
+    various blah_value functions'''
+    def f(self, key=None):
+        return v
+    return f
+
+class Tre(_FieldStruct):
+    '''Add a little extra structure unique to Tres'''
+    def cetag_value(self):
+        return self.tre_tag
+    def read_from_file(self, fh):
+        st = fh.tell()
+        _FieldStruct.read_from_file(self,fh)
+        sz = fh.tell() - st
+        if(sz != self.cel + 11):
+            raise RuntimeError("TRE length was expected to be %d but was actually %d" % (self.cel + 11, sz))
+    def write_to_file(self, fh):
+        st = fh.tell()
+        _FieldStruct.write_to_file(self,fh)
+        sz = fh.tell() - st
+        self.update_field(fh, "cel", sz-11)
+    def __str__(self):
+        '''Text description of structure, e.g., something you can print
+        out.'''
+        try:
+            maxlen = max(len(f.field_name) for f in self.field_value_list
+                         if not isinstance(f, _FieldLoopStruct) and
+                         f.field_name is not None)
+        except ValueError:
+            # We have no _FieldValue, so just set maxlen to a fixed value
+            maxlen = 10
+        res = six.StringIO()
+        print("TRE - %s" % self.tre_tag)
+        for f in self.field_value_list:
+            if(not isinstance(f, _FieldLoopStruct)):
+                if(f.field_name is not None and
+                   f.field_name not in ('cetag', 'cel')):
+                    print(f.field_name.ljust(maxlen) + ": " + f.get_print(self,()),
+                          file=res)
+            else:
+                print(f.desc(self), file=res, end='')
+        return res.getvalue()
+
 def create_nitf_field_structure(name, description, hlp = None):
     '''Create a nitf field structure and return a class for dealing with this. 
     The name is the class name, and the description should be a list of
@@ -449,4 +509,27 @@ def create_nitf_field_structure(name, description, hlp = None):
             pass
     return res
 
-               
+
+def create_nitf_tre_structure(name, description, hlp = None):
+    '''This is like create_nitf_field_structure, but adds a little
+    extra structure for TREs. The description should be almost like
+    with create_nitf_field_structure, except for the addition of a
+    TRE tag. By convention, we don't list the cetag and cel fields,
+    since these are always present.'''
+    t = _create_nitf_field_structure()
+    desc = copy.deepcopy(description)
+    tre_tag = desc.pop(0)
+    desc.insert(0,["cetag", 6, str])
+    desc.insert(1, ["cel", 5, int])
+    res = type(name, (Tre,), t.process(desc))
+    res.tre_tag = tre_tag
+    if(hlp is not None):
+        try:
+            # This doesn't work in python 2.7, we can't write to the
+            # doc. Rather than try to do something clever, just punt and
+            # skip adding help for python 2.7. This works find with python 3
+            res.__doc__ = hlp
+        except AttributeError:
+            pass
+    return res
+    

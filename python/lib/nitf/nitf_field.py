@@ -413,42 +413,6 @@ def hardcoded_value(v):
         return v
     return f
 
-class Tre(_FieldStruct):
-    '''Add a little extra structure unique to Tres'''
-    def cetag_value(self):
-        return self.tre_tag
-    def read_from_file(self, fh):
-        st = fh.tell()
-        _FieldStruct.read_from_file(self,fh)
-        sz = fh.tell() - st
-        if(sz != self.cel + 11):
-            raise RuntimeError("TRE length was expected to be %d but was actually %d" % (self.cel + 11, sz))
-    def write_to_file(self, fh):
-        st = fh.tell()
-        _FieldStruct.write_to_file(self,fh)
-        sz = fh.tell() - st
-        self.update_field(fh, "cel", sz-11)
-    def __str__(self):
-        '''Text description of structure, e.g., something you can print
-        out.'''
-        try:
-            maxlen = max(len(f.field_name) for f in self.field_value_list
-                         if not isinstance(f, _FieldLoopStruct) and
-                         f.field_name is not None)
-        except ValueError:
-            # We have no _FieldValue, so just set maxlen to a fixed value
-            maxlen = 10
-        res = six.StringIO()
-        print("TRE - %s" % self.tre_tag)
-        for f in self.field_value_list:
-            if(not isinstance(f, _FieldLoopStruct)):
-                if(f.field_name is not None and
-                   f.field_name not in ('cetag', 'cel')):
-                    print(f.field_name.ljust(maxlen) + ": " + f.get_print(self,()),
-                          file=res)
-            else:
-                print(f.desc(self), file=res, end='')
-        return res.getvalue()
 
 def create_nitf_field_structure(name, description, hlp = None):
     '''Create a nitf field structure and return a class for dealing with this. 
@@ -510,26 +474,4 @@ def create_nitf_field_structure(name, description, hlp = None):
     return res
 
 
-def create_nitf_tre_structure(name, description, hlp = None):
-    '''This is like create_nitf_field_structure, but adds a little
-    extra structure for TREs. The description should be almost like
-    with create_nitf_field_structure, except for the addition of a
-    TRE tag. By convention, we don't list the cetag and cel fields,
-    since these are always present.'''
-    t = _create_nitf_field_structure()
-    desc = copy.deepcopy(description)
-    tre_tag = desc.pop(0)
-    desc.insert(0,["cetag", 6, str])
-    desc.insert(1, ["cel", 5, int])
-    res = type(name, (Tre,), t.process(desc))
-    res.tre_tag = tre_tag
-    if(hlp is not None):
-        try:
-            # This doesn't work in python 2.7, we can't write to the
-            # doc. Rather than try to do something clever, just punt and
-            # skip adding help for python 2.7. This works find with python 3
-            res.__doc__ = hlp
-        except AttributeError:
-            pass
-    return res
     

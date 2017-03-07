@@ -7,6 +7,8 @@ from __future__ import print_function
 from .nitf_file_header import NitfFileHeader
 from .nitf_image_subheader import NitfImageSubheader
 from .nitf_image import NitfImageFromNumpy
+from .nitf_tre import process_tre
+from .nitf_tre_use00a import *
 import io,six
 
 class NitfFile(object):
@@ -22,6 +24,9 @@ class NitfFile(object):
         self.text_segment = []
         self.des_segment = []
         self.res_segment = []
+        # These are the file level TREs. There can also be TREs at the
+        # image segment level
+        self.tre_list = []
         if(file_name is not None):
             self.read(file_name)
     def __str__(self):
@@ -33,6 +38,15 @@ class NitfFile(object):
         print(self.file_header, file=res)
         print("-------------------------------------------------------------",
               file=res)
+        print("-------------------------------------------------------------",
+              file=res)
+        print("File level TRES:", file=res)
+        if(len(self.tre_list) == 0):
+            print("No file level TREs", file=res)
+        else:
+            print("File level TRES:", file=res)
+            for t in self.tre_list:
+                print(t)
         for arr, name in [[self.image_segment, "Image"],
                           [self.graphic_segment, "Graphic"],
                           [self.text_segment, "Text"],
@@ -51,6 +65,15 @@ class NitfFile(object):
         '''Read the given file'''
         with open(file_name, 'rb') as fh:
             self.file_header.read_from_file(fh)
+            self.tre_list = []
+            if(self.file_header.udhdl > 0):
+                if(self.file_header.udhofl > 0):
+                    raise RuntimeError("Don't handle TRE overflow yet")
+                self.tre_list.extend(process_tre(self.udhd))
+            if(self.file_header.xhdl > 0):
+                if(self.file_header.xhdlofl > 0):
+                    raise RuntimeError("Don't handle TRE overflow yet")
+                self.tre_list.extend(process_tre(self.xhd))
             self.image_segment = [NitfImageSegment() for i in
                                   range(self.file_header.numi)]
             self.graphic_segment = [NitfGraphicSegment() for i in
@@ -66,6 +89,8 @@ class NitfFile(object):
                             self.res_segment]:
                 for seg in seglist:
                     seg.read_from_file(fh)
+            for seg in self.image_segment:
+                seg.process_tre()
             
     def write(self, file_name):
         '''Write to the given file'''
@@ -134,6 +159,31 @@ class NitfImageSegment(NitfSegment):
         if(image is None):
             image = NitfImageFromNumpy()
         NitfSegment.__init__(self,image.image_subheader, image)
+        self.tre_list = []
+    def process_tre(self):
+        if(self.subheader.udidl > 0):
+            if(self.subheader.udofl > 0):
+                raise RuntimeError("Don't handle TRE overflow yet")
+            self.tre_list.extend(process_tre(self.udid))
+        if(self.subheader.ixshdl > 0):
+            if(self.subheader.ixofl > 0):
+                raise RuntimeError("Don't handle TRE overflow yet")
+            self.tre_list.extend(process_tre(self.subheader.ixshd))
+    def __str__(self):
+        '''Text description of structure, e.g., something you can print out'''
+        fh = six.StringIO()
+        print("Sub header:", file=fh)
+        print(self.subheader, file=fh)
+        print("TREs:", file=fh)
+        if(len(self.tre_list) == 0):
+            print("No image level TREs")
+        else:
+            for tre in self.tre_list:
+                print(tre, file=fh)
+        print("Data", file=fh)
+        print(self.data, file=fh)
+        return fh.getvalue()
+            
 
 class NitfGraphicSegment(NitfSegment):
     '''Graphic segment (GS), support the standard graphic type of data.'''

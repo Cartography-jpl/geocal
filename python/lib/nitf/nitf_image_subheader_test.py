@@ -84,7 +84,6 @@ def test_tre_read():
     with open(unit_test_data + "test_use00a.ntf", 'rb') as fh:
         t.read_from_file(fh)
         t2.read_from_file(fh)
-        t3 = fh.read(121-3)
     print(t)
     print(t2)
     print(t2.ixshd)

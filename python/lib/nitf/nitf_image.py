@@ -82,15 +82,22 @@ class NitfImageFromNumpy(NitfImage):
         '''Read from a file'''
         # Sanity check that we can access this data
         ih = self.image_subheader
-        if(ih.nbpp != 8):
-            raise RuntimeError("Can only handle byte images")
         if(ih.nbands != 1):
             raise RuntimeError("Can only handle 1 band images")
         if(ih.ic != "NC"):
             raise RuntimeError("Can only handle uncompressed images")
         if(ih.nbpr != 1 or ih.nbpc != 1):
             raise RuntimeError("Cannot handle blocked data")
-        self.data = np.fromfile(fh, dtype=np.uint8, count=ih.nrows*ih.ncols)
+        if(ih.nbpp == 8):
+            self.data = np.fromfile(fh, dtype=np.uint8, count=ih.nrows*ih.ncols)
+        elif(ih.nbpp ==16):
+            self.data = np.fromfile(fh, dtype=np.uint16,
+                                    count=ih.nrows*ih.ncols)
+        elif(ih.nbpp ==32):
+            self.data = np.fromfile(fh, dtype=np.uint32,
+                                    count=ih.nrows*ih.ncols)
+        else:
+            raise RuntimeError("Unrecognized nbpp %d" % ih.npp)
         self.data = np.reshape(self.data, (ih.nrows,ih.ncols))
 
     def write_to_file(self, fh):

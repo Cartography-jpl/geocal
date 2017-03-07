@@ -13,6 +13,16 @@ def test_basic_read():
     if(False):
         print(f)
 
+def test_read_tre():
+    f = NitfFile(unit_test_data + "test_use00a.ntf")
+    assert len(f.image_segment) == 1
+    assert len(f.image_segment[0].tre_list) == 1
+    tre = f.image_segment[0].tre_list[0]
+    assert tre.tre_tag == "USE00A"
+    assert tre.angle_to_north == 270
+    if(False):
+        print(f)
+        
 def test_basic_write(isolated_dir):
     f = NitfFile()
     img = NitfImageFromNumpy(nrow=10, ncol=10)

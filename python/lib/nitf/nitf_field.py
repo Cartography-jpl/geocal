@@ -87,8 +87,8 @@ class _FieldValue(object):
         self.fstring = "{:%ds}" % self.size
         self.frmt = "%s"
         if(ty == int):
-            self.fstring = "{:0>%ds}" % self.size
-            self.frmt = "%s"
+            self.fstring = "{:s}"
+            self.frmt = "%%0%dd" % self.size
         if("frmt" in options):
             self.frmt = options["frmt"]
         self.default = options.get("default", None)
@@ -149,7 +149,7 @@ class _FieldValue(object):
         if(hasattr(parent_obj, self.field_name + "_value")):
             raise RuntimeError("Can't set value for field " + self.field_name)
         self.value(parent_obj)[key] = v
-    def bytes(self, parent_obj, key):
+    def bytes(self, parent_obj, key=()):
         '''Return bytes version of this value, formatted and padded as
         NITF will store this.'''
         v = self.get(parent_obj, key)

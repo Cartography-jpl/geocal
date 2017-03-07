@@ -18,6 +18,9 @@ class Tre(_FieldStruct):
         fh = six.BytesIO()
         _FieldStruct.write_to_file(self, fh)
         return fh.getvalue()
+    def read_from_tre_bytes(self, bt):
+        fh = six.BytesIO(bt)
+        _FieldStruct.read_from_file(self,fh)
     def read_from_file(self, fh):
         tag = fh.read(6).rstrip().decode("utf-8")
         if(tag != self.tre_tag):

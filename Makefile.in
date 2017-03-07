@@ -3111,7 +3111,8 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_image.py \
 	@srcpythonlibnitf@/nitf_image_subheader.py \
 	@srcpythonlibnitf@/nitf_tre.py \
-	@srcpythonlibnitf@/nitf_tre_use00a.py
+	@srcpythonlibnitf@/nitf_tre_use00a.py \
+	@srcpythonlibnitf@/nitf_tre_rpc.py
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed

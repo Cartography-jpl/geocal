@@ -5,51 +5,6 @@ import subprocess
 from test_support import *
 import sys
 
-# Basic test of tre_struct
-def test_tre_struct():
-    # This string was pulled from an actual file.
-    # Can get this from
-    # t = GdalRasterImage("/Users/smyth/CloudData/c205.NTF")
-    # tre_string = t.metadata("USEOOA", "TRE")
-    
-    tre_string = "270105.2 02047       34.12-21.15                                     0003317001006287            +68.5131.3"
-    tre = TreUSE00A(tre_string)
-    assert str(tre) == """angle_to_north: 270
-mean_gsd      : 105.2
-dynamic_range : 2047
-obl_ang       : 34.12
-roll_ang      : -21.15
-n_ref         : 0
-rev_num       : 3317
-n_seg         : 1
-max_lp_seg    : 6287
-sun_el        : 68.5
-sun_az        : 131.3"""
-    assert tre.angle_to_north == 270
-    assert tre.mean_gsd == 105.2
-    assert tre.dynamic_range ==2047
-    assert tre.obl_ang == 34.12
-    assert tre.roll_ang == -21.15
-    assert tre.n_ref == 0
-    assert tre.rev_num == 3317
-    assert tre.n_seg == 1
-    assert tre.max_lp_seg == 6287
-    assert tre.sun_el == 68.5
-    assert tre.sun_az == 131.3
-    tre2 = TreUSE00A()
-    tre2.angle_to_north = 270
-    tre2.mean_gsd = 105.2
-    tre2.dynamic_range = 2047
-    tre2.obl_ang = 34.12
-    tre2.roll_ang = -21.15
-    tre2.n_ref= 0
-    tre2.rev_num = 3317
-    tre2.n_seg= 1
-    tre2.max_lp_seg = 6287
-    tre2.sun_el = 68.5
-    tre2.sun_az = 131.3
-    assert tre2.string_value == tre_string
-
 @require_vicar_gdalplugin    
 def test_nitf_use00a_create(isolated_dir):
     '''Create a nitf from existing VICAR data, adding a TRE for use00a'''
@@ -89,10 +44,10 @@ def test_nitf_use00a_create(isolated_dir):
     assert tre.dynamic_range ==2047
     assert tre.obl_ang == 28.55
     assert tre.roll_ang == -28.03
-    assert tre.n_ref == None
-    assert tre.rev_num == None
-    assert tre.n_seg == None
-    assert tre.max_lp_seg == None
+    assert tre.n_ref == 0
+    assert tre.rev_num == 0
+    assert tre.n_seg == 0
+    assert tre.max_lp_seg == 0
     assert tre.sun_el == 62.5
     assert tre.sun_az == 129.6
     subprocess.check_call(["nitf_to_vicar", "-q",
@@ -233,18 +188,4 @@ def noruntest_nitf_rpc():
 
     
 
-# None the TREs we have defined include a string type, so add that in to
-# test.
-TreTEST = create_tre("TreTest", "TEST", "test", "test metadata",
-                     [["field1", 20, bytes, "%s"],
-                      ["field2", 10, bytes, "%s"]])
-
-def test_tre_string():
-    '''Test handling of string types in a TRE.'''
-    tre = TreTEST()
-    tre.field1 = "data1"
-    tre.field2 = "data2"
-    assert tre.field1 == "data1"
-    assert tre.field2 == "data2"
-    assert tre.string_value == "data1               data2     "
 

@@ -81,12 +81,13 @@ class _FieldValue(object):
         self.size = size
         self.ty = ty
         self.loop = loop
+        self.do_not_process_string = options.get("do_not_process_string", False)
         # The format string fstring is used to add the proper padding to give
         # the full size. For string is padded with spaces on the left. For
         # integers we pad on the right with 0.
         self.fstring = "{:%ds}" % self.size
         self.frmt = "%s"
-        if(ty == int):
+        if(ty == int and not self.do_not_process_string):
             self.fstring = "{:s}"
             self.frmt = "%%0%dd" % self.size
         if("frmt" in options):
@@ -138,7 +139,10 @@ class _FieldValue(object):
                 return getattr(parent_obj, self.field_name + "_value")()
             else:
                 return getattr(parent_obj, self.field_name + "_value")(*key)
-        return self.ty(self.value(parent_obj)[key])
+        if(self.ty == str):
+            return self.ty(self.value(parent_obj)[key]).rstrip()
+        else:
+            return self.ty(self.value(parent_obj)[key])
     def set(self,parent_obj,key,v):
         if(self.field_name is None):
             raise RuntimeError("Can't set a reserved field")
@@ -152,7 +156,10 @@ class _FieldValue(object):
     def bytes(self, parent_obj, key=()):
         '''Return bytes version of this value, formatted and padded as
         NITF will store this.'''
-        v = self.get(parent_obj, key)
+        if(self.do_not_process_string):
+            v = self.value(parent_obj)[key]
+        else:
+            v = self.get(parent_obj, key)
         # Don't format bytes if we have python 3
         if sys.version_info > (3,) and self.ty == bytes:
             t = v
@@ -160,8 +167,8 @@ class _FieldValue(object):
             t = self.fstring.format(self.frmt % v)
         else:
             t = self.fstring.format(self.frmt(v))
-        if(len(t) > self.size):
-            raise RuntimeError("Formatting error. String '%s' is too long for NITF field %s" % (t, self.field_name))
+        if(len(t) != self.size):
+            raise RuntimeError("Formatting error. String '%s' is not right length for NITF field %s" % (t, self.field_name))
         if(self.ty == bytes):
             return t
         else:
@@ -196,7 +203,7 @@ class _FieldValue(object):
         if(len(t) != self.size):
             raise RuntimeError("Not enough bytes left to read %d bytes for field %s" % (self.size, self.field_name))
         if(self.field_name is not None):
-            if(self.ty == str):
+            if(self.ty == str or self.do_not_process_string):
                 self.value(parent_obj)[key] = t.rstrip().decode("utf-8")
             else:
                 self.value(parent_obj)[key] = self.ty(t.rstrip())
@@ -441,6 +448,10 @@ def create_nitf_field_structure(name, description, hlp = None):
               default is all spaces for a str and 0 for a number type.
     condition - An expression used to determine if the field is included
               or not.
+    do_not_process_string - Sometimes we have a field with a particularly
+              odd format, and it is easier to just return a literal string
+              to return as the TRE field content. If this is passed, we 
+              return the exact string passed, plus any padding.
     field_value_class - Most fields can be handled by our internal _FieldValue
               class. However there are some special cases (e.g., IXSHD used
               for image segment level TREs). If we need to change this,

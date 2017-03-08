@@ -1,0 +1,3 @@
+This directory contains code for reading and writing NITF files. There are
+unit tests to look at, but also there is a top level "basic_nitf_example.py"
+that shows reading and writing a NITF file.

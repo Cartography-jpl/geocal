@@ -8,3 +8,4 @@ create_delta.bundle
 *.o
 *.lo
 .cache
+.tramp_history

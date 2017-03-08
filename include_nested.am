@@ -27,6 +27,7 @@ include geocal/script/script.am
 include geocal/python/python.am
 include geocal/python/bin/bin.am
 include geocal/python/lib/lib.am
+include geocal/python/lib/nitf/nitf.am
 include geocal/python/doc/doc_python.am
 include geocal/python/test_support/test_support.am
 

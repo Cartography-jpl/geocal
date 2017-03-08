@@ -1,0 +1,20 @@
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_field.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_file_header.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_file.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_image.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_image_subheader.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_use00a.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_rpc.py
+EXTRA_DIST+=@srcpythonlibnitf@/__init__.py
+EXTRA_DIST+=@srcpythonlibnitf@/basic_nitf_example.py
+EXTRA_DIST+=@srcpythonlibnitf@/README
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_field_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_file_header_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_file_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_subheader_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_test.py
+
+
+

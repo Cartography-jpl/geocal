@@ -2,211 +2,74 @@ from __future__ import print_function
 from builtins import range
 from builtins import object
 from geocal_swig import *
+from geocal.nitf.nitf_tre_use00a import TreUSE00A
+from geocal.nitf.nitf_tre_rpc import TreRPC00B, TreRPC00A
 import re
 import six
 import sys
 
-# Note that the string here is *always* ASCII, or UTF-8 (since we only use
-# the ASCII subset). So the encoding etc. we do with python 3 isn't really
-# something we want to support here.
-
-# The ASCII code for space is 32
-_SPACE = 32
+# This bit of code may go away. It was an older way of handling TREs before
+# we wrote geocal.nitf. It attaches the TRE to existing GdalRasterImage class.
+# For now keep this, it isn't clear what will break by removing this. This
+# code gets used in gdal_to_nitf and nitf_to_vicar, perhaps we will rewrite
+# to use the full geocal.nitf library in the future. But for now, leave this
+# in place. For new code, you most likely don't want to use this.
 
 class _GdalRasterImageHelper(object):
     def __init__(self, tre_name, tre_class):
         self.tre_name = tre_name
         self.tre_class = tre_class
     def __get__(self, d):
-        return self.tre_class(d["TRE", self.tre_name])
+        t = self.tre_class()
+        t.read_from_tre_bytes(d["TRE", self.tre_name].encode('utf-8'))
+        return t
     def exists(self, d):
         return d.has_metadata(self.tre_name, "TRE")
     def __set__(self, d, val):
-        d["TRE", self.tre_name] = val.string_value
-    
-class _TREVal(object):
-    def __init__(self, sl, ty, frmt):
-        '''This is an internally used object that handled a TRE value.
-        We take a slice 'sl' which gives the area of the string we are part
-        of. The type 'ty' is given to convert to. Finally we take the
-        sprintf format 'frmt' string to use in setting the value.'''
-        self.sl = sl
-        self.ty = ty
-        self.size = self.sl.stop - self.sl.start
-        # This forces the string to be exactly the given size, padding with
-        # spaces if needed.
-        self.fstring = "{:%ds}" % self.size
-        self.frmt = frmt
-    def __get__(self, d, cls):
-        if(d._data[self.sl] == bytearray([_SPACE] * self.size)):
-            return None
-        if sys.version_info > (3,) and self.ty == bytes:
-            return self.ty(d._data[self.sl].rstrip()).decode('utf-8')
-        else:
-            return self.ty(d._data[self.sl].rstrip())
-    def __set__(self, d, v):
-        if(v is None):
-            d._data[self.sl] = [_SPACE] * self.size
-        else:
-            if(isinstance(self.frmt, six.string_types)):
-                t = self.fstring.format(self.frmt % v)
-            else:
-                t = self.fstring.format(self.frmt(v))
-            if(len(t) > self.size):
-                raise RuntimeError("Formatting error. String '%s' is too long" % t)
-            d._data[self.sl] = t[0:self.size].encode('utf-8')
-
-class _TREStruct(object):
-    def __init__(self, value = None):
-        '''Create a TRE structure. If there is an initial value (e.g.,
-        this was read from an existing TRE) then the values are
-        set. Otherwise all the strings are initialized to the empty
-        string and numbers are initialized to 0.'''
-        self._data = bytearray()
-        for i in range(self.size): self._data.append(_SPACE)
-        if(value):
-            self.string_value = value
-    def __str__(self):
-        '''Text description of structure, e.g., something you can print
-        out.'''
-        res = []
-        maxlen = max([len(f) for f in self.field_list])
-        for f in self.field_list:
-            res.append(f.ljust(maxlen) + ": " + str(getattr(self, f)))
-        return "\n".join(res)
-
-    @property
-    def string_value(self):
-        '''The ASCII string representing the TRE. This is the raw data stored
-        in the NITF file, this isn't something you would normally print
-        out.'''
         if sys.version_info > (3,):
-            return self._data.decode('utf-8')
+            d["TRE", self.tre_name] = val.tre_bytes().decode('utf-8')
         else:
-            return str(self._data)
-    @string_value.setter
-    def string_value(self, value):
-        if(len(value) != len(self._data)):
-            raise RuntimeError("Length of value must be exactly %d" %
-                               len(self._data))
-        if sys.version_info > (3,):
-            self._data[:] = value.encode('utf-8')
-        else:
-            self._data[:] = value
+            d["TRE", self.tre_name] = val.tre_bytes()
 
-def create_tre(name, tre_name, raster_name, help_desc, description):
-    '''This create a class to handle a specific NITF TRE (a extension of
-    the file header). These are fixed field strings. We handle converting to
-    and from the raw TRE string used by such classes as GdalRasterImage.
-
-    In addition to creating this class, we also extend GdalRasterImage to
-    add a function "raster_name" that read the metadata "tre_name" and
-    return this class.
-
-    This function takes a description of the TRE. This description
-    describes each of field names, the length of the field, the type
-    of the field, and the format string used to create the field.  In
-    some cases, there may be reserved space in a TRE. This can be
-    given a field name of None. This is given as an array. For
-    example, the first part of the USEOOA is:
-
-       [["angle_to_north", 3, int, "%03d"],
-        ["mean_gsd", 5, float, "%05.1lf"],
-        [None, 1, bytes, "%s"],
-        ["dynamic_range", 5, int, "%05d"],
-       ...]
-
-    The class that is created, has properties for each of the fields allowing
-    it to be read and written to. 
-
-    Note that there can be certain odd formats (e.g., in the RPC) that
-    can't be captured by a format string. In those cases, you can supply
-    a function to call for the formatting instead.
-    '''
-    d = dict()
-    start = 0
-    d["field_list"] = []
-    d["field_type"] = {}
-    for field_name, len, ty, frmt in description:
-        if(field_name):
-            d[field_name] = _TREVal(slice(start, start + len), ty, frmt)
-            d[field_name + "_string"] = _TREVal(slice(start, start + len), bytes,
-                                                frmt)
-            d["field_list"].append(field_name)
-            d["field_type"][field_name] = ty
-        start += len
-    d['size'] = start
-    res = type(name, (_TREStruct,), d)
-    # This is a Descriptor, but for whatever reason when we use a general
-    # Descriptor the python help function no longer works (in python 2.7.1
-    # at least). Easy enough to wrap this as a property, which is handled
-    # correctly by python help
-    h = _GdalRasterImageHelper(tre_name, res)
+def _add_tre_to_gdal(tre, raster_name, help_desc):
+    h = _GdalRasterImageHelper(tre.tre_tag, tre)
     setattr(GdalRasterImage, raster_name, 
             property(h.__get__, h.__set__, None, help_desc))
     setattr(GdalRasterImage, "has_" + raster_name, 
             property(h.exists, None, None, help_desc))
 
-    return res
-
-TreUSE00A = create_tre("TreUSE00A",
-                       "USE00A", "use00a", "USEOOA metadata",
-           [["angle_to_north", 3, int, "%03d"],
-            ["mean_gsd", 5, float, "%05.1lf"],
-            [None, 1, bytes, "%s"],
-            ["dynamic_range", 5, int, "%05d"],
-            [None, 3, bytes, "%s"],
-            [None, 1, bytes, "%s"],
-            [None, 3, bytes, "%s"],
-            ["obl_ang", 5, float, "%05.2lf"],
-            ["roll_ang", 6, float, "%+04.2lf"],
-            [None, 12, bytes, "%s"],
-            [None, 15, bytes, "%s"],
-            [None, 4, bytes, "%s"],
-            [None, 1, bytes, "%s"],
-            [None, 3, bytes, "%s"],
-            [None, 1, bytes, "%s"],
-            [None, 1, bytes, "%s"],
-            ["n_ref", 2, int, "%02d"],
-            ["rev_num", 5, int, "%05d"],
-            ["n_seg", 3, int, "%03d"],
-            ["max_lp_seg", 6, int, "%06d"],
-            [None, 6, bytes, "%s"],
-            [None, 6, bytes, "%s"],
-            ["sun_el", 5, float, "%+05.1lf"],
-            ["sun_az", 5, float, "%05.1lf"],
-            ]
-           )
+_add_tre_to_gdal(TreUSE00A, "use00a", "USEOOA metadata")    
 
 def _use00a_from_gdal(self, f):
     '''Fill in TRE based on GDAL parameters. These are the metadata field
     starting with "NITF_USE00A", for example "NITF_USE00A_SUN_EL"'''
-    for field in self.field_list:
+    for field in self.field_map.keys():
         # The use00a stuff can appear either as NITF_USE00A_<blah>
         # or as NITF_<blah>. Support both ways.
         # We might not have all the tags in an particular VICAR file.
         # If not, then default to a blank value.
         if(f.has_metadata("NITF_USE00A_" + field.upper())):
-            setattr(self, field, self.field_type[field](
-                    f["NITF_USE00A_" + field.upper()]))
+            self.field_map[field].set(self,(),self.field_map[field].ty(f["NITF_USE00A_" + field.upper()]))
         elif(f.has_metadata("NITF_" + field.upper())):
-            setattr(self, field, self.field_type[field](
-                    f["NITF_" + field.upper()]))
-        else:
-            setattr(self, field, None)
+            self.field_map[field].set(self,(),self.field_map[field].ty(f["NITF_" + field.upper()]))
 
 def _use00a_to_vicar(self, f):
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
-    for field in self.field_list:
-        f["GEOTIFF", "NITF_" + field.upper()] = getattr(self, field + "_string")
+    for field in self.field_map.keys():
+        if sys.version_info > (3,):
+            f["GEOTIFF", "NITF_" + field.upper()] = self.field_map[field].bytes(self).decode('utf-8')
+        else:
+            f["GEOTIFF", "NITF_" + field.upper()] = self.field_map[field].bytes(self)
 
 def _use00a_to_gdal(self, f):
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
-    for field in self.field_list:
-        if(getattr(self, field + "_string")):
-            f["TRE_NITF_" + field.upper()] =  getattr(self, field + "_string")
+    for field in self.field_map.keys():
+        if sys.version_info > (3,):
+            f["TRE_NITF_" + field.upper()] =  self.field_map[field].bytes(self).decode('utf-8')
+        else:
+            f["TRE_NITF_" + field.upper()] =  self.field_map[field].bytes(self)
 
 TreUSE00A.from_gdal = _use00a_from_gdal
 TreUSE00A.to_vicar = _use00a_to_vicar
@@ -236,218 +99,9 @@ def tre_use00a(fin, fout, creation_option):
         tre.from_gdal(fin.raster_image(0))
         fout.use00a = tre
 
-def tre_rpc_coeff_format(v):
-    '''Convert to string for RPC coefficient for a TRE'''
-    # If too small to represent, replace with zero
-    if(abs(v) < 1e-9):
-        return '+0.000000E+0'
-    # Error if too big
-    if(abs(v) >= 1e10):
-        raise RuntimeError("Value is to large to represent in a TRE")
-    t = "%+010.6lE" % v
-    # Replace 2 digit exponent with 1 digit
-    t = re.sub(r'E([+-])0', r'E\1', t)
-    return t
-
-TreRPC00B = create_tre("TreTPC00B",
-                       "RPC00B", "rpc00b", "RPC B metadata",
-           [["success", 1, int, "%01d"],
-            ["err_bias", 7, float, "%07.2lf"],
-            ["err_rand", 7, float, "%07.2lf"],
-            ["line_off", 6, int, "%06d"],
-            ["samp_off", 5, int, "%05d"],
-            ["lat_off", 8, float, "%+08.4lf"],
-            ["long_off", 9, float, "%+09.4lf"],
-            ["height_off", 5, int, "%+05d"],
-            ["line_scale", 6, int, "%06d"],
-            ["samp_scale", 5, int, "%05d"],
-            ["lat_scale", 8, float, "%+08.4lf"],
-            ["long_scale", 9, float, "%+09.4lf"],
-            ["height_scale", 5, int, "%+05d"],
-            ["line_num_coeff_1", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_2", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_3", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_4", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_5", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_6", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_7", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_8", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_9", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_10", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_11", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_12", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_13", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_14", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_15", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_16", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_17", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_18", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_19", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_20", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_1", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_2", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_3", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_4", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_5", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_6", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_7", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_8", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_9", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_10", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_11", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_12", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_13", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_14", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_15", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_16", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_17", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_18", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_19", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_20", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_1", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_2", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_3", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_4", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_5", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_6", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_7", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_8", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_9", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_10", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_11", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_12", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_13", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_14", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_15", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_16", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_17", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_18", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_19", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_20", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_1", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_2", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_3", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_4", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_5", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_6", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_7", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_8", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_9", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_10", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_11", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_12", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_13", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_14", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_15", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_16", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_17", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_18", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_19", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_20", 12, float, tre_rpc_coeff_format],
-            ]
-           )
-
-# RCP00A is the same format at the OOB, we just have the parameters in
-# a different order (as already handled by the Rpc class). But this is
-# a separate TRE
-TreRPC00A = create_tre("TreTPC00A",
-                       "RPC00A", "rpc00a", "RPC A metadata",
-           [["success", 1, int, "%01d"],
-            ["err_bias", 7, float, "%07.2lf"],
-            ["err_rand", 7, float, "%07.2lf"],
-            ["line_off", 6, int, "%06d"],
-            ["samp_off", 5, int, "%05d"],
-            ["lat_off", 8, float, "%+08.4lf"],
-            ["long_off", 9, float, "%+09.4lf"],
-            ["height_off", 5, int, "%+05d"],
-            ["line_scale", 6, int, "%06d"],
-            ["samp_scale", 5, int, "%05d"],
-            ["lat_scale", 8, float, "%+08.4lf"],
-            ["long_scale", 9, float, "%+09.4lf"],
-            ["height_scale", 5, int, "%+05d"],
-            ["line_num_coeff_1", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_2", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_3", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_4", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_5", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_6", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_7", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_8", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_9", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_10", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_11", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_12", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_13", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_14", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_15", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_16", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_17", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_18", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_19", 12, float, tre_rpc_coeff_format],
-            ["line_num_coeff_20", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_1", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_2", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_3", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_4", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_5", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_6", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_7", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_8", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_9", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_10", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_11", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_12", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_13", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_14", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_15", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_16", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_17", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_18", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_19", 12, float, tre_rpc_coeff_format],
-            ["line_den_coeff_20", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_1", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_2", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_3", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_4", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_5", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_6", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_7", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_8", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_9", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_10", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_11", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_12", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_13", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_14", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_15", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_16", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_17", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_18", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_19", 12, float, tre_rpc_coeff_format],
-            ["samp_num_coeff_20", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_1", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_2", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_3", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_4", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_5", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_6", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_7", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_8", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_9", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_10", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_11", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_12", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_13", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_14", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_15", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_16", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_17", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_18", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_19", 12, float, tre_rpc_coeff_format],
-            ["samp_den_coeff_20", 12, float, tre_rpc_coeff_format],
-            ]
-           )
-
+_add_tre_to_gdal(TreRPC00A, "rpc00a", "RPC A metadata")    
+_add_tre_to_gdal(TreRPC00B, "rpc00b", "RPC B metadata")    
+        
 def tre_is_rpc_a(self):
     return True
 
@@ -480,19 +134,10 @@ def tre_get_rpc(self):
     rpc.sample_scale = self.samp_scale
     rpc.fit_line_numerator = [False] * 20
     rpc.fit_sample_numerator = [False] * 20
-    ld = [0.0] * 20
-    ln = [0.0] * 20
-    sd = [0.0] * 20
-    sn = [0.0] * 20
-    for i in range(20):
-        ld[i] = getattr(self, "line_den_coeff_%d" % (i+1))
-        ln[i] = getattr(self, "line_num_coeff_%d" % (i+1))
-        sd[i] = getattr(self, "samp_den_coeff_%d" % (i+1))
-        sn[i] = getattr(self, "samp_num_coeff_%d" % (i+1))
-    rpc.line_denominator = ld
-    rpc.line_numerator = ln
-    rpc.sample_denominator = sd
-    rpc.sample_numerator = sn
+    rpc.line_denominator = list(self.line_den_coeff)
+    rpc.line_numerator = list(self.line_num_coeff)
+    rpc.sample_denominator = list(self.samp_den_coeff)
+    rpc.sample_numerator = list(self.samp_num_coeff)
     return rpc
 
 def tre_set_from_rpc(self, rpc):
@@ -515,10 +160,10 @@ def tre_set_from_rpc(self, rpc):
     self.samp_off = rpc.sample_offset 
     self.samp_scale = rpc.sample_scale 
     for i in range(20):
-        setattr(self, "line_den_coeff_%d" % (i+1), rpc.line_denominator[i])
-        setattr(self, "line_num_coeff_%d" % (i+1), rpc.line_numerator[i])
-        setattr(self, "samp_den_coeff_%d" % (i+1), rpc.sample_denominator[i])
-        setattr(self, "samp_num_coeff_%d" % (i+1), rpc.sample_numerator[i])
+        self.line_den_coeff[i] = rpc.line_denominator[i]
+        self.line_num_coeff[i] = rpc.line_numerator[i]
+        self.samp_den_coeff[i] = rpc.sample_denominator[i]
+        self.samp_num_coeff[i] = rpc.sample_numerator[i]
 
 setattr(TreRPC00B, "rpc", 
         property(tre_get_rpc, tre_set_from_rpc, None, 

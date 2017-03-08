@@ -11,7 +11,8 @@
 # printable description of the contents of the structure.
 #
 # A few support classes/routines are also exported. This includes
-# FieldData (for things like TREs), hardcoded_value, and hardcoded_value1
+# NitfLiteral, FieldData (for things like TREs), hardcoded_value, and
+# hardcoded_value1
 #
 # Note what might be slightly confusing using these classes, we do all this
 # to setup a NitfField class, not a particular object. These means that all
@@ -81,13 +82,12 @@ class _FieldValue(object):
         self.size = size
         self.ty = ty
         self.loop = loop
-        self.do_not_process_string = options.get("do_not_process_string", False)
         # The format string fstring is used to add the proper padding to give
         # the full size. For string is padded with spaces on the left. For
         # integers we pad on the right with 0.
         self.fstring = "{:%ds}" % self.size
         self.frmt = "%s"
-        if(ty == int and not self.do_not_process_string):
+        if(ty == int):
             self.fstring = "{:s}"
             self.frmt = "%%0%dd" % self.size
         if("frmt" in options):
@@ -127,7 +127,7 @@ class _FieldValue(object):
             print("Condition: " + self.condition)
             print("eval: " + str(eval(self.condition)))
         return eval(self.condition)
-    def get(self,parent_obj,key):
+    def get(self,parent_obj,key, no_type_conversion=False):
         if(self.field_name is None):
             return ''
         if(self.loop is not None):
@@ -139,10 +139,15 @@ class _FieldValue(object):
                 return getattr(parent_obj, self.field_name + "_value")()
             else:
                 return getattr(parent_obj, self.field_name + "_value")(*key)
+        v = self.value(parent_obj)[key]
+        if(no_type_conversion):
+            return v
+        if(isinstance(v, NitfLiteral)):
+            v = v.value
         if(self.ty == str):
-            return self.ty(self.value(parent_obj)[key]).rstrip()
+            return self.ty(v).rstrip()
         else:
-            return self.ty(self.value(parent_obj)[key])
+            return self.ty(v)
     def set(self,parent_obj,key,v):
         if(self.field_name is None):
             raise RuntimeError("Can't set a reserved field")
@@ -156,17 +161,23 @@ class _FieldValue(object):
     def bytes(self, parent_obj, key=()):
         '''Return bytes version of this value, formatted and padded as
         NITF will store this.'''
-        if(self.do_not_process_string):
-            v = self.value(parent_obj)[key]
+        # If we have a NitfLiteral we assume some sort of funky formating
+        # that is handled outside of this class. Pad, but otherwise don't
+        # process this.
+        t = self.get(parent_obj, key, no_type_conversion=True)
+        if(isinstance(t, NitfLiteral)):
+            t = ("{:%ds}" % self.size).format(t.value)
         else:
+            # Otherwise, get the value and do the formatting that has been
+            # supplied to us.
             v = self.get(parent_obj, key)
-        # Don't format bytes if we have python 3
-        if sys.version_info > (3,) and self.ty == bytes:
-            t = v
-        elif(isinstance(self.frmt, str)):
-            t = self.fstring.format(self.frmt % v)
-        else:
-            t = self.fstring.format(self.frmt(v))
+            # Don't format bytes if we have python 3
+            if sys.version_info > (3,) and self.ty == bytes:
+                t = v
+            elif(isinstance(self.frmt, str)):
+                t = self.fstring.format(self.frmt % v)
+            else:
+                t = self.fstring.format(self.frmt(v))
         if(len(t) != self.size):
             raise RuntimeError("Formatting error. String '%s' is not right length for NITF field %s" % (t, self.field_name))
         if(self.ty == bytes):
@@ -194,7 +205,7 @@ class _FieldValue(object):
         fh.seek(parent_obj.fh_loc[self.field_name][key])
         fh.write(self.bytes(parent_obj,key))
         fh.seek(last_pos)           
-    def read_from_file(self, parent_obj, key, fh):
+    def read_from_file(self, parent_obj, key, fh,nitf_literal=False):
         if(not self.check_condition(parent_obj, key)):
             return
         if(DEBUG and self.field_name is not None):
@@ -203,7 +214,9 @@ class _FieldValue(object):
         if(len(t) != self.size):
             raise RuntimeError("Not enough bytes left to read %d bytes for field %s" % (self.size, self.field_name))
         if(self.field_name is not None):
-            if(self.ty == str or self.do_not_process_string):
+            if(nitf_literal):
+                self.value(parent_obj)[key] = NitfLiteral(t.rstrip().decode("utf-8"))
+            elif(self.ty == str):
                 self.value(parent_obj)[key] = t.rstrip().decode("utf-8")
             else:
                 self.value(parent_obj)[key] = self.ty(t.rstrip())
@@ -232,7 +245,7 @@ class _FieldLoopStruct(object):
         for i in range(maxi):
             for f in self.field_value_list:
                 f.write_to_file(parent_object, lead + (i,), fh)
-    def read_from_file(self, parent_object, key, fh):
+    def read_from_file(self, parent_object, key, fh, nitf_literal=False):
         if(key is None):
             lead = ()
         else:
@@ -240,7 +253,7 @@ class _FieldLoopStruct(object):
         maxi = self.shape(parent_object, lead=lead)
         for i in range(maxi):
             for f in self.field_value_list:
-                f.read_from_file(parent_object, lead + (i,), fh)
+                f.read_from_file(parent_object, lead + (i,), fh, nitf_literal)
     def desc(self, parent_object):
         '''Text description of structure, e.g., something you can print
         out.'''
@@ -296,10 +309,18 @@ class _FieldStruct(object):
         '''Write to a file stream.'''
         for f in self.field_value_list:
             f.write_to_file(self, (), fh)
-    def read_from_file(self, fh):
-        '''Read from a file stream.'''
+    def read_from_file(self, fh, nitf_literal=False):
+        '''Read from a file stream.  
+        
+        nitf_literal set to True is to handle odd formatting rules,
+        where we want to read the values from a file as a string and
+        not apply any additional formatting. The data is read as
+        NitfLiteral objects. Normally you don't want this option, but
+        it can be useful for cases hard to capture otherwise (e.g.,
+        heritage systems that depend on specific formatting).
+        '''
         for f in self.field_value_list:
-            f.read_from_file(self, (), fh)
+            f.read_from_file(self, (), fh, nitf_literal)
     def update_field(self, fh, field_name, value, key = ()):
         '''Update a field name in an open file'''
         fv = self.field_map[field_name]
@@ -358,7 +379,7 @@ class FieldData(object):
             return
         parent_obj.fh_loc[self.field_name][key] = fh.tell()
         fh.write(self.value(parent_obj)[key])
-    def read_from_file(self, parent_obj, key, fh):
+    def read_from_file(self, parent_obj, key, fh,nitf_literal=False):
         if(len(key) > 0):
             raise RuntimeError("Need key support here")
         sz = getattr(parent_obj, self.size_field)
@@ -420,6 +441,16 @@ def hardcoded_value(v):
         return v
     return f
 
+class NitfLiteral(object):
+    '''Sometimes we have a field with a particularly odd format, and it 
+    is easier to just return a literal string to return as the TRE field 
+    content. If this is passed, we return the exact string passed, plus
+    any padding.'''
+    def __init__(self, value, trunc_size = None):
+        if(trunc_size is None):
+            self.value = str(value)
+        else:
+            self.value = str(value)[0:(trunc_size-1)]
 
 def create_nitf_field_structure(name, description, hlp = None):
     '''Create a nitf field structure and return a class for dealing with this. 
@@ -448,10 +479,6 @@ def create_nitf_field_structure(name, description, hlp = None):
               default is all spaces for a str and 0 for a number type.
     condition - An expression used to determine if the field is included
               or not.
-    do_not_process_string - Sometimes we have a field with a particularly
-              odd format, and it is easier to just return a literal string
-              to return as the TRE field content. If this is passed, we 
-              return the exact string passed, plus any padding.
     field_value_class - Most fields can be handled by our internal _FieldValue
               class. However there are some special cases (e.g., IXSHD used
               for image segment level TREs). If we need to change this,

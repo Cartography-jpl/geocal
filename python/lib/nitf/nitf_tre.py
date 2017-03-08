@@ -18,16 +18,16 @@ class Tre(_FieldStruct):
         fh = six.BytesIO()
         _FieldStruct.write_to_file(self, fh)
         return fh.getvalue()
-    def read_from_tre_bytes(self, bt):
+    def read_from_tre_bytes(self, bt, nitf_literal = False):
         fh = six.BytesIO(bt)
-        _FieldStruct.read_from_file(self,fh)
-    def read_from_file(self, fh):
+        _FieldStruct.read_from_file(self,fh, nitf_literal)
+    def read_from_file(self, fh, nitf_literal = False):
         tag = fh.read(6).rstrip().decode("utf-8")
         if(tag != self.tre_tag):
             raise RuntimeError("Expected TRE %s but got %s" % (self.tre_tag, tag))
         cel = int(fh.read(5))
         st = fh.tell()
-        _FieldStruct.read_from_file(self,fh)
+        _FieldStruct.read_from_file(self,fh, nitf_literal)
         sz = fh.tell() - st
         if(sz != cel):
             raise RuntimeError("TRE length was expected to be %d but was actually %d" % (cel, sz))
@@ -70,7 +70,7 @@ class TreUnknown(Tre):
         return self.tre_tag
     def cel_value(self):
         return len(self.tre_bytes())
-    def read_from_file(self, fh):
+    def read_from_file(self, fh, nitf_literal=False):
         self.tre_tag = fh.read(6).rstrip().decode("utf-8")
         cel = int(fh.read(5))
         self.tre_bytes = fh.read(cel)

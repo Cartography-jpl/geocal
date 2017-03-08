@@ -16,12 +16,14 @@ import sys
 # in place. For new code, you most likely don't want to use this.
 
 class _GdalRasterImageHelper(object):
-    def __init__(self, tre_name, tre_class):
+    def __init__(self, tre_name, tre_class, nitf_literal=False):
         self.tre_name = tre_name
         self.tre_class = tre_class
+        self.nitf_literal = nitf_literal
     def __get__(self, d):
         t = self.tre_class()
-        t.read_from_tre_bytes(d["TRE", self.tre_name].encode('utf-8'))
+        t.read_from_tre_bytes(d["TRE", self.tre_name].encode('utf-8'),
+                              self.nitf_literal)
         return t
     def exists(self, d):
         return d.has_metadata(self.tre_name, "TRE")
@@ -31,8 +33,8 @@ class _GdalRasterImageHelper(object):
         else:
             d["TRE", self.tre_name] = val.tre_bytes()
 
-def _add_tre_to_gdal(tre, raster_name, help_desc):
-    h = _GdalRasterImageHelper(tre.tre_tag, tre)
+def _add_tre_to_gdal(tre, raster_name, help_desc, nitf_literal=False):
+    h = _GdalRasterImageHelper(tre.tre_tag, tre, nitf_literal=nitf_literal)
     setattr(GdalRasterImage, raster_name, 
             property(h.__get__, h.__set__, None, help_desc))
     setattr(GdalRasterImage, "has_" + raster_name, 

@@ -6,6 +6,7 @@
 from __future__ import print_function
 from .nitf_file_header import NitfFileHeader
 from .nitf_image_subheader import NitfImageSubheader
+from .nitf_text_subheader import NitfTextSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageCannotHandle
 from .nitf_tre import process_tre
@@ -279,11 +280,47 @@ class NitfGraphicSegment(NitfPlaceHolder):
     def __init__(self, header_size=None, data_size=None):
         NitfPlaceHolder.__init__(self, header_size, data_size, "Graphic Segment")
 
-class NitfTextSegment(NitfPlaceHolder):
+class NitfTextSegment(NitfSegment):
     '''Text segment (TS), support the standard text type of data'''
-    def __init__(self, header_size=None, data_size=None):
-        NitfPlaceHolder.__init__(self, header_size, data_size, "Text Segment")
-    
+    def __init__(self, txt='', header_size=None, data_size=None):
+        h = NitfTextSubheader()
+        self.header_size = header_size
+        self.data_size = data_size
+        NitfSegment.__init__(self, h, copy.copy(txt))
+        self.tre_list = []
+    def read_from_file(self, fh):
+        '''Read from a file'''
+        self.subheader.read_from_file(fh)
+        self.data = fh.read(self.data_size)
+    def process_tre(self):
+        if(self.subheader.txshdl > 0):
+            if(self.subheader.txsofl > 0):
+                raise RuntimeError("Don't handle TRE overflow yet")
+            self.tre_list.extend(process_tre(self.txsofl))
+        
+    def __str__(self):
+        '''Text description of structure, e.g., something you can print out'''
+        fh = six.StringIO()
+        print("Sub header:", file=fh)
+        print(self.subheader, file=fh)
+        print("TREs:", file=fh)
+        if(len(self.tre_list) == 0):
+            print("No text level TREs")
+        else:
+            for tre in self.tre_list:
+                print(tre, file=fh)
+        print("Text", file=fh)
+        print(self.data.decode('utf-8'), file=fh)
+        return fh.getvalue()
+    def write_to_file(self, fh):
+        '''Write to a file. The returns (sz_header, sz_data), because this
+        information is needed by NitfFile.'''
+        start_pos = fh.tell()
+        self.subheader.write_to_file(fh)
+        header_pos = fh.tell()
+        fh.write(self.data.encode('utf-8'))
+        return (header_pos - start_pos, fh.tell() - header_pos)
+   
 class NitfDes(NitfPlaceHolder):
     '''Data extension segment (DES), allows for the addition of different data 
     types with each type encapsulated in its own DES'''

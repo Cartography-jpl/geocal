@@ -32,7 +32,7 @@ from collections import defaultdict
 import sys
 
 # Add a bunch of debugging if you are diagnosing a problem
-DEBUG = False
+DEBUG = True
 class _FieldValueArrayAccess(object):
     '''Provides an array access to a _FieldValue that is part of a loop 
     structure'''

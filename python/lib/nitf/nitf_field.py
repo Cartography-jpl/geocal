@@ -372,7 +372,7 @@ class FieldData(object):
         if(len(v) == 0):
             setattr(parent_obj, self.size_field, 0)
         else:
-            setattr(parent_obj, self.size_field, len(self.data) +
+            setattr(parent_obj, self.size_field, len(v) +
                     self.size_offset)
     def write_to_file(self, parent_obj, key, fh):
         if(len(self.value(parent_obj)[key]) == 0):

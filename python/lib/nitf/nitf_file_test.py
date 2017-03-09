@@ -1,4 +1,5 @@
 from .nitf_file import *
+from .nitf_tre_use00a import *
 from test_support import *
 import subprocess
 
@@ -30,6 +31,19 @@ def test_basic_write(isolated_dir):
         for j in range(10):
             img.data[i,j] = i + j
     f.image_segment.append(NitfImageSegment(img))
+    t = TreUSE00A()
+    t.angle_to_north = 270
+    t.mean_gsd = 105.2
+    t.dynamic_range = 2047
+    t.obl_ang = 34.12
+    t.roll_ang = -21.15
+    t.n_ref = 0
+    t.rev_num = 3317
+    t.n_seg = 1
+    t.max_lp_seg = 6287
+    t.sun_el = 68.5
+    t.sun_az = 131.3
+    f.tre_list.append(t)
     f.write("z.ntf")
     f2 = NitfFile("z.ntf")
     assert len(f2.image_segment) == 1
@@ -38,6 +52,20 @@ def test_basic_write(isolated_dir):
     for i in range(10):
         for j in range(10):
             assert img.data[i,j] == i + j
+    assert len(f2.tre_list) == 1
+    t = f2.tre_list[0]
+    assert t.tre_tag == "USE00A"
+    assert t.angle_to_north == 270
+    assert_almost_equal(t.mean_gsd, 105.2)
+    assert t.dynamic_range == 2047
+    assert_almost_equal(t.obl_ang, 34.12)
+    assert_almost_equal(t.roll_ang, -21.15)
+    assert t.n_ref == 0
+    assert t.rev_num == 3317
+    assert t.n_seg == 1
+    assert t.max_lp_seg == 6287
+    assert_almost_equal(t.sun_el, 68.5)
+    assert_almost_equal(t.sun_az, 131.3)
     
     # Print out diagnostic information, useful to make sure the file
     # we generate is valid.

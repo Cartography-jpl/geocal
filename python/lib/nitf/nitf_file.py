@@ -69,11 +69,11 @@ class NitfFile(object):
             if(self.file_header.udhdl > 0):
                 if(self.file_header.udhofl > 0):
                     raise RuntimeError("Don't handle TRE overflow yet")
-                self.tre_list.extend(process_tre(self.udhd))
+                self.tre_list.extend(process_tre(self.file_header.udhd))
             if(self.file_header.xhdl > 0):
                 if(self.file_header.xhdlofl > 0):
                     raise RuntimeError("Don't handle TRE overflow yet")
-                self.tre_list.extend(process_tre(self.xhd))
+                self.tre_list.extend(process_tre(self.file_header.xhd))
             self.image_segment = [NitfImageSegment() for i in
                                   range(self.file_header.numi)]
             self.graphic_segment = [NitfGraphicSegment() for i in
@@ -91,10 +91,40 @@ class NitfFile(object):
                     seg.read_from_file(fh)
             for seg in self.image_segment:
                 seg.process_tre()
-            
+
+    def prepare_tre_write(self):
+        '''Go through the TRE list, and use this to fill in XHD, UDHD, and
+        a TRE_OVERFLOW DES'''
+        xhd_fh = six.BytesIO()
+        xhd_size = 0
+        udhd_fh = six.BytesIO()
+        udhd_size = 0
+        des_fh = six.BytesIO()
+        des_size = 0
+        for tre in self.tre_list:
+            fht = six.BytesIO()
+            tre.write_to_file(fht)
+            t = fht.getvalue()
+            if(xhd_size + len(t) < 99999-3):
+                xhd_fh.write(t)
+                xhd_size += len(t)
+            elif(udhd_size + len(t) < 99999-3):
+                udhd_fh.write(t)
+                udhd_size += len(t)
+            else:
+                des_fh.write(t)
+                des_size += len(t)
+        if(xhd_size > 0):
+            self.file_header.xhd = xhd_fh.getvalue()
+        if(udhd_size > 0):
+            self.file_header.udhd = udhd_fh.getvalue()
+        if(des_size > 0):
+            raise RuntimeError("Don't handle TRE overflow yet")
+        
     def write(self, file_name):
         '''Write to the given file'''
         with open(file_name, 'wb') as fh:
+            self.prepare_tre_write()
             h = self.file_header
             h.numi = len(self.image_segment)
             h.nums = len(self.graphic_segment)

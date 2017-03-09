@@ -94,6 +94,7 @@ class _FieldValue(object):
             self.frmt = options["frmt"]
         self.default = options.get("default", None)
         self.condition = options.get("condition", None)
+        self.optional = options.get("optional", False)
 
     def value(self,parent_obj):
         if(self.field_name is None):
@@ -101,6 +102,8 @@ class _FieldValue(object):
         if(self.field_name not in parent_obj.value):
             if(self.default is not None):
                 parent_obj.value[self.field_name] = defaultdict(lambda : self.default)
+            elif(self.optional):
+                parent_obj.value[self.field_name] = defaultdict(lambda : None)
             elif(self.ty == str):
                 parent_obj.value[self.field_name] = defaultdict(lambda : " " * self.size)
             else:
@@ -140,6 +143,8 @@ class _FieldValue(object):
             else:
                 return getattr(parent_obj, self.field_name + "_value")(*key)
         v = self.value(parent_obj)[key]
+        if(self.optional and v is None):
+            return None
         if(no_type_conversion):
             return v
         if(isinstance(v, NitfLiteral)):
@@ -157,6 +162,8 @@ class _FieldValue(object):
             raise RuntimeError("Can't set value for field %s because the condition '%s' isn't met" % (self.field_name, self.condition))
         if(hasattr(parent_obj, self.field_name + "_value")):
             raise RuntimeError("Can't set value for field " + self.field_name)
+        if(v is None and not self.optional):
+            raise RuntimeError("Can only set a field to 'None' if it is marked as being optional")
         self.value(parent_obj)[key] = v
     def bytes(self, parent_obj, key=()):
         '''Return bytes version of this value, formatted and padded as
@@ -167,6 +174,8 @@ class _FieldValue(object):
         t = self.get(parent_obj, key, no_type_conversion=True)
         if(isinstance(t, NitfLiteral)):
             t = ("{:%ds}" % self.size).format(t.value)
+        elif(t is None and self.optional):
+            t = ("{:%ds}" % self.size).format("")
         else:
             # Otherwise, get the value and do the formatting that has been
             # supplied to us.
@@ -216,10 +225,15 @@ class _FieldValue(object):
         if(self.field_name is not None):
             if(nitf_literal):
                 self.value(parent_obj)[key] = NitfLiteral(t.rstrip().decode("utf-8"))
+            elif(self.optional and t.rstrip() == b''):
+                self.value(parent_obj)[key] = None
             elif(self.ty == str):
                 self.value(parent_obj)[key] = t.rstrip().decode("utf-8")
             else:
-                self.value(parent_obj)[key] = self.ty(t.rstrip())
+                v = t.rstrip()
+                if(v == b''):
+                    raise RuntimeError("Empty string read for field %s" % self.field_name)
+                self.value(parent_obj)[key] = self.ty(v)
 
 class _FieldLoopStruct(object):
     # The __dict__ is at class level
@@ -479,6 +493,12 @@ def create_nitf_field_structure(name, description, hlp = None):
               default is all spaces for a str and 0 for a number type.
     condition - An expression used to determine if the field is included
               or not.
+    optional - If true, a field is optional. Note that this is different than
+              conditional - with conditional the bytes for the field might
+              or might not be present. With optional, they are always present
+              but might be all spaces which indicates the value is not there.
+              If optional is present, we translate all spaces in the NITF
+              file to and from the python "None" object
     field_value_class - Most fields can be handled by our internal _FieldValue
               class. However there are some special cases (e.g., IXSHD used
               for image segment level TREs). If we need to change this,

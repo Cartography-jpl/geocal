@@ -1,5 +1,6 @@
 from .nitf_file import *
 from .nitf_tre_use00a import *
+from .nitf_tre_piae import *
 from test_support import *
 import subprocess
 

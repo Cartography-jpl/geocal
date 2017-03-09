@@ -3112,7 +3112,8 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_image_subheader.py \
 	@srcpythonlibnitf@/nitf_tre.py \
 	@srcpythonlibnitf@/nitf_tre_use00a.py \
-	@srcpythonlibnitf@/nitf_tre_rpc.py
+	@srcpythonlibnitf@/nitf_tre_rpc.py \
+	@srcpythonlibnitf@/nitf_tre_piae.py
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed
@@ -10909,7 +10910,7 @@ install-python: all
 
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@-include $(patsubst %.cc, %.Pcc, $(INCLUDE_SWIG_SRC))
 # Backdoor rule to do a quick install when we are just varying python
-install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-geocalpkgpythonnitfPYTHON install-dist_geocalpkgpythonnitfDATA install-dist_binSCRIPTS
+install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-geocalpkgpythonnitfPYTHON install-dist_binSCRIPTS
 
 python_check:
 	export PATH=$(PYTHON_CHECK_PATH) && \

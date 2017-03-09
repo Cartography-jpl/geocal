@@ -1,6 +1,12 @@
 # We import a number of "private" classes from nitf_field. This module really
 # is part of nitf_field.py, we have just pulled it out into a separate file
 # to keep things clean
+#
+# Note when importing TREs that much of the documentation is in PDF tables.
+# You can't easily paste this directly to emacs. But you can import to Excel.
+# To do this, cute and paste the table into *Word*, and then cut and paste
+# from word to Excel. For some reason, you can't go directly to Excel. You
+# can then cut and paste from excel to emacs
 from __future__ import print_function
 from .nitf_field import _FieldStruct, _FieldLoopStruct, \
     _FieldValueArrayAccess, _create_nitf_field_structure

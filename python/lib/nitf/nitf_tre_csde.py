@@ -1,5 +1,39 @@
 from .nitf_tre import *
 
+hlp = '''This is the STDIDC TRE, Standard ID
+
+The field names can be pretty cryptic, but are documented in detail in 
+the NITF TRE documentation (STDI-0002 V4.0, available at 
+http://www.gwg.nga.mil/ntb/baseline/docs/stdi0002).
+
+There is a table in the main body on page vii that gives the a pointer for 
+where in the document a particular TRE is defined.
+
+STDIDC is documented at D-8.
+'''
+desc = ["STDIDC",
+        ["acquisition_date", 14, str],
+        ["mission", 14, str],
+        ["pass", 2, str],
+        ["op_num", 3, int],
+        ["start_segment", 2, str],
+        ["repro_num", 2, int],
+        ["replay_regen", 3, str],
+        ["blank_fill", 1, str],
+        ["start_column", 3, int],
+        ["start_row", 5, int],
+        ["end_segment", 2, str],
+        ["end_column", 3, int],
+        ["end_row", 5, int],
+        ["country", 2, str, {"optional" : True}],
+        ["wac", 4, int, {"optional" : True}],
+        ["location", 11, str],
+	[None, 5, None],
+	[None, 8, None]
+]
+
+TreSTDIDC = create_nitf_tre_structure("TreSTDIDC", desc, hlp=hlp)
+
 hlp = '''This is the USE00A TRE, Exploitation Usability TRE. 
 
 The field names can be pretty cryptic, but are documented in detail in 
@@ -39,4 +73,5 @@ desc = ["USE00A",
 ]
 
 TreUSE00A = create_nitf_tre_structure("TreUSE00A",desc,hlp=hlp)
+
 

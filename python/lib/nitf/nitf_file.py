@@ -9,7 +9,7 @@ from .nitf_image_subheader import NitfImageSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageCannotHandle
 from .nitf_tre import process_tre
-from .nitf_tre_use00a import *
+from .nitf_tre_csde import *
 import io,six
 
 class NitfFile(object):

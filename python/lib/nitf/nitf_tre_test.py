@@ -1,5 +1,5 @@
 from .nitf_tre import *
-from .nitf_tre_use00a import *
+from .nitf_tre_csde import *
 from .nitf_file_header import *
 from .nitf_image_subheader import *
 from test_support import *
@@ -7,7 +7,7 @@ import io, six
 
 def test_tre():
     # This is parte of USE00A, but we give it a different name so it
-    # doesn't conflict with the real TRE defined in nitf_tre_use00a.py
+    # doesn't conflict with the real TRE defined in nitf_tre_csde.py
     TestUSE00A = create_nitf_tre_structure("TestUSE00A",
         ["USETST",
          ["angle_to_north", 3, int],

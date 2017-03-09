@@ -1,6 +1,16 @@
 from .nitf_tre import *
 
-hlp = '''This is the USE00A TRE, Exploitation Usability TRE.'''
+hlp = '''This is the USE00A TRE, Exploitation Usability TRE. 
+
+The field names can be pretty cryptic, but are documented in detail in 
+the NITF TRE documentation (STDI-0002 V4.0, available at 
+http://www.gwg.nga.mil/ntb/baseline/docs/stdi0002).
+
+There is a table in the main body on page vii that gives the a pointer for 
+where in the document a particular TRE is defined.
+
+USE00A is documented at D-11.
+'''
 desc = ["USE00A",
         ["angle_to_north", 3, int],
         ["mean_gsd", 5, float, {"frmt" : "%05.1lf"}],

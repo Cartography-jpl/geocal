@@ -226,4 +226,14 @@ def test_tre_overflow_write(isolated_dir):
                 subprocess.call(["show_nitf++", "z.ntf"])
                 
     
-    
+def test_read_quickbird():
+    '''Test reading a quickbird NITF file.'''
+    # This is a large file, which we don't want to depend on. Run this
+    # test if we happen to find the data, but skip otherwise.
+    fname = "/raid21/quickbird/05NOV23034644-P1BS-005545406180_01_P001.NTF"
+    try: 
+        f = NitfFile(fname)
+        print(f)
+    except FileNotFoundError:
+        pass
+        

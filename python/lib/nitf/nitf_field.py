@@ -390,7 +390,7 @@ class FieldData(object):
     def get_print(self, parent_obj,key):
         t = self.get(parent_obj,key)
         if(len(t) == 0):
-            t = "Not used"
+            return "Not used"
         return "Data length %s" % len(t)
         
 class _create_nitf_field_structure(object):

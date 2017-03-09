@@ -38,15 +38,14 @@ class NitfFile(object):
         print(self.file_header, file=res)
         print("-------------------------------------------------------------",
               file=res)
-        print("-------------------------------------------------------------",
-              file=res)
-        print("File level TRES:", file=res)
         if(len(self.tre_list) == 0):
             print("No file level TREs", file=res)
         else:
             print("File level TRES:", file=res)
             for t in self.tre_list:
                 print(t)
+            print("-------------------------------------------------------------",
+                  file=res)
         for arr, name in [[self.image_segment, "Image"],
                           [self.graphic_segment, "Graphic"],
                           [self.text_segment, "Text"],
@@ -54,10 +53,13 @@ class NitfFile(object):
                           [self.res_segment, "Reserved Extension"]]:
             if(len(arr) == 0):
                 print("No %s segments" % name, file=res)
+            else:
+                print("-------------------------------------------------------------",
+                      file=res)
             for i, seg in enumerate(arr):
                 print("%s segment %d of %d" % (name, i+1, len(arr)),
                       file=res)
-                print(seg,file=res)
+                print(seg,end='',file=res)
                 print("-------------------------------------------------------------",
                       file=res)
         return res.getvalue()
@@ -76,14 +78,22 @@ class NitfFile(object):
                 self.tre_list.extend(process_tre(self.file_header.xhd))
             self.image_segment = [NitfImageSegment() for i in
                                   range(self.file_header.numi)]
-            self.graphic_segment = [NitfGraphicSegment() for i in
-                                    range(self.file_header.nums)]
-            self.text_segment = [NitfTextSegment() for i in
-                                 range(self.file_header.numt)]
-            self.des_segment = [NitfDesSegment() for i in
-                                 range(self.file_header.numdes)]
-            self.res_segment = [NitfResSegment() for i in
-                                 range(self.file_header.numres)]
+            self.graphic_segment = \
+               [NitfGraphicSegment(self.file_header.lssh[i] +
+                                   self.file_header.ls[i]) for i in
+                range(self.file_header.nums)]
+            self.text_segment = \
+               [NitfTextSegment(self.file_header.ltsh[i] +
+                                   self.file_header.lt[i]) for i in
+                range(self.file_header.numt)]
+            self.des_segment = \
+               [NitfDesSegment(self.file_header.ldsh[i] +
+                                   self.file_header.ld[i]) for i in
+                range(self.file_header.numdes)]
+            self.res_segment = \
+               [NitfResSegment(self.file_header.lresh[i] +
+                                   self.file_header.lre[i]) for i in
+                range(self.file_header.numres)]
             for seglist in [self.image_segment, self.graphic_segment, 
                             self.text_segment, self.des_segment, 
                             self.res_segment]:
@@ -176,10 +186,29 @@ class NitfSegment(object):
         self.data.write_to_file(fh)
         return (header_pos - start_pos, fh.tell() - header_pos)
 
-class NitfTre(object):
-    '''Tagged Record Extension (TRE)'''
-    def __init__(self):
-        pass
+class NitfPlaceHolder(NitfSegment):
+    '''Implementation of NitfSegment that just skips over the data.'''
+    def __init__(self, sz, type_name):
+        NitfSegment.__init__(self, None, None)
+        self.sz = sz
+        self.type_name = type_name
+
+    def __str__(self):
+        '''Text description of structure, e.g., something you can print out'''
+        fh = six.StringIO()
+        print("%s segment, size %d" % (self.type_name, self.sz), file=fh)
+        return fh.getvalue()
+
+    def read_from_file(self, fh):
+        '''Read from a file'''
+        # Just skip over the data
+        fh.seek(self.sz, 1)
+
+    def write_to_file(self, fh):
+        '''Write to a file. The returns (sz_header, sz_data), because this
+        information is needed by NitfFile.'''
+        raise RuntimeError("write_to_file not implemented for %s" % self.type_name)
+        
 
 class NitfImageSegment(NitfSegment):
     '''Image segment (IS), supports the standard image type of data.'''
@@ -215,26 +244,26 @@ class NitfImageSegment(NitfSegment):
         return fh.getvalue()
             
 
-class NitfGraphicSegment(NitfSegment):
+class NitfGraphicSegment(NitfPlaceHolder):
     '''Graphic segment (GS), support the standard graphic type of data.'''
-    def __init__(self):
-        pass
+    def __init__(self, sz):
+        NitfPlaceHolder.__init__(self, sz, "Graphic Segment")
 
-class NitfTextSegment(NitfSegment):
+class NitfTextSegment(NitfPlaceHolder):
     '''Text segment (TS), support the standard text type of data'''
-    def __init__(self):
-        pass
+    def __init__(self, sz):
+        NitfPlaceHolder.__init__(self, sz, "Text Segment")
     
-class NitfDes(NitfSegment):
+class NitfDes(NitfPlaceHolder):
     '''Data extension segment (DES), allows for the addition of different data 
     types with each type encapsulated in its own DES'''
-    def __init__(self):
-        pass
+    def __init__(self, sz):
+        NitfPlaceHolder.__init__(self, sz, "DES")
 
-class NitfReservedExtensionSegment(NitfSegment):
+class NitfReservedExtensionSegment(NitfPlaceHolder):
     '''Reserved extension segment (RES), non-standard data segment which is
     user-defined. A NITF file can support different user-defined types of 
     segments called RES.'''
-    def __init__(self):
-        pass
+    def __init__(self, sz):
+        NitfPlaceHolder.__init__(self, sz, "RES")
     

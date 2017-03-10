@@ -43,7 +43,7 @@ t.sun_az = 131.3
 t2 = copy.copy(t)
 t2.angle_to_north = 290
 f.tre_list.append(t)
-f.image_segment[0].tre_list.append(t)
+f.image_segment[0].tre_list.append(t2)
 
 # Now we write out to a nitf file
 f.write("basic_nitf.ntf")

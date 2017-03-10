@@ -198,7 +198,7 @@ class _FieldValue(object):
             return
         if(self.field_name is not None):
             if(DEBUG):
-                print("Writing: ", self.field_name)
+                print("Writing: ", self.field_name, self.bytes(parent_obj,key))
             parent_obj.fh_loc[self.field_name][key] = fh.tell()
         fh.write(self.bytes(parent_obj,key))
     def update_file(self, parent_obj, key, fh):

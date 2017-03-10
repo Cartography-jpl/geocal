@@ -11,8 +11,7 @@ from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageCannotHandle
 from .nitf_tre import read_tre, prepare_tre_write
-from .nitf_tre_csde import *
-import io,six
+import io,six,copy
 
 class NitfFile(object):
     def __init__(self, file_name = None):
@@ -111,6 +110,12 @@ class NitfFile(object):
             prepare_tre_write(self.tre_list, h, self.des_segment,
                               [["xhdl", "xhdlofl", "xhd"],
                                ["udhdl", "udhofl", "udhd"]])
+            for seglist in [self.image_segment, self.graphic_segment, 
+                            self.text_segment, self.des_segment,
+                            self.res_segment]:
+                for i, seg in enumerate(seglist):
+                    # Seg index is 1 based, so add 1 to get it
+                    seg.prepare_tre_write(self.des_segment, i+1)
             h.numi = len(self.image_segment)
             h.nums = len(self.graphic_segment)
             h.numt = len(self.text_segment)
@@ -127,7 +132,6 @@ class NitfFile(object):
                                       [self.des_segment, "ldsh", "ld"],
                                       [self.res_segment, "lresh", "lre"]]:
                 for i, seg in enumerate(seglist):
-                    seg.prepare_tre_write(self.des_segment)
                     hs, ds = seg.write_to_file(fh)
                     h.update_field(fh, fhs, hs, (i,))
                     h.update_field(fh, fds, ds, (i,))
@@ -152,7 +156,7 @@ class NitfSegment(object):
         # By default, segment doesn't have any TREs
         pass
 
-    def prepare_tre_write(self, des_list):
+    def prepare_tre_write(self, des_list, seg_index):
         '''Process the TREs in a segment putting them in the various places
         in header and DES overflow before writing out the segment.'''
         # By default, segment doesn't have any TREs
@@ -233,10 +237,10 @@ class NitfImageSegment(NitfSegment):
                 else:
                     raise
         self.data = t
-    def prepare_tre_write(self, des_list):
+    def prepare_tre_write(self, des_list, seg_index):
         prepare_tre_write(self.tre_list, self.subheader,des_list,
                           [["ixshdl", "ixofl", "ixshd"],
-                           ["udidl", "udofl", "udid"]])
+                           ["udidl", "udofl", "udid"]], seg_index)
     def read_tre(self, des_list):
         self.tre_list = read_tre(self.subheader,des_list,
                                  [["ixshdl", "ixofl", "ixshd"],
@@ -273,9 +277,9 @@ class NitfTextSegment(NitfSegment):
         '''Read from a file'''
         self.subheader.read_from_file(fh)
         self.data = fh.read(self.data_size)
-    def prepare_tre_write(self, des_list):
+    def prepare_tre_write(self, des_list, seg_index):
         prepare_tre_write(self.tre_list, self.subheader,des_list,
-                          [["txshdl", "txsofl", "txshd"]])
+                          [["txshdl", "txsofl", "txshd"]], seg_index)
     def read_tre(self, des_list):
         self.tre_list = read_tre(self.subheader,des_list,
                                  [["txshdl", "txsofl", "txshd"]])

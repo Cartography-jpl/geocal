@@ -153,8 +153,8 @@ def test_large_tre_write(isolated_dir):
             assert img.data[i,j] == i + j
     assert len(f2.tre_list) == 2
     assert len(f2.image_segment[0].tre_list) == 2
-    check_tre(f2.tre_list[1])
-    check_tre2(f2.image_segment[0].tre_list[1])
+    check_tre([tre for tre in f2.tre_list if tre.tre_tag == "USE00A"][0])
+    check_tre2([tre for tre in f2.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0])
     print_diag(f2)
 
 def test_tre_overflow_write(isolated_dir):
@@ -171,7 +171,7 @@ def test_tre_overflow_write(isolated_dir):
     f.image_segment[0].tre_list.append(TreBig())
     f.image_segment[0].tre_list.append(TreBig())
     create_tre(f)
-    create_tre2(f)
+    create_tre2(f.image_segment[0])
     f.write("z.ntf")
     f2 = NitfFile("z.ntf")
     assert len(f2.image_segment) == 1
@@ -180,10 +180,10 @@ def test_tre_overflow_write(isolated_dir):
     for i in range(10):
         for j in range(10):
             assert img.data[i,j] == i + j
-    assert len(f2.tre_list) == 2
-    assert len(f2.image_segment[0].tre_list) == 2
-    check_tre(f2.tre_list[2])
-    check_tre2(f2.image_segment[0].tre_list[2])
+    assert len(f2.tre_list) == 3
+    assert len(f2.image_segment[0].tre_list) == 3
+    check_tre([tre for tre in f2.tre_list if tre.tre_tag == "USE00A"][0])
+    check_tre2([tre for tre in f2.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0])
     print_diag(f2)
     
 def test_read_quickbird():

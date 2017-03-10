@@ -116,12 +116,16 @@ def read_tre(header, des_list, field_list = []):
     tre_list = []
     for h_len, h_ofl, h_data in field_list:
         if(getattr(header, h_len) > 0):
-            if(getattr(header, h_ofl) > 0):
-                raise RuntimeError("Don't handle TRE overflow yet")
+            des_index = getattr(header, h_ofl)
+            if(des_index > 0):
+                # des_index is 1 based, so subtract 1 to get the des
+                des = des_list[getattr(header, h_ofl)-1]
+                tre_list.extend(read_tre_data(des.data))
             tre_list.extend(read_tre_data(getattr(header, h_data)))
     return tre_list
 
-def prepare_tre_write(tre_list, header, des_list, field_list = []):
+def prepare_tre_write(tre_list, header, des_list, field_list = [],
+                      seg_index = 0):
     '''This prepares TREs for writing, placing them in the right place
     in a header and/or creating TRE_OVERFLOW DES. This is the reverse
     of read_tre, the field_list should be the same as for that.'''
@@ -144,7 +148,21 @@ def prepare_tre_write(tre_list, header, des_list, field_list = []):
         if(len(head_fh[i].getvalue()) > 0):
             setattr(header, h_data, head_fh[i].getvalue())
     if(len(des_fh.getvalue()) > 0):
-        raise RuntimeError("Don't handle TRE overflow yet")
+        # We have a circular dependency. It is actually real, and isn't
+        # something we particularly need to break. Instead, work around by
+        # delaying the import
+        from .nitf_file import NitfDesSegment
+        des = NitfDesSegment()
+        h_len, h_offl, h_data = field_list[i]
+        h = des.subheader
+        h.desid = "TRE_OVERFLOW"
+        h.dsver = 1
+        h.dsclas = "U"
+        h.desoflw = str.upper(h_data)
+        h.desitem = seg_index
+        des.data = des_fh.getvalue()
+        des_list.append(des)
+        setattr(header, h_offl, len(des_list))
     
 def read_tre_data(data):
     '''Read a blob of data, and translate into a series of TREs'''

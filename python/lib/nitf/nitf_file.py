@@ -10,7 +10,7 @@ from .nitf_text_subheader import NitfTextSubheader
 from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageCannotHandle
-from .nitf_tre import process_tre
+from .nitf_tre import read_tre, prepare_tre_write
 from .nitf_tre_csde import *
 import io,six
 
@@ -70,15 +70,6 @@ class NitfFile(object):
         '''Read the given file'''
         with open(file_name, 'rb') as fh:
             self.file_header.read_from_file(fh)
-            self.tre_list = []
-            if(self.file_header.udhdl > 0):
-                if(self.file_header.udhofl > 0):
-                    raise RuntimeError("Don't handle TRE overflow yet")
-                self.tre_list.extend(process_tre(self.file_header.udhd))
-            if(self.file_header.xhdl > 0):
-                if(self.file_header.xhdlofl > 0):
-                    raise RuntimeError("Don't handle TRE overflow yet")
-                self.tre_list.extend(process_tre(self.file_header.xhd))
             self.image_segment = \
                [NitfImageSegment(header_size=self.file_header.lish[i],
                                  data_size=self.file_header.li[i]) for i in
@@ -104,43 +95,22 @@ class NitfFile(object):
                             self.res_segment]:
                 for seg in seglist:
                     seg.read_from_file(fh)
-            for seg in self.image_segment:
-                seg.process_tre()
+            self.tre_list = read_tre(self.file_header, self.des_segment,
+                                     [["xhdl", "xhdlofl", "xhd"],
+                                      ["udhdl", "udhofl", "udhd"]])
+            for seglist in [self.image_segment, self.graphic_segment, 
+                            self.text_segment, self.des_segment, 
+                            self.res_segment]:
+                for seg in self.image_segment:
+                    seg.read_tre(self.des_segment)
 
-    def prepare_tre_write(self):
-        '''Go through the TRE list, and use this to fill in XHD, UDHD, and
-        a TRE_OVERFLOW DES'''
-        xhd_fh = six.BytesIO()
-        xhd_size = 0
-        udhd_fh = six.BytesIO()
-        udhd_size = 0
-        des_fh = six.BytesIO()
-        des_size = 0
-        for tre in self.tre_list:
-            fht = six.BytesIO()
-            tre.write_to_file(fht)
-            t = fht.getvalue()
-            if(xhd_size + len(t) < 99999-3):
-                xhd_fh.write(t)
-                xhd_size += len(t)
-            elif(udhd_size + len(t) < 99999-3):
-                udhd_fh.write(t)
-                udhd_size += len(t)
-            else:
-                des_fh.write(t)
-                des_size += len(t)
-        if(xhd_size > 0):
-            self.file_header.xhd = xhd_fh.getvalue()
-        if(udhd_size > 0):
-            self.file_header.udhd = udhd_fh.getvalue()
-        if(des_size > 0):
-            raise RuntimeError("Don't handle TRE overflow yet")
-        
     def write(self, file_name):
         '''Write to the given file'''
         with open(file_name, 'wb') as fh:
-            self.prepare_tre_write()
             h = self.file_header
+            prepare_tre_write(self.tre_list, h, self.des_segment,
+                              [["xhdl", "xhdlofl", "xhd"],
+                               ["udhdl", "udhofl", "udhd"]])
             h.numi = len(self.image_segment)
             h.nums = len(self.graphic_segment)
             h.numt = len(self.text_segment)
@@ -157,6 +127,7 @@ class NitfFile(object):
                                       [self.des_segment, "ldsh", "ld"],
                                       [self.res_segment, "lresh", "lre"]]:
                 for i, seg in enumerate(seglist):
+                    seg.prepare_tre_write(self.des_segment)
                     hs, ds = seg.write_to_file(fh)
                     h.update_field(fh, fhs, hs, (i,))
                     h.update_field(fh, fds, ds, (i,))
@@ -177,6 +148,16 @@ class NitfSegment(object):
         print(self.data, file=fh)
         return fh.getvalue()
 
+    def read_tre(self, des_list):
+        # By default, segment doesn't have any TREs
+        pass
+
+    def prepare_tre_write(self, des_list):
+        '''Process the TREs in a segment putting them in the various places
+        in header and DES overflow before writing out the segment.'''
+        # By default, segment doesn't have any TREs
+        pass
+    
     def read_from_file(self, fh):
         '''Read from a file'''
         self.subheader.read_from_file(fh)
@@ -252,15 +233,14 @@ class NitfImageSegment(NitfSegment):
                 else:
                     raise
         self.data = t
-    def process_tre(self):
-        if(self.subheader.udidl > 0):
-            if(self.subheader.udofl > 0):
-                raise RuntimeError("Don't handle TRE overflow yet")
-            self.tre_list.extend(process_tre(self.udid))
-        if(self.subheader.ixshdl > 0):
-            if(self.subheader.ixofl > 0):
-                raise RuntimeError("Don't handle TRE overflow yet")
-            self.tre_list.extend(process_tre(self.subheader.ixshd))
+    def prepare_tre_write(self, des_list):
+        prepare_tre_write(self.tre_list, self.subheader,des_list,
+                          [["ixshdl", "ixofl", "ixshd"],
+                           ["udidl", "udofl", "udid"]])
+    def read_tre(self, des_list):
+        self.tre_list = read_tre(self.subheader,des_list,
+                                 [["ixshdl", "ixofl", "ixshd"],
+                                  ["udidl", "udofl", "udid"]])
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''
         fh = six.StringIO()
@@ -293,11 +273,12 @@ class NitfTextSegment(NitfSegment):
         '''Read from a file'''
         self.subheader.read_from_file(fh)
         self.data = fh.read(self.data_size)
-    def process_tre(self):
-        if(self.subheader.txshdl > 0):
-            if(self.subheader.txsofl > 0):
-                raise RuntimeError("Don't handle TRE overflow yet")
-            self.tre_list.extend(process_tre(self.txsofl))
+    def prepare_tre_write(self, des_list):
+        prepare_tre_write(self.tre_list, self.subheader,des_list,
+                          [["txshdl", "txsofl", "txshd"]])
+    def read_tre(self, des_list):
+        self.tre_list = read_tre(self.subheader,des_list,
+                                 [["txshdl", "txsofl", "txshd"]])
         
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''

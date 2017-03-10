@@ -36,7 +36,7 @@ def test_tre_read():
     with open(unit_test_data + "test_use00a.ntf", 'rb') as fh:
         t.read_from_file(fh)
         t2.read_from_file(fh)
-    trelist = process_tre(t2.ixshd)
+    trelist = read_tre_data(t2.ixshd)
     assert(len(trelist) == 1)
     t = trelist[0]
     assert t.angle_to_north == 270

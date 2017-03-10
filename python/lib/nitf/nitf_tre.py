@@ -104,7 +104,49 @@ def tre_object(tre_name):
         return _tre_class[tre_name]()
     return TreUnknown(tre_name)
 
-def process_tre(data):
+def read_tre(header, des_list, field_list = []):
+    '''This reads a TRE for a particular type of header (e.g., NitfFileHeader,
+    NitfImageSubheader). The reading is complicated. There are one or
+    more base field names to check, each has three fields,
+    e.g. udhdl, udhofl, udhd or the file header.
+    Each of these fields may or may not have TRE data. In addition, there
+    is an "overflow" indicator which points to a TRE_OVERFLOW DES to read 
+    additional TREs. This function processes through this logic and 
+    reads all the TREs, returning a (possibly empty) list of TREs.'''
+    tre_list = []
+    for h_len, h_ofl, h_data in field_list:
+        if(getattr(header, h_len) > 0):
+            if(getattr(header, h_ofl) > 0):
+                raise RuntimeError("Don't handle TRE overflow yet")
+            tre_list.extend(read_tre_data(getattr(header, h_data)))
+    return tre_list
+
+def prepare_tre_write(tre_list, header, des_list, field_list = []):
+    '''This prepares TREs for writing, placing them in the right place
+    in a header and/or creating TRE_OVERFLOW DES. This is the reverse
+    of read_tre, the field_list should be the same as for that.'''
+    head_fh = [six.BytesIO() for i in range(len(field_list))]
+    des_fh = six.BytesIO()
+    for tre in tre_list:
+        fht = six.BytesIO()
+        tre.write_to_file(fht)
+        t = fht.getvalue()
+        wrote = False
+        for fh in head_fh:
+            if(len(fh.getvalue()) + len(t) < 99999-3):
+                fh.write(t)
+                wrote = True
+                break
+        if(not wrote):
+            des_fh.write(t)
+    for i in range(len(field_list)):
+        h_len, h_offl, h_data = field_list[i]
+        if(len(head_fh[i].getvalue()) > 0):
+            setattr(header, h_data, head_fh[i].getvalue())
+    if(len(des_fh.getvalue()) > 0):
+        raise RuntimeError("Don't handle TRE overflow yet")
+    
+def read_tre_data(data):
     '''Read a blob of data, and translate into a series of TREs'''
     fh = six.BytesIO(data)
     res = []

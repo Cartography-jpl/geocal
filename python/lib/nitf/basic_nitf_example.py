@@ -40,7 +40,7 @@ t.n_seg = 1
 t.max_lp_seg = 6287
 t.sun_el = 68.5
 t.sun_az = 131.3
-t2 = copy.copy(t)
+t2 = copy.deepcopy(t)
 t2.angle_to_north = 290
 f.tre_list.append(t)
 f.image_segment[0].tre_list.append(t2)

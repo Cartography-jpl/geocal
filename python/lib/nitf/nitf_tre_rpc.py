@@ -15,7 +15,17 @@ def _tre_rpc_coeff_format(v):
     t = re.sub(r'E([+-])0', r'E\1', t)
     return t
 
-hlp = '''This is the RPC TRE.'''
+hlp = '''This is the RPC TRE.
+
+The field names can be pretty cryptic, but are documented in detail in 
+the NITF TRE documentation (STDI-0002 V4.0, available at 
+http://www.gwg.nga.mil/ntb/baseline/docs/stdi0002).
+
+There is a table in the main body on page vii that gives the a pointer for 
+where in the document a particular TRE is defined.
+
+RPC00B is documented at E-62.
+'''
 desc = ["RPC00B",
         ["success", 1, int],
         ["err_bias", 7, float, {"frmt" : "%07.2lf"}],

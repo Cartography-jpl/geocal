@@ -1,6 +1,12 @@
 # We import a number of "private" classes from nitf_field. This module really
 # is part of nitf_field.py, we have just pulled it out into a separate file
 # to keep things clean
+#
+# Note when importing TREs that much of the documentation is in PDF tables.
+# You can't easily paste this directly to emacs. But you can import to Excel.
+# To do this, cute and paste the table into *Word*, and then cut and paste
+# from word to Excel. For some reason, you can't go directly to Excel. You
+# can then cut and paste from excel to emacs
 from __future__ import print_function
 from .nitf_field import _FieldStruct, _FieldLoopStruct, \
     _FieldValueArrayAccess, _create_nitf_field_structure
@@ -98,7 +104,67 @@ def tre_object(tre_name):
         return _tre_class[tre_name]()
     return TreUnknown(tre_name)
 
-def process_tre(data):
+def read_tre(header, des_list, field_list = []):
+    '''This reads a TRE for a particular type of header (e.g., NitfFileHeader,
+    NitfImageSubheader). The reading is complicated. There are one or
+    more base field names to check, each has three fields,
+    e.g. udhdl, udhofl, udhd or the file header.
+    Each of these fields may or may not have TRE data. In addition, there
+    is an "overflow" indicator which points to a TRE_OVERFLOW DES to read 
+    additional TREs. This function processes through this logic and 
+    reads all the TREs, returning a (possibly empty) list of TREs.'''
+    tre_list = []
+    for h_len, h_ofl, h_data in field_list:
+        if(getattr(header, h_len) > 0):
+            des_index = getattr(header, h_ofl)
+            if(des_index > 0):
+                # des_index is 1 based, so subtract 1 to get the des
+                des = des_list[getattr(header, h_ofl)-1]
+                tre_list.extend(read_tre_data(des.data))
+            tre_list.extend(read_tre_data(getattr(header, h_data)))
+    return tre_list
+
+def prepare_tre_write(tre_list, header, des_list, field_list = [],
+                      seg_index = 0):
+    '''This prepares TREs for writing, placing them in the right place
+    in a header and/or creating TRE_OVERFLOW DES. This is the reverse
+    of read_tre, the field_list should be the same as for that.'''
+    head_fh = [six.BytesIO() for i in range(len(field_list))]
+    des_fh = six.BytesIO()
+    for tre in tre_list:
+        fht = six.BytesIO()
+        tre.write_to_file(fht)
+        t = fht.getvalue()
+        wrote = False
+        for fh in head_fh:
+            if(len(fh.getvalue()) + len(t) < 99999-3):
+                fh.write(t)
+                wrote = True
+                break
+        if(not wrote):
+            des_fh.write(t)
+    for i in range(len(field_list)):
+        h_len, h_offl, h_data = field_list[i]
+        if(len(head_fh[i].getvalue()) > 0):
+            setattr(header, h_data, head_fh[i].getvalue())
+    if(len(des_fh.getvalue()) > 0):
+        # We have a circular dependency. It is actually real, and isn't
+        # something we particularly need to break. Instead, work around by
+        # delaying the import
+        from .nitf_file import NitfDesSegment
+        des = NitfDesSegment()
+        h_len, h_offl, h_data = field_list[i]
+        h = des.subheader
+        h.desid = "TRE_OVERFLOW"
+        h.dsver = 1
+        h.dsclas = "U"
+        h.desoflw = str.upper(h_data)
+        h.desitem = seg_index
+        des.data = des_fh.getvalue()
+        des_list.append(des)
+        setattr(header, h_offl, len(des_list))
+    
+def read_tre_data(data):
     '''Read a blob of data, and translate into a series of TREs'''
     fh = six.BytesIO(data)
     res = []

@@ -79,7 +79,8 @@ desc = [['im', 2, str],
                                    'size_offset' : 3}]
 ]
 
-NitfImageSubheader = create_nitf_field_structure("NitfImageSubheader", desc)
+NitfImageSubheader = create_nitf_field_structure("NitfImageSubheader", desc,
+                                                 hlp=hlp)
 
 NitfImageSubheader.ifc_value = hardcoded_value("N")
 NitfImageSubheader.imflt_value = hardcoded_value("   ")

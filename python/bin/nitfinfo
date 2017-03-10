@@ -1,49 +1,58 @@
 #! /usr/bin/env python
+from __future__ import print_function
 try:
     from afids import *
 except ImportError:
     from geocal import *
+from geocal.nitf import *
 import subprocess
 import os
+import sys
 
-version="%prog May 12, 2014"
+version="%prog March 8, 2017"
 usage="""Usage: 
   nitfinfo [options] <input_file>
   nitfinfo -h | --help
   nitfinfo -v | --version
 
-This is like gdalinfo, but it includes formated information from various
-TREs that may be in the NITF file.
+Print out information about a NITF file.
 
-The input file can be any GDAL readable file, although this really only
-makes sense to call this program with a NITF file (otherwise, just use
-gdalinfo directly).
+By default we use to output based on gdalinfo, which gives a good summary.
+
+However, we also own NITF parser. Using the "--full" option will print out
+much more complete information, but it can be a fairly long summary.
 
 Options:
   -h --help         
        Print this message
+
+  --full
+       Print out much more complete information about the NITF file
 
   -v --version      
        Print program version
 
 """
 args = docopt_simple(usage, version=version)
-t = subprocess.check_output(["gdalinfo", args.input_file])
-# Split string into before and after the "Corner Cordinates" section. Note
-# that it is perfectly ok for this to be missing, we just have t2 and t3 
-# as blank strings.
-t1, t2, t3 = t.partition("Corner Coordinates")
+if(not args.full):
+    t = subprocess.check_output(["gdalinfo", args.input_file])
+    # Split string into before and after the "Corner Cordinates" section. Note
+    # that it is perfectly ok for this to be missing, we just have t2 and t3 
+    # as blank strings.
+    t1, t2, t3 = t.partition(b"Corner Coordinates")
 
-f = GdalRasterImage(args.input_file)
-print t1,
-tre_use00a_pretty_print(f)
-# Function is only optionally available, depending on options
-# used at build time of AFIDS. If this isn't found then just
-# continue without complaint
-try:
-    tre_afid_a_pretty_print(f)
-except NameError as exc:
-    pass
-print t2,
-print t3
-
+    f = GdalRasterImage(args.input_file)
+    print(t1.decode('utf-8'),end='')
+    tre_use00a_pretty_print(f)
+    # Function is only optionally available, depending on options
+    # used at build time of AFIDS. If this isn't found then just
+    # continue without complaint
+    try:
+        tre_afid_a_pretty_print(f)
+    except NameError as exc:
+        pass
+    print(t2.decode('utf-8'),end='')
+    print(t3.decode('utf-8'))
+else:
+    f = NitfFile(args.input_file)
+    print(f)

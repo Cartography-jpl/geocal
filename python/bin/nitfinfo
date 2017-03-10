@@ -17,33 +17,32 @@ usage="""Usage:
 
 Print out information about a NITF file.
 
-This use to be based on gdalinfo, but now we have our own NITF parser. I
-don't think anything depends on the old format, but if so you can pass the
-option --old-gdal to get the older output. We may retire this if it turns out
-we never use it.
+By default we use to output based on gdalinfo, which gives a good summary.
+
+However, we also own NITF parser. Using the "--full" option will print out
+much more complete information, but it can be a fairly long summary.
 
 Options:
   -h --help         
        Print this message
 
-  --old-gdal
-       Use the old gdalinfo based version of this, if needed for backwards
-       compatibility.
+  --full
+       Print out much more complete information about the NITF file
 
   -v --version      
        Print program version
 
 """
 args = docopt_simple(usage, version=version)
-if(args.old_gdal):
+if(not args.full):
     t = subprocess.check_output(["gdalinfo", args.input_file])
     # Split string into before and after the "Corner Cordinates" section. Note
     # that it is perfectly ok for this to be missing, we just have t2 and t3 
     # as blank strings.
-    t1, t2, t3 = t.partition("Corner Coordinates")
+    t1, t2, t3 = t.partition(b"Corner Coordinates")
 
     f = GdalRasterImage(args.input_file)
-    print(t1,end='')
+    print(t1.decode('utf-8'),end='')
     tre_use00a_pretty_print(f)
     # Function is only optionally available, depending on options
     # used at build time of AFIDS. If this isn't found then just
@@ -52,8 +51,8 @@ if(args.old_gdal):
         tre_afid_a_pretty_print(f)
     except NameError as exc:
         pass
-    print(t2,end='')
-    print(t3)
-    sys.exit()
-f = NitfFile(args.input_file)
-print(f)
+    print(t2.decode('utf-8'),end='')
+    print(t3.decode('utf-8'))
+else:
+    f = NitfFile(args.input_file)
+    print(f)

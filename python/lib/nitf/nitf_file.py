@@ -7,6 +7,7 @@ from __future__ import print_function
 from .nitf_file_header import NitfFileHeader
 from .nitf_image_subheader import NitfImageSubheader
 from .nitf_text_subheader import NitfTextSubheader
+from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageCannotHandle
 from .nitf_tre import process_tre
@@ -45,7 +46,7 @@ class NitfFile(object):
         else:
             print("File level TRES:", file=res)
             for t in self.tre_list:
-                print(t)
+                print(t, file=res)
             print("-------------------------------------------------------------",
                   file=res)
         for arr, name in [[self.image_segment, "Image"],
@@ -267,7 +268,7 @@ class NitfImageSegment(NitfSegment):
         print(self.subheader, file=fh)
         print("TREs:", file=fh)
         if(len(self.tre_list) == 0):
-            print("No image level TREs")
+            print("No image level TREs", file=fh)
         else:
             for tre in self.tre_list:
                 print(tre, file=fh)
@@ -305,7 +306,7 @@ class NitfTextSegment(NitfSegment):
         print(self.subheader, file=fh)
         print("TREs:", file=fh)
         if(len(self.tre_list) == 0):
-            print("No text level TREs")
+            print("No text level TREs", file=fh)
         else:
             for tre in self.tre_list:
                 print(tre, file=fh)
@@ -321,13 +322,35 @@ class NitfTextSegment(NitfSegment):
         fh.write(self.data.encode('utf-8'))
         return (header_pos - start_pos, fh.tell() - header_pos)
    
-class NitfDes(NitfPlaceHolder):
+class NitfDesSegment(NitfSegment):
     '''Data extension segment (DES), allows for the addition of different data 
     types with each type encapsulated in its own DES'''
-    def __init__(self, header_size=None, data_size=None):
-        NitfPlaceHolder.__init__(self, header_size, data_size, "DES")
+    def __init__(self, data='', header_size=None, data_size=None):
+        h = NitfDesSubheader()
+        self.header_size = header_size
+        self.data_size = data_size
+        NitfSegment.__init__(self, h, copy.copy(data))
+    def read_from_file(self, fh):
+        '''Read from a file'''
+        self.subheader.read_from_file(fh)
+        self.data = fh.read(self.data_size)
+    def __str__(self):
+        '''Text description of structure, e.g., something you can print out'''
+        fh = six.StringIO()
+        print("Sub header:", file=fh)
+        print(self.subheader, file=fh)
+        print("Data length %d" % len(self.data), file=fh)
+        return fh.getvalue()
+    def write_to_file(self, fh):
+        '''Write to a file. The returns (sz_header, sz_data), because this
+        information is needed by NitfFile.'''
+        start_pos = fh.tell()
+        self.subheader.write_to_file(fh)
+        header_pos = fh.tell()
+        fh.write(self.data)
+        return (header_pos - start_pos, fh.tell() - header_pos)
 
-class NitfReservedExtensionSegment(NitfPlaceHolder):
+class NitfResSegment(NitfPlaceHolder):
     '''Reserved extension segment (RES), non-standard data segment which is
     user-defined. A NITF file can support different user-defined types of 
     segments called RES.'''

@@ -2,6 +2,7 @@ from .nitf_file import *
 from .nitf_tre_csde import *
 from .nitf_tre_piae import *
 from .nitf_tre_rpc import *
+from .nitf_tre_geosde import *
 from test_support import *
 import subprocess
 
@@ -238,4 +239,28 @@ def test_read_quickbird():
         print(f)
     except FileNotFoundError:
         pass
-        
+
+def test_read_worldview():
+    '''Test reading a worldview NITF file.'''
+    # This is a large file, which we don't want to depend on. Run this
+    # test if we happen to find the data, but skip otherwise.
+    fname = "/raid23/worldview/nagoya/12JAN23015358-P1BS-052654848010_01_P003.NTF"
+    try: 
+        f = NitfFile(fname)
+        print(f)
+    except FileNotFoundError:
+        pass
+    
+
+def test_read_ikonos():
+    '''Test reading a ikonos NITF file.'''
+    # This is a large file, which we don't want to depend on. Run this
+    # test if we happen to find the data, but skip otherwise.
+    fname = "/raid20/11DEC11IK0101000po_755166_pan_0000000.ntf"
+    try: 
+        f = NitfFile(fname)
+        print(f)
+    except FileNotFoundError:
+        pass
+    
+    

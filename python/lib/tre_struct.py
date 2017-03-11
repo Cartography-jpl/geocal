@@ -2,7 +2,7 @@ from __future__ import print_function
 from builtins import range
 from builtins import object
 from geocal_swig import *
-from geocal.nitf.nitf_tre_use00a import TreUSE00A
+from geocal.nitf.nitf_tre_csde import TreUSE00A
 from geocal.nitf.nitf_tre_rpc import TreRPC00B, TreRPC00A
 import re
 import six

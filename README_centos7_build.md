@@ -31,11 +31,11 @@ it by:
 
 Or you can also just download directly from web site. Then build by:
 
-   tar -xf blitz-0.10.tar.gz
-   cd blitz-0.10
-   ./configure --prefix=`pwd`/../install --enable-shared
-   make -j 20 all && make install
-   cd ..
+    tar -xf blitz-0.10.tar.gz
+    cd blitz-0.10
+    ./configure --prefix=`pwd`/../install --enable-shared
+    make -j 20 all && make install
+    cd ..
 
 Note you should replace -j 20 with something making sense on your machine.
 
@@ -44,15 +44,15 @@ Note you should replace -j 20 with something making sense on your machine.
 We have a copy of JPL CSPICE library with build scripts added to create a
 shared library. You can get this by:
 
-   git clone https://github.jpl.nasa.gov/Cartography/spice.git spice
+    git clone https://github.jpl.nasa.gov/Cartography/spice.git spice
 
 Or you can also just grab tar file from github if you prefer to cloning. Then
 build with:
 
-   cd spice
-   ./configure --prefix=`pwd`/../install
-   make -j 20 all && make install
-   cd ..
+    cd spice
+    ./configure --prefix=`pwd`/../install
+    make -j 20 all && make install
+    cd ..
 
 ## Build python 3.5
 
@@ -66,12 +66,12 @@ Python 3.5 is too new to have a package for centos7, so we can build directly
 
 Then add the new python to you path:
 
-   export PATH=`pwd`/install/bin:${PATH}
-   export LD_LIBRARY_PATH=`pwd`/install/lib:${LD_LIBRARY_PATH}
-   cd install/bin
-   ln -s ./python3 python
-   ln -s ./python3-config python-config
-   cd ../..
+    export PATH=`pwd`/install/bin:${PATH}
+    export LD_LIBRARY_PATH=`pwd`/install/lib:${LD_LIBRARY_PATH}
+    cd install/bin
+    ln -s ./python3 python
+    ln -s ./python3-config python-config
+    cd ../..
 
 
 ## Install python packages

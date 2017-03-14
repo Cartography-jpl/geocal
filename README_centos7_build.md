@@ -11,9 +11,14 @@ protocol or https:
 
 ## Dependencies from packages
 
+Need to add the EPOL repository (the "extras" package for centos):
+
+    sudo yum -y install epel-release
+    sudo yum repolist
+    
 There are various dependencies that can be loaded from standard yum packages:
 
-    sudo yum install boost-devel wget gsl-devel gdal gdal-devel doxygen suitesparse-devel swig zlib-devel bzip2-devel sqlite sqlite-devel openssl-devel fftw-devel
+    sudo yum -y install boost-devel wget gsl-devel gdal gdal-devel doxygen suitesparse-devel swig zlib-devel bzip2-devel sqlite sqlite-devel openssl-devel fftw-devel
 
 Note gdal-devel fails to install a bunch of other development packages, so
 we need to install these. Not sure why it does this, normally dependencies

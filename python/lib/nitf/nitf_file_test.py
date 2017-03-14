@@ -91,6 +91,12 @@ def print_diag(f):
                 subprocess.run(["show_nitf++", "z.ntf"])
             else:
                 subprocess.call(["show_nitf++", "z.ntf"])
+
+def create_sample():
+#def test_create_sample():
+    '''Create sample.ntf file we can then use for testing'''
+    subprocess.run(["vicarb", "gen", "x"])
+    subprocess.run(["gdal_to_nitf", "x", unit_test_data + "sample.ntf"])
     
 def test_basic_read():
     f = NitfFile(unit_test_data + "sample.ntf")

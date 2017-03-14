@@ -75,7 +75,7 @@ require_geocal_test_data = pytest.mark.skipif(not os.path.exists(geocal_test_igc
     reason="need to have geocal test data (/data/geocal_test_data) available to run.")
 
 # Marker that test requires the vicar gdal plugin
-require_vicar_gdalplugin = pytest.mark.skipif(os.environ.get("NO_VICAR_GDALPLUGIN"),
+require_vicar_gdalplugin = pytest.mark.skipif("NO_VICAR_GDALPLUGIN" in os.environ,
     reason = "need the VICAR GDAL plugin to run.")
 
 # Short hand for marking as unconditional skipping. Good for tests we

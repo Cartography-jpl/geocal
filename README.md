@@ -33,6 +33,10 @@ This uses the standard autotools build (the configure/make cycle common
 to many software packages). Generic instructions can be be found in
 the [INSTALL](INSTALL) file.
 
+There are a number of dependencies for geocal (described below). As an
+example, explicit directions for building on a bare Centos 7 can be found
+in [Centos 7 Build](README_centos7_build.md)
+
 A note on the build. We have unit tests run with the standard GNU target
 "make check". There is also a standard GNU target "installcheck" that can
 be used to run unit tests that require the install step first. However this
@@ -90,21 +94,15 @@ GeoCal is now configured
 The required libraries are 
 
 * [Boost](http://www.boost.org) (need version >= 1.46) 
-* [Blitz](http://sourceforge.net/projects/blitz/) (need 0.9) 
+* [Blitz](http://sourceforge.net/projects/blitz/) (need >=0.9) 
 * [GSL](http://www.gnu.org/software/gsl)
 * [CSPICE](http://naif.jpl.nasa.gov/naif/toolkit.html)
 * [GDAL](http://www.gdal.org), [python](https://www.python.org/)
 
-A few notes, we require Blitz version 0.9, not the latest 0.10. There were
-incompatible changes made in the update from 0.9 to 0.10, and we have not
-modified GeoCal for the changes yet.
-
 The normal distribution of CSPICE is a static library. We require a shared
-verison of this library. A shared build of this is available in the much
-larger [AFIDS](https://github.jpl.nasa.gov/Cartography/afids) package. 
-Contact the software author (Mike.M.Smyth@jpl.nasa.gov) for a simple tar 
-file to build just CSPICE. I have plans to pull this out as a separate
-git repository, but this hasn't been done yet. 
+version of this library. A shared build of this is available in the package
+[spice](https://github.jpl.nasa.gov/Cartography/spice), this is just the
+normal JPL CSPICE but with build scripts added for making a shared library.
 
 In addition, CSPICE depends on a number of spice kernels to actually work.
 Again, we have this at [AFIDS](https://github.jpl.nasa.gov/Cartography/afids),

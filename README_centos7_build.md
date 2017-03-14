@@ -15,6 +15,11 @@ Need to add the EPOL repository (the "extras" package for centos):
 
     sudo yum -y install epel-release
     sudo yum repolist
+
+Some pretty basic build tools, likely already on you system but just to make
+sure:
+
+    sudo yum install -y gcc-gfortran gcc gcc-c++ make perl patch libX11-devel ncurses-devel tcsh m4 perl-Data-Dumper perl-Thread-Queue
     
 There are various dependencies that can be loaded from standard yum packages:
 

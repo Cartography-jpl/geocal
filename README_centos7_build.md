@@ -94,6 +94,7 @@ runtime library and a separate VICAR GDAL plugin to give GDAL VICAR support:
     make -j 20 all && make install
     cd ..
     git clone https://github.jpl.nasa.gov/Cartography/vicar_gdalplugin.git vicar_gdalplugin
+    cd vicar_gdalplugin
     ./configure --prefix=`pwd`/../install
     make -j 20 all && make install
     cd ..

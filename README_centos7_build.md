@@ -60,6 +60,7 @@ Python 3.5 is too new to have a package for centos7, so we can build directly
 
     wget https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
     tar -xf Python-3.5.2.tgz
+    cd Python-3.5.2
     ./configure --prefix=`pwd`/../install
     make -j 20 all && make install
     cd ..

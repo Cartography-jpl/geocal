@@ -25,7 +25,7 @@ we need to install these. Not sure why it does this, normally dependencies
 are installed. Perhaps a future gdal-devel will fix this. But for now, follow
 up with:
 
-    sudo yum install armadillo-devel poppler-devel libxml2-devel libgeotiff-devel mariadb-devel freexl-devel geos-devel libwebp-devel xerces-c-devel openjpeg2-devel jasper-devel netcdf-devel ogdi-devel giflib-devel libgta-devel cfitsio-devel postgresql-devel libdap-devel CharLS-devel hdf-devel hdf5-devel g2clib-devel
+    sudo yum -y install armadillo-devel poppler-devel libxml2-devel libgeotiff-devel mariadb-devel freexl-devel geos-devel libwebp-devel xerces-c-devel openjpeg2-devel jasper-devel netcdf-devel ogdi-devel giflib-devel libgta-devel cfitsio-devel postgresql-devel libdap-devel CharLS-devel hdf-devel hdf5-devel g2clib-devel
 
 ## Build blitz
 

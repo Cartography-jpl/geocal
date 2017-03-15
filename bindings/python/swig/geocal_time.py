@@ -237,13 +237,20 @@ class Time(geocal_swig.generic_object.GenericObject):
 
     time_j2000 = staticmethod(time_j2000)
 
-    def time_gps(gps):
+    def time_gps(*args):
         """
 
-        static Time GeoCal::Time::time_gps(double gps)
-        Return time from given GPS time (epoch of 1980-01-06). 
+        static Time GeoCal::Time::time_gps(int week, double week_offset)
+        Often GPS time is reported as week number and seconds offset in that
+        week.
+
+        This alternative version of time_gps takes weeks and week offset. Note
+        that older GPS units have the week number roll over at 1024, this
+        happen in 1999 and the next roll over will be If you have data like
+        that you need to just "know" to add 1024 or 2 * 1024. Newer GPS
+        units might not have this problem. 
         """
-        return _geocal_time.Time_time_gps(gps)
+        return _geocal_time.Time_time_gps(*args)
 
     time_gps = staticmethod(time_gps)
 
@@ -316,6 +323,39 @@ class Time(geocal_swig.generic_object.GenericObject):
         return self._v_gps()
 
 
+    def _v_gps_week(self):
+        """
+
+        int GeoCal::Time::gps_week() const
+        Give GPS week number.
+
+        Note that older GPS units roll over at 1024 (happened in 1999, will
+        again in 2019). The number returned here does not roll over, so it can
+        be > 1024. If you need to match an older GPS unit you may need to mod
+        1024 the value returned. 
+        """
+        return _geocal_time.Time__v_gps_week(self)
+
+
+    @property
+    def gps_week(self):
+        return self._v_gps_week()
+
+
+    def _v_gps_week_offset(self):
+        """
+
+        double GeoCal::Time::gps_week_offset() const
+        Gives GPS offset to the gps_week. 
+        """
+        return _geocal_time.Time__v_gps_week_offset(self)
+
+
+    @property
+    def gps_week_offset(self):
+        return self._v_gps_week_offset()
+
+
     def _v_j2000(self):
         """
 
@@ -375,6 +415,8 @@ class Time(geocal_swig.generic_object.GenericObject):
 Time._v_acs = new_instancemethod(_geocal_time.Time__v_acs, None, Time)
 Time._v_pgs = new_instancemethod(_geocal_time.Time__v_pgs, None, Time)
 Time._v_gps = new_instancemethod(_geocal_time.Time__v_gps, None, Time)
+Time._v_gps_week = new_instancemethod(_geocal_time.Time__v_gps_week, None, Time)
+Time._v_gps_week_offset = new_instancemethod(_geocal_time.Time__v_gps_week_offset, None, Time)
 Time._v_j2000 = new_instancemethod(_geocal_time.Time__v_j2000, None, Time)
 Time._v_et = new_instancemethod(_geocal_time.Time__v_et, None, Time)
 Time.__str__ = new_instancemethod(_geocal_time.Time___str__, None, Time)
@@ -417,13 +459,20 @@ def Time_time_j2000(j2000):
     """
     return _geocal_time.Time_time_j2000(j2000)
 
-def Time_time_gps(gps):
+def Time_time_gps(*args):
     """
 
-    static Time GeoCal::Time::time_gps(double gps)
-    Return time from given GPS time (epoch of 1980-01-06). 
+    static Time GeoCal::Time::time_gps(int week, double week_offset)
+    Often GPS time is reported as week number and seconds offset in that
+    week.
+
+    This alternative version of time_gps takes weeks and week offset. Note
+    that older GPS units have the week number roll over at 1024, this
+    happen in 1999 and the next roll over will be If you have data like
+    that you need to just "know" to add 1024 or 2 * 1024. Newer GPS
+    units might not have this problem. 
     """
-    return _geocal_time.Time_time_gps(gps)
+    return _geocal_time.Time_time_gps(*args)
 
 def Time_time_unix(unix_time):
     """
@@ -498,13 +547,20 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
 
     time_j2000 = staticmethod(time_j2000)
 
-    def time_gps(gps):
+    def time_gps(*args):
         """
 
-        static TimeWithDerivative GeoCal::TimeWithDerivative::time_gps(const AutoDerivative< double > &gps)
-        Return time from given GPS time (epoch of 1980-01-06). 
+        static TimeWithDerivative GeoCal::TimeWithDerivative::time_gps(int week, const AutoDerivative< double > &week_offset)
+        Often GPS time is reported as week number and seconds offset in that
+        week.
+
+        This alternative version of time_gps takes weeks and week offset. Note
+        that older GPS units have the week number roll over at 1024, this
+        happen in 1999 and the next roll over will be If you have data like
+        that you need to just "know" to add 1024 or 2 * 1024. Newer GPS
+        units might not have this problem. 
         """
-        return _geocal_time.TimeWithDerivative_time_gps(gps)
+        return _geocal_time.TimeWithDerivative_time_gps(*args)
 
     time_gps = staticmethod(time_gps)
 
@@ -534,6 +590,39 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
     @property
     def gps(self):
         return self._v_gps()
+
+
+    def _v_gps_week(self):
+        """
+
+        int GeoCal::TimeWithDerivative::gps_week() const
+        Give GPS week number.
+
+        Note that older GPS units roll over at 1024 (happened in 1999, will
+        again in 2019). The number returned here does not roll over, so it can
+        be > 1024. If you need to match an older GPS unit you may need to mod
+        1024 the value returned. 
+        """
+        return _geocal_time.TimeWithDerivative__v_gps_week(self)
+
+
+    @property
+    def gps_week(self):
+        return self._v_gps_week()
+
+
+    def _v_gps_week_offset(self):
+        """
+
+        AutoDerivative<double> GeoCal::TimeWithDerivative::gps_week_offset() const
+        Gives GPS offset to the gps_week. 
+        """
+        return _geocal_time.TimeWithDerivative__v_gps_week_offset(self)
+
+
+    @property
+    def gps_week_offset(self):
+        return self._v_gps_week_offset()
 
 
     def _v_j2000(self):
@@ -584,6 +673,8 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
     __swig_destroy__ = _geocal_time.delete_TimeWithDerivative
 TimeWithDerivative._v_pgs = new_instancemethod(_geocal_time.TimeWithDerivative__v_pgs, None, TimeWithDerivative)
 TimeWithDerivative._v_gps = new_instancemethod(_geocal_time.TimeWithDerivative__v_gps, None, TimeWithDerivative)
+TimeWithDerivative._v_gps_week = new_instancemethod(_geocal_time.TimeWithDerivative__v_gps_week, None, TimeWithDerivative)
+TimeWithDerivative._v_gps_week_offset = new_instancemethod(_geocal_time.TimeWithDerivative__v_gps_week_offset, None, TimeWithDerivative)
 TimeWithDerivative._v_j2000 = new_instancemethod(_geocal_time.TimeWithDerivative__v_j2000, None, TimeWithDerivative)
 TimeWithDerivative._v_value = new_instancemethod(_geocal_time.TimeWithDerivative__v_value, None, TimeWithDerivative)
 TimeWithDerivative._v_gradient = new_instancemethod(_geocal_time.TimeWithDerivative__v_gradient, None, TimeWithDerivative)
@@ -613,13 +704,20 @@ def TimeWithDerivative_time_j2000(j2000):
     """
     return _geocal_time.TimeWithDerivative_time_j2000(j2000)
 
-def TimeWithDerivative_time_gps(gps):
+def TimeWithDerivative_time_gps(*args):
     """
 
-    static TimeWithDerivative GeoCal::TimeWithDerivative::time_gps(const AutoDerivative< double > &gps)
-    Return time from given GPS time (epoch of 1980-01-06). 
+    static TimeWithDerivative GeoCal::TimeWithDerivative::time_gps(int week, const AutoDerivative< double > &week_offset)
+    Often GPS time is reported as week number and seconds offset in that
+    week.
+
+    This alternative version of time_gps takes weeks and week offset. Note
+    that older GPS units have the week number roll over at 1024, this
+    happen in 1999 and the next roll over will be If you have data like
+    that you need to just "know" to add 1024 or 2 * 1024. Newer GPS
+    units might not have this problem. 
     """
-    return _geocal_time.TimeWithDerivative_time_gps(gps)
+    return _geocal_time.TimeWithDerivative_time_gps(*args)
 
 
 

@@ -5257,6 +5257,32 @@ namespace swig {
 #include "geocal_time.h"
 
 
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
@@ -6358,16 +6384,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Time_time_gps(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Time_time_gps__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
   int ecode1 = 0 ;
-  PyObject *swig_obj[1] ;
   GeoCal::Time result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Time_time_gps" "', argument " "1"" of type '" "double""'");
@@ -6389,6 +6413,70 @@ SWIGINTERN PyObject *_wrap_Time_time_gps(PyObject *SWIGUNUSEDPARM(self), PyObjec
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Time_time_gps__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  double arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  GeoCal::Time result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Time_time_gps" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Time_time_gps" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    try {
+      result = GeoCal::Time::time_gps(arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Time_time_gps(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Time_time_gps",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_Time_time_gps__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_Time_time_gps__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Time_time_gps'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Time::time_gps(double)\n"
+    "    GeoCal::Time::time_gps(int,double)\n");
+  return 0;
 }
 
 
@@ -6576,6 +6664,92 @@ SWIGINTERN PyObject *_wrap_Time__v_gps(PyObject *SWIGUNUSEDPARM(self), PyObject 
   {
     try {
       result = (double)((GeoCal::Time const *)arg1)->gps();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Time__v_gps_week(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Time *arg1 = (GeoCal::Time *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Time const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Time__v_gps_week" "', argument " "1"" of type '" "GeoCal::Time const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+      arg1 = const_cast< GeoCal::Time * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+      arg1 = const_cast< GeoCal::Time * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::Time const *)arg1)->gps_week();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Time__v_gps_week_offset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Time *arg1 = (GeoCal::Time *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Time const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Time__v_gps_week_offset" "', argument " "1"" of type '" "GeoCal::Time const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+      arg1 = const_cast< GeoCal::Time * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp1);
+      arg1 = const_cast< GeoCal::Time * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::Time const *)arg1)->gps_week_offset();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7694,22 +7868,43 @@ fail:
 
 SWIGINTERN PyObject *_wrap_TimeWithDerivative_time_pgs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  double arg1 ;
-  double val1 ;
-  int ecode1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared1 ;
   PyObject *swig_obj[1] ;
   GeoCal::TimeWithDerivative result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "TimeWithDerivative_time_pgs" "', argument " "1"" of type '" "double""'");
-  } 
-  arg1 = static_cast< double >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeWithDerivative_time_pgs" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeWithDerivative_time_pgs" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1)->get());
+      }
+    }
+  }
   {
     try {
-      result = GeoCal::TimeWithDerivative::time_pgs(arg1);
+      result = GeoCal::TimeWithDerivative::time_pgs((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7728,22 +7923,43 @@ fail:
 
 SWIGINTERN PyObject *_wrap_TimeWithDerivative_time_j2000(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  double arg1 ;
-  double val1 ;
-  int ecode1 = 0 ;
+  GeoCal::AutoDerivative< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared1 ;
   PyObject *swig_obj[1] ;
   GeoCal::TimeWithDerivative result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "TimeWithDerivative_time_j2000" "', argument " "1"" of type '" "double""'");
-  } 
-  arg1 = static_cast< double >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeWithDerivative_time_j2000" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeWithDerivative_time_j2000" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1)->get());
+      }
+    }
+  }
   {
     try {
-      result = GeoCal::TimeWithDerivative::time_j2000(arg1);
+      result = GeoCal::TimeWithDerivative::time_j2000((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7760,24 +7976,43 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_TimeWithDerivative_time_gps(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_TimeWithDerivative_time_gps__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  double arg1 ;
-  double val1 ;
-  int ecode1 = 0 ;
-  PyObject *swig_obj[1] ;
+  GeoCal::AutoDerivative< double > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared1 ;
   GeoCal::TimeWithDerivative result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "TimeWithDerivative_time_gps" "', argument " "1"" of type '" "double""'");
-  } 
-  arg1 = static_cast< double >(val1);
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeWithDerivative_time_gps" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeWithDerivative_time_gps" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1)->get());
+      }
+    }
+  }
   {
     try {
-      result = GeoCal::TimeWithDerivative::time_gps(arg1);
+      result = GeoCal::TimeWithDerivative::time_gps((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7791,6 +8026,91 @@ SWIGINTERN PyObject *_wrap_TimeWithDerivative_time_gps(PyObject *SWIGUNUSEDPARM(
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TimeWithDerivative_time_gps__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  GeoCal::TimeWithDerivative result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "TimeWithDerivative_time_gps" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TimeWithDerivative_time_gps" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeWithDerivative_time_gps" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::TimeWithDerivative::time_gps(arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::TimeWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::TimeWithDerivative >(new GeoCal::TimeWithDerivative((GeoCal::TimeWithDerivative &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TimeWithDerivative_time_gps(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"TimeWithDerivative_time_gps",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_TimeWithDerivative_time_gps__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_TimeWithDerivative_time_gps__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'TimeWithDerivative_time_gps'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::TimeWithDerivative::time_gps(GeoCal::AutoDerivative< double > const &)\n"
+    "    GeoCal::TimeWithDerivative::time_gps(int,GeoCal::AutoDerivative< double > const &)\n");
+  return 0;
 }
 
 
@@ -7870,6 +8190,95 @@ SWIGINTERN PyObject *_wrap_TimeWithDerivative__v_gps(PyObject *SWIGUNUSEDPARM(se
   {
     try {
       result = ((GeoCal::TimeWithDerivative const *)arg1)->gps();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TimeWithDerivative__v_gps_week(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeWithDerivative *arg1 = (GeoCal::TimeWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeWithDerivative__v_gps_week" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::TimeWithDerivative const *)arg1)->gps_week();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TimeWithDerivative__v_gps_week_offset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeWithDerivative *arg1 = (GeoCal::TimeWithDerivative *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::AutoDerivative< double > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeWithDerivative__v_gps_week_offset" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeWithDerivative * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeWithDerivative * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::TimeWithDerivative const *)arg1)->gps_week_offset();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8563,10 +8972,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"Note that TT is different than UTC noon by about 64.184 seconds \n"
 		""},
-	 { (char *)"Time_time_gps", (PyCFunction)_wrap_Time_time_gps, METH_O, (char *)"\n"
+	 { (char *)"Time_time_gps", _wrap_Time_time_gps, METH_VARARGS, (char *)"\n"
 		"\n"
-		"static Time GeoCal::Time::time_gps(double gps)\n"
-		"Return time from given GPS time (epoch of 1980-01-06). \n"
+		"static Time GeoCal::Time::time_gps(int week, double week_offset)\n"
+		"Often GPS time is reported as week number and seconds offset in that\n"
+		"week.\n"
+		"\n"
+		"This alternative version of time_gps takes weeks and week offset. Note\n"
+		"that older GPS units have the week number roll over at 1024, this\n"
+		"happen in 1999 and the next roll over will be If you have data like\n"
+		"that you need to just \"know\" to add 1024 or 2 * 1024. Newer GPS\n"
+		"units might not have this problem. \n"
 		""},
 	 { (char *)"Time_time_unix", (PyCFunction)_wrap_Time_time_unix, METH_O, (char *)"\n"
 		"\n"
@@ -8599,6 +9015,21 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"double  GeoCal::TimeBase< double  >::gps() const\n"
 		"Give time in GPS. \n"
+		""},
+	 { (char *)"Time__v_gps_week", (PyCFunction)_wrap_Time__v_gps_week, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::Time::gps_week() const\n"
+		"Give GPS week number.\n"
+		"\n"
+		"Note that older GPS units roll over at 1024 (happened in 1999, will\n"
+		"again in 2019). The number returned here does not roll over, so it can\n"
+		"be > 1024. If you need to match an older GPS unit you may need to mod\n"
+		"1024 the value returned. \n"
+		""},
+	 { (char *)"Time__v_gps_week_offset", (PyCFunction)_wrap_Time__v_gps_week_offset, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::Time::gps_week_offset() const\n"
+		"Gives GPS offset to the gps_week. \n"
 		""},
 	 { (char *)"Time__v_j2000", (PyCFunction)_wrap_Time__v_j2000, METH_O, (char *)"\n"
 		"\n"
@@ -8653,10 +9084,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"Note that TT is different than UTC noon by about 64.184 seconds \n"
 		""},
-	 { (char *)"TimeWithDerivative_time_gps", (PyCFunction)_wrap_TimeWithDerivative_time_gps, METH_O, (char *)"\n"
+	 { (char *)"TimeWithDerivative_time_gps", _wrap_TimeWithDerivative_time_gps, METH_VARARGS, (char *)"\n"
 		"\n"
-		"static TimeWithDerivative GeoCal::TimeWithDerivative::time_gps(const AutoDerivative< double > &gps)\n"
-		"Return time from given GPS time (epoch of 1980-01-06). \n"
+		"static TimeWithDerivative GeoCal::TimeWithDerivative::time_gps(int week, const AutoDerivative< double > &week_offset)\n"
+		"Often GPS time is reported as week number and seconds offset in that\n"
+		"week.\n"
+		"\n"
+		"This alternative version of time_gps takes weeks and week offset. Note\n"
+		"that older GPS units have the week number roll over at 1024, this\n"
+		"happen in 1999 and the next roll over will be If you have data like\n"
+		"that you need to just \"know\" to add 1024 or 2 * 1024. Newer GPS\n"
+		"units might not have this problem. \n"
 		""},
 	 { (char *)"TimeWithDerivative__v_pgs", (PyCFunction)_wrap_TimeWithDerivative__v_pgs, METH_O, (char *)"\n"
 		"\n"
@@ -8667,6 +9105,21 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"AutoDerivative< double >  GeoCal::TimeBase< AutoDerivative< double >  >::gps() const\n"
 		"Give time in GPS. \n"
+		""},
+	 { (char *)"TimeWithDerivative__v_gps_week", (PyCFunction)_wrap_TimeWithDerivative__v_gps_week, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::TimeWithDerivative::gps_week() const\n"
+		"Give GPS week number.\n"
+		"\n"
+		"Note that older GPS units roll over at 1024 (happened in 1999, will\n"
+		"again in 2019). The number returned here does not roll over, so it can\n"
+		"be > 1024. If you need to match an older GPS unit you may need to mod\n"
+		"1024 the value returned. \n"
+		""},
+	 { (char *)"TimeWithDerivative__v_gps_week_offset", (PyCFunction)_wrap_TimeWithDerivative__v_gps_week_offset, METH_O, (char *)"\n"
+		"\n"
+		"AutoDerivative<double> GeoCal::TimeWithDerivative::gps_week_offset() const\n"
+		"Gives GPS offset to the gps_week. \n"
 		""},
 	 { (char *)"TimeWithDerivative__v_j2000", (PyCFunction)_wrap_TimeWithDerivative__v_j2000, METH_O, (char *)"\n"
 		"\n"

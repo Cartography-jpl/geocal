@@ -83,6 +83,18 @@ BOOST_AUTO_TEST_CASE(base_version_override)
   BOOST_CHECK(config.value<int>("last_unshielded") == 1434);
 }
 
+BOOST_AUTO_TEST_CASE(missing_file)
+{
+  BOOST_CHECK_THROW(MspiConfigFile config(test_data_dir() + "mspi_config_file_not_there.txt"),
+		    Exception);
+}
+
+BOOST_AUTO_TEST_CASE(missing_value)
+{
+  MspiConfigFile config(test_data_dir() + "mspi_config_file_test4.txt");
+  BOOST_CHECK_THROW(config.value<int>("fake_value"), Exception);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())
@@ -115,7 +127,6 @@ BOOST_AUTO_TEST_CASE(serialization_table)
   BOOST_CHECK_EQUAL(tab2->value<int>(1, "view_number"), 7);
   BOOST_CHECK_EQUAL(tab2->value<std::string>(0, "l1b1_file"), "file1.hdf");
   BOOST_CHECK_EQUAL(tab2->value<std::string>(1, "l1b1_file"), "file2.hdf");
-
 }
 
 BOOST_AUTO_TEST_SUITE_END()

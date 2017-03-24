@@ -3,9 +3,9 @@ import time
 import subprocess
 import sys
 import os
-from queue import Queue
 import traceback
 from io import StringIO
+from threading import RLock
 
 class Task(object):
     '''This class is a interface class describing a 'Task'. This is inspired
@@ -173,15 +173,11 @@ class TaskRunner(object):
     and the pipeline needed to create it.'''
     def __init__(self, task_list, pool, 
                  skip_cleanup_on_error=False):
+        # Lock needed to avoid race conditions
+        self.lock = RLock()
         self.skip_cleanup_on_error = skip_cleanup_on_error
         self.task_list = task_list
         self.tasks_to_run = {}
-        # We have to be a little careful about new tasks, since these
-        # Can come asynchronously, so we don't want to directly modify
-        # task_to_run (imagine looping over this dictionary when we get
-        # interrupted by a callback that adds new tasks). We stick these
-        # into a Queue, which is then processed in our main loop.
-        self.new_or_updated_task = Queue()
         for task in task_list:
             self.process_task(task)
         self.pool = pool
@@ -193,87 +189,94 @@ class TaskRunner(object):
         '''True if all the required input has been generated, False 
         otherwise. We check both that the required task successfully ran (if
         it is in the list of tasks to run) and that all the output exists.'''
-        for rtsk in task.requires():
-            if rtsk.task_unique_name() in self.tasks_to_run:
-                t = self.tasks_to_run[rtsk.task_unique_name()]
-                if(t["state"] != "done"):
+        with self.lock:
+            for rtsk in task.requires():
+                if rtsk.task_unique_name() in self.tasks_to_run:
+                    t = self.tasks_to_run[rtsk.task_unique_name()]
+                    if(t["state"] != "done"):
+                        return False
+            for rtsk in task.requires():
+                if not rtsk.output_exists():
                     return False
-        for rtsk in task.requires():
-            if not rtsk.output_exists():
-                return False
-        return True
+            return True
     
     def process_task(self, task, force_update=False):
-        if(not task.task_need_run()):
-            return
-        if not force_update and task.task_unique_name() in self.tasks_to_run:
-            return
-        self.tasks_to_run[task.task_unique_name()] = {"task": task,
-                                                     "state" : "not_started"}
-        for tsk in task.requires():
-            self.process_task(tsk)
+        with self.lock:
+            if(not task.task_need_run()):
+                return
+            if not force_update and task.task_unique_name() in self.tasks_to_run:
+                return
+            self.tasks_to_run[task.task_unique_name()] = {"task": task,
+                                                          "state" : "not_started"}
+            for tsk in task.requires():
+                self.process_task(tsk)
 
     def number_task_left(self):
         '''Return the number of processes we have left to finish up with.'''
-        return sum(1 for k,t in self.tasks_to_run.items()
-                   if not t["state"] in ("done", "error"))
+        with self.lock:
+            return sum(1 for k,t in self.tasks_to_run.items()
+                       if not t["state"] in ("done", "error"))
 
     def number_task_running(self):
         '''Return the number of processes we have running.'''
-        return sum(1 for k,t in self.tasks_to_run.items()
-                   if t["state"] == "running")
+        with self.lock:
+            return sum(1 for k,t in self.tasks_to_run.items()
+                       if t["state"] == "running")
         
     def next_task_to_process(self):
         '''Find the next task that hasn't been run yet, but has all the 
         required input ready.'''
-        for k, t in self.tasks_to_run.items():
-            if(t["state"] == "not_started" and
-               self.requires_satisfied(t["task"])):
-                return t["task"]
-        return None
+        with self.lock:
+            for k, t in self.tasks_to_run.items():
+                if(t["state"] == "not_started" and
+                   self.requires_satisfied(t["task"])):
+                    return t["task"]
+            return None
 
     def run_callback(self, x):
-        ofname, tsklist = x
-        for tsk in tsklist:
-            self.new_or_updated_task.put(tsk)
-        self.tasks_to_run[ofname]["state"] = "done"
+        with self.lock:
+            ofname, tsklist = x
+            for tsk in tsklist:
+                self.process_task(tsk, force_update=True)
+            self.tasks_to_run[ofname]["state"] = "done"
 
     def run_callback_error(self, e):
-        self.tasks_to_run[e.task_unique_name]["state"] = "error"
-        self.tasks_to_run[e.task_unique_name]["exception"] = e
-        self.error.append(e)
-        print("======== Task failed =======")
-        print("Failure while trying to generate %s" % e.task_unique_name)
-        print("Error:")
-        print(e.print_exception_string)
-        print("======= Waiting for pipeline to finish =======")
+        with self.lock:
+            self.tasks_to_run[e.task_unique_name]["state"] = "error"
+            self.tasks_to_run[e.task_unique_name]["exception"] = e
+            self.error.append(e)
+            print("======== Task failed =======")
+            print("Failure while trying to generate %s" % e.task_unique_name)
+            print("Error:")
+            print(e.print_exception_string)
+            print("======= Waiting for pipeline to finish =======")
         
     def run_next_tasks(self):
-        task = self.next_task_to_process()
-        # Make sure we have at least one task to process, or still
-        # running, or we haven't finished processing the queue of completed
-        # tasks
-        if(task is None and self.new_or_updated_task.empty() and
-           self.number_task_running() == 0):
-            #raise RuntimeError("Pipeline can't be completed. Task_to_run: %s" % self.tasks_to_run)
-            print("======= Pipeline can't be completed =======")
-            raise RuntimeError("Pipeline can't be completed.")
-
-        # Just run the task, if we don't have a pool
-        if(self.pool is None):
-            try:
-                res = task._run_with_finish()
-                self.run_callback(res)
-            except BaseException as e:
-                self.run_callback_error(e)
-            return
-
-        # Otherwise, start as many tasks as we can
-        while(task is not None):
-            self.tasks_to_run[task.task_unique_name()]["state"] = "running"
-            self.pool.apply_async(task._run_with_finish, (), {},
-                                  self.run_callback, self.run_callback_error)
+        with self.lock:
             task = self.next_task_to_process()
+            # Make sure we have at least one task to process, or still
+            # running
+            if(task is None and self.number_task_running() == 0):
+                #raise RuntimeError("Pipeline can't be completed. Task_to_run: %s" % self.tasks_to_run)
+                print("======= Pipeline can't be completed =======")
+                raise RuntimeError("Pipeline can't be completed.")
+
+            # Just run the task, if we don't have a pool
+            if(self.pool is None):
+                try:
+                    res = task._run_with_finish()
+                    self.run_callback(res)
+                except BaseException as e:
+                    self.run_callback_error(e)
+                return
+
+            # Otherwise, start as many tasks as we can
+            while(task is not None):
+                self.tasks_to_run[task.task_unique_name()]["state"] = "running"
+                self.pool.apply_async(task._run_with_finish, (), {},
+                                      self.run_callback,
+                                      self.run_callback_error)
+                task = self.next_task_to_process()
         
     def run(self):
         try:
@@ -287,10 +290,6 @@ class TaskRunner(object):
                     nleft = self.number_task_left()
                     self.run_next_tasks()
                 time.sleep(self.polling_time)
-                while(not self.new_or_updated_task.empty()):
-                    self.process_task(self.new_or_updated_task.get(),
-                                      force_update=True)
-                    nleft = -1
         finally:
             if(len(self.error) > 0):
                 print("======= Pipeline failed =======")

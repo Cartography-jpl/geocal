@@ -235,6 +235,7 @@ class TaskRunner(object):
 
     def run_callback(self, x):
         with self.lock:
+            self.task_has_finished = True
             ofname, tsklist = x
             for tsk in tsklist:
                 self.process_task(tsk, force_update=True)
@@ -242,6 +243,7 @@ class TaskRunner(object):
 
     def run_callback_error(self, e):
         with self.lock:
+            self.task_has_finished = True
             self.tasks_to_run[e.task_unique_name]["state"] = "error"
             self.tasks_to_run[e.task_unique_name]["exception"] = e
             self.error.append(e)
@@ -284,11 +286,12 @@ class TaskRunner(object):
             # Only check when the number of tasks left has changed, e.g,
             # something has finished since the last time through the
             # loop.
-            nleft = -1
+            self.task_has_finished = True
             while(not self.number_task_left() ==0):
-                if(nleft != self.number_task_left()):
-                    nleft = self.number_task_left()
-                    self.run_next_tasks()
+                with self.lock:
+                    if(self.task_has_finished):
+                        self.task_has_finished = False
+                        self.run_next_tasks()
                 time.sleep(self.polling_time)
         finally:
             if(len(self.error) > 0):

@@ -50,6 +50,18 @@ void GeoCal::serialize_write(const std::string& Fname,
 #endif
 }
 
+void GeoCal::serialize_write_binary(const std::string& Fname, 
+			     const boost::shared_ptr<GenericObject>& Obj)
+{
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  std::ofstream os(Fname.c_str());
+  boost::archive::polymorphic_binary_oarchive oa(os);
+  oa << boost::serialization::make_nvp("geocal_object", Obj);
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+}
+
 //-----------------------------------------------------------------------
 /// Variation of serialize_write that writes to a string instead of a file.
 //-----------------------------------------------------------------------
@@ -128,6 +140,25 @@ GeoCal::serialize_read_generic(const std::string& Fname)
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   std::ifstream is(Fname.c_str());
   boost::archive::polymorphic_xml_iarchive ia(is);
+  boost::filesystem::path p(Fname);
+  std::string dir = p.parent_path().string();
+  if(dir == "")
+    dir = ".";
+  DirChange d(dir);
+  boost::shared_ptr<GenericObject> obj;
+  ia >> boost::serialization::make_nvp("geocal_object", obj);
+  return obj;
+#else
+  throw Exception("GeoCal was not built with boost::serialization support");
+#endif
+}
+
+boost::shared_ptr<GenericObject> 
+GeoCal::serialize_read_binary_generic(const std::string& Fname)
+{
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  std::ifstream is(Fname.c_str());
+  boost::archive::polymorphic_binary_iarchive ia(is);
   boost::filesystem::path p(Fname);
   std::string dir = p.parent_path().string();
   if(dir == "")

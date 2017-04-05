@@ -134,11 +134,13 @@ BOOST_AUTO_TEST_CASE(basic_test)
   blitz::Array<double, 2> r = rpc.image_coordinate(lat, lon, height);
   BOOST_CHECK_CLOSE(r(0, 0), ic_expect.line, 1e-4);
   BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 1e-4);
-  Geodetic gcalc = rpc.ground_coordinate(ic_expect, 1017);
-  BOOST_CHECK(distance(gcalc, g) < 0.1);
+  boost::shared_ptr<GroundCoordinate> gcalc =
+    rpc.ground_coordinate(ic_expect, 1017);
+  BOOST_CHECK(distance(*gcalc, g) < 0.1);
   SimpleDem dem(1017);
-  Geodetic gcalc2 = rpc.ground_coordinate(ic_expect, dem);
-  BOOST_CHECK(distance(gcalc2, g) < 0.1);
+  boost::shared_ptr<GroundCoordinate> gcalc2 =
+    rpc.ground_coordinate(ic_expect, dem);
+  BOOST_CHECK(distance(*gcalc2, g) < 0.1);
 
 //-----------------------------------------------------------------------
 // Test fit function.
@@ -291,8 +293,8 @@ BOOST_AUTO_TEST_CASE(inverse_fails)
   SrtmDem dem;
   SimpleDem dem2;
   ImageCoordinate ic(12300.07480763955, 11274.740393180751);
-  Geodetic g2 = rpc.ground_coordinate(ic, dem2);
-  Geodetic g = rpc.ground_coordinate(ic, dem);
+  boost::shared_ptr<GroundCoordinate> g2 = rpc.ground_coordinate(ic, dem2);
+  boost::shared_ptr<GroundCoordinate> g = rpc.ground_coordinate(ic, dem);
 }
 
 BOOST_AUTO_TEST_CASE(inverse_fails2)
@@ -310,8 +312,8 @@ BOOST_AUTO_TEST_CASE(inverse_fails2)
   boost::shared_ptr<DemMapInfo> dem1(new VicarLiteDem("/raid10/sba_gold/syria1/syria1_dem.hlf"));
   DemMapInfoOffset dem(dem1, 20.5801);
   ImageCoordinate ic(8862, 14383);
-  Geodetic g = rpc.ground_coordinate(ic, dem);
-  ImageCoordinate ic2 = rpc.image_coordinate(g);
+  boost::shared_ptr<GroundCoordinate> g = rpc.ground_coordinate(ic, dem);
+  ImageCoordinate ic2 = rpc.image_coordinate(*g);
   BOOST_CHECK_CLOSE(ic.line, ic2.line, 1e-4);
   BOOST_CHECK_CLOSE(ic.sample, ic2.sample, 1e-4);
 }

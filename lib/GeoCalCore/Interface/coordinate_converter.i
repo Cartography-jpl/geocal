@@ -16,9 +16,11 @@ namespace GeoCal {
 class CoordinateConverter : public GenericObject {
 public:
   virtual boost::shared_ptr<GroundCoordinate>
-    convert_from_coordinate(double X, double Y, double Height = 0) const = 0;
+    convert_from_coordinate(double X, double Y, double Z = 0) const = 0;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const = 0;
+  virtual boost::shared_ptr<GroundCoordinate> create
+  (const GroundCoordinate& Gc) const;
   virtual bool is_same(const CoordinateConverter& Conv) const;
   std::string print_to_string() const;
 };
@@ -26,7 +28,7 @@ public:
 class GeodeticConverter : public CoordinateConverter {
 public:
   virtual boost::shared_ptr<GroundCoordinate>
-    convert_from_coordinate(double X, double Y, double Height = 0) const;
+    convert_from_coordinate(double X, double Y, double Z = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
   %pickle_serialization();

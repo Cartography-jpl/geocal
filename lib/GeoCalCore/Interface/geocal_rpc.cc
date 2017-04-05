@@ -1,4 +1,5 @@
 #include "geocal_rpc.h"
+#include "planet_coordinate.h"
 #include "raster_image.h"
 #include "geocal_gsl_fit.h"
 #include "geocal_gsl_root.h"
@@ -26,10 +27,18 @@ void Rpc::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(line_denominator) & GEOCAL_NVP(line_numerator)
     & GEOCAL_NVP(sample_denominator) & GEOCAL_NVP(sample_numerator)
     & GEOCAL_NVP(fit_line_numerator) & GEOCAL_NVP(fit_sample_numerator);
+  // Older version didn't have coordinate_converter. The default of a
+  // null point uses Geodetic, so we can just skip setting this for
+  // older versions.
+  if(version > 0)
+    ar & GEOCAL_NVP(coordinate_converter);
 }
 
 GEOCAL_IMPLEMENT(Rpc);
 #endif
+
+boost::shared_ptr<CoordinateConverter>
+Rpc::default_coordinate_converter(new GeodeticConverter);
 
 //-----------------------------------------------------------------------
 /// Generate a RPC that approximates the calculation done by a
@@ -74,6 +83,7 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
   // polynomial extrapolates poorly
   double min_lat = -999, max_lat = -999, min_lon = -999, max_lon = -999;
   bool first = true;
+  int naif_code;
   for(int ih = 0; ih < Nheight; ++ih)
     for(int i = 0; i < Nln + 1; ++i)
       for(int j = 0; j < Nsmp + 1; ++j) {
@@ -97,6 +107,7 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 	  if(first) {
 	    min_lat = max_lat = pt->latitude();
 	    min_lon = max_lon = pt->longitude();
+	    naif_code = pt->convert_to_cf()->naif_code();
 	    first = false;
 	  } else {
 	    min_lat = std::min(min_lat, pt->latitude());
@@ -124,7 +135,23 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
   rpc.latitude_scale = floor(rpc.latitude_scale * 10000.0 + 0.5) / 10000.0;
   rpc.longitude_offset = floor(rpc.longitude_offset * 10000.0 + 0.5) / 10000.0;
   rpc.longitude_scale = floor(rpc.longitude_scale * 10000.0 + 0.5) / 10000.0;
-
+  // We'll want to come back and revisit this when we can
+  // planet_coordinate to just take naif_code
+  switch(naif_code) {
+  case 399:
+    // Default is earth/geodetic
+    break;
+  case MarsConstant::NAIF_CODE:
+    rpc.coordinate_converter.reset(new MarsPlanetocentricConverter);
+    break;
+  case EuropaConstant::NAIF_CODE:
+    rpc.coordinate_converter.reset(new EuropaPlanetocentricConverter);
+    break;
+  default:
+    Exception e;
+    e << "Don't support NAIF code " << naif_code;
+    throw e;
+  }
   rpc.fit_all(ln, smp, lat, lon, h);
   return rpc;
 }
@@ -288,14 +315,14 @@ Rpc Rpc::rpc_type_a() const
 
 double Rpc::resolution_meter(const Dem& D) const
 {
-  Geodetic g1 = ground_coordinate(ImageCoordinate(line_offset, 
-						  sample_offset), D);
-  Geodetic g2 = ground_coordinate(ImageCoordinate(line_offset + 1, 
-						  sample_offset), D);
-  Geodetic g3 = ground_coordinate(ImageCoordinate(line_offset, 
-						  sample_offset + 1), D);
-  double d1 = distance(g1, g2);
-  double d2 = distance(g1, g3);
+  boost::shared_ptr<GroundCoordinate> g1 =
+    ground_coordinate(ImageCoordinate(line_offset, sample_offset), D);
+  boost::shared_ptr<GroundCoordinate> g2 =
+    ground_coordinate(ImageCoordinate(line_offset + 1, sample_offset), D);
+  boost::shared_ptr<GroundCoordinate> g3 =
+    ground_coordinate(ImageCoordinate(line_offset, sample_offset + 1), D);
+  double d1 = distance(*g1, *g2);
+  double d2 = distance(*g1, *g3);
   return std::max(d1, d2);
 }
 
@@ -608,24 +635,27 @@ void Rpc::fit(const std::vector<boost::shared_ptr<GroundCoordinate> >& Gc,
 /// ConvergenceFailure exception will be thrown.
 //-----------------------------------------------------------------------
    
-Geodetic Rpc::ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const
+boost::shared_ptr<GroundCoordinate>
+Rpc::ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const
 {
   // This is a common enough special case to treat specially:
   const SimpleDem* sdem = dynamic_cast<const SimpleDem*>(&D);
   if(sdem)
     return ground_coordinate(Ic, sdem->h());
-  Geodetic gc1 = ground_coordinate(Ic, height_offset);
+  boost::shared_ptr<GroundCoordinate> gc1 =
+    ground_coordinate(Ic, height_offset);
   double delta_h = 10;
-  Geodetic gc2 = ground_coordinate(Ic, height_offset + delta_h);
-  boost::shared_ptr<CartesianFixed> p = gc1.convert_to_cf();
-  boost::shared_ptr<CartesianFixed> p2 = gc2.convert_to_cf();
+  boost::shared_ptr<GroundCoordinate> gc2 =
+    ground_coordinate(Ic, height_offset + delta_h);
+  boost::shared_ptr<CartesianFixed> p = gc1->convert_to_cf();
+  boost::shared_ptr<CartesianFixed> p2 = gc2->convert_to_cf();
   CartesianFixedLookVector lv;
   lv.look_vector[0] = p->position[0] - p2->position[0];
   lv.look_vector[1] = p->position[1] - p2->position[1];
   lv.look_vector[2] = p->position[2] - p2->position[2];
   double resolution = 1.0;
   boost::shared_ptr<CartesianFixed> surfp = D.intersect(*p, lv, resolution);
-  return Geodetic(*surfp);
+  return coor_conv_or_default()->create(*surfp);
 }
 
 //-----------------------------------------------------------------------
@@ -636,7 +666,7 @@ Geodetic Rpc::ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const
 /// ConvergenceFailure exception will be thrown.
 //-----------------------------------------------------------------------
    
-Geodetic Rpc::ground_coordinate(const ImageCoordinate& Ic, double Height) const
+boost::shared_ptr<GroundCoordinate> Rpc::ground_coordinate(const ImageCoordinate& Ic, double Height) const
 {
 //-----------------------------------------------------------------------
 // Class describing RcpEquation. This just takes the latitude and
@@ -694,7 +724,7 @@ Geodetic Rpc::ground_coordinate(const ImageCoordinate& Ic, double Height) const
   xint = x * latitude_scale + latitude_offset,
     y * longitude_scale + longitude_offset;
   blitz::Array<double, 1> res = gsl_root(eq, xint, 0.1);
-  return Geodetic(res(0), res(1), Height);
+  return coor_conv_or_default()->convert_from_coordinate(res(1), res(0), Height);
 }
 
 //-----------------------------------------------------------------------

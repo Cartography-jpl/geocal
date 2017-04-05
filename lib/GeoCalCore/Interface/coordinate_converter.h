@@ -21,7 +21,7 @@ namespace GeoCal {
   class defining the interface to a general coordinate convertor.
 
   This class allows conversion to and from whatever coordinate system
-  has been selected. The meaning of the X, Y, and Height value passed
+  has been selected. The meaning of the X, Y, and Z value passed
   in and out of the functions depends on what concrete specialization
   of this class is used. For uses where the ambiguity isn't
   acceptable, it is not appropriate to use this class (i.e., the
@@ -40,22 +40,32 @@ public:
 //-----------------------------------------------------------------------
 /// This converts from a particular coordinate system, returning a ground
 /// coordinate for the given coordinates. The specific meaning and units
-/// of X, Y, and height depend on which coordinates system is used by a
+/// of X, Y, and Z depend on which coordinates system is used by a
 /// specialization of this class.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<GroundCoordinate>
-    convert_from_coordinate(double X, double Y, double Height = 0) const = 0;
+    convert_from_coordinate(double X, double Y, double Z = 0) const = 0;
 
 //-----------------------------------------------------------------------
 /// This converts from a ground coordinate to a particular coordinate
-/// system. The specific meaning and units of X, Y, and height depend on
+/// system. The specific meaning and units of X, Y, and Z depend on
 /// which coordinates system is used by a specialization of this class.
 //-----------------------------------------------------------------------
 
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
-			       double& Y, double& Height) const = 0;
+			       double& Y, double& Z) const = 0;
 
+//-----------------------------------------------------------------------
+/// Convert and create a coordinate.
+//-----------------------------------------------------------------------
+  virtual boost::shared_ptr<GroundCoordinate> create
+  (const GroundCoordinate& Gc) const
+  {
+    double x, y, z;
+    convert_to_coordinate(Gc, x, y, z);
+    return convert_from_coordinate(x, y, z);
+  }
 //-----------------------------------------------------------------------
 /// Specialization that converts from Geodetic. Because much of our
 /// data is in Geodetic coordinates this is an important performance
@@ -63,7 +73,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
-			       double& Y, double& Height) const = 0;
+			       double& Y, double& Z) const = 0;
 
 //-----------------------------------------------------------------------
 /// Test if two CoordinateConverters are the same coordinate system.
@@ -96,13 +106,13 @@ public:
 
 //-----------------------------------------------------------------------
 /// Convert to geodetic. X and Y are longitude and latitude in
-/// degrees, and height is in meters.
+/// degrees, and Z is height is in meters.
 //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<GroundCoordinate>
-    convert_from_coordinate(double X, double Y, double Height = 0) const
+    convert_from_coordinate(double X, double Y, double Z = 0) const
   {
-    return boost::shared_ptr<GroundCoordinate>(new Geodetic(Y, X, Height));
+    return boost::shared_ptr<GroundCoordinate>(new Geodetic(Y, X, Z));
   }
 
 //-----------------------------------------------------------------------
@@ -117,24 +127,24 @@ public:
 
 //-----------------------------------------------------------------------
 /// Convert to geodetic. X and Y are longitude and latitude in
-/// degrees, and height is in meters.
+/// degrees, and Z is height is in meters.
 //-----------------------------------------------------------------------
 
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
-			       double& Y, double& Height) const
+			       double& Y, double& Z) const
   {
     Geodetic gd(Gc);
     X = gd.longitude();
     Y = gd.latitude();
-    Height = gd.height_reference_surface();
+    Z = gd.height_reference_surface();
   }
 
   virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
-			       double& Y, double& Height) const
+			       double& Y, double& Z) const
   {
     X = Gc.longitude();
     Y = Gc.latitude();
-    Height = Gc.height_reference_surface();
+    Z = Gc.height_reference_surface();
   }
 
 //-----------------------------------------------------------------------

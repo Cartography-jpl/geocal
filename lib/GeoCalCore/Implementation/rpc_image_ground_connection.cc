@@ -63,11 +63,13 @@ RpcImageGroundConnection::cf_look_vector
  boost::shared_ptr<CartesianFixed>& P) const
 {
   double h = rpc_->height_offset;
-  Geodetic gc1 = rpc_->ground_coordinate(Ic, h);
+  boost::shared_ptr<GroundCoordinate> gc1 =
+    rpc_->ground_coordinate(Ic, h);
   double delta_h = 10;
-  Geodetic gc2 = rpc_->ground_coordinate(Ic, h + delta_h);
-  P = gc1.convert_to_cf();
-  boost::shared_ptr<CartesianFixed> ec2 = gc2.convert_to_cf();
+  boost::shared_ptr<GroundCoordinate> gc2 =
+    rpc_->ground_coordinate(Ic, h + delta_h);
+  P = gc1->convert_to_cf();
+  boost::shared_ptr<CartesianFixed> ec2 = gc2->convert_to_cf();
   Lv.look_vector[0] = ec2->position[0] - P->position[0];
   Lv.look_vector[1] = ec2->position[1] - P->position[1];
   Lv.look_vector[2] = ec2->position[2] - P->position[2];

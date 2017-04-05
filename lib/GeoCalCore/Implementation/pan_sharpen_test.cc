@@ -36,15 +36,15 @@ BOOST_AUTO_TEST_CASE(basic)
   ImageCoordinate ulc(-0.5,-0.5);
   ImageCoordinate lrc(ps.psmooth->number_line() - 0.5, 
 		      ps.psmooth->number_sample() - 0.5);
-  BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(ulc, d),
-       ps.pansub->rpc().ground_coordinate(ulc, d)) < 0.2);
-  BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(lrc, d),
-       ps.pansub->rpc().ground_coordinate(lrc, d)) < 0.2);
+  BOOST_CHECK(GeoCal::distance(*ps.psmooth->rpc().ground_coordinate(ulc, d),
+       *ps.pansub->rpc().ground_coordinate(ulc, d)) < 0.2);
+  BOOST_CHECK(GeoCal::distance(*ps.psmooth->rpc().ground_coordinate(lrc, d),
+       *ps.pansub->rpc().ground_coordinate(lrc, d)) < 0.2);
   for(int i = 0; i < ps.mag->number_band(); ++i) {
-    BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(ulc, d),
-	 ps.mag->raster_image(i).rpc().ground_coordinate(ulc, d)) < 0.2);
-    BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(lrc, d),
-	 ps.mag->raster_image(i).rpc().ground_coordinate(lrc, d)) < 0.2);
+    BOOST_CHECK(GeoCal::distance(*ps.psmooth->rpc().ground_coordinate(ulc, d),
+	 *ps.mag->raster_image(i).rpc().ground_coordinate(ulc, d)) < 0.2);
+    BOOST_CHECK(GeoCal::distance(*ps.psmooth->rpc().ground_coordinate(lrc, d),
+	 *ps.mag->raster_image(i).rpc().ground_coordinate(lrc, d)) < 0.2);
   }
 
   // Check set up of ps itself.
@@ -54,10 +54,10 @@ BOOST_AUTO_TEST_CASE(basic)
 		      ps.psmooth->number_line());
     BOOST_CHECK_EQUAL(ps.raster_image(i).number_sample(),
 		      ps.psmooth->number_sample());
-    BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(ulc, d),
-	 ps.raster_image(i).rpc().ground_coordinate(ulc, d)) < 0.2);
-    BOOST_CHECK(GeoCal::distance(ps.psmooth->rpc().ground_coordinate(lrc, d),
-	 ps.raster_image(i).rpc().ground_coordinate(lrc, d)) < 0.2);
+    BOOST_CHECK(GeoCal::distance(*ps.psmooth->rpc().ground_coordinate(ulc, d),
+	 *ps.raster_image(i).rpc().ground_coordinate(ulc, d)) < 0.2);
+    BOOST_CHECK(GeoCal::distance(*ps.psmooth->rpc().ground_coordinate(lrc, d),
+	 *ps.raster_image(i).rpc().ground_coordinate(lrc, d)) < 0.2);
   }
 
   BOOST_CHECK_EQUAL(ps.psq_stat.count(), 

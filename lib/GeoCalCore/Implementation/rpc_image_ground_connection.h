@@ -79,17 +79,11 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic,
 			const Dem& D) const
-  { return 
-      boost::shared_ptr<Geodetic>
-      (new Geodetic(rpc_->ground_coordinate(Ic, D)));
-  }
+  { return rpc_->ground_coordinate(Ic, D);}
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic,
 				  double H) const
-  { return 
-      boost::shared_ptr<Geodetic>
-      (new Geodetic(rpc_->ground_coordinate(Ic, H)));
-  }
+  { return rpc_->ground_coordinate(Ic, H); }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const { return rpc_->image_coordinate(Gc); }
   virtual void print(std::ostream& Os) const \

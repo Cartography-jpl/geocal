@@ -537,7 +537,7 @@ MapInfo RpcImage::map_info_bounding() const
   // Top and bottom line
   for(int i = 0; i < img_avg_->number_sample(); ++i) {
     try {
-      ImageCoordinate ic = coordinate(rpc().ground_coordinate(
+      ImageCoordinate ic = coordinate(*rpc().ground_coordinate(
       ImageCoordinate(0 * line_avg_fact_, i * sample_avg_fact_),
       dem()));
       line_min = std::min(line_min, ic.line);
@@ -548,7 +548,7 @@ MapInfo RpcImage::map_info_bounding() const
       // Ignore ConvergenceFailure problems, just skip that point.
     }
     try {
-      ImageCoordinate ic = coordinate(rpc().ground_coordinate(
+      ImageCoordinate ic = coordinate(*rpc().ground_coordinate(
        ImageCoordinate(img_avg_->number_line() * line_avg_fact_, 
 		       i * sample_avg_fact_), dem()));
       line_min = std::min(line_min, ic.line);
@@ -562,7 +562,7 @@ MapInfo RpcImage::map_info_bounding() const
   // Left and right side.
   for(int i = 0; i < img_avg_->number_line(); ++i) {
     try {
-      ImageCoordinate ic = coordinate(rpc().ground_coordinate(
+      ImageCoordinate ic = coordinate(*rpc().ground_coordinate(
       ImageCoordinate(i * line_avg_fact_, 0 * sample_avg_fact_),
       dem()));
       line_min = std::min(line_min, ic.line);
@@ -573,7 +573,7 @@ MapInfo RpcImage::map_info_bounding() const
       // Ignore ConvergenceFailure problems, just skip that point.
     }
     try {
-      ImageCoordinate ic = coordinate(rpc().ground_coordinate(
+      ImageCoordinate ic = coordinate(*rpc().ground_coordinate(
        ImageCoordinate(i * line_avg_fact_,
 		       img_avg_->number_sample() * sample_avg_fact_),
        dem()));

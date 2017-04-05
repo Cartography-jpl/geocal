@@ -731,18 +731,22 @@ void VicarFile::rpc(const Rpc& V)
   // VICAR expects NITF corners when it finds an RPC. We estimiate this
   // by finding the corners at the height offset of the RPC.
   SimpleDem d(V.height_offset);
-  Geodetic g1 = V.ground_coordinate(ImageCoordinate(0, 0), d);
-  Geodetic g2 = V.ground_coordinate(ImageCoordinate(0, number_sample() - 1), d);
-  Geodetic g3 = V.ground_coordinate(ImageCoordinate(number_line() - 1, number_sample() - 1), d);
-  Geodetic g4 = V.ground_coordinate(ImageCoordinate(number_line() - 1, 0), d);
-  label_set("NITF_CORNERLAT1", to_s2(g1.latitude()), "GEOTIFF");
-  label_set("NITF_CORNERLON1", to_s2(g1.longitude()), "GEOTIFF");
-  label_set("NITF_CORNERLAT2", to_s2(g2.latitude()), "GEOTIFF");
-  label_set("NITF_CORNERLON2", to_s2(g2.longitude()), "GEOTIFF");
-  label_set("NITF_CORNERLAT3", to_s2(g3.latitude()), "GEOTIFF");
-  label_set("NITF_CORNERLON3", to_s2(g3.longitude()), "GEOTIFF");
-  label_set("NITF_CORNERLAT4", to_s2(g4.latitude()), "GEOTIFF");
-  label_set("NITF_CORNERLON4", to_s2(g4.longitude()), "GEOTIFF");
+  boost::shared_ptr<GroundCoordinate> g1 =
+    V.ground_coordinate(ImageCoordinate(0, 0), d);
+  boost::shared_ptr<GroundCoordinate> g2 =
+    V.ground_coordinate(ImageCoordinate(0, number_sample() - 1), d);
+  boost::shared_ptr<GroundCoordinate> g3 =
+    V.ground_coordinate(ImageCoordinate(number_line() - 1, number_sample() - 1), d);
+  boost::shared_ptr<GroundCoordinate> g4 =
+    V.ground_coordinate(ImageCoordinate(number_line() - 1, 0), d);
+  label_set("NITF_CORNERLAT1", to_s2(g1->latitude()), "GEOTIFF");
+  label_set("NITF_CORNERLON1", to_s2(g1->longitude()), "GEOTIFF");
+  label_set("NITF_CORNERLAT2", to_s2(g2->latitude()), "GEOTIFF");
+  label_set("NITF_CORNERLON2", to_s2(g2->longitude()), "GEOTIFF");
+  label_set("NITF_CORNERLAT3", to_s2(g3->latitude()), "GEOTIFF");
+  label_set("NITF_CORNERLON3", to_s2(g3->longitude()), "GEOTIFF");
+  label_set("NITF_CORNERLAT4", to_s2(g4->latitude()), "GEOTIFF");
+  label_set("NITF_CORNERLON4", to_s2(g4->longitude()), "GEOTIFF");
 }
 
 //-----------------------------------------------------------------------

@@ -188,37 +188,6 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-
-def _new_rpc(cls, version, is_rpc_a, error_bias, error_random, height_offset, 
-             height_scale, latitude_offset,
-             latitude_scale, longitude_offset, longitude_scale,
-             line_offset, line_scale, sample_offset, sample_scale,
-             line_denominator, line_numerator, sample_denominator,
-             sample_numerator, fit_line_numerator, fit_sample_numerator):
-    if(cls.pickle_format_version() != version):
-      raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
-    rpc = Rpc()
-    rpc.rpc_type = Rpc.RPC_A if(is_rpc_a) else Rpc.RPC_B
-    rpc.error_bias = error_bias
-    rpc.error_random = error_random				
-    rpc.height_offset = height_offset
-    rpc.height_scale = height_scale
-    rpc.latitude_offset = latitude_offset
-    rpc.latitude_scale = latitude_scale
-    rpc.longitude_offset = longitude_offset
-    rpc.longitude_scale = longitude_scale
-    rpc.line_offset = line_offset
-    rpc.line_scale = line_scale
-    rpc.sample_offset = sample_offset
-    rpc.sample_scale = sample_scale
-    rpc.line_denominator = line_denominator
-    rpc.line_numerator = line_numerator
-    rpc.sample_denominator = sample_denominator
-    rpc.sample_numerator = sample_numerator
-    rpc.fit_line_numerator = fit_line_numerator
-    rpc.fit_sample_numerator = fit_sample_numerator
-    return rpc
-
 class Rpc(geocal_swig.generic_object.GenericObject):
     """
 
@@ -324,6 +293,7 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     def fit_sample_numerator(self, value):
       self._fit_sample_numerator(value)
 
+    coordinate_converter = _swig_property(_geocal_rpc.Rpc_coordinate_converter_get, _geocal_rpc.Rpc_coordinate_converter_set)
 
     def resolution_meter(self, D):
         """
@@ -430,7 +400,7 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     def ground_coordinate(self, *args):
         """
 
-        Geodetic Rpc::ground_coordinate(const ImageCoordinate &Ic, double Height) const
+        boost::shared_ptr< GroundCoordinate > Rpc::ground_coordinate(const ImageCoordinate &Ic, double Height) const
         Invert the RPC to find the ground coordinate that maps to a give
         ImageCoordinate.
 

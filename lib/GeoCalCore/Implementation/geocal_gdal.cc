@@ -577,19 +577,23 @@ void GeoCal::gdal_rpc(GDALDataset& D, const Rpc& R)
   // VICAR expects NITF corners when it finds an RPC. We estimiate this
   // by finding the corners at the height offset of the RPC.
   SimpleDem d(R.height_offset);
-  Geodetic g1 = R.ground_coordinate(ImageCoordinate(-0.5, -0.5), d);
-  Geodetic g2 = R.ground_coordinate(ImageCoordinate(-0.5, 
+  boost::shared_ptr<GroundCoordinate> g1 =
+    R.ground_coordinate(ImageCoordinate(-0.5, -0.5), d);
+  boost::shared_ptr<GroundCoordinate> g2 =
+    R.ground_coordinate(ImageCoordinate(-0.5, 
 					    D.GetRasterXSize() - 0.5), d);
-  Geodetic g3 = R.ground_coordinate(ImageCoordinate(D.GetRasterYSize() - 0.5, 
-					    D.GetRasterXSize() - 0.5), d);
-  Geodetic g4 = R.ground_coordinate(ImageCoordinate(D.GetRasterYSize() - 0.5, 
+  boost::shared_ptr<GroundCoordinate> g3 =
+    R.ground_coordinate(ImageCoordinate(D.GetRasterYSize() - 0.5, 
+					D.GetRasterXSize() - 0.5), d);
+  boost::shared_ptr<GroundCoordinate> g4 =
+    R.ground_coordinate(ImageCoordinate(D.GetRasterYSize() - 0.5, 
 					    -0.5), d);
-  D.SetMetadataItem("NITF_CORNERLAT1", to_s2(g1.latitude()).c_str());
-  D.SetMetadataItem("NITF_CORNERLON1", to_s2(g1.longitude()).c_str());
-  D.SetMetadataItem("NITF_CORNERLAT2", to_s2(g2.latitude()).c_str());
-  D.SetMetadataItem("NITF_CORNERLON2", to_s2(g2.longitude()).c_str());
-  D.SetMetadataItem("NITF_CORNERLAT3", to_s2(g3.latitude()).c_str());
-  D.SetMetadataItem("NITF_CORNERLON3", to_s2(g3.longitude()).c_str());
-  D.SetMetadataItem("NITF_CORNERLAT4", to_s2(g4.latitude()).c_str());
-  D.SetMetadataItem("NITF_CORNERLON4", to_s2(g4.longitude()).c_str());
+  D.SetMetadataItem("NITF_CORNERLAT1", to_s2(g1->latitude()).c_str());
+  D.SetMetadataItem("NITF_CORNERLON1", to_s2(g1->longitude()).c_str());
+  D.SetMetadataItem("NITF_CORNERLAT2", to_s2(g2->latitude()).c_str());
+  D.SetMetadataItem("NITF_CORNERLON2", to_s2(g2->longitude()).c_str());
+  D.SetMetadataItem("NITF_CORNERLAT3", to_s2(g3->latitude()).c_str());
+  D.SetMetadataItem("NITF_CORNERLON3", to_s2(g3->longitude()).c_str());
+  D.SetMetadataItem("NITF_CORNERLAT4", to_s2(g4->latitude()).c_str());
+  D.SetMetadataItem("NITF_CORNERLON4", to_s2(g4->longitude()).c_str());
 }

@@ -432,9 +432,9 @@ class _create_nitf_field_structure(object):
             field_value_list.append(lp)
             return
         # If we are here, then this is a simple field
-        #field_name, ln, ty, *rest = row
+        #field_name, desc, ln, ty, *rest = row
         # Write this so it also works in python 2.7
-        field_name, ln, ty, rest = row[0],row[1],row[2],row[3:]
+        field_name, desc, ln, ty, rest = row[0],row[1],row[2],row[3],row[4:]
         options = {}
         if(len(rest) > 0):
             options = rest[0]
@@ -485,8 +485,16 @@ def create_nitf_field_structure(name, description, hlp = None):
     foo_value. The change the field "foo" so it is no longer something that
     can be set, instead the class calculates the value that this should be.
 
-    For the description, we take a field_name, size, type 'ty', and a
-    set of optionally parameters.  The optional parameters are:
+    For the description, we take a field_name, help description, size,
+    type 'ty', and a set of optionally parameters.  
+
+    The field_name can be the "None" object if this needs to reserve
+    space but isn't actually a field (e.g., see "USE00A" which has
+    lots of reserved fields).  The type might be something like 'int',
+    'float' or 'str'. We convert the NITF string to and from this
+    type.
+
+    The optional parameters are:
 
     frmt    - A format string or function
     default - The default value to use when writing. If not specified, the
@@ -508,9 +516,6 @@ def create_nitf_field_structure(name, description, hlp = None):
               Note that we have a generic FieldData class here, which might 
               be sufficient.
 
-    The type might be something like 'int', 'float' or 'str'. We
-    convert the NITF string to and from this type.
-
     The 'frmt' can be a format string (e.g., "%03d" for a 3 digit integer),
     or it can be a function that takes a value and returns a string - useful
     for more complicated formatting than can be captured with a format string
@@ -518,6 +523,7 @@ def create_nitf_field_structure(name, description, hlp = None):
     for str type is just "%s" and integer is "%d" - you don't need to specify
     this if you want the default (note that we already handling padding, so
     you don't need to specify something like "%03d" to get 0 filled padding).
+
     '''
     t = _create_nitf_field_structure()
     res = type(name, (_FieldStruct,), t.process(description))
@@ -530,6 +536,3 @@ def create_nitf_field_structure(name, description, hlp = None):
         except AttributeError:
             pass
     return res
-
-
-    

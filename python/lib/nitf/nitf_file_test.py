@@ -140,7 +140,7 @@ def test_large_tre_write(isolated_dir):
     '''Repeat of test_basic_write, but also include a really big TRE that
     forces the use of the second place in the header for TREs'''
     desc = ["BIGTRE",
-            ["big_field", 99999-20, str]
+            ["big_field", "", 99999-20, str]
             ]
     TreBig = create_nitf_tre_structure("TreBig", desc)
     f = NitfFile()
@@ -167,7 +167,7 @@ def test_tre_overflow_write(isolated_dir):
     '''Repeat of test_basic_write, but also include two really big TREs that
     forces the use of the DES TRE overflow for TREs'''
     desc = ["BIGTRE",
-            ["big_field", 99999-20, str]
+            ["big_field", "", 99999-20, str]
             ]
     TreBig = create_nitf_tre_structure("TreBig", desc)
     f = NitfFile()

@@ -6,14 +6,14 @@ from test_support import *
 import io, six
 
 def test_tre():
-    # This is parte of USE00A, but we give it a different name so it
+    # This is part of USE00A, but we give it a different name so it
     # doesn't conflict with the real TRE defined in nitf_tre_csde.py
     TestUSE00A = create_nitf_tre_structure("TestUSE00A",
         ["USETST",
-         ["angle_to_north", 3, int],
-         ["mean_gsd", 5, float, {"frmt" : "%05.1lf"}],
-         [None, 1, str],
-         ["dynamic_range", 5, int],
+         ["angle_to_north", "Angle to North", 3, int],
+         ["mean_gsd", "Mean GSD", 5, float, {"frmt" : "%05.1lf"}],
+         [None, None, 1, str],
+         ["dynamic_range", "Dynamic Range", 5, int],
          ])
     t = TestUSE00A()
     t.angle_to_north = 270

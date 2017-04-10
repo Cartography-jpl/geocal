@@ -5,8 +5,8 @@ import io, six
 def test_basic():
     '''Basic test, just set and read values.'''
     TestField = create_nitf_field_structure("TestField",
-        [["fhdr", 4, str,  {"default" : "NITF"}],
-         ["clevel", 2, int ],
+        [["fhdr", "", 4, str,  {"default" : "NITF"}],
+         ["clevel", "", 2, int ],
         ])
     t = TestField()
     assert t.fhdr == "NITF"
@@ -29,7 +29,7 @@ clevel: 2
 def test_calculated_value():
     '''Test where we have a calculated value, in this case a hard coded value'''
     TestField = create_nitf_field_structure("TestField",
-        [["fhdr", 4, str],
+        [["fhdr", "", 4, str],
         ])
     def _fhdr_value(self):
         return "NITF"
@@ -43,11 +43,11 @@ def test_calculated_value():
 def test_loop():
     '''Test where we have a looping structure'''
     TestField = create_nitf_field_structure("TestField",
-        [["fhdr", 4, str, {"default" : "NITF"}],
-         ["numi", 3, int],
+        [["fhdr", "", 4, str, {"default" : "NITF"}],
+         ["numi", "", 3, int],
          [["loop", "f.numi"],
-          ['lish', 6, int],
-          ['li', 10, int]]
+          ['lish', "", 6, int],
+          ['li', "", 10, int]]
         ])
     t = TestField()
     t.numi = 4
@@ -86,11 +86,11 @@ Loop - f.numi
     
 def test_loop_calc_value():
     TestField = create_nitf_field_structure("TestField",
-        [["fhdr", 4, str, {"default" : "NITF"}],
-         ["numi", 3, int],
+        [["fhdr", "", 4, str, {"default" : "NITF"}],
+         ["numi", "", 3, int],
          [["loop", "f.numi"],
-          ['lish', 6, int],
-          ['li', 10, int]]
+          ['lish', "", 6, int],
+          ['li', "", 10, int]]
         ])
     def _lish_value(self, i):
         return [11,12,13,14][i]
@@ -109,13 +109,13 @@ def test_loop_calc_value():
 
 def test_nested_loop():
     TestField = create_nitf_field_structure("TestField",
-        [["fhdr", 4, str, {"default" : "NITF"}],
-         ["numi", 3, int],
+        [["fhdr", "", 4, str, {"default" : "NITF"}],
+         ["numi", "", 3, int],
          [["loop", "f.numi"],
-          ['lish', 6, int],
-          ["numj", 3, int],
+          ['lish', "", 6, int],
+          ["numj", "", 3, int],
           [["loop", "f.numj[i1]"],
-           ['li', 10, int]]
+           ['li', "", 10, int]]
           ]
         ])
     t = TestField()
@@ -140,9 +140,9 @@ def test_nested_loop():
 
 def test_conditional():
     TestField = create_nitf_field_structure("TestField",
-        [["fhdr", 4, str, {"default" : "NITF"}],
-         ["udhdl", 5, int],
-         ["udhofl", 3, int, {"condition" : "f.udhdl != 0"}]])
+        [["fhdr", "", 4, str, {"default" : "NITF"}],
+         ["udhdl", "", 5, int],
+         ["udhofl", "", 3, int, {"condition" : "f.udhdl != 0"}]])
     t = TestField()
     with pytest.raises(RuntimeError):
         t.udhofl = 1
@@ -161,11 +161,11 @@ def test_loop_conditional():
     # udhdl doesn't really loop in a nitf file header, but we'll pretend it
     # does to test a looping conditional
     TestField = create_nitf_field_structure("TestField",
-        [["fhdr", 4, str, {"default" : "NITF"}],
-         ["numi", 3, int],
+        [["fhdr", "", 4, str, {"default" : "NITF"}],
+         ["numi", "", 3, int],
          [["loop", "f.numi"],
-          ["udhdl", 5, int],
-          ["udhofl", 3, int, {"condition" : "f.udhdl[i1] != 0"}]]
+          ["udhdl", "", 5, int],
+          ["udhofl", "", 3, int, {"condition" : "f.udhdl[i1] != 0"}]]
          ])
     t = TestField()
     t.numi = 3

@@ -16,35 +16,30 @@ template<int NAIF_CODE> class Planetocentric;
   Note that "Planet" also includes "Moon of planet", basically 
   anything with a NAIF_CODE
 *******************************************************************/
-template<int NCODE> class PlanetConstant {
+class PlanetConstant {
 public:
-  enum {NAIF_CODE = NCODE };
-  static double a() {return h.planet_a();}
-  static double b() {return h.planet_b(); }
-  static double esq() {return h.planet_esq(); }
-  static std::string name() { return name_;}
+  enum {MARS_NAIF_CODE=499, EUROPA_NAIF_CODE=502};
+  static double a(int Naif_code) {return h(Naif_code).planet_a();}
+  static double b(int Naif_code) {return h(Naif_code).planet_b(); }
+  static double esq(int Naif_code) {return h(Naif_code).planet_esq(); }
+  static std::string name(int Naif_code) { return h(Naif_code).planet_name();}
 
 //-----------------------------------------------------------------------
 /// Calculate flattening
 //-----------------------------------------------------------------------
 
-  static double flattening()
-  { return (PlanetConstant<NAIF_CODE>::a() - PlanetConstant<NAIF_CODE>::b()) / PlanetConstant<NAIF_CODE>::a(); }
+  static double flattening(int Naif_code)
+  { return (PlanetConstant::a(Naif_code) - PlanetConstant::b(Naif_code)) /
+      PlanetConstant::a(Naif_code); }
   
 //-----------------------------------------------------------------------
 /// Calculate inverse flattening.
 //-----------------------------------------------------------------------
-  static double inverse_flattening()
-  { return 1.0 / PlanetConstant<NAIF_CODE>::flattening(); }    
-
-//-----------------------------------------------------------------------
-/// Return NAIF code.
-//-----------------------------------------------------------------------
-  
-  static int naif_code() {return NCODE;}
+  static double inverse_flattening(int Naif_code)
+  { return 1.0 / PlanetConstant::flattening(Naif_code); }    
 private:
-  static SpicePlanetConstant h;
-  static const char* name_;
+  static std::map<int, SpicePlanetConstant> h_map;
+  static SpicePlanetConstant h(int Naif_code);
 };
 
 /****************************************************************//**
@@ -72,7 +67,7 @@ public:
     if(!mf) {
       Exception e;
       e << "Cannot convert ground coordinate to "
-	<< PlanetConstant<NAIF_CODE>::name()<< "Fixed\n"
+	<< PlanetConstant::name(NAIF_CODE)<< "Fixed\n"
 	<< "Coordinate: " << Gc << "\n";
       throw e;
     }
@@ -151,8 +146,8 @@ public:
   virtual double height_reference_surface() const;
   virtual double min_radius_reference_surface() const
   {
-    return std::min(PlanetConstant<NAIF_CODE>::a(), 
-		    PlanetConstant<NAIF_CODE>::b());
+    return std::min(PlanetConstant::a(NAIF_CODE), 
+		    PlanetConstant::b(NAIF_CODE));
   }
 
 //-----------------------------------------------------------------------
@@ -184,9 +179,9 @@ public:
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0)
   const
   {
-    double aph = PlanetConstant<NAIF_CODE>::a() + 
+    double aph = PlanetConstant::a(NAIF_CODE) + 
       Height_reference_surface;
-    double bph = PlanetConstant<NAIF_CODE>::b() + 
+    double bph = PlanetConstant::b(NAIF_CODE) + 
       Height_reference_surface;
     boost::array<double, 3> dirci;
     dirci[0] = Cl.look_vector[0]/ aph;
@@ -217,7 +212,7 @@ public:
   
   virtual void print(std::ostream& Os) const
   {
-    Os << PlanetConstant<NAIF_CODE>::name()
+    Os << PlanetConstant::name(NAIF_CODE)
        << "Fixed (" << position[0] << " m, " << position[1] << " m, "
        << position[2] << "m)";
   }
@@ -347,9 +342,9 @@ public:
   const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
   const
   {
-    double aph = PlanetConstant<NAIF_CODE>::a() + 
+    double aph = PlanetConstant::a(NAIF_CODE) + 
       Height_reference_surface;
-    double bph = PlanetConstant<NAIF_CODE>::b() + 
+    double bph = PlanetConstant::b(NAIF_CODE) + 
       Height_reference_surface;
     boost::array<double, 3> dirci;
     dirci[0] = Cl.look_vector[0]/ aph;
@@ -384,7 +379,7 @@ public:
 
   virtual void print(std::ostream& Os) const
   {
-    Os << PlanetConstant<NAIF_CODE>::name()
+    Os << PlanetConstant::name(NAIF_CODE)
        << "Inertial (" << position[0] << " m, " << position[1] << " m, "
        << position[2] << "m)";
   }
@@ -436,7 +431,7 @@ public:
   }
   virtual void print(std::ostream& Os) const
   {
-    Os << PlanetConstant<NAIF_CODE>::name()
+    Os << PlanetConstant::name(NAIF_CODE)
        << "Planetocentric: (" << latitude() << " deg, " 
        << longitude() << " deg, "
        << height_reference_surface() << " m)";
@@ -505,8 +500,8 @@ private:
   double planet_radius(double Latitude_radians) const
   {
     double clat = cos(Latitude_radians);
-    return PlanetConstant<NAIF_CODE>::b() / 
-      sqrt(1 - PlanetConstant<NAIF_CODE>::esq() * clat * clat);
+    return PlanetConstant::b(NAIF_CODE) / 
+      sqrt(1 - PlanetConstant::esq(NAIF_CODE) * clat * clat);
   }
   friend class boost::serialization::access;
   template<class Archive>
@@ -595,14 +590,14 @@ public:
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  int naif_code() { return NAIF_CODE; }
+  virtual int naif_code() const { return NAIF_CODE; }
 
 //-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << PlanetConstant<NAIF_CODE>::name()
+  { Os << PlanetConstant::name(NAIF_CODE)
        << "Planetocentric Converter"; }
 private:
   friend class boost::serialization::access;
@@ -610,14 +605,12 @@ private:
   void serialize(Archive & ar, const unsigned int version);
 };
 
-typedef PlanetConstant<499> MarsConstant;
 typedef Planetocentric<499> MarsPlanetocentric;
 typedef PlanetFixed<499> MarsFixed;
 typedef PlanetInertial<499> MarsInertial;
 typedef SimpleDemT<MarsPlanetocentric> MarsSimpleDem;
 typedef PlanetocentricConverter<499> MarsPlanetocentricConverter;
 
-typedef PlanetConstant<502> EuropaConstant;
 typedef Planetocentric<502> EuropaPlanetocentric;
 typedef PlanetFixed<502> EuropaFixed;
 typedef PlanetInertial<502> EuropaInertial;

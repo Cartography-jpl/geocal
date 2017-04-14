@@ -3453,132 +3453,129 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Orbit_t swig_types[34]
 #define SWIGTYPE_p_GeoCal__Orbit swig_types[35]
 #define SWIGTYPE_p_GeoCal__OrbitData swig_types[36]
-#define SWIGTYPE_p_GeoCal__PlanetConstantT_499_t swig_types[37]
-#define SWIGTYPE_p_GeoCal__PlanetConstantT_502_t swig_types[38]
-#define SWIGTYPE_p_GeoCal__PlanetFixedT_499_t swig_types[39]
-#define SWIGTYPE_p_GeoCal__PlanetFixedT_502_t swig_types[40]
-#define SWIGTYPE_p_GeoCal__PlanetInertialT_499_t swig_types[41]
-#define SWIGTYPE_p_GeoCal__PlanetInertialT_502_t swig_types[42]
-#define SWIGTYPE_p_GeoCal__PlanetocentricConverterT_499_t swig_types[43]
-#define SWIGTYPE_p_GeoCal__PlanetocentricConverterT_502_t swig_types[44]
-#define SWIGTYPE_p_GeoCal__PlanetocentricT_499_t swig_types[45]
-#define SWIGTYPE_p_GeoCal__PlanetocentricT_502_t swig_types[46]
-#define SWIGTYPE_p_GeoCal__QuaternionOrbitData swig_types[47]
-#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[48]
-#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[49]
-#define SWIGTYPE_p_GeoCal__SimpleCamera swig_types[50]
-#define SWIGTYPE_p_GeoCal__SimpleDemTT_GeoCal__Geodetic_t swig_types[51]
-#define SWIGTYPE_p_GeoCal__SimpleDemTT_GeoCal__PlanetocentricT_499_t_t swig_types[52]
-#define SWIGTYPE_p_GeoCal__SimpleDemTT_GeoCal__PlanetocentricT_502_t_t swig_types[53]
-#define SWIGTYPE_p_GeoCal__Time swig_types[54]
-#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[55]
-#define SWIGTYPE_p_GeoCal__WithParameter swig_types[56]
-#define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[57]
-#define SWIGTYPE_p_allocator_type swig_types[58]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[59]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[60]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[61]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[62]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[63]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[64]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[65]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[66]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[67]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[68]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[69]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[70]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[71]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[72]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[73]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[74]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[75]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[76]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[77]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[78]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[79]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[80]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[81]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[82]
-#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[83]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[84]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[85]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[86]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[87]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[88]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[89]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[90]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[91]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[92]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[93]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[94]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[95]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[96]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[97]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[98]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[99]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[100]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[101]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[102]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[103]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geocentric_t swig_types[104]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[105]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t swig_types[106]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[107]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t swig_types[108]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[109]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[110]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[111]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[112]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t swig_types[113]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t swig_types[114]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t swig_types[115]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t swig_types[116]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t swig_types[117]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t swig_types[118]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t swig_types[119]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t swig_types[120]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetFixedT_499_t_t swig_types[121]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetFixedT_502_t_t swig_types[122]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t swig_types[123]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetInertialT_502_t_t swig_types[124]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricConverterT_499_t_t swig_types[125]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricConverterT_502_t_t swig_types[126]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricT_499_t_t swig_types[127]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricT_502_t_t swig_types[128]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t swig_types[129]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[130]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[131]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[132]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleDemTT_GeoCal__Geodetic_t_t swig_types[133]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleDemTT_GeoCal__PlanetocentricT_499_t_t_t swig_types[134]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleDemTT_GeoCal__PlanetocentricT_502_t_t_t swig_types[135]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[136]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[137]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[138]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[139]
-#define SWIGTYPE_p_char swig_types[140]
-#define SWIGTYPE_p_char_type swig_types[141]
-#define SWIGTYPE_p_difference_type swig_types[142]
-#define SWIGTYPE_p_fmtflags swig_types[143]
-#define SWIGTYPE_p_int_type swig_types[144]
-#define SWIGTYPE_p_iostate swig_types[145]
-#define SWIGTYPE_p_off_type swig_types[146]
-#define SWIGTYPE_p_openmode swig_types[147]
-#define SWIGTYPE_p_pos_type swig_types[148]
-#define SWIGTYPE_p_seekdir swig_types[149]
-#define SWIGTYPE_p_size_t swig_types[150]
-#define SWIGTYPE_p_size_type swig_types[151]
-#define SWIGTYPE_p_state_type swig_types[152]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[153]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[154]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[155]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[156]
-#define SWIGTYPE_p_std__invalid_argument swig_types[157]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[158]
-#define SWIGTYPE_p_traits_type swig_types[159]
-#define SWIGTYPE_p_value_type swig_types[160]
-static swig_type_info *swig_types[162];
-static swig_module_info swig_module = {swig_types, 161, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__PlanetConstant swig_types[37]
+#define SWIGTYPE_p_GeoCal__PlanetFixedT_499_t swig_types[38]
+#define SWIGTYPE_p_GeoCal__PlanetFixedT_502_t swig_types[39]
+#define SWIGTYPE_p_GeoCal__PlanetInertialT_499_t swig_types[40]
+#define SWIGTYPE_p_GeoCal__PlanetInertialT_502_t swig_types[41]
+#define SWIGTYPE_p_GeoCal__PlanetocentricConverterT_499_t swig_types[42]
+#define SWIGTYPE_p_GeoCal__PlanetocentricConverterT_502_t swig_types[43]
+#define SWIGTYPE_p_GeoCal__PlanetocentricT_499_t swig_types[44]
+#define SWIGTYPE_p_GeoCal__PlanetocentricT_502_t swig_types[45]
+#define SWIGTYPE_p_GeoCal__QuaternionOrbitData swig_types[46]
+#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[47]
+#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[48]
+#define SWIGTYPE_p_GeoCal__SimpleCamera swig_types[49]
+#define SWIGTYPE_p_GeoCal__SimpleDemTT_GeoCal__Geodetic_t swig_types[50]
+#define SWIGTYPE_p_GeoCal__SimpleDemTT_GeoCal__PlanetocentricT_499_t_t swig_types[51]
+#define SWIGTYPE_p_GeoCal__SimpleDemTT_GeoCal__PlanetocentricT_502_t_t swig_types[52]
+#define SWIGTYPE_p_GeoCal__Time swig_types[53]
+#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[54]
+#define SWIGTYPE_p_GeoCal__WithParameter swig_types[55]
+#define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[56]
+#define SWIGTYPE_p_allocator_type swig_types[57]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[58]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[59]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[60]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[61]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[62]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[63]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[64]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[65]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[66]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[67]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[68]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[69]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[70]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[71]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[72]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[73]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[74]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[75]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[76]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[77]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[78]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[79]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[80]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[81]
+#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[82]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[83]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[84]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[85]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[86]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[87]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[88]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[89]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[90]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[91]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[92]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[93]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[94]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[95]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[96]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[97]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[98]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[99]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[100]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[101]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[102]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geocentric_t swig_types[103]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[104]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t swig_types[105]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[106]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t swig_types[107]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[108]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[109]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[110]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[111]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t swig_types[112]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t swig_types[113]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t swig_types[114]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t swig_types[115]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t swig_types[116]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t swig_types[117]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetFixedT_499_t_t swig_types[118]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetFixedT_502_t_t swig_types[119]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t swig_types[120]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetInertialT_502_t_t swig_types[121]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricConverterT_499_t_t swig_types[122]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricConverterT_502_t_t swig_types[123]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricT_499_t_t swig_types[124]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricT_502_t_t swig_types[125]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t swig_types[126]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[127]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[128]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[129]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleDemTT_GeoCal__Geodetic_t_t swig_types[130]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleDemTT_GeoCal__PlanetocentricT_499_t_t_t swig_types[131]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleDemTT_GeoCal__PlanetocentricT_502_t_t_t swig_types[132]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[133]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[134]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[135]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[136]
+#define SWIGTYPE_p_char swig_types[137]
+#define SWIGTYPE_p_char_type swig_types[138]
+#define SWIGTYPE_p_difference_type swig_types[139]
+#define SWIGTYPE_p_fmtflags swig_types[140]
+#define SWIGTYPE_p_int_type swig_types[141]
+#define SWIGTYPE_p_iostate swig_types[142]
+#define SWIGTYPE_p_off_type swig_types[143]
+#define SWIGTYPE_p_openmode swig_types[144]
+#define SWIGTYPE_p_pos_type swig_types[145]
+#define SWIGTYPE_p_seekdir swig_types[146]
+#define SWIGTYPE_p_size_t swig_types[147]
+#define SWIGTYPE_p_size_type swig_types[148]
+#define SWIGTYPE_p_state_type swig_types[149]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[150]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[151]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[152]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[153]
+#define SWIGTYPE_p_std__invalid_argument swig_types[154]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[155]
+#define SWIGTYPE_p_traits_type swig_types[156]
+#define SWIGTYPE_p_value_type swig_types[157]
+static swig_type_info *swig_types[159];
+static swig_module_info swig_module = {swig_types, 158, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5362,6 +5359,32 @@ namespace swig {
 #include "planet_coordinate.h"
 
 
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
@@ -6327,14 +6350,24 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_a(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PlanetConstant_a(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_a",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "PlanetConstant_a" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR a();
+      result = (double)GeoCal::PlanetConstant::a(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6348,14 +6381,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_b(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PlanetConstant_b(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_b",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "PlanetConstant_b" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR b();
+      result = (double)GeoCal::PlanetConstant::b(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6369,14 +6412,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_esq(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PlanetConstant_esq(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_esq",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "PlanetConstant_esq" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR esq();
+      result = (double)GeoCal::PlanetConstant::esq(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6390,14 +6443,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PlanetConstant_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_flattening",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "PlanetConstant_flattening" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR flattening();
+      result = (double)GeoCal::PlanetConstant::flattening(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6411,14 +6474,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_inverse_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PlanetConstant_inverse_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_inverse_flattening",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "PlanetConstant_inverse_flattening" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
   {
     try {
-      result = (double)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR inverse_flattening();
+      result = (double)GeoCal::PlanetConstant::inverse_flattening(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6432,14 +6505,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PlanetConstant_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
   std::string result;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_name",0,0,0)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "PlanetConstant_name" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
   {
     try {
-      result = GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR name();
+      result = GeoCal::PlanetConstant::name(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6453,80 +6536,44 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsConstant_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_PlanetConstant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  int result;
+  GeoCal::PlanetConstant *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"MarsConstant_naif_code",0,0,0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"new_PlanetConstant",0,0,0)) SWIG_fail;
   {
     try {
-      result = (int)GeoCal::PlanetConstant< 499 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
+      result = (GeoCal::PlanetConstant *)new GeoCal::PlanetConstant();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_From_int(static_cast< int >(result));
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GeoCal__PlanetConstant, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_MarsConstant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_PlanetConstant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::PlanetConstant< 499 > *result = 0 ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"new_MarsConstant",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (GeoCal::PlanetConstant< 499 > *)new GeoCal::PlanetConstant< 499 >();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::PlanetConstant<499> > *smartresult = result ? new boost::shared_ptr<  GeoCal::PlanetConstant<499> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_MarsConstant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::PlanetConstant< 499 > *arg1 = (GeoCal::PlanetConstant< 499 > *) 0 ;
+  GeoCal::PlanetConstant *arg1 = (GeoCal::PlanetConstant *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::PlanetConstant< 499 > > tempshared1 ;
-  boost::shared_ptr< GeoCal::PlanetConstant< 499 > > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MarsConstant" "', argument " "1"" of type '" "GeoCal::PlanetConstant< 499 > *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetConstant<499> > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetConstant<499> > * >(argp1);
-      arg1 = const_cast< GeoCal::PlanetConstant< 499 > * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetConstant<499> > * >(argp1);
-      arg1 = const_cast< GeoCal::PlanetConstant< 499 > * >((smartarg1 ? smartarg1->get() : 0));
-    }
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GeoCal__PlanetConstant, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_PlanetConstant" "', argument " "1"" of type '" "GeoCal::PlanetConstant *""'"); 
   }
+  arg1 = reinterpret_cast< GeoCal::PlanetConstant * >(argp1);
   {
     try {
-      (void)arg1; delete smartarg1;
+      delete arg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6540,14 +6587,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *MarsConstant_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *PlanetConstant_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_GeoCal__PlanetConstant, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *MarsConstant_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *PlanetConstant_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -8274,7 +8321,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MarsPlanetocentricConverter_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MarsPlanetocentricConverter__v_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PlanetocentricConverter< 499 > *arg1 = (GeoCal::PlanetocentricConverter< 499 > *) 0 ;
   void *argp1 = 0 ;
@@ -8290,7 +8337,7 @@ SWIGINTERN PyObject *_wrap_MarsPlanetocentricConverter_naif_code(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricConverterT_499_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MarsPlanetocentricConverter_naif_code" "', argument " "1"" of type '" "GeoCal::PlanetocentricConverter< 499 > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MarsPlanetocentricConverter__v_naif_code" "', argument " "1"" of type '" "GeoCal::PlanetocentricConverter< 499 > *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetocentricConverter<499> > * >(argp1);
@@ -8391,230 +8438,6 @@ SWIGINTERN PyObject *MarsPlanetocentricConverter_swigregister(PyObject *SWIGUNUS
 }
 
 SWIGINTERN PyObject *MarsPlanetocentricConverter_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  return SWIG_Python_InitShadowInstance(args);
-}
-
-SWIGINTERN PyObject *_wrap_EuropaConstant_a(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  double result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_a",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR a();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_EuropaConstant_b(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  double result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_b",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR b();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_EuropaConstant_esq(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  double result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_esq",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR esq();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_EuropaConstant_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  double result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_flattening",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR flattening();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_EuropaConstant_inverse_flattening(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  double result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_inverse_flattening",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (double)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR inverse_flattening();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_EuropaConstant_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_name",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR name();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_EuropaConstant_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"EuropaConstant_naif_code",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (int)GeoCal::PlanetConstant< 502 >::SWIGTEMPLATEDISAMBIGUATOR naif_code();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_EuropaConstant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::PlanetConstant< 502 > *result = 0 ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"new_EuropaConstant",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (GeoCal::PlanetConstant< 502 > *)new GeoCal::PlanetConstant< 502 >();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::PlanetConstant<502> > *smartresult = result ? new boost::shared_ptr<  GeoCal::PlanetConstant<502> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_EuropaConstant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::PlanetConstant< 502 > *arg1 = (GeoCal::PlanetConstant< 502 > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::PlanetConstant< 502 > > tempshared1 ;
-  boost::shared_ptr< GeoCal::PlanetConstant< 502 > > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_EuropaConstant" "', argument " "1"" of type '" "GeoCal::PlanetConstant< 502 > *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetConstant<502> > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetConstant<502> > * >(argp1);
-      arg1 = const_cast< GeoCal::PlanetConstant< 502 > * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetConstant<502> > * >(argp1);
-      arg1 = const_cast< GeoCal::PlanetConstant< 502 > * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      (void)arg1; delete smartarg1;
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *EuropaConstant_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *EuropaConstant_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -10341,7 +10164,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_EuropaPlanetocentricConverter_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_EuropaPlanetocentricConverter__v_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PlanetocentricConverter< 502 > *arg1 = (GeoCal::PlanetocentricConverter< 502 > *) 0 ;
   void *argp1 = 0 ;
@@ -10357,7 +10180,7 @@ SWIGINTERN PyObject *_wrap_EuropaPlanetocentricConverter_naif_code(PyObject *SWI
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetocentricConverterT_502_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "EuropaPlanetocentricConverter_naif_code" "', argument " "1"" of type '" "GeoCal::PlanetocentricConverter< 502 > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "EuropaPlanetocentricConverter__v_naif_code" "', argument " "1"" of type '" "GeoCal::PlanetocentricConverter< 502 > *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PlanetocentricConverter<502> > * >(argp1);
@@ -10482,45 +10305,40 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
-	 { (char *)"MarsConstant_a", (PyCFunction)_wrap_MarsConstant_a, METH_NOARGS, (char *)"\n"
+	 { (char *)"PlanetConstant_a", (PyCFunction)_wrap_PlanetConstant_a, METH_O, (char *)"\n"
 		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::a()\n"
-		"\n"
-		""},
-	 { (char *)"MarsConstant_b", (PyCFunction)_wrap_MarsConstant_b, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::b()\n"
+		"static double GeoCal::PlanetConstant::a(int Naif_code)\n"
 		"\n"
 		""},
-	 { (char *)"MarsConstant_esq", (PyCFunction)_wrap_MarsConstant_esq, METH_NOARGS, (char *)"\n"
+	 { (char *)"PlanetConstant_b", (PyCFunction)_wrap_PlanetConstant_b, METH_O, (char *)"\n"
 		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::esq()\n"
+		"static double GeoCal::PlanetConstant::b(int Naif_code)\n"
 		"\n"
 		""},
-	 { (char *)"MarsConstant_flattening", (PyCFunction)_wrap_MarsConstant_flattening, METH_NOARGS, (char *)"\n"
+	 { (char *)"PlanetConstant_esq", (PyCFunction)_wrap_PlanetConstant_esq, METH_O, (char *)"\n"
 		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::flattening()\n"
+		"static double GeoCal::PlanetConstant::esq(int Naif_code)\n"
+		"\n"
+		""},
+	 { (char *)"PlanetConstant_flattening", (PyCFunction)_wrap_PlanetConstant_flattening, METH_O, (char *)"\n"
+		"\n"
+		"static double GeoCal::PlanetConstant::flattening(int Naif_code)\n"
 		"Calculate flattening. \n"
 		""},
-	 { (char *)"MarsConstant_inverse_flattening", (PyCFunction)_wrap_MarsConstant_inverse_flattening, METH_NOARGS, (char *)"\n"
+	 { (char *)"PlanetConstant_inverse_flattening", (PyCFunction)_wrap_PlanetConstant_inverse_flattening, METH_O, (char *)"\n"
 		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::inverse_flattening()\n"
+		"static double GeoCal::PlanetConstant::inverse_flattening(int Naif_code)\n"
 		"Calculate inverse flattening. \n"
 		""},
-	 { (char *)"MarsConstant_name", (PyCFunction)_wrap_MarsConstant_name, METH_NOARGS, (char *)"\n"
+	 { (char *)"PlanetConstant_name", (PyCFunction)_wrap_PlanetConstant_name, METH_O, (char *)"\n"
 		"\n"
-		"static std::string GeoCal::PlanetConstant< NCODE >::name()\n"
+		"static std::string GeoCal::PlanetConstant::name(int Naif_code)\n"
 		"\n"
 		""},
-	 { (char *)"MarsConstant_naif_code", (PyCFunction)_wrap_MarsConstant_naif_code, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static int GeoCal::PlanetConstant< NCODE >::naif_code()\n"
-		"Return NAIF code. \n"
-		""},
-	 { (char *)"new_MarsConstant", (PyCFunction)_wrap_new_MarsConstant, METH_NOARGS, NULL},
-	 { (char *)"delete_MarsConstant", (PyCFunction)_wrap_delete_MarsConstant, METH_O, NULL},
-	 { (char *)"MarsConstant_swigregister", MarsConstant_swigregister, METH_VARARGS, NULL},
-	 { (char *)"MarsConstant_swiginit", MarsConstant_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_PlanetConstant", (PyCFunction)_wrap_new_PlanetConstant, METH_NOARGS, NULL},
+	 { (char *)"delete_PlanetConstant", (PyCFunction)_wrap_delete_PlanetConstant, METH_O, NULL},
+	 { (char *)"PlanetConstant_swigregister", PlanetConstant_swigregister, METH_VARARGS, NULL},
+	 { (char *)"PlanetConstant_swiginit", PlanetConstant_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_MarsFixed", _wrap_new_MarsFixed, METH_VARARGS, (char *)"\n"
 		"\n"
 		"GeoCal::PlanetFixed< NAIF_CODE >::PlanetFixed()\n"
@@ -10610,9 +10428,9 @@ static PyMethodDef SwigMethods[] = {
 		"X and Y are longitude and latitude in degrees, and height is in\n"
 		"meters. \n"
 		""},
-	 { (char *)"MarsPlanetocentricConverter_naif_code", (PyCFunction)_wrap_MarsPlanetocentricConverter_naif_code, METH_O, (char *)"\n"
+	 { (char *)"MarsPlanetocentricConverter__v_naif_code", (PyCFunction)_wrap_MarsPlanetocentricConverter__v_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()\n"
+		"virtual int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code() const\n"
 		"Return NAIF code. \n"
 		""},
 	 { (char *)"new_MarsPlanetocentricConverter", (PyCFunction)_wrap_new_MarsPlanetocentricConverter, METH_NOARGS, NULL},
@@ -10623,45 +10441,6 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"MarsPlanetocentricConverter_swigregister", MarsPlanetocentricConverter_swigregister, METH_VARARGS, NULL},
 	 { (char *)"MarsPlanetocentricConverter_swiginit", MarsPlanetocentricConverter_swiginit, METH_VARARGS, NULL},
-	 { (char *)"EuropaConstant_a", (PyCFunction)_wrap_EuropaConstant_a, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::a()\n"
-		"\n"
-		""},
-	 { (char *)"EuropaConstant_b", (PyCFunction)_wrap_EuropaConstant_b, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::b()\n"
-		"\n"
-		""},
-	 { (char *)"EuropaConstant_esq", (PyCFunction)_wrap_EuropaConstant_esq, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::esq()\n"
-		"\n"
-		""},
-	 { (char *)"EuropaConstant_flattening", (PyCFunction)_wrap_EuropaConstant_flattening, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::flattening()\n"
-		"Calculate flattening. \n"
-		""},
-	 { (char *)"EuropaConstant_inverse_flattening", (PyCFunction)_wrap_EuropaConstant_inverse_flattening, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static double GeoCal::PlanetConstant< NCODE >::inverse_flattening()\n"
-		"Calculate inverse flattening. \n"
-		""},
-	 { (char *)"EuropaConstant_name", (PyCFunction)_wrap_EuropaConstant_name, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static std::string GeoCal::PlanetConstant< NCODE >::name()\n"
-		"\n"
-		""},
-	 { (char *)"EuropaConstant_naif_code", (PyCFunction)_wrap_EuropaConstant_naif_code, METH_NOARGS, (char *)"\n"
-		"\n"
-		"static int GeoCal::PlanetConstant< NCODE >::naif_code()\n"
-		"Return NAIF code. \n"
-		""},
-	 { (char *)"new_EuropaConstant", (PyCFunction)_wrap_new_EuropaConstant, METH_NOARGS, NULL},
-	 { (char *)"delete_EuropaConstant", (PyCFunction)_wrap_delete_EuropaConstant, METH_O, NULL},
-	 { (char *)"EuropaConstant_swigregister", EuropaConstant_swigregister, METH_VARARGS, NULL},
-	 { (char *)"EuropaConstant_swiginit", EuropaConstant_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_EuropaFixed", _wrap_new_EuropaFixed, METH_VARARGS, (char *)"\n"
 		"\n"
 		"GeoCal::PlanetFixed< NAIF_CODE >::PlanetFixed()\n"
@@ -10751,9 +10530,9 @@ static PyMethodDef SwigMethods[] = {
 		"X and Y are longitude and latitude in degrees, and height is in\n"
 		"meters. \n"
 		""},
-	 { (char *)"EuropaPlanetocentricConverter_naif_code", (PyCFunction)_wrap_EuropaPlanetocentricConverter_naif_code, METH_O, (char *)"\n"
+	 { (char *)"EuropaPlanetocentricConverter__v_naif_code", (PyCFunction)_wrap_EuropaPlanetocentricConverter__v_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()\n"
+		"virtual int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code() const\n"
 		"Return NAIF code. \n"
 		""},
 	 { (char *)"new_EuropaPlanetocentricConverter", (PyCFunction)_wrap_new_EuropaPlanetocentricConverter, METH_NOARGS, NULL},
@@ -11438,8 +11217,7 @@ static swig_type_info _swigt__p_GeoCal__ObserverT_GeoCal__Camera_t = {"_p_GeoCal
 static swig_type_info _swigt__p_GeoCal__ObserverT_GeoCal__Orbit_t = {"_p_GeoCal__ObserverT_GeoCal__Orbit_t", "GeoCal::Observer< GeoCal::Orbit > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__Orbit = {"_p_GeoCal__Orbit", "GeoCal::Orbit *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__OrbitData = {"_p_GeoCal__OrbitData", "GeoCal::OrbitData *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__PlanetConstantT_499_t = {"_p_GeoCal__PlanetConstantT_499_t", "GeoCal::PlanetConstant< 499 > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__PlanetConstantT_502_t = {"_p_GeoCal__PlanetConstantT_502_t", "GeoCal::PlanetConstant< 502 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__PlanetConstant = {"_p_GeoCal__PlanetConstant", "GeoCal::PlanetConstant *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__PlanetFixedT_499_t = {"_p_GeoCal__PlanetFixedT_499_t", "GeoCal::PlanetFixed< 499 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__PlanetFixedT_502_t = {"_p_GeoCal__PlanetFixedT_502_t", "GeoCal::PlanetFixed< 502 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__PlanetInertialT_499_t = {"_p_GeoCal__PlanetInertialT_499_t", "GeoCal::PlanetInertial< 499 > *", 0, 0, (void*)0, 0};
@@ -11520,8 +11298,6 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Cam
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t = {"_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t", "boost::shared_ptr< GeoCal::Observer< GeoCal::Orbit > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__OrbitData_t = {"_p_boost__shared_ptrT_GeoCal__OrbitData_t", "boost::shared_ptr< GeoCal::OrbitData > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Orbit_t = {"_p_boost__shared_ptrT_GeoCal__Orbit_t", "boost::shared_ptr< GeoCal::Orbit > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t = {"_p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t", "boost::shared_ptr< GeoCal::PlanetConstant< 499 > > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t = {"_p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t", "boost::shared_ptr< GeoCal::PlanetConstant< 502 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__PlanetFixedT_499_t_t = {"_p_boost__shared_ptrT_GeoCal__PlanetFixedT_499_t_t", "boost::shared_ptr< GeoCal::PlanetFixed< 499 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__PlanetFixedT_502_t_t = {"_p_boost__shared_ptrT_GeoCal__PlanetFixedT_502_t_t", "boost::shared_ptr< GeoCal::PlanetFixed< 502 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t = {"_p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t", "boost::shared_ptr< GeoCal::PlanetInertial< 499 > > *", 0, 0, (void*)0, 0};
@@ -11601,8 +11377,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__ObserverT_GeoCal__Orbit_t,
   &_swigt__p_GeoCal__Orbit,
   &_swigt__p_GeoCal__OrbitData,
-  &_swigt__p_GeoCal__PlanetConstantT_499_t,
-  &_swigt__p_GeoCal__PlanetConstantT_502_t,
+  &_swigt__p_GeoCal__PlanetConstant,
   &_swigt__p_GeoCal__PlanetFixedT_499_t,
   &_swigt__p_GeoCal__PlanetFixedT_502_t,
   &_swigt__p_GeoCal__PlanetInertialT_499_t,
@@ -11683,8 +11458,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__OrbitData_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__PlanetFixedT_499_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__PlanetFixedT_502_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t,
@@ -11764,8 +11537,7 @@ static swig_cast_info _swigc__p_GeoCal__ObserverT_GeoCal__Camera_t[] = {  {&_swi
 static swig_cast_info _swigc__p_GeoCal__ObserverT_GeoCal__Orbit_t[] = {  {&_swigt__p_GeoCal__ObserverT_GeoCal__Orbit_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Orbit[] = {  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__Orbit, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__OrbitData[] = {  {&_swigt__p_GeoCal__OrbitData, 0, 0, 0},  {&_swigt__p_GeoCal__QuaternionOrbitData, _p_GeoCal__QuaternionOrbitDataTo_p_GeoCal__OrbitData, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__PlanetConstantT_499_t[] = {  {&_swigt__p_GeoCal__PlanetConstantT_499_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__PlanetConstantT_502_t[] = {  {&_swigt__p_GeoCal__PlanetConstantT_502_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__PlanetConstant[] = {  {&_swigt__p_GeoCal__PlanetConstant, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__PlanetFixedT_499_t[] = {  {&_swigt__p_GeoCal__PlanetFixedT_499_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__PlanetFixedT_502_t[] = {  {&_swigt__p_GeoCal__PlanetFixedT_502_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__PlanetInertialT_499_t[] = {  {&_swigt__p_GeoCal__PlanetInertialT_499_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11846,8 +11618,6 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Cam
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitData_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, _p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitData_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Orbit_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__PlanetFixedT_499_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__PlanetFixedT_499_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__PlanetFixedT_502_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__PlanetFixedT_502_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11927,8 +11697,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__ObserverT_GeoCal__Orbit_t,
   _swigc__p_GeoCal__Orbit,
   _swigc__p_GeoCal__OrbitData,
-  _swigc__p_GeoCal__PlanetConstantT_499_t,
-  _swigc__p_GeoCal__PlanetConstantT_502_t,
+  _swigc__p_GeoCal__PlanetConstant,
   _swigc__p_GeoCal__PlanetFixedT_499_t,
   _swigc__p_GeoCal__PlanetFixedT_502_t,
   _swigc__p_GeoCal__PlanetInertialT_499_t,
@@ -12009,8 +11778,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__OrbitData_t,
   _swigc__p_boost__shared_ptrT_GeoCal__Orbit_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__PlanetConstantT_499_t_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__PlanetConstantT_502_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__PlanetFixedT_499_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__PlanetFixedT_502_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__PlanetInertialT_499_t_t,
@@ -12736,9 +12503,8 @@ SWIG_init(void) {
   
   SWIG_InstallConstants(d,swig_const_table);
   
-  
-  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetConstant<499>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetConstant<499> > > ("boost::shared_ptr< GeoCal::PlanetConstant<499> > *"));
-  
+  SWIG_Python_SetConstant(d, "PlanetConstant_MARS_CODE",SWIG_From_int(static_cast< int >(GeoCal::PlanetConstant::MARS_CODE)));
+  SWIG_Python_SetConstant(d, "PlanetConstant_EUROPA_CODE",SWIG_From_int(static_cast< int >(GeoCal::PlanetConstant::EUROPA_CODE)));
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetFixed<499>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetFixed<499> > > ("boost::shared_ptr< GeoCal::PlanetFixed<499> > *"));
   
@@ -12753,9 +12519,6 @@ SWIG_init(void) {
   
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetocentricConverter<499>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetocentricConverter<499> > > ("boost::shared_ptr< GeoCal::PlanetocentricConverter<499> > *"));
-  
-  
-  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetConstant<502>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetConstant<502> > > ("boost::shared_ptr< GeoCal::PlanetConstant<502> > *"));
   
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetFixed<502>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetFixed<502> > > ("boost::shared_ptr< GeoCal::PlanetFixed<502> > *"));

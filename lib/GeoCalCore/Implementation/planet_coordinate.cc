@@ -71,12 +71,13 @@ GEOCAL_IMPLEMENT(EuropaPlanetocentric);
 GEOCAL_IMPLEMENT(EuropaPlanetocentricConverter);
 #endif
 
-// Constants for Mars
-template<> SpicePlanetConstant MarsConstant::h(MarsConstant::NAIF_CODE);
-template<> const char* MarsConstant::name_ = "Mars";
+std::map<int, SpicePlanetConstant> PlanetConstant::h_map;
 
-// Constants for Europa
-template<> SpicePlanetConstant EuropaConstant::h(EuropaConstant::NAIF_CODE);
-template<> const char* EuropaConstant::name_ = "Europa";
+SpicePlanetConstant PlanetConstant::h(int Naif_code)
+{
+  if(h_map.count(Naif_code) == 0)
+    h_map[Naif_code] = SpicePlanetConstant(Naif_code);
+  return h_map[Naif_code];
+}
 
 

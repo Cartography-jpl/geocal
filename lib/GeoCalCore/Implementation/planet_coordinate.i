@@ -13,19 +13,15 @@
 %import "simple_dem.i"
 
 namespace GeoCal {
-template<int NCODE> class PlanetConstant {
+class PlanetConstant {
 public:
-  // Note, we'd like this to be properties. But it turns out getting
-  // class properties to work is a bit involved in python. Not really 
-  // worth doing, although we can always come back to this if it becomes
-  // an issue.
-  static double a();
-  static double b();
-  static double esq();
-  static double flattening();
-  static double inverse_flattening();
-  static std::string name();
-  static int naif_code();
+  enum {MARS_CODE=499, EUROPA_CODE=502};
+  static double a(int Naif_code);
+  static double b(int Naif_code);
+  static double esq(int Naif_code);
+  static double flattening(int Naif_code);
+  static double inverse_flattening(int Naif_code);
+  static std::string name(int Naif_code);
 };
 
 template<int NAIF_CODE> class PlanetFixed : public CartesianFixed {
@@ -98,26 +94,22 @@ public:
 
 }
 
-%geocal_shared_ptr(GeoCal::PlanetConstant<499>);
 %geocal_shared_ptr(GeoCal::PlanetFixed<499>);
 %geocal_shared_ptr(GeoCal::PlanetInertial<499>);
 %geocal_shared_ptr(GeoCal::Planetocentric<499>);
 %geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >);
 %geocal_shared_ptr(GeoCal::PlanetocentricConverter<499>);
-%template(MarsConstant) GeoCal::PlanetConstant<499>;
 %template(MarsFixed) GeoCal::PlanetFixed<499>;
 %template(MarsInertial) GeoCal::PlanetInertial<499>;
 %template(MarsPlanetocentric) GeoCal::Planetocentric<499>;
 %template(MarsSimpleDem) GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >;
 %template(MarsPlanetocentricConverter) GeoCal::PlanetocentricConverter<499>;
 
-%geocal_shared_ptr(GeoCal::PlanetConstant<502>);
 %geocal_shared_ptr(GeoCal::PlanetFixed<502>);
 %geocal_shared_ptr(GeoCal::PlanetInertial<502>);
 %geocal_shared_ptr(GeoCal::Planetocentric<502>);
 %geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >);
 %geocal_shared_ptr(GeoCal::PlanetocentricConverter<502>);
-%template(EuropaConstant) GeoCal::PlanetConstant<502>;
 %template(EuropaFixed) GeoCal::PlanetFixed<502>;
 %template(EuropaInertial) GeoCal::PlanetInertial<502>;
 %template(EuropaPlanetocentric) GeoCal::Planetocentric<502>;

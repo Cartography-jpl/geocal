@@ -192,7 +192,7 @@ import geocal_swig.dem
 import geocal_swig.coordinate_converter
 import geocal_swig.observer
 import geocal_swig.with_parameter
-class MarsConstant(object):
+class PlanetConstant(object):
     """
 
     Constants for a planet.
@@ -204,138 +204,122 @@ class MarsConstant(object):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    MARS_CODE = _planet_coordinate.PlanetConstant_MARS_CODE
+    EUROPA_CODE = _planet_coordinate.PlanetConstant_EUROPA_CODE
 
-    def a():
+    def a(Naif_code):
         """
 
-        static double GeoCal::PlanetConstant< NCODE >::a()
+        static double GeoCal::PlanetConstant::a(int Naif_code)
 
         """
-        return _planet_coordinate.MarsConstant_a()
+        return _planet_coordinate.PlanetConstant_a(Naif_code)
 
     a = staticmethod(a)
 
-    def b():
+    def b(Naif_code):
         """
 
-        static double GeoCal::PlanetConstant< NCODE >::b()
+        static double GeoCal::PlanetConstant::b(int Naif_code)
 
         """
-        return _planet_coordinate.MarsConstant_b()
+        return _planet_coordinate.PlanetConstant_b(Naif_code)
 
     b = staticmethod(b)
 
-    def esq():
+    def esq(Naif_code):
         """
 
-        static double GeoCal::PlanetConstant< NCODE >::esq()
+        static double GeoCal::PlanetConstant::esq(int Naif_code)
 
         """
-        return _planet_coordinate.MarsConstant_esq()
+        return _planet_coordinate.PlanetConstant_esq(Naif_code)
 
     esq = staticmethod(esq)
 
-    def flattening():
+    def flattening(Naif_code):
         """
 
-        static double GeoCal::PlanetConstant< NCODE >::flattening()
+        static double GeoCal::PlanetConstant::flattening(int Naif_code)
         Calculate flattening. 
         """
-        return _planet_coordinate.MarsConstant_flattening()
+        return _planet_coordinate.PlanetConstant_flattening(Naif_code)
 
     flattening = staticmethod(flattening)
 
-    def inverse_flattening():
+    def inverse_flattening(Naif_code):
         """
 
-        static double GeoCal::PlanetConstant< NCODE >::inverse_flattening()
+        static double GeoCal::PlanetConstant::inverse_flattening(int Naif_code)
         Calculate inverse flattening. 
         """
-        return _planet_coordinate.MarsConstant_inverse_flattening()
+        return _planet_coordinate.PlanetConstant_inverse_flattening(Naif_code)
 
     inverse_flattening = staticmethod(inverse_flattening)
 
-    def name():
+    def name(Naif_code):
         """
 
-        static std::string GeoCal::PlanetConstant< NCODE >::name()
+        static std::string GeoCal::PlanetConstant::name(int Naif_code)
 
         """
-        return _planet_coordinate.MarsConstant_name()
+        return _planet_coordinate.PlanetConstant_name(Naif_code)
 
     name = staticmethod(name)
 
-    def naif_code():
-        """
-
-        static int GeoCal::PlanetConstant< NCODE >::naif_code()
-        Return NAIF code. 
-        """
-        return _planet_coordinate.MarsConstant_naif_code()
-
-    naif_code = staticmethod(naif_code)
-
     def __init__(self):
-        _planet_coordinate.MarsConstant_swiginit(self, _planet_coordinate.new_MarsConstant())
-    __swig_destroy__ = _planet_coordinate.delete_MarsConstant
-MarsConstant_swigregister = _planet_coordinate.MarsConstant_swigregister
-MarsConstant_swigregister(MarsConstant)
+        _planet_coordinate.PlanetConstant_swiginit(self, _planet_coordinate.new_PlanetConstant())
+    __swig_destroy__ = _planet_coordinate.delete_PlanetConstant
+PlanetConstant_swigregister = _planet_coordinate.PlanetConstant_swigregister
+PlanetConstant_swigregister(PlanetConstant)
 
-def MarsConstant_a():
+def PlanetConstant_a(Naif_code):
     """
 
-    static double GeoCal::PlanetConstant< NCODE >::a()
+    static double GeoCal::PlanetConstant::a(int Naif_code)
 
     """
-    return _planet_coordinate.MarsConstant_a()
+    return _planet_coordinate.PlanetConstant_a(Naif_code)
 
-def MarsConstant_b():
+def PlanetConstant_b(Naif_code):
     """
 
-    static double GeoCal::PlanetConstant< NCODE >::b()
+    static double GeoCal::PlanetConstant::b(int Naif_code)
 
     """
-    return _planet_coordinate.MarsConstant_b()
+    return _planet_coordinate.PlanetConstant_b(Naif_code)
 
-def MarsConstant_esq():
+def PlanetConstant_esq(Naif_code):
     """
 
-    static double GeoCal::PlanetConstant< NCODE >::esq()
+    static double GeoCal::PlanetConstant::esq(int Naif_code)
 
     """
-    return _planet_coordinate.MarsConstant_esq()
+    return _planet_coordinate.PlanetConstant_esq(Naif_code)
 
-def MarsConstant_flattening():
+def PlanetConstant_flattening(Naif_code):
     """
 
-    static double GeoCal::PlanetConstant< NCODE >::flattening()
+    static double GeoCal::PlanetConstant::flattening(int Naif_code)
     Calculate flattening. 
     """
-    return _planet_coordinate.MarsConstant_flattening()
+    return _planet_coordinate.PlanetConstant_flattening(Naif_code)
 
-def MarsConstant_inverse_flattening():
+def PlanetConstant_inverse_flattening(Naif_code):
     """
 
-    static double GeoCal::PlanetConstant< NCODE >::inverse_flattening()
+    static double GeoCal::PlanetConstant::inverse_flattening(int Naif_code)
     Calculate inverse flattening. 
     """
-    return _planet_coordinate.MarsConstant_inverse_flattening()
+    return _planet_coordinate.PlanetConstant_inverse_flattening(Naif_code)
 
-def MarsConstant_name():
+def PlanetConstant_name(Naif_code):
     """
 
-    static std::string GeoCal::PlanetConstant< NCODE >::name()
+    static std::string GeoCal::PlanetConstant::name(int Naif_code)
 
     """
-    return _planet_coordinate.MarsConstant_name()
-
-def MarsConstant_naif_code():
-    """
-
-    static int GeoCal::PlanetConstant< NCODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.MarsConstant_naif_code()
+    return _planet_coordinate.PlanetConstant_name(Naif_code)
 
 class MarsFixed(geocal_swig.ground_coordinate.CartesianFixed):
     """
@@ -581,13 +565,13 @@ class MarsPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateCon
         return _planet_coordinate.MarsPlanetocentricConverter_convert_from_coordinate(self, X, Y, Height)
 
 
-    def naif_code(self):
+    def _v_naif_code(self):
         """
 
-        int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()
+        virtual int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code() const
         Return NAIF code. 
         """
-        return _planet_coordinate.MarsPlanetocentricConverter_naif_code(self)
+        return _planet_coordinate.MarsPlanetocentricConverter__v_naif_code(self)
 
 
     def __reduce__(self):
@@ -598,154 +582,9 @@ class MarsPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateCon
         _planet_coordinate.MarsPlanetocentricConverter_swiginit(self, _planet_coordinate.new_MarsPlanetocentricConverter())
     __swig_destroy__ = _planet_coordinate.delete_MarsPlanetocentricConverter
 MarsPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter_convert_from_coordinate, None, MarsPlanetocentricConverter)
-MarsPlanetocentricConverter.naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter_naif_code, None, MarsPlanetocentricConverter)
+MarsPlanetocentricConverter._v_naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter__v_naif_code, None, MarsPlanetocentricConverter)
 MarsPlanetocentricConverter_swigregister = _planet_coordinate.MarsPlanetocentricConverter_swigregister
 MarsPlanetocentricConverter_swigregister(MarsPlanetocentricConverter)
-
-class EuropaConstant(object):
-    """
-
-    Constants for a planet.
-
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
-
-    C++ includes: planet_coordinate.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-
-    def a():
-        """
-
-        static double GeoCal::PlanetConstant< NCODE >::a()
-
-        """
-        return _planet_coordinate.EuropaConstant_a()
-
-    a = staticmethod(a)
-
-    def b():
-        """
-
-        static double GeoCal::PlanetConstant< NCODE >::b()
-
-        """
-        return _planet_coordinate.EuropaConstant_b()
-
-    b = staticmethod(b)
-
-    def esq():
-        """
-
-        static double GeoCal::PlanetConstant< NCODE >::esq()
-
-        """
-        return _planet_coordinate.EuropaConstant_esq()
-
-    esq = staticmethod(esq)
-
-    def flattening():
-        """
-
-        static double GeoCal::PlanetConstant< NCODE >::flattening()
-        Calculate flattening. 
-        """
-        return _planet_coordinate.EuropaConstant_flattening()
-
-    flattening = staticmethod(flattening)
-
-    def inverse_flattening():
-        """
-
-        static double GeoCal::PlanetConstant< NCODE >::inverse_flattening()
-        Calculate inverse flattening. 
-        """
-        return _planet_coordinate.EuropaConstant_inverse_flattening()
-
-    inverse_flattening = staticmethod(inverse_flattening)
-
-    def name():
-        """
-
-        static std::string GeoCal::PlanetConstant< NCODE >::name()
-
-        """
-        return _planet_coordinate.EuropaConstant_name()
-
-    name = staticmethod(name)
-
-    def naif_code():
-        """
-
-        static int GeoCal::PlanetConstant< NCODE >::naif_code()
-        Return NAIF code. 
-        """
-        return _planet_coordinate.EuropaConstant_naif_code()
-
-    naif_code = staticmethod(naif_code)
-
-    def __init__(self):
-        _planet_coordinate.EuropaConstant_swiginit(self, _planet_coordinate.new_EuropaConstant())
-    __swig_destroy__ = _planet_coordinate.delete_EuropaConstant
-EuropaConstant_swigregister = _planet_coordinate.EuropaConstant_swigregister
-EuropaConstant_swigregister(EuropaConstant)
-
-def EuropaConstant_a():
-    """
-
-    static double GeoCal::PlanetConstant< NCODE >::a()
-
-    """
-    return _planet_coordinate.EuropaConstant_a()
-
-def EuropaConstant_b():
-    """
-
-    static double GeoCal::PlanetConstant< NCODE >::b()
-
-    """
-    return _planet_coordinate.EuropaConstant_b()
-
-def EuropaConstant_esq():
-    """
-
-    static double GeoCal::PlanetConstant< NCODE >::esq()
-
-    """
-    return _planet_coordinate.EuropaConstant_esq()
-
-def EuropaConstant_flattening():
-    """
-
-    static double GeoCal::PlanetConstant< NCODE >::flattening()
-    Calculate flattening. 
-    """
-    return _planet_coordinate.EuropaConstant_flattening()
-
-def EuropaConstant_inverse_flattening():
-    """
-
-    static double GeoCal::PlanetConstant< NCODE >::inverse_flattening()
-    Calculate inverse flattening. 
-    """
-    return _planet_coordinate.EuropaConstant_inverse_flattening()
-
-def EuropaConstant_name():
-    """
-
-    static std::string GeoCal::PlanetConstant< NCODE >::name()
-
-    """
-    return _planet_coordinate.EuropaConstant_name()
-
-def EuropaConstant_naif_code():
-    """
-
-    static int GeoCal::PlanetConstant< NCODE >::naif_code()
-    Return NAIF code. 
-    """
-    return _planet_coordinate.EuropaConstant_naif_code()
 
 class EuropaFixed(geocal_swig.ground_coordinate.CartesianFixed):
     """
@@ -991,13 +830,13 @@ class EuropaPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateC
         return _planet_coordinate.EuropaPlanetocentricConverter_convert_from_coordinate(self, X, Y, Height)
 
 
-    def naif_code(self):
+    def _v_naif_code(self):
         """
 
-        int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code()
+        virtual int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code() const
         Return NAIF code. 
         """
-        return _planet_coordinate.EuropaPlanetocentricConverter_naif_code(self)
+        return _planet_coordinate.EuropaPlanetocentricConverter__v_naif_code(self)
 
 
     def __reduce__(self):
@@ -1008,7 +847,7 @@ class EuropaPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateC
         _planet_coordinate.EuropaPlanetocentricConverter_swiginit(self, _planet_coordinate.new_EuropaPlanetocentricConverter())
     __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentricConverter
 EuropaPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.EuropaPlanetocentricConverter_convert_from_coordinate, None, EuropaPlanetocentricConverter)
-EuropaPlanetocentricConverter.naif_code = new_instancemethod(_planet_coordinate.EuropaPlanetocentricConverter_naif_code, None, EuropaPlanetocentricConverter)
+EuropaPlanetocentricConverter._v_naif_code = new_instancemethod(_planet_coordinate.EuropaPlanetocentricConverter__v_naif_code, None, EuropaPlanetocentricConverter)
 EuropaPlanetocentricConverter_swigregister = _planet_coordinate.EuropaPlanetocentricConverter_swigregister
 EuropaPlanetocentricConverter_swigregister(EuropaPlanetocentricConverter)
 

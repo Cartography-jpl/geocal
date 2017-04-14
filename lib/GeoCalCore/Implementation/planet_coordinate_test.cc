@@ -17,12 +17,15 @@ BOOST_AUTO_TEST_CASE(mars_constant)
     BOOST_WARN_MESSAGE(false, "Not configured to use SPICE library, so skipping Spice tests.");
     return;
   }
-  BOOST_CHECK_CLOSE(MarsConstant::a(), 3396190.0, 1e-8);
-  BOOST_CHECK_CLOSE(MarsConstant::b(), 3376200.0, 1e-8);
-  BOOST_CHECK_CLOSE(MarsConstant::esq(), 0.0117373700261, 1e-8);
-  BOOST_CHECK_CLOSE(MarsConstant::flattening(), 0.005886007555525457, 1e-8);
-  BOOST_CHECK_CLOSE(MarsConstant::inverse_flattening(),
+  int ncode = PlanetConstant::MARS_NAIF_CODE;
+  BOOST_CHECK_CLOSE(PlanetConstant::a(ncode), 3396190.0, 1e-8);
+  BOOST_CHECK_CLOSE(PlanetConstant::b(ncode), 3376200.0, 1e-8);
+  BOOST_CHECK_CLOSE(PlanetConstant::esq(ncode), 0.0117373700261, 1e-8);
+  BOOST_CHECK_CLOSE(PlanetConstant::flattening(ncode), 0.005886007555525457,
+		    1e-8);
+  BOOST_CHECK_CLOSE(PlanetConstant::inverse_flattening(ncode),
 		    169.8944472236118, 1e-8);
+  BOOST_CHECK_EQUAL(PlanetConstant::name(ncode), "MARS");
 }
 
 BOOST_AUTO_TEST_CASE(mars_fixed)

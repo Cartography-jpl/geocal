@@ -145,8 +145,11 @@ public:
 /// Test if a label is found in a file, and if so return
 /// true. Otherwise return false.
 //-----------------------------------------------------------------------
-  bool has_label(const std::string& Lbl) const
-  { return label_type_.count(Lbl) != 0; }
+  bool has_label(const std::string& Lbl, const std::string& Property = "") const
+  {
+    std::string t = (Property == "" ? Lbl : Property + " " + Lbl);
+    return label_type_.count(t) != 0;
+  }
 
 //-----------------------------------------------------------------------
 /// Map between Label names and the number of elements.

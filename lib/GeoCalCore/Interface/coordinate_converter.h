@@ -31,6 +31,8 @@ namespace GeoCal {
 
 class CoordinateConverter : public Printable<CoordinateConverter> {
 public:
+  enum {EARTH_NAIF_CODE = 399};
+
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
@@ -86,6 +88,12 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
+
+//-----------------------------------------------------------------------
+/// Naif code for planet
+//-----------------------------------------------------------------------
+
+  virtual int naif_code() const { return EARTH_NAIF_CODE; }
 private:
   friend class boost::serialization::access;
   template<class Archive>

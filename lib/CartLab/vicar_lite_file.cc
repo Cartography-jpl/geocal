@@ -492,6 +492,10 @@ Rpc VicarLiteFile::rpc() const
     res.rpc_type = Rpc::RPC_A;
   else
     throw MetadataMissing("Don't recognize value of NITF_CETAG");
+  if(has_label(g + " NAIF_CODE")) {
+    int naif_code = label<int>("NAIF_CODE", g);
+    std::cerr << "Faking NAIF CODE " << naif_code << "\n";
+  }
   res.line_offset = atof(label<string>("RPC_FIELD4",  g).c_str());
   res.sample_offset = atof(label<string>("RPC_FIELD5",  g).c_str());
   res.latitude_offset = atof(label<string>("RPC_FIELD6",  g).c_str());

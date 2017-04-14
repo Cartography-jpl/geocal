@@ -647,6 +647,10 @@ Rpc VicarFile::rpc() const
     res.rpc_type = Rpc::RPC_A;
   else
     throw MetadataMissing("Don't recognize value of NITF_CETAG");
+  if(has_label("NAIF_CODE", g)) {
+    int naif_code = label<int>("NAIF_CODE", g);
+    std::cerr << "Faking NAIF CODE " << naif_code << "\n";
+  }
   res.error_bias = atof(label<string>("RPC_FIELD2",  g).c_str());
   res.error_random = atof(label<string>("RPC_FIELD3",  g).c_str());
   res.line_offset = atof(label<string>("RPC_FIELD4",  g).c_str());
@@ -703,6 +707,15 @@ void VicarFile::rpc(const Rpc& V)
     label_set("NITF_CETAG", "RPC00A", "GEOTIFF");
   else 
     throw Exception("Unrecognized rpc type");
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(V.coordinate_converter) {
+    std::cerr << "Setting naif_code\n";
+    naif_code = V.coordinate_converter->naif_code();
+  }
+  std::cerr << "Hi there\n"
+	    << "NAIF CODE: " << naif_code << "\n";
+  if(naif_code != CoordinateConverter::EARTH_NAIF_CODE)
+    label_set("NAIF_CODE", naif_code, "GEOTIFF");
   label_set("RPC_FIELD1", "1", "GEOTIFF");
   label_set("RPC_FIELD2", to_s1(V.error_bias), "GEOTIFF");
   label_set("RPC_FIELD3", to_s1(V.error_random), "GEOTIFF");

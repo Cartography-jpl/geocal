@@ -185,7 +185,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-class TiledFileBase_2(object):
+import geocal_swig.generic_object
+class TiledFileBase_2(geocal_swig.generic_object.GenericObject):
     """
 
     This class is the base class of TiledFile<T, D>.

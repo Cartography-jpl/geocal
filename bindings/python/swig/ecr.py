@@ -196,6 +196,7 @@ class Ecr(geocal_swig.ground_coordinate.CartesianFixed):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    EARTH_NAIF_CODE = _ecr.Ecr_EARTH_NAIF_CODE
 
     def __init__(self, *args):
         """

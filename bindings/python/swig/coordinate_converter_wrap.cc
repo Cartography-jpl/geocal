@@ -6400,6 +6400,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CoordinateConverter__v_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CoordinateConverter *arg1 = (GeoCal::CoordinateConverter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CoordinateConverter const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CoordinateConverter__v_naif_code" "', argument " "1"" of type '" "GeoCal::CoordinateConverter const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp1);
+      arg1 = const_cast< GeoCal::CoordinateConverter * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp1);
+      arg1 = const_cast< GeoCal::CoordinateConverter * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::CoordinateConverter const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CoordinateConverter_create(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::CoordinateConverter *arg1 = (GeoCal::CoordinateConverter *) 0 ;
@@ -6900,6 +6943,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"Because much of our data is in Geodetic coordinates this is an\n"
 		"important performance specialization. \n"
+		""},
+	 { (char *)"CoordinateConverter__v_naif_code", (PyCFunction)_wrap_CoordinateConverter__v_naif_code, METH_O, (char *)"\n"
+		"\n"
+		"virtual int GeoCal::CoordinateConverter::naif_code() const\n"
+		"Naif code for planet. \n"
 		""},
 	 { (char *)"CoordinateConverter_create", _wrap_CoordinateConverter_create, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -8247,6 +8295,7 @@ SWIG_init(void) {
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::GeodeticConverter), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::GeodeticConverter > > ("boost::shared_ptr< GeoCal::GeodeticConverter > *"));
   
+  SWIG_Python_SetConstant(d, "CoordinateConverter_EARTH_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::CoordinateConverter::EARTH_NAIF_CODE)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

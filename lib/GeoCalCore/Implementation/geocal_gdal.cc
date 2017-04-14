@@ -3,6 +3,7 @@
 #include "planet_coordinate.h"
 #include "simple_dem.h"
 #include <gdal_priv.h>
+#include <boost/lexical_cast.hpp>
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
@@ -505,6 +506,10 @@ Rpc GeoCal::gdal_rpc(const GDALDataset& D)
 	gdal_metadata<boost::array<double, 20> >(D, "SAMP_NUM_COEFF", "RPC");
       res.sample_denominator = 
 	gdal_metadata<boost::array<double, 20> >(D, "SAMP_DEN_COEFF", "RPC");
+      if(const_cast<GDALDataset&>(D).GetMetadataItem("NAIF_CODE", "")) {
+	int naif_code = gdal_metadata<int>(D, "NAIF_CODE");
+	std::cerr << "Faking NAIF CODE " << naif_code << "\n";
+      }
     } else {
       throw MetadataMissing("Does not appear to be any RPC metadata in file");
     }
@@ -540,7 +545,11 @@ void GeoCal::gdal_rpc(GDALDataset& D, const Rpc& R)
     D.SetMetadataItem("NITF_CETAG", "RPC00A");
   else
     D.SetMetadataItem("NITF_CETAG", "RPC00B");
-
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(R.coordinate_converter)
+    naif_code = R.coordinate_converter->naif_code();
+  if(naif_code != CoordinateConverter::EARTH_NAIF_CODE)
+    D.SetMetadataItem("NAIF_CODE", boost::lexical_cast<std::string>(naif_code).c_str());
   D.SetMetadataItem("ERR_BIAS", to_s1(R.error_bias).c_str(), "RPC");
   D.SetMetadataItem("ERR_RAND", to_s1(R.error_random).c_str(), "RPC");
   D.SetMetadataItem("HEIGHT_OFF", to_s1(R.height_offset).c_str(), "RPC");

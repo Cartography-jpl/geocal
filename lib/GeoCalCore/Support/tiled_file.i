@@ -6,8 +6,10 @@
 #include "tiled_file.h"
 %}
 
+%base_import(generic_object)
+
 namespace GeoCal {
-template<std::size_t D> class TiledFileBase {
+  template<std::size_t D> class TiledFileBase : public GenericObject {
 public:
   typedef boost::multi_array_types::index index;
   %python_attribute(number_swap, int)
@@ -27,5 +29,7 @@ public:
 			    double Val) = 0;
 };
 
-%template(TiledFileBase_2) TiledFileBase<2>;
 }
+
+%geocal_shared_ptr(GeoCal::TiledFileBase<2>);
+%template(TiledFileBase_2) GeoCal::TiledFileBase<2>;

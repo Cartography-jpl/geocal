@@ -216,6 +216,7 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    EARTH_NAIF_CODE = _coordinate_converter.CoordinateConverter_EARTH_NAIF_CODE
 
     def convert_from_coordinate(self, X, Y, Z=0):
         """
@@ -242,6 +243,20 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
         return _coordinate_converter.CoordinateConverter_convert_to_coordinate(self, Gc)
 
 
+    def _v_naif_code(self):
+        """
+
+        virtual int GeoCal::CoordinateConverter::naif_code() const
+        Naif code for planet. 
+        """
+        return _coordinate_converter.CoordinateConverter__v_naif_code(self)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+
     def create(self, Gc):
         """
 
@@ -262,6 +277,7 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     __swig_destroy__ = _coordinate_converter.delete_CoordinateConverter
 CoordinateConverter.convert_from_coordinate = new_instancemethod(_coordinate_converter.CoordinateConverter_convert_from_coordinate, None, CoordinateConverter)
 CoordinateConverter.convert_to_coordinate = new_instancemethod(_coordinate_converter.CoordinateConverter_convert_to_coordinate, None, CoordinateConverter)
+CoordinateConverter._v_naif_code = new_instancemethod(_coordinate_converter.CoordinateConverter__v_naif_code, None, CoordinateConverter)
 CoordinateConverter.create = new_instancemethod(_coordinate_converter.CoordinateConverter_create, None, CoordinateConverter)
 CoordinateConverter.is_same = new_instancemethod(_coordinate_converter.CoordinateConverter_is_same, None, CoordinateConverter)
 CoordinateConverter.__str__ = new_instancemethod(_coordinate_converter.CoordinateConverter___str__, None, CoordinateConverter)

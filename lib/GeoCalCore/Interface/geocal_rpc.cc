@@ -141,10 +141,10 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
   case 399:
     // Default is earth/geodetic
     break;
-  case MarsConstant::NAIF_CODE:
+  case PlanetConstant::MARS_NAIF_CODE:
     rpc.coordinate_converter.reset(new MarsPlanetocentricConverter);
     break;
-  case EuropaConstant::NAIF_CODE:
+  case PlanetConstant::EUROPA_NAIF_CODE:
     rpc.coordinate_converter.reset(new EuropaPlanetocentricConverter);
     break;
   default:

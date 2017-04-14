@@ -30,6 +30,7 @@ class Geodetic;
 
 class Ecr : public CartesianFixed {
 public:
+  enum { EARTH_NAIF_CODE = 399 };
   Ecr(const GroundCoordinate& Gc);
   Ecr(double X, double Y, double Z);
   Ecr(const boost::array<double, 3>& Pos);

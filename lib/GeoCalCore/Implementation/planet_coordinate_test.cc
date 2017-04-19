@@ -34,19 +34,19 @@ BOOST_AUTO_TEST_CASE(mars_fixed)
     BOOST_WARN_MESSAGE(false, "Not configured to use SPICE library, so skipping Spice tests.");
     return;
   }
-  MarsFixed mf(10, 20, 30);
+  PlanetFixed mf(10, 20, 30, PlanetConstant::MARS_NAIF_CODE);
   BOOST_CHECK_CLOSE(mf.position[0], 10.0, 1e-8);
   BOOST_CHECK_CLOSE(mf.position[1], 20.0, 1e-8);
   BOOST_CHECK_CLOSE(mf.position[2], 30.0, 1e-8);
   boost::shared_ptr<GroundCoordinate> gc = mf.convert_to_cf();
-  MarsFixed mf2(*gc);
+  PlanetFixed mf2(*gc, PlanetConstant::MARS_NAIF_CODE);
   BOOST_CHECK_CLOSE(mf2.position[0], 10.0, 1e-8);
   BOOST_CHECK_CLOSE(mf2.position[1], 20.0, 1e-8);
   BOOST_CHECK_CLOSE(mf2.position[2], 30.0, 1e-8);
   BOOST_CHECK_CLOSE(mf.min_radius_reference_surface(), 3376200.0, 1e-8);
 
   // Results from an old unit test in the old version of GeoCal.
-  MarsFixed e3mf(0.5, 0.75, 0.90);
+  PlanetFixed e3mf(0.5, 0.75, 0.90, PlanetConstant::MARS_NAIF_CODE);
   Time t = Time::parse_time("1991-01-01T11:29:30.123211Z") + 3600.0;
   boost::shared_ptr<CartesianInertial> m3mi = e3mf.convert_to_ci(t);
   BOOST_CHECK(boost::dynamic_pointer_cast<MarsInertial>(m3mi));
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(mars_fixed)
   BOOST_CHECK_CLOSE(m3mi->position[2], 0.23946256, 1e-4);
 
   MarsPlanetocentric mp(10, 20, 30);
-  MarsFixed mf4(mp);
+  PlanetFixed mf4(mp, PlanetConstant::MARS_NAIF_CODE);
   BOOST_CHECK_CLOSE(mf4.latitude(), 10, 1e-8);
   BOOST_CHECK_CLOSE(mf4.longitude(), 20, 1e-8);
   BOOST_CHECK_CLOSE(mf4.height_reference_surface(), 30, 1e-8);
@@ -76,10 +76,11 @@ BOOST_AUTO_TEST_CASE(mars_inertial)
   MarsInertial m3mi(0.5, 0.75, 0.90);
   Time t = Time::parse_time("1991-01-01T11:29:30.123211Z") + 3600.0;
   boost::shared_ptr<CartesianFixed> m3mf = m3mi.convert_to_cf(t);
-  BOOST_CHECK(boost::dynamic_pointer_cast<MarsFixed>(m3mf));
+  BOOST_CHECK(boost::dynamic_pointer_cast<PlanetFixed>(m3mf));
   BOOST_CHECK_CLOSE(m3mf->position[0], -0.992024, 1e-4);
   BOOST_CHECK_CLOSE(m3mf->position[1], 0.48329419, 1e-4);
   BOOST_CHECK_CLOSE(m3mf->position[2], 0.636251, 1e-4);
+  BOOST_CHECK_EQUAL(m3mf->naif_code(), (int) PlanetConstant::MARS_NAIF_CODE);
 }
 
 BOOST_AUTO_TEST_CASE(mars_planetocentric)
@@ -92,9 +93,9 @@ BOOST_AUTO_TEST_CASE(mars_planetocentric)
   BOOST_CHECK_CLOSE(mp.height_reference_surface(), 30, 1e-8);
   BOOST_CHECK_CLOSE(mp.latitude(), 10, 1e-8);
   BOOST_CHECK_CLOSE(mp.longitude(), 20, 1e-8);
-  MarsFixed mf(mp);
+  PlanetFixed mf(mp, PlanetConstant::MARS_NAIF_CODE);
   MarsPlanetocentric mp2(mf);
-  MarsFixed mf2(mp2);
+  PlanetFixed mf2(mp2, PlanetConstant::MARS_NAIF_CODE);
   BOOST_CHECK(distance(mp, mp2) < 1e-8);
   BOOST_CHECK(distance(mf, mf2) < 1e-8);
 }
@@ -103,14 +104,15 @@ BOOST_AUTO_TEST_CASE(serialization_mars_fixed)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<MarsFixed> mf(new MarsFixed(100, 200, 300));
+  boost::shared_ptr<PlanetFixed> mf(new PlanetFixed(100, 200, 300, PlanetConstant::MARS_NAIF_CODE));
   std::string d = serialize_write_string(mf);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<MarsFixed> mfr = 
-    serialize_read_string<MarsFixed>(d);
+  boost::shared_ptr<PlanetFixed> mfr = 
+    serialize_read_string<PlanetFixed>(d);
   for(int i = 0; i < 3; ++i)
     BOOST_CHECK_CLOSE(mf->position[i], mfr->position[i], 1e-4);
+  BOOST_CHECK_EQUAL(mfr->naif_code(), (int) PlanetConstant::MARS_NAIF_CODE);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_mars_inertial)
@@ -190,9 +192,12 @@ public:
 BOOST_FIXTURE_TEST_SUITE(galileo, GalileoFixture)
 BOOST_AUTO_TEST_CASE(target_position)
 {
-  EuropaFixed p3800 = EuropaFixed::target_position(galileo_name, tm3800);
-  EuropaFixed p2828 = EuropaFixed::target_position(galileo_name, tm2828);
-  EuropaFixed p9400 = EuropaFixed::target_position(galileo_name, tm9400);
+  PlanetFixed p3800 = PlanetFixed::target_position(galileo_name, tm3800,
+			   PlanetConstant::EUROPA_NAIF_CODE);
+  PlanetFixed p2828 = PlanetFixed::target_position(galileo_name, tm2828,
+			   PlanetConstant::EUROPA_NAIF_CODE);
+  PlanetFixed p9400 = PlanetFixed::target_position(galileo_name, tm9400,
+			   PlanetConstant::EUROPA_NAIF_CODE);
   BOOST_CHECK_CLOSE(norm(p3800.position), 5.79122e+06, 1e-4);
   BOOST_CHECK_CLOSE(norm(p2828.position), 2.60614e+06, 1e-4);
   BOOST_CHECK_CLOSE(norm(p9400.position), 4.29518e+07, 1e-4);
@@ -207,7 +212,8 @@ BOOST_AUTO_TEST_CASE(target_position)
 BOOST_AUTO_TEST_CASE(orbit_data)
 {
   boost::shared_ptr<QuaternionOrbitData> od = 
-    EuropaFixed::orbit_data(galileo_name, sc_frame_name, tm3800);
+    PlanetFixed::orbit_data(galileo_name, sc_frame_name, tm3800,
+			    PlanetConstant::EUROPA_NAIF_CODE);
   BOOST_CHECK_CLOSE(od->position_cf()->latitude(), -2.61439, 5e-4);
   BOOST_CHECK_CLOSE(od->position_cf()->longitude(), -152.651, 5e-4);
   boost::shared_ptr<Dem> dem(new EuropaSimpleDem());
@@ -254,19 +260,6 @@ BOOST_AUTO_TEST_CASE(orbit_data)
   BOOST_CHECK_CLOSE(ic_planet_center.sample, 11478.387, 1e-4);
 }
 
-BOOST_AUTO_TEST_CASE(serialization_europa_fixed)
-{
-  if(!have_serialize_supported())
-    return;
-  boost::shared_ptr<EuropaFixed> ef(new EuropaFixed(100, 200, 300));
-  std::string d = serialize_write_string(ef);
-  if(false)
-    std::cerr << d;
-  boost::shared_ptr<EuropaFixed> efr = 
-    serialize_read_string<EuropaFixed>(d);
-  for(int i = 0; i < 3; ++i)
-    BOOST_CHECK_CLOSE(ef->position[i], efr->position[i], 1e-4);
-}
 
 BOOST_AUTO_TEST_CASE(serialization_europa_inertial)
 {

@@ -204,8 +204,8 @@ class PlanetConstant(object):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
-    MARS_CODE = _planet_coordinate.PlanetConstant_MARS_CODE
-    EUROPA_CODE = _planet_coordinate.PlanetConstant_EUROPA_CODE
+    MARS_NAIF_CODE = _planet_coordinate.PlanetConstant_MARS_NAIF_CODE
+    EUROPA_NAIF_CODE = _planet_coordinate.PlanetConstant_EUROPA_NAIF_CODE
 
     def a(Naif_code):
         """
@@ -321,7 +321,7 @@ def PlanetConstant_name(Naif_code):
     """
     return _planet_coordinate.PlanetConstant_name(Naif_code)
 
-class MarsFixed(geocal_swig.ground_coordinate.CartesianFixed):
+class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
     """
 
     This is a ground coordinate, expressed in fixed Planet coordinates.
@@ -337,80 +337,70 @@ class MarsFixed(geocal_swig.ground_coordinate.CartesianFixed):
     def __init__(self, *args):
         """
 
-        GeoCal::PlanetFixed< NAIF_CODE >::PlanetFixed()
+        GeoCal::PlanetFixed::PlanetFixed(int Naif_code=-1)
         Default constructor. 
         """
-        _planet_coordinate.MarsFixed_swiginit(self, _planet_coordinate.new_MarsFixed(*args))
-
-    def convert_to_planetocentric(self):
-        """
-
-        Planetocentric< NAIF_CODE > GeoCal::PlanetFixed< NAIF_CODE >::convert_to_planetocentric() const
-
-        """
-        return _planet_coordinate.MarsFixed_convert_to_planetocentric(self)
-
+        _planet_coordinate.PlanetFixed_swiginit(self, _planet_coordinate.new_PlanetFixed(*args))
 
     def reference_surface_intersect_approximate(self, Cl, Height_reference_surface=0):
         """
 
-        virtual boost::shared_ptr<CartesianFixed> GeoCal::PlanetFixed< NAIF_CODE >::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double
+        virtual boost::shared_ptr<CartesianFixed> GeoCal::PlanetFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double
         Height_reference_surface=0) const
 
         """
-        return _planet_coordinate.MarsFixed_reference_surface_intersect_approximate(self, Cl, Height_reference_surface)
+        return _planet_coordinate.PlanetFixed_reference_surface_intersect_approximate(self, Cl, Height_reference_surface)
 
 
-    def target_position(Target_name, T):
+    def target_position(Target_name, T, Naif_code):
         """
 
-        static PlanetFixed<NAIF_CODE> GeoCal::PlanetFixed< NAIF_CODE >::target_position(const std::string &Target_name, const Time &T)
+        static PlanetFixed GeoCal::PlanetFixed::target_position(const std::string &Target_name, const Time &T, int Naif_code)
         Use spice to determine the position of the given body at the given
         time. 
         """
-        return _planet_coordinate.MarsFixed_target_position(Target_name, T)
+        return _planet_coordinate.PlanetFixed_target_position(Target_name, T, Naif_code)
 
     target_position = staticmethod(target_position)
 
-    def orbit_data(Target_name, Spacecraft_reference_frame_name, T):
+    def orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code):
         """
 
-        static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed< NAIF_CODE >::orbit_data(const std::string &Target_name, const std::string
-        &Spacecraft_reference_frame_name, const Time &T)
+        static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed::orbit_data(const std::string &Target_name, const std::string
+        &Spacecraft_reference_frame_name, const Time &T, int Naif_code)
         Return orbit data for the given target and spacecraft reference frame.
 
         """
-        return _planet_coordinate.MarsFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T)
+        return _planet_coordinate.PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code)
 
     orbit_data = staticmethod(orbit_data)
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-    __swig_destroy__ = _planet_coordinate.delete_MarsFixed
-MarsFixed.convert_to_planetocentric = new_instancemethod(_planet_coordinate.MarsFixed_convert_to_planetocentric, None, MarsFixed)
-MarsFixed.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.MarsFixed_reference_surface_intersect_approximate, None, MarsFixed)
-MarsFixed_swigregister = _planet_coordinate.MarsFixed_swigregister
-MarsFixed_swigregister(MarsFixed)
+    __swig_destroy__ = _planet_coordinate.delete_PlanetFixed
+PlanetFixed.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.PlanetFixed_reference_surface_intersect_approximate, None, PlanetFixed)
+PlanetFixed_swigregister = _planet_coordinate.PlanetFixed_swigregister
+PlanetFixed_swigregister(PlanetFixed)
 
-def MarsFixed_target_position(Target_name, T):
+def PlanetFixed_target_position(Target_name, T, Naif_code):
     """
 
-    static PlanetFixed<NAIF_CODE> GeoCal::PlanetFixed< NAIF_CODE >::target_position(const std::string &Target_name, const Time &T)
+    static PlanetFixed GeoCal::PlanetFixed::target_position(const std::string &Target_name, const Time &T, int Naif_code)
     Use spice to determine the position of the given body at the given
     time. 
     """
-    return _planet_coordinate.MarsFixed_target_position(Target_name, T)
+    return _planet_coordinate.PlanetFixed_target_position(Target_name, T, Naif_code)
 
-def MarsFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T):
+def PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code):
     """
 
-    static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed< NAIF_CODE >::orbit_data(const std::string &Target_name, const std::string
-    &Spacecraft_reference_frame_name, const Time &T)
+    static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed::orbit_data(const std::string &Target_name, const std::string
+    &Spacecraft_reference_frame_name, const Time &T, int Naif_code)
     Return orbit data for the given target and spacecraft reference frame.
 
     """
-    return _planet_coordinate.MarsFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T)
+    return _planet_coordinate.PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code)
 
 class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """
@@ -585,97 +575,6 @@ MarsPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet
 MarsPlanetocentricConverter._v_naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter__v_naif_code, None, MarsPlanetocentricConverter)
 MarsPlanetocentricConverter_swigregister = _planet_coordinate.MarsPlanetocentricConverter_swigregister
 MarsPlanetocentricConverter_swigregister(MarsPlanetocentricConverter)
-
-class EuropaFixed(geocal_swig.ground_coordinate.CartesianFixed):
-    """
-
-    This is a ground coordinate, expressed in fixed Planet coordinates.
-
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
-
-    C++ includes: planet_coordinate.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        """
-
-        GeoCal::PlanetFixed< NAIF_CODE >::PlanetFixed()
-        Default constructor. 
-        """
-        _planet_coordinate.EuropaFixed_swiginit(self, _planet_coordinate.new_EuropaFixed(*args))
-
-    def convert_to_planetocentric(self):
-        """
-
-        Planetocentric< NAIF_CODE > GeoCal::PlanetFixed< NAIF_CODE >::convert_to_planetocentric() const
-
-        """
-        return _planet_coordinate.EuropaFixed_convert_to_planetocentric(self)
-
-
-    def reference_surface_intersect_approximate(self, Cl, Height_reference_surface=0):
-        """
-
-        virtual boost::shared_ptr<CartesianFixed> GeoCal::PlanetFixed< NAIF_CODE >::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double
-        Height_reference_surface=0) const
-
-        """
-        return _planet_coordinate.EuropaFixed_reference_surface_intersect_approximate(self, Cl, Height_reference_surface)
-
-
-    def target_position(Target_name, T):
-        """
-
-        static PlanetFixed<NAIF_CODE> GeoCal::PlanetFixed< NAIF_CODE >::target_position(const std::string &Target_name, const Time &T)
-        Use spice to determine the position of the given body at the given
-        time. 
-        """
-        return _planet_coordinate.EuropaFixed_target_position(Target_name, T)
-
-    target_position = staticmethod(target_position)
-
-    def orbit_data(Target_name, Spacecraft_reference_frame_name, T):
-        """
-
-        static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed< NAIF_CODE >::orbit_data(const std::string &Target_name, const std::string
-        &Spacecraft_reference_frame_name, const Time &T)
-        Return orbit data for the given target and spacecraft reference frame.
-
-        """
-        return _planet_coordinate.EuropaFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T)
-
-    orbit_data = staticmethod(orbit_data)
-
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-    __swig_destroy__ = _planet_coordinate.delete_EuropaFixed
-EuropaFixed.convert_to_planetocentric = new_instancemethod(_planet_coordinate.EuropaFixed_convert_to_planetocentric, None, EuropaFixed)
-EuropaFixed.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.EuropaFixed_reference_surface_intersect_approximate, None, EuropaFixed)
-EuropaFixed_swigregister = _planet_coordinate.EuropaFixed_swigregister
-EuropaFixed_swigregister(EuropaFixed)
-
-def EuropaFixed_target_position(Target_name, T):
-    """
-
-    static PlanetFixed<NAIF_CODE> GeoCal::PlanetFixed< NAIF_CODE >::target_position(const std::string &Target_name, const Time &T)
-    Use spice to determine the position of the given body at the given
-    time. 
-    """
-    return _planet_coordinate.EuropaFixed_target_position(Target_name, T)
-
-def EuropaFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T):
-    """
-
-    static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed< NAIF_CODE >::orbit_data(const std::string &Target_name, const std::string
-    &Spacecraft_reference_frame_name, const Time &T)
-    Return orbit data for the given target and spacecraft reference frame.
-
-    """
-    return _planet_coordinate.EuropaFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T)
 
 class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
     """

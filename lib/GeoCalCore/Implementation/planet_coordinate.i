@@ -12,10 +12,13 @@
 %import "orbit.i"
 %import "simple_dem.i"
 
+%geocal_shared_ptr(GeoCal::PlanetConstant);
+%geocal_shared_ptr(GeoCal::PlanetFixed);
+
 namespace GeoCal {
 class PlanetConstant {
 public:
-  enum {MARS_CODE=499, EUROPA_CODE=502};
+  enum {MARS_NAIF_CODE=499, EUROPA_NAIF_CODE=502};
   static double a(int Naif_code);
   static double b(int Naif_code);
   static double esq(int Naif_code);
@@ -24,28 +27,30 @@ public:
   static std::string name(int Naif_code);
 };
 
-template<int NAIF_CODE> class PlanetFixed : public CartesianFixed {
+class PlanetFixed : public CartesianFixed {
 public:
-  PlanetFixed(const GroundCoordinate& Gc);
-  PlanetFixed(double X, double Y, double Z);
-  PlanetFixed(const boost::array<double, 3>& Pos);
-  PlanetFixed();
+  PlanetFixed(const GroundCoordinate& Gc, int NAIF_CODE);
+  PlanetFixed(double X, double Y, double Z, int NAIF_CODE);
+  PlanetFixed(const boost::array<double, 3>& Pos, int NAIF_CODE);
+  PlanetFixed(int NAIF_CODE = -1);
   virtual boost::shared_ptr<CartesianInertial> 
   convert_to_ci(const Time& T) const;
   virtual boost::shared_ptr<CartesianFixed> 
     create(boost::array<double, 3> P) const;
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const;
   virtual void cf_to_ci_with_vel(const Time& T, double Cf_to_ci[6][6]) const;
-  Planetocentric<NAIF_CODE> convert_to_planetocentric() const;
+  // Temp
+  //Planetocentric<NAIF_CODE> convert_to_planetocentric() const;
   virtual boost::shared_ptr<CartesianFixed>
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0)
     const;
-  static PlanetFixed<NAIF_CODE> target_position
-  (const std::string& Target_name, const Time& T);
+  static PlanetFixed target_position
+  (const std::string& Target_name, const Time& T, int Naif_code);
   static boost::shared_ptr<QuaternionOrbitData> orbit_data
   (const std::string& Target_name, 
-   const std::string& Spacecraft_reference_frame_name, const Time& T);
+   const std::string& Spacecraft_reference_frame_name, const Time& T,
+   int Naif_code);
   virtual int naif_code() const;
   %pickle_serialization();
 };
@@ -94,23 +99,19 @@ public:
 
 }
 
-%geocal_shared_ptr(GeoCal::PlanetFixed<499>);
 %geocal_shared_ptr(GeoCal::PlanetInertial<499>);
 %geocal_shared_ptr(GeoCal::Planetocentric<499>);
 %geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >);
 %geocal_shared_ptr(GeoCal::PlanetocentricConverter<499>);
-%template(MarsFixed) GeoCal::PlanetFixed<499>;
 %template(MarsInertial) GeoCal::PlanetInertial<499>;
 %template(MarsPlanetocentric) GeoCal::Planetocentric<499>;
 %template(MarsSimpleDem) GeoCal::SimpleDemT<GeoCal::Planetocentric<499> >;
 %template(MarsPlanetocentricConverter) GeoCal::PlanetocentricConverter<499>;
 
-%geocal_shared_ptr(GeoCal::PlanetFixed<502>);
 %geocal_shared_ptr(GeoCal::PlanetInertial<502>);
 %geocal_shared_ptr(GeoCal::Planetocentric<502>);
 %geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >);
 %geocal_shared_ptr(GeoCal::PlanetocentricConverter<502>);
-%template(EuropaFixed) GeoCal::PlanetFixed<502>;
 %template(EuropaInertial) GeoCal::PlanetInertial<502>;
 %template(EuropaPlanetocentric) GeoCal::Planetocentric<502>;
 %template(EuropaSimpleDem) GeoCal::SimpleDemT<GeoCal::Planetocentric<502> >;

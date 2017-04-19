@@ -60,7 +60,8 @@ BOOST_AUTO_TEST_CASE(mars_coordinate)
   boost::shared_ptr<OgrWrapper> mars_sinusoidal(new OgrWrapper(mars_wkt));
   OgrCoordinate c(mars_sinusoidal, -39781.25, 1656201.25, 100.0);
   boost::shared_ptr<CartesianFixed> cf = c.convert_to_cf();
-  MarsFixed mf(2809164.6332301, -1064843.66585431, 1574812.3299872);
+  PlanetFixed mf(2809164.6332301, -1064843.66585431, 1574812.3299872,
+		 PlanetConstant::MARS_NAIF_CODE);
   BOOST_CHECK(distance(mf, *cf) < 1.0);
   BOOST_CHECK_CLOSE(c.latitude(), 27.663583380357668, 1e-4);
   BOOST_CHECK_CLOSE(c.longitude(), -20.759744758052218, 1e-4);

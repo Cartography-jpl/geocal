@@ -712,8 +712,6 @@ void VicarFile::rpc(const Rpc& V)
     std::cerr << "Setting naif_code\n";
     naif_code = V.coordinate_converter->naif_code();
   }
-  std::cerr << "Hi there\n"
-	    << "NAIF CODE: " << naif_code << "\n";
   if(naif_code != CoordinateConverter::EARTH_NAIF_CODE)
     label_set("NAIF_CODE", naif_code, "GEOTIFF");
   label_set("RPC_FIELD1", "1", "GEOTIFF");

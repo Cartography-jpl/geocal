@@ -3,10 +3,11 @@
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-template<> template<class Archive>
-void MarsFixed::serialize(Archive & ar, const unsigned int version)
+template<class Archive>
+void PlanetFixed::serialize(Archive & ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianFixed);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianFixed)
+    & GEOCAL_NVP_(naif_code);
 }
 
 template<> template<class Archive>
@@ -33,12 +34,6 @@ void MarsPlanetocentricConverter::serialize(Archive & ar, const unsigned int ver
 }
 
 template<> template<class Archive>
-void EuropaFixed::serialize(Archive & ar, const unsigned int version)
-{
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianFixed);
-}
-
-template<> template<class Archive>
 void EuropaInertial::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
@@ -61,11 +56,10 @@ void EuropaPlanetocentricConverter::serialize(Archive & ar, const unsigned int v
   GEOCAL_BASE(EuropaPlanetocentricConverter, CoordinateConverter);
 }
 
-GEOCAL_IMPLEMENT(MarsFixed);
+GEOCAL_IMPLEMENT(PlanetFixed);
 GEOCAL_IMPLEMENT(MarsInertial);
 GEOCAL_IMPLEMENT(MarsPlanetocentric);
 GEOCAL_IMPLEMENT(MarsPlanetocentricConverter);
-GEOCAL_IMPLEMENT(EuropaFixed);
 GEOCAL_IMPLEMENT(EuropaInertial);
 GEOCAL_IMPLEMENT(EuropaPlanetocentric);
 GEOCAL_IMPLEMENT(EuropaPlanetocentricConverter);

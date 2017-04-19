@@ -482,11 +482,7 @@ boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
     throw Exception("Call to OGR Transform failed");
   if(ogr().naif_code() == Ecr::EARTH_NAIF_CODE)
     return boost::shared_ptr<CartesianFixed>(new Ecr(xr, yr, zr));
-  if(ogr().naif_code() == PlanetConstant::MARS_NAIF_CODE)
-    return boost::shared_ptr<CartesianFixed>(new MarsFixed(xr, yr, zr));
-  Exception e;
-  e << "Don't recognize the naif code " << ogr().naif_code();
-  throw e;
+  return boost::shared_ptr<CartesianFixed>(new PlanetFixed(xr, yr, zr, ogr().naif_code()));
 }
 
 //-----------------------------------------------------------------------

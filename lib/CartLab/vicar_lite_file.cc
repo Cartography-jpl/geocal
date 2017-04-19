@@ -136,15 +136,35 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
   number_line_ = label<int>("NL");
   number_sample_ = label<int>("NS");
   number_band_ = label<int>("NB");
+  number_line_binary_ = label<int>("NLB");
+  data_offset_ += number_line_binary_ * label<int>("RECSIZE");
+  number_byte_binary_ = label<int>("NBB");
 
+//-----------------------------------------------------------------------
+/// Don't currently support binary labels that aren't even multiple of
+/// pixel size,
+//-----------------------------------------------------------------------
+
+  if(number_byte_binary_ % byte_per_pixel != 0) {
+    Exception e;
+    e << "VicarLiteFile doesn't support binary labels with the number of "
+      << "bytes not an even multiple of the byte_per_pixel."
+      << "The file " << file_name() << " has the label NBB="
+      << number_byte_binary_ << " and bytes per pixel="
+      << byte_per_pixel << ". Note the full VicarFile (which "
+      << "depends on the VICAR RTL) does support this.";
+    throw e;
+  }
+  number_sample_binary_ = number_byte_binary_ / byte_per_pixel;
+  
 //-----------------------------------------------------------------------
 // Check if there are any more labels at the end of the file. If there
 // are, add this to label_data and reprocess the full list.
 //-----------------------------------------------------------------------
 
   if(label_["EOL"] == "1") {
-    int data_size = number_line_ * number_sample_ * number_band_ * 
-      byte_per_pixel;
+    int data_size = number_line_ *
+      (number_sample_ * byte_per_pixel + number_byte_binary_) * number_band_ ;
     f_->seekg(data_offset_ + data_size, std::ios_base::beg);
     int trash;
     label_data += read_label(trash);
@@ -213,7 +233,7 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
     data_raw.reset(new MemoryMapArray<char, 4>
 		   (file_name(), 
 		    boost::extents[number_band()][number_line()]
-		    [number_sample()][byte_per_pixel],
+		    [number_sample() + number_sample_binary_][byte_per_pixel],
 		    (Access == READ ? MemoryMapArray<char, 4>::READ :
 		     MemoryMapArray<char, 4>::UPDATE), data_offset(),
 		    storage));

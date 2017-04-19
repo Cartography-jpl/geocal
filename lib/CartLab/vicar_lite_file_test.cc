@@ -232,10 +232,4 @@ BOOST_AUTO_TEST_CASE(serialization_dem)
   BOOST_CHECK_CLOSE(fr->height_reference_surface(g1), 1.0, 1e-4);
 }
 
-BOOST_AUTO_TEST_CASE(bad_file)
-{
-  VicarLiteRasterImage r("/home/smyth/Local/MarsRsm/3800r_rpc.img");
-  std::cerr << r << "\n";
-}
-
 BOOST_AUTO_TEST_SUITE_END()

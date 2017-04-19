@@ -42,6 +42,8 @@ public:
   %python_attribute(number_line, int)
   %python_attribute(number_sample, int)
   %python_attribute(number_band, int)
+  %python_attribute(number_line_binary, int)
+  %python_attribute(number_byte_binary, int)
   %python_attribute(type, data_type)
   %python_attribute_with_set(map_info, MapInfo)
   %python_attribute_with_set(rpc, Rpc)

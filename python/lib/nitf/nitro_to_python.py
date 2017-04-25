@@ -59,18 +59,27 @@ where in the document a particular TRE is defined.
 desc = ["%s",
 ''' % (tre_name, tre_name, tre_name)
 
-for ln in re.split('\},?', desc):
+cond = ""
+for ln in re.split(',?\s*\},?', desc):
     ln = re.sub('\s*{','',ln)
     if(ln[0:4]=="NITF"):
         typ, sz, d, v = re.split('\s*"?,\s*"?', ln)
         v = re.sub('"','', v).lower().strip()
         if(typ == "NITF_BCS_N"):
-            out += '        ["%s", "%s", %s, int],\n' % (v, d, sz)
+            out += '        ["%s", "%s", %s, int%s],\n' % (v, d, sz,cond)
         elif(typ == "NITF_BCS_A"):
             if(re.match('rsrvd\d*', v)):
-                out += '        [None, None, %s, str],\n' % (sz)
+                out += '        [None, None, %s, str%s],\n' % (sz,cond)
             else:
-                out += '        ["%s", "%s", %s, str],\n' % (v, d, sz)
+                out += '        ["%s", "%s", %s, str%s],\n' % (v, d, sz,cond)
+        elif(typ == "NITF_LOOP"):
+            out += '        [["loop", "f.%s"%s],\n' % (v, cond)
+        elif(typ == "NITF_ENDLOOP"):
+            out += "        ],\n"
+        elif(typ == "NITF_IF"):
+            cond = ", {'condition' : \"f.%s %s\"}" % (v,d)
+        elif(typ == "NITF_ENDIF"):
+            cond = ""
         elif(typ == "NITF_END"):
             pass
         else:

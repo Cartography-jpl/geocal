@@ -83,7 +83,7 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
   // polynomial extrapolates poorly
   double min_lat = -999, max_lat = -999, min_lon = -999, max_lon = -999;
   bool first = true;
-  int naif_code;
+  int naif_code = -1;
   for(int ih = 0; ih < Nheight; ++ih)
     for(int i = 0; i < Nln + 1; ++i)
       for(int j = 0; j < Nsmp + 1; ++j) {

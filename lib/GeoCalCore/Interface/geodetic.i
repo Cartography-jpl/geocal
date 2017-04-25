@@ -19,6 +19,7 @@ public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   Geodetic(double Latitude, double Longitude, double Height_ellipsoid = 0);
   Geodetic();
+  virtual int naif_code() const;
   %pickle_serialization();
 };
 
@@ -28,6 +29,7 @@ public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   Geocentric(double Latitude, double Longitude, double Height_ellipsoid = 0);
   Geocentric();
+  virtual int naif_code() const;
   %pickle_serialization();
 };
 

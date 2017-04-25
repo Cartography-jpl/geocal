@@ -184,6 +184,7 @@ public:
 
   int utm_zone() const;
 
+  virtual int naif_code() const { return ogr_->naif_code(); }
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
 private:
   boost::shared_ptr<OgrWrapper> ogr_;

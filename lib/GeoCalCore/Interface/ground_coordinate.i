@@ -27,6 +27,7 @@ public:
   %python_attribute(height_reference_surface, virtual double)
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const = 0;
   std::string print_to_string() const;
+  virtual int naif_code() const = 0;
 };
 
 class CartesianInertial : public GenericObject {
@@ -36,6 +37,7 @@ public:
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const = 0;
   virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) 
     const = 0;
+  virtual int naif_code() const = 0;
   boost::math::quaternion<double> ci_to_cf_quat(const Time& T) const;
   virtual boost::shared_ptr<CartesianInertial> 
     create(boost::array<double, 3> P) const = 0;

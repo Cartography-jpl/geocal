@@ -8,8 +8,8 @@
 #include "coordinate_converter.h"
 
 namespace GeoCal {
-template<int NAIF_CODE> class Planetocentric;
-
+  class Planetocentric;
+  
 /****************************************************************//**
   Constants for a planet.
 
@@ -50,41 +50,8 @@ private:
 *******************************************************************/
 class PlanetFixed : public CartesianFixed {
 public:
-//-----------------------------------------------------------------------
-/// Create PlanetFixed from GroundCoordinate
-//-----------------------------------------------------------------------
-
-  PlanetFixed(const GroundCoordinate& Gc, int Naif_code)
-    : naif_code_(Naif_code)
-  {
-    if(const PlanetFixed* g = 
-       dynamic_cast<const PlanetFixed*>(&Gc))
-      if(g->naif_code() == Naif_code) {
-	*this = *g;
-	return;
-      }
-    boost::shared_ptr<CartesianFixed> cf = Gc.convert_to_cf();
-    if(cf->naif_code() != Naif_code) {
-      Exception e;
-      e << "Cannot convert ground coordinate to "
-	<< PlanetConstant::name(Naif_code)<< "Fixed\n"
-	<< "Coordinate: " << Gc << "\n";
-      throw e;
-    }
-    position = cf->position;
-  }
-
-//-----------------------------------------------------------------------
-/// Make an PlanetFixed with the given position, in meters.
-//-----------------------------------------------------------------------
-
-  PlanetFixed(double X, double Y, double Z, int Naif_code)
-    : naif_code_(Naif_code)
-  {
-    position[0] = X;
-    position[1] = Y;
-    position[2] = Z;
-  }
+  PlanetFixed(const GroundCoordinate& Gc);
+  PlanetFixed(double X, double Y, double Z, int Naif_code);
 
 //-----------------------------------------------------------------------
 /// Create an PlanetFixed with the given position in meters.
@@ -175,83 +142,24 @@ public:
     return atan2(position[1], position[0]) * Constant::rad_to_deg;
   }
 
-  // Temp
-  //  Planetocentric<NAIF_CODE> convert_to_planetocentric() const;
+  Planetocentric convert_to_planetocentric() const;
   virtual boost::shared_ptr<CartesianFixed>
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0)
-  const
-  {
-    double aph = PlanetConstant::a(naif_code_) + 
-      Height_reference_surface;
-    double bph = PlanetConstant::b(naif_code_) + 
-      Height_reference_surface;
-    boost::array<double, 3> dirci;
-    dirci[0] = Cl.look_vector[0]/ aph;
-    dirci[1] = Cl.look_vector[1]/ aph;
-    dirci[2] = Cl.look_vector[2]/ bph;
-    double t = norm(dirci);
-    dirci[0] /= t;
-    dirci[1] /= t;
-    dirci[2] /= t;
-    boost::array<double, 3> pci;
-    pci[0] = position[0] / aph;
-    pci[1] = position[1] / aph;
-    pci[2] = position[2] / bph;
-    double ddotp = dot(dirci, pci);
-    double dl = -ddotp - sqrt(ddotp * ddotp + (1 - dot(pci, pci)));
-    boost::array<double, 3> res;
-    res[0] = (pci[0] + dirci[0] * dl) * aph;
-    res[1] = (pci[1] + dirci[1] * dl) * aph;
-    res[2] = (pci[2] + dirci[2] * dl) * bph;
-    return create(res);
-  }
-
+    const;
 //-----------------------------------------------------------------------
 /// Return NAIF code.
 //-----------------------------------------------------------------------
 
   virtual int naif_code() const {return naif_code_;}
   
-  virtual void print(std::ostream& Os) const
-  {
-    Os << PlanetConstant::name(naif_code_)
-       << "Fixed (" << position[0] << " m, " << position[1] << " m, "
-       << position[2] << "m)";
-  }
-
-//-----------------------------------------------------------------------
-/// Use spice to determine the position of the given body at the given
-/// time.
-//-----------------------------------------------------------------------
-
+  virtual void print(std::ostream& Os) const;
   static PlanetFixed target_position
-  (const std::string& Target_name, const Time& T, int Naif_code)
-  {
-    PlanetFixed res(Naif_code);
-    boost::array<double, 3> vel;
-    SpiceHelper::state_vector(Naif_code, Target_name, T, res.position, vel);
-    return res;
-  }
-
-//-----------------------------------------------------------------------
-/// Return orbit data for the given target and spacecraft reference
-/// frame.
-//-----------------------------------------------------------------------
-
+  (const std::string& Target_name, const Time& T, int Naif_code);
   static boost::shared_ptr<QuaternionOrbitData> orbit_data
   (const std::string& Target_name, 
    const std::string& Spacecraft_reference_frame_name, const Time& T,
-   int Naif_code)
-  {
-    boost::shared_ptr<PlanetFixed> pos(new PlanetFixed(Naif_code));
-    boost::array<double, 3> vel;
-    SpiceHelper::state_vector(Naif_code, Target_name, T, pos->position, vel);
-    return boost::shared_ptr<QuaternionOrbitData>
-      (new QuaternionOrbitData(T, pos, vel, 
-          SpiceHelper::conversion_quaternion(Spacecraft_reference_frame_name, 
-	     SpiceHelper::fixed_frame_name(Naif_code), T)));
-  }
+   int Naif_code);
 private:
   int naif_code_;
   friend class boost::serialization::access;
@@ -266,30 +174,21 @@ private:
   anything with a NAIF_CODE
 *******************************************************************/
 
-template<int NAIF_CODE> class PlanetInertial : public CartesianInertial {
+class PlanetInertial : public CartesianInertial {
 public:
 //-----------------------------------------------------------------------
 /// Default constructor, doesn't initialize position.
 //-----------------------------------------------------------------------
 
-  PlanetInertial() {}
-
-//-----------------------------------------------------------------------
-/// Make an PlanetInertial with the given position, in meters.
-//-----------------------------------------------------------------------
-
-  PlanetInertial(double X, double Y, double Z)
-  {
-    position[0] = X;
-    position[1] = Y;
-    position[2] = Z;
-  }
+  PlanetInertial(int Naif_code=-1) : naif_code_(Naif_code) {}
+  PlanetInertial(double X, double Y, double Z, int Naif_code);
 
 //-----------------------------------------------------------------------
 /// Create an PlanetInertial with the given position in meters.
 //-----------------------------------------------------------------------
 
-  PlanetInertial(const boost::array<double, 3>& Pos)
+  PlanetInertial(const boost::array<double, 3>& Pos, int Naif_code)
+    : naif_code_(Naif_code)
   {
     position = Pos;
   }
@@ -300,13 +199,7 @@ public:
 
   virtual ~PlanetInertial() {}
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
-    const
-  {
-    boost::shared_ptr<PlanetFixed> res(new PlanetFixed(NAIF_CODE));
-    CartesianFixed::toolkit_coordinate_interface->
-      to_fixed(NAIF_CODE, T, *this, *res);
-    return res;
-  }
+    const;
 
 //-----------------------------------------------------------------------
 /// Matrix to convert PlanetInertial to PlanetFixed. The transpose of this
@@ -316,7 +209,7 @@ public:
 
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
   { 
-    CartesianFixed::toolkit_coordinate_interface->to_fixed(NAIF_CODE,
+    CartesianFixed::toolkit_coordinate_interface->to_fixed(naif_code_,
 							   T, Ci_to_cf); 
   }
 
@@ -329,7 +222,7 @@ public:
   virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
   { 
     CartesianFixed::toolkit_coordinate_interface->to_fixed_with_vel
-      (NAIF_CODE, T, Ci_to_cf); 
+      (naif_code_, T, Ci_to_cf); 
   }
 
 //-----------------------------------------------------------------------
@@ -339,55 +232,21 @@ public:
   virtual boost::shared_ptr<CartesianInertial> 
     create(boost::array<double, 3> P) const 
   { return boost::shared_ptr<CartesianInertial>
-      (new PlanetInertial<NAIF_CODE>(P)); }
+      (new PlanetInertial(P,naif_code_)); }
 
   virtual boost::shared_ptr<CartesianInertial>
   reference_surface_intersect_approximate(
   const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
-  const
-  {
-    double aph = PlanetConstant::a(NAIF_CODE) + 
-      Height_reference_surface;
-    double bph = PlanetConstant::b(NAIF_CODE) + 
-      Height_reference_surface;
-    boost::array<double, 3> dirci;
-    dirci[0] = Cl.look_vector[0]/ aph;
-    dirci[1] = Cl.look_vector[1]/ aph;
-    dirci[2] = Cl.look_vector[2]/ bph;
-    double t = norm(dirci);
-    dirci[0] /= t;
-    dirci[1] /= t;
-    dirci[2] /= t;
-    boost::array<double, 3> pci;
-    pci[0] = position[0] / aph;
-    pci[1] = position[1] / aph;
-    pci[2] = position[2] / bph;
-    double ddotp = dot(dirci, pci);
-    double dl = -ddotp - sqrt(ddotp * ddotp + (1 - dot(pci, pci)));
-    boost::array<double, 3> res;
-    res[0] = (pci[0] + dirci[0] * dl) * aph;
-    res[1] = (pci[1] + dirci[1] * dl) * aph;
-    res[2] = (pci[2] + dirci[2] * dl) * bph;
-    return create(res);
-  }
+    const;
 
 //-----------------------------------------------------------------------
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  int naif_code() {return NAIF_CODE;}
-  
-//-----------------------------------------------------------------------
-/// Print to given stream.
-//-----------------------------------------------------------------------
-
-  virtual void print(std::ostream& Os) const
-  {
-    Os << PlanetConstant::name(NAIF_CODE)
-       << "Inertial (" << position[0] << " m, " << position[1] << " m, "
-       << position[2] << "m)";
-  }
+  virtual int naif_code() const {return naif_code_;}
+  virtual void print(std::ostream& Os) const;
 private:
+  int naif_code_;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -404,67 +263,25 @@ private:
   anything with a NAIF_CODE
 *******************************************************************/
 
-template<int NAIF_CODE> class Planetocentric : public GroundCoordinate {
+class Planetocentric : public GroundCoordinate {
 public:
-//-----------------------------------------------------------------------
-/// Convert from GroundCoor.
-//-----------------------------------------------------------------------
-
-  Planetocentric(const GroundCoordinate& Gc)
-  {
-    if(const Planetocentric<NAIF_CODE>* g = 
-       dynamic_cast<const Planetocentric<NAIF_CODE>*>(&Gc)) {
-      *this = *g;
-      return;
-    }
-    PlanetFixed mf(Gc, NAIF_CODE);
-    lon_ = mf.longitude();
-    lat_ = mf.latitude();
-    height_ellipsoid_ = 
-      norm(mf.position) - planet_radius(lat_ * Constant::deg_to_rad);
-  }
-  virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const
-  {
-    double lat = lat_ * Constant::deg_to_rad;
-    double lon = lon_ * Constant::deg_to_rad;
-    double r = planet_radius(lat) + height_ellipsoid_;
-    return boost::shared_ptr<CartesianFixed>
-      (new PlanetFixed(r * cos(lat) * cos(lon),
-		       r * cos(lat) * sin(lon),
-		       r * sin(lat), NAIF_CODE));
-  }
-  virtual void print(std::ostream& Os) const
-  {
-    Os << PlanetConstant::name(NAIF_CODE)
-       << "Planetocentric: (" << latitude() << " deg, " 
-       << longitude() << " deg, "
-       << height_reference_surface() << " m)";
-  }
+  Planetocentric(const GroundCoordinate& Gc);
+  virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
+  virtual void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  int naif_code() {return NAIF_CODE;}
-  
-//-----------------------------------------------------------------------
-/// Make an Planetocentric with the given latitude, longitude, and height.
-/// Latitude and longitude are in degrees, height is in meters.
-/// Longitude should be between -180 and 180 and latitude -90 and 90.
-//-----------------------------------------------------------------------
-
-  Planetocentric(double Latitude, double Longitude, double Height_ellipsoid = 0)
-  : lat_(Latitude), lon_(Longitude), height_ellipsoid_(Height_ellipsoid)
-  {
-    range_check(lat_, -90.0, 90.0);
-    range_check(lon_, -180.0, 180.0);
-  }
+  virtual int naif_code() const {return naif_code_;}
+  Planetocentric(double Latitude, double Longitude, double Height_ellipsoid,
+		 int Naif_code);
 
 //-----------------------------------------------------------------------
 /// Default constructor.
 //-----------------------------------------------------------------------
 
-  Planetocentric() {}
+  Planetocentric(int Naif_code=-1) : naif_code_(Naif_code) {}
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -489,12 +306,12 @@ public:
 //-----------------------------------------------------------------------
 
   virtual double longitude() const {return lon_;}
-
 private:
   double lat_;			///< Latitude, in degrees.
   double lon_;			///< Longitude, in degrees.
   double height_ellipsoid_;	///< Height above ellipsoid, in
 				///meters.
+  int naif_code_;
 
 //-----------------------------------------------------------------------
 /// Radius of planet in meters at given Planetocentric Latitude (in
@@ -504,36 +321,14 @@ private:
   double planet_radius(double Latitude_radians) const
   {
     double clat = cos(Latitude_radians);
-    return PlanetConstant::b(NAIF_CODE) / 
-      sqrt(1 - PlanetConstant::esq(NAIF_CODE) * clat * clat);
+    return PlanetConstant::b(naif_code_) / 
+      sqrt(1 - PlanetConstant::esq(naif_code_) * clat * clat);
   }
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };
 
-inline boost::shared_ptr<CartesianInertial> 
-PlanetFixed::convert_to_ci(const Time& T) const
-{
-  // Temp
-  // boost::shared_ptr<CartesianInertial> res(new PlanetInertial<NAIF_CODE>);
-  // CartesianFixed::toolkit_coordinate_interface->
-  //   to_inertial((int) NAIF_CODE, T, *this, *res);
-  // return res;
-}
-
-inline double PlanetFixed::height_reference_surface() const
-{
-  // Temp
-  // return Planetocentric<NAIF_CODE>(*this).height_reference_surface();
-}
-
-// template<int NAIF_CODE> inline Planetocentric<NAIF_CODE> 
-// PlanetFixed<NAIF_CODE>::convert_to_planetocentric() const
-// {
-//   return Planetocentric<NAIF_CODE>(latitude(), longitude(), 
-// 				   height_reference_surface());
-// }
 
 /****************************************************************//**
   CoordinateConverter that goes to and from Planetocentric coordinates.
@@ -557,7 +352,7 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const
   {
     return boost::shared_ptr<GroundCoordinate>
-      (new Planetocentric<NAIF_CODE>(Y, X, Height));
+      (new Planetocentric(Y, X, Height, NAIF_CODE));
   }
 
 //-----------------------------------------------------------------------
@@ -578,15 +373,27 @@ public:
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
 			       double& Y, double& Height) const
   {
-    Planetocentric<NAIF_CODE> gd(Gc);
+    if(Gc.naif_code() != NAIF_CODE) {
+      Exception e;
+      e << "Gp has the wrong naif_code(). Got " << Gc.naif_code()
+	<< " but expected " << NAIF_CODE;
+      throw e;
+    }
+    Planetocentric gd(Gc);
     X = gd.longitude();
     Y = gd.latitude();
     Height = gd.height_reference_surface();
   }
   virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
-			       double& Y, double& Height) const
+				     double& Y, double& Height) const
   {
-    Planetocentric<NAIF_CODE> gd(Gc);
+    if(Gc.naif_code() != NAIF_CODE) {
+      Exception e;
+      e << "Gp has the wrong naif_code(). Got " << Gc.naif_code()
+	<< " but expected " << NAIF_CODE;
+      throw e;
+    }
+    Planetocentric gd(Gc);
     X = gd.longitude();
     Y = gd.latitude();
     Height = gd.height_reference_surface();
@@ -611,23 +418,129 @@ private:
   void serialize(Archive & ar, const unsigned int version);
 };
 
-typedef Planetocentric<499> MarsPlanetocentric;
-typedef PlanetInertial<499> MarsInertial;
-typedef SimpleDemT<MarsPlanetocentric> MarsSimpleDem;
+class PlanetSimpleDem: public Dem {
+public:
+//-----------------------------------------------------------------------
+/// Constructor.
+//-----------------------------------------------------------------------
+
+  PlanetSimpleDem(double H, int Naif_code) : h_(H), naif_code_(Naif_code) {}
+
+//-----------------------------------------------------------------------
+/// Default constructor.
+//-----------------------------------------------------------------------
+
+  PlanetSimpleDem(int Naif_code=-1) : h_(0), naif_code_(Naif_code) {}
+
+//-----------------------------------------------------------------------
+/// Destructor
+//-----------------------------------------------------------------------
+
+  virtual ~PlanetSimpleDem() {}
+
+//-----------------------------------------------------------------------
+/// Return height of surface above/below the reference surface (e.g.,
+/// WGS-84 for the earth). Positive means above, negative below. This is 
+/// in meters.
+//-----------------------------------------------------------------------
+
+  virtual double height_reference_surface(const GroundCoordinate& Gp) 
+    const {
+    if(Gp.naif_code() != naif_code_) {
+      Exception e;
+      e << "Gp has the wrong naif_code(). Got " << Gp.naif_code()
+	<< " but expected " << naif_code_;
+      throw e;
+    }
+    return h_;
+  }
+
+//-----------------------------------------------------------------------
+/// Return distance to surface directly above/below the given point.
+/// Distance is in meters. Positive means Gp is above the surface, 
+/// negative means below.
+//-----------------------------------------------------------------------
+
+  virtual double distance_to_surface(const GroundCoordinate& Gp) 
+    const
+  {
+    if(Gp.naif_code() != naif_code_) {
+      Exception e;
+      e << "Gp has the wrong naif_code(). Got " << Gp.naif_code()
+	<< " but expected " << naif_code_;
+      throw e;
+    }
+    Planetocentric g(Gp);
+    return g.height_reference_surface() - h_;
+  }
+
+  virtual boost::shared_ptr<GroundCoordinate> 
+    surface_point(const GroundCoordinate& Gp) const
+  {
+    if(Gp.naif_code() != naif_code_) {
+      Exception e;
+      e << "Gp has the wrong naif_code(). Got " << Gp.naif_code()
+	<< " but expected " << naif_code_;
+      throw e;
+    }
+    Planetocentric g(Gp);
+    return boost::shared_ptr<GroundCoordinate>(
+       new Planetocentric(g.latitude(), g.longitude(), h_, naif_code_));
+  }
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const 
+  { Os << "Planet Simple Dem"
+       << "  Height: " << h_ << "m \n"
+       << "  Planet: " << PlanetConstant::name(naif_code_) << "\n";
+  }
+
+//-----------------------------------------------------------------------
+/// Return height value used by this object.
+//-----------------------------------------------------------------------
+
+  double h() const {return h_;}
+
+//-----------------------------------------------------------------------
+/// Set height value used by this object.
+//-----------------------------------------------------------------------
+
+  void h(double Hnew) {h_ = Hnew;}
+
+//-----------------------------------------------------------------------
+/// Naif code for planet
+//-----------------------------------------------------------------------
+
+  int naif_code() const {return naif_code_;}
+
+//-----------------------------------------------------------------------
+/// Set Naif code for planet
+//-----------------------------------------------------------------------
+
+  void naif_code(int Naif_code) {naif_code_ = Naif_code;}
+private:
+  double h_;
+  int naif_code_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+
+//typedef SimpleDemT<Planetocentric<499> > MarsSimpleDem;
 typedef PlanetocentricConverter<499> MarsPlanetocentricConverter;
 
-typedef Planetocentric<502> EuropaPlanetocentric;
-typedef PlanetInertial<502> EuropaInertial;
-typedef SimpleDemT<EuropaPlanetocentric> EuropaSimpleDem;
+//typedef SimpleDemT<Planetocentric<502> > EuropaSimpleDem;
 typedef PlanetocentricConverter<502> EuropaPlanetocentricConverter;
 
 }
 
 GEOCAL_EXPORT_KEY(PlanetFixed);
-GEOCAL_EXPORT_KEY(MarsInertial);
-GEOCAL_EXPORT_KEY(MarsPlanetocentric);
+GEOCAL_EXPORT_KEY(PlanetInertial);
+GEOCAL_EXPORT_KEY(Planetocentric);
+GEOCAL_EXPORT_KEY(PlanetSimpleDem);
 GEOCAL_EXPORT_KEY(MarsPlanetocentricConverter);
-GEOCAL_EXPORT_KEY(EuropaInertial);
-GEOCAL_EXPORT_KEY(EuropaPlanetocentric);
 GEOCAL_EXPORT_KEY(EuropaPlanetocentricConverter);
 #endif

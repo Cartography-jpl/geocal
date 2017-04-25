@@ -345,7 +345,7 @@ class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
     def reference_surface_intersect_approximate(self, Cl, Height_reference_surface=0):
         """
 
-        virtual boost::shared_ptr<CartesianFixed> GeoCal::PlanetFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double
+        boost::shared_ptr< CartesianFixed > PlanetFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double
         Height_reference_surface=0) const
 
         """
@@ -355,7 +355,7 @@ class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
     def target_position(Target_name, T, Naif_code):
         """
 
-        static PlanetFixed GeoCal::PlanetFixed::target_position(const std::string &Target_name, const Time &T, int Naif_code)
+        PlanetFixed PlanetFixed::target_position(const std::string &Target_name, const Time &T, int Naif_code)
         Use spice to determine the position of the given body at the given
         time. 
         """
@@ -366,7 +366,7 @@ class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
     def orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code):
         """
 
-        static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed::orbit_data(const std::string &Target_name, const std::string
+        boost::shared_ptr< QuaternionOrbitData > PlanetFixed::orbit_data(const std::string &Target_name, const std::string
         &Spacecraft_reference_frame_name, const Time &T, int Naif_code)
         Return orbit data for the given target and spacecraft reference frame.
 
@@ -386,7 +386,7 @@ PlanetFixed_swigregister(PlanetFixed)
 def PlanetFixed_target_position(Target_name, T, Naif_code):
     """
 
-    static PlanetFixed GeoCal::PlanetFixed::target_position(const std::string &Target_name, const Time &T, int Naif_code)
+    PlanetFixed PlanetFixed::target_position(const std::string &Target_name, const Time &T, int Naif_code)
     Use spice to determine the position of the given body at the given
     time. 
     """
@@ -395,63 +395,14 @@ def PlanetFixed_target_position(Target_name, T, Naif_code):
 def PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code):
     """
 
-    static boost::shared_ptr<QuaternionOrbitData> GeoCal::PlanetFixed::orbit_data(const std::string &Target_name, const std::string
+    boost::shared_ptr< QuaternionOrbitData > PlanetFixed::orbit_data(const std::string &Target_name, const std::string
     &Spacecraft_reference_frame_name, const Time &T, int Naif_code)
     Return orbit data for the given target and spacecraft reference frame.
 
     """
     return _planet_coordinate.PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code)
 
-class MarsInertial(geocal_swig.ground_coordinate.CartesianInertial):
-    """
-
-    This is a Planet Intertial coordinate.
-
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
-
-    C++ includes: planet_coordinate.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        """
-
-        GeoCal::PlanetInertial< NAIF_CODE >::PlanetInertial(const boost::array< double, 3 > &Pos)
-        Create an PlanetInertial with the given position in meters. 
-        """
-        _planet_coordinate.MarsInertial_swiginit(self, _planet_coordinate.new_MarsInertial(*args))
-
-    def reference_surface_intersect_approximate(self, Cl, Height_reference_surface=0):
-        """
-
-        virtual boost::shared_ptr<CartesianInertial> GeoCal::PlanetInertial< NAIF_CODE >::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double
-        Height_reference_surface=0) const
-
-        """
-        return _planet_coordinate.MarsInertial_reference_surface_intersect_approximate(self, Cl, Height_reference_surface)
-
-
-    def naif_code(self):
-        """
-
-        int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()
-        Return NAIF code. 
-        """
-        return _planet_coordinate.MarsInertial_naif_code(self)
-
-
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-    __swig_destroy__ = _planet_coordinate.delete_MarsInertial
-MarsInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.MarsInertial_reference_surface_intersect_approximate, None, MarsInertial)
-MarsInertial.naif_code = new_instancemethod(_planet_coordinate.MarsInertial_naif_code, None, MarsInertial)
-MarsInertial_swigregister = _planet_coordinate.MarsInertial_swigregister
-MarsInertial_swigregister(MarsInertial)
-
-class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
+class Planetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     """
 
     This is Planet coordinates as Planetocentric latitude, longitude, and
@@ -467,23 +418,18 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     C++ includes: planet_coordinate.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        """
-
-        GeoCal::Planetocentric< NAIF_CODE >::Planetocentric()
-        Default constructor. 
-        """
-        _planet_coordinate.MarsPlanetocentric_swiginit(self, _planet_coordinate.new_MarsPlanetocentric(*args))
 
     def naif_code(self):
         """
 
-        int GeoCal::Planetocentric< NAIF_CODE >::naif_code()
+        virtual int GeoCal::Planetocentric::naif_code() const
         Return NAIF code. 
         """
-        return _planet_coordinate.MarsPlanetocentric_naif_code(self)
+        return _planet_coordinate.Planetocentric_naif_code(self)
 
 
     @property
@@ -504,17 +450,75 @@ class MarsPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-    __swig_destroy__ = _planet_coordinate.delete_MarsPlanetocentric
-MarsPlanetocentric.naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentric_naif_code, None, MarsPlanetocentric)
-MarsPlanetocentric_swigregister = _planet_coordinate.MarsPlanetocentric_swigregister
-MarsPlanetocentric_swigregister(MarsPlanetocentric)
+    __swig_destroy__ = _planet_coordinate.delete_Planetocentric
+Planetocentric.naif_code = new_instancemethod(_planet_coordinate.Planetocentric_naif_code, None, Planetocentric)
+Planetocentric_swigregister = _planet_coordinate.Planetocentric_swigregister
+Planetocentric_swigregister(Planetocentric)
 
-class MarsSimpleDem(geocal_swig.dem.Dem):
+class PlanetInertial(geocal_swig.ground_coordinate.CartesianInertial):
+    """
+
+    This is a Planet Intertial coordinate.
+
+    Note that "Planet" also includes "Moon of planet", basically
+    anything with a NAIF_CODE
+
+    C++ includes: planet_coordinate.h 
+    """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, H=0):
-        _planet_coordinate.MarsSimpleDem_swiginit(self, _planet_coordinate.new_MarsSimpleDem(H))
+    def __init__(self, *args):
+        """
+
+        GeoCal::PlanetInertial::PlanetInertial(const boost::array< double, 3 > &Pos, int Naif_code)
+        Create an PlanetInertial with the given position in meters. 
+        """
+        _planet_coordinate.PlanetInertial_swiginit(self, _planet_coordinate.new_PlanetInertial(*args))
+
+    def reference_surface_intersect_approximate(self, Cl, Height_reference_surface=0):
+        """
+
+        boost::shared_ptr< CartesianInertial > PlanetInertial::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double
+        Height_reference_surface=0) const
+
+        """
+        return _planet_coordinate.PlanetInertial_reference_surface_intersect_approximate(self, Cl, Height_reference_surface)
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _planet_coordinate.delete_PlanetInertial
+PlanetInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.PlanetInertial_reference_surface_intersect_approximate, None, PlanetInertial)
+PlanetInertial_swigregister = _planet_coordinate.PlanetInertial_swigregister
+PlanetInertial_swigregister(PlanetInertial)
+
+class PlanetSimpleDem(geocal_swig.dem.Dem):
+    """
+
+    C++ includes: planet_coordinate.h
+
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+        GeoCal::PlanetSimpleDem::PlanetSimpleDem(int Naif_code=-1)
+        Default constructor. 
+        """
+        _planet_coordinate.PlanetSimpleDem_swiginit(self, _planet_coordinate.new_PlanetSimpleDem(*args))
+
+    def _v_h(self, *args):
+        """
+
+        void GeoCal::PlanetSimpleDem::h(double Hnew)
+        Set height value used by this object. 
+        """
+        return _planet_coordinate.PlanetSimpleDem__v_h(self, *args)
+
 
     @property
     def h(self):
@@ -525,13 +529,32 @@ class MarsSimpleDem(geocal_swig.dem.Dem):
       self._v_h(value)
 
 
+    def _v_naif_code(self, *args):
+        """
+
+        void GeoCal::PlanetSimpleDem::naif_code(int Naif_code)
+        Set Naif code for planet. 
+        """
+        return _planet_coordinate.PlanetSimpleDem__v_naif_code(self, *args)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+    @naif_code.setter
+    def naif_code(self, value):
+      self._v_naif_code(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-    __swig_destroy__ = _planet_coordinate.delete_MarsSimpleDem
-MarsSimpleDem._v_h = new_instancemethod(_planet_coordinate.MarsSimpleDem__v_h, None, MarsSimpleDem)
-MarsSimpleDem_swigregister = _planet_coordinate.MarsSimpleDem_swigregister
-MarsSimpleDem_swigregister(MarsSimpleDem)
+    __swig_destroy__ = _planet_coordinate.delete_PlanetSimpleDem
+PlanetSimpleDem._v_h = new_instancemethod(_planet_coordinate.PlanetSimpleDem__v_h, None, PlanetSimpleDem)
+PlanetSimpleDem._v_naif_code = new_instancemethod(_planet_coordinate.PlanetSimpleDem__v_naif_code, None, PlanetSimpleDem)
+PlanetSimpleDem_swigregister = _planet_coordinate.PlanetSimpleDem_swigregister
+PlanetSimpleDem_swigregister(PlanetSimpleDem)
 
 class MarsPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConverter):
     """
@@ -575,137 +598,6 @@ MarsPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet
 MarsPlanetocentricConverter._v_naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter__v_naif_code, None, MarsPlanetocentricConverter)
 MarsPlanetocentricConverter_swigregister = _planet_coordinate.MarsPlanetocentricConverter_swigregister
 MarsPlanetocentricConverter_swigregister(MarsPlanetocentricConverter)
-
-class EuropaInertial(geocal_swig.ground_coordinate.CartesianInertial):
-    """
-
-    This is a Planet Intertial coordinate.
-
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
-
-    C++ includes: planet_coordinate.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        """
-
-        GeoCal::PlanetInertial< NAIF_CODE >::PlanetInertial(const boost::array< double, 3 > &Pos)
-        Create an PlanetInertial with the given position in meters. 
-        """
-        _planet_coordinate.EuropaInertial_swiginit(self, _planet_coordinate.new_EuropaInertial(*args))
-
-    def reference_surface_intersect_approximate(self, Cl, Height_reference_surface=0):
-        """
-
-        virtual boost::shared_ptr<CartesianInertial> GeoCal::PlanetInertial< NAIF_CODE >::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double
-        Height_reference_surface=0) const
-
-        """
-        return _planet_coordinate.EuropaInertial_reference_surface_intersect_approximate(self, Cl, Height_reference_surface)
-
-
-    def naif_code(self):
-        """
-
-        int GeoCal::PlanetInertial< NAIF_CODE >::naif_code()
-        Return NAIF code. 
-        """
-        return _planet_coordinate.EuropaInertial_naif_code(self)
-
-
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-    __swig_destroy__ = _planet_coordinate.delete_EuropaInertial
-EuropaInertial.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.EuropaInertial_reference_surface_intersect_approximate, None, EuropaInertial)
-EuropaInertial.naif_code = new_instancemethod(_planet_coordinate.EuropaInertial_naif_code, None, EuropaInertial)
-EuropaInertial_swigregister = _planet_coordinate.EuropaInertial_swigregister
-EuropaInertial_swigregister(EuropaInertial)
-
-class EuropaPlanetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
-    """
-
-    This is Planet coordinates as Planetocentric latitude, longitude, and
-    height above the reference ellipsoid.
-
-    This is the planet equivalent of Geocentric ( not Geodetic). Height is
-    relative to the ellipsoid, but latitude is relative to center of
-    planet rather than normal of ellipsoid.
-
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
-
-    C++ includes: planet_coordinate.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        """
-
-        GeoCal::Planetocentric< NAIF_CODE >::Planetocentric()
-        Default constructor. 
-        """
-        _planet_coordinate.EuropaPlanetocentric_swiginit(self, _planet_coordinate.new_EuropaPlanetocentric(*args))
-
-    def naif_code(self):
-        """
-
-        int GeoCal::Planetocentric< NAIF_CODE >::naif_code()
-        Return NAIF code. 
-        """
-        return _planet_coordinate.EuropaPlanetocentric_naif_code(self)
-
-
-    @property
-    def height_reference_surface(self):
-        return self._v_height_reference_surface()
-
-
-    @property
-    def latitude(self):
-        return self._v_latitude()
-
-
-    @property
-    def longitude(self):
-        return self._v_longitude()
-
-
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-    __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentric
-EuropaPlanetocentric.naif_code = new_instancemethod(_planet_coordinate.EuropaPlanetocentric_naif_code, None, EuropaPlanetocentric)
-EuropaPlanetocentric_swigregister = _planet_coordinate.EuropaPlanetocentric_swigregister
-EuropaPlanetocentric_swigregister(EuropaPlanetocentric)
-
-class EuropaSimpleDem(geocal_swig.dem.Dem):
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-
-    def __init__(self, H=0):
-        _planet_coordinate.EuropaSimpleDem_swiginit(self, _planet_coordinate.new_EuropaSimpleDem(H))
-
-    @property
-    def h(self):
-        return self._v_h()
-
-    @h.setter
-    def h(self, value):
-      self._v_h(value)
-
-
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-    __swig_destroy__ = _planet_coordinate.delete_EuropaSimpleDem
-EuropaSimpleDem._v_h = new_instancemethod(_planet_coordinate.EuropaSimpleDem__v_h, None, EuropaSimpleDem)
-EuropaSimpleDem_swigregister = _planet_coordinate.EuropaSimpleDem_swigregister
-EuropaSimpleDem_swigregister(EuropaSimpleDem)
 
 class EuropaPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConverter):
     """

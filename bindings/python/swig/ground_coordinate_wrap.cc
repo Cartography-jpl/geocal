@@ -6613,6 +6613,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GroundCoordinate_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GroundCoordinate *arg1 = (GeoCal::GroundCoordinate *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate_naif_code" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundCoordinate * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
+      arg1 = const_cast< GeoCal::GroundCoordinate * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::GroundCoordinate const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_GroundCoordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GroundCoordinate *arg1 = (GeoCal::GroundCoordinate *) 0 ;
@@ -6885,6 +6928,49 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf_with_vel(PyObject *SWIGUNU
     }
   }
   resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CartesianInertial_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CartesianInertial *arg1 = (GeoCal::CartesianInertial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CartesianInertial const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_naif_code" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
+      arg1 = const_cast< GeoCal::CartesianInertial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
+      arg1 = const_cast< GeoCal::CartesianInertial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::CartesianInertial const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -7482,49 +7568,6 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_convert_to_ci(PyObject *SWIGUNUSEDPARM
   {
     resultobj = GeoCal::swig_to_python(result);
   }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CartesianFixed_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::CartesianFixed *arg1 = (GeoCal::CartesianFixed *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CartesianFixed const > tempshared1 ;
-  boost::shared_ptr< GeoCal::CartesianFixed const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_naif_code" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
-      arg1 = const_cast< GeoCal::CartesianFixed * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
-      arg1 = const_cast< GeoCal::CartesianFixed * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::CartesianFixed const *)arg1)->naif_code();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -12729,6 +12772,11 @@ static PyMethodDef SwigMethods[] = {
 		"Convert to CartesianFixed. \n"
 		""},
 	 { (char *)"GroundCoordinate___str__", (PyCFunction)_wrap_GroundCoordinate___str__, METH_O, NULL},
+	 { (char *)"GroundCoordinate_naif_code", (PyCFunction)_wrap_GroundCoordinate_naif_code, METH_O, (char *)"\n"
+		"\n"
+		"virtual int GeoCal::GroundCoordinate::naif_code() const =0\n"
+		"Naif code for planet. \n"
+		""},
 	 { (char *)"delete_GroundCoordinate", (PyCFunction)_wrap_delete_GroundCoordinate, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::GroundCoordinate::~GroundCoordinate()\n"
@@ -12757,6 +12805,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
 		"transpose is not the inverse. \n"
+		""},
+	 { (char *)"CartesianInertial_naif_code", (PyCFunction)_wrap_CartesianInertial_naif_code, METH_O, (char *)"\n"
+		"\n"
+		"virtual int GeoCal::CartesianInertial::naif_code() const =0\n"
+		"Naif code for planet. \n"
 		""},
 	 { (char *)"CartesianInertial_ci_to_cf_quat", _wrap_CartesianInertial_ci_to_cf_quat, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -12791,11 +12844,6 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"virtual boost::shared_ptr<CartesianInertial> GeoCal::CartesianFixed::convert_to_ci(const Time &T) const =0\n"
 		"Convert to CartesianInertial. \n"
-		""},
-	 { (char *)"CartesianFixed_naif_code", (PyCFunction)_wrap_CartesianFixed_naif_code, METH_O, (char *)"\n"
-		"\n"
-		"virtual int GeoCal::CartesianFixed::naif_code() const =0\n"
-		"Naif code for planet. \n"
 		""},
 	 { (char *)"CartesianFixed_create", _wrap_CartesianFixed_create, METH_VARARGS, (char *)"\n"
 		"\n"

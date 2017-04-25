@@ -25,6 +25,7 @@ public:
     reference_surface_intersect_approximate(
     const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
     const;
+  virtual naif_code() const;
   %pickle_serialization();
 };
 }

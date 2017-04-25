@@ -287,12 +287,22 @@ class GroundCoordinate(geocal_swig.generic_object.GenericObject):
         """
         return _ground_coordinate.GroundCoordinate_convert_to_cf(self)
 
+
+    def naif_code(self):
+        """
+
+        virtual int GeoCal::GroundCoordinate::naif_code() const =0
+        Naif code for planet. 
+        """
+        return _ground_coordinate.GroundCoordinate_naif_code(self)
+
     __swig_destroy__ = _ground_coordinate.delete_GroundCoordinate
 GroundCoordinate._v_latitude = new_instancemethod(_ground_coordinate.GroundCoordinate__v_latitude, None, GroundCoordinate)
 GroundCoordinate._v_longitude = new_instancemethod(_ground_coordinate.GroundCoordinate__v_longitude, None, GroundCoordinate)
 GroundCoordinate._v_height_reference_surface = new_instancemethod(_ground_coordinate.GroundCoordinate__v_height_reference_surface, None, GroundCoordinate)
 GroundCoordinate.convert_to_cf = new_instancemethod(_ground_coordinate.GroundCoordinate_convert_to_cf, None, GroundCoordinate)
 GroundCoordinate.__str__ = new_instancemethod(_ground_coordinate.GroundCoordinate___str__, None, GroundCoordinate)
+GroundCoordinate.naif_code = new_instancemethod(_ground_coordinate.GroundCoordinate_naif_code, None, GroundCoordinate)
 GroundCoordinate_swigregister = _ground_coordinate.GroundCoordinate_swigregister
 GroundCoordinate_swigregister(GroundCoordinate)
 
@@ -348,6 +358,15 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
         return _ground_coordinate.CartesianInertial_ci_to_cf_with_vel(self, T, Ci_to_cf)
 
 
+    def naif_code(self):
+        """
+
+        virtual int GeoCal::CartesianInertial::naif_code() const =0
+        Naif code for planet. 
+        """
+        return _ground_coordinate.CartesianInertial_naif_code(self)
+
+
     def ci_to_cf_quat(self, T):
         """
 
@@ -393,6 +412,7 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
 CartesianInertial.convert_to_cf = new_instancemethod(_ground_coordinate.CartesianInertial_convert_to_cf, None, CartesianInertial)
 CartesianInertial.ci_to_cf = new_instancemethod(_ground_coordinate.CartesianInertial_ci_to_cf, None, CartesianInertial)
 CartesianInertial.ci_to_cf_with_vel = new_instancemethod(_ground_coordinate.CartesianInertial_ci_to_cf_with_vel, None, CartesianInertial)
+CartesianInertial.naif_code = new_instancemethod(_ground_coordinate.CartesianInertial_naif_code, None, CartesianInertial)
 CartesianInertial.ci_to_cf_quat = new_instancemethod(_ground_coordinate.CartesianInertial_ci_to_cf_quat, None, CartesianInertial)
 CartesianInertial.create = new_instancemethod(_ground_coordinate.CartesianInertial_create, None, CartesianInertial)
 CartesianInertial.reference_surface_intersect_approximate = new_instancemethod(_ground_coordinate.CartesianInertial_reference_surface_intersect_approximate, None, CartesianInertial)
@@ -433,15 +453,6 @@ class CartesianFixed(GroundCoordinate):
         Convert to CartesianInertial. 
         """
         return _ground_coordinate.CartesianFixed_convert_to_ci(self, T)
-
-
-    def naif_code(self):
-        """
-
-        virtual int GeoCal::CartesianFixed::naif_code() const =0
-        Naif code for planet. 
-        """
-        return _ground_coordinate.CartesianFixed_naif_code(self)
 
 
     def create(self, P):
@@ -529,7 +540,6 @@ class CartesianFixed(GroundCoordinate):
 
     __swig_destroy__ = _ground_coordinate.delete_CartesianFixed
 CartesianFixed.convert_to_ci = new_instancemethod(_ground_coordinate.CartesianFixed_convert_to_ci, None, CartesianFixed)
-CartesianFixed.naif_code = new_instancemethod(_ground_coordinate.CartesianFixed_naif_code, None, CartesianFixed)
 CartesianFixed.create = new_instancemethod(_ground_coordinate.CartesianFixed_create, None, CartesianFixed)
 CartesianFixed.ci_to_cf = new_instancemethod(_ground_coordinate.CartesianFixed_ci_to_cf, None, CartesianFixed)
 CartesianFixed.cf_to_ci_with_vel = new_instancemethod(_ground_coordinate.CartesianFixed_cf_to_ci_with_vel, None, CartesianFixed)

@@ -99,6 +99,12 @@ public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const = 0;
 
 //-----------------------------------------------------------------------
+/// Naif code for planet
+//-----------------------------------------------------------------------
+
+  virtual int naif_code() const = 0;
+
+//-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
@@ -129,6 +135,12 @@ public:
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 
     const = 0;
 
+//-----------------------------------------------------------------------
+/// Naif code for planet
+//-----------------------------------------------------------------------
+
+  virtual int naif_code() const = 0;
+  
 //-----------------------------------------------------------------------
 /// Calculate matrix that can be used to convert CartesianFixed to
 /// CartesianInertial at the given Time. The matrix for going from

@@ -16,6 +16,8 @@ namespace GeoCal {
 
 class EciTodBurl : public CartesianInertial {
 public:
+  enum {EARTH_NAIF_CODE = 399};
+
 //-----------------------------------------------------------------------
 /// Default constructor, doesn't initialize position.
 //-----------------------------------------------------------------------
@@ -76,6 +78,8 @@ public:
 //-----------------------------------------------------------------------
 
   static double delta_ut1;
+
+  virtual int naif_code() const { return EARTH_NAIF_CODE; }
 private:
   friend class boost::serialization::access;
   template<class Archive>

@@ -55,11 +55,14 @@ public:
   static Time time_pgs(double pgs);
   static Time time_j2000(double j2000);
   static Time time_gps(double gps);
+  static Time time_gps(int week, double week_offset);
   static Time time_unix(double unix_time);
   static Time time_acs(double acs);
   %python_attribute(acs, double)
   %python_attribute(pgs, double)
   %python_attribute(gps, double)
+  %python_attribute(gps_week, int)
+  %python_attribute(gps_week_offset, double)
   %python_attribute(j2000, double)
   %python_attribute(et, double)
   static Time parse_time(const std::string Time_string);
@@ -101,11 +104,15 @@ class TimeWithDerivative : public GenericObject {
 public:
   TimeWithDerivative(const Time& T);
   TimeWithDerivative();
-  static TimeWithDerivative time_pgs(double pgs);
-  static TimeWithDerivative time_j2000(double j2000);
-  static TimeWithDerivative time_gps(double gps);
+  static TimeWithDerivative time_pgs(const AutoDerivative<double>& pgs);
+  static TimeWithDerivative time_j2000(const AutoDerivative<double>& j2000);
+  static TimeWithDerivative time_gps(const AutoDerivative<double>& gps);
+  static TimeWithDerivative time_gps(int week, const AutoDerivative<double>&
+				     week_offset);
   %python_attribute(pgs, AutoDerivative<double>)
   %python_attribute(gps, AutoDerivative<double>)
+  %python_attribute(gps_week, int)
+  %python_attribute(gps_week_offset, AutoDerivative<double>)
   %python_attribute(j2000, AutoDerivative<double>)
   %python_attribute(value, Time)
   %python_attribute(gradient, blitz::Array<double, 1>)

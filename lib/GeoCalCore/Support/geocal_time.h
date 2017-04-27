@@ -108,6 +108,21 @@ class Time : public TimeBase<double>, public Printable<Time>,
 {
 public:
 //-----------------------------------------------------------------------
+/// Give GPS week number. Note that older GPS units roll over at 1024
+/// (happened in 1999, will again in 2019). The number returned here
+/// does *not* roll over, so it can be > 1024. If you need to match an
+/// older GPS unit you may need to mod 1024 the value returned. 
+//-----------------------------------------------------------------------
+  
+  int gps_week() const {return (int) floor(gps() / (7.0 * 24 * 60 * 60));}
+
+//-----------------------------------------------------------------------
+/// Gives GPS offset to the gps_week.
+//-----------------------------------------------------------------------
+      
+  double gps_week_offset() const { return gps() - gps_week() * 7.0 * 24 * 60 * 60; }
+
+//-----------------------------------------------------------------------
 /// Return time from given PGS toolkit time (epoch of 1993-01-01).
 //-----------------------------------------------------------------------
   
@@ -132,6 +147,17 @@ public:
   
   static Time time_gps(double gps) {return time_pgs(gps - 409881608.0);}
 
+//-----------------------------------------------------------------------
+/// Often GPS time is reported as week number and seconds offset in
+/// that week. This alternative version of time_gps takes weeks and
+/// week offset. Note that older GPS units have the week number roll
+/// over at 1024, this happen in 1999 and the next roll over will be
+/// 2019. If you have data like that you need to just "know" to add
+/// 1024 or 2 * 1024.  Newer GPS units might not have this problem.
+//-----------------------------------------------------------------------
+
+  static Time time_gps(int week, double week_offset)
+  { return Time::time_gps(week * 7.0 * 24 * 60 * 60 + week_offset); }
   static Time time_et(double et);
   double et() const;
 
@@ -228,6 +254,21 @@ public:
   TimeWithDerivative() {}
 
 //-----------------------------------------------------------------------
+/// Give GPS week number. Note that older GPS units roll over at 1024
+/// (happened in 1999, will again in 2019). The number returned here
+/// does *not* roll over, so it can be > 1024. If you need to match an
+/// older GPS unit you may need to mod 1024 the value returned. 
+//-----------------------------------------------------------------------
+  
+  int gps_week() const {return (int) floor(gps().value() / (7.0 * 24 * 60 * 60));}
+
+//-----------------------------------------------------------------------
+/// Gives GPS offset to the gps_week.
+//-----------------------------------------------------------------------
+      
+  AutoDerivative<double> gps_week_offset() const { return gps() - gps_week() * 7.0 * 24 * 60 * 60; }
+
+//-----------------------------------------------------------------------
 /// Return time from given PGS toolkit time (epoch of 1993-01-01).
 //-----------------------------------------------------------------------
   
@@ -255,6 +296,19 @@ public:
   {return time_pgs(gps - 409881608.0);}
 
 //-----------------------------------------------------------------------
+/// Often GPS time is reported as week number and seconds offset in
+/// that week. This alternative version of time_gps takes weeks and
+/// week offset. Note that older GPS units have the week number roll
+/// over at 1024, this happen in 1999 and the next roll over will be
+/// 2019. If you have data like that you need to just "know" to add
+/// 1024 or 2 * 1024.  Newer GPS units might not have this problem.
+//-----------------------------------------------------------------------
+
+  static TimeWithDerivative time_gps(int week,
+				     const AutoDerivative<double>& week_offset)
+  { return TimeWithDerivative::time_gps(week * 7.0 * 24 * 60 * 60 + week_offset); }
+
+  //-----------------------------------------------------------------------
 /// Strip off gradient to just give a time.
 //-----------------------------------------------------------------------
 

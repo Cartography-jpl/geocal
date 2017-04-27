@@ -141,7 +141,7 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
   // We may need a more sophisticated way of handling this, but for
   // now just search for "mars" in the GCS name
   if(gname.find("mars") != std::string::npos) {
-    naif_code_ = MarsConstant::naif_code();
+    naif_code_ = PlanetConstant::MARS_NAIF_CODE;
     og = 0;
     og_cf = ogr_mars_cf.get();
   } else {
@@ -482,11 +482,7 @@ boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
     throw Exception("Call to OGR Transform failed");
   if(ogr().naif_code() == Ecr::EARTH_NAIF_CODE)
     return boost::shared_ptr<CartesianFixed>(new Ecr(xr, yr, zr));
-  if(ogr().naif_code() == MarsConstant::naif_code())
-    return boost::shared_ptr<CartesianFixed>(new MarsFixed(xr, yr, zr));
-  Exception e;
-  e << "Don't recognize the naif code " << ogr().naif_code();
-  throw e;
+  return boost::shared_ptr<CartesianFixed>(new PlanetFixed(xr, yr, zr, ogr().naif_code()));
 }
 
 //-----------------------------------------------------------------------

@@ -3,7 +3,7 @@
 #include "printable.h"
 #include "image_coordinate.h"
 #include "ground_coordinate.h"
-#include "geodetic.h"
+#include "coordinate_converter.h"
 #include "geocal_exception.h"
 #include "dem.h"
 #include "geocal_gsl_matrix.h"
@@ -180,6 +180,15 @@ public:
   
   boost::array<bool, 20> fit_sample_numerator;
 
+//-----------------------------------------------------------------------
+/// Type of coordinate we are generating (e.g., support
+/// MarsPlanetocentric). If this is null, then we assume earth and use
+/// Geodetic coordinates.
+//-----------------------------------------------------------------------
+
+  boost::shared_ptr<CoordinateConverter> coordinate_converter;
+  static boost::shared_ptr<CoordinateConverter> default_coordinate_converter;
+  
   void print(std::ostream& Os) const;
 
   void fit_coarse(const std::vector<boost::shared_ptr<GroundCoordinate> >& Gc,
@@ -197,8 +206,8 @@ public:
 	       const std::vector<double>& Latitude,
 	       const std::vector<double>& Longitude,
 	       const std::vector<double>& Height);
-  Geodetic ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
-  Geodetic ground_coordinate(const ImageCoordinate& Ic, double Height) const;
+  boost::shared_ptr<GroundCoordinate> ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
+  boost::shared_ptr<GroundCoordinate> ground_coordinate(const ImageCoordinate& Ic, double Height) const;
   static Rpc generate_rpc(const ImageGroundConnection& Igc,
 			  double Min_height, double Max_height,
 			  int Nlat = 20, int Nlon = 20, int Nheight = 20,
@@ -344,6 +353,13 @@ public:
   Rpc rpc_type_a() const;
   Rpc rpc_type_b() const;
 private:
+//-----------------------------------------------------------------------
+/// Return coordinate_converter or default
+//-----------------------------------------------------------------------
+  boost::shared_ptr<CoordinateConverter> coor_conv_or_default() const
+  { return (coordinate_converter ? coordinate_converter : default_coordinate_converter);
+  }
+
 //-----------------------------------------------------------------------
 /// Check that RPC is valid
 //-----------------------------------------------------------------------
@@ -570,5 +586,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Rpc);
+GEOCAL_CLASS_VERSION(Rpc, 1);
 #endif
 

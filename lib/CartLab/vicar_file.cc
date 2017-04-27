@@ -647,6 +647,10 @@ Rpc VicarFile::rpc() const
     res.rpc_type = Rpc::RPC_A;
   else
     throw MetadataMissing("Don't recognize value of NITF_CETAG");
+  if(has_label("NAIF_CODE", g)) {
+    int naif_code = label<int>("NAIF_CODE", g);
+    std::cerr << "Faking NAIF CODE " << naif_code << "\n";
+  }
   res.error_bias = atof(label<string>("RPC_FIELD2",  g).c_str());
   res.error_random = atof(label<string>("RPC_FIELD3",  g).c_str());
   res.line_offset = atof(label<string>("RPC_FIELD4",  g).c_str());
@@ -703,6 +707,13 @@ void VicarFile::rpc(const Rpc& V)
     label_set("NITF_CETAG", "RPC00A", "GEOTIFF");
   else 
     throw Exception("Unrecognized rpc type");
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(V.coordinate_converter) {
+    std::cerr << "Setting naif_code\n";
+    naif_code = V.coordinate_converter->naif_code();
+  }
+  if(naif_code != CoordinateConverter::EARTH_NAIF_CODE)
+    label_set("NAIF_CODE", naif_code, "GEOTIFF");
   label_set("RPC_FIELD1", "1", "GEOTIFF");
   label_set("RPC_FIELD2", to_s1(V.error_bias), "GEOTIFF");
   label_set("RPC_FIELD3", to_s1(V.error_random), "GEOTIFF");
@@ -731,18 +742,22 @@ void VicarFile::rpc(const Rpc& V)
   // VICAR expects NITF corners when it finds an RPC. We estimiate this
   // by finding the corners at the height offset of the RPC.
   SimpleDem d(V.height_offset);
-  Geodetic g1 = V.ground_coordinate(ImageCoordinate(0, 0), d);
-  Geodetic g2 = V.ground_coordinate(ImageCoordinate(0, number_sample() - 1), d);
-  Geodetic g3 = V.ground_coordinate(ImageCoordinate(number_line() - 1, number_sample() - 1), d);
-  Geodetic g4 = V.ground_coordinate(ImageCoordinate(number_line() - 1, 0), d);
-  label_set("NITF_CORNERLAT1", to_s2(g1.latitude()), "GEOTIFF");
-  label_set("NITF_CORNERLON1", to_s2(g1.longitude()), "GEOTIFF");
-  label_set("NITF_CORNERLAT2", to_s2(g2.latitude()), "GEOTIFF");
-  label_set("NITF_CORNERLON2", to_s2(g2.longitude()), "GEOTIFF");
-  label_set("NITF_CORNERLAT3", to_s2(g3.latitude()), "GEOTIFF");
-  label_set("NITF_CORNERLON3", to_s2(g3.longitude()), "GEOTIFF");
-  label_set("NITF_CORNERLAT4", to_s2(g4.latitude()), "GEOTIFF");
-  label_set("NITF_CORNERLON4", to_s2(g4.longitude()), "GEOTIFF");
+  boost::shared_ptr<GroundCoordinate> g1 =
+    V.ground_coordinate(ImageCoordinate(0, 0), d);
+  boost::shared_ptr<GroundCoordinate> g2 =
+    V.ground_coordinate(ImageCoordinate(0, number_sample() - 1), d);
+  boost::shared_ptr<GroundCoordinate> g3 =
+    V.ground_coordinate(ImageCoordinate(number_line() - 1, number_sample() - 1), d);
+  boost::shared_ptr<GroundCoordinate> g4 =
+    V.ground_coordinate(ImageCoordinate(number_line() - 1, 0), d);
+  label_set("NITF_CORNERLAT1", to_s2(g1->latitude()), "GEOTIFF");
+  label_set("NITF_CORNERLON1", to_s2(g1->longitude()), "GEOTIFF");
+  label_set("NITF_CORNERLAT2", to_s2(g2->latitude()), "GEOTIFF");
+  label_set("NITF_CORNERLON2", to_s2(g2->longitude()), "GEOTIFF");
+  label_set("NITF_CORNERLAT3", to_s2(g3->latitude()), "GEOTIFF");
+  label_set("NITF_CORNERLON3", to_s2(g3->longitude()), "GEOTIFF");
+  label_set("NITF_CORNERLAT4", to_s2(g4->latitude()), "GEOTIFF");
+  label_set("NITF_CORNERLON4", to_s2(g4->longitude()), "GEOTIFF");
 }
 
 //-----------------------------------------------------------------------

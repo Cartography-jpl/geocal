@@ -709,6 +709,13 @@ void SpicePlanetConstant::calc_data() const
 {
   SpiceHelper::spice_setup();
 #ifdef HAVE_SPICE
+  char name_buf[100];
+  SpiceBoolean found;
+  bodc2n_c(naif_code, 100, name_buf, &found);
+  if(found)
+    name = std::string(name_buf);
+  else
+    name = "Unknown";
   std::string bname = boost::lexical_cast<std::string>(naif_code);
   int dim;
   double values[3];

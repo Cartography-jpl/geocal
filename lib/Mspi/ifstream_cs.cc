@@ -19,4 +19,6 @@ IfstreamCs::IfstreamCs(const std::string& Fname, const std::string&
   if(boost::regex_search(Fname, boost::regex("\\.gz$")))
     sb.push(boost::iostreams::gzip_decompressor());
   sb.push(f);
+  // Set initial state to whatever underlying file has
+  setstate(f.rdstate());
 }

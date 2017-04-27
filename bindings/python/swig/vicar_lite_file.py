@@ -347,6 +347,34 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
         return self._v_number_band()
 
 
+    def _v_number_line_binary(self):
+        """
+
+        int GeoCal::VicarLiteFile::number_line_binary() const
+        Number of lines of binary data before the start of the image. 
+        """
+        return _vicar_lite_file.VicarLiteFile__v_number_line_binary(self)
+
+
+    @property
+    def number_line_binary(self):
+        return self._v_number_line_binary()
+
+
+    def _v_number_byte_binary(self):
+        """
+
+        int GeoCal::VicarLiteFile::number_byte_binary() const
+        Number of bytes of binary data before the start of each line. 
+        """
+        return _vicar_lite_file.VicarLiteFile__v_number_byte_binary(self)
+
+
+    @property
+    def number_byte_binary(self):
+        return self._v_number_byte_binary()
+
+
     def _v_type(self):
         """
 
@@ -433,6 +461,8 @@ VicarLiteFile._v_file_name = new_instancemethod(_vicar_lite_file.VicarLiteFile__
 VicarLiteFile._v_number_line = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_number_line, None, VicarLiteFile)
 VicarLiteFile._v_number_sample = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_number_sample, None, VicarLiteFile)
 VicarLiteFile._v_number_band = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_number_band, None, VicarLiteFile)
+VicarLiteFile._v_number_line_binary = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_number_line_binary, None, VicarLiteFile)
+VicarLiteFile._v_number_byte_binary = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_number_byte_binary, None, VicarLiteFile)
 VicarLiteFile._v_type = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_type, None, VicarLiteFile)
 VicarLiteFile._v_map_info = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_map_info, None, VicarLiteFile)
 VicarLiteFile._v_rpc = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_rpc, None, VicarLiteFile)

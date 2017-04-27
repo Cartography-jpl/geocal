@@ -2243,7 +2243,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlibnitf@/nitf_file_test.py \
 	@srcpythonlibnitf@/nitf_image_test.py \
 	@srcpythonlibnitf@/nitf_image_subheader_test.py \
-	@srcpythonlibnitf@/nitf_tre_test.py @docpythonsrc@ \
+	@srcpythonlibnitf@/nitf_tre_test.py \
+	@srcpythonlibnitf@/nitf_tre_pixqla_test.py \
+	@srcpythonlibnitf@/nitf_tre_engrda_test.py \
+	@srcpythonlibnitf@/nitf_tre_sensrb_test.py @docpythonsrc@ \
 	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
 	@testsupportsrc@/test_support.py \
@@ -3116,7 +3119,11 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_tre_csde.py \
 	@srcpythonlibnitf@/nitf_tre_geosde.py \
 	@srcpythonlibnitf@/nitf_tre_rpc.py \
-	@srcpythonlibnitf@/nitf_tre_piae.py
+	@srcpythonlibnitf@/nitf_tre_piae.py \
+	@srcpythonlibnitf@/nitf_tre_pixqla.py \
+	@srcpythonlibnitf@/nitf_tre_histoa.py \
+	@srcpythonlibnitf@/nitf_tre_engrda.py \
+	@srcpythonlibnitf@/nitf_tre_sensrb.py
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed

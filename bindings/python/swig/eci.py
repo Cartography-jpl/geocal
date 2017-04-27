@@ -195,15 +195,10 @@ class Eci(geocal_swig.ground_coordinate.CartesianInertial):
     C++ includes: eci.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        """
-
-        GeoCal::Eci::Eci(const boost::array< double, 3 > &Pos)
-        Create an Eci with the given position in meters. 
-        """
-        _eci.Eci_swiginit(self, _eci.new_Eci(*args))
 
     def reference_surface_intersect_approximate(self, Cl, Height_reference_surface=0):
         """

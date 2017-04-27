@@ -64,6 +64,8 @@ public:
   const CartesianInertialLookVector& Cl, double Height_reference_surface = 0) 
   const;
 
+  virtual int naif_code() const { return EARTH_NAIF_CODE; }
+
 //-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------

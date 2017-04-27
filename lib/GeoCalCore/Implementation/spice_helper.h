@@ -141,7 +141,7 @@ public:
 
 class SpicePlanetConstant {
 public:
-  SpicePlanetConstant(int Naif_code) 
+  SpicePlanetConstant(int Naif_code=-1) 
   : naif_code(Naif_code), filled_in(false) {}
 
 //-----------------------------------------------------------------------
@@ -165,10 +165,16 @@ public:
   double planet_esq() const
   { fill_in_data(); return esq; }
 
+//-----------------------------------------------------------------------
+/// Planet name.
+//-----------------------------------------------------------------------
+  std::string planet_name() const
+  { fill_in_data(); return name;}
 private:
   int naif_code;
   mutable bool filled_in;
   mutable double a, b, esq;
+  mutable std::string name;
   void fill_in_data() const 
   {
     if(!filled_in) {

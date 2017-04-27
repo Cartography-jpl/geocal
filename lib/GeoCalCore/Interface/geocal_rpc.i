@@ -13,42 +13,12 @@
 %import "ground_coordinate.i"
 %import "image_coordinate.i"
 %import "image_ground_connection.i"
-%import "geodetic.i"
+%import "ground_coordinate.i"
 %import "raster_image.i"
 %import "raster_image_multi_band.i"
+%import "coordinate_converter.i"
 %geocal_shared_ptr(GeoCal::Rpc);
 
-%pythoncode {
-def _new_rpc(cls, version, is_rpc_a, error_bias, error_random, height_offset, 
-             height_scale, latitude_offset,
-             latitude_scale, longitude_offset, longitude_scale,
-             line_offset, line_scale, sample_offset, sample_scale,
-             line_denominator, line_numerator, sample_denominator,
-             sample_numerator, fit_line_numerator, fit_sample_numerator):
-    if(cls.pickle_format_version() != version):
-      raise RuntimeException("Class is expecting a pickled object with version number %d, but we found %d" % (cls.pickle_format_version(), version))
-    rpc = Rpc()
-    rpc.rpc_type = Rpc.RPC_A if(is_rpc_a) else Rpc.RPC_B
-    rpc.error_bias = error_bias
-    rpc.error_random = error_random				
-    rpc.height_offset = height_offset
-    rpc.height_scale = height_scale
-    rpc.latitude_offset = latitude_offset
-    rpc.latitude_scale = latitude_scale
-    rpc.longitude_offset = longitude_offset
-    rpc.longitude_scale = longitude_scale
-    rpc.line_offset = line_offset
-    rpc.line_scale = line_scale
-    rpc.sample_offset = sample_offset
-    rpc.sample_scale = sample_scale
-    rpc.line_denominator = line_denominator
-    rpc.line_numerator = line_numerator
-    rpc.sample_denominator = sample_denominator
-    rpc.sample_numerator = sample_numerator
-    rpc.fit_line_numerator = fit_line_numerator
-    rpc.fit_sample_numerator = fit_sample_numerator
-    return rpc
-}
 namespace GeoCal {
   class RasterImage;
   class ImageGroundConnection;
@@ -78,6 +48,7 @@ namespace GeoCal {
     %python_attribute_boost_array(sample_numerator, double, 20);
     %python_attribute_boost_array(fit_line_numerator, bool, 20);
     %python_attribute_boost_array(fit_sample_numerator, bool, 20);
+    boost::shared_ptr<CoordinateConverter> coordinate_converter;
     double resolution_meter(const Dem& D) const;
     void fit(const std::vector<boost::shared_ptr<GroundCoordinate> >& Gc,
 	   const std::vector<ImageCoordinate>& Ic, 
@@ -98,8 +69,8 @@ namespace GeoCal {
 			    bool Skip_masked_point = false,
 			    bool Ignore_error = false
 			    );
-    Geodetic ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
-    Geodetic ground_coordinate(const ImageCoordinate& Ic, double Height) const;
+    boost::shared_ptr<GroundCoordinate> ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
+    boost::shared_ptr<GroundCoordinate> ground_coordinate(const ImageCoordinate& Ic, double Height) const;
     ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const;
     ImageCoordinate image_coordinate(double Latitude, double Longitude, 
 	 			     double Height_ellipsoid) const;

@@ -12,6 +12,7 @@ namespace GeoCal {
 
 class Geodetic : public GroundCoordinate {
 public:
+  enum {EARTH_NAIF_CODE = 399};
   Geodetic(const GroundCoordinate& Gc);
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   virtual void print(std::ostream& Os) const;
@@ -65,6 +66,8 @@ public:
 //-----------------------------------------------------------------------
 
   virtual double longitude() const {return lon_;}
+
+  virtual int naif_code() const { return EARTH_NAIF_CODE; }
 private:
   double lat_;			///< Latitude, in degrees.
   double lon_;			///< Longitude, in degrees.
@@ -84,6 +87,7 @@ private:
 
 class Geocentric : public GroundCoordinate {
 public:
+  enum {EARTH_NAIF_CODE = 399};
   Geocentric(const GroundCoordinate& Gc);
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   virtual void print(std::ostream& Os) const;
@@ -130,6 +134,8 @@ public:
 //-----------------------------------------------------------------------
 
   virtual double longitude() const {return lon_;}
+
+  virtual int naif_code() const { return EARTH_NAIF_CODE; }
 private:
   double earth_radius(double Latitude) const;
   double lat_;			///< Latitude, in degrees.

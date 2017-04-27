@@ -203,10 +203,10 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     class defining the interface to a general coordinate convertor.
 
     This class allows conversion to and from whatever coordinate system
-    has been selected. The meaning of the X, Y, and Height value passed in
-    and out of the functions depends on what concrete specialization of
-    this class is used. For uses where the ambiguity isn't acceptable, it
-    is not appropriate to use this class (i.e., the various Strategies of
+    has been selected. The meaning of the X, Y, and Z value passed in and
+    out of the functions depends on what concrete specialization of this
+    class is used. For uses where the ambiguity isn't acceptable, it is
+    not appropriate to use this class (i.e., the various Strategies of
     coordinate conversions aren't really exchangeable then).
 
     C++ includes: coordinate_converter.h 
@@ -216,30 +216,54 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    EARTH_NAIF_CODE = _coordinate_converter.CoordinateConverter_EARTH_NAIF_CODE
 
-    def convert_from_coordinate(self, X, Y, Height=0):
+    def convert_from_coordinate(self, X, Y, Z=0):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::CoordinateConverter::convert_from_coordinate(double X, double Y, double Height=0) const =0
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::CoordinateConverter::convert_from_coordinate(double X, double Y, double Z=0) const =0
         This converts from a particular coordinate system, returning a ground
         coordinate for the given coordinates.
 
-        The specific meaning and units of X, Y, and height depend on which
+        The specific meaning and units of X, Y, and Z depend on which
         coordinates system is used by a specialization of this class. 
         """
-        return _coordinate_converter.CoordinateConverter_convert_from_coordinate(self, X, Y, Height)
+        return _coordinate_converter.CoordinateConverter_convert_from_coordinate(self, X, Y, Z)
 
 
     def convert_to_coordinate(self, Gc):
         """
 
-        virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Height) const =0
+        virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Z) const =0
         Specialization that converts from Geodetic.
 
         Because much of our data is in Geodetic coordinates this is an
         important performance specialization. 
         """
         return _coordinate_converter.CoordinateConverter_convert_to_coordinate(self, Gc)
+
+
+    def _v_naif_code(self):
+        """
+
+        virtual int GeoCal::CoordinateConverter::naif_code() const
+        Naif code for planet. 
+        """
+        return _coordinate_converter.CoordinateConverter__v_naif_code(self)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+
+    def create(self, Gc):
+        """
+
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::CoordinateConverter::create(const GroundCoordinate &Gc) const
+        Convert and create a coordinate. 
+        """
+        return _coordinate_converter.CoordinateConverter_create(self, Gc)
 
 
     def is_same(self, Conv):
@@ -253,6 +277,8 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     __swig_destroy__ = _coordinate_converter.delete_CoordinateConverter
 CoordinateConverter.convert_from_coordinate = new_instancemethod(_coordinate_converter.CoordinateConverter_convert_from_coordinate, None, CoordinateConverter)
 CoordinateConverter.convert_to_coordinate = new_instancemethod(_coordinate_converter.CoordinateConverter_convert_to_coordinate, None, CoordinateConverter)
+CoordinateConverter._v_naif_code = new_instancemethod(_coordinate_converter.CoordinateConverter__v_naif_code, None, CoordinateConverter)
+CoordinateConverter.create = new_instancemethod(_coordinate_converter.CoordinateConverter_create, None, CoordinateConverter)
 CoordinateConverter.is_same = new_instancemethod(_coordinate_converter.CoordinateConverter_is_same, None, CoordinateConverter)
 CoordinateConverter.__str__ = new_instancemethod(_coordinate_converter.CoordinateConverter___str__, None, CoordinateConverter)
 CoordinateConverter_swigregister = _coordinate_converter.CoordinateConverter_swigregister
@@ -268,16 +294,16 @@ class GeodeticConverter(CoordinateConverter):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def convert_from_coordinate(self, X, Y, Height=0):
+    def convert_from_coordinate(self, X, Y, Z=0):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::GeodeticConverter::convert_from_coordinate(double X, double Y, double Height=0) const
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::GeodeticConverter::convert_from_coordinate(double X, double Y, double Z=0) const
         Convert to geodetic.
 
-        X and Y are longitude and latitude in degrees, and height is in
+        X and Y are longitude and latitude in degrees, and Z is height is in
         meters. 
         """
-        return _coordinate_converter.GeodeticConverter_convert_from_coordinate(self, X, Y, Height)
+        return _coordinate_converter.GeodeticConverter_convert_from_coordinate(self, X, Y, Z)
 
 
     def __reduce__(self):

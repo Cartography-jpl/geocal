@@ -8057,6 +8057,7 @@ SWIG_init(void) {
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Ecr), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Ecr > > ("boost::shared_ptr< GeoCal::Ecr > *"));
   
+  SWIG_Python_SetConstant(d, "Ecr_EARTH_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::Ecr::EARTH_NAIF_CODE)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

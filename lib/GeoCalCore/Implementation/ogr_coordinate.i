@@ -51,6 +51,7 @@ public:
   double x;
   double y;
   double z;
+  virtual int naif_code() const;
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
   %pickle_serialization();
 };

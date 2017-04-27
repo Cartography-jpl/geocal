@@ -57,6 +57,10 @@ void MspiConfigFile::add_file(const std::string& Fname)
   typedef std::map<std::string, std::string>::value_type itype;
   BOOST_FOREACH(itype i, key_to_value_new)
     key_to_value[i.first] = i.second;
+  if(key_to_value.count("__file_list") == 0)
+    key_to_value["__file_list"] = Fname;
+  else
+    key_to_value["__file_list"] = key_to_value["__file_list"] + ", " + Fname;
 }
 
 //-----------------------------------------------------------------------
@@ -132,8 +136,14 @@ MspiConfigTable::MspiConfigTable(const MspiConfigFile& Config,
 const std::string& MspiConfigFile::value_string
 (const std::string& Keyword) const
 {
-  if(!have_key(Keyword))
-    throw Exception("The keyword is not found in the file");
+  if(!have_key(Keyword)) {
+    Exception e("The keyword is not found in the MspiConfigFile\n");
+    if(key_to_value.count("__file_list") == 0)
+      e << "No File\n";
+    else
+      e << "From File(s): " << key_to_value.find("__file_list")->second;
+    throw e;
+  }
   return key_to_value.find(Keyword)->second;
 }
 

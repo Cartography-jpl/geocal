@@ -31,7 +31,7 @@ desc = [['te', "", 2, str],
         ['txtfmt', "", 3, str],
         ['txshdl', "", 5, int],
         ['txsofl', "", 3, int, {'condition' : 'f.txshdl != 0'}],
-        ['txshd', "", 'txshdl', None, {'field_value_class' : FieldData,
+        ['txshd', "", 'f.txshdl', None, {'field_value_class' : FieldData,
                                    'size_offset' : 3}],
         ]
 

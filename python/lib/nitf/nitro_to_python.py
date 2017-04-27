@@ -60,7 +60,10 @@ desc = ["%s",
 ''' % (tre_name, tre_name, tre_name)
 
 cond = ""
-for ln in re.split(',?\s*\},?', desc):
+for ln in re.split(',?\s*\},', desc):
+    print("------------------")
+    print(ln)
+    print("------------------")
     ln = re.sub('\s*{','',ln)
     if(ln[0:4]=="NITF"):
         typ, sz, d, v = re.split('\s*"?,\s*"?', ln)

@@ -55,7 +55,7 @@ desc = [['im', "", 2, str],
          ['nluts', "", 1, int],
          ['nelut', "", 5, int, {'condition' : "f.nluts[i1] != 0"}],
          [["loop", "f.nluts[i1]"],
-          ['lutd', "", 'nelut', None, {'field_value_class' : FieldData}]
+          ['lutd', "", 'f.nelut[i1]', None, {'field_value_class' : FieldData}]
          ],
         ],
         ['isync', "", 1, int],
@@ -71,11 +71,11 @@ desc = [['im', "", 2, str],
         ['imag', "", 4, str, {'default' : '1.0'}],
         ['udidl', "", 5, int],
         ['udofl', "", 3, int, {'condition' : 'f.udidl != 0'}],
-        ['udid', "", 'udidl', None, {'field_value_class' : FieldData,
+        ['udid', "", 'f.udidl', None, {'field_value_class' : FieldData,
                                      'size_offset' : 3}],
         ['ixshdl', "", 5, int],
         ['ixofl', "", 3, int, {'condition' : 'f.ixshdl != 0'}],
-        ['ixshd', "", 'ixshdl', None, {'field_value_class' : FieldData,
+        ['ixshd', "", 'f.ixshdl', None, {'field_value_class' : FieldData,
                                    'size_offset' : 3}]
 ]
 

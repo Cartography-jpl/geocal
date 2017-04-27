@@ -60,12 +60,12 @@ desc = [['fhdr', "", 4, str],
          ['lre', "", 7, int]],
         ['udhdl', "", 5, int],
         ["udhofl", "", 3, int, {"condition" : "f.udhdl != 0"}],
-        ['udhd', "", 'udhdl', None, {'field_value_class' : FieldData,
+        ['udhd', "", 'f.udhdl', None, {'field_value_class' : FieldData,
                                      'size_offset' : 3}],
         ['xhdl', "", 5, int],
         ["xhdlofl", "", 3, int, {"condition" : "f.xhdl != 0"}],
-        ['xhd', "", 'xhdl', None, {'field_value_class' : FieldData,
-                               'size_offset' : 3}],
+        ['xhd', "", 'f.xhdl', None, {'field_value_class' : FieldData,
+                                     'size_offset' : 3}],
         ]
 
 NitfFileHeader = create_nitf_field_structure("NitfFileHeader", desc, hlp=hlp)

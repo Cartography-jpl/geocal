@@ -12,6 +12,8 @@ geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_rpc.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_piae.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_pixqla.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_histoa.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_engrda.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_sensrb.py
 EXTRA_DIST+=@srcpythonlibnitf@/__init__.py
 EXTRA_DIST+=@srcpythonlibnitf@/basic_nitf_example.py
 EXTRA_DIST+=@srcpythonlibnitf@/README
@@ -22,6 +24,8 @@ EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_subheader_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_pixqla_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_engrda_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_sensrb_test.py
 
 
 

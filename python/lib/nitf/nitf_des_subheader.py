@@ -28,7 +28,7 @@ desc = [['de', "", 2, str],
         ['desoflw', "", 6, str, {"condition" : "f.desid == 'TRE_OVERFLOW'"}],
         ['desitem', "", 3, int, {"condition" : "f.desid == 'TRE_OVERFLOW'"}],
         ['desshl', "", 4, int],
-        ['desshf', "", 'desshl', None, {'field_value_class' : FieldData}],
+        ['desshf', "", 'f.desshl', None, {'field_value_class' : FieldData}],
 ]
 NitfDesSubheader = create_nitf_field_structure("NitfDesSubheader", desc, hlp=hlp)
 

@@ -218,7 +218,7 @@ class _FieldValue(object):
         if(not self.check_condition(parent_obj, key)):
             return
         if(DEBUG and self.field_name is not None):
-            print("Reading: ", self.field_name)
+            print("Reading: ", self.field_name, " bytes: ", self.size)
         t = fh.read(self.size)
         if(len(t) != self.size):
             raise RuntimeError("Not enough bytes left to read %d bytes for field %s" % (self.size, self.field_name))
@@ -361,45 +361,126 @@ class _FieldStruct(object):
 
 class FieldData(object):
     '''Class to handle generic variable size data. We might add more
-    specific classes, but for now just have this one generic one.'''
+    specific classes, but for now just have this one generic one.
+
+    There is size_field that we use to know what the field size is. There
+    are two kinds of behavior when we set a value:
+
+    1. We want to take the size of the value, and use that to fill in 
+       the size_field. This is useful for example for putting TREs in a
+       image header, we don't know what the size is ahead of time and just 
+       want to set this.
+    2. We know the size, want to hold this fixed, and trigger an error if
+       we try to set a value other than this size. This is useful for
+       things that are represented as binary data in a TRE, but where the
+       size is know ahead of time (e.g., TreENGRDA).
+
+    Note further that in some cases, the size is really the size of the
+    data plus something else. For example, in the image header the size
+    of the TRE includes both the TRE and an additional field indicating
+    if we have overflow. You can supply 'size_offset' option to specify
+    an offset that should be applied to the size.
+    '''
     def __init__(self, field_name, size_field, ty, loop, options):
         '''Note options can contains 'size_offset' to give the offset in
-        the size variable.'''
+        the size variable, and 'size_not_updated' which says to check the
+        size of data written rather than updating size_field to whatever
+        we have set'''
         self.field_name = field_name
         self.loop = loop
+        self.condition = options.get("condition", None)
         self.size_offset = options.get("size_offset", 0)
+        self.size_not_updated = options.get("size_not_updated", False)
         # This isn't exactly the size. Rather it is the expression that
         # we either use to read or set the size, e.g., "ixshdl". Note
         # that in standard NITF bizarreness this isn't actually the size,
         # but rather size_offset + the size
         self.size_field = size_field
+    def check_condition(self, parent_obj, key):
+        '''Evaluate the condition (if present) and return False if it isn't
+        met, True if it is or if there is no condition'''
+        if(self.condition is None):
+            return True
+        f = parent_obj
+        if(len(key) > 0):
+            i1 = key[0]
+        if(len(key) > 1):
+            i2 = key[1]
+        if(DEBUG):
+            print("Condition: " + self.condition)
+            print("eval: " + str(eval(self.condition)))
+        return eval(self.condition)
     def value(self, parent_obj):
         if(self.field_name not in parent_obj.value):
             parent_obj.value[self.field_name] = defaultdict(lambda : b'')
         return parent_obj.value[self.field_name]
     def get(self,parent_obj,key):
+        if(self.loop is not None):
+            self.loop.check_index(parent_obj, key)
+        if(not self.check_condition(parent_obj, key)):
+            return None
         return self.value(parent_obj)[key]
     def set(self,parent_obj,key,v):
+        if(self.loop is not None):
+            self.loop.check_index(parent_obj, key)
+        if(not self.check_condition(parent_obj, key)):
+            raise RuntimeError("Can't set value for field %s because the condition '%s' isn't met" % (self.field_name, self.condition))
         self.value(parent_obj)[key] = v
+        f = parent_obj
         if(len(key) > 0):
-            raise RuntimeError("Need key support here")
-        if(len(v) == 0):
-            setattr(parent_obj, self.size_field, 0)
+            i1 = key[0]
+        if(len(key) > 1):
+            i2 = key[1]
+        if(self.size_not_updated):
+            sz = eval(self.size_field)
+            if(sz != 0):
+                sz -= self.size_offset
+            if(len(v) != sz):
+                raise RuntimeError("FieldData was expected to be exactly %d bytes, but data that we tried to set was instead %d bytes" % (sz, len(v)))
         else:
-            setattr(parent_obj, self.size_field, len(v) +
-                    self.size_offset)
+            if(len(v) == 0):
+                exec("%s = 0" % self.size_field)
+            else:
+                exec("%s = %d" % (self.size_field, len(v) +
+                                  self.size_offset))
     def write_to_file(self, parent_obj, key, fh):
+        if(self.loop is not None):
+            self.loop.check_index(parent_obj, key)
+        if(not self.check_condition(parent_obj, key)):
+            raise RuntimeError("Can't set value for field %s because the condition '%s' isn't met" % (self.field_name, self.condition))
+        # Check that size is still correct. It is possible a value was set,
+        # and then we updated the size field without updating data.
+        if(self.size_not_updated):
+            f = parent_obj
+            if(len(key) > 0):
+                i1 = key[0]
+            if(len(key) > 1):
+                i2 = key[1]
+            sz = eval(self.size_field)
+            if(sz != 0):
+                sz -= self.size_offset
+            lndata = len(self.value(parent_obj)[key])
+            if(lndata != sz):
+                raise RuntimeError("FieldData was expected to be exactly %d bytes, but data was instead %d bytes" % (sz, lndata))
+        
         if(len(self.value(parent_obj)[key]) == 0):
             return
         parent_obj.fh_loc[self.field_name][key] = fh.tell()
+        if(DEBUG):
+            print("Writing Field Data: ", self.field_name, self.value(parent_obj)[key])
         fh.write(self.value(parent_obj)[key])
     def read_from_file(self, parent_obj, key, fh,nitf_literal=False):
+        f = parent_obj
         if(len(key) > 0):
-            raise RuntimeError("Need key support here")
-        sz = getattr(parent_obj, self.size_field)
+            i1 = key[0]
+        if(len(key) > 1):
+            i2 = key[1]
+        sz = eval(self.size_field)
         if(sz == 0):
             self.value(parent_obj)[key] = b''
             return
+        if(DEBUG and self.field_name is not None):
+            print("Reading: ", self.field_name, " bytes: ", sz - self.size_offset)
         self.value(parent_obj)[key] = fh.read(sz - self.size_offset)
     def get_print(self, parent_obj,key):
         t = self.get(parent_obj,key)

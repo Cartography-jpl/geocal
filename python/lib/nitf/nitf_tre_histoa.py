@@ -1,7 +1,7 @@
 from .nitf_field import *
 from .nitf_tre import *
 
-hlp = '''This is the HISTOA TRE, blah.
+hlp = '''This is the HISTOA TRE, History version A.
 
 The field names can be pretty cryptic, but are documented in detail in
 the NITF TRE documentation (STDI-0002 V4.0, available at
@@ -10,7 +10,7 @@ http://www.gwg.nga.mil/ntb/baseline/docs/stdi0002).
 There is a table in the main body on page vii that gives the a pointer for
 where in the document a particular TRE is defined.
 
-HISTOA is documented at blah.
+HISTOA is documented at L-10.
 '''
 desc = ["HISTOA",
         ["systype", "System Type", 20, str],

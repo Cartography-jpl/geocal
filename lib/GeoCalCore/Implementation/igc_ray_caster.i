@@ -18,7 +18,8 @@ public:
 	       int Number_integration_step = 2, double Resolution = 100,
 	       double Max_height = 10e3,
 	       int Start_sample = 0,
-	       int Number_sample = -1
+	       int Number_sample = -1,
+	       bool Include_path_distance = false
 	       );
   virtual blitz::Array<double, 6> next_position();
   %python_attribute(start_sample, int);

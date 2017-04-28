@@ -17,6 +17,9 @@ inline double sqr(double x) { return x * x; }
 /// For larger cameras, it might be more convenient to pass in start
 /// sample and number of samples to process, the default is to do the
 /// full camera.
+///
+/// If you have Include_path_distance set to true, then we return an
+/// extra entry in the result array that is the path distance.
 //-----------------------------------------------------------------------
 
 IgcRayCaster::IgcRayCaster
@@ -27,7 +30,8 @@ IgcRayCaster::IgcRayCaster
  double Resolution,
  double Max_height,
  int Start_sample,
- int Number_sample
+ int Number_sample,
+ bool Include_path_distance
 )
   : igc(Igc),
     start_position_(Start_line),
@@ -37,6 +41,7 @@ IgcRayCaster::IgcRayCaster
     start_sample_(Start_sample),
     number_sample_(Number_sample > 0 ? Number_sample : 
 		   Igc->number_sample() - Start_sample),
+    include_path_distance(Include_path_distance),
     resolution(Resolution),
     max_height(Max_height)
 {
@@ -63,7 +68,7 @@ IgcRayCaster::IgcRayCaster
   nsub_line = (int) ceil(line_res / Resolution);
   nsub_sample = (int) ceil(samp_res / Resolution);
   result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
-		      nintegration_step,3);
+		      nintegration_step,(include_path_distance ? 4 : 3));
 }
 
 //-----------------------------------------------------------------------
@@ -97,7 +102,7 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
   // the first position, where we can get away with doing a single
   // subline rather than a full line before starting to use our
   // initial distance optimization.
-  int i2_last;
+  int i2_last=-1;
   for(int i2_ind = 0; i2_ind < result_cache.shape()[2]; ++i2_ind) {
     // We do sub-line sample in the order that we are doing the ray casting.
     int i2 = (is_forward ? i2_ind : result_cache.shape()[2] - 1 - i2_ind);
@@ -140,6 +145,8 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
 	  result_cache(0,i1,i2,i3,i4, 0) = pt->position[0];
 	  result_cache(0,i1,i2,i3,i4, 1) = pt->position[1];
 	  result_cache(0,i1,i2,i3,i4, 2) = pt->position[2];
+	  if(include_path_distance)
+	    result_cache(0,i1,i2,i3,i4, 3) = dist(i1, i2, i3, i4);
 	}
     i2_last = i2;
   }

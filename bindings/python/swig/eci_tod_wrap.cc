@@ -6482,7 +6482,7 @@ SWIGINTERN PyObject *_wrap_EciTod_to_eci(PyObject *SWIGUNUSEDPARM(self), PyObjec
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::Time const > tempshared2 ;
   PyObject *swig_obj[2] ;
-  GeoCal::Eci result;
+  SwigValueWrapper< GeoCal::Eci > result;
   
   if (!SWIG_Python_UnpackTuple(args,"EciTod_to_eci",2,2,swig_obj)) SWIG_fail;
   {

@@ -73,6 +73,16 @@ TESTS=
 check_PROGRAM=
 check_DATA=
 
+#=================================================================
+# Code coverage rules. We exclude external code, because we don't
+# want to see this in our report
+
+CODE_COVERAGE_LCOV_SHOPTS = $(CODE_COVERAGE_LCOV_SHOPTS_DEFAULT)
+CODE_COVERAGE_LCOV_SHOPTS+= --directory=$(srcdir)
+CODE_COVERAGE_LCOV_SHOPTS+= --no-external
+CODE_COVERAGE_IGNORE_PATTERN = 
+@CODE_COVERAGE_RULES@
+
 # ========================================================================
 # An error we run into every once in a while is somebody trying to build
 # after having doing a setup_afids_env. The problem with this is that

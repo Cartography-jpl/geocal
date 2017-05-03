@@ -70,6 +70,7 @@ AC_COPY_DIR
 AC_PROG_CC
 
 AM_PROG_CC_C_O
+AX_CODE_COVERAGE()
 AC_ENABLE_DEBUG
 
 #=================================================================
@@ -81,6 +82,7 @@ AM_CONDITIONAL([HAVE_GCC], [test "$GCC" = yes])
 
 #=================================================================
 # Add prefix, THIRDPARTY, and /opt/afids_support for pkgconfig file
+#=================================================================
 
 PKG_PROG_PKG_CONFIG
 
@@ -100,4 +102,6 @@ export PKG_CONFIG_PATH
 
 AC_SUBST([pkgconfigdir], [${libdir}/pkgconfig])
 AC_SUBST([geocalsupportdir], [$geocal_support_path])
+
 ])
+

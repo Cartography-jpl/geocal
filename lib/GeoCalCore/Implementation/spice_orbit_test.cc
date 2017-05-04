@@ -14,7 +14,7 @@ BOOST_AUTO_TEST_CASE(basic)
     return;
   }
   SpiceOrbit orb(SpiceOrbit::ISS_ID, test_data_dir() + "iss_kernel/iss.ker");
-  Time t = Time::parse_time("2015-10-27T00:05:10Z");
+  Time t = Time::parse_time("2015-10-27T00:05:09Z");
   Geodetic pexpect(-51.7997916687, 19.9590219329, 425544.770209);
   BOOST_CHECK(distance(*orb.position_cf(t), pexpect) < 1.0);
   SimpleCamera ncam(0,0,0);

@@ -36,7 +36,9 @@ PYTEST_NJOB=10
 PYTEST_EXTRAFLAGS=
 PYTEST_FLAGS= -q -n $(PYTEST_NJOB)
 if CODE_COVERAGE_ENABLED
-PYTEST_FLAGS += --cov=geocal
+PYTEST_FLAGS+= --cov-report term
+PYTEST_FLAGS+= --cov-report html:$(PACKAGE)-coverage-python
+PYTEST_FLAGS+= --cov=geocal
 endif
 
 python_check:

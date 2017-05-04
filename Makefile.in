@@ -230,7 +230,10 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(INCLUDE_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@CODE_COVERAGE_ENABLED_TRUE@am__append_44 = --cov=geocal
+@CODE_COVERAGE_ENABLED_TRUE@am__append_44 = --cov-report term \
+@CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
+@CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
+@CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
 @HAVE_VICAR_RTL_TRUE@am__append_45 = $(srcdir)/$(srcpythonbin)/pan_sharpen
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4

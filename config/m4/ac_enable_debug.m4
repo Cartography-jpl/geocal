@@ -21,6 +21,7 @@ fi],
  if test "$enable_code_coverage" = yes; then
    CXXFLAGS="-g -Wall"
    CFLAGS="-g -Wall"
+   FFLAGS="-g"
  else
    CXXFLAGS="$CXXFLAGS -Wall"
    CFLAGS="$CFLAGS -Wall"

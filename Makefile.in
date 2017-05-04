@@ -2294,9 +2294,10 @@ check_DATA =
 # Code coverage rules. We exclude external code, because we don't
 # want to see this in our report
 CODE_COVERAGE_LCOV_SHOPTS = $(CODE_COVERAGE_LCOV_SHOPTS_DEFAULT) \
-	--directory=$(srcdir) --no-external
+	--directory=$(srcdir) --directory=$(abs_srcdir) --no-external
 CODE_COVERAGE_IGNORE_PATTERN = "*/thirdparty/libraw/*" \
 	"*/thirdparty/libsdbx/*" "*/lib/GeoCalCore/Support/boost/*"
+CODE_COVERAGE_OUTPUT_DIRECTORY = $(PACKAGE_NAME)-coverage
 
 # Build these up as we go
 

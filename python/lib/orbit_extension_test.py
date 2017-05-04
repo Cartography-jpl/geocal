@@ -11,5 +11,6 @@ def test_orbit_from_tle():
     orb = KeplerOrbit.orbit_from_tle(tle)
     t = orb.position_cf(Time.parse_time('2015-10-27T00:05:10Z'))
     assert distance(orb.position_cf(Time.parse_time('2015-10-27T00:05:10Z')),
-                    Geodetic(-51.772357805, 19.9739717878, 420921.889798)) < 1.0
+                    Geodetic(-51.77286358544813, 20.073929772655067,
+                             420921.42725819454)) < 1.0
 

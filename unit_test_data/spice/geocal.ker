@@ -12,7 +12,7 @@ file to point to the updated versions.
 
 \begindata
 KERNELS_TO_LOAD = (
-  'lsk/naif0010.tls',
+  'lsk/naif0012.tls',
   'pck/pck00010.tpc',
   'pck/earth_720101_070426.bpc',
   'pck/earth_000101_160116_151025.bpc',

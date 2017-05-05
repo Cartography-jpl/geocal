@@ -48,6 +48,7 @@ namespace GeoCal {
     %python_attribute_boost_array(sample_numerator, double, 20);
     %python_attribute_boost_array(fit_line_numerator, bool, 20);
     %python_attribute_boost_array(fit_sample_numerator, bool, 20);
+    %python_attribute_with_set(naif_code, int);
     boost::shared_ptr<CoordinateConverter> coordinate_converter;
     double resolution_meter(const Dem& D) const;
     void fit(const std::vector<boost::shared_ptr<GroundCoordinate> >& Gc,

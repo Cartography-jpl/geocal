@@ -506,10 +506,8 @@ Rpc GeoCal::gdal_rpc(const GDALDataset& D)
 	gdal_metadata<boost::array<double, 20> >(D, "SAMP_NUM_COEFF", "RPC");
       res.sample_denominator = 
 	gdal_metadata<boost::array<double, 20> >(D, "SAMP_DEN_COEFF", "RPC");
-      if(const_cast<GDALDataset&>(D).GetMetadataItem("NAIF_CODE", "")) {
-	int naif_code = gdal_metadata<int>(D, "NAIF_CODE");
-	std::cerr << "Faking NAIF CODE " << naif_code << "\n";
-      }
+      if(const_cast<GDALDataset&>(D).GetMetadataItem("NAIF_CODE", ""))
+	res.naif_code(gdal_metadata<int>(D, "NAIF_CODE"));
     } else {
       throw MetadataMissing("Does not appear to be any RPC metadata in file");
     }

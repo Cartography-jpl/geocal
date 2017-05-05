@@ -137,7 +137,7 @@ PlanetFixed::reference_surface_intersect_approximate
 void PlanetFixed::print(std::ostream& Os) const
 {
   Os << PlanetConstant::name(naif_code_)
-     << "Fixed (" << position[0] << " m, " << position[1] << " m, "
+     << " Fixed (" << position[0] << " m, " << position[1] << " m, "
      << position[2] << "m)";
 }
 
@@ -232,7 +232,7 @@ PlanetInertial::reference_surface_intersect_approximate
 void PlanetInertial::print(std::ostream& Os) const
 {
   Os << PlanetConstant::name(naif_code_)
-     << "Inertial (" << position[0] << " m, " << position[1] << " m, "
+     << " Inertial (" << position[0] << " m, " << position[1] << " m, "
      << position[2] << "m)";
 }
 
@@ -269,7 +269,7 @@ boost::shared_ptr<CartesianFixed> Planetocentric::convert_to_cf() const
 void Planetocentric::print(std::ostream& Os) const
 {
   Os << PlanetConstant::name(naif_code_)
-     << "Planetocentric: (" << latitude() << " deg, " 
+     << " Planetocentric: (" << latitude() << " deg, " 
      << longitude() << " deg, "
      << height_reference_surface() << " m)";
 }

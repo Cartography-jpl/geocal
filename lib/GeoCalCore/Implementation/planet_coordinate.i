@@ -16,6 +16,7 @@
 %geocal_shared_ptr(GeoCal::PlanetFixed);
 %geocal_shared_ptr(GeoCal::PlanetInertial);
 %geocal_shared_ptr(GeoCal::Planetocentric);
+%geocal_shared_ptr(GeoCal::PlanetocentricConverter);
 %geocal_shared_ptr(GeoCal::PlanetSimpleDem);
 
 namespace GeoCal {
@@ -91,13 +92,14 @@ public:
   %pickle_serialization();
 };
 
-template<int NAIF_CODE> class PlanetocentricConverter : public CoordinateConverter {
+class PlanetocentricConverter : public CoordinateConverter {
 public:
+  PlanetocentricConverter(int Naif_code = -1);
   virtual boost::shared_ptr<GroundCoordinate>
     convert_from_coordinate(double X, double Y, double Height = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
-  int naif_code();
+  virtual int naif_code();
   %pickle_serialization();
 };
 
@@ -115,9 +117,3 @@ public:
   %pickle_serialization();
 };
 }
-
-%geocal_shared_ptr(GeoCal::PlanetocentricConverter<499>);
-%template(MarsPlanetocentricConverter) GeoCal::PlanetocentricConverter<499>;
-
-%geocal_shared_ptr(GeoCal::PlanetocentricConverter<502>);
-%template(EuropaPlanetocentricConverter) GeoCal::PlanetocentricConverter<502>;

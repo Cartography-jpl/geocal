@@ -135,23 +135,9 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
   rpc.latitude_scale = floor(rpc.latitude_scale * 10000.0 + 0.5) / 10000.0;
   rpc.longitude_offset = floor(rpc.longitude_offset * 10000.0 + 0.5) / 10000.0;
   rpc.longitude_scale = floor(rpc.longitude_scale * 10000.0 + 0.5) / 10000.0;
-  // We'll want to come back and revisit this when we can
-  // planet_coordinate to just take naif_code
-  switch(naif_code) {
-  case 399:
-    // Default is earth/geodetic
-    break;
-  case PlanetConstant::MARS_NAIF_CODE:
-    rpc.coordinate_converter.reset(new MarsPlanetocentricConverter);
-    break;
-  case PlanetConstant::EUROPA_NAIF_CODE:
-    rpc.coordinate_converter.reset(new EuropaPlanetocentricConverter);
-    break;
-  default:
-    Exception e;
-    e << "Don't support NAIF code " << naif_code;
-    throw e;
-  }
+  // Default is earth/geodetic
+  if(naif_code != CoordinateConverter::EARTH_NAIF_CODE)
+    rpc.coordinate_converter.reset(new PlanetocentricConverter(naif_code));
   rpc.fit_all(ln, smp, lat, lon, h);
   return rpc;
 }

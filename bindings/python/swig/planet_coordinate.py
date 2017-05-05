@@ -494,6 +494,54 @@ PlanetInertial.reference_surface_intersect_approximate = new_instancemethod(_pla
 PlanetInertial_swigregister = _planet_coordinate.PlanetInertial_swigregister
 PlanetInertial_swigregister(PlanetInertial)
 
+class PlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConverter):
+    """
+
+    CoordinateConverter that goes to and from Planetocentric coordinates.
+
+    C++ includes: planet_coordinate.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Naif_code=-1):
+        """
+
+        GeoCal::PlanetocentricConverter::PlanetocentricConverter(int Naif_code=-1)
+        Constructor. 
+        """
+        _planet_coordinate.PlanetocentricConverter_swiginit(self, _planet_coordinate.new_PlanetocentricConverter(Naif_code))
+
+    def convert_from_coordinate(self, X, Y, Height=0):
+        """
+
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::PlanetocentricConverter::convert_from_coordinate(double X, double Y, double Height=0) const
+        Convert to Planetocentric.
+
+        X and Y are longitude and latitude in degrees, and height is in
+        meters. 
+        """
+        return _planet_coordinate.PlanetocentricConverter_convert_from_coordinate(self, X, Y, Height)
+
+
+    def _v_naif_code(self):
+        """
+
+        virtual int GeoCal::PlanetocentricConverter::naif_code() const
+        Return NAIF code. 
+        """
+        return _planet_coordinate.PlanetocentricConverter__v_naif_code(self)
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _planet_coordinate.delete_PlanetocentricConverter
+PlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.PlanetocentricConverter_convert_from_coordinate, None, PlanetocentricConverter)
+PlanetocentricConverter._v_naif_code = new_instancemethod(_planet_coordinate.PlanetocentricConverter__v_naif_code, None, PlanetocentricConverter)
+PlanetocentricConverter_swigregister = _planet_coordinate.PlanetocentricConverter_swigregister
+PlanetocentricConverter_swigregister(PlanetocentricConverter)
+
 class PlanetSimpleDem(geocal_swig.dem.Dem):
     """
 
@@ -555,92 +603,6 @@ PlanetSimpleDem._v_h = new_instancemethod(_planet_coordinate.PlanetSimpleDem__v_
 PlanetSimpleDem._v_naif_code = new_instancemethod(_planet_coordinate.PlanetSimpleDem__v_naif_code, None, PlanetSimpleDem)
 PlanetSimpleDem_swigregister = _planet_coordinate.PlanetSimpleDem_swigregister
 PlanetSimpleDem_swigregister(PlanetSimpleDem)
-
-class MarsPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConverter):
-    """
-
-    CoordinateConverter that goes to and from Planetocentric coordinates.
-
-    C++ includes: planet_coordinate.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-
-    def convert_from_coordinate(self, X, Y, Height=0):
-        """
-
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::PlanetocentricConverter< NAIF_CODE >::convert_from_coordinate(double X, double Y, double Height=0) const
-        Convert to Planetocentric.
-
-        X and Y are longitude and latitude in degrees, and height is in
-        meters. 
-        """
-        return _planet_coordinate.MarsPlanetocentricConverter_convert_from_coordinate(self, X, Y, Height)
-
-
-    def _v_naif_code(self):
-        """
-
-        virtual int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code() const
-        Return NAIF code. 
-        """
-        return _planet_coordinate.MarsPlanetocentricConverter__v_naif_code(self)
-
-
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-
-    def __init__(self):
-        _planet_coordinate.MarsPlanetocentricConverter_swiginit(self, _planet_coordinate.new_MarsPlanetocentricConverter())
-    __swig_destroy__ = _planet_coordinate.delete_MarsPlanetocentricConverter
-MarsPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter_convert_from_coordinate, None, MarsPlanetocentricConverter)
-MarsPlanetocentricConverter._v_naif_code = new_instancemethod(_planet_coordinate.MarsPlanetocentricConverter__v_naif_code, None, MarsPlanetocentricConverter)
-MarsPlanetocentricConverter_swigregister = _planet_coordinate.MarsPlanetocentricConverter_swigregister
-MarsPlanetocentricConverter_swigregister(MarsPlanetocentricConverter)
-
-class EuropaPlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConverter):
-    """
-
-    CoordinateConverter that goes to and from Planetocentric coordinates.
-
-    C++ includes: planet_coordinate.h 
-    """
-    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-    __repr__ = _swig_repr
-
-    def convert_from_coordinate(self, X, Y, Height=0):
-        """
-
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::PlanetocentricConverter< NAIF_CODE >::convert_from_coordinate(double X, double Y, double Height=0) const
-        Convert to Planetocentric.
-
-        X and Y are longitude and latitude in degrees, and height is in
-        meters. 
-        """
-        return _planet_coordinate.EuropaPlanetocentricConverter_convert_from_coordinate(self, X, Y, Height)
-
-
-    def _v_naif_code(self):
-        """
-
-        virtual int GeoCal::PlanetocentricConverter< NAIF_CODE >::naif_code() const
-        Return NAIF code. 
-        """
-        return _planet_coordinate.EuropaPlanetocentricConverter__v_naif_code(self)
-
-
-    def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
-
-
-    def __init__(self):
-        _planet_coordinate.EuropaPlanetocentricConverter_swiginit(self, _planet_coordinate.new_EuropaPlanetocentricConverter())
-    __swig_destroy__ = _planet_coordinate.delete_EuropaPlanetocentricConverter
-EuropaPlanetocentricConverter.convert_from_coordinate = new_instancemethod(_planet_coordinate.EuropaPlanetocentricConverter_convert_from_coordinate, None, EuropaPlanetocentricConverter)
-EuropaPlanetocentricConverter._v_naif_code = new_instancemethod(_planet_coordinate.EuropaPlanetocentricConverter__v_naif_code, None, EuropaPlanetocentricConverter)
-EuropaPlanetocentricConverter_swigregister = _planet_coordinate.EuropaPlanetocentricConverter_swigregister
-EuropaPlanetocentricConverter_swigregister(EuropaPlanetocentricConverter)
 
 
 

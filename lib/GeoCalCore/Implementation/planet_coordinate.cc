@@ -28,18 +28,12 @@ void Planetocentric::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(naif_code);
 }
 
-template<> template<class Archive>
-void MarsPlanetocentricConverter::serialize(Archive & ar, const unsigned int version)
+template<class Archive>
+void PlanetocentricConverter::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(CoordinateConverter);
-  GEOCAL_BASE(MarsPlanetocentricConverter, CoordinateConverter);
-}
-
-template<> template<class Archive>
-void EuropaPlanetocentricConverter::serialize(Archive & ar, const unsigned int version)
-{
-  GEOCAL_GENERIC_BASE(CoordinateConverter);
-  GEOCAL_BASE(EuropaPlanetocentricConverter, CoordinateConverter);
+  GEOCAL_BASE(PlanetocentricConverter, CoordinateConverter);
+  ar & GEOCAL_NVP_(naif_code);
 }
 
 template<class Archive>
@@ -54,12 +48,19 @@ void PlanetSimpleDem::serialize(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(PlanetFixed);
 GEOCAL_IMPLEMENT(PlanetInertial);
 GEOCAL_IMPLEMENT(Planetocentric);
-GEOCAL_IMPLEMENT(MarsPlanetocentricConverter);
-GEOCAL_IMPLEMENT(EuropaPlanetocentricConverter);
+GEOCAL_IMPLEMENT(PlanetocentricConverter);
 GEOCAL_IMPLEMENT(PlanetSimpleDem);
 #endif
 
+//-----------------------------------------------------------------------
+/// Map from NAIF code to planet constants
+//-----------------------------------------------------------------------
+
 std::map<int, SpicePlanetConstant> PlanetConstant::h_map;
+
+//-----------------------------------------------------------------------
+/// Get the planet constants for the given NAIF code.
+//-----------------------------------------------------------------------
 
 SpicePlanetConstant PlanetConstant::h(int Naif_code)
 {

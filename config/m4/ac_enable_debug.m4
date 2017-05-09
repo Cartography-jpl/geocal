@@ -18,8 +18,14 @@ fi],
 [AC_MSG_RESULT([no])
  enable_debug=no
  AC_DEFINE([BOOST_DISABLE_ASSERTS],[],[Disable assertions in boost])
- CXXFLAGS="$CXXFLAGS -Wall"
- CFLAGS="$CFLAGS -Wall"
+ if test "$enable_code_coverage" = yes; then
+   CXXFLAGS="-g -Wall"
+   CFLAGS="-g -Wall"
+   FFLAGS="-g"
+ else
+   CXXFLAGS="$CXXFLAGS -Wall"
+   CFLAGS="$CFLAGS -Wall"
+ fi
 ]
 )
 AC_ARG_VAR([DEBUG_FLAGS],[Compiler debugging flags])

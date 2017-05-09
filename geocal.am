@@ -19,9 +19,11 @@ geocalinc_HEADERS =
 geocalswiginc_HEADERS =
 geocal_test_all_SOURCES = 
 
+libgeocal_la_CXXFLAGS = $(AM_CXXFLAGS) $(CODE_COVERAGE_CXXFLAGS)
+libgeocal_la_CFLAGS = $(AM_CFLAGS) $(CODE_COVERAGE_CFLAGS)
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS)
 libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw)
-libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS)
+libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(CODE_COVERAGE_CPPFLAGS)
 
 EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND)
 EXTRA_libgeocal_la_DEPENDENCIES+= $(CARTO_BUILD_DEPEND)
@@ -65,6 +67,8 @@ libgeocal_la_LDFLAGS+= $(FFTW_LIBS)
 # Include SDP toolkit
 libgeocal_la_LDFLAGS+=$(SDP_LDFLAGS)
 
+libgeocal_la_LDFLAGS+=$(CODE_COVERAGE_LIBS)
+
 #=================================================================
 # Target to just install geocal
 # header, library, python
@@ -82,15 +86,21 @@ libgeocal_la_LIBADD += $(MSPI_SHARED_LIBS)
 
 #=================================================================
 # Unit test
+norm_raw = $(shell cd $(abs_srcdir)/@srcraw@; pwd)
+norm_sdbx = $(shell cd $(abs_srcdir)/@srcsdbx@; pwd)
+CODE_COVERAGE_IGNORE_PATTERN+= "*/thirdparty/libraw/*"
+CODE_COVERAGE_IGNORE_PATTERN+= "*/thirdparty/libsdbx/*"
+CODE_COVERAGE_IGNORE_PATTERN+= "*/lib/GeoCalCore/Support/boost/*"
 
 check_PROGRAMS = geocal_test_all
 geocal_test_all_SOURCES += @libgeocal@/test_all.cc
 geocal_test_all_LDADD = libgeocal.la 
 geocal_test_all_LDADD += $(CARTO_LIBS) libraw.la $(VICAR_RTL_LIBS) $(SPICE_LIBS)
-geocal_test_all_LDADD += $(GDAL_LIBS)
+geocal_test_all_LDADD += $(GDAL_LIBS) $(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install 
-geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS)
-geocal_test_all_CPPFLAGS+=  $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
+geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS)
+geocal_test_all_CPPFLAGS+= $(VICAR_RTL_CFLAGS)
+geocal_test_all_CPPFLAGS+= $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
 geocal_test_all_CPPFLAGS+= $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw)
 geocal_test_all_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS)
 TESTS+= @libgeocal@/test_all.sh

@@ -157,7 +157,19 @@ PlanetFixed PlanetFixed::target_position
 
 //-----------------------------------------------------------------------
 /// Return orbit data for the given target and spacecraft reference
-/// frame.
+/// frame. The target is the name of the satellite used by spice (e.g,
+/// "GLL", "MRO"), and the reference frame is the name of the camera
+/// reference frame (e.g., "GLL_SCAN_PLANE", "MRO_CTX"). Note that
+/// this combined both the space craft coordinate system and
+/// conversion to frame coordinates. We could split this out into a
+/// separate camera model, but there doesn't seem to be much of a
+/// reason to do this.
+///
+/// Note that the Target_name is of a body (e.g., something we have a
+/// spk kernel for), while the Spacecraft_reference_frame_name is for
+/// a frame (e.g., something we have a fk kernel for). In addition to
+/// the frame definition, you'll generally need a C kernel file (ck
+/// kernel) giving the orientation of the frame with the target.
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<QuaternionOrbitData> PlanetFixed::orbit_data

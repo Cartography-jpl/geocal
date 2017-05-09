@@ -66,7 +66,7 @@ public:
   Planetocentric(double Latitude, double Longitude, double Height_ellipsoid,
 		 int Naif_code);
   Planetocentric(int Naif_code=-1);
-  int naif_code();
+  virtual int naif_code() const;
   %python_attribute(height_reference_surface, double);
   %python_attribute(latitude, double);
   %python_attribute(longitude, double);
@@ -99,7 +99,7 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
-  virtual int naif_code();
+  virtual int naif_code() const;
   %pickle_serialization();
 };
 

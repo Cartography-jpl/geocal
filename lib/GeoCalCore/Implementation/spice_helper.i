@@ -25,8 +25,12 @@ public:
   static void add_kernel(const std::string& Kernel_dir, 
 			 const std::string& Kernel);
   static void add_kernel(const std::string& Kernel);
+  static bool kernel_loaded(const std::string& Kernel);
   static boost::math::quaternion<double> 
   conversion_quaternion(const std::string& From,
 			const std::string& To, const Time& T);
+  static void state_vector(int Body_id, const std::string& Target_name,
+			   const Time& T, boost::array<double, 3>& OUT,
+			   boost::array<double, 3>& OUT);
 };
 }

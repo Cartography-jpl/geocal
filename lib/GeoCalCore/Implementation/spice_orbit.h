@@ -7,6 +7,12 @@ namespace GeoCal {
 /****************************************************************//**
   This is an orbit that uses a SPICE kernel as the underlying 
   implementation.
+
+  This class is used with earth satellites. Compare this class with
+  SpicePlanetOrbit. These could perhaps be merged at some point, but
+  for right now just keep these separate. Don't have enough experience
+  with these classes yet to know what the interface should be like, or
+  if these really could be merged.
 *******************************************************************/
 class SpiceOrbit : public Orbit {
 public:

@@ -3447,40 +3447,41 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[28]
 #define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[29]
 #define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[30]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[31]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[32]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[33]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[34]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[35]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[36]
-#define SWIGTYPE_p_char swig_types[37]
-#define SWIGTYPE_p_char_type swig_types[38]
-#define SWIGTYPE_p_difference_type swig_types[39]
-#define SWIGTYPE_p_fmtflags swig_types[40]
-#define SWIGTYPE_p_int_type swig_types[41]
-#define SWIGTYPE_p_iostate swig_types[42]
-#define SWIGTYPE_p_off_type swig_types[43]
-#define SWIGTYPE_p_openmode swig_types[44]
-#define SWIGTYPE_p_p_PyObject swig_types[45]
-#define SWIGTYPE_p_pos_type swig_types[46]
-#define SWIGTYPE_p_seekdir swig_types[47]
-#define SWIGTYPE_p_size_t swig_types[48]
-#define SWIGTYPE_p_size_type swig_types[49]
-#define SWIGTYPE_p_state_type swig_types[50]
-#define SWIGTYPE_p_std__allocatorT_GeoCal__Time_t swig_types[51]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t swig_types[52]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[53]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[54]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[55]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[56]
-#define SWIGTYPE_p_std__invalid_argument swig_types[57]
-#define SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t swig_types[58]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t swig_types[59]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[60]
-#define SWIGTYPE_p_traits_type swig_types[61]
-#define SWIGTYPE_p_value_type swig_types[62]
-static swig_type_info *swig_types[64];
-static swig_module_info swig_module = {swig_types, 63, 0, 0, 0, 0};
+#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[31]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[32]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[33]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[34]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[35]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[36]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[37]
+#define SWIGTYPE_p_char swig_types[38]
+#define SWIGTYPE_p_char_type swig_types[39]
+#define SWIGTYPE_p_difference_type swig_types[40]
+#define SWIGTYPE_p_fmtflags swig_types[41]
+#define SWIGTYPE_p_int_type swig_types[42]
+#define SWIGTYPE_p_iostate swig_types[43]
+#define SWIGTYPE_p_off_type swig_types[44]
+#define SWIGTYPE_p_openmode swig_types[45]
+#define SWIGTYPE_p_p_PyObject swig_types[46]
+#define SWIGTYPE_p_pos_type swig_types[47]
+#define SWIGTYPE_p_seekdir swig_types[48]
+#define SWIGTYPE_p_size_t swig_types[49]
+#define SWIGTYPE_p_size_type swig_types[50]
+#define SWIGTYPE_p_state_type swig_types[51]
+#define SWIGTYPE_p_std__allocatorT_GeoCal__Time_t swig_types[52]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t swig_types[53]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[54]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[55]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[56]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[57]
+#define SWIGTYPE_p_std__invalid_argument swig_types[58]
+#define SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t swig_types[59]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t swig_types[60]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[61]
+#define SWIGTYPE_p_traits_type swig_types[62]
+#define SWIGTYPE_p_value_type swig_types[63]
+static swig_type_info *swig_types[65];
+static swig_module_info swig_module = {swig_types, 64, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -11259,6 +11260,44 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SpiceHelper_kernel_loaded(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceHelper_kernel_loaded" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_kernel_loaded" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = (bool)GeoCal::SpiceHelper::kernel_loaded((std::string const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_SpiceHelper_conversion_quaternion(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
@@ -11335,6 +11374,101 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_conversion_quaternion(PyObject *SWIGUNUSE
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  std::string *arg2 = 0 ;
+  GeoCal::Time *arg3 = 0 ;
+  boost::array< double,3 > *arg4 = 0 ;
+  boost::array< double,3 > *arg5 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  PyObject *swig_obj[5] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"SpiceHelper_state_vector",5,5,swig_obj)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "SpiceHelper_state_vector" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SpiceHelper_state_vector" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SpiceHelper_state_vector" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< GeoCal::Time * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_boost__arrayT_double_3_t,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "SpiceHelper_state_vector" "', argument " "4"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "4"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  arg4 = reinterpret_cast< boost::array< double,3 > * >(argp4);
+  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_boost__arrayT_double_3_t,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "SpiceHelper_state_vector" "', argument " "5"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "5"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  arg5 = reinterpret_cast< boost::array< double,3 > * >(argp5);
+  {
+    try {
+      GeoCal::SpiceHelper::state_vector(arg1,(std::string const &)*arg2,(GeoCal::Time const &)*arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
   if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
@@ -11523,11 +11657,34 @@ static PyMethodDef SwigMethods[] = {
 		"Add an additional kernel, after the one we automatically get (i.e.,\n"
 		"$SPICEDATA/geocal.ker). \n"
 		""},
+	 { (char *)"SpiceHelper_kernel_loaded", (PyCFunction)_wrap_SpiceHelper_kernel_loaded, METH_O, (char *)"\n"
+		"\n"
+		"bool SpiceHelper::kernel_loaded(const std::string &Kernel)\n"
+		"Check if a given kernel file has already been loaded.\n"
+		"\n"
+		"Note that this is a bit limited, this checks against the exact name\n"
+		"that was loaded. So if you load \"dir/bar/foo.ker\" and then check\n"
+		"against \"dir/./bar/foo.ker\" will return false even though this is\n"
+		"the same file. This is just a limitation of the spice function call.\n"
+		"\n"
+		""},
 	 { (char *)"SpiceHelper_conversion_quaternion", _wrap_SpiceHelper_conversion_quaternion, METH_VARARGS, (char *)"\n"
 		"\n"
 		"boost::math::quaternion< double > SpiceHelper::conversion_quaternion(const std::string &From, const std::string &To, const Time &T)\n"
 		"Return quaternion that converts between the two named coordinate\n"
 		"systems. \n"
+		""},
+	 { (char *)"SpiceHelper_state_vector", _wrap_SpiceHelper_state_vector, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void SpiceHelper::state_vector(int Body_id, const std::string &Target_name, const Time &T,\n"
+		"boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel)\n"
+		"Get the state vector (position and velocity, in meters), in the fixed\n"
+		"coordinates for the given Body_id, and the given Time.\n"
+		"\n"
+		"The Target name can be anything spice recognizes.\n"
+		"\n"
+		"Note we don't handle light travel time yet, or aberration. It isn't\n"
+		"clear if we want to or not. \n"
 		""},
 	 { (char *)"new_SpiceHelper", (PyCFunction)_wrap_new_SpiceHelper, METH_NOARGS, NULL},
 	 { (char *)"delete_SpiceHelper", (PyCFunction)_wrap_delete_SpiceHelper, METH_O, NULL},
@@ -11613,6 +11770,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_5_t = {"_p_blitz__ArrayT_int_5
 static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6_t", "blitz::Array< int,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__arrayT_double_3_t = {"_p_boost__arrayT_double_3_t", "boost::array< double,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_double_t = {"_p_boost__math__quaternionT_double_t", "boost::math::quaternion< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
@@ -11678,6 +11836,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_6_t,
   &_swigt__p_blitz__ArrayT_int_7_t,
   &_swigt__p_blitz__ArrayT_int_8_t,
+  &_swigt__p_boost__arrayT_double_3_t,
   &_swigt__p_boost__math__quaternionT_double_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
@@ -11743,6 +11902,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_5_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__arrayT_double_3_t[] = {  {&_swigt__p_boost__arrayT_double_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_double_t[] = {  {&_swigt__p_boost__math__quaternionT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11808,6 +11968,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_6_t,
   _swigc__p_blitz__ArrayT_int_7_t,
   _swigc__p_blitz__ArrayT_int_8_t,
+  _swigc__p_boost__arrayT_double_3_t,
   _swigc__p_boost__math__quaternionT_double_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,

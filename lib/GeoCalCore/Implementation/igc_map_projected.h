@@ -11,7 +11,7 @@ namespace GeoCal {
   IgcMapProjectedMultiBand
 *******************************************************************/
 
-class IgcMapProjectedBase {
+class IgcMapProjectedBase : public Printable<IgcMapProjectedBase> {
 public:
   virtual ~IgcMapProjectedBase() {}
   const boost::shared_ptr<ImageGroundConnection>& igc_original() const
@@ -20,6 +20,12 @@ public:
   int grid_spacing() const { return grid_spacing_; }
   bool read_into_memory() const { return read_into_memory_; }
   double fill_value() const {return fill_value_;}
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const { Os << "IgcMapProjectedBase";}
 protected:
   IgcMapProjectedBase(const MapInfo& Mi, 
 		      const boost::shared_ptr<ImageGroundConnection>& Igc,
@@ -36,6 +42,14 @@ protected:
   bool read_into_memory_;
   mutable blitz::Array<double, 2> ic_line, ic_sample;
   bool interpolate_ic(int Start_line, int Start_sample) const;
+  IgcMapProjectedBase() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -91,6 +105,10 @@ protected:
 private:
   void calc_no_grid(int Lstart, int Sstart) const;
   void calc_grid(int Lstart, int Sstart) const;
+  IgcMapProjected() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -146,7 +164,15 @@ protected:
 private:
   void calc_no_grid(int Lstart, int Sstart) const;
   void calc_grid(int Lstart, int Sstart) const;
+  IgcMapProjectedMultiBand() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(IgcMapProjectedBase);
+GEOCAL_EXPORT_KEY(IgcMapProjected);
+GEOCAL_EXPORT_KEY(IgcMapProjectedMultiBand);
 #endif

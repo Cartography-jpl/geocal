@@ -18,6 +18,7 @@ public:
   virtual bool area_any_masked(int Line, int Sample, int Number_line,
 			       int Number_sample) const;
   std::string print_to_string() const;
+  %pickle_serialization();
 };
 
 class CombinedImageMask: public ImageMask {
@@ -32,8 +33,3 @@ public:
 }
 %template(Vector_ImageMask) std::vector<boost::shared_ptr<GeoCal::ImageMask> >;
 
-// I don't think this is needed anymore. Comment this out and see if
-// anything breaks.
-// %extend std::vector<boost::shared_ptr<GeoCal::ImageMask> > {
-//   %pickle_init(1, list(self))
-// };

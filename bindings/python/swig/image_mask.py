@@ -244,6 +244,10 @@ class ImageMask(geocal_swig.generic_object.GenericObject):
         """
         return _image_mask.ImageMask_area_any_masked(self, Line, Sample, Number_line, Number_sample)
 
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _image_mask.delete_ImageMask
 ImageMask.mask = new_instancemethod(_image_mask.ImageMask_mask, None, ImageMask)
 ImageMask.mask_ic = new_instancemethod(_image_mask.ImageMask_mask_ic, None, ImageMask)

@@ -82,11 +82,20 @@ public:
   void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<H5::H5File> h;
+  unsigned int flag;
   std::string fname;
   H5::Attribute open_attribute(const std::string& Aname) const;
   bool is_group(const std::string& Objname) const;
   bool is_present(const std::string& Objname, 
 		  const H5::CommonFG& Parent) const;
+  HdfFile() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 
 template<> inline H5::PredType HdfFile::pred_arr<int>() const 
@@ -443,4 +452,6 @@ HdfFile::read_field(
   return helper.read_field(*this, *h, Dataname, start2, size2);
 }
 }
+
+GEOCAL_EXPORT_KEY(HdfFile);
 #endif

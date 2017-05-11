@@ -250,6 +250,10 @@ class HdfFile(geocal_swig.generic_object.GenericObject):
         return _hdf_file.HdfFile_is_hdf(Fname)
 
     is_hdf = staticmethod(is_hdf)
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _hdf_file.delete_HdfFile
 HdfFile.__str__ = new_instancemethod(_hdf_file.HdfFile___str__, None, HdfFile)
 HdfFile.close = new_instancemethod(_hdf_file.HdfFile_close, None, HdfFile)

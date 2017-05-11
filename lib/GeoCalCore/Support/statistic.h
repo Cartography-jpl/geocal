@@ -84,7 +84,11 @@ public:
 private:
   double sum_, sum_squares_, min_, max_, sum_abs_;
   int count_, min_index_, max_index_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
 
+GEOCAL_EXPORT_KEY(Statistic);
 #endif

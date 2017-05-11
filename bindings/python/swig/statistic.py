@@ -326,6 +326,10 @@ class Statistic(geocal_swig.generic_object.GenericObject):
     def count(self):
         return self._v_count()
 
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _statistic.delete_Statistic
 Statistic.add = new_instancemethod(_statistic.Statistic_add, None, Statistic)
 Statistic.__iadd__ = new_instancemethod(_statistic.Statistic___iadd__, None, Statistic)

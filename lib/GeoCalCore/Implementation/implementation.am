@@ -81,6 +81,7 @@ libgeocal_la_SOURCES+= @srcimplementation@/galileo_camera.cc
 geocalinc_HEADERS+= @srcimplementation@/refraction.h
 libgeocal_la_SOURCES+= @srcimplementation@/refraction.cc
 geocalinc_HEADERS+= @srcimplementation@/orbit_data_image_ground_connection.h
+libgeocal_la_SOURCES+= @srcimplementation@/orbit_data_image_ground_connection.cc
 geocalinc_HEADERS+= @srcimplementation@/ray_intersect.h
 libgeocal_la_SOURCES+= @srcimplementation@/ray_intersect.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_match.h

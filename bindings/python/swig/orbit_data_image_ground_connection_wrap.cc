@@ -7420,15 +7420,16 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::Orbit *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg3 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
   boost::shared_ptr< GeoCal::RasterImage > *arg5 = 0 ;
   std::string arg6 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::Time const > tempshared2 ;
@@ -7449,27 +7450,27 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_6(PyObject *
   if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Orbit *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1)->get());
-      }
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
     }
   }
   {
@@ -7583,7 +7584,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_6(PyObject *
   }
   {
     try {
-      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection(*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6);
+      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7602,14 +7603,15 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::Orbit *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg3 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
   boost::shared_ptr< GeoCal::RasterImage > *arg5 = 0 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::Time const > tempshared2 ;
@@ -7630,27 +7632,27 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_7(PyObject *
   if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Orbit *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1)->get());
-      }
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
     }
   }
   {
@@ -7755,7 +7757,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_7(PyObject *
   }
   {
     try {
-      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection(*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5);
+      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7774,7 +7776,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::Orbit *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg3 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
@@ -7784,9 +7786,10 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_8(PyObject *
   double arg8 ;
   int arg9 ;
   double arg10 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::Time const > tempshared2 ;
@@ -7817,27 +7820,27 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_8(PyObject *
   if ((nobjs < 10) || (nobjs > 10)) SWIG_fail;
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Orbit *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1)->get());
-      }
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
     }
   }
   {
@@ -7991,7 +7994,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_8(PyObject *
   arg10 = static_cast< double >(val10);
   {
     try {
-      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection(*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,arg8,arg9,arg10);
+      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,arg8,arg9,arg10);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8010,7 +8013,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::Orbit *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg3 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
@@ -8019,9 +8022,10 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_9(PyObject *
   boost::shared_ptr< GeoCal::Refraction > *arg7 = 0 ;
   double arg8 ;
   int arg9 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::Time const > tempshared2 ;
@@ -8050,27 +8054,27 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_9(PyObject *
   if ((nobjs < 9) || (nobjs > 9)) SWIG_fail;
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Orbit *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1)->get());
-      }
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
     }
   }
   {
@@ -8219,7 +8223,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_9(PyObject *
   arg9 = static_cast< int >(val9);
   {
     try {
-      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection(*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,arg8,arg9);
+      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8238,7 +8242,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::Orbit *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg3 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
@@ -8246,9 +8250,10 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_10(PyObject 
   std::string arg6 ;
   boost::shared_ptr< GeoCal::Refraction > *arg7 = 0 ;
   double arg8 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::Time const > tempshared2 ;
@@ -8275,27 +8280,27 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_10(PyObject 
   if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Orbit *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1)->get());
-      }
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
     }
   }
   {
@@ -8439,7 +8444,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_10(PyObject 
   arg8 = static_cast< double >(val8);
   {
     try {
-      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection(*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,arg8);
+      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8458,16 +8463,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::Orbit *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg3 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
   boost::shared_ptr< GeoCal::RasterImage > *arg5 = 0 ;
   std::string arg6 ;
   boost::shared_ptr< GeoCal::Refraction > *arg7 = 0 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::Time const > tempshared2 ;
@@ -8492,27 +8498,27 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_11(PyObject 
   if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
   {
     int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Orbit *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OrbitDataImageGroundConnection" "', argument " "1"" of type '" "GeoCal::Orbit &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1)->get());
-      }
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
     }
   }
   {
@@ -8651,7 +8657,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitDataImageGroundConnection__SWIG_11(PyObject 
   }
   {
     try {
-      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection(*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7);
+      result = (GeoCal::OrbitDataImageGroundConnection *)new GeoCal::OrbitDataImageGroundConnection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(GeoCal::Time const &)*arg2,(boost::shared_ptr< GeoCal::Camera > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg5,arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8922,12 +8928,12 @@ fail:
     "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::OrbitData > const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &,double,int)\n"
     "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::OrbitData > const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &,double)\n"
     "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::OrbitData > const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &)\n"
-    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(GeoCal::Orbit &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const)\n"
-    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(GeoCal::Orbit &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &)\n"
-    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(GeoCal::Orbit &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &,double,int,double)\n"
-    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(GeoCal::Orbit &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &,double,int)\n"
-    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(GeoCal::Orbit &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &,double)\n"
-    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(GeoCal::Orbit &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &)\n");
+    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::Orbit > const &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const)\n"
+    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::Orbit > const &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &)\n"
+    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::Orbit > const &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &,double,int,double)\n"
+    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::Orbit > const &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &,double,int)\n"
+    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::Orbit > const &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &,double)\n"
+    "    GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(boost::shared_ptr< GeoCal::Orbit > const &,GeoCal::Time const &,boost::shared_ptr< GeoCal::Camera > const &,boost::shared_ptr< GeoCal::Dem > const &,boost::shared_ptr< GeoCal::RasterImage > const &,std::string const,boost::shared_ptr< GeoCal::Refraction > const &)\n");
   return 0;
 }
 
@@ -9087,6 +9093,51 @@ SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection_image_coordinate_with_
   {
     boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative >(new GeoCal::ImageCoordinateWithDerivative((GeoCal::ImageCoordinateWithDerivative &)result));
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection__v_orbit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitDataImageGroundConnection *arg1 = (GeoCal::OrbitDataImageGroundConnection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDataImageGroundConnection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::Orbit > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDataImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDataImageGroundConnection__v_orbit" "', argument " "1"" of type '" "GeoCal::OrbitDataImageGroundConnection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDataImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDataImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OrbitDataImageGroundConnection const *)arg1)->orbit();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
   }
   return resultobj;
 fail:
@@ -9926,11 +9977,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"new_OrbitDataImageGroundConnection", _wrap_new_OrbitDataImageGroundConnection, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(Orbit &Orb, const Time &Tm, const boost::shared_ptr< Camera > &Cam,\n"
-		"const boost::shared_ptr< Dem > &D, const boost::shared_ptr<\n"
-		"RasterImage > &Img, const std::string Title=\"\", const\n"
-		"boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction\n"
-		">(), double Resolution=30, int Band=0, double Max_height=9000)\n"
+		"GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(const boost::shared_ptr< Orbit > &Orb, const Time &Tm, const\n"
+		"boost::shared_ptr< Camera > &Cam, const boost::shared_ptr< Dem > &D,\n"
+		"const boost::shared_ptr< RasterImage > &Img, const std::string\n"
+		"Title=\"\", const boost::shared_ptr< Refraction >\n"
+		"&Ref=boost::shared_ptr< Refraction >(), double Resolution=30, int\n"
+		"Band=0, double Max_height=9000)\n"
 		"Constructor that takes an Orbit and a time.\n"
 		"\n"
 		"We populate this using the OrbitData from the orbit for that time.\n"
@@ -9953,6 +10005,12 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"Not sure if we want this to be a general ImageGroundConnection\n"
 		"function, but for now we have this defined just for this class. \n"
+		""},
+	 { (char *)"OrbitDataImageGroundConnection__v_orbit", (PyCFunction)_wrap_OrbitDataImageGroundConnection__v_orbit, METH_O, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr<Orbit>& GeoCal::OrbitDataImageGroundConnection::orbit() const\n"
+		"Orbit that we are using, may be null if we are just using a fixed\n"
+		"orbit data. \n"
 		""},
 	 { (char *)"OrbitDataImageGroundConnection__v_orbit_data", _wrap_OrbitDataImageGroundConnection__v_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"

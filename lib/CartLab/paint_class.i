@@ -16,6 +16,7 @@ public:
 	     const boost::shared_ptr<RasterImage>& Pan_img,
 	     const blitz::Array<int, 2>& Color,
 	     int Class_id_first_color);
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 };

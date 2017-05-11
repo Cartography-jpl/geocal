@@ -31,6 +31,11 @@ protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:
   boost::shared_ptr<RasterImage> cloud_data;
+  WorldView2CloudMask() {};
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+GEOCAL_EXPORT_KEY(WorldView2CloudMask);
 #endif

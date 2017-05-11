@@ -18,6 +18,7 @@ public:
   WorldView2CloudMask(const RasterImageMultiBand&
 		      Mul_spec_data, int Min_cloud_size,
 		      double Cloud_threshold, double Shadow_threshold);
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
 };

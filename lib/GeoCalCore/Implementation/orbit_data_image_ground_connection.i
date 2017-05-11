@@ -29,12 +29,14 @@ public:
 				 const boost::shared_ptr<Refraction>& Ref,
 				 double Resolution=30, int Band=0, 
 				 double Max_height=9000);
-  OrbitDataImageGroundConnection(Orbit& Orb, const Time& Tm,
+  OrbitDataImageGroundConnection(const boost::shared_ptr<Orbit>& Orb,
+				 const Time& Tm,
 				 const boost::shared_ptr<Camera>& Cam, 
 				 const boost::shared_ptr<Dem>& D,
 				 const boost::shared_ptr<RasterImage>& Img,
 				 const std::string Title = "");
-  OrbitDataImageGroundConnection(Orbit& Orb, const Time& Tm,
+  OrbitDataImageGroundConnection(const boost::shared_ptr<Orbit>& Orb,
+				 const Time& Tm,
 				 const boost::shared_ptr<Camera>& Cam, 
 				 const boost::shared_ptr<Dem>& D,
 				 const boost::shared_ptr<RasterImage>& Img,
@@ -53,15 +55,14 @@ public:
     const;
   virtual ImageCoordinateWithDerivative 
   image_coordinate_with_derivative(const GroundCoordinate& Gc) const;
+  %python_attribute(orbit, boost::shared_ptr<Orbit>);
   %python_attribute_with_set(orbit_data, boost::shared_ptr<OrbitData>)
   %python_attribute_with_set(camera,boost::shared_ptr<Camera>)
   %python_attribute_with_set(resolution, double)
   %python_attribute_with_set(refraction, boost::shared_ptr<Refraction>)
   %python_attribute_with_set(band, int)
   %python_attribute_with_set(max_height, double)
-  %pickle_init(1, self.orbit_data, self.camera, self.dem,
-	       self.image, self.title, self.refraction,
-	       self.resolution, self.band, self.max_height)
+  %pickle_serialization();
 };
 }
 

@@ -1,8 +1,20 @@
 #include "spot_orbit.h"
 #include "ecr.h"
 #include "geocal_matrix.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void SpotOrbit::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit);
+  ar & GEOCAL_NVP(teph) & GEOCAL_NVP(posvel) & GEOCAL_NVP(sc_to_orb);
+}
+
+GEOCAL_IMPLEMENT(SpotOrbit);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor.

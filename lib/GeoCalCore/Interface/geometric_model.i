@@ -21,6 +21,7 @@ public:
   virtual ImageCoordinate resampled_image_coordinate
   (const ImageCoordinate& Resampled_ic) const;
   std::string print_to_string() const;
+  %pickle_serialization()
 };
 
 class GeometricTiePoints : public GenericObject {
@@ -31,6 +32,7 @@ public:
   %python_attribute(x, blitz::Array<double, 2>)
   %python_attribute(y, blitz::Array<double, 2>)
   std::string print_to_string() const;
+  %pickle_serialization()
 };
 }
 

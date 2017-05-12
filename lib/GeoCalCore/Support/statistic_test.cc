@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "statistic.h"
+#include <iostream>
 
 using namespace GeoCal;
 

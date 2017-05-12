@@ -7,6 +7,7 @@
 #include "wgs84_constant.h"
 #include "simple_dem.h"
 #include "memory_raster_image.h"
+#include "constant_raster_image.h"
 
 using namespace GeoCal;
 
@@ -55,8 +56,10 @@ BOOST_AUTO_TEST_CASE(serialize)
   int band = 0;
   boost::shared_ptr<Ipi> ipi(new Ipi(orb, cam, band, tmin, tmax, tt));
   boost::shared_ptr<Dem> dem(new SimpleDem());
-  boost::shared_ptr<RasterImage> img(new MemoryRasterImage(100,
-					   cam->number_sample(0)));
+  // Use ConstantRasterImage rather than RasterImage here because
+  // otherwise we get a valgrind error about using uninitialized memory.
+  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(100,
+				     cam->number_sample(0), 10));
   boost::shared_ptr<ImageGroundConnection> 
     igc(new IpiImageGroundConnection(ipi, dem, img));
   boost::shared_ptr<RayCaster> rcast(new IgcRayCaster(igc));

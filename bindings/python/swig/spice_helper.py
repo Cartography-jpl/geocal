@@ -349,6 +349,22 @@ class SpiceHelper(object):
 
     add_kernel = staticmethod(add_kernel)
 
+    def kernel_loaded(Kernel):
+        """
+
+        bool SpiceHelper::kernel_loaded(const std::string &Kernel)
+        Check if a given kernel file has already been loaded.
+
+        Note that this is a bit limited, this checks against the exact name
+        that was loaded. So if you load "dir/bar/foo.ker" and then check
+        against "dir/./bar/foo.ker" will return false even though this is
+        the same file. This is just a limitation of the spice function call.
+
+        """
+        return _spice_helper.SpiceHelper_kernel_loaded(Kernel)
+
+    kernel_loaded = staticmethod(kernel_loaded)
+
     def conversion_quaternion(From, To, T):
         """
 
@@ -359,6 +375,23 @@ class SpiceHelper(object):
         return _spice_helper.SpiceHelper_conversion_quaternion(From, To, T)
 
     conversion_quaternion = staticmethod(conversion_quaternion)
+
+    def state_vector(Body_id, Target_name, T, arg4, arg5):
+        """
+
+        void SpiceHelper::state_vector(int Body_id, const std::string &Target_name, const Time &T,
+        boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel)
+        Get the state vector (position and velocity, in meters), in the fixed
+        coordinates for the given Body_id, and the given Time.
+
+        The Target name can be anything spice recognizes.
+
+        Note we don't handle light travel time yet, or aberration. It isn't
+        clear if we want to or not. 
+        """
+        return _spice_helper.SpiceHelper_state_vector(Body_id, Target_name, T, arg4, arg5)
+
+    state_vector = staticmethod(state_vector)
 
     def __init__(self):
         _spice_helper.SpiceHelper_swiginit(self, _spice_helper.new_SpiceHelper())
@@ -411,6 +444,20 @@ def SpiceHelper_add_kernel(*args):
     """
     return _spice_helper.SpiceHelper_add_kernel(*args)
 
+def SpiceHelper_kernel_loaded(Kernel):
+    """
+
+    bool SpiceHelper::kernel_loaded(const std::string &Kernel)
+    Check if a given kernel file has already been loaded.
+
+    Note that this is a bit limited, this checks against the exact name
+    that was loaded. So if you load "dir/bar/foo.ker" and then check
+    against "dir/./bar/foo.ker" will return false even though this is
+    the same file. This is just a limitation of the spice function call.
+
+    """
+    return _spice_helper.SpiceHelper_kernel_loaded(Kernel)
+
 def SpiceHelper_conversion_quaternion(From, To, T):
     """
 
@@ -419,6 +466,21 @@ def SpiceHelper_conversion_quaternion(From, To, T):
     systems. 
     """
     return _spice_helper.SpiceHelper_conversion_quaternion(From, To, T)
+
+def SpiceHelper_state_vector(Body_id, Target_name, T, arg5, arg6):
+    """
+
+    void SpiceHelper::state_vector(int Body_id, const std::string &Target_name, const Time &T,
+    boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel)
+    Get the state vector (position and velocity, in meters), in the fixed
+    coordinates for the given Body_id, and the given Time.
+
+    The Target name can be anything spice recognizes.
+
+    Note we don't handle light travel time yet, or aberration. It isn't
+    clear if we want to or not. 
+    """
+    return _spice_helper.SpiceHelper_state_vector(Body_id, Target_name, T, arg5, arg6)
 
 
 

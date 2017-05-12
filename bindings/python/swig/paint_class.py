@@ -215,6 +215,10 @@ class PaintClass(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
 
         """
         _paint_class.PaintClass_swiginit(self, _paint_class.new_PaintClass(Class_id_img, Pan_img, Color, Class_id_first_color))
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _paint_class.delete_PaintClass
 PaintClass_swigregister = _paint_class.PaintClass_swigregister
 PaintClass_swigregister(PaintClass)

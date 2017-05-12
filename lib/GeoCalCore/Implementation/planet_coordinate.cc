@@ -28,18 +28,12 @@ void Planetocentric::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(naif_code);
 }
 
-template<> template<class Archive>
-void MarsPlanetocentricConverter::serialize(Archive & ar, const unsigned int version)
+template<class Archive>
+void PlanetocentricConverter::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(CoordinateConverter);
-  GEOCAL_BASE(MarsPlanetocentricConverter, CoordinateConverter);
-}
-
-template<> template<class Archive>
-void EuropaPlanetocentricConverter::serialize(Archive & ar, const unsigned int version)
-{
-  GEOCAL_GENERIC_BASE(CoordinateConverter);
-  GEOCAL_BASE(EuropaPlanetocentricConverter, CoordinateConverter);
+  GEOCAL_BASE(PlanetocentricConverter, CoordinateConverter);
+  ar & GEOCAL_NVP_(naif_code);
 }
 
 template<class Archive>
@@ -54,12 +48,19 @@ void PlanetSimpleDem::serialize(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(PlanetFixed);
 GEOCAL_IMPLEMENT(PlanetInertial);
 GEOCAL_IMPLEMENT(Planetocentric);
-GEOCAL_IMPLEMENT(MarsPlanetocentricConverter);
-GEOCAL_IMPLEMENT(EuropaPlanetocentricConverter);
+GEOCAL_IMPLEMENT(PlanetocentricConverter);
 GEOCAL_IMPLEMENT(PlanetSimpleDem);
 #endif
 
+//-----------------------------------------------------------------------
+/// Map from NAIF code to planet constants
+//-----------------------------------------------------------------------
+
 std::map<int, SpicePlanetConstant> PlanetConstant::h_map;
+
+//-----------------------------------------------------------------------
+/// Get the planet constants for the given NAIF code.
+//-----------------------------------------------------------------------
 
 SpicePlanetConstant PlanetConstant::h(int Naif_code)
 {
@@ -136,7 +137,7 @@ PlanetFixed::reference_surface_intersect_approximate
 void PlanetFixed::print(std::ostream& Os) const
 {
   Os << PlanetConstant::name(naif_code_)
-     << "Fixed (" << position[0] << " m, " << position[1] << " m, "
+     << " Fixed (" << position[0] << " m, " << position[1] << " m, "
      << position[2] << "m)";
 }
 
@@ -156,7 +157,19 @@ PlanetFixed PlanetFixed::target_position
 
 //-----------------------------------------------------------------------
 /// Return orbit data for the given target and spacecraft reference
-/// frame.
+/// frame. The target is the name of the satellite used by spice (e.g,
+/// "GLL", "MRO"), and the reference frame is the name of the camera
+/// reference frame (e.g., "GLL_SCAN_PLANE", "MRO_CTX"). Note that
+/// this combined both the space craft coordinate system and
+/// conversion to frame coordinates. We could split this out into a
+/// separate camera model, but there doesn't seem to be much of a
+/// reason to do this.
+///
+/// Note that the Target_name is of a body (e.g., something we have a
+/// spk kernel for), while the Spacecraft_reference_frame_name is for
+/// a frame (e.g., something we have a fk kernel for). In addition to
+/// the frame definition, you'll generally need a C kernel file (ck
+/// kernel) giving the orientation of the frame with the target.
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<QuaternionOrbitData> PlanetFixed::orbit_data
@@ -231,7 +244,7 @@ PlanetInertial::reference_surface_intersect_approximate
 void PlanetInertial::print(std::ostream& Os) const
 {
   Os << PlanetConstant::name(naif_code_)
-     << "Inertial (" << position[0] << " m, " << position[1] << " m, "
+     << " Inertial (" << position[0] << " m, " << position[1] << " m, "
      << position[2] << "m)";
 }
 
@@ -268,7 +281,7 @@ boost::shared_ptr<CartesianFixed> Planetocentric::convert_to_cf() const
 void Planetocentric::print(std::ostream& Os) const
 {
   Os << PlanetConstant::name(naif_code_)
-     << "Planetocentric: (" << latitude() << " deg, " 
+     << " Planetocentric: (" << latitude() << " deg, " 
      << longitude() << " deg, "
      << height_reference_surface() << " m)";
 }

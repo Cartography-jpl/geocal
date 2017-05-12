@@ -244,6 +244,10 @@ class SpotOrbit(geocal_swig.orbit.Orbit):
         """
         return _spot_orbit.SpotOrbit_orbit_data(self, *args)
 
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _spot_orbit.delete_SpotOrbit
 SpotOrbit.orbit_data = new_instancemethod(_spot_orbit.SpotOrbit_orbit_data, None, SpotOrbit)
 SpotOrbit_swigregister = _spot_orbit.SpotOrbit_swigregister

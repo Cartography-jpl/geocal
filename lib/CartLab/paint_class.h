@@ -26,6 +26,12 @@ private:
   boost::shared_ptr<RasterImage> class_id_img, pan_img;
   blitz::Array<int, 2> color;
   int class_id_first_color;
+  PaintClass() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(PaintClass);
 #endif

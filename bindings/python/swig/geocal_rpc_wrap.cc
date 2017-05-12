@@ -8316,6 +8316,121 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Rpc__v_naif_code__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rpc const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rpc const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_naif_code" "', argument " "1"" of type '" "GeoCal::Rpc const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::Rpc const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rpc__v_naif_code__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rpc > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rpc > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_naif_code" "', argument " "1"" of type '" "GeoCal::Rpc *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Rpc__v_naif_code" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->naif_code((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rpc__v_naif_code(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Rpc__v_naif_code",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_Rpc__v_naif_code__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_Rpc__v_naif_code__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Rpc__v_naif_code'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Rpc::naif_code() const\n"
+    "    GeoCal::Rpc::naif_code(int const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_Rpc_coordinate_converter_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
@@ -11099,6 +11214,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Rpc__sample_numerator", _wrap_Rpc__sample_numerator, METH_VARARGS, NULL},
 	 { (char *)"Rpc__fit_line_numerator", _wrap_Rpc__fit_line_numerator, METH_VARARGS, NULL},
 	 { (char *)"Rpc__fit_sample_numerator", _wrap_Rpc__fit_sample_numerator, METH_VARARGS, NULL},
+	 { (char *)"Rpc__v_naif_code", _wrap_Rpc__v_naif_code, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void Rpc::naif_code(int Naif_code)\n"
+		"Set the coordinate_converter based on the given NAIF code. \n"
+		""},
 	 { (char *)"Rpc_coordinate_converter_set", _wrap_Rpc_coordinate_converter_set, METH_VARARGS, NULL},
 	 { (char *)"Rpc_coordinate_converter_get", (PyCFunction)_wrap_Rpc_coordinate_converter_get, METH_O, NULL},
 	 { (char *)"Rpc_resolution_meter", _wrap_Rpc_resolution_meter, METH_VARARGS, (char *)"\n"

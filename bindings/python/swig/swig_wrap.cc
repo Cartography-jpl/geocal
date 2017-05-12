@@ -125,6 +125,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_orbit_time_shift)(void);
   INIT_TYPE INIT_FUNC(_tle_orbit)(void);
   INIT_TYPE INIT_FUNC(_spice_orbit)(void);
+  INIT_TYPE INIT_FUNC(_spice_planet_orbit)(void);
   INIT_TYPE INIT_FUNC(_argus_camera)(void);
   INIT_TYPE INIT_FUNC(_argus_orbit)(void);
   INIT_TYPE INIT_FUNC(_quickbird_camera)(void);
@@ -318,6 +319,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_orbit_time_shift", INIT_FUNC(_orbit_time_shift));
   INIT_MODULE(module, "_tle_orbit", INIT_FUNC(_tle_orbit));
   INIT_MODULE(module, "_spice_orbit", INIT_FUNC(_spice_orbit));
+  INIT_MODULE(module, "_spice_planet_orbit", INIT_FUNC(_spice_planet_orbit));
   INIT_MODULE(module, "_argus_camera", INIT_FUNC(_argus_camera));
   INIT_MODULE(module, "_argus_orbit", INIT_FUNC(_argus_orbit));
   INIT_MODULE(module, "_quickbird_camera", INIT_FUNC(_quickbird_camera));

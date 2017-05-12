@@ -70,6 +70,31 @@ void SpiceHelper::add_kernel(const std::string& Kernel_dir,
 }
 
 //-----------------------------------------------------------------------
+/// Check if a given kernel file has already been loaded.
+///
+/// Note that this is a bit limited, this checks against the exact
+/// name that was loaded. So if you load "dir/bar/foo.ker" and then
+/// check against "dir/./bar/foo.ker" will return false even though
+/// this is the same file. This is just a limitation of the spice
+/// function call.
+//-----------------------------------------------------------------------
+
+bool SpiceHelper::kernel_loaded(const std::string& Kernel)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  char filetype[1000], source[1000];
+  int handle;
+  SpiceBoolean found;
+  kinfo_c(Kernel.c_str(), 1000,1000, filetype, source, &handle, &found);
+  spice_error_check();
+  return found;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Add an additional kernel, after the one we automatically get
 /// (i.e., $SPICEDATA/geocal.ker).
 //-----------------------------------------------------------------------

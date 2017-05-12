@@ -206,6 +206,10 @@ class ConstantRasterImage(geocal_swig.raster_image_variable.RasterImageVariable)
         Construct a MemoryRasterImage of the given MapInfo. 
         """
         _constant_raster_image.ConstantRasterImage_swiginit(self, _constant_raster_image.new_ConstantRasterImage(*args))
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _constant_raster_image.delete_ConstantRasterImage
 ConstantRasterImage_swigregister = _constant_raster_image.ConstantRasterImage_swigregister
 ConstantRasterImage_swigregister(ConstantRasterImage)

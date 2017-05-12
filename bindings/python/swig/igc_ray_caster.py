@@ -318,6 +318,10 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
     def number_sample(self):
         return self._v_number_sample()
 
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _igc_ray_caster.delete_IgcRayCaster
 IgcRayCaster._v_start_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_start_sample, None, IgcRayCaster)
 IgcRayCaster._v_number_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_sample, None, IgcRayCaster)

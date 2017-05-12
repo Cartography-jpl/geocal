@@ -1,6 +1,40 @@
 #include "hdf_file.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace H5;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+
+template<class Archive>
+void HdfFile::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void HdfFile::load(Archive & ar, const unsigned int version)
+{
+  try {
+    h.reset(new H5File(fname, flag));
+  } catch(const H5::Exception& e) {
+    Exception en;
+    en << "While trying to open file '" << fname 
+       << "' a HDF 5 Exception thrown:\n"
+       << "  " << e.getDetailMsg();
+    throw en;
+  }
+}
+
+template<class Archive>
+void HdfFile::serialize(Archive & ar, const unsigned int version) 
+{
+  GEOCAL_GENERIC_BASE(HdfFile);
+  ar & GEOCAL_NVP(flag) & GEOCAL_NVP(fname);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+GEOCAL_IMPLEMENT(HdfFile);
+#endif
 
 //-----------------------------------------------------------------------
 /// Open the given file with the given mode.
@@ -9,7 +43,6 @@ using namespace H5;
 HdfFile::HdfFile(const std::string& Fname, Mode M)
 : fname(Fname)
 {
-  unsigned int flag;
   switch(M) {
   case READ:
     flag = H5F_ACC_RDONLY;
@@ -35,6 +68,9 @@ HdfFile::HdfFile(const std::string& Fname, Mode M)
        << "  " << e.getDetailMsg();
     throw en;
   }
+  // If we serialize this, then we want to reopen this as read write.
+  if(flag == H5F_ACC_TRUNC)
+    flag = H5F_ACC_RDWR;
 }
     
 //-----------------------------------------------------------------------

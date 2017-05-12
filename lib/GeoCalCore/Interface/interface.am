@@ -62,6 +62,7 @@ libgeocal_la_SOURCES+= @srcinterface@/orbit.cc
 geocalinc_HEADERS+= @srcinterface@/memory_raster_image.h
 libgeocal_la_SOURCES+= @srcinterface@/memory_raster_image.cc
 geocalinc_HEADERS+= @srcinterface@/constant_raster_image.h
+libgeocal_la_SOURCES+= @srcinterface@/constant_raster_image.cc
 geocalinc_HEADERS+= @srcinterface@/dem_map_info.h
 libgeocal_la_SOURCES+= @srcinterface@/dem_map_info.cc
 geocalinc_HEADERS+= @srcinterface@/feature_detector.h
@@ -91,6 +92,7 @@ libgeocal_la_SOURCES+= @srcinterface@/image_ground_connection.cc
 geocalinc_HEADERS+= @srcinterface@/igc_collection.h
 libgeocal_la_SOURCES+= @srcinterface@/igc_collection.cc
 geocalinc_HEADERS+= @srcinterface@/geometric_model.h
+libgeocal_la_SOURCES+= @srcinterface@/geometric_model.cc
 
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/image_coordinate_wrap.cc

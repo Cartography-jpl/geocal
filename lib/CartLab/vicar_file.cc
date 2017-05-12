@@ -647,10 +647,8 @@ Rpc VicarFile::rpc() const
     res.rpc_type = Rpc::RPC_A;
   else
     throw MetadataMissing("Don't recognize value of NITF_CETAG");
-  if(has_label("NAIF_CODE", g)) {
-    int naif_code = label<int>("NAIF_CODE", g);
-    std::cerr << "Faking NAIF CODE " << naif_code << "\n";
-  }
+  if(has_label("NAIF_CODE", g))
+    res.naif_code(label<int>("NAIF_CODE", g));
   res.error_bias = atof(label<string>("RPC_FIELD2",  g).c_str());
   res.error_random = atof(label<string>("RPC_FIELD3",  g).c_str());
   res.line_offset = atof(label<string>("RPC_FIELD4",  g).c_str());

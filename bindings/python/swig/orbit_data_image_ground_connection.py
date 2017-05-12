@@ -204,11 +204,12 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
     def __init__(self, *args):
         """
 
-        GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(Orbit &Orb, const Time &Tm, const boost::shared_ptr< Camera > &Cam,
-        const boost::shared_ptr< Dem > &D, const boost::shared_ptr<
-        RasterImage > &Img, const std::string Title="", const
-        boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction
-        >(), double Resolution=30, int Band=0, double Max_height=9000)
+        GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(const boost::shared_ptr< Orbit > &Orb, const Time &Tm, const
+        boost::shared_ptr< Camera > &Cam, const boost::shared_ptr< Dem > &D,
+        const boost::shared_ptr< RasterImage > &Img, const std::string
+        Title="", const boost::shared_ptr< Refraction >
+        &Ref=boost::shared_ptr< Refraction >(), double Resolution=30, int
+        Band=0, double Max_height=9000)
         Constructor that takes an Orbit and a time.
 
         We populate this using the OrbitData from the orbit for that time.
@@ -240,6 +241,21 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
         function, but for now we have this defined just for this class. 
         """
         return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_image_coordinate_with_derivative(self, Gc)
+
+
+    def _v_orbit(self):
+        """
+
+        const boost::shared_ptr<Orbit>& GeoCal::OrbitDataImageGroundConnection::orbit() const
+        Orbit that we are using, may be null if we are just using a fixed
+        orbit data. 
+        """
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit(self)
+
+
+    @property
+    def orbit(self):
+        return self._v_orbit()
 
 
     def _v_orbit_data(self, *args):
@@ -355,16 +371,13 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
       self._v_max_height(value)
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.orbit_data,self.camera,self.dem,self.image,self.title,self.refraction,self.resolution,self.band,self.max_height)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_data_image_ground_connection.delete_OrbitDataImageGroundConnection
 OrbitDataImageGroundConnection.cf_look_vector = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection.image_coordinate_with_derivative = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_image_coordinate_with_derivative, None, OrbitDataImageGroundConnection)
+OrbitDataImageGroundConnection._v_orbit = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_orbit_data = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_orbit_data, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_camera = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_camera, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_resolution = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_resolution, None, OrbitDataImageGroundConnection)

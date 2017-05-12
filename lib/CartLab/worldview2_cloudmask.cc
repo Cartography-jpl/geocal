@@ -1,8 +1,20 @@
 #include "worldview2_cloudmask.h"
 #include "magnify_replicate.h"
 #include "raster_averaged.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void WorldView2CloudMask::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster);
+  ar & GEOCAL_NVP(cloud_data);
+}
+
+GEOCAL_IMPLEMENT(WorldView2CloudMask);
+#endif
 
 // This is the helper class that handles the cloud calculation once we
 // have averaged the data.

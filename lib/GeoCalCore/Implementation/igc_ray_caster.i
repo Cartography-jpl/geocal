@@ -24,5 +24,6 @@ public:
   virtual blitz::Array<double, 6> next_position();
   %python_attribute(start_sample, int);
   %python_attribute(number_sample, int);
+  %pickle_serialization();
 };
 }

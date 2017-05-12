@@ -210,6 +210,7 @@ inline boost::shared_ptr<QuaternionOrbitData> HdfOrbit<PositionType, TimeCreator
 typedef HdfOrbit<EciTod, TimeAcsCreator> HdfOrbit_EciTod_TimeAcs;
 typedef HdfOrbit<Eci, TimePgsCreator> HdfOrbit_Eci_TimePgs;
 typedef HdfOrbit<Eci, TimeJ2000Creator> HdfOrbit_Eci_TimeJ2000;
+typedef HdfOrbit<EciTod, TimeJ2000Creator> HdfOrbit_EciTod_TimeJ2000;
 }
 
 GEOCAL_EXPORT_KEY(HdfOrbit_EciTod_TimeAcs);
@@ -218,4 +219,5 @@ GEOCAL_EXPORT_KEY(HdfOrbit_Eci_TimeJ2000);
 GEOCAL_CLASS_VERSION(HdfOrbit_EciTod_TimeAcs, 1);
 GEOCAL_CLASS_VERSION(HdfOrbit_Eci_TimePgs, 1);
 GEOCAL_CLASS_VERSION(HdfOrbit_Eci_TimeJ2000, 1);
+GEOCAL_CLASS_VERSION(HdfOrbit_EciTod_TimeJ2000, 1);
 #endif

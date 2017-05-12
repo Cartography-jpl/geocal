@@ -119,6 +119,16 @@ private:
   // prevent allocating/freeing at every position, and for use in
   // determining the starting point for the next position.
   blitz::Array<double, 6> result_cache;
+  IgcRayCaster() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(IgcRayCaster);
 #endif

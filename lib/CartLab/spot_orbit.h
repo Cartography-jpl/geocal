@@ -58,6 +58,12 @@ private:
   std::vector<Time> teph;
   std::vector<blitz::Array<double, 1> > posvel;
   std::map<Time, boost::math::quaternion<double> > sc_to_orb;
+  SpotOrbit() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(SpotOrbit);
 #endif

@@ -83,7 +83,6 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
   // polynomial extrapolates poorly
   double min_lat = -999, max_lat = -999, min_lon = -999, max_lon = -999;
   bool first = true;
-  int naif_code = -1;
   for(int ih = 0; ih < Nheight; ++ih)
     for(int i = 0; i < Nln + 1; ++i)
       for(int j = 0; j < Nsmp + 1; ++j) {
@@ -107,7 +106,7 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
 	  if(first) {
 	    min_lat = max_lat = pt->latitude();
 	    min_lon = max_lon = pt->longitude();
-	    naif_code = pt->convert_to_cf()->naif_code();
+	    rpc.naif_code(pt->convert_to_cf()->naif_code());
 	    first = false;
 	  } else {
 	    min_lat = std::min(min_lat, pt->latitude());
@@ -135,23 +134,6 @@ Rpc Rpc::generate_rpc(const ImageGroundConnection& Igc,
   rpc.latitude_scale = floor(rpc.latitude_scale * 10000.0 + 0.5) / 10000.0;
   rpc.longitude_offset = floor(rpc.longitude_offset * 10000.0 + 0.5) / 10000.0;
   rpc.longitude_scale = floor(rpc.longitude_scale * 10000.0 + 0.5) / 10000.0;
-  // We'll want to come back and revisit this when we can
-  // planet_coordinate to just take naif_code
-  switch(naif_code) {
-  case 399:
-    // Default is earth/geodetic
-    break;
-  case PlanetConstant::MARS_NAIF_CODE:
-    rpc.coordinate_converter.reset(new MarsPlanetocentricConverter);
-    break;
-  case PlanetConstant::EUROPA_NAIF_CODE:
-    rpc.coordinate_converter.reset(new EuropaPlanetocentricConverter);
-    break;
-  default:
-    Exception e;
-    e << "Don't support NAIF code " << naif_code;
-    throw e;
-  }
   rpc.fit_all(ln, smp, lat, lon, h);
   return rpc;
 }
@@ -168,6 +150,19 @@ Rpc::Rpc()
 }
 
 //-----------------------------------------------------------------------
+/// Set the coordinate_converter based on the given NAIF code.
+//-----------------------------------------------------------------------
+
+void Rpc::naif_code(int Naif_code)
+{
+  // Default is earth/geodetic
+  if(Naif_code != CoordinateConverter::EARTH_NAIF_CODE)
+    coordinate_converter.reset(new PlanetocentricConverter(Naif_code));
+  else
+    coordinate_converter.reset((CoordinateConverter*) 0);
+}
+
+//-----------------------------------------------------------------------
 ///  Print a Rpc to a stream
 //-----------------------------------------------------------------------
 
@@ -177,6 +172,7 @@ void Rpc::print(std::ostream& Os) const
      << "  Type:             " << (rpc_type == RPC_A ? "A" : 
 				   (rpc_type == RPC_B ? "B" : "Unknown"))
      << "\n"
+     << "  Planet:           " << PlanetConstant::name(naif_code()) << "\n"
      << "  Error Bias:       " << error_bias << "\n"
      << "  Error Random:     " << error_random << "\n"
      << "  Line offset:      " << line_offset << "\n"

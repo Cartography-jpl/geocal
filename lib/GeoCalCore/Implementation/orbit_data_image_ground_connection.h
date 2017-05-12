@@ -11,7 +11,7 @@ namespace GeoCal {
   OrbitData and a Camera.
 *******************************************************************/
 
-class OrbitDataImageGroundConnection : public ImageGroundConnection,
+class OrbitDataImageGroundConnection : public virtual ImageGroundConnection,
 				       public Observer<Orbit> {
 public:
 //-----------------------------------------------------------------------
@@ -39,10 +39,10 @@ public:
 /// class an Observer of the underlying orbit. When the orbit
 /// notifies us of changes, we regenerate the orbit data. This means
 /// that this class will remain in sync with changes in the underlying
-/// orbit. 
+/// orbit.
 //-----------------------------------------------------------------------
 
-  OrbitDataImageGroundConnection(Orbit& Orb,
+  OrbitDataImageGroundConnection(const boost::shared_ptr<Orbit>& Orb,
   				 const Time& Tm,
   				 const boost::shared_ptr<Camera>& Cam, 
   				 const boost::shared_ptr<Dem>& D,
@@ -53,12 +53,14 @@ public:
   				 double Resolution=30, int Band=0, 
   				 double Max_height=9000)
     : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
-  			    Title), cam(Cam),
+  			    Title), 
+      orb(Orb),
+      cam(Cam),      
       refraction_(Ref),
       res(Resolution), b(Band), max_h(Max_height) 
   {
-    od = Orb.orbit_data(TimeWithDerivative(Tm));
-    Orb.add_observer(*this);
+    od = orb->orbit_data(TimeWithDerivative(Tm));
+    orb->add_observer(*this);
   }
 
 //-----------------------------------------------------------------------
@@ -207,6 +209,12 @@ public:
 
   const boost::shared_ptr<OrbitData>& orbit_data() const { return od; }
 
+//-----------------------------------------------------------------------
+/// Orbit that we are using, may be null if we are just using a fixed
+/// orbit data.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<Orbit>& orbit() const { return orb; }
 
 //-----------------------------------------------------------------------
 /// Set orbit data that we are using
@@ -282,12 +290,19 @@ public:
   virtual int number_line() const { return cam->number_line(band()); }
   virtual int number_sample() const { return cam->number_sample(band()); }
 private:
+  boost::shared_ptr<Orbit> orb;
   boost::shared_ptr<OrbitData> od;
   boost::shared_ptr<Camera> cam;
   boost::shared_ptr<Refraction> refraction_;
   double res;
   int b;
   double max_h;
+  OrbitDataImageGroundConnection() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(OrbitDataImageGroundConnection);
 #endif

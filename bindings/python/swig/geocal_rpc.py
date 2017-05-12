@@ -293,6 +293,24 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     def fit_sample_numerator(self, value):
       self._fit_sample_numerator(value)
 
+
+    def _v_naif_code(self, *args):
+        """
+
+        void Rpc::naif_code(int Naif_code)
+        Set the coordinate_converter based on the given NAIF code. 
+        """
+        return _geocal_rpc.Rpc__v_naif_code(self, *args)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+    @naif_code.setter
+    def naif_code(self, value):
+      self._v_naif_code(value)
+
     coordinate_converter = _swig_property(_geocal_rpc.Rpc_coordinate_converter_get, _geocal_rpc.Rpc_coordinate_converter_set)
 
     def resolution_meter(self, D):
@@ -522,6 +540,7 @@ Rpc._sample_denominator = new_instancemethod(_geocal_rpc.Rpc__sample_denominator
 Rpc._sample_numerator = new_instancemethod(_geocal_rpc.Rpc__sample_numerator, None, Rpc)
 Rpc._fit_line_numerator = new_instancemethod(_geocal_rpc.Rpc__fit_line_numerator, None, Rpc)
 Rpc._fit_sample_numerator = new_instancemethod(_geocal_rpc.Rpc__fit_sample_numerator, None, Rpc)
+Rpc._v_naif_code = new_instancemethod(_geocal_rpc.Rpc__v_naif_code, None, Rpc)
 Rpc.resolution_meter = new_instancemethod(_geocal_rpc.Rpc_resolution_meter, None, Rpc)
 Rpc.fit = new_instancemethod(_geocal_rpc.Rpc_fit, None, Rpc)
 Rpc.fit_all = new_instancemethod(_geocal_rpc.Rpc_fit_all, None, Rpc)

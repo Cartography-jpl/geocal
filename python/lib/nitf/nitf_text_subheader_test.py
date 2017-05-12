@@ -7,7 +7,7 @@ def test_text_subheader_basic():
     t = NitfTextSubheader()
 
     t.textid = 'abcdefg'
-    t.txtalvl = '001'
+    t.txtalvl = 1
     t.txtitl = 'ABCDEFG'
 
     fh = six.BytesIO()
@@ -18,5 +18,5 @@ def test_text_subheader_basic():
     t2.read_from_file(fh2)
 
     assert t2.textid  ==  'abcdefg'
-    assert t2.txtalvl == '001'
+    assert t2.txtalvl == 1
     assert t2.txtitl == 'ABCDEFG'

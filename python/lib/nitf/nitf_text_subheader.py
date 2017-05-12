@@ -8,7 +8,7 @@ The NITF text subheader is described in Table A-6, starting page 107.
 '''
 desc = [['te', "", 2, str],
         ['textid', "", 7, str],
-        ['txtalvl', "", 3, str],
+        ['txtalvl', "", 3, int],
         ['txtdt', "", 14, str],
         ['txtitl', "", 80, str],
         ['tsclas', "", 1, str],

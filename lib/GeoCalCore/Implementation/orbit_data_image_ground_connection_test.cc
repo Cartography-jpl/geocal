@@ -13,8 +13,8 @@ BOOST_AUTO_TEST_CASE(basic)
   boost::shared_ptr<OrbitData> od = orb.orbit_data(tmin);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
-  boost::shared_ptr<RasterImage> img(new MemoryRasterImage(cam->number_line(0),
-						   cam->number_sample(0)));
+  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
+				     cam->number_sample(0), 10));
   OrbitDataImageGroundConnection igc(od, cam, dem, img);
   ImageCoordinate ic(1.0, 1504 / 2);
   Geodetic g(*igc.ground_coordinate(ic));
@@ -44,13 +44,15 @@ BOOST_AUTO_TEST_CASE(basic)
 
 BOOST_AUTO_TEST_CASE(serialize)
 {
+  if(!have_serialize_supported())
+    return;
   Time tmin = Time::parse_time("2003-01-01T11:11:00Z");
   KeplerOrbit orb;
   boost::shared_ptr<OrbitData> od = orb.orbit_data(tmin);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
-  boost::shared_ptr<RasterImage> img(new MemoryRasterImage(cam->number_line(0),
-						   cam->number_sample(0)));
+  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
+				     cam->number_sample(0), 10));
   boost::shared_ptr<ImageGroundConnection> igc
     (new OrbitDataImageGroundConnection (od, cam, dem, img));
   std::string d = serialize_write_string(igc);

@@ -5,6 +5,7 @@ from .nitf_tre_rpc import *
 from .nitf_tre_geosde import *
 from test_support import *
 import subprocess
+import os
 
 # Do these in a few places, so collect in one spot.
 def create_image_seg(f):
@@ -197,33 +198,26 @@ def test_read_quickbird():
     # This is a large file, which we don't want to depend on. Run this
     # test if we happen to find the data, but skip otherwise.
     fname = "/raid21/quickbird/05NOV23034644-P1BS-005545406180_01_P001.NTF"
-    try: 
+    if(os.path.exists(fname))
         f = NitfFile(fname)
         print(f)
-    except FileNotFoundError:
-        pass
 
 def test_read_worldview():
     '''Test reading a worldview NITF file.'''
     # This is a large file, which we don't want to depend on. Run this
     # test if we happen to find the data, but skip otherwise.
     fname = "/raid23/worldview/nagoya/12JAN23015358-P1BS-052654848010_01_P003.NTF"
-    try: 
+    if(os.path.exists(fname))
         f = NitfFile(fname)
         print(f)
-    except FileNotFoundError:
-        pass
-    
 
 def test_read_ikonos():
     '''Test reading a ikonos NITF file.'''
     # This is a large file, which we don't want to depend on. Run this
     # test if we happen to find the data, but skip otherwise.
     fname = "/raid20/11DEC11IK0101000po_755166_pan_0000000.ntf"
-    try: 
+    if(os.path.exists(fname))
         f = NitfFile(fname)
         print(f)
-    except FileNotFoundError:
-        pass
     
     

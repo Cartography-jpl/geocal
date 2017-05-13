@@ -2,6 +2,7 @@
 #include "orbit_data_image_ground_connection.h"
 #include "simple_dem.h"
 #include "memory_raster_image.h"
+#include "constant_raster_image.h"
 #include "ecr.h"
 using namespace GeoCal;
 

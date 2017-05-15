@@ -249,19 +249,91 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     def quaternion_orbit_data(self):
         return self._v_quaternion_orbit_data()
 
-
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
-    def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.quaternion_orbit_data)
-
     __swig_destroy__ = _orbit_quaternion_list.delete_OrbitQuaternionList
 OrbitQuaternionList.orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList_orbit_data, None, OrbitQuaternionList)
 OrbitQuaternionList._v_quaternion_orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data, None, OrbitQuaternionList)
 OrbitQuaternionList_swigregister = _orbit_quaternion_list.OrbitQuaternionList_swigregister
 OrbitQuaternionList_swigregister(OrbitQuaternionList)
+
+class OrbitListCache(OrbitQuaternionList):
+    """
+
+    Some orbits are expensive to calculate (e.g., SpicePlanetOrbit).
+
+    Often it is perfectly fine to only calculate this at some fixed set of
+    times and then interpolate, which can be significantly faster. This
+    class supports this.
+
+    C++ includes: orbit_quaternion_list.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Orbit_underlying, Tt, Sample=0.0):
+        """
+
+        GeoCal::OrbitListCache::OrbitListCache(const boost::shared_ptr< Orbit > &Orbit_underlying, const
+        boost::shared_ptr< TimeTable > &Tt, double Sample=0.0)
+        Create a OrbitListCache that calculates the orbit at each time found
+        for image coordinate line from Tt.min_line() to tt.max_line() for the
+        given sample.
+
+        We cache the orbit data. If the underlying orbit changes, we throw
+        away the cached values. 
+        """
+        _orbit_quaternion_list.OrbitListCache_swiginit(self, _orbit_quaternion_list.new_OrbitListCache(Orbit_underlying, Tt, Sample))
+
+    def _v_orbit_underlying(self):
+        """
+
+        const boost::shared_ptr<Orbit>& GeoCal::OrbitListCache::orbit_underlying() const
+        Underlying orbit. 
+        """
+        return _orbit_quaternion_list.OrbitListCache__v_orbit_underlying(self)
+
+
+    @property
+    def orbit_underlying(self):
+        return self._v_orbit_underlying()
+
+
+    def _v_time_table(self):
+        """
+
+        const boost::shared_ptr<TimeTable>& GeoCal::OrbitListCache::time_table() const
+        Time table we sample orbit at. 
+        """
+        return _orbit_quaternion_list.OrbitListCache__v_time_table(self)
+
+
+    @property
+    def time_table(self):
+        return self._v_time_table()
+
+
+    def _v_sample(self):
+        """
+
+        double GeoCal::OrbitListCache::sample() const
+        Sample we use with time table. 
+        """
+        return _orbit_quaternion_list.OrbitListCache__v_sample(self)
+
+
+    @property
+    def sample(self):
+        return self._v_sample()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _orbit_quaternion_list.delete_OrbitListCache
+OrbitListCache._v_orbit_underlying = new_instancemethod(_orbit_quaternion_list.OrbitListCache__v_orbit_underlying, None, OrbitListCache)
+OrbitListCache._v_time_table = new_instancemethod(_orbit_quaternion_list.OrbitListCache__v_time_table, None, OrbitListCache)
+OrbitListCache._v_sample = new_instancemethod(_orbit_quaternion_list.OrbitListCache__v_sample, None, OrbitListCache)
+OrbitListCache_swigregister = _orbit_quaternion_list.OrbitListCache_swigregister
+OrbitListCache_swigregister(OrbitListCache)
 
 
 

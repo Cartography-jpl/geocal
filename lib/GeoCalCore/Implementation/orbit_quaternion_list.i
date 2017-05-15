@@ -7,7 +7,9 @@
 #include "orbit_quaternion_list.h"
 %}
 %base_import(orbit)
+%import "time_table.i"
 %geocal_shared_ptr(GeoCal::OrbitQuaternionList);
+%geocal_shared_ptr(GeoCal::OrbitListCache);
 
 namespace GeoCal {
 class OrbitQuaternionList : public Orbit {
@@ -18,9 +20,20 @@ public:
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;
   %python_attribute(quaternion_orbit_data, std::vector<boost::shared_ptr<QuaternionOrbitData> >)
-  %pickle_init(1, self.quaternion_orbit_data);
 protected:
   virtual boost::shared_ptr<QuaternionOrbitData> orbit_data_create(Time T) 
     const;
 };
+
+class OrbitListCache: public OrbitQuaternionList {
+public:
+  OrbitListCache(const boost::shared_ptr<Orbit>& Orbit_underlying,
+		 const boost::shared_ptr<TimeTable>& Tt,
+		 double Sample = 0.0);
+  %python_attribute(orbit_underlying, boost::shared_ptr<Orbit>);
+  %python_attribute(time_table, boost::shared_ptr<TimeTable>);
+  %python_attribute(sample, double);
+  %pickle_serialization()
+};
+  
 }

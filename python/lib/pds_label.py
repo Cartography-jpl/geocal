@@ -29,7 +29,7 @@ def pds_label(fname):
         if(m):
             k = m.group(1)
             v = m.group(2).strip()
-            m = re.match(r'"(.*)', v)
+            m = re.match(r'"(.*)"', v)
             if(m):
                 v = m.group(1)
             res[k] = v

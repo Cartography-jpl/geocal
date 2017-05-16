@@ -14,14 +14,14 @@ CSEPHA is documented in section 3.4.
 '''
 desc = ["CSEPHA",
         ["ephem_flag", "ephemeris flag", 12, str],
-        ["dt_ephem", "time b/w eph vectors", 5, int],
+        ["dt_ephem", "time b/w eph vectors", 5, float, {"frmt" : "%03.1lf"}],
         ["date_ephem", "day of first eph vector", 8, int],
-        ["t0_ephem", "UTC of first eph vector", 13, int],
+        ["t0_ephem", "UTC of first eph vector", 13, str],
         ["num_ephem", "number of eph vectors", 3, int],
         [["loop", "f.num_ephem"],
-         ["ephem_x", "x-coor of eph vector", 12, int],
-         ["ephem_y", "y-coor of eph vector", 12, int],
-         ["ephem_z", "z-coor of eph vector", 12, int],
+         ["ephem_x", "x-coor of eph vector", 12, float, {"frmt" : "%+012.2lf"}],
+         ["ephem_y", "y-coor of eph vector", 12, float, {"frmt" : "%+012.2lf"}],
+         ["ephem_z", "z-coor of eph vector", 12, float, {"frmt" : "%+012.2lf"}],
         ], #end loop
 ]
 

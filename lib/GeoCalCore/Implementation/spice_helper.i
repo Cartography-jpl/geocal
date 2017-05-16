@@ -21,9 +21,8 @@ public:
   static std::string body_name(int Body_id);
   static std::string fixed_frame_name(int Body_id);
   static bool spice_available();
-  static void spice_setup(const std::string& Kernel = "geocal.ker");
-  static void add_kernel(const std::string& Kernel_dir, 
-			 const std::string& Kernel);
+  static void spice_setup(const std::string& Kernel = "geocal.ker",
+			  bool Force_kernel_pool_reset = false);
   static void add_kernel(const std::string& Kernel);
   static bool kernel_loaded(const std::string& Kernel);
   static boost::math::quaternion<double> 

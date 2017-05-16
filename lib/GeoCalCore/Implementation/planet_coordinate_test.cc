@@ -168,8 +168,8 @@ public:
     : galileo_name("GLL"),
       sc_frame_name("GLL_SCAN_PLANE")
   {
-    SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernel",
-     			    "galileo.ker");
+    SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernel/" +
+     			    std::string("galileo.ker"));
     double day_to_sec = 24 * 60 * 60;
     // We can write a general conversion from the time given in VICAR
     // to time. But this is "day 350". The -1 is because we start with

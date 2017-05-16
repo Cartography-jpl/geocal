@@ -2260,6 +2260,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/vicar_wrap_test.py \
 	@srcpythonlib@/with_parameter_test.py \
 	@srcpythonlib@/world_view2_reflectance_test.py \
+	@srcpythonlib@/pds_label_test.py \
 	@srcpythonlibnitf@/__init__.py \
 	@srcpythonlibnitf@/basic_nitf_example.py \
 	@srcpythonlibnitf@/README \
@@ -2268,10 +2269,12 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlibnitf@/nitf_file_test.py \
 	@srcpythonlibnitf@/nitf_image_test.py \
 	@srcpythonlibnitf@/nitf_image_subheader_test.py \
-	@srcpythonlibnitf@/nitf_tre_test.py \
-	@srcpythonlibnitf@/nitf_tre_pixqla_test.py \
+	@srcpythonlibnitf@/nitf_text_subheader_test.py \
+	@srcpythonlibnitf@/nitf_tre_csepha_test.py \
 	@srcpythonlibnitf@/nitf_tre_engrda_test.py \
-	@srcpythonlibnitf@/nitf_tre_sensrb_test.py @docpythonsrc@ \
+	@srcpythonlibnitf@/nitf_tre_pixqla_test.py \
+	@srcpythonlibnitf@/nitf_tre_sensrb_test.py \
+	@srcpythonlibnitf@/nitf_tre_test.py @docpythonsrc@ \
 	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
 	@testsupportsrc@/test_support.py \
@@ -3156,7 +3159,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py \
 	@srcpythonlib@/rsm_polynomial.py @srcpythonlib@/shape_file.py \
-	@srcpythonlib@/air_mspi_igc.py
+	@srcpythonlib@/air_mspi_igc.py @srcpythonlib@/pds_label.py
 geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_field.py \
 	@srcpythonlibnitf@/nitf_file_header.py \

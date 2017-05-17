@@ -256,6 +256,73 @@ ImageMask.__str__ = new_instancemethod(_image_mask.ImageMask___str__, None, Imag
 ImageMask_swigregister = _image_mask.ImageMask_swigregister
 ImageMask_swigregister(ImageMask)
 
+class OffsetImageMask(ImageMask):
+    """
+
+    This gives an ImageMask that is an offset of a given one.
+
+    This would be used for example when an image is subsetted.
+
+    C++ includes: image_mask.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+
+    def _v_original_image_mask(self):
+        """
+
+        const boost::shared_ptr<ImageMask>& GeoCal::OffsetImageMask::original_image_mask() const
+        Original ImageMask. 
+        """
+        return _image_mask.OffsetImageMask__v_original_image_mask(self)
+
+
+    @property
+    def original_image_mask(self):
+        return self._v_original_image_mask()
+
+
+    def _v_line_offset(self):
+        """
+
+        double GeoCal::OffsetImageMask::line_offset() const
+        Return line offset. 
+        """
+        return _image_mask.OffsetImageMask__v_line_offset(self)
+
+
+    @property
+    def line_offset(self):
+        return self._v_line_offset()
+
+
+    def _v_sample_offset(self):
+        """
+
+        double GeoCal::OffsetImageMask::sample_offset() const
+        Return line offset. 
+        """
+        return _image_mask.OffsetImageMask__v_sample_offset(self)
+
+
+    @property
+    def sample_offset(self):
+        return self._v_sample_offset()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _image_mask.delete_OffsetImageMask
+OffsetImageMask._v_original_image_mask = new_instancemethod(_image_mask.OffsetImageMask__v_original_image_mask, None, OffsetImageMask)
+OffsetImageMask._v_line_offset = new_instancemethod(_image_mask.OffsetImageMask__v_line_offset, None, OffsetImageMask)
+OffsetImageMask._v_sample_offset = new_instancemethod(_image_mask.OffsetImageMask__v_sample_offset, None, OffsetImageMask)
+OffsetImageMask_swigregister = _image_mask.OffsetImageMask_swigregister
+OffsetImageMask_swigregister(OffsetImageMask)
+
 class CombinedImageMask(ImageMask):
     """
 

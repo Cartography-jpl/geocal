@@ -1,7 +1,8 @@
 #include "image_mask.h"
+#include "ostream_pad.h"
+#include "geocal_serialize_support.h"
 #include <boost/foreach.hpp>
 #include <cmath>
-#include "geocal_serialize_support.h"
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -9,6 +10,14 @@ template<class Archive>
 void ImageMask::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(ImageMask);
+}
+
+template<class Archive>
+void OffsetImageMask::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(ImageMask);
+  GEOCAL_BASE(OffsetImageMask, ImageMask);
+  ar & GEOCAL_NVP_(im) & GEOCAL_NVP_(line_offset) & GEOCAL_NVP_(sample_offset);
 }
 
 template<class Archive>
@@ -20,6 +29,7 @@ void CombinedImageMask::serialize(Archive & ar, const unsigned int version)
 }
 
 GEOCAL_IMPLEMENT(ImageMask);
+GEOCAL_IMPLEMENT(OffsetImageMask);
 GEOCAL_IMPLEMENT(CombinedImageMask);
 #endif
 
@@ -72,6 +82,21 @@ bool CombinedImageMask::area_any_masked(int Line, int Sample, int Number_line,
       return true;
   }
   return false;
+}
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+void OffsetImageMask::print(std::ostream& Os) const
+{
+  OstreamPad opad(Os, "    ");
+  Os << "OffsetImageMask:\n"
+     << "  Line offset:   " << line_offset_ << "\n"
+     << "  Sample offset: " << sample_offset_ << "\n"
+     << "  Underlying mask:\n";
+  opad << *im_ << "\n";
+  opad.strict_sync();
 }
 
 //-----------------------------------------------------------------------

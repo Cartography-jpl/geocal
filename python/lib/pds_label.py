@@ -16,7 +16,9 @@ def pds_label_text(fname):
     with open(fname, "r") as fh:
         while True:
             line = fh.readline()
-            res += line
+            # Strip off /r. Shows up in python 2, but not 3. Not sure why
+            # the difference, but in any case we don't want them
+            res += line.replace('\r','')
             if line.strip() == 'END' or line == '':
                 break
     return res

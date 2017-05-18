@@ -114,3 +114,9 @@ def isolated_dir(tmpdir):
         yield curdir
     finally:
         os.chdir(curdir)
+
+matlab = pytest.mark.skipif(
+    not pytest.config.getoption("--run-matlab"),
+    reason="need --run-matlab option to run"
+)
+        

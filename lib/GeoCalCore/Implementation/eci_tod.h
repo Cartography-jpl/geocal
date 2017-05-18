@@ -19,6 +19,8 @@ public:
 
   EciTod() {}
   EciTod(const Eci& Eci_coor, const Time& T);
+  EciTod(const Ecr& P, const Time& T);
+  EciTod(const GroundCoordinate& Gc, const Time& T);
 
 //-----------------------------------------------------------------------
 /// Make an EciTod with the given position, in meters.

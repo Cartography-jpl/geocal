@@ -2270,6 +2270,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/with_parameter_test.py \
 	@srcpythonlib@/world_view2_reflectance_test.py \
 	@srcpythonlib@/pds_label_test.py \
+	@srcpythonlib@/compare_burl_matlab_test.py \
 	@srcpythonlibnitf@/__init__.py \
 	@srcpythonlibnitf@/basic_nitf_example.py \
 	@srcpythonlibnitf@/README \
@@ -3135,9 +3136,10 @@ _swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC) @swigsrc@/swig_wrap.cc
 @BUILD_AFIDS_FALSE@installafidspython_DATA = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
-	@srcpythonlib@/job_handle.py @srcpythonlib@/output_cache.py \
-	@srcpythonlib@/target.py @srcpythonlib@/local_target.py \
-	@srcpythonlib@/task.py @srcpythonlib@/ipython.py \
+	@srcpythonlib@/job_handle.py @srcpythonlib@/burl_camera.py \
+	@srcpythonlib@/output_cache.py @srcpythonlib@/target.py \
+	@srcpythonlib@/local_target.py @srcpythonlib@/task.py \
+	@srcpythonlib@/ipython.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \

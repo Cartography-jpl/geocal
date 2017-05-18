@@ -1,4 +1,5 @@
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_handle.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/burl_camera.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/output_cache.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/target.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/local_target.py
@@ -97,3 +98,4 @@ EXTRA_DIST+=@srcpythonlib@/vicar_wrap_test.py
 EXTRA_DIST+=@srcpythonlib@/with_parameter_test.py
 EXTRA_DIST+=@srcpythonlib@/world_view2_reflectance_test.py
 EXTRA_DIST+=@srcpythonlib@/pds_label_test.py
+EXTRA_DIST+=@srcpythonlib@/compare_burl_matlab_test.py

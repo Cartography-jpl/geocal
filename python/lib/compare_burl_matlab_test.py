@@ -4,7 +4,8 @@
 
 from test_support import *
 import os
-from geocal import *
+from geocal_swig import *
+from geocal.burl_camera import *
 import numpy.testing as npt
 
 # Optional support for running matlab from python
@@ -47,10 +48,40 @@ class MatlabWrapper(object):
         if(not res['success']):
             raise RuntimeError("Matlab setting variable %s to %s failed" % (v,val))
         if(self.diagnostic):
-            res = self.mlab.run_code(v)
-            print(res['content']['stdout'])
+            self.print_variable(v)
+    def print_variable(self, v):
+        res = self.mlab.run_code(v)
+        print(res['content']['stdout'])
+        
 
 mlab = MatlabWrapper(diagnostic=False)
+
+class BurlMatlabCamera(object):
+    def __init__(self, nu, nv, xi, u0, v0, pld_q_c):
+        mlab.set_variable('nu', nu)
+        mlab.set_variable('nv', nv)
+        mlab.set_variable('xi', xi)
+        mlab.set_variable('u0', u0)
+        mlab.set_variable('v0', v0)
+        mlab.set_variable('pld_q_c', quaternion_to_array(pld_q_c))
+        mlab.run_code('cam.nu = nu')
+        mlab.run_code('cam.nv = nv')
+        mlab.run_code('cam.fu = 1/xi')
+        mlab.run_code('cam.fv = 1/xi')
+        mlab.run_code('cam.q = 0')
+        mlab.run_code('cam.u0 = u0')
+        mlab.run_code('cam.v0 = v0')
+        mlab.run_code('cam.K = defK(cam.fu, cam.fv, cam.q, cam.u0, cam.v0)')
+        mlab.run_code('cam.Kinv = inv(cam.K)')
+        # Mike's code combines both the camera and the orbit data conversion
+        # to ECI. We set this second change to identity, so we get just
+        # the ScLookVector transformation.
+        mlab.run_code('cam.ECEF_p_PLD = [0; 0; 0]')
+        mlab.run_code('cam.ECEF_q_PLD = [1;0;0;0]')
+        mlab.run_code("cam.PLD_q_C = pld_q_c'")
+        mlab.run_code("cam.Kappa = eye(3,3)")
+        mlab.run_code("cam.KappaInv = eye(3,3)")
+        
 
 def ecr_to_tod(gp, t, delta_ut1=0):
     mlab.set_variable('delta_ut1', delta_ut1)
@@ -82,8 +113,9 @@ def test_convert_tod():
     # Note, if we load the prediction, do this *before* the high resolution.
     # This way the high resolution is used where available, and falls back
     # to prediction when needed
-    SpiceHelper.add_kernel("/opt/afids/data/cspice/pck/earth_070425_370426_predict.bpc")
-    SpiceHelper.add_kernel("/opt/afids/data/cspice/pck/earth_latest_high_prec.bpc")
+    bdir = os.environ["SPICEDATA"] + "/pck/"
+    SpiceHelper.add_kernel(bdir + "earth_070425_370426_predict.bpc")
+    SpiceHelper.add_kernel(bdir + "earth_latest_high_prec.bpc")
     # This future date (at least when we initially did this test) is ~2km off.
     # This is because prediction is going forward from 2007 and just isn't very
     # accurate
@@ -97,6 +129,13 @@ def test_convert_tod():
     # Improved with delta_ut1
     assert distance(gp, ecr_to_tod(gp, t, delta_ut1).convert_to_cf(t)) < 7
     
+@matlab
+def test_camera():
+    mcam = BurlMatlabCamera(1024,1024,2e-06,(1024-1)/2.0,(1024-1)/2.0,
+                            Quaternion_double(1,0,0,0))
+    cam = burl_camera(1024,1024,2e-06,(1024-1)/2.0,(1024-1)/2.0,
+                      Quaternion_double(1,0,0,0))
+    mlab.print_variable('cam')
     
     
 

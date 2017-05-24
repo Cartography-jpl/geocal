@@ -37,7 +37,8 @@ class MatlabWrapper(object):
             print("Running matlab code \"%s\"" % v)
         res = self.mlab.run_code(v)
         if(not res['success']):
-            raise RuntimeError("Matlab code failed: %s" % v)
+            raise RuntimeError("Matlab code failed: %s\nMessage:\n%s" %
+                               (v,res['content']['stdout']))
         if(self.diagnostic):
             print(res['content']['stdout'])
         return res
@@ -81,8 +82,20 @@ class BurlMatlabCamera(object):
         mlab.run_code("cam.PLD_q_C = pld_q_c'")
         mlab.run_code("cam.Kappa = eye(3,3)")
         mlab.run_code("cam.KappaInv = eye(3,3)")
-        
-
+    def sc_look_vector(self, fc, b):
+        mlab.set_variable('u', fc.sample)
+        mlab.set_variable('v', fc.line)
+        mlab.run_code('ecef = pixels_to_rays([u,v], cam)')
+        res = mlab.get_variable('ecef')
+        return ScLookVector(res[0,0],res[0,1], res[0,2])
+    def frame_coordinate(self, slv, b):
+        mlab.set_variable('x', slv.direction[0])
+        mlab.set_variable('y', slv.direction[1])
+        mlab.set_variable('z', slv.direction[2])
+        mlab.run_code('uv = world_to_pixels([x,y,z], cam)')
+        res = mlab.get_variable('uv')
+        return FrameCoordinate(res[0,1], res[0,0])
+    
 def ecr_to_tod(gp, t, delta_ut1=0):
     mlab.set_variable('delta_ut1', delta_ut1)
     mlab.run_code("[tt, ut1] = utc_iso_time_string_to_tt_and_ut1('%s',delta_ut1)" % str(t).replace('Z',''))
@@ -136,8 +149,12 @@ def test_camera():
     cam = burl_camera(1024,1024,2e-06,(1024-1)/2.0,(1024-1)/2.0,
                       Quaternion_double(1,0,0,0))
     mlab.print_variable('cam')
-    
-    
-
-
+    print(cam.sc_look_vector(FrameCoordinate(10,20), 0))
+    print(mcam.sc_look_vector(FrameCoordinate(10,20), 0))
+    print(cam.sc_look_vector(FrameCoordinate(1000,50), 0))
+    print(mcam.sc_look_vector(FrameCoordinate(1000,50), 0))
+    slv = cam.sc_look_vector(FrameCoordinate(10,20), 0)
+    print(mcam.frame_coordinate(slv,0))
+    slv = cam.sc_look_vector(FrameCoordinate(1000,50), 0)
+    print(mcam.frame_coordinate(slv,0))
     

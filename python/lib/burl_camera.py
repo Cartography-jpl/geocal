@@ -11,5 +11,5 @@ def burl_camera(nu, nv, xi, u0, v0, pld_q_c = Quaternion_double(1,0,0,0)):
     field angle as urad. He doesn't have the focal length separately, we just
     use a focal length of 1 to match his code.'''
     # Check, I might have pld_q_c backwards, we may need to invert
-    return QuaternionCamera(pld_q_c, nv, nu, 1/xi, 1/xi, 1,
+    return QuaternionCamera(pld_q_c, nv, nu, xi, xi, 1,
                             FrameCoordinate(v0, u0), QuaternionCamera.LINE_IS_Y)

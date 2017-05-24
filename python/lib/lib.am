@@ -1,5 +1,4 @@
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_handle.py
-geocalpkgpython_PYTHON+= @srcpythonlib@/burl_camera.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/output_cache.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/target.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/local_target.py

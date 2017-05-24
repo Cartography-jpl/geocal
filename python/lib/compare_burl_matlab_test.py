@@ -5,7 +5,6 @@
 from test_support import *
 import os
 from geocal_swig import *
-from geocal.burl_camera import *
 import numpy.testing as npt
 
 # Optional support for running matlab from python
@@ -144,11 +143,15 @@ def test_convert_tod():
     
 @matlab
 def test_camera():
-    mcam = BurlMatlabCamera(1024,1024,2e-06,(1024-1)/2.0,(1024-1)/2.0,
+    kappa = np.array([[1,0,0],[0,1,0],[0,0,1]])
+    kappa_inv  = kappa.copy()
+    mcam = BurlMatlabCamera(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
                             Quaternion_double(1,0,0,0))
-    cam = burl_camera(1024,1024,2e-06,(1024-1)/2.0,(1024-1)/2.0,
-                      Quaternion_double(1,0,0,0))
     mlab.print_variable('cam')
+    cam = CameraRationalPolyomial(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
+                                  Quaternion_double(1,0,0,0), kappa,
+                                  kappa_inv)
+    print(cam)
     print(cam.sc_look_vector(FrameCoordinate(10,20), 0))
     print(mcam.sc_look_vector(FrameCoordinate(10,20), 0))
     print(cam.sc_look_vector(FrameCoordinate(1000,50), 0))

@@ -38,6 +38,12 @@ public:
   }
   virtual ~CameraRationalPolyomial() {}
   virtual void print(std::ostream& Os) const;
+  virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
+					   int Band) const;
+  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
+				      int Band) const;
+  virtual ScLookVector sc_look_vector(const DcsLookVector& Dlv) const
+  { return QuaternionCamera::sc_look_vector(Dlv); }
 
 //-----------------------------------------------------------------------
 /// Kappa, used to describe nonlinearity.
@@ -50,6 +56,10 @@ public:
 //-----------------------------------------------------------------------
 
   const blitz::Array<double, 2>& kappa_inverse() const {return kappa_inverse_;}
+
+  blitz::Array<double, 1> apply_rational(const blitz::Array<double, 1>& X,
+					 const blitz::Array<double, 2>& Coeff)
+    const;
 private:
   blitz::Array<double, 2> kappa_, kappa_inverse_;
   CameraRationalPolyomial() {}

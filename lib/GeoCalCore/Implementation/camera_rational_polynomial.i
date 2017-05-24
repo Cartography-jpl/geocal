@@ -21,6 +21,8 @@ public:
 			  const blitz::Array<double, 2>& Kappa_inverse);
   %python_attribute(kappa, const blitz::Array<double, 2>&);
   %python_attribute(kappa_inverse, const blitz::Array<double, 2>&);
+  blitz::Array<double, 1> apply_rational(const blitz::Array<double, 1>& X,
+			 const blitz::Array<double, 2>& Coeff) const;
   %pickle_serialization();
 };
 }

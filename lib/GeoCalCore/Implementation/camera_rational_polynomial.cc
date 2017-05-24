@@ -34,3 +34,30 @@ void CameraRationalPolyomial::print(std::ostream& Os) const
   opad << kappa_inverse() << "\n";
   opad.strict_sync();
 }
+
+FrameCoordinate CameraRationalPolyomial::frame_coordinate
+(const ScLookVector& Sl, 
+ int Band) const
+{
+  FrameCoordinate fc = QuaternionCamera::frame_coordinate(Sl, Band);
+  return fc;
+}
+
+ScLookVector CameraRationalPolyomial::sc_look_vector
+(const FrameCoordinate& F, 
+ int Band) const
+{
+  ScLookVector slv = QuaternionCamera::sc_look_vector(F, Band);
+  return slv;
+}
+
+//-----------------------------------------------------------------------
+/// This is the apply_rational function found in Mike Burl's matlab code
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 1> CameraRationalPolyomial::apply_rational
+(const blitz::Array<double, 1>& X,
+ const blitz::Array<double, 2>& Coeff) const
+{
+  return X.copy();
+}

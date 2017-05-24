@@ -57,13 +57,15 @@ class MatlabWrapper(object):
 mlab = MatlabWrapper(diagnostic=False)
 
 class BurlMatlabCamera(object):
-    def __init__(self, nu, nv, xi, u0, v0, pld_q_c):
+    def __init__(self, nu, nv, xi, u0, v0, pld_q_c, kappa, kappa_inv):
         mlab.set_variable('nu', nu)
         mlab.set_variable('nv', nv)
         mlab.set_variable('xi', xi)
         mlab.set_variable('u0', u0)
         mlab.set_variable('v0', v0)
         mlab.set_variable('pld_q_c', quaternion_to_array(pld_q_c))
+        mlab.set_variable('kappa', kappa)
+        mlab.set_variable('kappa_inv', kappa_inv)
         mlab.run_code('cam.nu = nu')
         mlab.run_code('cam.nv = nv')
         mlab.run_code('cam.fu = 1/xi')
@@ -79,8 +81,8 @@ class BurlMatlabCamera(object):
         mlab.run_code('cam.ECEF_p_PLD = [0; 0; 0]')
         mlab.run_code('cam.ECEF_q_PLD = [1;0;0;0]')
         mlab.run_code("cam.PLD_q_C = pld_q_c'")
-        mlab.run_code("cam.Kappa = eye(3,3)")
-        mlab.run_code("cam.KappaInv = eye(3,3)")
+        mlab.run_code("cam.Kappa = kappa")
+        mlab.run_code("cam.KappaInv = kappa_inv")
     def sc_look_vector(self, fc, b):
         mlab.set_variable('u', fc.sample)
         mlab.set_variable('v', fc.line)
@@ -94,6 +96,11 @@ class BurlMatlabCamera(object):
         mlab.run_code('uv = world_to_pixels([x,y,z], cam)')
         res = mlab.get_variable('uv')
         return FrameCoordinate(res[0,1], res[0,0])
+    def apply_rational(self, x, coeff):
+        mlab.set_variable('x', x)
+        mlab.set_variable('coeff', coeff)
+        mlab.run_code('y_hat = apply_rational(x, coeff)')
+        return mlab.get_variable('y_hat')
     
 def ecr_to_tod(gp, t, delta_ut1=0):
     mlab.set_variable('delta_ut1', delta_ut1)
@@ -146,7 +153,7 @@ def test_camera():
     kappa = np.array([[1,0,0],[0,1,0],[0,0,1]])
     kappa_inv  = kappa.copy()
     mcam = BurlMatlabCamera(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
-                            Quaternion_double(1,0,0,0))
+                            Quaternion_double(1,0,0,0), kappa, kappa_inv)
     mlab.print_variable('cam')
     cam = CameraRationalPolyomial(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
                                   Quaternion_double(1,0,0,0), kappa,
@@ -158,6 +165,13 @@ def test_camera():
     print(mcam.sc_look_vector(FrameCoordinate(1000,50), 0))
     slv = cam.sc_look_vector(FrameCoordinate(10,20), 0)
     print(mcam.frame_coordinate(slv,0))
-    slv = cam.sc_look_vector(FrameCoordinate(1000,50), 0)
+    slv2 = cam.sc_look_vector(FrameCoordinate(1000,50), 0)
+    print(mcam.frame_coordinate(slv2,0))
+    kappa = np.array([[2,0,0],[0,3,0],[0,0,1]])
+    kappa_inv  = kappa.copy()
+    mcam = BurlMatlabCamera(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
+                            Quaternion_double(1,0,0,0), kappa, kappa_inv)
     print(mcam.frame_coordinate(slv,0))
+    print(mcam.apply_rational([1,2], kappa))
+    print(cam.apply_rational([1,2], kappa))
     

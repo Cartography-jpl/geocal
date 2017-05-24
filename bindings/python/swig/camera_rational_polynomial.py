@@ -252,12 +252,24 @@ class CameraRationalPolyomial(geocal_swig.quaternion_camera.QuaternionCamera):
         return self._v_kappa_inverse()
 
 
+    def apply_rational(self, X, Coeff):
+        """
+
+        blitz::Array< double, 1 > CameraRationalPolyomial::apply_rational(const blitz::Array< double, 1 > &X, const blitz::Array< double, 2 >
+        &Coeff) const
+        This is the apply_rational function found in Mike Burl's matlab code.
+
+        """
+        return _camera_rational_polynomial.CameraRationalPolyomial_apply_rational(self, X, Coeff)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _camera_rational_polynomial.delete_CameraRationalPolyomial
 CameraRationalPolyomial._v_kappa = new_instancemethod(_camera_rational_polynomial.CameraRationalPolyomial__v_kappa, None, CameraRationalPolyomial)
 CameraRationalPolyomial._v_kappa_inverse = new_instancemethod(_camera_rational_polynomial.CameraRationalPolyomial__v_kappa_inverse, None, CameraRationalPolyomial)
+CameraRationalPolyomial.apply_rational = new_instancemethod(_camera_rational_polynomial.CameraRationalPolyomial_apply_rational, None, CameraRationalPolyomial)
 CameraRationalPolyomial_swigregister = _camera_rational_polynomial.CameraRationalPolyomial_swigregister
 CameraRationalPolyomial_swigregister(CameraRationalPolyomial)
 

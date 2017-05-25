@@ -263,6 +263,16 @@ class CameraRationalPolyomial(geocal_swig.quaternion_camera.QuaternionCamera):
         return _camera_rational_polynomial.CameraRationalPolyomial_apply_rational(self, X, Coeff)
 
 
+    def construct_chi_matrix(self, X, ord):
+        """
+
+        blitz::Array< double, 1 > CameraRationalPolyomial::construct_chi_matrix(const blitz::Array< double, 1 > &X, int ord) const
+        This is the construct_chi_matrix function found in Mike Burl's matlab
+        code. 
+        """
+        return _camera_rational_polynomial.CameraRationalPolyomial_construct_chi_matrix(self, X, ord)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -270,6 +280,7 @@ class CameraRationalPolyomial(geocal_swig.quaternion_camera.QuaternionCamera):
 CameraRationalPolyomial._v_kappa = new_instancemethod(_camera_rational_polynomial.CameraRationalPolyomial__v_kappa, None, CameraRationalPolyomial)
 CameraRationalPolyomial._v_kappa_inverse = new_instancemethod(_camera_rational_polynomial.CameraRationalPolyomial__v_kappa_inverse, None, CameraRationalPolyomial)
 CameraRationalPolyomial.apply_rational = new_instancemethod(_camera_rational_polynomial.CameraRationalPolyomial_apply_rational, None, CameraRationalPolyomial)
+CameraRationalPolyomial.construct_chi_matrix = new_instancemethod(_camera_rational_polynomial.CameraRationalPolyomial_construct_chi_matrix, None, CameraRationalPolyomial)
 CameraRationalPolyomial_swigregister = _camera_rational_polynomial.CameraRationalPolyomial_swigregister
 CameraRationalPolyomial_swigregister(CameraRationalPolyomial)
 

@@ -38,12 +38,17 @@ public:
   }
   virtual ~CameraRationalPolyomial() {}
   virtual void print(std::ostream& Os) const;
-  virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
-					   int Band) const;
-  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
-				      int Band) const;
-  virtual ScLookVector sc_look_vector(const DcsLookVector& Dlv) const
-  { return QuaternionCamera::sc_look_vector(Dlv); }
+  void dcs_to_focal_plane
+  (int Band, const boost::math::quaternion<double>& Dcs,
+   double& Xfp, double& Yfp) const;
+  void dcs_to_focal_plane
+  (int Band, const boost::math::quaternion<AutoDerivative<double> >& Dcs,
+   AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const;
+  virtual boost::math::quaternion<double> 
+  focal_plane_to_dcs(int Band, double Xfp, double Yfp) const;
+  virtual boost::math::quaternion<AutoDerivative<double> > 
+  focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
+		     const AutoDerivative<double>& Yfp) const;
 
 //-----------------------------------------------------------------------
 /// Kappa, used to describe nonlinearity.
@@ -60,6 +65,8 @@ public:
   blitz::Array<double, 1> apply_rational(const blitz::Array<double, 1>& X,
 					 const blitz::Array<double, 2>& Coeff)
     const;
+  blitz::Array<double, 1> construct_chi_matrix(const blitz::Array<double, 1>& X,
+					       int ord) const;
 private:
   blitz::Array<double, 2> kappa_, kappa_inverse_;
   CameraRationalPolyomial() {}

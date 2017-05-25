@@ -6448,6 +6448,84 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CameraRationalPolyomial_construct_chi_matrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::CameraRationalPolyomial *arg1 = (GeoCal::CameraRationalPolyomial *) 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CameraRationalPolyomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CameraRationalPolyomial const > *smartarg1 = 0 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"CameraRationalPolyomial_construct_chi_matrix",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CameraRationalPolyomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CameraRationalPolyomial_construct_chi_matrix" "', argument " "1"" of type '" "GeoCal::CameraRationalPolyomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CameraRationalPolyomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CameraRationalPolyomial > * >(argp1);
+      arg1 = const_cast< GeoCal::CameraRationalPolyomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CameraRationalPolyomial > * >(argp1);
+      arg1 = const_cast< GeoCal::CameraRationalPolyomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj)
+      return NULL;
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CameraRationalPolyomial_construct_chi_matrix" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = ((GeoCal::CameraRationalPolyomial const *)arg1)->construct_chi_matrix((blitz::Array< double,1 > const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_CameraRationalPolyomial(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::CameraRationalPolyomial *arg1 = (GeoCal::CameraRationalPolyomial *) 0 ;
@@ -6555,6 +6633,12 @@ static PyMethodDef SwigMethods[] = {
 		"&Coeff) const\n"
 		"This is the apply_rational function found in Mike Burl's matlab code.\n"
 		"\n"
+		""},
+	 { (char *)"CameraRationalPolyomial_construct_chi_matrix", _wrap_CameraRationalPolyomial_construct_chi_matrix, METH_VARARGS, (char *)"\n"
+		"\n"
+		"blitz::Array< double, 1 > CameraRationalPolyomial::construct_chi_matrix(const blitz::Array< double, 1 > &X, int ord) const\n"
+		"This is the construct_chi_matrix function found in Mike Burl's matlab\n"
+		"code. \n"
 		""},
 	 { (char *)"delete_CameraRationalPolyomial", (PyCFunction)_wrap_delete_CameraRationalPolyomial, METH_O, (char *)"\n"
 		"\n"

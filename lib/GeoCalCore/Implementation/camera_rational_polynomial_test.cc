@@ -35,6 +35,36 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(fc2.sample, 50.0, 1e-3);
 }
 
+BOOST_AUTO_TEST_CASE(apply_rational_test)
+{
+  blitz::Array<double, 2> kappa(3,3);
+  kappa = 1, 0, 0,
+          0, 1, 0,
+          0, 0, 1;
+  blitz::Array<double, 2> kappa_inv(kappa);
+  
+  CameraRationalPolyomial cam(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
+			      boost::math::quaternion<double>(1,0,0,0),
+			      kappa, kappa_inv);
+  blitz::Array<double, 2> kappa2(3,3);
+  kappa2 = 2, 0, 0,
+          0, 3, 0,
+          0, 0, 1;
+  blitz::Array<double, 2> kappa2_inv(kappa);
+  
+  CameraRationalPolyomial cam2(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
+			      boost::math::quaternion<double>(1,0,0,0),
+			      kappa2, kappa2_inv);
+  blitz::Array<double, 1> x(2);
+  x = 1,2;
+  // Compare with matlab code
+  BOOST_CHECK_CLOSE(cam2.apply_rational(x, kappa2)(0), 2.0, 1e-3);
+  BOOST_CHECK_CLOSE(cam2.apply_rational(x, kappa2)(1), 6.0, 1e-3);
+  FrameCoordinate fc = cam2.frame_coordinate(cam.sc_look_vector(FrameCoordinate(10,20), 0), 0);
+  BOOST_CHECK_CLOSE(fc.line, -993.0, 1e-3);
+  BOOST_CHECK_CLOSE(fc.sample, -983.5, 1e-3);
+}
+  
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())

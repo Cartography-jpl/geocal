@@ -101,6 +101,11 @@ class BurlMatlabCamera(object):
         mlab.set_variable('coeff', coeff)
         mlab.run_code('y_hat = apply_rational(x, coeff)')
         return mlab.get_variable('y_hat')
+    def construct_chi_matrix(self, x, ord):
+        mlab.set_variable('x', x)
+        mlab.set_variable('ord', ord)
+        mlab.run_code('chi = construct_chi_matrix(x, ord)')
+        return mlab.get_variable('chi')
     
 def ecr_to_tod(gp, t, delta_ut1=0):
     mlab.set_variable('delta_ut1', delta_ut1)
@@ -174,4 +179,6 @@ def test_camera():
     print(mcam.frame_coordinate(slv,0))
     print(mcam.apply_rational([1,2], kappa))
     print(cam.apply_rational([1,2], kappa))
+    print(mcam.construct_chi_matrix([0.5,2.5], 1))
+    print(cam.construct_chi_matrix([0.5,2.5], 1))
     

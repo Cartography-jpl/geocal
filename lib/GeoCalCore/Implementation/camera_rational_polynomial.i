@@ -23,6 +23,8 @@ public:
   %python_attribute(kappa_inverse, const blitz::Array<double, 2>&);
   blitz::Array<double, 1> apply_rational(const blitz::Array<double, 1>& X,
 			 const blitz::Array<double, 2>& Coeff) const;
+  blitz::Array<double, 1> construct_chi_matrix(const blitz::Array<double, 1>& X,
+					       int ord) const;
   %pickle_serialization();
 };
 }

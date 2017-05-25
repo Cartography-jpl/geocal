@@ -1,6 +1,7 @@
 #include "camera_rational_polynomial.h"
 #include "geocal_serialize_support.h"
 #include "ostream_pad.h"
+#include <cmath>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -121,11 +122,16 @@ blitz::Array<double, 1> CameraRationalPolyomial::construct_chi_matrix
 (const blitz::Array<double, 1>& X,
  int ord) const
 {
-  if(ord !=1)
-    throw Exception("Not implemented yet");
-  Array<double, 1> res(X.rows() + 1);
-  res(Range(0,X.rows()-1)) = X;
-  res(X.rows()) = 1.0;
+  if(X.rows() != 2)
+    throw Exception("Not implemented");
+  int m = 1;
+  for(int k = 1; k <= X.rows(); ++k)
+    m = (ord + k) * m / k;
+  Array<double, 1> res(m);
+  int i = 0;
+  for(int tot = ord; tot >=0; --tot)
+    for(int l = 0; l <= tot; ++l, ++i)
+      res(i) = pow(X(0), tot-l) * pow(X(1), l);
   return res;
 }
 

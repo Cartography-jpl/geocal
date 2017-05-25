@@ -172,13 +172,37 @@ def test_camera():
     print(mcam.frame_coordinate(slv,0))
     slv2 = cam.sc_look_vector(FrameCoordinate(1000,50), 0)
     print(mcam.frame_coordinate(slv2,0))
-    kappa = np.array([[2,0,0],[0,3,0],[0,0,1]])
+    kappa = np.array([[2,0.2,0.3],[0.1,3,0.4],[-0.2,0,1.5]])
     kappa_inv  = kappa.copy()
     mcam = BurlMatlabCamera(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
                             Quaternion_double(1,0,0,0), kappa, kappa_inv)
+    cam = CameraRationalPolyomial(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
+                                  Quaternion_double(1,0,0,0), kappa,
+                                  kappa_inv)
     print(mcam.frame_coordinate(slv,0))
+    print(cam.frame_coordinate(slv, 0))
+    print(mcam.sc_look_vector(FrameCoordinate(10, 20), 0))
+    print(cam.sc_look_vector(FrameCoordinate(10, 20), 0))
     print(mcam.apply_rational([1,2], kappa))
     print(cam.apply_rational([1,2], kappa))
     print(mcam.construct_chi_matrix([0.5,2.5], 1))
     print(cam.construct_chi_matrix([0.5,2.5], 1))
+    print(mcam.construct_chi_matrix([0.5,2.5], 2))
+    print(cam.construct_chi_matrix([0.5,2.5], 2))
+    print(mcam.construct_chi_matrix([0.5,2.5], 3))
+    print(cam.construct_chi_matrix([0.5,2.5], 3))
+    kappa = np.array([[0.1, 0.2, 0.3, 2,0.2,0.3],[0.4, 0.5, 0.6, 0.1,3,0.4],
+                      [0.7,0.8,0.9,-0.2,0,1.5],
+                      [-0.7,-0.8,0.9,-0.2,0,0.4]])
+    kappa_inv = kappa
+    mcam = BurlMatlabCamera(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
+                            Quaternion_double(1,0,0,0), kappa, kappa_inv)
+    cam = CameraRationalPolyomial(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
+                                  Quaternion_double(1,0,0,0), kappa,
+                                  kappa_inv)
+    print(mcam.frame_coordinate(slv,0))
+    print(cam.frame_coordinate(slv, 0))
+    print(mcam.sc_look_vector(FrameCoordinate(10, 20), 0))
+    print(cam.sc_look_vector(FrameCoordinate(10, 20), 0))
+    
     

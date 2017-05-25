@@ -63,6 +63,15 @@ BOOST_AUTO_TEST_CASE(apply_rational_test)
   FrameCoordinate fc = cam2.frame_coordinate(cam.sc_look_vector(FrameCoordinate(10,20), 0), 0);
   BOOST_CHECK_CLOSE(fc.line, -993.0, 1e-3);
   BOOST_CHECK_CLOSE(fc.sample, -983.5, 1e-3);
+  x = 0.5, 2.5;
+  blitz::Array<double,1> chi_expect1(3);
+  chi_expect1 = 0.5, 2.5, 1;
+  blitz::Array<double,1> chi_expect2(6);
+  chi_expect2 = 0.25, 1.25, 6.25, 0.5, 2.5, 1;
+  BOOST_CHECK_MATRIX_CLOSE(cam2.construct_chi_matrix(x, 1),
+			   chi_expect1);
+  BOOST_CHECK_MATRIX_CLOSE(cam2.construct_chi_matrix(x, 2),
+			   chi_expect2);
 }
   
 BOOST_AUTO_TEST_CASE(serialization)

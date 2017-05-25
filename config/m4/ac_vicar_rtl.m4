@@ -5,8 +5,9 @@
 # DESCRIPTION
 #
 # This looks for the VICAR RTL library. If we find it, then we set the
-# Makefile conditional HAVE_VICAR_RTL. We also set VICAR_RTL_CPPFFLAGS and
-# VICAR_RTL_LIBS. VICAR_RTL_BUILD_DEPEND is set if we are building 
+# Makefile conditional HAVE_VICAR_RTL. We also set VICAR_RTL_CPPFFLAGS,
+# VICAR_RTL_LIBS and VICMAIN_FOR_LOCATION.
+# VICAR_RTL_BUILD_DEPEND is set if we are building 
 # VICAR_RTL, and not otherwise. This can be used set setup Makefile 
 # dependencies.
 #
@@ -42,14 +43,17 @@ if test "x$want_vicar_rtl" = "xyes"; then
             VICAR_RTL_LIBS="libvicar_rtl.la"
             VICAR_RTL_BUILD_DEPEND="libvicar_rtl.la"
             VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
+	    VICMAIN_FOR_LOCATION="$srcdir/vicar_rtl/rtl/inc/VICMAIN_FOR"
             succeeded=yes
         elif test "$ac_vicar_rtl_path" != ""; then
             VICAR_RTL_LIBS="-R$ac_vicar_rtl_path/lib -L$ac_vicar_rtl_path/lib -lvicar_rtl \$(CURSES_LIB) \$(FLIBS)"
             VICAR_RTL_CFLAGS="-I$ac_vicar_rtl_path/include/vicar_rtl"
+	    VICMAIN_FOR_LOCATION="$ac_vicar_rtl_path/include/vicar_rtl/VICMAIN_FOR"
             succeeded=yes
         else
 	    AC_SEARCH_LIB([VICAR_RTL], [vicar-rtl], [vicar_rtl/], 
                           [zvproto.h], , [libvicar_rtl], [-lvicar_rtl])
+            VICMAIN_FOR_LOCATION="${VICAR_RTL_PREFIX}/include/vicar_rtl/VICMAIN_FOR"
 	    VICAR_RTL_LIBS="${VICAR_RTL_LIBS} \$(CURSES_LIB) \$(FLIBS)"
         fi
 	if test "$succeeded" != "yes" -a "x$build_needed_vicar_rtl" = "xyes" ; then
@@ -58,6 +62,7 @@ if test "x$want_vicar_rtl" = "xyes"; then
             VICAR_RTL_LIBS="libvicar_rtl.la"
             VICAR_RTL_BUILD_DEPEND="libvicar_rtl.la"
             VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
+	    VICMAIN_FOR_LOCATION="$srcdir/vicar_rtl/rtl/inc/VICMAIN_FOR"
             succeeded=yes
         fi
 
@@ -66,6 +71,7 @@ if test "x$want_vicar_rtl" = "xyes"; then
         else
                 AC_MSG_RESULT([yes])
                 AC_SUBST(VICAR_RTL_CFLAGS)
+                AC_SUBST(VICMAIN_FOR_LOCATION)
                 AC_SUBST(VICAR_RTL_BUILD_DEPEND)
                 AC_SUBST(VICAR_RTL_LIBS)
                 AC_DEFINE(HAVE_VICAR_RTL,,[Defined if we have VICAR RTL])

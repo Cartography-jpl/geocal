@@ -837,6 +837,7 @@ BUILD_VICAR_RTL_TRUE
 HAVE_VICAR_RTL_FALSE
 HAVE_VICAR_RTL_TRUE
 VICAR_RTL_BUILD_DEPEND
+VICMAIN_FOR_LOCATION
 VICAR_RTL_LIBS
 VICAR_RTL_CFLAGS
 THIRDPARTY
@@ -856,6 +857,7 @@ CODE_COVERAGE_LDFLAGS
 CODE_COVERAGE_LIBS
 CODE_COVERAGE_CXXFLAGS
 CODE_COVERAGE_CFLAGS
+CODE_COVERAGE_FFLAGS
 CODE_COVERAGE_CPPFLAGS
 GENHTML
 LCOV
@@ -17753,9 +17755,11 @@ fi
 
 						CODE_COVERAGE_CPPFLAGS="-DNDEBUG"
 		CODE_COVERAGE_CFLAGS="-O0 -g -fprofile-arcs -ftest-coverage"
+		CODE_COVERAGE_FFLAGS="-O0 -g -fprofile-arcs -ftest-coverage"
 		CODE_COVERAGE_CXXFLAGS="-O0 -g -fprofile-arcs -ftest-coverage"
 		CODE_COVERAGE_LIBS="-lgcov"
 		CODE_COVERAGE_LDFLAGS="$CODE_COVERAGE_LIBS"
+
 
 
 
@@ -18251,10 +18255,12 @@ $as_echo_n "checking for VICAR RTL library... " >&6; }
             VICAR_RTL_LIBS="libvicar_rtl.la"
             VICAR_RTL_BUILD_DEPEND="libvicar_rtl.la"
             VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
+	    VICMAIN_FOR_LOCATION="$srcdir/vicar_rtl/rtl/inc/VICMAIN_FOR"
             succeeded=yes
         elif test "$ac_vicar_rtl_path" != ""; then
             VICAR_RTL_LIBS="-R$ac_vicar_rtl_path/lib -L$ac_vicar_rtl_path/lib -lvicar_rtl \$(CURSES_LIB) \$(FLIBS)"
             VICAR_RTL_CFLAGS="-I$ac_vicar_rtl_path/include/vicar_rtl"
+	    VICMAIN_FOR_LOCATION="$ac_vicar_rtl_path/include/vicar_rtl/VICMAIN_FOR"
             succeeded=yes
         else
 
@@ -18360,6 +18366,7 @@ fi
      done
   fi
 
+            VICMAIN_FOR_LOCATION="${VICAR_RTL_PREFIX}/include/vicar_rtl/VICMAIN_FOR"
 	    VICAR_RTL_LIBS="${VICAR_RTL_LIBS} \$(CURSES_LIB) \$(FLIBS)"
         fi
 	if test "$succeeded" != "yes" -a "x$build_needed_vicar_rtl" = "xyes" ; then
@@ -18368,6 +18375,7 @@ fi
             VICAR_RTL_LIBS="libvicar_rtl.la"
             VICAR_RTL_BUILD_DEPEND="libvicar_rtl.la"
             VICAR_RTL_CFLAGS="-I$srcdir/vicar_rtl/rtl/inc -I$srcdir/vicar_rtl/p1/inc -I$srcdir/vicar_rtl/p2/inc -I$srcdir/vicar_rtl/tae/inc"
+	    VICMAIN_FOR_LOCATION="$srcdir/vicar_rtl/rtl/inc/VICMAIN_FOR"
             succeeded=yes
         fi
 
@@ -18377,6 +18385,7 @@ $as_echo "no" >&6; }
         else
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
+
 
 
 

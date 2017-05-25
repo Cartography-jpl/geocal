@@ -26,5 +26,6 @@ public:
   %python_attribute(max_index, int)
   %python_attribute(count, int)
   std::string print_to_string() const;
+  %pickle_serialization();
 };
 }

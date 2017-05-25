@@ -39,6 +39,24 @@ BOOST_AUTO_TEST_CASE(basic)
 		    5022173.5787499994, 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Orbit> orbr = serialize_read_string<Orbit>(d);
+  BOOST_CHECK_CLOSE(orbr->min_time() - tr[0], 0, 1e-6);
+  BOOST_CHECK_CLOSE(orbr->max_time() - tr[1], 0, 1e-6);
+  BOOST_CHECK_CLOSE(orbr->position_cf(t)->position[0],
+		    -2143442.64665, 1e-4);
+  BOOST_CHECK_CLOSE(orb->position_cf(t)->position[1],
+		    -4690408.9397, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->position_cf(t)->position[2],
+		    5022173.5787499994, 1e-4);
+}
+
 BOOST_AUTO_TEST_CASE(derivative_ci)
 {
   // Skip, we don't have this implemented. Not a high priority, we

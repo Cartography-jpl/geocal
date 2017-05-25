@@ -3,8 +3,60 @@
 #include "memory_raster_image.h"
 #include "memory_multi_band.h"
 #include "ostream_pad.h"
+#include "geocal_serialize_support.h"
+
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void IgcMapProjectedBase::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void IgcMapProjectedBase::load(Archive & ar, const unsigned int version)
+{
+  ic_line.resize(grid_spacing_, grid_spacing_);
+  ic_sample.resize(grid_spacing_, grid_spacing_);
+}
+
+template<class Archive>
+void IgcMapProjectedBase::serialize(Archive & ar, 
+				    const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(IgcMapProjectedBase);
+  ar & GEOCAL_NVP_(igc_original) 
+    & GEOCAL_NVP_(igc)
+    & GEOCAL_NVP_(avg_factor)
+    & GEOCAL_NVP_(grid_spacing)
+    & GEOCAL_NVP_(fill_value)
+    & GEOCAL_NVP(mi)
+    & GEOCAL_NVP_(read_into_memory);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+template<class Archive>
+void IgcMapProjected::serialize(Archive & ar, 
+				    const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster)
+    & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IgcMapProjectedBase);
+}
+
+template<class Archive>
+void IgcMapProjectedMultiBand::serialize(Archive & ar, 
+				    const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRasterMultiBand)
+    & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IgcMapProjectedBase);
+}
+
+GEOCAL_IMPLEMENT(IgcMapProjectedBase);
+GEOCAL_IMPLEMENT(IgcMapProjected);
+GEOCAL_IMPLEMENT(IgcMapProjectedMultiBand);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor.

@@ -10,11 +10,13 @@ There is a table in the main body on page vii that gives the a pointer for
 where in the document a particular TRE is defined.
 
 STDIDC is documented at D-8.
+
+NOTE that "pass" is a python keyword. Therefore, the 3rd field is called "pass_"
 '''
 desc = ["STDIDC",
         ["acquisition_date", "Acquisition Date", 14, str],
         ["mission", "Mission", 14, str],
-        ["pass", "Pass", 2, str],
+        ["pass_", "Pass", 2, str],
         ["op_num", "Op number", 3, int],
         ["start_segment", "Start segment", 2, str],
         ["repro_num", "Repro number", 2, int],

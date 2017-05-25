@@ -27,7 +27,7 @@ IgcCollectionOrbitData::image_ground_connection(int Image_index) const
   igc_cache.resize(number_image());
   if(!igc_cache[Image_index])
     igc_cache[Image_index].reset
-      (new OrbitDataImageGroundConnection(*orb, tm_list[Image_index], cam, dem_,
+      (new OrbitDataImageGroundConnection(orb, tm_list[Image_index], cam, dem_,
 			     img_list[Image_index],
 			     title_list[Image_index]));
   return igc_cache[Image_index];

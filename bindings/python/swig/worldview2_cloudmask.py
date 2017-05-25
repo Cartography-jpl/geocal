@@ -226,6 +226,10 @@ class WorldView2CloudMask(geocal_swig.calc_raster.CalcRaster):
         Constructor. 
         """
         _worldview2_cloudmask.WorldView2CloudMask_swiginit(self, _worldview2_cloudmask.new_WorldView2CloudMask(Mul_spec_data, Min_cloud_size, Cloud_threshold, Shadow_threshold))
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _worldview2_cloudmask.delete_WorldView2CloudMask
 WorldView2CloudMask_swigregister = _worldview2_cloudmask.WorldView2CloudMask_swigregister
 WorldView2CloudMask_swigregister(WorldView2CloudMask)

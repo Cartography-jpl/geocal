@@ -39,7 +39,7 @@ public:
   { return 1.0 / PlanetConstant::flattening(Naif_code); }    
 private:
   static std::map<int, SpicePlanetConstant> h_map;
-  static SpicePlanetConstant h(int Naif_code);
+  static const SpicePlanetConstant& h(int Naif_code);
 };
 
 /****************************************************************//**
@@ -334,9 +334,16 @@ private:
   CoordinateConverter that goes to and from Planetocentric coordinates.
 *******************************************************************/
 
-template<int NAIF_CODE> class PlanetocentricConverter : 
-    public CoordinateConverter {
+class PlanetocentricConverter : public CoordinateConverter {
 public:
+//-----------------------------------------------------------------------
+/// Constructor.  
+//-----------------------------------------------------------------------
+
+  PlanetocentricConverter(int Naif_code = -1)
+    : naif_code_(Naif_code)
+  { }
+
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
@@ -352,7 +359,7 @@ public:
     convert_from_coordinate(double X, double Y, double Height = 0) const
   {
     return boost::shared_ptr<GroundCoordinate>
-      (new Planetocentric(Y, X, Height, NAIF_CODE));
+      (new Planetocentric(Y, X, Height, naif_code_));
   }
 
 //-----------------------------------------------------------------------
@@ -361,9 +368,12 @@ public:
 
   virtual bool is_same(const CoordinateConverter& Conv) const
   {
-    return dynamic_cast<const PlanetocentricConverter<NAIF_CODE>*>(&Conv);
+    const PlanetocentricConverter* t =
+      dynamic_cast<const PlanetocentricConverter*>(&Conv);
+    if(t && t->naif_code() == naif_code())
+      return true;
+    return false;
   }
-
 
 //-----------------------------------------------------------------------
 /// Convert to Planetocentric. X and Y are longitude and latitude in
@@ -373,10 +383,10 @@ public:
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
 			       double& Y, double& Height) const
   {
-    if(Gc.naif_code() != NAIF_CODE) {
+    if(Gc.naif_code() != naif_code_) {
       Exception e;
       e << "Gp has the wrong naif_code(). Got " << Gc.naif_code()
-	<< " but expected " << NAIF_CODE;
+	<< " but expected " << naif_code_;
       throw e;
     }
     Planetocentric gd(Gc);
@@ -387,10 +397,10 @@ public:
   virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
 				     double& Y, double& Height) const
   {
-    if(Gc.naif_code() != NAIF_CODE) {
+    if(Gc.naif_code() != naif_code_) {
       Exception e;
       e << "Gp has the wrong naif_code(). Got " << Gc.naif_code()
-	<< " but expected " << NAIF_CODE;
+	<< " but expected " << naif_code_;
       throw e;
     }
     Planetocentric gd(Gc);
@@ -403,16 +413,17 @@ public:
 /// Return NAIF code.
 //-----------------------------------------------------------------------
   
-  virtual int naif_code() const { return NAIF_CODE; }
+  virtual int naif_code() const { return naif_code_; }
 
 //-----------------------------------------------------------------------
 /// Print to given stream.
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << PlanetConstant::name(NAIF_CODE)
+  { Os << PlanetConstant::name(naif_code_)
        << "Planetocentric Converter"; }
 private:
+  int naif_code_;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -528,19 +539,11 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };
-
-//typedef SimpleDemT<Planetocentric<499> > MarsSimpleDem;
-typedef PlanetocentricConverter<499> MarsPlanetocentricConverter;
-
-//typedef SimpleDemT<Planetocentric<502> > EuropaSimpleDem;
-typedef PlanetocentricConverter<502> EuropaPlanetocentricConverter;
-
 }
 
 GEOCAL_EXPORT_KEY(PlanetFixed);
 GEOCAL_EXPORT_KEY(PlanetInertial);
 GEOCAL_EXPORT_KEY(Planetocentric);
 GEOCAL_EXPORT_KEY(PlanetSimpleDem);
-GEOCAL_EXPORT_KEY(MarsPlanetocentricConverter);
-GEOCAL_EXPORT_KEY(EuropaPlanetocentricConverter);
+GEOCAL_EXPORT_KEY(PlanetocentricConverter);
 #endif

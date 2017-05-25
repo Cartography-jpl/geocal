@@ -188,6 +188,18 @@ public:
 
   boost::shared_ptr<CoordinateConverter> coordinate_converter;
   static boost::shared_ptr<CoordinateConverter> default_coordinate_converter;
+
+//-----------------------------------------------------------------------
+/// Return NAIF code for planet RPC is for.
+//-----------------------------------------------------------------------
+
+  int naif_code() const { return coor_conv_or_default()->naif_code(); }
+
+  void naif_code(int Naif_code);
+  
+//-----------------------------------------------------------------------
+///
+//-----------------------------------------------------------------------
   
   void print(std::ostream& Os) const;
 

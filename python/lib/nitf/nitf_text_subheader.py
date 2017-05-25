@@ -8,7 +8,13 @@ The NITF text subheader is described in Table A-6, starting page 107.
 '''
 desc = [['te', "", 2, str],
         ['textid', "", 7, str],
-        ['txtalvl', "", 3, str],
+        # Note, according to the NITF specification, this should always be
+        # present, and if there is no value it should be "000". *However*,
+        # digital globe files for ikonos, quickbird, and world view 2 fill
+        # this in with all spaces. So we incorrectly mark this as "optional"
+        # so we can read these file types, even though this isn't actually
+        # valid. For these file, this will return None instead of "000"
+        ['txtalvl', "", 3, int, {"optional": True}],
         ['txtdt', "", 14, str],
         ['txtitl', "", 80, str],
         ['tsclas', "", 1, str],

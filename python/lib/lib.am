@@ -44,6 +44,7 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/job_database.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/rsm_polynomial.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/shape_file.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/air_mspi_igc.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/pds_label.py
 if HAVE_VICAR_GDALPLUGIN
 else
 # Used to short circuit tests that would otherwise run.
@@ -95,3 +96,5 @@ EXTRA_DIST+=@srcpythonlib@/vicar_interface_test.py
 EXTRA_DIST+=@srcpythonlib@/vicar_wrap_test.py
 EXTRA_DIST+=@srcpythonlib@/with_parameter_test.py
 EXTRA_DIST+=@srcpythonlib@/world_view2_reflectance_test.py
+EXTRA_DIST+=@srcpythonlib@/pds_label_test.py
+EXTRA_DIST+=@srcpythonlib@/compare_burl_matlab_test.py

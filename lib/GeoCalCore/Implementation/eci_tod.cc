@@ -27,6 +27,26 @@ EciTod::EciTod(const Eci& Eci_coor, const Time& T)
 }
 
 //-----------------------------------------------------------------------
+// Convert from Ecr to EciTod.
+//-----------------------------------------------------------------------
+
+EciTod::EciTod(const Ecr& P, const Time& T)
+{
+  Eci eci(P, T);
+  SpiceHelper::conversion("J2000", "ECI_TOD", T, eci.position, position);
+}
+
+//-----------------------------------------------------------------------
+// Convert from GroundCoordinate to EciTod.
+//-----------------------------------------------------------------------
+
+EciTod::EciTod(const GroundCoordinate& Gc, const Time& T)
+{
+  Eci eci(Gc, T);
+  SpiceHelper::conversion("J2000", "ECI_TOD", T, eci.position, position);
+}  
+
+//-----------------------------------------------------------------------
 /// Convert to CartesianFixed.
 //-----------------------------------------------------------------------
 

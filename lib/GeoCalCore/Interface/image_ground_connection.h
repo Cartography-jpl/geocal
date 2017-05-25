@@ -6,10 +6,13 @@
 #include "printable.h"
 #include "raster_image.h"
 #include "raster_image_multi_band.h"
+#include "sub_raster_image.h"
+#include "sub_raster_image_multi_band.h"
 #include "raster_image_multi_band_variable.h"
 #include "ground_mask.h"
 #include "image_mask.h"
 #include "with_parameter.h"
+#include <boost/make_shared.hpp>
 #include <blitz/array.h>
 
 namespace GeoCal {
@@ -476,6 +479,7 @@ public:
 //-----------------------------------------------------------------------
 /// Constructor.
 //-----------------------------------------------------------------------
+
   OffsetImageGroundConnection
   (const boost::shared_ptr<ImageGroundConnection>& Ig_original, 
    double Line_offset, double Sample_offset)
@@ -487,7 +491,37 @@ public:
 			     Ig_original->ground_mask()),
        ig_(Ig_original), line_offset_(Line_offset), 
        sample_offset_(Sample_offset)
-  { 
+  {
+    if(image_mask_)
+      image_mask_ = boost::make_shared<OffsetImageMask>
+	(image_mask_, line_offset_.value(), sample_offset_.value());
+  }
+
+//-----------------------------------------------------------------------
+/// Constructor that subsets an existing Igc.
+//-----------------------------------------------------------------------
+
+  OffsetImageGroundConnection
+  (const boost::shared_ptr<ImageGroundConnection>& Ig_original, 
+   int Lstart, int Sstart, int Number_line, int Number_sample)
+    :  ImageGroundConnection(Ig_original->dem_ptr(),
+			     Ig_original->image(),
+			     Ig_original->image_multi_band(),
+			     Ig_original->title(),
+			     Ig_original->image_mask(),
+			     Ig_original->ground_mask()),
+       ig_(Ig_original), line_offset_(-Lstart), 
+       sample_offset_(-Sstart)
+  {
+    if(image_mask_)
+      image_mask_ = boost::make_shared<OffsetImageMask>
+	(image_mask_, line_offset_.value(), sample_offset_.value());
+    if(image_)
+      image_ = boost::make_shared<SubRasterImage>
+	(image_, Lstart, Sstart, Number_line, Number_sample);
+    if(image_mb_)
+      image_mb_ = boost::make_shared<SubRasterImageMultiBand>
+	(image_mb_, Lstart, Sstart, Number_line, Number_sample);
   }
   
 //-----------------------------------------------------------------------

@@ -839,14 +839,14 @@ class OffsetImageGroundConnection(ImageGroundConnection):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Ig_original, Line_offset, Sample_offset):
+    def __init__(self, *args):
         """
 
-        GeoCal::OffsetImageGroundConnection::OffsetImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Ig_original, double
-        Line_offset, double Sample_offset)
-        Constructor. 
+        GeoCal::OffsetImageGroundConnection::OffsetImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Ig_original, int
+        Lstart, int Sstart, int Number_line, int Number_sample)
+        Constructor that subsets an existing Igc. 
         """
-        _image_ground_connection.OffsetImageGroundConnection_swiginit(self, _image_ground_connection.new_OffsetImageGroundConnection(Ig_original, Line_offset, Sample_offset))
+        _image_ground_connection.OffsetImageGroundConnection_swiginit(self, _image_ground_connection.new_OffsetImageGroundConnection(*args))
 
     def _v_original_image_ground_connection(self):
         """

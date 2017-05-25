@@ -37,6 +37,7 @@ public:
     blitz::Array<int, 4> read_int_4d(const std::string& fname)
     { return $self->read_field<int, 4>(fname); }
   }
+  %pickle_serialization()
 };
 
 }

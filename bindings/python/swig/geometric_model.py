@@ -224,6 +224,10 @@ class GeometricModel(geocal_swig.generic_object.GenericObject):
         """
         return _geometric_model.GeometricModel_resampled_image_coordinate(self, Resampled_ic)
 
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _geometric_model.delete_GeometricModel
 GeometricModel.original_image_coordinate = new_instancemethod(_geometric_model.GeometricModel_original_image_coordinate, None, GeometricModel)
 GeometricModel.resampled_image_coordinate = new_instancemethod(_geometric_model.GeometricModel_resampled_image_coordinate, None, GeometricModel)
@@ -291,6 +295,10 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
     @property
     def y(self):
         return self._v_y()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _geometric_model.delete_GeometricTiePoints
 GeometricTiePoints.add_point = new_instancemethod(_geometric_model.GeometricTiePoints_add_point, None, GeometricTiePoints)

@@ -40,6 +40,10 @@ public:
 
   virtual void print(std::ostream& Os) const 
   { Os << "Geometric model"; }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -86,8 +90,14 @@ public:
   { Os << "GeometricTiePoints"; }
 private:
   std::vector<ImageCoordinate> itie, otie;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(GeometricModel);
+GEOCAL_EXPORT_KEY(GeometricTiePoints);
 #endif
 

@@ -76,11 +76,14 @@ libgeocal_la_SOURCES+= @srcimplementation@/eci_tod_burl.cc
 endif
 geocalinc_HEADERS+= @srcimplementation@/quaternion_camera.h
 libgeocal_la_SOURCES+= @srcimplementation@/quaternion_camera.cc
+geocalinc_HEADERS+= @srcimplementation@/camera_rational_polynomial.h
+libgeocal_la_SOURCES+= @srcimplementation@/camera_rational_polynomial.cc
 geocalinc_HEADERS+= @srcimplementation@/galileo_camera.h
 libgeocal_la_SOURCES+= @srcimplementation@/galileo_camera.cc
 geocalinc_HEADERS+= @srcimplementation@/refraction.h
 libgeocal_la_SOURCES+= @srcimplementation@/refraction.cc
 geocalinc_HEADERS+= @srcimplementation@/orbit_data_image_ground_connection.h
+libgeocal_la_SOURCES+= @srcimplementation@/orbit_data_image_ground_connection.cc
 geocalinc_HEADERS+= @srcimplementation@/ray_intersect.h
 libgeocal_la_SOURCES+= @srcimplementation@/ray_intersect.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_match.h
@@ -125,6 +128,8 @@ geocalinc_HEADERS+= @srcimplementation@/tle_orbit.h
 libgeocal_la_SOURCES+= @srcimplementation@/tle_orbit.cc
 geocalinc_HEADERS+= @srcimplementation@/spice_orbit.h
 libgeocal_la_SOURCES+= @srcimplementation@/spice_orbit.cc
+geocalinc_HEADERS+= @srcimplementation@/spice_planet_orbit.h
+libgeocal_la_SOURCES+= @srcimplementation@/spice_planet_orbit.cc
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -269,6 +274,8 @@ SWIG_SRC_CARTO += @swigsrc@/eci_tod_burl_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/eci_tod_burl.i
 SWIG_SRC += @swigsrc@/quaternion_camera_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/quaternion_camera.i
+SWIG_SRC += @swigsrc@/camera_rational_polynomial_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/camera_rational_polynomial.i
 SWIG_SRC += @swigsrc@/galileo_camera_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/galileo_camera.i
 SWIG_SRC += @swigsrc@/refraction_wrap.cc
@@ -309,6 +316,8 @@ SWIG_SRC += @swigsrc@/tle_orbit_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/tle_orbit.i
 SWIG_SRC += @swigsrc@/spice_orbit_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/spice_orbit.i
+SWIG_SRC += @swigsrc@/spice_planet_orbit_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/spice_planet_orbit.i
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
@@ -333,6 +342,7 @@ if HAVE_CARTO
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_burl_test.cc
 endif
 geocal_test_all_SOURCES+= @srcimplementation@/quaternion_camera_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/camera_rational_polynomial_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/galileo_camera_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/refraction_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_data_image_ground_connection_test.cc
@@ -357,6 +367,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/orbit_piecewise_correction_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_time_shift_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/tle_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_orbit_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/spice_planet_orbit_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

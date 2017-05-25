@@ -147,16 +147,16 @@ BOOST_AUTO_TEST_CASE(serialization_mars_planetocentric)
   BOOST_CHECK_EQUAL(gpr->naif_code(), (int) PlanetConstant::MARS_NAIF_CODE);
 }
 
-BOOST_AUTO_TEST_CASE(serialization_mars_planetocentric_converter)
+BOOST_AUTO_TEST_CASE(serialization_planetocentric_converter)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<MarsPlanetocentricConverter> conv(new MarsPlanetocentricConverter());
+  boost::shared_ptr<PlanetocentricConverter> conv(new PlanetocentricConverter(PlanetConstant::MARS_NAIF_CODE));
   std::string d = serialize_write_string(conv);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<MarsPlanetocentricConverter> convr = 
-    serialize_read_string<MarsPlanetocentricConverter>(d);
+  boost::shared_ptr<PlanetocentricConverter> convr = 
+    serialize_read_string<PlanetocentricConverter>(d);
   BOOST_CHECK(convr->is_same(*conv));
 }
 
@@ -168,8 +168,8 @@ public:
     : galileo_name("GLL"),
       sc_frame_name("GLL_SCAN_PLANE")
   {
-    SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernel",
-     			    "galileo.ker");
+    SpiceHelper::add_kernel(test_data_dir() + "/galileo_kernel/" +
+     			    std::string("galileo.ker"));
     double day_to_sec = 24 * 60 * 60;
     // We can write a general conversion from the time given in VICAR
     // to time. But this is "day 350". The -1 is because we start with
@@ -264,18 +264,5 @@ BOOST_AUTO_TEST_CASE(orbit_data)
 }
 
 
-
-BOOST_AUTO_TEST_CASE(serialization_europa_planetocentric_converter)
-{
-  if(!have_serialize_supported())
-    return;
-  boost::shared_ptr<EuropaPlanetocentricConverter> conv(new EuropaPlanetocentricConverter());
-  std::string d = serialize_write_string(conv);
-  if(false)
-    std::cerr << d;
-  boost::shared_ptr<EuropaPlanetocentricConverter> convr = 
-    serialize_read_string<EuropaPlanetocentricConverter>(d);
-  BOOST_CHECK(convr->is_same(*conv));
-}
 
 BOOST_AUTO_TEST_SUITE_END()

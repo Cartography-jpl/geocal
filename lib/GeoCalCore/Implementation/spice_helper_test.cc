@@ -66,6 +66,9 @@ BOOST_AUTO_TEST_CASE(basic_test)
   }
   CartesianFixed::toolkit_coordinate_interface = keep;
   Time::toolkit_time_interface = keep2;
+  BOOST_CHECK(SpiceHelper::kernel_loaded("geocal.ker"));
+  BOOST_CHECK(!SpiceHelper::kernel_loaded("geocal_fake.ker"));
+  BOOST_CHECK(SpiceHelper::kernel_loaded("fk/planets/eci_tod.tf"));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

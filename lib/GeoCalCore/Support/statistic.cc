@@ -1,6 +1,25 @@
 #include "statistic.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void Statistic::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Statistic);
+  ar & GEOCAL_NVP_(sum)
+    & GEOCAL_NVP_(sum_squares)
+    & GEOCAL_NVP_(min)
+    & GEOCAL_NVP_(max)
+    & GEOCAL_NVP_(sum_abs)
+    & GEOCAL_NVP_(count)
+    & GEOCAL_NVP_(min_index)
+    & GEOCAL_NVP_(max_index);
+}
+
+GEOCAL_IMPLEMENT(Statistic);
+#endif
 
 //-----------------------------------------------------------------------
 /// Add a new data point.

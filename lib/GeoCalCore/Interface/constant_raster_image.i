@@ -15,6 +15,7 @@ class ConstantRasterImage : public RasterImageVariable {
 public:
   ConstantRasterImage(int Number_line, int Number_sample, int Value);
   ConstantRasterImage(const MapInfo& Mi, int Value);
+  %pickle_serialization()
 };
 
 }

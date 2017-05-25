@@ -107,6 +107,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_ipi_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_eci_tod)(void);
   INIT_TYPE INIT_FUNC(_quaternion_camera)(void);
+  INIT_TYPE INIT_FUNC(_camera_rational_polynomial)(void);
   INIT_TYPE INIT_FUNC(_galileo_camera)(void);
   INIT_TYPE INIT_FUNC(_refraction)(void);
   INIT_TYPE INIT_FUNC(_orbit_data_image_ground_connection)(void);
@@ -125,6 +126,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_orbit_time_shift)(void);
   INIT_TYPE INIT_FUNC(_tle_orbit)(void);
   INIT_TYPE INIT_FUNC(_spice_orbit)(void);
+  INIT_TYPE INIT_FUNC(_spice_planet_orbit)(void);
   INIT_TYPE INIT_FUNC(_argus_camera)(void);
   INIT_TYPE INIT_FUNC(_argus_orbit)(void);
   INIT_TYPE INIT_FUNC(_quickbird_camera)(void);
@@ -300,6 +302,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_ipi_image_ground_connection", INIT_FUNC(_ipi_image_ground_connection));
   INIT_MODULE(module, "_eci_tod", INIT_FUNC(_eci_tod));
   INIT_MODULE(module, "_quaternion_camera", INIT_FUNC(_quaternion_camera));
+  INIT_MODULE(module, "_camera_rational_polynomial", INIT_FUNC(_camera_rational_polynomial));
   INIT_MODULE(module, "_galileo_camera", INIT_FUNC(_galileo_camera));
   INIT_MODULE(module, "_refraction", INIT_FUNC(_refraction));
   INIT_MODULE(module, "_orbit_data_image_ground_connection", INIT_FUNC(_orbit_data_image_ground_connection));
@@ -318,6 +321,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_orbit_time_shift", INIT_FUNC(_orbit_time_shift));
   INIT_MODULE(module, "_tle_orbit", INIT_FUNC(_tle_orbit));
   INIT_MODULE(module, "_spice_orbit", INIT_FUNC(_spice_orbit));
+  INIT_MODULE(module, "_spice_planet_orbit", INIT_FUNC(_spice_planet_orbit));
   INIT_MODULE(module, "_argus_camera", INIT_FUNC(_argus_camera));
   INIT_MODULE(module, "_argus_orbit", INIT_FUNC(_argus_orbit));
   INIT_MODULE(module, "_quickbird_camera", INIT_FUNC(_quickbird_camera));

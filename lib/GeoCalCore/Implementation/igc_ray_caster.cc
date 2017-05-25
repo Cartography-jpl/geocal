@@ -1,8 +1,41 @@
 #include "igc_ray_caster.h"
 #include "simple_dem.h"
 #include "ecr.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void IgcRayCaster::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void IgcRayCaster::load(Archive & ar, const unsigned int version)
+{
+  result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
+		      nintegration_step,(include_path_distance ? 4 : 3));
+}
+
+template<class Archive>
+void IgcRayCaster::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(RayCaster);
+  GEOCAL_BASE(IgcRayCaster, RayCaster);
+  ar & GEOCAL_NVP(igc)
+    & GEOCAL_NVP_(start_position) & GEOCAL_NVP_(npos) & GEOCAL_NVP(ind)
+    & GEOCAL_NVP(nintegration_step) & GEOCAL_NVP(nsub_line)
+    & GEOCAL_NVP(nsub_sample) & GEOCAL_NVP_(start_sample)
+    & GEOCAL_NVP_(number_sample) & GEOCAL_NVP(is_forward)
+    & GEOCAL_NVP(include_path_distance) & GEOCAL_NVP(resolution)
+    & GEOCAL_NVP(max_height);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+GEOCAL_IMPLEMENT(IgcRayCaster);
+#endif
 
 inline double sqr(double x) { return x * x; }
 //-----------------------------------------------------------------------

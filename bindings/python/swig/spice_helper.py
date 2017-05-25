@@ -331,23 +331,75 @@ class SpiceHelper(object):
     def spice_setup(*args):
         """
 
-        void SpiceHelper::spice_setup(const std::string &Kernel="geocal.ker")
-        Set SPICE errors to just return, rather than aborting. 
+        void SpiceHelper::spice_setup(const std::string &Kernel="geocal.ker", bool
+        Force_kernel_pool_reset=false)
+        Set SPICE errors to just return, rather than aborting.
+
+        If Force_kernel_pool_reset is true, then reset the kernel pool and
+        start over.
+
+        Note a special issue when using with python multiprocessor. In a way
+        I've never been able to track down, the spice kernels are somehow
+        mangled in the forked processes. I'm not sure what is not getting
+        copied, we would regularly we get errors that looked like a corrupt
+        kernel. For example:
+
+        SPICE(BADSUBSCRIPT): Subscript out of range on file line 412,
+        procedure "zzdafgsr". Attempt to access element 129 of variable
+        "dpbuf".
+
+        RuntimeError: SPICE toolkit error: SPICE(DAFBEGGTEND)
+
+        Beginning address (8889045) greater than ending address (8889044).
+
+        Not sure what the source of this is, but as a workaround we:
+
+        Keep track of the process ID
+
+        Keep a list of kernels loaded
+
+        Check the process ID on each call to spice_setup.
+
+        If it doesn't match, clear all the kernels and reload them.
+
+        This happens transparently, and hopefully this will remove all the
+        problems with forking. If not, we may need to look into this further,
+        and perhaps track down the actual underlying issue with forking 
         """
         return _spice_helper.SpiceHelper_spice_setup(*args)
 
     spice_setup = staticmethod(spice_setup)
 
-    def add_kernel(*args):
+    def add_kernel(Kernel):
         """
 
-        void SpiceHelper::add_kernel(const std::string &Kernel)
+        void SpiceHelper::add_kernel(const std::string &Kernel, bool Skip_save=false)
         Add an additional kernel, after the one we automatically get (i.e.,
-        $SPICEDATA/geocal.ker). 
+        $SPICEDATA/geocal.ker).
+
+        Skip_save is really meant for internal use, it skips saving the kernel
+        in our list of kernels to reload on forking (see spice_setup comments
+        for a description of this). 
         """
-        return _spice_helper.SpiceHelper_add_kernel(*args)
+        return _spice_helper.SpiceHelper_add_kernel(Kernel)
 
     add_kernel = staticmethod(add_kernel)
+
+    def kernel_loaded(Kernel):
+        """
+
+        bool SpiceHelper::kernel_loaded(const std::string &Kernel)
+        Check if a given kernel file has already been loaded.
+
+        Note that this is a bit limited, this checks against the exact name
+        that was loaded. So if you load "dir/bar/foo.ker" and then check
+        against "dir/./bar/foo.ker" will return false even though this is
+        the same file. This is just a limitation of the spice function call.
+
+        """
+        return _spice_helper.SpiceHelper_kernel_loaded(Kernel)
+
+    kernel_loaded = staticmethod(kernel_loaded)
 
     def conversion_quaternion(From, To, T):
         """
@@ -359,6 +411,23 @@ class SpiceHelper(object):
         return _spice_helper.SpiceHelper_conversion_quaternion(From, To, T)
 
     conversion_quaternion = staticmethod(conversion_quaternion)
+
+    def state_vector(Body_id, Target_name, T, arg4, arg5):
+        """
+
+        void SpiceHelper::state_vector(int Body_id, const std::string &Target_name, const Time &T,
+        boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel)
+        Get the state vector (position and velocity, in meters), in the fixed
+        coordinates for the given Body_id, and the given Time.
+
+        The Target name can be anything spice recognizes.
+
+        Note we don't handle light travel time yet, or aberration. It isn't
+        clear if we want to or not. 
+        """
+        return _spice_helper.SpiceHelper_state_vector(Body_id, Target_name, T, arg4, arg5)
+
+    state_vector = staticmethod(state_vector)
 
     def __init__(self):
         _spice_helper.SpiceHelper_swiginit(self, _spice_helper.new_SpiceHelper())
@@ -397,19 +466,69 @@ def SpiceHelper_spice_available():
 def SpiceHelper_spice_setup(*args):
     """
 
-    void SpiceHelper::spice_setup(const std::string &Kernel="geocal.ker")
-    Set SPICE errors to just return, rather than aborting. 
+    void SpiceHelper::spice_setup(const std::string &Kernel="geocal.ker", bool
+    Force_kernel_pool_reset=false)
+    Set SPICE errors to just return, rather than aborting.
+
+    If Force_kernel_pool_reset is true, then reset the kernel pool and
+    start over.
+
+    Note a special issue when using with python multiprocessor. In a way
+    I've never been able to track down, the spice kernels are somehow
+    mangled in the forked processes. I'm not sure what is not getting
+    copied, we would regularly we get errors that looked like a corrupt
+    kernel. For example:
+
+    SPICE(BADSUBSCRIPT): Subscript out of range on file line 412,
+    procedure "zzdafgsr". Attempt to access element 129 of variable
+    "dpbuf".
+
+    RuntimeError: SPICE toolkit error: SPICE(DAFBEGGTEND)
+
+    Beginning address (8889045) greater than ending address (8889044).
+
+    Not sure what the source of this is, but as a workaround we:
+
+    Keep track of the process ID
+
+    Keep a list of kernels loaded
+
+    Check the process ID on each call to spice_setup.
+
+    If it doesn't match, clear all the kernels and reload them.
+
+    This happens transparently, and hopefully this will remove all the
+    problems with forking. If not, we may need to look into this further,
+    and perhaps track down the actual underlying issue with forking 
     """
     return _spice_helper.SpiceHelper_spice_setup(*args)
 
-def SpiceHelper_add_kernel(*args):
+def SpiceHelper_add_kernel(Kernel):
     """
 
-    void SpiceHelper::add_kernel(const std::string &Kernel)
+    void SpiceHelper::add_kernel(const std::string &Kernel, bool Skip_save=false)
     Add an additional kernel, after the one we automatically get (i.e.,
-    $SPICEDATA/geocal.ker). 
+    $SPICEDATA/geocal.ker).
+
+    Skip_save is really meant for internal use, it skips saving the kernel
+    in our list of kernels to reload on forking (see spice_setup comments
+    for a description of this). 
     """
-    return _spice_helper.SpiceHelper_add_kernel(*args)
+    return _spice_helper.SpiceHelper_add_kernel(Kernel)
+
+def SpiceHelper_kernel_loaded(Kernel):
+    """
+
+    bool SpiceHelper::kernel_loaded(const std::string &Kernel)
+    Check if a given kernel file has already been loaded.
+
+    Note that this is a bit limited, this checks against the exact name
+    that was loaded. So if you load "dir/bar/foo.ker" and then check
+    against "dir/./bar/foo.ker" will return false even though this is
+    the same file. This is just a limitation of the spice function call.
+
+    """
+    return _spice_helper.SpiceHelper_kernel_loaded(Kernel)
 
 def SpiceHelper_conversion_quaternion(From, To, T):
     """
@@ -419,6 +538,21 @@ def SpiceHelper_conversion_quaternion(From, To, T):
     systems. 
     """
     return _spice_helper.SpiceHelper_conversion_quaternion(From, To, T)
+
+def SpiceHelper_state_vector(Body_id, Target_name, T, arg5, arg6):
+    """
+
+    void SpiceHelper::state_vector(int Body_id, const std::string &Target_name, const Time &T,
+    boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel)
+    Get the state vector (position and velocity, in meters), in the fixed
+    coordinates for the given Body_id, and the given Time.
+
+    The Target name can be anything spice recognizes.
+
+    Note we don't handle light travel time yet, or aberration. It isn't
+    clear if we want to or not. 
+    """
+    return _spice_helper.SpiceHelper_state_vector(Body_id, Target_name, T, arg5, arg6)
 
 
 

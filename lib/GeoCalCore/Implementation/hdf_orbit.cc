@@ -68,4 +68,12 @@ template void HdfOrbit<Eci, TimeJ2000Creator>::save
 
 template void HdfOrbit<Eci, TimeJ2000Creator>::load
 (polymorphic_iarchive& ar, const unsigned version);
+
+BOOST_CLASS_EXPORT_IMPLEMENT(HdfOrbit_EciTod_TimeJ2000);
+
+template void HdfOrbit<EciTod, TimeJ2000Creator>::save
+(polymorphic_oarchive& ar, const unsigned version) const;
+
+template void HdfOrbit<EciTod, TimeJ2000Creator>::load
+(polymorphic_iarchive& ar, const unsigned version);
 #endif

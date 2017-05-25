@@ -1,7 +1,20 @@
 #include "paint_class.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void PaintClass::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRasterMultiBand);
+  ar & GEOCAL_NVP(class_id_img) & GEOCAL_NVP(pan_img)
+    & GEOCAL_NVP(color) & GEOCAL_NVP(class_id_first_color);
+}
+
+GEOCAL_IMPLEMENT(PaintClass);
+#endif
 
 PaintClass::PaintClass(const boost::shared_ptr<RasterImage>& Class_id_img,
 		       const boost::shared_ptr<RasterImage>& Pan_img,

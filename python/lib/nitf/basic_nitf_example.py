@@ -5,6 +5,7 @@
 # Code is in geocal.nitf (not geocal)
 from geocal.nitf import *
 import copy
+import json
 
 # Create the file. We don't supply a name yet, that comes when we actually
 # write
@@ -45,6 +46,19 @@ t2.angle_to_north = 290
 f.tre_list.append(t)
 f.image_segment[0].tre_list.append(t2)
 
+#Text segment
+d = {
+    'first_name': 'Guido',
+    'second_name': 'Rossum',
+    'titles': ['BDFL', 'Developer'],
+}
+
+ts = NitfTextSegment(txt = json.dumps(d))
+ts.subheader.textid = 'ID12345'
+ts.subheader.txtalvl = 0
+ts.subheader.txtitl = 'sample title'
+f.text_segment.append(ts)
+
 # Now we write out to a nitf file
 f.write("basic_nitf.ntf")
 
@@ -56,7 +70,8 @@ print(f2)
 
 # And the actual data (not normally done since most images are too large to
 # print the values
-print("Data:")
+print("Image Data:")
 print(f2.image_segment[0].data.data)
 
-
+print("Text Data:")
+print(f2.text_segment[0].data)

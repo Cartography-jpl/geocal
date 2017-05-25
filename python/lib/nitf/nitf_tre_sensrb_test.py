@@ -160,6 +160,40 @@ def test_tre_sensrb_additional_parameter():
     
 def test_tre_sensrb_sensor_array():
     '''Basic test of sensrb, sensor_array_data part only'''
-    pass
+
+    t = TreSENSRB()
+    # Turn everything off
+    turn_everything_off(t)
+    # Fill in stuff always needed
+    fill_in_5_and_6(t)
+
+    #Fill in sensor array data
+    t.sensor_array_data = "Y"
+    t.detection = "some detection"
+    t.row_detectors = "00001000"
+    t.column_detectors = "00001000"
+    t.row_metric = "00001000"
+    t.column_metric = "00001000"
+    t.focal_length = "00009999"
+    t.row_fov = "00000130"
+    t.column_fov = "00000090"
+    t.calibrated = "Y"
+
+    fh = six.BytesIO()
+    t.write_to_file(fh)
+    #print(fh.getvalue())
+    assert fh.getvalue() == b'SENSRB00183NYsome detection      00001000000010000000100000001000000099990000013000000090YNN00000000000000000000000000000000000001000000000002000000100000000000000000000000000000NNNN000000000000'
+    fh2 = six.BytesIO(fh.getvalue())
+    t2 = TreSENSRB()
+    t2.read_from_file(fh2)
+    assert t2.detection == "some detection"
+    assert t2.row_detectors == 1000
+    assert t2.column_detectors == 1000
+    assert t2.row_metric == 1000
+    assert t2.column_metric == 1000
+    assert t2.focal_length == 9999
+    assert t2.row_fov == 130
+    assert t2.column_fov == 90
+    assert t2.calibrated == "Y"
     
 # Tests for other parts

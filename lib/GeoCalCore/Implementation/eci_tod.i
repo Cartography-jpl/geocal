@@ -17,6 +17,8 @@ public:
   EciTod(const Eci& Eci_coor, const Time& T);
   EciTod(double X, double Y, double Z);
   EciTod(const boost::array<double, 3>& Pos);
+  EciTod(const Ecr& P, const Time& T);
+  EciTod(const GroundCoordinate& Gc, const Time& T);
   virtual void ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const;
   virtual void ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const;
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf(const Time& T) 

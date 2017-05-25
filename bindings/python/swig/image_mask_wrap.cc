@@ -3423,66 +3423,68 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[4]
 #define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[5]
 #define SWIGTYPE_p_GeoCal__ImageMask swig_types[6]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[7]
-#define SWIGTYPE_p_allocator_type swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[16]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[17]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[30]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[31]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[32]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[33]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[34]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[35]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[36]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[37]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[38]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[39]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[40]
-#define SWIGTYPE_p_char swig_types[41]
-#define SWIGTYPE_p_char_type swig_types[42]
-#define SWIGTYPE_p_difference_type swig_types[43]
-#define SWIGTYPE_p_fmtflags swig_types[44]
-#define SWIGTYPE_p_int_type swig_types[45]
-#define SWIGTYPE_p_iostate swig_types[46]
-#define SWIGTYPE_p_off_type swig_types[47]
-#define SWIGTYPE_p_openmode swig_types[48]
-#define SWIGTYPE_p_p_PyObject swig_types[49]
-#define SWIGTYPE_p_pos_type swig_types[50]
-#define SWIGTYPE_p_seekdir swig_types[51]
-#define SWIGTYPE_p_size_t swig_types[52]
-#define SWIGTYPE_p_size_type swig_types[53]
-#define SWIGTYPE_p_state_type swig_types[54]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__ImageMask_t_t swig_types[55]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[56]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[57]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[58]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[59]
-#define SWIGTYPE_p_std__invalid_argument swig_types[60]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__ImageMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageMask_t_t_t swig_types[61]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[62]
-#define SWIGTYPE_p_traits_type swig_types[63]
-#define SWIGTYPE_p_value_type swig_types[64]
-static swig_type_info *swig_types[66];
-static swig_module_info swig_module = {swig_types, 65, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__OffsetImageMask swig_types[7]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[8]
+#define SWIGTYPE_p_allocator_type swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[29]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[30]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[31]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[32]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[33]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[34]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[35]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[36]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[37]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[38]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[39]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[40]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[41]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[42]
+#define SWIGTYPE_p_char swig_types[43]
+#define SWIGTYPE_p_char_type swig_types[44]
+#define SWIGTYPE_p_difference_type swig_types[45]
+#define SWIGTYPE_p_fmtflags swig_types[46]
+#define SWIGTYPE_p_int_type swig_types[47]
+#define SWIGTYPE_p_iostate swig_types[48]
+#define SWIGTYPE_p_off_type swig_types[49]
+#define SWIGTYPE_p_openmode swig_types[50]
+#define SWIGTYPE_p_p_PyObject swig_types[51]
+#define SWIGTYPE_p_pos_type swig_types[52]
+#define SWIGTYPE_p_seekdir swig_types[53]
+#define SWIGTYPE_p_size_t swig_types[54]
+#define SWIGTYPE_p_size_type swig_types[55]
+#define SWIGTYPE_p_state_type swig_types[56]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__ImageMask_t_t swig_types[57]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[58]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[59]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[60]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[61]
+#define SWIGTYPE_p_std__invalid_argument swig_types[62]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__ImageMask_t_std__allocatorT_boost__shared_ptrT_GeoCal__ImageMask_t_t_t swig_types[63]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[64]
+#define SWIGTYPE_p_traits_type swig_types[65]
+#define SWIGTYPE_p_value_type swig_types[66]
+static swig_type_info *swig_types[68];
+static swig_module_info swig_module = {swig_types, 67, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5337,6 +5339,9 @@ SWIG_From_std_string  (const std::string& s)
 }
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -6658,6 +6663,186 @@ SWIGINTERN PyObject *ImageMask_swigregister(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_OffsetImageMask__v_original_image_mask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OffsetImageMask *arg1 = (GeoCal::OffsetImageMask *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OffsetImageMask const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OffsetImageMask const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::ImageMask > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OffsetImageMask__v_original_image_mask" "', argument " "1"" of type '" "GeoCal::OffsetImageMask const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageMask * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageMask * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OffsetImageMask const *)arg1)->original_image_mask();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OffsetImageMask__v_line_offset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OffsetImageMask *arg1 = (GeoCal::OffsetImageMask *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OffsetImageMask const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OffsetImageMask const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OffsetImageMask__v_line_offset" "', argument " "1"" of type '" "GeoCal::OffsetImageMask const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageMask * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageMask * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::OffsetImageMask const *)arg1)->line_offset();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OffsetImageMask__v_sample_offset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OffsetImageMask *arg1 = (GeoCal::OffsetImageMask *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OffsetImageMask const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OffsetImageMask const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OffsetImageMask__v_sample_offset" "', argument " "1"" of type '" "GeoCal::OffsetImageMask const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageMask * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OffsetImageMask > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageMask * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::OffsetImageMask const *)arg1)->sample_offset();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_OffsetImageMask(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OffsetImageMask *arg1 = (GeoCal::OffsetImageMask *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OffsetImageMask > tempshared1 ;
+  boost::shared_ptr< GeoCal::OffsetImageMask > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OffsetImageMask" "', argument " "1"" of type '" "GeoCal::OffsetImageMask *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OffsetImageMask > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OffsetImageMask > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageMask * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OffsetImageMask > * >(argp1);
+      arg1 = const_cast< GeoCal::OffsetImageMask * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *OffsetImageMask_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -9100,6 +9285,27 @@ static PyMethodDef SwigMethods[] = {
 		"Destructor. \n"
 		""},
 	 { (char *)"ImageMask_swigregister", ImageMask_swigregister, METH_VARARGS, NULL},
+	 { (char *)"OffsetImageMask__v_original_image_mask", (PyCFunction)_wrap_OffsetImageMask__v_original_image_mask, METH_O, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr<ImageMask>& GeoCal::OffsetImageMask::original_image_mask() const\n"
+		"Original ImageMask. \n"
+		""},
+	 { (char *)"OffsetImageMask__v_line_offset", (PyCFunction)_wrap_OffsetImageMask__v_line_offset, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::OffsetImageMask::line_offset() const\n"
+		"Return line offset. \n"
+		""},
+	 { (char *)"OffsetImageMask__v_sample_offset", (PyCFunction)_wrap_OffsetImageMask__v_sample_offset, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::OffsetImageMask::sample_offset() const\n"
+		"Return line offset. \n"
+		""},
+	 { (char *)"delete_OffsetImageMask", (PyCFunction)_wrap_delete_OffsetImageMask, METH_O, (char *)"\n"
+		"\n"
+		"virtual GeoCal::OffsetImageMask::~OffsetImageMask()\n"
+		"Destructor. \n"
+		""},
+	 { (char *)"OffsetImageMask_swigregister", OffsetImageMask_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CombinedImageMask", _wrap_new_CombinedImageMask, METH_VARARGS, (char *)"\n"
 		"\n"
 		"GeoCal::CombinedImageMask::CombinedImageMask(It First, It Last)\n"
@@ -9165,6 +9371,9 @@ static void *_p_std__basic_istreamT_char_std__char_traitsT_char_t_tTo_p_std__bas
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_iosT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ios< char,std::char_traits< char > > *) (std::basic_istream< char > *) ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
+static void *_p_GeoCal__OffsetImageMaskTo_p_GeoCal__ImageMask(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::ImageMask *)  ((GeoCal::OffsetImageMask *) x));
+}
 static void *_p_GeoCal__CombinedImageMaskTo_p_GeoCal__ImageMask(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::ImageMask *)  ((GeoCal::CombinedImageMask *) x));
 }
@@ -9180,6 +9389,9 @@ static void *_p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject(void *x, 
 static void *_p_GeoCal__ImageMaskTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageMask *) x));
 }
+static void *_p_GeoCal__OffsetImageMaskTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *) (GeoCal::ImageMask *) ((GeoCal::OffsetImageMask *) x));
+}
 static void *_p_GeoCal__CombinedImageMaskTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::ImageMask *) ((GeoCal::CombinedImageMask *) x));
 }
@@ -9188,6 +9400,10 @@ static void *_p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject(void 
 }
 static void *_p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivativeRef< double > *) x));
+}
+static void *_p_boost__shared_ptrT_GeoCal__OffsetImageMask_tTo_p_boost__shared_ptrT_GeoCal__ImageMask_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::ImageMask >(*(boost::shared_ptr< GeoCal::OffsetImageMask > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__ImageMask_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -9210,6 +9426,10 @@ static void *_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__sha
 static void *_p_boost__shared_ptrT_GeoCal__ImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::ImageMask > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__OffsetImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::OffsetImageMask > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -9234,6 +9454,7 @@ static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObje
 static swig_type_info _swigt__p_GeoCal__ImageCoordinate = {"_p_GeoCal__ImageCoordinate", "GeoCal::ImageCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageCoordinateWithDerivative = {"_p_GeoCal__ImageCoordinateWithDerivative", "GeoCal::ImageCoordinateWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageMask = {"_p_GeoCal__ImageMask", "GeoCal::ImageMask *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__OffsetImageMask = {"_p_GeoCal__OffsetImageMask", "GeoCal::OffsetImageMask *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__VicarImageCoordinate = {"_p_GeoCal__VicarImageCoordinate", "GeoCal::VicarImageCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
@@ -9267,6 +9488,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t", "boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t", "boost::shared_ptr< GeoCal::ImageCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t = {"_p_boost__shared_ptrT_GeoCal__ImageMask_t", "boost::shared_ptr< GeoCal::ImageMask > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t = {"_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t", "boost::shared_ptr< GeoCal::OffsetImageMask > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t", "boost::shared_ptr< GeoCal::VicarImageCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
@@ -9301,6 +9523,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__ImageCoordinate,
   &_swigt__p_GeoCal__ImageCoordinateWithDerivative,
   &_swigt__p_GeoCal__ImageMask,
+  &_swigt__p_GeoCal__OffsetImageMask,
   &_swigt__p_GeoCal__VicarImageCoordinate,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
@@ -9334,6 +9557,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
@@ -9364,10 +9588,11 @@ static swig_type_info *swig_type_initial[] = {
 static swig_cast_info _swigc__p_GeoCal__AutoDerivativeRefT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__AutoDerivativeT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CombinedImageMask[] = {  {&_swigt__p_GeoCal__CombinedImageMask, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageMask, _p_GeoCal__ImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageMask, _p_GeoCal__ImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OffsetImageMask, _p_GeoCal__OffsetImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinate[] = {  {&_swigt__p_GeoCal__ImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinateWithDerivative[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__ImageMask[] = {  {&_swigt__p_GeoCal__ImageMask, 0, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__ImageMask, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__ImageMask[] = {  {&_swigt__p_GeoCal__ImageMask, 0, 0, 0},  {&_swigt__p_GeoCal__OffsetImageMask, _p_GeoCal__OffsetImageMaskTo_p_GeoCal__ImageMask, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__ImageMask, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__OffsetImageMask[] = {  {&_swigt__p_GeoCal__OffsetImageMask, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VicarImageCoordinate[] = {  {&_swigt__p_GeoCal__VicarImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -9397,10 +9622,11 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, _p_boost__shared_ptrT_GeoCal__ImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, _p_boost__shared_ptrT_GeoCal__ImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, _p_boost__shared_ptrT_GeoCal__OffsetImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageMask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__ImageMask_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageMask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, _p_boost__shared_ptrT_GeoCal__OffsetImageMask_tTo_p_boost__shared_ptrT_GeoCal__ImageMask_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__ImageMask_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -9435,6 +9661,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__ImageCoordinate,
   _swigc__p_GeoCal__ImageCoordinateWithDerivative,
   _swigc__p_GeoCal__ImageMask,
+  _swigc__p_GeoCal__OffsetImageMask,
   _swigc__p_GeoCal__VicarImageCoordinate,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
@@ -9468,6 +9695,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ImageMask_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t,
   _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
   _swigc__p_char,
   _swigc__p_char_type,
@@ -10180,6 +10408,9 @@ SWIG_init(void) {
   
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ImageMask), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ImageMask > > ("boost::shared_ptr< GeoCal::ImageMask > *"));
+  
+  
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OffsetImageMask), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OffsetImageMask > > ("boost::shared_ptr< GeoCal::OffsetImageMask > *"));
   
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::CombinedImageMask), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::CombinedImageMask > > ("boost::shared_ptr< GeoCal::CombinedImageMask > *"));

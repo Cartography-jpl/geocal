@@ -129,8 +129,8 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
   // Right now we don't support planetary coordinate systems. I think 
   // GDAL actually can, it has some support for PDS. But for now, just
   // skip the mapinfo if it is for a planet.
-  else if(dynamic_cast<const EuropaPlanetocentricConverter*>(&M.coordinate_converter())) {
-    std::cerr << "Warning, skipping EuropaPlanetocentric map info writing because we don't currently support this.";
+  else if(dynamic_cast<const PlanetocentricConverter*>(&M.coordinate_converter())) {
+    std::cerr << "Warning, skipping Planetocentric map info writing because we don't currently support this.";
     return;
   } else if(const OgrCoordinateConverter* ogrconv =
       dynamic_cast<const OgrCoordinateConverter*>(&M.coordinate_converter()))
@@ -506,10 +506,8 @@ Rpc GeoCal::gdal_rpc(const GDALDataset& D)
 	gdal_metadata<boost::array<double, 20> >(D, "SAMP_NUM_COEFF", "RPC");
       res.sample_denominator = 
 	gdal_metadata<boost::array<double, 20> >(D, "SAMP_DEN_COEFF", "RPC");
-      if(const_cast<GDALDataset&>(D).GetMetadataItem("NAIF_CODE", "")) {
-	int naif_code = gdal_metadata<int>(D, "NAIF_CODE");
-	std::cerr << "Faking NAIF CODE " << naif_code << "\n";
-      }
+      if(const_cast<GDALDataset&>(D).GetMetadataItem("NAIF_CODE", ""))
+	res.naif_code(gdal_metadata<int>(D, "NAIF_CODE"));
     } else {
       throw MetadataMissing("Does not appear to be any RPC metadata in file");
     }

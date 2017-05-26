@@ -2223,6 +2223,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp7_ssd_mro110c.lbl \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp8_ssd_mro110c.lbl \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp9_ssd_mro110c.lbl \
+	@srcpython@/setup.cfg @srcpython@/conftest.py \
+	@srcpython@/README_test \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
 	@srcpythonbin@/gdal_to_nitf_test.py \
 	@srcpythonbin@/gtproj2_test.py \

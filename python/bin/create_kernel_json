@@ -1,0 +1,52 @@
+#! /usr/bin/env python
+#
+# This short script is used to parse the ck and spk kernels and create a
+# json file with a mapping of time to file. We could just read all the PDS
+# label files each time we need this information, but it is faster to record
+# this is a single file
+
+from geocal import *
+import glob
+
+version = "May 17, 2017"
+usage='''Usage:
+  create_kernel_json [options] <output_name>
+  create_kernel_json -h | --help
+  create_kernel_json -v | --version
+
+This short script is used to parse the ck and spk kernels and create a
+json file with a mapping of time to file. We could just read all the PDS
+label files each time we need this information, but it is faster to record
+this is a single file
+
+Options:
+  -h --help         
+       Print this message
+
+  --ck-glob=f
+       Pattern to use for finding ck kernels.
+       [default: ck/mro_sc_*[0-9].lbl]
+
+  --spk-glob=f
+       Pattern to use for finding spk kernels.
+       [default: spk/mro_*_ssd_mro110c.lbl]
+
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+curdir = os.getcwd()
+d = {}
+try:
+    os.chdir(os.path.dirname(__file__))
+    d["ck_kernel"] = SpiceKernelByTime(glob.glob(args.ck_glob))
+    d["spk_kernel"] = SpiceKernelByTime(glob.glob(args.spk_glob))
+finally:
+    os.chdir(curdir)
+
+write_shelve(args.output_name, d)
+
+
+    

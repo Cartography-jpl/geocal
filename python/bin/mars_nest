@@ -80,8 +80,8 @@ Options:
 
   --fftgrid=s
        Grid dimensions of FFTs to match in line x sample order.
-       Note that to pass this you need to use quotes, e.g.,
-       --fftgrid="(42,42)".
+       Note that to pass this you need to use quotes, 
+       e.g., --fftgrid="(42,42)".
        [default: (42, 42)]
 
   --hirise-correction

@@ -80,8 +80,8 @@ Options:
 
   --fftgrid=s
        Grid dimensions of FFTs to match in line x sample order.
-       Note that to pass this you need to use quotes, e.g.,
-       --fftgrid="(42,42)".
+       Note that to pass this you need to use quotes, 
+       e.g., --fftgrid="(42,42)".
        [default: (42, 42)]
 
   --hirise-correction
@@ -352,7 +352,18 @@ if(args.use_projection):
     resample_proj(img_fixed, use_projection_fixed, img_fixed_reproj,
                   fit_fref=False)
     img_fixed = img_fixed_reproj
-resample_proj(refimg_fixed, img_fixed, refimg_res1)
+# If resolutions are different, then don't resize when we reproject the
+# reference data. If on the other hand these are the same, then do resize
+# (which should be almost an identity transformation).
+#
+# This is to handle the case of "almost the same" resolution, which we
+# in particular can get if img_fixed has been reprojected from either
+# use_ref_image_projection or use_projection (or if the user just mildly
+# "lied" about the reference data and image data being the same resolution)
+if(args.ref_image_resolution_name != args.image_resolution_name):
+    resample_proj(refimg_fixed, img_fixed, refimg_res1)
+else:
+    resample_proj(refimg_fixed, img_fixed, refimg_res1, resize=True)
 if(args.ref_image_resolution_name != args.image_resolution_name):
     resample_proj(refimg_res1, img_fixed, refimg_res2, resize=True)
 import_file(img_fixed, img_res2)

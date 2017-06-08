@@ -1307,6 +1307,7 @@ am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -1381,6 +1382,7 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
@@ -2091,7 +2093,8 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/job_database_check_and_run \
 	$(srcdir)/$(srcpythonbin)/usgs_create_ocean_tile \
 	$(srcdir)/$(srcpythonbin)/srtm_90m_create_ocean_tile \
-	$(srcdir)/$(srcpythonbin)/surface_image_project
+	$(srcdir)/$(srcpythonbin)/surface_image_project \
+	$(srcdir)/$(srcpythonbin)/create_kernel_json
 AM_LDFLAGS = 
 
 #=================================================================
@@ -2633,11 +2636,13 @@ libgeocal_la_LDFLAGS = $(am__append_1) -R $(BOOST_LIBDIR) \
 dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
-	$(srcdir)/$(srcpythonbin)/mars_nest $(am__append_45)
+	$(srcdir)/$(srcpythonbin)/mars_nest \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map $(am__append_45)
 dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \

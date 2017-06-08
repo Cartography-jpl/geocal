@@ -21,7 +21,7 @@ parm redo type=int default=36 valid=(0:999)
 parm seed type=int default=562
 parm thr_res type=real count=1 default=10.0
 parm toler type=real count=1 default=1.5 valid=(0.0:20.0)
-parm useproj type=string count=1 default="" 
+parm useproj type=(string,99) count=1 default="" 
 parm userefproj type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC
 .TITLE

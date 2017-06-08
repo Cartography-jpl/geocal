@@ -247,16 +247,25 @@ Time SpiceHelper::parse_time(const std::string& Time_string)
 //-----------------------------------------------------------------------
 // Change CCSDS ASCII format to one that str2et_c can parse. This
 // changes something like "1996-07-03T04:13:57.987654Z" to
-// "1996-07-03 04:13:57.987654 UTC"
+// "1996-07-03 04:13:57 UTC"
+// We strip off the fractional part, and treat it separately. This is
+// to avoid minor roundoff problems that occur since we generate the
+// data as et, but store internally as pgs.
 //-----------------------------------------------------------------------
 
   std::string t = 
     boost::regex_replace(Time_string, 
-     boost::regex("(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?)Z"), 
+     boost::regex("(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2})(\\.\\d+)?Z"), 
 			 "\\1 \\2 UTC");
+  t = boost::regex_replace(t, boost::regex("\\.\\d+"), "");
+  double frac = 0.0;
+  boost::smatch m;
+  if(boost::regex_search(Time_string, m,
+      boost::regex("(\\.\\d+)")))
+    frac = boost::lexical_cast<double>(m[1]);
   str2et_c(t.c_str(), &et);
   spice_error_check();
-  return Time::time_et(et);
+  return Time::time_et(et) + frac;
 #else
   throw SpiceNotAvailableException();
 #endif
@@ -472,6 +481,9 @@ std::string SpiceHelper::fixed_frame_name(int Body_id)
     break;
   case 301:			// Moon
     return "IAU_MOON";
+    break;
+  case 2000001:			// Ceres
+    return "CERES_FIXED";
     break;
   }
   // Default to IAU_ + the name of the body 

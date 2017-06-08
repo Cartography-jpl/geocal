@@ -40,27 +40,40 @@ Options:
        a base_name_igc_projected.xml file that can then be translated to
        an image using write_image program.
 
+  --spice-kernel-dir=f
+       Give the directory to find the mars kernels. The default is
+       os.environ["AFIDS_DATA"] + "/mars_kernel/mro_kernel", but this
+       can be overridden
+
   -v --version      
        Print program version
 '''
 
 # Mapping between long name and shorter vicar name
-long_name_to_vicar = { "pds_image" : "",
-                       "output_base_name" : "",
-                       "mapped_image" : ""
-args = docopt_simple(usage, version=version)
+long_name_to_vicar = { "pds_image" : "pdsimg",
+                       "output_base_name" : "outbase",
+                       "mapped_image" : "mapimg",
+                       "spice_kernel_dir": "skerdir",
+                       }
+args = docopt_simple(usage, version=version,
+                     long_name_to_vicar=long_name_to_vicar)
+                     
 
 def igc_for_context(lbl, fname):
     '''Process for context camera'''
     tstart = Time.parse_time(lbl["START_TIME"])
     tend = Time.parse_time(lbl["STOP_TIME"])
-    bdir = os.environ["AFIDS_DATA"] + "/mars_kernel/mro_kernel/"
+    if(args.spice_kernel_dir):
+        bdir = args.spice_kernel_dir + "/"
+    else:
+        bdir = os.environ["AFIDS_DATA"] + "/mars_kernel/mro_kernel/"
     kdat = read_shelve(bdir + "kernel.json")
     # We need better logic here, but for now just set up the kernels we
     # handed
     klist = [bdir + "mro.ker",
              kdat["ck_kernel"].kernel(tstart),
              kdat["spk_kernel"].kernel(tend)]
+    klist = [os.path.abspath(i) for i in klist]
     orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
                            PlanetConstant.MARS_NAIF_CODE)
     img = GdalRasterImage(fname)

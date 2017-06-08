@@ -2,6 +2,7 @@ PROCESS       HELP=*
 parm pdsimg type=(string,99) count=1
 parm outbase type=(string,99) count=1
 parm mapimg type=(string,99) count=1 default="" 
+parm skerdir type=(string,99) count=1 default="" 
 END-PROC
 .TITLE
 Mars_Nest_Map

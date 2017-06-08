@@ -482,6 +482,9 @@ std::string SpiceHelper::fixed_frame_name(int Body_id)
   case 301:			// Moon
     return "IAU_MOON";
     break;
+  case 2000001:			// Ceres
+    return "CERES_FIXED";
+    break;
   }
   // Default to IAU_ + the name of the body 
   return "IAU_" + body_name(Body_id);

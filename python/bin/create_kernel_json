@@ -37,14 +37,9 @@ Options:
 
 args = docopt_simple(usage, version=version)
 
-curdir = os.getcwd()
 d = {}
-try:
-    os.chdir(os.path.dirname(__file__))
-    d["ck_kernel"] = SpiceKernelByTime(glob.glob(args.ck_glob))
-    d["spk_kernel"] = SpiceKernelByTime(glob.glob(args.spk_glob))
-finally:
-    os.chdir(curdir)
+d["ck_kernel"] = SpiceKernelByTime(glob.glob(args.ck_glob))
+d["spk_kernel"] = SpiceKernelByTime(glob.glob(args.spk_glob))
 
 write_shelve(args.output_name, d)
 

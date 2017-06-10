@@ -410,6 +410,20 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
         return self._v_unit_type()
 
 
+    def _v_raster_data_type(self):
+        """
+
+        int GeoCal::GdalRasterImage::raster_data_type() const
+
+        """
+        return _gdal_raster_image.GdalRasterImage__v_raster_data_type(self)
+
+
+    @property
+    def raster_data_type(self):
+        return self._v_raster_data_type()
+
+
     def _v_update(self):
         """
 
@@ -568,6 +582,7 @@ GdalRasterImage._v_band_id = new_instancemethod(_gdal_raster_image.GdalRasterIma
 GdalRasterImage._v_offset = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_offset, None, GdalRasterImage)
 GdalRasterImage._v_scale = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_scale, None, GdalRasterImage)
 GdalRasterImage._v_unit_type = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_unit_type, None, GdalRasterImage)
+GdalRasterImage._v_raster_data_type = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_raster_data_type, None, GdalRasterImage)
 GdalRasterImage._v_update = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_update, None, GdalRasterImage)
 GdalRasterImage._v_rpc = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_rpc, None, GdalRasterImage)
 GdalRasterImage._v_map_info = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_map_info, None, GdalRasterImage)

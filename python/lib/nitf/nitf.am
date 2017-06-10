@@ -9,7 +9,6 @@ geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_des_csatta.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_csde.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_csepha.py
-geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_stdidc.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_geosde.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_rpc.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_piae.py
@@ -20,17 +19,19 @@ geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_tre_sensrb.py
 EXTRA_DIST+=@srcpythonlibnitf@/__init__.py
 EXTRA_DIST+=@srcpythonlibnitf@/basic_nitf_example.py
 EXTRA_DIST+=@srcpythonlibnitf@/README
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_des_csatta_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_field_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_file_header_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_file_test.py
-EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_subheader_test.py
-EXTRA_DIST+=@srcpythonlibnitf@/nitf_des_csatta_test.py
-EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_test.py
-EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_pixqla_test.py
-EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_engrda_test.py
-EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_sensrb_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_text_subheader_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_csde_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_csepha_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_engrda_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_pixqla_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_sensrb_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_tre_test.py
 
 
 

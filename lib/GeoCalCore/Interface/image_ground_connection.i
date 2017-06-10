@@ -182,7 +182,12 @@ def ground_coordinate(self, ic, dem = None):
 
 class OffsetImageGroundConnection: public ImageGroundConnection {
 public:
-  OffsetImageGroundConnection(const boost::shared_ptr<ImageGroundConnection>& Ig_original, double Line_offset, double Sample_offset);
+  OffsetImageGroundConnection
+  (const boost::shared_ptr<ImageGroundConnection>& Ig_original,
+   double Line_offset, double Sample_offset);
+  OffsetImageGroundConnection
+  (const boost::shared_ptr<ImageGroundConnection>& Ig_original, 
+   int Lstart, int Sstart, int Number_line, int Number_sample);
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 

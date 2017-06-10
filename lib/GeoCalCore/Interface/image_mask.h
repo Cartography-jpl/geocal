@@ -50,6 +50,67 @@ private:
 };
 
 /****************************************************************//**
+  This gives an ImageMask that is an offset of a given one. This would
+  be used for example when an image is subsetted.
+*******************************************************************/
+
+class OffsetImageMask: public ImageMask {
+public:
+//-----------------------------------------------------------------------
+/// Constructor.
+//-----------------------------------------------------------------------
+
+  OffsetImageMask(const boost::shared_ptr<ImageMask> Im_original,
+		  double Line_offset, double Sample_offset)
+    : im_(Im_original), line_offset_(Line_offset),
+      sample_offset_(Sample_offset)
+  {
+  }
+
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+  virtual ~OffsetImageMask() {}
+
+  virtual bool mask(int Line, int Sample) const
+  { return im_->mask(Line - line_offset_, Sample = sample_offset_); }
+  virtual bool mask_ic(const ImageCoordinate& Ic) const
+  { return im_->mask(Ic.line - line_offset_, Ic.sample - sample_offset_); }
+    virtual bool area_any_masked(int Line, int Sample, int Number_line,
+			       int Number_sample) const
+  { return im_->area_any_masked(Line - line_offset_, Sample - sample_offset_,
+				Number_line, Number_sample); }
+
+  virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Original ImageMask
+//-----------------------------------------------------------------------
+  
+  const boost::shared_ptr<ImageMask>& original_image_mask()
+    const { return im_;}
+
+//-----------------------------------------------------------------------
+/// Return line offset.
+//-----------------------------------------------------------------------
+
+  double line_offset() const { return line_offset_;}
+
+//-----------------------------------------------------------------------
+/// Return line offset.
+//-----------------------------------------------------------------------
+
+  double sample_offset() const { return sample_offset_;}
+private:
+  boost::shared_ptr<ImageMask> im_;
+  double line_offset_, sample_offset_;
+  OffsetImageMask() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+  
+/****************************************************************//**
   This is combines a set of masks into a single one. The combination
   just check each mask in turn, and if any of them indicates a point
   or a area is masked, then we return true.
@@ -110,5 +171,6 @@ private:
 
 }
 GEOCAL_EXPORT_KEY(ImageMask);
+GEOCAL_EXPORT_KEY(OffsetImageMask);
 GEOCAL_EXPORT_KEY(CombinedImageMask);
 #endif

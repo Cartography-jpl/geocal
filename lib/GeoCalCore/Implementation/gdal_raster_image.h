@@ -66,7 +66,9 @@ public:
   { return gdal_data_base().file_names(); }
   int band_id() const 
   { return const_cast<GDALRasterBand*>(&raster_band())->GetBand(); }
-
+  int raster_data_type() const
+  { return const_cast<GDALRasterBand*>(&raster_band())->GetRasterDataType(); }
+  
 //-----------------------------------------------------------------------
 /// Return offset, if any to apply to data to get underlying values.
 //-----------------------------------------------------------------------

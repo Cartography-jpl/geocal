@@ -62,7 +62,7 @@ std::map<int, SpicePlanetConstant> PlanetConstant::h_map;
 /// Get the planet constants for the given NAIF code.
 //-----------------------------------------------------------------------
 
-SpicePlanetConstant PlanetConstant::h(int Naif_code)
+const SpicePlanetConstant& PlanetConstant::h(int Naif_code)
 {
   if(h_map.count(Naif_code) == 0)
     h_map[Naif_code] = SpicePlanetConstant(Naif_code);

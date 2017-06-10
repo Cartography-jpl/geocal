@@ -1,6 +1,7 @@
 #ifndef ORBIT_QUATERNION_LIST_H
 #define ORBIT_QUATERNION_LIST_H
 #include "orbit.h"
+#include "time_table.h"
 #include <map>
 
 namespace GeoCal {
@@ -115,5 +116,69 @@ protected:
     initialize();
   }
 };
+
+/****************************************************************//**
+  Some orbits are expensive to calculate (e.g., SpicePlanetOrbit).
+  Often it is perfectly fine to only calculate this at some fixed set
+  of times and then interpolate, which can be significantly faster.
+  This class supports this.
+*******************************************************************/
+
+class OrbitListCache: public OrbitQuaternionList, public Observer<Orbit> {
+public:
+//-----------------------------------------------------------------------
+/// Create a OrbitListCache that calculates the orbit at each time
+/// found for image coordinate line from Tt.min_line() to
+/// tt.max_line() for the given sample. We cache the orbit data. If
+/// the underlying orbit changes, we throw away the cached values.
+//-----------------------------------------------------------------------
+
+  OrbitListCache(const boost::shared_ptr<Orbit>& Orbit_underlying,
+		 const boost::shared_ptr<TimeTable>& Tt,
+		 double Sample = 0.0)
+    : orbit_underlying_(Orbit_underlying), tt(Tt), sample_(Sample)
+  { init(); }
+
+  virtual ~OrbitListCache() {};
+  virtual void notify_update(const Orbit& Orb);
+  virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Underlying orbit.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<Orbit>& orbit_underlying() const
+  {return orbit_underlying_;}
+
+//-----------------------------------------------------------------------
+/// Time table we sample orbit at.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<TimeTable>& time_table() const
+  { return tt;}
+  
+//-----------------------------------------------------------------------
+/// Sample we use with time table.
+//-----------------------------------------------------------------------
+  double sample() const { return sample_; }
+protected:
+  virtual boost::shared_ptr<QuaternionOrbitData> orbit_data_create(Time T)
+    const;
+private:
+  void init();
+  boost::shared_ptr<Orbit> orbit_underlying_;
+  boost::shared_ptr<TimeTable> tt;
+  double sample_;
+  OrbitListCache() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+};
 }
+
+GEOCAL_EXPORT_KEY(OrbitListCache);
 #endif

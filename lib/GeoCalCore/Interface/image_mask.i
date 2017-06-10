@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %import "image_coordinate.i"
 %geocal_shared_ptr(GeoCal::ImageMask);
+%geocal_shared_ptr(GeoCal::OffsetImageMask);
 %geocal_shared_ptr(GeoCal::CombinedImageMask);
 namespace GeoCal {
 class ImageMask: public GenericObject {
@@ -21,6 +22,17 @@ public:
   %pickle_serialization();
 };
 
+class OffsetImageMask: public ImageMask {
+public:
+  OffsetImageMask(const boost::shared_ptr<ImageMask> Im_original,
+		  double Line_offset, double Sample_offset);
+
+  %python_attribute(original_image_mask, boost::shared_ptr<ImageMask>);
+  %python_attribute(line_offset, double);
+  %python_attribute(sample_offset, double);
+  %pickle_serialization();
+};
+  
 class CombinedImageMask: public ImageMask {
 public:
   CombinedImageMask();

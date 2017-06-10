@@ -331,21 +331,57 @@ class SpiceHelper(object):
     def spice_setup(*args):
         """
 
-        void SpiceHelper::spice_setup(const std::string &Kernel="geocal.ker")
-        Set SPICE errors to just return, rather than aborting. 
+        void SpiceHelper::spice_setup(const std::string &Kernel="geocal.ker", bool
+        Force_kernel_pool_reset=false)
+        Set SPICE errors to just return, rather than aborting.
+
+        If Force_kernel_pool_reset is true, then reset the kernel pool and
+        start over.
+
+        Note a special issue when using with python multiprocessor. In a way
+        I've never been able to track down, the spice kernels are somehow
+        mangled in the forked processes. I'm not sure what is not getting
+        copied, we would regularly we get errors that looked like a corrupt
+        kernel. For example:
+
+        SPICE(BADSUBSCRIPT): Subscript out of range on file line 412,
+        procedure "zzdafgsr". Attempt to access element 129 of variable
+        "dpbuf".
+
+        RuntimeError: SPICE toolkit error: SPICE(DAFBEGGTEND)
+
+        Beginning address (8889045) greater than ending address (8889044).
+
+        Not sure what the source of this is, but as a workaround we:
+
+        Keep track of the process ID
+
+        Keep a list of kernels loaded
+
+        Check the process ID on each call to spice_setup.
+
+        If it doesn't match, clear all the kernels and reload them.
+
+        This happens transparently, and hopefully this will remove all the
+        problems with forking. If not, we may need to look into this further,
+        and perhaps track down the actual underlying issue with forking 
         """
         return _spice_helper.SpiceHelper_spice_setup(*args)
 
     spice_setup = staticmethod(spice_setup)
 
-    def add_kernel(*args):
+    def add_kernel(Kernel):
         """
 
-        void SpiceHelper::add_kernel(const std::string &Kernel)
+        void SpiceHelper::add_kernel(const std::string &Kernel, bool Skip_save=false)
         Add an additional kernel, after the one we automatically get (i.e.,
-        $SPICEDATA/geocal.ker). 
+        $SPICEDATA/geocal.ker).
+
+        Skip_save is really meant for internal use, it skips saving the kernel
+        in our list of kernels to reload on forking (see spice_setup comments
+        for a description of this). 
         """
-        return _spice_helper.SpiceHelper_add_kernel(*args)
+        return _spice_helper.SpiceHelper_add_kernel(Kernel)
 
     add_kernel = staticmethod(add_kernel)
 
@@ -430,19 +466,55 @@ def SpiceHelper_spice_available():
 def SpiceHelper_spice_setup(*args):
     """
 
-    void SpiceHelper::spice_setup(const std::string &Kernel="geocal.ker")
-    Set SPICE errors to just return, rather than aborting. 
+    void SpiceHelper::spice_setup(const std::string &Kernel="geocal.ker", bool
+    Force_kernel_pool_reset=false)
+    Set SPICE errors to just return, rather than aborting.
+
+    If Force_kernel_pool_reset is true, then reset the kernel pool and
+    start over.
+
+    Note a special issue when using with python multiprocessor. In a way
+    I've never been able to track down, the spice kernels are somehow
+    mangled in the forked processes. I'm not sure what is not getting
+    copied, we would regularly we get errors that looked like a corrupt
+    kernel. For example:
+
+    SPICE(BADSUBSCRIPT): Subscript out of range on file line 412,
+    procedure "zzdafgsr". Attempt to access element 129 of variable
+    "dpbuf".
+
+    RuntimeError: SPICE toolkit error: SPICE(DAFBEGGTEND)
+
+    Beginning address (8889045) greater than ending address (8889044).
+
+    Not sure what the source of this is, but as a workaround we:
+
+    Keep track of the process ID
+
+    Keep a list of kernels loaded
+
+    Check the process ID on each call to spice_setup.
+
+    If it doesn't match, clear all the kernels and reload them.
+
+    This happens transparently, and hopefully this will remove all the
+    problems with forking. If not, we may need to look into this further,
+    and perhaps track down the actual underlying issue with forking 
     """
     return _spice_helper.SpiceHelper_spice_setup(*args)
 
-def SpiceHelper_add_kernel(*args):
+def SpiceHelper_add_kernel(Kernel):
     """
 
-    void SpiceHelper::add_kernel(const std::string &Kernel)
+    void SpiceHelper::add_kernel(const std::string &Kernel, bool Skip_save=false)
     Add an additional kernel, after the one we automatically get (i.e.,
-    $SPICEDATA/geocal.ker). 
+    $SPICEDATA/geocal.ker).
+
+    Skip_save is really meant for internal use, it skips saving the kernel
+    in our list of kernels to reload on forking (see spice_setup comments
+    for a description of this). 
     """
-    return _spice_helper.SpiceHelper_add_kernel(*args)
+    return _spice_helper.SpiceHelper_add_kernel(Kernel)
 
 def SpiceHelper_kernel_loaded(Kernel):
     """

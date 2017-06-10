@@ -39,7 +39,7 @@ public:
   { return 1.0 / PlanetConstant::flattening(Naif_code); }    
 private:
   static std::map<int, SpicePlanetConstant> h_map;
-  static SpicePlanetConstant h(int Naif_code);
+  static const SpicePlanetConstant& h(int Naif_code);
 };
 
 /****************************************************************//**

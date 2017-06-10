@@ -102,5 +102,16 @@ BOOST_AUTO_TEST_CASE(timing_test)
   BOOST_CHECK_CLOSE(t.acs(), 215077459.472, 1e-6);
 }
 
+BOOST_AUTO_TEST_CASE(problem_time)
+{
+  // We encountered some times where str2et_c parsed slightly
+  // incorrectly, because of minor rounding in going from et to pgs
+  // time we have Time in. Have a unit test the illustrates the old
+  // problem, which we've tried to fix by explicitly handling
+  // fractional seconds separately.
+  BOOST_CHECK_EQUAL(Time::parse_time("2015-01-24T20:43:46.428490Z").to_string(),
+		    std::string("2015-01-24T20:43:46.428490Z"));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

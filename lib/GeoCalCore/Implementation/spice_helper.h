@@ -6,6 +6,11 @@
 #include <boost/regex.hpp>
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>
+#include <sys/types.h>
+// This won't be needed once version 3 becomes the default for boost filesystem
+#define BOOST_FILESYSTEM_VERSION 3
+#include <boost/filesystem.hpp>
+
 namespace GeoCal {
   class Time;			// Forward declaration.
 
@@ -52,6 +57,8 @@ public:
   SPICE depends on various kernels. We load the file found at 
   $SPICEDATA/geocal.ker. This file in turn loads a number of other
   kernels, you can edit this file to change which kernels are used.
+
+
 *******************************************************************/
 class SpiceHelper {
 public:
@@ -67,10 +74,9 @@ public:
   static Time et_to_geocal(double Et);
   static std::string to_string(const Time& T);
   static bool spice_available();
-  static void spice_setup(const std::string& Kernel = "geocal.ker");
-  static void add_kernel(const std::string& Kernel_dir, 
-			 const std::string& Kernel);
-  static void add_kernel(const std::string& Kernel);
+  static void spice_setup(const std::string& Kernel = "geocal.ker",
+			  bool Force_kernel_pool_reset = false);
+  static void add_kernel(const std::string& Kernel, bool Skip_save = false);
   static bool kernel_loaded(const std::string& Kernel);
   static void spice_error_check();
   static boost::math::quaternion<double> 
@@ -99,6 +105,8 @@ public:
 private:
   static std::string max_version_find(const std::string& D, 
 				      const boost::regex& F_reg);
+  static pid_t pid;
+  static std::vector<boost::filesystem::path> kernel_list;
 };
 
 class SpiceToolkitTimeInterface : public ToolkitTimeInterface {

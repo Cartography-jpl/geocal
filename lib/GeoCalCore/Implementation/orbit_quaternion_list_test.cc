@@ -1,6 +1,7 @@
 #include "unit_test_support.h"
 #include "orbit_quaternion_list.h"
 #include "aircraft_orbit_data.h"
+#include "time_table.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -222,6 +223,48 @@ BOOST_AUTO_TEST_CASE(derivative_sc_look2)
   jac_calc(1,Range::all()) = p2.look_vector[1].gradient();
   jac_calc(2,Range::all()) = p2.look_vector[2].gradient();
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+BOOST_FIXTURE_TEST_SUITE(orbit_list_cache, GlobalFixture)
+
+BOOST_AUTO_TEST_CASE(basic)
+{
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  boost::shared_ptr<Orbit> orb_underlying(new KeplerOrbit(t, t + 100.0));
+  boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(t, t + 100.0));
+  OrbitListCache orb(orb_underlying, tt);
+  BOOST_CHECK_CLOSE(orb.min_time().pgs(),
+		    orb_underlying->min_time().pgs(), 1e-6);
+  BOOST_CHECK_CLOSE(orb.max_time().pgs(),
+		    orb_underlying->max_time().pgs(), 1e-6);
+  BOOST_CHECK_CLOSE(orb.position_ci(t)->position[0], -1788501.0, 1e-4);
+  BOOST_CHECK_CLOSE(orb.position_ci(t)->position[1], -6854177.0, 1e-4);
+  BOOST_CHECK_CLOSE(orb.position_ci(t)->position[2], -16811.0, 1e-3);
+}
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  boost::shared_ptr<Orbit> orb_underlying(new KeplerOrbit(t, t + 100.0));
+  boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(t, t + 100.0));
+  boost::shared_ptr<Orbit> orb(new OrbitListCache(orb_underlying, tt));
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<OrbitListCache> orbr = 
+    serialize_read_string<OrbitListCache>(d);
+  
+  BOOST_CHECK_CLOSE(orbr->min_time().pgs(),
+		    orb_underlying->min_time().pgs(), 1e-6);
+  BOOST_CHECK_CLOSE(orbr->max_time().pgs(),
+		    orb_underlying->max_time().pgs(), 1e-6);
+  BOOST_CHECK_CLOSE(orbr->position_ci(t)->position[0], -1788501.0, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->position_ci(t)->position[1], -6854177.0, 1e-4);
+  BOOST_CHECK_CLOSE(orbr->position_ci(t)->position[2], -16811.0, 1e-3);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

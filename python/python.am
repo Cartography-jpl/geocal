@@ -3,6 +3,10 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py
 # Backdoor rule to do a quick install when we are just varying python
 install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-geocalpkgpythonnitfPYTHON install-dist_binSCRIPTS
 
+EXTRA_DIST+=@srcpython@/setup.cfg
+EXTRA_DIST+=@srcpython@/conftest.py
+EXTRA_DIST+=@srcpython@/README_test
+
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed
 

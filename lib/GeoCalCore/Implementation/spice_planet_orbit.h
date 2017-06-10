@@ -19,6 +19,10 @@ namespace GeoCal {
   to do this. We could revisit this if there is ever a need to. In
   practice, this means that something like a QuaternionCamera would
   have the identify Frame_to_sc quaternion.
+
+  This class can be a bit on the slow side, you may want to consider
+  wrapping it with OrbitListCache to cache the orbit data
+  calculation. 
 *******************************************************************/
 class SpicePlanetOrbit : public Orbit {
 public:

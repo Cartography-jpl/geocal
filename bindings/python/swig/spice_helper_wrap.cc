@@ -5844,6 +5844,20 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -11075,6 +11089,49 @@ fail:
 SWIGINTERN PyObject *_wrap_SpiceHelper_spice_setup__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
+  bool arg2 ;
+  int res1 = SWIG_OLDOBJ ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceHelper_spice_setup" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_spice_setup" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SpiceHelper_spice_setup" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    try {
+      GeoCal::SpiceHelper::spice_setup((std::string const &)*arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceHelper_spice_setup__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   
   if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
@@ -11107,7 +11164,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SpiceHelper_spice_setup__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+SWIGINTERN PyObject *_wrap_SpiceHelper_spice_setup__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
   
   if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
@@ -11129,84 +11186,40 @@ fail:
 
 SWIGINTERN PyObject *_wrap_SpiceHelper_spice_setup(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[2] = {
+  PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"SpiceHelper_spice_setup",0,1,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"SpiceHelper_spice_setup",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
-    return _wrap_SpiceHelper_spice_setup__SWIG_1(self, argc, argv);
+    return _wrap_SpiceHelper_spice_setup__SWIG_2(self, argc, argv);
   }
   if (argc == 1) {
+    return _wrap_SpiceHelper_spice_setup__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
     return _wrap_SpiceHelper_spice_setup__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SpiceHelper_spice_setup'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpiceHelper::spice_setup(std::string const &,bool)\n"
     "    GeoCal::SpiceHelper::spice_setup(std::string const &)\n"
     "    GeoCal::SpiceHelper::spice_setup()\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceHelper_add_kernel" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_add_kernel" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SpiceHelper_add_kernel" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_add_kernel" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    try {
-      GeoCal::SpiceHelper::add_kernel((std::string const &)*arg1,(std::string const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
   
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -11233,30 +11246,6 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel__SWIG_1(PyObject *SWIGUNUSEDPA
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"SpiceHelper_add_kernel",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 1) {
-    return _wrap_SpiceHelper_add_kernel__SWIG_1(self, argc, argv);
-  }
-  if (argc == 2) {
-    return _wrap_SpiceHelper_add_kernel__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SpiceHelper_add_kernel'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::SpiceHelper::add_kernel(std::string const &,std::string const &)\n"
-    "    GeoCal::SpiceHelper::add_kernel(std::string const &)\n");
-  return 0;
 }
 
 
@@ -11648,14 +11637,50 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"SpiceHelper_spice_setup", _wrap_SpiceHelper_spice_setup, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void SpiceHelper::spice_setup(const std::string &Kernel=\"geocal.ker\")\n"
-		"Set SPICE errors to just return, rather than aborting. \n"
-		""},
-	 { (char *)"SpiceHelper_add_kernel", _wrap_SpiceHelper_add_kernel, METH_VARARGS, (char *)"\n"
+		"void SpiceHelper::spice_setup(const std::string &Kernel=\"geocal.ker\", bool\n"
+		"Force_kernel_pool_reset=false)\n"
+		"Set SPICE errors to just return, rather than aborting.\n"
 		"\n"
-		"void SpiceHelper::add_kernel(const std::string &Kernel)\n"
+		"If Force_kernel_pool_reset is true, then reset the kernel pool and\n"
+		"start over.\n"
+		"\n"
+		"Note a special issue when using with python multiprocessor. In a way\n"
+		"I've never been able to track down, the spice kernels are somehow\n"
+		"mangled in the forked processes. I'm not sure what is not getting\n"
+		"copied, we would regularly we get errors that looked like a corrupt\n"
+		"kernel. For example:\n"
+		"\n"
+		"SPICE(BADSUBSCRIPT): Subscript out of range on file line 412,\n"
+		"procedure \"zzdafgsr\". Attempt to access element 129 of variable\n"
+		"\"dpbuf\".\n"
+		"\n"
+		"RuntimeError: SPICE toolkit error: SPICE(DAFBEGGTEND)\n"
+		"\n"
+		"Beginning address (8889045) greater than ending address (8889044).\n"
+		"\n"
+		"Not sure what the source of this is, but as a workaround we:\n"
+		"\n"
+		"Keep track of the process ID\n"
+		"\n"
+		"Keep a list of kernels loaded\n"
+		"\n"
+		"Check the process ID on each call to spice_setup.\n"
+		"\n"
+		"If it doesn't match, clear all the kernels and reload them.\n"
+		"\n"
+		"This happens transparently, and hopefully this will remove all the\n"
+		"problems with forking. If not, we may need to look into this further,\n"
+		"and perhaps track down the actual underlying issue with forking \n"
+		""},
+	 { (char *)"SpiceHelper_add_kernel", (PyCFunction)_wrap_SpiceHelper_add_kernel, METH_O, (char *)"\n"
+		"\n"
+		"void SpiceHelper::add_kernel(const std::string &Kernel, bool Skip_save=false)\n"
 		"Add an additional kernel, after the one we automatically get (i.e.,\n"
-		"$SPICEDATA/geocal.ker). \n"
+		"$SPICEDATA/geocal.ker).\n"
+		"\n"
+		"Skip_save is really meant for internal use, it skips saving the kernel\n"
+		"in our list of kernels to reload on forking (see spice_setup comments\n"
+		"for a description of this). \n"
 		""},
 	 { (char *)"SpiceHelper_kernel_loaded", (PyCFunction)_wrap_SpiceHelper_kernel_loaded, METH_O, (char *)"\n"
 		"\n"

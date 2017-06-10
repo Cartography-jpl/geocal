@@ -431,6 +431,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/rpc_image_ground_connection_wrap.cc \
 	@swigsrc@/ipi_image_ground_connection_wrap.cc \
 	@swigsrc@/eci_tod_wrap.cc @swigsrc@/quaternion_camera_wrap.cc \
+	@swigsrc@/camera_rational_polynomial_wrap.cc \
 	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
@@ -592,6 +593,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ipi_image_ground_connection_wrap.lo \
 	@swigsrc@/_swig_wrap_la-eci_tod_wrap.lo \
 	@swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo \
+	@swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo \
 	@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-refraction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo \
@@ -767,6 +769,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/planet_coordinate.cc \
 	@srcimplementation@/eci_tod_burl.cc \
 	@srcimplementation@/quaternion_camera.cc \
+	@srcimplementation@/camera_rational_polynomial.cc \
 	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
@@ -934,6 +937,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-planet_coordinate.lo \
 	$(am__objects_18) \
 	@srcimplementation@/libgeocal_la-quaternion_camera.lo \
+	@srcimplementation@/libgeocal_la-camera_rational_polynomial.lo \
 	@srcimplementation@/libgeocal_la-galileo_camera.lo \
 	@srcimplementation@/libgeocal_la-refraction.lo \
 	@srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo \
@@ -1087,6 +1091,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/planet_coordinate_test.cc \
 	@srcimplementation@/eci_tod_burl_test.cc \
 	@srcimplementation@/quaternion_camera_test.cc \
+	@srcimplementation@/camera_rational_polynomial_test.cc \
 	@srcimplementation@/galileo_camera_test.cc \
 	@srcimplementation@/refraction_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
@@ -1227,6 +1232,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-planet_coordinate_test.$(OBJEXT) \
 	$(am__objects_27) \
 	@srcimplementation@/geocal_test_all-quaternion_camera_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-refraction_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.$(OBJEXT) \
@@ -1301,6 +1307,7 @@ am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -1375,6 +1382,7 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
@@ -1477,6 +1485,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/planet_coordinate.h \
 	@srcimplementation@/eci_tod_burl.h \
 	@srcimplementation@/quaternion_camera.h \
+	@srcimplementation@/camera_rational_polynomial.h \
 	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
@@ -1815,6 +1824,7 @@ CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
 CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
 CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
 CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_FFLAGS = @CODE_COVERAGE_FFLAGS@
 CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
 CODE_COVERAGE_LIBS = @CODE_COVERAGE_LIBS@
 COPY_DIRECTORY = @COPY_DIRECTORY@
@@ -1945,6 +1955,7 @@ VICAR_GDALPLUGIN_HOME_ABS = @VICAR_GDALPLUGIN_HOME_ABS@
 VICAR_RTL_BUILD_DEPEND = @VICAR_RTL_BUILD_DEPEND@
 VICAR_RTL_CFLAGS = @VICAR_RTL_CFLAGS@
 VICAR_RTL_LIBS = @VICAR_RTL_LIBS@
+VICMAIN_FOR_LOCATION = @VICMAIN_FOR_LOCATION@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -2063,6 +2074,7 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/nitfinfo \
 	$(srcdir)/$(srcpythonbin)/dem_generate \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map \
 	$(srcdir)/$(srcpythonbin)/shelve_job_run \
 	$(srcdir)/$(srcpythonbin)/sba \
 	$(srcdir)/$(srcpythonbin)/tp_collect \
@@ -2082,7 +2094,8 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/job_database_check_and_run \
 	$(srcdir)/$(srcpythonbin)/usgs_create_ocean_tile \
 	$(srcdir)/$(srcpythonbin)/srtm_90m_create_ocean_tile \
-	$(srcdir)/$(srcpythonbin)/surface_image_project
+	$(srcdir)/$(srcpythonbin)/surface_image_project \
+	$(srcdir)/$(srcpythonbin)/create_kernel_json
 AM_LDFLAGS = 
 
 #=================================================================
@@ -2205,6 +2218,17 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/srtm_90m_dem/n34w120_L2.tif \
 	@geocalunittestdata@/srtm_90m_dem/n43w69_L2.tif \
 	@geocalunittestdata@/sample.ntf \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp1_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp2_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp3_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp4_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp5_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp6_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp7_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp8_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp9_ssd_mro110c.lbl \
+	@srcpython@/setup.cfg @srcpython@/conftest.py \
+	@srcpython@/README_test \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
 	@srcpythonbin@/gdal_to_nitf_test.py \
 	@srcpythonbin@/gtproj2_test.py \
@@ -2260,18 +2284,24 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/vicar_wrap_test.py \
 	@srcpythonlib@/with_parameter_test.py \
 	@srcpythonlib@/world_view2_reflectance_test.py \
+	@srcpythonlib@/pds_label_test.py \
+	@srcpythonlib@/compare_burl_matlab_test.py \
 	@srcpythonlibnitf@/__init__.py \
 	@srcpythonlibnitf@/basic_nitf_example.py \
 	@srcpythonlibnitf@/README \
+	@srcpythonlibnitf@/nitf_des_csatta_test.py \
 	@srcpythonlibnitf@/nitf_field_test.py \
 	@srcpythonlibnitf@/nitf_file_header_test.py \
 	@srcpythonlibnitf@/nitf_file_test.py \
-	@srcpythonlibnitf@/nitf_image_test.py \
 	@srcpythonlibnitf@/nitf_image_subheader_test.py \
-	@srcpythonlibnitf@/nitf_tre_test.py \
-	@srcpythonlibnitf@/nitf_tre_pixqla_test.py \
+	@srcpythonlibnitf@/nitf_image_test.py \
+	@srcpythonlibnitf@/nitf_text_subheader_test.py \
+	@srcpythonlibnitf@/nitf_tre_csde_test.py \
+	@srcpythonlibnitf@/nitf_tre_csepha_test.py \
 	@srcpythonlibnitf@/nitf_tre_engrda_test.py \
-	@srcpythonlibnitf@/nitf_tre_sensrb_test.py @docpythonsrc@ \
+	@srcpythonlibnitf@/nitf_tre_pixqla_test.py \
+	@srcpythonlibnitf@/nitf_tre_sensrb_test.py \
+	@srcpythonlibnitf@/nitf_tre_test.py @docpythonsrc@ \
 	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
 	@testsupportsrc@/test_support.py \
@@ -2393,6 +2423,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/eci_tod.cc \
 	@srcimplementation@/planet_coordinate.cc $(am__append_22) \
 	@srcimplementation@/quaternion_camera.cc \
+	@srcimplementation@/camera_rational_polynomial.cc \
 	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
@@ -2528,6 +2559,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/rpc_image_ground_connection_wrap.cc \
 	@swigsrc@/ipi_image_ground_connection_wrap.cc \
 	@swigsrc@/eci_tod_wrap.cc @swigsrc@/quaternion_camera_wrap.cc \
+	@swigsrc@/camera_rational_polynomial_wrap.cc \
 	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
@@ -2605,11 +2637,13 @@ libgeocal_la_LDFLAGS = $(am__append_1) -R $(BOOST_LIBDIR) \
 dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
-	$(srcdir)/$(srcpythonbin)/mars_nest $(am__append_45)
+	$(srcdir)/$(srcpythonbin)/mars_nest \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map $(am__append_45)
 dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_nest_map.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
@@ -2712,6 +2746,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/eci_tod.h \
 	@srcimplementation@/planet_coordinate.h $(am__append_21) \
 	@srcimplementation@/quaternion_camera.h \
+	@srcimplementation@/camera_rational_polynomial.h \
 	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
@@ -2860,6 +2895,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/eci_tod.i \
 	@srcimplementation@/eci_tod_burl.i \
 	@srcimplementation@/quaternion_camera.i \
+	@srcimplementation@/camera_rational_polynomial.i \
 	@srcimplementation@/galileo_camera.i \
 	@srcimplementation@/refraction.i \
 	@srcimplementation@/orbit_data_image_ground_connection.i \
@@ -2969,6 +3005,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/eci_tod_test.cc \
 	@srcimplementation@/planet_coordinate_test.cc $(am__append_31) \
 	@srcimplementation@/quaternion_camera_test.cc \
+	@srcimplementation@/camera_rational_polynomial_test.cc \
 	@srcimplementation@/galileo_camera_test.cc \
 	@srcimplementation@/refraction_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
@@ -3156,7 +3193,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py \
 	@srcpythonlib@/rsm_polynomial.py @srcpythonlib@/shape_file.py \
-	@srcpythonlib@/air_mspi_igc.py
+	@srcpythonlib@/air_mspi_igc.py @srcpythonlib@/pds_label.py
 geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_field.py \
 	@srcpythonlibnitf@/nitf_file_header.py \
@@ -3169,7 +3206,6 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_tre.py \
 	@srcpythonlibnitf@/nitf_tre_csde.py \
 	@srcpythonlibnitf@/nitf_tre_csepha.py \
-	@srcpythonlibnitf@/nitf_tre_stdidc.py \
 	@srcpythonlibnitf@/nitf_tre_geosde.py \
 	@srcpythonlibnitf@/nitf_tre_rpc.py \
 	@srcpythonlibnitf@/nitf_tre_piae.py \
@@ -3563,6 +3599,8 @@ clean-pkgpythonswigLTLIBRARIES:
 @swigsrc@/_swig_wrap_la-eci_tod_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -4004,6 +4042,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-quaternion_camera.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-camera_rational_polynomial.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-galileo_camera.lo:  \
@@ -4596,6 +4637,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-quaternion_camera_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -4913,6 +4957,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-worldview2_cloudmask.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcgeocalbin@/$(DEPDIR)/picmtch5-picmtch5.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-aircraft_orbit_data_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_match_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-did_datum_test.Po@am__quote@
@@ -4971,6 +5016,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_match.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_tiled_file.Plo@am__quote@
@@ -5194,6 +5240,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-cart_lab_multifile_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ccorr_lsm_matcher_wrap.Plo@am__quote@
@@ -6107,6 +6154,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/quaternion_camera_wrap.cc' object='@swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo `test -f '@swigsrc@/quaternion_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quaternion_camera_wrap.cc
+
+@swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo: @swigsrc@/camera_rational_polynomial_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo `test -f '@swigsrc@/camera_rational_polynomial_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_rational_polynomial_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/camera_rational_polynomial_wrap.cc' object='@swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo `test -f '@swigsrc@/camera_rational_polynomial_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_rational_polynomial_wrap.cc
 
 @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo: @swigsrc@/galileo_camera_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-galileo_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo `test -f '@swigsrc@/galileo_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/galileo_camera_wrap.cc
@@ -7269,6 +7323,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quaternion_camera.cc' object='@srcimplementation@/libgeocal_la-quaternion_camera.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-quaternion_camera.lo `test -f '@srcimplementation@/quaternion_camera.cc' || echo '$(srcdir)/'`@srcimplementation@/quaternion_camera.cc
+
+@srcimplementation@/libgeocal_la-camera_rational_polynomial.lo: @srcimplementation@/camera_rational_polynomial.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-camera_rational_polynomial.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Tpo -c -o @srcimplementation@/libgeocal_la-camera_rational_polynomial.lo `test -f '@srcimplementation@/camera_rational_polynomial.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_rational_polynomial.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_rational_polynomial.cc' object='@srcimplementation@/libgeocal_la-camera_rational_polynomial.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-camera_rational_polynomial.lo `test -f '@srcimplementation@/camera_rational_polynomial.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_rational_polynomial.cc
 
 @srcimplementation@/libgeocal_la-galileo_camera.lo: @srcimplementation@/galileo_camera.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-galileo_camera.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-galileo_camera.Tpo -c -o @srcimplementation@/libgeocal_la-galileo_camera.lo `test -f '@srcimplementation@/galileo_camera.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera.cc
@@ -8942,6 +9003,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quaternion_camera_test.cc' object='@srcimplementation@/geocal_test_all-quaternion_camera_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-quaternion_camera_test.obj `if test -f '@srcimplementation@/quaternion_camera_test.cc'; then $(CYGPATH_W) '@srcimplementation@/quaternion_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/quaternion_camera_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.o: @srcimplementation@/camera_rational_polynomial_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-camera_rational_polynomial_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Tpo -c -o @srcimplementation@/geocal_test_all-camera_rational_polynomial_test.o `test -f '@srcimplementation@/camera_rational_polynomial_test.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_rational_polynomial_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_rational_polynomial_test.cc' object='@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-camera_rational_polynomial_test.o `test -f '@srcimplementation@/camera_rational_polynomial_test.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_rational_polynomial_test.cc
+
+@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.obj: @srcimplementation@/camera_rational_polynomial_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-camera_rational_polynomial_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Tpo -c -o @srcimplementation@/geocal_test_all-camera_rational_polynomial_test.obj `if test -f '@srcimplementation@/camera_rational_polynomial_test.cc'; then $(CYGPATH_W) '@srcimplementation@/camera_rational_polynomial_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/camera_rational_polynomial_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_rational_polynomial_test.cc' object='@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-camera_rational_polynomial_test.obj `if test -f '@srcimplementation@/camera_rational_polynomial_test.cc'; then $(CYGPATH_W) '@srcimplementation@/camera_rational_polynomial_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/camera_rational_polynomial_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-galileo_camera_test.o: @srcimplementation@/galileo_camera_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-galileo_camera_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Tpo -c -o @srcimplementation@/geocal_test_all-galileo_camera_test.o `test -f '@srcimplementation@/galileo_camera_test.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera_test.cc

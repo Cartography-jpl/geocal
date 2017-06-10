@@ -1,5 +1,5 @@
 from .nitf_tre import *
-from .nitf_tre_stdidc import *
+from .nitf_tre_csde import *
 from test_support import *
 import io, six
 

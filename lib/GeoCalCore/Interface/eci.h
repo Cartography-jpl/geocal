@@ -1,6 +1,7 @@
 #ifndef ECI_H
 #define ECI_H
 #include "ground_coordinate.h"
+#include "ecr.h"
 
 namespace GeoCal {
 
@@ -18,6 +19,27 @@ public:
 
   Eci() {}
 
+//-----------------------------------------------------------------------
+/// Convert from Ecr to Eci
+//-----------------------------------------------------------------------
+
+  Eci(const Ecr& P, const Time& T)
+  {
+    CartesianFixed::toolkit_coordinate_interface->
+      to_inertial((int) EARTH_NAIF_CODE, T, P, *this);
+  }
+
+//-----------------------------------------------------------------------
+/// Convert from GroundCoordinate to Eci
+//-----------------------------------------------------------------------
+
+  Eci(const GroundCoordinate& Gc, const Time& T)
+  {
+    Ecr p(Gc);
+    CartesianFixed::toolkit_coordinate_interface->
+      to_inertial((int) EARTH_NAIF_CODE, T, p, *this);
+  }
+  
 //-----------------------------------------------------------------------
 /// Make an Eci with the given position, in meters.
 //-----------------------------------------------------------------------

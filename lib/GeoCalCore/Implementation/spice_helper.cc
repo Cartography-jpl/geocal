@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <boost/filesystem.hpp>
+#include <unistd.h>
 #ifdef HAVE_SPICE
 extern "C" {
 #include "SpiceUsr.h"
@@ -22,6 +23,9 @@ using namespace GeoCal;
 
 double SpiceHelper::m[3][3];
 double SpiceHelper::m2[6][6];
+std::vector<boost::filesystem::path> SpiceHelper::kernel_list;
+// -1 triggers spice_setup to run the first time.
+pid_t SpiceHelper::pid = -1;
 
 //-----------------------------------------------------------------------
 /// Spice exception. This automatically gets the SPICE error message.
@@ -43,27 +47,6 @@ SpiceException::SpiceException()
 	<< "  " << short_message << " -- " << explain << "\n\n"
 	<< "  " << long_message << "\n";
   reset_c();
-#else
-  throw SpiceNotAvailableException();
-#endif
-}
-
-//-----------------------------------------------------------------------
-/// Add an additional kernel, after the one we automatically get
-/// (i.e., $SPICEDATA/geocal.ker).
-///
-/// We change to the given Kernel_dir, so you can use relative paths
-/// if desired for the kernel names.
-//-----------------------------------------------------------------------
-
-void SpiceHelper::add_kernel(const std::string& Kernel_dir, 
-			     const std::string& Kernel)
-{
-#ifdef HAVE_SPICE
-  spice_setup();
-  DirChange dc(Kernel_dir);
-  furnsh_c(Kernel.c_str());
-  spice_error_check();
 #else
   throw SpiceNotAvailableException();
 #endif
@@ -97,13 +80,20 @@ bool SpiceHelper::kernel_loaded(const std::string& Kernel)
 //-----------------------------------------------------------------------
 /// Add an additional kernel, after the one we automatically get
 /// (i.e., $SPICEDATA/geocal.ker).
+///
+/// Skip_save is really meant for internal use, it skips saving the
+/// kernel in our list of kernels to reload on forking (see
+/// spice_setup comments for a description of this).
 //-----------------------------------------------------------------------
 
-void SpiceHelper::add_kernel(const std::string& Kernel)
+void SpiceHelper::add_kernel(const std::string& Kernel, bool Skip_save)
 {
 #ifdef HAVE_SPICE
-  spice_setup();
   boost::filesystem::path p(Kernel);
+  if(!Skip_save) {
+    spice_setup();
+    SpiceHelper::kernel_list.push_back(boost::filesystem::absolute(p));
+  }
   std::string dir = p.parent_path().string();
   std::string fname = p.filename().string();
   if(dir == "")
@@ -118,21 +108,56 @@ void SpiceHelper::add_kernel(const std::string& Kernel)
 
 //-----------------------------------------------------------------------
 /// Set SPICE errors to just return, rather than aborting.
+/// If Force_kernel_pool_reset is true, then reset the kernel pool and
+/// start over.
+///
+/// Note a special issue when using with python multiprocessor. In a 
+/// way I've never been able to track down, the spice kernels are
+/// somehow mangled in the forked processes. I'm not sure what is not
+/// getting copied, we would regularly we get errors that looked like
+/// a corrupt kernel. For example:
+///
+/// SPICE(BADSUBSCRIPT): Subscript out of range on file line 412,
+/// procedure "zzdafgsr". Attempt to access element 129 of variable
+/// "dpbuf".
+///
+/// RuntimeError: SPICE toolkit error:
+///  SPICE(DAFBEGGTEND) --
+///
+///  Beginning address (8889045) greater than ending address (8889044).
+///
+/// Not sure what the source of this is, but as a workaround we:
+///
+/// 1. Keep track of the process ID
+/// 2. Keep a list of kernels loaded
+/// 3. Check the process ID on each call to spice_setup.
+/// 4. If it doesn't match, clear all the kernels and reload them.
+///
+/// This happens transparently, and hopefully this will remove all the
+/// problems with forking. If not, we may need to look into this
+/// further, and perhaps track down the actual underlying issue with
+/// forking
 //-----------------------------------------------------------------------
 
-void SpiceHelper::spice_setup(const std::string& Kernel)
+void SpiceHelper::spice_setup
+(const std::string& Kernel, bool Force_kernel_pool_reset)
 {
-  static int already_done = 0;
 #ifdef HAVE_SPICE
-  if(!already_done) {
+  if(Force_kernel_pool_reset) {
+    SpiceHelper::pid = -1;
+    kernel_list.clear();
+  }
+  if(SpiceHelper::pid != getpid()) {
+    SpiceHelper::pid = getpid();
+    kclear_c();
+    clpool_c();
     errprt_c(const_cast<char*>("SET"), 10, const_cast<char*>("NONE"));
     erract_c(const_cast<char*>("SET"), 10, const_cast<char*>("RETURN"));
     if(!getenv("SPICEDATA"))
       throw Exception("Must have environment variable SPICEDATA set to use SPICE library");
-    DirChange dc(getenv("SPICEDATA"));
-    furnsh_c(Kernel.c_str());
-    spice_error_check();
-    already_done = 1;
+    add_kernel(std::string(getenv("SPICEDATA")) + "/" + Kernel, true);
+    BOOST_FOREACH(boost::filesystem::path& p, kernel_list)
+      add_kernel(p.string(), true);
   }
 #else
   throw SpiceNotAvailableException();
@@ -222,16 +247,25 @@ Time SpiceHelper::parse_time(const std::string& Time_string)
 //-----------------------------------------------------------------------
 // Change CCSDS ASCII format to one that str2et_c can parse. This
 // changes something like "1996-07-03T04:13:57.987654Z" to
-// "1996-07-03 04:13:57.987654 UTC"
+// "1996-07-03 04:13:57 UTC"
+// We strip off the fractional part, and treat it separately. This is
+// to avoid minor roundoff problems that occur since we generate the
+// data as et, but store internally as pgs.
 //-----------------------------------------------------------------------
 
   std::string t = 
     boost::regex_replace(Time_string, 
-     boost::regex("(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?)Z"), 
+     boost::regex("(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2})(\\.\\d+)?Z"), 
 			 "\\1 \\2 UTC");
+  t = boost::regex_replace(t, boost::regex("\\.\\d+"), "");
+  double frac = 0.0;
+  boost::smatch m;
+  if(boost::regex_search(Time_string, m,
+      boost::regex("(\\.\\d+)")))
+    frac = boost::lexical_cast<double>(m[1]);
   str2et_c(t.c_str(), &et);
   spice_error_check();
-  return Time::time_et(et);
+  return Time::time_et(et) + frac;
 #else
   throw SpiceNotAvailableException();
 #endif
@@ -447,6 +481,9 @@ std::string SpiceHelper::fixed_frame_name(int Body_id)
     break;
   case 301:			// Moon
     return "IAU_MOON";
+    break;
+  case 2000001:			// Ceres
+    return "CERES_FIXED";
     break;
   }
   // Default to IAU_ + the name of the body 

@@ -73,7 +73,7 @@ public:
   %python_attribute(offset, double)
   %python_attribute(scale, double)
   %python_attribute(unit_type, std::string)
-
+  %python_attribute(raster_data_type, int)
   %python_attribute(update, bool)
   %python_attribute(rpc, Rpc)
   %python_attribute(map_info, MapInfo)

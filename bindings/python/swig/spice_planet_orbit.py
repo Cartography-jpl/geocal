@@ -208,6 +208,9 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
     practice, this means that something like a QuaternionCamera would have
     the identify Frame_to_sc quaternion.
 
+    This class can be a bit on the slow side, you may want to consider
+    wrapping it with OrbitListCache to cache the orbit data calculation.
+
     C++ includes: spice_planet_orbit.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')

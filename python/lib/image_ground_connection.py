@@ -137,8 +137,8 @@ def _view_angle(self, image_coordinate = None, delta_h = 100):
     h = gc1.height_reference_surface
     d = SimpleDem(h + delta_h)
     gc2 = self.ground_coordinate_dem(image_coordinate, d)
-    e1 = Ecr(gc1)
-    e2 = Ecr(gc2)
+    e1 = gc1.convert_to_cf()
+    e2 = gc2.convert_to_cf()
     slat = sin(radians(gc1.latitude))
     clat = cos(radians(gc1.latitude))
     slon = sin(radians(gc1.longitude))

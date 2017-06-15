@@ -45,6 +45,20 @@ public:
   virtual void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------
+/// Set minimum time we want orbit for (important because kernels
+/// only cover a particular time range).
+//-----------------------------------------------------------------------
+  
+  void set_min_time(const Time& Tmin) {min_tm = Tmin;}
+
+//-----------------------------------------------------------------------
+/// Set maximum time we want orbit for (important because kernels
+/// only cover a particular time range).
+//-----------------------------------------------------------------------
+
+  void set_max_time(const Time& Tmax) {max_tm = Tmax;}
+  
+//-----------------------------------------------------------------------
 /// Body NAIF id.
 //-----------------------------------------------------------------------
 

@@ -253,6 +253,26 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
         return _spice_planet_orbit.SpicePlanetOrbit_orbit_data(self, *args)
 
 
+    def set_min_time(self, Tmin):
+        """
+
+        void GeoCal::SpicePlanetOrbit::set_min_time(const Time &Tmin)
+        Set minimum time we want orbit for (important because kernels only
+        cover a particular time range). 
+        """
+        return _spice_planet_orbit.SpicePlanetOrbit_set_min_time(self, Tmin)
+
+
+    def set_max_time(self, Tmax):
+        """
+
+        void GeoCal::SpicePlanetOrbit::set_max_time(const Time &Tmax)
+        Set maximum time we want orbit for (important because kernels only
+        cover a particular time range). 
+        """
+        return _spice_planet_orbit.SpicePlanetOrbit_set_max_time(self, Tmax)
+
+
     def _v_naif_id(self):
         """
 
@@ -315,6 +335,8 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
 
     __swig_destroy__ = _spice_planet_orbit.delete_SpicePlanetOrbit
 SpicePlanetOrbit.orbit_data = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_orbit_data, None, SpicePlanetOrbit)
+SpicePlanetOrbit.set_min_time = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_set_min_time, None, SpicePlanetOrbit)
+SpicePlanetOrbit.set_max_time = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_set_max_time, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_naif_id = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_naif_id, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_target_name = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_target_name, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_spacecraft_reference_frame_name = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_spacecraft_reference_frame_name, None, SpicePlanetOrbit)

@@ -46,18 +46,48 @@ t2.angle_to_north = 290
 f.tre_list.append(t)
 f.image_segment[0].tre_list.append(t2)
 
-#Text segment
+'''#Text segment
+
 d = {
     'first_name': 'Guido',
     'second_name': 'Rossum',
     'titles': ['BDFL', 'Developer'],
 }
 
-ts = NitfTextSegment(txt = json.dumps(d))
+ts = NitfTextSegment(txt = (json.dumps(d)))'''
+
+#Option 1: If txt is string, printing breaks because you can't "decode" a string
+ts = NitfTextSegment(txt = "ABC")
+
+#Option 2: However, if txt is group of bytes write breaks because you can't "encode" bytes
+#ts = NitfTextSegment(txt = b'ABC')
+
 ts.subheader.textid = 'ID12345'
 ts.subheader.txtalvl = 0
 ts.subheader.txtitl = 'sample title'
+
+#TODO: Get this working
 f.text_segment.append(ts)
+
+#DES
+des = DesCSATTA()
+
+des.dsclas = 'U'
+des.att_type = 'ORIGINAL'
+des.dt_att = '900.5000000000'
+des.date_att = 20170501
+des.t0_att = '235959.100001'
+des.num_att = 5
+for n in range(des.num_att):
+    des.att_q1[n] = 10.1
+    des.att_q2[n] = 10.1
+    des.att_q3[n] = 10.1
+    des.att_q4[n] = 10.1
+
+#TODO: CSATTA DES wasn't implemented correctly. Need to fix it.
+#f.des_segment.append(des)
+
+print (f)
 
 # Now we write out to a nitf file
 f.write("basic_nitf.ntf")

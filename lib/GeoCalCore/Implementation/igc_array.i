@@ -10,7 +10,7 @@
 %import "image_ground_connection.i"
 %geocal_shared_ptr(GeoCal::IgcArray);
 namespace GeoCal {
-class IgcArray: public IgcCollection {
+  class IgcArray: public IgcCollection, public WithParameterNested {
 public:
   IgcArray(const std::vector<boost::shared_ptr<ImageGroundConnection> >& 
 	   Igc_list);

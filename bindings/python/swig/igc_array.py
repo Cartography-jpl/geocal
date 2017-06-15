@@ -189,7 +189,7 @@ import geocal_swig.igc_collection
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-class IgcArray(geocal_swig.igc_collection.IgcCollection):
+class IgcArray(geocal_swig.igc_collection.IgcCollection, geocal_swig.with_parameter.WithParameterNested):
     """
 
     This is a IgcCollection that is just an array of independent

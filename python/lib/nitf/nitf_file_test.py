@@ -4,9 +4,11 @@ from .nitf_tre_csepha import *
 from .nitf_tre_piae import *
 from .nitf_tre_rpc import *
 from .nitf_tre_geosde import *
+from .nitf_des_csatta import *
 from test_support import *
 import subprocess
 import os
+import json
 
 # Do these in a few places, so collect in one spot.
 def create_image_seg(f):
@@ -73,6 +75,34 @@ def check_tre2(t):
     assert t.max_lp_seg == 6287
     assert_almost_equal(t.sun_el, 68.5)
     assert_almost_equal(t.sun_az, 131.3)
+
+def create_text_segment(f):
+    d = {
+        'first_name': 'Guido',
+        'second_name': 'Rossum',
+        'titles': ['BDFL', 'Developer'],
+    }
+    ts = NitfTextSegment(txt = json.dumps(d))
+    ts.subheader.textid = 'ID12345'
+    ts.subheader.txtalvl = 0
+    ts.subheader.txtitl = 'sample title'
+    f.text_segment.append(ts)
+
+def create_des(f):
+    des = DesCSATTA()
+    des.dsclas = 'U'
+    des.att_type = 'ORIGINAL'
+    des.dt_att = '900.5000000000'
+    des.date_att = 20170501
+    des.t0_att = '235959.100001'
+    des.num_att = 5
+    for n in range(des.num_att):
+        des.att_q1[n] = 10.1
+        des.att_q2[n] = 10.1
+        des.att_q3[n] = 10.1
+        des.att_q4[n] = 10.1
+
+    f.des_segment.append(des)
     
 def print_diag(f):
     # Print out diagnostic information, useful to make sure the file
@@ -232,4 +262,29 @@ def test_read_ikonos():
     elif (os.path.exists(fname2)):
         f = NitfFile(fname2)
         print(f)
+
+def test_full_file(isolated_dir):
+    '''This create an end to end NITF file, this was at least initially the
+    same as basic_nitf_example.py but as a unit test.'''
+
+    # Create the file. We don't supply a name yet, that comes when we actually
+    # write
+    
+    f = NitfFile()
+    create_image_seg(f)
+    create_tre(f)
+    create_tre2(f)
+    create_text_segment(f)
+    # This doesn't work yet
+    #create_des(f)
+    print(f)
+    f.write("basic_nitf.ntf")
+    f2 = NitfFile("basic_nitf.ntf")
+    print(f2)
+    print("Image Data:")
+    print(f2.image_segment[0].data.data)
+
+    print("Text Data:")
+    print(f2.text_segment[0].data)        
+    f2.write("basic_nitf2.ntf")
     

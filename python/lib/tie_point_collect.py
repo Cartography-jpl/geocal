@@ -373,7 +373,7 @@ class TiePointCollect(object):
                 self.itoim[i].match(ic1)
             diag[self.base_image_index] = diagnostic
             if(success):
-                tp.ground_location = Ecr(self.ref_igc.ground_coordinate(ic2))
+                tp.ground_location = self.ref_igc.ground_coordinate(ic2).convert_to_cf()
                 tp.is_gcp = True
                 return tp, diag
         if(self.igc_collection.number_image > 1):
@@ -508,7 +508,7 @@ class TiePointCollectFM(object):
                     tp = TiePoint(len(self.raster_image))
                     tp.image_coordinate(ind, ic1, 0.5, 0.5)
                 tp.is_gcp = True
-                tp.ground_location = Ecr(self.ref_image.ground_coordinate(ic2))
+                tp.ground_location = self.ref_image.ground_coordinate(ic2).convert_to_cf()
                 res[idx] = tp
             
         return res

@@ -79,18 +79,18 @@ def test_tre_sensrb_general_data():
     t.length_unit="SI"
     t.angular_unit="D"
     t.start_date=20170427
-    t.start_time=0
+    t.start_time="00000.99999999"
     t.end_date=20170427
-    t.end_time=1
+    t.end_time="86399.99999999"
     t.generation_count=0
     t.generation_date=20170427
-    t.generation_time=0
+    t.generation_time="235959.999"
     # Section 5 and 6 always need to be filled in
     fill_in_5_and_6(t)
     fh = six.BytesIO()
     t.write_to_file(fh)
     #print(fh.getvalue())
-    assert fh.getvalue() == b'SENSRB00309YMy sensor                blah                            My platform              blah                            blah      1WGS84GHAESID  2017042700000000000000201704270000000000000100201704270000000000NNN00000000000000000000000000000000000001000000000002000000100000000000000000000000000000NNNN000000000000'
+    assert fh.getvalue() == b'SENSRB00309YMy sensor                blah                            My platform              blah                            blah      1WGS84GHAESID  2017042700000.999999992017042786399.999999990020170427235959.999NNN00000000000000000000000000000000000001000000000002000000100000000000000000000000000000NNNN000000000000'
     fh2 = six.BytesIO(fh.getvalue())
     t2 = TreSENSRB()
     t2.read_from_file(fh2)
@@ -118,12 +118,12 @@ def test_tre_sensrb_general_data():
     assert t2.length_unit == "SI"
     assert t2.angular_unit == "D"
     assert t2.start_date == 20170427
-    assert t2.start_time == 0
+    assert t2.start_time == "00000.99999999"
     assert t2.end_date == 20170427
-    assert t2.end_time == 1
+    assert t2.end_time == "86399.99999999"
     assert t2.generation_count == 0
     assert t2.generation_date == 20170427
-    assert t2.generation_time == 0
+    assert t2.generation_time == "235959.999"
 
 def test_tre_sensrb_additional_parameter():
     t = TreSENSRB()
@@ -172,28 +172,28 @@ def test_tre_sensrb_sensor_array():
     t.detection = "some detection"
     t.row_detectors = "00001000"
     t.column_detectors = "00001000"
-    t.row_metric = "00001000"
-    t.column_metric = "00001000"
-    t.focal_length = "00009999"
-    t.row_fov = "00000130"
-    t.column_fov = "00000090"
+    t.row_metric = 1.1
+    t.column_metric = 1.1
+    t.focal_length = 1.2
+    t.row_fov = 1.3
+    t.column_fov = 1.3
     t.calibrated = "Y"
 
     fh = six.BytesIO()
     t.write_to_file(fh)
     #print(fh.getvalue())
-    assert fh.getvalue() == b'SENSRB00183NYsome detection      00001000000010000000100000001000000099990000013000000090YNN00000000000000000000000000000000000001000000000002000000100000000000000000000000000000NNNN000000000000'
+    assert fh.getvalue() == b'SENSRB00183NYsome detection      00001000000010001.1     1.1     1.2     1.3     1.3     YNN00000000000000000000000000000000000001000000000002000000100000000000000000000000000000NNNN000000000000'
     fh2 = six.BytesIO(fh.getvalue())
     t2 = TreSENSRB()
     t2.read_from_file(fh2)
     assert t2.detection == "some detection"
     assert t2.row_detectors == 1000
     assert t2.column_detectors == 1000
-    assert t2.row_metric == 1000
-    assert t2.column_metric == 1000
-    assert t2.focal_length == 9999
-    assert t2.row_fov == 130
-    assert t2.column_fov == 90
+    assert t2.row_metric == "1.1"
+    assert t2.column_metric == "1.1"
+    assert t2.focal_length == "1.2"
+    assert t2.row_fov == "1.3"
+    assert t2.column_fov == "1.3"
     assert t2.calibrated == "Y"
     
 # Tests for other parts

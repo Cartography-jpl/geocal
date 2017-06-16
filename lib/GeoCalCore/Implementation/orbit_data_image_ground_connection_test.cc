@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "orbit_data_image_ground_connection.h"
+#include "orbit_offset_correction.h"
 #include "simple_dem.h"
 #include "memory_raster_image.h"
 #include "constant_raster_image.h"
@@ -41,6 +42,29 @@ BOOST_AUTO_TEST_CASE(basic)
     BOOST_CHECK_CLOSE((ic2.line - ic0.line) / eps, jac(0, i), 1e-1);
     BOOST_CHECK_CLOSE((ic2.sample - ic0.sample) / eps, jac(1, i), 1e-1);
   }
+}
+
+BOOST_AUTO_TEST_CASE(jacobian)
+{
+  Time tmin = Time::parse_time("2003-01-01T11:11:00Z");
+  boost::shared_ptr<OrbitOffsetCorrection> orb =
+    boost::make_shared<OrbitOffsetCorrection>(boost::make_shared<KeplerOrbit>());
+  orb->insert_attitude_time_point(tmin);
+  orb->insert_position_time_point(tmin);
+  boost::shared_ptr<Camera> cam(new SimpleCamera);
+  boost::shared_ptr<Dem> dem(new SimpleDem(100));
+  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
+				     cam->number_sample(0), 10));
+  OrbitDataImageGroundConnection igc(orb, tmin, cam, dem, img);
+  ImageCoordinate ic(1.0, 1504 / 2);
+  Geodetic g(*igc.ground_coordinate(ic));
+  blitz::Array<double, 2> jac1 = igc.image_coordinate_jac_cf(*g.convert_to_cf());
+  BOOST_CHECK_EQUAL(jac1.rows(), 2);
+  BOOST_CHECK_EQUAL(jac1.cols(), 3);
+  orb->add_identity_gradient();
+  blitz::Array<double, 2> jac2 = igc.image_coordinate_jac_parm(g);
+  BOOST_CHECK_EQUAL(jac2.rows(), 2);
+  BOOST_CHECK_EQUAL(jac2.cols(), 6);
 }
 
 BOOST_AUTO_TEST_CASE(serialize)

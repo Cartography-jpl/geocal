@@ -51,6 +51,23 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_EQUAL(igccol->parameter_subset().rows(), 12);
 }
 
+BOOST_AUTO_TEST_CASE(jacobian)
+{
+  ImageCoordinate ic(10, 20);
+  boost::shared_ptr<GroundCoordinate> gc0 = igccol->ground_coordinate(0, ic);
+  boost::shared_ptr<GroundCoordinate> gc1 = igccol->ground_coordinate(1, ic);
+  boost::shared_ptr<GroundCoordinate> gc2 = igccol->ground_coordinate(2, ic);
+  blitz::Array<double, 2> jac1 = igccol->collinearity_residual_jacobian(0, *gc0, ic);
+  blitz::Array<double, 2> jac2 = igccol->collinearity_residual_jacobian(1, *gc1, ic);
+  blitz::Array<double, 2> jac3 = igccol->collinearity_residual_jacobian(2, *gc2, ic);
+  BOOST_CHECK_EQUAL(jac1.rows(), 2);
+  BOOST_CHECK_EQUAL(jac1.cols(), 15);
+  BOOST_CHECK_EQUAL(jac2.rows(), 2);
+  BOOST_CHECK_EQUAL(jac2.cols(), 15);
+  BOOST_CHECK_EQUAL(jac3.rows(), 2);
+  BOOST_CHECK_EQUAL(jac3.cols(), 15);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())

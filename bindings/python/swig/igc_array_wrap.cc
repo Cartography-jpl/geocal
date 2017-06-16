@@ -5471,6 +5471,20 @@ namespace swig {
       }
     
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -6307,15 +6321,60 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcArray(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_IgcArray__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *arg1 = 0 ;
+  bool arg2 ;
+  int res1 = SWIG_OLDOBJ ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  GeoCal::IgcArray *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::vector<boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *)0;
+    res1 = swig::asptr(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcArray" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcArray" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_IgcArray" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    try {
+      result = (GeoCal::IgcArray *)new GeoCal::IgcArray((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &)*arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::IgcArray > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcArray >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcArray_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IgcArray__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
   GeoCal::IgcArray *result = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     std::vector<boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > *)0;
     res1 = swig::asptr(swig_obj[0], &ptr);
@@ -6345,6 +6404,30 @@ SWIGINTERN PyObject *_wrap_new_IgcArray(PyObject *SWIGUNUSEDPARM(self), PyObject
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IgcArray(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcArray",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_new_IgcArray__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_IgcArray__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IgcArray'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::IgcArray::IgcArray(std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &,bool)\n"
+    "    GeoCal::IgcArray::IgcArray(std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &)\n");
+  return 0;
 }
 
 
@@ -6397,6 +6480,121 @@ SWIGINTERN PyObject *_wrap_IgcArray_image_ground_connection(PyObject *SWIGUNUSED
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcArray__v_assume_igc_independent__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcArray *arg1 = (GeoCal::IgcArray *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcArray const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcArray const > *smartarg1 = 0 ;
+  bool result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcArray_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcArray__v_assume_igc_independent" "', argument " "1"" of type '" "GeoCal::IgcArray const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcArray > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcArray > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcArray * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcArray > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcArray * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::IgcArray const *)arg1)->assume_igc_independent();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcArray__v_assume_igc_independent__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcArray *arg1 = (GeoCal::IgcArray *) 0 ;
+  bool *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcArray > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcArray > *smartarg1 = 0 ;
+  bool temp2 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcArray_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcArray__v_assume_igc_independent" "', argument " "1"" of type '" "GeoCal::IgcArray *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::IgcArray > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::IgcArray > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcArray * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::IgcArray > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcArray * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IgcArray__v_assume_igc_independent" "', argument " "2"" of type '" "bool""'");
+  } 
+  temp2 = static_cast< bool >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->assume_igc_independent((bool const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcArray__v_assume_igc_independent(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"IgcArray__v_assume_igc_independent",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_IgcArray__v_assume_igc_independent__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_IgcArray__v_assume_igc_independent__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'IgcArray__v_assume_igc_independent'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::IgcArray::assume_igc_independent() const\n"
+    "    GeoCal::IgcArray::assume_igc_independent(bool const &)\n");
+  return 0;
 }
 
 
@@ -6474,15 +6672,28 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
-	 { (char *)"new_IgcArray", (PyCFunction)_wrap_new_IgcArray, METH_O, (char *)"\n"
+	 { (char *)"new_IgcArray", _wrap_new_IgcArray, METH_VARARGS, (char *)"\n"
 		"\n"
 		"IgcArray::IgcArray(const std::vector< boost::shared_ptr< ImageGroundConnection > >\n"
-		"&Igc_list)\n"
-		"Constructor. \n"
+		"&Igc_list, bool Assume_igc_independent=true)\n"
+		"Constructor.\n"
+		"\n"
+		"Note that we can make assumption about ImageGroundConnection being\n"
+		"independent. If they are, then we can get a optimization in the\n"
+		"jacobian calculation to speed it up. If they aren't (e.g., they share\n"
+		"a common Orbit that has been added to the WithParameterNested), that\n"
+		"is fine. We just take longer to do the calculation. But we need to\n"
+		"know this to avoid making an incorrect optimization. Make sure\n"
+		"Assume_igc_independent is set to the right value. \n"
 		""},
 	 { (char *)"IgcArray_image_ground_connection", _wrap_IgcArray_image_ground_connection, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual boost::shared_ptr<ImageGroundConnection> GeoCal::IgcArray::image_ground_connection(int Image_index) const\n"
+		"\n"
+		""},
+	 { (char *)"IgcArray__v_assume_igc_independent", _wrap_IgcArray__v_assume_igc_independent, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::IgcArray::assume_igc_independent(bool v)\n"
 		"\n"
 		""},
 	 { (char *)"delete_IgcArray", (PyCFunction)_wrap_delete_IgcArray, METH_O, (char *)"\n"

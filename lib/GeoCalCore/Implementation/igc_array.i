@@ -10,14 +10,15 @@
 %import "image_ground_connection.i"
 %geocal_shared_ptr(GeoCal::IgcArray);
 namespace GeoCal {
-  class IgcArray: public IgcCollection, public WithParameterNested {
+class IgcArray: public IgcCollection, public WithParameterNested {
 public:
   IgcArray(const std::vector<boost::shared_ptr<ImageGroundConnection> >& 
-	   Igc_list);
+	   Igc_list, bool Assume_igc_independent=true);
   virtual boost::shared_ptr<ImageGroundConnection> 
   image_ground_connection(int Image_index) const;
   virtual boost::shared_ptr<IgcCollection> 
   subset(const std::vector<int>& Index_set) const;
+  %python_attribute_with_set(assume_igc_independent, bool);
   %pickle_serialization()
 };
 }

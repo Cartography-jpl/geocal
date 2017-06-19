@@ -1,5 +1,7 @@
 from .nitf_field import *
 
+import types
+
 hlp = '''This is a NITF File header. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
 (MIL-STD-2500C, available at http://www.gwg.nga.mil/ntb/baseline/docs/2500c/2500C.pdf).
@@ -74,5 +76,19 @@ NitfFileHeader.fver_value = hardcoded_value("02.10")
 NitfFileHeader.stype_value = hardcoded_value("BF01")
 # Will want this calculated
 NitfFileHeader.fdt_value = hardcoded_value("20021216151629")
+
+def summary(self):
+    print ("QU$%EYRWT$W^%&QY#^$%AERD --->")
+    child = self
+    child.__class__ = NitfFileHeader
+    print (child)
+    print (type(child))
+    print ("<---- QU$%EYRWT$W^%&QY#^$%AERD")
+    #print (vars(self))
+    print (type(vars(self)['fver']))
+    print (vars(vars(vars(self)['fver'])['fv']))
+
+NitfFileHeader.summary = classmethod(summary)
+#NitfFileHeader.summary = types.MethodType(summary, NitfFileHeader)
 
 

@@ -61,7 +61,13 @@ igcbase = igccol.image_ground_connection(args.base_image_index)
 if(args.ref_image):
     mibase = read_shelve(args.ref_image).map_info
 else:
-    mibase = cib01_mapinfo(igcbase.resolution_meter())
+    gc_sample = igcbase.ground_coordinate(ImageCoordinate(0,0))
+    if(gc_sample.naif_code() == CoordinateConverter.EARTH_NAIF_CODE):
+        mibase = cib01_mapinfo(igcbase.resolution_meter())
+    else:
+        mibase = planet_mapinfo(gc_sample.naif_code(),
+                                desired_resolution = igcbase.resolution_meter())
+        
 mi = igcbase.cover(mibase)
 
 class ProjectWrap(object):

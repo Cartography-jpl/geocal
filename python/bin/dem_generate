@@ -72,7 +72,7 @@ Options:
 
    --max-distance-good-point=f
        How far apart the intersection of the rays from the conjugate points
-       can be and we still call this is a good match. [default: 0.5]
+       can be and we still call this is a good match (in meters). [default: 0.5]
 
   --resolution=r
        Resolution in meters of output. [default: 1.0]
@@ -103,7 +103,12 @@ elif(args.map_info_cover):
     midem = igc1.cover(midem, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
 else:
-    mibase = cib01_mapinfo(desired_resolution = args.resolution)
+    gc_sample = igc1.ground_coordinate(ImageCoordinate(0,0))
+    if(gc_sample.naif_code() == CoordinateConverter.EARTH_NAIF_CODE):
+        mibase = cib01_mapinfo(desired_resolution = args.resolution)
+    else:
+        mibase = planet_mapinfo(gc_sample.naif_code(),
+                                desired_resolution = args.resolution)
     midem = igc1.cover(mibase, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
 

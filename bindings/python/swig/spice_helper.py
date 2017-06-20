@@ -294,6 +294,16 @@ class SpiceHelper(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
+    def name_to_body(Name):
+        """
+
+        int SpiceHelper::name_to_body(const std::string &Name)
+        Get ID given a name. 
+        """
+        return _spice_helper.SpiceHelper_name_to_body(Name)
+
+    name_to_body = staticmethod(name_to_body)
+
     def body_name(Body_id):
         """
 
@@ -434,6 +444,14 @@ class SpiceHelper(object):
     __swig_destroy__ = _spice_helper.delete_SpiceHelper
 SpiceHelper_swigregister = _spice_helper.SpiceHelper_swigregister
 SpiceHelper_swigregister(SpiceHelper)
+
+def SpiceHelper_name_to_body(Name):
+    """
+
+    int SpiceHelper::name_to_body(const std::string &Name)
+    Get ID given a name. 
+    """
+    return _spice_helper.SpiceHelper_name_to_body(Name)
 
 def SpiceHelper_body_name(Body_id):
     """

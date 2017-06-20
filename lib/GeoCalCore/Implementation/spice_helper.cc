@@ -423,6 +423,37 @@ void SpiceHelper::conversion_matrix2(const std::string& From,
 
 
 //-----------------------------------------------------------------------
+/// Get ID given a name.
+//-----------------------------------------------------------------------
+int SpiceHelper::name_to_body(const std::string& Name)
+{
+  // Handle some special cases for speed.
+  if(Name == "EARTH")
+    return 399;
+  if(Name == "MARS")
+    return 499;
+  if(Name == "EUROPA")
+    return 502;
+  if(Name == "MOON")
+    return 301;
+#ifdef HAVE_SPICE
+  spice_setup();
+  int res;
+  SpiceBoolean found;
+  bodn2c_c(Name.c_str(), &res, &found);
+  spice_error_check();
+  if(!found) {
+    Exception e;
+    e << "Could not find NAIF Code for " << Name;
+    throw e;
+  }
+  return res;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Return the body name for the given id.
 //-----------------------------------------------------------------------
 

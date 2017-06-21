@@ -41,3 +41,5 @@ def test_tre_csepha_basic():
         assert t.ephem_x[n] == n * n
         assert t.ephem_y[n] == n * n + offset1
         assert t.ephem_z[n] == n * n + offset2
+
+    print (t2.summary())

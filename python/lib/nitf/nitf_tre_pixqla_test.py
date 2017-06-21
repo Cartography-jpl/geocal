@@ -24,6 +24,8 @@ def test_tre_pixqla():
     assert t.pq_bit_value == "1"
     assert list(t.pq_condition) == ["Condition 1", "Condition 2"]
 
+    print(t2.summary())
+
 def test_tre_pixqla_with_all():
     '''Repeat basic test pf pixqla, but have numais set to 'ALL' and make sure
     we have proper handling'''

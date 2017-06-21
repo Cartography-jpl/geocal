@@ -44,3 +44,10 @@ desc = [['te', "", 2, str],
 NitfTextSubheader = create_nitf_field_structure("NitfTextSubheader", desc, hlp=hlp)
 
 NitfTextSubheader.te_value = hardcoded_value("TE")
+
+def summary(self):
+    res = six.StringIO()
+    print("%s %s %s" % (self.te, self.textid, self.txtitl), file=res)
+    return res.getvalue()
+
+NitfTextSubheader.summary = summary

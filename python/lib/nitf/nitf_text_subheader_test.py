@@ -20,3 +20,5 @@ def test_text_subheader_basic():
     assert t2.textid  ==  'abcdefg'
     assert t2.txtalvl == 1
     assert t2.txtitl == 'ABCDEFG'
+
+    print (t.summary())

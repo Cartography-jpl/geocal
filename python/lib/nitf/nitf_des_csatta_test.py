@@ -20,7 +20,7 @@ def test_des_csatta_basic():
 
     fh = six.BytesIO()
     d.write_to_file(fh)
-    #assert fh.getvalue() == b'TEabcdefg001'
+    assert fh.getvalue() == b'                           00U                                                                                                                                                                      0000ORIGINAL    900.500000000020170501235959.1000010000510.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    10.1    '
     fh2 = six.BytesIO(fh.getvalue())
     d2 = DesCSATTA()
     d2.read_from_file(fh2)
@@ -36,3 +36,5 @@ def test_des_csatta_basic():
         assert d2.att_q2[n] == 10.1
         assert d2.att_q3[n] == 10.1
         assert d2.att_q4[n] == 10.1
+
+    print (d2.summary())

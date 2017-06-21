@@ -27,3 +27,10 @@ desc = ["CSEPHA",
 
 TreCSEPHA = create_nitf_tre_structure("TreCSEPHA",desc,hlp=hlp)
 
+def summary(self):
+    res = six.StringIO()
+    print("CSEPHA: %s %d ephemeris vectors" % (self.ephem_flag, self.num_ephem), file=res)
+    return res.getvalue()
+
+TreCSEPHA.summary = summary
+

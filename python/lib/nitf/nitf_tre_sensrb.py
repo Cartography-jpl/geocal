@@ -232,3 +232,10 @@ desc = ["SENSRB",
 ]
 
 TreSENSRB = create_nitf_tre_structure("TreSENSRB",desc,hlp=hlp)
+
+def summary(self):
+    res = six.StringIO()
+    print("%s %s %s" % (self.te, self.textid, self.txtitl), file=res)
+    return res.getvalue()
+
+NitfTextSubheader.summary = summary

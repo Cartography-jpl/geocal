@@ -1,6 +1,6 @@
 from .nitf_field import *
 
-import types
+import six
 
 hlp = '''This is a NITF File header. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
@@ -78,17 +78,12 @@ NitfFileHeader.stype_value = hardcoded_value("BF01")
 NitfFileHeader.fdt_value = hardcoded_value("20021216151629")
 
 def summary(self):
-    print ("QU$%EYRWT$W^%&QY#^$%AERD --->")
-    child = self
-    child.__class__ = NitfFileHeader
-    print (child)
-    print (type(child))
-    print ("<---- QU$%EYRWT$W^%&QY#^$%AERD")
-    #print (vars(self))
-    print (type(vars(self)['fver']))
-    print (vars(vars(vars(self)['fver'])['fv']))
+    res = six.StringIO()
+    print("%s %s %s MD5: " % (self.fhdr, self.fver, self.ftitle), file=res)
+    print("%d Image Segments, %d Graphic Segments, %d Text Segments, %d DESs"
+          % (self.numi, self.nums, self.numt, self.numdes), file=res)
+    return res.getvalue()
 
-NitfFileHeader.summary = classmethod(summary)
-#NitfFileHeader.summary = types.MethodType(summary, NitfFileHeader)
+NitfFileHeader.summary = summary
 
 

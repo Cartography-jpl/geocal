@@ -37,3 +37,14 @@ TreENGRDA = create_nitf_tre_structure("TreENGRDA",desc,hlp=hlp)
 #TreENGRDA.engdatc_value = 
 # We have rename engdata to engdataraw in the tre, and we then give a
 # numpy interface to engdata
+
+def summary(self):
+    res = six.StringIO()
+    print("ENGRDA %s: %d Entries:" \
+          % (self.resrc, self.recnt), file=res)
+    for i in range(self.recnt):
+        print("%d. %s [%d X %d] %s%d" \
+              % (i, self.englbl[i], self.engmtxc[i], self.engmtxr[i], self.engtyp[i], self.engdts[i]), file=res)
+    return res.getvalue()
+
+TreENGRDA.summary = summary

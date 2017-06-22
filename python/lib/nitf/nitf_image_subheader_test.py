@@ -75,5 +75,7 @@ def test_basic():
     assert t2.imag == "1.0"
     assert t2.udidl == 0
     assert t2.ixshdl == 0
+
+    print("\n"+t2.summary())
     
     

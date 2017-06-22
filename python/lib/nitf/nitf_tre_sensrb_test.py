@@ -125,6 +125,8 @@ def test_tre_sensrb_general_data():
     assert t2.generation_date == 20170427
     assert t2.generation_time == "235959.999"
 
+    print("\n" + t2.summary())
+
 def test_tre_sensrb_additional_parameter():
     t = TreSENSRB()
     # Turn everything off

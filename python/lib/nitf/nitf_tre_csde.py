@@ -36,13 +36,13 @@ desc = ["STDIDC",
 
 TreSTDIDC = create_nitf_tre_structure("TreSTDIDC", desc, hlp=hlp)
 
-def summary(self):
+def _summary(self):
     res = six.StringIO()
     print("STDIDC: %s, %s, %s, %d" \
                   % (self.acquisition_date, self.mission, self.pass_, self.op_num), file=res)
     return res.getvalue()
 
-TreSTDIDC.summary = summary
+TreSTDIDC.summary = _summary
 
 hlp = '''This is the USE00A TRE, Exploitation Usability TRE. 
 
@@ -84,12 +84,12 @@ desc = ["USE00A",
 
 TreUSE00A = create_nitf_tre_structure("TreUSE00A",desc,hlp=hlp)
 
-def summary(self):
+def _summary(self):
     res = six.StringIO()
     print("USE00A", file=res)
     return res.getvalue()
 
-TreUSE00A.summary = summary
+TreUSE00A.summary = _summary
 
 
 

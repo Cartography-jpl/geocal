@@ -28,7 +28,6 @@ def test_basic():
 
     fh = six.BytesIO()
     t.write_to_file(fh)
-    print(fh.getvalue())
 
     print (t.summary())
 

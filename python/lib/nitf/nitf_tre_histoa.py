@@ -56,7 +56,7 @@ desc = ["HISTOA",
 
 TreHISTOA = create_nitf_tre_structure("TreHISTOA",desc,hlp=hlp)
 
-def summary(self):
+def _summary(self):
     res = six.StringIO()
     print("HISTOA: %d events:" % (self.nevents), file=res)
     for i in range(self.nevents):
@@ -64,4 +64,4 @@ def summary(self):
             print("%d.%d: %s" % (i, j, self.ipcom[i, j]), file=res)
     return res.getvalue()
 
-TreHISTOA.summary = summary
+TreHISTOA.summary = _summary

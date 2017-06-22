@@ -49,3 +49,5 @@ def test_tre_stdidc_basic():
     assert t.country == 'US'
     assert t.wac == 1866
     assert t.location == '8959N17959E'
+
+    print("\n" + t2.summary())

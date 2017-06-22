@@ -86,7 +86,7 @@ NitfImageSubheader.ifc_value = hardcoded_value("N")
 NitfImageSubheader.imflt_value = hardcoded_value("   ")
 NitfImageSubheader.isync_value = hardcoded_value(0)
 
-def summary(self):
+def _summary(self):
     res = six.StringIO()
     print("%s %s %s" % (self.im, self.iid1, self.iid2), file=res)
     numBands = self.nbands
@@ -96,4 +96,4 @@ def summary(self):
           % (self.nrows, self.ncols, numBands, self.abpp, self.nbpp), file=res)
     return res.getvalue()
 
-NitfImageSubheader.summary = summary
+NitfImageSubheader.summary = _summary

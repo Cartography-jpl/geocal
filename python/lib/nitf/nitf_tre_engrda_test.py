@@ -57,9 +57,7 @@ def test_tre_engrda():
     assert t.engdata[1] == b'0000'
     assert t.engdata[2] == b"10.7 DEG C"
 
-    print(t)
-
-    print (t.summary())
+    print ("\n" + t.summary())
 
     # We want to give a simpler interface, where we can read and write
     # numpy arrays

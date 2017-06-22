@@ -12,7 +12,7 @@ def test_text_subheader_basic():
 
     fh = six.BytesIO()
     t.write_to_file(fh)
-    #assert fh.getvalue() == b'TEabcdefg001'
+    assert fh.getvalue() == b'TEabcdefg001              ABCDEFG                                                                                                                                                                                                                                                0   00000'
     fh2 = six.BytesIO(fh.getvalue())
     t2 = NitfTextSubheader()
     t2.read_from_file(fh2)

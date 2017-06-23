@@ -30,8 +30,7 @@ def _display(self, ic, sz, cross_hair = True):
     if(cross_hair):
         plt.plot(ic.sample, ic.line, 'r+', markersize = 20,
                  markeredgewidth = 1.0)
-    plt.imshow(self.read_with_pad(ln, smp, nline, nsamp), cmap = plt.cm.gray,
-               vmin = min, vmax = max, 
+    plt.imshow(d, cmap = plt.cm.gray, vmin = min, vmax = max, 
                extent = [smp, smp + nsamp, ln + nline, ln])
 
 geocal_swig.RasterImage.display = _display

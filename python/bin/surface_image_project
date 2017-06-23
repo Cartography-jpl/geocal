@@ -29,6 +29,11 @@ Options:
   --base-image-index=n
        The image to consider the base image in matching. [default: 0]
 
+  --cover-image
+       Instead of subsetting to fit the base image, use a common projection
+       but adjust coverage for each image to include all the data (i.e., the
+       size and upper left corner will in general be different for each image)
+
   --grid-spacing=g
        Grid spacing to exactly calculate the image ground connection
        for, doing a linear interpolation in between. This can greatly
@@ -83,7 +88,10 @@ class ProjectWrap(object):
         igc = self.igccol.image_ground_connection(i)
         if(self.scale is not None):
             igc = ScaleImageGroundConnection(igc, self.scale)
-        t = IgcMapProjected(self.mi, igc, self.grid_spacing)
+        mi = self.mi
+        if(args.cover_image):
+            mi = igc.cover(mi)
+        t = IgcMapProjected(mi, igc, self.grid_spacing)
         f = VicarRasterImage("%s%d.img" % (self.basefname, i), t.map_info, 
                              "HALF")
         f.close()

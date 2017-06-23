@@ -25,7 +25,15 @@ void Time::serialize(Archive & ar, const unsigned int version)
   ar & GEOCAL_NVP_(time_pgs);
 }
 
+template<class Archive>
+void TimeWithDerivative::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(TimeWithDerivative);
+  ar & GEOCAL_NVP_(time_pgs);
+}
+
 GEOCAL_IMPLEMENT(Time);
+GEOCAL_IMPLEMENT(TimeWithDerivative);
 #endif
 
 const Time Time::min_valid_time = Time::time_pgs(-1009843218.0);

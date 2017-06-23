@@ -12,14 +12,14 @@ def pds_label_text(fname):
 
     This is PDS3 format, we don't yet handle PDS4.
     '''
-    res = ''
-    with open(fname, "r") as fh:
+    res = b''
+    with open(fname, "rb") as fh:
         while True:
             line = fh.readline()
             # Strip off /r. Shows up in python 2, but not 3. Not sure why
             # the difference, but in any case we don't want them
-            res += line.replace('\r','')
-            if line.strip() == 'END' or line == '':
+            res += line.replace(b'\r',b'')
+            if line.strip() == b'END' or line == b'':
                 break
     return res
         
@@ -28,15 +28,15 @@ def pds_label(fname):
     we'll have to try this on a number of datasets and see what breaks.'''
     txt = pds_label_text(fname)
     res = dict()
-    for ln in txt.split("\n"):
-        m = re.match(r'\s*(\w+)\s*=(.+)*', ln)
+    for ln in txt.split(b"\n"):
+        m = re.match(b'\s*(\w+)\s*=(.+)*', ln)
         if(m):
             k = m.group(1)
             v = m.group(2).strip()
-            m = re.match(r'"(.*)"', v)
+            m = re.match(b'"(.*)"', v)
             if(m):
                 v = m.group(1)
-            res[k] = v
+            res[k.decode("utf-8")] = v.decode("utf-8")
     return res
 
 class SpiceKernelByTime(object):

@@ -18,6 +18,7 @@
 namespace GeoCal {
 class SpiceHelper  {
 public:
+  static int name_to_body(const std::string& Name);
   static std::string body_name(int Body_id);
   static std::string fixed_frame_name(int Body_id);
   static bool spice_available();

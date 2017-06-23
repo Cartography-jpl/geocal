@@ -6,7 +6,7 @@ import glob
 def test_pds_label_text():
     fname = unit_test_data + "mars_kernel/mro_kernel/spk/mro_psp6_ssd_mro110c.lbl"
     txt = pds_label_text(fname)
-    assert txt == '''PDS_VERSION_ID               = PDS3
+    assert txt == b'''PDS_VERSION_ID               = PDS3
 RECORD_TYPE                  = FIXED_LENGTH
 RECORD_BYTES                 = 1024
 ^SPICE_KERNEL                = "mro_psp6_ssd_mro110c.bsp"

@@ -328,6 +328,10 @@ public:
   { os << "TimeWithDerivative:\n"
        << "  " << Time::time_pgs(pgs().value()) << "\n"
        << "  Gradient: " << time_pgs_.gradient() << "\n"; }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 //-----------------------------------------------------------------------
@@ -420,5 +424,5 @@ struct TimeGpsCreator {
 }
 
 GEOCAL_EXPORT_KEY(Time);
-
+GEOCAL_EXPORT_KEY(TimeWithDerivative);
 #endif

@@ -12,7 +12,7 @@ class IgcArray : public virtual IgcCollection,
 		 public virtual WithParameterNested {
 public:
   IgcArray(const std::vector<boost::shared_ptr<ImageGroundConnection> >& 
-	   Igc_list);
+	   Igc_list, bool Assume_igc_independent = true);
   virtual ~IgcArray() {}
   virtual int number_image() const { return (int) igc_list.size(); }
   virtual boost::shared_ptr<ImageGroundConnection> 
@@ -38,14 +38,31 @@ public:
   collinearity_residual_jacobian(int Image_index,
 				 const GroundCoordinate& Gc,
 				 const ImageCoordinate& Ic_actual) const;
+//-----------------------------------------------------------------------
+/// Return assumption about ImageGroundConnection being
+/// independent. If they are, then we can get a optimization in the
+/// jacobian calculation to speed it up. If they aren't (e.g., they
+/// share a common Orbit that has been added to the
+/// WithParameterNested), that is fine. We just take longer to do the
+/// calculation. But we need to know this to avoid making an incorrect
+/// optimization.
+//-----------------------------------------------------------------------
+  bool assume_igc_independent() const {return assume_igc_independent_;}
+  void assume_igc_independent(bool v) {assume_igc_independent_ = v;}
 private:
   std::vector<boost::shared_ptr<ImageGroundConnection> > igc_list;
+  bool assume_igc_independent_;
   IgcArray() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 }
 
 GEOCAL_EXPORT_KEY(IgcArray);
+GEOCAL_CLASS_VERSION(IgcArray, 1);
 #endif

@@ -64,6 +64,7 @@ class SpiceHelper {
 public:
   static double m[3][3];
   static double m2[6][6];
+  static int name_to_body(const std::string& Name);
   static std::string body_name(int Body_id);
   static std::string fixed_frame_name(int Body_id);
   static void cartesian_inertial_to_cartesian_fixed(int Body_id, const Time& T);

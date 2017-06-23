@@ -88,11 +88,27 @@ MapInfo GdalBase::map_info() const
   int status = sr_wgs84.SetWellKnownGeogCS("WGS84");
   if(status != OGRERR_NONE)
     throw Exception("Call to SetWellKnownGeogCS failed");
+  // Treat WGS-84 as special
   if(sr_wgs84.IsSame(ogr.get()))
     coor_conv.reset(new GeodeticConverter());
-  else 
+  // Next, look for Planetocentric
+  if(!coor_conv && ogr->IsGeographic()) {
+    std::string nm = ogr->GetAttrValue("GEOGCS");
+    if(nm.size() > 4 && nm.substr(0, 4) == "GCS_") {
+      std::string pname = nm.substr(4);
+      try {
+	int naif_code = SpiceHelper::name_to_body(pname);
+	coor_conv.reset(new PlanetocentricConverter(naif_code));
+      } catch(const Exception& e) {
+	// Don't worry about exceptions, we just fall through to using
+	// Ogr
+      }
+    }
+  }
+  // Then fall back to a generic Ogr
+  if(!coor_conv)
     coor_conv.reset(new OgrCoordinateConverter(boost::shared_ptr<OgrWrapper>
-					       (new OgrWrapper(ogr))));
+						 (new OgrWrapper(ogr))));
 
   // Note that Geotiff there are two ways the parameters are
   // specified, point or area. GDAL already handles this, so we don't
@@ -125,13 +141,42 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
     int status = ogr.SetWellKnownGeogCS("WGS84");
     if(status != OGRERR_NONE)
       throw Exception("Call to SetWellKnownGeogCS failed");
-  }
-  // Right now we don't support planetary coordinate systems. I think 
-  // GDAL actually can, it has some support for PDS. But for now, just
-  // skip the mapinfo if it is for a planet.
-  else if(dynamic_cast<const PlanetocentricConverter*>(&M.coordinate_converter())) {
-    std::cerr << "Warning, skipping Planetocentric map info writing because we don't currently support this.";
-    return;
+  } else if(const PlanetocentricConverter* conv = dynamic_cast<const PlanetocentricConverter*>(&M.coordinate_converter())) {
+    std::string name = PlanetConstant::name(conv->naif_code());
+    std::string gcs_name = "GCS_" + name;
+    std::string datum_name = "D_" + name;
+    std::string pcs_name = "Equirectangular " + name;
+    // Not sure how we indicate planetocentric instead of planetodetic
+    int status = ogr.SetGeogCS(gcs_name.c_str(), datum_name.c_str(),
+			       name.c_str(),
+			       PlanetConstant::a(conv->naif_code()),
+			       PlanetConstant::flattening(conv->naif_code()),
+			       "Reference_Meridian");
+    if(status ==CE_Failure)
+      throw Exception("SetGeogCS failed");
+    // status = ogr.setProjCs(pcs_name);
+    // if(status ==CE_Failure)
+    //   throw Exception("SetProjCs failed");
+    // status = ogr.SetProjection("Equirectangular");
+    // if(status ==CE_Failure)
+    //   throw Exception("SetProjection failed");
+    // status = ogr.setProjParm("latitude_of_origin", 0);
+    // if(status ==CE_Failure)
+    //   throw Exception("setProjParm failed");
+    // status = ogr.setProjParm("central_meridian", 0);
+    // if(status ==CE_Failure)
+    //   throw Exception("setProjParm failed");
+    // status = ogr.setProjParm("standard_parallel_1", 0);
+    // if(status ==CE_Failure)
+    //   throw Exception("setProjParm failed");
+    // status = ogr.setProjParm("false_easting", 0);
+    // if(status ==CE_Failure)
+    //   throw Exception("setProjParm failed");
+    // status = ogr.setProjParm("false_northing", 0);
+    // if(status ==CE_Failure)
+    //   throw Exception("setProjParm failed");
+    // status = ogr.SetTargetLinearUnits("PROJCS", "SRS_UL_METER", 1.0
+    //std::cerr << "Warning, skipping Planetocentric map info writing because we don't currently support this.";
   } else if(const OgrCoordinateConverter* ogrconv =
       dynamic_cast<const OgrCoordinateConverter*>(&M.coordinate_converter()))
     ogr = ogrconv->ogr().ogr();

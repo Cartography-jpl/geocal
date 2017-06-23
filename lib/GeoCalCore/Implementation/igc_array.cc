@@ -13,18 +13,48 @@ void IgcArray::serialize(Archive & ar, const unsigned int version)
   GEOCAL_BASE(IgcArray, IgcCollection);
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested);
   ar & GEOCAL_NVP(igc_list);
+  // Older version didn't have assume_igc_independent_, it used the default
+  // value of true for this.
+  if(version > 0)
+    ar & GEOCAL_NVP_(assume_igc_independent);
+  boost::serialization::split_member(ar, *this, version);
 }
+
+template<class Archive>
+void IgcArray::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void IgcArray::load(Archive & ar, const unsigned int version)
+{
+  // Older version didn't have assume_igc_independent_, it used the default
+  // value of true for this.
+  if(version == 0)
+    assume_igc_independent_ = true;
+}
+
 
 GEOCAL_IMPLEMENT(IgcArray);
 #endif
 
 //-----------------------------------------------------------------------
-/// Constructor
+/// Constructor.
+///
+/// Note that we can make assumption about ImageGroundConnection being
+/// independent. If they are, then we can get a optimization in the
+/// jacobian calculation to speed it up. If they aren't (e.g., they
+/// share a common Orbit that has been added to the
+/// WithParameterNested), that is fine. We just take longer to do the
+/// calculation. But we need to know this to avoid making an incorrect
+/// optimization. Make sure Assume_igc_independent is set to the right value.
 //-----------------------------------------------------------------------
 
 IgcArray::IgcArray
-(const std::vector<boost::shared_ptr<ImageGroundConnection> >& Igc_list)
-    : igc_list(Igc_list) 
+(const std::vector<boost::shared_ptr<ImageGroundConnection> >& Igc_list,
+ bool Assume_igc_independent)
+  : igc_list(Igc_list), assume_igc_independent_(Assume_igc_independent)
 {
   BOOST_FOREACH(boost::shared_ptr<ImageGroundConnection> igc, igc_list)
     add_object(igc);
@@ -61,6 +91,13 @@ IgcArray::collinearity_residual_jacobian
  const GroundCoordinate& Gc,
  const ImageCoordinate& Ic_actual) const
 {
+  // If we are doing the optimization by assuming we have independent
+  // ImageGroundConnection, then just use the normal
+  // collinearity_residual_jacobian
+  if(!assume_igc_independent_)
+    return IgcCollection::collinearity_residual_jacobian(Image_index, Gc,
+							 Ic_actual);
+  // Otherwise, do an optimized calculation
   range_check(Image_index, 0, number_image());
   // The jacobian calculated by the ImageGroundConnection is relative
   // to those parameters only, we need to translate to the full jacobian.
@@ -83,7 +120,11 @@ IgcArray::collinearity_residual_jacobian
 
 void IgcArray::add_identity_gradient()
 {
-  // For IgcArray, add the identity gradient to all contained classes.
-  BOOST_FOREACH(const boost::shared_ptr<ImageGroundConnection>& igc, igc_list)
-    igc->add_identity_gradient();
+  if(assume_igc_independent_)
+    // For IgcArray, add the identity gradient to all contained classes.
+    BOOST_FOREACH(const boost::shared_ptr<ImageGroundConnection>& igc, igc_list)
+      igc->add_identity_gradient();
+  else
+    // Otherwise, to the full calculation we do in WithParameter
+    WithParameterNested::add_identity_gradient();
 }

@@ -266,7 +266,10 @@ class NitfGraphicSegment(NitfPlaceHolder):
         NitfPlaceHolder.__init__(self, header_size, data_size, "Graphic Segment")
 
 class NitfTextSegment(NitfSegment):
-    '''Text segment (TS), support the standard text type of data'''
+    '''Text segment (TS), support the standard text type of data. 
+    Note that txt can be either a str or bytes, whichever is most convenient
+    for you. We encode/decode using utf-8 as needed. You can access the data
+    as one or the other using data_as_bytes and data_as_str.'''
     def __init__(self, txt='', header_size=None, data_size=None):
         h = NitfTextSubheader()
         self.header_size = header_size
@@ -283,7 +286,20 @@ class NitfTextSegment(NitfSegment):
     def read_tre(self, des_list):
         self.tre_list = read_tre(self.subheader,des_list,
                                  [["txshdl", "txsofl", "txshd"]])
-        
+    @property
+    def data_as_bytes(self):
+        '''Return data as bytes, encoding if needed'''
+        if isinstance(self.data, six.string_types):
+            return self.data.encode('utf-8')
+        return self.data
+            
+    @property
+    def data_as_str(self):
+        '''Return data as str, encoding if needed'''
+        if isinstance(self.data, six.string_types):
+            return self.data
+        return self.data.decode('utf-8')
+
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''
         fh = six.StringIO()
@@ -296,7 +312,7 @@ class NitfTextSegment(NitfSegment):
             for tre in self.tre_list:
                 print(tre, file=fh)
         print("Text", file=fh)
-        print(self.data.decode('utf-8'), file=fh)
+        print(self.data_as_str, file=fh)
         return fh.getvalue()
     def write_to_file(self, fh):
         '''Write to a file. The returns (sz_header, sz_data), because this
@@ -304,7 +320,7 @@ class NitfTextSegment(NitfSegment):
         start_pos = fh.tell()
         self.subheader.write_to_file(fh)
         header_pos = fh.tell()
-        fh.write(self.data.encode('utf-8'))
+        fh.write(self.data_as_bytes)
         return (header_pos - start_pos, fh.tell() - header_pos)
    
 class NitfDesSegment(NitfSegment):

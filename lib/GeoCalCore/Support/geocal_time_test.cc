@@ -113,5 +113,32 @@ BOOST_AUTO_TEST_CASE(problem_time)
 		    std::string("2015-01-24T20:43:46.428490Z"));
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<Time> tm(new Time(Time::time_pgs(100.0)));
+  std::string d = serialize_write_string(tm);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Time> tmr = serialize_read_string<Time>(d);
+  BOOST_CHECK_CLOSE(tmr->pgs(), 100.0, 1e-6);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_time_with_derivative)
+{
+  if(!have_serialize_supported())
+    return;
+  AutoDerivative<double> tmval(100.0, 0, 10);
+  boost::shared_ptr<TimeWithDerivative> tm
+    (new TimeWithDerivative(TimeWithDerivative::time_pgs(tmval)));
+  std::string d = serialize_write_string(tm);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<TimeWithDerivative> tmr =
+    serialize_read_string<TimeWithDerivative>(d);
+  BOOST_CHECK_CLOSE(tmr->value().pgs(), 100.0, 1e-6);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

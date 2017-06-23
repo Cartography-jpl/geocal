@@ -45,6 +45,14 @@ def cib01_mapinfo(desired_resolution = None):
                         old_div(desired_resolution, resbase))
     return res
 
+def planet_mapinfo(naif_code, desired_resolution = 1):
+    '''Like cib01_mapinfo, but for other planets. We have this as
+    Planetocentric, sized to the desired resolution in meters'''
+    cconv = PlanetocentricConverter(naif_code)
+    mi = MapInfo(cconv,0,0,1,1,10,10)
+    mi = mi.scale(desired_resolution/mi.resolution_meter,
+                  desired_resolution/mi.resolution_meter)
+    return mi
 
 def pid_exists(pid):
     """Check whether pid exists in the current process table.

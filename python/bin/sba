@@ -20,7 +20,8 @@ tiepoints.
 
 The input igc collection and tie point array, and the final output are
 given as sqlite shelve objects. The sqlite shelve objects are in
-"file:key" format, e.g., "my_data.db:tp".
+"file:key" format, e.g., "my_data.db:tp", or alternatively saved as
+"file.xml" or "file.json" to save as a boost serialization or Json file.
 
 We output an updated igc collection, and a tie point array with the
 ground location of the tie points updated to the final location used
@@ -37,8 +38,7 @@ Options:
        Print this message
 
   --dem=shelve
-       DEM to use, specified as file:key. If not specified, we use the 
-       DEM from the first IGC.
+       DEM to use. If not specified, we use the DEM from the first IGC.
 
   --dem-height-block-adjust
        For poor quality DEMs, we may find that the whole DEM should be
@@ -73,6 +73,11 @@ Options:
   --min-chisqr=f
       The target chisqr we try to reach [default: 0.1]
 
+  --save-sba=bname
+      When diagnosing what is happening with a SBA retrieval, it can be
+      useful to save the SimultaneousBundleAdjustment objects at various
+      stages in the processing. This saves the data and pickle objects.
+
   --stopping-criteria=f
       The stopping criteria we use, so change in chisq from one
       iteration to the next is < this value. [default: 0.001]
@@ -88,7 +93,6 @@ Options:
        prevent the points from being moved too far. If you supply a 
        tp-sigma, then we add a GCP constraint equation for points that 
        aren't marked as GCPs that is this looser value.
-
 
   --verbose
        Print more information as we run.
@@ -131,6 +135,10 @@ sba = SimultaneousBundleAdjustment(igc, tpcol, dem, dem_sigma=args.dem_sigma,
                                    gcp_sigma=args.gcp_sigma,
                                    tp_epsilon=args.tp_epsilon,
                                    tp_sigma=args.tp_sigma)
+if(args.save_sba):
+    with open(args.save_sba + "_initial.pkl", "wb") as fh:
+        pickle.dump(sba, fh)
+        
 v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 
@@ -145,6 +153,9 @@ log.info("Final Chisq: %f" % chisq)
 tpcol = sba.tpcol
 for i in range(len(tpcol)):
     tpcol[i].ground_location = sba.ground_location(i)
+if(args.save_sba):
+    with open(args.save_sba + "_first_optimize.pkl", "wb") as fh:
+        pickle.dump(sba, fh)
 
 if(args.initial_hold_gcp_fixed):
     sba = SimultaneousBundleAdjustment(igc, tpcol, dem, 
@@ -153,6 +164,9 @@ if(args.initial_hold_gcp_fixed):
                                        gcp_sigma=args.gcp_sigma,
                                        tp_epsilon=args.tp_epsilon,
                                        tp_sigma=args.tp_sigma)
+    if(args.save_sba):
+        with open(args.save_sba + "_second_initial.pkl", "wb") as fh:
+            pickle.dump(sba, fh)
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     log.info("Initial Chisq: %f" % chisq)
@@ -166,6 +180,9 @@ if(args.initial_hold_gcp_fixed):
     tpcol = sba.tpcol
     for i in range(len(tpcol)):
         tpcol[i].ground_location = sba.ground_location(i)
+    if(args.save_sba):
+        with open(args.save_sba + "_second_optimize.pkl", "wb") as fh:
+            pickle.dump(sba, fh)
     
 if(args.dem_height_block_adjust):
     d = sba.igc_coll.dem(0)
@@ -178,6 +195,9 @@ if(args.dem_height_block_adjust):
               for i in range(len(tpcol)) ]
     for i in range(sba.igc_coll.number_image):
         sba.igc_coll.image_ground_connection(i).dem = d
+    if(args.save_sba):
+        with open(args.save_sba + "_height_block_adjust.pkl", "wb") as fh:
+            pickle.dump(sba, fh)
 
 write_shelve(args.igc_out, sba.igc_coll)
 write_shelve(args.tpcol_out, tpcol)

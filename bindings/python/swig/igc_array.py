@@ -189,7 +189,7 @@ import geocal_swig.igc_collection
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-class IgcArray(geocal_swig.igc_collection.IgcCollection):
+class IgcArray(geocal_swig.igc_collection.IgcCollection, geocal_swig.with_parameter.WithParameterNested):
     """
 
     This is a IgcCollection that is just an array of independent
@@ -200,14 +200,22 @@ class IgcArray(geocal_swig.igc_collection.IgcCollection):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Igc_list):
+    def __init__(self, Igc_list, Assume_igc_independent=True):
         """
 
         IgcArray::IgcArray(const std::vector< boost::shared_ptr< ImageGroundConnection > >
-        &Igc_list)
-        Constructor. 
+        &Igc_list, bool Assume_igc_independent=true)
+        Constructor.
+
+        Note that we can make assumption about ImageGroundConnection being
+        independent. If they are, then we can get a optimization in the
+        jacobian calculation to speed it up. If they aren't (e.g., they share
+        a common Orbit that has been added to the WithParameterNested), that
+        is fine. We just take longer to do the calculation. But we need to
+        know this to avoid making an incorrect optimization. Make sure
+        Assume_igc_independent is set to the right value. 
         """
-        _igc_array.IgcArray_swiginit(self, _igc_array.new_IgcArray(Igc_list))
+        _igc_array.IgcArray_swiginit(self, _igc_array.new_IgcArray(Igc_list, Assume_igc_independent))
 
     def image_ground_connection(self, Image_index):
         """
@@ -218,11 +226,30 @@ class IgcArray(geocal_swig.igc_collection.IgcCollection):
         return _igc_array.IgcArray_image_ground_connection(self, Image_index)
 
 
+    def _v_assume_igc_independent(self, *args):
+        """
+
+        void GeoCal::IgcArray::assume_igc_independent(bool v)
+
+        """
+        return _igc_array.IgcArray__v_assume_igc_independent(self, *args)
+
+
+    @property
+    def assume_igc_independent(self):
+        return self._v_assume_igc_independent()
+
+    @assume_igc_independent.setter
+    def assume_igc_independent(self, value):
+      self._v_assume_igc_independent(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _igc_array.delete_IgcArray
 IgcArray.image_ground_connection = new_instancemethod(_igc_array.IgcArray_image_ground_connection, None, IgcArray)
+IgcArray._v_assume_igc_independent = new_instancemethod(_igc_array.IgcArray__v_assume_igc_independent, None, IgcArray)
 IgcArray_swigregister = _igc_array.IgcArray_swigregister
 IgcArray_swigregister(IgcArray)
 

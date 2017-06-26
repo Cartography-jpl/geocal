@@ -71,6 +71,12 @@ bool SpiceHelper::kernel_loaded(const std::string& Kernel)
   SpiceBoolean found;
   kinfo_c(Kernel.c_str(), 1000,1000, filetype, source, &handle, &found);
   spice_error_check();
+  if(!found) {
+    // Try using the full path
+    std::string full_path = boost::filesystem::absolute(Kernel).string();
+    kinfo_c(full_path.c_str(), 1000,1000, filetype, source, &handle, &found);
+    spice_error_check();
+  }
   return found;
 #else
   throw SpiceNotAvailableException();
@@ -96,10 +102,11 @@ void SpiceHelper::add_kernel(const std::string& Kernel, bool Skip_save)
   }
   std::string dir = p.parent_path().string();
   std::string fname = p.filename().string();
+  std::string full_path = boost::filesystem::absolute(p).string();
   if(dir == "")
     dir = ".";
   DirChange d(dir);
-  furnsh_c(fname.c_str());
+  furnsh_c(full_path.c_str());
   spice_error_check();
 #else 
   throw SpiceNotAvailableException();

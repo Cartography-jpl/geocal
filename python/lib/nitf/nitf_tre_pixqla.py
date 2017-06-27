@@ -25,3 +25,10 @@ desc = ["PIXQLA",
 TrePIXQLA = create_nitf_tre_structure("TrePIXQLA",desc,hlp=hlp)
 # This value is always "1", that is the only allowed value for it
 TrePIXQLA.pq_bit_value_value = hardcoded_value("1")
+
+def _summary(self):
+    res = six.StringIO()
+    print("PIXQLA %s Associated ISs, %d Quality Conditions" % (self.numais, self.npixqual), file=res)
+    return res.getvalue()
+
+TrePIXQLA.summary = _summary

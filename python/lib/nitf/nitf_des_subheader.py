@@ -33,3 +33,10 @@ desc = [['de', "", 2, str],
 NitfDesSubheader = create_nitf_field_structure("NitfDesSubheader", desc, hlp=hlp)
 
 NitfDesSubheader.de_value = hardcoded_value("DE")
+
+def summary(self):
+    res = six.StringIO()
+    print("%s %s %s " % (self.de, self.desid, self.dsver), file=res)
+    return res.getvalue()
+
+NitfDesSubheader.summary = summary

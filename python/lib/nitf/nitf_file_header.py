@@ -1,5 +1,7 @@
 from .nitf_field import *
 
+import six
+
 hlp = '''This is a NITF File header. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
 (MIL-STD-2500C, available at http://www.gwg.nga.mil/ntb/baseline/docs/2500c/2500C.pdf).
@@ -74,5 +76,14 @@ NitfFileHeader.fver_value = hardcoded_value("02.10")
 NitfFileHeader.stype_value = hardcoded_value("BF01")
 # Will want this calculated
 NitfFileHeader.fdt_value = hardcoded_value("20021216151629")
+
+def summary(self):
+    res = six.StringIO()
+    print("%s %s %s MD5: " % (self.fhdr, self.fver, self.ftitle), file=res)
+    print("%d Image Segments, %d Graphic Segments, %d Text Segments, %d DESs"
+          % (self.numi, self.nums, self.numt, self.numdes), file=res)
+    return res.getvalue()
+
+NitfFileHeader.summary = summary
 
 

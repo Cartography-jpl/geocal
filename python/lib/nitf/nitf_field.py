@@ -487,6 +487,13 @@ class FieldData(object):
         if(len(t) == 0):
             return "Not used"
         return "Data length %s" % len(t)
+
+class StringFieldData(FieldData):
+    def get_print(self, parent_obj,key):
+        t = self.get(parent_obj,key)
+        if(len(t) == 0):
+            return "Not used"
+        return "%s" % t
         
 class _create_nitf_field_structure(object):
     # The __dict__ is at class level

@@ -102,7 +102,11 @@ def create_des(f):
         des.att_q3[n] = 10.1
         des.att_q4[n] = 10.1
 
-    f.des_segment.append(des)
+    data = six.BytesIO()
+    des.write_to_file(data)
+    de = NitfDesSegment(data=data.getvalue())
+    de.subheader.desid = "CSATTA"
+    f.des_segment.append(de)
     
 def print_diag(f):
     # Print out diagnostic information, useful to make sure the file
@@ -275,8 +279,7 @@ def test_full_file(isolated_dir):
     create_tre(f)
     create_tre2(f)
     create_text_segment(f)
-    # This doesn't work yet
-    #create_des(f)
+    create_des(f)
     print(f)
     f.write("basic_nitf.ntf")
     f2 = NitfFile("basic_nitf.ntf")

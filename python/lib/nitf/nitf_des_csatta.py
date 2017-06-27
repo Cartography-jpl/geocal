@@ -27,3 +27,10 @@ DesCSATTA = create_nitf_field_structure("DesCSATTA", desc2, hlp=hlp)
 
 DesCSATTA.desid = hardcoded_value("DES CSATTA")
 DesCSATTA.desver = hardcoded_value("01")
+
+def summary(self):
+    res = six.StringIO()
+    print("CSATTA %s:  %d points" % (self.att_type, self.num_att), file=res)
+    return res.getvalue()
+
+DesCSATTA.summary = summary

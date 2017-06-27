@@ -65,6 +65,41 @@ class NitfFile(object):
                 print("-------------------------------------------------------------",
                       file=res)
         return res.getvalue()
+    def summary(self):
+        '''Short text summary of this file, something you can print out'''
+        res = six.StringIO()
+        print("NITF File Summary")
+        print("-------------------------------------------------------------",
+              file=res)
+        print("File Header:", file=res)
+        print(self.file_header.summary(), file=res)
+        print("-------------------------------------------------------------",
+              file=res)
+        if(len(self.tre_list) == 0):
+            print("No file level TREs", file=res)
+        else:
+            print("File level TRES:", file=res)
+            for t in self.tre_list:
+                print(t.summary(), file=res)
+            print("-------------------------------------------------------------",
+                  file=res)
+        for arr, name in [[self.image_segment, "Image"],
+                          [self.graphic_segment, "Graphic"],
+                          [self.text_segment, "Text"],
+                          [self.des_segment, "Data Extension"],
+                          [self.res_segment, "Reserved Extension"]]:
+            if(len(arr) == 0):
+                print("No %s segments" % name, file=res)
+            else:
+                print("-------------------------------------------------------------",
+                      file=res)
+            for i, seg in enumerate(arr):
+                print("%s segment %d of %d" % (name, i+1, len(arr)),
+                      file=res)
+                print(seg.summary(),end='',file=res)
+                print("-------------------------------------------------------------",
+                      file=res)
+        return res.getvalue()
     def read(self, file_name):
         '''Read the given file'''
         with open(file_name, 'rb') as fh:
@@ -151,6 +186,15 @@ class NitfSegment(object):
         print("Data", file=fh)
         print(self.data, file=fh)
         return fh.getvalue()
+
+    def summary(self):
+        res = six.StringIO()
+        print("Segment level TRES:", file=res)
+        if (hasattr(self, 'tre_list') == True):
+            for t in self.tre_list:
+                print(t.summary(), file=res)
+
+        return self.subheader.summary() + res.getvalue()
 
     def read_tre(self, des_list):
         # By default, segment doesn't have any TREs

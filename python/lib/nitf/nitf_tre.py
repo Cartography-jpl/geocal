@@ -66,6 +66,11 @@ class Tre(_FieldStruct):
                 print(f.desc(self), file=res, end='')
         return res.getvalue()
 
+    def summary(self):
+        res = six.StringIO()
+        print("TRE - %s" % self.tre_tag, file=res)
+        return res.getvalue()
+
 class TreUnknown(Tre):
     '''The is a general class to handle TREs that we don't have another 
     handler for. It just reports the tre string.'''

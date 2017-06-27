@@ -85,3 +85,15 @@ NitfImageSubheader = create_nitf_field_structure("NitfImageSubheader", desc,
 NitfImageSubheader.ifc_value = hardcoded_value("N")
 NitfImageSubheader.imflt_value = hardcoded_value("   ")
 NitfImageSubheader.isync_value = hardcoded_value(0)
+
+def _summary(self):
+    res = six.StringIO()
+    print("%s %s %s" % (self.im, self.iid1, self.iid2), file=res)
+    numBands = self.nbands
+    if (numBands == 0):
+            numbands = self.xbands
+    print("%d X %d, %d Bands, %d/%d bpp"
+          % (self.nrows, self.ncols, numBands, self.abpp, self.nbpp), file=res)
+    return res.getvalue()
+
+NitfImageSubheader.summary = _summary

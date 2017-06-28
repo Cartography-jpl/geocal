@@ -82,6 +82,7 @@ desc = [['im', "", 2, str],
 NitfImageSubheader = create_nitf_field_structure("NitfImageSubheader", desc,
                                                  hlp=hlp)
 
+NitfImageSubheader.im_value = hardcoded_value("IM")
 NitfImageSubheader.ifc_value = hardcoded_value("N")
 NitfImageSubheader.imflt_value = hardcoded_value("   ")
 NitfImageSubheader.isync_value = hardcoded_value(0)

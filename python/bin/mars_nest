@@ -11,7 +11,7 @@ import sys
 import re
 from geocal import *
 
-version = "August 26,2016"
+version = "June 27,2017"
 usage='''Usage:
   mars_nest [options] <ref_image> <ref_base_name> 
             <ref_image_resolution_name> <image> <image_base_name> 
@@ -70,6 +70,11 @@ Options:
   --band-image=d
        The band number to use if the input Second image contains
        multiple bands. [default: 1]
+
+  --border=d
+       Add a border of the given number of pixels when we resample. This
+       is useful for large corrections, where the image may shift outside of
+       the original bounding box. [default: 0]
 
   --fftsize=d
        FFT window size. Default should generally work, but if the
@@ -161,6 +166,7 @@ long_name_to_vicar = { "ref_image" : "refimg",
                        "image_resolution_name" : "imgresname",
                        "band_ref" : "bandref",
                        "band_image" : "bandimg",
+                       "border" : "border",
                        "hirise_correction" : "hirisecorr",
                        "use_projection" : "useproj",
                        "use_ref_image_projection" : "userefproj"}
@@ -177,7 +183,7 @@ def run_cmd(cmd):
     
 # We probably want to add a little bit of padding, but skip that for now.
 
-def resample_proj(fin, fref, fout, resize=False, fit_fref = True):
+def resample_proj(fin, fref, fout, resize=False, fit_fref = True, border=0):
     '''Project fin to same projection as fref. If resize is False, 
     leave fin in whatever its original resolution is. If resize is 
     True, also resize to the same resolution as fref.'''
@@ -189,6 +195,18 @@ def resample_proj(fin, fref, fout, resize=False, fit_fref = True):
     min_x, max_y, pix_size_x, pix_size_y = g[0], g[3], g[1], g[5]
     max_x = min_x + (x_size * pix_size_x)
     min_y = max_y + (y_size * pix_size_y)
+    if(min_x < max_x):
+        min_x -= border * abs(pix_size_x)
+        max_x += border * abs(pix_size_x)
+    else:
+        min_x += border * abs(pix_size_x)
+        max_x -= border * abs(pix_size_x)
+    if(min_y < max_y):
+        min_y -= border * abs(pix_size_y)
+        max_y += border * abs(pix_size_y)
+    else:
+        min_y += border * abs(pix_size_y)
+        max_y -= border * abs(pix_size_y)
     if(fit_fref):
         cmd.extend(["-te", repr(min_x), repr(min_y), repr(max_x), repr(max_y)])
     if(resize):
@@ -352,6 +370,12 @@ if(args.use_projection):
     resample_proj(img_fixed, use_projection_fixed, img_fixed_reproj,
                   fit_fref=False)
     img_fixed = img_fixed_reproj
+
+if(args.border == 0):    
+    import_file(img_fixed, img_res2)
+else:
+    resample_proj(img_fixed, img_fixed, img_res2, border=args.border)
+    
 # If resolutions are different, then don't resize when we reproject the
 # reference data. If on the other hand these are the same, then do resize
 # (which should be almost an identity transformation).
@@ -361,12 +385,11 @@ if(args.use_projection):
 # use_ref_image_projection or use_projection (or if the user just mildly
 # "lied" about the reference data and image data being the same resolution)
 if(args.ref_image_resolution_name != args.image_resolution_name):
-    resample_proj(refimg_fixed, img_fixed, refimg_res1)
+    resample_proj(refimg_fixed, img_res2, refimg_res1)
 else:
-    resample_proj(refimg_fixed, img_fixed, refimg_res1, resize=True)
+    resample_proj(refimg_fixed, img_res2, refimg_res1, resize=True)
 if(args.ref_image_resolution_name != args.image_resolution_name):
-    resample_proj(refimg_res1, img_fixed, refimg_res2, resize=True)
-import_file(img_fixed, img_res2)
+    resample_proj(refimg_res1, img_res2, refimg_res2, resize=True)
 if(args.ref_image_resolution_name != args.image_resolution_name):
     resample_proj(img_res2, refimg_res1, img_res1, resize=True)
 # Check that datasets are consistent

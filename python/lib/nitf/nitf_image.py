@@ -106,8 +106,8 @@ class NitfImageFromNumpy(NitfImage):
         ih.ncols = ncol
         ih.nbpr = 1
         ih.nbpc = 1
-        ih.npphb = ncol
-        ih.npphv = nrow
+        ih.nppbh = ncol
+        ih.nppbv = nrow
         ih.pvtype = "INT"
         ih.irep = "MONO"
         ih.icat = "VIS"

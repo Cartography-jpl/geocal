@@ -110,7 +110,10 @@ multiple bands.
 .variable border
 Add a border of the given
 number of pixels when we
-resample. This is useful for
+resample. This border is
+in pixels of the second
+image (not the reference
+image). This is useful for
 large corrections, where the
 image may shift outside of
 the original bounding box.

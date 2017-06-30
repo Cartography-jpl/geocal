@@ -72,9 +72,11 @@ Options:
        multiple bands. [default: 1]
 
   --border=d
-       Add a border of the given number of pixels when we resample. This
-       is useful for large corrections, where the image may shift outside of
-       the original bounding box. [default: 0]
+       Add a border of the given number of pixels when we
+       resample. This border is in pixels of the second image (not the
+       reference image). This is useful for large corrections, where
+       the image may shift outside of the original bounding
+       box. [default: 0]
 
   --fftsize=d
        FFT window size. Default should generally work, but if the

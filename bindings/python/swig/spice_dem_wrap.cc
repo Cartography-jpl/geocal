@@ -6634,7 +6634,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SpiceDem__v_naif_id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SpiceDem__v_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::SpiceDem *arg1 = (GeoCal::SpiceDem *) 0 ;
   void *argp1 = 0 ;
@@ -6650,7 +6650,7 @@ SWIGINTERN PyObject *_wrap_SpiceDem__v_naif_id(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceDem_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceDem__v_naif_id" "', argument " "1"" of type '" "GeoCal::SpiceDem const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceDem__v_naif_code" "', argument " "1"" of type '" "GeoCal::SpiceDem const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceDem > * >(argp1);
@@ -6663,7 +6663,7 @@ SWIGINTERN PyObject *_wrap_SpiceDem__v_naif_id(PyObject *SWIGUNUSEDPARM(self), P
   }
   {
     try {
-      result = (int)((GeoCal::SpiceDem const *)arg1)->naif_id();
+      result = (int)((GeoCal::SpiceDem const *)arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6717,49 +6717,6 @@ SWIGINTERN PyObject *_wrap_SpiceDem__v_time(PyObject *SWIGUNUSEDPARM(self), PyOb
     boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)result));
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_SpiceDem__v_spacecraft_reference_frame_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::SpiceDem *arg1 = (GeoCal::SpiceDem *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SpiceDem const > tempshared1 ;
-  boost::shared_ptr< GeoCal::SpiceDem const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceDem_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceDem__v_spacecraft_reference_frame_name" "', argument " "1"" of type '" "GeoCal::SpiceDem const *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceDem > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceDem > * >(argp1);
-      arg1 = const_cast< GeoCal::SpiceDem * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceDem > * >(argp1);
-      arg1 = const_cast< GeoCal::SpiceDem * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::SpiceDem const *)arg1)->spacecraft_reference_frame_name();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
   return NULL;
@@ -6842,7 +6799,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"new_SpiceDem", _wrap_new_SpiceDem, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::SpiceDem::SpiceDem(int Naif_id, const Time &Tm, const std::vector< std::string >\n"
+		"GeoCal::SpiceDem::SpiceDem(int Naif_code, const Time &Tm, const std::vector< std::string >\n"
 		"&Kernel_list)\n"
 		"\n"
 		""},
@@ -6851,9 +6808,9 @@ static PyMethodDef SwigMethods[] = {
 		"const SpiceKernelList& GeoCal::SpiceDem::kernel_list() const\n"
 		"List of kernels that should be loaded with this class. \n"
 		""},
-	 { (char *)"SpiceDem__v_naif_id", (PyCFunction)_wrap_SpiceDem__v_naif_id, METH_O, (char *)"\n"
+	 { (char *)"SpiceDem__v_naif_code", (PyCFunction)_wrap_SpiceDem__v_naif_code, METH_O, (char *)"\n"
 		"\n"
-		"int GeoCal::SpiceDem::naif_id() const\n"
+		"int GeoCal::SpiceDem::naif_code() const\n"
 		"\n"
 		""},
 	 { (char *)"SpiceDem__v_time", (PyCFunction)_wrap_SpiceDem__v_time, METH_O, (char *)"\n"
@@ -6861,7 +6818,6 @@ static PyMethodDef SwigMethods[] = {
 		"const Time& GeoCal::SpiceDem::time() const\n"
 		"\n"
 		""},
-	 { (char *)"SpiceDem__v_spacecraft_reference_frame_name", (PyCFunction)_wrap_SpiceDem__v_spacecraft_reference_frame_name, METH_O, NULL},
 	 { (char *)"delete_SpiceDem", (PyCFunction)_wrap_delete_SpiceDem, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::SpiceDem::~SpiceDem()\n"

@@ -205,7 +205,7 @@ class SpiceDem(geocal_swig.dem.Dem):
     def __init__(self, *args):
         """
 
-        GeoCal::SpiceDem::SpiceDem(int Naif_id, const Time &Tm, const std::vector< std::string >
+        GeoCal::SpiceDem::SpiceDem(int Naif_code, const Time &Tm, const std::vector< std::string >
         &Kernel_list)
 
         """
@@ -225,18 +225,18 @@ class SpiceDem(geocal_swig.dem.Dem):
         return self._v_kernel_list()
 
 
-    def _v_naif_id(self):
+    def _v_naif_code(self):
         """
 
-        int GeoCal::SpiceDem::naif_id() const
+        int GeoCal::SpiceDem::naif_code() const
 
         """
-        return _spice_dem.SpiceDem__v_naif_id(self)
+        return _spice_dem.SpiceDem__v_naif_code(self)
 
 
     @property
-    def naif_id(self):
-        return self._v_naif_id()
+    def naif_code(self):
+        return self._v_naif_code()
 
 
     def _v_time(self):
@@ -253,19 +253,13 @@ class SpiceDem(geocal_swig.dem.Dem):
         return self._v_time()
 
 
-    @property
-    def spacecraft_reference_frame_name(self):
-        return self._v_spacecraft_reference_frame_name()
-
-
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _spice_dem.delete_SpiceDem
 SpiceDem._v_kernel_list = new_instancemethod(_spice_dem.SpiceDem__v_kernel_list, None, SpiceDem)
-SpiceDem._v_naif_id = new_instancemethod(_spice_dem.SpiceDem__v_naif_id, None, SpiceDem)
+SpiceDem._v_naif_code = new_instancemethod(_spice_dem.SpiceDem__v_naif_code, None, SpiceDem)
 SpiceDem._v_time = new_instancemethod(_spice_dem.SpiceDem__v_time, None, SpiceDem)
-SpiceDem._v_spacecraft_reference_frame_name = new_instancemethod(_spice_dem.SpiceDem__v_spacecraft_reference_frame_name, None, SpiceDem)
 SpiceDem_swigregister = _spice_dem.SpiceDem_swigregister
 SpiceDem_swigregister(SpiceDem)
 

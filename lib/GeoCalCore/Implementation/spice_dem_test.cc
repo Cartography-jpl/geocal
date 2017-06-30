@@ -19,6 +19,8 @@ BOOST_AUTO_TEST_CASE(basic)
   klist.push_back("/data/smyth/DawnGpuWork/SPC170222/dawn_ceres_SPC170222.tpc");
   klist.push_back("/data/smyth/DawnGpuWork/SPC170222/traj_ceres18c.bsp");
   SpiceDem dem(2000001, Time::parse_time("2016-01-01T00:00:00Z"), klist);
+  Planetocentric gp(39.3143, -4.11205, 0, dem.naif_code());
+  BOOST_CHECK_CLOSE(dem.height_reference_surface(gp), -9513.05, 1e-2);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)
@@ -40,11 +42,11 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<SpiceDem> dem
     (new SpiceDem(2000001, Time::parse_time("2016-01-01T00:00:00Z"), klist));
   std::string d = serialize_write_string(dem);
-  if(true)
+  if(false)
     std::cerr << d;
   boost::shared_ptr<SpiceDem> demr = 
     serialize_read_string<SpiceDem>(d);
-  BOOST_CHECK_EQUAL(demr->naif_id(), dem->naif_id());
+  BOOST_CHECK_EQUAL(demr->naif_code(), dem->naif_code());
   BOOST_CHECK_EQUAL(demr->kernel_list().kernel_list()[0], klist[0]);
 }
 

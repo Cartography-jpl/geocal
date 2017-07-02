@@ -209,6 +209,10 @@ class DemToRaster(geocal_swig.calc_raster.CalcRaster):
 
         """
         _dem_to_raster.DemToRaster_swiginit(self, _dem_to_raster.new_DemToRaster(D, Mi))
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _dem_to_raster.delete_DemToRaster
 DemToRaster_swigregister = _dem_to_raster.DemToRaster_swigregister
 DemToRaster_swigregister(DemToRaster)

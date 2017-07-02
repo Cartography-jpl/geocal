@@ -748,6 +748,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/raster_averaged.cc \
 	@srcimplementation@/raster_subsample.cc \
 	@srcimplementation@/calc_raster.cc \
+	@srcimplementation@/dem_to_raster.cc \
 	@srcimplementation@/calc_raster_multi_band.cc \
 	@srcimplementation@/magnify_bilinear.cc \
 	@srcimplementation@/magnify_replicate.cc \
@@ -918,6 +919,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-raster_averaged.lo \
 	@srcimplementation@/libgeocal_la-raster_subsample.lo \
 	@srcimplementation@/libgeocal_la-calc_raster.lo \
+	@srcimplementation@/libgeocal_la-dem_to_raster.lo \
 	@srcimplementation@/libgeocal_la-calc_raster_multi_band.lo \
 	@srcimplementation@/libgeocal_la-magnify_bilinear.lo \
 	@srcimplementation@/libgeocal_la-magnify_replicate.lo \
@@ -2411,6 +2413,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/raster_averaged.cc \
 	@srcimplementation@/raster_subsample.cc \
 	@srcimplementation@/calc_raster.cc \
+	@srcimplementation@/dem_to_raster.cc \
 	@srcimplementation@/calc_raster_multi_band.cc \
 	@srcimplementation@/magnify_bilinear.cc \
 	@srcimplementation@/magnify_replicate.cc \
@@ -3994,6 +3997,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-calc_raster.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-dem_to_raster.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-calc_raster_multi_band.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -5055,6 +5061,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_match.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_tiled_file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_to_raster.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-did_datum.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-eci_tod_burl.Plo@am__quote@
@@ -7201,6 +7208,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/calc_raster.cc' object='@srcimplementation@/libgeocal_la-calc_raster.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-calc_raster.lo `test -f '@srcimplementation@/calc_raster.cc' || echo '$(srcdir)/'`@srcimplementation@/calc_raster.cc
+
+@srcimplementation@/libgeocal_la-dem_to_raster.lo: @srcimplementation@/dem_to_raster.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-dem_to_raster.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-dem_to_raster.Tpo -c -o @srcimplementation@/libgeocal_la-dem_to_raster.lo `test -f '@srcimplementation@/dem_to_raster.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_to_raster.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-dem_to_raster.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-dem_to_raster.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/dem_to_raster.cc' object='@srcimplementation@/libgeocal_la-dem_to_raster.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-dem_to_raster.lo `test -f '@srcimplementation@/dem_to_raster.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_to_raster.cc
 
 @srcimplementation@/libgeocal_la-calc_raster_multi_band.lo: @srcimplementation@/calc_raster_multi_band.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-calc_raster_multi_band.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Tpo -c -o @srcimplementation@/libgeocal_la-calc_raster_multi_band.lo `test -f '@srcimplementation@/calc_raster_multi_band.cc' || echo '$(srcdir)/'`@srcimplementation@/calc_raster_multi_band.cc

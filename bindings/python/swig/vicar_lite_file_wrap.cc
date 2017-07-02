@@ -8975,6 +8975,99 @@ SWIGINTERN PyObject *_wrap_new_VicarLiteDem__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   bool arg2 ;
   boost::shared_ptr< GeoCal::Datum > *arg3 = 0 ;
   int arg4 ;
+  int arg5 ;
+  int res1 = SWIG_OLDOBJ ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Datum > tempshared3 ;
+  boost::shared_ptr< GeoCal::Datum > temp2shared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  GeoCal::VicarLiteDem *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_VicarLiteDem" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_VicarLiteDem" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_VicarLiteDem" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Datum_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_VicarLiteDem" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::Datum > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::Datum > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Datum > * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Datum > * >(argp3) : &tempshared3;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_VicarLiteDem" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_VicarLiteDem" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      result = (GeoCal::VicarLiteDem *)new GeoCal::VicarLiteDem((std::string const &)*arg1,arg2,(boost::shared_ptr< GeoCal::Datum > const &)*arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::VicarLiteDem > *smartresult = result ? new boost::shared_ptr<  GeoCal::VicarLiteDem >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarLiteDem_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_VicarLiteDem__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  bool arg2 ;
+  boost::shared_ptr< GeoCal::Datum > *arg3 = 0 ;
+  int arg4 ;
   int res1 = SWIG_OLDOBJ ;
   bool val2 ;
   int ecode2 = 0 ;
@@ -9054,7 +9147,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarLiteDem__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarLiteDem__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   bool arg2 ;
@@ -9131,7 +9224,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarLiteDem__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarLiteDem__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   bool arg2 ;
@@ -9178,7 +9271,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_VicarLiteDem__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_VicarLiteDem__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -9219,28 +9312,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_VicarLiteDem(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[5] = {
+  PyObject *argv[6] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_VicarLiteDem",0,4,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_VicarLiteDem",0,5,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_VicarLiteDem__SWIG_3(self, argc, argv);
+    return _wrap_new_VicarLiteDem__SWIG_4(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_VicarLiteDem__SWIG_2(self, argc, argv);
+    return _wrap_new_VicarLiteDem__SWIG_3(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_VicarLiteDem__SWIG_1(self, argc, argv);
+    return _wrap_new_VicarLiteDem__SWIG_2(self, argc, argv);
   }
   if (argc == 4) {
+    return _wrap_new_VicarLiteDem__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
     return _wrap_new_VicarLiteDem__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_VicarLiteDem'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::VicarLiteDem::VicarLiteDem(std::string const &,bool,boost::shared_ptr< GeoCal::Datum > const &,int,int)\n"
     "    GeoCal::VicarLiteDem::VicarLiteDem(std::string const &,bool,boost::shared_ptr< GeoCal::Datum > const &,int)\n"
     "    GeoCal::VicarLiteDem::VicarLiteDem(std::string const &,bool,boost::shared_ptr< GeoCal::Datum > const &)\n"
     "    GeoCal::VicarLiteDem::VicarLiteDem(std::string const &,bool)\n"
@@ -9617,12 +9714,15 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"GeoCal::VicarLiteDem::VicarLiteDem(const std::string &Fname, bool Outside_dem_is_error=false, const\n"
 		"boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new\n"
-		"NoDatum()), int Band_id=1)\n"
+		"NoDatum()), int Band_id=1, int Naif_code=Geodetic::EARTH_NAIF_CODE)\n"
 		"Constructor.\n"
 		"\n"
 		"If Outside_dem_is_error is true, then calls for Dem data outside of\n"
 		"the range of the Dem cause an exception to be thrown, otherwise we\n"
-		"just return a height of 0. \n"
+		"just return a height of 0.\n"
+		"\n"
+		"Probably should have the Naif_code stored as metadata in the file, but\n"
+		"for now we just explicitly pass this in. \n"
 		""},
 	 { (char *)"VicarLiteDem__v_file", (PyCFunction)_wrap_VicarLiteDem__v_file, METH_O, (char *)"\n"
 		"\n"

@@ -250,11 +250,26 @@ class DemMapInfo(geocal_swig.dem.Dem):
     def outside_dem_is_error(self):
         return self._v_outside_dem_is_error()
 
+
+    def _v_naif_code(self):
+        """
+
+        int GeoCal::DemMapInfo::naif_code() const
+
+        """
+        return _dem_map_info.DemMapInfo__v_naif_code(self)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
     __swig_destroy__ = _dem_map_info.delete_DemMapInfo
 DemMapInfo._v_datum = new_instancemethod(_dem_map_info.DemMapInfo__v_datum, None, DemMapInfo)
 DemMapInfo._v_map_info = new_instancemethod(_dem_map_info.DemMapInfo__v_map_info, None, DemMapInfo)
 DemMapInfo.height_datum = new_instancemethod(_dem_map_info.DemMapInfo_height_datum, None, DemMapInfo)
 DemMapInfo._v_outside_dem_is_error = new_instancemethod(_dem_map_info.DemMapInfo__v_outside_dem_is_error, None, DemMapInfo)
+DemMapInfo._v_naif_code = new_instancemethod(_dem_map_info.DemMapInfo__v_naif_code, None, DemMapInfo)
 DemMapInfo_swigregister = _dem_map_info.DemMapInfo_swigregister
 DemMapInfo_swigregister(DemMapInfo)
 

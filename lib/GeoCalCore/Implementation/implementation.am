@@ -21,6 +21,7 @@ libgeocal_la_SOURCES+= @srcimplementation@/raster_subsample.cc
 geocalinc_HEADERS+= @srcimplementation@/calc_raster.h
 libgeocal_la_SOURCES+= @srcimplementation@/calc_raster.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_to_raster.h
+libgeocal_la_SOURCES+= @srcimplementation@/dem_to_raster.cc
 geocalinc_HEADERS+= @srcimplementation@/calc_raster_multi_band.h
 libgeocal_la_SOURCES+= @srcimplementation@/calc_raster_multi_band.cc
 geocalinc_HEADERS+= @srcimplementation@/magnify_bilinear.h

@@ -25,6 +25,11 @@ protected:
   }
 private:
   boost::shared_ptr<Dem> dem;
+  DemToRaster() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+GEOCAL_EXPORT_KEY(DemToRaster);
 #endif

@@ -871,16 +871,20 @@ public:
 /// Constructor. If Outside_dem_is_error is true, then calls for Dem
 /// data outside of the range of the Dem cause an exception to be
 /// thrown, otherwise we just return a height of 0.
+///
+/// Probably should have the Naif_code stored as metadata in the file,
+/// but for now we just explicitly pass this in.
 //-----------------------------------------------------------------------
 
   VicarLiteDem(const std::string& Fname, 
 	       bool Outside_dem_is_error = false,
 	       const boost::shared_ptr<Datum>& D = 
 	       boost::shared_ptr<Datum>(new NoDatum()),
-	       int Band_id = 1)
+	       int Band_id = 1,
+	       int Naif_code=Geodetic::EARTH_NAIF_CODE)
     : band_(Band_id - 1), f_(new VicarLiteFile(Fname))
   {
-    initialize(D, f_->map_info(), Outside_dem_is_error);
+    initialize(D, f_->map_info(), Outside_dem_is_error, Naif_code);
     range_check(band_, 0, f_->number_band());
   }
   virtual ~VicarLiteDem() {}

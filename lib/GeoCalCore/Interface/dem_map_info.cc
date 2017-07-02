@@ -1,5 +1,6 @@
 #include "dem_map_info.h"
 #include "geocal_serialize_support.h"
+#include "planet_coordinate.h"
 #include <cmath>
 
 using namespace GeoCal;
@@ -12,6 +13,10 @@ void DemMapInfo::serialize(Archive & ar, const unsigned int version)
   GEOCAL_BASE(DemMapInfo, Dem);
   ar & GEOCAL_NVP_(datum) & GEOCAL_NVP_(map_info) 
     & GEOCAL_NVP_(outside_dem_is_error);
+  // Older version didn't have naif_code_. The default was to always
+  // assume EARTH_NAIF_CODE.
+  if(version > 0)
+    ar & GEOCAL_NVP_(naif_code);
 }
 
 GEOCAL_IMPLEMENT(DemMapInfo);
@@ -143,9 +148,16 @@ boost::shared_ptr<CartesianFixed> DemMapInfo::intersect
 boost::shared_ptr<GroundCoordinate> 
 DemMapInfo::surface_point(const GroundCoordinate& Gp) const
 {
-  Geodetic g(Gp);
-  return boost::shared_ptr<GroundCoordinate>(new 
+  if(naif_code_ == Geodetic::EARTH_NAIF_CODE) {
+    Geodetic g(Gp);
+    return boost::shared_ptr<GroundCoordinate>(new 
      Geodetic(g.latitude(), g.longitude(), height_reference_surface(g)));
+  }
+  Planetocentric g(Gp);
+  return boost::shared_ptr<GroundCoordinate>
+    (new Planetocentric(g.latitude(), g.longitude(),
+			height_reference_surface(g),
+			g.naif_code()));
 }
 
 //-----------------------------------------------------------------------
@@ -157,9 +169,11 @@ DemMapInfo::surface_point(const GroundCoordinate& Gp) const
 
 void DemMapInfo::initialize(const boost::shared_ptr<Datum>& D, 
 			    const MapInfo& M, 
-			    bool Outside_dem_is_error)
+			    bool Outside_dem_is_error,
+			    int Naif_code)
 {
   datum_ = D;
   map_info_ = M;
   outside_dem_is_error_ = Outside_dem_is_error;
+  naif_code_ = Naif_code;
 }

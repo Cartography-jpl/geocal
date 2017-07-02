@@ -1,3 +1,4 @@
+from __future__ import print_function
 from .nitf_tre import *
 
 hlp = '''This is the STDIDC TRE, Standard ID

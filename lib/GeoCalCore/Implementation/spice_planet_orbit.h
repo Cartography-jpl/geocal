@@ -1,6 +1,7 @@
 #ifndef SPICE_PLANET_ORBIT_H
 #define SPICE_PLANET_ORBIT_H
 #include "orbit.h"
+#include "spice_kernel_list.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -81,21 +82,16 @@ public:
 /// List of kernels that should be loaded with this class.
 //-----------------------------------------------------------------------
 
-  const std::vector<std::string> kernel_list() const { return kernel_list_;}
+  const SpiceKernelList& kernel_list() const { return kernel_list_;}
 private:
   std::string target_name_;
   std::string spacecraft_reference_frame_name_;
-  std::vector<std::string> kernel_list_;
+  SpiceKernelList kernel_list_;
   int naif_id_;
-  void load_kernel();
   SpicePlanetOrbit() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
-  template<class Archive>
-  void save(Archive & ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive & ar, const unsigned int version);
 };
 }
 

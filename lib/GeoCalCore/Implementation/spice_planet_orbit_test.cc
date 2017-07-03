@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_EQUAL(orb.target_name(), "GLL");
   BOOST_CHECK_EQUAL(orb.spacecraft_reference_frame_name(), "GLL_SCAN_PLANE");
   BOOST_CHECK_EQUAL(orb.naif_id(), (int) PlanetConstant::EUROPA_NAIF_CODE);
-  BOOST_CHECK_EQUAL(orb.kernel_list()[0], klist[0]);
+  BOOST_CHECK_EQUAL(orb.kernel_list().kernel_list()[0], klist[0]);
   double day_to_sec = 24 * 60 * 60;
   Time tm3800 = Time::parse_time("1997-01-01T12:18:20.130Z") + 
     (350 - 1) * day_to_sec + 1;
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_EQUAL(orbr->target_name(), "GLL");
   BOOST_CHECK_EQUAL(orbr->spacecraft_reference_frame_name(), "GLL_SCAN_PLANE");
   BOOST_CHECK_EQUAL(orbr->naif_id(), (int) PlanetConstant::EUROPA_NAIF_CODE);
-  BOOST_CHECK_EQUAL(orbr->kernel_list()[0], klist[0]);
+  BOOST_CHECK_EQUAL(orbr->kernel_list().kernel_list()[0], klist[0]);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

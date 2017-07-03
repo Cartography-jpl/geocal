@@ -39,3 +39,8 @@ def test_cib01_mapinfo():
     m = cib01_mapinfo()
     assert m.number_y_pixel == 8795732
     assert m.number_x_pixel == 27109425
+
+@require_afids_data    
+def test_planet_mapinfo():
+    mi = planet_mapinfo(PlanetConstant.MARS_NAIF_CODE, 35.0)
+    assert_almost_equal(mi.resolution_meter, 35.0, 3)

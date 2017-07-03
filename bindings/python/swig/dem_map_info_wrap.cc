@@ -6306,6 +6306,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DemMapInfo__v_naif_code(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo__v_naif_code" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::DemMapInfo const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_DemMapInfo(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
@@ -6396,6 +6439,11 @@ static PyMethodDef SwigMethods[] = {
 		"bool GeoCal::DemMapInfo::outside_dem_is_error() const\n"
 		"If true, then calling with values outside the range of area of the DEM\n"
 		"triggers an exception, otherwise we just return a height of 0. \n"
+		""},
+	 { (char *)"DemMapInfo__v_naif_code", (PyCFunction)_wrap_DemMapInfo__v_naif_code, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::DemMapInfo::naif_code() const\n"
+		"\n"
 		""},
 	 { (char *)"delete_DemMapInfo", (PyCFunction)_wrap_delete_DemMapInfo, METH_O, (char *)"\n"
 		"\n"

@@ -9,12 +9,16 @@ import matplotlib.pyplot as plt
 version = "June 25, 2013"
 usage="""Usage:
   tp_show [options] <igc> <tiepoint_col> <tiepoint_index>
+  tp_show [options] <igc> <tiepoint_col> <surface_image> <tiepoint_index>
   tp_show -h | --help
   tp_show -v | --version
   
 Display the given tie point. The image ground connection collection and 
 tiepoint collection are in the standard "file:key" format, e.g., 
 "my_data.db:tpcol".
+
+If you give a surface_image, we use the projected data instead of the original
+data.
 
 Options:
   -h --help         
@@ -49,8 +53,12 @@ else:
     ref_image = None
 
 mi = None
+simg = None
 if(args.project_ref_image):
     mi = ref_image.map_info
+if(args.surface_image):
+    simg = read_shelve(args.surface_image)
 tp.display(igc, sz = args.size, ref_image = ref_image, 
-           number_row = args.number_row, map_info = mi)
+           number_row = args.number_row, map_info = mi,
+           surface_image=simg)
 plt.show()

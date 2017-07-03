@@ -1,6 +1,5 @@
 #include "spice_planet_orbit.h"
 #include "geocal_serialize_support.h"
-#include "geocal_internal_config.h"
 #include "spice_helper.h"
 #include "planet_coordinate.h"
 #include <boost/filesystem.hpp>
@@ -10,18 +9,6 @@ using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
 template<class Archive>
-void SpicePlanetOrbit::save(Archive & ar, const unsigned int version) const
-{
-  // Nothing more to do
-}
-
-template<class Archive>
-void SpicePlanetOrbit::load(Archive & ar, const unsigned int version)
-{
-  load_kernel();
-}
-
-template<class Archive>
 void SpicePlanetOrbit::serialize(Archive & ar, const unsigned int version) 
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
@@ -29,7 +16,6 @@ void SpicePlanetOrbit::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(spacecraft_reference_frame_name)
     & GEOCAL_NVP_(kernel_list)
     & GEOCAL_NVP_(naif_id);
-  boost::serialization::split_member(ar, *this, version);
 }
 
 GEOCAL_IMPLEMENT(SpicePlanetOrbit);
@@ -90,7 +76,6 @@ SpicePlanetOrbit::SpicePlanetOrbit
     kernel_list_(Kernel_list),
     naif_id_(Naif_id)
 {
-  load_kernel();
 }
 
 // Return orbit data
@@ -107,20 +92,7 @@ void SpicePlanetOrbit::print(std::ostream& Os) const
      << "  Target Name:                " << target_name_ << "\n"
      << "  Spacecraft Reference Frame: " << spacecraft_reference_frame_name_
      << "\n"
-     << "  Body:                       " << PlanetConstant::name(naif_id_)
-     << "  Kernel list:\n";
-  if(kernel_list_.size() == 0)
-    Os << "    None\n";
-  BOOST_FOREACH(const std::string& f, kernel_list_)
-    Os << "    " << f << "\n";
+     << "  Body:                       " << PlanetConstant::name(naif_id_);
 }
 
-void SpicePlanetOrbit::load_kernel()
-{
-  BOOST_FOREACH(const std::string& f, kernel_list_) {
-    boost::filesystem::path p(f);
-    if(!SpiceHelper::kernel_loaded(p.filename().string()))
-      SpiceHelper::add_kernel(f);
-  }
-}
 

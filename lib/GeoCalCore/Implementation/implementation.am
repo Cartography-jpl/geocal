@@ -21,6 +21,7 @@ libgeocal_la_SOURCES+= @srcimplementation@/raster_subsample.cc
 geocalinc_HEADERS+= @srcimplementation@/calc_raster.h
 libgeocal_la_SOURCES+= @srcimplementation@/calc_raster.cc
 geocalinc_HEADERS+= @srcimplementation@/dem_to_raster.h
+libgeocal_la_SOURCES+= @srcimplementation@/dem_to_raster.cc
 geocalinc_HEADERS+= @srcimplementation@/calc_raster_multi_band.h
 libgeocal_la_SOURCES+= @srcimplementation@/calc_raster_multi_band.cc
 geocalinc_HEADERS+= @srcimplementation@/magnify_bilinear.h
@@ -130,6 +131,10 @@ geocalinc_HEADERS+= @srcimplementation@/spice_orbit.h
 libgeocal_la_SOURCES+= @srcimplementation@/spice_orbit.cc
 geocalinc_HEADERS+= @srcimplementation@/spice_planet_orbit.h
 libgeocal_la_SOURCES+= @srcimplementation@/spice_planet_orbit.cc
+geocalinc_HEADERS+= @srcimplementation@/spice_kernel_list.h
+libgeocal_la_SOURCES+= @srcimplementation@/spice_kernel_list.cc
+geocalinc_HEADERS+= @srcimplementation@/spice_dem.h
+libgeocal_la_SOURCES+= @srcimplementation@/spice_dem.cc
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -318,6 +323,10 @@ SWIG_SRC += @swigsrc@/spice_orbit_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/spice_orbit.i
 SWIG_SRC += @swigsrc@/spice_planet_orbit_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/spice_planet_orbit.i
+SWIG_SRC += @swigsrc@/spice_kernel_list_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/spice_kernel_list.i
+SWIG_SRC += @swigsrc@/spice_dem_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/spice_dem.i
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
@@ -368,6 +377,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/orbit_time_shift_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/tle_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_planet_orbit_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/spice_dem_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

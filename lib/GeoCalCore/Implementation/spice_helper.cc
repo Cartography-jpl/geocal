@@ -6,8 +6,10 @@
 #include "geocal_quaternion.h"
 #include "ground_coordinate.h"
 #include "dir_change.h"
+#include "planet_coordinate.h"
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/make_shared.hpp>
 #include <iostream>
 #include <sys/types.h>
 #include <dirent.h>
@@ -71,6 +73,12 @@ bool SpiceHelper::kernel_loaded(const std::string& Kernel)
   SpiceBoolean found;
   kinfo_c(Kernel.c_str(), 1000,1000, filetype, source, &handle, &found);
   spice_error_check();
+  if(!found) {
+    // Try using the full path
+    std::string full_path = boost::filesystem::absolute(Kernel).string();
+    kinfo_c(full_path.c_str(), 1000,1000, filetype, source, &handle, &found);
+    spice_error_check();
+  }
   return found;
 #else
   throw SpiceNotAvailableException();
@@ -96,10 +104,11 @@ void SpiceHelper::add_kernel(const std::string& Kernel, bool Skip_save)
   }
   std::string dir = p.parent_path().string();
   std::string fname = p.filename().string();
+  std::string full_path = boost::filesystem::absolute(p).string();
   if(dir == "")
     dir = ".";
   DirChange d(dir);
-  furnsh_c(fname.c_str());
+  furnsh_c(full_path.c_str());
   spice_error_check();
 #else 
   throw SpiceNotAvailableException();
@@ -371,6 +380,35 @@ void SpiceHelper::state_vector
 }
 
 //-----------------------------------------------------------------------
+/// Return a surface point from latsrf. Note that although spice takes
+/// radians this function takes degrees. This does a single point, we
+/// can add something taking an array in the future if needed.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GroundCoordinate> SpiceHelper::latsrf
+(int Body_id, const Time& T, double Lat_deg, double Lon_deg)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  std::string body_name = SpiceHelper::body_name(Body_id);
+  std::string fixed_frame_name = SpiceHelper::fixed_frame_name(Body_id);
+  double lonlat[2];
+  lonlat[0] = Lon_deg * Constant::deg_to_rad;
+  lonlat[1] = Lat_deg * Constant::deg_to_rad;
+  double res[3];
+  latsrf_c("DSK/UNPRIORITIZED", const_cast<char*>(body_name.c_str()), T.et(),
+	   const_cast<char*>(fixed_frame_name.c_str()),
+	   1, &lonlat, &res);
+  spice_error_check();
+  return boost::make_shared<PlanetFixed>(res[0] * 1000.0,
+					 res[1] * 1000.0,
+					 res[2] * 1000.0, Body_id);
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Return quaternion that converts between the two named coordinate 
 /// systems.
 //-----------------------------------------------------------------------
@@ -421,6 +459,37 @@ void SpiceHelper::conversion_matrix2(const std::string& From,
 #endif
 }
 
+
+//-----------------------------------------------------------------------
+/// Get ID given a name.
+//-----------------------------------------------------------------------
+int SpiceHelper::name_to_body(const std::string& Name)
+{
+  // Handle some special cases for speed.
+  if(Name == "EARTH")
+    return 399;
+  if(Name == "MARS")
+    return 499;
+  if(Name == "EUROPA")
+    return 502;
+  if(Name == "MOON")
+    return 301;
+#ifdef HAVE_SPICE
+  spice_setup();
+  int res;
+  SpiceBoolean found;
+  bodn2c_c(Name.c_str(), &res, &found);
+  spice_error_check();
+  if(!found) {
+    Exception e;
+    e << "Could not find NAIF Code for " << Name;
+    throw e;
+  }
+  return res;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
 
 //-----------------------------------------------------------------------
 /// Return the body name for the given id.

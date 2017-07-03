@@ -273,6 +273,20 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
         return _spice_planet_orbit.SpicePlanetOrbit_set_max_time(self, Tmax)
 
 
+    def _v_kernel_list(self):
+        """
+
+        const SpiceKernelList& GeoCal::SpicePlanetOrbit::kernel_list() const
+        List of kernels that should be loaded with this class. 
+        """
+        return _spice_planet_orbit.SpicePlanetOrbit__v_kernel_list(self)
+
+
+    @property
+    def kernel_list(self):
+        return self._v_kernel_list()
+
+
     def _v_naif_id(self):
         """
 
@@ -316,20 +330,6 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
         return self._v_spacecraft_reference_frame_name()
 
 
-    def _v_kernel_list(self):
-        """
-
-        const std::vector<std::string> GeoCal::SpicePlanetOrbit::kernel_list() const
-        List of kernels that should be loaded with this class. 
-        """
-        return _spice_planet_orbit.SpicePlanetOrbit__v_kernel_list(self)
-
-
-    @property
-    def kernel_list(self):
-        return self._v_kernel_list()
-
-
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -337,10 +337,10 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
 SpicePlanetOrbit.orbit_data = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_orbit_data, None, SpicePlanetOrbit)
 SpicePlanetOrbit.set_min_time = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_set_min_time, None, SpicePlanetOrbit)
 SpicePlanetOrbit.set_max_time = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_set_max_time, None, SpicePlanetOrbit)
+SpicePlanetOrbit._v_kernel_list = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_kernel_list, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_naif_id = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_naif_id, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_target_name = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_target_name, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_spacecraft_reference_frame_name = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_spacecraft_reference_frame_name, None, SpicePlanetOrbit)
-SpicePlanetOrbit._v_kernel_list = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_kernel_list, None, SpicePlanetOrbit)
 SpicePlanetOrbit_swigregister = _spice_planet_orbit.SpicePlanetOrbit_swigregister
 SpicePlanetOrbit_swigregister(SpicePlanetOrbit)
 

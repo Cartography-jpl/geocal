@@ -1,3 +1,4 @@
+from __future__ import print_function
 from .nitf_field import *
 
 hlp = '''This is a NITF image subheader. The field names can be pretty

@@ -8,6 +8,7 @@ parm imgresname type=(string,99) count=1
 parm autofit type=int default=14 valid=(0:500)
 parm bandref type=int count=1 default=1
 parm bandimg type=int count=1 default=1
+parm border type=int count=1 default=0
 parm fftsize type=int count=1 default=256 valid=32:1024
 parm fftgrid type=int count=2 default=(42,42) valid=2:64
 parm hirisecorr type=(string,4) count=(0:1) valid=(n,y) default=n
@@ -106,6 +107,16 @@ multiple bands.
 The band number to use if the
 input Second image contains
 multiple bands.
+.variable border
+Add a border of the given
+number of pixels when we
+resample. This border is
+in pixels of the second
+image (not the reference
+image). This is useful for
+large corrections, where the
+image may shift outside of
+the original bounding box.
 .variable fftsize
 FFT window size. Default should
 generally work, but if the over-

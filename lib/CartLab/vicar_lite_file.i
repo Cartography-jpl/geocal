@@ -90,7 +90,8 @@ public:
 	       bool Outside_dem_is_error = false,
 	       const boost::shared_ptr<Datum>& D = 
 	       boost::shared_ptr<Datum>(new NoDatum()),
-	       int Band = 0);
+	       int Band = 0,
+	       int Naif_code=Geodetic::EARTH_NAIF_CODE);
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
   virtual double elevation(int Y_index, int X_index) const;
   %python_attribute(band, int)

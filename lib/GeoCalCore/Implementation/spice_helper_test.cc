@@ -7,6 +7,7 @@
 #include "ecr.h"
 #include "geodetic.h"
 #include <iostream>
+#include <boost/filesystem.hpp>
 
 using namespace GeoCal;
 
@@ -66,8 +67,9 @@ BOOST_AUTO_TEST_CASE(basic_test)
   }
   CartesianFixed::toolkit_coordinate_interface = keep;
   Time::toolkit_time_interface = keep2;
-  BOOST_CHECK(SpiceHelper::kernel_loaded("geocal.ker"));
-  BOOST_CHECK(!SpiceHelper::kernel_loaded("geocal_fake.ker"));
+  std::string bname = boost::filesystem::absolute(std::string(getenv("SPICEDATA"))).string() + "/";
+  BOOST_CHECK(SpiceHelper::kernel_loaded(bname + "geocal.ker"));
+  BOOST_CHECK(!SpiceHelper::kernel_loaded(bname + "geocal_fake.ker"));
   BOOST_CHECK(SpiceHelper::kernel_loaded("fk/planets/eci_tod.tf"));
 }
 

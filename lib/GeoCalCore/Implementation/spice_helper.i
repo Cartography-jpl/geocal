@@ -14,11 +14,15 @@
 %}
 %import "geocal_quaternion.i"
 %import "geocal_time.i"
+%import "ground_coordinate.i"
 %include "geocal_time_include.i"
 namespace GeoCal {
 class SpiceHelper  {
 public:
+  static int name_to_body(const std::string& Name);
   static std::string body_name(int Body_id);
+  static boost::shared_ptr<GroundCoordinate>
+  latsrf(int Body_id, const Time& Tm, double Lat_deg, double Lon_deg);
   static std::string fixed_frame_name(int Body_id);
   static bool spice_available();
   static void spice_setup(const std::string& Kernel = "geocal.ker",

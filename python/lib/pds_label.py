@@ -36,7 +36,7 @@ def pds_label(fname):
             m = re.match(b'"(.*)"', v)
             if(m):
                 v = m.group(1)
-            res[k.decode("utf-8")] = v.decode("utf-8")
+            res[k.decode("utf-8")] = str(v.decode("utf-8"))
     return res
 
 class SpiceKernelByTime(object):

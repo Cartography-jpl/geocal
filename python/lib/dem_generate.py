@@ -109,11 +109,16 @@ class DemGenerate(object):
                  surface_image1 = None, surface_image2 = None,
                  max_dist_good_point = 0.5,
                  all_image = False):
-        # Temporary here, we'll need to find a cleaner way to do this
-        #self.coordinate_system = EuropaPlanetocentric
-        self.coordinate_system = Geodetic
         self.igc1 = image_ground_connnection1
         self.igc2 = image_ground_connnection2
+        # We may need to have more complicated logic to figure our the
+        # CoordinateConverter to use, but for now we assume for earth we
+        # are using GeodeticConverter and other naif codes use Planetocentric.
+        gc_sample = self.igc1.ground_coordinate(ImageCoordinate(0,0))
+        if(gc_sample.naif_code() == CoordinateConverter.EARTH_NAIF_CODE):
+            self.coordinate_converter = GeodeticConverter()
+        else:
+            self.coordinate_converter = PlanetocentricConverter(gc_sample.naif_code())
         self.max_dist_good_point = max_dist_good_point
         self.all_image = all_image
         self.initial_dem = self.igc1.dem
@@ -210,7 +215,7 @@ class DemGenerate(object):
         Note that in general the points don't actually intersect, this finds
         the value that is closest to both points.'''
         p, dist = self.ri.two_ray_intersect(ic1, ic2)
-        gres = self.coordinate_system(p)
+        gres = self.coordinate_converter.convert_from_coordinate(p.longitude, p.latitude, p.height_reference_surface)
         if(dist > 1.0): 
             raise ValueError("Failure of epipolar constraint")
         return gres
@@ -227,7 +232,7 @@ class DemGenerate(object):
             fh.vertex[:,2] = self.r[:,2] / self.aoi.resolution_meter * scale_z
             for i in range(self.r.shape[0]):
                 fh.vertex[i,1], fh.vertex[i,0] = \
-                    self.aoi.coordinate(self.coordinate_system(self.r[i,0], self.r[i,1]))
+                    self.aoi.coordinate(self.coordinate_converter.convert_from_coordinate(self.r[i,1], self.r[i,0]))
         
         
     def height_all(self, pool = None, include_image = False, buffer_size = 5):
@@ -317,7 +322,7 @@ class DemGenerate(object):
             self.img1_h[:] = fill_value
             self.img2_h[:] = fill_value
         for i in range(self.r.shape[0]):
-            gp = self.coordinate_system(self.r[i,0], self.r[i,1])
+            gp = self.coordinate_converter.convert_from_coordinate(self.r[i,1], self.r[i,0])
             sample,line = self.aoi.coordinate(gp)
             if(line >= 0 and line < self.h.shape[0] and
                sample >= 0 and sample < self.h.shape[1]):
@@ -405,8 +410,8 @@ class DemGenerate(object):
             x = []
             y = []
             for i in range(self.r.shape[0]):
-                ic = aoi_img.coordinate(self.coordinate_system(self.r[i, 0], 
-                                                 self.r[i, 1]))
+                ic = aoi_img.coordinate(self.coordinate_converter.convert_from_coordinate(self.r[i, 1], 
+                                                 self.r[i, 0]))
                 if(ic.line >= 0 and ic.line < aoi_img.number_line and
                    ic.sample >= 0 and ic.sample < aoi_img.number_sample):
                     y.append(ic.line)

@@ -239,6 +239,7 @@ def test_read_quickbird():
         print(f)
     elif (os.path.exists(fname2)):
         f = NitfFile(fname2)
+        print(f.summary())
         print(f)
 
 def test_read_worldview():
@@ -252,6 +253,7 @@ def test_read_worldview():
         print(f)
     elif (os.path.exists(fname2)):
         f = NitfFile(fname2)
+        print(f.summary())
         print(f)
 
 def test_read_ikonos():
@@ -265,6 +267,7 @@ def test_read_ikonos():
         print(f)
     elif (os.path.exists(fname2)):
         f = NitfFile(fname2)
+        print(f.summary())
         print(f)
 
 def test_full_file(isolated_dir):

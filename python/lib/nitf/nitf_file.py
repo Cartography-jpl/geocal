@@ -9,7 +9,7 @@ from .nitf_image_subheader import NitfImageSubheader
 from .nitf_text_subheader import NitfTextSubheader
 from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
-    NitfImageCannotHandle
+    NitfImageGeneral, NitfImageCannotHandle
 from .nitf_tre import read_tre, prepare_tre_write
 import io,six,copy
 
@@ -72,7 +72,7 @@ class NitfFile(object):
         print("-------------------------------------------------------------",
               file=res)
         print("File Header:", file=res)
-        print(self.file_header.summary(), file=res)
+        print(self.file_header.summary(), file=res, end='', flush=True)
         print("-------------------------------------------------------------",
               file=res)
         if(len(self.tre_list) == 0):
@@ -80,7 +80,7 @@ class NitfFile(object):
         else:
             print("File level TRES:", file=res)
             for t in self.tre_list:
-                print(t.summary(), file=res)
+                print(t.summary(), file=res, end='', flush=True)
             print("-------------------------------------------------------------",
                   file=res)
         for arr, name in [[self.image_segment, "Image"],
@@ -96,7 +96,7 @@ class NitfFile(object):
             for i, seg in enumerate(arr):
                 print("%s segment %d of %d" % (name, i+1, len(arr)),
                       file=res)
-                print(seg.summary(),end='',file=res)
+                print(seg.summary(),end='',file=res, flush=True)
                 print("-------------------------------------------------------------",
                       file=res)
         return res.getvalue()
@@ -192,7 +192,7 @@ class NitfSegment(object):
         print("Segment level TRES:", file=res)
         if (hasattr(self, 'tre_list') == True):
             for t in self.tre_list:
-                print(t.summary(), file=res)
+                print(t.summary(), file=res, end='', flush=True)
 
         return self.subheader.summary() + res.getvalue()
 
@@ -251,6 +251,7 @@ class NitfImageSegment(NitfSegment):
     def __init__(self, image = None,
                  header_size = None, data_size = None,
                  nitf_image_handle = [NitfImageFromNumpy,
+                                      NitfImageGeneral,
                                       NitfImagePlaceHolder]):
         '''Initialize. You can pass a NitfImage class to use (i.e., you've
         created this for writing), or a list of classes to use to try

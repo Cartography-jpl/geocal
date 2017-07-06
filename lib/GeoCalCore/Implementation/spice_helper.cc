@@ -6,8 +6,10 @@
 #include "geocal_quaternion.h"
 #include "ground_coordinate.h"
 #include "dir_change.h"
+#include "planet_coordinate.h"
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/make_shared.hpp>
 #include <iostream>
 #include <sys/types.h>
 #include <dirent.h>
@@ -372,6 +374,35 @@ void SpiceHelper::state_vector
     Pos[i] = state[i] * 1000.0;
     Vel[i] = state[i + 3] * 1000.0;
   }
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Return a surface point from latsrf. Note that although spice takes
+/// radians this function takes degrees. This does a single point, we
+/// can add something taking an array in the future if needed.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GroundCoordinate> SpiceHelper::latsrf
+(int Body_id, const Time& T, double Lat_deg, double Lon_deg)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  std::string body_name = SpiceHelper::body_name(Body_id);
+  std::string fixed_frame_name = SpiceHelper::fixed_frame_name(Body_id);
+  double lonlat[2];
+  lonlat[0] = Lon_deg * Constant::deg_to_rad;
+  lonlat[1] = Lat_deg * Constant::deg_to_rad;
+  double res[3];
+  latsrf_c("DSK/UNPRIORITIZED", const_cast<char*>(body_name.c_str()), T.et(),
+	   const_cast<char*>(fixed_frame_name.c_str()),
+	   1, &lonlat, &res);
+  spice_error_check();
+  return boost::make_shared<PlanetFixed>(res[0] * 1000.0,
+					 res[1] * 1000.0,
+					 res[2] * 1000.0, Body_id);
 #else
   throw SpiceNotAvailableException();
 #endif

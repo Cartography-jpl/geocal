@@ -74,6 +74,7 @@ public:
   bool outside_dem_is_error() const {return outside_dem_is_error_; }
   virtual boost::shared_ptr<GroundCoordinate> 
   surface_point(const GroundCoordinate& Gp) const;
+  int naif_code() const {return naif_code_;}
 protected:
 
 //-----------------------------------------------------------------------
@@ -81,7 +82,7 @@ protected:
 /// exiting their constructor.
 //-----------------------------------------------------------------------
 
-  DemMapInfo() {}
+  DemMapInfo() : naif_code_(Geodetic::EARTH_NAIF_CODE) {}
 
 //-----------------------------------------------------------------------
 /// Constructor. The flag Outside_dem_is_error is used to indicate if
@@ -91,8 +92,9 @@ protected:
 //-----------------------------------------------------------------------
 
   DemMapInfo(const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-	     bool Outside_dem_is_error = false)
-  { initialize(D, M, Outside_dem_is_error); }
+	     bool Outside_dem_is_error = false,
+	     int Naif_code = Geodetic::EARTH_NAIF_CODE)
+  { initialize(D, M, Outside_dem_is_error, Naif_code); }
 
 //-----------------------------------------------------------------------
 /// Return height in meters relative to datum(). Note that the call is
@@ -105,7 +107,8 @@ protected:
   virtual double elevation(int Y_index, int X_index) const = 0;
 
   void initialize(const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-		  bool Outside_dem_is_error = false);
+		  bool Outside_dem_is_error = false,
+		  int Naif_code = Geodetic::EARTH_NAIF_CODE);
   friend class DemMapInfoOffset; // Allows this class access to the
 				 // protected member elevation.
   boost::shared_ptr<Datum> datum_; ///< Datum height is relative to.
@@ -114,7 +117,8 @@ protected:
   mutable bool outside_dem_is_error_;	   ///< If false, height requests
 				   ///outside of underlying Dem will
 				   ///return 0, otherwise throw an
-				   ///exception. 
+				   ///exception.
+  int naif_code_;
 private:
   friend class boost::serialization::access;
   template<class Archive>
@@ -123,4 +127,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(DemMapInfo);
+GEOCAL_CLASS_VERSION(DemMapInfo, 1);
 #endif

@@ -69,7 +69,7 @@ class Tre(_FieldStruct):
     def summary(self):
         res = six.StringIO()
         print("TRE - %s" % self.tre_tag, file=res)
-        return res.getvalue()
+
 
 class TreUnknown(Tre):
     '''The is a general class to handle TREs that we don't have another 
@@ -91,7 +91,7 @@ class TreUnknown(Tre):
         if(v > 99999):
             raise RuntimeError("TRE string is too long")
         fh.write("{:0>5d}".format(v).encode("utf-8"))
-        fh.write(t)
+        fh.write(self.tre_bytes)
     def __str__(self):
         '''Text description of structure, e.g., something you can print
         out.'''

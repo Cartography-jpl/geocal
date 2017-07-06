@@ -599,12 +599,15 @@ class VicarLiteDem(geocal_swig.dem_map_info.DemMapInfo):
 
         GeoCal::VicarLiteDem::VicarLiteDem(const std::string &Fname, bool Outside_dem_is_error=false, const
         boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        NoDatum()), int Band_id=1)
+        NoDatum()), int Band_id=1, int Naif_code=Geodetic::EARTH_NAIF_CODE)
         Constructor.
 
         If Outside_dem_is_error is true, then calls for Dem data outside of
         the range of the Dem cause an exception to be thrown, otherwise we
-        just return a height of 0. 
+        just return a height of 0.
+
+        Probably should have the Naif_code stored as metadata in the file, but
+        for now we just explicitly pass this in. 
         """
         _vicar_lite_file.VicarLiteDem_swiginit(self, _vicar_lite_file.new_VicarLiteDem(*args))
 

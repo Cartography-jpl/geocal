@@ -10,7 +10,7 @@
 
 from sys import version_info
 if version_info >= (3, 0, 0):
-    new_instancemethod = lambda func, inst, cls: _dem_map_info.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _spice_dem.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2, 6, 0):
@@ -19,20 +19,20 @@ if version_info >= (2, 6, 0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_dem_map_info', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_spice_dem', [dirname(__file__)])
         except ImportError:
-            import _dem_map_info
-            return _dem_map_info
+            import _spice_dem
+            return _spice_dem
         if fp is not None:
             try:
-                _mod = imp.load_module('_dem_map_info', fp, pathname, description)
+                _mod = imp.load_module('_spice_dem', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _dem_map_info = swig_import_helper()
+    _spice_dem = swig_import_helper()
     del swig_import_helper
 else:
-    import _dem_map_info
+    import _spice_dem
 del version_info
 try:
     _swig_property = property
@@ -116,31 +116,31 @@ class SwigPyIterator(object):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    __swig_destroy__ = _dem_map_info.delete_SwigPyIterator
+    __swig_destroy__ = _spice_dem.delete_SwigPyIterator
     def __iter__(self):
         return self
-SwigPyIterator.value = new_instancemethod(_dem_map_info.SwigPyIterator_value, None, SwigPyIterator)
-SwigPyIterator.incr = new_instancemethod(_dem_map_info.SwigPyIterator_incr, None, SwigPyIterator)
-SwigPyIterator.decr = new_instancemethod(_dem_map_info.SwigPyIterator_decr, None, SwigPyIterator)
-SwigPyIterator.distance = new_instancemethod(_dem_map_info.SwigPyIterator_distance, None, SwigPyIterator)
-SwigPyIterator.equal = new_instancemethod(_dem_map_info.SwigPyIterator_equal, None, SwigPyIterator)
-SwigPyIterator.copy = new_instancemethod(_dem_map_info.SwigPyIterator_copy, None, SwigPyIterator)
-SwigPyIterator.next = new_instancemethod(_dem_map_info.SwigPyIterator_next, None, SwigPyIterator)
-SwigPyIterator.__next__ = new_instancemethod(_dem_map_info.SwigPyIterator___next__, None, SwigPyIterator)
-SwigPyIterator.previous = new_instancemethod(_dem_map_info.SwigPyIterator_previous, None, SwigPyIterator)
-SwigPyIterator.advance = new_instancemethod(_dem_map_info.SwigPyIterator_advance, None, SwigPyIterator)
-SwigPyIterator.__eq__ = new_instancemethod(_dem_map_info.SwigPyIterator___eq__, None, SwigPyIterator)
-SwigPyIterator.__ne__ = new_instancemethod(_dem_map_info.SwigPyIterator___ne__, None, SwigPyIterator)
-SwigPyIterator.__iadd__ = new_instancemethod(_dem_map_info.SwigPyIterator___iadd__, None, SwigPyIterator)
-SwigPyIterator.__isub__ = new_instancemethod(_dem_map_info.SwigPyIterator___isub__, None, SwigPyIterator)
-SwigPyIterator.__add__ = new_instancemethod(_dem_map_info.SwigPyIterator___add__, None, SwigPyIterator)
-SwigPyIterator.__sub__ = new_instancemethod(_dem_map_info.SwigPyIterator___sub__, None, SwigPyIterator)
-SwigPyIterator_swigregister = _dem_map_info.SwigPyIterator_swigregister
+SwigPyIterator.value = new_instancemethod(_spice_dem.SwigPyIterator_value, None, SwigPyIterator)
+SwigPyIterator.incr = new_instancemethod(_spice_dem.SwigPyIterator_incr, None, SwigPyIterator)
+SwigPyIterator.decr = new_instancemethod(_spice_dem.SwigPyIterator_decr, None, SwigPyIterator)
+SwigPyIterator.distance = new_instancemethod(_spice_dem.SwigPyIterator_distance, None, SwigPyIterator)
+SwigPyIterator.equal = new_instancemethod(_spice_dem.SwigPyIterator_equal, None, SwigPyIterator)
+SwigPyIterator.copy = new_instancemethod(_spice_dem.SwigPyIterator_copy, None, SwigPyIterator)
+SwigPyIterator.next = new_instancemethod(_spice_dem.SwigPyIterator_next, None, SwigPyIterator)
+SwigPyIterator.__next__ = new_instancemethod(_spice_dem.SwigPyIterator___next__, None, SwigPyIterator)
+SwigPyIterator.previous = new_instancemethod(_spice_dem.SwigPyIterator_previous, None, SwigPyIterator)
+SwigPyIterator.advance = new_instancemethod(_spice_dem.SwigPyIterator_advance, None, SwigPyIterator)
+SwigPyIterator.__eq__ = new_instancemethod(_spice_dem.SwigPyIterator___eq__, None, SwigPyIterator)
+SwigPyIterator.__ne__ = new_instancemethod(_spice_dem.SwigPyIterator___ne__, None, SwigPyIterator)
+SwigPyIterator.__iadd__ = new_instancemethod(_spice_dem.SwigPyIterator___iadd__, None, SwigPyIterator)
+SwigPyIterator.__isub__ = new_instancemethod(_spice_dem.SwigPyIterator___isub__, None, SwigPyIterator)
+SwigPyIterator.__add__ = new_instancemethod(_spice_dem.SwigPyIterator___add__, None, SwigPyIterator)
+SwigPyIterator.__sub__ = new_instancemethod(_spice_dem.SwigPyIterator___sub__, None, SwigPyIterator)
+SwigPyIterator_swigregister = _spice_dem.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
 
-_dem_map_info.SHARED_PTR_DISOWN_swigconstant(_dem_map_info)
-SHARED_PTR_DISOWN = _dem_map_info.SHARED_PTR_DISOWN
+_spice_dem.SHARED_PTR_DISOWN_swigconstant(_spice_dem)
+SHARED_PTR_DISOWN = _spice_dem.SHARED_PTR_DISOWN
 
 import os
 
@@ -187,91 +187,81 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.dem
 import geocal_swig.generic_object
-class DemMapInfo(geocal_swig.dem.Dem):
+class SpiceDem(geocal_swig.dem.Dem):
     """
 
-    C++ includes: dem_map_info.h
+    This class uses the SPICE function latsrf to use DSK files to create a
+    DEM.
 
+    Note that this isn't particularly efficient. If you are doing to use
+    this for a large number of points you may want to use DemToRaster or
+    something similar to create a stand alone DEM file
+
+    C++ includes: spice_dem.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
 
-    def _v_datum(self):
+    def __init__(self, *args):
         """
 
-        const boost::shared_ptr<Datum> GeoCal::DemMapInfo::datum_ptr() const
-        Pointer to datum. 
+        GeoCal::SpiceDem::SpiceDem(int Naif_code, const Time &Tm, const std::vector< std::string >
+        &Kernel_list)
+
         """
-        return _dem_map_info.DemMapInfo__v_datum(self)
+        _spice_dem.SpiceDem_swiginit(self, _spice_dem.new_SpiceDem(*args))
+
+    def _v_kernel_list(self):
+        """
+
+        const SpiceKernelList& GeoCal::SpiceDem::kernel_list() const
+        List of kernels that should be loaded with this class. 
+        """
+        return _spice_dem.SpiceDem__v_kernel_list(self)
 
 
     @property
-    def datum(self):
-        return self._v_datum()
-
-
-    def _v_map_info(self):
-        """
-
-        const MapInfo& GeoCal::DemMapInfo::map_info() const
-        MapInfo of underlying data. 
-        """
-        return _dem_map_info.DemMapInfo__v_map_info(self)
-
-
-    @property
-    def map_info(self):
-        return self._v_map_info()
-
-
-    def height_datum(self, Gp):
-        """
-
-        double DemMapInfo::height_datum(const Geodetic &Gp) const
-
-        """
-        return _dem_map_info.DemMapInfo_height_datum(self, Gp)
-
-
-    def _v_outside_dem_is_error(self):
-        """
-
-        bool GeoCal::DemMapInfo::outside_dem_is_error() const
-        If true, then calling with values outside the range of area of the DEM
-        triggers an exception, otherwise we just return a height of 0. 
-        """
-        return _dem_map_info.DemMapInfo__v_outside_dem_is_error(self)
-
-
-    @property
-    def outside_dem_is_error(self):
-        return self._v_outside_dem_is_error()
+    def kernel_list(self):
+        return self._v_kernel_list()
 
 
     def _v_naif_code(self):
         """
 
-        int GeoCal::DemMapInfo::naif_code() const
+        int GeoCal::SpiceDem::naif_code() const
 
         """
-        return _dem_map_info.DemMapInfo__v_naif_code(self)
+        return _spice_dem.SpiceDem__v_naif_code(self)
 
 
     @property
     def naif_code(self):
         return self._v_naif_code()
 
-    __swig_destroy__ = _dem_map_info.delete_DemMapInfo
-DemMapInfo._v_datum = new_instancemethod(_dem_map_info.DemMapInfo__v_datum, None, DemMapInfo)
-DemMapInfo._v_map_info = new_instancemethod(_dem_map_info.DemMapInfo__v_map_info, None, DemMapInfo)
-DemMapInfo.height_datum = new_instancemethod(_dem_map_info.DemMapInfo_height_datum, None, DemMapInfo)
-DemMapInfo._v_outside_dem_is_error = new_instancemethod(_dem_map_info.DemMapInfo__v_outside_dem_is_error, None, DemMapInfo)
-DemMapInfo._v_naif_code = new_instancemethod(_dem_map_info.DemMapInfo__v_naif_code, None, DemMapInfo)
-DemMapInfo_swigregister = _dem_map_info.DemMapInfo_swigregister
-DemMapInfo_swigregister(DemMapInfo)
+
+    def _v_time(self):
+        """
+
+        const Time& GeoCal::SpiceDem::time() const
+
+        """
+        return _spice_dem.SpiceDem__v_time(self)
+
+
+    @property
+    def time(self):
+        return self._v_time()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _spice_dem.delete_SpiceDem
+SpiceDem._v_kernel_list = new_instancemethod(_spice_dem.SpiceDem__v_kernel_list, None, SpiceDem)
+SpiceDem._v_naif_code = new_instancemethod(_spice_dem.SpiceDem__v_naif_code, None, SpiceDem)
+SpiceDem._v_time = new_instancemethod(_spice_dem.SpiceDem__v_time, None, SpiceDem)
+SpiceDem_swigregister = _spice_dem.SpiceDem_swigregister
+SpiceDem_swigregister(SpiceDem)
 
 
 

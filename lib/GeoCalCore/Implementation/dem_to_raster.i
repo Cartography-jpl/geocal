@@ -12,6 +12,7 @@ namespace GeoCal {
 class DemToRaster : public CalcRaster {
 public:
   DemToRaster(const boost::shared_ptr<Dem>& D, const MapInfo& Mi);
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 };

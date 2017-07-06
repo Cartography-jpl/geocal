@@ -106,8 +106,8 @@ class NitfImageFromNumpy(NitfImage):
         ih.ncols = ncol
         ih.nbpr = 1
         ih.nbpc = 1
-        ih.npphb = ncol
-        ih.npphv = nrow
+        ih.nppbh = ncol
+        ih.nppbv = nrow
         ih.pvtype = "INT"
         ih.irep = "MONO"
         ih.icat = "VIS"
@@ -139,7 +139,7 @@ class NitfImageFromNumpy(NitfImage):
             self.data = np.fromfile(fh, dtype=np.uint32,
                                     count=ih.nrows*ih.ncols)
         else:
-            raise NitfImageCannotHandle("Unrecognized nbpp %d" % ih.npp)
+            raise NitfImageCannotHandle("Unrecognized nbpp %d" % ih.nbpp)
         self.data = np.reshape(self.data, (ih.nrows,ih.ncols))
 
     def write_to_file(self, fh):
@@ -148,3 +148,87 @@ class NitfImageFromNumpy(NitfImage):
         # we need to worry about
         fh.write(self.data.tobytes())
         
+class NitfImageGeneral(NitfImage):
+    #This is a implementation of NitfImage that either takes binary numpy blob or generates
+    #its own using specified value
+    def __init__(self, image_subheader = None, header_size = None, data_size=None,
+                 nrow = None, ncol = None, numbands=1, dataType=np.uint16, value=0, data=None):
+        if image_subheader is None:
+            image_subheader = NitfImageSubheader()
+        if data_size == None:
+            data_size = nrow*ncol*numbands*np.dtype(dataType).itemsize
+        NitfImage.__init__(self,image_subheader, header_size, data_size)
+        # Only fill in data if we give a size. Otherwise we assume
+        # that we are doing to just do a read
+        if(nrow is None):
+            return
+        self.data = data
+        if (data == None):
+            self.data = np.ndarray(shape=(nrow, ncol, numbands), dtype = dataType,
+                        buffer=np.array([value]*nrow*ncol*numbands))
+        ih = self.image_subheader
+        ih.iid1 = "Test data"
+        ih.iid2 = "This is from a NitfImageFromNumpy, used as sample data."
+        ih.idatim = "20160101120000"
+        ih.nrows = nrow
+        ih.ncols = ncol
+        ih.nbpr = 1
+        ih.nbpc = 1
+        ih.nppbh = ncol
+        ih.nppbv = nrow
+
+        if (dataType == np.uint8):
+            ih.abpp = 8
+            ih.nbpp = 8
+            ih.pvtype = "INT"
+        elif (dataType == np.uint16):
+            ih.abpp = 16
+            ih.nbpp = 16
+            ih.pvtype = "INT"
+        elif (dataType == np.float32):
+            ih.abpp = 32
+            ih.nbpp = 32
+            ih.pvtype = "R"
+        else:
+            raise NitfImageCannotHandle("Unsupported dataType")
+
+        ih.ic = "NC"
+
+        if (numbands < 10):
+            ih.nbands = numbands
+        else:
+            ih.nbands = 0
+            ih.xbands = numbands
+
+        for b in range(numbands):
+            ih.irepband[b] = 'M'
+            ih.isubcat[b] = b+1
+            ih.nluts[b] = 0
+
+        #If numbands is 1, we end up with the irepband being "R"
+        ih.irepband[numbands-1] = "B"
+        ih.irepband[int(numbands/2)] = "G"
+        ih.irepband[0] = "R"
+
+    def __str__(self):
+        if hasattr(self.data, 'shape'):
+            return "NitfImageGeneral %d x %d, %d bands of type %s" \
+                   % (self.data.shape[0], self.data.shape[1], self.data.shape[2], self.data.dtype)
+        else:
+            return "NitfImageGeneral %d x %d, %d bands, blob size %d" \
+               % (self.image_subheader.nrows, self.image_subheader.ncols, self.image_subheader.nbands, self.data_size)
+
+
+    def read_from_file(self, fh):
+        '''Read from a file'''
+        ih = self.image_subheader
+        self.data = fh.read(self.data_size)
+
+    def write_to_file(self, fh):
+        '''Write to a file'''
+        # Note that data is a single byte, so endianness isn't something
+        # we need to worry about
+        if (type(self.data) is np.ndarray or type(self.data) is np.array):
+            fh.write(self.data.tobytes())
+        else:
+            fh.write(self.data)

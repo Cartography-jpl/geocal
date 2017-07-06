@@ -2,6 +2,7 @@
 #define SPICE_HELPER_H
 #include "toolkit_time_interface.h"
 #include "toolkit_coordinate_interface.h"
+#include "ground_coordinate.h"
 #include <string>
 #include <boost/regex.hpp>
 #include <boost/array.hpp>
@@ -66,6 +67,8 @@ public:
   static double m2[6][6];
   static int name_to_body(const std::string& Name);
   static std::string body_name(int Body_id);
+  static boost::shared_ptr<GroundCoordinate>
+  latsrf(int Body_id, const Time& Tm, double Lat_deg, double Lon_deg);
   static std::string fixed_frame_name(int Body_id);
   static void cartesian_inertial_to_cartesian_fixed(int Body_id, const Time& T);
   static void cartesian_inertial_to_cartesian_fixed2(int Body_id, const Time& T);

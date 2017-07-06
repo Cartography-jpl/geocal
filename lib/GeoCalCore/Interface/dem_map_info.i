@@ -21,7 +21,8 @@ public:
   double height_datum(const GroundCoordinate& Gp) const;
   virtual double height_reference_surface(const GroundCoordinate& Gp) 
     const;
-  %python_attribute(outside_dem_is_error, bool)
+  %python_attribute(outside_dem_is_error, bool);
+  %python_attribute(naif_code, int);
   virtual boost::shared_ptr<GroundCoordinate> 
   surface_point(const GroundCoordinate& Gp) const;
 protected:

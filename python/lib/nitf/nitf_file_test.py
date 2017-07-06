@@ -270,6 +270,71 @@ def test_read_ikonos():
         print(f.summary())
         print(f)
 
+def test_copy_quickbird():
+    #Test copying a quickbird NITF file. It creates a copy of the file and then
+    #reads it back and compares the str() result to that of the original file
+    # This is a large file, which we don't want to depend on. Run this
+    # test if we happen to find the data, but skip otherwise.
+    fname = "/raid21/quickbird/05NOV23034644-P1BS-005545406180_01_P001.NTF"
+    fname2 = "/opt/nitf_files/NitfSamples/quickbird/05NOV23034644-P1BS-005545406180_01_P001.NTF"
+    fname_copy = "quickbird_copy.ntf"
+
+    if(os.path.exists(fname)):
+        filename = fname
+    elif (os.path.exists(fname2)):
+        filename = fname2
+    f = NitfFile(filename)
+    originalOutput = str(f)
+    f.write(fname_copy)
+    copyOutput = str(NitfFile(fname_copy))
+    os.remove(fname_copy)
+
+    assert originalOutput == copyOutput
+
+@pytest.mark.skip(reason="We're writing out a duplicate TRE for some reason for this file.")
+def test_copy_worldview():
+    #Test copying a worldview NITF file. It creates a copy of the file and then
+    #reads it back and compares the str() result to that of the original file
+    # This is a large file, which we don't want to depend on. Run this
+    # test if we happen to find the data, but skip otherwise.
+    fname = "/raid23/worldview/nagoya/12JAN23015358-P1BS-052654848010_01_P003.NTF"
+    fname2 = "/opt/nitf_files/NitfSamples/wv2/12JAN23015358-P1BS-052654848010_01_P003.NTF"
+    fname_copy = "worldview_copy.ntf"
+
+    if (os.path.exists(fname)):
+        filename = fname
+    elif (os.path.exists(fname2)):
+        filename = fname2
+    f = NitfFile(filename)
+    print(f)
+    originalOutput = str(f)
+    f.write(fname_copy)
+    copyOutput = str(NitfFile(fname_copy))
+    #os.remove(fname_copy)
+
+    assert originalOutput == copyOutput
+
+def test_copy_ikonos():
+    #Test copying a ikonos NITF file. It creates a copy of the file and then
+    #reads it back and compares the str() result to that of the original file
+    # This is a large file, which we don't want to depend on. Run this
+    # test if we happen to find the data, but skip otherwise.
+    fname = "/raid20/11DEC11IK0101000po_755166_pan_0000000.ntf"
+    fname2 = "/opt/nitf_files/NitfSamples/ikonos/11DEC11IK0101000po_755166_pan_0000000.ntf"
+    fname_copy = "ikonos_copy.ntf"
+
+    if (os.path.exists(fname)):
+        filename = fname
+    elif (os.path.exists(fname2)):
+        filename = fname2
+    f = NitfFile(filename)
+    originalOutput = str(f)
+    f.write(fname_copy)
+    copyOutput = str(NitfFile(fname_copy))
+    os.remove(fname_copy)
+
+    assert originalOutput == copyOutput
+
 def test_full_file(isolated_dir):
     '''This create an end to end NITF file, this was at least initially the
     same as basic_nitf_example.py but as a unit test.'''

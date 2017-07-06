@@ -9,7 +9,7 @@ from .nitf_image_subheader import NitfImageSubheader
 from .nitf_text_subheader import NitfTextSubheader
 from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
-    NitfImageCannotHandle
+    NitfImageGeneral, NitfImageCannotHandle
 from .nitf_tre import read_tre, prepare_tre_write
 import io,six,copy
 
@@ -251,6 +251,7 @@ class NitfImageSegment(NitfSegment):
     def __init__(self, image = None,
                  header_size = None, data_size = None,
                  nitf_image_handle = [NitfImageFromNumpy,
+                                      NitfImageGeneral,
                                       NitfImagePlaceHolder]):
         '''Initialize. You can pass a NitfImage class to use (i.e., you've
         created this for writing), or a list of classes to use to try

@@ -218,11 +218,21 @@ class NitfImageGeneral(NitfImage):
             return "NitfImageGeneral %d x %d, %d bands, blob size %d" \
                % (self.image_subheader.nrows, self.image_subheader.ncols, self.image_subheader.nbands, self.data_size)
 
-
+    #Todo: Since we don't store the data in self.data anymore,
+    #We need to now provide data accessor functions instead of allowing for direct
+    #self.data access
     def read_from_file(self, fh):
         '''Read from a file'''
         ih = self.image_subheader
-        self.data = fh.read(self.data_size)
+
+        #Instead of reading the entire data in memory, which could be gigabytes,
+        #we will simply note the location and size of the data in the input file
+        # Todo 1: If the input file is closed, we won't be able to get data from it
+        # Todo 2: Reading from it is not thread-safe right now
+        self.data = (fh.name, fh.tell(), self.data_size)#fh.read(self.data_size)
+
+        #We need to move the file pointer to the next section
+        fh.seek(self.data_size, 1)
 
     def write_to_file(self, fh):
         '''Write to a file'''
@@ -230,5 +240,22 @@ class NitfImageGeneral(NitfImage):
         # we need to worry about
         if (type(self.data) is np.ndarray or type(self.data) is np.array):
             fh.write(self.data.tobytes())
+        elif (type(self.data) is tuple):
+            filename = self.data[0]
+            location = self.data[1]
+            size = self.data[2]
+
+            blockSize = 1024
+            inFile = open(filename, 'rb')
+            inFile.seek(location)
+            while (size > 0):
+                if (size < blockSize):
+                    blockSize = size
+                inData = inFile.read(blockSize)
+                fh.write(inData)
+                size = size - blockSize
+
+            inFile.close()
+
         else:
             fh.write(self.data)

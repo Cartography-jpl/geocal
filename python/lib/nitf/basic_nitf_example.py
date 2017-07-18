@@ -35,6 +35,10 @@ def test_main():
     # just a normal python array.
     f.image_segment.append(NitfImageSegment(img))
 
+    # Create a larger img segment
+    img2 = NitfImageGeneral(nrow=3000, ncol=3000, numbands=100)
+    f.image_segment.append(NitfImageSegment(img2))
+
     # Can add TRES to either the file or image segment level. This automatically
     # handles TRE overflow, you just put the tre in and the writing figures out
     # where it should go.

@@ -164,8 +164,13 @@ class NitfImageGeneral(NitfImage):
             return
         self.data = data
         if (data == None):
-            self.data = np.ndarray(shape=(nrow, ncol, numbands), dtype = dataType,
-                        buffer=np.array([value]*nrow*ncol*numbands))
+            self.nrow = nrow
+            self.ncol = ncol
+            self.numbands = numbands
+            self.value = value
+            self.dataType = dataType
+            #self.data = np.ndarray(shape=(nrow, ncol, numbands), dtype = dataType,
+            #            buffer=np.array([value]*nrow*ncol*numbands))
         ih = self.image_subheader
         ih.iid1 = "Test data"
         ih.iid2 = "This is from a NitfImageFromNumpy, used as sample data."
@@ -227,8 +232,7 @@ class NitfImageGeneral(NitfImage):
 
         #Instead of reading the entire data in memory, which could be gigabytes,
         #we will simply note the location and size of the data in the input file
-        # Todo 1: If the input file is closed, we won't be able to get data from it
-        # Todo 2: Reading from it is not thread-safe right now
+        # Todo: Reading from it is not thread-safe right now
         self.data = (fh.name, fh.tell(), self.data_size)#fh.read(self.data_size)
 
         #We need to move the file pointer to the next section
@@ -238,8 +242,18 @@ class NitfImageGeneral(NitfImage):
         '''Write to a file'''
         # Note that data is a single byte, so endianness isn't something
         # we need to worry about
-        if (type(self.data) is np.ndarray or type(self.data) is np.array):
-            fh.write(self.data.tobytes())
+
+        #If the data is none, that means that we just stored parameters to
+        #use to generate quick data
+        if (self.data == None):
+            bytes = np.ndarray(shape=(self.nrow, self.ncol),
+                buffer=np.array([self.value] * self.nrow *self.ncol, self.dataType),
+                dtype=self.dataType).tobytes()
+            for b in range(self.numbands):
+                fh.write(bytes)
+
+        #If data is a tuple, that means we saved the file information to
+        #use to write data.
         elif (type(self.data) is tuple):
             filename = self.data[0]
             location = self.data[1]
@@ -258,4 +272,4 @@ class NitfImageGeneral(NitfImage):
             inFile.close()
 
         else:
-            fh.write(self.data)
+            fh.write(self.data.tobytes())

@@ -19,8 +19,8 @@ def rpc_data():
     min_height = rpc.height_offset - rpc.height_scale
     max_height = rpc.height_offset + rpc.height_scale
     for lnv in np.linspace(0, nline, 20):
-        for smpv in np.linspace(0, nsamp, 20):
-            for hv in np.linspace(min_height, max_height, 20):
+        for smpv in np.linspace(0, nsamp, 60):
+            for hv in np.linspace(min_height, max_height, 60):
                 gc = rpc.ground_coordinate(ImageCoordinate(lnv, smpv), hv)
                 lat.append(gc.latitude)
                 lon.append(gc.longitude)
@@ -64,8 +64,6 @@ def test_rsm_rational_polynomial():
 @require_serialize
 def test_rsm_fit(rpc_data):
     r = RsmRationalPolynomial(3,3,3)
-    r.fit_offset_and_scale(rpc_data.nline, rpc_data.nsamp, rpc_data.min_height,
-                           rpc_data.max_height, rpc_data.lat, rpc_data.lon)
     r.fit(rpc_data.ln, rpc_data.smp, rpc_data.lat, rpc_data.lon, rpc_data.h)
     lncalc, smpcalc = r(rpc_data.lat,rpc_data.lon,rpc_data.h)
     assert abs(rpc_data.ln-lncalc).max() < 0.01
@@ -73,11 +71,28 @@ def test_rsm_fit(rpc_data):
     
 @require_serialize
 def test_low_order_polynomial(rpc_data):
-    lp = LowOrderPolynomial()
+    lp = RsmLowOrderPolynomial()
     lp.fit(rpc_data.ln, rpc_data.smp, rpc_data.lat, rpc_data.lon, rpc_data.h)
     lncalc, smpcalc = lp(rpc_data.lat,rpc_data.lon,rpc_data.h)
     assert abs(rpc_data.ln-lncalc).max() < 2.0
     assert abs(rpc_data.smp-smpcalc).max() < 2.0
+
+@require_serialize
+def test_multi_section_polynomial(rpc_data):
+    r = RsmMultiSection(rpc_data.nline, rpc_data.nsamp, 3, 2,
+                           lambda : RsmRationalPolynomial(3,3,3))
+    r.fit(rpc_data.ln, rpc_data.smp, rpc_data.lat, rpc_data.lon, rpc_data.h)
     
+    lncalc, smpcalc = r(rpc_data.lat,rpc_data.lon,rpc_data.h)
+    assert abs(rpc_data.ln-lncalc).max() < 0.01
+    assert abs(rpc_data.smp-smpcalc).max() < 0.01
+    
+    def f(ln,smp):
+        gc = rpc_data.rpc.ground_coordinate(ImageCoordinate(ln,smp),0)
+        return r(gc.latitude, gc.longitude, gc.height_reference_surface)
+    #print(f(0,0))
+    #print(f(0,14237))
+    #print(f(0,14239))
+    #print(f(0,15000))
     
     

@@ -2,6 +2,7 @@
 # certainly want to reimplement this is C++, but do this in python first to
 # have much quicker to write baseline
 import numpy as np
+import math
 
 class RsmPolynomial(object):
     '''This is a polynomial, already working in the scaled XYZ coordinate
@@ -112,16 +113,17 @@ class RsmRationalPolynomial(object):
         return [f1 / f2 * self. line_scale + self.line_offset,
                 f3 / f4 * self.sample_scale + self.sample_offset]
 
-    def fit_offset_and_scale(self, nline, nsample, min_height, max_height,
+    def fit_offset_and_scale(self, min_line, max_line, min_sample, max_sample,
+                             min_height, max_height,
                              latitude, longitude):
         '''Set line_offset, line_scale etc to cover the range for each
         of the set of data provided.'''
         self.height_offset = (max_height + min_height) / 2.0
         self.height_scale = (max_height - min_height) / 2.0
-        self.line_offset = nline / 2.0
-        self.line_scale = nline / 2.0
-        self.sample_offset = nsample / 2.0
-        self.sample_scale = nsample / 2.0
+        self.line_offset = (max_line + min_line) / 2.0
+        self.line_scale = (max_line - min_line) / 2.0
+        self.sample_offset = (max_sample + min_sample) / 2.0
+        self.sample_scale = (max_sample - min_sample) / 2.0
         min_lat = latitude.min()
         max_lat = latitude.max()
         min_lon = longitude.min()
@@ -131,9 +133,18 @@ class RsmRationalPolynomial(object):
         self.longitude_offset = (max_lon + min_lon) / 2
         self.longitude_scale = (max_lon - min_lon) / 2
 
-    def fit(self, line, sample, latitude, longitude, height):
+    def fit(self, line, sample, latitude, longitude, height, do_scale = True):
+        '''Fit rational polynomial to the given data. We usually also want
+        to determine the scale for line_offset etc. from this data. Set 
+        do_scale to false if you want to instead call fit_offset_and_scale
+        yourself and hold things fixed here.'''
+        if(do_scale):
+            self.fit_offset_and_scale(line.min(), line.max(), sample.min(),
+                                      sample.max(), height.min(), height.max(),
+                                      latitude, longitude)
+                                
         ln_lhs = (line - self.line_offset) / self.line_scale
-        smp_lhs = (sample - self.sample_offset) / self.sample_offset
+        smp_lhs = (sample - self.sample_offset) / self.sample_scale
         x = (latitude - self.latitude_offset) / self.latitude_scale
         y = (longitude - self.longitude_offset) / self.longitude_scale
         z = (height - self.height_offset) / self.height_scale
@@ -180,7 +191,19 @@ class RsmRationalPolynomial(object):
         self.sample_den.coefficient[:,:,:] = \
             np.concatenate(([1.0,], smpar[nx*ny*nz:])).reshape(nx2,ny2,nz2)
 
-class LowOrderPolynomial(object):
+class RsmGrid(object):
+    '''Use a interpolation grid to map from ground to image. Right now we
+    only do a linear interpolation. The RSM documentation suggests doing
+    Lagrange interpolation of various orders, we can implement that in the
+    future (or just do this when we implement this in C++).'''
+    def __init__(self):
+        pass
+    def __call__(self, lat, lon, h):
+        pass
+    def fit(self, line, sample, latitude, longitude, height):
+        pass
+    
+class RsmLowOrderPolynomial(object):
     '''This is the low order polynomial used to determine approximate 
     row/column (line/sample, the RSM documentation calls this Row/Column)'''
     def __init__(self):
@@ -210,4 +233,67 @@ class LowOrderPolynomial(object):
         g[:,9] = z * z
         self.pline = np.linalg.lstsq(g,line)[0]
         self.psamp = np.linalg.lstsq(g,sample)[0]
-        
+
+class RsmMultiSection(object):
+    '''Handle multiple sections.'''
+    def __init__(self, nline, nsamp, nrow_section, ncol_section,
+                 object_creator):
+        self.nline = nline
+        self.nsamp = nsamp
+        self.section = np.empty((nrow_section, ncol_section), dtype=object)
+        self.lp = RsmLowOrderPolynomial()
+        for i in range(self.section.shape[0]):
+            for j in range(self.section.shape[1]):
+                self.section[i,j] = object_creator()
+        self.nline_sec = float(self.nline) / self.section.shape[0]
+        self.nsamp_sec = float(self.nsamp) / self.section.shape[1]
+    def __call__(self, x, y, z):
+        lp_line, lp_samp = self.lp(x, y, z)
+        if isinstance(lp_line, np.ndarray):
+            lp_line[lp_line < 0] = 0
+            lp_line[lp_line >= self.nline_sec * self.section.shape[0]] = \
+                 self.nline_sec * self.section.shape[0] - 0.1
+            lp_samp[lp_samp < 0] = 0
+            lp_samp[lp_samp >= self.nsamp_sec * self.section.shape[1]] = \
+                 self.nsamp_sec * self.section.shape[1] - 0.1
+            line = np.empty(lp_line.shape)
+            sample = np.empty(lp_line.shape)
+            for i in range(self.section.shape[0]):
+                wh_ln = np.logical_and(lp_line >= self.nline_sec * i,
+                                       lp_line < self.nline_sec * (i+1))
+                for j in range(self.section.shape[1]):
+                    wh = np.logical_and(wh_ln,
+                      np.logical_and(lp_samp >= self.nsamp_sec * j,
+                      lp_samp < self.nsamp_sec * (j+1)))
+                    line[wh], sample[wh] = self.section[i,j](x[wh],y[wh], z[wh])
+        else:
+            i = math.floor(lp_line / self.nline_sec)
+            j = math.floor(lp_samp / self.nsamp_sec)
+            if(i < 0):
+                i = 0
+            if(i >= self.section.shape[0]):
+                i = self.section.shape[0] - 1
+            if(j < 0):
+                j = 0
+            if(j >= self.section.shape[1]):
+                j = self.section.shape[1] - 1
+            line, sample = self.section[i,j](x,y, z)
+        return line, sample
+    def fit(self, line, sample, x, y, z):
+        self.lp.fit(line, sample, x, y, z)
+        lp_line, lp_samp = self.lp(x, y, z)
+        lp_line[lp_line < 0] = 0
+        lp_line[lp_line >= self.nline_sec * self.section.shape[0]] = \
+            self.nline_sec * self.section.shape[0] - 0.1
+        lp_samp[lp_samp < 0] = 0
+        lp_samp[lp_samp >= self.nsamp_sec * self.section.shape[1]] = \
+            self.nsamp_sec * self.section.shape[1] - 0.1
+        for i in range(self.section.shape[0]):
+            wh_ln = np.logical_and(lp_line >= self.nline_sec * i,
+                                   lp_line < self.nline_sec * (i+1))
+            for j in range(self.section.shape[1]):
+                wh = np.logical_and(wh_ln,
+                      np.logical_and(lp_samp >= self.nsamp_sec * j,
+                      lp_samp < self.nsamp_sec * (j+1)))
+                self.section[i,j].fit(line[wh],sample[wh],x[wh],y[wh], z[wh])
+                

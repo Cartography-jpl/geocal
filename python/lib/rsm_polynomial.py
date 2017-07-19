@@ -179,3 +179,35 @@ class RsmRationalPolynomial(object):
         nz2 = self.sample_den.coefficient.shape[2]
         self.sample_den.coefficient[:,:,:] = \
             np.concatenate(([1.0,], smpar[nx*ny*nz:])).reshape(nx2,ny2,nz2)
+
+class LowOrderPolynomial(object):
+    '''This is the low order polynomial used to determine approximate 
+    row/column (line/sample, the RSM documentation calls this Row/Column)'''
+    def __init__(self):
+        self.pline = np.zeros(10)
+        self.psamp = np.zeros(10)
+
+    def __call__(self, x, y, z):
+        p = self.pline
+        line =  p[0] + x * (p[1] + p[4] * x + p[5] * y + p[6] * z) + \
+            y * (p[2] + p[7] * y + p[8] * z) + z * (p[3] + p[9] * z)
+        p = self.psamp
+        sample =  p[0] + x * (p[1] + p[4] * x + p[5] * y + p[6] * z) + \
+            y * (p[2] + p[7] * y + p[8] * z) + z * (p[3] + p[9] * z)
+        return [line, sample]
+
+    def fit(self, line, sample, x, y, z):
+        g = np.zeros((x.size, 10))
+        g[:,0] = 1
+        g[:,1] = x
+        g[:,2] = y
+        g[:,3] = z
+        g[:,4] = x * x
+        g[:,5] = x * y
+        g[:,6] = x * z
+        g[:,7] = y * y
+        g[:,8] = y * z
+        g[:,9] = z * z
+        self.pline = np.linalg.lstsq(g,line)[0]
+        self.psamp = np.linalg.lstsq(g,sample)[0]
+        

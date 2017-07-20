@@ -176,3 +176,19 @@ def test_multi_section_grid(rpc_data_latgrid, rpc_data):
     assert np.nanmax(abs(rpc_data_latgrid.ln-lncalc)) < 0.3
     assert np.nanmax(abs(rpc_data_latgrid.smp-smpcalc)) < 5
     
+@require_serialize
+def test_polynomial_plus_grid_fit(rpc_data_latgrid):
+    # The 2,2,2 will by test design be pretty crappy, so we give the
+    # correction grid something to do.
+    r = RsmRationalPolynomialPlusGrid(RsmRationalPolynomial(2,2,2),
+                                      RsmGrid(60,60,20))
+    r.fit(rpc_data_latgrid.ln, rpc_data_latgrid.smp, rpc_data_latgrid.lat,
+          rpc_data_latgrid.lon, rpc_data_latgrid.h)
+    h = np.empty(rpc_data_latgrid.lat.shape)
+    h[:,:,:] = rpc_data_latgrid.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = r(rpc_data_latgrid.lat,rpc_data_latgrid.lon,h)
+    lcorr, scorr = r.corr_grid(rpc_data_latgrid.lat,rpc_data_latgrid.lon,h)
+    #print(abs(lcorr).max())
+    #print(abs(scorr).max())
+    assert abs(rpc_data_latgrid.ln-lncalc).max() < 0.1
+    assert np.median(abs(rpc_data_latgrid.smp-smpcalc)) < 0.1

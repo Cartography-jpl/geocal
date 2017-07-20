@@ -421,3 +421,25 @@ class RsmMultiSection(object):
                       lp_samp < self.nsamp_sec * (j+1)))
                 self.section[i,j].fit(line,sample,x, y, z, wh=wh)
                 
+class RsmRationalPolynomialPlusGrid(object):
+    '''We can have both a RsmRationalPolynomial and a RsmGrid that is used
+    to correct the line and sample. This handles that.'''
+    def __init__(self, rational_poly, corr_grid):
+        '''This takes either a RsmRationalPolynomial or a RsmMultiSection that
+        contains RsmRationalPolynomial, and the same with RsmGrid for the
+        correction grid.'''
+        self.rational_poly = rational_poly
+        self.corr_grid = corr_grid
+
+    def __call__(self, lat, lon, h):
+        line, sample = self.rational_poly(lat,lon,h)
+        lcorr, scorr  = self.corr_grid(lat,lon,h)
+        return [line + lcorr, sample + scorr] 
+
+    def fit(self, line, sample, latitude, longitude, height):
+        self.rational_poly.fit(line,sample,latitude,longitude,height)
+        lcalc, scalc = self.rational_poly(latitude,longitude,height)
+        lcorr = line - lcalc
+        scorr = sample - scalc
+        self.corr_grid.fit(lcorr, scorr, latitude, longitude, height)
+

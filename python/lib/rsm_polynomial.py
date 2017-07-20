@@ -133,21 +133,74 @@ class RsmRationalPolynomial(object):
         self.longitude_offset = (max_lon + min_lon) / 2
         self.longitude_scale = (max_lon - min_lon) / 2
 
-    def fit(self, line, sample, latitude, longitude, height, do_scale = True):
+    def fit(self, line, sample, latitude, longitude, height,
+            do_scale = True, wh = None):
         '''Fit rational polynomial to the given data. We usually also want
         to determine the scale for line_offset etc. from this data. Set 
         do_scale to false if you want to instead call fit_offset_and_scale
-        yourself and hold things fixed here.'''
+        yourself and hold things fixed here.
+
+        You can pass a "wh" value to use to restrict the data used, this is
+        useful for when we are doing multisection fits and only some of the
+        data should be used by this RsmRationalPolynomial.
+
+        The data is a slightly complicated, we want to evaluate things
+        at fixed height planes. This doesn't matter for fitting
+        polynomials, but does for gridded data (and we want a common
+        interface for both). So we give height as 1 d arrays, and then
+        report latitude and longitude as n_line x n_sample x n_height
+        arrays.
+
+        line and sample can either be 1d or 3d (so n_line and n_sample, or
+        n_line x n_sample x n_height). For 1d we assume the same line and 
+        sample at each height, otherwise we allow the line and samples to be
+        different for each height.
+        '''
         if(do_scale):
-            self.fit_offset_and_scale(line.min(), line.max(), sample.min(),
-                                      sample.max(), height.min(), height.max(),
-                                      latitude, longitude)
-                                
-        ln_lhs = (line - self.line_offset) / self.line_scale
-        smp_lhs = (sample - self.sample_offset) / self.sample_scale
+            if(wh is not None):
+                self.fit_offset_and_scale(line[wh].min(), line[wh].max(),
+                                          sample[wh].min(),
+                                          sample[wh].max(),
+                                          height.min(), height.max(),
+                                          latitude[wh], longitude[wh])
+            else:
+                self.fit_offset_and_scale(line.min(), line.max(),
+                                          sample.min(),
+                                          sample.max(),
+                                          height.min(), height.max(),
+                                          latitude, longitude)
+                
+        ln_lhs_v = (line - self.line_offset) / self.line_scale
+        if(len(ln_lhs_v.shape) == 1):
+            ln_lhs = np.empty(latitude.shape)
+            ln_lhs[:,:,:] = ln_lhs_v[:, np.newaxis,np.newaxis]
+        else:
+            ln_lhs = ln_lhs_v
+        if(wh is not None):
+            ln_lhs = ln_lhs[wh]
+        ln_lhs = ln_lhs.reshape(ln_lhs.size)
+        smp_lhs_v = (sample - self.sample_offset) / self.sample_scale
+        if(len(smp_lhs_v.shape) == 1):
+            smp_lhs = np.empty(latitude.shape)
+            smp_lhs[:,:,:] = smp_lhs_v[np.newaxis,:,np.newaxis]
+        else:
+            smp_lhs = smp_lhs_v
+        if(wh is not None):
+            smp_lhs = smp_lhs[wh]
+        smp_lhs = smp_lhs.reshape(smp_lhs.size)
         x = (latitude - self.latitude_offset) / self.latitude_scale
         y = (longitude - self.longitude_offset) / self.longitude_scale
-        z = (height - self.height_offset) / self.height_scale
+        zv = (height - self.height_offset) / self.height_scale
+        z = np.empty(x.shape)
+        z[:,:,:] = zv[np.newaxis, np.newaxis, :]
+        if(wh is not None):
+            x = x[wh]
+            y = y[wh]
+            z = z[wh]
+        else:
+            x = x.reshape((x.size))
+            y = y.reshape((y.size))
+            z = z.reshape((z.size))
         ljac1 = self.line_num.poly_jac(x, y, z)
         ljac1 = ljac1.reshape(ljac1.shape[0] * ljac1.shape[1] * ljac1.shape[2],
                               ljac1.shape[3])
@@ -196,12 +249,15 @@ class RsmGrid(object):
     only do a linear interpolation. The RSM documentation suggests doing
     Lagrange interpolation of various orders, we can implement that in the
     future (or just do this when we implement this in C++).'''
-    def __init__(self):
-        pass
+    def __init__(self, NP_X, NP_Y, NP_Z):
+        self.line_grid = None
+        self.sample_grid = None
     def __call__(self, lat, lon, h):
-        pass
+        x = np.hstack(lat, lon, h)
+        return self.line_grid(x), self.sample_grid(x)
     def fit(self, line, sample, latitude, longitude, height):
-        pass
+        x = np.hstack(latitude, longitude, height)
+
     
 class RsmLowOrderPolynomial(object):
     '''This is the low order polynomial used to determine approximate 
@@ -220,19 +276,45 @@ class RsmLowOrderPolynomial(object):
         return [line, sample]
 
     def fit(self, line, sample, x, y, z):
-        g = np.zeros((x.size, 10))
-        g[:,0] = 1
-        g[:,1] = x
-        g[:,2] = y
-        g[:,3] = z
-        g[:,4] = x * x
-        g[:,5] = x * y
-        g[:,6] = x * z
-        g[:,7] = y * y
-        g[:,8] = y * z
-        g[:,9] = z * z
-        self.pline = np.linalg.lstsq(g,line)[0]
-        self.psamp = np.linalg.lstsq(g,sample)[0]
+        '''The data is a slightly complicated, we want to evaluate things
+        at fixed height planes. This doesn't matter for fitting
+        polynomials, but does for gridded data (and we want a common
+        interface for both). So we give height as 1 d arrays, and then
+        report latitude and longitude as n_line x n_sample x n_height
+        arrays.
+
+        line and sample can either be 1d or 3d (so n_line and n_sample, or
+        n_line x n_sample x n_height). For 1d we assume the same line and 
+        sample at each height, otherwise we allow the line and samples to be
+        different for each height.
+        '''
+        if(len(line.shape) == 1):
+            line_v = np.empty(x.shape)
+            line_v[:,:,:] = line[:,np.newaxis, np.newaxis]
+        else:
+            line_v = line
+        line_v = line_v.reshape(line_v.size)
+        if(len(sample.shape) == 1):
+            sample_v = np.empty(x.shape)
+            sample_v[:,:,:] = sample[np.newaxis,:,np.newaxis]
+        else:
+            sample_v = sample
+        sample_v = sample_v.reshape(sample_v.size)
+        
+        g = np.zeros(x.shape + (10,))
+        g[...,0] = 1
+        g[...,1] = x
+        g[...,2] = y
+        g[...,3] = z
+        g[...,4] = x * x
+        g[...,5] = x * y
+        g[...,6] = x * z[np.newaxis, np.newaxis, :]
+        g[...,7] = y * y
+        g[...,8] = y * z[np.newaxis, np.newaxis, :]
+        g[...,9] = (z * z)[np.newaxis, np.newaxis, :]
+        g = g.reshape((x.size, 10))
+        self.pline = np.linalg.lstsq(g,line_v)[0]
+        self.psamp = np.linalg.lstsq(g,sample_v)[0]
 
 class RsmMultiSection(object):
     '''Handle multiple sections.'''
@@ -265,7 +347,8 @@ class RsmMultiSection(object):
                     wh = np.logical_and(wh_ln,
                       np.logical_and(lp_samp >= self.nsamp_sec * j,
                       lp_samp < self.nsamp_sec * (j+1)))
-                    line[wh], sample[wh] = self.section[i,j](x[wh],y[wh], z[wh])
+                    line[wh], sample[wh] = self.section[i,j](x[wh], y[wh],
+                                                             z[wh])
         else:
             i = math.floor(lp_line / self.nline_sec)
             j = math.floor(lp_samp / self.nsamp_sec)
@@ -280,6 +363,18 @@ class RsmMultiSection(object):
             line, sample = self.section[i,j](x,y, z)
         return line, sample
     def fit(self, line, sample, x, y, z):
+        ''' The data is a slightly complicated, we want to evaluate things
+        at fixed height planes. This doesn't matter for fitting
+        polynomials, but does for gridded data (and we want a common
+        interface for both). So we give height as 1 d arrays, and then
+        report latitude and longitude as n_line x n_sample x n_height
+        arrays.
+
+        line and sample can either be 1d or 3d (so n_line and n_sample, or
+        n_line x n_sample x n_height). For 1d we assume the same line and 
+        sample at each height, otherwise we allow the line and samples to be
+        different for each height.
+        '''
         self.lp.fit(line, sample, x, y, z)
         lp_line, lp_samp = self.lp(x, y, z)
         lp_line[lp_line < 0] = 0
@@ -295,5 +390,5 @@ class RsmMultiSection(object):
                 wh = np.logical_and(wh_ln,
                       np.logical_and(lp_samp >= self.nsamp_sec * j,
                       lp_samp < self.nsamp_sec * (j+1)))
-                self.section[i,j].fit(line[wh],sample[wh],x[wh],y[wh], z[wh])
+                self.section[i,j].fit(line,sample,x, y, z, wh=wh)
                 

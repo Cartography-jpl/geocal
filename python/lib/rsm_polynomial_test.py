@@ -35,6 +35,30 @@ def rpc_data():
     return RpcResult(rpc, ln, smp, lnvv, smpvv, lat, lon, h, nline, nsamp,
                      min_height, max_height)
 
+@pytest.fixture(scope="module")
+def rpc_data_latgrid(rpc_data):
+    '''Variation of rpc_data where we used fixed spacing latitude/longitude
+    and height rather than in image space. Think this will work better with
+    rpc grid'''
+    latv = np.linspace(rpc_data.lat.min(), rpc_data.lat.max(), 30)
+    lonv = np.linspace(rpc_data.lon.min(), rpc_data.lon.max(), 30)
+    h = rpc_data.h
+    lat = np.empty((latv.size, lonv.size, h.size))
+    lat[:,:,:] = latv[:, np.newaxis, np.newaxis]
+    lon = np.empty(lat.shape)
+    lon[:,:,:] = lonv[np.newaxis,:,np.newaxis]
+    ln = np.empty(lat.shape)
+    smp = np.empty(lon.shape)
+    for i in range(lat.shape[0]):
+        for j in range(lon.shape[0]):
+            for k, hv in enumerate(h):
+                gc = Geodetic(lat[i,j,k],lon[i,j,k], hv)
+                ic = rpc_data.rpc.image_coordinate(gc)
+                ln[i,j,k] = ic.line
+                smp[i,j,k] = ic.sample
+    RpcResult2 = namedtuple('RpcResult2', ['ln', 'smp', 'lat', 'lon', 'h'])
+    return RpcResult2(ln, smp, lat, lon, h)
+
 def test_rsm_polynomial():
     r = RsmPolynomial(3,3,3)
     r.coefficient[0,0,0] = 10.0
@@ -128,4 +152,27 @@ def test_multi_section_polynomial(rpc_data):
     #print(f(0,14239))
     #print(f(0,15000))
     
+    
+@require_serialize
+def test_grid_fit(rpc_data_latgrid):
+    r = RsmGrid(60,60,20)
+    r.fit(rpc_data_latgrid.ln, rpc_data_latgrid.smp, rpc_data_latgrid.lat,
+          rpc_data_latgrid.lon, rpc_data_latgrid.h)
+    h = np.empty(rpc_data_latgrid.lat.shape)
+    h[:,:,:] = rpc_data_latgrid.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = r(rpc_data_latgrid.lat,rpc_data_latgrid.lon,h)
+    assert abs(rpc_data_latgrid.ln-lncalc).max() < 0.05
+    assert abs(rpc_data_latgrid.smp-smpcalc).max() < 0.3
+
+@require_serialize
+def test_multi_section_grid(rpc_data_latgrid, rpc_data):
+    r = RsmMultiSection(rpc_data.nline, rpc_data.nsamp, 3, 2,
+                           lambda : RsmGrid(60,60,20))
+    r.fit(rpc_data_latgrid.ln, rpc_data_latgrid.smp, rpc_data_latgrid.lat,
+          rpc_data_latgrid.lon, rpc_data_latgrid.h)
+    h = np.empty(rpc_data_latgrid.lat.shape)
+    h[:,:,:] = rpc_data_latgrid.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = r(rpc_data_latgrid.lat,rpc_data_latgrid.lon,h)
+    assert np.nanmax(abs(rpc_data_latgrid.ln-lncalc)) < 0.3
+    assert np.nanmax(abs(rpc_data_latgrid.smp-smpcalc)) < 5
     

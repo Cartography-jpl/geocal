@@ -2,6 +2,7 @@
 # certainly want to reimplement this is C++, but do this in python first to
 # have much quicker to write baseline
 import numpy as np
+import scipy
 import math
 
 class RsmPolynomial(object):
@@ -250,13 +251,41 @@ class RsmGrid(object):
     Lagrange interpolation of various orders, we can implement that in the
     future (or just do this when we implement this in C++).'''
     def __init__(self, NP_X, NP_Y, NP_Z):
+        self.np_x = NP_X
+        self.np_y = NP_Y
+        self.np_z = NP_Z
         self.line_grid = None
         self.sample_grid = None
     def __call__(self, lat, lon, h):
-        x = np.hstack(lat, lon, h)
+        x = np.stack((lat, lon, h), axis=-1)
         return self.line_grid(x), self.sample_grid(x)
-    def fit(self, line, sample, latitude, longitude, height):
-        x = np.hstack(latitude, longitude, height)
+    def fit(self, line, sample, latitude, longitude, height, wh = None):
+        if(height.size != self.np_z):
+            raise RuntimeError("Fit was not passed the correct number of heights. Expected %d but got %s" % (np_z, height.shape))
+        latv = np.linspace(latitude.min(), latitude.max(), self.np_x)
+        lonv = np.linspace(longitude.min(), longitude.max(), self.np_y)
+        ldata = np.empty((self.np_x, self.np_y, self.np_z))
+        sdata = np.empty(ldata.shape)
+        for i in range(self.np_z):
+            lat = latitude[:,:,i]
+            lon = longitude[:,:,i]
+            ln = line[:,:,i]
+            smp = sample[:,:,i]
+            if(wh is not None):
+                lat = lat[wh[:,:,i]]
+                lon = lon[wh[:,:,i]]
+                ln = ln[wh[:,:,i]]
+                smp = smp[wh[:,:,i]]
+            else:
+                lat = lat.reshape(lat.size)
+                lon = lon.reshape(lon.size)
+                ln= ln.reshape(ln.size)
+                smp = smp.reshape(smp.size)
+            gd = scipy.interpolate.griddata((lat,lon), np.stack((ln, smp), axis=1), (np.outer(latv,np.ones_like(lonv)), np.outer(np.ones_like(latv), lonv)))
+            ldata[...,i] = gd[...,0]
+            sdata[...,i] = gd[...,1]
+        self.line_grid = scipy.interpolate.RegularGridInterpolator((latv,lonv,height), ldata)
+        self.sample_grid = scipy.interpolate.RegularGridInterpolator((latv,lonv,height), sdata)
 
     
 class RsmLowOrderPolynomial(object):

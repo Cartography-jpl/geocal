@@ -283,6 +283,8 @@ def test_copy_quickbird():
         filename = fname
     elif (os.path.exists(fname2)):
         filename = fname2
+    else:
+        raise SkipTest
     f = NitfFile(filename)
     originalOutput = str(f)
     f.write(fname_copy)
@@ -327,6 +329,8 @@ def test_copy_ikonos():
         filename = fname
     elif (os.path.exists(fname2)):
         filename = fname2
+    else:
+        raise SkipTest
     f = NitfFile(filename)
     originalOutput = str(f)
     f.write(fname_copy)

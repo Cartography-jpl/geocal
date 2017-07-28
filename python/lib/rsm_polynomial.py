@@ -284,8 +284,8 @@ class RsmGrid(object):
             gd = scipy.interpolate.griddata((lat,lon), np.stack((ln, smp), axis=1), (np.outer(latv,np.ones_like(lonv)), np.outer(np.ones_like(latv), lonv)))
             ldata[...,i] = gd[...,0]
             sdata[...,i] = gd[...,1]
-        self.line_grid = scipy.interpolate.RegularGridInterpolator((latv,lonv,height), ldata)
-        self.sample_grid = scipy.interpolate.RegularGridInterpolator((latv,lonv,height), sdata)
+        self.line_grid = scipy.interpolate.RegularGridInterpolator((latv,lonv,height), ldata, bounds_error=False,fill_value=None)
+        self.sample_grid = scipy.interpolate.RegularGridInterpolator((latv,lonv,height), sdata, bounds_error=False,fill_value=None)
 
     
 class RsmLowOrderPolynomial(object):
@@ -369,6 +369,11 @@ class RsmMultiSection(object):
                  self.nsamp_sec * self.section.shape[1] - 0.1
             line = np.empty(lp_line.shape)
             sample = np.empty(lp_line.shape)
+            if(len(z.shape) != len(x.shape)):
+                z2 = np.empty(x.shape)
+                z2[:,:,:] = z[np.newaxis,np.newaxis,:]
+            else:
+                z2 = z
             for i in range(self.section.shape[0]):
                 wh_ln = np.logical_and(lp_line >= self.nline_sec * i,
                                        lp_line < self.nline_sec * (i+1))
@@ -377,7 +382,7 @@ class RsmMultiSection(object):
                       np.logical_and(lp_samp >= self.nsamp_sec * j,
                       lp_samp < self.nsamp_sec * (j+1)))
                     line[wh], sample[wh] = self.section[i,j](x[wh], y[wh],
-                                                             z[wh])
+                                                             z2[wh])
         else:
             i = math.floor(lp_line / self.nline_sec)
             j = math.floor(lp_samp / self.nsamp_sec)
@@ -412,6 +417,11 @@ class RsmMultiSection(object):
         lp_samp[lp_samp < 0] = 0
         lp_samp[lp_samp >= self.nsamp_sec * self.section.shape[1]] = \
             self.nsamp_sec * self.section.shape[1] - 0.1
+        if(len(z.shape) != len(x.shape)):
+            z2 = np.empty(x.shape)
+            z2[:,:,:] = z[np.newaxis,np.newaxis,:]
+        else:
+            z2 = z
         for i in range(self.section.shape[0]):
             wh_ln = np.logical_and(lp_line >= self.nline_sec * i,
                                    lp_line < self.nline_sec * (i+1))
@@ -419,7 +429,7 @@ class RsmMultiSection(object):
                 wh = np.logical_and(wh_ln,
                       np.logical_and(lp_samp >= self.nsamp_sec * j,
                       lp_samp < self.nsamp_sec * (j+1)))
-                self.section[i,j].fit(line,sample,x, y, z, wh=wh)
+                self.section[i,j].fit(line,sample,x, y, z2, wh=wh)
                 
 class RsmRationalPolynomialPlusGrid(object):
     '''We can have both a RsmRationalPolynomial and a RsmGrid that is used

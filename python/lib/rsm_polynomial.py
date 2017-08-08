@@ -261,7 +261,7 @@ class RsmGrid(object):
         return self.line_grid(x), self.sample_grid(x)
     def fit(self, line, sample, latitude, longitude, height, wh = None):
         if(height.size != self.np_z):
-            raise RuntimeError("Fit was not passed the correct number of heights. Expected %d but got %s" % (np_z, height.shape))
+            raise RuntimeError("Fit was not passed the correct number of heights. Expected %d but got %s" % (self.np_z, height.shape))
         latv = np.linspace(latitude.min(), latitude.max(), self.np_x)
         lonv = np.linspace(longitude.min(), longitude.max(), self.np_y)
         ldata = np.empty((self.np_x, self.np_y, self.np_z))

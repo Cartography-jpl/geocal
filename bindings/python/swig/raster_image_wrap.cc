@@ -7131,6 +7131,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RasterImage__v_copy_needs_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_copy_needs_double" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::RasterImage const *)arg1)->copy_needs_double();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RasterImage__v_number_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
@@ -12093,6 +12136,16 @@ static PyMethodDef SwigMethods[] = {
 		"This does a bilinear interpolation of the data for fractional Line and\n"
 		"Sample. \n"
 		""},
+	 { (char *)"RasterImage__v_copy_needs_double", (PyCFunction)_wrap_RasterImage__v_copy_needs_double, METH_O, (char *)"\n"
+		"\n"
+		"virtual bool GeoCal::RasterImage::copy_needs_double() const\n"
+		"As an optimization, we assume when copying that data can be\n"
+		"represented as a int.\n"
+		"\n"
+		"That is true of many images. But we actually need to use double, then\n"
+		"we need to know that in the copy command. This function indicates if\n"
+		"we need a double or not. \n"
+		""},
 	 { (char *)"RasterImage__v_number_line", (PyCFunction)_wrap_RasterImage__v_number_line, METH_O, (char *)"\n"
 		"\n"
 		"virtual int GeoCal::RasterImage::number_line() const =0\n"
@@ -12159,7 +12212,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage_write", _wrap_RasterImage_write, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RasterImage::write(int Lstart, int Sstart, const blitz::Array< int, 2 > &A)\n"
+		"void RasterImage::write(int Lstart, int Sstart, const blitz::Array< double, 2 > &A)\n"
 		"\n"
 		""},
 	 { (char *)"RasterImage___str__", (PyCFunction)_wrap_RasterImage___str__, METH_O, NULL},

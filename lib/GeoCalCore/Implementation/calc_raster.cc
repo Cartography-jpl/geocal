@@ -41,6 +41,11 @@ void CalcRaster::unchecked_write(int Line, int Sample, int Val)
   throw Exception("CalcRaster doesn't support writing to.");
 }
 
+void CalcRaster::unchecked_write(int Line, int Sample, double Val)
+{
+  throw Exception("CalcRaster doesn't support writing to.");
+}
+
 //-----------------------------------------------------------------------
 /// Swap tiles so that Line, Sample are in range. This calls read_double
 /// if needed.

@@ -137,6 +137,10 @@ void RpcImage::unchecked_write(int Line, int Sample, int Val)
 {
   throw Exception("write not implemented");
 }
+void RpcImage::unchecked_write(int Line, int Sample, double Val) 
+{
+  throw Exception("write not implemented");
+}
 
 //-----------------------------------------------------------------------
 /// This sets up ref_img. We subset the passed in Ref_img to match the

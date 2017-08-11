@@ -188,6 +188,7 @@ public:
   void read_double(int B, int L, int S, int Nb, int Nl, int Ns, 
 		   double* Res) const;
   void write_int(int B, int L, int S, int V) const;
+  void write_double(int B, int L, int S, double V) const;
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -230,6 +231,8 @@ protected:
 
   template<class C, bool Swap_needed> double to_double(const char* c) const
   { return to_int<C, Swap_needed>(c);}
+  template<class C, bool Swap_needed> void from_double(const double&, 
+						       char* c) const;
 
 private:
   access_type access_;
@@ -399,6 +402,31 @@ VicarLiteFile::from_int<float, false>(const int& I, char* c) const
 { *(reinterpret_cast<float *>(c)) = static_cast<float>(I); }
 template<> inline void 
 VicarLiteFile::from_int<double, false>(const int& I, char* c) const
+{ *(reinterpret_cast<double *>(c)) = static_cast<double>(I); }
+
+template<> inline void 
+VicarLiteFile::from_double<unsigned char, true>(const double& I, char* c) const
+{ from_int<unsigned char, true>(static_cast<int>(I), c); }
+template<> inline void 
+VicarLiteFile::from_double<unsigned char, false>(const double& I, char* c) const
+{ from_int<unsigned char, false>(static_cast<int>(I), c); }
+template<> inline void 
+VicarLiteFile::from_double<short int, true>(const double& I, char* c) const
+{ from_int<short int, true>(static_cast<int>(I), c); }
+template<> inline void 
+VicarLiteFile::from_double<short int, false>(const double& I, char* c) const
+{ from_int<short int, false>(static_cast<int>(I), c); }
+template<> inline void 
+VicarLiteFile::from_double<int, true>(const double& I, char* c) const
+{ from_int<int, true>(static_cast<int>(I), c); }
+template<> inline void 
+VicarLiteFile::from_double<int, false>(const double& I, char* c) const
+{ from_int<int, false>(static_cast<int>(I), c); }
+template<> inline void 
+VicarLiteFile::from_double<float, false>(const double& I, char* c) const
+{ *(reinterpret_cast<float *>(c)) = static_cast<float>(I); }
+template<> inline void 
+VicarLiteFile::from_double<double, false>(const double& I, char* c) const
 { *(reinterpret_cast<double *>(c)) = static_cast<double>(I); }
 
 //-----------------------------------------------------------------------
@@ -673,6 +701,46 @@ inline void VicarLiteFile::write_int(int B, int L, int S, int V) const
     }
 }
 
+inline void VicarLiteFile::write_double(int B, int L, int S, double V) const 
+{
+  if(is_compressed_)
+    throw Exception("Can't use VicarLiteFile to write a compressed file");
+  if(swap_needed_)
+    switch(type_) {
+    case VICAR_BYTE:
+      from_double<unsigned char, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      break;
+    case VICAR_HALF:
+      from_double<short int, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      break;
+    case VICAR_FULL:
+      from_double<int, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      break;
+    default:
+      throw Exception("Unrecognized type");
+    }
+  else
+    switch(type_) {
+    case VICAR_BYTE:
+      from_double<unsigned char, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      break;
+    case VICAR_HALF:
+      from_double<short int, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      break;
+    case VICAR_FULL:
+      from_double<int, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      break;
+    case VICAR_FLOAT:
+      from_double<float, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      break;
+    case VICAR_DOUBLE:
+      from_double<double, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      break;
+    default:
+      throw Exception("Unrecognized type");
+    }
+}
+
 /****************************************************************//**
   This uses VicarLiteFile to implement a RasterImage.
 
@@ -740,7 +808,11 @@ public:
   }
   virtual ~VicarLiteRasterImage() {}
 
-//-----------------------------------------------------------------------
+  virtual bool copy_needs_double() const
+  { return (file().type() == VicarLiteFile::VICAR_FLOAT ||
+	    file().type() == VicarLiteFile::VICAR_DOUBLE); }
+
+  //-----------------------------------------------------------------------
 /// Underlying file.
 //-----------------------------------------------------------------------
 
@@ -795,6 +867,8 @@ public:
 
   virtual void unchecked_write(int Line, int Sample, int Val)
   { f_->write_int(band_, Line, Sample, Val); }
+  virtual void unchecked_write(int Line, int Sample, double Val)
+  { f_->write_double(band_, Line, Sample, Val); }
 
 //-----------------------------------------------------------------------
 /// Indicate if the file is compressed. If it is, we can't actually

@@ -52,6 +52,10 @@ public:
   {
     throw Exception("Not implemented");
   }
+  virtual void unchecked_write(int Line, int Sample, double Val)
+  {
+    throw Exception("Not implemented");
+  }
   virtual void print(std::ostream& Os) const
   {
     Os << "RasterImage of " << number_line() << " x " << number_sample() 

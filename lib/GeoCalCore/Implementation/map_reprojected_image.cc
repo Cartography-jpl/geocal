@@ -74,6 +74,11 @@ void MapReprojectedImage::unchecked_write(int Line, int Sample, int Val)
   throw Exception("Write not implemented for MapReprojectedImage");
 }
 
+void MapReprojectedImage::unchecked_write(int Line, int Sample, double Val)
+{
+  throw Exception("Write not implemented for MapReprojectedImage");
+}
+
 //-----------------------------------------------------------------------
 /// Print out a description of the object.
 //-----------------------------------------------------------------------

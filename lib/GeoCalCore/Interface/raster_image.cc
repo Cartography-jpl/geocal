@@ -201,6 +201,22 @@ void RasterImage::write(int Lstart, int Sstart, const blitz::Array<int, 2>& A)
   write_ptr(Lstart, Sstart, A.rows(), A.cols(), A.dataFirst());
 }
 
+void RasterImage::write(int Lstart, int Sstart, const blitz::Array<double, 2>& A) 
+{
+  Array<double, 2> data;
+  if(A.isStorageContiguous() &&
+     A.ordering(0) == 1 &&
+     A.ordering(1) == 2 &&
+     A.isRankStoredAscending(0) &&
+     A.isRankStoredAscending(1))
+    data.reference(A);
+  else {
+    data.reference(Array<double, 2>(A.shape()));
+    data = A;
+  }
+  write_ptr(Lstart, Sstart, A.rows(), A.cols(), A.dataFirst());
+}
+
 //-----------------------------------------------------------------------
 /// This calculates the grid resolution in meters for the center of
 /// the grid in the line direction. This is just the distance between
@@ -251,7 +267,9 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
     tnl = Tile_nline;
   if(Tile_nsamp > 0)
     tns = Tile_nsamp;
-  std::vector<int> buf(tnl * tns);
+  std::vector<int> buf;
+  if(!Img_in.copy_needs_double())
+    buf.resize(tnl * tns);
   for(int istart = 0; istart < Img_out.number_line();
       istart += tnl)
     for(int jstart = 0; jstart < Img_out.number_sample();
@@ -262,8 +280,13 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
 		  << tns << ")\n";
       int nl = std::min(tnl, Img_out.number_line() - istart);
       int ns = std::min(tns, Img_out.number_sample() - jstart);
-      Img_in.read_ptr(istart, jstart, nl, ns, &(*buf.begin()));
-      Img_out.write_ptr(istart, jstart, nl, ns, &(*buf.begin()));
+      if(Img_in.copy_needs_double())
+	Img_out.write(istart, jstart,
+		      Img_in.read_double(istart, jstart, nl, ns));
+      else {
+	Img_in.read_ptr(istart, jstart, nl, ns, &(*buf.begin()));
+	Img_out.write_ptr(istart, jstart, nl, ns, &(*buf.begin()));
+      }
     }
 }
 
@@ -288,7 +311,6 @@ void GeoCal::copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out,
     throw Exception("Images need to be the same size");
   int tnl = std::min(Img_in.number_tile_line(), Img_out.number_tile_line());
   int tns = std::min(Img_in.number_tile_sample(), Img_out.number_tile_sample());
-  std::vector<int> buf(tnl * tns);
   for(int istart = 0; istart < Img_out.number_line();
       istart += tnl)
     for(int jstart = 0; jstart < Img_out.number_sample();
@@ -300,9 +322,15 @@ void GeoCal::copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out,
       for(int i = istart; i < Img_out.number_line() && i < istart + tnl; ++i)
 	for(int j = jstart; j < Img_out.number_sample() && j < jstart + tns; 
 	    ++j) {
-	  int v = Img_in(i, j);
-	  if(v != Fill_value)
-	    Img_out.write(i, j, v);
+	  if(Img_in.copy_needs_double()) {
+	    double v = Img_in.read_double(i, j, 1, 1)(0,0);
+	    if((int) v != Fill_value)
+	      Img_out.write(i, j, v);
+	  } else {
+	    int v = Img_in(i, j);
+	    if(v != Fill_value)
+	      Img_out.write(i, j, v);
+	  }
 	}
     }
 }
@@ -328,7 +356,6 @@ void GeoCal::copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out,
     throw Exception("Images need to be the same size");
   int tnl = std::min(Img_in.number_tile_line(), Img_out.number_tile_line());
   int tns = std::min(Img_in.number_tile_sample(), Img_out.number_tile_sample());
-  std::vector<int> buf(tnl * tns);
   for(int istart = 0; istart < Img_out.number_line();
       istart += tnl)
     for(int jstart = 0; jstart < Img_out.number_sample();
@@ -340,8 +367,12 @@ void GeoCal::copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out,
       for(int i = istart; i < Img_out.number_line() && i < istart + tnl; ++i)
 	for(int j = jstart; j < Img_out.number_sample() && j < jstart + tns; 
 	    ++j) {
-	  if(Img_out.read(i, j) == Fill_value)
-	    Img_out.write(i, j, Img_in(i,j));
+	  if(Img_out.read(i, j) == Fill_value) {
+	    if(Img_in.copy_needs_double())
+	      Img_out.write(i, j, Img_in.read_double(i,j,1,1)(0,0));
+	    else
+	      Img_out.write(i, j, Img_in(i,j));
+	  }
 	}
     }
 }

@@ -62,6 +62,11 @@ void RasterSubSample::unchecked_write(int Line, int Sample, int Val)
   throw Exception("Write not implemented for RasterSubSample");
 }
 
+void RasterSubSample::unchecked_write(int Line, int Sample, double Val)
+{
+  throw Exception("Write not implemented for RasterSubSample");
+}
+
 //-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------

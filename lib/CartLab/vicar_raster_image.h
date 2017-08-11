@@ -155,6 +155,10 @@ public:
 
   virtual ~VicarRasterImage() {}
 
+  virtual bool copy_needs_double() const
+  { return (vicar_file().type() == VicarFile::VICAR_FLOAT ||
+	    vicar_file().type() == VicarFile::VICAR_DOUBLE); }
+
 //-----------------------------------------------------------------------
 /// Close a file. You don't normally need to call this directly, it
 /// is done by the destructor. But it is useful to have for use by Ruby.

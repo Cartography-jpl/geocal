@@ -16,6 +16,15 @@ class CalcRasterMultiBand: public RasterImageMultiBandVariable {
 public:
   virtual blitz::Array<double, 3> read_double(int Lstart, int Sstart, 
 					      int Nline, int Nsamp) const;
+
+//-----------------------------------------------------------------------
+/// We generally need doubles for copying CalcRaster. Specific classes
+/// can override this if desired, but the default should be to use
+/// doubles.
+//-----------------------------------------------------------------------
+  
+  virtual bool copy_needs_double() const {return true;}
+
 protected:
   blitz::Array<double, 3>& data_ptr() { return data; }
   mutable blitz::Array<double, 3> data;

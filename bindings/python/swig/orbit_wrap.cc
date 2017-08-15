@@ -12474,18 +12474,16 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
   boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   SwigValueWrapper< boost::math::quaternion< double > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
@@ -12517,18 +12515,91 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
+  boost::math::quaternion< double > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__v_sc_to_ci" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData__v_sc_to_ci" "', argument " "2"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData__v_sc_to_ci" "', argument " "2"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  arg2 = reinterpret_cast< boost::math::quaternion< double > * >(argp2);
+  {
+    try {
+      (arg1)->sc_to_ci((boost::math::quaternion< double > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionOrbitData__v_sc_to_ci",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_QuaternionOrbitData__v_sc_to_ci__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_QuaternionOrbitData__v_sc_to_ci__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionOrbitData__v_sc_to_ci'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::QuaternionOrbitData::sc_to_ci() const\n"
+    "    GeoCal::QuaternionOrbitData::sc_to_ci(boost::math::quaternion< double > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
   boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   SwigValueWrapper< boost::math::quaternion< GeoCal::AutoDerivative< double > > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
@@ -12557,6 +12628,81 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative(PyObj
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
+  boost::math::quaternion< GeoCal::AutoDerivative< double > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__v_sc_to_ci_with_derivative" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_boost__math__quaternionT_GeoCal__AutoDerivativeT_double_t_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData__v_sc_to_ci_with_derivative" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData__v_sc_to_ci_with_derivative" "', argument " "2"" of type '" "boost::math::quaternion< GeoCal::AutoDerivative< double > > const &""'"); 
+  }
+  arg2 = reinterpret_cast< boost::math::quaternion< GeoCal::AutoDerivative< double > > * >(argp2);
+  {
+    try {
+      (arg1)->sc_to_ci_with_derivative((boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionOrbitData__v_sc_to_ci_with_derivative",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionOrbitData__v_sc_to_ci_with_derivative'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::QuaternionOrbitData::sc_to_ci_with_derivative() const\n"
+    "    GeoCal::QuaternionOrbitData::sc_to_ci_with_derivative(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)\n");
+  return 0;
 }
 
 
@@ -21762,15 +21908,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitData_swigregister", OrbitData_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_QuaternionOrbitData", _wrap_new_QuaternionOrbitData, METH_VARARGS, (char *)"\n"
 		"\n"
-		"QuaternionOrbitData::QuaternionOrbitData(const TimeWithDerivative &Tm, const boost::shared_ptr<\n"
-		"CartesianInertial > &pos_ci, const boost::array< AutoDerivative<\n"
-		"double >, 3 > &pos_ci_with_der, const boost::array< AutoDerivative<\n"
-		"double >, 3 > &vel_inertial, const boost::math::quaternion<\n"
-		"AutoDerivative< double > > &sc_to_ci_q)\n"
-		"Construct QuaternionOrbitData.\n"
-		"\n"
-		"This takes data in a CartesianInertial coordinate system (e.g., Eci\n"
-		"coordinates). \n"
+		"QuaternionOrbitData::QuaternionOrbitData(const QuaternionOrbitData &V)\n"
+		"Copy constructor. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_ci_look_vector", _wrap_QuaternionOrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -21787,17 +21926,16 @@ static PyMethodDef SwigMethods[] = {
 		"ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const\n"
 		"Convert to ScLookVector. \n"
 		""},
-	 { (char *)"QuaternionOrbitData__v_sc_to_ci", (PyCFunction)_wrap_QuaternionOrbitData__v_sc_to_ci, METH_O, (char *)"\n"
+	 { (char *)"QuaternionOrbitData__v_sc_to_ci", _wrap_QuaternionOrbitData__v_sc_to_ci, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::math::quaternion<double> GeoCal::QuaternionOrbitData::sc_to_ci() const\n"
-		"Return the quaternion used to go from spacecraft to cartesian\n"
-		"inertial. \n"
+		"void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion< double > &sc_to_ci_q)\n"
+		"Set sc_to_ci. \n"
 		""},
-	 { (char *)"QuaternionOrbitData__v_sc_to_ci_with_derivative", (PyCFunction)_wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative, METH_O, (char *)"\n"
+	 { (char *)"QuaternionOrbitData__v_sc_to_ci_with_derivative", _wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::math::quaternion<AutoDerivative<double> > GeoCal::QuaternionOrbitData::sc_to_ci_with_derivative() const\n"
-		"Return the quaternion used to go from spacecraft to cartesian\n"
-		"inertial. \n"
+		"void QuaternionOrbitData::sc_to_ci_with_derivative(const boost::math::quaternion< AutoDerivative< double > >\n"
+		"&sc_to_ci_q)\n"
+		"Set sc_to_ci_with_derivative. \n"
 		""},
 	 { (char *)"QuaternionOrbitData__v_sc_to_cf", _wrap_QuaternionOrbitData__v_sc_to_cf, METH_VARARGS, (char *)"\n"
 		"\n"

@@ -545,6 +545,32 @@ QuaternionOrbitData::QuaternionOrbitData
 }
 
 //-----------------------------------------------------------------------
+/// Copy constructor.
+//-----------------------------------------------------------------------
+
+QuaternionOrbitData::QuaternionOrbitData
+(const QuaternionOrbitData& V)
+{
+  tm = V.tm;
+  pos = V.pos->create(V.pos->position);
+  pos_with_der = V.pos_with_der;
+  vel_cf = V.vel_cf;
+  vel_cf_with_der = V.vel_cf_with_der;
+  sc_to_cf_with_der = V.sc_to_cf_with_der;
+  sc_to_cf_ = value(sc_to_cf_with_der);
+  from_cf_ = V.from_cf_;
+  have_ci_to_cf = V.have_ci_to_cf;
+  if(V.have_ci_to_cf) {
+    ci_to_cf_ = V.ci_to_cf_;
+    ci_to_cf_der_ =V.ci_to_cf_der_;
+    pos_ci = V.pos_ci->create(V.pos_ci->position);
+    pos_ci_with_der = V.pos_ci_with_der;
+    vel_ci = V.vel_ci;
+    vel_ci_with_der = V.vel_ci_with_der;
+  }
+}
+
+//-----------------------------------------------------------------------
 /// Constructor.
 /// This make an perturbation to an existing QuaternionOrbitData. We
 /// take an offset to add to the position, and a rotation matrix that
@@ -769,6 +795,31 @@ void QuaternionOrbitData::initialize(Time Tm,
 						 pos->position[2]);
   sc_to_cf_ = ci_to_cf() * sc_to_ci_q;
   sc_to_cf_with_der = sc_to_cf_;
+  normalize(sc_to_cf_);
+  normalize(sc_to_cf_with_der);
+}
+
+//-----------------------------------------------------------------------
+/// Set sc_to_ci
+//-----------------------------------------------------------------------
+
+void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion<double>& sc_to_ci_q)
+{
+  sc_to_cf_ = ci_to_cf() * sc_to_ci_q;
+  sc_to_cf_with_der = sc_to_cf_;
+  normalize(sc_to_cf_);
+  normalize(sc_to_cf_with_der);
+}
+
+//-----------------------------------------------------------------------
+/// Set sc_to_ci_with_derivative
+//-----------------------------------------------------------------------
+
+void QuaternionOrbitData::sc_to_ci_with_derivative
+(const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q)
+{
+  sc_to_cf_with_der = ci_to_cf_with_derivative() * sc_to_ci_q;
+  sc_to_cf_ = value(sc_to_cf_with_der);
   normalize(sc_to_cf_);
   normalize(sc_to_cf_with_der);
 }

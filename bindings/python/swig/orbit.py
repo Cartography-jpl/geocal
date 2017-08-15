@@ -440,15 +440,8 @@ class QuaternionOrbitData(OrbitData):
     def __init__(self, *args):
         """
 
-        QuaternionOrbitData::QuaternionOrbitData(const TimeWithDerivative &Tm, const boost::shared_ptr<
-        CartesianInertial > &pos_ci, const boost::array< AutoDerivative<
-        double >, 3 > &pos_ci_with_der, const boost::array< AutoDerivative<
-        double >, 3 > &vel_inertial, const boost::math::quaternion<
-        AutoDerivative< double > > &sc_to_ci_q)
-        Construct QuaternionOrbitData.
-
-        This takes data in a CartesianInertial coordinate system (e.g., Eci
-        coordinates). 
+        QuaternionOrbitData::QuaternionOrbitData(const QuaternionOrbitData &V)
+        Copy constructor. 
         """
         _orbit.QuaternionOrbitData_swiginit(self, _orbit.new_QuaternionOrbitData(*args))
 
@@ -479,34 +472,41 @@ class QuaternionOrbitData(OrbitData):
         return _orbit.QuaternionOrbitData_sc_look_vector(self, *args)
 
 
-    def _v_sc_to_ci(self):
+    def _v_sc_to_ci(self, *args):
         """
 
-        boost::math::quaternion<double> GeoCal::QuaternionOrbitData::sc_to_ci() const
-        Return the quaternion used to go from spacecraft to cartesian
-        inertial. 
+        void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion< double > &sc_to_ci_q)
+        Set sc_to_ci. 
         """
-        return _orbit.QuaternionOrbitData__v_sc_to_ci(self)
+        return _orbit.QuaternionOrbitData__v_sc_to_ci(self, *args)
 
 
     @property
     def sc_to_ci(self):
         return self._v_sc_to_ci()
 
+    @sc_to_ci.setter
+    def sc_to_ci(self, value):
+      self._v_sc_to_ci(value)
 
-    def _v_sc_to_ci_with_derivative(self):
+
+    def _v_sc_to_ci_with_derivative(self, *args):
         """
 
-        boost::math::quaternion<AutoDerivative<double> > GeoCal::QuaternionOrbitData::sc_to_ci_with_derivative() const
-        Return the quaternion used to go from spacecraft to cartesian
-        inertial. 
+        void QuaternionOrbitData::sc_to_ci_with_derivative(const boost::math::quaternion< AutoDerivative< double > >
+        &sc_to_ci_q)
+        Set sc_to_ci_with_derivative. 
         """
-        return _orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative(self)
+        return _orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative(self, *args)
 
 
     @property
     def sc_to_ci_with_derivative(self):
         return self._v_sc_to_ci_with_derivative()
+
+    @sc_to_ci_with_derivative.setter
+    def sc_to_ci_with_derivative(self, value):
+      self._v_sc_to_ci_with_derivative(value)
 
 
     def _v_sc_to_cf(self, *args):

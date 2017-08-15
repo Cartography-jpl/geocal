@@ -241,6 +241,7 @@ public:
 		      vel_inertial,
 		      const boost::math::quaternion<AutoDerivative<double> >& 
 		      sc_to_ci_q);
+  QuaternionOrbitData(const QuaternionOrbitData& V);
   virtual ~QuaternionOrbitData() {}
 
   virtual CartesianInertialLookVector 
@@ -337,6 +338,7 @@ public:
 
   boost::math::quaternion<double> sc_to_ci() const 
   { return conj(ci_to_cf()) * sc_to_cf_; }
+  void sc_to_ci(const boost::math::quaternion<double>& sc_to_ci_q);
   
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian inertial
@@ -344,6 +346,7 @@ public:
 
   boost::math::quaternion<AutoDerivative<double> > sc_to_ci_with_derivative() const 
   { return conj(ci_to_cf_with_derivative()) * sc_to_cf_with_der; }
+  void sc_to_ci_with_derivative(const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q);
   
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian fixed.

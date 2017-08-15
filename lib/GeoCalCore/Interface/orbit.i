@@ -178,8 +178,8 @@ public:
   sc_look_vector(const CartesianFixedLookVector& Cf) const;
   virtual ScLookVectorWithDerivative 
   sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
-  %python_attribute(sc_to_ci, boost::math::quaternion<double>)
-  %python_attribute(sc_to_ci_with_derivative, 
+  %python_attribute_with_set(sc_to_ci, boost::math::quaternion<double>)
+  %python_attribute_with_set(sc_to_ci_with_derivative, 
 		    boost::math::quaternion<AutoDerivative<double> >)
   %python_attribute_with_set(sc_to_cf, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_cf_with_derivative, boost::math::quaternion<AutoDerivative<double> >)

@@ -4,6 +4,7 @@
 import numpy as np
 import scipy
 import math
+from geocal_swig import Rpc
 
 class RsmPolynomial(object):
     '''This is a polynomial, already working in the scaled XYZ coordinate
@@ -15,15 +16,15 @@ class RsmPolynomial(object):
         '''Set the subset of self.coefficient that corresponds to the RPC
         coefficients. This assumes RPC_B format.'''
         self.coefficient[:,:,:]=0
-        self.coefficient[0,0,0],self.coefficient[0,1,0],self.coefficient[1,0,0],self.coefficient[0,0,1],\
-        self.coefficient[1,1,0],self.coefficient[0,1,1],self.coefficient[1,0,1],\
-        self.coefficient[0,2,0],self.coefficient[2,0,0],self.coefficient[0,0,2],\
-        self.coefficient[1,1,1],self.coefficient[0,3,0],\
-        self.coefficient[2,1,0],\
-        self.coefficient[0,1,2], self.coefficient[1,2,0],\
-        self.coefficient[3,0,0],\
-        self.coefficient[1,0,2],self.coefficient[0,2,1],\
-        self.coefficient[2,0,1],\
+        self.coefficient[0,0,0],self.coefficient[1,0,0],self.coefficient[0,1,0],self.coefficient[0,0,1],\
+        self.coefficient[1,1,0],self.coefficient[1,0,1],self.coefficient[0,1,1],\
+        self.coefficient[2,0,0],self.coefficient[0,2,0],self.coefficient[0,0,2],\
+        self.coefficient[1,1,1],self.coefficient[3,0,0],\
+        self.coefficient[1,2,0],\
+        self.coefficient[1,0,2], self.coefficient[2,1,0],\
+        self.coefficient[0,3,0],\
+        self.coefficient[0,1,2],self.coefficient[2,0,1],\
+        self.coefficient[0,2,1],\
         self.coefficient[0,0,3] = coeff
 
     def __call__(self, x, y, z):
@@ -66,34 +67,51 @@ class RsmPolynomial(object):
         return res
 
 class RsmRationalPolynomial(object):
-    def __init__(self, NP_X, NP_Y, NP_Z):
+    '''This is an RSM. The X,Y,Z can be either longitude,latitude,height,
+    or it can be Rectangular system. For a rectangular system, we can go 
+    with [x y z] = Rot * (Cartesian_fixed - origin).  By convention, we 
+    pass in the Cartesian_fixed X, Y, Z and carry the transformation in
+    this class.'''
+    def __init__(self, NP_X, NP_Y, NP_Z, fit_rpc_param_only = False,
+                 DP_X=-1, DP_Y=-1,DP_Z=-1):
         '''Right now, we use the same order polynomial for both line and
         sample, and both numerator and denominator. This isn't an actual
         requirement, we'll just keep things simple for right now.'''
-        self.height_offset = 0
-        self.height_scale = 0
-        self.latitude_offset = 0
-        self.latitude_scale = 0
-        self.longitude_offset = 0
-        self.longitude_scale = 0
+        self.fit_rpc_param_only = fit_rpc_param_only
+        self.z_offset = 0
+        self.z_scale = 0
+        self.y_offset = 0
+        self.y_scale = 0
+        self.x_offset = 0
+        self.x_scale = 0
         self.line_offset = 0
         self.line_scale = 0
         self.sample_offset = 0
         self.sample_scale = 0
+        if(fit_rpc_param_only) :
+            NP_X = 3
+            NP_Y = 3
+            NP_Z = 3
+        if(DP_X < 0):
+            DP_X = NP_X
+        if(DP_Y < 0):
+            DP_Y = NP_Y
+        if(DP_Z < 0):
+            DP_Z = NP_Z
         self.line_num = RsmPolynomial(NP_X, NP_Y, NP_Z)
-        self.line_den = RsmPolynomial(NP_X, NP_Y, NP_Z)
+        self.line_den = RsmPolynomial(DP_X, DP_Y, DP_Z)
         self.sample_num = RsmPolynomial(NP_X, NP_Y, NP_Z)
-        self.sample_den = RsmPolynomial(NP_X, NP_Y, NP_Z)
+        self.sample_den = RsmPolynomial(DP_X, DP_Y, DP_Z)
 
     def rpc_set(self, rpc):
         '''Set this to match an existing RPC, useful for testing against
         our existing and tested RPC code.'''
-        self.height_offset = rpc.height_offset
-        self.height_scale = rpc.height_scale
-        self.latitude_offset = rpc.latitude_offset
-        self.latitude_scale = rpc.latitude_scale
-        self.longitude_offset = rpc.longitude_offset
-        self.longitude_scale = rpc.longitude_scale
+        self.z_offset = rpc.height_offset
+        self.z_scale = rpc.height_scale
+        self.y_offset = rpc.latitude_offset
+        self.y_scale = rpc.latitude_scale
+        self.x_offset = rpc.longitude_offset
+        self.x_scale = rpc.longitude_scale
         self.line_offset = rpc.line_offset
         self.line_scale = rpc.line_scale
         self.sample_offset = rpc.sample_offset
@@ -103,10 +121,11 @@ class RsmRationalPolynomial(object):
         self.sample_num.rpc_coeff_set(rpc.sample_numerator)
         self.sample_den.rpc_coeff_set(rpc.sample_denominator)
         
-    def __call__(self, lat, lon, h):
-        x = (lat - self.latitude_offset) / self.latitude_scale
-        y = (lon - self.longitude_offset) / self.longitude_scale
-        z = (h - self.height_offset) / self.height_scale
+    def __call__(self, xin,yin,zin):
+        '''For geodetic, x is longitude, y is latitude, z is height.'''
+        x = (xin - self.x_offset) / self.x_scale
+        y = (yin - self.y_offset) / self.y_scale
+        z = (zin - self.z_offset) / self.z_scale
         f1 = self.line_num(x,y,z)
         f2 = self.line_den(x,y,z)
         f3 = self.sample_num(x,y,z)
@@ -115,26 +134,25 @@ class RsmRationalPolynomial(object):
                 f3 / f4 * self.sample_scale + self.sample_offset]
 
     def fit_offset_and_scale(self, min_line, max_line, min_sample, max_sample,
-                             min_height, max_height,
-                             latitude, longitude):
+                             min_z, max_z, x, y):
         '''Set line_offset, line_scale etc to cover the range for each
         of the set of data provided.'''
-        self.height_offset = (max_height + min_height) / 2.0
-        self.height_scale = (max_height - min_height) / 2.0
+        self.z_offset = (max_z + min_z) / 2.0
+        self.z_scale = (max_z - min_z) / 2.0
         self.line_offset = (max_line + min_line) / 2.0
         self.line_scale = (max_line - min_line) / 2.0
         self.sample_offset = (max_sample + min_sample) / 2.0
         self.sample_scale = (max_sample - min_sample) / 2.0
-        min_lat = latitude.min()
-        max_lat = latitude.max()
-        min_lon = longitude.min()
-        max_lon = longitude.max()
-        self.latitude_offset = (max_lat + min_lat) / 2
-        self.latitude_scale = (max_lat - min_lat) / 2
-        self.longitude_offset = (max_lon + min_lon) / 2
-        self.longitude_scale = (max_lon - min_lon) / 2
+        min_y = y.min()
+        max_y = y.max()
+        min_x = x.min()
+        max_x = x.max()
+        self.y_offset = (max_y + min_y) / 2
+        self.y_scale = (max_y - min_y) / 2
+        self.x_offset = (max_x + min_x) / 2
+        self.x_scale = (max_x - min_x) / 2
 
-    def fit(self, line, sample, latitude, longitude, height,
+    def fit(self, line, sample, xin, yin, zin,
             do_scale = True, wh = None):
         '''Fit rational polynomial to the given data. We usually also want
         to determine the scale for line_offset etc. from this data. Set 
@@ -149,7 +167,7 @@ class RsmRationalPolynomial(object):
         at fixed height planes. This doesn't matter for fitting
         polynomials, but does for gridded data (and we want a common
         interface for both). So we give height as 1 d arrays, and then
-        report latitude and longitude as n_line x n_sample x n_height
+        report longitude, latitude as n_line x n_sample x n_height
         arrays.
 
         line and sample can either be 1d or 3d (so n_line and n_sample, or
@@ -162,18 +180,20 @@ class RsmRationalPolynomial(object):
                 self.fit_offset_and_scale(line[wh].min(), line[wh].max(),
                                           sample[wh].min(),
                                           sample[wh].max(),
-                                          height.min(), height.max(),
-                                          latitude[wh], longitude[wh])
+                                          zin.min(), zin.max(),
+                                          xin[wh], yin[wh])
             else:
                 self.fit_offset_and_scale(line.min(), line.max(),
                                           sample.min(),
                                           sample.max(),
-                                          height.min(), height.max(),
-                                          latitude, longitude)
+                                          zin.min(), zin.max(),
+                                          xin, yin)
+        if(self.fit_rpc_param_only):
+            self._fit_rpc_param(line, sample, xin, yin, zin, wh)
                 
         ln_lhs_v = (line - self.line_offset) / self.line_scale
         if(len(ln_lhs_v.shape) == 1):
-            ln_lhs = np.empty(latitude.shape)
+            ln_lhs = np.empty(xin.shape)
             ln_lhs[:,:,:] = ln_lhs_v[:, np.newaxis,np.newaxis]
         else:
             ln_lhs = ln_lhs_v
@@ -182,16 +202,16 @@ class RsmRationalPolynomial(object):
         ln_lhs = ln_lhs.reshape(ln_lhs.size)
         smp_lhs_v = (sample - self.sample_offset) / self.sample_scale
         if(len(smp_lhs_v.shape) == 1):
-            smp_lhs = np.empty(latitude.shape)
+            smp_lhs = np.empty(xin.shape)
             smp_lhs[:,:,:] = smp_lhs_v[np.newaxis,:,np.newaxis]
         else:
             smp_lhs = smp_lhs_v
         if(wh is not None):
             smp_lhs = smp_lhs[wh]
         smp_lhs = smp_lhs.reshape(smp_lhs.size)
-        x = (latitude - self.latitude_offset) / self.latitude_scale
-        y = (longitude - self.longitude_offset) / self.longitude_scale
-        zv = (height - self.height_offset) / self.height_scale
+        x = (xin - self.x_offset) / self.x_scale
+        y = (yin - self.y_offset) / self.y_scale
+        zv = (zin - self.z_offset) / self.z_scale
         z = np.empty(x.shape)
         z[:,:,:] = zv[np.newaxis, np.newaxis, :]
         if(wh is not None):
@@ -245,6 +265,33 @@ class RsmRationalPolynomial(object):
         self.sample_den.coefficient[:,:,:] = \
             np.concatenate(([1.0,], smpar[nx*ny*nz:])).reshape(nx2,ny2,nz2)
 
+    def _fit_rpc_param(self, line, sample, xin, yin, zin, wh):
+        rpc = Rpc()
+        rpc.height_offset = self.z_offset
+        rpc.height_scale = self.z_scale
+        rpc.line_offset = self.line_offset
+        rpc.line_scale = self.line_scale
+        rpc.sample_offset = self.sample_offset
+        rpc.sample_scale = self.sample_scale
+        rpc.latitude_offset = self.y_offset
+        rpc.latitude_scale = self.y_scale
+        rpc.longitude_offset = self.x_offset
+        rpc.longitude_scale = self.x_scale
+        z2 = np.empty(xin.shape)
+        z2[:,:,:] = zin[np.newaxis,np.newaxis,:]
+        if(wh is not None):
+            rpc.fit_all(line[wh], sample[wh], yin[wh], xin[wh],
+                        z2[wh])
+        else:
+            rpc.fit_all(line.flatten(), sample.flatten(),
+                        yin.flatten(), xin.flatten(),
+                        z2.flatten())
+        self.line_num.rpc_coeff_set(rpc.line_numerator)
+        self.line_den.rpc_coeff_set(rpc.line_denominator)
+        self.sample_num.rpc_coeff_set(rpc.sample_numerator)
+        self.sample_den.rpc_coeff_set(rpc.sample_denominator)
+        
+
 class RsmGrid(object):
     '''Use a interpolation grid to map from ground to image. Right now we
     only do a linear interpolation. The RSM documentation suggests doing
@@ -256,36 +303,36 @@ class RsmGrid(object):
         self.np_z = NP_Z
         self.line_grid = None
         self.sample_grid = None
-    def __call__(self, lat, lon, h):
-        x = np.stack((lat, lon, h), axis=-1)
+    def __call__(self, xin, yin, zin):
+        x = np.stack((xin, yin, zin), axis=-1)
         return self.line_grid(x), self.sample_grid(x)
-    def fit(self, line, sample, latitude, longitude, height, wh = None):
-        if(height.size != self.np_z):
-            raise RuntimeError("Fit was not passed the correct number of heights. Expected %d but got %s" % (self.np_z, height.shape))
-        latv = np.linspace(latitude.min(), latitude.max(), self.np_x)
-        lonv = np.linspace(longitude.min(), longitude.max(), self.np_y)
+    def fit(self, line, sample, xin, yin, zin, wh = None):
+        if(zin.size != self.np_z):
+            raise RuntimeError("Fit was not passed the correct number of heights. Expected %d but got %s" % (self.np_z, zin.shape))
+        xv = np.linspace(xin.min(), xin.max(), self.np_x)
+        yv = np.linspace(yin.min(), yin.max(), self.np_y)
         ldata = np.empty((self.np_x, self.np_y, self.np_z))
         sdata = np.empty(ldata.shape)
         for i in range(self.np_z):
-            lat = latitude[:,:,i]
-            lon = longitude[:,:,i]
+            x = xin[:,:,i]
+            y = yin[:,:,i]
             ln = line[:,:,i]
             smp = sample[:,:,i]
             if(wh is not None):
-                lat = lat[wh[:,:,i]]
-                lon = lon[wh[:,:,i]]
+                x = x[wh[:,:,i]]
+                y = y[wh[:,:,i]]
                 ln = ln[wh[:,:,i]]
                 smp = smp[wh[:,:,i]]
             else:
-                lat = lat.reshape(lat.size)
-                lon = lon.reshape(lon.size)
+                x = x.reshape(x.size)
+                y = y.reshape(y.size)
                 ln= ln.reshape(ln.size)
                 smp = smp.reshape(smp.size)
-            gd = scipy.interpolate.griddata((lat,lon), np.stack((ln, smp), axis=1), (np.outer(latv,np.ones_like(lonv)), np.outer(np.ones_like(latv), lonv)))
+            gd = scipy.interpolate.griddata((x,y), np.stack((ln, smp), axis=1), (np.outer(xv,np.ones_like(yv)), np.outer(np.ones_like(xv), yv)))
             ldata[...,i] = gd[...,0]
             sdata[...,i] = gd[...,1]
-        self.line_grid = scipy.interpolate.RegularGridInterpolator((latv,lonv,height), ldata, bounds_error=False,fill_value=None)
-        self.sample_grid = scipy.interpolate.RegularGridInterpolator((latv,lonv,height), sdata, bounds_error=False,fill_value=None)
+        self.line_grid = scipy.interpolate.RegularGridInterpolator((xv,yv,zin), ldata, bounds_error=False,fill_value=None)
+        self.sample_grid = scipy.interpolate.RegularGridInterpolator((xv,yv,zin), sdata, bounds_error=False,fill_value=None)
 
     
 class RsmLowOrderPolynomial(object):
@@ -441,15 +488,15 @@ class RsmRationalPolynomialPlusGrid(object):
         self.rational_poly = rational_poly
         self.corr_grid = corr_grid
 
-    def __call__(self, lat, lon, h):
-        line, sample = self.rational_poly(lat,lon,h)
-        lcorr, scorr  = self.corr_grid(lat,lon,h)
+    def __call__(self, x, y, z):
+        line, sample = self.rational_poly(x, y, z)
+        lcorr, scorr  = self.corr_grid(x, y, z)
         return [line + lcorr, sample + scorr] 
 
-    def fit(self, line, sample, latitude, longitude, height):
-        self.rational_poly.fit(line,sample,latitude,longitude,height)
-        lcalc, scalc = self.rational_poly(latitude,longitude,height)
+    def fit(self, line, sample, x, y, z):
+        self.rational_poly.fit(line,sample,x, y, z)
+        lcalc, scalc = self.rational_poly(x,y,z)
         lcorr = line - lcalc
         scorr = sample - scalc
-        self.corr_grid.fit(lcorr, scorr, latitude, longitude, height)
+        self.corr_grid.fit(lcorr, scorr, x,y,z)
 

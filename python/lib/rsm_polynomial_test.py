@@ -100,6 +100,16 @@ def test_rsm_fit_rpc(rpc_data):
                         rpc_data.h[np.newaxis, np.newaxis, :])
     assert abs(rpc_data.ln-lncalc).max() < 0.01
     assert abs(rpc_data.smp-smpcalc).max() < 0.01
+
+@require_serialize
+def test_rsm_fit_rpc_max_order(rpc_data):
+    r = RsmRationalPolynomial(3,3,3, fit_rpc_param_only=True, N_max_order=3,
+                              D_max_order=3)
+    r.fit(rpc_data.ln, rpc_data.smp, rpc_data.lon, rpc_data.lat, rpc_data.h)
+    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,
+                        rpc_data.h[np.newaxis, np.newaxis, :])
+    assert abs(rpc_data.ln-lncalc).max() < 0.01
+    assert abs(rpc_data.smp-smpcalc).max() < 0.01
     
 @require_serialize
 def test_rsm_fit_1dln(rpc_data):

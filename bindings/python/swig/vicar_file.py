@@ -510,6 +510,8 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
              return self.label_int(ky, prop)
           elif(tp == VicarFile.VICAR_REAL):
              return self.label_float(ky, prop)
+          elif(tp == VicarFile.VICAR_DOUBLE):
+             return self.label_double(ky, prop)
           else:
              return self.label_string(ky, prop)
         else:
@@ -518,6 +520,8 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
              return self.label_int(key)
           elif(tp == VicarFile.VICAR_REAL):
              return self.label_float(key)
+          elif(tp == VicarFile.VICAR_DOUBLE):
+             return self.label_double(key)
           else:
              return self.label_string(key)
 
@@ -550,6 +554,7 @@ VicarFile.label_set = new_instancemethod(_vicar_file.VicarFile_label_set, None, 
 VicarFile.ltype = new_instancemethod(_vicar_file.VicarFile_ltype, None, VicarFile)
 VicarFile.label_int = new_instancemethod(_vicar_file.VicarFile_label_int, None, VicarFile)
 VicarFile.label_float = new_instancemethod(_vicar_file.VicarFile_label_float, None, VicarFile)
+VicarFile.label_double = new_instancemethod(_vicar_file.VicarFile_label_double, None, VicarFile)
 VicarFile.label_string = new_instancemethod(_vicar_file.VicarFile_label_string, None, VicarFile)
 VicarFile.label_list = new_instancemethod(_vicar_file.VicarFile_label_list, None, VicarFile)
 VicarFile.property_list = new_instancemethod(_vicar_file.VicarFile_property_list, None, VicarFile)

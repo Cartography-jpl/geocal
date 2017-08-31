@@ -135,6 +135,8 @@ geocalinc_HEADERS+= @srcimplementation@/spice_kernel_list.h
 libgeocal_la_SOURCES+= @srcimplementation@/spice_kernel_list.cc
 geocalinc_HEADERS+= @srcimplementation@/spice_dem.h
 libgeocal_la_SOURCES+= @srcimplementation@/spice_dem.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_polynomial.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_polynomial.cc
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -177,6 +179,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/spice_helper_test.cc
 libgeocal_la_SOURCES+= @srcimplementation@/sdp_helper.cc
 geocalinc_HEADERS+= @srcimplementation@/sdp_helper.h
 geocal_test_all_SOURCES+= @srcimplementation@/sdp_helper_test.cc
+
 
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/did_datum_wrap.cc
@@ -327,6 +330,8 @@ SWIG_SRC += @swigsrc@/spice_kernel_list_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/spice_kernel_list.i
 SWIG_SRC += @swigsrc@/spice_dem_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/spice_dem.i
+SWIG_SRC += @swigsrc@/rsm_polynomial_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_polynomial.i
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
@@ -378,6 +383,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/tle_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_planet_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_dem_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_polynomial_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

@@ -333,7 +333,11 @@ class RsmGrid(object):
                 y = y.reshape(y.size)
                 ln= ln.reshape(ln.size)
                 smp = smp.reshape(smp.size)
+            # Use nearest value outside of the convex hull, linear interpolation
+            # otherwise
+            gd_nearest = scipy.interpolate.griddata((x,y), np.stack((ln, smp), axis=1), (np.outer(xv,np.ones_like(yv)), np.outer(np.ones_like(xv), yv)), method='nearest')
             gd = scipy.interpolate.griddata((x,y), np.stack((ln, smp), axis=1), (np.outer(xv,np.ones_like(yv)), np.outer(np.ones_like(xv), yv)))
+            gd[np.isnan(gd)] = gd_nearest[np.isnan(gd)]
             ldata[...,i] = gd[...,0]
             sdata[...,i] = gd[...,1]
         self.line_grid = scipy.interpolate.RegularGridInterpolator((xv,yv,zin), ldata, bounds_error=False,fill_value=None)

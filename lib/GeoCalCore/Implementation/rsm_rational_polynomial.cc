@@ -1,6 +1,7 @@
 #include "rsm_rational_polynomial.h"
 #include "geocal_serialize_support.h"
 #include "geocal_rpc.h"
+#include "geocal_gsl_fit.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -212,8 +213,54 @@ void RsmRationalPolynomial::fit
  const std::vector<double>& Y,
  const std::vector<double>& Z)
 {
+  firstIndex i1; secondIndex i2;
+  Range ra = Range::all();
+  if(Line.size() != Sample.size() ||
+     Line.size() != X.size() ||
+     Line.size() != Y.size() ||
+     Line.size() != Z.size())
+    throw Exception("Line, Sample, X, Y and Z all need to be the same size");
+  Array<double, 1> ln_lhs(Line.size());
+  Array<double, 1> smp_lhs(Line.size());
+  Array<double, 1> xs(Line.size());
+  Array<double, 1> ys(Line.size());
+  Array<double, 1> zs(Line.size());
+  for(int i = 0; i < (int) Line.size(); ++i) {
+    xs(i) = (X[i] - x_offset_) / x_scale_;
+    ys(i) = (Y[i] - y_offset_) / y_scale_;
+    zs(i) = (Z[i] - z_offset_) / z_scale_;
+    ln_lhs(i) = (Line[i] - line_offset_) / line_scale_;
+    smp_lhs(i) = (Sample[i] - sample_offset_) / sample_scale_;
+  }
+  Array<double, 2> ln_den_jac = line_den_.jacobian(xs, ys, zs);
+  Array<double, 2> smp_den_jac = sample_den_.jacobian(xs, ys, zs);
+  Array<double, 2> ln_num_jac = line_num_.jacobian(xs, ys, zs);
+  Array<double, 2> smp_num_jac = sample_num_.jacobian(xs, ys, zs);
+  Array<double, 2> ln_jac(ln_den_jac.rows(), ln_den_jac.cols() +
+			  ln_num_jac.cols());
+  Array<double, 2> smp_jac(smp_den_jac.rows(), smp_den_jac.cols() +
+			   smp_num_jac.cols());
+  ln_jac(ra, Range(0, ln_num_jac.cols() - 1)) = ln_num_jac;
+  ln_jac(ra, Range(ln_num_jac.cols(), Range::toEnd)) =
+    -ln_lhs(i1) * ln_den_jac;
+  smp_jac(ra, Range(0, smp_num_jac.cols() - 1)) = smp_num_jac;
+  smp_jac(ra, Range(smp_num_jac.cols(), Range::toEnd)) =
+    -smp_lhs(i1) * smp_den_jac;
+  GslMatrix cov;
+  GslVector ln_c;
+  GslVector smp_c;
+  double chisq;
+  gsl_fit(ln_jac, ln_lhs, ln_c, cov, chisq);
+  gsl_fit(smp_jac, smp_lhs, smp_c, cov, chisq);
+  line_num_.fitted_coefficent(ln_c.blitz_array()(Range(0,
+						       ln_num_jac.cols()-1)));
+  line_den_.fitted_coefficent(ln_c.blitz_array()(Range(ln_num_jac.cols(),
+						       Range::toEnd)));
+  sample_num_.fitted_coefficent(smp_c.blitz_array()(Range(0,
+					       smp_num_jac.cols()-1)));
+  sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
+					       Range::toEnd)));
 }
-
 
 //-----------------------------------------------------------------------
 /// Print to stream.

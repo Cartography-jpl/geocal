@@ -5,10 +5,13 @@
 
 %{
 #include "rsm_rational_polynomial.h"
+#include "geocal_rpc.h"
+#include "image_ground_connection.h"
 %}
 %base_import(generic_object)
 %import "image_coordinate.i"
 %import "rsm_polynomial.i"
+%import "geocal_rpc.i"
 
 %geocal_shared_ptr(GeoCal::RsmRationalPolynomial);
 

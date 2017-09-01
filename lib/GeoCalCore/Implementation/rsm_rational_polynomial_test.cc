@@ -105,7 +105,12 @@ BOOST_AUTO_TEST_CASE(fit_test)
 			 *std::max_element(y.begin(), y.end()),
 			 *std::min_element(z.begin(), z.end()),
 			 *std::max_element(z.begin(), z.end()));
-  std::cerr << r << "\n";
+  r.fit(line, sample, x, y, z);
+  ImageCoordinate ic_expect = rpc.image_coordinate(gp);
+  ImageCoordinate ic = r.image_coordinate(gp.longitude(), gp.latitude(),
+					  gp.height_reference_surface());
+  BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
+  BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
 }
 
 BOOST_AUTO_TEST_CASE(serialize)

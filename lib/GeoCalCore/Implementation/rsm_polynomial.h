@@ -4,6 +4,7 @@
 #include <boost/array.hpp>
 #include <blitz/array.h>
 namespace GeoCal {
+  class RsmRationalPolynomial;
 /****************************************************************//**
   This is used to handle a single polynomial for use with a 
   RsmRationalPolynomial. This is a low level class, you don't 
@@ -61,6 +62,10 @@ private:
 
   RsmPolynomial() {}
   friend class boost::serialization::access;
+  // This is a friend just so it can call RsmPolynomial default
+  // constructor from its default constructor. It doesn't do anything
+  // else with private member of RsmPolynomial.
+  friend class RsmRationalPolynomial;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };

@@ -183,10 +183,11 @@ blitz::Array<double, 3> RsmPolynomial::operator()
 }
 
 //-----------------------------------------------------------------------
-/// 
+/// This is the jacobian of the value with respect to
+/// the fitted_coefficent
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> RsmPolynomial::jacobian
+blitz::Array<double, 2> RsmPolynomial::jacobian_fitted_coefficent
 (const blitz::Array<double, 1>& X,
  const blitz::Array<double, 1>& Y, const blitz::Array<double, 1>& Z) const
 {
@@ -213,6 +214,40 @@ blitz::Array<double, 2> RsmPolynomial::jacobian
 	if(!(is_denominator_  && i == 0  && j == 0 && k ==0))
 	  if(max_order_ < 0 || i + j + k <= max_order_)
 	    res(ra, ind++) = xpow(ra,i) * ypow(ra,j) * zpow(ra, k);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// This is the jacobian of the value with respect to
+/// X, Y, and Z.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 1> RsmPolynomial::jacobian
+(double X, double Y, double Z) const
+{
+  Array<double, 1> res(3);
+  res = 0;
+  firstIndex i1; secondIndex i2; thirdIndex i3;
+  Array<double, 1> xpow(coefficient_.rows());
+  Array<double, 1> ypow(coefficient_.cols());
+  Array<double, 1> zpow(coefficient_.depth());
+  xpow(0) = ypow(0) = zpow(0) = 1;
+  for(int i = 1; i < xpow.rows(); ++i)
+    xpow(i) = xpow(i-1) * X;
+  for(int i = 1; i < ypow.rows(); ++i)
+    ypow(i) = ypow(i-1) * Y;
+  for(int i = 1; i < zpow.rows(); ++i)
+    zpow(i) = zpow(i-1) * Z;
+  for(int i = 0; i < coefficient_.rows(); ++i)
+    for(int j = 0; j < coefficient_.cols(); ++j)
+      for(int k = 0; k < coefficient_.cols(); ++k) {
+	if(i > 0)
+	  res(0) += coefficient_(i,j,k) * i * xpow(i-1) * ypow(j) * zpow(k);
+	if(j > 0)
+	  res(1) += coefficient_(i,j,k) * xpow(i) * j * ypow(j-1) * zpow(k);
+	if(k > 0)
+	  res(2) += coefficient_(i,j,k) * xpow(i) * ypow(j) * k * zpow(k-1);
+      }
   return res;
 }
 

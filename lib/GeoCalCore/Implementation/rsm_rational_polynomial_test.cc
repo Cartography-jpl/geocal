@@ -69,6 +69,17 @@ BOOST_AUTO_TEST_CASE(basic_test)
 					  gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
+  Array<double, 2> jac_exp =
+    rpc.image_coordinate_jac(gp.latitude(), gp.longitude(),
+			     gp.height_reference_surface());
+  Array<double, 2> jac =
+    r.image_coordinate_jacobian(gp.longitude(), gp.latitude(),
+				gp.height_reference_surface());
+  // We have first column swapped because RPC has lat at x, while RSM
+  // has lon as x.
+  BOOST_CHECK_MATRIX_CLOSE(jac(Range::all(), 0), jac_exp(Range::all(), 1));
+  BOOST_CHECK_MATRIX_CLOSE(jac(Range::all(), 1), jac_exp(Range::all(), 0));
+  BOOST_CHECK_MATRIX_CLOSE(jac(Range::all(), 2), jac_exp(Range::all(), 2));
 }
 
 BOOST_AUTO_TEST_CASE(fit_test)

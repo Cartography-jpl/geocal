@@ -271,6 +271,17 @@ class RsmRationalPolynomial(geocal_swig.generic_object.GenericObject):
         return _rsm_rational_polynomial.RsmRationalPolynomial_fit(self, Line, Sample, X, Y, Z)
 
 
+    def image_coordinate_jacobian(self, X, Y, Z):
+        """
+
+        blitz::Array< double, 2 > RsmRationalPolynomial::image_coordinate_jacobian(double X, double Y, double Z) const
+        This the jacobian of the line, sample with respect to X, Y, Z.
+
+        This is a 2x3 matrix. 
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate_jacobian(self, X, Y, Z)
+
+
     def _v_line_offset(self):
         """
 
@@ -476,6 +487,7 @@ RsmRationalPolynomial.image_coordinate = new_instancemethod(_rsm_rational_polyno
 RsmRationalPolynomial.set_rpc_coeff = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_set_rpc_coeff, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit_offset_and_scale = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_offset_and_scale, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit, None, RsmRationalPolynomial)
+RsmRationalPolynomial.image_coordinate_jacobian = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate_jacobian, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_line_offset = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_offset, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_line_scale = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_scale, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_sample_offset = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_sample_offset, None, RsmRationalPolynomial)

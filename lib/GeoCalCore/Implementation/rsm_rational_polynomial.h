@@ -33,6 +33,27 @@ public:
 	   const std::vector<double>& Y,
 	   const std::vector<double>& Z);
 
+//-----------------------------------------------------------------------
+/// Initial guess to use when inverting the ground to image
+/// function. Not sure if this belongs here or not, but for now we'll
+/// try having this here.  Currently our initial guess is just the
+/// middle of our X,Y range, but we can do something more intelligent
+/// in the future if needed (e.g., a linear approximation to the
+/// rational polynomial, or something like that.
+//-----------------------------------------------------------------------
+  
+  void initial_guess(double Line, double Sample, double Z,
+		     double& X_guess, double& Y_guess) const
+  { X_guess = x_offset_; Y_guess = y_offset_; }
+
+//-----------------------------------------------------------------------
+/// Initial guess at Z, if we need to find that also. This is just the
+/// middle Z value.
+//-----------------------------------------------------------------------
+
+  double initial_guess_z(double Line, double Sample) const { return z_offset_;}
+  blitz::Array<double, 2> image_coordinate_jacobian
+  (double X, double Y, double Z) const;
   double line_offset() const {return line_offset_;}
   double line_scale() const {return line_scale_;}
   double sample_offset() const {return sample_offset_;}

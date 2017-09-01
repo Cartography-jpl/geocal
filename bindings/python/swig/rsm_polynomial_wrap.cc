@@ -6903,7 +6903,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian_fitted_coefficent(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmPolynomial *arg1 = (GeoCal::RsmPolynomial *) 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -6922,12 +6922,12 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
   PyObject *swig_obj[4] ;
   SwigValueWrapper< blitz::Array< double,2 > > result;
   
-  if (!SWIG_Python_UnpackTuple(args,"RsmPolynomial_jacobian",4,4,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"RsmPolynomial_jacobian_fitted_coefficent",4,4,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmPolynomial_jacobian" "', argument " "1"" of type '" "GeoCal::RsmPolynomial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmPolynomial_jacobian_fitted_coefficent" "', argument " "1"" of type '" "GeoCal::RsmPolynomial const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
@@ -6944,11 +6944,11 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian_fitted_coefficent', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian_fitted_coefficent', expecting type  Array<double,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -6961,11 +6961,11 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<double >(swig_obj[2]);
       if(!numpy3.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian_fitted_coefficent', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian_fitted_coefficent', expecting type  Array<double,1>");
         return NULL;
       }
       a3.reference(to_blitz_array<double, 1>(numpy3));
@@ -6978,11 +6978,11 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<double >(swig_obj[3]);
       if(!numpy4.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian_fitted_coefficent', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian_fitted_coefficent', expecting type  Array<double,1>");
         return NULL;
       }
       a4.reference(to_blitz_array<double, 1>(numpy4));
@@ -6991,7 +6991,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     try {
-      result = ((GeoCal::RsmPolynomial const *)arg1)->jacobian((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4);
+      result = ((GeoCal::RsmPolynomial const *)arg1)->jacobian_fitted_coefficent((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7012,6 +7012,86 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmPolynomial *arg1 = (GeoCal::RsmPolynomial *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RsmPolynomial_jacobian",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmPolynomial_jacobian" "', argument " "1"" of type '" "GeoCal::RsmPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmPolynomial_jacobian" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmPolynomial_jacobian" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmPolynomial_jacobian" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      result = ((GeoCal::RsmPolynomial const *)arg1)->jacobian(arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
   }
   return resultobj;
 fail:
@@ -7440,11 +7520,17 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RsmPolynomial___str__", (PyCFunction)_wrap_RsmPolynomial___str__, METH_O, NULL},
 	 { (char *)"RsmPolynomial___call__", _wrap_RsmPolynomial___call__, METH_VARARGS, NULL},
+	 { (char *)"RsmPolynomial_jacobian_fitted_coefficent", _wrap_RsmPolynomial_jacobian_fitted_coefficent, METH_VARARGS, (char *)"\n"
+		"\n"
+		"blitz::Array< double, 2 > RsmPolynomial::jacobian_fitted_coefficent(const blitz::Array< double, 1 > &X, const blitz::Array< double, 1 >\n"
+		"&Y, const blitz::Array< double, 1 > &Z) const\n"
+		"This is the jacobian of the value with respect to the\n"
+		"fitted_coefficent. \n"
+		""},
 	 { (char *)"RsmPolynomial_jacobian", _wrap_RsmPolynomial_jacobian, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array< double, 2 > RsmPolynomial::jacobian(const blitz::Array< double, 1 > &X, const blitz::Array< double, 1 >\n"
-		"&Y, const blitz::Array< double, 1 > &Z) const\n"
-		"\n"
+		"blitz::Array< double, 1 > RsmPolynomial::jacobian(double X, double Y, double Z) const\n"
+		"This is the jacobian of the value with respect to X, Y, and Z. \n"
 		""},
 	 { (char *)"RsmPolynomial_set_rpc_coeff", _wrap_RsmPolynomial_set_rpc_coeff, METH_VARARGS, (char *)"\n"
 		"\n"

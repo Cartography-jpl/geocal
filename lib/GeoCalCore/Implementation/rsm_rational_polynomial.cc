@@ -58,15 +58,15 @@ RsmRationalPolynomial::RsmRationalPolynomial
 //-----------------------------------------------------------------------
 
 ImageCoordinate RsmRationalPolynomial::image_coordinate
-(double Xin, double Yin, double Zin) const
+(double X, double Y, double Z) const
 {
-  double x = (Xin - x_offset_) / x_scale_;
-  double y = (Yin - y_offset_) / y_scale_;
-  double z = (Zin - z_offset_) / z_scale_;
-  double f1 = line_num_(x,y,z);
-  double f2 = line_den_(x,y,z);
-  double f3 = sample_num_(x,y,z);
-  double f4 = sample_den_(x,y,z);
+  double xs = (X - x_offset_) / x_scale_;
+  double ys = (Y - y_offset_) / y_scale_;
+  double zs = (Z - z_offset_) / z_scale_;
+  double f1 = line_num_(xs,ys,zs);
+  double f2 = line_den_(xs,ys,zs);
+  double f3 = sample_num_(xs,ys,zs);
+  double f4 = sample_den_(xs,ys,zs);
   return ImageCoordinate(f1 / f2 * line_scale_ + line_offset_,
 			 f3 / f4 * sample_scale_ + sample_offset_);
 }
@@ -79,20 +79,20 @@ ImageCoordinate RsmRationalPolynomial::image_coordinate
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 2> RsmRationalPolynomial::image_coordinate
-(const blitz::Array<double, 1>& Xin, const blitz::Array<double, 1>& Yin,
- const blitz::Array<double, 1>& Zin) const
+(const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
+ const blitz::Array<double, 1>& Z) const
 {
   Range ra = Range::all();
-  Array<double, 1> x(Xin.shape()), y(Yin.shape()), z(Zin.shape()),
-    f1(Xin.shape()), f2(Xin.shape()), f3(Xin.shape()), f4(Xin.shape());
-  x = (Xin - x_offset_) / x_scale_;
-  y = (Yin - y_offset_) / y_scale_;
-  z = (Zin - z_offset_) / z_scale_;
-  f1 = line_num_(x,y,z);
-  f2 = line_den_(x,y,z);
-  f3 = sample_num_(x,y,z);
-  f4 = sample_den_(x,y,z);
-  Array<double, 2> res(2, x.rows());
+  Array<double, 1> xs(X.shape()), ys(Y.shape()), zs(Z.shape()),
+    f1(X.shape()), f2(X.shape()), f3(X.shape()), f4(X.shape());
+  xs = (X - x_offset_) / x_scale_;
+  ys = (Y - y_offset_) / y_scale_;
+  zs = (Z - z_offset_) / z_scale_;
+  f1 = line_num_(xs,ys,zs);
+  f2 = line_den_(xs,ys,zs);
+  f3 = sample_num_(xs,ys,zs);
+  f4 = sample_den_(xs,ys,zs);
+  Array<double, 2> res(2, xs.rows());
   res(0, ra) = f1 / f2 * line_scale_ + line_offset_;
   res(1, ra) = f3 / f4 * sample_scale_ + sample_offset_;
   return res;
@@ -106,20 +106,20 @@ blitz::Array<double, 2> RsmRationalPolynomial::image_coordinate
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 3> RsmRationalPolynomial::image_coordinate
-(const blitz::Array<double, 2>& Xin, const blitz::Array<double, 2>& Yin,
- const blitz::Array<double, 2>& Zin) const
+(const blitz::Array<double, 2>& X, const blitz::Array<double, 2>& Y,
+ const blitz::Array<double, 2>& Z) const
 {
   Range ra = Range::all();
-  Array<double, 2> x(Xin.shape()), y(Yin.shape()), z(Zin.shape()),
-    f1(Xin.shape()), f2(Xin.shape()), f3(Xin.shape()), f4(Xin.shape());
-  x = (Xin - x_offset_) / x_scale_;
-  y = (Yin - y_offset_) / y_scale_;
-  z = (Zin - z_offset_) / z_scale_;
-  f1 = line_num_(x,y,z);
-  f2 = line_den_(x,y,z);
-  f3 = sample_num_(x,y,z);
-  f4 = sample_den_(x,y,z);
-  Array<double, 3> res(2, x.rows(), x.cols());
+  Array<double, 2> xs(X.shape()), ys(Y.shape()), zs(Z.shape()),
+    f1(X.shape()), f2(X.shape()), f3(X.shape()), f4(X.shape());
+  xs = (X - x_offset_) / x_scale_;
+  ys = (Y - y_offset_) / y_scale_;
+  zs = (Z - z_offset_) / z_scale_;
+  f1 = line_num_(xs,ys,zs);
+  f2 = line_den_(xs,ys,zs);
+  f3 = sample_num_(xs,ys,zs);
+  f4 = sample_den_(xs,ys,zs);
+  Array<double, 3> res(2, xs.rows(), xs.cols());
   res(0, ra, ra) = f1 / f2 * line_scale_ + line_offset_;
   res(1, ra, ra) = f3 / f4 * sample_scale_ + sample_offset_;
   return res;
@@ -133,20 +133,20 @@ blitz::Array<double, 3> RsmRationalPolynomial::image_coordinate
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 4> RsmRationalPolynomial::image_coordinate
-(const blitz::Array<double, 3>& Xin, const blitz::Array<double, 3>& Yin,
- const blitz::Array<double, 3>& Zin) const
+(const blitz::Array<double, 3>& X, const blitz::Array<double, 3>& Y,
+ const blitz::Array<double, 3>& Z) const
 {
   Range ra = Range::all();
-  Array<double, 3> x(Xin.shape()), y(Yin.shape()), z(Zin.shape()),
-    f1(Xin.shape()), f2(Xin.shape()), f3(Xin.shape()), f4(Xin.shape());
-  x = (Xin - x_offset_) / x_scale_;
-  y = (Yin - y_offset_) / y_scale_;
-  z = (Zin - z_offset_) / z_scale_;
-  f1 = line_num_(x,y,z);
-  f2 = line_den_(x,y,z);
-  f3 = sample_num_(x,y,z);
-  f4 = sample_den_(x,y,z);
-  Array<double, 4> res(2, x.rows(), x.cols(), x.depth());
+  Array<double, 3> xs(X.shape()), ys(Y.shape()), zs(Z.shape()),
+    f1(X.shape()), f2(X.shape()), f3(X.shape()), f4(X.shape());
+  xs = (X - x_offset_) / x_scale_;
+  ys = (Y - y_offset_) / y_scale_;
+  zs = (Z - z_offset_) / z_scale_;
+  f1 = line_num_(xs,ys,zs);
+  f2 = line_den_(xs,ys,zs);
+  f3 = sample_num_(xs,ys,zs);
+  f4 = sample_den_(xs,ys,zs);
+  Array<double, 4> res(2, xs.rows(), xs.cols(), xs.depth());
   res(0, ra, ra, ra) = f1 / f2 * line_scale_ + line_offset_;
   res(1, ra, ra, ra) = f3 / f4 * sample_scale_ + sample_offset_;
   return res;
@@ -232,10 +232,14 @@ void RsmRationalPolynomial::fit
     ln_lhs(i) = (Line[i] - line_offset_) / line_scale_;
     smp_lhs(i) = (Sample[i] - sample_offset_) / sample_scale_;
   }
-  Array<double, 2> ln_den_jac = line_den_.jacobian(xs, ys, zs);
-  Array<double, 2> smp_den_jac = sample_den_.jacobian(xs, ys, zs);
-  Array<double, 2> ln_num_jac = line_num_.jacobian(xs, ys, zs);
-  Array<double, 2> smp_num_jac = sample_num_.jacobian(xs, ys, zs);
+  Array<double, 2> ln_den_jac =
+    line_den_.jacobian_fitted_coefficent(xs, ys, zs);
+  Array<double, 2> smp_den_jac =
+    sample_den_.jacobian_fitted_coefficent(xs, ys, zs);
+  Array<double, 2> ln_num_jac =
+    line_num_.jacobian_fitted_coefficent(xs, ys, zs);
+  Array<double, 2> smp_num_jac =
+    sample_num_.jacobian_fitted_coefficent(xs, ys, zs);
   Array<double, 2> ln_jac(ln_den_jac.rows(), ln_den_jac.cols() +
 			  ln_num_jac.cols());
   Array<double, 2> smp_jac(smp_den_jac.rows(), smp_den_jac.cols() +
@@ -260,6 +264,34 @@ void RsmRationalPolynomial::fit
 					       smp_num_jac.cols()-1)));
   sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
 					       Range::toEnd)));
+}
+
+//-----------------------------------------------------------------------
+/// This the jacobian of the line, sample with respect to X, Y, Z.
+/// This is a 2x3 matrix.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> RsmRationalPolynomial::image_coordinate_jacobian
+(double X, double Y, double Z) const
+{
+  Range ra = Range::all();
+  Array<double, 2> res(2, 3);
+  double xs = (X - x_offset_) / x_scale_;
+  double ys = (Y - y_offset_) / y_scale_;
+  double zs = (Z - z_offset_) / z_scale_;
+  double f1 = line_num_(xs,ys,zs);
+  double f2 = line_den_(xs,ys,zs);
+  double f3 = sample_num_(xs,ys,zs);
+  double f4 = sample_den_(xs,ys,zs);
+  Array<double, 1> f1_dv = line_num_.jacobian(xs,ys,zs);
+  Array<double, 1> f2_dv = line_den_.jacobian(xs,ys,zs);
+  Array<double, 1> f3_dv = sample_num_.jacobian(xs,ys,zs);
+  Array<double, 1> f4_dv = sample_den_.jacobian(xs,ys,zs);
+  Array<double, 1> v_scale(3);
+  v_scale = 1/x_scale_, 1/y_scale_, 1/z_scale_;
+  res(0,ra) = (f1_dv * f2 - f1 * f2_dv) / (f2 * f2) * line_scale_ * v_scale;
+  res(1,ra) = (f3_dv * f4 - f3 * f4_dv) / (f4 * f4) * sample_scale_ * v_scale;
+  return res;
 }
 
 //-----------------------------------------------------------------------

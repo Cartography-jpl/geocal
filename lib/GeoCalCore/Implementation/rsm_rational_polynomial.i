@@ -38,6 +38,8 @@ public:
 	   const std::vector<double>& X,
 	   const std::vector<double>& Y,
 	   const std::vector<double>& Z);
+  blitz::Array<double, 2> image_coordinate_jacobian
+  (double X, double Y, double Z) const;
 
   %python_attribute(line_offset, double);
   %python_attribute(line_scale, double);

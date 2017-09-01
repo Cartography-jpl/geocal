@@ -6417,8 +6417,14 @@ SWIGINTERN PyObject *_wrap_new_MspiCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(self)
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MspiCamera', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MspiCamera', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -6458,18 +6464,16 @@ SWIGINTERN PyObject *_wrap_new_MspiCamera(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v = 0;
     {
-      {
-        PythonObject t(to_numpy<double >(argv[1]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
-      }
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_2;
-    return _wrap_new_MspiCamera__SWIG_2(self, argc, argv);
+    return _wrap_new_MspiCamera__SWIG_0(self, argc, argv);
   }
 check_2:
   
   if (argc == 2) {
-    return _wrap_new_MspiCamera__SWIG_0(self, argc, argv);
+    return _wrap_new_MspiCamera__SWIG_2(self, argc, argv);
   }
   
 fail:
@@ -7347,8 +7351,14 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_parameter_mask__SWIG_1(PyObject *SWIGUN
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<bool >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MspiCamera__v_parameter_mask', expecting type  Array<bool,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'MspiCamera__v_parameter_mask', expecting type  Array<bool,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<bool, 1>(numpy2));
       arg2 = &a2;
     }

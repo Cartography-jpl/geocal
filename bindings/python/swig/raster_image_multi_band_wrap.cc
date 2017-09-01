@@ -6514,8 +6514,14 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_write(PyObject *SWIGUNUSEDPARM(s
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<int >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImageMultiBand_write', expecting type  Array<int,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImageMultiBand_write', expecting type  Array<int,3>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<int, 3>(numpy4));
       arg4 = &a4;
     }

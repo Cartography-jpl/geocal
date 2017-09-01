@@ -5623,6 +5623,12 @@ blitz::Array< double,1 > SwigDirector_WithParameter::parameter() const {
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter', expecting type  Array<double,1>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=1) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter', expecting type  Array<double,1>");
+    }
     c_result.reference(to_blitz_array<double, 1>(t).copy());
   }
   return (blitz::Array< double,1 >) c_result;
@@ -5812,6 +5818,12 @@ blitz::Array< double,1 > SwigDirector_WithParameter::parameter_subset() const {
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter_subset', expecting type  Array<double,1>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=1) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter_subset', expecting type  Array<double,1>");
+    }
     c_result.reference(to_blitz_array<double, 1>(t).copy());
   }
   return (blitz::Array< double,1 >) c_result;
@@ -6001,6 +6013,12 @@ blitz::Array< bool,1 > SwigDirector_WithParameter::parameter_mask() const {
   }
   {
     PythonObject t(to_numpy<bool >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter_mask', expecting type  Array<bool,1>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=1) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter_mask', expecting type  Array<bool,1>");
+    }
     c_result.reference(to_blitz_array<bool, 1>(t).copy());
   }
   return (blitz::Array< bool,1 >) c_result;
@@ -6898,8 +6916,14 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter__SWIG_1(PyObject *SWIGUNUS
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'WithParameter__v_parameter', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'WithParameter__v_parameter', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -7271,8 +7295,14 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_subset__SWIG_1(PyObject *S
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'WithParameter__v_parameter_subset', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'WithParameter__v_parameter_subset', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }

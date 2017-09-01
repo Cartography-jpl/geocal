@@ -7607,8 +7607,14 @@ SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_1(PyObject *SWIGUNUSEDPAR
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_denominator', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_denominator', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -7740,8 +7746,14 @@ SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_1(PyObject *SWIGUNUSEDPARM(
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_numerator', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_numerator', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -7873,8 +7885,14 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_1(PyObject *SWIGUNUSEDP
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_denominator', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_denominator', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -8006,8 +8024,14 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_1(PyObject *SWIGUNUSEDPAR
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_numerator', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_numerator', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -8139,8 +8163,14 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_1(PyObject *SWIGUNUSEDP
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<bool >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_line_numerator', expecting type  Array<bool,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_line_numerator', expecting type  Array<bool,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<bool, 1>(numpy2));
       arg2 = &a2;
     }
@@ -8272,8 +8302,14 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_1(PyObject *SWIGUNUSE
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<bool >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_sample_numerator', expecting type  Array<bool,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_sample_numerator', expecting type  Array<bool,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<bool, 1>(numpy2));
       arg2 = &a2;
     }
@@ -10231,8 +10267,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_2(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -10242,8 +10284,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_2(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj)
-      return NULL;
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
       a3.reference(to_blitz_array<double, 1>(numpy3));
       arg3 = &a3;
     }
@@ -10253,8 +10301,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_2(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<double >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<double, 1>(numpy4));
       arg4 = &a4;
     }
@@ -10328,8 +10382,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_3(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 2>(numpy2));
       arg2 = &a2;
     }
@@ -10339,8 +10399,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_3(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj)
-      return NULL;
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
       a3.reference(to_blitz_array<double, 2>(numpy3));
       arg3 = &a3;
     }
@@ -10350,8 +10416,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_3(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<double >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<double, 2>(numpy4));
       arg4 = &a4;
     }
@@ -10425,8 +10497,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_4(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 3>(numpy2));
       arg2 = &a2;
     }
@@ -10436,8 +10514,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_4(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj)
-      return NULL;
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
       a3.reference(to_blitz_array<double, 3>(numpy3));
       arg3 = &a3;
     }
@@ -10447,8 +10531,14 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_4(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<double >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<double, 3>(numpy4));
       arg4 = &a4;
     }
@@ -10498,26 +10588,26 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate(PyObject *self, PyObject *args) 
     int _v = 0;
     {
       {
-        PythonObject t(to_numpy<double >(argv[1]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
       }
     }
     if (!_v) goto check_2;
     {
       {
-        PythonObject t(to_numpy<double >(argv[2]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+        int res = SWIG_AsVal_double(argv[2], NULL);
+        _v = SWIG_CheckState(res);
       }
     }
     if (!_v) goto check_2;
     {
       {
-        PythonObject t(to_numpy<double >(argv[3]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+        int res = SWIG_AsVal_double(argv[3], NULL);
+        _v = SWIG_CheckState(res);
       }
     }
     if (!_v) goto check_2;
-    return _wrap_Rpc_image_coordinate__SWIG_2(self, argc, argv);
+    return _wrap_Rpc_image_coordinate__SWIG_1(self, argc, argv);
   }
 check_2:
   
@@ -10526,25 +10616,25 @@ check_2:
     {
       {
         PythonObject t(to_numpy<double >(argv[1]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
       }
     }
     if (!_v) goto check_3;
     {
       {
         PythonObject t(to_numpy<double >(argv[2]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
       }
     }
     if (!_v) goto check_3;
     {
       {
         PythonObject t(to_numpy<double >(argv[3]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
       }
     }
     if (!_v) goto check_3;
-    return _wrap_Rpc_image_coordinate__SWIG_3(self, argc, argv);
+    return _wrap_Rpc_image_coordinate__SWIG_2(self, argc, argv);
   }
 check_3:
   
@@ -10553,30 +10643,30 @@ check_3:
     {
       {
         PythonObject t(to_numpy<double >(argv[1]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==3 ? 1 : 0);
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
       }
     }
     if (!_v) goto check_4;
     {
       {
         PythonObject t(to_numpy<double >(argv[2]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==3 ? 1 : 0);
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
       }
     }
     if (!_v) goto check_4;
     {
       {
         PythonObject t(to_numpy<double >(argv[3]));
-        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==3 ? 1 : 0);
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
       }
     }
     if (!_v) goto check_4;
-    return _wrap_Rpc_image_coordinate__SWIG_4(self, argc, argv);
+    return _wrap_Rpc_image_coordinate__SWIG_3(self, argc, argv);
   }
 check_4:
   
   if (argc == 4) {
-    return _wrap_Rpc_image_coordinate__SWIG_1(self, argc, argv);
+    return _wrap_Rpc_image_coordinate__SWIG_4(self, argc, argv);
   }
   
 fail:

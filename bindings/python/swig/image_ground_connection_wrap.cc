@@ -5884,6 +5884,12 @@ blitz::Array< double,1 > SwigDirector_ImageGroundConnection::parameter() const {
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter', expecting type  Array<double,1>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=1) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter', expecting type  Array<double,1>");
+    }
     c_result.reference(to_blitz_array<double, 1>(t).copy());
   }
   return (blitz::Array< double,1 >) c_result;
@@ -6073,6 +6079,12 @@ blitz::Array< double,1 > SwigDirector_ImageGroundConnection::parameter_subset() 
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter_subset', expecting type  Array<double,1>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=1) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter_subset', expecting type  Array<double,1>");
+    }
     c_result.reference(to_blitz_array<double, 1>(t).copy());
   }
   return (blitz::Array< double,1 >) c_result;
@@ -6262,6 +6274,12 @@ blitz::Array< bool,1 > SwigDirector_ImageGroundConnection::parameter_mask() cons
   }
   {
     PythonObject t(to_numpy<bool >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter_mask', expecting type  Array<bool,1>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=1) {
+      SWIG_Error(SWIG_TypeError, "in method '_v_parameter_mask', expecting type  Array<bool,1>");
+    }
     c_result.reference(to_blitz_array<bool, 1>(t).copy());
   }
   return (blitz::Array< bool,1 >) c_result;
@@ -6415,6 +6433,12 @@ blitz::Array< double,1 > SwigDirector_ImageGroundConnection::collinearity_residu
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'collinearity_residual', expecting type  Array<double,1>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=1) {
+      SWIG_Error(SWIG_TypeError, "in method 'collinearity_residual', expecting type  Array<double,1>");
+    }
     c_result.reference(to_blitz_array<double, 1>(t).copy());
   }
   return (blitz::Array< double,1 >) c_result;
@@ -6460,6 +6484,12 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::collinearity_residu
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'collinearity_residual_jacobian', expecting type  Array<double,2>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=2) {
+      SWIG_Error(SWIG_TypeError, "in method 'collinearity_residual_jacobian', expecting type  Array<double,2>");
+    }
     c_result.reference(to_blitz_array<double, 2>(t).copy());
   }
   return (blitz::Array< double,2 >) c_result;
@@ -6745,6 +6775,12 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'image_coordinate_jac_cf', expecting type  Array<double,2>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=2) {
+      SWIG_Error(SWIG_TypeError, "in method 'image_coordinate_jac_cf', expecting type  Array<double,2>");
+    }
     c_result.reference(to_blitz_array<double, 2>(t).copy());
   }
   return (blitz::Array< double,2 >) c_result;
@@ -6787,6 +6823,12 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'image_coordinate_jac_cf_fd', expecting type  Array<double,2>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=2) {
+      SWIG_Error(SWIG_TypeError, "in method 'image_coordinate_jac_cf_fd', expecting type  Array<double,2>");
+    }
     c_result.reference(to_blitz_array<double, 2>(t).copy());
   }
   return (blitz::Array< double,2 >) c_result;
@@ -6827,6 +6869,12 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'image_coordinate_jac_parm', expecting type  Array<double,2>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=2) {
+      SWIG_Error(SWIG_TypeError, "in method 'image_coordinate_jac_parm', expecting type  Array<double,2>");
+    }
     c_result.reference(to_blitz_array<double, 2>(t).copy());
   }
   return (blitz::Array< double,2 >) c_result;
@@ -7182,6 +7230,12 @@ blitz::Array< double,7 > SwigDirector_ImageGroundConnection::cf_look_vector_arr(
   }
   {
     PythonObject t(to_numpy<double >(result));
+    if(!t.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'cf_look_vector_arr', expecting type  Array<double,7>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)t.obj) !=7) {
+      SWIG_Error(SWIG_TypeError, "in method 'cf_look_vector_arr', expecting type  Array<double,7>");
+    }
     c_result.reference(to_blitz_array<double, 7>(t).copy());
   }
   return (blitz::Array< double,7 >) c_result;
@@ -11885,8 +11939,14 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter__SWIG_1(PyObject *
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'ImageGroundConnection__v_parameter', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'ImageGroundConnection__v_parameter', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -12258,8 +12318,14 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_subset__SWIG_1(PyO
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'ImageGroundConnection__v_parameter_subset', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'ImageGroundConnection__v_parameter_subset', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }

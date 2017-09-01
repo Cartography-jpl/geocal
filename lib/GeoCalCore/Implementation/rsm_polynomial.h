@@ -1,6 +1,7 @@
 #ifndef RSM_POLYNOMIAL_H
 #define RSM_POLYNOMIAL_H
 #include "printable.h"
+#include <boost/array.hpp>
 #include <blitz/array.h>
 namespace GeoCal {
 /****************************************************************//**
@@ -22,6 +23,10 @@ public:
   double operator()(double X, double Y, double Z) const;
   blitz::Array<double, 1> operator()(const blitz::Array<double, 1>& X,
      const blitz::Array<double, 1>& Y, const blitz::Array<double, 1>& Z) const;
+  blitz::Array<double, 2> operator()(const blitz::Array<double, 2>& X,
+     const blitz::Array<double, 2>& Y, const blitz::Array<double, 2>& Z) const;
+  blitz::Array<double, 3> operator()(const blitz::Array<double, 3>& X,
+     const blitz::Array<double, 3>& Y, const blitz::Array<double, 3>& Z) const;
   blitz::Array<double, 2> jacobian(const blitz::Array<double, 1>& X,
      const blitz::Array<double, 1>& Y, const blitz::Array<double, 1>& Z) const;
 
@@ -45,7 +50,8 @@ public:
 //-----------------------------------------------------------------------
 
   int max_order() const {return max_order_;}
-  
+
+  void set_rpc_coeff(const boost::array<double, 20>& V);
   void print(std::ostream& Os) const;
 private:
   blitz::Array<double, 3> coefficient_;

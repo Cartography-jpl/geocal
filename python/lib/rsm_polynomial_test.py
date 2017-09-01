@@ -59,17 +59,6 @@ def rpc_data_latgrid(rpc_data):
     RpcResult2 = namedtuple('RpcResult2', ['ln', 'smp', 'lon', 'lat', 'h'])
     return RpcResult2(ln, smp, lon, lat, h)
 
-def test_rsm_polynomial():
-    r = RsmPolynomial(3,3,3)
-    r.coefficient[0,0,0] = 10.0
-    r.coefficient[1,1,1] = 1.0
-    r.coefficient[2,1,1] = 2.0
-    r.coefficient[3,1,1] = 3.0
-    r.coefficient[2,2,1] = 4.0
-    r.coefficient[2,2,3] = 5.0
-    assert r(2, 3, 4) == 10 + 1 * 2 * 3 * 4 + 2 * 2**2 * 3 * 4 + \
-        3 * 2**3 * 3 * 4 +  4 * 2**2 * 3**2 * 4 + 5 * 2**2 * 3**2 * 4**3
-    
 @require_serialize
 def test_rsm_rational_polynomial():
     r = RsmRationalPolynomial(3,3,3)
@@ -87,8 +76,9 @@ def test_rsm_rational_polynomial():
 def test_rsm_fit(rpc_data):
     r = RsmRationalPolynomial(3,3,3)
     r.fit(rpc_data.ln, rpc_data.smp, rpc_data.lon, rpc_data.lat, rpc_data.h)
-    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,
-                        rpc_data.h[np.newaxis, np.newaxis, :])
+    h = np.empty(rpc_data.lat.shape)
+    h[:,:,:] = rpc_data.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,h)
     assert abs(rpc_data.ln-lncalc).max() < 0.01
     assert abs(rpc_data.smp-smpcalc).max() < 0.01
 
@@ -96,8 +86,9 @@ def test_rsm_fit(rpc_data):
 def test_rsm_fit_rpc(rpc_data):
     r = RsmRationalPolynomial(3,3,3, fit_rpc_param_only=True)
     r.fit(rpc_data.ln, rpc_data.smp, rpc_data.lon, rpc_data.lat, rpc_data.h)
-    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,
-                        rpc_data.h[np.newaxis, np.newaxis, :])
+    h = np.empty(rpc_data.lat.shape)
+    h[:,:,:] = rpc_data.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,h)
     assert abs(rpc_data.ln-lncalc).max() < 0.01
     assert abs(rpc_data.smp-smpcalc).max() < 0.01
 
@@ -106,8 +97,9 @@ def test_rsm_fit_rpc_max_order(rpc_data):
     r = RsmRationalPolynomial(3,3,3, fit_rpc_param_only=True, N_max_order=3,
                               D_max_order=3)
     r.fit(rpc_data.ln, rpc_data.smp, rpc_data.lon, rpc_data.lat, rpc_data.h)
-    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,
-                        rpc_data.h[np.newaxis, np.newaxis, :])
+    h = np.empty(rpc_data.lat.shape)
+    h[:,:,:] = rpc_data.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,h)
     assert abs(rpc_data.ln-lncalc).max() < 0.01
     assert abs(rpc_data.smp-smpcalc).max() < 0.01
     
@@ -118,8 +110,9 @@ def test_rsm_fit_1dln(rpc_data):
     ground coordinates for a given image coordinate'''
     r = RsmRationalPolynomial(3,3,3)
     r.fit(rpc_data.lnvv, rpc_data.smpvv, rpc_data.lon, rpc_data.lat, rpc_data.h)
-    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,
-                        rpc_data.h[np.newaxis, np.newaxis, :])
+    h = np.empty(rpc_data.lat.shape)
+    h[:,:,:] = rpc_data.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = r(rpc_data.lon,rpc_data.lat,h)
     assert abs(rpc_data.lnvv[:,np.newaxis,np.newaxis]-lncalc).max() < 0.1
 
     # We have a asymptote in our solution, which is apparently a common
@@ -136,8 +129,9 @@ def test_rsm_fit_1dln(rpc_data):
 def test_low_order_polynomial(rpc_data):
     lp = RsmLowOrderPolynomial()
     lp.fit(rpc_data.ln, rpc_data.smp, rpc_data.lon, rpc_data.lat, rpc_data.h)
-    lncalc, smpcalc = lp(rpc_data.lon,rpc_data.lat,
-                         rpc_data.h[np.newaxis,np.newaxis,:])
+    h = np.empty(rpc_data.lat.shape)
+    h[:,:,:] = rpc_data.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = lp(rpc_data.lon,rpc_data.lat,h)
     assert abs(rpc_data.ln-lncalc).max() < 2.0
     assert abs(rpc_data.smp-smpcalc).max() < 2.0
 
@@ -146,8 +140,9 @@ def test_low_order_polynomial_1dv(rpc_data):
     lp = RsmLowOrderPolynomial()
     lp.fit(rpc_data.lnvv, rpc_data.smpvv, rpc_data.lon,rpc_data.lat, 
            rpc_data.h)
-    lncalc, smpcalc = lp(rpc_data.lon,rpc_data.lat,
-                         rpc_data.h[np.newaxis,np.newaxis,:])
+    h = np.empty(rpc_data.lat.shape)
+    h[:,:,:] = rpc_data.h[np.newaxis,np.newaxis,:]
+    lncalc, smpcalc = lp(rpc_data.lon,rpc_data.lat,h)
     assert abs(rpc_data.lnvv[:,np.newaxis,np.newaxis]-lncalc).max() < 2.0
     assert abs(rpc_data.smp[np.newaxis,:,np.newaxis]-smpcalc).max() < 2.0
     

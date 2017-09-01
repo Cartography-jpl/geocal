@@ -4,84 +4,7 @@
 import numpy as np
 import scipy
 import math
-from geocal_swig import Rpc
-
-class RsmPolynomial(object):
-    '''This is a polynomial, already working in the scaled XYZ coordinate
-    system.'''
-    def __init__(self, NP_X, NP_Y, NP_Z, is_denominator=False, max_order=None):
-        self.coefficient = np.zeros((NP_X+1, NP_Y+1, NP_Z+1))
-        self.fit_coefficient = np.ones((NP_X+1, NP_Y+1, NP_Z+1), dtype=bool)
-        # By convention, hold the constant term 1 in a denominator term.
-        if(is_denominator):
-            self.coefficient[0,0,0] = 1
-            self.fit_coefficient[0,0,0] = False
-        # If we have a maximum term order, remove all the cross terms that have
-        # a higher order
-        if(max_order is not None):
-            for i in range(self.fit_coefficient.shape[0]):
-                for j in range(self.fit_coefficient.shape[1]):
-                    for k in range(self.fit_coefficient.shape[2]):
-                        if(i+j+k > max_order):
-                            self.fit_coefficient[i,j,k] = False
-
-    def rpc_coeff_set(self, coeff):
-        '''Set the subset of self.coefficient that corresponds to the RPC
-        coefficients. This assumes RPC_B format.'''
-        self.coefficient[:,:,:]=0
-        self.coefficient[0,0,0],self.coefficient[1,0,0],self.coefficient[0,1,0],self.coefficient[0,0,1],\
-        self.coefficient[1,1,0],self.coefficient[1,0,1],self.coefficient[0,1,1],\
-        self.coefficient[2,0,0],self.coefficient[0,2,0],self.coefficient[0,0,2],\
-        self.coefficient[1,1,1],self.coefficient[3,0,0],\
-        self.coefficient[1,2,0],\
-        self.coefficient[1,0,2], self.coefficient[2,1,0],\
-        self.coefficient[0,3,0],\
-        self.coefficient[0,1,2],self.coefficient[2,0,1],\
-        self.coefficient[0,2,1],\
-        self.coefficient[0,0,3] = coeff
-
-    def __call__(self, x, y, z):
-        xp = [ x**i for i in range(self.coefficient.shape[0]) ]
-        yp = [ y**i for i in range(self.coefficient.shape[1]) ]
-        zp = [ z**i for i in range(self.coefficient.shape[2]) ]
-        # I'm sure we can do this faster, but for now have a clean
-        # way of calculating this
-        res = 0
-        for i in range(self.coefficient.shape[0]):
-            for j in range(self.coefficient.shape[1]):
-                for k in range(self.coefficient.shape[2]):
-                    res += self.coefficient[i,j,k] * xp[i] * yp[j] * zp[k]
-        return res;
-
-    def poly_jac(self, x, y, z):
-        '''Return the derivative of the polynomial with each coefficient. 
-        This is just the xp etc. without the coefficient.'''
-        x_is_array = False
-        if(hasattr(x, 'shape')):
-            x_is_array = True
-        if(x_is_array):
-            res = np.zeros(x.shape + (np.count_nonzero(self.fit_coefficient),))
-        else:
-            res = np.zeros((np.count_nonzero(self.fit_coefficient),))
-        xp = [ x**i for i in range(self.coefficient.shape[0]) ]
-        yp = [ y**i for i in range(self.coefficient.shape[1]) ]
-        zp = [ z**i for i in range(self.coefficient.shape[2]) ]
-        # I'm sure we can do this faster, but for now have a clean
-        # way of calculating this
-        ind = 0
-        for i in range(self.coefficient.shape[0]):
-            for j in range(self.coefficient.shape[1]):
-                for k in range(self.coefficient.shape[2]):
-                    if(self.fit_coefficient[i,j,k]):
-                        if(x_is_array):
-                            res[...,ind] = xp[i] * yp[j] * zp[k]
-                        else:
-                            res[ind] = xp[i] * yp[j] * zp[k]
-                        ind += 1
-        return res
-
-    def set_coefficient(self, c):
-        self.coefficient[self.fit_coefficient] = c.flatten()
+from geocal_swig import Rpc, RsmPolynomial
 
 class RsmRationalPolynomial(object):
     '''This is an RSM. The X,Y,Z can be either longitude,latitude,height,
@@ -90,8 +13,8 @@ class RsmRationalPolynomial(object):
     pass in the Cartesian_fixed X, Y, Z and carry the transformation in
     this class.'''
     def __init__(self, NP_X, NP_Y, NP_Z, fit_rpc_param_only = False,
-                 DP_X=None, DP_Y=None,DP_Z=None, N_max_order = None,
-                 D_max_order = None):
+                 DP_X=None, DP_Y=None,DP_Z=None, N_max_order = -1,
+                 D_max_order = -1):
         '''Right now, we use the same order polynomial for both line and
         sample. This isn't an actual requirement, we'll just keep
         things simple for right now.
@@ -129,12 +52,10 @@ class RsmRationalPolynomial(object):
             DP_Y = NP_Y
         if(DP_Z is None):
             DP_Z = NP_Z
-        self.line_num = RsmPolynomial(NP_X, NP_Y, NP_Z, max_order=N_max_order)
-        self.line_den = RsmPolynomial(DP_X, DP_Y, DP_Z, is_denominator=True,
-                                      max_order=D_max_order)
-        self.sample_num = RsmPolynomial(NP_X, NP_Y, NP_Z, max_order=N_max_order)
-        self.sample_den = RsmPolynomial(DP_X, DP_Y, DP_Z, is_denominator=True,
-                                        max_order=D_max_order)
+        self.line_num = RsmPolynomial(NP_X, NP_Y, NP_Z, False, N_max_order)
+        self.line_den = RsmPolynomial(DP_X, DP_Y, DP_Z, True, D_max_order)
+        self.sample_num = RsmPolynomial(NP_X, NP_Y, NP_Z, False, N_max_order)
+        self.sample_den = RsmPolynomial(DP_X, DP_Y, DP_Z, True, D_max_order)
 
     def rpc_set(self, rpc):
         '''Set this to match an existing RPC, useful for testing against
@@ -149,10 +70,10 @@ class RsmRationalPolynomial(object):
         self.line_scale = rpc.line_scale
         self.sample_offset = rpc.sample_offset
         self.sample_scale = rpc.sample_scale
-        self.line_num.rpc_coeff_set(rpc.line_numerator)
-        self.line_den.rpc_coeff_set(rpc.line_denominator)
-        self.sample_num.rpc_coeff_set(rpc.sample_numerator)
-        self.sample_den.rpc_coeff_set(rpc.sample_denominator)
+        self.line_num.set_rpc_coeff(rpc.line_numerator)
+        self.line_den.set_rpc_coeff(rpc.line_denominator)
+        self.sample_num.set_rpc_coeff(rpc.sample_numerator)
+        self.sample_den.set_rpc_coeff(rpc.sample_denominator)
         
     def __call__(self, xin,yin,zin):
         '''For geodetic, x is longitude, y is latitude, z is height.'''
@@ -255,20 +176,20 @@ class RsmRationalPolynomial(object):
             x = x.reshape((x.size))
             y = y.reshape((y.size))
             z = z.reshape((z.size))
-        ljac1 = self.line_num.poly_jac(x, y, z)
-        ljac2 = self.line_den.poly_jac(x, y, z)
+        ljac1 = self.line_num.jacobian(x, y, z)
+        ljac2 = self.line_den.jacobian(x, y, z)
         ljac2 = np.transpose(-ln_lhs * np.transpose(ljac2))
         ljac = np.concatenate((ljac1, ljac2), axis=1)
-        sjac1 = self.sample_num.poly_jac(x, y, z)
-        sjac2 = self.sample_den.poly_jac(x, y, z)
+        sjac1 = self.sample_num.jacobian(x, y, z)
+        sjac2 = self.sample_den.jacobian(x, y, z)
         sjac2 = np.transpose(-smp_lhs * np.transpose(sjac2))
         sjac = np.concatenate((sjac1, sjac2), axis=1)
         lnpar = np.linalg.lstsq(ljac, ln_lhs)[0]
         smpar = np.linalg.lstsq(sjac, smp_lhs)[0]
-        self.line_num.set_coefficient(lnpar[0:ljac1.shape[1]])
-        self.line_den.set_coefficient(lnpar[ljac1.shape[1]:])
-        self.sample_num.set_coefficient(smpar[0:sjac1.shape[1]])
-        self.sample_den.set_coefficient(smpar[sjac1.shape[1]:])
+        self.line_num.fitted_coefficent = lnpar[0:ljac1.shape[1]]
+        self.line_den.fitted_coefficent = lnpar[ljac1.shape[1]:]
+        self.sample_num.fitted_coefficent = smpar[0:sjac1.shape[1]]
+        self.sample_den.fitted_coefficent = smpar[sjac1.shape[1]:]
 
     def _fit_rpc_param(self, line, sample, xin, yin, zin, wh):
         rpc = Rpc()
@@ -291,10 +212,10 @@ class RsmRationalPolynomial(object):
             rpc.fit_all(line.flatten(), sample.flatten(),
                         yin.flatten(), xin.flatten(),
                         z2.flatten())
-        self.line_num.rpc_coeff_set(rpc.line_numerator)
-        self.line_den.rpc_coeff_set(rpc.line_denominator)
-        self.sample_num.rpc_coeff_set(rpc.sample_numerator)
-        self.sample_den.rpc_coeff_set(rpc.sample_denominator)
+        self.line_num.set_rpc_coeff(rpc.line_numerator)
+        self.line_den.set_rpc_coeff(rpc.line_denominator)
+        self.sample_num.set_rpc_coeff(rpc.sample_numerator)
+        self.sample_den.set_rpc_coeff(rpc.sample_denominator)
         
 
 class RsmGrid(object):
@@ -504,7 +425,9 @@ class RsmRationalPolynomialPlusGrid(object):
 
     def fit(self, line, sample, x, y, z):
         self.rational_poly.fit(line,sample,x, y, z)
-        lcalc, scalc = self.rational_poly(x,y,z)
+        z2 = np.empty(x.shape)
+        z2[:,:,:] = z[np.newaxis,np.newaxis,:]
+        lcalc, scalc = self.rational_poly(x,y,z2)
         lcorr = line - lcalc
         scorr = sample - scalc
         self.corr_grid.fit(lcorr, scorr, x,y,z)

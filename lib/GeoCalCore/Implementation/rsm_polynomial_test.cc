@@ -94,6 +94,18 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_MATRIX_CLOSE(r1(xvec, yvec, zvec), r1vecexp);
   BOOST_CHECK_MATRIX_CLOSE(r2(xvec, yvec, zvec), r2vecexp);
   BOOST_CHECK_MATRIX_CLOSE(r3(xvec, yvec, zvec), r3vecexp);
+  // Check that we can call jacobian. We can't easily check that this
+  // is right, but we verify that at a higher level when we fit for
+  // RsmRationalPolynomial in that unit test.
+  blitz::Array<double, 2> jac1(r1.jacobian(xvec, yvec, zvec));
+  blitz::Array<double, 2> jac2(r2.jacobian(xvec, yvec, zvec));
+  blitz::Array<double, 2> jac3(r3.jacobian(xvec, yvec, zvec));
+  BOOST_CHECK_EQUAL(jac1.rows(), xvec.rows());
+  BOOST_CHECK_EQUAL(jac2.rows(), xvec.rows());
+  BOOST_CHECK_EQUAL(jac3.rows(), xvec.rows());
+  BOOST_CHECK_EQUAL(jac1.cols(), fexpect1.rows()); 
+  BOOST_CHECK_EQUAL(jac2.cols(), fexpect2.rows()); 
+  BOOST_CHECK_EQUAL(jac3.cols(), fexpect3.rows()); 
 }
 
 BOOST_AUTO_TEST_CASE(serialize)

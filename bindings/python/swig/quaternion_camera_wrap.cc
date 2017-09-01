@@ -6765,8 +6765,14 @@ SWIGINTERN PyObject *_wrap_new_QuaternionCamera__SWIG_4(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy11.obj = to_numpy<bool >(swig_obj[10]);
-      if(!numpy11.obj)
-      return NULL;
+      if(!numpy11.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuaternionCamera', expecting type  Array<bool,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy11.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuaternionCamera', expecting type  Array<bool,1>");
+        return NULL;
+      }
       a11.reference(to_blitz_array<bool, 1>(numpy11));
       arg11 = &a11;
     }
@@ -8519,8 +8525,14 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_ypr__SWIG_1(PyObject *SWIGUNUSEDP
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'QuaternionCamera__v_ypr', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'QuaternionCamera__v_ypr', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -8768,8 +8780,14 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_euler__SWIG_1(PyObject *SWIGUNUSE
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'QuaternionCamera__v_euler', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'QuaternionCamera__v_euler', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }

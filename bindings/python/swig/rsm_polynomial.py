@@ -229,6 +229,18 @@ class RsmPolynomial(geocal_swig.generic_object.GenericObject):
         return _rsm_polynomial.RsmPolynomial_jacobian(self, X, Y, Z)
 
 
+    def set_rpc_coeff(self, V):
+        """
+
+        void RsmPolynomial::set_rpc_coeff(const boost::array< double, 20 > &V)
+        Set a RsmPolynomial to match coefficients from RPC_B format RPC.
+
+        This is really only useful for testing, comparing against our RPC code
+
+        """
+        return _rsm_polynomial.RsmPolynomial_set_rpc_coeff(self, V)
+
+
     def _v_coefficient(self):
         """
 
@@ -300,6 +312,7 @@ class RsmPolynomial(geocal_swig.generic_object.GenericObject):
 RsmPolynomial.__str__ = new_instancemethod(_rsm_polynomial.RsmPolynomial___str__, None, RsmPolynomial)
 RsmPolynomial.__call__ = new_instancemethod(_rsm_polynomial.RsmPolynomial___call__, None, RsmPolynomial)
 RsmPolynomial.jacobian = new_instancemethod(_rsm_polynomial.RsmPolynomial_jacobian, None, RsmPolynomial)
+RsmPolynomial.set_rpc_coeff = new_instancemethod(_rsm_polynomial.RsmPolynomial_set_rpc_coeff, None, RsmPolynomial)
 RsmPolynomial._v_coefficient = new_instancemethod(_rsm_polynomial.RsmPolynomial__v_coefficient, None, RsmPolynomial)
 RsmPolynomial._v_fitted_coefficent = new_instancemethod(_rsm_polynomial.RsmPolynomial__v_fitted_coefficent, None, RsmPolynomial)
 RsmPolynomial._v_is_denominator = new_instancemethod(_rsm_polynomial.RsmPolynomial__v_is_denominator, None, RsmPolynomial)

@@ -8272,8 +8272,14 @@ SWIGINTERN PyObject *_wrap_RasterImage_write__SWIG_1(PyObject *SWIGUNUSEDPARM(se
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<int >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_write', expecting type  Array<int,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_write', expecting type  Array<int,2>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<int, 2>(numpy4));
       arg4 = &a4;
     }
@@ -8934,8 +8940,14 @@ SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_1(PyObject *SWIGUNUSEDPA
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -8945,8 +8957,14 @@ SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_1(PyObject *SWIGUNUSEDPA
       0 );
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj)
-      return NULL;
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
       a3.reference(to_blitz_array<double, 1>(numpy3));
       arg3 = &a3;
     }

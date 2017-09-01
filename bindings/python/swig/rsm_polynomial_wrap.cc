@@ -3443,31 +3443,32 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[24]
 #define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[25]
 #define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[26]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[27]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t swig_types[28]
-#define SWIGTYPE_p_char swig_types[29]
-#define SWIGTYPE_p_char_type swig_types[30]
-#define SWIGTYPE_p_difference_type swig_types[31]
-#define SWIGTYPE_p_fmtflags swig_types[32]
-#define SWIGTYPE_p_int_type swig_types[33]
-#define SWIGTYPE_p_iostate swig_types[34]
-#define SWIGTYPE_p_off_type swig_types[35]
-#define SWIGTYPE_p_openmode swig_types[36]
-#define SWIGTYPE_p_pos_type swig_types[37]
-#define SWIGTYPE_p_seekdir swig_types[38]
-#define SWIGTYPE_p_size_t swig_types[39]
-#define SWIGTYPE_p_size_type swig_types[40]
-#define SWIGTYPE_p_state_type swig_types[41]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[42]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[43]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[44]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[45]
-#define SWIGTYPE_p_std__invalid_argument swig_types[46]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[47]
-#define SWIGTYPE_p_traits_type swig_types[48]
-#define SWIGTYPE_p_value_type swig_types[49]
-static swig_type_info *swig_types[51];
-static swig_module_info swig_module = {swig_types, 50, 0, 0, 0, 0};
+#define SWIGTYPE_p_boost__arrayT_double_20_t swig_types[27]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[28]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t swig_types[29]
+#define SWIGTYPE_p_char swig_types[30]
+#define SWIGTYPE_p_char_type swig_types[31]
+#define SWIGTYPE_p_difference_type swig_types[32]
+#define SWIGTYPE_p_fmtflags swig_types[33]
+#define SWIGTYPE_p_int_type swig_types[34]
+#define SWIGTYPE_p_iostate swig_types[35]
+#define SWIGTYPE_p_off_type swig_types[36]
+#define SWIGTYPE_p_openmode swig_types[37]
+#define SWIGTYPE_p_pos_type swig_types[38]
+#define SWIGTYPE_p_seekdir swig_types[39]
+#define SWIGTYPE_p_size_t swig_types[40]
+#define SWIGTYPE_p_size_type swig_types[41]
+#define SWIGTYPE_p_state_type swig_types[42]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[43]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[44]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[45]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[46]
+#define SWIGTYPE_p_std__invalid_argument swig_types[47]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[48]
+#define SWIGTYPE_p_traits_type swig_types[49]
+#define SWIGTYPE_p_value_type swig_types[50]
+static swig_type_info *swig_types[52];
+static swig_module_info swig_module = {swig_types, 51, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5248,7 +5249,7 @@ namespace swig {
 }
 
 
-#include "rsm_polynomial"
+#include "rsm_polynomial.h"
 
 
 #include <limits.h>
@@ -6492,8 +6493,14 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_1(PyObject *SWIGUNUSEDPA
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -6503,8 +6510,14 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_1(PyObject *SWIGUNUSEDPA
       0 );
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj)
-      return NULL;
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,1>");
+        return NULL;
+      }
       a3.reference(to_blitz_array<double, 1>(numpy3));
       arg3 = &a3;
     }
@@ -6514,8 +6527,14 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_1(PyObject *SWIGUNUSEDPA
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<double >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,1>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<double, 1>(numpy4));
       arg4 = &a4;
     }
@@ -6550,6 +6569,236 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmPolynomial *arg1 = (GeoCal::RsmPolynomial *) 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,2 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > *smartarg1 = 0 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,2 > a4 ;
+  PythonObject numpy4 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmPolynomial___call__" "', argument " "1"" of type '" "GeoCal::RsmPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 2>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmPolynomial const *)arg1)->operator ()((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,2 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmPolynomial *arg1 = (GeoCal::RsmPolynomial *) 0 ;
+  blitz::Array< double,3 > *arg2 = 0 ;
+  blitz::Array< double,3 > *arg3 = 0 ;
+  blitz::Array< double,3 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > *smartarg1 = 0 ;
+  blitz::Array< double,3 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,3 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,3 > a4 ;
+  PythonObject numpy4 ;
+  SwigValueWrapper< blitz::Array< double,3 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmPolynomial___call__" "', argument " "1"" of type '" "GeoCal::RsmPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 3>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 3>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial___call__', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 3>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmPolynomial const *)arg1)->operator ()((blitz::Array< double,3 > const &)*arg2,(blitz::Array< double,3 > const &)*arg3,(blitz::Array< double,3 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[3], stride[3];
+    for(int i = 0; i < 3; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 3>* t = new blitz::Array<double, 3>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmPolynomial___call__(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[5] = {
@@ -6562,38 +6811,94 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call__(PyObject *self, PyObject *args
     int _v = 0;
     {
       {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    return _wrap_RsmPolynomial___call____SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 4) {
+    int _v = 0;
+    {
+      {
         PythonObject t(to_numpy<double >(argv[1]));
         _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
       }
     }
-    if (!_v) goto check_1;
+    if (!_v) goto check_2;
     {
       {
         PythonObject t(to_numpy<double >(argv[2]));
         _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
       }
     }
-    if (!_v) goto check_1;
+    if (!_v) goto check_2;
     {
       {
         PythonObject t(to_numpy<double >(argv[3]));
         _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
       }
     }
-    if (!_v) goto check_1;
+    if (!_v) goto check_2;
     return _wrap_RsmPolynomial___call____SWIG_1(self, argc, argv);
   }
-check_1:
+check_2:
   
   if (argc == 4) {
-    return _wrap_RsmPolynomial___call____SWIG_0(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[3]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    return _wrap_RsmPolynomial___call____SWIG_2(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 4) {
+    return _wrap_RsmPolynomial___call____SWIG_3(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmPolynomial___call__'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::RsmPolynomial::operator ()(double,double,double) const\n"
-    "    GeoCal::RsmPolynomial::operator ()(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &,blitz::Array< double,1 > const &) const\n");
+    "    GeoCal::RsmPolynomial::operator ()(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &,blitz::Array< double,1 > const &) const\n"
+    "    GeoCal::RsmPolynomial::operator ()(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &) const\n"
+    "    GeoCal::RsmPolynomial::operator ()(blitz::Array< double,3 > const &,blitz::Array< double,3 > const &,blitz::Array< double,3 > const &) const\n");
   return 0;
 }
 
@@ -6638,8 +6943,14 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -6649,8 +6960,14 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
       0 );
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj)
-      return NULL;
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        return NULL;
+      }
       a3.reference(to_blitz_array<double, 1>(numpy3));
       arg3 = &a3;
     }
@@ -6660,8 +6977,14 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<double >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial_jacobian', expecting type  Array<double,1>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<double, 1>(numpy4));
       arg4 = &a4;
     }
@@ -6690,6 +7013,57 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmPolynomial_set_rpc_coeff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmPolynomial *arg1 = (GeoCal::RsmPolynomial *) 0 ;
+  boost::array< double,20 > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial > *smartarg1 = 0 ;
+  boost::array< double,20 > a2 ;
+  PythonObject numpy2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RsmPolynomial_set_rpc_coeff",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmPolynomial_set_rpc_coeff" "', argument " "1"" of type '" "GeoCal::RsmPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    numpy2.obj = to_numpy<double >(swig_obj[1]);
+    if(!numpy2.obj)
+    return NULL;
+    a2 = to_boost_array<double, 20>(numpy2);
+    arg2 = &a2;
+  }
+  {
+    try {
+      (arg1)->set_rpc_coeff((boost::array< double,20 > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -6840,8 +7214,14 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial__v_fitted_coefficent__SWIG_1(PyObject *
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial__v_fitted_coefficent', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmPolynomial__v_fitted_coefficent', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -7066,6 +7446,14 @@ static PyMethodDef SwigMethods[] = {
 		"&Y, const blitz::Array< double, 1 > &Z) const\n"
 		"\n"
 		""},
+	 { (char *)"RsmPolynomial_set_rpc_coeff", _wrap_RsmPolynomial_set_rpc_coeff, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void RsmPolynomial::set_rpc_coeff(const boost::array< double, 20 > &V)\n"
+		"Set a RsmPolynomial to match coefficients from RPC_B format RPC.\n"
+		"\n"
+		"This is really only useful for testing, comparing against our RPC code\n"
+		"\n"
+		""},
 	 { (char *)"RsmPolynomial__v_coefficient", (PyCFunction)_wrap_RsmPolynomial__v_coefficient, METH_O, (char *)"\n"
 		"\n"
 		"const blitz::Array<double, 3>& GeoCal::RsmPolynomial::coefficient() const\n"
@@ -7152,6 +7540,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_5_t = {"_p_blitz__ArrayT_int_5
 static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6_t", "blitz::Array< int,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__arrayT_double_20_t = {"_p_boost__arrayT_double_20_t", "boost::array< double,20 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RsmPolynomial_t = {"_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t", "boost::shared_ptr< GeoCal::RsmPolynomial > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -7204,6 +7593,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_6_t,
   &_swigt__p_blitz__ArrayT_int_7_t,
   &_swigt__p_blitz__ArrayT_int_8_t,
+  &_swigt__p_boost__arrayT_double_20_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RsmPolynomial_t,
   &_swigt__p_char,
@@ -7256,6 +7646,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_5_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__arrayT_double_20_t[] = {  {&_swigt__p_boost__arrayT_double_20_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, _p_boost__shared_ptrT_GeoCal__RsmPolynomial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RsmPolynomial_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -7308,6 +7699,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_6_t,
   _swigc__p_blitz__ArrayT_int_7_t,
   _swigc__p_blitz__ArrayT_int_8_t,
+  _swigc__p_boost__arrayT_double_20_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RsmPolynomial_t,
   _swigc__p_char,

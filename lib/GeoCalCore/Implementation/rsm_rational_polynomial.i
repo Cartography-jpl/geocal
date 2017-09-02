@@ -7,11 +7,14 @@
 #include "rsm_rational_polynomial.h"
 #include "geocal_rpc.h"
 #include "image_ground_connection.h"
+#include "coordinate_converter.h"  
 %}
 %base_import(generic_object)
 %import "image_coordinate.i"
 %import "rsm_polynomial.i"
 %import "geocal_rpc.i"
+%import "image_ground_connection.i"
+%import "coordinate_converter.i"
 
 %geocal_shared_ptr(GeoCal::RsmRationalPolynomial);
 
@@ -33,11 +36,19 @@ public:
 			    double Max_sample, double Min_x, double Max_x,
 			    double Min_y, double Max_y, double Min_z,
 			    double Max_z);
-  void fit(const std::vector<double>& Line,
-	   const std::vector<double>& Sample,
-	   const std::vector<double>& X,
-	   const std::vector<double>& Y,
-	   const std::vector<double>& Z);
+  void fit_data(const std::vector<double>& Line,
+		const std::vector<double>& Sample,
+		const std::vector<double>& X,
+		const std::vector<double>& Y,
+		const std::vector<double>& Z);
+  void fit(const ImageGroundConnection& Igc,
+	   const CoordinateConverter& Cconv,
+	   double Min_height, double Max_height,
+	   int Min_line, int Max_line, int Min_sample,
+	   int Max_sample,
+	   int Nline = 20, int Nsample = 20, int Nheight = 20,
+	   bool Skip_masked_point = false,
+	   bool Ignore_error = false);
   blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
 

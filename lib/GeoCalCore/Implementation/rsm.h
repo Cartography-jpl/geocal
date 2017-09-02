@@ -32,7 +32,9 @@ public:
   (double X, double Y, double Z) const;
 
   void fit(const ImageGroundConnection& Igc, double Min_height,
-	   double Max_height, bool Skip_masked_point = false,
+	   double Max_height,
+	   int Nline = 20, int Nsample = 20, int Nheight = 20,
+	   bool Skip_masked_point = false,
 	   bool Ignore_error = false);
   void print(std::ostream& Os) const;
 private:

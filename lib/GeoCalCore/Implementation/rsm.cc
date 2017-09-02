@@ -160,13 +160,35 @@ blitz::Array<double, 2> Rsm::image_coordinate_jacobian
 }
 
 //-----------------------------------------------------------------------
-/// 
+/// Generate a RsmRationalPolynomial that approximates the calculation
+/// done by a ImageGroundConnection.
+///
+/// This routine always ignores ImageGroundConnectionFailed
+/// exceptions, and just skips to the next point. But if we are using
+/// python code for the ImageGroundConnection we can't translate
+/// errors to ImageGroundConnectionFailed (this is a limitation of
+/// SWIG). So you can optionally specify Ignore_error as true, in
+/// which case we ignore *all* exceptions and just skip to the next
+/// point.
+///
+/// We normally look at all image points when generating the Rsm. You
+/// can optionally specify Skip_masked_point to skip all image points
+/// that are masked.
+///
+/// The Nline, Nsample, Nheight is used for any RsmRationalPolynomial
+/// we fit. A RsmGrid uses the size of the grid to determine how many
+/// points it needs to calculate.
 //-----------------------------------------------------------------------
 
 void Rsm::fit(const ImageGroundConnection& Igc, double Min_height,
-	      double Max_height, bool Skip_masked_point,
+	      double Max_height,
+	      int Nline, int Nsample, int Nheight,
+	      bool Skip_masked_point,
 	      bool Ignore_error)
 {
+  rp->fit(Igc, *cconv, Min_height, Max_height, 0, Igc.number_line(),
+	  0, Igc.number_sample(), Nline, Nsample, Nheight, Skip_masked_point,
+	  Ignore_error);
 }
 
 //-----------------------------------------------------------------------

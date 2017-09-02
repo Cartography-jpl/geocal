@@ -255,10 +255,10 @@ class RsmRationalPolynomial(geocal_swig.generic_object.GenericObject):
         return _rsm_rational_polynomial.RsmRationalPolynomial_fit_offset_and_scale(self, Min_line, Max_line, Min_sample, Max_sample, Min_x, Max_x, Min_y, Max_y, Min_z, Max_z)
 
 
-    def fit(self, Line, Sample, X, Y, Z):
+    def fit_data(self, Line, Sample, X, Y, Z):
         """
 
-        void RsmRationalPolynomial::fit(const std::vector< double > &Line, const std::vector< double >
+        void RsmRationalPolynomial::fit_data(const std::vector< double > &Line, const std::vector< double >
         &Sample, const std::vector< double > &X, const std::vector< double >
         &Y, const std::vector< double > &Z)
         Adjust the parameters of line and sample numerator and denominator to
@@ -268,7 +268,37 @@ class RsmRationalPolynomial(geocal_swig.generic_object.GenericObject):
         should make sure to set that first (e.g., call fit_offset_and_scale).
 
         """
-        return _rsm_rational_polynomial.RsmRationalPolynomial_fit(self, Line, Sample, X, Y, Z)
+        return _rsm_rational_polynomial.RsmRationalPolynomial_fit_data(self, Line, Sample, X, Y, Z)
+
+
+    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=20, Nsample=20, Nheight=20, Skip_masked_point=False, Ignore_error=False):
+        """
+
+        void RsmRationalPolynomial::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
+        double Min_height, double Max_height, int Min_line, int Max_line, int
+        Min_sample, int Max_sample, int Nline=20, int Nsample=20, int
+        Nheight=20, bool Skip_masked_point=false, bool Ignore_error=false)
+        Generate a RsmRationalPolynomial that approximates the calculation
+        done by a ImageGroundConnection.
+
+        We determine that X, Y, and Z range to use automatically to cover the
+        range given by the ImageGroundConnection.
+
+        This routine always ignores ImageGroundConnectionFailed exceptions,
+        and just skips to the next point. But if we are using python code for
+        the ImageGroundConnection we can't translate errors to
+        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
+        optionally specify Ignore_error as true, in which case we ignore all
+        exceptions and just skip to the next point.
+
+        We normally look at all image points when generating the
+        RsmRationalPolynomial. You can optionally specify Skip_masked_point to
+        skip all image points that are masked.
+
+        To support sections, you can pass in a restricted number of
+        line/samples to fit over. 
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
 
 
     def image_coordinate_jacobian(self, X, Y, Z):
@@ -486,6 +516,7 @@ RsmRationalPolynomial.__str__ = new_instancemethod(_rsm_rational_polynomial.RsmR
 RsmRationalPolynomial.image_coordinate = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate, None, RsmRationalPolynomial)
 RsmRationalPolynomial.set_rpc_coeff = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_set_rpc_coeff, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit_offset_and_scale = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_offset_and_scale, None, RsmRationalPolynomial)
+RsmRationalPolynomial.fit_data = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_data, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit, None, RsmRationalPolynomial)
 RsmRationalPolynomial.image_coordinate_jacobian = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate_jacobian, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_line_offset = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_offset, None, RsmRationalPolynomial)

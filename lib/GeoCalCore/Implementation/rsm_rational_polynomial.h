@@ -4,7 +4,10 @@
 #include "image_coordinate.h"
 
 namespace GeoCal {
-class Rpc;
+  class Rpc;
+  class ImageGroundConnection;
+  class CoordinateConverter;
+  
 /****************************************************************//**
   This is a RsmRationalPolynomial.
 *******************************************************************/
@@ -27,11 +30,19 @@ public:
 			    double Max_sample, double Min_x, double Max_x,
 			    double Min_y, double Max_y, double Min_z,
 			    double Max_z);
-  void fit(const std::vector<double>& Line,
-	   const std::vector<double>& Sample,
-	   const std::vector<double>& X,
-	   const std::vector<double>& Y,
-	   const std::vector<double>& Z);
+  void fit_data(const std::vector<double>& Line,
+		const std::vector<double>& Sample,
+		const std::vector<double>& X,
+		const std::vector<double>& Y,
+		const std::vector<double>& Z);
+  void fit(const ImageGroundConnection& Igc,
+	   const CoordinateConverter& Cconv,
+	   double Min_height, double Max_height,
+	   int Min_line, int Max_line, int Min_sample,
+	   int Max_sample,
+	   int Nline = 20, int Nsample = 20, int Nheight = 20,
+	   bool Skip_masked_point = false,
+	   bool Ignore_error = false);
 
 //-----------------------------------------------------------------------
 /// Initial guess to use when inverting the ground to image

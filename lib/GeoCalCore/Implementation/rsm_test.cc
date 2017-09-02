@@ -4,6 +4,9 @@
 #include "geodetic.h"
 #include "vicar_file.h"
 #include "srtm_dem.h"
+#include "rpc_image_ground_connection.h"
+#include "memory_raster_image.h"
+#include "simple_dem.h"
 #include <boost/make_shared.hpp>
 using namespace GeoCal;
 using namespace blitz;
@@ -59,9 +62,15 @@ public:
   rp = boost::make_shared<RsmRationalPolynomial>(3,3,3,3,3,3,3,3);
   rp->set_rpc_coeff(rpc);
   cconv = boost::make_shared<GeodeticConverter>();
+  boost::shared_ptr<RasterImage> image =
+    boost::make_shared<MemoryRasterImage>(rpc.line_offset * 2,
+					  rpc.sample_offset * 2);
+  igc = boost::make_shared<RpcImageGroundConnection>
+    (rpc, boost::make_shared<SimpleDem>(), image);
   }
   boost::shared_ptr<RsmRationalPolynomial> rp;
   boost::shared_ptr<CoordinateConverter> cconv;
+  boost::shared_ptr<RpcImageGroundConnection> igc;
   Rpc rpc;
   Geodetic gp;
 };
@@ -74,6 +83,23 @@ BOOST_AUTO_TEST_CASE(basic_test)
   ImageCoordinate ic = r.image_coordinate(gp);
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
+  boost::shared_ptr<GroundCoordinate> gpcalc =
+    r.ground_coordinate(ic_expect, gp.height_reference_surface());
+  BOOST_CHECK(distance(gp, *gpcalc) < 1.0);
+}
+
+BOOST_AUTO_TEST_CASE(fit_test)
+{
+  // Don't cheat, make sure rp isn't fitted yet.
+  rp = boost::make_shared<RsmRationalPolynomial>(3,3,3,3,3,3,3,3);
+  double hmin = rpc.height_offset - rpc.height_scale;
+  double hmax = rpc.height_offset + rpc.height_scale;
+  Rsm r(rp, cconv);
+  r.fit(*igc, hmin, hmax);
+  ImageCoordinate ic_expect = rpc.image_coordinate(gp);
+  ImageCoordinate ic = r.image_coordinate(gp);
+  BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
+  BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
   boost::shared_ptr<GroundCoordinate> gpcalc =
     r.ground_coordinate(ic_expect, gp.height_reference_surface());
   BOOST_CHECK(distance(gp, *gpcalc) < 1.0);

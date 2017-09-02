@@ -1,7 +1,9 @@
 #include "rsm_rational_polynomial.h"
-#include "geocal_serialize_support.h"
+#include "image_ground_connection.h"
+#include "coordinate_converter.h"
 #include "geocal_rpc.h"
 #include "geocal_gsl_fit.h"
+#include "geocal_serialize_support.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -206,7 +208,7 @@ void RsmRationalPolynomial::fit_offset_and_scale
 /// call fit_offset_and_scale).
 //-----------------------------------------------------------------------
 
-void RsmRationalPolynomial::fit
+void RsmRationalPolynomial::fit_data
 (const std::vector<double>& Line,
  const std::vector<double>& Sample,
  const std::vector<double>& X,
@@ -264,6 +266,79 @@ void RsmRationalPolynomial::fit
 					       smp_num_jac.cols()-1)));
   sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
 					       Range::toEnd)));
+}
+
+//-----------------------------------------------------------------------
+/// Generate a RsmRationalPolynomial that approximates the calculation
+/// done by a ImageGroundConnection.  We determine that X, Y, and Z
+/// range to use automatically to cover the range given by the
+/// ImageGroundConnection.
+///
+/// This routine always ignores ImageGroundConnectionFailed
+/// exceptions, and just skips to the next point. But if we are using
+/// python code for the ImageGroundConnection we can't translate
+/// errors to ImageGroundConnectionFailed (this is a limitation of
+/// SWIG). So you can optionally specify Ignore_error as true, in
+/// which case we ignore *all* exceptions and just skip to the next
+/// point.
+///
+/// We normally look at all image points when generating the
+/// RsmRationalPolynomial. You can optionally specify
+/// Skip_masked_point to skip all image points that are masked.
+///
+/// To support sections, you can pass in a restricted number of
+/// line/samples to fit over.
+//-----------------------------------------------------------------------
+
+void RsmRationalPolynomial::fit
+(const ImageGroundConnection& Igc,
+ const CoordinateConverter& Cconv,
+ double Min_height, double Max_height,
+ int Min_line, int Max_line, int Min_sample,
+ int Max_sample,
+ int Nline, int Nsample, int Nheight,
+ bool Skip_masked_point,
+ bool Ignore_error)
+{
+  std::vector<double> line, sample, x, y, z;
+  for(int i = 0; i < Nline; ++i)
+    for(int j = 0; j < Nsample; ++j)
+      for(int k = 0; k < Nheight; ++k) {
+	try {
+	  double ln = Min_line + (Max_line - Min_line) / (Nline - 1) * i;
+	  double smp = Min_sample + (Max_sample - Min_sample) / (Nsample - 1) * j;
+	  double h = Min_height + (Max_height - Min_height) / (Nheight - 1) * k;
+	  if(Skip_masked_point && Igc.image_mask()->mask(ln, smp))
+	    continue;
+	  boost::shared_ptr<GroundCoordinate> gc =
+	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
+	  line.push_back(ln);
+	  sample.push_back(smp);
+	  double xv, yv, zv;
+	  Cconv.convert_to_coordinate(*gc, xv, yv, zv);
+	  x.push_back(xv);
+	  y.push_back(yv);
+	  z.push_back(zv);
+	} catch(const ImageGroundConnectionFailed&) {
+	  // Ignore failures, just go to next point.
+	} catch(...) {
+	  if(!Ignore_error)
+	    throw;
+	}
+      }
+  if(line.size() == 0)
+    throw Exception("Did not get any points for RsmRationalPolynomial fit");
+  fit_offset_and_scale(*std::min_element(line.begin(), line.end()),
+		       *std::max_element(line.begin(), line.end()),
+		       *std::min_element(sample.begin(), sample.end()),
+		       *std::max_element(sample.begin(), sample.end()),
+		       *std::min_element(x.begin(), x.end()),
+		       *std::max_element(x.begin(), x.end()),
+		       *std::min_element(y.begin(), y.end()),
+		       *std::max_element(y.begin(), y.end()),
+		       *std::min_element(z.begin(), z.end()),
+		       *std::max_element(z.begin(), z.end()));
+  fit_data(line, sample, x, y, z);
 }
 
 //-----------------------------------------------------------------------

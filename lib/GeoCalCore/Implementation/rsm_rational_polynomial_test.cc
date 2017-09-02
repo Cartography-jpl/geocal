@@ -1,5 +1,8 @@
 #include "unit_test_support.h"
 #include "rsm_rational_polynomial.h"
+#include "rpc_image_ground_connection.h"
+#include "coordinate_converter.h"
+#include "simple_dem.h"
 #include "geocal_rpc.h"
 #include "geodetic.h"
 #include <boost/make_shared.hpp>
@@ -54,9 +57,13 @@ public:
       1e-9, -2.33038e-07, 1.86413e-08, -1.35637e-08}};
   rpc.sample_denominator = t4;
   gp = Geodetic(35.8399968, 45.0770183, 1017);
+  boost::shared_ptr<RasterImage> no_image;
+  igc = boost::make_shared<RpcImageGroundConnection>
+    (rpc, boost::make_shared<SimpleDem>(), no_image);
   }
   Rpc rpc;
   Geodetic gp;
+  boost::shared_ptr<RpcImageGroundConnection> igc;
 };
   
 BOOST_FIXTURE_TEST_SUITE(rsm_rational_polynomial, RsmRationalPolynomialFixture)
@@ -82,7 +89,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_MATRIX_CLOSE(jac(Range::all(), 2), jac_exp(Range::all(), 2));
 }
 
-BOOST_AUTO_TEST_CASE(fit_test)
+BOOST_AUTO_TEST_CASE(fit_data_test)
 {
   RsmRationalPolynomial r(3,3,3,3,3,3,3,3);
   double hmin = rpc.height_offset - rpc.height_scale;
@@ -116,7 +123,25 @@ BOOST_AUTO_TEST_CASE(fit_test)
 			 *std::max_element(y.begin(), y.end()),
 			 *std::min_element(z.begin(), z.end()),
 			 *std::max_element(z.begin(), z.end()));
-  r.fit(line, sample, x, y, z);
+  r.fit_data(line, sample, x, y, z);
+  ImageCoordinate ic_expect = rpc.image_coordinate(gp);
+  ImageCoordinate ic = r.image_coordinate(gp.longitude(), gp.latitude(),
+					  gp.height_reference_surface());
+  BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
+  BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
+}
+
+BOOST_AUTO_TEST_CASE(fit)
+{
+  RsmRationalPolynomial r(3,3,3,3,3,3,3,3);
+  double hmin = rpc.height_offset - rpc.height_scale;
+  double hmax = rpc.height_offset + rpc.height_scale;
+  double lmin = 0;
+  double smin = 0;
+  double lmax = rpc.line_offset * 2;
+  double smax = rpc.sample_offset * 2;
+  GeodeticConverter cconv;
+  r.fit(*igc, cconv, hmin, hmax, lmin, lmax, smin, smax);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
   ImageCoordinate ic = r.image_coordinate(gp.longitude(), gp.latitude(),
 					  gp.height_reference_surface());

@@ -253,14 +253,31 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         return _rsm.Rsm_image_coordinate_jacobian(self, X, Y, Z)
 
 
-    def fit(self, Igc, Min_height, Max_height, Skip_masked_point=False, Ignore_error=False):
+    def fit(self, Igc, Min_height, Max_height, Nline=20, Nsample=20, Nheight=20, Skip_masked_point=False, Ignore_error=False):
         """
 
         void Rsm::fit(const ImageGroundConnection &Igc, double Min_height, double
-        Max_height, bool Skip_masked_point=false, bool Ignore_error=false)
+        Max_height, int Nline=20, int Nsample=20, int Nheight=20, bool
+        Skip_masked_point=false, bool Ignore_error=false)
+        Generate a RsmRationalPolynomial that approximates the calculation
+        done by a ImageGroundConnection.
 
+        This routine always ignores ImageGroundConnectionFailed exceptions,
+        and just skips to the next point. But if we are using python code for
+        the ImageGroundConnection we can't translate errors to
+        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
+        optionally specify Ignore_error as true, in which case we ignore all
+        exceptions and just skip to the next point.
+
+        We normally look at all image points when generating the Rsm. You can
+        optionally specify Skip_masked_point to skip all image points that are
+        masked.
+
+        The Nline, Nsample, Nheight is used for any RsmRationalPolynomial we
+        fit. A RsmGrid uses the size of the grid to determine how many points
+        it needs to calculate. 
         """
-        return _rsm.Rsm_fit(self, Igc, Min_height, Max_height, Skip_masked_point, Ignore_error)
+        return _rsm.Rsm_fit(self, Igc, Min_height, Max_height, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
 
 
     def __reduce__(self):

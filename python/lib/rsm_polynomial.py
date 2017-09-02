@@ -219,8 +219,9 @@ class RsmRationalPolynomialPlusGrid(object):
                                                 x.min(), x.max(),
                                                 y.min(), y.max(),
                                                 z.min(), z.max())
-        self.rational_poly.fit(line.flatten(),sample.flatten(), x.flatten(),
-                               y.flatten(), z2.flatten())
+        self.rational_poly.fit_data(line.flatten(),sample.flatten(),
+                                    x.flatten(),
+                                    y.flatten(), z2.flatten())
         lcalc, scalc = self.rational_poly.image_coordinate(x,y,z2)
         lcorr = line - lcalc
         scorr = sample - scalc

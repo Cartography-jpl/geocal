@@ -83,7 +83,7 @@ def test_rsm_fit(rpc_data):
                            rpc_data.lon.min(), rpc_data.lon.max(),
                            rpc_data.lat.min(), rpc_data.lat.max(),
                            rpc_data.h.min(), rpc_data.h.max())
-    r.fit(rpc_data.ln.flatten(), rpc_data.smp.flatten(),
+    r.fit_data(rpc_data.ln.flatten(), rpc_data.smp.flatten(),
           rpc_data.lon.flatten(), rpc_data.lat.flatten(), h.flatten())
     lncalc, smpcalc = r.image_coordinate(rpc_data.lon,rpc_data.lat,h)
     assert abs(rpc_data.ln-lncalc).max() < 0.01

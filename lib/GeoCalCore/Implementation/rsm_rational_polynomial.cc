@@ -328,10 +328,7 @@ void RsmRationalPolynomial::fit
       }
   if(line.size() == 0)
     throw Exception("Did not get any points for RsmRationalPolynomial fit");
-  fit_offset_and_scale(*std::min_element(line.begin(), line.end()),
-		       *std::max_element(line.begin(), line.end()),
-		       *std::min_element(sample.begin(), sample.end()),
-		       *std::max_element(sample.begin(), sample.end()),
+  fit_offset_and_scale(Min_line, Max_line, Min_sample, Max_sample,
 		       *std::min_element(x.begin(), x.end()),
 		       *std::max_element(x.begin(), x.end()),
 		       *std::min_element(y.begin(), y.end()),

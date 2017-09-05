@@ -56,9 +56,14 @@ class RsmGrid(object):
 class RsmMultiSection(object):
     '''Handle multiple sections.'''
     def __init__(self, nline, nsamp, nrow_section, ncol_section,
-                 object_creator):
+                 object_creator, border=10):
+        '''The RsmRationalPolynomial tends to extrapolate badly. Because the
+        low order polynomial is only approximately correct, we add a little
+        bit of a border to each underlying RsmRationalPolynomial so we can
+        avoid extrapolating.'''
         self.nline = nline
         self.nsamp = nsamp
+        self.border = border
         self.section = np.empty((nrow_section, ncol_section), dtype=object)
         self.lp = RsmLowOrderPolynomial()
         for i in range(self.section.shape[0]):
@@ -68,6 +73,8 @@ class RsmMultiSection(object):
         self.nsamp_sec = float(self.nsamp) / self.section.shape[1]
     def image_coordinate(self, x, y, z):
         lp_line, lp_samp = self.lp.image_coordinate(x, y, z)
+        lp_line = lp_line.copy()
+        lp_samp = lp_samp.copy()
         if isinstance(lp_line, np.ndarray):
             lp_line[lp_line < 0] = 0
             lp_line[lp_line >= self.nline_sec * self.section.shape[0]] = \
@@ -89,8 +96,9 @@ class RsmMultiSection(object):
                     wh = np.logical_and(wh_ln,
                       np.logical_and(lp_samp >= self.nsamp_sec * j,
                       lp_samp < self.nsamp_sec * (j+1)))
-                    line[wh], sample[wh] = self.section[i,j](x[wh], y[wh],
-                                                             z2[wh])
+                    line[wh], sample[wh] = \
+                        self.section[i,j].image_coordinate(x[wh], y[wh],
+                                                           z2[wh])
         else:
             i = math.floor(lp_line / self.nline_sec)
             j = math.floor(lp_samp / self.nsamp_sec)
@@ -104,42 +112,28 @@ class RsmMultiSection(object):
                 j = self.section.shape[1] - 1
             line, sample = self.section[i,j](x,y, z)
         return line, sample
-    def fit(self, line, sample, x, y, z):
-        ''' The data is a slightly complicated, we want to evaluate things
-        at fixed height planes. This doesn't matter for fitting
-        polynomials, but does for gridded data (and we want a common
-        interface for both). So we give height as 1 d arrays, and then
-        report latitude and longitude as n_line x n_sample x n_height
-        arrays.
-
-        line and sample can either be 1d or 3d (so n_line and n_sample, or
-        n_line x n_sample x n_height). For 1d we assume the same line and 
-        sample at each height, otherwise we allow the line and samples to be
-        different for each height.
-        '''
-        z2 = np.empty(x.shape)
-        z2[:,:,:] = z[np.newaxis,np.newaxis,:]
-        self.lp.fit_data(line, sample, x, y, z)
-        lp_line, lp_samp = self.lp.image_coordinate(x, y, z)
-        lp_line[lp_line < 0] = 0
-        lp_line[lp_line >= self.nline_sec * self.section.shape[0]] = \
-            self.nline_sec * self.section.shape[0] - 0.1
-        lp_samp[lp_samp < 0] = 0
-        lp_samp[lp_samp >= self.nsamp_sec * self.section.shape[1]] = \
-            self.nsamp_sec * self.section.shape[1] - 0.1
-        if(len(z.shape) != len(x.shape)):
-            z2 = np.empty(x.shape)
-            z2[:,:,:] = z[np.newaxis,np.newaxis,:]
-        else:
-            z2 = z
+    def fit(self, igc, cconv, min_height, max_height,
+	   min_line, max_line, min_sample, max_sample,
+	   nline = 20, nsample = 20, nheight = 20,
+	   skip_masked_point = False,
+	   ignore_error = False):
+        self.lp.fit(igc, cconv, min_height, max_height, min_line,
+                    max_line, min_sample, max_sample, nline, nsample,
+                    nheight, skip_masked_point, ignore_error)
         for i in range(self.section.shape[0]):
-            wh_ln = np.logical_and(lp_line >= self.nline_sec * i,
-                                   lp_line < self.nline_sec * (i+1))
             for j in range(self.section.shape[1]):
-                wh = np.logical_and(wh_ln,
-                      np.logical_and(lp_samp >= self.nsamp_sec * j,
-                      lp_samp < self.nsamp_sec * (j+1)))
-                self.section[i,j].fit(line,sample,x, y, z2, wh=wh)
+                self.section[i,j].fit(igc, cconv, min_height,
+                                      max_height,
+                                    max(int(self.nline_sec * i)-self.border,
+                                        min_line),
+                                    min(int(self.nline_sec * (i+1))+
+                                        self.border, max_line),
+                                    max(int(self.nsamp_sec * j)-self.border,
+                                        min_sample),
+                                    min(int(self.nsamp_sec * (j+1))+
+                                        self.border,max_sample),
+                                    nline, nsample, nheight,
+                                    skip_masked_point, ignore_error)
                 
 class RsmRationalPolynomialPlusGrid(object):
     '''We can have both a RsmRationalPolynomial and a RsmGrid that is used

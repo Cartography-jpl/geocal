@@ -4,7 +4,7 @@
 import numpy as np
 import scipy
 import math
-from geocal_swig import Rpc, RsmPolynomial, RsmRationalPolynomial
+from geocal_swig import Rpc, RsmPolynomial, RsmRationalPolynomial, RsmLowOrderPolynomial
 
 class RsmGrid(object):
     '''Use a interpolation grid to map from ground to image. Right now we
@@ -53,63 +53,6 @@ class RsmGrid(object):
         self.sample_grid = scipy.interpolate.RegularGridInterpolator((xv,yv,zin), sdata, bounds_error=False,fill_value=None)
 
     
-class RsmLowOrderPolynomial(object):
-    '''This is the low order polynomial used to determine approximate 
-    row/column (line/sample, the RSM documentation calls this Row/Column)'''
-    def __init__(self):
-        self.pline = np.zeros(10)
-        self.psamp = np.zeros(10)
-
-    def image_coordinate(self, x, y, z):
-        p = self.pline
-        line =  p[0] + x * (p[1] + p[4] * x + p[5] * y + p[6] * z) + \
-            y * (p[2] + p[7] * y + p[8] * z) + z * (p[3] + p[9] * z)
-        p = self.psamp
-        sample =  p[0] + x * (p[1] + p[4] * x + p[5] * y + p[6] * z) + \
-            y * (p[2] + p[7] * y + p[8] * z) + z * (p[3] + p[9] * z)
-        return [line, sample]
-
-    def fit(self, line, sample, x, y, z):
-        '''The data is a slightly complicated, we want to evaluate things
-        at fixed height planes. This doesn't matter for fitting
-        polynomials, but does for gridded data (and we want a common
-        interface for both). So we give height as 1 d arrays, and then
-        report latitude and longitude as n_line x n_sample x n_height
-        arrays.
-
-        line and sample can either be 1d or 3d (so n_line and n_sample, or
-        n_line x n_sample x n_height). For 1d we assume the same line and 
-        sample at each height, otherwise we allow the line and samples to be
-        different for each height.
-        '''
-        if(len(line.shape) == 1):
-            line_v = np.empty(x.shape)
-            line_v[:,:,:] = line[:,np.newaxis, np.newaxis]
-        else:
-            line_v = line
-        line_v = line_v.reshape(line_v.size)
-        if(len(sample.shape) == 1):
-            sample_v = np.empty(x.shape)
-            sample_v[:,:,:] = sample[np.newaxis,:,np.newaxis]
-        else:
-            sample_v = sample
-        sample_v = sample_v.reshape(sample_v.size)
-        
-        g = np.zeros(x.shape + (10,))
-        g[...,0] = 1
-        g[...,1] = x
-        g[...,2] = y
-        g[...,3] = z
-        g[...,4] = x * x
-        g[...,5] = x * y
-        g[...,6] = x * z[np.newaxis, np.newaxis, :]
-        g[...,7] = y * y
-        g[...,8] = y * z[np.newaxis, np.newaxis, :]
-        g[...,9] = (z * z)[np.newaxis, np.newaxis, :]
-        g = g.reshape((x.size, 10))
-        self.pline = np.linalg.lstsq(g,line_v)[0]
-        self.psamp = np.linalg.lstsq(g,sample_v)[0]
-
 class RsmMultiSection(object):
     '''Handle multiple sections.'''
     def __init__(self, nline, nsamp, nrow_section, ncol_section,
@@ -174,7 +117,9 @@ class RsmMultiSection(object):
         sample at each height, otherwise we allow the line and samples to be
         different for each height.
         '''
-        self.lp.fit(line, sample, x, y, z)
+        z2 = np.empty(x.shape)
+        z2[:,:,:] = z[np.newaxis,np.newaxis,:]
+        self.lp.fit_data(line, sample, x, y, z)
         lp_line, lp_samp = self.lp.image_coordinate(x, y, z)
         lp_line[lp_line < 0] = 0
         lp_line[lp_line >= self.nline_sec * self.section.shape[0]] = \

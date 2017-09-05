@@ -130,6 +130,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_spice_kernel_list)(void);
   INIT_TYPE INIT_FUNC(_spice_dem)(void);
   INIT_TYPE INIT_FUNC(_rsm_polynomial)(void);
+  INIT_TYPE INIT_FUNC(_rsm_low_order_polynomial)(void);
   INIT_TYPE INIT_FUNC(_rsm_rational_polynomial)(void);
   INIT_TYPE INIT_FUNC(_rsm)(void);
   INIT_TYPE INIT_FUNC(_argus_camera)(void);
@@ -330,6 +331,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_spice_kernel_list", INIT_FUNC(_spice_kernel_list));
   INIT_MODULE(module, "_spice_dem", INIT_FUNC(_spice_dem));
   INIT_MODULE(module, "_rsm_polynomial", INIT_FUNC(_rsm_polynomial));
+  INIT_MODULE(module, "_rsm_low_order_polynomial", INIT_FUNC(_rsm_low_order_polynomial));
   INIT_MODULE(module, "_rsm_rational_polynomial", INIT_FUNC(_rsm_rational_polynomial));
   INIT_MODULE(module, "_rsm", INIT_FUNC(_rsm));
   INIT_MODULE(module, "_argus_camera", INIT_FUNC(_argus_camera));

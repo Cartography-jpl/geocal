@@ -92,9 +92,11 @@ def test_rsm_fit(rpc_data):
 @require_serialize
 def test_low_order_polynomial(rpc_data):
     lp = RsmLowOrderPolynomial()
-    lp.fit(rpc_data.ln, rpc_data.smp, rpc_data.lon, rpc_data.lat, rpc_data.h)
     h = np.empty(rpc_data.lat.shape)
     h[:,:,:] = rpc_data.h[np.newaxis,np.newaxis,:]
+    lp.fit_data(rpc_data.ln.flatten(), rpc_data.smp.flatten(),
+                rpc_data.lon.flatten(), rpc_data.lat.flatten(),
+                h.flatten())
     lncalc, smpcalc = lp.image_coordinate(rpc_data.lon,rpc_data.lat,h)
     assert abs(rpc_data.ln-lncalc).max() < 2.0
     assert abs(rpc_data.smp-smpcalc).max() < 2.0

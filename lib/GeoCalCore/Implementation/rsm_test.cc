@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "rsm.h"
+#include "rsm_rational_polynomial.h"
 #include "geocal_rpc.h"
 #include "geodetic.h"
 #include "vicar_file.h"

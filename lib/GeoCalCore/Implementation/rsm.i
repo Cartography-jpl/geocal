@@ -8,7 +8,7 @@
 %}
 %base_import(generic_object)
 %import "coordinate_converter.i"
-%import "rsm_rational_polynomial.i"
+%import "rsm_base.i"
 %import "image_ground_connection.i"
 
 %geocal_shared_ptr(GeoCal::Rsm);
@@ -16,7 +16,7 @@
 namespace GeoCal {
 class Rsm : public GenericObject {
 public:
-  Rsm(const boost::shared_ptr<RsmRationalPolynomial>& Rp,
+  Rsm(const boost::shared_ptr<RsmBase>& Rp,
       const boost::shared_ptr<CoordinateConverter>& Cconv);
   std::string print_to_string() const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate

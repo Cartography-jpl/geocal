@@ -1,6 +1,6 @@
 #ifndef RSM_H
 #define RSM_H
-#include "rsm_rational_polynomial.h"
+#include "rsm_base.h"
 #include "coordinate_converter.h"
 #include "image_ground_connection.h"
 
@@ -20,7 +20,7 @@ namespace GeoCal {
 
 class Rsm : public Printable<Rsm> {
 public:
-  Rsm(const boost::shared_ptr<RsmRationalPolynomial>& Rp,
+  Rsm(const boost::shared_ptr<RsmBase>& Rp,
       const boost::shared_ptr<CoordinateConverter>& Cconv);
   virtual ~Rsm() {}
 
@@ -38,7 +38,7 @@ public:
 	   bool Ignore_error = false);
   void print(std::ostream& Os) const;
 private:
-  boost::shared_ptr<RsmRationalPolynomial> rp;
+  boost::shared_ptr<RsmBase> rp;
   boost::shared_ptr<CoordinateConverter> cconv;
 
   Rsm() {}

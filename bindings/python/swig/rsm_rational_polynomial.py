@@ -185,10 +185,11 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.rsm_base
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-class RsmRationalPolynomial(geocal_swig.generic_object.GenericObject):
+class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
     """
 
     This is a RsmRationalPolynomial.
@@ -201,20 +202,8 @@ class RsmRationalPolynomial(geocal_swig.generic_object.GenericObject):
     def __init__(self, Np_x, Np_y, Np_z, Dp_x, Dp_y, Dp_z, N_max_order=-1, D_max_order=-1):
         """
 
-        RsmRationalPolynomial::RsmRationalPolynomial(int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y, int Dp_z, int
-        N_max_order=-1, int D_max_order=-1)
-        Constructor.
-
-        You indicated the order of the polynomial in each dimension for both
-        the numerator and denominator. This particular constructor uses the
-        same dimensions for both the line and the sample, there is no actual
-        requirement in a Rsm that this be the case (although it is pretty
-        common).
-
-        You can limit the over all order of cross terms by supplying a
-        max_order for the numerator, denominator, or both. This holds all
-        cross terms with a total order > max to 0. The default is to not
-        restrict the cross terms. 
+        RsmRationalPolynomial::RsmRationalPolynomial(const RsmRationalPolynomial &Rp)
+        Copy constructor. 
         """
         _rsm_rational_polynomial.RsmRationalPolynomial_swiginit(self, _rsm_rational_polynomial.new_RsmRationalPolynomial(Np_x, Np_y, Np_z, Dp_x, Dp_y, Dp_z, N_max_order, D_max_order))
 
@@ -299,17 +288,6 @@ class RsmRationalPolynomial(geocal_swig.generic_object.GenericObject):
         line/samples to fit over. 
         """
         return _rsm_rational_polynomial.RsmRationalPolynomial_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
-
-
-    def image_coordinate_jacobian(self, X, Y, Z):
-        """
-
-        blitz::Array< double, 2 > RsmRationalPolynomial::image_coordinate_jacobian(double X, double Y, double Z) const
-        This the jacobian of the line, sample with respect to X, Y, Z.
-
-        This is a 2x3 matrix. 
-        """
-        return _rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate_jacobian(self, X, Y, Z)
 
 
     def _v_line_offset(self):
@@ -512,13 +490,11 @@ class RsmRationalPolynomial(geocal_swig.generic_object.GenericObject):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_rational_polynomial.delete_RsmRationalPolynomial
-RsmRationalPolynomial.__str__ = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial___str__, None, RsmRationalPolynomial)
 RsmRationalPolynomial.image_coordinate = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate, None, RsmRationalPolynomial)
 RsmRationalPolynomial.set_rpc_coeff = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_set_rpc_coeff, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit_offset_and_scale = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_offset_and_scale, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit_data = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_data, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit, None, RsmRationalPolynomial)
-RsmRationalPolynomial.image_coordinate_jacobian = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate_jacobian, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_line_offset = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_offset, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_line_scale = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_scale, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_sample_offset = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_sample_offset, None, RsmRationalPolynomial)

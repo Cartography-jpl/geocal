@@ -34,12 +34,25 @@ RsmPolynomial::RsmPolynomial(int Np_x, int Np_y, int Np_z,
   max_order_(Max_order)
 {
   fitted_coefficent_size = 0;
+  coefficient_ = 0;
   for(int i = 0; i < coefficient_.rows(); ++i)
     for(int j = 0; j < coefficient_.cols(); ++j)
       for(int k = 0; k < coefficient_.depth(); ++k)
 	if(!(is_denominator_  && i == 0  && j == 0 && k ==0))
 	  if(max_order_ < 0 || i + j + k <= max_order_)
 	    ++fitted_coefficent_size;
+}
+
+//-----------------------------------------------------------------------
+/// Copy constructor.
+//-----------------------------------------------------------------------
+
+RsmPolynomial::RsmPolynomial(const RsmPolynomial& Rp)
+  : coefficient_(Rp.coefficient_.copy()),
+    is_denominator_(Rp.is_denominator_),
+    max_order_(Rp.max_order_),
+    fitted_coefficent_size(Rp.fitted_coefficent_size)
+{
 }
 
 //-----------------------------------------------------------------------

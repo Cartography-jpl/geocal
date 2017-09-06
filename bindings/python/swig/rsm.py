@@ -211,8 +211,8 @@ class Rsm(geocal_swig.generic_object.GenericObject):
     def __init__(self, Rp, Cconv):
         """
 
-        Rsm::Rsm(const boost::shared_ptr< RsmRationalPolynomial > &Rp, const
-        boost::shared_ptr< CoordinateConverter > &Cconv)
+        Rsm::Rsm(const boost::shared_ptr< RsmBase > &Rp, const boost::shared_ptr<
+        CoordinateConverter > &Cconv)
         Constructor. 
         """
         _rsm.Rsm_swiginit(self, _rsm.new_Rsm(Rp, Cconv))
@@ -259,8 +259,8 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         void Rsm::fit(const ImageGroundConnection &Igc, double Min_height, double
         Max_height, int Nline=20, int Nsample=20, int Nheight=20, bool
         Skip_masked_point=false, bool Ignore_error=false)
-        Generate a RsmRationalPolynomial that approximates the calculation
-        done by a ImageGroundConnection.
+        Generate a Rsm that approximates the calculation done by a
+        ImageGroundConnection.
 
         This routine always ignores ImageGroundConnectionFailed exceptions,
         and just skips to the next point. But if we are using python code for

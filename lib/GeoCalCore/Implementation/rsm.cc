@@ -24,7 +24,7 @@ GEOCAL_IMPLEMENT(Rsm);
 /// Constructor.
 //-----------------------------------------------------------------------
 
-Rsm::Rsm(const boost::shared_ptr<RsmRationalPolynomial>& Rp,
+Rsm::Rsm(const boost::shared_ptr<RsmBase>& Rp,
 	 const boost::shared_ptr<CoordinateConverter>& Cconv)
 : rp(Rp), cconv(Cconv)
 {
@@ -52,7 +52,7 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
     return ground_coordinate(Ic, sdem->h());
 
   // We now have more general case.
-  double delta_z;
+  const double delta_z = 10.0;
   double z0 = rp->initial_guess_z(Ic.line, Ic.sample);
   boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate(Ic, z0);
   boost::shared_ptr<GroundCoordinate> gc2 =
@@ -160,7 +160,7 @@ blitz::Array<double, 2> Rsm::image_coordinate_jacobian
 }
 
 //-----------------------------------------------------------------------
-/// Generate a RsmRationalPolynomial that approximates the calculation
+/// Generate a Rsm that approximates the calculation
 /// done by a ImageGroundConnection.
 ///
 /// This routine always ignores ImageGroundConnectionFailed

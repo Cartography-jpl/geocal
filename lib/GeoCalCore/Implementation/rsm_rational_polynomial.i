@@ -9,7 +9,7 @@
 #include "image_ground_connection.h"
 #include "coordinate_converter.h"  
 %}
-%base_import(generic_object)
+%base_import(rsm_base)
 %import "image_coordinate.i"
 %import "rsm_polynomial.i"
 %import "geocal_rpc.i"
@@ -19,7 +19,7 @@
 %geocal_shared_ptr(GeoCal::RsmRationalPolynomial);
 
 namespace GeoCal {
-class RsmRationalPolynomial : public GenericObject {
+class RsmRationalPolynomial : public RsmBase {
 public:
   RsmRationalPolynomial(int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
 			int Dp_z, int N_max_order = -1, int D_max_order = -1);

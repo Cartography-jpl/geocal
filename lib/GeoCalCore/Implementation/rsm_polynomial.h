@@ -20,6 +20,7 @@ class RsmPolynomial : public Printable<RsmPolynomial> {
 public:
   RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false,
 		int Max_order=-1);
+  RsmPolynomial(const RsmPolynomial& Rp);
   virtual ~RsmPolynomial() {}
   double operator()(double X, double Y, double Z) const;
   blitz::Array<double, 1> operator()(const blitz::Array<double, 1>& X,

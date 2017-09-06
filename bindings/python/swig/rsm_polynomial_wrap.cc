@@ -7508,15 +7508,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"new_RsmPolynomial", _wrap_new_RsmPolynomial, METH_VARARGS, (char *)"\n"
 		"\n"
-		"RsmPolynomial::RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false, int\n"
-		"Max_order=-1)\n"
-		"Constructor.\n"
-		"\n"
-		"You indicated the order of the polynomial in each dimension, and if\n"
-		"this is a denominator (where we hold the constant term to 1.0 by\n"
-		"convention, and don't fit for this). The maximum order of cross terms\n"
-		"can be given, or left as -1 in which case we don't limit the cross\n"
-		"terms. \n"
+		"RsmPolynomial::RsmPolynomial(const RsmPolynomial &Rp)\n"
+		"Copy constructor. \n"
 		""},
 	 { (char *)"RsmPolynomial___str__", (PyCFunction)_wrap_RsmPolynomial___str__, METH_O, NULL},
 	 { (char *)"RsmPolynomial___call__", _wrap_RsmPolynomial___call__, METH_VARARGS, NULL},

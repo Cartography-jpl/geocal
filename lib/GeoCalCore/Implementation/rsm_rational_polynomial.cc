@@ -12,8 +12,8 @@ using namespace blitz;
 template<class Archive>
 void RsmRationalPolynomial::serialize(Archive & ar, const unsigned int version)
 {
-  GEOCAL_GENERIC_BASE(RsmRationalPolynomial);
-  ar & GEOCAL_NVP_(line_offset)
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase)
+    & GEOCAL_NVP_(line_offset)
     & GEOCAL_NVP_(line_scale)
     & GEOCAL_NVP_(sample_offset)
     & GEOCAL_NVP_(sample_scale)    
@@ -48,12 +48,45 @@ GEOCAL_IMPLEMENT(RsmRationalPolynomial);
 RsmRationalPolynomial::RsmRationalPolynomial
 (int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
  int Dp_z, int N_max_order, int D_max_order)
-  : line_num_(Np_x, Np_y, Np_z, false, N_max_order),
+  : line_offset_(0),
+    line_scale_(0),
+    sample_offset_(0),
+    sample_scale_(0),
+    x_offset_(0),
+    x_scale_(0),
+    y_offset_(0),
+    y_scale_(0),
+    z_offset_(0),
+    z_scale_(0),
+    line_num_(Np_x, Np_y, Np_z, false, N_max_order),
     line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
     sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
     sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order)
 {
 }
+
+//-----------------------------------------------------------------------
+/// Copy constructor.
+//-----------------------------------------------------------------------
+
+RsmRationalPolynomial::RsmRationalPolynomial(const RsmRationalPolynomial& Rp)
+  : line_offset_(Rp.line_offset_),
+    line_scale_(Rp.line_scale_),
+    sample_offset_(Rp.sample_offset_),
+    sample_scale_(Rp.sample_scale_),
+    x_offset_(Rp.x_offset_),
+    x_scale_(Rp.x_scale_),
+    y_offset_(Rp.y_offset_),
+    y_scale_(Rp.y_scale_),
+    z_offset_(Rp.z_offset_),
+    z_scale_(Rp.z_scale_),
+    line_num_(Rp.line_num_),
+    line_den_(Rp.line_den_),
+    sample_num_(Rp.sample_num_),
+    sample_den_(Rp.sample_den_)
+{
+}
+
 
 //-----------------------------------------------------------------------
 /// Apply the rational polynomial to the given X, Y, and Z value.

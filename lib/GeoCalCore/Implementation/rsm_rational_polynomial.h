@@ -1,6 +1,7 @@
 #ifndef RSM_RATIONAL_POLYNOMIAL_H
 #define RSM_RATIONAL_POLYNOMIAL_H
 #include "rsm_polynomial.h"
+#include "rsm_base.h"
 #include "image_coordinate.h"
 
 namespace GeoCal {
@@ -12,19 +13,25 @@ namespace GeoCal {
   This is a RsmRationalPolynomial.
 *******************************************************************/
 
-class RsmRationalPolynomial : public Printable<RsmRationalPolynomial> {
+class RsmRationalPolynomial : public RsmBase {
 public:
   RsmRationalPolynomial(int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
 			int Dp_z, int N_max_order = -1, int D_max_order = -1);
+  RsmRationalPolynomial(const RsmRationalPolynomial& Rp);
   virtual ~RsmRationalPolynomial() {}
-  void print(std::ostream& Os) const;
-  ImageCoordinate image_coordinate(double X, double Y, double Z) const;
-  blitz::Array<double, 2> image_coordinate(const blitz::Array<double, 1>& X,
-     const blitz::Array<double, 1>& Y, const blitz::Array<double, 1>& Z) const;
-  blitz::Array<double, 3> image_coordinate(const blitz::Array<double, 2>& X,
-     const blitz::Array<double, 2>& Y, const blitz::Array<double, 2>& Z) const;
-  blitz::Array<double, 4> image_coordinate(const blitz::Array<double, 3>& X,
-     const blitz::Array<double, 3>& Y, const blitz::Array<double, 3>& Z) const;
+  virtual void print(std::ostream& Os) const;
+  virtual boost::shared_ptr<RsmBase> clone() const
+  { return boost::shared_ptr<RsmBase>(new RsmRationalPolynomial(*this)); }
+  virtual ImageCoordinate image_coordinate(double X, double Y, double Z) const;
+  virtual blitz::Array<double, 2> image_coordinate
+  (const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
+   const blitz::Array<double, 1>& Z) const;
+  virtual blitz::Array<double, 3> image_coordinate
+  (const blitz::Array<double, 2>& X,
+   const blitz::Array<double, 2>& Y, const blitz::Array<double, 2>& Z) const;
+  virtual blitz::Array<double, 4> image_coordinate
+  (const blitz::Array<double, 3>& X,
+   const blitz::Array<double, 3>& Y, const blitz::Array<double, 3>& Z) const;
   void set_rpc_coeff(const Rpc& R);
   void fit_offset_and_scale(double Min_line, double Max_line, double Min_sample,
 			    double Max_sample, double Min_x, double Max_x,
@@ -35,7 +42,7 @@ public:
 		const std::vector<double>& X,
 		const std::vector<double>& Y,
 		const std::vector<double>& Z);
-  void fit(const ImageGroundConnection& Igc,
+  virtual void fit(const ImageGroundConnection& Igc,
 	   const CoordinateConverter& Cconv,
 	   double Min_height, double Max_height,
 	   int Min_line, int Max_line, int Min_sample,
@@ -53,7 +60,7 @@ public:
 /// rational polynomial, or something like that.
 //-----------------------------------------------------------------------
   
-  void initial_guess(double Line, double Sample, double Z,
+  virtual void initial_guess(double Line, double Sample, double Z,
 		     double& X_guess, double& Y_guess) const
   { X_guess = x_offset_; Y_guess = y_offset_; }
 
@@ -62,8 +69,9 @@ public:
 /// middle Z value.
 //-----------------------------------------------------------------------
 
-  double initial_guess_z(double Line, double Sample) const { return z_offset_;}
-  blitz::Array<double, 2> image_coordinate_jacobian
+  virtual double initial_guess_z(double Line, double Sample) const
+  { return z_offset_;}
+  virtual blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
   double line_offset() const {return line_offset_;}
   double line_scale() const {return line_scale_;}

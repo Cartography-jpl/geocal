@@ -1,0 +1,56 @@
+// -*- mode: c++; -*-
+// (Not really c++, but closest emacs mode)
+
+%include "geocal_common.i"
+
+%{
+#include "rsm_base.h"
+#include "image_ground_connection.h"
+#include "coordinate_converter.h"  
+%}
+%base_import(generic_object)
+%import "image_coordinate.i"
+%import "image_ground_connection.i"
+%import "coordinate_converter.i"
+
+%geocal_shared_ptr(GeoCal::RsmBase);
+
+namespace GeoCal {
+class RsmBase : public GenericObject {
+public:
+  RsmBase();
+  virtual std::string print_to_string() const;
+  virtual boost::shared_ptr<RsmBase> clone() const;
+  virtual ImageCoordinate image_coordinate(double X, double Y, double Z) const;
+  virtual blitz::Array<double, 2> image_coordinate
+    (const blitz::Array<double, 1>& X,
+     const blitz::Array<double, 1>& Y, const blitz::Array<double, 1>& Z) const;
+  virtual blitz::Array<double, 3> image_coordinate
+    (const blitz::Array<double, 2>& X,
+     const blitz::Array<double, 2>& Y, const blitz::Array<double, 2>& Z) const;
+  virtual blitz::Array<double, 4> image_coordinate
+    (const blitz::Array<double, 3>& X,
+     const blitz::Array<double, 3>& Y, const blitz::Array<double, 3>& Z) const;
+  virtual blitz::Array<double, 2> image_coordinate_jacobian
+  (double X, double Y, double Z) const;
+  virtual void initial_guess(double Line, double Sample, double Z,
+			     double& X_guess, double& Y_guess) const;
+  virtual double initial_guess_z(double Line, double Sample) const;
+  virtual void fit(const ImageGroundConnection& Igc,
+	   const CoordinateConverter& Cconv,
+	   double Min_height, double Max_height,
+	   int Min_line, int Max_line, int Min_sample,
+	   int Max_sample,
+	   int Nline = 20, int Nsample = 20, int Nheight = 20,
+	   bool Skip_masked_point = false,
+		   bool Ignore_error = false) = 0;
+  static blitz::Array<double, 4> generate_data
+  (const ImageGroundConnection& Igc,
+   const CoordinateConverter& Cconv,
+   double Min_x, double Max_x,
+   double Min_y, double Max_y,
+   double Min_z, double Max_z,
+   int Numx, int Numy, int Numz);
+  %pickle_serialization()
+};
+}

@@ -312,13 +312,13 @@ public:
 /// Strip off gradient to just give a time.
 //-----------------------------------------------------------------------
 
-  Time value() const { return Time::time_pgs(pgs().value()); }
+  Time value() const { return Time::time_pgs(time_pgs_.value()); }
 
 //-----------------------------------------------------------------------
 /// Return gradient.
 //-----------------------------------------------------------------------
 
-  blitz::Array<double, 1> gradient() const { return pgs().gradient();}
+  blitz::Array<double, 1> gradient() const { return time_pgs_.gradient();}
 
 //-----------------------------------------------------------------------
 /// Print to stream.

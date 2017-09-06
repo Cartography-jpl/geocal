@@ -604,7 +604,7 @@ public:
     lv.look_vector[0] = p1[0] - p2[0];
     lv.look_vector[1] = p1[1] - p2[1];
     lv.look_vector[2] = p1[2] - p2[2];
-    return orbit_data(T)->sc_look_vector(lv);
+    return od->sc_look_vector(lv);
   }
   
 //-----------------------------------------------------------------------

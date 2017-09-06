@@ -736,9 +736,8 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def sc_look_vector(self, *args):
         """
 
-        virtual ScLookVectorWithDerivative GeoCal::Orbit::sc_look_vector(const TimeWithDerivative &T, const
-        CartesianFixedLookVectorWithDerivative &Cf) const
-
+        virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixed &Pt) const
+        Return ScLookVector that sees a given point. 
         """
         return _orbit.Orbit_sc_look_vector(self, *args)
 

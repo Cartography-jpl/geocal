@@ -245,15 +245,12 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
     virtual ~IpiEq() {}
     virtual double operator()(const double& Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
-      return cam->frame_line_coordinate(od->sc_look_vector(look_vector(od)), 
+      return cam->frame_line_coordinate(orb->sc_look_vector(tmin+Toffset, *p), 
 					band);
     }
     FrameCoordinate frame_coordinate(const double& Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = 
-	orb->orbit_data(tmin + Toffset);
-      return cam->frame_coordinate(od->sc_look_vector(look_vector(od)), 
+      return cam->frame_coordinate(orb->sc_look_vector(tmin+Toffset, *p),
 				   band);
     }
     bool false_root(double Toffset) const
@@ -374,8 +371,8 @@ void Ipi::time_with_derivative
     virtual ~IpiEq() {}
     virtual double operator()(const double& Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
-      return cam->frame_line_coordinate(od->sc_look_vector(look_vector(od)), 
+      return cam->frame_line_coordinate(orb->sc_look_vector(tmin + Toffset,
+							    *p), 
 					band);
     }
     virtual double df(double Toffset) const

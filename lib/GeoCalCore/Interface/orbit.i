@@ -269,6 +269,8 @@ public:
   virtual ScLookVectorWithDerivative sc_look_vector
   (const TimeWithDerivative& T, 
    const CartesianFixedLookVectorWithDerivative& Cf) const;
+  virtual ScLookVector sc_look_vector(Time T, 
+				      const CartesianFixed& Pt) const;
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
   %python_attribute(min_time, Time)

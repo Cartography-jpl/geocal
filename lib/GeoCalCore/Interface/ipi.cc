@@ -255,14 +255,19 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
     }
     bool false_root(double Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
+      boost::shared_ptr<CartesianFixed> p2 = orb->position_cf(tmin + Toffset);
+      boost::array<double, 3> p1 = p->position;
+      boost::array<double, 3> p3 = p2->position;
+      CartesianFixedLookVector lv;
+      lv.look_vector[0] = p1[0] - p3[0];
+      lv.look_vector[1] = p1[1] - p3[1];
+      lv.look_vector[2] = p1[2] - p3[2];
       const double allowed_intersection_error = 50000;
 				// How far off we can be from actual position 
 				// of point and still call it a true
 				// solution.
-      return (distance(*(od->position_cf()->
-		 reference_surface_intersect_approximate(look_vector(od), 
-					 height)),
+      return (distance(*(p2->
+			 reference_surface_intersect_approximate(lv, height)),
 			 *p) > allowed_intersection_error);
     }
     CartesianFixedLookVector look_vector

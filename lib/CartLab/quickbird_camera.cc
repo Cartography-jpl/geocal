@@ -55,10 +55,10 @@ QuickBirdCamera::QuickBirdCamera()
   // (q1, q2, q3, q4). That means when we bring this over to the boost
   // library, we need to reorder this to the 4-tuple (q4, q1, q2, q3).
 
-  frame_to_sc_ = quaternion<double>(0.9999806843019142,
-				    -0.0037369299279122,
-				    -0.0046602381421084,
-				    0.0017171366422757);
+  frame_to_sc(quaternion<double>(0.9999806843019142,
+				 -0.0037369299279122,
+				 -0.0046602381421084,
+				 0.0017171366422757));
 }
 
 //-----------------------------------------------------------------------

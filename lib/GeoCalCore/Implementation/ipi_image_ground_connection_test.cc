@@ -47,13 +47,13 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(timing_test)
 {
-  return;
+  //return;
   // This has been slow to run. Put this is a unit test so we can look
   // at this with valgrind and try to speed up.
   boost::shared_ptr<IpiImageGroundConnection> igc =
     serialize_read<IpiImageGroundConnection>("/home/smyth/Local/MarsRsm/ctx1_igc.xml");
-  const int nline = 100;
-  //const int nline = 500;
+  //const int nline = 100;
+  const int nline = 500;
   blitz::Array<double, 4> t = RsmBase::generate_data(*igc, PlanetocentricConverter(PlanetConstant::MARS_NAIF_CODE), -19.55, -19.02, 23.148, 23.202, 0, 1000, nline, 100, 20);
 }
 

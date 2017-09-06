@@ -47,7 +47,9 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(timing_test)
 {
-  //return;
+  // Don't normally run, this depends on specific test data that isn't
+  // available other than on pistol
+  return;
   // This has been slow to run. Put this is a unit test so we can look
   // at this with valgrind and try to speed up.
   boost::shared_ptr<IpiImageGroundConnection> igc =

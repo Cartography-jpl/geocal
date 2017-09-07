@@ -4,55 +4,8 @@
 import numpy as np
 import scipy
 import math
-from geocal_swig import Rpc, RsmPolynomial, RsmRationalPolynomial, RsmLowOrderPolynomial
+from geocal_swig import Rpc, RsmPolynomial, RsmRationalPolynomial, RsmLowOrderPolynomial, RsmGrid
 
-class RsmGrid(object):
-    '''Use a interpolation grid to map from ground to image. Right now we
-    only do a linear interpolation. The RSM documentation suggests doing
-    Lagrange interpolation of various orders, we can implement that in the
-    future (or just do this when we implement this in C++).'''
-    def __init__(self, NP_X, NP_Y, NP_Z):
-        self.np_x = NP_X
-        self.np_y = NP_Y
-        self.np_z = NP_Z
-        self.line_grid = None
-        self.sample_grid = None
-    def image_coordinate(self, xin, yin, zin):
-        x = np.stack((xin, yin, zin), axis=-1)
-        return self.line_grid(x), self.sample_grid(x)
-    def fit(self, line, sample, xin, yin, zin, wh = None):
-        if(zin.size != self.np_z):
-            raise RuntimeError("Fit was not passed the correct number of heights. Expected %d but got %s" % (self.np_z, zin.shape))
-        xv = np.linspace(xin.min(), xin.max(), self.np_x)
-        yv = np.linspace(yin.min(), yin.max(), self.np_y)
-        ldata = np.empty((self.np_x, self.np_y, self.np_z))
-        sdata = np.empty(ldata.shape)
-        for i in range(self.np_z):
-            x = xin[:,:,i]
-            y = yin[:,:,i]
-            ln = line[:,:,i]
-            smp = sample[:,:,i]
-            if(wh is not None):
-                x = x[wh[:,:,i]]
-                y = y[wh[:,:,i]]
-                ln = ln[wh[:,:,i]]
-                smp = smp[wh[:,:,i]]
-            else:
-                x = x.reshape(x.size)
-                y = y.reshape(y.size)
-                ln= ln.reshape(ln.size)
-                smp = smp.reshape(smp.size)
-            # Use nearest value outside of the convex hull, linear interpolation
-            # otherwise
-            gd_nearest = scipy.interpolate.griddata((x,y), np.stack((ln, smp), axis=1), (np.outer(xv,np.ones_like(yv)), np.outer(np.ones_like(xv), yv)), method='nearest')
-            gd = scipy.interpolate.griddata((x,y), np.stack((ln, smp), axis=1), (np.outer(xv,np.ones_like(yv)), np.outer(np.ones_like(xv), yv)))
-            gd[np.isnan(gd)] = gd_nearest[np.isnan(gd)]
-            ldata[...,i] = gd[...,0]
-            sdata[...,i] = gd[...,1]
-        self.line_grid = scipy.interpolate.RegularGridInterpolator((xv,yv,zin), ldata, bounds_error=False,fill_value=None)
-        self.sample_grid = scipy.interpolate.RegularGridInterpolator((xv,yv,zin), sdata, bounds_error=False,fill_value=None)
-
-    
 class RsmMultiSection(object):
     '''Handle multiple sections.'''
     def __init__(self, nline, nsamp, nrow_section, ncol_section,
@@ -150,6 +103,7 @@ class RsmRationalPolynomialPlusGrid(object):
         lcorr, scorr  = self.corr_grid.image_coordinate(x, y, z)
         return [line + lcorr, sample + scorr] 
 
+    # Needs work
     def fit(self, line, sample, x, y, z):
         z2 = np.empty(x.shape)
         z2[:,:,:] = z[np.newaxis,np.newaxis,:]

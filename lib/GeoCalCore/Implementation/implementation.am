@@ -409,6 +409,8 @@ geocal_test_all_SOURCES+= @srcimplementation@/rsm_low_order_polynomial_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_rational_polynomial_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_test.cc
 
+EXTRA_DIST += @srcimplementationt@/rsm_fixture.h
+
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 
 

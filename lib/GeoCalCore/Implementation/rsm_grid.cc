@@ -19,7 +19,11 @@ void RsmGrid::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(z_start)
     & GEOCAL_NVP_(x_delta)
     & GEOCAL_NVP_(y_delta)
-    & GEOCAL_NVP_(z_delta);
+    & GEOCAL_NVP_(z_delta)
+    & GEOCAL_NVP_(min_line)
+    & GEOCAL_NVP_(max_line)
+    & GEOCAL_NVP_(min_sample)
+    & GEOCAL_NVP_(max_sample);
 }
 
 GEOCAL_IMPLEMENT(RsmGrid);
@@ -204,7 +208,11 @@ void RsmGrid::fit
  bool Ignore_error)
 {
   bool first = true;
-  double min_x, max_x, min_y, max_y, min_z, max_z;
+  min_line_ = Min_line;
+  max_line_ = Max_line;
+  min_sample_ = Min_sample;
+  max_sample_ = Max_sample;
+  double min_x=0, max_x=0, min_y=0, max_y=0, min_z=0, max_z=0;
   for(double i = 0; i < 2; ++i)
     for(double j = 0; j < 2; ++j)
       for(double k = 0; k < 2; ++k) {

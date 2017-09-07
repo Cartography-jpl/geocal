@@ -90,6 +90,16 @@ public:
    double Min_y, double Max_y,
    double Min_z, double Max_z,
    int Numx, int Numy, int Numz);
+  virtual int min_line() const = 0;
+  virtual int max_line() const = 0;
+  virtual int min_sample() const = 0;
+  virtual int max_sample() const = 0;
+  virtual double min_x() const = 0;
+  virtual double max_x() const = 0;
+  virtual double min_y() const = 0;
+  virtual double max_y() const = 0;
+  virtual double min_z() const = 0;
+  virtual double max_z() const = 0;
 private:
   friend class boost::serialization::access;
   template<class Archive>

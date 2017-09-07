@@ -83,6 +83,16 @@ public:
   double y_scale() const {return y_scale_;}
   double z_offset() const {return z_offset_;}
   double z_scale() const {return z_scale_;}
+  virtual int min_line() const {return int(line_offset_-line_scale_);}
+  virtual int max_line() const {return int(line_offset_+line_scale_);}
+  virtual int min_sample() const {return int(sample_offset_-sample_scale_);}
+  virtual int max_sample() const {return int(sample_offset_+sample_scale_);}
+  virtual double min_x() const {return x_offset_-x_scale_;}
+  virtual double max_x() const {return x_offset_+x_scale_;}
+  virtual double min_y() const {return y_offset_-y_scale_;}
+  virtual double max_y() const {return y_offset_+y_scale_;} 
+  virtual double min_z() const {return z_offset_-z_scale_;}
+  virtual double max_z() const {return z_offset_+z_scale_;}
   const RsmPolynomial& line_numerator() const {return line_num_;}
   const RsmPolynomial& line_denominator() const {return line_den_;}
   const RsmPolynomial& sample_numerator() const {return sample_num_;}

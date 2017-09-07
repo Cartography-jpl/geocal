@@ -51,6 +51,16 @@ public:
    double Min_y, double Max_y,
    double Min_z, double Max_z,
    int Numx, int Numy, int Numz);
+  %python_attribute(min_line, int);
+  %python_attribute(max_line, int);
+  %python_attribute(min_sample, int);
+  %python_attribute(max_sample, int);
+  %python_attribute(min_x, double);
+  %python_attribute(max_x, double);
+  %python_attribute(min_y, double);
+  %python_attribute(max_y, double);
+  %python_attribute(min_z, double);
+  %python_attribute(max_z, double);
   %pickle_serialization()
 };
 }

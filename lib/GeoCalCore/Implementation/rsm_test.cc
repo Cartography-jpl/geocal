@@ -119,7 +119,6 @@ BOOST_AUTO_TEST_CASE(ground_coordinate_dem)
     boost::shared_ptr<GroundCoordinate> gpcalc =
       r.ground_coordinate(ic, d);
     BOOST_CHECK(GeoCal::distance(*gpsurf, *gpcalc) < 1.0);
-    std::cerr << GeoCal::distance(*gpsurf, *gpcalc) << "\n";
   } catch(const Exception&) {
     BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
     // Don't worry if we can't find the data.

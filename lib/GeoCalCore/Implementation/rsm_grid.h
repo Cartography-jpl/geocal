@@ -120,9 +120,21 @@ public:
 //-----------------------------------------------------------------------
 
   double z_delta() const {return z_delta_;}
+
+  virtual int min_line() const {return min_line_;}
+  virtual int max_line() const {return max_line_;}
+  virtual int min_sample() const {return min_sample_;}
+  virtual int max_sample() const {return max_sample_;}
+  virtual double min_x() const {return x_start();}
+  virtual double max_x() const {return x_start()+x_delta()*number_x();}
+  virtual double min_y() const {return y_start();}
+  virtual double max_y() const {return y_start()+y_delta()*number_y();}
+  virtual double min_z() const {return z_start();}
+  virtual double max_z() const {return z_start()+z_delta()*number_z();}
 private:
   blitz::Array<double, 3> line_, sample_;
   double x_start_, y_start_, z_start_, x_delta_, y_delta_, z_delta_;
+  int min_line_,max_line_,min_sample_,max_sample_;
   RsmGrid() {}
   friend class boost::serialization::access;
   template<class Archive>

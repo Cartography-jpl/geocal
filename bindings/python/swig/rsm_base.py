@@ -294,6 +294,146 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
 
     generate_data = staticmethod(generate_data)
 
+    def _v_min_line(self):
+        """
+
+        virtual int GeoCal::RsmBase::min_line() const =0
+
+        """
+        return _rsm_base.RsmBase__v_min_line(self)
+
+
+    @property
+    def min_line(self):
+        return self._v_min_line()
+
+
+    def _v_max_line(self):
+        """
+
+        virtual int GeoCal::RsmBase::max_line() const =0
+
+        """
+        return _rsm_base.RsmBase__v_max_line(self)
+
+
+    @property
+    def max_line(self):
+        return self._v_max_line()
+
+
+    def _v_min_sample(self):
+        """
+
+        virtual int GeoCal::RsmBase::min_sample() const =0
+
+        """
+        return _rsm_base.RsmBase__v_min_sample(self)
+
+
+    @property
+    def min_sample(self):
+        return self._v_min_sample()
+
+
+    def _v_max_sample(self):
+        """
+
+        virtual int GeoCal::RsmBase::max_sample() const =0
+
+        """
+        return _rsm_base.RsmBase__v_max_sample(self)
+
+
+    @property
+    def max_sample(self):
+        return self._v_max_sample()
+
+
+    def _v_min_x(self):
+        """
+
+        virtual double GeoCal::RsmBase::min_x() const =0
+
+        """
+        return _rsm_base.RsmBase__v_min_x(self)
+
+
+    @property
+    def min_x(self):
+        return self._v_min_x()
+
+
+    def _v_max_x(self):
+        """
+
+        virtual double GeoCal::RsmBase::max_x() const =0
+
+        """
+        return _rsm_base.RsmBase__v_max_x(self)
+
+
+    @property
+    def max_x(self):
+        return self._v_max_x()
+
+
+    def _v_min_y(self):
+        """
+
+        virtual double GeoCal::RsmBase::min_y() const =0
+
+        """
+        return _rsm_base.RsmBase__v_min_y(self)
+
+
+    @property
+    def min_y(self):
+        return self._v_min_y()
+
+
+    def _v_max_y(self):
+        """
+
+        virtual double GeoCal::RsmBase::max_y() const =0
+
+        """
+        return _rsm_base.RsmBase__v_max_y(self)
+
+
+    @property
+    def max_y(self):
+        return self._v_max_y()
+
+
+    def _v_min_z(self):
+        """
+
+        virtual double GeoCal::RsmBase::min_z() const =0
+
+        """
+        return _rsm_base.RsmBase__v_min_z(self)
+
+
+    @property
+    def min_z(self):
+        return self._v_min_z()
+
+
+    def _v_max_z(self):
+        """
+
+        virtual double GeoCal::RsmBase::max_z() const =0
+
+        """
+        return _rsm_base.RsmBase__v_max_z(self)
+
+
+    @property
+    def max_z(self):
+        return self._v_max_z()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -305,6 +445,16 @@ RsmBase.image_coordinate_jacobian = new_instancemethod(_rsm_base.RsmBase_image_c
 RsmBase.initial_guess = new_instancemethod(_rsm_base.RsmBase_initial_guess, None, RsmBase)
 RsmBase.initial_guess_z = new_instancemethod(_rsm_base.RsmBase_initial_guess_z, None, RsmBase)
 RsmBase.fit = new_instancemethod(_rsm_base.RsmBase_fit, None, RsmBase)
+RsmBase._v_min_line = new_instancemethod(_rsm_base.RsmBase__v_min_line, None, RsmBase)
+RsmBase._v_max_line = new_instancemethod(_rsm_base.RsmBase__v_max_line, None, RsmBase)
+RsmBase._v_min_sample = new_instancemethod(_rsm_base.RsmBase__v_min_sample, None, RsmBase)
+RsmBase._v_max_sample = new_instancemethod(_rsm_base.RsmBase__v_max_sample, None, RsmBase)
+RsmBase._v_min_x = new_instancemethod(_rsm_base.RsmBase__v_min_x, None, RsmBase)
+RsmBase._v_max_x = new_instancemethod(_rsm_base.RsmBase__v_max_x, None, RsmBase)
+RsmBase._v_min_y = new_instancemethod(_rsm_base.RsmBase__v_min_y, None, RsmBase)
+RsmBase._v_max_y = new_instancemethod(_rsm_base.RsmBase__v_max_y, None, RsmBase)
+RsmBase._v_min_z = new_instancemethod(_rsm_base.RsmBase__v_min_z, None, RsmBase)
+RsmBase._v_max_z = new_instancemethod(_rsm_base.RsmBase__v_max_z, None, RsmBase)
 RsmBase_swigregister = _rsm_base.RsmBase_swigregister
 RsmBase_swigregister(RsmBase)
 

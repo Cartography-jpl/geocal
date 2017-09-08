@@ -137,6 +137,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_rsm_rational_polynomial)(void);
   INIT_TYPE INIT_FUNC(_rsm_multi_section)(void);
   INIT_TYPE INIT_FUNC(_rsm)(void);
+  INIT_TYPE INIT_FUNC(_rsm_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_argus_camera)(void);
   INIT_TYPE INIT_FUNC(_argus_orbit)(void);
   INIT_TYPE INIT_FUNC(_quickbird_camera)(void);
@@ -342,6 +343,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_rsm_rational_polynomial", INIT_FUNC(_rsm_rational_polynomial));
   INIT_MODULE(module, "_rsm_multi_section", INIT_FUNC(_rsm_multi_section));
   INIT_MODULE(module, "_rsm", INIT_FUNC(_rsm));
+  INIT_MODULE(module, "_rsm_image_ground_connection", INIT_FUNC(_rsm_image_ground_connection));
   INIT_MODULE(module, "_argus_camera", INIT_FUNC(_argus_camera));
   INIT_MODULE(module, "_argus_orbit", INIT_FUNC(_argus_orbit));
   INIT_MODULE(module, "_quickbird_camera", INIT_FUNC(_quickbird_camera));

@@ -129,6 +129,25 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
 }
 
 //-----------------------------------------------------------------------
+/// Return ground coordinate at the height above the reference ellipsoid.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GroundCoordinate>
+Rsm::ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
+{
+  const GeodeticConverter* gconv = dynamic_cast<const GeodeticConverter*>(cconv.get());
+  const PlanetocentricConverter* pconv = dynamic_cast<const PlanetocentricConverter*>(cconv.get());
+  if(gconv || pconv)
+    return ground_coordinate(Ic, H);
+  if(cconv->naif_code() == CoordinateConverter::EARTH_NAIF_CODE) {
+    SimpleDem d(H);
+    return ground_coordinate(Ic, d);
+  }
+  PlanetSimpleDem d(H, cconv->naif_code());
+  return ground_coordinate(Ic, d);
+}
+
+//-----------------------------------------------------------------------
 /// Return the image coordinates for the given Gc.
 //-----------------------------------------------------------------------
 

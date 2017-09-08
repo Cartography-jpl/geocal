@@ -32,8 +32,7 @@ public:
 		   bool Ignore_error = false);
   %python_attribute(rational_polynomial,
 		    boost::shared_ptr<RsmRationalPolynomial>);
-  %python_attribute(correction_grid,
-		    boost::shared_ptr<RsmRationalPolynomial>);
+  %python_attribute(correction_grid, boost::shared_ptr<RsmGrid>);
   %pickle_serialization()
 };
 }

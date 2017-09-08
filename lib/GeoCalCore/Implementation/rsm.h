@@ -26,6 +26,7 @@ public:
 
   boost::shared_ptr<GroundCoordinate> ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate(const ImageCoordinate& Ic, double Z) const;
+  boost::shared_ptr<GroundCoordinate> ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const;
   ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const;
   ImageCoordinate image_coordinate(double X, double Y, double Z) const;
   blitz::Array<double, 2> image_coordinate_jacobian
@@ -37,6 +38,10 @@ public:
 	   bool Skip_masked_point = false,
 	   bool Ignore_error = false);
   void print(std::ostream& Os) const;
+
+  const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
+  const boost::shared_ptr<CoordinateConverter> coordinate_converter() const
+  { return cconv; }
 private:
   boost::shared_ptr<RsmBase> rp;
   boost::shared_ptr<CoordinateConverter> cconv;

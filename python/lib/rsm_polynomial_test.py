@@ -1,6 +1,6 @@
 from test_support import *
 import pickle
-from geocal.rsm_polynomial import *
+from geocal_swig import Rpc, RsmPolynomial, RsmRationalPolynomial, RsmLowOrderPolynomial, RsmGrid, RsmMultiSection, RsmRpPlusGrid
 import matplotlib.pylab as plt
 import matplotlib as mpl
 import seaborn as sns
@@ -177,20 +177,17 @@ def test_multi_section_grid(rpc_data):
     assert np.nanmax(abs(rpc_data.ln-lncalc)) < 0.003
     assert np.nanmax(abs(rpc_data.smp-smpcalc)) < 0.06
 
-@skip
 @require_serialize
 def test_polynomial_plus_grid_fit(rpc_data):
     # The 2,2,2 will by test design be pretty crappy, so we give the
     # correction grid something to do.
-    r = RsmRationalPolynomialPlusGrid(RsmRationalPolynomial(2,2,2,2,2,2),
-                                      RsmGrid(60,60,20))
-    r.fit(rpc_data.ln, rpc_data.smp, 
-          rpc_data.lon, rpc_data.lat, rpc_data.h)
+    r = RsmRpPlusGrid(RsmRationalPolynomial(2,2,2,2,2,2),
+                      RsmGrid(60,60,20))
+    r.fit(rpc_data.igc, GeodeticConverter(), rpc_data.h.min(),
+          rpc_data.h.max(), 0, int(rpc_data.ln.max()), 0,
+          int(rpc_data.smp.max()))
     lncalc, smpcalc = r.image_coordinate(rpc_data.lon,
                                          rpc_data.lat,
-                                         rpc_data.hh)
-    lcorr, scorr = r.corr_grid.image_coordinate(rpc_data.lon,
-                                                rpc_data.lat,
-                                                rpc_data.h)
-    assert abs(rpc_data.ln-lncalc).max() < 0.1
-    assert np.median(abs(rpc_data.smp-smpcalc)) < 0.1
+                                         rpc_data.h)
+    assert np.nanmax(abs(rpc_data.ln-lncalc)) < 0.1
+    assert np.nanmedian(abs(rpc_data.smp-smpcalc)) < 0.1

@@ -233,6 +233,16 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         return _rsm.Rsm_ground_coordinate(self, *args)
 
 
+    def ground_coordinate_approx_height(self, Ic, H):
+        """
+
+        boost::shared_ptr< GroundCoordinate > Rsm::ground_coordinate_approx_height(const ImageCoordinate &Ic, double H) const
+        Return ground coordinate at the height above the reference ellipsoid.
+
+        """
+        return _rsm.Rsm_ground_coordinate_approx_height(self, Ic, H)
+
+
     def image_coordinate(self, *args):
         """
 
@@ -280,15 +290,46 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         return _rsm.Rsm_fit(self, Igc, Min_height, Max_height, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
 
 
+    def _v_rsm_base(self):
+        """
+
+        const boost::shared_ptr<RsmBase>& GeoCal::Rsm::rsm_base() const
+
+        """
+        return _rsm.Rsm__v_rsm_base(self)
+
+
+    @property
+    def rsm_base(self):
+        return self._v_rsm_base()
+
+
+    def _v_coordinate_converter(self):
+        """
+
+        const boost::shared_ptr<CoordinateConverter> GeoCal::Rsm::coordinate_converter() const
+
+        """
+        return _rsm.Rsm__v_coordinate_converter(self)
+
+
+    @property
+    def coordinate_converter(self):
+        return self._v_coordinate_converter()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm.delete_Rsm
 Rsm.__str__ = new_instancemethod(_rsm.Rsm___str__, None, Rsm)
 Rsm.ground_coordinate = new_instancemethod(_rsm.Rsm_ground_coordinate, None, Rsm)
+Rsm.ground_coordinate_approx_height = new_instancemethod(_rsm.Rsm_ground_coordinate_approx_height, None, Rsm)
 Rsm.image_coordinate = new_instancemethod(_rsm.Rsm_image_coordinate, None, Rsm)
 Rsm.image_coordinate_jacobian = new_instancemethod(_rsm.Rsm_image_coordinate_jacobian, None, Rsm)
 Rsm.fit = new_instancemethod(_rsm.Rsm_fit, None, Rsm)
+Rsm._v_rsm_base = new_instancemethod(_rsm.Rsm__v_rsm_base, None, Rsm)
+Rsm._v_coordinate_converter = new_instancemethod(_rsm.Rsm__v_coordinate_converter, None, Rsm)
 Rsm_swigregister = _rsm.Rsm_swigregister
 Rsm_swigregister(Rsm)
 

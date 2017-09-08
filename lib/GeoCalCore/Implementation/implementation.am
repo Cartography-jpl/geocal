@@ -151,6 +151,8 @@ geocalinc_HEADERS+= @srcimplementation@/rsm_multi_section.h
 libgeocal_la_SOURCES+= @srcimplementation@/rsm_multi_section.cc
 geocalinc_HEADERS+= @srcimplementation@/rsm.h
 libgeocal_la_SOURCES+= @srcimplementation@/rsm.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_image_ground_connection.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_image_ground_connection.cc
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -360,6 +362,8 @@ SWIG_SRC += @swigsrc@/rsm_multi_section_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/rsm_multi_section.i
 SWIG_SRC += @swigsrc@/rsm_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/rsm.i
+SWIG_SRC += @swigsrc@/rsm_image_ground_connection_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_image_ground_connection.i
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
@@ -418,6 +422,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/rsm_low_order_polynomial_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_rational_polynomial_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_multi_section_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_image_ground_connection_test.cc
 
 EXTRA_DIST += @srcimplementationt@/rsm_fixture.h
 

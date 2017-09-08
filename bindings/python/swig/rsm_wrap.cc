@@ -6591,6 +6591,87 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate_approx_height(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Rsm_ground_coordinate_approx_height",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_ground_coordinate_approx_height" "', argument " "1"" of type '" "GeoCal::Rsm const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_ground_coordinate_approx_height" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_ground_coordinate_approx_height" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_ground_coordinate_approx_height" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = ((GeoCal::Rsm const *)arg1)->ground_coordinate_approx_height((GeoCal::ImageCoordinate const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Rsm_image_coordinate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
@@ -7506,6 +7587,96 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Rsm__v_rsm_base(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::RsmBase > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm__v_rsm_base" "', argument " "1"" of type '" "GeoCal::Rsm const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::Rsm const *)arg1)->rsm_base();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm__v_coordinate_converter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::CoordinateConverter > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm__v_coordinate_converter" "', argument " "1"" of type '" "GeoCal::Rsm const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::Rsm const *)arg1)->coordinate_converter();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_Rsm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
@@ -7599,6 +7770,12 @@ static PyMethodDef SwigMethods[] = {
 		"This routine may fail to find a solution, in which case a\n"
 		"ConvergenceFailure exception will be thrown. \n"
 		""},
+	 { (char *)"Rsm_ground_coordinate_approx_height", _wrap_Rsm_ground_coordinate_approx_height, METH_VARARGS, (char *)"\n"
+		"\n"
+		"boost::shared_ptr< GroundCoordinate > Rsm::ground_coordinate_approx_height(const ImageCoordinate &Ic, double H) const\n"
+		"Return ground coordinate at the height above the reference ellipsoid.\n"
+		"\n"
+		""},
 	 { (char *)"Rsm_image_coordinate", _wrap_Rsm_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"ImageCoordinate Rsm::image_coordinate(double X, double Y, double Z) const\n"
@@ -7633,6 +7810,16 @@ static PyMethodDef SwigMethods[] = {
 		"The Nline, Nsample, Nheight is used for any RsmRationalPolynomial we\n"
 		"fit. A RsmGrid uses the size of the grid to determine how many points\n"
 		"it needs to calculate. \n"
+		""},
+	 { (char *)"Rsm__v_rsm_base", (PyCFunction)_wrap_Rsm__v_rsm_base, METH_O, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr<RsmBase>& GeoCal::Rsm::rsm_base() const\n"
+		"\n"
+		""},
+	 { (char *)"Rsm__v_coordinate_converter", (PyCFunction)_wrap_Rsm__v_coordinate_converter, METH_O, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr<CoordinateConverter> GeoCal::Rsm::coordinate_converter() const\n"
+		"\n"
 		""},
 	 { (char *)"delete_Rsm", (PyCFunction)_wrap_delete_Rsm, METH_O, (char *)"\n"
 		"\n"

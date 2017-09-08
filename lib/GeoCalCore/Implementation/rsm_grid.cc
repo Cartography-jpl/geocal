@@ -272,6 +272,56 @@ void RsmGrid::fit
 }
 
 //-----------------------------------------------------------------------
+/// Generate a RsmGrid that gives a correction to another RsmBase.
+///
+/// This routine always ignores ImageGroundConnectionFailed
+/// exceptions, and just skips to the next point. But if we are using
+/// python code for the ImageGroundConnection we can't translate
+/// errors to ImageGroundConnectionFailed (this is a limitation of
+/// SWIG). So you can optionally specify Ignore_error as true, in
+/// which case we ignore *all* exceptions and just skip to the next
+/// point.
+//-----------------------------------------------------------------------
+
+void RsmGrid::fit_corr
+(const ImageGroundConnection& Igc,
+ const CoordinateConverter& Cconv,
+ const RsmBase& Rb)
+{
+  min_line_ = Rb.min_line();
+  max_line_ = Rb.max_line();
+  min_sample_ = Rb.min_sample();
+  max_sample_ = Rb.max_sample();
+  x_start_ = Rb.min_x();
+  y_start_ = Rb.min_y();
+  z_start_ = Rb.min_z();
+  x_delta_ = (Rb.max_x() - Rb.min_x()) / (number_x() - 1);
+  y_delta_ = (Rb.max_y() - Rb.min_y()) / (number_y() - 1);
+  z_delta_ = (Rb.max_z() - Rb.min_z()) / (number_z() - 1);
+  for(int i = 0; i < number_x(); ++i)
+    for(int j = 0; j < number_y(); ++j)
+      for(int k = 0; k < number_z(); ++k) {
+	double x = x_start_ + x_delta_ * i;
+	double y = y_start_ + y_delta_ * j;
+	double z = z_start_ + z_delta_ * k;
+	boost::shared_ptr<GroundCoordinate> gc =
+	  Cconv.convert_from_coordinate(x, y, z);
+	ImageCoordinate ic;
+	bool success;
+	Igc.image_coordinate_with_status(*gc, ic, success);
+	ImageCoordinate ic_calc;
+	ic_calc = Rb.image_coordinate(x,y,z);
+	if(success) {
+	  line_(i,j,k) = ic.line - ic_calc.line;
+	  sample_(i,j,k) = ic.sample - ic_calc.sample;
+	} else {
+	  line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	  sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	}
+      }
+}
+
+//-----------------------------------------------------------------------
 /// This the jacobian of the line, sample with respect to X, Y, Z.
 /// This is a 2x3 matrix.
 //-----------------------------------------------------------------------

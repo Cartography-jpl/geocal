@@ -247,6 +247,23 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         return _rsm_grid.RsmGrid_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
 
 
+    def fit_corr(self, IGc, Cconv, Rb):
+        """
+
+        void RsmGrid::fit_corr(const ImageGroundConnection &IGc, const CoordinateConverter &Cconv,
+        const RsmBase &Rb)
+        Generate a RsmGrid that gives a correction to another RsmBase.
+
+        This routine always ignores ImageGroundConnectionFailed exceptions,
+        and just skips to the next point. But if we are using python code for
+        the ImageGroundConnection we can't translate errors to
+        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
+        optionally specify Ignore_error as true, in which case we ignore all
+        exceptions and just skip to the next point. 
+        """
+        return _rsm_grid.RsmGrid_fit_corr(self, IGc, Cconv, Rb)
+
+
     def _v_number_x(self):
         """
 
@@ -378,6 +395,7 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
 
     __swig_destroy__ = _rsm_grid.delete_RsmGrid
 RsmGrid.fit = new_instancemethod(_rsm_grid.RsmGrid_fit, None, RsmGrid)
+RsmGrid.fit_corr = new_instancemethod(_rsm_grid.RsmGrid_fit_corr, None, RsmGrid)
 RsmGrid._v_number_x = new_instancemethod(_rsm_grid.RsmGrid__v_number_x, None, RsmGrid)
 RsmGrid._v_number_y = new_instancemethod(_rsm_grid.RsmGrid__v_number_y, None, RsmGrid)
 RsmGrid._v_number_z = new_instancemethod(_rsm_grid.RsmGrid__v_number_z, None, RsmGrid)

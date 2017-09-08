@@ -132,6 +132,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_rsm_base)(void);
   INIT_TYPE INIT_FUNC(_rsm_polynomial)(void);
   INIT_TYPE INIT_FUNC(_rsm_grid)(void);
+  INIT_TYPE INIT_FUNC(_rsm_rp_plus_grid)(void);
   INIT_TYPE INIT_FUNC(_rsm_low_order_polynomial)(void);
   INIT_TYPE INIT_FUNC(_rsm_rational_polynomial)(void);
   INIT_TYPE INIT_FUNC(_rsm_multi_section)(void);
@@ -336,6 +337,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_rsm_base", INIT_FUNC(_rsm_base));
   INIT_MODULE(module, "_rsm_polynomial", INIT_FUNC(_rsm_polynomial));
   INIT_MODULE(module, "_rsm_grid", INIT_FUNC(_rsm_grid));
+  INIT_MODULE(module, "_rsm_rp_plus_grid", INIT_FUNC(_rsm_rp_plus_grid));
   INIT_MODULE(module, "_rsm_low_order_polynomial", INIT_FUNC(_rsm_low_order_polynomial));
   INIT_MODULE(module, "_rsm_rational_polynomial", INIT_FUNC(_rsm_rational_polynomial));
   INIT_MODULE(module, "_rsm_multi_section", INIT_FUNC(_rsm_multi_section));

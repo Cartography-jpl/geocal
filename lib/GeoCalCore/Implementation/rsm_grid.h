@@ -66,6 +66,9 @@ public:
 		   int Nline = 20, int Nsample = 20, int Nheight = 20,
 		   bool Skip_masked_point = false,
 		   bool Ignore_error = false);
+  void fit_corr(const ImageGroundConnection& IGc,
+		const CoordinateConverter& Cconv,
+		const RsmBase& Rb);
 
 //-----------------------------------------------------------------------
 /// Number of X values in grid

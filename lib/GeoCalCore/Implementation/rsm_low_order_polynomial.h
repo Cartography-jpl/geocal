@@ -63,9 +63,13 @@ public:
   { return blitz::Array<double, 1>(const_cast<double*>(psamp), blitz::shape(10), blitz::neverDeleteData); }
   void print(std::ostream& Os) const
   { Os << "RsmLowOrderPolynomial"; }
+  int min_line() const {return min_line_;}
+  int max_line() const {return max_line_;}
+  int min_sample() const {return min_sample_;}
+  int max_sample() const {return max_sample_;}
 private:
   double pline[10], psamp[10];
-
+  int min_line_, max_line_, min_sample_, max_sample_;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

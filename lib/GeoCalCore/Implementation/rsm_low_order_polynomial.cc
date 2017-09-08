@@ -13,7 +13,11 @@ void RsmLowOrderPolynomial::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmLowOrderPolynomial);
   ar & GEOCAL_NVP(pline)
-    & GEOCAL_NVP(psamp);
+    & GEOCAL_NVP(psamp)
+    & GEOCAL_NVP_(min_line)
+    & GEOCAL_NVP_(max_line)
+    & GEOCAL_NVP_(min_sample)
+    & GEOCAL_NVP_(max_sample);
 }
 
 GEOCAL_IMPLEMENT(RsmLowOrderPolynomial);

@@ -12,8 +12,8 @@ def rpc_data():
     fixture'''
     with open(unit_test_data + "rpc_example.pkl", "rb") as f:
         rpc = pickle.load(f)
-    nline = rpc.line_scale * 2
-    nsamp = rpc.sample_scale * 2
+    nline = int(rpc.line_scale * 2)
+    nsamp = int(rpc.sample_scale * 2)
     min_height = rpc.height_offset - rpc.height_scale
     max_height = rpc.height_offset + rpc.height_scale
     lnvv = np.linspace(0, nline, 20)
@@ -122,12 +122,10 @@ def test_low_order_polynomial(rpc_data):
     assert abs(rpc_data.ln-lncalc).max() < 2.0
     assert abs(rpc_data.smp-smpcalc).max() < 2.0
 
-# This doesn't work yet. We'll need to reorganize how the sections work
-# with polynomials.
 @require_serialize
 def test_multi_section_polynomial(rpc_data):
     r = RsmMultiSection(rpc_data.nline, rpc_data.nsamp, 3, 2,
-                           lambda : RsmRationalPolynomial(3,3,3,3,3,3,3,3))
+                        RsmRationalPolynomial(3,3,3,3,3,3,3,3))
     r.fit(rpc_data.igc, GeodeticConverter(), rpc_data.h.min(),
           rpc_data.h.max(), 0, int(rpc_data.ln.max()), 0,
           int(rpc_data.smp.max()))
@@ -169,7 +167,7 @@ def test_grid_fit(rpc_data):
 @require_serialize
 def test_multi_section_grid(rpc_data):
     r = RsmMultiSection(rpc_data.nline, rpc_data.nsamp, 3, 2,
-                           lambda : RsmGrid(60,60,20))
+                        RsmGrid(60,60,20))
     r.fit(rpc_data.igc, GeodeticConverter(), rpc_data.h.min(),
           rpc_data.h.max(), 0, int(rpc_data.ln.max()), 0,
           int(rpc_data.smp.max()))

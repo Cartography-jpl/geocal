@@ -145,6 +145,8 @@ geocalinc_HEADERS+= @srcimplementation@/rsm_low_order_polynomial.h
 libgeocal_la_SOURCES+= @srcimplementation@/rsm_low_order_polynomial.cc
 geocalinc_HEADERS+= @srcimplementation@/rsm_rational_polynomial.h
 libgeocal_la_SOURCES+= @srcimplementation@/rsm_rational_polynomial.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_multi_section.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_multi_section.cc
 geocalinc_HEADERS+= @srcimplementation@/rsm.h
 libgeocal_la_SOURCES+= @srcimplementation@/rsm.cc
 
@@ -350,6 +352,8 @@ SWIG_SRC += @swigsrc@/rsm_low_order_polynomial_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/rsm_low_order_polynomial.i
 SWIG_SRC += @swigsrc@/rsm_rational_polynomial_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/rsm_rational_polynomial.i
+SWIG_SRC += @swigsrc@/rsm_multi_section_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_multi_section.i
 SWIG_SRC += @swigsrc@/rsm_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/rsm.i
 # Test files
@@ -407,6 +411,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/rsm_polynomial_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_grid_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_low_order_polynomial_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_rational_polynomial_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_multi_section_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_test.cc
 
 EXTRA_DIST += @srcimplementationt@/rsm_fixture.h

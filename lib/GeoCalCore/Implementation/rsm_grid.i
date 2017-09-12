@@ -18,18 +18,18 @@
 namespace GeoCal {
 class RsmGrid : public RsmBase {
 public:
-  RsmGrid(int N_x, int N_y, int N_z);
+  RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false);
   virtual void fit(const ImageGroundConnection& Igc,
-	   const CoordinateConverter& Cconv,
-	   double Min_height, double Max_height,
-	   int Min_line, int Max_line, int Min_sample,
-	   int Max_sample,
-	   int Nline = 20, int Nsample = 20, int Nheight = 20,
-	   bool Skip_masked_point = false,
-		   bool Ignore_error = false);
+		   const CoordinateConverter& Cconv,
+		   double Min_height, double Max_height,
+		   int Min_line, int Max_line, int Min_sample,
+		   int Max_sample);
   void fit_corr(const ImageGroundConnection& IGc,
 		const CoordinateConverter& Cconv,
 		const RsmBase& Rb);
+  %python_attribute_with_set(ignore_igc_in_error_fit, bool);
+  %python_attribute(line_grid, blitz::Array<double, 3>);
+  %python_attribute(sample_grid, blitz::Array<double, 3>);
   %python_attribute(number_x, int);
   %python_attribute(number_y, int);
   %python_attribute(number_z, int);

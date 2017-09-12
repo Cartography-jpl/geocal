@@ -62,9 +62,10 @@ public:
   gp = Geodetic(35.8399968, 45.0770183, 1017);
   rp_from_rpc = boost::make_shared<RsmRationalPolynomial>(3,3,3,3,3,3,3,3);
   rp_from_rpc->set_rpc_coeff(rpc);
-  boost::shared_ptr<RasterImage> image =
+  boost::shared_ptr<MemoryRasterImage> image =
     boost::make_shared<MemoryRasterImage>(rpc.line_offset * 2,
 					  rpc.sample_offset * 2);
+  image->data() = 0;
   igc = boost::make_shared<RpcImageGroundConnection>
     (rpc, boost::make_shared<SimpleDem>(), image);
   cconv = boost::make_shared<GeodeticConverter>();

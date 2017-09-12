@@ -45,13 +45,15 @@ public:
 	   const CoordinateConverter& Cconv,
 	   double Min_height, double Max_height,
 	   int Min_line, int Max_line, int Min_sample,
-	   int Max_sample,
-	   int Nline = 20, int Nsample = 20, int Nheight = 20,
-	   bool Skip_masked_point = false,
-	   bool Ignore_error = false);
+	   int Max_sample);
   blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
 
+  %python_attribute_with_set(number_line_fit, int);
+  %python_attribute_with_set(number_sample_fit, int);
+  %python_attribute_with_set(number_height_fit, int);
+  %python_attribute_with_set(number_second_pass_fit, int);
+  %python_attribute_with_set(ignore_igc_in_error_fit, bool);
   %python_attribute(line_offset, double);
   %python_attribute(line_scale, double);
   %python_attribute(sample_offset, double);

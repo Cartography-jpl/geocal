@@ -21,13 +21,10 @@ public:
   RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section,
 		  const RsmBase& Rsm_prototype, int Border=5);
   virtual void fit(const ImageGroundConnection& Igc,
-	   const CoordinateConverter& Cconv,
-	   double Min_height, double Max_height,
-	   int Min_line, int Max_line, int Min_sample,
-	   int Max_sample,
-	   int Nline = 20, int Nsample = 20, int Nheight = 20,
-	   bool Skip_masked_point = false,
-		   bool Ignore_error = false);
+		   const CoordinateConverter& Cconv,
+		   double Min_height, double Max_height,
+		   int Min_line, int Max_line, int Min_sample,
+		   int Max_sample);
   %pickle_serialization()
 };
 }

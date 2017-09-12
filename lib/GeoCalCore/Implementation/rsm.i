@@ -31,10 +31,14 @@ public:
   (double X, double Y, double Z) const;
 
   void fit(const ImageGroundConnection& Igc, double Min_height,
-	   double Max_height,
-	   int Nline = 20, int Nsample = 20, int Nheight = 20,
-	   bool Skip_masked_point = false,
-	   bool Ignore_error = false);
+	   double Max_height);
+  void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
+		   int Number_sample_spacing, double Height,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT)
+    const;
   %python_attribute(rsm_base, boost::shared_ptr<RsmBase>);
   %python_attribute(coordinate_converter,
 		    boost::shared_ptr<CoordinateConverter>);

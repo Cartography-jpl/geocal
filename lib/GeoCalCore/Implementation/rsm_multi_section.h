@@ -74,7 +74,7 @@ public:
 /// To support sections, you can pass in a restricted number of
 /// line/samples to fit over.
 ///
-/// The number lines, samples, and heights only applies to a
+/// The number lines, samples, heights, and second_pass only applies to a
 /// RsmRationalPolynomial. For a grid, we need to calculate the points
 /// to fill the grid. But we give a common interface here, the values
 /// are just ignored by RsmGrid.
@@ -84,10 +84,7 @@ public:
 		   const CoordinateConverter& Cconv,
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
-		   int Max_sample,
-		   int Nline = 20, int Nsample = 20, int Nheight = 20,
-		   bool Skip_masked_point = false,
-		   bool Ignore_error = false);
+		   int Max_sample);
   virtual int min_line() const {return lp.min_line();}
   virtual int max_line() const {return lp.max_line();}
   virtual int min_sample() const {return lp.min_sample();}

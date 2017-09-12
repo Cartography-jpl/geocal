@@ -23,13 +23,10 @@ public:
   RsmRpPlusGrid(const boost::shared_ptr<RsmRationalPolynomial>& Rp,
 		const boost::shared_ptr<RsmGrid>& Rgrid);
   virtual void fit(const ImageGroundConnection& Igc,
-	   const CoordinateConverter& Cconv,
-	   double Min_height, double Max_height,
-	   int Min_line, int Max_line, int Min_sample,
-	   int Max_sample,
-	   int Nline = 20, int Nsample = 20, int Nheight = 20,
-	   bool Skip_masked_point = false,
-		   bool Ignore_error = false);
+		   const CoordinateConverter& Cconv,
+		   double Min_height, double Max_height,
+		   int Min_line, int Max_line, int Min_sample,
+		   int Max_sample);
   %python_attribute(rational_polynomial,
 		    boost::shared_ptr<RsmRationalPolynomial>);
   %python_attribute(correction_grid, boost::shared_ptr<RsmGrid>);

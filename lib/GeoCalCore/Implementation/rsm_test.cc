@@ -3,6 +3,9 @@
 #include "rsm_fixture.h"
 #include "vicar_file.h"
 #include "srtm_dem.h"
+#include "rsm_rp_plus_grid.h"
+#include "rsm_rational_polynomial.h"
+#include "local_rectangular_coordinate.h"
 #include <boost/make_shared.hpp>
 using namespace GeoCal;
 using namespace blitz;
@@ -69,4 +72,22 @@ BOOST_AUTO_TEST_CASE(serialize)
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
 }
+
+BOOST_AUTO_TEST_CASE(mars_example)
+{
+// Don't normally run, this depends on specific test data we have on
+// the system
+  //return;
+  boost::shared_ptr<ImageGroundConnection> igc =
+    serialize_read<ImageGroundConnection>("/home/smyth/Local/MarsRsm/ctx1_igc.xml");
+  Rsm r(boost::make_shared<RsmRpPlusGrid>
+	(boost::shared_ptr<RsmRationalPolynomial>(new RsmRationalPolynomial(5,5,3,1,1,1,5,1,40,40,20,40)),
+	 boost::make_shared<RsmGrid>(3, 1000, 3)),
+	boost::make_shared<LocalRcConverter>
+	(boost::make_shared<LocalRcParameter>(*igc)));
+  r.fit(*igc, 0, 1000);
+}
+					  
+    
+
 BOOST_AUTO_TEST_SUITE_END()

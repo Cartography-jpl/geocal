@@ -25,9 +25,11 @@ namespace GeoCal {
 
 class RsmGrid : public RsmBase {
 public:
-  RsmGrid(int N_x, int N_y, int N_z)
+  RsmGrid(int N_x, int N_y, int N_z,
+	  bool Ignore_igc_error_in_fit = false)
     : line_(N_x, N_y, N_z),
-      sample_(N_x, N_y, N_z)
+      sample_(N_x, N_y, N_z),
+      ignore_igc_error_in_fit_(Ignore_igc_error_in_fit)
   {}
   virtual ~RsmGrid() {}
   virtual void print(std::ostream& Os) const;
@@ -62,10 +64,7 @@ public:
 		   const CoordinateConverter& Cconv,
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
-		   int Max_sample,
-		   int Nline = 20, int Nsample = 20, int Nheight = 20,
-		   bool Skip_masked_point = false,
-		   bool Ignore_error = false);
+		   int Max_sample);
   void fit_corr(const ImageGroundConnection& IGc,
 		const CoordinateConverter& Cconv,
 		const RsmBase& Rb);
@@ -124,6 +123,18 @@ public:
 
   double z_delta() const {return z_delta_;}
 
+//-----------------------------------------------------------------------
+/// Grid of Line values
+//-----------------------------------------------------------------------
+  
+  const blitz::Array<double, 3>& line_grid() const {return line_;}
+
+//-----------------------------------------------------------------------
+/// Grid of sample values
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 3>& sample_grid() const {return sample_;};
+  
   virtual int min_line() const {return min_line_;}
   virtual int max_line() const {return max_line_;}
   virtual int min_sample() const {return min_sample_;}
@@ -134,10 +145,23 @@ public:
   virtual double max_y() const {return y_start()+y_delta()*number_y();}
   virtual double min_z() const {return z_start();}
   virtual double max_z() const {return z_start()+z_delta()*number_z();}
+
+//-----------------------------------------------------------------------
+/// If true, ignore igc errors in fit.
+//-----------------------------------------------------------------------
+  
+  bool ignore_igc_error_in_fit() const { return ignore_igc_error_in_fit_;}
+
+//-----------------------------------------------------------------------
+/// If true, ignore igc errors in fit.
+//-----------------------------------------------------------------------
+  
+  void ignore_igc_error_in_fit(bool V) { ignore_igc_error_in_fit_ = V;}
 private:
   blitz::Array<double, 3> line_, sample_;
   double x_start_, y_start_, z_start_, x_delta_, y_delta_, z_delta_;
   int min_line_,max_line_,min_sample_,max_sample_;
+  bool ignore_igc_error_in_fit_;
   RsmGrid() {}
   friend class boost::serialization::access;
   template<class Archive>

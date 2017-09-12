@@ -251,35 +251,18 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
         return _rsm_base.RsmBase_initial_guess_z(self, Line, Sample)
 
 
-    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=20, Nsample=20, Nheight=20, Skip_masked_point=False, Ignore_error=False):
+    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=20, Nsample=20, Nheight=20, Second_pass=20, Skip_masked_point=False, Ignore_error=False):
         """
 
         virtual void GeoCal::RsmBase::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
         double Min_height, double Max_height, int Min_line, int Max_line, int
-        Min_sample, int Max_sample, int Nline=20, int Nsample=20, int
-        Nheight=20, bool Skip_masked_point=false, bool Ignore_error=false)=0
+        Min_sample, int Max_sample)=0
         Fit that approximates the calculation done by a ImageGroundConnection.
 
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point.
-
-        We normally look at all image points when generating the
-        RsmRationalPolynomial. You can optionally specify Skip_masked_point to
-        skip all image points that are masked.
-
         To support sections, you can pass in a restricted number of
-        line/samples to fit over.
-
-        The number lines, samples, and heights only applies to a
-        RsmRationalPolynomial. For a grid, we need to calculate the points to
-        fill the grid. But we give a common interface here, the values are
-        just ignored by RsmGrid. 
+        line/samples to fit over. 
         """
-        return _rsm_base.RsmBase_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
+        return _rsm_base.RsmBase_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Second_pass, Skip_masked_point, Ignore_error)
 
 
     def generate_data(Igc, Cconv, Min_x, Max_x, Min_y, Max_y, Min_z, Max_z, Numx, Numy, Numz):

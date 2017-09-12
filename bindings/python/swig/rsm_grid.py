@@ -211,57 +211,56 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
     C++ includes: rsm_grid.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-
-    def __init__(self, N_x, N_y, N_z):
-        """
-
-        GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z)
-
-        """
-        _rsm_grid.RsmGrid_swiginit(self, _rsm_grid.new_RsmGrid(N_x, N_y, N_z))
-
-    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=20, Nsample=20, Nheight=20, Skip_masked_point=False, Ignore_error=False):
-        """
-
-        void RsmGrid::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
-        double Min_height, double Max_height, int Min_line, int Max_line, int
-        Min_sample, int Max_sample, int Nline=20, int Nsample=20, int
-        Nheight=20, bool Skip_masked_point=false, bool Ignore_error=false)
-        Generate a RsmGrid that approximates the calculation done by a
-        ImageGroundConnection.
-
-        We determine that X, Y, and Z range to use automatically to cover the
-        range given by the ImageGroundConnection.
-
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point.
-
-        To support sections, you can pass in a restricted number of
-        line/samples to fit over. 
-        """
-        return _rsm_grid.RsmGrid_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
-
 
     def fit_corr(self, IGc, Cconv, Rb):
         """
 
         void RsmGrid::fit_corr(const ImageGroundConnection &IGc, const CoordinateConverter &Cconv,
         const RsmBase &Rb)
-        Generate a RsmGrid that gives a correction to another RsmBase.
-
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point. 
+        Generate a RsmGrid that gives a correction to another RsmBase. 
         """
         return _rsm_grid.RsmGrid_fit_corr(self, IGc, Cconv, Rb)
+
+
+    @property
+    def ignore_igc_in_error_fit(self):
+        return self._v_ignore_igc_in_error_fit()
+
+    @ignore_igc_in_error_fit.setter
+    def ignore_igc_in_error_fit(self, value):
+      self._v_ignore_igc_in_error_fit(value)
+
+
+    def _v_line_grid(self):
+        """
+
+        const blitz::Array<double, 3>& GeoCal::RsmGrid::line_grid() const
+        Grid of Line values. 
+        """
+        return _rsm_grid.RsmGrid__v_line_grid(self)
+
+
+    @property
+    def line_grid(self):
+        return self._v_line_grid()
+
+
+    def _v_sample_grid(self):
+        """
+
+        const blitz::Array<double, 3>& GeoCal::RsmGrid::sample_grid() const
+        Grid of sample values. 
+        """
+        return _rsm_grid.RsmGrid__v_sample_grid(self)
+
+
+    @property
+    def sample_grid(self):
+        return self._v_sample_grid()
 
 
     def _v_number_x(self):
@@ -394,8 +393,10 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_grid.delete_RsmGrid
-RsmGrid.fit = new_instancemethod(_rsm_grid.RsmGrid_fit, None, RsmGrid)
 RsmGrid.fit_corr = new_instancemethod(_rsm_grid.RsmGrid_fit_corr, None, RsmGrid)
+RsmGrid._v_ignore_igc_in_error_fit = new_instancemethod(_rsm_grid.RsmGrid__v_ignore_igc_in_error_fit, None, RsmGrid)
+RsmGrid._v_line_grid = new_instancemethod(_rsm_grid.RsmGrid__v_line_grid, None, RsmGrid)
+RsmGrid._v_sample_grid = new_instancemethod(_rsm_grid.RsmGrid__v_sample_grid, None, RsmGrid)
 RsmGrid._v_number_x = new_instancemethod(_rsm_grid.RsmGrid__v_number_x, None, RsmGrid)
 RsmGrid._v_number_y = new_instancemethod(_rsm_grid.RsmGrid__v_number_y, None, RsmGrid)
 RsmGrid._v_number_z = new_instancemethod(_rsm_grid.RsmGrid__v_number_z, None, RsmGrid)

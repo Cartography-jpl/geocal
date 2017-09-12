@@ -158,14 +158,6 @@ blitz::Array<double, 4> RsmMultiSection::image_coordinate
 /// range to use automatically to cover the range given by the
 /// ImageGroundConnection.
 ///
-/// This routine always ignores ImageGroundConnectionFailed
-/// exceptions, and just skips to the next point. But if we are using
-/// python code for the ImageGroundConnection we can't translate
-/// errors to ImageGroundConnectionFailed (this is a limitation of
-/// SWIG). So you can optionally specify Ignore_error as true, in
-/// which case we ignore *all* exceptions and just skip to the next
-/// point.
-///
 /// To support sections, you can pass in a restricted number of
 /// line/samples to fit over.
 //-----------------------------------------------------------------------
@@ -175,10 +167,7 @@ void RsmMultiSection::fit
  const CoordinateConverter& Cconv,
  double Min_height, double Max_height,
  int Min_line, int Max_line, int Min_sample,
- int Max_sample,
- int Nline, int Nsample, int Nheight,
- bool Skip_masked_point,
- bool Ignore_error)
+ int Max_sample)
 {
   lp.fit(Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample,
 	 Max_sample);
@@ -188,9 +177,7 @@ void RsmMultiSection::fit
 		    std::max(int(nline_sec * i) - border_, Min_line),
 		    std::min(int(nline_sec * (i + 1)) + border_, Max_line),
 		    std::max(int(nsamp_sec * j) - border_, Min_sample),
-		    std::min(int(nsamp_sec * (j + 1)) + border_, Max_sample),
-		    Nline, Nsample, Nheight,
-		    Skip_masked_point, Ignore_error);
+		    std::min(int(nsamp_sec * (j + 1)) + border_, Max_sample));
 }
 
 

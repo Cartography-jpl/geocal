@@ -197,42 +197,10 @@ class RsmRpPlusGrid(geocal_swig.rsm_base.RsmBase):
     C++ includes: rsm_rp_plus_grid.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-
-    def __init__(self, Rp, Rgrid):
-        """
-
-        GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmRationalPolynomial > &Rp, const
-        boost::shared_ptr< RsmGrid > &Rgrid)
-
-        """
-        _rsm_rp_plus_grid.RsmRpPlusGrid_swiginit(self, _rsm_rp_plus_grid.new_RsmRpPlusGrid(Rp, Rgrid))
-
-    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=20, Nsample=20, Nheight=20, Skip_masked_point=False, Ignore_error=False):
-        """
-
-        void RsmRpPlusGrid::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
-        double Min_height, double Max_height, int Min_line, int Max_line, int
-        Min_sample, int Max_sample, int Nline=20, int Nsample=20, int
-        Nheight=20, bool Skip_masked_point=false, bool Ignore_error=false)
-        Generate a RsmRpPlusGrid that approximates the calculation done by a
-        ImageGroundConnection.
-
-        We determine that X, Y, and Z range to use automatically to cover the
-        range given by the ImageGroundConnection.
-
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point.
-
-        To support sections, you can pass in a restricted number of
-        line/samples to fit over. 
-        """
-        return _rsm_rp_plus_grid.RsmRpPlusGrid_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
-
 
     def _v_rational_polynomial(self):
         """
@@ -266,7 +234,6 @@ class RsmRpPlusGrid(geocal_swig.rsm_base.RsmBase):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_rp_plus_grid.delete_RsmRpPlusGrid
-RsmRpPlusGrid.fit = new_instancemethod(_rsm_rp_plus_grid.RsmRpPlusGrid_fit, None, RsmRpPlusGrid)
 RsmRpPlusGrid._v_rational_polynomial = new_instancemethod(_rsm_rp_plus_grid.RsmRpPlusGrid__v_rational_polynomial, None, RsmRpPlusGrid)
 RsmRpPlusGrid._v_correction_grid = new_instancemethod(_rsm_rp_plus_grid.RsmRpPlusGrid__v_correction_grid, None, RsmRpPlusGrid)
 RsmRpPlusGrid_swigregister = _rsm_rp_plus_grid.RsmRpPlusGrid_swigregister

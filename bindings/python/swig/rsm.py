@@ -263,31 +263,42 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         return _rsm.Rsm_image_coordinate_jacobian(self, X, Y, Z)
 
 
-    def fit(self, Igc, Min_height, Max_height, Nline=20, Nsample=20, Nheight=20, Skip_masked_point=False, Ignore_error=False):
+    def fit(self, Igc, Min_height, Max_height):
         """
 
         void Rsm::fit(const ImageGroundConnection &Igc, double Min_height, double
-        Max_height, int Nline=20, int Nsample=20, int Nheight=20, bool
-        Skip_masked_point=false, bool Ignore_error=false)
+        Max_height)
         Generate a Rsm that approximates the calculation done by a
-        ImageGroundConnection.
-
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point.
-
-        We normally look at all image points when generating the Rsm. You can
-        optionally specify Skip_masked_point to skip all image points that are
-        masked.
-
-        The Nline, Nsample, Nheight is used for any RsmRationalPolynomial we
-        fit. A RsmGrid uses the size of the grid to determine how many points
-        it needs to calculate. 
+        ImageGroundConnection. 
         """
-        return _rsm.Rsm_fit(self, Igc, Min_height, Max_height, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
+        return _rsm.Rsm_fit(self, Igc, Min_height, Max_height)
+
+
+    def compare_igc(self, Igc, Number_line_spacing, Number_sample_spacing, Height):
+        """
+
+        void Rsm::compare_igc(const ImageGroundConnection &Igc, int Number_line_spacing, int
+        Number_sample_spacing, double Height, blitz::Array< double, 2 >
+        &True_line, blitz::Array< double, 2 > &True_sample, blitz::Array<
+        double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample) const
+        After fitting an Igc, it is good to see how accurate the Rsm captures
+        the Igc.
+
+        This function take an Igc, and fixed height, and generates a regular
+        grid of the "True" line and sample. We then project this to the
+        surface using the Igc, and then use the Rsm to calculate the line
+        sample. If the Rsm is perfect, it would give the same values as
+        "True".
+
+        This returns Nan where we can't calculate this (e.g., Igc fails, or
+        outside of our RsmGrid).
+
+        This function could just be done in python, but we have it in C++ for
+        performance. We may want to adjust what we calculate as we get a
+        better feel for how to characterize a Rsm. But this is our initial
+        version of this. 
+        """
+        return _rsm.Rsm_compare_igc(self, Igc, Number_line_spacing, Number_sample_spacing, Height)
 
 
     def _v_rsm_base(self):
@@ -328,6 +339,7 @@ Rsm.ground_coordinate_approx_height = new_instancemethod(_rsm.Rsm_ground_coordin
 Rsm.image_coordinate = new_instancemethod(_rsm.Rsm_image_coordinate, None, Rsm)
 Rsm.image_coordinate_jacobian = new_instancemethod(_rsm.Rsm_image_coordinate_jacobian, None, Rsm)
 Rsm.fit = new_instancemethod(_rsm.Rsm_fit, None, Rsm)
+Rsm.compare_igc = new_instancemethod(_rsm.Rsm_compare_igc, None, Rsm)
 Rsm._v_rsm_base = new_instancemethod(_rsm.Rsm__v_rsm_base, None, Rsm)
 Rsm._v_coordinate_converter = new_instancemethod(_rsm.Rsm__v_coordinate_converter, None, Rsm)
 Rsm_swigregister = _rsm.Rsm_swigregister

@@ -5439,20 +5439,6 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
-SWIGINTERN int
-SWIG_AsVal_bool (PyObject *obj, bool *val)
-{
-  int r;
-  if (!PyBool_Check(obj))
-    return SWIG_ERROR;
-  r = PyObject_IsTrue(obj);
-  if (r == -1)
-    return SWIG_ERROR;
-  if (val) *val = r ? true : false;
-  return SWIG_OK;
-}
-
-
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6917,552 +6903,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rsm_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  double arg3 ;
-  double arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  bool arg8 ;
-  bool arg9 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
-  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  bool val8 ;
-  int ecode8 = 0 ;
-  bool val9 ;
-  int ecode9 = 0 ;
-  
-  if ((nobjs < 9) || (nobjs > 9)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_fit" "', argument " "1"" of type '" "GeoCal::Rsm *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_fit" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_fit" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Rsm_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Rsm_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "Rsm_fit" "', argument " "8"" of type '" "bool""'");
-  } 
-  arg8 = static_cast< bool >(val8);
-  ecode9 = SWIG_AsVal_bool(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "Rsm_fit" "', argument " "9"" of type '" "bool""'");
-  } 
-  arg9 = static_cast< bool >(val9);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Rsm_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  double arg3 ;
-  double arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  bool arg8 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
-  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  bool val8 ;
-  int ecode8 = 0 ;
-  
-  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_fit" "', argument " "1"" of type '" "GeoCal::Rsm *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_fit" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_fit" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Rsm_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Rsm_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "Rsm_fit" "', argument " "8"" of type '" "bool""'");
-  } 
-  arg8 = static_cast< bool >(val8);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Rsm_fit__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  double arg3 ;
-  double arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
-  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  
-  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_fit" "', argument " "1"" of type '" "GeoCal::Rsm *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_fit" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_fit" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Rsm_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Rsm_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,arg6,arg7);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Rsm_fit__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  double arg3 ;
-  double arg4 ;
-  int arg5 ;
-  int arg6 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
-  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_fit" "', argument " "1"" of type '" "GeoCal::Rsm *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_fit" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_fit" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Rsm_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Rsm_fit__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  double arg3 ;
-  double arg4 ;
-  int arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
-  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_fit" "', argument " "1"" of type '" "GeoCal::Rsm *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
-      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_fit" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_fit" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Rsm_fit__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rsm_fit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
   GeoCal::ImageGroundConnection *arg2 = 0 ;
@@ -7479,8 +6920,9 @@ SWIGINTERN PyObject *_wrap_Rsm_fit__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int n
   int ecode3 = 0 ;
   double val4 ;
   int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
   
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"Rsm_fit",4,4,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
@@ -7547,43 +6989,181 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rsm_fit(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[10] = {
-    0
-  };
+SWIGINTERN PyObject *_wrap_Rsm_compare_igc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageGroundConnection *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  double arg5 ;
+  blitz::Array< double,2 > *arg6 = 0 ;
+  blitz::Array< double,2 > *arg7 = 0 ;
+  blitz::Array< double,2 > *arg8 = 0 ;
+  blitz::Array< double,2 > *arg9 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  blitz::Array< double,2 > temp6 ;
+  blitz::Array< double,2 > temp7 ;
+  blitz::Array< double,2 > temp8 ;
+  blitz::Array< double,2 > temp9 ;
+  PyObject *swig_obj[5] ;
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Rsm_fit",0,9,argv))) SWIG_fail;
-  --argc;
-  if (argc == 4) {
-    return _wrap_Rsm_fit__SWIG_5(self, argc, argv);
+  {
+    arg6 = &temp6;
   }
-  if (argc == 5) {
-    return _wrap_Rsm_fit__SWIG_4(self, argc, argv);
+  {
+    arg7 = &temp7;
   }
-  if (argc == 6) {
-    return _wrap_Rsm_fit__SWIG_3(self, argc, argv);
+  {
+    arg8 = &temp8;
   }
-  if (argc == 7) {
-    return _wrap_Rsm_fit__SWIG_2(self, argc, argv);
+  {
+    arg9 = &temp9;
   }
-  if (argc == 8) {
-    return _wrap_Rsm_fit__SWIG_1(self, argc, argv);
+  if (!SWIG_Python_UnpackTuple(args,"Rsm_compare_igc",5,5,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_compare_igc" "', argument " "1"" of type '" "GeoCal::Rsm const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
   }
-  if (argc == 9) {
-    return _wrap_Rsm_fit__SWIG_0(self, argc, argv);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_compare_igc" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_compare_igc" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
+      }
+    }
   }
-  
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_compare_igc" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_compare_igc" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_compare_igc" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    try {
+      ((GeoCal::Rsm const *)arg1)->compare_igc((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,*arg6,*arg7,*arg8,*arg9);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg6->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg6->stride(i) * sizeof(double);
+    }
+    PyObject *res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg6->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg6);
+    PyArray_SetBaseObject((PyArrayObject*)res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg7->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg7->stride(i) * sizeof(double);
+    }
+    PyObject *res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg7->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg7);
+    PyArray_SetBaseObject((PyArrayObject*)res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg8->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg8->stride(i) * sizeof(double);
+    }
+    PyObject *res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg8->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg8);
+    PyArray_SetBaseObject((PyArrayObject*)res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg9->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg9->stride(i) * sizeof(double);
+    }
+    PyObject *res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg9->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg9);
+    PyArray_SetBaseObject((PyArrayObject*)res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  return resultobj;
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Rsm_fit'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Rsm::fit(GeoCal::ImageGroundConnection const &,double,double,int,int,int,bool,bool)\n"
-    "    GeoCal::Rsm::fit(GeoCal::ImageGroundConnection const &,double,double,int,int,int,bool)\n"
-    "    GeoCal::Rsm::fit(GeoCal::ImageGroundConnection const &,double,double,int,int,int)\n"
-    "    GeoCal::Rsm::fit(GeoCal::ImageGroundConnection const &,double,double,int,int)\n"
-    "    GeoCal::Rsm::fit(GeoCal::ImageGroundConnection const &,double,double,int)\n"
-    "    GeoCal::Rsm::fit(GeoCal::ImageGroundConnection const &,double,double)\n");
-  return 0;
+  return NULL;
 }
 
 
@@ -7791,25 +7371,32 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Rsm_fit", _wrap_Rsm_fit, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void Rsm::fit(const ImageGroundConnection &Igc, double Min_height, double\n"
-		"Max_height, int Nline=20, int Nsample=20, int Nheight=20, bool\n"
-		"Skip_masked_point=false, bool Ignore_error=false)\n"
+		"Max_height)\n"
 		"Generate a Rsm that approximates the calculation done by a\n"
-		"ImageGroundConnection.\n"
+		"ImageGroundConnection. \n"
+		""},
+	 { (char *)"Rsm_compare_igc", _wrap_Rsm_compare_igc, METH_VARARGS, (char *)"\n"
 		"\n"
-		"This routine always ignores ImageGroundConnectionFailed exceptions,\n"
-		"and just skips to the next point. But if we are using python code for\n"
-		"the ImageGroundConnection we can't translate errors to\n"
-		"ImageGroundConnectionFailed (this is a limitation of SWIG). So you can\n"
-		"optionally specify Ignore_error as true, in which case we ignore all\n"
-		"exceptions and just skip to the next point.\n"
+		"void Rsm::compare_igc(const ImageGroundConnection &Igc, int Number_line_spacing, int\n"
+		"Number_sample_spacing, double Height, blitz::Array< double, 2 >\n"
+		"&True_line, blitz::Array< double, 2 > &True_sample, blitz::Array<\n"
+		"double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample) const\n"
+		"After fitting an Igc, it is good to see how accurate the Rsm captures\n"
+		"the Igc.\n"
 		"\n"
-		"We normally look at all image points when generating the Rsm. You can\n"
-		"optionally specify Skip_masked_point to skip all image points that are\n"
-		"masked.\n"
+		"This function take an Igc, and fixed height, and generates a regular\n"
+		"grid of the \"True\" line and sample. We then project this to the\n"
+		"surface using the Igc, and then use the Rsm to calculate the line\n"
+		"sample. If the Rsm is perfect, it would give the same values as\n"
+		"\"True\".\n"
 		"\n"
-		"The Nline, Nsample, Nheight is used for any RsmRationalPolynomial we\n"
-		"fit. A RsmGrid uses the size of the grid to determine how many points\n"
-		"it needs to calculate. \n"
+		"This returns Nan where we can't calculate this (e.g., Igc fails, or\n"
+		"outside of our RsmGrid).\n"
+		"\n"
+		"This function could just be done in python, but we have it in C++ for\n"
+		"performance. We may want to adjust what we calculate as we get a\n"
+		"better feel for how to characterize a Rsm. But this is our initial\n"
+		"version of this. \n"
 		""},
 	 { (char *)"Rsm__v_rsm_base", (PyCFunction)_wrap_Rsm__v_rsm_base, METH_O, (char *)"\n"
 		"\n"

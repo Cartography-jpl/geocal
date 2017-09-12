@@ -5362,45 +5362,6 @@ namespace swig {
 #include "coordinate_converter.h"  
 
 
-#include <limits.h>
-#if !defined(SWIG_NO_LLONG_MAX)
-# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
-#   define LLONG_MAX __LONG_LONG_MAX__
-#   define LLONG_MIN (-LLONG_MAX - 1LL)
-#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-# endif
-#endif
-
-
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
-
-
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
-
-
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
@@ -5532,6 +5493,32 @@ namespace swig {
       }
     
 
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 SWIGINTERN int
 SWIG_AsVal_bool (PyObject *obj, bool *val)
 {
@@ -5544,6 +5531,19 @@ SWIG_AsVal_bool (PyObject *obj, bool *val)
   if (val) *val = r ? true : false;
   return SWIG_OK;
 }
+
+
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
 
@@ -6340,274 +6340,6 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
   if (!d) return NULL;
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
   return SWIG_Py_Void();
-}
-
-
-SWIGINTERN PyObject *_wrap_new_RsmRationalPolynomial__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  GeoCal::RsmRationalPolynomial *result = 0 ;
-  
-  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_RsmRationalPolynomial" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_RsmRationalPolynomial" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_RsmRationalPolynomial" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_RsmRationalPolynomial" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_RsmRationalPolynomial" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_RsmRationalPolynomial" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_RsmRationalPolynomial" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_RsmRationalPolynomial" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  {
-    try {
-      result = (GeoCal::RsmRationalPolynomial *)new GeoCal::RsmRationalPolynomial(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::RsmRationalPolynomial > *smartresult = result ? new boost::shared_ptr<  GeoCal::RsmRationalPolynomial >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_RsmRationalPolynomial__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  GeoCal::RsmRationalPolynomial *result = 0 ;
-  
-  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_RsmRationalPolynomial" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_RsmRationalPolynomial" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_RsmRationalPolynomial" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_RsmRationalPolynomial" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_RsmRationalPolynomial" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_RsmRationalPolynomial" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_RsmRationalPolynomial" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  {
-    try {
-      result = (GeoCal::RsmRationalPolynomial *)new GeoCal::RsmRationalPolynomial(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::RsmRationalPolynomial > *smartresult = result ? new boost::shared_ptr<  GeoCal::RsmRationalPolynomial >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_RsmRationalPolynomial__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  GeoCal::RsmRationalPolynomial *result = 0 ;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_RsmRationalPolynomial" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_RsmRationalPolynomial" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_RsmRationalPolynomial" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_RsmRationalPolynomial" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_RsmRationalPolynomial" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_RsmRationalPolynomial" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  {
-    try {
-      result = (GeoCal::RsmRationalPolynomial *)new GeoCal::RsmRationalPolynomial(arg1,arg2,arg3,arg4,arg5,arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::RsmRationalPolynomial > *smartresult = result ? new boost::shared_ptr<  GeoCal::RsmRationalPolynomial >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_RsmRationalPolynomial(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[9] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_RsmRationalPolynomial",0,8,argv))) SWIG_fail;
-  --argc;
-  if (argc == 6) {
-    return _wrap_new_RsmRationalPolynomial__SWIG_2(self, argc, argv);
-  }
-  if (argc == 7) {
-    return _wrap_new_RsmRationalPolynomial__SWIG_1(self, argc, argv);
-  }
-  if (argc == 8) {
-    return _wrap_new_RsmRationalPolynomial__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_RsmRationalPolynomial'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RsmRationalPolynomial::RsmRationalPolynomial(int,int,int,int,int,int,int,int)\n"
-    "    GeoCal::RsmRationalPolynomial::RsmRationalPolynomial(int,int,int,int,int,int,int)\n"
-    "    GeoCal::RsmRationalPolynomial::RsmRationalPolynomial(int,int,int,int,int,int)\n");
-  return 0;
 }
 
 
@@ -7435,61 +7167,65 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_line_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  GeoCal::CoordinateConverter *arg3 = 0 ;
-  double arg4 ;
-  double arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  int arg9 ;
-  int arg10 ;
-  int arg11 ;
-  int arg12 ;
-  bool arg13 ;
-  bool arg14 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared3 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  int val10 ;
-  int ecode10 = 0 ;
-  int val11 ;
-  int ecode11 = 0 ;
-  int val12 ;
-  int ecode12 = 0 ;
-  bool val13 ;
-  int ecode13 = 0 ;
-  bool val14 ;
-  int ecode14 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > *smartarg1 = 0 ;
+  int result;
   
-  if ((nobjs < 14) || (nobjs > 14)) SWIG_fail;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_number_line_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmRationalPolynomial const *)arg1)->number_line_fit();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_line_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_number_line_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
@@ -7500,114 +7236,15 @@ SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit__SWIG_0(PyObject *SWIGUNUSE
       arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CoordinateConverter *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CoordinateConverter,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3)->get());
-      }
-    }
-  }
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmRationalPolynomial_fit" "', argument " "4"" of type '" "double""'");
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmRationalPolynomial__v_number_line_fit" "', argument " "2"" of type '" "int""'");
   } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmRationalPolynomial_fit" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RsmRationalPolynomial_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "RsmRationalPolynomial_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "RsmRationalPolynomial_fit" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "RsmRationalPolynomial_fit" "', argument " "9"" of type '" "int""'");
-  } 
-  arg9 = static_cast< int >(val9);
-  ecode10 = SWIG_AsVal_int(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "RsmRationalPolynomial_fit" "', argument " "10"" of type '" "int""'");
-  } 
-  arg10 = static_cast< int >(val10);
-  ecode11 = SWIG_AsVal_int(swig_obj[10], &val11);
-  if (!SWIG_IsOK(ecode11)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "RsmRationalPolynomial_fit" "', argument " "11"" of type '" "int""'");
-  } 
-  arg11 = static_cast< int >(val11);
-  ecode12 = SWIG_AsVal_int(swig_obj[11], &val12);
-  if (!SWIG_IsOK(ecode12)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode12), "in method '" "RsmRationalPolynomial_fit" "', argument " "12"" of type '" "int""'");
-  } 
-  arg12 = static_cast< int >(val12);
-  ecode13 = SWIG_AsVal_bool(swig_obj[12], &val13);
-  if (!SWIG_IsOK(ecode13)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode13), "in method '" "RsmRationalPolynomial_fit" "', argument " "13"" of type '" "bool""'");
-  } 
-  arg13 = static_cast< bool >(val13);
-  ecode14 = SWIG_AsVal_bool(swig_obj[13], &val14);
-  if (!SWIG_IsOK(ecode14)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode14), "in method '" "RsmRationalPolynomial_fit" "', argument " "14"" of type '" "bool""'");
-  } 
-  arg14 = static_cast< bool >(val14);
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
   {
     try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14);
+      (arg1)->number_line_fit((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7621,852 +7258,486 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  GeoCal::CoordinateConverter *arg3 = 0 ;
-  double arg4 ;
-  double arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  int arg9 ;
-  int arg10 ;
-  int arg11 ;
-  int arg12 ;
-  bool arg13 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared3 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  int val10 ;
-  int ecode10 = 0 ;
-  int val11 ;
-  int ecode11 = 0 ;
-  int val12 ;
-  int ecode12 = 0 ;
-  bool val13 ;
-  int ecode13 = 0 ;
-  
-  if ((nobjs < 13) || (nobjs > 13)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CoordinateConverter *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CoordinateConverter,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3)->get());
-      }
-    }
-  }
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmRationalPolynomial_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmRationalPolynomial_fit" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RsmRationalPolynomial_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "RsmRationalPolynomial_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "RsmRationalPolynomial_fit" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "RsmRationalPolynomial_fit" "', argument " "9"" of type '" "int""'");
-  } 
-  arg9 = static_cast< int >(val9);
-  ecode10 = SWIG_AsVal_int(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "RsmRationalPolynomial_fit" "', argument " "10"" of type '" "int""'");
-  } 
-  arg10 = static_cast< int >(val10);
-  ecode11 = SWIG_AsVal_int(swig_obj[10], &val11);
-  if (!SWIG_IsOK(ecode11)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "RsmRationalPolynomial_fit" "', argument " "11"" of type '" "int""'");
-  } 
-  arg11 = static_cast< int >(val11);
-  ecode12 = SWIG_AsVal_int(swig_obj[11], &val12);
-  if (!SWIG_IsOK(ecode12)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode12), "in method '" "RsmRationalPolynomial_fit" "', argument " "12"" of type '" "int""'");
-  } 
-  arg12 = static_cast< int >(val12);
-  ecode13 = SWIG_AsVal_bool(swig_obj[12], &val13);
-  if (!SWIG_IsOK(ecode13)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode13), "in method '" "RsmRationalPolynomial_fit" "', argument " "13"" of type '" "bool""'");
-  } 
-  arg13 = static_cast< bool >(val13);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  GeoCal::CoordinateConverter *arg3 = 0 ;
-  double arg4 ;
-  double arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  int arg9 ;
-  int arg10 ;
-  int arg11 ;
-  int arg12 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared3 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  int val10 ;
-  int ecode10 = 0 ;
-  int val11 ;
-  int ecode11 = 0 ;
-  int val12 ;
-  int ecode12 = 0 ;
-  
-  if ((nobjs < 12) || (nobjs > 12)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CoordinateConverter *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CoordinateConverter,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3)->get());
-      }
-    }
-  }
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmRationalPolynomial_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmRationalPolynomial_fit" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RsmRationalPolynomial_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "RsmRationalPolynomial_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "RsmRationalPolynomial_fit" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "RsmRationalPolynomial_fit" "', argument " "9"" of type '" "int""'");
-  } 
-  arg9 = static_cast< int >(val9);
-  ecode10 = SWIG_AsVal_int(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "RsmRationalPolynomial_fit" "', argument " "10"" of type '" "int""'");
-  } 
-  arg10 = static_cast< int >(val10);
-  ecode11 = SWIG_AsVal_int(swig_obj[10], &val11);
-  if (!SWIG_IsOK(ecode11)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "RsmRationalPolynomial_fit" "', argument " "11"" of type '" "int""'");
-  } 
-  arg11 = static_cast< int >(val11);
-  ecode12 = SWIG_AsVal_int(swig_obj[11], &val12);
-  if (!SWIG_IsOK(ecode12)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode12), "in method '" "RsmRationalPolynomial_fit" "', argument " "12"" of type '" "int""'");
-  } 
-  arg12 = static_cast< int >(val12);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  GeoCal::CoordinateConverter *arg3 = 0 ;
-  double arg4 ;
-  double arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  int arg9 ;
-  int arg10 ;
-  int arg11 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared3 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  int val10 ;
-  int ecode10 = 0 ;
-  int val11 ;
-  int ecode11 = 0 ;
-  
-  if ((nobjs < 11) || (nobjs > 11)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CoordinateConverter *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CoordinateConverter,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3)->get());
-      }
-    }
-  }
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmRationalPolynomial_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmRationalPolynomial_fit" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RsmRationalPolynomial_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "RsmRationalPolynomial_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "RsmRationalPolynomial_fit" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "RsmRationalPolynomial_fit" "', argument " "9"" of type '" "int""'");
-  } 
-  arg9 = static_cast< int >(val9);
-  ecode10 = SWIG_AsVal_int(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "RsmRationalPolynomial_fit" "', argument " "10"" of type '" "int""'");
-  } 
-  arg10 = static_cast< int >(val10);
-  ecode11 = SWIG_AsVal_int(swig_obj[10], &val11);
-  if (!SWIG_IsOK(ecode11)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "RsmRationalPolynomial_fit" "', argument " "11"" of type '" "int""'");
-  } 
-  arg11 = static_cast< int >(val11);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  GeoCal::CoordinateConverter *arg3 = 0 ;
-  double arg4 ;
-  double arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  int arg9 ;
-  int arg10 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared3 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  int val10 ;
-  int ecode10 = 0 ;
-  
-  if ((nobjs < 10) || (nobjs > 10)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CoordinateConverter *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CoordinateConverter,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3)->get());
-      }
-    }
-  }
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmRationalPolynomial_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmRationalPolynomial_fit" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RsmRationalPolynomial_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "RsmRationalPolynomial_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "RsmRationalPolynomial_fit" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "RsmRationalPolynomial_fit" "', argument " "9"" of type '" "int""'");
-  } 
-  arg9 = static_cast< int >(val9);
-  ecode10 = SWIG_AsVal_int(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "RsmRationalPolynomial_fit" "', argument " "10"" of type '" "int""'");
-  } 
-  arg10 = static_cast< int >(val10);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
-  GeoCal::ImageGroundConnection *arg2 = 0 ;
-  GeoCal::CoordinateConverter *arg3 = 0 ;
-  double arg4 ;
-  double arg5 ;
-  int arg6 ;
-  int arg7 ;
-  int arg8 ;
-  int arg9 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared3 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
-  int val8 ;
-  int ecode8 = 0 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  
-  if ((nobjs < 9) || (nobjs > 9)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
-      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageGroundConnection *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CoordinateConverter *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CoordinateConverter,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmRationalPolynomial_fit" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::CoordinateConverter * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3)->get());
-      }
-    }
-  }
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmRationalPolynomial_fit" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmRationalPolynomial_fit" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RsmRationalPolynomial_fit" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "RsmRationalPolynomial_fit" "', argument " "7"" of type '" "int""'");
-  } 
-  arg7 = static_cast< int >(val7);
-  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "RsmRationalPolynomial_fit" "', argument " "8"" of type '" "int""'");
-  } 
-  arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "RsmRationalPolynomial_fit" "', argument " "9"" of type '" "int""'");
-  } 
-  arg9 = static_cast< int >(val9);
-  {
-    try {
-      (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_line_fit(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[15] = {
+  PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial_fit",0,14,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial__v_number_line_fit",0,2,argv))) SWIG_fail;
   --argc;
-  if (argc == 9) {
-    return _wrap_RsmRationalPolynomial_fit__SWIG_5(self, argc, argv);
+  if (argc == 1) {
+    return _wrap_RsmRationalPolynomial__v_number_line_fit__SWIG_0(self, argc, argv);
   }
-  if (argc == 10) {
-    return _wrap_RsmRationalPolynomial_fit__SWIG_4(self, argc, argv);
-  }
-  if (argc == 11) {
-    return _wrap_RsmRationalPolynomial_fit__SWIG_3(self, argc, argv);
-  }
-  if (argc == 12) {
-    return _wrap_RsmRationalPolynomial_fit__SWIG_2(self, argc, argv);
-  }
-  if (argc == 13) {
-    return _wrap_RsmRationalPolynomial_fit__SWIG_1(self, argc, argv);
-  }
-  if (argc == 14) {
-    return _wrap_RsmRationalPolynomial_fit__SWIG_0(self, argc, argv);
+  if (argc == 2) {
+    return _wrap_RsmRationalPolynomial__v_number_line_fit__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial_fit'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial__v_number_line_fit'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RsmRationalPolynomial::fit(GeoCal::ImageGroundConnection const &,GeoCal::CoordinateConverter const &,double,double,int,int,int,int,int,int,int,bool,bool)\n"
-    "    GeoCal::RsmRationalPolynomial::fit(GeoCal::ImageGroundConnection const &,GeoCal::CoordinateConverter const &,double,double,int,int,int,int,int,int,int,bool)\n"
-    "    GeoCal::RsmRationalPolynomial::fit(GeoCal::ImageGroundConnection const &,GeoCal::CoordinateConverter const &,double,double,int,int,int,int,int,int,int)\n"
-    "    GeoCal::RsmRationalPolynomial::fit(GeoCal::ImageGroundConnection const &,GeoCal::CoordinateConverter const &,double,double,int,int,int,int,int,int)\n"
-    "    GeoCal::RsmRationalPolynomial::fit(GeoCal::ImageGroundConnection const &,GeoCal::CoordinateConverter const &,double,double,int,int,int,int,int)\n"
-    "    GeoCal::RsmRationalPolynomial::fit(GeoCal::ImageGroundConnection const &,GeoCal::CoordinateConverter const &,double,double,int,int,int,int)\n");
+    "    GeoCal::RsmRationalPolynomial::number_line_fit() const\n"
+    "    GeoCal::RsmRationalPolynomial::number_line_fit(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_sample_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_number_sample_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmRationalPolynomial const *)arg1)->number_sample_fit();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_sample_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_number_sample_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmRationalPolynomial__v_number_sample_fit" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->number_sample_fit((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_sample_fit(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial__v_number_sample_fit",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmRationalPolynomial__v_number_sample_fit__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmRationalPolynomial__v_number_sample_fit__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial__v_number_sample_fit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmRationalPolynomial::number_sample_fit() const\n"
+    "    GeoCal::RsmRationalPolynomial::number_sample_fit(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_height_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_number_height_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmRationalPolynomial const *)arg1)->number_height_fit();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_height_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_number_height_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmRationalPolynomial__v_number_height_fit" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->number_height_fit((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_height_fit(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial__v_number_height_fit",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmRationalPolynomial__v_number_height_fit__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmRationalPolynomial__v_number_height_fit__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial__v_number_height_fit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmRationalPolynomial::number_height_fit() const\n"
+    "    GeoCal::RsmRationalPolynomial::number_height_fit(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_second_pass_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_number_second_pass_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmRationalPolynomial const *)arg1)->number_second_pass_fit();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_second_pass_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_number_second_pass_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmRationalPolynomial__v_number_second_pass_fit" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->number_second_pass_fit((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_number_second_pass_fit(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial__v_number_second_pass_fit",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmRationalPolynomial__v_number_second_pass_fit__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmRationalPolynomial__v_number_second_pass_fit__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial__v_number_second_pass_fit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmRationalPolynomial::number_second_pass_fit() const\n"
+    "    GeoCal::RsmRationalPolynomial::number_second_pass_fit(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_ignore_igc_in_error_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > *smartarg1 = 0 ;
+  bool result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_ignore_igc_in_error_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::RsmRationalPolynomial const *)arg1)->ignore_igc_in_error_fit();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_ignore_igc_in_error_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  bool *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
+  bool temp2 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_ignore_igc_in_error_fit" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmRationalPolynomial__v_ignore_igc_in_error_fit" "', argument " "2"" of type '" "bool""'");
+  } 
+  temp2 = static_cast< bool >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->ignore_igc_in_error_fit((bool const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_ignore_igc_in_error_fit(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial__v_ignore_igc_in_error_fit",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmRationalPolynomial__v_ignore_igc_in_error_fit__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmRationalPolynomial__v_ignore_igc_in_error_fit__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial__v_ignore_igc_in_error_fit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmRationalPolynomial::ignore_igc_in_error_fit() const\n"
+    "    GeoCal::RsmRationalPolynomial::ignore_igc_in_error_fit(bool const &)\n");
   return 0;
 }
 
@@ -9134,10 +8405,6 @@ SWIGINTERN PyObject *RsmRationalPolynomial_swigregister(PyObject *SWIGUNUSEDPARM
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *RsmRationalPolynomial_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  return SWIG_Python_InitShadowInstance(args);
-}
-
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -9159,11 +8426,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
-	 { (char *)"new_RsmRationalPolynomial", _wrap_new_RsmRationalPolynomial, METH_VARARGS, (char *)"\n"
-		"\n"
-		"RsmRationalPolynomial::RsmRationalPolynomial(const RsmRationalPolynomial &Rp)\n"
-		"Copy constructor. \n"
-		""},
 	 { (char *)"RsmRationalPolynomial_image_coordinate", _wrap_RsmRationalPolynomial_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"blitz::Array< double, 4 > RsmRationalPolynomial::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >\n"
@@ -9201,32 +8463,28 @@ static PyMethodDef SwigMethods[] = {
 		"should make sure to set that first (e.g., call fit_offset_and_scale).\n"
 		"\n"
 		""},
-	 { (char *)"RsmRationalPolynomial_fit", _wrap_RsmRationalPolynomial_fit, METH_VARARGS, (char *)"\n"
+	 { (char *)"RsmRationalPolynomial__v_number_line_fit", _wrap_RsmRationalPolynomial__v_number_line_fit, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RsmRationalPolynomial::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height, int Min_line, int Max_line, int\n"
-		"Min_sample, int Max_sample, int Nline=20, int Nsample=20, int\n"
-		"Nheight=20, bool Skip_masked_point=false, bool Ignore_error=false)\n"
-		"Generate a RsmRationalPolynomial that approximates the calculation\n"
-		"done by a ImageGroundConnection.\n"
-		"\n"
-		"We determine that X, Y, and Z range to use automatically to cover the\n"
-		"range given by the ImageGroundConnection.\n"
-		"\n"
-		"This routine always ignores ImageGroundConnectionFailed exceptions,\n"
-		"and just skips to the next point. But if we are using python code for\n"
-		"the ImageGroundConnection we can't translate errors to\n"
-		"ImageGroundConnectionFailed (this is a limitation of SWIG). So you can\n"
-		"optionally specify Ignore_error as true, in which case we ignore all\n"
-		"exceptions and just skip to the next point.\n"
-		"\n"
-		"We normally look at all image points when generating the\n"
-		"RsmRationalPolynomial. You can optionally specify Skip_masked_point to\n"
-		"skip all image points that are masked.\n"
-		"\n"
-		"To support sections, you can pass in a restricted number of\n"
-		"line/samples to fit over. \n"
+		"void GeoCal::RsmRationalPolynomial::number_line_fit(int V)\n"
+		"Number of lines in the grid we fit for. \n"
 		""},
+	 { (char *)"RsmRationalPolynomial__v_number_sample_fit", _wrap_RsmRationalPolynomial__v_number_sample_fit, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmRationalPolynomial::number_sample_fit(int V)\n"
+		"Number of samples in the grid we fit for. \n"
+		""},
+	 { (char *)"RsmRationalPolynomial__v_number_height_fit", _wrap_RsmRationalPolynomial__v_number_height_fit, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmRationalPolynomial::number_height_fit(int V)\n"
+		"Number of heights in the grid we fit for. \n"
+		""},
+	 { (char *)"RsmRationalPolynomial__v_number_second_pass_fit", _wrap_RsmRationalPolynomial__v_number_second_pass_fit, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmRationalPolynomial::number_second_pass_fit(int V)\n"
+		"Number of rows/col/depth in x,y,z grid we fit for in the second pass\n"
+		"of generating fit data. \n"
+		""},
+	 { (char *)"RsmRationalPolynomial__v_ignore_igc_in_error_fit", _wrap_RsmRationalPolynomial__v_ignore_igc_in_error_fit, METH_VARARGS, NULL},
 	 { (char *)"RsmRationalPolynomial__v_line_offset", (PyCFunction)_wrap_RsmRationalPolynomial__v_line_offset, METH_O, (char *)"\n"
 		"\n"
 		"double GeoCal::RsmRationalPolynomial::line_offset() const\n"
@@ -9303,7 +8561,6 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"RsmRationalPolynomial_swigregister", RsmRationalPolynomial_swigregister, METH_VARARGS, NULL},
-	 { (char *)"RsmRationalPolynomial_swiginit", RsmRationalPolynomial_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

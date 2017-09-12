@@ -18,7 +18,13 @@ public:
 /// Constructor.
 //-----------------------------------------------------------------------
 
-  RsmLowOrderPolynomial() {}
+  RsmLowOrderPolynomial(int Nline_fit=10, int Nsample_fit=10,
+			int Nheight_fit=10,
+			bool Ignore_igc_error_in_fit = false)
+    : nline_fit_(Nline_fit),
+      nsample_fit_(Nsample_fit),
+      nheight_fit_(Nheight_fit),
+      ignore_igc_error_in_fit_(Ignore_igc_error_in_fit) {}
   virtual ~RsmLowOrderPolynomial() {}
 
 //-----------------------------------------------------------------------
@@ -53,10 +59,7 @@ public:
 	   const CoordinateConverter& Cconv,
 	   double Min_height, double Max_height,
 	   int Min_line, int Max_line, int Min_sample,
-	   int Max_sample,
-	   int Nline = 10, int Nsample = 10, int Nheight = 10,
-	   bool Skip_masked_point = false,
-	   bool Ignore_error = false);
+	   int Max_sample);
   blitz::Array<double, 1> parameter_line() const
   { return blitz::Array<double, 1>(const_cast<double*>(pline), blitz::shape(10), blitz::neverDeleteData); }
   blitz::Array<double, 1> parameter_sample() const
@@ -67,9 +70,60 @@ public:
   int max_line() const {return max_line_;}
   int min_sample() const {return min_sample_;}
   int max_sample() const {return max_sample_;}
+  
+//-----------------------------------------------------------------------
+/// Number of lines in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  int number_line_fit() const {return nline_fit_;}
+
+//-----------------------------------------------------------------------
+/// Number of lines in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  void number_line_fit(int V) { nline_fit_ = V;}
+
+//-----------------------------------------------------------------------
+/// Number of samples in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  int number_sample_fit() const {return nsample_fit_;}
+
+//-----------------------------------------------------------------------
+/// Number of samples in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  void number_sample_fit(int V) { nsample_fit_ = V;}
+  
+//-----------------------------------------------------------------------
+/// Number of heights in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  int number_height_fit() const {return nheight_fit_;}
+
+//-----------------------------------------------------------------------
+/// Number of heights in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  void number_height_fit(int V) { nheight_fit_ = V;}
+
+//-----------------------------------------------------------------------
+/// If true, ignore igc errors in fit.
+//-----------------------------------------------------------------------
+  
+  bool ignore_igc_error_in_fit() const { return ignore_igc_error_in_fit_;}
+
+//-----------------------------------------------------------------------
+/// If true, ignore igc errors in fit.
+//-----------------------------------------------------------------------
+  
+  void ignore_igc_error_in_fit(bool V) { ignore_igc_error_in_fit_ = V;}
+  
 private:
   double pline[10], psamp[10];
   int min_line_, max_line_, min_sample_, max_sample_;
+  int nline_fit_, nsample_fit_, nheight_fit_, nsecond_pass_fit_;
+  bool ignore_igc_error_in_fit_;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

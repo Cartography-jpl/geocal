@@ -23,7 +23,8 @@ void RsmGrid::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(min_line)
     & GEOCAL_NVP_(max_line)
     & GEOCAL_NVP_(min_sample)
-    & GEOCAL_NVP_(max_sample);
+    & GEOCAL_NVP_(max_sample)
+    & GEOCAL_NVP_(ignore_igc_error_in_fit);
 }
 
 GEOCAL_IMPLEMENT(RsmGrid);
@@ -185,14 +186,6 @@ blitz::Array<double, 4> RsmGrid::image_coordinate
 /// range to use automatically to cover the range given by the
 /// ImageGroundConnection.
 ///
-/// This routine always ignores ImageGroundConnectionFailed
-/// exceptions, and just skips to the next point. But if we are using
-/// python code for the ImageGroundConnection we can't translate
-/// errors to ImageGroundConnectionFailed (this is a limitation of
-/// SWIG). So you can optionally specify Ignore_error as true, in
-/// which case we ignore *all* exceptions and just skip to the next
-/// point.
-///
 /// To support sections, you can pass in a restricted number of
 /// line/samples to fit over.
 //-----------------------------------------------------------------------
@@ -202,10 +195,7 @@ void RsmGrid::fit
  const CoordinateConverter& Cconv,
  double Min_height, double Max_height,
  int Min_line, int Max_line, int Min_sample,
- int Max_sample,
- int Nline, int Nsample, int Nheight,
- bool Skip_masked_point,
- bool Ignore_error)
+ int Max_sample)
 {
   bool first = true;
   min_line_ = Min_line;
@@ -240,7 +230,7 @@ void RsmGrid::fit
 	} catch(const ImageGroundConnectionFailed&) {
 	  // Ignore failures, just go to next point.
 	} catch(...) {
-	  if(!Ignore_error)
+	  if(!ignore_igc_error_in_fit_)
 	    throw;
 	}
       }
@@ -260,11 +250,22 @@ void RsmGrid::fit
 	  Cconv.convert_from_coordinate(x, y, z);
 	ImageCoordinate ic;
 	bool success;
-	Igc.image_coordinate_with_status(*gc, ic, success);
-	if(success) {
-	  line_(i,j,k) = ic.line;
-	  sample_(i,j,k) = ic.sample;
-	} else {
+	try {
+	  Igc.image_coordinate_with_status(*gc, ic, success);
+	  if(success) {
+	    line_(i,j,k) = ic.line;
+	    sample_(i,j,k) = ic.sample;
+	  } else {
+	    line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	    sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	  }
+	} catch(const ImageGroundConnectionFailed&) {
+	  // Ignore failures, just go to next point.
+	  line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	  sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	} catch(...) {
+	  if(!ignore_igc_error_in_fit_)
+	    throw;
 	  line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
 	  sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
 	}
@@ -273,14 +274,6 @@ void RsmGrid::fit
 
 //-----------------------------------------------------------------------
 /// Generate a RsmGrid that gives a correction to another RsmBase.
-///
-/// This routine always ignores ImageGroundConnectionFailed
-/// exceptions, and just skips to the next point. But if we are using
-/// python code for the ImageGroundConnection we can't translate
-/// errors to ImageGroundConnectionFailed (this is a limitation of
-/// SWIG). So you can optionally specify Ignore_error as true, in
-/// which case we ignore *all* exceptions and just skip to the next
-/// point.
 //-----------------------------------------------------------------------
 
 void RsmGrid::fit_corr
@@ -308,13 +301,24 @@ void RsmGrid::fit_corr
 	  Cconv.convert_from_coordinate(x, y, z);
 	ImageCoordinate ic;
 	bool success;
-	Igc.image_coordinate_with_status(*gc, ic, success);
-	ImageCoordinate ic_calc;
-	ic_calc = Rb.image_coordinate(x,y,z);
-	if(success) {
-	  line_(i,j,k) = ic.line - ic_calc.line;
-	  sample_(i,j,k) = ic.sample - ic_calc.sample;
-	} else {
+	try {
+	  Igc.image_coordinate_with_status(*gc, ic, success);
+	  ImageCoordinate ic_calc;
+	  ic_calc = Rb.image_coordinate(x,y,z);
+	  if(success) {
+	    line_(i,j,k) = ic.line - ic_calc.line;
+	    sample_(i,j,k) = ic.sample - ic_calc.sample;
+	  } else {
+	    line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	    sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	  }
+	} catch(const ImageGroundConnectionFailed&) {
+	  // Ignore failures, just go to next point.
+	  line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	  sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	} catch(...) {
+	  if(!ignore_igc_error_in_fit_)
+	    throw;
 	  line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
 	  sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
 	}

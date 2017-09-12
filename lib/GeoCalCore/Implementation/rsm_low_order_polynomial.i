@@ -18,7 +18,9 @@
 namespace GeoCal {
 class RsmLowOrderPolynomial : public GenericObject {
 public:
-  RsmLowOrderPolynomial();
+  RsmLowOrderPolynomial(int Nline_fit=10, int Nsample_fit=10,
+			int Nheight_fit=10,
+			bool Ignore_igc_error_in_fit = false);
   std::string print_to_string() const;
   ImageCoordinate image_coordinate(double X, double Y, double Z) const;
   blitz::Array<double, 2> image_coordinate(const blitz::Array<double, 1>& X,
@@ -36,10 +38,11 @@ public:
 	   const CoordinateConverter& Cconv,
 	   double Min_height, double Max_height,
 	   int Min_line, int Max_line, int Min_sample,
-	   int Max_sample,
-	   int Nline = 10, int Nsample = 10, int Nheight = 10,
-	   bool Skip_masked_point = false,
-	   bool Ignore_error = false);
+	   int Max_sample);
+  %python_attribute_with_set(number_line_fit, int);
+  %python_attribute_with_set(number_sample_fit, int);
+  %python_attribute_with_set(number_height_fit, int);
+  %python_attribute_with_set(ignore_igc_in_error_fit, bool);
   %python_attribute(parameter_line, blitz::Array<double, 1>);
   %python_attribute(parameter_sample, blitz::Array<double, 1>);
   %pickle_serialization()

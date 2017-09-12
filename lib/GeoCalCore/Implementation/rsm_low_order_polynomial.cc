@@ -17,7 +17,11 @@ void RsmLowOrderPolynomial::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(min_line)
     & GEOCAL_NVP_(max_line)
     & GEOCAL_NVP_(min_sample)
-    & GEOCAL_NVP_(max_sample);
+    & GEOCAL_NVP_(max_sample)
+    & GEOCAL_NVP_(nline_fit)
+    & GEOCAL_NVP_(nsample_fit)
+    & GEOCAL_NVP_(nheight_fit)
+    & GEOCAL_NVP_(ignore_igc_error_in_fit);
 }
 
 GEOCAL_IMPLEMENT(RsmLowOrderPolynomial);
@@ -154,19 +158,7 @@ void RsmLowOrderPolynomial::fit_data
 
 //-----------------------------------------------------------------------
 /// Generate a RsmLowOrderPolynomial that approximates the calculation
-/// done by a ImageGroundConnection.  
-///
-/// This routine always ignores ImageGroundConnectionFailed
-/// exceptions, and just skips to the next point. But if we are using
-/// python code for the ImageGroundConnection we can't translate
-/// errors to ImageGroundConnectionFailed (this is a limitation of
-/// SWIG). So you can optionally specify Ignore_error as true, in
-/// which case we ignore *all* exceptions and just skip to the next
-/// point.
-///
-/// We normally look at all image points when generating the
-/// RsmLowOrderPolynomial. You can optionally specify
-/// Skip_masked_point to skip all image points that are masked.
+/// done by a ImageGroundConnection.
 ///
 /// To support sections, you can pass in a restricted number of
 /// line/samples to fit over.
@@ -177,25 +169,23 @@ void RsmLowOrderPolynomial::fit
  const CoordinateConverter& Cconv,
  double Min_height, double Max_height,
  int Min_line, int Max_line, int Min_sample,
- int Max_sample,
- int Nline, int Nsample, int Nheight,
- bool Skip_masked_point,
- bool Ignore_error)
+ int Max_sample)
 {
   min_line_ = Min_line;
   max_line_ = Max_line;
   min_sample_ = Min_sample;
   max_sample_ = Max_sample;
   std::vector<double> line, sample, x, y, z;
-  for(int i = 0; i < Nline; ++i)
-    for(int j = 0; j < Nsample; ++j)
-      for(int k = 0; k < Nheight; ++k) {
+  for(int i = 0; i < nline_fit_; ++i)
+    for(int j = 0; j < nsample_fit_; ++j)
+      for(int k = 0; k < nheight_fit_; ++k) {
 	try {
-	  double ln = Min_line + (Max_line - Min_line) / (Nline - 1) * i;
-	  double smp = Min_sample + (Max_sample - Min_sample) / (Nsample - 1) * j;
-	  double h = Min_height + (Max_height - Min_height) / (Nheight - 1) * k;
-	  if(Skip_masked_point && Igc.image_mask()->mask(ln, smp))
-	    continue;
+	  double ln = Min_line + (Max_line - Min_line - 1.0) /
+	    (nline_fit_ - 1.0) * i;
+	  double smp = Min_sample + (Max_sample - Min_sample - 1.0) /
+	    (nsample_fit_ - 1.0) * j;
+	  double h = Min_height + (Max_height - Min_height) /
+	    (nheight_fit_ - 1.0) * k;
 	  boost::shared_ptr<GroundCoordinate> gc =
 	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
 	  line.push_back(ln);
@@ -208,7 +198,7 @@ void RsmLowOrderPolynomial::fit
 	} catch(const ImageGroundConnectionFailed&) {
 	  // Ignore failures, just go to next point.
 	} catch(...) {
-	  if(!Ignore_error)
+	  if(!ignore_igc_error_in_fit_)
 	    throw;
 	}
       }

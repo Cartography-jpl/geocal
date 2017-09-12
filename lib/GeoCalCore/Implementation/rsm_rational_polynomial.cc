@@ -26,7 +26,12 @@ void RsmRationalPolynomial::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(line_num)
     & GEOCAL_NVP_(line_den)
     & GEOCAL_NVP_(sample_num)
-    & GEOCAL_NVP_(sample_den);
+    & GEOCAL_NVP_(sample_den)
+    & GEOCAL_NVP_(nline_fit)
+    & GEOCAL_NVP_(nsample_fit)
+    & GEOCAL_NVP_(nheight_fit)
+    & GEOCAL_NVP_(nsecond_pass_fit)
+    & GEOCAL_NVP_(ignore_igc_error_in_fit);
 }
 
 GEOCAL_IMPLEMENT(RsmRationalPolynomial);
@@ -43,11 +48,25 @@ GEOCAL_IMPLEMENT(RsmRationalPolynomial);
 /// max_order for the numerator, denominator, or both. This holds all 
 /// cross terms with a total order > max to 0. The default is to not
 /// restrict the cross terms.
+///
+/// You can give the number of points to generate in the fit function
+/// by giving the grid dimensions Nline_fit x Nsample_fit x
+/// Nheight_fit. For Geodetic like coordinate systems this usually
+/// gives pretty good coverage, but for something like
+/// LocalRectangularCoordinate this kind of a grid doesn't cover the
+/// full space. You can give the value for second pass through where
+/// we make a X, Y, Z grid of points. This is often slower, but can be
+/// necessary. If you set Nsecond_pass_fit to 0, then we skip this step
+/// in fit. In fit we always ignore ImageGroundConnectionFailed
+/// exceptions, but you can optionally ignore other errors in the Igc
+/// by setting Ignore_igc_error_in_fit to true.
 //-----------------------------------------------------------------------
 
 RsmRationalPolynomial::RsmRationalPolynomial
 (int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
- int Dp_z, int N_max_order, int D_max_order)
+ int Dp_z, int N_max_order, int D_max_order,int Nline_fit,
+ int Nsample_fit, int Nheight_fit, int Nsecond_pass_fit,
+ bool Ignore_igc_error_in_fit)
   : line_offset_(0),
     line_scale_(0),
     sample_offset_(0),
@@ -61,32 +80,14 @@ RsmRationalPolynomial::RsmRationalPolynomial
     line_num_(Np_x, Np_y, Np_z, false, N_max_order),
     line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
     sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
-    sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order)
+    sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
+    nline_fit_(Nline_fit),
+    nsample_fit_(Nsample_fit),
+    nheight_fit_(Nheight_fit),
+    nsecond_pass_fit_(Nsecond_pass_fit),
+    ignore_igc_error_in_fit_(Ignore_igc_error_in_fit)
 {
 }
-
-//-----------------------------------------------------------------------
-/// Copy constructor.
-//-----------------------------------------------------------------------
-
-RsmRationalPolynomial::RsmRationalPolynomial(const RsmRationalPolynomial& Rp)
-  : line_offset_(Rp.line_offset_),
-    line_scale_(Rp.line_scale_),
-    sample_offset_(Rp.sample_offset_),
-    sample_scale_(Rp.sample_scale_),
-    x_offset_(Rp.x_offset_),
-    x_scale_(Rp.x_scale_),
-    y_offset_(Rp.y_offset_),
-    y_scale_(Rp.y_scale_),
-    z_offset_(Rp.z_offset_),
-    z_scale_(Rp.z_scale_),
-    line_num_(Rp.line_num_),
-    line_den_(Rp.line_den_),
-    sample_num_(Rp.sample_num_),
-    sample_den_(Rp.sample_den_)
-{
-}
-
 
 //-----------------------------------------------------------------------
 /// Apply the rational polynomial to the given X, Y, and Z value.
@@ -307,18 +308,6 @@ void RsmRationalPolynomial::fit_data
 /// range to use automatically to cover the range given by the
 /// ImageGroundConnection.
 ///
-/// This routine always ignores ImageGroundConnectionFailed
-/// exceptions, and just skips to the next point. But if we are using
-/// python code for the ImageGroundConnection we can't translate
-/// errors to ImageGroundConnectionFailed (this is a limitation of
-/// SWIG). So you can optionally specify Ignore_error as true, in
-/// which case we ignore *all* exceptions and just skip to the next
-/// point.
-///
-/// We normally look at all image points when generating the
-/// RsmRationalPolynomial. You can optionally specify
-/// Skip_masked_point to skip all image points that are masked.
-///
 /// To support sections, you can pass in a restricted number of
 /// line/samples to fit over.
 //-----------------------------------------------------------------------
@@ -328,21 +317,19 @@ void RsmRationalPolynomial::fit
  const CoordinateConverter& Cconv,
  double Min_height, double Max_height,
  int Min_line, int Max_line, int Min_sample,
- int Max_sample,
- int Nline, int Nsample, int Nheight,
- bool Skip_masked_point,
- bool Ignore_error)
+ int Max_sample)
 {
   std::vector<double> line, sample, x, y, z;
-  for(int i = 0; i < Nline; ++i)
-    for(int j = 0; j < Nsample; ++j)
-      for(int k = 0; k < Nheight; ++k) {
+  for(int i = 0; i < nline_fit_; ++i)
+    for(int j = 0; j < nsample_fit_; ++j)
+      for(int k = 0; k < nheight_fit_; ++k) {
 	try {
-	  double ln = Min_line + (Max_line - Min_line) / (Nline - 1) * i;
-	  double smp = Min_sample + (Max_sample - Min_sample) / (Nsample - 1) * j;
-	  double h = Min_height + (Max_height - Min_height) / (Nheight - 1) * k;
-	  if(Skip_masked_point && Igc.image_mask()->mask(ln, smp))
-	    continue;
+	  double ln = Min_line + (Max_line - Min_line - 1.0) /
+	    (nline_fit_ - 1.0) * i;
+	  double smp = Min_sample + (Max_sample - Min_sample - 1.0) /
+	    (nsample_fit_ - 1.0) * j;
+	  double h = Min_height + (Max_height - Min_height) /
+	    (nheight_fit_ - 1.0) * k;
 	  boost::shared_ptr<GroundCoordinate> gc =
 	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
 	  line.push_back(ln);
@@ -355,7 +342,7 @@ void RsmRationalPolynomial::fit
 	} catch(const ImageGroundConnectionFailed&) {
 	  // Ignore failures, just go to next point.
 	} catch(...) {
-	  if(!Ignore_error)
+	  if(!ignore_igc_error_in_fit_)
 	    throw;
 	}
       }
@@ -368,6 +355,37 @@ void RsmRationalPolynomial::fit
 		       *std::max_element(y.begin(), y.end()),
 		       *std::min_element(z.begin(), z.end()),
 		       *std::max_element(z.begin(), z.end()));
+  // Go back through, and also make even spacing in x, y, and
+  // z. Without this we can get a polynomial that acts badly at the
+  // edge of the fitted range
+  if(nsecond_pass_fit_ > 1) {
+    for(int i = 0; i < nsecond_pass_fit_; ++i)
+      for(int j = 0; j < nsecond_pass_fit_; ++j)
+	for(int k = 0; k < nsecond_pass_fit_; ++k) {
+	  double xv = min_x() + (max_x() - min_x()) / (nsecond_pass_fit_-1) * i;
+	  double yv = min_y() + (max_y() - min_y()) / (nsecond_pass_fit_-1) * j;
+	  double zv = min_z() + (max_z() - min_z()) / (nsecond_pass_fit_-1) * k;
+	  boost::shared_ptr<GroundCoordinate> gc =
+	    Cconv.convert_from_coordinate(xv, yv, zv);
+	  ImageCoordinate ic;
+	  bool success;
+	  try {
+	    Igc.image_coordinate_with_status(*gc, ic, success);
+	    if(success) {
+	      line.push_back(ic.line);
+	      sample.push_back(ic.sample);
+	      x.push_back(xv);
+	      y.push_back(yv);
+	      z.push_back(zv);
+	    }
+	  } catch(const ImageGroundConnectionFailed&) {
+	    // Ignore failures, just go to next point.
+	  } catch(...) {
+	    if(!ignore_igc_error_in_fit_)
+	      throw;
+	  }
+	}
+  }
   fit_data(line, sample, x, y, z);
 }
 
@@ -423,5 +441,9 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
      << "  Dp x:          " << line_den_.coefficient().rows()-1 << "\n"
      << "  Dp y:          " << line_den_.coefficient().cols()-1 << "\n"
      << "  Dp z:          " << line_den_.coefficient().depth()-1 << "\n"
-     << "  DMax order:    " << line_den_.max_order() << "\n";
+     << "  DMax order:    " << line_den_.max_order() << "\n"
+     << "  Nline fit:     " << nline_fit_ << "\n"
+     << "  Nsample fit:   " << nsample_fit_ << "\n"
+     << "  Nheight fit:   " << nheight_fit_ << "\n"
+     << "  Nsecond pass fit: " << nsecond_pass_fit_ << "\n";
 }

@@ -197,15 +197,10 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
     C++ includes: rsm_rational_polynomial.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-
-    def __init__(self, Np_x, Np_y, Np_z, Dp_x, Dp_y, Dp_z, N_max_order=-1, D_max_order=-1):
-        """
-
-        RsmRationalPolynomial::RsmRationalPolynomial(const RsmRationalPolynomial &Rp)
-        Copy constructor. 
-        """
-        _rsm_rational_polynomial.RsmRationalPolynomial_swiginit(self, _rsm_rational_polynomial.new_RsmRationalPolynomial(Np_x, Np_y, Np_z, Dp_x, Dp_y, Dp_z, N_max_order, D_max_order))
 
     def image_coordinate(self, *args):
         """
@@ -260,34 +255,86 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
         return _rsm_rational_polynomial.RsmRationalPolynomial_fit_data(self, Line, Sample, X, Y, Z)
 
 
-    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=20, Nsample=20, Nheight=20, Skip_masked_point=False, Ignore_error=False):
+    def _v_number_line_fit(self, *args):
         """
 
-        void RsmRationalPolynomial::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
-        double Min_height, double Max_height, int Min_line, int Max_line, int
-        Min_sample, int Max_sample, int Nline=20, int Nsample=20, int
-        Nheight=20, bool Skip_masked_point=false, bool Ignore_error=false)
-        Generate a RsmRationalPolynomial that approximates the calculation
-        done by a ImageGroundConnection.
-
-        We determine that X, Y, and Z range to use automatically to cover the
-        range given by the ImageGroundConnection.
-
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point.
-
-        We normally look at all image points when generating the
-        RsmRationalPolynomial. You can optionally specify Skip_masked_point to
-        skip all image points that are masked.
-
-        To support sections, you can pass in a restricted number of
-        line/samples to fit over. 
+        void GeoCal::RsmRationalPolynomial::number_line_fit(int V)
+        Number of lines in the grid we fit for. 
         """
-        return _rsm_rational_polynomial.RsmRationalPolynomial_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
+        return _rsm_rational_polynomial.RsmRationalPolynomial__v_number_line_fit(self, *args)
+
+
+    @property
+    def number_line_fit(self):
+        return self._v_number_line_fit()
+
+    @number_line_fit.setter
+    def number_line_fit(self, value):
+      self._v_number_line_fit(value)
+
+
+    def _v_number_sample_fit(self, *args):
+        """
+
+        void GeoCal::RsmRationalPolynomial::number_sample_fit(int V)
+        Number of samples in the grid we fit for. 
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial__v_number_sample_fit(self, *args)
+
+
+    @property
+    def number_sample_fit(self):
+        return self._v_number_sample_fit()
+
+    @number_sample_fit.setter
+    def number_sample_fit(self, value):
+      self._v_number_sample_fit(value)
+
+
+    def _v_number_height_fit(self, *args):
+        """
+
+        void GeoCal::RsmRationalPolynomial::number_height_fit(int V)
+        Number of heights in the grid we fit for. 
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial__v_number_height_fit(self, *args)
+
+
+    @property
+    def number_height_fit(self):
+        return self._v_number_height_fit()
+
+    @number_height_fit.setter
+    def number_height_fit(self, value):
+      self._v_number_height_fit(value)
+
+
+    def _v_number_second_pass_fit(self, *args):
+        """
+
+        void GeoCal::RsmRationalPolynomial::number_second_pass_fit(int V)
+        Number of rows/col/depth in x,y,z grid we fit for in the second pass
+        of generating fit data. 
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial__v_number_second_pass_fit(self, *args)
+
+
+    @property
+    def number_second_pass_fit(self):
+        return self._v_number_second_pass_fit()
+
+    @number_second_pass_fit.setter
+    def number_second_pass_fit(self, value):
+      self._v_number_second_pass_fit(value)
+
+
+    @property
+    def ignore_igc_in_error_fit(self):
+        return self._v_ignore_igc_in_error_fit()
+
+    @ignore_igc_in_error_fit.setter
+    def ignore_igc_in_error_fit(self, value):
+      self._v_ignore_igc_in_error_fit(value)
 
 
     def _v_line_offset(self):
@@ -494,7 +541,11 @@ RsmRationalPolynomial.image_coordinate = new_instancemethod(_rsm_rational_polyno
 RsmRationalPolynomial.set_rpc_coeff = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_set_rpc_coeff, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit_offset_and_scale = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_offset_and_scale, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit_data = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_data, None, RsmRationalPolynomial)
-RsmRationalPolynomial.fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_number_line_fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_number_line_fit, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_number_sample_fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_number_sample_fit, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_number_height_fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_number_height_fit, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_number_second_pass_fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_number_second_pass_fit, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_ignore_igc_in_error_fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_ignore_igc_in_error_fit, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_line_offset = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_offset, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_line_scale = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_scale, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_sample_offset = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_sample_offset, None, RsmRationalPolynomial)

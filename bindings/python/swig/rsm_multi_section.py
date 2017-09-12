@@ -200,74 +200,15 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
     C++ includes: rsm_multi_section.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-
-    def __init__(self, Nline, Nsamp, Nrow_section, Ncol_section, Rsm_prototype, Border=5):
-        """
-
-        RsmMultiSection::RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, const
-        RsmBase &Rsm_prototype, int Border=5)
-        Constructor.
-
-        The RsmRationalPolynomial tends to extrapolate badly. Because the low
-        order polynomial is only approximately correct, we add a little bit of
-        a border to each underlying RsmRationalPolynomial so we can avoid
-        extrapolating. 
-        """
-        _rsm_multi_section.RsmMultiSection_swiginit(self, _rsm_multi_section.new_RsmMultiSection(Nline, Nsamp, Nrow_section, Ncol_section, Rsm_prototype, Border))
-
-    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=20, Nsample=20, Nheight=20, Skip_masked_point=False, Ignore_error=False):
-        """
-
-        void RsmMultiSection::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
-        double Min_height, double Max_height, int Min_line, int Max_line, int
-        Min_sample, int Max_sample, int Nline=20, int Nsample=20, int
-        Nheight=20, bool Skip_masked_point=false, bool Ignore_error=false)
-        Fit that approximates the calculation done by a ImageGroundConnection.
-
-        Generate a RsmGrid that approximates the calculation done by a
-        ImageGroundConnection.
-
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point.
-
-        We normally look at all image points when generating the
-        RsmRationalPolynomial. You can optionally specify Skip_masked_point to
-        skip all image points that are masked.
-
-        To support sections, you can pass in a restricted number of
-        line/samples to fit over.
-
-        The number lines, samples, and heights only applies to a
-        RsmRationalPolynomial. For a grid, we need to calculate the points to
-        fill the grid. But we give a common interface here, the values are
-        just ignored by RsmGrid.
-
-        We determine that X, Y, and Z range to use automatically to cover the
-        range given by the ImageGroundConnection.
-
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point.
-
-        To support sections, you can pass in a restricted number of
-        line/samples to fit over. 
-        """
-        return _rsm_multi_section.RsmMultiSection_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
-
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_multi_section.delete_RsmMultiSection
-RsmMultiSection.fit = new_instancemethod(_rsm_multi_section.RsmMultiSection_fit, None, RsmMultiSection)
 RsmMultiSection_swigregister = _rsm_multi_section.RsmMultiSection_swigregister
 RsmMultiSection_swigregister(RsmMultiSection)
 

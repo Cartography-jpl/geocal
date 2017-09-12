@@ -52,35 +52,15 @@ public:
 //-----------------------------------------------------------------------
 /// Fit that approximates the calculation done by a ImageGroundConnection.
 ///
-/// This routine always ignores ImageGroundConnectionFailed
-/// exceptions, and just skips to the next point. But if we are using
-/// python code for the ImageGroundConnection we can't translate
-/// errors to ImageGroundConnectionFailed (this is a limitation of
-/// SWIG). So you can optionally specify Ignore_error as true, in
-/// which case we ignore *all* exceptions and just skip to the next
-/// point.
-///
-/// We normally look at all image points when generating the
-/// RsmRationalPolynomial. You can optionally specify
-/// Skip_masked_point to skip all image points that are masked.
-///
 /// To support sections, you can pass in a restricted number of
 /// line/samples to fit over.
-///
-/// The number lines, samples, and heights only applies to a
-/// RsmRationalPolynomial. For a grid, we need to calculate the points
-/// to fill the grid. But we give a common interface here, the values
-/// are just ignored by RsmGrid.
 //-----------------------------------------------------------------------
 
   virtual void fit(const ImageGroundConnection& Igc,
 		   const CoordinateConverter& Cconv,
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
-		   int Max_sample,
-		   int Nline = 20, int Nsample = 20, int Nheight = 20,
-		   bool Skip_masked_point = false,
-		   bool Ignore_error = false) = 0;
+		   int Max_sample) = 0;
 
 // Doesn't really belong here, but stick here for now
   static blitz::Array<double, 4> generate_data

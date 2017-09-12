@@ -199,13 +199,14 @@ class RsmLowOrderPolynomial(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self):
+    def __init__(self, Nline_fit=10, Nsample_fit=10, Nheight_fit=10, Ignore_igc_error_in_fit=False):
         """
 
-        GeoCal::RsmLowOrderPolynomial::RsmLowOrderPolynomial()
+        GeoCal::RsmLowOrderPolynomial::RsmLowOrderPolynomial(int Nline_fit=10, int Nsample_fit=10, int Nheight_fit=10, bool
+        Ignore_igc_error_in_fit=false)
         Constructor. 
         """
-        _rsm_low_order_polynomial.RsmLowOrderPolynomial_swiginit(self, _rsm_low_order_polynomial.new_RsmLowOrderPolynomial())
+        _rsm_low_order_polynomial.RsmLowOrderPolynomial_swiginit(self, _rsm_low_order_polynomial.new_RsmLowOrderPolynomial(Nline_fit, Nsample_fit, Nheight_fit, Ignore_igc_error_in_fit))
 
     def image_coordinate(self, *args):
         """
@@ -237,31 +238,82 @@ class RsmLowOrderPolynomial(geocal_swig.generic_object.GenericObject):
         return _rsm_low_order_polynomial.RsmLowOrderPolynomial_fit_data(self, Line, Sample, X, Y, Z)
 
 
-    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=10, Nsample=10, Nheight=10, Skip_masked_point=False, Ignore_error=False):
+    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample):
         """
 
         void RsmLowOrderPolynomial::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
         double Min_height, double Max_height, int Min_line, int Max_line, int
-        Min_sample, int Max_sample, int Nline=10, int Nsample=10, int
-        Nheight=10, bool Skip_masked_point=false, bool Ignore_error=false)
+        Min_sample, int Max_sample)
         Generate a RsmLowOrderPolynomial that approximates the calculation
         done by a ImageGroundConnection.
-
-        This routine always ignores ImageGroundConnectionFailed exceptions,
-        and just skips to the next point. But if we are using python code for
-        the ImageGroundConnection we can't translate errors to
-        ImageGroundConnectionFailed (this is a limitation of SWIG). So you can
-        optionally specify Ignore_error as true, in which case we ignore all
-        exceptions and just skip to the next point.
-
-        We normally look at all image points when generating the
-        RsmLowOrderPolynomial. You can optionally specify Skip_masked_point to
-        skip all image points that are masked.
 
         To support sections, you can pass in a restricted number of
         line/samples to fit over. 
         """
-        return _rsm_low_order_polynomial.RsmLowOrderPolynomial_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Skip_masked_point, Ignore_error)
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample)
+
+
+    def _v_number_line_fit(self, *args):
+        """
+
+        void GeoCal::RsmLowOrderPolynomial::number_line_fit(int V)
+        Number of lines in the grid we fit for. 
+        """
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_line_fit(self, *args)
+
+
+    @property
+    def number_line_fit(self):
+        return self._v_number_line_fit()
+
+    @number_line_fit.setter
+    def number_line_fit(self, value):
+      self._v_number_line_fit(value)
+
+
+    def _v_number_sample_fit(self, *args):
+        """
+
+        void GeoCal::RsmLowOrderPolynomial::number_sample_fit(int V)
+        Number of samples in the grid we fit for. 
+        """
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_sample_fit(self, *args)
+
+
+    @property
+    def number_sample_fit(self):
+        return self._v_number_sample_fit()
+
+    @number_sample_fit.setter
+    def number_sample_fit(self, value):
+      self._v_number_sample_fit(value)
+
+
+    def _v_number_height_fit(self, *args):
+        """
+
+        void GeoCal::RsmLowOrderPolynomial::number_height_fit(int V)
+        Number of heights in the grid we fit for. 
+        """
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_height_fit(self, *args)
+
+
+    @property
+    def number_height_fit(self):
+        return self._v_number_height_fit()
+
+    @number_height_fit.setter
+    def number_height_fit(self, value):
+      self._v_number_height_fit(value)
+
+
+    @property
+    def ignore_igc_in_error_fit(self):
+        return self._v_ignore_igc_in_error_fit()
+
+    @ignore_igc_in_error_fit.setter
+    def ignore_igc_in_error_fit(self, value):
+      self._v_ignore_igc_in_error_fit(value)
 
 
     def _v_parameter_line(self):
@@ -300,6 +352,10 @@ RsmLowOrderPolynomial.__str__ = new_instancemethod(_rsm_low_order_polynomial.Rsm
 RsmLowOrderPolynomial.image_coordinate = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial_image_coordinate, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial.fit_data = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial_fit_data, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial.fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial_fit, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_number_line_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_line_fit, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_number_sample_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_sample_fit, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_number_height_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_height_fit, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_ignore_igc_in_error_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_ignore_igc_in_error_fit, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_parameter_line = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_parameter_line, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_parameter_sample = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_parameter_sample, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial_swigregister = _rsm_low_order_polynomial.RsmLowOrderPolynomial_swigregister

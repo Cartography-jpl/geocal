@@ -82,7 +82,10 @@ public:
 				  double H) const
   { return rsm_->ground_coordinate_approx_height(Ic,H); }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
-    const { return rsm_->image_coordinate(Gc); }
+    const;
+  virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
+					    ImageCoordinate& Res,
+					    bool& Success) const;
   virtual void print(std::ostream& Os) const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const;
 

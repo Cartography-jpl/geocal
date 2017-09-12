@@ -1,6 +1,7 @@
 #include "rsm_image_ground_connection.h"
 #include "geocal_serialize_support.h"
 #include "ostream_pad.h"
+#include <cmath>
 using namespace GeoCal;
 using namespace blitz;
 
@@ -32,6 +33,24 @@ RsmImageGroundConnection::cf_look_vector
   Lv.look_vector[0] = ec2->position[0] - P->position[0];
   Lv.look_vector[1] = ec2->position[1] - P->position[1];
   Lv.look_vector[2] = ec2->position[2] - P->position[2];
+}
+
+ImageCoordinate RsmImageGroundConnection::image_coordinate(const GroundCoordinate& Gc) const
+{
+  ImageCoordinate res = rsm_->image_coordinate(Gc);
+  if(isnan(res.line) || isnan(res.sample))
+    throw ImageGroundConnectionFailed();
+  return res;
+}
+
+void RsmImageGroundConnection::image_coordinate_with_status
+(const GroundCoordinate& Gc, ImageCoordinate& Res, bool& Success) const
+{
+  Res = rsm_->image_coordinate(Gc);
+  if(isnan(Res.line) || isnan(Res.sample))
+    Success = false;
+  else
+    Success = true;
 }
 
 Array<double, 2> RsmImageGroundConnection::image_coordinate_jac_cf

@@ -148,7 +148,9 @@ Rsm::ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
 }
 
 //-----------------------------------------------------------------------
-/// Return the image coordinates for the given Gc.
+/// Return the image coordinates for the given Gc. This can return Nan
+/// if we are outside the range of a RsmGrid, indicating we can't
+/// calculate the ImageCoordinate.
 //-----------------------------------------------------------------------
 
 ImageCoordinate Rsm::image_coordinate(const GroundCoordinate& Gc) const
@@ -181,33 +183,13 @@ blitz::Array<double, 2> Rsm::image_coordinate_jacobian
 //-----------------------------------------------------------------------
 /// Generate a Rsm that approximates the calculation
 /// done by a ImageGroundConnection.
-///
-/// This routine always ignores ImageGroundConnectionFailed
-/// exceptions, and just skips to the next point. But if we are using
-/// python code for the ImageGroundConnection we can't translate
-/// errors to ImageGroundConnectionFailed (this is a limitation of
-/// SWIG). So you can optionally specify Ignore_error as true, in
-/// which case we ignore *all* exceptions and just skip to the next
-/// point.
-///
-/// We normally look at all image points when generating the Rsm. You
-/// can optionally specify Skip_masked_point to skip all image points
-/// that are masked.
-///
-/// The Nline, Nsample, Nheight is used for any RsmRationalPolynomial
-/// we fit. A RsmGrid uses the size of the grid to determine how many
-/// points it needs to calculate.
 //-----------------------------------------------------------------------
 
 void Rsm::fit(const ImageGroundConnection& Igc, double Min_height,
-	      double Max_height,
-	      int Nline, int Nsample, int Nheight,
-	      bool Skip_masked_point,
-	      bool Ignore_error)
+	      double Max_height)
 {
   rp->fit(Igc, *cconv, Min_height, Max_height, 0, Igc.number_line(),
-	  0, Igc.number_sample(), Nline, Nsample, Nheight, Skip_masked_point,
-	  Ignore_error);
+	  0, Igc.number_sample());
 }
 
 //-----------------------------------------------------------------------
@@ -223,4 +205,53 @@ void Rsm::print(std::ostream& Os) const
   opad.strict_sync();
   Os << "  Coordinate Converter:\n";
   opad << *cconv << "\n";
+}
+
+//-----------------------------------------------------------------------
+/// After fitting an Igc, it is good to see how accurate the Rsm
+/// captures the Igc. This function take an Igc, and fixed height,
+/// and generates a regular grid of the "True" line and sample. We
+/// then project this to the surface using the Igc, and then use the
+/// Rsm to calculate the line sample. If the Rsm is perfect, it would
+/// give the same values as "True".
+///
+/// This returns Nan where we can't calculate this (e.g., Igc fails,
+/// or outside of our RsmGrid).
+///
+/// This function could just be done in python, but we have it in C++
+/// for performance. We may want to adjust what we calculate as we get
+/// a better feel for how to characterize a Rsm. But this is our
+/// initial version of this.
+//-----------------------------------------------------------------------
+void Rsm::compare_igc
+(const ImageGroundConnection& Igc, int Number_line_spacing,
+ int Number_sample_spacing, double Height,
+ blitz::Array<double, 2>& True_line,
+ blitz::Array<double, 2>& True_sample,
+ blitz::Array<double, 2>& Calc_line,
+ blitz::Array<double, 2>& Calc_sample)
+  const
+{
+  True_line.resize(Number_line_spacing, Number_sample_spacing);
+  True_sample.resize(Number_line_spacing, Number_sample_spacing);
+  Calc_line.resize(Number_line_spacing, Number_sample_spacing);
+  Calc_sample.resize(Number_line_spacing, Number_sample_spacing);
+  for(int i = 0; i < Number_line_spacing; ++i) {
+    int ln = (int) floor(Igc.number_line() / double(Number_line_spacing) * i);
+    for(int j = 0; j < Number_sample_spacing; ++j) {
+      int smp = (int) floor(Igc.number_sample() / double(Number_sample_spacing)
+			    * j);
+      True_line(i,j) = ln;
+      True_sample(i,j) = smp;
+      try {
+	ImageCoordinate iccalc = 
+	  image_coordinate(*Igc.ground_coordinate_approx_height(ImageCoordinate(ln,smp), Height));
+	Calc_line(i,j) = iccalc.line;
+	Calc_sample(i, j) = iccalc.sample;
+      } catch(const ImageGroundConnectionFailed&) {
+	Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
+	Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
+      }
+    }
+  }
 }

@@ -47,10 +47,7 @@ public:
 		   const CoordinateConverter& Cconv,
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
-		   int Max_sample,
-		   int Nline = 20, int Nsample = 20, int Nheight = 20,
-		   bool Skip_masked_point = false,
-		   bool Ignore_error = false);
+		   int Max_sample);
 
 //-----------------------------------------------------------------------
 /// RsmRationalPolynomial we are using

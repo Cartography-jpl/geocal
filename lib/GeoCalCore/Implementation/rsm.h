@@ -33,15 +33,19 @@ public:
   (double X, double Y, double Z) const;
 
   void fit(const ImageGroundConnection& Igc, double Min_height,
-	   double Max_height,
-	   int Nline = 20, int Nsample = 20, int Nheight = 20,
-	   bool Skip_masked_point = false,
-	   bool Ignore_error = false);
+	   double Max_height);
   void print(std::ostream& Os) const;
 
   const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
   const boost::shared_ptr<CoordinateConverter> coordinate_converter() const
   { return cconv; }
+  void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
+		   int Number_sample_spacing, double Height,
+		   blitz::Array<double, 2>& True_line,
+		   blitz::Array<double, 2>& True_sample,
+		   blitz::Array<double, 2>& Calc_line,
+		   blitz::Array<double, 2>& Calc_sample)
+    const;
 private:
   boost::shared_ptr<RsmBase> rp;
   boost::shared_ptr<CoordinateConverter> cconv;

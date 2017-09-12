@@ -42,8 +42,9 @@ public:
 	   int Min_line, int Max_line, int Min_sample,
 	   int Max_sample,
 	   int Nline = 20, int Nsample = 20, int Nheight = 20,
+           int Second_pass = 20,
 	   bool Skip_masked_point = false,
-		   bool Ignore_error = false) = 0;
+	   bool Ignore_error = false) = 0;
   static blitz::Array<double, 4> generate_data
   (const ImageGroundConnection& Igc,
    const CoordinateConverter& Cconv,

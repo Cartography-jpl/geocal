@@ -16,8 +16,10 @@ namespace GeoCal {
 class RsmRationalPolynomial : public RsmBase {
 public:
   RsmRationalPolynomial(int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
-			int Dp_z, int N_max_order = -1, int D_max_order = -1);
-  RsmRationalPolynomial(const RsmRationalPolynomial& Rp);
+			int Dp_z, int N_max_order = -1, int D_max_order = -1,
+			int Nline_fit = 20, int Nsample_fit = 20,
+			int Nheight_fit = 20, int Nsecond_pass_fit = 20,
+			bool Ignore_igc_error_in_fit = false);
   virtual ~RsmRationalPolynomial() {}
   virtual void print(std::ostream& Os) const;
   virtual boost::shared_ptr<RsmBase> clone() const
@@ -43,13 +45,10 @@ public:
 		const std::vector<double>& Y,
 		const std::vector<double>& Z);
   virtual void fit(const ImageGroundConnection& Igc,
-	   const CoordinateConverter& Cconv,
-	   double Min_height, double Max_height,
-	   int Min_line, int Max_line, int Min_sample,
-	   int Max_sample,
-	   int Nline = 20, int Nsample = 20, int Nheight = 20,
-	   bool Skip_masked_point = false,
-	   bool Ignore_error = false);
+		   const CoordinateConverter& Cconv,
+		   double Min_height, double Max_height,
+		   int Min_line, int Max_line, int Min_sample,
+		   int Max_sample);
 
 //-----------------------------------------------------------------------
 /// Initial guess to use when inverting the ground to image
@@ -71,6 +70,69 @@ public:
 
   virtual double initial_guess_z(double Line, double Sample) const
   { return z_offset_;}
+
+//-----------------------------------------------------------------------
+/// Number of lines in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  int number_line_fit() const {return nline_fit_;}
+
+//-----------------------------------------------------------------------
+/// Number of lines in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  void number_line_fit(int V) { nline_fit_ = V;}
+
+//-----------------------------------------------------------------------
+/// Number of samples in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  int number_sample_fit() const {return nsample_fit_;}
+
+//-----------------------------------------------------------------------
+/// Number of samples in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  void number_sample_fit(int V) { nsample_fit_ = V;}
+  
+//-----------------------------------------------------------------------
+/// Number of heights in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  int number_height_fit() const {return nheight_fit_;}
+
+//-----------------------------------------------------------------------
+/// Number of heights in the grid we fit for.
+//-----------------------------------------------------------------------
+
+  void number_height_fit(int V) { nheight_fit_ = V;}
+
+//-----------------------------------------------------------------------
+/// Number of rows/col/depth in x,y,z grid we fit for in the second
+/// pass of generating fit data.
+//-----------------------------------------------------------------------
+
+  int number_second_pass_fit() const {return nsecond_pass_fit_;}
+
+//-----------------------------------------------------------------------
+/// Number of rows/col/depth in x,y,z grid we fit for in the second
+/// pass of generating fit data.
+//-----------------------------------------------------------------------
+
+  void number_second_pass_fit(int V) { nsecond_pass_fit_ = V;}
+
+//-----------------------------------------------------------------------
+/// If true, ignore igc errors in fit.
+//-----------------------------------------------------------------------
+  
+  bool ignore_igc_error_in_fit() const { return ignore_igc_error_in_fit_;}
+
+//-----------------------------------------------------------------------
+/// If true, ignore igc errors in fit.
+//-----------------------------------------------------------------------
+  
+  void ignore_igc_error_in_fit(bool V) { ignore_igc_error_in_fit_ = V;}
+  
   virtual blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
   double line_offset() const {return line_offset_;}
@@ -97,9 +159,12 @@ public:
   const RsmPolynomial& line_denominator() const {return line_den_;}
   const RsmPolynomial& sample_numerator() const {return sample_num_;}
   const RsmPolynomial& sample_denominator() const {return sample_den_;}
+  
 private:
   double line_offset_, line_scale_, sample_offset_, sample_scale_,
     x_offset_, x_scale_, y_offset_, y_scale_, z_offset_, z_scale_;
+  int nline_fit_, nsample_fit_, nheight_fit_, nsecond_pass_fit_;
+  bool ignore_igc_error_in_fit_;
   RsmPolynomial line_num_, line_den_, sample_num_, sample_den_;
   RsmRationalPolynomial() {}
   friend class boost::serialization::access;

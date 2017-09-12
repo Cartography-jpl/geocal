@@ -429,7 +429,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/rsm_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/local_rectangular_coordinate_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_image_ground_connection_test.cc
 
-EXTRA_DIST += @srcimplementationt@/rsm_fixture.h
+EXTRA_DIST += @srcimplementation@/rsm_fixture.h
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

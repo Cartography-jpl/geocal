@@ -182,6 +182,10 @@ void RsmLowOrderPolynomial::fit
  bool Skip_masked_point,
  bool Ignore_error)
 {
+  min_line_ = Min_line;
+  max_line_ = Max_line;
+  min_sample_ = Min_sample;
+  max_sample_ = Max_sample;
   std::vector<double> line, sample, x, y, z;
   for(int i = 0; i < Nline; ++i)
     for(int j = 0; j < Nsample; ++j)

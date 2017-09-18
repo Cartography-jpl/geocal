@@ -5357,6 +5357,32 @@ namespace swig {
 #include "coordinate_converter.h"  
 
 
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 SWIGINTERN int
 SWIG_AsVal_bool (PyObject *obj, bool *val)
 {
@@ -5369,6 +5395,19 @@ SWIG_AsVal_bool (PyObject *obj, bool *val)
   if (val) *val = r ? true : false;
   return SWIG_OK;
 }
+
+
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
   #define SWIG_From_double   PyFloat_FromDouble 
@@ -6171,6 +6210,134 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
+SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  bool arg4 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  GeoCal::RsmGrid *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_RsmGrid" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_RsmGrid" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_RsmGrid" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_RsmGrid" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  {
+    try {
+      result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::RsmGrid > *smartresult = result ? new boost::shared_ptr<  GeoCal::RsmGrid >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::RsmGrid *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_RsmGrid" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_RsmGrid" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_RsmGrid" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::RsmGrid > *smartresult = result ? new boost::shared_ptr<  GeoCal::RsmGrid >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_RsmGrid(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_RsmGrid",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_new_RsmGrid__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_new_RsmGrid__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_RsmGrid'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmGrid::RsmGrid(int,int,int,bool)\n"
+    "    GeoCal::RsmGrid::RsmGrid(int,int,int)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmGrid_fit_corr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
@@ -6299,7 +6466,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_in_error_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_error_in_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
   void *argp1 = 0 ;
@@ -6313,7 +6480,7 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_in_error_fit__SWIG_0(PyObject *
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid__v_ignore_igc_in_error_fit" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid__v_ignore_igc_error_in_fit" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
@@ -6326,7 +6493,7 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_in_error_fit__SWIG_0(PyObject *
   }
   {
     try {
-      result = (bool)((GeoCal::RsmGrid const *)arg1)->ignore_igc_in_error_fit();
+      result = (bool)((GeoCal::RsmGrid const *)arg1)->ignore_igc_error_in_fit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6340,7 +6507,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_in_error_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_error_in_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
   bool *arg2 = 0 ;
@@ -6357,7 +6524,7 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_in_error_fit__SWIG_1(PyObject *
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid__v_ignore_igc_in_error_fit" "', argument " "1"" of type '" "GeoCal::RsmGrid *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid__v_ignore_igc_error_in_fit" "', argument " "1"" of type '" "GeoCal::RsmGrid *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
@@ -6370,13 +6537,13 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_in_error_fit__SWIG_1(PyObject *
   }
   ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid__v_ignore_igc_in_error_fit" "', argument " "2"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid__v_ignore_igc_error_in_fit" "', argument " "2"" of type '" "bool""'");
   } 
   temp2 = static_cast< bool >(val2);
   arg2 = &temp2;
   {
     try {
-      (arg1)->ignore_igc_in_error_fit((bool const &)*arg2);
+      (arg1)->ignore_igc_error_in_fit((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6390,26 +6557,26 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_in_error_fit(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_error_in_fit(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmGrid__v_ignore_igc_in_error_fit",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmGrid__v_ignore_igc_error_in_fit",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_RsmGrid__v_ignore_igc_in_error_fit__SWIG_0(self, argc, argv);
+    return _wrap_RsmGrid__v_ignore_igc_error_in_fit__SWIG_0(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_RsmGrid__v_ignore_igc_in_error_fit__SWIG_1(self, argc, argv);
+    return _wrap_RsmGrid__v_ignore_igc_error_in_fit__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmGrid__v_ignore_igc_in_error_fit'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmGrid__v_ignore_igc_error_in_fit'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RsmGrid::ignore_igc_in_error_fit() const\n"
-    "    GeoCal::RsmGrid::ignore_igc_in_error_fit(bool const &)\n");
+    "    GeoCal::RsmGrid::ignore_igc_error_in_fit() const\n"
+    "    GeoCal::RsmGrid::ignore_igc_error_in_fit(bool const &)\n");
   return 0;
 }
 
@@ -6964,6 +7131,10 @@ SWIGINTERN PyObject *RsmGrid_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *RsmGrid_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -6985,13 +7156,22 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
+	 { (char *)"new_RsmGrid", _wrap_new_RsmGrid, METH_VARARGS, (char *)"\n"
+		"\n"
+		"GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false)\n"
+		"\n"
+		""},
 	 { (char *)"RsmGrid_fit_corr", _wrap_RsmGrid_fit_corr, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void RsmGrid::fit_corr(const ImageGroundConnection &IGc, const CoordinateConverter &Cconv,\n"
 		"const RsmBase &Rb)\n"
 		"Generate a RsmGrid that gives a correction to another RsmBase. \n"
 		""},
-	 { (char *)"RsmGrid__v_ignore_igc_in_error_fit", _wrap_RsmGrid__v_ignore_igc_in_error_fit, METH_VARARGS, NULL},
+	 { (char *)"RsmGrid__v_ignore_igc_error_in_fit", _wrap_RsmGrid__v_ignore_igc_error_in_fit, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmGrid::ignore_igc_error_in_fit(bool V)\n"
+		"If true, ignore igc errors in fit. \n"
+		""},
 	 { (char *)"RsmGrid__v_line_grid", (PyCFunction)_wrap_RsmGrid__v_line_grid, METH_O, (char *)"\n"
 		"\n"
 		"const blitz::Array<double, 3>& GeoCal::RsmGrid::line_grid() const\n"
@@ -7053,6 +7233,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"RsmGrid_swigregister", RsmGrid_swigregister, METH_VARARGS, NULL},
+	 { (char *)"RsmGrid_swiginit", RsmGrid_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

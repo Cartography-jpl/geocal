@@ -7785,7 +7785,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
   void *argp1 = 0 ;
@@ -7799,7 +7799,7 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit__SWI
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_ignore_igc_in_error_fit" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_ignore_igc_error_in_fit" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
@@ -7812,7 +7812,7 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit__SWI
   }
   {
     try {
-      result = (bool)((GeoCal::RsmLowOrderPolynomial const *)arg1)->ignore_igc_in_error_fit();
+      result = (bool)((GeoCal::RsmLowOrderPolynomial const *)arg1)->ignore_igc_error_in_fit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7826,7 +7826,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
   bool *arg2 = 0 ;
@@ -7843,7 +7843,7 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit__SWI
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_ignore_igc_in_error_fit" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_ignore_igc_error_in_fit" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
@@ -7856,13 +7856,13 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit__SWI
   }
   ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmLowOrderPolynomial__v_ignore_igc_in_error_fit" "', argument " "2"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmLowOrderPolynomial__v_ignore_igc_error_in_fit" "', argument " "2"" of type '" "bool""'");
   } 
   temp2 = static_cast< bool >(val2);
   arg2 = &temp2;
   {
     try {
-      (arg1)->ignore_igc_in_error_fit((bool const &)*arg2);
+      (arg1)->ignore_igc_error_in_fit((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7876,26 +7876,26 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmLowOrderPolynomial__v_ignore_igc_in_error_fit",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmLowOrderPolynomial__v_ignore_igc_error_in_fit",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit__SWIG_0(self, argc, argv);
+    return _wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit__SWIG_0(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit__SWIG_1(self, argc, argv);
+    return _wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmLowOrderPolynomial__v_ignore_igc_in_error_fit'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmLowOrderPolynomial__v_ignore_igc_error_in_fit'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RsmLowOrderPolynomial::ignore_igc_in_error_fit() const\n"
-    "    GeoCal::RsmLowOrderPolynomial::ignore_igc_in_error_fit(bool const &)\n");
+    "    GeoCal::RsmLowOrderPolynomial::ignore_igc_error_in_fit() const\n"
+    "    GeoCal::RsmLowOrderPolynomial::ignore_igc_error_in_fit(bool const &)\n");
   return 0;
 }
 
@@ -8143,7 +8143,11 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::RsmLowOrderPolynomial::number_height_fit(int V)\n"
 		"Number of heights in the grid we fit for. \n"
 		""},
-	 { (char *)"RsmLowOrderPolynomial__v_ignore_igc_in_error_fit", _wrap_RsmLowOrderPolynomial__v_ignore_igc_in_error_fit, METH_VARARGS, NULL},
+	 { (char *)"RsmLowOrderPolynomial__v_ignore_igc_error_in_fit", _wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmLowOrderPolynomial::ignore_igc_error_in_fit(bool V)\n"
+		"If true, ignore igc errors in fit. \n"
+		""},
 	 { (char *)"RsmLowOrderPolynomial__v_parameter_line", (PyCFunction)_wrap_RsmLowOrderPolynomial__v_parameter_line, METH_O, (char *)"\n"
 		"\n"
 		"blitz::Array<double, 1> GeoCal::RsmLowOrderPolynomial::parameter_line() const\n"

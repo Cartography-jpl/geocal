@@ -307,13 +307,22 @@ class RsmLowOrderPolynomial(geocal_swig.generic_object.GenericObject):
       self._v_number_height_fit(value)
 
 
-    @property
-    def ignore_igc_in_error_fit(self):
-        return self._v_ignore_igc_in_error_fit()
+    def _v_ignore_igc_error_in_fit(self, *args):
+        """
 
-    @ignore_igc_in_error_fit.setter
-    def ignore_igc_in_error_fit(self, value):
-      self._v_ignore_igc_in_error_fit(value)
+        void GeoCal::RsmLowOrderPolynomial::ignore_igc_error_in_fit(bool V)
+        If true, ignore igc errors in fit. 
+        """
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial__v_ignore_igc_error_in_fit(self, *args)
+
+
+    @property
+    def ignore_igc_error_in_fit(self):
+        return self._v_ignore_igc_error_in_fit()
+
+    @ignore_igc_error_in_fit.setter
+    def ignore_igc_error_in_fit(self, value):
+      self._v_ignore_igc_error_in_fit(value)
 
 
     def _v_parameter_line(self):
@@ -355,7 +364,7 @@ RsmLowOrderPolynomial.fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowO
 RsmLowOrderPolynomial._v_number_line_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_line_fit, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_number_sample_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_sample_fit, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_number_height_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_height_fit, None, RsmLowOrderPolynomial)
-RsmLowOrderPolynomial._v_ignore_igc_in_error_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_ignore_igc_in_error_fit, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_ignore_igc_error_in_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_ignore_igc_error_in_fit, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_parameter_line = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_parameter_line, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_parameter_sample = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_parameter_sample, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial_swigregister = _rsm_low_order_polynomial.RsmLowOrderPolynomial_swigregister

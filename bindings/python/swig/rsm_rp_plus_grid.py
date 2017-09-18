@@ -197,10 +197,16 @@ class RsmRpPlusGrid(geocal_swig.rsm_base.RsmBase):
     C++ includes: rsm_rp_plus_grid.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, Rp, Rgrid):
+        """
+
+        GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmRationalPolynomial > &Rp, const
+        boost::shared_ptr< RsmGrid > &Rgrid)
+
+        """
+        _rsm_rp_plus_grid.RsmRpPlusGrid_swiginit(self, _rsm_rp_plus_grid.new_RsmRpPlusGrid(Rp, Rgrid))
 
     def _v_rational_polynomial(self):
         """

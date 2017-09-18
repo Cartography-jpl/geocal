@@ -251,7 +251,7 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
         return _rsm_base.RsmBase_initial_guess_z(self, Line, Sample)
 
 
-    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline=20, Nsample=20, Nheight=20, Second_pass=20, Skip_masked_point=False, Ignore_error=False):
+    def fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample):
         """
 
         virtual void GeoCal::RsmBase::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
@@ -262,7 +262,7 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
         To support sections, you can pass in a restricted number of
         line/samples to fit over. 
         """
-        return _rsm_base.RsmBase_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample, Nline, Nsample, Nheight, Second_pass, Skip_masked_point, Ignore_error)
+        return _rsm_base.RsmBase_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample)
 
 
     def generate_data(Igc, Cconv, Min_x, Max_x, Min_y, Max_y, Min_z, Max_z, Numx, Numy, Numz):

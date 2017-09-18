@@ -200,10 +200,21 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
     C++ includes: rsm_multi_section.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, Nline, Nsamp, Nrow_section, Ncol_section, Rsm_prototype, Border=5):
+        """
+
+        RsmMultiSection::RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, const
+        RsmBase &Rsm_prototype, int Border=5)
+        Constructor.
+
+        The RsmRationalPolynomial tends to extrapolate badly. Because the low
+        order polynomial is only approximately correct, we add a little bit of
+        a border to each underlying RsmRationalPolynomial so we can avoid
+        extrapolating. 
+        """
+        _rsm_multi_section.RsmMultiSection_swiginit(self, _rsm_multi_section.new_RsmMultiSection(Nline, Nsamp, Nrow_section, Ncol_section, Rsm_prototype, Border))
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)

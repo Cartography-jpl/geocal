@@ -22,7 +22,10 @@ namespace GeoCal {
 class RsmRationalPolynomial : public RsmBase {
 public:
   RsmRationalPolynomial(int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
-			int Dp_z, int N_max_order = -1, int D_max_order = -1);
+			int Dp_z, int N_max_order = -1, int D_max_order = -1,
+			int Nline_fit = 20, int Nsample_fit = 20,
+			int Nheight_fit = 20, int Nsecond_pass_fit = 20,
+			bool Ignore_igc_error_in_fit = false);
   std::string print_to_string() const;
   ImageCoordinate image_coordinate(double X, double Y, double Z) const;
   blitz::Array<double, 2> image_coordinate(const blitz::Array<double, 1>& X,
@@ -53,7 +56,7 @@ public:
   %python_attribute_with_set(number_sample_fit, int);
   %python_attribute_with_set(number_height_fit, int);
   %python_attribute_with_set(number_second_pass_fit, int);
-  %python_attribute_with_set(ignore_igc_in_error_fit, bool);
+  %python_attribute_with_set(ignore_igc_error_in_fit, bool);
   %python_attribute(line_offset, double);
   %python_attribute(line_scale, double);
   %python_attribute(sample_offset, double);

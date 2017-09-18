@@ -42,7 +42,7 @@ public:
   %python_attribute_with_set(number_line_fit, int);
   %python_attribute_with_set(number_sample_fit, int);
   %python_attribute_with_set(number_height_fit, int);
-  %python_attribute_with_set(ignore_igc_in_error_fit, bool);
+  %python_attribute_with_set(ignore_igc_error_in_fit, bool);
   %python_attribute(parameter_line, blitz::Array<double, 1>);
   %python_attribute(parameter_sample, blitz::Array<double, 1>);
   %pickle_serialization()

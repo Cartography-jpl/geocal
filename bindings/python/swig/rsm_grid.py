@@ -211,10 +211,15 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
     C++ includes: rsm_grid.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, N_x, N_y, N_z, Ignore_igc_error_in_fit=False):
+        """
+
+        GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false)
+
+        """
+        _rsm_grid.RsmGrid_swiginit(self, _rsm_grid.new_RsmGrid(N_x, N_y, N_z, Ignore_igc_error_in_fit))
 
     def fit_corr(self, IGc, Cconv, Rb):
         """
@@ -226,13 +231,22 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         return _rsm_grid.RsmGrid_fit_corr(self, IGc, Cconv, Rb)
 
 
-    @property
-    def ignore_igc_in_error_fit(self):
-        return self._v_ignore_igc_in_error_fit()
+    def _v_ignore_igc_error_in_fit(self, *args):
+        """
 
-    @ignore_igc_in_error_fit.setter
-    def ignore_igc_in_error_fit(self, value):
-      self._v_ignore_igc_in_error_fit(value)
+        void GeoCal::RsmGrid::ignore_igc_error_in_fit(bool V)
+        If true, ignore igc errors in fit. 
+        """
+        return _rsm_grid.RsmGrid__v_ignore_igc_error_in_fit(self, *args)
+
+
+    @property
+    def ignore_igc_error_in_fit(self):
+        return self._v_ignore_igc_error_in_fit()
+
+    @ignore_igc_error_in_fit.setter
+    def ignore_igc_error_in_fit(self, value):
+      self._v_ignore_igc_error_in_fit(value)
 
 
     def _v_line_grid(self):
@@ -394,7 +408,7 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
 
     __swig_destroy__ = _rsm_grid.delete_RsmGrid
 RsmGrid.fit_corr = new_instancemethod(_rsm_grid.RsmGrid_fit_corr, None, RsmGrid)
-RsmGrid._v_ignore_igc_in_error_fit = new_instancemethod(_rsm_grid.RsmGrid__v_ignore_igc_in_error_fit, None, RsmGrid)
+RsmGrid._v_ignore_igc_error_in_fit = new_instancemethod(_rsm_grid.RsmGrid__v_ignore_igc_error_in_fit, None, RsmGrid)
 RsmGrid._v_line_grid = new_instancemethod(_rsm_grid.RsmGrid__v_line_grid, None, RsmGrid)
 RsmGrid._v_sample_grid = new_instancemethod(_rsm_grid.RsmGrid__v_sample_grid, None, RsmGrid)
 RsmGrid._v_number_x = new_instancemethod(_rsm_grid.RsmGrid__v_number_x, None, RsmGrid)

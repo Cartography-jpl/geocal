@@ -27,7 +27,7 @@ public:
   void fit_corr(const ImageGroundConnection& IGc,
 		const CoordinateConverter& Cconv,
 		const RsmBase& Rb);
-  %python_attribute_with_set(ignore_igc_in_error_fit, bool);
+  %python_attribute_with_set(ignore_igc_error_in_fit, bool);
   %python_attribute(line_grid, blitz::Array<double, 3>);
   %python_attribute(sample_grid, blitz::Array<double, 3>);
   %python_attribute(number_x, int);

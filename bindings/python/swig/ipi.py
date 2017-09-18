@@ -223,6 +223,15 @@ class Ipi(geocal_swig.generic_object.GenericObject):
     comparing the collinearity equation results to a user supplied
     tolerance.
 
+    We also allow a "extended" camera (i.e., frame coordinate outside of
+    the range of the camera). This is useful for edge of images etc, so we
+    don't have abrupt transitions. But we can get false solutions with
+    really large coordinate - e.g., imagine two lines at a slight angle to
+    each other than intersect at some point outside of the image. We pass
+    in a "max_frame_extend" value to limit how far outside the camera we
+    look for a solution. This can be a large value to skip this limit, or
+    set to 0 to not allow any extension at all.
+
     We find all the solutions to the collinearity equation, in the range
     Tmin to Tmax. The solutions found must be seperated by a time larger
     then Root_min_separation.
@@ -249,7 +258,7 @@ class Ipi(geocal_swig.generic_object.GenericObject):
         Camera > &Cam, int Band, Time Tmin, Time Tmax, const
         boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),
         double Local_time_window_size=5.0, double Root_min_separation=30.0,
-        double Time_tolerance=1e-6)
+        double Time_tolerance=1e-6, double Max_frame_extend=1000)
         Constructor.
 
         If you only want to get the Time from the Ipi and not ImageCoordinate,
@@ -500,6 +509,23 @@ class Ipi(geocal_swig.generic_object.GenericObject):
         return self._v_time_tolerance()
 
 
+    def _v_max_frame_extend(self):
+        """
+
+        double GeoCal::Ipi::max_frame_extend() const
+        Maximum amount we allow a Ipi solution to be outside the edged of the
+        camera.
+
+        See class description for discussion of this. 
+        """
+        return _ipi.Ipi__v_max_frame_extend(self)
+
+
+    @property
+    def max_frame_extend(self):
+        return self._v_max_frame_extend()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -521,6 +547,7 @@ Ipi._v_max_time = new_instancemethod(_ipi.Ipi__v_max_time, None, Ipi)
 Ipi._v_local_time_window_size = new_instancemethod(_ipi.Ipi__v_local_time_window_size, None, Ipi)
 Ipi._v_root_min_separation = new_instancemethod(_ipi.Ipi__v_root_min_separation, None, Ipi)
 Ipi._v_time_tolerance = new_instancemethod(_ipi.Ipi__v_time_tolerance, None, Ipi)
+Ipi._v_max_frame_extend = new_instancemethod(_ipi.Ipi__v_max_frame_extend, None, Ipi)
 Ipi_swigregister = _ipi.Ipi_swigregister
 Ipi_swigregister(Ipi)
 

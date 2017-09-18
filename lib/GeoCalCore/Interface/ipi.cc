@@ -21,6 +21,10 @@ void Ipi::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(root_min_separation)
     & GEOCAL_NVP_(time_tolerance);
   last_time = min_time_;
+  // Older version didn't have max_frame_extend_. The default was to 
+  // not check this.
+  if(version > 0)
+    ar & GEOCAL_NVP_(max_frame_extend);
 }
 
 GEOCAL_IMPLEMENT(Ipi);
@@ -43,11 +47,12 @@ Ipi::Ipi(const boost::shared_ptr<Orbit>& Orb, const
 	 Time Tmin, Time Tmax, const boost::shared_ptr<TimeTable>& Tt,
 	 double Local_time_window_size,
 	 double Root_min_separation, 
-	 double Time_tolerance)
+	 double Time_tolerance, double Max_frame_extend)
   : orb(Orb), cam(Cam), band_(Band), tt(Tt), min_time_(Tmin), max_time_(Tmax), 
     last_time(Tmin), local_time_window_size_(Local_time_window_size),
     root_min_separation_(Root_min_separation), 
-    time_tolerance_(Time_tolerance)
+    time_tolerance_(Time_tolerance),
+    max_frame_extend_(Max_frame_extend)
 {
   if(Cam->number_line(Band) != 1)
     throw Exception("I think we only want to do an IPI with a pushbroom camera with 1 line. If this is wrong, you can remove this exception");
@@ -300,11 +305,17 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 //-----------------------------------------------------------------------
 
   double true_sol = 0;
+  FrameCoordinate fc_sol;
   int num_sol = 0;
   BOOST_FOREACH(double x, sol) {
     if(!eq.false_root(x)) {
-      num_sol++;
-      true_sol = x;
+      FrameCoordinate fc = eq.frame_coordinate(x);
+      if(fc.sample >= -max_frame_extend_ &&
+	 fc.sample <= cam->number_sample(band_) + max_frame_extend_) {
+	num_sol++;
+	true_sol = x;
+	fc_sol = fc;
+      }
     }
   }
 
@@ -322,8 +333,13 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 		    root_min_separation_, time_tolerance_);
     BOOST_FOREACH(double x, sol) {
       if(!eq.false_root(x)) {
-	num_sol++;
-	true_sol = x;
+	FrameCoordinate fc = eq.frame_coordinate(x);
+	if(fc.sample >= -max_frame_extend_ &&
+	   fc.sample <= cam->number_sample(band_) + max_frame_extend_) {
+	  num_sol++;
+	  true_sol = x;
+	  fc_sol = fc;
+	}
       }
     }
   }
@@ -334,7 +350,7 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
     Success = true;
     Tres = min_time_ + true_sol;
     last_time = Tres;
-    Fres = eq.frame_coordinate(true_sol);
+    Fres = fc_sol;
   } else {
     Success = false;
   }

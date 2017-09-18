@@ -29,7 +29,7 @@ public:
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
       double Local_time_window_size = 5.0,
       double Root_min_separation = 30.0, 
-      double Time_tolerance = 1e-6);
+      double Time_tolerance = 1e-6, double Max_frame_extend=1000);
   void image_coordinate(const GroundCoordinate& Gp, ImageCoordinate &OUTPUT,
 			bool &OUTPUT) const;
   void image_coordinate_with_derivative(const GroundCoordinate& Gp, ImageCoordinateWithDerivative &OUTPUT,
@@ -72,6 +72,7 @@ public:
   %python_attribute(local_time_window_size, double)
   %python_attribute(root_min_separation, double)
   %python_attribute(time_tolerance, double)
+  %python_attribute(max_frame_extend, double)
   %pickle_serialization();
 };
 }

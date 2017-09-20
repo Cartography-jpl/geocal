@@ -344,8 +344,10 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
     }
   }
 
-  if(num_sol > 1)
-    throw Exception("Have more than one solution to ipi equations");
+  // Suppose this is actually ok, we just don't have a solution
+  // if(num_sol > 1) {
+  //   throw Exception("Have more than one solution to ipi equations");
+  //}
   if(num_sol ==1) {
     Success = true;
     Tres = min_time_ + true_sol;

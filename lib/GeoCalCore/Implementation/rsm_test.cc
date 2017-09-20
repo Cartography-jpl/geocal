@@ -76,8 +76,8 @@ BOOST_AUTO_TEST_CASE(serialize)
 BOOST_AUTO_TEST_CASE(mars_example)
 {
 // Don't normally run, this depends on specific test data we have on
-// the system
-  //return;
+// python system
+  return;
   boost::shared_ptr<ImageGroundConnection> igc =
     serialize_read<ImageGroundConnection>("/home/smyth/Local/MarsRsm/ctx1_igc.xml");
   Rsm r(boost::make_shared<RsmRpPlusGrid>

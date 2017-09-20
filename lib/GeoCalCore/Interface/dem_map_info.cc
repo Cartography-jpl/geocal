@@ -175,5 +175,5 @@ void DemMapInfo::initialize(const boost::shared_ptr<Datum>& D,
   datum_ = D;
   map_info_ = M;
   outside_dem_is_error_ = Outside_dem_is_error;
-  naif_code_ = Naif_code;
+  naif_code_ = M.ground_coordinate(0,0)->naif_code();
 }

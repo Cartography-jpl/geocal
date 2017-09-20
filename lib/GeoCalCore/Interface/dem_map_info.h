@@ -92,9 +92,8 @@ protected:
 //-----------------------------------------------------------------------
 
   DemMapInfo(const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-	     bool Outside_dem_is_error = false,
-	     int Naif_code = Geodetic::EARTH_NAIF_CODE)
-  { initialize(D, M, Outside_dem_is_error, Naif_code); }
+	     bool Outside_dem_is_error = false)
+  { initialize(D, M, Outside_dem_is_error); }
 
 //-----------------------------------------------------------------------
 /// Return height in meters relative to datum(). Note that the call is

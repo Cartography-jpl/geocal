@@ -9,11 +9,54 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RsmGrid::serialize(Archive & ar, const unsigned int version)
+void RsmGrid::load(Archive & ar, const unsigned int version)
 {
+  // Unfortunately boost serialization doesn't support NaN in XML
+  // format (see
+  // https://stackoverflow.com/questions/28696663/boost-serialization-1-5-5-crash-when-meets-nan-and-inf)
+  // So we map line and sample using a "special" value to indicate
+  // NaN.
+  blitz::Array<double, 3> line_no_nan;
+  blitz::Array<double, 3> sample_no_nan;
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase)
-    & GEOCAL_NVP_(line)
-    & GEOCAL_NVP_(sample)
+    & GEOCAL_NVP2("line", line_no_nan)
+    & GEOCAL_NVP2("sample", sample_no_nan)
+    & GEOCAL_NVP_(x_start)
+    & GEOCAL_NVP_(y_start)
+    & GEOCAL_NVP_(z_start)
+    & GEOCAL_NVP_(x_delta)
+    & GEOCAL_NVP_(y_delta)
+    & GEOCAL_NVP_(z_delta)
+    & GEOCAL_NVP_(min_line)
+    & GEOCAL_NVP_(max_line)
+    & GEOCAL_NVP_(min_sample)
+    & GEOCAL_NVP_(max_sample)
+    & GEOCAL_NVP_(ignore_igc_error_in_fit);
+  line_.resize(line_no_nan.shape());
+  sample_.resize(sample_no_nan.shape());
+  line_ = where(line_no_nan < -9e19,
+		std::numeric_limits<double>::quiet_NaN(),
+		line_no_nan);
+  sample_ = where(sample_no_nan < -9e19,
+		  std::numeric_limits<double>::quiet_NaN(),
+		  sample_no_nan);
+}
+
+template<class Archive>
+void RsmGrid::save(Archive & ar, const unsigned int version) const
+{
+  // Unfortunately boost serialization doesn't support NaN in XML
+  // format (see
+  // https://stackoverflow.com/questions/28696663/boost-serialization-1-5-5-crash-when-meets-nan-and-inf)
+  // So we map line and sample using a "special" value to indicate
+  // NaN.
+  blitz::Array<double, 3> line_no_nan(line_.shape());
+  blitz::Array<double, 3> sample_no_nan(sample_.shape());
+  line_no_nan = where(blitz_isnan(line_), -1e20, line_);
+  sample_no_nan = where(blitz_isnan(sample_), -1e20, sample_);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase)
+    & GEOCAL_NVP2("line", line_no_nan)
+    & GEOCAL_NVP2("sample", sample_no_nan)
     & GEOCAL_NVP_(x_start)
     & GEOCAL_NVP_(y_start)
     & GEOCAL_NVP_(z_start)
@@ -27,8 +70,18 @@ void RsmGrid::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(ignore_igc_error_in_fit);
 }
 
-GEOCAL_IMPLEMENT(RsmGrid);
+GEOCAL_SPLIT_IMPLEMENT(RsmGrid);
 #endif
+
+// Have handling for NaN in interpolation
+inline double interp_nan(double x1, double x2, double delta)
+{
+  if(isnan(x1))
+    return x2;
+  if(isnan(x2))
+    return x1;
+  return x1 + (x2 - x1) * delta;
+}
 
 //-----------------------------------------------------------------------
 /// Apply the grid to the given X, Y, and Z value.
@@ -57,21 +110,20 @@ ImageCoordinate RsmGrid::image_coordinate
     xinter_sample[2][2];
   for(int i1 = 0; i1 < 2; ++i1)
     for(int i2 = 0; i2 < 2; ++i2) {
-      xinter_line[i1][i2] = line_(i,j+i1,k+i2) +
-	(line_(i+1,j+i1,k+i2)-line_(i,j+i1,k+i2)) * i_delta;
-      xinter_sample[i1][i2] = sample_(i,j+i1,k+i2) +
-	(sample_(i+1,j+i1,k+i2)-sample_(i,j+i1,k+i2)) * i_delta;
+      xinter_line[i1][i2] =
+	interp_nan(line_(i,j+i1,k+i2), line_(i+1,j+i1,k+i2), i_delta);
+      xinter_sample[i1][i2] =
+	interp_nan(sample_(i,j+i1,k+i2), sample_(i+1,j+i1,k+i2), i_delta);
     }
   double yinter_line[2], yinter_sample[2];
   for(int i1 = 0; i1 < 2; ++i1) {
-    yinter_line[i1] = xinter_line[0][i1] +
-      (xinter_line[1][i1]-xinter_line[0][i1])*j_delta;
-    yinter_sample[i1] = xinter_sample[0][i1] +
-      (xinter_sample[1][i1]-xinter_sample[0][i1])*j_delta;
+    yinter_line[i1] =
+      interp_nan(xinter_line[0][i1], xinter_line[1][i1], j_delta);
+    yinter_sample[i1] = 
+      interp_nan(xinter_sample[0][i1], xinter_sample[1][i1], j_delta);
   }
-  double ln = yinter_line[0] + (yinter_line[1]-yinter_line[0])*k_delta;
-  double smp = yinter_sample[0] +
-    (yinter_sample[1]-yinter_sample[0])*k_delta;
+  double ln = interp_nan(yinter_line[0], yinter_line[1], k_delta);
+  double smp = interp_nan(yinter_sample[0], yinter_sample[1], k_delta);
 
   // Bunch of diagnostic messages. Leave stubbed out for now, we may
   // want this when we go to the lagrange interpolation to debug

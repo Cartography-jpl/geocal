@@ -155,6 +155,8 @@ geocalinc_HEADERS+= @srcimplementation@/local_rectangular_coordinate.h
 libgeocal_la_SOURCES+= @srcimplementation@/local_rectangular_coordinate.cc
 geocalinc_HEADERS+= @srcimplementation@/rsm_image_ground_connection.h
 libgeocal_la_SOURCES+= @srcimplementation@/rsm_image_ground_connection.cc
+libgeocal_la_SOURCES+= @srcimplementation@/mola_dem_file.cc
+geocalinc_HEADERS+= @srcimplementation@/mola_dem_file.h
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -368,6 +370,8 @@ SWIG_SRC += @swigsrc@/local_rectangular_coordinate_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/local_rectangular_coordinate.i
 SWIG_SRC += @swigsrc@/rsm_image_ground_connection_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/rsm_image_ground_connection.i
+SWIG_SRC += @swigsrc@/mola_dem_file_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/mola_dem_file.i
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
@@ -428,6 +432,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/rsm_multi_section_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/local_rectangular_coordinate_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_image_ground_connection_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/mola_dem_file_test.cc
 
 EXTRA_DIST += @srcimplementation@/rsm_fixture.h
 

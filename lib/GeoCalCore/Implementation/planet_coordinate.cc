@@ -264,14 +264,14 @@ Planetocentric::Planetocentric(const GroundCoordinate& Gc)
   lon_ = mf.longitude();
   lat_ = mf.latitude();
   height_ellipsoid_ = 
-    norm(mf.position) - planet_radius(lat_ * Constant::deg_to_rad);
+    norm(mf.position) - planet_radius();
 }
 
 boost::shared_ptr<CartesianFixed> Planetocentric::convert_to_cf() const
 {
   double lat = lat_ * Constant::deg_to_rad;
   double lon = lon_ * Constant::deg_to_rad;
-  double r = planet_radius(lat) + height_ellipsoid_;
+  double r = planet_radius_lat(lat) + height_ellipsoid_;
   return boost::shared_ptr<CartesianFixed>
     (new PlanetFixed(r * cos(lat) * cos(lon),
 		     r * cos(lat) * sin(lon),

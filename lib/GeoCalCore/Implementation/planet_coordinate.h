@@ -306,6 +306,13 @@ public:
 //-----------------------------------------------------------------------
 
   virtual double longitude() const {return lon_;}
+
+//-----------------------------------------------------------------------
+/// Radius of planet in meters at the point
+//-----------------------------------------------------------------------
+
+  double planet_radius() const
+  {return planet_radius_lat(lat_ * Constant::deg_to_rad); }
 private:
   double lat_;			///< Latitude, in degrees.
   double lon_;			///< Longitude, in degrees.
@@ -318,7 +325,7 @@ private:
 /// radians, since we've already converted.
 //-----------------------------------------------------------------------
 
-  double planet_radius(double Latitude_radians) const
+  double planet_radius_lat(double Latitude_radians) const
   {
     double clat = cos(Latitude_radians);
     return PlanetConstant::b(naif_code_) / 

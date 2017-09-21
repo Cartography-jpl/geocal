@@ -1,173 +1,126 @@
 from .nitf_tre import *
-from .nitf_tre_rsmida import *
+from .nitf_tre_rsmapa import *
 from test_support import *
 import io, six
 
-def test_tre_rsmida():
-    t = TreRSMIDA()
+def test_tre_rsmapa():
+    t = TreRSMAPA()
     t.iid = 'abc'
     t.edition = 'abc'
-    t.isid = 'abc'
-    t.sid = 'abc'
-    t.stid = 'abc'
-    t.year = 2017
-    t.month=12
-    t.day = 1
-    t.hour = 10
-    t.minute = 59
-    t.second = 12.5
-    t.grndd = 'G'
-    t.xuor = 1234.567890
-    t.yuor = 1234.567890
-    t.zuor = 1234.567890
-    t.xuxr = 0.1234567890
-    t.xuyr = 0.1234567890
-    t.xuzr = 0.1234567890
-    t.yuxr = 0.1234567890
-    t.yuyr = 0.1234567890
-    t.yuzr = 0.1234567890
-    t.zuxr = 0.1234567890
-    t.zuyr = 0.1234567890
-    t.zuzr = 0.1234567890
-    t.v1x = 0.1234567890
-    t.v1y = 0.1234567890
-    t.v1z = 0.1234567890
-    t.v2x = 0.1234567890
-    t.v2y = 0.1234567890
-    t.v2z = 0.1234567890
-    t.v3x = 0.1234567890
-    t.v3y = 0.1234567890
-    t.v3z = 0.1234567890
-    t.v4x = 0.1234567890
-    t.v4y = 0.1234567890
-    t.v4z = 0.1234567890
-    t.v5x = 0.1234567890
-    t.v5y = 0.1234567890
-    t.v5z = 0.1234567890
-    t.v6x = 0.1234567890
-    t.v6y = 0.1234567890
-    t.v6z = 0.1234567890
-    t.v7x = 0.1234567890
-    t.v7y = 0.1234567890
-    t.v7z = 0.1234567890
-    t.v8x = 0.1234567890
-    t.v8y = 0.1234567890
-    t.v8z = 0.1234567890
-    t.grpx = 0.1234567890
-    t.grpy = 0.1234567890
-    t.grpz = 0.1234567890
-    t.fullr = 1234567
-    t.fullc = 1234567
-    t.minr = 1234567
-    t.maxr = 1234567
-    t.minc = 1234567
-    t.maxc = 1234567
-    t.ie0 = 0.1234567890
-    t.ier = 0.1234567890
-    t.iec = 0.1234567890
-    t.ierr = 0.1234567890
-    t.ierc = 0.1234567890
-    t.iecc = 0.1234567890
-    t.ia0 = 0.1234567890
-    t.iar = 0.1234567890
-    t.iac = 0.1234567890
-    t.iarr = 0.1234567890
-    t.iarc = 0.1234567890
-    t.iacc = 0.1234567890
-    t.spx = 0.1234567890
-    t.svx = 0.1234567890
-    t.sax = 0.1234567890
-    t.spy = 0.1234567890
-    t.svy = 0.1234567890
-    t.say = 0.1234567890
-    t.spz = 0.1234567890
-    t.svz = 0.1234567890
-    t.saz = 0.1234567890
+    t.tid = 'cde'
+    t.npar = 36
+    t.xuol = 0.1234567890
+    t.yuol = 0.1234567890
+    t.zuol = 0.1234567890
+    t.xuxl = 0.1234567890
+    t.xuyl = 0.1234567890
+    t.xuzl = 0.1234567890
+    t.yuxl = 0.1234567890
+    t.yuyl = 0.1234567890
+    t.yuzl = 0.1234567890
+    t.zuxl = 0.1234567890
+    t.zuyl = 0.1234567890
+    t.zuzl = 0.1234567890
+    t.ir0 = 1
+    t.irx = 1
+    t.iry = 1
+    t.irz = 1
+    t.irxx = 1
+    t.irxy = 1
+    t.irxz = 1
+    t.iryy = 1
+    t.iryz = 1
+    t.irzz = 1
+    t.ic0 = 1
+    t.icx = 1
+    t.icy = 1
+    t.icz = 1
+    t.icxx = 1
+    t.icxy = 1
+    t.icxz = 1
+    t.icyy = 1
+    t.icyz = 1
+    t.iczz = 1
+    t.gx0 = 1
+    t.gy0 = 1
+    t.gz0 = 1
+    t.gxr = 1
+    t.gyr = 1
+    t.gzr = 1
+    t.gs = 1
+    t.gxx = 1
+    t.gxy = 1
+    t.gxz = 1
+    t.gyx = 1
+    t.gyy = 1
+    t.gyz = 1
+    t.gzx = 1
+    t.gzy = 1
+    t.gzz = 1
+    for a in range (t.npar):
+        t.parval[a] = 0.01*a
+
     fh = six.BytesIO()
     t.write_to_file(fh)
     print(fh.getvalue())
 
-    assert fh.getvalue() == b'RSMIDA01628abc                                                                             abc                                     abc                                     abc                                     abc                                     20171201105912.500000                                                          G 1.23456789000000E+03 1.23456789000000E+03 1.23456789000000E+03 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01012345670123456701234567012345670123456701234567 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01'
+    assert fh.getvalue() == b'RSMAPA01242abc                                                                             abc                                     cde                                     36 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01 1.23456789000000E-01010101010101010101010101010101010101010101010101010101010101010101010101 0.00000000000000E+00 1.00000000000000E-02 2.00000000000000E-02 3.00000000000000E-02 4.00000000000000E-02 5.00000000000000E-02 6.00000000000000E-02 7.00000000000000E-02 8.00000000000000E-02 9.00000000000000E-02 1.00000000000000E-01 1.10000000000000E-01 1.20000000000000E-01 1.30000000000000E-01 1.40000000000000E-01 1.50000000000000E-01 1.60000000000000E-01 1.70000000000000E-01 1.80000000000000E-01 1.90000000000000E-01 2.00000000000000E-01 2.10000000000000E-01 2.20000000000000E-01 2.30000000000000E-01 2.40000000000000E-01 2.50000000000000E-01 2.60000000000000E-01 2.70000000000000E-01 2.80000000000000E-01 2.90000000000000E-01 3.00000000000000E-01 3.10000000000000E-01 3.20000000000000E-01 3.30000000000000E-01 3.40000000000000E-01 3.50000000000000E-01'
     fh2 = six.BytesIO(fh.getvalue())
-    t2 = TreRSMIDA()
+    t2 = TreRSMAPA()
     t2.read_from_file(fh2)
-    assert t2.iid == 'abc'
-    assert t2.edition == 'abc'
-    assert t2.isid == 'abc'
-    assert t2.sid == 'abc'
-    assert t2.stid == 'abc'
-    assert t2.year == 2017
-    assert t2.month==12
-    assert t2.day == 1
-    assert t2.hour == 10
-    assert t2.minute == 59
-    assert t2.second == 12.5
-    assert t2.grndd == 'G'
-    assert t2.xuor == 1234.567890
-    assert t2.yuor == 1234.567890
-    assert t2.zuor == 1234.567890
-    assert t2.xuxr == 0.1234567890
-    assert t2.xuyr == 0.1234567890
-    assert t2.xuzr == 0.1234567890
-    assert t2.yuxr == 0.1234567890
-    assert t2.yuyr == 0.1234567890
-    assert t2.yuzr == 0.1234567890
-    assert t2.zuxr == 0.1234567890
-    assert t2.zuyr == 0.1234567890
-    assert t2.zuzr == 0.1234567890
-    assert t2.v1x ==0.1234567890
-    assert t2.v1y ==0.1234567890
-    assert t2.v1z == 0.1234567890
-    assert t2.v2x == 0.1234567890
-    assert t2.v2y == 0.1234567890
-    assert t2.v2z == 0.1234567890
-    assert t2.v3x == 0.1234567890
-    assert t2.v3y == 0.1234567890
-    assert t2.v3z == 0.1234567890
-    assert t2.v4x == 0.1234567890
-    assert t2.v4y == 0.1234567890
-    assert t2.v4z == 0.1234567890
-    assert t2.v5x == 0.1234567890
-    assert t2.v5y == 0.1234567890
-    assert t2.v5z == 0.1234567890
-    assert t2.v6x == 0.1234567890
-    assert t2.v6y == 0.1234567890
-    assert t2.v6z == 0.1234567890
-    assert t2.v7x == 0.1234567890
-    assert t2.v7y == 0.1234567890
-    assert t2.v7z == 0.1234567890
-    assert t2.v8x == 0.1234567890
-    assert t2.v8y == 0.1234567890
-    assert t2.v8z == 0.1234567890
-    assert t2.grpx == 0.1234567890
-    assert t2.grpy == 0.1234567890
-    assert t2.grpz == 0.1234567890
-    assert t2.fullr == 1234567
-    assert t2.fullc == 1234567
-    assert t2.minr == 1234567
-    assert t2.maxr == 1234567
-    assert t2.minc == 1234567
-    assert t2.maxc == 1234567
-    assert t2.ie0 == 0.1234567890
-    assert t2.ier == 0.1234567890
-    assert t2.iec == 0.1234567890
-    assert t2.ierr == 0.1234567890
-    assert t2.ierc == 0.1234567890
-    assert t2.iecc == 0.1234567890
-    assert t2.ia0 == 0.1234567890
-    assert t2.iar == 0.1234567890
-    assert t2.iac == 0.1234567890
-    assert t2.iarr == 0.1234567890
-    assert t2.iarc == 0.1234567890
-    assert t2.iacc == 0.1234567890
-    assert t2.spx == 0.1234567890
-    assert t2.svx == 0.1234567890
-    assert t2.sax == 0.1234567890
-    assert t2.spy == 0.1234567890
-    assert t2.svy == 0.1234567890
-    assert t2.say == 0.1234567890
-    assert t2.spz == 0.1234567890
-    assert t2.svz == 0.1234567890
-    assert t2.saz == 0.1234567890
+    assert t.iid == 'abc'
+    assert t.edition == 'abc'
+    assert t.tid == 'cde'
+    assert t.npar == 36
+    assert t.xuol == 0.1234567890
+    assert t.yuol == 0.1234567890
+    assert t.zuol == 0.1234567890
+    assert t.xuxl == 0.1234567890
+    assert t.xuyl == 0.1234567890
+    assert t.xuzl == 0.1234567890
+    assert t.yuxl == 0.1234567890
+    assert t.yuyl == 0.1234567890
+    assert t.yuzl == 0.1234567890
+    assert t.zuxl == 0.1234567890
+    assert t.zuyl == 0.1234567890
+    assert t.zuzl == 0.1234567890
+    assert t.ir0 == 1
+    assert t.irx == 1
+    assert t.iry == 1
+    assert t.irz == 1
+    assert t.irxx == 1
+    assert t.irxy == 1
+    assert t.irxz == 1
+    assert t.iryy == 1
+    assert t.iryz == 1
+    assert t.irzz == 1
+    assert t.ic0 ==1
+    assert t.icx == 1
+    assert t.icy == 1
+    assert t.icz == 1
+    assert t.icxx == 1
+    assert t.icxy == 1
+    assert t.icxz == 1
+    assert t.icyy == 1
+    assert t.icyz == 1
+    assert t.iczz == 1
+    assert t.gx0 == 1
+    assert t.gy0 == 1
+    assert t.gz0 == 1
+    assert t.gxr == 1
+    assert t.gyr == 1
+    assert t.gzr == 1
+    assert t.gs == 1
+    assert t.gxx == 1
+    assert t.gxy == 1
+    assert t.gxz == 1
+    assert t.gyx == 1
+    assert t.gyy == 1
+    assert t.gyz == 1
+    assert t.gzx == 1
+    assert t.gzy == 1
+    assert t.gzz == 1
+    for a in range(t.npar):
+        assert t.parval[a] == 0.01 * a
 
 # Tests for other parts

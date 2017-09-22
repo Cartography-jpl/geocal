@@ -1,0 +1,310 @@
+#! /usr/bin/env python
+#
+# This takes a unprojected PDS file, imports it to VICAR, and adds a
+# RSM.
+
+from geocal import *
+import subprocess
+import matplotlib.pylab as plt
+import matplotlib as mpl
+import seaborn as sns
+from matplotlib.backends.backend_pdf import PdfPages
+
+version = "May 16, 2017"
+usage='''Usage:
+  mars_generate_rsm [options] <pds_image> <output_base_name>
+  mars_generate_rsm -h | --help
+  mars_generate_rsm -v | --version
+
+This takes an unprojected PDS image, imports it to VICAR, and adds
+a RSM.
+
+Also not clear what to do with masked pixels. Right now, we are just removing
+them.
+
+We are also not currently including camera nonlinearities, this is just
+something we will add in a bit.
+
+We currently hard code the DEM height range we use. This should be determined
+from an actual DEM (e.g. MOLA).
+
+The specific forms of the RSM are also hard coded, we should develop a more
+dynamic way to determine this (e.g., how many sections to use with hrsc?)
+
+Example:
+    mars_generate_rsm /raid26/tllogan/mars/mawrth_vallis/source/unmapped/P16_007388_2049_XI_24N020W.IMG ctx1
+    shelve_igccol --image-ground-connection ctx1.img dem.xml ctx1_igc.xml "CTX 1 image"
+    igc_project --grid-spacing=10 --map-info=ctx1_ref_img.xml ctx1_igc.xml ctx1_proj.xml
+    write_image --number-process=20 --verbose --process-number-line=1000 --process-number-sample=1000 ctx1_proj.xml ctx1_proj.img
+
+Options:
+  -h --help         
+       Print this message
+
+  --full-igc=f
+       For diagnostic purposes, it can be useful to have the full IGC (i.e.,
+       the one with the camera model, spice kernel, etc.). This is what we
+       are approximating with the RSM.
+
+  --plot-cross-section=f
+       To evaluate the quality of the generated RSM, this takes a cross 
+       section for all lines, and 5 equally spaced samples and plots the 
+       difference between the calculated line and sample vs. what the
+       full ImageGroundConnection calculation creates. Output is a PDF
+       file.
+
+  --subset=f
+       Subset the image. This should be the start line, start sample, number
+       line and number sample.
+ 
+  -v --version      
+       Print program version
+'''
+
+args = docopt_simple(usage, version=version)
+
+# This is in meters. I determined this by checking every 100th pixel in
+# the reference image for our test data.
+dem_min = -5000
+dem_max = -1500
+# Value we plot difference for
+dem_nominal = -3000
+
+def plot_diff(r, igc, fname):
+    pdf = PdfPages(fname)
+    ln, smp, lncalc, smpcalc = r.compare_igc(igc, igc.number_line, 5,
+                                             dem_nominal)
+    print("Max line diff:   ", np.nanmax(abs(ln-lncalc)), " at ",
+          np.unravel_index(np.nanargmax(abs(ln-lncalc)), ln.shape))
+    print("Max sample diff: ", np.nanmax(abs(smp-smpcalc)), " at ",
+          np.unravel_index(np.nanargmax(abs(smp-smpcalc)), smp.shape))
+
+    cmap = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
+    plt.clf()
+    for i in range(smp.shape[1]):
+        plt.plot(ln[:,i], lncalc[:,i] - ln[:,i], label="Sample %d" % smp[0,i])
+    plt.legend()
+    plt.title("Line diff")
+    plt.xlabel("Line")
+    plt.ylabel("Diff")
+    pdf.savefig()
+    plt.clf()
+    for i in range(smp.shape[1]):
+        plt.plot(ln[:,i], smpcalc[:,i] - smp[:,i], label="Sample %d" % smp[0,i])
+    plt.legend()
+    plt.title("Sample diff")
+    plt.xlabel("Line")
+    plt.ylabel("Diff")
+    pdf.savefig()
+    plt.clf()
+    
+    pdf.close()
+
+# Note, when adding a new instrument there are a few good sanity things to
+# check:
+# 1. Check check_rc_assumption, this verifies that we have line, sample, and
+#    look directions nearly orthogonal. If you have the camera rotated wrong,
+#    you can catch that because the dot products won't be close to 0.
+# 2. Compare spice calculation of boresight with the full Igc calculation. This
+#    makes sure you have things lined up right.
+#
+def igc_for_context(lbl, fname):
+    '''Process for context camera'''
+    tstart = Time.parse_time(lbl["START_TIME"])
+    tend = Time.parse_time(lbl["STOP_TIME"])
+    bdir = os.environ["AFIDS_DATA"] + "/mars_kernel/mro_kernel/"
+    kdat = read_shelve(bdir + "kernel.json")
+    # We need better logic here, but for now just set up the kernels we
+    # handed
+    klist = [bdir + "mro.ker",
+             kdat["ck_kernel"].kernel(tstart),
+             kdat["spk_kernel"].kernel(tend)]
+    orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
+                           PlanetConstant.MARS_NAIF_CODE)
+    img = GdalRasterImage(fname)
+    focal_length = 350
+    pitch = 7e-3
+    left_masked = 38
+    right_masked = 18
+    # Ignore nonlinearities for now, and assume boresight is middle of active
+    # pixels
+    ctx_cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, img.number_sample,
+                               pitch, pitch, focal_length, 
+                               FrameCoordinate(0, 2500+left_masked))
+    tt = ConstantSpacingTimeTable(tstart, tend,
+                                  (tend- tstart) / (img.number_line-1))
+    dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
+    orb_cache = OrbitListCache(orb, tt)
+    ipi = Ipi(orb_cache, ctx_cam, 0, tstart, tend, tt)
+    igc = IpiImageGroundConnection(ipi, dem, img)
+    # Chop off masked pixels for map projecting
+    igc_sub = OffsetImageGroundConnection(igc, 0, 38, igc.number_line, 5000)
+    gdal_arg = ["-srcwin", "38", "0", "5000", str(igc.number_line)]
+    return igc, igc_sub, gdal_arg
+
+def rsm_for_context(lbl, fname, subset=None):
+    '''This generates a RSM for a MRO Context image. We return the Rsm, 
+    and the original igc. This strips off the masked pixels. Not sure if this
+    is what we ultimately want or not, but it is what we do here.
+
+    We also return any extra arguments for gdal_translate. Not sure if this is
+    the best interface of not, but do this for now.'''
+    igc, igc_sub, gdal_arg = igc_for_context(lbl, fname)
+    if(subset is not None):
+        igc_sub = OffsetImageGroundConnection(igc_sub, subset[0], subset[1],
+                                              subset[2], subset[3])
+        gdal_arg = ["-srcwin", str(subset[1]+38), str(subset[0]),
+                    str(subset[3]), str(subset[2])]
+    # In order for LocalRcParameter to be useful, the look, sample, and line
+    # directions need to be mostly orthogonal. So dot product of unit vectors
+    # should be close to 0
+    if(False):
+        LocalRcParameter.check_rc_assumption(igc)
+
+    # Verify that we calculate nearly the same boresight at SPICE.
+    if(False):
+        ic = ImageCoordinate(200, igc_sub.number_sample / 2)
+        pts = SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
+                                                  PlanetConstant.MARS_NAIF_CODE,
+                                                  "MRO", "MRO_CTX")
+        print("Distance spice boresight and IGC: ",
+              distance(pts[0], igc_sub.ground_coordinate(ic)))
+        print(igc_sub.image_coordinate(pts[0]))
+
+    r = Rsm(RsmRpPlusGrid(RsmRationalPolynomial(5,5,3,1,1,1,5,1,
+                                                40, 40, 20, 40),
+                          RsmGrid(3, 1000, 50)),
+            LocalRcConverter(LocalRcParameter(igc_sub)))
+    r.fit(igc_sub, dem_min, dem_max)
+    return r, igc_sub, gdal_arg
+    
+def igc_for_hrsc(lbl, fname):
+    '''Process for HRSC camera'''
+    tstart = Time.parse_time(lbl["START_TIME"])
+    tend = Time.parse_time(lbl["STOP_TIME"])
+    if(lbl["DETECTOR_ID"] != "MEX_HRSC_NADIR"):
+        raise RuntimeError("Right now we only work with MEX_HRSC_NADIR")
+    bdir = os.environ["AFIDS_DATA"] + "/mars_kernel/mex_kernel/"
+    kdat = read_shelve(bdir + "kernel.json")
+    # We need better logic here, but for now just set up the kernels we
+    # handed
+    klist = [bdir + "mex.ker",
+             kdat["ck_kernel"].kernel(tstart),
+             kdat["spk_kernel"].kernel(tstart),
+             bdir + "mex_reconstituted.ker"]
+    orb = SpicePlanetOrbit("MEX", "MEX_HRSC_HEAD", klist,
+                           PlanetConstant.MARS_NAIF_CODE)
+    img = GdalRasterImage(fname)
+    # Pitch is INS-41215_PIXEL_SIZE, focal length is INS-41215_FOCAL_LENGTH
+    # focal length is in mm and pitch is in microns, so we have 1e-3 to put
+    # in the same units
+    focal_length = 175
+    pitch = 7e-3
+
+    # Can also get by (which is same value)
+    # ifov_rad_pixel = 0.000040
+    # pitch = focal_length * ifov_rad_pixel
+
+    # Ignore nonlinearities for now. Spice kernel doesn't list any.
+    # We have the boresight from
+    # the spice kernel (INS-41215_BORESIGHT). This is in ccd mm units,
+    # so we translate to pixels.
+    # Note that we would subtract here, except that we have
+    # "INCREASE_IS_NEGATIVE", so this flips the sign
+    hrsc_cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1,
+                                img.number_sample,
+                                pitch, pitch, focal_length, 
+                                FrameCoordinate(0 + (-0.007000 / pitch),
+                                                5176/2 + 0.0295 / pitch),
+                                QuaternionCamera.LINE_IS_Y,
+                                QuaternionCamera.INCREASE_IS_NEGATIVE,
+                                QuaternionCamera.INCREASE_IS_NEGATIVE)
+    tt = ConstantSpacingTimeTable(tstart, tend,
+                                  (tend- tstart) / (img.number_line-1))
+    dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
+    orb_cache = OrbitListCache(orb, tt)
+    ipi = Ipi(orb_cache, hrsc_cam, 0, tstart, tend, tt)
+    igc = IpiImageGroundConnection(ipi, dem, img)
+    return igc
+
+def rsm_for_hrsc(lbl, fname, subset=None):
+    '''This generates a RSM for a MRO Context image. We return the Rsm, 
+    and the original igc. This strips off the masked pixels. Not sure if this
+    is what we ultimately want or not, but it is what we do here.
+
+    We also return any extra arguments for gdal_translate. Not sure if this is
+    the best interface of not, but do this for now.'''
+    igc = igc_for_hrsc(lbl, fname)
+    gdal_arg = []
+    if(subset is not None):
+        igc = OffsetImageGroundConnection(igc, subset[0], subset[1],
+                                          subset[2], subset[3])
+        gdal_arg = ["-srcwin", str(subset[1]), str(subset[0]),
+                    str(subset[3]), str(subset[2])]
+    # In order for LocalRcParameter to be useful, the look, sample, and line
+    # directions need to be mostly orthogonal. So dot product of unit vectors
+    # should be close to 0
+    if(False):
+        LocalRcParameter.check_rc_assumption(igc)
+
+    # Verify that we calculate nearly the same boresight at SPICE.
+    if(False):
+        ic = ImageCoordinate(200, igc.number_sample / 2.0)
+        pts = SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
+                                                  PlanetConstant.MARS_NAIF_CODE,
+                                                  "MEX", "MEX_HRSC_NADIR")
+        print("Distance spice boresight and IGC: ",
+              distance(pts[0], igc.ground_coordinate(ic)))
+        print(igc.image_coordinate(pts[0]))
+    
+    # Really big image, so break up into a few sections. We should perhaps have
+    # a dynamic way to determine this.
+    r = Rsm(RsmRpPlusGrid(RsmMultiSection(igc.number_line,
+                                          igc.number_sample, 3, 1,
+                                RsmRationalPolynomial(5,5,3,1,1,1,5,1,
+                                                      40, 40, 20, 40, False)),
+                          RsmGrid(3, 5000, 50, False)),
+            LocalRcConverter(LocalRcParameter(igc)))
+    r.fit(igc, dem_min, dem_max)
+    return r, igc, gdal_arg
+
+# Determine the image type
+lbl = pds_label(args.pds_image)
+subset = None
+if args.subset is not None:
+    subset = eval(args.subset)
+if(lbl['INSTRUMENT_NAME'] == 'CONTEXT CAMERA'):
+    r, igc, gdal_arg = rsm_for_context(lbl,args.pds_image, subset)
+elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION STEREO CAMERA'):
+    r, igc, gdal_arg = rsm_for_hrsc(lbl,args.pds_image, subset)
+else:
+    raise RuntimeError("Not a recognized instrument name %s" %
+                       lbl['INSTRUMENT_NAME'])
+
+# For right now, output the igc so we have record of it
+if(args.full_igc):
+    write_shelve(args.full_igc, igc)
+    
+# Write out the PDS label, in case there is something we need from it
+with open(args.output_base_name + ".lbl", "wb") as fh:
+    fh.write(pds_label_text(args.pds_image))
+cmd = ["gdal_translate", "-of", "VRT", "-q"]
+cmd.extend(gdal_arg)
+cmd.extend([args.pds_image, args.output_base_name + ".vrt"])
+subprocess.run(cmd, check=True)
+fvrt = GdalRasterImage(args.output_base_name + ".vrt")
+write_shelve(args.output_base_name + ".rsm.xml", r)
+# RSM is too big for a VICAR label. I'm not sure we can do anything about this,
+# we may need to just have a separate file
+#fvrt.set_rsm(Rsm.generate_rsm(igc, 0, 1000))
+#fvrt["rsm", "rsmv"] = serialize_write_string(r)
+#fvrt["rsm"] = serialize_write_string(r)
+fvrt.close()
+subprocess.run(["gdal_translate", "-of", "VICAR", 
+                args.output_base_name + ".vrt",
+                args.output_base_name + ".img"], check=True)
+os.remove(args.output_base_name + ".vrt")
+if(args.plot_cross_section):
+    plot_diff(r, igc, args.plot_cross_section)
+    
+

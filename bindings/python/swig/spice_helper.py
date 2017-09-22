@@ -364,6 +364,33 @@ class SpiceHelper(object):
 
     state_vector = staticmethod(state_vector)
 
+    def boresight_and_footprint(*args):
+        """
+
+        std::vector< boost::shared_ptr< GroundCoordinate > > SpiceHelper::boresight_and_footprint(const Time &T, int Body_id, const std::string &Satellite_name, const
+        std::string &Camera_name, const std::string &Corr_type="CN+S")
+        SPICE does not directly work with a full camera.
+
+        However it can calculate boresight and footprint for instruments. This
+        can be very useful to check a full ImageGroundConnection by checking
+        that it agrees with SPICE on the boresight and footprint.
+
+        The Corr_type is what is used by sincpt_c, check the SPICE
+        documentation for this. You generally will want to use the default,
+        but you can use some of the other possible values if you want to see
+        if things we normally ignore are important (e.g., light travel time).
+
+        Satellite_name is something like "MEX" (for mars express), and
+        Camera_name is something like "MEX_HRSC_NADIR".
+
+        We return a vector of GroundCoordinate. The first is the boresight,
+        and the remaining are the footprint bounds in the order than spice
+        returns them. 
+        """
+        return _spice_helper.SpiceHelper_boresight_and_footprint(*args)
+
+    boresight_and_footprint = staticmethod(boresight_and_footprint)
+
     def __init__(self):
         _spice_helper.SpiceHelper_swiginit(self, _spice_helper.new_SpiceHelper())
     __swig_destroy__ = _spice_helper.delete_SpiceHelper
@@ -508,6 +535,31 @@ def SpiceHelper_state_vector(Body_id, Target_name, T, arg5, arg6):
     clear if we want to or not. 
     """
     return _spice_helper.SpiceHelper_state_vector(Body_id, Target_name, T, arg5, arg6)
+
+def SpiceHelper_boresight_and_footprint(*args):
+    """
+
+    std::vector< boost::shared_ptr< GroundCoordinate > > SpiceHelper::boresight_and_footprint(const Time &T, int Body_id, const std::string &Satellite_name, const
+    std::string &Camera_name, const std::string &Corr_type="CN+S")
+    SPICE does not directly work with a full camera.
+
+    However it can calculate boresight and footprint for instruments. This
+    can be very useful to check a full ImageGroundConnection by checking
+    that it agrees with SPICE on the boresight and footprint.
+
+    The Corr_type is what is used by sincpt_c, check the SPICE
+    documentation for this. You generally will want to use the default,
+    but you can use some of the other possible values if you want to see
+    if things we normally ignore are important (e.g., light travel time).
+
+    Satellite_name is something like "MEX" (for mars express), and
+    Camera_name is something like "MEX_HRSC_NADIR".
+
+    We return a vector of GroundCoordinate. The first is the boresight,
+    and the remaining are the footprint bounds in the order than spice
+    returns them. 
+    """
+    return _spice_helper.SpiceHelper_boresight_and_footprint(*args)
 
 
 

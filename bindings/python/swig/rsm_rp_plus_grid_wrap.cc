@@ -6177,12 +6177,12 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 
 SWIGINTERN PyObject *_wrap_new_RsmRpPlusGrid(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::RsmGrid > *arg2 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > temp2shared1 ;
+  boost::shared_ptr< GeoCal::RsmBase > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmBase > temp2shared1 ;
   void *argp2 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::RsmGrid > tempshared2 ;
@@ -6193,16 +6193,16 @@ SWIGINTERN PyObject *_wrap_new_RsmRpPlusGrid(PyObject *SWIGUNUSEDPARM(self), PyO
   if (!SWIG_Python_UnpackTuple(args,"new_RsmRpPlusGrid",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t,  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t,  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_RsmRpPlusGrid" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RsmRationalPolynomial > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_RsmRpPlusGrid" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RsmBase > const &""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RsmRationalPolynomial > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RsmRationalPolynomial > * >(argp1);
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RsmBase > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RsmBase > * >(argp1);
       arg1 = &tempshared1;
     } else {
-      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RsmRationalPolynomial > * >(argp1) : &tempshared1;
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RsmBase > * >(argp1) : &tempshared1;
     }
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
@@ -6243,7 +6243,7 @@ SWIGINTERN PyObject *_wrap_new_RsmRpPlusGrid(PyObject *SWIGUNUSEDPARM(self), PyO
   }
   {
     try {
-      result = (GeoCal::RsmRpPlusGrid *)new GeoCal::RsmRpPlusGrid((boost::shared_ptr< GeoCal::RsmRationalPolynomial > const &)*arg1,(boost::shared_ptr< GeoCal::RsmGrid > const &)*arg2);
+      result = (GeoCal::RsmRpPlusGrid *)new GeoCal::RsmRpPlusGrid((boost::shared_ptr< GeoCal::RsmBase > const &)*arg1,(boost::shared_ptr< GeoCal::RsmGrid > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6268,7 +6268,7 @@ SWIGINTERN PyObject *_wrap_RsmRpPlusGrid__v_rational_polynomial(PyObject *SWIGUN
   boost::shared_ptr< GeoCal::RsmRpPlusGrid const > tempshared1 ;
   boost::shared_ptr< GeoCal::RsmRpPlusGrid const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::RsmRationalPolynomial > result;
+  boost::shared_ptr< GeoCal::RsmBase > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -6426,13 +6426,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"new_RsmRpPlusGrid", _wrap_new_RsmRpPlusGrid, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmRationalPolynomial > &Rp, const\n"
-		"boost::shared_ptr< RsmGrid > &Rgrid)\n"
+		"GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmBase > &Rp, const boost::shared_ptr<\n"
+		"RsmGrid > &Rgrid)\n"
 		"\n"
 		""},
 	 { (char *)"RsmRpPlusGrid__v_rational_polynomial", (PyCFunction)_wrap_RsmRpPlusGrid__v_rational_polynomial, METH_O, (char *)"\n"
 		"\n"
-		"const boost::shared_ptr<RsmRationalPolynomial>& GeoCal::RsmRpPlusGrid::rational_polynomial() const\n"
+		"const boost::shared_ptr<RsmBase>& GeoCal::RsmRpPlusGrid::rational_polynomial() const\n"
 		"RsmRationalPolynomial we are using. \n"
 		""},
 	 { (char *)"RsmRpPlusGrid__v_correction_grid", (PyCFunction)_wrap_RsmRpPlusGrid__v_correction_grid, METH_O, (char *)"\n"

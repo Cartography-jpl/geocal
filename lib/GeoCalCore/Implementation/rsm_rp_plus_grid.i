@@ -10,6 +10,7 @@
 %}
 %base_import(rsm_base)
 %import "rsm_rational_polynomial.i"
+%import "rsm_base.i"
 %import "rsm_grid.i"
 %import "image_coordinate.i"
 %import "image_ground_connection.i"
@@ -20,7 +21,7 @@
 namespace GeoCal {
 class RsmRpPlusGrid : public RsmBase {
 public:
-  RsmRpPlusGrid(const boost::shared_ptr<RsmRationalPolynomial>& Rp,
+  RsmRpPlusGrid(const boost::shared_ptr<RsmBase>& Rp,
 		const boost::shared_ptr<RsmGrid>& Rgrid);
   virtual void fit(const ImageGroundConnection& Igc,
 		   const CoordinateConverter& Cconv,
@@ -28,7 +29,7 @@ public:
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample);
   %python_attribute(rational_polynomial,
-		    boost::shared_ptr<RsmRationalPolynomial>);
+		    boost::shared_ptr<RsmBase>);
   %python_attribute(correction_grid, boost::shared_ptr<RsmGrid>);
   %pickle_serialization()
 };

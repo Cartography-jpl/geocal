@@ -202,8 +202,8 @@ class RsmRpPlusGrid(geocal_swig.rsm_base.RsmBase):
     def __init__(self, Rp, Rgrid):
         """
 
-        GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmRationalPolynomial > &Rp, const
-        boost::shared_ptr< RsmGrid > &Rgrid)
+        GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmBase > &Rp, const boost::shared_ptr<
+        RsmGrid > &Rgrid)
 
         """
         _rsm_rp_plus_grid.RsmRpPlusGrid_swiginit(self, _rsm_rp_plus_grid.new_RsmRpPlusGrid(Rp, Rgrid))
@@ -211,7 +211,7 @@ class RsmRpPlusGrid(geocal_swig.rsm_base.RsmBase):
     def _v_rational_polynomial(self):
         """
 
-        const boost::shared_ptr<RsmRationalPolynomial>& GeoCal::RsmRpPlusGrid::rational_polynomial() const
+        const boost::shared_ptr<RsmBase>& GeoCal::RsmRpPlusGrid::rational_polynomial() const
         RsmRationalPolynomial we are using. 
         """
         return _rsm_rp_plus_grid.RsmRpPlusGrid__v_rational_polynomial(self)

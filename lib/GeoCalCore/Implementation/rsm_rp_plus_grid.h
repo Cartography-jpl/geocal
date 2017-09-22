@@ -13,7 +13,7 @@ namespace GeoCal {
 
 class RsmRpPlusGrid : public RsmBase {
 public:
-  RsmRpPlusGrid(const boost::shared_ptr<RsmRationalPolynomial>& Rp,
+  RsmRpPlusGrid(const boost::shared_ptr<RsmBase>& Rp,
 		const boost::shared_ptr<RsmGrid>& Rgrid)
     : rp(Rp),
       rgrid(Rgrid)
@@ -22,7 +22,7 @@ public:
   virtual void print(std::ostream& Os) const;
   virtual boost::shared_ptr<RsmBase> clone() const
   { return boost::shared_ptr<RsmBase>
-      (new RsmRpPlusGrid(boost::dynamic_pointer_cast<RsmRationalPolynomial>(rp->clone()), boost::dynamic_pointer_cast<RsmGrid>(rgrid->clone())));
+      (new RsmRpPlusGrid(rp->clone(), boost::dynamic_pointer_cast<RsmGrid>(rgrid->clone())));
   }
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z)
     const;
@@ -53,7 +53,7 @@ public:
 /// RsmRationalPolynomial we are using
 //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<RsmRationalPolynomial>& rational_polynomial() const
+  const boost::shared_ptr<RsmBase>& rational_polynomial() const
   { return rp;}
 
 //-----------------------------------------------------------------------
@@ -74,7 +74,7 @@ public:
   virtual double min_z() const {return rp->min_z(); }
   virtual double max_z() const {return rp->max_z(); }
 private:
-  boost::shared_ptr<RsmRationalPolynomial> rp;
+  boost::shared_ptr<RsmBase> rp;
   boost::shared_ptr<RsmGrid> rgrid;
   RsmRpPlusGrid() {}
   friend class boost::serialization::access;

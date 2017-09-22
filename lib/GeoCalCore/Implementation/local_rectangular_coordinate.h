@@ -15,6 +15,8 @@ class LocalRcParameter : public Printable<LocalRcParameter> {
 public:
   LocalRcParameter() {}
   LocalRcParameter(const ImageGroundConnection& Igc, double Height = 0);
+  static void check_rc_assumption
+  (const ImageGroundConnection& Igc, double Height = 0);
   virtual ~LocalRcParameter() {}
   virtual void print(std::ostream& Os) const
   { Os << "LocalRcParameter"; }

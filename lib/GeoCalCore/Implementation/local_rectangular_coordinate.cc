@@ -91,6 +91,46 @@ LocalRcParameter::LocalRcParameter
   cf_to_rc[2][2]=z(2);
 }
 
+//-----------------------------------------------------------------------
+/// The assumption with the LocalRcParameter is that we create a
+/// coordinate system with z along the look direction, x mostly in the
+/// sample direction, and y mostly in the line direction. This
+/// function actually checks this by calculating the dot product
+/// between a unit vector in the look direction, sample direction, and
+/// line direction. These dot products should be close to zero, the
+/// farther away from 0 the less true our assumption is.
+///
+/// Note that you can still completely defined LocalRcParameter (as
+/// long as none of the directions are exactly parallel), the problem
+/// is just that the LocalRcParameter isn't very useful when this
+/// assumption doesn't hold
+//-----------------------------------------------------------------------
+
+void LocalRcParameter::check_rc_assumption
+  (const ImageGroundConnection& Igc, double Height)
+{
+  ImageCoordinate ic(Igc.number_line() / 2, Igc.number_sample() / 2);
+  ImageCoordinate ic_p1s(ic.line, ic.sample + 1);
+  ImageCoordinate ic_p1l(ic.line+1, ic.sample);
+    
+  boost::array<double, 3> p1 = Igc.ground_coordinate_approx_height(ic, Height)->convert_to_cf()->position;
+  boost::array<double, 3> p2 = Igc.ground_coordinate_approx_height(ic, Height + 100)->convert_to_cf()->position;
+  boost::array<double, 3> p3 = Igc.ground_coordinate_approx_height(ic_p1s, Height)->convert_to_cf()->position;
+  boost::array<double, 3> p4 = Igc.ground_coordinate_approx_height(ic_p1l, Height)->convert_to_cf()->position;
+  blitz::Array<double, 1> lk_dir(3), smp_dir(3), ln_dir(3);
+  lk_dir = p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2];
+  lk_dir /= normb(lk_dir);
+  smp_dir = p3[0] - p1[0], p3[1] - p1[1], p3[2] - p1[2];
+  smp_dir /= normb(smp_dir);
+  ln_dir = p4[0] - p1[0], p4[1] - p1[1], p4[2] - p1[2];
+  ln_dir /= normb(ln_dir);
+  std::cout << "dot(Look direction, Sample direction): "
+	    << dotb(lk_dir, smp_dir) << "\n"
+	    << "dot(Look direction, Line direction): "
+	    << dotb(lk_dir, ln_dir) << "\n"
+	    << "dot(Sample direction, Line direction): "
+	    << dotb(smp_dir, ln_dir) << "\n";
+}
 
 LocalRectangularCoordinate::LocalRectangularCoordinate
 (const boost::shared_ptr<LocalRcParameter>& P,

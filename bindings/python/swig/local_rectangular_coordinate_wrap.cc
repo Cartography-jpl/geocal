@@ -6381,6 +6381,136 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_LocalRcParameter_check_rc_assumption__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LocalRcParameter_check_rc_assumption" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LocalRcParameter_check_rc_assumption" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+        arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "LocalRcParameter_check_rc_assumption" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    try {
+      GeoCal::LocalRcParameter::check_rc_assumption((GeoCal::ImageGroundConnection const &)*arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_LocalRcParameter_check_rc_assumption__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LocalRcParameter_check_rc_assumption" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LocalRcParameter_check_rc_assumption" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+        arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      GeoCal::LocalRcParameter::check_rc_assumption((GeoCal::ImageGroundConnection const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_LocalRcParameter_check_rc_assumption(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"LocalRcParameter_check_rc_assumption",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_LocalRcParameter_check_rc_assumption__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_LocalRcParameter_check_rc_assumption__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'LocalRcParameter_check_rc_assumption'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::LocalRcParameter::check_rc_assumption(GeoCal::ImageGroundConnection const &,double)\n"
+    "    GeoCal::LocalRcParameter::check_rc_assumption(GeoCal::ImageGroundConnection const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_LocalRcParameter___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::LocalRcParameter *arg1 = (GeoCal::LocalRcParameter *) 0 ;
@@ -7417,6 +7547,23 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This sets up coordinates so the origin is at the given height on the\n"
 		"surface for the center pixel of the Igc. \n"
+		""},
+	 { (char *)"LocalRcParameter_check_rc_assumption", _wrap_LocalRcParameter_check_rc_assumption, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void LocalRcParameter::check_rc_assumption(const ImageGroundConnection &Igc, double Height=0)\n"
+		"The assumption with the LocalRcParameter is that we create a\n"
+		"coordinate system with z along the look direction, x mostly in the\n"
+		"sample direction, and y mostly in the line direction.\n"
+		"\n"
+		"This function actually checks this by calculating the dot product\n"
+		"between a unit vector in the look direction, sample direction, and\n"
+		"line direction. These dot products should be close to zero, the\n"
+		"farther away from 0 the less true our assumption is.\n"
+		"\n"
+		"Note that you can still completely defined LocalRcParameter (as long\n"
+		"as none of the directions are exactly parallel), the problem is just\n"
+		"that the LocalRcParameter isn't very useful when this assumption\n"
+		"doesn't hold \n"
 		""},
 	 { (char *)"LocalRcParameter___str__", (PyCFunction)_wrap_LocalRcParameter___str__, METH_O, NULL},
 	 { (char *)"LocalRcParameter_cf_to_rc_set", _wrap_LocalRcParameter_cf_to_rc_set, METH_VARARGS, NULL},

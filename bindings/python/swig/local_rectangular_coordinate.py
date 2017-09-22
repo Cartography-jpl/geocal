@@ -211,6 +211,28 @@ class LocalRcParameter(geocal_swig.generic_object.GenericObject):
         surface for the center pixel of the Igc. 
         """
         _local_rectangular_coordinate.LocalRcParameter_swiginit(self, _local_rectangular_coordinate.new_LocalRcParameter(*args))
+
+    def check_rc_assumption(Igc, Height=0):
+        """
+
+        void LocalRcParameter::check_rc_assumption(const ImageGroundConnection &Igc, double Height=0)
+        The assumption with the LocalRcParameter is that we create a
+        coordinate system with z along the look direction, x mostly in the
+        sample direction, and y mostly in the line direction.
+
+        This function actually checks this by calculating the dot product
+        between a unit vector in the look direction, sample direction, and
+        line direction. These dot products should be close to zero, the
+        farther away from 0 the less true our assumption is.
+
+        Note that you can still completely defined LocalRcParameter (as long
+        as none of the directions are exactly parallel), the problem is just
+        that the LocalRcParameter isn't very useful when this assumption
+        doesn't hold 
+        """
+        return _local_rectangular_coordinate.LocalRcParameter_check_rc_assumption(Igc, Height)
+
+    check_rc_assumption = staticmethod(check_rc_assumption)
     cf_to_rc = _swig_property(_local_rectangular_coordinate.LocalRcParameter_cf_to_rc_get, _local_rectangular_coordinate.LocalRcParameter_cf_to_rc_set)
     cf_offset = _swig_property(_local_rectangular_coordinate.LocalRcParameter_cf_offset_get, _local_rectangular_coordinate.LocalRcParameter_cf_offset_set)
 
@@ -221,6 +243,26 @@ class LocalRcParameter(geocal_swig.generic_object.GenericObject):
 LocalRcParameter.__str__ = new_instancemethod(_local_rectangular_coordinate.LocalRcParameter___str__, None, LocalRcParameter)
 LocalRcParameter_swigregister = _local_rectangular_coordinate.LocalRcParameter_swigregister
 LocalRcParameter_swigregister(LocalRcParameter)
+
+def LocalRcParameter_check_rc_assumption(Igc, Height=0):
+    """
+
+    void LocalRcParameter::check_rc_assumption(const ImageGroundConnection &Igc, double Height=0)
+    The assumption with the LocalRcParameter is that we create a
+    coordinate system with z along the look direction, x mostly in the
+    sample direction, and y mostly in the line direction.
+
+    This function actually checks this by calculating the dot product
+    between a unit vector in the look direction, sample direction, and
+    line direction. These dot products should be close to zero, the
+    farther away from 0 the less true our assumption is.
+
+    Note that you can still completely defined LocalRcParameter (as long
+    as none of the directions are exactly parallel), the problem is just
+    that the LocalRcParameter isn't very useful when this assumption
+    doesn't hold 
+    """
+    return _local_rectangular_coordinate.LocalRcParameter_check_rc_assumption(Igc, Height)
 
 class LocalRectangularCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     """

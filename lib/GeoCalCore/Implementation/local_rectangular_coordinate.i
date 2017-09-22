@@ -20,6 +20,8 @@ class LocalRcParameter : public GenericObject {
 public:
   LocalRcParameter();
   LocalRcParameter(const ImageGroundConnection& Igc, double Height = 0);
+  static void check_rc_assumption
+  (const ImageGroundConnection& Igc, double Height = 0);
   std::string print_to_string() const;
   double cf_to_rc[3][3];
   boost::array<double, 3> cf_offset;

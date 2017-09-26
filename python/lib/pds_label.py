@@ -29,7 +29,7 @@ def pds_label(fname):
     txt = pds_label_text(fname)
     res = dict()
     for ln in txt.split(b"\n"):
-        m = re.match(b'\s*(\w+)\s*=(.+)*', ln)
+        m = re.match(b'\s*(\^?\w+)\s*=(.+)*', ln)
         if(m):
             k = m.group(1)
             v = m.group(2).strip()

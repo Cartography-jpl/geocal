@@ -11645,6 +11645,12 @@ clean_unit_test:
 @WITH_DOCUMENTATION_TRUE@clean_doxygen_generate:
 @WITH_DOCUMENTATION_TRUE@	-rm -rf doc/geocal
 @WITH_DOCUMENTATION_TRUE@	-rm -r doc/geocal.tag
+
+#=================================================================
+# Upload documentation to github pages
+@WITH_DOCUMENTATION_TRUE@github-pages: doc/geocal.tag
+@WITH_DOCUMENTATION_TRUE@	@echo "Note, this should usually be done from the main branch only"
+@WITH_DOCUMENTATION_TRUE@	cd $(srcdir) && ghp-import $(abs_builddir)/doc -m "Update doxygen documentation"
 # We don't use this for anything, so don't bother to build
 #bin_PROGRAMS += dcraw
 #dcraw_SOURCES = @srcraw@/simple_dcraw.cpp

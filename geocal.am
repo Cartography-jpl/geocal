@@ -199,6 +199,6 @@ clean_doxygen_generate:
 # Upload documentation to github pages
 github-pages: doc/geocal.tag
 	@echo "Note, this should usually be done from the main branch only"
-	cd $(srcdir) && ghp-import $(abs_builddir)/doc -m "Update doxygen documentation"
-	@echo "You now need to push the gh-pages branchs to github for these to be visible"
+	cd $(srcdir) && ghp-import $(abs_builddir)/doc/html -m "Update doxygen documentation"
+	@echo "You now need to push the gh-pages branchs to github for these to be visible (git push origin gh-pages)"
 endif

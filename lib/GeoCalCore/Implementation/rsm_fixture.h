@@ -64,8 +64,7 @@ public:
   rp_from_rpc->set_rpc_coeff(rpc);
   boost::shared_ptr<MemoryRasterImage> image =
     boost::make_shared<MemoryRasterImage>(rpc.line_offset * 2,
-					  rpc.sample_offset * 2);
-  image->data() = 0;
+					  rpc.sample_offset * 2, 0);
   igc = boost::make_shared<RpcImageGroundConnection>
     (rpc, boost::make_shared<SimpleDem>(), image);
   cconv = boost::make_shared<GeodeticConverter>();

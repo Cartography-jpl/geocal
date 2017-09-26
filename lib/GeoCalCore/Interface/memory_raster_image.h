@@ -28,6 +28,19 @@ public:
     {
     }
 
+//-----------------------------------------------------------------------
+/// Construct a MemoryRasterImage of the given size, and fill with
+/// given value (useful in particular for unit tests that just need
+/// "an image" without caring about the content)
+//-----------------------------------------------------------------------
+
+  MemoryRasterImage(int Number_line, int Number_sample, int Fill_value)
+    : RasterImageVariable(Number_line, Number_sample),
+      data_(Number_line, Number_sample)
+    {
+      data_ = Fill_value;
+    }
+
   MemoryRasterImage(const RasterImage& Img, int Number_line_to_read = -1, 
 		    int Number_sample_to_read = -1);
 

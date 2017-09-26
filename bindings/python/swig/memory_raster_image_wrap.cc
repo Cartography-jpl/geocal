@@ -6189,6 +6189,54 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_MemoryRasterImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
+  int arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::MemoryRasterImage *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_MemoryRasterImage" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_MemoryRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_MemoryRasterImage" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (GeoCal::MemoryRasterImage *)new GeoCal::MemoryRasterImage(arg1,arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::MemoryRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::MemoryRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MemoryRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MemoryRasterImage__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = 0 ;
   int arg2 ;
   int arg3 ;
@@ -6256,7 +6304,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_MemoryRasterImage__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_MemoryRasterImage__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = 0 ;
   int arg2 ;
@@ -6317,7 +6365,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_MemoryRasterImage__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_MemoryRasterImage__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RasterImage *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -6370,7 +6418,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_MemoryRasterImage__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_MemoryRasterImage__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -6438,12 +6486,12 @@ SWIGINTERN PyObject *_wrap_new_MemoryRasterImage(PyObject *self, PyObject *args)
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_1;
-    return _wrap_new_MemoryRasterImage__SWIG_3(self, argc, argv);
+    return _wrap_new_MemoryRasterImage__SWIG_4(self, argc, argv);
   }
 check_1:
   
   if (argc == 1) {
-    return _wrap_new_MemoryRasterImage__SWIG_4(self, argc, argv);
+    return _wrap_new_MemoryRasterImage__SWIG_5(self, argc, argv);
   }
   if (argc == 2) {
     int _v = 0;
@@ -6452,13 +6500,24 @@ check_1:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_3;
-    return _wrap_new_MemoryRasterImage__SWIG_2(self, argc, argv);
+    return _wrap_new_MemoryRasterImage__SWIG_3(self, argc, argv);
   }
 check_3:
   
   if (argc == 2) {
     return _wrap_new_MemoryRasterImage__SWIG_0(self, argc, argv);
   }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_MemoryRasterImage__SWIG_2(self, argc, argv);
+  }
+check_5:
+  
   if (argc == 3) {
     return _wrap_new_MemoryRasterImage__SWIG_1(self, argc, argv);
   }
@@ -6467,6 +6526,7 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_MemoryRasterImage'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::MemoryRasterImage::MemoryRasterImage(int,int)\n"
+    "    GeoCal::MemoryRasterImage::MemoryRasterImage(int,int,int)\n"
     "    GeoCal::MemoryRasterImage::MemoryRasterImage(GeoCal::RasterImage const &,int,int)\n"
     "    GeoCal::MemoryRasterImage::MemoryRasterImage(GeoCal::RasterImage const &,int)\n"
     "    GeoCal::MemoryRasterImage::MemoryRasterImage(GeoCal::RasterImage const &)\n"

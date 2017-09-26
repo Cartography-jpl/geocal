@@ -12,7 +12,7 @@ BOOST_AUTO_TEST_CASE(basic)
 {
   boost::shared_ptr<Dem> dem = boost::make_shared<SimpleDem>(1017);
   boost::shared_ptr<RasterImage> img =
-    boost::make_shared<MemoryRasterImage>(100, 300);
+    boost::make_shared<MemoryRasterImage>(100, 300, 0);
   boost::shared_ptr<Rsm> rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
   RsmImageGroundConnection ig(rsm, dem, img);
   ImageCoordinate ic_expect(5729.22, 27561.36);
@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(serialize)
     return;
   boost::shared_ptr<Dem> dem = boost::make_shared<SimpleDem>(1017);
   boost::shared_ptr<RasterImage> img =
-    boost::make_shared<MemoryRasterImage>(100, 300);
+    boost::make_shared<MemoryRasterImage>(100, 300, 0);
   boost::shared_ptr<Rsm> rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
   boost::shared_ptr<RsmImageGroundConnection> ig =
     boost::make_shared<RsmImageGroundConnection>(rsm, dem, img);

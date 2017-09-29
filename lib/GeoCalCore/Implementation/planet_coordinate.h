@@ -147,6 +147,15 @@ public:
   reference_surface_intersect_approximate(
   const CartesianFixedLookVector& Cl, double Height_reference_surface = 0)
     const;
+
+//-----------------------------------------------------------------------
+/// Radius of planet in meters at the point
+//-----------------------------------------------------------------------
+
+  double planet_radius() const
+  {return planet_radius_lat(atan2(position[2],
+     sqrt(position[0] * position[0] + position[1] * position[1]))); }
+  
 //-----------------------------------------------------------------------
 /// Return NAIF code.
 //-----------------------------------------------------------------------
@@ -161,6 +170,17 @@ public:
    const std::string& Spacecraft_reference_frame_name, const Time& T,
    int Naif_code);
 private:
+//-----------------------------------------------------------------------
+/// Radius of planet in meters at given Planetocentric Latitude (in
+/// radians, since we've already converted.
+//-----------------------------------------------------------------------
+
+  double planet_radius_lat(double Latitude_radians) const
+  {
+    double clat = cos(Latitude_radians);
+    return PlanetConstant::b(naif_code_) / 
+      sqrt(1 - PlanetConstant::esq(naif_code_) * clat * clat);
+  }
   int naif_code_;
   friend class boost::serialization::access;
   template<class Archive>

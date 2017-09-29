@@ -7197,6 +7197,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_PlanetFixed__v_planet_radius(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::PlanetFixed *arg1 = (GeoCal::PlanetFixed *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PlanetFixed const > tempshared1 ;
+  boost::shared_ptr< GeoCal::PlanetFixed const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetFixed_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PlanetFixed__v_planet_radius" "', argument " "1"" of type '" "GeoCal::PlanetFixed const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PlanetFixed > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::PlanetFixed > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetFixed * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::PlanetFixed > * >(argp1);
+      arg1 = const_cast< GeoCal::PlanetFixed * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::PlanetFixed const *)arg1)->planet_radius();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_PlanetFixed(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PlanetFixed *arg1 = (GeoCal::PlanetFixed *) 0 ;
@@ -8789,6 +8832,11 @@ static PyMethodDef SwigMethods[] = {
 		"(e.g., something we have a fk kernel for). In addition to the frame\n"
 		"definition, you'll generally need a C kernel file (ck kernel) giving\n"
 		"the orientation of the frame with the target. \n"
+		""},
+	 { (char *)"PlanetFixed__v_planet_radius", (PyCFunction)_wrap_PlanetFixed__v_planet_radius, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::PlanetFixed::planet_radius() const\n"
+		"Radius of planet in meters at the point. \n"
 		""},
 	 { (char *)"delete_PlanetFixed", (PyCFunction)_wrap_delete_PlanetFixed, METH_O, (char *)"\n"
 		"\n"

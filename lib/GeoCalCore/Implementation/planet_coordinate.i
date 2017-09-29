@@ -56,6 +56,7 @@ public:
    const std::string& Spacecraft_reference_frame_name, const Time& T,
    int Naif_code);
   virtual int naif_code() const;
+  %python_attribute(planet_radius, double);
   %pickle_serialization();
 };
 

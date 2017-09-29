@@ -387,11 +387,26 @@ class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
 
     orbit_data = staticmethod(orbit_data)
 
+    def _v_planet_radius(self):
+        """
+
+        double GeoCal::PlanetFixed::planet_radius() const
+        Radius of planet in meters at the point. 
+        """
+        return _planet_coordinate.PlanetFixed__v_planet_radius(self)
+
+
+    @property
+    def planet_radius(self):
+        return self._v_planet_radius()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _planet_coordinate.delete_PlanetFixed
 PlanetFixed.reference_surface_intersect_approximate = new_instancemethod(_planet_coordinate.PlanetFixed_reference_surface_intersect_approximate, None, PlanetFixed)
+PlanetFixed._v_planet_radius = new_instancemethod(_planet_coordinate.PlanetFixed__v_planet_radius, None, PlanetFixed)
 PlanetFixed_swigregister = _planet_coordinate.PlanetFixed_swigregister
 PlanetFixed_swigregister(PlanetFixed)
 

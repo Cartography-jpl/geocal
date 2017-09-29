@@ -49,31 +49,32 @@ BOOST_AUTO_TEST_CASE(mars_coordinate)
   std::string mars_wkt="PROJCS[\"SINUSOIDAL MARS\",\
     GEOGCS[\"GCS_MARS\",\
         DATUM[\"D_MARS\",\
-            SPHEROID[\"MARS\",3396000,0]],\
+            SPHEROID[\"MARS\",3396190,0]],\
         PRIMEM[\"Reference_Meridian\",0],\
         UNIT[\"degree\",0.0174532925199433]],\
     PROJECTION[\"Sinusoidal\"],\
-    PARAMETER[\"longitude_of_center\",340],\
+    PARAMETER[\"longitude_of_center\",339.97692848049],\
     PARAMETER[\"false_easting\",0],\
     PARAMETER[\"false_northing\",0],\
     UNIT[\"metre\",1,\
         AUTHORITY[\"EPSG\",\"9001\"]]]";
   boost::shared_ptr<OgrWrapper> mars_sinusoidal(new OgrWrapper(mars_wkt));
-  OgrCoordinate c(mars_sinusoidal, -39781.25, 1656201.25, 100.0);
+  OgrCoordinate c(mars_sinusoidal, 8954.539525824, 1309729.025467, 100.0);
   boost::shared_ptr<CartesianFixed> cf = c.convert_to_cf();
-  PlanetFixed mf(2809164.6332301, -1064843.66585431, 1574812.3299872,
+  Planetocentric mf(22.095920859859, -19.860028385975, 100,
 		 PlanetConstant::MARS_NAIF_CODE);
   BOOST_CHECK(distance(mf, *cf) < 1.0);
-  BOOST_CHECK_CLOSE(c.latitude(), 27.663583380357668, 1e-4);
-  BOOST_CHECK_CLOSE(c.longitude(), -20.759744758052218, 1e-4);
-  // Not exactly 100.0 because the coordinates use a sphere, but we
-  // use a spheroid for defining the reference surface. Not a big
-  // difference between the 2, but it is present.
-  BOOST_CHECK_CLOSE(c.height_reference_surface(), 100.00118645606562, 1e-4);
+  BOOST_CHECK_CLOSE(c.latitude(), 22.095920859859, 1e-4);
+  BOOST_CHECK_CLOSE(c.longitude(), -19.860028385975, 1e-4);
+  BOOST_CHECK_CLOSE(c.height_reference_surface(), 100, 1e-4);
   OgrCoordinate c2(mars_sinusoidal, mf);
-  BOOST_CHECK_CLOSE(c2.x, -39781.25, 1e-4);
-  BOOST_CHECK_CLOSE(c2.y, 1656201.25, 1e-4);
+  BOOST_CHECK_CLOSE(c2.x, 8954.539525824, 1e-4);
+  BOOST_CHECK_CLOSE(c2.y, 1309729.025467, 1e-4);
   BOOST_CHECK_CLOSE(c2.z, 100.0, 1e-4);
+  OgrCoordinate c3(mars_sinusoidal, *mf.convert_to_cf());
+  BOOST_CHECK_CLOSE(c3.x, 8954.539525824, 1e-4);
+  BOOST_CHECK_CLOSE(c3.y, 1309729.025467, 1e-4);
+  BOOST_CHECK_CLOSE(c3.z, 100.0, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(mars_coordinate_isis_problem)

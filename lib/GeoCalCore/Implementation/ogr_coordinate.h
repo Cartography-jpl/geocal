@@ -9,6 +9,8 @@
 #include <boost/utility.hpp>
 
 namespace GeoCal {
+  class Planetocentric;
+  
 /****************************************************************//**
   This is a wrapper around the OGRSpatialReference class. We hold onto
   a OGRSpatialReference class and a transformation from that
@@ -37,15 +39,14 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return transformation that takes us from our coordinate system to
-/// Geodetic. Is null for other planets (where Geodetic doesn't make sense).
+/// Geodetic/Planetocentric.
 //-----------------------------------------------------------------------
 
   const OGRCoordinateTransformation* transform() const {return ogr_transform_;}
 
 //-----------------------------------------------------------------------
-/// Return inverse of transform(). This goes from Geodetic to our
-/// coordinate system. Is null for other planets (where Geodetic
-/// doesn't make sense). 
+/// Return inverse of transform(). This goes from
+/// Geodetic/Planetocentric to our coordinate system. 
 //-----------------------------------------------------------------------
 
   const OGRCoordinateTransformation* inverse_transform() const 
@@ -53,7 +54,7 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return transformation that takes us from our coordinate system to
-/// CartesianFixed.
+/// CartesianFixed. Is null for other planets.
 //-----------------------------------------------------------------------
 
   const OGRCoordinateTransformation* cf_transform() const
@@ -61,7 +62,7 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return inverse of cf_transform(). This goes from CartesianFixed to our
-/// coordinate system.
+/// coordinate system. Is null for other planets
 //-----------------------------------------------------------------------
 
   const OGRCoordinateTransformation* cf_inverse_transform() const 
@@ -93,7 +94,7 @@ private:
   // issue, we can come up with something more flexible.
   static boost::scoped_ptr<OGRSpatialReference> ogr_geodetic;
   static boost::scoped_ptr<OGRSpatialReference> ogr_ecr;
-  static boost::scoped_ptr<OGRSpatialReference> ogr_mars_cf;
+  static boost::scoped_ptr<OGRSpatialReference> ogr_mars_pc;
   OgrWrapper() {}
   friend class boost::serialization::access;
   template<class Archive>
@@ -129,6 +130,8 @@ public:
   {}
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 		const Geodetic& G);
+  OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
+		const Planetocentric& G);
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 		const GroundCoordinate& G);
 

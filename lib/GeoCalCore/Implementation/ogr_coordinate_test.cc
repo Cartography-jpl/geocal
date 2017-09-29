@@ -2,6 +2,7 @@
 #include "ogr_coordinate.h"
 #include "ecr.h"
 #include "planet_coordinate.h"
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 BOOST_FIXTURE_TEST_SUITE(ogr_coordinate, GlobalFixture)
@@ -75,6 +76,30 @@ BOOST_AUTO_TEST_CASE(mars_coordinate)
   BOOST_CHECK_CLOSE(c2.z, 100.0, 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(mars_coordinate_isis_problem)
+{
+  // Illustrate a problem we had with SimpleCylindrical handling to
+  // agree with ISIS software. The expected results comes from the
+  // the ISIS program mappt
+  boost::shared_ptr<OgrWrapper> owrap =
+    boost::make_shared<OgrWrapper>("PROJCS[\"SimpleCylindrical Mars\",\
+    GEOGCS[\"GCS_Mars\",\
+        DATUM[\"D_Mars\",\
+            SPHEROID[\"Mars\",3396190,0]],\
+        PRIMEM[\"Reference_Meridian\",0],\
+        UNIT[\"degree\",0.0174532925199433]],\
+    PROJECTION[\"Equirectangular\"],\
+    PARAMETER[\"latitude_of_origin\",0],\
+    PARAMETER[\"central_meridian\",180],\
+    PARAMETER[\"standard_parallel_1\",0],\
+    PARAMETER[\"false_easting\",0],\
+    PARAMETER[\"false_northing\",0]]");
+  OgrCoordinate pt(owrap, 9487606.7892057, 1309729.025467, 0);
+  Planetocentric pt2(pt);
+  BOOST_CHECK_CLOSE(pt2.latitude(), 22.095920859859, 1e-4);
+  BOOST_CHECK_CLOSE(pt2.longitude(), -19.938334810139, 1e-4);
+}
+    
 BOOST_AUTO_TEST_CASE(ogr_wrapper)
 {
   boost::shared_ptr<OgrWrapper> ogrw = OgrWrapper::from_epsg(32612);

@@ -113,7 +113,7 @@ if(args.mapped_image):
     write_shelve(args.output_base_name + "_igc_proj.xml", igc_proj)
     
 # Write out the PDS label, in case there is something we need from it
-with open(args.output_base_name + ".lbl", "w") as fh:
+with open(args.output_base_name + ".lbl", "wb") as fh:
     fh.write(pds_label_text(args.pds_image))
 subprocess.run(["gdal_translate", "-of", "VRT", "-q", args.pds_image,
                 args.output_base_name + ".vrt"], check=True)

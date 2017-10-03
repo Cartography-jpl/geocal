@@ -24,7 +24,7 @@ Options:
   -h --help         
        Print this message
 
-  --avg_factor=d
+  --avg-factor=d
        The averaging factor to use on the original data before projecting
        it. If this isn't specified, we match the map resolution to the
        resolution of center pixel of the projected ImageGroundCollection.

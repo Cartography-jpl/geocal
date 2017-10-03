@@ -1380,7 +1380,7 @@ am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
-	$(srcdir)/$(srcpythonbin)/mars_nest_map \
+	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen
 SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -1455,7 +1455,7 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
-	$(srcdir)/$(srcpythonbin)/mars_nest_map.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
@@ -2159,7 +2159,6 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/nitfinfo \
 	$(srcdir)/$(srcpythonbin)/dem_generate \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
-	$(srcdir)/$(srcpythonbin)/mars_nest_map \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/shelve_job_run \
 	$(srcdir)/$(srcpythonbin)/sba \
@@ -2749,12 +2748,12 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
-	$(srcdir)/$(srcpythonbin)/mars_nest_map $(am__append_45)
+	$(srcdir)/$(srcpythonbin)/mars_generate_rsm $(am__append_45)
 dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
-	$(srcdir)/$(srcpythonbin)/mars_nest_map.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \

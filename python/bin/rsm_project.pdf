@@ -1,0 +1,131 @@
+PROCESS       HELP=*
+parm img type=(string,99) count=1
+parm out type=(string,99) count=1
+parm dem type=(string,99) count=1 default=""
+parm datum type=(string,99) count=1 default=""
+parm srtm type=(string,4) count=(0:1) valid=(n,y) default=n
+parm consdem type=real count=1 default=-9999.0
+parm okout type=(string,4) count=(0:1) valid=(n,y) default=n
+parm demband type=int count=1 default=1
+parm datumband type=int count=1 default=1
+parm consdatum type=real count=1 default=0.0
+parm avgfactor type=int count=1 default=-1
+parm bbox type=(string,99) count=1 default=""
+parm gspace type=int count=1 default=1
+parm mapinfo type=(string,99) count=1 default=""
+parm res type=real count=1 default=1.0
+parm nproc type=int count=1 default=1
+parm pline type=int count=1 default=1000
+parm psamp type=int count=1 default=1000
+parm vtype type=(string,99) count=1 valid=(BYTE,HALF,FULL,REAL,DOUB) default=HALF
+parm verbose type=(string,4) count=(0:1) valid=(n,y) default=n
+END-PROC
+.TITLE
+Rsm_Project
+.HELP
+rsm_project takes a VICAR file with a RSM and projects it to the surface.
+
+Example:
+    mars_generate_rsm /raid26/tllogan/mars/mawrth_vallis/source/unmapped/P16_007388_2049_XI_24N020W.IMG ctx1
+    rsm_project --grid-spacing=10 --map-info=ctx1_ref_img.xml --number-process=20 --verbose --process-number-line=1000 --process-number-sample=1000 ctx1.img ctx1_proj.img
+.LEVEL1
+.variable img
+The input image file to use,
+which should have RSM
+generated (e.g., call
+mars_generate_rsm first)
+.variable dem
+DEM file to use
+.variable datum
+DATUM file to use
+.variable out
+Name of output file
+.variable srtm
+If "y", use the SRTM rather
+than supplying a DEM file.
+.variable consdem
+Use a constant height DEM (a
+SimpleDem), with the given
+height.
+.variable okout
+If a program attempts to read
+a DEM value outside of the
+supplied file, this is
+normally treated as an error.
+Alternatively, you can specify
+this option as "y" and we will
+return a height of "0" for any
+attempt to read outside the DEM.
+.variable demband
+The band of the DEM file to
+use (1 based).
+.variable datumband
+The band of the Datum file to
+use (1 based).
+.variable condatum
+Use a datum with a constant
+undulation. This is useful as
+a quick way to add an offset
+to  DEM file.
+.variable avgfactor
+The averaging factor to use
+on the original data before
+projecting it. If this isn't
+specified, we match the map
+resolution to the resolution of
+center pixel of the projected
+ImageGroundCollection.
+Otherwise, we average by the
+given factor.
+.variable bbox
+Use the given image to supply
+the bounding box for the
+output. Note that we use the
+projection and bounding box,
+but not the resolution of the
+map info (unlike mapinfo).
+This can be useful to for
+example cover the area of a
+generated DEM, even if the DEM
+is lower resolution than what
+we want to project here.
+.variable gspace
+Grid spacing to exactly
+calculate the image ground
+connection for, doing a linear
+interpolation in between. This
+can greatly affect how long
+the processing takes. If the
+grid spacing is something like
+the DEM resolution, usually
+you get almost as good output
+but much faster.
+.variable mapinfo
+Rather than generating a image
+to cover the full area, match
+exactly the supplied shelve
+image or MapInfo. This is
+useful to when comparing
+against an existing image/DEM.
+.variable res
+Resolution in meters of output
+.variable nproc
+Number of processors to use
+.variable pline
+Number of lines to include in
+each tile that we work on.
+This controls how long each
+parallel job takes to run.
+.variable psamp
+Number of samples to include
+in each tile that we work on.
+This controls how long each
+parallel job takes to run.
+.variable vtype
+Type of file to generate. This
+should by BYTE, HALF, FULL,
+REAL, or DOUB. Default is HALF
+.variable verbose
+Print more information as we run.
+.END
+

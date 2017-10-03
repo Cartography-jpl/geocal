@@ -102,7 +102,7 @@ else:
             if(VicarLiteFile.is_vicar_file(args.image[i])):
                 img = VicarLiteRasterImage(args.image[i])
             else:
-                imv = GdalRasterImage(args.image[i])
+                img = GdalRasterImage(args.image[i])
             t = RsmImageGroundConnection(rsm, dem, img, args.title[i])
         elif VicarImageGroundConnection.is_vicar_file(args.image[i]):
             t = VicarImageGroundConnection(args.image[i], dem, 

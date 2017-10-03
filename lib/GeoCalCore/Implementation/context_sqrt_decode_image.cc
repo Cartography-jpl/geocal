@@ -49,7 +49,7 @@ void ContextSqrtDecodeImage::calc(int Lstart, int Sstart) const
   blitz::Array<int, 2> rd = raw_data_->read(Lstart, Sstart, data.rows(),
 					   data.cols());
   for(int i = 0; i < data.rows(); ++i)
-    for(int j = 0; j < data.rows(); ++j) {
+    for(int j = 0; j < data.cols(); ++j) {
       if(rd(i,j) < 0 || rd(i, j) > 255) {
 	Exception e;
 	e << "Out of range data found at (" << i + Lstart

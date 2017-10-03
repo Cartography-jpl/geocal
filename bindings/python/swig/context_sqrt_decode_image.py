@@ -206,10 +206,15 @@ class ContextSqrtDecodeImage(geocal_swig.calc_raster.CalcRaster):
     C++ includes: context_sqrt_decode_image.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, Raw_data):
+        """
+
+        GeoCal::ContextSqrtDecodeImage::ContextSqrtDecodeImage(const boost::shared_ptr< RasterImage > &Raw_data)
+
+        """
+        _context_sqrt_decode_image.ContextSqrtDecodeImage_swiginit(self, _context_sqrt_decode_image.new_ContextSqrtDecodeImage(Raw_data))
 
     def _v_raw_data(self):
         """

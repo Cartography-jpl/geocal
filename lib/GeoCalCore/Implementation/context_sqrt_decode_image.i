@@ -15,7 +15,7 @@ public:
   ContextSqrtDecodeImage(const boost::shared_ptr<RasterImage>& Raw_data);
   %python_attribute(raw_data, boost::shared_ptr<RasterImage>);
 protected:
-  virtual void calc(int Lstart, int Sstart) const = 0;
+  virtual void calc(int Lstart, int Sstart) const;
   %pickle_serialization()
 };
 

@@ -37,9 +37,11 @@ std::vector<std::string> GdalBase::metadata_list(const std::string& Domain) cons
   if(md) {
     for(char **i = md; *i != 0; ++i) {
       std::string t(*i);
-      res.push_back(t.substr(0, t.find("=")));
+      // Skip value that end in "=", this is metadata with no actual
+      // value.
+      if(*t.rbegin() != '=')
+	res.push_back(t.substr(0, t.find("=")));
     }
-    CSLDestroy(md);
   }
   return res;
 }

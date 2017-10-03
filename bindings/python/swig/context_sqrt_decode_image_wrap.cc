@@ -5313,6 +5313,19 @@ namespace swig {
 #include "context_sqrt_decode_image.h"
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6110,6 +6123,62 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
+SWIGINTERN PyObject *_wrap_new_ContextSqrtDecodeImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::RasterImage > *arg1 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared1 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::ContextSqrtDecodeImage *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_ContextSqrtDecodeImage" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    try {
+      result = (GeoCal::ContextSqrtDecodeImage *)new GeoCal::ContextSqrtDecodeImage((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ContextSqrtDecodeImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::ContextSqrtDecodeImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ContextSqrtDecodeImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ContextSqrtDecodeImage__v_raw_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ContextSqrtDecodeImage *arg1 = (GeoCal::ContextSqrtDecodeImage *) 0 ;
@@ -6204,6 +6273,10 @@ SWIGINTERN PyObject *ContextSqrtDecodeImage_swigregister(PyObject *SWIGUNUSEDPAR
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *ContextSqrtDecodeImage_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -6225,6 +6298,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
+	 { (char *)"new_ContextSqrtDecodeImage", (PyCFunction)_wrap_new_ContextSqrtDecodeImage, METH_O, (char *)"\n"
+		"\n"
+		"GeoCal::ContextSqrtDecodeImage::ContextSqrtDecodeImage(const boost::shared_ptr< RasterImage > &Raw_data)\n"
+		"\n"
+		""},
 	 { (char *)"ContextSqrtDecodeImage__v_raw_data", (PyCFunction)_wrap_ContextSqrtDecodeImage__v_raw_data, METH_O, (char *)"\n"
 		"\n"
 		"const boost::shared_ptr<RasterImage>& GeoCal::ContextSqrtDecodeImage::raw_data() const\n"
@@ -6236,6 +6314,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"ContextSqrtDecodeImage_swigregister", ContextSqrtDecodeImage_swigregister, METH_VARARGS, NULL},
+	 { (char *)"ContextSqrtDecodeImage_swiginit", ContextSqrtDecodeImage_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

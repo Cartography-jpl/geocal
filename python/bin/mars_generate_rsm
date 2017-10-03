@@ -137,6 +137,8 @@ def igc_for_context(lbl, fname):
     orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
                            PlanetConstant.MARS_NAIF_CODE)
     img = GdalRasterImage(fname)
+    if(lbl["SAMPLE_BIT_MODE_ID"] == "SQROOT"):
+        img = ContextSqrtDecodeImage(img)
     focal_length = 352.9271664
     pitch = 7e-3
     left_masked = 38
@@ -165,7 +167,7 @@ def igc_for_context(lbl, fname):
     # Chop off masked pixels for map projecting
     igc_sub = OffsetImageGroundConnection(igc, 0, 38, igc.number_line, 5000)
     gdal_arg = ["-srcwin", "38", "0", "5000", str(igc.number_line)]
-    return igc, igc_sub, gdal_arg
+    return igc, igc_sub
 
 def rsm_for_context(lbl, fname, subset=None):
     '''This generates a RSM for a MRO Context image. We return the Rsm, 
@@ -174,12 +176,10 @@ def rsm_for_context(lbl, fname, subset=None):
 
     We also return any extra arguments for gdal_translate. Not sure if this is
     the best interface of not, but do this for now.'''
-    igc, igc_sub, gdal_arg = igc_for_context(lbl, fname)
+    igc, igc_sub = igc_for_context(lbl, fname)
     if(subset is not None):
         igc_sub = OffsetImageGroundConnection(igc_sub, subset[0], subset[1],
                                               subset[2], subset[3])
-        gdal_arg = ["-srcwin", str(subset[1]+38), str(subset[0]),
-                    str(subset[3]), str(subset[2])]
     # In order for LocalRcParameter to be useful, the look, sample, and line
     # directions need to be mostly orthogonal. So dot product of unit vectors
     # should be close to 0
@@ -201,7 +201,7 @@ def rsm_for_context(lbl, fname, subset=None):
                           RsmGrid(3, 1000, 50)),
             LocalRcConverter(LocalRcParameter(igc_sub)))
     r.fit(igc_sub, args.min_height, args.max_height)
-    return r, igc_sub, gdal_arg
+    return r, igc_sub
     
 def igc_for_hrsc(lbl, fname):
     '''Process for HRSC camera'''
@@ -270,16 +270,11 @@ def rsm_for_hrsc(lbl, fname, subset=None):
     '''This generates a RSM for a MRO Context image. We return the Rsm, 
     and the original igc. This strips off the masked pixels. Not sure if this
     is what we ultimately want or not, but it is what we do here.
-
-    We also return any extra arguments for gdal_translate. Not sure if this is
-    the best interface of not, but do this for now.'''
+    '''
     igc = igc_for_hrsc(lbl, fname)
-    gdal_arg = []
     if(subset is not None):
         igc = OffsetImageGroundConnection(igc, subset[0], subset[1],
                                           subset[2], subset[3])
-        gdal_arg = ["-srcwin", str(subset[1]), str(subset[0]),
-                    str(subset[3]), str(subset[2])]
     # In order for LocalRcParameter to be useful, the look, sample, and line
     # directions need to be mostly orthogonal. So dot product of unit vectors
     # should be close to 0
@@ -305,7 +300,7 @@ def rsm_for_hrsc(lbl, fname, subset=None):
                           RsmGrid(3, 5000, 50, False)),
             LocalRcConverter(LocalRcParameter(igc)))
     r.fit(igc, args.min_height, args.max_height)
-    return r, igc, gdal_arg
+    return r, igc
 
 # Determine the image type
 lbl = pds_label(args.pds_image)
@@ -313,9 +308,9 @@ subset = None
 if args.subset:
     subset = eval(args.subset)
 if(lbl['INSTRUMENT_NAME'] == 'CONTEXT CAMERA'):
-    r, igc, gdal_arg = rsm_for_context(lbl,args.pds_image, subset)
+    r, igc = rsm_for_context(lbl,args.pds_image, subset)
 elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION STEREO CAMERA'):
-    r, igc, gdal_arg = rsm_for_hrsc(lbl,args.pds_image, subset)
+    r, igc = rsm_for_hrsc(lbl,args.pds_image, subset)
 else:
     raise RuntimeError("Not a recognized instrument name %s" %
                        lbl['INSTRUMENT_NAME'])
@@ -327,22 +322,14 @@ if(args.full_igc):
 # Write out the PDS label, in case there is something we need from it
 with open(args.output_base_name + ".lbl", "wb") as fh:
     fh.write(pds_label_text(args.pds_image))
-cmd = ["gdal_translate", "-of", "VRT", "-q"]
-cmd.extend(gdal_arg)
-cmd.extend([args.pds_image, args.output_base_name + ".vrt"])
-subprocess.run(cmd, check=True)
-fvrt = GdalRasterImage(args.output_base_name + ".vrt")
-write_shelve(args.output_base_name + ".rsm.xml", r)
-# RSM is too big for a VICAR label. I'm not sure we can do anything about this,
-# we may need to just have a separate file
-#fvrt.set_rsm(Rsm.generate_rsm(igc, 0, 1000))
-#fvrt["rsm", "rsmv"] = serialize_write_string(r)
-#fvrt["rsm"] = serialize_write_string(r)
-fvrt.close()
-subprocess.run(["gdal_translate", "-of", "VICAR", 
-                args.output_base_name + ".vrt",
-                args.output_base_name + ".img"], check=True)
-os.remove(args.output_base_name + ".vrt")
+f = VicarRasterImage(args.output_base_name + ".img", "HALF",
+                     igc.number_line, igc.number_sample)
+fin = GdalRasterImage(args.pds_image)
+for k in fin.metadata_list():
+    if(not fin[k] == "") :
+        f[k] = fin[k]
+copy_raster(igc.image, f, True)
+f.close()
 if(args.plot_cross_section):
     plot_diff(r, igc, args.plot_cross_section)
     

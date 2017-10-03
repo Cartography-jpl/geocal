@@ -25,6 +25,26 @@ std::vector<std::string> GdalBase::file_names() const
 }
 
 //-----------------------------------------------------------------------
+/// Get a list of metadata keys for a given domain.
+//-----------------------------------------------------------------------
+
+std::vector<std::string> GdalBase::metadata_list(const std::string& Domain) const
+{
+  if(is_closed())
+    throw Exception("File has already been closed");
+  std::vector<std::string> res;
+  char** md = data_set()->GetMetadata(Domain.c_str());
+  if(md) {
+    for(char **i = md; *i != 0; ++i) {
+      std::string t(*i);
+      res.push_back(t.substr(0, t.find("=")));
+    }
+    CSLDestroy(md);
+  }
+  return res;
+}
+
+  //-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------
 

@@ -176,6 +176,13 @@ public:
   GdalBase& gdal_data_base() {return *gdal_data_base_;}
 
 //-----------------------------------------------------------------------
+/// Return the list of metadata keys for a given domain
+//-----------------------------------------------------------------------
+
+  std::vector<std::string> metadata_list(const std::string& Domain = "") const
+  { return gdal_data_base().metadata_list(Domain); }
+  
+//-----------------------------------------------------------------------
 /// Indicates if a metadata item is found in the file
 //-----------------------------------------------------------------------
 

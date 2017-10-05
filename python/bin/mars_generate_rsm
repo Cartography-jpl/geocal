@@ -330,6 +330,7 @@ for k in fin.metadata_list():
         f[k] = fin[k]
 copy_raster(igc.image, f, True)
 f.close()
+write_shelve(args.output_base_name + ".rsm.xml", r)
 if(args.plot_cross_section):
     plot_diff(r, igc, args.plot_cross_section)
     

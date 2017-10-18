@@ -10,10 +10,39 @@ from .nitf_tre_csepha import *
 from .nitf_tre_piae import *
 from .nitf_tre_rpc import *
 from .nitf_tre_geosde import *
+from .nitf_tre_histoa import *
 from .nitf_des_csatta import *
 from test_support import *
 import copy
 import json
+
+def createHISTOA():
+
+    t = TreHISTOA()
+
+    # Set some values
+    t.systype = "SYSTEM_TYPE"
+    t.pc = "NO_COMPRESSI"
+    t.pe = "NONE"
+    t.remap_flag = "0"
+    t.lutid = 0
+    t.nevents = 2
+
+    t.pdate[0] = "2017061512121_"
+    t.psite[0] = "ABCDEFGHI_"
+    t.pas[0] = "AAAAAAAAA_"
+    t.nipcom[0] = 2
+    t.ipcom[0, 0] = "HELLO1_"
+    t.ipcom[0, 1] = "HELLO2_"
+
+    t.pdate[1] = "20170615121212"
+    t.psite[1] = "ABCDEFGHIJ"
+    t.pas[1] = "AAAAAAAAAA"
+    t.nipcom[1] = 2
+    t.ipcom[1, 0] = "HELLO1"
+    t.ipcom[1, 1] = "HELLO2"
+
+    return t
 
 def test_main():
     # Create the file. We don't supply a name yet, that comes when we actually
@@ -37,7 +66,11 @@ def test_main():
 
     # Create a larger img segment
     img2 = NitfImageGeneral(nrow=3000, ncol=3000, numbands=100)
-    f.image_segment.append(NitfImageSegment(img2))
+    segment2 = NitfImageSegment(img2)
+    segment2.tre_list.append(createHISTOA())
+    f.image_segment.append(segment2)
+
+
 
     # Can add TRES to either the file or image segment level. This automatically
     # handles TRE overflow, you just put the tre in and the writing figures out

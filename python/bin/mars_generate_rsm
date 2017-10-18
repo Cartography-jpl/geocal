@@ -127,7 +127,7 @@ def plot_diff(r, igc, fname):
 def igc_for_context(lbl, fname):
     '''Process for context camera'''
     tstart = Time.parse_time(lbl["START_TIME"])
-    bdir = os.environ["AFIDS_DATA"] + "/mars_kernel/mro_kernel/"
+    bdir = os.environ["MARS_KERNEL"] + "/mro_kernel/"
     kdat = read_shelve(bdir + "kernel.json")
     # We need better logic here, but for now just set up the kernels we
     # handed
@@ -209,7 +209,7 @@ def igc_for_hrsc(lbl, fname):
     tend = Time.parse_time(lbl["STOP_TIME"])
     if(lbl["DETECTOR_ID"] != "MEX_HRSC_NADIR"):
         raise RuntimeError("Right now we only work with MEX_HRSC_NADIR")
-    bdir = os.environ["AFIDS_DATA"] + "/mars_kernel/mex_kernel/"
+    bdir = os.environ["MARS_KERNEL"] + "/mex_kernel/"
     kdat = read_shelve(bdir + "kernel.json")
     # We need better logic here, but for now just set up the kernels we
     # handed

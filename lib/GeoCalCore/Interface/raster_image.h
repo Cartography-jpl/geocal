@@ -176,6 +176,15 @@ public:
   virtual double unchecked_read_double(int Line, int Sample) const = 0;
 
 //-----------------------------------------------------------------------
+/// As an optimization, we assume when copying that data can be
+/// represented as a int. That is true of many images. But we actually
+/// need to use double, then we need to know that in the copy command.
+/// This function indicates if we need a double or not.
+//-----------------------------------------------------------------------
+
+  virtual bool copy_needs_double() const {return false;}
+  
+//-----------------------------------------------------------------------
 /// Alternate name for operator(). Languages that wrap this class such
 /// as Ruby don't support operator(), so we give another name for the
 /// same function.
@@ -219,6 +228,12 @@ public:
     range_check(Sample, 0, number_sample());
     unchecked_write(Line, Sample, Val);
   }
+  virtual void write(int Line, int Sample, double Val)
+  {
+    range_check(Line, 0, number_line());
+    range_check(Sample, 0, number_sample());
+    unchecked_write(Line, Sample, Val);
+  }
 
 //-----------------------------------------------------------------------
 /// Most of the time you should use the range checked write. But
@@ -227,6 +242,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void unchecked_write(int Line, int Sample, int Val) = 0;
+  virtual void unchecked_write(int Line, int Sample, double Val) = 0;
 
 //-----------------------------------------------------------------------
 /// Write a subset of the data. The default is just to call write for
@@ -241,8 +257,16 @@ public:
       for(int j = Sstart; j < Sstart + Number_sample; ++j, ++V)
 	write(i, j, *V);
   }
+  virtual void write_ptr(int Lstart, int Sstart, int Number_line, 
+			 int Number_sample, const double* V)
+  {
+    for(int i = Lstart; i < Lstart + Number_line; ++i)
+      for(int j = Sstart; j < Sstart + Number_sample; ++j, ++V)
+	write(i, j, *V);
+  }
 
   virtual void write(int Lstart, int Sstart, const blitz::Array<int, 2>& A);
+  virtual void write(int Lstart, int Sstart, const blitz::Array<double, 2>& A);
 
 //-----------------------------------------------------------------------
 /// Print to stream.

@@ -862,3 +862,70 @@ void SpicePlanetConstant::calc_data() const
 				// Eccentricity squared. From CRC.
 #endif
 }
+
+//-----------------------------------------------------------------------
+/// SPICE does not directly work with a full camera. However it can
+/// calculate boresight and footprint for instruments. This can be
+/// very useful to check a full ImageGroundConnection by checking that
+/// it agrees with SPICE on the boresight and footprint.
+///
+/// The Corr_type is what is used by sincpt_c, check the SPICE
+/// documentation for this. You generally will want to use the
+/// default, but you can use some of the other possible values if you
+/// want to see if things we normally ignore are important (e.g.,
+/// light travel time).
+///
+/// Satellite_name is something like "MEX" (for mars express), and
+/// Camera_name is something like "MEX_HRSC_NADIR".
+///
+/// We return a vector of GroundCoordinate. The first is the
+/// boresight, and the remaining are the footprint bounds in the order
+/// than spice returns them.
+//-----------------------------------------------------------------------
+
+std::vector<boost::shared_ptr<GroundCoordinate> >
+SpiceHelper::boresight_and_footprint
+(const Time& T, int Body_id,
+ const std::string& Satellite_name,
+ const std::string& Camera_name,
+ const std::string& Corr_type)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  char shape[1000], frame[1000];
+  int n;
+  double bsight[3], bounds[10][3];
+  
+  getfov_c(SpiceHelper::name_to_body(Camera_name),
+	   10, 1000, 1000, shape, frame, bsight, &n, bounds);
+  spice_error_check();
+  double spoint[3], trgepc, srfvec[3];
+  SpiceBoolean found;
+  sincpt_c ("Ellipsoid", body_name(Body_id).c_str(), T.et(),
+	    fixed_frame_name(Body_id).c_str(),  
+	    Corr_type.c_str(), Satellite_name.c_str(), frame, bsight, 
+	    spoint, &trgepc, srfvec, &found);  
+  SpiceHelper::spice_error_check();
+  if(!found)
+    throw Exception("Spice did not find a solution");
+  std::vector<boost::shared_ptr<GroundCoordinate> > res;
+  res.push_back(boost::make_shared<PlanetFixed>
+	     (spoint[0] * 1000.0,spoint[1] * 1000.0,spoint[2] * 1000.0,
+	      Body_id));
+  for(int i = 0; i < n; ++i) {
+    sincpt_c ("Ellipsoid", body_name(Body_id).c_str(), T.et(),
+	      fixed_frame_name(Body_id).c_str(),  
+	      Corr_type.c_str(), Satellite_name.c_str(), frame, bounds[i], 
+	      spoint, &trgepc, srfvec, &found);  
+    SpiceHelper::spice_error_check();
+    if(!found)
+      throw Exception("Spice did not find a solution");
+    res.push_back(boost::make_shared<PlanetFixed>
+	       (spoint[0] * 1000.0,spoint[1] * 1000.0,spoint[2] * 1000.0,
+		Body_id));
+  }
+  return res;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}

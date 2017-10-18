@@ -70,6 +70,7 @@ public:
   %python_attribute(height_reference_surface, double);
   %python_attribute(latitude, double);
   %python_attribute(longitude, double);
+  %python_attribute(planet_radius, double);
   %pickle_serialization();
 };
 

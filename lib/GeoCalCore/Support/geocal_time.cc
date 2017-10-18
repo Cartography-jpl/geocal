@@ -154,6 +154,43 @@ private:
 };
 
 //-----------------------------------------------------------------------
+/// Return time from a given SCLK (spacecraft clock string).
+//-----------------------------------------------------------------------
+
+Time Time::time_sclk(const std::string& Sclk,
+		     const std::string& Spacecraft_name)
+{
+#ifdef HAVE_SPICE
+  SpiceHelper::spice_setup();
+  double et;
+  scs2e_c(SpiceHelper::name_to_body(Spacecraft_name),
+	  Sclk.c_str(), &et);
+  SpiceHelper::spice_error_check();
+  return Time::time_et(et);
+#else
+  throw Exception("Need to have SPICE toolkit to convert from SCLK time");
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Return SCLK (spacecraft clock string) for the given time.
+//-----------------------------------------------------------------------
+
+std::string Time::sclk(const std::string& Spacecraft_name)
+{
+#ifdef HAVE_SPICE
+  SpiceHelper::spice_setup();
+  char buffer[1000];
+  sce2s_c(SpiceHelper::name_to_body(Spacecraft_name),
+	  et(), 1000, buffer);
+  SpiceHelper::spice_error_check();
+  return std::string(buffer);
+#else
+  throw Exception("Need to have SPICE toolkit to convert to SCLK time");
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Return time from given SPICE ET time.
 //-----------------------------------------------------------------------
 

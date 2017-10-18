@@ -6352,6 +6352,192 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int n
   double arg7 ;
   double arg8 ;
   double arg9 ;
+  double arg10 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Camera > tempshared2 ;
+  boost::shared_ptr< GeoCal::Camera > temp2shared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  void *argp5 ;
+  int res5 = 0 ;
+  void *argp6 ;
+  int res6 = 0 ;
+  boost::shared_ptr< GeoCal::TimeTable > tempshared6 ;
+  boost::shared_ptr< GeoCal::TimeTable > temp2shared6 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  double val8 ;
+  int ecode8 = 0 ;
+  double val9 ;
+  int ecode9 = 0 ;
+  double val10 ;
+  int ecode10 = 0 ;
+  GeoCal::Ipi *result = 0 ;
+  
+  if ((nobjs < 10) || (nobjs > 10)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Ipi" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Ipi" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Camera > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Ipi" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_Ipi" "', argument " "4"" of type '" "GeoCal::Time""'"); 
+    }
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Ipi" "', argument " "4"" of type '" "GeoCal::Time""'");
+    } else {
+      arg4 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp4)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp4);
+    }
+  }
+  {
+    int newmem = 0;
+    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_Ipi" "', argument " "5"" of type '" "GeoCal::Time""'"); 
+    }
+    if (!argp5) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Ipi" "', argument " "5"" of type '" "GeoCal::Time""'");
+    } else {
+      arg5 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp5)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp5);
+    }
+  }
+  {
+    int newmem = 0;
+    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t,  0 , &newmem);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_Ipi" "', argument " "6"" of type '" "boost::shared_ptr< GeoCal::TimeTable > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp6) tempshared6 = *reinterpret_cast< boost::shared_ptr< GeoCal::TimeTable > * >(argp6);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::TimeTable > * >(argp6);
+      arg6 = &tempshared6;
+    } else {
+      arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::TimeTable > * >(argp6) : &tempshared6;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg6 = &temp2shared6;
+    }
+  }
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_Ipi" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  ecode8 = SWIG_AsVal_double(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_Ipi" "', argument " "8"" of type '" "double""'");
+  } 
+  arg8 = static_cast< double >(val8);
+  ecode9 = SWIG_AsVal_double(swig_obj[8], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_Ipi" "', argument " "9"" of type '" "double""'");
+  } 
+  arg9 = static_cast< double >(val9);
+  ecode10 = SWIG_AsVal_double(swig_obj[9], &val10);
+  if (!SWIG_IsOK(ecode10)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_Ipi" "', argument " "10"" of type '" "double""'");
+  } 
+  arg10 = static_cast< double >(val10);
+  {
+    try {
+      result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,arg4,arg5,(boost::shared_ptr< GeoCal::TimeTable > const &)*arg6,arg7,arg8,arg9,arg10);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Ipi > *smartresult = result ? new boost::shared_ptr<  GeoCal::Ipi >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ipi_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::Camera > *arg2 = 0 ;
+  int arg3 ;
+  GeoCal::Time arg4 ;
+  GeoCal::Time arg5 ;
+  boost::shared_ptr< GeoCal::TimeTable > *arg6 = 0 ;
+  double arg7 ;
+  double arg8 ;
+  double arg9 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
@@ -6519,7 +6705,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg2 = 0 ;
@@ -6689,7 +6875,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg2 = 0 ;
@@ -6851,7 +7037,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg2 = 0 ;
@@ -7005,7 +7191,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Camera > *arg2 = 0 ;
@@ -7131,31 +7317,35 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Ipi(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[10] = {
+  PyObject *argv[11] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_Ipi",0,9,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_Ipi",0,10,argv))) SWIG_fail;
   --argc;
   if (argc == 5) {
-    return _wrap_new_Ipi__SWIG_4(self, argc, argv);
+    return _wrap_new_Ipi__SWIG_5(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_Ipi__SWIG_3(self, argc, argv);
+    return _wrap_new_Ipi__SWIG_4(self, argc, argv);
   }
   if (argc == 7) {
-    return _wrap_new_Ipi__SWIG_2(self, argc, argv);
+    return _wrap_new_Ipi__SWIG_3(self, argc, argv);
   }
   if (argc == 8) {
-    return _wrap_new_Ipi__SWIG_1(self, argc, argv);
+    return _wrap_new_Ipi__SWIG_2(self, argc, argv);
   }
   if (argc == 9) {
+    return _wrap_new_Ipi__SWIG_1(self, argc, argv);
+  }
+  if (argc == 10) {
     return _wrap_new_Ipi__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Ipi'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Ipi::Ipi(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::Camera > const &,int,GeoCal::Time,GeoCal::Time,boost::shared_ptr< GeoCal::TimeTable > const &,double,double,double,double)\n"
     "    GeoCal::Ipi::Ipi(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::Camera > const &,int,GeoCal::Time,GeoCal::Time,boost::shared_ptr< GeoCal::TimeTable > const &,double,double,double)\n"
     "    GeoCal::Ipi::Ipi(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::Camera > const &,int,GeoCal::Time,GeoCal::Time,boost::shared_ptr< GeoCal::TimeTable > const &,double,double)\n"
     "    GeoCal::Ipi::Ipi(boost::shared_ptr< GeoCal::Orbit > const &,boost::shared_ptr< GeoCal::Camera > const &,int,GeoCal::Time,GeoCal::Time,boost::shared_ptr< GeoCal::TimeTable > const &,double)\n"
@@ -8895,6 +9085,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Ipi__v_max_frame_extend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Ipi *arg1 = (GeoCal::Ipi *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Ipi const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Ipi const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ipi_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Ipi__v_max_frame_extend" "', argument " "1"" of type '" "GeoCal::Ipi const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::Ipi const *)arg1)->max_frame_extend();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_Ipi(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Ipi *arg1 = (GeoCal::Ipi *) 0 ;
@@ -8975,7 +9208,7 @@ static PyMethodDef SwigMethods[] = {
 		"Camera > &Cam, int Band, Time Tmin, Time Tmax, const\n"
 		"boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),\n"
 		"double Local_time_window_size=5.0, double Root_min_separation=30.0,\n"
-		"double Time_tolerance=1e-6)\n"
+		"double Time_tolerance=1e-6, double Max_frame_extend=1000)\n"
 		"Constructor.\n"
 		"\n"
 		"If you only want to get the Time from the Ipi and not ImageCoordinate,\n"
@@ -9098,6 +9331,14 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"double GeoCal::Ipi::time_tolerance() const\n"
 		"How accurate we find the time. \n"
+		""},
+	 { (char *)"Ipi__v_max_frame_extend", (PyCFunction)_wrap_Ipi__v_max_frame_extend, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::Ipi::max_frame_extend() const\n"
+		"Maximum amount we allow a Ipi solution to be outside the edged of the\n"
+		"camera.\n"
+		"\n"
+		"See class description for discussion of this. \n"
 		""},
 	 { (char *)"delete_Ipi", (PyCFunction)_wrap_delete_Ipi, METH_O, (char *)"\n"
 		"\n"

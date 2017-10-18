@@ -7455,6 +7455,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Planetocentric__v_planet_radius(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Planetocentric *arg1 = (GeoCal::Planetocentric *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Planetocentric const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Planetocentric const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Planetocentric_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Planetocentric__v_planet_radius" "', argument " "1"" of type '" "GeoCal::Planetocentric const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Planetocentric > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Planetocentric > * >(argp1);
+      arg1 = const_cast< GeoCal::Planetocentric * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Planetocentric > * >(argp1);
+      arg1 = const_cast< GeoCal::Planetocentric * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::Planetocentric const *)arg1)->planet_radius();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_Planetocentric(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Planetocentric *arg1 = (GeoCal::Planetocentric *) 0 ;
@@ -8758,6 +8801,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"GeoCal::Planetocentric::Planetocentric(int Naif_code=-1)\n"
 		"Default constructor. \n"
+		""},
+	 { (char *)"Planetocentric__v_planet_radius", (PyCFunction)_wrap_Planetocentric__v_planet_radius, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::Planetocentric::planet_radius() const\n"
+		"Radius of planet in meters at the point. \n"
 		""},
 	 { (char *)"delete_Planetocentric", (PyCFunction)_wrap_delete_Planetocentric, METH_O, (char *)"\n"
 		"\n"

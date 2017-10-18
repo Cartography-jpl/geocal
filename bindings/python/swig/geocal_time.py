@@ -281,6 +281,25 @@ class Time(geocal_swig.generic_object.GenericObject):
 
     time_acs = staticmethod(time_acs)
 
+    def time_sclk(Sclk, Spacecraft_name):
+        """
+
+        Time Time::time_sclk(const std::string &Sclk, const std::string &Spacecraft_name)
+        Return time from a given SCLK (spacecraft clock string). 
+        """
+        return _geocal_time.Time_time_sclk(Sclk, Spacecraft_name)
+
+    time_sclk = staticmethod(time_sclk)
+
+    def sclk(self, Spacecraft_name):
+        """
+
+        std::string Time::sclk(const std::string &Spacecraft_name)
+        Return SCLK (spacecraft clock string) for the given time. 
+        """
+        return _geocal_time.Time_sclk(self, Spacecraft_name)
+
+
     def _v_acs(self):
         """
 
@@ -412,6 +431,7 @@ class Time(geocal_swig.generic_object.GenericObject):
     def __init__(self):
         _geocal_time.Time_swiginit(self, _geocal_time.new_Time())
     __swig_destroy__ = _geocal_time.delete_Time
+Time.sclk = new_instancemethod(_geocal_time.Time_sclk, None, Time)
 Time._v_acs = new_instancemethod(_geocal_time.Time__v_acs, None, Time)
 Time._v_pgs = new_instancemethod(_geocal_time.Time__v_pgs, None, Time)
 Time._v_gps = new_instancemethod(_geocal_time.Time__v_gps, None, Time)
@@ -496,6 +516,14 @@ def Time_time_acs(acs):
     different from terrestrial time J2000. 
     """
     return _geocal_time.Time_time_acs(acs)
+
+def Time_time_sclk(Sclk, Spacecraft_name):
+    """
+
+    Time Time::time_sclk(const std::string &Sclk, const std::string &Spacecraft_name)
+    Return time from a given SCLK (spacecraft clock string). 
+    """
+    return _geocal_time.Time_time_sclk(Sclk, Spacecraft_name)
 
 def Time_parse_time(Time_string):
     """

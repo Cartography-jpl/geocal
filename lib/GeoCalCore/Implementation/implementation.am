@@ -135,6 +135,28 @@ geocalinc_HEADERS+= @srcimplementation@/spice_kernel_list.h
 libgeocal_la_SOURCES+= @srcimplementation@/spice_kernel_list.cc
 geocalinc_HEADERS+= @srcimplementation@/spice_dem.h
 libgeocal_la_SOURCES+= @srcimplementation@/spice_dem.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_base.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_base.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_polynomial.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_polynomial.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_grid.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_grid.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_rp_plus_grid.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_rp_plus_grid.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_low_order_polynomial.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_low_order_polynomial.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_rational_polynomial.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_rational_polynomial.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_multi_section.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_multi_section.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm.cc
+geocalinc_HEADERS+= @srcimplementation@/local_rectangular_coordinate.h
+libgeocal_la_SOURCES+= @srcimplementation@/local_rectangular_coordinate.cc
+geocalinc_HEADERS+= @srcimplementation@/rsm_image_ground_connection.h
+libgeocal_la_SOURCES+= @srcimplementation@/rsm_image_ground_connection.cc
+libgeocal_la_SOURCES+= @srcimplementation@/mola_dem_file.cc
+geocalinc_HEADERS+= @srcimplementation@/mola_dem_file.h
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -177,6 +199,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/spice_helper_test.cc
 libgeocal_la_SOURCES+= @srcimplementation@/sdp_helper.cc
 geocalinc_HEADERS+= @srcimplementation@/sdp_helper.h
 geocal_test_all_SOURCES+= @srcimplementation@/sdp_helper_test.cc
+
 
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/did_datum_wrap.cc
@@ -327,6 +350,28 @@ SWIG_SRC += @swigsrc@/spice_kernel_list_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/spice_kernel_list.i
 SWIG_SRC += @swigsrc@/spice_dem_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/spice_dem.i
+SWIG_SRC += @swigsrc@/rsm_base_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_base.i
+SWIG_SRC += @swigsrc@/rsm_polynomial_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_polynomial.i
+SWIG_SRC += @swigsrc@/rsm_grid_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_grid.i
+SWIG_SRC += @swigsrc@/rsm_rp_plus_grid_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_rp_plus_grid.i
+SWIG_SRC += @swigsrc@/rsm_low_order_polynomial_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_low_order_polynomial.i
+SWIG_SRC += @swigsrc@/rsm_rational_polynomial_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_rational_polynomial.i
+SWIG_SRC += @swigsrc@/rsm_multi_section_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_multi_section.i
+SWIG_SRC += @swigsrc@/rsm_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm.i
+SWIG_SRC += @swigsrc@/local_rectangular_coordinate_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/local_rectangular_coordinate.i
+SWIG_SRC += @swigsrc@/rsm_image_ground_connection_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/rsm_image_ground_connection.i
+SWIG_SRC += @swigsrc@/mola_dem_file_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/mola_dem_file.i
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
@@ -378,6 +423,18 @@ geocal_test_all_SOURCES+= @srcimplementation@/tle_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_planet_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/spice_dem_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_polynomial_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_grid_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_rp_plus_grid_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_low_order_polynomial_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_rational_polynomial_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_multi_section_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/local_rectangular_coordinate_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/rsm_image_ground_connection_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/mola_dem_file_test.cc
+
+EXTRA_DIST += @srcimplementation@/rsm_fixture.h
 
 AM_CPPFLAGS+= -I$(srcdir)/@srcimplementation@
 

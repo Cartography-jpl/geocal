@@ -51,6 +51,7 @@ Options:
 
 args = docopt_simple(usage, version=version)
 
+dem = None
 if(args.srtm):
     dem = SrtmDem()
 elif(args.constant_dem is not None):
@@ -64,8 +65,14 @@ else:
         dem = VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
                            datum, args.dem_band)
     else:
-        dem = GdalDem(args.dem_file, datum, args.dem_band, 
-                      not args.outside_dem_not_error)
+        # Check for mola file
+        t = subprocess.run(["file", "-b", args.dem_file], stdout=subprocess.PIPE)
+        if(t.returncode == 0 and t.stdout.find(b"PDS image data") >= 0):
+            if(pds_label(args.dem_file)["DATA_SET_ID"].find("MOLA") >= 0):
+                dem = MolaDemFile(args.dem_file, not args.outside_dem_not_error)
+        if(dem is None):
+            dem = GdalDem(args.dem_file, datum, args.dem_band, 
+                          not args.outside_dem_not_error)
 
 write_shelve(args.output, dem)
 

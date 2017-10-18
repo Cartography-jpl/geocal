@@ -14,6 +14,7 @@ namespace GeoCal {
 class MemoryRasterImage : public RasterImageVariable {
 public:
   MemoryRasterImage(int Number_line, int Number_sample);
+  MemoryRasterImage(int Number_line, int Number_sample, int Fill_value);
   MemoryRasterImage(const RasterImage& Img, int Number_line_to_read = -1, 
 	int Number_sample_to_read = -1);
   MemoryRasterImage(const MapInfo& Mi);

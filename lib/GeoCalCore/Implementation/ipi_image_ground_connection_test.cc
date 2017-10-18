@@ -6,6 +6,8 @@
 #include "wgs84_constant.h"
 #include "simple_dem.h"
 #include "memory_raster_image.h"
+#include "rsm_base.h"
+#include "planet_coordinate.h"
 #include <cmath>
 
 using namespace GeoCal;
@@ -41,6 +43,20 @@ BOOST_AUTO_TEST_CASE(basic_test)
   igc.footprint_resolution(0, 0, line_res, samp_res);
   BOOST_CHECK_CLOSE(line_res, 708.36177816238671, 1e-2);
   BOOST_CHECK_CLOSE(samp_res, 275.98094050780151, 1e-2);
+}
+
+BOOST_AUTO_TEST_CASE(timing_test)
+{
+  // Don't normally run, this depends on specific test data that isn't
+  // available other than on pistol
+  return;
+  // This has been slow to run. Put this is a unit test so we can look
+  // at this with valgrind and try to speed up.
+  boost::shared_ptr<IpiImageGroundConnection> igc =
+    serialize_read<IpiImageGroundConnection>("/home/smyth/Local/MarsRsm/ctx1_igc.xml");
+  //const int nline = 100;
+  const int nline = 500;
+  blitz::Array<double, 4> t = RsmBase::generate_data(*igc, PlanetocentricConverter(PlanetConstant::MARS_NAIF_CODE), -19.55, -19.02, 23.148, 23.202, 0, 1000, nline, 100, 20);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

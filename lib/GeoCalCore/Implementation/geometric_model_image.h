@@ -16,6 +16,8 @@ namespace GeoCal {
 
 class GeometricModelImage : public CalcRaster {
 public:
+  enum interpolation_type { BILINEAR, NEAREST_NEIGHBOR };
+  
 //-----------------------------------------------------------------------
 /// Constructor. This takes underlying data, and a geometric model to
 /// use to resample it.
@@ -28,13 +30,16 @@ public:
   GeometricModelImage(const boost::shared_ptr<RasterImage>& Data,
 		      const boost::shared_ptr<GeometricModel>& Geom_model,
 		      int Number_line, int Number_sample,
-		      double Fill_value = 0.0)
+		      double Fill_value = 0.0,
+		      interpolation_type Interpolation_type = BILINEAR)
     : CalcRaster(Number_line, Number_sample), 
-      fill_value_(Fill_value), 
+      fill_value_(Fill_value),
+      itype_(Interpolation_type),
       raw_data_(Data),
       model(Geom_model) {}
   virtual ~GeometricModelImage() {}
   virtual void print(std::ostream& Os) const;
+  interpolation_type itype() const {return itype_;}
   double fill_value() const {return fill_value_;}
   const boost::shared_ptr<RasterImage>& raw_data() const {return raw_data_;}
   const boost::shared_ptr<GeometricModel>& geometric_model() const 
@@ -45,8 +50,15 @@ protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:
   double fill_value_;
+  interpolation_type itype_;
   boost::shared_ptr<RasterImage> raw_data_;
   boost::shared_ptr<GeometricModel> model;
+  GeometricModelImage() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(GeometricModelImage);
 #endif

@@ -156,6 +156,11 @@ void SubRasterImage::unchecked_write(int Line, int Sample, int Val)
   return data_->write(Line + start_line_, Sample + start_sample_, Val);
 }
 
+void SubRasterImage::unchecked_write(int Line, int Sample, double Val)
+{
+  return data_->write(Line + start_line_, Sample + start_sample_, Val);
+}
+
 //-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------

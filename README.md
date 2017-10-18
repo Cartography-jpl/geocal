@@ -20,7 +20,7 @@ The documentation can also be viewed from a version pushed into
 If you work on documentation, you can rebuild the version in Github using
 the command
 
-    make blah_blah_need_to_implement
+    make github-pages
 
 We also generate python documentation for all of the python code. This
 is available in for example in ipython using the normal "help(class)".

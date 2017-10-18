@@ -21,6 +21,10 @@ void Ipi::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(root_min_separation)
     & GEOCAL_NVP_(time_tolerance);
   last_time = min_time_;
+  // Older version didn't have max_frame_extend_. The default was to 
+  // not check this.
+  if(version > 0)
+    ar & GEOCAL_NVP_(max_frame_extend);
 }
 
 GEOCAL_IMPLEMENT(Ipi);
@@ -43,11 +47,12 @@ Ipi::Ipi(const boost::shared_ptr<Orbit>& Orb, const
 	 Time Tmin, Time Tmax, const boost::shared_ptr<TimeTable>& Tt,
 	 double Local_time_window_size,
 	 double Root_min_separation, 
-	 double Time_tolerance)
+	 double Time_tolerance, double Max_frame_extend)
   : orb(Orb), cam(Cam), band_(Band), tt(Tt), min_time_(Tmin), max_time_(Tmax), 
     last_time(Tmin), local_time_window_size_(Local_time_window_size),
     root_min_separation_(Root_min_separation), 
-    time_tolerance_(Time_tolerance)
+    time_tolerance_(Time_tolerance),
+    max_frame_extend_(Max_frame_extend)
 {
   if(Cam->number_line(Band) != 1)
     throw Exception("I think we only want to do an IPI with a pushbroom camera with 1 line. If this is wrong, you can remove this exception");
@@ -245,27 +250,29 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
     virtual ~IpiEq() {}
     virtual double operator()(const double& Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
-      return cam->frame_line_coordinate(od->sc_look_vector(look_vector(od)), 
+      return cam->frame_line_coordinate(orb->sc_look_vector(tmin+Toffset, *p), 
 					band);
     }
     FrameCoordinate frame_coordinate(const double& Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = 
-	orb->orbit_data(tmin + Toffset);
-      return cam->frame_coordinate(od->sc_look_vector(look_vector(od)), 
+      return cam->frame_coordinate(orb->sc_look_vector(tmin+Toffset, *p),
 				   band);
     }
     bool false_root(double Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
+      boost::shared_ptr<CartesianFixed> p2 = orb->position_cf(tmin + Toffset);
+      boost::array<double, 3> p1 = p->position;
+      boost::array<double, 3> p3 = p2->position;
+      CartesianFixedLookVector lv;
+      lv.look_vector[0] = p1[0] - p3[0];
+      lv.look_vector[1] = p1[1] - p3[1];
+      lv.look_vector[2] = p1[2] - p3[2];
       const double allowed_intersection_error = 50000;
 				// How far off we can be from actual position 
 				// of point and still call it a true
 				// solution.
-      return (distance(*(od->position_cf()->
-		 reference_surface_intersect_approximate(look_vector(od), 
-					 height)),
+      return (distance(*(p2->
+			 reference_surface_intersect_approximate(lv, height)),
 			 *p) > allowed_intersection_error);
     }
     CartesianFixedLookVector look_vector
@@ -298,11 +305,17 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 //-----------------------------------------------------------------------
 
   double true_sol = 0;
+  FrameCoordinate fc_sol;
   int num_sol = 0;
   BOOST_FOREACH(double x, sol) {
     if(!eq.false_root(x)) {
-      num_sol++;
-      true_sol = x;
+      FrameCoordinate fc = eq.frame_coordinate(x);
+      if(fc.sample >= -max_frame_extend_ &&
+	 fc.sample <= cam->number_sample(band_) + max_frame_extend_) {
+	num_sol++;
+	true_sol = x;
+	fc_sol = fc;
+      }
     }
   }
 
@@ -320,19 +333,26 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 		    root_min_separation_, time_tolerance_);
     BOOST_FOREACH(double x, sol) {
       if(!eq.false_root(x)) {
-	num_sol++;
-	true_sol = x;
+	FrameCoordinate fc = eq.frame_coordinate(x);
+	if(fc.sample >= -max_frame_extend_ &&
+	   fc.sample <= cam->number_sample(band_) + max_frame_extend_) {
+	  num_sol++;
+	  true_sol = x;
+	  fc_sol = fc;
+	}
       }
     }
   }
 
-  if(num_sol > 1)
-    throw Exception("Have more than one solution to ipi equations");
+  // Suppose this is actually ok, we just don't have a solution
+  // if(num_sol > 1) {
+  //   throw Exception("Have more than one solution to ipi equations");
+  //}
   if(num_sol ==1) {
     Success = true;
     Tres = min_time_ + true_sol;
     last_time = Tres;
-    Fres = eq.frame_coordinate(true_sol);
+    Fres = fc_sol;
   } else {
     Success = false;
   }
@@ -374,8 +394,8 @@ void Ipi::time_with_derivative
     virtual ~IpiEq() {}
     virtual double operator()(const double& Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
-      return cam->frame_line_coordinate(od->sc_look_vector(look_vector(od)), 
+      return cam->frame_line_coordinate(orb->sc_look_vector(tmin + Toffset,
+							    *p), 
 					band);
     }
     virtual double df(double Toffset) const

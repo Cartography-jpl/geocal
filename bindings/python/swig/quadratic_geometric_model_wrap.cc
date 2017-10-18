@@ -6273,8 +6273,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_4(PyObject *SWIGUNU
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1));
       arg1 = &a1;
     }
@@ -6284,8 +6290,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_4(PyObject *SWIGUNU
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -6346,8 +6358,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_5(PyObject *SWIGUNU
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1));
       arg1 = &a1;
     }
@@ -6357,8 +6375,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_5(PyObject *SWIGUNU
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -6411,8 +6435,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_6(PyObject *SWIGUNU
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1));
       arg1 = &a1;
     }
@@ -6422,8 +6452,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_6(PyObject *SWIGUNU
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -6468,8 +6504,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_7(PyObject *SWIGUNU
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1));
       arg1 = &a1;
     }
@@ -6479,8 +6521,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_7(PyObject *SWIGUNU
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_QuadraticGeometricModel', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }

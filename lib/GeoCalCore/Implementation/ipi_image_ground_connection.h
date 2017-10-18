@@ -74,6 +74,8 @@ public:
     Time t;
     FrameCoordinate f;
     ipi_->time_table().time(Ic, t, f);
+    if(t < ipi_->orbit().min_time() || t >= ipi_->orbit().max_time())
+      throw ImageGroundConnectionFailed();
     return ipi_->orbit().orbit_data(t)->
       surface_intersect(ipi_->camera(), f, D, res, ipi_->band(), max_h);
   }
@@ -84,6 +86,8 @@ public:
     Time t;
     FrameCoordinate f;
     ipi_->time_table().time(Ic, t, f);
+    if(t < ipi_->orbit().min_time() || t >= ipi_->orbit().max_time())
+      throw ImageGroundConnectionFailed();
     return ipi_->orbit().orbit_data(t)->
       reference_surface_intersect_approximate(ipi_->camera(), f, ipi_->band(), H);
   }

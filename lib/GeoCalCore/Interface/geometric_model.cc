@@ -19,4 +19,5 @@ void GeometricTiePoints::serialize(Archive & ar, const unsigned int version)
 }
 
 GEOCAL_IMPLEMENT(GeometricModel);
+GEOCAL_IMPLEMENT(GeometricTiePoints);
 #endif

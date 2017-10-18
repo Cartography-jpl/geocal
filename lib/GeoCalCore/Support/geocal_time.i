@@ -58,6 +58,9 @@ public:
   static Time time_gps(int week, double week_offset);
   static Time time_unix(double unix_time);
   static Time time_acs(double acs);
+  static Time time_sclk(const std::string& Sclk,
+			const std::string& Spacecraft_name);
+  std::string sclk(const std::string& Spacecraft_name);
   %python_attribute(acs, double)
   %python_attribute(pgs, double)
   %python_attribute(gps, double)

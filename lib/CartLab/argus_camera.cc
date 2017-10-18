@@ -48,9 +48,9 @@ ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll,
   line_pitch_ = 24.0 / number_line(0);
   sample_pitch_ = 36.0 / number_sample(0);
 
-  frame_to_sc_ = quat_rot("ZYX", Yaw * Constant::deg_to_rad, 
-			  Pitch * Constant::deg_to_rad,
-			 Roll * Constant::deg_to_rad);
+  frame_to_sc(quat_rot("ZYX", Yaw * Constant::deg_to_rad, 
+		       Pitch * Constant::deg_to_rad,
+		       Roll * Constant::deg_to_rad));
 }
 
 //-----------------------------------------------------------------------

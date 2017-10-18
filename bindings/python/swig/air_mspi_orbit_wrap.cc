@@ -6395,8 +6395,14 @@ SWIGINTERN PyObject *_wrap_new_AirMspiNavData__SWIG_1(PyObject *SWIGUNUSEDPARM(s
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_AirMspiNavData', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_AirMspiNavData', expecting type  Array<double,1>");
+        return NULL;
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1));
       arg1 = &a1;
     }

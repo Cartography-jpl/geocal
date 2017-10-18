@@ -197,6 +197,9 @@ class MemoryRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     This is useful both for testing and to read all of another RasterImage
     into memory.
 
+    Note that this stores data as int type, so floating point data gets
+    truncated to int.
+
     C++ includes: memory_raster_image.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')

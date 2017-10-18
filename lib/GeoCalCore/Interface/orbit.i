@@ -178,8 +178,8 @@ public:
   sc_look_vector(const CartesianFixedLookVector& Cf) const;
   virtual ScLookVectorWithDerivative 
   sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
-  %python_attribute(sc_to_ci, boost::math::quaternion<double>)
-  %python_attribute(sc_to_ci_with_derivative, 
+  %python_attribute_with_set(sc_to_ci, boost::math::quaternion<double>)
+  %python_attribute_with_set(sc_to_ci_with_derivative, 
 		    boost::math::quaternion<AutoDerivative<double> >)
   %python_attribute_with_set(sc_to_cf, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_cf_with_derivative, boost::math::quaternion<AutoDerivative<double> >)
@@ -269,6 +269,8 @@ public:
   virtual ScLookVectorWithDerivative sc_look_vector
   (const TimeWithDerivative& T, 
    const CartesianFixedLookVectorWithDerivative& Cf) const;
+  virtual ScLookVector sc_look_vector(Time T, 
+				      const CartesianFixed& Pt) const;
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
   %python_attribute(min_time, Time)

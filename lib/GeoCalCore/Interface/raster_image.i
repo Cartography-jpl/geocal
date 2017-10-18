@@ -45,6 +45,7 @@ public:
   //boost::array<double, 2> interpolate_derivative(double Line, double Sample) 
   //  const;
   double interpolate(const ImageCoordinate& Ic) const;
+  %python_attribute(copy_needs_double, bool)
   %python_attribute(number_line, int)
   %python_attribute(number_sample, int)
   %python_attribute(number_tile_line, int)

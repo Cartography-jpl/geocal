@@ -46,6 +46,8 @@ class RawRasterImage : public RasterImageVariable {
 
   virtual void unchecked_write(int Line, int Sample, int Val)
     { throw Exception("RawRasterImage doesn't implement write");}
+  virtual void unchecked_write(int Line, int Sample, double Val)
+    { throw Exception("RawRasterImage doesn't implement write");}
   
   virtual void print(std::ostream& Os) const;
   const std::string& file_name() const {return fname;}

@@ -50,6 +50,8 @@ public:
 //-----------------------------------------------------------------------
   
   RasterImage& full_raster_image() {return *data_; }
+  virtual bool copy_needs_double() const {return data_->copy_needs_double();}
+  
   virtual int unchecked_read(int Line, int Sample) const
   {
     return data_->unchecked_read(Line + start_line_, Sample + start_sample_);
@@ -69,6 +71,7 @@ public:
 			      Number_line, Number_sample);
   }
   virtual void unchecked_write(int Line, int Sample, int Val);
+  virtual void unchecked_write(int Line, int Sample, double Val);
 
   virtual void print(std::ostream& Os) const;
 private:

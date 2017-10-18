@@ -11,6 +11,9 @@ namespace GeoCal {
 
   This is useful both for testing and to read all of another
   RasterImage into memory.
+
+  Note that this stores data as int type, so floating point data gets
+  truncated to int.
 *******************************************************************/
 
 class MemoryRasterImage : public RasterImageVariable {
@@ -23,6 +26,19 @@ public:
     : RasterImageVariable(Number_line, Number_sample),
       data_(Number_line, Number_sample)
     {
+    }
+
+//-----------------------------------------------------------------------
+/// Construct a MemoryRasterImage of the given size, and fill with
+/// given value (useful in particular for unit tests that just need
+/// "an image" without caring about the content)
+//-----------------------------------------------------------------------
+
+  MemoryRasterImage(int Number_line, int Number_sample, int Fill_value)
+    : RasterImageVariable(Number_line, Number_sample),
+      data_(Number_line, Number_sample)
+    {
+      data_ = Fill_value;
     }
 
   MemoryRasterImage(const RasterImage& Img, int Number_line_to_read = -1, 
@@ -72,6 +88,10 @@ public:
   virtual void unchecked_write(int Line, int Sample, int Val)
   {
     data_(Line, Sample) = Val;
+  }
+  virtual void unchecked_write(int Line, int Sample, double Val)
+  {
+    data_(Line, Sample) = (int) Val;
   }
   virtual void print(std::ostream& Os) const;
  private:
@@ -167,7 +187,12 @@ public:
   {
     data_[Line][Sample] = (T) Val;
   }
+  virtual void unchecked_write(int Line, int Sample, double Val)
+  {
+    data_[Line][Sample] = (T) Val;
+  }
 
+  
 //-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------

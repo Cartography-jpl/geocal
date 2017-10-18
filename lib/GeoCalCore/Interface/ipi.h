@@ -42,6 +42,15 @@ namespace GeoCal {
   solutions by comparing the collinearity equation results to a user
   supplied tolerance.
 
+  We also allow a "extended" camera (i.e., frame coordinate outside of
+  the range of the camera). This is useful for edge of images etc, so
+  we don't have abrupt transitions. But we can get false solutions
+  with really large coordinate - e.g., imagine two lines at a slight
+  angle to each other than intersect at some point outside of the
+  image. We pass in a "max_frame_extend" value to limit how far
+  outside the camera we look for a solution. This can be a large value
+  to skip this limit, or set to 0 to not allow any extension at all.
+
   We find all the solutions to the collinearity equation, in the range
   Tmin to Tmax. The solutions found must be seperated by a time
   larger then Root_min_separation.
@@ -67,7 +76,7 @@ public:
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
       double Local_time_window_size = 5.0,
       double Root_min_separation = 30.0, 
-      double Time_tolerance = 1e-6);
+      double Time_tolerance = 1e-6, double Max_frame_extend=1000);
   virtual ~Ipi() {}
   void image_coordinate(const GroundCoordinate& Gp, ImageCoordinate& Ic,
 			bool& Success) const;
@@ -174,6 +183,12 @@ public:
 
   double time_tolerance() const {return time_tolerance_;}
 
+//-----------------------------------------------------------------------
+/// Maximum amount we allow a Ipi solution to be outside the edged of
+/// the camera. See class description for discussion of this.
+//-----------------------------------------------------------------------
+
+  double max_frame_extend() const { return max_frame_extend_; }
 private:
   boost::shared_ptr<Orbit> orb;
   boost::shared_ptr<Camera> cam;
@@ -189,6 +204,8 @@ private:
 				 ///for solutions to the collinearity
 				 ///equation.
   double time_tolerance_;	 ///< How accurate we find the time.
+  double max_frame_extend_;	 // Maximum FrameCoordinate outside of
+				 // the camera that we consider 'ok'.
 
 //-----------------------------------------------------------------------
 /// Initial guess at minimum time, based on last_time.
@@ -213,7 +230,7 @@ private:
 		    last_time + local_time_window_size_ / 2);
   }
 
-  Ipi() {}
+  Ipi() : max_frame_extend_(1e19) {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -222,5 +239,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Ipi);
+GEOCAL_CLASS_VERSION(Ipi, 1);
 #endif
 

@@ -158,6 +158,9 @@ public:
 
   static Time time_gps(int week, double week_offset)
   { return Time::time_gps(week * 7.0 * 24 * 60 * 60 + week_offset); }
+  static Time time_sclk(const std::string& Sclk,
+			const std::string& Spacecraft_name);
+  std::string sclk(const std::string& Spacecraft_name);
   static Time time_et(double et);
   double et() const;
 
@@ -312,13 +315,13 @@ public:
 /// Strip off gradient to just give a time.
 //-----------------------------------------------------------------------
 
-  Time value() const { return Time::time_pgs(pgs().value()); }
+  Time value() const { return Time::time_pgs(time_pgs_.value()); }
 
 //-----------------------------------------------------------------------
 /// Return gradient.
 //-----------------------------------------------------------------------
 
-  blitz::Array<double, 1> gradient() const { return pgs().gradient();}
+  blitz::Array<double, 1> gradient() const { return time_pgs_.gradient();}
 
 //-----------------------------------------------------------------------
 /// Print to stream.

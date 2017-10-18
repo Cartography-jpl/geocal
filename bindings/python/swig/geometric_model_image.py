@@ -204,13 +204,16 @@ class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    BILINEAR = _geometric_model_image.GeometricModelImage_BILINEAR
+    NEAREST_NEIGHBOR = _geometric_model_image.GeometricModelImage_NEAREST_NEIGHBOR
 
-    def __init__(self, Data, Geom_model, Number_line, Number_sample, Fill_value=0.0):
+    def __init__(self, *args):
         """
 
         GeoCal::GeometricModelImage::GeometricModelImage(const boost::shared_ptr< RasterImage > &Data, const
         boost::shared_ptr< GeometricModel > &Geom_model, int Number_line, int
-        Number_sample, double Fill_value=0.0)
+        Number_sample, double Fill_value=0.0, interpolation_type
+        Interpolation_type=BILINEAR)
         Constructor.
 
         This takes underlying data, and a geometric model to use to resample
@@ -219,7 +222,21 @@ class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
         Because we fill in data outside of the original image with O's this
         image can be any size. So the size desired needs to be passed in. 
         """
-        _geometric_model_image.GeometricModelImage_swiginit(self, _geometric_model_image.new_GeometricModelImage(Data, Geom_model, Number_line, Number_sample, Fill_value))
+        _geometric_model_image.GeometricModelImage_swiginit(self, _geometric_model_image.new_GeometricModelImage(*args))
+
+    def _v_itype(self):
+        """
+
+        interpolation_type GeoCal::GeometricModelImage::itype() const
+
+        """
+        return _geometric_model_image.GeometricModelImage__v_itype(self)
+
+
+    @property
+    def itype(self):
+        return self._v_itype()
+
 
     def _v_raw_data(self):
         """
@@ -263,14 +280,11 @@ class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
         return self._v_fill_value()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.raw_data,self.geometric_model,self.number_line,self.number_sample,self.fill_value)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _geometric_model_image.delete_GeometricModelImage
+GeometricModelImage._v_itype = new_instancemethod(_geometric_model_image.GeometricModelImage__v_itype, None, GeometricModelImage)
 GeometricModelImage._v_raw_data = new_instancemethod(_geometric_model_image.GeometricModelImage__v_raw_data, None, GeometricModelImage)
 GeometricModelImage._v_geometric_model = new_instancemethod(_geometric_model_image.GeometricModelImage__v_geometric_model, None, GeometricModelImage)
 GeometricModelImage._v_fill_value = new_instancemethod(_geometric_model_image.GeometricModelImage__v_fill_value, None, GeometricModelImage)

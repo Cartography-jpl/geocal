@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 #
 # This creates a IgcCollection that uses GDAL data files for the DEM, 
-# image, and RPC.
+# image, and RPC or RSM.
 from geocal import *
 
-version = "October 11, 2013"
+version = "September 20, 2017"
 usage='''Usage: 
   shelve_igccol [options] <output> <dem> 
        <image> <title> [(<image> <title>)...]
@@ -97,16 +97,24 @@ else:
             else:
                 rpc = img.raster_image(0).rpc
             t = RpcImageGroundConnection(rpc, dem, img, args.title[i])
+        elif(os.path.exists(os.path.splitext(args.image[i])[0] + ".rsm.xml")):
+            rsm = read_shelve(os.path.splitext(args.image[i])[0] + ".rsm.xml")
+            if(VicarLiteFile.is_vicar_file(args.image[i])):
+                img = VicarLiteRasterImage(args.image[i])
+            else:
+                imv = GdalRasterImage(args.image[i])
+            t = RsmImageGroundConnection(rsm, dem, img, args.title[i])
         elif VicarImageGroundConnection.is_vicar_file(args.image[i]):
             t = VicarImageGroundConnection(args.image[i], dem, 
                                            title=args.title[i])
         else:
             t = GdalImageGroundConnection(args.image[i], dem, 
                                           title=args.title[i])
-        t.rpc.fit_line_numerator = fln
-        t.rpc.fit_sample_numerator = fsmp
-        if(args.fit_height_offset):
-            t.fit_height_offset = True
+        if(getattr(t, "rpc", None)):
+            t.rpc.fit_line_numerator = fln
+            t.rpc.fit_sample_numerator = fsmp
+            if(args.fit_height_offset):
+                t.fit_height_offset = True
         a.append(t)
 
 igc_coll = IgcArray(a)

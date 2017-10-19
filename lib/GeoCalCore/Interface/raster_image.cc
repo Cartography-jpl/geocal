@@ -1,6 +1,7 @@
 #include "raster_image.h"
 #include <iostream>
 #include <boost/progress.hpp>
+#include <boost/make_shared.hpp>
 #include "geocal_serialize_support.h"
 
 using namespace GeoCal;

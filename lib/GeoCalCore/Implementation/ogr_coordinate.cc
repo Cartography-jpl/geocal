@@ -3,6 +3,7 @@
 #include "geocal_serialize_support.h"
 #include "ecr.h"
 #include <boost/algorithm/string.hpp>
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 

@@ -32,6 +32,11 @@ up with:
 
     sudo yum -y install armadillo-devel poppler-devel libxml2-devel libgeotiff-devel mariadb-devel freexl-devel geos-devel libwebp-devel xerces-c-devel openjpeg2-devel jasper-devel netcdf-devel ogdi-devel giflib-devel libgta-devel cfitsio-devel postgresql-devel libdap-devel CharLS-devel hdf-devel hdf5-devel g2clib-devel
 
+## IMPORTANT!!!
+## This is the end of yum install and we should in the parent directory of where geocal was checked out.
+## For example, if your geocal repo is located at /home/user/code/geocal, your current working directory
+## should now be /home/user/code. All the config scripts from this point on depends on that.
+
 ## Build blitz
 
 We need to build blitz directly, it doesn't have an easy to find package. Get

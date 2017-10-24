@@ -14,9 +14,9 @@ where in the document a particular TRE is defined.
 SENSRB is documented at Z-13.
 '''
 
-_6a_format = "%011.4lf"
-_6b_format = "%012.4lf"
-_6c_format = "%011.4lf"
+_6a_format = "%011.2lf"
+_6b_format = "%012.2lf"
+_6c_format = "%011.2lf"
 _6d_format = "%08.3lf"
 _6e_format = "%08.3lf"
 _6f_format = "%08.3lf"

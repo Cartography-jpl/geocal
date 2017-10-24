@@ -8,6 +8,9 @@ cryptic, but these are documented in detail in the NITF 2.10 documentation
 
 The NITF DES subheader is described in Table A-8, starting page 112.
 '''
+
+_quat_format = "%08.5lf"
+
 desc2 = desc + \
        [['att_type', "Type of attitude data being provided", 12, str],
         ['dt_att', "Time interval between attitude reference points", 14, str],
@@ -15,10 +18,10 @@ desc2 = desc + \
         ['t0_att', "UTC of First Attitude Reference Point", 13, str],
         ['num_att', "Number of Attitude Reference Points", 5, int],
         [["loop", "f.num_att"],
-         ["att_q1", "Quaternion Q1 of Attitude Reference Point", 8, float],
-         ["att_q2", "Quaternion Q2 of Attitude Reference Point", 8, float],
-         ["att_q3", "Quaternion Q3 of Attitude Reference Point", 8, float],
-         ["att_q4", "Quaternion Q4 of Attitude Reference Point", 8, float],
+         ["att_q1", "Quaternion Q1 of Attitude Reference Point", 8, float, {"frmt": _quat_format}],
+         ["att_q2", "Quaternion Q2 of Attitude Reference Point", 8, float, {"frmt": _quat_format}],
+         ["att_q3", "Quaternion Q3 of Attitude Reference Point", 8, float, {"frmt": _quat_format}],
+         ["att_q4", "Quaternion Q4 of Attitude Reference Point", 8, float, {"frmt": _quat_format}],
         ], #end loop
        ]
 

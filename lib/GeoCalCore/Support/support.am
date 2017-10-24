@@ -69,6 +69,7 @@ if HAVE_HDF5
 geocalinc_HEADERS+= @srcsupport@/hdf_file.h
 libgeocal_la_SOURCES+= @srcsupport@/hdf_file.cc
 endif
+geocalinc_HEADERS+= @srcsupport@/tre_support.h
 
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/constant_wrap.cc

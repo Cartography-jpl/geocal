@@ -57,6 +57,8 @@ public:
 
   void set_rpc_coeff(const boost::array<double, 20>& V);
   void print(std::ostream& Os) const;
+  std::string tre_string() const;
+  static RsmPolynomial read_tre_string(std::istream& In);
 private:
   blitz::Array<double, 3> coefficient_;
   bool is_denominator_;

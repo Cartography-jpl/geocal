@@ -1497,7 +1497,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/blitz_array_serialize_support.h \
 	@srcsupport@/geocal_fftw.h @srcsupport@/hdf_file.h \
-	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
+	@srcsupport@/tre_support.h @srcinterface@/raster_image.h \
+	@srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
 	@srcinterface@/sub_raster_image.h \
 	@srcinterface@/raster_image_multi_band.h \
@@ -2801,8 +2802,8 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/geocal_serialize_function.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/blitz_array_serialize_support.h $(am__append_15) \
-	$(am__append_17) @srcinterface@/raster_image.h \
-	@srcinterface@/with_parameter.h \
+	$(am__append_17) @srcsupport@/tre_support.h \
+	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
 	@srcinterface@/sub_raster_image.h \
 	@srcinterface@/raster_image_multi_band.h \

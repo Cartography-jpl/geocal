@@ -13,7 +13,7 @@ where in the document a particular TRE is defined.
 
 RSMPCA is documented at blah.
 '''
-_rfep_format = "%21.14E"
+_rfep_format = "%+21.14E"
 
 desc = ["RSMPCA",
         ["iid", "Image Identifier", 80, str, {'optional':True}],

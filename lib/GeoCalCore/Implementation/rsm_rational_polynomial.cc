@@ -32,6 +32,28 @@ void RsmRationalPolynomial::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(nheight_fit)
     & GEOCAL_NVP_(nsecond_pass_fit)
     & GEOCAL_NVP_(ignore_igc_error_in_fit);
+  // Older version didn't have row_section_number_ or col_section_number_.
+  if(version == 0) {
+    ar & GEOCAL_NVP_(row_section_number)
+      & GEOCAL_NVP_(col_section_number);
+  }
+  boost::serialization::split_member(ar, *this, version);
+}
+
+template<class Archive>
+void RsmRationalPolynomial::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void RsmRationalPolynomial::load(Archive & ar, const unsigned int version)
+{
+  // Older version didn't have row_section_number_ or col_section_number_.
+  if(version == 0) {
+    row_section_number_ = 1;
+    col_section_number_ = 1;
+  }
 }
 
 GEOCAL_IMPLEMENT(RsmRationalPolynomial);
@@ -66,26 +88,34 @@ RsmRationalPolynomial::RsmRationalPolynomial
 (int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
  int Dp_z, int N_max_order, int D_max_order,int Nline_fit,
  int Nsample_fit, int Nheight_fit, int Nsecond_pass_fit,
- bool Ignore_igc_error_in_fit)
-  : line_offset_(0),
-    line_scale_(0),
-    sample_offset_(0),
-    sample_scale_(0),
-    x_offset_(0),
-    x_scale_(0),
-    y_offset_(0),
-    y_scale_(0),
-    z_offset_(0),
-    z_scale_(0),
-    line_num_(Np_x, Np_y, Np_z, false, N_max_order),
-    line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
-    sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
-    sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
-    nline_fit_(Nline_fit),
-    nsample_fit_(Nsample_fit),
-    nheight_fit_(Nheight_fit),
-    nsecond_pass_fit_(Nsecond_pass_fit),
-    ignore_igc_error_in_fit_(Ignore_igc_error_in_fit)
+ bool Ignore_igc_error_in_fit,
+ int Row_section_number,
+ int Col_section_number,
+ const std::string& Image_identifier,
+ const std::string& Rsm_support_data_edition
+ )
+ : RsmBase(Image_identifier, Rsm_support_data_edition),
+     row_section_number_(Row_section_number),
+     col_section_number_(Col_section_number),
+     line_offset_(0),
+     line_scale_(0),
+     sample_offset_(0),
+     sample_scale_(0),
+     x_offset_(0),
+     x_scale_(0),
+     y_offset_(0),
+     y_scale_(0),
+     z_offset_(0),
+     z_scale_(0),
+     line_num_(Np_x, Np_y, Np_z, false, N_max_order),
+     line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
+     sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
+     sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
+     nline_fit_(Nline_fit),
+     nsample_fit_(Nsample_fit),
+     nheight_fit_(Nheight_fit),
+     nsecond_pass_fit_(Nsecond_pass_fit),
+     ignore_igc_error_in_fit_(Ignore_igc_error_in_fit)
 {
 }
 
@@ -446,4 +476,37 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
      << "  Nsample fit:   " << nsample_fit_ << "\n"
      << "  Nheight fit:   " << nheight_fit_ << "\n"
      << "  Nsecond pass fit: " << nsecond_pass_fit_ << "\n";
+}
+
+//-----------------------------------------------------------------------
+/// Write to TRE string.
+///
+/// Note also that the TRE has a fixed precision which is less than
+/// the machine precision. Writing a RsmRationalPolynomial and then
+/// reading it from a TRE does *not* in general give the exact same
+/// RsmRationalPolynomial, rather just one that is close.
+//-----------------------------------------------------------------------
+
+std::string RsmRationalPolynomial::tre_string() const
+{
+  return "";
+}
+
+//-----------------------------------------------------------------------
+/// Read a TRE string. Note that the TRE does not contain all the
+/// fields we have in a RsmRationalPolynomial. However the fields that
+/// aren't contained are ones used for fitting the RSM, so in practice
+/// this doesn't matter. We just set the various fields to the default
+/// values found in the constructor.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<RsmRationalPolynomial>
+RsmRationalPolynomial::read_tre_string(const std::string& Tre_in)
+{
+  boost::shared_ptr<RsmRationalPolynomial> res(new RsmRationalPolynomial);
+  res->nline_fit_ = 20;
+  res->nsample_fit_ = 20;
+  res->nheight_fit_ = 20;
+  res->nsecond_pass_fit_ = 20;
+  res->ignore_igc_error_in_fit_ = false;
 }

@@ -15,7 +15,10 @@ namespace GeoCal {
 
 class RsmBase : public Printable<RsmBase> {
 public:
-  RsmBase() {}
+  RsmBase(const std::string& Image_identifier="",
+	  const std::string& Rsm_support_data_edition="fake-1")
+    : image_identifier_(Image_identifier),
+      rsm_suport_data_edition_(Rsm_support_data_edition){}
   virtual ~RsmBase() {}
   virtual void print(std::ostream& Os) const
   { Os << "RsmBase"; }
@@ -34,6 +37,20 @@ public:
 
   virtual blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const = 0;
+
+//-----------------------------------------------------------------------
+/// Image identification.
+//-----------------------------------------------------------------------
+  const std::string& image_identifier() const { return image_identifier_;}
+  void image_identifier(const std::string& V) { image_identifier_ = V;}
+
+//-----------------------------------------------------------------------
+/// RSM Support Data Edition.
+//-----------------------------------------------------------------------
+  const std::string& rsm_suport_data_edition() const
+  { return rsm_suport_data_edition_;}
+  void rsm_suport_data_edition(const std::string& V)
+  { rsm_suport_data_edition_ = V; }
   
 //-----------------------------------------------------------------------
 /// Initial guess to use when inverting the ground to image
@@ -80,12 +97,20 @@ public:
   virtual double max_y() const = 0;
   virtual double min_z() const = 0;
   virtual double max_z() const = 0;
+  std::string base_tre_string() const;
+  void base_read_tre_string(std::istream& In);
 private:
+  std::string image_identifier_, rsm_suport_data_edition_;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 }
 
 GEOCAL_EXPORT_KEY(RsmBase);
+GEOCAL_CLASS_VERSION(RsmBase, 1);
 #endif

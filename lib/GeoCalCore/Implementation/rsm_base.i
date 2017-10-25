@@ -18,7 +18,8 @@
 namespace GeoCal {
 class RsmBase : public GenericObject {
 public:
-  RsmBase();
+  RsmBase(const std::string& Image_identifier="",
+	  const std::string& Rsm_support_data_edition="fake-1");
   virtual std::string print_to_string() const;
   virtual boost::shared_ptr<RsmBase> clone() const;
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z) const;
@@ -58,6 +59,8 @@ public:
   %python_attribute(max_y, double);
   %python_attribute(min_z, double);
   %python_attribute(max_z, double);
+  %python_attribute_with_set(image_identifier, std::string);
+  %python_attribute_with_set(rsm_suport_data_edition, std::string);
   %pickle_serialization()
 };
 }

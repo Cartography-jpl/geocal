@@ -417,6 +417,42 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
         return self._v_max_z()
 
 
+    def _v_image_identifier(self, *args):
+        """
+
+        void GeoCal::RsmBase::image_identifier(const std::string &V)
+
+        """
+        return _rsm_base.RsmBase__v_image_identifier(self, *args)
+
+
+    @property
+    def image_identifier(self):
+        return self._v_image_identifier()
+
+    @image_identifier.setter
+    def image_identifier(self, value):
+      self._v_image_identifier(value)
+
+
+    def _v_rsm_suport_data_edition(self, *args):
+        """
+
+        void GeoCal::RsmBase::rsm_suport_data_edition(const std::string &V)
+
+        """
+        return _rsm_base.RsmBase__v_rsm_suport_data_edition(self, *args)
+
+
+    @property
+    def rsm_suport_data_edition(self):
+        return self._v_rsm_suport_data_edition()
+
+    @rsm_suport_data_edition.setter
+    def rsm_suport_data_edition(self, value):
+      self._v_rsm_suport_data_edition(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -438,6 +474,8 @@ RsmBase._v_min_y = new_instancemethod(_rsm_base.RsmBase__v_min_y, None, RsmBase)
 RsmBase._v_max_y = new_instancemethod(_rsm_base.RsmBase__v_max_y, None, RsmBase)
 RsmBase._v_min_z = new_instancemethod(_rsm_base.RsmBase__v_min_z, None, RsmBase)
 RsmBase._v_max_z = new_instancemethod(_rsm_base.RsmBase__v_max_z, None, RsmBase)
+RsmBase._v_image_identifier = new_instancemethod(_rsm_base.RsmBase__v_image_identifier, None, RsmBase)
+RsmBase._v_rsm_suport_data_edition = new_instancemethod(_rsm_base.RsmBase__v_rsm_suport_data_edition, None, RsmBase)
 RsmBase_swigregister = _rsm_base.RsmBase_swigregister
 RsmBase_swigregister(RsmBase)
 

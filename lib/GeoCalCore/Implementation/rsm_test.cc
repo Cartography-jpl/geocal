@@ -56,6 +56,9 @@ BOOST_AUTO_TEST_CASE(ground_coordinate_dem)
   } catch(const Exception&) {
     BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
     // Don't worry if we can't find the data.
+  } catch(const std::exception&) {
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    // Don't worry if we can't find the data.
   }
 }
 

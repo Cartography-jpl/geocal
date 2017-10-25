@@ -367,9 +367,15 @@ boost::format coeffformat("%1$+21.14E");
 
 std::string RsmPolynomial::tre_string() const
 {
-  std::string s1 = str_check_size(sizeformat % coefficient_.rows() %
-   				  coefficient_.cols() %
-   				  coefficient_.depth() % coefficient_.size(),
+  if(coefficient_.rows() - 1 > 5 ||
+     coefficient_.cols() - 1 > 5 ||
+     coefficient_.depth() - 1 > 5)
+    throw Exception("The maximum polynomial order supported by the NITF TRE is 5");
+  std::string s1 = str_check_size(sizeformat
+				  % (coefficient_.rows() - 1)
+				  % (coefficient_.cols() - 1)
+				  % (coefficient_.depth() - 1)
+				  % coefficient_.size(),
    				  1 + 1 + 1 + 3);
   for(int i = 0; i < coefficient_.rows(); ++i)
     for(int j = 0; j < coefficient_.cols(); ++j)
@@ -398,9 +404,9 @@ RsmPolynomial RsmPolynomial::read_tre_string(std::istream& In)
   int ny = read_size<int>(In, 1);
   int nz = read_size<int>(In, 1);
   int total_size = read_size<int>(In, 3);
-  if(total_size != nx * ny * nz)
+  if(total_size != (nx + 1) * (ny + 1) * (nz + 1))
     throw Exception("Total size should be the product of nx, ny, and nz");
-  res.coefficient_.resize(nx, ny, nz);
+  res.coefficient_.resize(nx + 1, ny + 1, nz + 1);
   res.fitted_coefficent_size = total_size;
   for(int i = 0; i < res.coefficient_.rows(); ++i)
     for(int j = 0; j < res.coefficient_.cols(); ++j)

@@ -48,7 +48,6 @@ public:
     virtual boost::shared_ptr< GeoCal::OrbitData > orbit_data(GeoCal::TimeWithDerivative const &T) const;
     virtual std::string print_to_string();
     using GeoCal::Orbit::notify_update_do;
-    using GeoCal::Orbit::interpolate;
 
 /* Internal director utilities */
 public:

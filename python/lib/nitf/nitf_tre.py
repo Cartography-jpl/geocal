@@ -45,6 +45,12 @@ class Tre(_FieldStruct):
             raise RuntimeError("TRE string is too long")
         fh.write("{:0>5d}".format(v).encode("utf-8"))
         fh.write(t)
+    def str_hook(self, file):
+        '''Convenient to have a place to add stuff in __str__ for derived
+        classes. This gets called after the TRE name is written, but before
+        any fields. Default is to do nothing, but derived classes can 
+        override this if desired.'''
+        pass
     def __str__(self):
         '''Text description of structure, e.g., something you can print
         out.'''
@@ -57,6 +63,7 @@ class Tre(_FieldStruct):
             maxlen = 10
         res = six.StringIO()
         print("TRE - %s" % self.tre_tag, file=res)
+        self.str_hook(res)
         for f in self.field_value_list:
             if(not isinstance(f, _FieldLoopStruct)):
                 if(f.field_name is not None):
@@ -70,6 +77,36 @@ class Tre(_FieldStruct):
         res = six.StringIO()
         print("TRE - %s" % self.tre_tag, file=res)
 
+class TreObjectImplementation(Tre):
+    '''Modifications where the class of type tre_implementation_class in
+    the attribute tre_implementation_field handles most of the TRE conversion
+    (see for example TreRSMPCA).'''
+    def tre_bytes(self):
+        t = getattr(self, self.tre_implementation_field).tre_string()
+        if(isinstance(t, bytes)):
+            return t
+        return t.encode("utf-8")
+    def read_from_tre_bytes(self, bt, nitf_literal = False):
+        setattr(self, self.tre_implementation_field, self.tre_implementation_class.read_tre_string(bt.decode("utf-8")))
+        self.update_raw_field()
+
+    def read_from_file(self, fh, nitf_literal = False):
+        tag = fh.read(6).rstrip().decode("utf-8")
+        if(tag != self.tre_tag):
+            raise RuntimeError("Expected TRE %s but got %s" % (self.tre_tag,
+                                                               tag))
+        cel = int(fh.read(5))
+        self.read_from_tre_bytes(fh.read(cel), nitf_literal)
+
+    def str_hook(self, fh):
+        print("Object associated with TRE:", file=fh)
+        print(getattr(self, self.tre_implementation_field), file=fh)
+        print("Raw fields:", file=fh)
+
+    def update_raw_field(self):
+        '''Update the raw fields after a change to tre_implementation_field'''
+        fh = six.BytesIO(self.tre_bytes())
+        _FieldStruct.read_from_file(self, fh)
 
 class TreUnknown(Tre):
     '''The is a general class to handle TREs that we don't have another 
@@ -186,19 +223,40 @@ def read_tre_data(data):
         res.append(t)
     return res
     
-def create_nitf_tre_structure(name, description, hlp = None):
+def create_nitf_tre_structure(name, description, hlp = None,
+                              tre_implementation_class=None,
+                              tre_implementation_field=None):
     '''This is like create_nitf_field_structure, but adds a little
     extra structure for TREs. The description should be almost like
     with create_nitf_field_structure, except for the addition of a
     TRE tag. By convention, we don't list the cetag and cel fields,
-    since these are always present.'''
+    since these are always present.
+
+    In some cases, we want the bulk of the TRE generation/reading to
+    be done in another class (e.g., a C++ class such as for 
+    RsmRationalPolynomial and RSMPCA). To support this, the optional
+    arguments tre_implementation_class and tre_implementation_field can
+    be passed in, e.g., RsmRationalPolynomial and "rsm_rational_polynomial".
+
+    The class should have the functions "tre_string()" and 
+    "read_tre_string(s)", as well as having some reasonable "print(obj)" 
+    value. See for example the C++ RsmRationalPolynomial.
+    '''
     t = _create_nitf_field_structure()
     desc = copy.deepcopy(description)
     tre_tag = desc.pop(0)
     # cetag and cel are really part of the field structure, but it is
     # convenient to treat the tre as all fields *except* these one. The
     # tre handles the rest these tags special.
-    res = type(name, (Tre,), t.process(desc))
+    if((tre_implementation_field and not tre_implementation_class) or
+       (not tre_implementation_field and tre_implementation_class)):
+        raise RuntimeError("Need to supply either none or both of tre_implementation_class and tre_implementation_field")
+    if(tre_implementation_field):
+        res = type(name, (TreObjectImplementation,), t.process(desc))
+        res.tre_implementation_class = tre_implementation_class
+        res.tre_implementation_field = tre_implementation_field
+    else:
+        res = type(name, (Tre,), t.process(desc))
     res.tre_tag = tre_tag
     if(hlp is not None):
         try:

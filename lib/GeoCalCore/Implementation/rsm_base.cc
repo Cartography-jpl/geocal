@@ -40,7 +40,7 @@ void RsmBase::load(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(RsmBase);
 #endif
 
-boost::format f("%|1$80s|%|2$40s|");
+boost::format f("%|1$-80s|%|2$-40s|");
 
 //-----------------------------------------------------------------------
 /// Write the part of the TRE string for the image identification and

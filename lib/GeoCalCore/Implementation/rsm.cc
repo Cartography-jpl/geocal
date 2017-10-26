@@ -4,6 +4,7 @@
 #include "geocal_serialize_support.h"
 #include "simple_dem.h"
 #include "planet_coordinate.h"
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -15,6 +16,26 @@ void Rsm::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(Rsm);
   ar & GEOCAL_NVP(rp)
     & GEOCAL_NVP(cconv);
+  // Older version didn't have rid.
+  if(version > 0) {
+    ar & GEOCAL_NVP(rid);
+  }
+  boost::serialization::split_member(ar, *this, version);
+}
+
+template<class Archive>
+void Rsm::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void Rsm::load(Archive & ar, const unsigned int version)
+{
+  // Older version didn't have rid
+  if(version == 0) {
+    rid = boost::make_shared<RsmId>(rp, cconv);
+  }
 }
 
 GEOCAL_IMPLEMENT(Rsm);
@@ -28,6 +49,7 @@ Rsm::Rsm(const boost::shared_ptr<RsmBase>& Rp,
 	 const boost::shared_ptr<CoordinateConverter>& Cconv)
 : rp(Rp), cconv(Cconv)
 {
+  rid = boost::make_shared<RsmId>(rp, cconv);
 }
 
 //-----------------------------------------------------------------------

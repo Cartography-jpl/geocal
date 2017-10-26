@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %import "coordinate_converter.i"
 %import "rsm_base.i"
+%import "rsm_id.i"
 %import "image_ground_connection.i"
 
 %geocal_shared_ptr(GeoCal::Rsm);
@@ -39,6 +40,7 @@ public:
 		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT)
     const;
+  %python_attribute(rsm_id, boost::shared_ptr<RsmId>);
   %python_attribute(rsm_base, boost::shared_ptr<RsmBase>);
   %python_attribute(coordinate_converter,
 		    boost::shared_ptr<CoordinateConverter>);

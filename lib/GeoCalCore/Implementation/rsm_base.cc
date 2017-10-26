@@ -19,7 +19,6 @@ void RsmBase::serialize(Archive & ar, const unsigned int version)
   }
   boost::serialization::split_member(ar, *this, version);
 }
-
 template<class Archive>
 void RsmBase::save(Archive & ar, const unsigned int version) const
 {

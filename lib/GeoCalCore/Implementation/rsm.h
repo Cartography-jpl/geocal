@@ -1,6 +1,7 @@
 #ifndef RSM_H
 #define RSM_H
 #include "rsm_base.h"
+#include "rsm_id.h"
 #include "coordinate_converter.h"
 #include "image_ground_connection.h"
 
@@ -36,6 +37,7 @@ public:
 	   double Max_height);
   void print(std::ostream& Os) const;
 
+  const boost::shared_ptr<RsmId>& rsm_id() const {return rid;}
   const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
   const boost::shared_ptr<CoordinateConverter> coordinate_converter() const
   { return cconv; }
@@ -49,14 +51,19 @@ public:
 private:
   boost::shared_ptr<RsmBase> rp;
   boost::shared_ptr<CoordinateConverter> cconv;
-
+  boost::shared_ptr<RsmId> rid;
   Rsm() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 }
 
 GEOCAL_EXPORT_KEY(Rsm);
+GEOCAL_CLASS_VERSION(RsmId, 1);
 #endif
 

@@ -2,6 +2,9 @@
 #define RSM_H
 #include "rsm_base.h"
 #include "rsm_id.h"
+#include "rsm_direct_covariance.h"
+#include "rsm_indirect_covariance.h"
+#include "rsm_adjustable_parameter.h"
 #include "coordinate_converter.h"
 #include "image_ground_connection.h"
 
@@ -38,6 +41,12 @@ public:
   void print(std::ostream& Os) const;
 
   const boost::shared_ptr<RsmId>& rsm_id() const {return rid;}
+  const boost::shared_ptr<RsmDirectCovariance>& rsm_direct_covariance() const
+  {return rdcov;}
+  const boost::shared_ptr<RsmIndirectCovariance>&
+  rsm_indirect_covariance() const {return ricov;}
+  const boost::shared_ptr<RsmAdjustableParameter>&
+  rsm_adjustable_parameter() const {return rparm;}
   const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
   const boost::shared_ptr<CoordinateConverter> coordinate_converter() const
   { return cconv; }
@@ -52,6 +61,9 @@ private:
   boost::shared_ptr<RsmBase> rp;
   boost::shared_ptr<CoordinateConverter> cconv;
   boost::shared_ptr<RsmId> rid;
+  boost::shared_ptr<RsmDirectCovariance> rdcov;
+  boost::shared_ptr<RsmIndirectCovariance> ricov;
+  boost::shared_ptr<RsmAdjustableParameter> rparm;
   Rsm() {}
   friend class boost::serialization::access;
   template<class Archive>

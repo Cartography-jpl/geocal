@@ -18,7 +18,10 @@ void Rsm::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(cconv);
   // Older version didn't have rid.
   if(version > 0) {
-    ar & GEOCAL_NVP(rid);
+    ar & GEOCAL_NVP(rid)
+      & GEOCAL_NVP(rdcov)
+      & GEOCAL_NVP(ricov)
+      & GEOCAL_NVP(rparm);
   }
   boost::serialization::split_member(ar, *this, version);
 }

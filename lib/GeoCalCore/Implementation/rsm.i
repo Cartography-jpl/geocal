@@ -10,6 +10,9 @@
 %import "coordinate_converter.i"
 %import "rsm_base.i"
 %import "rsm_id.i"
+%import "rsm_direct_covariance.i"
+%import "rsm_indirect_covariance.i"
+%import "rsm_adjustable_parameter.i"
 %import "image_ground_connection.i"
 
 %geocal_shared_ptr(GeoCal::Rsm);
@@ -41,6 +44,12 @@ public:
 		   blitz::Array<double, 2>& OUTPUT)
     const;
   %python_attribute(rsm_id, boost::shared_ptr<RsmId>);
+  %python_attribute(rsm_direct_covariance,
+		    boost::shared_ptr<RsmDirectCovariance>);
+  %python_attribute(rsm_indirect_covariance,
+		    boost::shared_ptr<RsmIndirectCovariance>);
+  %python_attribute(rsm_adjustable_parameter,
+		    boost::shared_ptr<RsmAdjustableParameter>);
   %python_attribute(rsm_base, boost::shared_ptr<RsmBase>);
   %python_attribute(coordinate_converter,
 		    boost::shared_ptr<CoordinateConverter>);

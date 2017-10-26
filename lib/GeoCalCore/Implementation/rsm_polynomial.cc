@@ -351,8 +351,8 @@ void RsmPolynomial::print(std::ostream& Os) const
      << "  Max order:      "  << max_order_ << "\n";
 }
 
-boost::format sizeformat("%1$01d%2$01d%3$01d%4$03d");
-boost::format coeffformat("%1$+21.14E");
+boost::format sizeformat("%|1$01d|%|2$01d|%|3$01d|%|4$03d|");
+boost::format coeffformat("%|1$+21.14E|");
 
 //-----------------------------------------------------------------------
 /// Write out the polynomial data as a TRE string. Note that you don't
@@ -395,22 +395,20 @@ std::string RsmPolynomial::tre_string() const
 /// to -1.
 //-----------------------------------------------------------------------
 
-RsmPolynomial RsmPolynomial::read_tre_string(std::istream& In)
+void RsmPolynomial::read_tre_string(std::istream& In)
 {
-  RsmPolynomial res;
-  res.is_denominator_ = false;
-  res.max_order_ = -1;
+  is_denominator_ = false;
+  max_order_ = -1;
   int nx = read_size<int>(In, 1);
   int ny = read_size<int>(In, 1);
   int nz = read_size<int>(In, 1);
   int total_size = read_size<int>(In, 3);
   if(total_size != (nx + 1) * (ny + 1) * (nz + 1))
     throw Exception("Total size should be the product of nx, ny, and nz");
-  res.coefficient_.resize(nx + 1, ny + 1, nz + 1);
-  res.fitted_coefficent_size = total_size;
-  for(int i = 0; i < res.coefficient_.rows(); ++i)
-    for(int j = 0; j < res.coefficient_.cols(); ++j)
-      for(int k = 0; k < res.coefficient_.depth(); ++k)
-	res.coefficient_(i,j,k) = read_size<double>(In, 21);
-  return res;
+  coefficient_.resize(nx + 1, ny + 1, nz + 1);
+  fitted_coefficent_size = total_size;
+  for(int i = 0; i < coefficient_.rows(); ++i)
+    for(int j = 0; j < coefficient_.cols(); ++j)
+      for(int k = 0; k < coefficient_.depth(); ++k)
+	coefficient_(i,j,k) = read_size<double>(In, 21);
 }

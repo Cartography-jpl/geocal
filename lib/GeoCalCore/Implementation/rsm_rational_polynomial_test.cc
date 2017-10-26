@@ -28,6 +28,19 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_MATRIX_CLOSE(jac(Range::all(), 2), jac_exp(Range::all(), 2));
 }
 
+BOOST_AUTO_TEST_CASE(tre)
+{
+  RsmRationalPolynomial r(3,3,3,3,3,3,3,3);
+  r.set_rpc_coeff(rpc);
+  boost::shared_ptr<RsmRationalPolynomial> r2 =
+    RsmRationalPolynomial::read_tre_string(r.tre_string());
+  ImageCoordinate ic_expect = rpc.image_coordinate(gp);
+  ImageCoordinate ic = r2->image_coordinate(gp.longitude(), gp.latitude(),
+					  gp.height_reference_surface());
+  BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
+  BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
+}
+
 BOOST_AUTO_TEST_CASE(fit_data_test)
 {
   RsmRationalPolynomial r(3,3,3,3,3,3,3,3);

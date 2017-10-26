@@ -4,6 +4,8 @@
 #include "geocal_rpc.h"
 #include "geocal_gsl_fit.h"
 #include "geocal_serialize_support.h"
+#include "tre_support.h"
+#include <sstream>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -478,6 +480,9 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
      << "  Nsecond pass fit: " << nsecond_pass_fit_ << "\n";
 }
 
+boost::format secformat("%|1$03d|%|2$03d|%|3$21s|%|4$21s|");
+boost::format scaleformat("%|1$+21.14E|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|");
+
 //-----------------------------------------------------------------------
 /// Write to TRE string.
 ///
@@ -485,11 +490,30 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
 /// the machine precision. Writing a RsmRationalPolynomial and then
 /// reading it from a TRE does *not* in general give the exact same
 /// RsmRationalPolynomial, rather just one that is close.
+///
+/// Note that this is all the fields *except* the CETAG and CEL (the
+/// front two). It is convenient to treat those special. (We can
+/// revisit this in the future if we need to).
 //-----------------------------------------------------------------------
 
 std::string RsmRationalPolynomial::tre_string() const
 {
-  return "";
+  std::string res = base_tre_string();
+  // Don't fill in the row and column fit error
+  std::string row_fit_error="";
+  std::string col_fit_error="";
+  res += str_check_size(secformat % row_section_number_ % col_section_number_
+			% row_fit_error % col_fit_error,
+			3 + 3 + 21 + 21);
+  res += str_check_size(scaleformat % line_offset_ % sample_offset_ %
+			x_offset_ % y_offset_ % z_offset_, 5 * 21);
+  res += str_check_size(scaleformat % line_scale_ % sample_scale_ %
+			x_scale_ % y_scale_ % z_scale_, 5 * 21);
+  res += line_num_.tre_string();
+  res += line_den_.tre_string();
+  res += sample_num_.tre_string();
+  res += sample_den_.tre_string();
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -498,6 +522,10 @@ std::string RsmRationalPolynomial::tre_string() const
 /// aren't contained are ones used for fitting the RSM, so in practice
 /// this doesn't matter. We just set the various fields to the default
 /// values found in the constructor.
+///
+/// This should have all the TRE *except* for the front CETAG and CEL.
+/// It is convenient to treat these fields as special. (We can
+/// revisit this in the future if we need to).
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<RsmRationalPolynomial>
@@ -509,4 +537,26 @@ RsmRationalPolynomial::read_tre_string(const std::string& Tre_in)
   res->nheight_fit_ = 20;
   res->nsecond_pass_fit_ = 20;
   res->ignore_igc_error_in_fit_ = false;
+  std::stringstream in(Tre_in);
+  res->base_read_tre_string(in);
+  res->row_section_number_ = read_size<int>(in, 3);
+  res->col_section_number_ = read_size<int>(in, 3);
+  std::string trash = read_size<std::string>(in, 21);
+  trash = read_size<std::string>(in, 21);
+  res->line_offset_ = read_size<double>(in, 21);
+  res->sample_offset_ = read_size<double>(in, 21);
+  res->x_offset_ = read_size<double>(in, 21);
+  res->y_offset_ = read_size<double>(in, 21);
+  res->z_offset_ = read_size<double>(in, 21);
+  res->line_scale_ = read_size<double>(in, 21);
+  res->sample_scale_ = read_size<double>(in, 21);
+  res->x_scale_ = read_size<double>(in, 21);
+  res->y_scale_ = read_size<double>(in, 21);
+  res->z_scale_ = read_size<double>(in, 21);
+  res->line_num_.read_tre_string(in);
+  res->line_den_.read_tre_string(in);
+  res->sample_num_.read_tre_string(in);
+  res->sample_den_.read_tre_string(in);
+  check_end_of_stream(in);
+  return res;
 }

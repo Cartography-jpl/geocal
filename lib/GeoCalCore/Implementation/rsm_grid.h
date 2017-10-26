@@ -23,7 +23,9 @@ namespace GeoCal {
   for doing a correction.
 *******************************************************************/
 
-class RsmGrid : public RsmBase {
+class RsmGrid : public boost::noncopyable, public RsmBase {
+  // Could make copyable, we just haven't bothered. But put this in
+  // place so we don't accidentally try to copy
 public:
   RsmGrid(int N_x, int N_y, int N_z,
 	  bool Ignore_igc_error_in_fit = false)

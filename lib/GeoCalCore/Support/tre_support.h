@@ -21,8 +21,14 @@ namespace GeoCal {
 inline std::string str_check_size(const boost::basic_format<char>& F, int sz)
 {
   std::string res = boost::str(F);
-  if((int) res.size() != sz)
-    throw Exception("Formatted string is not the expected size");
+  if((int) res.size() != sz) {
+    Exception e;
+    e << "Formatted string is not the expected size.\n"
+      << "Expected size: " << sz << "\n"
+      << "Actual size:   " << res.size() << "\n"
+      << "String:       '" << res << "'\n";
+    throw e;
+  }
   return res;
 }
 
@@ -39,5 +45,23 @@ template<class T> inline T read_size(std::istream& In, int size)
   return boost::lexical_cast<T>(buf, size);
 }
 
+//-----------------------------------------------------------------------
+/// Check end of stream
+//-----------------------------------------------------------------------
+inline void check_end_of_stream(std::istream& in)
+{
+  // Try to read more data. This should actually read 0 bytes, but we
+  // can't do the "obvious" thing of in.eof() because eof is only set
+  // once we try to read past the end of stream
+  char buf[101];
+  in.read(buf, 100);
+  if(in.gcount() > 0) {
+    Exception e;
+    buf[100] = '\0'; // Make sure we end somewhere.
+    e << "There is unexpected stuff at the end of the TRE string\n"
+      << "Stuff: '" << buf << "'\n";
+    throw e;
+  }
+}
 }
 #endif

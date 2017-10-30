@@ -216,7 +216,12 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
     def __init__(self, N_x, N_y, N_z, Ignore_igc_error_in_fit=False):
         """
 
-        GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false)
+        GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false, int
+        Total_number_row_digit=11, int Total_number_col_digit=11, int
+        Number_fractional_row_digit=2, int Number_fractional_col_digit=2, int
+        Row_section_number=1, int Col_section_number=1, const std::string
+        &Image_identifier="", const std::string
+        &Rsm_support_data_edition="fake-1")
 
         """
         _rsm_grid.RsmGrid_swiginit(self, _rsm_grid.new_RsmGrid(N_x, N_y, N_z, Ignore_igc_error_in_fit))
@@ -419,6 +424,62 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         return self._v_z_delta()
 
 
+    def _v_total_number_row_digit(self):
+        """
+
+        int GeoCal::RsmGrid::total_number_row_digit() const
+
+        """
+        return _rsm_grid.RsmGrid__v_total_number_row_digit(self)
+
+
+    @property
+    def total_number_row_digit(self):
+        return self._v_total_number_row_digit()
+
+
+    def _v_total_number_col_digit(self):
+        """
+
+        int GeoCal::RsmGrid::total_number_col_digit() const
+
+        """
+        return _rsm_grid.RsmGrid__v_total_number_col_digit(self)
+
+
+    @property
+    def total_number_col_digit(self):
+        return self._v_total_number_col_digit()
+
+
+    def _v_number_fractional_row_digit(self):
+        """
+
+        int GeoCal::RsmGrid::number_fractional_row_digit() const
+
+        """
+        return _rsm_grid.RsmGrid__v_number_fractional_row_digit(self)
+
+
+    @property
+    def number_fractional_row_digit(self):
+        return self._v_number_fractional_row_digit()
+
+
+    def _v_number_fractional_col_digit(self):
+        """
+
+        int GeoCal::RsmGrid::number_fractional_col_digit() const
+
+        """
+        return _rsm_grid.RsmGrid__v_number_fractional_col_digit(self)
+
+
+    @property
+    def number_fractional_col_digit(self):
+        return self._v_number_fractional_col_digit()
+
+
     def tre_string(self):
         """
 
@@ -470,6 +531,10 @@ RsmGrid._v_y_start = new_instancemethod(_rsm_grid.RsmGrid__v_y_start, None, RsmG
 RsmGrid._v_y_delta = new_instancemethod(_rsm_grid.RsmGrid__v_y_delta, None, RsmGrid)
 RsmGrid._v_z_start = new_instancemethod(_rsm_grid.RsmGrid__v_z_start, None, RsmGrid)
 RsmGrid._v_z_delta = new_instancemethod(_rsm_grid.RsmGrid__v_z_delta, None, RsmGrid)
+RsmGrid._v_total_number_row_digit = new_instancemethod(_rsm_grid.RsmGrid__v_total_number_row_digit, None, RsmGrid)
+RsmGrid._v_total_number_col_digit = new_instancemethod(_rsm_grid.RsmGrid__v_total_number_col_digit, None, RsmGrid)
+RsmGrid._v_number_fractional_row_digit = new_instancemethod(_rsm_grid.RsmGrid__v_number_fractional_row_digit, None, RsmGrid)
+RsmGrid._v_number_fractional_col_digit = new_instancemethod(_rsm_grid.RsmGrid__v_number_fractional_col_digit, None, RsmGrid)
 RsmGrid.tre_string = new_instancemethod(_rsm_grid.RsmGrid_tre_string, None, RsmGrid)
 RsmGrid_swigregister = _rsm_grid.RsmGrid_swigregister
 RsmGrid_swigregister(RsmGrid)

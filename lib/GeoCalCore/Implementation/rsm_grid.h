@@ -28,10 +28,25 @@ class RsmGrid : public boost::noncopyable, public RsmBase {
   // place so we don't accidentally try to copy
 public:
   RsmGrid(int N_x, int N_y, int N_z,
-	  bool Ignore_igc_error_in_fit = false)
-    : line_(N_x, N_y, N_z),
+	  bool Ignore_igc_error_in_fit = false,
+	  int Total_number_row_digit = 11,
+	  int Total_number_col_digit = 11,
+	  int Number_fractional_row_digit = 2,
+	  int Number_fractional_col_digit = 2,
+	  int Row_section_number = 1,
+	  int Col_section_number = 1,
+	  const std::string& Image_identifier="",
+	  const std::string& Rsm_support_data_edition="fake-1")
+    : RsmBase(Image_identifier, Rsm_support_data_edition),
+      line_(N_x, N_y, N_z),
       sample_(N_x, N_y, N_z),
-      ignore_igc_error_in_fit_(Ignore_igc_error_in_fit)
+      ignore_igc_error_in_fit_(Ignore_igc_error_in_fit),
+      total_number_row_digit_(Total_number_row_digit),
+      total_number_col_digit_(Total_number_col_digit),
+      number_fractional_row_digit_(Number_fractional_row_digit),
+      number_fractional_col_digit_(Number_fractional_col_digit),
+      row_section_number_(Row_section_number),
+      col_section_number_(Col_section_number)
   {}
   virtual ~RsmGrid() {}
   virtual void print(std::ostream& Os) const;
@@ -183,6 +198,25 @@ public:
   
   void ignore_igc_error_in_fit(bool V) { ignore_igc_error_in_fit_ = V;}
 
+//-----------------------------------------------------------------------
+/// Row section number.  
+//-----------------------------------------------------------------------
+  int row_section_number() const {return row_section_number_; }
+  void row_section_number(int V) {row_section_number_ = V; }
+  
+//-----------------------------------------------------------------------
+/// Column section number.
+//-----------------------------------------------------------------------
+  int col_section_number() const {return col_section_number_; }
+  void col_section_number(int V) {col_section_number_ = V; }
+
+  int total_number_row_digit() const {return total_number_row_digit_; }
+  int total_number_col_digit() const {return total_number_col_digit_; }
+  int number_fractional_row_digit() const
+  { return number_fractional_row_digit_; }
+  int number_fractional_col_digit() const
+  { return number_fractional_col_digit_; }
+  
   std::string tre_string() const;
   static boost::shared_ptr<RsmGrid>
   read_tre_string(const std::string& Tre_in);
@@ -198,6 +232,9 @@ private:
   double x_start_, y_start_, z_start_, x_delta_, y_delta_, z_delta_;
   int min_line_,max_line_,min_sample_,max_sample_;
   bool ignore_igc_error_in_fit_;
+  int total_number_row_digit_, total_number_col_digit_,
+    number_fractional_row_digit_, number_fractional_col_digit_;
+  int row_section_number_, col_section_number_;
   RsmGrid() {}
   friend class boost::serialization::access;
   template<class Archive>

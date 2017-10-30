@@ -4,6 +4,7 @@
 #include "memory_raster_image.h"
 #include "simple_dem.h"
 #include "rsm_rational_polynomial.h"
+#include "rsm_grid.h"
 #include "geocal_rpc.h"
 #include "geodetic.h"
 #include <boost/make_shared.hpp>
@@ -74,6 +75,23 @@ public:
   boost::shared_ptr<RsmRationalPolynomial> rp_from_rpc;
   Geodetic gp;
   boost::shared_ptr<RpcImageGroundConnection> igc;
+};
+
+class RsmGridFixture : public RsmFixture {
+public:
+  RsmGridFixture()
+  {
+    rg_from_rpc = boost::make_shared<RsmGrid>(60,60,20);
+    double hmin = rpc.height_offset - rpc.height_scale;
+    double hmax = rpc.height_offset + rpc.height_scale;
+    double lmin = 0;
+    double smin = 0;
+    double lmax = rpc.line_offset * 2;
+    double smax = rpc.sample_offset * 2;
+    GeodeticConverter cconv;
+    rg_from_rpc->fit(*igc, cconv, hmin, hmax, lmin, lmax, smin, smax);
+  }
+  boost::shared_ptr<RsmGrid> rg_from_rpc;
 };
 }
 

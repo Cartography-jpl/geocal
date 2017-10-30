@@ -351,8 +351,8 @@ void RsmPolynomial::print(std::ostream& Os) const
      << "  Max order:      "  << max_order_ << "\n";
 }
 
-boost::format sizeformat("%|1$01d|%|2$01d|%|3$01d|%|4$03d|");
-boost::format coeffformat("%|1$+21.14E|");
+static boost::format sizeformat("%|1$01d|%|2$01d|%|3$01d|%|4$03d|");
+static boost::format coeffformat("%|1$+21.14E|");
 
 //-----------------------------------------------------------------------
 /// Write out the polynomial data as a TRE string. Note that you don't

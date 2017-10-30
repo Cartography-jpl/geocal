@@ -41,9 +41,22 @@ void RsmGrid::load(Archive & ar, const unsigned int version)
   sample_ = where(sample_no_nan < -9e19,
 		  std::numeric_limits<double>::quiet_NaN(),
 		  sample_no_nan);
-  // Older version didn't have blah blah
+  // Older version didn't have number of digits
   if(version == 0) {
-  }
+    total_number_row_digit_ = 11;
+    total_number_col_digit_ = 11;
+    number_fractional_row_digit_ = 11;
+    number_fractional_col_digit_ = 11;
+    row_section_number_ = 1;
+    col_section_number_ = 1;
+  } else {
+    ar & GEOCAL_NVP_(total_number_row_digit)
+      & GEOCAL_NVP_(total_number_col_digit)
+      & GEOCAL_NVP_(number_fractional_row_digit)
+      & GEOCAL_NVP_(number_fractional_col_digit)
+      & GEOCAL_NVP_(row_section_number)
+      & GEOCAL_NVP_(col_section_number);
+  }    
 }
 
 template<class Archive>
@@ -72,8 +85,14 @@ void RsmGrid::save(Archive & ar, const unsigned int version) const
     & GEOCAL_NVP_(min_sample)
     & GEOCAL_NVP_(max_sample)
     & GEOCAL_NVP_(ignore_igc_error_in_fit);
-  // Older version didn't have blah blah
+  // Older version didn't have number of digits
   if(version > 0) {
+    ar & GEOCAL_NVP_(total_number_row_digit)
+      & GEOCAL_NVP_(total_number_col_digit)
+      & GEOCAL_NVP_(number_fractional_row_digit)
+      & GEOCAL_NVP_(number_fractional_col_digit)
+      & GEOCAL_NVP_(row_section_number)
+      & GEOCAL_NVP_(col_section_number);
   }
 }
 
@@ -455,6 +474,11 @@ void RsmGrid::print(std::ostream& Os) const
      << ")\n";
 }
 
+static boost::format secformat("%|1$03d|%|2$03d|%|3$21s|%|4$21s|%|5$1s|");
+static boost::format gplaneformat("%|1$03d|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|%|6$+21.14E|%|7$+21.14E|%|8$+09d|%|9$+09d|%|10$02d|%|11$02d|%|12$1d|%|13$1d|");
+static boost::format igoffformat("%|1$+04d|%|2$+04d|");
+static boost::format szformat("%|1$03d|%|2$03d|");
+
 //-----------------------------------------------------------------------
 /// Write to TRE string.
 ///
@@ -471,6 +495,46 @@ void RsmGrid::print(std::ostream& Os) const
 std::string RsmGrid::tre_string() const
 {
   std::string res = base_tre_string();
+  // Don't fill in the row and column fit error
+  std::string row_fit_error="";
+  std::string col_fit_error="";
+  std::string int_ord = "";
+  res += str_check_size(secformat % row_section_number_ % col_section_number_
+			% row_fit_error % col_fit_error % int_ord,
+			3 + 3 + 21 + 21 + 1);
+  // This is the value that the line/sample are recorded relative
+  // to. The TRE *only* has positive values, so this number needs to
+  // be < the minimum value in the array so we don't need positive numbers.
+  int refrow = int(floor(min(where(blitz_isnan(line_), 0, line_))));
+  int refcol = int(floor(min(where(blitz_isnan(sample_), 0, sample_))));
+  res += str_check_size(gplaneformat % number_z() % z_delta_ % x_delta_
+			% y_delta_ % z_start_ % x_start_ % y_start_
+			% refrow % refcol % total_number_row_digit_
+			% total_number_col_digit_
+			% number_fractional_row_digit_
+			% number_fractional_col_digit_,
+			3 + 6 * 21 + 2 * 9 + 2 * 2 + 2 * 1);
+  for(int i = 1; i < number_z(); ++i) {
+    // Offset held to 0 for now
+    int xoff = 0;
+    int yoff = 0;
+    res += str_check_size(igoffformat % xoff % yoff, 2 * 4);
+  }
+  // The actual grid value size depends on the total_number_rol_digit_
+  // and total_number_col_digit_, so we need to create it here rather
+  // than having a static variable defined.
+  boost::format lnform("%|1$0" +
+       boost::lexical_cast<std::string>(total_number_row_digit_) + "d|");
+  boost::format lnnanform("%|1$" +
+       boost::lexical_cast<std::string>(total_number_row_digit_) + "s|");
+  boost::format sampform("%|1$0" +
+       boost::lexical_cast<std::string>(total_number_col_digit_) + "d|");
+  boost::format smpnanfor("%|1$" +
+       boost::lexical_cast<std::string>(total_number_col_digit_) + "s|");
+  for(int i = 0; i < number_z(); ++i) {
+    res += str_check_size(szformat % number_x(i) % number_y(i), 2 * 3);
+    
+  }
   // Don't fill in the row and column fit error
   // std::string row_fit_error="";
   // std::string col_fit_error="";
@@ -514,6 +578,57 @@ RsmGrid::read_tre_string(const std::string& Tre_in)
   std::stringstream in(Tre_in);
   boost::shared_ptr<RsmGrid> res(new RsmGrid);
   res->base_read_tre_string(in);
+  res->row_section_number_ = read_size<int>(in, 3);
+  res->col_section_number_ = read_size<int>(in, 3);
+  std::string trash = read_size<std::string>(in, 21);
+  trash = read_size<std::string>(in, 21);
+  trash = read_size<std::string>(in, 1);
+  int numz = read_size<int>(in, 3);
+  res->z_delta_ = read_size<double>(in, 21);
+  res->x_delta_ = read_size<double>(in, 21);
+  res->y_delta_ = read_size<double>(in, 21);
+  res->z_start_ = read_size<double>(in, 21);
+  res->x_start_ = read_size<double>(in, 21);
+  res->y_start_ = read_size<double>(in, 21);
+  int refrow = read_size<int>(in, 9);
+  int refcol = read_size<int>(in, 9);
+  res->total_number_row_digit_ = read_size<int>(in, 2);
+  res->total_number_col_digit_ = read_size<int>(in, 2);
+  res->number_fractional_row_digit_ = read_size<int>(in, 1);
+  res->number_fractional_col_digit_ = read_size<int>(in, 1);
+  for(int i = 1; i < numz; ++i) {
+    int xoff = read_size<int>(in, 4);
+    int yoff = read_size<int>(in, 4);
+    // Offset held to 0 for now
+    if(xoff != 0 || yoff != 0) {
+      Exception e;
+      e << "We don't currently support a initial x or y offset other than 0\n"
+	<< "Z index:  " << i << "\n"
+	<< "X offset: " << xoff << "\n"
+	<< "Y offset: " << yoff << "\n";
+      throw e;
+    }
+  }
+  int num_x = -1;
+  int num_y = -1;
+  for(int i = 0; i < numz; ++i) {
+    int num_x_new = read_size<int>(in, 3);
+    int num_y_new = read_size<int>(in, 3);
+    if(i == 0) {
+      num_x = num_x_new;
+      num_y = num_y_new;
+    }
+    if(num_x_new != num_x || num_y_new != num_y) {
+      Exception e;
+      e << "We don't currently support variable x/y size\n"
+	<< "Z index:  " << i << "\n"
+	<< "Number x: " << num_x_new << "\n"
+	<< "Number y: " << num_y_new << "\n"
+	<< "Number x previous layer: " << num_x << "\n"
+	<< "Number y previous layer: " << num_y << "\n";
+      throw e;
+    }
+  }
   // res->nline_fit_ = 20;
   // res->nsample_fit_ = 20;
   // res->nheight_fit_ = 20;

@@ -480,8 +480,8 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
      << "  Nsecond pass fit: " << nsecond_pass_fit_ << "\n";
 }
 
-boost::format secformat("%|1$03d|%|2$03d|%|3$21s|%|4$21s|");
-boost::format scaleformat("%|1$+21.14E|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|");
+static boost::format secformat("%|1$03d|%|2$03d|%|3$21s|%|4$21s|");
+static boost::format scaleformat("%|1$+21.14E|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|");
 
 //-----------------------------------------------------------------------
 /// Write to TRE string.

@@ -37,7 +37,8 @@ public:
   virtual void print(std::ostream& Os) const;
   virtual boost::shared_ptr<RsmBase> clone() const
   { return boost::shared_ptr<RsmBase>
-      (new RsmGrid(number_x(), number_y(), number_z()));
+      (new RsmGrid(line_.rows(), line_.cols(), line_.depth(),
+		   ignore_igc_error_in_fit_));
   }
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z)
     const;
@@ -55,8 +56,12 @@ public:
   (double X, double Y, double Z) const;
   virtual void initial_guess(double Line, double Sample, double Z,
 			     double& X_guess, double& Y_guess) const
-  { X_guess = x_start() + x_delta() * number_x() / 2.0;
-    Y_guess = y_start() + y_delta() * number_y() / 2.0;
+  {
+    int z_index = (int) floor((Z - z_start()) / z_delta() + 0.5);
+    X_guess = x_start() + x_delta() * (x_offset(z_index) +
+				       number_x(z_index) / 2.0);
+    Y_guess = y_start() + y_delta() * (y_offset(z_index) +
+				       number_y(z_index) / 2.0);
   }
   virtual double initial_guess_z(double Line, double Sample) const
   {
@@ -72,16 +77,18 @@ public:
 		const RsmBase& Rb);
 
 //-----------------------------------------------------------------------
-/// Number of X values in grid
+/// Number of X values in grid. This can potentially depend on the z
+/// axis value.
 //-----------------------------------------------------------------------
   
-  int number_x() const { return line_.rows(); }
+  int number_x(int Zindex) const { return line_.rows(); }
 
 //-----------------------------------------------------------------------
-/// Number of Y values in grid
+/// Number of Y values in grid. This can potentially depend on the z
+/// axis value.
 //-----------------------------------------------------------------------
   
-  int number_y() const { return line_.cols(); }
+  int number_y(int Zindex) const { return line_.cols(); }
 
 //-----------------------------------------------------------------------
 /// Number of Z values in grid
@@ -89,8 +96,24 @@ public:
   
   int number_z() const { return line_.depth(); }
 
+
 //-----------------------------------------------------------------------
-/// First X value in grid.
+/// Offset in X pixels of particular z_index grid relative to the
+/// initial grid
+//-----------------------------------------------------------------------
+
+  int x_offset(int Zindex) const {return 0; }
+
+//-----------------------------------------------------------------------
+/// Offset in Y pixels of particular z_index grid relative to the
+/// initial grid
+//-----------------------------------------------------------------------
+
+  int y_offset(int Zindex) const {return 0; }
+  
+//-----------------------------------------------------------------------
+/// First X value in grid. This is for the first index, use x_offset
+/// for other z index values.
 //-----------------------------------------------------------------------
 
   double x_start() const {return x_start_;}
@@ -142,9 +165,9 @@ public:
   virtual int min_sample() const {return min_sample_;}
   virtual int max_sample() const {return max_sample_;}
   virtual double min_x() const {return x_start();}
-  virtual double max_x() const {return x_start()+x_delta()*number_x();}
+  virtual double max_x() const {return x_start()+x_delta()*number_x(0);}
   virtual double min_y() const {return y_start();}
-  virtual double max_y() const {return y_start()+y_delta()*number_y();}
+  virtual double max_y() const {return y_start()+y_delta()*number_y(0);}
   virtual double min_z() const {return z_start();}
   virtual double max_z() const {return z_start()+z_delta()*number_z();}
 
@@ -159,7 +182,18 @@ public:
 //-----------------------------------------------------------------------
   
   void ignore_igc_error_in_fit(bool V) { ignore_igc_error_in_fit_ = V;}
+
+  std::string tre_string() const;
+  static boost::shared_ptr<RsmGrid>
+  read_tre_string(const std::string& Tre_in);
 private:
+  // Note, by convention we *don't* include the x_offset, y_offset in
+  // line_ and sample_. So we always have things relative to the
+  // initial plane. The x_offset and y_offset is only used when we
+  // store line_ and sample_, we instead use a larger array to fully
+  // fit the data and fill the edges in with NaN. This speeds up the
+  // code. We can revisit this if needed, this is really just an
+  // internal convention we use and we could change this if desired.
   blitz::Array<double, 3> line_, sample_;
   double x_start_, y_start_, z_start_, x_delta_, y_delta_, z_delta_;
   int min_line_,max_line_,min_sample_,max_sample_;
@@ -175,4 +209,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(RsmGrid);
+GEOCAL_CLASS_VERSION(RsmGrid, 1);
 #endif

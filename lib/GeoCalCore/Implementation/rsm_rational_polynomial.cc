@@ -35,7 +35,7 @@ void RsmRationalPolynomial::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(nsecond_pass_fit)
     & GEOCAL_NVP_(ignore_igc_error_in_fit);
   // Older version didn't have row_section_number_ or col_section_number_.
-  if(version == 0) {
+  if(version > 0) {
     ar & GEOCAL_NVP_(row_section_number)
       & GEOCAL_NVP_(col_section_number);
   }

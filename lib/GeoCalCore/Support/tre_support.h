@@ -45,6 +45,20 @@ template<class T> inline T read_size(std::istream& In, int size)
   return boost::lexical_cast<T>(buf, size);
 }
 
+// We use the convention that a missing number (so all spaces) is
+// returned as NaN, which we use as a holder for missing data
+inline double read_size_nan(std::istream& In, int size)
+{
+  char buf[1000];
+  In.read(buf, size);
+  if(In.gcount() != size)
+    throw Exception("Not enough characters to read");
+  for(int i = 0; i < size; ++i)
+    if(buf[i] != ' ')
+      return boost::lexical_cast<double>(buf, size);
+  return std::numeric_limits<double>::quiet_NaN();
+}
+  
 //-----------------------------------------------------------------------
 /// Check end of stream
 //-----------------------------------------------------------------------

@@ -527,13 +527,29 @@ std::string RsmGrid::tre_string() const
        boost::lexical_cast<std::string>(total_number_row_digit_) + "d|");
   boost::format lnnanform("%|1$" +
        boost::lexical_cast<std::string>(total_number_row_digit_) + "s|");
-  boost::format sampform("%|1$0" +
+  boost::format smpform("%|1$0" +
        boost::lexical_cast<std::string>(total_number_col_digit_) + "d|");
-  boost::format smpnanfor("%|1$" +
+  boost::format smpnanform("%|1$" +
        boost::lexical_cast<std::string>(total_number_col_digit_) + "s|");
+  double lnscale = pow(10, number_fractional_row_digit_);
+  double smpscale = pow(10, number_fractional_row_digit_);
   for(int i = 0; i < number_z(); ++i) {
     res += str_check_size(szformat % number_x(i) % number_y(i), 2 * 3);
-    
+    for(int i1 = 0; i1 < number_x(i); ++i1)
+      for(int i2 = 0; i2 < number_y(i); ++i2) {
+	if(isnan(line_(i1,i2, i)))
+	  res += str_check_size(lnnanform % "", total_number_row_digit_);
+	else
+	  res += str_check_size(lnform %
+		(int) floor((line_(i1,i2, i) - refrow) * lnscale + 0.5),
+		total_number_row_digit_);
+	if(isnan(sample_(i1,i2, i)))
+	  res += str_check_size(smpnanform % "", total_number_col_digit_);
+	else
+	  res += str_check_size(smpform % 
+		(int) floor((sample_(i1,i2, i) - refcol) * smpscale + 0.5),
+		total_number_col_digit_);
+      }
   }
   // Don't fill in the row and column fit error
   // std::string row_fit_error="";
@@ -583,7 +599,7 @@ RsmGrid::read_tre_string(const std::string& Tre_in)
   std::string trash = read_size<std::string>(in, 21);
   trash = read_size<std::string>(in, 21);
   trash = read_size<std::string>(in, 1);
-  int numz = read_size<int>(in, 3);
+  int num_z = read_size<int>(in, 3);
   res->z_delta_ = read_size<double>(in, 21);
   res->x_delta_ = read_size<double>(in, 21);
   res->y_delta_ = read_size<double>(in, 21);
@@ -596,7 +612,7 @@ RsmGrid::read_tre_string(const std::string& Tre_in)
   res->total_number_col_digit_ = read_size<int>(in, 2);
   res->number_fractional_row_digit_ = read_size<int>(in, 1);
   res->number_fractional_col_digit_ = read_size<int>(in, 1);
-  for(int i = 1; i < numz; ++i) {
+  for(int i = 1; i < num_z; ++i) {
     int xoff = read_size<int>(in, 4);
     int yoff = read_size<int>(in, 4);
     // Offset held to 0 for now
@@ -611,12 +627,16 @@ RsmGrid::read_tre_string(const std::string& Tre_in)
   }
   int num_x = -1;
   int num_y = -1;
-  for(int i = 0; i < numz; ++i) {
+  double lnscale = pow(10, res->number_fractional_row_digit_);
+  double smpscale = pow(10, res->number_fractional_row_digit_);
+  for(int i = 0; i < num_z; ++i) {
     int num_x_new = read_size<int>(in, 3);
     int num_y_new = read_size<int>(in, 3);
     if(i == 0) {
       num_x = num_x_new;
       num_y = num_y_new;
+      res->line_.resize(num_x, num_y, num_z);
+      res->sample_.resize(num_x, num_y, num_z);
     }
     if(num_x_new != num_x || num_y_new != num_y) {
       Exception e;
@@ -628,6 +648,13 @@ RsmGrid::read_tre_string(const std::string& Tre_in)
 	<< "Number y previous layer: " << num_y << "\n";
       throw e;
     }
+    for(int i1 = 0; i1 < num_x; ++i1)
+      for(int i2 = 0; i2 < num_y; ++i2) {
+	res->line_(i1, i2, i) =
+	  (read_size_nan(in, res->total_number_row_digit_) / lnscale) + refrow;
+	res->sample_(i1, i2, i) =
+	  (read_size_nan(in, res->total_number_col_digit_) / smpscale) + refcol;
+      }
   }
   // res->nline_fit_ = 20;
   // res->nsample_fit_ = 20;

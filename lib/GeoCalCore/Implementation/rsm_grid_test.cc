@@ -40,11 +40,10 @@ BOOST_AUTO_TEST_CASE(tre)
   boost::shared_ptr<RsmGrid> r2 =
     RsmGrid::read_tre_string(r.tre_string());
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
-  // std::cerr << r.tre_string() << "\n";
-  // ImageCoordinate ic = r2->image_coordinate(gp.longitude(), gp.latitude(),
-  // 					    gp.height_reference_surface());
-  // BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
-  // BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
+  ImageCoordinate ic = r2->image_coordinate(gp.longitude(), gp.latitude(),
+   					    gp.height_reference_surface());
+  BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
+  BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(serialize)

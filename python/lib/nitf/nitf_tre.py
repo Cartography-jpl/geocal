@@ -42,7 +42,7 @@ class Tre(_FieldStruct):
         t = self.tre_bytes()
         v = len(t)
         if(v > 99999):
-            raise RuntimeError("TRE string is too long")
+            raise RuntimeError("TRE string is too long at size %d" % v)
         fh.write("{:0>5d}".format(v).encode("utf-8"))
         fh.write(t)
     def str_hook(self, file):
@@ -87,7 +87,10 @@ class TreObjectImplementation(Tre):
             return t
         return t.encode("utf-8")
     def read_from_tre_bytes(self, bt, nitf_literal = False):
-        setattr(self, self.tre_implementation_field, self.tre_implementation_class.read_tre_string(bt.decode("utf-8")))
+        t = bt
+        if not isinstance(t, six.string_types):
+            t = t.decode("utf-8")
+        setattr(self, self.tre_implementation_field, self.tre_implementation_class.read_tre_string(t))
         self.update_raw_field()
 
     def read_from_file(self, fh, nitf_literal = False):

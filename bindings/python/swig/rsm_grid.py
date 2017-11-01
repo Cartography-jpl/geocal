@@ -424,60 +424,76 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         return self._v_z_delta()
 
 
-    def _v_total_number_row_digit(self):
+    def _v_total_number_row_digit(self, *args):
         """
 
-        int GeoCal::RsmGrid::total_number_row_digit() const
+        void GeoCal::RsmGrid::total_number_row_digit(int v)
 
         """
-        return _rsm_grid.RsmGrid__v_total_number_row_digit(self)
+        return _rsm_grid.RsmGrid__v_total_number_row_digit(self, *args)
 
 
     @property
     def total_number_row_digit(self):
         return self._v_total_number_row_digit()
 
+    @total_number_row_digit.setter
+    def total_number_row_digit(self, value):
+      self._v_total_number_row_digit(value)
 
-    def _v_total_number_col_digit(self):
+
+    def _v_total_number_col_digit(self, *args):
         """
 
-        int GeoCal::RsmGrid::total_number_col_digit() const
+        void GeoCal::RsmGrid::total_number_col_digit(int v)
 
         """
-        return _rsm_grid.RsmGrid__v_total_number_col_digit(self)
+        return _rsm_grid.RsmGrid__v_total_number_col_digit(self, *args)
 
 
     @property
     def total_number_col_digit(self):
         return self._v_total_number_col_digit()
 
+    @total_number_col_digit.setter
+    def total_number_col_digit(self, value):
+      self._v_total_number_col_digit(value)
 
-    def _v_number_fractional_row_digit(self):
+
+    def _v_number_fractional_row_digit(self, *args):
         """
 
-        int GeoCal::RsmGrid::number_fractional_row_digit() const
+        void GeoCal::RsmGrid::number_fractional_row_digit(int v)
 
         """
-        return _rsm_grid.RsmGrid__v_number_fractional_row_digit(self)
+        return _rsm_grid.RsmGrid__v_number_fractional_row_digit(self, *args)
 
 
     @property
     def number_fractional_row_digit(self):
         return self._v_number_fractional_row_digit()
 
+    @number_fractional_row_digit.setter
+    def number_fractional_row_digit(self, value):
+      self._v_number_fractional_row_digit(value)
 
-    def _v_number_fractional_col_digit(self):
+
+    def _v_number_fractional_col_digit(self, *args):
         """
 
-        int GeoCal::RsmGrid::number_fractional_col_digit() const
+        void GeoCal::RsmGrid::number_fractional_col_digit(int v)
 
         """
-        return _rsm_grid.RsmGrid__v_number_fractional_col_digit(self)
+        return _rsm_grid.RsmGrid__v_number_fractional_col_digit(self, *args)
 
 
     @property
     def number_fractional_col_digit(self):
         return self._v_number_fractional_col_digit()
+
+    @number_fractional_col_digit.setter
+    def number_fractional_col_digit(self, value):
+      self._v_number_fractional_col_digit(value)
 
 
     def tre_string(self):

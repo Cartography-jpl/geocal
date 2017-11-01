@@ -1,7 +1,6 @@
 from __future__ import print_function
 from .nitf_field import *
 from .nitf_tre import *
-from .nitf_field import _FieldValue, _FieldStruct
 from geocal_swig import RsmRationalPolynomial
 
 hlp = '''This is the RSMPCA TRE, the Replacement Senor Model Polynomial

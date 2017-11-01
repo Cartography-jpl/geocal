@@ -211,11 +211,15 @@ public:
   void col_section_number(int V) {col_section_number_ = V; }
 
   int total_number_row_digit() const {return total_number_row_digit_; }
+  void total_number_row_digit(int v) {total_number_row_digit_ = v; }
   int total_number_col_digit() const {return total_number_col_digit_; }
+  void total_number_col_digit(int v) {total_number_col_digit_ = v; }
   int number_fractional_row_digit() const
   { return number_fractional_row_digit_; }
+  void number_fractional_row_digit(int v) { number_fractional_row_digit_ = v; }
   int number_fractional_col_digit() const
   { return number_fractional_col_digit_; }
+  void number_fractional_col_digit(int v) { number_fractional_col_digit_ = v; }
   
   std::string tre_string() const;
   static boost::shared_ptr<RsmGrid>

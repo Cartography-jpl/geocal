@@ -41,10 +41,10 @@ public:
   %python_attribute(y_delta, double);
   %python_attribute(z_start, double);
   %python_attribute(z_delta, double);
-  %python_attribute(total_number_row_digit, int);
-  %python_attribute(total_number_col_digit, int);
-  %python_attribute(number_fractional_row_digit, int);
-  %python_attribute(number_fractional_col_digit, int);
+  %python_attribute_with_set(total_number_row_digit, int);
+  %python_attribute_with_set(total_number_col_digit, int);
+  %python_attribute_with_set(number_fractional_row_digit, int);
+  %python_attribute_with_set(number_fractional_col_digit, int);
   std::string tre_string() const;
   static boost::shared_ptr<RsmGrid>
   read_tre_string(const std::string& Tre_in);

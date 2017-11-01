@@ -164,10 +164,31 @@ def rpc():
     return r
 
 @pytest.fixture(scope="function")
+def igc_rpc(rpc):
+    image = MemoryRasterImage(int(rpc.line_offset * 2),
+                              int(rpc.sample_offset * 2), 0)
+    return RpcImageGroundConnection(rpc, SimpleDem(), image)
+
+@pytest.fixture(scope="function")
 def rsm_rational_polynomial(rpc):
     '''Create a RsmRationalPolynomial that matches our rpc test fixture'''
     r = RsmRationalPolynomial(3,3,3,3,3,3,3,3)
     r.set_rpc_coeff(rpc)
+    return r
+
+@pytest.fixture(scope="function")
+def rsm_grid(igc_rpc):
+    '''Create a RsmGrid that matches our rpc test fixture'''
+    r = RsmGrid(40,40,2)
+    r.total_number_row_digit = 8
+    r.total_number_col_digit = 8
+    hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
+    hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
+    lmin = 0
+    smin = 0
+    lmax = int(igc_rpc.rpc.line_offset * 2)
+    smax = int(igc_rpc.rpc.sample_offset * 2)
+    r.fit(igc_rpc, GeodeticConverter(), hmin, hmax, lmin, lmax, smin, smax)
     return r
 
 

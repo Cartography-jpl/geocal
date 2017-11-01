@@ -7348,18 +7348,16 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_row_digit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_row_digit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
   boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   int result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
@@ -7391,18 +7389,90 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_col_digit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_row_digit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid__v_total_number_row_digit" "', argument " "1"" of type '" "GeoCal::RsmGrid *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid__v_total_number_row_digit" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->total_number_row_digit((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_row_digit(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmGrid__v_total_number_row_digit",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmGrid__v_total_number_row_digit__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmGrid__v_total_number_row_digit__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmGrid__v_total_number_row_digit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmGrid::total_number_row_digit() const\n"
+    "    GeoCal::RsmGrid::total_number_row_digit(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_col_digit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
   boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   int result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
@@ -7434,18 +7504,90 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_row_digit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_col_digit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid__v_total_number_col_digit" "', argument " "1"" of type '" "GeoCal::RsmGrid *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid__v_total_number_col_digit" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->total_number_col_digit((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_col_digit(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmGrid__v_total_number_col_digit",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmGrid__v_total_number_col_digit__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmGrid__v_total_number_col_digit__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmGrid__v_total_number_col_digit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmGrid::total_number_col_digit() const\n"
+    "    GeoCal::RsmGrid::total_number_col_digit(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_row_digit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
   boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   int result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
@@ -7477,18 +7619,90 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_col_digit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_row_digit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid__v_number_fractional_row_digit" "', argument " "1"" of type '" "GeoCal::RsmGrid *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid__v_number_fractional_row_digit" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->number_fractional_row_digit((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_row_digit(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmGrid__v_number_fractional_row_digit",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmGrid__v_number_fractional_row_digit__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmGrid__v_number_fractional_row_digit__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmGrid__v_number_fractional_row_digit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmGrid::number_fractional_row_digit() const\n"
+    "    GeoCal::RsmGrid::number_fractional_row_digit(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_col_digit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
   boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   int result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
@@ -7517,6 +7731,80 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_col_digit(PyObject *SWIG
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_col_digit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid__v_number_fractional_col_digit" "', argument " "1"" of type '" "GeoCal::RsmGrid *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid__v_number_fractional_col_digit" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->number_fractional_col_digit((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_col_digit(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmGrid__v_number_fractional_col_digit",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmGrid__v_number_fractional_col_digit__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmGrid__v_number_fractional_col_digit__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmGrid__v_number_fractional_col_digit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmGrid::number_fractional_col_digit() const\n"
+    "    GeoCal::RsmGrid::number_fractional_col_digit(int const &)\n");
+  return 0;
 }
 
 
@@ -7771,24 +8059,24 @@ static PyMethodDef SwigMethods[] = {
 		"double GeoCal::RsmGrid::z_delta() const\n"
 		"Spacing of Z in grid. \n"
 		""},
-	 { (char *)"RsmGrid__v_total_number_row_digit", (PyCFunction)_wrap_RsmGrid__v_total_number_row_digit, METH_O, (char *)"\n"
+	 { (char *)"RsmGrid__v_total_number_row_digit", _wrap_RsmGrid__v_total_number_row_digit, METH_VARARGS, (char *)"\n"
 		"\n"
-		"int GeoCal::RsmGrid::total_number_row_digit() const\n"
-		"\n"
-		""},
-	 { (char *)"RsmGrid__v_total_number_col_digit", (PyCFunction)_wrap_RsmGrid__v_total_number_col_digit, METH_O, (char *)"\n"
-		"\n"
-		"int GeoCal::RsmGrid::total_number_col_digit() const\n"
+		"void GeoCal::RsmGrid::total_number_row_digit(int v)\n"
 		"\n"
 		""},
-	 { (char *)"RsmGrid__v_number_fractional_row_digit", (PyCFunction)_wrap_RsmGrid__v_number_fractional_row_digit, METH_O, (char *)"\n"
+	 { (char *)"RsmGrid__v_total_number_col_digit", _wrap_RsmGrid__v_total_number_col_digit, METH_VARARGS, (char *)"\n"
 		"\n"
-		"int GeoCal::RsmGrid::number_fractional_row_digit() const\n"
+		"void GeoCal::RsmGrid::total_number_col_digit(int v)\n"
 		"\n"
 		""},
-	 { (char *)"RsmGrid__v_number_fractional_col_digit", (PyCFunction)_wrap_RsmGrid__v_number_fractional_col_digit, METH_O, (char *)"\n"
+	 { (char *)"RsmGrid__v_number_fractional_row_digit", _wrap_RsmGrid__v_number_fractional_row_digit, METH_VARARGS, (char *)"\n"
 		"\n"
-		"int GeoCal::RsmGrid::number_fractional_col_digit() const\n"
+		"void GeoCal::RsmGrid::number_fractional_row_digit(int v)\n"
+		"\n"
+		""},
+	 { (char *)"RsmGrid__v_number_fractional_col_digit", _wrap_RsmGrid__v_number_fractional_col_digit, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmGrid::number_fractional_col_digit(int v)\n"
 		"\n"
 		""},
 	 { (char *)"RsmGrid_tre_string", (PyCFunction)_wrap_RsmGrid_tre_string, METH_O, (char *)"\n"

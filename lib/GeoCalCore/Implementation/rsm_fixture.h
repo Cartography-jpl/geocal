@@ -5,6 +5,7 @@
 #include "simple_dem.h"
 #include "rsm_rational_polynomial.h"
 #include "rsm_grid.h"
+#include "rsm_low_order_polynomial.h"
 #include "geocal_rpc.h"
 #include "geodetic.h"
 #include <boost/make_shared.hpp>
@@ -75,6 +76,23 @@ public:
   boost::shared_ptr<RsmRationalPolynomial> rp_from_rpc;
   Geodetic gp;
   boost::shared_ptr<RpcImageGroundConnection> igc;
+};
+
+class RsmLowOrderPolynomialFixture : public RsmFixture {
+public:
+  RsmLowOrderPolynomialFixture()
+  {
+    rlop = boost::make_shared<RsmLowOrderPolynomial>();
+    double hmin = rpc.height_offset - rpc.height_scale;
+    double hmax = rpc.height_offset + rpc.height_scale;
+    double lmin = 0;
+    double smin = 0;
+    double lmax = rpc.line_offset * 2;
+    double smax = rpc.sample_offset * 2;
+    GeodeticConverter cconv;
+    rlop->fit(*igc, cconv, hmin, hmax, lmin, lmax, smin, smax);
+  }
+  boost::shared_ptr<RsmLowOrderPolynomial> rlop;
 };
 
 class RsmGridFixture : public RsmFixture {

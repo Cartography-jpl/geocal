@@ -253,6 +253,78 @@ class RsmLowOrderPolynomial(geocal_swig.generic_object.GenericObject):
         return _rsm_low_order_polynomial.RsmLowOrderPolynomial_fit(self, Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample, Max_sample)
 
 
+    def _v_min_line(self, *args):
+        """
+
+        void GeoCal::RsmLowOrderPolynomial::min_line(int V)
+
+        """
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial__v_min_line(self, *args)
+
+
+    @property
+    def min_line(self):
+        return self._v_min_line()
+
+    @min_line.setter
+    def min_line(self, value):
+      self._v_min_line(value)
+
+
+    def _v_max_line(self, *args):
+        """
+
+        void GeoCal::RsmLowOrderPolynomial::max_line(int V)
+
+        """
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial__v_max_line(self, *args)
+
+
+    @property
+    def max_line(self):
+        return self._v_max_line()
+
+    @max_line.setter
+    def max_line(self, value):
+      self._v_max_line(value)
+
+
+    def _v_min_sample(self, *args):
+        """
+
+        void GeoCal::RsmLowOrderPolynomial::min_sample(int V)
+
+        """
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial__v_min_sample(self, *args)
+
+
+    @property
+    def min_sample(self):
+        return self._v_min_sample()
+
+    @min_sample.setter
+    def min_sample(self, value):
+      self._v_min_sample(value)
+
+
+    def _v_max_sample(self, *args):
+        """
+
+        void GeoCal::RsmLowOrderPolynomial::max_sample(int V)
+
+        """
+        return _rsm_low_order_polynomial.RsmLowOrderPolynomial__v_max_sample(self, *args)
+
+
+    @property
+    def max_sample(self):
+        return self._v_max_sample()
+
+    @max_sample.setter
+    def max_sample(self, value):
+      self._v_max_sample(value)
+
+
     def _v_number_line_fit(self, *args):
         """
 
@@ -361,6 +433,10 @@ RsmLowOrderPolynomial.__str__ = new_instancemethod(_rsm_low_order_polynomial.Rsm
 RsmLowOrderPolynomial.image_coordinate = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial_image_coordinate, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial.fit_data = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial_fit_data, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial.fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial_fit, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_min_line = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_min_line, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_max_line = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_max_line, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_min_sample = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_min_sample, None, RsmLowOrderPolynomial)
+RsmLowOrderPolynomial._v_max_sample = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_max_sample, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_number_line_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_line_fit, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_number_sample_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_sample_fit, None, RsmLowOrderPolynomial)
 RsmLowOrderPolynomial._v_number_height_fit = new_instancemethod(_rsm_low_order_polynomial.RsmLowOrderPolynomial__v_number_height_fit, None, RsmLowOrderPolynomial)

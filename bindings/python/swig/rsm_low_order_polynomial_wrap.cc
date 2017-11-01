@@ -7440,6 +7440,466 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_line__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_min_line" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->min_line();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_line__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_min_line" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmLowOrderPolynomial__v_min_line" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->min_line((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_line(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmLowOrderPolynomial__v_min_line",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmLowOrderPolynomial__v_min_line__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmLowOrderPolynomial__v_min_line__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmLowOrderPolynomial__v_min_line'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmLowOrderPolynomial::min_line() const\n"
+    "    GeoCal::RsmLowOrderPolynomial::min_line(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_line__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_max_line" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->max_line();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_line__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_max_line" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmLowOrderPolynomial__v_max_line" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->max_line((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_line(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmLowOrderPolynomial__v_max_line",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmLowOrderPolynomial__v_max_line__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmLowOrderPolynomial__v_max_line__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmLowOrderPolynomial__v_max_line'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmLowOrderPolynomial::max_line() const\n"
+    "    GeoCal::RsmLowOrderPolynomial::max_line(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_sample__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_min_sample" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->min_sample();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_sample__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_min_sample" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmLowOrderPolynomial__v_min_sample" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->min_sample((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_sample(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmLowOrderPolynomial__v_min_sample",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmLowOrderPolynomial__v_min_sample__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmLowOrderPolynomial__v_min_sample__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmLowOrderPolynomial__v_min_sample'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmLowOrderPolynomial::min_sample() const\n"
+    "    GeoCal::RsmLowOrderPolynomial::min_sample(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_sample__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_max_sample" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->max_sample();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_sample__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmLowOrderPolynomial > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmLowOrderPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmLowOrderPolynomial__v_max_sample" "', argument " "1"" of type '" "GeoCal::RsmLowOrderPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmLowOrderPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmLowOrderPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmLowOrderPolynomial__v_max_sample" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->max_sample((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_sample(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmLowOrderPolynomial__v_max_sample",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmLowOrderPolynomial__v_max_sample__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmLowOrderPolynomial__v_max_sample__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmLowOrderPolynomial__v_max_sample'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmLowOrderPolynomial::max_sample() const\n"
+    "    GeoCal::RsmLowOrderPolynomial::max_sample(int const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_number_line_fit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmLowOrderPolynomial *arg1 = (GeoCal::RsmLowOrderPolynomial *) 0 ;
@@ -8127,6 +8587,26 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"To support sections, you can pass in a restricted number of\n"
 		"line/samples to fit over. \n"
+		""},
+	 { (char *)"RsmLowOrderPolynomial__v_min_line", _wrap_RsmLowOrderPolynomial__v_min_line, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmLowOrderPolynomial::min_line(int V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmLowOrderPolynomial__v_max_line", _wrap_RsmLowOrderPolynomial__v_max_line, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmLowOrderPolynomial::max_line(int V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmLowOrderPolynomial__v_min_sample", _wrap_RsmLowOrderPolynomial__v_min_sample, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmLowOrderPolynomial::min_sample(int V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmLowOrderPolynomial__v_max_sample", _wrap_RsmLowOrderPolynomial__v_max_sample, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmLowOrderPolynomial::max_sample(int V)\n"
+		"\n"
 		""},
 	 { (char *)"RsmLowOrderPolynomial__v_number_line_fit", _wrap_RsmLowOrderPolynomial__v_number_line_fit, METH_VARARGS, (char *)"\n"
 		"\n"

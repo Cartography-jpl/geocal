@@ -67,9 +67,13 @@ public:
   void print(std::ostream& Os) const
   { Os << "RsmLowOrderPolynomial"; }
   int min_line() const {return min_line_;}
+  void min_line(int V) { min_line_ = V;}
   int max_line() const {return max_line_;}
+  void max_line(int V) { max_line_ = V;}
   int min_sample() const {return min_sample_;}
+  void min_sample(int V) { min_sample_ = V;}
   int max_sample() const {return max_sample_;}
+  void max_sample(int V) { max_sample_ = V;}
   
 //-----------------------------------------------------------------------
 /// Number of lines in the grid we fit for.
@@ -118,7 +122,8 @@ public:
 //-----------------------------------------------------------------------
   
   void ignore_igc_error_in_fit(bool V) { ignore_igc_error_in_fit_ = V;}
-  
+  std::string tre_string() const;
+  void read_tre_string(std::istream& In);
 private:
   double pline[10], psamp[10];
   int min_line_, max_line_, min_sample_, max_sample_;

@@ -3,6 +3,7 @@
 #include "coordinate_converter.h"
 #include "geocal_gsl_fit.h"
 #include "geocal_serialize_support.h"
+#include "tre_support.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -205,4 +206,57 @@ void RsmLowOrderPolynomial::fit
   if(line.size() == 0)
     throw Exception("Did not get any points for RsmLowOrderPolynomial fit");
   fit_data(line, sample, x, y, z);
+}
+
+static boost::format coeffformat("%|1$+21.14E|");
+
+//-----------------------------------------------------------------------
+/// Write out the polynomial data as a TRE string. Note that you don't
+/// generally use this directly, rather this is used by
+/// RsmMultiSection to create a RSMPIA or RSMGIA TRE.
+///
+/// Note also that the TRE has a fixed precision which is less than
+/// the machine precision. Writing a RsmLowOrderPolynomial and then
+/// reading it from a TRE does *not* in general give the exact same
+/// RsmLowOrderPolynomial, rather just one that is close.
+//-----------------------------------------------------------------------
+
+std::string RsmLowOrderPolynomial::tre_string() const
+{
+  std::string res ="";
+  for(int i = 0; i < 9; ++i)
+    res += str_check_size(coeffformat % pline[i], 21);
+  for(int i = 0; i < 9; ++i)
+    res += str_check_size(coeffformat % psamp[i], 21);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Read a TRE string to create a RsmLowOrderPolynomial
+///
+/// Not all the fields are saved in a TRE. In practice, this isn't a
+/// problem because we only use the extra fields when initially
+/// fitting the polynomial. Once we are reading it from a TRE, the
+/// data should be fixed. Because we have to pick something to set
+/// these values to, we set min_line, max_line, min_sample, max_sample
+/// all to 0 (the RsmMultiSection will fill this in with other TRE
+/// information), and nline_fit, nsample_fit, nheight_fit,
+/// nsecond_pass_fit, ignore_igc_error_in_fit to the default values of
+/// the constructor 
+//-----------------------------------------------------------------------
+
+void RsmLowOrderPolynomial::read_tre_string(std::istream& In)
+{
+  min_line_ = 0;
+  max_line_ = 0;
+  min_sample_ = 0;
+  max_sample_ = 0;
+  nline_fit_ = 10;
+  nsample_fit_ = 10;
+  nheight_fit_ = 10;
+  ignore_igc_error_in_fit_ = false;
+  for(int i = 0; i < 9; ++i)
+    pline[i] = read_size<double>(In, 21);
+  for(int i = 0; i < 9; ++i)
+    psamp[i] = read_size<double>(In, 21);
 }

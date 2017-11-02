@@ -10568,12 +10568,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RsmRationalPolynomial__v_row_section_number", _wrap_RsmRationalPolynomial__v_row_section_number, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::RsmRationalPolynomial::row_section_number(int V)\n"
+		"virtual void GeoCal::RsmRationalPolynomial::row_section_number(int V)\n"
 		"\n"
 		""},
 	 { (char *)"RsmRationalPolynomial__v_col_section_number", _wrap_RsmRationalPolynomial__v_col_section_number, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::RsmRationalPolynomial::col_section_number(int V)\n"
+		"virtual void GeoCal::RsmRationalPolynomial::col_section_number(int V)\n"
 		"\n"
 		""},
 	 { (char *)"delete_RsmRationalPolynomial", (PyCFunction)_wrap_delete_RsmRationalPolynomial, METH_O, (char *)"\n"

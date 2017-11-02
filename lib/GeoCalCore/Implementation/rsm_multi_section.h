@@ -13,7 +13,9 @@ namespace GeoCal {
 class RsmMultiSection : public RsmBase {
 public:
   RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section,
-		  const RsmBase& Rsm_prototype, int Border=5);
+		  const RsmBase& Rsm_prototype, int Border=5,
+		  const std::string& Image_identifier="",
+		  const std::string& Rsm_support_data_edition="fake-1");
   virtual ~RsmMultiSection() {}
   virtual void print(std::ostream& Os) const;
   virtual boost::shared_ptr<RsmBase> clone() const
@@ -95,6 +97,27 @@ public:
   virtual double max_y() const;
   virtual double min_z() const;
   virtual double max_z() const;
+  std::string tre_string() const;
+  static boost::shared_ptr<RsmMultiSection>
+  read_tre_string(const std::string& Tre_in);
+
+  double number_line_per_section() const { return nline_sec;}
+  double number_sample_per_section() const { return nsamp_sec;}
+  int number_row_section() const { return sec.rows(); }
+  int number_col_section() const { return sec.cols(); }
+//-----------------------------------------------------------------------
+/// Access a single section. This isn't something you normally want to
+/// do, but is needed by the python Rsm TRE code because the
+/// individual sections are separate TREs.
+//-----------------------------------------------------------------------
+  boost::shared_ptr<RsmBase> section(int i, int j) const
+  { range_check(i, 0, sec.rows()); range_check(j, 0, sec.cols());
+    return sec(i, j);
+  }
+  void section(int i, int j, const boost::shared_ptr<RsmBase>& V)
+  { range_check(i, 0, sec.rows()); range_check(j, 0, sec.cols());
+    sec(i, j) = V;
+  }
 private:
   int border_;
   double nline_sec, nsamp_sec;

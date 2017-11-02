@@ -16,7 +16,7 @@ RSMAPB is documented at http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TR
 
 _nsfx_format = "%+21.14E"
 
-desc = ["RSMAPA",
+desc = ["RSMAPB",
         ["iid", "Image Identifier", 80, str, {'optional':True}],
         ["edition", "RSM Image Support Data Edition", 40, str],
         ["tid", "Triangulation ID", 40, str],
@@ -44,23 +44,24 @@ desc = ["RSMAPA",
         ["apbase", "Basis Option", 1, str],
         ["nisap", "Number of Image-Space Adjustable Parameters", 2, int, {'condition' : "f.aptyp == 'I'"}],
         ["nisapr", "Number of Image-Space Adjustable Parameters for Image Row Coordinate", 2, int, {'condition' : "f.aptyp == 'I'"}],
-        [["loop", "f.nisapr"],
+        [["loop", "0 if f.aptyp == 'G' else int(f.nisapr)"],
          ["xpwrr", "Row Parameter Power of X", 1, int, {'condition': "f.aptyp == 'I'"}],
          ["ypwrr", "Row Parameter Power of Y", 1, int, {'condition': "f.aptyp == 'I'"}],
          ["zpwrr", "Row Parameter Power of Z", 1, int, {'condition': "f.aptyp == 'I'"}],
         ],
         ["nisapc", "Number of Image-Space Adjustable Parameters for Image Column Coordinate", 2, int, {'condition': "f.aptyp == 'I'"}],
-        [["loop", "f.nisapc"],
+        [["loop", "0 if f.aptyp == 'G' else int(f.nisapc)"],
          ["xpwrc", "Column Parameter Power of X", 1, int, {'condition': "f.aptyp == 'I'"}],
          ["ypwrc", "Column Parameter Power of Y", 1, int, {'condition': "f.aptyp == 'I'"}],
          ["zpwrc", "Column Parameter Power of Z", 1, int, {'condition': "f.aptyp == 'I'"}],
         ],
         ["ngsap", "Number of Ground Adjustable Parameters", 2, int, {'condition' : "f.aptyp == 'G'"}],
-        [["loop", "f.ngsap"],
+        [["loop", "0 if f.aptyp == 'I' else int(f.ngsap)"],
          ["gsapid", "Ground-space Adjustable Parameter ID", 4, str, {'condition': "f.aptyp == 'G'"}]
         ],
-        ["nbasis", "Number of Basis Adjustable Parameters", 2, int, {'condition': "f.apbase == 'Y'"}],
-        [["loop", "f.npar*f.nbasis"],
+        #This is a phantom field
+        #["nbasis", "Number of Basis Adjustable Parameters"],
+        [["loop", "0 if f.apbase == 'N' else int(f.npar*f.nisap) if f.aptyp == 'I' else int(f.npar*f.ngsap)"],
          ["ael", "Matrix A Element", 21, float, {'frmt' : _nsfx_format, 'condition': "f.apbase == 'Y'"}]
         ],
         [["loop", "f.npar"],

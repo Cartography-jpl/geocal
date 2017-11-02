@@ -46,7 +46,6 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<GalileoCamera> camr = 
     serialize_read_string<GalileoCamera>(d);
   FrameCoordinate f2 = camr->frame_coordinate(sl, 0);
-  FrameCoordinate f3 = cam->frame_coordinate(sl, 0);
   BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
   BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
   BOOST_CHECK_CLOSE(camr->focal_length(), 1501.039, 1e-4);

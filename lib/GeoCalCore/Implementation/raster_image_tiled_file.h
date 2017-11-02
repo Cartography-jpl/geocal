@@ -105,6 +105,12 @@ public:
     data_->write_int(i, Val);
   }
 
+  virtual void unchecked_write(int Line, int Sample, double Val)
+  { 
+    boost::array<index, 2> i = {{Line, Sample}};
+    data_->write_double(i, Val);
+  }
+  
 //-----------------------------------------------------------------------
 /// Write a subset of the image.
 //-----------------------------------------------------------------------
@@ -118,6 +124,15 @@ public:
     data_->write_int_arr(min_index, max_index, V);
   }
 
+  virtual void write_ptr(int Lstart, int Sstart, int Number_line, 
+			int Number_sample, const double* V)
+  { 
+    boost::array<index, 2> min_index = {{Lstart, Sstart}};
+    boost::array<index, 2> max_index = {{Lstart + Number_line, 
+					 Sstart + Number_sample}};
+    data_->write_double_arr(min_index, max_index, V);
+  }
+  
 //-----------------------------------------------------------------------
 /// Flush data to disk
 //-----------------------------------------------------------------------

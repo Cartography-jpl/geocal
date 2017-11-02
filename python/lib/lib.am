@@ -41,7 +41,6 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/pleides_rpc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/parallel_process.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ibis_file_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_database.py
-geocalpkgpython_PYTHON+= @srcpythonlib@/rsm_polynomial.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/shape_file.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/air_mspi_igc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/pds_label.py

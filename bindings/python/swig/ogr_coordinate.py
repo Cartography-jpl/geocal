@@ -189,6 +189,9 @@ import geocal_swig.generic_object
 import geocal_swig.ground_coordinate
 import geocal_swig.look_vector
 import geocal_swig.coordinate_converter
+import geocal_swig.dem
+import geocal_swig.observer
+import geocal_swig.with_parameter
 class OgrWrapper(geocal_swig.generic_object.GenericObject):
     """
 
@@ -255,9 +258,7 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
 
         const OGRCoordinateTransformation* GeoCal::OgrWrapper::transform() const
         Return transformation that takes us from our coordinate system to
-        Geodetic.
-
-        Is null for other planets (where Geodetic doesn't make sense). 
+        Geodetic/Planetocentric. 
         """
         return _ogr_coordinate.OgrWrapper__v_transform(self)
 
@@ -273,8 +274,7 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
         const OGRCoordinateTransformation* GeoCal::OgrWrapper::inverse_transform() const
         Return inverse of transform().
 
-        This goes from Geodetic to our coordinate system. Is null for other
-        planets (where Geodetic doesn't make sense). 
+        This goes from Geodetic/Planetocentric to our coordinate system. 
         """
         return _ogr_coordinate.OgrWrapper__v_inverse_transform(self)
 
@@ -289,7 +289,9 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
 
         const OGRCoordinateTransformation* GeoCal::OgrWrapper::cf_transform() const
         Return transformation that takes us from our coordinate system to
-        CartesianFixed. 
+        CartesianFixed.
+
+        Is null for other planets. 
         """
         return _ogr_coordinate.OgrWrapper__v_cf_transform(self)
 
@@ -305,7 +307,8 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
         const OGRCoordinateTransformation* GeoCal::OgrWrapper::cf_inverse_transform() const
         Return inverse of cf_transform().
 
-        This goes from CartesianFixed to our coordinate system. 
+        This goes from CartesianFixed to our coordinate system. Is null for
+        other planets 
         """
         return _ogr_coordinate.OgrWrapper__v_cf_inverse_transform(self)
 

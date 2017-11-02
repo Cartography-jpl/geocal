@@ -594,6 +594,50 @@ void VicarFile::label_set(const std::string& F,
 //-----------------------------------------------------------------------
 
 void VicarFile::label_set(const std::string& F, 
+			  double Val,
+			  const std::string& Property)
+{
+#ifdef HAVE_VICAR_RTL
+  int status;
+  if(Property == "") {
+    status = zldel(unit(), const_cast<char*>("SYSTEM"), 
+		   const_cast<char*>(F.c_str()), NULL);
+    if(status != 1 && status != CANNOT_FIND_KEY)
+      throw VicarException(status,"Call to zldel failed");
+    status = zladd(unit(), const_cast<char*>("SYSTEM"), 
+		   const_cast<char*>(F.c_str()), 
+		   &Val,
+		   const_cast<char*>("FORMAT"), const_cast<char*>("DOUB"), 
+		   NULL);
+    if(status != 1)
+      throw VicarException(status,"Call to zladd failed");
+  } else {
+    status = zldel(unit(), const_cast<char*>("PROPERTY"), 
+		   const_cast<char*>(F.c_str()), 
+		   const_cast<char*>("PROPERTY"), Property.c_str(), NULL);
+    if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
+      throw VicarException(status,"Call to zldel failed");
+    status = zladd(unit(), const_cast<char*>("PROPERTY"), 
+		   const_cast<char*>(F.c_str()), 
+		   &Val,
+		   const_cast<char*>("PROPERTY"), Property.c_str(),
+		   const_cast<char*>("FORMAT"), const_cast<char*>("REAL"), 
+		   NULL);
+    if(status != 1)
+      throw VicarException(status,"Call to zladd failed");
+  }
+#else
+  throw VicarNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Set the value of a label. If the label is already in the file, is 
+/// is deleted and replaced with this new value. Otherwise, it is
+/// simply added. Optionally the label can be part of a Property.
+//-----------------------------------------------------------------------
+
+void VicarFile::label_set(const std::string& F, 
 			  const std::string& Val,
 			  const std::string& Property)
 {

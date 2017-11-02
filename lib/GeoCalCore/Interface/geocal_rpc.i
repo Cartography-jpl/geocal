@@ -75,6 +75,18 @@ namespace GeoCal {
     ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const;
     ImageCoordinate image_coordinate(double Latitude, double Longitude, 
 	 			     double Height_ellipsoid) const;
+    blitz::Array<double, 2> image_coordinate(
+    const blitz::Array<double, 1>& Latitude, 
+    const blitz::Array<double, 1>& Longitude, 
+    const blitz::Array<double, 1>& Height_ellipsoid) const;
+    blitz::Array<double, 3> image_coordinate(
+    const blitz::Array<double, 2>& Latitude, 
+    const blitz::Array<double, 2>& Longitude, 
+    const blitz::Array<double, 2>& Height_ellipsoid) const;
+    blitz::Array<double, 4> image_coordinate(
+    const blitz::Array<double, 3>& Latitude, 
+    const blitz::Array<double, 3>& Longitude, 
+    const blitz::Array<double, 3>& Height_ellipsoid) const;
     blitz::Array<double, 2> image_coordinate_jac_parm(const GroundCoordinate& Gc)
     const;
     blitz::Array<double, 2> 

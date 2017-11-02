@@ -6228,8 +6228,14 @@ SWIGINTERN PyObject *_wrap_new_PaintClass(PyObject *SWIGUNUSEDPARM(self), PyObje
       0 );
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<int >(swig_obj[2]);
-      if(!numpy3.obj)
-      return NULL;
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_PaintClass', expecting type  Array<int,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_PaintClass', expecting type  Array<int,2>");
+        return NULL;
+      }
       a3.reference(to_blitz_array<int, 2>(numpy3));
       arg3 = &a3;
     }

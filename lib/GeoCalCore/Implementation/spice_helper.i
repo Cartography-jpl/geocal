@@ -35,5 +35,10 @@ public:
   static void state_vector(int Body_id, const std::string& Target_name,
 			   const Time& T, boost::array<double, 3>& OUT,
 			   boost::array<double, 3>& OUT);
+  static std::vector<boost::shared_ptr<GroundCoordinate> >
+  boresight_and_footprint(const Time& T, int Body_id,
+			  const std::string& Satellite_name,
+			  const std::string& Camera_name,
+			  const std::string& Corr_type = "CN+S");
 };
 }

@@ -349,7 +349,7 @@ def vicar_open(*args):
 
     boost::shared_ptr< RasterImage > GeoCal::vicar_open(const std::string &Fname, int Band_id=1, VicarFile::access_type
     Access=VicarFile::READ, bool Favor_memory_mapped=true, int
-    Number_line_per_tile=-1, int Number_tile=4, bool
+    Number_line_per_tile=100, int Number_tile=4, bool
     Force_area_pixel=false)
     Often you want to open a memory mapped VicarLiteRasterImage if you can
     because it is faster, but fall back to using a VicarRasterImage if you

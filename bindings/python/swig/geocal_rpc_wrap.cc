@@ -7607,8 +7607,14 @@ SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_1(PyObject *SWIGUNUSEDPAR
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_denominator', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_denominator', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -7740,8 +7746,14 @@ SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_1(PyObject *SWIGUNUSEDPARM(
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_numerator', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_numerator', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -7873,8 +7885,14 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_1(PyObject *SWIGUNUSEDP
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_denominator', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_denominator', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -8006,8 +8024,14 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_1(PyObject *SWIGUNUSEDPAR
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_numerator', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_numerator', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -8139,8 +8163,14 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_1(PyObject *SWIGUNUSEDP
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<bool >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_line_numerator', expecting type  Array<bool,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_line_numerator', expecting type  Array<bool,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<bool, 1>(numpy2));
       arg2 = &a2;
     }
@@ -8272,8 +8302,14 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_1(PyObject *SWIGUNUSE
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<bool >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_sample_numerator', expecting type  Array<bool,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_sample_numerator', expecting type  Array<bool,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<bool, 1>(numpy2));
       arg2 = &a2;
     }
@@ -10192,6 +10228,351 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  blitz::Array< double,1 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rpc const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rpc const > *smartarg1 = 0 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,1 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc_image_coordinate" "', argument " "1"" of type '" "GeoCal::Rpc const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 1>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::Rpc const *)arg1)->image_coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,2 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rpc const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rpc const > *smartarg1 = 0 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,2 > a4 ;
+  PythonObject numpy4 ;
+  SwigValueWrapper< blitz::Array< double,3 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc_image_coordinate" "', argument " "1"" of type '" "GeoCal::Rpc const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 2>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::Rpc const *)arg1)->image_coordinate((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,2 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[3], stride[3];
+    for(int i = 0; i < 3; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 3>* t = new blitz::Array<double, 3>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
+  blitz::Array< double,3 > *arg2 = 0 ;
+  blitz::Array< double,3 > *arg3 = 0 ;
+  blitz::Array< double,3 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rpc const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rpc const > *smartarg1 = 0 ;
+  blitz::Array< double,3 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,3 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,3 > a4 ;
+  PythonObject numpy4 ;
+  SwigValueWrapper< blitz::Array< double,4 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc_image_coordinate" "', argument " "1"" of type '" "GeoCal::Rpc const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
+      arg1 = const_cast< GeoCal::Rpc * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 3>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 3>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 3>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::Rpc const *)arg1)->image_coordinate((blitz::Array< double,3 > const &)*arg2,(blitz::Array< double,3 > const &)*arg3,(blitz::Array< double,3 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[4], stride[4];
+    for(int i = 0; i < 4; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 4>* t = new blitz::Array<double, 4>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_4_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Rpc_image_coordinate(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[5] = {
@@ -10204,14 +10585,98 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate(PyObject *self, PyObject *args) 
     return _wrap_Rpc_image_coordinate__SWIG_0(self, argc, argv);
   }
   if (argc == 4) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_2;
     return _wrap_Rpc_image_coordinate__SWIG_1(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 4) {
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[3]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    return _wrap_Rpc_image_coordinate__SWIG_2(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 4) {
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_4;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_4;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[3]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_4;
+    return _wrap_Rpc_image_coordinate__SWIG_3(self, argc, argv);
+  }
+check_4:
+  
+  if (argc == 4) {
+    return _wrap_Rpc_image_coordinate__SWIG_4(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Rpc_image_coordinate'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::Rpc::image_coordinate(GeoCal::GroundCoordinate const &) const\n"
-    "    GeoCal::Rpc::image_coordinate(double,double,double) const\n");
+    "    GeoCal::Rpc::image_coordinate(double,double,double) const\n"
+    "    GeoCal::Rpc::image_coordinate(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &,blitz::Array< double,1 > const &) const\n"
+    "    GeoCal::Rpc::image_coordinate(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &) const\n"
+    "    GeoCal::Rpc::image_coordinate(blitz::Array< double,3 > const &,blitz::Array< double,3 > const &,blitz::Array< double,3 > const &) const\n");
   return 0;
 }
 

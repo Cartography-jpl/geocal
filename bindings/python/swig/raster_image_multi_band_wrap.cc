@@ -6514,8 +6514,14 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_write(PyObject *SWIGUNUSEDPARM(s
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<int >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImageMultiBand_write', expecting type  Array<int,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RasterImageMultiBand_write', expecting type  Array<int,3>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<int, 3>(numpy4));
       arg4 = &a4;
     }
@@ -7317,10 +7323,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImageMultiBand_write", _wrap_RasterImageMultiBand_write, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< int, 3 > &Data)\n"
-		"Write the data to the same location in each image.\n"
+		"void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< double, 3 > &Data)\n"
 		"\n"
-		"Data should be number_band() x nline x nsamp. \n"
 		""},
 	 { (char *)"RasterImageMultiBand___str__", (PyCFunction)_wrap_RasterImageMultiBand___str__, METH_O, NULL},
 	 { (char *)"RasterImageMultiBand_overview", _wrap_RasterImageMultiBand_overview, METH_VARARGS, (char *)"\n"

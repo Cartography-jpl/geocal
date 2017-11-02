@@ -6471,8 +6471,14 @@ SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_2(PyObject *SWIGUNUSEDPARM(self), i
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MapInfo', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MapInfo', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -7153,13 +7159,15 @@ SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate(PyObject *SWIGUNUSEDPARM(
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
-  void *argp5 = 0 ;
-  int res5 = 0 ;
-  PyObject *swig_obj[5] ;
+  double temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[3] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"MapInfo_index_to_coordinate",5,5,swig_obj)) SWIG_fail;
+  arg4 = &temp4;
+  arg5 = &temp5;
+  if (!SWIG_Python_UnpackTuple(args,"MapInfo_index_to_coordinate",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
@@ -7185,22 +7193,6 @@ SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MapInfo_index_to_coordinate" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_double,  0 );
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "MapInfo_index_to_coordinate" "', argument " "4"" of type '" "double &""'"); 
-  }
-  if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MapInfo_index_to_coordinate" "', argument " "4"" of type '" "double &""'"); 
-  }
-  arg4 = reinterpret_cast< double * >(argp4);
-  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_double,  0 );
-  if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "MapInfo_index_to_coordinate" "', argument " "5"" of type '" "double &""'"); 
-  }
-  if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MapInfo_index_to_coordinate" "', argument " "5"" of type '" "double &""'"); 
-  }
-  arg5 = reinterpret_cast< double * >(argp5);
   {
     try {
       ((GeoCal::MapInfo const *)arg1)->index_to_coordinate(arg2,arg3,*arg4,*arg5);
@@ -7211,6 +7203,18 @@ SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate(PyObject *SWIGUNUSEDPARM(
     }
   }
   resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
   return resultobj;
 fail:
   return NULL;
@@ -7232,13 +7236,15 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index(PyObject *SWIGUNUSEDPARM(
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
-  void *argp5 = 0 ;
-  int res5 = 0 ;
-  PyObject *swig_obj[5] ;
+  double temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[3] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"MapInfo_coordinate_to_index",5,5,swig_obj)) SWIG_fail;
+  arg4 = &temp4;
+  arg5 = &temp5;
+  if (!SWIG_Python_UnpackTuple(args,"MapInfo_coordinate_to_index",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
@@ -7264,22 +7270,6 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "MapInfo_coordinate_to_index" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_double,  0 );
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "MapInfo_coordinate_to_index" "', argument " "4"" of type '" "double &""'"); 
-  }
-  if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MapInfo_coordinate_to_index" "', argument " "4"" of type '" "double &""'"); 
-  }
-  arg4 = reinterpret_cast< double * >(argp4);
-  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_double,  0 );
-  if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "MapInfo_coordinate_to_index" "', argument " "5"" of type '" "double &""'"); 
-  }
-  if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MapInfo_coordinate_to_index" "', argument " "5"" of type '" "double &""'"); 
-  }
-  arg5 = reinterpret_cast< double * >(argp5);
   {
     try {
       ((GeoCal::MapInfo const *)arg1)->coordinate_to_index(arg2,arg3,*arg4,*arg5);
@@ -7290,6 +7280,18 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index(PyObject *SWIGUNUSEDPARM(
     }
   }
   resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
   return resultobj;
 fail:
   return NULL;

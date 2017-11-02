@@ -85,6 +85,7 @@ public:
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const;
   virtual void unchecked_write(int Line, int Sample, int Val);
+  virtual void unchecked_write(int Line, int Sample, double Val);
   void fit(const RasterImage& Ref_img,
 	   double Max_diff = 1000,
            const GroundMask& M = CombinedGroundMask(),
@@ -162,6 +163,7 @@ public:
   const std::set<int> blunder() const {return blunder_;}
 
   const RasterImage& img_avg() const {return *img_avg_;}
+  virtual bool copy_needs_double() const {return raw_img_->copy_needs_double();}
 private:
   boost::timer tmr;
   boost::shared_ptr<Dem> dem_;		   ///< DEM.

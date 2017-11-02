@@ -7708,8 +7708,14 @@ SWIGINTERN PyObject *_wrap_matrix_to_quaternion(PyObject *SWIGUNUSEDPARM(self), 
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'matrix_to_quaternion', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'matrix_to_quaternion', expecting type  Array<double,2>");
+        return NULL;
+      }
       a1.reference(to_blitz_array<double, 2>(numpy1));
       arg1 = &a1;
     }
@@ -7793,8 +7799,14 @@ SWIGINTERN PyObject *_wrap_array_to_quaternion(PyObject *SWIGUNUSEDPARM(self), P
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'array_to_quaternion', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'array_to_quaternion', expecting type  Array<double,1>");
+        return NULL;
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1));
       arg1 = &a1;
     }

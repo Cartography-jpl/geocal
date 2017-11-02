@@ -304,6 +304,15 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
         return _gdal_raster_image.GdalRasterImage_set_rpc(self, R)
 
 
+    def metadata_list(self, *args):
+        """
+
+        std::vector<std::string> GeoCal::GdalRasterImage::metadata_list(const std::string &Domain="") const
+        Return the list of metadata keys for a given domain. 
+        """
+        return _gdal_raster_image.GdalRasterImage_metadata_list(self, *args)
+
+
     def has_metadata(self, *args):
         """
 
@@ -574,6 +583,7 @@ GdalRasterImage.close = new_instancemethod(_gdal_raster_image.GdalRasterImage_cl
 GdalRasterImage._v_is_closed = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_is_closed, None, GdalRasterImage)
 GdalRasterImage.set_map_info = new_instancemethod(_gdal_raster_image.GdalRasterImage_set_map_info, None, GdalRasterImage)
 GdalRasterImage.set_rpc = new_instancemethod(_gdal_raster_image.GdalRasterImage_set_rpc, None, GdalRasterImage)
+GdalRasterImage.metadata_list = new_instancemethod(_gdal_raster_image.GdalRasterImage_metadata_list, None, GdalRasterImage)
 GdalRasterImage.has_metadata = new_instancemethod(_gdal_raster_image.GdalRasterImage_has_metadata, None, GdalRasterImage)
 GdalRasterImage.set_metadata = new_instancemethod(_gdal_raster_image.GdalRasterImage_set_metadata, None, GdalRasterImage)
 GdalRasterImage._v_file_names = new_instancemethod(_gdal_raster_image.GdalRasterImage__v_file_names, None, GdalRasterImage)

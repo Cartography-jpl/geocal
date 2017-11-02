@@ -145,14 +145,14 @@ void MspiCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
   // 
   // The negative values give a passive rotation, vs. active rotation
   // for positive values
-  frame_to_sc_ = 
-    quat_rot("ZYXYXYZ", -yaw_with_derivative() * Constant::deg_to_rad, 
+  frame_to_sc_with_derivative
+    (quat_rot("ZYXYXYZ", -yaw_with_derivative() * Constant::deg_to_rad, 
 	     -pitch_with_derivative() * Constant::deg_to_rad, 
 	     -roll_with_derivative()  * Constant::deg_to_rad, 
 	     AutoDerivative<double>(-boresight_angle())  * Constant::deg_to_rad, 
 	     AutoDerivative<double>(theta()) * Constant::deg_to_rad, 
 	     AutoDerivative<double>(psi())  * Constant::deg_to_rad, 
-	     AutoDerivative<double>(epsilon())  * Constant::deg_to_rad);
+	      AutoDerivative<double>(epsilon())  * Constant::deg_to_rad));
   notify_update();
 }
 

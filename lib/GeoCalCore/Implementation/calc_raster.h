@@ -23,6 +23,14 @@ public:
 			int Number_sample, int* Res) const;
 
 //-----------------------------------------------------------------------
+/// We generally need doubles for copying CalcRaster. Specific classes
+/// can override this if desired, but the default should be to use
+/// doubles.
+//-----------------------------------------------------------------------
+  
+  virtual bool copy_needs_double() const {return true;}
+
+//-----------------------------------------------------------------------
 /// Calculate the results as a blitz::Array of doubles.
 //-----------------------------------------------------------------------
 
@@ -30,6 +38,7 @@ public:
   read_double(int Lstart, int Sstart, int Number_line, 
 	      int Number_sample) const;
   virtual void unchecked_write(int Line, int Sample, int Val);
+  virtual void unchecked_write(int Line, int Sample, double Val);
 protected:
   blitz::Array<double, 2>& data_ptr() { return data; }
   mutable blitz::Array<double, 2> data;

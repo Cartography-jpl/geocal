@@ -46,6 +46,9 @@ public:
   static std::vector<boost::shared_ptr<RasterImage> > 
     read_all_bands(const std::string& Fname);
 
+  virtual bool copy_needs_double() const
+  { return (raster_data_type() == Float32 || raster_data_type() == Float64); }
+  
 //-----------------------------------------------------------------------
 /// Constructor.
 //-----------------------------------------------------------------------
@@ -172,6 +175,13 @@ public:
 
   GdalBase& gdal_data_base() {return *gdal_data_base_;}
 
+//-----------------------------------------------------------------------
+/// Return the list of metadata keys for a given domain
+//-----------------------------------------------------------------------
+
+  std::vector<std::string> metadata_list(const std::string& Domain = "") const
+  { return gdal_data_base().metadata_list(Domain); }
+  
 //-----------------------------------------------------------------------
 /// Indicates if a metadata item is found in the file
 //-----------------------------------------------------------------------

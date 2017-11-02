@@ -62,6 +62,12 @@ public:
 
   std::vector<boost::shared_ptr<QuaternionOrbitData> > 
   quaternion_orbit_data() const;
+  // Specialization of sc_look_vector, which turns out to be a bottle
+  // neck in the Ipi code
+  using Orbit::sc_look_vector; // Only override one of these functions
+  virtual ScLookVector sc_look_vector(Time T, 
+				      const CartesianFixed& Pt) const;
+  virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
 protected:
 //-----------------------------------------------------------------------
 /// Derived classes can override this to create orbit data on demand

@@ -4,6 +4,18 @@
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+  template<class Archive>
+void QuaternionCamera::save(Archive& Ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void QuaternionCamera::load(Archive& Ar, const unsigned int version)
+{
+  frame_to_sc_nd_ = value(frame_to_sc_);
+}
+
 template<class Archive>
 void QuaternionCamera::serialize(Archive & ar, const unsigned int version)
 {
@@ -23,6 +35,7 @@ void QuaternionCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(line_direction)
     & GEOCAL_NVP_(sample_direction)
     & GEOCAL_NVP_(parameter_mask);
+  boost::serialization::split_member(ar, *this, version);
 }
 
 GEOCAL_IMPLEMENT(QuaternionCamera);

@@ -6526,8 +6526,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_1__SWIG_6(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,1>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,1>");
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1).copy());
       arg1 = &a1;
     }
@@ -6537,8 +6541,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_1__SWIG_6(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,2>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,2>");
+      }
       a2.reference(to_blitz_array<double, 2>(numpy2).copy());
       arg2 = &a2;
     }
@@ -6583,8 +6591,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_1__SWIG_7(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,1>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,1>");
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1).copy());
       arg1 = &a1;
     }
@@ -6594,8 +6606,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_1__SWIG_7(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,2>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,2>");
+      }
       a2.reference(to_blitz_array<double, 2>(numpy2).copy());
       arg2 = &a2;
     }
@@ -6632,8 +6648,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_1__SWIG_8(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,1>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_1', expecting type  Array<double,1>");
+      }
       a1.reference(to_blitz_array<double, 1>(numpy1).copy());
       arg1 = &a1;
     }
@@ -8754,8 +8774,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_2__SWIG_6(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,2>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,2>");
+      }
       a1.reference(to_blitz_array<double, 2>(numpy1).copy());
       arg1 = &a1;
     }
@@ -8765,8 +8789,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_2__SWIG_6(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,3>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,3>");
+      }
       a2.reference(to_blitz_array<double, 3>(numpy2).copy());
       arg2 = &a2;
     }
@@ -8811,8 +8839,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_2__SWIG_7(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,2>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,2>");
+      }
       a1.reference(to_blitz_array<double, 2>(numpy1).copy());
       arg1 = &a1;
     }
@@ -8822,8 +8854,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_2__SWIG_7(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,3>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,3>");
+      }
       a2.reference(to_blitz_array<double, 3>(numpy2).copy());
       arg2 = &a2;
     }
@@ -8860,8 +8896,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_2__SWIG_8(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,2>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_2', expecting type  Array<double,2>");
+      }
       a1.reference(to_blitz_array<double, 2>(numpy1).copy());
       arg1 = &a1;
     }
@@ -10982,8 +11022,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_3__SWIG_6(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,3>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,3>");
+      }
       a1.reference(to_blitz_array<double, 3>(numpy1).copy());
       arg1 = &a1;
     }
@@ -10993,8 +11037,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_3__SWIG_6(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,4>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=4) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,4>");
+      }
       a2.reference(to_blitz_array<double, 4>(numpy2).copy());
       arg2 = &a2;
     }
@@ -11039,8 +11087,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_3__SWIG_7(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,3>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,3>");
+      }
       a1.reference(to_blitz_array<double, 3>(numpy1).copy());
       arg1 = &a1;
     }
@@ -11050,8 +11102,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_3__SWIG_7(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,4>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=4) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,4>");
+      }
       a2.reference(to_blitz_array<double, 4>(numpy2).copy());
       arg2 = &a2;
     }
@@ -11088,8 +11144,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_3__SWIG_8(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,3>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_3', expecting type  Array<double,3>");
+      }
       a1.reference(to_blitz_array<double, 3>(numpy1).copy());
       arg1 = &a1;
     }
@@ -13210,8 +13270,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_4__SWIG_6(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,4>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=4) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,4>");
+      }
       a1.reference(to_blitz_array<double, 4>(numpy1).copy());
       arg1 = &a1;
     }
@@ -13221,8 +13285,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_4__SWIG_6(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,5>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=5) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,5>");
+      }
       a2.reference(to_blitz_array<double, 5>(numpy2).copy());
       arg2 = &a2;
     }
@@ -13267,8 +13335,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_4__SWIG_7(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,4>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=4) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,4>");
+      }
       a1.reference(to_blitz_array<double, 4>(numpy1).copy());
       arg1 = &a1;
     }
@@ -13278,8 +13350,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_4__SWIG_7(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,5>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=5) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,5>");
+      }
       a2.reference(to_blitz_array<double, 5>(numpy2).copy());
       arg2 = &a2;
     }
@@ -13316,8 +13392,12 @@ SWIGINTERN PyObject *_wrap_new_ArrayAd_double_4__SWIG_8(PyObject *SWIGUNUSEDPARM
       0 );
     if(!SWIG_IsOK(res)) {
       numpy1.obj = to_numpy<double >(swig_obj[0]);
-      if(!numpy1.obj)
-      return NULL;
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,4>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=4) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_ArrayAd_double_4', expecting type  Array<double,4>");
+      }
       a1.reference(to_blitz_array<double, 4>(numpy1).copy());
       arg1 = &a1;
     }

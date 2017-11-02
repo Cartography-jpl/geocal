@@ -7457,8 +7457,14 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_parameter_mask__SWIG_1(PyObject *SWIGUN
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<bool >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MspiGimbal__v_parameter_mask', expecting type  Array<bool,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'MspiGimbal__v_parameter_mask', expecting type  Array<bool,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<bool, 1>(numpy2));
       arg2 = &a2;
     }

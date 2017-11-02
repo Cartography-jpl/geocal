@@ -162,6 +162,10 @@ class _FieldValue(object):
             raise RuntimeError("Can't set value for field %s because the condition '%s' isn't met" % (self.field_name, self.condition))
         if(hasattr(parent_obj, self.field_name + "_value")):
             raise RuntimeError("Can't set value for field " + self.field_name)
+        # If we are implementing the TRE in its own object, don't allow
+        # the raw values to be set
+        if(hasattr(parent_obj, "tre_implementation_field")):
+            raise RuntimeError("You can't directly set fields in %s TRE. Instead, set this through the %s object" % (parent_obj.cetag_value(), parent_obj.tre_implementation_field))
         if(v is None and not self.optional):
             raise RuntimeError("Can only set a field to 'None' if it is marked as being optional")
         self.value(parent_obj)[key] = v

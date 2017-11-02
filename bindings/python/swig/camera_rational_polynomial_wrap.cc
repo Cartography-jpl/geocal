@@ -6214,8 +6214,14 @@ SWIGINTERN PyObject *_wrap_new_CameraRationalPolyomial(PyObject *SWIGUNUSEDPARM(
       0 );
     if(!SWIG_IsOK(res)) {
       numpy7.obj = to_numpy<double >(swig_obj[6]);
-      if(!numpy7.obj)
-      return NULL;
+      if(!numpy7.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_CameraRationalPolyomial', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy7.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_CameraRationalPolyomial', expecting type  Array<double,2>");
+        return NULL;
+      }
       a7.reference(to_blitz_array<double, 2>(numpy7));
       arg7 = &a7;
     }
@@ -6225,8 +6231,14 @@ SWIGINTERN PyObject *_wrap_new_CameraRationalPolyomial(PyObject *SWIGUNUSEDPARM(
       0 );
     if(!SWIG_IsOK(res)) {
       numpy8.obj = to_numpy<double >(swig_obj[7]);
-      if(!numpy8.obj)
-      return NULL;
+      if(!numpy8.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_CameraRationalPolyomial', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy8.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_CameraRationalPolyomial', expecting type  Array<double,2>");
+        return NULL;
+      }
       a8.reference(to_blitz_array<double, 2>(numpy8));
       arg8 = &a8;
     }
@@ -6401,8 +6413,14 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial_apply_rational(PyObject *SWIG
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'CameraRationalPolyomial_apply_rational', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'CameraRationalPolyomial_apply_rational', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }
@@ -6412,8 +6430,14 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial_apply_rational(PyObject *SWIG
       0 );
     if(!SWIG_IsOK(res)) {
       numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj)
-      return NULL;
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'CameraRationalPolyomial_apply_rational', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'CameraRationalPolyomial_apply_rational', expecting type  Array<double,2>");
+        return NULL;
+      }
       a3.reference(to_blitz_array<double, 2>(numpy3));
       arg3 = &a3;
     }
@@ -6485,8 +6509,14 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial_construct_chi_matrix(PyObject
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'CameraRationalPolyomial_construct_chi_matrix', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'CameraRationalPolyomial_construct_chi_matrix', expecting type  Array<double,1>");
+        return NULL;
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2));
       arg2 = &a2;
     }

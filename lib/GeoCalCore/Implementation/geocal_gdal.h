@@ -169,6 +169,12 @@ public:
   inline const GDALRasterBand& raster_band() const { return *raster_band_; }
 
 //-----------------------------------------------------------------------
+/// Get a list of metadata keys for a given domain.
+//-----------------------------------------------------------------------
+
+  std::vector<std::string> metadata_list(const std::string& Domain = "") const;
+  
+//-----------------------------------------------------------------------
 /// This is a thin wrapper around GDALGetMetadataItem(). We determine if
 /// requested metadata can be read.
 //-----------------------------------------------------------------------

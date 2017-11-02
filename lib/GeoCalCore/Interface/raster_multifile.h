@@ -75,6 +75,8 @@ namespace GeoCal {
 
     void unchecked_write(int Line, int Sample, int Val) const
     { data->unchecked_write(Line - line_offset, Sample - sample_offset, Val); }
+    void unchecked_write(int Line, int Sample, double Val) const
+    { data->unchecked_write(Line - line_offset, Sample - sample_offset, Val); }
   };
 
 /****************************************************************//**
@@ -148,6 +150,17 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void     unchecked_write(int Line, int Sample, int Val)
+  {
+    RasterMultifileTile& mi = swap(Line, Sample);
+    if(mi.data.get())
+      mi.unchecked_write(Line, Sample, Val);
+    else {
+      NoCoverage e("Attempt to write data where we don't have a file in RasterMultifile.");
+      e << " Location: " << *ground_coordinate(ImageCoordinate(Line,Sample));
+      throw e;
+    }
+  }
+  virtual void     unchecked_write(int Line, int Sample, double Val)
   {
     RasterMultifileTile& mi = swap(Line, Sample);
     if(mi.data.get())

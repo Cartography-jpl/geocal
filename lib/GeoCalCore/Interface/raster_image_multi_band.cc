@@ -84,6 +84,19 @@ void RasterImageMultiBand::write(int Lstart, int Sstart,
     raster_image(i).write_ptr(Lstart, Sstart, nline, nsamp, d_ptr);
 }
 
+void RasterImageMultiBand::write(int Lstart, int Sstart, 
+				 const blitz::Array<double, 3>& Data)
+{
+  if(Data.rows() != number_band())
+    throw Exception("Data is not number_band() in size");
+  Array<double, 3> d(to_c_order_const(Data));
+  const double* d_ptr = d.data();
+  int nline = d.cols();
+  int nsamp = d.depth();
+  for(int i = 0; i < number_band(); ++i, d_ptr += nline * nsamp)
+    raster_image(i).write_ptr(Lstart, Sstart, nline, nsamp, d_ptr);
+}
+
 //-----------------------------------------------------------------------
 /// Create a RasterImageMultiBandVariable by finding the overview (if
 /// any) for each of the raster bands. The bands will all be the same
@@ -151,9 +164,14 @@ void GeoCal::copy(const RasterImageMultiBand& Img_in,
   }
   for(RasterImageTileIterator i(Img_in.raster_image(0));
       !i.end(); ++i) {
-    Img_out.write(i.istart(), i.jstart(), 
-		  Img_in.read(i.istart(), i.jstart(),
-			      i.number_line(), i.number_sample()));
+    if(Img_in.copy_needs_double())
+      Img_out.write(i.istart(), i.jstart(), 
+		    Img_in.read_double(i.istart(), i.jstart(),
+				i.number_line(), i.number_sample()));
+    else
+      Img_out.write(i.istart(), i.jstart(), 
+		    Img_in.read(i.istart(), i.jstart(),
+				i.number_line(), i.number_sample()));
     if(disp)
       *disp +=1;
   }

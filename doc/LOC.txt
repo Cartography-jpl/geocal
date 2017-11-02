@@ -1,0 +1,107 @@
+We occasionally need to get the lines of code (LOC) of geocal or some subset of
+it.
+
+We have a program "cloc" available at https://github.com/AlDanial/cloc,
+installed already in the home directory on pistol. This is a simple perl
+script that can be used to gets LOC.
+
+A sample of its use for various things is shown below (note these numbers are
+all just a snapshot, rerun these on whatever version you are actually using).
+
+We need to make sure to exclude the pycache files that python generates (which
+are often in the source tree). These aren't checked into git, but are ignored
+by git so they tend to accumalate in a source tree if you've used it for a
+while.
+
+1. Total for all of GeoCal
+   Command
+pistol% ~/cloc/cloc --exclude-dir=__pycache__  .
+    3184 text files.
+    2534 unique files.
+    1305 files ignored.
+
+github.com/AlDanial/cloc v 1.74  T=18.14 s (104.8 files/s, 117529.2 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+C++                            555         177426         116662        1565242
+Python                         386          17672          16607          54687
+Bourne Shell                    19           6169           6423          38629
+C/C++ Header                   567           9997          16568          35239
+XML                            177              2              0          30453
+HTML                            96            483           3824          13832
+m4                              53           1396            298          13811
+make                            30            186            174           1872
+MSBuild script                   5              0              0           1081
+CSS                              3            203             46            801
+XSD                              2             94              7            762
+XMI                              1              0              0            554
+PHP                              1             19             22            343
+Markdown                         2             83              0            202
+Ruby                             2             39             74            109
+Perl                             1              8              0            109
+XSLT                             1              0              5             10
+MATLAB                           1              0              1              5
+-------------------------------------------------------------------------------
+SUM:                          1902         213777         160711        1757741
+-------------------------------------------------------------------------------
+
+2. Much of this in the C++ bindings for python.
+
+pistol% ~/cloc/cloc --exclude-dir=__pycache__  bindings
+     570 text files.
+     569 unique files.
+       2 files ignored.
+
+github.com/AlDanial/cloc v 1.74  T=12.67 s (44.8 files/s, 146874.0 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+C++                            191         171131         108427        1512084
+Python                         190          15111          11686          39253
+C/C++ Header                   186            780           1686           1243
+make                             1             14              2            101
+-------------------------------------------------------------------------------
+SUM:                           568         187036         121801        1552681
+-------------------------------------------------------------------------------
+
+3. Counting just code we would tend to think of as "what we have written"
+pistol% ~/cloc/cloc --exclude-dir=__pycache__  bin lib python
+    1405 text files.
+    1006 unique files.
+     646 files ignored.
+
+github.com/AlDanial/cloc v 1.74  T=2.68 s (285.8 files/s, 39515.1 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+C++                            339           4417           6767          38047
+C/C++ Header                   215           4891           9354          17998
+Python                         192           2487           4840          15114
+make                            15             66             74           1266
+CSS                              1             91             11            405
+XML                              1              1              0             24
+Bourne Shell                     1              5              7             23
+HTML                             1              7              0             15
+MATLAB                           1              0              1              5
+-------------------------------------------------------------------------------
+SUM:                           766          11965          21054          72897
+-------------------------------------------------------------------------------
+
+4. Counting only unit test files:
+pistol% ~/cloc/cloc --exclude-dir=__pycache__  --match-f='.*_test.*' bin lib python
+     288 text files.
+     233 unique files.
+      64 files ignored.
+
+github.com/AlDanial/cloc v 1.74  T=1.87 s (123.7 files/s, 11119.0 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+C++                            151           1106            646          12344
+Python                          79            556            689           5400
+C/C++ Header                     1              3              3             10
+-------------------------------------------------------------------------------
+SUM:                           231           1665           1338          17754
+-------------------------------------------------------------------------------
+

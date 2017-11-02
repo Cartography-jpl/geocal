@@ -3,6 +3,7 @@
 #include "geocal_serialize_support.h"
 #include "ecr.h"
 #include <boost/algorithm/string.hpp>
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 
@@ -51,7 +52,7 @@ GEOCAL_SPLIT_IMPLEMENT(OgrWrapper);
 
 boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_geodetic;
 boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_ecr;
-boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_mars_cf;
+boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_mars_pc;
 
 //-----------------------------------------------------------------------
 /// Constructor that creates a OGRSpatialReference from a WKT (Well
@@ -111,19 +112,16 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
     if(status != OGRERR_NONE)
       throw Exception("Call to importFromEPSG failed");
   }
-  if(!ogr_mars_cf.get()) {
-    // Look this up http://spatialreference.org/ref/iau2000/49901/
-    ogr_mars_cf.reset(new OGRSpatialReference);
-    const char *wkt = "GEOCCS[\"Mars 2000\",\
+  if(!ogr_mars_pc.get()) {
+    // Look this up http://spatialreference.org/ref/iau2000/49900/
+    ogr_mars_pc.reset(new OGRSpatialReference);
+    const char *wkt = "GEOGCS[\"Mars 2000\",\
     DATUM[\"D_Mars_2000\",\
         SPHEROID[\"Mars_2000_IAU_IAG\",3396190.0,169.89444722361179]],\
-    PRIMEM[\"Reference_Meridian\",0],\
-    UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],\
-    AXIS[\"Geocentric X\",OTHER],\
-    AXIS[\"Geocentric Y\",OTHER],\
-    AXIS[\"Geocentric Z\",NORTH]]";
+    PRIMEM[\"Greenwich\",0],\
+    UNIT[\"Decimal_Degree\",0.0174532925199433]]";
     char * wkt_str = const_cast<char*>(wkt);
-    OGRErr status = ogr_mars_cf->importFromWkt(&wkt_str);
+    OGRErr status = ogr_mars_pc->importFromWkt(&wkt_str);
     if(status != OGRERR_NONE) {
       Exception e;
       e << "Create of OGRSpatialReference failed. "
@@ -142,8 +140,12 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
   // now just search for "mars" in the GCS name
   if(gname.find("mars") != std::string::npos) {
     naif_code_ = PlanetConstant::MARS_NAIF_CODE;
-    og = 0;
-    og_cf = ogr_mars_cf.get();
+    og =  ogr_mars_pc.get();
+    // Note we use to have a mars cartesian fixed conversion. However,
+    // GDAL (version 2.0.2) seems to have trouble converting correctly
+    // we have a coordinate system with a spherical mars model. See
+    // Issue #19 in github for details on this.
+    og_cf = 0;
   } else {
     naif_code_ = Ecr::EARTH_NAIF_CODE;
     og = ogr_geodetic.get();
@@ -172,21 +174,23 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
       throw Exception("Couldn't create transformation from geodetic coordinate system");
     }
   }
-  ogr_cf_transform_ = OGRCreateCoordinateTransformation(ogr_.get(), og_cf);
-  if(!ogr_cf_transform_) {
-    delete ogr_transform_;
-    delete ogr_inverse_transform_;
-    delete ogr_cf_transform_;
-    delete ogr_cf_inverse_transform_;
-    throw Exception("Couldn't create transformation to cartesian fixed coordinate system");
-  }
-  ogr_cf_inverse_transform_ = OGRCreateCoordinateTransformation(og_cf, ogr_.get());
-  if(!ogr_cf_inverse_transform_) {
-    delete ogr_transform_;
-    delete ogr_inverse_transform_;
-    delete ogr_cf_transform_;
-    delete ogr_cf_inverse_transform_;
-    throw Exception("Couldn't create transformation to cartesian fixed coordinate system");
+  if(og_cf) {
+    ogr_cf_transform_ = OGRCreateCoordinateTransformation(ogr_.get(), og_cf);
+    if(!ogr_cf_transform_) {
+      delete ogr_transform_;
+      delete ogr_inverse_transform_;
+      delete ogr_cf_transform_;
+      delete ogr_cf_inverse_transform_;
+      throw Exception("Couldn't create transformation to cartesian fixed coordinate system");
+    }
+    ogr_cf_inverse_transform_ = OGRCreateCoordinateTransformation(og_cf, ogr_.get());
+    if(!ogr_cf_inverse_transform_) {
+      delete ogr_transform_;
+      delete ogr_inverse_transform_;
+      delete ogr_cf_transform_;
+      delete ogr_cf_inverse_transform_;
+      throw Exception("Couldn't create transformation to cartesian fixed coordinate system");
+    }
   }
 }
 
@@ -217,6 +221,32 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 }
 
 //-----------------------------------------------------------------------
+/// Convert from Planetocentric to the coordinate system given by Ogr.
+//-----------------------------------------------------------------------
+
+OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
+			     const Planetocentric& G)
+  : ogr_(Ogr)
+{
+  if(ogr_->naif_code() != G.naif_code())
+    throw Exception("Can't convert from Planetocentric");
+  x = G.longitude(); 
+  y = G.latitude();
+  z = G.height_reference_surface();
+  // Note that operation Transform really is const, this just doesn't
+  // have the right signature in GDAL.
+  if(ogr_->inverse_transform()) {
+    int status = 
+      const_cast<OGRCoordinateTransformation&>(*ogr_->inverse_transform()).
+      Transform(1, &x, &y, &z);
+    if(!status)
+      throw Exception("Call to OGR Transform failed");
+    return;
+  }
+  throw Exception("Not implemented yet");
+}
+
+//-----------------------------------------------------------------------
 /// Convert from GroundCoordinate to the coordinate system given by Ogr.
 //-----------------------------------------------------------------------
 
@@ -224,20 +254,28 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 			     const GroundCoordinate& G)
   : ogr_(Ogr)
 {
-  boost::shared_ptr<CartesianFixed> cf = G.convert_to_cf();
-  if(ogr_->naif_code() != cf->naif_code()) {
-    Exception e;
-    e << "Inconsistent NAIF codes.\n"
-      << "  G:    " << cf->naif_code() << "\n"
-      << "  ogr_: " << ogr_->naif_code();
-    throw e;
+  if(ogr_->cf_transform()) {
+    boost::shared_ptr<CartesianFixed> cf = G.convert_to_cf();
+    if(ogr_->naif_code() != cf->naif_code()) {
+      Exception e;
+      e << "Inconsistent NAIF codes.\n"
+	<< "  G:    " << cf->naif_code() << "\n"
+	<< "  ogr_: " << ogr_->naif_code();
+      throw e;
+    }
+    x = cf->position[0];
+    y = cf->position[1];
+    z = cf->position[2];
+    int status = 
+      const_cast<OGRCoordinateTransformation&>(*ogr_->cf_inverse_transform()).
+      Transform(1, &x, &y, &z);
+    if(!status)
+      throw Exception("Call to OGR Transform failed");
   }
-  x = cf->position[0];
-  y = cf->position[1];
-  z = cf->position[2];
-  int status = 
-    const_cast<OGRCoordinateTransformation&>(*ogr_->cf_inverse_transform()).
-    Transform(1, &x, &y, &z);
+  // y really is first, latitude is y
+  G.lat_lon_height(y, x, z);
+  int status = const_cast<OGRCoordinateTransformation&>
+    (*ogr_->inverse_transform()).Transform(1, &x, &y, &z);
   if(!status)
     throw Exception("Call to OGR Transform failed");
 }
@@ -474,15 +512,21 @@ void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude,
 boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
 {
   double xr = x, yr = y , zr = z;
+  if(ogr_->cf_transform()) {
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
-  int status = const_cast<OGRCoordinateTransformation&>(*ogr_->cf_transform()).
-    Transform(1, &xr, &yr, &zr);
-  if(!status)
-    throw Exception("Call to OGR Transform failed");
-  if(ogr().naif_code() == Ecr::EARTH_NAIF_CODE)
-    return boost::shared_ptr<CartesianFixed>(new Ecr(xr, yr, zr));
-  return boost::shared_ptr<CartesianFixed>(new PlanetFixed(xr, yr, zr, ogr().naif_code()));
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->cf_transform()).
+      Transform(1, &xr, &yr, &zr);
+    if(!status)
+      throw Exception("Call to OGR Transform failed");
+    if(naif_code() == Ecr::EARTH_NAIF_CODE)
+      return boost::make_shared<Ecr>(xr, yr, zr);
+    return boost::make_shared<PlanetFixed>(xr, yr, zr, naif_code());
+  }
+  double lat, lon, h;
+  lat_lon_height(lat, lon, h);
+  return boost::make_shared<PlanetFixed>(Planetocentric(lat, lon, h,
+							naif_code()));
 }
 
 //-----------------------------------------------------------------------

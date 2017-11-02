@@ -6453,8 +6453,12 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_1(PyObject *SWIGUNUSED
       0 );
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj)
-      return NULL;
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_AutoDerivativeDouble', expecting type  Array<double,1>");
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_AutoDerivativeDouble', expecting type  Array<double,1>");
+      }
       a2.reference(to_blitz_array<double, 1>(numpy2).copy());
       arg2 = &a2;
     }

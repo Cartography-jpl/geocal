@@ -48,6 +48,7 @@ public:
   virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
 			int Number_sample, int* Res) const;
   virtual void unchecked_write(int Line, int Sample, int Val);
+  virtual void unchecked_write(int Line, int Sample, double Val);
 
   virtual void print(std::ostream& Os) const;
   boost::shared_ptr<RasterImage> raw_image_ptr() const {return img;}

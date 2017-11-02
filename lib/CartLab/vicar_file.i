@@ -60,6 +60,9 @@ public:
 		 float Val,
 		 const std::string& Property = "");
   void label_set(const std::string& F, 
+		 double Val,
+		 const std::string& Property = "");
+  void label_set(const std::string& F, 
 		 const std::string& Val,
 		 const std::string& Property = "");
   %extend {
@@ -71,6 +74,9 @@ public:
      std::vector<float> label_float(const std::string& N, 
         const std::string& Prop = "")
 	{return $self->label<std::vector<float> >(N, Prop);}
+     std::vector<double> label_double(const std::string& N, 
+        const std::string& Prop = "")
+	{return $self->label<std::vector<double> >(N, Prop);}
      std::vector<std::string> label_string(const std::string& N,
         const std::string& Prop = "")
 	{return $self->label<std::vector<std::string> >(N, Prop);}
@@ -95,6 +101,8 @@ def __getitem__(self, key):
          return self.label_int(ky, prop)
       elif(tp == VicarFile.VICAR_REAL):
          return self.label_float(ky, prop)
+      elif(tp == VicarFile.VICAR_DOUBLE):
+         return self.label_double(ky, prop)
       else:
          return self.label_string(ky, prop)
     else:
@@ -103,6 +111,8 @@ def __getitem__(self, key):
          return self.label_int(key)
       elif(tp == VicarFile.VICAR_REAL):
          return self.label_float(key)
+      elif(tp == VicarFile.VICAR_DOUBLE):
+         return self.label_double(key)
       else:
          return self.label_string(key)
 

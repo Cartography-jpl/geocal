@@ -260,18 +260,14 @@ Planetocentric::Planetocentric(const GroundCoordinate& Gc)
     *this = *g;
     return;
   }
-  PlanetFixed mf(Gc);
-  lon_ = mf.longitude();
-  lat_ = mf.latitude();
-  height_ellipsoid_ = 
-    norm(mf.position) - planet_radius(lat_ * Constant::deg_to_rad);
+  Gc.lat_lon_height(lat_, lon_, height_ellipsoid_);
 }
 
 boost::shared_ptr<CartesianFixed> Planetocentric::convert_to_cf() const
 {
   double lat = lat_ * Constant::deg_to_rad;
   double lon = lon_ * Constant::deg_to_rad;
-  double r = planet_radius(lat) + height_ellipsoid_;
+  double r = planet_radius_lat(lat) + height_ellipsoid_;
   return boost::shared_ptr<CartesianFixed>
     (new PlanetFixed(r * cos(lat) * cos(lon),
 		     r * cos(lat) * sin(lon),
@@ -313,7 +309,7 @@ PlanetFixed::convert_to_ci(const Time& T) const
 
 double PlanetFixed::height_reference_surface() const
 {
-  return Planetocentric(*this).height_reference_surface();
+  return norm(position) - planet_radius();
 }
 
 Planetocentric PlanetFixed::convert_to_planetocentric() const

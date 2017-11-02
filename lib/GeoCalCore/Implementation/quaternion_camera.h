@@ -76,6 +76,7 @@ public:
       line_pitch_(Line_pitch),
       sample_pitch_(Sample_pitch),
       frame_to_sc_(to_autoderivative(Frame_to_sc_q)),
+      frame_to_sc_nd_(Frame_to_sc_q),
       frame_convention_(Frame_convention),
       line_direction_(Line_direction),
       sample_direction_(Sample_direction)
@@ -101,6 +102,7 @@ public:
       line_pitch_(Line_pitch),
       sample_pitch_(Sample_pitch),
       frame_to_sc_(to_autoderivative(Frame_to_sc_q)),
+      frame_to_sc_nd_(Frame_to_sc_q),
       frame_convention_(Frame_convention),
       line_direction_(Line_direction),
       sample_direction_(Sample_direction),
@@ -369,7 +371,7 @@ public:
 //-----------------------------------------------------------------------
 
   boost::math::quaternion<double> frame_to_sc() const
-  {return value(frame_to_sc_);}
+  {return frame_to_sc_nd_;}
 
 //-----------------------------------------------------------------------
 /// Frame to spacecraft quaternion.
@@ -384,7 +386,11 @@ public:
 //-----------------------------------------------------------------------
 
   void frame_to_sc(const boost::math::quaternion<double>& frame_to_sc_q) 
-  { frame_to_sc_ = to_autoderivative(frame_to_sc_q); notify_update(); }
+  {
+    frame_to_sc_ = to_autoderivative(frame_to_sc_q);
+    frame_to_sc_nd_ = frame_to_sc_q;
+    notify_update();
+  }
 
 
 //-----------------------------------------------------------------------
@@ -392,7 +398,9 @@ public:
 //-----------------------------------------------------------------------
 
   void frame_to_sc_with_derivative(const boost::math::quaternion<AutoDerivative<double> >& frame_to_sc_q) 
-  { frame_to_sc_ = frame_to_sc_q; notify_update(); }
+  { frame_to_sc_ = frame_to_sc_q;
+    frame_to_sc_nd_ = value(frame_to_sc_);
+    notify_update(); }
 
 //-----------------------------------------------------------------------
 /// Frame convention, indicates if Line is in X or Y direction in
@@ -592,6 +600,11 @@ protected:
   std::vector<FrameCoordinateWithDerivative> principal_point_;
 				// Principal point, indexed by band.
   boost::math::quaternion<AutoDerivative<double> > frame_to_sc_;
+  // Turns out that converting frame_to_sc_ to a version without
+  // derivatives is a bit of a bottle neck in some calculations (e.g.,
+  // Ipi). So we keep a copy of value(frame_to_sc_) so we don't need
+  // to calculate it multiple times.
+  boost::math::quaternion<double> frame_to_sc_nd_;
   FrameConvention frame_convention_;
                                 // Indicates if X or Y is the line
                                 // direction.
@@ -613,6 +626,10 @@ protected:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
 };
 }
 

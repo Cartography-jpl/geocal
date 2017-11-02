@@ -54,6 +54,10 @@ public:
   }
   int band_id() const {return band_id_;}
   const std::string& file_name() const {return fname;}
+protected:
+  // Needs to be protected to derived classes can use serialization
+  // with this.
+  GdalDem() {}
 private:
   std::string fname;
   int band_id_;
@@ -83,7 +87,6 @@ private:
     DemTiledFile::initialize(t, D, t->map_info(), Outside_dem_is_error,
 			     t->linear_unit_scale());
   }
-  GdalDem() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

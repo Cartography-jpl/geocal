@@ -6389,8 +6389,14 @@ SWIGINTERN PyObject *_wrap_new_MaterialDetect(PyObject *SWIGUNUSEDPARM(self), Py
       0 );
     if(!SWIG_IsOK(res)) {
       numpy4.obj = to_numpy<double >(swig_obj[3]);
-      if(!numpy4.obj)
-      return NULL;
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MaterialDetect', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MaterialDetect', expecting type  Array<double,1>");
+        return NULL;
+      }
       a4.reference(to_blitz_array<double, 1>(numpy4));
       arg4 = &a4;
     }
@@ -6400,8 +6406,14 @@ SWIGINTERN PyObject *_wrap_new_MaterialDetect(PyObject *SWIGUNUSEDPARM(self), Py
       0 );
     if(!SWIG_IsOK(res)) {
       numpy5.obj = to_numpy<double >(swig_obj[4]);
-      if(!numpy5.obj)
-      return NULL;
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MaterialDetect', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MaterialDetect', expecting type  Array<double,1>");
+        return NULL;
+      }
       a5.reference(to_blitz_array<double, 1>(numpy5));
       arg5 = &a5;
     }
@@ -6411,8 +6423,14 @@ SWIGINTERN PyObject *_wrap_new_MaterialDetect(PyObject *SWIGUNUSEDPARM(self), Py
       0 );
     if(!SWIG_IsOK(res)) {
       numpy6.obj = to_numpy<int >(swig_obj[5]);
-      if(!numpy6.obj)
-      return NULL;
+      if(!numpy6.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MaterialDetect', expecting type  Array<int,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy6.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MaterialDetect', expecting type  Array<int,1>");
+        return NULL;
+      }
       a6.reference(to_blitz_array<int, 1>(numpy6));
       arg6 = &a6;
     }

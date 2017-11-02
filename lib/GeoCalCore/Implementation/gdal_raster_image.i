@@ -63,6 +63,7 @@ public:
   %python_attribute(is_closed, bool)
   void set_map_info(const MapInfo& Mi);
   void set_rpc(const Rpc& R);
+  std::vector<std::string> metadata_list(const std::string& Domain = "") const;
   bool has_metadata(const std::string& M,
 		    const std::string& Domain = "");
   void set_metadata(const std::string& M, const std::string& Val,

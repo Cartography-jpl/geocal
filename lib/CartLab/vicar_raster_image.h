@@ -155,6 +155,10 @@ public:
 
   virtual ~VicarRasterImage() {}
 
+  virtual bool copy_needs_double() const
+  { return (vicar_file().type() == VicarFile::VICAR_FLOAT ||
+	    vicar_file().type() == VicarFile::VICAR_DOUBLE); }
+
 //-----------------------------------------------------------------------
 /// Close a file. You don't normally need to call this directly, it
 /// is done by the destructor. But it is useful to have for use by Ruby.
@@ -251,7 +255,7 @@ boost::shared_ptr<RasterImage>
   vicar_open(const std::string& Fname, int Band_id = 1,
 	     VicarFile::access_type Access = VicarFile::READ,
 	     bool Favor_memory_mapped = true,
-	     int Number_line_per_tile = -1,
+	     int Number_line_per_tile = 100,
 	     int Number_tile = 4,
 	     bool Force_area_pixel = false);
 }

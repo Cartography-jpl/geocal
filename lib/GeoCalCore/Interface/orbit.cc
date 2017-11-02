@@ -545,6 +545,32 @@ QuaternionOrbitData::QuaternionOrbitData
 }
 
 //-----------------------------------------------------------------------
+/// Copy constructor.
+//-----------------------------------------------------------------------
+
+QuaternionOrbitData::QuaternionOrbitData
+(const QuaternionOrbitData& V)
+{
+  tm = V.tm;
+  pos = V.pos->create(V.pos->position);
+  pos_with_der = V.pos_with_der;
+  vel_cf = V.vel_cf;
+  vel_cf_with_der = V.vel_cf_with_der;
+  sc_to_cf_with_der = V.sc_to_cf_with_der;
+  sc_to_cf_ = value(sc_to_cf_with_der);
+  from_cf_ = V.from_cf_;
+  have_ci_to_cf = V.have_ci_to_cf;
+  if(V.have_ci_to_cf) {
+    ci_to_cf_ = V.ci_to_cf_;
+    ci_to_cf_der_ =V.ci_to_cf_der_;
+    pos_ci = V.pos_ci->create(V.pos_ci->position);
+    pos_ci_with_der = V.pos_ci_with_der;
+    vel_ci = V.vel_ci;
+    vel_ci_with_der = V.vel_ci_with_der;
+  }
+}
+
+//-----------------------------------------------------------------------
 /// Constructor.
 /// This make an perturbation to an existing QuaternionOrbitData. We
 /// take an offset to add to the position, and a rotation matrix that
@@ -769,6 +795,31 @@ void QuaternionOrbitData::initialize(Time Tm,
 						 pos->position[2]);
   sc_to_cf_ = ci_to_cf() * sc_to_ci_q;
   sc_to_cf_with_der = sc_to_cf_;
+  normalize(sc_to_cf_);
+  normalize(sc_to_cf_with_der);
+}
+
+//-----------------------------------------------------------------------
+/// Set sc_to_ci
+//-----------------------------------------------------------------------
+
+void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion<double>& sc_to_ci_q)
+{
+  sc_to_cf_ = ci_to_cf() * sc_to_ci_q;
+  sc_to_cf_with_der = sc_to_cf_;
+  normalize(sc_to_cf_);
+  normalize(sc_to_cf_with_der);
+}
+
+//-----------------------------------------------------------------------
+/// Set sc_to_ci_with_derivative
+//-----------------------------------------------------------------------
+
+void QuaternionOrbitData::sc_to_ci_with_derivative
+(const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q)
+{
+  sc_to_cf_with_der = ci_to_cf_with_derivative() * sc_to_ci_q;
+  sc_to_cf_ = value(sc_to_cf_with_der);
   normalize(sc_to_cf_);
   normalize(sc_to_cf_with_der);
 }
@@ -1065,7 +1116,7 @@ void Orbit::interpolate(const boost::array<double, 3>& P1,
 		   const boost::array<double, 3>& V2,
 		   double toffset, double tspace,
 		   boost::array<double, 3>& Pres,
-		   boost::array<double, 3>& Vres) const
+		   boost::array<double, 3>& Vres)
 {
   ::interpolate(P1, V1, P2, V2, toffset, tspace, Pres, Vres);
 }
@@ -1076,7 +1127,7 @@ void Orbit::interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
 		   const boost::array<AutoDerivative<double>, 3>& V2,
 		   const AutoDerivative<double>& toffset, double tspace,
 		   boost::array<AutoDerivative<double>, 3>& Pres,
-		   boost::array<AutoDerivative<double>, 3>& Vres) const
+		   boost::array<AutoDerivative<double>, 3>& Vres)
 {
   ::interpolate(P1, V1, P2, V2, toffset, tspace, Pres, Vres);
 }
@@ -1095,7 +1146,7 @@ void Orbit::interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
 boost::math::quaternion<double> Orbit::interpolate(
               const boost::math::quaternion<double>& Q1, 
               const boost::math::quaternion<double>& Q2,
-	      double toffset, double tspace) const
+	      double toffset, double tspace)
 {
   return interpolate_quaternion_rotation(Q1, Q2, toffset, tspace);
 }
@@ -1103,7 +1154,7 @@ boost::math::quaternion<double> Orbit::interpolate(
 boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
               const boost::math::quaternion<AutoDerivative<double> >& Q1, 
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
-	      const AutoDerivative<double>& toffset, double tspace) const
+	      const AutoDerivative<double>& toffset, double tspace)
 {
   return interpolate_quaternion_rotation(Q1, Q2, toffset, tspace);
 }
@@ -1172,9 +1223,9 @@ void QuaternionOrbitData::fill_in_ci_to_cf() const
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<QuaternionOrbitData>
- GeoCal::interpolate(const QuaternionOrbitData& t1, 
-		     const QuaternionOrbitData& t2,
-		     const TimeWithDerivative& tm)
+ QuaternionOrbitData::interpolate(const QuaternionOrbitData& t1, 
+				  const QuaternionOrbitData& t2,
+				  const TimeWithDerivative& tm)
 {
   if(tm.value() < t1.time() || tm.value() > t2.time())
     throw Exception("tm needs to be between t1 and t2");
@@ -1250,9 +1301,10 @@ boost::shared_ptr<QuaternionOrbitData>
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<QuaternionOrbitData>
- GeoCal::interpolate(const QuaternionOrbitData& t1, 
-		     const QuaternionOrbitData& t2,
-		     const Time& tm)
+QuaternionOrbitData::interpolate
+(const QuaternionOrbitData& t1, 
+ const QuaternionOrbitData& t2,
+ const Time& tm)
 {
   if(tm < t1.time() || tm > t2.time())
     throw Exception("tm needs to be between t1 and t2");

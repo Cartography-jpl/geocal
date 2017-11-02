@@ -13,15 +13,17 @@
 namespace GeoCal {
 class GeometricModelImage : public CalcRaster {
 public:
+  enum interpolation_type { BILINEAR, NEAREST_NEIGHBOR };
   GeometricModelImage(const boost::shared_ptr<RasterImage>& Data,
 		      const boost::shared_ptr<GeometricModel>& Geom_model,
 		      int Number_line, int Number_sample,
-		      double Fill_value = 0.0);
+		      double Fill_value = 0.0,
+		      interpolation_type Interpolation_type = BILINEAR);
+  %python_attribute(itype, interpolation_type)
   %python_attribute(raw_data, boost::shared_ptr<RasterImage>)
   %python_attribute(geometric_model, boost::shared_ptr<GeometricModel>)
   %python_attribute(fill_value, double)
-  %pickle_init(1, self.raw_data, self.geometric_model, self.number_line,
-	       self.number_sample, self.fill_value)
+  %pickle_serialization();
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 };

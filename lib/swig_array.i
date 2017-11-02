@@ -131,9 +131,13 @@ public:
 // Swig doesn't have typemap templates, so we define a macro to
 // do this for each type and dimension, and then call the macro
 // below to set this up for a range of types and sizes.
+// The PRECEDENCE is the order that we check for a match with
+// overloaded functions. The actual value doesn't matter too much,
+// just make sure it is different from any of the type check
+// in swig, and that it is different for different array types
 //--------------------------------------------------------------
 
-%define %array_template(NAME,TYPE,DIM)
+%define %array_template(NAME,TYPE,DIM, PRECEDENCE)
 
 //--------------------------------------------------------------
 // Convert to numpy. Note that there is a complication in the 
@@ -210,7 +214,50 @@ public:
    $1 = &temp;
 }
 
+%typemap(in, numinputs=0) blitz::Array<TYPE, DIM>& OUTPUT1 (blitz::Array<TYPE, DIM> temp) {
+   $1 = &temp;
+}
+
+%typemap(in, numinputs=0) blitz::Array<TYPE, DIM>& OUTPUT2 (blitz::Array<TYPE, DIM> temp) {
+   $1 = &temp;
+}
+
+
 %typemap(argout) blitz::Array<TYPE, DIM>& OUTPUT {
+  npy_intp dims[DIM], stride[DIM];
+  for(int i = 0; i < DIM; ++i) {
+    dims[i] = $1->extent(i);
+    // Note numpy stride is in terms of bytes, while blitz in in terms
+    // of type T.
+    stride[i] = $1->stride(i) * sizeof(TYPE);
+  }
+  PyObject *res = PyArray_New(&PyArray_Type, DIM, dims, type_to_npy<TYPE >(), 
+			stride, $1->data(), 0, 0, 0);
+  blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
+  PyArray_SetBaseObject((PyArrayObject*)res, 
+			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+  $result = SWIG_AppendOutput($result, res);
+}
+
+%typemap(argout) blitz::Array<TYPE, DIM>& OUTPUT1 {
+  npy_intp dims[DIM], stride[DIM];
+  for(int i = 0; i < DIM; ++i) {
+    dims[i] = $1->extent(i);
+    // Note numpy stride is in terms of bytes, while blitz in in terms
+    // of type T.
+    stride[i] = $1->stride(i) * sizeof(TYPE);
+  }
+  PyObject *res = PyArray_New(&PyArray_Type, DIM, dims, type_to_npy<TYPE >(), 
+			stride, $1->data(), 0, 0, 0);
+  blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
+  PyArray_SetBaseObject((PyArrayObject*)res, 
+			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+  $result = SWIG_AppendOutput($result, res);
+}
+
+%typemap(argout) blitz::Array<TYPE, DIM>& OUTPUT2 {
   npy_intp dims[DIM], stride[DIM];
   for(int i = 0; i < DIM; ++i) {
     dims[i] = $1->extent(i);
@@ -239,8 +286,14 @@ public:
 			    %convertptr_flags);
   if(!SWIG_IsOK(res)) {
     numpy.obj = to_numpy<TYPE >($input);
-    if(!numpy.obj)
+    if(!numpy.obj) {
+      SWIG_Error(SWIG_TypeError, "in method '$symname', expecting type  Array<TYPE,DIM>");
       return NULL;
+    }
+    if(PyArray_NDIM((PyArrayObject*)numpy.obj) !=DIM) {
+      SWIG_Error(SWIG_TypeError, "in method '$symname', expecting type  Array<TYPE,DIM>");
+      return NULL;
+    }
     a.reference(to_blitz_array<TYPE, DIM>(numpy));
     $1 = &a;
   }
@@ -256,8 +309,12 @@ public:
 			    %convertptr_flags);
   if(!SWIG_IsOK(res)) {
     numpy.obj = to_numpy<TYPE >($input);
-    if(!numpy.obj)
-      return NULL;
+    if(!numpy.obj) {
+      SWIG_Error(SWIG_TypeError, "in method '$symname', expecting type  Array<TYPE,DIM>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)numpy.obj) !=DIM) {
+      SWIG_Error(SWIG_TypeError, "in method '$symname', expecting type  Array<TYPE,DIM>");
+    }
     a.reference(to_blitz_array<TYPE, DIM>(numpy).copy());
     $1 = &a;
   }
@@ -272,8 +329,12 @@ public:
 %typemap(in) blitz::Array<TYPE, DIM> (PythonObject numpy) 
 {
   numpy.obj = to_numpy<TYPE >($input);
-  if(!numpy.obj)
-    return NULL;
+  if(!numpy.obj) {
+    SWIG_Error(SWIG_TypeError, "in method '$symname', expecting type  Array<TYPE,DIM>");
+  }
+  if(PyArray_NDIM((PyArrayObject*)numpy.obj) !=DIM) {
+    SWIG_Error(SWIG_TypeError, "in method '$symname', expecting type  Array<TYPE,DIM>");
+  }
   $1 = to_blitz_array<TYPE, DIM>(numpy);
 }
 
@@ -284,6 +345,12 @@ public:
 %typemap(directorout) blitz::Array<TYPE, DIM> (PythonObject numpy) 
 {
   PythonObject t(to_numpy<TYPE >($input));
+  if(!t.obj) {
+    SWIG_Error(SWIG_TypeError, "in method '$symname', expecting type  Array<TYPE,DIM>");
+  }
+  if(PyArray_NDIM((PyArrayObject*)t.obj) !=DIM) {
+    SWIG_Error(SWIG_TypeError, "in method '$symname', expecting type  Array<TYPE,DIM>");
+  }
   $result.reference(to_blitz_array<TYPE, DIM>(t).copy());
 }
 
@@ -309,7 +376,7 @@ public:
 // Check if object can be converted to a blitz::Array.
 //--------------------------------------------------------------
 
-%typemap(typecheck,precedence=SWIG_TYPECHECK_INTEGER) blitz::Array<TYPE, DIM>, const blitz::Array<TYPE, DIM>& {
+%typecheck(PRECEDENCE) blitz::Array<TYPE, DIM>, const blitz::Array<TYPE, DIM>& {
   PythonObject t(to_numpy<TYPE >($input));
   $1 = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==DIM ? 1 : 0);
 }
@@ -318,30 +385,30 @@ public:
 
 %enddef
 
-%array_template(BlitzArray_double_1, double, 1);
-%array_template(BlitzArray_double_2, double, 2);
-%array_template(BlitzArray_double_3, double, 3);
-%array_template(BlitzArray_double_4, double, 4);
-%array_template(BlitzArray_double_5, double, 5);
-%array_template(BlitzArray_double_6, double, 6);
-%array_template(BlitzArray_double_7, double, 7);
-%array_template(BlitzArray_double_8, double, 8);
-%array_template(BlitzArray_bool_1, bool, 1);
-%array_template(BlitzArray_bool_2, bool, 2);
-%array_template(BlitzArray_bool_3, bool, 3);
-%array_template(BlitzArray_bool_4, bool, 4);
-%array_template(BlitzArray_bool_5, bool, 5);
-%array_template(BlitzArray_bool_6, bool, 6);
-%array_template(BlitzArray_bool_7, bool, 7);
-%array_template(BlitzArray_bool_8, bool, 8);
-%array_template(BlitzArray_int_1, int, 1);
-%array_template(BlitzArray_int_2, int, 2);
-%array_template(BlitzArray_int_3, int, 3);
-%array_template(BlitzArray_int_4, int, 4);
-%array_template(BlitzArray_int_5, int, 5);
-%array_template(BlitzArray_int_6, int, 6);
-%array_template(BlitzArray_int_7, int, 7);
-%array_template(BlitzArray_int_8, int, 8);
+%array_template(BlitzArray_double_1, double, 1, 1150);
+%array_template(BlitzArray_double_2, double, 2, 1151);
+%array_template(BlitzArray_double_3, double, 3, 1152);
+%array_template(BlitzArray_double_4, double, 4, 1153);
+%array_template(BlitzArray_double_5, double, 5, 1154);
+%array_template(BlitzArray_double_6, double, 6, 1155);
+%array_template(BlitzArray_double_7, double, 7, 1156);
+%array_template(BlitzArray_double_8, double, 8, 1157);
+%array_template(BlitzArray_bool_1, bool, 1, 1158);
+%array_template(BlitzArray_bool_2, bool, 2, 1159);
+%array_template(BlitzArray_bool_3, bool, 3, 1160);
+%array_template(BlitzArray_bool_4, bool, 4, 1161);
+%array_template(BlitzArray_bool_5, bool, 5, 1162);
+%array_template(BlitzArray_bool_6, bool, 6, 1163);
+%array_template(BlitzArray_bool_7, bool, 7, 1164);
+%array_template(BlitzArray_bool_8, bool, 8, 1165);
+%array_template(BlitzArray_int_1, int, 1, 1166);
+%array_template(BlitzArray_int_2, int, 2, 1167);
+%array_template(BlitzArray_int_3, int, 3, 1168);
+%array_template(BlitzArray_int_4, int, 4, 1169);
+%array_template(BlitzArray_int_5, int, 5, 1170);
+%array_template(BlitzArray_int_6, int, 6, 1171);
+%array_template(BlitzArray_int_7, int, 7, 1172);
+%array_template(BlitzArray_int_8, int, 8, 1173);
 #endif  // end SWIGPYTHON
 
 

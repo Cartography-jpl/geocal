@@ -36,9 +36,9 @@ public:
   MapInfo intersection(const MapInfo& Mi) const;
   MapInfo map_union(const MapInfo& Mi) const;
   void index_to_coordinate(double Pixel_x_index, double Pixel_y_index,
-      double& Pixel_x_coordinate, double& Pixel_y_coordinate) const;
+      double& OUTPUT, double& OUTPUT) const;
   void coordinate_to_index(double Pixel_x_coordinate, double Pixel_y_coordinate,
-			   double& Pixel_x_index, double& Pixel_y_index) const;
+			   double& OUTPUT, double& OUTPUT) const;
   %python_attribute(lrc_x, double)
   %python_attribute(lrc_y, double)
   %python_attribute(number_x_pixel, int)

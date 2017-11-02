@@ -5,11 +5,13 @@
 
 %{
 #include "ogr_coordinate.h"
+#include "planet_coordinate.h"  
 %}
 %base_import(generic_object)
 %base_import(ground_coordinate)
 %base_import(coordinate_converter)
 %import "geodetic.i"
+%import "planet_coordinate.i"
 %geocal_shared_ptr(GeoCal::OgrWrapper);
 %geocal_shared_ptr(GeoCal::OgrCoordinate);
 %geocal_shared_ptr(GeoCal::OgrCoordinateConverter);
@@ -45,6 +47,8 @@ public:
 		const Geodetic& G);
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 		const GroundCoordinate& G);
+  OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
+		const Planetocentric& G);
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   %python_attribute2(ogr, ogr_ptr, boost::shared_ptr<OgrWrapper>);
   %python_attribute(utm_zone, int);

@@ -384,6 +384,25 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         return _raster_image.RasterImage_interpolate(self, *args)
 
 
+    def _v_copy_needs_double(self):
+        """
+
+        virtual bool GeoCal::RasterImage::copy_needs_double() const
+        As an optimization, we assume when copying that data can be
+        represented as a int.
+
+        That is true of many images. But we actually need to use double, then
+        we need to know that in the copy command. This function indicates if
+        we need a double or not. 
+        """
+        return _raster_image.RasterImage__v_copy_needs_double(self)
+
+
+    @property
+    def copy_needs_double(self):
+        return self._v_copy_needs_double()
+
+
     def _v_number_line(self):
         """
 
@@ -507,7 +526,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def write(self, *args):
         """
 
-        void RasterImage::write(int Lstart, int Sstart, const blitz::Array< int, 2 > &A)
+        void RasterImage::write(int Lstart, int Sstart, const blitz::Array< double, 2 > &A)
 
         """
         return _raster_image.RasterImage_write(self, *args)
@@ -639,6 +658,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     __swig_destroy__ = _raster_image.delete_RasterImage
 RasterImage.overview = new_instancemethod(_raster_image.RasterImage_overview, None, RasterImage)
 RasterImage.interpolate = new_instancemethod(_raster_image.RasterImage_interpolate, None, RasterImage)
+RasterImage._v_copy_needs_double = new_instancemethod(_raster_image.RasterImage__v_copy_needs_double, None, RasterImage)
 RasterImage._v_number_line = new_instancemethod(_raster_image.RasterImage__v_number_line, None, RasterImage)
 RasterImage._v_number_sample = new_instancemethod(_raster_image.RasterImage__v_number_sample, None, RasterImage)
 RasterImage._v_number_tile_line = new_instancemethod(_raster_image.RasterImage__v_number_tile_line, None, RasterImage)

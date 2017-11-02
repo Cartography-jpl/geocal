@@ -191,6 +191,9 @@ public:
 		 float Val,
 		 const std::string& Property = "");
   void label_set(const std::string& F, 
+		 double Val,
+		 const std::string& Property = "");
+  void label_set(const std::string& F, 
 		 const std::string& Val,
 		 const std::string& Property = "");
 
@@ -415,6 +418,69 @@ VicarFile::label<std::vector<float> >(const std::string& K,
   if((*label_type().find(t)).second != VICAR_REAL)
     throw Exception("Label " + K + " is not real type in file " + fname_);
   std::vector<float> res((*label_nelement().find(t)).second);
+  int status;
+  if(P != "") {
+    status = VicarFile::zlgetw(unit(), "PROPERTY", 
+			       K.c_str(), 
+			       reinterpret_cast<char*>(&(*res.begin())), 
+			       P.c_str());
+  } else {
+    status = VicarFile::zlgetsh(unit(), K.c_str(), 
+				reinterpret_cast<char*>(&(*res.begin())));
+  }
+  if(status != 1)
+    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Return value for the given label.
+//-----------------------------------------------------------------------
+
+template<> inline double VicarFile::label<double>(const std::string& K,
+						const std::string& P) const
+{
+  std::string t = K;
+  if(P != "")
+    t = P + " " + t;
+  if(label_type().count(t) != 1)
+    throw Exception("Label " + K + " is not found in file " + fname_);
+  if((*label_type().find(t)).second != VICAR_DOUBLE)
+    throw Exception("Label " + K + " is not double type in file " + fname_);
+  if((*label_nelement().find(t)).second != 1)
+    throw Exception("Label " + K + " is not a single value in file " + fname_);
+  double res;
+  int status;
+  if(P != "") {
+    status = VicarFile::zlgetw(unit(), "PROPERTY", 
+			       K.c_str(), 
+			       reinterpret_cast<char*>(&res), 
+			       P.c_str());
+  } else {
+    status = VicarFile::zlgetsh(unit(), K.c_str(), 
+				reinterpret_cast<char*>(&res));
+  }
+  if(status != 1)
+    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Return value for the given label.
+//-----------------------------------------------------------------------
+
+template<> inline std::vector<double> 
+VicarFile::label<std::vector<double> >(const std::string& K,
+				      const std::string& P) const
+{
+  std::string t = K;
+  if(P != "")
+    t = P + " " + t;
+  if(label_type().count(t) != 1)
+    throw Exception("Label " + K + " is not found in file " + fname_);
+  if((*label_type().find(t)).second != VICAR_DOUBLE)
+    throw Exception("Label " + K + " is not double type in file " + fname_);
+  std::vector<double> res((*label_nelement().find(t)).second);
   int status;
   if(P != "") {
     status = VicarFile::zlgetw(unit(), "PROPERTY", 

@@ -13,6 +13,8 @@ echo "test is run."
 echo ""
 echo "If valgrind is defined, then we run the test with valgrind."
 echo ""
+echo "If gdb is defined, we run the debugger on the test."
+echo ""
 echo "==========================================================="
 
 if [ ${valgrind} ] ; then
@@ -20,12 +22,14 @@ if [ ${valgrind} ] ; then
 elif [ ${gdb} ]; then
     tool_command="gdb --args"
 else
+#    tool_command="valgrind --tool=callgrind"
     tool_command=""
 fi
 
 if [ ${log_test} ] ; then
     ${tool_command} ./geocal_test_all --log_level=test_suite --run_test=${run_test}
 else
+    echo "${tool_command} ./geocal_test_all --show_progress --run_test=${run_test}"
     ${tool_command} ./geocal_test_all --show_progress --run_test=${run_test}
 fi
 

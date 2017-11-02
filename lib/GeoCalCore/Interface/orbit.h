@@ -14,15 +14,6 @@
 namespace GeoCal {
 
 class QuaternionOrbitData;
-boost::shared_ptr<QuaternionOrbitData>
-  interpolate(const QuaternionOrbitData& t1, 
-	      const QuaternionOrbitData& t2, 
-	      const TimeWithDerivative& tm);
-
-boost::shared_ptr<QuaternionOrbitData>
-  interpolate(const QuaternionOrbitData& t1, 
-	      const QuaternionOrbitData& t2, 
-	      const Time& tm);
 
 /****************************************************************//**
   This class is used to convert ScLookVector,
@@ -241,6 +232,7 @@ public:
 		      vel_inertial,
 		      const boost::math::quaternion<AutoDerivative<double> >& 
 		      sc_to_ci_q);
+  QuaternionOrbitData(const QuaternionOrbitData& V);
   virtual ~QuaternionOrbitData() {}
 
   virtual CartesianInertialLookVector 
@@ -322,12 +314,12 @@ public:
   virtual Time time() const {return tm.value();}
   virtual TimeWithDerivative time_with_derivative() const {return tm;}
   virtual void print(std::ostream& Os) const;
-  friend boost::shared_ptr<QuaternionOrbitData>
-  GeoCal::interpolate(const QuaternionOrbitData& t1, 
+  static boost::shared_ptr<QuaternionOrbitData>
+  interpolate(const QuaternionOrbitData& t1, 
 		      const QuaternionOrbitData& t2, 
 		      const TimeWithDerivative& tm);
-  friend boost::shared_ptr<QuaternionOrbitData>
-  GeoCal::interpolate(const QuaternionOrbitData& t1, 
+  static boost::shared_ptr<QuaternionOrbitData>
+  interpolate(const QuaternionOrbitData& t1, 
 		      const QuaternionOrbitData& t2, 
 		      const Time& tm);
 
@@ -337,6 +329,7 @@ public:
 
   boost::math::quaternion<double> sc_to_ci() const 
   { return conj(ci_to_cf()) * sc_to_cf_; }
+  void sc_to_ci(const boost::math::quaternion<double>& sc_to_ci_q);
   
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian inertial
@@ -344,6 +337,7 @@ public:
 
   boost::math::quaternion<AutoDerivative<double> > sc_to_ci_with_derivative() const 
   { return conj(ci_to_cf_with_derivative()) * sc_to_cf_with_der; }
+  void sc_to_ci_with_derivative(const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q);
   
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian fixed.
@@ -586,6 +580,24 @@ public:
   (const TimeWithDerivative& T, 
    const CartesianFixedLookVectorWithDerivative& Cf) const
   { return orbit_data(T)->sc_look_vector(Cf); }
+
+//-----------------------------------------------------------------------
+/// Return ScLookVector that sees a given point.
+//-----------------------------------------------------------------------
+  
+  virtual ScLookVector sc_look_vector(Time T, 
+			      const CartesianFixed& Pt) const
+  {
+    boost::shared_ptr<OrbitData> od = orbit_data(T);
+    boost::array<double, 3> p1 = Pt.position;
+    boost::array<double, 3> p2 = od->position_cf()->position;
+    CartesianFixedLookVector lv;
+    lv.look_vector[0] = p1[0] - p2[0];
+    lv.look_vector[1] = p1[1] - p2[1];
+    lv.look_vector[2] = p1[2] - p2[2];
+    return od->sc_look_vector(lv);
+  }
+  
 //-----------------------------------------------------------------------
 /// Return position at given time. We should have min_time() <= T <
 /// max_time(). 
@@ -649,6 +661,29 @@ public:
   virtual boost::shared_ptr<OrbitData> 
   orbit_data(const TimeWithDerivative& T) const  = 0;
   virtual void print(std::ostream& Os) const { Os << "Orbit"; }
+  static void interpolate(const boost::array<double, 3>& P1,
+		   const boost::array<double, 3>& V1,
+		   const boost::array<double, 3>& P2,
+		   const boost::array<double, 3>& V2,
+		   double toffset, double tspace,
+		   boost::array<double, 3>& Pres,
+		   boost::array<double, 3>& Vres);
+  static void interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
+		   const boost::array<AutoDerivative<double>, 3>& V1,
+		   const boost::array<AutoDerivative<double>, 3>& P2,
+		   const boost::array<AutoDerivative<double>, 3>& V2,
+		   const AutoDerivative<double>& toffset, 
+		   double tspace,
+		   boost::array<AutoDerivative<double>, 3>& Pres,
+		   boost::array<AutoDerivative<double>, 3>& Vres);
+  static boost::math::quaternion<double> interpolate(
+              const boost::math::quaternion<double>& Q1, 
+              const boost::math::quaternion<double>& Q2,
+	      double toffset, double tspace);
+  static boost::math::quaternion<AutoDerivative<double> > interpolate(
+              const boost::math::quaternion<AutoDerivative<double> >& Q1, 
+              const boost::math::quaternion<AutoDerivative<double> >& Q2,
+	      const AutoDerivative<double>& toffset, double tspace);
 protected:
 //-----------------------------------------------------------------------
 /// This calculates the weighting factor to use to do a Lagrangian 
@@ -692,29 +727,6 @@ protected:
       res += (*ifac) * (*v);
     return res;
   }
-  void interpolate(const boost::array<double, 3>& P1,
-		   const boost::array<double, 3>& V1,
-		   const boost::array<double, 3>& P2,
-		   const boost::array<double, 3>& V2,
-		   double toffset, double tspace,
-		   boost::array<double, 3>& Pres,
-		   boost::array<double, 3>& Vres) const;
-  void interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
-		   const boost::array<AutoDerivative<double>, 3>& V1,
-		   const boost::array<AutoDerivative<double>, 3>& P2,
-		   const boost::array<AutoDerivative<double>, 3>& V2,
-		   const AutoDerivative<double>& toffset, 
-		   double tspace,
-		   boost::array<AutoDerivative<double>, 3>& Pres,
-		   boost::array<AutoDerivative<double>, 3>& Vres) const;
-  boost::math::quaternion<double> interpolate(
-              const boost::math::quaternion<double>& Q1, 
-              const boost::math::quaternion<double>& Q2,
-	      double toffset, double tspace) const;
-  boost::math::quaternion<AutoDerivative<double> > interpolate(
-              const boost::math::quaternion<AutoDerivative<double> >& Q1, 
-              const boost::math::quaternion<AutoDerivative<double> >& Q2,
-	      const AutoDerivative<double>& toffset, double tspace) const;
   Time min_tm;			///< Minimum time that we have
 				///OrbitData for.
   Time max_tm;			///< Maximum time that we have

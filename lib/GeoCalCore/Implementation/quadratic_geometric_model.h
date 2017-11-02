@@ -70,6 +70,7 @@ public:
 //-----------------------------------------------------------------------
   FitType fit_type() const {return ft;}
 private:
+  static const int min_tp_for_quadratic;
   blitz::Array<double, 1> trans;
   blitz::Array<double, 1> inv_trans;
   double mag_ln, mag_smp;

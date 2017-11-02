@@ -3549,30 +3549,29 @@ namespace Swig {
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[130]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[131]
 #define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[132]
-#define SWIGTYPE_p_boost__shared_ptrT_RsmRationalPolynomial_t swig_types[133]
-#define SWIGTYPE_p_char swig_types[134]
-#define SWIGTYPE_p_char_type swig_types[135]
-#define SWIGTYPE_p_difference_type swig_types[136]
-#define SWIGTYPE_p_fmtflags swig_types[137]
-#define SWIGTYPE_p_int_type swig_types[138]
-#define SWIGTYPE_p_iostate swig_types[139]
-#define SWIGTYPE_p_off_type swig_types[140]
-#define SWIGTYPE_p_openmode swig_types[141]
-#define SWIGTYPE_p_pos_type swig_types[142]
-#define SWIGTYPE_p_seekdir swig_types[143]
-#define SWIGTYPE_p_size_t swig_types[144]
-#define SWIGTYPE_p_size_type swig_types[145]
-#define SWIGTYPE_p_state_type swig_types[146]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[147]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[148]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[149]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[150]
-#define SWIGTYPE_p_std__invalid_argument swig_types[151]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[152]
-#define SWIGTYPE_p_traits_type swig_types[153]
-#define SWIGTYPE_p_value_type swig_types[154]
-static swig_type_info *swig_types[156];
-static swig_module_info swig_module = {swig_types, 155, 0, 0, 0, 0};
+#define SWIGTYPE_p_char swig_types[133]
+#define SWIGTYPE_p_char_type swig_types[134]
+#define SWIGTYPE_p_difference_type swig_types[135]
+#define SWIGTYPE_p_fmtflags swig_types[136]
+#define SWIGTYPE_p_int_type swig_types[137]
+#define SWIGTYPE_p_iostate swig_types[138]
+#define SWIGTYPE_p_off_type swig_types[139]
+#define SWIGTYPE_p_openmode swig_types[140]
+#define SWIGTYPE_p_pos_type swig_types[141]
+#define SWIGTYPE_p_seekdir swig_types[142]
+#define SWIGTYPE_p_size_t swig_types[143]
+#define SWIGTYPE_p_size_type swig_types[144]
+#define SWIGTYPE_p_state_type swig_types[145]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[146]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[147]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[148]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[149]
+#define SWIGTYPE_p_std__invalid_argument swig_types[150]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[151]
+#define SWIGTYPE_p_traits_type swig_types[152]
+#define SWIGTYPE_p_value_type swig_types[153]
+static swig_type_info *swig_types[155];
+static swig_module_info swig_module = {swig_types, 154, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6940,7 +6939,7 @@ SWIGINTERN PyObject *_wrap_RsmMultiSection_read_tre_string(PyObject *SWIGUNUSEDP
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   PyObject *swig_obj[1] ;
-  SwigValueWrapper< boost::shared_ptr< RsmRationalPolynomial > > result;
+  boost::shared_ptr< GeoCal::RsmMultiSection > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -6964,7 +6963,9 @@ SWIGINTERN PyObject *_wrap_RsmMultiSection_read_tre_string(PyObject *SWIGUNUSEDP
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_NewPointerObj((new boost::shared_ptr< RsmRationalPolynomial >(static_cast< const boost::shared_ptr< RsmRationalPolynomial >& >(result))), SWIGTYPE_p_boost__shared_ptrT_RsmRationalPolynomial_t, SWIG_POINTER_OWN |  0 );
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
@@ -7819,7 +7820,6 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__VicarException_t = {"
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t", "boost::shared_ptr< GeoCal::VicarImageCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t = {"_p_boost__shared_ptrT_GeoCal__WithParameterNested_t", "boost::shared_ptr< GeoCal::WithParameterNested > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t = {"_p_boost__shared_ptrT_GeoCal__WithParameter_t", "boost::shared_ptr< GeoCal::WithParameter > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_RsmRationalPolynomial_t = {"_p_boost__shared_ptrT_RsmRationalPolynomial_t", "boost::shared_ptr< RsmRationalPolynomial > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
@@ -7976,7 +7976,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t,
-  &_swigt__p_boost__shared_ptrT_RsmRationalPolynomial_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
@@ -8133,7 +8132,6 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarException_t[] = 
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameterNested_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_RsmRationalPolynomial_t[] = {  {&_swigt__p_boost__shared_ptrT_RsmRationalPolynomial_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -8290,7 +8288,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
   _swigc__p_boost__shared_ptrT_GeoCal__WithParameterNested_t,
   _swigc__p_boost__shared_ptrT_GeoCal__WithParameter_t,
-  _swigc__p_boost__shared_ptrT_RsmRationalPolynomial_t,
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,

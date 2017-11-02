@@ -224,9 +224,9 @@ static boost::format coeffformat("%|1$+21.14E|");
 std::string RsmLowOrderPolynomial::tre_string() const
 {
   std::string res ="";
-  for(int i = 0; i < 9; ++i)
+  for(int i = 0; i < 10; ++i)
     res += str_check_size(coeffformat % pline[i], 21);
-  for(int i = 0; i < 9; ++i)
+  for(int i = 0; i < 10; ++i)
     res += str_check_size(coeffformat % psamp[i], 21);
   return res;
 }
@@ -255,8 +255,8 @@ void RsmLowOrderPolynomial::read_tre_string(std::istream& In)
   nsample_fit_ = 10;
   nheight_fit_ = 10;
   ignore_igc_error_in_fit_ = false;
-  for(int i = 0; i < 9; ++i)
+  for(int i = 0; i < 10; ++i)
     pline[i] = read_size<double>(In, 21);
-  for(int i = 0; i < 9; ++i)
+  for(int i = 0; i < 10; ++i)
     psamp[i] = read_size<double>(In, 21);
 }

@@ -32,7 +32,7 @@ public:
   boost::shared_ptr<RsmBase> section(int i, int j) const;
   void section(int i, int j, const boost::shared_ptr<RsmBase>& V);
   std::string tre_string() const;
-  static boost::shared_ptr<RsmRationalPolynomial>
+  static boost::shared_ptr<RsmMultiSection>
   read_tre_string(const std::string& Tre_in);
   %pickle_serialization()
 };

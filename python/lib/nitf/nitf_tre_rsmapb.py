@@ -2,7 +2,8 @@ from __future__ import print_function
 from .nitf_field import *
 from .nitf_tre import *
 
-hlp = '''This is the RSMAPB TRE.
+hlp = '''This is the RSMAPB TRE,
+Replacement Sensor Model Adjustable Parameters, version B.
 
 The field names can be pretty cryptic, but are documented in detail in 
 the NITF TRE documentation (STDI-0002 V4.0, available at 

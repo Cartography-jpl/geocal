@@ -25,6 +25,15 @@ public:
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample);
+  %python_attribute(number_row_section, int);
+  %python_attribute(number_col_section, int);
+  %python_attribute(number_line_per_section, double);
+  %python_attribute(number_sample_per_section, double);
+  boost::shared_ptr<RsmBase> section(int i, int j) const;
+  void section(int i, int j, const boost::shared_ptr<RsmBase>& V);
+  std::string tre_string() const;
+  static boost::shared_ptr<RsmMultiSection>
+  read_tre_string(const std::string& Tre_in);
   %pickle_serialization()
 };
 }

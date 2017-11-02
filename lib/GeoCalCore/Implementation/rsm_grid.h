@@ -201,14 +201,14 @@ public:
 //-----------------------------------------------------------------------
 /// Row section number.  
 //-----------------------------------------------------------------------
-  int row_section_number() const {return row_section_number_; }
-  void row_section_number(int V) {row_section_number_ = V; }
+  virtual int row_section_number() const {return row_section_number_; }
+  virtual void row_section_number(int V) {row_section_number_ = V; }
   
 //-----------------------------------------------------------------------
 /// Column section number.
 //-----------------------------------------------------------------------
-  int col_section_number() const {return col_section_number_; }
-  void col_section_number(int V) {col_section_number_ = V; }
+  virtual int col_section_number() const {return col_section_number_; }
+  virtual void col_section_number(int V) {col_section_number_ = V; }
 
   int total_number_row_digit() const {return total_number_row_digit_; }
   void total_number_row_digit(int v) {total_number_row_digit_ = v; }

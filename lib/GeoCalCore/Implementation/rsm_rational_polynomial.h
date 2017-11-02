@@ -169,14 +169,14 @@ public:
 //-----------------------------------------------------------------------
 /// Row section number.  
 //-----------------------------------------------------------------------
-  int row_section_number() const {return row_section_number_; }
-  void row_section_number(int V) {row_section_number_ = V; }
+  virtual int row_section_number() const {return row_section_number_; }
+  virtual void row_section_number(int V) {row_section_number_ = V; }
   
 //-----------------------------------------------------------------------
 /// Column section number.
 //-----------------------------------------------------------------------
-  int col_section_number() const {return col_section_number_; }
-  void col_section_number(int V) {col_section_number_ = V; }
+  virtual int col_section_number() const {return col_section_number_; }
+  virtual void col_section_number(int V) {col_section_number_ = V; }
   
 private:
   int row_section_number_, col_section_number_;

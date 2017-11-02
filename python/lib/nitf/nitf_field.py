@@ -224,6 +224,8 @@ class _FieldValue(object):
         if(DEBUG and self.field_name is not None):
             print("Reading: ", self.field_name, " bytes: ", self.size)
         t = fh.read(self.size)
+        if(DEBUG and self.field_name is not None):
+            print("Value: " + str(t))
         if(len(t) != self.size):
             raise RuntimeError("Not enough bytes left to read %d bytes for field %s" % (self.size, self.field_name))
         if(self.field_name is not None):

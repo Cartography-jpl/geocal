@@ -5396,6 +5396,161 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+#if PY_VERSION_HEX >= 0x03010000
+      return PyUnicode_DecodeUTF8(carray, static_cast< int >(size), "surrogateescape");
+#else
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
+{
+#if PY_VERSION_HEX>=0x03000000
+  if (PyUnicode_Check(obj))
+#else  
+  if (PyString_Check(obj))
+#endif
+  {
+    char *cstr; Py_ssize_t len;
+#if PY_VERSION_HEX>=0x03000000
+    if (!alloc && cptr) {
+        /* We can't allow converting without allocation, since the internal
+           representation of string in Python 3 is UCS-2/UCS-4 but we require
+           a UTF-8 representation.
+           TODO(bhy) More detailed explanation */
+        return SWIG_RuntimeError;
+    }
+    obj = PyUnicode_AsUTF8String(obj);
+    PyBytes_AsStringAndSize(obj, &cstr, &len);
+    if(alloc) *alloc = SWIG_NEWOBJ;
+#else
+    PyString_AsStringAndSize(obj, &cstr, &len);
+#endif
+    if (cptr) {
+      if (alloc) {
+	/* 
+	   In python the user should not be able to modify the inner
+	   string representation. To warranty that, if you define
+	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
+	   buffer is always returned.
+
+	   The default behavior is just to return the pointer value,
+	   so, be careful.
+	*/ 
+#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
+	if (*alloc != SWIG_OLDOBJ) 
+#else
+	if (*alloc == SWIG_NEWOBJ) 
+#endif
+	  {
+	    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
+	    *alloc = SWIG_NEWOBJ;
+	  }
+	else {
+	  *cptr = cstr;
+	  *alloc = SWIG_OLDOBJ;
+	}
+      } else {
+        #if PY_VERSION_HEX>=0x03000000
+        assert(0); /* Should never reach here in Python 3 */
+        #endif
+	*cptr = SWIG_Python_str_AsChar(obj);
+      }
+    }
+    if (psize) *psize = len + 1;
+#if PY_VERSION_HEX>=0x03000000
+    Py_XDECREF(obj);
+#endif
+    return SWIG_OK;
+  } else {
+    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+    if (pchar_descriptor) {
+      void* vptr = 0;
+      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
+	if (cptr) *cptr = (char *) vptr;
+	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
+	if (alloc) *alloc = SWIG_OLDOBJ;
+	return SWIG_OK;
+      }
+    }
+  }
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
+{
+  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
+  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
+    if (buf) {
+      if (val) *val = new std::string(buf, size - 1);
+      if (alloc == SWIG_NEWOBJ) delete[] buf;
+      return SWIG_NEWOBJ;
+    } else {
+      if (val) *val = 0;
+      return SWIG_OLDOBJ;
+    }
+  } else {
+    static int init = 0;
+    static swig_type_info* descriptor = 0;
+    if (!init) {
+      descriptor = SWIG_TypeQuery("std::string" " *");
+      init = 1;
+    }
+    if (descriptor) {
+      std::string *vptr;
+      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
+      if (SWIG_IsOK(res) && val) *val = vptr;
+      return res;
+    }
+  }
+  return SWIG_ERROR;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6395,6 +6550,430 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmMultiSection__v_number_row_section(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection__v_number_row_section" "', argument " "1"" of type '" "GeoCal::RsmMultiSection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmMultiSection const *)arg1)->number_row_section();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection__v_number_col_section(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection__v_number_col_section" "', argument " "1"" of type '" "GeoCal::RsmMultiSection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmMultiSection const *)arg1)->number_col_section();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection__v_number_line_per_section(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection__v_number_line_per_section" "', argument " "1"" of type '" "GeoCal::RsmMultiSection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::RsmMultiSection const *)arg1)->number_line_per_section();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection__v_number_sample_per_section(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection__v_number_sample_per_section" "', argument " "1"" of type '" "GeoCal::RsmMultiSection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::RsmMultiSection const *)arg1)->number_sample_per_section();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_section__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase > result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_section" "', argument " "1"" of type '" "GeoCal::RsmMultiSection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmMultiSection_section" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmMultiSection_section" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = ((GeoCal::RsmMultiSection const *)arg1)->section(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_section__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  boost::shared_ptr< GeoCal::RsmBase > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase > tempshared4 ;
+  boost::shared_ptr< GeoCal::RsmBase > temp2shared4 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_section" "', argument " "1"" of type '" "GeoCal::RsmMultiSection *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmMultiSection_section" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmMultiSection_section" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "RsmMultiSection_section" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::RsmBase > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::RsmBase > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RsmBase > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RsmBase > * >(argp4) : &tempshared4;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
+    try {
+      (arg1)->section(arg2,arg3,(boost::shared_ptr< GeoCal::RsmBase > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_section(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmMultiSection_section",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_RsmMultiSection_section__SWIG_0(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_RsmMultiSection_section__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmMultiSection_section'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmMultiSection::section(int,int) const\n"
+    "    GeoCal::RsmMultiSection::section(int,int,boost::shared_ptr< GeoCal::RsmBase > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_tre_string" "', argument " "1"" of type '" "GeoCal::RsmMultiSection const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmMultiSection const *)arg1)->tre_string();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_read_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_read_tre_string" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmMultiSection_read_tre_string" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = GeoCal::RsmMultiSection::read_tre_string((std::string const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_RsmMultiSection(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
@@ -6472,13 +7051,74 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_RsmMultiSection", _wrap_new_RsmMultiSection, METH_VARARGS, (char *)"\n"
 		"\n"
 		"RsmMultiSection::RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, const\n"
-		"RsmBase &Rsm_prototype, int Border=5)\n"
+		"RsmBase &Rsm_prototype, int Border=5, const std::string\n"
+		"&Image_identifier=\"\", const std::string\n"
+		"&Rsm_support_data_edition=\"fake-1\")\n"
 		"Constructor.\n"
 		"\n"
 		"The RsmRationalPolynomial tends to extrapolate badly. Because the low\n"
 		"order polynomial is only approximately correct, we add a little bit of\n"
 		"a border to each underlying RsmRationalPolynomial so we can avoid\n"
 		"extrapolating. \n"
+		""},
+	 { (char *)"RsmMultiSection__v_number_row_section", (PyCFunction)_wrap_RsmMultiSection__v_number_row_section, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::RsmMultiSection::number_row_section() const\n"
+		"\n"
+		""},
+	 { (char *)"RsmMultiSection__v_number_col_section", (PyCFunction)_wrap_RsmMultiSection__v_number_col_section, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::RsmMultiSection::number_col_section() const\n"
+		"\n"
+		""},
+	 { (char *)"RsmMultiSection__v_number_line_per_section", (PyCFunction)_wrap_RsmMultiSection__v_number_line_per_section, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::RsmMultiSection::number_line_per_section() const\n"
+		"\n"
+		""},
+	 { (char *)"RsmMultiSection__v_number_sample_per_section", (PyCFunction)_wrap_RsmMultiSection__v_number_sample_per_section, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::RsmMultiSection::number_sample_per_section() const\n"
+		"\n"
+		""},
+	 { (char *)"RsmMultiSection_section", _wrap_RsmMultiSection_section, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmMultiSection::section(int i, int j, const boost::shared_ptr< RsmBase > &V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmMultiSection_tre_string", (PyCFunction)_wrap_RsmMultiSection_tre_string, METH_O, (char *)"\n"
+		"\n"
+		"std::string RsmMultiSection::tre_string() const\n"
+		"Write to TRE string.\n"
+		"\n"
+		"Note also that the TRE has a fixed precision which is less than the\n"
+		"machine precision. Writing a RsmMultiSection and then reading it from\n"
+		"a TRE does not in general give the exact same RsmRationalPolynomial,\n"
+		"rather just one that is close.\n"
+		"\n"
+		"Note that this is all the fields except the CETAG and CEL (the front\n"
+		"two). It is convenient to treat those special. (We can revisit this in\n"
+		"the future if we need to).\n"
+		"\n"
+		"We do not write out the actually RsmBase that make up the section,\n"
+		"this writing is handled separately. \n"
+		""},
+	 { (char *)"RsmMultiSection_read_tre_string", (PyCFunction)_wrap_RsmMultiSection_read_tre_string, METH_O, (char *)"\n"
+		"\n"
+		"boost::shared_ptr< RsmMultiSection > RsmMultiSection::read_tre_string(const std::string &Tre_in)\n"
+		"Read a TRE string.\n"
+		"\n"
+		"Note that the TRE does not contain all the fields we have in a\n"
+		"RsmMultiSection. However the fields that aren't contained are ones\n"
+		"used for fitting the RSM, so in practice this doesn't matter. We just\n"
+		"set the various fields to the default values found in the constructor.\n"
+		"\n"
+		"This should have all the TRE except for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in\n"
+		"the future if we need to).\n"
+		"\n"
+		"We do not fill in the actual RsmBase stuff in sec, that is handled\n"
+		"separately. We do resize sec, but fill it with null pointers. \n"
 		""},
 	 { (char *)"delete_RsmMultiSection", (PyCFunction)_wrap_delete_RsmMultiSection, METH_O, (char *)"\n"
 		"\n"

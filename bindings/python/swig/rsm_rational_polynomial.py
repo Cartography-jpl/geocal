@@ -615,7 +615,7 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
     def _v_row_section_number(self, *args):
         """
 
-        void GeoCal::RsmRationalPolynomial::row_section_number(int V)
+        virtual void GeoCal::RsmRationalPolynomial::row_section_number(int V)
 
         """
         return _rsm_rational_polynomial.RsmRationalPolynomial__v_row_section_number(self, *args)
@@ -633,7 +633,7 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
     def _v_col_section_number(self, *args):
         """
 
-        void GeoCal::RsmRationalPolynomial::col_section_number(int V)
+        virtual void GeoCal::RsmRationalPolynomial::col_section_number(int V)
 
         """
         return _rsm_rational_polynomial.RsmRationalPolynomial__v_col_section_number(self, *args)

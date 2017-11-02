@@ -39,6 +39,26 @@ public:
   (double X, double Y, double Z) const = 0;
 
 //-----------------------------------------------------------------------
+/// Row section number. This only makes sense for
+/// RsmRationalPolynomial and RsmGrid, but we want to be able to set
+/// this through a general RsmBase. The default returns 1 and throws
+/// an error if you try to set it, but derived classes override this.
+//-----------------------------------------------------------------------
+  virtual int row_section_number() const { return 1; }
+  virtual void row_section_number(int V)
+  { throw Exception("Not Implemented"); }
+
+//-----------------------------------------------------------------------
+/// Col section number. This only makes sense for
+/// RsmRationalPolynomial and RsmGrid, but we want to be able to set
+/// this through a general RsmBase. The default returns 1 and throws
+/// an error if you try to set it, but derived classes override this.
+//-----------------------------------------------------------------------
+  virtual int col_section_number() const { return 1; }
+  virtual void col_section_number(int V)
+  { throw Exception("Not Implemented"); }
+  
+//-----------------------------------------------------------------------
 /// Image identification.
 //-----------------------------------------------------------------------
   const std::string& image_identifier() const { return image_identifier_;}

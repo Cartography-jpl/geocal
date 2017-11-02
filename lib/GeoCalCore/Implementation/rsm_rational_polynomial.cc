@@ -313,10 +313,10 @@ void RsmRationalPolynomial::fit_data
   Array<double, 2> smp_jac(smp_den_jac.rows(), smp_den_jac.cols() +
 			   smp_num_jac.cols());
   ln_jac(ra, Range(0, ln_num_jac.cols() - 1)) = ln_num_jac;
-  ln_jac(ra, Range(ln_num_jac.cols(), Range::toEnd)) =
+  ln_jac(ra, Range(ln_num_jac.cols(), toEnd)) =
     -ln_lhs(i1) * ln_den_jac;
   smp_jac(ra, Range(0, smp_num_jac.cols() - 1)) = smp_num_jac;
-  smp_jac(ra, Range(smp_num_jac.cols(), Range::toEnd)) =
+  smp_jac(ra, Range(smp_num_jac.cols(), toEnd)) =
     -smp_lhs(i1) * smp_den_jac;
   GslMatrix cov;
   GslVector ln_c;
@@ -327,11 +327,11 @@ void RsmRationalPolynomial::fit_data
   line_num_.fitted_coefficent(ln_c.blitz_array()(Range(0,
 						       ln_num_jac.cols()-1)));
   line_den_.fitted_coefficent(ln_c.blitz_array()(Range(ln_num_jac.cols(),
-						       Range::toEnd)));
+						       toEnd)));
   sample_num_.fitted_coefficent(smp_c.blitz_array()(Range(0,
 					       smp_num_jac.cols()-1)));
   sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
-					       Range::toEnd)));
+					       toEnd)));
 }
 
 //-----------------------------------------------------------------------

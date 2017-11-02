@@ -184,12 +184,32 @@ def rsm_grid(igc_rpc):
     r.total_number_col_digit = 8
     hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
     hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
-    lmin = 0
-    smin = 0
-    lmax = int(igc_rpc.rpc.line_offset * 2)
-    smax = int(igc_rpc.rpc.sample_offset * 2)
-    r.fit(igc_rpc, GeodeticConverter(), hmin, hmax, lmin, lmax, smin, smax)
+    r.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line,
+          0, igc_rpc.number_sample)
     return r
+
+@pytest.fixture(scope="function")
+def rsm_ms_polynomial(igc_rpc):
+    rp = RsmRationalPolynomial(3,3,3,3,3,3,3,3)
+    res = RsmMultiSection(igc_rpc.number_line, igc_rpc.number_sample, 3, 2, rp)
+    hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
+    hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
+    res.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
+	    igc_rpc.number_sample)
+    return res
+
+@pytest.fixture(scope="function")
+def rsm_ms_grid(igc_rpc):
+    rg = RsmGrid(10,10,2)
+    rg.total_number_row_digit = 8
+    rg.total_number_col_digit = 8
+    res = RsmMultiSection(igc_rpc.number_line, igc_rpc.number_sample, 3, 2, rg)
+    hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
+    hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
+    res.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
+	    igc_rpc.number_sample)
+    return res
+
 
 
     

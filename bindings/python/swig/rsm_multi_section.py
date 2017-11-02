@@ -206,7 +206,9 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
         """
 
         RsmMultiSection::RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, const
-        RsmBase &Rsm_prototype, int Border=5)
+        RsmBase &Rsm_prototype, int Border=5, const std::string
+        &Image_identifier="", const std::string
+        &Rsm_support_data_edition="fake-1")
         Constructor.
 
         The RsmRationalPolynomial tends to extrapolate badly. Because the low
@@ -216,12 +218,146 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
         """
         _rsm_multi_section.RsmMultiSection_swiginit(self, _rsm_multi_section.new_RsmMultiSection(Nline, Nsamp, Nrow_section, Ncol_section, Rsm_prototype, Border))
 
+    def _v_number_row_section(self):
+        """
+
+        int GeoCal::RsmMultiSection::number_row_section() const
+
+        """
+        return _rsm_multi_section.RsmMultiSection__v_number_row_section(self)
+
+
+    @property
+    def number_row_section(self):
+        return self._v_number_row_section()
+
+
+    def _v_number_col_section(self):
+        """
+
+        int GeoCal::RsmMultiSection::number_col_section() const
+
+        """
+        return _rsm_multi_section.RsmMultiSection__v_number_col_section(self)
+
+
+    @property
+    def number_col_section(self):
+        return self._v_number_col_section()
+
+
+    def _v_number_line_per_section(self):
+        """
+
+        double GeoCal::RsmMultiSection::number_line_per_section() const
+
+        """
+        return _rsm_multi_section.RsmMultiSection__v_number_line_per_section(self)
+
+
+    @property
+    def number_line_per_section(self):
+        return self._v_number_line_per_section()
+
+
+    def _v_number_sample_per_section(self):
+        """
+
+        double GeoCal::RsmMultiSection::number_sample_per_section() const
+
+        """
+        return _rsm_multi_section.RsmMultiSection__v_number_sample_per_section(self)
+
+
+    @property
+    def number_sample_per_section(self):
+        return self._v_number_sample_per_section()
+
+
+    def section(self, *args):
+        """
+
+        void GeoCal::RsmMultiSection::section(int i, int j, const boost::shared_ptr< RsmBase > &V)
+
+        """
+        return _rsm_multi_section.RsmMultiSection_section(self, *args)
+
+
+    def tre_string(self):
+        """
+
+        std::string RsmMultiSection::tre_string() const
+        Write to TRE string.
+
+        Note also that the TRE has a fixed precision which is less than the
+        machine precision. Writing a RsmMultiSection and then reading it from
+        a TRE does not in general give the exact same RsmRationalPolynomial,
+        rather just one that is close.
+
+        Note that this is all the fields except the CETAG and CEL (the front
+        two). It is convenient to treat those special. (We can revisit this in
+        the future if we need to).
+
+        We do not write out the actually RsmBase that make up the section,
+        this writing is handled separately. 
+        """
+        return _rsm_multi_section.RsmMultiSection_tre_string(self)
+
+
+    def read_tre_string(Tre_in):
+        """
+
+        boost::shared_ptr< RsmMultiSection > RsmMultiSection::read_tre_string(const std::string &Tre_in)
+        Read a TRE string.
+
+        Note that the TRE does not contain all the fields we have in a
+        RsmMultiSection. However the fields that aren't contained are ones
+        used for fitting the RSM, so in practice this doesn't matter. We just
+        set the various fields to the default values found in the constructor.
+
+        This should have all the TRE except for the front CETAG and CEL. It is
+        convenient to treat these fields as special. (We can revisit this in
+        the future if we need to).
+
+        We do not fill in the actual RsmBase stuff in sec, that is handled
+        separately. We do resize sec, but fill it with null pointers. 
+        """
+        return _rsm_multi_section.RsmMultiSection_read_tre_string(Tre_in)
+
+    read_tre_string = staticmethod(read_tre_string)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_multi_section.delete_RsmMultiSection
+RsmMultiSection._v_number_row_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_row_section, None, RsmMultiSection)
+RsmMultiSection._v_number_col_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_col_section, None, RsmMultiSection)
+RsmMultiSection._v_number_line_per_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_line_per_section, None, RsmMultiSection)
+RsmMultiSection._v_number_sample_per_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_sample_per_section, None, RsmMultiSection)
+RsmMultiSection.section = new_instancemethod(_rsm_multi_section.RsmMultiSection_section, None, RsmMultiSection)
+RsmMultiSection.tre_string = new_instancemethod(_rsm_multi_section.RsmMultiSection_tre_string, None, RsmMultiSection)
 RsmMultiSection_swigregister = _rsm_multi_section.RsmMultiSection_swigregister
 RsmMultiSection_swigregister(RsmMultiSection)
+
+def RsmMultiSection_read_tre_string(Tre_in):
+    """
+
+    boost::shared_ptr< RsmMultiSection > RsmMultiSection::read_tre_string(const std::string &Tre_in)
+    Read a TRE string.
+
+    Note that the TRE does not contain all the fields we have in a
+    RsmMultiSection. However the fields that aren't contained are ones
+    used for fitting the RSM, so in practice this doesn't matter. We just
+    set the various fields to the default values found in the constructor.
+
+    This should have all the TRE except for the front CETAG and CEL. It is
+    convenient to treat these fields as special. (We can revisit this in
+    the future if we need to).
+
+    We do not fill in the actual RsmBase stuff in sec, that is handled
+    separately. We do resize sec, but fill it with null pointers. 
+    """
+    return _rsm_multi_section.RsmMultiSection_read_tre_string(Tre_in)
 
 
 

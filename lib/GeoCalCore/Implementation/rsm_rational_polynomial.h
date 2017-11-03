@@ -19,7 +19,11 @@ public:
 			int Dp_z, int N_max_order = -1, int D_max_order = -1,
 			int Nline_fit = 20, int Nsample_fit = 20,
 			int Nheight_fit = 20, int Nsecond_pass_fit = 20,
-			bool Ignore_igc_error_in_fit = false);
+			bool Ignore_igc_error_in_fit = false,
+			int Row_section_number = 1,
+			int Col_section_number = 1,
+			const std::string& Image_identifier="",
+			const std::string& Rsm_support_data_edition="fake-1");
   virtual ~RsmRationalPolynomial() {}
   virtual void print(std::ostream& Os) const;
   virtual boost::shared_ptr<RsmBase> clone() const
@@ -159,8 +163,23 @@ public:
   const RsmPolynomial& line_denominator() const {return line_den_;}
   const RsmPolynomial& sample_numerator() const {return sample_num_;}
   const RsmPolynomial& sample_denominator() const {return sample_den_;}
+  std::string tre_string() const;
+  static boost::shared_ptr<RsmRationalPolynomial>
+  read_tre_string(const std::string& Tre_in);
+//-----------------------------------------------------------------------
+/// Row section number.  
+//-----------------------------------------------------------------------
+  virtual int row_section_number() const {return row_section_number_; }
+  virtual void row_section_number(int V) {row_section_number_ = V; }
+  
+//-----------------------------------------------------------------------
+/// Column section number.
+//-----------------------------------------------------------------------
+  virtual int col_section_number() const {return col_section_number_; }
+  virtual void col_section_number(int V) {col_section_number_ = V; }
   
 private:
+  int row_section_number_, col_section_number_;
   double line_offset_, line_scale_, sample_offset_, sample_scale_,
     x_offset_, x_scale_, y_offset_, y_scale_, z_offset_, z_scale_;
   int nline_fit_, nsample_fit_, nheight_fit_, nsecond_pass_fit_;
@@ -170,10 +189,15 @@ private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 }
 
 GEOCAL_EXPORT_KEY(RsmRationalPolynomial);
+GEOCAL_CLASS_VERSION(RsmRationalPolynomial, 1);
 #endif
 
 

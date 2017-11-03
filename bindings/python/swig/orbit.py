@@ -472,6 +472,18 @@ class QuaternionOrbitData(OrbitData):
         return _orbit.QuaternionOrbitData_sc_look_vector(self, *args)
 
 
+    def interpolate(*args):
+        """
+
+        boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const
+        Time &tm)
+        Interpolate between two QuaternionOrbitData for the given time,
+        without interpolating the derivative stuff. 
+        """
+        return _orbit.QuaternionOrbitData_interpolate(*args)
+
+    interpolate = staticmethod(interpolate)
+
     def _v_sc_to_ci(self, *args):
         """
 
@@ -588,6 +600,16 @@ QuaternionOrbitData._velocity_cf = new_instancemethod(_orbit.QuaternionOrbitData
 QuaternionOrbitData._velocity_cf_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf_with_derivative, None, QuaternionOrbitData)
 QuaternionOrbitData_swigregister = _orbit.QuaternionOrbitData_swigregister
 QuaternionOrbitData_swigregister(QuaternionOrbitData)
+
+def QuaternionOrbitData_interpolate(*args):
+    """
+
+    boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const
+    Time &tm)
+    Interpolate between two QuaternionOrbitData for the given time,
+    without interpolating the derivative stuff. 
+    """
+    return _orbit.QuaternionOrbitData_interpolate(*args)
 
 class ObservableOrbit(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -855,6 +877,18 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def parameter_mask(self):
         return self._v_parameter_mask()
 
+
+    def interpolate(*args):
+        """
+
+        boost::math::quaternion< AutoDerivative< double > > Orbit::interpolate(const boost::math::quaternion< AutoDerivative< double > > &Q1, const
+        boost::math::quaternion< AutoDerivative< double > > &Q2, const
+        AutoDerivative< double > &toffset, double tspace)
+
+        """
+        return _orbit.Orbit_interpolate(*args)
+
+    interpolate = staticmethod(interpolate)
     def __disown__(self):
         self.this.disown()
         _orbit.disown_Orbit(self)
@@ -881,9 +915,18 @@ Orbit._v_parameter_with_derivative_subset = new_instancemethod(_orbit.Orbit__v_p
 Orbit._v_parameter_name_subset = new_instancemethod(_orbit.Orbit__v_parameter_name_subset, None, Orbit)
 Orbit._v_parameter_mask = new_instancemethod(_orbit.Orbit__v_parameter_mask, None, Orbit)
 Orbit.notify_update_do = new_instancemethod(_orbit.Orbit_notify_update_do, None, Orbit)
-Orbit.interpolate = new_instancemethod(_orbit.Orbit_interpolate, None, Orbit)
 Orbit_swigregister = _orbit.Orbit_swigregister
 Orbit_swigregister(Orbit)
+
+def Orbit_interpolate(*args):
+    """
+
+    boost::math::quaternion< AutoDerivative< double > > Orbit::interpolate(const boost::math::quaternion< AutoDerivative< double > > &Q1, const
+    boost::math::quaternion< AutoDerivative< double > > &Q2, const
+    AutoDerivative< double > &toffset, double tspace)
+
+    """
+    return _orbit.Orbit_interpolate(*args)
 
 class KeplerOrbit(Orbit):
     """

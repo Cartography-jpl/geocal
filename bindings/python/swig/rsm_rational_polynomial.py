@@ -199,13 +199,15 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Np_x, Np_y, Np_z, Dp_x, Dp_y, Dp_z, N_max_order=-1, D_max_order=-1, Nline_fit=20, Nsample_fit=20, Nheight_fit=20, Nsecond_pass_fit=20, Ignore_igc_error_in_fit=False):
+    def __init__(self, *args):
         """
 
         RsmRationalPolynomial::RsmRationalPolynomial(int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y, int Dp_z, int
         N_max_order=-1, int D_max_order=-1, int Nline_fit=20, int
         Nsample_fit=20, int Nheight_fit=20, int Nsecond_pass_fit=20, bool
-        Ignore_igc_error_in_fit=false)
+        Ignore_igc_error_in_fit=false, int Row_section_number=1, int
+        Col_section_number=1, const std::string &Image_identifier="", const
+        std::string &Rsm_support_data_edition="fake-1")
         Constructor.
 
         You indicated the order of the polynomial in each dimension for both
@@ -230,7 +232,7 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
         ImageGroundConnectionFailed exceptions, but you can optionally ignore
         other errors in the Igc by setting Ignore_igc_error_in_fit to true. 
         """
-        _rsm_rational_polynomial.RsmRationalPolynomial_swiginit(self, _rsm_rational_polynomial.new_RsmRationalPolynomial(Np_x, Np_y, Np_z, Dp_x, Dp_y, Dp_z, N_max_order, D_max_order, Nline_fit, Nsample_fit, Nheight_fit, Nsecond_pass_fit, Ignore_igc_error_in_fit))
+        _rsm_rational_polynomial.RsmRationalPolynomial_swiginit(self, _rsm_rational_polynomial.new_RsmRationalPolynomial(*args))
 
     def image_coordinate(self, *args):
         """
@@ -284,6 +286,44 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
         """
         return _rsm_rational_polynomial.RsmRationalPolynomial_fit_data(self, Line, Sample, X, Y, Z)
 
+
+    def tre_string(self):
+        """
+
+        std::string RsmRationalPolynomial::tre_string() const
+        Write to TRE string.
+
+        Note also that the TRE has a fixed precision which is less than the
+        machine precision. Writing a RsmRationalPolynomial and then reading it
+        from a TRE does not in general give the exact same
+        RsmRationalPolynomial, rather just one that is close.
+
+        Note that this is all the fields except the CETAG and CEL (the front
+        two). It is convenient to treat those special. (We can revisit this in
+        the future if we need to). 
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial_tre_string(self)
+
+
+    def read_tre_string(Tre_in):
+        """
+
+        boost::shared_ptr< RsmRationalPolynomial > RsmRationalPolynomial::read_tre_string(const std::string &Tre_in)
+        Read a TRE string.
+
+        Note that the TRE does not contain all the fields we have in a
+        RsmRationalPolynomial. However the fields that aren't contained are
+        ones used for fitting the RSM, so in practice this doesn't matter. We
+        just set the various fields to the default values found in the
+        constructor.
+
+        This should have all the TRE except for the front CETAG and CEL. It is
+        convenient to treat these fields as special. (We can revisit this in
+        the future if we need to). 
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial_read_tre_string(Tre_in)
+
+    read_tre_string = staticmethod(read_tre_string)
 
     def _v_number_line_fit(self, *args):
         """
@@ -572,6 +612,42 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
         return self._v_sample_denominator()
 
 
+    def _v_row_section_number(self, *args):
+        """
+
+        virtual void GeoCal::RsmRationalPolynomial::row_section_number(int V)
+
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial__v_row_section_number(self, *args)
+
+
+    @property
+    def row_section_number(self):
+        return self._v_row_section_number()
+
+    @row_section_number.setter
+    def row_section_number(self, value):
+      self._v_row_section_number(value)
+
+
+    def _v_col_section_number(self, *args):
+        """
+
+        virtual void GeoCal::RsmRationalPolynomial::col_section_number(int V)
+
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial__v_col_section_number(self, *args)
+
+
+    @property
+    def col_section_number(self):
+        return self._v_col_section_number()
+
+    @col_section_number.setter
+    def col_section_number(self, value):
+      self._v_col_section_number(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -580,6 +656,7 @@ RsmRationalPolynomial.image_coordinate = new_instancemethod(_rsm_rational_polyno
 RsmRationalPolynomial.set_rpc_coeff = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_set_rpc_coeff, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit_offset_and_scale = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_offset_and_scale, None, RsmRationalPolynomial)
 RsmRationalPolynomial.fit_data = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_fit_data, None, RsmRationalPolynomial)
+RsmRationalPolynomial.tre_string = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial_tre_string, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_number_line_fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_number_line_fit, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_number_sample_fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_number_sample_fit, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_number_height_fit = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_number_height_fit, None, RsmRationalPolynomial)
@@ -599,8 +676,28 @@ RsmRationalPolynomial._v_line_numerator = new_instancemethod(_rsm_rational_polyn
 RsmRationalPolynomial._v_line_denominator = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_denominator, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_sample_numerator = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_sample_numerator, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_sample_denominator = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_sample_denominator, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_row_section_number = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_row_section_number, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_col_section_number = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_col_section_number, None, RsmRationalPolynomial)
 RsmRationalPolynomial_swigregister = _rsm_rational_polynomial.RsmRationalPolynomial_swigregister
 RsmRationalPolynomial_swigregister(RsmRationalPolynomial)
+
+def RsmRationalPolynomial_read_tre_string(Tre_in):
+    """
+
+    boost::shared_ptr< RsmRationalPolynomial > RsmRationalPolynomial::read_tre_string(const std::string &Tre_in)
+    Read a TRE string.
+
+    Note that the TRE does not contain all the fields we have in a
+    RsmRationalPolynomial. However the fields that aren't contained are
+    ones used for fitting the RSM, so in practice this doesn't matter. We
+    just set the various fields to the default values found in the
+    constructor.
+
+    This should have all the TRE except for the front CETAG and CEL. It is
+    convenient to treat these fields as special. (We can revisit this in
+    the future if we need to). 
+    """
+    return _rsm_rational_polynomial.RsmRationalPolynomial_read_tre_string(Tre_in)
 
 
 

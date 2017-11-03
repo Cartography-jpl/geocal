@@ -290,7 +290,7 @@ boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data(Time T) const
   int i = (int) floor((T - min_time()) / time_spacing());
   boost::shared_ptr<QuaternionOrbitData> q1 = orbit_data_index(i); 
   boost::shared_ptr<QuaternionOrbitData> q2 = orbit_data_index(i + 1); 
-  return GeoCal::interpolate(*q1, *q2, T);
+  return QuaternionOrbitData::interpolate(*q1, *q2, T);
 }
 
 boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data
@@ -302,7 +302,7 @@ boost::shared_ptr<OrbitData> AirMspiOrbit::orbit_data
     orbit_data_index_with_derivative(i); 
   boost::shared_ptr<QuaternionOrbitData> q2 = 
     orbit_data_index_with_derivative(i + 1); 
-  return GeoCal::interpolate(*q1, *q2, T);
+  return QuaternionOrbitData::interpolate(*q1, *q2, T);
 }
 
 boost::shared_ptr<CartesianFixed> AirMspiOrbit::position_cf(Time T) const

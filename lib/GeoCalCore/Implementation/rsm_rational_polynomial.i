@@ -25,7 +25,11 @@ public:
 			int Dp_z, int N_max_order = -1, int D_max_order = -1,
 			int Nline_fit = 20, int Nsample_fit = 20,
 			int Nheight_fit = 20, int Nsecond_pass_fit = 20,
-			bool Ignore_igc_error_in_fit = false);
+			bool Ignore_igc_error_in_fit = false,
+			int Row_section_number = 1,
+			int Col_section_number = 1,
+			const std::string& Image_identifier="",
+			const std::string& Rsm_support_data_edition="fake-1");
   std::string print_to_string() const;
   ImageCoordinate image_coordinate(double X, double Y, double Z) const;
   blitz::Array<double, 2> image_coordinate(const blitz::Array<double, 1>& X,
@@ -51,6 +55,9 @@ public:
 	   int Max_sample);
   blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
+  std::string tre_string() const;
+  static boost::shared_ptr<RsmRationalPolynomial>
+  read_tre_string(const std::string& Tre_in);
 
   %python_attribute_with_set(number_line_fit, int);
   %python_attribute_with_set(number_sample_fit, int);
@@ -71,6 +78,8 @@ public:
   %python_attribute(line_denominator, const RsmPolynomial&)
   %python_attribute(sample_numerator, const RsmPolynomial&)
   %python_attribute(sample_denominator, const RsmPolynomial&)
+  %python_attribute_with_set(row_section_number, int);
+  %python_attribute_with_set(col_section_number, int);
   %pickle_serialization()
 };
 }

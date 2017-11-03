@@ -1,8 +1,17 @@
 from __future__ import print_function
 from .nitf_field import *
 from .nitf_tre import *
+from geocal_swig import RsmMultiSection
 
-hlp = '''This is the RSMGIA TRE, blah. 
+hlp = '''This is the RSMPIA TRE, Replacement Sensor Model Grid
+Identification. 
+
+This TRE is mostly implemented by the RsmMultiSection available as
+rsm_multi_section. This should be used to set the TRE values, and to
+use the TRE values. This is handled mostly transparently, except that if you
+update rsm_multi_section the raw fields in the TRE might not be
+updated. Call update_raw_field() if you have modified rsm_multi_section
+and wish to access the raw fields.
 
 The field names can be pretty cryptic, but are documented in detail in 
 the NITF TRE documentation (STDI-0002 V4.0, available at 
@@ -11,10 +20,12 @@ http://www.gwg.nga.mil/ntb/baseline/docs/stdi0002).
 There is a table in the main body on page vii that gives the a pointer for 
 where in the document a particular TRE is defined.
 
-RSMGIA is documented at blah.
+RSMGIA is documented at U-6, which points to other documentation, such as
+"Replacement Sensor Model Tagged Record Extensions Specification for NITF
+2.1" (http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)
 '''
 
-_gr0_format = "%21.14E"
+_gr0_format = "%+21.14E"
 
 desc = ["RSMGIA",
         ["iid", "Image Identifier", 80, str, {'optional':True}],
@@ -45,5 +56,8 @@ desc = ["RSMGIA",
         ["grssiz", "Section Size in Rows", 21, float, {'frmt' : _gr0_format}],
         ["gcssiz", "Section Size in Cols", 21, float, {'frmt' : _gr0_format}],
 ]
-TreRSMGIA = create_nitf_tre_structure("TreRSMGIA",desc,hlp=hlp)
+TreRSMGIA = create_nitf_tre_structure("TreRSMGIA",desc,hlp=hlp,
+                        tre_implementation_field="rsm_multi_section",
+                        tre_implementation_class=RsmMultiSection)
+                                      
 

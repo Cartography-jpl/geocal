@@ -5,18 +5,10 @@ using namespace GeoCal;
 using namespace blitz;
 
   
-BOOST_FIXTURE_TEST_SUITE(rsm_grid, RsmFixture)
+BOOST_FIXTURE_TEST_SUITE(rsm_grid, RsmGridFixture)
 BOOST_AUTO_TEST_CASE(basic)
 {
-  RsmGrid r(60,60,20);
-  double hmin = rpc.height_offset - rpc.height_scale;
-  double hmax = rpc.height_offset + rpc.height_scale;
-  double lmin = 0;
-  double smin = 0;
-  double lmax = rpc.line_offset * 2;
-  double smax = rpc.sample_offset * 2;
-  GeodeticConverter cconv;
-  r.fit(*igc, cconv, hmin, hmax, lmin, lmax, smin, smax);
+  RsmGrid& r = *rg_from_rpc;
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
   ImageCoordinate ic = r.image_coordinate(gp.longitude(), gp.latitude(),
 					  gp.height_reference_surface());
@@ -42,21 +34,23 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac, jac_exp,1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(tre)
+{
+  RsmGrid& r = *rg_from_rpc;
+  boost::shared_ptr<RsmGrid> r2 =
+    RsmGrid::read_tre_string(r.tre_string());
+  ImageCoordinate ic_expect = rpc.image_coordinate(gp);
+  ImageCoordinate ic = r2->image_coordinate(gp.longitude(), gp.latitude(),
+   					    gp.height_reference_surface());
+  BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
+  BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
+}
+
 BOOST_AUTO_TEST_CASE(serialize)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<RsmGrid> r =
-    boost::make_shared<RsmGrid>(60,60,20);
-  double hmin = rpc.height_offset - rpc.height_scale;
-  double hmax = rpc.height_offset + rpc.height_scale;
-  double lmin = 0;
-  double smin = 0;
-  double lmax = rpc.line_offset * 2;
-  double smax = rpc.sample_offset * 2;
-  GeodeticConverter cconv;
-  r->fit(*igc, cconv, hmin, hmax, lmin, lmax, smin, smax);
-  std::string d = serialize_write_string(r);
+  std::string d = serialize_write_string(rg_from_rpc);
   if(false)
     std::cerr << d;
   boost::shared_ptr<RsmGrid> rr = 

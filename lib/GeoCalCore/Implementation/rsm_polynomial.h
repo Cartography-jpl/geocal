@@ -16,7 +16,10 @@ namespace GeoCal {
   the performance is like.
 *******************************************************************/
 
-class RsmPolynomial : public Printable<RsmPolynomial> {
+class RsmPolynomial : public boost::noncopyable,
+		      public Printable<RsmPolynomial> {
+  // Could make copyable, we just haven't bothered. But put this in
+  // place so we don't accidentally try to copy
 public:
   RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false,
 		int Max_order=-1);
@@ -57,6 +60,8 @@ public:
 
   void set_rpc_coeff(const boost::array<double, 20>& V);
   void print(std::ostream& Os) const;
+  std::string tre_string() const;
+  void read_tre_string(std::istream& In);
 private:
   blitz::Array<double, 3> coefficient_;
   bool is_denominator_;

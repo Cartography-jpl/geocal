@@ -319,10 +319,10 @@ private:
   }
   boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const Time& Tm) const
-  { return interpolate(*od1, *od2, Tm); }
+  { return QuaternionOrbitData::interpolate(*od1, *od2, Tm); }
   boost::shared_ptr<QuaternionOrbitData> 
   orbit_data(const TimeWithDerivative& Tm) const
-  { return interpolate(*od1, *od2, Tm); }
+  { return QuaternionOrbitData::interpolate(*od1, *od2, Tm); }
   boost::shared_ptr<TimeTable> time_table_;
   boost::shared_ptr<Camera> cam;
   boost::shared_ptr<Refraction> refraction_;

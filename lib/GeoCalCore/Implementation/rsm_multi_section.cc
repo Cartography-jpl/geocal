@@ -2,6 +2,7 @@
 #include "image_ground_connection.h"
 #include "coordinate_converter.h"
 #include "geocal_serialize_support.h"
+#include "tre_support.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -70,12 +71,21 @@ GEOCAL_IMPLEMENT(RsmMultiSection);
 
 RsmMultiSection::RsmMultiSection
 (int Nline, int Nsamp, int Nrow_section, int Ncol_section,
- const RsmBase& Rsm_prototype, int Border)
-  : border_(Border), sec(Nrow_section, Ncol_section)
+ const RsmBase& Rsm_prototype, int Border,
+ const std::string& Image_identifier,
+ const std::string& Rsm_support_data_edition
+)
+  : RsmBase(Image_identifier, Rsm_support_data_edition),
+    border_(Border), sec(Nrow_section, Ncol_section)
 {
   for(int i = 0; i < sec.rows(); ++i)
-    for(int j = 0; j < sec.cols(); ++j)
+    for(int j = 0; j < sec.cols(); ++j) {
       sec(i,j) = Rsm_prototype.clone();
+      sec(i,j)->image_identifier(Image_identifier);
+      sec(i,j)->rsm_suport_data_edition(Rsm_support_data_edition);
+      sec(i,j)->row_section_number(i + 1);
+      sec(i,j)->col_section_number(j + 1);
+    }
   nline_sec = double(Nline) / sec.rows();
   nsamp_sec = double(Nsamp) / sec.cols();
 }
@@ -277,4 +287,79 @@ const RsmBase& RsmMultiSection::section_xyz(double X, double Y, double Z) const
 {
   ImageCoordinate ic = lp.image_coordinate(X,Y,Z);
   return section_ls(ic.line,ic.sample);
+}
+
+static boost::format secformat("%|1$03d|%|2$03d|%|3$03d|%|4$+21.14E|%|5$+21.14E|");
+
+//-----------------------------------------------------------------------
+/// Write to TRE string.
+///
+/// Note also that the TRE has a fixed precision which is less than
+/// the machine precision. Writing a RsmMultiSection and then
+/// reading it from a TRE does *not* in general give the exact same
+/// RsmRationalPolynomial, rather just one that is close.
+///
+/// Note that this is all the fields *except* the CETAG and CEL (the
+/// front two). It is convenient to treat those special. (We can
+/// revisit this in the future if we need to).
+///
+/// We do *not* write out the actually RsmBase that make up the
+/// section, this writing is handled separately.
+//-----------------------------------------------------------------------
+
+std::string RsmMultiSection::tre_string() const
+{
+  std::string res = base_tre_string();
+  res += lp.tre_string();
+  res += str_check_size(secformat % sec.rows() % sec.cols() % sec.size()
+			% nline_sec % nsamp_sec, 3 * 3 + 2 * 21);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Read a TRE string. Note that the TRE does not contain all the
+/// fields we have in a RsmMultiSection. However the fields that
+/// aren't contained are ones used for fitting the RSM, so in practice
+/// this doesn't matter. We just set the various fields to the default
+/// values found in the constructor.
+///
+/// This should have all the TRE *except* for the front CETAG and CEL.
+/// It is convenient to treat these fields as special. (We can
+/// revisit this in the future if we need to).
+///
+/// We do *not* fill in the actual RsmBase stuff in sec, that is
+/// handled separately. We do resize sec, but fill it with null pointers.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<RsmMultiSection>
+RsmMultiSection::read_tre_string(const std::string& Tre_in)
+{
+  boost::shared_ptr<RsmMultiSection> res(new RsmMultiSection);
+  res->border_ = 5;
+  std::stringstream in(Tre_in);
+  res->base_read_tre_string(in);
+  res->lp.read_tre_string(in);
+  int nrow = read_size<int>(in, 3);
+  int ncol= read_size<int>(in, 3);
+  int sz = read_size<int>(in, 3);
+  if(sz != nrow * ncol) {
+    Exception e;
+    e << "Bad total size in TRE. We expect this to be nrow * nsize:\n"
+      << "Nrow: " << nrow << "\n"
+      << "Ncol: " << ncol << "\n"
+      << "Sz:   " << sz << "\n";
+    throw e;
+  }
+  res->sec.resize(nrow, ncol);
+  for(int i = 0; i < nrow; ++i)
+    for(int j = 0; j < ncol; ++j)
+      res->sec(i,j).reset();
+  res->nline_sec = read_size<double>(in, 21);
+  res->nsamp_sec = read_size<double>(in, 21);
+  res->lp.min_line(0);
+  res->lp.max_line((int) floor(res->nline_sec * nrow + 0.5));
+  res->lp.min_sample(0);
+  res->lp.max_sample((int) floor(res->nsamp_sec * ncol + 0.5));
+  check_end_of_stream(in);
+  return res;
 }

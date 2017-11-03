@@ -3,6 +3,7 @@
 #include "coordinate_converter.h"
 #include "geocal_serialize_support.h"
 #include "auto_derivative.h"
+#include "tre_support.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -40,6 +41,22 @@ void RsmGrid::load(Archive & ar, const unsigned int version)
   sample_ = where(sample_no_nan < -9e19,
 		  std::numeric_limits<double>::quiet_NaN(),
 		  sample_no_nan);
+  // Older version didn't have number of digits
+  if(version == 0) {
+    total_number_row_digit_ = 11;
+    total_number_col_digit_ = 11;
+    number_fractional_row_digit_ = 11;
+    number_fractional_col_digit_ = 11;
+    row_section_number_ = 1;
+    col_section_number_ = 1;
+  } else {
+    ar & GEOCAL_NVP_(total_number_row_digit)
+      & GEOCAL_NVP_(total_number_col_digit)
+      & GEOCAL_NVP_(number_fractional_row_digit)
+      & GEOCAL_NVP_(number_fractional_col_digit)
+      & GEOCAL_NVP_(row_section_number)
+      & GEOCAL_NVP_(col_section_number);
+  }    
 }
 
 template<class Archive>
@@ -68,6 +85,15 @@ void RsmGrid::save(Archive & ar, const unsigned int version) const
     & GEOCAL_NVP_(min_sample)
     & GEOCAL_NVP_(max_sample)
     & GEOCAL_NVP_(ignore_igc_error_in_fit);
+  // Older version didn't have number of digits
+  if(version > 0) {
+    ar & GEOCAL_NVP_(total_number_row_digit)
+      & GEOCAL_NVP_(total_number_col_digit)
+      & GEOCAL_NVP_(number_fractional_row_digit)
+      & GEOCAL_NVP_(number_fractional_col_digit)
+      & GEOCAL_NVP_(row_section_number)
+      & GEOCAL_NVP_(col_section_number);
+  }
 }
 
 GEOCAL_SPLIT_IMPLEMENT(RsmGrid);
@@ -99,9 +125,9 @@ ImageCoordinate RsmGrid::image_coordinate
   double j_delta = jv - j;
   int k = (int) floor(kv);
   double k_delta = kv - k;
-  if(i < 0 || i + 1 >= number_x() ||
-     j < 0 || j + 1 >= number_y() ||
-     k < 0 || k + 1 >= number_z())
+  if(i < 0 || i + 1 >= line_.rows() ||
+     j < 0 || j + 1 >= line_.cols() ||
+     k < 0 || k + 1 >= line_.depth())
     return ImageCoordinate(std::numeric_limits<double>::quiet_NaN(),
 			   std::numeric_limits<double>::quiet_NaN());
   // Bilinear interpolation. Should add 3x3 lagrange interpolation at
@@ -289,12 +315,12 @@ void RsmGrid::fit
   x_start_ = min_x;
   y_start_ = min_y;
   z_start_ = min_z;
-  x_delta_ = (max_x - min_x) / (number_x() - 1);
-  y_delta_ = (max_y - min_y) / (number_y() - 1);
+  x_delta_ = (max_x - min_x) / (number_x(0) - 1);
+  y_delta_ = (max_y - min_y) / (number_y(0) - 1);
   z_delta_ = (max_z - min_z) / (number_z() - 1);
-  for(int i = 0; i < number_x(); ++i)
-    for(int j = 0; j < number_y(); ++j)
-      for(int k = 0; k < number_z(); ++k) {
+  for(int i = 0; i < line_.rows(); ++i)
+    for(int j = 0; j < line_.cols(); ++j)
+      for(int k = 0; k < line_.depth(); ++k) {
 	double x = x_start_ + x_delta_ * i;
 	double y = y_start_ + y_delta_ * j;
 	double z = z_start_ + z_delta_ * k;
@@ -340,12 +366,12 @@ void RsmGrid::fit_corr
   x_start_ = Rb.min_x();
   y_start_ = Rb.min_y();
   z_start_ = Rb.min_z();
-  x_delta_ = (Rb.max_x() - Rb.min_x()) / (number_x() - 1);
-  y_delta_ = (Rb.max_y() - Rb.min_y()) / (number_y() - 1);
+  x_delta_ = (Rb.max_x() - Rb.min_x()) / (number_x(0) - 1);
+  y_delta_ = (Rb.max_y() - Rb.min_y()) / (number_y(0) - 1);
   z_delta_ = (Rb.max_z() - Rb.min_z()) / (number_z() - 1);
-  for(int i = 0; i < number_x(); ++i)
-    for(int j = 0; j < number_y(); ++j)
-      for(int k = 0; k < number_z(); ++k) {
+  for(int i = 0; i < line_.rows(); ++i)
+    for(int j = 0; j < line_.cols(); ++j)
+      for(int k = 0; k < line_.depth(); ++k) {
 	double x = x_start_ + x_delta_ * i;
 	double y = y_start_ + y_delta_ * j;
 	double z = z_start_ + z_delta_ * k;
@@ -399,9 +425,9 @@ blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
   AutoDerivative<double> j_delta = jv - j;
   int k = (int) floor(kv.value());
   AutoDerivative<double> k_delta = kv - k;
-  if(i < 0 || i + 1 >= number_x() ||
-     j < 0 || j + 1 >= number_y() ||
-     k < 0 || k + 1 >= number_z()) {
+  if(i < 0 || i + 1 >= line_.rows() ||
+     j < 0 || j + 1 >= line_.cols() ||
+     k < 0 || k + 1 >= line_.depth()) {
     res = 0;
     return res;
   }
@@ -439,11 +465,220 @@ blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
 void RsmGrid::print(std::ostream& Os) const
 {
   Os << "RsmGrid:\n"
-     << "  Number x: " << number_x() << "\n"
-     << "  Number y: " << number_y() << "\n"
+     << "  Number x: " << number_x(0) << "\n"
+     << "  Number y: " << number_y(0) << "\n"
      << "  Number z: " << number_z() << "\n"
      << "  Start:    (" << x_start() << ", " << y_start() << ", " << z_start()
      << ")\n"
      << "  Delta:    (" << x_delta() << ", " << y_delta() << ", " << z_delta()
      << ")\n";
+}
+
+static boost::format secformat("%|1$03d|%|2$03d|%|3$21s|%|4$21s|%|5$1s|");
+static boost::format gplaneformat("%|1$03d|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|%|6$+21.14E|%|7$+21.14E|%|8$+09d|%|9$+09d|%|10$02d|%|11$02d|%|12$1d|%|13$1d|");
+static boost::format igoffformat("%|1$+04d|%|2$+04d|");
+static boost::format szformat("%|1$03d|%|2$03d|");
+
+//-----------------------------------------------------------------------
+/// Write to TRE string.
+///
+/// Note also that the TRE has a fixed precision which is less than
+/// the machine precision. Writing a RsmGrid and then
+/// reading it from a TRE does *not* in general give the exact same
+/// RsmGrid, rather just one that is close.
+///
+/// Note that this is all the fields *except* the CETAG and CEL (the
+/// front two). It is convenient to treat those special. (We can
+/// revisit this in the future if we need to).
+//-----------------------------------------------------------------------
+
+std::string RsmGrid::tre_string() const
+{
+  std::string res = base_tre_string();
+  // Don't fill in the row and column fit error
+  std::string row_fit_error="";
+  std::string col_fit_error="";
+  std::string int_ord = "";
+  res += str_check_size(secformat % row_section_number_ % col_section_number_
+			% row_fit_error % col_fit_error % int_ord,
+			3 + 3 + 21 + 21 + 1);
+  // This is the value that the line/sample are recorded relative
+  // to. The TRE *only* has positive values, so this number needs to
+  // be < the minimum value in the array so we don't need positive numbers.
+  int refrow = int(floor(min(where(blitz_isnan(line_), 0, line_))));
+  int refcol = int(floor(min(where(blitz_isnan(sample_), 0, sample_))));
+  res += str_check_size(gplaneformat % number_z() % z_delta_ % x_delta_
+			% y_delta_ % z_start_ % x_start_ % y_start_
+			% refrow % refcol % total_number_row_digit_
+			% total_number_col_digit_
+			% number_fractional_row_digit_
+			% number_fractional_col_digit_,
+			3 + 6 * 21 + 2 * 9 + 2 * 2 + 2 * 1);
+  for(int i = 1; i < number_z(); ++i) {
+    // Offset held to 0 for now
+    int xoff = 0;
+    int yoff = 0;
+    res += str_check_size(igoffformat % xoff % yoff, 2 * 4);
+  }
+  // The actual grid value size depends on the total_number_rol_digit_
+  // and total_number_col_digit_, so we need to create it here rather
+  // than having a static variable defined.
+  boost::format lnform("%|1$0" +
+       boost::lexical_cast<std::string>(total_number_row_digit_) + "d|");
+  boost::format lnnanform("%|1$" +
+       boost::lexical_cast<std::string>(total_number_row_digit_) + "s|");
+  boost::format smpform("%|1$0" +
+       boost::lexical_cast<std::string>(total_number_col_digit_) + "d|");
+  boost::format smpnanform("%|1$" +
+       boost::lexical_cast<std::string>(total_number_col_digit_) + "s|");
+  double lnscale = pow(10, number_fractional_row_digit_);
+  double smpscale = pow(10, number_fractional_row_digit_);
+  for(int i = 0; i < number_z(); ++i) {
+    res += str_check_size(szformat % number_x(i) % number_y(i), 2 * 3);
+    for(int i1 = 0; i1 < number_x(i); ++i1)
+      for(int i2 = 0; i2 < number_y(i); ++i2) {
+	if(isnan(line_(i1,i2, i)))
+	  res += str_check_size(lnnanform % "", total_number_row_digit_);
+	else
+	  res += str_check_size(lnform %
+		(int) floor((line_(i1,i2, i) - refrow) * lnscale + 0.5),
+		total_number_row_digit_);
+	if(isnan(sample_(i1,i2, i)))
+	  res += str_check_size(smpnanform % "", total_number_col_digit_);
+	else
+	  res += str_check_size(smpform % 
+		(int) floor((sample_(i1,i2, i) - refcol) * smpscale + 0.5),
+		total_number_col_digit_);
+      }
+  }
+  // Don't fill in the row and column fit error
+  // std::string row_fit_error="";
+  // std::string col_fit_error="";
+  // res += str_check_size(secformat % row_section_number_ % col_section_number_
+  // 			% row_fit_error % col_fit_error,
+  // 			3 + 3 + 21 + 21);
+  // res += str_check_size(scaleformat % line_offset_ % sample_offset_ %
+  // 			x_offset_ % y_offset_ % z_offset_, 5 * 21);
+  // res += str_check_size(scaleformat % line_scale_ % sample_scale_ %
+  // 			x_scale_ % y_scale_ % z_scale_, 5 * 21);
+  // res += line_num_.tre_string();
+  // res += line_den_.tre_string();
+  // res += sample_num_.tre_string();
+  // res += sample_den_.tre_string();
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Read a TRE string. 
+///
+/// This should have all the TRE *except* for the front CETAG and CEL.
+/// It is convenient to treat these fields as special. (We can
+/// revisit this in the future if we need to).
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<RsmGrid>
+RsmGrid::read_tre_string(const std::string& Tre_in)
+{
+  // Have check in place for xoffset or number of pixels being
+  // different from one grid level to the next. We don't currently
+  // support this. Only matters for reading RsmGrid that we didn't
+  // generate ourselves. We can add support for this is needed, just
+  // need to work through saving the offset/number and making sure
+  // line_ and sample_ are big enough. Note we use the convention that
+  // line_ doesn't account for xoffset, instead we have an array big
+  // enough for all the data. We pad it with NaN on the outside, and
+  // only trim when we read and write the TRE (we could revisit this
+  // if needed, but seems to make a difference in speed of using the
+  // grid).
+  
+  std::stringstream in(Tre_in);
+  boost::shared_ptr<RsmGrid> res(new RsmGrid);
+  res->base_read_tre_string(in);
+  res->row_section_number_ = read_size<int>(in, 3);
+  res->col_section_number_ = read_size<int>(in, 3);
+  std::string trash = read_size<std::string>(in, 21);
+  trash = read_size<std::string>(in, 21);
+  trash = read_size<std::string>(in, 1);
+  int num_z = read_size<int>(in, 3);
+  res->z_delta_ = read_size<double>(in, 21);
+  res->x_delta_ = read_size<double>(in, 21);
+  res->y_delta_ = read_size<double>(in, 21);
+  res->z_start_ = read_size<double>(in, 21);
+  res->x_start_ = read_size<double>(in, 21);
+  res->y_start_ = read_size<double>(in, 21);
+  int refrow = read_size<int>(in, 9);
+  int refcol = read_size<int>(in, 9);
+  res->total_number_row_digit_ = read_size<int>(in, 2);
+  res->total_number_col_digit_ = read_size<int>(in, 2);
+  res->number_fractional_row_digit_ = read_size<int>(in, 1);
+  res->number_fractional_col_digit_ = read_size<int>(in, 1);
+  for(int i = 1; i < num_z; ++i) {
+    int xoff = read_size<int>(in, 4);
+    int yoff = read_size<int>(in, 4);
+    // Offset held to 0 for now
+    if(xoff != 0 || yoff != 0) {
+      Exception e;
+      e << "We don't currently support a initial x or y offset other than 0\n"
+	<< "Z index:  " << i << "\n"
+	<< "X offset: " << xoff << "\n"
+	<< "Y offset: " << yoff << "\n";
+      throw e;
+    }
+  }
+  int num_x = -1;
+  int num_y = -1;
+  double lnscale = pow(10, res->number_fractional_row_digit_);
+  double smpscale = pow(10, res->number_fractional_row_digit_);
+  for(int i = 0; i < num_z; ++i) {
+    int num_x_new = read_size<int>(in, 3);
+    int num_y_new = read_size<int>(in, 3);
+    if(i == 0) {
+      num_x = num_x_new;
+      num_y = num_y_new;
+      res->line_.resize(num_x, num_y, num_z);
+      res->sample_.resize(num_x, num_y, num_z);
+    }
+    if(num_x_new != num_x || num_y_new != num_y) {
+      Exception e;
+      e << "We don't currently support variable x/y size\n"
+	<< "Z index:  " << i << "\n"
+	<< "Number x: " << num_x_new << "\n"
+	<< "Number y: " << num_y_new << "\n"
+	<< "Number x previous layer: " << num_x << "\n"
+	<< "Number y previous layer: " << num_y << "\n";
+      throw e;
+    }
+    for(int i1 = 0; i1 < num_x; ++i1)
+      for(int i2 = 0; i2 < num_y; ++i2) {
+	res->line_(i1, i2, i) =
+	  (read_size_nan(in, res->total_number_row_digit_) / lnscale) + refrow;
+	res->sample_(i1, i2, i) =
+	  (read_size_nan(in, res->total_number_col_digit_) / smpscale) + refcol;
+      }
+  }
+  // res->nline_fit_ = 20;
+  // res->nsample_fit_ = 20;
+  // res->nheight_fit_ = 20;
+  // res->nsecond_pass_fit_ = 20;
+  // res->ignore_igc_error_in_fit_ = false;
+  // res->row_section_number_ = read_size<int>(in, 3);
+  // res->col_section_number_ = read_size<int>(in, 3);
+  // std::string trash = read_size<std::string>(in, 21);
+  // trash = read_size<std::string>(in, 21);
+  // res->line_offset_ = read_size<double>(in, 21);
+  // res->sample_offset_ = read_size<double>(in, 21);
+  // res->x_offset_ = read_size<double>(in, 21);
+  // res->y_offset_ = read_size<double>(in, 21);
+  // res->z_offset_ = read_size<double>(in, 21);
+  // res->line_scale_ = read_size<double>(in, 21);
+  // res->sample_scale_ = read_size<double>(in, 21);
+  // res->x_scale_ = read_size<double>(in, 21);
+  // res->y_scale_ = read_size<double>(in, 21);
+  // res->z_scale_ = read_size<double>(in, 21);
+  // res->line_num_.read_tre_string(in);
+  // res->line_den_.read_tre_string(in);
+  // res->sample_num_.read_tre_string(in);
+  // res->sample_den_.read_tre_string(in);
+  check_end_of_stream(in);
+  return res;
 }

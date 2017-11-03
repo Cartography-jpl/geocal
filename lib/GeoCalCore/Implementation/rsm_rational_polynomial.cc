@@ -4,6 +4,8 @@
 #include "geocal_rpc.h"
 #include "geocal_gsl_fit.h"
 #include "geocal_serialize_support.h"
+#include "tre_support.h"
+#include <sstream>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -32,6 +34,28 @@ void RsmRationalPolynomial::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(nheight_fit)
     & GEOCAL_NVP_(nsecond_pass_fit)
     & GEOCAL_NVP_(ignore_igc_error_in_fit);
+  // Older version didn't have row_section_number_ or col_section_number_.
+  if(version > 0) {
+    ar & GEOCAL_NVP_(row_section_number)
+      & GEOCAL_NVP_(col_section_number);
+  }
+  boost::serialization::split_member(ar, *this, version);
+}
+
+template<class Archive>
+void RsmRationalPolynomial::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void RsmRationalPolynomial::load(Archive & ar, const unsigned int version)
+{
+  // Older version didn't have row_section_number_ or col_section_number_.
+  if(version == 0) {
+    row_section_number_ = 1;
+    col_section_number_ = 1;
+  }
 }
 
 GEOCAL_IMPLEMENT(RsmRationalPolynomial);
@@ -66,26 +90,34 @@ RsmRationalPolynomial::RsmRationalPolynomial
 (int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
  int Dp_z, int N_max_order, int D_max_order,int Nline_fit,
  int Nsample_fit, int Nheight_fit, int Nsecond_pass_fit,
- bool Ignore_igc_error_in_fit)
-  : line_offset_(0),
-    line_scale_(0),
-    sample_offset_(0),
-    sample_scale_(0),
-    x_offset_(0),
-    x_scale_(0),
-    y_offset_(0),
-    y_scale_(0),
-    z_offset_(0),
-    z_scale_(0),
-    line_num_(Np_x, Np_y, Np_z, false, N_max_order),
-    line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
-    sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
-    sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
-    nline_fit_(Nline_fit),
-    nsample_fit_(Nsample_fit),
-    nheight_fit_(Nheight_fit),
-    nsecond_pass_fit_(Nsecond_pass_fit),
-    ignore_igc_error_in_fit_(Ignore_igc_error_in_fit)
+ bool Ignore_igc_error_in_fit,
+ int Row_section_number,
+ int Col_section_number,
+ const std::string& Image_identifier,
+ const std::string& Rsm_support_data_edition
+ )
+ : RsmBase(Image_identifier, Rsm_support_data_edition),
+     row_section_number_(Row_section_number),
+     col_section_number_(Col_section_number),
+     line_offset_(0),
+     line_scale_(0),
+     sample_offset_(0),
+     sample_scale_(0),
+     x_offset_(0),
+     x_scale_(0),
+     y_offset_(0),
+     y_scale_(0),
+     z_offset_(0),
+     z_scale_(0),
+     line_num_(Np_x, Np_y, Np_z, false, N_max_order),
+     line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
+     sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
+     sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
+     nline_fit_(Nline_fit),
+     nsample_fit_(Nsample_fit),
+     nheight_fit_(Nheight_fit),
+     nsecond_pass_fit_(Nsecond_pass_fit),
+     ignore_igc_error_in_fit_(Ignore_igc_error_in_fit)
 {
 }
 
@@ -281,10 +313,10 @@ void RsmRationalPolynomial::fit_data
   Array<double, 2> smp_jac(smp_den_jac.rows(), smp_den_jac.cols() +
 			   smp_num_jac.cols());
   ln_jac(ra, Range(0, ln_num_jac.cols() - 1)) = ln_num_jac;
-  ln_jac(ra, Range(ln_num_jac.cols(), Range::toEnd)) =
+  ln_jac(ra, Range(ln_num_jac.cols(), toEnd)) =
     -ln_lhs(i1) * ln_den_jac;
   smp_jac(ra, Range(0, smp_num_jac.cols() - 1)) = smp_num_jac;
-  smp_jac(ra, Range(smp_num_jac.cols(), Range::toEnd)) =
+  smp_jac(ra, Range(smp_num_jac.cols(), toEnd)) =
     -smp_lhs(i1) * smp_den_jac;
   GslMatrix cov;
   GslVector ln_c;
@@ -295,11 +327,11 @@ void RsmRationalPolynomial::fit_data
   line_num_.fitted_coefficent(ln_c.blitz_array()(Range(0,
 						       ln_num_jac.cols()-1)));
   line_den_.fitted_coefficent(ln_c.blitz_array()(Range(ln_num_jac.cols(),
-						       Range::toEnd)));
+						       toEnd)));
   sample_num_.fitted_coefficent(smp_c.blitz_array()(Range(0,
 					       smp_num_jac.cols()-1)));
   sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
-					       Range::toEnd)));
+					       toEnd)));
 }
 
 //-----------------------------------------------------------------------
@@ -446,4 +478,85 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
      << "  Nsample fit:   " << nsample_fit_ << "\n"
      << "  Nheight fit:   " << nheight_fit_ << "\n"
      << "  Nsecond pass fit: " << nsecond_pass_fit_ << "\n";
+}
+
+static boost::format secformat("%|1$03d|%|2$03d|%|3$21s|%|4$21s|");
+static boost::format scaleformat("%|1$+21.14E|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|");
+
+//-----------------------------------------------------------------------
+/// Write to TRE string.
+///
+/// Note also that the TRE has a fixed precision which is less than
+/// the machine precision. Writing a RsmRationalPolynomial and then
+/// reading it from a TRE does *not* in general give the exact same
+/// RsmRationalPolynomial, rather just one that is close.
+///
+/// Note that this is all the fields *except* the CETAG and CEL (the
+/// front two). It is convenient to treat those special. (We can
+/// revisit this in the future if we need to).
+//-----------------------------------------------------------------------
+
+std::string RsmRationalPolynomial::tre_string() const
+{
+  std::string res = base_tre_string();
+  // Don't fill in the row and column fit error
+  std::string row_fit_error="";
+  std::string col_fit_error="";
+  res += str_check_size(secformat % row_section_number_ % col_section_number_
+			% row_fit_error % col_fit_error,
+			3 + 3 + 21 + 21);
+  res += str_check_size(scaleformat % line_offset_ % sample_offset_ %
+			x_offset_ % y_offset_ % z_offset_, 5 * 21);
+  res += str_check_size(scaleformat % line_scale_ % sample_scale_ %
+			x_scale_ % y_scale_ % z_scale_, 5 * 21);
+  res += line_num_.tre_string();
+  res += line_den_.tre_string();
+  res += sample_num_.tre_string();
+  res += sample_den_.tre_string();
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Read a TRE string. Note that the TRE does not contain all the
+/// fields we have in a RsmRationalPolynomial. However the fields that
+/// aren't contained are ones used for fitting the RSM, so in practice
+/// this doesn't matter. We just set the various fields to the default
+/// values found in the constructor.
+///
+/// This should have all the TRE *except* for the front CETAG and CEL.
+/// It is convenient to treat these fields as special. (We can
+/// revisit this in the future if we need to).
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<RsmRationalPolynomial>
+RsmRationalPolynomial::read_tre_string(const std::string& Tre_in)
+{
+  boost::shared_ptr<RsmRationalPolynomial> res(new RsmRationalPolynomial);
+  res->nline_fit_ = 20;
+  res->nsample_fit_ = 20;
+  res->nheight_fit_ = 20;
+  res->nsecond_pass_fit_ = 20;
+  res->ignore_igc_error_in_fit_ = false;
+  std::stringstream in(Tre_in);
+  res->base_read_tre_string(in);
+  res->row_section_number_ = read_size<int>(in, 3);
+  res->col_section_number_ = read_size<int>(in, 3);
+  std::string trash = read_size<std::string>(in, 21);
+  trash = read_size<std::string>(in, 21);
+  res->line_offset_ = read_size<double>(in, 21);
+  res->sample_offset_ = read_size<double>(in, 21);
+  res->x_offset_ = read_size<double>(in, 21);
+  res->y_offset_ = read_size<double>(in, 21);
+  res->z_offset_ = read_size<double>(in, 21);
+  res->line_scale_ = read_size<double>(in, 21);
+  res->sample_scale_ = read_size<double>(in, 21);
+  res->x_scale_ = read_size<double>(in, 21);
+  res->y_scale_ = read_size<double>(in, 21);
+  res->z_scale_ = read_size<double>(in, 21);
+  res->line_num_.read_tre_string(in);
+  res->line_den_.read_tre_string(in);
+  res->sample_num_.read_tre_string(in);
+  res->sample_den_.read_tre_string(in);
+  check_end_of_stream(in);
+  return res;
 }

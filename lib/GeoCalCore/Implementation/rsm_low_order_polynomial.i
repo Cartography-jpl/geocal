@@ -39,6 +39,10 @@ public:
 	   double Min_height, double Max_height,
 	   int Min_line, int Max_line, int Min_sample,
 	   int Max_sample);
+  %python_attribute_with_set(min_line, int);
+  %python_attribute_with_set(max_line, int);
+  %python_attribute_with_set(min_sample, int);
+  %python_attribute_with_set(max_sample, int);
   %python_attribute_with_set(number_line_fit, int);
   %python_attribute_with_set(number_sample_fit, int);
   %python_attribute_with_set(number_height_fit, int);

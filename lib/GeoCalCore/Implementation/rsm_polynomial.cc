@@ -1,6 +1,6 @@
 #include "rsm_polynomial.h"
 #include "geocal_serialize_support.h"
-
+#include "tre_support.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -349,4 +349,66 @@ void RsmPolynomial::print(std::ostream& Os) const
      << "  Np z:           " << coefficient_.depth()-1 << "\n"
      << "  Is denominator: " << is_denominator_ << "\n"
      << "  Max order:      "  << max_order_ << "\n";
+}
+
+static boost::format sizeformat("%|1$01d|%|2$01d|%|3$01d|%|4$03d|");
+static boost::format coeffformat("%|1$+21.14E|");
+
+//-----------------------------------------------------------------------
+/// Write out the polynomial data as a TRE string. Note that you don't
+/// generally use this directly, rather this is used by
+/// RsmRationalPolynomial to create a RSMPCA TRE.
+///
+/// Note also that the TRE has a fixed precision which is less than
+/// the machine precision. Writing a RsmPolynomial and then reading it
+/// from a TRE does *not* in general give the exact same
+/// RsmPolynomial, rather just one that is close.
+//-----------------------------------------------------------------------
+
+std::string RsmPolynomial::tre_string() const
+{
+  if(coefficient_.rows() - 1 > 5 ||
+     coefficient_.cols() - 1 > 5 ||
+     coefficient_.depth() - 1 > 5)
+    throw Exception("The maximum polynomial order supported by the NITF TRE is 5");
+  std::string s1 = str_check_size(sizeformat
+				  % (coefficient_.rows() - 1)
+				  % (coefficient_.cols() - 1)
+				  % (coefficient_.depth() - 1)
+				  % coefficient_.size(),
+   				  1 + 1 + 1 + 3);
+  for(int i = 0; i < coefficient_.rows(); ++i)
+    for(int j = 0; j < coefficient_.cols(); ++j)
+      for(int k = 0; k < coefficient_.depth(); ++k)
+	s1 += str_check_size(coeffformat % coefficient_(i,j,k), 21);
+  return s1;
+}
+
+//-----------------------------------------------------------------------
+/// Read a TRE string to create a RsmPolynomial.
+///
+/// Not all the fields are saved in a TRE. In practice, this isn't a
+/// problem because we only use the extra fields when initially
+/// fitting the polynomial. Once we are reading it from a TRE, the
+/// data should be fixed. Because we have to pick something to set
+/// these values to, we just set is_denominator_ to false, and max_order_
+/// to -1.
+//-----------------------------------------------------------------------
+
+void RsmPolynomial::read_tre_string(std::istream& In)
+{
+  is_denominator_ = false;
+  max_order_ = -1;
+  int nx = read_size<int>(In, 1);
+  int ny = read_size<int>(In, 1);
+  int nz = read_size<int>(In, 1);
+  int total_size = read_size<int>(In, 3);
+  if(total_size != (nx + 1) * (ny + 1) * (nz + 1))
+    throw Exception("Total size should be the product of nx, ny, and nz");
+  coefficient_.resize(nx + 1, ny + 1, nz + 1);
+  fitted_coefficent_size = total_size;
+  for(int i = 0; i < coefficient_.rows(); ++i)
+    for(int j = 0; j < coefficient_.cols(); ++j)
+      for(int k = 0; k < coefficient_.depth(); ++k)
+	coefficient_(i,j,k) = read_size<double>(In, 21);
 }

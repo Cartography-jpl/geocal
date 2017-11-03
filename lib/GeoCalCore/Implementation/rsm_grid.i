@@ -30,8 +30,10 @@ public:
   %python_attribute_with_set(ignore_igc_error_in_fit, bool);
   %python_attribute(line_grid, blitz::Array<double, 3>);
   %python_attribute(sample_grid, blitz::Array<double, 3>);
-  %python_attribute(number_x, int);
-  %python_attribute(number_y, int);
+  int number_x(int Zindex) const;
+  int number_y(int Zindex) const;
+  int x_offset(int Zindex) const;
+  int y_offset(int Zindex) const;
   %python_attribute(number_z, int);
   %python_attribute(x_start, double);
   %python_attribute(x_delta, double);
@@ -39,6 +41,13 @@ public:
   %python_attribute(y_delta, double);
   %python_attribute(z_start, double);
   %python_attribute(z_delta, double);
+  %python_attribute_with_set(total_number_row_digit, int);
+  %python_attribute_with_set(total_number_col_digit, int);
+  %python_attribute_with_set(number_fractional_row_digit, int);
+  %python_attribute_with_set(number_fractional_col_digit, int);
+  std::string tre_string() const;
+  static boost::shared_ptr<RsmGrid>
+  read_tre_string(const std::string& Tre_in);
   %pickle_serialization()
 };
 }

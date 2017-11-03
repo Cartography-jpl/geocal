@@ -135,6 +135,10 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_rsm_rp_plus_grid)(void);
   INIT_TYPE INIT_FUNC(_rsm_low_order_polynomial)(void);
   INIT_TYPE INIT_FUNC(_rsm_rational_polynomial)(void);
+  INIT_TYPE INIT_FUNC(_rsm_id)(void);
+  INIT_TYPE INIT_FUNC(_rsm_direct_covariance)(void);
+  INIT_TYPE INIT_FUNC(_rsm_indirect_covariance)(void);
+  INIT_TYPE INIT_FUNC(_rsm_adjustable_parameter)(void);
   INIT_TYPE INIT_FUNC(_rsm_multi_section)(void);
   INIT_TYPE INIT_FUNC(_rsm)(void);
   INIT_TYPE INIT_FUNC(_local_rectangular_coordinate)(void);
@@ -344,6 +348,10 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_rsm_rp_plus_grid", INIT_FUNC(_rsm_rp_plus_grid));
   INIT_MODULE(module, "_rsm_low_order_polynomial", INIT_FUNC(_rsm_low_order_polynomial));
   INIT_MODULE(module, "_rsm_rational_polynomial", INIT_FUNC(_rsm_rational_polynomial));
+  INIT_MODULE(module, "_rsm_id", INIT_FUNC(_rsm_id));
+  INIT_MODULE(module, "_rsm_direct_covariance", INIT_FUNC(_rsm_direct_covariance));
+  INIT_MODULE(module, "_rsm_indirect_covariance", INIT_FUNC(_rsm_indirect_covariance));
+  INIT_MODULE(module, "_rsm_adjustable_parameter", INIT_FUNC(_rsm_adjustable_parameter));
   INIT_MODULE(module, "_rsm_multi_section", INIT_FUNC(_rsm_multi_section));
   INIT_MODULE(module, "_rsm", INIT_FUNC(_rsm));
   INIT_MODULE(module, "_local_rectangular_coordinate", INIT_FUNC(_local_rectangular_coordinate));

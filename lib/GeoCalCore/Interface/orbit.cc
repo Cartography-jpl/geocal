@@ -1116,7 +1116,7 @@ void Orbit::interpolate(const boost::array<double, 3>& P1,
 		   const boost::array<double, 3>& V2,
 		   double toffset, double tspace,
 		   boost::array<double, 3>& Pres,
-		   boost::array<double, 3>& Vres) const
+		   boost::array<double, 3>& Vres)
 {
   ::interpolate(P1, V1, P2, V2, toffset, tspace, Pres, Vres);
 }
@@ -1127,7 +1127,7 @@ void Orbit::interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
 		   const boost::array<AutoDerivative<double>, 3>& V2,
 		   const AutoDerivative<double>& toffset, double tspace,
 		   boost::array<AutoDerivative<double>, 3>& Pres,
-		   boost::array<AutoDerivative<double>, 3>& Vres) const
+		   boost::array<AutoDerivative<double>, 3>& Vres)
 {
   ::interpolate(P1, V1, P2, V2, toffset, tspace, Pres, Vres);
 }
@@ -1146,7 +1146,7 @@ void Orbit::interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
 boost::math::quaternion<double> Orbit::interpolate(
               const boost::math::quaternion<double>& Q1, 
               const boost::math::quaternion<double>& Q2,
-	      double toffset, double tspace) const
+	      double toffset, double tspace)
 {
   return interpolate_quaternion_rotation(Q1, Q2, toffset, tspace);
 }
@@ -1154,7 +1154,7 @@ boost::math::quaternion<double> Orbit::interpolate(
 boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
               const boost::math::quaternion<AutoDerivative<double> >& Q1, 
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
-	      const AutoDerivative<double>& toffset, double tspace) const
+	      const AutoDerivative<double>& toffset, double tspace)
 {
   return interpolate_quaternion_rotation(Q1, Q2, toffset, tspace);
 }
@@ -1223,9 +1223,9 @@ void QuaternionOrbitData::fill_in_ci_to_cf() const
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<QuaternionOrbitData>
- GeoCal::interpolate(const QuaternionOrbitData& t1, 
-		     const QuaternionOrbitData& t2,
-		     const TimeWithDerivative& tm)
+ QuaternionOrbitData::interpolate(const QuaternionOrbitData& t1, 
+				  const QuaternionOrbitData& t2,
+				  const TimeWithDerivative& tm)
 {
   if(tm.value() < t1.time() || tm.value() > t2.time())
     throw Exception("tm needs to be between t1 and t2");
@@ -1301,9 +1301,10 @@ boost::shared_ptr<QuaternionOrbitData>
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<QuaternionOrbitData>
- GeoCal::interpolate(const QuaternionOrbitData& t1, 
-		     const QuaternionOrbitData& t2,
-		     const Time& tm)
+QuaternionOrbitData::interpolate
+(const QuaternionOrbitData& t1, 
+ const QuaternionOrbitData& t2,
+ const Time& tm)
 {
   if(tm < t1.time() || tm > t2.time())
     throw Exception("tm needs to be between t1 and t2");

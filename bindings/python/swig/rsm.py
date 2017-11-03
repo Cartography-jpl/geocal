@@ -301,6 +301,62 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         return _rsm.Rsm_compare_igc(self, Igc, Number_line_spacing, Number_sample_spacing, Height)
 
 
+    def _v_rsm_id(self):
+        """
+
+        const boost::shared_ptr<RsmId>& GeoCal::Rsm::rsm_id() const
+
+        """
+        return _rsm.Rsm__v_rsm_id(self)
+
+
+    @property
+    def rsm_id(self):
+        return self._v_rsm_id()
+
+
+    def _v_rsm_direct_covariance(self):
+        """
+
+        const boost::shared_ptr<RsmDirectCovariance>& GeoCal::Rsm::rsm_direct_covariance() const
+
+        """
+        return _rsm.Rsm__v_rsm_direct_covariance(self)
+
+
+    @property
+    def rsm_direct_covariance(self):
+        return self._v_rsm_direct_covariance()
+
+
+    def _v_rsm_indirect_covariance(self):
+        """
+
+        const boost::shared_ptr<RsmIndirectCovariance>& GeoCal::Rsm::rsm_indirect_covariance() const
+
+        """
+        return _rsm.Rsm__v_rsm_indirect_covariance(self)
+
+
+    @property
+    def rsm_indirect_covariance(self):
+        return self._v_rsm_indirect_covariance()
+
+
+    def _v_rsm_adjustable_parameter(self):
+        """
+
+        const boost::shared_ptr<RsmAdjustableParameter>& GeoCal::Rsm::rsm_adjustable_parameter() const
+
+        """
+        return _rsm.Rsm__v_rsm_adjustable_parameter(self)
+
+
+    @property
+    def rsm_adjustable_parameter(self):
+        return self._v_rsm_adjustable_parameter()
+
+
     def _v_rsm_base(self):
         """
 
@@ -340,6 +396,10 @@ Rsm.image_coordinate = new_instancemethod(_rsm.Rsm_image_coordinate, None, Rsm)
 Rsm.image_coordinate_jacobian = new_instancemethod(_rsm.Rsm_image_coordinate_jacobian, None, Rsm)
 Rsm.fit = new_instancemethod(_rsm.Rsm_fit, None, Rsm)
 Rsm.compare_igc = new_instancemethod(_rsm.Rsm_compare_igc, None, Rsm)
+Rsm._v_rsm_id = new_instancemethod(_rsm.Rsm__v_rsm_id, None, Rsm)
+Rsm._v_rsm_direct_covariance = new_instancemethod(_rsm.Rsm__v_rsm_direct_covariance, None, Rsm)
+Rsm._v_rsm_indirect_covariance = new_instancemethod(_rsm.Rsm__v_rsm_indirect_covariance, None, Rsm)
+Rsm._v_rsm_adjustable_parameter = new_instancemethod(_rsm.Rsm__v_rsm_adjustable_parameter, None, Rsm)
 Rsm._v_rsm_base = new_instancemethod(_rsm.Rsm__v_rsm_base, None, Rsm)
 Rsm._v_coordinate_converter = new_instancemethod(_rsm.Rsm__v_coordinate_converter, None, Rsm)
 Rsm_swigregister = _rsm.Rsm_swigregister

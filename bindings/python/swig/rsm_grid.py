@@ -216,7 +216,12 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
     def __init__(self, N_x, N_y, N_z, Ignore_igc_error_in_fit=False):
         """
 
-        GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false)
+        GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false, int
+        Total_number_row_digit=11, int Total_number_col_digit=11, int
+        Number_fractional_row_digit=2, int Number_fractional_col_digit=2, int
+        Row_section_number=1, int Col_section_number=1, const std::string
+        &Image_identifier="", const std::string
+        &Rsm_support_data_edition="fake-1")
 
         """
         _rsm_grid.RsmGrid_swiginit(self, _rsm_grid.new_RsmGrid(N_x, N_y, N_z, Ignore_igc_error_in_fit))
@@ -277,32 +282,46 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         return self._v_sample_grid()
 
 
-    def _v_number_x(self):
+    def number_x(self, Zindex):
         """
 
-        int GeoCal::RsmGrid::number_x() const
-        Number of X values in grid. 
+        int GeoCal::RsmGrid::number_x(int Zindex) const
+        Number of X values in grid.
+
+        This can potentially depend on the z axis value. 
         """
-        return _rsm_grid.RsmGrid__v_number_x(self)
+        return _rsm_grid.RsmGrid_number_x(self, Zindex)
 
 
-    @property
-    def number_x(self):
-        return self._v_number_x()
-
-
-    def _v_number_y(self):
+    def number_y(self, Zindex):
         """
 
-        int GeoCal::RsmGrid::number_y() const
-        Number of Y values in grid. 
+        int GeoCal::RsmGrid::number_y(int Zindex) const
+        Number of Y values in grid.
+
+        This can potentially depend on the z axis value. 
         """
-        return _rsm_grid.RsmGrid__v_number_y(self)
+        return _rsm_grid.RsmGrid_number_y(self, Zindex)
 
 
-    @property
-    def number_y(self):
-        return self._v_number_y()
+    def x_offset(self, Zindex):
+        """
+
+        int GeoCal::RsmGrid::x_offset(int Zindex) const
+        Offset in X pixels of particular z_index grid relative to the initial
+        grid. 
+        """
+        return _rsm_grid.RsmGrid_x_offset(self, Zindex)
+
+
+    def y_offset(self, Zindex):
+        """
+
+        int GeoCal::RsmGrid::y_offset(int Zindex) const
+        Offset in Y pixels of particular z_index grid relative to the initial
+        grid. 
+        """
+        return _rsm_grid.RsmGrid_y_offset(self, Zindex)
 
 
     def _v_number_z(self):
@@ -323,7 +342,9 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         """
 
         double GeoCal::RsmGrid::x_start() const
-        First X value in grid. 
+        First X value in grid.
+
+        This is for the first index, use x_offset for other z index values. 
         """
         return _rsm_grid.RsmGrid__v_x_start(self)
 
@@ -403,6 +424,110 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         return self._v_z_delta()
 
 
+    def _v_total_number_row_digit(self, *args):
+        """
+
+        void GeoCal::RsmGrid::total_number_row_digit(int v)
+
+        """
+        return _rsm_grid.RsmGrid__v_total_number_row_digit(self, *args)
+
+
+    @property
+    def total_number_row_digit(self):
+        return self._v_total_number_row_digit()
+
+    @total_number_row_digit.setter
+    def total_number_row_digit(self, value):
+      self._v_total_number_row_digit(value)
+
+
+    def _v_total_number_col_digit(self, *args):
+        """
+
+        void GeoCal::RsmGrid::total_number_col_digit(int v)
+
+        """
+        return _rsm_grid.RsmGrid__v_total_number_col_digit(self, *args)
+
+
+    @property
+    def total_number_col_digit(self):
+        return self._v_total_number_col_digit()
+
+    @total_number_col_digit.setter
+    def total_number_col_digit(self, value):
+      self._v_total_number_col_digit(value)
+
+
+    def _v_number_fractional_row_digit(self, *args):
+        """
+
+        void GeoCal::RsmGrid::number_fractional_row_digit(int v)
+
+        """
+        return _rsm_grid.RsmGrid__v_number_fractional_row_digit(self, *args)
+
+
+    @property
+    def number_fractional_row_digit(self):
+        return self._v_number_fractional_row_digit()
+
+    @number_fractional_row_digit.setter
+    def number_fractional_row_digit(self, value):
+      self._v_number_fractional_row_digit(value)
+
+
+    def _v_number_fractional_col_digit(self, *args):
+        """
+
+        void GeoCal::RsmGrid::number_fractional_col_digit(int v)
+
+        """
+        return _rsm_grid.RsmGrid__v_number_fractional_col_digit(self, *args)
+
+
+    @property
+    def number_fractional_col_digit(self):
+        return self._v_number_fractional_col_digit()
+
+    @number_fractional_col_digit.setter
+    def number_fractional_col_digit(self, value):
+      self._v_number_fractional_col_digit(value)
+
+
+    def tre_string(self):
+        """
+
+        std::string RsmGrid::tre_string() const
+        Write to TRE string.
+
+        Note also that the TRE has a fixed precision which is less than the
+        machine precision. Writing a RsmGrid and then reading it from a TRE
+        does not in general give the exact same RsmGrid, rather just one that
+        is close.
+
+        Note that this is all the fields except the CETAG and CEL (the front
+        two). It is convenient to treat those special. (We can revisit this in
+        the future if we need to). 
+        """
+        return _rsm_grid.RsmGrid_tre_string(self)
+
+
+    def read_tre_string(Tre_in):
+        """
+
+        boost::shared_ptr< RsmGrid > RsmGrid::read_tre_string(const std::string &Tre_in)
+        Read a TRE string.
+
+        This should have all the TRE except for the front CETAG and CEL. It is
+        convenient to treat these fields as special. (We can revisit this in
+        the future if we need to). 
+        """
+        return _rsm_grid.RsmGrid_read_tre_string(Tre_in)
+
+    read_tre_string = staticmethod(read_tre_string)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -411,8 +536,10 @@ RsmGrid.fit_corr = new_instancemethod(_rsm_grid.RsmGrid_fit_corr, None, RsmGrid)
 RsmGrid._v_ignore_igc_error_in_fit = new_instancemethod(_rsm_grid.RsmGrid__v_ignore_igc_error_in_fit, None, RsmGrid)
 RsmGrid._v_line_grid = new_instancemethod(_rsm_grid.RsmGrid__v_line_grid, None, RsmGrid)
 RsmGrid._v_sample_grid = new_instancemethod(_rsm_grid.RsmGrid__v_sample_grid, None, RsmGrid)
-RsmGrid._v_number_x = new_instancemethod(_rsm_grid.RsmGrid__v_number_x, None, RsmGrid)
-RsmGrid._v_number_y = new_instancemethod(_rsm_grid.RsmGrid__v_number_y, None, RsmGrid)
+RsmGrid.number_x = new_instancemethod(_rsm_grid.RsmGrid_number_x, None, RsmGrid)
+RsmGrid.number_y = new_instancemethod(_rsm_grid.RsmGrid_number_y, None, RsmGrid)
+RsmGrid.x_offset = new_instancemethod(_rsm_grid.RsmGrid_x_offset, None, RsmGrid)
+RsmGrid.y_offset = new_instancemethod(_rsm_grid.RsmGrid_y_offset, None, RsmGrid)
 RsmGrid._v_number_z = new_instancemethod(_rsm_grid.RsmGrid__v_number_z, None, RsmGrid)
 RsmGrid._v_x_start = new_instancemethod(_rsm_grid.RsmGrid__v_x_start, None, RsmGrid)
 RsmGrid._v_x_delta = new_instancemethod(_rsm_grid.RsmGrid__v_x_delta, None, RsmGrid)
@@ -420,8 +547,25 @@ RsmGrid._v_y_start = new_instancemethod(_rsm_grid.RsmGrid__v_y_start, None, RsmG
 RsmGrid._v_y_delta = new_instancemethod(_rsm_grid.RsmGrid__v_y_delta, None, RsmGrid)
 RsmGrid._v_z_start = new_instancemethod(_rsm_grid.RsmGrid__v_z_start, None, RsmGrid)
 RsmGrid._v_z_delta = new_instancemethod(_rsm_grid.RsmGrid__v_z_delta, None, RsmGrid)
+RsmGrid._v_total_number_row_digit = new_instancemethod(_rsm_grid.RsmGrid__v_total_number_row_digit, None, RsmGrid)
+RsmGrid._v_total_number_col_digit = new_instancemethod(_rsm_grid.RsmGrid__v_total_number_col_digit, None, RsmGrid)
+RsmGrid._v_number_fractional_row_digit = new_instancemethod(_rsm_grid.RsmGrid__v_number_fractional_row_digit, None, RsmGrid)
+RsmGrid._v_number_fractional_col_digit = new_instancemethod(_rsm_grid.RsmGrid__v_number_fractional_col_digit, None, RsmGrid)
+RsmGrid.tre_string = new_instancemethod(_rsm_grid.RsmGrid_tre_string, None, RsmGrid)
 RsmGrid_swigregister = _rsm_grid.RsmGrid_swigregister
 RsmGrid_swigregister(RsmGrid)
+
+def RsmGrid_read_tre_string(Tre_in):
+    """
+
+    boost::shared_ptr< RsmGrid > RsmGrid::read_tre_string(const std::string &Tre_in)
+    Read a TRE string.
+
+    This should have all the TRE except for the front CETAG and CEL. It is
+    convenient to treat these fields as special. (We can revisit this in
+    the future if we need to). 
+    """
+    return _rsm_grid.RsmGrid_read_tre_string(Tre_in)
 
 
 

@@ -178,6 +178,14 @@ public:
   sc_look_vector(const CartesianFixedLookVector& Cf) const;
   virtual ScLookVectorWithDerivative 
   sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
+  static boost::shared_ptr<QuaternionOrbitData>
+  interpolate(const QuaternionOrbitData& t1, 
+	      const QuaternionOrbitData& t2, 
+	      const TimeWithDerivative& tm);
+  static boost::shared_ptr<QuaternionOrbitData>
+  interpolate(const QuaternionOrbitData& t1, 
+	      const QuaternionOrbitData& t2, 
+	      const Time& tm);
   %python_attribute_with_set(sc_to_ci, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_ci_with_derivative, 
 		    boost::math::quaternion<AutoDerivative<double> >)
@@ -288,39 +296,68 @@ public:
 			     ArrayAd<double, 1>);
   %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
   %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
-//   %extend {
-//     std::string serialize_base_class() const
-//     {
-// #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-//       std::ostringstream os;
-//       boost::archive::polymorphic_binary_oarchive oa(os);
-//       oa << boost::serialization::make_nvp("Orbit", boost::serialization::base_object<Orbit>(*this));
-//       return os.str();
-// #else
-//       throw GeoCal::Exception("GeoCal was not built with boost::serialization support");
-// #endif
-//     }
-//     void serialize_base_class(const std::string& Data) const
-//     {
-// #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-//       std::istringstream is(Data);
-//       boost::archive::polymorphic_binary_iarchive ia(is);
-//       oa >> boost::serialization::make_nvp("Orbit", boost::serialization::base_object<Orbit>(*this));
-// #else
-//       throw GeoCal::Exception("GeoCal was not built with boost::serialization support");
-// #endif
-//     }
-//   }
-protected:
-  void notify_update_do(const Orbit& Self);
-  boost::math::quaternion<double> interpolate(
+  // boost::array is kind of a pain to work with for python, so
+  // rewrite this for blitz array.
+  %extend {
+    static void interpolate(const blitz::Array<double, 1>& P1,
+			    const blitz::Array<double, 1>& V1,
+			    const blitz::Array<double, 1>& P2,
+			    const blitz::Array<double, 1>& V2,
+			    double toffset, double tspace,
+			    blitz::Array<double, 1>& OUTPUT1,
+			    blitz::Array<double, 1>& OUTPUT2)
+    { if(P1.rows() != 3 || V1.rows() !=3 || P2.rows() != 3 || V2.rows() !=3)
+	throw GeoCal::Exception("Array size must be exactly 3");
+      boost::array<double, 3> p1, v1, p2, v2, p, v;
+      for(int i = 0; i < 3; ++i) {
+	p1[i] = P1(i);
+	p2[i] = P2(i);
+	v1[i] = V1(i);
+	v2[i] = V2(i);
+      }
+      GeoCal::Orbit::interpolate(p1, v1, p2, v2, toffset, tspace, p, v);
+      OUTPUT1.resize(3);
+      OUTPUT2.resize(3);
+      for(int i = 0; i < 3; ++i) {
+	OUTPUT1(i) = p[i];
+	OUTPUT2(i) = v[i];
+      }
+    }
+    static void interpolate(const blitz::Array<GeoCal::AutoDerivative<double>, 1>& P1,
+			    const blitz::Array<GeoCal::AutoDerivative<double>, 1>& V1,
+			    const blitz::Array<GeoCal::AutoDerivative<double>, 1>& P2,
+			    const blitz::Array<GeoCal::AutoDerivative<double>, 1>& V2,
+			    const GeoCal::AutoDerivative<double> toffset, double tspace,
+			    blitz::Array<GeoCal::AutoDerivative<double>, 1>& OUTPUT1,
+			    blitz::Array<GeoCal::AutoDerivative<double>, 1>& OUTPUT2)
+    { if(P1.rows() != 3 || V1.rows() !=3 || P2.rows() != 3 || V2.rows() !=3)
+	throw GeoCal::Exception("Array size must be exactly 3");
+      boost::array<GeoCal::AutoDerivative<double>, 3> p1, v1, p2, v2, p, v;
+      for(int i = 0; i < 3; ++i) {
+	p1[i] = P1(i);
+	p2[i] = P2(i);
+	v1[i] = V1(i);
+	v2[i] = V2(i);
+      }
+      GeoCal::Orbit::interpolate(p1, v1, p2, v2, toffset, tspace, p, v);
+      OUTPUT1.resize(3);
+      OUTPUT2.resize(3);
+      for(int i = 0; i < 3; ++i) {
+	OUTPUT1(i) = p[i];
+	OUTPUT2(i) = v[i];
+      }
+    }
+  }
+  static boost::math::quaternion<double> interpolate(
               const boost::math::quaternion<double>& Q1, 
               const boost::math::quaternion<double>& Q2,
-	      double toffset, double tspace) const;
-  boost::math::quaternion<AutoDerivative<double> > interpolate(
+	      double toffset, double tspace);
+  static boost::math::quaternion<AutoDerivative<double> > interpolate(
               const boost::math::quaternion<AutoDerivative<double> >& Q1, 
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
-	      const AutoDerivative<double>& toffset, double tspace) const;
+	      const AutoDerivative<double>& toffset, double tspace);
+protected:
+  void notify_update_do(const Orbit& Self);
 };
 
 %{

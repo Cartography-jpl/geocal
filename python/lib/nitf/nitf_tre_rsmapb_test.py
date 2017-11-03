@@ -3,19 +3,16 @@ from .nitf_tre_rsmapb import *
 from test_support import *
 import io, six
 
-def test_tre_rsmapb():
-
-    gsapids = ['OFFX', 'OFFY', 'OFFZ', 'ROTX', 'ROTY', 'ROTZ', 'SCAL',
+_gsapids = ['OFFX', 'OFFY', 'OFFZ', 'ROTX', 'ROTY', 'ROTZ', 'SCAL',
                'XRTX', 'XRTY', 'XRTZ', 'YRTZ', 'YRTY', 'YRTZ',
                'ZRTX', 'ZRTY', 'ZRTZ']
 
+def getBasicTRE():
     t = TreRSMAPB()
     t.iid = 'abc'
     t.edition = 'abc'
     t.tid = 'cde'
     t.npar = 36
-    t.aptyp = 'G'
-    t.loctyp = 'R'
 
     t.nsfx = 0.1234567890
     t.nsfy = 0.1234567890
@@ -37,11 +34,46 @@ def test_tre_rsmapb():
     t.zuyl = 0.1234567890
     t.zuzl = 0.1234567890
 
+    return t
+
+def assertBasicTRE(t2):
+
+    assert t2.iid == 'abc'
+    assert t2.edition == 'abc'
+    assert t2.tid == 'cde'
+    assert t2.npar == 36
+
+    assert t2.nsfx == 0.1234567890
+    assert t2.nsfy == 0.1234567890
+    assert t2.nsfz == 0.1234567890
+    assert t2.noffx == 0.1234567890
+    assert t2.noffy == 0.1234567890
+    assert t2.noffz == 0.1234567890
+
+    assert t2.xuol == 0.1234567890
+    assert t2.yuol == 0.1234567890
+    assert t2.zuol == 0.1234567890
+    assert t2.xuxl == 0.1234567890
+    assert t2.xuyl == 0.1234567890
+    assert t2.xuzl == 0.1234567890
+    assert t2.yuxl == 0.1234567890
+    assert t2.yuyl == 0.1234567890
+    assert t2.yuzl == 0.1234567890
+    assert t2.zuxl == 0.1234567890
+    assert t2.zuyl == 0.1234567890
+    assert t2.zuzl == 0.1234567890
+
+def test_tre_rsmapb_G_Y():
+
+    t = getBasicTRE()
+
+    t.aptyp = 'G'
+    t.loctyp = 'R'
     t.apbase = 'Y'
 
     t.ngsap = 16
     for a in range (t.ngsap):
-        t.gsapid[a] = gsapids[a]
+        t.gsapid[a] = _gsapids[a]
 
     if (t.aptyp == 'G'):
         count = t.npar * t.ngsap
@@ -61,47 +93,81 @@ def test_tre_rsmapb():
     fh2 = six.BytesIO(fh.getvalue())
     t2 = TreRSMAPB()
     t2.read_from_file(fh2)
-    assert t.iid == 'abc'
-    assert t.edition == 'abc'
-    assert t.tid == 'cde'
-    assert t.npar == 36
-    assert t.aptyp == 'G'
-    assert t.loctyp == 'R'
 
-    assert t.nsfx == 0.1234567890
-    assert t.nsfy == 0.1234567890
-    assert t.nsfz == 0.1234567890
-    assert t.noffx == 0.1234567890
-    assert t.noffy == 0.1234567890
-    assert t.noffz == 0.1234567890
+    assertBasicTRE(t2)
 
-    assert t.xuol == 0.1234567890
-    assert t.yuol == 0.1234567890
-    assert t.zuol == 0.1234567890
-    assert t.xuxl == 0.1234567890
-    assert t.xuyl == 0.1234567890
-    assert t.xuzl == 0.1234567890
-    assert t.yuxl == 0.1234567890
-    assert t.yuyl == 0.1234567890
-    assert t.yuzl == 0.1234567890
-    assert t.zuxl == 0.1234567890
-    assert t.zuyl == 0.1234567890
-    assert t.zuzl == 0.1234567890
+    assert t2.aptyp == 'G'
+    assert t2.loctyp == 'R'
 
-    assert t.apbase == 'Y'
+    assert t2.apbase == 'Y'
 
-    assert t.ngsap == 16
-    for a in range(t.ngsap):
-        assert t.gsapid[a] == gsapids[a]
+    assert t2.ngsap == 16
+    for a in range(t2.ngsap):
+        assert t2.gsapid[a] == _gsapids[a]
 
-    if (t.aptyp == 'G'):
-        count = t.npar * t.ngsap
+    if (t2.aptyp == 'G'):
+        count = t2.npar * t2.ngsap
     else:
-        count = t.npar * t.nisap
+        count = t2.npar * t2.nisap
     for a in range(count):
-        assert t.ael[a] == 0.1234567890
+        assert t2.ael[a] == 0.1234567890
+
+    for a in range(t2.npar):
+        assert t2.parval[a] == 0.1234567890
+
+def test_tre_rsmapb_I_N():
+
+    t = getBasicTRE()
+
+    t.aptyp = 'I'
+    t.loctyp = 'R'
+    t.apbase = 'N'
+
+    t.nisap = 36
+
+    t.nisapr = 18
+    for a in range(t.nisapr):
+        t.xpwrr[a] = 1
+        t.ypwrr[a] = 2
+        t.zpwrr[a] = 3
+
+    t.nisapc = 18
+    for a in range(t.nisapc):
+        t.xpwrc[a] = 1
+        t.ypwrc[a] = 2
+        t.zpwrc[a] = 3
 
     for a in range(t.npar):
-        assert t.parval[a] == 0.1234567890
+        t.parval[a] = 0.1234567890
 
-# Tests for other parts
+    fh = six.BytesIO()
+    t.write_to_file(fh)
+    #print(fh.getvalue())
+
+    assert fh.getvalue() == b'RSMAPB01413abc                                                                             abc                                     cde                                     36IR+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01N361812312312312312312312312312312312312312312312312312312318123123123123123123123123123123123123123123123123123123+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01+1.23456789000000E-01'
+    fh2 = six.BytesIO(fh.getvalue())
+    t2 = TreRSMAPB()
+    t2.read_from_file(fh2)
+
+    assertBasicTRE(t2)
+
+    assert t2.aptyp == 'I'
+    assert t2.loctyp == 'R'
+    assert t2.apbase == 'N'
+
+    assert t.nisap == 36
+
+    assert t.nisapr == 18
+    for a in range(t.nisapr):
+        assert t.xpwrr[a] == 1
+        assert t.ypwrr[a] == 2
+        assert t.zpwrr[a] == 3
+
+    assert t.nisapc == 18
+    for a in range(t.nisapc):
+        assert t.xpwrc[a] == 1
+        assert t.ypwrc[a] == 2
+        assert t.zpwrc[a] == 3
+
+    for a in range(t2.npar):
+        assert t2.parval[a] == 0.1234567890

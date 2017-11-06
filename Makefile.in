@@ -2424,6 +2424,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlibnitf@/nitf_tre_engrda_test.py \
 	@srcpythonlibnitf@/nitf_tre_pixqla_test.py \
 	@srcpythonlibnitf@/nitf_tre_rsmapa_test.py \
+	@srcpythonlibnitf@/nitf_tre_rsmapb_test.py \
 	@srcpythonlibnitf@/nitf_tre_rsmgga_test.py \
 	@srcpythonlibnitf@/nitf_tre_rsmgia_test.py \
 	@srcpythonlibnitf@/nitf_tre_rsmida_test.py \
@@ -3426,6 +3427,7 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_tre_histoa.py \
 	@srcpythonlibnitf@/nitf_tre_engrda.py \
 	@srcpythonlibnitf@/nitf_tre_rsmapa.py \
+	@srcpythonlibnitf@/nitf_tre_rsmapb.py \
 	@srcpythonlibnitf@/nitf_tre_rsmgga.py \
 	@srcpythonlibnitf@/nitf_tre_rsmgia.py \
 	@srcpythonlibnitf@/nitf_tre_rsmida.py \

@@ -18,6 +18,9 @@ class RsmId : public GenericObject {
 public:
   RsmId(const boost::shared_ptr<RsmBase>& Base,
 	const boost::shared_ptr<CoordinateConverter> &Cconv);
+  virtual std::string print_to_string() const;
+  %python_attribute_with_set(image_identifier, std::string);
+  %python_attribute_with_set(rsm_suport_data_edition, std::string);
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);

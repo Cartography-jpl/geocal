@@ -1,6 +1,7 @@
 #include "rsm_id.h"
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
+#include <boost/algorithm/string.hpp>
 #include <sstream>
 
 using namespace GeoCal;
@@ -11,10 +12,14 @@ template<class Archive>
 void RsmId::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmId);
+  ar & GEOCAL_NVP_(image_identifier)
+    & GEOCAL_NVP_(rsm_suport_data_edition);
 }
 
 GEOCAL_IMPLEMENT(RsmId);
 #endif
+
+static boost::format f("%|1$-80s|%|2$-40s|");
 
 //-----------------------------------------------------------------------
 /// Write to TRE string.
@@ -26,14 +31,12 @@ GEOCAL_IMPLEMENT(RsmId);
 
 std::string RsmId::tre_string() const
 {
+  return str_check_size(f % image_identifier_ % rsm_suport_data_edition_,
+			120);
 }
 
 //-----------------------------------------------------------------------
-/// Read a TRE string. Note that the TRE does not contain all the
-/// fields we have in a RsmRationalPolynomial. However the fields that
-/// aren't contained are ones used for fitting the RSM, so in practice
-/// this doesn't matter. We just set the various fields to the default
-/// values found in the constructor.
+/// Read a TRE string. 
 ///
 /// This should have all the TRE *except* for the front CETAG and CEL.
 /// It is convenient to treat these fields as special. (We can
@@ -43,4 +46,23 @@ std::string RsmId::tre_string() const
 boost::shared_ptr<RsmId>
 RsmId::read_tre_string(const std::string& Tre_in)
 {
+  std::stringstream in(Tre_in);
+  boost::shared_ptr<RsmId> res(new RsmId);
+  res->image_identifier_ = read_size<std::string>(in, 80);
+  res->rsm_suport_data_edition_ = read_size<std::string>(in, 40);
+  boost::trim(res->image_identifier_);
+  boost::trim(res->rsm_suport_data_edition_);
+  check_end_of_stream(in);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+void RsmId::print(std::ostream& Os) const
+{
+  Os << "RsmId:\n"
+     << "  Image Identifier:   " << image_identifier_ << "\n"
+     << "  RSM Edition:        " << rsm_suport_data_edition_ << "\n";
 }

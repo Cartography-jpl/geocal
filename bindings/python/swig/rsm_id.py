@@ -208,6 +208,42 @@ class RsmId(geocal_swig.generic_object.GenericObject):
         """
         _rsm_id.RsmId_swiginit(self, _rsm_id.new_RsmId(Base, Cconv))
 
+    def _v_image_identifier(self, *args):
+        """
+
+        void GeoCal::RsmId::image_identifier(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_image_identifier(self, *args)
+
+
+    @property
+    def image_identifier(self):
+        return self._v_image_identifier()
+
+    @image_identifier.setter
+    def image_identifier(self, value):
+      self._v_image_identifier(value)
+
+
+    def _v_rsm_suport_data_edition(self, *args):
+        """
+
+        void GeoCal::RsmId::rsm_suport_data_edition(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_rsm_suport_data_edition(self, *args)
+
+
+    @property
+    def rsm_suport_data_edition(self):
+        return self._v_rsm_suport_data_edition()
+
+    @rsm_suport_data_edition.setter
+    def rsm_suport_data_edition(self, value):
+      self._v_rsm_suport_data_edition(value)
+
+
     def tre_string(self):
         """
 
@@ -227,12 +263,6 @@ class RsmId(geocal_swig.generic_object.GenericObject):
         boost::shared_ptr< RsmId > RsmId::read_tre_string(const std::string &Tre_in)
         Read a TRE string.
 
-        Note that the TRE does not contain all the fields we have in a
-        RsmRationalPolynomial. However the fields that aren't contained are
-        ones used for fitting the RSM, so in practice this doesn't matter. We
-        just set the various fields to the default values found in the
-        constructor.
-
         This should have all the TRE except for the front CETAG and CEL. It is
         convenient to treat these fields as special. (We can revisit this in
         the future if we need to). 
@@ -245,6 +275,9 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_id.delete_RsmId
+RsmId.__str__ = new_instancemethod(_rsm_id.RsmId___str__, None, RsmId)
+RsmId._v_image_identifier = new_instancemethod(_rsm_id.RsmId__v_image_identifier, None, RsmId)
+RsmId._v_rsm_suport_data_edition = new_instancemethod(_rsm_id.RsmId__v_rsm_suport_data_edition, None, RsmId)
 RsmId.tre_string = new_instancemethod(_rsm_id.RsmId_tre_string, None, RsmId)
 RsmId_swigregister = _rsm_id.RsmId_swigregister
 RsmId_swigregister(RsmId)
@@ -254,12 +287,6 @@ def RsmId_read_tre_string(Tre_in):
 
     boost::shared_ptr< RsmId > RsmId::read_tre_string(const std::string &Tre_in)
     Read a TRE string.
-
-    Note that the TRE does not contain all the fields we have in a
-    RsmRationalPolynomial. However the fields that aren't contained are
-    ones used for fitting the RSM, so in practice this doesn't matter. We
-    just set the various fields to the default values found in the
-    constructor.
 
     This should have all the TRE except for the front CETAG and CEL. It is
     convenient to treat these fields as special. (We can revisit this in

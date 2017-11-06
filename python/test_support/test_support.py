@@ -210,6 +210,10 @@ def rsm_ms_grid(igc_rpc):
 	    igc_rpc.number_sample)
     return res
 
+@pytest.fixture(scope="function")
+def rsm(rsm_rational_polynomial):
+    res = Rsm(rsm_rational_polynomial, GeodeticConverter())
+    return res
 
 
     

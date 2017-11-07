@@ -3411,7 +3411,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_field.py \
 	@srcpythonlibnitf@/nitf_file_header.py \
-	@srcpythonlibnitf@/nitf_file.py \
+	@srcpythonlibnitf@/nitf_file.py @srcpythonlibnitf@/nitf_rsm.py \
 	@srcpythonlibnitf@/nitf_image.py \
 	@srcpythonlibnitf@/nitf_image_subheader.py \
 	@srcpythonlibnitf@/nitf_text_subheader.py \

@@ -11,6 +11,7 @@ from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageGeneral, NitfImageCannotHandle
 from .nitf_tre import read_tre, prepare_tre_write
+from .nitf_rsm import rsm_prepare_tre_write, rsm_read_tre
 import io,six,copy
 
 class NitfFile(object):
@@ -247,7 +248,14 @@ class NitfPlaceHolder(NitfSegment):
         
 
 class NitfImageSegment(NitfSegment):
-    '''Image segment (IS), supports the standard image type of data.'''
+    '''Image segment (IS), supports the standard image type of data.
+
+    Note the RSM is a bit complicated, because it spans multiple TREs. 
+    We handle the RSM as a special field, you can access it as self.rsm, or
+    write to it by setting self.rsm to the RSM. The lower level TREs are also
+    available as any other TRE, but you wouldn't normally read or write these
+    directly, instead go through self.rsm.  We have self.rsm set to None if the
+    ImageSegment doesn't have an RSM.'''
     def __init__(self, image = None,
                  header_size = None, data_size = None,
                  nitf_image_handle = [NitfImageFromNumpy,
@@ -266,6 +274,7 @@ class NitfImageSegment(NitfSegment):
             h = image.image_subheader
         NitfSegment.__init__(self, h, image)
         self.tre_list = []
+        self.rsm = None
     def read_from_file(self, fh):
         '''Read from a file'''
         self.subheader.read_from_file(fh)
@@ -283,6 +292,7 @@ class NitfImageSegment(NitfSegment):
                     raise
         self.data = t
     def prepare_tre_write(self, des_list, seg_index):
+        rsm_prepare_tre_write(self)
         prepare_tre_write(self.tre_list, self.subheader,des_list,
                           [["ixshdl", "ixofl", "ixshd"],
                            ["udidl", "udofl", "udid"]], seg_index)
@@ -290,6 +300,7 @@ class NitfImageSegment(NitfSegment):
         self.tre_list = read_tre(self.subheader,des_list,
                                  [["ixshdl", "ixofl", "ixshd"],
                                   ["udidl", "udofl", "udid"]])
+        rsm_read_tre(self)
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''
         fh = six.StringIO()

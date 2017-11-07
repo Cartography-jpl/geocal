@@ -70,23 +70,28 @@ void throwout(int* throwcount,double** a,double** b,int* neq,int neqmax)
   std::vector<double> aa(neqmax*6);
   std::vector<double> bb(neqmax);
   std::vector<double> resid(neqmax);
-
-  QuadraticGeometricModel gm(QuadraticGeometricModel::LINEAR);
-  GeometricTiePoints tpset;
+   
   /* solve lsq (linear), keeping quadratic form for consistency with main */
-
-  for(int i=0;i<*neq;i++)
-    tpset.add_point(ImageCoordinate(b[0][i],b[1][i]),
-		    ImageCoordinate(a[0][i],a[1][i]));
-  gm.fit_transformation(tpset);
+   
+  for(int ix=0;ix<2;ix++) {
+    for(int i=0;i<*neq;i++) {
+      aa[i] = a[0][i];
+      aa[i+(*neq)] = a[1][i];
+      aa[i+2*(*neq)] = 1.;
+      aa[i+3*(*neq)] = a[0][i]*a[0][i];
+      aa[i+4*(*neq)] = a[1][i]*a[1][i];
+      aa[i+5*(*neq)] = a[0][i]*a[1][i];
+      bb[i] = b[ix][i];
+    }
+    matcher->lsqfit(&aa[0],&bb[0],(*neq),3,&soln[ix*6],eps,&ierror);
+    for(int j=3;j<6;j++) soln[ix*6+j] = 0.0;
+  }
    
   /* calculate residuals */
    
   for(int i=0;i<*neq;i++) {
-    ImageCoordinate icpred =
-      gm.resampled_image_coordinate(ImageCoordinate(a[0][i], a[1][i]));
-    rx = b[0][i]-icpred.line;
-    ry = b[1][i]-icpred.sample;
+    rx = b[0][i]-(soln[0]*a[0][i]+soln[1]*a[1][i]+soln[2]);
+    ry = b[1][i]-(soln[6]*a[0][i]+soln[7]*a[1][i]+soln[8]);
     resid[i] = rx*rx+ry*ry;
   }
    
@@ -207,9 +212,7 @@ try {
     (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
 				 rmagtae[0], rmagtae[1]));
   boost::shared_ptr<QuadraticGeometricModel> gm2
-    (new QuadraticGeometricModel((predfunc ?
-				  QuadraticGeometricModel::QUADRATIC :
-				  QuadraticGeometricModel::LINEAR),
+    (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
 				 rmagtae[0], rmagtae[1]));
   // Temporary, we should replace everything using this with gm2 stuff.
   blitz::Array<double, 1>& soln = gm2->transformation();
@@ -240,7 +243,7 @@ try {
   // Mark file as updated, so we know to write this out at the end
   ifile.mark_updated();
 
-  // Get elevation offset, which is either read from the ibis file or
+  // Get elevation offset, which is either read from the ibis file are
   // set to zero.
   std::vector<ImageCoordinate> elvoff(ifile.number_row(), ImageCoordinate(0,0));
   if(elvcor) {
@@ -376,6 +379,7 @@ try {
        b[0][iii/2] = dline;
        b[1][iii/2] = dsamp;
      }
+   
    /* open the first image file */
    // this should go away.
    status = zvunit(&i_unit[0],(char*)"INP",1,NULL);
@@ -393,19 +397,6 @@ try {
    zvget(i_unit[1],"NL",&lnlg[1],"NS",&lnsg[1],"PIX_SIZE",&ityp2,NULL);
    double rctl = 0.5*lnlg[1];
    double rcts = 0.5*lnsg[1];
-   
-   // Rotate the initial mapping by the given angle
-   if(fabs(angoff)>0.000001)
-     for(int iii=0; iii < 3; ++iii) {
-       double rv1 = b[0][iii]-rctl;
-       double rw1 = b[1][iii]-rcts;
-       double rr = sqrt(rv1*rv1+rw1*rw1+0.0000001);
-       double theta = atan2(rw1,rv1)-angoff;
-       double rv2 = rr*cos(theta);
-       double rw2 = rr*sin(theta);
-       b[0][iii] = rv2+rctl;
-       b[1][iii] = rw2+rcts;
-     }
    
    /* outer loop over the tiepoints or gcp's */
    /* gcp option inactive for now... I need a sample gcp data set */
@@ -461,11 +452,33 @@ try {
 	 if (scount%10==9) throwout(&throwcount,a,b,&neq,neqmax);
 	 scount++;
 	 lastneq = neq;
-	 GeometricTiePoints tpset;
-	 for(int iii=0;iii<neq;iii++)
-	   tpset.add_point(ImageCoordinate(b[0][iii], b[1][iii]),
-			   ImageCoordinate(a[0][iii], a[1][iii]));
-	 gm2->fit_transformation(tpset);
+	 for(int ix=0;ix<2;ix++) {
+	   for(int iii=0;iii<neq;iii++) {
+	     aa[iii] = a[0][iii];
+	     aa[iii+neq] = a[1][iii];
+	     aa[iii+2*neq] = 1.;
+	     aa[iii+3*neq] = a[0][iii]*a[0][iii];
+	     aa[iii+4*neq] = a[1][iii]*a[1][iii];
+	     aa[iii+5*neq] = a[0][iii]*a[1][iii];
+	     if (fabs(angoff)>0.000001&&ibigx==0&&ix==0) {
+	       double rv1 = b[0][iii]-rctl;
+	       double rw1 = b[1][iii]-rcts;
+	       double rr = sqrt(rv1*rv1+rw1*rw1+0.0000001);
+	       double theta = atan2(rw1,rv1)-angoff;
+	       double rv2 = rr*cos(theta);
+	       double rw2 = rr*sin(theta);
+	       b[0][iii] = rv2+rctl;
+	       b[1][iii] = rw2+rcts;
+	     }
+	     bb[iii] = b[ix][iii];
+	   }
+	   if (predfunc&&neq>11)
+	     matcher->lsqfit(&aa[0],&bb[0],neq,6,&soln(ix*6),eps,&ierror);
+	   else {
+	     matcher->lsqfit(&aa[0],&bb[0],neq,3,&soln(ix*6),eps,&ierror);
+	     for(int jjj=3;jjj<6;jjj++) soln(ix*6+jjj) = 0.0;
+	   }
+	 }
        }
        if (ibigx==0) neq = 0;
          
@@ -659,6 +672,24 @@ try {
        samp_res[iii] = second_samp[iii]-second_pred.sample; 
      } else 
        line_res[iii] = -9999.;
+   }
+   for(int ix=0;ix<2;ix++) {
+     for(int iii=0;iii<neq;iii++) {
+       aa[iii] = b[0][iii];
+       aa[iii+neq] = b[1][iii];
+       aa[iii+2*neq] = 1.;
+       aa[iii+3*neq] = b[0][iii]*b[0][iii];
+       aa[iii+4*neq] = b[1][iii]*b[1][iii];
+       aa[iii+5*neq] = b[0][iii]*b[1][iii];
+       bb[iii] = a[ix][iii];
+     }
+     if (predfunc&&neq>11)
+       matcher->lsqfit(&aa[0],&bb[0],neq,6,&solninv(ix*6),eps,&ierror);
+     else 
+       if (neq>=neqmin) {
+	 matcher->lsqfit(&aa[0],&bb[0],neq,3,&solninv(ix*6),eps,&ierror);
+	 for(int jjj=3;jjj<6;jjj++) solninv(ix*6+jjj) = 0.0;
+       }
    }
    printf("\n\nfinal line fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n",
 	  soln(0),soln(1),soln(2),soln(3),soln(4),soln(5));

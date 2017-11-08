@@ -8147,6 +8147,236 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmBase__v_row_section_number__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmBase const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmBase__v_row_section_number" "', argument " "1"" of type '" "GeoCal::RsmBase const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmBase const *)arg1)->row_section_number();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmBase__v_row_section_number__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmBase > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmBase__v_row_section_number" "', argument " "1"" of type '" "GeoCal::RsmBase *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmBase__v_row_section_number" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->row_section_number((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmBase__v_row_section_number(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmBase__v_row_section_number",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmBase__v_row_section_number__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmBase__v_row_section_number__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmBase__v_row_section_number'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmBase::row_section_number() const\n"
+    "    GeoCal::RsmBase::row_section_number(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmBase__v_col_section_number__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmBase const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmBase__v_col_section_number" "', argument " "1"" of type '" "GeoCal::RsmBase const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmBase const *)arg1)->col_section_number();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmBase__v_col_section_number__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmBase > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmBase__v_col_section_number" "', argument " "1"" of type '" "GeoCal::RsmBase *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmBase__v_col_section_number" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->col_section_number((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmBase__v_col_section_number(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmBase__v_col_section_number",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmBase__v_col_section_number__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmBase__v_col_section_number__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmBase__v_col_section_number'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmBase::col_section_number() const\n"
+    "    GeoCal::RsmBase::col_section_number(int const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_RsmBase(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
@@ -8314,12 +8544,22 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RsmBase__v_image_identifier", _wrap_RsmBase__v_image_identifier, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::RsmBase::image_identifier(const std::string &V)\n"
+		"virtual void GeoCal::RsmBase::image_identifier(const std::string &V)\n"
 		"\n"
 		""},
 	 { (char *)"RsmBase__v_rsm_suport_data_edition", _wrap_RsmBase__v_rsm_suport_data_edition, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::RsmBase::rsm_suport_data_edition(const std::string &V)\n"
+		"virtual void GeoCal::RsmBase::rsm_suport_data_edition(const std::string &V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmBase__v_row_section_number", _wrap_RsmBase__v_row_section_number, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual void GeoCal::RsmBase::row_section_number(int V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmBase__v_col_section_number", _wrap_RsmBase__v_col_section_number, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual void GeoCal::RsmBase::col_section_number(int V)\n"
 		"\n"
 		""},
 	 { (char *)"delete_RsmBase", (PyCFunction)_wrap_delete_RsmBase, METH_O, (char *)"\n"

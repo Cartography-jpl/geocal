@@ -11,6 +11,8 @@ template<class Archive>
 void RsmDirectCovariance::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmDirectCovariance);
+  ar & GEOCAL_NVP_(image_identifier)
+    & GEOCAL_NVP_(rsm_suport_data_edition);
 }
 
 GEOCAL_IMPLEMENT(RsmDirectCovariance);

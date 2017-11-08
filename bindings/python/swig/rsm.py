@@ -208,14 +208,14 @@ class Rsm(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Rp, Cconv):
+    def __init__(self, *args):
         """
 
         Rsm::Rsm(const boost::shared_ptr< RsmBase > &Rp, const boost::shared_ptr<
         CoordinateConverter > &Cconv)
         Constructor. 
         """
-        _rsm.Rsm_swiginit(self, _rsm.new_Rsm(Rp, Cconv))
+        _rsm.Rsm_swiginit(self, _rsm.new_Rsm(*args))
 
     def ground_coordinate(self, *args):
         """
@@ -315,74 +315,130 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         return self._v_rsm_id()
 
 
-    def _v_rsm_direct_covariance(self):
+    def _v_rsm_direct_covariance(self, *args):
         """
 
-        const boost::shared_ptr<RsmDirectCovariance>& GeoCal::Rsm::rsm_direct_covariance() const
+        void GeoCal::Rsm::rsm_direct_covariance(const boost::shared_ptr< RsmDirectCovariance > &V)
 
         """
-        return _rsm.Rsm__v_rsm_direct_covariance(self)
+        return _rsm.Rsm__v_rsm_direct_covariance(self, *args)
 
 
     @property
     def rsm_direct_covariance(self):
         return self._v_rsm_direct_covariance()
 
+    @rsm_direct_covariance.setter
+    def rsm_direct_covariance(self, value):
+      self._v_rsm_direct_covariance(value)
 
-    def _v_rsm_indirect_covariance(self):
+
+    def _v_rsm_indirect_covariance(self, *args):
         """
 
-        const boost::shared_ptr<RsmIndirectCovariance>& GeoCal::Rsm::rsm_indirect_covariance() const
+        void GeoCal::Rsm::rsm_indirect_covariance(const boost::shared_ptr< RsmIndirectCovariance > &V)
 
         """
-        return _rsm.Rsm__v_rsm_indirect_covariance(self)
+        return _rsm.Rsm__v_rsm_indirect_covariance(self, *args)
 
 
     @property
     def rsm_indirect_covariance(self):
         return self._v_rsm_indirect_covariance()
 
+    @rsm_indirect_covariance.setter
+    def rsm_indirect_covariance(self, value):
+      self._v_rsm_indirect_covariance(value)
 
-    def _v_rsm_adjustable_parameter(self):
+
+    def _v_rsm_adjustable_parameter(self, *args):
         """
 
-        const boost::shared_ptr<RsmAdjustableParameter>& GeoCal::Rsm::rsm_adjustable_parameter() const
+        void GeoCal::Rsm::rsm_adjustable_parameter(const boost::shared_ptr< RsmAdjustableParameter > &V)
 
         """
-        return _rsm.Rsm__v_rsm_adjustable_parameter(self)
+        return _rsm.Rsm__v_rsm_adjustable_parameter(self, *args)
 
 
     @property
     def rsm_adjustable_parameter(self):
         return self._v_rsm_adjustable_parameter()
 
+    @rsm_adjustable_parameter.setter
+    def rsm_adjustable_parameter(self, value):
+      self._v_rsm_adjustable_parameter(value)
 
-    def _v_rsm_base(self):
+
+    def _v_rsm_base(self, *args):
         """
 
-        const boost::shared_ptr<RsmBase>& GeoCal::Rsm::rsm_base() const
+        void GeoCal::Rsm::rsm_base(const boost::shared_ptr< RsmBase > &V)
 
         """
-        return _rsm.Rsm__v_rsm_base(self)
+        return _rsm.Rsm__v_rsm_base(self, *args)
 
 
     @property
     def rsm_base(self):
         return self._v_rsm_base()
 
+    @rsm_base.setter
+    def rsm_base(self, value):
+      self._v_rsm_base(value)
 
-    def _v_coordinate_converter(self):
+
+    def _v_coordinate_converter(self, *args):
         """
 
-        const boost::shared_ptr<CoordinateConverter> GeoCal::Rsm::coordinate_converter() const
+        void GeoCal::Rsm::coordinate_converter(const boost::shared_ptr< CoordinateConverter > &V)
 
         """
-        return _rsm.Rsm__v_coordinate_converter(self)
+        return _rsm.Rsm__v_coordinate_converter(self, *args)
 
 
     @property
     def coordinate_converter(self):
         return self._v_coordinate_converter()
+
+    @coordinate_converter.setter
+    def coordinate_converter(self, value):
+      self._v_coordinate_converter(value)
+
+
+    def _v_image_identifier(self, *args):
+        """
+
+        virtual void GeoCal::Rsm::image_identifier(const std::string &V)
+
+        """
+        return _rsm.Rsm__v_image_identifier(self, *args)
+
+
+    @property
+    def image_identifier(self):
+        return self._v_image_identifier()
+
+    @image_identifier.setter
+    def image_identifier(self, value):
+      self._v_image_identifier(value)
+
+
+    def _v_rsm_suport_data_edition(self, *args):
+        """
+
+        virtual void GeoCal::Rsm::rsm_suport_data_edition(const std::string &V)
+
+        """
+        return _rsm.Rsm__v_rsm_suport_data_edition(self, *args)
+
+
+    @property
+    def rsm_suport_data_edition(self):
+        return self._v_rsm_suport_data_edition()
+
+    @rsm_suport_data_edition.setter
+    def rsm_suport_data_edition(self, value):
+      self._v_rsm_suport_data_edition(value)
 
 
     def __reduce__(self):
@@ -402,6 +458,8 @@ Rsm._v_rsm_indirect_covariance = new_instancemethod(_rsm.Rsm__v_rsm_indirect_cov
 Rsm._v_rsm_adjustable_parameter = new_instancemethod(_rsm.Rsm__v_rsm_adjustable_parameter, None, Rsm)
 Rsm._v_rsm_base = new_instancemethod(_rsm.Rsm__v_rsm_base, None, Rsm)
 Rsm._v_coordinate_converter = new_instancemethod(_rsm.Rsm__v_coordinate_converter, None, Rsm)
+Rsm._v_image_identifier = new_instancemethod(_rsm.Rsm__v_image_identifier, None, Rsm)
+Rsm._v_rsm_suport_data_edition = new_instancemethod(_rsm.Rsm__v_rsm_suport_data_edition, None, Rsm)
 Rsm_swigregister = _rsm.Rsm_swigregister
 Rsm_swigregister(Rsm)
 

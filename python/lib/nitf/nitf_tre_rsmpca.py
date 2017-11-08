@@ -89,3 +89,13 @@ TreRSMPCA = create_nitf_tre_structure("TreRSMPCA",desc,hlp=hlp,
                         tre_implementation_field="rsm_rational_polynomial",
                         tre_implementation_class=RsmRationalPolynomial)
     
+def _row_section_number(self):
+    return self.rsn
+
+def _col_section_number(self):
+    return self.csn
+
+TreRSMPCA.row_section_number = property(_row_section_number)
+
+TreRSMPCA.col_section_number = property(_col_section_number)
+

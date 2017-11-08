@@ -15,10 +15,25 @@ public:
   {
   }
   virtual ~RsmAdjustableParameter() {}
+//-----------------------------------------------------------------------
+/// Image identification.
+//-----------------------------------------------------------------------
+  const std::string& image_identifier() const { return image_identifier_;}
+  void image_identifier(const std::string& V) { image_identifier_ = V;}
+
+//-----------------------------------------------------------------------
+/// RSM Support Data Edition.
+//-----------------------------------------------------------------------
+  const std::string& rsm_suport_data_edition() const
+  { return rsm_suport_data_edition_;}
+  void rsm_suport_data_edition(const std::string& V)
+  { rsm_suport_data_edition_ = V; }
+
   std::string tre_string() const;
   static boost::shared_ptr<RsmAdjustableParameter>
   read_tre_string(const std::string& Tre_in);
 private:
+  std::string image_identifier_, rsm_suport_data_edition_;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

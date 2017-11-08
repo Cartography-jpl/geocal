@@ -93,3 +93,12 @@ TreRSMGGA = create_nitf_tre_structure("TreRSMGGA",desc,hlp=hlp,
                         tre_implementation_field="rsm_grid",
                         tre_implementation_class=RsmGrid)
 
+def _row_section_number(self):
+    return self.ggrsn
+
+def _col_section_number(self):
+    return self.ggcsn
+
+TreRSMGGA.row_section_number = property(_row_section_number)
+
+TreRSMGGA.col_section_number = property(_col_section_number)

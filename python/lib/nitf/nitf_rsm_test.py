@@ -38,7 +38,7 @@ def test_rsm_ms_rp(isolated_dir, rsm_ms_rp):
     f2 = NitfFile("nitf_rsm.ntf")
     print(f2)
 
-def test_rsm_ms_rp(isolated_dir, rsm_ms_g):
+def test_rsm_ms_g(isolated_dir, rsm_ms_g):
     '''Create a file, and write out a RSM. This has a multi section
     grid in it'''    
     f = NitfFile()

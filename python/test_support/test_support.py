@@ -215,5 +215,20 @@ def rsm(rsm_rational_polynomial):
     res = Rsm(rsm_rational_polynomial, GeodeticConverter())
     return res
 
+@pytest.fixture(scope="function")
+def rsm_g(rsm_grid):
+    res = Rsm(rsm_grid, GeodeticConverter())
+    return res
+
+@pytest.fixture(scope="function")
+def rsm_ms_rp(rsm_ms_polynomial):
+    res = Rsm(rsm_ms_polynomial, GeodeticConverter())
+    return res
+
+@pytest.fixture(scope="function")
+def rsm_ms_g(rsm_ms_grid):
+    res = Rsm(rsm_ms_grid, GeodeticConverter())
+    return res
+
 
     

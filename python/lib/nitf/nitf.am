@@ -31,6 +31,7 @@ EXTRA_DIST+=@srcpythonlibnitf@/nitf_des_csatta_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_field_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_file_header_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_file_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_rsm_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_subheader_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_text_subheader_test.py

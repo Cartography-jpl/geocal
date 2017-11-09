@@ -1,4 +1,4 @@
-from geocal_swig import Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial, RsmGrid, RsmRpPlusGrid
+from geocal_swig import Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial, RsmGrid, RsmRpPlusGrid, GeodeticConverter
 from .nitf_tre_rsmida import TreRSMIDA
 from .nitf_tre_rsmgga import TreRSMGGA
 from .nitf_tre_rsmgia import TreRSMGIA
@@ -40,15 +40,18 @@ def _rsm_add_rec(seg, v):
                 _rsm_add_rec(seg, v.section(i, j))
     else:
         raise RuntimeError("Unknown Rsm element " + str(v))
+
+rsm_tre_tag_list =  ['RSMIDA', 'RSMPIA','RSMPCA', 'RSMDCA', 'RSMDCB',
+                     'RSMAPA', 'RSMAPB', 'RSMECA', 'RSMECB',
+                     'RSMGIA', 'RSMGGA']
+   
                 
 def rsm_prepare_tre_write(seg):
     '''Remove all the existing RSM TREs (if any), and add the TREs 
     to store seg.rsm'''
     # Remove any existing RSM Tres
     seg.tre_list = [t for t in seg.tre_list if t.tre_tag not in
-                    ('RSMIDA', 'RSMPIA','RSMPCA', 'RSMDCA', 'RSMDCB',
-                     'RSMAPA', 'RSMAPB', 'RSMECA', 'RSMECB',
-                     'RSMGIA', 'RSMGGA')]
+                    rsm_tre_tag_list]
     # Currently only handle one RSM TRE set. We could extend this if needed.
     if(seg.rsm):
         t = TreRSMIDA()
@@ -78,6 +81,8 @@ def rsm_read_tre(seg):
        return
     t = _rsm_find_tre(seg, 'RSMIDA')
     r = Rsm(t.rsm_id)
+    # Temp
+    r.coordinate_converter = GeodeticConverter()
     edition = t.edition
     rsm_rp = None
     rsm_g = None

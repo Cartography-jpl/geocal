@@ -11,7 +11,7 @@ from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageGeneral, NitfImageCannotHandle
 from .nitf_tre import read_tre, prepare_tre_write
-from .nitf_rsm import rsm_prepare_tre_write, rsm_read_tre
+from .nitf_rsm import rsm_prepare_tre_write, rsm_read_tre, rsm_tre_tag_list
 import io,six,copy
 
 class NitfFile(object):
@@ -304,6 +304,10 @@ class NitfImageSegment(NitfSegment):
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''
         fh = six.StringIO()
+        if(self.rsm):
+            print(self.rsm, file=fh)
+        else:
+            print("Rsm: None", file=fh)
         print("Sub header:", file=fh)
         print(self.subheader, file=fh)
         print("TREs:", file=fh)
@@ -311,7 +315,10 @@ class NitfImageSegment(NitfSegment):
             print("No image level TREs", file=fh)
         else:
             for tre in self.tre_list:
-                print(tre, file=fh)
+                if(tre.tre_tag in rsm_tre_tag_list):
+                    print("%s: See RSM above" % tre.tre_tag, file=fh)
+                else:
+                    print(tre, file=fh)
         print("Data", file=fh)
         print(self.data, file=fh)
         return fh.getvalue()

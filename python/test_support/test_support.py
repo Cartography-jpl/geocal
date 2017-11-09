@@ -24,6 +24,11 @@ geocal_test_igc = geocal_test_data + "igccol_rolling_shutter.xml"
 geocal_test_igc_sim_error = geocal_test_data + "igccol_rolling_shutter_simulated_error.xml"
 geocal_test_tpcol = geocal_test_data + "tpcol.xml"
 
+# RSM sample data. This is too big to carry in our source, so we have a
+# separate directory.
+# This comes from http://www.gwg.nga.mil/ntb/baseline/software/testfile/rsm/samples.htm
+rsm_sample_data = "/data/smyth/SampleRsm/"
+
 def cmd_exists(cmd):
     '''Check if a cmd exists by using type, which returns a nonzero status if
     the program isn't found'''
@@ -77,6 +82,9 @@ require_geocal_test_data = pytest.mark.skipif(not os.path.exists(geocal_test_igc
 # Marker that test requires the vicar gdal plugin
 require_vicar_gdalplugin = pytest.mark.skipif("NO_VICAR_GDALPLUGIN" in os.environ,
     reason = "need the VICAR GDAL plugin to run.")
+
+require_rsm_sample_data = pytest.mark.skipif(not os.path.exists(rsm_sample_data),
+      reason="need to have RSM sample data (%s) available to run." % rsm_sample_data)
 
 # Short hand for marking as unconditional skipping. Good for tests we
 # don't normally run, but might want to comment out for a specific debugging

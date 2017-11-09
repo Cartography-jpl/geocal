@@ -19,7 +19,10 @@ void RsmId::serialize(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(RsmId);
 #endif
 
-static boost::format f("%|1$-80s|%|2$-40s|");
+static boost::format f("%|1$-80s|%|2$-40s|%|3$-200|");
+static boost::format rsm_sz("%|1$08d|%|2$08d|%|3$08d|%|5$08d|%|5$08d|%|6$08d|");
+static boost::format num_missing("%|1$21s|");
+static boost::format num("%|1$+21.14E|");
 
 //-----------------------------------------------------------------------
 /// Write to TRE string.
@@ -31,8 +34,20 @@ static boost::format f("%|1$-80s|%|2$-40s|");
 
 std::string RsmId::tre_string() const
 {
-  return str_check_size(f % image_identifier_ % rsm_suport_data_edition_,
-			120);
+  std::string res = "";
+  std::string placeholder = "";
+  res += str_check_size(f % image_identifier_ % rsm_suport_data_edition_ %
+			placeholder, 120 + 200);
+  for(int i = 0; i < 12; ++i)
+    res += str_check_size(num_missing % "", 21);
+  for(int i = 0; i < 24; ++i)
+    res += str_check_size(num % 0.0, 21);
+  for(int i = 0; i < 3; ++i)
+    res += str_check_size(num_missing % "", 21);
+  res += str_check_size(rsm_sz % 0 % 0 % 0 % 0 % 0 % 0, 8*6);
+  for(int i = 0; i < 21; ++i)
+    res += str_check_size(num_missing % "", 21);
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -52,6 +67,19 @@ RsmId::read_tre_string(const std::string& Tre_in)
   res->rsm_suport_data_edition_ = read_size<std::string>(in, 40);
   boost::trim(res->image_identifier_);
   boost::trim(res->rsm_suport_data_edition_);
+  std::string placeholder = read_size<std::string>(in, 200);
+  for(int i = 0; i < 12; ++i)
+    double x = read_size_nan(in, 21);
+  for(int i = 0; i < 24; ++i)
+    double x = read_size<double>(in, 21);
+  for(int i = 0; i < 3; ++i)
+    double x = read_size_nan(in, 21);
+  for(int i = 0; i < 2; ++i)
+    int x = read_size_fill(in, 8);
+  for(int i = 0; i < 4; ++i)
+    int x = read_size<int>(in, 8);
+  for(int i = 0; i < 21; ++i)
+    double x = read_size_nan(in, 21);
   check_end_of_stream(in);
   return res;
 }

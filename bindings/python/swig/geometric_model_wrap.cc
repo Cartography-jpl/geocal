@@ -5321,6 +5321,32 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6481,6 +6507,55 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GeometricTiePoints_remove_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeometricTiePoints *arg1 = (GeoCal::GeometricTiePoints *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"GeometricTiePoints_remove_point",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeometricTiePoints_remove_point" "', argument " "1"" of type '" "GeoCal::GeometricTiePoints *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricTiePoints * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricTiePoints * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GeometricTiePoints_remove_point" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      (arg1)->remove_point(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GeometricTiePoints__v_x(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeometricTiePoints *arg1 = (GeoCal::GeometricTiePoints *) 0 ;
@@ -6589,6 +6664,49 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints__v_y(PyObject *SWIGUNUSEDPARM(self
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GeometricTiePoints__v_number_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeometricTiePoints *arg1 = (GeoCal::GeometricTiePoints *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeometricTiePoints__v_number_point" "', argument " "1"" of type '" "GeoCal::GeometricTiePoints const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricTiePoints > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricTiePoints * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricTiePoints * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::GeometricTiePoints const *)arg1)->number_point();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -6746,6 +6864,11 @@ static PyMethodDef SwigMethods[] = {
 		"&Original_ic)\n"
 		"Add a point. \n"
 		""},
+	 { (char *)"GeometricTiePoints_remove_point", _wrap_GeometricTiePoints_remove_point, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::GeometricTiePoints::remove_point(int Index)\n"
+		"Remove the point at the given index. \n"
+		""},
 	 { (char *)"GeometricTiePoints__v_x", (PyCFunction)_wrap_GeometricTiePoints__v_x, METH_O, (char *)"\n"
 		"\n"
 		"blitz::Array<double, 2> GeoCal::GeometricTiePoints::x() const\n"
@@ -6757,6 +6880,11 @@ static PyMethodDef SwigMethods[] = {
 		"blitz::Array<double, 2> GeoCal::GeometricTiePoints::y() const\n"
 		"Return the resampled_ic as 2 columns, first is line second is sample;.\n"
 		"\n"
+		""},
+	 { (char *)"GeometricTiePoints__v_number_point", (PyCFunction)_wrap_GeometricTiePoints__v_number_point, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::GeometricTiePoints::number_point() const\n"
+		"Number of points. \n"
 		""},
 	 { (char *)"GeometricTiePoints___str__", (PyCFunction)_wrap_GeometricTiePoints___str__, METH_O, NULL},
 	 { (char *)"delete_GeometricTiePoints", (PyCFunction)_wrap_delete_GeometricTiePoints, METH_O, (char *)"\n"

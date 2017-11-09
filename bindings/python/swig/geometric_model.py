@@ -267,6 +267,15 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
         return _geometric_model.GeometricTiePoints_add_point(self, Resampled_ic, Original_ic)
 
 
+    def remove_point(self, Index):
+        """
+
+        void GeoCal::GeometricTiePoints::remove_point(int Index)
+        Remove the point at the given index. 
+        """
+        return _geometric_model.GeometricTiePoints_remove_point(self, Index)
+
+
     def _v_x(self):
         """
 
@@ -297,13 +306,29 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
         return self._v_y()
 
 
+    def _v_number_point(self):
+        """
+
+        int GeoCal::GeometricTiePoints::number_point() const
+        Number of points. 
+        """
+        return _geometric_model.GeometricTiePoints__v_number_point(self)
+
+
+    @property
+    def number_point(self):
+        return self._v_number_point()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _geometric_model.delete_GeometricTiePoints
 GeometricTiePoints.add_point = new_instancemethod(_geometric_model.GeometricTiePoints_add_point, None, GeometricTiePoints)
+GeometricTiePoints.remove_point = new_instancemethod(_geometric_model.GeometricTiePoints_remove_point, None, GeometricTiePoints)
 GeometricTiePoints._v_x = new_instancemethod(_geometric_model.GeometricTiePoints__v_x, None, GeometricTiePoints)
 GeometricTiePoints._v_y = new_instancemethod(_geometric_model.GeometricTiePoints__v_y, None, GeometricTiePoints)
+GeometricTiePoints._v_number_point = new_instancemethod(_geometric_model.GeometricTiePoints__v_number_point, None, GeometricTiePoints)
 GeometricTiePoints.__str__ = new_instancemethod(_geometric_model.GeometricTiePoints___str__, None, GeometricTiePoints)
 GeometricTiePoints_swigregister = _geometric_model.GeometricTiePoints_swigregister
 GeometricTiePoints_swigregister(GeometricTiePoints)

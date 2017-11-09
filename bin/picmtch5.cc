@@ -212,7 +212,9 @@ try {
     (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
 				 rmagtae[0], rmagtae[1]));
   boost::shared_ptr<QuadraticGeometricModel> gm2
-    (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
+    (new QuadraticGeometricModel((predfunc ?
+				  QuadraticGeometricModel::QUADRATIC :
+				  QuadraticGeometricModel::LINEAR),
 				 rmagtae[0], rmagtae[1]));
   // Temporary, we should replace everything using this with gm2 stuff.
   blitz::Array<double, 1>& soln = gm2->transformation();
@@ -243,7 +245,7 @@ try {
   // Mark file as updated, so we know to write this out at the end
   ifile.mark_updated();
 
-  // Get elevation offset, which is either read from the ibis file are
+  // Get elevation offset, which is either read from the ibis file or
   // set to zero.
   std::vector<ImageCoordinate> elvoff(ifile.number_row(), ImageCoordinate(0,0));
   if(elvcor) {
@@ -379,7 +381,6 @@ try {
        b[0][iii/2] = dline;
        b[1][iii/2] = dsamp;
      }
-   
    /* open the first image file */
    // this should go away.
    status = zvunit(&i_unit[0],(char*)"INP",1,NULL);
@@ -397,6 +398,19 @@ try {
    zvget(i_unit[1],"NL",&lnlg[1],"NS",&lnsg[1],"PIX_SIZE",&ityp2,NULL);
    double rctl = 0.5*lnlg[1];
    double rcts = 0.5*lnsg[1];
+   
+   // Rotate the initial mapping by the given angle
+   if(fabs(angoff)>0.000001)
+     for(int iii=0; iii < 3; ++iii) {
+       double rv1 = b[0][iii]-rctl;
+       double rw1 = b[1][iii]-rcts;
+       double rr = sqrt(rv1*rv1+rw1*rw1+0.0000001);
+       double theta = atan2(rw1,rv1)-angoff;
+       double rv2 = rr*cos(theta);
+       double rw2 = rr*sin(theta);
+       b[0][iii] = rv2+rctl;
+       b[1][iii] = rw2+rcts;
+     }
    
    /* outer loop over the tiepoints or gcp's */
    /* gcp option inactive for now... I need a sample gcp data set */
@@ -460,16 +474,6 @@ try {
 	     aa[iii+3*neq] = a[0][iii]*a[0][iii];
 	     aa[iii+4*neq] = a[1][iii]*a[1][iii];
 	     aa[iii+5*neq] = a[0][iii]*a[1][iii];
-	     if (fabs(angoff)>0.000001&&ibigx==0&&ix==0) {
-	       double rv1 = b[0][iii]-rctl;
-	       double rw1 = b[1][iii]-rcts;
-	       double rr = sqrt(rv1*rv1+rw1*rw1+0.0000001);
-	       double theta = atan2(rw1,rv1)-angoff;
-	       double rv2 = rr*cos(theta);
-	       double rw2 = rr*sin(theta);
-	       b[0][iii] = rv2+rctl;
-	       b[1][iii] = rw2+rcts;
-	     }
 	     bb[iii] = b[ix][iii];
 	   }
 	   if (predfunc&&neq>11)

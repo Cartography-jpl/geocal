@@ -3,6 +3,7 @@
 #include "rsm_polynomial.h"
 #include "rsm_base.h"
 #include "image_coordinate.h"
+#include <boost/optional.hpp>
 
 namespace GeoCal {
   class Rpc;
@@ -54,6 +55,27 @@ public:
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample);
 
+//-----------------------------------------------------------------------
+/// Line fit error. This is a boost::optional, it may or may not be
+/// available
+//-----------------------------------------------------------------------
+
+  const boost::optional<double>& line_fit_error() const
+  {return line_fit_error_;}
+  void line_fit_error(const boost::optional<double>& V)
+  { line_fit_error_ = V; }
+
+//-----------------------------------------------------------------------
+/// Sample fit error. This is a boost::optional, it may or may not be
+/// available
+//-----------------------------------------------------------------------
+
+  const boost::optional<double>& sample_fit_error() const
+  {return sample_fit_error_;}
+  void sample_fit_error(const boost::optional<double>& V)
+  { sample_fit_error_ = V; }
+  
+  
 //-----------------------------------------------------------------------
 /// Initial guess to use when inverting the ground to image
 /// function. Not sure if this belongs here or not, but for now we'll
@@ -184,6 +206,7 @@ private:
     x_offset_, x_scale_, y_offset_, y_scale_, z_offset_, z_scale_;
   int nline_fit_, nsample_fit_, nheight_fit_, nsecond_pass_fit_;
   bool ignore_igc_error_in_fit_;
+  boost::optional<double> line_fit_error_, sample_fit_error_;
   RsmPolynomial line_num_, line_den_, sample_num_, sample_den_;
   RsmRationalPolynomial() {}
   friend class boost::serialization::access;

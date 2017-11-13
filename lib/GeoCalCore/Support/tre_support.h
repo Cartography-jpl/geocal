@@ -3,6 +3,7 @@
 #include "geocal_exception.h"
 #include <boost/format.hpp> 
 #include <boost/lexical_cast.hpp>
+#include <boost/optional.hpp>
 #include <istream>
 #include <string>
 
@@ -44,6 +45,31 @@ template<class T> inline T read_size(std::istream& In, int size)
     throw Exception("Not enough characters to read");
   return boost::lexical_cast<T>(buf, size);
 }
+
+template<> inline boost::optional<double> read_size<boost::optional<double> > (std::istream& In, int size)
+{
+  char buf[1000];
+  In.read(buf, size);
+  if(In.gcount() != size)
+    throw Exception("Not enough characters to read");
+  for(int i = 0; i < size; ++i)
+    if(buf[i] != ' ')
+      return boost::lexical_cast<double>(buf, size);
+  return boost::optional<double>();
+}
+
+template<> inline boost::optional<int> read_size<boost::optional<int> >(std::istream& In, int size)
+{
+  char buf[1000];
+  In.read(buf, size);
+  if(In.gcount() != size)
+    throw Exception("Not enough characters to read");
+  for(int i = 0; i < size; ++i)
+    if(buf[i] != ' ')
+      return boost::lexical_cast<int>(buf, size);
+  return boost::optional<int>();
+}
+  
 
 // We use the convention that a missing number (so all spaces) is
 // returned as NaN, which we use as a holder for missing data
@@ -90,6 +116,17 @@ inline void check_end_of_stream(std::istream& in)
       << "Stuff: '" << buf << "'\n";
     throw e;
   }
+}
+
+template<class T> inline std::string write_optional
+(boost::format& F, const boost::optional<T> & V, int Str_length)
+{
+  if(V)
+    return str_check_size(F % *V, Str_length);
+  std::string res;
+  for(int i = 0; i < Str_length ; ++i)
+    res += " ";
+  return res;
 }
 }
 #endif

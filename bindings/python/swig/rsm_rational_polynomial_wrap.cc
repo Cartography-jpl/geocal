@@ -3497,85 +3497,86 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[78]
 #define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[79]
 #define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[80]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[81]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[82]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[83]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[84]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t swig_types[85]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[86]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[87]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[88]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[89]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[90]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[91]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[92]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[93]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[94]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[95]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[96]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[97]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[98]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[99]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[100]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[101]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[102]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[103]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[104]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[105]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[106]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[107]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[108]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[109]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[110]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[111]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[112]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[113]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[114]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[115]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[116]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[117]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[118]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[119]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[120]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[121]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[122]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[123]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[124]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t swig_types[125]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t swig_types[126]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t swig_types[127]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t swig_types[128]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[129]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[130]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[131]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[132]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[133]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[134]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[135]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[136]
-#define SWIGTYPE_p_char swig_types[137]
-#define SWIGTYPE_p_char_type swig_types[138]
-#define SWIGTYPE_p_difference_type swig_types[139]
-#define SWIGTYPE_p_fmtflags swig_types[140]
-#define SWIGTYPE_p_int_type swig_types[141]
-#define SWIGTYPE_p_iostate swig_types[142]
-#define SWIGTYPE_p_off_type swig_types[143]
-#define SWIGTYPE_p_openmode swig_types[144]
-#define SWIGTYPE_p_pos_type swig_types[145]
-#define SWIGTYPE_p_seekdir swig_types[146]
-#define SWIGTYPE_p_size_t swig_types[147]
-#define SWIGTYPE_p_size_type swig_types[148]
-#define SWIGTYPE_p_state_type swig_types[149]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[150]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[151]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[152]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[153]
-#define SWIGTYPE_p_std__invalid_argument swig_types[154]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[155]
-#define SWIGTYPE_p_traits_type swig_types[156]
-#define SWIGTYPE_p_value_type swig_types[157]
-static swig_type_info *swig_types[159];
-static swig_module_info swig_module = {swig_types, 158, 0, 0, 0, 0};
+#define SWIGTYPE_p_boost__optionalT_double_t swig_types[81]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[82]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[83]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[84]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[85]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t swig_types[86]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[87]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[88]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[89]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[90]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[91]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[92]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[93]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[94]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[95]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[96]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[97]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[98]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[99]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[100]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[101]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[102]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[103]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[104]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[105]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[106]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[107]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[108]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[109]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[110]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[111]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[112]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[113]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[114]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[115]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[116]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[117]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[118]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[119]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[120]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[121]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[122]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[123]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[124]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[125]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t swig_types[126]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t swig_types[127]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t swig_types[128]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t swig_types[129]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[130]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[131]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[132]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[133]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[134]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[135]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[136]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[137]
+#define SWIGTYPE_p_char swig_types[138]
+#define SWIGTYPE_p_char_type swig_types[139]
+#define SWIGTYPE_p_difference_type swig_types[140]
+#define SWIGTYPE_p_fmtflags swig_types[141]
+#define SWIGTYPE_p_int_type swig_types[142]
+#define SWIGTYPE_p_iostate swig_types[143]
+#define SWIGTYPE_p_off_type swig_types[144]
+#define SWIGTYPE_p_openmode swig_types[145]
+#define SWIGTYPE_p_pos_type swig_types[146]
+#define SWIGTYPE_p_seekdir swig_types[147]
+#define SWIGTYPE_p_size_t swig_types[148]
+#define SWIGTYPE_p_size_type swig_types[149]
+#define SWIGTYPE_p_state_type swig_types[150]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[151]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[152]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[153]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[154]
+#define SWIGTYPE_p_std__invalid_argument swig_types[155]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[156]
+#define SWIGTYPE_p_traits_type swig_types[157]
+#define SWIGTYPE_p_value_type swig_types[158]
+static swig_type_info *swig_types[160];
+static swig_module_info swig_module = {swig_types, 159, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -10298,6 +10299,250 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_line_fit_error__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > *smartarg1 = 0 ;
+  boost::optional< double > result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_line_fit_error" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmRationalPolynomial const *)arg1)->line_fit_error();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  
+  if(result)
+  resultobj = PyFloat_FromDouble(*result);
+  else
+  {
+    resultobj = Py_None;
+    Py_INCREF(Py_None);
+  }
+  
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_line_fit_error__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  boost::optional< double > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
+  boost::optional< double > v2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_line_fit_error" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  
+  if(swig_obj[1] == Py_None)
+  v2 = boost::optional<double>();
+  else
+  v2 = boost::optional<double>(PyFloat_AsDouble(swig_obj[1]));
+  arg2 = &v2;
+  
+  {
+    try {
+      (arg1)->line_fit_error((boost::optional< double > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_line_fit_error(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial__v_line_fit_error",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmRationalPolynomial__v_line_fit_error__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmRationalPolynomial__v_line_fit_error__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial__v_line_fit_error'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmRationalPolynomial::line_fit_error() const\n"
+    "    GeoCal::RsmRationalPolynomial::line_fit_error(boost::optional< double > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_sample_fit_error__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial const > *smartarg1 = 0 ;
+  boost::optional< double > result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_sample_fit_error" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmRationalPolynomial const *)arg1)->sample_fit_error();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  
+  if(result)
+  resultobj = PyFloat_FromDouble(*result);
+  else
+  {
+    resultobj = Py_None;
+    Py_INCREF(Py_None);
+  }
+  
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_sample_fit_error__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  boost::optional< double > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
+  boost::optional< double > v2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial__v_sample_fit_error" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  
+  if(swig_obj[1] == Py_None)
+  v2 = boost::optional<double>();
+  else
+  v2 = boost::optional<double>(PyFloat_AsDouble(swig_obj[1]));
+  arg2 = &v2;
+  
+  {
+    try {
+      (arg1)->sample_fit_error((boost::optional< double > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial__v_sample_fit_error(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial__v_sample_fit_error",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmRationalPolynomial__v_sample_fit_error__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmRationalPolynomial__v_sample_fit_error__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial__v_sample_fit_error'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmRationalPolynomial::sample_fit_error() const\n"
+    "    GeoCal::RsmRationalPolynomial::sample_fit_error(boost::optional< double > const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_RsmRationalPolynomial(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
@@ -10574,6 +10819,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RsmRationalPolynomial__v_col_section_number", _wrap_RsmRationalPolynomial__v_col_section_number, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual void GeoCal::RsmRationalPolynomial::col_section_number(int V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmRationalPolynomial__v_line_fit_error", _wrap_RsmRationalPolynomial__v_line_fit_error, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmRationalPolynomial::line_fit_error(const boost::optional< double > &V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmRationalPolynomial__v_sample_fit_error", _wrap_RsmRationalPolynomial__v_sample_fit_error, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmRationalPolynomial::sample_fit_error(const boost::optional< double > &V)\n"
 		"\n"
 		""},
 	 { (char *)"delete_RsmRationalPolynomial", (PyCFunction)_wrap_delete_RsmRationalPolynomial, METH_O, (char *)"\n"
@@ -11238,6 +11493,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_5_t = {"_p_blitz__ArrayT_int_5
 static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6_t", "blitz::Array< int,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__optionalT_double_t = {"_p_boost__optionalT_double_t", "boost::optional< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,1 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,2 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,3 > > *", 0, 0, (void*)0, 0};
@@ -11398,6 +11654,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_6_t,
   &_swigt__p_blitz__ArrayT_int_7_t,
   &_swigt__p_blitz__ArrayT_int_8_t,
+  &_swigt__p_boost__optionalT_double_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t,
@@ -11558,6 +11815,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_5_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__optionalT_double_t[] = {  {&_swigt__p_boost__optionalT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11718,6 +11976,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_6_t,
   _swigc__p_blitz__ArrayT_int_7_t,
   _swigc__p_blitz__ArrayT_int_8_t,
+  _swigc__p_boost__optionalT_double_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t,

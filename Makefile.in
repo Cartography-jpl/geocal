@@ -2984,8 +2984,9 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@libgeocal@/swig_array.i @libgeocal@/swig_array_inc.i \
 	@libgeocal@/swig_boost_array.i \
 	@libgeocal@/swig_boost_array_inc.i \
-	@libgeocal@/swig_exception.i @libgeocal@/swig_pickle.i \
-	@libgeocal@/swig_print.i @libgeocal@/swig_python_attribute.i \
+	@libgeocal@/swig_boost_optional.i @libgeocal@/swig_exception.i \
+	@libgeocal@/swig_pickle.i @libgeocal@/swig_print.i \
+	@libgeocal@/swig_python_attribute.i \
 	@libgeocal@/swig_quaternion.i @libgeocal@/swig_std.i \
 	@srcsupport@/constant.i @srcsupport@/generic_object.i \
 	@srcsupport@/auto_derivative.i @srcsupport@/array_ad.i \

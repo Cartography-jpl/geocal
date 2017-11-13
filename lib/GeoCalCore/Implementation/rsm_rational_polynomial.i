@@ -80,6 +80,8 @@ public:
   %python_attribute(sample_denominator, const RsmPolynomial&)
   %python_attribute_with_set(row_section_number, int);
   %python_attribute_with_set(col_section_number, int);
+  %python_attribute_with_set(line_fit_error, boost::optional<double>);
+  %python_attribute_with_set(sample_fit_error, boost::optional<double>);
   %pickle_serialization()
 };
 }

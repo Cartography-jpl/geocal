@@ -1,5 +1,6 @@
 from .nitf_file import *
 from test_support import *
+from geocal_swig import GdalRasterImage
 
 def create_image_seg(f):
     img = NitfImageFromNumpy(nrow=10, ncol=10)
@@ -512,4 +513,97 @@ def test_rsm_sample(isolated_dir):
             assert(abs(ic_expect.line - ic_calc.line) < 0.01)
             assert(abs(ic_expect.sample - ic_calc.sample) < 0.01)
         # Should add tests to check against the expected value spreadsheet
+    
+@require_rsm_sample_data    
+def test_rsm_sample_file_a(isolated_dir):
+    '''Test that we can generate the same TREs as we read.'''
+    fname = rsm_sample_data + "i_6130a.ntf"
+    f = NitfFile(fname)
+    rsm = f.image_segment[0].rsm
+    # GdalRasterImage has much more limited reading of TRE, it just gives
+    # the data as a string. However that is exactly what we want to get the
+    # raw uninterpreted data.
+    fgdal = GdalRasterImage(fname)
+    texpect = fgdal["TRE", "RSMPCA"]
+    assert rsm.rsm_base.tre_string() == texpect
+    # This also as RSMDCA, RSMECA, and RSMIDA (the direct and indirect
+    # covariance, and the ID). We don't currently read these, or read them
+    # fully (for RSMIDA)
+
+@require_rsm_sample_data    
+def test_rsm_sample_file_b(isolated_dir):
+    '''Test that we can generate the same TREs as we read.'''
+    fname = rsm_sample_data + "i_6130b.ntf"
+    f = NitfFile(fname)
+    rsm = f.image_segment[0].rsm
+    fgdal = GdalRasterImage(fname)
+    texpect = fgdal["TRE", "RSMPCA"]
+    assert rsm.rsm_base.tre_string() == texpect
+    # This also as RSMDCA, RSMECA, and RSMIDA (the direct and indirect
+    # covariance, and the ID). We don't currently read these, or read them
+    # fully (for RSMIDA)
+
+@require_rsm_sample_data    
+def test_rsm_sample_file_c(isolated_dir):
+    '''Test that we can generate the same TREs as we read.'''
+    fname = rsm_sample_data + "i_6130c.ntf"
+    f = NitfFile(fname)
+    rsm = f.image_segment[0].rsm
+    fgdal = GdalRasterImage(fname)
+    texpect = fgdal["TRE", "RSMPCA"]
+    assert rsm.rsm_base.section(0,0).tre_string() == texpect
+    texpect = fgdal["TRE", "RSMPCA_2"]
+    assert rsm.rsm_base.section(0,1).tre_string() == texpect
+    texpect = fgdal["TRE", "RSMPCA_3"]
+    assert rsm.rsm_base.section(1,0).tre_string() == texpect
+    texpect = fgdal["TRE", "RSMPCA_4"]
+    assert rsm.rsm_base.section(1,1).tre_string() == texpect
+    texpect = fgdal["TRE", "RSMPIA"]
+    assert rsm.rsm_base.tre_string() == texpect
+    # This also as RSMDCA, RSMECA, and RSMIDA (the direct and indirect
+    # covariance, and the ID). We don't currently read these, or read them
+    # fully (for RSMIDA)
+
+# Doesn't work yet    
+@skip
+@require_rsm_sample_data    
+def test_rsm_sample_file_e(isolated_dir):
+    '''Test that we can generate the same TREs as we read.'''
+    fname = rsm_sample_data + "i_6130e.ntf"
+    f = NitfFile(fname)
+    rsm = f.image_segment[0].rsm
+    fgdal = GdalRasterImage(fname)
+    texpect = fgdal["TRE", "RSMPCA"]
+    assert rsm.rsm_base.tre_string() == texpect
+    # This also as RSMDCA, RSMAPA, and RSMIDA (the direct covariance,
+    # adjustment, and the ID). We don't currently read these, or read them
+    # fully (for RSMIDA)
+
+@require_rsm_sample_data    
+def test_rsm_sample_file_f(isolated_dir):
+    '''Test that we can generate the same TREs as we read.'''
+    fname = rsm_sample_data + "i_6130f.ntf"
+    f = NitfFile(fname)
+    rsm = f.image_segment[0].rsm
+    fgdal = GdalRasterImage(fname)
+    texpect = fgdal["TRE", "RSMPCA"]
+    assert rsm.rsm_base.tre_string() == texpect
+    # This also as RSMDCA, RSMAPA, and RSMIDA (the direct covariance,
+    # adjustment, and the ID). We don't currently read these, or read them
+    # fully (for RSMIDA)
+
+@require_rsm_sample_data    
+def test_rsm_sample_file_g(isolated_dir):
+    '''Test that we can generate the same TREs as we read.'''
+    fname = rsm_sample_data + "i_6130g.ntf"
+    f = NitfFile(fname)
+    rsm = f.image_segment[0].rsm
+    fgdal = GdalRasterImage(fname)
+    texpect = fgdal["TRE", "RSMPCA"]
+    assert rsm.rsm_base.section(0,0).tre_string() == texpect
+    texpect = fgdal["TRE", "RSMPIA"]
+    assert rsm.rsm_base.tre_string() == texpect
+    # This also as RSMECA, and RSMIDA (the indirect covariance,
+    # and the ID). We don't currently read these, or read them
+    # fully (for RSMIDA)
     

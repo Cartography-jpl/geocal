@@ -526,6 +526,10 @@ def test_rsm_sample_file_a(isolated_dir):
     fgdal = GdalRasterImage(fname)
     texpect = fgdal["TRE", "RSMPCA"]
     assert rsm.rsm_base.tre_string() == texpect
+    texpect = fgdal["TRE", "RSMIDA"]
+    print(rsm.rsm_id.tre_string())
+    print(texpect)
+    assert rsm.rsm_id.tre_string() == texpect
     # This also as RSMDCA, RSMECA, and RSMIDA (the direct and indirect
     # covariance, and the ID). We don't currently read these, or read them
     # fully (for RSMIDA)

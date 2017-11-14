@@ -21,6 +21,10 @@ public:
   virtual std::string print_to_string() const;
   %python_attribute_with_set(image_identifier, std::string);
   %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(image_sequence_identifier, std::string);
+  %python_attribute_with_set(sensor_identifier, std::string);
+  %python_attribute_with_set(sensor_type, std::string);
+  %python_attribute_with_set(image_acquistion_time, boost::shared_ptr<Time>);
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);

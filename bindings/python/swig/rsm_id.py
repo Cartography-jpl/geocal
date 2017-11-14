@@ -244,6 +244,78 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       self._v_rsm_suport_data_edition(value)
 
 
+    def _v_image_sequence_identifier(self, *args):
+        """
+
+        void GeoCal::RsmId::image_sequence_identifier(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_image_sequence_identifier(self, *args)
+
+
+    @property
+    def image_sequence_identifier(self):
+        return self._v_image_sequence_identifier()
+
+    @image_sequence_identifier.setter
+    def image_sequence_identifier(self, value):
+      self._v_image_sequence_identifier(value)
+
+
+    def _v_sensor_identifier(self, *args):
+        """
+
+        void GeoCal::RsmId::sensor_identifier(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_sensor_identifier(self, *args)
+
+
+    @property
+    def sensor_identifier(self):
+        return self._v_sensor_identifier()
+
+    @sensor_identifier.setter
+    def sensor_identifier(self, value):
+      self._v_sensor_identifier(value)
+
+
+    def _v_sensor_type(self, *args):
+        """
+
+        void GeoCal::RsmId::sensor_type(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_sensor_type(self, *args)
+
+
+    @property
+    def sensor_type(self):
+        return self._v_sensor_type()
+
+    @sensor_type.setter
+    def sensor_type(self, value):
+      self._v_sensor_type(value)
+
+
+    def _v_image_acquistion_time(self, *args):
+        """
+
+        void GeoCal::RsmId::image_acquistion_time(const boost::shared_ptr< Time > &V)
+
+        """
+        return _rsm_id.RsmId__v_image_acquistion_time(self, *args)
+
+
+    @property
+    def image_acquistion_time(self):
+        return self._v_image_acquistion_time()
+
+    @image_acquistion_time.setter
+    def image_acquistion_time(self, value):
+      self._v_image_acquistion_time(value)
+
+
     def tre_string(self):
         """
 
@@ -278,6 +350,10 @@ class RsmId(geocal_swig.generic_object.GenericObject):
 RsmId.__str__ = new_instancemethod(_rsm_id.RsmId___str__, None, RsmId)
 RsmId._v_image_identifier = new_instancemethod(_rsm_id.RsmId__v_image_identifier, None, RsmId)
 RsmId._v_rsm_suport_data_edition = new_instancemethod(_rsm_id.RsmId__v_rsm_suport_data_edition, None, RsmId)
+RsmId._v_image_sequence_identifier = new_instancemethod(_rsm_id.RsmId__v_image_sequence_identifier, None, RsmId)
+RsmId._v_sensor_identifier = new_instancemethod(_rsm_id.RsmId__v_sensor_identifier, None, RsmId)
+RsmId._v_sensor_type = new_instancemethod(_rsm_id.RsmId__v_sensor_type, None, RsmId)
+RsmId._v_image_acquistion_time = new_instancemethod(_rsm_id.RsmId__v_image_acquistion_time, None, RsmId)
 RsmId.tre_string = new_instancemethod(_rsm_id.RsmId_tre_string, None, RsmId)
 RsmId_swigregister = _rsm_id.RsmId_swigregister
 RsmId_swigregister(RsmId)

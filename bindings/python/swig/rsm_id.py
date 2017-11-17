@@ -188,6 +188,114 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
+class RsmIdTiming(geocal_swig.generic_object.GenericObject):
+    """
+
+    RSM timing information.
+
+    This is just a structure, but we put this together because we always
+    either want all or none of these fields.
+
+    C++ includes: rsm_id.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Number_row_acquired_simulatenously, Number_col_acquired_simulatenously, Time_betweeen_adjacent_row_group, Time_betweeen_adjacent_col_group):
+        """
+
+        GeoCal::RsmIdTiming::RsmIdTiming(int Number_row_acquired_simulatenously, int
+        Number_col_acquired_simulatenously, double
+        Time_betweeen_adjacent_row_group, double
+        Time_betweeen_adjacent_col_group)
+
+        """
+        _rsm_id.RsmIdTiming_swiginit(self, _rsm_id.new_RsmIdTiming(Number_row_acquired_simulatenously, Number_col_acquired_simulatenously, Time_betweeen_adjacent_row_group, Time_betweeen_adjacent_col_group))
+
+    def _v_number_row_acquired_simultaneously(self, *args):
+        """
+
+        void GeoCal::RsmIdTiming::number_row_acquired_simultaneously(int V)
+
+        """
+        return _rsm_id.RsmIdTiming__v_number_row_acquired_simultaneously(self, *args)
+
+
+    @property
+    def number_row_acquired_simultaneously(self):
+        return self._v_number_row_acquired_simultaneously()
+
+    @number_row_acquired_simultaneously.setter
+    def number_row_acquired_simultaneously(self, value):
+      self._v_number_row_acquired_simultaneously(value)
+
+
+    def _v_number_col_acquired_simultaneously(self, *args):
+        """
+
+        void GeoCal::RsmIdTiming::number_col_acquired_simultaneously(int V)
+
+        """
+        return _rsm_id.RsmIdTiming__v_number_col_acquired_simultaneously(self, *args)
+
+
+    @property
+    def number_col_acquired_simultaneously(self):
+        return self._v_number_col_acquired_simultaneously()
+
+    @number_col_acquired_simultaneously.setter
+    def number_col_acquired_simultaneously(self, value):
+      self._v_number_col_acquired_simultaneously(value)
+
+
+    def _v_time_between_adjacent_row_group(self, *args):
+        """
+
+        void GeoCal::RsmIdTiming::time_between_adjacent_row_group(double V)
+
+        """
+        return _rsm_id.RsmIdTiming__v_time_between_adjacent_row_group(self, *args)
+
+
+    @property
+    def time_between_adjacent_row_group(self):
+        return self._v_time_between_adjacent_row_group()
+
+    @time_between_adjacent_row_group.setter
+    def time_between_adjacent_row_group(self, value):
+      self._v_time_between_adjacent_row_group(value)
+
+
+    def _v_time_between_adjacent_col_group(self, *args):
+        """
+
+        void GeoCal::RsmIdTiming::time_between_adjacent_col_group(double V)
+
+        """
+        return _rsm_id.RsmIdTiming__v_time_between_adjacent_col_group(self, *args)
+
+
+    @property
+    def time_between_adjacent_col_group(self):
+        return self._v_time_between_adjacent_col_group()
+
+    @time_between_adjacent_col_group.setter
+    def time_between_adjacent_col_group(self, value):
+      self._v_time_between_adjacent_col_group(value)
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _rsm_id.delete_RsmIdTiming
+RsmIdTiming._v_number_row_acquired_simultaneously = new_instancemethod(_rsm_id.RsmIdTiming__v_number_row_acquired_simultaneously, None, RsmIdTiming)
+RsmIdTiming._v_number_col_acquired_simultaneously = new_instancemethod(_rsm_id.RsmIdTiming__v_number_col_acquired_simultaneously, None, RsmIdTiming)
+RsmIdTiming._v_time_between_adjacent_row_group = new_instancemethod(_rsm_id.RsmIdTiming__v_time_between_adjacent_row_group, None, RsmIdTiming)
+RsmIdTiming._v_time_between_adjacent_col_group = new_instancemethod(_rsm_id.RsmIdTiming__v_time_between_adjacent_col_group, None, RsmIdTiming)
+RsmIdTiming.__str__ = new_instancemethod(_rsm_id.RsmIdTiming___str__, None, RsmIdTiming)
+RsmIdTiming_swigregister = _rsm_id.RsmIdTiming_swigregister
+RsmIdTiming_swigregister(RsmIdTiming)
+
 class RsmId(geocal_swig.generic_object.GenericObject):
     """
 
@@ -207,6 +315,24 @@ class RsmId(geocal_swig.generic_object.GenericObject):
 
         """
         _rsm_id.RsmId_swiginit(self, _rsm_id.new_RsmId(Base, Cconv))
+
+    def _v_coordinate_converter(self, *args):
+        """
+
+        void GeoCal::RsmId::coordinate_converter(const boost::shared_ptr< CoordinateConverter > &V)
+
+        """
+        return _rsm_id.RsmId__v_coordinate_converter(self, *args)
+
+
+    @property
+    def coordinate_converter(self):
+        return self._v_coordinate_converter()
+
+    @coordinate_converter.setter
+    def coordinate_converter(self, value):
+      self._v_coordinate_converter(value)
+
 
     def _v_image_identifier(self, *args):
         """
@@ -316,6 +442,24 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       self._v_image_acquistion_time(value)
 
 
+    def _v_timing(self, *args):
+        """
+
+        void GeoCal::RsmId::timing(const boost::shared_ptr< RsmIdTiming > &V)
+
+        """
+        return _rsm_id.RsmId__v_timing(self, *args)
+
+
+    @property
+    def timing(self):
+        return self._v_timing()
+
+    @timing.setter
+    def timing(self, value):
+      self._v_timing(value)
+
+
     def tre_string(self):
         """
 
@@ -348,12 +492,14 @@ class RsmId(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _rsm_id.delete_RsmId
 RsmId.__str__ = new_instancemethod(_rsm_id.RsmId___str__, None, RsmId)
+RsmId._v_coordinate_converter = new_instancemethod(_rsm_id.RsmId__v_coordinate_converter, None, RsmId)
 RsmId._v_image_identifier = new_instancemethod(_rsm_id.RsmId__v_image_identifier, None, RsmId)
 RsmId._v_rsm_suport_data_edition = new_instancemethod(_rsm_id.RsmId__v_rsm_suport_data_edition, None, RsmId)
 RsmId._v_image_sequence_identifier = new_instancemethod(_rsm_id.RsmId__v_image_sequence_identifier, None, RsmId)
 RsmId._v_sensor_identifier = new_instancemethod(_rsm_id.RsmId__v_sensor_identifier, None, RsmId)
 RsmId._v_sensor_type = new_instancemethod(_rsm_id.RsmId__v_sensor_type, None, RsmId)
 RsmId._v_image_acquistion_time = new_instancemethod(_rsm_id.RsmId__v_image_acquistion_time, None, RsmId)
+RsmId._v_timing = new_instancemethod(_rsm_id.RsmId__v_timing, None, RsmId)
 RsmId.tre_string = new_instancemethod(_rsm_id.RsmId_tre_string, None, RsmId)
 RsmId_swigregister = _rsm_id.RsmId_swigregister
 RsmId_swigregister(RsmId)

@@ -224,8 +224,8 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         Invert the image_coordinate function to find the ground coordinates at
         a particular Z value.
 
-        For the special case that the cconv is a GeodeticConverter or
-        PlanetocentricConverter Z corresponds to height.
+        For the special case that the coordinate converter is a
+        GeodeticConverter or PlanetocentricConverter Z corresponds to height.
 
         This routine may fail to find a solution, in which case a
         ConvergenceFailure exception will be thrown. 

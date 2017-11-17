@@ -58,9 +58,9 @@ public:
   const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
   void rsm_base(const boost::shared_ptr<RsmBase>& V) { rp = V;}
   const boost::shared_ptr<CoordinateConverter>& coordinate_converter() const
-  { return cconv; }
+  { return rid->coordinate_converter(); }
   void coordinate_converter(const boost::shared_ptr<CoordinateConverter>& V) 
-  { cconv = V; }
+  { rid->coordinate_converter(V); }
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,
 		   blitz::Array<double, 2>& True_line,
@@ -100,11 +100,14 @@ public:
   }
 private:
   boost::shared_ptr<RsmBase> rp;
-  boost::shared_ptr<CoordinateConverter> cconv;
   boost::shared_ptr<RsmId> rid;
   boost::shared_ptr<RsmDirectCovariance> rdcov;
   boost::shared_ptr<RsmIndirectCovariance> ricov;
   boost::shared_ptr<RsmAdjustableParameter> rparm;
+  // *Important* This is not actually used anymore. We keep this as a
+  // scratch variable for reading the old format of the data. Instead,
+  // the coordinate converter is stored in RsmId.
+  boost::shared_ptr<CoordinateConverter> cconv_not_used;
   Rsm() {}
   friend class boost::serialization::access;
   template<class Archive>
@@ -117,6 +120,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Rsm);
-GEOCAL_CLASS_VERSION(RsmId, 1);
+GEOCAL_CLASS_VERSION(Rsm, 1);
 #endif
 

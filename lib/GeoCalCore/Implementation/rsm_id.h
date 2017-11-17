@@ -5,6 +5,49 @@
 
 namespace GeoCal {
 /****************************************************************//**
+  RSM timing information. This is just a structure, but we put this
+  together because we always either want all or none of these fields.
+*******************************************************************/
+
+class RsmIdTiming : public Printable<RsmIdTiming> {
+public:
+  RsmIdTiming(int Number_row_acquired_simulatenously,
+	      int Number_col_acquired_simulatenously,
+	      double Time_betweeen_adjacent_row_group,
+	      double Time_betweeen_adjacent_col_group)
+    : number_row_acquired_simultaneously_(Number_row_acquired_simulatenously),
+      number_col_acquired_simultaneously_(Number_col_acquired_simulatenously),
+      time_between_adjacent_row_group_(Time_betweeen_adjacent_row_group),
+      time_between_adjacent_col_group_(Time_betweeen_adjacent_col_group)
+  { }
+
+  int number_row_acquired_simultaneously() const
+  {return number_row_acquired_simultaneously_; }
+  void number_row_acquired_simultaneously(int V)
+  {number_row_acquired_simultaneously_ = V; }
+  int number_col_acquired_simultaneously() const
+  {return number_col_acquired_simultaneously_; }
+  void number_col_acquired_simultaneously(int V)
+  {number_col_acquired_simultaneously_ = V; }
+  double time_between_adjacent_row_group() const
+  { return time_between_adjacent_row_group_;}
+  void time_between_adjacent_row_group(double V)
+  { time_between_adjacent_row_group_ = V;}
+  double time_between_adjacent_col_group() const
+  { return time_between_adjacent_col_group_;}
+  void time_between_adjacent_col_group(double V)
+  { time_between_adjacent_col_group_ = V;}
+  virtual void print(std::ostream& Os) const;
+private:
+  int number_row_acquired_simultaneously_, number_col_acquired_simultaneously_;
+  double time_between_adjacent_row_group_, time_between_adjacent_col_group_;
+  RsmIdTiming() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+  
+/****************************************************************//**
   This provides additional information about the Rsm, it is what is
   used to populate 
 *******************************************************************/
@@ -14,10 +57,17 @@ public:
   RsmId(const boost::shared_ptr<RsmBase>& Base,
 	const boost::shared_ptr<CoordinateConverter> &Cconv)
     : image_identifier_(Base->image_identifier()),
-      rsm_suport_data_edition_(Base->rsm_suport_data_edition())
+      rsm_suport_data_edition_(Base->rsm_suport_data_edition()),
+      cconv(Cconv)
   {
   }
   virtual ~RsmId() {}
+
+  const boost::shared_ptr<CoordinateConverter>& coordinate_converter() const
+  { return cconv; }
+  void coordinate_converter(const boost::shared_ptr<CoordinateConverter>& V) 
+  { cconv = V; }
+  
 //-----------------------------------------------------------------------
 /// Image identification.
 //-----------------------------------------------------------------------
@@ -68,16 +118,26 @@ public:
   { return image_acquistion_time_;}
   void image_acquistion_time(const boost::shared_ptr<Time>& V)
   { image_acquistion_time_ = V; }
+
+//-----------------------------------------------------------------------
+/// Timing information
+//-----------------------------------------------------------------------
+  const boost::shared_ptr<RsmIdTiming> timing() const
+  { return timing_; }
+  void timing(const boost::shared_ptr<RsmIdTiming>& V)
+  { timing_ = V; }
   
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);
   virtual void print(std::ostream& Os) const;
 private:
+  boost::shared_ptr<CoordinateConverter> cconv;
   std::string image_identifier_, rsm_suport_data_edition_,
     image_sequence_identifier_, sensor_identifier_,
     sensor_type_;
   boost::shared_ptr<Time> image_acquistion_time_;
+  boost::shared_ptr<RsmIdTiming> timing_;
   RsmId() {}
   friend class boost::serialization::access;
   template<class Archive>
@@ -86,4 +146,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(RsmId);
+GEOCAL_EXPORT_KEY(RsmIdTiming);
 #endif

@@ -70,8 +70,8 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
   // This is a common enough special case to treat specially:
   const SimpleDem* sdem = dynamic_cast<const SimpleDem*>(&D);
   const GeodeticConverter* gconv = dynamic_cast<const GeodeticConverter*>(coordinate_converter().get());
-  const GeodeticRadianConverter* gconv2 = dynamic_cast<const GeodeticRadianConverterConverter*>(coordinate_converter().get());
-  const GeodeticRadian2piConverter* gconv3 = dynamic_cast<const GeodeticRadian2piConverterConverter*>(coordinate_converter().get());
+  const GeodeticRadianConverter* gconv2 = dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
+  const GeodeticRadian2piConverter* gconv3 = dynamic_cast<const GeodeticRadian2piConverter*>(coordinate_converter().get());
   if(sdem && (gconv || gconv2 || gconv3))
     return ground_coordinate(Ic, sdem->h());
   const PlanetSimpleDem* pdem = dynamic_cast<const PlanetSimpleDem*>(&D);
@@ -164,8 +164,8 @@ boost::shared_ptr<GroundCoordinate>
 Rsm::ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
 {
   const GeodeticConverter* gconv = dynamic_cast<const GeodeticConverter*>(coordinate_converter().get());
-  const GeodeticRadianConverter* gconv2 = dynamic_cast<const GeodeticRadianConverterConverter*>(coordinate_converter().get());
-  const GeodeticRadian2piConverter* gconv3 = dynamic_cast<const GeodeticRadian2piConverterConverter*>(coordinate_converter().get());
+  const GeodeticRadianConverter* gconv2 = dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
+  const GeodeticRadian2piConverter* gconv3 = dynamic_cast<const GeodeticRadian2piConverter*>(coordinate_converter().get());
   const PlanetocentricConverter* pconv = dynamic_cast<const PlanetocentricConverter*>(coordinate_converter().get());
   if(gconv || gconv2 || gconv3 || pconv)
     return ground_coordinate(Ic, H);

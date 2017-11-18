@@ -199,7 +199,7 @@ def rsm_grid(igc_rpc):
     r.total_number_col_digit = 8
     hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
     hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
-    r.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line,
+    r.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line,
           0, igc_rpc.number_sample)
     return r
 
@@ -209,7 +209,7 @@ def rsm_ms_polynomial(igc_rpc):
     res = RsmMultiSection(igc_rpc.number_line, igc_rpc.number_sample, 3, 2, rp)
     hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
     hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
-    res.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
+    res.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
 	    igc_rpc.number_sample)
     return res
 
@@ -221,28 +221,28 @@ def rsm_ms_grid(igc_rpc):
     res = RsmMultiSection(igc_rpc.number_line, igc_rpc.number_sample, 3, 2, rg)
     hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
     hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
-    res.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
+    res.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
 	    igc_rpc.number_sample)
     return res
 
 @pytest.fixture(scope="function")
 def rsm(rsm_rational_polynomial):
-    res = Rsm(rsm_rational_polynomial, GeodeticConverter())
+    res = Rsm(rsm_rational_polynomial, GeodeticRadianConverter())
     return res
 
 @pytest.fixture(scope="function")
 def rsm_g(rsm_grid):
-    res = Rsm(rsm_grid, GeodeticConverter())
+    res = Rsm(rsm_grid, GeodeticRadianConverter())
     return res
 
 @pytest.fixture(scope="function")
 def rsm_ms_rp(rsm_ms_polynomial):
-    res = Rsm(rsm_ms_polynomial, GeodeticConverter())
+    res = Rsm(rsm_ms_polynomial, GeodeticRadianConverter())
     return res
 
 @pytest.fixture(scope="function")
 def rsm_ms_g(rsm_ms_grid):
-    res = Rsm(rsm_ms_grid, GeodeticConverter())
+    res = Rsm(rsm_ms_grid, GeodeticRadianConverter())
     return res
 
 

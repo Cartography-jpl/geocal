@@ -78,6 +78,14 @@ public:
   boost::shared_ptr<RpcImageGroundConnection> igc;
 };
 
+class RsmFixtureRadian : public RsmFixture {
+public:
+  RsmFixtureRadian()
+  {
+  cconv = boost::make_shared<GeodeticRadianConverter>();
+  }
+};
+  
 class RsmLowOrderPolynomialFixture : public RsmFixture {
 public:
   RsmLowOrderPolynomialFixture()

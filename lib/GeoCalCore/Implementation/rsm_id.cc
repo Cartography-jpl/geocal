@@ -3,6 +3,8 @@
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
 #include "ostream_pad.h"
+#include "ecr.h"
+#include "local_rectangular_coordinate.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/make_shared.hpp>
 #include <sstream>
@@ -41,7 +43,6 @@ GEOCAL_IMPLEMENT(RsmId);
 
 static boost::format f("%|1$-80s|%|2$-40s|%|3$-40|%|4$-40|%|5$-40|");
 static boost::format tac("%|1$4s|%|2$2s|%|3$2s|%|4$2s|%|5$2s|%|6$9s|");
-static boost::format holder("%|1$-1|");
 static boost::format rsm_sz("%|1$08d|%|2$08d|%|3$08d|%|4$08d|%|5$08d|%|6$08d|");
 static boost::format num_missing("%|1$21s|");
 static boost::format num("%|1$+21.14E|");
@@ -79,9 +80,30 @@ std::string RsmId::tre_string() const
 			  8 + 8 + 21 + 21);
   else
     res += str_check_size(timingf_missing % "", 8 + 8 + 21 + 21);
-  res += str_check_size(holder % "", 1);
-  for(int i = 0; i < 12; ++i)
-    res += str_check_size(num_missing % "", 21);
+  const GeodeticRadianConverter* gconv =
+    dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
+  const GeodeticRadian2piConverter* gconv2 =
+    dynamic_cast<const GeodeticRadian2piConverter*>
+    (coordinate_converter().get());
+  const LocalRcConverter* gconv3 = 
+    dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
+  if(gconv) {
+    res += "G";
+    for(int i = 0; i < 12; ++i)
+      res += str_check_size(num_missing % "", 21);
+  } else if(gconv2) {
+    res += "H";
+    for(int i = 0; i < 12; ++i)
+      res += str_check_size(num_missing % "", 21);
+  } else if(gconv3) {
+    res += "R";
+    for(int i = 0; i < 3; ++i)
+      res += str_check_size(num % gconv3->parameter()->cf_offset[i], 21);
+    for(int i = 0; i < 3; ++i)
+      for(int j = 0; j < 3; ++j)
+	res += str_check_size(num % gconv3->parameter()->cf_to_rc[i][j], 21);
+  } else
+    throw Exception("Writing a RSMIDA TRE only supports GeodeticRadianConverter, GeodeticRadian2piConverter and LocalRcConverter. This is a limitation of the TRE format. Note boost serialization works fine with an CoordinateConverter, just not the TRE");
   for(int i = 0; i < 24; ++i)
     res += str_check_size(num % 0.0, 21);
   for(int i = 0; i < 3; ++i)
@@ -123,18 +145,38 @@ RsmId::read_tre_string(const std::string& Tre_in)
     t += ":" + read_size<std::string>(in, 2);
     t += ":" + read_size<std::string>(in, 9) + "Z";
     res->image_acquistion_time_ = boost::make_shared<Time>(Time::parse_time(t));
-  } else {
-    std::string trash = read_size<std::string>(in, 2 * 4 + 9);
-  }
+  } else
+    read_size<std::string>(in, 2 * 4 + 9);
   boost::optional<int> t1 = read_size<boost::optional<int> >(in, 8);
   boost::optional<int> t2 = read_size<boost::optional<int> >(in, 8);
   boost::optional<double> t3 = read_size<boost::optional<double> >(in, 21);
   boost::optional<double> t4 = read_size<boost::optional<double> >(in, 21);
   if(t1)
     res->timing_ = boost::make_shared<RsmIdTiming>(*t1, *t2, *t3, *t4);
-  std::string placeholder = read_size<std::string>(in, 1);
-  for(int i = 0; i < 12; ++i)
-    double x = read_size_nan(in, 21);
+  std::string conv_type = read_size<std::string>(in, 1);
+  if(conv_type == "G") {
+    res->cconv = boost::make_shared<GeodeticRadianConverter>();
+    for(int i = 0; i < 12; ++i)
+      read_size<boost::optional<double> >(in, 21);
+  } else if (conv_type == "H") {
+    res->cconv = boost::make_shared<GeodeticRadian2piConverter>();
+    for(int i = 0; i < 12; ++i)
+      read_size<boost::optional<double> >(in, 21);
+  } else if (conv_type == "R") {
+    boost::shared_ptr<LocalRcParameter> lp =
+      boost::make_shared<LocalRcParameter>();
+    lp->cf_prototype = boost::make_shared<Ecr>(0,0,0);
+    for(int i = 0; i < 3; ++i)
+      lp->cf_offset[i] = read_size<double>(in, 21);
+    for(int i = 0; i < 3; ++i)
+      for(int j = 0; j < 3; ++j)
+	lp->cf_to_rc[i][j] = read_size<double>(in, 21);
+    res->cconv = boost::make_shared<LocalRcConverter>(lp);
+  } else {
+    Exception e;
+    e << "Unrecognized ground domain form. We got " << conv_type << "by only recognize G, H and R";
+    throw e;
+  }
   for(int i = 0; i < 24; ++i)
     double x = read_size<double>(in, 21);
   for(int i = 0; i < 3; ++i)

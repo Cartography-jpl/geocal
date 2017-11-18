@@ -56,9 +56,9 @@ class RsmId : public Printable<RsmId> {
 public:
   RsmId(const boost::shared_ptr<RsmBase>& Base,
 	const boost::shared_ptr<CoordinateConverter> &Cconv)
-    : image_identifier_(Base->image_identifier()),
-      rsm_suport_data_edition_(Base->rsm_suport_data_edition()),
-      cconv(Cconv)
+    : cconv(Cconv),
+      image_identifier_(Base->image_identifier()),
+      rsm_suport_data_edition_(Base->rsm_suport_data_edition())
   {
   }
   virtual ~RsmId() {}

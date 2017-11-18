@@ -6,7 +6,7 @@ using namespace GeoCal;
 using namespace blitz;
 
   
-BOOST_FIXTURE_TEST_SUITE(rsm_id, RsmFixture)
+BOOST_FIXTURE_TEST_SUITE(rsm_id, RsmFixtureRadian)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   Rsm r(rp_from_rpc, cconv);

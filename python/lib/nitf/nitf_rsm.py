@@ -1,4 +1,4 @@
-from geocal_swig import Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial, RsmGrid, RsmRpPlusGrid, GeodeticConverter
+from geocal_swig import Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial, RsmGrid, RsmRpPlusGrid
 from .nitf_tre_rsmida import TreRSMIDA
 from .nitf_tre_rsmgga import TreRSMGGA
 from .nitf_tre_rsmgia import TreRSMGIA
@@ -81,8 +81,6 @@ def rsm_read_tre(seg):
        return
     t = _rsm_find_tre(seg, 'RSMIDA')
     r = Rsm(t.rsm_id)
-    # Temp
-    r.coordinate_converter = GeodeticConverter()
     edition = t.edition
     rsm_rp = None
     rsm_g = None

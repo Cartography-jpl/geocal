@@ -82,7 +82,14 @@ class RsmFixtureRadian : public RsmFixture {
 public:
   RsmFixtureRadian()
   {
-  cconv = boost::make_shared<GeodeticRadianConverter>();
+    cconv = boost::make_shared<GeodeticRadianConverter>();
+    double hmin = rpc.height_offset - rpc.height_scale;
+    double hmax = rpc.height_offset + rpc.height_scale;
+    double lmin = 0;
+    double smin = 0;
+    double lmax = rpc.line_offset * 2;
+    double smax = rpc.sample_offset * 2;
+    rp_from_rpc->fit(*igc, *cconv, hmin, hmax, lmin, lmax, smin, smax);
   }
 };
   

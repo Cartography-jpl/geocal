@@ -274,6 +274,19 @@ class Rsm(geocal_swig.generic_object.GenericObject):
         return _rsm.Rsm_fit(self, Igc, Min_height, Max_height)
 
 
+    def fill_in_ground_domain_vertex(self, Min_height, Max_height):
+        """
+
+        void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)
+        Fill in the ground domain vertex information.
+
+        Note that you don't normally need to call this directly, the "fit"
+        function already does this. But it can be useful in unit testing and
+        perhaps other contexts to directly calculate this. 
+        """
+        return _rsm.Rsm_fill_in_ground_domain_vertex(self, Min_height, Max_height)
+
+
     def compare_igc(self, Igc, Number_line_spacing, Number_sample_spacing, Height):
         """
 
@@ -451,6 +464,7 @@ Rsm.ground_coordinate_approx_height = new_instancemethod(_rsm.Rsm_ground_coordin
 Rsm.image_coordinate = new_instancemethod(_rsm.Rsm_image_coordinate, None, Rsm)
 Rsm.image_coordinate_jacobian = new_instancemethod(_rsm.Rsm_image_coordinate_jacobian, None, Rsm)
 Rsm.fit = new_instancemethod(_rsm.Rsm_fit, None, Rsm)
+Rsm.fill_in_ground_domain_vertex = new_instancemethod(_rsm.Rsm_fill_in_ground_domain_vertex, None, Rsm)
 Rsm.compare_igc = new_instancemethod(_rsm.Rsm_compare_igc, None, Rsm)
 Rsm._v_rsm_id = new_instancemethod(_rsm.Rsm__v_rsm_id, None, Rsm)
 Rsm._v_rsm_direct_covariance = new_instancemethod(_rsm.Rsm__v_rsm_direct_covariance, None, Rsm)

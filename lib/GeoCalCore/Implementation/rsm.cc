@@ -220,6 +220,29 @@ void Rsm::fit(const ImageGroundConnection& Igc, double Min_height,
 {
   rp->fit(Igc, *coordinate_converter(), Min_height, Max_height, 0, Igc.number_line(),
 	  0, Igc.number_sample());
+  fill_in_ground_domain_vertex(Min_height, Max_height);
+}
+
+//-----------------------------------------------------------------------
+/// Fill in the ground domain vertex information. Note that you don't
+/// normally need to call this directly, the "fit" function already
+/// does this. But it can be useful in unit testing and perhaps other
+/// contexts to directly calculate this.
+//-----------------------------------------------------------------------
+
+void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)
+{
+  int ind = 0;
+  for(int hind = 0; hind < 2; ++hind)
+    for(int lind = 0; lind < 2; ++lind)
+      for(int sind = 0; sind < 2; ++sind, ++ind) {
+	rid->ground_domain_vertex()[ind] = ground_coordinate_approx_height
+	  (ImageCoordinate(
+	      (lind == 0 ? rp->min_line() : rp->max_line()),
+	      (sind == 0 ? rp->min_sample() : rp->max_sample())),
+	   (hind == 0 ? Min_height : Max_height));
+      }
+      
 }
 
 //-----------------------------------------------------------------------

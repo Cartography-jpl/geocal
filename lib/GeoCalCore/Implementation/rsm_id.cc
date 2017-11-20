@@ -34,7 +34,8 @@ void RsmId::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(sensor_identifier)
     & GEOCAL_NVP_(sensor_type)
     & GEOCAL_NVP_(image_acquistion_time)
-    & GEOCAL_NVP_(timing);
+    & GEOCAL_NVP_(timing)
+    & GEOCAL_NVP_(ground_domain_vertex);
 }
 
 GEOCAL_IMPLEMENT(RsmIdTiming);
@@ -105,8 +106,17 @@ std::string RsmId::tre_string() const
 	res += str_check_size(num % gconv3->parameter()->cf_to_rc[i][j], 21);
   } else
     throw Exception("Writing a RSMIDA TRE only supports GeodeticRadianConverter, GeodeticRadian2piConverter and LocalRcConverter. This is a limitation of the TRE format. Note boost serialization works fine with an CoordinateConverter, just not the TRE");
-  for(int i = 0; i < 24; ++i)
-    res += str_check_size(num % 0.0, 21);
+  if(ground_domain_vertex_.size() != 8)
+      throw Exception("Ground domain vertex needs to be exactly 8 points");
+  for(int i = 0; i < 8; ++i) {
+    if(!ground_domain_vertex_[i])
+      throw Exception("ground_domain_vertex needs to be filled in");
+    double x, y, z;
+    cconv->convert_to_coordinate(*ground_domain_vertex_[i], x, y, z);
+    res += str_check_size(num % x, 21);
+    res += str_check_size(num % y, 21);
+    res += str_check_size(num % z, 21);
+  }
   for(int i = 0; i < 3; ++i)
     res += str_check_size(num_missing % "", 21);
   res += str_check_size(rsm_sz % 0 % 0 % 0 % 0 % 0 % 0, 8*6);
@@ -179,8 +189,14 @@ RsmId::read_tre_string(const std::string& Tre_in)
     e << "Unrecognized ground domain form. We got " << conv_type << "by only recognize G, H and R";
     throw e;
   }
-  for(int i = 0; i < 24; ++i)
+  res->ground_domain_vertex_.resize(8);
+  for(int i = 0; i < 8; ++i) {
     double x = read_size<double>(in, 21);
+    double y = read_size<double>(in, 21);
+    double z = read_size<double>(in, 21);
+    res->ground_domain_vertex_[i] =
+      res->cconv->convert_from_coordinate(x, y, z);
+  }
   for(int i = 0; i < 3; ++i)
     double x = read_size_nan(in, 21);
   for(int i = 0; i < 2; ++i)

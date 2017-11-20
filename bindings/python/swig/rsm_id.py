@@ -460,6 +460,24 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       self._v_timing(value)
 
 
+    def _v_ground_domain_vertex(self, *args):
+        """
+
+        void GeoCal::RsmId::ground_domain_vertex(const std::vector< boost::shared_ptr< GroundCoordinate > > &V)
+
+        """
+        return _rsm_id.RsmId__v_ground_domain_vertex(self, *args)
+
+
+    @property
+    def ground_domain_vertex(self):
+        return self._v_ground_domain_vertex()
+
+    @ground_domain_vertex.setter
+    def ground_domain_vertex(self, value):
+      self._v_ground_domain_vertex(value)
+
+
     def tre_string(self):
         """
 
@@ -500,6 +518,7 @@ RsmId._v_sensor_identifier = new_instancemethod(_rsm_id.RsmId__v_sensor_identifi
 RsmId._v_sensor_type = new_instancemethod(_rsm_id.RsmId__v_sensor_type, None, RsmId)
 RsmId._v_image_acquistion_time = new_instancemethod(_rsm_id.RsmId__v_image_acquistion_time, None, RsmId)
 RsmId._v_timing = new_instancemethod(_rsm_id.RsmId__v_timing, None, RsmId)
+RsmId._v_ground_domain_vertex = new_instancemethod(_rsm_id.RsmId__v_ground_domain_vertex, None, RsmId)
 RsmId.tre_string = new_instancemethod(_rsm_id.RsmId_tre_string, None, RsmId)
 RsmId_swigregister = _rsm_id.RsmId_swigregister
 RsmId_swigregister(RsmId)

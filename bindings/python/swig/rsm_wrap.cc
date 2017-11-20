@@ -7187,6 +7187,63 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Rsm_fill_in_ground_domain_vertex",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "1"" of type '" "GeoCal::Rsm *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      (arg1)->fill_in_ground_domain_vertex(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Rsm_compare_igc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
@@ -8452,6 +8509,15 @@ static PyMethodDef SwigMethods[] = {
 		"Max_height)\n"
 		"Generate a Rsm that approximates the calculation done by a\n"
 		"ImageGroundConnection. \n"
+		""},
+	 { (char *)"Rsm_fill_in_ground_domain_vertex", _wrap_Rsm_fill_in_ground_domain_vertex, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)\n"
+		"Fill in the ground domain vertex information.\n"
+		"\n"
+		"Note that you don't normally need to call this directly, the \"fit\"\n"
+		"function already does this. But it can be useful in unit testing and\n"
+		"perhaps other contexts to directly calculate this. \n"
 		""},
 	 { (char *)"Rsm_compare_igc", _wrap_Rsm_compare_igc, METH_VARARGS, (char *)"\n"
 		"\n"

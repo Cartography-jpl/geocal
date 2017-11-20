@@ -5557,6 +5557,122 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
 }
 
 
+  namespace swig {
+    template <>  struct traits<boost::shared_ptr< GeoCal::GroundCoordinate > > {
+      typedef pointer_category category;
+      static const char* type_name() { return"boost::shared_ptr< GeoCal::GroundCoordinate >"; }
+    };
+  }
+
+
+namespace swig {
+  template <class SwigPySeq, class Seq>
+  inline void
+  assign(const SwigPySeq& swigpyseq, Seq* seq) {
+    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
+    typedef typename SwigPySeq::value_type value_type;
+    typename SwigPySeq::const_iterator it = swigpyseq.begin();
+    for (;it != swigpyseq.end(); ++it) {
+      seq->insert(seq->end(),(value_type)(*it));
+    }
+  }
+
+  template <class Seq, class T = typename Seq::value_type >
+  struct traits_asptr_stdseq {
+    typedef Seq sequence;
+    typedef T value_type;
+
+    static int asptr(PyObject *obj, sequence **seq) {
+      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
+	sequence *p;
+	if (::SWIG_ConvertPtr(obj,(void**)&p,
+			      swig::type_info<sequence>(),0) == SWIG_OK) {
+	  if (seq) *seq = p;
+	  return SWIG_OLDOBJ;
+	}
+      } else if (PySequence_Check(obj)) {
+	try {
+	  SwigPySequence_Cont<value_type> swigpyseq(obj);
+	  if (seq) {
+	    sequence *pseq = new sequence();
+	    assign(swigpyseq, pseq);
+	    *seq = pseq;
+	    return SWIG_NEWOBJ;
+	  } else {
+	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
+	  }
+	} catch (std::exception& e) {
+	  if (seq) {
+	    if (!PyErr_Occurred()) {
+	      PyErr_SetString(PyExc_TypeError, e.what());
+	    }
+	  }
+	  return SWIG_ERROR;
+	}
+      }
+      return SWIG_ERROR;
+    }
+  };
+
+  template <class Seq, class T = typename Seq::value_type >
+  struct traits_from_stdseq {
+    typedef Seq sequence;
+    typedef T value_type;
+    typedef typename Seq::size_type size_type;
+    typedef typename sequence::const_iterator const_iterator;
+
+    static PyObject *from(const sequence& seq) {
+#ifdef SWIG_PYTHON_EXTRA_NATIVE_CONTAINERS
+      swig_type_info *desc = swig::type_info<sequence>();
+      if (desc && desc->clientdata) {
+	return SWIG_NewPointerObj(new sequence(seq), desc, SWIG_POINTER_OWN);
+      }
+#endif
+      size_type size = seq.size();
+      if (size <= (size_type)INT_MAX) {
+	PyObject *obj = PyTuple_New((int)size);
+	int i = 0;
+	for (const_iterator it = seq.begin();
+	     it != seq.end(); ++it, ++i) {
+	  PyTuple_SetItem(obj,i,swig::from<value_type>(*it));
+	}
+	return obj;
+      } else {
+	PyErr_SetString(PyExc_OverflowError,"sequence size not valid in python");
+	return NULL;
+      }
+    }
+  };
+}
+
+
+  namespace swig {
+    template <class T>
+    struct traits_asptr<std::vector<T> >  {
+      static int asptr(PyObject *obj, std::vector<T> **vec) {
+	return traits_asptr_stdseq<std::vector<T> >::asptr(obj, vec);
+      }
+    };
+    
+    template <class T>
+    struct traits_from<std::vector<T> > {
+      static PyObject *from(const std::vector<T>& vec) {
+	return traits_from_stdseq<std::vector<T> >::from(vec);
+      }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >, std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "boost::shared_ptr< GeoCal::GroundCoordinate >" "," "std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > >" " >";
+	  }
+	};
+      }
+    
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -8106,6 +8222,126 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmId__v_ground_domain_vertex__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmId *arg1 = (GeoCal::RsmId *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmId const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmId const > *smartarg1 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmId__v_ground_domain_vertex" "', argument " "1"" of type '" "GeoCal::RsmId const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmId const *)arg1)->ground_domain_vertex();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmId__v_ground_domain_vertex__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmId *arg1 = (GeoCal::RsmId *) 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmId > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmId > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmId__v_ground_domain_vertex" "', argument " "1"" of type '" "GeoCal::RsmId *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmId > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *ptr = (std::vector<boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *)0;
+    res2 = swig::asptr(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmId__v_ground_domain_vertex" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmId__v_ground_domain_vertex" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      (arg1)->ground_domain_vertex((std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmId__v_ground_domain_vertex(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmId__v_ground_domain_vertex",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmId__v_ground_domain_vertex__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmId__v_ground_domain_vertex__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmId__v_ground_domain_vertex'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmId::ground_domain_vertex() const\n"
+    "    GeoCal::RsmId::ground_domain_vertex(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmId_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmId *arg1 = (GeoCal::RsmId *) 0 ;
@@ -8340,6 +8576,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RsmId__v_timing", _wrap_RsmId__v_timing, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::RsmId::timing(const boost::shared_ptr< RsmIdTiming > &V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmId__v_ground_domain_vertex", _wrap_RsmId__v_ground_domain_vertex, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmId::ground_domain_vertex(const std::vector< boost::shared_ptr< GroundCoordinate > > &V)\n"
 		"\n"
 		""},
 	 { (char *)"RsmId_tre_string", (PyCFunction)_wrap_RsmId_tre_string, METH_O, (char *)"\n"

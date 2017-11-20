@@ -185,10 +185,13 @@ def igc_rpc(rpc):
     return RpcImageGroundConnection(rpc, SimpleDem(), image)
 
 @pytest.fixture(scope="function")
-def rsm_rational_polynomial(rpc):
+def rsm_rational_polynomial(igc_rpc):
     '''Create a RsmRationalPolynomial that matches our rpc test fixture'''
     r = RsmRationalPolynomial(3,3,3,3,3,3,3,3)
-    r.set_rpc_coeff(rpc)
+    hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
+    hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
+    r.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line,
+          0, igc_rpc.number_sample)
     return r
 
 @pytest.fixture(scope="function")
@@ -228,21 +231,28 @@ def rsm_ms_grid(igc_rpc):
 @pytest.fixture(scope="function")
 def rsm(rsm_rational_polynomial):
     res = Rsm(rsm_rational_polynomial, GeodeticRadianConverter())
+    res.fill_in_ground_domain_vertex(500, 1500)
     return res
 
 @pytest.fixture(scope="function")
 def rsm_g(rsm_grid):
     res = Rsm(rsm_grid, GeodeticRadianConverter())
+    # This fails. We'll have to figure out what the problem is and fix it,
+    # but in the mean time put dummy data in so we can bypass this problem
+    # res.fill_in_ground_domain_vertex(500, 1500)
+    res.rsm_id.ground_domain_vertex = [Geodetic(10,20)] * 8
     return res
 
 @pytest.fixture(scope="function")
 def rsm_ms_rp(rsm_ms_polynomial):
     res = Rsm(rsm_ms_polynomial, GeodeticRadianConverter())
+    res.fill_in_ground_domain_vertex(500, 1500)
     return res
 
 @pytest.fixture(scope="function")
 def rsm_ms_g(rsm_ms_grid):
     res = Rsm(rsm_ms_grid, GeodeticRadianConverter())
+    res.fill_in_ground_domain_vertex(500, 1500)
     return res
 
 

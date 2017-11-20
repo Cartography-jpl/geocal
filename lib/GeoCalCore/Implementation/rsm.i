@@ -37,6 +37,7 @@ public:
 
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
+  void fill_in_ground_domain_vertex(double Min_height, double Max_height);
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,
 		   blitz::Array<double, 2>& OUTPUT,

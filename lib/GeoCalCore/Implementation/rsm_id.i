@@ -10,6 +10,7 @@
 %}
 %import "rsm_base.i"
 %import "coordinate_converter.i"
+%import "ground_coordinate.i"
 
 %geocal_shared_ptr(GeoCal::RsmIdTiming);
 %geocal_shared_ptr(GeoCal::RsmId);
@@ -42,6 +43,7 @@ public:
   %python_attribute_with_set(sensor_type, std::string);
   %python_attribute_with_set(image_acquistion_time, boost::shared_ptr<Time>);
   %python_attribute_with_set(timing, boost::shared_ptr<RsmIdTiming>);
+  %python_attribute_with_set(ground_domain_vertex, std::vector<boost::shared_ptr<GroundCoordinate> >);
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);

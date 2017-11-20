@@ -2,6 +2,7 @@
 #define RSM_ID_H
 #include "rsm_base.h"
 #include "geocal_time.h"
+#include "ground_coordinate.h"
 
 namespace GeoCal {
 /****************************************************************//**
@@ -58,7 +59,8 @@ public:
 	const boost::shared_ptr<CoordinateConverter> &Cconv)
     : cconv(Cconv),
       image_identifier_(Base->image_identifier()),
-      rsm_suport_data_edition_(Base->rsm_suport_data_edition())
+      rsm_suport_data_edition_(Base->rsm_suport_data_edition()),
+      ground_domain_vertex_(8)
   {
   }
   virtual ~RsmId() {}
@@ -126,7 +128,22 @@ public:
   { return timing_; }
   void timing(const boost::shared_ptr<RsmIdTiming>& V)
   { timing_ = V; }
-  
+
+//-----------------------------------------------------------------------
+/// Ground domain vertex
+//-----------------------------------------------------------------------
+
+  const std::vector<boost::shared_ptr<GroundCoordinate> >&
+  ground_domain_vertex() const { return ground_domain_vertex_;}
+  std::vector<boost::shared_ptr<GroundCoordinate> >&
+  ground_domain_vertex() { return ground_domain_vertex_;}
+  void ground_domain_vertex(const std::vector<boost::shared_ptr<GroundCoordinate> >& V)
+  {
+    if(V.size() != 8)
+      throw Exception("Ground domain vertex needs to be exactly 8 points");
+    ground_domain_vertex_ = V;
+  }
+
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);
@@ -138,6 +155,7 @@ private:
     sensor_type_;
   boost::shared_ptr<Time> image_acquistion_time_;
   boost::shared_ptr<RsmIdTiming> timing_;
+  std::vector<boost::shared_ptr<GroundCoordinate> > ground_domain_vertex_;
   RsmId() {}
   friend class boost::serialization::access;
   template<class Archive>

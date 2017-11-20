@@ -259,7 +259,8 @@ public:
   virtual boost::shared_ptr<GroundCoordinate>
     convert_from_coordinate(double X, double Y, double Z = 0) const
   {
-    return boost::shared_ptr<GroundCoordinate>(new Geodetic(Y * Constant::rad_to_deg, (X > 180 ? X - 360 : X) * Constant::rad_to_deg, Z));
+    double x = X * Constant::rad_to_deg;
+    return boost::shared_ptr<GroundCoordinate>(new Geodetic(Y * Constant::rad_to_deg, (x > 180 ? x - 360 : x), Z));
   }
 
 //-----------------------------------------------------------------------

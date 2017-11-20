@@ -99,8 +99,9 @@ std::string RsmId::tre_string() const
     res += "R";
     for(int i = 0; i < 3; ++i)
       res += str_check_size(num % gconv3->parameter()->cf_offset[i], 21);
-    for(int i = 0; i < 3; ++i)
-      for(int j = 0; j < 3; ++j)
+    // This is column major order
+    for(int j = 0; j < 3; ++j)
+      for(int i = 0; i < 3; ++i)
 	res += str_check_size(num % gconv3->parameter()->cf_to_rc[i][j], 21);
   } else
     throw Exception("Writing a RSMIDA TRE only supports GeodeticRadianConverter, GeodeticRadian2piConverter and LocalRcConverter. This is a limitation of the TRE format. Note boost serialization works fine with an CoordinateConverter, just not the TRE");
@@ -168,8 +169,9 @@ RsmId::read_tre_string(const std::string& Tre_in)
     lp->cf_prototype = boost::make_shared<Ecr>(0,0,0);
     for(int i = 0; i < 3; ++i)
       lp->cf_offset[i] = read_size<double>(in, 21);
-    for(int i = 0; i < 3; ++i)
-      for(int j = 0; j < 3; ++j)
+    // Column major order
+    for(int j = 0; j < 3; ++j)
+      for(int i = 0; i < 3; ++i)
 	lp->cf_to_rc[i][j] = read_size<double>(in, 21);
     res->cconv = boost::make_shared<LocalRcConverter>(lp);
   } else {

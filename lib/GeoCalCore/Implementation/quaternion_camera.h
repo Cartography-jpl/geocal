@@ -587,7 +587,9 @@ public:
 protected:
 //-----------------------------------------------------------------------
 // Constructor for use by derived classes. Derived classes should make
-// sure to fill in all the values
+// sure to fill in all the values. Note the confusion mentioned below
+// about frame_to_sc_, you need to fill in *both* frame_to_sc_ and
+// frame_to_sc_nd_.
 //-----------------------------------------------------------------------
   QuaternionCamera() {}
   AutoDerivative<double> focal_length_;	
@@ -599,6 +601,9 @@ protected:
   AutoDerivative<double> sample_pitch_;	// CCD pitch, in mm
   std::vector<FrameCoordinateWithDerivative> principal_point_;
 				// Principal point, indexed by band.
+  // ** Important, see note below about frame_to_sc_nd_. You can
+  // use the member function frame_to_sc(val) to set both at the same
+  // time if you like ***
   boost::math::quaternion<AutoDerivative<double> > frame_to_sc_;
   // Turns out that converting frame_to_sc_ to a version without
   // derivatives is a bit of a bottle neck in some calculations (e.g.,

@@ -542,12 +542,9 @@ def test_rsm_sample_file_a(isolated_dir):
     texpect = fgdal["TRE", "RSMPCA"]
     assert rsm.rsm_base.tre_string() == texpect
     texpect = fgdal["TRE", "RSMIDA"]
-    print(rsm.rsm_id.tre_string())
-    print(texpect)
     assert rsm.rsm_id.tre_string() == texpect
-    # This also as RSMDCA, RSMECA, and RSMIDA (the direct and indirect
-    # covariance, and the ID). We don't currently read these, or read them
-    # fully (for RSMIDA)
+    # This also as RSMDCA and RSMECA (the direct and indirect
+    # covariance). We don't currently read these
 
 @require_rsm_sample_data    
 def test_rsm_sample_file_b(isolated_dir):
@@ -558,9 +555,10 @@ def test_rsm_sample_file_b(isolated_dir):
     fgdal = GdalRasterImage(fname)
     texpect = fgdal["TRE", "RSMPCA"]
     assert rsm.rsm_base.tre_string() == texpect
-    # This also as RSMDCA, RSMECA, and RSMIDA (the direct and indirect
-    # covariance, and the ID). We don't currently read these, or read them
-    # fully (for RSMIDA)
+    texpect = fgdal["TRE", "RSMIDA"]
+    assert rsm.rsm_id.tre_string() == texpect
+    # This also as RSMDCA and RSMECA (the direct and indirect
+    # covariance). We don't currently read these
 
 @require_rsm_sample_data    
 def test_rsm_sample_file_c(isolated_dir):
@@ -579,9 +577,10 @@ def test_rsm_sample_file_c(isolated_dir):
     assert rsm.rsm_base.section(1,1).tre_string() == texpect
     texpect = fgdal["TRE", "RSMPIA"]
     assert rsm.rsm_base.tre_string() == texpect
-    # This also as RSMDCA, RSMECA, and RSMIDA (the direct and indirect
-    # covariance, and the ID). We don't currently read these, or read them
-    # fully (for RSMIDA)
+    texpect = fgdal["TRE", "RSMIDA"]
+    assert rsm.rsm_id.tre_string() == texpect
+    # This also as RSMDCA and RSMECA (the direct and indirect
+    # covariance). We don't currently read these
 
 # Doesn't work yet    
 @skip
@@ -594,9 +593,10 @@ def test_rsm_sample_file_e(isolated_dir):
     fgdal = GdalRasterImage(fname)
     texpect = fgdal["TRE", "RSMPCA"]
     assert rsm.rsm_base.tre_string() == texpect
-    # This also as RSMDCA, RSMAPA, and RSMIDA (the direct covariance,
-    # adjustment, and the ID). We don't currently read these, or read them
-    # fully (for RSMIDA)
+    texpect = fgdal["TRE", "RSMIDA"]
+    assert rsm.rsm_id.tre_string() == texpect
+    # This also as RSMDCA and RSMECA (the direct and indirect
+    # covariance). We don't currently read these
 
 @require_rsm_sample_data    
 def test_rsm_sample_file_f(isolated_dir):
@@ -607,9 +607,12 @@ def test_rsm_sample_file_f(isolated_dir):
     fgdal = GdalRasterImage(fname)
     texpect = fgdal["TRE", "RSMPCA"]
     assert rsm.rsm_base.tre_string() == texpect
-    # This also as RSMDCA, RSMAPA, and RSMIDA (the direct covariance,
-    # adjustment, and the ID). We don't currently read these, or read them
-    # fully (for RSMIDA)
+    texpect = fgdal["TRE", "RSMIDA"]
+    assert rsm.rsm_id.tre_string() == texpect
+    # This also as RSMDCA and RSMECA (the direct and indirect
+    # covariance). We don't currently read these
+    # This also as RSMDCA and RSMAPA (the direct covariance,
+    # adjustment). We don't currently read these.
 
 @require_rsm_sample_data    
 def test_rsm_sample_file_g(isolated_dir):
@@ -622,7 +625,8 @@ def test_rsm_sample_file_g(isolated_dir):
     assert rsm.rsm_base.section(0,0).tre_string() == texpect
     texpect = fgdal["TRE", "RSMPIA"]
     assert rsm.rsm_base.tre_string() == texpect
-    # This also as RSMECA, and RSMIDA (the indirect covariance,
-    # and the ID). We don't currently read these, or read them
-    # fully (for RSMIDA)
+    texpect = fgdal["TRE", "RSMIDA"]
+    assert rsm.rsm_id.tre_string() == texpect
+    # This also as RSMECA (the indirect
+    # covariance). We don't currently read these
     

@@ -3,6 +3,7 @@
 #include "rsm_base.h"
 #include "geocal_time.h"
 #include "ground_coordinate.h"
+#include <boost/optional.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -144,6 +145,41 @@ public:
     ground_domain_vertex_ = V;
   }
 
+//-----------------------------------------------------------------------
+/// Ground reference point.
+//-----------------------------------------------------------------------
+  const boost::shared_ptr<GroundCoordinate>& ground_reference_point() const
+  { return ground_reference_point_; }
+  void ground_reference_point(const boost::shared_ptr<GroundCoordinate>& V)
+  { ground_reference_point_ = V; }
+
+//-----------------------------------------------------------------------
+/// Size of the full image
+//-----------------------------------------------------------------------
+
+  const boost::optional<int>& full_number_line() const
+  { return full_number_line_; }
+  void full_number_line(const boost::optional<int>& V)
+  { full_number_line_ = V; }
+  const boost::optional<int>& full_number_sample() const
+  { return full_number_sample_; }
+  void full_number_sample(const boost::optional<int>& V)
+  { full_number_sample_ = V; }
+  
+
+//-----------------------------------------------------------------------
+/// Range of image covered by Rsm
+//-----------------------------------------------------------------------
+
+  int min_line() const { return min_line_; }
+  void min_line(int V) { min_line_ = V; }
+  int min_sample() const { return min_sample_; }
+  void min_sample(int V) { min_sample_ = V; }
+  int max_line() const { return max_line_; }
+  void max_line(int V) { max_line_ = V; }
+  int max_sample() const { return max_sample_; }
+  void max_sample(int V) { max_sample_ = V; }
+  
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);
@@ -156,6 +192,9 @@ private:
   boost::shared_ptr<Time> image_acquistion_time_;
   boost::shared_ptr<RsmIdTiming> timing_;
   std::vector<boost::shared_ptr<GroundCoordinate> > ground_domain_vertex_;
+  boost::shared_ptr<GroundCoordinate> ground_reference_point_;
+  boost::optional<int> full_number_line_, full_number_sample_;
+  int min_line_, max_line_, min_sample_, max_sample_;
   RsmId() {}
   friend class boost::serialization::access;
   template<class Archive>

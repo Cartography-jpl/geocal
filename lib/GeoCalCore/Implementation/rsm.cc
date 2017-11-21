@@ -242,7 +242,10 @@ void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)
 	      (sind == 0 ? rp->min_sample() : rp->max_sample())),
 	   (hind == 0 ? Min_height : Max_height));
       }
-      
+  rid->min_line(rp->min_line());
+  rid->max_line(rp->max_line());
+  rid->min_sample(rp->min_sample());
+  rid->max_sample(rp->max_sample());
 }
 
 //-----------------------------------------------------------------------

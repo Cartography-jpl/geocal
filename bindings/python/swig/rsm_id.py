@@ -478,6 +478,132 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       self._v_ground_domain_vertex(value)
 
 
+    def _v_ground_reference_point(self, *args):
+        """
+
+        void GeoCal::RsmId::ground_reference_point(const boost::shared_ptr< GroundCoordinate > &V)
+
+        """
+        return _rsm_id.RsmId__v_ground_reference_point(self, *args)
+
+
+    @property
+    def ground_reference_point(self):
+        return self._v_ground_reference_point()
+
+    @ground_reference_point.setter
+    def ground_reference_point(self, value):
+      self._v_ground_reference_point(value)
+
+
+    def _v_full_number_line(self, *args):
+        """
+
+        void GeoCal::RsmId::full_number_line(const boost::optional< int > &V)
+
+        """
+        return _rsm_id.RsmId__v_full_number_line(self, *args)
+
+
+    @property
+    def full_number_line(self):
+        return self._v_full_number_line()
+
+    @full_number_line.setter
+    def full_number_line(self, value):
+      self._v_full_number_line(value)
+
+
+    def _v_full_number_sample(self, *args):
+        """
+
+        void GeoCal::RsmId::full_number_sample(const boost::optional< int > &V)
+
+        """
+        return _rsm_id.RsmId__v_full_number_sample(self, *args)
+
+
+    @property
+    def full_number_sample(self):
+        return self._v_full_number_sample()
+
+    @full_number_sample.setter
+    def full_number_sample(self, value):
+      self._v_full_number_sample(value)
+
+
+    def _v_min_line(self, *args):
+        """
+
+        void GeoCal::RsmId::min_line(int V)
+
+        """
+        return _rsm_id.RsmId__v_min_line(self, *args)
+
+
+    @property
+    def min_line(self):
+        return self._v_min_line()
+
+    @min_line.setter
+    def min_line(self, value):
+      self._v_min_line(value)
+
+
+    def _v_min_sample(self, *args):
+        """
+
+        void GeoCal::RsmId::min_sample(int V)
+
+        """
+        return _rsm_id.RsmId__v_min_sample(self, *args)
+
+
+    @property
+    def min_sample(self):
+        return self._v_min_sample()
+
+    @min_sample.setter
+    def min_sample(self, value):
+      self._v_min_sample(value)
+
+
+    def _v_max_line(self, *args):
+        """
+
+        void GeoCal::RsmId::max_line(int V)
+
+        """
+        return _rsm_id.RsmId__v_max_line(self, *args)
+
+
+    @property
+    def max_line(self):
+        return self._v_max_line()
+
+    @max_line.setter
+    def max_line(self, value):
+      self._v_max_line(value)
+
+
+    def _v_max_sample(self, *args):
+        """
+
+        void GeoCal::RsmId::max_sample(int V)
+
+        """
+        return _rsm_id.RsmId__v_max_sample(self, *args)
+
+
+    @property
+    def max_sample(self):
+        return self._v_max_sample()
+
+    @max_sample.setter
+    def max_sample(self, value):
+      self._v_max_sample(value)
+
+
     def tre_string(self):
         """
 
@@ -519,6 +645,13 @@ RsmId._v_sensor_type = new_instancemethod(_rsm_id.RsmId__v_sensor_type, None, Rs
 RsmId._v_image_acquistion_time = new_instancemethod(_rsm_id.RsmId__v_image_acquistion_time, None, RsmId)
 RsmId._v_timing = new_instancemethod(_rsm_id.RsmId__v_timing, None, RsmId)
 RsmId._v_ground_domain_vertex = new_instancemethod(_rsm_id.RsmId__v_ground_domain_vertex, None, RsmId)
+RsmId._v_ground_reference_point = new_instancemethod(_rsm_id.RsmId__v_ground_reference_point, None, RsmId)
+RsmId._v_full_number_line = new_instancemethod(_rsm_id.RsmId__v_full_number_line, None, RsmId)
+RsmId._v_full_number_sample = new_instancemethod(_rsm_id.RsmId__v_full_number_sample, None, RsmId)
+RsmId._v_min_line = new_instancemethod(_rsm_id.RsmId__v_min_line, None, RsmId)
+RsmId._v_min_sample = new_instancemethod(_rsm_id.RsmId__v_min_sample, None, RsmId)
+RsmId._v_max_line = new_instancemethod(_rsm_id.RsmId__v_max_line, None, RsmId)
+RsmId._v_max_sample = new_instancemethod(_rsm_id.RsmId__v_max_sample, None, RsmId)
 RsmId.tre_string = new_instancemethod(_rsm_id.RsmId_tre_string, None, RsmId)
 RsmId_swigregister = _rsm_id.RsmId_swigregister
 RsmId_swigregister(RsmId)

@@ -241,6 +241,10 @@ def rsm_g(rsm_grid):
     # but in the mean time put dummy data in so we can bypass this problem
     # res.fill_in_ground_domain_vertex(500, 1500)
     res.rsm_id.ground_domain_vertex = [Geodetic(10,20)] * 8
+    res.rsm_id.min_line = rsm_grid.min_line
+    res.rsm_id.max_line = rsm_grid.max_line
+    res.rsm_id.min_sample = rsm_grid.min_sample
+    res.rsm_id.max_sample = rsm_grid.max_sample
     return res
 
 @pytest.fixture(scope="function")

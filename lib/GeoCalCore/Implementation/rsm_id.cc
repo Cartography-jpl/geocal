@@ -35,7 +35,14 @@ void RsmId::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(sensor_type)
     & GEOCAL_NVP_(image_acquistion_time)
     & GEOCAL_NVP_(timing)
-    & GEOCAL_NVP_(ground_domain_vertex);
+    & GEOCAL_NVP_(ground_domain_vertex)
+    & GEOCAL_NVP_(ground_reference_point)
+    & GEOCAL_NVP_(full_number_line)
+    & GEOCAL_NVP_(full_number_sample)
+    & GEOCAL_NVP_(min_line)
+    & GEOCAL_NVP_(min_sample)
+    & GEOCAL_NVP_(max_line)
+    & GEOCAL_NVP_(max_sample);
 }
 
 GEOCAL_IMPLEMENT(RsmIdTiming);
@@ -47,6 +54,7 @@ static boost::format tac("%|1$4s|%|2$2s|%|3$2s|%|4$2s|%|5$2s|%|6$9s|");
 static boost::format rsm_sz("%|1$08d|%|2$08d|%|3$08d|%|4$08d|%|5$08d|%|6$08d|");
 static boost::format num_missing("%|1$21s|");
 static boost::format num("%|1$+21.14E|");
+static boost::format numint("%|1$08d|");
 static boost::format timingf("%|1$08d|%|2$08d|%|3$+21.14E|%|4$+21.14E|");
 static boost::format timingf_missing("%|1$-58s|");
 
@@ -117,9 +125,23 @@ std::string RsmId::tre_string() const
     res += str_check_size(num % y, 21);
     res += str_check_size(num % z, 21);
   }
-  for(int i = 0; i < 3; ++i)
-    res += str_check_size(num_missing % "", 21);
-  res += str_check_size(rsm_sz % 0 % 0 % 0 % 0 % 0 % 0, 8*6);
+  if(ground_reference_point_) {
+    double x, y, z;
+    cconv->convert_to_coordinate(*ground_reference_point_, x, y, z);
+    res += str_check_size(num % x, 21);
+    res += str_check_size(num % y, 21);
+    res += str_check_size(num % z, 21);
+  } else
+    for(int i = 0; i < 3; ++i)
+      res += str_check_size(num_missing % "", 21);
+  res += write_optional(numint, full_number_line_, 8);
+  res += write_optional(numint, full_number_sample_, 8);
+  res += str_check_size(numint % min_line_, 8);
+  res += str_check_size(numint % max_line_, 8);
+  res += str_check_size(numint % min_sample_, 8);
+  res += str_check_size(numint % max_sample_, 8);
+  // This is the illumination and sensor position. We don't currently
+  // have this in place, we'll need to add this in.
   for(int i = 0; i < 21; ++i)
     res += str_check_size(num_missing % "", 21);
   return res;
@@ -197,14 +219,22 @@ RsmId::read_tre_string(const std::string& Tre_in)
     res->ground_domain_vertex_[i] =
       res->cconv->convert_from_coordinate(x, y, z);
   }
-  for(int i = 0; i < 3; ++i)
-    double x = read_size_nan(in, 21);
-  for(int i = 0; i < 2; ++i)
-    int x = read_size_fill(in, 8);
-  for(int i = 0; i < 4; ++i)
-    int x = read_size<int>(in, 8);
+  boost::optional<double> x = read_size<boost::optional<double> >(in, 21);
+  boost::optional<double> y = read_size<boost::optional<double> >(in, 21);
+  boost::optional<double> z = read_size<boost::optional<double> >(in, 21);
+  if(x)
+    res->ground_reference_point_ = res->cconv->convert_from_coordinate(*x, *y, *z);
+  res->full_number_line_ = read_size<boost::optional<int> >(in, 8);
+  res->full_number_sample_ = read_size<boost::optional<int> >(in, 8);
+  res->min_line_ = read_size<int>(in, 8);
+  res->max_line_ = read_size<int>(in, 8);
+  res->min_sample_ = read_size<int>(in, 8);
+  res->max_sample_ = read_size<int>(in, 8);
+
+  // This is the illumination and sensor position. We don't currently
+  // have this in place, we'll need to add this in.
   for(int i = 0; i < 21; ++i)
-    double x = read_size_nan(in, 21);
+    boost::optional<double> x = read_size<boost::optional<double> >(in, 21);
   check_end_of_stream(in);
   return res;
 }

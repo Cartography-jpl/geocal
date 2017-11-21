@@ -44,6 +44,13 @@ public:
   %python_attribute_with_set(image_acquistion_time, boost::shared_ptr<Time>);
   %python_attribute_with_set(timing, boost::shared_ptr<RsmIdTiming>);
   %python_attribute_with_set(ground_domain_vertex, std::vector<boost::shared_ptr<GroundCoordinate> >);
+  %python_attribute_with_set(ground_reference_point, boost::shared_ptr<GroundCoordinate>);
+  %python_attribute_with_set(full_number_line, boost::optional<int>);
+  %python_attribute_with_set(full_number_sample, boost::optional<int>);
+  %python_attribute_with_set(min_line, int);
+  %python_attribute_with_set(min_sample, int);
+  %python_attribute_with_set(max_line, int);
+  %python_attribute_with_set(max_sample, int);
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);

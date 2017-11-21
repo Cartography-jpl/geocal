@@ -137,6 +137,12 @@ LocalRectangularCoordinate::LocalRectangularCoordinate
  const GroundCoordinate& Gc)
   : parameter(P)
 {
+  // Special case worth checking
+  const LocalRectangularCoordinate* lrc = dynamic_cast<const LocalRectangularCoordinate*>(&Gc);
+  if(lrc && lrc->parameter.get() == P.get()) {
+    position = lrc->position;
+    return;
+  }
   boost::shared_ptr<CartesianFixed> cf = Gc.convert_to_cf();
   if(cf->naif_code() != naif_code())
     throw Exception("Naif code of Gc doesn't match that of the LocalRcParameter");

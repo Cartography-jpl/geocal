@@ -53,6 +53,7 @@ GEOCAL_SPLIT_IMPLEMENT(OgrWrapper);
 boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_geodetic;
 boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_ecr;
 boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_mars_pc;
+boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_ceres_pc;
 
 //-----------------------------------------------------------------------
 /// Constructor that creates a OGRSpatialReference from a WKT (Well
@@ -130,6 +131,23 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
       throw e;
     }
   }
+  if(!ogr_ceres_pc.get()) {
+    ogr_ceres_pc.reset(new OGRSpatialReference);
+    const char *wkt = "GEOGCS[\"GCS_CERES\",\
+    DATUM[\"D_CERES\",\
+        SPHEROID[\"CERES\",487300,0.0668992407141]],\
+    PRIMEM[\"Reference_Meridian\",0],\
+    UNIT[\"Decimal_Degree\",0.0174532925199433]]";
+    char * wkt_str = const_cast<char*>(wkt);
+    OGRErr status = ogr_ceres_pc->importFromWkt(&wkt_str);
+    if(status != OGRERR_NONE) {
+      Exception e;
+      e << "Create of OGRSpatialReference failed. "
+	<< "The WKT (Well Known Text) was:\n"
+	<< wkt;
+      throw e;
+    }
+  }
   OGRSpatialReference * og;
   OGRSpatialReference * og_cf;
   std::string gname = geogcs_name();
@@ -145,6 +163,10 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
     // GDAL (version 2.0.2) seems to have trouble converting correctly
     // we have a coordinate system with a spherical mars model. See
     // Issue #19 in github for details on this.
+    og_cf = 0;
+  } else if(gname.find("ceres") != std::string::npos) {
+    naif_code_ = PlanetConstant::CERES_NAIF_CODE;
+    og =  ogr_ceres_pc.get();
     og_cf = 0;
   } else {
     naif_code_ = Ecr::EARTH_NAIF_CODE;

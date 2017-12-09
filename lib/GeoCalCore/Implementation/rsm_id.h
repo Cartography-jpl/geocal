@@ -61,7 +61,8 @@ public:
     : cconv(Cconv),
       image_identifier_(Base->image_identifier()),
       rsm_suport_data_edition_(Base->rsm_suport_data_edition()),
-      ground_domain_vertex_(8)
+      ground_domain_vertex_(8),
+      min_line_(-1), max_line_(-1), min_sample_(-1), max_sample_(-1)
   {
   }
   virtual ~RsmId() {}

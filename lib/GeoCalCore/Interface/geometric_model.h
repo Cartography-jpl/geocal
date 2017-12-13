@@ -53,16 +53,25 @@ private:
 *******************************************************************/
 class GeometricTiePoints : public Printable<GeometricTiePoints> {
 public:
-  GeometricTiePoints() {}
+  GeometricTiePoints() : replace_point_(-1) {}
 
   virtual ~GeometricTiePoints() {} 
-//-----------------------------------------------------------------------
-/// Add a point
-//-----------------------------------------------------------------------
   void add_point(const ImageCoordinate& Resampled_ic,
-		 const ImageCoordinate& Original_ic)
-  { itie.push_back(Original_ic); otie.push_back(Resampled_ic); }
+		 const ImageCoordinate& Original_ic);
 
+//-----------------------------------------------------------------------
+/// To get started we may have a first set of approximate points added
+/// to the GeometricTiePoints, which it can be useful to replace
+/// them. For example, picmtch5 starts with 3 points, but then
+/// replaces these 3 points with the first 3 image matches.
+///  
+/// To support this, you can call "start_replacing". Each subsequent
+/// call to add_point then replaces one of the existing points rather
+/// than adding a new set to the end.
+//-----------------------------------------------------------------------
+
+  void start_replacing() { replace_point_ = 0; }
+  
 //-----------------------------------------------------------------------
 /// Remove the point at the given index.
 //-----------------------------------------------------------------------
@@ -107,6 +116,7 @@ public:
   { Os << "GeometricTiePoints"; }
 private:
   std::vector<ImageCoordinate> itie, otie;
+  int replace_point_;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

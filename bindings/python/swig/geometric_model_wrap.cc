@@ -6507,6 +6507,48 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GeometricTiePoints_start_replacing(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeometricTiePoints *arg1 = (GeoCal::GeometricTiePoints *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeometricTiePoints_start_replacing" "', argument " "1"" of type '" "GeoCal::GeometricTiePoints *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricTiePoints * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricTiePoints * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->start_replacing();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GeometricTiePoints_remove_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeometricTiePoints *arg1 = (GeoCal::GeometricTiePoints *) 0 ;
@@ -6860,9 +6902,22 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GeometricTiePoints_add_point", _wrap_GeometricTiePoints_add_point, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::GeometricTiePoints::add_point(const ImageCoordinate &Resampled_ic, const ImageCoordinate\n"
+		"void GeometricTiePoints::add_point(const ImageCoordinate &Resampled_ic, const ImageCoordinate\n"
 		"&Original_ic)\n"
 		"Add a point. \n"
+		""},
+	 { (char *)"GeometricTiePoints_start_replacing", (PyCFunction)_wrap_GeometricTiePoints_start_replacing, METH_O, (char *)"\n"
+		"\n"
+		"void GeoCal::GeometricTiePoints::start_replacing()\n"
+		"To get started we may have a first set of approximate points added to\n"
+		"the GeometricTiePoints, which it can be useful to replace them.\n"
+		"\n"
+		"For example, picmtch5 starts with 3 points, but then replaces these 3\n"
+		"points with the first 3 image matches.\n"
+		"\n"
+		"To support this, you can call \"start_replacing\". Each subsequent\n"
+		"call to add_point then replaces one of the existing points rather than\n"
+		"adding a new set to the end. \n"
 		""},
 	 { (char *)"GeometricTiePoints_remove_point", _wrap_GeometricTiePoints_remove_point, METH_VARARGS, (char *)"\n"
 		"\n"

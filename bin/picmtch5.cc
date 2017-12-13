@@ -58,7 +58,7 @@ void throwout(GeometricTiePoints& Tpset)
   blitz::Array<double, 2> y = Tpset.y();
   for(int i=0;i< x.rows();i++) {
     ImageCoordinate icpred =
-      gm.resampled_image_coordinate(ImageCoordinate(x(i,0), x(i, 1)));
+      gm.original_image_coordinate(ImageCoordinate(x(i,0), x(i, 1)));
     double rx = y(i,0)-icpred.line;
     double ry = y(i,1)-icpred.sample;
     double r = rx*rx+ry*ry;
@@ -69,7 +69,6 @@ void throwout(GeometricTiePoints& Tpset)
   }
    
   /* discard the worst point */
-
   Tpset.remove_point(imax);
   return;
 }
@@ -360,6 +359,9 @@ try {
    GeometricTiePoints tpset;
    for(int i = 0; i < 3; ++i)
      tpset.add_point(xinit[i], yinit[i]);
+   // We want to replace the approximate tiepoints with image matching
+   // as we start matching.
+   tpset.start_replacing();
    int lastneq = -1; 
    int autoix = 0; 
    int gotthresh = 0; 
@@ -402,7 +404,7 @@ try {
 	   solved = true;
 	   printf("***auto fit:neq = %8d ***\n",tpset.number_point());
 	 }
-	 if (ibigx>0) 
+	 if (ibigx>0)
 	   for(int iii=0;iii<4;iii++) {
 	     if (throwcount<=0) break;
 	     throwout(tpset);

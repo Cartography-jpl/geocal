@@ -260,11 +260,28 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
     def add_point(self, Resampled_ic, Original_ic):
         """
 
-        void GeoCal::GeometricTiePoints::add_point(const ImageCoordinate &Resampled_ic, const ImageCoordinate
+        void GeometricTiePoints::add_point(const ImageCoordinate &Resampled_ic, const ImageCoordinate
         &Original_ic)
         Add a point. 
         """
         return _geometric_model.GeometricTiePoints_add_point(self, Resampled_ic, Original_ic)
+
+
+    def start_replacing(self):
+        """
+
+        void GeoCal::GeometricTiePoints::start_replacing()
+        To get started we may have a first set of approximate points added to
+        the GeometricTiePoints, which it can be useful to replace them.
+
+        For example, picmtch5 starts with 3 points, but then replaces these 3
+        points with the first 3 image matches.
+
+        To support this, you can call "start_replacing". Each subsequent
+        call to add_point then replaces one of the existing points rather than
+        adding a new set to the end. 
+        """
+        return _geometric_model.GeometricTiePoints_start_replacing(self)
 
 
     def remove_point(self, Index):
@@ -325,6 +342,7 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _geometric_model.delete_GeometricTiePoints
 GeometricTiePoints.add_point = new_instancemethod(_geometric_model.GeometricTiePoints_add_point, None, GeometricTiePoints)
+GeometricTiePoints.start_replacing = new_instancemethod(_geometric_model.GeometricTiePoints_start_replacing, None, GeometricTiePoints)
 GeometricTiePoints.remove_point = new_instancemethod(_geometric_model.GeometricTiePoints_remove_point, None, GeometricTiePoints)
 GeometricTiePoints._v_x = new_instancemethod(_geometric_model.GeometricTiePoints__v_x, None, GeometricTiePoints)
 GeometricTiePoints._v_y = new_instancemethod(_geometric_model.GeometricTiePoints__v_y, None, GeometricTiePoints)

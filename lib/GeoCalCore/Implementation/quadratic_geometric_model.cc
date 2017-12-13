@@ -88,6 +88,14 @@ void QuadraticGeometricModel::fit_transformation(const GeometricTiePoints& Tp)
 {
   Array<double, 2> x = Tp.x();
   Array<double, 2> y = Tp.y();
+  // Diagnostic message. Leave in place, in case we need this again
+  if(false) {
+    std::cout << "Points to fit:\n";
+    for(int iii=0;iii<x.rows();iii++) 
+      std::cout << "   " << iii << ": (" << x(iii,0) << ", "
+		<< x(iii, 1) << "), ("
+		<< y(iii, 0) << ", " << y(iii,1) << ")\n";
+  }
   fit_single(x, y, trans);
   fit_single(y, x, inv_trans);
 }

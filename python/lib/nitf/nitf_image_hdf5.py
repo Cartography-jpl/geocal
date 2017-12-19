@@ -29,6 +29,13 @@ class NitfImageHDF5(NitfImage):
         return "NitfImageHFD5 %d x %d, %d bands, blob size %d" \
             % (self.image_subheader.nrows, self.image_subheader.ncols, self.image_subheader.nbands, self.data_size)
 
+    def bands(self):
+        bands = self.image_subheader.nbands
+        if (bands == 0):
+            bands = self.image_subheader.xbands
+
+        return bands
+
     #Todo: Since we don't store the data in self.data anymore,
     #We need to now provide data accessor functions instead of allowing for direct
     #self.data access
@@ -53,18 +60,23 @@ class NitfImageHDF5(NitfImage):
             fh.write(data[modLow:, v_low:v_high].tobytes())
             fh.write(data[:modHigh, v_low:v_high].tobytes())
 
-    def writePartialRows(self, data, fh, modLow, modHigh, v_high):
-        fillData = np.ndarray(shape=(v_high - ih.ncols, bands),
-                              buffer=np.array([0] * ((v_high - ih.ncols) * bands), data.dtype), dtype=data.dtype)
+    def writePartialRows(self, fh, data, v_low, v_high, h_low, h_high):
+        ih = self.image_header
+
+        npixels = v_high - ih.ncols
+        fillData = np.ndarray(shape=(npixels, self.bands()),
+                              buffer=np.array([0] * (npixels * self.bands()), data.dtype), dtype=data.dtype)
         print(fillData.shape)
 
-        for i in range(modLow, modHigh):
-            fh.write(data[h_low:h_high, i].tobytes())
+        for i in range(h_low, h_high):
+            fh.write(data[i, v_low:ih.ncols].tobytes())
             fh.write(fillData.tobytes)
 
     def writeEmptyRows(self, fh, data, h_high):
-        fillData = np.ndarray(shape=(h_high - ih.nrows, ih.nppbv, bands),
-                              buffer=np.array([0] * ((h_high - ih.nrows) * ih.nppbv * bands),
+        ih = self.image_subheader
+
+        fillData = np.ndarray(shape=(h_high - ih.nrows, ih.nppbv, self.bands()),
+                              buffer=np.array([0] * ((h_high - ih.nrows) * ih.nppbv * self.bands()),
                                               data.dtype), dtype=data.dtype)
         print(fillData.shape)
         fh.write(fillData.tobytes)
@@ -84,9 +96,7 @@ class NitfImageHDF5(NitfImage):
             data = self.data
 
         ih = self.image_subheader
-        bands = ih.bands
-        if (bands == 0):
-            bands = ih.xbands
+        bands = self.bands()
 
         for i in range(ih.nbpr):
             for j in range(ih.nbpc):
@@ -107,23 +117,23 @@ class NitfImageHDF5(NitfImage):
                           %d is larger than %d, vertically" %
                           (h_high, ih.nrows, v_high, ih.ncols))
 
-                    modLowH = h_low % (data.shape[0] + 1)
-                    modHighH = h_high % (data.shape[0] + 1)
-                    modLowV = v_low % (data.shape[1] + 1)
-                    modHighV = v_high % (data.shape[1] + 1)
+                    #modLowH = h_low % (data.shape[0] + 1)
+                    #modHighH = h_high % (data.shape[0] + 1)
+                    #modLowV = v_low % (data.shape[1] + 1)
+                    #modHighV = v_high % (data.shape[1] + 1)
 
-                    if (modHighH < modLowH or modHighV > modLowV):
-                        raise NitfImageCannotHandle(
-                            "Currently we cannot repeat images horizontally: %d is greater than %d" % (
-                            v_high, data.shape[1]))
-                    else:
+                    #if (modHighH < modLowH or modHighV > modLowV):
+                    #    raise NitfImageCannotHandle(
+                    #        "Currently we cannot repeat images horizontally: %d is greater than %d" % (
+                    #        v_high, data.shape[1]))
+                    #else:
                         #First we zero fill the rows of the missing columns interleaved with rows that
                         #exist in the data. In the illustration above, it'd be the first 3 rows
-                        writePartialRows(data, fh, modLow, data.shape[0], v_high)
+                    writePartialRows(fh, data, v_low, v_high, h_low, ih.nrows)
 
                         #Then we will zero fill the entire rows where no information exists.
                         #This is the last 2 rows in the illustration above
-                        self.writeEmptyRows(fh, data, h_high)
+                    self.writeEmptyRows(fh, data, h_high)
 
                 #Else if we are short just on rows, zero fill just horizontally
                 # ------------
@@ -146,13 +156,13 @@ class NitfImageHDF5(NitfImage):
                 # ---------___
                 elif (v_high > ih.ncols):
                     print("%d is larger than %d, vertically" % (v_high, ih.ncols))
-                    modLow = v_low % (data.shape[1] + 1)
-                    modHigh = v_high % (data.shape[1] + 1)
+                    #modLow = v_low % (data.shape[1] + 1)
+                    #modHigh = v_high % (data.shape[1] + 1)
 
-                    if (modHigh >= modLow):
-                        writePartialRows(data, fh, modLow, modHigh, v_high)
-                    else:
-                        raise NitfImageCannotHandle("Currently we cannot repeat images horizontally: %d is greater than %d" % (v_high, data.shape[1]))
+                    #if (modHigh >= modLow):
+                    writePartialRows(fh, data, v_low, v_high, h_low, h_high)
+                    #else:
+                    #    raise NitfImageCannotHandle("Currently we cannot repeat images horizontally: %d is greater than %d" % (v_high, data.shape[1]))
 
                 #Else, we're at exact match on both dimensions along block boundaries
                 # ------------

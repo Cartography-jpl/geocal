@@ -3423,63 +3423,67 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__GeometricTiePoints swig_types[4]
 #define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[5]
 #define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[6]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[7]
-#define SWIGTYPE_p_allocator_type swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[16]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[17]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[30]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[31]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[32]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[33]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[34]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[35]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricModel_t swig_types[36]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t swig_types[37]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[38]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[39]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[40]
-#define SWIGTYPE_p_char swig_types[41]
-#define SWIGTYPE_p_char_type swig_types[42]
-#define SWIGTYPE_p_difference_type swig_types[43]
-#define SWIGTYPE_p_fmtflags swig_types[44]
-#define SWIGTYPE_p_int_type swig_types[45]
-#define SWIGTYPE_p_iostate swig_types[46]
-#define SWIGTYPE_p_off_type swig_types[47]
-#define SWIGTYPE_p_openmode swig_types[48]
-#define SWIGTYPE_p_pos_type swig_types[49]
-#define SWIGTYPE_p_seekdir swig_types[50]
-#define SWIGTYPE_p_size_t swig_types[51]
-#define SWIGTYPE_p_size_type swig_types[52]
-#define SWIGTYPE_p_state_type swig_types[53]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[54]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[55]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[56]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[57]
-#define SWIGTYPE_p_std__invalid_argument swig_types[58]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[59]
-#define SWIGTYPE_p_traits_type swig_types[60]
-#define SWIGTYPE_p_value_type swig_types[61]
-static swig_type_info *swig_types[63];
-static swig_module_info swig_module = {swig_types, 62, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t swig_types[7]
+#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t swig_types[8]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[9]
+#define SWIGTYPE_p_allocator_type swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[29]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[30]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[31]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[32]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[33]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[34]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[35]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[36]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[37]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricModel_t swig_types[38]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t swig_types[39]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[40]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[41]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t swig_types[42]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t swig_types[43]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[44]
+#define SWIGTYPE_p_char swig_types[45]
+#define SWIGTYPE_p_char_type swig_types[46]
+#define SWIGTYPE_p_difference_type swig_types[47]
+#define SWIGTYPE_p_fmtflags swig_types[48]
+#define SWIGTYPE_p_int_type swig_types[49]
+#define SWIGTYPE_p_iostate swig_types[50]
+#define SWIGTYPE_p_off_type swig_types[51]
+#define SWIGTYPE_p_openmode swig_types[52]
+#define SWIGTYPE_p_pos_type swig_types[53]
+#define SWIGTYPE_p_seekdir swig_types[54]
+#define SWIGTYPE_p_size_t swig_types[55]
+#define SWIGTYPE_p_size_type swig_types[56]
+#define SWIGTYPE_p_state_type swig_types[57]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[58]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[59]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[60]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[61]
+#define SWIGTYPE_p_std__invalid_argument swig_types[62]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[63]
+#define SWIGTYPE_p_traits_type swig_types[64]
+#define SWIGTYPE_p_value_type swig_types[65]
+static swig_type_info *swig_types[67];
+static swig_module_info swig_module = {swig_types, 66, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5263,6 +5267,19 @@ namespace swig {
 #include "geometric_model.h"
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -5306,19 +5323,6 @@ SWIG_From_std_string  (const std::string& s)
 {
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
-
-
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
 #include <limits.h>
@@ -6144,6 +6148,553 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
+SWIGINTERN PyObject *_wrap_delete_ObservableGeometricTiePoints(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observable< GeoCal::GeometricTiePoints > *arg1 = (GeoCal::Observable< GeoCal::GeometricTiePoints > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ObservableGeometricTiePoints" "', argument " "1"" of type '" "GeoCal::Observable< GeoCal::GeometricTiePoints > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observable< GeoCal::GeometricTiePoints > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observable< GeoCal::GeometricTiePoints > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ObservableGeometricTiePoints_add_observer_and_keep_reference(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observable< GeoCal::GeometricTiePoints > *arg1 = (GeoCal::Observable< GeoCal::GeometricTiePoints > *) 0 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > tempshared2 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > temp2shared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"ObservableGeometricTiePoints_add_observer_and_keep_reference",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ObservableGeometricTiePoints_add_observer_and_keep_reference" "', argument " "1"" of type '" "GeoCal::Observable< GeoCal::GeometricTiePoints > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observable< GeoCal::GeometricTiePoints > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observable< GeoCal::GeometricTiePoints > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ObservableGeometricTiePoints_add_observer_and_keep_reference" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      (arg1)->add_observer_and_keep_reference(*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ObservableGeometricTiePoints_add_observer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observable< GeoCal::GeometricTiePoints > *arg1 = (GeoCal::Observable< GeoCal::GeometricTiePoints > *) 0 ;
+  GeoCal::Observer< GeoCal::GeometricTiePoints > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"ObservableGeometricTiePoints_add_observer",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ObservableGeometricTiePoints_add_observer" "', argument " "1"" of type '" "GeoCal::Observable< GeoCal::GeometricTiePoints > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observable< GeoCal::GeometricTiePoints > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observable< GeoCal::GeometricTiePoints > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Observer<GeoCal::GeometricTiePoints> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ObservableGeometricTiePoints_add_observer" "', argument " "2"" of type '" "GeoCal::Observer< GeoCal::GeometricTiePoints > &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ObservableGeometricTiePoints_add_observer" "', argument " "2"" of type '" "GeoCal::Observer< GeoCal::GeometricTiePoints > &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp2);
+        arg2 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->add_observer(*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ObservableGeometricTiePoints_remove_observer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observable< GeoCal::GeometricTiePoints > *arg1 = (GeoCal::Observable< GeoCal::GeometricTiePoints > *) 0 ;
+  GeoCal::Observer< GeoCal::GeometricTiePoints > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"ObservableGeometricTiePoints_remove_observer",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ObservableGeometricTiePoints_remove_observer" "', argument " "1"" of type '" "GeoCal::Observable< GeoCal::GeometricTiePoints > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observable< GeoCal::GeometricTiePoints > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Observable<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observable< GeoCal::GeometricTiePoints > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Observer<GeoCal::GeometricTiePoints> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ObservableGeometricTiePoints_remove_observer" "', argument " "2"" of type '" "GeoCal::Observer< GeoCal::GeometricTiePoints > &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ObservableGeometricTiePoints_remove_observer" "', argument " "2"" of type '" "GeoCal::Observer< GeoCal::GeometricTiePoints > &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp2);
+        arg2 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >(reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->remove_observer(*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *ObservableGeometricTiePoints_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_ObserverGeometricTiePoints(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observer< GeoCal::GeometricTiePoints > *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"new_ObserverGeometricTiePoints",0,0,0)) SWIG_fail;
+  {
+    try {
+      result = (GeoCal::Observer< GeoCal::GeometricTiePoints > *)new GeoCal::Observer< GeoCal::GeometricTiePoints >();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > *smartresult = result ? new boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_ObserverGeometricTiePoints(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observer< GeoCal::GeometricTiePoints > *arg1 = (GeoCal::Observer< GeoCal::GeometricTiePoints > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ObserverGeometricTiePoints" "', argument " "1"" of type '" "GeoCal::Observer< GeoCal::GeometricTiePoints > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ObserverGeometricTiePoints_notify_update(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observer< GeoCal::GeometricTiePoints > *arg1 = (GeoCal::Observer< GeoCal::GeometricTiePoints > *) 0 ;
+  GeoCal::GeometricTiePoints *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"ObserverGeometricTiePoints_notify_update",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ObserverGeometricTiePoints_notify_update" "', argument " "1"" of type '" "GeoCal::Observer< GeoCal::GeometricTiePoints > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GeometricTiePoints *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GeometricTiePoints,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ObserverGeometricTiePoints_notify_update" "', argument " "2"" of type '" "GeoCal::GeometricTiePoints const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ObserverGeometricTiePoints_notify_update" "', argument " "2"" of type '" "GeoCal::GeometricTiePoints const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricTiePoints > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricTiePoints > * >(argp2);
+        arg2 = const_cast< GeoCal::GeometricTiePoints * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GeometricTiePoints * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GeometricTiePoints > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->notify_update((GeoCal::GeometricTiePoints const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ObserverGeometricTiePoints_notify_add(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observer< GeoCal::GeometricTiePoints > *arg1 = (GeoCal::Observer< GeoCal::GeometricTiePoints > *) 0 ;
+  GeoCal::GeometricTiePoints *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"ObserverGeometricTiePoints_notify_add",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ObserverGeometricTiePoints_notify_add" "', argument " "1"" of type '" "GeoCal::Observer< GeoCal::GeometricTiePoints > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GeometricTiePoints *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GeometricTiePoints,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ObserverGeometricTiePoints_notify_add" "', argument " "2"" of type '" "GeoCal::GeometricTiePoints &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ObserverGeometricTiePoints_notify_add" "', argument " "2"" of type '" "GeoCal::GeometricTiePoints &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp2);
+        arg2 = const_cast< GeoCal::GeometricTiePoints * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GeometricTiePoints * >(reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->notify_add(*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ObserverGeometricTiePoints_notify_remove(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Observer< GeoCal::GeometricTiePoints > *arg1 = (GeoCal::Observer< GeoCal::GeometricTiePoints > *) 0 ;
+  GeoCal::GeometricTiePoints *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > tempshared1 ;
+  boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"ObserverGeometricTiePoints_notify_remove",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ObserverGeometricTiePoints_notify_remove" "', argument " "1"" of type '" "GeoCal::Observer< GeoCal::GeometricTiePoints > *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Observer<GeoCal::GeometricTiePoints> > * >(argp1);
+      arg1 = const_cast< GeoCal::Observer< GeoCal::GeometricTiePoints > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GeometricTiePoints *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GeometricTiePoints,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ObserverGeometricTiePoints_notify_remove" "', argument " "2"" of type '" "GeoCal::GeometricTiePoints &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ObserverGeometricTiePoints_notify_remove" "', argument " "2"" of type '" "GeoCal::GeometricTiePoints &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp2);
+        arg2 = const_cast< GeoCal::GeometricTiePoints * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GeometricTiePoints * >(reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->notify_remove(*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *ObserverGeometricTiePoints_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char*)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *ObserverGeometricTiePoints_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 SWIGINTERN PyObject *_wrap_GeometricModel_original_image_coordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeometricModel *arg1 = (GeoCal::GeometricModel *) 0 ;
@@ -6598,6 +7149,48 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GeometricTiePoints_notify_update(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeometricTiePoints *arg1 = (GeoCal::GeometricTiePoints *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeometricTiePoints_notify_update" "', argument " "1"" of type '" "GeoCal::GeometricTiePoints *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricTiePoints * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = const_cast< GeoCal::GeometricTiePoints * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->notify_update();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GeometricTiePoints__v_x(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeometricTiePoints *arg1 = (GeoCal::GeometricTiePoints *) 0 ;
@@ -6872,6 +7465,18 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
+	 { (char *)"delete_ObservableGeometricTiePoints", (PyCFunction)_wrap_delete_ObservableGeometricTiePoints, METH_O, NULL},
+	 { (char *)"ObservableGeometricTiePoints_add_observer_and_keep_reference", _wrap_ObservableGeometricTiePoints_add_observer_and_keep_reference, METH_VARARGS, NULL},
+	 { (char *)"ObservableGeometricTiePoints_add_observer", _wrap_ObservableGeometricTiePoints_add_observer, METH_VARARGS, NULL},
+	 { (char *)"ObservableGeometricTiePoints_remove_observer", _wrap_ObservableGeometricTiePoints_remove_observer, METH_VARARGS, NULL},
+	 { (char *)"ObservableGeometricTiePoints_swigregister", ObservableGeometricTiePoints_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_ObserverGeometricTiePoints", (PyCFunction)_wrap_new_ObserverGeometricTiePoints, METH_NOARGS, NULL},
+	 { (char *)"delete_ObserverGeometricTiePoints", (PyCFunction)_wrap_delete_ObserverGeometricTiePoints, METH_O, NULL},
+	 { (char *)"ObserverGeometricTiePoints_notify_update", _wrap_ObserverGeometricTiePoints_notify_update, METH_VARARGS, NULL},
+	 { (char *)"ObserverGeometricTiePoints_notify_add", _wrap_ObserverGeometricTiePoints_notify_add, METH_VARARGS, NULL},
+	 { (char *)"ObserverGeometricTiePoints_notify_remove", _wrap_ObserverGeometricTiePoints_notify_remove, METH_VARARGS, NULL},
+	 { (char *)"ObserverGeometricTiePoints_swigregister", ObserverGeometricTiePoints_swigregister, METH_VARARGS, NULL},
+	 { (char *)"ObserverGeometricTiePoints_swiginit", ObserverGeometricTiePoints_swiginit, METH_VARARGS, NULL},
 	 { (char *)"GeometricModel_original_image_coordinate", _wrap_GeometricModel_original_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const =0\n"
@@ -6902,8 +7507,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GeometricTiePoints_add_point", _wrap_GeometricTiePoints_add_point, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeometricTiePoints::add_point(const ImageCoordinate &Resampled_ic, const ImageCoordinate\n"
-		"&Original_ic)\n"
+		"void GeometricTiePoints::add_point(const ImageCoordinate &X_ic, const ImageCoordinate &Y_ic)\n"
 		"Add a point. \n"
 		""},
 	 { (char *)"GeometricTiePoints_start_replacing", (PyCFunction)_wrap_GeometricTiePoints_start_replacing, METH_O, (char *)"\n"
@@ -6921,18 +7525,23 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GeometricTiePoints_remove_point", _wrap_GeometricTiePoints_remove_point, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::GeometricTiePoints::remove_point(int Index)\n"
+		"void GeometricTiePoints::remove_point(int Index)\n"
 		"Remove the point at the given index. \n"
+		""},
+	 { (char *)"GeometricTiePoints_notify_update", (PyCFunction)_wrap_GeometricTiePoints_notify_update, METH_O, (char *)"\n"
+		"\n"
+		"virtual void GeoCal::GeometricTiePoints::notify_update()\n"
+		"\n"
 		""},
 	 { (char *)"GeometricTiePoints__v_x", (PyCFunction)_wrap_GeometricTiePoints__v_x, METH_O, (char *)"\n"
 		"\n"
-		"blitz::Array<double, 2> GeoCal::GeometricTiePoints::x() const\n"
+		"blitz::Array< double, 2 > GeometricTiePoints::x() const\n"
 		"Return the resampled_ic as 2 columns, first is line second is sample;.\n"
 		"\n"
 		""},
 	 { (char *)"GeometricTiePoints__v_y", (PyCFunction)_wrap_GeometricTiePoints__v_y, METH_O, (char *)"\n"
 		"\n"
-		"blitz::Array<double, 2> GeoCal::GeometricTiePoints::y() const\n"
+		"blitz::Array< double, 2 > GeometricTiePoints::y() const\n"
 		"Return the resampled_ic as 2 columns, first is line second is sample;.\n"
 		"\n"
 		""},
@@ -6964,11 +7573,21 @@ static void *_p_std__basic_istreamT_char_std__char_traitsT_char_t_tTo_p_std__bas
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_iosT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ios< char,std::char_traits< char > > *) (std::basic_istream< char > *) ((std::basic_iostream< char,std::char_traits< char > > *) x));
 }
+static void *_p_boost__shared_ptrT_GeoCal__GeometricModel_tTo_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > >(*(boost::shared_ptr< GeoCal::GeometricModel > *)x);
+}
 static void *_p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageCoordinateWithDerivative *) x));
 }
+static void *_p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Observable< GeoCal::GeometricTiePoints > *) x));
+}
+static void *_p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::Observer< GeoCal::GeometricTiePoints > *) x));
+}
 static void *_p_GeoCal__GeometricTiePointsTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::GeometricTiePoints *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::Observable< GeoCal::GeometricTiePoints > *) ((GeoCal::GeometricTiePoints *) x));
 }
 static void *_p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::ImageCoordinate *) x));
@@ -6977,7 +7596,7 @@ static void *_p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject(void *x, 
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::VicarImageCoordinate *) x));
 }
 static void *_p_GeoCal__GeometricModelTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::GeometricModel *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::Observer< GeoCal::GeometricTiePoints > *) ((GeoCal::GeometricModel *) x));
 }
 static void *_p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::AutoDerivative< double > *) x));
@@ -6990,6 +7609,10 @@ static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__ba
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ostream< char,std::char_traits< char > > *)  ((std::basic_iostream< char,std::char_traits< char > > *) x));
+}
+static void *_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__GeometricModel_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7011,6 +7634,10 @@ static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost_
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivative< double > > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > *)x);
+}
 static void *_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *)x);
@@ -7019,6 +7646,16 @@ static void *_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_b
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > >(*(boost::shared_ptr< GeoCal::GeometricTiePoints > *)x);
+}
+static void *_p_GeoCal__GeometricModelTo_p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observer< GeoCal::GeometricTiePoints > *)  ((GeoCal::GeometricModel *) x));
+}
+static void *_p_GeoCal__GeometricTiePointsTo_p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::GeometricTiePoints > *)  ((GeoCal::GeometricTiePoints *) x));
+}
 static swig_type_info _swigt__p_GeoCal__AutoDerivativeRefT_double_t = {"_p_GeoCal__AutoDerivativeRefT_double_t", "GeoCal::AutoDerivativeRef< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__AutoDerivativeT_double_t = {"_p_GeoCal__AutoDerivativeT_double_t", "GeoCal::AutoDerivative< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
@@ -7026,6 +7663,8 @@ static swig_type_info _swigt__p_GeoCal__GeometricModel = {"_p_GeoCal__GeometricM
 static swig_type_info _swigt__p_GeoCal__GeometricTiePoints = {"_p_GeoCal__GeometricTiePoints", "GeoCal::GeometricTiePoints *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageCoordinate = {"_p_GeoCal__ImageCoordinate", "GeoCal::ImageCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageCoordinateWithDerivative = {"_p_GeoCal__ImageCoordinateWithDerivative", "GeoCal::ImageCoordinateWithDerivative *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t = {"_p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t", "GeoCal::Observable< GeoCal::GeometricTiePoints > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t = {"_p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t", "GeoCal::Observer< GeoCal::GeometricTiePoints > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__VicarImageCoordinate = {"_p_GeoCal__VicarImageCoordinate", "GeoCal::VicarImageCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
@@ -7059,6 +7698,8 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GeometricModel_t = {"
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t = {"_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t", "boost::shared_ptr< GeoCal::GeometricTiePoints > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t", "boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t", "boost::shared_ptr< GeoCal::ImageCoordinate > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t = {"_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t", "boost::shared_ptr< GeoCal::Observable< GeoCal::GeometricTiePoints > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t = {"_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t", "boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t", "boost::shared_ptr< GeoCal::VicarImageCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
@@ -7090,6 +7731,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__GeometricTiePoints,
   &_swigt__p_GeoCal__ImageCoordinate,
   &_swigt__p_GeoCal__ImageCoordinateWithDerivative,
+  &_swigt__p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t,
+  &_swigt__p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t,
   &_swigt__p_GeoCal__VicarImageCoordinate,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
@@ -7123,6 +7766,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
@@ -7149,11 +7794,13 @@ static swig_type_info *swig_type_initial[] = {
 
 static swig_cast_info _swigc__p_GeoCal__AutoDerivativeRefT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__AutoDerivativeT_double_t[] = {  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeometricTiePoints, _p_GeoCal__GeometricTiePointsTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeometricModel, _p_GeoCal__GeometricModelTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeometricTiePoints, _p_GeoCal__GeometricTiePointsTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeometricModel, _p_GeoCal__GeometricModelTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t, _p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t, _p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_tTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GeometricModel[] = {  {&_swigt__p_GeoCal__GeometricModel, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GeometricTiePoints[] = {  {&_swigt__p_GeoCal__GeometricTiePoints, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinate[] = {  {&_swigt__p_GeoCal__ImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinateWithDerivative[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t[] = {  {&_swigt__p_GeoCal__GeometricTiePoints, _p_GeoCal__GeometricTiePointsTo_p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t[] = {  {&_swigt__p_GeoCal__GeometricModel, _p_GeoCal__GeometricModelTo_p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VicarImageCoordinate[] = {  {&_swigt__p_GeoCal__VicarImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7182,11 +7829,13 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeometricModel_t, _p_boost__shared_ptrT_GeoCal__GeometricModel_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, _p_boost__shared_ptrT_GeoCal__GeometricTiePoints_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeometricModel_t, _p_boost__shared_ptrT_GeoCal__GeometricModel_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, _p_boost__shared_ptrT_GeoCal__GeometricTiePoints_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GeometricModel_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeometricModel_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, _p_boost__shared_ptrT_GeoCal__GeometricTiePoints_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeometricModel_t, _p_boost__shared_ptrT_GeoCal__GeometricModel_tTo_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7218,6 +7867,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__GeometricTiePoints,
   _swigc__p_GeoCal__ImageCoordinate,
   _swigc__p_GeoCal__ImageCoordinateWithDerivative,
+  _swigc__p_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t,
+  _swigc__p_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t,
   _swigc__p_GeoCal__VicarImageCoordinate,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
@@ -7251,6 +7902,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__GeometricTiePoints_t_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__GeometricTiePoints_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t,
   _swigc__p_char,
   _swigc__p_char_type,
@@ -7963,6 +8616,12 @@ SWIG_init(void) {
   
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::GeometricTiePoints), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::GeometricTiePoints > > ("boost::shared_ptr< GeoCal::GeometricTiePoints > *"));
+  
+  
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observer<GeoCal::GeometricTiePoints>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::GeometricTiePoints> > > ("boost::shared_ptr< GeoCal::Observer<GeoCal::GeometricTiePoints> > *"));
+  
+  
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observable<GeoCal::GeometricTiePoints>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observable<GeoCal::GeometricTiePoints> > > ("boost::shared_ptr< GeoCal::Observable<GeoCal::GeometricTiePoints> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

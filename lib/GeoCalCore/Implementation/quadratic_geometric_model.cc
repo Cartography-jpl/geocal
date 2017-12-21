@@ -2,8 +2,40 @@
 #include "geocal_exception.h"
 #include "geocal_gsl_fit.h"
 #include "ostream_pad.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void QuadraticGeometricModel::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GeometricModel)
+    & GEOCAL_NVP(tp)
+    & GEOCAL_NVP(trans)
+    & GEOCAL_NVP(inv_trans)
+    & GEOCAL_NVP(mag_ln)
+    & GEOCAL_NVP(mag_smp)
+    & GEOCAL_NVP(ft);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+template<class Archive>
+void QuadraticGeometricModel::save(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void QuadraticGeometricModel::load(Archive & ar, const unsigned int version)
+{
+  // Connect class to tp as observer
+  if(tp)
+    tp->add_observer(*this);
+}
+
+GEOCAL_IMPLEMENT(QuadraticGeometricModel);
+#endif
 
 // Minimum number of tiepoints before fitting a Quadratic function. We
 // fit a linear model even if fit type is Quadratic if we have fewer
@@ -26,29 +58,24 @@ QuadraticGeometricModel::QuadraticGeometricModel
 }
 
 //-----------------------------------------------------------------------
-/// Constructor. The transform gives the coefficients of the quadratic
-/// transform, it should be length 12. The transformation is:
-/// x = trans(0)*px+trans(1)*py+trans(2)+trans(3)*px*px+
-///     trans(4)*py*py+trans(5)*px*py
-/// y = trans(6)*px+trans(7)*py+trans(8)+trans(9)*px*px+
-///     trans(10)*py*py+trans(11)*px*py
+/// Constructor. This fits the set of Tp, or creates an identity
+/// transformation if Tp is null.
 //-----------------------------------------------------------------------
 
 QuadraticGeometricModel::QuadraticGeometricModel
-( const blitz::Array<double, 1>& Transformation,
-  const blitz::Array<double, 1>& Inverse_transformation,
-  FitType Ft,
-  double Magnify_line, 
-  double Magnify_sample
-)
-  : trans(Transformation.copy()), inv_trans(Inverse_transformation.copy()),
-    mag_ln(Magnify_line), mag_smp(Magnify_sample),
-    ft(Ft)
+(const boost::shared_ptr<GeometricTiePoints>& Tp,
+ FitType Ft,
+ double Magnify_line, 
+ double Magnify_sample)
+  : tp(Tp), trans(12), inv_trans(12), mag_ln(Magnify_line), 
+    mag_smp(Magnify_sample), ft(Ft)
 {
-  if(trans.rows() != 12)
-    throw Exception("Transformation needs to be size 12");
-  if(inv_trans.rows() != 12)
-    throw Exception("Transformation needs to be size 12");
+  trans = 1,0,0,0,0,0,0,1,0,0,0,0;
+  inv_trans = 1,0,0,0,0,0,0,1,0,0,0,0;
+  if(tp) {
+    tp->add_observer(*this);
+    tp->notify_update();
+  }
 }
 
 ImageCoordinate QuadraticGeometricModel::original_image_coordinate
@@ -88,14 +115,6 @@ void QuadraticGeometricModel::fit_transformation(const GeometricTiePoints& Tp)
 {
   Array<double, 2> x = Tp.x();
   Array<double, 2> y = Tp.y();
-  // Diagnostic message. Leave in place, in case we need this again
-  if(false) {
-    std::cout << "Points to fit:\n";
-    for(int iii=0;iii<x.rows();iii++) 
-      std::cout << "   " << iii << ": (" << x(iii,0) << ", "
-		<< x(iii, 1) << "), ("
-		<< y(iii, 0) << ", " << y(iii,1) << ")\n";
-  }
   fit_single(x, y, trans);
   fit_single(y, x, inv_trans);
 }

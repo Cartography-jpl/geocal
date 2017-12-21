@@ -2,16 +2,20 @@
 #define GEOMETRIC_MODEL_H
 #include "printable.h"
 #include "image_coordinate.h"
+#include "observer.h"
 #include <vector>
 #include <blitz/array.h>
 
 namespace GeoCal {
+  class GeometricTiePoints; // Forward declaration
+  
 /****************************************************************//**
   This supplies a geometric model that can be used to deform an image,
   e.g., resample an image to match to geometry of another reference
   image. 
 *******************************************************************/
-class GeometricModel : public Printable<GeometricModel> {
+class GeometricModel : public Printable<GeometricModel>,
+		       public Observer<GeometricTiePoints> {
 public:
   virtual ~GeometricModel() {}
 
@@ -51,13 +55,14 @@ private:
   the image together. This is just complicated enough to need a class
   to maintain it. This is little more than a structure.
 *******************************************************************/
-class GeometricTiePoints : public Printable<GeometricTiePoints> {
+class GeometricTiePoints : public Printable<GeometricTiePoints>,
+			   public Observable<GeometricTiePoints> {
 public:
   GeometricTiePoints() : replace_point_(-1) {}
 
   virtual ~GeometricTiePoints() {} 
-  void add_point(const ImageCoordinate& Resampled_ic,
-		 const ImageCoordinate& Original_ic);
+  void add_point(const ImageCoordinate& X_ic,
+		 const ImageCoordinate& Y_ic);
 
 //-----------------------------------------------------------------------
 /// To get started we may have a first set of approximate points added
@@ -71,51 +76,25 @@ public:
 //-----------------------------------------------------------------------
 
   void start_replacing() { replace_point_ = 0; }
-  
-//-----------------------------------------------------------------------
-/// Remove the point at the given index.
-//-----------------------------------------------------------------------
 
-  void remove_point(int Index)
-  {
-    range_check(Index, 0, (int) otie.size());
-    itie.erase(itie.begin() + Index);
-    otie.erase(otie.begin() + Index);
-  }
+  void remove_point(int Index);
 
 //-----------------------------------------------------------------------
 /// Number of points.
 //-----------------------------------------------------------------------
 
-  int number_point() const { return (int) otie.size(); }
-  
-//-----------------------------------------------------------------------
-/// Return the resampled_ic as 2 columns, first is line second is sample;
-//-----------------------------------------------------------------------
-  blitz::Array<double, 2> x() const
-  { blitz::Array<double, 2> res((int) otie.size(), 2);
-    for(int i = 0; i < res.rows(); ++i) {
-      res(i, 0) = otie[i].line;
-      res(i, 1) = otie[i].sample;
-    }
-    return res;
-  }
-
-//-----------------------------------------------------------------------
-/// Return the resampled_ic as 2 columns, first is line second is sample;
-//-----------------------------------------------------------------------
-  blitz::Array<double, 2> y() const
-  { blitz::Array<double, 2> res((int) itie.size(), 2);
-    for(int i = 0; i < res.rows(); ++i) {
-      res(i, 0) = itie[i].line;
-      res(i, 1) = itie[i].sample;
-    }
-    return res;
-  }
-  virtual void print(std::ostream& Os) const 
-  { Os << "GeometricTiePoints"; }
+  int number_point() const { return (int) x_tie.size(); }
+  blitz::Array<double, 2> x() const;
+  blitz::Array<double, 2> y() const;
+  virtual void print(std::ostream& Os) const;
+  virtual void notify_update()
+  { notify_update_do(*this); }
+  virtual void add_observer(Observer<GeometricTiePoints>& Obs)
+  { add_observer_do(Obs, *this); }
+  virtual void remove_observer(Observer<GeometricTiePoints>& Obs)
+  { remove_observer_do(Obs, *this);}
 private:
-  std::vector<ImageCoordinate> itie, otie;
+  std::vector<ImageCoordinate> y_tie, x_tie;
   int replace_point_;
   friend class boost::serialization::access;
   template<class Archive>

@@ -189,6 +189,7 @@ import geocal_swig.calc_raster
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
+import geocal_swig.observer
 class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
     """
 

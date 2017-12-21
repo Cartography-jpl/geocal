@@ -16,14 +16,15 @@ public:
 			  double Magnify_line = 1.0, 
 			  double Magnify_sample = 1.0
 			  );
-  QuadraticGeometricModel(const blitz::Array<double, 1>& Transformation,
-			  const blitz::Array<double, 1>& Inverse_ransformation,
+  QuadraticGeometricModel(const boost::shared_ptr<GeometricTiePoints>& Tp,
 			  FitType ft = LINEAR,
 			  double Magnify_line = 1.0, 
 			  double Magnify_sample = 1.0
 			  );
   virtual ~QuadraticGeometricModel() {}
   void fit_transformation(const GeometricTiePoints& Tp);
+  virtual void notify_update(const GeometricTiePoints& Tp)
+  { fit_transformation(Tp); }
   virtual ImageCoordinate original_image_coordinate
   (const ImageCoordinate& Resampled_ic) const;
   virtual ImageCoordinate resampled_image_coordinate
@@ -69,8 +70,16 @@ public:
 /// Type of fit to do.
 //-----------------------------------------------------------------------
   FitType fit_type() const {return ft;}
+
+//-----------------------------------------------------------------------
+/// Tiepoints used for Model. This may be null if we aren't actually
+/// using tiepoints  
+//-----------------------------------------------------------------------
+  const boost::shared_ptr<GeometricTiePoints>& tie_points() const
+  {return tp;}
 private:
   static const int min_tp_for_quadratic;
+  boost::shared_ptr<GeometricTiePoints> tp;
   blitz::Array<double, 1> trans;
   blitz::Array<double, 1> inv_trans;
   double mag_ln, mag_smp;
@@ -78,8 +87,17 @@ private:
   void fit_single(const blitz::Array<double, 2>& x,
 		  const blitz::Array<double, 2>& y,
 		  blitz::Array<double, 1>& tr);
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 
 }
+
+GEOCAL_EXPORT_KEY(QuadraticGeometricModel);
 #endif
 

@@ -187,6 +187,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.geometric_model
 import geocal_swig.generic_object
+import geocal_swig.observer
 class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     """
 
@@ -203,19 +204,30 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     def __init__(self, *args):
         """
 
-        QuadraticGeometricModel::QuadraticGeometricModel(const blitz::Array< double, 1 > &Transformation, const blitz::Array<
-        double, 1 > &Inverse_ransformation, FitType ft=LINEAR, double
-        Magnify_line=1.0, double Magnify_sample=1.0)
+        QuadraticGeometricModel::QuadraticGeometricModel(const boost::shared_ptr< GeometricTiePoints > &Tp, FitType ft=LINEAR,
+        double Magnify_line=1.0, double Magnify_sample=1.0)
         Constructor.
 
-        The transform gives the coefficients of the quadratic transform, it
-        should be length 12. The transformation is: x =
-        trans(0)*px+trans(1)*py+trans(2)+trans(3)*px*px+
-        trans(4)*py*py+trans(5)*px*py y =
-        trans(6)*px+trans(7)*py+trans(8)+trans(9)*px*px+
-        trans(10)*py*py+trans(11)*px*py 
+        This fits the set of Tp, or creates an identity transformation if Tp
+        is null. 
         """
         _quadratic_geometric_model.QuadraticGeometricModel_swiginit(self, _quadratic_geometric_model.new_QuadraticGeometricModel(*args))
+
+    def _v_tie_points(self):
+        """
+
+        const boost::shared_ptr<GeometricTiePoints>& GeoCal::QuadraticGeometricModel::tie_points() const
+        Tiepoints used for Model.
+
+        This may be null if we aren't actually using tiepoints 
+        """
+        return _quadratic_geometric_model.QuadraticGeometricModel__v_tie_points(self)
+
+
+    @property
+    def tie_points(self):
+        return self._v_tie_points()
+
 
     def fit_transformation(self, Tp):
         """
@@ -305,14 +317,11 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
         return self._v_fit_type()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-      return _new_from_init, (self.__class__, 1, self.transformation,self.fit_type,self.magnify_line,self.magnify_sample)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _quadratic_geometric_model.delete_QuadraticGeometricModel
+QuadraticGeometricModel._v_tie_points = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_tie_points, None, QuadraticGeometricModel)
 QuadraticGeometricModel.fit_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel_fit_transformation, None, QuadraticGeometricModel)
 QuadraticGeometricModel._v_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_transformation, None, QuadraticGeometricModel)
 QuadraticGeometricModel._v_inverse_transformation = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_inverse_transformation, None, QuadraticGeometricModel)

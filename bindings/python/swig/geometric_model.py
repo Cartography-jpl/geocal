@@ -186,7 +186,34 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
-class GeometricModel(geocal_swig.generic_object.GenericObject):
+import geocal_swig.observer
+class ObservableGeometricTiePoints(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _geometric_model.delete_ObservableGeometricTiePoints
+ObservableGeometricTiePoints.add_observer_and_keep_reference = new_instancemethod(_geometric_model.ObservableGeometricTiePoints_add_observer_and_keep_reference, None, ObservableGeometricTiePoints)
+ObservableGeometricTiePoints.add_observer = new_instancemethod(_geometric_model.ObservableGeometricTiePoints_add_observer, None, ObservableGeometricTiePoints)
+ObservableGeometricTiePoints.remove_observer = new_instancemethod(_geometric_model.ObservableGeometricTiePoints_remove_observer, None, ObservableGeometricTiePoints)
+ObservableGeometricTiePoints_swigregister = _geometric_model.ObservableGeometricTiePoints_swigregister
+ObservableGeometricTiePoints_swigregister(ObservableGeometricTiePoints)
+
+class ObserverGeometricTiePoints(geocal_swig.generic_object.GenericObject):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        _geometric_model.ObserverGeometricTiePoints_swiginit(self, _geometric_model.new_ObserverGeometricTiePoints())
+    __swig_destroy__ = _geometric_model.delete_ObserverGeometricTiePoints
+ObserverGeometricTiePoints.notify_update = new_instancemethod(_geometric_model.ObserverGeometricTiePoints_notify_update, None, ObserverGeometricTiePoints)
+ObserverGeometricTiePoints.notify_add = new_instancemethod(_geometric_model.ObserverGeometricTiePoints_notify_add, None, ObserverGeometricTiePoints)
+ObserverGeometricTiePoints.notify_remove = new_instancemethod(_geometric_model.ObserverGeometricTiePoints_notify_remove, None, ObserverGeometricTiePoints)
+ObserverGeometricTiePoints_swigregister = _geometric_model.ObserverGeometricTiePoints_swigregister
+ObserverGeometricTiePoints_swigregister(ObserverGeometricTiePoints)
+
+class GeometricModel(ObserverGeometricTiePoints):
     """
 
     This supplies a geometric model that can be used to deform an image,
@@ -235,7 +262,7 @@ GeometricModel.__str__ = new_instancemethod(_geometric_model.GeometricModel___st
 GeometricModel_swigregister = _geometric_model.GeometricModel_swigregister
 GeometricModel_swigregister(GeometricModel)
 
-class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
+class GeometricTiePoints(ObservableGeometricTiePoints):
     """
 
     Often GeometricModels are created by fitting a set of points tieing
@@ -260,8 +287,7 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
     def add_point(self, Resampled_ic, Original_ic):
         """
 
-        void GeometricTiePoints::add_point(const ImageCoordinate &Resampled_ic, const ImageCoordinate
-        &Original_ic)
+        void GeometricTiePoints::add_point(const ImageCoordinate &X_ic, const ImageCoordinate &Y_ic)
         Add a point. 
         """
         return _geometric_model.GeometricTiePoints_add_point(self, Resampled_ic, Original_ic)
@@ -287,16 +313,25 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
     def remove_point(self, Index):
         """
 
-        void GeoCal::GeometricTiePoints::remove_point(int Index)
+        void GeometricTiePoints::remove_point(int Index)
         Remove the point at the given index. 
         """
         return _geometric_model.GeometricTiePoints_remove_point(self, Index)
 
 
+    def notify_update(self):
+        """
+
+        virtual void GeoCal::GeometricTiePoints::notify_update()
+
+        """
+        return _geometric_model.GeometricTiePoints_notify_update(self)
+
+
     def _v_x(self):
         """
 
-        blitz::Array<double, 2> GeoCal::GeometricTiePoints::x() const
+        blitz::Array< double, 2 > GeometricTiePoints::x() const
         Return the resampled_ic as 2 columns, first is line second is sample;.
 
         """
@@ -311,7 +346,7 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
     def _v_y(self):
         """
 
-        blitz::Array<double, 2> GeoCal::GeometricTiePoints::y() const
+        blitz::Array< double, 2 > GeometricTiePoints::y() const
         Return the resampled_ic as 2 columns, first is line second is sample;.
 
         """
@@ -344,6 +379,7 @@ class GeometricTiePoints(geocal_swig.generic_object.GenericObject):
 GeometricTiePoints.add_point = new_instancemethod(_geometric_model.GeometricTiePoints_add_point, None, GeometricTiePoints)
 GeometricTiePoints.start_replacing = new_instancemethod(_geometric_model.GeometricTiePoints_start_replacing, None, GeometricTiePoints)
 GeometricTiePoints.remove_point = new_instancemethod(_geometric_model.GeometricTiePoints_remove_point, None, GeometricTiePoints)
+GeometricTiePoints.notify_update = new_instancemethod(_geometric_model.GeometricTiePoints_notify_update, None, GeometricTiePoints)
 GeometricTiePoints._v_x = new_instancemethod(_geometric_model.GeometricTiePoints__v_x, None, GeometricTiePoints)
 GeometricTiePoints._v_y = new_instancemethod(_geometric_model.GeometricTiePoints__v_y, None, GeometricTiePoints)
 GeometricTiePoints._v_number_point = new_instancemethod(_geometric_model.GeometricTiePoints__v_number_point, None, GeometricTiePoints)

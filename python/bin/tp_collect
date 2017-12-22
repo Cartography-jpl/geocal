@@ -159,7 +159,7 @@ Options:
        the raster data before image matching. This is useful for
        example AirMSPI data where the image is a reflectance value
        between 0.0 and 1.0. Since the image matchers expect integer
-       data, you want get any results unless you scale to a different
+       data, you won't get any results unless you scale to a different
        range.
 
   --surface-image=shelve

@@ -15,6 +15,7 @@ class QuadraticGeometricModel: public GeometricModel {
 public:
   enum FitType {LINEAR = 0, QUADRATIC};
   QuadraticGeometricModel(const boost::shared_ptr<GeometricTiePoints>& Tp,
+			  int Min_tp_to_fit,
 			  FitType ft = LINEAR,
 			  double Magnify_line = 1.0, 
 			  double Magnify_sample = 1.0);
@@ -28,6 +29,8 @@ public:
   %python_attribute_with_set(magnify_line, double)
   %python_attribute_with_set(magnify_sample, double)
   %python_attribute(fit_type, FitType)
+  %python_attribute(min_number_tie_point_to_fit, int);
+  %python_attribute(enough_tie_point_to_fit, bool);
   %pickle_serialization();
 };
 

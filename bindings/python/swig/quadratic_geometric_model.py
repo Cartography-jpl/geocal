@@ -204,8 +204,8 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     def __init__(self, *args):
         """
 
-        QuadraticGeometricModel::QuadraticGeometricModel(const boost::shared_ptr< GeometricTiePoints > &Tp, FitType ft=LINEAR,
-        double Magnify_line=1.0, double Magnify_sample=1.0)
+        QuadraticGeometricModel::QuadraticGeometricModel(const boost::shared_ptr< GeometricTiePoints > &Tp, int Min_tp_to_fit,
+        FitType ft=LINEAR, double Magnify_line=1.0, double Magnify_sample=1.0)
         Constructor.
 
         This fits the set of Tp, or creates an identity transformation if Tp
@@ -219,7 +219,11 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
         const boost::shared_ptr<GeometricTiePoints>& GeoCal::QuadraticGeometricModel::tie_points() const
         Tiepoints used for Model.
 
-        This may be null if we aren't actually using tiepoints 
+        This may be null if we aren't actually using tiepoints.
+
+        Adding points to tie_points() (or removing them) will automatically
+        update this transformation, if the number of tie_points() is >=
+        min_number_tie_point_to_fit(). 
         """
         return _quadratic_geometric_model.QuadraticGeometricModel__v_tie_points(self)
 
@@ -317,6 +321,36 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
         return self._v_fit_type()
 
 
+    def _v_min_number_tie_point_to_fit(self):
+        """
+
+        int GeoCal::QuadraticGeometricModel::min_number_tie_point_to_fit() const
+        This is the minimum number of tie_points() before we automatically
+        update our fit. 
+        """
+        return _quadratic_geometric_model.QuadraticGeometricModel__v_min_number_tie_point_to_fit(self)
+
+
+    @property
+    def min_number_tie_point_to_fit(self):
+        return self._v_min_number_tie_point_to_fit()
+
+
+    def _v_enough_tie_point_to_fit(self):
+        """
+
+        bool GeoCal::QuadraticGeometricModel::enough_tie_point_to_fit() const
+        True if we 1) have tie_points() and 2) number of tie points >=
+        min_number_tie_point_to_fit(). 
+        """
+        return _quadratic_geometric_model.QuadraticGeometricModel__v_enough_tie_point_to_fit(self)
+
+
+    @property
+    def enough_tie_point_to_fit(self):
+        return self._v_enough_tie_point_to_fit()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -328,6 +362,8 @@ QuadraticGeometricModel._v_inverse_transformation = new_instancemethod(_quadrati
 QuadraticGeometricModel._v_magnify_line = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_magnify_line, None, QuadraticGeometricModel)
 QuadraticGeometricModel._v_magnify_sample = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_magnify_sample, None, QuadraticGeometricModel)
 QuadraticGeometricModel._v_fit_type = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_fit_type, None, QuadraticGeometricModel)
+QuadraticGeometricModel._v_min_number_tie_point_to_fit = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_min_number_tie_point_to_fit, None, QuadraticGeometricModel)
+QuadraticGeometricModel._v_enough_tie_point_to_fit = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_enough_tie_point_to_fit, None, QuadraticGeometricModel)
 QuadraticGeometricModel_swigregister = _quadratic_geometric_model.QuadraticGeometricModel_swigregister
 QuadraticGeometricModel_swigregister(QuadraticGeometricModel)
 

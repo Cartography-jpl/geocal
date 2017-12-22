@@ -17,6 +17,7 @@ public:
 			  double Magnify_sample = 1.0
 			  );
   QuadraticGeometricModel(const boost::shared_ptr<GeometricTiePoints>& Tp,
+			  int Min_tp_to_fit,
 			  FitType ft = LINEAR,
 			  double Magnify_line = 1.0, 
 			  double Magnify_sample = 1.0
@@ -24,7 +25,9 @@ public:
   virtual ~QuadraticGeometricModel() {}
   void fit_transformation(const GeometricTiePoints& Tp);
   virtual void notify_update(const GeometricTiePoints& Tp)
-  { fit_transformation(Tp); }
+  { if(enough_tie_point_to_fit())
+      fit_transformation(*tp);
+  }
   virtual ImageCoordinate original_image_coordinate
   (const ImageCoordinate& Resampled_ic) const;
   virtual ImageCoordinate resampled_image_coordinate
@@ -73,10 +76,28 @@ public:
 
 //-----------------------------------------------------------------------
 /// Tiepoints used for Model. This may be null if we aren't actually
-/// using tiepoints  
+/// using tiepoints.
+///
+/// Adding points to tie_points() (or removing them) will
+/// automatically update this transformation, if the number of
+/// tie_points() is >= min_number_tie_point_to_fit().
 //-----------------------------------------------------------------------
   const boost::shared_ptr<GeometricTiePoints>& tie_points() const
   {return tp;}
+
+//-----------------------------------------------------------------------
+/// This is the minimum number of tie_points() before we automatically
+/// update our fit.
+//-----------------------------------------------------------------------
+
+  int min_number_tie_point_to_fit() const {return min_tp_to_fit_; }
+
+//-----------------------------------------------------------------------
+/// True if we 1) have tie_points() and 2) number of tie points >=
+/// min_number_tie_point_to_fit().
+//-----------------------------------------------------------------------
+  bool enough_tie_point_to_fit() const
+  { return tp && tp->number_point() >= min_tp_to_fit_; }
 private:
   static const int min_tp_for_quadratic;
   boost::shared_ptr<GeometricTiePoints> tp;
@@ -84,6 +105,7 @@ private:
   blitz::Array<double, 1> inv_trans;
   double mag_ln, mag_smp;
   FitType ft;
+  int min_tp_to_fit_;
   void fit_single(const blitz::Array<double, 2>& x,
 		  const blitz::Array<double, 2>& y,
 		  blitz::Array<double, 1>& tr);

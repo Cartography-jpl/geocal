@@ -6111,8 +6111,94 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::GeometricTiePoints > *arg1 = 0 ;
-  GeoCal::QuadraticGeometricModel::FitType arg2 ;
-  double arg3 ;
+  int arg2 ;
+  GeoCal::QuadraticGeometricModel::FitType arg3 ;
+  double arg4 ;
+  double arg5 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > temp2shared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  GeoCal::QuadraticGeometricModel *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_QuadraticGeometricModel" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::GeometricTiePoints > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::GeometricTiePoints > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::GeometricTiePoints > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::GeometricTiePoints > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_QuadraticGeometricModel" "', argument " "3"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
+  } 
+  arg3 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_QuadraticGeometricModel" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_QuadraticGeometricModel" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    try {
+      result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((boost::shared_ptr< GeoCal::GeometricTiePoints > const &)*arg1,arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::QuadraticGeometricModel > *smartresult = result ? new boost::shared_ptr<  GeoCal::QuadraticGeometricModel >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::GeometricTiePoints > *arg1 = 0 ;
+  int arg2 ;
+  GeoCal::QuadraticGeometricModel::FitType arg3 ;
   double arg4 ;
   void *argp1 ;
   int res1 = 0 ;
@@ -6120,7 +6206,7 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_0(PyObject *SWIGUNU
   boost::shared_ptr< GeoCal::GeometricTiePoints > temp2shared1 ;
   int val2 ;
   int ecode2 = 0 ;
-  double val3 ;
+  int val3 ;
   int ecode3 = 0 ;
   double val4 ;
   int ecode4 = 0 ;
@@ -6154,14 +6240,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_0(PyObject *SWIGUNU
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_QuadraticGeometricModel" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_QuadraticGeometricModel" "', argument " "3"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
   } 
-  arg3 = static_cast< double >(val3);
+  arg3 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val3);
   ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_QuadraticGeometricModel" "', argument " "4"" of type '" "double""'");
@@ -6186,18 +6272,18 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::GeometricTiePoints > *arg1 = 0 ;
-  GeoCal::QuadraticGeometricModel::FitType arg2 ;
-  double arg3 ;
+  int arg2 ;
+  GeoCal::QuadraticGeometricModel::FitType arg3 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared1 ;
   boost::shared_ptr< GeoCal::GeometricTiePoints > temp2shared1 ;
   int val2 ;
   int ecode2 = 0 ;
-  double val3 ;
+  int val3 ;
   int ecode3 = 0 ;
   GeoCal::QuadraticGeometricModel *result = 0 ;
   
@@ -6229,14 +6315,14 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_1(PyObject *SWIGUNU
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_QuadraticGeometricModel" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_QuadraticGeometricModel" "', argument " "3"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
   } 
-  arg3 = static_cast< double >(val3);
+  arg3 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val3);
   {
     try {
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((boost::shared_ptr< GeoCal::GeometricTiePoints > const &)*arg1,arg2,arg3);
@@ -6256,10 +6342,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::GeometricTiePoints > *arg1 = 0 ;
-  GeoCal::QuadraticGeometricModel::FitType arg2 ;
+  int arg2 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared1 ;
@@ -6296,66 +6382,12 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_2(PyObject *SWIGUNU
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "GeoCal::QuadraticGeometricModel::FitType""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_QuadraticGeometricModel" "', argument " "2"" of type '" "int""'");
   } 
-  arg2 = static_cast< GeoCal::QuadraticGeometricModel::FitType >(val2);
+  arg2 = static_cast< int >(val2);
   {
     try {
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((boost::shared_ptr< GeoCal::GeometricTiePoints > const &)*arg1,arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::QuadraticGeometricModel > *smartresult = result ? new boost::shared_ptr<  GeoCal::QuadraticGeometricModel >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  boost::shared_ptr< GeoCal::GeometricTiePoints > *arg1 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::GeometricTiePoints > tempshared1 ;
-  boost::shared_ptr< GeoCal::GeometricTiePoints > temp2shared1 ;
-  GeoCal::QuadraticGeometricModel *result = 0 ;
-  
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t,  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_QuadraticGeometricModel" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::GeometricTiePoints > const &""'"); 
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::GeometricTiePoints > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::GeometricTiePoints > * >(argp1);
-      arg1 = &tempshared1;
-    } else {
-      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::GeometricTiePoints > * >(argp1) : &tempshared1;
-    }
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg1 = &temp2shared1;
-    }
-  }
-  {
-    try {
-      result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((boost::shared_ptr< GeoCal::GeometricTiePoints > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6518,26 +6550,15 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel(PyObject *self, PyObject *args) {
   int argc;
-  PyObject *argv[5] = {
+  PyObject *argv[6] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_QuadraticGeometricModel",0,4,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_QuadraticGeometricModel",0,5,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
     return _wrap_new_QuadraticGeometricModel__SWIG_7(self, argc, argv);
   }
-  if (argc == 1) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    return _wrap_new_QuadraticGeometricModel__SWIG_3(self, argc, argv);
-  }
-check_2:
-  
   if (argc == 1) {
     return _wrap_new_QuadraticGeometricModel__SWIG_6(self, argc, argv);
   }
@@ -6547,17 +6568,17 @@ check_2:
       int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_4;
+    if (!_v) goto check_3;
     {
       {
         int res = SWIG_AsVal_int(argv[1], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_4;
-    return _wrap_new_QuadraticGeometricModel__SWIG_2(self, argc, argv);
+    if (!_v) goto check_3;
+    return _wrap_new_QuadraticGeometricModel__SWIG_3(self, argc, argv);
   }
-check_4:
+check_3:
   
   if (argc == 2) {
     return _wrap_new_QuadraticGeometricModel__SWIG_5(self, argc, argv);
@@ -6568,32 +6589,42 @@ check_4:
       int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeometricTiePoints_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_6;
+    if (!_v) goto check_5;
     {
       {
         int res = SWIG_AsVal_int(argv[1], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_6;
-    return _wrap_new_QuadraticGeometricModel__SWIG_1(self, argc, argv);
+    if (!_v) goto check_5;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_QuadraticGeometricModel__SWIG_2(self, argc, argv);
   }
-check_6:
+check_5:
   
   if (argc == 3) {
     return _wrap_new_QuadraticGeometricModel__SWIG_4(self, argc, argv);
   }
   if (argc == 4) {
+    return _wrap_new_QuadraticGeometricModel__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
     return _wrap_new_QuadraticGeometricModel__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_QuadraticGeometricModel'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(boost::shared_ptr< GeoCal::GeometricTiePoints > const &,GeoCal::QuadraticGeometricModel::FitType,double,double)\n"
-    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(boost::shared_ptr< GeoCal::GeometricTiePoints > const &,GeoCal::QuadraticGeometricModel::FitType,double)\n"
-    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(boost::shared_ptr< GeoCal::GeometricTiePoints > const &,GeoCal::QuadraticGeometricModel::FitType)\n"
-    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(boost::shared_ptr< GeoCal::GeometricTiePoints > const &)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(boost::shared_ptr< GeoCal::GeometricTiePoints > const &,int,GeoCal::QuadraticGeometricModel::FitType,double,double)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(boost::shared_ptr< GeoCal::GeometricTiePoints > const &,int,GeoCal::QuadraticGeometricModel::FitType,double)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(boost::shared_ptr< GeoCal::GeometricTiePoints > const &,int,GeoCal::QuadraticGeometricModel::FitType)\n"
+    "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(boost::shared_ptr< GeoCal::GeometricTiePoints > const &,int)\n"
     "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(GeoCal::QuadraticGeometricModel::FitType,double,double)\n"
     "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(GeoCal::QuadraticGeometricModel::FitType,double)\n"
     "    GeoCal::QuadraticGeometricModel::QuadraticGeometricModel(GeoCal::QuadraticGeometricModel::FitType)\n"
@@ -7104,6 +7135,92 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_min_number_tie_point_to_fit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel const > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuadraticGeometricModel__v_min_number_tie_point_to_fit" "', argument " "1"" of type '" "GeoCal::QuadraticGeometricModel const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::QuadraticGeometricModel const *)arg1)->min_number_tie_point_to_fit();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_enough_tie_point_to_fit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel const > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuadraticGeometricModel const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuadraticGeometricModel_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuadraticGeometricModel__v_enough_tie_point_to_fit" "', argument " "1"" of type '" "GeoCal::QuadraticGeometricModel const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuadraticGeometricModel > * >(argp1);
+      arg1 = const_cast< GeoCal::QuadraticGeometricModel * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::QuadraticGeometricModel const *)arg1)->enough_tie_point_to_fit();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_QuadraticGeometricModel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::QuadraticGeometricModel *arg1 = (GeoCal::QuadraticGeometricModel *) 0 ;
@@ -7180,8 +7297,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
 	 { (char *)"new_QuadraticGeometricModel", _wrap_new_QuadraticGeometricModel, METH_VARARGS, (char *)"\n"
 		"\n"
-		"QuadraticGeometricModel::QuadraticGeometricModel(const boost::shared_ptr< GeometricTiePoints > &Tp, FitType ft=LINEAR,\n"
-		"double Magnify_line=1.0, double Magnify_sample=1.0)\n"
+		"QuadraticGeometricModel::QuadraticGeometricModel(const boost::shared_ptr< GeometricTiePoints > &Tp, int Min_tp_to_fit,\n"
+		"FitType ft=LINEAR, double Magnify_line=1.0, double Magnify_sample=1.0)\n"
 		"Constructor.\n"
 		"\n"
 		"This fits the set of Tp, or creates an identity transformation if Tp\n"
@@ -7192,7 +7309,11 @@ static PyMethodDef SwigMethods[] = {
 		"const boost::shared_ptr<GeometricTiePoints>& GeoCal::QuadraticGeometricModel::tie_points() const\n"
 		"Tiepoints used for Model.\n"
 		"\n"
-		"This may be null if we aren't actually using tiepoints \n"
+		"This may be null if we aren't actually using tiepoints.\n"
+		"\n"
+		"Adding points to tie_points() (or removing them) will automatically\n"
+		"update this transformation, if the number of tie_points() is >=\n"
+		"min_number_tie_point_to_fit(). \n"
 		""},
 	 { (char *)"QuadraticGeometricModel_fit_transformation", _wrap_QuadraticGeometricModel_fit_transformation, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -7224,6 +7345,18 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"FitType GeoCal::QuadraticGeometricModel::fit_type() const\n"
 		"Type of fit to do. \n"
+		""},
+	 { (char *)"QuadraticGeometricModel__v_min_number_tie_point_to_fit", (PyCFunction)_wrap_QuadraticGeometricModel__v_min_number_tie_point_to_fit, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::QuadraticGeometricModel::min_number_tie_point_to_fit() const\n"
+		"This is the minimum number of tie_points() before we automatically\n"
+		"update our fit. \n"
+		""},
+	 { (char *)"QuadraticGeometricModel__v_enough_tie_point_to_fit", (PyCFunction)_wrap_QuadraticGeometricModel__v_enough_tie_point_to_fit, METH_O, (char *)"\n"
+		"\n"
+		"bool GeoCal::QuadraticGeometricModel::enough_tie_point_to_fit() const\n"
+		"True if we 1) have tie_points() and 2) number of tie points >=\n"
+		"min_number_tie_point_to_fit(). \n"
 		""},
 	 { (char *)"delete_QuadraticGeometricModel", (PyCFunction)_wrap_delete_QuadraticGeometricModel, METH_O, (char *)"\n"
 		"\n"

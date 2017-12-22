@@ -166,11 +166,6 @@ try {
   boost::shared_ptr<QuadraticGeometricModel> gm1
     (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
 				 rmagtae[0], rmagtae[1]));
-  boost::shared_ptr<QuadraticGeometricModel> gm2
-    (new QuadraticGeometricModel((predfunc ?
-				  QuadraticGeometricModel::QUADRATIC :
-				  QuadraticGeometricModel::LINEAR),
-				 rmagtae[0], rmagtae[1]));
  if (getw%2==0) throw Exception("zwind must be odd");
   retry = (nretry>1);
   if (retry&&gcpf) throw Exception("can't retry gcpf");
@@ -214,9 +209,6 @@ try {
   GeometricModelImage gimg1(img1, gm1, 
 	    (int) floor(img1->number_line() * gm1->magnify_line() + 0.5),
 	    (int) floor(img1->number_sample() * gm1->magnify_sample() + 0.5));
-  GeometricModelImage gimg2(img2, gm2,
-           (int) floor(img2->number_line() * gm2->magnify_line() + 0.5),
-           (int) floor(img2->number_sample() * gm2->magnify_sample() + 0.5));
   if (gcpf) throw Exception("ground control point file not implemented yet");
   matcher.reset(new PhaseCorrelationMatcher(fftsize,search));
   // Tempory, this should be done in constructor
@@ -365,18 +357,20 @@ try {
   // We want to replace the approximate tiepoints with image matching
   // as we start matching.
   tpset->start_replacing();
-  // boost::shared_ptr<QuadraticGeometricModel> gm2
-  //   (new QuadraticGeometricModel(tpset, (predfunc ?
-  // 				  QuadraticGeometricModel::QUADRATIC :
-  // 				  QuadraticGeometricModel::LINEAR),
-  // 				 rmagtae[0], rmagtae[1]));
-  // GeometricModelImage gimg2(img2, gm2, 
-  // 	    (int) floor(img2->number_line() * gm2->magnify_line() + 0.5),
-  // 	    (int) floor(img2->number_sample() * gm2->magnify_sample() + 0.5));
+  int throwcount = 4; 
+  int neqmin = std::max(autofit/2+throwcount,9);
+  boost::shared_ptr<QuadraticGeometricModel> gm2
+    (new QuadraticGeometricModel(tpset, neqmin,
+				 (predfunc ?
+   				  QuadraticGeometricModel::QUADRATIC :
+   				  QuadraticGeometricModel::LINEAR),
+   				 rmagtae[0], rmagtae[1]));
+  GeometricModelImage gimg2(img2, gm2, 
+   	    (int) floor(img2->number_line() * gm2->magnify_line() + 0.5),
+   	    (int) floor(img2->number_sample() * gm2->magnify_sample() + 0.5));
   int lastneq = -1; 
   int autoix = 0; 
   int gotthresh = 0; 
-  int throwcount = 4; 
   int scount = 0;
   int srchw = search-fftsize; 
   int msrchw = msrc-fftsize; 
@@ -384,7 +378,6 @@ try {
   double vmaxfac = 0.9;
   int maxredo = std::min(nredo,ifile.number_row()); 
   double thr_resp = 4.0*thr_res;
-  int neqmin = std::max(autofit/2+4,9);
   printf("  seq             point     srch       convergence     corr\n");
   for(int ibigx=0;ibigx<(ifile.number_row()+maxredo);ibigx++) {
     int ibig = ibigx%ifile.number_row();
@@ -406,28 +399,30 @@ try {
       }
       ffthset = 0;
       
-      /*  do linear fit of tiepoints and matches to predict match */
-      /*  inverse linear fit needed for getgrid outputs */
-      /*  can't mix 3 initial points with updates */
-      
-      if(((ibigx==0)||(tpset->number_point()>=neqmin))&&(tpset->number_point()!=lastneq)) {
+      if(( ibigx ==0 || gm2->enough_tie_point_to_fit()) &&
+	 tpset->number_point() != lastneq) {
 	if (ibigx>0&&throwcount>0) {
 	  solved = true;
 	  printf("***auto fit:neq = %8d ***\n",tpset->number_point());
 	}
-	if (ibigx>0)
+	if (ibigx>0) {
 	  for(int iii=0;iii<4;iii++) {
 	    if (throwcount<=0) break;
 	    throwout(*tpset);
 	    --throwcount;
 	  }
+	  // Go ahead and fit transformation, even through we
+	  // have reduced the number of points by throwing them
+	  // out. Perhaps move this into throwout.
+	  gm2->fit_transformation(*tpset);
+	}
 	if (scount%10==9) {
 	  throwout(*tpset);
 	  --throwcount;
+	  gm2->fit_transformation(*tpset);
 	}
 	scount++;
 	lastneq = tpset->number_point();
-	gm2->fit_transformation(*tpset);
       }
          
       int choplimit1 = (int)(ifftsize*ifftsize*zerolim);

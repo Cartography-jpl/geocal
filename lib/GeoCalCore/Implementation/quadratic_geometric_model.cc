@@ -16,7 +16,8 @@ void QuadraticGeometricModel::serialize(Archive & ar, const unsigned int version
     & GEOCAL_NVP(inv_trans)
     & GEOCAL_NVP(mag_ln)
     & GEOCAL_NVP(mag_smp)
-    & GEOCAL_NVP(ft);
+    & GEOCAL_NVP(ft)
+    & GEOCAL_NVP(min_tp_to_fit_);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -51,7 +52,7 @@ QuadraticGeometricModel::QuadraticGeometricModel
  double Magnify_line, 
  double Magnify_sample)
   : trans(12), inv_trans(12), mag_ln(Magnify_line), 
-    mag_smp(Magnify_sample), ft(Ft)
+    mag_smp(Magnify_sample), ft(Ft), min_tp_to_fit_(-1)
 {
   trans = 1,0,0,0,0,0,0,1,0,0,0,0;
   inv_trans = 1,0,0,0,0,0,0,1,0,0,0,0;
@@ -64,17 +65,18 @@ QuadraticGeometricModel::QuadraticGeometricModel
 
 QuadraticGeometricModel::QuadraticGeometricModel
 (const boost::shared_ptr<GeometricTiePoints>& Tp,
+ int Min_tp_to_fit,
  FitType Ft,
  double Magnify_line, 
  double Magnify_sample)
   : tp(Tp), trans(12), inv_trans(12), mag_ln(Magnify_line), 
-    mag_smp(Magnify_sample), ft(Ft)
+    mag_smp(Magnify_sample), ft(Ft), min_tp_to_fit_(Min_tp_to_fit)
 {
   trans = 1,0,0,0,0,0,0,1,0,0,0,0;
   inv_trans = 1,0,0,0,0,0,0,1,0,0,0,0;
   if(tp) {
     tp->add_observer(*this);
-    tp->notify_update();
+    fit_transformation(*tp);
   }
 }
 

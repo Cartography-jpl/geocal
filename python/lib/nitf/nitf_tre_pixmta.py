@@ -32,10 +32,10 @@ desc = ["PIXMTA",
          ["fittype", "Mathematical Form of the Data Transformation for the mth Pixel Metric", 1, str],
          ["numcoef", "Number of Coefficients Used by the Data Transformation of the mth Pixel Metric", 1, int,
           {'condition': "f.fittype[i1] == 'P'"}],
-          [["loop", "f.numcoef[i1]"],
+          [["loop", "0 if f.fittype[i1] == 'D' else int(f.numcoef[i1])"],
            ["coef", "jth Data Transformation Coefficient for the mth Pixel Metric", 15, float, {'frmt': _coef_format}]]],
         ["reserved_len", "Size of the Reserved Field", 5, int],
-        ["reserved", "Reserved Data Field", "f.reserved_len", str]
+        ["reserved", "Reserved Data Field", "f.reserved_len", None, {'field_value_class' : StringFieldData}]
 ]
 
 TrePIXMTA = create_nitf_tre_structure("TrePIXMTA",desc,hlp=hlp)

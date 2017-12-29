@@ -18,7 +18,7 @@ def test_des_csattb_basic():
     d.eci_ecf_att = 0
     d.dt_att = 900.5
     d.date_att = 20170501
-    d.t0_att = 235959.1000010101
+    d.t0_att = 235959.100001010
     d.num_att = 5
     for n in range(d.num_att):
         d.q1[n] = -0.11111
@@ -37,23 +37,23 @@ def test_des_csattb_basic():
 
     assert d2.dsclas  ==  'U'
     assert d2.id == '4385ab47-f3ba-40b7-9520-13d6b7a7f311'
-    d2.numais == 10
+    assert d2.numais == '010'
     for i in range(int(d2.numais)):
-        d2.aisdlvl[i] == 5 + i
-    d2.reservedsubh_len == 0
-    d2.qual_flag_att == 1
-    d2.interp_type_att == 1
-    d2.att_type == 1
-    d2.eci_ecf_att == 0
-    d2.dt_att == 900.5
-    d2.date_att == 20170501
-    d2.t0_att == 235959.1000010101
-    d2.num_att == 5
+        assert d2.aisdlvl[i] == 5 + i
+    assert d2.reservedsubh_len == 0
+    assert d2.qual_flag_att == 1
+    assert d2.interp_type_att == 1
+    assert d2.att_type == 1
+    assert d2.eci_ecf_att == 0
+    assert d2.dt_att == 900.5
+    assert d2.date_att == 20170501
+    assert d2.t0_att == 235959.100001010
+    assert d2.num_att == 5
     for n in range(d2.num_att):
-        d2.q1[n] == -0.11111
-        d2.q2[n] == -0.11111
-        d2.q3[n] == 0.11111
-        d2.q4[n] == 0.11111
-    d2.reserved_len == 0
+        assert d2.q1[n] == -0.11111
+        assert d2.q2[n] == -0.11111
+        assert d2.q3[n] == 0.11111
+        assert d2.q4[n] == 0.11111
+    assert d2.reserved_len == 0
 
     print (d2.summary())

@@ -64,6 +64,23 @@ public:
   { itie.push_back(Original_ic); otie.push_back(Resampled_ic); }
 
 //-----------------------------------------------------------------------
+/// Remove the point at the given index.
+//-----------------------------------------------------------------------
+
+  void remove_point(int Index)
+  {
+    range_check(Index, 0, (int) otie.size());
+    itie.erase(itie.begin() + Index);
+    otie.erase(otie.begin() + Index);
+  }
+
+//-----------------------------------------------------------------------
+/// Number of points.
+//-----------------------------------------------------------------------
+
+  int number_point() const { return (int) otie.size(); }
+  
+//-----------------------------------------------------------------------
 /// Return the resampled_ic as 2 columns, first is line second is sample;
 //-----------------------------------------------------------------------
   blitz::Array<double, 2> x() const

@@ -648,6 +648,42 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
       self._v_col_section_number(value)
 
 
+    def _v_line_fit_error(self, *args):
+        """
+
+        void GeoCal::RsmRationalPolynomial::line_fit_error(const boost::optional< double > &V)
+
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial__v_line_fit_error(self, *args)
+
+
+    @property
+    def line_fit_error(self):
+        return self._v_line_fit_error()
+
+    @line_fit_error.setter
+    def line_fit_error(self, value):
+      self._v_line_fit_error(value)
+
+
+    def _v_sample_fit_error(self, *args):
+        """
+
+        void GeoCal::RsmRationalPolynomial::sample_fit_error(const boost::optional< double > &V)
+
+        """
+        return _rsm_rational_polynomial.RsmRationalPolynomial__v_sample_fit_error(self, *args)
+
+
+    @property
+    def sample_fit_error(self):
+        return self._v_sample_fit_error()
+
+    @sample_fit_error.setter
+    def sample_fit_error(self, value):
+      self._v_sample_fit_error(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -678,6 +714,8 @@ RsmRationalPolynomial._v_sample_numerator = new_instancemethod(_rsm_rational_pol
 RsmRationalPolynomial._v_sample_denominator = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_sample_denominator, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_row_section_number = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_row_section_number, None, RsmRationalPolynomial)
 RsmRationalPolynomial._v_col_section_number = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_col_section_number, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_line_fit_error = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_line_fit_error, None, RsmRationalPolynomial)
+RsmRationalPolynomial._v_sample_fit_error = new_instancemethod(_rsm_rational_polynomial.RsmRationalPolynomial__v_sample_fit_error, None, RsmRationalPolynomial)
 RsmRationalPolynomial_swigregister = _rsm_rational_polynomial.RsmRationalPolynomial_swigregister
 RsmRationalPolynomial_swigregister(RsmRationalPolynomial)
 

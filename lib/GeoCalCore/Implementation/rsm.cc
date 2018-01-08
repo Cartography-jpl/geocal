@@ -14,14 +14,15 @@ template<class Archive>
 void Rsm::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Rsm);
-  ar & GEOCAL_NVP(rp)
-    & GEOCAL_NVP(cconv);
+  ar & GEOCAL_NVP(rp);
   // Older version didn't have rid.
   if(version > 0) {
     ar & GEOCAL_NVP(rid)
       & GEOCAL_NVP(rdcov)
       & GEOCAL_NVP(ricov)
       & GEOCAL_NVP(rparm);
+  } else {
+    ar & GEOCAL_NVP2("cconv", cconv_not_used);
   }
   boost::serialization::split_member(ar, *this, version);
 }
@@ -37,7 +38,7 @@ void Rsm::load(Archive & ar, const unsigned int version)
 {
   // Older version didn't have rid
   if(version == 0) {
-    rid = boost::make_shared<RsmId>(rp, cconv);
+    rid = boost::make_shared<RsmId>(rp, cconv_not_used);
   }
 }
 
@@ -50,9 +51,9 @@ GEOCAL_IMPLEMENT(Rsm);
 
 Rsm::Rsm(const boost::shared_ptr<RsmBase>& Rp,
 	 const boost::shared_ptr<CoordinateConverter>& Cconv)
-: rp(Rp), cconv(Cconv)
+: rp(Rp)
 {
-  rid = boost::make_shared<RsmId>(rp, cconv);
+  rid = boost::make_shared<RsmId>(rp, Cconv);
 }
 
 //-----------------------------------------------------------------------
@@ -68,11 +69,13 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
 {
   // This is a common enough special case to treat specially:
   const SimpleDem* sdem = dynamic_cast<const SimpleDem*>(&D);
-  const GeodeticConverter* gconv = dynamic_cast<const GeodeticConverter*>(cconv.get());
-  if(sdem && gconv)
+  const GeodeticConverter* gconv = dynamic_cast<const GeodeticConverter*>(coordinate_converter().get());
+  const GeodeticRadianConverter* gconv2 = dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
+  const GeodeticRadian2piConverter* gconv3 = dynamic_cast<const GeodeticRadian2piConverter*>(coordinate_converter().get());
+  if(sdem && (gconv || gconv2 || gconv3))
     return ground_coordinate(Ic, sdem->h());
   const PlanetSimpleDem* pdem = dynamic_cast<const PlanetSimpleDem*>(&D);
-  const PlanetocentricConverter* pconv = dynamic_cast<const PlanetocentricConverter*>(cconv.get());
+  const PlanetocentricConverter* pconv = dynamic_cast<const PlanetocentricConverter*>(coordinate_converter().get());
   if(pdem && pconv)
     return ground_coordinate(Ic, sdem->h());
 
@@ -90,13 +93,13 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
   lv.look_vector[2] = p->position[2] - p2->position[2];
   double resolution = 1.0;
   boost::shared_ptr<CartesianFixed> surfp = D.intersect(*p, lv, resolution);
-  return cconv->create(*surfp);
+  return coordinate_converter()->create(*surfp);
 }
 
 //-----------------------------------------------------------------------
 /// Invert the image_coordinate function to find the ground
 /// coordinates at a particular Z value. For the special case that the
-/// cconv is a GeodeticConverter or PlanetocentricConverter Z
+/// coordinate converter is a GeodeticConverter or PlanetocentricConverter Z
 /// corresponds to height.
 ///
 /// This routine may fail to find a solution, in which case a 
@@ -150,7 +153,7 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
   blitz::Array<double, 1> xint(2);
   rp->initial_guess(Ic.line, Ic.sample, Z, xint(0), xint(1));
   blitz::Array<double, 1> res = gsl_root(eq, xint, 0.1);
-  return cconv->convert_from_coordinate(res(0), res(1), Z);
+  return coordinate_converter()->convert_from_coordinate(res(0), res(1), Z);
 }
 
 //-----------------------------------------------------------------------
@@ -160,15 +163,17 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
 boost::shared_ptr<GroundCoordinate>
 Rsm::ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
 {
-  const GeodeticConverter* gconv = dynamic_cast<const GeodeticConverter*>(cconv.get());
-  const PlanetocentricConverter* pconv = dynamic_cast<const PlanetocentricConverter*>(cconv.get());
-  if(gconv || pconv)
+  const GeodeticConverter* gconv = dynamic_cast<const GeodeticConverter*>(coordinate_converter().get());
+  const GeodeticRadianConverter* gconv2 = dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
+  const GeodeticRadian2piConverter* gconv3 = dynamic_cast<const GeodeticRadian2piConverter*>(coordinate_converter().get());
+  const PlanetocentricConverter* pconv = dynamic_cast<const PlanetocentricConverter*>(coordinate_converter().get());
+  if(gconv || gconv2 || gconv3 || pconv)
     return ground_coordinate(Ic, H);
-  if(cconv->naif_code() == CoordinateConverter::EARTH_NAIF_CODE) {
+  if(coordinate_converter()->naif_code() == CoordinateConverter::EARTH_NAIF_CODE) {
     SimpleDem d(H);
     return ground_coordinate(Ic, d);
   }
-  PlanetSimpleDem d(H, cconv->naif_code());
+  PlanetSimpleDem d(H, coordinate_converter()->naif_code());
   return ground_coordinate(Ic, d);
 }
 
@@ -181,7 +186,7 @@ Rsm::ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
 ImageCoordinate Rsm::image_coordinate(const GroundCoordinate& Gc) const
 {
   double x, y, z;
-  cconv->convert_to_coordinate(Gc, x, y, z);
+  coordinate_converter()->convert_to_coordinate(Gc, x, y, z);
   return image_coordinate(x, y, z);
 }
 
@@ -213,8 +218,34 @@ blitz::Array<double, 2> Rsm::image_coordinate_jacobian
 void Rsm::fit(const ImageGroundConnection& Igc, double Min_height,
 	      double Max_height)
 {
-  rp->fit(Igc, *cconv, Min_height, Max_height, 0, Igc.number_line(),
+  rp->fit(Igc, *coordinate_converter(), Min_height, Max_height, 0, Igc.number_line(),
 	  0, Igc.number_sample());
+  fill_in_ground_domain_vertex(Min_height, Max_height);
+}
+
+//-----------------------------------------------------------------------
+/// Fill in the ground domain vertex information. Note that you don't
+/// normally need to call this directly, the "fit" function already
+/// does this. But it can be useful in unit testing and perhaps other
+/// contexts to directly calculate this.
+//-----------------------------------------------------------------------
+
+void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)
+{
+  int ind = 0;
+  for(int hind = 0; hind < 2; ++hind)
+    for(int lind = 0; lind < 2; ++lind)
+      for(int sind = 0; sind < 2; ++sind, ++ind) {
+	rid->ground_domain_vertex()[ind] = ground_coordinate_approx_height
+	  (ImageCoordinate(
+	      (lind == 0 ? rp->min_line() : rp->max_line()),
+	      (sind == 0 ? rp->min_sample() : rp->max_sample())),
+	   (hind == 0 ? Min_height : Max_height));
+      }
+  rid->min_line(rp->min_line());
+  rid->max_line(rp->max_line());
+  rid->min_sample(rp->min_sample());
+  rid->max_sample(rp->max_sample());
 }
 
 //-----------------------------------------------------------------------
@@ -228,8 +259,8 @@ void Rsm::print(std::ostream& Os) const
      << "  Rational Polynomial:\n";
   opad << *rp << "\n";
   opad.strict_sync();
-  Os << "  Coordinate Converter:\n";
-  opad << *cconv << "\n";
+  Os << "  Rsm ID:\n";
+  opad << *rid << "\n";
 }
 
 //-----------------------------------------------------------------------

@@ -16,6 +16,8 @@ public:
   std::string tre_string() const;
   static boost::shared_ptr<RsmAdjustableParameter>
   read_tre_string(const std::string& Tre_in);
+  %python_attribute_with_set(image_identifier, std::string);
+  %python_attribute_with_set(rsm_suport_data_edition, std::string);
   %pickle_serialization()
 };
 }

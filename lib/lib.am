@@ -13,6 +13,7 @@ geocalswiginc_HEADERS += @libgeocal@/swig_array.i
 geocalswiginc_HEADERS += @libgeocal@/swig_array_inc.i
 geocalswiginc_HEADERS += @libgeocal@/swig_boost_array.i
 geocalswiginc_HEADERS += @libgeocal@/swig_boost_array_inc.i
+geocalswiginc_HEADERS += @libgeocal@/swig_boost_optional.i
 geocalswiginc_HEADERS += @libgeocal@/swig_exception.i
 geocalswiginc_HEADERS += @libgeocal@/swig_pickle.i
 geocalswiginc_HEADERS += @libgeocal@/swig_print.i

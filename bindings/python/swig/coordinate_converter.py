@@ -317,5 +317,76 @@ GeodeticConverter.convert_from_coordinate = new_instancemethod(_coordinate_conve
 GeodeticConverter_swigregister = _coordinate_converter.GeodeticConverter_swigregister
 GeodeticConverter_swigregister(GeodeticConverter)
 
+class GeodeticRadianConverter(CoordinateConverter):
+    """
+
+    CoordinateConverter that goes to and from Geodetic coordinates.
+
+    This variations uses radians instead
+
+    C++ includes: coordinate_converter.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def convert_from_coordinate(self, X, Y, Z=0):
+        """
+
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::GeodeticRadianConverter::convert_from_coordinate(double X, double Y, double Z=0) const
+        Convert to geodetic.
+
+        X and Y are longitude and latitude in degrees, and Z is height is in
+        meters. 
+        """
+        return _coordinate_converter.GeodeticRadianConverter_convert_from_coordinate(self, X, Y, Z)
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+
+    def __init__(self):
+        _coordinate_converter.GeodeticRadianConverter_swiginit(self, _coordinate_converter.new_GeodeticRadianConverter())
+    __swig_destroy__ = _coordinate_converter.delete_GeodeticRadianConverter
+GeodeticRadianConverter.convert_from_coordinate = new_instancemethod(_coordinate_converter.GeodeticRadianConverter_convert_from_coordinate, None, GeodeticRadianConverter)
+GeodeticRadianConverter_swigregister = _coordinate_converter.GeodeticRadianConverter_swigregister
+GeodeticRadianConverter_swigregister(GeodeticRadianConverter)
+
+class GeodeticRadian2piConverter(CoordinateConverter):
+    """
+
+    CoordinateConverter that goes to and from Geodetic coordinates.
+
+    This variations uses radians instead. This version has longitude
+    between 0 and 360 degrees instead of -180 to 180
+
+    C++ includes: coordinate_converter.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def convert_from_coordinate(self, X, Y, Z=0):
+        """
+
+        virtual boost::shared_ptr<GroundCoordinate> GeoCal::GeodeticRadian2piConverter::convert_from_coordinate(double X, double Y, double Z=0) const
+        Convert to geodetic.
+
+        X and Y are longitude and latitude in degrees, and Z is height is in
+        meters. 
+        """
+        return _coordinate_converter.GeodeticRadian2piConverter_convert_from_coordinate(self, X, Y, Z)
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+
+    def __init__(self):
+        _coordinate_converter.GeodeticRadian2piConverter_swiginit(self, _coordinate_converter.new_GeodeticRadian2piConverter())
+    __swig_destroy__ = _coordinate_converter.delete_GeodeticRadian2piConverter
+GeodeticRadian2piConverter.convert_from_coordinate = new_instancemethod(_coordinate_converter.GeodeticRadian2piConverter_convert_from_coordinate, None, GeodeticRadian2piConverter)
+GeodeticRadian2piConverter_swigregister = _coordinate_converter.GeodeticRadian2piConverter_swigregister
+GeodeticRadian2piConverter_swigregister(GeodeticRadian2piConverter)
+
 
 

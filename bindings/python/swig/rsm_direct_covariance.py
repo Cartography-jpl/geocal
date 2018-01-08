@@ -238,11 +238,49 @@ class RsmDirectCovariance(geocal_swig.generic_object.GenericObject):
 
     read_tre_string = staticmethod(read_tre_string)
 
+    def _v_image_identifier(self, *args):
+        """
+
+        void GeoCal::RsmDirectCovariance::image_identifier(const std::string &V)
+
+        """
+        return _rsm_direct_covariance.RsmDirectCovariance__v_image_identifier(self, *args)
+
+
+    @property
+    def image_identifier(self):
+        return self._v_image_identifier()
+
+    @image_identifier.setter
+    def image_identifier(self, value):
+      self._v_image_identifier(value)
+
+
+    def _v_rsm_suport_data_edition(self, *args):
+        """
+
+        void GeoCal::RsmDirectCovariance::rsm_suport_data_edition(const std::string &V)
+
+        """
+        return _rsm_direct_covariance.RsmDirectCovariance__v_rsm_suport_data_edition(self, *args)
+
+
+    @property
+    def rsm_suport_data_edition(self):
+        return self._v_rsm_suport_data_edition()
+
+    @rsm_suport_data_edition.setter
+    def rsm_suport_data_edition(self, value):
+      self._v_rsm_suport_data_edition(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_direct_covariance.delete_RsmDirectCovariance
 RsmDirectCovariance.tre_string = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance_tre_string, None, RsmDirectCovariance)
+RsmDirectCovariance._v_image_identifier = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance__v_image_identifier, None, RsmDirectCovariance)
+RsmDirectCovariance._v_rsm_suport_data_edition = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance__v_rsm_suport_data_edition, None, RsmDirectCovariance)
 RsmDirectCovariance_swigregister = _rsm_direct_covariance.RsmDirectCovariance_swigregister
 RsmDirectCovariance_swigregister(RsmDirectCovariance)
 

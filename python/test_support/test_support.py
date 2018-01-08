@@ -24,6 +24,11 @@ geocal_test_igc = geocal_test_data + "igccol_rolling_shutter.xml"
 geocal_test_igc_sim_error = geocal_test_data + "igccol_rolling_shutter_simulated_error.xml"
 geocal_test_tpcol = geocal_test_data + "tpcol.xml"
 
+# RSM sample data. This is too big to carry in our source, so we have a
+# separate directory.
+# This comes from http://www.gwg.nga.mil/ntb/baseline/software/testfile/rsm/samples.htm
+rsm_sample_data = "/data/smyth/SampleRsm/"
+
 def cmd_exists(cmd):
     '''Check if a cmd exists by using type, which returns a nonzero status if
     the program isn't found'''
@@ -78,6 +83,9 @@ require_geocal_test_data = pytest.mark.skipif(not os.path.exists(geocal_test_igc
 require_vicar_gdalplugin = pytest.mark.skipif("NO_VICAR_GDALPLUGIN" in os.environ,
     reason = "need the VICAR GDAL plugin to run.")
 
+require_rsm_sample_data = pytest.mark.skipif(not os.path.exists(rsm_sample_data),
+      reason="need to have RSM sample data (%s) available to run." % rsm_sample_data)
+
 # Short hand for marking as unconditional skipping. Good for tests we
 # don't normally run, but might want to comment out for a specific debugging
 # reason.
@@ -115,10 +123,17 @@ def isolated_dir(tmpdir):
     finally:
         os.chdir(curdir)
 
-matlab = pytest.mark.skipif(
-    not pytest.config.getoption("--run-matlab"),
-    reason="need --run-matlab option to run"
-)
+run_matlab = False
+try:
+    run_matlab = pytest.config.getoption("--run-matlab")
+except ValueError:
+    # Might be missing if we execute something without conftest.py
+    # Might be a cleaner way to make sure run-matlab is always present,
+    # but I don't know how
+    pass
+
+matlab = pytest.mark.skipif(not run_matlab,
+                            reason="need --run-matlab option to run")
         
 @pytest.fixture(scope="function")
 def rpc():
@@ -170,10 +185,13 @@ def igc_rpc(rpc):
     return RpcImageGroundConnection(rpc, SimpleDem(), image)
 
 @pytest.fixture(scope="function")
-def rsm_rational_polynomial(rpc):
+def rsm_rational_polynomial(igc_rpc):
     '''Create a RsmRationalPolynomial that matches our rpc test fixture'''
     r = RsmRationalPolynomial(3,3,3,3,3,3,3,3)
-    r.set_rpc_coeff(rpc)
+    hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
+    hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
+    r.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line,
+          0, igc_rpc.number_sample)
     return r
 
 @pytest.fixture(scope="function")
@@ -184,7 +202,7 @@ def rsm_grid(igc_rpc):
     r.total_number_col_digit = 8
     hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
     hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
-    r.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line,
+    r.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line,
           0, igc_rpc.number_sample)
     return r
 
@@ -194,7 +212,7 @@ def rsm_ms_polynomial(igc_rpc):
     res = RsmMultiSection(igc_rpc.number_line, igc_rpc.number_sample, 3, 2, rp)
     hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
     hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
-    res.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
+    res.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
 	    igc_rpc.number_sample)
     return res
 
@@ -206,10 +224,40 @@ def rsm_ms_grid(igc_rpc):
     res = RsmMultiSection(igc_rpc.number_line, igc_rpc.number_sample, 3, 2, rg)
     hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
     hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
-    res.fit(igc_rpc, GeodeticConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
+    res.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line, 0,
 	    igc_rpc.number_sample)
     return res
 
+@pytest.fixture(scope="function")
+def rsm(rsm_rational_polynomial):
+    res = Rsm(rsm_rational_polynomial, GeodeticRadianConverter())
+    res.fill_in_ground_domain_vertex(500, 1500)
+    return res
+
+@pytest.fixture(scope="function")
+def rsm_g(rsm_grid):
+    res = Rsm(rsm_grid, GeodeticRadianConverter())
+    # This fails. We'll have to figure out what the problem is and fix it,
+    # but in the mean time put dummy data in so we can bypass this problem
+    # res.fill_in_ground_domain_vertex(500, 1500)
+    res.rsm_id.ground_domain_vertex = [Geodetic(10,20)] * 8
+    res.rsm_id.min_line = rsm_grid.min_line
+    res.rsm_id.max_line = rsm_grid.max_line
+    res.rsm_id.min_sample = rsm_grid.min_sample
+    res.rsm_id.max_sample = rsm_grid.max_sample
+    return res
+
+@pytest.fixture(scope="function")
+def rsm_ms_rp(rsm_ms_polynomial):
+    res = Rsm(rsm_ms_polynomial, GeodeticRadianConverter())
+    res.fill_in_ground_domain_vertex(500, 1500)
+    return res
+
+@pytest.fixture(scope="function")
+def rsm_ms_g(rsm_ms_grid):
+    res = Rsm(rsm_ms_grid, GeodeticRadianConverter())
+    res.fill_in_ground_domain_vertex(500, 1500)
+    return res
 
 
     

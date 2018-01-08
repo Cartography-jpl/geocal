@@ -29,8 +29,10 @@ public:
   GeometricTiePoints();
   void add_point(const ImageCoordinate& Resampled_ic,
 		 const ImageCoordinate& Original_ic);
+  void remove_point(int Index);
   %python_attribute(x, blitz::Array<double, 2>)
   %python_attribute(y, blitz::Array<double, 2>)
+  %python_attribute(number_point, int);
   std::string print_to_string() const;
   %pickle_serialization()
 };

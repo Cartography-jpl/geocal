@@ -118,6 +118,25 @@ public:
   { range_check(i, 0, sec.rows()); range_check(j, 0, sec.cols());
     sec(i, j) = V;
   }
+
+  virtual const std::string& image_identifier() const
+  { return image_identifier_;}
+  virtual void image_identifier(const std::string& V)
+  {
+    image_identifier_ = V;
+    for(int i = 0; i < sec.rows(); ++i)
+      for(int j = 0; j < sec.cols(); ++j)
+	sec(i, j)->image_identifier(V);
+  }
+  virtual const std::string& rsm_suport_data_edition() const
+  { return rsm_suport_data_edition_;}
+  virtual void rsm_suport_data_edition(const std::string& V)
+  {
+    rsm_suport_data_edition_ = V;
+    for(int i = 0; i < sec.rows(); ++i)
+      for(int j = 0; j < sec.cols(); ++j)
+	sec(i, j)->rsm_suport_data_edition(V);
+  }
 private:
   int border_;
   double nline_sec, nsamp_sec;

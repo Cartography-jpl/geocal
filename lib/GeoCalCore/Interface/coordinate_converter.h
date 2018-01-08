@@ -166,8 +166,154 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };
+
+/****************************************************************//**
+  CoordinateConverter that goes to and from Geodetic coordinates. This
+  variations uses radians instead
+*******************************************************************/
+
+class GeodeticRadianConverter : public CoordinateConverter {
+public:
+  
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~GeodeticRadianConverter() {}
+
+//-----------------------------------------------------------------------
+/// Convert to geodetic. X and Y are longitude and latitude in
+/// degrees, and Z is height is in meters.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<GroundCoordinate>
+    convert_from_coordinate(double X, double Y, double Z = 0) const
+  {
+    return boost::shared_ptr<GroundCoordinate>(new Geodetic(Y * Constant::rad_to_deg, X * Constant::rad_to_deg, Z));
+  }
+
+//-----------------------------------------------------------------------
+/// Test if two CoordinateConverters are the same coordinate system.
+//-----------------------------------------------------------------------
+
+  virtual bool is_same(const CoordinateConverter& Conv) const
+  {
+    return dynamic_cast<const GeodeticRadianConverter*>(&Conv);
+  }
+
+
+//-----------------------------------------------------------------------
+/// Convert to geodetic. X and Y are longitude and latitude in
+/// degrees, and Z is height is in meters.
+//-----------------------------------------------------------------------
+
+  virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
+			       double& Y, double& Z) const
+  {
+    Geodetic gd(Gc);
+    X = gd.longitude() * Constant::deg_to_rad;
+    Y = gd.latitude() * Constant::deg_to_rad;
+    Z = gd.height_reference_surface();
+  }
+
+  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
+			       double& Y, double& Z) const
+  {
+    X = Gc.longitude() * Constant::deg_to_rad;
+    Y = Gc.latitude() * Constant::deg_to_rad;
+    Z = Gc.height_reference_surface();
+  }
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const
+  { Os << "Geodetic Coordinate Converter (Radians)"; }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+
+/****************************************************************//**
+  CoordinateConverter that goes to and from Geodetic coordinates. This
+  variations uses radians instead. This version has longitude between
+  0 and 360 degrees instead of -180 to 180
+*******************************************************************/
+
+class GeodeticRadian2piConverter : public CoordinateConverter {
+public:
+  
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~GeodeticRadian2piConverter() {}
+
+//-----------------------------------------------------------------------
+/// Convert to geodetic. X and Y are longitude and latitude in
+/// degrees, and Z is height is in meters.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<GroundCoordinate>
+    convert_from_coordinate(double X, double Y, double Z = 0) const
+  {
+    double x = X * Constant::rad_to_deg;
+    return boost::shared_ptr<GroundCoordinate>(new Geodetic(Y * Constant::rad_to_deg, (x > 180 ? x - 360 : x), Z));
+  }
+
+//-----------------------------------------------------------------------
+/// Test if two CoordinateConverters are the same coordinate system.
+//-----------------------------------------------------------------------
+
+  virtual bool is_same(const CoordinateConverter& Conv) const
+  {
+    return dynamic_cast<const GeodeticRadian2piConverter*>(&Conv);
+  }
+
+
+//-----------------------------------------------------------------------
+/// Convert to geodetic. X and Y are longitude and latitude in
+/// degrees, and Z is height is in meters.
+//-----------------------------------------------------------------------
+
+  virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
+			       double& Y, double& Z) const
+  {
+    Geodetic gd(Gc);
+    X = gd.longitude();
+    X = (X < 0 ? X + 360 : X);
+    X *= Constant::deg_to_rad;
+    Y = gd.latitude() * Constant::deg_to_rad;
+    Z = gd.height_reference_surface();
+  }
+
+  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
+			       double& Y, double& Z) const
+  {
+    X = Gc.longitude();
+    X = (X < 0 ? X + 360 : X);
+    X *= Constant::deg_to_rad;
+    Y = Gc.latitude() * Constant::deg_to_rad;
+    Z = Gc.height_reference_surface();
+  }
+
+//-----------------------------------------------------------------------
+/// Print to given stream.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const
+  { Os << "Geodetic Coordinate Converter (Radians, 0 to 2pi)"; }
+private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 }
 
 GEOCAL_EXPORT_KEY(CoordinateConverter);
 GEOCAL_EXPORT_KEY(GeodeticConverter);
+GEOCAL_EXPORT_KEY(GeodeticRadianConverter);
+GEOCAL_EXPORT_KEY(GeodeticRadian2piConverter);
 #endif

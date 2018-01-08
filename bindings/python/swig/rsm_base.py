@@ -420,7 +420,7 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
     def _v_image_identifier(self, *args):
         """
 
-        void GeoCal::RsmBase::image_identifier(const std::string &V)
+        virtual void GeoCal::RsmBase::image_identifier(const std::string &V)
 
         """
         return _rsm_base.RsmBase__v_image_identifier(self, *args)
@@ -438,7 +438,7 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
     def _v_rsm_suport_data_edition(self, *args):
         """
 
-        void GeoCal::RsmBase::rsm_suport_data_edition(const std::string &V)
+        virtual void GeoCal::RsmBase::rsm_suport_data_edition(const std::string &V)
 
         """
         return _rsm_base.RsmBase__v_rsm_suport_data_edition(self, *args)
@@ -451,6 +451,42 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
     @rsm_suport_data_edition.setter
     def rsm_suport_data_edition(self, value):
       self._v_rsm_suport_data_edition(value)
+
+
+    def _v_row_section_number(self, *args):
+        """
+
+        virtual void GeoCal::RsmBase::row_section_number(int V)
+
+        """
+        return _rsm_base.RsmBase__v_row_section_number(self, *args)
+
+
+    @property
+    def row_section_number(self):
+        return self._v_row_section_number()
+
+    @row_section_number.setter
+    def row_section_number(self, value):
+      self._v_row_section_number(value)
+
+
+    def _v_col_section_number(self, *args):
+        """
+
+        virtual void GeoCal::RsmBase::col_section_number(int V)
+
+        """
+        return _rsm_base.RsmBase__v_col_section_number(self, *args)
+
+
+    @property
+    def col_section_number(self):
+        return self._v_col_section_number()
+
+    @col_section_number.setter
+    def col_section_number(self, value):
+      self._v_col_section_number(value)
 
 
     def __reduce__(self):
@@ -476,6 +512,8 @@ RsmBase._v_min_z = new_instancemethod(_rsm_base.RsmBase__v_min_z, None, RsmBase)
 RsmBase._v_max_z = new_instancemethod(_rsm_base.RsmBase__v_max_z, None, RsmBase)
 RsmBase._v_image_identifier = new_instancemethod(_rsm_base.RsmBase__v_image_identifier, None, RsmBase)
 RsmBase._v_rsm_suport_data_edition = new_instancemethod(_rsm_base.RsmBase__v_rsm_suport_data_edition, None, RsmBase)
+RsmBase._v_row_section_number = new_instancemethod(_rsm_base.RsmBase__v_row_section_number, None, RsmBase)
+RsmBase._v_col_section_number = new_instancemethod(_rsm_base.RsmBase__v_col_section_number, None, RsmBase)
 RsmBase_swigregister = _rsm_base.RsmBase_swigregister
 RsmBase_swigregister(RsmBase)
 

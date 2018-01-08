@@ -314,10 +314,10 @@ picmtch5 (picmtch5_xxim1,picmtch5_xxim2,picmtch5_xxa) +
 ''')
     # Not a lot of checks done in the original picmtch4 tests, really just
     # look at the output and visually inspect it. This doesn't map well to 
-    # nosetests, so we don't normally print the output and just check the
+    # py.test, so we don't normally print the output and just check the
     # number of good matches. But we can look at the output if we need to
     # debug something.
-    if(False):
+    if(True):
         print(res.stdout.decode('utf-8'))
     f = IbisFile("picmtch5_xxa")
     # This counts the number of good matches

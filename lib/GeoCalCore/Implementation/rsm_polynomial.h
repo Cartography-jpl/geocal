@@ -2,6 +2,7 @@
 #define RSM_POLYNOMIAL_H
 #include "printable.h"
 #include <boost/array.hpp>
+#include <boost/noncopyable.hpp>
 #include <blitz/array.h>
 namespace GeoCal {
   class RsmRationalPolynomial;

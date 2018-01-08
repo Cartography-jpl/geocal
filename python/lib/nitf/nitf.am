@@ -1,6 +1,7 @@
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_field.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_file_header.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_file.py
+geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_rsm.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_image.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_image_subheader.py
 geocalpkgpythonnitf_PYTHON+= @srcpythonlibnitf@/nitf_text_subheader.py
@@ -35,6 +36,7 @@ EXTRA_DIST+=@srcpythonlibnitf@/nitf_des_csephb_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_field_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_file_header_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_file_test.py
+EXTRA_DIST+=@srcpythonlibnitf@/nitf_rsm_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_subheader_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_image_test.py
 EXTRA_DIST+=@srcpythonlibnitf@/nitf_text_subheader_test.py

@@ -1,7 +1,15 @@
 from .nitf_field import *
 from .nitf_tre import *
+from geocal_swig import RsmId
 
-hlp = '''This is the RSMIDA TRE, blah. 
+hlp = '''This is the RSMIDA TRE, Replacement Sensor Model Identification. 
+
+This TRE is mostly implemented by the RsmId available as
+rsm_id. This should be used to set the TRE values, and to
+use the TRE values. This is handled mostly transparently, except that if you
+update rsm_id the raw fields in the TRE might not be
+updated. Call update_raw_field() if you have modified rsm_id
+and wish to access the raw fields.
 
 The field names can be pretty cryptic, but are documented in detail in 
 the NITF TRE documentation (STDI-0002 V4.0, available at 
@@ -10,7 +18,9 @@ http://www.gwg.nga.mil/ntb/baseline/docs/stdi0002).
 There is a table in the main body on page vii that gives the a pointer for 
 where in the document a particular TRE is defined.
 
-RSMIDA is documented at blah.
+RSMIDA is documented at U-6, which points to other documentation, such as
+"Replacement Sensor Model Tagged Record Extensions Specification for NITF
+2.1" (http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)
 '''
 
 _second_format = "%09.6lf"
@@ -19,6 +29,9 @@ _trg_format = "%21.14E"
 desc = ["RSMIDA",
         ["iid", "Image Identifier", 80, str],
         ["edition", "RSM Image Support Data Edition", 40, str],
+        # Temporary, comment out the rest. This is because RsmId is just
+        # a skeleton, we'll put all the fields in and then uncomment the
+        # rest of this.
         ["isid", "Image Sequence Identifier", 40, str],
         ["sid", "Sensor Identifier", 40, str],
         ["stid", "Sensor Type Identifier", 40, str],
@@ -101,5 +114,7 @@ desc = ["RSMIDA",
         ["saz", "Sensor z-acceleration", 21, float, {'optional':True, 'frmt' : _trg_format}],
 ]
 
-TreRSMIDA = create_nitf_tre_structure("TreRSMIDA",desc,hlp=hlp)
+TreRSMIDA = create_nitf_tre_structure("TreRSMIDA",desc,hlp=hlp,
+                        tre_implementation_field="rsm_id",
+                        tre_implementation_class=RsmId)
 

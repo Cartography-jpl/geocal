@@ -95,6 +95,7 @@ private:
   static boost::scoped_ptr<OGRSpatialReference> ogr_geodetic;
   static boost::scoped_ptr<OGRSpatialReference> ogr_ecr;
   static boost::scoped_ptr<OGRSpatialReference> ogr_mars_pc;
+  static boost::scoped_ptr<OGRSpatialReference> ogr_ceres_pc;
   OgrWrapper() {}
   friend class boost::serialization::access;
   template<class Archive>

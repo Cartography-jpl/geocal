@@ -2413,6 +2413,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlibnitf@/basic_nitf_example.py \
 	@srcpythonlibnitf@/README \
 	@srcpythonlibnitf@/nitf_des_csatta_test.py \
+	@srcpythonlibnitf@/nitf_des_csattb_test.py \
+	@srcpythonlibnitf@/nitf_des_csephb_test.py \
 	@srcpythonlibnitf@/nitf_field_test.py \
 	@srcpythonlibnitf@/nitf_file_header_test.py \
 	@srcpythonlibnitf@/nitf_file_test.py \
@@ -2432,6 +2434,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlibnitf@/nitf_tre_rsmpca_test.py \
 	@srcpythonlibnitf@/nitf_tre_rsmpia_test.py \
 	@srcpythonlibnitf@/nitf_tre_sensrb_test.py \
+	@srcpythonlibnitf@/nitf_tre_pixmta_test.py \
 	@srcpythonlibnitf@/nitf_tre_test.py @docpythonsrc@ \
 	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
@@ -3419,6 +3422,8 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_text_subheader.py \
 	@srcpythonlibnitf@/nitf_des_subheader.py \
 	@srcpythonlibnitf@/nitf_des_csatta.py \
+	@srcpythonlibnitf@/nitf_des_csattb.py \
+	@srcpythonlibnitf@/nitf_des_csephb.py \
 	@srcpythonlibnitf@/nitf_tre.py \
 	@srcpythonlibnitf@/nitf_tre_csde.py \
 	@srcpythonlibnitf@/nitf_tre_csepha.py \
@@ -3435,7 +3440,8 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_tre_rsmida.py \
 	@srcpythonlibnitf@/nitf_tre_rsmpca.py \
 	@srcpythonlibnitf@/nitf_tre_rsmpia.py \
-	@srcpythonlibnitf@/nitf_tre_sensrb.py
+	@srcpythonlibnitf@/nitf_tre_sensrb.py \
+	@srcpythonlibnitf@/nitf_tre_pixmta.py
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed

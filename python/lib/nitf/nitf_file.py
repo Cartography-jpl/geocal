@@ -11,11 +11,14 @@ from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageGeneral, NitfImageCannotHandle
 from .nitf_tre import read_tre, prepare_tre_write
-# We'll need to remove this shortly, once we figure out how
-from .geocal_nitf_rsm import rsm_prepare_tre_write, rsm_read_tre, rsm_tre_tag_list
 import io,six,copy
 
 class NitfFile(object):
+    # List of hook objects to extend the handling in the various types of
+    # segments. Right now we only do this for image_segment and text_segment,
+    # but we could extend this if desired
+    image_segment_hook_obj = []
+    text_segment_hook_obj = []
     def __init__(self, file_name = None):
         '''Create a NitfFile for reading or writing. Because it is common, if
         you give a file_name we read from that file to populate the Nitf 
@@ -108,7 +111,8 @@ class NitfFile(object):
             self.file_header.read_from_file(fh)
             self.image_segment = \
                [NitfImageSegment(header_size=self.file_header.lish[i],
-                                 data_size=self.file_header.li[i]) for i in
+                                 data_size=self.file_header.li[i],
+                          hook_obj = NitfFile.image_segment_hook_obj) for i in
                 range(self.file_header.numi)]
             self.graphic_segment = \
                [NitfGraphicSegment(header_size=self.file_header.lssh[i],
@@ -116,7 +120,8 @@ class NitfFile(object):
                 range(self.file_header.nums)]
             self.text_segment = \
                [NitfTextSegment(header_size=self.file_header.ltsh[i],
-                                data_size=self.file_header.lt[i]) for i in
+                                data_size=self.file_header.lt[i],
+                         hook_obj = NitfFile.text_segment_hook_obj) for i in
                 range(self.file_header.numt)]
             self.des_segment = \
                [NitfDesSegment(header_size=self.file_header.ldsh[i],
@@ -175,14 +180,49 @@ class NitfFile(object):
             # Now we have to update the file length
             h.update_field(fh, "fl", fh.tell())
 
+class NitfSegmentHook(object):
+    '''To allow special handling of TREs etc. we allow a hook_list of
+    these objects to be passed to NitfSegment. These then are called in
+    each function of NitfSegment.
+
+    Note that you don't need to strictly derive from this class, we use
+    the standard "duck" typing of python. This is just the list of functions
+    that need to be supplied.
+
+    See for example geocal_nitf_rsm.py in geocal for an example of using
+    these hooks to add in support for the geocal Rsm object.
+    '''
+    def init_hook(self, seg):
+        '''Called at the end of NitfSegment.__init__'''
+        pass
+    def prepare_tre_write_hook(self, seg, des_list, seg_index):
+        '''Called at the start of NitfSegment.prepare_tre_write'''
+        pass
+    def read_tre_hook(self, seg, des_list):
+        '''Called at the end of NitfSegment.read_tre'''
+        pass
+    def str_hook(self, seg, fh):
+        '''Called at the start of NitfSegment.__str__'''
+        pass
+    def str_tre_handle_hook(self, seg, tre, fh):
+        '''Called before printing a TRE. If this returns true we assume
+        that this class has handled the TRE printing. Otherwise, we
+        call print on the tre'''
+        return False
+        
 class NitfSegment(object):
-    def __init__(self, subheader, data):
+    def __init__(self, subheader, data, hook_obj = []):
         self.subheader = subheader
         self.data = data
+        self.hook_obj = hook_obj
+        for ho in self.hook_obj:
+            ho.init_hook(self)
 
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''
         fh = six.StringIO()
+        for ho in self.hook_obj:
+            ho.str_hook(self, fh)
         print("Sub header:", file=fh)
         print(self.subheader, file=fh)
         print("Data", file=fh)
@@ -200,11 +240,15 @@ class NitfSegment(object):
 
     def read_tre(self, des_list):
         # By default, segment doesn't have any TREs
-        pass
+        #pass
+        for ho in self.hook_obj:
+            ho.read_tre_hook(self, des_list)
 
     def prepare_tre_write(self, des_list, seg_index):
         '''Process the TREs in a segment putting them in the various places
         in header and DES overflow before writing out the segment.'''
+        for ho in self.hook_obj:
+            ho.prepare_tre_write_hook(self, des_list, seg_index)
         # By default, segment doesn't have any TREs
         pass
     
@@ -246,18 +290,17 @@ class NitfPlaceHolder(NitfSegment):
         '''Write to a file. The returns (sz_header, sz_data), because this
         information is needed by NitfFile.'''
         raise NotImplementedError("write_to_file not implemented for %s" % self.type_name)
-        
 
 class NitfImageSegment(NitfSegment):
     '''Image segment (IS), supports the standard image type of data.
-
-    Note the RSM is a bit complicated, because it spans multiple TREs. 
-    We handle the RSM as a special field, you can access it as self.rsm, or
-    write to it by setting self.rsm to the RSM. The lower level TREs are also
-    available as any other TRE, but you wouldn't normally read or write these
-    directly, instead go through self.rsm.  We have self.rsm set to None if the
-    ImageSegment doesn't have an RSM.'''
+    
+    To support adding special handling of TREs etc we allow 
+    hook_obj to contain hook objects that are called at various places in
+    the code. See for example geocal_nitf_rsm.py in geocal for an example
+    of this.
+    '''
     def __init__(self, image = None,
+                 hook_obj = None,
                  header_size = None, data_size = None,
                  nitf_image_handle = [NitfImageFromNumpy,
                                       NitfImageGeneral,
@@ -273,9 +316,10 @@ class NitfImageSegment(NitfSegment):
             h = NitfImageSubheader()
         else:
             h = image.image_subheader
-        NitfSegment.__init__(self, h, image)
         self.tre_list = []
-        self.rsm = None
+        if(hook_obj is None):
+            hook_obj = NitfFile.image_segment_hook_obj
+        NitfSegment.__init__(self, h, image, hook_obj = hook_obj)
     def read_from_file(self, fh):
         '''Read from a file'''
         self.subheader.read_from_file(fh)
@@ -293,7 +337,8 @@ class NitfImageSegment(NitfSegment):
                     raise
         self.data = t
     def prepare_tre_write(self, des_list, seg_index):
-        rsm_prepare_tre_write(self)
+        for ho in self.hook_obj:
+            ho.prepare_tre_write_hook(self, des_list, seg_index)
         prepare_tre_write(self.tre_list, self.subheader,des_list,
                           [["ixshdl", "ixofl", "ixshd"],
                            ["udidl", "udofl", "udid"]], seg_index)
@@ -301,14 +346,14 @@ class NitfImageSegment(NitfSegment):
         self.tre_list = read_tre(self.subheader,des_list,
                                  [["ixshdl", "ixofl", "ixshd"],
                                   ["udidl", "udofl", "udid"]])
-        rsm_read_tre(self)
+        for ho in self.hook_obj:
+            ho.read_tre_hook(self, des_list)
+
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''
         fh = six.StringIO()
-        if(self.rsm):
-            print(self.rsm, file=fh)
-        else:
-            print("Rsm: None", file=fh)
+        for ho in self.hook_obj:
+            ho.str_hook(self, fh)
         print("Sub header:", file=fh)
         print(self.subheader, file=fh)
         print("TREs:", file=fh)
@@ -316,9 +361,11 @@ class NitfImageSegment(NitfSegment):
             print("No image level TREs", file=fh)
         else:
             for tre in self.tre_list:
-                if(tre.tre_tag in rsm_tre_tag_list):
-                    print("%s: See RSM above" % tre.tre_tag, file=fh)
-                else:
+                was_processed = False
+                for ho in self.hook_obj:
+                    if(not was_processed):
+                        was_processed = ho.str_tre_handle_hook(self, tre, fh)
+                if(not was_processed):
                     print(tre, file=fh)
         print("Data", file=fh)
         print(self.data, file=fh)
@@ -334,22 +381,31 @@ class NitfTextSegment(NitfSegment):
     Note that txt can be either a str or bytes, whichever is most convenient
     for you. We encode/decode using utf-8 as needed. You can access the data
     as one or the other using data_as_bytes and data_as_str.'''
-    def __init__(self, txt='', header_size=None, data_size=None):
+    def __init__(self, txt='', header_size=None, data_size=None,
+                 hook_obj = None):
         h = NitfTextSubheader()
         self.header_size = header_size
         self.data_size = data_size
-        NitfSegment.__init__(self, h, copy.copy(txt))
+        if(hook_obj is None):
+            hook_obj = NitfFile.image_segment_hook_obj
+        NitfSegment.__init__(self, h, copy.copy(txt), hook_obj = hook_obj)
         self.tre_list = []
     def read_from_file(self, fh):
         '''Read from a file'''
         self.subheader.read_from_file(fh)
         self.data = fh.read(self.data_size)
+
     def prepare_tre_write(self, des_list, seg_index):
+        for ho in self.hook_obj:
+            ho.prepare_tre_write_hook(self, des_list, seg_index)
         prepare_tre_write(self.tre_list, self.subheader,des_list,
                           [["txshdl", "txsofl", "txshd"]], seg_index)
     def read_tre(self, des_list):
         self.tre_list = read_tre(self.subheader,des_list,
                                  [["txshdl", "txsofl", "txshd"]])
+        for ho in self.hook_obj:
+            ho.read_tre_hook(self, des_list)
+
     @property
     def data_as_bytes(self):
         '''Return data as bytes, encoding if needed'''
@@ -367,6 +423,8 @@ class NitfTextSegment(NitfSegment):
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''
         fh = six.StringIO()
+        for ho in self.hook_obj:
+            ho.str_hook(self, fh)
         print("Sub header:", file=fh)
         print(self.subheader, file=fh)
         print("TREs:", file=fh)
@@ -374,7 +432,12 @@ class NitfTextSegment(NitfSegment):
             print("No text level TREs", file=fh)
         else:
             for tre in self.tre_list:
-                print(tre, file=fh)
+                was_processed = False
+                for ho in self.hook_obj:
+                    if(not was_processed):
+                        was_processed = ho.str_tre_handle_hook(self, tre, fh)
+                if(not was_processed):
+                    print(tre, file=fh)
         print("Text", file=fh)
         print(self.data_as_str, file=fh)
         return fh.getvalue()

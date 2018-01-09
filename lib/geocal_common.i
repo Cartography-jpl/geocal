@@ -52,6 +52,7 @@ public:
 %include "swig_boost_array_inc.i"
 %import "swig_boost_array.i"
 %import "swig_quaternion.i"
+%import "swig_boost_optional.i"
  // Don't think we need this
  //%import "swig_rational.i"
 

@@ -377,9 +377,12 @@ std::string RsmPolynomial::tre_string() const
 				  % (coefficient_.depth() - 1)
 				  % coefficient_.size(),
    				  1 + 1 + 1 + 3);
-  for(int i = 0; i < coefficient_.rows(); ++i)
+  // Seems odd, but for whatever reason this is stored in column major
+  // form in a TRE rather than row major. So we need to flip the order here to
+  // what looks "backwards"
+  for(int k = 0; k < coefficient_.depth(); ++k)
     for(int j = 0; j < coefficient_.cols(); ++j)
-      for(int k = 0; k < coefficient_.depth(); ++k)
+      for(int i = 0; i < coefficient_.rows(); ++i)
 	s1 += str_check_size(coeffformat % coefficient_(i,j,k), 21);
   return s1;
 }
@@ -407,8 +410,11 @@ void RsmPolynomial::read_tre_string(std::istream& In)
     throw Exception("Total size should be the product of nx, ny, and nz");
   coefficient_.resize(nx + 1, ny + 1, nz + 1);
   fitted_coefficent_size = total_size;
-  for(int i = 0; i < coefficient_.rows(); ++i)
+  // Seems odd, but for whatever reason this is stored in column major
+  // form in a TRE rather than row major. So we need to flip the order here to
+  // what looks "backwards"
+  for(int k = 0; k < coefficient_.depth(); ++k)
     for(int j = 0; j < coefficient_.cols(); ++j)
-      for(int k = 0; k < coefficient_.depth(); ++k)
+      for(int i = 0; i < coefficient_.rows(); ++i)
 	coefficient_(i,j,k) = read_size<double>(In, 21);
 }

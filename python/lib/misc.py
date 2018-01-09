@@ -49,7 +49,7 @@ def planet_mapinfo(naif_code, desired_resolution = 1):
     '''Like cib01_mapinfo, but for other planets. We have this as
     Planetocentric, sized to the desired resolution in meters'''
     cconv = PlanetocentricConverter(naif_code)
-    mi = MapInfo(cconv,0,0,1,1,10,10)
+    mi = MapInfo(cconv,0,1,1,0,10,10)
     mi = mi.scale(desired_resolution/mi.resolution_meter,
                   desired_resolution/mi.resolution_meter)
     return mi

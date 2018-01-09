@@ -61,15 +61,17 @@ public:
 //-----------------------------------------------------------------------
 /// Image identification.
 //-----------------------------------------------------------------------
-  const std::string& image_identifier() const { return image_identifier_;}
-  void image_identifier(const std::string& V) { image_identifier_ = V;}
+  virtual const std::string& image_identifier() const
+  { return image_identifier_;}
+  virtual void image_identifier(const std::string& V)
+  { image_identifier_ = V;}
 
 //-----------------------------------------------------------------------
 /// RSM Support Data Edition.
 //-----------------------------------------------------------------------
-  const std::string& rsm_suport_data_edition() const
+  virtual const std::string& rsm_suport_data_edition() const
   { return rsm_suport_data_edition_;}
-  void rsm_suport_data_edition(const std::string& V)
+  virtual void rsm_suport_data_edition(const std::string& V)
   { rsm_suport_data_edition_ = V; }
   
 //-----------------------------------------------------------------------
@@ -119,8 +121,9 @@ public:
   virtual double max_z() const = 0;
   std::string base_tre_string() const;
   void base_read_tre_string(std::istream& In);
-private:
+protected:
   std::string image_identifier_, rsm_suport_data_edition_;
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

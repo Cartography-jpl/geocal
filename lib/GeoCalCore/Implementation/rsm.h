@@ -24,6 +24,8 @@ namespace GeoCal {
 
 class Rsm : public Printable<Rsm> {
 public:
+  Rsm(const boost::shared_ptr<RsmId>& Rsm_id)
+    : rid(Rsm_id) {}
   Rsm(const boost::shared_ptr<RsmBase>& Rp,
       const boost::shared_ptr<CoordinateConverter>& Cconv);
   virtual ~Rsm() {}
@@ -38,18 +40,28 @@ public:
 
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
+  void fill_in_ground_domain_vertex(double Min_height, double Max_height);
   void print(std::ostream& Os) const;
 
   const boost::shared_ptr<RsmId>& rsm_id() const {return rid;}
   const boost::shared_ptr<RsmDirectCovariance>& rsm_direct_covariance() const
   {return rdcov;}
+  void rsm_direct_covariance(const boost::shared_ptr<RsmDirectCovariance>& V)
+  {rdcov = V;}
   const boost::shared_ptr<RsmIndirectCovariance>&
   rsm_indirect_covariance() const {return ricov;}
+  void rsm_indirect_covariance
+  (const boost::shared_ptr<RsmIndirectCovariance>& V) {ricov = V;}
   const boost::shared_ptr<RsmAdjustableParameter>&
   rsm_adjustable_parameter() const {return rparm;}
+  void rsm_adjustable_parameter
+  (const boost::shared_ptr<RsmAdjustableParameter>&V) {rparm = V;}
   const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
-  const boost::shared_ptr<CoordinateConverter> coordinate_converter() const
-  { return cconv; }
+  void rsm_base(const boost::shared_ptr<RsmBase>& V) { rp = V;}
+  const boost::shared_ptr<CoordinateConverter>& coordinate_converter() const
+  { return rid->coordinate_converter(); }
+  void coordinate_converter(const boost::shared_ptr<CoordinateConverter>& V) 
+  { rid->coordinate_converter(V); }
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,
 		   blitz::Array<double, 2>& True_line,
@@ -57,13 +69,46 @@ public:
 		   blitz::Array<double, 2>& Calc_line,
 		   blitz::Array<double, 2>& Calc_sample)
     const;
+  virtual const std::string& image_identifier() const
+  { return rid->image_identifier();}
+  virtual void image_identifier(const std::string& V)
+  {
+    if(rp)
+      rp->image_identifier(V);
+    if(rid)
+      rid->image_identifier(V);
+    if(rdcov)
+      rdcov->image_identifier(V);
+    if(ricov)
+      ricov->image_identifier(V);
+    if(rparm)
+      rparm->image_identifier(V);
+  }
+  virtual const std::string& rsm_suport_data_edition() const
+  { return rid->rsm_suport_data_edition();}
+  virtual void rsm_suport_data_edition(const std::string& V)
+  {
+    if(rp)
+      rp->rsm_suport_data_edition(V);
+    if(rid)
+      rid->rsm_suport_data_edition(V);
+    if(rdcov)
+      rdcov->rsm_suport_data_edition(V);
+    if(ricov)
+      ricov->rsm_suport_data_edition(V);
+    if(rparm)
+      rparm->rsm_suport_data_edition(V);
+  }
 private:
   boost::shared_ptr<RsmBase> rp;
-  boost::shared_ptr<CoordinateConverter> cconv;
   boost::shared_ptr<RsmId> rid;
   boost::shared_ptr<RsmDirectCovariance> rdcov;
   boost::shared_ptr<RsmIndirectCovariance> ricov;
   boost::shared_ptr<RsmAdjustableParameter> rparm;
+  // *Important* This is not actually used anymore. We keep this as a
+  // scratch variable for reading the old format of the data. Instead,
+  // the coordinate converter is stored in RsmId.
+  boost::shared_ptr<CoordinateConverter> cconv_not_used;
   Rsm() {}
   friend class boost::serialization::access;
   template<class Archive>
@@ -76,6 +121,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Rsm);
-GEOCAL_CLASS_VERSION(RsmId, 1);
+GEOCAL_CLASS_VERSION(Rsm, 1);
 #endif
 

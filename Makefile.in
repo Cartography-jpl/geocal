@@ -2413,9 +2413,12 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlibnitf@/basic_nitf_example.py \
 	@srcpythonlibnitf@/README \
 	@srcpythonlibnitf@/nitf_des_csatta_test.py \
+	@srcpythonlibnitf@/nitf_des_csattb_test.py \
+	@srcpythonlibnitf@/nitf_des_csephb_test.py \
 	@srcpythonlibnitf@/nitf_field_test.py \
 	@srcpythonlibnitf@/nitf_file_header_test.py \
 	@srcpythonlibnitf@/nitf_file_test.py \
+	@srcpythonlibnitf@/nitf_rsm_test.py \
 	@srcpythonlibnitf@/nitf_image_subheader_test.py \
 	@srcpythonlibnitf@/nitf_image_test.py \
 	@srcpythonlibnitf@/nitf_text_subheader_test.py \
@@ -2431,6 +2434,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlibnitf@/nitf_tre_rsmpca_test.py \
 	@srcpythonlibnitf@/nitf_tre_rsmpia_test.py \
 	@srcpythonlibnitf@/nitf_tre_sensrb_test.py \
+	@srcpythonlibnitf@/nitf_tre_pixmta_test.py \
 	@srcpythonlibnitf@/nitf_tre_test.py @docpythonsrc@ \
 	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
@@ -2983,8 +2987,9 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@libgeocal@/swig_array.i @libgeocal@/swig_array_inc.i \
 	@libgeocal@/swig_boost_array.i \
 	@libgeocal@/swig_boost_array_inc.i \
-	@libgeocal@/swig_exception.i @libgeocal@/swig_pickle.i \
-	@libgeocal@/swig_print.i @libgeocal@/swig_python_attribute.i \
+	@libgeocal@/swig_boost_optional.i @libgeocal@/swig_exception.i \
+	@libgeocal@/swig_pickle.i @libgeocal@/swig_print.i \
+	@libgeocal@/swig_python_attribute.i \
 	@libgeocal@/swig_quaternion.i @libgeocal@/swig_std.i \
 	@srcsupport@/constant.i @srcsupport@/generic_object.i \
 	@srcsupport@/auto_derivative.i @srcsupport@/array_ad.i \
@@ -3411,12 +3416,14 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_field.py \
 	@srcpythonlibnitf@/nitf_file_header.py \
-	@srcpythonlibnitf@/nitf_file.py \
+	@srcpythonlibnitf@/nitf_file.py @srcpythonlibnitf@/nitf_rsm.py \
 	@srcpythonlibnitf@/nitf_image.py \
 	@srcpythonlibnitf@/nitf_image_subheader.py \
 	@srcpythonlibnitf@/nitf_text_subheader.py \
 	@srcpythonlibnitf@/nitf_des_subheader.py \
 	@srcpythonlibnitf@/nitf_des_csatta.py \
+	@srcpythonlibnitf@/nitf_des_csattb.py \
+	@srcpythonlibnitf@/nitf_des_csephb.py \
 	@srcpythonlibnitf@/nitf_tre.py \
 	@srcpythonlibnitf@/nitf_tre_csde.py \
 	@srcpythonlibnitf@/nitf_tre_csepha.py \
@@ -3433,7 +3440,8 @@ geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_tre_rsmida.py \
 	@srcpythonlibnitf@/nitf_tre_rsmpca.py \
 	@srcpythonlibnitf@/nitf_tre_rsmpia.py \
-	@srcpythonlibnitf@/nitf_tre_sensrb.py
+	@srcpythonlibnitf@/nitf_tre_sensrb.py \
+	@srcpythonlibnitf@/nitf_tre_pixmta.py
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed

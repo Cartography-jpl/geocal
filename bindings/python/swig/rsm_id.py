@@ -188,6 +188,114 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
+class RsmIdTiming(geocal_swig.generic_object.GenericObject):
+    """
+
+    RSM timing information.
+
+    This is just a structure, but we put this together because we always
+    either want all or none of these fields.
+
+    C++ includes: rsm_id.h 
+    """
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Number_row_acquired_simulatenously, Number_col_acquired_simulatenously, Time_betweeen_adjacent_row_group, Time_betweeen_adjacent_col_group):
+        """
+
+        GeoCal::RsmIdTiming::RsmIdTiming(int Number_row_acquired_simulatenously, int
+        Number_col_acquired_simulatenously, double
+        Time_betweeen_adjacent_row_group, double
+        Time_betweeen_adjacent_col_group)
+
+        """
+        _rsm_id.RsmIdTiming_swiginit(self, _rsm_id.new_RsmIdTiming(Number_row_acquired_simulatenously, Number_col_acquired_simulatenously, Time_betweeen_adjacent_row_group, Time_betweeen_adjacent_col_group))
+
+    def _v_number_row_acquired_simultaneously(self, *args):
+        """
+
+        void GeoCal::RsmIdTiming::number_row_acquired_simultaneously(int V)
+
+        """
+        return _rsm_id.RsmIdTiming__v_number_row_acquired_simultaneously(self, *args)
+
+
+    @property
+    def number_row_acquired_simultaneously(self):
+        return self._v_number_row_acquired_simultaneously()
+
+    @number_row_acquired_simultaneously.setter
+    def number_row_acquired_simultaneously(self, value):
+      self._v_number_row_acquired_simultaneously(value)
+
+
+    def _v_number_col_acquired_simultaneously(self, *args):
+        """
+
+        void GeoCal::RsmIdTiming::number_col_acquired_simultaneously(int V)
+
+        """
+        return _rsm_id.RsmIdTiming__v_number_col_acquired_simultaneously(self, *args)
+
+
+    @property
+    def number_col_acquired_simultaneously(self):
+        return self._v_number_col_acquired_simultaneously()
+
+    @number_col_acquired_simultaneously.setter
+    def number_col_acquired_simultaneously(self, value):
+      self._v_number_col_acquired_simultaneously(value)
+
+
+    def _v_time_between_adjacent_row_group(self, *args):
+        """
+
+        void GeoCal::RsmIdTiming::time_between_adjacent_row_group(double V)
+
+        """
+        return _rsm_id.RsmIdTiming__v_time_between_adjacent_row_group(self, *args)
+
+
+    @property
+    def time_between_adjacent_row_group(self):
+        return self._v_time_between_adjacent_row_group()
+
+    @time_between_adjacent_row_group.setter
+    def time_between_adjacent_row_group(self, value):
+      self._v_time_between_adjacent_row_group(value)
+
+
+    def _v_time_between_adjacent_col_group(self, *args):
+        """
+
+        void GeoCal::RsmIdTiming::time_between_adjacent_col_group(double V)
+
+        """
+        return _rsm_id.RsmIdTiming__v_time_between_adjacent_col_group(self, *args)
+
+
+    @property
+    def time_between_adjacent_col_group(self):
+        return self._v_time_between_adjacent_col_group()
+
+    @time_between_adjacent_col_group.setter
+    def time_between_adjacent_col_group(self, value):
+      self._v_time_between_adjacent_col_group(value)
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _rsm_id.delete_RsmIdTiming
+RsmIdTiming._v_number_row_acquired_simultaneously = new_instancemethod(_rsm_id.RsmIdTiming__v_number_row_acquired_simultaneously, None, RsmIdTiming)
+RsmIdTiming._v_number_col_acquired_simultaneously = new_instancemethod(_rsm_id.RsmIdTiming__v_number_col_acquired_simultaneously, None, RsmIdTiming)
+RsmIdTiming._v_time_between_adjacent_row_group = new_instancemethod(_rsm_id.RsmIdTiming__v_time_between_adjacent_row_group, None, RsmIdTiming)
+RsmIdTiming._v_time_between_adjacent_col_group = new_instancemethod(_rsm_id.RsmIdTiming__v_time_between_adjacent_col_group, None, RsmIdTiming)
+RsmIdTiming.__str__ = new_instancemethod(_rsm_id.RsmIdTiming___str__, None, RsmIdTiming)
+RsmIdTiming_swigregister = _rsm_id.RsmIdTiming_swigregister
+RsmIdTiming_swigregister(RsmIdTiming)
+
 class RsmId(geocal_swig.generic_object.GenericObject):
     """
 
@@ -208,6 +316,294 @@ class RsmId(geocal_swig.generic_object.GenericObject):
         """
         _rsm_id.RsmId_swiginit(self, _rsm_id.new_RsmId(Base, Cconv))
 
+    def _v_coordinate_converter(self, *args):
+        """
+
+        void GeoCal::RsmId::coordinate_converter(const boost::shared_ptr< CoordinateConverter > &V)
+
+        """
+        return _rsm_id.RsmId__v_coordinate_converter(self, *args)
+
+
+    @property
+    def coordinate_converter(self):
+        return self._v_coordinate_converter()
+
+    @coordinate_converter.setter
+    def coordinate_converter(self, value):
+      self._v_coordinate_converter(value)
+
+
+    def _v_image_identifier(self, *args):
+        """
+
+        void GeoCal::RsmId::image_identifier(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_image_identifier(self, *args)
+
+
+    @property
+    def image_identifier(self):
+        return self._v_image_identifier()
+
+    @image_identifier.setter
+    def image_identifier(self, value):
+      self._v_image_identifier(value)
+
+
+    def _v_rsm_suport_data_edition(self, *args):
+        """
+
+        void GeoCal::RsmId::rsm_suport_data_edition(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_rsm_suport_data_edition(self, *args)
+
+
+    @property
+    def rsm_suport_data_edition(self):
+        return self._v_rsm_suport_data_edition()
+
+    @rsm_suport_data_edition.setter
+    def rsm_suport_data_edition(self, value):
+      self._v_rsm_suport_data_edition(value)
+
+
+    def _v_image_sequence_identifier(self, *args):
+        """
+
+        void GeoCal::RsmId::image_sequence_identifier(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_image_sequence_identifier(self, *args)
+
+
+    @property
+    def image_sequence_identifier(self):
+        return self._v_image_sequence_identifier()
+
+    @image_sequence_identifier.setter
+    def image_sequence_identifier(self, value):
+      self._v_image_sequence_identifier(value)
+
+
+    def _v_sensor_identifier(self, *args):
+        """
+
+        void GeoCal::RsmId::sensor_identifier(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_sensor_identifier(self, *args)
+
+
+    @property
+    def sensor_identifier(self):
+        return self._v_sensor_identifier()
+
+    @sensor_identifier.setter
+    def sensor_identifier(self, value):
+      self._v_sensor_identifier(value)
+
+
+    def _v_sensor_type(self, *args):
+        """
+
+        void GeoCal::RsmId::sensor_type(const std::string &V)
+
+        """
+        return _rsm_id.RsmId__v_sensor_type(self, *args)
+
+
+    @property
+    def sensor_type(self):
+        return self._v_sensor_type()
+
+    @sensor_type.setter
+    def sensor_type(self, value):
+      self._v_sensor_type(value)
+
+
+    def _v_image_acquistion_time(self, *args):
+        """
+
+        void GeoCal::RsmId::image_acquistion_time(const boost::shared_ptr< Time > &V)
+
+        """
+        return _rsm_id.RsmId__v_image_acquistion_time(self, *args)
+
+
+    @property
+    def image_acquistion_time(self):
+        return self._v_image_acquistion_time()
+
+    @image_acquistion_time.setter
+    def image_acquistion_time(self, value):
+      self._v_image_acquistion_time(value)
+
+
+    def _v_timing(self, *args):
+        """
+
+        void GeoCal::RsmId::timing(const boost::shared_ptr< RsmIdTiming > &V)
+
+        """
+        return _rsm_id.RsmId__v_timing(self, *args)
+
+
+    @property
+    def timing(self):
+        return self._v_timing()
+
+    @timing.setter
+    def timing(self, value):
+      self._v_timing(value)
+
+
+    def _v_ground_domain_vertex(self, *args):
+        """
+
+        void GeoCal::RsmId::ground_domain_vertex(const std::vector< boost::shared_ptr< GroundCoordinate > > &V)
+
+        """
+        return _rsm_id.RsmId__v_ground_domain_vertex(self, *args)
+
+
+    @property
+    def ground_domain_vertex(self):
+        return self._v_ground_domain_vertex()
+
+    @ground_domain_vertex.setter
+    def ground_domain_vertex(self, value):
+      self._v_ground_domain_vertex(value)
+
+
+    def _v_ground_reference_point(self, *args):
+        """
+
+        void GeoCal::RsmId::ground_reference_point(const boost::shared_ptr< GroundCoordinate > &V)
+
+        """
+        return _rsm_id.RsmId__v_ground_reference_point(self, *args)
+
+
+    @property
+    def ground_reference_point(self):
+        return self._v_ground_reference_point()
+
+    @ground_reference_point.setter
+    def ground_reference_point(self, value):
+      self._v_ground_reference_point(value)
+
+
+    def _v_full_number_line(self, *args):
+        """
+
+        void GeoCal::RsmId::full_number_line(const boost::optional< int > &V)
+
+        """
+        return _rsm_id.RsmId__v_full_number_line(self, *args)
+
+
+    @property
+    def full_number_line(self):
+        return self._v_full_number_line()
+
+    @full_number_line.setter
+    def full_number_line(self, value):
+      self._v_full_number_line(value)
+
+
+    def _v_full_number_sample(self, *args):
+        """
+
+        void GeoCal::RsmId::full_number_sample(const boost::optional< int > &V)
+
+        """
+        return _rsm_id.RsmId__v_full_number_sample(self, *args)
+
+
+    @property
+    def full_number_sample(self):
+        return self._v_full_number_sample()
+
+    @full_number_sample.setter
+    def full_number_sample(self, value):
+      self._v_full_number_sample(value)
+
+
+    def _v_min_line(self, *args):
+        """
+
+        void GeoCal::RsmId::min_line(int V)
+
+        """
+        return _rsm_id.RsmId__v_min_line(self, *args)
+
+
+    @property
+    def min_line(self):
+        return self._v_min_line()
+
+    @min_line.setter
+    def min_line(self, value):
+      self._v_min_line(value)
+
+
+    def _v_min_sample(self, *args):
+        """
+
+        void GeoCal::RsmId::min_sample(int V)
+
+        """
+        return _rsm_id.RsmId__v_min_sample(self, *args)
+
+
+    @property
+    def min_sample(self):
+        return self._v_min_sample()
+
+    @min_sample.setter
+    def min_sample(self, value):
+      self._v_min_sample(value)
+
+
+    def _v_max_line(self, *args):
+        """
+
+        void GeoCal::RsmId::max_line(int V)
+
+        """
+        return _rsm_id.RsmId__v_max_line(self, *args)
+
+
+    @property
+    def max_line(self):
+        return self._v_max_line()
+
+    @max_line.setter
+    def max_line(self, value):
+      self._v_max_line(value)
+
+
+    def _v_max_sample(self, *args):
+        """
+
+        void GeoCal::RsmId::max_sample(int V)
+
+        """
+        return _rsm_id.RsmId__v_max_sample(self, *args)
+
+
+    @property
+    def max_sample(self):
+        return self._v_max_sample()
+
+    @max_sample.setter
+    def max_sample(self, value):
+      self._v_max_sample(value)
+
+
     def tre_string(self):
         """
 
@@ -227,12 +623,6 @@ class RsmId(geocal_swig.generic_object.GenericObject):
         boost::shared_ptr< RsmId > RsmId::read_tre_string(const std::string &Tre_in)
         Read a TRE string.
 
-        Note that the TRE does not contain all the fields we have in a
-        RsmRationalPolynomial. However the fields that aren't contained are
-        ones used for fitting the RSM, so in practice this doesn't matter. We
-        just set the various fields to the default values found in the
-        constructor.
-
         This should have all the TRE except for the front CETAG and CEL. It is
         convenient to treat these fields as special. (We can revisit this in
         the future if we need to). 
@@ -245,6 +635,23 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_id.delete_RsmId
+RsmId.__str__ = new_instancemethod(_rsm_id.RsmId___str__, None, RsmId)
+RsmId._v_coordinate_converter = new_instancemethod(_rsm_id.RsmId__v_coordinate_converter, None, RsmId)
+RsmId._v_image_identifier = new_instancemethod(_rsm_id.RsmId__v_image_identifier, None, RsmId)
+RsmId._v_rsm_suport_data_edition = new_instancemethod(_rsm_id.RsmId__v_rsm_suport_data_edition, None, RsmId)
+RsmId._v_image_sequence_identifier = new_instancemethod(_rsm_id.RsmId__v_image_sequence_identifier, None, RsmId)
+RsmId._v_sensor_identifier = new_instancemethod(_rsm_id.RsmId__v_sensor_identifier, None, RsmId)
+RsmId._v_sensor_type = new_instancemethod(_rsm_id.RsmId__v_sensor_type, None, RsmId)
+RsmId._v_image_acquistion_time = new_instancemethod(_rsm_id.RsmId__v_image_acquistion_time, None, RsmId)
+RsmId._v_timing = new_instancemethod(_rsm_id.RsmId__v_timing, None, RsmId)
+RsmId._v_ground_domain_vertex = new_instancemethod(_rsm_id.RsmId__v_ground_domain_vertex, None, RsmId)
+RsmId._v_ground_reference_point = new_instancemethod(_rsm_id.RsmId__v_ground_reference_point, None, RsmId)
+RsmId._v_full_number_line = new_instancemethod(_rsm_id.RsmId__v_full_number_line, None, RsmId)
+RsmId._v_full_number_sample = new_instancemethod(_rsm_id.RsmId__v_full_number_sample, None, RsmId)
+RsmId._v_min_line = new_instancemethod(_rsm_id.RsmId__v_min_line, None, RsmId)
+RsmId._v_min_sample = new_instancemethod(_rsm_id.RsmId__v_min_sample, None, RsmId)
+RsmId._v_max_line = new_instancemethod(_rsm_id.RsmId__v_max_line, None, RsmId)
+RsmId._v_max_sample = new_instancemethod(_rsm_id.RsmId__v_max_sample, None, RsmId)
 RsmId.tre_string = new_instancemethod(_rsm_id.RsmId_tre_string, None, RsmId)
 RsmId_swigregister = _rsm_id.RsmId_swigregister
 RsmId_swigregister(RsmId)
@@ -254,12 +661,6 @@ def RsmId_read_tre_string(Tre_in):
 
     boost::shared_ptr< RsmId > RsmId::read_tre_string(const std::string &Tre_in)
     Read a TRE string.
-
-    Note that the TRE does not contain all the fields we have in a
-    RsmRationalPolynomial. However the fields that aren't contained are
-    ones used for fitting the RSM, so in practice this doesn't matter. We
-    just set the various fields to the default values found in the
-    constructor.
 
     This should have all the TRE except for the front CETAG and CEL. It is
     convenient to treat these fields as special. (We can revisit this in

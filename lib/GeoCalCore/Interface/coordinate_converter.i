@@ -11,6 +11,8 @@
 
 %geocal_shared_ptr(GeoCal::CoordinateConverter);
 %geocal_shared_ptr(GeoCal::GeodeticConverter);
+%geocal_shared_ptr(GeoCal::GeodeticRadianConverter);
+%geocal_shared_ptr(GeoCal::GeodeticRadian2piConverter);
 
 namespace GeoCal {
 class CoordinateConverter : public GenericObject {
@@ -28,6 +30,24 @@ public:
 };
 
 class GeodeticConverter : public CoordinateConverter {
+public:
+  virtual boost::shared_ptr<GroundCoordinate>
+    convert_from_coordinate(double X, double Y, double Z = 0) const;
+  virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
+  double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
+  %pickle_serialization();
+};
+
+class GeodeticRadianConverter : public CoordinateConverter {
+public:
+  virtual boost::shared_ptr<GroundCoordinate>
+    convert_from_coordinate(double X, double Y, double Z = 0) const;
+  virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
+  double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
+  %pickle_serialization();
+};
+
+class GeodeticRadian2piConverter : public CoordinateConverter {
 public:
   virtual boost::shared_ptr<GroundCoordinate>
     convert_from_coordinate(double X, double Y, double Z = 0) const;

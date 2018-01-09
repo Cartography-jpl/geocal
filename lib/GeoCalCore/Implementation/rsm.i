@@ -20,6 +20,7 @@
 namespace GeoCal {
 class Rsm : public GenericObject {
 public:
+  Rsm(const boost::shared_ptr<RsmId>& Rsm_id);
   Rsm(const boost::shared_ptr<RsmBase>& Rp,
       const boost::shared_ptr<CoordinateConverter>& Cconv);
   std::string print_to_string() const;
@@ -36,6 +37,7 @@ public:
 
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
+  void fill_in_ground_domain_vertex(double Min_height, double Max_height);
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,
 		   blitz::Array<double, 2>& OUTPUT,
@@ -44,16 +46,17 @@ public:
 		   blitz::Array<double, 2>& OUTPUT)
     const;
   %python_attribute(rsm_id, boost::shared_ptr<RsmId>);
-  %python_attribute(rsm_direct_covariance,
+  %python_attribute_with_set(rsm_direct_covariance,
 		    boost::shared_ptr<RsmDirectCovariance>);
-  %python_attribute(rsm_indirect_covariance,
+  %python_attribute_with_set(rsm_indirect_covariance,
 		    boost::shared_ptr<RsmIndirectCovariance>);
-  %python_attribute(rsm_adjustable_parameter,
+  %python_attribute_with_set(rsm_adjustable_parameter,
 		    boost::shared_ptr<RsmAdjustableParameter>);
-  %python_attribute(rsm_base, boost::shared_ptr<RsmBase>);
-  %python_attribute(coordinate_converter,
+  %python_attribute_with_set(rsm_base, boost::shared_ptr<RsmBase>);
+  %python_attribute_with_set(coordinate_converter,
 		    boost::shared_ptr<CoordinateConverter>);
-  
+  %python_attribute_with_set(image_identifier, std::string);
+  %python_attribute_with_set(rsm_suport_data_edition, std::string);
   %pickle_serialization()
 };
 }

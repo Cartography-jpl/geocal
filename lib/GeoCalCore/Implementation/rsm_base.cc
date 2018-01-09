@@ -1,6 +1,7 @@
 #include "rsm_base.h"
 #include "geocal_serialize_support.h"
 #include "image_ground_connection.h"
+#include <boost/algorithm/string.hpp>
 #include "tre_support.h"
 
 using namespace GeoCal;
@@ -56,6 +57,8 @@ void RsmBase::base_read_tre_string(std::istream& In)
 {
   image_identifier_ = read_size<std::string>(In, 80);
   rsm_suport_data_edition_ = read_size<std::string>(In, 40);
+  boost::trim(image_identifier_);
+  boost::trim(rsm_suport_data_edition_);
 }
 
 blitz::Array<double, 4> RsmBase::generate_data

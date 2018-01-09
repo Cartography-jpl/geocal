@@ -5,6 +5,11 @@
 using namespace GeoCal;
 using namespace blitz;
 
+// Minimum number of tiepoints before fitting a Quadratic function. We
+// fit a linear model even if fit type is Quadratic if we have fewer
+// than this number of points.
+const int QuadraticGeometricModel::min_tp_for_quadratic = 12;
+
 //-----------------------------------------------------------------------
 /// Constructor. This creates an identity transformation.
 //-----------------------------------------------------------------------
@@ -96,14 +101,19 @@ void QuadraticGeometricModel::fit_single(const blitz::Array<double, 2>& x,
 		const blitz::Array<double, 2>& y,
 		blitz::Array<double, 1>& tr)
 {
+  bool do_quadratic = (fit_type() == QUADRATIC);
+  // If we have too few points, do a quadratic fit even if we've been
+  // requested to do a quadratic fit.
+  if(x.rows() < min_tp_for_quadratic)
+    do_quadratic = false;
   Range ra = Range::all();
   Array<double, 1> px(x(ra, 0));
   Array<double, 1> py(x(ra, 1));
-  Array<double, 2> mat(x.rows(), (fit_type() == LINEAR ? 3 : 6));
+  Array<double, 2> mat(x.rows(), (do_quadratic ? 6 : 3));
   mat(ra, 0) = px;
   mat(ra, 1) = py;
   mat(ra, 2) = 1;
-  if(fit_type() == QUADRATIC) {
+  if(do_quadratic) {
     mat(ra, 3) = px * px;
     mat(ra, 4) = py*py;
     mat(ra, 5) = py*px;
@@ -115,17 +125,19 @@ void QuadraticGeometricModel::fit_single(const blitz::Array<double, 2>& x,
   double chisq;
   GslMatrix cov;
   gsl_fit(gsl_mat, gsl_ln, coeff, cov, chisq);
-  if(fit_type() == LINEAR) {
+  if(do_quadratic)
+    tr(Range(0, 5)) = coeff.blitz_array();
+  else {
     tr(Range(0, 2)) = coeff.blitz_array();
     tr(Range(3, 5)) = 0;
-  } else
-    tr(Range(0, 5)) = coeff.blitz_array();
+  }
   gsl_fit(gsl_mat, gsl_smp, coeff, cov, chisq);
-  if(fit_type() == LINEAR) {
+  if(do_quadratic)
+    tr(Range(6, 11)) = coeff.blitz_array();
+  else {
     tr(Range(6, 8)) = coeff.blitz_array();
     tr(Range(9, 11)) = 0;
-  } else
-    tr(Range(6, 11)) = coeff.blitz_array();
+  }
 }
 
 // Print to stream.

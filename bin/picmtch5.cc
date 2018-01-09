@@ -42,77 +42,35 @@ boost::shared_ptr<PhaseCorrelationMatcher> matcher;
 throwout
 
 throws out the worst point from the a,b arrays using a linear fit.
-
-
-arguments:
-
-     1. throwcount: input, int *throwcount;
-	decremented by one for one throwout
-     2. a: input/output, double **a;
-	coefficients for the matched point
-     3. b: input/output, double **b;
-	coefficients for the matched point
-     4. neq: input/output, int *neq;
-	decremented by one for one throwout
-     5. neqmax: input, int neqmax;
-	the 2d dimension of the a and b arrays,
-	the first dimension is fixed at 2
      
 */
 
-void throwout(int* throwcount,double** a,double** b,int* neq,int neqmax)
+void throwout(GeometricTiePoints& Tpset)
 {
-  int ierror,imax=0;
-  double rx,ry,rmax;
-  double soln[12];
+  QuadraticGeometricModel gm(QuadraticGeometricModel::LINEAR);
+  gm.fit_transformation(Tpset);
+   
+  /* calculate residuals and find the worst point */
 
-  const double eps = 1e-7;
-  std::vector<double> aa(neqmax*6);
-  std::vector<double> bb(neqmax);
-  std::vector<double> resid(neqmax);
-   
-  /* solve lsq (linear), keeping quadratic form for consistency with main */
-   
-  for(int ix=0;ix<2;ix++) {
-    for(int i=0;i<*neq;i++) {
-      aa[i] = a[0][i];
-      aa[i+(*neq)] = a[1][i];
-      aa[i+2*(*neq)] = 1.;
-      aa[i+3*(*neq)] = a[0][i]*a[0][i];
-      aa[i+4*(*neq)] = a[1][i]*a[1][i];
-      aa[i+5*(*neq)] = a[0][i]*a[1][i];
-      bb[i] = b[ix][i];
+  double rmax = -1;
+  int imax;
+  blitz::Array<double, 2> x = Tpset.x();
+  blitz::Array<double, 2> y = Tpset.y();
+  for(int i=0;i< x.rows();i++) {
+    ImageCoordinate icpred =
+      gm.resampled_image_coordinate(ImageCoordinate(x(i,0), x(i, 1)));
+    double rx = y(i,0)-icpred.line;
+    double ry = y(i,1)-icpred.sample;
+    double r = rx*rx+ry*ry;
+    if(r > rmax) {
+      imax = i;
+      rmax = r;
     }
-    matcher->lsqfit(&aa[0],&bb[0],(*neq),3,&soln[ix*6],eps,&ierror);
-    for(int j=3;j<6;j++) soln[ix*6+j] = 0.0;
-  }
-   
-  /* calculate residuals */
-   
-  for(int i=0;i<*neq;i++) {
-    rx = b[0][i]-(soln[0]*a[0][i]+soln[1]*a[1][i]+soln[2]);
-    ry = b[1][i]-(soln[6]*a[0][i]+soln[7]*a[1][i]+soln[8]);
-    resid[i] = rx*rx+ry*ry;
   }
    
   /* discard the worst point */
-   
-  rmax = -1.0;
-  for(int i=0;i<*neq;i++) {
-    if (resid[i]<=rmax) continue;
-    rmax = resid[i];
-    imax = i;
-  }
-   
-  for(int i=imax;i<(*neq)-1;i++) {
-    a[0][i] = a[0][i+1];
-    a[1][i] = a[1][i+1];
-    b[0][i] = b[0][i+1];
-    b[1][i] = b[1][i+1];
-  }
-   
-  (*throwcount)--;
-  (*neq)--;
+
+  Tpset.remove_point(imax);
   return;
 }
 
@@ -120,10 +78,7 @@ int main(int Argc, char *Argv[])
 {
 try {
   int   minsrch;
-   
-  double **a,**b;
 
-  int ierror;
   int chop,picout,srchdim;
   int retry,refinerr;
   double vloff, vsoff;
@@ -131,11 +86,10 @@ try {
   double dline,dsamp;
 
   int status,parmcnt,o_unit;
-  const double eps = 1e-7;
   
   VicarArgument va(Argc, Argv);
 
-  zifmessage(const_cast<char*>("picmtch5 version Wed Apr 08 2016"));
+  zifmessage(const_cast<char*>("picmtch5 version Thu Nov 09 2017"));
    
   /* get the basic parameters */
    
@@ -212,18 +166,16 @@ try {
     (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
 				 rmagtae[0], rmagtae[1]));
   boost::shared_ptr<QuadraticGeometricModel> gm2
-    (new QuadraticGeometricModel(QuadraticGeometricModel::LINEAR, 
+    (new QuadraticGeometricModel((predfunc ?
+				  QuadraticGeometricModel::QUADRATIC :
+				  QuadraticGeometricModel::LINEAR),
 				 rmagtae[0], rmagtae[1]));
-  // Temporary, we should replace everything using this with gm2 stuff.
-  blitz::Array<double, 1>& soln = gm2->transformation();
-  blitz::Array<double, 1>& solninv = gm2->inverse_transformation();
   if (getw%2==0) throw Exception("zwind must be odd");
   retry = (nretry>1);
   if (retry&&gcpf) throw Exception("can't retry gcpf");
 
   /* open the ibis interface file */
 
-  // Come back to this and replace with IbisFile
   std::vector<std::string> inpfname = va.arg<std::vector<std::string> >("inp");
   IbisFile ifile(inpfname[2], IbisFile::UPDATE);
   if (ifile.number_col()<11) throw Exception("ibis file needs 11 columns");
@@ -243,7 +195,7 @@ try {
   // Mark file as updated, so we know to write this out at the end
   ifile.mark_updated();
 
-  // Get elevation offset, which is either read from the ibis file are
+  // Get elevation offset, which is either read from the ibis file or
   // set to zero.
   std::vector<ImageCoordinate> elvoff(ifile.number_row(), ImageCoordinate(0,0));
   if(elvcor) {
@@ -265,12 +217,6 @@ try {
 	    (int) floor(img2->number_line() * gm2->magnify_line() + 0.5),
 	    (int) floor(img2->number_sample() * gm2->magnify_sample() + 0.5));
   if (gcpf) throw Exception("ground control point file not implemented yet");
-  int neqmax = ifile.number_row()+3+nredo;
-  std::vector<double> aa(neqmax*6);
-  std::vector<double> bb(neqmax);
-  // May want to replace with blitz array, or some other structure.
-  mz_alloc2((unsigned char ***)&a,2,neqmax,sizeof(double));
-  mz_alloc2((unsigned char ***)&b,2,neqmax,sizeof(double));
   matcher.reset(new PhaseCorrelationMatcher(fftsize,search));
   // Tempory, this should be done in constructor
   matcher->nohpf = nohpf;
@@ -321,6 +267,7 @@ try {
      first_line[iii] = dline;
      first_samp[iii] = dsamp;
    }
+   std::vector<ImageCoordinate> xinit;
    for(int iii=0;iii<6;iii+=2) {
      if (!geotie) {
        dline = tinv[0]*itie[iii]+tinv[1]*itie[iii+1]+tinv[2];
@@ -329,8 +276,7 @@ try {
        dline = itie[iii];
        dsamp = itie[iii+1];
      }
-     a[0][iii/2] = dline;
-     a[1][iii/2] = dsamp;
+     xinit.push_back(ImageCoordinate(dline, dsamp));
    }
    
    /* convert otie */
@@ -352,6 +298,7 @@ try {
      if (status!=1)
        throw Exception("Failed to get mapping from GeoTIFF label, second input");
    }
+   std::vector<ImageCoordinate> yinit;
    if (otie.size()==0) {
      if (!geocord1) {
        char* labelstr;
@@ -369,17 +316,14 @@ try {
        dsamp = t[3]*itie[iii]+t[4]*itie[iii+1]+t[5];
        otie[iii] = uinv[0]*dline+uinv[1]*dsamp+uinv[2];
        otie[iii+1] = uinv[3]*dline+uinv[4]*dsamp+uinv[5];
-       b[0][iii/2] = otie[iii];
-       b[1][iii/2] = otie[iii+1];
+       yinit.push_back(ImageCoordinate(otie[iii], otie[iii+1]));
      }
    } else 
      for(int iii=0;iii<6;iii+=2) {
        dline = uinv[0]*otie[iii]+uinv[1]*otie[iii+1]+uinv[2];
        dsamp = uinv[3]*otie[iii]+uinv[4]*otie[iii+1]+uinv[5];
-       b[0][iii/2] = dline;
-       b[1][iii/2] = dsamp;
+       yinit.push_back(ImageCoordinate(dline, dsamp));
      }
-   
    /* open the first image file */
    // this should go away.
    status = zvunit(&i_unit[0],(char*)"INP",1,NULL);
@@ -398,10 +342,24 @@ try {
    double rctl = 0.5*lnlg[1];
    double rcts = 0.5*lnsg[1];
    
+   // Rotate the initial mapping by the given angle
+   if(fabs(angoff)>0.000001)
+     for(int iii=0; iii < 3; ++iii) {
+       double rv1 = yinit[iii].line-rctl;
+       double rw1 = yinit[iii].sample-rcts;
+       double rr = sqrt(rv1*rv1+rw1*rw1+0.0000001);
+       double theta = atan2(rw1,rv1)-angoff;
+       double rv2 = rr*cos(theta);
+       double rw2 = rr*sin(theta);
+       yinit[iii] = ImageCoordinate(rv2+rctl, rw2+rcts);
+     }
+   
    /* outer loop over the tiepoints or gcp's */
    /* gcp option inactive for now... I need a sample gcp data set */
 
-   int neq = 3; 
+   GeometricTiePoints tpset;
+   for(int i = 0; i < 3; ++i)
+     tpset.add_point(xinit[i], yinit[i]);
    int lastneq = -1; 
    int autoix = 0; 
    int gotthresh = 0; 
@@ -439,48 +397,25 @@ try {
        /*  inverse linear fit needed for getgrid outputs */
        /*  can't mix 3 initial points with updates */
        
-       if(((ibigx==0)||(neq>=neqmin))&&(neq!=lastneq)) {
+       if(((ibigx==0)||(tpset.number_point()>=neqmin))&&(tpset.number_point()!=lastneq)) {
 	 if (ibigx>0&&throwcount>0) {
 	   solved = true;
-	   printf("***auto fit:neq = %8d ***\n",neq);
+	   printf("***auto fit:neq = %8d ***\n",tpset.number_point());
 	 }
 	 if (ibigx>0) 
 	   for(int iii=0;iii<4;iii++) {
 	     if (throwcount<=0) break;
-	     throwout(&throwcount,a,b,&neq,neqmax);
+	     throwout(tpset);
+	     --throwcount;
 	   }
-	 if (scount%10==9) throwout(&throwcount,a,b,&neq,neqmax);
-	 scount++;
-	 lastneq = neq;
-	 for(int ix=0;ix<2;ix++) {
-	   for(int iii=0;iii<neq;iii++) {
-	     aa[iii] = a[0][iii];
-	     aa[iii+neq] = a[1][iii];
-	     aa[iii+2*neq] = 1.;
-	     aa[iii+3*neq] = a[0][iii]*a[0][iii];
-	     aa[iii+4*neq] = a[1][iii]*a[1][iii];
-	     aa[iii+5*neq] = a[0][iii]*a[1][iii];
-	     if (fabs(angoff)>0.000001&&ibigx==0&&ix==0) {
-	       double rv1 = b[0][iii]-rctl;
-	       double rw1 = b[1][iii]-rcts;
-	       double rr = sqrt(rv1*rv1+rw1*rw1+0.0000001);
-	       double theta = atan2(rw1,rv1)-angoff;
-	       double rv2 = rr*cos(theta);
-	       double rw2 = rr*sin(theta);
-	       b[0][iii] = rv2+rctl;
-	       b[1][iii] = rw2+rcts;
-	     }
-	     bb[iii] = b[ix][iii];
-	   }
-	   if (predfunc&&neq>11)
-	     matcher->lsqfit(&aa[0],&bb[0],neq,6,&soln(ix*6),eps,&ierror);
-	   else {
-	     matcher->lsqfit(&aa[0],&bb[0],neq,3,&soln(ix*6),eps,&ierror);
-	     for(int jjj=3;jjj<6;jjj++) soln(ix*6+jjj) = 0.0;
-	   }
+	 if (scount%10==9) {
+	   throwout(tpset);
+	   --throwcount;
 	 }
+	 scount++;
+	 lastneq = tpset.number_point();
+	 gm2->fit_transformation(tpset);
        }
-       if (ibigx==0) neq = 0;
          
        int choplimit1 = (int)(ifftsize*ifftsize*zerolim);
        int choplimit2 = (int)(ifftsize*ifftsize*zerolim2);
@@ -626,10 +561,9 @@ try {
 	   if (vmaxvec[ie]>rmcor) {
 	     int ibigt = vmaxix[ie]-1;
 	     line_res[ibigt] = 2.;
-	     a[0][neq] = first_line[ibigt];
-	     a[1][neq] = first_samp[ibigt];
-	     b[0][neq] = second_line[ibigt];
-	     b[1][neq++] = second_samp[ibigt];
+	     tpset.add_point
+	       (ImageCoordinate(first_line[ibigt],first_samp[ibigt]),
+		ImageCoordinate(second_line[ibigt],second_samp[ibigt]));
 	   }
 	 }
 	 break;
@@ -637,11 +571,9 @@ try {
        if (autoix<autofit) break;
        if (vmax<rmcor) break;
        line_res[ibig] = 2.;
-       a[0][neq] = first_ic.line;
-       a[1][neq] = first_ic.sample;
-       b[0][neq] = second_line[ibig];
-       b[1][neq++] = second_samp[ibig];
-       if (neq<neqmin) break;
+       tpset.add_point(first_ic,
+		       ImageCoordinate(second_line[ibig],second_samp[ibig]));
+       if (ibigx==0 || tpset.number_point()<neqmin) break;
        if (srchw>msrchw) vmaxfac = vmaxfac*1.05;
        if (gm1->magnify_line() > rmagmin[0]) 
 	 vmaxfac = std::max(0.50,vmaxfac*0.9825);
@@ -673,29 +605,13 @@ try {
      } else 
        line_res[iii] = -9999.;
    }
-   for(int ix=0;ix<2;ix++) {
-     for(int iii=0;iii<neq;iii++) {
-       aa[iii] = b[0][iii];
-       aa[iii+neq] = b[1][iii];
-       aa[iii+2*neq] = 1.;
-       aa[iii+3*neq] = b[0][iii]*b[0][iii];
-       aa[iii+4*neq] = b[1][iii]*b[1][iii];
-       aa[iii+5*neq] = b[0][iii]*b[1][iii];
-       bb[iii] = a[ix][iii];
-     }
-     if (predfunc&&neq>11)
-       matcher->lsqfit(&aa[0],&bb[0],neq,6,&solninv(ix*6),eps,&ierror);
-     else 
-       if (neq>=neqmin) {
-	 matcher->lsqfit(&aa[0],&bb[0],neq,3,&solninv(ix*6),eps,&ierror);
-	 for(int jjj=3;jjj<6;jjj++) solninv(ix*6+jjj) = 0.0;
-       }
-   }
+   blitz::Array<double, 1>& soln = gm2->transformation();
+   blitz::Array<double, 1>& solninv = gm2->inverse_transformation();
    printf("\n\nfinal line fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n",
 	  soln(0),soln(1),soln(2),soln(3),soln(4),soln(5));
    printf("final samp fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n",
 	  soln(6),soln(7),soln(8),soln(9),soln(10),soln(11));
-   if(neq>=neqmin) {
+   if(tpset.number_point()>=neqmin) {
      printf("inv line fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n",
 	    solninv(0),solninv(1),solninv(2),solninv(3),solninv(4),solninv(5));
      printf("inv samp fit %12.6f x %12.6f y %12.6f %12.6f x2 %12.6f y2%12.6f xy\n\n",

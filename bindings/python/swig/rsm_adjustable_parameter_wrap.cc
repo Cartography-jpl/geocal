@@ -6320,6 +6320,246 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_image_identifier__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmAdjustableParameter *arg1 = (GeoCal::RsmAdjustableParameter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter const > *smartarg1 = 0 ;
+  std::string result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmAdjustableParameter__v_image_identifier" "', argument " "1"" of type '" "GeoCal::RsmAdjustableParameter const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmAdjustableParameter const *)arg1)->image_identifier();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_image_identifier__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmAdjustableParameter *arg1 = (GeoCal::RsmAdjustableParameter *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmAdjustableParameter__v_image_identifier" "', argument " "1"" of type '" "GeoCal::RsmAdjustableParameter *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmAdjustableParameter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmAdjustableParameter__v_image_identifier" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmAdjustableParameter__v_image_identifier" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      (arg1)->image_identifier((std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_image_identifier(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmAdjustableParameter__v_image_identifier",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmAdjustableParameter__v_image_identifier__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmAdjustableParameter__v_image_identifier__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmAdjustableParameter__v_image_identifier'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmAdjustableParameter::image_identifier() const\n"
+    "    GeoCal::RsmAdjustableParameter::image_identifier(std::string const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_rsm_suport_data_edition__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmAdjustableParameter *arg1 = (GeoCal::RsmAdjustableParameter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter const > *smartarg1 = 0 ;
+  std::string result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmAdjustableParameter__v_rsm_suport_data_edition" "', argument " "1"" of type '" "GeoCal::RsmAdjustableParameter const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmAdjustableParameter const *)arg1)->rsm_suport_data_edition();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_rsm_suport_data_edition__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmAdjustableParameter *arg1 = (GeoCal::RsmAdjustableParameter *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmAdjustableParameter__v_rsm_suport_data_edition" "', argument " "1"" of type '" "GeoCal::RsmAdjustableParameter *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmAdjustableParameter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmAdjustableParameter__v_rsm_suport_data_edition" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmAdjustableParameter__v_rsm_suport_data_edition" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      (arg1)->rsm_suport_data_edition((std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_rsm_suport_data_edition(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmAdjustableParameter__v_rsm_suport_data_edition",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmAdjustableParameter__v_rsm_suport_data_edition__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmAdjustableParameter__v_rsm_suport_data_edition__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmAdjustableParameter__v_rsm_suport_data_edition'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmAdjustableParameter::rsm_suport_data_edition() const\n"
+    "    GeoCal::RsmAdjustableParameter::rsm_suport_data_edition(std::string const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_RsmAdjustableParameter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmAdjustableParameter *arg1 = (GeoCal::RsmAdjustableParameter *) 0 ;
@@ -6422,6 +6662,16 @@ static PyMethodDef SwigMethods[] = {
 		"This should have all the TRE except for the front CETAG and CEL. It is\n"
 		"convenient to treat these fields as special. (We can revisit this in\n"
 		"the future if we need to). \n"
+		""},
+	 { (char *)"RsmAdjustableParameter__v_image_identifier", _wrap_RsmAdjustableParameter__v_image_identifier, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmAdjustableParameter::image_identifier(const std::string &V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmAdjustableParameter__v_rsm_suport_data_edition", _wrap_RsmAdjustableParameter__v_rsm_suport_data_edition, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmAdjustableParameter::rsm_suport_data_edition(const std::string &V)\n"
+		"\n"
 		""},
 	 { (char *)"delete_RsmAdjustableParameter", (PyCFunction)_wrap_delete_RsmAdjustableParameter, METH_O, (char *)"\n"
 		"\n"

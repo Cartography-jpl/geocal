@@ -33,7 +33,9 @@ void RsmRationalPolynomial::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(nsample_fit)
     & GEOCAL_NVP_(nheight_fit)
     & GEOCAL_NVP_(nsecond_pass_fit)
-    & GEOCAL_NVP_(ignore_igc_error_in_fit);
+    & GEOCAL_NVP_(ignore_igc_error_in_fit)
+    & GEOCAL_NVP_(line_fit_error)
+    & GEOCAL_NVP_(sample_fit_error);
   // Older version didn't have row_section_number_ or col_section_number_.
   if(version > 0) {
     ar & GEOCAL_NVP_(row_section_number)
@@ -480,8 +482,9 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
      << "  Nsecond pass fit: " << nsecond_pass_fit_ << "\n";
 }
 
-static boost::format secformat("%|1$03d|%|2$03d|%|3$21s|%|4$21s|");
+static boost::format secformat("%|1$03d|%|2$03d|");
 static boost::format scaleformat("%|1$+21.14E|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|");
+static boost::format numformat("%|1$+21.14E|");
 
 //-----------------------------------------------------------------------
 /// Write to TRE string.
@@ -499,12 +502,10 @@ static boost::format scaleformat("%|1$+21.14E|%|2$+21.14E|%|3$+21.14E|%|4$+21.14
 std::string RsmRationalPolynomial::tre_string() const
 {
   std::string res = base_tre_string();
-  // Don't fill in the row and column fit error
-  std::string row_fit_error="";
-  std::string col_fit_error="";
-  res += str_check_size(secformat % row_section_number_ % col_section_number_
-			% row_fit_error % col_fit_error,
-			3 + 3 + 21 + 21);
+  res += str_check_size(secformat % row_section_number_ % col_section_number_,
+			3 + 3);
+  res += write_optional(numformat, line_fit_error_, 21);
+  res += write_optional(numformat, sample_fit_error_, 21);
   res += str_check_size(scaleformat % line_offset_ % sample_offset_ %
 			x_offset_ % y_offset_ % z_offset_, 5 * 21);
   res += str_check_size(scaleformat % line_scale_ % sample_scale_ %
@@ -541,8 +542,8 @@ RsmRationalPolynomial::read_tre_string(const std::string& Tre_in)
   res->base_read_tre_string(in);
   res->row_section_number_ = read_size<int>(in, 3);
   res->col_section_number_ = read_size<int>(in, 3);
-  std::string trash = read_size<std::string>(in, 21);
-  trash = read_size<std::string>(in, 21);
+  res->line_fit_error_ = read_size<boost::optional<double> >(in, 21);
+  res->sample_fit_error_ = read_size<boost::optional<double> >(in, 21);
   res->line_offset_ = read_size<double>(in, 21);
   res->sample_offset_ = read_size<double>(in, 21);
   res->x_offset_ = read_size<double>(in, 21);

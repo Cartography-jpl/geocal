@@ -1,17 +1,9 @@
 from __future__ import print_function
 from .nitf_field import *
 from .nitf_tre import *
-from geocal_swig import RsmRationalPolynomial
 
 hlp = '''This is the RSMPCA TRE, the Replacement Senor Model Polynomial
 Coefficients version A. 
-
-This TRE is mostly implemented by the RsmRationalPolynomial available as
-rsm_rational_polynomial. This should be used to set the TRE values, and to
-use the TRE values. This is handled mostly transparently, except that if you
-update rsm_rational_polynomial the raw fields in the TRE might not be
-updated. Call update_raw_field() if you have modified rsm_rational_polynomial 
-and wish to access the raw fields.
 
 The field names can be pretty cryptic, but are documented in detail in 
 the NITF TRE documentation (STDI-0002 V4.0, available at 
@@ -85,9 +77,7 @@ desc = ["RSMPCA",
         ],
 ]
 
-TreRSMPCA = create_nitf_tre_structure("TreRSMPCA",desc,hlp=hlp,
-                        tre_implementation_field="rsm_rational_polynomial",
-                        tre_implementation_class=RsmRationalPolynomial)
+TreRSMPCA = create_nitf_tre_structure("TreRSMPCA",desc,hlp=hlp)
     
 def _row_section_number(self):
     return self.rsn

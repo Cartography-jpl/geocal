@@ -11,7 +11,8 @@ from .nitf_des_subheader import NitfDesSubheader
 from .nitf_image import NitfImageFromNumpy, NitfImagePlaceHolder, \
     NitfImageGeneral, NitfImageCannotHandle
 from .nitf_tre import read_tre, prepare_tre_write
-from .nitf_rsm import rsm_prepare_tre_write, rsm_read_tre, rsm_tre_tag_list
+# We'll need to remove this shortly, once we figure out how
+from .geocal_nitf_rsm import rsm_prepare_tre_write, rsm_read_tre, rsm_tre_tag_list
 import io,six,copy
 
 class NitfFile(object):

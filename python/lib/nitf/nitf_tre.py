@@ -235,11 +235,26 @@ def create_nitf_tre_structure(name, description, hlp = None,
     TRE tag. By convention, we don't list the cetag and cel fields,
     since these are always present.
 
+    Note that it is perfectly fine to call create_nitf_field_structure 
+    from outside of the nitf module. This can be useful for projects that
+    need to support specialized TREs that aren't included in this package.
+    Just call create_nitf_field_structure to add your TREs.
+
+    It is also perfectly ok to call create_nitf_field_structure with an 
+    existing TRE tag. This can be useful to add in a replacement TRE 
+    structure outside of the nitf module. For example, we can have a
+    generic version of a TRE like RSMGGA replaced with a version in geocal 
+    that uses RsmGrid.
+
     In some cases, we want the bulk of the TRE generation/reading to
     be done in another class (e.g., a C++ class such as for 
     RsmRationalPolynomial and RSMPCA). To support this, the optional
     arguments tre_implementation_class and tre_implementation_field can
     be passed in, e.g., RsmRationalPolynomial and "rsm_rational_polynomial".
+    Typically this will be done by replacing an existing TRE (so calling
+    create_nitf_field_structure in your own module). This allows the nitf 
+    module to have a minimum set of requirements but allow for the nitf
+    code to be extended. See for example geocal_nitf_rsm.py.
 
     The class should have the functions "tre_string()" and 
     "read_tre_string(s)", as well as having some reasonable "print(obj)" 
@@ -261,6 +276,9 @@ def create_nitf_tre_structure(name, description, hlp = None,
     else:
         res = type(name, (Tre,), t.process(desc))
     res.tre_tag = tre_tag
+    # Stash description, to make available if we want to later override a TRE
+    # (see geocal_nitf_rsm.py in geocal for an example)
+    res._description = description
     if(hlp is not None):
         try:
             # This doesn't work in python 2.7, we can't write to the

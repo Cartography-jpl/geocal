@@ -5,8 +5,9 @@ import io, six
 
 def test_tre_rsmpia(rsm_ms_polynomial):
     t = TreRSMGIA()
-    t.rsm_multi_section = rsm_ms_polynomial
-    t.update_raw_field()
+    t.grnis = 3
+    t.gcnis = 2
+    t.gcssiz = 13763.0
     fh = six.BytesIO()
     t.write_to_file(fh)
     # This can vary depending on roundoff, so don't compare.
@@ -15,6 +16,4 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     t2 = TreRSMGIA()
     t2.read_from_file(fh2)
     print(t2)
-    assert t2.rsm_multi_section.number_row_section == 3
-    assert t2.rsm_multi_section.number_col_section == 2
     assert t2.gcssiz == 13763.0

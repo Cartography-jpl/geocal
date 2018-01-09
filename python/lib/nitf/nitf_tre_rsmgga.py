@@ -1,7 +1,6 @@
 from __future__ import print_function
 from .nitf_field import *
 from .nitf_tre import *
-from geocal_swig import RsmGrid
 
 class BaseCoord(FieldData):
     '''The row/column coordinate is a scaled integer. This class handles 
@@ -32,13 +31,6 @@ class CCoord(BaseCoord):
         return int(t) / pow(10.0, parent_obj.fnumcd) + parent_obj.refcol    
     
 hlp = '''This is the RSMGGA TRE, Replacement Sensor Model Ground-to-Image Grid 
-
-This TRE is mostly implemented by the RsmGrid available as
-rsm_grid. This should be used to set the TRE values, and to use the
-TRE values. This is handled mostly transparently, except that if you
-update rsm_grid the raw fields in the TRE might not be updated. Call
-update_raw_field() if you have modified rsm_grid and wish to access
-the raw fields.
 
 The field names can be pretty cryptic, but are documented in detail in 
 the NITF TRE documentation (STDI-0002 V4.0, available at 
@@ -89,9 +81,7 @@ desc = ["RSMGGA",
         ]
 ]
 
-TreRSMGGA = create_nitf_tre_structure("TreRSMGGA",desc,hlp=hlp,
-                        tre_implementation_field="rsm_grid",
-                        tre_implementation_class=RsmGrid)
+TreRSMGGA = create_nitf_tre_structure("TreRSMGGA",desc,hlp=hlp)
 
 def _row_section_number(self):
     return self.ggrsn

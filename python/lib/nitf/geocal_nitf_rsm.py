@@ -1,35 +1,123 @@
 from geocal_swig import Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial, RsmGrid, RsmRpPlusGrid
+from .nitf_tre import create_nitf_tre_structure
 from .nitf_tre_rsmida import TreRSMIDA
 from .nitf_tre_rsmgga import TreRSMGGA
 from .nitf_tre_rsmgia import TreRSMGIA
 from .nitf_tre_rsmpca import TreRSMPCA
 from .nitf_tre_rsmpia import TreRSMPIA
 
-# This provides a higher level interface to the RSM TREs, using a C++ Rsm object
+# ---------------------------------------------------------
+# Override various TREs to use the geocal objects instead
+# ---------------------------------------------------------
+
+hlp_rsmgga = TreRSMGGA.__doc__ + \
+''' 
+This TRE is mostly implemented by the RsmGrid available as
+rsm_grid. This should be used to set the TRE values, and to use the
+TRE values. This is handled mostly transparently, except that if you
+update rsm_grid the raw fields in the TRE might not be updated. Call
+update_raw_field() if you have modified rsm_grid and wish to access
+the raw fields.'''
+
+TreRSMGGA_geocal = create_nitf_tre_structure("TreRSMGGA",
+                          TreRSMGGA._description,hlp=hlp_rsmgga,
+                          tre_implementation_field="rsm_grid",
+                          tre_implementation_class=RsmGrid)
+TreRSMGGA_geocal.row_section_number = TreRSMGGA.row_section_number
+TreRSMGGA_geocal.col_section_number = TreRSMGGA.col_section_number
+
+hlp_rsmpca = TreRSMPCA.__doc__ + \
+'''
+This TRE is mostly implemented by the RsmRationalPolynomial available as
+rsm_rational_polynomial. This should be used to set the TRE values, and to
+use the TRE values. This is handled mostly transparently, except that if you
+update rsm_rational_polynomial the raw fields in the TRE might not be
+updated. Call update_raw_field() if you have modified rsm_rational_polynomial 
+and wish to access the raw fields.
+'''             
+
+TreRSMPCA_geocal = create_nitf_tre_structure("TreRSMPCA",
+                          TreRSMPCA._description,hlp=hlp_rsmpca,
+                          tre_implementation_field="rsm_rational_polynomial",
+                          tre_implementation_class=RsmRationalPolynomial)
+TreRSMPCA_geocal.row_section_number = TreRSMPCA.row_section_number
+TreRSMPCA_geocal.col_section_number = TreRSMPCA.col_section_number
+
+hlp_rsmgia = TreRSMGIA.__doc__ + \
+'''
+This TRE is mostly implemented by the RsmMultiSection available as
+rsm_multi_section. This should be used to set the TRE values, and to
+use the TRE values. This is handled mostly transparently, except that if you
+update rsm_multi_section the raw fields in the TRE might not be
+updated. Call update_raw_field() if you have modified rsm_multi_section
+and wish to access the raw fields.
+'''             
+
+TreRSMGIA_geocal = create_nitf_tre_structure("TreRSMGIA",
+                          TreRSMGIA._description,hlp=hlp_rsmgia,
+                          tre_implementation_field="rsm_multi_section",
+                          tre_implementation_class=RsmMultiSection)
+
+
+hlp_rsmpia = TreRSMPIA.__doc__ + \
+'''
+This TRE is mostly implemented by the RsmMultiSection available as
+rsm_multi_section. This should be used to set the TRE values, and to
+use the TRE values. This is handled mostly transparently, except that if you
+update rsm_multi_section the raw fields in the TRE might not be
+updated. Call update_raw_field() if you have modified rsm_multi_section
+and wish to access the raw fields.
+'''             
+
+TreRSMPIA_geocal = create_nitf_tre_structure("TreRSMPIA",
+                          TreRSMPIA._description,hlp=hlp_rsmpia,
+                          tre_implementation_field="rsm_multi_section",
+                          tre_implementation_class=RsmMultiSection)
+
+hlp_rsmida = TreRSMIDA.__doc__ + \
+'''
+This TRE is mostly implemented by the RsmId available as
+rsm_id. This should be used to set the TRE values, and to
+use the TRE values. This is handled mostly transparently, except that if you
+update rsm_id the raw fields in the TRE might not be
+updated. Call update_raw_field() if you have modified rsm_id
+and wish to access the raw fields.
+'''             
+
+TreRSMIDA_geocal = create_nitf_tre_structure("TreRSMIDA",
+                          TreRSMIDA._description,hlp=hlp_rsmida,
+                          tre_implementation_field="rsm_id",
+                          tre_implementation_class=RsmId)
+
+
+# ---------------------------------------------------------
+# This provides a higher level interface to the RSM TREs,
+# using a C++ Rsm object
 # to read and write the full set of TREs.
+# ---------------------------------------------------------
 
 def _rsm_add_rec(seg, v):
     if(isinstance(v, RsmRpPlusGrid)):
         _rsm_add_rec(seg, v.rational_polynomial)
         _rsm_add_rec(seg, v.correction_grid)
     elif(isinstance(v, RsmRationalPolynomial)):
-        t = TreRSMPCA()
+        t = TreRSMPCA_geocal()
         t.rsm_rational_polynomial = v
         t.update_raw_field()
         seg.tre_list.append(t)
     elif(isinstance(v, RsmGrid)):
-        t = TreRSMGGA()
+        t = TreRSMGGA_geocal()
         t.rsm_grid = v
         t.update_raw_field()
         seg.tre_list.append(t)
     elif(isinstance(v, RsmMultiSection)):
         if(isinstance(v.section(0,0), RsmRationalPolynomial)):
-            t = TreRSMPIA()
+            t = TreRSMPIA_geocal()
             t.rsm_multi_section = v
             t.update_raw_field()
             seg.tre_list.append(t)
         elif(isinstance(v.section(0,0), RsmGrid)):
-            t = TreRSMGIA()
+            t = TreRSMGIA_geocal()
             t.rsm_multi_section = v
             t.update_raw_field()
             seg.tre_list.append(t)
@@ -54,7 +142,7 @@ def rsm_prepare_tre_write(seg):
                     rsm_tre_tag_list]
     # Currently only handle one RSM TRE set. We could extend this if needed.
     if(seg.rsm):
-        t = TreRSMIDA()
+        t = TreRSMIDA_geocal()
         t.rsm_id = seg.rsm.rsm_id
         seg.tre_list.append(t)
         _rsm_add_rec(seg, seg.rsm.rsm_base)

@@ -2416,7 +2416,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlibnitf@/nitf_field_test.py \
 	@srcpythonlibnitf@/nitf_file_header_test.py \
 	@srcpythonlibnitf@/nitf_file_test.py \
-	@srcpythonlibnitf@/nitf_rsm_test.py \
+	@srcpythonlibnitf@/geocal_nitf_rsm_test.py \
 	@srcpythonlibnitf@/nitf_image_subheader_test.py \
 	@srcpythonlibnitf@/nitf_image_test.py \
 	@srcpythonlibnitf@/nitf_text_subheader_test.py \
@@ -3413,7 +3413,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 geocalpkgpythonnitf_PYTHON = @srcpython@/init/nitf/__init__.py \
 	@srcpythonlibnitf@/nitf_field.py \
 	@srcpythonlibnitf@/nitf_file_header.py \
-	@srcpythonlibnitf@/nitf_file.py @srcpythonlibnitf@/nitf_rsm.py \
+	@srcpythonlibnitf@/nitf_file.py \
+	@srcpythonlibnitf@/geocal_nitf_rsm.py \
 	@srcpythonlibnitf@/nitf_image.py \
 	@srcpythonlibnitf@/nitf_image_subheader.py \
 	@srcpythonlibnitf@/nitf_text_subheader.py \

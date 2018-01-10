@@ -231,12 +231,13 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
 @INSTALL_PYNITF_TRUE@am__append_44 = install-pynitf
 @INSTALL_PYNITF_TRUE@am__append_45 = uninstall-pynitf
-@CODE_COVERAGE_ENABLED_TRUE@am__append_46 = --cov-report term \
+@INSTALL_PYNITF_TRUE@am__append_46 = clean-pynitf
+@CODE_COVERAGE_ENABLED_TRUE@am__append_47 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_47 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_48 = install_python_doc
+@HAVE_VICAR_RTL_TRUE@am__append_48 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_49 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -2433,11 +2434,14 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_10) $(am__append_44) $(am__append_48)
+INSTALL_DATA_HOOK = $(am__append_10) $(am__append_44) $(am__append_49)
 UNINSTALL_HOOK = $(am__append_11) $(am__append_45) \
 	clean_install_python_doc
-CLEAN_HOOK = clean_unit_test $(am__append_12)
+CLEAN_HOOK = clean_unit_test $(am__append_12) $(am__append_46)
 INSTALLCHECK_HOOK = python_check
+
+# Make sure we don't have any pyc or pycache files floating around
+DIST_HOOK = dist-clean-up-python
 TESTS = @libgeocal@/test_all.sh
 check_PROGRAM = 
 check_DATA = 
@@ -2780,7 +2784,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_47)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_48)
 dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -3405,7 +3409,7 @@ am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYT
 # but you can specify a different number.
 PYTEST_NJOB = 10
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_46)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_47)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -11365,6 +11369,9 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
+	$(MAKE) $(AM_MAKEFLAGS) \
+	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
+	  dist-hook
 	-test -n "$(am__skip_mode_fix)" \
 	|| find "$(distdir)" -type d ! -perm -755 \
 		-exec chmod u+rwx,go+rx {} \; -o \
@@ -11678,13 +11685,14 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	clean-libLTLIBRARIES clean-libtool clean-local \
 	clean-noinstLTLIBRARIES clean-pkgpythonswigLTLIBRARIES cscope \
 	cscopelist-am ctags ctags-am dist dist-all dist-bzip2 \
-	dist-gzip dist-lzip dist-shar dist-tarZ dist-xz dist-zip \
-	distcheck distclean distclean-compile distclean-generic \
-	distclean-hdr distclean-libtool distclean-tags distcleancheck \
-	distdir distuninstallcheck dvi dvi-am html html-am info \
-	info-am install install-afidspythonvdevPROGRAMS install-am \
-	install-binPROGRAMS install-data install-data-am \
-	install-data-hook install-dist_afidspythonvdevDATA \
+	dist-gzip dist-hook dist-lzip dist-shar dist-tarZ dist-xz \
+	dist-zip distcheck distclean distclean-compile \
+	distclean-generic distclean-hdr distclean-libtool \
+	distclean-tags distcleancheck distdir distuninstallcheck dvi \
+	dvi-am html html-am info info-am install \
+	install-afidspythonvdevPROGRAMS install-am install-binPROGRAMS \
+	install-data install-data-am install-data-hook \
+	install-dist_afidspythonvdevDATA \
 	install-dist_afidspythonvdevSCRIPTS install-dist_binSCRIPTS \
 	install-dist_geocalpkgpythonDATA install-dist_sdbxdocDATA \
 	install-dvi install-dvi-am install-etcafidspythonDATA \
@@ -11723,6 +11731,7 @@ install-data-hook: $(INSTALL_DATA_HOOK)
 uninstall-hook: $(UNINSTALL_HOOK)
 clean-local: $(CLEAN_HOOK)
 installcheck-local: $(INSTALLCHECK_HOOK)
+dist-hook: $(DIST_HOOK)
 @CODE_COVERAGE_RULES@
 
 # ========================================================================
@@ -11918,11 +11927,17 @@ install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpytho
 # we really do just have a single version externally managed here
 @INSTALL_PYNITF_TRUE@install-pynitf:
 @INSTALL_PYNITF_TRUE@	cd $(srcdir)/@srcpython@/pynitf && \
-@INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build install --prefix=$(prefix) --single-version-externally-managed --root="/" 
+@INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build egg_info --egg-base=@abs_builddir@/pynitf install --prefix=$(prefix) --single-version-externally-managed --record @abs_builddir@/pynitf/files.txt
 
 @INSTALL_PYNITF_TRUE@uninstall-pynitf:
-@INSTALL_PYNITF_TRUE@	cd $(srcdir)/@srcpython@/pynitf && \
-@INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py uninstall --prefix=$(prefix) --single-version-externally-managed --root="/"
+@INSTALL_PYNITF_TRUE@	-rm -rf `cat pynitf/files.txt`
+
+@INSTALL_PYNITF_TRUE@clean-pynitf:
+@INSTALL_PYNITF_TRUE@	-rm -r pynitf
+
+dist-clean-up-python:
+	rm -rf `find $(distdir) -name '__pycache__'`
+	rm -f `find $(distdir) -name '*.pyc'`
 
 python_check:
 	export PATH=$(PYTHON_CHECK_PATH) && \

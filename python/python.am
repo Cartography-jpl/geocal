@@ -8,16 +8,20 @@ if INSTALL_PYNITF
 # we really do just have a single version externally managed here
 install-pynitf:
 	cd $(srcdir)/@srcpython@/pynitf && \
-        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build install --prefix=$(prefix) --single-version-externally-managed --root="/" 
+        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build egg_info --egg-base=@abs_builddir@/pynitf install --prefix=$(prefix) --single-version-externally-managed --record @abs_builddir@/pynitf/files.txt
 
 EXTRA_PYTHON_TEST=$(srcdir)/@srcpython@/pynitf
 INSTALL_DATA_HOOK += install-pynitf
 
 uninstall-pynitf:
-	cd $(srcdir)/@srcpython@/pynitf && \
-        $(PYTHON) setup.py uninstall --prefix=$(prefix) --single-version-externally-managed --root="/"
+	-rm -rf `cat pynitf/files.txt`
 
 UNINSTALL_HOOK+= uninstall-pynitf
+
+clean-pynitf:
+	-rm -r pynitf
+
+CLEAN_HOOK += clean-pynitf
 else
 EXTRA_PYTHON_TEST=
 endif
@@ -26,6 +30,13 @@ EXTRA_DIST+=@srcpython@/pynitf
 EXTRA_DIST+=@srcpython@/setup.cfg
 EXTRA_DIST+=@srcpython@/conftest.py
 EXTRA_DIST+=@srcpython@/README_test
+
+# Make sure we don't have any pyc or pycache files floating around
+DIST_HOOK += dist-clean-up-python
+
+dist-clean-up-python:
+	rm -rf `find $(distdir) -name '__pycache__'`
+	rm -f `find $(distdir) -name '*.pyc'`
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed

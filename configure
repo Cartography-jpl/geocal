@@ -657,7 +657,6 @@ SWIG
 etcafidspythondir
 installafidspythondir
 afidspythonvdevdir
-geocalpkgpythonnitfdir
 geocalpkgpythondir
 geocalswigincdir
 pythondocdir
@@ -678,7 +677,6 @@ geocalunittestdata
 testsupportsrc
 docpythonsrc
 srcpythonbin
-srcpythonlibnitf
 srcpythonlib
 srcpython
 srcgeocalbin
@@ -24187,8 +24185,6 @@ srcpython=${geocal_topdir}/python
 
 srcpythonlib=${srcpython}/lib
 
-srcpythonlibnitf=${srcpython}/lib/nitf
-
 srcpythonbin=${srcpython}/bin
 
 docpythonsrc=${srcpython}/doc
@@ -24228,8 +24224,6 @@ pythondocdir=\${prefix}/share/doc/geocal/python
 geocalswigincdir=\${prefix}/share/geocal/swig
 
 geocalpkgpythondir=\${prefix}/\${pythondir}/geocal
-
-geocalpkgpythonnitfdir=\${prefix}/\${pythondir}/geocal/nitf
 
 afidspythonvdevdir=\${prefix}/afids/vdev
 

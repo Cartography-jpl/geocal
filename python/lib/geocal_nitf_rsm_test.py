@@ -1,6 +1,9 @@
-from .nitf_file import *
-from .geocal_nitf_rsm import *
+try:
+    from pynitf.nitf_file import *
+except ImportError:
+    pass
 from test_support import *
+from geocal.geocal_nitf_rsm import *
 from geocal_swig import GdalRasterImage
 
 def create_image_seg(f):
@@ -10,6 +13,7 @@ def create_image_seg(f):
             img.data[i,j] = i + j
     f.image_segment.append(NitfImageSegment(img))
 
+@require_pynitf
 def test_rsm_rp(isolated_dir, rsm):
     '''Create a file, and write out a RSM. This RSM has just a single 
     rational polynomial in it'''    
@@ -20,6 +24,7 @@ def test_rsm_rp(isolated_dir, rsm):
     f2 = NitfFile("nitf_rsm.ntf")
     print(f2)
 
+@require_pynitf
 def test_rsm_grid(isolated_dir, rsm_g):
     '''Create a file, and write out a RSM. This RSM has just a single 
     grid in it'''    
@@ -30,6 +35,7 @@ def test_rsm_grid(isolated_dir, rsm_g):
     f2 = NitfFile("nitf_rsm.ntf")
     print(f2)
 
+@require_pynitf
 def test_rsm_ms_rp(isolated_dir, rsm_ms_rp):
     '''Create a file, and write out a RSM. This has a multi section
     rational polynomial in it'''    
@@ -40,6 +46,7 @@ def test_rsm_ms_rp(isolated_dir, rsm_ms_rp):
     f2 = NitfFile("nitf_rsm.ntf")
     print(f2)
 
+@require_pynitf
 def test_rsm_ms_g(isolated_dir, rsm_ms_g):
     '''Create a file, and write out a RSM. This has a multi section
     grid in it'''    
@@ -51,6 +58,7 @@ def test_rsm_ms_g(isolated_dir, rsm_ms_g):
     print(f2)
 
 # Test the raw TREs
+@require_pynitf
 def test_tre_rsmpca(rsm_rational_polynomial):
     t = TreRSMPCA_geocal()
     t.rsm_rational_polynomial = rsm_rational_polynomial
@@ -83,6 +91,7 @@ def test_tre_rsmpca(rsm_rational_polynomial):
     assert t.rnrmo == 2881.0
     assert t2.rnrmo == 2881.0
 
+@require_pynitf
 def test_tre_rsmgga(rsm_grid):
     t = TreRSMGGA_geocal()
     t.rsm_grid = rsm_grid
@@ -104,6 +113,7 @@ def test_tre_rsmgga(rsm_grid):
     assert t.iid is None
     assert t.deltaz == 1268.0
     
+@require_pynitf
 def test_tre_rsmpia(rsm_ms_polynomial):
     t = TreRSMGIA_geocal()
     t.rsm_multi_section = rsm_ms_polynomial
@@ -120,6 +130,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     assert t2.rsm_multi_section.number_col_section == 2
     assert t2.gcssiz == 13763.0
 
+@require_pynitf
 def test_tre_rsmpia(rsm_ms_polynomial):
     t = TreRSMPIA_geocal()
     t.rsm_multi_section = rsm_ms_polynomial
@@ -136,6 +147,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     assert t2.rsm_multi_section.number_col_section == 2
     assert t2.cssiz == 13763.0
 
+@require_pynitf
 def test_tre_rsmida(rsm):
     t = TreRSMIDA_geocal()
     t.rsm_id = rsm.rsm_id
@@ -597,6 +609,7 @@ pcalc["i_6130g.ntf"] = \
 # 18. Request identity and defnition of RSM coordinate system
 
 # 19. Request fit error
+@require_pynitf
 @require_rsm_sample_data    
 def test_rsm_sample(isolated_dir):
     '''Check if we can read the various RSM sample data files.
@@ -629,6 +642,7 @@ def test_rsm_sample(isolated_dir):
             assert(abs(ic_expect.sample - ic_calc.sample) < 0.2)
         # Should add tests to check against the expected value spreadsheet
     
+@require_pynitf
 @require_rsm_sample_data    
 def test_rsm_sample_file_a(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
@@ -646,6 +660,7 @@ def test_rsm_sample_file_a(isolated_dir):
     # This also as RSMDCA and RSMECA (the direct and indirect
     # covariance). We don't currently read these
 
+@require_pynitf
 @require_rsm_sample_data    
 def test_rsm_sample_file_b(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
@@ -660,6 +675,7 @@ def test_rsm_sample_file_b(isolated_dir):
     # This also as RSMDCA and RSMECA (the direct and indirect
     # covariance). We don't currently read these
 
+@require_pynitf
 @require_rsm_sample_data    
 def test_rsm_sample_file_c(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
@@ -684,6 +700,7 @@ def test_rsm_sample_file_c(isolated_dir):
 
 # Doesn't work yet    
 @skip
+@require_pynitf
 @require_rsm_sample_data    
 def test_rsm_sample_file_e(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
@@ -698,6 +715,7 @@ def test_rsm_sample_file_e(isolated_dir):
     # This also as RSMDCA and RSMECA (the direct and indirect
     # covariance). We don't currently read these
 
+@require_pynitf
 @require_rsm_sample_data    
 def test_rsm_sample_file_f(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
@@ -714,6 +732,7 @@ def test_rsm_sample_file_f(isolated_dir):
     # This also as RSMDCA and RSMAPA (the direct covariance,
     # adjustment). We don't currently read these.
 
+@require_pynitf
 @require_rsm_sample_data    
 def test_rsm_sample_file_g(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''

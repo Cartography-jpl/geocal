@@ -2,8 +2,11 @@ from __future__ import print_function
 from builtins import range
 from builtins import object
 from geocal_swig import *
-from geocal.nitf.nitf_tre_csde import TreUSE00A
-from geocal.nitf.nitf_tre_rpc import TreRPC00B, TreRPC00A
+try:
+    from pynitf import TreUSE00A, TreRPC00B, TreRPC00A
+    have_pynitf = True
+except ImportError:
+    have_pynitf = False
 import re
 import six
 import sys
@@ -40,7 +43,8 @@ def _add_tre_to_gdal(tre, raster_name, help_desc, nitf_literal=False):
     setattr(GdalRasterImage, "has_" + raster_name, 
             property(h.exists, None, None, help_desc))
 
-_add_tre_to_gdal(TreUSE00A, "use00a", "USEOOA metadata")    
+if(have_pynitf):
+    _add_tre_to_gdal(TreUSE00A, "use00a", "USEOOA metadata")    
 
 def _use00a_from_gdal(self, f):
     '''Fill in TRE based on GDAL parameters. These are the metadata field
@@ -73,9 +77,10 @@ def _use00a_to_gdal(self, f):
         else:
             f["TRE_NITF_" + field.upper()] =  self.field_map[field].bytes(self)
 
-TreUSE00A.from_gdal = _use00a_from_gdal
-TreUSE00A.to_vicar = _use00a_to_vicar
-TreUSE00A.to_gdal = _use00a_to_gdal
+if(have_pynitf):
+    TreUSE00A.from_gdal = _use00a_from_gdal
+    TreUSE00A.to_vicar = _use00a_to_vicar
+    TreUSE00A.to_gdal = _use00a_to_gdal
 
 def tre_use00a_to_gdal(fin, fout):
     '''Function to copy use00a structure from TRE in input to output vicar file.'''
@@ -100,9 +105,9 @@ def tre_use00a(fin, fout, creation_option):
         tre = TreUSE00A()
         tre.from_gdal(fin.raster_image(0))
         fout.use00a = tre
-
-_add_tre_to_gdal(TreRPC00A, "rpc00a", "RPC A metadata")    
-_add_tre_to_gdal(TreRPC00B, "rpc00b", "RPC B metadata")    
+if(have_pynitf):
+    _add_tre_to_gdal(TreRPC00A, "rpc00a", "RPC A metadata")    
+    _add_tre_to_gdal(TreRPC00B, "rpc00b", "RPC B metadata")    
         
 def tre_is_rpc_a(self):
     return True
@@ -110,13 +115,14 @@ def tre_is_rpc_a(self):
 def tre_isnot_rpc_a(self):
     return False
 
-setattr(TreRPC00B, "is_rpc_a", 
-        property(tre_isnot_rpc_a, None, None, 
-                 "Return true if this is type A"))
+if(have_pynitf):
+    setattr(TreRPC00B, "is_rpc_a", 
+            property(tre_isnot_rpc_a, None, None, 
+                     "Return true if this is type A"))
 
-setattr(TreRPC00A, "is_rpc_a", 
-        property(tre_is_rpc_a, None, None, 
-                 "Return true if this is type A"))
+    setattr(TreRPC00A, "is_rpc_a", 
+            property(tre_is_rpc_a, None, None, 
+                     "Return true if this is type A"))
 
 def tre_get_rpc(self):
     '''Get a Rpc object directly from a TRE object'''
@@ -167,10 +173,11 @@ def tre_set_from_rpc(self, rpc):
         self.samp_den_coeff[i] = rpc.sample_denominator[i]
         self.samp_num_coeff[i] = rpc.sample_numerator[i]
 
-setattr(TreRPC00B, "rpc", 
-        property(tre_get_rpc, tre_set_from_rpc, None, 
-                 "TRE RPC structure as a GeoCal RPC object"))
+if(have_pynitf):
+    setattr(TreRPC00B, "rpc", 
+            property(tre_get_rpc, tre_set_from_rpc, None, 
+                     "TRE RPC structure as a GeoCal RPC object"))
 
-setattr(TreRPC00A, "rpc", 
-        property(tre_get_rpc, tre_set_from_rpc, None, 
-                 "TRE RPC structure as a GeoCal RPC object"))
+    setattr(TreRPC00A, "rpc", 
+            property(tre_get_rpc, tre_set_from_rpc, None, 
+                     "TRE RPC structure as a GeoCal RPC object"))

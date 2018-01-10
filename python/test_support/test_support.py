@@ -9,6 +9,11 @@ import os
 import sys
 import subprocess
 import pytest
+try:
+    have_pynitf = True
+except ImportError:
+    # Ok if we don't have pynitf, we just can't execute this code
+    have_pynitf = False
 
 # Location of test data that is part of source
 unit_test_data = os.path.abspath(os.path.dirname(__file__) + "/../../unit_test_data/") + "/"
@@ -85,6 +90,9 @@ require_vicar_gdalplugin = pytest.mark.skipif("NO_VICAR_GDALPLUGIN" in os.enviro
 
 require_rsm_sample_data = pytest.mark.skipif(not os.path.exists(rsm_sample_data),
       reason="need to have RSM sample data (%s) available to run." % rsm_sample_data)
+
+require_pynitf = pytest.mark.skipif(not have_pynitf,
+      reason="need to have pynitf available to run.")
 
 # Short hand for marking as unconditional skipping. Good for tests we
 # don't normally run, but might want to comment out for a specific debugging

@@ -5,6 +5,7 @@ import subprocess
 from test_support import *
 import sys
 
+@require_pynitf
 @require_vicar_gdalplugin    
 def test_nitf_use00a_create(isolated_dir):
     '''Create a nitf from existing VICAR data, adding a TRE for use00a'''
@@ -57,6 +58,7 @@ def test_nitf_use00a_create(isolated_dir):
         assert t["GEOTIFF", "NITF_USE00A_ANGLE_TO_NORTH"][0] == "270"
     
 # Check that GdalRasterImage got extended
+@require_pynitf
 def test_gdal_raster():
     t = GdalRasterImage(unit_test_data + "test_use00a.ntf")
     tre = t.use00a
@@ -72,6 +74,7 @@ def test_gdal_raster():
     assert tre.sun_el == 68.5
     assert tre.sun_az == 131.3
 
+@require_pynitf
 def test_tre_rpc():
     '''Test reading and writing a RPC'''
     rpc = VicarLiteRasterImage(stereo_unit_test_data + "10MAY21-1.img").rpc

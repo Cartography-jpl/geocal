@@ -4,7 +4,7 @@ try:
     from afids import *
 except ImportError:
     from geocal import *
-from geocal.nitf import *
+import pynitf
 import subprocess
 import os
 import sys
@@ -54,5 +54,5 @@ if(not args.full):
     print(t2.decode('utf-8'),end='')
     print(t3.decode('utf-8'))
 else:
-    f = NitfFile(args.input_file)
+    f = pynitf.NitfFile(args.input_file)
     print(f)

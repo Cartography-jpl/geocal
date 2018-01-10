@@ -169,6 +169,26 @@ fi
 
 AM_CONDITIONAL([BUILD_AFIDS], [false])
 
+#=================================================================
+# We normally include pynitf installation (at least for the time being,
+# see python/README_pynitf.md for discussion of this). But for testing
+# it is useful to have the option to disable this. That we in the long
+# term when pynitf is just handled like any other dependency, we know the
+# code will still work.
+
+AC_MSG_CHECKING([whether to disable installing pynitf])
+AC_ARG_ENABLE(pynitf,
+AS_HELP_STRING([--disable-pynitf],[Do not install pynitf]),
+[if test "$enableval" = no; then
+  AC_MSG_RESULT([yes])
+  install_pynitf="no"
+fi],
+[AC_MSG_RESULT([no])
+ install_pynitf="yes"
+]
+)
+AM_CONDITIONAL([INSTALL_PYNITF], [test "$install_pynitf" = "yes"])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
@@ -199,3 +219,4 @@ LOC_MSG([  Have MSPI-Shared:              ${have_mspi_shared}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])
 LOC_MSG([  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}])
 LOC_MSG([  Have VICAR Run Time Library:   ${have_vicar_rtl}])
+LOC_MSG([  Install pynitf:                ${install_pynitf}])

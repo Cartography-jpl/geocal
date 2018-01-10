@@ -1,7 +1,28 @@
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py
 # Backdoor rule to do a quick install when we are just varying python
-install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
+install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS install-pynitf
 
+if INSTALL_PYNITF
+# Note the --single-version-externally-managed is because we don't yet have
+# the PYTHONPATH set, and an install complains. This is actually ok, because
+# we really do just have a single version externally managed here
+install-pynitf:
+	cd $(srcdir)/@srcpython@/pynitf && \
+        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build install --prefix=$(prefix) --single-version-externally-managed --root="/" 
+
+EXTRA_PYTHON_TEST=$(srcdir)/@srcpython@/pynitf
+INSTALL_DATA_HOOK += install-pynitf
+
+uninstall-pynitf:
+	cd $(srcdir)/@srcpython@/pynitf && \
+        $(PYTHON) setup.py uninstall --prefix=$(prefix) --single-version-externally-managed --root="/"
+
+UNINSTALL_HOOK+= uninstall-pynitf
+else
+EXTRA_PYTHON_TEST=
+endif
+
+EXTRA_DIST+=@srcpython@/pynitf
 EXTRA_DIST+=@srcpython@/setup.cfg
 EXTRA_DIST+=@srcpython@/conftest.py
 EXTRA_DIST+=@srcpython@/README_test
@@ -48,7 +69,7 @@ python_check:
 	export PATH=$(PYTHON_CHECK_PATH) && \
         export PYTHONPATH=$(abs_srcdir)/$(srcpython):${PYTHONPATH} && \
         $(setup_geocal) && \
-        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
+        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@ $(EXTRA_PYTHON_TEST)
 
 INSTALLCHECK_HOOK+= python_check
 

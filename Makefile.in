@@ -166,8 +166,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py README.developer \
 @WITH_DOCUMENTATION_TRUE@	INSTALL
-@WITH_DOCUMENTATION_TRUE@am__append_10 = install_doxygen_doc \
-@WITH_DOCUMENTATION_TRUE@	install_python_doc
+@WITH_DOCUMENTATION_TRUE@am__append_10 = install_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_11 = clean_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_12 = clean_doxygen_generate
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_13 = picmtch5
@@ -230,11 +229,14 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(INCLUDE_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@CODE_COVERAGE_ENABLED_TRUE@am__append_44 = --cov-report term \
+@INSTALL_PYNITF_TRUE@am__append_44 = install-pynitf
+@INSTALL_PYNITF_TRUE@am__append_45 = uninstall-pynitf
+@CODE_COVERAGE_ENABLED_TRUE@am__append_46 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_45 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@HAVE_VICAR_RTL_TRUE@am__append_47 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_48 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -2346,8 +2348,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp7_ssd_mro110c.lbl \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp8_ssd_mro110c.lbl \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp9_ssd_mro110c.lbl \
-	@srcpython@/setup.cfg @srcpython@/conftest.py \
-	@srcpython@/README_test \
+	@srcpython@/pynitf @srcpython@/setup.cfg \
+	@srcpython@/conftest.py @srcpython@/README_test \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
 	@srcpythonbin@/gdal_to_nitf_test.py \
 	@srcpythonbin@/gtproj2_test.py \
@@ -2431,8 +2433,9 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_10)
-UNINSTALL_HOOK = $(am__append_11) clean_install_python_doc
+INSTALL_DATA_HOOK = $(am__append_10) $(am__append_44) $(am__append_48)
+UNINSTALL_HOOK = $(am__append_11) $(am__append_45) \
+	clean_install_python_doc
 CLEAN_HOOK = clean_unit_test $(am__append_12)
 INSTALLCHECK_HOOK = python_check
 TESTS = @libgeocal@/test_all.sh
@@ -2777,7 +2780,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_45)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_47)
 dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -3384,6 +3387,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
 	@srcpythonlib@/air_mspi_igc.py @srcpythonlib@/pds_label.py
+@INSTALL_PYNITF_FALSE@EXTRA_PYTHON_TEST = 
+@INSTALL_PYNITF_TRUE@EXTRA_PYTHON_TEST = $(srcdir)/@srcpython@/pynitf
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed
@@ -3400,7 +3405,7 @@ am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYT
 # but you can specify a different number.
 PYTEST_NJOB = 10
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_44)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_46)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -11906,13 +11911,24 @@ install-python: all
 
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@-include $(patsubst %.cc, %.Pcc, $(INCLUDE_SWIG_SRC))
 # Backdoor rule to do a quick install when we are just varying python
-install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
+install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS install-pynitf
+
+# Note the --single-version-externally-managed is because we don't yet have
+# the PYTHONPATH set, and an install complains. This is actually ok, because
+# we really do just have a single version externally managed here
+@INSTALL_PYNITF_TRUE@install-pynitf:
+@INSTALL_PYNITF_TRUE@	cd $(srcdir)/@srcpython@/pynitf && \
+@INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build install --prefix=$(prefix) --single-version-externally-managed --root="/" 
+
+@INSTALL_PYNITF_TRUE@uninstall-pynitf:
+@INSTALL_PYNITF_TRUE@	cd $(srcdir)/@srcpython@/pynitf && \
+@INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py uninstall --prefix=$(prefix) --single-version-externally-managed --root="/"
 
 python_check:
 	export PATH=$(PYTHON_CHECK_PATH) && \
         export PYTHONPATH=$(abs_srcdir)/$(srcpython):${PYTHONPATH} && \
         $(setup_geocal) && \
-        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
+        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@ $(EXTRA_PYTHON_TEST)
 
 # We don't actually replace the shebang, this was done for a short time
 # when we were porting to python 3. But go ahead and leave this in commented

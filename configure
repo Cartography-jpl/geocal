@@ -635,6 +635,8 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+INSTALL_PYNITF_FALSE
+INSTALL_PYNITF_TRUE
 BUILD_AFIDS_FALSE
 BUILD_AFIDS_TRUE
 WITH_DOCUMENTATION_FALSE
@@ -1035,6 +1037,7 @@ with_python
 with_swig
 with_boost_serialization
 with_documentation
+enable_pynitf
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1719,6 +1722,7 @@ Optional Features:
   --disable-libtool-lock  avoid locking (might break parallel builds)
   --enable-code-coverage  Whether to enable code coverage support
   --enable-debug          Enable compiler debugging flags
+  --disable-pynitf        Do not install pynitf
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -24650,6 +24654,39 @@ else
 fi
 
 
+#=================================================================
+# We normally include pynitf installation (at least for the time being,
+# see python/README_pynitf.md for discussion of this). But for testing
+# it is useful to have the option to disable this. That we in the long
+# term when pynitf is just handled like any other dependency, we know the
+# code will still work.
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to disable installing pynitf" >&5
+$as_echo_n "checking whether to disable installing pynitf... " >&6; }
+# Check whether --enable-pynitf was given.
+if test "${enable_pynitf+set}" = set; then :
+  enableval=$enable_pynitf; if test "$enableval" = no; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+  install_pynitf="no"
+fi
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+ install_pynitf="yes"
+
+
+fi
+
+ if test "$install_pynitf" = "yes"; then
+  INSTALL_PYNITF_TRUE=
+  INSTALL_PYNITF_FALSE='#'
+else
+  INSTALL_PYNITF_TRUE='#'
+  INSTALL_PYNITF_FALSE=
+fi
+
+
 ac_config_files="$ac_config_files Makefile"
 
 cat >confcache <<\_ACEOF
@@ -25067,6 +25104,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_AFIDS_TRUE}" && test -z "${BUILD_AFIDS_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_AFIDS\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${INSTALL_PYNITF_TRUE}" && test -z "${INSTALL_PYNITF_FALSE}"; then
+  as_fn_error $? "conditional \"INSTALL_PYNITF\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 
@@ -27560,4 +27601,7 @@ echo "  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}"
 
 
 echo "  Have VICAR Run Time Library:   ${have_vicar_rtl}"
+
+
+echo "  Install pynitf:                ${install_pynitf}"
 

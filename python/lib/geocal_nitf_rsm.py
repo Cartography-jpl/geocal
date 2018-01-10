@@ -1,3 +1,4 @@
+from __future__ import print_function
 from geocal_swig import Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial, RsmGrid, RsmRpPlusGrid
 try:
     from pynitf import create_nitf_tre_structure, NitfSegmentHook, NitfFile, TreRSMIDA, \

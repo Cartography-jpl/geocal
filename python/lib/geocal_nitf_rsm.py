@@ -39,8 +39,12 @@ the raw fields.'''
                           tre_implementation_class=RsmGrid)
     TreRSMGGA_geocal.row_section_number = TreRSMGGA.row_section_number
     TreRSMGGA_geocal.col_section_number = TreRSMGGA.col_section_number
-
-    hlp_rsmpca = TreRSMPCA.__doc__ + \
+    
+    # This doesn't work in python 2.7, we can't write to the
+    # doc. Rather than try to do something clever, just punt and
+    # skip adding help for python 2.7. This works find with python 3
+    try:
+        hlp_rsmpca = TreRSMPCA.__doc__ + \
 '''
 This TRE is mostly implemented by the RsmRationalPolynomial available as
 rsm_rational_polynomial. This should be used to set the TRE values, and to
@@ -48,7 +52,11 @@ use the TRE values. This is handled mostly transparently, except that if you
 update rsm_rational_polynomial the raw fields in the TRE might not be
 updated. Call update_raw_field() if you have modified rsm_rational_polynomial 
 and wish to access the raw fields.
-'''             
+'''     
+    except AttributeError:
+        hlp_rsmpca = None
+        pass
+
 
     TreRSMPCA_geocal = create_nitf_tre_structure("TreRSMPCA",
                           TreRSMPCA._description,hlp=hlp_rsmpca,
@@ -57,7 +65,8 @@ and wish to access the raw fields.
     TreRSMPCA_geocal.row_section_number = TreRSMPCA.row_section_number
     TreRSMPCA_geocal.col_section_number = TreRSMPCA.col_section_number
 
-    hlp_rsmgia = TreRSMGIA.__doc__ + \
+    try:
+        hlp_rsmgia = TreRSMGIA.__doc__ + \
 '''
 This TRE is mostly implemented by the RsmMultiSection available as
 rsm_multi_section. This should be used to set the TRE values, and to
@@ -66,14 +75,16 @@ update rsm_multi_section the raw fields in the TRE might not be
 updated. Call update_raw_field() if you have modified rsm_multi_section
 and wish to access the raw fields.
 '''             
+    except AttributeError:
+        hlp_rsmgia = None
+        pass
 
     TreRSMGIA_geocal = create_nitf_tre_structure("TreRSMGIA",
                           TreRSMGIA._description,hlp=hlp_rsmgia,
                           tre_implementation_field="rsm_multi_section",
                           tre_implementation_class=RsmMultiSection)
-
-
-    hlp_rsmpia = TreRSMPIA.__doc__ + \
+    try:
+        hlp_rsmpia = TreRSMPIA.__doc__ + \
 '''
 This TRE is mostly implemented by the RsmMultiSection available as
 rsm_multi_section. This should be used to set the TRE values, and to
@@ -82,13 +93,17 @@ update rsm_multi_section the raw fields in the TRE might not be
 updated. Call update_raw_field() if you have modified rsm_multi_section
 and wish to access the raw fields.
 '''             
+    except AttributeError:
+        hlp_rsmpia = None
+        pass
 
     TreRSMPIA_geocal = create_nitf_tre_structure("TreRSMPIA",
                           TreRSMPIA._description,hlp=hlp_rsmpia,
                           tre_implementation_field="rsm_multi_section",
                           tre_implementation_class=RsmMultiSection)
-
-    hlp_rsmida = TreRSMIDA.__doc__ + \
+    
+    try:
+        hlp_rsmida = TreRSMIDA.__doc__ + \
 '''
 This TRE is mostly implemented by the RsmId available as
 rsm_id. This should be used to set the TRE values, and to
@@ -97,6 +112,9 @@ update rsm_id the raw fields in the TRE might not be
 updated. Call update_raw_field() if you have modified rsm_id
 and wish to access the raw fields.
 '''             
+    except AttributeError:
+        hlp_rsmida = None
+        pass
 
     TreRSMIDA_geocal = create_nitf_tre_structure("TreRSMIDA",
                           TreRSMIDA._description,hlp=hlp_rsmida,

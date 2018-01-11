@@ -2,6 +2,7 @@ from geocal import *
 import subprocess
 from test_support import *
 
+@require_pynitf
 @require_vicar_gdalplugin
 def test_gdal_to_nitf(isolated_dir):
     '''Create a simple NITF from gdal_to_nitf, and check that everything is
@@ -45,6 +46,7 @@ def test_gdal_to_nitf(isolated_dir):
     # way to test this, so just make sure IGEOLO is the same
     assert f1["NITF_IGEOLO"] == "364644N1160720W364645N1160642W364611N1160641W364609N1160720W"
 
+@require_pynitf
 @require_vicar_gdalplugin    
 def test_gdal_to_nitf_a(isolated_dir):
     '''Create a simple NITF from gdal_to_nitf, and check that everything is
@@ -95,6 +97,7 @@ def test_gdal_to_nitf_a(isolated_dir):
     # way to test this, so just make sure IGEOLO is the same
     assert f1["NITF_IGEOLO"] == "364644N1160720W364645N1160642W364611N1160641W364609N1160720W"
 
+@require_pynitf
 @require_vicar_gdalplugin    
 def test_gda1_to_nitf_no_rpc(isolated_dir):
     '''Create a simple NITF from gda1_to_nitf, and check that everything is

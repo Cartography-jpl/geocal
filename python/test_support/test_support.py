@@ -10,7 +10,7 @@ import sys
 import subprocess
 import pytest
 try:
-    import pynitf
+    from pynitf import NitfFile
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code

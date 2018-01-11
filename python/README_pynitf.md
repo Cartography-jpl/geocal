@@ -1,6 +1,5 @@
-========================================
 PYNITF
-========================================
+======
 
 pynitf is a python module that we have developed at JPL. This was code that
 was originally part of geocal, but has been spun off as its own independent
@@ -16,9 +15,8 @@ However, in the short term the library is still under active development. To
 keep things in sync, we will maintain a copy of this code here in geocal,
 and install it as part of the geocal install.
 
-========================================
 GIT Subtree
-========================================
+============
 
 We us git subtree for managing the connection.
 

@@ -24,7 +24,8 @@ except ImportError:
 # Override various TREs to use the geocal objects instead
 # ---------------------------------------------------------
 if(have_pynitf):
-    hlp_rsmgga = TreRSMGGA.__doc__ + \
+    if(TreRSMGGA.__doc__ is not None):
+        hlp_rsmgga = TreRSMGGA.__doc__ + \
 ''' 
 This TRE is mostly implemented by the RsmGrid available as
 rsm_grid. This should be used to set the TRE values, and to use the
@@ -32,6 +33,8 @@ TRE values. This is handled mostly transparently, except that if you
 update rsm_grid the raw fields in the TRE might not be updated. Call
 update_raw_field() if you have modified rsm_grid and wish to access
 the raw fields.'''
+    else:
+        hlp_rsmgga = None
 
     TreRSMGGA_geocal = create_nitf_tre_structure("TreRSMGGA",
                           TreRSMGGA._description,hlp=hlp_rsmgga,

@@ -6,6 +6,8 @@ import pickle
 
 test_data = "/raid3/test_data/AirMSPI_ER2_Hanford_GRP_ELLIPSOID_20130118_174900Z_286F_F01_V001.hdf"
 
+
+@require_raid
 @require_hdf5
 def test_air_mspi_igc():
     # We can  only do this if data is available. If it isn't, just skip

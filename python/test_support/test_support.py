@@ -111,6 +111,16 @@ require_rsync = pytest.mark.skipif(not cmd_exists("rsync"),
 require_python3 = pytest.mark.skipif(not sys.version_info > (3,),
        reason = "require python 3 to run")                                     
 
+# Have tests that require /raid be available. We generally skip these if not
+# available, tests are nice to make sure things don't break but not essential.
+# Things that really matter have small test data sets put into unit_test_data,
+# but we do want the option of running larger tests when available
+#require_raid = pytest.mark.skipif(not os.path.exists("/raid1"),
+#                                  reason = "require /raid* test data to run")
+# Temporary, /raid is down.
+require_raid = pytest.mark.skipif(True,
+                                  reason = "require /raid* test data to run")
+
 @pytest.yield_fixture(scope="function")
 def isolated_dir(tmpdir):
     '''This is a fixture that creates a temporary directory, and uses this

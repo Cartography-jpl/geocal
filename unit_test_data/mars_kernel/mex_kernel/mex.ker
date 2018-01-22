@@ -1,0 +1,12 @@
+This is the set of kernels we always include for HRSC. In addition, you should
+load the ck and spk kernel for the time period you are working with.
+
+Right now only have ctx stuff, we may extend this in the future.
+
+Assume we already have the geocal.ker, so we only have the additional
+kernels needed.
+
+\begindata
+KERNELS_TO_LOAD = (
+  'ik/MEX_HRSC_V05.TI'
+)

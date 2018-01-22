@@ -42,7 +42,7 @@ namespace GeoCal {
 
   The focal plane coordinates are on the actual CCD (so offset from an
   origin in mm). The conversion to DcsLookVector capture any
-  non-linearity, if gives the look vector in the detector coordinate
+  non-linearity, it gives the look vector in the detector coordinate
   system for the given location on the focal plane. The conversion to
   ScLookVector captures the angle orientation of the camera relative
   to the space craft.

@@ -118,5 +118,11 @@ EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp6_ssd_mro110
 EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp7_ssd_mro110c.lbl
 EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp8_ssd_mro110c.lbl
 EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp9_ssd_mro110c.lbl
+EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mex_kernel/mex.ker
+EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mex_kernel/ik/MEX_HRSC_V05.TI
+EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/mro.ker
+EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/ik/mro_ctx_v11.ti
+
+
 
 

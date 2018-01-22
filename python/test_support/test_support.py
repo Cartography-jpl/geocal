@@ -57,6 +57,11 @@ def check_vicarb():
 require_serialize = pytest.mark.skipif(not have_serialize_supported(),
     reason="need a geocal build with boost serialization support to run")
 
+# Marker that skips a test if we have a build without spice
+# support
+require_spice = pytest.mark.skipif(not SpiceHelper.have_spice(),
+    reason="need a geocal build with spice support to run")
+
 # Marker that tests if we have HdfFile available.
 require_hdf5 = pytest.mark.skipif(not hasattr(geocal_swig, "HdfFile"),
     reason="need a geocal build with HDF 5 support to run")
@@ -277,6 +282,13 @@ def rsm_ms_g(rsm_ms_grid):
     res = Rsm(rsm_ms_grid, GeodeticRadianConverter())
     res.fill_in_ground_domain_vertex(500, 1500)
     return res
+
+@pytest.fixture(scope="module")
+def mars_kernel():
+    SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker")
+    SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")
+    
+                     
 
 
     

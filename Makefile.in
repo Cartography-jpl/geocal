@@ -2349,6 +2349,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp7_ssd_mro110c.lbl \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp8_ssd_mro110c.lbl \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp9_ssd_mro110c.lbl \
+	@geocalunittestdata@/mars_kernel/mex_kernel/mex.ker \
+	@geocalunittestdata@/mars_kernel/mex_kernel/ik/MEX_HRSC_V05.TI \
+	@geocalunittestdata@/mars_kernel/mro_kernel/mro.ker \
+	@geocalunittestdata@/mars_kernel/mro_kernel/ik/mro_ctx_v11.ti \
 	@srcpython@/pynitf @srcpython@/setup.cfg \
 	@srcpython@/conftest.py @srcpython@/README_test \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
@@ -2408,7 +2412,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/world_view2_reflectance_test.py \
 	@srcpythonlib@/pds_label_test.py \
 	@srcpythonlib@/compare_burl_matlab_test.py \
-	@srcpythonlib@/geocal_nitf_rsm_test.py @docpythonsrc@ \
+	@srcpythonlib@/geocal_nitf_rsm_test.py \
+	@srcpythonlib@/spice_camera_test.py @docpythonsrc@ \
 	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
 	@testsupportsrc@/test_support.py \
@@ -3390,7 +3395,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/parallel_process.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
-	@srcpythonlib@/air_mspi_igc.py @srcpythonlib@/pds_label.py
+	@srcpythonlib@/air_mspi_igc.py @srcpythonlib@/pds_label.py \
+	@srcpythonlib@/spice_camera.py
 @INSTALL_PYNITF_FALSE@EXTRA_PYTHON_TEST = 
 @INSTALL_PYNITF_TRUE@EXTRA_PYTHON_TEST = $(srcdir)/@srcpython@/pynitf
 
@@ -3402,7 +3408,7 @@ am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYT
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :
-@HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
+@HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice && export MARS_KERNEL=$(abs_top_srcdir)/@geocalunittestdata@/mars_kernel
 @BUILD_AFIDS_FALSE@setup_geocal = $(setup_afids_data) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
 @BUILD_AFIDS_TRUE@setup_geocal = source $(DESTDIR)$(prefix)/setup_afids_env.sh
 # Number of jobs to run at once. Default is to automatically determine this,

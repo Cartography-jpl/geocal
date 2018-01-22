@@ -139,15 +139,6 @@ def igc_for_context(lbl, fname):
     img = GdalRasterImage(fname)
     if(lbl["SAMPLE_BIT_MODE_ID"] == "SQROOT"):
         img = ContextSqrtDecodeImage(img)
-    focal_length = 352.9271664
-    pitch = 7e-3
-    left_masked = 38
-    right_masked = 18
-    # Ignore nonlinearities for now, they are pretty small
-    ctx_cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, img.number_sample,
-                               pitch, pitch, focal_length, 
-                               FrameCoordinate(0.430442527 - 0.5,
-                                               2543.46099 - 0.5 +left_masked))
     # The START_TIME is the commanded start time, the actual start time
     # might be different. According to the CTX SIS (available at
     # https://pdsimage2.wr.usgs.gov/archive/mro-m-ctx-2-edr-l0-v1.0/mrox_0452/document/
@@ -162,7 +153,7 @@ def igc_for_context(lbl, fname):
                                   tspace)
     dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
     orb_cache = OrbitListCache(orb, tt)
-    ipi = Ipi(orb_cache, ctx_cam, 0, tt.min_time, tt.max_time, tt)
+    ipi = Ipi(orb_cache, ctx_camera(), 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
     # Chop off masked pixels for map projecting
     igc_sub = OffsetImageGroundConnection(igc, 0, 38, igc.number_line, 5000)
@@ -220,30 +211,6 @@ def igc_for_hrsc(lbl, fname):
     orb = SpicePlanetOrbit("MEX", "MEX_HRSC_HEAD", klist,
                            PlanetConstant.MARS_NAIF_CODE)
     img = GdalRasterImage(fname)
-    # Pitch is INS-41215_PIXEL_SIZE, focal length is INS-41215_FOCAL_LENGTH
-    # focal length is in mm and pitch is in microns, so we have 1e-3 to put
-    # in the same units
-    focal_length = 175
-    pitch = 7e-3
-
-    # Can also get by (which is same value)
-    # ifov_rad_pixel = 0.000040
-    # pitch = focal_length * ifov_rad_pixel
-
-    # Ignore nonlinearities for now. Spice kernel doesn't list any.
-    # We have the boresight from
-    # the spice kernel (INS-41215_BORESIGHT). This is in ccd mm units,
-    # so we translate to pixels.
-    # Note that we would subtract here, except that we have
-    # "INCREASE_IS_NEGATIVE", so this flips the sign
-    hrsc_cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1,
-                                img.number_sample,
-                                pitch, pitch, focal_length, 
-                                FrameCoordinate(0 + (-0.007000 / pitch),
-                                                5176/2 + 0.0295 / pitch),
-                                QuaternionCamera.LINE_IS_Y,
-                                QuaternionCamera.INCREASE_IS_NEGATIVE,
-                                QuaternionCamera.INCREASE_IS_NEGATIVE)
     # The PDS image has a byte label in the front of each line. GDAL
     # doesn't read this (it just skips it), but we can read it directly.
     # The byte label is described in HRSC_LABEL_HEADER.PDF
@@ -262,7 +229,7 @@ def igc_for_hrsc(lbl, fname):
     tt = MeasuredTimeTable(tlist)
     dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
     orb_cache = OrbitListCache(orb, tt)
-    ipi = Ipi(orb_cache, hrsc_cam, 0, tt.min_time, tt.max_time, tt)
+    ipi = Ipi(orb_cache, hrsc_camera(), 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
     return igc
 

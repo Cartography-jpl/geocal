@@ -929,3 +929,91 @@ SpiceHelper::boresight_and_footprint
   throw SpiceNotAvailableException();
 #endif
 }
+
+//-----------------------------------------------------------------------
+/// Return a specific kernel value. This returns a single double value.
+//-----------------------------------------------------------------------
+
+double SpiceHelper::kernel_data_double(const std::string& Dname)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  int n;
+  double v;
+  SpiceBoolean found;
+  gdpool_c(Dname.c_str(), 0, 1, &n, &v, &found);
+  SpiceHelper::spice_error_check();
+  if(!found) {
+    Exception e;
+    e << "Did not find spice kernel data " << Dname;
+    throw e;
+  }
+  return v;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Return a specific kernel value. This returns a single integer value.
+//-----------------------------------------------------------------------
+
+int SpiceHelper::kernel_data_int(const std::string& Dname)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  int n;
+  int v;
+  SpiceBoolean found;
+  gipool_c(Dname.c_str(), 0, 1, &n, &v, &found);
+  SpiceHelper::spice_error_check();
+  if(!found) {
+    Exception e;
+    e << "Did not find spice kernel data " << Dname;
+    throw e;
+  }
+  return v;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Return a specific kernel value. This returns a array value.
+//-----------------------------------------------------------------------
+
+blitz::Array<double,1> SpiceHelper::kernel_data_array_double(const std::string& Dname)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  int n;
+  double v[1000];
+  SpiceBoolean found;
+  gdpool_c(Dname.c_str(), 0, 1000, &n, v, &found);
+  SpiceHelper::spice_error_check();
+  if(!found) {
+    Exception e;
+    e << "Did not find spice kernel data " << Dname;
+    throw e;
+  }
+  blitz::Array<double, 1> res(n);
+  for(int i = 0; i < n; ++i)
+    res(i) = v[i];
+  return res;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Return true if we have spice available, false otherwise.
+//-----------------------------------------------------------------------
+
+bool SpiceHelper::have_spice()
+{
+#ifdef HAVE_SPICE
+  return true;
+#else
+  return false;
+#endif
+}

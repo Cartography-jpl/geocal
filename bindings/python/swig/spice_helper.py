@@ -205,6 +205,16 @@ class SpiceHelper(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
+    def have_spice():
+        """
+
+        bool SpiceHelper::have_spice()
+        Return true if we have spice available, false otherwise. 
+        """
+        return _spice_helper.SpiceHelper_have_spice()
+
+    have_spice = staticmethod(have_spice)
+
     def name_to_body(Name):
         """
 
@@ -224,6 +234,37 @@ class SpiceHelper(object):
         return _spice_helper.SpiceHelper_body_name(Body_id)
 
     body_name = staticmethod(body_name)
+
+    def kernel_data_int(Dname):
+        """
+
+        int SpiceHelper::kernel_data_int(const std::string &Dname)
+        Return a specific kernel value. This returns a single integer value.
+
+        """
+        return _spice_helper.SpiceHelper_kernel_data_int(Dname)
+
+    kernel_data_int = staticmethod(kernel_data_int)
+
+    def kernel_data_double(Dname):
+        """
+
+        double SpiceHelper::kernel_data_double(const std::string &Dname)
+        Return a specific kernel value. This returns a single double value. 
+        """
+        return _spice_helper.SpiceHelper_kernel_data_double(Dname)
+
+    kernel_data_double = staticmethod(kernel_data_double)
+
+    def kernel_data_array_double(Dname):
+        """
+
+        blitz::Array< double, 1 > SpiceHelper::kernel_data_array_double(const std::string &Dname)
+        Return a specific kernel value. This returns a array value. 
+        """
+        return _spice_helper.SpiceHelper_kernel_data_array_double(Dname)
+
+    kernel_data_array_double = staticmethod(kernel_data_array_double)
 
     def latsrf(Body_id, Tm, Lat_deg, Lon_deg):
         """
@@ -397,6 +438,14 @@ class SpiceHelper(object):
 SpiceHelper_swigregister = _spice_helper.SpiceHelper_swigregister
 SpiceHelper_swigregister(SpiceHelper)
 
+def SpiceHelper_have_spice():
+    """
+
+    bool SpiceHelper::have_spice()
+    Return true if we have spice available, false otherwise. 
+    """
+    return _spice_helper.SpiceHelper_have_spice()
+
 def SpiceHelper_name_to_body(Name):
     """
 
@@ -412,6 +461,31 @@ def SpiceHelper_body_name(Body_id):
     Return the body name for the given id. 
     """
     return _spice_helper.SpiceHelper_body_name(Body_id)
+
+def SpiceHelper_kernel_data_int(Dname):
+    """
+
+    int SpiceHelper::kernel_data_int(const std::string &Dname)
+    Return a specific kernel value. This returns a single integer value.
+
+    """
+    return _spice_helper.SpiceHelper_kernel_data_int(Dname)
+
+def SpiceHelper_kernel_data_double(Dname):
+    """
+
+    double SpiceHelper::kernel_data_double(const std::string &Dname)
+    Return a specific kernel value. This returns a single double value. 
+    """
+    return _spice_helper.SpiceHelper_kernel_data_double(Dname)
+
+def SpiceHelper_kernel_data_array_double(Dname):
+    """
+
+    blitz::Array< double, 1 > SpiceHelper::kernel_data_array_double(const std::string &Dname)
+    Return a specific kernel value. This returns a array value. 
+    """
+    return _spice_helper.SpiceHelper_kernel_data_array_double(Dname)
 
 def SpiceHelper_latsrf(Body_id, Tm, Lat_deg, Lon_deg):
     """

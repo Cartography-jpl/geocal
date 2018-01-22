@@ -57,7 +57,7 @@ else
 setup_afids_data = :
 endif
 if HAVE_SPICE
-setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice
+setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice && export MARS_KERNEL=$(abs_top_srcdir)/@geocalunittestdata@/mars_kernel
 else
 setup_spice = :
 endif

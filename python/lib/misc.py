@@ -5,6 +5,7 @@ from past.utils import old_div
 import os
 import errno
 import sys
+import re
 from geocal_swig import *
 import pickle
 
@@ -81,3 +82,24 @@ def pid_exists(pid):
             raise
     else:
         return True
+
+def comment_remover(text):
+    '''This removes C and C++ style comments (/* */ and //, C can be multiline)
+    This is from https://gist.github.com/ChunMinChang/88bfa5842396c1fbbc5b.
+    Fairly complicated regex, believe this originally came from 
+    Jeffrey Friedl and later modified by Fred Curtis, from a perl FAQ.
+    Extended this to also strip out python style comments starting with
+    "#" (pretty much the same as // C++ style)
+    '''
+    def replacer(match):
+        s = match.group(0)
+        if s.startswith('/') or s.startswith('#'):
+            return " " # note: a space and not an empty string
+        else:
+            return s
+    pattern = re.compile(
+        r'//.*?$|#.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
+        re.DOTALL | re.MULTILINE
+    )
+    return re.sub(pattern, replacer, text)
+    

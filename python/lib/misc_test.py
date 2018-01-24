@@ -1,5 +1,6 @@
 from geocal.misc import *
 from test_support import *
+import json
 
 def test_makedirs_p(isolated_dir):
     '''Test makedirs_p by creating a directory and checking that it actually
@@ -44,3 +45,22 @@ def test_cib01_mapinfo():
 def test_planet_mapinfo():
     mi = planet_mapinfo(PlanetConstant.MARS_NAIF_CODE, 35.0)
     assert_almost_equal(mi.resolution_meter, 35.0, 3)
+
+def test_comment_remover():
+    '''Test parsing json with C and C++ style comments.'''
+    txt = '''
+{
+    /* Here is a multiple line
+       comment */
+    "bar": 20,  // Single line comment
+    "foo": 10,  # Python style comment
+    "car" : "blah // foo",
+    "dar" : "/*blah blah*/"
+}
+'''
+    p = json.loads(comment_remover(txt))
+    assert p['bar'] == 20
+    assert p['car'] == "blah // foo"
+    assert p['dar'] == "/*blah blah*/"
+    assert p['foo'] == 10
+    

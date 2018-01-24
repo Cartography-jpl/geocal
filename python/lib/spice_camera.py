@@ -68,8 +68,9 @@ def ctx_camera():
         SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_LINE") - 0.5,
         SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_SAMPLE") - 0.5 +
                                       left_masked)
-    ctx_cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, nsamp,
-                               pitch, pitch, focal_length,
-                               principal_point)
+    od_k = SpiceHelper.kernel_data_array_double("INS-74021_OD_K");
+    ctx_cam = CameraRadialDistortion(Quaternion_double(1,0,0,0), od_k,
+                                     1, nsamp, pitch, pitch, focal_length,
+                                     principal_point)
     return ctx_cam
 

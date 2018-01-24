@@ -433,6 +433,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/ipi_image_ground_connection_wrap.cc \
 	@swigsrc@/eci_tod_wrap.cc @swigsrc@/quaternion_camera_wrap.cc \
 	@swigsrc@/camera_rational_polynomial_wrap.cc \
+	@swigsrc@/camera_radial_distortion_wrap.cc \
 	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
@@ -610,6 +611,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-eci_tod_wrap.lo \
 	@swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo \
+	@swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-refraction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo \
@@ -805,6 +807,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/eci_tod_burl.cc \
 	@srcimplementation@/quaternion_camera.cc \
 	@srcimplementation@/camera_rational_polynomial.cc \
+	@srcimplementation@/camera_radial_distortion.cc \
 	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
@@ -992,6 +995,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	$(am__objects_18) \
 	@srcimplementation@/libgeocal_la-quaternion_camera.lo \
 	@srcimplementation@/libgeocal_la-camera_rational_polynomial.lo \
+	@srcimplementation@/libgeocal_la-camera_radial_distortion.lo \
 	@srcimplementation@/libgeocal_la-galileo_camera.lo \
 	@srcimplementation@/libgeocal_la-refraction.lo \
 	@srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo \
@@ -1164,6 +1168,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/eci_tod_burl_test.cc \
 	@srcimplementation@/quaternion_camera_test.cc \
 	@srcimplementation@/camera_rational_polynomial_test.cc \
+	@srcimplementation@/camera_radial_distortion_test.cc \
 	@srcimplementation@/galileo_camera_test.cc \
 	@srcimplementation@/refraction_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
@@ -1320,6 +1325,7 @@ am_geocal_test_all_OBJECTS =  \
 	$(am__objects_27) \
 	@srcimplementation@/geocal_test_all-quaternion_camera_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-camera_radial_distortion_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-refraction_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.$(OBJEXT) \
@@ -1591,6 +1597,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/eci_tod_burl.h \
 	@srcimplementation@/quaternion_camera.h \
 	@srcimplementation@/camera_rational_polynomial.h \
+	@srcimplementation@/camera_radial_distortion.h \
 	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
@@ -2541,6 +2548,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/planet_coordinate.cc $(am__append_22) \
 	@srcimplementation@/quaternion_camera.cc \
 	@srcimplementation@/camera_rational_polynomial.cc \
+	@srcimplementation@/camera_radial_distortion.cc \
 	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
@@ -2695,6 +2703,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/ipi_image_ground_connection_wrap.cc \
 	@swigsrc@/eci_tod_wrap.cc @swigsrc@/quaternion_camera_wrap.cc \
 	@swigsrc@/camera_rational_polynomial_wrap.cc \
+	@swigsrc@/camera_radial_distortion_wrap.cc \
 	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
@@ -2899,6 +2908,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/planet_coordinate.h $(am__append_21) \
 	@srcimplementation@/quaternion_camera.h \
 	@srcimplementation@/camera_rational_polynomial.h \
+	@srcimplementation@/camera_radial_distortion.h \
 	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
@@ -3066,6 +3076,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/eci_tod_burl.i \
 	@srcimplementation@/quaternion_camera.i \
 	@srcimplementation@/camera_rational_polynomial.i \
+	@srcimplementation@/camera_radial_distortion.i \
 	@srcimplementation@/galileo_camera.i \
 	@srcimplementation@/refraction.i \
 	@srcimplementation@/orbit_data_image_ground_connection.i \
@@ -3193,6 +3204,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/planet_coordinate_test.cc $(am__append_31) \
 	@srcimplementation@/quaternion_camera_test.cc \
 	@srcimplementation@/camera_rational_polynomial_test.cc \
+	@srcimplementation@/camera_radial_distortion_test.cc \
 	@srcimplementation@/galileo_camera_test.cc \
 	@srcimplementation@/refraction_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
@@ -3788,6 +3800,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-refraction_wrap.lo: @swigsrc@/$(am__dirstamp) \
@@ -4270,6 +4284,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-camera_rational_polynomial.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-camera_radial_distortion.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-galileo_camera.lo:  \
@@ -4919,6 +4936,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-camera_rational_polynomial_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-camera_radial_distortion_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -5281,6 +5301,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-worldview2_cloudmask.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcgeocalbin@/$(DEPDIR)/picmtch5-picmtch5.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-aircraft_orbit_data_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-context_sqrt_decode_image_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po@am__quote@
@@ -5355,6 +5376,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-context_sqrt_decode_image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo@am__quote@
@@ -5598,6 +5620,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-cart_lab_multifile_wrap.Plo@am__quote@
@@ -6537,6 +6560,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/camera_rational_polynomial_wrap.cc' object='@swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo `test -f '@swigsrc@/camera_rational_polynomial_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_rational_polynomial_wrap.cc
+
+@swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo: @swigsrc@/camera_radial_distortion_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo `test -f '@swigsrc@/camera_radial_distortion_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_radial_distortion_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/camera_radial_distortion_wrap.cc' object='@swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo `test -f '@swigsrc@/camera_radial_distortion_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_radial_distortion_wrap.cc
 
 @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo: @swigsrc@/galileo_camera_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-galileo_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo `test -f '@swigsrc@/galileo_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/galileo_camera_wrap.cc
@@ -7839,6 +7869,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_rational_polynomial.cc' object='@srcimplementation@/libgeocal_la-camera_rational_polynomial.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-camera_rational_polynomial.lo `test -f '@srcimplementation@/camera_rational_polynomial.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_rational_polynomial.cc
+
+@srcimplementation@/libgeocal_la-camera_radial_distortion.lo: @srcimplementation@/camera_radial_distortion.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-camera_radial_distortion.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion.Tpo -c -o @srcimplementation@/libgeocal_la-camera_radial_distortion.lo `test -f '@srcimplementation@/camera_radial_distortion.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_radial_distortion.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_radial_distortion.cc' object='@srcimplementation@/libgeocal_la-camera_radial_distortion.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-camera_radial_distortion.lo `test -f '@srcimplementation@/camera_radial_distortion.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_radial_distortion.cc
 
 @srcimplementation@/libgeocal_la-galileo_camera.lo: @srcimplementation@/galileo_camera.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-galileo_camera.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-galileo_camera.Tpo -c -o @srcimplementation@/libgeocal_la-galileo_camera.lo `test -f '@srcimplementation@/galileo_camera.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera.cc
@@ -9652,6 +9689,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_rational_polynomial_test.cc' object='@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-camera_rational_polynomial_test.obj `if test -f '@srcimplementation@/camera_rational_polynomial_test.cc'; then $(CYGPATH_W) '@srcimplementation@/camera_rational_polynomial_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/camera_rational_polynomial_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-camera_radial_distortion_test.o: @srcimplementation@/camera_radial_distortion_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-camera_radial_distortion_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Tpo -c -o @srcimplementation@/geocal_test_all-camera_radial_distortion_test.o `test -f '@srcimplementation@/camera_radial_distortion_test.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_radial_distortion_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_radial_distortion_test.cc' object='@srcimplementation@/geocal_test_all-camera_radial_distortion_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-camera_radial_distortion_test.o `test -f '@srcimplementation@/camera_radial_distortion_test.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_radial_distortion_test.cc
+
+@srcimplementation@/geocal_test_all-camera_radial_distortion_test.obj: @srcimplementation@/camera_radial_distortion_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-camera_radial_distortion_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Tpo -c -o @srcimplementation@/geocal_test_all-camera_radial_distortion_test.obj `if test -f '@srcimplementation@/camera_radial_distortion_test.cc'; then $(CYGPATH_W) '@srcimplementation@/camera_radial_distortion_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/camera_radial_distortion_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_radial_distortion_test.cc' object='@srcimplementation@/geocal_test_all-camera_radial_distortion_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-camera_radial_distortion_test.obj `if test -f '@srcimplementation@/camera_radial_distortion_test.cc'; then $(CYGPATH_W) '@srcimplementation@/camera_radial_distortion_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/camera_radial_distortion_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-galileo_camera_test.o: @srcimplementation@/galileo_camera_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-galileo_camera_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-galileo_camera_test.Tpo -c -o @srcimplementation@/geocal_test_all-galileo_camera_test.o `test -f '@srcimplementation@/galileo_camera_test.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera_test.cc

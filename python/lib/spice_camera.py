@@ -57,17 +57,9 @@ def ctx_camera():
     pitch = SpiceHelper.kernel_data_double("INS-74021_PIXEL_PITCH")
     nsamp = SpiceHelper.kernel_data_double("INS-74021_PIXEL_SAMPLES")
     
-    # We just need to "know" there are masked pixels. Note that this data
-    # appears in the Level 1 data, so we want the camera to include these
-    # pixels
-    left_masked = 38
-    right_masked = 18
-    nsamp += left_masked + right_masked
-    # Ignore nonlinearities for now, they are pretty small
     principal_point = FrameCoordinate(\
         SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_LINE") - 0.5,
-        SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_SAMPLE") - 0.5 +
-                                      left_masked)
+        SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_SAMPLE") - 0.5)
     od_k = SpiceHelper.kernel_data_array_double("INS-74021_OD_K");
     ctx_cam = CameraRadialDistortion(Quaternion_double(1,0,0,0), od_k,
                                      1, nsamp, pitch, pitch, focal_length,

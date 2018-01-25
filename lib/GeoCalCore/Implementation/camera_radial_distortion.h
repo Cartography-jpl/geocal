@@ -43,7 +43,8 @@ public:
   : QuaternionCamera(Frame_to_sc_q, Number_line, Number_sample, Line_pitch,
 		     Sample_pitch, Focal_length, Principal_point,
 		     Frame_convention, Line_direction, Sample_direction),
-    k_distort_(K_distort.copy())
+    k_distort_(K_distort.copy()),
+    max_r2_filled_in(false)
   {
     if(k_distort_.rows() > 3)
       throw Exception("Right now, only support k_distort.rows <= 3");
@@ -62,7 +63,8 @@ public:
 		     Sample_pitch, Focal_length, Principal_point,
 		     Frame_convention, Line_direction, Sample_direction,
 		     Parameter_mask),
-    k_distort_(K_distort.copy())
+    k_distort_(K_distort.copy()),
+    max_r2_filled_in(false)
   {
     if(k_distort_.rows() > 3)
       throw Exception("Right now, only support k_distort.rows <= 3");
@@ -88,7 +90,15 @@ public:
 
 private:
   blitz::Array<double, 1> k_distort_;
-  CameraRadialDistortion() {}
+  double dr_over_r_calc(double r2) const
+  { return k_distort_(0) + r2 * (k_distort_(1) + r2 * k_distort_(2)); }
+  double dr_over_r_calc_from_x_y(double x, double y) const;
+  mutable bool max_r2_filled_in;
+  mutable double max_rp2;
+  mutable double max_r2;
+  mutable double max_dr_over_r;
+  void fill_in_max() const;
+  CameraRadialDistortion() : max_r2_filled_in(false) {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

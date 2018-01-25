@@ -137,6 +137,10 @@ def igc_for_context(lbl, fname):
     orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
                            PlanetConstant.MARS_NAIF_CODE)
     img = GdalRasterImage(fname)
+    # We have masked pixels in the L1 data, which we want to chop out
+    left_masked = 38
+    right_masked = 18
+    img = SubRasterImage(img, 0, left_masked, img.number_line, 5000)
     if(lbl["SAMPLE_BIT_MODE_ID"] == "SQROOT"):
         img = ContextSqrtDecodeImage(img)
     # The START_TIME is the commanded start time, the actual start time
@@ -155,21 +159,15 @@ def igc_for_context(lbl, fname):
     orb_cache = OrbitListCache(orb, tt)
     ipi = Ipi(orb_cache, ctx_camera(), 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
-    # Chop off masked pixels for map projecting
-    igc_sub = OffsetImageGroundConnection(igc, 0, 38, igc.number_line, 5000)
-    gdal_arg = ["-srcwin", "38", "0", "5000", str(igc.number_line)]
-    return igc, igc_sub
+    return igc
 
 def rsm_for_context(lbl, fname, subset=None):
     '''This generates a RSM for a MRO Context image. We return the Rsm, 
     and the original igc. This strips off the masked pixels. Not sure if this
-    is what we ultimately want or not, but it is what we do here.
-
-    We also return any extra arguments for gdal_translate. Not sure if this is
-    the best interface of not, but do this for now.'''
-    igc, igc_sub = igc_for_context(lbl, fname)
+    is what we ultimately want or not, but it is what we do here.'''
+    igc = igc_for_context(lbl, fname)
     if(subset is not None):
-        igc_sub = OffsetImageGroundConnection(igc_sub, subset[0], subset[1],
+        igc = OffsetImageGroundConnection(igc, subset[0], subset[1],
                                               subset[2], subset[3])
     # In order for LocalRcParameter to be useful, the look, sample, and line
     # directions need to be mostly orthogonal. So dot product of unit vectors
@@ -179,20 +177,20 @@ def rsm_for_context(lbl, fname, subset=None):
 
     # Verify that we calculate nearly the same boresight at SPICE.
     if(False):
-        ic = ImageCoordinate(200, igc_sub.number_sample / 2)
+        ic = ImageCoordinate(200, igc.number_sample / 2)
         pts = SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
                                                   PlanetConstant.MARS_NAIF_CODE,
                                                   "MRO", "MRO_CTX")
         print("Distance spice boresight and IGC: ",
-              distance(pts[0], igc_sub.ground_coordinate(ic)))
-        print(igc_sub.image_coordinate(pts[0]))
+              distance(pts[0], igc.ground_coordinate(ic)))
+        print(igc.image_coordinate(pts[0]))
 
     r = Rsm(RsmRpPlusGrid(RsmRationalPolynomial(5,5,3,1,1,1,5,1,
                                                 40, 40, 20, 40),
                           RsmGrid(3, 1000, 50)),
-            LocalRcConverter(LocalRcParameter(igc_sub)))
-    r.fit(igc_sub, args.min_height, args.max_height)
-    return r, igc_sub
+            LocalRcConverter(LocalRcParameter(igc)))
+    r.fit(igc, args.min_height, args.max_height)
+    return r, igc
     
 def igc_for_hrsc(lbl, fname):
     '''Process for HRSC camera'''

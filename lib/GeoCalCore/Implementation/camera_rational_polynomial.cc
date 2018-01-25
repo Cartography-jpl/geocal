@@ -42,9 +42,20 @@ void CameraRationalPolyomial::dcs_to_focal_plane
 {
   Array<double, 1> x(2);
   QuaternionCamera::dcs_to_focal_plane(Band, Dcs, x(0), x(1));
-  Array<double, 1> x_tilde = apply_rational(x, kappa_);
-  Xfp = x_tilde(0);
-  Yfp = x_tilde(1);
+  // The rational polynomial tends to extrapolate badly. If we
+  // are a ways outside of the image, switch to a pinhole camera.
+  FrameCoordinate fc_approx = focal_plane_to_fc(Band, x(0), x(1));
+  const int border = 100;
+  if(fc_approx.line < -border || fc_approx.line > number_line(Band) + border ||
+     fc_approx.sample < -border ||
+     fc_approx.sample > number_sample(Band) + border) {
+    Xfp = x(0);
+    Yfp = x(1);
+  } else {
+    Array<double, 1> x_tilde = apply_rational(x, kappa_);
+    Xfp = x_tilde(0);
+    Yfp = x_tilde(1);
+  }
 }
 
 void CameraRationalPolyomial::dcs_to_focal_plane
@@ -57,6 +68,14 @@ void CameraRationalPolyomial::dcs_to_focal_plane
 boost::math::quaternion<double> CameraRationalPolyomial::focal_plane_to_dcs
 (int Band, double Xfp, double Yfp) const
 {
+  // The rational polynomial tends to extrapolate badly. If we
+  // are a ways outside of the image, switch to a pinhole camera.
+  FrameCoordinate fc_approx = focal_plane_to_fc(Band, Xfp, Yfp);
+  const int border = 100;
+  if(fc_approx.line < -border || fc_approx.line > number_line(Band) + border ||
+     fc_approx.sample < -border ||
+     fc_approx.sample > number_sample(Band) + border)
+    return QuaternionCamera::focal_plane_to_dcs(Band, Xfp, Yfp);
   Array<double, 1> x(2);
   x = Xfp, Yfp;
   Array<double, 1> x_tilde = apply_rational(x, kappa_inverse_);

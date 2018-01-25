@@ -42,15 +42,25 @@ void CameraRadialDistortion::dcs_to_focal_plane
 {
   double x, y;
   QuaternionCamera::dcs_to_focal_plane(Band, Dcs, x, y);
-  // std::cerr << "x: " << x << "\n"
-  // 	    << "y: " << y << "\n";
   double r2 = (x *x + y * y);
   double dr_over_r = k_distort_(0) + r2 * (k_distort_(1) + r2 * k_distort_(2));
-  //std::cerr << "dr_over_r: " << dr_over_r << "\n";
+  // The radial polynomial really extrapolates badly. If we are a ways
+  // outside of the image, switch to a pinhole camera.
+  FrameCoordinate fc_approx = focal_plane_to_fc(Band, x, y);
+  const int border = 100;
+  if(fc_approx.line < -border || fc_approx.line > number_line(Band) + border ||
+     fc_approx.sample < -border ||
+     fc_approx.sample > number_sample(Band) + border)
+    dr_over_r = 0;
   Xfp = x * (1-dr_over_r);
   Yfp = y * (1-dr_over_r);
-  // std::cerr << "Xfp: " << Xfp << "\n"
-  // 	    << "Yfp: " << Yfp << "\n";
+  if(false)
+    std::cerr << "dcs_to_focal_plane:\n"
+	      << "  x: " << x << "\n"
+	      << "  y: " << y << "\n"
+	      << "  dr_over_r: " << dr_over_r << "\n"
+	      << "  Xfp: " << Xfp << "\n"
+	      << "  Yfp: " << Yfp << "\n";
 }
 
 void CameraRadialDistortion::dcs_to_focal_plane
@@ -62,6 +72,14 @@ void CameraRadialDistortion::dcs_to_focal_plane
   AutoDerivative<double> r2 = (x *x + y * y);
   AutoDerivative<double> dr_over_r =
     k_distort_(0) + r2 * (k_distort_(1) + r2 * k_distort_(2));
+  // The radial polynomial really extrapolates badly. If we are a ways
+  // outside of the image, switch to a pinhole camera.
+  FrameCoordinate fc_approx = focal_plane_to_fc(Band, x.value(), y.value());
+  const int border = 100;
+  if(fc_approx.line < -border || fc_approx.line > number_line(Band) + border ||
+     fc_approx.sample < -border ||
+     fc_approx.sample > number_sample(Band) + border)
+    dr_over_r = 0;
   Xfp = x * (1-dr_over_r);
   Yfp = y * (1-dr_over_r);
 }
@@ -69,39 +87,56 @@ void CameraRadialDistortion::dcs_to_focal_plane
 boost::math::quaternion<double> CameraRadialDistortion::focal_plane_to_dcs
 (int Band, double Xfp, double Yfp) const
 {
-  // Pulled this code from ISIS CameraRadialDistortionMap. Not sure if
-  // we can come up with a closed form solution, or something better
-  // here. But this is good for now.
-  double rp2 = (Xfp * Xfp + Yfp * Yfp);
-  double rp = sqrt(rp2);
-  double dr_over_r = k_distort_(0) + rp2 * (k_distort_(1) +
-					    rp2 * k_distort_(2));
+  double dr_over_r = 0;
+  // The radial polynomial really extrapolates badly. If we are a ways
+  // outside of the image, switch to a pinhole camera.
+  FrameCoordinate fc_approx = focal_plane_to_fc(Band, Xfp, Yfp);
+  const int border = 100;
+  if(fc_approx.line < -border || fc_approx.line > number_line(Band) + border ||
+     fc_approx.sample < -border ||
+     fc_approx.sample > number_sample(Band) + border)
+    dr_over_r = 0;
+  else {
+    // Pulled this code from ISIS CameraRadialDistortionMap. Not sure if
+    // we can come up with a closed form solution, or something better
+    // here. But this is good for now.
+    double rp2 = (Xfp * Xfp + Yfp * Yfp);
+    double rp = sqrt(rp2);
+    dr_over_r = k_distort_(0) + rp2 * (k_distort_(1) + rp2 * k_distort_(2));
   
-  // Estimate r
-  double r = (1 + dr_over_r) * rp;
-  double r_prev;
-  double tol = std::min(line_pitch(), sample_pitch()) / 100.0;
-  int iteration = 0;
-  do {
-    // Don't get in an end-less loop.  This algorithm should
-    // converge quickly.  If not then we are probably way outside
-    // of the focal plane.  Just set the distorted position to the
-    // undistorted position. Also, make sure the focal plane is less
-    // than 1km, it is unreasonable for it to grow larger than that.
-    if (iteration >= 15 || r > 1E9) {
-      dr_over_r = 0.0;
-      break;
-    }
+    // Estimate r
+    double r = (1 + dr_over_r) * rp;
+    double r_prev;
+    double tol = std::min(line_pitch(), sample_pitch()) / 100.0;
+    int iteration = 0;
+    do {
+      // Don't get in an end-less loop.  This algorithm should
+      // converge quickly.  If not then we are probably way outside
+      // of the focal plane.  Just set the distorted position to the
+      // undistorted position. Also, make sure the focal plane is less
+      // than 1km, it is unreasonable for it to grow larger than that.
+      if (iteration >= 15 || r > 1E9) {
+	dr_over_r = 0.0;
+	break;
+      }
 
-    r_prev = r;
-    double r2 = r * r;
-    dr_over_r = k_distort_(0) + r2 * (k_distort_(1) + r2 * k_distort_(2));
+      r_prev = r;
+      double r2 = r * r;
+      dr_over_r = k_distort_(0) + r2 * (k_distort_(1) + r2 * k_distort_(2));
     
-    r = rp + (dr_over_r * r_prev);  // Compute new estimate of r
-    iteration++;
-  } while (fabs(r - r_prev) > tol);
+      r = rp + (dr_over_r * r_prev);  // Compute new estimate of r
+      iteration++;
+    } while (fabs(r - r_prev) > tol);
+  }
   double x = Xfp / (1 - dr_over_r);
   double y = Yfp / (1 - dr_over_r);
+  if(false)
+    std::cerr << "focal_plane_to_dcs:\n"
+	      << "  Xfp: " << Xfp << "\n"
+	      << "  Yfp: " << Yfp << "\n"
+	      << "  dr_over_r: " << dr_over_r << "\n"
+	      << "  x: " << x << "\n"
+	      << "  y: " << y << "\n";
   return QuaternionCamera::focal_plane_to_dcs(Band, x, y);
 }
 

@@ -2866,6 +2866,8 @@ ac_config_files="$ac_config_files script/setup_afids_python.csh script/setup_afi
 
 ac_config_files="$ac_config_files script/setup_geocal.csh script/setup_geocal.sh"
 
+ac_config_files="$ac_config_files script/setup_afids_env.csh script/setup_afids_env.sh script/vicarb"
+
 ac_config_files="$ac_config_files lib/GeoCalCore/Support/global_fixture_default.cc"
 
 ac_config_files="$ac_config_files geocal.pc"
@@ -22348,8 +22350,11 @@ $as_echo_n "checking for AFIDS programs... " >&6; }
 	    AFIDS_PREFIX="$ac_afids_path"
             succeeded=yes
         else
+	    # Check for taetm instead of vicarb because we may install our
+	    # own verion of vicarb, but want to still point to the other
+	    # afids
             for ac_afids_path_tmp in $prefix $THIRDPARTY /opt/afids ; do
-                  if test -e "$ac_afids_path_tmp/bin/vicarb" && test -r "$ac_afids_path_tmp/bin/vicarb"; then
+                  if test -e "$ac_afids_path_tmp/bin/taetm" && test -r "$ac_afids_path_tmp/bin/taetm"; then
                       AFIDS_PREFIX="$ac_afids_path_tmp"
                       succeeded=yes
                       break;
@@ -26087,6 +26092,9 @@ do
     "script/setup_afids_python.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.sh" ;;
     "script/setup_geocal.csh") CONFIG_FILES="$CONFIG_FILES script/setup_geocal.csh" ;;
     "script/setup_geocal.sh") CONFIG_FILES="$CONFIG_FILES script/setup_geocal.sh" ;;
+    "script/setup_afids_env.csh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_env.csh" ;;
+    "script/setup_afids_env.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_env.sh" ;;
+    "script/vicarb") CONFIG_FILES="$CONFIG_FILES script/vicarb" ;;
     "lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES lib/GeoCalCore/Support/global_fixture_default.cc" ;;
     "geocal.pc") CONFIG_FILES="$CONFIG_FILES geocal.pc" ;;
     "lib/GeoCalCore/Support/geocal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_config.h" ;;

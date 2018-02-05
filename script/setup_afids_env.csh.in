@@ -1,0 +1,10 @@
+# In some cases, we want to use an existing afids installation, but also replace
+# all afids scripts with newer ones from a separate geocal install. This is
+# common for example if we are testing out new version of geocal software
+# that hasn't yet been integrated into afids. This setup file does that.
+
+unset PYTHONPATH
+setenv AFIDSPYTHONTOP @prefix@
+source @AFIDS_PREFIX@/setup_afids_env.csh
+setenv TAE_PATH @prefix@/afids/vdev:${TAE_PATH}
+setenv PATH @prefix@/bin:@prefix@/afids/vdev:${PATH}

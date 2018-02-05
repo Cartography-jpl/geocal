@@ -305,7 +305,8 @@ CONFIG_HEADER =  \
 	$(top_builddir)/lib/GeoCalCore/Support/geocal_internal_config.h
 CONFIG_CLEAN_FILES = script/setup_afids_python.csh \
 	script/setup_afids_python.sh script/setup_geocal.csh \
-	script/setup_geocal.sh \
+	script/setup_geocal.sh script/setup_afids_env.csh \
+	script/setup_afids_env.sh script/vicarb \
 	lib/GeoCalCore/Support/global_fixture_default.cc geocal.pc
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
@@ -1898,14 +1899,16 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(top_srcdir)/lib/GeoCalCore/Support/geocal_config.h.in \
 	$(top_srcdir)/lib/GeoCalCore/Support/geocal_internal_config.h.in \
 	$(top_srcdir)/lib/GeoCalCore/Support/global_fixture_default.cc.in \
+	$(top_srcdir)/script/setup_afids_env.csh.in \
+	$(top_srcdir)/script/setup_afids_env.sh.in \
 	$(top_srcdir)/script/setup_afids_python.csh.in \
 	$(top_srcdir)/script/setup_afids_python.sh.in \
 	$(top_srcdir)/script/setup_geocal.csh.in \
-	$(top_srcdir)/script/setup_geocal.sh.in AUTHORS COPYING \
-	ChangeLog INSTALL NEWS README config/compile \
-	config/config.guess config/config.sub config/depcomp \
-	config/install-sh config/ltmain.sh config/missing \
-	config/py-compile
+	$(top_srcdir)/script/setup_geocal.sh.in \
+	$(top_srcdir)/script/vicarb.in AUTHORS COPYING ChangeLog \
+	INSTALL NEWS README config/compile config/config.guess \
+	config/config.sub config/depcomp config/install-sh \
+	config/ltmain.sh config/missing config/py-compile
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -3498,6 +3501,12 @@ script/setup_afids_python.sh: $(top_builddir)/config.status $(top_srcdir)/script
 script/setup_geocal.csh: $(top_builddir)/config.status $(top_srcdir)/script/setup_geocal.csh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 script/setup_geocal.sh: $(top_builddir)/config.status $(top_srcdir)/script/setup_geocal.sh.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+script/setup_afids_env.csh: $(top_builddir)/config.status $(top_srcdir)/script/setup_afids_env.csh.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+script/setup_afids_env.sh: $(top_builddir)/config.status $(top_srcdir)/script/setup_afids_env.sh.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+script/vicarb: $(top_builddir)/config.status $(top_srcdir)/script/vicarb.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 lib/GeoCalCore/Support/global_fixture_default.cc: $(top_builddir)/config.status $(top_srcdir)/lib/GeoCalCore/Support/global_fixture_default.cc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@

@@ -214,13 +214,13 @@ class TiePoint(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Number_image):
+    def __init__(self, *args):
         """
 
         TiePoint::TiePoint(const TiePoint &Tp)
         Copy constructor. We make a deep copy of everything. 
         """
-        _tie_point.TiePoint_swiginit(self, _tie_point.new_TiePoint(Number_image))
+        _tie_point.TiePoint_swiginit(self, _tie_point.new_TiePoint(*args))
 
     def _v_id(self, *args):
         """

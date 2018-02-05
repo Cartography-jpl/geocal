@@ -6482,16 +6482,14 @@ SWIGINTERN PyObject *SHARED_PTR_DISOWN_swigconstant(PyObject *SWIGUNUSEDPARM(sel
 }
 
 
-SWIGINTERN PyObject *_wrap_new_TiePoint(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_TiePoint__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int val1 ;
   int ecode1 = 0 ;
-  PyObject *swig_obj[1] ;
   GeoCal::TiePoint *result = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_TiePoint" "', argument " "1"" of type '" "int""'");
@@ -6513,6 +6511,119 @@ SWIGINTERN PyObject *_wrap_new_TiePoint(PyObject *SWIGUNUSEDPARM(self), PyObject
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TiePoint__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+  PyObject *resultobj = 0;
+  GeoCal::TiePoint *result = 0 ;
+  
+  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
+  {
+    try {
+      result = (GeoCal::TiePoint *)new GeoCal::TiePoint();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::TiePoint > *smartresult = result ? new boost::shared_ptr<  GeoCal::TiePoint >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TiePoint__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::TiePoint *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TiePoint const > tempshared1 ;
+  GeoCal::TiePoint *result = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::TiePoint *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__TiePoint,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_TiePoint" "', argument " "1"" of type '" "GeoCal::TiePoint const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TiePoint" "', argument " "1"" of type '" "GeoCal::TiePoint const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
+        arg1 = const_cast< GeoCal::TiePoint * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::TiePoint * >(reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (GeoCal::TiePoint *)new GeoCal::TiePoint((GeoCal::TiePoint const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::TiePoint > *smartresult = result ? new boost::shared_ptr<  GeoCal::TiePoint >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_TiePoint(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_TiePoint",0,1,argv))) SWIG_fail;
+  --argc;
+  if (argc == 0) {
+    return _wrap_new_TiePoint__SWIG_1(self, argc, argv);
+  }
+  if (argc == 1) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    return _wrap_new_TiePoint__SWIG_2(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 1) {
+    return _wrap_new_TiePoint__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_TiePoint'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::TiePoint::TiePoint(int)\n"
+    "    GeoCal::TiePoint::TiePoint()\n"
+    "    GeoCal::TiePoint::TiePoint(GeoCal::TiePoint const &)\n");
+  return 0;
 }
 
 
@@ -10735,7 +10846,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SHARED_PTR_DISOWN_swigconstant", SHARED_PTR_DISOWN_swigconstant, METH_VARARGS, NULL},
-	 { (char *)"new_TiePoint", (PyCFunction)_wrap_new_TiePoint, METH_O, (char *)"\n"
+	 { (char *)"new_TiePoint", _wrap_new_TiePoint, METH_VARARGS, (char *)"\n"
 		"\n"
 		"TiePoint::TiePoint(const TiePoint &Tp)\n"
 		"Copy constructor. We make a deep copy of everything. \n"

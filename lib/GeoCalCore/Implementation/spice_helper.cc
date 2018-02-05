@@ -67,6 +67,7 @@ SpiceException::SpiceException()
 bool SpiceHelper::kernel_loaded(const std::string& Kernel)
 {
 #ifdef HAVE_SPICE
+  //std::cerr << "Checking if kernel loaded: " << Kernel << "\n";
   spice_setup();
   char filetype[1000], source[1000];
   int handle;
@@ -79,6 +80,10 @@ bool SpiceHelper::kernel_loaded(const std::string& Kernel)
     kinfo_c(full_path.c_str(), 1000,1000, filetype, source, &handle, &found);
     spice_error_check();
   }
+  // if(found)
+  //   std::cerr << "Kernel was found\n";
+  // else
+  //   std::cerr << "Kernel was not found\n";
   return found;
 #else
   throw SpiceNotAvailableException();
@@ -97,6 +102,7 @@ bool SpiceHelper::kernel_loaded(const std::string& Kernel)
 void SpiceHelper::add_kernel(const std::string& Kernel, bool Skip_save)
 {
 #ifdef HAVE_SPICE
+  //std::cerr << "Adding kernel: " << Kernel << "\n";
   boost::filesystem::path p(Kernel);
   if(!Skip_save) {
     spice_setup();

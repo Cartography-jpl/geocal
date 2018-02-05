@@ -17,6 +17,8 @@ namespace GeoCal {
 class TiePoint : public GenericObject {
 public:
   TiePoint(int Number_image);
+  TiePoint();
+  TiePoint(const TiePoint& Tp);
   %python_attribute_with_set(id, int);
   %python_attribute_with_set(is_gcp, bool);
   %python_attribute_with_set(ground_location,

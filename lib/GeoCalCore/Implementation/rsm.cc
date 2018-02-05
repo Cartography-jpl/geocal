@@ -236,11 +236,17 @@ void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)
   for(int hind = 0; hind < 2; ++hind)
     for(int lind = 0; lind < 2; ++lind)
       for(int sind = 0; sind < 2; ++sind, ++ind) {
-	rid->ground_domain_vertex()[ind] = ground_coordinate_approx_height
-	  (ImageCoordinate(
-	      (lind == 0 ? rp->min_line() : rp->max_line()),
-	      (sind == 0 ? rp->min_sample() : rp->max_sample())),
-	   (hind == 0 ? Min_height : Max_height));
+	// Temporary, we'll need to fix this
+	try {
+	  rid->ground_domain_vertex()[ind] = ground_coordinate_approx_height
+	    (ImageCoordinate((lind == 0 ? rp->min_line() : rp->max_line()),
+			     (sind == 0 ? rp->min_sample() : rp->max_sample())),
+	     (hind == 0 ? Min_height : Max_height));
+	} catch(const std::exception& E) {
+	  // Temporary, we'll need to fix this
+	  std::cerr << "Warning, ground_coordinate_approx_height failed. Skipping error for now, and filling in with default data.\n";
+	  rid->ground_domain_vertex()[ind] = coordinate_converter()->convert_from_coordinate((rp->min_x() + rp->min_x())/2, (rp->min_y() + rp->min_y())/2, (rp->min_z() + rp->min_z())/2);
+	}
       }
   rid->min_line(rp->min_line());
   rid->max_line(rp->max_line());

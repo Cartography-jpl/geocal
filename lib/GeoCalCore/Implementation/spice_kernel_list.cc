@@ -33,8 +33,7 @@ GEOCAL_IMPLEMENT(SpiceKernelList);
 void SpiceKernelList::load_kernel()
 {
   BOOST_FOREACH(const std::string& f, kernel_list_) {
-    boost::filesystem::path p(f);
-    if(!SpiceHelper::kernel_loaded(p.filename().string()))
+    if(!SpiceHelper::kernel_loaded(f))
       SpiceHelper::add_kernel(f);
   }
 }

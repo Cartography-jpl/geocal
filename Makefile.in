@@ -229,15 +229,16 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(INCLUDE_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@INSTALL_PYNITF_TRUE@am__append_44 = install-pynitf
-@INSTALL_PYNITF_TRUE@am__append_45 = uninstall-pynitf
-@INSTALL_PYNITF_TRUE@am__append_46 = clean-pynitf
-@CODE_COVERAGE_ENABLED_TRUE@am__append_47 = --cov-report term \
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_44 = @srcpythonscript@/vicarb
+@INSTALL_PYNITF_TRUE@am__append_45 = install-pynitf
+@INSTALL_PYNITF_TRUE@am__append_46 = uninstall-pynitf
+@INSTALL_PYNITF_TRUE@am__append_47 = clean-pynitf
+@CODE_COVERAGE_ENABLED_TRUE@am__append_48 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_48 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_49 = install_python_doc
+@HAVE_VICAR_RTL_TRUE@am__append_49 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_50 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -339,8 +340,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(pkgpythonswigdir)" \
 	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(geocalpkgpythondir)" \
+	"$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" \
+	"$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" \
 	"$(DESTDIR)$(pkgpythonswigdir)" \
 	"$(DESTDIR)$(afidspythonvdevdir)" \
 	"$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" \
@@ -1419,7 +1420,8 @@ am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/rsm_project \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen
-SCRIPTS = $(dist_afidspythonvdev_SCRIPTS) $(dist_bin_SCRIPTS)
+SCRIPTS = $(bin_SCRIPTS) $(dist_afidspythonvdev_SCRIPTS) \
+	$(dist_bin_SCRIPTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -2193,6 +2195,7 @@ noop =
 # libgeocal: The main library
 lib_LTLIBRARIES = libgeocal.la
 noinst_LTLIBRARIES = libraw.la
+bin_SCRIPTS = $(am__append_44)
 dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_dir \
 	$(srcdir)/$(srcpythonbin)/shelve_show \
@@ -2449,10 +2452,10 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_10) $(am__append_44) $(am__append_49)
-UNINSTALL_HOOK = $(am__append_11) $(am__append_45) \
+INSTALL_DATA_HOOK = $(am__append_10) $(am__append_45) $(am__append_50)
+UNINSTALL_HOOK = $(am__append_11) $(am__append_46) \
 	clean_install_python_doc
-CLEAN_HOOK = clean_unit_test $(am__append_12) $(am__append_46)
+CLEAN_HOOK = clean_unit_test $(am__append_12) $(am__append_47)
 INSTALLCHECK_HOOK = python_check
 
 # Make sure we don't have any pyc or pycache files floating around
@@ -2801,7 +2804,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_48)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_49)
 dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -3373,6 +3376,7 @@ _swig_wrap_la_LDFLAGS = -module -avoid-version
 _swig_wrap_la_LIBADD = libgeocal.la
 _swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC) @swigsrc@/swig_wrap.cc
 @BUILD_AFIDS_FALSE@installafidspython_DATA = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@installafidspython_DATA = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py @srcpythonlib@/output_cache.py \
@@ -3430,7 +3434,7 @@ am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYT
 # but you can specify a different number.
 PYTEST_NJOB = 10
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_47)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_48)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -5168,6 +5172,41 @@ geocal_test_all$(EXEEXT): $(geocal_test_all_OBJECTS) $(geocal_test_all_DEPENDENC
 picmtch5$(EXEEXT): $(picmtch5_OBJECTS) $(picmtch5_DEPENDENCIES) $(EXTRA_picmtch5_DEPENDENCIES) 
 	@rm -f picmtch5$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(picmtch5_OBJECTS) $(picmtch5_LDADD) $(LIBS)
+install-binSCRIPTS: $(bin_SCRIPTS)
+	@$(NORMAL_INSTALL)
+	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(bindir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(bindir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  if test -f "$$d$$p"; then echo "$$d$$p"; echo "$$p"; else :; fi; \
+	done | \
+	sed -e 'p;s,.*/,,;n' \
+	    -e 'h;s|.*|.|' \
+	    -e 'p;x;s,.*/,,;$(transform)' | sed 'N;N;N;s,\n, ,g' | \
+	$(AWK) 'BEGIN { files["."] = ""; dirs["."] = 1; } \
+	  { d=$$3; if (dirs[d] != 1) { print "d", d; dirs[d] = 1 } \
+	    if ($$2 == $$4) { files[d] = files[d] " " $$1; \
+	      if (++n[d] == $(am__install_max)) { \
+		print "f", d, files[d]; n[d] = 0; files[d] = "" } } \
+	    else { print "f", d "/" $$4, $$1 } } \
+	  END { for (d in files) print "f", d, files[d] }' | \
+	while read type dir files; do \
+	     if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
+	     test -z "$$files" || { \
+	       echo " $(INSTALL_SCRIPT) $$files '$(DESTDIR)$(bindir)$$dir'"; \
+	       $(INSTALL_SCRIPT) $$files "$(DESTDIR)$(bindir)$$dir" || exit $$?; \
+	     } \
+	; done
+
+uninstall-binSCRIPTS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(bin_SCRIPTS)'; test -n "$(bindir)" || exit 0; \
+	files=`for p in $$list; do echo "$$p"; done | \
+	       sed -e 's,.*/,,;$(transform)'`; \
+	dir='$(DESTDIR)$(bindir)'; $(am__uninstall_files_from_dir)
 install-dist_afidspythonvdevSCRIPTS: $(dist_afidspythonvdev_SCRIPTS)
 	@$(NORMAL_INSTALL)
 	@list='$(dist_afidspythonvdev_SCRIPTS)'; test -n "$(afidspythonvdevdir)" || list=; \
@@ -11579,7 +11618,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -11683,8 +11722,8 @@ install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am: install-binPROGRAMS install-dist_binSCRIPTS \
-	install-libLTLIBRARIES
+install-exec-am: install-binPROGRAMS install-binSCRIPTS \
+	install-dist_binSCRIPTS install-libLTLIBRARIES
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-exec-hook
 install-html: install-html-am
@@ -11728,7 +11767,7 @@ ps: ps-am
 ps-am:
 
 uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
-	uninstall-dist_afidspythonvdevDATA \
+	uninstall-binSCRIPTS uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
 	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
 	uninstall-dist_sdbxdocDATA uninstall-etcafidspythonDATA \
@@ -11757,8 +11796,8 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	distclean-tags distcleancheck distdir distuninstallcheck dvi \
 	dvi-am html html-am info info-am install \
 	install-afidspythonvdevPROGRAMS install-am install-binPROGRAMS \
-	install-data install-data-am install-data-hook \
-	install-dist_afidspythonvdevDATA \
+	install-binSCRIPTS install-data install-data-am \
+	install-data-hook install-dist_afidspythonvdevDATA \
 	install-dist_afidspythonvdevSCRIPTS install-dist_binSCRIPTS \
 	install-dist_geocalpkgpythonDATA install-dist_sdbxdocDATA \
 	install-dvi install-dvi-am install-etcafidspythonDATA \
@@ -11777,7 +11816,8 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	mostlyclean mostlyclean-compile mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am recheck tags tags-am \
 	uninstall uninstall-afidspythonvdevPROGRAMS uninstall-am \
-	uninstall-binPROGRAMS uninstall-dist_afidspythonvdevDATA \
+	uninstall-binPROGRAMS uninstall-binSCRIPTS \
+	uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
 	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
 	uninstall-dist_sdbxdocDATA uninstall-etcafidspythonDATA \

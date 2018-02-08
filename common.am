@@ -31,6 +31,7 @@ noop =
 lib_LTLIBRARIES = 
 noinst_LTLIBRARIES = 
 bin_PROGRAMS =
+bin_SCRIPTS =
 dist_bin_SCRIPTS = 
 AM_LDFLAGS =
 BUILT_SOURCES = 

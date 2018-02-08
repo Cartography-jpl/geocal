@@ -3,3 +3,7 @@ else
 installafidspython_DATA = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
 endif
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
+if GEOCAL_OVERRIDE_AFIDS
+installafidspython_DATA = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
+bin_SCRIPTS+= @srcpythonscript@/vicarb
+endif

@@ -229,16 +229,18 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(INCLUDE_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_44 = @srcpythonscript@/vicarb
-@INSTALL_PYNITF_TRUE@am__append_45 = install-pynitf
-@INSTALL_PYNITF_TRUE@am__append_46 = uninstall-pynitf
-@INSTALL_PYNITF_TRUE@am__append_47 = clean-pynitf
-@CODE_COVERAGE_ENABLED_TRUE@am__append_48 = --cov-report term \
+@BUILD_AFIDS_FALSE@am__append_44 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_45 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_46 = @srcpythonscript@/vicarb
+@INSTALL_PYNITF_TRUE@am__append_47 = install-pynitf
+@INSTALL_PYNITF_TRUE@am__append_48 = uninstall-pynitf
+@INSTALL_PYNITF_TRUE@am__append_49 = clean-pynitf
+@CODE_COVERAGE_ENABLED_TRUE@am__append_50 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_49 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_50 = install_python_doc
+@HAVE_VICAR_RTL_TRUE@am__append_51 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_52 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -2195,7 +2197,7 @@ noop =
 # libgeocal: The main library
 lib_LTLIBRARIES = libgeocal.la
 noinst_LTLIBRARIES = libraw.la
-bin_SCRIPTS = $(am__append_44)
+bin_SCRIPTS = $(am__append_46)
 dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_dir \
 	$(srcdir)/$(srcpythonbin)/shelve_show \
@@ -2452,10 +2454,10 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_10) $(am__append_45) $(am__append_50)
-UNINSTALL_HOOK = $(am__append_11) $(am__append_46) \
+INSTALL_DATA_HOOK = $(am__append_10) $(am__append_47) $(am__append_52)
+UNINSTALL_HOOK = $(am__append_11) $(am__append_48) \
 	clean_install_python_doc
-CLEAN_HOOK = clean_unit_test $(am__append_12) $(am__append_47)
+CLEAN_HOOK = clean_unit_test $(am__append_12) $(am__append_49)
 INSTALLCHECK_HOOK = python_check
 
 # Make sure we don't have any pyc or pycache files floating around
@@ -2804,7 +2806,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_49)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_51)
 dist_afidspythonvdev_DATA = $(am__append_14) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -3375,8 +3377,7 @@ _swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
 _swig_wrap_la_LDFLAGS = -module -avoid-version
 _swig_wrap_la_LIBADD = libgeocal.la
 _swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC) @swigsrc@/swig_wrap.cc
-@BUILD_AFIDS_FALSE@installafidspython_DATA = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@installafidspython_DATA = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
+installafidspython_DATA = $(am__append_44) $(am__append_45)
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py @srcpythonlib@/output_cache.py \
@@ -3434,7 +3435,7 @@ am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYT
 # but you can specify a different number.
 PYTEST_NJOB = 10
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_48)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_50)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am

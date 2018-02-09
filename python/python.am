@@ -10,6 +10,8 @@ if INSTALL_PYNITF
 install-pynitf:
 	-chmod +w -R @geocalpkgpythondir@/../pynitf*
 	cd $(srcdir)/@srcpython@/pynitf && \
+	export PATH=$(bindir):$$PATH && \
+        export LD_LIBRARY_PATH="$(DESTDIR)$(libdir):${LD_LIBRARY_PATH}" && \
         $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build egg_info --egg-base=@abs_builddir@/pynitf install --prefix=$(prefix) --single-version-externally-managed --record @abs_builddir@/pynitf/files.txt
 
 EXTRA_PYTHON_TEST=$(srcdir)/@srcpython@/pynitf

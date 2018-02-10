@@ -62,6 +62,14 @@ require_serialize = pytest.mark.skipif(not have_serialize_supported(),
 require_spice = pytest.mark.skipif(not SpiceHelper.have_spice(),
     reason="need a geocal build with spice support to run")
 
+# Marker that skips a test if we don't have mars data
+require_mars_spice = pytest.mark.skips(not SpiceHelper.have_spice() or
+       not "MARS_KERNEL" in os.environ or
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") or
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker"),
+       reason="need a geocal build with spice support, and the mars spice kernels available to run")
+                                       
+                                       
 # Marker that tests if we have HdfFile available.
 require_hdf5 = pytest.mark.skipif(not hasattr(geocal_swig, "HdfFile"),
     reason="need a geocal build with HDF 5 support to run")
@@ -287,8 +295,3 @@ def rsm_ms_g(rsm_ms_grid):
 def mars_kernel():
     SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker")
     SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")
-    
-                     
-
-
-    

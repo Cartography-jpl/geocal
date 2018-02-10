@@ -3,6 +3,7 @@ from geocal.spice_camera import *
 from geocal.sqlite_shelf import write_shelve
 
 @require_spice
+@require_mars_spice
 def test_hrsc_camera(mars_kernel):
     print(hrsc_camera())
 
@@ -21,6 +22,7 @@ def test_hrsc_camera(mars_kernel):
         print(cam)
     
 @require_spice
+@require_mars_spice
 def test_ctx1_camera(mars_kernel):
     print(ctx_camera())
 

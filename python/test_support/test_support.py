@@ -299,6 +299,6 @@ def mars_kernel():
     if(SpiceHelper.have_spice() and
        "MARS_KERNEL" in os.environ and
        os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") and
-       os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker"):
+       os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")):
        SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker")
        SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")

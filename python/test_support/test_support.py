@@ -63,7 +63,7 @@ require_spice = pytest.mark.skipif(not SpiceHelper.have_spice(),
     reason="need a geocal build with spice support to run")
 
 # Marker that skips a test if we don't have mars data
-require_mars_spice = pytest.mark.skips(not SpiceHelper.have_spice() or
+require_mars_spice = pytest.mark.skipif(not SpiceHelper.have_spice() or
        not "MARS_KERNEL" in os.environ or
        not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") or
        not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker"),

@@ -293,5 +293,12 @@ def rsm_ms_g(rsm_ms_grid):
 
 @pytest.fixture(scope="module")
 def mars_kernel():
-    SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker")
-    SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")
+    # Since this is module level fixture, we need to check before running
+    # spice setup. The tests should be skipped by the require_mars_spice,
+    # but that is only checked when we get to the functions
+    if(SpiceHelper.have_spice() and
+       "MARS_KERNEL" in os.environ and
+       os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") and
+       os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker"):
+       SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker")
+       SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")

@@ -282,6 +282,25 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         return self._v_sample_grid()
 
 
+    def image_coordinate(self, *args):
+        """
+
+        virtual blitz::Array<double, 4> GeoCal::RsmGrid::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >
+        &Y, const blitz::Array< double, 3 > &Z) const
+
+        """
+        return _rsm_grid.RsmGrid_image_coordinate(self, *args)
+
+
+    def image_coordinate_jacobian(self, *args):
+        """
+
+        virtual blitz::Array<double, 2> GeoCal::RsmGrid::image_coordinate_jacobian(double X, double Y, double Z) const
+
+        """
+        return _rsm_grid.RsmGrid_image_coordinate_jacobian(self, *args)
+
+
     def number_x(self, Zindex):
         """
 
@@ -536,6 +555,8 @@ RsmGrid.fit_corr = new_instancemethod(_rsm_grid.RsmGrid_fit_corr, None, RsmGrid)
 RsmGrid._v_ignore_igc_error_in_fit = new_instancemethod(_rsm_grid.RsmGrid__v_ignore_igc_error_in_fit, None, RsmGrid)
 RsmGrid._v_line_grid = new_instancemethod(_rsm_grid.RsmGrid__v_line_grid, None, RsmGrid)
 RsmGrid._v_sample_grid = new_instancemethod(_rsm_grid.RsmGrid__v_sample_grid, None, RsmGrid)
+RsmGrid.image_coordinate = new_instancemethod(_rsm_grid.RsmGrid_image_coordinate, None, RsmGrid)
+RsmGrid.image_coordinate_jacobian = new_instancemethod(_rsm_grid.RsmGrid_image_coordinate_jacobian, None, RsmGrid)
 RsmGrid.number_x = new_instancemethod(_rsm_grid.RsmGrid_number_x, None, RsmGrid)
 RsmGrid.number_y = new_instancemethod(_rsm_grid.RsmGrid_number_y, None, RsmGrid)
 RsmGrid.x_offset = new_instancemethod(_rsm_grid.RsmGrid_x_offset, None, RsmGrid)

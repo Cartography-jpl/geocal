@@ -27,7 +27,8 @@ ImageCoordinate RsmRpPlusGrid::image_coordinate
 (double X, double Y, double Z) const
 {
   ImageCoordinate ic = rp->image_coordinate(X, Y, Z);
-  ImageCoordinate ic_corr = rgrid->image_coordinate(X, Y, Z);
+  ImageCoordinate ic_corr = rgrid->image_coordinate(X, Y, Z, true);
+  //  std::cerr << "Ic: " << ic << " Ic_corr: " << ic_corr << "\n";
   ic.line += ic_corr.line;
   ic.sample += ic_corr.sample;
   return ic;
@@ -136,8 +137,7 @@ blitz::Array<double, 2> RsmRpPlusGrid::image_coordinate_jacobian
 (double X, double Y, double Z) const
 {
   Array<double, 2> res = rp->image_coordinate_jacobian(X, Y, Z);
-  Array<double, 2> r2 = rgrid->image_coordinate_jacobian(X,Y,Z);
-  res += rgrid->image_coordinate_jacobian(X,Y,Z);
+  res += rgrid->image_coordinate_jacobian(X,Y,Z, true);
   return res;
 }
 

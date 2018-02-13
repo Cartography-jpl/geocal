@@ -127,6 +127,7 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
       blitz::Array<double, 1> res(2);
       res(0) = icres.line - ic_.line;
       res(1) = icres.sample - ic_.sample;
+      //      std::cerr << "X: " << X  << "  Res: " << res << "\n";
       return res;
     }
     virtual blitz::Array<double, 2> df

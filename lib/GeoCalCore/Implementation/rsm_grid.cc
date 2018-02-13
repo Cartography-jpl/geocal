@@ -114,17 +114,43 @@ inline double interp_nan(double x1, double x2, double delta)
 //-----------------------------------------------------------------------
 
 ImageCoordinate RsmGrid::image_coordinate
-(double X, double Y, double Z) const
+(double X, double Y, double Z, bool Extrapolate_ok) const
 {
   double iv = (X - x_start_) / x_delta_;
   double jv = (Y - y_start_) / y_delta_;
   double kv = (Z - z_start_) / z_delta_;
   int i = (int) floor(iv);
-  double i_delta = iv - i;
   int j = (int) floor(jv);
-  double j_delta = jv - j;
   int k = (int) floor(kv);
+  double i_delta = iv - i;
+  double j_delta = jv - j;
   double k_delta = kv - k;
+  if(Extrapolate_ok) {
+    if(i < 0) {
+      i = 0;
+      i_delta = 0;
+    }
+    if(j < 0) {
+      j = 0;
+      j_delta = 0;
+    }
+    if(k < 0) {
+      k = 0;
+      k_delta = 0;
+    }
+    if(i > line_.rows() - 2) {
+      i = line_.rows() - 2;
+      i_delta = 1;
+    }
+    if(j > line_.cols() - 2) {
+      j = line_.cols() - 2;
+      j_delta = 1;
+    }
+    if(k > line_.depth() - 2) {
+      k = line_.depth() - 2;
+      k_delta = 1;
+    }
+  }
   if(i < 0 || i + 1 >= line_.rows() ||
      j < 0 || j + 1 >= line_.cols() ||
      k < 0 || k + 1 >= line_.depth())
@@ -195,13 +221,13 @@ ImageCoordinate RsmGrid::image_coordinate
 
 blitz::Array<double, 2> RsmGrid::image_coordinate
 (const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
- const blitz::Array<double, 1>& Z) const
+ const blitz::Array<double, 1>& Z, bool Extrapolate_ok) const
 {
   if(X.rows() != Y.rows() || X.rows() != Z.rows())
     throw Exception("X, Y, and Z need to be the same size");
   Array<double, 2> res(2, X.rows());
   for(int i = 0; i < X.rows(); ++i) {
-    ImageCoordinate ic = image_coordinate(X(i), Y(i), Z(i));
+    ImageCoordinate ic = image_coordinate(X(i), Y(i), Z(i), Extrapolate_ok);
     res(0, i) = ic.line;
     res(1, i) = ic.sample;
   }
@@ -217,7 +243,7 @@ blitz::Array<double, 2> RsmGrid::image_coordinate
 
 blitz::Array<double, 3> RsmGrid::image_coordinate
 (const blitz::Array<double, 2>& X, const blitz::Array<double, 2>& Y,
- const blitz::Array<double, 2>& Z) const
+ const blitz::Array<double, 2>& Z, bool Extrapolate_ok) const
 {
   if(X.rows() != Y.rows() || X.rows() != Z.rows() ||
      X.cols() != Y.cols() || X.cols() != Z.cols())
@@ -225,7 +251,8 @@ blitz::Array<double, 3> RsmGrid::image_coordinate
   Array<double, 3> res(2, X.rows(), X.cols());
   for(int i = 0; i < X.rows(); ++i)
     for(int j = 0; j < X.cols(); ++j) {
-      ImageCoordinate ic = image_coordinate(X(i,j), Y(i,j), Z(i,j));
+      ImageCoordinate ic = image_coordinate(X(i,j), Y(i,j), Z(i,j),
+					    Extrapolate_ok);
       res(0, i, j) = ic.line;
       res(1, i, j) = ic.sample;
     }
@@ -241,7 +268,7 @@ blitz::Array<double, 3> RsmGrid::image_coordinate
 
 blitz::Array<double, 4> RsmGrid::image_coordinate
 (const blitz::Array<double, 3>& X, const blitz::Array<double, 3>& Y,
- const blitz::Array<double, 3>& Z) const
+ const blitz::Array<double, 3>& Z, bool Extrapolate_ok) const
 {
   if(X.rows() != Y.rows() || X.rows() != Z.rows() ||
      X.cols() != Y.cols() || X.cols() != Z.cols() ||
@@ -251,7 +278,8 @@ blitz::Array<double, 4> RsmGrid::image_coordinate
   for(int i = 0; i < X.rows(); ++i)
     for(int j = 0; j < X.cols(); ++j)
       for(int k = 0; k < X.depth(); ++k) {
-	ImageCoordinate ic = image_coordinate(X(i,j,k), Y(i,j,k), Z(i,j,k));
+	ImageCoordinate ic = image_coordinate(X(i,j,k), Y(i,j,k), Z(i,j,k),
+					      Extrapolate_ok);
 	res(0, i, j, k) = ic.line;
 	res(1, i, j, k) = ic.sample;
       }
@@ -387,18 +415,18 @@ void RsmGrid::fit_corr
 	    line_(i,j,k) = ic.line - ic_calc.line;
 	    sample_(i,j,k) = ic.sample - ic_calc.sample;
 	  } else {
-	    line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
-	    sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	    line_(i,j,k) = 0;
+	    sample_(i,j,k) = 0;
 	  }
 	} catch(const ImageGroundConnectionFailed&) {
 	  // Ignore failures, just go to next point.
-	  line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
-	  sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	  line_(i,j,k) = 0;
+	  sample_(i,j,k) = 0;
 	} catch(...) {
 	  if(!ignore_igc_error_in_fit_)
 	    throw;
-	  line_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
-	  sample_(i,j,k) = std::numeric_limits<double>::quiet_NaN();
+	  line_(i,j,k) = 0;
+	  sample_(i,j,k) = 0;
 	}
       }
 }
@@ -409,7 +437,7 @@ void RsmGrid::fit_corr
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
-(double X, double Y, double Z) const
+(double X, double Y, double Z, bool Extrapolate_ok) const
 {
   Range ra = Range::all();
   Array<double, 2> res(2, 3);
@@ -420,11 +448,37 @@ blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
   AutoDerivative<double> jv = (yd - y_start_) / y_delta_;
   AutoDerivative<double> kv = (zd - z_start_) / z_delta_;
   int i = (int) floor(iv.value());
-  AutoDerivative<double> i_delta = iv - i;
   int j = (int) floor(jv.value());
-  AutoDerivative<double> j_delta = jv - j;
   int k = (int) floor(kv.value());
+  AutoDerivative<double> i_delta = iv - i;
+  AutoDerivative<double> j_delta = jv - j;
   AutoDerivative<double> k_delta = kv - k;
+  if(Extrapolate_ok) {
+    if(i < 0) {
+      i = 0;
+      i_delta = 0;
+    }
+    if(j < 0) {
+      j = 0;
+      j_delta = 0;
+    }
+    if(k < 0) {
+      k = 0;
+      k_delta = 0;
+    }
+    if(i > line_.rows() - 2) {
+      i = line_.rows() - 2;
+      i_delta = 1;
+    }
+    if(j > line_.cols() - 2) {
+      j = line_.cols() - 2;
+      j_delta = 1;
+    }
+    if(k > line_.depth() - 2) {
+      k = line_.depth() - 2;
+      k_delta = 1;
+    }
+  }
   if(i < 0 || i + 1 >= line_.rows() ||
      j < 0 || j + 1 >= line_.cols() ||
      k < 0 || k + 1 >= line_.depth()) {

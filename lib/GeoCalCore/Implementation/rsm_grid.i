@@ -30,6 +30,37 @@ public:
   %python_attribute_with_set(ignore_igc_error_in_fit, bool);
   %python_attribute(line_grid, blitz::Array<double, 3>);
   %python_attribute(sample_grid, blitz::Array<double, 3>);
+
+  virtual ImageCoordinate image_coordinate(double X, double Y, double Z,
+					   bool Extrapolate_ok) const;
+  virtual ImageCoordinate image_coordinate(double X, double Y, double Z) const;
+
+  virtual blitz::Array<double, 2> image_coordinate
+    (const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
+     const blitz::Array<double, 1>& Z, bool Extrapolate_ok) const;
+  virtual blitz::Array<double, 2> image_coordinate
+    (const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
+     const blitz::Array<double, 1>& Z) const;
+
+  virtual blitz::Array<double, 3> image_coordinate
+    (const blitz::Array<double, 2>& X, const blitz::Array<double, 2>& Y,
+     const blitz::Array<double, 2>& Z, bool Extrapolate_ok) const;
+  virtual blitz::Array<double, 3> image_coordinate
+  (const blitz::Array<double, 2>& X, const blitz::Array<double, 2>& Y,
+   const blitz::Array<double, 2>& Z) const;
+
+  virtual blitz::Array<double, 4> image_coordinate
+  (const blitz::Array<double, 3>& X, const blitz::Array<double, 3>& Y,
+   const blitz::Array<double, 3>& Z, bool Extrapolate_ok) const;
+  virtual blitz::Array<double, 4> image_coordinate
+  (const blitz::Array<double, 3>& X, const blitz::Array<double, 3>& Y,
+   const blitz::Array<double, 3>& Z) const;
+
+  virtual blitz::Array<double, 2> image_coordinate_jacobian
+  (double X, double Y, double Z, bool Extrapolate_ok) const;
+  virtual blitz::Array<double, 2> image_coordinate_jacobian
+  (double X, double Y, double Z) const;
+
   int number_x(int Zindex) const;
   int number_y(int Zindex) const;
   int x_offset(int Zindex) const;

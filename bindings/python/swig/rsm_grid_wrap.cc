@@ -6851,6 +6851,1246 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  GeoCal::ImageCoordinate result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid_image_coordinate" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmGrid_image_coordinate" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmGrid_image_coordinate" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmGrid_image_coordinate" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate(arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  GeoCal::ImageCoordinate result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid_image_coordinate" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmGrid_image_coordinate" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmGrid_image_coordinate" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate(arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  blitz::Array< double,1 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,1 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 1>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmGrid_image_coordinate" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  blitz::Array< double,1 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,1 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 1>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,2 > *arg4 = 0 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,2 > a4 ;
+  PythonObject numpy4 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  SwigValueWrapper< blitz::Array< double,3 > > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 2>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmGrid_image_coordinate" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,2 > const &)*arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[3], stride[3];
+    for(int i = 0; i < 3; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 3>* t = new blitz::Array<double, 3>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,2 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,2 > a4 ;
+  PythonObject numpy4 ;
+  SwigValueWrapper< blitz::Array< double,3 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 2>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,2 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[3], stride[3];
+    for(int i = 0; i < 3; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 3>* t = new blitz::Array<double, 3>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  blitz::Array< double,3 > *arg2 = 0 ;
+  blitz::Array< double,3 > *arg3 = 0 ;
+  blitz::Array< double,3 > *arg4 = 0 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  blitz::Array< double,3 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,3 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,3 > a4 ;
+  PythonObject numpy4 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  SwigValueWrapper< blitz::Array< double,4 > > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 3>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 3>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 3>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmGrid_image_coordinate" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,3 > const &)*arg2,(blitz::Array< double,3 > const &)*arg3,(blitz::Array< double,3 > const &)*arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[4], stride[4];
+    for(int i = 0; i < 4; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 4>* t = new blitz::Array<double, 4>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_4_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  blitz::Array< double,3 > *arg2 = 0 ;
+  blitz::Array< double,3 > *arg3 = 0 ;
+  blitz::Array< double,3 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  blitz::Array< double,3 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,3 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,3 > a4 ;
+  PythonObject numpy4 ;
+  SwigValueWrapper< blitz::Array< double,4 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 3>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 3>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_3_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=3) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmGrid_image_coordinate', expecting type  Array<double,3>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 3>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,3 > const &)*arg2,(blitz::Array< double,3 > const &)*arg3,(blitz::Array< double,3 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[4], stride[4];
+    for(int i = 0; i < 4; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 4, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 4>* t = new blitz::Array<double, 4>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_4_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmGrid_image_coordinate",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    return _wrap_RsmGrid_image_coordinate__SWIG_1(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 4) {
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[3]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_2;
+    return _wrap_RsmGrid_image_coordinate__SWIG_3(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 4) {
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[3]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_3;
+    return _wrap_RsmGrid_image_coordinate__SWIG_5(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 4) {
+    return _wrap_RsmGrid_image_coordinate__SWIG_7(self, argc, argv);
+  }
+  if (argc == 5) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_5;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_5;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_5;
+    return _wrap_RsmGrid_image_coordinate__SWIG_0(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 5) {
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_6;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_6;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[3]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_6;
+    return _wrap_RsmGrid_image_coordinate__SWIG_2(self, argc, argv);
+  }
+check_6:
+  
+  if (argc == 5) {
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_7;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_7;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[3]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==2 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_7;
+    return _wrap_RsmGrid_image_coordinate__SWIG_4(self, argc, argv);
+  }
+check_7:
+  
+  if (argc == 5) {
+    return _wrap_RsmGrid_image_coordinate__SWIG_6(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmGrid_image_coordinate'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmGrid::image_coordinate(double,double,double,bool) const\n"
+    "    GeoCal::RsmGrid::image_coordinate(double,double,double) const\n"
+    "    GeoCal::RsmGrid::image_coordinate(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &,blitz::Array< double,1 > const &,bool) const\n"
+    "    GeoCal::RsmGrid::image_coordinate(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &,blitz::Array< double,1 > const &) const\n"
+    "    GeoCal::RsmGrid::image_coordinate(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,bool) const\n"
+    "    GeoCal::RsmGrid::image_coordinate(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &) const\n"
+    "    GeoCal::RsmGrid::image_coordinate(blitz::Array< double,3 > const &,blitz::Array< double,3 > const &,blitz::Array< double,3 > const &,bool) const\n"
+    "    GeoCal::RsmGrid::image_coordinate(blitz::Array< double,3 > const &,blitz::Array< double,3 > const &,blitz::Array< double,3 > const &) const\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate_jacobian__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  bool arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate_jacobian(arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate_jacobian__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "1"" of type '" "GeoCal::RsmGrid const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmGrid_image_coordinate_jacobian" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate_jacobian(arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
+    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate_jacobian(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmGrid_image_coordinate_jacobian",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    return _wrap_RsmGrid_image_coordinate_jacobian__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_RsmGrid_image_coordinate_jacobian__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmGrid_image_coordinate_jacobian'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmGrid::image_coordinate_jacobian(double,double,double,bool) const\n"
+    "    GeoCal::RsmGrid::image_coordinate_jacobian(double,double,double) const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmGrid_number_x(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
@@ -7999,6 +9239,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"const blitz::Array<double, 3>& GeoCal::RsmGrid::sample_grid() const\n"
 		"Grid of sample values. \n"
+		""},
+	 { (char *)"RsmGrid_image_coordinate", _wrap_RsmGrid_image_coordinate, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual blitz::Array<double, 4> GeoCal::RsmGrid::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >\n"
+		"&Y, const blitz::Array< double, 3 > &Z) const\n"
+		"\n"
+		""},
+	 { (char *)"RsmGrid_image_coordinate_jacobian", _wrap_RsmGrid_image_coordinate_jacobian, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual blitz::Array<double, 2> GeoCal::RsmGrid::image_coordinate_jacobian(double X, double Y, double Z) const\n"
+		"\n"
 		""},
 	 { (char *)"RsmGrid_number_x", _wrap_RsmGrid_number_x, METH_VARARGS, (char *)"\n"
 		"\n"

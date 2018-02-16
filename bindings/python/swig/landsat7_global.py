@@ -10,7 +10,7 @@
 
 from sys import version_info
 if version_info >= (3, 0, 0):
-    new_instancemethod = lambda func, inst, cls: _landsat7_panchromatic.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _landsat7_global.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if version_info >= (2, 6, 0):
@@ -19,20 +19,20 @@ if version_info >= (2, 6, 0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_landsat7_panchromatic', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_landsat7_global', [dirname(__file__)])
         except ImportError:
-            import _landsat7_panchromatic
-            return _landsat7_panchromatic
+            import _landsat7_global
+            return _landsat7_global
         if fp is not None:
             try:
-                _mod = imp.load_module('_landsat7_panchromatic', fp, pathname, description)
+                _mod = imp.load_module('_landsat7_global', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _landsat7_panchromatic = swig_import_helper()
+    _landsat7_global = swig_import_helper()
     del swig_import_helper
 else:
-    import _landsat7_panchromatic
+    import _landsat7_global
 del version_info
 try:
     _swig_property = property
@@ -116,31 +116,31 @@ class SwigPyIterator(object):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    __swig_destroy__ = _landsat7_panchromatic.delete_SwigPyIterator
+    __swig_destroy__ = _landsat7_global.delete_SwigPyIterator
     def __iter__(self):
         return self
-SwigPyIterator.value = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_value, None, SwigPyIterator)
-SwigPyIterator.incr = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_incr, None, SwigPyIterator)
-SwigPyIterator.decr = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_decr, None, SwigPyIterator)
-SwigPyIterator.distance = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_distance, None, SwigPyIterator)
-SwigPyIterator.equal = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_equal, None, SwigPyIterator)
-SwigPyIterator.copy = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_copy, None, SwigPyIterator)
-SwigPyIterator.next = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_next, None, SwigPyIterator)
-SwigPyIterator.__next__ = new_instancemethod(_landsat7_panchromatic.SwigPyIterator___next__, None, SwigPyIterator)
-SwigPyIterator.previous = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_previous, None, SwigPyIterator)
-SwigPyIterator.advance = new_instancemethod(_landsat7_panchromatic.SwigPyIterator_advance, None, SwigPyIterator)
-SwigPyIterator.__eq__ = new_instancemethod(_landsat7_panchromatic.SwigPyIterator___eq__, None, SwigPyIterator)
-SwigPyIterator.__ne__ = new_instancemethod(_landsat7_panchromatic.SwigPyIterator___ne__, None, SwigPyIterator)
-SwigPyIterator.__iadd__ = new_instancemethod(_landsat7_panchromatic.SwigPyIterator___iadd__, None, SwigPyIterator)
-SwigPyIterator.__isub__ = new_instancemethod(_landsat7_panchromatic.SwigPyIterator___isub__, None, SwigPyIterator)
-SwigPyIterator.__add__ = new_instancemethod(_landsat7_panchromatic.SwigPyIterator___add__, None, SwigPyIterator)
-SwigPyIterator.__sub__ = new_instancemethod(_landsat7_panchromatic.SwigPyIterator___sub__, None, SwigPyIterator)
-SwigPyIterator_swigregister = _landsat7_panchromatic.SwigPyIterator_swigregister
+SwigPyIterator.value = new_instancemethod(_landsat7_global.SwigPyIterator_value, None, SwigPyIterator)
+SwigPyIterator.incr = new_instancemethod(_landsat7_global.SwigPyIterator_incr, None, SwigPyIterator)
+SwigPyIterator.decr = new_instancemethod(_landsat7_global.SwigPyIterator_decr, None, SwigPyIterator)
+SwigPyIterator.distance = new_instancemethod(_landsat7_global.SwigPyIterator_distance, None, SwigPyIterator)
+SwigPyIterator.equal = new_instancemethod(_landsat7_global.SwigPyIterator_equal, None, SwigPyIterator)
+SwigPyIterator.copy = new_instancemethod(_landsat7_global.SwigPyIterator_copy, None, SwigPyIterator)
+SwigPyIterator.next = new_instancemethod(_landsat7_global.SwigPyIterator_next, None, SwigPyIterator)
+SwigPyIterator.__next__ = new_instancemethod(_landsat7_global.SwigPyIterator___next__, None, SwigPyIterator)
+SwigPyIterator.previous = new_instancemethod(_landsat7_global.SwigPyIterator_previous, None, SwigPyIterator)
+SwigPyIterator.advance = new_instancemethod(_landsat7_global.SwigPyIterator_advance, None, SwigPyIterator)
+SwigPyIterator.__eq__ = new_instancemethod(_landsat7_global.SwigPyIterator___eq__, None, SwigPyIterator)
+SwigPyIterator.__ne__ = new_instancemethod(_landsat7_global.SwigPyIterator___ne__, None, SwigPyIterator)
+SwigPyIterator.__iadd__ = new_instancemethod(_landsat7_global.SwigPyIterator___iadd__, None, SwigPyIterator)
+SwigPyIterator.__isub__ = new_instancemethod(_landsat7_global.SwigPyIterator___isub__, None, SwigPyIterator)
+SwigPyIterator.__add__ = new_instancemethod(_landsat7_global.SwigPyIterator___add__, None, SwigPyIterator)
+SwigPyIterator.__sub__ = new_instancemethod(_landsat7_global.SwigPyIterator___sub__, None, SwigPyIterator)
+SwigPyIterator_swigregister = _landsat7_global.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
 
-_landsat7_panchromatic.SHARED_PTR_DISOWN_swigconstant(_landsat7_panchromatic)
-SHARED_PTR_DISOWN = _landsat7_panchromatic.SHARED_PTR_DISOWN
+_landsat7_global.SHARED_PTR_DISOWN_swigconstant(_landsat7_global)
+SHARED_PTR_DISOWN = _landsat7_global.SHARED_PTR_DISOWN
 
 import os
 
@@ -190,44 +190,53 @@ import geocal_swig.raster_multifile
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-class Landsat7Panchromatic(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
+class Landsat7Global(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     """
 
-    This is used to read the global Landsat 7 panchromatic band.
+    This is used to read the global Landsat 7 data.
 
-    This data has 15 meter resolution. The geolocation accuracy was
-    estimated by Tom Logan at 1/3 pixel or so (so 5m). Not sure how
-    accurate this estimate is, perhaps Tom has a better estimate.
+    The resolution varies by band. The The geolocation accuracy was
+    estimated by Tom Logan at 1/3 pixel or so. Not sure how accurate this
+    estimate is, perhaps Tom has a better estimate.
 
-    Note that this is very similar to Landsat7Global. The difference is
-    that this was used for MSPI, where the data was supplied as geotiff
-    rather that the VICAR format we use in the cartlab. Could probably
-    combine these into one class with some extra options, but doesn't seem
-    to be much point in doing that.
-
-    C++ includes: landsat7_panchromatic.h 
+    C++ includes: landsat7_global.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    BAND62 = _landsat7_global.Landsat7Global_BAND62
 
-    def __init__(self, Dir):
+    def __init__(self, Dir, B):
         """
 
-        Landsat7Panchromatic::Landsat7Panchromatic(const std::string &Dir)
+        Landsat7Global::Landsat7Global(const std::string &Dir, Band B)
         Constructor.
 
-        You can provide the directory to look for Landsat 7 panchromatic data,
-        or if you leave this blank we use the value of environment variable
-        LANDSAT7_PANCHROMATIC_15M. 
+        You provide the directory to look for Landsat 7 data, along with the
+        band type. 
         """
-        _landsat7_panchromatic.Landsat7Panchromatic_swiginit(self, _landsat7_panchromatic.new_Landsat7Panchromatic(Dir))
+        _landsat7_global.Landsat7Global_swiginit(self, _landsat7_global.new_Landsat7Global(Dir, B))
+
+    def _v_band(self):
+        """
+
+        Band GeoCal::Landsat7Global::band() const
+
+        """
+        return _landsat7_global.Landsat7Global__v_band(self)
+
+
+    @property
+    def band(self):
+        return self._v_band()
+
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-    __swig_destroy__ = _landsat7_panchromatic.delete_Landsat7Panchromatic
-Landsat7Panchromatic_swigregister = _landsat7_panchromatic.Landsat7Panchromatic_swigregister
-Landsat7Panchromatic_swigregister(Landsat7Panchromatic)
+    __swig_destroy__ = _landsat7_global.delete_Landsat7Global
+Landsat7Global._v_band = new_instancemethod(_landsat7_global.Landsat7Global__v_band, None, Landsat7Global)
+Landsat7Global_swigregister = _landsat7_global.Landsat7Global_swigregister
+Landsat7Global_swigregister(Landsat7Global)
 
 
 

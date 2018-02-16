@@ -177,7 +177,7 @@ protected:
   }
   VicarCartLabMultifile(const std::string& Dir,
 			const std::string& Dir_env_variable = "",
-			int Number_line_per_tile = -1,
+			int Number_line_per_tile = 100,
 			int Number_sample_per_tile = -1, 
 			int Number_tile_each_file = 4,
 			int Number_tile = 4,

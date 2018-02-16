@@ -160,6 +160,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_vicar_lite_file)(void);
   INIT_TYPE INIT_FUNC(_cart_lab_multifile)(void);
   INIT_TYPE INIT_FUNC(_landsat7_panchromatic)(void);
+  INIT_TYPE INIT_FUNC(_landsat7_global)(void);
   INIT_TYPE INIT_FUNC(_material_detect)(void);
   INIT_TYPE INIT_FUNC(_ibis_file)(void);
   INIT_TYPE INIT_FUNC(_vicar_file)(void);
@@ -374,6 +375,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_vicar_lite_file", INIT_FUNC(_vicar_lite_file));
   INIT_MODULE(module, "_cart_lab_multifile", INIT_FUNC(_cart_lab_multifile));
   INIT_MODULE(module, "_landsat7_panchromatic", INIT_FUNC(_landsat7_panchromatic));
+  INIT_MODULE(module, "_landsat7_global", INIT_FUNC(_landsat7_global));
   INIT_MODULE(module, "_material_detect", INIT_FUNC(_material_detect));
   INIT_MODULE(module, "_ibis_file", INIT_FUNC(_ibis_file));
   INIT_MODULE(module, "_vicar_file", INIT_FUNC(_vicar_file));

@@ -318,4 +318,7 @@ MspiConfigTable_swigregister = _mspi_config_file.MspiConfigTable_swigregister
 MspiConfigTable_swigregister(MspiConfigTable)
 
 
+__all__ = ["MspiConfigFile","MspiConfigTable"]
+
+
 

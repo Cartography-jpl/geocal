@@ -397,4 +397,7 @@ MspiGimbal_swigregister = _mspi_gimbal.MspiGimbal_swigregister
 MspiGimbal_swigregister(MspiGimbal)
 
 
+__all__ = ["MspiGimbal","ObserverMspiGimbal","ObservableMspiGimbal"]
+
+
 

@@ -412,4 +412,7 @@ AirMspiOrbit_swigregister = _air_mspi_orbit.AirMspiOrbit_swigregister
 AirMspiOrbit_swigregister(AirMspiOrbit)
 
 
+__all__ = ["AirMspiOrbit","AirMspiNavData"]
+
+
 

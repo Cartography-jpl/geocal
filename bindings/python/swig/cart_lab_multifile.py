@@ -343,4 +343,7 @@ VicarCartLabMultifile_swigregister = _cart_lab_multifile.VicarCartLabMultifile_s
 VicarCartLabMultifile_swigregister(VicarCartLabMultifile)
 
 
+__all__ = ["CartLabMultifile","GdalCartLabMultifile","VicarCartLabMultifile"]
+
+
 

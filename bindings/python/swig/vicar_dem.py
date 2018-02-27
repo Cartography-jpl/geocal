@@ -245,4 +245,7 @@ VicarDem_swigregister = _vicar_dem.VicarDem_swigregister
 VicarDem_swigregister(VicarDem)
 
 
+__all__ = ["VicarDem"]
+
+
 

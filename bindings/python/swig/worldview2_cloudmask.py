@@ -235,4 +235,7 @@ WorldView2CloudMask_swigregister = _worldview2_cloudmask.WorldView2CloudMask_swi
 WorldView2CloudMask_swigregister(WorldView2CloudMask)
 
 
+__all__ = ["WorldView2CloudMask"]
+
+
 

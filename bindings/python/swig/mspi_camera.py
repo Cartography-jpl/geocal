@@ -526,4 +526,7 @@ MspiCamera_swigregister = _mspi_camera.MspiCamera_swigregister
 MspiCamera_swigregister(MspiCamera)
 
 
+__all__ = ["MspiCamera"]
+
+
 

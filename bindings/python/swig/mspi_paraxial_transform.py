@@ -338,4 +338,7 @@ MspiParaxialTransform_swigregister = _mspi_paraxial_transform.MspiParaxialTransf
 MspiParaxialTransform_swigregister(MspiParaxialTransform)
 
 
+__all__ = ["MspiParaxialTransform"]
+
+
 

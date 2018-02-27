@@ -272,4 +272,7 @@ PosExportOrbit_swigregister = _pos_export_orbit.PosExportOrbit_swigregister
 PosExportOrbit_swigregister(PosExportOrbit)
 
 
+__all__ = ["PosExportOrbit"]
+
+
 

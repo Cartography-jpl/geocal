@@ -231,4 +231,7 @@ DatumGeoid96_swigregister = _datum_geoid96.DatumGeoid96_swigregister
 DatumGeoid96_swigregister(DatumGeoid96)
 
 
+__all__ = ["DatumGeoid96"]
+
+
 

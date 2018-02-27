@@ -88,3 +88,8 @@ public:
   }
 };
 }
+
+// List of things "import *" will include
+%python_export("IbisFile", "IbisColumn_byte", "IbisColumn_half", "IbisColumn_full", "IbisColumn_float", "IbisColumn_double", "IbisColumn_string")
+
+

@@ -593,4 +593,7 @@ def VicarFile_file_name_to_unit(Fname):
     return _vicar_file.VicarFile_file_name_to_unit(Fname)
 
 
+__all__ = ["VicarFile"]
+
+
 

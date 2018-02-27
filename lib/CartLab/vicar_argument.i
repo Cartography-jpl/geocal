@@ -71,3 +71,5 @@ def __setitem__(self, key, val):
 }
 
 
+// List of things "import *" will include
+%python_export("VicarArgument")

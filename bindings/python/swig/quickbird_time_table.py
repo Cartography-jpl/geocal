@@ -225,4 +225,7 @@ QuickBirdTimeTable_swigregister = _quickbird_time_table.QuickBirdTimeTable_swigr
 QuickBirdTimeTable_swigregister(QuickBirdTimeTable)
 
 
+__all__ = ["QuickBirdTimeTable"]
+
+
 

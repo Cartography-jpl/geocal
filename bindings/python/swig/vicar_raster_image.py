@@ -359,4 +359,7 @@ def vicar_open(*args):
     """
     return _vicar_raster_image.vicar_open(*args)
 
+__all__ = ["VicarRasterImage","vicar_open"]
+
+
 

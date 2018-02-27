@@ -284,4 +284,7 @@ VicarArgument_swigregister = _vicar_argument.VicarArgument_swigregister
 VicarArgument_swigregister(VicarArgument)
 
 
+__all__ = ["VicarArgument"]
+
+
 

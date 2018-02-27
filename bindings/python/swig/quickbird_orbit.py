@@ -499,4 +499,7 @@ QuickBirdOrbit_swigregister = _quickbird_orbit.QuickBirdOrbit_swigregister
 QuickBirdOrbit_swigregister(QuickBirdOrbit)
 
 
+__all__ = ["QuickBirdOrbit"]
+
+
 

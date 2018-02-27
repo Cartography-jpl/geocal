@@ -489,4 +489,7 @@ Vector_ArgusOrbitData_swigregister = _argus_orbit.Vector_ArgusOrbitData_swigregi
 Vector_ArgusOrbitData_swigregister(Vector_ArgusOrbitData)
 
 
+__all__ = ["ArgusOrbitData","ArgusOrbit","Vector_ArgusOrbitData"]
+
+
 

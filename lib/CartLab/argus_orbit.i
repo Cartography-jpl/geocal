@@ -59,3 +59,6 @@ public:
 }
 
 %template(Vector_ArgusOrbitData) std::vector<boost::shared_ptr<GeoCal::ArgusOrbitData> >;
+
+// List of things "import *" will include
+%python_export("ArgusOrbitData", "ArgusOrbit", "Vector_ArgusOrbitData")

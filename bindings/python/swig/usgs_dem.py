@@ -315,4 +315,7 @@ UsgsDem_swigregister = _usgs_dem.UsgsDem_swigregister
 UsgsDem_swigregister(UsgsDem)
 
 
+__all__ = ["UsgsDemData","UsgsDem"]
+
+
 

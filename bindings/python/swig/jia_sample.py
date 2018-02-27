@@ -239,4 +239,7 @@ JiaSample_swigregister = _jia_sample.JiaSample_swigregister
 JiaSample_swigregister(JiaSample)
 
 
+__all__ = ["JiaSample"]
+
+
 

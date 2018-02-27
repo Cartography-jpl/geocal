@@ -230,4 +230,7 @@ Landsat7Panchromatic_swigregister = _landsat7_panchromatic.Landsat7Panchromatic_
 Landsat7Panchromatic_swigregister(Landsat7Panchromatic)
 
 
+__all__ = ["Landsat7Panchromatic"]
+
+
 

@@ -328,4 +328,7 @@ MaterialDetect_swigregister = _material_detect.MaterialDetect_swigregister
 MaterialDetect_swigregister(MaterialDetect)
 
 
+__all__ = ["MaterialDetect"]
+
+
 

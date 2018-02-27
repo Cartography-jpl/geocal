@@ -109,3 +109,9 @@ def NAME(self):
   virtual TYPE NAME() const;
 %enddef
 
+%define %python_export(NAME...)
+%pythoncode %{
+__all__ = [NAME]
+%}
+%enddef
+

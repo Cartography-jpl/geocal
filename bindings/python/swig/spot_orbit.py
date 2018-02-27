@@ -254,4 +254,7 @@ SpotOrbit_swigregister = _spot_orbit.SpotOrbit_swigregister
 SpotOrbit_swigregister(SpotOrbit)
 
 
+__all__ = ["SpotOrbit"]
+
+
 

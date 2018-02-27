@@ -355,4 +355,7 @@ SrtmDem_swigregister = _srtm_dem.SrtmDem_swigregister
 SrtmDem_swigregister(SrtmDem)
 
 
+__all__ = ["SrtmDem"]
+
+
 

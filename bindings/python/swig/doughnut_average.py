@@ -438,4 +438,7 @@ RasterImageWrapPandif_swigregister = _doughnut_average.RasterImageWrapPandif_swi
 RasterImageWrapPandif_swigregister(RasterImageWrapPandif)
 
 
+__all__ = ["DoughnutAverage","RasterImageWrapPandif","RasterImageWrapCvdNorm"]
+
+
 

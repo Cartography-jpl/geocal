@@ -224,4 +224,7 @@ PaintClass_swigregister = _paint_class.PaintClass_swigregister
 PaintClass_swigregister(PaintClass)
 
 
+__all__ = ["PaintClass"]
+
+
 

@@ -92,3 +92,6 @@ boost::shared_ptr<RasterImage>
 	     int Number_tile = 4,
 	     bool Force_area_pixel = false);
 }
+
+// List of things "import *" will include
+%python_export("VicarRasterImage", "vicar_open")

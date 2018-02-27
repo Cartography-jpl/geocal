@@ -268,4 +268,7 @@ ArgusCamera_swigregister = _argus_camera.ArgusCamera_swigregister
 ArgusCamera_swigregister(ArgusCamera)
 
 
+__all__ = ["ArgusCamera"]
+
+
 

@@ -420,4 +420,7 @@ AirMspiL1b1_swigregister = _air_mspi_l1b1.AirMspiL1b1_swigregister
 AirMspiL1b1_swigregister(AirMspiL1b1)
 
 
+__all__ = ["AirMspiL1b1File","AirMspiL1b1"]
+
+
 

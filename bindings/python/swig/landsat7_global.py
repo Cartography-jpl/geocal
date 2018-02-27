@@ -239,4 +239,7 @@ Landsat7Global_swigregister = _landsat7_global.Landsat7Global_swigregister
 Landsat7Global_swigregister(Landsat7Global)
 
 
+__all__ = ["Landsat7Global"]
+
+
 

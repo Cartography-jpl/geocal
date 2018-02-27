@@ -278,4 +278,7 @@ VicarOgr_swigregister = _vicar_ogr.VicarOgr_swigregister
 VicarOgr_swigregister(VicarOgr)
 
 
+__all__ = ["VicarOgr"]
+
+
 

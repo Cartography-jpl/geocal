@@ -867,4 +867,7 @@ IbisFile_swigregister = _ibis_file.IbisFile_swigregister
 IbisFile_swigregister(IbisFile)
 
 
+__all__ = ["IbisFile","IbisColumn_byte","IbisColumn_half","IbisColumn_full","IbisColumn_float","IbisColumn_double","IbisColumn_string"]
+
+
 

@@ -324,4 +324,7 @@ AirMspiIgc_swigregister = _air_mspi_igc.AirMspiIgc_swigregister
 AirMspiIgc_swigregister(AirMspiIgc)
 
 
+__all__ = ["AirMspiIgc"]
+
+
 

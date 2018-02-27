@@ -126,3 +126,5 @@ def __setitem__(self, key, v):
   %pickle_serialization();
 };
 }
+// List of things "import *" will include
+%python_export("VicarFile")

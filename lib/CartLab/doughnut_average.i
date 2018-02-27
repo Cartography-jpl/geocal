@@ -54,3 +54,6 @@ protected:
 };
 
 }
+
+// List of things "import *" will include
+%python_export("DoughnutAverage", "RasterImageWrapPandif", "RasterImageWrapCvdNorm")

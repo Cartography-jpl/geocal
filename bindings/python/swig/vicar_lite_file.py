@@ -659,4 +659,7 @@ VicarLiteDem_swigregister = _vicar_lite_file.VicarLiteDem_swigregister
 VicarLiteDem_swigregister(VicarLiteDem)
 
 
+__all__ = ["VicarLiteFile","VicarLiteRasterImage","VicarLiteDem"]
+
+
 

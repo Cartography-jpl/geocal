@@ -224,4 +224,7 @@ def air_mspi_local_file_name(Fname):
     """
     return _air_mspi_file.air_mspi_local_file_name(Fname)
 
+__all__ = ["air_mspi_local_file_name","air_mspi_permanent_file_name"]
+
+
 

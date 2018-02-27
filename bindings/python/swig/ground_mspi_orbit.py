@@ -308,4 +308,7 @@ GroundMspiOrbit_swigregister = _ground_mspi_orbit.GroundMspiOrbit_swigregister
 GroundMspiOrbit_swigregister(GroundMspiOrbit)
 
 
+__all__ = ["GroundMspiOrbit"]
+
+
 

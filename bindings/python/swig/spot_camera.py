@@ -268,4 +268,7 @@ SpotCamera_swigregister = _spot_camera.SpotCamera_swigregister
 SpotCamera_swigregister(SpotCamera)
 
 
+__all__ = ["SpotCamera"]
+
+
 

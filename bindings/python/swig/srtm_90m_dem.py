@@ -315,4 +315,7 @@ Srtm90mDem_swigregister = _srtm_90m_dem.Srtm90mDem_swigregister
 Srtm90mDem_swigregister(Srtm90mDem)
 
 
+__all__ = ["Srtm90mData","Srtm90mDem"]
+
+
 

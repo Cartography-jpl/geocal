@@ -264,4 +264,7 @@ AirMspiTimeTable_swigregister = _air_mspi_time_table.AirMspiTimeTable_swigregist
 AirMspiTimeTable_swigregister(AirMspiTimeTable)
 
 
+__all__ = ["AirMspiTimeTable"]
+
+
 

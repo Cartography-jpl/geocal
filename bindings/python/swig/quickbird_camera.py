@@ -236,4 +236,7 @@ QuickBirdCamera_swigregister = _quickbird_camera.QuickBirdCamera_swigregister
 QuickBirdCamera_swigregister(QuickBirdCamera)
 
 
+__all__ = ["QuickBirdCamera"]
+
+
 

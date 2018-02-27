@@ -24,3 +24,5 @@ public:
   virtual Time max_time() const;
 };
 }
+// List of things "import *" will include
+%python_export("QuickBirdTimeTable")

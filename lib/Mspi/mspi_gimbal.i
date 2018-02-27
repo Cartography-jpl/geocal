@@ -48,3 +48,6 @@ protected:
   void notify_update_do(const MspiGimbal& Self);
 };
 }
+
+// List of things "import *" will include
+%python_export("MspiGimbal", "ObserverMspiGimbal", "ObservableMspiGimbal")

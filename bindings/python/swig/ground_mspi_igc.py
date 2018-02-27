@@ -269,4 +269,7 @@ GroundMspiIgc_swigregister = _ground_mspi_igc.GroundMspiIgc_swigregister
 GroundMspiIgc_swigregister(GroundMspiIgc)
 
 
+__all__ = ["GroundMspiIgc"]
+
+
 

@@ -439,4 +439,7 @@ AirMspiIgcCollection_swigregister = _air_mspi_igc_collection.AirMspiIgcCollectio
 AirMspiIgcCollection_swigregister(AirMspiIgcCollection)
 
 
+__all__ = ["AirMspiIgcCollection"]
+
+
 

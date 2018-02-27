@@ -64,3 +64,6 @@ public:
   %pickle_serialization_dir();
 };
 }
+
+// List of things "import *" will include
+%python_export("AirMspiOrbit", "AirMspiNavData")

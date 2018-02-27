@@ -40,3 +40,6 @@ protected:
   virtual double elevation(int Y_index, int X_index) const;
 };
 }
+
+// List of things "import *" will include
+%python_export("Srtm90mData", "Srtm90mDem")

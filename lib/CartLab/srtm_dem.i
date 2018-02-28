@@ -47,4 +47,4 @@ public:
 };
 }
 // List of things "import *" will include
-%python_export("SrtmDem")
+%python_export("SrtmDem", "SrtmDemData", "SrtmLwmData")

@@ -1,4 +1,4 @@
-from geocal import *
+import geocal
 from test_support import *
 
 @require_serialize
@@ -19,5 +19,5 @@ def test_tp_collection(isolated_dir):
     subprocess.check_call(["tp_collect", "--number-x", "10",
                            "--number-y", "10", "sqlite_shelf.db:igc",
                            "sqlite_shelf.db:tpcol"])
-    tpcol = read_shelve("sqlite_shelf.db:tpcol")
+    tpcol = geocal.read_shelve("sqlite_shelf.db:tpcol")
     assert len(tpcol) > 90

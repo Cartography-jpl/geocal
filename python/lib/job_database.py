@@ -237,3 +237,5 @@ order by job_id
                 if(s in old_signal):
                     signal.signal(s, old_signal[s])
         return True
+
+__all__ = ["JobDatabase"]    

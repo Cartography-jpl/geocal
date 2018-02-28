@@ -1,4 +1,4 @@
-from geocal import *
+import geocal
 import subprocess
 from test_support import *
 
@@ -16,8 +16,8 @@ def test_gdal_to_nitf(isolated_dir):
                            "gdal_to_nitf.ntf"])
 
     # Check that NITF was created correctly
-    f1 = GdalRasterImage("gdal_to_nitf.ntf")
-    f2 = GdalRasterImage(stereo_unit_test_data + "10MAY21-1.img")
+    f1 = geocal.GdalRasterImage("gdal_to_nitf.ntf")
+    f2 = geocal.GdalRasterImage(stereo_unit_test_data + "10MAY21-1.img")
     rpc = f1.rpc
     rpc2 = f2.rpc
     assert_almost_equal(rpc.error_bias, rpc2.error_bias, 5)
@@ -63,8 +63,8 @@ def test_gdal_to_nitf_a(isolated_dir):
                            "gdal_to_nitf.ntf"])
 
     # Check that NITF was created correctly
-    f1 = GdalRasterImage("gdal_to_nitf.ntf")
-    f2 = GdalRasterImage(stereo_unit_test_data + "10MAY21-1_A.img")
+    f1 = geocal.GdalRasterImage("gdal_to_nitf.ntf")
+    f2 = geocal.GdalRasterImage(stereo_unit_test_data + "10MAY21-1_A.img")
     # GDAL NITF always returns the RPC as type B. Go ahead and explicitly 
     # convert both, so can directly compare
     rpc = f1.rpc.rpc_type_b()

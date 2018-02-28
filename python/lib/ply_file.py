@@ -98,3 +98,5 @@ property uchar alpha\n'''
 
     def __del__(self):
         self.close()
+
+__all__ = ["PlyFile"]        

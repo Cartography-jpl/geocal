@@ -312,3 +312,4 @@ class TaskRunner(object):
             if(len(self.error) > 0):
                 raise RuntimeError("Pipeline failed")
 
+__all__ = ["Task", "TaskRunner"]

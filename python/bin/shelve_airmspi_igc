@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-from geocal import *
+import geocal
 
 version = "October 9, 2013"
 usage='''Usage: 
@@ -33,7 +33,7 @@ Options:
        Print program version
 '''
 # Parse command line arguments
-args = docopt_simple(usage, version=version)
-igc = AirMspiIgc(args.air_mspi_file, args.title, args.ellipsoid_height,
+args = geocal.docopt_simple(usage, version=version)
+igc = geocal.AirMspiIgc(args.air_mspi_file, args.title, args.ellipsoid_height,
                  args.group_name, args.data_field, args.data_scale)
-write_shelve(args.output, igc)
+geocal.write_shelve(args.output, igc)

@@ -424,3 +424,6 @@ class XmlLocalTarget(Target):
         # directory anyways.
         
     
+__all__ = ["InLocalTarget", "OutLocalTarget", "OutTempLocalTarget",
+           "OutTempDirLocalTarget", "GeneratedOutLocalTarget",
+           "XmlLocalTarget"]

@@ -227,3 +227,4 @@ def vicar_to_numpy(cmd, output_name = "out"):
     vi.vicar_run()
     return vi.res
 
+__all__ = ["VicarInterface", "vicar_to_numpy"]

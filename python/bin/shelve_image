@@ -2,7 +2,7 @@
 #
 # This sets up a RasterImage into a shelve.
 
-from geocal import *
+import geocal
 
 version = "October 29, 2013"
 usage='''Usage: 
@@ -48,48 +48,48 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 if(args.from_shelve):
-    img = read_shelve(args.image)
+    img = geocal.read_shelve(args.image)
 elif(args.multi_band):
     # Leverage off of VicarImageGroundConnection, even though we don't care
     # about the rpc.
-    if(VicarImageGroundConnection.is_vicar_file(args.image)):
-        img = VicarImageGroundConnection(args.image, SimpleDem()).image_multi_band
+    if(geocal.VicarImageGroundConnection.is_vicar_file(args.image)):
+        img = geocal.VicarImageGroundConnection(args.image, geocal.SimpleDem()).image_multi_band
         if(not img):
-            img = RasterImageMultiBandVariable()
-            img.add_raster_image(VicarLiteRasterImage(args.image))
+            img = geocal.RasterImageMultiBandVariable()
+            img.add_raster_image(geocal.VicarLiteRasterImage(args.image))
     else:
-        img = GdalMultiBand(args.image)
-elif VicarLiteFile.is_vicar_file(args.image):
+        img = geocal.GdalMultiBand(args.image)
+elif geocal.VicarLiteFile.is_vicar_file(args.image):
     if(args.force_map_info):
-        mi = read_shelve(args.force_map_info)
-        img = VicarLiteRasterImage(args.image, mi, args.band)
+        mi = geocal.read_shelve(args.force_map_info)
+        img = geocal.VicarLiteRasterImage(args.image, mi, args.band)
     else:
-        img = VicarLiteRasterImage(args.image, args.band)
+        img = geocal.VicarLiteRasterImage(args.image, args.band)
 else:
-    img = GdalRasterImage(args.image, args.band)
+    img = geocal.GdalRasterImage(args.image, args.band)
 if(args.start_line):
-    if(isinstance(img, RasterImageMultiBand)):
-        img = SubRasterImageMultiBand(img, args.start_line, args.start_sample,
+    if(isinstance(img, geocal.RasterImageMultiBand)):
+        img = geocal.SubRasterImageMultiBand(img, args.start_line, args.start_sample,
                                       args.number_line, args.number_sample)
     else:
-        img = SubRasterImage(img, args.start_line, args.start_sample,
+        img = geocal.SubRasterImage(img, args.start_line, args.start_sample,
                              args.number_line, args.number_sample)
 
 if(args.average):
-    if(isinstance(img, RasterImageMultiBand)):
+    if(isinstance(img, geocal.RasterImageMultiBand)):
         raise RuntimeError("We don't support averaging yet for RasterImageMultiBand")
     else:
-        img = RasterAveraged(img, args.average, args.average)
+        img = geocal.RasterAveraged(img, args.average, args.average)
 if(args.scale):
-    if(isinstance(img, RasterImageMultiBand)):
-        img = ScaleImageMultiBand(img, args.scale)
+    if(isinstance(img, geocal.RasterImageMultiBand)):
+        img = geocal.ScaleImageMultiBand(img, args.scale)
     else:
-        img = ScaleImage(img, args.scale)
+        img = geocal.ScaleImage(img, args.scale)
 
-write_shelve(args.output, img)
+geocal.write_shelve(args.output, img)
 
 
 

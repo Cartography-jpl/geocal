@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-from geocal import *
+import geocal
 
 version = "October 11, 2013"
 usage='''Usage: 
@@ -56,7 +56,7 @@ Options:
 
 # Parse command line arguments
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 line_fit = []
 for i in str(args.rpc_line_fit).split(','):
     if(i != ''):
@@ -68,8 +68,8 @@ for i in str(args.rpc_sample_fit).split(','):
 
 # Generate RPC
 
-igc_in = read_shelve(args.input)
-rpc = Rpc.generate_rpc(igc_in, args.height_min, args.height_max,
+igc_in = geocal.read_shelve(args.input)
+rpc = geocal.Rpc.generate_rpc(igc_in, args.height_min, args.height_max,
                        args.grid_number, args.grid_number,
                        args.grid_number, True, True)
 fln = [False] * 20
@@ -83,10 +83,10 @@ rpc.fit_sample_numerator = fsmp
 
 # And use to create ImageGroundConnection
 
-igc_out = RpcImageGroundConnection(rpc, igc_in.dem, igc_in.image,
+igc_out = geocal.RpcImageGroundConnection(rpc, igc_in.dem, igc_in.image,
                                    igc_in.title, igc_in.image_mask,
                                    igc_in.ground_mask)
 if(args.fit_height_offset):
     igc_out.fit_height_offset = True
 
-write_shelve(args.output, igc_out)
+geocal.write_shelve(args.output, igc_out)

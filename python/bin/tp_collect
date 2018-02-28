@@ -2,7 +2,7 @@
 #
 # This collects tie points.
 
-from geocal import *
+import geocal
 from multiprocessing import Pool
 import logging
 
@@ -184,19 +184,19 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
     tpcollect = []
     msg = []
     if(args.surface_image):
-        surface_image = read_shelve(args.surface_image)
+        surface_image = geocal.read_shelve(args.surface_image)
     else:
         surface_image = None
     if(args.matcher):
-       image_matcher = read_shelve(args.matcher)
+       image_matcher = geocal.read_shelve(args.matcher)
     else:       
        image_matcher = None
     if(args.gcp_matcher):
-       gcp_image_matcher = read_shelve(args.gcp_matcher)
+       gcp_image_matcher = geocal.read_shelve(args.gcp_matcher)
     else:       
        gcp_image_matcher = image_matcher
     if(args.reference_dem):
-       dem = read_shelve(args.reference_dem)
+       dem = geocal.read_shelve(args.reference_dem)
     else:
        dem = igc.dem(0)
            
@@ -208,7 +208,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
                 ig_base = igc.image_ground_connection(i)
                 mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
                 mi = ig_base.cover(mibase)
-            tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+            tpcollect.append(geocal.TiePointCollect(igc, avg_level = args.avg_level,
                                              scale_factor = args.scale_factor,
                                              image_matcher = image_matcher,
                                              ref_image = refimg,
@@ -225,9 +225,9 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
             msg.append("Doing base image %d" % (igc.number_image - 1, ))
             if(args.project_surface):
                 ig_base = igc.image_ground_connection(igc.number_image - 1)
-                mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
+                mibase = geocal.cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
                 mi = ig_base.cover(mibase)
-            tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+            tpcollect.append(geocal.TiePointCollect(igc, avg_level = args.avg_level,
                                              image_matcher = image_matcher,
                                              ref_image = refimg,
                                              ref_dem = dem,
@@ -242,7 +242,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
     else:
         log.info("Adding base image %d" % args.base_image_index)
         msg.append("Doing base image %d" % args.base_image_index)
-        tpcollect.append(TiePointCollect(igc, avg_level = args.avg_level,
+        tpcollect.append(geocal.TiePointCollect(igc, avg_level = args.avg_level,
                                          image_matcher = image_matcher,
                                          ref_image = refimg,
                                          ref_dem = dem,
@@ -258,7 +258,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
     maxnumy = int(igc.image(0).number_sample / args.min_grid_size)
     numx = min(args.number_x, maxnumx)
     numy = min(args.number_y, maxnumy)
-    tparr = TiePointCollection()
+    tparr = geocal.TiePointCollection()
     diag = None
     for i, tpcol in enumerate(tpcollect):
         log.info("---------------------------------------------------------")
@@ -270,7 +270,7 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
     return tparr, diag
 
 def feature_match_tp_collect(args, igc, refimg, pool):
-    tp_collect = TiePointCollectFM(igc, ref_image = refimg,
+    tp_collect = geocal.TiePointCollectFM(igc, ref_image = refimg,
                                number_feature = args.number_feature,
                                number_octave_levels = args.number_octave_levels,
                                number_ref_feature = args.number_ref_feature,
@@ -279,7 +279,7 @@ def feature_match_tp_collect(args, igc, refimg, pool):
     return tp_collect.tie_point_list(pool = pool)
     
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 if(args.debug):
     logging.basicConfig(level = logging.DEBUG)
 elif(args.verbose):
@@ -292,21 +292,21 @@ pool = None
 if(args.number_process > 1):
     pool = Pool(args.number_process)
 
-igc = read_shelve(args.igc)
+igc = geocal.read_shelve(args.igc)
 if(args.map_info):
-    m = read_shelve(args.map_info)
-    if(isinstance(m, MapInfo)):
+    m = geocal.read_shelve(args.map_info)
+    if(isinstance(m, geocal.MapInfo)):
         mi = m
     else:
         mi = m.map_info
 elif(args.project_surface):
     ig_base = igc.image_ground_connection(args.base_image_index)
-    mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
+    mibase = geocal.cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
     mi = ig_base.cover(mibase)
 else:
     mi = None
 if(args.gcp):
-    refimg = read_shelve(args.reference_image)
+    refimg = geocal.read_shelve(args.reference_image)
 else:
     refimg = None
 
@@ -321,11 +321,11 @@ else:
     tparr, diag = image_match_tp_collect(args, igc, mi, refimg, pool)
 
 if(args.outlier_reject_ransac):
-    tparr = outlier_reject_ransac(tparr, ref_image = refimg, 
+    tparr = geocal.outlier_reject_ransac(tparr, ref_image = refimg, 
                threshold = args.outlier_reject_ransac_threshold,
                diagnostic = diag)
 if(args.outlier_reject_ransac_surface_project):
-    tparr = outlier_reject_ransac(tparr, ref_image = refimg, 
+    tparr = geocal.outlier_reject_ransac(tparr, ref_image = refimg, 
                igccol = igc, threshold = args.outlier_reject_ransac_threshold,
                diagnostic = diag)
 
@@ -337,13 +337,13 @@ if(diag is not None):
 try:
     # Ok if this fails, it just means args.output doesn't exist yet
     if(args.add_tp):
-        tparr.extend(read_shelve(args.output))
+        tparr.extend(geocal.read_shelve(args.output))
 except (KeyError, RuntimeError):
     pass
 
 for i in range(len(tparr)):
     tparr[i].id = i
 
-write_shelve(args.output, tparr)
+geocal.write_shelve(args.output, tparr)
 
 

@@ -101,3 +101,5 @@ class Geoeye1Reflectance(InstrumentReflectance):
          print("gain: ", self.gain[i], "offset: ", self.offset[i])
          print("effectiveBandwidth: ", self.effectiveBandwidths[i])
 
+
+__all__ = ["Geoeye1Reflectance"]         

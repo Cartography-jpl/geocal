@@ -3,7 +3,7 @@
 # This converts a GDAL file to ERDAS, including calculating statistics and
 # an image pyramid.
 
-from geocal import *
+import geocal
 import subprocess
 
 version = "May 10,2013"
@@ -29,7 +29,7 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 if(args.input_band):
     with TempDir() as t:
@@ -37,8 +37,8 @@ if(args.input_band):
         cmd = ["gdalbuildvrt", "-separate", tfile]
         cmd.extend(args.input_band)
         subprocess.check_call(cmd)
-        gdal_to_erdas_file(tfile, args.output_erdas)
+        geocal.gdal_to_erdas_file(tfile, args.output_erdas)
 else:
-    gdal_to_erdas_file(args.input_gdal_file, args.output_erdas)
+    geocal.gdal_to_erdas_file(args.input_gdal_file, args.output_erdas)
 
 

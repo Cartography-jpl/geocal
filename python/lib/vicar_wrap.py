@@ -185,3 +185,5 @@ def sc2rpc(orbit_data, delta_ut1, leapsecond_file, image_coordinate,
     t = __sc2rpc(orbit_data, delta_ut1, leapsecond_file, image_coordinate, 
                  height, sc_to_cam_q, fu, fv)
     return t.res
+
+__all__ = ["scinterp", "sc2rpc"]

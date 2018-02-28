@@ -44,3 +44,5 @@ def pleides_rpc(fname):
     rpc.sample_numerator = samp_num
     rpc.sample_denominator = samp_den
     return rpc
+
+__all__ = ["pleides_rpc"]

@@ -1,5 +1,6 @@
 from __future__ import print_function
 from geocal.local_target import *
+from geocal.misc import makedirs_p
 from test_support import *
 
 @require_rsync

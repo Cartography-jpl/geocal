@@ -5,7 +5,7 @@
 # label files each time we need this information, but it is faster to record
 # this is a single file
 
-from geocal import *
+import geocal
 import glob
 
 version = "May 17, 2017"
@@ -35,13 +35,13 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 d = {}
-d["ck_kernel"] = SpiceKernelByTime(glob.glob(args.ck_glob))
-d["spk_kernel"] = SpiceKernelByTime(glob.glob(args.spk_glob))
+d["ck_kernel"] = geocal.SpiceKernelByTime(glob.glob(args.ck_glob))
+d["spk_kernel"] = geocal.SpiceKernelByTime(glob.glob(args.spk_glob))
 
-write_shelve(args.output_name, d)
+geocal.write_shelve(args.output_name, d)
 
 
     

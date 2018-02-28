@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-from geocal import *
+import geocal
 from functools import partial
 import subprocess
 import os
@@ -80,23 +80,23 @@ Options:
   -v --version      
        Print program version
 '''
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
-igc_col = read_shelve(args.igc_collection)
+igc_col = geocal.read_shelve(args.igc_collection)
 igc1 = igc_col.image_ground_connection(args.index_image1)
 igc2 = igc_col.image_ground_connection(args.index_image2)
 
 # Determine the coverage of the DEM.
 
 if(args.map_info):
-    m = read_shelve(args.map_info)
-    if(isinstance(m, MapInfo)):
+    m = geocal.read_shelve(args.map_info)
+    if(isinstance(m, geocal.MapInfo)):
         midem = m
     else:
         midem = m.map_info
 elif(args.map_info_cover):
-    m = read_shelve(args.map_info_cover)
-    if(isinstance(m, MapInfo)):
+    m = geocal.read_shelve(args.map_info_cover)
+    if(isinstance(m, geocal.MapInfo)):
         midem = m
     else:
         midem = m.map_info
@@ -105,9 +105,9 @@ elif(args.map_info_cover):
 else:
     gc_sample = igc1.ground_coordinate(ImageCoordinate(0,0))
     if(gc_sample.naif_code() == CoordinateConverter.EARTH_NAIF_CODE):
-        mibase = cib01_mapinfo(desired_resolution = args.resolution)
+        mibase = geocal.cib01_mapinfo(desired_resolution = args.resolution)
     else:
-        mibase = planet_mapinfo(gc_sample.naif_code(),
+        mibase = geocal.planet_mapinfo(gc_sample.naif_code(),
                                 desired_resolution = args.resolution)
     midem = igc1.cover(mibase, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
@@ -116,34 +116,37 @@ else:
 surface_image1 = None
 surface_image2 = None
 if(args.surface_image1):
-    surface_image1 = read_shelve(args.surface_image1)
-    surface_image2 = read_shelve(args.surface_image2)
+    surface_image1 = geocal.read_shelve(args.surface_image1)
+    surface_image2 = geocal.read_shelve(args.surface_image2)
 
 # Average data id requested
 if(args.average):
-    igc1 = AveragedImageGroundConnection(igc1, args.average, args.average, True)
-    igc2 = AveragedImageGroundConnection(igc2, args.average, args.average, True)
+    igc1 = geocal.AveragedImageGroundConnection(igc1, args.average,
+                                                args.average, True)
+    igc2 = geocal.AveragedImageGroundConnection(igc2, args.average,
+                                                args.average, True)
     if(surface_image1 is not None):
-        surface_image1 = RasterAveraged(surface_image1, args.average, 
+        surface_image1 = geocal.RasterAveraged(surface_image1, args.average, 
                                         args.average)
     if(surface_image2 is not None):
-        surface_image2 = RasterAveraged(surface_image2, args.average, 
+        surface_image2 = geocal.RasterAveraged(surface_image2, args.average, 
                                         args.average)
 
 # Set up image matcher
 if(args.image_matcher):
-    im = read_shelve(args.image_matcher)
+    im = geocal.read_shelve(args.image_matcher)
 elif(args.airmspi_image_match):
-    im = CcorrLsmMatcher(CcorrMatcher(), LsmMatcher(11, 11, 5, 0.3, 0.5, 2.0))
+    im = geocal.CcorrLsmMatcher(geocal.CcorrMatcher(),
+                                geocal.LsmMatcher(11, 11, 5, 0.3, 0.5, 2.0))
 else:
-    im = CcorrLsmMatcher()
+    im = geocal.CcorrLsmMatcher()
 
 # Create the DEM object and save.
-dem = DemGenerateMB(igc1, igc2, midem, 
+dem = geocal.DemGenerateMB(igc1, igc2, midem, 
                     image_matcher = im,
                     interpolate_method = args.interpolation_method,
                     buffer_size = args.buffer,
                     surface_image1 = surface_image1,
                     surface_image2 = surface_image2,
                     max_dist_good_point = args.max_distance_good_point)
-write_shelve(args.output, dem)
+geocal.write_shelve(args.output, dem)

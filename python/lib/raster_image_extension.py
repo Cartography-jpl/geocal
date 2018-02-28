@@ -97,7 +97,7 @@ def _footprint_geometry(self, cconver = geocal_swig.GeodeticConverter()):
 if(have_shape_file):
     geocal_swig.RasterImage.footprint_geometry = _footprint_geometry
 
-
+__all__ = []
 
 
 

@@ -98,4 +98,5 @@ class OutputCache(object):
         if(stdout is not None):
             with open(d + "/STDOUT", "wb") as fh:
                 fh.write(stdout)
-        
+
+__all__ = ["OutputCache"]

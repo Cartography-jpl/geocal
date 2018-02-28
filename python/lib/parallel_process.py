@@ -86,3 +86,5 @@ def parallel_process_image(img_in, out, process_nline, process_nsamp,
             pool = Pool(number_process)
             res = pool.map(do_parallel_process, process_list)
     return job_index
+
+__all__ = ["parallel_process_image"]

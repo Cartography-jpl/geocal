@@ -8,7 +8,7 @@ from builtins import range
 # You can add this to your ipython configuration
 # file to always load by setting "c.InteractiveShellApp.extension =  ['geocal.ipython']"
 
-from geocal import *
+import geocal
 # The interact gives a warning everytime we load it. Kind of annoying, so
 # turn off. 
 import warnings

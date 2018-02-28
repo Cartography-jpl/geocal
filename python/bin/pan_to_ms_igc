@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from geocal import *
+import geocal
 
 version = "November 5, 2013"
 usage='''Usage: 
@@ -29,37 +29,37 @@ Options:
        Print program version
 '''
 # Parse command line arguments
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 if(args.initial_pan_igc):
-    pan_init = read_shelve(args.initial_pan_igc)
+    pan_init = geocal.read_shelve(args.initial_pan_igc)
 else:
-    pan_init = read_shelve(args.initial_pan_igccol).image_ground_connection(args.orignal_index)
+    pan_init = geocal.read_shelve(args.initial_pan_igccol).image_ground_connection(args.orignal_index)
 if(args.final_pan_igc):
-    pan_final = read_shelve(args.final_pan_igc)
+    pan_final = geocal.read_shelve(args.final_pan_igc)
 else:
-    pan_final = read_shelve(args.final_pan_igccol).image_ground_connection(args.orignal_index)
-ms = read_shelve(args.initial_ms_igc)
+    pan_final = geocal.read_shelve(args.final_pan_igccol).image_ground_connection(args.orignal_index)
+ms = geocal.read_shelve(args.initial_ms_igc)
 
 # Determine scaling and offset so that it matches the ms, and then apply
 # to the final image ground connection
 ic1 = pan_init.image_coordinate(
-    ms.ground_coordinate(ImageCoordinate(-0.5,-0.5)))
+    ms.ground_coordinate(geocal.ImageCoordinate(-0.5,-0.5)))
 ic2 = pan_init.image_coordinate(
-    ms.ground_coordinate(ImageCoordinate(-0.5 + 1.0,-0.5)))
+    ms.ground_coordinate(geocal.ImageCoordinate(-0.5 + 1.0,-0.5)))
 ic3 = pan_init.image_coordinate(ms.ground_coordinate(
-        ImageCoordinate(-0.5,-0.5 + 1.0)))
-pavg = AveragedImageGroundConnection(
-    OffsetImageGroundConnection(pan_final, -0.5 - ic1.line, -0.5 - ic1.sample), 
+        geocal.ImageCoordinate(-0.5,-0.5 + 1.0)))
+pavg = geocal.AveragedImageGroundConnection(
+    geocal.OffsetImageGroundConnection(pan_final, -0.5 - ic1.line, -0.5 - ic1.sample), 
     int(round(ic2.line - ic1.line)), int(round(ic3.sample - ic1.sample)))
 
 # Now apply this to the multi-spectral data
-msigc = ImageGroundConnectionCopy(pavg)
+msigc = geocal.ImageGroundConnectionCopy(pavg)
 msigc.image = None
 msigc.image_multi_band = ms.image_multi_band
 msigc.title = ms.title
 
 # And then save
-write_shelve(args.output, msigc)
+geocal.write_shelve(args.output, msigc)
 
 

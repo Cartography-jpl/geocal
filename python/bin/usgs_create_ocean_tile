@@ -3,7 +3,7 @@
 # This creates a USGS DEM tile that has a height relative to the datum
 # of 0 everywhere, i.e., an ocean tile.
 
-from geocal import *
+import geocal
 import re
 import numpy as np
 
@@ -25,7 +25,7 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 # Get the upper left corner. Note that there is actually 6 pixel border around
 # this, but we start initially with this value.
@@ -40,13 +40,13 @@ if(m.group(3) == 'w'):
     lon = -lon
 
 # We just looked at one of the tile to get this full coordinate system
-ogr = OgrWrapper('GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["unretrievable - using WGS84",6378137,298.257223563,AUTHORITY["EPSG","7019"]],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433],AUTHORITY["EPSG","4269"]]')
-cconv = OgrCoordinateConverter(ogr)
+ogr = geocal.OgrWrapper('GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["unretrievable - using WGS84",6378137,298.257223563,AUTHORITY["EPSG","7019"]],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433],AUTHORITY["EPSG","4269"]]')
+cconv = geocal.OgrCoordinateConverter(ogr)
 
 # Create the mapinfo that goes with this set
-minfo = MapInfo(cconv, lon, lat, lon + 1, lat-1, 10800, 10800)
+minfo = geocal.MapInfo(cconv, lon, lat, lon + 1, lat-1, 10800, 10800)
 # Add border
 minfo = minfo.subset(-6,-6,10812,10812)
-f = GdalRasterImage("%s_10m.tif" % args.tile_coordinate, "gtiff", minfo, 1, 
-                    GdalRasterImage.Int16, "COMPRESS=LZW")
+f = geocal.GdalRasterImage("%s_10m.tif" % args.tile_coordinate, "gtiff", minfo, 1, 
+                    geocal.GdalRasterImage.Int16, "COMPRESS=LZW")
 f.write(0, 0, np.zeros((10812,10812), dtype=np.int16))

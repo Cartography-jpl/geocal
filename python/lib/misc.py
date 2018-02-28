@@ -102,4 +102,6 @@ def comment_remover(text):
         re.DOTALL | re.MULTILINE
     )
     return re.sub(pattern, replacer, text)
-    
+
+__all__ = ["makedirs_p", "cib01_data", "cib01_mapinfo", "planet_mapinfo",
+           "pid_exists", "comment_remover"]

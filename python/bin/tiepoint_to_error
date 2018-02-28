@@ -5,7 +5,7 @@
 # may contains fill values). For those GCPs we find the CE90 error to the
 # reference for each of the igcs.
 
-from geocal import *
+import geocal
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 
@@ -32,16 +32,16 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
-tpcol = read_shelve(args.tpcol_in)
-dem = read_shelve(args.dem_in)
-igccol = read_shelve(args.igccol)
+tpcol = geocal.read_shelve(args.tpcol_in)
+dem = geocal.read_shelve(args.dem_in)
+igccol = geocal.read_shelve(args.igccol)
 
 # The calculation here is for the CE90%. The details of how to calculate this
 # can be found in Dr. Charles G. O'Hara "Accuracy Analyst: A Horizontal 
 # Accuracy Assessment Tool.
-goodtp = TiePointCollection()
+goodtp = geocal.TiePointCollection()
 diff = [ [ ] for i in range(tpcol[0].number_image)]
 for tp in tpcol:
     if(tp.is_gcp):

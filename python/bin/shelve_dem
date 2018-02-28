@@ -2,7 +2,7 @@
 #
 # This sets up a DEM into a shelve.
 
-from geocal import *
+import geocal
 
 version = "February 4, 2013"
 usage='''Usage: 
@@ -49,32 +49,32 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 dem = None
 if(args.srtm):
-    dem = SrtmDem()
+    dem = geocal.SrtmDem()
 elif(args.constant_dem is not None):
-    dem = SimpleDem(args.constant_dem)
+    dem = geocal.SimpleDem(args.constant_dem)
 else:
     if(args.datum_file):
-        datum = GdalDatum(args.datum_file, args.datum_band)
+        datum = geocal.GdalDatum(args.datum_file, args.datum_band)
     else:
-        datum = SimpleDatum(args.constant_datum)
-    if VicarLiteFile.is_vicar_file(args.dem_file):
-        dem = VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
+        datum = geocal.SimpleDatum(args.constant_datum)
+    if geocal.VicarLiteFile.is_vicar_file(args.dem_file):
+        dem = geocal.VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
                            datum, args.dem_band)
     else:
         # Check for mola file
         t = subprocess.run(["file", "-b", args.dem_file], stdout=subprocess.PIPE)
         if(t.returncode == 0 and t.stdout.find(b"PDS image data") >= 0):
             if(pds_label(args.dem_file)["DATA_SET_ID"].find("MOLA") >= 0):
-                dem = MolaDemFile(args.dem_file, not args.outside_dem_not_error)
+                dem = geocal.MolaDemFile(args.dem_file, not args.outside_dem_not_error)
         if(dem is None):
-            dem = GdalDem(args.dem_file, datum, args.dem_band, 
+            dem = geocal.GdalDem(args.dem_file, datum, args.dem_band, 
                           not args.outside_dem_not_error)
 
-write_shelve(args.output, dem)
+geocal.write_shelve(args.output, dem)
 
 
 

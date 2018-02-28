@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-from geocal import *
+import geocal
 import matplotlib.pyplot as plt
 import subprocess
 import os
@@ -29,14 +29,14 @@ Options:
   -v --version      
        Print program version
 """
-args = docopt_simple(usage, version=version)
-mi = VicarRasterImage(args.fname + ".img").map_info
-d = mmap_file(args.fname + ".img")
-img1 = VicarRasterImage(args.fname + "_b1.img", mi, "BYTE")
+args = geocal.docopt_simple(usage, version=version)
+mi = geocal.VicarRasterImage(args.fname + ".img").map_info
+d = geocal.mmap_file(args.fname + ".img")
+img1 = geocal.VicarRasterImage(args.fname + "_b1.img", mi, "BYTE")
 img1["NODATA"] = 0.0
-img2 = VicarRasterImage(args.fname + "_b2.img", mi, "BYTE")
+img2 = geocal.VicarRasterImage(args.fname + "_b2.img", mi, "BYTE")
 img2["NODATA"] = 0.0
-img3 = VicarRasterImage(args.fname + "_b3.img", mi, "BYTE")
+img3 = geocal.VicarRasterImage(args.fname + "_b3.img", mi, "BYTE")
 img3["NODATA"] = 0.0
 cdata = cm((d - args.vmin) / (args.vmax - args.vmin))
 for i in range(d.shape[0]):

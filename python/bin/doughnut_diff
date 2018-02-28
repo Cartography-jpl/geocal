@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from geocal import *
+import geocal
 
 version = "September 18, 2013"
 usage='''Usage:
@@ -33,17 +33,17 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
-mb = RasterImageMultiBandVariable()
-mb.add_raster_image(read_shelve(args.input_image_1))
-mb.add_raster_image(read_shelve(args.input_image_2))
-davg = DoughnutAverage(mb, args.window_size, args.doughnut_size,
+args = geocal.docopt_simple(usage, version=version)
+mb = geocal.RasterImageMultiBandVariable()
+mb.add_raster_image(geocal.read_shelve(args.input_image_1))
+mb.add_raster_image(geocal.read_shelve(args.input_image_2))
+davg = geocal.DoughnutAverage(mb, args.window_size, args.doughnut_size,
                        not args.disallow_gore)
-pdiff = RasterImageWrapPandif(davg)
-write_shelve(args.pandiff, pdiff)
+pdiff = geocal.RasterImageWrapPandif(davg)
+geocal.write_shelve(args.pandiff, pdiff)
 if(args.pandiff_and_cvdnorm):
-    mb = RasterImageMultiBandVariable()
+    mb = geocal.RasterImageMultiBandVariable()
     mb.add_raster_image(pdiff)
-    mb.add_raster_image(RasterImageWrapCvdNorm(davg, 1))
-    write_shelve(args.pandiff_and_cvdnorm, mb)
+    mb.add_raster_image(geocal.RasterImageWrapCvdNorm(davg, 1))
+    geocal.write_shelve(args.pandiff_and_cvdnorm, mb)
 

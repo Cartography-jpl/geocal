@@ -250,3 +250,4 @@ class WorldView2Reflectance(InstrumentReflectance):
          print("abscalfactor: ", self.absCalFactors[i])
          print("effectiveBandwidth: ", self.effectiveBandwidths[i])
 
+__all__ = ["WorldView2Reflectance"]

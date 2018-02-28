@@ -2,7 +2,7 @@
 #
 # This takes a VICAR file with a RSM and projects it to the surface.
 
-from geocal import *
+import geocal
 
 version = "October 2, 2017"
 usage='''Usage:
@@ -120,7 +120,7 @@ long_name_to_vicar = { "image" : "img",
                        "verbose" : "verbose"
                        }
 
-args = docopt_simple(usage, version=version,
+args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
 # This is shelve_dem. We will want to come up with a better way of stringing
@@ -129,30 +129,30 @@ args = docopt_simple(usage, version=version,
 def create_dem(args):
     dem = None
     if(args.srtm):
-        dem = SrtmDem()
+        dem = geocal.SrtmDem()
     elif(args.constant_dem and args.constant_dem != -9999.0):
-        dem = SimpleDem(args.constant_dem)
+        dem = geocal.SimpleDem(args.constant_dem)
     else:
         if(args.datum_file):
-            datum = GdalDatum(args.datum_file, args.datum_band)
+            datum = geocal.GdalDatum(args.datum_file, args.datum_band)
         else:
-            datum = SimpleDatum(args.constant_datum)
-        if VicarLiteFile.is_vicar_file(args.dem_file):
-            dem = VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
+            datum = geocal.SimpleDatum(args.constant_datum)
+        if geocal.VicarLiteFile.is_vicar_file(args.dem_file):
+            dem = geocal.VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
                                datum, args.dem_band)
         else:
             # Check for mola file
             t = subprocess.run(["file", "-b", args.dem_file], stdout=subprocess.PIPE)
             if(t.returncode == 0 and t.stdout.find(b"PDS image data") >= 0):
                 if(pds_label(args.dem_file)["DATA_SET_ID"].find("MOLA") >= 0):
-                    dem = MolaDemFile(args.dem_file, not args.outside_dem_not_error)
+                    dem = geocal.MolaDemFile(args.dem_file, not args.outside_dem_not_error)
             if(dem is None):
-                dem = GdalDem(args.dem_file, datum, args.dem_band, 
+                dem = geocal.GdalDem(args.dem_file, datum, args.dem_band, 
                               not args.outside_dem_not_error)
     return dem
 
 def mars_default_mi(desired_resolution = 1):
-    owrap = OgrWrapper(
+    owrap = geocal.OgrWrapper(
 '''PROJCS["SimpleCylindrical Mars",
      GEOGCS["GCS_Mars",
          DATUM["D_Mars",
@@ -167,46 +167,46 @@ def mars_default_mi(desired_resolution = 1):
      PARAMETER["false_northing",0],
      UNIT["metre",1,
          AUTHORITY["EPSG","9001"]]]''')
-    cconv = OgrCoordinateConverter(owrap)
-    mi = MapInfo(cconv, 0, 0, 10000, 10000, 10000, 10000)
+    cconv = geocal.OgrCoordinateConverter(owrap)
+    mi = geocal.MapInfo(cconv, 0, 0, 10000, 10000, 10000, 10000)
     return mi.scale(desired_resolution, desired_resolution)
 
 def create_igc_map(igc, args):
     if(args.map_info):
-        mi = GdalRasterImage(args.map_info).map_info
+        mi = geocal.GdalRasterImage(args.map_info).map_info
     elif(args.bounding_box):
-        mibase = GdalRasterImage(args.map_info).map_info
+        mibase = geocal.GdalRasterImage(args.map_info).map_info
         resbase = mibase.resolution_meter
         miscale = mibase.scale(args.resolution / resbase,
                                args.resolution / resbase)
-        mp = IgcMapProjected(miscale, igc, 1, -1, False)
+        mp = geocal.IgcMapProjected(miscale, igc, 1, -1, False)
         mi = mp.map_info
         mp = None
     else:
         naif_code = rsm.coordinate_converter.naif_code
-        if(naif_code == Ecr.EARTH_NAIF_CODE):
-            mibase = cib01_mapinfo(desired_resolution = args.resolution)
-        elif(naif_code == PlanetConstant.MARS_NAIF_CODE):
-            mibase = mars_default_mi(desired_resolution = args.resolution)
+        if(naif_code == geocal.Ecr.EARTH_NAIF_CODE):
+            mibase = geocal.cib01_mapinfo(desired_resolution = args.resolution)
+        elif(naif_code == geocal.PlanetConstant.MARS_NAIF_CODE):
+            mibase = geocal.mars_default_mi(desired_resolution = args.resolution)
         else:
             raise RuntimeError("Don't currently support NAIF code %d" %
                                naif_code)
         mi = igc.cover(mibase)
-        mp = IgcMapProjected(mi, igc, 1, -1, False)
+        mp = geocal.IgcMapProjected(mi, igc, 1, -1, False)
         mi = mp.map_info
         mp = None
-    igc_map = IgcMapProjected(mi, igc, args.grid_spacing, args.avg_factor,
+    igc_map = geocal.IgcMapProjected(mi, igc, args.grid_spacing, args.avg_factor,
                               False)
         
     return igc_map
         
 dem = create_dem(args)
-rsm = read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
-if(VicarLiteFile.is_vicar_file(args.image)):
-    img = VicarLiteRasterImage(args.image)
+rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
+if(geocal.VicarLiteFile.is_vicar_file(args.image)):
+    img = geocal.VicarLiteRasterImage(args.image)
 else:
-    img = GdalRasterImage(args.image)
-igc = RsmImageGroundConnection(rsm, dem, img, "RSM Image")
+    img = geocal.GdalRasterImage(args.image)
+igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
 igc_map = create_igc_map(igc, args)
 
 if(args.verbose):
@@ -224,6 +224,6 @@ elif(args.vicar_type == "FULL"):
     dtype = np.int32
 else:
     raise RuntimeError("Unknown vicar type %s" % args.vicar_type)
-out = mmap_file(args.output, igc_map.map_info, dtype=dtype)
-parallel_process_image(igc_map, out, args.process_number_line,
+out = geocal.mmap_file(args.output, igc_map.map_info, dtype=dtype)
+geocal.parallel_process_image(igc_map, out, args.process_number_line,
                        args.process_number_sample, args.number_process)

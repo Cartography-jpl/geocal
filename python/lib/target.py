@@ -162,6 +162,5 @@ class OutFileTarget(Target):
             # silently ignore this problem
             pass
 
-        
-        
-    
+__all__ = ["Target", "InFileTarget", "LogFileTarget", "OutFileTarget"]
+           

@@ -3,7 +3,7 @@
 # This map projects a ImageGroundConnection to the surface, generating
 # a map projected image.
 
-from geocal import *
+import geocal
 from functools import partial
 from multiprocessing import Pool
 
@@ -64,58 +64,58 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 if(args.igc_collection):
-    igc_col = read_shelve(args.igc_collection)
+    igc_col = geocal.read_shelve(args.igc_collection)
     igc = igc_col.image_ground_connection(args.image_index)
 else:
-    igc = read_shelve(args.igc)
+    igc = geocal.read_shelve(args.igc)
 
 # Allow changes to be made to igc
-igc = ImageGroundConnectionCopy(igc)
+igc = geocal.ImageGroundConnectionCopy(igc)
 
 if(args.dem):
-    igc.dem = read_shelve(args.dem)
+    igc.dem = geocal.read_shelve(args.dem)
 if(args.ground_mask):
-    if(not isinstance(igc.ground_mask, CombinedGroundMask)):
-        gmnew = CombinedGroundMask()
+    if(not isinstance(igc.ground_mask, geocal.CombinedGroundMask)):
+        gmnew = geocal.CombinedGroundMask()
         gmnew.mask_list.push_back(igc.ground_mask)
         igc.ground_mask = gmnew
-    igc.ground_mask.mask_list.push_back(read_shelve(args.ground_mask))
+    igc.ground_mask.mask_list.push_back(geocal.read_shelve(args.ground_mask))
 
 # Create the map projection object, and the output object
 
 if(args.map_info):
-    mi = read_shelve(args.map_info)
-    if(not isinstance(mi, MapInfo)):
+    mi = geocal.read_shelve(args.map_info)
+    if(not isinstance(mi, geocal.MapInfo)):
         mi = mi.map_info
 elif(args.bounding_box):
-    mibase = read_shelve(args.bounding_box).map_info
+    mibase = geocal.read_shelve(args.bounding_box).map_info
     resbase = mibase.resolution_meter
     miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
     if(igc.image):
-        mp = IgcMapProjected(miscale, igc, 1, -1, False)
+        mp = geocal.IgcMapProjected(miscale, igc, 1, -1, False)
         mi = mp.map_info
     else:
-        mp = IgcMapProjectedMultiBand(miscale, igc, 1, -1, False)
+        mp = geocal.IgcMapProjectedMultiBand(miscale, igc, 1, -1, False)
         mi = mp.raster_image(0).map_info
     mp = None
 else:
-    mibase = cib01_mapinfo(desired_resolution = args.resolution)
+    mibase = geocal.cib01_mapinfo(desired_resolution = args.resolution)
     mi = igc.cover(mibase)
     if(igc.image):
-        mp = IgcMapProjected(mi, igc, 1, -1, False)
+        mp = geocal.IgcMapProjected(mi, igc, 1, -1, False)
         mi = mp.map_info
     else:
-        mp = IgcMapProjectedMultiBand(mi, igc, 1, -1, False)
+        mp = geocal.IgcMapProjectedMultiBand(mi, igc, 1, -1, False)
         mi = mp.raster_image(0).map_info
     mp = None
 
 if(igc.image):
-    igc = IgcMapProjected(mi, igc, args.grid_spacing, args.avg_factor, False)
+    igc = geocal.IgcMapProjected(mi, igc, args.grid_spacing, args.avg_factor, False)
 else:
-    igc = IgcMapProjectedMultiBand(mi, igc, args.grid_spacing, 
+    igc = geocal.IgcMapProjectedMultiBand(mi, igc, args.grid_spacing, 
                                    args.avg_factor, False)
     
-write_shelve(args.output, igc)
+geocal.write_shelve(args.output, igc)

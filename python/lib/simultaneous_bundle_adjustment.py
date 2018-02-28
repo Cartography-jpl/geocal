@@ -439,3 +439,5 @@ class SimultaneousBundleAdjustment(object):
         jstart = self.igc_coll_param_slice.start
         for i in range(self.igc_coll.parameter_subset.shape[0]):
             res[istart + i, jstart + i] = old_div(1, self.psigma[i])
+
+__all__ = ["SimultaneousBundleAdjustment"]            

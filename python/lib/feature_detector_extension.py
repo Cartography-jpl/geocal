@@ -65,3 +65,5 @@ def interest_point_grid(self, img, number_grid_line, number_grid_sample,
     return list(chain.from_iterable(res))
 
 setattr(FeatureDetector, "interest_point_grid", interest_point_grid)
+
+__all__ = []

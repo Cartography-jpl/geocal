@@ -10,7 +10,7 @@ from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 from .misc import makedirs_p
 from geocal_swig import IgcMapProjected, CartesianFixedLookVector, \
-    LnLookVector, Ecr, ImageCoordinate, distance, TiePoint
+    LnLookVector, Ecr, ImageCoordinate, distance, TiePoint, TiePointCollection
 import copy
 import numpy as np
 import re
@@ -357,3 +357,4 @@ def _tpcol_extend(self, tparr):
         
 TiePointCollection.extend = _tpcol_extend
 
+__all__ = []

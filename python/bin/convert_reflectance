@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from geocal import *
+import geocal
 import os
 
 version = "September 18, 2013"
@@ -29,12 +29,12 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
-img_in = read_shelve(args.input_image)
+args = geocal.docopt_simple(usage, version=version)
+img_in = geocal.read_shelve(args.input_image)
 if(args.wv2_pan):
-    wv2 = WorldView2Reflectance(None, args.wv2_pan)
-    out = ScaleImage(img_in, wv2.dn2TOAReflectance_factor(wv2.pan_band()))
+    wv2 = geocal.WorldView2Reflectance(None, args.wv2_pan)
+    out = geocal.ScaleImage(img_in, wv2.dn2TOAReflectance_factor(wv2.pan_band()))
 else:
     raise RuntimeException("Need to select a image type to convert to reflectance")
-write_shelve(args.output_image, out)
+geocal.write_shelve(args.output_image, out)
 

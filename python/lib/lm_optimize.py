@@ -79,3 +79,5 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
     log.info("Done with optimize.")
     log.info("  Total time: %f" %(time.clock() - start_time))
     return x
+
+__all__ = ["lm_optimize"]

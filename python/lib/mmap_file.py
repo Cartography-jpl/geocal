@@ -108,3 +108,5 @@ def mmap_file(*args, **kwargs):
     return memmap_wrap(fname, dtype = dtype, offset = lsize, shape=shp, 
                        mode=mode)
 
+__all__ = ["mmap_file"]
+

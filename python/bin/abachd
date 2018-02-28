@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from geocal import *
+import geocal
 import os
 import subprocess
 import logging
@@ -89,7 +89,7 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 tstart = time.time()
 
 # Get input files
@@ -138,7 +138,7 @@ def generate_image(fname, name_in, name, subset = None):
     shelve_image(fname, name)
 
 def generate_image_ms(fname, name_in, name, subset = None):
-    nband = read_shelve(dbfile + ":" + name_in).number_band
+    nband = geocal.read_shelve(dbfile + ":" + name_in).number_band
     # Producing data as 1000x1000 seems to go much faster
     cmd = ["write_image", nproc, dbfile + ":" + name_in,
            "--process-number-line=1000", "--process-number-sample=1000"]
@@ -165,11 +165,11 @@ def timing(txt):
 def determine_subset(fname):
     subset = None
     if(args.start_line):
-        dem = read_shelve(dbfile + ":dem_initial")
-        igc1 = VicarImageGroundConnection("pre_pan_raw.hlf", dem)
-        igc2 = GdalImageGroundConnection(fname, dem)
-        ulc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(0, 0)))
-        lrc = igc2.image_coordinate(igc1.ground_coordinate(ImageCoordinate(igc1.number_line, igc1.number_sample)))
+        dem = geocal.read_shelve(dbfile + ":dem_initial")
+        igc1 = geocal.VicarImageGroundConnection("pre_pan_raw.hlf", dem)
+        igc2 = geocal.GdalImageGroundConnection(fname, dem)
+        ulc = igc2.image_coordinate(igc1.ground_coordinate(geocal.ImageCoordinate(0, 0)))
+        lrc = igc2.image_coordinate(igc1.ground_coordinate(geocal.ImageCoordinate(igc1.number_line, igc1.number_sample)))
         sl = max(int(floor(ulc.line)), 0)
         ss = max(int(floor(ulc.sample)), 0)
         el = min(int(ceil(lrc.line)), igc2.number_line - 1)
@@ -186,9 +186,9 @@ def determine_subset(fname):
         igc2 = None
         subset = [sl, ss, el - sl + 1, es - ss + 1]
     elif(args.aoi):
-        dem = read_shelve(dbfile + ":dem_initial")
-        aoi = read_shelve(args.aoi)
-        igc = GdalImageGroundConnection(fname, dem)
+        dem = geocal.read_shelve(dbfile + ":dem_initial")
+        aoi = geocal.read_shelve(args.aoi)
+        igc = geocal.GdalImageGroundConnection(fname, dem)
         ulc_g = dem.surface_point(aoi.ground_coordinate(0,0))
         lrc_g = dem.surface_point(aoi.ground_coordinate(aoi.number_x_pixel,
                                                     aoi.number_y_pixel))
@@ -222,7 +222,7 @@ def import_image(fname, name, subset = None):
 def import_image_ms(fname, name, subset = None):
     shelve_image(fname, "%s_raw" % name, subset = subset, 
                  multi_band = True)
-    nband = read_shelve(dbfile + ":%s_raw" % name).number_band
+    nband = geocal.read_shelve(dbfile + ":%s_raw" % name).number_band
     with timing("Importing %s image" % name):
         cmd = ["write_image", 
                "--process-number-line=2048",
@@ -251,10 +251,10 @@ def dem_generate():
                                "dem_generate_filled.img",
                                dbfile + ":dem_generate_filled"])
         # Create mask
-        f = VicarLiteRasterImage("dem_generate_filled.img")
+        f = geocal.VicarLiteRasterImage("dem_generate_filled.img")
         fv = int(float(f.file.label_string("NODATA")))
-        gmask = GroundMaskImage(f, fv, True)
-        write_shelve("end_to_end.db:dem_mask", gmask)
+        gmask = geocal.GroundMaskImage(f, fv, True)
+        geocal.write_shelve("end_to_end.db:dem_mask", gmask)
         gmask = None
         f = None
 
@@ -340,7 +340,7 @@ with timing("Doing SBA"):
 
 # 7. Initial projection to surface, for DEM generation.
 # Determine image resolution, by going the nearest multiple of 0.1 (e.g., 0.8)
-igc_sba = read_shelve(dbfile + ":igc_sba")
+igc_sba = geocal.read_shelve(dbfile + ":igc_sba")
 res = round(igc_sba.image_ground_connection(0).resolution_meter() * 10) / 10.0
 with timing("Initial orthorectification initial_surf1"):
     subprocess.check_call(["igc_project", "--grid-spacing=10",

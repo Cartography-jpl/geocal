@@ -1,4 +1,4 @@
-from geocal import *
+import geocal
 from test_support import *
 
 expected_dir = unit_test_data + "expected_results/pan_sharpen/"
@@ -12,8 +12,8 @@ def test_pan_sharpen_map_projected(isolated_dir):
                            "inp=(%spost_pan_sub.img, \"%spost_b1:8.img\")" %
                            (shiva_test_data, shiva_test_data),
                            "out=ps1_b1.img", "force_rpc=n"])
-    res = GdalMultiBand("ps1_b1:8.img")
-    expected = GdalMultiBand(expected_dir + "ps1_b1:8.img")
+    res = geocal.GdalMultiBand("ps1_b1:8.img")
+    expected = geocal.GdalMultiBand(expected_dir + "ps1_b1:8.img")
     assert res.number_band == expected.number_band
     assert res.raster_image(0).number_line == expected.raster_image(0).number_line
     assert res.raster_image(0).number_sample == expected.raster_image(0).number_sample
@@ -34,8 +34,8 @@ def test_pan_sharpen_rpc(isolated_dir):
                            "inp=(%span.tif, %smul.tif)" %
                            (unit_test_data, unit_test_data),
                            "out=ps2_b1.img"])
-    res = GdalMultiBand("ps2_b1:8.img")
-    expected = GdalMultiBand(expected_dir + "ps2_b1:8.img")
+    res = geocal.GdalMultiBand("ps2_b1:8.img")
+    expected = geocal.GdalMultiBand(expected_dir + "ps2_b1:8.img")
     assert res.number_band == expected.number_band
     assert res.raster_image(0).number_line == expected.raster_image(0).number_line
     assert res.raster_image(0).number_sample == expected.raster_image(0).number_sample

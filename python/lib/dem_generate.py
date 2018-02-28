@@ -451,3 +451,5 @@ class DemGenerate(object):
         sstart = int(math.floor(min(sample)))
         send = int(math.ceil(max(sample)))
         return [lstart, sstart, lend, send]
+
+__all__ = ["DemGenerateMB", "DemGenerate"]

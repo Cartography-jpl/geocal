@@ -58,4 +58,4 @@ def _determine_orbit_to_match(self, ic, ind):
 IgcCollectionRollingShutter._determine_orbit_parm = _determine_orbit_parm
 IgcCollectionRollingShutter.determine_orbit_to_match = _determine_orbit_to_match
 
-        
+__all__ = []        

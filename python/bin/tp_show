@@ -3,7 +3,7 @@
 # This is used to display a tie point, to see how good the quality of it is
 # visually.
 
-from geocal import *
+import geocal
 import matplotlib.pyplot as plt
 
 version = "June 25, 2013"
@@ -43,12 +43,12 @@ Options:
   -v --version      
        Print program version
 """
-args = docopt_simple(usage, version=version)
-igc = read_shelve(args.igc)
-tpcol = read_shelve(args.tiepoint_col)
+args = geocal.docopt_simple(usage, version=version)
+igc = geocal.read_shelve(args.igc)
+tpcol = geocal.read_shelve(args.tiepoint_col)
 tp = tpcol[args.tiepoint_index]
 if(args.ref_image):
-    ref_image = read_shelve(args.ref_image)
+    ref_image = geocal.read_shelve(args.ref_image)
 else:
     ref_image = None
 
@@ -57,7 +57,7 @@ simg = None
 if(args.project_ref_image):
     mi = ref_image.map_info
 if(args.surface_image):
-    simg = read_shelve(args.surface_image)
+    simg = geocal.read_shelve(args.surface_image)
 tp.display(igc, sz = args.size, ref_image = ref_image, 
            number_row = args.number_row, map_info = mi,
            surface_image=simg)

@@ -113,3 +113,5 @@ class PanInstrumentReflectance(object):
 
       if self.pan_solarDist < 0.983 or self.pan_solarDist > 1.017:
          raise ValueError("Solar Distance should be between 0.983 and 1.017")
+
+__all__ = ["InstrumentReflectance", "PanInstrumentReflectance"]      

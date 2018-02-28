@@ -26,7 +26,7 @@ def read_iterator(data):
     """
     This is similar to tile_iterator, but it is used as a short cut when
     all you want to do is read the tile given by tile_iterator. Instead
-    of return a RasterImageTileIterator, this returns a numpy array of the
+    of returning a RasterImageTileIterator, this returns a numpy array of the
     data given by the tile. This can be use either with a RasterImage or a
     RasterImageMultiBand. For the RasterImageMultiBand the iterator is
     generated for raster_image(0), and then we read all bands at the same
@@ -48,3 +48,4 @@ def read_iterator(data):
                         t.number_sample)
         t.next()
 
+__all__ = ["tile_iterator", "read_iterator"]        

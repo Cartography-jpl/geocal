@@ -145,5 +145,6 @@ class RayIntersect3(object):
         x = lm_optimize(self.coll_eq, x0, self.coll_jac)
         tp.ground_location = self.create_cf(x[0], x[1], x[2])
         return tp
-         
+
+__all__ = ["RayIntersect2", "RayIntersect3"]    
         

@@ -82,3 +82,4 @@ def _create(fname, data, type="DOUB"):
 if have_ibis_file:
     IbisFile.create = staticmethod(_create)
 
+__all__ = []

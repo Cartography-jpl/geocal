@@ -3,7 +3,7 @@
 # This projects all the images of a IGC collection to a common projection
 # on the surface. This can be used as a first step to generating tiepoints.
 
-from geocal import *
+import geocal
 import multiprocessing
 from multiprocessing import Pool
 
@@ -59,18 +59,18 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
-igccol = read_shelve(args.igccol)
+igccol = geocal.read_shelve(args.igccol)
 igcbase = igccol.image_ground_connection(args.base_image_index)
 if(args.ref_image):
-    mibase = read_shelve(args.ref_image).map_info
+    mibase = geocal.read_shelve(args.ref_image).map_info
 else:
-    gc_sample = igcbase.ground_coordinate(ImageCoordinate(0,0))
-    if(gc_sample.naif_code() == CoordinateConverter.EARTH_NAIF_CODE):
-        mibase = cib01_mapinfo(igcbase.resolution_meter())
+    gc_sample = igcbase.ground_coordinate(geocal.ImageCoordinate(0,0))
+    if(gc_sample.naif_code() == geocal.CoordinateConverter.EARTH_NAIF_CODE):
+        mibase = geocal.cib01_mapinfo(igcbase.resolution_meter())
     else:
-        mibase = planet_mapinfo(gc_sample.naif_code(),
+        mibase = geocal.planet_mapinfo(gc_sample.naif_code(),
                                 desired_resolution = igcbase.resolution_meter())
         
 mi = igcbase.cover(mibase)
@@ -87,17 +87,17 @@ class ProjectWrap(object):
         print("Doing %d" % i)
         igc = self.igccol.image_ground_connection(i)
         if(self.scale is not None):
-            igc = ScaleImageGroundConnection(igc, self.scale)
+            igc = geocal.ScaleImageGroundConnection(igc, self.scale)
         mi = self.mi
         if(args.cover_image):
             mi = igc.cover(mi)
-        t = IgcMapProjected(mi, igc, self.grid_spacing)
-        f = VicarRasterImage("%s%d.img" % (self.basefname, i), t.map_info, 
+        t = geocal.IgcMapProjected(mi, igc, self.grid_spacing)
+        f = geocal.VicarRasterImage("%s%d.img" % (self.basefname, i), t.map_info, 
                              "HALF")
         f.close()
-        f = VicarLiteRasterImage("%s%d.img" % (self.basefname, i), 1, 
-                                 VicarLiteFile.UPDATE)
-        copy_raster(t, f)
+        f = geocal.VicarLiteRasterImage("%s%d.img" % (self.basefname, i), 1, 
+                                 geocal.VicarLiteFile.UPDATE)
+        geocal.copy_raster(t, f)
         print("Done with %d" % i)
 
 func = ProjectWrap(args.basefname, igccol, mi, args.scale, args.grid_spacing)
@@ -107,7 +107,7 @@ if(args.number_process > 1):
 else:
     res = list(map(func, range(igccol.number_image)))
 
-surface_image = [VicarLiteRasterImage("%s%d.img" % (args.basefname, i)) 
+surface_image = [geocal.VicarLiteRasterImage("%s%d.img" % (args.basefname, i)) 
                  for i in range(igccol.number_image)]
 
-write_shelve(args.output, surface_image)
+geocal.write_shelve(args.output, surface_image)

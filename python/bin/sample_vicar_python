@@ -14,9 +14,9 @@
 #  
 #   vicarb "sample_vicar_python inp=('val1','val2') out='outname'"
 
-from geocal import *
+import geocal
 import sys
-t = VicarArgument(sys.argv)
+t = geocal.VicarArgument(sys.argv)
 # Returns an array
 print(t["inp"])
 # Return a single value

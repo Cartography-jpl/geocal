@@ -102,3 +102,4 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
                 self.pan_solarZenithAngle = 90 - self.pan_solarElevation;
                 self.pan_solarZenithAngleInRadians = self.pan_solarZenithAngle*(old_div(math.pi,180));
 
+__all__ = ["SpotReflectance"]

@@ -266,3 +266,4 @@ if(have_pynitf):
     NitfFile.image_segment_hook_obj.append(RsmImageSegementHook())
 
         
+__all__ = []

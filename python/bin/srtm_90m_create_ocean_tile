@@ -3,7 +3,7 @@
 # This creates a SRTM_90m DEM tile that has a height relative to the datum
 # of 0 everywhere, i.e., an ocean tile.
 
-from geocal import *
+import geocal
 import re
 import numpy as np
 
@@ -25,7 +25,7 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 # Get the upper left corner. Note that there is actually 0.5 pixel border around
 # this, but we start initially with this value.
@@ -40,16 +40,16 @@ if(m.group(3) == 'w'):
     lon = -lon
 
 # We just looked at one of the tile to get this full coordinate system
-ogr = OgrWrapper('GEOGCS["unknown",DATUM["unknown",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]]],PRIMEM["Greenwich",0],UNIT[,0.0174532925199433]]')
-cconv = OgrCoordinateConverter(ogr)
+ogr = geocal.OgrWrapper('GEOGCS["unknown",DATUM["unknown",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]]],PRIMEM["Greenwich",0],UNIT[,0.0174532925199433]]')
+cconv = geocal.OgrCoordinateConverter(ogr)
 
 # Create the mapinfo that goes with this set
-minfo = MapInfo(cconv,
+minfo = geocal.MapInfo(cconv,
                lon, lat + 1, lon + 1, lat, 1200,
                1200);
-# Add borde
+# Add border
 minfo = minfo.subset(-0.5,-0.5,1201,1201);
 
-f = GdalRasterImage("%s_L2.tif" % args.tile_coordinate, "gtiff", minfo, 1, 
-                    GdalRasterImage.Int16, "COMPRESS=LZW")
+f = geocal.GdalRasterImage("%s_L2.tif" % args.tile_coordinate, "gtiff", minfo, 1, 
+                    geocal.GdalRasterImage.Int16, "COMPRESS=LZW")
 f.write(0, 0, np.zeros((1201,1201), dtype=np.int16))

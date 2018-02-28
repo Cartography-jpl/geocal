@@ -3,6 +3,7 @@ from future import standard_library
 standard_library.install_aliases()
 from past.utils import old_div
 from geocal.image_ground_connection import *
+from geocal.shape_file import have_shape_file
 import pickle
 from test_support import *
 

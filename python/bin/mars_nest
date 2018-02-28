@@ -9,7 +9,7 @@ import tempfile
 import subprocess
 import sys
 import re
-from geocal import *
+import geocal
 
 version = "June 27,2017"
 usage='''Usage:
@@ -173,7 +173,7 @@ long_name_to_vicar = { "ref_image" : "refimg",
                        "use_projection" : "useproj",
                        "use_ref_image_projection" : "userefproj"}
 
-args = docopt_simple(usage, version=version,
+args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
 # Small wrapper around running command, so we can print this to screen
@@ -229,8 +229,8 @@ def resample_proj(fin, fref, fout, resize=False, fit_fref = True, border=0):
 
 def check_same_projection(f1, f2):
     '''Check that the 2 images have identical projection and resolution.'''
-    gf1 = GdalRasterImage(f1)
-    gf2 = GdalRasterImage(f2)
+    gf1 = geocal.GdalRasterImage(f1)
+    gf2 = geocal.GdalRasterImage(f2)
     if(not gf1.map_info.coordinate_converter.is_same(gf2.map_info.coordinate_converter)):
         return False
     if(not (gf1.map_info.transform == gf2.map_info.transform).all()):
@@ -243,7 +243,7 @@ def check_intersection(f1, f2):
     image. So if this returns False the images definitely don't overlap,
     but True might still not overlap if it happens that all the intersection
     is in the gore of an image.'''
-    t = GdalRasterImage(f1).map_info.intersection(GdalRasterImage(f2).map_info)
+    t = geocal.GdalRasterImage(f1).map_info.intersection(geocal.GdalRasterImage(f2).map_info)
     if(t.number_x_pixel == 0 or t.number_y_pixel == 0):
         return False
     return True
@@ -280,8 +280,8 @@ def gtpwarp(fin, fref, fref_res, fout):
     # sure why, we may try fixing this at some point. But for now, just
     # update this. Note this is pretty much the same as a gtgenup call, just
     # easier to do this in python here.
-    t = VicarRasterImage(fout, 1, VicarFile.UPDATE)
-    t.set_map_info(VicarRasterImage(fin).map_info)
+    t = geocal.VicarRasterImage(fout, 1, geocal.VicarFile.UPDATE)
+    t.set_map_info(geocal.VicarRasterImage(fin).map_info)
     t.close()
 
 def accck(fin,fref):

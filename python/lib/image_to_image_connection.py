@@ -23,4 +23,4 @@ class ImageToImageConnection(object):
         gc = self.igc1.ground_coordinate(ic1)
         return self.igc2.image_coordinate(gc)
 
-    
+__all__ = ["ImageToImageConnection"]    

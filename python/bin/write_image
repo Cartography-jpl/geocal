@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from geocal import *
+import geocal
 import os
 import logging
 import math
@@ -82,7 +82,7 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 if(args.log_file):
     logging.basicConfig(level = logging.INFO,
                         format = '%(asctime)s %(levelname)s:%(name)s:%(message)s',
@@ -96,22 +96,22 @@ elif(args.verbose):
     logging.basicConfig(level = logging.INFO)
 log = logging.getLogger("geocal-python.write_image")
 
-img_in = read_shelve(args.input_image)
+img_in = geocal.read_shelve(args.input_image)
 if(args.start_line):
-    if(isinstance(img_in, RasterImageMultiBand)):
+    if(isinstance(img_in, geocal.RasterImageMultiBand)):
         img_in = img_in.subset(args.start_line, args.start_sample,
                                args.number_line, args.number_sample)
     else:
-        img_in = SubRasterImage(img_in, args.start_line, args.start_sample,
+        img_in = geocal.SubRasterImage(img_in, args.start_line, args.start_sample,
                                 args.number_line, args.number_sample)
 if(args.scale):
-    if(isinstance(img_in, RasterImageMultiBand)):
-        img_in = ScaleImageMultiBand(img_in, args.scale)
+    if(isinstance(img_in, geocal.RasterImageMultiBand)):
+        img_in = geocal.ScaleImageMultiBand(img_in, args.scale)
     else:
-        img_in = ScaleImage(img_in, args.scale)
+        img_in = geocal.ScaleImage(img_in, args.scale)
 
 img_list = []
-if(isinstance(img_in, RasterImageMultiBand)):
+if(isinstance(img_in, geocal.RasterImageMultiBand)):
     for i in range(img_in.number_band):
         img_list.append(img_in.raster_image(i))
 else:
@@ -119,7 +119,7 @@ else:
 
 out_list = []
 for i, img in enumerate(img_list):
-    out = VicarRasterImage(args.output_image[i], args.vicar_type, 
+    out = geocal.VicarRasterImage(args.output_image[i], args.vicar_type, 
                            img.number_line, img.number_sample)
     if(img.has_map_info):
         out.set_map_info(img.map_info)
@@ -128,9 +128,9 @@ for i, img in enumerate(img_list):
     if(args.no_data_value is not None):
         out["NODATA"] = float(args.no_data_value)
     out.close()
-    out_list.append(mmap_file(args.output_image[i], mode="r+"))
+    out_list.append(geocal.mmap_file(args.output_image[i], mode="r+"))
 
-if(not isinstance(img_in, RasterImageMultiBand)):
+if(not isinstance(img_in, geocal.RasterImageMultiBand)):
     out_list = out_list[0]
 
 if(args.process_number_line is not None):
@@ -151,7 +151,7 @@ if(args.torque or args.gnu_parallel):
 else:
     shelve_name = None
     
-number_job = parallel_process_image(img_in, out_list, process_nline, 
+number_job = geocal.parallel_process_image(img_in, out_list, process_nline, 
                                     process_nsamp, 
                                     args.number_process, 
                                     shelve_name = shelve_name)
@@ -160,7 +160,7 @@ if(args.torque):
     log_dir = base_name + "_log"
     shelve_job_run = subprocess.check_output(["which", "shelve_job_run"]).replace("\n", "")
     pythonpath = os.environ["PYTHONPATH"]
-    makedirs_p(log_dir)
+    geocal.makedirs_p(log_dir)
     job_script = '''#!/bin/bash
 if [[ $# -lt 1 ]]; then
    echo "Usage: $0 <arguments to qsub>"

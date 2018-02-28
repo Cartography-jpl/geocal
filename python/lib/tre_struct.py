@@ -181,3 +181,6 @@ if(have_pynitf):
     setattr(TreRPC00A, "rpc", 
             property(tre_get_rpc, tre_set_from_rpc, None, 
                      "TRE RPC structure as a GeoCal RPC object"))
+
+__all__ = ["tre_use00a_to_gdal", "tre_use00a_pretty_print", "tre_use00a",
+           "TreRPC00A", "TreRPC00B", "TreUSE00A"]

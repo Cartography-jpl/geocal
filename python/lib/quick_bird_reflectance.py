@@ -171,3 +171,4 @@ class QuickBirdReflectance(InstrumentReflectance):
          print("abscalfactor: ", self.absCalFactors[i])
          print("effectiveBandwidth: ", self.effectiveBandwidths[i])
 
+__all__ = ["QuickBirdReflectance"]

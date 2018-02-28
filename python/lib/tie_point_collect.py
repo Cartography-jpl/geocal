@@ -686,3 +686,5 @@ def outlier_reject_ransac(tpcol, ref_image = None, threshold = 3.0,
         diagnostic.tp_diagnostic[3] += len1 - len3
     return res2
 
+__all__ = ["TiePointDiagnostic", "TiePointCollect", "TiePointCollectFM",
+           "outlier_reject_ransac"]

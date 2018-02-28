@@ -73,3 +73,4 @@ class IkonosReflectance(InstrumentReflectance):
          print("abscalfactor: ", self.absCalFactors[i])
          print("effectiveBandwidth: ", self.effectiveBandwidths[i])
 
+__all__ = ["IkonosReflectance"]

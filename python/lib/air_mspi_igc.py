@@ -178,3 +178,5 @@ class AirMspiIgc(ImageGroundConnection):
                              self.data_scale,
                              self.title, 
                              self.dem.h)
+
+__all__ = ["AirMspiIgc"]

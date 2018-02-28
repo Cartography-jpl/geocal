@@ -1,4 +1,4 @@
-from geocal import *
+import geocal
 import re
 from test_support import *
 
@@ -46,10 +46,10 @@ def test_gtproj2_1(vicarb_env):
 ''')
     d = np.array([[31.0,40.0,333.33, 0.0, 0.0, 0.0],
                   [32.0,40.0,333.33, 0.0, 0.0, 0.0]])
-    IbisFile.create(ib, d)
+    geocal.IbisFile.create(ib, d)
     print("gtproj2 \"(%s,%s,%s)\" incol=\"(1,2,3)\" outcol=\"(4,5,6)\"" % (ib, f1, f2))
     res = vicarb_run("gtproj2 \"(%s,%s,%s)\" incol=\"(1,2,3)\" outcol=\"(4,5,6)\"" % (ib, f1, f2))
     print(res.stdout)
-    f = IbisFile(ib)
+    f = geocal.IbisFile(ib)
     print(f[:,:])
     

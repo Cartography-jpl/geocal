@@ -65,3 +65,5 @@ class DocInherit(object):
         return func
 
 doc_inherit = DocInherit
+
+__all__ = ["doc_inherit", "DocInherit"]

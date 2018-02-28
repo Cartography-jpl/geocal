@@ -1,5 +1,5 @@
 from __future__ import print_function
-from geocal import *
+import geocal
 from test_support import *
 import subprocess
 
@@ -27,10 +27,10 @@ def test_sba(isolated_dir):
     subprocess.check_call(["sba", "sqlite_shelf.db:igc",
                            "sqlite_shelf.db:tpcol", "sqlite_shelf.db:igc_sba",
                            "sqlite_shelf.db:tpcol_sba"])
-    igc = read_shelve("sqlite_shelf.db:igc_sba")
-    tpcol = read_shelve("sqlite_shelf.db:tpcol_sba")
+    igc = geocal.read_shelve("sqlite_shelf.db:igc_sba")
+    tpcol = geocal.read_shelve("sqlite_shelf.db:tpcol_sba")
     dem = igc.dem(0)
-    sba = SimultaneousBundleAdjustment(igc, tpcol, dem);
+    sba = geocal.SimultaneousBundleAdjustment(igc, tpcol, dem);
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print(chisq)

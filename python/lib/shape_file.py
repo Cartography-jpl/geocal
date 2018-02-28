@@ -235,4 +235,7 @@ class ShapeFeature(collections.Mapping):
                 raise KeyError(key)
             return self.feature.GetField(ind)
 
-    
+if(have_shape_file):
+    __all__ = ["ShapeFile", "ShapeLayer", "ShapeFeature", "have_shape_file"]
+else:
+    __all__ = ["have_shape_file"]

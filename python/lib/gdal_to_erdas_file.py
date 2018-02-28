@@ -24,3 +24,5 @@ def gdal_to_erdas_file(infname, outfname):
         i *= 2
         cmd.append(str(i))
     subprocess.check_call(cmd)
+
+__all__ = ["gdal_to_erdas_file"]

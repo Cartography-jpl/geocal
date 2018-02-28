@@ -4,7 +4,7 @@
 # a image ground connnection collection to more closely fit a given set o
 # tiepoints.
 
-from geocal import *
+import geocal
 import numpy as np
 import logging
 
@@ -101,7 +101,7 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 if(args.log_file):
     logging.basicConfig(level = logging.INFO,
                         format = '%(asctime)s %(levelname)s:%(name)s:%(message)s',
@@ -115,14 +115,14 @@ elif(args.verbose):
     logging.basicConfig(level = logging.INFO)
 log = logging.getLogger("geocal-python.sba")
 
-igc = read_shelve(args.igc_in)
-tpcol = read_shelve(args.tpcol_in)
+igc = geocal.read_shelve(args.igc_in)
+tpcol = geocal.read_shelve(args.tpcol_in)
 
 if(len(tpcol) < 1):
     raise RuntimeError("Need to have at least one tiepoint")
 
 if(args.dem):
-    dem = read_shelve(args.dem)
+    dem = geocal.read_shelve(args.dem)
 else:
     dem = igc.dem(0)
 
@@ -130,7 +130,8 @@ if(args.hold_gcp_fixed or args.initial_hold_gcp_fixed):
     hold_gcp_fixed = True
 else: 
     hold_gcp_fixed = False
-sba = SimultaneousBundleAdjustment(igc, tpcol, dem, dem_sigma=args.dem_sigma,
+sba = geocal.SimultaneousBundleAdjustment(igc, tpcol, dem,
+                                   dem_sigma=args.dem_sigma,
                                    hold_gcp_fixed=hold_gcp_fixed,
                                    gcp_sigma=args.gcp_sigma,
                                    tp_epsilon=args.tp_epsilon,
@@ -143,7 +144,7 @@ v = sba.sba_eq(sba.parameter)
 chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
 
 log.info("Initial Chisq: %f" % chisq)
-parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian,
+parm = geocal.lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian,
                    min_chisqr = args.min_chisqr, 
                    stopping_criteria = args.stopping_criteria)
 sba.parameter = parm
@@ -158,7 +159,7 @@ if(args.save_sba):
         pickle.dump(sba, fh)
 
 if(args.initial_hold_gcp_fixed):
-    sba = SimultaneousBundleAdjustment(igc, tpcol, dem, 
+    sba = geocal.SimultaneousBundleAdjustment(igc, tpcol, dem, 
                                        dem_sigma=args.dem_sigma,
                                        hold_gcp_fixed=False,
                                        gcp_sigma=args.gcp_sigma,
@@ -170,7 +171,7 @@ if(args.initial_hold_gcp_fixed):
     v = sba.sba_eq(sba.parameter)
     chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     log.info("Initial Chisq: %f" % chisq)
-    parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian,
+    parm = geocal.lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian,
                        min_chisqr = args.min_chisqr, 
                        stopping_criteria = args.stopping_criteria)
     sba.parameter = parm
@@ -190,7 +191,7 @@ if(args.dem_height_block_adjust):
               for i in range(len(tpcol)) ]
     hadj = np.median(sdiff)
     log.info("Doing DEM height block adjustment of %f" % hadj)
-    d = DemMapInfoOffset(d, hadj)
+    d = geocal.DemMapInfoOffset(d, hadj)
     sdiff = [ d.distance_to_surface(sba.ground_location(i)) 
               for i in range(len(tpcol)) ]
     for i in range(sba.igc_coll.number_image):
@@ -199,7 +200,7 @@ if(args.dem_height_block_adjust):
         with open(args.save_sba + "_height_block_adjust.pkl", "wb") as fh:
             pickle.dump(sba, fh)
 
-write_shelve(args.igc_out, sba.igc_coll)
-write_shelve(args.tpcol_out, tpcol)
+geocal.write_shelve(args.igc_out, sba.igc_coll)
+geocal.write_shelve(args.tpcol_out, tpcol)
 logging.shutdown()
 

@@ -100,3 +100,4 @@ class JobDependent(JobHandle):
         else:
             self.process_is_done(None)
         
+__all__ = ["JobHandle", "JobDependent"]

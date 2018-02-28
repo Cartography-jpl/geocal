@@ -94,5 +94,6 @@ class SpiceKernelByTime(object):
         if(tm_et > self.tend_et[i-1]):
             raise ValueError
         return self.kernel_file[i-1]
-    
+
+__all__ = ["pds_label_text", "pds_label", "SpiceKernelByTime"]    
         

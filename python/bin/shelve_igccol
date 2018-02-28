@@ -2,7 +2,8 @@
 #
 # This creates a IgcCollection that uses GDAL data files for the DEM, 
 # image, and RPC or RSM.
-from geocal import *
+import geocal
+import os
 
 version = "September 20, 2017"
 usage='''Usage: 
@@ -65,7 +66,7 @@ Options:
        Print program version
 '''
 # Parse command line arguments
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 line_fit = []
 for i in str(args.rpc_line_fit).split(','):
@@ -85,30 +86,30 @@ for i in sample_fit:
 a = []
 if(args.from_shelve):
     for inp in args.input:
-        t = read_shelve(inp)
+        t = geocal.read_shelve(inp)
         a.append(t)
 else:
-    dem = read_shelve(args.dem)
+    dem = geocal.read_shelve(args.dem)
     for i in range(len(args.image)):
         if(args.image_from_shelve):
-            img = read_shelve(args.image[i])
+            img = geocal.read_shelve(args.image[i])
             if(getattr(img, "rpc", None)):
                 rpc = img.rpc
             else:
                 rpc = img.raster_image(0).rpc
-            t = RpcImageGroundConnection(rpc, dem, img, args.title[i])
+            t = geocal.RpcImageGroundConnection(rpc, dem, img, args.title[i])
         elif(os.path.exists(os.path.splitext(args.image[i])[0] + ".rsm.xml")):
-            rsm = read_shelve(os.path.splitext(args.image[i])[0] + ".rsm.xml")
-            if(VicarLiteFile.is_vicar_file(args.image[i])):
-                img = VicarLiteRasterImage(args.image[i])
+            rsm = geocal.read_shelve(os.path.splitext(args.image[i])[0] + ".rsm.xml")
+            if(geocal.VicarLiteFile.is_vicar_file(args.image[i])):
+                img = geocal.VicarLiteRasterImage(args.image[i])
             else:
-                img = GdalRasterImage(args.image[i])
-            t = RsmImageGroundConnection(rsm, dem, img, args.title[i])
-        elif VicarImageGroundConnection.is_vicar_file(args.image[i]):
-            t = VicarImageGroundConnection(args.image[i], dem, 
+                img = geocal.GdalRasterImage(args.image[i])
+            t = geocal.RsmImageGroundConnection(rsm, dem, img, args.title[i])
+        elif geocal.VicarImageGroundConnection.is_vicar_file(args.image[i]):
+            t = geocal.VicarImageGroundConnection(args.image[i], dem, 
                                            title=args.title[i])
         else:
-            t = GdalImageGroundConnection(args.image[i], dem, 
+            t = geocal.GdalImageGroundConnection(args.image[i], dem, 
                                           title=args.title[i])
         if(getattr(t, "rpc", None)):
             t.rpc.fit_line_numerator = fln
@@ -117,9 +118,9 @@ else:
                 t.fit_height_offset = True
         a.append(t)
 
-igc_coll = IgcArray(a)
+igc_coll = geocal.IgcArray(a)
 if(args.image_ground_connection):
-    write_shelve(args.output, a[0])
+    geocal.write_shelve(args.output, a[0])
 else:
-    write_shelve(args.output, igc_coll)
+    geocal.write_shelve(args.output, igc_coll)
 

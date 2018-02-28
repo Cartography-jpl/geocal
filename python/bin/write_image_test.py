@@ -1,4 +1,4 @@
-from geocal import *
+import geocal
 from test_support import *
 import subprocess
 

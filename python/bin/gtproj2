@@ -3,10 +3,10 @@
 # This implements the gtproj2 routine. This is a replacement for gtproj
 # which adds support for more map projections.
 
-from geocal import *
+import geocal
 import sys
 
-t = VicarArgument(sys.argv)
+t = geocal.VicarArgument(sys.argv)
 
 ibfname,labfname1,labfname2 = t["inp"]
 
@@ -17,9 +17,9 @@ elif(t["coordtype"] == "IMAGE"):
 else:
     raise RuntimeError("This shouldn't be able to happen")
 
-f = IbisFile(ibfname, IbisFile.UPDATE)
-imgin = VicarLiteRasterImage(labfname1)
-imgout = VicarLiteRasterImage(labfname2)
+f = geocal.IbisFile(ibfname, geocal.IbisFile.UPDATE)
+imgin = geocal.VicarLiteRasterImage(labfname1)
+imgout = geocal.VicarLiteRasterImage(labfname2)
 cin = imgin.map_info.coordinate_converter
 cout = imgout.map_info.coordinate_converter
 

@@ -3,10 +3,11 @@
 # doesn't require a display.
 
 # Use agg if we know we don't have a display.
-import os, sys
-if('matplotlib.backends' not in sys.modules and
-   (os.getenv("DISPLAY") is None or
-    os.getenv("DISPLAY") == "")):
+import os as _os
+import sys as _sys
+if('matplotlib.backends' not in _sys.modules and
+   (_os.getenv("DISPLAY") is None or
+    _os.getenv("DISPLAY") == "")):
     import matplotlib
     matplotlib.use('agg')
 
@@ -14,10 +15,10 @@ if('matplotlib.backends' not in sys.modules and
 # set for a display that isn't there anymore. So go ahead and try to import,
 # but if this fails then switch to agg.
 try:
-    import warnings
-    warnings.filterwarnings(action="ignore",
+    import warnings as _warnings
+    _warnings.filterwarnings(action="ignore",
                             message=".*gdk_cursor_new_for_display: assertion `GDK_IS_DISPLAY \\(display\\)' failed.*")
-    warnings.filterwarnings(action="ignore",
+    _warnings.filterwarnings(action="ignore",
                             message=".*could not open display.*")
     import matplotlib.pyplot as plt
 except RuntimeError:
@@ -26,5 +27,9 @@ except RuntimeError:
     import matplotlib.pyplot as plt
 finally:
     # Remove our filters
-    warnings.filters.pop(0)
-    warnings.filters.pop(0)
+    _warnings.filters.pop(0)
+    _warnings.filters.pop(0)
+    del _warnings
+    
+del _os
+del _sys

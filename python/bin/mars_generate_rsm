@@ -3,7 +3,8 @@
 # This takes a unprojected PDS file, imports it to VICAR, and adds a
 # RSM.
 
-from geocal import *
+import geocal
+import os
 import subprocess
 import matplotlib.pylab as plt
 import matplotlib as mpl
@@ -79,7 +80,7 @@ long_name_to_vicar = { "pds_image" : "pdsimg",
                        "max_height" : "maxh",
                        "plot_cross_section" : "plot" }
 
-args = docopt_simple(usage, version=version,
+args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
 def plot_diff(r, igc, fname):
@@ -126,23 +127,23 @@ def plot_diff(r, igc, fname):
 
 def igc_for_context(lbl, fname):
     '''Process for context camera'''
-    tstart = Time.parse_time(lbl["START_TIME"])
+    tstart = geocal.Time.parse_time(lbl["START_TIME"])
     bdir = os.environ["MARS_KERNEL"] + "/mro_kernel/"
-    kdat = read_shelve(bdir + "kernel.json")
+    kdat = geocal.read_shelve(bdir + "kernel.json")
     # We need better logic here, but for now just set up the kernels we
     # handed
     klist = [bdir + "mro.ker",
              kdat["ck_kernel"].kernel(tstart),
              kdat["spk_kernel"].kernel(tstart)]
-    orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
-                           PlanetConstant.MARS_NAIF_CODE)
-    img = GdalRasterImage(fname)
+    orb = geocal.SpicePlanetOrbit("MRO", "MRO_CTX", klist,
+                           geocal.PlanetConstant.MARS_NAIF_CODE)
+    img = geocal.GdalRasterImage(fname)
     # We have masked pixels in the L1 data, which we want to chop out
     left_masked = 38
     right_masked = 18
-    img = SubRasterImage(img, 0, left_masked, img.number_line, 5000)
+    img = geocal.SubRasterImage(img, 0, left_masked, img.number_line, 5000)
     if(lbl["SAMPLE_BIT_MODE_ID"] == "SQROOT"):
-        img = ContextSqrtDecodeImage(img)
+        img = geocal.ContextSqrtDecodeImage(img)
     # The START_TIME is the commanded start time, the actual start time
     # might be different. According to the CTX SIS (available at
     # https://pdsimage2.wr.usgs.gov/archive/mro-m-ctx-2-edr-l0-v1.0/mrox_0452/document/
@@ -150,15 +151,15 @@ def igc_for_context(lbl, fname):
     # pretty close to START_TIME. Note that we use START_TIME first because
     # we need to read the spice kernels before being able to convert SCLK to
     # time.
-    tstart = Time.time_sclk(lbl["SPACECRAFT_CLOCK_START_COUNT"], "MRO")
+    tstart = geocal.Time.time_sclk(lbl["SPACECRAFT_CLOCK_START_COUNT"], "MRO")
     # 1e-3 is because LINE_EXPOSURE_DURATION is in milliseconds.
     tspace = float(lbl["LINE_EXPOSURE_DURATION"].split(" ")[0]) * 1e-3
-    tt = ConstantSpacingTimeTable(tstart, tstart + tspace * (img.number_line-1),
+    tt = geocal.ConstantSpacingTimeTable(tstart, tstart + tspace * (img.number_line-1),
                                   tspace)
-    dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
-    orb_cache = OrbitListCache(orb, tt)
-    ipi = Ipi(orb_cache, ctx_camera(), 0, tt.min_time, tt.max_time, tt)
-    igc = IpiImageGroundConnection(ipi, dem, img)
+    dem = geocal.PlanetSimpleDem(geocal.PlanetConstant.MARS_NAIF_CODE)
+    orb_cache = geocal.OrbitListCache(orb, tt)
+    ipi = geocal.Ipi(orb_cache, geocal.ctx_camera(), 0, tt.min_time, tt.max_time, tt)
+    igc = geocal.IpiImageGroundConnection(ipi, dem, img)
     return igc
 
 def rsm_for_context(lbl, fname, subset=None):
@@ -167,48 +168,48 @@ def rsm_for_context(lbl, fname, subset=None):
     is what we ultimately want or not, but it is what we do here.'''
     igc = igc_for_context(lbl, fname)
     if(subset is not None):
-        igc = OffsetImageGroundConnection(igc, subset[0], subset[1],
+        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
                                               subset[2], subset[3])
     # In order for LocalRcParameter to be useful, the look, sample, and line
     # directions need to be mostly orthogonal. So dot product of unit vectors
     # should be close to 0
     if(False):
-        LocalRcParameter.check_rc_assumption(igc)
+        geocal.LocalRcParameter.check_rc_assumption(igc)
 
     # Verify that we calculate nearly the same boresight at SPICE.
     if(False):
-        ic = ImageCoordinate(200, igc.number_sample / 2)
-        pts = SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
-                                                  PlanetConstant.MARS_NAIF_CODE,
-                                                  "MRO", "MRO_CTX")
+        ic = geocal.ImageCoordinate(200, igc.number_sample / 2)
+        pts = geocal.SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
+                                         geocal.PlanetConstant.MARS_NAIF_CODE,
+                                         "MRO", "MRO_CTX")
         print("Distance spice boresight and IGC: ",
               distance(pts[0], igc.ground_coordinate(ic)))
         print(igc.image_coordinate(pts[0]))
 
-    r = Rsm(RsmRpPlusGrid(RsmRationalPolynomial(5,5,3,1,1,1,5,1,
+    r = geocal.Rsm(geocal.RsmRpPlusGrid(geocal.RsmRationalPolynomial(5,5,3,1,1,1,5,1,
                                                 40, 40, 20, 40),
-                          RsmGrid(3, 1000, 50)),
-            LocalRcConverter(LocalRcParameter(igc)))
+                          geocal.RsmGrid(3, 1000, 50)),
+            geocal.LocalRcConverter(geocal.LocalRcParameter(igc)))
     r.fit(igc, args.min_height, args.max_height)
     return r, igc
     
 def igc_for_hrsc(lbl, fname):
     '''Process for HRSC camera'''
-    tstart = Time.parse_time(lbl["START_TIME"])
-    tend = Time.parse_time(lbl["STOP_TIME"])
+    tstart = geocal.Time.parse_time(lbl["START_TIME"])
+    tend = geocal.Time.parse_time(lbl["STOP_TIME"])
     if(lbl["DETECTOR_ID"] != "MEX_HRSC_NADIR"):
         raise RuntimeError("Right now we only work with MEX_HRSC_NADIR")
     bdir = os.environ["MARS_KERNEL"] + "/mex_kernel/"
-    kdat = read_shelve(bdir + "kernel.json")
+    kdat = geocal.read_shelve(bdir + "kernel.json")
     # We need better logic here, but for now just set up the kernels we
     # handed
     klist = [bdir + "mex.ker",
              kdat["ck_kernel"].kernel(tstart),
              kdat["spk_kernel"].kernel(tstart),
              bdir + "mex_reconstituted.ker"]
-    orb = SpicePlanetOrbit("MEX", "MEX_HRSC_HEAD", klist,
-                           PlanetConstant.MARS_NAIF_CODE)
-    img = GdalRasterImage(fname)
+    orb = geocal.SpicePlanetOrbit("MEX", "MEX_HRSC_HEAD", klist,
+                           geocal.PlanetConstant.MARS_NAIF_CODE)
+    img = geocal.GdalRasterImage(fname)
     # The PDS image has a byte label in the front of each line. GDAL
     # doesn't read this (it just skips it), but we can read it directly.
     # The byte label is described in HRSC_LABEL_HEADER.PDF
@@ -219,16 +220,16 @@ def igc_for_hrsc(lbl, fname):
     record_bytes = int(lbl['RECORD_BYTES'])
     # This is 1 based, convert to 0 based with -1
     istart = int(lbl['^IMAGE']) - 1
-    tlist = Vector_Time()
+    tlist = geocal.Vector_Time()
     with open(fname, "rb") as f:
         for i in range(istart, istart + img.number_line):
             f.seek(i * record_bytes, 0)
-            tlist.push_back(Time.time_et(struct.unpack("d", f.read(8))[0]))
-    tt = MeasuredTimeTable(tlist)
-    dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
-    orb_cache = OrbitListCache(orb, tt)
-    ipi = Ipi(orb_cache, hrsc_camera(), 0, tt.min_time, tt.max_time, tt)
-    igc = IpiImageGroundConnection(ipi, dem, img)
+            tlist.push_back(geocal.Time.time_et(struct.unpack("d", f.read(8))[0]))
+    tt = geocal.MeasuredTimeTable(tlist)
+    dem = geocal.PlanetSimpleDem(geocal.PlanetConstant.MARS_NAIF_CODE)
+    orb_cache = geocal.OrbitListCache(orb, tt)
+    ipi = geocal.Ipi(orb_cache, geocal.hrsc_camera(), 0, tt.min_time, tt.max_time, tt)
+    igc = geocal.IpiImageGroundConnection(ipi, dem, img)
     return igc
 
 def rsm_for_hrsc(lbl, fname, subset=None):
@@ -238,19 +239,19 @@ def rsm_for_hrsc(lbl, fname, subset=None):
     '''
     igc = igc_for_hrsc(lbl, fname)
     if(subset is not None):
-        igc = OffsetImageGroundConnection(igc, subset[0], subset[1],
+        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
                                           subset[2], subset[3])
     # In order for LocalRcParameter to be useful, the look, sample, and line
     # directions need to be mostly orthogonal. So dot product of unit vectors
     # should be close to 0
     if(False):
-        LocalRcParameter.check_rc_assumption(igc)
+        geocal.LocalRcParameter.check_rc_assumption(igc)
 
     # Verify that we calculate nearly the same boresight at SPICE.
     if(False):
-        ic = ImageCoordinate(200, igc.number_sample / 2.0)
-        pts = SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
-                                                  PlanetConstant.MARS_NAIF_CODE,
+        ic = geocal.ImageCoordinate(200, igc.number_sample / 2.0)
+        pts = geocal.SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
+                                                  geocal.PlanetConstant.MARS_NAIF_CODE,
                                                   "MEX", "MEX_HRSC_NADIR")
         print("Distance spice boresight and IGC: ",
               distance(pts[0], igc.ground_coordinate(ic)))
@@ -258,17 +259,17 @@ def rsm_for_hrsc(lbl, fname, subset=None):
     
     # Really big image, so break up into a few sections. We should perhaps have
     # a dynamic way to determine this.
-    r = Rsm(RsmRpPlusGrid(RsmMultiSection(igc.number_line,
+    r = geocal.Rsm(geocal.RsmRpPlusGrid(geocal.RsmMultiSection(igc.number_line,
                                           igc.number_sample, 3, 1,
-                                RsmRationalPolynomial(5,5,3,1,1,1,5,1,
+                                geocal.RsmRationalPolynomial(5,5,3,1,1,1,5,1,
                                                       40, 40, 20, 40, False)),
-                          RsmGrid(3, 5000, 50, False)),
-            LocalRcConverter(LocalRcParameter(igc)))
+                          geocal.RsmGrid(3, 5000, 50, False)),
+            geocal.LocalRcConverter(geocal.LocalRcParameter(igc)))
     r.fit(igc, args.min_height, args.max_height)
     return r, igc
 
 # Determine the image type
-lbl = pds_label(args.pds_image)
+lbl = geocal.pds_label(args.pds_image)
 subset = None
 if args.subset:
     subset = eval(args.subset)
@@ -282,20 +283,20 @@ else:
 
 # For right now, output the igc so we have record of it
 if(args.full_igc):
-    write_shelve(args.full_igc, igc)
+    geocal.write_shelve(args.full_igc, igc)
     
 # Write out the PDS label, in case there is something we need from it
 with open(args.output_base_name + ".lbl", "wb") as fh:
     fh.write(pds_label_text(args.pds_image))
-f = VicarRasterImage(args.output_base_name + ".img", "HALF",
+f = geocal.VicarRasterImage(args.output_base_name + ".img", "HALF",
                      igc.number_line, igc.number_sample)
-fin = GdalRasterImage(args.pds_image)
+fin = geocal.GdalRasterImage(args.pds_image)
 for k in fin.metadata_list():
     if(not fin[k] == "") :
         f[k] = fin[k]
-copy_raster(igc.image, f, True)
+geocal.copy_raster(igc.image, f, True)
 f.close()
-write_shelve(args.output_base_name + ".rsm.xml", r)
+geocal.write_shelve(args.output_base_name + ".rsm.xml", r)
 if(args.plot_cross_section):
     plot_diff(r, igc, args.plot_cross_section)
     

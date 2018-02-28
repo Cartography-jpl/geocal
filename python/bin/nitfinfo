@@ -1,9 +1,10 @@
 #! /usr/bin/env python
 from __future__ import print_function
 try:
-    from afids import *
+    import afids
 except ImportError:
-    from geocal import *
+    pass
+import geocal
 import pynitf
 import subprocess
 import os
@@ -33,7 +34,7 @@ Options:
        Print program version
 
 """
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 if(not args.full):
     t = subprocess.check_output(["gdalinfo", args.input_file])
     # Split string into before and after the "Corner Cordinates" section. Note
@@ -41,14 +42,14 @@ if(not args.full):
     # as blank strings.
     t1, t2, t3 = t.partition(b"Corner Coordinates")
 
-    f = GdalRasterImage(args.input_file)
+    f = geocal.GdalRasterImage(args.input_file)
     print(t1.decode('utf-8'),end='')
-    tre_use00a_pretty_print(f)
+    geocal.tre_use00a_pretty_print(f)
     # Function is only optionally available, depending on options
     # used at build time of AFIDS. If this isn't found then just
     # continue without complaint
     try:
-        tre_afid_a_pretty_print(f)
+        afids.tre_afid_a_pretty_print(f)
     except NameError as exc:
         pass
     print(t2.decode('utf-8'),end='')

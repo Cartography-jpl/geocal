@@ -2,7 +2,7 @@
 #
 # This runs a job from a shelf file.
 
-from geocal import *
+import geocal
 
 version = "February 6, 2013"
 usage='''Usage: 
@@ -31,7 +31,7 @@ Options:
        Print program version
 '''
 
-args = docopt_simple(usage, version=version)
+args = geocal.docopt_simple(usage, version=version)
 
 if(args.shelve_file):
     fname = args.shelve_file
@@ -41,7 +41,7 @@ else:
     job_index = int(os.environ["PBS_ARRAYID"])
 
 print("Starting job %d from %s" % (job_index, fname))
-f = read_shelve(fname + ":job_%d" % job_index)
+f = geocal.read_shelve(fname + ":job_%d" % job_index)
 f()
 print("Done with job %d from %s" % (job_index, fname))
 

@@ -3,6 +3,10 @@
 # This takes a VICAR file with a RSM and projects it to the surface.
 
 import geocal
+import numpy as np
+import subprocess
+import os
+import logging
 
 version = "October 2, 2017"
 usage='''Usage:
@@ -144,7 +148,7 @@ def create_dem(args):
             # Check for mola file
             t = subprocess.run(["file", "-b", args.dem_file], stdout=subprocess.PIPE)
             if(t.returncode == 0 and t.stdout.find(b"PDS image data") >= 0):
-                if(pds_label(args.dem_file)["DATA_SET_ID"].find("MOLA") >= 0):
+                if(geocal.pds_label(args.dem_file)["DATA_SET_ID"].find("MOLA") >= 0):
                     dem = geocal.MolaDemFile(args.dem_file, not args.outside_dem_not_error)
             if(dem is None):
                 dem = geocal.GdalDem(args.dem_file, datum, args.dem_band, 

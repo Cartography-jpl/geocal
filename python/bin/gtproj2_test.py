@@ -1,6 +1,7 @@
 import geocal
 import re
 from test_support import *
+import numpy as np
 
 def gtgen(filename, label):
     '''This runs the gtgen program. This is used in the original gtproj unit

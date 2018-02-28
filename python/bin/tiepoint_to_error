@@ -8,6 +8,7 @@
 import geocal
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
+import numpy as np
 
 version = "February 21, 2013"
 usage = '''Usage:

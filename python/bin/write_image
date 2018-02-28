@@ -3,6 +3,7 @@ import geocal
 import os
 import logging
 import math
+import subprocess
 
 version = "September 16, 2013"
 usage='''Usage: 

@@ -3,6 +3,8 @@ import geocal
 import os
 import logging
 import time
+import numpy as np
+import subprocess
 
 version = "October 15, 2013"
 usage='''Usage:

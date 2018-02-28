@@ -3,6 +3,7 @@
 # This runs a job from a shelf file.
 
 import geocal
+import os
 
 version = "February 6, 2013"
 usage='''Usage: 

@@ -4,6 +4,7 @@ import geocal
 import matplotlib.pyplot as plt
 import subprocess
 import os
+import numpy as np
 
 cm = plt.cm.jet
 

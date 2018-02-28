@@ -3,6 +3,7 @@
 # This sets up a DEM into a shelve.
 
 import geocal
+import subprocess
 
 version = "February 4, 2013"
 usage='''Usage: 

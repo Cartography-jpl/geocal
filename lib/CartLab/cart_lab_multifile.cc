@@ -294,13 +294,14 @@ void CartLabMultifile::create_subset_file
   // try to use the file.
   system(command.str().c_str());
   if(Type != "") {
-    TempFile f2;
+    std::string t2 = std::string(f.temp_fname) + "_2";
     std::ostringstream command2;
     command2 << "gdal_translate -of VRT -ot " << Type << " "
-	     << f.temp_fname << " " << f2.temp_fname;
+	     << f.temp_fname << " " << t2;
     system(command2.str().c_str());
-    GdalRasterImage d(f2.temp_fname);
+    GdalRasterImage d(t2);
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);
+    unlink(t2.c_str());
   } else {
     GdalRasterImage d(f.temp_fname);
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);

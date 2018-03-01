@@ -238,7 +238,8 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
 
         void CartLabMultifile::create_subset_file(const std::string &Oname, const std::string &Driver, const
         std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, const
-        std::string &Options="", int boundary=0) const
+        std::string &Type="", const std::string &Options="", int
+        boundary=0) const
         Create a stand alone file that contains a subset of the full file.
 
         This handles whatever mosaicing/subsetting is needed for the
@@ -252,7 +253,12 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
         This executes the command shell gdalbuildvrt, which must be in the
         path. Right now with GDAL the same functionality can't be done through
         C++, but there is talk of making VRTBuilder found in gdalbuildvrt
-        available. For now though, we just use a system call. 
+        available. For now though, we just use a system call.
+
+        The default is to create the subset file as the same type as the input
+        data (e.g, Byte from Byte). You can optionally specify a type string
+        such as would be passed to gdal_translate (e.g., "Int16"). We then
+        convert the output to the given type. 
         """
         return _cart_lab_multifile.CartLabMultifile__v_create_subset_file(self, *args)
 
@@ -275,14 +281,14 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 
-    def create_subset_file(self, Oname, Driver, Pt, Options = "", Boundary = 0):
+    def create_subset_file(self, Oname, Driver, Pt, Type = "", Options = "", Boundary = 0):
         if(isinstance(Pt, geocal_swig.Vector_GroundCoordinate)):
             t = Pt
         else:
             t = geocal_swig.Vector_GroundCoordinate()
             for p in Pt:
                 t.push_back(p)
-        return self._v_create_subset_file(Oname, Driver, t, Options, Boundary)
+        return self._v_create_subset_file(Oname, Driver, t, Type,Options, Boundary)
 
     __swig_destroy__ = _cart_lab_multifile.delete_CartLabMultifile
 CartLabMultifile._v_create_subset_file = new_instancemethod(_cart_lab_multifile.CartLabMultifile__v_create_subset_file, None, CartLabMultifile)

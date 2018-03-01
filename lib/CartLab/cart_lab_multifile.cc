@@ -248,11 +248,17 @@ public:
 /// path. Right now with GDAL the same functionality can't be done
 /// through C++, but there is talk of making VRTBuilder found in
 /// gdalbuildvrt available. For now though, we just use a system call.
+///
+/// The default is to create the subset file as the same type as the
+/// input data (e.g, Byte from Byte). You can optionally specify a
+/// type string such as would be passed to gdal_translate (e.g.,
+/// "Int16"). We then convert the output to the given type.
 //-----------------------------------------------------------------------
 
 void CartLabMultifile::create_subset_file
 (const std::string& Oname, const std::string& Driver,
- const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt, 
+ const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt,
+ const std::string& Type,
  const std::string& Options,
  int Boundary) const
 {
@@ -287,6 +293,16 @@ void CartLabMultifile::create_subset_file
   // Can ignore system status, we just fail in the next step when we
   // try to use the file.
   system(command.str().c_str());
-  GdalRasterImage d(f.temp_fname);
-  gdal_create_copy(Oname, Driver, *d.data_set(), Options);
+  if(Type != "") {
+    TempFile f2;
+    std::ostringstream command2;
+    command2 << "gdal_translate -of VRT -ot " << Type << " "
+	     << f.temp_fname << " " << f2.temp_fname;
+    system(command2.str().c_str());
+    GdalRasterImage d(f2.temp_fname);
+    gdal_create_copy(Oname, Driver, *d.data_set(), Options);
+  } else {
+    GdalRasterImage d(f.temp_fname);
+    gdal_create_copy(Oname, Driver, *d.data_set(), Options);
+  }
 }

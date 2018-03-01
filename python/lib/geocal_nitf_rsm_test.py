@@ -1,61 +1,62 @@
 try:
-    from pynitf.nitf_file import *
+    import pynitf
 except ImportError:
     pass
 from test_support import *
 import geocal.geocal_nitf_rsm
 from geocal.geocal_nitf_rsm import *
 from geocal_swig import GdalRasterImage
+import six
 
 def create_image_seg(f):
-    img = NitfImageFromNumpy(nrow=10, ncol=10)
+    img = pynitf.NitfImageFromNumpy(nrow=10, ncol=10)
     for i in range(10):
         for j in range(10):
             img.data[i,j] = i + j
-    f.image_segment.append(NitfImageSegment(img))
+    f.image_segment.append(pynitf.NitfImageSegment(img))
 
 @require_pynitf
 def test_rsm_rp(isolated_dir, rsm):
     '''Create a file, and write out a RSM. This RSM has just a single 
     rational polynomial in it'''    
-    f = NitfFile()
+    f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = rsm
     f.write("nitf_rsm.ntf")
-    f2 = NitfFile("nitf_rsm.ntf")
+    f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
 @require_pynitf
 def test_rsm_grid(isolated_dir, rsm_g):
     '''Create a file, and write out a RSM. This RSM has just a single 
     grid in it'''    
-    f = NitfFile()
+    f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = rsm_g
     f.write("nitf_rsm.ntf")
-    f2 = NitfFile("nitf_rsm.ntf")
+    f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
 @require_pynitf
 def test_rsm_ms_rp(isolated_dir, rsm_ms_rp):
     '''Create a file, and write out a RSM. This has a multi section
     rational polynomial in it'''    
-    f = NitfFile()
+    f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = rsm_ms_rp
     f.write("nitf_rsm.ntf")
-    f2 = NitfFile("nitf_rsm.ntf")
+    f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
 @require_pynitf
 def test_rsm_ms_g(isolated_dir, rsm_ms_g):
     '''Create a file, and write out a RSM. This has a multi section
     grid in it'''    
-    f = NitfFile()
+    f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = rsm_ms_g
     f.write("nitf_rsm.ntf")
-    f2 = NitfFile("nitf_rsm.ntf")
+    f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
 # Test the raw TREs
@@ -623,7 +624,7 @@ def test_rsm_sample(isolated_dir):
                   #'i_6130e.ntf',
                   'i_6130f.ntf', 'i_6130g.ntf'):
         print(fname)
-        f = NitfFile(rsm_sample_data + fname)
+        f = pynitf.NitfFile(rsm_sample_data + fname)
         print(f.image_segment[0].rsm)
         r = f.image_segment[0].rsm
         for ln, smp, h, lat, lon in pcalc[fname]:
@@ -648,7 +649,7 @@ def test_rsm_sample(isolated_dir):
 def test_rsm_sample_file_a(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
     fname = rsm_sample_data + "i_6130a.ntf"
-    f = NitfFile(fname)
+    f = pynitf.NitfFile(fname)
     rsm = f.image_segment[0].rsm
     # GdalRasterImage has much more limited reading of TRE, it just gives
     # the data as a string. However that is exactly what we want to get the
@@ -666,7 +667,7 @@ def test_rsm_sample_file_a(isolated_dir):
 def test_rsm_sample_file_b(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
     fname = rsm_sample_data + "i_6130b.ntf"
-    f = NitfFile(fname)
+    f = pynitf.NitfFile(fname)
     rsm = f.image_segment[0].rsm
     fgdal = GdalRasterImage(fname)
     texpect = fgdal["TRE", "RSMPCA"]
@@ -681,7 +682,7 @@ def test_rsm_sample_file_b(isolated_dir):
 def test_rsm_sample_file_c(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
     fname = rsm_sample_data + "i_6130c.ntf"
-    f = NitfFile(fname)
+    f = pynitf.NitfFile(fname)
     rsm = f.image_segment[0].rsm
     fgdal = GdalRasterImage(fname)
     texpect = fgdal["TRE", "RSMPCA"]
@@ -706,7 +707,7 @@ def test_rsm_sample_file_c(isolated_dir):
 def test_rsm_sample_file_e(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
     fname = rsm_sample_data + "i_6130e.ntf"
-    f = NitfFile(fname)
+    f = pynitf.NitfFile(fname)
     rsm = f.image_segment[0].rsm
     fgdal = GdalRasterImage(fname)
     texpect = fgdal["TRE", "RSMPCA"]
@@ -721,7 +722,7 @@ def test_rsm_sample_file_e(isolated_dir):
 def test_rsm_sample_file_f(isolated_dir):
     '''Test that we can generate the same TREs as we read.'''
     fname = rsm_sample_data + "i_6130f.ntf"
-    f = NitfFile(fname)
+    f = pynitf.NitfFile(fname)
     rsm = f.image_segment[0].rsm
     fgdal = GdalRasterImage(fname)
     texpect = fgdal["TRE", "RSMPCA"]

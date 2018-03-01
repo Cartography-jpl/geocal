@@ -51,7 +51,7 @@ for tp in tpcol:
            smp > 0 and smp < dem.map_info.number_x_pixel):
             h = dem.elevation(int(ln), int(smp))
             if(h > -9000):
-                gp = dem.map_info.ground_coordinate(smp,ln, SimpleDem(h))
+                gp = dem.map_info.ground_coordinate(smp,ln, geocal.SimpleDem(h))
                 for i in range(len(diff)):
                     iloc = tp.image_location[i]
                     if(iloc is not None):

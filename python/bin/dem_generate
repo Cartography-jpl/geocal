@@ -103,8 +103,8 @@ elif(args.map_info_cover):
     midem = igc1.cover(midem, args.boundary)
     midem = midem.intersection(igc2.cover(midem, args.boundary))
 else:
-    gc_sample = igc1.ground_coordinate(ImageCoordinate(0,0))
-    if(gc_sample.naif_code() == CoordinateConverter.EARTH_NAIF_CODE):
+    gc_sample = igc1.ground_coordinate(geocal.ImageCoordinate(0,0))
+    if(gc_sample.naif_code() == geocal.CoordinateConverter.EARTH_NAIF_CODE):
         mibase = geocal.cib01_mapinfo(desired_resolution = args.resolution)
     else:
         mibase = geocal.planet_mapinfo(gc_sample.naif_code(),

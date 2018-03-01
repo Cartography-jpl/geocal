@@ -72,7 +72,7 @@ for r in range(f.number_row):
             foz[r] = zmaybe
     else:
         if(oz):
-            gc = imgin.ground_coordinate(x - 1, y - 1, SimpleDem(z))
+            gc = imgin.ground_coordinate(x - 1, y - 1, geocal.SimpleDem(z))
             foz[r] = cout.convert_to_coordinate(gc)[2]
         else:
             gc = imgin.ground_coordinate(x - 1, y - 1)

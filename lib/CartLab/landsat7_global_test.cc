@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "landsat7_global.h"
+#include "vicar_file.h"
 #include <boost/filesystem.hpp>
 #include <iostream>
 
@@ -9,6 +10,8 @@ BOOST_FIXTURE_TEST_SUITE(landsat7_global, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(basic_test)
 {
+  if(!VicarFile::vicar_available())
+    return;
   if(!boost::filesystem::is_directory("/raid22/band62_VICAR"))
     return;
   Landsat7Global f("/raid22/band62_VICAR", Landsat7Global::BAND62);
@@ -20,6 +23,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+  if(!VicarFile::vicar_available())
+    return;
   if(!have_serialize_supported())
     return;
   if(!boost::filesystem::is_directory("/raid22/band62_VICAR"))

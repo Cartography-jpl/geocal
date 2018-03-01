@@ -92,7 +92,8 @@ with NamedTemporaryFile() as tmp:
     rpc_is_valid = fin.has_rpc
     if(fin.has_rpc):
         try:
-            fin.rpc.ground_coordinate(ImageCoordinate(0.5, 0.5), SimpleDem())
+            fin.rpc.ground_coordinate(geocal.ImageCoordinate(0.5, 0.5),
+                                      geocal.SimpleDem())
         except:
             rpc_is_valid = False
     if(rpc_is_valid and args.dem):

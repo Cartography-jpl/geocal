@@ -32,7 +32,7 @@ Options:
 args = geocal.docopt_simple(usage, version=version)
 
 if(args.input_band):
-    with TempDir() as t:
+    with geocal.TempDir() as t:
         tfile = t.name + "/temp.vrt"
         cmd = ["gdalbuildvrt", "-separate", tfile]
         cmd.extend(args.input_band)

@@ -349,4 +349,7 @@ Vector_GroundMask_swigregister = _ground_mask.Vector_GroundMask_swigregister
 Vector_GroundMask_swigregister(Vector_GroundMask)
 
 
+__all__ = ["GroundMask","CombinedGroundMask","Vector_GroundMask"]
+
+
 

@@ -463,4 +463,7 @@ IgcCollection_swigregister = _igc_collection.IgcCollection_swigregister
 IgcCollection_swigregister(IgcCollection)
 
 
+__all__ = ["IgcCollection"]
+
+
 

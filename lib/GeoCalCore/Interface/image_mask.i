@@ -45,3 +45,5 @@ public:
 }
 %template(Vector_ImageMask) std::vector<boost::shared_ptr<GeoCal::ImageMask> >;
 
+// List of things "import *" will include
+%python_export("ImageMask", "OffsetImageMask", "CombinedImageMask", "Vector_ImageMask")

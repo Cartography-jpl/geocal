@@ -240,4 +240,7 @@ def root_list(F, Xmin, Xmax, Root_minimum_spacing, Residual=1e-6):
     """
     return _geocal_gsl_root.root_list(F, Xmin, Xmax, Root_minimum_spacing, Residual)
 
+__all__ = ["gsl_root","gsl_root_with_derivative","root_list"]
+
+
 

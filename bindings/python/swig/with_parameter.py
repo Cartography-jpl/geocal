@@ -400,4 +400,7 @@ WithParameterNested_swigregister = _with_parameter.WithParameterNested_swigregis
 WithParameterNested_swigregister(WithParameterNested)
 
 
+__all__ = ["WithParameter","WithParameterNested"]
+
+
 

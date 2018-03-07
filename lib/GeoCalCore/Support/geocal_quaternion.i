@@ -81,3 +81,6 @@ namespace GeoCal {
 					   const AutoDerivative<double>& A7);
 }
 
+
+// List of things "import *" will include
+%python_export("Quaternion_AutoDerivative_double","quat_rot_x","quat_rot_y","quat_rot_z","quat_rot","quaternion_to_matrix","matrix_to_quaternion","quaternion_to_array","array_to_quaternion","quat_to_ypr","determine_quat_rot","quat_normalize")

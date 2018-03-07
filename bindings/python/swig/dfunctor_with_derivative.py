@@ -223,4 +223,7 @@ DFunctorWithDerivative_swigregister = _dfunctor_with_derivative.DFunctorWithDeri
 DFunctorWithDerivative_swigregister(DFunctorWithDerivative)
 
 
+__all__ = ["DFunctorWithDerivative"]
+
+
 

@@ -256,4 +256,7 @@ ImageMatcher_swigregister = _image_matcher.ImageMatcher_swigregister
 ImageMatcher_swigregister(ImageMatcher)
 
 
+__all__ = ["ImageMatcher"]
+
+
 

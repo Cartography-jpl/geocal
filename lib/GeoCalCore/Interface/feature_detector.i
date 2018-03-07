@@ -54,4 +54,6 @@ public:
 }
 %template(Vector_InterestPoint) std::vector<GeoCal::InterestPoint>;
 
+// List of things "import *" will include
+%python_export("InterestPoint", "Vector_InterestPoint", "FeatureDetector")
 

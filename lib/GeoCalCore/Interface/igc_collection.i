@@ -103,4 +103,6 @@ def ground_coordinate(self, image_index, ic, dem = None):
 };
 
 }
+// List of things "import *" will include
+%python_export("IgcCollection")
 

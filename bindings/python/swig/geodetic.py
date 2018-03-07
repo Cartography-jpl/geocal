@@ -238,4 +238,7 @@ Geocentric_swigregister = _geodetic.Geocentric_swigregister
 Geocentric_swigregister(Geocentric)
 
 
+__all__ = ["Geodetic","Geocentric"]
+
+
 

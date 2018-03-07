@@ -388,4 +388,7 @@ GeometricTiePoints_swigregister = _geometric_model.GeometricTiePoints_swigregist
 GeometricTiePoints_swigregister(GeometricTiePoints)
 
 
+__all__ = ["GeometricTiePoints","GeometricModel","ObserverGeometricTiePoints","ObservableGeometricTiePoints"]
+
+
 

@@ -186,6 +186,9 @@ def _new_from_set(cls, version, *args):
     return inst
 
 
+__all__ = ["wgs84_a","wgs84_b","wgs84_esq"]
+
+
 cvar = _wgs84_constant.cvar
 wgs84_a = cvar.wgs84_a
 wgs84_b = cvar.wgs84_b

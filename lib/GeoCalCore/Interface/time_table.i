@@ -68,3 +68,11 @@ public:
   %pickle_serialization();
 };
 }
+
+// List of things "import *" will include
+///
+// Note Vector_Time is actually from geocal_time_include.i. Since this gets
+// included in multiple files, we just pick one to export it
+
+%python_export("TimeTable", "ConstantSpacingTimeTable", "MeasuredTimeTable",
+	       "Vector_Time", "Vector_Time2")

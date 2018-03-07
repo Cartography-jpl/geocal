@@ -278,4 +278,7 @@ def HdfFile_is_hdf(Fname):
     return _hdf_file.HdfFile_is_hdf(Fname)
 
 
+__all__ = ["HdfFile"]
+
+
 

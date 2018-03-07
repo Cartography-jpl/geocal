@@ -552,4 +552,7 @@ Ipi_swigregister = _ipi.Ipi_swigregister
 Ipi_swigregister(Ipi)
 
 
+__all__ = ["Ipi"]
+
+
 

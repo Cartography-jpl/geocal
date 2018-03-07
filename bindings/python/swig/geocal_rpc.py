@@ -580,4 +580,7 @@ def Rpc_generate_rpc(Igc, Min_height, Max_height, Nlat=20, Nlon=20, Nheight=20, 
     return _geocal_rpc.Rpc_generate_rpc(Igc, Min_height, Max_height, Nlat, Nlon, Nheight, Skip_masked_point, Ignore_error)
 
 
+__all__ = ["Rpc"]
+
+
 

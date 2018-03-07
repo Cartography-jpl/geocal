@@ -236,4 +236,7 @@ SimpleDem_swigregister = _simple_dem.SimpleDem_swigregister
 SimpleDem_swigregister(SimpleDem)
 
 
+__all__ = ["SimpleDem"]
+
+
 

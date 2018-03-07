@@ -19,3 +19,5 @@ public:
 			blitz::Array<double, 2>& OUT) const;
 };
 }
+// List of things "import *" will include
+%python_export("VFunctorWithDerivative")

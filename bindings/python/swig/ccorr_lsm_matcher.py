@@ -279,4 +279,7 @@ CcorrLsmMatcher_swigregister = _ccorr_lsm_matcher.CcorrLsmMatcher_swigregister
 CcorrLsmMatcher_swigregister(CcorrLsmMatcher)
 
 
+__all__ = ["CcorrLsmMatcher"]
+
+
 

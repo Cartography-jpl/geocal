@@ -274,4 +274,7 @@ DemMapInfo_swigregister = _dem_map_info.DemMapInfo_swigregister
 DemMapInfo_swigregister(DemMapInfo)
 
 
+__all__ = ["DemMapInfo"]
+
+
 

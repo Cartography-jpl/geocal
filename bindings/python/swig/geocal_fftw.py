@@ -271,4 +271,7 @@ Fftw2dBackward_swigregister = _geocal_fftw.Fftw2dBackward_swigregister
 Fftw2dBackward_swigregister(Fftw2dBackward)
 
 
+__all__ = ["Fftw2dForward","Fftw2dBackward"]
+
+
 

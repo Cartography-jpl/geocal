@@ -381,4 +381,7 @@ LsmMatcher_swigregister = _lsm_matcher.LsmMatcher_swigregister
 LsmMatcher_swigregister(LsmMatcher)
 
 
+__all__ = ["LsmMatcher"]
+
+
 

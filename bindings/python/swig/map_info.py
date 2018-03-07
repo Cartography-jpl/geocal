@@ -503,4 +503,7 @@ MapInfo_swigregister = _map_info.MapInfo_swigregister
 MapInfo_swigregister(MapInfo)
 
 
+__all__ = ["MapInfo"]
+
+
 

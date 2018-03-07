@@ -229,4 +229,7 @@ ImageToImageMatch_swigregister = _image_to_image_match.ImageToImageMatch_swigreg
 ImageToImageMatch_swigregister(ImageToImageMatch)
 
 
+__all__ = ["ImageToImageMatch"]
+
+
 

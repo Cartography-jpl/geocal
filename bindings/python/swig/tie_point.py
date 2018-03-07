@@ -492,4 +492,7 @@ TiePointCollection_swigregister = _tie_point.TiePointCollection_swigregister
 TiePointCollection_swigregister(TiePointCollection)
 
 
+__all__ = ["TiePoint","TiePointCollection","TiePointVector"]
+
+
 

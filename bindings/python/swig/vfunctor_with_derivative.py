@@ -227,4 +227,7 @@ VFunctorWithDerivative_swigregister = _vfunctor_with_derivative.VFunctorWithDeri
 VFunctorWithDerivative_swigregister(VFunctorWithDerivative)
 
 
+__all__ = ["VFunctorWithDerivative"]
+
+
 

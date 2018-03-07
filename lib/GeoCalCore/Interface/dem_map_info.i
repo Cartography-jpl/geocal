@@ -29,3 +29,5 @@ protected:
   virtual double elevation(int Y_index, int X_index) const = 0;
 };
 }
+// List of things "import *" will include
+%python_export("DemMapInfo")

@@ -617,4 +617,7 @@ CartesianFixedLookVectorWithDerivative_swigregister = _look_vector.CartesianFixe
 CartesianFixedLookVectorWithDerivative_swigregister(CartesianFixedLookVectorWithDerivative)
 
 
+__all__ = ["ScLookVector","ScLookVectorWithDerivative","CartesianInertialLookVector","CartesianInertialLookVectorWithDerivative","DcsLookVector","DcsLookVectorWithDerivative","CartesianFixedLookVectorWithDerivative"]
+
+
 

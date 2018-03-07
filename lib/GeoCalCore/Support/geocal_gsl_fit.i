@@ -15,3 +15,6 @@ void gsl_fit(const GslMatrix& X, const GslVector& W, const GslVector& Y,
 void gsl_fit(const GslMatrix& X, const GslVector& Y, 
              GslVector& C, GslMatrix& Cov, double& Chisq);
 }
+
+// List of things "import *" will include
+%python_export("gsl_fit")

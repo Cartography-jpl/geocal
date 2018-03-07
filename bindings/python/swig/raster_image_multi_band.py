@@ -296,4 +296,7 @@ def copy_raster(*args):
     """
     return _raster_image_multi_band.copy_raster(*args)
 
+__all__ = ["copy_raster","RasterImageMultiBand"]
+
+
 

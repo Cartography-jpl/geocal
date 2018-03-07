@@ -17,3 +17,5 @@ class RasterMultifile : public RasterImageVariable {
 public:
 };
 }
+// List of things "import *" will include
+%python_export("RasterMultifile")

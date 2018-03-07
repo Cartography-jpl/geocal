@@ -258,4 +258,7 @@ FrameCoordinateWithDerivative_swigregister = _frame_coordinate.FrameCoordinateWi
 FrameCoordinateWithDerivative_swigregister(FrameCoordinateWithDerivative)
 
 
+__all__ = ["FrameCoordinate","FrameCoordinateWithDerivative"]
+
+
 

@@ -23,3 +23,5 @@ public:
 }
 %geocal_shared_ptr(GeoCal::SimpleDemT<GeoCal::Geodetic>);
 %template(SimpleDem) GeoCal::SimpleDemT<GeoCal::Geodetic>;
+// List of things "import *" will include
+%python_export("SimpleDem")

@@ -33,3 +33,5 @@ public:
 
 %geocal_shared_ptr(GeoCal::TiledFileBase<2>);
 %template(TiledFileBase_2) GeoCal::TiledFileBase<2>;
+// List of things "import *" will include
+%python_export("TiledFileBase_2")

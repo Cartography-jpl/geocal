@@ -188,3 +188,6 @@ void convert_position_and_velocity
 }
 
 %template(Vector_GroundCoordinate) std::vector<boost::shared_ptr<GeoCal::GroundCoordinate> >;
+
+// List of things "import *" will include
+%python_export("GroundCoordinate", "CartesianFixed", "CartesianInertial", "LnLookVector", "LnLookVectorWithDerivative", "CartesianFixedLookVector", "distance", "convert_position_and_velocity", "Vector_GroundCoordinate")

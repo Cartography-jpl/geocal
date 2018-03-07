@@ -23,3 +23,5 @@ protected:
   void remove_rpc();
 };
 }
+// List of things "import *" will include
+%python_export("RasterImageVariable")

@@ -221,4 +221,7 @@ MemoryRasterImage_swigregister = _memory_raster_image.MemoryRasterImage_swigregi
 MemoryRasterImage_swigregister(MemoryRasterImage)
 
 
+__all__ = ["MemoryRasterImage"]
+
+
 

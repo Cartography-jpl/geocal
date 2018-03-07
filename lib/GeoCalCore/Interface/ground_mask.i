@@ -36,3 +36,5 @@ public:
 %extend std::vector<boost::shared_ptr<GeoCal::GroundMask> > {
   %pickle_serialization();
 };
+// List of things "import *" will include
+%python_export("GroundMask", "CombinedGroundMask", "Vector_GroundMask")

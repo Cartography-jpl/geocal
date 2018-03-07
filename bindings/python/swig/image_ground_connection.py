@@ -993,4 +993,7 @@ Vector_ImageGroundConnection_swigregister = _image_ground_connection.Vector_Imag
 Vector_ImageGroundConnection_swigregister(Vector_ImageGroundConnection)
 
 
+__all__ = ["ImageGroundConnection","Vector_ImageGroundConnection","ImageGroundConnectionFailed","OffsetImageGroundConnection","ImageGroundConnectionCopy"]
+
+
 

@@ -306,4 +306,7 @@ CcorrMatcher_swigregister = _ccorr_matcher.CcorrMatcher_swigregister
 CcorrMatcher_swigregister(CcorrMatcher)
 
 
+__all__ = ["CcorrMatcher"]
+
+
 

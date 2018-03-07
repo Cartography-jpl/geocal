@@ -404,4 +404,7 @@ Vector_ImageMask_swigregister = _image_mask.Vector_ImageMask_swigregister
 Vector_ImageMask_swigregister(Vector_ImageMask)
 
 
+__all__ = ["ImageMask","OffsetImageMask","CombinedImageMask","Vector_ImageMask"]
+
+
 

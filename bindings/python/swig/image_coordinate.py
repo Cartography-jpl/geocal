@@ -383,4 +383,7 @@ Vector_ImageCoordinatePtr_swigregister = _image_coordinate.Vector_ImageCoordinat
 Vector_ImageCoordinatePtr_swigregister(Vector_ImageCoordinatePtr)
 
 
+__all__ = ["ImageCoordinate","VicarImageCoordinate","ImageCoordinateWithDerivative","Vector_ImageCoordinate","Vector_ImageCoordinatePtr"]
+
+
 

@@ -72,3 +72,5 @@ namespace GeoCal {
 
 %template(Vector_ImageCoordinate) std::vector<GeoCal::ImageCoordinate>;
 %template(Vector_ImageCoordinatePtr) std::vector<boost::shared_ptr<GeoCal::ImageCoordinate> >;
+// List of things "import *" will include
+%python_export("ImageCoordinate", "VicarImageCoordinate", "ImageCoordinateWithDerivative", "Vector_ImageCoordinate", "Vector_ImageCoordinatePtr")

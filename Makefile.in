@@ -2435,8 +2435,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/pds_label_test.py \
 	@srcpythonlib@/compare_burl_matlab_test.py \
 	@srcpythonlib@/geocal_nitf_rsm_test.py \
-	@srcpythonlib@/spice_camera_test.py @docpythonsrc@ \
-	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
+	@srcpythonlib@/spice_camera_test.py \
+	@srcpythonlib@/tie_point_collect_picmtch_test.py \
+	@docpythonsrc@ @testsupportsrc@/__init__.py \
+	@testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
 	@testsupportsrc@/test_support.py \
 	@testsupportsrc@/vicar_test_support.py @testsupportsrc@/README
@@ -3428,7 +3430,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/ibis_file_extension.py \
 	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
 	@srcpythonlib@/air_mspi_igc.py @srcpythonlib@/pds_label.py \
-	@srcpythonlib@/spice_camera.py
+	@srcpythonlib@/spice_camera.py \
+	@srcpythonlib@/tie_point_collect_picmtch.py
 @INSTALL_PYNITF_FALSE@EXTRA_PYTHON_TEST = 
 @INSTALL_PYNITF_TRUE@EXTRA_PYTHON_TEST = $(srcdir)/@srcpython@/pynitf
 

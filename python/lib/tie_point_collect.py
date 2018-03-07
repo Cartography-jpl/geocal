@@ -18,6 +18,7 @@ from multiprocessing import Pool
 import time
 import logging
 from tabulate import tabulate
+import numpy as np
 
 # Might not have cv2 available
 try:

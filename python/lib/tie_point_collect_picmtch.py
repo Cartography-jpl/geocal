@@ -1,5 +1,6 @@
 from geocal.vicar_interface import VicarInterface
-from geocal_swig import (IbisFile, ImageCoordinate, TiePoint,
+from geocal_swig import (IbisFile, ImageCoordinate, VicarImageCoordinate,
+                         TiePoint,
                          TiePointCollection, VicarLiteRasterImage)
 import time
 import os
@@ -117,12 +118,12 @@ rowop2 &xqxqgrid3 &out keycol=18 range=(0.0,&toler) 'select
         f = IbisFile("tpcol.ibis")
         ln1 = f.column(2)[:]
         smp1 = f.column(3)[:]
-        z1 = f.column(4)[:]
         ln2 = f.column(5)[:]
         smp2 = f.column(6)[:]
-        z2 = f.column(7)[:]
-        self.res = [(ImageCoordinate(ln1[i],smp1[i]),
-                     ImageCoordinate(ln2[i],smp2[i]))
+        #z1 = f.column(4)[:]
+        #z2 = f.column(7)[:]
+        self.res = [(ImageCoordinate(VicarImageCoordinate(ln1[i],smp1[i])),
+                     ImageCoordinate(VicarImageCoordinate(ln2[i],smp2[i])))
                     for i in range(f.number_row)]
         
 class TiePointCollectPicmtch(object):

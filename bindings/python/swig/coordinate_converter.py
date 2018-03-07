@@ -389,4 +389,7 @@ GeodeticRadian2piConverter_swigregister = _coordinate_converter.GeodeticRadian2p
 GeodeticRadian2piConverter_swigregister(GeodeticRadian2piConverter)
 
 
+__all__ = ["CoordinateConverter","GeodeticConverter","GeodeticRadianConverter","GeodeticRadian2piConverter"]
+
+
 

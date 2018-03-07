@@ -346,4 +346,7 @@ Statistic_swigregister = _statistic.Statistic_swigregister
 Statistic_swigregister(Statistic)
 
 
+__all__ = ["Statistic"]
+
+
 

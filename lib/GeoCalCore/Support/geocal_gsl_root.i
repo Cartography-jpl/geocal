@@ -28,3 +28,6 @@ std::vector<double> root_list(const DFunctor& F,
 	        double Xmin, double Xmax, double Root_minimum_spacing,
 		double Residual = 1e-6);
 }
+
+// List of things "import *" will include
+%python_export("gsl_root","gsl_root_with_derivative","root_list")

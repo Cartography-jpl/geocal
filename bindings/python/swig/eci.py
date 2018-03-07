@@ -232,4 +232,7 @@ Eci_swigregister = _eci.Eci_swigregister
 Eci_swigregister(Eci)
 
 
+__all__ = ["Eci"]
+
+
 

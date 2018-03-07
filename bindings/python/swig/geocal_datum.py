@@ -262,4 +262,7 @@ SimpleDatum_swigregister = _geocal_datum.SimpleDatum_swigregister
 SimpleDatum_swigregister(SimpleDatum)
 
 
+__all__ = ["Datum","SimpleDatum"]
+
+
 

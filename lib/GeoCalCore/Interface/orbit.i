@@ -27,7 +27,6 @@
 %geocal_shared_ptr(GeoCal::QuaternionOrbitData);
 %geocal_shared_ptr(GeoCal::Orbit);
 %geocal_shared_ptr(GeoCal::KeplerOrbit);
-
 namespace GeoCal {
   class Orbit;
 }
@@ -471,3 +470,6 @@ public:
 %extend std::vector<boost::shared_ptr<GeoCal::QuaternionOrbitData> > {
   %pickle_serialization();
 };
+
+// List of things "import *" will include
+%python_export("OrbitData", "QuaternionOrbitData", "Orbit", "KeplerOrbit", "ObservableOrbit", "ObserverOrbit", "Vector_QuaternionOrbitData")

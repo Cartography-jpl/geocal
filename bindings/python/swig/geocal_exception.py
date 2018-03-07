@@ -324,4 +324,7 @@ def no_gsl_abort():
     """
     return _geocal_exception.no_gsl_abort()
 
+__all__ = ["no_gsl_abort","Exception","ConvergenceFailure","NoCoverage","MetadataMissing","VicarException"]
+
+
 

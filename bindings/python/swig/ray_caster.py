@@ -317,4 +317,7 @@ RayCaster_swigregister = _ray_caster.RayCaster_swigregister
 RayCaster_swigregister(RayCaster)
 
 
+__all__ = ["RayCaster"]
+
+
 

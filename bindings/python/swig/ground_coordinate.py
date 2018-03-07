@@ -709,4 +709,7 @@ Vector_GroundCoordinate_swigregister = _ground_coordinate.Vector_GroundCoordinat
 Vector_GroundCoordinate_swigregister(Vector_GroundCoordinate)
 
 
+__all__ = ["GroundCoordinate","CartesianFixed","CartesianInertial","LnLookVector","LnLookVectorWithDerivative","CartesianFixedLookVector","distance","convert_position_and_velocity","Vector_GroundCoordinate"]
+
+
 

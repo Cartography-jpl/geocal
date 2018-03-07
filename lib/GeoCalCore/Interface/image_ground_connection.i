@@ -223,3 +223,5 @@ public:
 }
 
 %template(Vector_ImageGroundConnection) std::vector<boost::shared_ptr<GeoCal::ImageGroundConnection> >;
+// List of things "import *" will include
+%python_export("ImageGroundConnection", "Vector_ImageGroundConnection", "ImageGroundConnectionFailed", "OffsetImageGroundConnection", "ImageGroundConnectionCopy")

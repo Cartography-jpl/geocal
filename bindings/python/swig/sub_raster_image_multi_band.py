@@ -260,4 +260,7 @@ SubRasterImageMultiBand_swigregister = _sub_raster_image_multi_band.SubRasterIma
 SubRasterImageMultiBand_swigregister(SubRasterImageMultiBand)
 
 
+__all__ = ["SubRasterImageMultiBand"]
+
+
 

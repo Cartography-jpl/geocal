@@ -540,4 +540,7 @@ vector_auto_derivative_swigregister = _auto_derivative.vector_auto_derivative_sw
 vector_auto_derivative_swigregister(vector_auto_derivative)
 
 
+__all__ = ["AutoDerivativeDouble","AutoDerivativeRefDouble","ArrayAutoDerivativeDouble_1","BoostArrayAutoDerivativeDouble_3","sqrt","log","log10","exp","sin","asin","cos","acos","tan","atan"]
+
+
 

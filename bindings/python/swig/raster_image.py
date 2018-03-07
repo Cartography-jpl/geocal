@@ -804,4 +804,7 @@ Vector_RasterImage_swigregister = _raster_image.Vector_RasterImage_swigregister
 Vector_RasterImage_swigregister(Vector_RasterImage)
 
 
+__all__ = ["copy_no_fill","Vector_RasterImage","RasterImage","ArrayRasterImage","RasterImageTileIterator"]
+
+
 

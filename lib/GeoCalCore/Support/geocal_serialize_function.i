@@ -44,3 +44,6 @@ std::string serialize_write_binary(const boost::shared_ptr<GenericObject>& Obj);
 boost::shared_ptr<GenericObject> 
 serialize_read_binary(const std::string& Data);
 }
+
+// List of things "import *" will include
+%python_export("have_serialize_supported","serialize_write","serialize_write_string","serialize_read_generic","serialize_read_generic_string","serialize_write_binary","serialize_read_binary")

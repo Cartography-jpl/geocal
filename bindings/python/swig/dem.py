@@ -280,4 +280,7 @@ Dem_swigregister = _dem.Dem_swigregister
 Dem_swigregister(Dem)
 
 
+__all__ = ["Dem"]
+
+
 

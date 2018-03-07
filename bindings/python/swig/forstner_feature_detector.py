@@ -338,4 +338,7 @@ ForstnerFeatureDetector_swigregister = _forstner_feature_detector.ForstnerFeatur
 ForstnerFeatureDetector_swigregister(ForstnerFeatureDetector)
 
 
+__all__ = ["ForstnerFeatureDetector"]
+
+
 

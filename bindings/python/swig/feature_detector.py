@@ -312,4 +312,7 @@ Vector_InterestPoint_swigregister = _feature_detector.Vector_InterestPoint_swigr
 Vector_InterestPoint_swigregister(Vector_InterestPoint)
 
 
+__all__ = ["InterestPoint","Vector_InterestPoint","FeatureDetector"]
+
+
 

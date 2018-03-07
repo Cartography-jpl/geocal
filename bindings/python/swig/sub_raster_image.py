@@ -266,4 +266,7 @@ SubRasterImage_swigregister = _sub_raster_image.SubRasterImage_swigregister
 SubRasterImage_swigregister(SubRasterImage)
 
 
+__all__ = ["SubRasterImage"]
+
+
 

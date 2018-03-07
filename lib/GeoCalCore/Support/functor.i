@@ -24,3 +24,6 @@ class DFunctor : public GenericObject {
     1>& X) const = 0;
   };
 }
+
+// List of things "import *" will include
+%python_export("DFunctor","VFunctor")

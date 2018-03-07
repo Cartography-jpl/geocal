@@ -215,4 +215,7 @@ ConstantRasterImage_swigregister = _constant_raster_image.ConstantRasterImage_sw
 ConstantRasterImage_swigregister(ConstantRasterImage)
 
 
+__all__ = ["ConstantRasterImage"]
+
+
 

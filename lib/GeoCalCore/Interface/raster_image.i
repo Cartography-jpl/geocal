@@ -127,3 +127,5 @@ void copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_valu
 
 %template(Vector_RasterImage) std::vector<boost::shared_ptr<GeoCal::RasterImage> >;
 
+// List of things "import *" will include
+%python_export("copy_no_fill", "Vector_RasterImage", "RasterImage", "ArrayRasterImage", "RasterImageTileIterator")

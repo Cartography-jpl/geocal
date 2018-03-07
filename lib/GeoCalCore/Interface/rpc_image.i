@@ -46,3 +46,5 @@ public:
   image_match_diagnostic() const;
 };
 }
+// List of things "import *" will include
+%python_export("RpcImage")

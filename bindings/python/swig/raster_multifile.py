@@ -228,4 +228,7 @@ RasterMultifile_swigregister = _raster_multifile.RasterMultifile_swigregister
 RasterMultifile_swigregister(RasterMultifile)
 
 
+__all__ = ["RasterMultifile"]
+
+
 

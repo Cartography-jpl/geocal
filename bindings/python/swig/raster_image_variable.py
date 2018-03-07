@@ -208,4 +208,7 @@ RasterImageVariable_swigregister = _raster_image_variable.RasterImageVariable_sw
 RasterImageVariable_swigregister(RasterImageVariable)
 
 
+__all__ = ["RasterImageVariable"]
+
+
 

@@ -9,6 +9,7 @@
 %}
 %base_import(generic_object)
 %import "raster_image.i"
+%import "raster_image_multi_band_variable.i"
 %geocal_shared_ptr(GeoCal::RasterImageMultiBand);
 
 namespace GeoCal {
@@ -36,4 +37,5 @@ void copy(const RasterImageMultiBand& Img_in, RasterImageMultiBand& Img_out,
 
 }
 
-%import "raster_image_multi_band_variable.i"
+// List of things "import *" will include
+%python_export("copy_raster", "RasterImageMultiBand")

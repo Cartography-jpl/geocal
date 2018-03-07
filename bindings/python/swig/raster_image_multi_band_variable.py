@@ -236,4 +236,7 @@ RasterImageMultiBandVariable_swigregister = _raster_image_multi_band_variable.Ra
 RasterImageMultiBandVariable_swigregister(RasterImageMultiBandVariable)
 
 
+__all__ = ["RasterImageMultiBandVariable"]
+
+
 

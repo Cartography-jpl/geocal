@@ -124,3 +124,6 @@ public:
 // to break a SWIG circular dependency.
 
 }
+// List of things "import *" will include
+%python_export("ScLookVector", "ScLookVectorWithDerivative", "CartesianInertialLookVector", "CartesianInertialLookVectorWithDerivative", "DcsLookVector", "DcsLookVectorWithDerivative", "CartesianFixedLookVectorWithDerivative")
+

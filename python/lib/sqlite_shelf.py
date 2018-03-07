@@ -77,7 +77,8 @@ def read_shelve(f):
     a shelve file, e.g., we are using python modules not already 
     included in AFIDS. If the special key "_extra_python_init" is 
     found, we execute the code found there. This can do things like 
-    import modules.
+    import modules. For xml and json files, we look for the file 
+    "extra_python_init.py" found in the same directory.
 
     Because we often use relative names for files, we first chdir to 
     the same directory as the database file (if different than the current
@@ -91,8 +92,12 @@ def read_shelve(f):
         if(dirn):
             os.chdir(dirn)
         if(os.path.splitext(f)[1] == ".xml"):
+            if(os.path.exists("extra_python_init.py")):
+                exec(open("extra_python_init.py").read())
             return geocal_swig.serialize_read_generic(fb)
         if(os.path.splitext(f)[1] == ".json"):
+            if(os.path.exists("extra_python_init.py")):
+                exec(open("extra_python_init.py").read())
             if(have_jsonpickle):
                 return jsonpickle.decode(open(fb).read())
             else:

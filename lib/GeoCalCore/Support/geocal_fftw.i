@@ -27,3 +27,6 @@ public:
   std::string print_to_string() const;
 };
 }
+
+// List of things "import *" will include
+%python_export("Fftw2dForward","Fftw2dBackward")

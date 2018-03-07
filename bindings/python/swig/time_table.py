@@ -559,4 +559,7 @@ MeasuredTimeTable_swigregister = _time_table.MeasuredTimeTable_swigregister
 MeasuredTimeTable_swigregister(MeasuredTimeTable)
 
 
+__all__ = ["TimeTable","ConstantSpacingTimeTable","MeasuredTimeTable","Vector_Time","Vector_Time2"]
+
+
 

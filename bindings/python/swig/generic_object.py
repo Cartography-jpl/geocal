@@ -206,4 +206,7 @@ GenericObject_swigregister = _generic_object.GenericObject_swigregister
 GenericObject_swigregister(GenericObject)
 
 
+__all__ = ["GenericObject"]
+
+
 

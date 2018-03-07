@@ -272,4 +272,7 @@ def serialize_read_binary(Data):
     """
     return _geocal_serialize_function.serialize_read_binary(Data)
 
+__all__ = ["have_serialize_supported","serialize_write","serialize_write_string","serialize_read_generic","serialize_read_generic_string","serialize_write_binary","serialize_read_binary"]
+
+
 

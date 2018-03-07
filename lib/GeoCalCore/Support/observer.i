@@ -32,3 +32,8 @@ protected:
   void clean_dead_ptr();
 };  
 }
+// List of things "import *" will include
+%pythoncode %{
+__all__ = []
+%}
+

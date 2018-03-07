@@ -123,5 +123,9 @@ GeoCal::AutoDerivative<double> atan(const GeoCal::AutoDerivative<double>& x);
 
 %template(vector_auto_derivative) std::vector<GeoCal::AutoDerivative<double> >;
 
+// List of things "import *" will include
+%python_export("AutoDerivativeDouble","AutoDerivativeRefDouble","ArrayAutoDerivativeDouble_1","BoostArrayAutoDerivativeDouble_3","sqrt","log","log10","exp","sin","asin","cos","acos","tan","atan")
+
+
 
 

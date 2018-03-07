@@ -331,4 +331,7 @@ TiledFileBase_2_swigregister = _tiled_file.TiledFileBase_2_swigregister
 TiledFileBase_2_swigregister(TiledFileBase_2)
 
 
+__all__ = ["TiledFileBase_2"]
+
+
 

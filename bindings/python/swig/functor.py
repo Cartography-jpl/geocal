@@ -209,4 +209,7 @@ VFunctor_swigregister = _functor.VFunctor_swigregister
 VFunctor_swigregister(VFunctor)
 
 
+__all__ = ["DFunctor","VFunctor"]
+
+
 

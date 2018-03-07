@@ -187,4 +187,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 
+__all__ = []
+
+
 

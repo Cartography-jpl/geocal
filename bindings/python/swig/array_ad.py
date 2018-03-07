@@ -1108,4 +1108,7 @@ ArrayAd_double_4_swigregister = _array_ad.ArrayAd_double_4_swigregister
 ArrayAd_double_4_swigregister(ArrayAd_double_4)
 
 
+__all__ = ["ArrayAd_double_1","ArrayAd_double_2","ArrayAd_double_3","ArrayAd_double_4"]
+
+
 

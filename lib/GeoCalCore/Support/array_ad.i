@@ -162,4 +162,7 @@ def __setitem__(self, index, val):
 %array_ad_template(ArrayAd_double_3, double, 3, 4);
 %array_ad_template(ArrayAd_double_4, double, 4, 5);
 
+// List of things "import *" will include
+%python_export("ArrayAd_double_1","ArrayAd_double_2","ArrayAd_double_3","ArrayAd_double_4")
+
 

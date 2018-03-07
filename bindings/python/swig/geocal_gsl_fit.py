@@ -199,4 +199,7 @@ def gsl_fit(*args):
     """
     return _geocal_gsl_fit.gsl_fit(*args)
 
+__all__ = ["gsl_fit"]
+
+
 

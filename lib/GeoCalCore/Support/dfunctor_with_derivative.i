@@ -18,3 +18,6 @@ public:
   virtual AutoDerivative<double> f_with_derivative(double X) const;
 };
 }
+
+// List of things "import *" will include
+%python_export("DFunctorWithDerivative")

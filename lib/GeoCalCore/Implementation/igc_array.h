@@ -38,6 +38,14 @@ public:
   collinearity_residual_jacobian(int Image_index,
 				 const GroundCoordinate& Gc,
 				 const ImageCoordinate& Ic_actual) const;
+
+//-----------------------------------------------------------------------
+/// Add a igc. Sometimes it is easier to build IgcArray up
+//-----------------------------------------------------------------------
+
+  void add_igc(const boost::shared_ptr<ImageGroundConnection>& Igc)
+  { igc_list.push_back(Igc); add_object(Igc); }
+    
 //-----------------------------------------------------------------------
 /// Return assumption about ImageGroundConnection being
 /// independent. If they are, then we can get a optimization in the

@@ -226,6 +226,15 @@ class IgcArray(geocal_swig.igc_collection.IgcCollection, geocal_swig.with_parame
         return _igc_array.IgcArray_image_ground_connection(self, Image_index)
 
 
+    def add_igc(self, Igc):
+        """
+
+        void GeoCal::IgcArray::add_igc(const boost::shared_ptr< ImageGroundConnection > &Igc)
+        Add a igc. Sometimes it is easier to build IgcArray up. 
+        """
+        return _igc_array.IgcArray_add_igc(self, Igc)
+
+
     def _v_assume_igc_independent(self, *args):
         """
 
@@ -249,6 +258,7 @@ class IgcArray(geocal_swig.igc_collection.IgcCollection, geocal_swig.with_parame
 
     __swig_destroy__ = _igc_array.delete_IgcArray
 IgcArray.image_ground_connection = new_instancemethod(_igc_array.IgcArray_image_ground_connection, None, IgcArray)
+IgcArray.add_igc = new_instancemethod(_igc_array.IgcArray_add_igc, None, IgcArray)
 IgcArray._v_assume_igc_independent = new_instancemethod(_igc_array.IgcArray__v_assume_igc_independent, None, IgcArray)
 IgcArray_swigregister = _igc_array.IgcArray_swigregister
 IgcArray_swigregister(IgcArray)

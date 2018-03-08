@@ -27,7 +27,8 @@ class VicarInterface(object):
         self.title = "vicar command"
         self.timing = True
         self.force_cleanup = False
-
+        self.run_dir_name = None
+        
     def pre_run(self):
         '''This gets called after the temporary directory has been created
         and everything set up, but before we actually run. This can be 
@@ -112,6 +113,10 @@ class VicarInterface(object):
             If true, keep run directory after completing function. This
             is primarily useful for debugging problems with the actual VICAR
             comand.
+        run_dir_name
+            If present, can specify the name of the run directory. Useful with
+            keep_run_dir if we have a unique, meaningful name. Without this
+            we use mkdtemp to create a unique directory name.
         input
             List of files the should be linked in to the temporary directory 
             to be available for the command.
@@ -144,7 +149,11 @@ class VicarInterface(object):
         curdir = None
         successfully_done = False
         try:
-            d = tempfile.mkdtemp(dir='./')
+            if(self.run_dir_name is not None):
+                d = self.run_dir_name
+                makedirs_p(d)
+            else:
+                d = tempfile.mkdtemp(dir='./')
             for i in self.input:
                 os.symlink(os.path.abspath(i), d + "/" + os.path.basename(i))
             outabs = [os.path.abspath(x) for x in self.output]
@@ -152,12 +161,15 @@ class VicarInterface(object):
                 self.log_file = os.path.abspath(self.log_file)
             curdir = os.getcwd()
             os.chdir(d)
+            # Don't think I need these anymore, so comment these out.
+            # We could do this in pre_run if needed by a particular
+            # vicar command.
             # These were used by the Shiva stuff. Not sure if we still
             # need these, but they are cheap to create so leave in
             # place for now
-            for f in ["basemos", "baseraw", "dtedmos", "dtedraw", 
-                      "finaltst", "rawtst", "scratch"]: 
-                os.mkdir(f)
+            #for f in ["basemos", "baseraw", "dtedmos", "dtedraw", 
+            #          "finaltst", "rawtst", "scratch"]: 
+            #    os.mkdir(f)
             with open("tmppdf.pdf", "w") as f:
                 f.write(
 """procedure

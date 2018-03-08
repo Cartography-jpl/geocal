@@ -12,10 +12,11 @@ class _tpcol(VicarInterface):
     '''
     def __init__(self, img1_fname, img2_fname, fftgrid=(42, 42),
                  fftsize=256, magnify=4.0, magmin=2.0, toler=1.5, redo=36,
-                 ffthalf=2, seed=562, log_file=None):
+                 ffthalf=2, seed=562, log_file=None, run_dir_name=None):
         VicarInterface.__init__(self)
         self.title = "tpcol"
         self.log_file = log_file
+        self.run_dir_name = run_dir_name
         self.input = [img1_fname, img2_fname]
         self.before_body = '''
 local toler real
@@ -110,8 +111,8 @@ mf3 &xqxqgrid3 func="c18=@sqrt(c16*c16+c17*c17)"
 rowop2 &xqxqgrid3 &out keycol=18 range=(0.0,&toler) 'select
 '''
         self.timing = False
-        # Temporary, until we get parsing of output in place
-        self.keep_run_dir = True
+        if(self.run_dir_name is not None):
+            self.keep_run_dir = True
         self.vicar_run()
 
     def post_run(self):
@@ -131,7 +132,8 @@ class TiePointCollectPicmtch(object):
                  image_index1 = 0, image_index2 = -1,
                  ref_image_fname = None, ref_dem = None,
                  fftsize=256, magnify=4.0, magmin=2.0, toler=1.5, redo=36,
-                 ffthalf=2, seed=562, log_file = None):
+                 ffthalf=2, seed=562, log_file = None,
+                 run_dir_name = None):
         '''This sets up for doing a tie point collection, using pictmtch5.
         This is similar to TiePointCollect.
 
@@ -176,6 +178,7 @@ class TiePointCollectPicmtch(object):
         self.ffthalf = ffthalf
         self.seed = seed
         self.log_file = log_file
+        self.run_dir_name = run_dir_name
         if((self.image_index2 >= 0 and self.ref_image_fname is not None) or
            (self.image_index2 < 0 and self.ref_image_fname is None)):
             raise RuntimeError("Need to either supply a ref_image_fname or an image_index2, but not both")
@@ -197,7 +200,8 @@ class TiePointCollectPicmtch(object):
                            fftsize = self.fftsize, magnify = self.magnify,
                            magmin = self.magmin, toler = self.toler,
                            redo = self.redo, ffthalf = self.ffthalf,
-                           seed = self.seed, log_file = self.log_file)
+                           seed = self.seed, log_file = self.log_file,
+                           run_dir_name = self.run_dir_name)
         tpcol = TiePointCollection()
         img1 = VicarLiteRasterImage(img1_fname)
         img2 = VicarLiteRasterImage(img2_fname)

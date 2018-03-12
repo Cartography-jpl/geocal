@@ -11,6 +11,8 @@ template<class Archive>
 void TimeTable::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(TimeTable);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(TimeTable, WithParameter);
 }
 
 template<class Archive>

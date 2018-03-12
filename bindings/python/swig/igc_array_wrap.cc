@@ -6768,7 +6768,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"IgcArray_add_igc", _wrap_IgcArray_add_igc, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::IgcArray::add_igc(const boost::shared_ptr< ImageGroundConnection > &Igc)\n"
+		"virtual void GeoCal::IgcArray::add_igc(const boost::shared_ptr< ImageGroundConnection > &Igc)\n"
 		"Add a igc. Sometimes it is easier to build IgcArray up. \n"
 		""},
 	 { (char *)"IgcArray__v_assume_igc_independent", _wrap_IgcArray__v_assume_igc_independent, METH_VARARGS, (char *)"\n"

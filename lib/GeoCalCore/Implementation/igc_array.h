@@ -43,7 +43,7 @@ public:
 /// Add a igc. Sometimes it is easier to build IgcArray up
 //-----------------------------------------------------------------------
 
-  void add_igc(const boost::shared_ptr<ImageGroundConnection>& Igc)
+  virtual void add_igc(const boost::shared_ptr<ImageGroundConnection>& Igc)
   { igc_list.push_back(Igc); add_object(Igc); }
     
 //-----------------------------------------------------------------------
@@ -57,10 +57,11 @@ public:
 //-----------------------------------------------------------------------
   bool assume_igc_independent() const {return assume_igc_independent_;}
   void assume_igc_independent(bool v) {assume_igc_independent_ = v;}
-private:
+protected:
   std::vector<boost::shared_ptr<ImageGroundConnection> > igc_list;
   bool assume_igc_independent_;
   IgcArray() {}
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

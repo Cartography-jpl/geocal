@@ -229,7 +229,7 @@ class IgcArray(geocal_swig.igc_collection.IgcCollection, geocal_swig.with_parame
     def add_igc(self, Igc):
         """
 
-        void GeoCal::IgcArray::add_igc(const boost::shared_ptr< ImageGroundConnection > &Igc)
+        virtual void GeoCal::IgcArray::add_igc(const boost::shared_ptr< ImageGroundConnection > &Igc)
         Add a igc. Sometimes it is easier to build IgcArray up. 
         """
         return _igc_array.IgcArray_add_igc(self, Igc)

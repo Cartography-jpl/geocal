@@ -314,7 +314,7 @@ void QuaternionCamera::parameter(const blitz::Array<double, 1>& Parm)
 
 void QuaternionCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
 {
-  if(Parm.rows() != 8)
+  if(Parm.rows() != 6 + 2 * number_band())
     throw Exception("Wrong sized parameter passed.");
   line_pitch_ = Parm(3);
   sample_pitch_ = Parm(4);
@@ -341,7 +341,7 @@ blitz::Array<double, 1> QuaternionCamera::parameter() const
 
 ArrayAd<double, 1> QuaternionCamera::parameter_with_derivative() const
 {
-  blitz::Array<AutoDerivative<double>, 1> res(8);
+  blitz::Array<AutoDerivative<double>, 1> res(6 + 2 * number_band());
   res(blitz::Range(0,2)) = euler_with_derivative();
   res(3) = line_pitch_with_derivative();
   res(4) = sample_pitch_with_derivative();

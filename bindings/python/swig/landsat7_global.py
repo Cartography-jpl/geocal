@@ -199,11 +199,29 @@ class Landsat7Global(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     estimated by Tom Logan at 1/3 pixel or so. Not sure how accurate this
     estimate is, perhaps Tom has a better estimate.
 
+    The bands are the standard Landsat 7 bands:
+
+    Band Wavelength (micrometer) Resolution (m)  Band 1 - Blue 0.45-0.52
+    30 Band 2 - Green 0.52-0.60 30 Band 3 - Red 0.63-0.69 30 Band 4 - Near
+    Infrared (NIR) 0.77-0.90 30 Band 5 - Shortwave Infrared (SWIR) 1
+    1.55-1.75 30 Band 6 - Thermal 10.40-12.50 60 Band 7 - Shortwave
+    Infrared (SWIR) 2 2.09-2.35 30 Band 8 - Panchromatic .52-.90 15
+
+    Band 6 has both a low and a high gain (Bands 61 and 62).
+
     C++ includes: landsat7_global.h 
     """
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    BAND1 = _landsat7_global.Landsat7Global_BAND1
+    BAND2 = _landsat7_global.Landsat7Global_BAND2
+    BAND3 = _landsat7_global.Landsat7Global_BAND3
+    BAND4 = _landsat7_global.Landsat7Global_BAND4
+    BAND5 = _landsat7_global.Landsat7Global_BAND5
+    BAND61 = _landsat7_global.Landsat7Global_BAND61
     BAND62 = _landsat7_global.Landsat7Global_BAND62
+    BAND7 = _landsat7_global.Landsat7Global_BAND7
+    BAND8 = _landsat7_global.Landsat7Global_BAND8
 
     def __init__(self, Dir, B):
         """

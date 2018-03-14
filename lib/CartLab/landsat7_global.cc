@@ -25,9 +25,50 @@ Landsat7Global::Landsat7Global(const std::string& Dir, Band B)
 {
   int num_pix = -1;
   switch(band_) {
+  case BAND1:
+    dirbase += "/band1_VICAR";
+    file_name_end = "_band1";
+    num_pix = 18950;
+    break;
+  case BAND2:
+    dirbase += "/band2_VICAR";
+    file_name_end = "_band2";
+    num_pix = 18950;
+    break;
+  case BAND3:
+    dirbase += "/band3_VICAR";
+    file_name_end = "_band3";
+    num_pix = 18950;
+    break;
+  case BAND4:
+    dirbase += "/band4_VICAR";
+    file_name_end = "_band4";
+    num_pix = 18950;
+    break;
+  case BAND5:
+    dirbase += "/band5_VICAR";
+    file_name_end = "_band5";
+    num_pix = 18950;
+    break;
+  case BAND61:
+    dirbase += "/band61_VICAR";
+    file_name_end = "_band61";
+    num_pix = 9475;
+    break;
   case BAND62:
+    dirbase += "/band62_VICAR";
     file_name_end = "_band62";
     num_pix = 9475;
+    break;
+  case BAND7:
+    dirbase += "/band7_VICAR";
+    file_name_end = "_band7";
+    num_pix = 18950;
+    break;
+  case BAND8:
+    dirbase += "/band8_VICAR";
+    file_name_end = "_band8";
+    num_pix = 37900;
     break;
   default:
     throw Exception("Unrecognized band value");
@@ -55,8 +96,32 @@ void Landsat7Global::print(std::ostream& Os) const
      << "  Directory base: " << directory_base() << "\n"
      << "  Band:           ";
   switch(band_) {
+  case BAND1:
+    Os << "BAND1";
+    break;
+  case BAND2:
+    Os << "BAND2";
+    break;
+  case BAND3:
+    Os << "BAND3";
+    break;
+  case BAND4:
+    Os << "BAND4";
+    break;
+  case BAND5:
+    Os << "BAND5";
+    break;
+  case BAND61:
+    Os << "BAND61";
+    break;
   case BAND62:
     Os << "BAND62";
+    break;
+  case BAND7:
+    Os << "BAND7";
+    break;
+  case BAND8:
+    Os << "BAND8";
     break;
   default:
     Os << "Unknown";

@@ -13,7 +13,7 @@
 namespace GeoCal {
 class Landsat7Global : public VicarCartLabMultifile {
 public:
-  enum Band {BAND62};
+  enum Band { BAND1, BAND2, BAND3, BAND4, BAND5, BAND61, BAND62, BAND7, BAND8};
   Landsat7Global(const std::string& Dir, Band B);
   %python_attribute(band, Band);
   %pickle_serialization();

@@ -8157,7 +8157,15 @@ SWIG_init(void) {
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Landsat7Global), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Landsat7Global > > ("boost::shared_ptr< GeoCal::Landsat7Global > *"));
   
+  SWIG_Python_SetConstant(d, "Landsat7Global_BAND1",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND1)));
+  SWIG_Python_SetConstant(d, "Landsat7Global_BAND2",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND2)));
+  SWIG_Python_SetConstant(d, "Landsat7Global_BAND3",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND3)));
+  SWIG_Python_SetConstant(d, "Landsat7Global_BAND4",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND4)));
+  SWIG_Python_SetConstant(d, "Landsat7Global_BAND5",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND5)));
+  SWIG_Python_SetConstant(d, "Landsat7Global_BAND61",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND61)));
   SWIG_Python_SetConstant(d, "Landsat7Global_BAND62",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND62)));
+  SWIG_Python_SetConstant(d, "Landsat7Global_BAND7",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND7)));
+  SWIG_Python_SetConstant(d, "Landsat7Global_BAND8",SWIG_From_int(static_cast< int >(GeoCal::Landsat7Global::BAND8)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

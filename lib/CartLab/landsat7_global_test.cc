@@ -14,7 +14,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
     return;
   if(!boost::filesystem::is_directory("/raid22/band62_VICAR"))
     return;
-  Landsat7Global f("/raid22/band62_VICAR", Landsat7Global::BAND62);
+  Landsat7Global f("/raid22", Landsat7Global::BAND62);
   // We just found this value empirical, and check that we get the
   // same results back.
   BOOST_CHECK_CLOSE(f.interpolate(f.coordinate(Geodetic(42, -77))), 136.0,
@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(!boost::filesystem::is_directory("/raid22/band62_VICAR"))
     return;
   boost::shared_ptr<RasterImage> img;
-  img.reset(new Landsat7Global("/raid22/band62_VICAR", Landsat7Global::BAND62));
+  img.reset(new Landsat7Global("/raid22", Landsat7Global::BAND62));
   std::string d = serialize_write_string(img);
   if(false)
     std::cerr << d;

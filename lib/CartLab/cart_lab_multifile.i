@@ -20,20 +20,21 @@ public:
   void create_subset_file
   (const std::string& Oname, const std::string& Driver,
    const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt,
-   const std::string& Type = "",
+   const boost::shared_ptr<MapInfo>& Desired_map_info,
+   const std::string& Translate_arg = "",
    const std::string& Options = "",   
    int boundary = 0) const;
   %python_attribute(directory_base, std::string);
   %pickle_serialization();
 %pythoncode {
-def create_subset_file(self, Oname, Driver, Pt, Type = "", Options = "", Boundary = 0):
-    if(isinstance(Pt, geocal_swig.Vector_GroundCoordinate)):
-        t = Pt
+  def create_subset_file(self, Oname, Driver, Pt_list = [], Desired_map_info = None, Translate_arg = "", Options = "", Boundary = 0):
+    if(isinstance(Pt_list, geocal_swig.Vector_GroundCoordinate)):
+        t = Pt_list
     else:
         t = geocal_swig.Vector_GroundCoordinate()
-        for p in Pt:
+        for p in Pt_list:
             t.push_back(p)
-    return self._v_create_subset_file(Oname, Driver, t, Type,Options, Boundary)
+    return self._v_create_subset_file(Oname, Driver, t, Desired_map_info, Translate_arg,Options, Boundary)
 }
 };
 

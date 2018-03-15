@@ -238,8 +238,9 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
 
         void CartLabMultifile::create_subset_file(const std::string &Oname, const std::string &Driver, const
         std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, const
-        std::string &Type="", const std::string &Options="", int
-        boundary=0) const
+        boost::shared_ptr< MapInfo > &Desired_map_info=boost::shared_ptr<
+        MapInfo >(), const std::string &Translate_arg="", const std::string
+        &Options="", int boundary=0) const
         Create a stand alone file that contains a subset of the full file.
 
         This handles whatever mosaicing/subsetting is needed for the
@@ -255,10 +256,17 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
         C++, but there is talk of making VRTBuilder found in gdalbuildvrt
         available. For now though, we just use a system call.
 
-        The default is to create the subset file as the same type as the input
-        data (e.g, Byte from Byte). You can optionally specify a type string
-        such as would be passed to gdal_translate (e.g., "Int16"). We then
-        convert the output to the given type. 
+        You can either supply a set of points to cover (which will use the
+        native map_info() for this object), or you can supply an explicit
+        Desired_map_info (e.g., you are matching an existing file in extent
+        and resolution).
+
+        You can optionally supply an argument string to use with
+        gdal_translate on the gdalbuildvrt file before writing to the output.
+        This can be useful to do things like change the output type or scale
+        the data. See gdal_translate documentation for what these options
+        should be (e.g., "-ot Int16 -outsize 50% 50% -r average" to convert
+        to Int16 and 2x2 pixel averaging to make a coarser image). 
         """
         return _cart_lab_multifile.CartLabMultifile__v_create_subset_file(self, *args)
 
@@ -281,14 +289,14 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 
-    def create_subset_file(self, Oname, Driver, Pt, Type = "", Options = "", Boundary = 0):
-        if(isinstance(Pt, geocal_swig.Vector_GroundCoordinate)):
-            t = Pt
-        else:
-            t = geocal_swig.Vector_GroundCoordinate()
-            for p in Pt:
-                t.push_back(p)
-        return self._v_create_subset_file(Oname, Driver, t, Type,Options, Boundary)
+    def create_subset_file(self, Oname, Driver, Pt_list = [], Desired_map_info = None, Translate_arg = "", Options = "", Boundary = 0):
+      if(isinstance(Pt_list, geocal_swig.Vector_GroundCoordinate)):
+          t = Pt_list
+      else:
+          t = geocal_swig.Vector_GroundCoordinate()
+          for p in Pt_list:
+              t.push_back(p)
+      return self._v_create_subset_file(Oname, Driver, t, Desired_map_info, Translate_arg,Options, Boundary)
 
     __swig_destroy__ = _cart_lab_multifile.delete_CartLabMultifile
 CartLabMultifile._v_create_subset_file = new_instancemethod(_cart_lab_multifile.CartLabMultifile__v_create_subset_file, None, CartLabMultifile)

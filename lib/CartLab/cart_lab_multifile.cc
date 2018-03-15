@@ -249,30 +249,43 @@ public:
 /// through C++, but there is talk of making VRTBuilder found in
 /// gdalbuildvrt available. For now though, we just use a system call.
 ///
-/// The default is to create the subset file as the same type as the
-/// input data (e.g, Byte from Byte). You can optionally specify a
-/// type string such as would be passed to gdal_translate (e.g.,
-/// "Int16"). We then convert the output to the given type.
+/// You can either supply a set of points to cover (which will use the
+/// native map_info() for this object), or you can supply an explicit
+/// Desired_map_info (e.g., you are matching an existing file in
+/// extent and resolution).
+///
+/// You can optionally supply an argument string to use with
+/// gdal_translate on the gdalbuildvrt file before writing to the
+/// output. This can be useful to do things like change the output
+/// type or scale the data. See gdal_translate documentation for what
+/// these options should be (e.g., "-ot Int16 -outsize 50% 50% -r
+/// average" to convert to Int16 and 2x2 pixel averaging to make a
+/// coarser image).
 //-----------------------------------------------------------------------
 
 void CartLabMultifile::create_subset_file
 (const std::string& Oname, const std::string& Driver,
  const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt,
- const std::string& Type,
+ const boost::shared_ptr<MapInfo>& Desired_map_info,
+ const std::string& Translate_arg,
  const std::string& Options,
  int Boundary) const
 {
-  MapInfo msub = map_info().cover(Pt, Boundary);
-  ImageCoordinate ic = coordinate(*msub.ground_coordinate(0,0));
+  boost::shared_ptr<MapInfo> msub;
+  if(Desired_map_info)
+    msub = Desired_map_info;
+  else
+    msub = boost::make_shared<MapInfo>(map_info().cover(Pt, Boundary));
+  ImageCoordinate ic = coordinate(*msub->ground_coordinate(0,0));
   std::vector<std::string> flist = 
     loc_to_file.find_region((int) round(ic.line), (int) round(ic.sample), 
-			    msub.number_y_pixel(), msub.number_x_pixel());
+			    msub->number_y_pixel(), msub->number_x_pixel());
   std::vector<double> lat, lon;
-  Geodetic g1 = Geodetic(*msub.ground_coordinate(-0.5,-0.5));
-  Geodetic g2 = Geodetic(*msub.ground_coordinate(-0.5,msub.number_y_pixel()-0.5));
-  Geodetic g3 = Geodetic(*msub.ground_coordinate(msub.number_x_pixel()-0.5,
-						 msub.number_y_pixel()-0.5));
-  Geodetic g4 = Geodetic(*msub.ground_coordinate(msub.number_x_pixel()-0.5,-0.5));
+  Geodetic g1 = Geodetic(*msub->ground_coordinate(-0.5,-0.5));
+  Geodetic g2 = Geodetic(*msub->ground_coordinate(-0.5,msub->number_y_pixel()-0.5));
+  Geodetic g3 = Geodetic(*msub->ground_coordinate(msub->number_x_pixel()-0.5,
+						 msub->number_y_pixel()-0.5));
+  Geodetic g4 = Geodetic(*msub->ground_coordinate(msub->number_x_pixel()-0.5,-0.5));
   double lat_min = std::min(g1.latitude(), std::min(g2.latitude(),
 			    std::min(g3.latitude(), g4.latitude())));
   double lat_max = std::max(g1.latitude(), std::max(g2.latitude(),
@@ -281,11 +294,13 @@ void CartLabMultifile::create_subset_file
 			    std::min(g3.longitude(), g4.longitude())));
   double lon_max = std::max(g1.longitude(), std::max(g2.longitude(),
 			    std::max(g3.longitude(), g4.longitude())));
+  double tres_lon = fabs((msub->ulc_x()-msub->lrc_x()) / msub->number_x_pixel());
+  double tres_lat = fabs((msub->ulc_y()-msub->lrc_y()) / msub->number_y_pixel());
   std::ostringstream command;
   command << "gdalbuildvrt -q"
 	  << " -te " << std::setprecision(12)
 	  << lon_min << " " << lat_min << " " << lon_max << " "
-	  << lat_max;
+	  << lat_max << " -tr " << tres_lon << " " << tres_lat << " -r average";
   TempFile f;
   command << " " << f.temp_fname;
   BOOST_FOREACH(std::string f, flist)
@@ -293,10 +308,10 @@ void CartLabMultifile::create_subset_file
   // Can ignore system status, we just fail in the next step when we
   // try to use the file.
   system(command.str().c_str());
-  if(Type != "") {
+  if(Translate_arg != "") {
     std::string t2 = std::string(f.temp_fname) + "_2";
     std::ostringstream command2;
-    command2 << "gdal_translate -of VRT -ot " << Type << " "
+    command2 << "gdal_translate " << Translate_arg << " "
 	     << f.temp_fname << " " << t2;
     system(command2.str().c_str());
     GdalRasterImage d(t2);

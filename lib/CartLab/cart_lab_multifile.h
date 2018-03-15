@@ -49,7 +49,9 @@ public:
   void create_subset_file
   (const std::string& Oname, const std::string& Driver,
    const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt,
-   const std::string& Type = "",
+   const boost::shared_ptr<MapInfo>& Desired_map_info=
+   boost::shared_ptr<MapInfo>(),
+   const std::string& Translate_arg = "",
    const std::string& Options = "",   
    int boundary = 0) const;
 protected:

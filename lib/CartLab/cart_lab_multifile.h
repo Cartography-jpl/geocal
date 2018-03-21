@@ -53,7 +53,8 @@ public:
    boost::shared_ptr<MapInfo>(),
    const std::string& Translate_arg = "",
    const std::string& Options = "",   
-   int boundary = 0) const;
+   int boundary = 0,
+   bool Verbose = false) const;
 protected:
   CartLabMultifile() {}
   CartLabMultifile(int Number_tile,

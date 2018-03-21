@@ -240,7 +240,7 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
         std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, const
         boost::shared_ptr< MapInfo > &Desired_map_info=boost::shared_ptr<
         MapInfo >(), const std::string &Translate_arg="", const std::string
-        &Options="", int boundary=0) const
+        &Options="", int boundary=0, bool Verbose=false) const
         Create a stand alone file that contains a subset of the full file.
 
         This handles whatever mosaicing/subsetting is needed for the
@@ -289,14 +289,14 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
 
-    def create_subset_file(self, Oname, Driver, Pt_list = [], Desired_map_info = None, Translate_arg = "", Options = "", Boundary = 0):
+    def create_subset_file(self, Oname, Driver, Pt_list = [], Desired_map_info = None, Translate_arg = "", Options = "", Boundary = 0, Verbose = False):
       if(isinstance(Pt_list, geocal_swig.Vector_GroundCoordinate)):
           t = Pt_list
       else:
           t = geocal_swig.Vector_GroundCoordinate()
           for p in Pt_list:
               t.push_back(p)
-      return self._v_create_subset_file(Oname, Driver, t, Desired_map_info, Translate_arg,Options, Boundary)
+      return self._v_create_subset_file(Oname, Driver, t, Desired_map_info, Translate_arg,Options, Boundary, Verbose)
 
     __swig_destroy__ = _cart_lab_multifile.delete_CartLabMultifile
 CartLabMultifile._v_create_subset_file = new_instancemethod(_cart_lab_multifile.CartLabMultifile__v_create_subset_file, None, CartLabMultifile)

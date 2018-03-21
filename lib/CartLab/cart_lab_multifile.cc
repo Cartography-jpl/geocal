@@ -269,7 +269,8 @@ void CartLabMultifile::create_subset_file
  const boost::shared_ptr<MapInfo>& Desired_map_info,
  const std::string& Translate_arg,
  const std::string& Options,
- int Boundary) const
+ int Boundary,
+ bool Verbose) const
 {
   boost::shared_ptr<MapInfo> msub;
   if(Desired_map_info)
@@ -277,15 +278,24 @@ void CartLabMultifile::create_subset_file
   else
     msub = boost::make_shared<MapInfo>(map_info().cover(Pt, Boundary));
   ImageCoordinate ic = coordinate(*msub->ground_coordinate(0,0));
+  ImageCoordinate icend = coordinate(*msub->ground_coordinate(msub->number_x_pixel(), msub->number_y_pixel()));
+  int lstart = (int) floor(ic.line);
+  int sstart = (int) floor(ic.sample);
+  int numl = ((int) ceil(icend.line)) - lstart;
+  int nums = ((int) ceil(icend.sample)) - sstart;
+  if(Verbose)
+    std::cout << "Looking for region (" << lstart << ", " << sstart
+	      << ") size (" << numl << ", " << nums << ")\n";
   std::vector<std::string> flist = 
-    loc_to_file.find_region((int) round(ic.line), (int) round(ic.sample), 
-			    msub->number_y_pixel(), msub->number_x_pixel());
+    loc_to_file.find_region(lstart, sstart, numl, nums);
   std::vector<double> lat, lon;
   Geodetic g1 = Geodetic(*msub->ground_coordinate(-0.5,-0.5));
-  Geodetic g2 = Geodetic(*msub->ground_coordinate(-0.5,msub->number_y_pixel()-0.5));
+  Geodetic g2 = Geodetic(*msub->ground_coordinate(-0.5,
+						  msub->number_y_pixel()-0.5));
   Geodetic g3 = Geodetic(*msub->ground_coordinate(msub->number_x_pixel()-0.5,
-						 msub->number_y_pixel()-0.5));
-  Geodetic g4 = Geodetic(*msub->ground_coordinate(msub->number_x_pixel()-0.5,-0.5));
+						  msub->number_y_pixel()-0.5));
+  Geodetic g4 = Geodetic(*msub->ground_coordinate(msub->number_x_pixel()-0.5,
+						  -0.5));
   double lat_min = std::min(g1.latitude(), std::min(g2.latitude(),
 			    std::min(g3.latitude(), g4.latitude())));
   double lat_max = std::max(g1.latitude(), std::max(g2.latitude(),
@@ -294,8 +304,10 @@ void CartLabMultifile::create_subset_file
 			    std::min(g3.longitude(), g4.longitude())));
   double lon_max = std::max(g1.longitude(), std::max(g2.longitude(),
 			    std::max(g3.longitude(), g4.longitude())));
-  double tres_lon = fabs((msub->ulc_x()-msub->lrc_x()) / msub->number_x_pixel());
-  double tres_lat = fabs((msub->ulc_y()-msub->lrc_y()) / msub->number_y_pixel());
+  double tres_lon = fabs((msub->ulc_x()-msub->lrc_x()) /
+			 msub->number_x_pixel());
+  double tres_lat = fabs((msub->ulc_y()-msub->lrc_y()) /
+			 msub->number_y_pixel());
   std::ostringstream command;
   command << "gdalbuildvrt -q"
 	  << " -te " << std::setprecision(12)
@@ -305,6 +317,8 @@ void CartLabMultifile::create_subset_file
   command << " " << f.temp_fname;
   BOOST_FOREACH(std::string f, flist)
     command << " " << f;
+  if(Verbose)
+    std::cout << "GDAL command: " << command.str() << "\n";
   // Can ignore system status, we just fail in the next step when we
   // try to use the file.
   system(command.str().c_str());
@@ -313,6 +327,8 @@ void CartLabMultifile::create_subset_file
     std::ostringstream command2;
     command2 << "gdal_translate " << Translate_arg << " "
 	     << f.temp_fname << " " << t2;
+    if(Verbose)
+      std::cout << "GDAL command: " << command2.str() << "\n";
     system(command2.str().c_str());
     GdalRasterImage d(t2);
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);

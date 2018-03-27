@@ -9,6 +9,7 @@
 #include <boost/foreach.hpp>
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/make_shared.hpp>
 #include "vicar_raster_image.h"
 
 using namespace GeoCal;

@@ -12,6 +12,8 @@ surfimg_fname1 = stereo_unit_test_data + "10MAY21-1_projected.tif"
 surfimg_fname2 = stereo_unit_test_data + "10MAY21-2_projected.tif"
 
 @require_vicarb
+@require_vicar_gdalplugin
+@require_vicar
 def test_tp_picmtch(isolated_dir):
     subprocess.check_call(["gdal_translate", "-q",
                            "-of", "VICAR",

@@ -18269,6 +18269,13 @@ $as_echo_n "checking for VICAR RTL library... " >&6; }
 	    VICMAIN_FOR_LOCATION="$ac_vicar_rtl_path/include/vicar_rtl/VICMAIN_FOR"
             succeeded=yes
         else
+	    if test "$V2OLB" != ""; then
+	      VICAR_RTL_LIBS="-R$V2OLB -L$V2OLB -lrtl"
+	      VICAR_RTL_CFLAGS="-I$V2INC"
+	      VICAR_RTL_PREFIX="$V2TOP"
+	      VICMAIN_FOR_LOCATION="$V2INC/vicmain_for.fin"
+              succeeded=yes
+	    else
 
 
 pkg_failed=no
@@ -18372,7 +18379,8 @@ fi
      done
   fi
 
-            VICMAIN_FOR_LOCATION="${VICAR_RTL_PREFIX}/include/vicar_rtl/VICMAIN_FOR"
+              VICMAIN_FOR_LOCATION="${VICAR_RTL_PREFIX}/include/vicar_rtl/VICMAIN_FOR"
+	    fi
 	    VICAR_RTL_LIBS="${VICAR_RTL_LIBS} \$(CURSES_LIB) \$(FLIBS)"
         fi
 	if test "$succeeded" != "yes" -a "x$build_needed_vicar_rtl" = "xyes" ; then
@@ -20953,6 +20961,12 @@ $as_echo_n "checking for GDAL library... " >&6; }
             GDAL_CFLAGS="-I$ac_gdal_path/include"
             succeeded=yes
         else
+	    if test "$V2OLB" != "" && test "$GDALLIB" != ""; then
+		GDAL_PREFIX="$GDALLIB"
+		GDAL_LIBS="-L$GDAL_PREFIX/lib -lgdal"
+		GDAL_CFLAGS="-I$GDAL_PREFIX/include"
+		succeeded=yes
+	    else
 
 
 pkg_failed=no
@@ -21056,6 +21070,7 @@ fi
      done
   fi
 
+	    fi
         fi
 	if test "$succeeded" != "yes" -a "x$build_needed_gdal" = "xyes" ; then
             build_gdal="yes"

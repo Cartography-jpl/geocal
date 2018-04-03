@@ -28,6 +28,11 @@
 # library on the system or of building our own copy of it. You can
 # specify "default_build" if this should build, otherwise we just look
 # for this on the system.
+#
+# We initially look for librtl at $V2OLB, which is where MIPL vicar
+# builds this. If we don't find this, we then look for libvicar_rtl.
+# Note the difference in the library names, MIPL calls this librtl but
+# AFIDS calls in libvicar_rtl
 
 AC_DEFUN([AC_VICAR_RTL],
 [
@@ -51,9 +56,17 @@ if test "x$want_vicar_rtl" = "xyes"; then
 	    VICMAIN_FOR_LOCATION="$ac_vicar_rtl_path/include/vicar_rtl/VICMAIN_FOR"
             succeeded=yes
         else
-	    AC_SEARCH_LIB([VICAR_RTL], [vicar-rtl], [vicar_rtl/], 
+	    if test "$V2OLB" != ""; then
+	      VICAR_RTL_LIBS="-R$V2OLB -L$V2OLB -lrtl"
+	      VICAR_RTL_CFLAGS="-I$V2INC"
+	      VICAR_RTL_PREFIX="$V2TOP"
+	      VICMAIN_FOR_LOCATION="$V2INC/vicmain_for.fin"
+              succeeded=yes
+	    else
+  	      AC_SEARCH_LIB([VICAR_RTL], [vicar-rtl], [vicar_rtl/], 
                           [zvproto.h], , [libvicar_rtl], [-lvicar_rtl])
-            VICMAIN_FOR_LOCATION="${VICAR_RTL_PREFIX}/include/vicar_rtl/VICMAIN_FOR"
+              VICMAIN_FOR_LOCATION="${VICAR_RTL_PREFIX}/include/vicar_rtl/VICMAIN_FOR"
+	    fi
 	    VICAR_RTL_LIBS="${VICAR_RTL_LIBS} \$(CURSES_LIB) \$(FLIBS)"
         fi
 	if test "$succeeded" != "yes" -a "x$build_needed_vicar_rtl" = "xyes" ; then

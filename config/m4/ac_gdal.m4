@@ -13,6 +13,9 @@
 # 
 # To allow users to build there own copy of GDAL, we also define
 # BUILD_GDAL
+#
+# If the variable $V2OLB is defined (so we are in a MIPL environment) we
+# initially look for GDAL at $GDALLIB directory
 
 AC_DEFUN([AC_GDAL],
 [
@@ -50,7 +53,14 @@ if test "x$want_gdal" = "xyes"; then
             GDAL_CFLAGS="-I$ac_gdal_path/include"
             succeeded=yes
         else
-	    AC_SEARCH_LIB([GDAL], [gdal], , [gdal.h], , [libgdal], [-lgdal])
+	    if test "$V2OLB" != "" && test "$GDALLIB" != ""; then
+		GDAL_PREFIX="$GDALLIB"
+		GDAL_LIBS="-L$GDAL_PREFIX/lib -lgdal"
+		GDAL_CFLAGS="-I$GDAL_PREFIX/include"
+		succeeded=yes
+	    else
+	      AC_SEARCH_LIB([GDAL], [gdal], , [gdal.h], , [libgdal], [-lgdal])
+	    fi
         fi
 	if test "$succeeded" != "yes" -a "x$build_needed_gdal" = "xyes" ; then
             build_gdal="yes"

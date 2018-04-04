@@ -93,6 +93,9 @@ else
   pkg_extra_path=\${prefix}/lib/pkgconfig:$THIRDPARTY/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
   geocal_support_path=$THIRDPARTY
 fi
+if test "x$CONDA_PREFIX" != x; then
+   pkg_extra_path=$CONDA_PREFIX/lib/pkgconfig:${pkg_extra_path}
+fi
 if test "x$PKG_CONFIG_PATH" = x; then
   PKG_CONFIG_PATH=$pkg_extra_path
 else

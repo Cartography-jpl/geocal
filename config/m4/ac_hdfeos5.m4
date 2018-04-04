@@ -44,8 +44,21 @@ if test "x$want_hdfeos5" = "xyes"; then
             HDFEOS5_CFLAGS="-I$ac_hdfeos5_path/include/hdfeos5"
             succeeded=yes
         else
-	    AC_SEARCH_LIB([HDFEOS5], [hdfeos5], [hdfeos5/], [HE5_HdfEosDef.h], ,
+	    # Special case, conda doesn't have a pkgconfig for hdfeos5, but
+	    # we want to pick this before anything else. So start by
+	    # searching for that.
+            if test "x$CONDA_PREFIX" != x; then
+	       if test -e "$CONDA_PREFIX/include/HE5_HdfEosDef.h"; then
+	           HDFEOS5_PREFIX="$CONDA_PREFIX"
+		   HDFEOS5_CFLAGS="-I$CONDA_PREFIX/include"
+		   HDFEOS5_LIBS="-R$CONDA_PREFIX/lib -L$CONDA_PREFIX/lib -lhe5_hdfeos -lGctp"
+		   succeeded=yes
+	       fi
+	    fi
+            if test "$succeeded" != "yes" ; then
+	       AC_SEARCH_LIB([HDFEOS5], [hdfeos5], [hdfeos5/], [HE5_HdfEosDef.h], ,
                           [libhe5_hdfeos], [-lhe5_hdfeos -lGctp])
+	    fi  
             if test "$succeeded" != "yes" ; then
  	       AC_SEARCH_LIB([HDFEOS5], [hdfeos5], , [HE5_HdfEosDef.h], ,
                              [libhe5_hdfeos], [-lhe5_hdfeos -lGctp])

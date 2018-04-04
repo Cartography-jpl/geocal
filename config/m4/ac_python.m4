@@ -23,6 +23,9 @@ if test "x$THIRDPARTY" = x ; then
 else
    python_search_path=$THIRDPARTY/bin:$PATH
 fi
+if test "x$CONDA_PREFIX" != x ; then
+   python_search_path=$CONDA_PREFIX/bin:$python_search_path
+fi
 AC_PATH_PROG([PYTHON],[python[$PYTHON_VERSION]], [], [$python_search_path])
 PYTHON_ABS=`eval echo ${PYTHON}`
 PYTHON_PREFIX=`AS_DIRNAME(["$PYTHON_ABS"])`

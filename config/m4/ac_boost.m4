@@ -63,7 +63,7 @@ if test "x$want_boost" = "xyes"; then
             BOOST_CPPFLAGS="$boost_include$ac_boost_path/include"
             succeeded=yes
         else
-            for ac_boost_path_tmp in $prefix $THIRDPARTY /opt/afids_support /usr /usr/local /opt /opt/local /sw ; do
+            for ac_boost_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /usr /usr/local /opt /opt/local /sw ; do
                   if test -e "$ac_boost_path_tmp/include/boost/smart_ptr.hpp" && test -r "$ac_boost_path_tmp/include/boost/smart_ptr.hpp"; then
                       ac_boost_path="$ac_boost_path_tmp"
                       BOOST_CPPFLAGS="$boost_include$ac_boost_path_tmp/include"

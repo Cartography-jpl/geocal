@@ -39,7 +39,7 @@ if test "x$want_vicar_gdalplugin" = "xyes"; then
             VICAR_GDALPLUGIN_HOME="$ac_vicar_gdalplugin_path/lib/gdalplugins"
             succeeded=yes
         else
-           for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+           for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
              if test -e "$ac_path_tmp/lib/gdalplugins/gdal_vicar.so"; then
                VICAR_GDALPLUGIN_HOME="$ac_path_tmp/lib/gdalplugins"
                succeeded=yes

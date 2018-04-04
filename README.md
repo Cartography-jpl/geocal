@@ -37,6 +37,16 @@ There are a number of dependencies for geocal (described below). As an
 example, explicit directions for building on a bare Centos 7 can be found
 in [Centos 7 Build](README_centos7_build.md)
 
+We can also get the dependencies through [Conda](https://conda.io/docs/).
+If you have a conda environment set up, (e.g., source activate <env_dir>).
+Then you can do:
+
+    conda install --yes --file requirements.txt
+    conda install --yes --file extra_anaconda_requirements.txt
+	
+In addition, there are conda packages available for things not available
+in anaconda (e.g., spice) at [afids-conda-package](https://github.jpl.nasa.gov/Cartography/afids-conda-package).
+
 A note on the build. We have unit tests run with the standard GNU target
 "make check". There is also a standard GNU target "installcheck" that can
 be used to run unit tests that require the install step first. However this

@@ -18089,6 +18089,9 @@ else
   pkg_extra_path=\${prefix}/lib/pkgconfig:$THIRDPARTY/lib/pkgconfig:/opt/afids_support/lib/pkgconfig
   geocal_support_path=$THIRDPARTY
 fi
+if test "x$CONDA_PREFIX" != x; then
+   pkg_extra_path=$CONDA_PREFIX/lib/pkgconfig:${pkg_extra_path}
+fi
 if test "x$PKG_CONFIG_PATH" = x; then
   PKG_CONFIG_PATH=$pkg_extra_path
 else
@@ -18354,7 +18357,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/vicar_rtl/zvproto.h" && test -r "$ac_path_tmp/include/vicar_rtl/zvproto.h"; then
           VICAR_RTL_PREFIX=$ac_path_tmp
           VICAR_RTL_CFLAGS="-I$ac_path_tmp/include/vicar_rtl/"
@@ -18518,7 +18521,7 @@ $as_echo_n "checking for AFIDS data... " >&6; }
             AFIDS_DATA="$ac_afids_data_path/data"
 	    succeeded=yes
         else
-	   for ac_path_tmp in $prefix $THIRDPARTY /opt/afids ; do
+	   for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids ; do
                if test -e "$ac_path_tmp/data/vdev"; then
                   AFIDS_DATA="$ac_path_tmp/data"
 	          succeeded=yes
@@ -18765,7 +18768,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
@@ -18873,109 +18876,17 @@ $as_echo_n "checking for Hdfeos5 library... " >&6; }
             HDFEOS5_CFLAGS="-I$ac_hdfeos5_path/include/hdfeos5"
             succeeded=yes
         else
-
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS5" >&5
-$as_echo_n "checking for HDFEOS5... " >&6; }
-
-if test -n "$HDFEOS5_CFLAGS"; then
-    pkg_cv_HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$HDFEOS5_LIBS"; then
-    pkg_cv_HDFEOS5_LIBS="$HDFEOS5_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
-        else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDFEOS5_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
-	HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-     if test -z "$HDFEOS5_PREFIX"; then
-        HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
-     fi
-  fi
-  if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
-       if test -e "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h"; then
-          HDFEOS5_PREFIX=$ac_path_tmp
-          HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
-          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
-             succeeded=yes
-             break;
-          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
-             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
-             succeeded=yes
-             break;
-          fi
-       fi
-     done
-  fi
-
+	    # Special case, conda doesn't have a pkgconfig for hdfeos5, but
+	    # we want to pick this before anything else. So start by
+	    # searching for that.
+            if test "x$CONDA_PREFIX" != x; then
+	       if test -e "$CONDA_PREFIX/include/HE5_HdfEosDef.h"; then
+	           HDFEOS5_PREFIX="$CONDA_PREFIX"
+		   HDFEOS5_CFLAGS="-I$CONDA_PREFIX/include"
+		   HDFEOS5_LIBS="-R$CONDA_PREFIX/lib -L$CONDA_PREFIX/lib -lhe5_hdfeos -lGctp"
+		   succeeded=yes
+	       fi
+	    fi
             if test "$succeeded" != "yes" ; then
 
 
@@ -19055,7 +18966,112 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+       if test -e "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/hdfeos5/HE5_HdfEosDef.h"; then
+          HDFEOS5_PREFIX=$ac_path_tmp
+          HDFEOS5_CFLAGS="-I$ac_path_tmp/include/hdfeos5/"
+          if test -e "$ac_path_tmp/lib/libhe5_hdfeos.so"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib/libhe5_hdfeos.dylib"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.so"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          elif test -e "$ac_path_tmp/lib64/libhe5_hdfeos.dylib"; then
+             HDFEOS5_LIBS="-R$ac_path_tmp/lib64/ -L$ac_path_tmp/lib64/ -lhe5_hdfeos -lGctp"
+             succeeded=yes
+             break;
+          fi
+       fi
+     done
+  fi
+
+	    fi
+            if test "$succeeded" != "yes" ; then
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS5" >&5
+$as_echo_n "checking for HDFEOS5... " >&6; }
+
+if test -n "$HDFEOS5_CFLAGS"; then
+    pkg_cv_HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDFEOS5_CFLAGS=`$PKG_CONFIG --cflags "hdfeos5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$HDFEOS5_LIBS"; then
+    pkg_cv_HDFEOS5_LIBS="$HDFEOS5_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDFEOS5_LIBS=`$PKG_CONFIG --libs "hdfeos5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
+        else
+	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$HDFEOS5_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
+	HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+     if test -z "$HDFEOS5_PREFIX"; then
+        HDFEOS5_PREFIX=`$PKG_CONFIG --variable=prefix "hdfeos5" 2>/dev/null`
+     fi
+  fi
+  if test "$succeeded" = "no"; then
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/HE5_HdfEosDef.h" && test -r "$ac_path_tmp/include/HE5_HdfEosDef.h"; then
           HDFEOS5_PREFIX=$ac_path_tmp
           HDFEOS5_CFLAGS="-I$ac_path_tmp/include/"
@@ -19199,7 +19215,7 @@ $as_echo_n "checking for MSPI-Shared library... " >&6; }
             MSPI_SHARED_CFLAGS="-I$ac_mspi_shared_path/include"
             succeeded=yes
         else
-          for ac_path_tmp in $prefix $THIRDPARTY /data/smyth/MSPI-Shared/install ; do
+          for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /data/smyth/MSPI-Shared/install ; do
              if test -e "$ac_path_tmp/lib/libMSPI-Shared.la" && test -r "$ac_path_tmp/lib/libMSPI-Shared.la"; then
                 MSPI_SHARED_LIBS="-R$ac_path_tmp/lib -L$ac_path_tmp/lib -lMSPI-Shared"
                 MSPI_SHARED_CFLAGS="-I$ac_path_tmp/include"
@@ -19343,7 +19359,7 @@ $as_echo_n "checking for BOOST library >= $boost_lib_version_req... " >&6; }
             BOOST_CPPFLAGS="$boost_include$ac_boost_path/include"
             succeeded=yes
         else
-            for ac_boost_path_tmp in $prefix $THIRDPARTY /opt/afids_support /usr /usr/local /opt /opt/local /sw ; do
+            for ac_boost_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /usr /usr/local /opt /opt/local /sw ; do
                   if test -e "$ac_boost_path_tmp/include/boost/smart_ptr.hpp" && test -r "$ac_boost_path_tmp/include/boost/smart_ptr.hpp"; then
                       ac_boost_path="$ac_boost_path_tmp"
                       BOOST_CPPFLAGS="$boost_include$ac_boost_path_tmp/include"
@@ -19759,7 +19775,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/blitz/blitz.h" && test -r "$ac_path_tmp/include/blitz/blitz.h"; then
           BLITZ_PREFIX=$ac_path_tmp
           BLITZ_CFLAGS="-I$ac_path_tmp/include/blitz/"
@@ -19972,7 +19988,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/gsl/gsl_blas.h" && test -r "$ac_path_tmp/include/gsl/gsl_blas.h"; then
           GSL_PREFIX=$ac_path_tmp
           GSL_CFLAGS="-I$ac_path_tmp/include/"
@@ -20192,7 +20208,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/SpiceCK.h" && test -r "$ac_path_tmp/include/SpiceCK.h"; then
           SPICE_PREFIX=$ac_path_tmp
           SPICE_CFLAGS="-I$ac_path_tmp/include/"
@@ -20407,7 +20423,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/hdf5.h" && test -r "$ac_path_tmp/include/hdf5.h"; then
           HDF5_PREFIX=$ac_path_tmp
           HDF5_CFLAGS="-I$ac_path_tmp/include/"
@@ -20565,6 +20581,9 @@ $as_echo_n "checking for Doxygen... " >&6; }
             else
               doxygen_search_path=$THIRDPARTY/bin:$PATH
             fi
+	    if test "x$CONDA_PREFIX" != x ; then
+              doxygen_search_path=$CONDA_PREFIX/bin:$doxygen_search_path
+	    fi
             # Extract the first word of "doxygen", so it can be a program name with args.
 set dummy doxygen; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
@@ -20792,7 +20811,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/fftw3.h" && test -r "$ac_path_tmp/include/fftw3.h"; then
           FFTW_PREFIX=$ac_path_tmp
           FFTW_CFLAGS="-I$ac_path_tmp/include/"
@@ -21045,7 +21064,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/gdal.h" && test -r "$ac_path_tmp/include/gdal.h"; then
           GDAL_PREFIX=$ac_path_tmp
           GDAL_CFLAGS="-I$ac_path_tmp/include/"
@@ -21335,7 +21354,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/geos.h" && test -r "$ac_path_tmp/include/geos.h"; then
           GEOS_PREFIX=$ac_path_tmp
           GEOS_CFLAGS="-I$ac_path_tmp/include/"
@@ -21549,7 +21568,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/ecs.h" && test -r "$ac_path_tmp/include/ecs.h"; then
           OGDI_PREFIX=$ac_path_tmp
           OGDI_CFLAGS="-I$ac_path_tmp/include/"
@@ -21765,7 +21784,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/expat.h" && test -r "$ac_path_tmp/include/expat.h"; then
           EXPAT_PREFIX=$ac_path_tmp
           EXPAT_CFLAGS="-I$ac_path_tmp/include/"
@@ -21981,7 +22000,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/openjpeg-2.1/openjpeg.h" && test -r "$ac_path_tmp/include/openjpeg-2.1/openjpeg.h"; then
           OPENJPEG_PREFIX=$ac_path_tmp
           OPENJPEG_CFLAGS="-I$ac_path_tmp/include/openjpeg-2.1/"
@@ -22234,7 +22253,7 @@ $as_echo_n "checking for GDAL VICAR Plugin... " >&6; }
             VICAR_GDALPLUGIN_HOME="$ac_vicar_gdalplugin_path/lib/gdalplugins"
             succeeded=yes
         else
-           for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
+           for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /sw ; do
              if test -e "$ac_path_tmp/lib/gdalplugins/gdal_vicar.so"; then
                VICAR_GDALPLUGIN_HOME="$ac_path_tmp/lib/gdalplugins"
                succeeded=yes
@@ -22370,7 +22389,7 @@ $as_echo_n "checking for AFIDS programs... " >&6; }
 	    # Check for taetm instead of vicarb because we may install our
 	    # own verion of vicarb, but want to still point to the other
 	    # afids
-            for ac_afids_path_tmp in $prefix $THIRDPARTY /opt/afids ; do
+            for ac_afids_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids ; do
                   if test -e "$ac_afids_path_tmp/bin/taetm" && test -r "$ac_afids_path_tmp/bin/taetm"; then
                       AFIDS_PREFIX="$ac_afids_path_tmp"
                       succeeded=yes
@@ -22563,7 +22582,7 @@ fi
      fi
   fi
   if test "$succeeded" = "no"; then
-     for ac_path_tmp in $prefix $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
+     for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
        if test -e "$ac_path_tmp/include/carto/burl.h" && test -r "$ac_path_tmp/include/carto/burl.h"; then
           CARTO_PREFIX=$ac_path_tmp
           CARTO_CFLAGS="-I$ac_path_tmp/include/carto/"
@@ -22963,6 +22982,9 @@ if test "x$THIRDPARTY" = x ; then
    python_search_path=$PATH
 else
    python_search_path=$THIRDPARTY/bin:$PATH
+fi
+if test "x$CONDA_PREFIX" != x ; then
+   python_search_path=$CONDA_PREFIX/bin:$python_search_path
 fi
 # Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
 set dummy python$PYTHON_VERSION; ac_word=$2
@@ -23604,6 +23626,9 @@ if test "x$THIRDPARTY" = x ; then
    python_search_path=$PATH
 else
    python_search_path=$THIRDPARTY/bin:$PATH
+fi
+if test "x$CONDA_PREFIX" != x ; then
+   python_search_path=$CONDA_PREFIX/bin:$python_search_path
 fi
 # Extract the first word of "python[$PYTHON_VERSION]", so it can be a program name with args.
 set dummy python$PYTHON_VERSION; ac_word=$2
@@ -24280,6 +24305,9 @@ fi
         else
            swig_search_path=$THIRDPARTY/bin:$PATH
         fi
+	if test "x$CONDA_PREFIX" != x ; then
+           swig_search_path=$CONDA_PREFIX/bin:$swig_search_path
+	fi
         # Extract the first word of "swig", so it can be a program name with args.
 set dummy swig; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5

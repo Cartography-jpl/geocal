@@ -37,7 +37,7 @@ if test "x$want_afids_data" = "xyes"; then
             AFIDS_DATA="$ac_afids_data_path/data"
 	    succeeded=yes
         else
-	   for ac_path_tmp in $prefix $THIRDPARTY /opt/afids ; do
+	   for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids ; do
                if test -e "$ac_path_tmp/data/vdev"; then
                   AFIDS_DATA="$ac_path_tmp/data"
 	          succeeded=yes

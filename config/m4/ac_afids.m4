@@ -31,7 +31,7 @@ if test "x$want_afids" = "xyes"; then
 	    # Check for taetm instead of vicarb because we may install our
 	    # own verion of vicarb, but want to still point to the other
 	    # afids
-            for ac_afids_path_tmp in $prefix $THIRDPARTY /opt/afids ; do
+            for ac_afids_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids ; do
                   if test -e "$ac_afids_path_tmp/bin/taetm" && test -r "$ac_afids_path_tmp/bin/taetm"; then
                       AFIDS_PREFIX="$ac_afids_path_tmp"
                       succeeded=yes

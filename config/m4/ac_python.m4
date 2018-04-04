@@ -56,7 +56,8 @@ fi
 
 if test "x$PYTHON" != "x"; then
   AC_MSG_CHECKING([Checking for python-config])
-  AC_PATH_TOOL([PYTHON_CONFIG], [python-config], [], [$python_search_path])
+  ac_python_config_name=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:$LD_LIBRARY_PATH $PYTHON -c 'import sys; import os; print("%s-config" % os.path.basename(os.path.realpath(sys.executable)))'`
+  AC_PATH_TOOL([PYTHON_CONFIG], [$ac_python_config_name], [], [$python_search_path])
   if test -n "$PYTHON_CONFIG" ; then
       AC_MSG_RESULT([yes])
   else

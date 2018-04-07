@@ -34,7 +34,6 @@ MemoryRasterImage::MemoryRasterImage(const RasterImage& Img,
     Number_line_to_read = Img.number_tile_line();
   if(Number_sample_to_read == -1)
     Number_sample_to_read = Img.number_tile_sample();
-  typedef boost::multi_array<int, 2>::index_range range;
   for(int i = 0; i < Img.number_line(); i+= Number_line_to_read) {
     for(int j = 0; j < Img.number_sample(); j+= Number_sample_to_read) {
       int nline = Number_line_to_read;

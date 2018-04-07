@@ -1,5 +1,6 @@
 #include "rsm_adjustable_parameter.h"
 #include "geocal_serialize_support.h"
+#include <boost/make_shared.hpp>
 #include "tre_support.h"
 #include <sstream>
 
@@ -28,6 +29,7 @@ GEOCAL_IMPLEMENT(RsmAdjustableParameter);
 
 std::string RsmAdjustableParameter::tre_string() const
 {
+  return "dummy";
 }
 
 //-----------------------------------------------------------------------
@@ -45,4 +47,5 @@ std::string RsmAdjustableParameter::tre_string() const
 boost::shared_ptr<RsmAdjustableParameter>
 RsmAdjustableParameter::read_tre_string(const std::string& Tre_in)
 {
+  return boost::make_shared<RsmAdjustableParameter>();
 }

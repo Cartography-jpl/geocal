@@ -22,7 +22,7 @@ GEOCAL_IMPLEMENT(IgcCollection);
 blitz::Array<double, 2> 
 IgcCollection::image_coordinate_jac_parm_fd
 (int Image_index, const CartesianFixed& Gc,
- const blitz::Array<double, 1> Pstep) const
+ const blitz::Array<double, 1>& Pstep) const
 { 
   blitz::Array<double, 1> p0 = parameter_subset();
   if(p0.rows() != Pstep.rows())

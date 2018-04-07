@@ -87,7 +87,7 @@ private:
   H5::Attribute open_attribute(const std::string& Aname) const;
   bool is_group(const std::string& Objname) const;
   bool is_present(const std::string& Objname, 
-		  const H5::CommonFG& Parent) const;
+		  const H5::H5File& Parent) const;
   HdfFile() {}
   friend class boost::serialization::access;
   template<class Archive>

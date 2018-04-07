@@ -111,15 +111,15 @@ RsmRationalPolynomial::RsmRationalPolynomial
      y_scale_(0),
      z_offset_(0),
      z_scale_(0),
-     line_num_(Np_x, Np_y, Np_z, false, N_max_order),
-     line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
-     sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
-     sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
      nline_fit_(Nline_fit),
      nsample_fit_(Nsample_fit),
      nheight_fit_(Nheight_fit),
      nsecond_pass_fit_(Nsecond_pass_fit),
-     ignore_igc_error_in_fit_(Ignore_igc_error_in_fit)
+     ignore_igc_error_in_fit_(Ignore_igc_error_in_fit),
+     line_num_(Np_x, Np_y, Np_z, false, N_max_order),
+     line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
+     sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
+     sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order)
 {
 }
 

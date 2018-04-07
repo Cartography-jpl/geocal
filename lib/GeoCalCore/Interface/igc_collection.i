@@ -5,6 +5,9 @@
 
 %{
 #include "igc_collection.h"
+namespace GeoCal {
+typedef blitz::Array<double, 1> blitz_array_double_1d;
+}
 %}
 %base_import(generic_object)
 %base_import(with_parameter)
@@ -39,6 +42,7 @@ namespace GeoCal {
 #ifdef SWIGPYTHON
 %rename("__ground_coordinate") IgcCollection::ground_coordinate;
 #endif
+typedef blitz::Array<double, 1> blitz_array_double_1d;
 class IgcCollection: public WithParameter {
 public:
   virtual ~IgcCollection() {}
@@ -65,7 +69,7 @@ public:
     const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed& Gc,
-			       const blitz::Array<double, 1> Pstep) const;
+			       const blitz_array_double_1d& Pstep) const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(int Image_index,
 					  const CartesianFixed& Gc) const;
   virtual blitz::Array<double, 2> 

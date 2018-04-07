@@ -4,7 +4,7 @@
 #include "ecr.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/make_shared.hpp>
-
+#include <cpl_string.h>
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -348,7 +348,7 @@ std::string OgrWrapper::pretty_wkt() const
   char *res;
   ogr_->exportToPrettyWkt(&res);
   std::string ress(res);
-  OGRFree(res);
+  CPLFree(res);
   return ress;
 }
 
@@ -361,7 +361,7 @@ std::string OgrWrapper::wkt() const
   char *res;
   ogr_->exportToWkt(&res);
   std::string ress(res);
-  OGRFree(res);
+  CPLFree(res);
   return ress;
 }
 

@@ -89,7 +89,7 @@ bool HdfFile::is_group(const std::string& Objname) const
 //-----------------------------------------------------------------------
 
 bool HdfFile::is_present(const std::string& Objname, 
-			 const H5::CommonFG& Parent) const
+			 const H5::H5File& Parent) const
 {
   try {
     H5G_stat_t statbuf;

@@ -12,6 +12,10 @@
 /* Defined if we have BOOST */
 #undef HAVE_BOOST
 
+/* Define to 1 if you have the <boost/serialization/boost_array.hpp> header
+   file. */
+#undef HAVE_BOOST_SERIALIZATION_BOOST_ARRAY_HPP
+
 /* Defined if we have Carto library */
 #undef HAVE_CARTO
 

@@ -101,7 +101,7 @@ public:
 
 virtual blitz::Array<double, 2> 
 image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed& Gc,
-			     const blitz::Array<double, 1> Pstep) const;
+			     const blitz::Array<double, 1>& Pstep) const;
 
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the

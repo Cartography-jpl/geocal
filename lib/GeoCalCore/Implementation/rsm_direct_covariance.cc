@@ -1,6 +1,7 @@
 #include "rsm_direct_covariance.h"
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
+#include <boost/make_shared.hpp>
 #include <sstream>
 
 using namespace GeoCal;
@@ -28,6 +29,7 @@ GEOCAL_IMPLEMENT(RsmDirectCovariance);
 
 std::string RsmDirectCovariance::tre_string() const
 {
+  return "dummy";
 }
 
 //-----------------------------------------------------------------------
@@ -45,4 +47,5 @@ std::string RsmDirectCovariance::tre_string() const
 boost::shared_ptr<RsmDirectCovariance>
 RsmDirectCovariance::read_tre_string(const std::string& Tre_in)
 {
+  return boost::make_shared<RsmDirectCovariance>();
 }

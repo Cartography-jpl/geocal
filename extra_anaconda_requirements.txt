@@ -4,13 +4,14 @@
 # Stuff needed to install ptpython and ptipython. This is just a nice
 # interface to have, geocal doesn't actually depend on this being available.
 # There is currently no anaconda package for this, so we just put in the
-# dependencies and then we can use pip to get ptpython
+# dependencies.
 docopt
 jedi >=0.9.0
 prompt_toolkit >=1.0.14,<2.0.0
 pygments
 
-# Nonpython dependencies
+# Nonpython dependencies. Note doxygen, swig, hdf5, hdfeos5, and fftw
+# are optional, geocal can be built without these.
 gdal
 libblitz
 boost
@@ -20,3 +21,15 @@ gsl < 2.0.0
 pkgconfig
 doxygen
 swig
+ncurses
+fftw
+
+# These are dependencies that come from our afids-conda-package repository
+# at https://github.jpl.nasa.gov/Cartography/afids-conda-package. You can
+# leave these out if you want to build this separately. Note ptipython,
+# vicar-rtl, vicar-gdalplugin, and afids-data are optional, geocal
+# builds without them. spice is required.
+ptipython
+vicar-rtl
+afids-data
+spice

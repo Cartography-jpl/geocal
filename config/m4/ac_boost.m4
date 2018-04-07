@@ -207,6 +207,8 @@ if test "x$want_boost" = "xyes"; then
  	   ],[
  	   ])
 
+	   # Also, check for the header file 
+           AC_CHECK_HEADERS([boost/serialization/boost_array.hpp])
  	   AC_LANG_POP([C++])
         fi
 
@@ -228,7 +230,6 @@ if test "x$want_boost" = "xyes"; then
 fi
 AM_CONDITIONAL([HAVE_BOOST], [test "$have_boost" = "yes"])
 AM_CONDITIONAL([BUILD_BOOST], [test "$build_boost" = "yes"])
-
 AC_CHECK_FOUND([boost], [boost],[BOOST],$1,$2)
 done_boost="yes"
 fi

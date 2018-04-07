@@ -11,6 +11,13 @@
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/map.hpp>
+// At boost 1.64, the header file to include for boost::array changed
+// names. Pretty annoying, but select the right file to include
+#ifdef HAVE_BOOST_SERIALIZATION_BOOST_ARRAY_HPP
+#include <boost/serialization/boost_array.hpp>
+#else
+#include <boost/serialization/array.hpp>
+#endif
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 

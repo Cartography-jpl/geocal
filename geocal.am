@@ -80,7 +80,10 @@ geocal_install: install-geocalincHEADERS install-geocalpkgpyexecLTLIBRARIES inst
 # libgeocal: The main library
 
 lib_LTLIBRARIES += libgeocal.la
-libgeocal_la_LIBADD = $(CARTO_LIBS) libraw.la $(VICAR_RTL_LIBS) $(FLIBS)
+libgeocal_la_LIBADD = $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(FLIBS)
+if BUILD_LIBRAW
+libgeocal_la_LIBADD += libraw.la
+endif
 libgeocal_la_LIBADD += $(SPICE_LIBS)
 libgeocal_la_LIBADD += $(MSPI_SHARED_LIBS)
 
@@ -95,7 +98,10 @@ CODE_COVERAGE_IGNORE_PATTERN+= "*/lib/GeoCalCore/Support/boost/*"
 check_PROGRAMS = geocal_test_all
 geocal_test_all_SOURCES += @libgeocal@/test_all.cc
 geocal_test_all_LDADD = libgeocal.la 
-geocal_test_all_LDADD += $(CARTO_LIBS) libraw.la $(VICAR_RTL_LIBS) $(SPICE_LIBS)
+geocal_test_all_LDADD += $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(SPICE_LIBS)
+if BUILD_LIBRAW
+geocal_test_all_LDADD += libraw.la
+endif
 geocal_test_all_LDADD += $(GDAL_LIBS) $(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install 
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS)

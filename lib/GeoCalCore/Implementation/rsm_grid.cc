@@ -102,9 +102,9 @@ GEOCAL_SPLIT_IMPLEMENT(RsmGrid);
 // Have handling for NaN in interpolation
 inline double interp_nan(double x1, double x2, double delta)
 {
-  if(isnan(x1))
+  if(std::isnan(x1))
     return x2;
-  if(isnan(x2))
+  if(std::isnan(x2))
     return x1;
   return x1 + (x2 - x1) * delta;
 }
@@ -591,13 +591,13 @@ std::string RsmGrid::tre_string() const
     res += str_check_size(szformat % number_x(i) % number_y(i), 2 * 3);
     for(int i1 = 0; i1 < number_x(i); ++i1)
       for(int i2 = 0; i2 < number_y(i); ++i2) {
-	if(isnan(line_(i1,i2, i)))
+	if(std::isnan(line_(i1,i2, i)))
 	  res += str_check_size(lnnanform % "", total_number_row_digit_);
 	else
 	  res += str_check_size(lnform %
 		(int) floor((line_(i1,i2, i) - refrow) * lnscale + 0.5),
 		total_number_row_digit_);
-	if(isnan(sample_(i1,i2, i)))
+	if(std::isnan(sample_(i1,i2, i)))
 	  res += str_check_size(smpnanform % "", total_number_col_digit_);
 	else
 	  res += str_check_size(smpform % 

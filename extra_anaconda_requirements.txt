@@ -13,7 +13,6 @@ pygments
 # Nonpython dependencies. Note doxygen, swig, hdf5, hdfeos5, and fftw
 # are optional, geocal can be built without these.
 gdal
-libblitz
 boost
 hdf5
 hdfeos5
@@ -23,6 +22,9 @@ doxygen
 swig
 ncurses
 fftw
+gcc_linux-64
+gfortran_linux-64
+gxx_linux-64
 
 # These are dependencies that come from our afids-conda-package repository
 # at https://github.jpl.nasa.gov/Cartography/afids-conda-package. You can
@@ -31,5 +33,11 @@ fftw
 # builds without them. spice is required.
 ptipython
 vicar-rtl
-afids-data
+vicar-gdalplugin
+# This doens't currently work. We'll come back to this, but for now just skip this
+# package
+#afids-data
 spice
+# Note the conda system libblitz doesn't work with gcc 7, so we have our
+# own build with a patch to fix this
+libblitz

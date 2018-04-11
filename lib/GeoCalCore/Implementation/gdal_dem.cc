@@ -34,7 +34,7 @@ void GdalDem::load(Archive & ar, const unsigned int version)
 	     tile_number_sample);
 }
 
-GEOCAL_IMPLEMENT(GdalDem);
+GEOCAL_SPLIT_IMPLEMENT(GdalDem);
 #endif
 
 //-----------------------------------------------------------------------

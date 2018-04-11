@@ -41,15 +41,15 @@ public:
     bool p1 = false, p2 = false, p3 = false;
     while(buf.find("List") == std::string::npos) {
       boost::smatch m;
-      if(regex_match(buf, m, boost::regex("startTime\\s*=\\s*([^ ]+)\\s*;"))) {
+      if(boost::regex_match(buf, m, boost::regex("startTime\\s*=\\s*([^ ]+)\\s*;"))) {
 	p1 = true;
 	stime = Time::parse_time(m[1]);
       }
-      if(regex_match(buf, m, boost::regex("numPoints\\s*=\\s*(\\d+)\\s*;"))) {
+      if(boost::regex_match(buf, m, boost::regex("numPoints\\s*=\\s*(\\d+)\\s*;"))) {
 	p2 = true;
 	d.resize(atoi(m[1].str().c_str()));
       }
-      if(regex_match(buf, m, 
+      if(boost::regex_match(buf, m, 
 		     boost::regex("timeInterval\\s*=\\s*([\\d\\.]+)\\s*;"))) {
 	p3 = true;
 	tspace = atof(m[1].str().c_str());

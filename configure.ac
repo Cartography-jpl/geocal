@@ -84,6 +84,13 @@ AC_CARTO(optional, cannot_build, default_search)
 AFIDS_PYTHON(required, can_build, default_search)
 
 #=================================================================
+# We have not needed to read RAW format images for a while, and
+# the library we used is out of date. Turn this off for now. We
+# can revisit this if it becomes an issue
+
+AM_CONDITIONAL([BUILD_LIBRAW], [false])
+
+#=================================================================
 # Location of all the source code directories
 GEOCAL_SOURCE_DIRECTORY
 

@@ -1,3 +1,4 @@
+if BUILD_LIBRAW
 librawdir = $(includedir)
 libraw_HEADERS = @srcraw@/libraw.h @srcraw@/libraw_alloc.h  @srcraw@/libraw_const.h 
 libraw_HEADERS += @srcraw@/libraw_datastream.h @srcraw@/libraw_internal.h
@@ -7,6 +8,7 @@ libraw_la_SOURCES = @srcraw@/dcraw_common.cpp @srcraw@/dcraw_fileio.cpp @srcraw@
 libraw_la_SOURCES+= @srcraw@/libraw_c_api.cpp @srcraw@/libraw_cxx.cpp
 libraw_la_SOURCES+= @srcraw@/libraw_defines.h @srcraw@/var_defines.h
 libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
+endif
 # We don't use this for anything, so don't bother to build
 #bin_PROGRAMS += dcraw
 #dcraw_SOURCES = @srcraw@/simple_dcraw.cpp

@@ -1,5 +1,8 @@
 #include "raw_raster_image.h"
+#include "geocal_config.h"
+#ifdef HAVE_LIBRAW
 #include "libraw.h"
+#endif
 
 using namespace GeoCal;
 
@@ -11,6 +14,7 @@ RawRasterImage::RawRasterImage(const std::string& Fname, int Band)
 : fname(Fname), band_(Band)
 {
   range_check(Band, 0, 3);
+#ifdef HAVE_LIBRAW 
   LibRaw t;
   t.open_file(Fname.c_str());
   number_sample_ = t.imgdata.sizes.width;
@@ -23,6 +27,9 @@ RawRasterImage::RawRasterImage(const std::string& Fname, int Band)
     for(int j = 0; j < number_sample(); ++j)
       data->write(i, j, t.imgdata.image[i*number_sample() + j][Band]);
   t.recycle();
+#else
+  throw Exception("Software was not built with libraw");
+#endif
 }
 
 //-----------------------------------------------------------------------
@@ -33,6 +40,7 @@ RawRasterImage::RawRasterImage(const std::string& Fname, int Band)
 std::vector<boost::shared_ptr<RasterImage> > 
 RawRasterImage::read_all_bands(const std::string& Fname)
 {
+#ifdef HAVE_LIBRAW 
   LibRaw t;
   t.open_file(Fname.c_str());
   int number_sample = t.imgdata.sizes.width;
@@ -50,6 +58,9 @@ RawRasterImage::read_all_bands(const std::string& Fname)
     }
   t.recycle();
   return res;
+#else
+  throw Exception("Software was not built with libraw");
+#endif
 }
 
 //-----------------------------------------------------------------------

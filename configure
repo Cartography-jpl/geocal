@@ -685,6 +685,8 @@ srcpythonlib
 srcpython
 srcgeocalbin
 libgeocal
+BUILD_LIBRAW_FALSE
+BUILD_LIBRAW_TRUE
 BUILD_PYTHON_FALSE
 BUILD_PYTHON_TRUE
 build_python
@@ -24328,6 +24330,20 @@ fi
 
 
 #=================================================================
+# We have not needed to read RAW format images for a while, and
+# the library we used is out of date. Turn this off for now. We
+# can revisit this if it becomes an issue
+
+ if false; then
+  BUILD_LIBRAW_TRUE=
+  BUILD_LIBRAW_FALSE='#'
+else
+  BUILD_LIBRAW_TRUE='#'
+  BUILD_LIBRAW_FALSE=
+fi
+
+
+#=================================================================
 # Location of all the source code directories
 
 libgeocal=${geocal_topdir}/lib
@@ -25241,6 +25257,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BUILD_PYTHON_TRUE}" && test -z "${BUILD_PYTHON_FALSE}"; then
   as_fn_error $? "conditional \"BUILD_PYTHON\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_LIBRAW_TRUE}" && test -z "${BUILD_LIBRAW_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_LIBRAW\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_SWIG_TRUE}" && test -z "${HAVE_SWIG_FALSE}"; then

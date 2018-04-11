@@ -34,9 +34,7 @@ gxx_linux-64
 ptipython
 vicar-rtl
 vicar-gdalplugin
-# This doens't currently work. We'll come back to this, but for now just skip this
-# package
-#afids-data
+afids-data
 spice
 # Note the conda system libblitz doesn't work with gcc 7, so we have our
 # own build with a patch to fix this

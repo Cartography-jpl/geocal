@@ -135,7 +135,7 @@ with NamedTemporaryFile() as tmp:
     # continue without complaint
     try:
         afids.tre_afid_a(fin, fvrt, args.unsigned, creation_option)
-    except NameError as exc:
+    except (NameError, AttributeError) as exc:
         pass
     fvrt.close()
     cmd = ["gdal_translate", "-of", "NITF"]

@@ -79,7 +79,14 @@ PYTEST_FLAGS+= --cov-report html:$(PACKAGE)-coverage-python
 PYTEST_FLAGS+= --cov=geocal
 endif
 
-python_check:
+# We use to have this called python_check, which is inconsistent with
+# the "normal" automake convention of names with a "-" instead of "_".
+# So we've changed this. But I'm not sure that there isn't old scripts out
+# there depending on the old name, so at least for a while accept both
+# names
+python_check: python-check
+
+python-check:
 	export PATH=$(PYTHON_CHECK_PATH) && \
         export PYTHONPATH=$(abs_srcdir)/$(srcpython):${PYTHONPATH} && \
         $(setup_geocal) && \

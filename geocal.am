@@ -130,10 +130,17 @@ endif
 # version builds just what is needed for unit tests, which is faster
 # to do during development.
 
-geocal_check: $(BUILT_SOURCES)
-	$(MAKE) $(AM_MAKEFLAGS) geocal_check-am
+# We use to have this called geocal_check, which is inconsistent with
+# the "normal" automake convention of names with a "-" instead of "_".
+# So we've changed this. But I'm not sure that there isn't old scripts out
+# there depending on the old name, so at least for a while accept both
+# names
+geocal_check: geocal-check
 
-geocal_check-am: geocal_test_all
+geocal-check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) geocal-check-am
+
+geocal-check-am: geocal_test_all
 	@echo "====================================================="
 	@echo "This just builds and runs the geocal unit tests (useful"
 	@echo "during development). It does not build the executables"

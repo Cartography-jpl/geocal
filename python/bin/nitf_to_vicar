@@ -84,7 +84,7 @@ with NamedTemporaryFile() as tmp:
     # continue without complaint
     try:
         afids.tre_afid_a_to_gdal(fin, fvrt)
-    except NameError as exc:
+    except (NameError, AttributeError) as exc:
         pass
 
     # Sometimes have a rpc value in a NITF file is actually invalid. We

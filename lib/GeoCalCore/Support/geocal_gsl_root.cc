@@ -3,7 +3,8 @@
 #include "geocal_exception.h"
 #include <gsl/gsl_multiroots.h>
 #include <gsl/gsl_roots.h>
-
+// We will replace with boost tools and rename things
+#include <boost/math/tools/roots.hpp>
 using namespace GeoCal;
 using namespace blitz;
 
@@ -159,7 +160,6 @@ GeoCal::gsl_root(const VFunctorWithDerivative& F,
 }
 
 //-----------------------------------------------------------------------
-/// \ingroup GSL
 /// This finds the root of a Double -> Double function, without a
 /// derivative available.  The solution found is in the bracketed
 /// range Xmin <= X <= Xmax. We find a solution when we have bracketed
@@ -169,54 +169,58 @@ GeoCal::gsl_root(const VFunctorWithDerivative& F,
 /// exception. 
 //-----------------------------------------------------------------------
 
-double
-GeoCal::gsl_root(const DFunctor& F, double Xmin, double Xmax, 
-		 double Eps, double Eps_abs)
+class StoppingCriteria {
+public:
+  StoppingCriteria(double Eps, double Eps_abs)
+    :eps(Eps), eps_abs(Eps_abs)
+  {}
+  bool operator()(double a, double b) const
+  { return fabs(a-b) < eps_abs + eps * std::min(fabs(a), fabs(b)); }
+private:
+  double eps, eps_abs;
+};
+
+class FWrap {
+public:
+  FWrap(const DFunctor& F) : f(F) { }
+  double operator()(double x) const {return f(x);}
+private:
+  const DFunctor& f;
+};
+    
+double GeoCal::root(const DFunctor& F, double Xmin, double Xmax, 
+		    double Eps, double Eps_abs)
 {
-  GslFsolver w;
-  gsl_function gf;
-  gf.function = &dfunctor_adapter;
-  gf.params = static_cast<void*>(const_cast<DFunctor*>(&F));
-  int status;
-  status = gsl_root_fsolver_set(w.fsolver, &gf, Xmin, Xmax);
-  gsl_check(status);
-  status = GSL_CONTINUE;
-  for(int i = 0; i < 1000 && status ==GSL_CONTINUE; ++i) {
-    status = gsl_root_fsolver_iterate(w.fsolver);
-    gsl_check(status);
-    status = gsl_root_test_interval(gsl_root_fsolver_x_lower(w.fsolver),
-				    gsl_root_fsolver_x_upper(w.fsolver),
-				    Eps_abs, Eps);
-  }
-  if(status != GSL_SUCCESS) {
+  StoppingCriteria c(Eps, Eps_abs);
+  boost::uintmax_t max_iter = 1000;
+  std::pair<double, double> res =
+    boost::math::tools::toms748_solve(FWrap(F), Xmin, Xmax, c, max_iter);
+  if(max_iter == 1000) {
     ConvergenceFailure e;
-    e << "gsl_root exceeded the maximum number of iterations\n"
-      << "status: " << status << "\n";
+    e << "toms748_solve exceeded the maximum number of iterations";
     throw e;
   }
-  return gsl_root_fsolver_root(w.fsolver);
+  return (res.first + res.second) / 2;
 }
 
 //-----------------------------------------------------------------------
-/// \ingroup GSL
 /// This finds the root of a function, and propagates the derivative
 /// of the solution with respect to any parameters in the function
 /// (i.e., we *aren't* talking about the derivative wrt X here).
 //-----------------------------------------------------------------------
 
 AutoDerivative<double> 
-GeoCal::gsl_root_with_derivative
+GeoCal::root_with_derivative
 (const DFunctorWithDerivative& F, double Xmin, double Xmax, 
  double Eps, double Eps_abs)
 {
-  double xroot = gsl_root(F, Xmin, Xmax, Eps, Eps_abs);
+  double xroot = root(F, Xmin, Xmax, Eps, Eps_abs);
   Array<double, 1> grad = F.f_with_derivative(xroot).gradient();
   grad /= -F.df(xroot);
   return AutoDerivative<double>(xroot, grad);
 }
 
 //-----------------------------------------------------------------------
-/// \ingroup GSL
 /// This will find a (possible empty) list of roots of a function,
 /// where the roots have a seperation of at least the supplied minimum
 /// separation. 
@@ -249,7 +253,7 @@ std::vector<double> GeoCal::root_list(const DFunctor& F,
   for(double b = a + Root_minimum_spacing; b < Xmax; 
       b += Root_minimum_spacing) {
     if(F(a) * F(b) <= 0.0) {
-      double rt = gsl_root(F, a, b, Eps);
+      double rt = root(F, a, b, Eps);
       if(fabs(rt - last_root) > Eps) {
 				// Reject root if it is too close to
 				// the last root. We have trouble
@@ -262,7 +266,7 @@ std::vector<double> GeoCal::root_list(const DFunctor& F,
     a = b;
   }
   if(F(a) * F(Xmax) <= 0.0) {
-    double rt = gsl_root(F, a, Xmax, Eps);
+    double rt = root(F, a, Xmax, Eps);
     if(fabs(rt - last_root) > Eps) {
 				// Reject root if it is too close to
 				// the last root. We have trouble
@@ -309,7 +313,7 @@ std::vector<AutoDerivative<double> > GeoCal::root_list(const DFunctorWithDerivat
   for(double b = a + Root_minimum_spacing; b < Xmax; 
       b += Root_minimum_spacing) {
     if(F(a) * F(b) <= 0.0) {
-      AutoDerivative<double> rt = gsl_root_with_derivative(F, a, b, Eps);
+      AutoDerivative<double> rt = root_with_derivative(F, a, b, Eps);
       if(fabs(rt.value() - last_root) > Eps) {
 				// Reject root if it is too close to
 				// the last root. We have trouble
@@ -322,7 +326,7 @@ std::vector<AutoDerivative<double> > GeoCal::root_list(const DFunctorWithDerivat
     a = b;
   }
   if(F(a) * F(Xmax) <= 0.0) {
-    AutoDerivative<double> rt = gsl_root_with_derivative(F, a, Xmax, Eps);
+    AutoDerivative<double> rt = root_with_derivative(F, a, Xmax, Eps);
     if(fabs(rt.value() - last_root) > Eps) {
 				// Reject root if it is too close to
 				// the last root. We have trouble

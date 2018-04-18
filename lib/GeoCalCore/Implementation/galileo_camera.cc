@@ -81,7 +81,7 @@ void GalileoCamera::dcs_to_focal_plane
   } else {
     F f(R);
     // We will always have 0 <= r <= R
-    double r = gsl_root(f, 0, R);
+    double r = root(f, 0, R);
     Xfp = xfp_prime * r / R;
     Yfp = yfp_prime * r / R;
   }
@@ -111,7 +111,7 @@ void GalileoCamera::dcs_to_focal_plane
   } else {
     F f(R.value());
     // We will always have 0 <= r <= R
-    double r = gsl_root(f, 0, R.value());
+    double r = root(f, 0, R.value());
     Xfp = xfp_prime * r / R;
     Yfp = yfp_prime * r / R;
   }

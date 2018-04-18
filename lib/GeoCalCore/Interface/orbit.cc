@@ -330,8 +330,8 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
 //-----------------------------------------------------------------------
 
   double eccentric_anomaly = 
-    gsl_root(KeplerEquation(freq_rev_ * (T - epoch_) + ma_, e_), 0, 
-	     2 * Constant::pi);
+    root(KeplerEquation(freq_rev_ * (T - epoch_) + ma_, e_), 0, 
+	 2 * Constant::pi);
 
   double spsi = sin(eccentric_anomaly);
   double cpsi = cos(eccentric_anomaly);
@@ -396,7 +396,7 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
 // Calculate r, theta, and their derivatives using Kepler's equations.
 //-----------------------------------------------------------------------
 
-  AutoDerivative<double> eccentric_anomaly = gsl_root_with_derivative
+  AutoDerivative<double> eccentric_anomaly = root_with_derivative
     (KeplerEquation(freq_rev_ * (T - epoch_) + ma_, e_), 0, 2 * Constant::pi);
 
   AutoDerivative<double> spsi = std::sin(eccentric_anomaly);

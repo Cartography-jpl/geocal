@@ -14,13 +14,13 @@ blitz::Array<double, 1> gsl_root(const VFunctor& F,
 				 const blitz::Array<double, 1>& Initial,
 				 double Residual = 1e-6);
 
-double gsl_root(const DFunctor& F, 
-		double Xmin, double Xmax,
-		double Eps = 1e-6,
-		double Eps_abs = 1e-8);
+double root(const DFunctor& F, 
+	    double Xmin, double Xmax,
+	    double Eps = 1e-6,
+	    double Eps_abs = 1e-8);
 
 AutoDerivative<double> 
-gsl_root_with_derivative(const DFunctorWithDerivative& F, 
+root_with_derivative(const DFunctorWithDerivative& F, 
 		double Xmin, double Xmax,
 		double Eps = 1e-6, double Eps_abs = 1e-8);
 
@@ -30,4 +30,4 @@ std::vector<double> root_list(const DFunctor& F,
 }
 
 // List of things "import *" will include
-%python_export("gsl_root","gsl_root_with_derivative","root_list")
+%python_export("root","root_with_derivative","root_list")

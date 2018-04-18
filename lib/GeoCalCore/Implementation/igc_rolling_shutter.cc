@@ -311,8 +311,8 @@ void IgcRollingShutter::image_coordinate_with_status
     Success = false;
     return;
   }
-  double t = gsl_root(eq, 0, time_table_->max_time() - 
-		      time_table_->min_time(), time_tolerance_);
+  double t = root(eq, 0, time_table_->max_time() - 
+		  time_table_->min_time(), time_tolerance_);
   Res = eq.image_coordinate(t);
   Success = true;
 }
@@ -328,8 +328,8 @@ blitz::Array<double, 2> IgcRollingShutter::image_coordinate_jac_parm
   if(eq(0) * eq(time_table_->max_time() - time_table_->min_time()) > 0)
     throw ImageGroundConnectionFailed();
   AutoDerivative<double> t = 
-    gsl_root_with_derivative(eq, 0, time_table_->max_time() - 
-			     time_table_->min_time(), time_tolerance_);
+    root_with_derivative(eq, 0, time_table_->max_time() - 
+			 time_table_->min_time(), time_tolerance_);
   ImageCoordinateWithDerivative ic = eq.image_coordinate_with_derivative(t);
   Array<double, 2> jac(2, t.number_variable());
   if(t.number_variable() != 0) {

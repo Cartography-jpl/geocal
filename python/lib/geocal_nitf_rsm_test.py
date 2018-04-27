@@ -7,9 +7,10 @@ import geocal.geocal_nitf_rsm
 from geocal.geocal_nitf_rsm import *
 from geocal_swig import GdalRasterImage
 import six
+import numpy as np
 
 def create_image_seg(f):
-    img = pynitf.NitfImageFromNumpy(nrow=10, ncol=10)
+    img = pynitf.NitfImageWriteNumpy(10, 10, np.uint8)
     for i in range(10):
         for j in range(10):
             img.data[i,j] = i + j

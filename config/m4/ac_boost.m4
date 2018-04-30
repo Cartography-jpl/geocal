@@ -59,6 +59,7 @@ if test "x$want_boost" = "xyes"; then
 
         AC_MSG_CHECKING(for BOOST library >= $boost_lib_version_req)
         succeeded=no
+	boost_version_check_needed=yes
         if test "$ac_boost_path" != ""; then
             BOOST_CPPFLAGS="$boost_include$ac_boost_path/include"
             succeeded=yes
@@ -74,11 +75,11 @@ if test "x$want_boost" = "xyes"; then
         fi
 	if test "$succeeded" != "yes" -a "x$build_needed_boost" == "xyes" ; then
             build_boost="yes"
+            boost_version_check_needed=no
             ac_boost_path="\${prefix}"
             BOOST_CPPFLAGS="$boost_include$ac_boost_path/include"
             succeeded=yes
         fi
-        boost_version_check_needed=no
         if test "$succeeded" = "yes" ; then
             boost_done=no
             if test "$build_boost" = "yes"; then
@@ -100,7 +101,6 @@ if test "x$want_boost" = "xyes"; then
                        BOOST_DATETIME_LIB="-lboost_date_time"
 		       BOOST_IOSTREAMS_LIB="-lboost_iostreams"
                        BOOST_SERIALIZATION_LIB="-lboost_serialization"
-		       boost_version_check_needed=yes
                        boost_done=yes
                        break;
                    fi
@@ -115,7 +115,6 @@ if test "x$want_boost" = "xyes"; then
                        BOOST_DATETIME_LIB="-lboost_date_time-mt"
                        BOOST_IOSTREAMS_LIB="-lboost_iostreams-mt"
                        BOOST_SERIALIZATION_LIB="-lboost_serialization-mt"
-		       boost_version_check_needed=yes
                        boost_done=yes
                        break;
                    fi

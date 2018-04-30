@@ -16,7 +16,7 @@ gdal
 boost
 hdf5
 hdfeos5
-gsl < 2.0.0
+gsl
 pkgconfig
 doxygen
 swig

@@ -10,10 +10,10 @@ import six
 import numpy as np
 
 def create_image_seg(f):
-    img = pynitf.NitfImageWriteNumpy(10, 10, np.uint8)
-    for i in range(10):
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8)
+    for i in range(9):
         for j in range(10):
-            img.data[i,j] = i + j
+            img[0,i,j] = i + j
     f.image_segment.append(pynitf.NitfImageSegment(img))
 
 @require_pynitf

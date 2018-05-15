@@ -75,7 +75,6 @@ if test "x$want_boost" = "xyes"; then
         fi
 	if test "$succeeded" != "yes" -a "x$build_needed_boost" == "xyes" ; then
             build_boost="yes"
-            boost_version_check_needed=no
             ac_boost_path="\${prefix}"
             BOOST_CPPFLAGS="$boost_include$ac_boost_path/include"
             succeeded=yes
@@ -125,6 +124,9 @@ if test "x$want_boost" = "xyes"; then
 	        boost_version_check_needed=no
                 succeeded=no
             fi
+        fi
+	if test "x$build_boost" == "xyes" ; then
+	   boost_version_check_needed=no
         fi
         if test "$boost_version_check_needed" = "yes"; then
 	   CPPFLAGS_SAVED="$CPPFLAGS"

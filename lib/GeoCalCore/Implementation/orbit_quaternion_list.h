@@ -5,6 +5,8 @@
 #include <map>
 
 namespace GeoCal {
+  class OrbitQuaternionListOffset; // Forward Declaration.
+  
 /****************************************************************//**
   This is an implementation of an Orbit that is a list of
   QuaternionOrbitData values. For times that fall between these
@@ -69,6 +71,8 @@ public:
 				      const CartesianFixed& Pt) const;
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
 protected:
+  friend class OrbitQuaternionListOffset;
+  
 //-----------------------------------------------------------------------
 /// Derived classes can override this to create orbit data on demand
 /// to support lazy evaluation.

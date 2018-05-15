@@ -117,6 +117,8 @@ if HAVE_HDF5
 geocalinc_HEADERS+= @srcimplementation@/hdf_orbit.h
 libgeocal_la_SOURCES+= @srcimplementation@/hdf_orbit.cc
 endif
+geocalinc_HEADERS+= @srcimplementation@/orbit_quaternion_list_offset.h
+libgeocal_la_SOURCES+= @srcimplementation@/orbit_quaternion_list_offset.cc
 geocalinc_HEADERS+= @srcimplementation@/orbit_correction.h
 libgeocal_la_SOURCES+= @srcimplementation@/orbit_correction.cc
 geocalinc_HEADERS+= @srcimplementation@/orbit_offset_correction.h
@@ -352,6 +354,8 @@ SWIG_SRC += @swigsrc@/orbit_time_shift_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/orbit_time_shift.i
 SWIG_SRC_HDF5 += @swigsrc@/hdf_orbit_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/hdf_orbit.i
+SWIG_SRC += @swigsrc@/orbit_quaternion_list_offset_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/orbit_quaternion_list_offset.i
 SWIG_SRC_HDF5_CARTO += @swigsrc@/hdf_orbit_carto_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/hdf_orbit_carto.i
 SWIG_SRC += @swigsrc@/tle_orbit_wrap.cc
@@ -462,6 +466,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/local_rectangular_coordinate_test.
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/mola_dem_file_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/context_sqrt_decode_image_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/orbit_quaternion_list_offset_test.cc
 
 EXTRA_DIST += @srcimplementation@/rsm_fixture.h
 

@@ -455,8 +455,9 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/orbit_correction_wrap.cc \
 	@swigsrc@/orbit_offset_correction_wrap.cc \
 	@swigsrc@/orbit_piecewise_correction_wrap.cc \
-	@swigsrc@/orbit_time_shift_wrap.cc @swigsrc@/tle_orbit_wrap.cc \
-	@swigsrc@/spice_orbit_wrap.cc \
+	@swigsrc@/orbit_time_shift_wrap.cc \
+	@swigsrc@/orbit_quaternion_list_offset_wrap.cc \
+	@swigsrc@/tle_orbit_wrap.cc @swigsrc@/spice_orbit_wrap.cc \
 	@swigsrc@/spice_planet_orbit_wrap.cc \
 	@swigsrc@/spice_kernel_list_wrap.cc \
 	@swigsrc@/spice_dem_wrap.cc @swigsrc@/rsm_base_wrap.cc \
@@ -636,6 +637,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_offset_correction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_piecewise_correction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo \
+	@swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo \
 	@swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-spice_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-spice_planet_orbit_wrap.lo \
@@ -833,6 +835,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/quadratic_geometric_model.cc \
 	@srcimplementation@/geometric_model_image.cc \
 	@srcimplementation@/hdf_orbit.cc \
+	@srcimplementation@/orbit_quaternion_list_offset.cc \
 	@srcimplementation@/orbit_correction.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
 	@srcimplementation@/orbit_piecewise_correction.cc \
@@ -1022,6 +1025,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-quadratic_geometric_model.lo \
 	@srcimplementation@/libgeocal_la-geometric_model_image.lo \
 	$(am__objects_20) \
+	@srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo \
 	@srcimplementation@/libgeocal_la-orbit_correction.lo \
 	@srcimplementation@/libgeocal_la-orbit_offset_correction.lo \
 	@srcimplementation@/libgeocal_la-orbit_piecewise_correction.lo \
@@ -1224,6 +1228,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/rsm_image_ground_connection_test.cc \
 	@srcimplementation@/mola_dem_file_test.cc \
 	@srcimplementation@/context_sqrt_decode_image_test.cc \
+	@srcimplementation@/orbit_quaternion_list_offset_test.cc \
 	@srccartlab@/vicar_ogr_test.cc \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
@@ -1382,6 +1387,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-rsm_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-mola_dem_file_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-context_sqrt_decode_image_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.$(OBJEXT) \
 	$(am__objects_29) \
 	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
@@ -1634,6 +1640,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/quadratic_geometric_model.h \
 	@srcimplementation@/geometric_model_image.h \
 	@srcimplementation@/hdf_orbit.h \
+	@srcimplementation@/orbit_quaternion_list_offset.h \
 	@srcimplementation@/orbit_correction.h \
 	@srcimplementation@/orbit_offset_correction.h \
 	@srcimplementation@/orbit_piecewise_correction.h \
@@ -2593,6 +2600,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/piecewise_linear.cc $(am__append_27) \
 	@srcimplementation@/quadratic_geometric_model.cc \
 	@srcimplementation@/geometric_model_image.cc $(am__append_29) \
+	@srcimplementation@/orbit_quaternion_list_offset.cc \
 	@srcimplementation@/orbit_correction.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
 	@srcimplementation@/orbit_piecewise_correction.cc \
@@ -2749,8 +2757,9 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/orbit_correction_wrap.cc \
 	@swigsrc@/orbit_offset_correction_wrap.cc \
 	@swigsrc@/orbit_piecewise_correction_wrap.cc \
-	@swigsrc@/orbit_time_shift_wrap.cc @swigsrc@/tle_orbit_wrap.cc \
-	@swigsrc@/spice_orbit_wrap.cc \
+	@swigsrc@/orbit_time_shift_wrap.cc \
+	@swigsrc@/orbit_quaternion_list_offset_wrap.cc \
+	@swigsrc@/tle_orbit_wrap.cc @swigsrc@/spice_orbit_wrap.cc \
 	@swigsrc@/spice_planet_orbit_wrap.cc \
 	@swigsrc@/spice_kernel_list_wrap.cc \
 	@swigsrc@/spice_dem_wrap.cc @swigsrc@/rsm_base_wrap.cc \
@@ -2955,6 +2964,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/piecewise_linear.h $(am__append_26) \
 	@srcimplementation@/quadratic_geometric_model.h \
 	@srcimplementation@/geometric_model_image.h $(am__append_28) \
+	@srcimplementation@/orbit_quaternion_list_offset.h \
 	@srcimplementation@/orbit_correction.h \
 	@srcimplementation@/orbit_offset_correction.h \
 	@srcimplementation@/orbit_piecewise_correction.h \
@@ -3127,6 +3137,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/orbit_piecewise_correction.i \
 	@srcimplementation@/orbit_time_shift.i \
 	@srcimplementation@/hdf_orbit.i \
+	@srcimplementation@/orbit_quaternion_list_offset.i \
 	@srcimplementation@/hdf_orbit_carto.i \
 	@srcimplementation@/tle_orbit.i \
 	@srcimplementation@/spice_orbit.i \
@@ -3276,6 +3287,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/rsm_image_ground_connection_test.cc \
 	@srcimplementation@/mola_dem_file_test.cc \
 	@srcimplementation@/context_sqrt_decode_image_test.cc \
+	@srcimplementation@/orbit_quaternion_list_offset_test.cc \
 	$(am__append_38) @srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
 	@srccartlab@/quickbird_camera_test.cc \
@@ -3883,6 +3895,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-spice_orbit_wrap.lo:  \
@@ -4386,6 +4400,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-hdf_orbit.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-orbit_correction.lo:  \
@@ -5107,6 +5124,9 @@ clean-checkPROGRAMS:
 @srcimplementation@/geocal_test_all-context_sqrt_decode_image_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT):  \
 	@srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
@@ -5434,6 +5454,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_data_image_ground_connection_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_offset_correction_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_piecewise_correction_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_offset_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_time_shift_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-pan_sharpen_test.Po@am__quote@
@@ -5514,6 +5535,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_offset_correction.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_piecewise_correction.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list_offset.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_time_shift.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pan_sharpen.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-phase_correlation_matcher.Plo@am__quote@
@@ -5818,6 +5840,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_data_image_ground_connection_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_offset_correction_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_piecewise_correction_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_offset_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_time_shift_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_wrap.Plo@am__quote@
@@ -6774,6 +6797,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_time_shift_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo `test -f '@swigsrc@/orbit_time_shift_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_time_shift_wrap.cc
+
+@swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo: @swigsrc@/orbit_quaternion_list_offset_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_offset_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo `test -f '@swigsrc@/orbit_quaternion_list_offset_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_quaternion_list_offset_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_offset_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_offset_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_quaternion_list_offset_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo `test -f '@swigsrc@/orbit_quaternion_list_offset_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_quaternion_list_offset_wrap.cc
 
 @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo: @swigsrc@/tle_orbit_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo `test -f '@swigsrc@/tle_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/tle_orbit_wrap.cc
@@ -8090,6 +8120,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/hdf_orbit.cc' object='@srcimplementation@/libgeocal_la-hdf_orbit.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-hdf_orbit.lo `test -f '@srcimplementation@/hdf_orbit.cc' || echo '$(srcdir)/'`@srcimplementation@/hdf_orbit.cc
+
+@srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo: @srcimplementation@/orbit_quaternion_list_offset.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list_offset.Tpo -c -o @srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo `test -f '@srcimplementation@/orbit_quaternion_list_offset.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_quaternion_list_offset.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list_offset.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list_offset.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/orbit_quaternion_list_offset.cc' object='@srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo `test -f '@srcimplementation@/orbit_quaternion_list_offset.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_quaternion_list_offset.cc
 
 @srcimplementation@/libgeocal_la-orbit_correction.lo: @srcimplementation@/orbit_correction.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-orbit_correction.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_correction.Tpo -c -o @srcimplementation@/libgeocal_la-orbit_correction.lo `test -f '@srcimplementation@/orbit_correction.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_correction.cc
@@ -10344,6 +10381,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/context_sqrt_decode_image_test.cc' object='@srcimplementation@/geocal_test_all-context_sqrt_decode_image_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-context_sqrt_decode_image_test.obj `if test -f '@srcimplementation@/context_sqrt_decode_image_test.cc'; then $(CYGPATH_W) '@srcimplementation@/context_sqrt_decode_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/context_sqrt_decode_image_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.o: @srcimplementation@/orbit_quaternion_list_offset_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_offset_test.Tpo -c -o @srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.o `test -f '@srcimplementation@/orbit_quaternion_list_offset_test.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_quaternion_list_offset_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_offset_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_offset_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/orbit_quaternion_list_offset_test.cc' object='@srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.o `test -f '@srcimplementation@/orbit_quaternion_list_offset_test.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_quaternion_list_offset_test.cc
+
+@srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.obj: @srcimplementation@/orbit_quaternion_list_offset_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_offset_test.Tpo -c -o @srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.obj `if test -f '@srcimplementation@/orbit_quaternion_list_offset_test.cc'; then $(CYGPATH_W) '@srcimplementation@/orbit_quaternion_list_offset_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/orbit_quaternion_list_offset_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_offset_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_offset_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/orbit_quaternion_list_offset_test.cc' object='@srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.obj `if test -f '@srcimplementation@/orbit_quaternion_list_offset_test.cc'; then $(CYGPATH_W) '@srcimplementation@/orbit_quaternion_list_offset_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/orbit_quaternion_list_offset_test.cc'; fi`
 
 @srccartlab@/geocal_test_all-vicar_ogr_test.o: @srccartlab@/vicar_ogr_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-vicar_ogr_test.o -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_ogr_test.Tpo -c -o @srccartlab@/geocal_test_all-vicar_ogr_test.o `test -f '@srccartlab@/vicar_ogr_test.cc' || echo '$(srcdir)/'`@srccartlab@/vicar_ogr_test.cc

@@ -8,8 +8,8 @@
  * interface file instead.
  * ----------------------------------------------------------------------------- */
 
-#ifndef SWIG_orbit_quaternion_list_WRAP_H_
-#define SWIG_orbit_quaternion_list_WRAP_H_
+#ifndef SWIG_orbit_quaternion_list_offset_WRAP_H_
+#define SWIG_orbit_quaternion_list_offset_WRAP_H_
 
 #include <map>
 #include <string>

@@ -347,4 +347,7 @@ LocalRcConverter_swigregister = _local_rectangular_coordinate.LocalRcConverter_s
 LocalRcConverter_swigregister(LocalRcConverter)
 
 
+__all__ = ["LocalRcParameter","LocalRectangularCoordinate","LocalRcConverter"]
+
+
 

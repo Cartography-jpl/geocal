@@ -35,6 +35,5 @@ public:
   %pickle_init(1, self.match, self.ray_intersect, self.max_distance)
 };
 }
-
-
-
+// List of things "import *" will include
+%python_export("DemMatch")

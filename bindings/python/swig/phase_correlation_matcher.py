@@ -268,4 +268,7 @@ PhaseCorrelationMatcher_swigregister = _phase_correlation_matcher.PhaseCorrelati
 PhaseCorrelationMatcher_swigregister(PhaseCorrelationMatcher)
 
 
+__all__ = ["PhaseCorrelationMatcher"]
+
+
 

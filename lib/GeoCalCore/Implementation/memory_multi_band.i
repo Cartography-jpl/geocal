@@ -16,3 +16,5 @@ public:
   %python_attribute(data, blitz::Array<int, 3>)
 };
 }
+// List of things "import *" will include
+%python_export("MemoryMultiBand")

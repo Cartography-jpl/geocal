@@ -211,4 +211,7 @@ LocationToFile_swigregister = _location_to_file.LocationToFile_swigregister
 LocationToFile_swigregister(LocationToFile)
 
 
+__all__ = ["LocationToFile"]
+
+
 

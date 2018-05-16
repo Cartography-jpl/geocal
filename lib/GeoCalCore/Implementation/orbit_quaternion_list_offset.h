@@ -74,7 +74,64 @@ private:
   template<class Archive>
   void load(Archive& Ar, const unsigned int version);
 };
+
+/****************************************************************//**
+  Like OrbitQuaternionListOffset, but for a more general orbit
+*******************************************************************/
+
+class OrbitScCoorOffset : public Orbit {
+public:
+//-----------------------------------------------------------------------
+/// Constructor. Add a fixed offset to the position in meters, in
+/// space craft coordinate system.
+//-----------------------------------------------------------------------
+  
+  OrbitScCoorOffset(const boost::shared_ptr<Orbit>&
+      Orbit_underlying, const blitz::Array<double, 1>&
+      Position_offset_sc_coordinate)
+    : Orbit(Orbit_underlying->min_time(), Orbit_underlying->max_time()),
+      orbit_underlying_(Orbit_underlying),
+      pos_off_(Position_offset_sc_coordinate)
+  { }
+  virtual ~OrbitScCoorOffset() {}
+
+//-----------------------------------------------------------------------
+/// Return the base orbit we are applying the offset to.
+//-----------------------------------------------------------------------
+  
+  boost::shared_ptr<Orbit> orbit_underlying() const
+  { return orbit_underlying_; }
+
+//-----------------------------------------------------------------------
+/// Return the position offset, in the spacecraft coordinate system,
+/// in meters.
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 1>& position_offset_sc_coordinate() const
+  { return pos_off_; }
+
+  virtual void print(std::ostream& Os) const;
+
+  virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> 
+  orbit_data(const TimeWithDerivative& T) const
+  { 
+    // Right now don't handle derivatives. We can revisit this if
+    // this becomes an issue.
+    return orbit_data(T.value());
+  }
+private:
+  // These needs to be a Orbit for boost serialization, however it is
+  // is actually of the type OrbitQuaternionList.
+  boost::shared_ptr<Orbit> orbit_underlying_;
+  blitz::Array<double, 1> pos_off_;
+  OrbitScCoorOffset() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 }
 
 GEOCAL_EXPORT_KEY(OrbitQuaternionListOffset);
+GEOCAL_EXPORT_KEY(OrbitScCoorOffset);
 #endif

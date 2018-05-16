@@ -734,4 +734,7 @@ def RsmRationalPolynomial_read_tre_string(Tre_in):
     return _rsm_rational_polynomial.RsmRationalPolynomial_read_tre_string(Tre_in)
 
 
+__all__ = ["RsmRationalPolynomial"]
+
+
 

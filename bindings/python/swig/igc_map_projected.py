@@ -464,4 +464,7 @@ IgcMapProjectedMultiBand_swigregister = _igc_map_projected.IgcMapProjectedMultiB
 IgcMapProjectedMultiBand_swigregister(IgcMapProjectedMultiBand)
 
 
+__all__ = ["IgcMapProjected","IgcMapProjectedMultiBand"]
+
+
 

@@ -272,4 +272,7 @@ RasterImageTiledFile_swigregister = _raster_image_tiled_file.RasterImageTiledFil
 RasterImageTiledFile_swigregister(RasterImageTiledFile)
 
 
+__all__ = ["RasterImageTiledFile"]
+
+
 

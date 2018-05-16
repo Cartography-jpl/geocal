@@ -242,4 +242,7 @@ EciTod_swigregister = _eci_tod.EciTod_swigregister
 EciTod_swigregister(EciTod)
 
 
+__all__ = ["EciTod"]
+
+
 

@@ -276,4 +276,7 @@ IgcCollectionOrbitData_swigregister = _igc_collection_orbit_data.IgcCollectionOr
 IgcCollectionOrbitData_swigregister(IgcCollectionOrbitData)
 
 
+__all__ = ["IgcCollectionOrbitData"]
+
+
 

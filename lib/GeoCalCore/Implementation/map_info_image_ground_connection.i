@@ -36,3 +36,6 @@ public:
   %pickle_init(2, self.image, self.image_multi_band, self.dem, self.title)
 };
 }
+
+// List of things "import *" will include
+%python_export("MapInfoImageGroundConnection")

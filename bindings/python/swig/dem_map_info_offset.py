@@ -244,4 +244,7 @@ DemMapInfoOffset_swigregister = _dem_map_info_offset.DemMapInfoOffset_swigregist
 DemMapInfoOffset_swigregister(DemMapInfoOffset)
 
 
+__all__ = ["DemMapInfoOffset"]
+
+
 

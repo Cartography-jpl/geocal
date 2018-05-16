@@ -47,3 +47,5 @@ public:
 			  const std::string& Corr_type = "CN+S");
 };
 }
+// List of things "import *" will include
+%python_export("SpiceHelper")

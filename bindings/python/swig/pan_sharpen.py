@@ -235,4 +235,7 @@ PanSharpen_swigregister = _pan_sharpen.PanSharpen_swigregister
 PanSharpen_swigregister(PanSharpen)
 
 
+__all__ = ["PanSharpen"]
+
+
 

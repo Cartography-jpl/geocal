@@ -483,4 +483,7 @@ OrbitOffsetCorrection_swigregister = _orbit_offset_correction.OrbitOffsetCorrect
 OrbitOffsetCorrection_swigregister(OrbitOffsetCorrection)
 
 
+__all__ = ["OrbitOffsetCorrection"]
+
+
 

@@ -20,3 +20,5 @@ public:
   %pickle_init(1, self.file_name, self.band)
 };
 }
+// List of things "import *" will include
+%python_export("RawRasterImage")

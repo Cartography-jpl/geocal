@@ -232,4 +232,7 @@ GdalDatum_swigregister = _gdal_datum.GdalDatum_swigregister
 GdalDatum_swigregister(GdalDatum)
 
 
+__all__ = ["GdalDatum"]
+
+
 

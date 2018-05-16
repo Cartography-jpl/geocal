@@ -764,4 +764,7 @@ QuaternionCamera_swigregister = _quaternion_camera.QuaternionCamera_swigregister
 QuaternionCamera_swigregister(QuaternionCamera)
 
 
+__all__ = ["QuaternionCamera"]
+
+
 

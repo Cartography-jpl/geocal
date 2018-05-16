@@ -315,4 +315,7 @@ def GdalMultiBand_save(*args):
     return _gdal_multi_band.GdalMultiBand_save(*args)
 
 
+__all__ = ["GdalMultiBand"]
+
+
 

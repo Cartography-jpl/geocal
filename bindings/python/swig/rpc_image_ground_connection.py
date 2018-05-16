@@ -265,4 +265,7 @@ RpcImageGroundConnection_swigregister = _rpc_image_ground_connection.RpcImageGro
 RpcImageGroundConnection_swigregister(RpcImageGroundConnection)
 
 
+__all__ = ["RpcImageGroundConnection"]
+
+
 

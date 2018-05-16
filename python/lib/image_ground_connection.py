@@ -2,7 +2,7 @@ from __future__ import division
 from __future__ import absolute_import
 from builtins import range
 from past.utils import old_div
-from geocal_swig import *
+import geocal_swig
 from math import *
 import numpy as np
 import os.path
@@ -30,7 +30,7 @@ class GdalImageGroundConnection(geocal_swig.RpcImageGroundConnection):
     def __init__(self, fname, dem, rpc = None, title=None, image_mask=None,
                  ground_mask=None, fit_height_offset=False):
         self.fname = fname
-        img = GdalMultiBand(fname)
+        img = geocal_swig.GdalMultiBand(fname)
         if(not rpc):
             rpc = img.gdal_raster_image(0).rpc
         if(img.number_band == 1):
@@ -71,11 +71,11 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
             baseend = m.group(4)
             img = RasterImageMultiBandVariable()
             for i in range(int(m.group(2)), int(m.group(3)) + 1):
-                img.add_raster_image(VicarLiteRasterImage("%s%d%s" % (base, i, baseend)))
+                img.add_raster_image(geocal_swig.VicarLiteRasterImage("%s%d%s" % (base, i, baseend)))
             if(not rpc):
                 rpc = img.raster_image(0).rpc
         else:
-            img = VicarLiteRasterImage(fname)
+            img = geocal_swig.VicarLiteRasterImage(fname)
             if(not rpc):
                 rpc = img.rpc
         if(not title):
@@ -92,9 +92,9 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
             base = m.group(1)
             baseend = m.group(4)
             i = int(m.group(2))
-            return VicarLiteFile.is_vicar_file("%s%d%s" % (base, i, baseend))
+            return geocal_swig.VicarLiteFile.is_vicar_file("%s%d%s" % (base, i, baseend))
         else:
-            return VicarLiteFile.is_vicar_file(fname)
+            return geocal_swig.VicarLiteFile.is_vicar_file(fname)
         
     @classmethod
     def pickle_format_version(cls):
@@ -131,11 +131,11 @@ def _view_angle(self, image_coordinate = None, delta_h = 100):
     The zenith and azimuth angles are return in that order, in degrees.
     '''
     if(image_coordinate is None):
-        image_coordinate = ImageCoordinate(old_div(self.number_line, 2.0),
+        image_coordinate = geocal_swig.ImageCoordinate(old_div(self.number_line, 2.0),
                                            old_div(self.number_sample, 2.0))
     gc1 = self.ground_coordinate(image_coordinate)
     h = gc1.height_reference_surface
-    d = SimpleDem(h + delta_h)
+    d = geocal_swig.SimpleDem(h + delta_h)
     gc2 = self.ground_coordinate_dem(image_coordinate, d)
     e1 = gc1.convert_to_cf()
     e2 = gc2.convert_to_cf()

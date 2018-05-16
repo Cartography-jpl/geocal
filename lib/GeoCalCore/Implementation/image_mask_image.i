@@ -25,3 +25,5 @@ public:
   %pickle_init(2, self.raster_image, self.masked_value, self.outside_handling)
 };
 }
+// List of things "import *" will include
+%python_export("ImageMaskImage")

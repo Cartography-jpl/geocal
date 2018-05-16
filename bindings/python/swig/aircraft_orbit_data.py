@@ -307,4 +307,7 @@ AircraftOrbitData_swigregister = _aircraft_orbit_data.AircraftOrbitData_swigregi
 AircraftOrbitData_swigregister(AircraftOrbitData)
 
 
+__all__ = ["AircraftOrbitData"]
+
+
 

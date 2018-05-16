@@ -621,4 +621,7 @@ def OgrCoordinateConverter_utm_converter(Zone):
     return _ogr_coordinate.OgrCoordinateConverter_utm_converter(Zone)
 
 
+__all__ = ["OgrWrapper","OgrCoordinate","OgrCoordinateConverter"]
+
+
 

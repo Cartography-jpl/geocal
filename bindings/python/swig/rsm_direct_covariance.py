@@ -299,4 +299,7 @@ def RsmDirectCovariance_read_tre_string(Tre_in):
     return _rsm_direct_covariance.RsmDirectCovariance_read_tre_string(Tre_in)
 
 
+__all__ = ["RsmDirectCovariance"]
+
+
 

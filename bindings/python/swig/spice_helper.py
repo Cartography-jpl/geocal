@@ -632,4 +632,7 @@ def SpiceHelper_boresight_and_footprint(*args):
     return _spice_helper.SpiceHelper_boresight_and_footprint(*args)
 
 
+__all__ = ["SpiceHelper"]
+
+
 

@@ -341,4 +341,7 @@ SpicePlanetOrbit_swigregister = _spice_planet_orbit.SpicePlanetOrbit_swigregiste
 SpicePlanetOrbit_swigregister(SpicePlanetOrbit)
 
 
+__all__ = ["SpicePlanetOrbit"]
+
+
 

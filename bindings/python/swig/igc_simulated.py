@@ -334,4 +334,7 @@ IgcSimulated_swigregister = _igc_simulated.IgcSimulated_swigregister
 IgcSimulated_swigregister(IgcSimulated)
 
 
+__all__ = ["IgcSimulated"]
+
+
 

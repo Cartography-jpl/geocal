@@ -333,4 +333,7 @@ PiecewiseLinear_swigregister = _piecewise_linear.PiecewiseLinear_swigregister
 PiecewiseLinear_swigregister(PiecewiseLinear)
 
 
+__all__ = ["PiecewiseLinear"]
+
+
 

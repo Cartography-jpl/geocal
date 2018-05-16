@@ -260,4 +260,7 @@ IgcArray_swigregister = _igc_array.IgcArray_swigregister
 IgcArray_swigregister(IgcArray)
 
 
+__all__ = ["IgcArray"]
+
+
 

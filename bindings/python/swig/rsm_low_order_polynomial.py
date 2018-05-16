@@ -443,4 +443,7 @@ RsmLowOrderPolynomial_swigregister = _rsm_low_order_polynomial.RsmLowOrderPolyno
 RsmLowOrderPolynomial_swigregister(RsmLowOrderPolynomial)
 
 
+__all__ = ["RsmLowOrderPolynomial"]
+
+
 

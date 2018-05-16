@@ -227,4 +227,7 @@ DidDatum_swigregister = _did_datum.DidDatum_swigregister
 DidDatum_swigregister(DidDatum)
 
 
+__all__ = ["DidDatum"]
+
+
 

@@ -232,4 +232,7 @@ SpiceKernelList_swigregister = _spice_kernel_list.SpiceKernelList_swigregister
 SpiceKernelList_swigregister(SpiceKernelList)
 
 
+__all__ = ["SpiceKernelList"]
+
+
 

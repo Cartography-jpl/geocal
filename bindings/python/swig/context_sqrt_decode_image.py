@@ -235,4 +235,7 @@ ContextSqrtDecodeImage_swigregister = _context_sqrt_decode_image.ContextSqrtDeco
 ContextSqrtDecodeImage_swigregister(ContextSqrtDecodeImage)
 
 
+__all__ = ["ContextSqrtDecodeImage"]
+
+
 

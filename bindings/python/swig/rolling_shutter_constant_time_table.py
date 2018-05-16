@@ -236,4 +236,7 @@ RollingShutterConstantTimeTable_swigregister = _rolling_shutter_constant_time_ta
 RollingShutterConstantTimeTable_swigregister(RollingShutterConstantTimeTable)
 
 
+__all__ = ["RollingShutterConstantTimeTable"]
+
+
 

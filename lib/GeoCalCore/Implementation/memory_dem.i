@@ -17,3 +17,5 @@ public:
   boost::multi_array<double, 2> elevation_data;
 };
 }
+// List of things "import *" will include
+%python_export("MemoryDem")

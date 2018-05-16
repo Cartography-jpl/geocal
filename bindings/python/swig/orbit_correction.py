@@ -235,4 +235,7 @@ OrbitCorrection_swigregister = _orbit_correction.OrbitCorrection_swigregister
 OrbitCorrection_swigregister(OrbitCorrection)
 
 
+__all__ = ["OrbitCorrection"]
+
+
 

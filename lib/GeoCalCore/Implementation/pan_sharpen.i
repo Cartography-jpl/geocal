@@ -21,3 +21,6 @@ protected:
   virtual void calc(int Start_line, int Start_sample) const;
 };
 }
+
+// List of things "import *" will include
+%python_export("PanSharpen")

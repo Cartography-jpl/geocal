@@ -524,4 +524,7 @@ def RsmBase_generate_data(Igc, Cconv, Min_x, Max_x, Min_y, Max_y, Min_z, Max_z, 
     return _rsm_base.RsmBase_generate_data(Igc, Cconv, Min_x, Max_x, Min_y, Max_y, Min_z, Max_z, Numx, Numy, Numz)
 
 
+__all__ = ["RsmBase"]
+
+
 

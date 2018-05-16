@@ -364,4 +364,7 @@ QuadraticGeometricModel_swigregister = _quadratic_geometric_model.QuadraticGeome
 QuadraticGeometricModel_swigregister(QuadraticGeometricModel)
 
 
+__all__ = ["QuadraticGeometricModel"]
+
+
 

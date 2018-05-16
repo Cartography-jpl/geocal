@@ -332,4 +332,7 @@ ScaleImageGroundConnection_swigregister = _scale_image.ScaleImageGroundConnectio
 ScaleImageGroundConnection_swigregister(ScaleImageGroundConnection)
 
 
+__all__ = ["ScaleImage","ScaleImageMultiBand","ScaleImageGroundConnection"]
+
+
 

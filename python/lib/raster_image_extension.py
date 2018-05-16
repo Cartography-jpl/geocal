@@ -1,7 +1,7 @@
 from __future__ import division
 from __future__ import absolute_import
 from past.utils import old_div
-from geocal_swig import *
+import geocal_swig
 import numpy as np
 from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt

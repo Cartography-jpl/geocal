@@ -379,4 +379,7 @@ DemMatch_swigregister = _dem_match.DemMatch_swigregister
 DemMatch_swigregister(DemMatch)
 
 
+__all__ = ["DemMatch"]
+
+
 

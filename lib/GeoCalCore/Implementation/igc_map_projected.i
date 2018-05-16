@@ -54,3 +54,5 @@ protected:
   virtual void calc(int Lstart, int Sstart) const; 
 };
 }
+// List of things "import *" will include
+%python_export("IgcMapProjected", "IgcMapProjectedMultiBand")

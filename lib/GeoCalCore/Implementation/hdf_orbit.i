@@ -34,3 +34,6 @@ public:
 %template(HdfOrbit_Eci_TimeJ2000) GeoCal::HdfOrbit<GeoCal::Eci, GeoCal::TimeJ2000Creator>;
 %geocal_shared_ptr(GeoCal::HdfOrbit<GeoCal::EciTod, GeoCal::TimeJ2000Creator>);
 %template(HdfOrbit_EciTod_TimeJ2000) GeoCal::HdfOrbit<GeoCal::EciTod, GeoCal::TimeJ2000Creator>;
+
+// List of things "import *" will include
+%python_export("HdfOrbit_EciTod_TimeAcs", "HdfOrbit_Eci_TimePgs", "HdfOrbit_Eci_TimeJ2000", "HdfOrbit_EciTod_TimeJ2000")

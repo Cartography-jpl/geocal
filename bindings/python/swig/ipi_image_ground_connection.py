@@ -270,4 +270,7 @@ IpiImageGroundConnection_swigregister = _ipi_image_ground_connection.IpiImageGro
 IpiImageGroundConnection_swigregister(IpiImageGroundConnection)
 
 
+__all__ = ["IpiImageGroundConnection"]
+
+
 

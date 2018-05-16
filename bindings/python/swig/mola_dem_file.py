@@ -219,4 +219,7 @@ MolaDemFile_swigregister = _mola_dem_file.MolaDemFile_swigregister
 MolaDemFile_swigregister(MolaDemFile)
 
 
+__all__ = ["MolaDemFile"]
+
+
 

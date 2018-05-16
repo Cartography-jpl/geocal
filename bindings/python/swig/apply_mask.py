@@ -274,4 +274,7 @@ ApplyMask_swigregister = _apply_mask.ApplyMask_swigregister
 ApplyMask_swigregister(ApplyMask)
 
 
+__all__ = ["ApplyMask"]
+
+
 

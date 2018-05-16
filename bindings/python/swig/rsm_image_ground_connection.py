@@ -243,4 +243,7 @@ RsmImageGroundConnection_swigregister = _rsm_image_ground_connection.RsmImageGro
 RsmImageGroundConnection_swigregister(RsmImageGroundConnection)
 
 
+__all__ = ["RsmImageGroundConnection"]
+
+
 

@@ -275,4 +275,7 @@ IgcCollectionRollingShutter_swigregister = _igc_collection_rolling_shutter.IgcCo
 IgcCollectionRollingShutter_swigregister(IgcCollectionRollingShutter)
 
 
+__all__ = ["IgcCollectionRollingShutter"]
+
+
 

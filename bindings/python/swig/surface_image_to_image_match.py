@@ -361,4 +361,7 @@ SurfaceImageToImageMatch_swigregister = _surface_image_to_image_match.SurfaceIma
 SurfaceImageToImageMatch_swigregister(SurfaceImageToImageMatch)
 
 
+__all__ = ["SurfaceImageToImageMatch"]
+
+
 

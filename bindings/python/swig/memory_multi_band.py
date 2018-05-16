@@ -227,4 +227,7 @@ MemoryMultiBand_swigregister = _memory_multi_band.MemoryMultiBand_swigregister
 MemoryMultiBand_swigregister(MemoryMultiBand)
 
 
+__all__ = ["MemoryMultiBand"]
+
+
 

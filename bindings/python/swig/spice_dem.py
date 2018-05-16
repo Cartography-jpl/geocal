@@ -260,4 +260,7 @@ SpiceDem_swigregister = _spice_dem.SpiceDem_swigregister
 SpiceDem_swigregister(SpiceDem)
 
 
+__all__ = ["SpiceDem"]
+
+
 

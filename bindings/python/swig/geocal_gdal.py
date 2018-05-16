@@ -344,4 +344,7 @@ def GdalBase_driver_option_list(i):
 GdalBase_driver_option_list = _geocal_gdal.GdalBase_driver_option_list
 
 
+__all__ = ["GdalBase"]
+
+
 

@@ -474,4 +474,7 @@ Rsm_swigregister = _rsm.Rsm_swigregister
 Rsm_swigregister(Rsm)
 
 
+__all__ = ["Rsm"]
+
+
 

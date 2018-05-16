@@ -224,4 +224,7 @@ MemoryDem_swigregister = _memory_dem.MemoryDem_swigregister
 MemoryDem_swigregister(MemoryDem)
 
 
+__all__ = ["MemoryDem"]
+
+
 

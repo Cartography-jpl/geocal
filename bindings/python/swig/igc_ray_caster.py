@@ -325,4 +325,7 @@ IgcRayCaster_swigregister = _igc_ray_caster.IgcRayCaster_swigregister
 IgcRayCaster_swigregister(IgcRayCaster)
 
 
+__all__ = ["IgcRayCaster"]
+
+
 

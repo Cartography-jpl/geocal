@@ -55,3 +55,5 @@ public:
 	       self.gdal_raster_image(0).number_tile_sample)
 };
 }
+// List of things "import *" will include
+%python_export("GdalMultiBand")

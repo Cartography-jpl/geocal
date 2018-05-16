@@ -264,4 +264,7 @@ GdalDem_swigregister = _gdal_dem.GdalDem_swigregister
 GdalDem_swigregister(GdalDem)
 
 
+__all__ = ["GdalDem"]
+
+
 

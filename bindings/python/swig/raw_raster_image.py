@@ -274,4 +274,7 @@ def RawRasterImage_read_all_bands(Fname):
     return _raw_raster_image.RawRasterImage_read_all_bands(Fname)
 
 
+__all__ = ["RawRasterImage"]
+
+
 

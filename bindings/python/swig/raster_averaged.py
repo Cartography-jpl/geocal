@@ -592,4 +592,7 @@ AveragedImageGroundConnection_swigregister = _raster_averaged.AveragedImageGroun
 AveragedImageGroundConnection_swigregister(AveragedImageGroundConnection)
 
 
+__all__ = ["RasterAveraged","RasterAveragedMultiBand","ImageMaskAveraged","AveragedImageGroundConnection"]
+
+
 

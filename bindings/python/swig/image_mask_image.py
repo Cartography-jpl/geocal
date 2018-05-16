@@ -279,4 +279,7 @@ ImageMaskImage_swigregister = _image_mask_image.ImageMaskImage_swigregister
 ImageMaskImage_swigregister(ImageMaskImage)
 
 
+__all__ = ["ImageMaskImage"]
+
+
 

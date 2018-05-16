@@ -256,4 +256,7 @@ SmoothImage_swigregister = _smooth_image.SmoothImage_swigregister
 SmoothImage_swigregister(SmoothImage)
 
 
+__all__ = ["SmoothImage"]
+
+
 

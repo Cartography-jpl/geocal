@@ -225,4 +225,7 @@ CalcRasterMultiBand_swigregister = _calc_raster_multi_band.CalcRasterMultiBand_s
 CalcRasterMultiBand_swigregister(CalcRasterMultiBand)
 
 
+__all__ = ["CalcRasterMultiBand"]
+
+
 

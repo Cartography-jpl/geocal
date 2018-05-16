@@ -252,4 +252,7 @@ IgcMultiplePass_swigregister = _igc_multiple_pass.IgcMultiplePass_swigregister
 IgcMultiplePass_swigregister(IgcMultiplePass)
 
 
+__all__ = ["IgcMultiplePass"]
+
+
 

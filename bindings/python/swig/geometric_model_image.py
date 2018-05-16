@@ -289,4 +289,7 @@ GeometricModelImage_swigregister = _geometric_model_image.GeometricModelImage_sw
 GeometricModelImage_swigregister(GeometricModelImage)
 
 
+__all__ = ["GeometricModelImage"]
+
+
 

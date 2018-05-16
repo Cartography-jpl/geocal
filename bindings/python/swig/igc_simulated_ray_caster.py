@@ -336,4 +336,7 @@ IgcSimulatedRayCaster_swigregister = _igc_simulated_ray_caster.IgcSimulatedRayCa
 IgcSimulatedRayCaster_swigregister(IgcSimulatedRayCaster)
 
 
+__all__ = ["IgcSimulatedRayCaster"]
+
+
 

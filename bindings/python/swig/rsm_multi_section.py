@@ -356,4 +356,7 @@ def RsmMultiSection_read_tre_string(Tre_in):
     return _rsm_multi_section.RsmMultiSection_read_tre_string(Tre_in)
 
 
+__all__ = ["RsmMultiSection"]
+
+
 

@@ -324,4 +324,7 @@ MagnifyBilinearImageGroundConnection_swigregister = _magnify_bilinear.MagnifyBil
 MagnifyBilinearImageGroundConnection_swigregister(MagnifyBilinearImageGroundConnection)
 
 
+__all__ = ["MagnifyBilinear","MagnifyBilinearImageGroundConnection"]
+
+
 

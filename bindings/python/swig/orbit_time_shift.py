@@ -263,4 +263,7 @@ OrbitTimeShift_swigregister = _orbit_time_shift.OrbitTimeShift_swigregister
 OrbitTimeShift_swigregister(OrbitTimeShift)
 
 
+__all__ = ["OrbitTimeShift"]
+
+
 

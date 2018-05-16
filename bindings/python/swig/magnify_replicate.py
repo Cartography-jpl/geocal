@@ -248,4 +248,7 @@ MagnifyReplicate_swigregister = _magnify_replicate.MagnifyReplicate_swigregister
 MagnifyReplicate_swigregister(MagnifyReplicate)
 
 
+__all__ = ["MagnifyReplicate"]
+
+
 

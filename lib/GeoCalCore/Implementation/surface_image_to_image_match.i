@@ -68,3 +68,5 @@ def __reduce__(self):
 
 
 
+// List of things "import *" will include
+%python_export("SurfaceImageToImageMatch")

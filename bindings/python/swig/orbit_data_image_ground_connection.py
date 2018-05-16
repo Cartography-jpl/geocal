@@ -384,4 +384,7 @@ OrbitDataImageGroundConnection_swigregister = _orbit_data_image_ground_connectio
 OrbitDataImageGroundConnection_swigregister(OrbitDataImageGroundConnection)
 
 
+__all__ = ["OrbitDataImageGroundConnection"]
+
+
 

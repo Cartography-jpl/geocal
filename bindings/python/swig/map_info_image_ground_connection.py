@@ -229,4 +229,7 @@ MapInfoImageGroundConnection_swigregister = _map_info_image_ground_connection.Ma
 MapInfoImageGroundConnection_swigregister(MapInfoImageGroundConnection)
 
 
+__all__ = ["MapInfoImageGroundConnection"]
+
+
 

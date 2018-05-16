@@ -321,4 +321,7 @@ RsmPolynomial_swigregister = _rsm_polynomial.RsmPolynomial_swigregister
 RsmPolynomial_swigregister(RsmPolynomial)
 
 
+__all__ = ["RsmPolynomial"]
+
+
 

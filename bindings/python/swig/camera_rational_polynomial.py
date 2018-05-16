@@ -281,4 +281,7 @@ CameraRationalPolyomial_swigregister = _camera_rational_polynomial.CameraRationa
 CameraRationalPolyomial_swigregister(CameraRationalPolyomial)
 
 
+__all__ = ["CameraRationalPolyomial"]
+
+
 

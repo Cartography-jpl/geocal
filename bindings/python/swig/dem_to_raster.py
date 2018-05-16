@@ -214,4 +214,7 @@ DemToRaster_swigregister = _dem_to_raster.DemToRaster_swigregister
 DemToRaster_swigregister(DemToRaster)
 
 
+__all__ = ["DemToRaster"]
+
+
 

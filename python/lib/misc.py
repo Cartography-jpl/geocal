@@ -6,7 +6,7 @@ import os
 import errno
 import sys
 import re
-from geocal_swig import *
+import geocal_swig
 import pickle
 
 # This contains miscellenous routines that don't really belong anywhere else.
@@ -24,8 +24,8 @@ def makedirs_p(dir):
 def cib01_data():
     '''This return a raster image that can be used to read the CIB
     1 meter data.'''
-    return VicarMultiFile(os.environ["CIB1_ROOT"] + "/cib01_db.int",
-                          os.environ["CIB1_ROOT"], ".img")
+    return geocal_swig.VicarMultiFile(os.environ["CIB1_ROOT"] + "/cib01_db.int",
+                                      os.environ["CIB1_ROOT"], ".img")
 
 def _write_cib01_mapinfo():
     '''Write out cib01 map info for when we don't have CIB 1 data available'''
@@ -49,8 +49,8 @@ def cib01_mapinfo(desired_resolution = None):
 def planet_mapinfo(naif_code, desired_resolution = 1):
     '''Like cib01_mapinfo, but for other planets. We have this as
     Planetocentric, sized to the desired resolution in meters'''
-    cconv = PlanetocentricConverter(naif_code)
-    mi = MapInfo(cconv,0,1,1,0,10,10)
+    cconv = geocal_swig.PlanetocentricConverter(naif_code)
+    mi = geocal_swig.MapInfo(cconv,0,1,1,0,10,10)
     mi = mi.scale(desired_resolution/mi.resolution_meter,
                   desired_resolution/mi.resolution_meter)
     return mi

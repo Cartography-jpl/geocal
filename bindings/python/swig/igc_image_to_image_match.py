@@ -263,4 +263,7 @@ IgcImageToImageMatch_swigregister = _igc_image_to_image_match.IgcImageToImageMat
 IgcImageToImageMatch_swigregister(IgcImageToImageMatch)
 
 
+__all__ = ["IgcImageToImageMatch"]
+
+
 

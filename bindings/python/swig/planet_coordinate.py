@@ -655,4 +655,7 @@ PlanetSimpleDem_swigregister = _planet_coordinate.PlanetSimpleDem_swigregister
 PlanetSimpleDem_swigregister(PlanetSimpleDem)
 
 
+__all__ = ["PlanetConstant","PlanetFixed","PlanetInertial","Planetocentric","PlanetocentricConverter","PlanetSimpleDem"]
+
+
 

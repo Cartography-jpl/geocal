@@ -245,4 +245,7 @@ CameraRadialDistortion_swigregister = _camera_radial_distortion.CameraRadialDist
 CameraRadialDistortion_swigregister(CameraRadialDistortion)
 
 
+__all__ = ["CameraRadialDistortion"]
+
+
 

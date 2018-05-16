@@ -242,4 +242,7 @@ RsmRpPlusGrid_swigregister = _rsm_rp_plus_grid.RsmRpPlusGrid_swigregister
 RsmRpPlusGrid_swigregister(RsmRpPlusGrid)
 
 
+__all__ = ["RsmRpPlusGrid"]
+
+
 

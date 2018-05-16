@@ -271,4 +271,7 @@ DemTiledFile_swigregister = _dem_tiled_file.DemTiledFile_swigregister
 DemTiledFile_swigregister(DemTiledFile)
 
 
+__all__ = ["DemTiledFile"]
+
+
 

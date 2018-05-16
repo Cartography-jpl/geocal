@@ -273,4 +273,7 @@ TleOrbit_swigregister = _tle_orbit.TleOrbit_swigregister
 TleOrbit_swigregister(TleOrbit)
 
 
+__all__ = ["TleOrbit"]
+
+
 

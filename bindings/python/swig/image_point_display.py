@@ -226,4 +226,7 @@ ImagePointDisplay_swigregister = _image_point_display.ImagePointDisplay_swigregi
 ImagePointDisplay_swigregister(ImagePointDisplay)
 
 
+__all__ = ["ImagePointDisplay"]
+
+
 

@@ -21,3 +21,5 @@ public:
   virtual void write(int Line, int Sample, int Val);
 };
 }
+// List of things "import *" will include
+%python_export("GdalMultiFile")

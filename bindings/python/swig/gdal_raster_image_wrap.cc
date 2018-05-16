@@ -13994,7 +13994,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"GdalRasterImage_save", _wrap_GdalRasterImage_save, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GdalRasterImage::save(const std::string &Oname, const std::string &Driver, const\n"
-		"std::vector< const RasterImage *> &d, int Dt=GDT_Byte, const\n"
+		"std::vector< const RasterImage * > &d, int Dt=GDT_Byte, const\n"
 		"std::string &Option=\"\", bool Require_copy=false, int\n"
 		"Fill_value=-1000)\n"
 		"Copy the given RasterImages into a new file, using the given driver\n"

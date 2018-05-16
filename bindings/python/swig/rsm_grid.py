@@ -585,4 +585,7 @@ def RsmGrid_read_tre_string(Tre_in):
     return _rsm_grid.RsmGrid_read_tre_string(Tre_in)
 
 
+__all__ = ["RsmGrid"]
+
+
 

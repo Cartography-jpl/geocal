@@ -266,4 +266,7 @@ OrbitPiecewiseCorrection_swigregister = _orbit_piecewise_correction.OrbitPiecewi
 OrbitPiecewiseCorrection_swigregister(OrbitPiecewiseCorrection)
 
 
+__all__ = ["OrbitPiecewiseCorrection"]
+
+
 

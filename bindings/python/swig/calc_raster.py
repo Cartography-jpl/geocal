@@ -219,4 +219,7 @@ CalcRaster_swigregister = _calc_raster.CalcRaster_swigregister
 CalcRaster_swigregister(CalcRaster)
 
 
+__all__ = ["CalcRaster"]
+
+
 

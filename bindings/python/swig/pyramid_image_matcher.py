@@ -275,4 +275,7 @@ PyramidImageMatcher_swigregister = _pyramid_image_matcher.PyramidImageMatcher_sw
 PyramidImageMatcher_swigregister(PyramidImageMatcher)
 
 
+__all__ = ["PyramidImageMatcher"]
+
+
 

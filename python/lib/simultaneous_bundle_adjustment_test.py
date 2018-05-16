@@ -9,6 +9,7 @@ from geocal.image_ground_connection import *
 from geocal.simultaneous_bundle_adjustment import *
 from geocal.lm_optimize import *
 from geocal.sqlite_shelf import *
+from geocal_swig import VicarLiteRasterImage
 import scipy.optimize
 import pickle
 from test_support import *

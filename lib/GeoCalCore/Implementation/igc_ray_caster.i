@@ -27,3 +27,6 @@ public:
   %pickle_serialization();
 };
 }
+
+// List of things "import *" will include
+%python_export("IgcRayCaster")

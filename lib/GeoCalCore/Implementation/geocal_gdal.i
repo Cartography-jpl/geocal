@@ -73,3 +73,7 @@ public:
 // 			  bool Log_progress = false);
 
 }
+
+
+// List of things "import *" will include
+%python_export("GdalBase")

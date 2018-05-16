@@ -342,4 +342,7 @@ Refraction_swigregister = _refraction.Refraction_swigregister
 Refraction_swigregister(Refraction)
 
 
+__all__ = ["Refraction"]
+
+
 

@@ -266,4 +266,7 @@ GroundMaskImage_swigregister = _ground_mask_image.GroundMaskImage_swigregister
 GroundMaskImage_swigregister(GroundMaskImage)
 
 
+__all__ = ["GroundMaskImage"]
+
+
 

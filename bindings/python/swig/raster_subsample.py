@@ -268,4 +268,7 @@ RasterSubSample_swigregister = _raster_subsample.RasterSubSample_swigregister
 RasterSubSample_swigregister(RasterSubSample)
 
 
+__all__ = ["RasterSubSample"]
+
+
 

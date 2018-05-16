@@ -17,3 +17,5 @@ public:
   %pickle_init(1, self.raw_image, self.map_info)
 };
 }
+// List of things "import *" will include
+%python_export("MapReprojectedImage")

@@ -255,4 +255,7 @@ MapReprojectedImage_swigregister = _map_reprojected_image.MapReprojectedImage_sw
 MapReprojectedImage_swigregister(MapReprojectedImage)
 
 
+__all__ = ["MapReprojectedImage"]
+
+
 

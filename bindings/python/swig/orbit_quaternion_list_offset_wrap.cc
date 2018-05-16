@@ -6570,6 +6570,244 @@ SWIGINTERN PyObject *OrbitQuaternionListOffset_swiginit(PyObject *SWIGUNUSEDPARM
   return SWIG_Python_InitShadowInstance(args);
 }
 
+SWIGINTERN PyObject *_wrap_new_OrbitScCoorOffset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::Orbit > *arg1 = 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit > temp2shared1 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  PyObject *swig_obj[2] ;
+  GeoCal::OrbitScCoorOffset *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"new_OrbitScCoorOffset",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitScCoorOffset" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::Orbit > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitScCoorOffset', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitScCoorOffset', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    try {
+      result = (GeoCal::OrbitScCoorOffset *)new GeoCal::OrbitScCoorOffset((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(blitz::Array< double,1 > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitScCoorOffset > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitScCoorOffset >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitScCoorOffset_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitScCoorOffset_orbit_data__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitScCoorOffset *arg1 = (GeoCal::OrbitScCoorOffset *) 0 ;
+  GeoCal::Time arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitScCoorOffset const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitScCoorOffset const > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitScCoorOffset_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitScCoorOffset_orbit_data" "', argument " "1"" of type '" "GeoCal::OrbitScCoorOffset const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitScCoorOffset > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitScCoorOffset > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitScCoorOffset * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitScCoorOffset > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitScCoorOffset * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitScCoorOffset_orbit_data" "', argument " "2"" of type '" "GeoCal::Time""'"); 
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitScCoorOffset_orbit_data" "', argument " "2"" of type '" "GeoCal::Time""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OrbitScCoorOffset const *)arg1)->orbit_data(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitScCoorOffset_orbit_data__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitScCoorOffset *arg1 = (GeoCal::OrbitScCoorOffset *) 0 ;
+  GeoCal::TimeWithDerivative *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitScCoorOffset const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitScCoorOffset const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > tempshared2 ;
+  boost::shared_ptr< GeoCal::OrbitData > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitScCoorOffset_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitScCoorOffset_orbit_data" "', argument " "1"" of type '" "GeoCal::OrbitScCoorOffset const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitScCoorOffset > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitScCoorOffset > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitScCoorOffset * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitScCoorOffset > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitScCoorOffset * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::TimeWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__TimeWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitScCoorOffset_orbit_data" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitScCoorOffset_orbit_data" "', argument " "2"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::TimeWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::TimeWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::TimeWithDerivative > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OrbitScCoorOffset const *)arg1)->orbit_data((GeoCal::TimeWithDerivative const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitScCoorOffset_orbit_data(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitScCoorOffset_orbit_data",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_OrbitScCoorOffset_orbit_data__SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 2) {
+    return _wrap_OrbitScCoorOffset_orbit_data__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitScCoorOffset_orbit_data'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitScCoorOffset::orbit_data(GeoCal::Time) const\n"
+    "    GeoCal::OrbitScCoorOffset::orbit_data(GeoCal::TimeWithDerivative const &) const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_OrbitScCoorOffset__v_orbit_underlying(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitScCoorOffset *arg1 = (GeoCal::OrbitScCoorOffset *) 0 ;
@@ -6721,6 +6959,10 @@ SWIGINTERN PyObject *OrbitScCoorOffset_swigregister(PyObject *SWIGUNUSEDPARM(sel
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *OrbitScCoorOffset_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -6768,6 +7010,20 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitQuaternionListOffset_swigregister", OrbitQuaternionListOffset_swigregister, METH_VARARGS, NULL},
 	 { (char *)"OrbitQuaternionListOffset_swiginit", OrbitQuaternionListOffset_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_OrbitScCoorOffset", _wrap_new_OrbitScCoorOffset, METH_VARARGS, (char *)"\n"
+		"\n"
+		"GeoCal::OrbitScCoorOffset::OrbitScCoorOffset(const boost::shared_ptr< Orbit > &Orbit_underlying, const\n"
+		"blitz::Array< double, 1 > &Position_offset_sc_coordinate)\n"
+		"Constructor.\n"
+		"\n"
+		"Add a fixed offset to the position in meters, in space craft\n"
+		"coordinate system. \n"
+		""},
+	 { (char *)"OrbitScCoorOffset_orbit_data", _wrap_OrbitScCoorOffset_orbit_data, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual boost::shared_ptr<OrbitData> GeoCal::OrbitScCoorOffset::orbit_data(const TimeWithDerivative &T) const\n"
+		"\n"
+		""},
 	 { (char *)"OrbitScCoorOffset__v_orbit_underlying", (PyCFunction)_wrap_OrbitScCoorOffset__v_orbit_underlying, METH_O, (char *)"\n"
 		"\n"
 		"boost::shared_ptr<Orbit> GeoCal::OrbitScCoorOffset::orbit_underlying() const\n"
@@ -6785,6 +7041,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"OrbitScCoorOffset_swigregister", OrbitScCoorOffset_swigregister, METH_VARARGS, NULL},
+	 { (char *)"OrbitScCoorOffset_swiginit", OrbitScCoorOffset_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

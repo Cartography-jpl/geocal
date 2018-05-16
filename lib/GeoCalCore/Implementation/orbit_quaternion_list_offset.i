@@ -26,6 +26,9 @@ public:
   OrbitScCoorOffset(const boost::shared_ptr<Orbit>&
       Orbit_underlying, const blitz::Array<double, 1>&
       Position_offset_sc_coordinate);
+  virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
+    const;
   %python_attribute(orbit_underlying, boost::shared_ptr<Orbit>);
   %python_attribute(position_offset_sc_coordinate, blitz::Array<double, 1>);
   %pickle_serialization()

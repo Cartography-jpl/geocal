@@ -273,10 +273,28 @@ class OrbitScCoorOffset(geocal_swig.orbit.Orbit):
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, Orbit_underlying, Position_offset_sc_coordinate):
+        """
+
+        GeoCal::OrbitScCoorOffset::OrbitScCoorOffset(const boost::shared_ptr< Orbit > &Orbit_underlying, const
+        blitz::Array< double, 1 > &Position_offset_sc_coordinate)
+        Constructor.
+
+        Add a fixed offset to the position in meters, in space craft
+        coordinate system. 
+        """
+        _orbit_quaternion_list_offset.OrbitScCoorOffset_swiginit(self, _orbit_quaternion_list_offset.new_OrbitScCoorOffset(Orbit_underlying, Position_offset_sc_coordinate))
+
+    def orbit_data(self, *args):
+        """
+
+        virtual boost::shared_ptr<OrbitData> GeoCal::OrbitScCoorOffset::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _orbit_quaternion_list_offset.OrbitScCoorOffset_orbit_data(self, *args)
+
 
     def _v_orbit_underlying(self):
         """
@@ -311,6 +329,7 @@ class OrbitScCoorOffset(geocal_swig.orbit.Orbit):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_quaternion_list_offset.delete_OrbitScCoorOffset
+OrbitScCoorOffset.orbit_data = new_instancemethod(_orbit_quaternion_list_offset.OrbitScCoorOffset_orbit_data, None, OrbitScCoorOffset)
 OrbitScCoorOffset._v_orbit_underlying = new_instancemethod(_orbit_quaternion_list_offset.OrbitScCoorOffset__v_orbit_underlying, None, OrbitScCoorOffset)
 OrbitScCoorOffset._v_position_offset_sc_coordinate = new_instancemethod(_orbit_quaternion_list_offset.OrbitScCoorOffset__v_position_offset_sc_coordinate, None, OrbitScCoorOffset)
 OrbitScCoorOffset_swigregister = _orbit_quaternion_list_offset.OrbitScCoorOffset_swigregister

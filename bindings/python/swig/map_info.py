@@ -203,6 +203,13 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     this comment so you can understand where the various "0.5" terms
     come in.
 
+    We have a field indicating if the pixels are points or area. Note that
+    we follow the GDAL convention - the value of the field doesn't change
+    the geotiff parameters or any of the other fields. (-0.5, -0.5) is the
+    ulc of the area, regardless of if we are point or area. But the value
+    of this tells how to interpret the pixels in the RasterImage that this
+    MapInfo is attached to - either as points or averages over area.
+
     C++ includes: map_info.h 
     """
 
@@ -214,7 +221,7 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
 
         MapInfo::MapInfo(const boost::shared_ptr< CoordinateConverter > &Conv, const
         blitz::Array< double, 1 > &Param, int Number_x_pixel, int
-        Number_y_pixel)
+        Number_y_pixel, bool Is_point=false)
         Constructor that takes the affine parameters.
 
         Note that the parameters should be such that the ulc is at coordinates
@@ -235,6 +242,24 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     @property
     def coordinate_converter(self):
         return self._v_coordinate_converter()
+
+
+    def _v_is_point(self):
+        """
+
+        bool GeoCal::MapInfo::is_point() const
+        True if we should interpret pixel as a point.
+
+        Note that this doesn't change the coordinate calculation at all,
+        (-0.5,-0.5) is still the coordinate of the area covered by the pixel.
+
+        """
+        return _map_info.MapInfo__v_is_point(self)
+
+
+    @property
+    def is_point(self):
+        return self._v_is_point()
 
 
     def coordinate(self, Gc):
@@ -477,6 +502,7 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _map_info.delete_MapInfo
 MapInfo._v_coordinate_converter = new_instancemethod(_map_info.MapInfo__v_coordinate_converter, None, MapInfo)
+MapInfo._v_is_point = new_instancemethod(_map_info.MapInfo__v_is_point, None, MapInfo)
 MapInfo.coordinate = new_instancemethod(_map_info.MapInfo_coordinate, None, MapInfo)
 MapInfo.cover = new_instancemethod(_map_info.MapInfo_cover, None, MapInfo)
 MapInfo.ground_coordinate = new_instancemethod(_map_info.MapInfo_ground_coordinate, None, MapInfo)

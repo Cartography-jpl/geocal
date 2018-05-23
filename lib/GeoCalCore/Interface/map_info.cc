@@ -13,6 +13,10 @@ void MapInfo::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(MapInfo);
   ar & GEOCAL_NVP_(conv) & GEOCAL_NVP_(number_x_pixel) 
     & GEOCAL_NVP_(number_y_pixel) & GEOCAL_NVP(param);
+  // Older version didn't have is_point_. The default was to always
+  // assume pixel is area.
+  if(version > 0)
+    ar & GEOCAL_NVP_(is_point);
 }
 
 GEOCAL_IMPLEMENT(MapInfo);
@@ -30,9 +34,10 @@ GEOCAL_IMPLEMENT(MapInfo);
 //-----------------------------------------------------------------------
 
 MapInfo::MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, 
-		   double Ulc_x, double Ulc_y, double Lrc_x, double Lrc_y, 
-		   int Number_x_pixel, int Number_y_pixel)
+		 double Ulc_x, double Ulc_y, double Lrc_x, double Lrc_y, 
+		 int Number_x_pixel, int Number_y_pixel, bool Is_point)
   : conv_(Conv),
+    is_point_(Is_point),
     number_x_pixel_(Number_x_pixel),
     number_y_pixel_(Number_y_pixel),
     param(6)
@@ -63,8 +68,9 @@ MapInfo::MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv,
 MapInfo::MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, 
 	  const blitz::Array<double, 1>& Param,
 	  int Number_x_pixel, 
-	  int Number_y_pixel)
+		 int Number_y_pixel, bool Is_point)
   : conv_(Conv),
+    is_point_(Is_point),
     number_x_pixel_(Number_x_pixel),
     number_y_pixel_(Number_y_pixel),
     param(Param.copy())
@@ -254,7 +260,8 @@ void MapInfo::print(std::ostream& Os) const
   Os << "ULC:       (" << ulc_x() << ", " << ulc_y() << ")\n"
      << "LRC:       (" << lrc_x() << ", " << lrc_y() << ")\n"
      << "Number:    (" << number_x_pixel() << ", "
-     << number_y_pixel() << ")\n";
+     << number_y_pixel() << ")\n"
+     << "Pixel:     " << (is_point() ? "Is point" : "Is area") << "\n";
 }
 
 //-----------------------------------------------------------------------

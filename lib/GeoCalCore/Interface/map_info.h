@@ -28,6 +28,14 @@ namespace GeoCal {
   at (0, 0). This class handles this difference, but we mention this
   in this comment so you can understand where the various "0.5" terms
   come in.
+
+  We have a field indicating if the pixels are points or area. Note
+  that we follow the GDAL convention - the value of the field doesn't
+  change the geotiff parameters or any of the other fields. (-0.5,
+  -0.5) is the ulc of the area, regardless of if we are point or area.
+  But the value of this tells how to interpret the pixels in the
+  RasterImage that this MapInfo is attached to - either as points or
+  averages over area.
 *******************************************************************/
 
 class MapInfo : public Printable<MapInfo> {
@@ -36,18 +44,19 @@ public:
 /// Default constructor.
 //-----------------------------------------------------------------------
 
-  MapInfo() : param(6) {}
+  MapInfo() : is_point_(false), param(6) {}
   MapInfo(const MapInfo& Mi)
-    : conv_(Mi.conv_), number_x_pixel_(Mi.number_x_pixel_),
+    : conv_(Mi.conv_), is_point_(Mi.is_point_),
+      number_x_pixel_(Mi.number_x_pixel_),
       number_y_pixel_(Mi.number_y_pixel_), param(Mi.param.copy()) {}
 
   MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, double Ulc_x, 
 	  double Ulc_y, double Lrc_x, double Lrc_y, int Number_x_pixel, 
-	  int Number_y_pixel);
+	  int Number_y_pixel, bool Is_point=false);
   MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, 
 	  const blitz::Array<double, 1>& Param,
 	  int Number_x_pixel, 
-	  int Number_y_pixel);
+	  int Number_y_pixel, bool Is_point=false);
 
 //-----------------------------------------------------------------------
 /// Coordinate converter used by map projection.
@@ -80,6 +89,14 @@ public:
   MapInfo intersection(const MapInfo& Mi) const;
   MapInfo map_union(const MapInfo& Mi) const;
 
+//-----------------------------------------------------------------------
+/// True if we should interpret pixel as a point. Note that this
+/// doesn't change the coordinate calculation at all, (-0.5,-0.5) is
+/// still the coordinate of the area covered by the pixel.
+//-----------------------------------------------------------------------
+
+  bool is_point() const { return is_point_;}
+  
 //-----------------------------------------------------------------------
 /// Convert pixel index to pixel coordinate.
 //-----------------------------------------------------------------------
@@ -181,7 +198,10 @@ public:
   void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<CoordinateConverter> conv_; ///< Coordinate
-						///converter for map projection.
+						///converter for map
+						///projection.
+  bool is_point_;		///< True if pixel should be
+                                /// interpreted as a point
   int number_x_pixel_;          ///< Number of X pixels in image
   int number_y_pixel_;		///< Number of Y pixels in image
   blitz::Array<double, 1> param; ///< Affine parameters.
@@ -192,4 +212,5 @@ private:
 };
 }
 GEOCAL_EXPORT_KEY(MapInfo);
+GEOCAL_CLASS_VERSION(MapInfo, 1);
 #endif

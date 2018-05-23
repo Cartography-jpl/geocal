@@ -5525,6 +5525,20 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
@@ -6518,6 +6532,116 @@ SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_1(PyObject *SWIGUNUSEDPARM(self), i
   double arg5 ;
   int arg6 ;
   int arg7 ;
+  bool arg8 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CoordinateConverter > tempshared1 ;
+  boost::shared_ptr< GeoCal::CoordinateConverter > temp2shared1 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  GeoCal::MapInfo *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MapInfo" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::CoordinateConverter > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::CoordinateConverter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::CoordinateConverter > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::CoordinateConverter > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_MapInfo" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_MapInfo" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_MapInfo" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_MapInfo" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_MapInfo" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_MapInfo" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_MapInfo" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = (GeoCal::MapInfo *)new GeoCal::MapInfo((boost::shared_ptr< GeoCal::CoordinateConverter > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::MapInfo > *smartresult = result ? new boost::shared_ptr<  GeoCal::MapInfo >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::CoordinateConverter > *arg1 = 0 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  double arg5 ;
+  int arg6 ;
+  int arg7 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::CoordinateConverter > tempshared1 ;
@@ -6611,7 +6735,105 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::CoordinateConverter > *arg1 = 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  bool arg5 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CoordinateConverter > tempshared1 ;
+  boost::shared_ptr< GeoCal::CoordinateConverter > temp2shared1 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  GeoCal::MapInfo *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MapInfo" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::CoordinateConverter > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::CoordinateConverter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::CoordinateConverter > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::CoordinateConverter > * >(argp1) : &tempshared1;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MapInfo', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_MapInfo', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_MapInfo" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_MapInfo" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_MapInfo" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  {
+    try {
+      result = (GeoCal::MapInfo *)new GeoCal::MapInfo((boost::shared_ptr< GeoCal::CoordinateConverter > const &)*arg1,(blitz::Array< double,1 > const &)*arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::MapInfo > *smartresult = result ? new boost::shared_ptr<  GeoCal::MapInfo >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::CoordinateConverter > *arg1 = 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -6703,19 +6925,25 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_MapInfo(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[8] = {
+  PyObject *argv[9] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_MapInfo",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_MapInfo",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
     return _wrap_new_MapInfo__SWIG_0(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_MapInfo__SWIG_2(self, argc, argv);
+    return _wrap_new_MapInfo__SWIG_4(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_MapInfo__SWIG_3(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_MapInfo__SWIG_2(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_MapInfo__SWIG_1(self, argc, argv);
   }
   
@@ -6723,7 +6951,9 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_MapInfo'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::MapInfo::MapInfo()\n"
+    "    GeoCal::MapInfo::MapInfo(boost::shared_ptr< GeoCal::CoordinateConverter > const &,double,double,double,double,int,int,bool)\n"
     "    GeoCal::MapInfo::MapInfo(boost::shared_ptr< GeoCal::CoordinateConverter > const &,double,double,double,double,int,int)\n"
+    "    GeoCal::MapInfo::MapInfo(boost::shared_ptr< GeoCal::CoordinateConverter > const &,blitz::Array< double,1 > const &,int,int,bool)\n"
     "    GeoCal::MapInfo::MapInfo(boost::shared_ptr< GeoCal::CoordinateConverter > const &,blitz::Array< double,1 > const &,int,int)\n");
   return 0;
 }
@@ -6768,6 +6998,49 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_coordinate_converter(PyObject *SWIGUNUSEDP
   {
     resultobj = GeoCal::swig_to_python(result);
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo__v_is_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MapInfo const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MapInfo__v_is_point" "', argument " "1"" of type '" "GeoCal::MapInfo const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::MapInfo const *)arg1)->is_point();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
   return NULL;
@@ -8219,7 +8492,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"MapInfo::MapInfo(const boost::shared_ptr< CoordinateConverter > &Conv, const\n"
 		"blitz::Array< double, 1 > &Param, int Number_x_pixel, int\n"
-		"Number_y_pixel)\n"
+		"Number_y_pixel, bool Is_point=false)\n"
 		"Constructor that takes the affine parameters.\n"
 		"\n"
 		"Note that the parameters should be such that the ulc is at coordinates\n"
@@ -8230,6 +8503,15 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"const boost::shared_ptr<CoordinateConverter>& GeoCal::MapInfo::coordinate_converter_ptr() const\n"
 		"Pointer to Coordinate converter used by map projection. \n"
+		""},
+	 { (char *)"MapInfo__v_is_point", (PyCFunction)_wrap_MapInfo__v_is_point, METH_O, (char *)"\n"
+		"\n"
+		"bool GeoCal::MapInfo::is_point() const\n"
+		"True if we should interpret pixel as a point.\n"
+		"\n"
+		"Note that this doesn't change the coordinate calculation at all,\n"
+		"(-0.5,-0.5) is still the coordinate of the area covered by the pixel.\n"
+		"\n"
 		""},
 	 { (char *)"MapInfo_coordinate", _wrap_MapInfo_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"

@@ -18,13 +18,14 @@ public:
   MapInfo() {}
   MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, double Ulc_x, 
 	  double Ulc_y, double Lrc_x, double Lrc_y, int Number_x_pixel, 
-	  int Number_y_pixel);
+	  int Number_y_pixel, bool Is_point=false);
   MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, 
 	  const blitz::Array<double, 1>& Param,
 	  int Number_x_pixel, 
-	  int Number_y_pixel);
+	  int Number_y_pixel, bool Is_point=false);
   %python_attribute2(coordinate_converter, coordinate_converter_ptr,
 		     boost::shared_ptr<CoordinateConverter>)
+  %python_attribute(is_point, bool);
   void coordinate(const GroundCoordinate& Gc, double& OUTPUT, 
 		  double& OUTPUT) const;
   MapInfo cover(const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt,

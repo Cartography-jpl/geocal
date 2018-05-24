@@ -32,7 +32,7 @@ GEOCAL_IMPLEMENT(OrbitListCache);
 // See base class for description.
 boost::shared_ptr<OrbitData> OrbitQuaternionList::orbit_data(Time T) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
   time_map::iterator i = orbit_data_map.lower_bound(T);
   check_lazy_evaluation(i);
   if(i->first - T == 0.0)
@@ -48,7 +48,7 @@ boost::shared_ptr<OrbitData> OrbitQuaternionList::orbit_data(Time T) const
 boost::shared_ptr<OrbitData> 
 OrbitQuaternionList::orbit_data(const TimeWithDerivative& T) const
 {
-  range_check(T.value(), min_time(), max_time());
+  range_check_inclusive(T.value(), min_time(), max_time());
   time_map::iterator i = orbit_data_map.lower_bound(T.value());
   // Special handling if we are looking at the very first point
   if(i == orbit_data_map.begin() && i->first - T == 0.0)
@@ -63,7 +63,7 @@ OrbitQuaternionList::orbit_data(const TimeWithDerivative& T) const
 
 boost::shared_ptr<CartesianFixed> OrbitQuaternionList::position_cf(Time T) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
   time_map::iterator i = orbit_data_map.lower_bound(T);
   check_lazy_evaluation(i);
   if(i->first - T == 0.0)
@@ -91,7 +91,7 @@ boost::shared_ptr<CartesianFixed> OrbitQuaternionList::position_cf(Time T) const
 ScLookVector OrbitQuaternionList::sc_look_vector
 (Time T, const CartesianFixed& Pt) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
   time_map::iterator i = orbit_data_map.lower_bound(T);
   check_lazy_evaluation(i);
   if(i->first - T == 0.0) {

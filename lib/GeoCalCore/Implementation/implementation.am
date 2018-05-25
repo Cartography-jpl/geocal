@@ -204,6 +204,7 @@ if HAVE_GDAL
 endif # End HAVE_GDAL
 if HAVE_HDF5
   geocal_test_all_SOURCES+= @srcimplementation@/hdf_orbit_test.cc
+  geocal_test_all_SOURCES+= @srcimplementation@/orbit_quaternion_list_offset_test.cc
 endif
 
 libgeocal_la_SOURCES+= @srcimplementation@/spice_helper.cc
@@ -466,7 +467,6 @@ geocal_test_all_SOURCES+= @srcimplementation@/local_rectangular_coordinate_test.
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/mola_dem_file_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/context_sqrt_decode_image_test.cc
-geocal_test_all_SOURCES+= @srcimplementation@/orbit_quaternion_list_offset_test.cc
 
 EXTRA_DIST += @srcimplementation@/rsm_fixture.h
 

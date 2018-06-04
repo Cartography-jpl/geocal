@@ -144,7 +144,15 @@ MapInfo GdalBase::map_info() const
   boost::array<index, 2> size = 
     {{const_cast<GDALRasterBand&>(raster_band()).GetYSize(),
       const_cast<GDALRasterBand&>(raster_band()).GetXSize()}};
-  MapInfo res(coor_conv, param, size[1], size[0]);
+  // Now, read if the data is point or area. Note that other than the
+  // metadata information the mapinfo is the same (so same param and
+  // size). But we need to record information about if the original
+  // data as pixel is point or pixel is area.
+  bool is_point = false;
+  if(has_metadata("AREA_OR_POINT") &&
+     metadata<std::string>("AREA_OR_POINT") == "Point")
+    is_point = true;
+  MapInfo res(coor_conv, param, size[1], size[0], is_point);
   return res;
 }
 
@@ -213,6 +221,9 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
   status = D.SetGeoTransform(M.transform().data());
   if(status ==CE_Failure)
     throw Exception("SetGeoTransform failed");
+  // Set pixel is point/area for data.
+  if(M.is_point())
+    D.SetMetadataItem("AREA_OR_POINT", "Point", "");
 }
 
 

@@ -439,7 +439,7 @@ MapInfo VicarLiteFile::map_info() const
 // pixel. That means we need to offset this by 1/2 pixel to match what
 // we expect in MapInfo. We check and see if the file has metadata
 // giving this information, and if so if we need to offset the pixel.
-
+  bool is_point = false;
   if(has_label("GEOTIFF GTRASTERTYPEGEOKEY")) {
     std::istringstream ise(label<string>("GTRASTERTYPEGEOKEY", "GEOTIFF"));
     int rt_id;
@@ -447,12 +447,13 @@ MapInfo VicarLiteFile::map_info() const
     if(rt_id ==2 && !force_area_pixel_) {		// Point type
       lon -= 0.5 * lon_scale;
       lat -= 0.5 * lat_scale;
+      is_point = true;
     }
   }
   MapInfo res(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
 	      lon, lat, lon + number_sample() * lon_scale,
 	      lat + number_line() * lat_scale, number_sample(),
-	      number_line());
+	      number_line(), is_point);
   return res;
 }
 

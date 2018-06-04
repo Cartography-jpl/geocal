@@ -141,6 +141,8 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
 			     ulc), 0, 1e-4);
   BOOST_CHECK_CLOSE(distance(*fpixel_is_point.ground_coordinate(0, 0),
 			     ulc), 0, 1e-4);
+  BOOST_CHECK(fpixel_is_point.map_info().is_point());
+  BOOST_CHECK(!fpixel_is_area.map_info().is_point());
 
   // Check that we can force pixel as point to pixel as area. This is
   // really meant just as a workaround for the SRTM erroneously
@@ -151,6 +153,38 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
   BOOST_CHECK_CLOSE
     (distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5),
 	      ulc), 0, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(write_pixel_is_point)
+{
+  // Test data where we have data as point instead of image. Already
+  // have test above for reading, this checks that we can write this
+  // correctly. 
+  double ulc_x = 50;
+  double ulc_y = 60;
+  double x_pixel_res = 0.25;
+  double y_pixel_res = -0.50;
+  int number_x_pixel = 100;
+  int number_y_pixel = 200;
+  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter), 
+	     ulc_x, ulc_y, 
+	     ulc_x + x_pixel_res * number_x_pixel, 
+	     ulc_y + y_pixel_res * number_y_pixel, 
+	     number_x_pixel, number_y_pixel, true);
+  VicarRasterImage d("test_out/vicar_point.img", mi, "HALF");
+  int val = 0;
+  for(int i = 0; i < d.number_line(); ++i)
+    for(int j = 0; j < d.number_sample(); ++j)
+      d.write(i,j,++val);
+  d.close();
+  VicarFile f2("test_out/vicar_point.img");
+  VicarRasterImage d2("test_out/vicar_point.img");
+  BOOST_CHECK(d.map_info().is_point());
+  BOOST_CHECK(d2.map_info().is_point());
+  BOOST_CHECK(distance(*d.ground_coordinate(0,0), *d2.ground_coordinate(0,0))
+	      < 0.1);
+  BOOST_CHECK(distance(*d.ground_coordinate(50,70),
+		       *d2.ground_coordinate(50,70)) < 0.1);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

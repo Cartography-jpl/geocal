@@ -150,6 +150,8 @@ BOOST_AUTO_TEST_CASE(vicar_lite_point_vs_area)
 			     ulc), 0, 1e-4);
   BOOST_CHECK_CLOSE(distance(*fpixel_is_point.ground_coordinate(0, 0),
 			     ulc), 0, 1e-4);
+  BOOST_CHECK(fpixel_is_point.map_info().is_point());
+  BOOST_CHECK(!fpixel_is_area.map_info().is_point());
 
   // Check that we can force pixel as point to pixel as area. This is
   // really meant just as a workaround for the SRTM erroneously

@@ -165,4 +165,43 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_EQUAL((*imgr)(10, 20), 58);
 }
 
+BOOST_AUTO_TEST_CASE(handle_point)
+{
+  // Test data where we have data as point instead of image.
+  double ulc_x = 50;
+  double ulc_y = 60;
+  double x_pixel_res = 0.25;
+  double y_pixel_res = -0.50;
+  int number_x_pixel = 100;
+  int number_y_pixel = 200;
+  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter), 
+	     ulc_x, ulc_y, 
+	     ulc_x + x_pixel_res * number_x_pixel, 
+	     ulc_y + y_pixel_res * number_y_pixel, 
+	     number_x_pixel, number_y_pixel, true);
+  GdalRasterImage d("test_out/gdal_point.tif", "gtiff", mi, 1,
+		    GdalRasterImage::Int16);
+  int val = 0;
+  for(int i = 0; i < d.number_line(); ++i)
+    for(int j = 0; j < d.number_sample(); ++j)
+      d.write(i,j,++val);
+  d.close();
+  GdalRasterImage d2("test_out/gdal_point.tif");
+  BOOST_CHECK(d2.map_info().is_point());
+  BOOST_CHECK(distance(*d.ground_coordinate(0,0), *d2.ground_coordinate(0,0))
+	      < 0.1);
+  BOOST_CHECK(distance(*d.ground_coordinate(50,70),
+		       *d2.ground_coordinate(50,70)) < 0.1);
+}
+
+BOOST_AUTO_TEST_CASE(handle_point_read)
+{
+  // Normally skip, since this depends on specific file. Note that the
+  // functionality of this is really tested already by the unit test
+  // above.
+  return;
+  GdalRasterImage f("/data/smyth/Temp/N30E075.hgt");
+  BOOST_CHECK(f.map_info().is_point());
+}
+
 BOOST_AUTO_TEST_SUITE_END()

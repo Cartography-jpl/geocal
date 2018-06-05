@@ -160,6 +160,8 @@ BOOST_AUTO_TEST_CASE(write_pixel_is_point)
   // Test data where we have data as point instead of image. Already
   // have test above for reading, this checks that we can write this
   // correctly. 
+  if(!VicarFile::vicar_available())
+    return;
   double ulc_x = 50;
   double ulc_y = 60;
   double x_pixel_res = 0.25;

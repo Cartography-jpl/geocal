@@ -65,7 +65,7 @@ endif
 if BUILD_AFIDS
 setup_geocal=source $(DESTDIR)$(prefix)/setup_afids_env.sh
 else
-setup_geocal=$(setup_afids_data) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
+setup_geocal=$(setup_afids_data) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh && export TAE_PATH=$(DESTDIR)$(afidspythonvdevdir)
 endif
 # Number of jobs to run at once. Default is to automatically determine this,
 # but you can specify a different number.

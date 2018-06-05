@@ -19511,7 +19511,7 @@ $as_echo_n "checking for BOOST library >= $boost_lib_version_req... " >&6; }
                 succeeded=no
             fi
         fi
-	if test "x$build_boost" == "xyes" ; then
+        if test "x$build_boost" == "xyes" ; then
 	   boost_version_check_needed=no
         fi
         if test "$boost_version_check_needed" = "yes"; then

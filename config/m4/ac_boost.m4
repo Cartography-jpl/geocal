@@ -125,7 +125,7 @@ if test "x$want_boost" = "xyes"; then
                 succeeded=no
             fi
         fi
-	if test "x$build_boost" == "xyes" ; then
+        if test "x$build_boost" == "xyes" ; then
 	   boost_version_check_needed=no
         fi
         if test "$boost_version_check_needed" = "yes"; then

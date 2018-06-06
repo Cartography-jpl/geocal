@@ -47,9 +47,9 @@ dist-clean-up-python:
 am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(SHELL) $(py_compile)
 
 if HAVE_AFIDS
-PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
+PYTHON_CHECK_PATH=$(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:$${PATH}:${GDAL_PREFIX}/bin
 else
-PYTHON_CHECK_PATH=$(bindir):$(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
+PYTHON_CHECK_PATH=$(afidspythonvdevdir):$${PATH}:${GDAL_PREFIX}/bin
 endif
 
 if HAVE_AFIDS_DATA

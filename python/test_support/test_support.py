@@ -49,6 +49,14 @@ def check_vicarb():
     # We just skip all the tests if we are using python 2.
     if sys.version_info < (3,5):
         return False
+    # We may have vicarb in our path, but not have actually set up AFIDS.
+    # Will this can sort of work, but mostly this causes problems since
+    # expected vicar procs aren't in the TAE_PATH. So say we  don't have
+    # vicarb if we don't have AFIDS setup, even if we find it in our path.
+    # We can revisit this if it becomes an issue, perhaps a refined
+    # require_vicarb_and_afids or something like that.
+    if("AFIDSTOP" not in os.environ):
+        return False
     return True
 
 

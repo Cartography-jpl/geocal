@@ -13822,7 +13822,7 @@ install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpytho
 @INSTALL_PYNITF_TRUE@	-chmod +w -R @geocalpkgpythondir@/../pynitf*
 @INSTALL_PYNITF_TRUE@	cd $(srcdir)/@srcpython@/pynitf && \
 @INSTALL_PYNITF_TRUE@        export LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) && \
-@INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build egg_info --egg-base=@abs_builddir@/pynitf install --prefix=$(prefix) --single-version-externally-managed --record @abs_builddir@/pynitf/files.txt
+@INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build egg_info --egg-base=@abs_builddir@/pynitf install --prefix=$(DESTDIR)$(prefix) --single-version-externally-managed --record @abs_builddir@/pynitf/files.txt
 
 @INSTALL_PYNITF_TRUE@uninstall-pynitf:
 @INSTALL_PYNITF_TRUE@	-rm -rf `cat pynitf/files.txt`

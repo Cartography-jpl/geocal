@@ -239,14 +239,12 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @INSTALL_PYNITF_TRUE@am__append_50 = install-pynitf
 @INSTALL_PYNITF_TRUE@am__append_51 = uninstall-pynitf
 @INSTALL_PYNITF_TRUE@am__append_52 = clean-pynitf
-@BUILD_AFIDS_FALSE@@HAVE_AFIDS_TRUE@am__append_53 = export AFIDSPYTHONTOP=$(prefix) && source $(AFIDS_PREFIX)/setup_afids_env.sh && export TAE_PATH=$(prefix)/afids/vdev:$${TAE_PATH} && PATH=$(prefix)/bin:$(prefix)/afids/vdev:$${PATH}
-@BUILD_AFIDS_FALSE@@HAVE_AFIDS_FALSE@am__append_54 = && source $(DESTDIR)$(prefix)/setup_geocal.sh
-@CODE_COVERAGE_ENABLED_TRUE@am__append_55 = --cov-report term \
+@CODE_COVERAGE_ENABLED_TRUE@am__append_53 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_56 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_57 = install_python_doc
+@HAVE_VICAR_RTL_TRUE@am__append_54 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_55 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -3038,7 +3036,7 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_12) $(am__append_50) $(am__append_57)
+INSTALL_DATA_HOOK = $(am__append_12) $(am__append_50) $(am__append_55)
 UNINSTALL_HOOK = $(am__append_13) $(am__append_51) \
 	clean_install_python_doc
 CLEAN_HOOK = clean_unit_test $(am__append_14) $(am__append_52)
@@ -3394,7 +3392,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_56)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_54)
 dist_afidspythonvdev_DATA = $(am__append_17) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -4030,17 +4028,15 @@ am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYT
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice && export MARS_KERNEL=$(abs_top_srcdir)/@geocalunittestdata@/mars_kernel
-@BUILD_AFIDS_FALSE@setup_geocal = $(setup_afids_data) && \
-@BUILD_AFIDS_FALSE@	$(setup_spice) $(am__append_53) \
-@BUILD_AFIDS_FALSE@	$(am__append_54)
-@BUILD_AFIDS_TRUE@setup_geocal = source \
-@BUILD_AFIDS_TRUE@	$(DESTDIR)$(prefix)/setup_afids_env.sh \
-@BUILD_AFIDS_TRUE@	$(am__append_53) $(am__append_54)
+@HAVE_AFIDS_FALSE@setup_afids = ;
+@HAVE_AFIDS_TRUE@setup_afids = export AFIDSPYTHONTOP=$(prefix) && source $(AFIDS_PREFIX)/setup_afids_env.sh && export TAE_PATH=$(prefix)/afids/vdev:$${TAE_PATH} && PATH=$(prefix)/bin:$(prefix)/afids/vdev:$${PATH}
+@BUILD_AFIDS_FALSE@setup_geocal = $(setup_afids_data) && $(setup_afids) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
+@BUILD_AFIDS_TRUE@setup_geocal = source $(DESTDIR)$(prefix)/setup_afids_env.sh
 # Number of jobs to run at once. Default is to automatically determine this,
 # but you can specify a different number.
 PYTEST_NJOB = 10
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_55)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_53)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am

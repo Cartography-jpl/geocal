@@ -62,15 +62,15 @@ setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice && e
 else
 setup_spice = :
 endif
-if BUILD_AFIDS
-setup_geocal=source $(DESTDIR)$(prefix)/setup_afids_env.sh
-else
-setup_geocal=$(setup_afids_data) && $(setup_spice)
 if HAVE_AFIDS
-setup_geocal+= export AFIDSPYTHONTOP=$(prefix) && source $(AFIDS_PREFIX)/setup_afids_env.sh && export TAE_PATH=$(prefix)/afids/vdev:$${TAE_PATH} && PATH=$(prefix)/bin:$(prefix)/afids/vdev:$${PATH}
+setup_afids = export AFIDSPYTHONTOP=$(prefix) && source $(AFIDS_PREFIX)/setup_afids_env.sh && export TAE_PATH=$(prefix)/afids/vdev:$${TAE_PATH} && PATH=$(prefix)/bin:$(prefix)/afids/vdev:$${PATH}
 else
-setup_geocal+= && source $(DESTDIR)$(prefix)/setup_geocal.sh
+setup_afids = ;
 endif
+if BUILD_AFIDS
+setup_geocal = source $(DESTDIR)$(prefix)/setup_afids_env.sh
+else
+setup_geocal = $(setup_afids_data) && $(setup_afids) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
 endif
 # Number of jobs to run at once. Default is to automatically determine this,
 # but you can specify a different number.

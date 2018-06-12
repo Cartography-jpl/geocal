@@ -8,11 +8,15 @@ Most programs are written in python.
 
 ## Documentation
 
-When you do a
+There is higher level documentation at [Github GeoCal Documentation](https://github.jpl.nasa.gov/Cartography/GeoCalDocumentation). In particular, there
+is detailed documentation about one specific mission [MSPI Documentation](https://github.jpl.nasa.gov/pages/Cartography/GeoCalDocumentation/introduction.html).
+
+There is lower level doxgyen documentation describing each class in details.
+You can create a local copy as part of:
 
     make install
 
-we create doxygen documentation for the C++ code.
+where create doxygen documentation for the C++ code.
 This will appear in the directory \<install prefix\>/share/doc/geocal.
 
 The documentation can also be viewed from a version pushed into
@@ -24,8 +28,6 @@ the command
 
 We also generate python documentation for all of the python code. This
 is available in for example in ipython using the normal "help(class)".
-
-We will generate html documentation of geocal python "real soon now".
 
 ## Building
 

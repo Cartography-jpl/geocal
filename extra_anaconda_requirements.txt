@@ -25,6 +25,16 @@ fftw
 gcc_linux-64
 gfortran_linux-64
 gxx_linux-64
+libtool
+automake
+autoconf
+parallel
+imagemagick
+# This pulls in conflicting version of things, and we don't actually
+# need this (just a nice to have). We might make our own recipe to build
+# against what we have, but for now just leave this out
+#gnuplot
+opencv
 
 # These are dependencies that come from our afids-conda-package repository
 # at https://github.jpl.nasa.gov/Cartography/afids-conda-package. You can

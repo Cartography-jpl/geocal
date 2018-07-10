@@ -44,9 +44,21 @@ void OrbitQuaternionListOffset::init()
 {
   if(pos_off_.rows() != 3)
     throw Exception("Position offset needs to be size 3.");
-  BOOST_FOREACH(time_map::value_type i, orbit_underlying()->orbit_data_map)
-    orbit_data_map[i.first] = boost::shared_ptr<QuaternionOrbitData>();
-  OrbitQuaternionList::initialize();
+  bool have_min_time = false;
+  bool have_max_time = false;
+  min_tm = orbit_underlying()->min_time();
+  max_tm = orbit_underlying()->max_time();
+  BOOST_FOREACH(time_map::value_type i, orbit_underlying()->orbit_data_map) {
+    if(i.first <= min_tm && !have_min_time) {
+      orbit_data_map[min_tm] = boost::shared_ptr<QuaternionOrbitData>();
+      have_min_time = true;
+    } else if(i.first >= max_tm && !have_max_time) {
+      orbit_data_map[max_tm] = boost::shared_ptr<QuaternionOrbitData>();
+      have_max_time = true;
+    } else {
+      orbit_data_map[i.first] = boost::shared_ptr<QuaternionOrbitData>();
+    }
+  }
 }
 
 // See base class for description

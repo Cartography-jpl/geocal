@@ -209,6 +209,16 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionL
     time to be changed. The measurement class is passed in, e.g., Eci, as
     is a small wrapper to give the conversion to Time.
 
+    The Attitude is always assumed to have the real part first, like boost
+    library uses. We could probably add an option to change this if
+    needed, but for now this is always the case.
+
+    By default, the reported attitude goes from the spacecraft to the
+    reference frame (e.g., ECI). However, you can optionally specify that
+    the attitude goes in the other direction. This is true for example for
+    the ISS, where the quaternion goes from J2000 ECI to the ISSACS body
+    frame, rather than the other way around.
+
     C++ includes: hdf_orbit.h 
     """
 
@@ -223,7 +233,8 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionL
         &Eph_pos="/Ephemeris/Position", const std::string
         &Eph_vel="/Ephemeris/Velocity", const std::string
         &Att_time="/Attitude/Time", const std::string
-        &Att_quat="/Attitude/Quaternion")
+        &Att_quat="/Attitude/Quaternion", bool
+        Att_from_sc_to_ref_frame=true)
         Read the given orbit data file.
 
         You can optional pass the base group of the HDF file, the default is
@@ -292,6 +303,16 @@ class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList
     time to be changed. The measurement class is passed in, e.g., Eci, as
     is a small wrapper to give the conversion to Time.
 
+    The Attitude is always assumed to have the real part first, like boost
+    library uses. We could probably add an option to change this if
+    needed, but for now this is always the case.
+
+    By default, the reported attitude goes from the spacecraft to the
+    reference frame (e.g., ECI). However, you can optionally specify that
+    the attitude goes in the other direction. This is true for example for
+    the ISS, where the quaternion goes from J2000 ECI to the ISSACS body
+    frame, rather than the other way around.
+
     C++ includes: hdf_orbit.h 
     """
 
@@ -306,7 +327,8 @@ class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList
         &Eph_pos="/Ephemeris/Position", const std::string
         &Eph_vel="/Ephemeris/Velocity", const std::string
         &Att_time="/Attitude/Time", const std::string
-        &Att_quat="/Attitude/Quaternion")
+        &Att_quat="/Attitude/Quaternion", bool
+        Att_from_sc_to_ref_frame=true)
         Read the given orbit data file.
 
         You can optional pass the base group of the HDF file, the default is
@@ -375,6 +397,16 @@ class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionLi
     time to be changed. The measurement class is passed in, e.g., Eci, as
     is a small wrapper to give the conversion to Time.
 
+    The Attitude is always assumed to have the real part first, like boost
+    library uses. We could probably add an option to change this if
+    needed, but for now this is always the case.
+
+    By default, the reported attitude goes from the spacecraft to the
+    reference frame (e.g., ECI). However, you can optionally specify that
+    the attitude goes in the other direction. This is true for example for
+    the ISS, where the quaternion goes from J2000 ECI to the ISSACS body
+    frame, rather than the other way around.
+
     C++ includes: hdf_orbit.h 
     """
 
@@ -389,7 +421,8 @@ class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionLi
         &Eph_pos="/Ephemeris/Position", const std::string
         &Eph_vel="/Ephemeris/Velocity", const std::string
         &Att_time="/Attitude/Time", const std::string
-        &Att_quat="/Attitude/Quaternion")
+        &Att_quat="/Attitude/Quaternion", bool
+        Att_from_sc_to_ref_frame=true)
         Read the given orbit data file.
 
         You can optional pass the base group of the HDF file, the default is
@@ -458,6 +491,16 @@ class HdfOrbit_EciTod_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternio
     time to be changed. The measurement class is passed in, e.g., Eci, as
     is a small wrapper to give the conversion to Time.
 
+    The Attitude is always assumed to have the real part first, like boost
+    library uses. We could probably add an option to change this if
+    needed, but for now this is always the case.
+
+    By default, the reported attitude goes from the spacecraft to the
+    reference frame (e.g., ECI). However, you can optionally specify that
+    the attitude goes in the other direction. This is true for example for
+    the ISS, where the quaternion goes from J2000 ECI to the ISSACS body
+    frame, rather than the other way around.
+
     C++ includes: hdf_orbit.h 
     """
 
@@ -472,7 +515,8 @@ class HdfOrbit_EciTod_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternio
         &Eph_pos="/Ephemeris/Position", const std::string
         &Eph_vel="/Ephemeris/Velocity", const std::string
         &Att_time="/Attitude/Time", const std::string
-        &Att_quat="/Attitude/Quaternion")
+        &Att_quat="/Attitude/Quaternion", bool
+        Att_from_sc_to_ref_frame=true)
         Read the given orbit data file.
 
         You can optional pass the base group of the HDF file, the default is

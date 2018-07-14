@@ -14,7 +14,8 @@ void HdfOrbit<PositionType, TimeCreatorType>::save(Archive & ar,
     & GEOCAL_NVP(eph_pos)
     & GEOCAL_NVP(eph_vel)
     & GEOCAL_NVP(att_time)
-    & GEOCAL_NVP(att_quat);
+    & GEOCAL_NVP(att_quat)
+    & GEOCAL_NVP(att_from_sc_to_ref_frame);
 }
 
 template<class PositionType, class TimeCreatorType> template<class Archive>
@@ -38,7 +39,11 @@ void HdfOrbit<PositionType, TimeCreatorType>::load(Archive & ar, const unsigned 
       & GEOCAL_NVP(att_time)
       & GEOCAL_NVP(att_quat);
   }
-  
+  // Previous to version 2, we always had att_from_sc_to_ref_frame true
+  if(version < 2)
+    att_from_sc_to_ref_frame = true;
+  else
+    ar & GEOCAL_NVP(att_from_sc_to_ref_frame);
   init();
 }
 

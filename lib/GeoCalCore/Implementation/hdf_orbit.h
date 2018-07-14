@@ -28,6 +28,14 @@ namespace GeoCal {
    Because it is useful, we allow the type of position measurement
    and time to be changed. The measurement class is passed in, e.g.,
    Eci, as is a small wrapper to give the conversion to Time.
+
+   The Attitude is always assumed to have the real part first, like
+   boost library uses. We could probably add an option to change this 
+   if needed, but for now this is always the case.
+
+   By default, the reported attitude goes from the spacecraft to the
+   reference frame (e.g., ECI). However, you can optionally specify
+   that the attitude goes in the other direction. 
 *******************************************************************/
 
 template<class PositionType, class TimeCreatorType> class HdfOrbit : 
@@ -44,7 +52,8 @@ public:
 	   const std::string& Eph_pos = "/Ephemeris/Position",
 	   const std::string& Eph_vel = "/Ephemeris/Velocity",
 	   const std::string& Att_time = "/Attitude/Time",
-	   const std::string& Att_quat = "/Attitude/Quaternion"
+	   const std::string& Att_quat = "/Attitude/Quaternion",
+	   bool Att_from_sc_to_ref_frame = true
 	   )
     : fname(Fname),
       bgroup(Base_group),
@@ -52,7 +61,8 @@ public:
       eph_pos(Eph_pos),
       eph_vel(Eph_vel),
       att_time(Att_time),
-      att_quat(Att_quat)
+      att_quat(Att_quat),
+      att_from_sc_to_ref_frame(Att_from_sc_to_ref_frame)
   { init(); }
   virtual ~HdfOrbit() {}
 
@@ -87,6 +97,7 @@ private:
   void init();
   std::string fname;
   std::string bgroup, eph_time, eph_pos, eph_vel, att_time, att_quat;
+  bool att_from_sc_to_ref_frame;
   typedef std::map<Time, boost::math::quaternion<double> > 
   time_attmap;
   time_attmap att_map;
@@ -159,8 +170,16 @@ void HdfOrbit<PositionType, TimeCreatorType>::init()
   boost::shared_ptr<QuaternionOrbitData> null;
   for(int i = 0; i < tdouble2.rows(); ++i) {
     Time t = tc(tdouble2(i));
-    att_map[t] = boost::math::quaternion<double>(quat(i, 0), quat(i, 1),
-						 quat(i, 2), quat(i, 3));
+    // att_map always goes from sc_to_refframe (e.g. sc_to_ci). If the
+    // underlying data goes the other way, take the conjugate as we
+    // read it in
+    
+    if(att_from_sc_to_ref_frame)
+      att_map[t] = boost::math::quaternion<double>(quat(i, 0), quat(i, 1),
+						   quat(i, 2), quat(i, 3));
+    else
+      att_map[t] = boost::math::quaternion<double>(quat(i, 0), -quat(i, 1),
+						   -quat(i, 2), -quat(i, 3));
     orbit_data_map[t] = null;
   }
   min_tm = std::max(att_map.begin()->first, pos_map.begin()->first);
@@ -217,8 +236,8 @@ GEOCAL_EXPORT_KEY(HdfOrbit_EciTod_TimeAcs);
 GEOCAL_EXPORT_KEY(HdfOrbit_Eci_TimePgs);
 GEOCAL_EXPORT_KEY(HdfOrbit_Eci_TimeJ2000);
 GEOCAL_EXPORT_KEY(HdfOrbit_EciTod_TimeJ2000);
-GEOCAL_CLASS_VERSION(HdfOrbit_EciTod_TimeAcs, 1);
-GEOCAL_CLASS_VERSION(HdfOrbit_Eci_TimePgs, 1);
-GEOCAL_CLASS_VERSION(HdfOrbit_Eci_TimeJ2000, 1);
-GEOCAL_CLASS_VERSION(HdfOrbit_EciTod_TimeJ2000, 1);
+GEOCAL_CLASS_VERSION(HdfOrbit_EciTod_TimeAcs, 2);
+GEOCAL_CLASS_VERSION(HdfOrbit_Eci_TimePgs, 2);
+GEOCAL_CLASS_VERSION(HdfOrbit_Eci_TimeJ2000, 2);
+GEOCAL_CLASS_VERSION(HdfOrbit_EciTod_TimeJ2000, 2);
 #endif

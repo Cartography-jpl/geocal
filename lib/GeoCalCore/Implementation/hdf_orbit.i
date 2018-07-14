@@ -18,7 +18,8 @@ public:
 	   const std::string& Eph_pos = "/Ephemeris/Position",
 	   const std::string& Eph_vel = "/Ephemeris/Velocity",
 	   const std::string& Att_time = "/Attitude/Time",
-	   const std::string& Att_quat = "/Attitude/Quaternion"
+	   const std::string& Att_quat = "/Attitude/Quaternion",
+	   bool Att_from_sc_to_ref_frame = true
 	   );
   %python_attribute(file_name, std::string)
   %python_attribute(base_group, std::string)

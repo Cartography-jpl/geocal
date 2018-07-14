@@ -5709,6 +5709,20 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -6553,6 +6567,143 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_0(PyObject *SWIGUNU
   std::string *arg5 = 0 ;
   std::string *arg6 = 0 ;
   std::string *arg7 = 0 ;
+  bool arg8 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int res7 = SWIG_OLDOBJ ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    arg7 = ptr;
+  }
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_HdfOrbit_EciTod_TimeAcs" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = (GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  std::string *arg7 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int res3 = SWIG_OLDOBJ ;
@@ -6673,7 +6824,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -6787,7 +6938,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -6886,7 +7037,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -6970,7 +7121,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7039,7 +7190,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7093,7 +7244,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -7134,37 +7285,41 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeAcs(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[8] = {
+  PyObject *argv[9] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_EciTod_TimeAcs",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_EciTod_TimeAcs",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_6(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_7(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_5(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_4(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_5(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_3(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_2(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_1(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_HdfOrbit_EciTod_TimeAcs__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_HdfOrbit_EciTod_TimeAcs'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,bool)\n"
     "    GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
@@ -7324,6 +7479,143 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_0(PyObject *SWIGUNUSED
   std::string *arg5 = 0 ;
   std::string *arg6 = 0 ;
   std::string *arg7 = 0 ;
+  bool arg8 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int res7 = SWIG_OLDOBJ ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    arg7 = ptr;
+  }
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_HdfOrbit_Eci_TimePgs" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = (GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *)new GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimePgsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimePgsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  std::string *arg7 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int res3 = SWIG_OLDOBJ ;
@@ -7444,7 +7736,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7558,7 +7850,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7657,7 +7949,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7741,7 +8033,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7810,7 +8102,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7864,7 +8156,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -7905,37 +8197,41 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimePgs(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[8] = {
+  PyObject *argv[9] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_Eci_TimePgs",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_Eci_TimePgs",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_6(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_7(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_5(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_4(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_5(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_3(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_2(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_1(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_HdfOrbit_Eci_TimePgs__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_HdfOrbit_Eci_TimePgs'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,bool)\n"
     "    GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
@@ -8095,6 +8391,143 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_0(PyObject *SWIGUNUS
   std::string *arg5 = 0 ;
   std::string *arg6 = 0 ;
   std::string *arg7 = 0 ;
+  bool arg8 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int res7 = SWIG_OLDOBJ ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    arg7 = ptr;
+  }
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_HdfOrbit_Eci_TimeJ2000" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = (GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *)new GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimeJ2000Creator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::Eci,GeoCal::TimeJ2000Creator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  std::string *arg7 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int res3 = SWIG_OLDOBJ ;
@@ -8215,7 +8648,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -8329,7 +8762,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -8428,7 +8861,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -8512,7 +8945,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -8581,7 +9014,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -8635,7 +9068,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -8676,37 +9109,41 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_HdfOrbit_Eci_TimeJ2000(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[8] = {
+  PyObject *argv[9] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_Eci_TimeJ2000",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_Eci_TimeJ2000",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_6(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_7(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_5(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_4(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_5(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_3(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_2(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_1(self, argc, argv);
+    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_HdfOrbit_Eci_TimeJ2000__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_HdfOrbit_Eci_TimeJ2000'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,bool)\n"
     "    GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
@@ -8866,6 +9303,143 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_0(PyObject *SWIGU
   std::string *arg5 = 0 ;
   std::string *arg6 = 0 ;
   std::string *arg7 = 0 ;
+  bool arg8 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int res7 = SWIG_OLDOBJ ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    arg7 = ptr;
+  }
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_HdfOrbit_EciTod_TimeJ2000" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = (GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *)new GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTod,GeoCal::TimeJ2000Creator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  std::string *arg7 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int res3 = SWIG_OLDOBJ ;
@@ -8986,7 +9560,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9100,7 +9674,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9199,7 +9773,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9283,7 +9857,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9352,7 +9926,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9406,7 +9980,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
@@ -9447,37 +10021,41 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTod_TimeJ2000(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[8] = {
+  PyObject *argv[9] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_EciTod_TimeJ2000",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_EciTod_TimeJ2000",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_6(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_7(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_5(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_6(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_4(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_5(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_3(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_2(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_1(self, argc, argv);
+    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_new_HdfOrbit_EciTod_TimeJ2000__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_HdfOrbit_EciTod_TimeJ2000'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,bool)\n"
     "    GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
     "    GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
@@ -9655,7 +10233,8 @@ static PyMethodDef SwigMethods[] = {
 		"&Eph_pos=\"/Ephemeris/Position\", const std::string\n"
 		"&Eph_vel=\"/Ephemeris/Velocity\", const std::string\n"
 		"&Att_time=\"/Attitude/Time\", const std::string\n"
-		"&Att_quat=\"/Attitude/Quaternion\")\n"
+		"&Att_quat=\"/Attitude/Quaternion\", bool\n"
+		"Att_from_sc_to_ref_frame=true)\n"
 		"Read the given orbit data file.\n"
 		"\n"
 		"You can optional pass the base group of the HDF file, the default is\n"
@@ -9685,7 +10264,8 @@ static PyMethodDef SwigMethods[] = {
 		"&Eph_pos=\"/Ephemeris/Position\", const std::string\n"
 		"&Eph_vel=\"/Ephemeris/Velocity\", const std::string\n"
 		"&Att_time=\"/Attitude/Time\", const std::string\n"
-		"&Att_quat=\"/Attitude/Quaternion\")\n"
+		"&Att_quat=\"/Attitude/Quaternion\", bool\n"
+		"Att_from_sc_to_ref_frame=true)\n"
 		"Read the given orbit data file.\n"
 		"\n"
 		"You can optional pass the base group of the HDF file, the default is\n"
@@ -9715,7 +10295,8 @@ static PyMethodDef SwigMethods[] = {
 		"&Eph_pos=\"/Ephemeris/Position\", const std::string\n"
 		"&Eph_vel=\"/Ephemeris/Velocity\", const std::string\n"
 		"&Att_time=\"/Attitude/Time\", const std::string\n"
-		"&Att_quat=\"/Attitude/Quaternion\")\n"
+		"&Att_quat=\"/Attitude/Quaternion\", bool\n"
+		"Att_from_sc_to_ref_frame=true)\n"
 		"Read the given orbit data file.\n"
 		"\n"
 		"You can optional pass the base group of the HDF file, the default is\n"
@@ -9745,7 +10326,8 @@ static PyMethodDef SwigMethods[] = {
 		"&Eph_pos=\"/Ephemeris/Position\", const std::string\n"
 		"&Eph_vel=\"/Ephemeris/Velocity\", const std::string\n"
 		"&Att_time=\"/Attitude/Time\", const std::string\n"
-		"&Att_quat=\"/Attitude/Quaternion\")\n"
+		"&Att_quat=\"/Attitude/Quaternion\", bool\n"
+		"Att_from_sc_to_ref_frame=true)\n"
 		"Read the given orbit data file.\n"
 		"\n"
 		"You can optional pass the base group of the HDF file, the default is\n"

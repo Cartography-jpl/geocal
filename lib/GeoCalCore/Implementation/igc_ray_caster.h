@@ -108,6 +108,8 @@ public:
   }
   int start_sample() const {return start_sample_;}
   int number_sample() const {return number_sample_;}
+protected:
+  IgcRayCaster() {}
 private:
   boost::shared_ptr<ImageGroundConnection> igc;
   int start_position_, npos_, ind, nintegration_step, nsub_line, nsub_sample,
@@ -119,7 +121,6 @@ private:
   // prevent allocating/freeing at every position, and for use in
   // determining the starting point for the next position.
   blitz::Array<double, 6> result_cache;
-  IgcRayCaster() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

@@ -174,12 +174,12 @@ public:
 protected:
   virtual boost::shared_ptr<QuaternionOrbitData> orbit_data_create(Time T)
     const;
+  OrbitListCache() {}
 private:
   void init();
   boost::shared_ptr<Orbit> orbit_underlying_;
   boost::shared_ptr<TimeTable> tt;
   double sample_;
-  OrbitListCache() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

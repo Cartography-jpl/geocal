@@ -69,11 +69,12 @@ public:
 			  bool& Success,
 			  int* Diagnostic = 0) const;
   virtual void print(std::ostream& Os) const;
+protected:
+  PyramidImageMatcher() {}
 private:
   boost::shared_ptr<ImageMatcher> match_;
   int start_level_;
   bool only_accept_finest_resolution_;
-  PyramidImageMatcher() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

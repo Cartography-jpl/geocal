@@ -102,10 +102,10 @@ public:
   virtual void print(std::ostream& Os) const;
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+  IgcMapProjected() {}
 private:
   void calc_no_grid(int Lstart, int Sstart) const;
   void calc_grid(int Lstart, int Sstart) const;
-  IgcMapProjected() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -161,10 +161,10 @@ public:
   virtual void print(std::ostream& Os) const;
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+  IgcMapProjectedMultiBand() {}
 private:
   void calc_no_grid(int Lstart, int Sstart) const;
   void calc_grid(int Lstart, int Sstart) const;
-  IgcMapProjectedMultiBand() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

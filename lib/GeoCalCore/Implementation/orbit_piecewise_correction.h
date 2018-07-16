@@ -64,9 +64,9 @@ protected:
   virtual boost::math::quaternion<double> 
   acorr(const Time& T) const
   { return boost::math::quaternion<double>(1,0,0,0); }
+  OrbitPiecewiseCorrection() {}
 private:
   boost::shared_ptr<PiecewiseLinear> e_corr_, n_corr_, u_corr_;
-  OrbitPiecewiseCorrection() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

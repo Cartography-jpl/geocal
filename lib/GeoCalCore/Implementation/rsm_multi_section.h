@@ -137,6 +137,8 @@ public:
       for(int j = 0; j < sec.cols(); ++j)
 	sec(i, j)->rsm_suport_data_edition(V);
   }
+protected:
+  RsmMultiSection() {}
 private:
   int border_;
   double nline_sec, nsamp_sec;
@@ -144,7 +146,6 @@ private:
   RsmLowOrderPolynomial lp;
   const RsmBase& section_ls(double Line, double Sample) const;
   const RsmBase& section_xyz(double X, double Y, double Z) const;
-  RsmMultiSection() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

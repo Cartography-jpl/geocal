@@ -134,10 +134,11 @@ public:
   Rpc& rpc() { return *rpc_; }
 
   boost::shared_ptr<Rpc> rpc_ptr() const {return rpc_;}
+protected:
+  RpcImageGroundConnection() {}
 private:
   boost::shared_ptr<Rpc> rpc_;
   bool fit_height_offset_;
-  RpcImageGroundConnection() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

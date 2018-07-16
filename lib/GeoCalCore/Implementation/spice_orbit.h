@@ -37,12 +37,13 @@ public:
 //-----------------------------------------------------------------------
 
   int satellite_id() const { return satellite_id_;}
+protected:
+  SpiceOrbit() {}
 private:
   int body_id_;
   int satellite_id_;
   int satellite_spice_id() const { return -100000 - satellite_id_; }
   std::string kernel_name_;
-  SpiceOrbit() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

@@ -94,9 +94,10 @@ public:
 //-----------------------------------------------------------------------
 
   const boost::shared_ptr<Rsm>& rsm() const { return rsm_; }
+protected:
+  RsmImageGroundConnection() {}
 private:
   boost::shared_ptr<Rsm> rsm_;
-  RsmImageGroundConnection() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

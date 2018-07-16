@@ -40,10 +40,11 @@ public:
   void time_between_adjacent_col_group(double V)
   { time_between_adjacent_col_group_ = V;}
   virtual void print(std::ostream& Os) const;
+protected:
+  RsmIdTiming() {}
 private:
   int number_row_acquired_simultaneously_, number_col_acquired_simultaneously_;
   double time_between_adjacent_row_group_, time_between_adjacent_col_group_;
-  RsmIdTiming() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -185,6 +186,8 @@ public:
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);
   virtual void print(std::ostream& Os) const;
+protected:
+  RsmId() {}
 private:
   boost::shared_ptr<CoordinateConverter> cconv;
   std::string image_identifier_, rsm_suport_data_edition_,
@@ -196,7 +199,6 @@ private:
   boost::shared_ptr<GroundCoordinate> ground_reference_point_;
   boost::optional<int> full_number_line_, full_number_sample_;
   int min_line_, max_line_, min_sample_, max_sample_;
-  RsmId() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

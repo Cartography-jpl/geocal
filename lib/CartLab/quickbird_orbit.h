@@ -150,8 +150,9 @@ public:
 //-----------------------------------------------------------------------
 
   void print(std::ostream& Os) const;
-private:
+protected:
   QuickBirdEphemeris() {}
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
@@ -207,8 +208,9 @@ public:
 //-----------------------------------------------------------------------
 
   void print(std::ostream& Os) const;
-private:
+protected:
   QuickBirdAttitude() {}
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
@@ -252,10 +254,11 @@ public:
   virtual void print(std::ostream& Os) const;
   std::string ephemeris_file_name() const {return eph->file_name();}
   std::string attitude_file_name() const {return att->file_name();}
+protected:
+  QuickBirdOrbit() {}
 private:
   boost::shared_ptr<QuickBirdEphemeris> eph;
   boost::shared_ptr<QuickBirdAttitude> att;
-  QuickBirdOrbit() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

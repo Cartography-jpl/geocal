@@ -46,12 +46,12 @@ public:
   { return img_; }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+  IgcSimulatedRayCaster() {}
 private:
   boost::shared_ptr<ImageGroundConnection> igc_;
   int number_integration_step_;
   double fill_value_, raycast_resolution_, max_height_;
   boost::shared_ptr<RasterImage> img_;
-  IgcSimulatedRayCaster() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

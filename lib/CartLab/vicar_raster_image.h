@@ -216,6 +216,8 @@ public:
     vicar_file_->map_info(Mi); 
     map_info_.reset(new MapInfo(vicar_file_->map_info()));
   }
+protected:
+  VicarRasterImage() {}
 private:
   boost::shared_ptr<VicarFile> vicar_file_; 
 				///< Underlying data.
@@ -241,7 +243,6 @@ private:
     if(vicar_file_->has_rpc())
       rpc_.reset(new Rpc(vicar_file_->rpc()));
   }
-  VicarRasterImage() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

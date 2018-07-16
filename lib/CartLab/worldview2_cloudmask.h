@@ -29,9 +29,9 @@ public:
   virtual ~WorldView2CloudMask() {}
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+  WorldView2CloudMask() {};
 private:
   boost::shared_ptr<RasterImage> cloud_data;
-  WorldView2CloudMask() {};
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

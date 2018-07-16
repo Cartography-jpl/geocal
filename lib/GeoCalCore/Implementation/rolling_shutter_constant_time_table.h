@@ -63,11 +63,12 @@ public:
   virtual Time min_time() const {return min_t;}
   virtual Time max_time() const {return min_t + tspace * max_l;}
   double time_space() const {return tspace;}
+protected:
+  RollingShutterConstantTimeTable() {}
 private:
   Time min_t;
   int max_l;
   double tspace;
-  RollingShutterConstantTimeTable() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

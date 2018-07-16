@@ -83,12 +83,13 @@ public:
 //-----------------------------------------------------------------------
 
   const SpiceKernelList& kernel_list() const { return kernel_list_;}
+protected:
+  SpicePlanetOrbit() {}
 private:
   std::string target_name_;
   std::string spacecraft_reference_frame_name_;
   SpiceKernelList kernel_list_;
   int naif_id_;
-  SpicePlanetOrbit() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

@@ -233,7 +233,8 @@ protected:
   { return to_int<C, Swap_needed>(c);}
   template<class C, bool Swap_needed> void from_double(const double&, 
 						       char* c) const;
-
+protected:
+  VicarLiteFile() {}
 private:
   access_type access_;
   bool is_compressed_;
@@ -255,7 +256,6 @@ private:
   void process_label(const std::string& label);
   void initialize(const std::string& Fname, access_type Access = READ,
 	    bool Force_area_pixel = false);
-  VicarLiteFile() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
@@ -905,6 +905,8 @@ public:
     } else
       Os << "None\n";
   }
+protected:
+  VicarLiteRasterImage() {}
 private:
   void initialize() 
   {
@@ -924,7 +926,6 @@ private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
   bool force_map_info_;
-  VicarLiteRasterImage() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
@@ -1007,10 +1008,11 @@ public:
 /// Return band number
 //-----------------------------------------------------------------------
   int band() const { return band_  + 1; }
+protected:
+  VicarLiteDem() {}
 private:
   int band_;
   boost::shared_ptr<VicarLiteFile> f_;
-  VicarLiteDem() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive& Ar, const unsigned int version);

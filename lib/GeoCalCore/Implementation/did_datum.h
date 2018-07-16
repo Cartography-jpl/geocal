@@ -28,6 +28,8 @@ public:
   { Os << "DID Datum\n"; }
 
   const std::string& file_name() const {return msl_->file_name();}
+protected:
+  DidDatum() {}
 private:
   void initialize(const std::string& Fname);
   MapInfo mi_;			///< MapInfo describing how data is
@@ -35,7 +37,6 @@ private:
   boost::shared_ptr<MemoryMapArray<char, 3> > msl_;
                                 ///< Data. We read this as raw bytes
                                 ///so we don't have any endian problems.
-  DidDatum() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

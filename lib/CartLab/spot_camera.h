@@ -58,10 +58,11 @@ public:
   virtual void print(std::ostream& Os) const;
   const std::vector<double> psi_x() const {return psi_x_;}
   const std::vector<double> psi_y() const {return psi_y_;}
+protected:
+  SpotCamera() {}
 private:
   std::vector<double> psi_x_;
   std::vector<double> psi_y_;
-  SpotCamera() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

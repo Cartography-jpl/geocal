@@ -44,10 +44,11 @@ public:
 //-----------------------------------------------------------------------
 
   double time_shift() const {return time_shift_;}
+protected:
+  OrbitTimeShift() {}
 private:
   boost::shared_ptr<Orbit>  orbit_original_;
   double time_shift_;
-  OrbitTimeShift() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

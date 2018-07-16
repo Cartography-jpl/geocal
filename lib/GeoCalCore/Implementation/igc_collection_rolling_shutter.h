@@ -95,6 +95,8 @@ public:
   { return WithParameterNested::parameter_with_derivative(); }
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
   { WithParameterNested::parameter_with_derivative(Parm);}
+protected:
+  IgcCollectionRollingShutter() {}
 private:
   boost::shared_ptr<Orbit> orb;
   boost::shared_ptr<Camera> cam;
@@ -108,7 +110,6 @@ private:
     igc_cache.resize(0);
   }
 
-  IgcCollectionRollingShutter() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

@@ -67,9 +67,10 @@ public:
     const;
   blitz::Array<double, 1> construct_chi_matrix(const blitz::Array<double, 1>& X,
 					       int ord) const;
+protected:
+  CameraRationalPolyomial() {}
 private:
   blitz::Array<double, 2> kappa_, kappa_inverse_;
-  CameraRationalPolyomial() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

@@ -45,11 +45,12 @@ public:
   const SpiceKernelList& kernel_list() const { return kernel_list_;}
   int naif_code() const {return naif_code_;}
   const Time& time() const {return time_;}
+protected:
+  SpiceDem() {}
 private:
   int naif_code_;
   Time time_;
   SpiceKernelList kernel_list_;
-  SpiceDem() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

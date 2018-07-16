@@ -54,10 +54,10 @@ public:
   }
 
   boost::shared_ptr<GdalRasterImage> map_file() const {return map_file_;}
-  
+protected:
+  GdalDatum() {}
 private:
   boost::shared_ptr<GdalRasterImage> map_file_;
-  GdalDatum() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

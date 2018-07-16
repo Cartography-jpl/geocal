@@ -275,6 +275,8 @@ public:
   static int zvzinitw(int argc, char *argv[]);
 
   static bool vicar_available();
+protected:
+  VicarFile() {}
 private:
   mutable boost::shared_ptr<MapInfo> map_info_; 
 				///< Cache of MapInfo information.
@@ -298,7 +300,6 @@ private:
 				/// unique for each file.
   void open_unit();
   void set_type(const std::string& Type);
-  VicarFile() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

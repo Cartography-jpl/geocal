@@ -101,10 +101,11 @@ public:
 //-----------------------------------------------------------------------
 
   double sample_offset() const { return sample_offset_;}
+protected:
+  OffsetImageMask() {}
 private:
   boost::shared_ptr<ImageMask> im_;
   double line_offset_, sample_offset_;
-  OffsetImageMask() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

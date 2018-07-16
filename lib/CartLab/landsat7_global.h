@@ -36,9 +36,10 @@ public:
   virtual ~Landsat7Global() {}
   virtual void print(std::ostream& Os) const;
   Band band() const { return band_;}
+protected:
+  Landsat7Global() {}
 private:
   Band band_;
-  Landsat7Global() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

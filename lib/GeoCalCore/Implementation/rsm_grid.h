@@ -246,6 +246,8 @@ public:
   std::string tre_string() const;
   static boost::shared_ptr<RsmGrid>
   read_tre_string(const std::string& Tre_in);
+protected:
+  RsmGrid() {}
 private:
   // Note, by convention we *don't* include the x_offset, y_offset in
   // line_ and sample_. So we always have things relative to the
@@ -261,7 +263,6 @@ private:
   int total_number_row_digit_, total_number_col_digit_,
     number_fractional_row_digit_, number_fractional_col_digit_;
   int row_section_number_, col_section_number_;
-  RsmGrid() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

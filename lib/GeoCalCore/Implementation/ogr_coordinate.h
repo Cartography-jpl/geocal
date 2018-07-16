@@ -81,6 +81,8 @@ public:
 //-----------------------------------------------------------------------
 
   int naif_code() const { return naif_code_; }
+protected:
+  OgrWrapper() {}
 private:
   void init(const boost::shared_ptr<OGRSpatialReference>& Ogr);
   void init(const std::string& Wkt);
@@ -96,7 +98,6 @@ private:
   static boost::scoped_ptr<OGRSpatialReference> ogr_ecr;
   static boost::scoped_ptr<OGRSpatialReference> ogr_mars_pc;
   static boost::scoped_ptr<OGRSpatialReference> ogr_ceres_pc;
-  OgrWrapper() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
@@ -190,9 +191,10 @@ public:
 
   virtual int naif_code() const { return ogr_->naif_code(); }
   static OgrCoordinate to_utm(const Geodetic& Gc, int zone = -999);
+protected:
+  OgrCoordinate() {}
 private:
   boost::shared_ptr<OgrWrapper> ogr_;
-  OgrCoordinate() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -279,9 +281,10 @@ public:
   virtual void print(std::ostream& Os) const;
   static boost::shared_ptr<OgrCoordinateConverter>
   utm_converter(int Zone);
+protected:
+  OgrCoordinateConverter() {}
 private:
   boost::shared_ptr<OgrWrapper> ogr_;
-  OgrCoordinateConverter() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

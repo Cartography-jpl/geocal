@@ -23,9 +23,9 @@ protected:
       for(int j = 0; j < data.cols(); ++j)
 	data(i, j) = dem->height_reference_surface(*ground_coordinate(i, j));
   }
+  DemToRaster() {}
 private:
   boost::shared_ptr<Dem> dem;
-  DemToRaster() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

@@ -215,9 +215,7 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionL
 
     By default, the reported attitude goes from the spacecraft to the
     reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction. This is true for example for
-    the ISS, where the quaternion goes from J2000 ECI to the ISSACS body
-    frame, rather than the other way around.
+    the attitude goes in the other direction.
 
     C++ includes: hdf_orbit.h 
     """
@@ -309,9 +307,7 @@ class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList
 
     By default, the reported attitude goes from the spacecraft to the
     reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction. This is true for example for
-    the ISS, where the quaternion goes from J2000 ECI to the ISSACS body
-    frame, rather than the other way around.
+    the attitude goes in the other direction.
 
     C++ includes: hdf_orbit.h 
     """
@@ -403,9 +399,7 @@ class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionLi
 
     By default, the reported attitude goes from the spacecraft to the
     reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction. This is true for example for
-    the ISS, where the quaternion goes from J2000 ECI to the ISSACS body
-    frame, rather than the other way around.
+    the attitude goes in the other direction.
 
     C++ includes: hdf_orbit.h 
     """
@@ -497,9 +491,7 @@ class HdfOrbit_EciTod_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternio
 
     By default, the reported attitude goes from the spacecraft to the
     reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction. This is true for example for
-    the ISS, where the quaternion goes from J2000 ECI to the ISSACS body
-    frame, rather than the other way around.
+    the attitude goes in the other direction.
 
     C++ includes: hdf_orbit.h 
     """

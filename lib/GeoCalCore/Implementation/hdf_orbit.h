@@ -92,6 +92,7 @@ public:
 protected:
   virtual boost::shared_ptr<QuaternionOrbitData> 
   orbit_data_create(Time T) const;
+  HdfOrbit() {}
 private:
   // Separate out initialization to make serialization a little easier
   void init();
@@ -104,7 +105,6 @@ private:
   typedef typename std::pair<PositionType, boost::array<double, 3> > posvel;
   typedef std::map<Time,  posvel> time_posmap;
   time_posmap pos_map;
-  HdfOrbit() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

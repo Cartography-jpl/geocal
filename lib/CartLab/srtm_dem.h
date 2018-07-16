@@ -20,8 +20,9 @@ public:
 	      int Number_tile_each_file = 4, int Number_file = 4,
 	      bool Favor_memory_mapped = true, bool Force_area_pixel = true);
   virtual ~SrtmDemData() { }
-private:
+protected:
   SrtmDemData() {}
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -40,8 +41,9 @@ public:
 	      int Number_tile_each_file = 4, int Number_file = 4,
 	      bool Favor_memory_mapped = true, bool Force_area_pixel = true);
   virtual ~SrtmLwmData() { }
-private:
+protected:
   SrtmLwmData() {}
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

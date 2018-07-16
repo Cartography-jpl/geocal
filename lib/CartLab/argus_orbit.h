@@ -75,6 +75,8 @@ public:
 
   int camera_number() const { return camera_number_;}
 
+protected:
+  ArgusOrbitData() {}
 private:
   static void save_to_file(const std::string& Fname, 
 			   const RasterImage& M1,
@@ -84,7 +86,6 @@ private:
   int camera_number_;
   std::string file_name_;
   mutable boost::shared_ptr<GDALDataset> gdal_data_;
-  ArgusOrbitData() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -117,6 +118,8 @@ public:
 
   int number_row() const { return number_row_; }
   const std::string& file_name() const {return fname;}
+protected:
+  ArgusOrbit() {}
 private:
   void init(const std::string& Fname);
   std::string fname;
@@ -131,7 +134,6 @@ private:
   row_map row_data;
   /// Number of rows we have.
   int number_row_;
-  ArgusOrbit() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

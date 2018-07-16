@@ -40,6 +40,7 @@ public:
 protected:
   virtual double elevation(int Y_index, int X_index) const
   { return dem_->elevation(Y_index, X_index) + height_offset_; }
+  DemMapInfoOffset() {}
 private:
   void initialize(const boost::shared_ptr<DemMapInfo>& Dem_underlying,
 		   double Height_offset)
@@ -52,7 +53,6 @@ private:
   }
   boost::shared_ptr<DemMapInfo> dem_;
   double height_offset_;
-  DemMapInfoOffset() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive& Ar, const unsigned int version);

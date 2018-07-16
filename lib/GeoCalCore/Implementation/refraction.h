@@ -79,10 +79,11 @@ public:
        << "  Index refraction at surface: "
        << index_refraction_surface() << "\n";
   }
+protected:
+  Refraction() {}
 private:
   double alt, lat, index_ref;
   double k1, k2, dens_fac;
-  Refraction() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

@@ -68,12 +68,13 @@ public:
   virtual bool region_masked(const GroundCoordinate& Ulc, 
 			     const GroundCoordinate& Lrc) const;
   virtual void print(std::ostream& Os) const;
+protected:
+  GroundMaskImage() {}
 private:
   boost::shared_ptr<RasterImage> img; ///< Underlying image.
   int maskv;				    ///< Value that indicates
 					    ///a masked point.
   bool outside_is_masked_;
-  GroundMaskImage() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

@@ -61,9 +61,10 @@ public:
     Os << "RasterImage of " << number_line() << " x " << number_sample() 
        << " constant value of " << data_ << "\n";
   }
+protected:
+  ConstantRasterImage() {}
 private:
   int data_;			    /// <Underlying data.
-  ConstantRasterImage() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

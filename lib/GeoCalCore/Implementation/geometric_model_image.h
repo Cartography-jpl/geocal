@@ -48,12 +48,12 @@ public:
       int Number_line, int Number_sample, double Fill_value = 0.0) const;
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+  GeometricModelImage() {}
 private:
   double fill_value_;
   interpolation_type itype_;
   boost::shared_ptr<RasterImage> raw_data_;
   boost::shared_ptr<GeometricModel> model;
-  GeometricModelImage() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

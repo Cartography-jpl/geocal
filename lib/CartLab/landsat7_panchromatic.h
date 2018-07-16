@@ -20,8 +20,9 @@ public:
   virtual ~Landsat7Panchromatic() {}
   virtual void print(std::ostream& Os) const
   { Os << "Landsat7Panchromatic";}
-private:
+protected:
   Landsat7Panchromatic() {}
+private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

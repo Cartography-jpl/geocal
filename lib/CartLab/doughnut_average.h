@@ -69,6 +69,7 @@ public:
   virtual void print(std::ostream& Os) const { Os << "DoughnutAverage"; }
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
+  DoughnutAverage() {}
 private:
   boost::shared_ptr<RasterImageMultiBand> rimg;
   // This is the window and dougnut half size (it turns out this is a
@@ -82,7 +83,6 @@ private:
 
   // The input data, with 0's propagated
   mutable blitz::Array<double, 3> input_data;
-  DoughnutAverage() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -101,10 +101,10 @@ public:
 protected:
   virtual void calc(int Lstart, int Sstart) const 
   { data = davg_->cvdnorm(band_, Lstart, Sstart, data.rows(), data.cols()); }
+  RasterImageWrapCvdNorm() {}
 private:
   boost::shared_ptr<DoughnutAverage> davg_;
   int band_;
-  RasterImageWrapCvdNorm() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -122,9 +122,9 @@ public:
 protected:
   virtual void calc(int Lstart, int Sstart) const 
   {  data = davg_->pandif(Lstart, Sstart, data.rows(), data.cols()); }
+  RasterImageWrapPandif() {}
 private:
   boost::shared_ptr<DoughnutAverage> davg_;
-  RasterImageWrapPandif() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

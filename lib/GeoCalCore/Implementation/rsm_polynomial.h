@@ -63,13 +63,14 @@ public:
   void print(std::ostream& Os) const;
   std::string tre_string() const;
   void read_tre_string(std::istream& In);
+protected:
+  RsmPolynomial() {}
 private:
   blitz::Array<double, 3> coefficient_;
   bool is_denominator_;
   int max_order_;
   int fitted_coefficent_size;
 
-  RsmPolynomial() {}
   friend class boost::serialization::access;
   // This is a friend just so it can call RsmPolynomial default
   // constructor from its default constructor. It doesn't do anything

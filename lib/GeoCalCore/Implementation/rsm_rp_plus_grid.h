@@ -88,10 +88,11 @@ public:
   virtual double max_y() const {return rp->max_y(); }
   virtual double min_z() const {return rp->min_z(); }
   virtual double max_z() const {return rp->max_z(); }
+protected:
+  RsmRpPlusGrid() {}
 private:
   boost::shared_ptr<RsmBase> rp;
   boost::shared_ptr<RsmGrid> rgrid;
-  RsmRpPlusGrid() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

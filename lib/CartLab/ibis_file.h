@@ -239,6 +239,8 @@ public:
 			     int srow, int nrows);
   static int IBISColumnWritew(int ibis_id, char *buffer, int column, 
 			      int srow, int nrows);
+protected:
+  IbisFile() {}
 private:
   access_type access_;
   std::string fname_;
@@ -254,7 +256,6 @@ private:
   void create_col();
   data_type read_column_data_type(int I) const;
   int read_column_size(int I) const;
-  IbisFile() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

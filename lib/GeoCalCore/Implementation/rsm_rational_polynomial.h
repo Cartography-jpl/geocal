@@ -199,7 +199,9 @@ public:
 //-----------------------------------------------------------------------
   virtual int col_section_number() const {return col_section_number_; }
   virtual void col_section_number(int V) {col_section_number_ = V; }
-  
+
+protected:
+  RsmRationalPolynomial() {}
 private:
   int row_section_number_, col_section_number_;
   double line_offset_, line_scale_, sample_offset_, sample_scale_,
@@ -208,7 +210,6 @@ private:
   bool ignore_igc_error_in_fit_;
   boost::optional<double> line_fit_error_, sample_fit_error_;
   RsmPolynomial line_num_, line_den_, sample_num_, sample_den_;
-  RsmRationalPolynomial() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

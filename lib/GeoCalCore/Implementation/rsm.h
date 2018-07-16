@@ -99,6 +99,8 @@ public:
     if(rparm)
       rparm->rsm_suport_data_edition(V);
   }
+protected:
+  Rsm() {}
 private:
   boost::shared_ptr<RsmBase> rp;
   boost::shared_ptr<RsmId> rid;
@@ -109,7 +111,6 @@ private:
   // scratch variable for reading the old format of the data. Instead,
   // the coordinate converter is stored in RsmId.
   boost::shared_ptr<CoordinateConverter> cconv_not_used;
-  Rsm() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

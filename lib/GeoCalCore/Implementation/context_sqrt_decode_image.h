@@ -25,9 +25,9 @@ public:
   virtual void print(std::ostream& Os) const { Os << "ContextSqrtDecodeImage"; }
 protected:
   virtual void calc(int Lstart, int Sstart) const; 
+  ContextSqrtDecodeImage() {}
 private:
   boost::shared_ptr<RasterImage> raw_data_;
-  ContextSqrtDecodeImage() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

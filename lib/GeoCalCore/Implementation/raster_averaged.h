@@ -71,12 +71,12 @@ public:
   virtual void print(std::ostream& Os) const;
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+  RasterAveraged() {}
 private:
   boost::shared_ptr<RasterImage> raw_data_;
   bool ignore_zero_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;
-  RasterAveraged() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -149,12 +149,12 @@ public:
   virtual void print(std::ostream& Os) const;
 protected:
   virtual void calc(int Lstart, int Sstart) const;
+  RasterAveragedMultiBand() {}
 private:
   boost::shared_ptr<RasterImageMultiBand> raw_data_;
   bool ignore_zero_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;
-  RasterAveragedMultiBand() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -212,11 +212,12 @@ public:
   virtual bool area_any_masked(int Line, int Sample, int Number_line,
 			       int Number_sample) const;
   virtual void print(std::ostream& Os) const;
+protected:
+  ImageMaskAveraged() {}
 private:
   boost::shared_ptr<ImageMask> data_;
   int number_line_per_pixel_;
   int number_sample_per_pixel_;
-  ImageMaskAveraged() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -341,7 +342,8 @@ public:
     res(1) /= number_sample_per_pixel_;
     return res;
   }
-
+protected:
+  AveragedImageGroundConnection() {}
 private:
   void init();
   boost::shared_ptr<ImageGroundConnection> ig_;
@@ -349,7 +351,6 @@ private:
   int number_sample_per_pixel_;
   bool in_memory_;
   bool ignore_zero_;
-  AveragedImageGroundConnection() {}
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

@@ -59,13 +59,13 @@ public:
 protected:
   virtual boost::shared_ptr<QuaternionOrbitData> orbit_data_create(Time T)
     const;
+  OrbitQuaternionListOffset() {}
 private:
   // These needs to be a Orbit for boost serialization, however it is
   // is actually of the type OrbitQuaternionList.
   boost::shared_ptr<Orbit> orbit_underlying_;
   blitz::Array<double, 1> pos_off_;
   void init();
-  OrbitQuaternionListOffset() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -120,12 +120,13 @@ public:
     // this becomes an issue.
     return orbit_data(T.value());
   }
+protected:
+  OrbitScCoorOffset() {}
 private:
   // These needs to be a Orbit for boost serialization, however it is
   // is actually of the type OrbitQuaternionList.
   boost::shared_ptr<Orbit> orbit_underlying_;
   blitz::Array<double, 1> pos_off_;
-  OrbitScCoorOffset() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

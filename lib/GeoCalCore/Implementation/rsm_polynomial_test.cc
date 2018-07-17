@@ -119,7 +119,7 @@ BOOST_AUTO_TEST_CASE(tre)
   r1r.read_tre_string(in);
   BOOST_CHECK_EQUAL(r1r.is_denominator(), false);
   BOOST_CHECK_EQUAL(r1r.max_order(), -1);
-  BOOST_CHECK_MATRIX_CLOSE(r1r.fitted_coefficent(), fexpect1);
+  BOOST_CHECK_MATRIX_CLOSE(r1r.coefficient(), cexpect1);
 }
 
 BOOST_AUTO_TEST_CASE(serialize)

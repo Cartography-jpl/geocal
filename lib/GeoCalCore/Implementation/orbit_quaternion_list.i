@@ -21,6 +21,8 @@ public:
     const;
   %python_attribute(quaternion_orbit_data, std::vector<boost::shared_ptr<QuaternionOrbitData> >)
 protected:
+  virtual void interpolate_or_extrapolate_data
+  (Time T, const QuaternionOrbitData* Q1, const QuaternionOrbitData* Q2) const;
   virtual boost::shared_ptr<QuaternionOrbitData> orbit_data_create(Time T) 
     const;
 };

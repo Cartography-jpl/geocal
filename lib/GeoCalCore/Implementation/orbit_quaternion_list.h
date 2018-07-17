@@ -72,6 +72,9 @@ public:
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
 protected:
   friend class OrbitQuaternionListOffset;
+  virtual void interpolate_or_extrapolate_data
+  (Time T, boost::shared_ptr<GeoCal::QuaternionOrbitData>& Q1,
+   boost::shared_ptr<GeoCal::QuaternionOrbitData>& Q2) const;
   
 //-----------------------------------------------------------------------
 /// Derived classes can override this to create orbit data on demand

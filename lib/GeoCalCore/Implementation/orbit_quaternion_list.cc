@@ -29,99 +29,86 @@ void OrbitListCache::serialize(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(OrbitListCache);
 #endif
 
-// See base class for description.
-boost::shared_ptr<OrbitData> OrbitQuaternionList::orbit_data(Time T) const
+//-----------------------------------------------------------------------
+/// Return the two QuaternionOrbitData that we should
+/// interpolate/extrapolate from. Derived classes can override this if
+/// there is extra logic to this (e.g., see EcostressOrbit in the
+/// ecostress-level1 repository).
+//-----------------------------------------------------------------------
+
+void OrbitQuaternionList::interpolate_or_extrapolate_data
+(Time T, boost::shared_ptr<GeoCal::QuaternionOrbitData>& Q1,
+ boost::shared_ptr<GeoCal::QuaternionOrbitData>& Q2) const
 {
   range_check_inclusive(T, min_time(), max_time());
   time_map::iterator i = orbit_data_map.lower_bound(T);
   check_lazy_evaluation(i);
-  if(i->first - T == 0.0)
-    return i->second;
-  const QuaternionOrbitData& q2 = *(i->second);
+  // Special handling if we are looking at the very first point
+  if(i == orbit_data_map.begin() && i->first - T == 0.0) {
+    ++i;
+    check_lazy_evaluation(i);
+  }
+  Q2 = i->second;
   --i;
   check_lazy_evaluation(i);
-  const QuaternionOrbitData& q1 = *(i->second);
-  return QuaternionOrbitData::interpolate(q1, q2, T);
+  Q1 = i->second;
+}
+
+// See base class for description.
+boost::shared_ptr<OrbitData> OrbitQuaternionList::orbit_data(Time T) const
+{
+  boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2;
+  interpolate_or_extrapolate_data(T, q1, q2);
+  return QuaternionOrbitData::interpolate(*q1, *q2, T);
 }
 
 // See base class for description.
 boost::shared_ptr<OrbitData> 
 OrbitQuaternionList::orbit_data(const TimeWithDerivative& T) const
 {
-  range_check_inclusive(T.value(), min_time(), max_time());
-  time_map::iterator i = orbit_data_map.lower_bound(T.value());
-  // Special handling if we are looking at the very first point
-  if(i == orbit_data_map.begin() && i->first - T == 0.0)
-    ++i;
-  check_lazy_evaluation(i);
-  const QuaternionOrbitData& q2 = *(i->second);
-  --i;
-  check_lazy_evaluation(i);
-  const QuaternionOrbitData& q1 = *(i->second);
-  return QuaternionOrbitData::interpolate(q1, q2, T);
+  boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2;
+  interpolate_or_extrapolate_data(T.value(), q1, q2);
+  return QuaternionOrbitData::interpolate(*q1, *q2, T);
 }
 
 boost::shared_ptr<CartesianFixed> OrbitQuaternionList::position_cf(Time T) const
 {
-  range_check_inclusive(T, min_time(), max_time());
-  time_map::iterator i = orbit_data_map.lower_bound(T);
-  check_lazy_evaluation(i);
-  if(i->first - T == 0.0)
-    return i->second->position_cf();
-  const QuaternionOrbitData& q2 = *(i->second);
-  --i;
-  check_lazy_evaluation(i);
-  const QuaternionOrbitData& q1 = *(i->second);
-
-  double tspace = q2.time() - q1.time();
-  double toffset = T - q1.time();
+  boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2;
+  interpolate_or_extrapolate_data(T, q1, q2);
+  double tspace = q2->time() - q1->time();
+  double toffset = T - q1->time();
   boost::array<double, 3> pos1, pos2, vel_cf, pos_cf;
-  pos1[0] = q1.position_cf()->position[0];
-  pos1[1] = q1.position_cf()->position[1];
-  pos1[2] = q1.position_cf()->position[2];
-  pos2[0] = q2.position_cf()->position[0];
-  pos2[1] = q2.position_cf()->position[1];
-  pos2[2] = q2.position_cf()->position[2];
-  Orbit::interpolate(pos1, q1.velocity_cf(), pos2, q1.velocity_cf(), toffset,
+  pos1[0] = q1->position_cf()->position[0];
+  pos1[1] = q1->position_cf()->position[1];
+  pos1[2] = q1->position_cf()->position[2];
+  pos2[0] = q2->position_cf()->position[0];
+  pos2[1] = q2->position_cf()->position[1];
+  pos2[2] = q2->position_cf()->position[2];
+  Orbit::interpolate(pos1, q1->velocity_cf(), pos2, q1->velocity_cf(), toffset,
 		     tspace, pos_cf, vel_cf);
-  return q1.position_cf()->create(pos_cf);
+  return q1->position_cf()->create(pos_cf);
 }
 
 // See base class for description.
 ScLookVector OrbitQuaternionList::sc_look_vector
 (Time T, const CartesianFixed& Pt) const
 {
-  range_check_inclusive(T, min_time(), max_time());
-  time_map::iterator i = orbit_data_map.lower_bound(T);
-  check_lazy_evaluation(i);
-  if(i->first - T == 0.0) {
-    boost::shared_ptr<OrbitData> od = i->second;
-    boost::array<double, 3> p1 = Pt.position;
-    boost::array<double, 3> p2 = od->position_cf()->position;
-    CartesianFixedLookVector lv;
-    lv.look_vector[0] = p1[0] - p2[0];
-    lv.look_vector[1] = p1[1] - p2[1];
-    lv.look_vector[2] = p1[2] - p2[2];
-    return od->sc_look_vector(lv);
-  }
-  const QuaternionOrbitData& q2 = *(i->second);
-  --i;
-  check_lazy_evaluation(i);
-  const QuaternionOrbitData& q1 = *(i->second);
+  boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2;
+  interpolate_or_extrapolate_data(T, q1, q2);
 
-  double tspace = q2.time() - q1.time();
-  double toffset = T - q1.time();
+  double tspace = q2->time() - q1->time();
+  double toffset = T - q1->time();
   boost::math::quaternion<double> sc_to_cf_ = 
-    interpolate_quaternion_rotation(q1.sc_to_cf(), 
-			   q2.sc_to_cf(), toffset, tspace);
+    interpolate_quaternion_rotation(q1->sc_to_cf(), 
+			   q2->sc_to_cf(), toffset, tspace);
   boost::array<double, 3> pos1, pos2, vel_cf, pos_cf;
-  pos1[0] = q1.position_cf()->position[0];
-  pos1[1] = q1.position_cf()->position[1];
-  pos1[2] = q1.position_cf()->position[2];
-  pos2[0] = q2.position_cf()->position[0];
-  pos2[1] = q2.position_cf()->position[1];
-  pos2[2] = q2.position_cf()->position[2];
-  Orbit::interpolate(pos1, q1.velocity_cf(), pos2, q1.velocity_cf(), toffset,
+  pos1[0] = q1->position_cf()->position[0];
+  pos1[1] = q1->position_cf()->position[1];
+  pos1[2] = q1->position_cf()->position[2];
+  pos2[0] = q2->position_cf()->position[0];
+  pos2[1] = q2->position_cf()->position[1];
+  pos2[2] = q2->position_cf()->position[2];
+  Orbit::interpolate(pos1, q1->velocity_cf(), pos2, q1->velocity_cf(), toffset,
 		     tspace, pos_cf, vel_cf);
 
   boost::array<double, 3> p1 = Pt.position;

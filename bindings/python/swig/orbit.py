@@ -473,7 +473,7 @@ class QuaternionOrbitData(OrbitData):
         """
 
         boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const
-        Time &tm)
+        Time &tm, bool Extrapolation_ok=false)
         Interpolate between two QuaternionOrbitData for the given time,
         without interpolating the derivative stuff. 
         """
@@ -602,7 +602,7 @@ def QuaternionOrbitData_interpolate(*args):
     """
 
     boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const
-    Time &tm)
+    Time &tm, bool Extrapolation_ok=false)
     Interpolate between two QuaternionOrbitData for the given time,
     without interpolating the derivative stuff. 
     """

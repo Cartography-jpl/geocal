@@ -1223,11 +1223,11 @@ void QuaternionOrbitData::fill_in_ci_to_cf() const
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<QuaternionOrbitData>
- QuaternionOrbitData::interpolate(const QuaternionOrbitData& t1, 
-				  const QuaternionOrbitData& t2,
-				  const TimeWithDerivative& tm)
+ QuaternionOrbitData::interpolate
+(const QuaternionOrbitData& t1, const QuaternionOrbitData& t2,
+ const TimeWithDerivative& tm, bool Extrapolation_ok)
 {
-  if(tm.value() < t1.time() || tm.value() > t2.time())
+  if(!Extrapolation_ok && (tm.value() < t1.time() || tm.value() > t2.time()))
     throw Exception("tm needs to be between t1 and t2");
   double tspace = t2.time() - t1.time();
   AutoDerivative<double> toffset = tm - t1.time_with_derivative();
@@ -1304,9 +1304,10 @@ boost::shared_ptr<QuaternionOrbitData>
 QuaternionOrbitData::interpolate
 (const QuaternionOrbitData& t1, 
  const QuaternionOrbitData& t2,
- const Time& tm)
+ const Time& tm,
+ bool Extrapolation_ok)
 {
-  if(tm < t1.time() || tm > t2.time())
+  if(!Extrapolation_ok && (tm < t1.time() || tm > t2.time()))
     throw Exception("tm needs to be between t1 and t2");
   double tspace = t2.time() - t1.time();
   double toffset = tm - t1.time();

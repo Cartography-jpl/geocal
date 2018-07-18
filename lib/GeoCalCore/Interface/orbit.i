@@ -180,11 +180,11 @@ public:
   static boost::shared_ptr<QuaternionOrbitData>
   interpolate(const QuaternionOrbitData& t1, 
 	      const QuaternionOrbitData& t2, 
-	      const TimeWithDerivative& tm);
+	      const TimeWithDerivative& tm, bool Extrapolation_ok = false);
   static boost::shared_ptr<QuaternionOrbitData>
   interpolate(const QuaternionOrbitData& t1, 
 	      const QuaternionOrbitData& t2, 
-	      const Time& tm);
+	      const Time& tm, bool Extrapolation_ok = false);
   %python_attribute_with_set(sc_to_ci, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_ci_with_derivative, 
 		    boost::math::quaternion<AutoDerivative<double> >)

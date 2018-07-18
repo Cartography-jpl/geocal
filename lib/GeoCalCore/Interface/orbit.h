@@ -316,12 +316,13 @@ public:
   virtual void print(std::ostream& Os) const;
   static boost::shared_ptr<QuaternionOrbitData>
   interpolate(const QuaternionOrbitData& t1, 
-		      const QuaternionOrbitData& t2, 
-		      const TimeWithDerivative& tm);
+	      const QuaternionOrbitData& t2, 
+	      const TimeWithDerivative& tm,
+	      bool Extrapolation_ok = false);
   static boost::shared_ptr<QuaternionOrbitData>
   interpolate(const QuaternionOrbitData& t1, 
-		      const QuaternionOrbitData& t2, 
-		      const Time& tm);
+	      const QuaternionOrbitData& t2, 
+	      const Time& tm, bool Extrapolation_ok = false);
 
 //-----------------------------------------------------------------------
 /// Return the quaternion used to go from spacecraft to cartesian inertial

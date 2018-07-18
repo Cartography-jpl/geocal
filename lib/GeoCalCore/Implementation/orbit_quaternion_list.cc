@@ -59,7 +59,7 @@ boost::shared_ptr<OrbitData> OrbitQuaternionList::orbit_data(Time T) const
 {
   boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2;
   interpolate_or_extrapolate_data(T, q1, q2);
-  return QuaternionOrbitData::interpolate(*q1, *q2, T);
+  return QuaternionOrbitData::interpolate(*q1, *q2, T, true);
 }
 
 // See base class for description.
@@ -68,7 +68,7 @@ OrbitQuaternionList::orbit_data(const TimeWithDerivative& T) const
 {
   boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2;
   interpolate_or_extrapolate_data(T.value(), q1, q2);
-  return QuaternionOrbitData::interpolate(*q1, *q2, T);
+  return QuaternionOrbitData::interpolate(*q1, *q2, T, true);
 }
 
 boost::shared_ptr<CartesianFixed> OrbitQuaternionList::position_cf(Time T) const

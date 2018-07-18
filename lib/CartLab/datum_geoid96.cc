@@ -50,16 +50,30 @@ DatumGeoid96::DatumGeoid96(const std::string& Fname)
 
 double DatumGeoid96::undulation(const GroundCoordinate& Gc) const
 {
+  // Data can be slightly out of range as we cross the dateline
+  // (sample 0). Truncate this is we are slightly past the ends.
+  ImageCoordinate ic = data->coordinate(Gc);
+  if(ic.sample < 0)
+    ic.sample = 0;
+  if(ic.sample >= data->number_sample() - 1)
+    ic.sample = data->number_sample() - 1 - 0.01;
   // Data is scaled by 100 to fit into a integer. So we multiple by
   // 0.01 to get back the orginal data.
-  return data->interpolate(data->coordinate(Gc)) * 0.01;
+  return data->interpolate(ic) * 0.01;
 }
 
 double DatumGeoid96::undulation(const Geodetic& Gc) const
 {
+  // Data can be slightly out of range as we cross the dateline
+  // (sample 0). Truncate this is we are slightly past the ends.
+  ImageCoordinate ic = data->coordinate(Gc);
+  if(ic.sample < 0)
+    ic.sample = 0;
+  if(ic.sample >= data->number_sample() - 1)
+    ic.sample = data->number_sample() - 1 - 0.01;
   // Data is scaled by 100 to fit into a integer. So we multiple by
   // 0.01 to get back the orginal data.
-  return data->interpolate(data->coordinate(Gc)) * 0.01;
+  return data->interpolate(ic) * 0.01;
 }
 
 //-----------------------------------------------------------------------

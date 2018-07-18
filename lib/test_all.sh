@@ -27,6 +27,7 @@ else
 fi
 
 if [ ${log_test} ] ; then
+    echo ${tool_command} ./geocal_test_all --log_level=test_suite --run_test=${run_test}
     ${tool_command} ./geocal_test_all --log_level=test_suite --run_test=${run_test}
 else
     echo "${tool_command} ./geocal_test_all --show_progress --run_test=${run_test}"

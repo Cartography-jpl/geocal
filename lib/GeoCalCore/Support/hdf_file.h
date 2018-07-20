@@ -41,6 +41,8 @@ public:
 	 const std::string& Dataname, 
 	 const blitz::TinyVector<int,D>& Start, 
 	 const blitz::TinyVector<int,D>& Size) const;
+  template<class T> T read_field(
+	 const std::string& Dataname) const;
   template<class T, int D> blitz::Array<T, D> 
   read_attribute(const std::string& Aname) const;
   template<class T> T read_attribute(const std::string& Aname) const;
@@ -80,6 +82,8 @@ public:
   // Map type of blitz array to type of data in file.
   template<class T> H5::PredType pred_data() const;
   void print(std::ostream& Os) const;
+
+  const boost::shared_ptr<H5::H5File>& h5_handle() const {return h;}
 private:
   boost::shared_ptr<H5::H5File> h;
   unsigned int flag;
@@ -451,6 +455,52 @@ HdfFile::read_field(
   size2 = Size;
   return helper.read_field(*this, *h, Dataname, start2, size2);
 }
+
+//-----------------------------------------------------------------------
+/// Read a given scalar field. This is a array of size 1, which we
+/// return just the value in.
+//-----------------------------------------------------------------------
+
+template<class T> inline 
+T HdfFile::read_field(const std::string& Dataname) const
+{
+  try {
+    using namespace H5;
+    DataSet d = h->openDataSet(Dataname);
+    DataSpace ds = d.getSpace();
+    T res;
+    d.read(&res, pred_arr<T>());
+    return res;
+  } catch(const H5::Exception& e) {
+    Exception en;
+    en << "While reading field " << Dataname
+       << " for the file '" << file_name()
+       << "' a HDF 5 Exception thrown:\n"
+       << "  " << e.getDetailMsg();
+    throw en;
+  }
+}
+
+template<> inline 
+std::string HdfFile::read_field(const std::string& Dataname) const
+{
+  try {
+    using namespace H5;
+    DataSet d = h->openDataSet(Dataname);
+    const char* tp;
+    d.read(&tp, d.getStrType());
+    std::string res(tp);
+    return res;
+  } catch(const H5::Exception& e) {
+    Exception en;
+    en << "While reading field " << Dataname
+       << " for the file '" << file_name()
+       << "' a HDF 5 Exception thrown:\n"
+       << "  " << e.getDetailMsg();
+    throw en;
+  }
+}
+
 }
 
 GEOCAL_EXPORT_KEY(HdfFile);

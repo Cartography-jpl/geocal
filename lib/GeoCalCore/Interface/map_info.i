@@ -38,8 +38,24 @@ public:
   MapInfo map_union(const MapInfo& Mi) const;
   void index_to_coordinate(double Pixel_x_index, double Pixel_y_index,
       double& OUTPUT, double& OUTPUT) const;
+  void index_to_coordinate(const blitz::Array<double, 1>& Pixel_x_index,
+			   const blitz::Array<double, 1>& Pixel_y_index,
+			   blitz::Array<double,1>& OUTPUT,
+			   blitz::Array<double,1>& OUTPUT) const;
+  void index_to_coordinate(const blitz::Array<double, 2>& Pixel_x_index,
+			   const blitz::Array<double, 2>& Pixel_y_index,
+			   blitz::Array<double,2>& OUTPUT,
+			   blitz::Array<double,2>& OUTPUT) const;
   void coordinate_to_index(double Pixel_x_coordinate, double Pixel_y_coordinate,
 			   double& OUTPUT, double& OUTPUT) const;
+  void coordinate_to_index(const blitz::Array<double,1>& Pixel_x_coordinate,
+			   const blitz::Array<double,1>& Pixel_y_coordinate,
+			   blitz::Array<double,1>& Pixel_x_index,
+			   blitz::Array<double,1>& Pixel_y_index) const;
+  void coordinate_to_index(const blitz::Array<double,2>& Pixel_x_coordinate,
+			   const blitz::Array<double,2>& Pixel_y_coordinate,
+			   blitz::Array<double,2>& Pixel_x_index,
+			   blitz::Array<double,2>& Pixel_y_index) const;
   %python_attribute(lrc_x, double)
   %python_attribute(lrc_y, double)
   %python_attribute(number_x_pixel, int)

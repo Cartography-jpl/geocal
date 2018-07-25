@@ -110,6 +110,31 @@ public:
       (Pixel_y_index + 0.5) * param(5);
   }
 
+  void index_to_coordinate(const blitz::Array<double, 1>& Pixel_x_index,
+			   const blitz::Array<double, 1>& Pixel_y_index,
+			   blitz::Array<double, 1>& Pixel_x_coordinate,
+			   blitz::Array<double, 1>& Pixel_y_coordinate) const
+  {
+    Pixel_x_coordinate.resize(Pixel_x_index.shape());
+    Pixel_y_coordinate.resize(Pixel_x_index.shape());
+    Pixel_x_coordinate = param(0) + (Pixel_x_index + 0.5) * param(1) + 
+      (Pixel_y_index + 0.5) * param(2);
+    Pixel_y_coordinate = param(3) + (Pixel_x_index + 0.5) * param(4) + 
+      (Pixel_y_index + 0.5) * param(5);
+  }
+  void index_to_coordinate(const blitz::Array<double, 2>& Pixel_x_index,
+			   const blitz::Array<double, 2>& Pixel_y_index,
+			   blitz::Array<double, 2>& Pixel_x_coordinate,
+			   blitz::Array<double, 2>& Pixel_y_coordinate) const
+  {
+    Pixel_x_coordinate.resize(Pixel_x_index.shape());
+    Pixel_y_coordinate.resize(Pixel_x_index.shape());
+    Pixel_x_coordinate = param(0) + (Pixel_x_index + 0.5) * param(1) + 
+      (Pixel_y_index + 0.5) * param(2);
+    Pixel_y_coordinate = param(3) + (Pixel_x_index + 0.5) * param(4) + 
+      (Pixel_y_index + 0.5) * param(5);
+  }
+
 //-----------------------------------------------------------------------
 /// Convert pixel coordinate to pixel index.
 //-----------------------------------------------------------------------
@@ -117,6 +142,34 @@ public:
   void coordinate_to_index(double Pixel_x_coordinate, double Pixel_y_coordinate,
 			   double& Pixel_x_index, double& Pixel_y_index) const
   {
+    Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) - 
+		     param(2) * (Pixel_y_coordinate - param(3))) / 
+      (param(5) * param(1) - param(2) * param(4)) - 0.5;
+    Pixel_y_index = (param(4) * (Pixel_x_coordinate - param(0)) - 
+		     param(1) * (Pixel_y_coordinate - param(3))) / 
+      (param(4) * param(2) - param(1) * param(5)) - 0.5;
+  }
+  void coordinate_to_index(const blitz::Array<double,1>& Pixel_x_coordinate,
+			   const blitz::Array<double,1>& Pixel_y_coordinate,
+			   blitz::Array<double,1>& Pixel_x_index,
+			   blitz::Array<double,1>& Pixel_y_index) const
+  {
+    Pixel_x_index.resize(Pixel_x_coordinate.shape());
+    Pixel_y_index.resize(Pixel_y_coordinate.shape());
+    Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) - 
+		     param(2) * (Pixel_y_coordinate - param(3))) / 
+      (param(5) * param(1) - param(2) * param(4)) - 0.5;
+    Pixel_y_index = (param(4) * (Pixel_x_coordinate - param(0)) - 
+		     param(1) * (Pixel_y_coordinate - param(3))) / 
+      (param(4) * param(2) - param(1) * param(5)) - 0.5;
+  }
+  void coordinate_to_index(const blitz::Array<double,2>& Pixel_x_coordinate,
+			   const blitz::Array<double,2>& Pixel_y_coordinate,
+			   blitz::Array<double,2>& Pixel_x_index,
+			   blitz::Array<double,2>& Pixel_y_index) const
+  {
+    Pixel_x_index.resize(Pixel_x_coordinate.shape());
+    Pixel_y_index.resize(Pixel_y_coordinate.shape());
     Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) - 
 		     param(2) * (Pixel_y_coordinate - param(3))) / 
       (param(5) * param(1) - param(2) * param(4)) - 0.5;

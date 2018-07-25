@@ -274,8 +274,6 @@ void MapInfo::print(std::ostream& Os) const
 MapInfo MapInfo::subset(int x_index, int y_index, int nx_pixel,
 			int ny_pixel) const 
 {
-  // This won't be right for rotated coordinate system, we'll come
-  // back to this.
   MapInfo res(*this);
   index_to_coordinate(x_index - 0.5, y_index - 0.5, res.param(0), 
 		      res.param(3));
@@ -294,8 +292,6 @@ MapInfo MapInfo::subset(int x_index, int y_index, int nx_pixel,
 MapInfo MapInfo::subset(double x_index, double y_index, int nx_pixel,
 			int ny_pixel) const 
 {
-  // This won't be right for rotated coordinate system, we'll come
-  // back to this.
   MapInfo res(*this);
   index_to_coordinate(x_index - 0.5, y_index - 0.5, res.param(0), 
 		      res.param(3));

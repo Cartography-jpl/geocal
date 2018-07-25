@@ -319,24 +319,27 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
         return _map_info.MapInfo_map_union(self, Mi)
 
 
-    def index_to_coordinate(self, Pixel_x_index, Pixel_y_index):
+    def index_to_coordinate(self, *args):
         """
 
-        void GeoCal::MapInfo::index_to_coordinate(double Pixel_x_index, double Pixel_y_index, double
-        &Pixel_x_coordinate, double &Pixel_y_coordinate) const
-        Convert pixel index to pixel coordinate. 
+        void GeoCal::MapInfo::index_to_coordinate(const blitz::Array< double, 2 > &Pixel_x_index, const blitz::Array<
+        double, 2 > &Pixel_y_index, blitz::Array< double, 2 >
+        &Pixel_x_coordinate, blitz::Array< double, 2 > &Pixel_y_coordinate)
+        const
+
         """
-        return _map_info.MapInfo_index_to_coordinate(self, Pixel_x_index, Pixel_y_index)
+        return _map_info.MapInfo_index_to_coordinate(self, *args)
 
 
-    def coordinate_to_index(self, Pixel_x_coordinate, Pixel_y_coordinate):
+    def coordinate_to_index(self, *args):
         """
 
-        void GeoCal::MapInfo::coordinate_to_index(double Pixel_x_coordinate, double Pixel_y_coordinate, double
-        &Pixel_x_index, double &Pixel_y_index) const
-        Convert pixel coordinate to pixel index. 
+        void GeoCal::MapInfo::coordinate_to_index(const blitz::Array< double, 2 > &Pixel_x_coordinate, const
+        blitz::Array< double, 2 > &Pixel_y_coordinate, blitz::Array< double, 2
+        > &Pixel_x_index, blitz::Array< double, 2 > &Pixel_y_index) const
+
         """
-        return _map_info.MapInfo_coordinate_to_index(self, Pixel_x_coordinate, Pixel_y_coordinate)
+        return _map_info.MapInfo_coordinate_to_index(self, *args)
 
 
     def _v_lrc_x(self):

@@ -7606,7 +7606,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
   double arg2 ;
@@ -7625,11 +7625,10 @@ SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate(PyObject *SWIGUNUSEDPARM(
   int res4 = SWIG_TMPOBJ ;
   double temp5 ;
   int res5 = SWIG_TMPOBJ ;
-  PyObject *swig_obj[3] ;
   
   arg4 = &temp4;
   arg5 = &temp5;
-  if (!SWIG_Python_UnpackTuple(args,"MapInfo_index_to_coordinate",3,3,swig_obj)) SWIG_fail;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
@@ -7683,7 +7682,313 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  blitz::Array< double,1 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,1 > *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MapInfo const > *smartarg1 = 0 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,1 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > temp4 ;
+  blitz::Array< double,1 > temp5 ;
+  
+  {
+    arg4 = &temp4;
+  }
+  {
+    arg5 = &temp5;
+  }
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MapInfo_index_to_coordinate" "', argument " "1"" of type '" "GeoCal::MapInfo const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_index_to_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_index_to_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_index_to_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_index_to_coordinate', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 1>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    try {
+      ((GeoCal::MapInfo const *)arg1)->index_to_coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = arg4->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg4->stride(i) * sizeof(double);
+    }
+    PyObject *res = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, arg4->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*arg4);
+    PyArray_SetBaseObject((PyArrayObject*)res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  {
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = arg5->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg5->stride(i) * sizeof(double);
+    }
+    PyObject *res = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, arg5->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*arg5);
+    PyArray_SetBaseObject((PyArrayObject*)res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,2 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MapInfo const > *smartarg1 = 0 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,2 > temp4 ;
+  blitz::Array< double,2 > temp5 ;
+  
+  {
+    arg4 = &temp4;
+  }
+  {
+    arg5 = &temp5;
+  }
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MapInfo_index_to_coordinate" "', argument " "1"" of type '" "GeoCal::MapInfo const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_index_to_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_index_to_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_index_to_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_index_to_coordinate', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    try {
+      ((GeoCal::MapInfo const *)arg1)->index_to_coordinate((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg4->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg4->stride(i) * sizeof(double);
+    }
+    PyObject *res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg4->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg4);
+    PyArray_SetBaseObject((PyArrayObject*)res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  {
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg5->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg5->stride(i) * sizeof(double);
+    }
+    PyObject *res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg5->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg5);
+    PyArray_SetBaseObject((PyArrayObject*)res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"MapInfo_index_to_coordinate",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_1;
+    return _wrap_MapInfo_index_to_coordinate__SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 3) {
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_2;
+    return _wrap_MapInfo_index_to_coordinate__SWIG_1(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 3) {
+    return _wrap_MapInfo_index_to_coordinate__SWIG_2(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MapInfo_index_to_coordinate'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::MapInfo::index_to_coordinate(double,double,double &,double &) const\n"
+    "    GeoCal::MapInfo::index_to_coordinate(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &,blitz::Array< double,1 > &,blitz::Array< double,1 > &) const\n"
+    "    GeoCal::MapInfo::index_to_coordinate(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > &,blitz::Array< double,2 > &) const\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
   double arg2 ;
@@ -7702,11 +8007,10 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index(PyObject *SWIGUNUSEDPARM(
   int res4 = SWIG_TMPOBJ ;
   double temp5 ;
   int res5 = SWIG_TMPOBJ ;
-  PyObject *swig_obj[3] ;
   
   arg4 = &temp4;
   arg5 = &temp5;
-  if (!SWIG_Python_UnpackTuple(args,"MapInfo_coordinate_to_index",3,3,swig_obj)) SWIG_fail;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
@@ -7757,6 +8061,267 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index(PyObject *SWIGUNUSEDPARM(
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  blitz::Array< double,1 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,1 > *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MapInfo const > *smartarg1 = 0 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,1 > a3 ;
+  PythonObject numpy3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MapInfo_coordinate_to_index" "', argument " "1"" of type '" "GeoCal::MapInfo const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_coordinate_to_index', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_coordinate_to_index', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_coordinate_to_index', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_coordinate_to_index', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 1>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__ArrayT_double_1_t,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "MapInfo_coordinate_to_index" "', argument " "4"" of type '" "blitz::Array< double,1 > &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MapInfo_coordinate_to_index" "', argument " "4"" of type '" "blitz::Array< double,1 > &""'"); 
+  }
+  arg4 = reinterpret_cast< blitz::Array< double,1 > * >(argp4);
+  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__ArrayT_double_1_t,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "MapInfo_coordinate_to_index" "', argument " "5"" of type '" "blitz::Array< double,1 > &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MapInfo_coordinate_to_index" "', argument " "5"" of type '" "blitz::Array< double,1 > &""'"); 
+  }
+  arg5 = reinterpret_cast< blitz::Array< double,1 > * >(argp5);
+  {
+    try {
+      ((GeoCal::MapInfo const *)arg1)->coordinate_to_index((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,2 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MapInfo const > *smartarg1 = 0 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MapInfo_coordinate_to_index" "', argument " "1"" of type '" "GeoCal::MapInfo const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_coordinate_to_index', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_coordinate_to_index', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_coordinate_to_index', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'MapInfo_coordinate_to_index', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__ArrayT_double_2_t,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "MapInfo_coordinate_to_index" "', argument " "4"" of type '" "blitz::Array< double,2 > &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MapInfo_coordinate_to_index" "', argument " "4"" of type '" "blitz::Array< double,2 > &""'"); 
+  }
+  arg4 = reinterpret_cast< blitz::Array< double,2 > * >(argp4);
+  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_blitz__ArrayT_double_2_t,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "MapInfo_coordinate_to_index" "', argument " "5"" of type '" "blitz::Array< double,2 > &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MapInfo_coordinate_to_index" "', argument " "5"" of type '" "blitz::Array< double,2 > &""'"); 
+  }
+  arg5 = reinterpret_cast< blitz::Array< double,2 > * >(argp5);
+  {
+    try {
+      ((GeoCal::MapInfo const *)arg1)->coordinate_to_index((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"MapInfo_coordinate_to_index",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_MapInfo_coordinate_to_index__SWIG_0(self, argc, argv);
+  }
+  if (argc == 5) {
+    int _v = 0;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[1]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      {
+        PythonObject t(to_numpy<double >(argv[2]));
+        _v = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==1 ? 1 : 0);
+      }
+    }
+    if (!_v) goto check_2;
+    {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_blitz__ArrayT_double_1_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[4], &vptr, SWIGTYPE_p_blitz__ArrayT_double_1_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_2;
+    return _wrap_MapInfo_coordinate_to_index__SWIG_1(self, argc, argv);
+  }
+check_2:
+  
+  if (argc == 5) {
+    return _wrap_MapInfo_coordinate_to_index__SWIG_2(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MapInfo_coordinate_to_index'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::MapInfo::coordinate_to_index(double,double,double &,double &) const\n"
+    "    GeoCal::MapInfo::coordinate_to_index(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &,blitz::Array< double,1 > &,blitz::Array< double,1 > &) const\n"
+    "    GeoCal::MapInfo::coordinate_to_index(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > &,blitz::Array< double,2 > &) const\n");
+  return 0;
 }
 
 
@@ -8552,15 +9117,18 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"MapInfo_index_to_coordinate", _wrap_MapInfo_index_to_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::MapInfo::index_to_coordinate(double Pixel_x_index, double Pixel_y_index, double\n"
-		"&Pixel_x_coordinate, double &Pixel_y_coordinate) const\n"
-		"Convert pixel index to pixel coordinate. \n"
+		"void GeoCal::MapInfo::index_to_coordinate(const blitz::Array< double, 2 > &Pixel_x_index, const blitz::Array<\n"
+		"double, 2 > &Pixel_y_index, blitz::Array< double, 2 >\n"
+		"&Pixel_x_coordinate, blitz::Array< double, 2 > &Pixel_y_coordinate)\n"
+		"const\n"
+		"\n"
 		""},
 	 { (char *)"MapInfo_coordinate_to_index", _wrap_MapInfo_coordinate_to_index, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::MapInfo::coordinate_to_index(double Pixel_x_coordinate, double Pixel_y_coordinate, double\n"
-		"&Pixel_x_index, double &Pixel_y_index) const\n"
-		"Convert pixel coordinate to pixel index. \n"
+		"void GeoCal::MapInfo::coordinate_to_index(const blitz::Array< double, 2 > &Pixel_x_coordinate, const\n"
+		"blitz::Array< double, 2 > &Pixel_y_coordinate, blitz::Array< double, 2\n"
+		"> &Pixel_x_index, blitz::Array< double, 2 > &Pixel_y_index) const\n"
+		"\n"
 		""},
 	 { (char *)"MapInfo__v_lrc_x", (PyCFunction)_wrap_MapInfo__v_lrc_x, METH_O, (char *)"\n"
 		"\n"

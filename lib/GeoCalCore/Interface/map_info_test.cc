@@ -93,7 +93,10 @@ BOOST_AUTO_TEST_CASE(basic)
 
 BOOST_AUTO_TEST_CASE(rotated)
 {
-  
+  // Note we can compare these values to GDAL, by writing out a file
+  // and using the gdaltransform program to convert. Note that our
+  // ImageCoordinate convention and GDAL's are different. The point
+  // (0,0) in GDAL is the ULC, or (-0.5,-0.5) in ImageCoordinate.
   double ulc_x = 50;
   double ulc_y = 60;
   Array<double, 1> param(6);

@@ -229,7 +229,7 @@ class TiePointCollect(object):
                 mi = map_info
                 if(mi is None):
                     mi = igc1.coverage(ref_image.map_info)
-                self.itoim[j] = SurfaceImageToImageMatch(igc1, ref_igc,
+                self.itoim[j] = SurfaceImageToImageMatch(igc1, self.ref_igc,
                                  mi, self.gcp_image_matcher, grid_spacing)
 
     def __getstate__(self):
@@ -413,7 +413,7 @@ class TiePointCollectFM(object):
         if(not have_cv2):
             raise RuntimeError("This class requires the openCV python library cv2, which is not available.")
         self.raster_image = [igc_collection.image(i) for i in range(igc_collection.number_image)]
-        if(self.igc_collection.number_image > 1):
+        if(igc_collection.number_image > 1):
             self.ri = RayIntersect3(igc_collection,
                                 max_ground_covariance = max_ground_covariance)
         self.max_ground_covariance = max_ground_covariance

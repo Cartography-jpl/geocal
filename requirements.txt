@@ -35,7 +35,11 @@ tabulate
 # Needed while we support both python 2 and 3
 future
 six
+#
 # For uploading doxygen documentation to github, we need ghp-import.
 # I don't list this as an actual requirement since this is only needed
 # on a development machine where we are updating the documentation
 # ghp-import
+#
+# Not a strict requirement, but can't use the NITF code without this
+# pynitf

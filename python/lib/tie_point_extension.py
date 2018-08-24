@@ -10,7 +10,8 @@ from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 from .misc import makedirs_p
 from geocal_swig import IgcMapProjected, CartesianFixedLookVector, \
-    LnLookVector, Ecr, ImageCoordinate, distance, TiePoint, TiePointCollection
+    LnLookVector, Ecr, ImageCoordinate, distance, TiePoint, TiePointCollection, \
+    distance, SimpleDem
 import copy
 import numpy as np
 import re
@@ -273,7 +274,7 @@ def _tpcol_data_frame(self, igccol, image_index):
 
     df = tpcol.data_frame(igccol, image_index)
     cmap = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
-    plt.scatter(df.line, df.sample, c = df.line_residual, cmap = cmap)
+    plt.scatter(df.sample, df.line, c = df.line_residual, cmap = cmap)
     plt.colorbar()
     '''
     if(not have_pandas):
@@ -282,7 +283,8 @@ def _tpcol_data_frame(self, igccol, image_index):
     ind = [ tp.id for tp in self ]
     is_gcp = [ tp.is_gcp for tp in self ]
     nimgloc = [ tp.number_image_location for tp in self ]
-    data = np.full((len(self), 8), np.NaN)
+    data = np.full((len(self), 9), np.NaN)
+    d = SimpleDem()
     for i, tp in enumerate(self):
         iloc = tp.image_coordinate(image_index)
         if(iloc):
@@ -294,11 +296,13 @@ def _tpcol_data_frame(self, igccol, image_index):
                 data[i,3] = tp.sample_sigma(image_index)
                 data[i, 4] = icpred.line
                 data[i, 5] = icpred.sample
+                data[i, 6] = distance(d.surface_point(tp.ground_location),
+                             d.surface_point(igc.ground_coordinate(iloc)))
             except RuntimeError as e:
                 if(str(e) != "ImageGroundConnectionFailed"):
                     raise e
-    data[:,6] = data[:, 0] - data[:, 4]
-    data[:,7] = data[:, 1] - data[:, 5]
+    data[:,7] = data[:, 0] - data[:, 4]
+    data[:,8] = data[:, 1] - data[:, 5]
     return pd.DataFrame({ 'line' : data[:,0],
                           'samp' : data[:, 1],
                           'number_image_location' : nimgloc,
@@ -306,8 +310,9 @@ def _tpcol_data_frame(self, igccol, image_index):
                           'samp_sigma' : data[:, 3],
                           'line_pred' : data[:, 4],
                           'samp_pred' : data[:, 5],
-                          'line_residual' : data[:, 6],
-                          'samp_residual' : data[:, 7],
+                          'ground_2d_distance' : data[:, 6],
+                          'line_residual' : data[:, 7],
+                          'samp_residual' : data[:, 8],
                           'is_gcp' : is_gcp },
                         index=ind)
 

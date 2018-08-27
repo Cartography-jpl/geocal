@@ -175,5 +175,14 @@ void DemMapInfo::initialize(const boost::shared_ptr<Datum>& D,
   datum_ = D;
   map_info_ = M;
   outside_dem_is_error_ = Outside_dem_is_error;
-  naif_code_ = M.ground_coordinate(0,0)->naif_code();
+  try {
+    naif_code_ = M.ground_coordinate(0,0)->naif_code();
+  } catch(const Exception& E) {
+    // We have DEMs where 0,0 is actually invalid point. For example
+    // etop02nobath.hlf cover the whole earth including the north pole.
+    // 0,0 is actually an invalid value. So if 0,0 fails, try the center
+    // as backup.
+    naif_code_ = M.ground_coordinate(M.number_x_pixel() / 2,
+				     M.number_y_pixel() / 2)->naif_code();
+  }
 }

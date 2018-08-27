@@ -847,7 +847,8 @@ VICAR_RTL_CFLAGS
 THIRDPARTY
 HAVE_CURSES_FALSE
 HAVE_CURSES_TRUE
-CURSES_LIB
+CURSES_LIBS
+CURSES_CFLAGS
 geocalsupportdir
 pkgconfigdir
 PKG_CONFIG_LIBDIR
@@ -1061,6 +1062,8 @@ DEBUG_FLAGS
 PKG_CONFIG
 PKG_CONFIG_PATH
 PKG_CONFIG_LIBDIR
+CURSES_CFLAGS
+CURSES_LIBS
 THIRDPARTY
 VICAR_RTL_CFLAGS
 VICAR_RTL_LIBS
@@ -1840,6 +1843,9 @@ Some influential environment variables:
               directories to add to pkg-config's search path
   PKG_CONFIG_LIBDIR
               path overriding pkg-config's built-in search path
+  CURSES_CFLAGS
+              C compiler flags for CURSES, overriding pkg-config
+  CURSES_LIBS linker flags for CURSES, overriding pkg-config
   THIRDPARTY  It is common that either 1) you want to build a local copy of
               all thirdparty software or 2) you have a central location not
               already searched for that you want to be searched. You can
@@ -18202,9 +18208,84 @@ fi
 
    have_curses="no"
    mp_save_LIBS="$LIBS"
-   CURSES_LIB=""
-   if test "$with_ncurses" != yes
-   then
+   CURSES_LIBS=""
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for CURSES" >&5
+$as_echo_n "checking for CURSES... " >&6; }
+
+if test -n "$CURSES_CFLAGS"; then
+    pkg_cv_CURSES_CFLAGS="$CURSES_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ncurses\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ncurses") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_CURSES_CFLAGS=`$PKG_CONFIG --cflags "ncurses" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$CURSES_LIBS"; then
+    pkg_cv_CURSES_LIBS="$CURSES_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ncurses\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ncurses") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_CURSES_LIBS=`$PKG_CONFIG --libs "ncurses" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        CURSES_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "ncurses" 2>&1`
+        else
+	        CURSES_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "ncurses" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$CURSES_PKG_ERRORS" >&5
+
+	succeeded=no
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	succeeded=no
+else
+	CURSES_CFLAGS=$pkg_cv_CURSES_CFLAGS
+	CURSES_LIBS=$pkg_cv_CURSES_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	succeeded=yes
+fi
+  if test "$succeeded" = "yes"; then
+
+$as_echo "#define HAVE_NCURSES_H 1" >>confdefs.h
+
+       have_curses="yes"
+   elif test "$with_ncurses" != yes; then
      { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working curses" >&5
 $as_echo_n "checking for working curses... " >&6; }
 if ${mp_cv_curses+:} false; then :
@@ -18237,12 +18318,11 @@ $as_echo "$mp_cv_curses" >&6; }
 
 $as_echo "#define HAVE_CURSES_H 1" >>confdefs.h
 
-       CURSES_LIB="-lcurses"
+       CURSES_LIBS="-lcurses"
        have_curses="yes"
      fi
    fi
-   if test ! "$CURSES_LIB"
-   then
+   if test ! "$CURSES_LIBS"; then
      { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working ncurses" >&5
 $as_echo_n "checking for working ncurses... " >&6; }
 if ${mp_cv_ncurses+:} false; then :
@@ -18270,18 +18350,17 @@ rm -f core conftest.err conftest.$ac_objext \
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $mp_cv_ncurses" >&5
 $as_echo "$mp_cv_ncurses" >&6; }
-     if test "$mp_cv_ncurses" = yes
-     then
+     if test "$mp_cv_ncurses" = yes; then
 
 $as_echo "#define HAVE_NCURSES_H 1" >>confdefs.h
 
-       CURSES_LIB="-lncurses"
+       CURSES_LIBS="-lncurses"
        have_curses="yes"
      fi
    fi
    LIBS="$mp_save_LIBS"
 
- if test "$have_curses" = "yes"; then
+    if test "$have_curses" = "yes"; then
   HAVE_CURSES_TRUE=
   HAVE_CURSES_FALSE='#'
 else

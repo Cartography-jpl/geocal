@@ -10,9 +10,9 @@
 #
 #   Detect SysV compatible curses, such as ncurses.
 #
-#   Defines HAVE_CURSES_H or HAVE_NCURSES_H if curses is found. CURSES_LIB
+#   Defines HAVE_CURSES_H or HAVE_NCURSES_H if curses is found. CURSES_LIBS
 #   is also set with the required libary, but is not appended to LIBS
-#   automatically. If no working curses libary is found CURSES_LIB will be
+#   automatically. If no working curses libary is found CURSES_LIBS will be
 #   left blank.
 #
 #   This macro adds the option "--with-ncurses" to configure which can force
@@ -59,9 +59,12 @@ AC_DEFUN([MP_WITH_CURSES],
   [AC_ARG_WITH(ncurses, [  --with-ncurses          Force the use of ncurses over curses],,)
    have_curses="no"
    mp_save_LIBS="$LIBS"
-   CURSES_LIB=""
-   if test "$with_ncurses" != yes
-   then
+   CURSES_LIBS=""
+   PKG_CHECK_MODULES(CURSES, ncurses, [succeeded=yes], [succeeded=no])
+  if test "$succeeded" = "yes"; then
+       AC_DEFINE([HAVE_NCURSES_H],[1],[Define if you have ncurses.h])
+       have_curses="yes"
+   elif test "$with_ncurses" != yes; then
      AC_CACHE_CHECK([for working curses], mp_cv_curses,
        [LIBS="$LIBS -lcurses"
         AC_TRY_LINK(
@@ -71,26 +74,24 @@ AC_DEFUN([MP_WITH_CURSES],
      if test "$mp_cv_curses" = yes
      then
        AC_DEFINE([HAVE_CURSES_H],[1],[Define if you have curses.h])
-       CURSES_LIB="-lcurses"
+       CURSES_LIBS="-lcurses"
        have_curses="yes"
      fi
    fi
-   if test ! "$CURSES_LIB"
-   then
+   if test ! "$CURSES_LIBS"; then
      AC_CACHE_CHECK([for working ncurses], mp_cv_ncurses,
        [LIBS="$mp_save_LIBS -lncurses"
         AC_TRY_LINK(
           [#include <ncurses.h>],
           [chtype a; int b=A_STANDOUT, c=KEY_LEFT; initscr(); ],
           mp_cv_ncurses=yes, mp_cv_ncurses=no)])
-     if test "$mp_cv_ncurses" = yes
-     then
+     if test "$mp_cv_ncurses" = yes; then
        AC_DEFINE([HAVE_NCURSES_H],[1],[Define if you have ncurses.h])
-       CURSES_LIB="-lncurses"
+       CURSES_LIBS="-lncurses"
        have_curses="yes"
      fi
    fi
    LIBS="$mp_save_LIBS"
-AC_SUBST(CURSES_LIB)
-AM_CONDITIONAL([HAVE_CURSES], [test "$have_curses" = "yes"])
+   AC_SUBST(CURSES_LIBS)
+   AM_CONDITIONAL([HAVE_CURSES], [test "$have_curses" = "yes"])
 ])dnl

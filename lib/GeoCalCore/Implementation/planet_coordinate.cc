@@ -294,8 +294,8 @@ Planetocentric::Planetocentric
   : lat_(Latitude), lon_(Longitude), height_ellipsoid_(Height_ellipsoid),
     naif_code_(Naif_code)
 {
-  range_check(lat_, -90.0, 90.0);
-  range_check(lon_, -180.0, 180.0);
+  range_check_inclusive(lat_, -90.0, 90.0);
+  range_check_inclusive(lon_, -180.0, 180.0);
 }
 
 boost::shared_ptr<CartesianInertial> 

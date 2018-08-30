@@ -461,6 +461,26 @@ class OrbitOffsetCorrection(geocal_swig.orbit_correction.OrbitCorrection):
         return _orbit_offset_correction.OrbitOffsetCorrection_insert_position_time_point(self, T_pt)
 
 
+    def orbit_correction_parameter(self):
+        """
+
+        void OrbitOffsetCorrection::orbit_correction_parameter(std::vector< boost::shared_ptr< Time > > &Attitude_time_point,
+        blitz::Array< double, 2 > &Attitude_corr, std::vector<
+        boost::shared_ptr< Time > > &Position_time_point, blitz::Array<
+        double, 2 > &Position_corr)
+        Return the time points and corrections.
+
+        This is primarily of use for python wrappers, to give access to the
+        same kind of information that std::cout << *this gives.
+
+        We return the attitude correction in arcseconds, one row per time
+        point. The columns are yaw, pitch, and roll. The position correction
+        is returned in meters, one row per time point. The columns are X, Y, Z
+        offset. 
+        """
+        return _orbit_offset_correction.OrbitOffsetCorrection_orbit_correction_parameter(self)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -479,6 +499,7 @@ OrbitOffsetCorrection._v_fit_roll = new_instancemethod(_orbit_offset_correction.
 OrbitOffsetCorrection.update_quaterion = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_update_quaterion, None, OrbitOffsetCorrection)
 OrbitOffsetCorrection.insert_attitude_time_point = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_insert_attitude_time_point, None, OrbitOffsetCorrection)
 OrbitOffsetCorrection.insert_position_time_point = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_insert_position_time_point, None, OrbitOffsetCorrection)
+OrbitOffsetCorrection.orbit_correction_parameter = new_instancemethod(_orbit_offset_correction.OrbitOffsetCorrection_orbit_correction_parameter, None, OrbitOffsetCorrection)
 OrbitOffsetCorrection_swigregister = _orbit_offset_correction.OrbitOffsetCorrection_swigregister
 OrbitOffsetCorrection_swigregister(OrbitOffsetCorrection)
 

@@ -4,6 +4,7 @@
 #include "constant.h"
 #include "ecr.h"
 #include <boost/foreach.hpp>
+#include <boost/make_shared.hpp>
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -388,3 +389,46 @@ void OrbitOffsetCorrection::print(std::ostream& Os) const
        << pname[i] << "\n";
 }
 
+//-----------------------------------------------------------------------
+/// Return the time points and corrections. This is primarily of use
+/// for python wrappers, to give access to the same kind of
+/// information that std::cout << *this gives.
+///
+/// We return the attitude correction in arcseconds, one row per time
+/// point. The columns are yaw, pitch, and roll. The position
+/// correction is returned in meters, one row  per time point. The
+/// columns are X, Y, Z offset.
+//-----------------------------------------------------------------------
+
+void OrbitOffsetCorrection::orbit_correction_parameter
+(std::vector<boost::shared_ptr<Time> >& Attitude_time_point,
+ blitz::Array<double, 2>& Attitude_corr,
+ std::vector<boost::shared_ptr<Time> >&
+ Position_time_point,
+ blitz::Array<double, 2>& Position_corr)
+{
+  Attitude_time_point.clear();
+  Position_time_point.clear();
+  BOOST_FOREACH(att_map_pair_type e, att_corr)
+    Attitude_time_point.push_back(boost::make_shared<Time>(e.first));
+  BOOST_FOREACH(pos_map_pair_type e, pos_corr)
+    Position_time_point.push_back(boost::make_shared<Time>(e.first));
+  Attitude_corr.resize((int) Attitude_time_point.size(), 3);
+  Position_corr.resize((int) Position_time_point.size(), 3);
+  int i = 0;
+  BOOST_FOREACH(att_map_pair_type e, att_corr) {
+    AutoDerivative<double> y,p,r;
+    quat_to_ypr(e.second, y,p,r);
+    Attitude_corr(i, 0) = y.value() / Constant::arcsecond_to_rad;
+    Attitude_corr(i, 1) = p.value() / Constant::arcsecond_to_rad;
+    Attitude_corr(i, 2) = r.value() / Constant::arcsecond_to_rad;
+    ++i;
+  }
+  i = 0;
+  BOOST_FOREACH(pos_map_pair_type e, pos_corr) {
+    Position_corr(i, 0) = e.second[0].value();
+    Position_corr(i, 1) = e.second[1].value();
+    Position_corr(i, 2) = e.second[2].value();
+    ++i;
+  }
+}

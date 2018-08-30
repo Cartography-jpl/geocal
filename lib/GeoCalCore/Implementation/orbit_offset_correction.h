@@ -104,6 +104,13 @@ public:
   std::vector<Time> attitude_time_point() const;
   std::vector<Time> position_time_point() const;
 
+  void orbit_correction_parameter(std::vector<boost::shared_ptr<Time> >&
+				  Attitude_time_point,
+				  blitz::Array<double, 2>& Attitude_corr,
+				  std::vector<boost::shared_ptr<Time> >&
+				  Position_time_point,
+				  blitz::Array<double, 2>& Position_corr);
+  
 //-----------------------------------------------------------------------
 /// Directly update the quaternion at time_point i. This is
 /// occasionally more convenient that updating the parameters.

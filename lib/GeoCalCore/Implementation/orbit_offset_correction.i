@@ -35,6 +35,11 @@ public:
   void update_quaterion(int Ind, const boost::math::quaternion<double>& Q);
   void insert_attitude_time_point(Time T_pt);
   void insert_position_time_point(Time T_pt);
+  void orbit_correction_parameter
+  (std::vector<boost::shared_ptr<Time> >& OUTPUT,
+   blitz::Array<double, 2>& OUTPUT,
+   std::vector<boost::shared_ptr<Time> >& OUTPUT,
+   blitz::Array<double, 2>& OUTPUT);
   %pickle_serialization();
 };
 }

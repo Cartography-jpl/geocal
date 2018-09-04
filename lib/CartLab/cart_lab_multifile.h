@@ -106,6 +106,8 @@ protected:
   // This is the thing that gets filled in
   LocationToFile loc_to_file;	///< Map a pixel location to the file
 				///that contains it.
+  std::string first_file;	///< First file we have in
+				///loc_to_file. Useful as a sample file
 private:
   friend class boost::serialization::access;
   template<class Archive>

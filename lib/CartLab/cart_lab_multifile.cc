@@ -158,7 +158,7 @@ void CartLabMultifile::init_loc_to_file()
     e << "No data files found at " << dirbase;
     throw e;
   }
-
+  first_file = flist[0];
   // Calculate the map_info that fill cover all the data.
   map_info_.reset(new MapInfo(mi_ref.subset(smin, lmin, 
 		    smax - smin + mi_ref.number_x_pixel(),
@@ -245,6 +245,11 @@ public:
 /// We cover the given set of points, along with whatever boundary you
 /// request (just like MapInfo cover function).
 ///
+/// Note that datasets often have holes in them (e.g., no data over
+/// the ocean). These get filled in as zero. It is perfectly possible
+/// (and not an error) for there to be *no* data over the desired
+/// subset. In that case, we create a file with all zeros.
+///
 /// This executes the command shell gdalbuildvrt, which must be in the
 /// path. Right now with GDAL the same functionality can't be done
 /// through C++, but there is talk of making VRTBuilder found in
@@ -289,6 +294,10 @@ void CartLabMultifile::create_subset_file
 	      << ") size (" << numl << ", " << nums << ")\n";
   std::vector<std::string> flist = 
     loc_to_file.find_region(lstart, sstart, numl, nums);
+  if(flist.size() == 0) {
+    if(Verbose)
+      std::cout << "No files cover that area, creating a file of all zeros\n";
+  }
   std::vector<double> lat, lon;
   Geodetic g1 = Geodetic(*msub->ground_coordinate(-0.5,-0.5));
   Geodetic g2 = Geodetic(*msub->ground_coordinate(-0.5,
@@ -318,6 +327,11 @@ void CartLabMultifile::create_subset_file
   command << " " << f.temp_fname;
   BOOST_FOREACH(std::string f, flist)
     command << " " << f;
+  // Make sure we have at least one file in the list, even if this
+  // doesn't actually over the area at all. This will force
+  // gdalbuildvrt to make an empty file
+  if(flist.size() == 0)
+    command << " " << first_file;
   if(Verbose)
     std::cout << "GDAL command: " << command.str() << "\n";
   // Can ignore system status, we just fail in the next step when we

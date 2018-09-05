@@ -247,6 +247,11 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
         along with whatever boundary you request (just like MapInfo cover
         function).
 
+        Note that datasets often have holes in them (e.g., no data over the
+        ocean). These get filled in as zero. It is perfectly possible (and not
+        an error) for there to be no data over the desired subset. In that
+        case, we create a file with all zeros.
+
         This executes the command shell gdalbuildvrt, which must be in the
         path. Right now with GDAL the same functionality can't be done through
         C++, but there is talk of making VRTBuilder found in gdalbuildvrt

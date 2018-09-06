@@ -77,7 +77,7 @@ def mmap_file(*args, **kwargs):
             t = VicarRasterImage(fname, mi, "FULL")
         else:
             raise ValueError("Unsupport data type")
-        if(kwargs.get('nodata')):
+        if(kwargs.get('nodata') is not None):
             t["NODATA"] = kwargs.get('nodata')
         t = None                    # Force write to disk
         mode = kwargs.get('mode', 'r+')

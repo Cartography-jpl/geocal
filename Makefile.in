@@ -410,6 +410,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/raster_multifile_wrap.cc @swigsrc@/did_datum_wrap.cc \
 	@swigsrc@/dem_map_info_offset_wrap.cc \
 	@swigsrc@/map_info_image_ground_connection_wrap.cc \
+	@swigsrc@/geotiff_file_wrap.cc \
 	@swigsrc@/ground_mask_image_wrap.cc \
 	@swigsrc@/image_mask_image_wrap.cc \
 	@swigsrc@/raster_averaged_wrap.cc \
@@ -585,6 +586,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-did_datum_wrap.lo \
 	@swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo \
 	@swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo \
+	@swigsrc@/_swig_wrap_la-geotiff_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ground_mask_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-image_mask_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-raster_averaged_wrap.lo \
@@ -789,6 +791,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcinterface@/geometric_model.cc \
 	@srcimplementation@/did_datum.cc \
 	@srcimplementation@/dem_map_info_offset.cc \
+	@srcimplementation@/geotiff_file.cc \
 	@srcimplementation@/ground_mask_image.cc \
 	@srcimplementation@/image_mask_image.cc \
 	@srcimplementation@/raster_averaged.cc \
@@ -979,6 +982,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcinterface@/libgeocal_la-geometric_model.lo \
 	@srcimplementation@/libgeocal_la-did_datum.lo \
 	@srcimplementation@/libgeocal_la-dem_map_info_offset.lo \
+	@srcimplementation@/libgeocal_la-geotiff_file.lo \
 	@srcimplementation@/libgeocal_la-ground_mask_image.lo \
 	@srcimplementation@/libgeocal_la-image_mask_image.lo \
 	@srcimplementation@/libgeocal_la-raster_averaged.lo \
@@ -1171,6 +1175,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/sdp_helper_test.cc \
 	@srcimplementation@/did_datum_test.cc \
 	@srcimplementation@/dem_map_info_offset_test.cc \
+	@srcimplementation@/geotiff_file_test.cc \
 	@srcimplementation@/ground_mask_image_test.cc \
 	@srcimplementation@/raster_averaged_test.cc \
 	@srcimplementation@/raster_subsample_test.cc \
@@ -1330,6 +1335,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-sdp_helper_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-did_datum_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-dem_map_info_offset_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-geotiff_file_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-ground_mask_image_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-raster_averaged_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-raster_subsample_test.$(OBJEXT) \
@@ -1523,6 +1529,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_raster_image_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-geocal_gdal_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_array_test.Po \
@@ -1602,6 +1609,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_raster_image.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-geometric_model_image.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-geotiff_file.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-hdf_orbit.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_array.Plo \
@@ -1878,6 +1886,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-geodetic_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-geotiff_file_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_coordinate_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_image_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_wrap.Plo \
@@ -2141,6 +2150,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/did_datum.h \
 	@srcimplementation@/dem_map_info_offset.h \
 	@srcimplementation@/map_info_image_ground_connection.h \
+	@srcimplementation@/geotiff_file.h \
 	@srcimplementation@/ground_mask_image.h \
 	@srcimplementation@/image_mask_image.h \
 	@srcimplementation@/raster_averaged.h \
@@ -3108,6 +3118,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcinterface@/geometric_model.cc \
 	@srcimplementation@/did_datum.cc \
 	@srcimplementation@/dem_map_info_offset.cc \
+	@srcimplementation@/geotiff_file.cc \
 	@srcimplementation@/ground_mask_image.cc \
 	@srcimplementation@/image_mask_image.cc \
 	@srcimplementation@/raster_averaged.cc \
@@ -3263,6 +3274,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/raster_multifile_wrap.cc @swigsrc@/did_datum_wrap.cc \
 	@swigsrc@/dem_map_info_offset_wrap.cc \
 	@swigsrc@/map_info_image_ground_connection_wrap.cc \
+	@swigsrc@/geotiff_file_wrap.cc \
 	@swigsrc@/ground_mask_image_wrap.cc \
 	@swigsrc@/image_mask_image_wrap.cc \
 	@swigsrc@/raster_averaged_wrap.cc \
@@ -3469,6 +3481,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/did_datum.h \
 	@srcimplementation@/dem_map_info_offset.h \
 	@srcimplementation@/map_info_image_ground_connection.h \
+	@srcimplementation@/geotiff_file.h \
 	@srcimplementation@/ground_mask_image.h \
 	@srcimplementation@/image_mask_image.h \
 	@srcimplementation@/raster_averaged.h \
@@ -3625,6 +3638,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/did_datum.i \
 	@srcimplementation@/dem_map_info_offset.i \
 	@srcimplementation@/map_info_image_ground_connection.i \
+	@srcimplementation@/geotiff_file.i \
 	@srcimplementation@/ground_mask_image.i \
 	@srcimplementation@/image_mask_image.i \
 	@srcimplementation@/raster_averaged.i \
@@ -3784,6 +3798,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/sdp_helper_test.cc \
 	@srcimplementation@/did_datum_test.cc \
 	@srcimplementation@/dem_map_info_offset_test.cc \
+	@srcimplementation@/geotiff_file_test.cc \
 	@srcimplementation@/ground_mask_image_test.cc \
 	@srcimplementation@/raster_averaged_test.cc \
 	@srcimplementation@/raster_subsample_test.cc \
@@ -4445,6 +4460,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-geotiff_file_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-ground_mask_image_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-image_mask_image_wrap.lo:  \
@@ -4913,6 +4930,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-dem_map_info_offset.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-geotiff_file.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-ground_mask_image.lo:  \
@@ -5503,6 +5523,9 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcimplementation@/geocal_test_all-dem_map_info_offset_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-geotiff_file_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-ground_mask_image_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -5982,6 +6005,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_raster_image_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-geocal_gdal_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_array_test.Po@am__quote@ # am--include-marker
@@ -6061,6 +6085,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_raster_image.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-geometric_model_image.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-geotiff_file.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-hdf_orbit.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_array.Plo@am__quote@ # am--include-marker
@@ -6337,6 +6362,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geodetic_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-geotiff_file_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_coordinate_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_image_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_wrap.Plo@am__quote@ # am--include-marker
@@ -6971,6 +6997,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/map_info_image_ground_connection_wrap.cc' object='@swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-map_info_image_ground_connection_wrap.lo `test -f '@swigsrc@/map_info_image_ground_connection_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/map_info_image_ground_connection_wrap.cc
+
+@swigsrc@/_swig_wrap_la-geotiff_file_wrap.lo: @swigsrc@/geotiff_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-geotiff_file_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-geotiff_file_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-geotiff_file_wrap.lo `test -f '@swigsrc@/geotiff_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geotiff_file_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-geotiff_file_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-geotiff_file_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/geotiff_file_wrap.cc' object='@swigsrc@/_swig_wrap_la-geotiff_file_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-geotiff_file_wrap.lo `test -f '@swigsrc@/geotiff_file_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/geotiff_file_wrap.cc
 
 @swigsrc@/_swig_wrap_la-ground_mask_image_wrap.lo: @swigsrc@/ground_mask_image_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-ground_mask_image_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_image_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-ground_mask_image_wrap.lo `test -f '@swigsrc@/ground_mask_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ground_mask_image_wrap.cc
@@ -8336,6 +8369,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/dem_map_info_offset.cc' object='@srcimplementation@/libgeocal_la-dem_map_info_offset.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-dem_map_info_offset.lo `test -f '@srcimplementation@/dem_map_info_offset.cc' || echo '$(srcdir)/'`@srcimplementation@/dem_map_info_offset.cc
+
+@srcimplementation@/libgeocal_la-geotiff_file.lo: @srcimplementation@/geotiff_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-geotiff_file.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-geotiff_file.Tpo -c -o @srcimplementation@/libgeocal_la-geotiff_file.lo `test -f '@srcimplementation@/geotiff_file.cc' || echo '$(srcdir)/'`@srcimplementation@/geotiff_file.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-geotiff_file.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-geotiff_file.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/geotiff_file.cc' object='@srcimplementation@/libgeocal_la-geotiff_file.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-geotiff_file.lo `test -f '@srcimplementation@/geotiff_file.cc' || echo '$(srcdir)/'`@srcimplementation@/geotiff_file.cc
 
 @srcimplementation@/libgeocal_la-ground_mask_image.lo: @srcimplementation@/ground_mask_image.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-ground_mask_image.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Tpo -c -o @srcimplementation@/libgeocal_la-ground_mask_image.lo `test -f '@srcimplementation@/ground_mask_image.cc' || echo '$(srcdir)/'`@srcimplementation@/ground_mask_image.cc
@@ -10128,6 +10168,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/dem_map_info_offset_test.cc' object='@srcimplementation@/geocal_test_all-dem_map_info_offset_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-dem_map_info_offset_test.obj `if test -f '@srcimplementation@/dem_map_info_offset_test.cc'; then $(CYGPATH_W) '@srcimplementation@/dem_map_info_offset_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/dem_map_info_offset_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-geotiff_file_test.o: @srcimplementation@/geotiff_file_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-geotiff_file_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Tpo -c -o @srcimplementation@/geocal_test_all-geotiff_file_test.o `test -f '@srcimplementation@/geotiff_file_test.cc' || echo '$(srcdir)/'`@srcimplementation@/geotiff_file_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/geotiff_file_test.cc' object='@srcimplementation@/geocal_test_all-geotiff_file_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-geotiff_file_test.o `test -f '@srcimplementation@/geotiff_file_test.cc' || echo '$(srcdir)/'`@srcimplementation@/geotiff_file_test.cc
+
+@srcimplementation@/geocal_test_all-geotiff_file_test.obj: @srcimplementation@/geotiff_file_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-geotiff_file_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Tpo -c -o @srcimplementation@/geocal_test_all-geotiff_file_test.obj `if test -f '@srcimplementation@/geotiff_file_test.cc'; then $(CYGPATH_W) '@srcimplementation@/geotiff_file_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/geotiff_file_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/geotiff_file_test.cc' object='@srcimplementation@/geocal_test_all-geotiff_file_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-geotiff_file_test.obj `if test -f '@srcimplementation@/geotiff_file_test.cc'; then $(CYGPATH_W) '@srcimplementation@/geotiff_file_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/geotiff_file_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-ground_mask_image_test.o: @srcimplementation@/ground_mask_image_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-ground_mask_image_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Tpo -c -o @srcimplementation@/geocal_test_all-ground_mask_image_test.o `test -f '@srcimplementation@/ground_mask_image_test.cc' || echo '$(srcdir)/'`@srcimplementation@/ground_mask_image_test.cc
@@ -12427,6 +12481,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_raster_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-geocal_gdal_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_array_test.Po
@@ -12506,6 +12561,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_raster_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-geometric_model_image.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-geotiff_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-hdf_orbit.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_array.Plo
@@ -12782,6 +12838,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-geodetic_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-geotiff_file_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_coordinate_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_image_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_wrap.Plo
@@ -13038,6 +13095,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-gdal_raster_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-geocal_gdal_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-geometric_model_image_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-geotiff_file_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ground_mask_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-hdf_orbit_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_array_test.Po
@@ -13117,6 +13175,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_raster_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-geocal_gdal.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-geometric_model_image.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-geotiff_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ground_mask_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-hdf_orbit.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_array.Plo
@@ -13393,6 +13452,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-geodetic_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_image_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-geometric_model_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-geotiff_file_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_coordinate_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_image_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ground_mask_wrap.Plo

@@ -4,12 +4,19 @@
 #include <boost/utility.hpp>
 #include <unistd.h>
 #include <stdint.h>
+#include <vector>
 
 struct TIFF;
 struct GTIF;
 
 namespace GeoCal {
 
+  /// Temporary, we will remove this once VicarOgr fully used
+  /// GeotiffFile. But short term, useful to move functionality as we
+  /// have it
+  
+  class VicarOgr;
+  
 /****************************************************************//**
   Provide direct access to a GeoTiff file. Note that this is a
   pretty low level class, you almost certainly don't want to be
@@ -140,6 +147,11 @@ public:
        << "  File: " << file_name() << "\n"
        << "  Mode: " << mode() << "\n";
   }
+
+  static tagtype_t key_type(geokey_t K);
+  static const std::vector<int>& geotiff_tag_ascii();
+  static const std::vector<int>& geotiff_tag_double();
+  static const std::vector<int>& geotiff_tag_short();
 private:
   void init();
   std::string fname_, mode_;
@@ -153,6 +165,9 @@ private:
   void save(Archive & ar, const unsigned int version) const;
   template<class Archive>
   void load(Archive & ar, const unsigned int version);
+
+  // Temporary
+  friend class VicarOgr;
 };
   
 }

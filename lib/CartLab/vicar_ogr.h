@@ -53,9 +53,6 @@ public:
 private:
   template<class T> MapInfo from_vicar_template(const T& F);
   template<class T> void vicar_to_gtiff_template(const T& F, const char* Fname);
-  std::vector<int> geotiff_tag_ascii;
-  std::vector<int> geotiff_tag_double;
-  std::vector<int> geotiff_tag_short;
   mutable std::map<int, std::string> tag_to_vicar_name;
 };
 }

@@ -90,3 +90,156 @@ GeotiffFile::~GeotiffFile()
   if(tif)
     XTIFFClose(tif);
 }
+
+//-----------------------------------------------------------------------
+/// Return the type for the given key.
+//-----------------------------------------------------------------------
+
+GeotiffFile::tagtype_t GeotiffFile::key_type(GeotiffFile::geokey_t K)
+{
+  switch(K) {
+  case GTCitationGeoKey:
+  case GeogCitationGeoKey:
+  case PCSCitationGeoKey:
+  case VerticalCitationGeoKey:
+    return TYPE_ASCII;
+    break;
+  case GeogInvFlatteningGeoKey:
+  case GeogSemiMajorAxisGeoKey:
+  case GeogSemiMinorAxisGeoKey:
+  case ProjAzimuthAngleGeoKey:
+  case ProjCenterLatGeoKey:
+  case ProjCenterLongGeoKey:
+  case ProjFalseEastingGeoKey:
+  case ProjFalseNorthingGeoKey:
+  case ProjFalseOriginEastingGeoKey:
+  case ProjFalseOriginLatGeoKey:
+  case ProjFalseOriginLongGeoKey:
+  case ProjFalseOriginNorthingGeoKey:
+  case ProjLinearUnitSizeGeoKey:
+  case ProjNatOriginLatGeoKey:
+  case ProjNatOriginLongGeoKey:
+  case ProjRectifiedGridAngleGeoKey:
+  case ProjScaleAtNatOriginGeoKey:
+  case ProjStdParallel1GeoKey:
+  case ProjStdParallel2GeoKey:
+  case ProjStraightVertPoleLongGeoKey:
+  case GeogLinearUnitSizeGeoKey:
+  case GeogAngularUnitSizeGeoKey:
+  case GeogPrimeMeridianLongGeoKey:
+  case ProjCenterEastingGeoKey:
+  case ProjCenterNorthingGeoKey:
+  case ProjScaleAtCenterGeoKey:
+    return TYPE_DOUBLE;
+    break;
+  case GTModelTypeGeoKey:
+  case GTRasterTypeGeoKey:
+  case GeogAngularUnitsGeoKey:
+  case GeogEllipsoidGeoKey:
+  case GeogGeodeticDatumGeoKey:
+  case GeographicTypeGeoKey:
+  case ProjCoordTransGeoKey:
+  case ProjLinearUnitsGeoKey:
+  case ProjectedCSTypeGeoKey:
+  case ProjectionGeoKey:
+  case GeogPrimeMeridianGeoKey:
+  case GeogLinearUnitsGeoKey:
+  case GeogAzimuthUnitsGeoKey:
+  case VerticalCSTypeGeoKey:
+  case VerticalDatumGeoKey:
+  case VerticalUnitsGeoKey:
+    return TYPE_SHORT;
+  default:
+    Exception e;
+    e << "Unrecognized key " << K;
+    throw e;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Return the list of tags that take ASCII data.
+//-----------------------------------------------------------------------
+
+const std::vector<int>& GeotiffFile::geotiff_tag_ascii()
+{
+  static bool filled_in = false;
+  static std::vector<int> data;
+  if(!filled_in) {
+    data.push_back(GTCitationGeoKey);
+    data.push_back(GeogCitationGeoKey);
+    data.push_back(PCSCitationGeoKey);
+    data.push_back(VerticalCitationGeoKey);
+    filled_in = true;
+  }
+  return data;
+}
+
+//-----------------------------------------------------------------------
+/// Return the list of tags that take double data.
+//-----------------------------------------------------------------------
+
+const std::vector<int>& GeotiffFile::geotiff_tag_double()
+{
+  static bool filled_in = false;
+  static std::vector<int> data;
+  if(!filled_in) {
+    data.push_back(GeogInvFlatteningGeoKey);
+    data.push_back(GeogSemiMajorAxisGeoKey);
+    data.push_back(GeogSemiMinorAxisGeoKey);
+    data.push_back(ProjAzimuthAngleGeoKey);
+    data.push_back(ProjCenterLatGeoKey);
+    data.push_back(ProjCenterLongGeoKey);
+    data.push_back(ProjFalseEastingGeoKey);
+    data.push_back(ProjFalseNorthingGeoKey);
+    data.push_back(ProjFalseOriginEastingGeoKey);
+    data.push_back(ProjFalseOriginLatGeoKey);
+    data.push_back(ProjFalseOriginLongGeoKey);
+    data.push_back(ProjFalseOriginNorthingGeoKey);
+    data.push_back(ProjLinearUnitSizeGeoKey);
+    data.push_back(ProjNatOriginLatGeoKey);
+    data.push_back(ProjNatOriginLongGeoKey);
+    data.push_back(ProjRectifiedGridAngleGeoKey);
+    data.push_back(ProjScaleAtNatOriginGeoKey);
+    data.push_back(ProjStdParallel1GeoKey);
+    data.push_back(ProjStdParallel2GeoKey);
+    data.push_back(ProjStraightVertPoleLongGeoKey);
+    data.push_back(GeogLinearUnitSizeGeoKey);
+    data.push_back(GeogAngularUnitSizeGeoKey);
+    data.push_back(GeogPrimeMeridianLongGeoKey);
+    data.push_back(ProjCenterEastingGeoKey);
+    data.push_back(ProjCenterNorthingGeoKey);
+    data.push_back(ProjScaleAtCenterGeoKey);
+    filled_in = true;
+  }
+  return data;
+}
+
+//-----------------------------------------------------------------------
+/// Return the list of tags that take short data.
+//-----------------------------------------------------------------------
+
+const std::vector<int>& GeotiffFile::geotiff_tag_short()
+{
+  static bool filled_in = false;
+  static std::vector<int> data;
+  if(!filled_in) {
+    data.push_back(GTModelTypeGeoKey);
+    data.push_back(GTRasterTypeGeoKey);
+    data.push_back(GeogAngularUnitsGeoKey);
+    data.push_back(GeogEllipsoidGeoKey);
+    data.push_back(GeogGeodeticDatumGeoKey);
+    data.push_back(GeographicTypeGeoKey);
+    data.push_back(ProjCoordTransGeoKey);
+    data.push_back(ProjLinearUnitsGeoKey);
+    data.push_back(ProjectedCSTypeGeoKey);
+    data.push_back(ProjectionGeoKey);
+    data.push_back(GeogPrimeMeridianGeoKey);
+    data.push_back(GeogLinearUnitsGeoKey);
+    data.push_back(GeogAzimuthUnitsGeoKey);
+    data.push_back(VerticalCSTypeGeoKey);
+    data.push_back(VerticalDatumGeoKey);
+    data.push_back(VerticalUnitsGeoKey);
+    filled_in = true;
+  }
+  return data;
+}

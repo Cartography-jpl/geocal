@@ -85,6 +85,10 @@ public:
   %python_attribute(file_name, std::string);
   %python_attribute(mode, std::string);
   std::string print_to_string() const;
+  static tagtype_t key_type(geokey_t K);
+  static const std::vector<int>& geotiff_tag_ascii();
+  static const std::vector<int>& geotiff_tag_double();
+  static const std::vector<int>& geotiff_tag_short();
   %pickle_serialization();
 };
 }

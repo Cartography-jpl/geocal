@@ -311,6 +311,46 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
         return self._v_mode()
 
 
+    def key_type(K):
+        """
+
+        GeotiffFile::tagtype_t GeotiffFile::key_type(geokey_t K)
+        Return the type for the given key. 
+        """
+        return _geotiff_file.GeotiffFile_key_type(K)
+
+    key_type = staticmethod(key_type)
+
+    def geotiff_tag_ascii():
+        """
+
+        const std::vector< int > & GeotiffFile::geotiff_tag_ascii()
+        Return the list of tags that take ASCII data. 
+        """
+        return _geotiff_file.GeotiffFile_geotiff_tag_ascii()
+
+    geotiff_tag_ascii = staticmethod(geotiff_tag_ascii)
+
+    def geotiff_tag_double():
+        """
+
+        const std::vector< int > & GeotiffFile::geotiff_tag_double()
+        Return the list of tags that take double data. 
+        """
+        return _geotiff_file.GeotiffFile_geotiff_tag_double()
+
+    geotiff_tag_double = staticmethod(geotiff_tag_double)
+
+    def geotiff_tag_short():
+        """
+
+        const std::vector< int > & GeotiffFile::geotiff_tag_short()
+        Return the list of tags that take short data. 
+        """
+        return _geotiff_file.GeotiffFile_geotiff_tag_short()
+
+    geotiff_tag_short = staticmethod(geotiff_tag_short)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -320,6 +360,38 @@ GeotiffFile._v_mode = new_instancemethod(_geotiff_file.GeotiffFile__v_mode, None
 GeotiffFile.__str__ = new_instancemethod(_geotiff_file.GeotiffFile___str__, None, GeotiffFile)
 GeotiffFile_swigregister = _geotiff_file.GeotiffFile_swigregister
 GeotiffFile_swigregister(GeotiffFile)
+
+def GeotiffFile_key_type(K):
+    """
+
+    GeotiffFile::tagtype_t GeotiffFile::key_type(geokey_t K)
+    Return the type for the given key. 
+    """
+    return _geotiff_file.GeotiffFile_key_type(K)
+
+def GeotiffFile_geotiff_tag_ascii():
+    """
+
+    const std::vector< int > & GeotiffFile::geotiff_tag_ascii()
+    Return the list of tags that take ASCII data. 
+    """
+    return _geotiff_file.GeotiffFile_geotiff_tag_ascii()
+
+def GeotiffFile_geotiff_tag_double():
+    """
+
+    const std::vector< int > & GeotiffFile::geotiff_tag_double()
+    Return the list of tags that take double data. 
+    """
+    return _geotiff_file.GeotiffFile_geotiff_tag_double()
+
+def GeotiffFile_geotiff_tag_short():
+    """
+
+    const std::vector< int > & GeotiffFile::geotiff_tag_short()
+    Return the list of tags that take short data. 
+    """
+    return _geotiff_file.GeotiffFile_geotiff_tag_short()
 
 
 __all__ = ["GeotiffFile"]

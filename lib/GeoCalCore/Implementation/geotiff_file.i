@@ -85,10 +85,13 @@ public:
   %python_attribute(file_name, std::string);
   %python_attribute(mode, std::string);
   std::string print_to_string() const;
+  static std::string key_name(geokey_t K);
+  static std::string key_name_uppercase(geokey_t K);
+  static std::string value_name(geokey_t K, geocode_t V);
   static tagtype_t key_type(geokey_t K);
-  static const std::vector<int>& geotiff_tag_ascii();
-  static const std::vector<int>& geotiff_tag_double();
-  static const std::vector<int>& geotiff_tag_short();
+  static const std::vector<geokey_t>& geotiff_tag_ascii();
+  static const std::vector<geokey_t>& geotiff_tag_double();
+  static const std::vector<geokey_t>& geotiff_tag_short();
   %pickle_serialization();
 };
 }

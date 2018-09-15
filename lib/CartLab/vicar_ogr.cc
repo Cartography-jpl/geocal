@@ -1,9 +1,6 @@
 #include "vicar_ogr.h"
 #include <boost/utility.hpp>
-#include <boost/algorithm/string.hpp>
 #include <stdio.h>
-#include <unistd.h>
-#include <stdint.h>
 #include "gdal_raster_image.h"
 #include "geotiff_file.h"
 
@@ -46,16 +43,10 @@ extern "C" {
 typedef int geokey_t;
 typedef int tagtype_t;
 typedef uint32_t ttag_t;
-TIFF * XTIFFOpen(const char* name, const char* mode);
-void XTIFFClose(TIFF *tif);
-GTIF *GTIFNew(void *tif);
-void GTIFFree(GTIF *gtif);
 int  GTIFWriteKeys(GTIF *gtif);
 int GTIFKeyInfo(GTIF *gtif, geokey_t key, int *size, tagtype_t* type);
 int GTIFKeyGet(GTIF *gtif, geokey_t key, void *val, int index, int count);
 int GTIFKeySet(GTIF *gtif, geokey_t keyID, tagtype_t type, int count,...);
-char *GTIFKeyName(geokey_t key);
-char *GTIFValueName(geokey_t key,int value);
 int TIFFSetField(TIFF*, ttag_t, ...);
 int TIFFGetField(TIFF*, ttag_t, ...);
 int32_t TIFFWriteEncodedStrip(TIFF*, uint32_t, void*, int32_t);
@@ -90,21 +81,12 @@ public:
 
 VicarOgr::VicarOgr()
 {
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_ascii()) {
-    std::string kn = GTIFKeyName((geokey_t) t);
-    boost::to_upper(kn);
-    tag_to_vicar_name[t] = kn;
-  }
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_double()) {
-    std::string kn = GTIFKeyName((geokey_t) t);
-    boost::to_upper(kn);
-    tag_to_vicar_name[t] = kn;
-  }
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_short()) {
-    std::string kn = GTIFKeyName((geokey_t) t);
-    boost::to_upper(kn);
-    tag_to_vicar_name[t] = kn;
-  }
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_ascii())
+    tag_to_vicar_name[(int) t] = GeotiffFile::key_name_uppercase(t);
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_double())
+    tag_to_vicar_name[(int) t] = GeotiffFile::key_name_uppercase(t);
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_short())
+    tag_to_vicar_name[(int) t] = GeotiffFile::key_name_uppercase(t);
 
   // Make sure we have registered all the drivers, including geotiff.
   GdalRegister::gdal_register();
@@ -322,16 +304,16 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
   GeotiffFile g(ft.temp_fname, "r");
   const int bufsize = 1000;
   char buf[bufsize];
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_short()) {
-    geocode_t v;
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_short()) {
+    GeotiffFile::geocode_t v;
     if(GTIFKeyGet(g.gtif, (geokey_t) t, &v, 0, 1) ==1) {
       snprintf(buf, bufsize, "%d", v);
       std::string s(buf);
-      s = s + "(" + GTIFValueName((geokey_t) t, v) + ")";
+      s = s + "(" + GeotiffFile::value_name(t, v) + ")";
       F.label_set(tag_to_vicar_name[t], s, "GEOTIFF");
     }
   }
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_double()) {
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_double()) {
     double v;
     if(GTIFKeyGet(g.gtif, (geokey_t) t, &v, 0, 1) ==1) {
       snprintf(buf, bufsize, "%.12g", v);
@@ -339,7 +321,7 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
       F.label_set(tag_to_vicar_name[t], s, "GEOTIFF");
     }
   }
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_ascii()) {
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_ascii()) {
     int size = GTIFKeyInfo(g.gtif, (geokey_t) t, 0, 0);
     if(size !=0) {
       std::vector<char> v(size);

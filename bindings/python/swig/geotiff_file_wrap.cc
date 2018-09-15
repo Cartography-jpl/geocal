@@ -3501,13 +3501,14 @@ namespace Swig {
 #define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[46]
 #define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[47]
 #define SWIGTYPE_p_std__invalid_argument swig_types[48]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[49]
-#define SWIGTYPE_p_tagtype_t swig_types[50]
-#define SWIGTYPE_p_traits_type swig_types[51]
-#define SWIGTYPE_p_ttag_t swig_types[52]
-#define SWIGTYPE_p_value_type swig_types[53]
-static swig_type_info *swig_types[55];
-static swig_module_info swig_module = {swig_types, 54, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t swig_types[49]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[50]
+#define SWIGTYPE_p_tagtype_t swig_types[51]
+#define SWIGTYPE_p_traits_type swig_types[52]
+#define SWIGTYPE_p_ttag_t swig_types[53]
+#define SWIGTYPE_p_value_type swig_types[54]
+static swig_type_info *swig_types[56];
+static swig_module_info swig_module = {swig_types, 55, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5673,139 +5674,21 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
-namespace swig {
-  template <> struct traits< int > {
-    typedef value_category category;
-    static const char* type_name() { return"int"; }
-  };
-  template <>  struct traits_asval< int > {
-    typedef int value_type;
-    static int asval(PyObject *obj, value_type *val) {
-      return SWIG_AsVal_int (obj, val);
+SWIGINTERN int
+SWIG_AsVal_unsigned_SS_short (PyObject * obj, unsigned short *val)
+{
+  unsigned long v;
+  int res = SWIG_AsVal_unsigned_SS_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v > USHRT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< unsigned short >(v);
     }
-  };
-  template <>  struct traits_from< int > {
-    typedef int value_type;
-    static PyObject *from(const value_type& val) {
-      return SWIG_From_int  (val);
-    }
-  };
+  }  
+  return res;
 }
 
-
-namespace swig {
-  template <class SwigPySeq, class Seq>
-  inline void
-  assign(const SwigPySeq& swigpyseq, Seq* seq) {
-    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
-    typedef typename SwigPySeq::value_type value_type;
-    typename SwigPySeq::const_iterator it = swigpyseq.begin();
-    for (;it != swigpyseq.end(); ++it) {
-      seq->insert(seq->end(),(value_type)(*it));
-    }
-  }
-
-  template <class Seq, class T = typename Seq::value_type >
-  struct traits_asptr_stdseq {
-    typedef Seq sequence;
-    typedef T value_type;
-
-    static int asptr(PyObject *obj, sequence **seq) {
-      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
-	sequence *p;
-	swig_type_info *descriptor = swig::type_info<sequence>();
-	if (descriptor && SWIG_IsOK(::SWIG_ConvertPtr(obj, (void **)&p, descriptor, 0))) {
-	  if (seq) *seq = p;
-	  return SWIG_OLDOBJ;
-	}
-      } else if (PySequence_Check(obj)) {
-	try {
-	  SwigPySequence_Cont<value_type> swigpyseq(obj);
-	  if (seq) {
-	    sequence *pseq = new sequence();
-	    assign(swigpyseq, pseq);
-	    *seq = pseq;
-	    return SWIG_NEWOBJ;
-	  } else {
-	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
-	  }
-	} catch (std::exception& e) {
-	  if (seq) {
-	    if (!PyErr_Occurred()) {
-	      PyErr_SetString(PyExc_TypeError, e.what());
-	    }
-	  }
-	  return SWIG_ERROR;
-	}
-      }
-      return SWIG_ERROR;
-    }
-  };
-
-  template <class Seq, class T = typename Seq::value_type >
-  struct traits_from_stdseq {
-    typedef Seq sequence;
-    typedef T value_type;
-    typedef typename Seq::size_type size_type;
-    typedef typename sequence::const_iterator const_iterator;
-
-    static PyObject *from(const sequence& seq) {
-#ifdef SWIG_PYTHON_EXTRA_NATIVE_CONTAINERS
-      swig_type_info *desc = swig::type_info<sequence>();
-      if (desc && desc->clientdata) {
-	return SWIG_InternalNewPointerObj(new sequence(seq), desc, SWIG_POINTER_OWN);
-      }
-#endif
-      size_type size = seq.size();
-      if (size <= (size_type)INT_MAX) {
-	PyObject *obj = PyTuple_New((Py_ssize_t)size);
-	Py_ssize_t i = 0;
-	for (const_iterator it = seq.begin(); it != seq.end(); ++it, ++i) {
-	  PyTuple_SetItem(obj,i,swig::from<value_type>(*it));
-	}
-	return obj;
-      } else {
-	PyErr_SetString(PyExc_OverflowError,"sequence size not valid in python");
-	return NULL;
-      }
-    }
-  };
-}
-
-
-  namespace swig {
-    template <class T>
-    struct traits_reserve<std::vector<T> > {
-      static void reserve(std::vector<T> &seq, typename std::vector<T>::size_type n) {
-        seq.reserve(n);
-      }
-    };
-
-    template <class T>
-    struct traits_asptr<std::vector<T> >  {
-      static int asptr(PyObject *obj, std::vector<T> **vec) {
-	return traits_asptr_stdseq<std::vector<T> >::asptr(obj, vec);
-      }
-    };
-    
-    template <class T>
-    struct traits_from<std::vector<T> > {
-      static PyObject *from(const std::vector<T>& vec) {
-	return traits_from_stdseq<std::vector<T> >::from(vec);
-      }
-    };
-  }
-
-
-      namespace swig {
-	template <>  struct traits<std::vector< int, std::allocator< int > > > {
-	  typedef pointer_category category;
-	  static const char* type_name() {
-	    return "std::vector<" "int" "," "std::allocator< int >" " >";
-	  }
-	};
-      }
-    
 
 
 /* ---------------------------------------------------
@@ -6777,6 +6660,106 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GeotiffFile_key_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeotiffFile::geokey_t arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "GeotiffFile_key_name" "', argument " "1"" of type '" "GeoCal::GeotiffFile::geokey_t""'");
+  } 
+  arg1 = static_cast< GeoCal::GeotiffFile::geokey_t >(val1);
+  {
+    try {
+      result = GeoCal::GeotiffFile::key_name(arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GeotiffFile_key_name_uppercase(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeotiffFile::geokey_t arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "GeotiffFile_key_name_uppercase" "', argument " "1"" of type '" "GeoCal::GeotiffFile::geokey_t""'");
+  } 
+  arg1 = static_cast< GeoCal::GeotiffFile::geokey_t >(val1);
+  {
+    try {
+      result = GeoCal::GeotiffFile::key_name_uppercase(arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GeotiffFile_value_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeotiffFile::geokey_t arg1 ;
+  GeoCal::GeotiffFile::geocode_t arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  unsigned short val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  std::string result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"GeotiffFile_value_name",2,2,swig_obj)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "GeotiffFile_value_name" "', argument " "1"" of type '" "GeoCal::GeotiffFile::geokey_t""'");
+  } 
+  arg1 = static_cast< GeoCal::GeotiffFile::geokey_t >(val1);
+  ecode2 = SWIG_AsVal_unsigned_SS_short(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GeotiffFile_value_name" "', argument " "2"" of type '" "GeoCal::GeotiffFile::geocode_t""'");
+  } 
+  arg2 = static_cast< GeoCal::GeotiffFile::geocode_t >(val2);
+  {
+    try {
+      result = GeoCal::GeotiffFile::value_name(arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GeotiffFile_key_type(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeotiffFile::geokey_t arg1 ;
@@ -6810,19 +6793,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_GeotiffFile_geotiff_tag_ascii(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< int,std::allocator< int > > *result = 0 ;
+  std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *result = 0 ;
   
   if (!SWIG_Python_UnpackTuple(args,"GeotiffFile_geotiff_tag_ascii",0,0,0)) SWIG_fail;
   {
     try {
-      result = (std::vector< int,std::allocator< int > > *) &GeoCal::GeotiffFile::geotiff_tag_ascii();
+      result = (std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *) &GeoCal::GeotiffFile::geotiff_tag_ascii();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(*result));
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6831,19 +6814,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_GeotiffFile_geotiff_tag_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< int,std::allocator< int > > *result = 0 ;
+  std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *result = 0 ;
   
   if (!SWIG_Python_UnpackTuple(args,"GeotiffFile_geotiff_tag_double",0,0,0)) SWIG_fail;
   {
     try {
-      result = (std::vector< int,std::allocator< int > > *) &GeoCal::GeotiffFile::geotiff_tag_double();
+      result = (std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *) &GeoCal::GeotiffFile::geotiff_tag_double();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(*result));
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6852,19 +6835,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_GeotiffFile_geotiff_tag_short(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::vector< int,std::allocator< int > > *result = 0 ;
+  std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *result = 0 ;
   
   if (!SWIG_Python_UnpackTuple(args,"GeotiffFile_geotiff_tag_short",0,0,0)) SWIG_fail;
   {
     try {
-      result = (std::vector< int,std::allocator< int > > *) &GeoCal::GeotiffFile::geotiff_tag_short();
+      result = (std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *) &GeoCal::GeotiffFile::geotiff_tag_short();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(*result));
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6962,6 +6945,24 @@ static PyMethodDef SwigMethods[] = {
 		"Return mode the file was opened with. \n"
 		""},
 	 { (char *)"GeotiffFile___str__", (PyCFunction)_wrap_GeotiffFile___str__, METH_O, NULL},
+	 { (char *)"GeotiffFile_key_name", (PyCFunction)_wrap_GeotiffFile_key_name, METH_O, (char *)"\n"
+		"\n"
+		"std::string GeotiffFile::key_name(geokey_t K)\n"
+		"Return a string giving the key name. \n"
+		""},
+	 { (char *)"GeotiffFile_key_name_uppercase", (PyCFunction)_wrap_GeotiffFile_key_name_uppercase, METH_O, (char *)"\n"
+		"\n"
+		"std::string GeotiffFile::key_name_uppercase(geokey_t K)\n"
+		"Return a string giving the key name, in all uppercase.\n"
+		"\n"
+		"This is useful because this the tag used in VICAR files to carry the\n"
+		"geotiff information \n"
+		""},
+	 { (char *)"GeotiffFile_value_name", _wrap_GeotiffFile_value_name, METH_VARARGS, (char *)"\n"
+		"\n"
+		"std::string GeotiffFile::value_name(geokey_t K, geocode_t V)\n"
+		"Return a string giving the value name for the given key. \n"
+		""},
 	 { (char *)"GeotiffFile_key_type", (PyCFunction)_wrap_GeotiffFile_key_type, METH_O, (char *)"\n"
 		"\n"
 		"GeotiffFile::tagtype_t GeotiffFile::key_type(geokey_t K)\n"
@@ -6969,17 +6970,17 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GeotiffFile_geotiff_tag_ascii", (PyCFunction)_wrap_GeotiffFile_geotiff_tag_ascii, METH_NOARGS, (char *)"\n"
 		"\n"
-		"const std::vector< int > & GeotiffFile::geotiff_tag_ascii()\n"
+		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_ascii()\n"
 		"Return the list of tags that take ASCII data. \n"
 		""},
 	 { (char *)"GeotiffFile_geotiff_tag_double", (PyCFunction)_wrap_GeotiffFile_geotiff_tag_double, METH_NOARGS, (char *)"\n"
 		"\n"
-		"const std::vector< int > & GeotiffFile::geotiff_tag_double()\n"
+		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_double()\n"
 		"Return the list of tags that take double data. \n"
 		""},
 	 { (char *)"GeotiffFile_geotiff_tag_short", (PyCFunction)_wrap_GeotiffFile_geotiff_tag_short, METH_NOARGS, (char *)"\n"
 		"\n"
-		"const std::vector< int > & GeotiffFile::geotiff_tag_short()\n"
+		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_short()\n"
 		"Return the list of tags that take short data. \n"
 		""},
 	 { (char *)"delete_GeotiffFile", (PyCFunction)_wrap_delete_GeotiffFile, METH_O, (char *)"\n"
@@ -7066,6 +7067,7 @@ static swig_type_info _swigt__p_std__basic_iostreamT_char_std__char_traitsT_char
 static swig_type_info _swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_istreamT_char_std__char_traitsT_char_t_t", "std::basic_istream< char,std::char_traits< char > > *|std::istream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t", "std::basic_ostream< char,std::char_traits< char > > *|std::ostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t = {"_p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t", "std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *|std::vector< enum GeoCal::GeotiffFile::geokey_t,std::allocator< enum GeoCal::GeotiffFile::geokey_t > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_tagtype_t = {"_p_tagtype_t", "tagtype_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *", 0, 0, (void*)0, 0};
@@ -7122,6 +7124,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__invalid_argument,
+  &_swigt__p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_tagtype_t,
   &_swigt__p_traits_type,
@@ -7178,6 +7181,7 @@ static swig_cast_info _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char
 static swig_cast_info _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t[] = {  {&_swigt__p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_tagtype_t[] = {  {&_swigt__p_tagtype_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7234,6 +7238,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__invalid_argument,
+  _swigc__p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_tagtype_t,
   _swigc__p_traits_type,

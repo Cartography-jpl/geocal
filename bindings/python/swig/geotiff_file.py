@@ -311,6 +311,39 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
         return self._v_mode()
 
 
+    def key_name(K):
+        """
+
+        std::string GeotiffFile::key_name(geokey_t K)
+        Return a string giving the key name. 
+        """
+        return _geotiff_file.GeotiffFile_key_name(K)
+
+    key_name = staticmethod(key_name)
+
+    def key_name_uppercase(K):
+        """
+
+        std::string GeotiffFile::key_name_uppercase(geokey_t K)
+        Return a string giving the key name, in all uppercase.
+
+        This is useful because this the tag used in VICAR files to carry the
+        geotiff information 
+        """
+        return _geotiff_file.GeotiffFile_key_name_uppercase(K)
+
+    key_name_uppercase = staticmethod(key_name_uppercase)
+
+    def value_name(K, V):
+        """
+
+        std::string GeotiffFile::value_name(geokey_t K, geocode_t V)
+        Return a string giving the value name for the given key. 
+        """
+        return _geotiff_file.GeotiffFile_value_name(K, V)
+
+    value_name = staticmethod(value_name)
+
     def key_type(K):
         """
 
@@ -324,7 +357,7 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     def geotiff_tag_ascii():
         """
 
-        const std::vector< int > & GeotiffFile::geotiff_tag_ascii()
+        const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_ascii()
         Return the list of tags that take ASCII data. 
         """
         return _geotiff_file.GeotiffFile_geotiff_tag_ascii()
@@ -334,7 +367,7 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     def geotiff_tag_double():
         """
 
-        const std::vector< int > & GeotiffFile::geotiff_tag_double()
+        const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_double()
         Return the list of tags that take double data. 
         """
         return _geotiff_file.GeotiffFile_geotiff_tag_double()
@@ -344,7 +377,7 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     def geotiff_tag_short():
         """
 
-        const std::vector< int > & GeotiffFile::geotiff_tag_short()
+        const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_short()
         Return the list of tags that take short data. 
         """
         return _geotiff_file.GeotiffFile_geotiff_tag_short()
@@ -361,6 +394,33 @@ GeotiffFile.__str__ = new_instancemethod(_geotiff_file.GeotiffFile___str__, None
 GeotiffFile_swigregister = _geotiff_file.GeotiffFile_swigregister
 GeotiffFile_swigregister(GeotiffFile)
 
+def GeotiffFile_key_name(K):
+    """
+
+    std::string GeotiffFile::key_name(geokey_t K)
+    Return a string giving the key name. 
+    """
+    return _geotiff_file.GeotiffFile_key_name(K)
+
+def GeotiffFile_key_name_uppercase(K):
+    """
+
+    std::string GeotiffFile::key_name_uppercase(geokey_t K)
+    Return a string giving the key name, in all uppercase.
+
+    This is useful because this the tag used in VICAR files to carry the
+    geotiff information 
+    """
+    return _geotiff_file.GeotiffFile_key_name_uppercase(K)
+
+def GeotiffFile_value_name(K, V):
+    """
+
+    std::string GeotiffFile::value_name(geokey_t K, geocode_t V)
+    Return a string giving the value name for the given key. 
+    """
+    return _geotiff_file.GeotiffFile_value_name(K, V)
+
 def GeotiffFile_key_type(K):
     """
 
@@ -372,7 +432,7 @@ def GeotiffFile_key_type(K):
 def GeotiffFile_geotiff_tag_ascii():
     """
 
-    const std::vector< int > & GeotiffFile::geotiff_tag_ascii()
+    const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_ascii()
     Return the list of tags that take ASCII data. 
     """
     return _geotiff_file.GeotiffFile_geotiff_tag_ascii()
@@ -380,7 +440,7 @@ def GeotiffFile_geotiff_tag_ascii():
 def GeotiffFile_geotiff_tag_double():
     """
 
-    const std::vector< int > & GeotiffFile::geotiff_tag_double()
+    const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_double()
     Return the list of tags that take double data. 
     """
     return _geotiff_file.GeotiffFile_geotiff_tag_double()
@@ -388,7 +448,7 @@ def GeotiffFile_geotiff_tag_double():
 def GeotiffFile_geotiff_tag_short():
     """
 
-    const std::vector< int > & GeotiffFile::geotiff_tag_short()
+    const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_short()
     Return the list of tags that take short data. 
     """
     return _geotiff_file.GeotiffFile_geotiff_tag_short()

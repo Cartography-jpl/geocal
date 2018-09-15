@@ -1,6 +1,7 @@
 #include "geotiff_file.h"
 #include "geocal_serialize_support.h"
 #include "geocal_exception.h"
+#include <boost/algorithm/string.hpp>
 
 using namespace GeoCal;
 
@@ -47,7 +48,6 @@ GEOCAL_IMPLEMENT(GeotiffFile);
 #define	TIFFTAG_BITSPERSAMPLE		258
 #define	TIFFTAG_SAMPLESPERPIXEL		277
 extern "C" {
-typedef int geokey_t;
 typedef int tagtype_t;
 typedef uint32_t ttag_t;
 TIFF * XTIFFOpen(const char* name, const char* mode);
@@ -55,11 +55,11 @@ void XTIFFClose(TIFF *tif);
 GTIF *GTIFNew(void *tif);
 void GTIFFree(GTIF *gtif);
 int  GTIFWriteKeys(GTIF *gtif);
-int GTIFKeyInfo(GTIF *gtif, geokey_t key, int *size, tagtype_t* type);
-int GTIFKeyGet(GTIF *gtif, geokey_t key, void *val, int index, int count);
-int GTIFKeySet(GTIF *gtif, geokey_t keyID, tagtype_t type, int count,...);
-char *GTIFKeyName(geokey_t key);
-char *GTIFValueName(geokey_t key,int value);
+int GTIFKeyInfo(GTIF *gtif, int key, int *size, tagtype_t* type);
+int GTIFKeyGet(GTIF *gtif, int key, void *val, int index, int count);
+int GTIFKeySet(GTIF *gtif, int keyID, tagtype_t type, int count,...);
+char *GTIFKeyName(int key);
+char *GTIFValueName(int key,int value);
 int TIFFSetField(TIFF*, ttag_t, ...);
 int TIFFGetField(TIFF*, ttag_t, ...);
 int32_t TIFFWriteEncodedStrip(TIFF*, uint32_t, void*, int32_t);
@@ -89,6 +89,37 @@ GeotiffFile::~GeotiffFile()
     GTIFFree(gtif);
   if(tif)
     XTIFFClose(tif);
+}
+
+//-----------------------------------------------------------------------
+/// Return a string giving the key name.
+//-----------------------------------------------------------------------
+
+std::string GeotiffFile::key_name(GeotiffFile::geokey_t K)
+{
+  return GTIFKeyName(K);
+}
+
+//-----------------------------------------------------------------------
+/// Return a string giving the key name, in all uppercase. This is
+/// useful because this the tag used in VICAR files to carry the
+/// geotiff information
+//-----------------------------------------------------------------------
+
+std::string GeotiffFile::key_name_uppercase(GeotiffFile::geokey_t K)
+{
+  std::string kn = GeotiffFile::key_name(K);
+  boost::to_upper(kn);
+  return kn;
+}
+
+//-----------------------------------------------------------------------
+/// Return a string giving the value name for the given key
+//-----------------------------------------------------------------------
+
+std::string GeotiffFile::value_name(GeotiffFile::geokey_t K, geocode_t V)
+{
+  return GTIFValueName(K, V);
 }
 
 //-----------------------------------------------------------------------
@@ -160,10 +191,10 @@ GeotiffFile::tagtype_t GeotiffFile::key_type(GeotiffFile::geokey_t K)
 /// Return the list of tags that take ASCII data.
 //-----------------------------------------------------------------------
 
-const std::vector<int>& GeotiffFile::geotiff_tag_ascii()
+const std::vector<GeotiffFile::geokey_t>& GeotiffFile::geotiff_tag_ascii()
 {
   static bool filled_in = false;
-  static std::vector<int> data;
+  static std::vector<geokey_t> data;
   if(!filled_in) {
     data.push_back(GTCitationGeoKey);
     data.push_back(GeogCitationGeoKey);
@@ -178,10 +209,10 @@ const std::vector<int>& GeotiffFile::geotiff_tag_ascii()
 /// Return the list of tags that take double data.
 //-----------------------------------------------------------------------
 
-const std::vector<int>& GeotiffFile::geotiff_tag_double()
+const std::vector<GeotiffFile::geokey_t>& GeotiffFile::geotiff_tag_double()
 {
   static bool filled_in = false;
-  static std::vector<int> data;
+  static std::vector<geokey_t> data;
   if(!filled_in) {
     data.push_back(GeogInvFlatteningGeoKey);
     data.push_back(GeogSemiMajorAxisGeoKey);
@@ -218,10 +249,10 @@ const std::vector<int>& GeotiffFile::geotiff_tag_double()
 /// Return the list of tags that take short data.
 //-----------------------------------------------------------------------
 
-const std::vector<int>& GeotiffFile::geotiff_tag_short()
+const std::vector<GeotiffFile::geokey_t>& GeotiffFile::geotiff_tag_short()
 {
   static bool filled_in = false;
-  static std::vector<int> data;
+  static std::vector<geokey_t> data;
   if(!filled_in) {
     data.push_back(GTModelTypeGeoKey);
     data.push_back(GTRasterTypeGeoKey);

@@ -71,12 +71,12 @@ write "&o3"
         '''Grab the results from the run file before we finish with the
         scratch directory.'''
         res = []
-        with open("run.log") as f:
-            for line in f:
-                if(line == "output starts here\n"):
-                    break
-            for line in f:
+        do_append = False
+        for line in self.run_out.splitlines():
+            if do_append:
                 res.append(float(line))
+            if(line == b"output starts here"):
+                do_append = True
         p = self.pos_sample.create(res[0:3])
         att = Quaternion_double(*res[3:7])
         self.res = QuaternionOrbitData(self.time, p, [0,0,0], att)

@@ -185,11 +185,11 @@ end-proc
                 fh = None
                 if(self.log_file):
                     fh = open(self.log_file, "w")
-                run_out = run_tee(["vicarb", "tmppdf"], out_fh = fh,
+                self.run_out = run_tee(["vicarb", "tmppdf"], out_fh = fh,
                          quiet = (not self.debug and not self.print_output))
             except subprocess.CalledProcessError as ex:
                 print("Vicar call failed. Log of VICAR:")
-                print(run_out)
+                print(self.run_out)
                 raise
             for f in outabs:
                 shutil.move(os.path.basename(f), f)

@@ -30,6 +30,7 @@ EXTRA_PYTHON_TEST=
 endif
 
 EXTRA_DIST+=@srcpython@/pynitf
+EXTRA_DIST+=@srcpython@/pytest.ini
 EXTRA_DIST+=@srcpython@/setup.cfg
 EXTRA_DIST+=@srcpython@/conftest.py
 EXTRA_DIST+=@srcpython@/README_test

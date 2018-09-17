@@ -8,7 +8,7 @@ import tempfile
 import subprocess
 import time
 import geocal_swig
-from .misc import makedirs_p
+from .misc import makedirs_p, run_tee
 import six
 
 class VicarInterface(object):
@@ -182,32 +182,20 @@ end-proc
 
             self.pre_run()
             try:
-                if(self.debug):
-                    subprocess.check_call(["vicarb", "tmppdf"], 
-                                          stderr=subprocess.STDOUT)
-                else:
-                    with open("run.log", "w") as f:
-                        subprocess.check_call(["vicarb", "tmppdf"], 
-                                              stderr=subprocess.STDOUT,
-                                              stdout=f)
+                fh = None
+                if(self.log_file):
+                    fh = open(self.log_file, "w")
+                run_out = run_tee(["vicarb", "tmppdf"], out_fh = fh,
+                         quiet = (not self.debug and not self.print_output))
             except subprocess.CalledProcessError as ex:
                 print("Vicar call failed. Log of VICAR:")
-                with open("run.log") as f:
-                    for line in f:
-                        print(line, end=' ')
-                    raise
+                print(run_out)
+                raise
             for f in outabs:
                 shutil.move(os.path.basename(f), f)
             self.post_run()
-            if(not self.debug and self.print_output):
-                print("Vicar output:")
-                with open("run.log") as f:
-                    for line in f:
-                        print(line, end=' ')
             successfully_done = True
         finally:
-            if(self.log_file):
-                shutil.move("run.log", self.log_file)
             if(curdir):
                 os.chdir(curdir)
             if(self.force_cleanup or 

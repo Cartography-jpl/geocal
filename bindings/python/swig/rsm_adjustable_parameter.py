@@ -181,7 +181,8 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
-class RsmAdjustableParameter(geocal_swig.generic_object.GenericObject):
+import geocal_swig.with_parameter
+class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
     """
 
     This is used to handle the RSM adjustable parameters.
@@ -233,6 +234,24 @@ class RsmAdjustableParameter(geocal_swig.generic_object.GenericObject):
         return _rsm_adjustable_parameter.RsmAdjustableParameter_read_tre_string(Tre_in)
 
     read_tre_string = staticmethod(read_tre_string)
+
+    def _v_coordinate_converter(self, *args):
+        """
+
+        void GeoCal::RsmAdjustableParameter::coordinate_converter(const boost::shared_ptr< CoordinateConverter > &V)
+
+        """
+        return _rsm_adjustable_parameter.RsmAdjustableParameter__v_coordinate_converter(self, *args)
+
+
+    @property
+    def coordinate_converter(self):
+        return self._v_coordinate_converter()
+
+    @coordinate_converter.setter
+    def coordinate_converter(self, value):
+      self._v_coordinate_converter(value)
+
 
     def _v_image_identifier(self, *args):
         """
@@ -293,6 +312,7 @@ class RsmAdjustableParameter(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _rsm_adjustable_parameter.delete_RsmAdjustableParameter
 RsmAdjustableParameter.tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_tre_string, None, RsmAdjustableParameter)
+RsmAdjustableParameter._v_coordinate_converter = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_coordinate_converter, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_image_identifier = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_image_identifier, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_rsm_suport_data_edition = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_suport_data_edition, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_triangulation_id = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_triangulation_id, None, RsmAdjustableParameter)

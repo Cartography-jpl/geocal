@@ -80,10 +80,28 @@ public:
     TYPE_SLONG=10,
     TYPE_UNKNOWN=11
   } tagtype_t;
+  typedef enum {
+    TIFFTAG_GEOPIXELSCALE=33550,
+    TIFFTAG_GEOTIEPOINTS=33922,
+    TIFFTAG_GEOTRANSMATRIX=34264,
+    TIFFTAG_IMAGEWIDTH=256,
+    TIFFTAG_IMAGELENGTH=257,
+    TIFFTAG_COMPRESSION=259,
+    TIFFTAG_PLANARCONFIG=284,
+    TIFFTAG_PHOTOMETRIC=262,
+    TIFFTAG_BITSPERSAMPLE=258,
+    TIFFTAG_SAMPLESPERPIXEL=277
+  } tiftag_t;
   typedef uint32_t ttag_t;
   GeotiffFile(const std::string& Fname, const std::string& Mode);
   %python_attribute(file_name, std::string);
   %python_attribute(mode, std::string);
+  void set_tiftag(tiftag_t K, int V);
+  void set_tiftag(tiftag_t K, const blitz::Array<double, 1>& V);
+  void set_key(geokey_t K, geocode_t V);
+  void set_key(geokey_t K, double V);
+  void set_key(geokey_t K, const std::string& V);
+  void write_key();
   std::string print_to_string() const;
   static std::string key_name(geokey_t K);
   static std::string key_name_uppercase(geokey_t K);

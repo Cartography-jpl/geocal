@@ -272,6 +272,16 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     TYPE_SSHORT = _geotiff_file.GeotiffFile_TYPE_SSHORT
     TYPE_SLONG = _geotiff_file.GeotiffFile_TYPE_SLONG
     TYPE_UNKNOWN = _geotiff_file.GeotiffFile_TYPE_UNKNOWN
+    TIFFTAG_GEOPIXELSCALE = _geotiff_file.GeotiffFile_TIFFTAG_GEOPIXELSCALE
+    TIFFTAG_GEOTIEPOINTS = _geotiff_file.GeotiffFile_TIFFTAG_GEOTIEPOINTS
+    TIFFTAG_GEOTRANSMATRIX = _geotiff_file.GeotiffFile_TIFFTAG_GEOTRANSMATRIX
+    TIFFTAG_IMAGEWIDTH = _geotiff_file.GeotiffFile_TIFFTAG_IMAGEWIDTH
+    TIFFTAG_IMAGELENGTH = _geotiff_file.GeotiffFile_TIFFTAG_IMAGELENGTH
+    TIFFTAG_COMPRESSION = _geotiff_file.GeotiffFile_TIFFTAG_COMPRESSION
+    TIFFTAG_PLANARCONFIG = _geotiff_file.GeotiffFile_TIFFTAG_PLANARCONFIG
+    TIFFTAG_PHOTOMETRIC = _geotiff_file.GeotiffFile_TIFFTAG_PHOTOMETRIC
+    TIFFTAG_BITSPERSAMPLE = _geotiff_file.GeotiffFile_TIFFTAG_BITSPERSAMPLE
+    TIFFTAG_SAMPLESPERPIXEL = _geotiff_file.GeotiffFile_TIFFTAG_SAMPLESPERPIXEL
 
     def __init__(self, Fname, Mode):
         """
@@ -309,6 +319,35 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     @property
     def mode(self):
         return self._v_mode()
+
+
+    def set_tiftag(self, *args):
+        """
+
+        void GeotiffFile::set_tiftag(tiftag_t K, const blitz::Array< double, 1 > &V)
+        Set the tiff tag value. 
+        """
+        return _geotiff_file.GeotiffFile_set_tiftag(self, *args)
+
+
+    def set_key(self, *args):
+        """
+
+        void GeotiffFile::set_key(geokey_t K, const std::string &V)
+        Set the value of the given key.
+
+        Not actually written to the file until write_key is called. 
+        """
+        return _geotiff_file.GeotiffFile_set_key(self, *args)
+
+
+    def write_key(self):
+        """
+
+        void GeotiffFile::write_key()
+        Write the key value to the file. 
+        """
+        return _geotiff_file.GeotiffFile_write_key(self)
 
 
     def key_name(K):
@@ -390,6 +429,9 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     __swig_destroy__ = _geotiff_file.delete_GeotiffFile
 GeotiffFile._v_file_name = new_instancemethod(_geotiff_file.GeotiffFile__v_file_name, None, GeotiffFile)
 GeotiffFile._v_mode = new_instancemethod(_geotiff_file.GeotiffFile__v_mode, None, GeotiffFile)
+GeotiffFile.set_tiftag = new_instancemethod(_geotiff_file.GeotiffFile_set_tiftag, None, GeotiffFile)
+GeotiffFile.set_key = new_instancemethod(_geotiff_file.GeotiffFile_set_key, None, GeotiffFile)
+GeotiffFile.write_key = new_instancemethod(_geotiff_file.GeotiffFile_write_key, None, GeotiffFile)
 GeotiffFile.__str__ = new_instancemethod(_geotiff_file.GeotiffFile___str__, None, GeotiffFile)
 GeotiffFile_swigregister = _geotiff_file.GeotiffFile_swigregister
 GeotiffFile_swigregister(GeotiffFile)

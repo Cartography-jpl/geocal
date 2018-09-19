@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <vector>
+#include <blitz/array.h>
 
 struct TIFF;
 struct GTIF;
@@ -112,6 +113,23 @@ public:
     TYPE_SLONG=10,
     TYPE_UNKNOWN=11
   } tagtype_t;
+  typedef enum {
+    TIFFTAG_GEOPIXELSCALE=33550,
+    TIFFTAG_GEOTIEPOINTS=33922,
+    TIFFTAG_GEOTRANSMATRIX=34264,
+    TIFFTAG_IMAGEWIDTH=256,
+    TIFFTAG_IMAGELENGTH=257,
+    TIFFTAG_COMPRESSION=259,
+    TIFFTAG_PLANARCONFIG=284,
+    TIFFTAG_PHOTOMETRIC=262,
+    TIFFTAG_BITSPERSAMPLE=258,
+    TIFFTAG_SAMPLESPERPIXEL=277
+  } tiftag_t;
+  typedef enum {
+    PHOTOMETRIC_MINISBLACK = 1,
+    COMPRESSION_NONE = 1,
+    PLANARCONFIG_CONTIG = 1
+  } tiftagval_t;
   typedef uint32_t ttag_t;
 
 //-----------------------------------------------------------------------
@@ -147,7 +165,14 @@ public:
        << "  File: " << file_name() << "\n"
        << "  Mode: " << mode() << "\n";
   }
-
+  void set_tiftag(tiftag_t K, int V);
+  void set_tiftag(tiftag_t K, const blitz::Array<double, 1>& V);
+  void set_key(geokey_t K, geocode_t V);
+  void set_key(geokey_t K, double V);
+  void set_key(geokey_t K, const std::string& V);
+  void write_key();
+  template<class T> T get_key(geokey_t K) const;
+  bool has_key(geokey_t K) const;
   static std::string key_name(geokey_t K);
   static std::string key_name_uppercase(geokey_t K);
   static std::string value_name(geokey_t K, geocode_t V);
@@ -172,6 +197,10 @@ private:
   // Temporary
   friend class VicarOgr;
 };
+
+template<> GeotiffFile::geocode_t GeotiffFile::get_key(geokey_t K) const;
+template<> double GeotiffFile::get_key(geokey_t K) const;
+template<> std::string GeotiffFile::get_key(geokey_t K) const;
   
 }
 

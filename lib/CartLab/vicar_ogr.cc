@@ -26,27 +26,8 @@ typedef unsigned short geocode_t;
 // the TIFF standard. This should mean that they are fairly stable
 // and unlikely to change.
 
-#define TIFFTAG_GEOPIXELSCALE       33550
-#define TIFFTAG_GEOTIEPOINTS        33922
-#define TIFFTAG_GEOTRANSMATRIX      34264
-#define	TIFFTAG_IMAGEWIDTH		256
-#define	TIFFTAG_IMAGELENGTH		257
-#define	TIFFTAG_COMPRESSION		259
-#define	TIFFTAG_PLANARCONFIG		284
-#define	TIFFTAG_PHOTOMETRIC		262
-#define	PHOTOMETRIC_MINISBLACK	        1
-#define	COMPRESSION_NONE		1
-#define	PLANARCONFIG_CONTIG		1
-#define	TIFFTAG_BITSPERSAMPLE		258
-#define	TIFFTAG_SAMPLESPERPIXEL		277
 extern "C" {
-typedef int geokey_t;
-typedef int tagtype_t;
 typedef uint32_t ttag_t;
-int  GTIFWriteKeys(GTIF *gtif);
-int GTIFKeyInfo(GTIF *gtif, geokey_t key, int *size, tagtype_t* type);
-int GTIFKeyGet(GTIF *gtif, geokey_t key, void *val, int index, int count);
-int GTIFKeySet(GTIF *gtif, geokey_t keyID, tagtype_t type, int count,...);
 int TIFFSetField(TIFF*, ttag_t, ...);
 int TIFFGetField(TIFF*, ttag_t, ...);
 int32_t TIFFWriteEncodedStrip(TIFF*, uint32_t, void*, int32_t);
@@ -104,33 +85,33 @@ template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*
   // Write out all of the keys we find in the VICAR file into the
   // temporary file.
   GeotiffFile g(Fname, "w");
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_short()) {
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_short()) {
     if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
       std::string tv = F.label_string(tag_to_vicar_name[t],
 				      "GEOTIFF");
-      int v = atoi(tv.c_str());
+      GeotiffFile::geocode_t v = (GeotiffFile::geocode_t) atoi(tv.c_str());
       // Special handling to override GTRASTERTYPEGEOKEY and force
       // pixel is area. This is a workaround for an error in SRTM
       // data, see VicarFile force_area_pixel description for details.
       if(F.force_area_pixel() &&
 	 tag_to_vicar_name[t] == "GTRASTERTYPEGEOKEY")
 	v = 1;		// Force RasterPixelIsArea, which is
-      // code 1.
-      GTIFKeySet(g.gtif, (geokey_t) t, GeotiffFile::TYPE_SHORT, 1, (geocode_t) v);
+                        // code 1.
+      g.set_key(t, v);
     }
   }
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_double()) {
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_double()) {
     if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
       std::string tv = F.label_string(tag_to_vicar_name[t],
 				      "GEOTIFF");
       double v = atof(tv.c_str());
-      GTIFKeySet(g.gtif, (geokey_t) t, GeotiffFile::TYPE_DOUBLE, 1, v);
+      g.set_key(t, v);
     }
   }
-  BOOST_FOREACH(int t, GeotiffFile::geotiff_tag_ascii()) {
+  BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_ascii()) {
     if(F.has_label("GEOTIFF " + tag_to_vicar_name[t])) {
       std::string v = F.label_string(tag_to_vicar_name[t], "GEOTIFF");
-      GTIFKeySet(g.gtif, (geokey_t) t, GeotiffFile::TYPE_ASCII, 0, v.c_str());
+      g.set_key(t, v);
     }
   }
   if(F.has_label("GEOTIFF MODELPIXELSCALETAG")) {
@@ -140,13 +121,13 @@ template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*
 	c = ' ';
     size_t istart = 0;
     size_t iend = 0;
-    double v[3];
+    blitz::Array<double, 1> v(3);
     for(int i = 0; i < 3; ++i) {
       istart = vs.find_first_not_of(" ", iend);
       iend = vs.find_first_of(" ", istart);
-      v[i] = atof(vs.substr(istart, iend - istart).c_str());
+      v(i) = atof(vs.substr(istart, iend - istart).c_str());
     }
-    TIFFSetField(g.tif, TIFFTAG_GEOPIXELSCALE, 3, v);
+    g.set_tiftag(GeotiffFile::TIFFTAG_GEOPIXELSCALE, v);
   }
   if(F.has_label("GEOTIFF MODELTIEPOINTTAG")) {
     std::string vs = F.label_string("MODELTIEPOINTTAG", "GEOTIFF");
@@ -155,13 +136,13 @@ template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*
 	c = ' ';
     size_t istart = 0;
     size_t iend = 0;
-    double v[6];
+    blitz::Array<double, 1> v(6);
     for(int i = 0; i < 6; ++i) {
       istart = vs.find_first_not_of(" ", iend);
       iend = vs.find_first_of(" ", istart);
-      v[i] = atof(vs.substr(istart, iend - istart).c_str());
+      v(i) = atof(vs.substr(istart, iend - istart).c_str());
     }
-    TIFFSetField(g.tif, TIFFTAG_GEOTIEPOINTS, 6, v);
+    g.set_tiftag(GeotiffFile::TIFFTAG_GEOTIEPOINTS, v);
   }
   if(F.has_label("GEOTIFF MODELTRANSFORMATIONTAG")) {
     std::string vs = F.label_string("MODELTRANSFORMATIONTAG", "GEOTIFF");
@@ -170,13 +151,13 @@ template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*
 	c = ' ';
     size_t istart = 0;
     size_t iend = 0;
-    double v[16];
+    blitz::Array<double, 1> v(16);
     for(int i = 0; i < 16; ++i) {
       istart = vs.find_first_not_of(" ", iend);
       iend = vs.find_first_of(" ", istart);
-      v[i] = atof(vs.substr(istart, iend - istart).c_str());
+      v(i) = atof(vs.substr(istart, iend - istart).c_str());
     }
-    TIFFSetField(g.tif, TIFFTAG_GEOTRANSMATRIX, 16, v);
+    g.set_tiftag(GeotiffFile::TIFFTAG_GEOTRANSMATRIX, v);
   }
 
   //----------------------------------------------------------------
@@ -192,25 +173,26 @@ template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*
      F.has_label("GEOTIFF GTMODELTYPEGEOKEY") &&
      atoi(F.label_string("GTMODELTYPEGEOKEY", "GEOTIFF").c_str()) 
      == 2)
-    GTIFKeySet(g.gtif, GeotiffFile::GeographicTypeGeoKey,
-	       GeotiffFile::TYPE_SHORT, 1, 
-	       (geocode_t) 4326); 
+    g.set_key(GeotiffFile::GeographicTypeGeoKey, (GeotiffFile::geocode_t) 4326);
   
   //----------------------------------------------------------------
   // Set other tags needed to make a valid file, and write data.
   // This is just a 1x1 file.
   //----------------------------------------------------------------
-  
-  TIFFSetField(g.tif, TIFFTAG_IMAGEWIDTH, 1);
-  TIFFSetField(g.tif, TIFFTAG_IMAGELENGTH, 1);
-  TIFFSetField(g.tif, TIFFTAG_COMPRESSION, COMPRESSION_NONE);
-  TIFFSetField(g.tif, TIFFTAG_PLANARCONFIG, PLANARCONFIG_CONTIG);
-  TIFFSetField(g.tif, TIFFTAG_PHOTOMETRIC, PHOTOMETRIC_MINISBLACK);
-  TIFFSetField(g.tif, TIFFTAG_BITSPERSAMPLE, 8);
-  TIFFSetField(g.tif, TIFFTAG_SAMPLESPERPIXEL, 1);
+
+  g.set_tiftag(GeotiffFile::TIFFTAG_IMAGEWIDTH, 1);
+  g.set_tiftag(GeotiffFile::TIFFTAG_IMAGELENGTH, 1);
+  g.set_tiftag(GeotiffFile::TIFFTAG_COMPRESSION,
+	       GeotiffFile::COMPRESSION_NONE);
+  g.set_tiftag(GeotiffFile::TIFFTAG_PLANARCONFIG,
+	       GeotiffFile::PLANARCONFIG_CONTIG);
+  g.set_tiftag(GeotiffFile::TIFFTAG_PHOTOMETRIC,
+	       GeotiffFile::PHOTOMETRIC_MINISBLACK);
+  g.set_tiftag(GeotiffFile::TIFFTAG_BITSPERSAMPLE, 8);
+  g.set_tiftag(GeotiffFile::TIFFTAG_SAMPLESPERPIXEL, 1);
   char c = '\0';
   TIFFWriteEncodedStrip(g.tif, 0, &c, 1);
-  GTIFWriteKeys(g.gtif);
+  g.write_key();
 }
 
 //-----------------------------------------------------------------------
@@ -305,8 +287,8 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
   const int bufsize = 1000;
   char buf[bufsize];
   BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_short()) {
-    GeotiffFile::geocode_t v;
-    if(GTIFKeyGet(g.gtif, (geokey_t) t, &v, 0, 1) ==1) {
+    if(g.has_key(t)) {
+      GeotiffFile::geocode_t v = g.get_key<GeotiffFile::geocode_t>(t);
       snprintf(buf, bufsize, "%d", v);
       std::string s(buf);
       s = s + "(" + GeotiffFile::value_name(t, v) + ")";
@@ -314,27 +296,23 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
     }
   }
   BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_double()) {
-    double v;
-    if(GTIFKeyGet(g.gtif, (geokey_t) t, &v, 0, 1) ==1) {
+    if(g.has_key(t)) {
+      double v = g.get_key<double>(t);
       snprintf(buf, bufsize, "%.12g", v);
       std::string s(buf);
       F.label_set(tag_to_vicar_name[t], s, "GEOTIFF");
     }
   }
   BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_ascii()) {
-    int size = GTIFKeyInfo(g.gtif, (geokey_t) t, 0, 0);
-    if(size !=0) {
-      std::vector<char> v(size);
-      if(GTIFKeyGet(g.gtif, (geokey_t) t, &v[0], 0, size) ==0)
-	throw Exception("Trouble reading ASCII tag in geotiff file");
-      std::string vs(&v[0]);
-      F.label_set(tag_to_vicar_name[t], vs, "GEOTIFF");
+    if(g.has_key(t)) {
+      std::string v = g.get_key<std::string>(t);
+      F.label_set(tag_to_vicar_name[t], v, "GEOTIFF");
     }
   }
   
   double *tiepoint, *scale, *transform;
   uint16_t num;
-  if(TIFFGetField(g.tif, TIFFTAG_GEOPIXELSCALE, &num, &scale) ==1) {
+  if(TIFFGetField(g.tif, GeotiffFile::TIFFTAG_GEOPIXELSCALE, &num, &scale) ==1) {
     if(num == 2)		// Fill in 0.0 for third entry if
 				// missing
       snprintf(buf, bufsize, "(%.12g,%.12g,0.0)", scale[0], scale[1]);
@@ -345,7 +323,7 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
     std::string s(buf);
     F.label_set("MODELPIXELSCALETAG", s, "GEOTIFF");
   }
-  if(TIFFGetField(g.tif, TIFFTAG_GEOTIEPOINTS, &num, &tiepoint) ==1) {
+  if(TIFFGetField(g.tif, GeotiffFile::TIFFTAG_GEOTIEPOINTS, &num, &tiepoint) ==1) {
     if(num != 6)
       throw Exception("Not sure how to interpret TIFFTAG_GEOTIEPOINTS");
     snprintf(buf,bufsize, "(%.12g,%.12g,%.12g,%.12g,%.12g,%.12g)", tiepoint[0], 
@@ -353,7 +331,7 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
     std::string s(buf);
     F.label_set("MODELTIEPOINTTAG", s, "GEOTIFF");
   }
-  if(TIFFGetField(g.tif, TIFFTAG_GEOTRANSMATRIX, &num, &transform) ==1) {
+  if(TIFFGetField(g.tif, GeotiffFile::TIFFTAG_GEOTRANSMATRIX, &num, &transform) ==1) {
     if(num != 16)
       throw Exception("Not sure how to interpret TIFFTAG_GEOTRANSMATRIX");
     snprintf(buf,bufsize, "(%.12g,%.12g,%.12g,%.12g,%.12g,%.12g,%12g,%12g,%.12g,%.12g,%.12g,%.12g,%.12g,%.12g,%12g,%12g)", 

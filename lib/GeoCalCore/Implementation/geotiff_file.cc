@@ -274,3 +274,126 @@ const std::vector<GeotiffFile::geokey_t>& GeotiffFile::geotiff_tag_short()
   }
   return data;
 }
+
+//-----------------------------------------------------------------------
+/// Set the value of the given key. Not actually written to the file
+/// until write_key is called.
+//-----------------------------------------------------------------------
+
+void GeotiffFile::set_key(geokey_t K, GeotiffFile::geocode_t V)
+{
+  int status = GTIFKeySet(gtif, K, GeotiffFile::TYPE_SHORT, 1, V);
+  if(status != 1)
+    throw Exception("Call to GTIFKeySet failed");
+}
+
+//-----------------------------------------------------------------------
+/// Set the value of the given key. Not actually written to the file
+/// until write_key is called.
+//-----------------------------------------------------------------------
+
+void GeotiffFile::set_key(geokey_t K, double V)
+{
+  int status = GTIFKeySet(gtif, K, GeotiffFile::TYPE_DOUBLE, 1, V);
+  if(status != 1)
+    throw Exception("Call to GTIFKeySet failed");
+}
+
+//-----------------------------------------------------------------------
+/// Set the value of the given key. Not actually written to the file
+/// until write_key is called.
+//-----------------------------------------------------------------------
+
+void GeotiffFile::set_key(geokey_t K, const std::string& V)
+{
+  int status = GTIFKeySet(gtif, K, GeotiffFile::TYPE_ASCII, 0, V.c_str());
+  if(status != 1)
+    throw Exception("Call to GTIFKeySet failed");
+}
+  
+
+//-----------------------------------------------------------------------
+/// Write the key value to the file.
+//-----------------------------------------------------------------------
+
+void GeotiffFile::write_key()
+{
+  int status = GTIFWriteKeys(gtif);
+  if(status != 1)
+    throw Exception("Call to GTIFWriteKeys failed");
+}
+
+//-----------------------------------------------------------------------
+/// Return true if we have the key.
+//-----------------------------------------------------------------------
+
+bool GeotiffFile::has_key(geokey_t K) const
+{
+  int size = GTIFKeyInfo(gtif, K, 0, 0);
+  return size > 0;
+}
+
+//-----------------------------------------------------------------------
+/// Get key value.
+//-----------------------------------------------------------------------
+
+template<> GeotiffFile::geocode_t GeotiffFile::get_key(geokey_t K) const
+{
+  geocode_t v;
+  int status = GTIFKeyGet(gtif, K, &v, 0, 1);
+  if(status != 1)
+    throw Exception("Error getting geotiff key");
+  return v;
+}
+
+//-----------------------------------------------------------------------
+/// Get key value.
+//-----------------------------------------------------------------------
+
+template<> double GeotiffFile::get_key(geokey_t K) const
+{
+  double v;
+  int status = GTIFKeyGet(gtif, K, &v, 0, 1);
+  if(status != 1)
+    throw Exception("Error getting geotiff key");
+  return v;
+  
+}
+
+//-----------------------------------------------------------------------
+/// Get key value.
+//-----------------------------------------------------------------------
+
+template<> std::string GeotiffFile::get_key(geokey_t K) const
+{
+  int size = GTIFKeyInfo(gtif, K, 0, 0);
+  if(size == 0)
+    throw Exception("Error getting geotiff key");
+  std::vector<char> v(size);
+  if(GTIFKeyGet(gtif, K, &v[0], 0, size) ==0)
+    throw Exception("Trouble reading ASCII tag in geotiff file");
+  std::string vs(&v[0]);
+  return vs;
+}
+
+//-----------------------------------------------------------------------
+/// Set the tiff tag value.
+//-----------------------------------------------------------------------
+
+void GeotiffFile::set_tiftag(tiftag_t K, int V)
+{
+  int status = TIFFSetField(tif, (ttag_t) K, V);
+  if(status != 1)
+    throw Exception("Error setting tiff field");
+}
+
+//-----------------------------------------------------------------------
+/// Set the tiff tag value.
+//-----------------------------------------------------------------------
+
+void GeotiffFile::set_tiftag(tiftag_t K, const blitz::Array<double, 1>& V)
+{
+  int status = TIFFSetField(tif, (ttag_t) K, V.rows(), &V(0));
+  if(status != 1)
+    throw Exception("Error setting tiff field");
+}

@@ -11,7 +11,7 @@ import sys
 import re
 import geocal
 
-version = "June 27,2017"
+version = "September 17,2018"
 usage='''Usage:
   mars_nest [options] <ref_image> <ref_base_name> 
             <ref_image_resolution_name> <image> <image_base_name> 
@@ -254,35 +254,27 @@ def import_file(fin, fout):
     cmd = ["gdal_translate", "-of", "VICAR", "-ot", "Int16", fin, fout]
     run_cmd(cmd)
 
-# Not sure about triangulation. Maybe try quad.
-def gtpwarp(fin, fref, fref_res, fout):
-    '''gtpwarp, using Tom's usual parameters.'''
-    cmd = ["vicarb", "gtpwarp", fin, fout, fref, fref_res,
-                    "nav=%d" % args.nav, "nah=%d" % args.nah,
-                    "fftgrid=%s" % str(args.fftgrid),
-                    "fftsize=%d" % args.fftsize,
-                    "magnify=%f" % args.magnify,
-                    "magmin=%f" % args.magmin,
-                    "toler=%f" % args.toler, 
-                    "polyfit=\"%s\"" % args.polyfit if args.polyfit else "",
-                    "autofit=%d" % args.autofit,
-                    'ref_lowres=y',
-                    "redo=%d" % args.redo,
-                    "ffthalf=2",
-                    "seed=%d" % args.seed, 
-                    "accoff=y", "'bilin", 
-                    "'coverref",
-                    "thr_res=%f" % args.thr_res,
-                    "ref_res=%s" % fref_res,
-                    ]
-    run_cmd(cmd)
-    # For some reason, gtpwarp doesn't set all the geotiff metadata. Not
-    # sure why, we may try fixing this at some point. But for now, just
-    # update this. Note this is pretty much the same as a gtgenup call, just
-    # easier to do this in python here.
-    t = geocal.VicarRasterImage(fout, 1, geocal.VicarFile.UPDATE)
-    t.set_map_info(geocal.VicarRasterImage(fin).map_info)
-    t.close()
+def tie_point_collect(fin, fref):
+    '''Collect tie points between fin and fref'''
+    img = geocal.VicarLiteRasterImage(fin)
+    dem = geocal.PlanetSimpleDem(img.ground_coordinate(0,0).naif_code())
+    igc1 = geocal.MapInfoImageGroundConnection(img, dem)
+    igc_coll = geocal.IgcArray([igc1,])
+    tpcollect = geocal.TiePointCollectPicmtch(igc_coll, [fin,],
+                  ref_image_fname=fref, fftsize=args.fftsize,
+                  magnify=args.magnify, magmin=args.magmin,
+                  toler=args.toler, redo=args.redo,
+                  ffthalf=2, seed=args.seed, autofit=args.autofit,
+                  thr_res=10.0, quiet=False)
+    tpcol = tpcollect.tie_point_grid(eval(args.fftgrid)[0],
+                                     eval(args.fftgrid)[1])
+    return tpcol
+
+def run_warp_image(fin, fref_res, tpcol, fout):
+    '''Run warp_image to generate output.'''
+    geocal.warp_image(fin, fout, fref_res, tpcol, nav=args.nav, nah=args.nah,
+                      polyfit=args.polyfit,interp="bilin",
+                      quiet=False)
 
 def accck(fin,fref):
     '''Run accuracy check. We assume images are in the same projection
@@ -350,6 +342,7 @@ refimg_res1 = "%s_%s.img" % (args.ref_base_name, args.ref_image_resolution_name)
 refimg_res2 = "%s_%s.img" % (args.ref_base_name, args.image_resolution_name)
 img_fixed = "%s.vrt" % (args.image_base_name)
 img_res1 = "%s_%s.img" % (args.image_base_name, args.ref_image_resolution_name)
+tpcol_fname = "%s_%s_tpcol.xml" % (args.image_base_name, args.ref_image_resolution_name)
 img_res2 = "%s_%s.img" % (args.image_base_name, args.image_resolution_name)
 cimg_res1 = "%s_corr_%s.img" % (args.image_base_name, 
                                 args.ref_image_resolution_name)
@@ -403,7 +396,9 @@ print("MSG: Before correcting\n")
 print("MSG: Each pixels is %s" % args.ref_image_resolution_name)
 sys.stdout.flush()
 accck(img_res1, refimg_res1)
-gtpwarp(img_res2, refimg_res1, refimg_res2, cimg_res2)
+tpcol = tie_point_collect(img_res2, refimg_res1)
+geocal.write_shelve(tpcol_fname, tpcol)
+run_warp_image(img_res2, refimg_res2, tpcol, cimg_res2)
 if(args.ref_image_resolution_name != args.image_resolution_name):
     resample_proj(cimg_res2, refimg_res1, cimg_res1, resize=True)
 print("MSG:----------------------------------------------------\n")

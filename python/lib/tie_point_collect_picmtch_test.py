@@ -33,6 +33,7 @@ def test_tp_picmtch(isolated_dir):
 # probably go away. We depend on a specific run, including the ibis file
 # output. So this is something where the data will likely disappear. But
 # leave this code in place so we have a record of the testing we did.
+@skip
 @require_vicarb
 @require_vicar_gdalplugin
 @require_vicar

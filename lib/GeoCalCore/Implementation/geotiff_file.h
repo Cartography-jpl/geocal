@@ -11,13 +11,6 @@ struct TIFF;
 struct GTIF;
 
 namespace GeoCal {
-
-  /// Temporary, we will remove this once VicarOgr fully used
-  /// GeotiffFile. But short term, useful to move functionality as we
-  /// have it
-  
-  class VicarOgr;
-  
 /****************************************************************//**
   Provide direct access to a GeoTiff file. Note that this is a
   pretty low level class, you almost certainly don't want to be
@@ -27,19 +20,19 @@ namespace GeoCal {
 
   A note on the hardcode values/protypes:
 
-  Normally we wouldn't have prototypes defined directly in this
-  class. However, we have a special case. We know that GDAL will
-  supply the GeoTIFF library, because if it isn't found on the system
-  GDAL will use its own private copy. However, we don't know that the 
-  GeoTIFF headers will be available. GDAL doesn't install them, and
-  unless there is a another copy of GeoTIFF available they won't be
-  found. Since it is entirely possible to have GDAL installed but
-  GeoTIFF not, we don't want to add a dependency on this library that
-  we don't really need. So, we define the prototypes here. There is a
-  risk that these prototypes will become out of date, in which case
-  we'll need to update these. But the GeoTIFF library hasn't changed
-  in some time, so the trade against adding a dependency is probably
-  a good one.
+  Normally we wouldn't have prototypes and hard coded values defined
+  directly in a class. However, we have a special case. We know that
+  GDAL will supply the GeoTIFF library, because if it isn't found on
+  the system GDAL will use its own private copy. However, we don't
+  know that the GeoTIFF headers will be available. GDAL doesn't
+  install them, and unless there is a another copy of GeoTIFF
+  available they won't be found. Since it is entirely possible to have
+  GDAL installed but GeoTIFF not, we don't want to add a dependency on
+  this library that we don't really need. So, we define the prototypes
+  here. There is a risk that these prototypes will become out of date,
+  in which case we'll need to update these. But the GeoTIFF library
+  hasn't changed in some time, so the trade against adding a
+  dependency is probably a good one.
 *******************************************************************/
 
 class GeotiffFile: public boost::noncopyable, public Printable<GeotiffFile>  {
@@ -173,6 +166,8 @@ public:
   void write_key();
   template<class T> T get_key(geokey_t K) const;
   bool has_key(geokey_t K) const;
+  bool has_tiftag(tiftag_t K) const;
+  template<class T> T get_tiftag(tiftag_t K) const;
   static std::string key_name(geokey_t K);
   static std::string key_name_uppercase(geokey_t K);
   static std::string value_name(geokey_t K, geocode_t V);
@@ -180,6 +175,7 @@ public:
   static const std::vector<geokey_t>& geotiff_tag_ascii();
   static const std::vector<geokey_t>& geotiff_tag_double();
   static const std::vector<geokey_t>& geotiff_tag_short();
+  void write_1x1_file();
 private:
   void init();
   std::string fname_, mode_;
@@ -201,7 +197,8 @@ private:
 template<> GeotiffFile::geocode_t GeotiffFile::get_key(geokey_t K) const;
 template<> double GeotiffFile::get_key(geokey_t K) const;
 template<> std::string GeotiffFile::get_key(geokey_t K) const;
-  
+template<> int GeotiffFile::get_tiftag(tiftag_t K) const;
+template<> blitz::Array<double, 1> GeotiffFile::get_tiftag(tiftag_t K) const;
 }
 
 GEOCAL_EXPORT_KEY(GeotiffFile);

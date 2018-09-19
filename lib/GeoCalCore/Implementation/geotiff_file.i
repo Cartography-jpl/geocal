@@ -103,6 +103,8 @@ public:
   void set_key(geokey_t K, const std::string& V);
   void write_key();
   std::string print_to_string() const;
+  bool has_key(geokey_t K) const;
+  bool has_tiftag(tiftag_t K) const;
   static std::string key_name(geokey_t K);
   static std::string key_name_uppercase(geokey_t K);
   static std::string value_name(geokey_t K, geocode_t V);
@@ -110,6 +112,7 @@ public:
   static const std::vector<geokey_t>& geotiff_tag_ascii();
   static const std::vector<geokey_t>& geotiff_tag_double();
   static const std::vector<geokey_t>& geotiff_tag_short();
+  void write_1x1_file();
   %pickle_serialization();
 };
 }

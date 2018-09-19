@@ -1,48 +1,13 @@
 #include "vicar_ogr.h"
-#include <boost/utility.hpp>
-#include <stdio.h>
 #include "gdal_raster_image.h"
 #include "geotiff_file.h"
-
-//-----------------------------------------------------------------------
-// Normally we wouldn't have prototypes defined directly in this
-// class. However, we have a special case. We know that GDAL will
-// supply the GeoTIFF library, because if it isn't found on the system
-// GDAL will use its own private copy. However, we don't know that the 
-// GeoTIFF headers will be available. GDAL doesn't install them, and
-// unless there is a another copy of GeoTIFF available they won't be
-// found. Since it is entirely possible to have GDAL installed but
-// GeoTIFF not, we don't want to add a dependency on this library that
-// we don't really need. So, we define the prototypes here. There is a
-// risk that these prototypes will become out of date, in which case
-// we'll need to update these. But the GeoTIFF library hasn't changed
-// in some time, so the trade against adding a dependency is probably
-// a good one.
-//-----------------------------------------------------------------------
-struct TIFF;
-struct GTIF;
-typedef unsigned short geocode_t;
-// Note that all of these hard coded values are actually registered in
-// the TIFF standard. This should mean that they are fairly stable
-// and unlikely to change.
-
-extern "C" {
-typedef uint32_t ttag_t;
-int TIFFSetField(TIFF*, ttag_t, ...);
-int TIFFGetField(TIFF*, ttag_t, ...);
-int32_t TIFFWriteEncodedStrip(TIFF*, uint32_t, void*, int32_t);
-}
-
-//------------------------------------------
-// All done with prototypes, ready to start code
-//------------------------------------------
+#include <boost/utility.hpp>
+#include <stdio.h>
 
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
-// We have a number of resources that we need to maintain. This set of
-// classes is used to maintain these resources and make sure they get
-// cleaned up.
+// Temporary file
 //-----------------------------------------------------------------------
 namespace GeoCal {
 namespace VicarOgrNsp {
@@ -68,7 +33,6 @@ VicarOgr::VicarOgr()
     tag_to_vicar_name[(int) t] = GeotiffFile::key_name_uppercase(t);
   BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_short())
     tag_to_vicar_name[(int) t] = GeotiffFile::key_name_uppercase(t);
-
   // Make sure we have registered all the drivers, including geotiff.
   GdalRegister::gdal_register();
 }
@@ -180,18 +144,7 @@ template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*
   // This is just a 1x1 file.
   //----------------------------------------------------------------
 
-  g.set_tiftag(GeotiffFile::TIFFTAG_IMAGEWIDTH, 1);
-  g.set_tiftag(GeotiffFile::TIFFTAG_IMAGELENGTH, 1);
-  g.set_tiftag(GeotiffFile::TIFFTAG_COMPRESSION,
-	       GeotiffFile::COMPRESSION_NONE);
-  g.set_tiftag(GeotiffFile::TIFFTAG_PLANARCONFIG,
-	       GeotiffFile::PLANARCONFIG_CONTIG);
-  g.set_tiftag(GeotiffFile::TIFFTAG_PHOTOMETRIC,
-	       GeotiffFile::PHOTOMETRIC_MINISBLACK);
-  g.set_tiftag(GeotiffFile::TIFFTAG_BITSPERSAMPLE, 8);
-  g.set_tiftag(GeotiffFile::TIFFTAG_SAMPLESPERPIXEL, 1);
-  char c = '\0';
-  TIFFWriteEncodedStrip(g.tif, 0, &c, 1);
+  g.write_1x1_file();
   g.write_key();
 }
 
@@ -310,34 +263,41 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
     }
   }
   
-  double *tiepoint, *scale, *transform;
-  uint16_t num;
-  if(TIFFGetField(g.tif, GeotiffFile::TIFFTAG_GEOPIXELSCALE, &num, &scale) ==1) {
-    if(num == 2)		// Fill in 0.0 for third entry if
+  if(g.has_tiftag(GeotiffFile::TIFFTAG_GEOPIXELSCALE)) {
+    blitz::Array<double,1> scale =
+      g.get_tiftag<blitz::Array<double,1> >(GeotiffFile::TIFFTAG_GEOPIXELSCALE);
+    if(scale.rows() == 2)	// Fill in 0.0 for third entry if
 				// missing
-      snprintf(buf, bufsize, "(%.12g,%.12g,0.0)", scale[0], scale[1]);
-    else if(num ==3)
-      snprintf(buf, bufsize, "(%.12g,%.12g,%.12g)", scale[0], scale[1], scale[2]);
+      snprintf(buf, bufsize, "(%.12g,%.12g,0.0)", scale(0), scale(1));
+    else if(scale.rows() == 3)
+      snprintf(buf, bufsize, "(%.12g,%.12g,%.12g)", scale(0), scale(1),
+	       scale(2));
     else
       throw Exception("Not sure how to interpret TIFFTAG_GEOPIXELSCALE");
     std::string s(buf);
     F.label_set("MODELPIXELSCALETAG", s, "GEOTIFF");
   }
-  if(TIFFGetField(g.tif, GeotiffFile::TIFFTAG_GEOTIEPOINTS, &num, &tiepoint) ==1) {
-    if(num != 6)
+  if(g.has_tiftag(GeotiffFile::TIFFTAG_GEOTIEPOINTS)) {
+    blitz::Array<double,1> tiepoint =
+      g.get_tiftag<blitz::Array<double,1> >(GeotiffFile::TIFFTAG_GEOTIEPOINTS);
+    if(tiepoint.rows() != 6)
       throw Exception("Not sure how to interpret TIFFTAG_GEOTIEPOINTS");
-    snprintf(buf,bufsize, "(%.12g,%.12g,%.12g,%.12g,%.12g,%.12g)", tiepoint[0], 
-	     tiepoint[1], tiepoint[2], tiepoint[3], tiepoint[4], tiepoint[5]);
+    snprintf(buf,bufsize, "(%.12g,%.12g,%.12g,%.12g,%.12g,%.12g)", tiepoint(0), 
+	     tiepoint(1), tiepoint(2), tiepoint(3), tiepoint(4), tiepoint(5));
     std::string s(buf);
     F.label_set("MODELTIEPOINTTAG", s, "GEOTIFF");
   }
-  if(TIFFGetField(g.tif, GeotiffFile::TIFFTAG_GEOTRANSMATRIX, &num, &transform) ==1) {
-    if(num != 16)
+  if(g.has_tiftag(GeotiffFile::TIFFTAG_GEOTRANSMATRIX)) {
+    blitz::Array<double,1> transform =
+     g.get_tiftag<blitz::Array<double,1> >(GeotiffFile::TIFFTAG_GEOTRANSMATRIX);
+    if(transform.rows() != 16)
       throw Exception("Not sure how to interpret TIFFTAG_GEOTRANSMATRIX");
     snprintf(buf,bufsize, "(%.12g,%.12g,%.12g,%.12g,%.12g,%.12g,%12g,%12g,%.12g,%.12g,%.12g,%.12g,%.12g,%.12g,%12g,%12g)", 
-	     transform[0], transform[1], transform[2], transform[3], transform[4], transform[5], transform[6], 
-	     transform[7], transform[8], transform[9], transform[10], transform[11], transform[12], 
-	     transform[13], transform[14], transform[15]);
+	     transform(0), transform(1), transform(2), transform(3),
+	     transform(4), transform(5), transform(6), 
+	     transform(7), transform(8), transform(9), transform(10),
+	     transform(11), transform(12), 
+	     transform(13), transform(14), transform(15));
     std::string s(buf);
     F.label_set("MODELTRANSFORMATIONTAG", s, "GEOTIFF");
   }

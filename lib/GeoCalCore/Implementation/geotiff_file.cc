@@ -30,23 +30,7 @@ void GeotiffFile::serialize(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(GeotiffFile);
 #endif
 
-// Note that all of these hard coded values are actually registered in
-// the TIFF standard. This should mean that they are fairly stable
-// and unlikely to change.
-
-#define TIFFTAG_GEOPIXELSCALE       33550
-#define TIFFTAG_GEOTIEPOINTS        33922
-#define TIFFTAG_GEOTRANSMATRIX      34264
-#define	TIFFTAG_IMAGEWIDTH		256
-#define	TIFFTAG_IMAGELENGTH		257
-#define	TIFFTAG_COMPRESSION		259
-#define	TIFFTAG_PLANARCONFIG		284
-#define	TIFFTAG_PHOTOMETRIC		262
-#define	PHOTOMETRIC_MINISBLACK	        1
-#define	COMPRESSION_NONE		1
-#define	PLANARCONFIG_CONTIG		1
-#define	TIFFTAG_BITSPERSAMPLE		258
-#define	TIFFTAG_SAMPLESPERPIXEL		277
+// See note in class comment about the direct use of prototypes here.
 extern "C" {
 typedef int tagtype_t;
 typedef uint32_t ttag_t;
@@ -396,4 +380,70 @@ void GeotiffFile::set_tiftag(tiftag_t K, const blitz::Array<double, 1>& V)
   int status = TIFFSetField(tif, (ttag_t) K, V.rows(), &V(0));
   if(status != 1)
     throw Exception("Error setting tiff field");
+}
+
+//-----------------------------------------------------------------------
+/// As a way to process VICAR geotiff tags, we write out a single 1x1
+/// file along with metadata. The 1x1 is just to make a valid geotiff
+/// file. We may want to also add writing real images, but right now
+/// we have no need for that.
+//-----------------------------------------------------------------------
+
+void GeotiffFile::write_1x1_file()
+{
+  //----------------------------------------------------------------
+  // Set other tags needed to make a valid file, and write data.
+  // This is just a 1x1 file.
+  //----------------------------------------------------------------
+
+  set_tiftag(TIFFTAG_IMAGEWIDTH, 1);
+  set_tiftag(TIFFTAG_IMAGELENGTH, 1);
+  set_tiftag(TIFFTAG_COMPRESSION, COMPRESSION_NONE);
+  set_tiftag(TIFFTAG_PLANARCONFIG, PLANARCONFIG_CONTIG);
+  set_tiftag(TIFFTAG_PHOTOMETRIC, PHOTOMETRIC_MINISBLACK);
+  set_tiftag(TIFFTAG_BITSPERSAMPLE, 8);
+  set_tiftag(TIFFTAG_SAMPLESPERPIXEL, 1);
+  char c = '\0';
+  TIFFWriteEncodedStrip(tif, 0, &c, 1);
+}
+
+//-----------------------------------------------------------------------
+/// Return true if we have the given tag.
+//-----------------------------------------------------------------------
+
+bool GeotiffFile::has_tiftag(tiftag_t K) const
+{
+  uint16_t count;
+  void *data;
+  int status = TIFFGetField(tif, K, &count, &data);
+  return status == 1;
+}
+
+
+//-----------------------------------------------------------------------
+/// Return the value of a tiff tag.
+//-----------------------------------------------------------------------
+
+template<> int GeotiffFile::get_tiftag(tiftag_t K) const
+{
+  int data;
+  int status = TIFFGetField(tif, K, &data);
+  if(status != 1)
+    throw Exception("Trouble retrieving tiftag.");
+  return data;
+}
+
+//-----------------------------------------------------------------------
+/// Return the value of a tiff tag.
+//-----------------------------------------------------------------------
+
+template<> blitz::Array<double, 1> GeotiffFile::get_tiftag(tiftag_t K) const
+{
+  uint16_t count;
+  double *data;
+  int status = TIFFGetField(tif, K, &count, &data);
+  if(status != 1)
+    throw Exception("Trouble retrieving tiftag.");
+  blitz::Array<double,1> res(data, blitz::shape(count), blitz::duplicateData);
+  return res;
 }

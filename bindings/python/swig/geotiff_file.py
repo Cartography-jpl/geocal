@@ -193,18 +193,18 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
 
     A note on the hardcode values/protypes:
 
-    Normally we wouldn't have prototypes defined directly in this class.
-    However, we have a special case. We know that GDAL will supply the
-    GeoTIFF library, because if it isn't found on the system GDAL will use
-    its own private copy. However, we don't know that the GeoTIFF headers
-    will be available. GDAL doesn't install them, and unless there is a
-    another copy of GeoTIFF available they won't be found. Since it is
-    entirely possible to have GDAL installed but GeoTIFF not, we don't
-    want to add a dependency on this library that we don't really need.
-    So, we define the prototypes here. There is a risk that these
-    prototypes will become out of date, in which case we'll need to update
-    these. But the GeoTIFF library hasn't changed in some time, so the
-    trade against adding a dependency is probably a good one.
+    Normally we wouldn't have prototypes and hard coded values defined
+    directly in a class. However, we have a special case. We know that
+    GDAL will supply the GeoTIFF library, because if it isn't found on the
+    system GDAL will use its own private copy. However, we don't know that
+    the GeoTIFF headers will be available. GDAL doesn't install them, and
+    unless there is a another copy of GeoTIFF available they won't be
+    found. Since it is entirely possible to have GDAL installed but
+    GeoTIFF not, we don't want to add a dependency on this library that we
+    don't really need. So, we define the prototypes here. There is a risk
+    that these prototypes will become out of date, in which case we'll
+    need to update these. But the GeoTIFF library hasn't changed in some
+    time, so the trade against adding a dependency is probably a good one.
 
     C++ includes: geotiff_file.h 
     """
@@ -350,6 +350,24 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
         return _geotiff_file.GeotiffFile_write_key(self)
 
 
+    def has_key(self, K):
+        """
+
+        bool GeotiffFile::has_key(geokey_t K) const
+        Return true if we have the key. 
+        """
+        return _geotiff_file.GeotiffFile_has_key(self, K)
+
+
+    def has_tiftag(self, K):
+        """
+
+        bool GeotiffFile::has_tiftag(tiftag_t K) const
+        Return true if we have the given tag. 
+        """
+        return _geotiff_file.GeotiffFile_has_tiftag(self, K)
+
+
     def key_name(K):
         """
 
@@ -423,6 +441,19 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
 
     geotiff_tag_short = staticmethod(geotiff_tag_short)
 
+    def write_1x1_file(self):
+        """
+
+        void GeotiffFile::write_1x1_file()
+        As a way to process VICAR geotiff tags, we write out a single 1x1 file
+        along with metadata.
+
+        The 1x1 is just to make a valid geotiff file. We may want to also add
+        writing real images, but right now we have no need for that. 
+        """
+        return _geotiff_file.GeotiffFile_write_1x1_file(self)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -433,6 +464,9 @@ GeotiffFile.set_tiftag = new_instancemethod(_geotiff_file.GeotiffFile_set_tiftag
 GeotiffFile.set_key = new_instancemethod(_geotiff_file.GeotiffFile_set_key, None, GeotiffFile)
 GeotiffFile.write_key = new_instancemethod(_geotiff_file.GeotiffFile_write_key, None, GeotiffFile)
 GeotiffFile.__str__ = new_instancemethod(_geotiff_file.GeotiffFile___str__, None, GeotiffFile)
+GeotiffFile.has_key = new_instancemethod(_geotiff_file.GeotiffFile_has_key, None, GeotiffFile)
+GeotiffFile.has_tiftag = new_instancemethod(_geotiff_file.GeotiffFile_has_tiftag, None, GeotiffFile)
+GeotiffFile.write_1x1_file = new_instancemethod(_geotiff_file.GeotiffFile_write_1x1_file, None, GeotiffFile)
 GeotiffFile_swigregister = _geotiff_file.GeotiffFile_swigregister
 GeotiffFile_swigregister(GeotiffFile)
 

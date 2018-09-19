@@ -7084,6 +7084,106 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GeotiffFile_has_key(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeotiffFile *arg1 = (GeoCal::GeotiffFile *) 0 ;
+  GeoCal::GeotiffFile::geokey_t arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeotiffFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeotiffFile const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"GeotiffFile_has_key",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_has_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
+      arg1 = const_cast< GeoCal::GeotiffFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
+      arg1 = const_cast< GeoCal::GeotiffFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GeotiffFile_has_key" "', argument " "2"" of type '" "GeoCal::GeotiffFile::geokey_t""'");
+  } 
+  arg2 = static_cast< GeoCal::GeotiffFile::geokey_t >(val2);
+  {
+    try {
+      result = (bool)((GeoCal::GeotiffFile const *)arg1)->has_key(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GeotiffFile_has_tiftag(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeotiffFile *arg1 = (GeoCal::GeotiffFile *) 0 ;
+  GeoCal::GeotiffFile::tiftag_t arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeotiffFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeotiffFile const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"GeotiffFile_has_tiftag",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_has_tiftag" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
+      arg1 = const_cast< GeoCal::GeotiffFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
+      arg1 = const_cast< GeoCal::GeotiffFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GeotiffFile_has_tiftag" "', argument " "2"" of type '" "GeoCal::GeotiffFile::tiftag_t""'");
+  } 
+  arg2 = static_cast< GeoCal::GeotiffFile::tiftag_t >(val2);
+  {
+    try {
+      result = (bool)((GeoCal::GeotiffFile const *)arg1)->has_tiftag(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GeotiffFile_key_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeotiffFile::geokey_t arg1 ;
@@ -7278,6 +7378,48 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GeotiffFile_write_1x1_file(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GeotiffFile *arg1 = (GeoCal::GeotiffFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GeotiffFile > tempshared1 ;
+  boost::shared_ptr< GeoCal::GeotiffFile > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_write_1x1_file" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
+      arg1 = const_cast< GeoCal::GeotiffFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
+      arg1 = const_cast< GeoCal::GeotiffFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->write_1x1_file();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_GeotiffFile(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::GeotiffFile *arg1 = (GeoCal::GeotiffFile *) 0 ;
@@ -7386,6 +7528,16 @@ static PyMethodDef SwigMethods[] = {
 		"Write the key value to the file. \n"
 		""},
 	 { (char *)"GeotiffFile___str__", (PyCFunction)_wrap_GeotiffFile___str__, METH_O, NULL},
+	 { (char *)"GeotiffFile_has_key", _wrap_GeotiffFile_has_key, METH_VARARGS, (char *)"\n"
+		"\n"
+		"bool GeotiffFile::has_key(geokey_t K) const\n"
+		"Return true if we have the key. \n"
+		""},
+	 { (char *)"GeotiffFile_has_tiftag", _wrap_GeotiffFile_has_tiftag, METH_VARARGS, (char *)"\n"
+		"\n"
+		"bool GeotiffFile::has_tiftag(tiftag_t K) const\n"
+		"Return true if we have the given tag. \n"
+		""},
 	 { (char *)"GeotiffFile_key_name", (PyCFunction)_wrap_GeotiffFile_key_name, METH_O, (char *)"\n"
 		"\n"
 		"std::string GeotiffFile::key_name(geokey_t K)\n"
@@ -7423,6 +7575,15 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_short()\n"
 		"Return the list of tags that take short data. \n"
+		""},
+	 { (char *)"GeotiffFile_write_1x1_file", (PyCFunction)_wrap_GeotiffFile_write_1x1_file, METH_O, (char *)"\n"
+		"\n"
+		"void GeotiffFile::write_1x1_file()\n"
+		"As a way to process VICAR geotiff tags, we write out a single 1x1 file\n"
+		"along with metadata.\n"
+		"\n"
+		"The 1x1 is just to make a valid geotiff file. We may want to also add\n"
+		"writing real images, but right now we have no need for that. \n"
 		""},
 	 { (char *)"delete_GeotiffFile", (PyCFunction)_wrap_delete_GeotiffFile, METH_O, (char *)"\n"
 		"\n"

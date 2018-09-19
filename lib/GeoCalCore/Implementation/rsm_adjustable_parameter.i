@@ -12,12 +12,16 @@
 namespace GeoCal {
 class RsmAdjustableParameter : public GenericObject {
 public:
-  RsmAdjustableParameter();
+  RsmAdjustableParameter(const std::string& Image_identifier="",
+			 const std::string& Rsm_support_data_edition="fake-1",
+			 const std::string& Triangulation_id="");
   std::string tre_string() const;
   static boost::shared_ptr<RsmAdjustableParameter>
   read_tre_string(const std::string& Tre_in);
   %python_attribute_with_set(image_identifier, std::string);
   %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(triangulation_id, std::string);
+  virtual std::string print_to_string() const;
   %pickle_serialization()
 };
 }

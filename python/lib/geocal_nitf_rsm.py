@@ -1,8 +1,10 @@
 from __future__ import print_function
-from geocal_swig import Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial, RsmGrid, RsmRpPlusGrid
+from geocal_swig import (Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial,
+                         RsmGrid, RsmRpPlusGrid, RsmAdjustableParameter)
 try:
-    from pynitf import create_nitf_tre_structure, NitfSegmentHook, NitfFile, TreRSMIDA, \
-        TreRSMGGA, TreRSMGIA, TreRSMPCA, TreRSMPIA
+    from pynitf import (create_nitf_tre_structure, NitfSegmentHook, NitfFile,
+                        TreRSMIDA, TreRSMGGA, TreRSMGIA, TreRSMPCA,
+                        TreRSMPIA, TreRSMAPA)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
@@ -119,6 +121,24 @@ and wish to access the raw fields.
                           tre_implementation_field="rsm_id",
                           tre_implementation_class=RsmId)
 
+    if(TreRSMAPA.__doc__ is not None):
+        hlp_rsmapa = TreRSMAPA.__doc__ + \
+'''
+This TRE is mostly implemented by the RsmAdjustableParameter available as
+rsm_adjustable_parameter. This should be used to set the TRE values, and to
+use the TRE values. This is handled mostly transparently, except that if you
+update rsm_rsm_adjustable_parameter the raw fields in the TRE might not be
+updated. Call update_raw_field() if you have modified 
+rsm_rsm_adjustable_parameter and wish to access the raw fields.
+'''             
+    else:
+        hlp_rsmapa = None
+
+    TreRSMAPA_geocal = create_nitf_tre_structure("TreRSMAPA",
+                          TreRSMAPA._description,hlp=hlp_rsmapa,
+                          tre_implementation_field="rsm_adjustable_parameter",
+                          tre_implementation_class=RsmAdjustableParameter)
+    
 
 # ---------------------------------------------------------
 # This provides a higher level interface to the RSM TREs,
@@ -179,6 +199,10 @@ if(have_pynitf):
                 t = TreRSMIDA_geocal()
                 t.rsm_id = seg.rsm.rsm_id
                 seg.tre_list.append(t)
+                if(seg.rsm.rsm_adjustable_parameter):
+                    t = TreRSMAPA_geocal()
+                    t.rsm_adjustable_parameter = seg.rsm_adjustable_parameter
+                    seg.tre_list.append(t)
                 self._rsm_add_rec(seg, seg.rsm.rsm_base)
     
         def _rsm_find_tre_list(self, seg, tre_tag, edition,
@@ -207,6 +231,9 @@ if(have_pynitf):
             t = self._rsm_find_tre(seg, 'RSMIDA')
             r = Rsm(t.rsm_id)
             edition = t.edition
+            t = self._rsm_find_tre(seg, 'RSMAPA')
+            if(t is not None):
+                r.rsm_adjustable_parameter = t.rsm_adjustable_parameter
             rsm_rp = None
             rsm_g = None
             if(self._rsm_find_tre(seg, 'RSMPIA', edition) is not None):

@@ -184,8 +184,10 @@ import geocal_swig.generic_object
 class RsmAdjustableParameter(geocal_swig.generic_object.GenericObject):
     """
 
-    This provides additional information about the Rsm, it is what is used
-    to populate.
+    This is used to handle the RSM adjustable parameters.
+
+    Right now, we only support RSMAPA. Could add RSMAPB if we end up
+    needing it, (perhaps as a new subclass?)
 
     C++ includes: rsm_adjustable_parameter.h 
     """
@@ -193,23 +195,21 @@ class RsmAdjustableParameter(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self):
+    def __init__(self, *args):
         """
 
-        GeoCal::RsmAdjustableParameter::RsmAdjustableParameter()
+        GeoCal::RsmAdjustableParameter::RsmAdjustableParameter(const std::string &Image_identifier="", const std::string
+        &Rsm_support_data_edition="fake-1", const std::string
+        &Triangulation_id="")
 
         """
-        _rsm_adjustable_parameter.RsmAdjustableParameter_swiginit(self, _rsm_adjustable_parameter.new_RsmAdjustableParameter())
+        _rsm_adjustable_parameter.RsmAdjustableParameter_swiginit(self, _rsm_adjustable_parameter.new_RsmAdjustableParameter(*args))
 
     def tre_string(self):
         """
 
         std::string RsmAdjustableParameter::tre_string() const
-        Write to TRE string.
 
-        Note that this is all the fields except the CETAG and CEL (the front
-        two). It is convenient to treat those special. (We can revisit this in
-        the future if we need to). 
         """
         return _rsm_adjustable_parameter.RsmAdjustableParameter_tre_string(self)
 
@@ -270,6 +270,24 @@ class RsmAdjustableParameter(geocal_swig.generic_object.GenericObject):
       self._v_rsm_suport_data_edition(value)
 
 
+    def _v_triangulation_id(self, *args):
+        """
+
+        void GeoCal::RsmAdjustableParameter::triangulation_id(const std::string &V)
+
+        """
+        return _rsm_adjustable_parameter.RsmAdjustableParameter__v_triangulation_id(self, *args)
+
+
+    @property
+    def triangulation_id(self):
+        return self._v_triangulation_id()
+
+    @triangulation_id.setter
+    def triangulation_id(self, value):
+      self._v_triangulation_id(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -277,6 +295,8 @@ class RsmAdjustableParameter(geocal_swig.generic_object.GenericObject):
 RsmAdjustableParameter.tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_tre_string, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_image_identifier = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_image_identifier, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_rsm_suport_data_edition = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_suport_data_edition, None, RsmAdjustableParameter)
+RsmAdjustableParameter._v_triangulation_id = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_triangulation_id, None, RsmAdjustableParameter)
+RsmAdjustableParameter.__str__ = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter___str__, None, RsmAdjustableParameter)
 RsmAdjustableParameter_swigregister = _rsm_adjustable_parameter.RsmAdjustableParameter_swigregister
 RsmAdjustableParameter_swigregister(RsmAdjustableParameter)
 

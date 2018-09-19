@@ -1,7 +1,8 @@
 #include "rsm_adjustable_parameter.h"
 #include "geocal_serialize_support.h"
-#include <boost/make_shared.hpp>
 #include "tre_support.h"
+#include <boost/algorithm/string.hpp>
+#include <boost/make_shared.hpp>
 #include <sstream>
 
 using namespace GeoCal;
@@ -13,7 +14,8 @@ void RsmAdjustableParameter::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmAdjustableParameter);
   ar & GEOCAL_NVP_(image_identifier)
-    & GEOCAL_NVP_(rsm_suport_data_edition);
+    & GEOCAL_NVP_(rsm_suport_data_edition)
+    & GEOCAL_NVP_(triangulation_id);
 }
 
 GEOCAL_IMPLEMENT(RsmAdjustableParameter);
@@ -27,9 +29,19 @@ GEOCAL_IMPLEMENT(RsmAdjustableParameter);
 /// revisit this in the future if we need to).
 //-----------------------------------------------------------------------
 
+static boost::format f("%|1$-80s|%|2$-40s|%|3$-40s|%|4$02d|");
+
+// Short term, fake out tre_string with whatever was passed to
+  // read_tre_string.
+static std::string temp;
+
 std::string RsmAdjustableParameter::tre_string() const
 {
-  return "dummy";
+  std::string s = str_check_size(f % image_identifier_
+				 % rsm_suport_data_edition_
+				 % triangulation_id_ % 0, 80+40+40+2);
+  //return s;
+  return temp;
 }
 
 //-----------------------------------------------------------------------
@@ -47,5 +59,26 @@ std::string RsmAdjustableParameter::tre_string() const
 boost::shared_ptr<RsmAdjustableParameter>
 RsmAdjustableParameter::read_tre_string(const std::string& Tre_in)
 {
-  return boost::make_shared<RsmAdjustableParameter>();
+  temp = Tre_in;
+  std::stringstream in(Tre_in);
+  boost::shared_ptr<RsmAdjustableParameter> res(new RsmAdjustableParameter);
+  res->image_identifier_ = read_size<std::string>(in, 80);
+  res->rsm_suport_data_edition_ = read_size<std::string>(in, 40);
+  res->triangulation_id_ = read_size<std::string>(in, 40);
+  boost::trim(res->image_identifier_);
+  boost::trim(res->rsm_suport_data_edition_);
+  boost::trim(res->triangulation_id_);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+void RsmAdjustableParameter::print(std::ostream& Os) const
+{
+  Os << "RsmAdjustableParameter:\n"
+     << "  Image Identifier: " << image_identifier_ << "\n"
+     << "  RSM Edition:      " << rsm_suport_data_edition_ << "\n"
+     << "  Triangulation ID: " << triangulation_id_ << "\n";
 }

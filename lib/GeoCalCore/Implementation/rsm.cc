@@ -266,6 +266,13 @@ void Rsm::print(std::ostream& Os) const
      << "  Rational Polynomial:\n";
   opad << *rp << "\n";
   opad.strict_sync();
+  Os << "  Rsm Adjustable Parameter:\n";
+  if(!rparm)
+    opad << "None" << "\n"
+	 << "\n";
+  else
+    opad << *rparm << "\n";
+  opad.strict_sync();
   Os << "  Rsm ID:\n";
   opad << *rid << "\n";
 }

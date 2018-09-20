@@ -1,6 +1,6 @@
 from __future__ import print_function
 from geocal_swig import (Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial,
-                         RsmGrid, RsmRpPlusGrid, RsmAdjustableParameter)
+                         RsmGrid, RsmRpPlusGrid, RsmAdjustableParameterA)
 try:
     from pynitf import (create_nitf_tre_structure, NitfSegmentHook, NitfFile,
                         TreRSMIDA, TreRSMGGA, TreRSMGIA, TreRSMPCA,
@@ -124,7 +124,7 @@ and wish to access the raw fields.
     if(TreRSMAPA.__doc__ is not None):
         hlp_rsmapa = TreRSMAPA.__doc__ + \
 '''
-This TRE is mostly implemented by the RsmAdjustableParameter available as
+This TRE is mostly implemented by the RsmAdjustableParameterA available as
 rsm_adjustable_parameter. This should be used to set the TRE values, and to
 use the TRE values. This is handled mostly transparently, except that if you
 update rsm_rsm_adjustable_parameter the raw fields in the TRE might not be
@@ -137,7 +137,7 @@ rsm_rsm_adjustable_parameter and wish to access the raw fields.
     TreRSMAPA_geocal = create_nitf_tre_structure("TreRSMAPA",
                           TreRSMAPA._description,hlp=hlp_rsmapa,
                           tre_implementation_field="rsm_adjustable_parameter",
-                          tre_implementation_class=RsmAdjustableParameter)
+                          tre_implementation_class=RsmAdjustableParameterA)
     
 
 # ---------------------------------------------------------

@@ -18,10 +18,8 @@ public:
   RsmAdjustableParameter(const std::string& Image_identifier="",
 			 const std::string& Rsm_support_data_edition="fake-1",
 			 const std::string& Triangulation_id="");
-  std::string tre_string() const;
-  static boost::shared_ptr<RsmAdjustableParameter>
-  read_tre_string(const std::string& Tre_in);
-  %python_attribute_with_set(coordinate_converter, boost::shared_ptr<CoordinateConverter>);
+  std::string base_tre_string() const;
+  void base_read_tre_string(std::istream& In);
   %python_attribute_with_set(image_identifier, std::string);
   %python_attribute_with_set(rsm_suport_data_edition, std::string);
   %python_attribute_with_set(triangulation_id, std::string);

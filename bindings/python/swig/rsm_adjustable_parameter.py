@@ -187,8 +187,9 @@ class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
 
     This is used to handle the RSM adjustable parameters.
 
-    Right now, we only support RSMAPA. Could add RSMAPB if we end up
-    needing it, (perhaps as a new subclass?)
+    There are currently two version of this, RSMAPA and RSMAPB. We handle
+    the specific versions by subclasses, this base class just gives the
+    overall interface.
 
     C++ includes: rsm_adjustable_parameter.h 
     """
@@ -206,51 +207,23 @@ class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
         """
         _rsm_adjustable_parameter.RsmAdjustableParameter_swiginit(self, _rsm_adjustable_parameter.new_RsmAdjustableParameter(*args))
 
-    def tre_string(self):
+    def base_tre_string(self):
         """
 
-        std::string RsmAdjustableParameter::tre_string() const
-
+        std::string RsmAdjustableParameter::base_tre_string() const
+        Write the part of the TRE string for the image identification, RSM
+        support data edition, and triangulation_id. 
         """
-        return _rsm_adjustable_parameter.RsmAdjustableParameter_tre_string(self)
+        return _rsm_adjustable_parameter.RsmAdjustableParameter_base_tre_string(self)
 
 
-    def read_tre_string(Tre_in):
-        """
-
-        boost::shared_ptr< RsmAdjustableParameter > RsmAdjustableParameter::read_tre_string(const std::string &Tre_in)
-        Read a TRE string.
-
-        Note that the TRE does not contain all the fields we have in a
-        RsmRationalPolynomial. However the fields that aren't contained are
-        ones used for fitting the RSM, so in practice this doesn't matter. We
-        just set the various fields to the default values found in the
-        constructor.
-
-        This should have all the TRE except for the front CETAG and CEL. It is
-        convenient to treat these fields as special. (We can revisit this in
-        the future if we need to). 
-        """
-        return _rsm_adjustable_parameter.RsmAdjustableParameter_read_tre_string(Tre_in)
-
-    read_tre_string = staticmethod(read_tre_string)
-
-    def _v_coordinate_converter(self, *args):
+    def base_read_tre_string(self, In):
         """
 
-        void GeoCal::RsmAdjustableParameter::coordinate_converter(const boost::shared_ptr< CoordinateConverter > &V)
+        void RsmAdjustableParameter::base_read_tre_string(std::istream &In)
 
         """
-        return _rsm_adjustable_parameter.RsmAdjustableParameter__v_coordinate_converter(self, *args)
-
-
-    @property
-    def coordinate_converter(self):
-        return self._v_coordinate_converter()
-
-    @coordinate_converter.setter
-    def coordinate_converter(self, value):
-      self._v_coordinate_converter(value)
+        return _rsm_adjustable_parameter.RsmAdjustableParameter_base_read_tre_string(self, In)
 
 
     def _v_image_identifier(self, *args):
@@ -311,32 +284,14 @@ class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_adjustable_parameter.delete_RsmAdjustableParameter
-RsmAdjustableParameter.tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_tre_string, None, RsmAdjustableParameter)
-RsmAdjustableParameter._v_coordinate_converter = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_coordinate_converter, None, RsmAdjustableParameter)
+RsmAdjustableParameter.base_tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_base_tre_string, None, RsmAdjustableParameter)
+RsmAdjustableParameter.base_read_tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_base_read_tre_string, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_image_identifier = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_image_identifier, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_rsm_suport_data_edition = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_suport_data_edition, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_triangulation_id = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_triangulation_id, None, RsmAdjustableParameter)
 RsmAdjustableParameter.__str__ = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter___str__, None, RsmAdjustableParameter)
 RsmAdjustableParameter_swigregister = _rsm_adjustable_parameter.RsmAdjustableParameter_swigregister
 RsmAdjustableParameter_swigregister(RsmAdjustableParameter)
-
-def RsmAdjustableParameter_read_tre_string(Tre_in):
-    """
-
-    boost::shared_ptr< RsmAdjustableParameter > RsmAdjustableParameter::read_tre_string(const std::string &Tre_in)
-    Read a TRE string.
-
-    Note that the TRE does not contain all the fields we have in a
-    RsmRationalPolynomial. However the fields that aren't contained are
-    ones used for fitting the RSM, so in practice this doesn't matter. We
-    just set the various fields to the default values found in the
-    constructor.
-
-    This should have all the TRE except for the front CETAG and CEL. It is
-    convenient to treat these fields as special. (We can revisit this in
-    the future if we need to). 
-    """
-    return _rsm_adjustable_parameter.RsmAdjustableParameter_read_tre_string(Tre_in)
 
 
 __all__ = ["RsmAdjustableParameter"]

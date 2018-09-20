@@ -1,11 +1,11 @@
 #include "unit_test_support.h"
-#include "rsm_adjustable_parameter.h"
+#include "rsm_adjustable_parameter_a.h"
 #include "rsm_fixture.h"
 using namespace GeoCal;
 using namespace blitz;
 
   
-BOOST_FIXTURE_TEST_SUITE(rsm_adjustable_parameter, RsmFixture)
+BOOST_FIXTURE_TEST_SUITE(rsm_adjustable_parameter_a, RsmFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
 }

@@ -17,12 +17,9 @@ void RsmAdjustableParameter::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(RsmAdjustableParameter, WithParameter);
-  ar & GEOCAL_NVP(cconv)
-    & GEOCAL_NVP_(image_identifier)
+  ar & GEOCAL_NVP_(image_identifier)
     & GEOCAL_NVP_(rsm_suport_data_edition)
-    & GEOCAL_NVP_(triangulation_id)
-    & GEOCAL_NVP(parm_index)
-    & GEOCAL_NVP_(full_parameter);
+    & GEOCAL_NVP_(triangulation_id);
 }
 
 GEOCAL_IMPLEMENT(RsmAdjustableParameter);
@@ -41,199 +38,25 @@ static boost::format numint("%|1$02d|");
 static boost::format numint_missing("%|1$2s|");
 static boost::format num("%|1$+21.14E|");
 
-std::string RsmAdjustableParameter::tre_string() const
-{
-  std::string res = str_check_size(f % image_identifier_
-				 % rsm_suport_data_edition_
-				 % triangulation_id_, 80+40+40);
-  res += str_check_size(numint % num_parameter(), 2);
-  const LocalRcConverter* gconv = 
-    dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
-  if(!gconv)
-    throw Exception("Writing a RSMAPA TRE only supports LocalRcConverter. This is by definition of how the RSM adjustable parameters work");
-  for(int i = 0; i < 3; ++i)
-    res += str_check_size(num % gconv->parameter()->cf_offset[i], 21);
-  // This is column major order
-  for(int j = 0; j < 3; ++j)
-    for(int i = 0; i < 3; ++i)
-      res += str_check_size(num % gconv->parameter()->cf_to_rc[i][j], 21);
-  for(int i = 0; i < parm_index.rows(); ++i) {
-    if(parm_index(i) > 0)
-      res += str_check_size(numint % parm_index(i), 2);
-    else
-      res += str_check_size(numint_missing % "", 2);
-  }
-  blitz::Array<double, 1> parm = parameter();
-  for(int i = 0; i < parm.rows(); ++i)
-    res += str_check_size(num % parm(i), 21);
-  return res;
-}
-
 //-----------------------------------------------------------------------
-/// Read a TRE string. Note that the TRE does not contain all the
-/// fields we have in a RsmRationalPolynomial. However the fields that
-/// aren't contained are ones used for fitting the RSM, so in practice
-/// this doesn't matter. We just set the various fields to the default
-/// values found in the constructor.
-///
-/// This should have all the TRE *except* for the front CETAG and CEL.
-/// It is convenient to treat these fields as special. (We can
-/// revisit this in the future if we need to).
+/// Write the part of the TRE string for the image identification,
+/// RSM support data edition, and triangulation_id.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<RsmAdjustableParameter>
-RsmAdjustableParameter::read_tre_string(const std::string& Tre_in)
+std::string RsmAdjustableParameter::base_tre_string() const
 {
-  std::stringstream in(Tre_in);
-  boost::shared_ptr<RsmAdjustableParameter> res(new RsmAdjustableParameter);
-  res->image_identifier_ = read_size<std::string>(in, 80);
-  res->rsm_suport_data_edition_ = read_size<std::string>(in, 40);
-  res->triangulation_id_ = read_size<std::string>(in, 40);
-  boost::trim(res->image_identifier_);
-  boost::trim(res->rsm_suport_data_edition_);
-  boost::trim(res->triangulation_id_);
-  int nparm = read_size<int>(in, 2);
-  blitz::Array<double, 1> parm(nparm);
-  boost::shared_ptr<LocalRcParameter> lp =
-    boost::make_shared<LocalRcParameter>();
-  lp->cf_prototype = boost::make_shared<Ecr>(0,0,0);
-  for(int i = 0; i < 3; ++i)
-    lp->cf_offset[i] = read_size<double>(in, 21);
-  // Column major order
-  for(int j = 0; j < 3; ++j)
-    for(int i = 0; i < 3; ++i)
-      lp->cf_to_rc[i][j] = read_size<double>(in, 21);
-  res->cconv = boost::make_shared<LocalRcConverter>(lp);
-  for(int i = 0; i < res->parm_index.rows(); ++i) {
-    boost::optional<int> ind = read_size<boost::optional<int> >(in, 2);
-    if(ind)
-      res->parm_index(i) = *ind;
-    else
-      res->parm_index(i) = -1;
-  }
-  for(int i = 0; i < parm.rows(); ++i)
-    parm(i) = read_size<double>(in, 21);
-  res->parameter(parm);
-  return res;
+ return str_check_size(f % image_identifier_
+		       % rsm_suport_data_edition_
+		       % triangulation_id_, 80+40+40);
 }
 
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
-
-void RsmAdjustableParameter::print(std::ostream& Os) const
+void RsmAdjustableParameter::base_read_tre_string(std::istream& In)
 {
-  OstreamPad opad(Os, "    ");
-  Os << "RsmAdjustableParameter:\n"
-     << "  Image Identifier: " << image_identifier_ << "\n"
-     << "  RSM Edition:      " << rsm_suport_data_edition_ << "\n"
-     << "  Triangulation ID: " << triangulation_id_ << "\n"
-     << "  Local Coordinate System:\n";
-  opad << *cconv << "\n";
-  opad.strict_sync();
-  Os << "  Parameter:\n";
-  blitz::Array<double, 1> p = parameter_subset();
-  std::vector<std::string> pname = parameter_name_subset();
-  for(int i = 0; i < p.rows(); ++i)
-    Os << "    " << pname[i] << ": " << p(i) << "\n";
+  image_identifier_ = read_size<std::string>(In, 80);
+  rsm_suport_data_edition_ = read_size<std::string>(In, 40);
+  triangulation_id_ = read_size<std::string>(In, 40);
+  boost::trim(image_identifier_);
+  boost::trim(rsm_suport_data_edition_);
+  boost::trim(triangulation_id_);
 }
 
-//-----------------------------------------------------------------------
-/// Name of the full parameters
-//-----------------------------------------------------------------------
-
-const std::vector<std::string>&
-RsmAdjustableParameter::full_parameter_name()
-{
-  static bool filled_in = false;
-  static std::vector<std::string> res;
-  if(!filled_in) {
-    res.push_back("Image row constant");
-    res.push_back("Image row X");
-    res.push_back("Image row Y");
-    res.push_back("Image row Z");
-    res.push_back("Image row X*X");
-    res.push_back("Image row X*Y");
-    res.push_back("Image row X*Z");
-    res.push_back("Image row Y*Y");
-    res.push_back("Image row Y*Z");
-    res.push_back("Image row Z*Z");
-    res.push_back("Image col constant");
-    res.push_back("Image col X");
-    res.push_back("Image col Y");
-    res.push_back("Image col Z");
-    res.push_back("Image col X*X");
-    res.push_back("Image col X*Y");
-    res.push_back("Image col X*Z");
-    res.push_back("Image col Y*Y");
-    res.push_back("Image col Y*Z");
-    res.push_back("Image col Z*Z");
-    res.push_back("Ground X constant");
-    res.push_back("Ground Y constant");
-    res.push_back("Ground Z constant");
-    res.push_back("Ground rotation X");
-    res.push_back("Ground rotation Y");
-    res.push_back("Ground rotation Z");
-    res.push_back("Ground scale");
-    res.push_back("Ground X proportional to X index");
-    res.push_back("Ground X proportional to Y index");
-    res.push_back("Ground X proportional to Z index");
-    res.push_back("Ground Y proportional to X index");
-    res.push_back("Ground Y proportional to Y index");
-    res.push_back("Ground Y proportional to Z index");
-    res.push_back("Ground Z proportional to X index");
-    res.push_back("Ground Z proportional to Y index");
-    res.push_back("Ground Z proportional to Z index");
-    filled_in = true;
-  }
-  return res;
-}
-
-// See base class for description
-ArrayAd<double, 1> RsmAdjustableParameter::parameter_with_derivative() const
-{
-  ArrayAd<double, 1> res(num_parameter(), full_parameter_.number_variable());
-  for(int i = 0; i < parm_index.rows(); ++i)
-    if(parm_index(i) > 0)
-      res(parm_index(i) - 1) = full_parameter_(i);
-  return res;
-}
-
-// See base class for description
-void RsmAdjustableParameter::parameter_with_derivative
-(const ArrayAd<double, 1>& Parm)
-{
-  if(Parm.rows() != num_parameter()) {
-    Exception e;
-    e << "Wrong size parameter. Size " << Parm.rows()
-      << " expected " << num_parameter();
-    throw e;
-  }
-  for(int i = 0; i < parm_index.rows(); ++i)
-    if(parm_index(i) > 0)
-      full_parameter_(i) = Parm(parm_index(i) - 1);
-    else
-      full_parameter_(i) = 0;
-}
-
-int RsmAdjustableParameter::num_parameter() const
-{
-  int nparm = 0;
-  for(int i = 0; i < parm_index.rows(); ++i)
-    if(parm_index(i) > 0)
-      ++nparm;
-  return nparm;
-}
-  
-std::vector<std::string> RsmAdjustableParameter::parameter_name() const
-{
-  const std::vector<std::string>& fp = full_parameter_name();
-  std::vector<std::string> res;
-  int nparm = num_parameter();
-  for(int i = 0; i < nparm; ++i)
-    res.push_back("");
-  for(int i = 0; i < parm_index.rows(); ++i)
-    if(parm_index(i) > 0)
-      res[parm_index(i) - 1] = fp[i];
-  return res;
-}

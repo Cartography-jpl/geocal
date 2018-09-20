@@ -13,7 +13,8 @@ using namespace blitz;
 template<class Archive>
 void Rsm::serialize(Archive & ar, const unsigned int version)
 {
-  GEOCAL_GENERIC_BASE(Rsm);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Rsm, WithParameter);
   ar & GEOCAL_NVP(rp);
   // Older version didn't have rid.
   if(version > 0) {
@@ -40,6 +41,8 @@ void Rsm::load(Archive & ar, const unsigned int version)
   if(version == 0) {
     rid = boost::make_shared<RsmId>(rp, cconv_not_used);
   }
+  if(rparm)
+    add_object(rparm);
 }
 
 GEOCAL_IMPLEMENT(Rsm);

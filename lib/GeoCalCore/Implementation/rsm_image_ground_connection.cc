@@ -11,6 +11,21 @@ void RsmImageGroundConnection::serialize(Archive & ar, const unsigned int versio
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
   ar & GEOCAL_NVP_(rsm);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+template<class Archive>
+void RsmImageGroundConnection::save
+(Archive & ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void RsmImageGroundConnection::load(Archive & ar, const unsigned int version)
+{
+  if(rsm_)
+    add_object(rsm_);
 }
 
 GEOCAL_IMPLEMENT(RsmImageGroundConnection);

@@ -183,7 +183,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-class Rsm(geocal_swig.generic_object.GenericObject):
+class Rsm(geocal_swig.with_parameter.WithParameterNested):
     """
 
     This class is a Replacement Sensor Model (see Dolloff, J.T., M.M.

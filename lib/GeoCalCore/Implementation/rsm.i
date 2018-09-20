@@ -7,6 +7,7 @@
 #include "rsm.h"
 %}
 %base_import(generic_object)
+%base_import(with_parameter)
 %import "coordinate_converter.i"
 %import "rsm_base.i"
 %import "rsm_id.i"
@@ -18,7 +19,7 @@
 %geocal_shared_ptr(GeoCal::Rsm);
 
 namespace GeoCal {
-class Rsm : public GenericObject {
+class Rsm : public WithParameterNested {
 public:
   Rsm(const boost::shared_ptr<RsmId>& Rsm_id);
   Rsm(const boost::shared_ptr<RsmBase>& Rp,

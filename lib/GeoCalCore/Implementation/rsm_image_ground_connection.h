@@ -9,7 +9,8 @@ namespace GeoCal {
   Rsm.
 *******************************************************************/
 
-class RsmImageGroundConnection : virtual public ImageGroundConnection {
+class RsmImageGroundConnection : virtual public ImageGroundConnection,
+				 public WithParameterNested {
 public:
 //-----------------------------------------------------------------------
 // Constructor.
@@ -26,7 +27,7 @@ public:
     : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
 			    Title, Img_mask, Ground_mask), 
       rsm_(R)
-  { }
+  { add_object(rsm_); }
 
 //-----------------------------------------------------------------------
 // Constructor.
@@ -44,7 +45,7 @@ public:
     : ImageGroundConnection(D, boost::shared_ptr<RasterImage>(), Img_mb,
 			    Title, Img_mask, Ground_mask), 
       rsm_(R)
-  { }
+  { add_object(rsm_); }
 
 //-----------------------------------------------------------------------
 // Constructor.
@@ -63,7 +64,7 @@ public:
 			   bool Fit_height_offset = false)
     : ImageGroundConnection(D, Img, Img_mb, Title, Img_mask, Ground_mask), 
       rsm_(R)
-  { }
+  { add_object(rsm_); }
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -94,6 +95,15 @@ public:
 //-----------------------------------------------------------------------
 
   const boost::shared_ptr<Rsm>& rsm() const { return rsm_; }
+
+  virtual blitz::Array<double, 1> parameter() const
+  { return WithParameterNested::parameter(); }
+  virtual void parameter(const blitz::Array<double, 1>& Parm)
+  { WithParameterNested::parameter(Parm); }
+  virtual ArrayAd<double, 1> parameter_with_derivative() const
+  { return WithParameterNested::parameter_with_derivative(); }
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  { WithParameterNested::parameter_with_derivative(Parm);}
 protected:
   RsmImageGroundConnection() {}
 private:
@@ -101,6 +111,10 @@ private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive & ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive & ar, const unsigned int version);
 };
 
 }

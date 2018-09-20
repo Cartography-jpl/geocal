@@ -22,7 +22,7 @@ namespace GeoCal {
   this is mostly a placeholder for now.
 *******************************************************************/
 
-class Rsm : public Printable<Rsm> {
+class Rsm : public WithParameterNested, public Printable<Rsm> {
 public:
   Rsm(const boost::shared_ptr<RsmId>& Rsm_id)
     : rid(Rsm_id) {}
@@ -55,7 +55,13 @@ public:
   const boost::shared_ptr<RsmAdjustableParameter>&
   rsm_adjustable_parameter() const {return rparm;}
   void rsm_adjustable_parameter
-  (const boost::shared_ptr<RsmAdjustableParameter>&V) {rparm = V;}
+  (const boost::shared_ptr<RsmAdjustableParameter>&V)
+  {
+    clear_object();
+    rparm = V;
+    if(rparm)
+      add_object(rparm);
+  }
   const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
   void rsm_base(const boost::shared_ptr<RsmBase>& V) { rp = V;}
   const boost::shared_ptr<CoordinateConverter>& coordinate_converter() const

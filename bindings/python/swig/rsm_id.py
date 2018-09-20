@@ -601,6 +601,32 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       self._v_max_sample(value)
 
 
+    def _v_naif_code(self, *args):
+        """
+
+        void RsmId::naif_code(int Naif_code)
+        Set the NAIF code for the planet/body we are working with.
+
+        Note that the NITF TRE structure does not have a place to store the
+        NAIF code, it implicitly assumes earth. So when we read a TRE, even
+        for something like Mars, we have the NAIF code set to earth. We need
+        to update this with other metadata (e.g. TARGET_NAME in PDS label).
+
+        This is not a problem for boost serialization (which keeps the NAIF
+        code), just for NITF TRE. 
+        """
+        return _rsm_id.RsmId__v_naif_code(self, *args)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+    @naif_code.setter
+    def naif_code(self, value):
+      self._v_naif_code(value)
+
+
     def tre_string(self):
         """
 
@@ -649,6 +675,7 @@ RsmId._v_min_line = new_instancemethod(_rsm_id.RsmId__v_min_line, None, RsmId)
 RsmId._v_min_sample = new_instancemethod(_rsm_id.RsmId__v_min_sample, None, RsmId)
 RsmId._v_max_line = new_instancemethod(_rsm_id.RsmId__v_max_line, None, RsmId)
 RsmId._v_max_sample = new_instancemethod(_rsm_id.RsmId__v_max_sample, None, RsmId)
+RsmId._v_naif_code = new_instancemethod(_rsm_id.RsmId__v_naif_code, None, RsmId)
 RsmId.tre_string = new_instancemethod(_rsm_id.RsmId_tre_string, None, RsmId)
 RsmId_swigregister = _rsm_id.RsmId_swigregister
 RsmId_swigregister(RsmId)

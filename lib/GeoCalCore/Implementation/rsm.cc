@@ -200,6 +200,19 @@ ImageCoordinate Rsm::image_coordinate(const GroundCoordinate& Gc) const
 
 ImageCoordinate Rsm::image_coordinate(double X, double Y, double Z) const
 {
+  if(rparm) {
+    boost::shared_ptr<GroundCoordinate> gc =
+      coordinate_converter()->convert_from_coordinate(X, Y, Z);
+    boost::shared_ptr<GroundCoordinate> gcadj;
+    double lndelta, smpdelta;
+    rparm->adjustment(*gc, gcadj, lndelta, smpdelta);
+    double xadj, yadj, zadj;
+    coordinate_converter()->convert_to_coordinate(*gcadj, xadj, yadj, zadj);
+    ImageCoordinate ic = rp->image_coordinate(xadj, yadj, zadj);
+    ic.line += lndelta;
+    ic.sample += smpdelta;
+    return ic;
+  } 
   return rp->image_coordinate(X, Y, Z);
 }
 
@@ -211,6 +224,16 @@ ImageCoordinate Rsm::image_coordinate(double X, double Y, double Z) const
 blitz::Array<double, 2> Rsm::image_coordinate_jacobian
 (double X, double Y, double Z) const
 {
+  if(rparm) {
+    boost::shared_ptr<GroundCoordinate> gc =
+      coordinate_converter()->convert_from_coordinate(X, Y, Z);
+    boost::shared_ptr<GroundCoordinate> gcadj;
+    double lndelta, smpdelta;
+    rparm->adjustment(*gc, gcadj, lndelta, smpdelta);
+    double xadj, yadj, zadj;
+    coordinate_converter()->convert_to_coordinate(*gcadj, xadj, yadj, zadj);
+    return rp->image_coordinate_jacobian(xadj, yadj, zadj);
+  } 
   return rp->image_coordinate_jacobian(X, Y, Z);
 }
 

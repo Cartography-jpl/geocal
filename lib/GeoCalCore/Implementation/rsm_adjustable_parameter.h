@@ -47,6 +47,41 @@ public:
   const std::string& triangulation_id() const { return triangulation_id_;}
   void triangulation_id(const std::string& V) { triangulation_id_ = V;}
 
+//-----------------------------------------------------------------------
+/// Adjustment for given ground location
+//-----------------------------------------------------------------------
+
+  virtual void adjustment(const GroundCoordinate& Gc,
+			  boost::shared_ptr<GroundCoordinate>& Gc_adjusted,
+			  double& Lndelta, double& Smpdelta) const = 0;
+
+//-----------------------------------------------------------------------
+/// Return the NAIF code for the planet/body we are working with.
+//-----------------------------------------------------------------------
+  
+  virtual int naif_code() const = 0;
+
+//-----------------------------------------------------------------------
+/// Set the NAIF code for the planet/body we are working with.
+///
+/// Note that the NITF TRE structure does not have a place to store
+/// the NAIF code, it implicitly assumes earth. So when we read a TRE,
+/// even for something like Mars, we have the NAIF code set to
+/// earth. We need to update this with other metadata
+/// (e.g. TARGET_NAME in PDS label).
+///
+/// This is not a problem for boost serialization (which keeps the
+/// NAIF code), just for NITF TRE.
+//-----------------------------------------------------------------------
+  
+  virtual void naif_code(int Naif_code) = 0;
+  
+//-----------------------------------------------------------------------
+/// Adjustment including sample derivatives.
+//-----------------------------------------------------------------------
+  virtual void adjustment_with_derivative(const GroundCoordinate& Gc,
+	  ArrayAd<double, 1>& Cf_adjusted, AutoDerivative<double>& Lndelta,
+	  AutoDerivative<double>& Smpdelta) const = 0;
   std::string base_tre_string() const;
   void base_read_tre_string(std::istream& In);
   virtual void print(std::ostream& Os) const

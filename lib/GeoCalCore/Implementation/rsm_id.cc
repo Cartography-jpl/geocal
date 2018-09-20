@@ -4,6 +4,7 @@
 #include "tre_support.h"
 #include "ostream_pad.h"
 #include "ecr.h"
+#include "planet_coordinate.h"
 #include "local_rectangular_coordinate.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/make_shared.hpp>
@@ -208,7 +209,7 @@ RsmId::read_tre_string(const std::string& Tre_in)
     res->cconv = boost::make_shared<LocalRcConverter>(lp);
   } else {
     Exception e;
-    e << "Unrecognized ground domain form. We got " << conv_type << "by only recognize G, H and R";
+    e << "Unrecognized ground domain form. We got " << conv_type << "but only recognize G, H and R";
     throw e;
   }
   res->ground_domain_vertex_.resize(8);
@@ -276,4 +277,47 @@ void RsmId::print(std::ostream& Os) const
     opad.strict_sync();
   } else
     Os << "Not used\n";
+}
+
+//-----------------------------------------------------------------------
+/// Set the NAIF code for the planet/body we are working with.
+///
+/// Note that the NITF TRE structure does not have a place to store
+/// the NAIF code, it implicitly assumes earth. So when we read a TRE,
+/// even for something like Mars, we have the NAIF code set to
+/// earth. We need to update this with other metadata
+/// (e.g. TARGET_NAME in PDS label).
+///
+/// This is not a problem for boost serialization (which keeps the
+/// NAIF code), just for NITF TRE.
+//-----------------------------------------------------------------------
+
+void RsmId::naif_code(int Naif_code)
+{
+  const GeodeticRadianConverter* gconv =
+    dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
+  const GeodeticRadian2piConverter* gconv2 =
+    dynamic_cast<const GeodeticRadian2piConverter*>
+    (coordinate_converter().get());
+  const LocalRcConverter* gconv3 = 
+    dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
+  if(gconv) {
+    if(Naif_code != Ecr::EARTH_NAIF_CODE)
+      throw Exception("Right now, GeodeticRadianConverter is not supported for anything other than Earth");
+    return;
+  }
+  if(gconv2) {
+    if(Naif_code != Ecr::EARTH_NAIF_CODE)
+      throw Exception("Right now, GeodeticRadian2piConverter is not supported for anything other than Earth");
+    return;
+  }
+  if(gconv3) {
+    boost::shared_ptr<LocalRcParameter> p = gconv3->parameter();
+    if(Naif_code == Ecr::EARTH_NAIF_CODE)
+      p->cf_prototype = boost::make_shared<Ecr>();
+    else
+      p->cf_prototype = boost::make_shared<PlanetFixed>(Naif_code);
+    return;
+  }
+  throw Exception("Unsupported coordinate converter in naif_code");
 }

@@ -259,6 +259,16 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         return _rsm.Rsm_image_coordinate_jacobian(self, X, Y, Z)
 
 
+    def image_coordinate_jac_parm(self, Gc):
+        """
+
+        blitz::Array<double, 2> GeoCal::Rsm::image_coordinate_jac_parm(const GroundCoordinate &Gc) const
+        Return the Jacobian of the image coordinates with respect to the
+        parameters (what we have is RsmAdjustableParameter object) 
+        """
+        return _rsm.Rsm_image_coordinate_jac_parm(self, Gc)
+
+
     def fit(self, Igc, Min_height, Max_height):
         """
 
@@ -450,6 +460,32 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
       self._v_rsm_suport_data_edition(value)
 
 
+    def _v_naif_code(self, *args):
+        """
+
+        void GeoCal::Rsm::naif_code(int Naif_code)
+        Set the NAIF code for the planet/body we are working with.
+
+        Note that the NITF TRE structure does not have a place to store the
+        NAIF code, it implicitly assumes earth. So when we read a TRE, even
+        for something like Mars, we have the NAIF code set to earth. We need
+        to update this with other metadata (e.g. TARGET_NAME in PDS label).
+
+        This is not a problem for boost serialization (which keeps the NAIF
+        code), just for NITF TRE. 
+        """
+        return _rsm.Rsm__v_naif_code(self, *args)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+    @naif_code.setter
+    def naif_code(self, value):
+      self._v_naif_code(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -459,6 +495,7 @@ Rsm.ground_coordinate = new_instancemethod(_rsm.Rsm_ground_coordinate, None, Rsm
 Rsm.ground_coordinate_approx_height = new_instancemethod(_rsm.Rsm_ground_coordinate_approx_height, None, Rsm)
 Rsm.image_coordinate = new_instancemethod(_rsm.Rsm_image_coordinate, None, Rsm)
 Rsm.image_coordinate_jacobian = new_instancemethod(_rsm.Rsm_image_coordinate_jacobian, None, Rsm)
+Rsm.image_coordinate_jac_parm = new_instancemethod(_rsm.Rsm_image_coordinate_jac_parm, None, Rsm)
 Rsm.fit = new_instancemethod(_rsm.Rsm_fit, None, Rsm)
 Rsm.fill_in_ground_domain_vertex = new_instancemethod(_rsm.Rsm_fill_in_ground_domain_vertex, None, Rsm)
 Rsm.compare_igc = new_instancemethod(_rsm.Rsm_compare_igc, None, Rsm)
@@ -470,6 +507,7 @@ Rsm._v_rsm_base = new_instancemethod(_rsm.Rsm__v_rsm_base, None, Rsm)
 Rsm._v_coordinate_converter = new_instancemethod(_rsm.Rsm__v_coordinate_converter, None, Rsm)
 Rsm._v_image_identifier = new_instancemethod(_rsm.Rsm__v_image_identifier, None, Rsm)
 Rsm._v_rsm_suport_data_edition = new_instancemethod(_rsm.Rsm__v_rsm_suport_data_edition, None, Rsm)
+Rsm._v_naif_code = new_instancemethod(_rsm.Rsm__v_naif_code, None, Rsm)
 Rsm_swigregister = _rsm.Rsm_swigregister
 Rsm_swigregister(Rsm)
 

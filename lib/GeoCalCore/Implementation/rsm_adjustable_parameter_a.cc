@@ -3,7 +3,7 @@
 #include "tre_support.h"
 #include "ostream_pad.h"
 #include "ecr.h"
-#include "local_rectangular_coordinate.h"
+#include "planet_coordinate.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/make_shared.hpp>
 #include <sstream>
@@ -224,4 +224,120 @@ std::vector<std::string> RsmAdjustableParameterA::parameter_name() const
     if(parm_index(i) > 0)
       res[parm_index(i) - 1] = fp[i];
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Calculate the delta for the ground x, y, z. This comes from the
+/// RSM documentation (RSM TRE Specificatino for NITF 2.1, page 96).
+//-----------------------------------------------------------------------
+
+void RsmAdjustableParameterA::delta_x
+(double X, double Y, double Z, double& xdelta, double& ydelta,
+ double& zdelta) const
+{
+  const blitz::Array<double, 1>& p = full_parameter_.value();
+  double dx = p(20);
+  double dy = p(22);
+  double dz = p(23);
+  double alpha = p(24);
+  double beta = p(25);
+  double kappa = p(26);
+  double s = p(27);
+  xdelta = dx + s * X     + kappa * Y - beta * Z; 
+  ydelta = dy - kappa * X + s * Y     + alpha * Z;
+  zdelta = dz + beta * X  - alpha * Y + s * Z;
+  xdelta += p(27) * X + p(28) * Y + p(29) * Z;
+  ydelta += p(30) * X + p(31) * Y + p(32) * Z;
+  zdelta += p(33) * X + p(34) * Y + p(35) * Z;
+}
+
+void RsmAdjustableParameterA::delta_x
+(double X, double Y, double Z, AutoDerivative<double>& xdelta,
+ AutoDerivative<double>& ydelta,
+ AutoDerivative<double>& zdelta) const
+{
+  const ArrayAd<double, 1>& p = full_parameter_;
+  AutoDerivative<double> dx = p(20);
+  AutoDerivative<double> dy = p(22);
+  AutoDerivative<double> dz = p(23);
+  AutoDerivative<double> alpha = p(24);
+  AutoDerivative<double> beta = p(25);
+  AutoDerivative<double> kappa = p(26);
+  AutoDerivative<double> s = p(27);
+  xdelta = dx + s * X     + kappa * Y - beta * Z; 
+  ydelta = dy - kappa * X + s * Y     + alpha * Z;
+  zdelta = dz + beta * X  - alpha * Y + s * Z;
+  xdelta += p(27) * X + p(28) * Y + p(29) * Z;
+  ydelta += p(30) * X + p(31) * Y + p(32) * Z;
+  zdelta += p(33) * X + p(34) * Y + p(35) * Z;
+}
+
+//-----------------------------------------------------------------------
+/// Calculate the delta for the image coordinate. This comes from the
+/// RSM documentation (RSM TRE Specificatino for NITF 2.1, page 96).
+//-----------------------------------------------------------------------
+
+void RsmAdjustableParameterA::delta_ls
+(double x, double y, double z, double& lndelta, double& smpdelta) const
+{
+  const blitz::Array<double, 1>& p = full_parameter_.value();
+  lndelta = p(0) + p(1) * x + p(2) * y + p(3) * z
+    + p(4) * x * x + p(5) * x * y + p(6) * x * z
+    + p(7) * y * y + p(8) * y * z + p(9) * z * z;
+  smpdelta = p(10) + p(11) * x + p(12) * y + p(13) * z
+    + p(14) * x * x + p(15) * x * y + p(16) * x * z
+    + p(17) * y * y + p(18) * y * z + p(19) * z * z;
+}
+
+void RsmAdjustableParameterA::delta_ls
+(double x, double y, double z, AutoDerivative<double>& lndelta,
+ AutoDerivative<double>& smpdelta) const
+{
+  const ArrayAd<double, 1>& p = full_parameter_;
+  lndelta = p(0) + p(1) * x + p(2) * y + p(3) * z
+    + p(4) * x * x + p(5) * x * y + p(6) * x * z
+    + p(7) * y * y + p(8) * y * z + p(9) * z * z;
+  smpdelta = p(10) + p(11) * x + p(12) * y + p(13) * z
+    + p(14) * x * x + p(15) * x * y + p(16) * x * z
+    + p(17) * y * y + p(18) * y * z + p(19) * z * z;
+}
+
+
+// See base class for description.
+void RsmAdjustableParameterA::adjustment
+(const GroundCoordinate& Gc, boost::shared_ptr<GroundCoordinate>& Gc_adjusted,
+ double& Lndelta, double& Smpdelta) const
+{
+  double x, y, z;
+  coordinate_converter()->convert_to_coordinate(Gc, x, y, z);
+  double xdelta, ydelta, zdelta;
+  delta_x(x, y, z, xdelta, ydelta, zdelta);
+  delta_ls(x, y, z, Lndelta, Smpdelta);
+  Gc_adjusted = coordinate_converter()->convert_from_coordinate(x + xdelta,
+		      y + ydelta, z + zdelta);
+}
+
+// See base class for description.
+
+void RsmAdjustableParameterA::adjustment_with_derivative
+(const GroundCoordinate& Gc, ArrayAd<double, 1>& Cf_adjusted,
+ AutoDerivative<double>& Lndelta, AutoDerivative<double>& Smpdelta) const
+{
+  double x, y, z;
+  coordinate_converter()->convert_to_coordinate(Gc, x, y, z);
+  AutoDerivative<double> xdelta, ydelta, zdelta;
+  delta_x(x, y, z, xdelta, ydelta, zdelta);
+  delta_ls(x, y, z, Lndelta, Smpdelta);
+  // Cf calculation needed
+  Cf_adjusted.resize(3, full_parameter_.number_variable());
+}
+
+// See base class for description.
+void RsmAdjustableParameterA::naif_code(int Naif_code)
+{
+  boost::shared_ptr<LocalRcParameter> p = cconv->parameter();
+  if(Naif_code == Ecr::EARTH_NAIF_CODE)
+    p->cf_prototype = boost::make_shared<Ecr>();
+  else
+    p->cf_prototype = boost::make_shared<PlanetFixed>(Naif_code);
 }

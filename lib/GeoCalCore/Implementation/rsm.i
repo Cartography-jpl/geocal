@@ -35,6 +35,8 @@ public:
   ImageCoordinate image_coordinate(double X, double Y, double Z) const;
   blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
+  blitz::Array<double, 2> 
+  image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
 
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
@@ -58,6 +60,7 @@ public:
 		    boost::shared_ptr<CoordinateConverter>);
   %python_attribute_with_set(image_identifier, std::string);
   %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(naif_code, int);
   %pickle_serialization()
 };
 }

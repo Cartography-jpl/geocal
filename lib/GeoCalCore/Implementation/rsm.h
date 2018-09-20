@@ -38,6 +38,17 @@ public:
   blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
 
+//-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
+/// parameters (what we have is RsmAdjustableParameter object)
+//-----------------------------------------------------------------------
+
+  blitz::Array<double, 2> 
+  image_coordinate_jac_parm(const GroundCoordinate& Gc) const
+  {// For now, no parameters.
+    return blitz::Array<double, 2>(2, 0);
+  }
+
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
   void fill_in_ground_domain_vertex(double Min_height, double Max_height);
@@ -105,6 +116,33 @@ public:
     if(rparm)
       rparm->rsm_suport_data_edition(V);
   }
+
+//-----------------------------------------------------------------------
+/// Return the NAIF code for the planet/body we are working with.
+//-----------------------------------------------------------------------
+  
+  int naif_code() const { return rid->naif_code(); }
+
+//-----------------------------------------------------------------------
+/// Set the NAIF code for the planet/body we are working with.
+///
+/// Note that the NITF TRE structure does not have a place to store
+/// the NAIF code, it implicitly assumes earth. So when we read a TRE,
+/// even for something like Mars, we have the NAIF code set to
+/// earth. We need to update this with other metadata
+/// (e.g. TARGET_NAME in PDS label).
+///
+/// This is not a problem for boost serialization (which keeps the
+/// NAIF code), just for NITF TRE.
+//-----------------------------------------------------------------------
+  
+  void naif_code(int Naif_code)
+  {
+    rid->naif_code(Naif_code);
+    if(rparm)
+      rparm->naif_code(Naif_code);
+  }
+  
 protected:
   Rsm() {}
 private:

@@ -195,17 +195,31 @@ class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
 
-    def __init__(self, *args):
+    def adjustment(self, Gc, Gc_adjusted, Lndelta, Smpdelta):
         """
 
-        GeoCal::RsmAdjustableParameter::RsmAdjustableParameter(const std::string &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1", const std::string
-        &Triangulation_id="")
-
+        virtual void GeoCal::RsmAdjustableParameter::adjustment(const GroundCoordinate &Gc, boost::shared_ptr< GroundCoordinate >
+        &Gc_adjusted, double &Lndelta, double &Smpdelta) const =0
+        Adjustment for given ground location. 
         """
-        _rsm_adjustable_parameter.RsmAdjustableParameter_swiginit(self, _rsm_adjustable_parameter.new_RsmAdjustableParameter(*args))
+        return _rsm_adjustable_parameter.RsmAdjustableParameter_adjustment(self, Gc, Gc_adjusted, Lndelta, Smpdelta)
+
+
+    def adjustment_with_derivative(self, Gc, Cf_adjusted, Lndelta, Smpdelta):
+        """
+
+        virtual void GeoCal::RsmAdjustableParameter::adjustment_with_derivative(const GroundCoordinate &Gc, ArrayAd< double, 1 > &Cf_adjusted,
+        AutoDerivative< double > &Lndelta, AutoDerivative< double > &Smpdelta)
+        const =0
+        Adjustment including sample derivatives. 
+        """
+        return _rsm_adjustable_parameter.RsmAdjustableParameter_adjustment_with_derivative(self, Gc, Cf_adjusted, Lndelta, Smpdelta)
+
 
     def base_tre_string(self):
         """
@@ -280,15 +294,44 @@ class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
       self._v_triangulation_id(value)
 
 
+    def _v_naif_code(self, *args):
+        """
+
+        virtual void GeoCal::RsmAdjustableParameter::naif_code(int Naif_code)=0
+        Set the NAIF code for the planet/body we are working with.
+
+        Note that the NITF TRE structure does not have a place to store the
+        NAIF code, it implicitly assumes earth. So when we read a TRE, even
+        for something like Mars, we have the NAIF code set to earth. We need
+        to update this with other metadata (e.g. TARGET_NAME in PDS label).
+
+        This is not a problem for boost serialization (which keeps the NAIF
+        code), just for NITF TRE. 
+        """
+        return _rsm_adjustable_parameter.RsmAdjustableParameter__v_naif_code(self, *args)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+    @naif_code.setter
+    def naif_code(self, value):
+      self._v_naif_code(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_adjustable_parameter.delete_RsmAdjustableParameter
+RsmAdjustableParameter.adjustment = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_adjustment, None, RsmAdjustableParameter)
+RsmAdjustableParameter.adjustment_with_derivative = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_adjustment_with_derivative, None, RsmAdjustableParameter)
 RsmAdjustableParameter.base_tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_base_tre_string, None, RsmAdjustableParameter)
 RsmAdjustableParameter.base_read_tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_base_read_tre_string, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_image_identifier = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_image_identifier, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_rsm_suport_data_edition = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_suport_data_edition, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_triangulation_id = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_triangulation_id, None, RsmAdjustableParameter)
+RsmAdjustableParameter._v_naif_code = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_naif_code, None, RsmAdjustableParameter)
 RsmAdjustableParameter.__str__ = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter___str__, None, RsmAdjustableParameter)
 RsmAdjustableParameter_swigregister = _rsm_adjustable_parameter.RsmAdjustableParameter_swigregister
 RsmAdjustableParameter_swigregister(RsmAdjustableParameter)

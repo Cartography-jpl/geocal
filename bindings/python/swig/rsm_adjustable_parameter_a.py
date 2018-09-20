@@ -183,6 +183,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.rsm_adjustable_parameter
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
+import geocal_swig.geocal_exception
 class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustableParameter):
     """
 
@@ -194,17 +195,10 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        """
-
-        GeoCal::RsmAdjustableParameterA::RsmAdjustableParameterA(const std::string &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1", const std::string
-        &Triangulation_id="")
-
-        """
-        _rsm_adjustable_parameter_a.RsmAdjustableParameterA_swiginit(self, _rsm_adjustable_parameter_a.new_RsmAdjustableParameterA(*args))
 
     def tre_string(self):
         """
@@ -238,7 +232,7 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
     def _v_coordinate_converter(self, *args):
         """
 
-        void GeoCal::RsmAdjustableParameterA::coordinate_converter(const boost::shared_ptr< CoordinateConverter > &V)
+        void GeoCal::RsmAdjustableParameterA::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)
 
         """
         return _rsm_adjustable_parameter_a.RsmAdjustableParameterA__v_coordinate_converter(self, *args)

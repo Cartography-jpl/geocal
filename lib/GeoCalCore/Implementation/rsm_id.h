@@ -3,6 +3,7 @@
 #include "rsm_base.h"
 #include "geocal_time.h"
 #include "ground_coordinate.h"
+#include "coordinate_converter.h"
 #include <boost/optional.hpp>
 
 namespace GeoCal {
@@ -181,6 +182,9 @@ public:
   void max_line(int V) { max_line_ = V; }
   int max_sample() const { return max_sample_; }
   void max_sample(int V) { max_sample_ = V; }
+
+  int naif_code() const { return cconv->naif_code(); }
+  void naif_code(int Naif_code);
   
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>

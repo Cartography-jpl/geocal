@@ -51,6 +51,7 @@ public:
   %python_attribute_with_set(min_sample, int);
   %python_attribute_with_set(max_line, int);
   %python_attribute_with_set(max_sample, int);
+  %python_attribute_with_set(naif_code, int);
   std::string tre_string() const;
   static boost::shared_ptr<RsmId>
   read_tre_string(const std::string& Tre_in);

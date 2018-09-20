@@ -9406,6 +9406,121 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmId__v_naif_code__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmId *arg1 = (GeoCal::RsmId *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmId const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmId const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmId__v_naif_code" "', argument " "1"" of type '" "GeoCal::RsmId const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmId const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmId__v_naif_code__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmId *arg1 = (GeoCal::RsmId *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmId > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmId > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmId__v_naif_code" "', argument " "1"" of type '" "GeoCal::RsmId *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmId > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmId__v_naif_code" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->naif_code((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmId__v_naif_code(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmId__v_naif_code",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmId__v_naif_code__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmId__v_naif_code__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmId__v_naif_code'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmId::naif_code() const\n"
+    "    GeoCal::RsmId::naif_code(int const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmId_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmId *arg1 = (GeoCal::RsmId *) 0 ;
@@ -9680,6 +9795,19 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"void GeoCal::RsmId::max_sample(int V)\n"
 		"\n"
+		""},
+	 { (char *)"RsmId__v_naif_code", _wrap_RsmId__v_naif_code, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void RsmId::naif_code(int Naif_code)\n"
+		"Set the NAIF code for the planet/body we are working with.\n"
+		"\n"
+		"Note that the NITF TRE structure does not have a place to store the\n"
+		"NAIF code, it implicitly assumes earth. So when we read a TRE, even\n"
+		"for something like Mars, we have the NAIF code set to earth. We need\n"
+		"to update this with other metadata (e.g. TARGET_NAME in PDS label).\n"
+		"\n"
+		"This is not a problem for boost serialization (which keeps the NAIF\n"
+		"code), just for NITF TRE. \n"
 		""},
 	 { (char *)"RsmId_tre_string", (PyCFunction)_wrap_RsmId_tre_string, METH_O, (char *)"\n"
 		"\n"

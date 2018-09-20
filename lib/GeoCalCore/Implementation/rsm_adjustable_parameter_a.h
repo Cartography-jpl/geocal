@@ -1,7 +1,7 @@
 #ifndef RSM_ADJUSTABLE_PARAMETER_A_H
 #define RSM_ADJUSTABLE_PARAMETER_A_H
 #include "rsm_adjustable_parameter.h"
-#include "coordinate_converter.h"
+#include "local_rectangular_coordinate.h"
 #include <boost/shared_ptr.hpp>
 
 namespace GeoCal {
@@ -30,10 +30,18 @@ public:
   }
   virtual ~RsmAdjustableParameterA() {}
 
-  const boost::shared_ptr<CoordinateConverter>& coordinate_converter() const
-  { return cconv; }
-  void coordinate_converter(const boost::shared_ptr<CoordinateConverter>& V) 
+  const boost::shared_ptr<LocalRcConverter>&
+  coordinate_converter() const { return cconv; }
+  void coordinate_converter(const
+    boost::shared_ptr<LocalRcConverter>& V) 
   { cconv = V; }
+
+  virtual void adjustment(const GroundCoordinate& Gc,
+			  boost::shared_ptr<GroundCoordinate>& Gc_adjusted,
+			  double& Lndelta, double& Smpdelta) const;
+  virtual void adjustment_with_derivative(const GroundCoordinate& Gc,
+	  ArrayAd<double, 1>& Cf_adjusted, AutoDerivative<double>& Lndelta,
+	  AutoDerivative<double>& Smpdelta) const;
 
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
@@ -43,11 +51,22 @@ public:
   static boost::shared_ptr<RsmAdjustableParameterA>
   read_tre_string(const std::string& Tre_in);
   virtual void print(std::ostream& Os) const;
+  virtual int naif_code() const { return cconv->naif_code(); }
+  virtual void naif_code(int Naif_code);
 private:
-  boost::shared_ptr<CoordinateConverter> cconv;
+  boost::shared_ptr<LocalRcConverter> cconv;
   // The TRE will in general reorder the parameters
   blitz::Array<int, 1> parm_index;
   int num_parameter() const;
+  void delta_x(double x, double y, double z, double& xdelta,
+	       double& ydelta, double& zdelta) const;
+  void delta_x(double x, double y, double z, AutoDerivative<double>& xdelta,
+	       AutoDerivative<double>& ydelta,
+	       AutoDerivative<double>& zdelta) const;
+  void delta_ls(double x, double y, double z, double& lndelta,
+	       double& smpdelta) const;
+  void delta_ls(double x, double y, double z, AutoDerivative<double>& lndelta,
+		AutoDerivative<double>& smpdelta) const;
   
   // Internally, we store the parameters in a fixed order. This is the
   // order they appear in the TRE. Values that aren't actually set in

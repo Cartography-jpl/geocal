@@ -1,0 +1,233 @@
+#! /usr/bin/env python
+#
+# This takes a VICAR file with a RSM, projects it to the surface, and then
+# generate tiepoints.
+
+import geocal
+import numpy as np
+import subprocess
+import os
+import logging
+
+version = "September 25, 2018"
+usage='''Usage:
+  rsm_tiepoint [options] <image> <dem_file> <reference_image> <output>
+  rsm_tiepoint [options] <image> <dem_file> <datum_file> <reference_image> <output>
+  rsm_tiepoint --srtm <image> <reference_image> <output>
+  rsm_tiepoint --constant-dem=h <image> <reference_image> <output>
+  rsm_tiepoint -h | --help
+  rsm_tiepoint -v | --version
+
+rsm_tiepoint takes a VICAR file with a RSM and projects it to the surface, and
+then collects tiepoints. By default the projected image is the base image
+name with "_proj" added. But you can specify any name you would like.
+
+Options:
+  -h --help         
+       Print this message
+
+  --outside-dem-not-error
+       If a program attempts to read a DEM value outside of the supplied 
+       file, this is normally treated as an error. Alternatively, you can
+       specify this option and we will return a height of "0" for any
+       attempt to read outside the DEM.
+
+  --constant-dem=h
+       Use a constant height DEM (a SimpleDem), with the given height.
+
+  --dem-band=b
+       The band of the DEM file to use (1 based). [default: 1]
+
+  --datum-band=b
+       The band of the Datum file to use (1 based). [default: 1]
+
+  --constant-datum=u
+       Use a datum with a constant undulation. This is useful as a quick
+       way to add an offset to  DEM file. [default: 0.0]
+
+  --srtm
+       Use the SRTM rather than supplying a DEM file.
+
+  --grid-spacing=g
+       Grid spacing to exactly calculate the image ground connection
+       for, doing a linear interpolation in between. This can greatly
+       affect how long the processing takes. If the grid spacing is
+       something like the DEM resolution, usually you get almost as
+       good output but much faster. [default: 1]
+
+  --fftsize=d
+       FFT window size. Default should generally work, but if the
+       overlap is very narrow, a smaller window will be needed. Or
+       use a larger window if the two images have very different
+       resolutions (e.g., Viking 232m vs 50m HRSC).
+       [default: 256]
+
+  --fftgrid=s
+       Grid dimensions of FFTs to match in line x sample order.
+       Note that to pass this you need to use quotes, 
+       e.g., --fftgrid="(42,42)".
+       [default: (42, 42)]
+
+  --magnify=f
+       Magnify the FFT size to search a larger area to obtain better
+       initial match points. 1.0 means no magnification.
+       [default: 4.0]
+
+   --magmin=f
+       Shrink the Magnify factor to this size after successful initial
+       matching. Will increase the number of (smaller) FFTs fitting
+       inside the image overlap.
+       [default: 2.0]
+
+  --number-process=n
+       Number of processors to use. [default: 1]
+
+  --proj-file-name=f
+       Name of projected file. If not supplied, we use the input image
+       name + "_proj".
+       
+  --process-number-line=n
+       Number of lines to include in each tile that we work on. This 
+       controls how long each torque/parallel job takes to run.
+       [default: 1000]
+
+  --process-number-sample=n
+       Number of lines to include in each tile that we work on. This 
+       controls how long each torque/parallel job takes to run. 
+       [default: 1000]
+
+  --redo=d
+       At the end of processing, this number of the first FFT match
+       points will be redone.
+       [default: 36]   
+
+  --seed=d
+       Number that controls the positions of the first FFT match
+       points. Use a different number if the first image matching
+       points result in poor registration accuracy.
+       [default: 562]
+   
+  --thr-res=f
+       Prevent offset correlations further than this value from the
+       predicted location from entering into the model fit. Prevents
+       gross blunders. Note this is in the (lower) resolution of the
+       Reference image. [default: 10.0]
+
+  --toler=f
+       Tolerance used to reject matched points as blunders.
+       [default: 1.5]
+
+  --verbose
+       Print more information as we run.
+
+  -v --version      
+       Print program version
+'''
+
+# Mapping between long name and shorter vicar name
+long_name_to_vicar = { "image" : "img",
+                       "dem_file" : "dem",
+                       "datum_file" : "datum",
+                       "output" : "out",
+                       "strtm" : "srtm",
+                       "constant_dem" : "consdem",
+                       "outside_dem_not_error" : "okout",
+                       "dem_band" : "demband",
+                       "datum_band" : "datumband",
+                       "constant_datum" : "consdatum",
+                       "grid_spacing" : "gspace",
+                       "number_process" : "nproc",
+		       "proj_file_name" : "pname",
+                       "process_number_line" : "pline",
+                       "process_number_sample" : "psamp",
+                       "verbose" : "verbose"
+                       }
+
+# This is shelve_dem. We will want to come up with a better way of stringing
+# these together, but for now just copy this code over.
+
+def create_dem(args):
+    dem = None
+    if(args.srtm):
+        dem = geocal.SrtmDem()
+    elif(args.constant_dem and args.constant_dem != -9999.0):
+        dem = geocal.SimpleDem(args.constant_dem)
+    else:
+        if(args.datum_file):
+            datum = geocal.GdalDatum(args.datum_file, args.datum_band)
+        else:
+            datum = geocal.SimpleDatum(args.constant_datum)
+        if geocal.VicarLiteFile.is_vicar_file(args.dem_file):
+            dem = geocal.VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
+                               datum, args.dem_band)
+        else:
+            # Check for mola file
+            t = subprocess.run(["file", "-b", args.dem_file], stdout=subprocess.PIPE)
+            if(t.returncode == 0 and t.stdout.find(b"PDS image data") >= 0):
+                if(geocal.pds_label(args.dem_file)["DATA_SET_ID"].find("MOLA") >= 0):
+                    dem = geocal.MolaDemFile(args.dem_file, not args.outside_dem_not_error)
+            if(dem is None):
+                dem = geocal.GdalDem(args.dem_file, datum, args.dem_band, 
+                              not args.outside_dem_not_error)
+    return dem
+
+args = geocal.docopt_simple(usage, version=version,
+                     long_name_to_vicar=long_name_to_vicar)
+
+# Project data to the surface
+cmd = ["rsm_project", ]
+if(args.outside_dem_not_error):
+    cmd.append("--outside-dem-not-error")
+if(args.constant_dem):
+    cmd.append("--constant-dem=%s" % args.constant_dem)
+if(args.dem_band):
+    cmd.append("--dem-band=%d" % args.dem_band)
+if(args.datum_band):
+    cmd.append("--datum-band=%d" % args.datum_band)
+if(args.constant_datum):
+    cmd.append("--constant-datum=%f" % args.constant_datum)
+if(args.srtm):
+    cmd.append("--srtm")
+cmd.append("--cover-image=%s" % args.reference_image)
+cmd.append("--resolution=-1")
+if(args.number_process):
+    cmd.append("--number-process=%d" % args.number_process)
+if(args.process_number_line):
+    cmd.append("--process-number-line=%d" % args.process_number_line)
+if(args.process_number_sample):
+    cmd.append("--process-number-sample=%d" % args.process_number_sample)
+cmd.append(args.image)
+if(args.dem_file):
+    cmd.append(args.dem_file)
+if(args.datum_file):
+    cmd.append(args.datum_file)
+if(args.verbose):
+    cmd.append("--verbose")
+    
+proj_fname = os.path.splitext(os.path.basename(args.image))[0] + "_proj.img"
+if(args.proj_file_name):
+    proj_fname = args.proj_file_name
+cmd.append(proj_fname)
+subprocess.run(cmd, check=True)
+
+
+dem = create_dem(args)
+rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
+if(geocal.VicarLiteFile.is_vicar_file(args.image)):
+    img = geocal.VicarLiteRasterImage(args.image)
+else:
+    img = geocal.GdalRasterImage(args.image)
+igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
+igccol = geocal.IgcArray([igc,])
+tpcollect = geocal.TiePointCollectPicmtch(igccol, [proj_fname,],
+                            ref_image_fname=args.reference_image,
+                            fftsize=args.fftsize, magnify=args.magnify,
+                            magmin=args.magmin, toler=args.toler,
+                            redo=args.redo,
+                            ffthalf=2, seed=args.seed, autofit=14,
+                            thr_res=args.thr_res, quiet = not args.verbose)
+tpcol = tpcollect.tie_point_grid(eval(args.fftgrid)[0],
+                                 eval(args.fftgrid)[1])
+geocal.write_shelve(args.output, tpcol)
+
+                            

@@ -11,6 +11,7 @@ parm datumband type=int count=1 default=1
 parm consdatum type=real count=1 default=0.0
 parm avgfactor type=int count=1 default=-1
 parm bbox type=(string,99) count=1 default=""
+parm cimage type=(string,99) count=1 default=""
 parm gspace type=int count=1 default=1
 parm mapinfo type=(string,99) count=1 default=""
 parm res type=real count=1 default=1.0
@@ -89,6 +90,17 @@ example cover the area of a
 generated DEM, even if the DEM
 is lower resolution than what
 we want to project here.
+.variable cimage
+Use the given image to supply
+the projection. We calculate
+the bounding box to cover the
+image, and use the supplied
+resolution. Compare with
+bounding-box option, this is
+useful in the same
+circumstances where we might
+not want to cover the entire
+area of the file f.
 .variable gspace
 Grid spacing to exactly
 calculate the image ground
@@ -108,7 +120,9 @@ image or MapInfo. This is
 useful to when comparing
 against an existing image/DEM.
 .variable res
-Resolution in meters of output
+Resolution in meters of output.
+If negative, then we use the
+center resolution of the image.
 .variable nproc
 Number of processors to use
 .variable pline

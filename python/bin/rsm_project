@@ -55,12 +55,19 @@ Options:
        resolution of center pixel of the projected ImageGroundCollection.
        Otherwise, we average by the given factor. [default: -1]
 
-  --bounding-box=mi
+  --bounding-box=f
        Use the given image to supply the bounding box for the output. 
        Note that we use the projection and bounding box, but not the
        resolution of the map info (unlike --map-info). This can be useful
        to for example cover the area of a generated DEM, even if the DEM
        is lower resolution than what we want to project here.
+
+  --cover-image=f
+       Use the given image to supply the projection. We calculate the 
+       bounding box to cover the image, and use the supplied resolution.
+       Compare with bounding-box option, this is useful in the same 
+       circumstances where we might not want to cover the entire area of
+       the file f.
 
   --grid-spacing=g
        Grid spacing to exactly calculate the image ground connection
@@ -75,7 +82,8 @@ Options:
        comparing against an existing image/DEM.
 
   --resolution=r
-       Resolution in meters of output. [default: 1.0]
+       Resolution in meters of output. If negative, then we use the center
+       resolution of the image. [default: 1.0]
 
   --number-process=n
        Number of processors to use. [default: 1]
@@ -114,6 +122,7 @@ long_name_to_vicar = { "image" : "img",
                        "constant_datum" : "consdatum",
                        "avg_factor" : "avgfactor",
                        "bounding_box" : "bbox",
+                       "cover_image": "cimage",
                        "grid_spacing" : "gspace",
                        "map_info" : "mapinfo",
                        "resolution" : "res",
@@ -176,22 +185,38 @@ def mars_default_mi(desired_resolution = 1):
     return mi.scale(desired_resolution, desired_resolution)
 
 def create_igc_map(igc, args):
+    resolution = args.resolution
+    if(resolution < 0):
+        resolution = igc.resolution_meter()
     if(args.map_info):
         mi = geocal.GdalRasterImage(args.map_info).map_info
+        if(args.bounding_box or args.cover_image):
+            raise RuntimeError("Can only specify one of --map-info, --bounding-box and --cover-mage")
     elif(args.bounding_box):
-        mibase = geocal.GdalRasterImage(args.map_info).map_info
+        mibase = geocal.GdalRasterImage(args.bounding_box).map_info
         resbase = mibase.resolution_meter
-        miscale = mibase.scale(args.resolution / resbase,
-                               args.resolution / resbase)
+        miscale = mibase.scale(resolution / resbase,
+                               resolution / resbase)
+        mp = geocal.IgcMapProjected(miscale, igc, 1, -1, False)
+        mi = mp.map_info
+        mp = None
+        if(args.cover_image):
+            raise RuntimeError("Can only specify one of --map-info, --bounding-box and --cover-mage")
+    elif(args.cover_image):
+        mibase = geocal.GdalRasterImage(args.cover_image).map_info
+        resbase = mibase.resolution_meter
+        miscale = mibase.scale(resolution / resbase,
+                               resolution / resbase)
+        miscale = igc.cover(miscale)
         mp = geocal.IgcMapProjected(miscale, igc, 1, -1, False)
         mi = mp.map_info
         mp = None
     else:
         naif_code = rsm.coordinate_converter.naif_code
         if(naif_code == geocal.Ecr.EARTH_NAIF_CODE):
-            mibase = geocal.cib01_mapinfo(desired_resolution = args.resolution)
+            mibase = geocal.cib01_mapinfo(desired_resolution = resolution)
         elif(naif_code == geocal.PlanetConstant.MARS_NAIF_CODE):
-            mibase = geocal.mars_default_mi(desired_resolution = args.resolution)
+            mibase = geocal.mars_default_mi(desired_resolution = resolution)
         else:
             raise RuntimeError("Don't currently support NAIF code %d" %
                                naif_code)

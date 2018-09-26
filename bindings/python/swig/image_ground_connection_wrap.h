@@ -46,6 +46,7 @@ public:
     virtual blitz::Array< double,2 > image_coordinate_jac_cf(GeoCal::CartesianFixed const &Gc) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_cf_fd(GeoCal::CartesianFixed const &Gc, double Step_size) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_parm(GeoCal::GroundCoordinate const &Gc) const;
+    virtual blitz::Array< double,2 > image_coordinate_jac_parm_fd(GeoCal::GroundCoordinate const &Gc, blitz::Array< double,1 > const &Eps) const;
     virtual int number_line() const;
     virtual int number_sample() const;
     virtual int number_band() const;
@@ -86,7 +87,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[35];
+    mutable swig::SwigVar_PyObject vtable[36];
 #endif
 
 };

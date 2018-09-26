@@ -8920,7 +8920,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Rsm_image_coordinate_jac_parm", _wrap_Rsm_image_coordinate_jac_parm, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array<double, 2> GeoCal::Rsm::image_coordinate_jac_parm(const GroundCoordinate &Gc) const\n"
+		"blitz::Array< double, 2 > Rsm::image_coordinate_jac_parm(const GroundCoordinate &Gc) const\n"
 		"Return the Jacobian of the image coordinates with respect to the\n"
 		"parameters (what we have is RsmAdjustableParameter object) \n"
 		""},

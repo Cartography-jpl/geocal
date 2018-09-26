@@ -418,6 +418,20 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm(self, Gc)
 
 
+    def image_coordinate_jac_parm_fd(self, Gc, Eps):
+        """
+
+        blitz::Array< double, 2 > ImageGroundConnection::image_coordinate_jac_parm_fd(const GroundCoordinate &Gc, const blitz::Array< double, 1 > &Eps)
+        const
+        Return the Jacobian of the image coordinates with respect to the
+        parameter_subset.
+
+        This is calculated by finite difference, using a step size given by
+        Eps. 
+        """
+        return _image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm_fd(self, Gc, Eps)
+
+
     def cover(self, Mi, boundary=0):
         """
 
@@ -794,6 +808,7 @@ ImageGroundConnection.image_coordinate_with_status = new_instancemethod(_image_g
 ImageGroundConnection.image_coordinate_jac_cf = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf, None, ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_cf_fd = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf_fd, None, ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm, None, ImageGroundConnection)
+ImageGroundConnection.image_coordinate_jac_parm_fd = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm_fd, None, ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover, None, ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image, None, ImageGroundConnection)
 ImageGroundConnection._v_image_multi_band = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image_multi_band, None, ImageGroundConnection)

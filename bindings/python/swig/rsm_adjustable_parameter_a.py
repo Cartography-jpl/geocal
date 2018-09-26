@@ -229,6 +229,42 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
 
     read_tre_string = staticmethod(read_tre_string)
 
+    def activate_image_correction(self):
+        """
+
+        void RsmAdjustableParameterA::activate_image_correction()
+        Any set of parameters can be activated, in any desired order.
+
+        But we tend to activate them in groups. This function turns on all of
+        image correction parameters. 
+        """
+        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_image_correction(self)
+
+
+    def activate_ground_rotation(self):
+        """
+
+        void RsmAdjustableParameterA::activate_ground_rotation()
+        Any set of parameters can be activated, in any desired order.
+
+        But we tend to activate them in groups. This function turns on all of
+        ground rotation parameters. 
+        """
+        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_ground_rotation(self)
+
+
+    def activate_ground_correction(self):
+        """
+
+        void RsmAdjustableParameterA::activate_ground_correction()
+        Any set of parameters can be activated, in any desired order.
+
+        But we tend to activate them in groups. This function turns on all of
+        ground correction parameters. 
+        """
+        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_ground_correction(self)
+
+
     def _v_coordinate_converter(self, *args):
         """
 
@@ -252,6 +288,9 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
 
     __swig_destroy__ = _rsm_adjustable_parameter_a.delete_RsmAdjustableParameterA
 RsmAdjustableParameterA.tre_string = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_tre_string, None, RsmAdjustableParameterA)
+RsmAdjustableParameterA.activate_image_correction = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_image_correction, None, RsmAdjustableParameterA)
+RsmAdjustableParameterA.activate_ground_rotation = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_ground_rotation, None, RsmAdjustableParameterA)
+RsmAdjustableParameterA.activate_ground_correction = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_ground_correction, None, RsmAdjustableParameterA)
 RsmAdjustableParameterA._v_coordinate_converter = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA__v_coordinate_converter, None, RsmAdjustableParameterA)
 RsmAdjustableParameterA_swigregister = _rsm_adjustable_parameter_a.RsmAdjustableParameterA_swigregister
 RsmAdjustableParameterA_swigregister(RsmAdjustableParameterA)

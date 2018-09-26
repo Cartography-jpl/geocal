@@ -37,18 +37,8 @@ public:
   ImageCoordinate image_coordinate(double X, double Y, double Z) const;
   blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
-
-//-----------------------------------------------------------------------
-/// Return the Jacobian of the image coordinates with respect to the
-/// parameters (what we have is RsmAdjustableParameter object)
-//-----------------------------------------------------------------------
-
   blitz::Array<double, 2> 
-  image_coordinate_jac_parm(const GroundCoordinate& Gc) const
-  {// For now, no parameters.
-    return blitz::Array<double, 2>(2, 0);
-  }
-
+  image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
   void fill_in_ground_domain_vertex(double Min_height, double Max_height);

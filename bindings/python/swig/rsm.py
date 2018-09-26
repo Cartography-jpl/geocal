@@ -262,7 +262,7 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
     def image_coordinate_jac_parm(self, Gc):
         """
 
-        blitz::Array<double, 2> GeoCal::Rsm::image_coordinate_jac_parm(const GroundCoordinate &Gc) const
+        blitz::Array< double, 2 > Rsm::image_coordinate_jac_parm(const GroundCoordinate &Gc) const
         Return the Jacobian of the image coordinates with respect to the
         parameters (what we have is RsmAdjustableParameter object) 
         """

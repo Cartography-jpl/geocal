@@ -220,6 +220,38 @@ blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf_fd
 }
 
 //-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
+/// parameter_subset. This is calculated by finite difference, using a step
+/// size given by Eps.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2>
+ImageGroundConnection::image_coordinate_jac_parm_fd
+(const GroundCoordinate& Gc,
+ const blitz::Array<double, 1>& Eps) const
+{
+  Array<double, 1> p0(parameter_subset());
+  Array<double, 2> jac_fd(2, p0.rows());
+  if(Eps.rows() != p0.rows()) {
+    Exception e;
+    e << "Eps is not the expected size. parameter_subset size is "
+      << p0.rows() << " but Eps size is " << Eps.rows();
+    throw e;
+  }					    
+  ImageCoordinate ic0 = image_coordinate(Gc);
+  for(int i = 0; i < Eps.rows(); ++i) {
+    Array<double, 1> p = p0.copy();
+    p(i) += Eps(i);
+    const_cast<ImageGroundConnection&>(*this).parameter_subset(p);
+    ImageCoordinate ic = image_coordinate(Gc);
+    jac_fd(0,i) = (ic.line - ic0.line) / Eps(i);
+    jac_fd(1,i) = (ic.sample - ic0.sample) / Eps(i);
+  }
+  const_cast<ImageGroundConnection&>(*this).parameter_subset(p0);
+  return jac_fd;
+}
+
+//-----------------------------------------------------------------------
 /// Return ground coordinate that is nearly the given height above
 /// the reference surface. This is exact in the sense that the
 /// returned point matches the image coordinate (to 

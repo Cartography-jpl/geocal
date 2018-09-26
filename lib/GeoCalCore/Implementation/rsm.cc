@@ -238,6 +238,33 @@ blitz::Array<double, 2> Rsm::image_coordinate_jacobian
 }
 
 //-----------------------------------------------------------------------
+/// Return the Jacobian of the image coordinates with respect to the
+/// parameters (what we have is RsmAdjustableParameter object)
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> 
+Rsm::image_coordinate_jac_parm(const GroundCoordinate& Gc) const
+{
+  if(!rparm)
+    return blitz::Array<double, 2>(2, 0);
+  blitz::Range ra = blitz::Range::all();
+  ArrayAd<double, 1> poriginal = rparm->parameter_with_derivative();
+  blitz::Array<double, 2> jac(2, poriginal.rows());
+  const_cast<RsmAdjustableParameter&>(*rparm).add_identity_gradient();
+  ArrayAd<double, 1> gcadj;
+  AutoDerivative<double> lndelta, smpdelta;
+  rparm->adjustment_with_derivative(Gc, gcadj, lndelta, smpdelta);
+  // Need to account for ground derivative, ignored for now.
+  // double xadj, yadj, zadj;
+  // coordinate_converter()->convert_to_coordinate(*gcadj, xadj, yadj, zadj);
+  // ImageCoordinate ic = rp->image_coordinate(xadj, yadj, zadj);
+  jac(0, ra) = lndelta.gradient();
+  jac(1, ra) = smpdelta.gradient();
+  const_cast<RsmAdjustableParameter&>(*rparm).parameter_with_derivative(poriginal);
+  return jac;
+}
+
+//-----------------------------------------------------------------------
 /// Generate a Rsm that approximates the calculation
 /// done by a ImageGroundConnection.
 //-----------------------------------------------------------------------

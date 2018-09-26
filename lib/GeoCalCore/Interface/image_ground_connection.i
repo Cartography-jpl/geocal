@@ -117,6 +117,9 @@ public:
   virtual blitz::Array<double, 2> image_coordinate_jac_cf_fd(const CartesianFixed& Gc, double Step_size) const;
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
+  virtual blitz::Array<double, 2>
+  image_coordinate_jac_parm_fd(const GroundCoordinate& Gc,
+			       const blitz::Array<double, 1>& Eps) const;
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
   %python_attribute_with_set(image, boost::shared_ptr<RasterImage>)
   %python_attribute_with_set(image_multi_band, 

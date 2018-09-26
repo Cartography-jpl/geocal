@@ -1,4 +1,5 @@
 #include "rsm_adjustable_parameter_a.h"
+#include "rsm_id.h"
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
 #include "ostream_pad.h"
@@ -60,6 +61,41 @@ std::string RsmAdjustableParameterA::tre_string() const
     res += str_check_size(num % parm(i), 21);
   return res;
 }
+
+//-----------------------------------------------------------------------
+/// Create a RsmAdjustableParameterA. We create a LocalRcConverter
+/// that matches the given Igc, set the Image_identifier and
+/// Rsm_support_data_edition to match that of the given Rsm_id, and
+/// can optionally activate a set of the parameters for the correction.
+//-----------------------------------------------------------------------
+
+RsmAdjustableParameterA::RsmAdjustableParameterA
+(const ImageGroundConnection& Igc,
+ const RsmId& Rsm_id,
+ const std::string& Triangulation_id,
+ bool Activate_image_correction,
+ bool Activate_ground_rotation,
+ bool Activate_ground_correction
+ )
+  : RsmAdjustableParameter(Rsm_id.image_identifier(),
+			   Rsm_id.rsm_suport_data_edition(),
+			   Triangulation_id),
+    parm_index(36),
+    full_parameter_(36, 0)
+{
+  for(int i = 0; i < full_parameter_.rows(); ++i) {
+    full_parameter_(i) = 0.0;
+    parm_index(i) = -1;
+  }
+  cconv = boost::make_shared<LocalRcConverter>(boost::make_shared<LocalRcParameter>(Igc));
+  if(Activate_image_correction)
+    activate_image_correction();
+  if(Activate_ground_rotation)
+    activate_ground_rotation();
+  if(Activate_ground_correction)
+    activate_ground_correction();
+}
+
 
 //-----------------------------------------------------------------------
 /// Read a TRE string. Note that the TRE does not contain all the
@@ -176,6 +212,51 @@ RsmAdjustableParameterA::full_parameter_name()
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// Any set of parameters can be activated, in any desired order. But
+/// we tend to activate them in groups. This function turns on all of
+/// image correction parameters.
+//-----------------------------------------------------------------------
+ 
+void RsmAdjustableParameterA::activate_image_correction()
+{
+  int ind = (int) num_parameter();
+  for(int i = 0; i < 20; ++i)
+    if(parm_index(i) < 1)
+      parm_index(i) = ++ind;
+}
+
+//-----------------------------------------------------------------------
+/// Any set of parameters can be activated, in any desired order. But
+/// we tend to activate them in groups. This function turns on all of
+/// ground rotation parameters.
+//-----------------------------------------------------------------------
+ 
+void RsmAdjustableParameterA::activate_ground_rotation()
+{
+  int ind = (int) num_parameter();
+  for(int i = 20; i < 27; ++i)
+    if(parm_index(i) < 1)
+      parm_index(i) = ++ind;
+}
+
+//-----------------------------------------------------------------------
+/// Any set of parameters can be activated, in any desired order. But
+/// we tend to activate them in groups. This function turns on all of
+/// ground correction parameters.
+//-----------------------------------------------------------------------
+ 
+void RsmAdjustableParameterA::activate_ground_correction()
+{
+  int ind = (int) num_parameter();
+  for(int i = 20; i < 23; ++i)
+    if(parm_index(i) < 1)
+      parm_index(i) = ++ind;
+  for(int i = 28; i < 36; ++i)
+    if(parm_index(i) < 1)
+      parm_index(i) = ++ind;
+}
+ 
 // See base class for description
 ArrayAd<double, 1> RsmAdjustableParameterA::parameter_with_derivative() const
 {

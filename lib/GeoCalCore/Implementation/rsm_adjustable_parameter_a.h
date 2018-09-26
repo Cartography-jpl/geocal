@@ -5,6 +5,8 @@
 #include <boost/shared_ptr.hpp>
 
 namespace GeoCal {
+  class RsmId;			// Forward declaration.
+  
 /****************************************************************//**
   This is used to handle the RSM adjustable parameters. This 
   supports RSMAPA.
@@ -28,6 +30,12 @@ public:
       parm_index(i) = -1;
     }
   }
+  RsmAdjustableParameterA(const ImageGroundConnection& Igc,
+			  const RsmId& Rsm_id,
+			  const std::string& Triangulation_id="",
+			  bool Activate_image_correction=false,
+			  bool Activate_ground_rotation=false,
+			  bool Activate_ground_correction=false);
   virtual ~RsmAdjustableParameterA() {}
 
   const boost::shared_ptr<LocalRcConverter>&
@@ -42,6 +50,9 @@ public:
   virtual void adjustment_with_derivative(const GroundCoordinate& Gc,
 	  ArrayAd<double, 1>& Cf_adjusted, AutoDerivative<double>& Lndelta,
 	  AutoDerivative<double>& Smpdelta) const;
+  void activate_image_correction();
+  void activate_ground_rotation();
+  void activate_ground_correction();
 
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);

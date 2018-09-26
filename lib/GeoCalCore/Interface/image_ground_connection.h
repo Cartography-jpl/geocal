@@ -304,6 +304,10 @@ public:
     return blitz::Array<double, 2>(2, 0);
   }
 
+  virtual blitz::Array<double, 2>
+  image_coordinate_jac_parm_fd(const GroundCoordinate& Gc,
+			       const blitz::Array<double, 1>& Eps) const;
+  
 //-----------------------------------------------------------------------
 /// Return number of lines in underlying image.
 //-----------------------------------------------------------------------

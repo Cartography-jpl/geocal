@@ -2,6 +2,7 @@ PROCESS       HELP=*
 parm refimg type=(string,99) count=1
 parm refbase type=(string,99) count=1
 parm refresname type=(string,99) count=1
+parm tp type=(string,99) count=1 default=""
 parm img type=(string,99) count=1
 parm imgbase type=(string,99) count=1
 parm imgresname type=(string,99) count=1
@@ -19,6 +20,7 @@ parm nav type=int count=1 default=1000
 parm polyfit type=string count=(0:1) default="" +
    VALID=("","LINEAR","KEYSTONE","QUAD","CUBIC")
 parm redo type=int default=36 valid=(0:999)
+parm scl type=real count=1 default=1.0
 parm seed type=int default=562
 parm thr_res type=real count=1 default=10.0
 parm toler type=real count=1 default=1.5 valid=(0.0:20.0)
@@ -178,6 +180,10 @@ match points. Use a different
 number if the first image 
 matching points results in poor
 registration accuracy.
+.variable scl
+Value to scale the input image by,
+useful if the input data is
+floating for example.
 .variable thr_res
 Prevent offset correlations
 further than this value from the

@@ -195,10 +195,23 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+        RsmAdjustableParameterA::RsmAdjustableParameterA(const ImageGroundConnection &Igc, const RsmId &Rsm_id, const
+        std::string &Triangulation_id="", bool
+        Activate_image_correction=false, bool Activate_ground_rotation=false,
+        bool Activate_ground_correction=false)
+        Create a RsmAdjustableParameterA.
+
+        We create a LocalRcConverter that matches the given Igc, set the
+        Image_identifier and Rsm_support_data_edition to match that of the
+        given Rsm_id, and can optionally activate a set of the parameters for
+        the correction. 
+        """
+        _rsm_adjustable_parameter_a.RsmAdjustableParameterA_swiginit(self, _rsm_adjustable_parameter_a.new_RsmAdjustableParameterA(*args))
 
     def tre_string(self):
         """

@@ -17,7 +17,7 @@ template<class Archive>
 void RsmAdjustableParameterA::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmAdjustableParameter)
-    & GEOCAL_NVP(parm_index)
+    & GEOCAL_NVP(cconv) & GEOCAL_NVP(parm_index)
     & GEOCAL_NVP_(full_parameter);
 }
 

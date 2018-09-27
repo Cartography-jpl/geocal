@@ -32,7 +32,7 @@ public:
 			  double& Lndelta, double& Smpdelta) const;
   virtual void adjustment_with_derivative(const GroundCoordinate& Gc,
 	  ArrayAd<double, 1>& Cf_adjusted, AutoDerivative<double>& Lndelta,
-	  AutoDerivative<double>& Smpdelta) const = 0;
+	  AutoDerivative<double>& Smpdelta) const;
   std::string tre_string() const;
   static boost::shared_ptr<RsmAdjustableParameterA>
   read_tre_string(const std::string& Tre_in);

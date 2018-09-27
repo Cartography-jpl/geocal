@@ -164,6 +164,36 @@ LocalRectangularCoordinate::convert_to_cf() const
   return parameter->cf_prototype->create(t);
 }
 
+ArrayAd<double, 1> LocalRcConverter::convert_to_cf
+(const AutoDerivative<double>& X,
+ const AutoDerivative<double>& Y,
+ const AutoDerivative<double>& Z) const
+{
+  blitz::firstIndex i1; blitz::secondIndex i2;
+  blitz::Array<AutoDerivative<double>, 1> coora(3);
+  coora(0) = X; 
+  coora(1) = Y; 
+  coora(2) = Z;
+  blitz::Array<AutoDerivative<double>, 1> res(3);
+  res = blitz::sum(p->cf_to_rc_arr()(i2, i1) * coora(i2), i2) +
+    p->cf_offset_arr()(i1);
+  return ArrayAd<double, 1>(res);
+}
+
+void LocalRcConverter::convert_from_cf
+(const ArrayAd<double, 1>& Cf,
+ AutoDerivative<double>& X,
+ AutoDerivative<double>& Y,
+ AutoDerivative<double>& Z) const
+{
+  blitz::firstIndex i1; blitz::secondIndex i2;
+  blitz::Array<AutoDerivative<double>, 1> res(3);
+  res = blitz::sum(p->cf_to_rc_arr()(i1,i2) * (Cf.to_array()(i2) - p->cf_offset_arr()(i2)), i2);
+  X = res(0);
+  Y = res(1);
+  Z = res(2);
+}
+
 bool LocalRcConverter::is_same
 (const CoordinateConverter& Conv) const
 {

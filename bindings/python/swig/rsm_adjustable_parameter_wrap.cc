@@ -7351,6 +7351,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_has_ground_coordinate_parameter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmAdjustableParameter *arg1 = (GeoCal::RsmAdjustableParameter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmAdjustableParameter const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmAdjustableParameter__v_has_ground_coordinate_parameter" "', argument " "1"" of type '" "GeoCal::RsmAdjustableParameter const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmAdjustableParameter > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmAdjustableParameter * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::RsmAdjustableParameter const *)arg1)->has_ground_coordinate_parameter();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmAdjustableParameter___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmAdjustableParameter *arg1 = (GeoCal::RsmAdjustableParameter *) 0 ;
@@ -7514,6 +7557,16 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This is not a problem for boost serialization (which keeps the NAIF\n"
 		"code), just for NITF TRE. \n"
+		""},
+	 { (char *)"RsmAdjustableParameter__v_has_ground_coordinate_parameter", (PyCFunction)_wrap_RsmAdjustableParameter__v_has_ground_coordinate_parameter, METH_O, (char *)"\n"
+		"\n"
+		"virtual bool GeoCal::RsmAdjustableParameter::has_ground_coordinate_parameter() const =0\n"
+		"The derivative handling requires different handling for ground\n"
+		"coordinate adjusting parameters vs.\n"
+		"\n"
+		"just image coordinate adjusting parameters. This function lets the Rsm\n"
+		"class know if it needs to worry about the ground coordinate adjusting\n"
+		"parameters. \n"
 		""},
 	 { (char *)"RsmAdjustableParameter___str__", (PyCFunction)_wrap_RsmAdjustableParameter___str__, METH_O, NULL},
 	 { (char *)"delete_RsmAdjustableParameter", (PyCFunction)_wrap_delete_RsmAdjustableParameter, METH_O, (char *)"\n"

@@ -3,6 +3,7 @@
 #include "rsm.h"
 #include "rsm_image_ground_connection.h"
 #include "rsm_fixture.h"
+#include "local_rectangular_coordinate.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -39,7 +40,64 @@ BOOST_AUTO_TEST_CASE(image_correction_jac_test)
   eps = 1e-2;
   blitz::Array<double, 2> jacfd = rigc.image_coordinate_jac_parm_fd(gp, eps);
   blitz::Array<double, 2> jac = rigc.image_coordinate_jac_parm(gp);
+  if(false)
+    std::cerr << jacfd << "\n"
+	      << jac << "\n";
   BOOST_CHECK_MATRIX_CLOSE_TOL(jacfd, jac, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(ground_rotation_jac_test)
+{
+  double hmin = rpc.height_offset - rpc.height_scale;
+  double hmax = rpc.height_offset + rpc.height_scale;
+  boost::shared_ptr<Rsm> r = boost::make_shared<Rsm>
+    (boost::make_shared<RsmRationalPolynomial>(3,3,3,3,3,3,3,3),
+     boost::make_shared<LocalRcConverter>(boost::make_shared<LocalRcParameter>(*igc)));
+  r->fit(*igc, hmin, hmax);
+  ImageCoordinate ic_expect = rpc.image_coordinate(gp);
+  ImageCoordinate ic = r->image_coordinate(gp);
+  BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
+  BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
+
+  RsmImageGroundConnection rigc(r, boost::make_shared<SimpleDem>(),
+		boost::make_shared<MemoryRasterImage>(100, 300, 0));
+  boost::shared_ptr<RsmAdjustableParameterA> adj = boost::make_shared<RsmAdjustableParameterA>(*igc, *r->rsm_id(), "Triangulation_1", false, true, false);
+  r->rsm_adjustable_parameter(adj);
+  blitz::Array<double, 1> eps(rigc.parameter_subset().rows());
+  eps = 1e-6;
+  blitz::Array<double, 2> jacfd = rigc.image_coordinate_jac_parm_fd(gp, eps);
+  blitz::Array<double, 2> jac = rigc.image_coordinate_jac_parm(gp);
+  if(false)
+    std::cerr << jacfd << "\n"
+	      << jac << "\n";
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jacfd, jac, 1e-3);
+}
+
+BOOST_AUTO_TEST_CASE(ground_correction_jac_test)
+{
+  double hmin = rpc.height_offset - rpc.height_scale;
+  double hmax = rpc.height_offset + rpc.height_scale;
+  boost::shared_ptr<Rsm> r = boost::make_shared<Rsm>
+    (boost::make_shared<RsmRationalPolynomial>(3,3,3,3,3,3,3,3),
+     boost::make_shared<LocalRcConverter>(boost::make_shared<LocalRcParameter>(*igc)));
+  r->fit(*igc, hmin, hmax);
+  ImageCoordinate ic_expect = rpc.image_coordinate(gp);
+  ImageCoordinate ic = r->image_coordinate(gp);
+  BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
+  BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
+
+  RsmImageGroundConnection rigc(r, boost::make_shared<SimpleDem>(),
+		boost::make_shared<MemoryRasterImage>(100, 300, 0));
+  boost::shared_ptr<RsmAdjustableParameterA> adj = boost::make_shared<RsmAdjustableParameterA>(*igc, *r->rsm_id(), "Triangulation_1", false, false, true);
+  r->rsm_adjustable_parameter(adj);
+  blitz::Array<double, 1> eps(rigc.parameter_subset().rows());
+  eps = 1e-6;
+  blitz::Array<double, 2> jacfd = rigc.image_coordinate_jac_parm_fd(gp, eps);
+  blitz::Array<double, 2> jac = rigc.image_coordinate_jac_parm(gp);
+  if(false)
+    std::cerr << jacfd << "\n"
+	      << jac << "\n";
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jacfd, jac, 1e-3);
 }
 
 BOOST_AUTO_TEST_CASE(tre)

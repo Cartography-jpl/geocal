@@ -1,4 +1,5 @@
 #include "rsm.h"
+#include "local_rectangular_coordinate.h"
 #include "ostream_pad.h"
 #include "geocal_gsl_root.h"
 #include "geocal_serialize_support.h"
@@ -248,18 +249,32 @@ Rsm::image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   if(!rparm)
     return blitz::Array<double, 2>(2, 0);
   blitz::Range ra = blitz::Range::all();
+  blitz::firstIndex i1; blitz::secondIndex i2; blitz::thirdIndex i3;
+  // Currently only handle LocalRcConverter if we need to include
+  // ground coordinate parameters.
+  boost::shared_ptr<LocalRcConverter> gconv =
+    boost::dynamic_pointer_cast<LocalRcConverter>(coordinate_converter());
+  if(!gconv && rparm->has_ground_coordinate_parameter())
+    throw Exception("Currently we can only calculate image_coordinate jacobians for adjustments including ground coordinates if we are using LocalRectangularCoordinate as our RSM coordinate system.");
+  
   ArrayAd<double, 1> poriginal = rparm->parameter_with_derivative();
   blitz::Array<double, 2> jac(2, poriginal.rows());
   const_cast<RsmAdjustableParameter&>(*rparm).add_identity_gradient();
   ArrayAd<double, 1> gcadj;
   AutoDerivative<double> lndelta, smpdelta;
   rparm->adjustment_with_derivative(Gc, gcadj, lndelta, smpdelta);
-  // Need to account for ground derivative, ignored for now.
-  // double xadj, yadj, zadj;
-  // coordinate_converter()->convert_to_coordinate(*gcadj, xadj, yadj, zadj);
-  // ImageCoordinate ic = rp->image_coordinate(xadj, yadj, zadj);
-  jac(0, ra) = lndelta.gradient();
-  jac(1, ra) = smpdelta.gradient();
+  if(rparm->has_ground_coordinate_parameter()) {
+    blitz::Array<AutoDerivative<double>, 1> x(3);
+    gconv->convert_from_cf(gcadj, x(0), x(1), x(2));
+    blitz::Array<double, 2> dx_dp = ArrayAd<double, 1>(x).jacobian();
+    blitz::Array<double, 2> dic_dx =
+      rp->image_coordinate_jacobian(x(0).value(), x(1).value(), x(2).value());
+    jac = blitz::sum(dic_dx(i1, i3) * dx_dp(i3, i2), i3);
+  } else {
+    jac = 0;
+  }
+  jac(0, ra) += lndelta.gradient();
+  jac(1, ra) += smpdelta.gradient();
   const_cast<RsmAdjustableParameter&>(*rparm).parameter_with_derivative(poriginal);
   return jac;
 }

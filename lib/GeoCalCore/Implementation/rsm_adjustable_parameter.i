@@ -32,6 +32,7 @@ public:
   %python_attribute_with_set(rsm_suport_data_edition, std::string);
   %python_attribute_with_set(triangulation_id, std::string);
   %python_attribute_with_set(naif_code, int);
+  %python_attribute(has_ground_coordinate_parameter, bool);
   virtual std::string print_to_string() const;
   %pickle_serialization()
 };

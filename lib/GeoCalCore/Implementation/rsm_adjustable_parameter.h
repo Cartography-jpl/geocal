@@ -82,6 +82,15 @@ public:
   virtual void adjustment_with_derivative(const GroundCoordinate& Gc,
 	  ArrayAd<double, 1>& Cf_adjusted, AutoDerivative<double>& Lndelta,
 	  AutoDerivative<double>& Smpdelta) const = 0;
+
+//-----------------------------------------------------------------------
+/// The derivative handling requires different handling for ground
+/// coordinate adjusting parameters vs. just image coordinate
+/// adjusting parameters. This function lets the Rsm class know if it
+/// needs to worry about the ground coordinate adjusting parameters.
+//-----------------------------------------------------------------------
+
+  virtual bool has_ground_coordinate_parameter() const = 0;
   std::string base_tre_string() const;
   void base_read_tre_string(std::istream& In);
   virtual void print(std::ostream& Os) const

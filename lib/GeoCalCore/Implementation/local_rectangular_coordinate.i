@@ -10,6 +10,8 @@
 %base_import(ground_coordinate)
 %base_import(coordinate_converter)
 %import "image_ground_connection.i"
+%import "array_ad.i"
+%import "auto_derivative.i"
 
 %geocal_shared_ptr(GeoCal::LocalRcParameter);
 %geocal_shared_ptr(GeoCal::LocalRectangularCoordinate);
@@ -50,6 +52,9 @@ public:
     convert_from_coordinate(double X, double Y, double Z = 0) const;
   virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
   double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
+  ArrayAd<double, 1> convert_to_cf(const AutoDerivative<double>& X,
+				   const AutoDerivative<double>& Y,
+				   const AutoDerivative<double>& Z) const;
   %python_attribute(parameter, boost::shared_ptr<LocalRcParameter>);
   %pickle_serialization();
 };

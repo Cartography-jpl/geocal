@@ -58,6 +58,7 @@ public:
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;
   
+  virtual bool has_ground_coordinate_parameter() const;
   std::string tre_string() const;
   static boost::shared_ptr<RsmAdjustableParameterA>
   read_tre_string(const std::string& Tre_in);

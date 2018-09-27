@@ -323,6 +323,16 @@ class LocalRcConverter(geocal_swig.coordinate_converter.CoordinateConverter):
         return _local_rectangular_coordinate.LocalRcConverter_convert_from_coordinate(self, X, Y, Z)
 
 
+    def convert_to_cf(self, X, Y, Z):
+        """
+
+        ArrayAd< double, 1 > LocalRcConverter::convert_to_cf(const AutoDerivative< double > &X, const AutoDerivative< double > &Y,
+        const AutoDerivative< double > &Z) const
+
+        """
+        return _local_rectangular_coordinate.LocalRcConverter_convert_to_cf(self, X, Y, Z)
+
+
     def _v_parameter(self):
         """
 
@@ -342,6 +352,7 @@ class LocalRcConverter(geocal_swig.coordinate_converter.CoordinateConverter):
 
     __swig_destroy__ = _local_rectangular_coordinate.delete_LocalRcConverter
 LocalRcConverter.convert_from_coordinate = new_instancemethod(_local_rectangular_coordinate.LocalRcConverter_convert_from_coordinate, None, LocalRcConverter)
+LocalRcConverter.convert_to_cf = new_instancemethod(_local_rectangular_coordinate.LocalRcConverter_convert_to_cf, None, LocalRcConverter)
 LocalRcConverter._v_parameter = new_instancemethod(_local_rectangular_coordinate.LocalRcConverter__v_parameter, None, LocalRcConverter)
 LocalRcConverter_swigregister = _local_rectangular_coordinate.LocalRcConverter_swigregister
 LocalRcConverter_swigregister(LocalRcConverter)

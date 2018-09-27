@@ -7614,6 +7614,138 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_LocalRcConverter_convert_to_cf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::LocalRcConverter *arg1 = (GeoCal::LocalRcConverter *) 0 ;
+  GeoCal::AutoDerivative< double > *arg2 = 0 ;
+  GeoCal::AutoDerivative< double > *arg3 = 0 ;
+  GeoCal::AutoDerivative< double > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::LocalRcConverter const > tempshared1 ;
+  boost::shared_ptr< GeoCal::LocalRcConverter const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::AutoDerivative< double > const > tempshared4 ;
+  PyObject *swig_obj[4] ;
+  SwigValueWrapper< GeoCal::ArrayAd< double,1 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"LocalRcConverter_convert_to_cf",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LocalRcConverter_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LocalRcConverter_convert_to_cf" "', argument " "1"" of type '" "GeoCal::LocalRcConverter const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LocalRcConverter > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::LocalRcConverter > * >(argp1);
+      arg1 = const_cast< GeoCal::LocalRcConverter * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::LocalRcConverter > * >(argp1);
+      arg1 = const_cast< GeoCal::LocalRcConverter * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LocalRcConverter_convert_to_cf" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LocalRcConverter_convert_to_cf" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2);
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "LocalRcConverter_convert_to_cf" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LocalRcConverter_convert_to_cf" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3);
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::AutoDerivative<double> *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__AutoDerivativeT_double_t,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "LocalRcConverter_convert_to_cf" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LocalRcConverter_convert_to_cf" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4);
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::AutoDerivative< double > * >(reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::LocalRcConverter const *)arg1)->convert_to_cf((GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_LocalRcConverter__v_parameter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::LocalRcConverter *arg1 = (GeoCal::LocalRcConverter *) 0 ;
@@ -7794,6 +7926,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"LocalRcConverter_convert_from_coordinate", _wrap_LocalRcConverter_convert_from_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual boost::shared_ptr<GroundCoordinate> GeoCal::LocalRcConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
+		"\n"
+		""},
+	 { (char *)"LocalRcConverter_convert_to_cf", _wrap_LocalRcConverter_convert_to_cf, METH_VARARGS, (char *)"\n"
+		"\n"
+		"ArrayAd< double, 1 > LocalRcConverter::convert_to_cf(const AutoDerivative< double > &X, const AutoDerivative< double > &Y,\n"
+		"const AutoDerivative< double > &Z) const\n"
 		"\n"
 		""},
 	 { (char *)"LocalRcConverter__v_parameter", (PyCFunction)_wrap_LocalRcConverter__v_parameter, METH_O, (char *)"\n"

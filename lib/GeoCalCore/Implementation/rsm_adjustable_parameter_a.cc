@@ -240,6 +240,15 @@ void RsmAdjustableParameterA::activate_ground_rotation()
       parm_index(i) = ++ind;
 }
 
+// See base class for description.
+bool RsmAdjustableParameterA::has_ground_coordinate_parameter() const
+{
+  for(int i = 20; i < parm_index.rows(); ++i)
+    if(parm_index(i) > 0)
+      return true;
+  return false;
+}
+
 //-----------------------------------------------------------------------
 /// Any set of parameters can be activated, in any desired order. But
 /// we tend to activate them in groups. This function turns on all of
@@ -318,12 +327,12 @@ void RsmAdjustableParameterA::delta_x
 {
   const blitz::Array<double, 1>& p = full_parameter_.value();
   double dx = p(20);
-  double dy = p(22);
-  double dz = p(23);
-  double alpha = p(24);
-  double beta = p(25);
-  double kappa = p(26);
-  double s = p(27);
+  double dy = p(21);
+  double dz = p(22);
+  double alpha = p(23);
+  double beta = p(24);
+  double kappa = p(25);
+  double s = p(26);
   xdelta = dx + s * X     + kappa * Y - beta * Z; 
   ydelta = dy - kappa * X + s * Y     + alpha * Z;
   zdelta = dz + beta * X  - alpha * Y + s * Z;
@@ -339,12 +348,12 @@ void RsmAdjustableParameterA::delta_x
 {
   const ArrayAd<double, 1>& p = full_parameter_;
   AutoDerivative<double> dx = p(20);
-  AutoDerivative<double> dy = p(22);
-  AutoDerivative<double> dz = p(23);
-  AutoDerivative<double> alpha = p(24);
-  AutoDerivative<double> beta = p(25);
-  AutoDerivative<double> kappa = p(26);
-  AutoDerivative<double> s = p(27);
+  AutoDerivative<double> dy = p(21);
+  AutoDerivative<double> dz = p(22);
+  AutoDerivative<double> alpha = p(23);
+  AutoDerivative<double> beta = p(24);
+  AutoDerivative<double> kappa = p(25);
+  AutoDerivative<double> s = p(26);
   xdelta = dx + s * X     + kappa * Y - beta * Z; 
   ydelta = dy - kappa * X + s * Y     + alpha * Z;
   zdelta = dz + beta * X  - alpha * Y + s * Z;
@@ -409,8 +418,7 @@ void RsmAdjustableParameterA::adjustment_with_derivative
   AutoDerivative<double> xdelta, ydelta, zdelta;
   delta_x(x, y, z, xdelta, ydelta, zdelta);
   delta_ls(x, y, z, Lndelta, Smpdelta);
-  // Cf calculation needed
-  Cf_adjusted.resize(3, full_parameter_.number_variable());
+  Cf_adjusted.reference(coordinate_converter()->convert_to_cf(x + xdelta, y + ydelta, z + zdelta));
 }
 
 // See base class for description.

@@ -3,6 +3,7 @@
 #include "ground_coordinate.h"
 #include "coordinate_converter.h"
 #include "geocal_matrix.h"
+#include "array_ad.h"
 #include <boost/make_shared.hpp>
 
 namespace GeoCal {
@@ -20,6 +21,20 @@ public:
   virtual ~LocalRcParameter() {}
   virtual void print(std::ostream& Os) const
   { Os << "LocalRcParameter"; }
+  blitz::Array<double, 2> cf_to_rc_arr() const
+  { blitz::Array<double, 2> res(3,3);
+    for(int i = 0; i < 3; ++i)
+      for(int j = 0; j < 3; ++j)
+	res(i,j) = cf_to_rc[i][j];
+    return res;
+  }
+  blitz::Array<double, 1> cf_offset_arr() const
+  {
+    blitz::Array<double, 1> res(3);
+    for(int i = 0; i < 3; ++i)
+      res(i) = cf_offset[i];
+    return res;
+  }
   double cf_to_rc[3][3];
   boost::array<double, 3> cf_offset;
   boost::shared_ptr<CartesianFixed> cf_prototype;
@@ -92,6 +107,14 @@ public:
     LocalRectangularCoordinate c(p, Gc);
     X = c.position[0]; Y = c.position[1]; Z = c.position[2];
   }
+  ArrayAd<double, 1> convert_to_cf(const AutoDerivative<double>& X,
+				   const AutoDerivative<double>& Y,
+				   const AutoDerivative<double>& Z) const;
+  void convert_from_cf(const ArrayAd<double, 1>& Cf,
+		       AutoDerivative<double>& X,
+		       AutoDerivative<double>& Y,
+		       AutoDerivative<double>& Z) const;
+  
   virtual boost::shared_ptr<GroundCoordinate> create
   (const GroundCoordinate& Gc) const
   { return boost::make_shared<LocalRectangularCoordinate>(p, Gc); }

@@ -320,6 +320,25 @@ class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
       self._v_naif_code(value)
 
 
+    def _v_has_ground_coordinate_parameter(self):
+        """
+
+        virtual bool GeoCal::RsmAdjustableParameter::has_ground_coordinate_parameter() const =0
+        The derivative handling requires different handling for ground
+        coordinate adjusting parameters vs.
+
+        just image coordinate adjusting parameters. This function lets the Rsm
+        class know if it needs to worry about the ground coordinate adjusting
+        parameters. 
+        """
+        return _rsm_adjustable_parameter.RsmAdjustableParameter__v_has_ground_coordinate_parameter(self)
+
+
+    @property
+    def has_ground_coordinate_parameter(self):
+        return self._v_has_ground_coordinate_parameter()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -332,6 +351,7 @@ RsmAdjustableParameter._v_image_identifier = new_instancemethod(_rsm_adjustable_
 RsmAdjustableParameter._v_rsm_suport_data_edition = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_suport_data_edition, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_triangulation_id = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_triangulation_id, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_naif_code = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_naif_code, None, RsmAdjustableParameter)
+RsmAdjustableParameter._v_has_ground_coordinate_parameter = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_has_ground_coordinate_parameter, None, RsmAdjustableParameter)
 RsmAdjustableParameter.__str__ = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter___str__, None, RsmAdjustableParameter)
 RsmAdjustableParameter_swigregister = _rsm_adjustable_parameter.RsmAdjustableParameter_swigregister
 RsmAdjustableParameter_swigregister(RsmAdjustableParameter)

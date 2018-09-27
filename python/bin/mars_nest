@@ -285,57 +285,6 @@ def accck(fin,fref):
            "zerolim=10.0", "zerolim2=10.0"]
     run_cmd(cmd)
 
-def fix_projection(fin, fout, band):
-    '''There are potential issues with some of the map projections with 
-    Mars, errors or missing pieces. This create a VRT file that fixes any 
-    of these problems.'''
-    cmd = ["gdal_translate", "-of", "VRT", "-b", str(band), fin, fout]
-    run_cmd(cmd)
-    f = gdal.Open(fout, gdal.GA_Update)
-    p = str(f.GetProjectionRef())
-    # The PolarSterographic can have the wrong scale factor of 0. This
-    # appears to be an error in ISIS, they don't actually set the scale
-    # factor and assume it defaults to 1, when actually it defaults to 0. 
-    # See https://trac.osgeo.org/gdal/ticket/4499. Fix this if this is the 
-    # projection. 
-    if(re.search("Polar_Stereographic", p)):
-        p = re.sub('PARAMETER\["scale_factor",0\]', 
-                   'PARAMETER["scale_factor",1]', p)
-        f.SetProjection(p)
-    # The standard_parallel_1 and latitude_of_origin are sometimes swapped for
-    # HiRISE. Examples I've seen have standard_parallel_1 0, so also possible
-    # this is just a mislabeling of standard_parallel_1 as latitude_of_origin,
-    # combined with gdal or some other tool filling in the missing
-    # standard_parallel_1 with default value of 0. In any case, we swap
-    # both values since this doesn't hurt even if standard_parallel_1 is
-    # always zero.
-    #
-    # Not sure if this swap/misname is always the case, or just with some data.
-    # The ticket https://trac.osgeo.org/gdal/ticket/2706 seems to talk about
-    # this to some level. We have a heuristic here which checks to a name
-    # "Equirectangular MARS" or "Equirectangular_MARS", and if found we swap
-    # the standard_parallel_1 and latitude_of_origin. Since I'm not sure that
-    # this won't corrupt some actually good data, we only do this if the
-    # user selected the --hirise-correction option
-    if(args.hirise_correction and
-       re.search("Equirectangular[_ ]MARS", p)):
-        m1 = re.search('PARAMETER\["latitude_of_origin",([\\d\\.]+)\]', p)
-        m2 = re.search('PARAMETER\["standard_parallel_1",([\\d\\.]+)\]', p)
-        if(m1 and m2 and m1.group(1) != m2.group(1)):
-            print("MSG:----------------------------------------------------\n")
-            print("MSG: Doing HiRISE correction of swapping latitude_of_origin and standard_parallel_1 for the Equirectangular projection")
-            sys.stdout.flush()
-            p = re.sub('PARAMETER\["latitude_of_origin",[\\d\\.]+\]',
-                       'PARAMETER["latitude_of_origin",' + m2.group(1) + ']',
-                       p)
-            p = re.sub('PARAMETER\["standard_parallel_1",[\\d\\.]+\]',
-                       'PARAMETER["standard_parallel_1",' + m1.group(1) + ']',
-                       p)
-            f.SetProjection(p)
-            
-    # Force close/flush
-    f = None
-
 # Various output names
 refimg_fixed = "%s.vrt" % (args.ref_base_name)
 refimg_res1 = "%s_%s.img" % (args.ref_base_name, args.ref_image_resolution_name)
@@ -349,11 +298,11 @@ cimg_res1 = "%s_corr_%s.img" % (args.image_base_name,
 cimg_res2 = "%s_corr_%s.img" % (args.image_base_name, 
                                 args.image_resolution_name)
 
-fix_projection(args.ref_image, refimg_fixed, args.band_ref)
-fix_projection(args.image, img_fixed, args.band_image)
+geocal.mars_fix_projection(args.ref_image, refimg_fixed, args.band_ref)
+geocal.mars_fix_projection(args.image, img_fixed, args.band_image)
 if(args.use_projection):
     use_projection_fixed = "%s_proj.vrt" % (args.image_base_name)
-    fix_projection(args.use_projection, use_projection_fixed, 1)
+    geocal.mars_fix_projection(args.use_projection, use_projection_fixed, 1)
 if(not check_intersection(refimg_fixed, img_fixed)):
     raise RuntimeError("The two images have no area of intersection")
 if(args.use_ref_image_projection):

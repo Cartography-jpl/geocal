@@ -9,6 +9,7 @@ import re
 import geocal_swig
 import pickle
 import subprocess
+import osgeo.gdal as gdal
 
 # This contains miscellenous routines that don't really belong anywhere else.
 
@@ -132,6 +133,67 @@ def run_tee(exec_cmd, out_fh = None, quiet = False):
                                             output=stdout)
     return stdout
 
+def mars_fix_projection(fin, fout, band, hirise_correction=False):
+    '''There are potential issues with some of the map projections with 
+    Mars, errors or missing pieces. This create a VRT file that fixes any 
+    of these problems.
+
+    fin should be a file name with any readable GDAL file (e.g., PDS, 
+    HiRISE JPEG2000). fout will be a ".vrt" file with the projection 
+    information corrected.
+
+    There is a HiRISE problem that I'm not sure is always there (see code 
+    comment for details). Since this could potentially corrupt good data,
+    we only include this correction of hirise_correction is set to True.
+    '''
+    cmd = ["gdal_translate", "-of", "VRT", "-b", str(band), fin, fout]
+    subprocess.run(cmd, check=True)
+    f = gdal.Open(fout, gdal.GA_Update)
+    p = str(f.GetProjectionRef())
+    # The PolarSterographic can have the wrong scale factor of 0. This
+    # appears to be an error in ISIS, they don't actually set the scale
+    # factor and assume it defaults to 1, when actually it defaults to 0. 
+    # See https://trac.osgeo.org/gdal/ticket/4499. Fix this if this is the 
+    # projection. 
+    if(re.search("Polar_Stereographic", p)):
+        p = re.sub('PARAMETER\["scale_factor",0\]', 
+                   'PARAMETER["scale_factor",1]', p)
+        f.SetProjection(p)
+    # The standard_parallel_1 and latitude_of_origin are sometimes swapped for
+    # HiRISE. Examples I've seen have standard_parallel_1 0, so also possible
+    # this is just a mislabeling of standard_parallel_1 as latitude_of_origin,
+    # combined with gdal or some other tool filling in the missing
+    # standard_parallel_1 with default value of 0. In any case, we swap
+    # both values since this doesn't hurt even if standard_parallel_1 is
+    # always zero.
+    #
+    # Not sure if this swap/misname is always the case, or just with some data.
+    # The ticket https://trac.osgeo.org/gdal/ticket/2706 seems to talk about
+    # this to some level. We have a heuristic here which checks to a name
+    # "Equirectangular MARS" or "Equirectangular_MARS", and if found we swap
+    # the standard_parallel_1 and latitude_of_origin. Since I'm not sure that
+    # this won't corrupt some actually good data, we only do this if the
+    # user selected the --hirise-correction option
+    if(hirise_correction and
+       re.search("Equirectangular[_ ]MARS", p)):
+        m1 = re.search('PARAMETER\["latitude_of_origin",([\\d\\.]+)\]', p)
+        m2 = re.search('PARAMETER\["standard_parallel_1",([\\d\\.]+)\]', p)
+        if(m1 and m2 and m1.group(1) != m2.group(1)):
+            print("MSG:----------------------------------------------------\n")
+            print("MSG: Doing HiRISE correction of swapping latitude_of_origin and standard_parallel_1 for the Equirectangular projection")
+            sys.stdout.flush()
+            p = re.sub('PARAMETER\["latitude_of_origin",[\\d\\.]+\]',
+                       'PARAMETER["latitude_of_origin",' + m2.group(1) + ']',
+                       p)
+            p = re.sub('PARAMETER\["standard_parallel_1",[\\d\\.]+\]',
+                       'PARAMETER["standard_parallel_1",' + m1.group(1) + ']',
+                       p)
+            f.SetProjection(p)
+            
+    # Force close/flush
+    f = None
+    
+    
 
 __all__ = ["makedirs_p", "cib01_data", "cib01_mapinfo", "planet_mapinfo",
-           "pid_exists", "comment_remover", "run_tee"]
+           "pid_exists", "comment_remover", "run_tee", "mars_fix_projection"]

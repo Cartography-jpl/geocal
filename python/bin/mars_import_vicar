@@ -56,7 +56,7 @@ subprocess.run(cmd, check=True)
 os.remove(fixed_name)
 try:
     os.remove(args.out_image + ".aux.xml")
-except RuntimeError:
+except FileNotFoundError:
     pass
 
 

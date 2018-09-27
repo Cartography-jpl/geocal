@@ -1,0 +1,110 @@
+#! /usr/bin/env python
+#
+# This takes a VICAR file with a RSM and a set of tiepoints, and uses this
+# to produce a improved RSM.
+
+import geocal
+import subprocess
+import os
+
+version = "September 27, 2018"
+usage='''Usage:
+  rsm_improve [options] <image> <dem_file> <tiepoint_file> <output>
+  rsm_improve -h | --help
+  rsm_improve -v | --version
+
+This takes a VICAR file with a RSM and a set of tiepoints, and uses this
+to produce a improved RSM.
+
+The image should be a VICAR file with a associated RSM (e.g, output from
+mars_generate_rsm). The dem_file should be the output of shelve_dem 
+(e.g., a ".xml" file). Tiepoint_file is the output of rsm_tiepoint.
+We copy the input file to the output name, and create a new RSM for it
+with an updated adjustment.
+
+The adjustment can be one of several set of parameters, see the option.
+
+Options:
+  -h --help         
+       Print this message
+
+  --image-correction
+       Use the image correction parameters. This is the default if nothing
+       else is selected.
+
+  --ground-rotation
+       Use the ground rotation correction.
+
+  --ground-correction
+       Use the ground correction.
+
+  --verbose
+       Print more information as we run.
+
+  -v --version      
+       Print program version
+'''
+
+# Mapping between long name and shorter vicar name
+long_name_to_vicar = { "image" : "img",
+                       "output" : "out",
+                       "dem_file" : "dem",
+                       "image_correction" : "icor",
+                       "ground_rotation" : "grot",
+                       "ground_correction" : "gcor",
+                       "verbose" : "verbose"
+                       }
+
+
+args = geocal.docopt_simple(usage, version=version,
+                     long_name_to_vicar=long_name_to_vicar)
+
+dem = geocal.read_shelve(args.dem_file)
+tpcol = geocal.read_shelve(args.tiepoint_file)
+rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
+if(geocal.VicarLiteFile.is_vicar_file(args.image)):
+    img = geocal.VicarLiteRasterImage(args.image)
+else:
+    img = geocal.GdalRasterImage(args.image)
+igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
+igccol = geocal.IgcArray([igc,])
+icorr = args.image_correction
+if((not args.image_correction) and (not args.ground_correction) and
+   (not args.ground_rotation)):
+    # Default is image correction, if nothing else specified
+    icorr = True
+adj = geocal.RsmAdjustableParameterA(igc, rsm.rsm_id, "Triangulation_1",
+                                     icorr, args.ground_rotation,
+                                     args.ground_correction)
+rsm.rsm_adjustable_parameter = adj
+print("Initial data:")
+print("----------------------------------")
+print(igccol)
+print("----------------------------------")
+outbase = os.path.splitext(args.output)[0]
+initial_igcfname = outbase + "_igccol_initial.xml"
+sba_igcfname = outbase + "_igccol_sba.xml"
+tp_igcfname = outbase + "_tp_sba.xml"
+rsmfname = outbase + ".rsm.xml"
+geocal.write_shelve(initial_igcfname, igccol)
+subprocess.run(["sba", "--hold-gcp-fixed", "--verbose",
+                initial_igcfname, args.tiepoint_file, sba_igcfname,
+                tp_igcfname], check=True)
+igccol_sba = geocal.read_shelve(sba_igcfname)
+try:
+    os.remove(args.output)
+except FileNotFoundError:
+    pass
+subprocess.run(["ln", "-s", args.image, args.output], check=True)
+geocal.write_shelve(rsmfname, igccol_sba.image_ground_connection(0).rsm)
+print("Improved data:")
+print("----------------------------------")
+print(igccol_sba)
+print("----------------------------------")
+df = tpcol.data_frame(igccol, 0)
+print("Initial distance %f m" % df.ground_2d_distance.quantile(.68))
+df_sba = tpcol.data_frame(igccol_sba, 0)
+print("Improved distance %f m" % df_sba.ground_2d_distance.quantile(.68))
+
+
+                            

@@ -9,6 +9,7 @@ dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/nitf_to_vicar
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/nitfinfo
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/dem_generate
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/mars_nest
+dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/mars_import_vicar
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/mars_generate_rsm
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/rsm_project
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/rsm_tiepoint

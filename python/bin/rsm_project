@@ -11,13 +11,12 @@ import logging
 version = "October 2, 2017"
 usage='''Usage:
   rsm_project [options] <image> <dem_file> <output>
-  rsm_project [options] <image> <dem_file> <datum_file> <output>
-  rsm_project --srtm <output>
-  rsm_project --constant-dem=h <output>
   rsm_project -h | --help
   rsm_project -v | --version
 
 rsm_project takes a VICAR file with a RSM and projects it to the surface.
+
+The dem_file should be the output of shelve_dem (e.g., a ".xml" file)
 
 Example:
     mars_generate_rsm /raid26/tllogan/mars/mawrth_vallis/source/unmapped/P16_007388_2049_XI_24N020W.IMG ctx1
@@ -26,28 +25,6 @@ Example:
 Options:
   -h --help         
        Print this message
-
-  --outside-dem-not-error
-       If a program attempts to read a DEM value outside of the supplied 
-       file, this is normally treated as an error. Alternatively, you can
-       specify this option and we will return a height of "0" for any
-       attempt to read outside the DEM.
-
-  --constant-dem=h
-       Use a constant height DEM (a SimpleDem), with the given height.
-
-  --dem-band=b
-       The band of the DEM file to use (1 based). [default: 1]
-
-  --datum-band=b
-       The band of the Datum file to use (1 based). [default: 1]
-
-  --constant-datum=u
-       Use a datum with a constant undulation. This is useful as a quick
-       way to add an offset to  DEM file. [default: 0.0]
-
-  --srtm
-       Use the SRTM rather than supplying a DEM file.
 
   --avg-factor=d
        The averaging factor to use on the original data before projecting
@@ -111,15 +88,8 @@ Options:
 
 # Mapping between long name and shorter vicar name
 long_name_to_vicar = { "image" : "img",
-                       "dem_file" : "dem",
-                       "datum_file" : "datum",
                        "output" : "out",
-                       "strtm" : "srtm",
-                       "constant_dem" : "consdem",
-                       "outside_dem_not_error" : "okout",
-                       "dem_band" : "demband",
-                       "datum_band" : "datumband",
-                       "constant_datum" : "consdatum",
+                       "dem_file" : "dem",
                        "avg_factor" : "avgfactor",
                        "bounding_box" : "bbox",
                        "cover_image": "cimage",
@@ -135,34 +105,6 @@ long_name_to_vicar = { "image" : "img",
 
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
-
-# This is shelve_dem. We will want to come up with a better way of stringing
-# these together, but for now just copy this code over.
-
-def create_dem(args):
-    dem = None
-    if(args.srtm):
-        dem = geocal.SrtmDem()
-    elif(args.constant_dem and args.constant_dem != -9999.0):
-        dem = geocal.SimpleDem(args.constant_dem)
-    else:
-        if(args.datum_file):
-            datum = geocal.GdalDatum(args.datum_file, args.datum_band)
-        else:
-            datum = geocal.SimpleDatum(args.constant_datum)
-        if geocal.VicarLiteFile.is_vicar_file(args.dem_file):
-            dem = geocal.VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
-                               datum, args.dem_band)
-        else:
-            # Check for mola file
-            t = subprocess.run(["file", "-b", args.dem_file], stdout=subprocess.PIPE)
-            if(t.returncode == 0 and t.stdout.find(b"PDS image data") >= 0):
-                if(geocal.pds_label(args.dem_file)["DATA_SET_ID"].find("MOLA") >= 0):
-                    dem = geocal.MolaDemFile(args.dem_file, not args.outside_dem_not_error)
-            if(dem is None):
-                dem = geocal.GdalDem(args.dem_file, datum, args.dem_band, 
-                              not args.outside_dem_not_error)
-    return dem
 
 def mars_default_mi(desired_resolution = 1):
     owrap = geocal.OgrWrapper(
@@ -229,7 +171,7 @@ def create_igc_map(igc, args):
         
     return igc_map
         
-dem = create_dem(args)
+dem = geocal.read_shelve(args.dem_file)
 rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
     img = geocal.VicarLiteRasterImage(args.image)

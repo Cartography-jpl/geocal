@@ -2807,6 +2807,7 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/nitfinfo \
 	$(srcdir)/$(srcpythonbin)/dem_generate \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
+	$(srcdir)/$(srcpythonbin)/mars_import_vicar \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/rsm_project \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \

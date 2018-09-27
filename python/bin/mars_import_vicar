@@ -1,0 +1,62 @@
+#! /usr/bin/env python
+#
+# Import a mars file into VICAR, correcting any errors in the map projection
+# information.
+
+import geocal
+import subprocess
+import os
+
+version = "September 27,2018"
+usage='''Usage:
+  mars_import_vicar [options] <image> <out_image> 
+  mars_import_vicar -h | --help
+  mars_import_vicar -v | --version
+
+Import a mars file into VICAR, correcting any errors in the map projection
+information.
+
+Options:
+  -h --help         
+       Print this message
+
+  --band=d
+       The band number to use if the input image contains
+       multiple bands. [default: 1]
+
+  --hirise-correction
+       Hirise imagery in equirectangular projection appears to have
+       the latitude_of_origin and standard_parallel_1 swapped for some
+       cases. This option turns on heuristics to identify and correct
+       the problem. Specify this parameter to turn on the heuristics.
+
+  -v --version      
+       Print program version
+'''
+
+# Mapping between long name and shorter vicar name
+long_name_to_vicar = { "image" : "img",
+                       "out_image" : "outimg",
+                       "band" : "band",
+                       "hirise_correction" : "hirisecorr"}
+
+args = geocal.docopt_simple(usage, version=version,
+                     long_name_to_vicar=long_name_to_vicar)
+
+fixed_name = os.path.splitext(args.out_image)[0] + ".vrt"
+geocal.mars_fix_projection(args.image, fixed_name, args.band,
+                           hirise_correction = args.hirise_correction)
+
+# Not 100% sure that all data should be Int16, but for now we assume this
+cmd = ["gdal_translate", "-of", "VICAR", "-ot", "Int16", fixed_name,
+       args.out_image]
+subprocess.run(cmd, check=True)
+
+# Remove VRT file
+os.remove(fixed_name)
+try:
+    os.remove(args.out_image + ".aux.xml")
+except RuntimeError:
+    pass
+
+

@@ -12,9 +12,6 @@ import logging
 version = "September 25, 2018"
 usage='''Usage:
   rsm_tiepoint [options] <image> <dem_file> <reference_image> <output>
-  rsm_tiepoint [options] <image> <dem_file> <datum_file> <reference_image> <output>
-  rsm_tiepoint --srtm <image> <reference_image> <output>
-  rsm_tiepoint --constant-dem=h <image> <reference_image> <output>
   rsm_tiepoint -h | --help
   rsm_tiepoint -v | --version
 
@@ -22,31 +19,12 @@ rsm_tiepoint takes a VICAR file with a RSM and projects it to the surface, and
 then collects tiepoints. By default the projected image is the base image
 name with "_proj" added. But you can specify any name you would like.
 
+The image and reference_image should be VICAR files. The dem_file should be
+the output of shelve_dem (e.g., a ".xml" file).
+
 Options:
   -h --help         
        Print this message
-
-  --outside-dem-not-error
-       If a program attempts to read a DEM value outside of the supplied 
-       file, this is normally treated as an error. Alternatively, you can
-       specify this option and we will return a height of "0" for any
-       attempt to read outside the DEM.
-
-  --constant-dem=h
-       Use a constant height DEM (a SimpleDem), with the given height.
-
-  --dem-band=b
-       The band of the DEM file to use (1 based). [default: 1]
-
-  --datum-band=b
-       The band of the Datum file to use (1 based). [default: 1]
-
-  --constant-datum=u
-       Use a datum with a constant undulation. This is useful as a quick
-       way to add an offset to  DEM file. [default: 0.0]
-
-  --srtm
-       Use the SRTM rather than supplying a DEM file.
 
   --grid-spacing=g
        Grid spacing to exactly calculate the image ground connection
@@ -126,15 +104,7 @@ Options:
 
 # Mapping between long name and shorter vicar name
 long_name_to_vicar = { "image" : "img",
-                       "dem_file" : "dem",
-                       "datum_file" : "datum",
                        "output" : "out",
-                       "strtm" : "srtm",
-                       "constant_dem" : "consdem",
-                       "outside_dem_not_error" : "okout",
-                       "dem_band" : "demband",
-                       "datum_band" : "datumband",
-                       "constant_datum" : "consdatum",
                        "grid_spacing" : "gspace",
                        "number_process" : "nproc",
 		       "proj_file_name" : "pname",
@@ -143,51 +113,12 @@ long_name_to_vicar = { "image" : "img",
                        "verbose" : "verbose"
                        }
 
-# This is shelve_dem. We will want to come up with a better way of stringing
-# these together, but for now just copy this code over.
-
-def create_dem(args):
-    dem = None
-    if(args.srtm):
-        dem = geocal.SrtmDem()
-    elif(args.constant_dem and args.constant_dem != -9999.0):
-        dem = geocal.SimpleDem(args.constant_dem)
-    else:
-        if(args.datum_file):
-            datum = geocal.GdalDatum(args.datum_file, args.datum_band)
-        else:
-            datum = geocal.SimpleDatum(args.constant_datum)
-        if geocal.VicarLiteFile.is_vicar_file(args.dem_file):
-            dem = geocal.VicarLiteDem(args.dem_file, not args.outside_dem_not_error, 
-                               datum, args.dem_band)
-        else:
-            # Check for mola file
-            t = subprocess.run(["file", "-b", args.dem_file], stdout=subprocess.PIPE)
-            if(t.returncode == 0 and t.stdout.find(b"PDS image data") >= 0):
-                if(geocal.pds_label(args.dem_file)["DATA_SET_ID"].find("MOLA") >= 0):
-                    dem = geocal.MolaDemFile(args.dem_file, not args.outside_dem_not_error)
-            if(dem is None):
-                dem = geocal.GdalDem(args.dem_file, datum, args.dem_band, 
-                              not args.outside_dem_not_error)
-    return dem
 
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
 # Project data to the surface
 cmd = ["rsm_project", ]
-if(args.outside_dem_not_error):
-    cmd.append("--outside-dem-not-error")
-if(args.constant_dem):
-    cmd.append("--constant-dem=%s" % args.constant_dem)
-if(args.dem_band):
-    cmd.append("--dem-band=%d" % args.dem_band)
-if(args.datum_band):
-    cmd.append("--datum-band=%d" % args.datum_band)
-if(args.constant_datum):
-    cmd.append("--constant-datum=%f" % args.constant_datum)
-if(args.srtm):
-    cmd.append("--srtm")
 cmd.append("--cover-image=%s" % args.reference_image)
 cmd.append("--resolution=-1")
 if(args.number_process):
@@ -197,10 +128,7 @@ if(args.process_number_line):
 if(args.process_number_sample):
     cmd.append("--process-number-sample=%d" % args.process_number_sample)
 cmd.append(args.image)
-if(args.dem_file):
-    cmd.append(args.dem_file)
-if(args.datum_file):
-    cmd.append(args.datum_file)
+cmd.append(args.dem_file)
 if(args.verbose):
     cmd.append("--verbose")
     
@@ -211,7 +139,7 @@ cmd.append(proj_fname)
 subprocess.run(cmd, check=True)
 
 
-dem = create_dem(args)
+dem = geocal.read_shelve(args.dem_file)
 rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
     img = geocal.VicarLiteRasterImage(args.image)

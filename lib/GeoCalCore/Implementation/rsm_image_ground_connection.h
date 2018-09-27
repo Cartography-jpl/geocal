@@ -76,12 +76,10 @@ public:
 		 boost::shared_ptr<CartesianFixed>& P) const;
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic,
-			const Dem& D) const
-  { return rsm_->ground_coordinate(Ic, D);}
+			const Dem& D) const;
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic,
-				  double H) const
-  { return rsm_->ground_coordinate_approx_height(Ic,H); }
+				  double H) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
   virtual void image_coordinate_with_status(const GroundCoordinate& Gc,

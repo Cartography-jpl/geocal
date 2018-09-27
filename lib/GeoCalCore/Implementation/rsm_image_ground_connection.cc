@@ -93,6 +93,29 @@ Array<double, 2> RsmImageGroundConnection::image_coordinate_jac_cf
   return res;
 }
 
+boost::shared_ptr<GroundCoordinate> 
+RsmImageGroundConnection::ground_coordinate_dem(const ImageCoordinate& Ic,
+						const Dem& D) const
+{
+  try {
+    return rsm_->ground_coordinate(Ic, D);
+  } catch(const ConvergenceFailure& E_original) {
+    throw ImageGroundConnectionFailed();
+  }
+}
+
+boost::shared_ptr<GroundCoordinate> 
+RsmImageGroundConnection::ground_coordinate_approx_height
+(const ImageCoordinate& Ic,
+ double H) const
+{
+  try {
+    return rsm_->ground_coordinate_approx_height(Ic,H);
+  } catch(const ConvergenceFailure& E_original) {
+    throw ImageGroundConnectionFailed();
+  }
+}
+
 void RsmImageGroundConnection::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");

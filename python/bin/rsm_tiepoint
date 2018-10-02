@@ -154,8 +154,8 @@ tpcollect = geocal.TiePointCollectPicmtch(igccol, [proj_fname,],
                             redo=args.redo,
                             ffthalf=2, seed=args.seed, autofit=14,
                             thr_res=args.thr_res, quiet = not args.verbose)
-tpcol = tpcollect.tie_point_grid(eval(args.fftgrid)[0],
-                                 eval(args.fftgrid)[1])
+tpcol = tpcollect.tie_point_grid(eval(str(args.fftgrid))[0],
+                                 eval(str(args.fftgrid))[1])
 geocal.write_shelve(args.output, tpcol)
 
                             

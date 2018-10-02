@@ -2,10 +2,10 @@ PROCESS       HELP=*
 parm refimg type=(string,99) count=1
 parm refbase type=(string,99) count=1
 parm refresname type=(string,99) count=1
-parm tp type=(string,99) count=1 default=""
 parm img type=(string,99) count=1
 parm imgbase type=(string,99) count=1
 parm imgresname type=(string,99) count=1
+parm tp type=(string,99) count=1 default=""
 parm autofit type=int default=14 valid=(0:500)
 parm bandref type=int count=1 default=1
 parm bandimg type=int count=1 default=1

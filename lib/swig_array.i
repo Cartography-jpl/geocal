@@ -137,7 +137,7 @@ public:
 // in swig, and that it is different for different array types
 //--------------------------------------------------------------
 
-%define %array_template(NAME,TYPE,DIM, PRECEDENCE)
+%define %array_template(NMTYPE, TYPE,DIM, PRECEDENCE)
 
 //--------------------------------------------------------------
 // Convert to numpy. Note that there is a complication in the 
@@ -381,39 +381,40 @@ public:
   $1 = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==DIM ? 1 : 0);
 }
 
-%template(NAME) blitz::Array<TYPE, DIM>;
+%template(BlitzArray_ ## NMTYPE ## _ ## DIM) blitz::Array<TYPE, DIM>;
 
 %enddef
 
-%array_template(BlitzArray_double_1, double, 1, 1150);
-%array_template(BlitzArray_double_2, double, 2, 1151);
-%array_template(BlitzArray_double_3, double, 3, 1152);
-%array_template(BlitzArray_double_4, double, 4, 1153);
-%array_template(BlitzArray_double_5, double, 5, 1154);
-%array_template(BlitzArray_double_6, double, 6, 1155);
-%array_template(BlitzArray_double_7, double, 7, 1156);
-%array_template(BlitzArray_double_8, double, 8, 1157);
-%array_template(BlitzArray_bool_1, bool, 1, 1158);
-%array_template(BlitzArray_bool_2, bool, 2, 1159);
-%array_template(BlitzArray_bool_3, bool, 3, 1160);
-%array_template(BlitzArray_bool_4, bool, 4, 1161);
-%array_template(BlitzArray_bool_5, bool, 5, 1162);
-%array_template(BlitzArray_bool_6, bool, 6, 1163);
-%array_template(BlitzArray_bool_7, bool, 7, 1164);
-%array_template(BlitzArray_bool_8, bool, 8, 1165);
-%array_template(BlitzArray_int_1, int, 1, 1166);
-%array_template(BlitzArray_int_2, int, 2, 1167);
-%array_template(BlitzArray_int_3, int, 3, 1168);
-%array_template(BlitzArray_int_4, int, 4, 1169);
-%array_template(BlitzArray_int_5, int, 5, 1170);
-%array_template(BlitzArray_int_6, int, 6, 1171);
-%array_template(BlitzArray_int_7, int, 7, 1172);
-%array_template(BlitzArray_int_8, int, 8, 1173);
+%define %array_all_template(NMTYPE, TYPE, PRECEDENCE)
+
+%array_template(NMTYPE, TYPE, 1, PRECEDENCE ## 0);
+%array_template(NMTYPE, TYPE, 2, PRECEDENCE ## 1);
+%array_template(NMTYPE, TYPE, 3, PRECEDENCE ## 2);
+%array_template(NMTYPE, TYPE, 4, PRECEDENCE ## 3);
+%array_template(NMTYPE, TYPE, 5, PRECEDENCE ## 4);
+%array_template(NMTYPE, TYPE, 6, PRECEDENCE ## 5);
+%array_template(NMTYPE, TYPE, 7, PRECEDENCE ## 6);
+%array_template(NMTYPE, TYPE, 8, PRECEDENCE ## 7);
+
+%enddef
+
+%array_all_template(double, double, 115);
+%array_all_template(bool, bool, 116);
+%array_all_template(int, int, 117);
+%array_all_template(uint, unsigned int, 118);
+%array_all_template(float, float, 119);
+%array_all_template(short, short int, 120);
+%array_all_template(ushort, unsigned short int, 121);
+%array_all_template(char, char, 122);
+%array_all_template(uchar, unsigned char, 123);
 #endif  // end SWIGPYTHON
 
 // List of things "import *" will include
 %pythoncode %{
-__all__ = ["BlitzArray_double_1", "BlitzArray_double_2", "BlitzArray_double_3", "BlitzArray_double_4", "BlitzArray_double_5", "BlitzArray_double_6", "BlitzArray_double_7", "BlitzArray_double_8", "BlitzArray_bool_1", "BlitzArray_bool_2", "BlitzArray_bool_3", "BlitzArray_bool_4", "BlitzArray_bool_5", "BlitzArray_bool_6", "BlitzArray_bool_7", "BlitzArray_bool_8", "BlitzArray_int_1", "BlitzArray_int_2", "BlitzArray_int_3", "BlitzArray_int_4", "BlitzArray_int_5", "BlitzArray_int_6", "BlitzArray_int_7", "BlitzArray_int_8"]
+__all__ = []  
+for t in ("double", "bool", "int", "uint", "float", "short", "ushort", "char", "uchar"):
+    for d in range(1,8+1):
+        __all__.append("BlitzArray_%s_%d" % (t, d))
 %}
 
 

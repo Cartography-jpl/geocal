@@ -3473,62 +3473,110 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[18]
 #define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[19]
 #define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[30]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[31]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[32]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[33]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[34]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[35]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[36]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[37]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[38]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[39]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[40]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[41]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[42]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[43]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t swig_types[44]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[45]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[46]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[47]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[48]
-#define SWIGTYPE_p_char swig_types[49]
-#define SWIGTYPE_p_char_type swig_types[50]
-#define SWIGTYPE_p_difference_type swig_types[51]
-#define SWIGTYPE_p_fmtflags swig_types[52]
-#define SWIGTYPE_p_int_type swig_types[53]
-#define SWIGTYPE_p_iostate swig_types[54]
-#define SWIGTYPE_p_off_type swig_types[55]
-#define SWIGTYPE_p_openmode swig_types[56]
-#define SWIGTYPE_p_p_PyObject swig_types[57]
-#define SWIGTYPE_p_pos_type swig_types[58]
-#define SWIGTYPE_p_seekdir swig_types[59]
-#define SWIGTYPE_p_size_t swig_types[60]
-#define SWIGTYPE_p_size_type swig_types[61]
-#define SWIGTYPE_p_state_type swig_types[62]
-#define SWIGTYPE_p_std__allocatorT_GeoCal__Time_t swig_types[63]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t swig_types[64]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[65]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[66]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[67]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[68]
-#define SWIGTYPE_p_std__invalid_argument swig_types[69]
-#define SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t swig_types[70]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t swig_types[71]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[72]
-#define SWIGTYPE_p_traits_type swig_types[73]
-#define SWIGTYPE_p_value_type swig_types[74]
-static swig_type_info *swig_types[76];
-static swig_module_info swig_module = {swig_types, 75, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__ArrayT_char_1_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_char_2_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_char_3_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_char_4_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_char_5_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_char_6_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_char_7_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_char_8_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[29]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[30]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[31]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[32]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[33]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[34]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[35]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[36]
+#define SWIGTYPE_p_blitz__ArrayT_float_1_t swig_types[37]
+#define SWIGTYPE_p_blitz__ArrayT_float_2_t swig_types[38]
+#define SWIGTYPE_p_blitz__ArrayT_float_3_t swig_types[39]
+#define SWIGTYPE_p_blitz__ArrayT_float_4_t swig_types[40]
+#define SWIGTYPE_p_blitz__ArrayT_float_5_t swig_types[41]
+#define SWIGTYPE_p_blitz__ArrayT_float_6_t swig_types[42]
+#define SWIGTYPE_p_blitz__ArrayT_float_7_t swig_types[43]
+#define SWIGTYPE_p_blitz__ArrayT_float_8_t swig_types[44]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[45]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[46]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[47]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[48]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[49]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[50]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[51]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[52]
+#define SWIGTYPE_p_blitz__ArrayT_short_1_t swig_types[53]
+#define SWIGTYPE_p_blitz__ArrayT_short_2_t swig_types[54]
+#define SWIGTYPE_p_blitz__ArrayT_short_3_t swig_types[55]
+#define SWIGTYPE_p_blitz__ArrayT_short_4_t swig_types[56]
+#define SWIGTYPE_p_blitz__ArrayT_short_5_t swig_types[57]
+#define SWIGTYPE_p_blitz__ArrayT_short_6_t swig_types[58]
+#define SWIGTYPE_p_blitz__ArrayT_short_7_t swig_types[59]
+#define SWIGTYPE_p_blitz__ArrayT_short_8_t swig_types[60]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_1_t swig_types[61]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_2_t swig_types[62]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_3_t swig_types[63]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_4_t swig_types[64]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_5_t swig_types[65]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_6_t swig_types[66]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_7_t swig_types[67]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_8_t swig_types[68]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_1_t swig_types[69]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_2_t swig_types[70]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_3_t swig_types[71]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_4_t swig_types[72]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_5_t swig_types[73]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_6_t swig_types[74]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_7_t swig_types[75]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_8_t swig_types[76]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_1_t swig_types[77]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_2_t swig_types[78]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_3_t swig_types[79]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_4_t swig_types[80]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_5_t swig_types[81]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[82]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[83]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[84]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[85]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[86]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[87]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[88]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[89]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[90]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[91]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t swig_types[92]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[93]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[94]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[95]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[96]
+#define SWIGTYPE_p_char swig_types[97]
+#define SWIGTYPE_p_char_type swig_types[98]
+#define SWIGTYPE_p_difference_type swig_types[99]
+#define SWIGTYPE_p_fmtflags swig_types[100]
+#define SWIGTYPE_p_int_type swig_types[101]
+#define SWIGTYPE_p_iostate swig_types[102]
+#define SWIGTYPE_p_off_type swig_types[103]
+#define SWIGTYPE_p_openmode swig_types[104]
+#define SWIGTYPE_p_p_PyObject swig_types[105]
+#define SWIGTYPE_p_pos_type swig_types[106]
+#define SWIGTYPE_p_seekdir swig_types[107]
+#define SWIGTYPE_p_size_t swig_types[108]
+#define SWIGTYPE_p_size_type swig_types[109]
+#define SWIGTYPE_p_state_type swig_types[110]
+#define SWIGTYPE_p_std__allocatorT_GeoCal__Time_t swig_types[111]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t swig_types[112]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[113]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[114]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[115]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[116]
+#define SWIGTYPE_p_std__invalid_argument swig_types[117]
+#define SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t swig_types[118]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t swig_types[119]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[120]
+#define SWIGTYPE_p_traits_type swig_types[121]
+#define SWIGTYPE_p_value_type swig_types[122]
+static swig_type_info *swig_types[124];
+static swig_module_info swig_module = {swig_types, 123, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -11768,6 +11816,14 @@ static swig_type_info _swigt__p_blitz__ArrayT_bool_5_t = {"_p_blitz__ArrayT_bool
 static swig_type_info _swigt__p_blitz__ArrayT_bool_6_t = {"_p_blitz__ArrayT_bool_6_t", "blitz::Array< bool,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_7_t = {"_p_blitz__ArrayT_bool_7_t", "blitz::Array< bool,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_8_t = {"_p_blitz__ArrayT_bool_8_t", "blitz::Array< bool,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_char_1_t = {"_p_blitz__ArrayT_char_1_t", "blitz::Array< char,1 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_char_2_t = {"_p_blitz__ArrayT_char_2_t", "blitz::Array< char,2 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_char_3_t = {"_p_blitz__ArrayT_char_3_t", "blitz::Array< char,3 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_char_4_t = {"_p_blitz__ArrayT_char_4_t", "blitz::Array< char,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_char_5_t = {"_p_blitz__ArrayT_char_5_t", "blitz::Array< char,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_char_6_t = {"_p_blitz__ArrayT_char_6_t", "blitz::Array< char,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_char_7_t = {"_p_blitz__ArrayT_char_7_t", "blitz::Array< char,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_char_8_t = {"_p_blitz__ArrayT_char_8_t", "blitz::Array< char,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_1_t = {"_p_blitz__ArrayT_double_1_t", "blitz::Array< double,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_2_t = {"_p_blitz__ArrayT_double_2_t", "blitz::Array< double,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_3_t = {"_p_blitz__ArrayT_double_3_t", "blitz::Array< double,3 > *", 0, 0, (void*)0, 0};
@@ -11776,6 +11832,14 @@ static swig_type_info _swigt__p_blitz__ArrayT_double_5_t = {"_p_blitz__ArrayT_do
 static swig_type_info _swigt__p_blitz__ArrayT_double_6_t = {"_p_blitz__ArrayT_double_6_t", "blitz::Array< double,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_7_t = {"_p_blitz__ArrayT_double_7_t", "blitz::Array< double,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_double_8_t = {"_p_blitz__ArrayT_double_8_t", "blitz::Array< double,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_float_1_t = {"_p_blitz__ArrayT_float_1_t", "blitz::Array< float,1 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_float_2_t = {"_p_blitz__ArrayT_float_2_t", "blitz::Array< float,2 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_float_3_t = {"_p_blitz__ArrayT_float_3_t", "blitz::Array< float,3 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_float_4_t = {"_p_blitz__ArrayT_float_4_t", "blitz::Array< float,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_float_5_t = {"_p_blitz__ArrayT_float_5_t", "blitz::Array< float,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_float_6_t = {"_p_blitz__ArrayT_float_6_t", "blitz::Array< float,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_float_7_t = {"_p_blitz__ArrayT_float_7_t", "blitz::Array< float,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_float_8_t = {"_p_blitz__ArrayT_float_8_t", "blitz::Array< float,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_1_t = {"_p_blitz__ArrayT_int_1_t", "blitz::Array< int,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_2_t = {"_p_blitz__ArrayT_int_2_t", "blitz::Array< int,2 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_3_t = {"_p_blitz__ArrayT_int_3_t", "blitz::Array< int,3 > *", 0, 0, (void*)0, 0};
@@ -11784,6 +11848,38 @@ static swig_type_info _swigt__p_blitz__ArrayT_int_5_t = {"_p_blitz__ArrayT_int_5
 static swig_type_info _swigt__p_blitz__ArrayT_int_6_t = {"_p_blitz__ArrayT_int_6_t", "blitz::Array< int,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_7_t = {"_p_blitz__ArrayT_int_7_t", "blitz::Array< int,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_int_8_t = {"_p_blitz__ArrayT_int_8_t", "blitz::Array< int,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_short_1_t = {"_p_blitz__ArrayT_short_1_t", "blitz::Array< short,1 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_short_2_t = {"_p_blitz__ArrayT_short_2_t", "blitz::Array< short,2 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_short_3_t = {"_p_blitz__ArrayT_short_3_t", "blitz::Array< short,3 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_short_4_t = {"_p_blitz__ArrayT_short_4_t", "blitz::Array< short,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_short_5_t = {"_p_blitz__ArrayT_short_5_t", "blitz::Array< short,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_short_6_t = {"_p_blitz__ArrayT_short_6_t", "blitz::Array< short,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_short_7_t = {"_p_blitz__ArrayT_short_7_t", "blitz::Array< short,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_short_8_t = {"_p_blitz__ArrayT_short_8_t", "blitz::Array< short,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_char_1_t = {"_p_blitz__ArrayT_unsigned_char_1_t", "blitz::Array< unsigned char,1 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_char_2_t = {"_p_blitz__ArrayT_unsigned_char_2_t", "blitz::Array< unsigned char,2 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_char_3_t = {"_p_blitz__ArrayT_unsigned_char_3_t", "blitz::Array< unsigned char,3 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_char_4_t = {"_p_blitz__ArrayT_unsigned_char_4_t", "blitz::Array< unsigned char,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_char_5_t = {"_p_blitz__ArrayT_unsigned_char_5_t", "blitz::Array< unsigned char,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_char_6_t = {"_p_blitz__ArrayT_unsigned_char_6_t", "blitz::Array< unsigned char,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_char_7_t = {"_p_blitz__ArrayT_unsigned_char_7_t", "blitz::Array< unsigned char,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_char_8_t = {"_p_blitz__ArrayT_unsigned_char_8_t", "blitz::Array< unsigned char,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_int_1_t = {"_p_blitz__ArrayT_unsigned_int_1_t", "blitz::Array< unsigned int,1 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_int_2_t = {"_p_blitz__ArrayT_unsigned_int_2_t", "blitz::Array< unsigned int,2 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_int_3_t = {"_p_blitz__ArrayT_unsigned_int_3_t", "blitz::Array< unsigned int,3 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_int_4_t = {"_p_blitz__ArrayT_unsigned_int_4_t", "blitz::Array< unsigned int,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_int_5_t = {"_p_blitz__ArrayT_unsigned_int_5_t", "blitz::Array< unsigned int,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_int_6_t = {"_p_blitz__ArrayT_unsigned_int_6_t", "blitz::Array< unsigned int,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_int_7_t = {"_p_blitz__ArrayT_unsigned_int_7_t", "blitz::Array< unsigned int,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_int_8_t = {"_p_blitz__ArrayT_unsigned_int_8_t", "blitz::Array< unsigned int,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_1_t = {"_p_blitz__ArrayT_unsigned_short_1_t", "blitz::Array< unsigned short,1 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_2_t = {"_p_blitz__ArrayT_unsigned_short_2_t", "blitz::Array< unsigned short,2 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_3_t = {"_p_blitz__ArrayT_unsigned_short_3_t", "blitz::Array< unsigned short,3 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_4_t = {"_p_blitz__ArrayT_unsigned_short_4_t", "blitz::Array< unsigned short,4 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_5_t = {"_p_blitz__ArrayT_unsigned_short_5_t", "blitz::Array< unsigned short,5 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_6_t = {"_p_blitz__ArrayT_unsigned_short_6_t", "blitz::Array< unsigned short,6 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__ArrayT_unsigned_short_7_t", "blitz::Array< unsigned short,7 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,1 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,2 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,3 > > *", 0, 0, (void*)0, 0};
@@ -11845,6 +11941,14 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_bool_6_t,
   &_swigt__p_blitz__ArrayT_bool_7_t,
   &_swigt__p_blitz__ArrayT_bool_8_t,
+  &_swigt__p_blitz__ArrayT_char_1_t,
+  &_swigt__p_blitz__ArrayT_char_2_t,
+  &_swigt__p_blitz__ArrayT_char_3_t,
+  &_swigt__p_blitz__ArrayT_char_4_t,
+  &_swigt__p_blitz__ArrayT_char_5_t,
+  &_swigt__p_blitz__ArrayT_char_6_t,
+  &_swigt__p_blitz__ArrayT_char_7_t,
+  &_swigt__p_blitz__ArrayT_char_8_t,
   &_swigt__p_blitz__ArrayT_double_1_t,
   &_swigt__p_blitz__ArrayT_double_2_t,
   &_swigt__p_blitz__ArrayT_double_3_t,
@@ -11853,6 +11957,14 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_double_6_t,
   &_swigt__p_blitz__ArrayT_double_7_t,
   &_swigt__p_blitz__ArrayT_double_8_t,
+  &_swigt__p_blitz__ArrayT_float_1_t,
+  &_swigt__p_blitz__ArrayT_float_2_t,
+  &_swigt__p_blitz__ArrayT_float_3_t,
+  &_swigt__p_blitz__ArrayT_float_4_t,
+  &_swigt__p_blitz__ArrayT_float_5_t,
+  &_swigt__p_blitz__ArrayT_float_6_t,
+  &_swigt__p_blitz__ArrayT_float_7_t,
+  &_swigt__p_blitz__ArrayT_float_8_t,
   &_swigt__p_blitz__ArrayT_int_1_t,
   &_swigt__p_blitz__ArrayT_int_2_t,
   &_swigt__p_blitz__ArrayT_int_3_t,
@@ -11861,6 +11973,38 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_int_6_t,
   &_swigt__p_blitz__ArrayT_int_7_t,
   &_swigt__p_blitz__ArrayT_int_8_t,
+  &_swigt__p_blitz__ArrayT_short_1_t,
+  &_swigt__p_blitz__ArrayT_short_2_t,
+  &_swigt__p_blitz__ArrayT_short_3_t,
+  &_swigt__p_blitz__ArrayT_short_4_t,
+  &_swigt__p_blitz__ArrayT_short_5_t,
+  &_swigt__p_blitz__ArrayT_short_6_t,
+  &_swigt__p_blitz__ArrayT_short_7_t,
+  &_swigt__p_blitz__ArrayT_short_8_t,
+  &_swigt__p_blitz__ArrayT_unsigned_char_1_t,
+  &_swigt__p_blitz__ArrayT_unsigned_char_2_t,
+  &_swigt__p_blitz__ArrayT_unsigned_char_3_t,
+  &_swigt__p_blitz__ArrayT_unsigned_char_4_t,
+  &_swigt__p_blitz__ArrayT_unsigned_char_5_t,
+  &_swigt__p_blitz__ArrayT_unsigned_char_6_t,
+  &_swigt__p_blitz__ArrayT_unsigned_char_7_t,
+  &_swigt__p_blitz__ArrayT_unsigned_char_8_t,
+  &_swigt__p_blitz__ArrayT_unsigned_int_1_t,
+  &_swigt__p_blitz__ArrayT_unsigned_int_2_t,
+  &_swigt__p_blitz__ArrayT_unsigned_int_3_t,
+  &_swigt__p_blitz__ArrayT_unsigned_int_4_t,
+  &_swigt__p_blitz__ArrayT_unsigned_int_5_t,
+  &_swigt__p_blitz__ArrayT_unsigned_int_6_t,
+  &_swigt__p_blitz__ArrayT_unsigned_int_7_t,
+  &_swigt__p_blitz__ArrayT_unsigned_int_8_t,
+  &_swigt__p_blitz__ArrayT_unsigned_short_1_t,
+  &_swigt__p_blitz__ArrayT_unsigned_short_2_t,
+  &_swigt__p_blitz__ArrayT_unsigned_short_3_t,
+  &_swigt__p_blitz__ArrayT_unsigned_short_4_t,
+  &_swigt__p_blitz__ArrayT_unsigned_short_5_t,
+  &_swigt__p_blitz__ArrayT_unsigned_short_6_t,
+  &_swigt__p_blitz__ArrayT_unsigned_short_7_t,
+  &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t,
@@ -11922,6 +12066,14 @@ static swig_cast_info _swigc__p_blitz__ArrayT_bool_5_t[] = {  {&_swigt__p_blitz_
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_6_t[] = {  {&_swigt__p_blitz__ArrayT_bool_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_7_t[] = {  {&_swigt__p_blitz__ArrayT_bool_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_8_t[] = {  {&_swigt__p_blitz__ArrayT_bool_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_char_1_t[] = {  {&_swigt__p_blitz__ArrayT_char_1_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_char_2_t[] = {  {&_swigt__p_blitz__ArrayT_char_2_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_char_3_t[] = {  {&_swigt__p_blitz__ArrayT_char_3_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_char_4_t[] = {  {&_swigt__p_blitz__ArrayT_char_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_char_5_t[] = {  {&_swigt__p_blitz__ArrayT_char_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_char_6_t[] = {  {&_swigt__p_blitz__ArrayT_char_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_char_7_t[] = {  {&_swigt__p_blitz__ArrayT_char_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_char_8_t[] = {  {&_swigt__p_blitz__ArrayT_char_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_1_t[] = {  {&_swigt__p_blitz__ArrayT_double_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_2_t[] = {  {&_swigt__p_blitz__ArrayT_double_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_3_t[] = {  {&_swigt__p_blitz__ArrayT_double_3_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11930,6 +12082,14 @@ static swig_cast_info _swigc__p_blitz__ArrayT_double_5_t[] = {  {&_swigt__p_blit
 static swig_cast_info _swigc__p_blitz__ArrayT_double_6_t[] = {  {&_swigt__p_blitz__ArrayT_double_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_7_t[] = {  {&_swigt__p_blitz__ArrayT_double_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_double_8_t[] = {  {&_swigt__p_blitz__ArrayT_double_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_float_1_t[] = {  {&_swigt__p_blitz__ArrayT_float_1_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_float_2_t[] = {  {&_swigt__p_blitz__ArrayT_float_2_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_float_3_t[] = {  {&_swigt__p_blitz__ArrayT_float_3_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_float_4_t[] = {  {&_swigt__p_blitz__ArrayT_float_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_float_5_t[] = {  {&_swigt__p_blitz__ArrayT_float_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_float_6_t[] = {  {&_swigt__p_blitz__ArrayT_float_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_float_7_t[] = {  {&_swigt__p_blitz__ArrayT_float_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_float_8_t[] = {  {&_swigt__p_blitz__ArrayT_float_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_1_t[] = {  {&_swigt__p_blitz__ArrayT_int_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_2_t[] = {  {&_swigt__p_blitz__ArrayT_int_2_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_3_t[] = {  {&_swigt__p_blitz__ArrayT_int_3_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11938,6 +12098,38 @@ static swig_cast_info _swigc__p_blitz__ArrayT_int_5_t[] = {  {&_swigt__p_blitz__
 static swig_cast_info _swigc__p_blitz__ArrayT_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_short_1_t[] = {  {&_swigt__p_blitz__ArrayT_short_1_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_short_2_t[] = {  {&_swigt__p_blitz__ArrayT_short_2_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_short_3_t[] = {  {&_swigt__p_blitz__ArrayT_short_3_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_short_4_t[] = {  {&_swigt__p_blitz__ArrayT_short_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_short_5_t[] = {  {&_swigt__p_blitz__ArrayT_short_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_short_6_t[] = {  {&_swigt__p_blitz__ArrayT_short_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_char_1_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_char_1_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_char_2_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_char_2_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_char_3_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_char_3_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_char_4_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_char_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_char_5_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_char_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_char_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_char_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_char_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_char_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_char_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_char_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_int_1_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_int_1_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_int_2_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_int_2_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_int_3_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_int_3_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_int_4_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_int_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_int_5_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_int_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_int_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_int_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_int_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_int_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_int_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_int_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_1_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_1_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_2_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_2_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_3_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_3_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_4_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_4_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_5_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_5_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_6_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11999,6 +12191,14 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_bool_6_t,
   _swigc__p_blitz__ArrayT_bool_7_t,
   _swigc__p_blitz__ArrayT_bool_8_t,
+  _swigc__p_blitz__ArrayT_char_1_t,
+  _swigc__p_blitz__ArrayT_char_2_t,
+  _swigc__p_blitz__ArrayT_char_3_t,
+  _swigc__p_blitz__ArrayT_char_4_t,
+  _swigc__p_blitz__ArrayT_char_5_t,
+  _swigc__p_blitz__ArrayT_char_6_t,
+  _swigc__p_blitz__ArrayT_char_7_t,
+  _swigc__p_blitz__ArrayT_char_8_t,
   _swigc__p_blitz__ArrayT_double_1_t,
   _swigc__p_blitz__ArrayT_double_2_t,
   _swigc__p_blitz__ArrayT_double_3_t,
@@ -12007,6 +12207,14 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_double_6_t,
   _swigc__p_blitz__ArrayT_double_7_t,
   _swigc__p_blitz__ArrayT_double_8_t,
+  _swigc__p_blitz__ArrayT_float_1_t,
+  _swigc__p_blitz__ArrayT_float_2_t,
+  _swigc__p_blitz__ArrayT_float_3_t,
+  _swigc__p_blitz__ArrayT_float_4_t,
+  _swigc__p_blitz__ArrayT_float_5_t,
+  _swigc__p_blitz__ArrayT_float_6_t,
+  _swigc__p_blitz__ArrayT_float_7_t,
+  _swigc__p_blitz__ArrayT_float_8_t,
   _swigc__p_blitz__ArrayT_int_1_t,
   _swigc__p_blitz__ArrayT_int_2_t,
   _swigc__p_blitz__ArrayT_int_3_t,
@@ -12015,6 +12223,38 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_int_6_t,
   _swigc__p_blitz__ArrayT_int_7_t,
   _swigc__p_blitz__ArrayT_int_8_t,
+  _swigc__p_blitz__ArrayT_short_1_t,
+  _swigc__p_blitz__ArrayT_short_2_t,
+  _swigc__p_blitz__ArrayT_short_3_t,
+  _swigc__p_blitz__ArrayT_short_4_t,
+  _swigc__p_blitz__ArrayT_short_5_t,
+  _swigc__p_blitz__ArrayT_short_6_t,
+  _swigc__p_blitz__ArrayT_short_7_t,
+  _swigc__p_blitz__ArrayT_short_8_t,
+  _swigc__p_blitz__ArrayT_unsigned_char_1_t,
+  _swigc__p_blitz__ArrayT_unsigned_char_2_t,
+  _swigc__p_blitz__ArrayT_unsigned_char_3_t,
+  _swigc__p_blitz__ArrayT_unsigned_char_4_t,
+  _swigc__p_blitz__ArrayT_unsigned_char_5_t,
+  _swigc__p_blitz__ArrayT_unsigned_char_6_t,
+  _swigc__p_blitz__ArrayT_unsigned_char_7_t,
+  _swigc__p_blitz__ArrayT_unsigned_char_8_t,
+  _swigc__p_blitz__ArrayT_unsigned_int_1_t,
+  _swigc__p_blitz__ArrayT_unsigned_int_2_t,
+  _swigc__p_blitz__ArrayT_unsigned_int_3_t,
+  _swigc__p_blitz__ArrayT_unsigned_int_4_t,
+  _swigc__p_blitz__ArrayT_unsigned_int_5_t,
+  _swigc__p_blitz__ArrayT_unsigned_int_6_t,
+  _swigc__p_blitz__ArrayT_unsigned_int_7_t,
+  _swigc__p_blitz__ArrayT_unsigned_int_8_t,
+  _swigc__p_blitz__ArrayT_unsigned_short_1_t,
+  _swigc__p_blitz__ArrayT_unsigned_short_2_t,
+  _swigc__p_blitz__ArrayT_unsigned_short_3_t,
+  _swigc__p_blitz__ArrayT_unsigned_short_4_t,
+  _swigc__p_blitz__ArrayT_unsigned_short_5_t,
+  _swigc__p_blitz__ArrayT_unsigned_short_6_t,
+  _swigc__p_blitz__ArrayT_unsigned_short_7_t,
+  _swigc__p_blitz__ArrayT_unsigned_short_8_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t,

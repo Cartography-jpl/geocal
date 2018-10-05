@@ -3234,7 +3234,13 @@ namespace swig {
 
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
+PyObject* numpy_dot_float32();
 PyObject* numpy_dot_int32();
+PyObject* numpy_dot_uint32();
+PyObject* numpy_dot_int16();
+PyObject* numpy_dot_uint16();
+PyObject* numpy_dot_int8();
+PyObject* numpy_dot_uint8();
 PyObject* numpy_dot_bool();
 
 //--------------------------------------------------------------
@@ -3244,7 +3250,13 @@ PyObject* numpy_dot_bool();
 
 template<class T> int type_to_npy();
 template<> inline int type_to_npy<double>() {return NPY_DOUBLE;}
+template<> inline int type_to_npy<float>() {return NPY_FLOAT;}
 template<> inline int type_to_npy<int>() {return NPY_INT;}
+template<> inline int type_to_npy<unsigned int>() {return NPY_UINT;}
+template<> inline int type_to_npy<short int>() {return NPY_SHORT;}
+template<> inline int type_to_npy<unsigned short int>() {return NPY_USHORT;}
+template<> inline int type_to_npy<char>() {return NPY_BYTE;}
+template<> inline int type_to_npy<unsigned char>() {return NPY_UBYTE;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
 
 //--------------------------------------------------------------
@@ -3260,6 +3272,16 @@ template<> inline PyObject* to_numpy<double>(PyObject* obj)
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
 					     PyString_FromString("asarray"), 
 					     obj, numpy_dot_float64(), NULL);
+  // Don't worry about errors , since we just return a null
+  PyErr_Clear();
+  return res;
+}
+
+template<> inline PyObject* to_numpy<float>(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+					     PyString_FromString("asarray"), 
+					     obj, numpy_dot_float32(), NULL);
   // Don't worry about errors , since we just return a null
   PyErr_Clear();
   return res;
@@ -3283,6 +3305,51 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
   return res;
 }
 
+template<> inline PyObject* to_numpy<unsigned int>(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+				    PyString_FromString("asarray"), 
+				    obj, numpy_dot_uint32(), NULL);
+  PyErr_Clear();
+  return res;
+}
+
+template<> inline PyObject* to_numpy<short int>(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+				    PyString_FromString("asarray"), 
+				    obj, numpy_dot_int16(), NULL);
+  PyErr_Clear();
+  return res;
+}
+
+template<> inline PyObject* to_numpy<unsigned short int>(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+				    PyString_FromString("asarray"), 
+				    obj, numpy_dot_uint16(), NULL);
+  PyErr_Clear();
+  return res;
+}
+
+template<> inline PyObject* to_numpy<char>(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+				    PyString_FromString("asarray"), 
+				    obj, numpy_dot_int8(), NULL);
+  PyErr_Clear();
+  return res;
+}
+
+template<> inline PyObject* to_numpy<unsigned char>(PyObject* obj)
+{
+  PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
+				    PyString_FromString("asarray"), 
+				    obj, numpy_dot_uint8(), NULL);
+  PyErr_Clear();
+  return res;
+}
+ 
 //--------------------------------------------------------------
 // Convert a numpy array to a blitz::Array. The numpy should 
 // already be the right data type before calling these (you can
@@ -3350,6 +3417,14 @@ PyObject* numpy_dot_float64()
   return res;
 }
 
+PyObject* numpy_dot_float32()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "float32");
+  return res;
+}
+ 
 PyObject* numpy_dot_int32()
 {
   static PyObject* res = 0;
@@ -3358,6 +3433,46 @@ PyObject* numpy_dot_int32()
   return res;
 }
 
+PyObject* numpy_dot_uint32()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "uint32");
+  return res;
+}
+
+PyObject* numpy_dot_int16()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "int16");
+  return res;
+}
+
+PyObject* numpy_dot_uint16()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "uint16");
+  return res;
+}
+
+PyObject* numpy_dot_int8()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "int8");
+  return res;
+}
+
+PyObject* numpy_dot_uint8()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "uint8");
+  return res;
+}
+ 
 PyObject* numpy_dot_bool()
 {
   static PyObject* res = 0;

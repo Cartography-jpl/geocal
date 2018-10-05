@@ -40,6 +40,14 @@ PyObject* numpy_dot_float64()
   return res;
 }
 
+PyObject* numpy_dot_float32()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "float32");
+  return res;
+}
+ 
 PyObject* numpy_dot_int32()
 {
   static PyObject* res = 0;
@@ -48,6 +56,46 @@ PyObject* numpy_dot_int32()
   return res;
 }
 
+PyObject* numpy_dot_uint32()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "uint32");
+  return res;
+}
+
+PyObject* numpy_dot_int16()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "int16");
+  return res;
+}
+
+PyObject* numpy_dot_uint16()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "uint16");
+  return res;
+}
+
+PyObject* numpy_dot_int8()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "int8");
+  return res;
+}
+
+PyObject* numpy_dot_uint8()
+{
+  static PyObject* res = 0;
+  if(!res)
+    res = PyObject_GetAttrString(numpy_module(), "uint8");
+  return res;
+}
+ 
 PyObject* numpy_dot_bool()
 {
   static PyObject* res = 0;

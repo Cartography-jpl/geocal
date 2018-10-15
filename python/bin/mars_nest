@@ -325,11 +325,14 @@ cimg_res1 = "%s_corr_%s.img" % (args.image_base_name,
 cimg_res2 = "%s_corr_%s.img" % (args.image_base_name, 
                                 args.image_resolution_name)
 
-geocal.mars_fix_projection(args.ref_image, refimg_fixed, args.band_ref)
-geocal.mars_fix_projection(args.image, img_fixed, args.band_image)
+geocal.mars_fix_projection(args.ref_image, refimg_fixed, args.band_ref,
+                           hirise_correction=args.hirise_correction)
+geocal.mars_fix_projection(args.image, img_fixed, args.band_image,
+                           hirise_correction=args.hirise_correction)
 if(args.use_projection):
     use_projection_fixed = "%s_proj.vrt" % (args.image_base_name)
-    geocal.mars_fix_projection(args.use_projection, use_projection_fixed, 1)
+    geocal.mars_fix_projection(args.use_projection, use_projection_fixed,1,
+                               hirise_correction=args.hirise_correction)
 if(not check_intersection(refimg_fixed, img_fixed)):
     raise RuntimeError("The two images have no area of intersection")
 if(args.scale_image != 1.0):

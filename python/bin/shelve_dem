@@ -14,8 +14,8 @@ usage='''Usage:
   shelve_dem -h | --help
   shelve_dem -v | --version
 
-This program is used to setup a DEM as a sqlite shelve object. The
-output should be in the "file:key" format, e.g., "my_data.db:dem".
+This generates an XML file that describes a DEM, which is then used
+as an input to other programs.
 
 You can supply a DEM file along with an optional Datum file. This should
 be any format readable by GDAL (e.g., GeoTIFF) or VICAR format.
@@ -50,12 +50,25 @@ Options:
        Print program version
 '''
 
-args = geocal.docopt_simple(usage, version=version)
+# Mapping between long name and shorter vicar name
+long_name_to_vicar = {
+    "dem_file" : "dem",
+    "datum_file" : "datum",
+    "output" : "out",
+    "outside_dem_not_error" : "outok",
+    "constant_dem" : "cdem",
+    "dem_band" : "banddem",
+    "datum_band" : "banddatum",
+    "constant_datum" : "cdatum",
+    "srtm" : "srtm"}
+
+args = geocal.docopt_simple(usage, version=version,
+                            long_name_to_vicar=long_name_to_vicar)
 
 dem = None
 if(args.srtm):
     dem = geocal.SrtmDem()
-elif(args.constant_dem is not None):
+elif(args.constant_dem is not None and args.constant_dem > -99999):
     dem = geocal.SimpleDem(args.constant_dem)
 else:
     if(args.datum_file):

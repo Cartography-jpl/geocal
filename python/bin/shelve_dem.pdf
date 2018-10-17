@@ -1,0 +1,56 @@
+PROCESS       HELP=*
+parm dem type=(string,99) count=1 default=""
+parm datum type=(string,99) count=1 default=""
+parm out type=(string,99) count=1
+parm outok type=(string,4) count=(0:1) valid=(n,y) default=n
+parm srtm type=(string,4) count=(0:1) valid=(n,y) default=n
+parm banddem type=int count=1 default=1
+parm banddatum type=int count=1 default=1
+parm cdem type=real count=1 default=-99999
+parm cdatum type=real count=1 default=0
+END-PROC
+.TITLE
+shelve_dem
+.HELP
+This generates an XML file that describes a DEM, which is then used
+as an input to other programs.
+.LEVEL1
+.variable dem
+DEM file to read. Should be
+anything that GDAL or VICAR
+can read.
+.variable datum
+Datum file to read. Should be
+anything that GDAL or VICAR
+can read.
+.variable out
+output file. Should be a
+".xml" file
+.variable outok
+If a program attempts to read
+a DEM value outside of the
+supplied file, this is normally
+treated as an error.
+Alternatively, you can specify
+this option and we will return
+a height of "0" for any
+attempt to read outside the DEM.
+.variable srtm
+Use the SRTM rather than
+supplying a DEM file.
+.variable banddem
+The band of the DEM file to
+use. Default is 1.
+.variable banddatum
+The band of the datum file to
+use. Default is 1.
+.variable cdem
+Use a constant height DEM
+(a SimpleDem), with the
+given height.
+.variable cdatum
+Use a datum with a constant
+undulation. This is useful
+as a quick way to add an
+offset to  DEM file
+.END

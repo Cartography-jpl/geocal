@@ -1,0 +1,29 @@
+PROCESS       HELP=*
+parm img type=(string,99) count=1
+parm outimg type=(string,99) count=1
+parm band type=int count=1 default=1
+parm hirisecorr type=(string,4) count=(0:1) valid=(n,y) default=n
+END-PROC
+.TITLE
+mars_import_vicar
+.HELP
+Import a mars file into VICAR, correcting any errors in the map projection
+information.
+.LEVEL1
+.variable img
+The input image.
+.variable outimg
+The output vicar image
+.variable band
+Band of the input image to use
+.variable  hirisecorr
+Hirise imagery in equirectan-
+gular projection appears to have
+the latitude_of_origin and
+standard_parallel_1 swapped for
+some cases. This option turns on
+heuristics to identify and
+correct the problem. Default is
+"n". Enter "y" to perform the
+correction.
+.END

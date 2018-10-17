@@ -80,6 +80,7 @@ long_name_to_vicar = { "pds_image" : "pdsimg",
                        "full_igc" : "fulligc",
                        "min_height" : "minh",
                        "max_height" : "maxh",
+                       "subset" : "subset",
                        "plot_cross_section" : "plot" }
 
 args = geocal.docopt_simple(usage, version=version,

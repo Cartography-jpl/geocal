@@ -2,7 +2,6 @@ PROCESS       HELP=*
 parm img type=(string,99) count=1
 parm out type=(string,99) count=1
 parm dem type=(string,99) count=1 default=""
-parm okout type=(string,4) count=(0:1) valid=(n,y) default=n
 parm avgfactor type=int count=1 default=-1
 parm bbox type=(string,99) count=1 default=""
 parm cimage type=(string,99) count=1 default=""
@@ -30,18 +29,10 @@ which should have RSM
 generated (e.g., call
 mars_generate_rsm first)
 .variable dem
-DEM file to use
+DEM file to use. Should be XML
+created by shelve_dem
 .variable out
 Name of output file
-.variable okout
-If a program attempts to read
-a DEM value outside of the
-supplied file, this is
-normally treated as an error.
-Alternatively, you can specify
-this option as "y" and we will
-return a height of "0" for any
-attempt to read outside the DEM.
 .variable avgfactor
 The averaging factor to use
 on the original data before

@@ -186,7 +186,7 @@ AM_CONDITIONAL([GEOCAL_OVERRIDE_AFIDS], [test x$have_afids = xyes])
 #=================================================================
 # We normally include pynitf installation (at least for the time being,
 # see python/README_pynitf.md for discussion of this). But for testing
-# it is useful to have the option to disable this. That we in the long
+# it is useful to have the option to disable this. That way in the long
 # term when pynitf is just handled like any other dependency, we know the
 # code will still work.
 

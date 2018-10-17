@@ -1451,6 +1451,7 @@ am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
+	$(srcdir)/$(srcpythonbin)/mars_import_vicar \
 	$(srcdir)/$(srcpythonbin)/shelve_dem \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/rsm_project \
@@ -2086,6 +2087,7 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_import_vicar.pdf \
 	$(srcdir)/$(srcpythonbin)/shelve_dem.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_project.pdf \
@@ -3419,6 +3421,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
 	$(srcdir)/$(srcpythonbin)/mars_nest \
+	$(srcdir)/$(srcpythonbin)/mars_import_vicar \
 	$(srcdir)/$(srcpythonbin)/shelve_dem \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_54)
@@ -3426,6 +3429,7 @@ dist_afidspythonvdev_DATA = $(am__append_17) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
+	$(srcdir)/$(srcpythonbin)/mars_import_vicar.pdf \
 	$(srcdir)/$(srcpythonbin)/shelve_dem.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_project.pdf \

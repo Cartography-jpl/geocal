@@ -1,0 +1,46 @@
+PROCESS       HELP=*
+parm img type=(string,99) count=1
+parm dem type=(string,99) count=1
+parm tp type=(string,99) count=1
+parm out type=(string,99) count=1
+parm icor type=(string,4) count=(0:1) valid=(n,y) default=n
+parm grot type=(string,4) count=(0:1) valid=(n,y) default=n
+parm gcor type=(string,4) count=(0:1) valid=(n,y) default=n
+parm verbose type=(string,4) count=(0:1) valid=(n,y) default=n
+END-PROC
+.TITLE
+rsm_improve
+.HELP
+This takes a VICAR file with a RSM and a set of tiepoints, and uses this
+to produce a improved RSM.
+
+The image should be a VICAR file with a associated RSM (e.g, output from
+mars_generate_rsm). The dem_file should be the output of shelve_dem 
+(e.g., a ".xml" file). Tiepoint_file is the output of rsm_tiepoint.
+We copy the input file to the output name, and create a new RSM for it
+with an updated adjustment.
+
+The adjustment can be one of several set of parameters, see the option.
+.LEVEL1
+.variable img
+The input image, with RSM.
+.variable dem
+DEM file to use. Should be XML
+created by shelve_dem
+.variable tp
+The tiepoint file to use. Generated
+by something like rsm_tiepoint
+.variable out
+The output vicar image, with a
+improved RSM
+.variable  icor
+Use the image correction parameters.
+This is the default if nothing else
+is selected
+.variable  grot
+Use the ground rotation correction
+.variable  gcor
+Use the ground correction
+.variable verbose
+Print more information as we run.
+.END

@@ -49,6 +49,7 @@ Options:
 long_name_to_vicar = { "image" : "img",
                        "output" : "out",
                        "dem_file" : "dem",
+                       "tiepoint_file" : "tp",
                        "image_correction" : "icor",
                        "ground_rotation" : "grot",
                        "ground_correction" : "gcor",

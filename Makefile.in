@@ -1455,6 +1455,7 @@ am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/shelve_dem \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
+	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
 	$(srcdir)/$(srcpythonbin)/rsm_project \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen
 SCRIPTS = $(bin_SCRIPTS) $(dist_afidspythonvdev_SCRIPTS) \
@@ -2092,6 +2093,7 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/shelve_dem.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_improve.pdf \
+	$(srcdir)/$(srcpythonbin)/rsm_tiepoint.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_project.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
@@ -3427,6 +3429,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/shelve_dem \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
+	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
 	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_54)
 dist_afidspythonvdev_DATA = $(am__append_17) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
@@ -3436,6 +3439,7 @@ dist_afidspythonvdev_DATA = $(am__append_17) \
 	$(srcdir)/$(srcpythonbin)/shelve_dem.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_improve.pdf \
+	$(srcdir)/$(srcpythonbin)/rsm_tiepoint.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_project.pdf \
 	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \

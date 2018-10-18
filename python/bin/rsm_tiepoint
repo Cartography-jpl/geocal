@@ -26,6 +26,10 @@ Options:
   -h --help         
        Print this message
 
+  --autofit=d
+       Sets the FITMIN threshold automatically using the first n
+       correlations. [default: 14]
+
   --grid-spacing=g
        Grid spacing to exactly calculate the image ground connection
        for, doing a linear interpolation in between. This can greatly
@@ -104,6 +108,8 @@ Options:
 
 # Mapping between long name and shorter vicar name
 long_name_to_vicar = { "image" : "img",
+                       "dem_file" : "dem",
+                       "reference_image": "rimg",
                        "output" : "out",
                        "grid_spacing" : "gspace",
                        "number_process" : "nproc",
@@ -112,7 +118,6 @@ long_name_to_vicar = { "image" : "img",
                        "process_number_sample" : "psamp",
                        "verbose" : "verbose"
                        }
-
 
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
@@ -152,7 +157,7 @@ tpcollect = geocal.TiePointCollectPicmtch(igccol, [proj_fname,],
                             fftsize=args.fftsize, magnify=args.magnify,
                             magmin=args.magmin, toler=args.toler,
                             redo=args.redo,
-                            ffthalf=2, seed=args.seed, autofit=14,
+                            ffthalf=2, seed=args.seed, autofit=args.autofit,
                             thr_res=args.thr_res, quiet = not args.verbose)
 tpcol = tpcollect.tie_point_grid(eval(str(args.fftgrid))[0],
                                  eval(str(args.fftgrid))[1])

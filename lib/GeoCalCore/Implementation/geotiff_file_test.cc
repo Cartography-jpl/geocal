@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_CASE(basic)
 
 BOOST_AUTO_TEST_CASE(write_file)
 {
-  std::string fname = "geotiff_write_file_test.tif";
+  std::string fname = "test_out/geotiff_write_file_test.tif";
   boost::shared_ptr<GeotiffFile> f =
     boost::make_shared<GeotiffFile>(fname, "w");
   BOOST_CHECK_EQUAL(f->file_name(), fname);

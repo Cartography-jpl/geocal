@@ -13798,6 +13798,7 @@ test_out/vicar_copy.img : @geocalunittestdata@/vicar.img
 
 clean_unit_test:
 	-rm -rf test_out
+	-rm -rf pytest_tmp
 	-rm vicar_out.img
 @WITH_DOCUMENTATION_TRUE@doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg $(DOXYGEN_TARGET)
 @WITH_DOCUMENTATION_TRUE@	$(MKDIR_P) doc/geocal

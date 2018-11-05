@@ -169,6 +169,7 @@ CLEAN_HOOK+= clean_unit_test
 
 clean_unit_test:
 	-rm -rf test_out
+	-rm -rf pytest_tmp
 	-rm vicar_out.img
 
 if WITH_DOCUMENTATION

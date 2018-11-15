@@ -207,25 +207,148 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        PosCsephb::PosCsephb(Orbit &Orb, const Time &Min_time, const Time &Max_time, double Tstep)
+        PosCsephb::PosCsephb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
+        Tstep)
         Constructor.
 
         We sample the position of the given Orbit at fixed spaces times. This
         version goes from the Min_time, up to Max_time (or more accurately,
-        the largest time Min_time i * Tstep that is <= Max_time). 
+        the largest time Min_time i * Tstep that is <= Max_time).w 
         """
         _orbit_des.PosCsephb_swiginit(self, _orbit_des.new_PosCsephb(*args))
+
+    def pos_vel(self, *args):
+        """
+
+        blitz::Array< AutoDerivative< double >, 1 > PosCsephb::pos_vel(const TimeWithDerivative &T) const
+        Return position and velocity for the given time. 
+        """
+        return _orbit_des.PosCsephb_pos_vel(self, *args)
+
+
+    def _v_is_cf(self):
+        """
+
+        bool GeoCal::PosCsephb::is_cf() const
+        True if data is CartesianFixed.
+
+        If false, then data is CartesianInertial. 
+        """
+        return _orbit_des.PosCsephb__v_is_cf(self)
+
+
+    @property
+    def is_cf(self):
+        return self._v_is_cf()
+
+
+    def _v_min_time(self):
+        """
+
+        const Time& GeoCal::PosCsephb::min_time() const
+        Minimum time we have data for. 
+        """
+        return _orbit_des.PosCsephb__v_min_time(self)
+
+
+    @property
+    def min_time(self):
+        return self._v_min_time()
+
+
+    def _v_max_time(self):
+        """
+
+        Time GeoCal::PosCsephb::max_time() const
+        Maximum time we have data for. 
+        """
+        return _orbit_des.PosCsephb__v_max_time(self)
+
+
+    @property
+    def max_time(self):
+        return self._v_max_time()
+
+
+    def _v_time_step(self):
+        """
+
+        double GeoCal::PosCsephb::time_step() const
+        Time step between position data, in seconds. 
+        """
+        return _orbit_des.PosCsephb__v_time_step(self)
+
+
+    @property
+    def time_step(self):
+        return self._v_time_step()
+
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_des.delete_PosCsephb
+PosCsephb.pos_vel = new_instancemethod(_orbit_des.PosCsephb_pos_vel, None, PosCsephb)
+PosCsephb._v_is_cf = new_instancemethod(_orbit_des.PosCsephb__v_is_cf, None, PosCsephb)
+PosCsephb._v_min_time = new_instancemethod(_orbit_des.PosCsephb__v_min_time, None, PosCsephb)
+PosCsephb._v_max_time = new_instancemethod(_orbit_des.PosCsephb__v_max_time, None, PosCsephb)
+PosCsephb._v_time_step = new_instancemethod(_orbit_des.PosCsephb__v_time_step, None, PosCsephb)
 PosCsephb.__str__ = new_instancemethod(_orbit_des.PosCsephb___str__, None, PosCsephb)
 PosCsephb_swigregister = _orbit_des.PosCsephb_swigregister
 PosCsephb_swigregister(PosCsephb)
 
+class OrbitDes(geocal_swig.orbit.Orbit):
+    """
 
-__all__ = ["PosCsephb"]
+    This combines a PosCsephb and AttCsattb into an Orbit.
+
+    Note that we calculate things for every time point. If you are using
+    this a bit you may want to create a OrbitQuaternionList from this
+    Orbit to speed things up.
+
+    C++ includes: orbit_des.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+
+    def orbit_data(self, *args):
+        """
+
+        boost::shared_ptr< OrbitData > OrbitDes::orbit_data(const TimeWithDerivative &T) const
+
+        """
+        return _orbit_des.OrbitDes_orbit_data(self, *args)
+
+
+    def _v_pos_csephb(self):
+        """
+
+        const boost::shared_ptr<PosCsephb>& GeoCal::OrbitDes::pos_csephb() const
+
+        """
+        return _orbit_des.OrbitDes__v_pos_csephb(self)
+
+
+    @property
+    def pos_csephb(self):
+        return self._v_pos_csephb()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _orbit_des.delete_OrbitDes
+OrbitDes.orbit_data = new_instancemethod(_orbit_des.OrbitDes_orbit_data, None, OrbitDes)
+OrbitDes._v_pos_csephb = new_instancemethod(_orbit_des.OrbitDes__v_pos_csephb, None, OrbitDes)
+OrbitDes_swigregister = _orbit_des.OrbitDes_swigregister
+OrbitDes_swigregister(OrbitDes)
+
+
+__all__ = ["PosCsephb","OrbitDes"]
 
 
 

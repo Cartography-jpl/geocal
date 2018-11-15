@@ -323,7 +323,7 @@ template<class T> inline blitz::Array<T, 1> cross2
 
 boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
 {
-  range_check(T, min_time(), max_time());
+  range_check_inclusive(T, min_time(), max_time());
 
 //-----------------------------------------------------------------------
 // Calculate r, theta, and their derivatives using Kepler's equations.
@@ -390,7 +390,7 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
 boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
 (const TimeWithDerivative& T) const
 {
-  range_check(T.value(), min_time(), max_time());
+  range_check_inclusive(T.value(), min_time(), max_time());
 
 //-----------------------------------------------------------------------
 // Calculate r, theta, and their derivatives using Kepler's equations.

@@ -11655,6 +11655,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OrbitData__v_prefer_cf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData__v_prefer_cf" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::OrbitData const *)arg1)->prefer_cf();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_OrbitData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
@@ -23243,6 +23286,14 @@ static PyMethodDef SwigMethods[] = {
 		"Return TimeWithDerivative of OrbitData. \n"
 		""},
 	 { (char *)"OrbitData___str__", (PyCFunction)_wrap_OrbitData___str__, METH_O, NULL},
+	 { (char *)"OrbitData__v_prefer_cf", (PyCFunction)_wrap_OrbitData__v_prefer_cf, METH_O, (char *)"\n"
+		"\n"
+		"virtual bool GeoCal::OrbitData::prefer_cf() const =0\n"
+		"Do we prefer using CartesianFixed for the position or not? Note that\n"
+		"that class can always return either CartesianFixed or\n"
+		"CartesianInertial, but one or the other might be preferred because the\n"
+		"underlying data is already in that format. \n"
+		""},
 	 { (char *)"delete_OrbitData", (PyCFunction)_wrap_delete_OrbitData, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::OrbitData::~OrbitData()\n"

@@ -80,6 +80,15 @@ public:
 			  int Band = 0) const;
 
 //-----------------------------------------------------------------------
+/// Do we prefer using CartesianFixed for the position or not? Note
+/// that that class can always return either CartesianFixed or
+/// CartesianInertial, but one or the other might be preferred because
+/// the underlying data is already in that format. 
+//-----------------------------------------------------------------------
+
+  virtual bool prefer_cf() const = 0;
+  
+//-----------------------------------------------------------------------
 /// Convert from CartesianInertialLookVector to ScLookVector.
 //-----------------------------------------------------------------------
 
@@ -370,7 +379,9 @@ public:
 /// this object so we know which constructor to call. It probably
 /// isn't of interest to anything else.
 //-----------------------------------------------------------------------
+
   bool from_cf() const { return from_cf_; }
+  virtual bool prefer_cf() const {return from_cf_;}
 protected:
 //-----------------------------------------------------------------------
 /// Default constructor. Derived classes should call initialize before
@@ -685,15 +696,15 @@ public:
               const boost::math::quaternion<AutoDerivative<double> >& Q1, 
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
 	      const AutoDerivative<double>& toffset, double tspace);
-protected:
+
 //-----------------------------------------------------------------------
 /// This calculates the weighting factor to use to do a Lagrangian 
 /// interpolation.
 //-----------------------------------------------------------------------
 
   template<class iterator> std::vector<double> 
-  lagrangian_interpolation_factor(iterator tstart, 
-			    iterator tend, Time t) const
+  static lagrangian_interpolation_factor(iterator tstart, 
+			    iterator tend, Time t) 
   {
     std::vector<double> res;
     for(iterator j = tstart; j != tend; ++j) {
@@ -714,11 +725,11 @@ protected:
 //-----------------------------------------------------------------------
 
   template<class iterator, class iterator2> 
-  blitz::Array<double, 1> lagrangian_interpolation(iterator tstart, 
+  static blitz::Array<double, 1> lagrangian_interpolation(iterator tstart, 
 						   iterator tend,
 						   Time tm,
 						   iterator2 vstart,
-						   iterator2 vend) const
+						   iterator2 vend) 
   {
     std::vector<double> fac = lagrangian_interpolation_factor(tstart, tend, tm);
     std::vector<double>::iterator ifac = fac.begin();
@@ -728,6 +739,7 @@ protected:
       res += (*ifac) * (*v);
     return res;
   }
+protected:
   Time min_tm;			///< Minimum time that we have
 				///OrbitData for.
   Time max_tm;			///< Maximum time that we have

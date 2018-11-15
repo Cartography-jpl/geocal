@@ -375,6 +375,23 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def time_with_derivative(self):
         return self._v_time_with_derivative()
 
+
+    def _v_prefer_cf(self):
+        """
+
+        virtual bool GeoCal::OrbitData::prefer_cf() const =0
+        Do we prefer using CartesianFixed for the position or not? Note that
+        that class can always return either CartesianFixed or
+        CartesianInertial, but one or the other might be preferred because the
+        underlying data is already in that format. 
+        """
+        return _orbit.OrbitData__v_prefer_cf(self)
+
+
+    @property
+    def prefer_cf(self):
+        return self._v_prefer_cf()
+
     __swig_destroy__ = _orbit.delete_OrbitData
 OrbitData.resolution_meter = new_instancemethod(_orbit.OrbitData_resolution_meter, None, OrbitData)
 OrbitData.ci_look_vector = new_instancemethod(_orbit.OrbitData_ci_look_vector, None, OrbitData)
@@ -394,6 +411,7 @@ OrbitData._position_cf_with_derivative = new_instancemethod(_orbit.OrbitData__po
 OrbitData._v_time = new_instancemethod(_orbit.OrbitData__v_time, None, OrbitData)
 OrbitData._v_time_with_derivative = new_instancemethod(_orbit.OrbitData__v_time_with_derivative, None, OrbitData)
 OrbitData.__str__ = new_instancemethod(_orbit.OrbitData___str__, None, OrbitData)
+OrbitData._v_prefer_cf = new_instancemethod(_orbit.OrbitData__v_prefer_cf, None, OrbitData)
 OrbitData_swigregister = _orbit.OrbitData_swigregister
 OrbitData_swigregister(OrbitData)
 

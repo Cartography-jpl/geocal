@@ -131,6 +131,7 @@ def position_cf_with_derivative(self):
   %python_attribute(time, virtual Time)
   %python_attribute(time_with_derivative, virtual TimeWithDerivative)
   std::string print_to_string() const;
+  %python_attribute(prefer_cf, bool)
 };
 
 class QuaternionOrbitData : public OrbitData {

@@ -5553,6 +5553,7 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
+#include <ios>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/categories.hpp>
 
@@ -5560,8 +5561,22 @@ template<class T, int D> inline boost::array<T, D>
 class python_fh_device {
 public:
   typedef char  char_type;
-  typedef boost::iostreams::sink_tag category;
+  typedef boost::iostreams::seekable_device_tag category;
   python_fh_device(PyObject* Fh) : fh(Fh) {}
+  std::streamsize read(char* s, std::streamsize n)
+  {
+    PyObject* res = PyObject_CallMethod(fh, "read", "(i)", (int) n);
+    if(res == NULL) {
+      throw GeoCal::Exception("Call to FileHandle read failed");
+    }
+    char *rescp = PyBytes_AsString(res);
+    std::copy(rescp, rescp + n, s);
+    return n;
+  }
+  std::streamoff seek(std::streamoff off, std::ios_base::seekdir way)
+  {
+    throw GeoCal::Exception("Not implemented");
+  }
   std::streamsize write(const char* s, std::streamsize n)
   {
     PyObject* res = PyObject_CallMethod(fh, "write", "(y#)", s, (int) n);

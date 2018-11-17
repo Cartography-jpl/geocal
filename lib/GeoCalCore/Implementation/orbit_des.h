@@ -60,6 +60,7 @@ public:
   int des_size() const;
   void des_write(blitz::Array<char, 1>& Data) const;
   void test_print(std::ostream& Os) const { Os << "hi there\n";}
+  void test_read(std::istream& Is) const { std::string v; Is >> v; std::cerr << "From C++: " << v; }
 private:
   Time min_time_;
   double tstep_;

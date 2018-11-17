@@ -5577,6 +5577,7 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
+#include <ios>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/categories.hpp>
 
@@ -5584,8 +5585,22 @@ template<class T, int D> inline boost::array<T, D>
 class python_fh_device {
 public:
   typedef char  char_type;
-  typedef boost::iostreams::sink_tag category;
+  typedef boost::iostreams::seekable_device_tag category;
   python_fh_device(PyObject* Fh) : fh(Fh) {}
+  std::streamsize read(char* s, std::streamsize n)
+  {
+    PyObject* res = PyObject_CallMethod(fh, "read", "(i)", (int) n);
+    if(res == NULL) {
+      throw GeoCal::Exception("Call to FileHandle read failed");
+    }
+    char *rescp = PyBytes_AsString(res);
+    std::copy(rescp, rescp + n, s);
+    return n;
+  }
+  std::streamoff seek(std::streamoff off, std::ios_base::seekdir way)
+  {
+    throw GeoCal::Exception("Not implemented");
+  }
   std::streamsize write(const char* s, std::streamsize n)
   {
     PyObject* res = PyObject_CallMethod(fh, "write", "(y#)", s, (int) n);
@@ -7137,6 +7152,54 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_PosCsephb_test_read(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::PosCsephb *arg1 = (GeoCal::PosCsephb *) 0 ;
+  std::istream *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PosCsephb const > tempshared1 ;
+  boost::shared_ptr< GeoCal::PosCsephb const > *smartarg1 = 0 ;
+  boost::iostreams::filtering_istream v2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"PosCsephb_test_read",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PosCsephb_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PosCsephb_test_read" "', argument " "1"" of type '" "GeoCal::PosCsephb const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PosCsephb > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::PosCsephb > * >(argp1);
+      arg1 = const_cast< GeoCal::PosCsephb * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::PosCsephb > * >(argp1);
+      arg1 = const_cast< GeoCal::PosCsephb * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  
+  if(swig_obj[1] != Py_None)
+  v2.push(python_fh_inserter(swig_obj[1]));
+  arg2 = &v2;
+  
+  {
+    try {
+      ((GeoCal::PosCsephb const *)arg1)->test_read(*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_PosCsephb___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PosCsephb *arg1 = (GeoCal::PosCsephb *) 0 ;
@@ -7550,6 +7613,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"PosCsephb_test_print", _wrap_PosCsephb_test_print, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::PosCsephb::test_print(std::ostream &Os) const\n"
+		"\n"
+		""},
+	 { (char *)"PosCsephb_test_read", _wrap_PosCsephb_test_read, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::PosCsephb::test_read(std::istream &Is) const\n"
 		"\n"
 		""},
 	 { (char *)"PosCsephb___str__", (PyCFunction)_wrap_PosCsephb___str__, METH_O, NULL},

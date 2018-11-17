@@ -300,6 +300,15 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
         return _orbit_des.PosCsephb_test_print(self, Os)
 
 
+    def test_read(self, Is):
+        """
+
+        void GeoCal::PosCsephb::test_read(std::istream &Is) const
+
+        """
+        return _orbit_des.PosCsephb_test_read(self, Is)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -310,6 +319,7 @@ PosCsephb._v_min_time = new_instancemethod(_orbit_des.PosCsephb__v_min_time, Non
 PosCsephb._v_max_time = new_instancemethod(_orbit_des.PosCsephb__v_max_time, None, PosCsephb)
 PosCsephb._v_time_step = new_instancemethod(_orbit_des.PosCsephb__v_time_step, None, PosCsephb)
 PosCsephb.test_print = new_instancemethod(_orbit_des.PosCsephb_test_print, None, PosCsephb)
+PosCsephb.test_read = new_instancemethod(_orbit_des.PosCsephb_test_read, None, PosCsephb)
 PosCsephb.__str__ = new_instancemethod(_orbit_des.PosCsephb___str__, None, PosCsephb)
 PosCsephb_swigregister = _orbit_des.PosCsephb_swigregister
 PosCsephb_swigregister(PosCsephb)

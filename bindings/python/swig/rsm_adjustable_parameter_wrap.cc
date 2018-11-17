@@ -5557,6 +5557,7 @@ template<class T, int D> inline boost::array<T, D>
 }
 
 
+#include <ios>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/categories.hpp>
 
@@ -5564,8 +5565,22 @@ template<class T, int D> inline boost::array<T, D>
 class python_fh_device {
 public:
   typedef char  char_type;
-  typedef boost::iostreams::sink_tag category;
+  typedef boost::iostreams::seekable_device_tag category;
   python_fh_device(PyObject* Fh) : fh(Fh) {}
+  std::streamsize read(char* s, std::streamsize n)
+  {
+    PyObject* res = PyObject_CallMethod(fh, "read", "(i)", (int) n);
+    if(res == NULL) {
+      throw GeoCal::Exception("Call to FileHandle read failed");
+    }
+    char *rescp = PyBytes_AsString(res);
+    std::copy(rescp, rescp + n, s);
+    return n;
+  }
+  std::streamoff seek(std::streamoff off, std::ios_base::seekdir way)
+  {
+    throw GeoCal::Exception("Not implemented");
+  }
   std::streamsize write(const char* s, std::streamsize n)
   {
     PyObject* res = PyObject_CallMethod(fh, "write", "(y#)", s, (int) n);
@@ -6976,8 +6991,7 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter_base_read_tre_string(PyObject 
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::RsmAdjustableParameter > tempshared1 ;
   boost::shared_ptr< GeoCal::RsmAdjustableParameter > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
+  boost::iostreams::filtering_istream v2 ;
   PyObject *swig_obj[2] ;
   
   if (!SWIG_Python_UnpackTuple(args,"RsmAdjustableParameter_base_read_tre_string",2,2,swig_obj)) SWIG_fail;
@@ -6996,14 +7010,11 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter_base_read_tre_string(PyObject 
       arg1 = const_cast< GeoCal::RsmAdjustableParameter * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmAdjustableParameter_base_read_tre_string" "', argument " "2"" of type '" "std::istream &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmAdjustableParameter_base_read_tre_string" "', argument " "2"" of type '" "std::istream &""'"); 
-  }
-  arg2 = reinterpret_cast< std::istream * >(argp2);
+  
+  if(swig_obj[1] != Py_None)
+  v2.push(python_fh_inserter(swig_obj[1]));
+  arg2 = &v2;
+  
   {
     try {
       (arg1)->base_read_tre_string(*arg2);

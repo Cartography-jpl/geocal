@@ -11,3 +11,9 @@
         v.push(python_fh_inserter($input));
     $1 = &v;
 %}
+
+%typemap(in) std::istream& (boost::iostreams::filtering_istream v) %{
+    if($input != Py_None)
+        v.push(python_fh_inserter($input));
+    $1 = &v;
+%}

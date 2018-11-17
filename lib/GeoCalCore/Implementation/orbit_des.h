@@ -13,6 +13,13 @@ namespace GeoCal {
 
   The CSEPHB DES doens't contain velocity. We calculate the velocity
   from the positions.
+
+  Note that the the CSEPHB data is like a NITF TRE. But because it
+  is a DES, it is potentially much larger. For efficiency, we read and
+  write the data as a a large blitz::Array<char, 1>. This allows the
+  data on the python side to be a numpy array, which is potentially 
+  memory mapped. This data is pretty much just a std::string like any
+  TRE, but without the overhead of handling a dynamic size.
 *******************************************************************/
 class PosCsephb : public Printable<PosCsephb> {
 public:
@@ -49,6 +56,10 @@ public:
 
   Time max_time() const { return min_time_ + (pos.size() - 1) * time_step(); }
   virtual void print(std::ostream& Os) const;
+
+  int des_size() const;
+  void des_write(blitz::Array<char, 1>& Data) const;
+  void test_print(std::ostream& Os) const { Os << "hi there\n";}
 private:
   Time min_time_;
   double tstep_;

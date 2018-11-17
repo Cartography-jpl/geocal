@@ -25,6 +25,7 @@ public:
   %python_attribute(min_time, Time);
   %python_attribute(max_time, Time);
   %python_attribute(time_step, double);
+  void test_print(std::ostream& Os) const;
   std::string print_to_string() const;
   %pickle_serialization();
 };

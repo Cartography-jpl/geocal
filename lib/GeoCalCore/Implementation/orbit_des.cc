@@ -3,7 +3,11 @@
 #include "ecr.h"
 #include "eci.h"
 #include "geocal_serialize_support.h"
+#include "tre_support.h"
 #include <boost/make_shared.hpp>
+#include <boost/iostreams/filtering_stream.hpp>
+#include <boost/iostreams/categories.hpp>
+#include <boost/algorithm/string.hpp>
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -25,6 +29,32 @@ void OrbitDes::serialize(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(PosCsephb);
 GEOCAL_IMPLEMENT(OrbitDes);
 #endif
+
+namespace GeoCal {
+  namespace OrbitDesHelper {
+class blitz_insert_device {
+public:
+  typedef char  char_type;
+  typedef boost::iostreams::sink_tag category;
+  blitz_insert_device(blitz::Array<char, 1>& Data)
+    : data(Data), data_ptr(&Data(0))
+  { }
+  std::streamsize write(const char* s, std::streamsize n)
+  {
+    std::copy(s, s + n, data_ptr);
+    return n;
+  }
+  blitz::Array<char, 1>& data;
+  char* data_ptr;
+};
+  }
+}
+
+inline GeoCal::OrbitDesHelper::blitz_insert_device
+blitz_inserter(blitz::Array<char, 1>& Data)
+{
+  return GeoCal::OrbitDesHelper::blitz_insert_device(Data);
+}
 
 //-----------------------------------------------------------------------
 /// Constructor. We sample the position of the given Orbit at fixed
@@ -121,6 +151,37 @@ blitz::Array<AutoDerivative<double>, 1> PosCsephb::pos_vel
   res(blitz::Range(0,2)) = f * pos[i+1] + (1 - f) * pos[i];
   res(blitz::Range(3,5)) = (pos[i+1] - pos[i]) / tstep_;
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Size needed to store DES data.
+//-----------------------------------------------------------------------
+  
+int PosCsephb::des_size() const
+{
+  int res = 1 + 1; // Qual, interpolation type
+  if(false)	   // Lagrange order
+    res += 1;
+  // source, coordinate, tstep, min_time date, min_time time, number;
+  res += 1 + 1 + 13 + 8 + 16 + 5;
+  res += pos.size() * (3 * 12);	// Data for each point
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Write out the DES data. See the discussion at the start of this
+/// class for why we have this awkward interface.
+//-----------------------------------------------------------------------
+
+static boost::format frontpart("%|1$01d|%|2$01d|");
+static boost::format largangeorder("%|1$01d|");
+//static boost::format nextpart("%|1$01d|%|2$01d|3");
+void PosCsephb::des_write(blitz::Array<char, 1>& Data) const
+{
+  if(Data.rows() != des_size())
+    throw Exception("Data is not the required des_size()");
+  boost::iostreams::filtering_ostream out(blitz_inserter(Data));
+  
 }
 
 //-----------------------------------------------------------------------

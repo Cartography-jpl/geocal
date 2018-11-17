@@ -198,6 +198,13 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
     The CSEPHB DES doens't contain velocity. We calculate the velocity
     from the positions.
 
+    Note that the the CSEPHB data is like a NITF TRE. But because it is a
+    DES, it is potentially much larger. For efficiency, we read and write
+    the data as a a large blitz::Array<char, 1>. This allows the data on
+    the python side to be a numpy array, which is potentially memory
+    mapped. This data is pretty much just a std::string like any TRE, but
+    without the overhead of handling a dynamic size.
+
     C++ includes: orbit_des.h 
     """
 
@@ -284,6 +291,15 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
         return self._v_time_step()
 
 
+    def test_print(self, Os):
+        """
+
+        void GeoCal::PosCsephb::test_print(std::ostream &Os) const
+
+        """
+        return _orbit_des.PosCsephb_test_print(self, Os)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -293,6 +309,7 @@ PosCsephb._v_is_cf = new_instancemethod(_orbit_des.PosCsephb__v_is_cf, None, Pos
 PosCsephb._v_min_time = new_instancemethod(_orbit_des.PosCsephb__v_min_time, None, PosCsephb)
 PosCsephb._v_max_time = new_instancemethod(_orbit_des.PosCsephb__v_max_time, None, PosCsephb)
 PosCsephb._v_time_step = new_instancemethod(_orbit_des.PosCsephb__v_time_step, None, PosCsephb)
+PosCsephb.test_print = new_instancemethod(_orbit_des.PosCsephb_test_print, None, PosCsephb)
 PosCsephb.__str__ = new_instancemethod(_orbit_des.PosCsephb___str__, None, PosCsephb)
 PosCsephb_swigregister = _orbit_des.PosCsephb_swigregister
 PosCsephb_swigregister(PosCsephb)

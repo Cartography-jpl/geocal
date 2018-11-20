@@ -200,22 +200,36 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
 
     Note that the the CSEPHB data is like a NITF TRE. But because it is a
     DES, it is potentially much larger. For efficiency, we read and write
-    the data as a a large blitz::Array<char, 1>. This allows the data on
-    the python side to be a numpy array, which is potentially memory
-    mapped. This data is pretty much just a std::string like any TRE, but
-    without the overhead of handling a dynamic size.
+    the data as istream and ostream rather than return strings as we
+    typically do for TREs. On the python side, this can be mapped from a
+    io object like FileHandle or BytesIO.
 
     C++ includes: orbit_des.h 
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    EPHEMERIS_QUALITY_SUSPECT = _orbit_des.PosCsephb_EPHEMERIS_QUALITY_SUSPECT
+    EPHEMERIS_QUALITY_GOOD = _orbit_des.PosCsephb_EPHEMERIS_QUALITY_GOOD
+    NEAREST_NEIGHBOR = _orbit_des.PosCsephb_NEAREST_NEIGHBOR
+    LINEAR = _orbit_des.PosCsephb_LINEAR
+    LAGRANGE = _orbit_des.PosCsephb_LAGRANGE
+    NO_LAGRANGE = _orbit_des.PosCsephb_NO_LAGRANGE
+    LAGRANGE_1 = _orbit_des.PosCsephb_LAGRANGE_1
+    LAGRANGE_3 = _orbit_des.PosCsephb_LAGRANGE_3
+    LAGRANGE_5 = _orbit_des.PosCsephb_LAGRANGE_5
+    LAGRANGE_7 = _orbit_des.PosCsephb_LAGRANGE_7
+    PREDICTED = _orbit_des.PosCsephb_PREDICTED
+    ACTUAL = _orbit_des.PosCsephb_ACTUAL
+    REFINED = _orbit_des.PosCsephb_REFINED
 
     def __init__(self, *args):
         """
 
         PosCsephb::PosCsephb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
-        Tstep)
+        Tstep, InterpolationType Itype=LINEAR, LagrangeOrder
+        Lagrange_order=NO_LAGRANGE, EphemerisDataQuality
+        E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL)
         Constructor.
 
         We sample the position of the given Orbit at fixed spaces times. This
@@ -291,23 +305,96 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
         return self._v_time_step()
 
 
-    def test_print(self, Os):
+    def _v_interpolation_type(self, *args):
         """
 
-        void GeoCal::PosCsephb::test_print(std::ostream &Os) const
+        void GeoCal::PosCsephb::interpolation_type(InterpolationType Itype)
 
         """
-        return _orbit_des.PosCsephb_test_print(self, Os)
+        return _orbit_des.PosCsephb__v_interpolation_type(self, *args)
 
 
-    def test_read(self, Is):
+    @property
+    def interpolation_type(self):
+        return self._v_interpolation_type()
+
+    @interpolation_type.setter
+    def interpolation_type(self, value):
+      self._v_interpolation_type(value)
+
+
+    def _v_ephemeris_data_quality(self, *args):
         """
 
-        void GeoCal::PosCsephb::test_read(std::istream &Is) const
+        void GeoCal::PosCsephb::ephemeris_data_quality(EphemerisDataQuality E_quality)
 
         """
-        return _orbit_des.PosCsephb_test_read(self, Is)
+        return _orbit_des.PosCsephb__v_ephemeris_data_quality(self, *args)
 
+
+    @property
+    def ephemeris_data_quality(self):
+        return self._v_ephemeris_data_quality()
+
+    @ephemeris_data_quality.setter
+    def ephemeris_data_quality(self, value):
+      self._v_ephemeris_data_quality(value)
+
+
+    def _v_ephemeris_source(self, *args):
+        """
+
+        void GeoCal::PosCsephb::ephemeris_source(EphemerisSource E_source)
+
+        """
+        return _orbit_des.PosCsephb__v_ephemeris_source(self, *args)
+
+
+    @property
+    def ephemeris_source(self):
+        return self._v_ephemeris_source()
+
+    @ephemeris_source.setter
+    def ephemeris_source(self, value):
+      self._v_ephemeris_source(value)
+
+
+    def _v_lagrange_order(self, *args):
+        """
+
+        void GeoCal::PosCsephb::lagrange_order(LagrangeOrder Lagrange_order)
+
+        """
+        return _orbit_des.PosCsephb__v_lagrange_order(self, *args)
+
+
+    @property
+    def lagrange_order(self):
+        return self._v_lagrange_order()
+
+    @lagrange_order.setter
+    def lagrange_order(self, value):
+      self._v_lagrange_order(value)
+
+
+    def des_write(self, Os):
+        """
+
+        void PosCsephb::des_write(std::ostream &Os) const
+        Write out the DES data to the given stream. 
+        """
+        return _orbit_des.PosCsephb_des_write(self, Os)
+
+
+    def des_read(In):
+        """
+
+        boost::shared_ptr< PosCsephb > PosCsephb::des_read(std::istream &In)
+        Read the DES data the given stream. 
+        """
+        return _orbit_des.PosCsephb_des_read(In)
+
+    des_read = staticmethod(des_read)
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
@@ -318,11 +405,22 @@ PosCsephb._v_is_cf = new_instancemethod(_orbit_des.PosCsephb__v_is_cf, None, Pos
 PosCsephb._v_min_time = new_instancemethod(_orbit_des.PosCsephb__v_min_time, None, PosCsephb)
 PosCsephb._v_max_time = new_instancemethod(_orbit_des.PosCsephb__v_max_time, None, PosCsephb)
 PosCsephb._v_time_step = new_instancemethod(_orbit_des.PosCsephb__v_time_step, None, PosCsephb)
-PosCsephb.test_print = new_instancemethod(_orbit_des.PosCsephb_test_print, None, PosCsephb)
-PosCsephb.test_read = new_instancemethod(_orbit_des.PosCsephb_test_read, None, PosCsephb)
+PosCsephb._v_interpolation_type = new_instancemethod(_orbit_des.PosCsephb__v_interpolation_type, None, PosCsephb)
+PosCsephb._v_ephemeris_data_quality = new_instancemethod(_orbit_des.PosCsephb__v_ephemeris_data_quality, None, PosCsephb)
+PosCsephb._v_ephemeris_source = new_instancemethod(_orbit_des.PosCsephb__v_ephemeris_source, None, PosCsephb)
+PosCsephb._v_lagrange_order = new_instancemethod(_orbit_des.PosCsephb__v_lagrange_order, None, PosCsephb)
+PosCsephb.des_write = new_instancemethod(_orbit_des.PosCsephb_des_write, None, PosCsephb)
 PosCsephb.__str__ = new_instancemethod(_orbit_des.PosCsephb___str__, None, PosCsephb)
 PosCsephb_swigregister = _orbit_des.PosCsephb_swigregister
 PosCsephb_swigregister(PosCsephb)
+
+def PosCsephb_des_read(In):
+    """
+
+    boost::shared_ptr< PosCsephb > PosCsephb::des_read(std::istream &In)
+    Read the DES data the given stream. 
+    """
+    return _orbit_des.PosCsephb_des_read(In)
 
 class OrbitDes(geocal_swig.orbit.Orbit):
     """

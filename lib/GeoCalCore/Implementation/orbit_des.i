@@ -15,9 +15,25 @@
 namespace GeoCal {
 class PosCsephb : public GenericObject {
 public:
-  PosCsephb(const Orbit& Orb, double Tstep);
+  enum EphemerisDataQuality {EPHEMERIS_QUALITY_SUSPECT = 0,
+			     EPHEMERIS_QUALITY_GOOD = 1};
+  enum InterpolationType { NEAREST_NEIGHBOR = 0,
+			   LINEAR = 1,
+			   LAGRANGE = 2 };
+  enum LagrangeOrder { NO_LAGRANGE = 0, LAGRANGE_1 = 1, LAGRANGE_3 = 3,
+		       LAGRANGE_5 = 5,
+		       LAGRANGE_7 = 7};
+  enum EphemerisSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
+  PosCsephb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    EphemerisDataQuality E_quality = EPHEMERIS_QUALITY_GOOD,
+	    EphemerisSource E_source = ACTUAL);
   PosCsephb(const Orbit& Orb, const Time& Min_time, const Time& Max_time,
-	    double Tstep);
+	    double Tstep,
+	    InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    EphemerisDataQuality E_quality = EPHEMERIS_QUALITY_GOOD,
+	    EphemerisSource E_source = ACTUAL);
   blitz::Array<double, 1> pos_vel(const Time& T) const;
   blitz::Array<AutoDerivative<double>, 1>
     pos_vel(const TimeWithDerivative& T) const;
@@ -25,8 +41,12 @@ public:
   %python_attribute(min_time, Time);
   %python_attribute(max_time, Time);
   %python_attribute(time_step, double);
-  void test_print(std::ostream& Os) const;
-  void test_read(std::istream& Is) const;
+  %python_attribute_with_set(interpolation_type, InterpolationType);
+  %python_attribute_with_set(ephemeris_data_quality, EphemerisDataQuality);
+  %python_attribute_with_set(ephemeris_source, EphemerisSource);
+  %python_attribute_with_set(lagrange_order, LagrangeOrder);
+  void des_write(std::ostream& Os) const;
+  static boost::shared_ptr<PosCsephb> des_read(std::istream& In);
   std::string print_to_string() const;
   %pickle_serialization();
 };

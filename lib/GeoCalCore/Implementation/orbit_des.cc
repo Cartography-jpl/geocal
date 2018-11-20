@@ -5,9 +5,9 @@
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
 #include <boost/make_shared.hpp>
-#include <boost/iostreams/filtering_stream.hpp>
-#include <boost/iostreams/categories.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/foreach.hpp>
+#include <boost/regex.hpp>
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -16,7 +16,11 @@ void PosCsephb::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(PosCsephb);
   ar & GEOCAL_NVP_(min_time) & GEOCAL_NVP_(tstep)
-    & GEOCAL_NVP_(is_cf) & GEOCAL_NVP(pos);
+    & GEOCAL_NVP_(is_cf) & GEOCAL_NVP_(itype)
+    & GEOCAL_NVP_(e_quality)
+    & GEOCAL_NVP_(e_source)
+    & GEOCAL_NVP_(lagrange_order)
+    & GEOCAL_NVP(pos);
 }
 
 template<class Archive>
@@ -30,32 +34,6 @@ GEOCAL_IMPLEMENT(PosCsephb);
 GEOCAL_IMPLEMENT(OrbitDes);
 #endif
 
-namespace GeoCal {
-  namespace OrbitDesHelper {
-class blitz_insert_device {
-public:
-  typedef char  char_type;
-  typedef boost::iostreams::sink_tag category;
-  blitz_insert_device(blitz::Array<char, 1>& Data)
-    : data(Data), data_ptr(&Data(0))
-  { }
-  std::streamsize write(const char* s, std::streamsize n)
-  {
-    std::copy(s, s + n, data_ptr);
-    return n;
-  }
-  blitz::Array<char, 1>& data;
-  char* data_ptr;
-};
-  }
-}
-
-inline GeoCal::OrbitDesHelper::blitz_insert_device
-blitz_inserter(blitz::Array<char, 1>& Data)
-{
-  return GeoCal::OrbitDesHelper::blitz_insert_device(Data);
-}
-
 //-----------------------------------------------------------------------
 /// Constructor. We sample the position of the given Orbit at fixed
 /// spaces times. This version goes from the min_time() of the Orbit,
@@ -63,8 +41,15 @@ blitz_inserter(blitz::Array<char, 1>& Data)
 /// + i * Tstep that is <= max_time()).
 //-----------------------------------------------------------------------
 
-PosCsephb::PosCsephb(const Orbit& Orb, double Tstep)
-  : min_time_(Orb.min_time()), tstep_(Tstep)
+PosCsephb::PosCsephb
+(const Orbit& Orb, double Tstep,
+ InterpolationType Itype,
+ LagrangeOrder Lagrange_order,
+ EphemerisDataQuality E_quality,
+ EphemerisSource E_source)
+  : min_time_(Orb.min_time()), tstep_(Tstep),
+    itype_(Itype), lagrange_order_(Lagrange_order),
+    e_quality_(E_quality), e_source_(E_source)
 {
   is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
   blitz::Array<double, 1> p(3);
@@ -88,8 +73,14 @@ PosCsephb::PosCsephb(const Orbit& Orb, double Tstep)
 //-----------------------------------------------------------------------
 
 PosCsephb::PosCsephb
-(const Orbit& Orb, const Time& Min_time, const Time& Max_time, double Tstep)
-  : min_time_(Min_time), tstep_(Tstep)
+(const Orbit& Orb, const Time& Min_time, const Time& Max_time, double Tstep,
+ InterpolationType Itype,
+ LagrangeOrder Lagrange_order,
+ EphemerisDataQuality E_quality,
+ EphemerisSource E_source)
+  : min_time_(Min_time), tstep_(Tstep),
+    itype_(Itype), lagrange_order_(Lagrange_order),
+    e_quality_(E_quality), e_source_(E_source)
 {
   is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
   blitz::Array<double, 1> p(3);
@@ -108,10 +99,21 @@ PosCsephb::PosCsephb
 void PosCsephb::print(std::ostream& Os) const
 {
   Os << "PosCsephb\n"
-     << "  Min time: " << min_time_ << "\n"
-     << "  Max time: " << max_time() << "\n"
-     << "  Tstep:    " << tstep_ << "\n"
-     << "  Is_cf:    " << is_cf_ << "\n";
+     << "  Min time:           " << min_time_ << "\n"
+     << "  Max time:           " << max_time() << "\n"
+     << "  Tstep:              " << tstep_ << "\n"
+     << "  Is_cf:              " << is_cf_ << "\n"
+     << "  Interpolation type: "
+     << (itype_ == NEAREST_NEIGHBOR ? "Nearest Neighbor" :
+	 (itype_ == LINEAR ? "Linear" : "Lagrange")) << "\n"
+     << "  Lagrange order:     " << (int) lagrange_order_ << "\n"
+     << "  Ephemeris quality:  " << (e_quality_ == EPHEMERIS_QUALITY_SUSPECT ?
+				     "Suspect" : "Good") << "\n"
+     << "  Ephemeris source:   " << (e_source_ == PREDICTED ?
+				     "Predicted" :
+				     (e_source_ == ACTUAL ?
+				      "Actual, time of collection" :
+				      "Refined")) << "\n";
 }
 
 //-----------------------------------------------------------------------
@@ -123,6 +125,8 @@ blitz::Array<double, 1> PosCsephb::pos_vel(const Time& T) const
   range_check_inclusive(T, min_time_, max_time());
   // Just linear interpolation for now. We'll do more complicated
   // interpolation shortly.
+  if(itype_ != LINEAR)
+    throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T - min_time_) / tstep_);
   if(i >= (int) pos.size())
     --i;
@@ -143,6 +147,8 @@ blitz::Array<AutoDerivative<double>, 1> PosCsephb::pos_vel
   range_check_inclusive(T.value(), min_time_, max_time());
   // Just linear interpolation for now. We'll do more complicated
   // interpolation shortly.
+  if(itype_ != LINEAR)
+    throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T.value() - min_time_) / tstep_);
   if(i >= (int) pos.size())
     --i;
@@ -153,35 +159,80 @@ blitz::Array<AutoDerivative<double>, 1> PosCsephb::pos_vel
   return res;
 }
 
+static boost::format frontpart("%|1$01d|%|2$01d|");
+static boost::format largangeorder("%|1$01d|");
+static boost::format nextpart("%|1$01d|%|2$01d|%|3$013.9f|%|4$8s|%|5$16s|%|6$05d|");
+static boost::format numformat("%|1$+012.2f|");
+
 //-----------------------------------------------------------------------
-/// Size needed to store DES data.
+/// Write out the DES data to the given stream.
 //-----------------------------------------------------------------------
-  
-int PosCsephb::des_size() const
+
+void PosCsephb::des_write(std::ostream& Os) const
 {
-  int res = 1 + 1; // Qual, interpolation type
-  if(false)	   // Lagrange order
-    res += 1;
-  // source, coordinate, tstep, min_time date, min_time time, number;
-  res += 1 + 1 + 13 + 8 + 16 + 5;
-  res += pos.size() * (3 * 12);	// Data for each point
-  return res;
+  Os << str_check_size(frontpart % e_quality_ % itype_, 2);
+  if(itype_ == LAGRANGE)
+    Os << str_check_size(largangeorder % lagrange_order_, 1);
+  // Indicate 1 for ECF, 0 for ECI
+  int coor_frame = (is_cf_ ? 1 : 0);
+  std::string mtime = min_time_.to_string();
+  // Split into date and time parts
+  // The time string is something like "1998-06-30T10:51:28.32Z"
+  std::size_t t = mtime.find("T");
+  std::string d_mtime = mtime.substr(0, t);
+  std::string t_mtime = mtime.substr(t+1, -1);
+  // Chop off trailing "Z" in time part"
+  t_mtime = t_mtime.substr(0, t_mtime.size() - 1);
+  // Remove the "-" in the date.
+  d_mtime = boost::regex_replace(d_mtime, boost::regex("-"), "");
+  // Remove the ":" in the time.
+  t_mtime = boost::regex_replace(t_mtime, boost::regex(":"), "");
+  // Pad with trailing "0" to full size"
+  while(t_mtime.size() < 16)
+    t_mtime += "0";
+  Os << str_check_size(nextpart % e_source_ % coor_frame % tstep_ % d_mtime %
+		       t_mtime % (int) pos.size(), 1 + 1 + 13 + 8 + 16 + 5);
+  typedef blitz::Array<double, 1> atype;
+  BOOST_FOREACH(const atype& v, pos)
+    Os << str_check_size(numformat % v(0), 12)
+       << str_check_size(numformat % v(1), 12)
+       << str_check_size(numformat % v(2), 12);
 }
 
 //-----------------------------------------------------------------------
-/// Write out the DES data. See the discussion at the start of this
-/// class for why we have this awkward interface.
+/// Read the DES data  the given stream.
 //-----------------------------------------------------------------------
 
-static boost::format frontpart("%|1$01d|%|2$01d|");
-static boost::format largangeorder("%|1$01d|");
-//static boost::format nextpart("%|1$01d|%|2$01d|3");
-void PosCsephb::des_write(blitz::Array<char, 1>& Data) const
+boost::shared_ptr<PosCsephb> PosCsephb::des_read(std::istream& In)
 {
-  if(Data.rows() != des_size())
-    throw Exception("Data is not the required des_size()");
-  boost::iostreams::filtering_ostream out(blitz_inserter(Data));
-  
+  boost::shared_ptr<PosCsephb> res(new PosCsephb());
+  res->e_quality_ = EphemerisDataQuality(read_size<int>(In, 1));
+  res->itype_ = InterpolationType(read_size<int>(In, 1));
+  res->lagrange_order_ = NO_LAGRANGE;	
+  if(res->itype_ == LAGRANGE)
+    res->lagrange_order_ = LagrangeOrder(read_size<int> (In, 1));
+  res->e_source_ = EphemerisSource(read_size<int>(In, 1));
+  int coor_frame = read_size<int>(In, 1);
+  res->is_cf_ = (coor_frame == 1);
+  res->tstep_ = read_size<double>(In,13);
+  std::string d_mtime = read_size<std::string>(In, 8);
+  std::string t_mtime = read_size<std::string>(In, 16);
+  // Add "-" and ":"
+  d_mtime.insert(6, "-");
+  d_mtime.insert(4, "-");
+  t_mtime.insert(4, ":");
+  t_mtime.insert(2, ":");
+  res->min_time_ = Time::parse_time(d_mtime + "T" + t_mtime + "Z");
+  int sz = read_size<int>(In, 5);
+  res->pos.reserve(sz);
+  for(int i = 0; i < sz; ++i) {
+    blitz::Array<double, 1> v(3);
+    v(0) = read_size<double>(In, 12);
+    v(1) = read_size<double>(In, 12);
+    v(2) = read_size<double>(In, 12);
+    res->pos.push_back(v);
+  }
+  return res;
 }
 
 //-----------------------------------------------------------------------

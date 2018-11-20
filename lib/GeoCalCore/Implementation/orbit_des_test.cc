@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "orbit_des.h"
+#include <sstream>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -16,6 +17,22 @@ BOOST_AUTO_TEST_CASE(pos_csephb)
   BOOST_CHECK_CLOSE(p.pos_vel(t)(0), -1788501.0, 1e-4);
   BOOST_CHECK_CLOSE(p.pos_vel(t)(1), -6854177.0, 1e-4);
   BOOST_CHECK_CLOSE(p.pos_vel(t)(2), -16811.0, 1e-3);
+  std::ostringstream os;
+  p.des_write(os);
+  if(false)
+    std::cerr << os.str() << "\n";
+  std::istringstream is(os.str());
+  boost::shared_ptr<PosCsephb> p2 = PosCsephb::des_read(is);
+  BOOST_CHECK(fabs(p2->min_time() - t) < 1e-6);
+  BOOST_CHECK_CLOSE(p2->max_time() - t, 100.0, 1e-4);
+  BOOST_CHECK_CLOSE(p2->pos_vel(t)(0), -1788501.0, 1e-4);
+  BOOST_CHECK_CLOSE(p2->pos_vel(t)(1), -6854177.0, 1e-4);
+  BOOST_CHECK_CLOSE(p2->pos_vel(t)(2), -16811.0, 1e-3);
+  BOOST_CHECK_EQUAL(p2->is_cf(), p.is_cf());
+  BOOST_CHECK_CLOSE(p2->time_step(), p.time_step(), 1e-4);
+  if(false)
+    std::cerr << p << "\n"
+	      << *p2 << "\n";
 }
 
 BOOST_AUTO_TEST_CASE(orbit_des)

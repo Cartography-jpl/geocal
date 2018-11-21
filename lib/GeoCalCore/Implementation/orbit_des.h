@@ -1,6 +1,7 @@
 #ifndef ORBIT_DES_H
 #define ORBIT_DES_H
 #include "orbit.h"
+#include <boost/utility.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -20,7 +21,7 @@ namespace GeoCal {
   we typically do for TREs. On the python side, this can be mapped
   from a io object like FileHandle or BytesIO.
 *******************************************************************/
-class PosCsephb : public Printable<PosCsephb> {
+class PosCsephb : public Printable<PosCsephb>, boost::noncopyable {
 public:
   enum EphemerisDataQuality {EPHEMERIS_QUALITY_SUSPECT = 0,
 			     EPHEMERIS_QUALITY_GOOD = 1};

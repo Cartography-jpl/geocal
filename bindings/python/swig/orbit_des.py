@@ -435,10 +435,15 @@ class OrbitDes(geocal_swig.orbit.Orbit):
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, Pos):
+        """
+
+        OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos)
+        Constructor. 
+        """
+        _orbit_des.OrbitDes_swiginit(self, _orbit_des.new_OrbitDes(Pos))
 
     def orbit_data(self, *args):
         """

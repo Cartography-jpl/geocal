@@ -128,7 +128,7 @@ blitz::Array<double, 1> PosCsephb::pos_vel(const Time& T) const
   if(itype_ != LINEAR)
     throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T - min_time_) / tstep_);
-  if(i >= (int) pos.size())
+  if(i >= (int) pos.size() - 1)
     --i;
   double f = (T - min_time_) / tstep_ - i;
   blitz::Array<double, 1> res(6);
@@ -163,6 +163,7 @@ static boost::format frontpart("%|1$01d|%|2$01d|");
 static boost::format largangeorder("%|1$01d|");
 static boost::format nextpart("%|1$01d|%|2$01d|%|3$013.9f|%|4$8s|%|5$16s|%|6$05d|");
 static boost::format numformat("%|1$+012.2f|");
+static boost::format resformat("%|1$05d|");
 
 //-----------------------------------------------------------------------
 /// Write out the DES data to the given stream.
@@ -197,6 +198,7 @@ void PosCsephb::des_write(std::ostream& Os) const
     Os << str_check_size(numformat % v(0), 12)
        << str_check_size(numformat % v(1), 12)
        << str_check_size(numformat % v(2), 12);
+  Os << str_check_size(resformat % 0, 5);
 }
 
 //-----------------------------------------------------------------------
@@ -232,6 +234,9 @@ boost::shared_ptr<PosCsephb> PosCsephb::des_read(std::istream& In)
     v(2) = read_size<double>(In, 12);
     res->pos.push_back(v);
   }
+  int reserved_len = read_size<int>(In, 5);
+  if(reserved_len > 0)
+    std::string skipped = read_size<std::string>(In, reserved_len);
   return res;
 }
 

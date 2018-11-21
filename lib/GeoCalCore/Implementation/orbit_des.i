@@ -8,8 +8,6 @@
 %}
 %base_import(generic_object)
 %base_import(orbit)
-%import "geocal_time.i"
-%include "geocal_time_include.i"
 %geocal_shared_ptr(GeoCal::PosCsephb);
 %geocal_shared_ptr(GeoCal::OrbitDes);
 namespace GeoCal {
@@ -55,8 +53,8 @@ class OrbitDes: public Orbit {
 public:
   OrbitDes(const boost::shared_ptr<PosCsephb>& Pos);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
-  virtual boost::shared_ptr<OrbitData> 
-  orbit_data(const TimeWithDerivative& T) const;
+  virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
+    const;
   %python_attribute(pos_csephb, boost::shared_ptr<PosCsephb>);
   %pickle_serialization();
 };

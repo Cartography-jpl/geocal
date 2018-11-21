@@ -5575,6 +5575,7 @@ public:
     }
     char *rescp = PyBytes_AsString(res);
     std::copy(rescp, rescp + n, s);
+    Py_DECREF(res);
     return n;
   }
   std::streamoff seek(std::streamoff off, std::ios_base::seekdir way)

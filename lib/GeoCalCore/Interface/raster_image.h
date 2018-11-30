@@ -5,6 +5,7 @@
 #include "geocal_exception.h"
 #include "map_info.h"
 #include "geocal_rpc.h"
+#include "rsm.h"
 #include <boost/multi_array.hpp>
 #include <boost/shared_ptr.hpp>
 #include <blitz/array.h>
@@ -13,7 +14,7 @@
 
 namespace GeoCal {
   class RasterImageTileIterator;
-
+  
 /****************************************************************//**
   This is a general image class. Conceptually, an image is just a two
   dimensional array of integers, although it is not necessarily
@@ -40,10 +41,10 @@ namespace GeoCal {
   The default tile size is the entire image, derived classes can
   supply other values if desired.
 
-  A RasterImage may or may not have a Rpc and MapInfo associated with
-  it. You can query has_rpc() and has_mapinfo() to find out if it has
-  this metadata, and if it does you can access this by rpc() and
-  map_info().
+  A RasterImage may or may not have a Rpc, Rsm, or MapInfo associated with
+  it. You can query has_rpc(), has_rsm(), and has_mapinfo() to find
+  out if it has this metadata, and if it does you can access this by
+  rpc(), rsm() and map_info().
 *******************************************************************/
 
 class RasterImage : public Printable<RasterImage> {
@@ -367,6 +368,23 @@ public:
   boost::shared_ptr<Rpc> rpc_ptr() const
   { return boost::shared_ptr<Rpc>(new Rpc(rpc())); }
 
+/// *********************************************************************
+/// Functions available if we have RSM
+/// *********************************************************************
+
+//-----------------------------------------------------------------------
+/// Indicate if we have Rsm. The default is false, but derived
+/// classes can override this.
+//-----------------------------------------------------------------------
+
+  virtual bool has_rsm() const {return false;}
+
+///-----------------------------------------------------------------------
+/// Rsm for image.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<Rsm> rsm() const 
+  { throw Exception("Do not have RSM for this RasterImage"); }
 private:
   friend class boost::serialization::access;
   template<class Archive>

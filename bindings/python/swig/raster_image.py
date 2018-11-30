@@ -181,6 +181,8 @@ def _new_from_set(cls, version, *args):
     return inst
 
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
+import geocal_swig.geocal_exception
 class RasterImageTileIterator(geocal_swig.generic_object.GenericObject):
     """
 
@@ -343,10 +345,10 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     The default tile size is the entire image, derived classes can supply
     other values if desired.
 
-    A RasterImage may or may not have a Rpc and MapInfo associated with
-    it. You can query has_rpc() and has_mapinfo() to find out if it has
-    this metadata, and if it does you can access this by rpc() and
-    map_info().
+    A RasterImage may or may not have a Rpc, Rsm, or MapInfo associated
+    with it. You can query has_rpc(), has_rsm(), and has_mapinfo() to find
+    out if it has this metadata, and if it does you can access this by
+    rpc(), rsm() and map_info().
 
     C++ includes: raster_image.h 
     """
@@ -652,6 +654,37 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def rpc(self):
         return self._v_rpc()
 
+
+    def _v_has_rsm(self):
+        """
+
+        virtual bool GeoCal::RasterImage::has_rsm() const
+        Functions available if we have RSM
+
+        Indicate if we have Rsm. The default is false, but derived classes can
+        override this. 
+        """
+        return _raster_image.RasterImage__v_has_rsm(self)
+
+
+    @property
+    def has_rsm(self):
+        return self._v_has_rsm()
+
+
+    def _v_rsm(self):
+        """
+
+        virtual boost::shared_ptr<Rsm> GeoCal::RasterImage::rsm() const
+        Rsm for image. 
+        """
+        return _raster_image.RasterImage__v_rsm(self)
+
+
+    @property
+    def rsm(self):
+        return self._v_rsm()
+
     __swig_destroy__ = _raster_image.delete_RasterImage
 RasterImage.overview = new_instancemethod(_raster_image.RasterImage_overview, None, RasterImage)
 RasterImage.interpolate = new_instancemethod(_raster_image.RasterImage_interpolate, None, RasterImage)
@@ -675,6 +708,8 @@ RasterImage._v_grid_center_line_resolution = new_instancemethod(_raster_image.Ra
 RasterImage._v_grid_center_sample_resolution = new_instancemethod(_raster_image.RasterImage__v_grid_center_sample_resolution, None, RasterImage)
 RasterImage._v_has_rpc = new_instancemethod(_raster_image.RasterImage__v_has_rpc, None, RasterImage)
 RasterImage._v_rpc = new_instancemethod(_raster_image.RasterImage__v_rpc, None, RasterImage)
+RasterImage._v_has_rsm = new_instancemethod(_raster_image.RasterImage__v_has_rsm, None, RasterImage)
+RasterImage._v_rsm = new_instancemethod(_raster_image.RasterImage__v_rsm, None, RasterImage)
 RasterImage_swigregister = _raster_image.RasterImage_swigregister
 RasterImage_swigregister(RasterImage)
 

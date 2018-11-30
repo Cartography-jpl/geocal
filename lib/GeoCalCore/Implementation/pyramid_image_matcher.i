@@ -5,6 +5,7 @@
 
 %{
 #include "pyramid_image_matcher.h"
+#include "image_ground_connection.h"
 %}
 %base_import(image_matcher)
 %geocal_shared_ptr(GeoCal::PyramidImageMatcher);

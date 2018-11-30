@@ -74,6 +74,7 @@ bool gdal_has_rpc(const GDALDataset& D);
 Rpc gdal_rpc(const std::string& Fname);
 Rpc gdal_rpc(const GDALDataset& D);
 void gdal_rpc(GDALDataset& D, const Rpc& R);
+// No RSM support yet
 void gdal_map_info(GDALDataset& D, const MapInfo& M);
 boost::shared_ptr<GDALDataset> gdal_create_dataset(const std::string& Fname, 
  const std::string& Driver_name, int Number_line, 

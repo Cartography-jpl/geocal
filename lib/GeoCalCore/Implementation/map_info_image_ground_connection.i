@@ -5,6 +5,7 @@
 
 %{
 #include "map_info_image_ground_connection.h"
+#include "image_ground_connection.h"
 %}
 %base_import(image_ground_connection)
 %import "geocal_rpc.i"

@@ -5,6 +5,7 @@
 
 %{
 #include "usgs_dem.h"
+#include "image_ground_connection.h"
 %}
 
 %base_import(dem_map_info)

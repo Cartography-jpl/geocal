@@ -183,10 +183,9 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.raster_image
 import geocal_swig.look_vector
-import geocal_swig.dem_map_info
-import geocal_swig.dem
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
+import geocal_swig.dem_map_info
 class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     """
 

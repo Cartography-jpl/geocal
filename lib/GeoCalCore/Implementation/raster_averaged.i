@@ -5,6 +5,7 @@
 
 %{
 #include "raster_averaged.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster)
 %base_import(calc_raster_multi_band)

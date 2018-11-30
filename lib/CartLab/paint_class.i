@@ -5,6 +5,7 @@
 
 %{
 #include "paint_class.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster_multi_band)
 %geocal_shared_ptr(GeoCal::PaintClass);

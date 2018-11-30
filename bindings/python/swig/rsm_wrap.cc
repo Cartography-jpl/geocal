@@ -5723,6 +5723,7 @@ namespace swig {
 
 
 #include "rsm.h"
+#include "image_ground_connection.h"
 
 
 struct SWIG_null_deleter {

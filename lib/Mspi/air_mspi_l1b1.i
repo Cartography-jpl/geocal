@@ -5,6 +5,7 @@
 
 %{
 #include "air_mspi_l1b1.h"
+#include "image_ground_connection.h"
 %}
 %base_import(raster_image_tiled_file)
 %import "geocal_time.i"

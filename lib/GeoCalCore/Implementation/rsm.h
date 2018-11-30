@@ -6,9 +6,9 @@
 #include "rsm_indirect_covariance.h"
 #include "rsm_adjustable_parameter.h"
 #include "coordinate_converter.h"
-#include "image_ground_connection.h"
 
 namespace GeoCal {
+  class ImageGroundConnection; // Forward declaration.
 /****************************************************************//**
   This class is a Replacement Sensor Model (see Dolloff, J.T.,
   M.M. Iiyama, and C.R. Taylor, 2008. The Replacement Sensor Model

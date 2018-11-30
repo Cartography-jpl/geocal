@@ -184,12 +184,9 @@ import geocal_swig.calc_raster
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-import geocal_swig.calc_raster_multi_band
-import geocal_swig.raster_image_multi_band_variable
-import geocal_swig.raster_image_multi_band
-import geocal_swig.image_ground_connection
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
+import geocal_swig.calc_raster_multi_band
 class ScaleImage(geocal_swig.calc_raster.CalcRaster):
     """
 
@@ -305,7 +302,7 @@ ScaleImageMultiBand._v_scale_factor = new_instancemethod(_scale_image.ScaleImage
 ScaleImageMultiBand_swigregister = _scale_image.ScaleImageMultiBand_swigregister
 ScaleImageMultiBand_swigregister(ScaleImageMultiBand)
 
-class ScaleImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
+class ScaleImageGroundConnection(object):
     """
 
     C++ includes: scale_image.h

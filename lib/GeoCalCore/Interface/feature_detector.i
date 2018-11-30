@@ -5,6 +5,7 @@
 
 %{
 #include "feature_detector.h"
+#include "image_ground_connection.h"
 %}
 %base_import(generic_object)
 %import "image_coordinate.i"

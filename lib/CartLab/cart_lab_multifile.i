@@ -5,6 +5,7 @@
 
 %{
 #include "cart_lab_multifile.h"
+#include "image_ground_connection.h"
 %}
 
 %base_import(raster_multifile)

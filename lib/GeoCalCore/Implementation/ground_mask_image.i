@@ -5,6 +5,7 @@
 
 %{
 #include "ground_mask_image.h"
+#include "image_ground_connection.h"
 %}
 %base_import(ground_mask)
 %import "raster_image.i"

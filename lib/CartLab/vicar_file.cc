@@ -5,9 +5,11 @@
 #endif
 #include "geocal_exception.h"
 #include "geocal_serialize_support.h"
+#include "geocal_serialize_function.h"
 #include "simple_dem.h"
 #include <string>
 #include <boost/foreach.hpp>
+#include <boost/filesystem.hpp>
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
 #include <boost/lexical_cast.hpp>
 #undef EQUAL
@@ -450,6 +452,17 @@ bool VicarFile::has_rpc() const
 }
 
 //-----------------------------------------------------------------------
+/// Return true if the file has a RSM_NITF_FILE or RSM_XML_FILE label
+/// in it, indicating it has RSM information.
+//-----------------------------------------------------------------------
+
+bool VicarFile::has_rsm() const
+{
+  return (has_label("GEOTIFF RSM_NITF_FILE") ||
+	  has_label("GEOTIFF RSM_XML_FILE"));
+}
+
+//-----------------------------------------------------------------------
 /// Read metadata for MapInfo.
 //-----------------------------------------------------------------------
 
@@ -803,6 +816,58 @@ void VicarFile::rpc(const Rpc& V)
   label_set("NITF_CORNERLAT4", to_s2(g4->latitude()), "GEOTIFF");
   label_set("NITF_CORNERLON4", to_s2(g4->longitude()), "GEOTIFF");
 }
+
+//-----------------------------------------------------------------------
+/// Read metadata for Rsm. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<Rsm> VicarFile::rsm() const
+{
+  if(has_label("GEOTIFF RSM_NITF_FILE"))
+    throw Exception("Not implemented for NITF format yet");
+  std::string fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
+  boost::filesystem::path p(file_name());
+  std::string dir = p.parent_path().string();
+  return serialize_read<Rsm>(dir + "/" + fname);
+}
+
+//-----------------------------------------------------------------------
+/// Set metadata for Rsm. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+void VicarFile::rsm(const boost::shared_ptr<Rsm>& V, rsm_file_type File_type)
+{
+  if(File_type == RSM_NITF_FILE)
+    throw Exception("Not implemented for NITF format yet");
+#ifdef HAVE_VICAR_RTL
+  int status = zldel(unit(), const_cast<char*>("PROPERTY"),
+		 const_cast<char*>("GEOTIFF"), 
+		 const_cast<char*>("PROPERTY"), "RSM_NITF_FILE", NULL);
+  if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
+      throw VicarException(status, "Call to zldel failed");
+#else
+  throw VicarNotAvailableException();
+#endif
+  boost::filesystem::path p(file_name());
+  std::string ext = ".xml";
+  // Don't think VICAR file will every end with ".xml", but handle this
+  // since it is at least possible.
+  if(p.extension().string() == ext)
+    ext = ext + "2";
+  std::string dir = p.parent_path().string();
+  std::string fname = p.stem().string() + ext;
+  label_set("RSM_XML_FILE", fname, "GEOTIFF");
+  serialize_write(fname, V);
+}
+
 
 //-----------------------------------------------------------------------
 /// Close and reopen the file. Vicar is odd about reading to the end

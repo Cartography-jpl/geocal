@@ -5,6 +5,7 @@
 
 %{
 #include "air_mspi_time_table.h"
+#include "image_ground_connection.h"
 %}
 
 %base_import(time_table)

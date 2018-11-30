@@ -6,6 +6,7 @@
 %{
 #include "raster_image_multi_band.h"
 #include "raster_image_multi_band_variable.h"
+#include "image_ground_connection.h"
 %}
 %base_import(generic_object)
 %import "raster_image.i"

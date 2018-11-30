@@ -243,6 +243,8 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
     NONE = _vicar_file.VicarFile_NONE
     BASIC = _vicar_file.VicarFile_BASIC
     BASIC2 = _vicar_file.VicarFile_BASIC2
+    RSM_XML_FILE = _vicar_file.VicarFile_RSM_XML_FILE
+    RSM_NITF_FILE = _vicar_file.VicarFile_RSM_NITF_FILE
 
     def __init__(self, *args):
         """
@@ -448,6 +450,34 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
       self._v_rpc(value)
 
 
+    def _v_rsm(self, *args):
+        """
+
+        void VicarFile::rsm(const boost::shared_ptr< Rsm > &R, rsm_file_type
+        File_type=RSM_NITF_FILE)
+        Set metadata for Rsm.
+
+        Note we store this as a separate detached file in either NITF or boost
+        serialization XML format. The VICAR file then has a pointer to the
+        file. The pointer just has a file name, it is assumed the file is in
+        the same directory as the VICAR file. 
+        """
+        return _vicar_file.VicarFile__v_rsm(self, *args)
+
+
+    @property
+    def rsm(self):
+        return self._v_rsm()
+
+    @rsm.setter
+    def rsm(self, value):
+      self._v_rsm(value)
+
+
+    def rsm_save_xml(self, value):
+      self._v_rsm(value, self.RSM_XML_FILE)
+
+
     def close(self):
         """
 
@@ -542,6 +572,7 @@ VicarFile._v_type = new_instancemethod(_vicar_file.VicarFile__v_type, None, Vica
 VicarFile._v_unit = new_instancemethod(_vicar_file.VicarFile__v_unit, None, VicarFile)
 VicarFile._v_map_info = new_instancemethod(_vicar_file.VicarFile__v_map_info, None, VicarFile)
 VicarFile._v_rpc = new_instancemethod(_vicar_file.VicarFile__v_rpc, None, VicarFile)
+VicarFile._v_rsm = new_instancemethod(_vicar_file.VicarFile__v_rsm, None, VicarFile)
 VicarFile.close = new_instancemethod(_vicar_file.VicarFile_close, None, VicarFile)
 VicarFile.flush = new_instancemethod(_vicar_file.VicarFile_flush, None, VicarFile)
 VicarFile.__str__ = new_instancemethod(_vicar_file.VicarFile___str__, None, VicarFile)

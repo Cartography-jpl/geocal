@@ -5,6 +5,7 @@
 
 %{
 #include "raw_raster_image.h"
+#include "image_ground_connection.h"
 %}
 %base_import(raster_image)
 %geocal_shared_ptr(GeoCal::RawRasterImage);

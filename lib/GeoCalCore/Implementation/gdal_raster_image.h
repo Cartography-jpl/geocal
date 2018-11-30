@@ -61,6 +61,7 @@ public:
       map_info_.reset(new MapInfo(gdal_data_base_->map_info()));
     if(gdal_data_base_->has_rpc())
       rpc_.reset(new Rpc(gdal_data_base_->rpc()));
+    // No RSM support yet
   }
   void set_map_info(const MapInfo& Mi);
   boost::shared_ptr<MapInfo> map_info_from_nitf_corner(bool Approx_ok = false) const;
@@ -238,6 +239,13 @@ public:
       opad.strict_sync();
     } else
       Os << "None\n";
+    Os << "  RSM:           ";
+    if(has_rsm()) {
+      Os << "\n";
+      opad << *rsm();
+      opad.strict_sync();
+    } else
+      Os << "None\n";
   }
 
   static void save_to_erdas(const std::string& Oname, 
@@ -341,6 +349,7 @@ private:
       map_info_.reset(new MapInfo(gdal_data_base_->map_info()));
     if(gdal_data_base_->has_rpc())
       rpc_.reset(new Rpc(gdal_data_base_->rpc()));
+    // No RSM support yet
   }
 
   template<class T> void initialize(const boost::shared_ptr<GDALDataset>&
@@ -357,6 +366,7 @@ private:
       map_info_.reset(new MapInfo(gdal_data_base_->map_info()));
     if(gdal_data_base_->has_rpc())
       rpc_.reset(new Rpc(gdal_data_base_->rpc()));
+    // No RSM support yet
   }
 
   template<class T> void initialize(const std::string& Fname,
@@ -374,6 +384,7 @@ private:
       map_info_.reset(new MapInfo(gdal_data_base_->map_info()));
     if(gdal_data_base_->has_rpc())
       rpc_.reset(new Rpc(gdal_data_base_->rpc()));
+    // No RSM support yet
   }
   friend class boost::serialization::access;
   template<class Archive>

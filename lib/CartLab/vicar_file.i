@@ -11,6 +11,7 @@
 %base_import(generic_object)
 %import "map_info.i"
 %import "geocal_rpc.i"
+%import "rsm.i"
 %geocal_shared_ptr(GeoCal::VicarFile);
 namespace GeoCal {
 class VicarFile : public GenericObject {
@@ -20,6 +21,7 @@ public:
 		  VICAR_DOUBLE};
   enum access_type {READ, WRITE, UPDATE};
   enum compression {NONE, BASIC, BASIC2};
+  enum rsm_file_type {RSM_XML_FILE, RSM_NITF_FILE};
   VicarFile(const std::string& Fname, access_type Access = READ);
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE");
@@ -49,6 +51,12 @@ public:
   %python_attribute(unit, int)
   %python_attribute_with_set(map_info, MapInfo)
   %python_attribute_with_set(rpc, Rpc)
+  %python_attribute_with_set(rsm, boost::shared_ptr<Rsm>)
+%pythoncode {
+def rsm_save_xml(self, value):
+  self._v_rsm(value, self.RSM_XML_FILE)
+}
+
   void close();
   void flush() const;
   std::string print_to_string() const;

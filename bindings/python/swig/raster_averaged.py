@@ -184,13 +184,9 @@ import geocal_swig.calc_raster
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-import geocal_swig.calc_raster_multi_band
-import geocal_swig.raster_image_multi_band_variable
-import geocal_swig.raster_image_multi_band
-import geocal_swig.image_mask
-import geocal_swig.image_ground_connection
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
+import geocal_swig.calc_raster_multi_band
 class RasterAveraged(geocal_swig.calc_raster.CalcRaster):
     """
 
@@ -399,7 +395,7 @@ RasterAveragedMultiBand._v_ignore_zero = new_instancemethod(_raster_averaged.Ras
 RasterAveragedMultiBand_swigregister = _raster_averaged.RasterAveragedMultiBand_swigregister
 RasterAveragedMultiBand_swigregister(RasterAveragedMultiBand)
 
-class ImageMaskAveraged(geocal_swig.image_mask.ImageMask):
+class ImageMaskAveraged(object):
     """
 
     Take an existing image mask, and averages it like RasterAveraged.
@@ -476,7 +472,7 @@ ImageMaskAveraged._v_number_sample_per_pixel = new_instancemethod(_raster_averag
 ImageMaskAveraged_swigregister = _raster_averaged.ImageMaskAveraged_swigregister
 ImageMaskAveraged_swigregister(ImageMaskAveraged)
 
-class AveragedImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
+class AveragedImageGroundConnection(object):
     """
 
     This takes an existing ImageGroundConnection and it averages the

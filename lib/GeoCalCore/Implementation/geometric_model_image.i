@@ -5,6 +5,7 @@
 
 %{
 #include "geometric_model_image.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster)
 %import "geometric_model.i"

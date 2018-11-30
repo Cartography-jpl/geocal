@@ -5,11 +5,13 @@
 
 %{
 #include "raster_image.h"
+#include "image_ground_connection.h"
 %}
 %base_import(generic_object)
 %import "image_coordinate.i"
 %import "map_info.i"
 %import "ground_coordinate.i"
+%import "rsm.i"
 %geocal_shared_ptr(GeoCal::RasterImage);
 %geocal_shared_ptr(GeoCal::ArrayRasterImage);
 %geocal_shared_ptr(GeoCal::RasterImageTileIterator);
@@ -90,6 +92,8 @@ public:
   %python_attribute(grid_center_sample_resolution, double)
   %python_attribute(has_rpc, bool)
   %python_attribute2(rpc, rpc_ptr, boost::shared_ptr<Rpc>)
+  %python_attribute(has_rsm, bool)
+  %python_attribute(rsm, boost::shared_ptr<Rsm>)
 };
 
 class ArrayRasterImage: public GenericObject {

@@ -209,6 +209,15 @@ public:
   }
 
 //-----------------------------------------------------------------------
+/// Set the RSM.
+//-----------------------------------------------------------------------
+
+  void set_rsm(const boost::shared_ptr<Rsm>& R,
+	       VicarFile::rsm_file_type File_type = VicarFile::RSM_NITF_FILE) { 
+    vicar_file_->rsm(R, File_type); rsm_ = R;
+  }
+  
+//-----------------------------------------------------------------------
 /// Set the Map Info.
 //-----------------------------------------------------------------------
 
@@ -242,6 +251,8 @@ private:
       map_info_.reset(new MapInfo(vicar_file_->map_info()));
     if(vicar_file_->has_rpc())
       rpc_.reset(new Rpc(vicar_file_->rpc()));
+    if(vicar_file_->has_rsm())
+      rsm_ = vicar_file_->rsm();
   }
   friend class boost::serialization::access;
   template<class Archive>

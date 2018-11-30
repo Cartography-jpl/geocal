@@ -5,6 +5,7 @@
 
 %{
 #include "image_matcher.h"
+#include "image_ground_connection.h"
 %}
 %base_import(generic_object)
 %import "raster_image.i"

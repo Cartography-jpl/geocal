@@ -35,6 +35,20 @@ public:
       throw Exception("Do not have RPC for this RasterImage");
     return *rpc_;
   }
+
+  virtual bool has_rsm() const {return rsm_.get();}
+//-----------------------------------------------------------------------
+/// Remove an RSM.
+//-----------------------------------------------------------------------
+  void remove_rsm() { rsm_.reset(); }
+
+  virtual boost::shared_ptr<Rsm> rsm() const 
+  {
+    if(!has_rsm())
+      throw Exception("Do not have RSM for this RasterImage");
+    return rsm_;
+  }
+
 protected:
 //-----------------------------------------------------------------------
 /// Default constructor, derived classes should fill in protected
@@ -92,11 +106,14 @@ protected:
       map_info_.reset(new MapInfo(Img.map_info()));
     if(Img.has_rpc())
       rpc_.reset(new Rpc(Img.rpc()));
+    if(Img.has_rsm())
+      rsm_ = Img.rsm();;
   }      
 
   int number_line_, number_sample_, number_tile_line_, number_tile_sample_;
   boost::shared_ptr<MapInfo> map_info_;
   boost::shared_ptr<Rpc> rpc_;
+  boost::shared_ptr<Rsm> rsm_;
 private:
   friend class boost::serialization::access;
   template<class Archive>
@@ -105,4 +122,5 @@ private:
 
 }
 GEOCAL_EXPORT_KEY(RasterImageVariable);
+GEOCAL_CLASS_VERSION(RasterImageVariable, 1);
 #endif

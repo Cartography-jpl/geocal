@@ -5,6 +5,7 @@
 
 %{
 #include "raster_subsample.h"
+#include "image_ground_connection.h"
 %}
 %base_import(raster_image_variable)
 %geocal_shared_ptr(GeoCal::RasterSubSample);

@@ -5,6 +5,7 @@
 
 %{
 #include "scale_image.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster)
 %base_import(calc_raster_multi_band)

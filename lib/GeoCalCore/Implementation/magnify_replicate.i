@@ -5,6 +5,7 @@
 
 %{
 #include "magnify_replicate.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster)
 %geocal_shared_ptr(GeoCal::MagnifyReplicate);

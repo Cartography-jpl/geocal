@@ -5,6 +5,7 @@
 
 %{
 #include "dem_to_raster.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster)
 %geocal_shared_ptr(GeoCal::DemToRaster);

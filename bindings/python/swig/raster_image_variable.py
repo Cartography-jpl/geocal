@@ -182,6 +182,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.raster_image
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
+import geocal_swig.geocal_exception
 class RasterImageVariable(geocal_swig.raster_image.RasterImage):
     """
 

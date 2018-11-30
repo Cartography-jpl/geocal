@@ -5,6 +5,7 @@
 
 %{
 #include "rsm.h"
+#include "image_ground_connection.h"
 %}
 %base_import(generic_object)
 %base_import(with_parameter)

@@ -5,6 +5,7 @@
 
 %{
 #include "landsat7_panchromatic.h"
+#include "image_ground_connection.h"
 %}
 
 %base_import(cart_lab_multifile)

@@ -5,6 +5,7 @@
 
 %{
 #include "memory_multi_band.h"
+#include "image_ground_connection.h"
 %}
 %base_import(raster_image_multi_band_variable)
 %geocal_shared_ptr(GeoCal::MemoryMultiBand);

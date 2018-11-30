@@ -5,6 +5,7 @@
 
 %{
 #include "magnify_bilinear.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster)
 %base_import(image_ground_connection)

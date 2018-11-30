@@ -6,6 +6,7 @@
 %{
 #include "ray_caster.h"
 #include "raster_image.h"
+#include "image_ground_connection.h"
 %}
 %base_import(generic_object)
 %import "raster_image.i"

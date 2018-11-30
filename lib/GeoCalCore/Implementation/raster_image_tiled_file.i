@@ -5,6 +5,7 @@
 
 %{
 #include "raster_image_tiled_file.h"
+#include "image_ground_connection.h"
 %}
 %base_import(raster_image_variable)
 %import "tiled_file.i"

@@ -14,6 +14,9 @@ void RasterImageVariable::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(number_tile_sample)
     & GEOCAL_NVP_(map_info)
     & GEOCAL_NVP_(rpc);
+  // Older version didn't have rsm
+  if(version > 0)
+    ar & GEOCAL_NVP_(rsm);
 }
 
 GEOCAL_IMPLEMENT(RasterImageVariable);

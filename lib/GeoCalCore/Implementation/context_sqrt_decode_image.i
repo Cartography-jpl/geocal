@@ -5,6 +5,7 @@
 
 %{
 #include "context_sqrt_decode_image.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster)
 %geocal_shared_ptr(GeoCal::ContextSqrtDecodeImage);

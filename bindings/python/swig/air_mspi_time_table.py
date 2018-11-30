@@ -187,6 +187,7 @@ import geocal_swig.geocal_time
 import geocal_swig.raster_image_tiled_file
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
+import geocal_swig.geocal_exception
 class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
     """
 

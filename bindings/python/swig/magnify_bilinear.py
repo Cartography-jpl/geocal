@@ -184,7 +184,6 @@ import geocal_swig.calc_raster
 import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.generic_object
-import geocal_swig.image_ground_connection
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
 class MagnifyBilinear(geocal_swig.calc_raster.CalcRaster):
@@ -250,7 +249,7 @@ MagnifyBilinear._v_magnification_factor = new_instancemethod(_magnify_bilinear.M
 MagnifyBilinear_swigregister = _magnify_bilinear.MagnifyBilinear_swigregister
 MagnifyBilinear_swigregister(MagnifyBilinear)
 
-class MagnifyBilinearImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
+class MagnifyBilinearImageGroundConnection(object):
     """
 
     This create an ImageGroundConnection that is magnified the same way

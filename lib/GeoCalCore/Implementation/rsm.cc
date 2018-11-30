@@ -5,6 +5,7 @@
 #include "geocal_serialize_support.h"
 #include "simple_dem.h"
 #include "planet_coordinate.h"
+#include "image_ground_connection.h"
 #include <boost/make_shared.hpp>
 
 using namespace GeoCal;

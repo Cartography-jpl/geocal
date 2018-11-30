@@ -38,6 +38,8 @@ public:
   %rename(_v_grid_center_sample_resolution) grid_center_sample_resolution;
   %rename(_v_has_rpc) has_rpc;
   %rename(_v_rpc) rpc_ptr;
+  %rename(_v_has_rsm) has_rsm;
+  %rename(_v_rsm) rsm;
   virtual int number_line();
   virtual int number_sample();
   virtual int number_tile_line();
@@ -48,6 +50,8 @@ public:
   virtual double grid_center_sample_resolution();
   virtual bool has_rpc();
   virtual boost::shared_ptr<Rpc> rpc_ptr();
+  virtual bool has_rsm();
+  virtual boost::shared_ptr<Rsm> rsm();
 
   %python_attribute(igc, boost::shared_ptr<ImageGroundConnection>)
   %python_attribute(number_integration_step, int)

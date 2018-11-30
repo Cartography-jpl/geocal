@@ -5,6 +5,7 @@
 
 %{
 #include "ccorr_lsm_matcher.h"
+#include "image_ground_connection.h"
 %}
 %base_import(image_matcher)
 %import "ccorr_matcher.i"

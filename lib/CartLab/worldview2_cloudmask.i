@@ -6,6 +6,7 @@
 %{
 #include "worldview2_cloudmask.h"
 #include "raster_image_multi_band_variable.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster)
 %import "raster_image_multi_band.i"

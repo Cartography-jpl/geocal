@@ -5,6 +5,7 @@
 
 %{
 #include "forstner_feature_detector.h"
+#include "image_ground_connection.h"
 %}
 %base_import(feature_detector)
 

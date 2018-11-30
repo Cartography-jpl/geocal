@@ -5,6 +5,7 @@
 
 %{
 #include "doughnut_average.h"
+#include "image_ground_connection.h"
 %}
 %base_import(calc_raster_multi_band)
 %base_import(calc_raster)

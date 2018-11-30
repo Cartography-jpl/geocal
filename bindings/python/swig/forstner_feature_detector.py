@@ -182,6 +182,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.feature_detector
 import geocal_swig.generic_object
+import geocal_swig.with_parameter
+import geocal_swig.geocal_exception
 class ForstnerFeatureDetector(geocal_swig.feature_detector.FeatureDetector):
     """
 

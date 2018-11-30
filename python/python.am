@@ -72,6 +72,8 @@ endif
 # but you can specify a different number.
 PYTEST_NJOB=10
 
+# Note useful flags to use here might be PYTEST_EXTRAFLAGS="--instafail" or
+# PYTEST_EXTRAFLAGS="--timeout=20"
 PYTEST_EXTRAFLAGS=
 PYTEST_FLAGS= -q -n $(PYTEST_NJOB)
 if CODE_COVERAGE_ENABLED

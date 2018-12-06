@@ -1,3 +1,5 @@
+#ifndef RPC_FIXTURE_H
+#define RPC_FIXTURE_H
 #include "unit_test_support.h"
 #include "geocal_rpc.h"
 #include "geodetic.h"
@@ -61,3 +63,4 @@ public:
   Geodetic gp;
 };
 }
+#endif

@@ -1,6 +1,7 @@
 #include "unit_test_support.h"
 #include "vicar_raster_image.h"
 #include "rpc_fixture.h"
+#include "rsm_fixture.h"
 
 using namespace GeoCal;
 
@@ -37,7 +38,7 @@ BOOST_AUTO_TEST_CASE(create)
 {
   if(!VicarFile::vicar_available())
     return;
-  VicarRasterImage out("vicar_out.img", "BYTE", 10, 11, 1);
+  VicarRasterImage out("test_out/vicar_out.img", "BYTE", 10, 11, 1);
   int val = 0;
   for(int i = 9; i >= 0; --i)
     for(int j = 0; j < 11; ++j, ++val)
@@ -75,6 +76,23 @@ BOOST_FIXTURE_TEST_CASE(vicar_label, RpcFixture)
 	     ulc_y + y_pixel_res * number_y_pixel, 
 	     number_x_pixel, number_y_pixel);
   r.set_map_info(mi);
+}
+
+BOOST_FIXTURE_TEST_CASE(vicar_rsm, RsmFixture)
+{
+  if(!VicarFile::vicar_available())
+    return;
+  // Temp
+  return;
+  {
+    VicarRasterImage out("test_out/vicar_rsm_out.img", "BYTE", 10, 11, 1);
+    int val = 0;
+    for(int i = 9; i >= 0; --i)
+      for(int j = 0; j < 11; ++j, ++val)
+	out.write(i, j, val);
+    out.set_rsm(rsm, VicarFile::RSM_XML_FILE);
+  }
+  VicarRasterImage in("test_out/vicar_rsm_out.img");
 }
 
 BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)

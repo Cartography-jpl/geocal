@@ -1,9 +1,12 @@
+#ifndef RSM_FIXTURE_H
+#define RSM_FIXTURE_H
 #include "unit_test_support.h"
 #include "rpc_fixture.h"
 #include "rpc_image_ground_connection.h"
 #include "coordinate_converter.h"
 #include "memory_raster_image.h"
 #include "simple_dem.h"
+#include "rsm.h"
 #include "rsm_rational_polynomial.h"
 #include "rsm_grid.h"
 #include "rsm_low_order_polynomial.h"
@@ -25,9 +28,11 @@ public:
     igc = boost::make_shared<RpcImageGroundConnection>
       (rpc, boost::make_shared<SimpleDem>(), image);
     cconv = boost::make_shared<GeodeticConverter>();
+    rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
   }
   boost::shared_ptr<CoordinateConverter> cconv;
   boost::shared_ptr<RsmRationalPolynomial> rp_from_rpc;
+  boost::shared_ptr<Rsm> rsm;
   boost::shared_ptr<RpcImageGroundConnection> igc;
 };
 
@@ -43,6 +48,7 @@ public:
     double lmax = rpc.line_offset * 2;
     double smax = rpc.sample_offset * 2;
     rp_from_rpc->fit(*igc, *cconv, hmin, hmax, lmin, lmax, smin, smax);
+    rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
   }
 };
   
@@ -57,8 +63,7 @@ public:
     double smin = 0;
     double lmax = rpc.line_offset * 2;
     double smax = rpc.sample_offset * 2;
-    GeodeticConverter cconv;
-    rlop->fit(*igc, cconv, hmin, hmax, lmin, lmax, smin, smax);
+    rlop->fit(*igc, *cconv, hmin, hmax, lmin, lmax, smin, smax);
   }
   boost::shared_ptr<RsmLowOrderPolynomial> rlop;
 };
@@ -74,10 +79,11 @@ public:
     double smin = 0;
     double lmax = rpc.line_offset * 2;
     double smax = rpc.sample_offset * 2;
-    GeodeticConverter cconv;
-    rg_from_rpc->fit(*igc, cconv, hmin, hmax, lmin, lmax, smin, smax);
+    rg_from_rpc->fit(*igc, *cconv, hmin, hmax, lmin, lmax, smin, smax);
+    rsm = boost::make_shared<Rsm>(rg_from_rpc, cconv);
   }
   boost::shared_ptr<RsmGrid> rg_from_rpc;
 };
 }
 
+#endif

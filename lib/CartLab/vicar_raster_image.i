@@ -60,6 +60,8 @@ public:
   virtual void flush() const;
   void close();
   void set_rpc(const Rpc& R);
+  void set_rsm(const boost::shared_ptr<Rsm>& R,
+	       VicarFile::rsm_file_type File_type = VicarFile::RSM_NITF_FILE);
   void set_map_info(const MapInfo& Mi);
   %python_attribute(number_band, int)
   %python_attribute(band_id, int)

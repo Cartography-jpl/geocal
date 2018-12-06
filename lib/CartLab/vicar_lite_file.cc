@@ -3,6 +3,8 @@
 #include <boost/tokenizer.hpp>
 #include <boost/foreach.hpp>
 #include "geocal_serialize_support.h"
+#include "geocal_serialize_function.h"
+#include <boost/filesystem.hpp>
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
 #include <boost/lexical_cast.hpp>
 #ifdef HAVE_VICAR_RTL
@@ -498,6 +500,17 @@ bool VicarLiteFile::has_rpc() const
 }
 
 //-----------------------------------------------------------------------
+/// Return true if the file has a RSM_NITF_FILE or RSM_XML_FILE label
+/// in it, indicating it has RSM information.
+//-----------------------------------------------------------------------
+
+bool VicarLiteFile::has_rsm() const
+{
+  return (has_label("GEOTIFF RSM_NITF_FILE") ||
+	  has_label("GEOTIFF RSM_XML_FILE"));
+}
+
+//-----------------------------------------------------------------------
 /// Read metadata for Rpc.
 //-----------------------------------------------------------------------
 
@@ -539,4 +552,22 @@ Rpc VicarLiteFile::rpc() const
       atof(label<string>("RPC_FIELD17" + is, g).c_str());
   }
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Read metadata for Rsm. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<Rsm> VicarLiteFile::rsm() const
+{
+  if(has_label("GEOTIFF RSM_NITF_FILE"))
+    throw Exception("Not implemented for NITF format yet");
+  std::string fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
+  boost::filesystem::path p(file_name());
+  std::string dir = p.parent_path().string();
+  return serialize_read<Rsm>(dir + "/" + fname);
 }

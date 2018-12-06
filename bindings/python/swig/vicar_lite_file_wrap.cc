@@ -7952,6 +7952,143 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VicarLiteFile__v_rsm__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarLiteFile *arg1 = (GeoCal::VicarLiteFile *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarLiteFile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarLiteFile const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarLiteFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarLiteFile__v_rsm" "', argument " "1"" of type '" "GeoCal::VicarLiteFile const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarLiteFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarLiteFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarLiteFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarLiteFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarLiteFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::VicarLiteFile const *)arg1)->rsm();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarLiteFile__v_rsm__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarLiteFile *arg1 = (GeoCal::VicarLiteFile *) 0 ;
+  boost::shared_ptr< GeoCal::Rsm > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarLiteFile > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarLiteFile > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > tempshared2 ;
+  boost::shared_ptr< GeoCal::Rsm > temp2shared2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarLiteFile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarLiteFile__v_rsm" "', argument " "1"" of type '" "GeoCal::VicarLiteFile *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteFile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarLiteFile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarLiteFile > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarLiteFile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VicarLiteFile__v_rsm" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Rsm > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Rsm > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Rsm > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Rsm > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      (arg1)->rsm((boost::shared_ptr< GeoCal::Rsm > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarLiteFile__v_rsm(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"VicarLiteFile__v_rsm",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_VicarLiteFile__v_rsm__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_VicarLiteFile__v_rsm__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'VicarLiteFile__v_rsm'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::VicarLiteFile::rsm() const\n"
+    "    GeoCal::VicarLiteFile::rsm(boost::shared_ptr< GeoCal::Rsm > const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_VicarLiteFile___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarLiteFile *arg1 = (GeoCal::VicarLiteFile *) 0 ;
@@ -10047,6 +10184,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"VicarLiteFile__v_rpc", _wrap_VicarLiteFile__v_rpc, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::VicarLiteFile::rpc(const Rpc &R)\n"
+		"\n"
+		""},
+	 { (char *)"VicarLiteFile__v_rsm", _wrap_VicarLiteFile__v_rsm, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::VicarLiteFile::rsm(const boost::shared_ptr< Rsm > &R)\n"
 		"\n"
 		""},
 	 { (char *)"VicarLiteFile___str__", (PyCFunction)_wrap_VicarLiteFile___str__, METH_O, NULL},

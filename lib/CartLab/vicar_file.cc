@@ -865,7 +865,7 @@ void VicarFile::rsm(const boost::shared_ptr<Rsm>& V, rsm_file_type File_type)
   std::string dir = p.parent_path().string();
   std::string fname = p.stem().string() + ext;
   label_set("RSM_XML_FILE", fname, "GEOTIFF");
-  serialize_write(fname, V);
+  serialize_write(dir + "/" + fname, V);
 }
 
 

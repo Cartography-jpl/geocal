@@ -420,6 +420,24 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
       self._v_rpc(value)
 
 
+    def _v_rsm(self, *args):
+        """
+
+        void GeoCal::VicarLiteFile::rsm(const boost::shared_ptr< Rsm > &R)
+
+        """
+        return _vicar_lite_file.VicarLiteFile__v_rsm(self, *args)
+
+
+    @property
+    def rsm(self):
+        return self._v_rsm()
+
+    @rsm.setter
+    def rsm(self, value):
+      self._v_rsm(value)
+
+
     def _v_is_compressed(self):
         """
 
@@ -461,6 +479,7 @@ VicarLiteFile._v_number_byte_binary = new_instancemethod(_vicar_lite_file.VicarL
 VicarLiteFile._v_type = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_type, None, VicarLiteFile)
 VicarLiteFile._v_map_info = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_map_info, None, VicarLiteFile)
 VicarLiteFile._v_rpc = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_rpc, None, VicarLiteFile)
+VicarLiteFile._v_rsm = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_rsm, None, VicarLiteFile)
 VicarLiteFile.__str__ = new_instancemethod(_vicar_lite_file.VicarLiteFile___str__, None, VicarLiteFile)
 VicarLiteFile._v_is_compressed = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_is_compressed, None, VicarLiteFile)
 VicarLiteFile.label_string = new_instancemethod(_vicar_lite_file.VicarLiteFile_label_string, None, VicarLiteFile)

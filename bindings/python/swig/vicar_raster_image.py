@@ -258,6 +258,16 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
         return _vicar_raster_image.VicarRasterImage_set_rpc(self, R)
 
 
+    def set_rsm(self, *args):
+        """
+
+        void GeoCal::VicarRasterImage::set_rsm(const boost::shared_ptr< Rsm > &R, VicarFile::rsm_file_type
+        File_type=VicarFile::RSM_NITF_FILE)
+        Set the RSM. 
+        """
+        return _vicar_raster_image.VicarRasterImage_set_rsm(self, *args)
+
+
     def set_map_info(self, Mi):
         """
 
@@ -331,6 +341,7 @@ VicarRasterImage._v_vicar_file = new_instancemethod(_vicar_raster_image.VicarRas
 VicarRasterImage.flush = new_instancemethod(_vicar_raster_image.VicarRasterImage_flush, None, VicarRasterImage)
 VicarRasterImage.close = new_instancemethod(_vicar_raster_image.VicarRasterImage_close, None, VicarRasterImage)
 VicarRasterImage.set_rpc = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_rpc, None, VicarRasterImage)
+VicarRasterImage.set_rsm = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_rsm, None, VicarRasterImage)
 VicarRasterImage.set_map_info = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_map_info, None, VicarRasterImage)
 VicarRasterImage._v_number_band = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_number_band, None, VicarRasterImage)
 VicarRasterImage._v_band_id = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_band_id, None, VicarRasterImage)

@@ -82,8 +82,6 @@ BOOST_FIXTURE_TEST_CASE(vicar_rsm, RsmFixture)
 {
   if(!VicarFile::vicar_available())
     return;
-  // Temp
-  return;
   {
     VicarRasterImage out("test_out/vicar_rsm_out.img", "BYTE", 10, 11, 1);
     int val = 0;

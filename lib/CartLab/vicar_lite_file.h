@@ -3,6 +3,7 @@
 #include "geocal_exception.h"
 #include "map_info.h"
 #include "geocal_rpc.h"
+#include "rsm.h"
 #include "memory_map_array.h"
 #include "raster_image_variable.h"
 #include "dem_map_info.h"
@@ -178,10 +179,13 @@ public:
 
   bool has_map_info() const;
   bool has_rpc() const;
+  bool has_rsm() const;
   MapInfo map_info() const;
   void map_info(const MapInfo& M);
   Rpc rpc() const;
   void rpc(const Rpc& R) { throw Exception("Not yet implemented"); }
+  boost::shared_ptr<Rsm> rsm() const;
+  void rsm(const boost::shared_ptr<Rsm>& R) { throw Exception("Not yet implemented"); }
   int read_int(int B, int L, int S) const;
   double read_double(int B, int L, int S) const;
   void read_int(int B, int L, int S, int Nb, int Nl, int Ns, int* Res) const;
@@ -804,6 +808,8 @@ public:
       number_tile_sample_ = number_sample_;
     if(f_->has_rpc())
       rpc_.reset(new Rpc(f_->rpc()));
+    if(f_->has_rsm())
+      rsm_ = f_->rsm();
     map_info_.reset(new MapInfo(Mi));
   }
   virtual ~VicarLiteRasterImage() {}
@@ -904,6 +910,13 @@ public:
       opad.strict_sync();
     } else
       Os << "None\n";
+    Os << "  RPC:           ";
+    if(has_rsm()) {
+      Os << "\n";
+      opad << *rsm();
+      opad.strict_sync();
+    } else
+      Os << "None\n";
   }
 protected:
   VicarLiteRasterImage() {}
@@ -919,6 +932,8 @@ private:
       number_tile_sample_ = number_sample_;
     if(f_->has_rpc())
       rpc_.reset(new Rpc(f_->rpc()));
+    if(f_->has_rsm())
+      rsm_ = f_->rsm();
     if(f_->has_map_info())
       map_info_.reset(new MapInfo(f_->map_info()));
   }

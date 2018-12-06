@@ -13,6 +13,7 @@
 %base_import(dem_map_info)
 %import "map_info.i"
 %import "geocal_rpc.i"
+%import "rsm.i"
 %geocal_shared_ptr(GeoCal::VicarLiteFile);
 %geocal_shared_ptr(GeoCal::VicarLiteRasterImage);
 %geocal_shared_ptr(GeoCal::VicarLiteDem);
@@ -47,6 +48,7 @@ public:
   %python_attribute(type, data_type)
   %python_attribute_with_set(map_info, MapInfo)
   %python_attribute_with_set(rpc, Rpc)
+  %python_attribute_with_set(rsm, boost::shared_ptr<Rsm>)
   std::string print_to_string() const;
   %python_attribute(is_compressed, bool)
   %extend {

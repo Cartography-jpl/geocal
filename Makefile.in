@@ -2866,8 +2866,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcsdbx@/StorageConcepts.txt @libgeocal@/dummy.pdf \
 	@libgeocal@/geocal_doxygen.h @srcsupport@/unit_test_support.h \
 	@srcsupport@/global_fixture.h @srcinterface@/matcher_fixture.h \
-	@srcimplementation@/rsm_fixture.h $(patsubst %_wrap.cc, %.py, \
-	$(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
+	@srcinterface@/rpc_fixture.h @srcimplementation@/rsm_fixture.h \
+	$(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h \
 	@geocalunittestdata@/RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML \
 	@geocalunittestdata@/mspi_config_file_test.txt \

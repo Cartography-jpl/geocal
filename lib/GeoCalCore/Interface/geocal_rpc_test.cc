@@ -1,6 +1,6 @@
 #include "unit_test_support.h"
 #include "geocal_rpc.h"
-#include "geodetic.h"
+#include "rpc_fixture.h"
 #include "simple_dem.h"
 #include "argus_camera.h"
 #include "orbit_data_image_ground_connection.h"
@@ -11,7 +11,7 @@
 #include "dem_map_info_offset.h"
 using namespace GeoCal;
 
-BOOST_FIXTURE_TEST_SUITE(rpc, GlobalFixture)
+BOOST_FIXTURE_TEST_SUITE(rpc, RpcFixture)
 BOOST_AUTO_TEST_CASE(generate_rpc_test)
 {
   boost::shared_ptr<Camera> c(new ArgusCamera(0, 10, 0));
@@ -58,75 +58,29 @@ BOOST_AUTO_TEST_CASE(generate_rpc_test)
 
 BOOST_AUTO_TEST_CASE(basic_test)
 {
-  Rpc rpc;
-  rpc.error_bias = 0;
-  rpc.error_random = 0;
-  rpc.rpc_type = Rpc::RPC_B;
-  rpc.line_offset = 2881;
-  rpc.line_scale = 2921;
-  rpc.sample_offset = 13763;
-  rpc.sample_scale = 14238;
-  rpc.latitude_offset = 35.8606;
-  rpc.latitude_scale = 0.0209;
-  rpc.longitude_offset = 44.9534;
-  rpc.longitude_scale = 0.1239;
-  rpc.height_offset = 1017;
-  rpc.height_scale = 634;
-  boost::array<double, 20> t1 = 
-    {{ 0.0132748, -0.14751, -1.13465, -0.0138959, 0.0020018,
-      6.35242e-05, 0.000115861, -0.00286551, -0.00778726, 
-      3.88308e-06, -1.26487e-06, 7.881069999999999e-06, 
-      3.65929e-05, 2.32154e-06, -2.25421e-05, -2.08933e-05, 
-       1.8091e-05, 3.6393e-07, -9.39815e-07, -4.31269e-08 }};
-  rpc.line_numerator = t1;
-  boost::array<double, 20> t2 = 
-    {{ 1, 0.00380256, 0.00643151, 0.00031479,
-      1.84958e-05, -1.98243e-06, -1.16422e-06,
-      -1.92637e-05, 7.224010000000001e-05, -1.61779e-05,
-      4.95049e-06, 1.26794e-06, 0.000190771, -1.57429e-07,
-      2.46815e-05, 0.00049166, -5.41022e-07, 3.209e-07,
-       1.81401e-05, 1.43592e-07}};
-  rpc.line_denominator = t2;
-  boost::array<double, 20> t3 = 
-    {{ -0.0104025, 0.96885, -0.000487887, -0.0325142,
-      -0.000710444, 0.000217572, -6.549690000000001e-05,
-      0.0107384, -5.19453e-06, -1.76761e-05, -1.21058e-06,
-      0.000106017, 5.41226e-06, -3.8968e-06, 1.03307e-05,
-      5.84016e-05, 3.80777e-08, 9.01765e-06, 1.65988e-06,
-       -1.19374e-07}};
-  rpc.sample_numerator = t3;
-  boost::array<double, 20> t4 = 
-    {{1, -0.000319831, 0.000681092, -0.000549762,
-     -2.67977e-06, -6.19388e-06, 2.67975e-08, 4.76371e-06,
-     -1.47985e-05, -4.23457e-06, 1.44009e-08, -1.07213e-06,
-     1.1059e-07, 4.10217e-08, -1.69482e-07, 1.08104e-06,
-      1e-9, -2.33038e-07, 1.86413e-08, -1.35637e-08}};
-  rpc.sample_denominator = t4;
-    
   BOOST_CHECK(rpc.print_to_string() != "");
 				// String too long to check, so
 				// just make sure call returns
 				// something.
 
   ImageCoordinate ic_expect(5729.22, 27561.36);
-  Geodetic g(35.8399968, 45.0770183, 1017);
-  BOOST_CHECK_EQUAL(rpc.image_coordinate(g), ic_expect);
+  BOOST_CHECK_EQUAL(rpc.image_coordinate(gp), ic_expect);
   blitz::Array<double, 2> ic_jac = 
-    rpc.image_coordinate_jac(g.latitude(),
-			     g.longitude(),
-			     g.height_reference_surface());
+    rpc.image_coordinate_jac(gp.latitude(),
+			     gp.longitude(),
+			     gp.height_reference_surface());
   ImageCoordinate ic2;
   double eps = 1e-4;
-  ic2 = rpc.image_coordinate(g.latitude() + eps, g.longitude(),
-			     g.height_reference_surface());
+  ic2 = rpc.image_coordinate(gp.latitude() + eps, gp.longitude(),
+			     gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_jac(0, 0), (ic2.line - ic_expect.line) / eps, 1.0);
   BOOST_CHECK_CLOSE(ic_jac(1, 0), (ic2.sample - ic_expect.sample) / eps, 1.5);
-  ic2 = rpc.image_coordinate(g.latitude(), g.longitude() + eps,
-			     g.height_reference_surface());
+  ic2 = rpc.image_coordinate(gp.latitude(), gp.longitude() + eps,
+			     gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_jac(0, 1), (ic2.line - ic_expect.line) / eps, 1.5);
   BOOST_CHECK_CLOSE(ic_jac(1, 1), (ic2.sample - ic_expect.sample) / eps, 1.0);
-  ic2 = rpc.image_coordinate(g.latitude(), g.longitude(),
-			     g.height_reference_surface() + 10);
+  ic2 = rpc.image_coordinate(gp.latitude(), gp.longitude(),
+			     gp.height_reference_surface() + 10);
   BOOST_CHECK_CLOSE(ic_jac(0, 2), (ic2.line - ic_expect.line) / 10, 1.0);
   BOOST_CHECK_CLOSE(ic_jac(1, 2), (ic2.sample - ic_expect.sample) / 10, 1.0);
   blitz::Array<double, 1> lat(1), lon(1), height(1);
@@ -136,11 +90,11 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 1e-4);
   boost::shared_ptr<GroundCoordinate> gcalc =
     rpc.ground_coordinate(ic_expect, 1017);
-  BOOST_CHECK(distance(*gcalc, g) < 0.1);
+  BOOST_CHECK(distance(*gcalc, gp) < 0.1);
   SimpleDem dem(1017);
   boost::shared_ptr<GroundCoordinate> gcalc2 =
     rpc.ground_coordinate(ic_expect, dem);
-  BOOST_CHECK(distance(*gcalc2, g) < 0.1);
+  BOOST_CHECK(distance(*gcalc2, gp) < 0.1);
 
 //-----------------------------------------------------------------------
 // Test fit function.
@@ -175,12 +129,12 @@ BOOST_AUTO_TEST_CASE(basic_test)
     BOOST_CHECK_CLOSE(rpc2.sample_numerator[i], rpc.sample_numerator[i], 0.1);
   }
   eps = 1e-4;
-  blitz::Array<double, 2> jac = rpc2.image_coordinate_jac_parm(g);
-  ImageCoordinate ic0 = rpc2.image_coordinate(g);
+  blitz::Array<double, 2> jac = rpc2.image_coordinate_jac_parm(gp);
+  ImageCoordinate ic0 = rpc2.image_coordinate(gp);
   for(int i = 0; i < 3; ++i) {
     rpc2.line_numerator[i] += eps;
     rpc2.sample_numerator[i] += eps;
-    ImageCoordinate ic2 = rpc2.image_coordinate(g);
+    ImageCoordinate ic2 = rpc2.image_coordinate(gp);
     BOOST_CHECK_CLOSE((ic2.line - ic0.line) / eps, jac(0, i), 1e-2);
     BOOST_CHECK_CLOSE((ic2.sample - ic0.sample) / eps, jac(1, 3 + i), 1e-2);
     rpc2.line_numerator[i] -= eps;
@@ -322,51 +276,8 @@ BOOST_AUTO_TEST_CASE(serialize)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<Rpc> rpc(new Rpc());
-  rpc->error_bias = 0;
-  rpc->error_random = 0;
-  rpc->rpc_type = Rpc::RPC_B;
-  rpc->line_offset = 2881;
-  rpc->line_scale = 2921;
-  rpc->sample_offset = 13763;
-  rpc->sample_scale = 14238;
-  rpc->latitude_offset = 35.8606;
-  rpc->latitude_scale = 0.0209;
-  rpc->longitude_offset = 44.9534;
-  rpc->longitude_scale = 0.1239;
-  rpc->height_offset = 1017;
-  rpc->height_scale = 634;
-  boost::array<double, 20> t1 = 
-    {{ 0.0132748, -0.14751, -1.13465, -0.0138959, 0.0020018,
-      6.35242e-05, 0.000115861, -0.00286551, -0.00778726, 
-      3.88308e-06, -1.26487e-06, 7.881069999999999e-06, 
-      3.65929e-05, 2.32154e-06, -2.25421e-05, -2.08933e-05, 
-       1.8091e-05, 3.6393e-07, -9.39815e-07, -4.31269e-08 }};
-  rpc->line_numerator = t1;
-  boost::array<double, 20> t2 = 
-    {{ 1, 0.00380256, 0.00643151, 0.00031479,
-      1.84958e-05, -1.98243e-06, -1.16422e-06,
-      -1.92637e-05, 7.224010000000001e-05, -1.61779e-05,
-      4.95049e-06, 1.26794e-06, 0.000190771, -1.57429e-07,
-      2.46815e-05, 0.00049166, -5.41022e-07, 3.209e-07,
-       1.81401e-05, 1.43592e-07}};
-  rpc->line_denominator = t2;
-  boost::array<double, 20> t3 = 
-    {{ -0.0104025, 0.96885, -0.000487887, -0.0325142,
-      -0.000710444, 0.000217572, -6.549690000000001e-05,
-      0.0107384, -5.19453e-06, -1.76761e-05, -1.21058e-06,
-      0.000106017, 5.41226e-06, -3.8968e-06, 1.03307e-05,
-      5.84016e-05, 3.80777e-08, 9.01765e-06, 1.65988e-06,
-       -1.19374e-07}};
-  rpc->sample_numerator = t3;
-  boost::array<double, 20> t4 = 
-    {{1, -0.000319831, 0.000681092, -0.000549762,
-     -2.67977e-06, -6.19388e-06, 2.67975e-08, 4.76371e-06,
-     -1.47985e-05, -4.23457e-06, 1.44009e-08, -1.07213e-06,
-     1.1059e-07, 4.10217e-08, -1.69482e-07, 1.08104e-06,
-      1e-9, -2.33038e-07, 1.86413e-08, -1.35637e-08}};
-  rpc->sample_denominator = t4;
-  std::string d = serialize_write_string(rpc);
+  boost::shared_ptr<Rpc> rpc2(new Rpc(rpc));
+  std::string d = serialize_write_string(rpc2);
   if(false)
     std::cerr << d;
   boost::shared_ptr<Rpc> rpcr = 

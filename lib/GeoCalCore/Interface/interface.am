@@ -186,6 +186,7 @@ geocalswiginc_HEADERS += @srcinterface@/raster_multifile.i
 
 # Test files
 EXTRA_DIST += @srcinterface@/matcher_fixture.h
+EXTRA_DIST += @srcinterface@/rpc_fixture.h
 geocal_test_all_SOURCES+= @srcinterface@/constant_raster_image_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/memory_raster_image_test.cc
 geocal_test_all_SOURCES+= @srcinterface@/sub_raster_image_test.cc

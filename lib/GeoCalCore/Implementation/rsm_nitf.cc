@@ -27,7 +27,7 @@ using namespace GeoCal;
 void GeoCal::rsm_write_nitf(const std::string& Fname,
 		    const boost::shared_ptr<Rsm>& R)
 {
-  std::string data = serialize_write_binary(R);
+  std::string data = serialize_write_string(R);
   std::string cmd = "boost_nitf_rsm to_nitf " + Fname;
   FILE* f = popen(cmd.c_str(), "w");
   if(!f)
@@ -61,4 +61,20 @@ void GeoCal::rsm_write_nitf(const std::string& Fname,
 
 boost::shared_ptr<Rsm> GeoCal::rsm_read_nitf(const std::string& Fname)
 {
+  std::string cmd = "boost_nitf_rsm from_nitf " + Fname;
+  FILE* f = popen(cmd.c_str(), "r");
+  if(!f)
+    throw Exception("Trouble calling boost_nitf_rsm in rsm_read_nitf");
+  std::string data;
+  data.reserve(1000);		// We'll need some space, so go ahead
+				// at set it aside.
+  int c = fgetc(f);
+  while(!feof(f)) {
+    data.push_back((char) c);
+    c = getc(f);
+  }
+  int status = pclose(f);
+  if(status)
+    throw Exception("Trouble calling boost_nitf_rsm in rsm_read_nitf");
+  return serialize_read_string<Rsm>(data);
 }

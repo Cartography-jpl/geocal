@@ -5,7 +5,7 @@ except ImportError:
 from test_support import *
 import geocal.geocal_nitf_rsm
 from geocal.geocal_nitf_rsm import *
-from geocal_swig import GdalRasterImage
+from geocal_swig import GdalRasterImage, VicarRasterImage, VicarLiteRasterImage
 import six
 import numpy as np
 
@@ -27,6 +27,23 @@ def test_rsm_rp(isolated_dir, rsm):
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
+@require_pynitf
+@require_vicar
+def test_vicar_rsm(isolated_dir, rsm):
+    '''Test that we can read and write RSM attached to a VicarRasterImage
+    and VicarLiteRasterImage. This requires everything to be installed, so
+    we can't check this at the C++ level (which runs unit tests before 
+    installing'''
+    out = VicarRasterImage("vicar_rsm_nitf.img", "BYTE", 10, 11, 1)
+    out.write(0,0,np.zeros((10,11),dtype=np.uint8))
+    out.set_rsm(rsm)
+    out = None
+    fin = VicarRasterImage("vicar_rsm_nitf.img")
+    print(fin.rsm)
+    fin = VicarLiteRasterImage("vicar_rsm_nitf.img")
+    print(fin.rsm)
+    
+    
 @require_pynitf
 def test_rsm_grid(isolated_dir, rsm_g):
     '''Create a file, and write out a RSM. This RSM has just a single 

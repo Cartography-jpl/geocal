@@ -5,7 +5,9 @@
 # not useful for other applications
 
 import geocal
+import pynitf
 import sys
+import numpy as np
 
 version = "Dec 6, 2018"
 usage='''Usage:
@@ -28,7 +30,14 @@ Options:
 
 args = geocal.docopt_simple(usage, version=version)
 if(args.to_nitf):
-    data = bytearray(sys.stdin.buffer.read())
-    print(geocal.serialize_read_binary(data))
+    rsm = geocal.serialize_read_generic_string(sys.stdin.read())
+    f = pynitf.NitfFile()
+    img = pynitf.NitfImageWriteNumpy(1, 1, np.uint8)
+    img[0,0,0] = 0
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+    f.image_segment[0].rsm = rsm
+    f.write(args.nitf_file)
 elif(args.from_nitf):
-    print("hi there")
+    f = pynitf.NitfFile(args.nitf_file)
+    rsm = f.image_segment[0].rsm
+    sys.stdout.write(geocal.serialize_write_string(rsm))

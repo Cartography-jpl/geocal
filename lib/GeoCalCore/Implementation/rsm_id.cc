@@ -114,7 +114,7 @@ std::string RsmId::tre_string() const
       for(int i = 0; i < 3; ++i)
 	res += str_check_size(num % gconv3->parameter()->cf_to_rc[i][j], 21);
   } else
-    throw Exception("Writing a RSMIDA TRE only supports GeodeticRadianConverter, GeodeticRadian2piConverter and LocalRcConverter. This is a limitation of the TRE format. Note boost serialization works fine with an CoordinateConverter, just not the TRE");
+    throw Exception("Writing a RSMIDA TRE only supports GeodeticRadianConverter, GeodeticRadian2piConverter and LocalRcConverter. This is a limitation of the NITF TRE format. Note boost serialization works fine with any CoordinateConverter, just not the NITF TRE");
   if(ground_domain_vertex_.size() != 8)
       throw Exception("Ground domain vertex needs to be exactly 8 points");
   for(int i = 0; i < 8; ++i) {

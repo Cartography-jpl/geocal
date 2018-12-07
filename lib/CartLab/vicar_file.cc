@@ -7,6 +7,7 @@
 #include "geocal_serialize_support.h"
 #include "geocal_serialize_function.h"
 #include "simple_dem.h"
+#include "rsm_nitf.h"
 #include <string>
 #include <boost/foreach.hpp>
 #include <boost/filesystem.hpp>
@@ -827,12 +828,16 @@ void VicarFile::rpc(const Rpc& V)
 
 boost::shared_ptr<Rsm> VicarFile::rsm() const
 {
+  std::string fname;
   if(has_label("GEOTIFF RSM_NITF_FILE"))
-    throw Exception("Not implemented for NITF format yet");
-  std::string fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
+    fname = label<std::string>("RSM_NITF_FILE", "GEOTIFF");
+  else
+    fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
   boost::filesystem::path p(file_name());
-  std::string dir = p.parent_path().string();
-  return serialize_read<Rsm>(dir + "/" + fname);
+  boost::filesystem::path dir = p.parent_path();
+  if(has_label("GEOTIFF RSM_NITF_FILE"))
+    return rsm_read_nitf((dir / fname).string());
+  return serialize_read<Rsm>((dir / fname).string());
 }
 
 //-----------------------------------------------------------------------
@@ -845,27 +850,44 @@ boost::shared_ptr<Rsm> VicarFile::rsm() const
 
 void VicarFile::rsm(const boost::shared_ptr<Rsm>& V, rsm_file_type File_type)
 {
-  if(File_type == RSM_NITF_FILE)
-    throw Exception("Not implemented for NITF format yet");
+  std::string ext = ".xml";
+  if(File_type == RSM_NITF_FILE) {
+    ext = ".ntf";
 #ifdef HAVE_VICAR_RTL
-  int status = zldel(unit(), const_cast<char*>("PROPERTY"),
-		 const_cast<char*>("GEOTIFF"), 
-		 const_cast<char*>("PROPERTY"), "RSM_NITF_FILE", NULL);
-  if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
+    int status = zldel(unit(), const_cast<char*>("PROPERTY"),
+		       const_cast<char*>("GEOTIFF"), 
+		       const_cast<char*>("PROPERTY"), "RSM_XML_FILE", NULL);
+    if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
       throw VicarException(status, "Call to zldel failed");
 #else
-  throw VicarNotAvailableException();
+    throw VicarNotAvailableException();
 #endif
+  } else {
+    ext = ".xml";
+#ifdef HAVE_VICAR_RTL
+    int status = zldel(unit(), const_cast<char*>("PROPERTY"),
+		       const_cast<char*>("GEOTIFF"), 
+		       const_cast<char*>("PROPERTY"), "RSM_NITF_FILE", NULL);
+    if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
+      throw VicarException(status, "Call to zldel failed");
+#else
+    throw VicarNotAvailableException();
+#endif
+  }
   boost::filesystem::path p(file_name());
-  std::string ext = ".xml";
   // Don't think VICAR file will every end with ".xml", but handle this
   // since it is at least possible.
   if(p.extension().string() == ext)
     ext = ext + "2";
-  std::string dir = p.parent_path().string();
+  boost::filesystem::path dir = p.parent_path();
   std::string fname = p.stem().string() + ext;
-  label_set("RSM_XML_FILE", fname, "GEOTIFF");
-  serialize_write(dir + "/" + fname, V);
+  if(File_type == RSM_NITF_FILE) {
+    label_set("RSM_NITF_FILE", fname, "GEOTIFF");
+    rsm_write_nitf((dir / fname).string(), V);
+  } else {
+    label_set("RSM_XML_FILE", fname, "GEOTIFF");
+    serialize_write((dir / fname).string(), V);
+  }
 }
 
 

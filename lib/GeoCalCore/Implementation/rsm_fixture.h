@@ -29,6 +29,8 @@ public:
       (rpc, boost::make_shared<SimpleDem>(), image);
     cconv = boost::make_shared<GeodeticConverter>();
     rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
+    rsm->fill_in_ground_domain_vertex(rpc.height_offset - rpc.height_scale,
+				      rpc.height_offset + rpc.height_scale);
   }
   boost::shared_ptr<CoordinateConverter> cconv;
   boost::shared_ptr<RsmRationalPolynomial> rp_from_rpc;
@@ -49,6 +51,8 @@ public:
     double smax = rpc.sample_offset * 2;
     rp_from_rpc->fit(*igc, *cconv, hmin, hmax, lmin, lmax, smin, smax);
     rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
+    rsm->fill_in_ground_domain_vertex(rpc.height_offset - rpc.height_scale,
+				      rpc.height_offset + rpc.height_scale);
   }
 };
   

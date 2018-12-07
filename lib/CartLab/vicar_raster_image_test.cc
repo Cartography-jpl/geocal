@@ -93,6 +93,26 @@ BOOST_FIXTURE_TEST_CASE(vicar_rsm, RsmFixture)
   VicarRasterImage in("test_out/vicar_rsm_out.img");
 }
 
+BOOST_FIXTURE_TEST_CASE(vicar_rsm_nitf, RsmFixtureRadian)
+{
+  // This test depends on having geocal and python scripts installed,
+  // it is really a installcheck test rather than a check test. Don't
+  // normally run this, but leave in place so we can test this out if
+  // desired.
+  return;
+  if(!VicarFile::vicar_available())
+    return;
+  {
+    VicarRasterImage out("test_out/vicar_rsm_nitf_out.img", "BYTE", 10, 11, 1);
+    int val = 0;
+    for(int i = 9; i >= 0; --i)
+      for(int j = 0; j < 11; ++j, ++val)
+	out.write(i, j, val);
+    out.set_rsm(rsm, VicarFile::RSM_NITF_FILE);
+  }
+  VicarRasterImage in("test_out/vicar_rsm_nitf_out.img");
+}
+
 BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
 {
   if(!VicarFile::vicar_available())

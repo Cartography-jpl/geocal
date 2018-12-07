@@ -4,6 +4,7 @@
 #include <boost/foreach.hpp>
 #include "geocal_serialize_support.h"
 #include "geocal_serialize_function.h"
+#include "rsm_nitf.h"
 #include <boost/filesystem.hpp>
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
 #include <boost/lexical_cast.hpp>
@@ -564,10 +565,14 @@ Rpc VicarLiteFile::rpc() const
 
 boost::shared_ptr<Rsm> VicarLiteFile::rsm() const
 {
+  std::string fname;
   if(has_label("GEOTIFF RSM_NITF_FILE"))
-    throw Exception("Not implemented for NITF format yet");
-  std::string fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
+    fname = label<std::string>("RSM_NITF_FILE", "GEOTIFF");
+  else
+    fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
   boost::filesystem::path p(file_name());
-  std::string dir = p.parent_path().string();
-  return serialize_read<Rsm>(dir + "/" + fname);
+  boost::filesystem::path dir = p.parent_path();
+  if(has_label("GEOTIFF RSM_NITF_FILE"))
+    return rsm_read_nitf((dir / fname).string());
+  return serialize_read<Rsm>((dir / fname).string());
 }

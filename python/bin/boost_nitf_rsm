@@ -1,0 +1,34 @@
+#! /usr/bin/env python
+#
+# This is a utility program that converts the boost binary format to and from
+# a NITF file. This is really meant for use by geocal library, this is likely
+# not useful for other applications
+
+import geocal
+import sys
+
+version = "Dec 6, 2018"
+usage='''Usage:
+  boost_nitf_rsm [options] from_nitf <nitf_file>
+  boost_nitf_rsm [options] to_nitf <nitf_file>
+  boost_nitf_rsm -h | --help
+  boost_nitf_rsm -v | --version
+
+This is a utility program that converts the boost binary format to and from
+a NITF file. This is really meant for use by geocal library, this is likely
+not useful for other applications
+
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+'''
+
+args = geocal.docopt_simple(usage, version=version)
+if(args.to_nitf):
+    data = sys.stdin.buffer.read()
+    print(geocal.serialize_read_binary(data))
+elif(args.from_nitf):
+    print("hi there")

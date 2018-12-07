@@ -1,11 +1,6 @@
 #include "rsm_nitf.h"
 #include "geocal_serialize_function.h"
-#include "geocal_internal_config.h"
-#ifdef HAVE_CXX11
-#include <boost/process/child.hpp>
-#include <boost/process/io.hpp>
-#define HAVE_BOOST_PROCESS
-#endif
+#include <cstdio>
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
@@ -32,16 +27,15 @@ using namespace GeoCal;
 void GeoCal::rsm_write_nitf(const std::string& Fname,
 		    const boost::shared_ptr<Rsm>& R)
 {
-#ifdef HAVE_BOOST_PROCESS
   std::string data = serialize_write_binary(R);
-  boost::process::opstream in;
-  boost::process::child c("boost_nitf_rsm to_nitf " + Fname,
-			  boost::process::std_in < in);
-  in << data;
-  c.wait();
-#else
-  throw Exception("rsm_write_nitf needs to have boost::process available (which in turn requires CXX11 support");
-#endif
+  std::string cmd = "boost_nitf_rsm to_nitf " + Fname;
+  FILE* f = popen(cmd.c_str(), "w");
+  if(!f)
+    throw Exception("Trouble calling boost_nitf_rsm in rsm_write_nitf");
+  fwrite(data.c_str(), sizeof(char), data.size(), f);
+  int status = pclose(f);
+  if(status)
+    throw Exception("Trouble calling boost_nitf_rsm in rsm_write_nitf");
 }
 
 //-----------------------------------------------------------------------

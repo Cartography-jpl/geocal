@@ -28,7 +28,7 @@ Options:
 
 args = geocal.docopt_simple(usage, version=version)
 if(args.to_nitf):
-    data = sys.stdin.buffer.read()
+    data = bytearray(sys.stdin.buffer.read())
     print(geocal.serialize_read_binary(data))
 elif(args.from_nitf):
     print("hi there")

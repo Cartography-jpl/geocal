@@ -43,6 +43,7 @@ public:
   %python_attribute_with_set(ephemeris_data_quality, EphemerisDataQuality);
   %python_attribute_with_set(ephemeris_source, EphemerisSource);
   %python_attribute_with_set(lagrange_order, LagrangeOrder);
+  %python_attribute(position_data, blitz::Array<double, 2>);
   void min_time_split(std::string& OUTPUT, std::string& OUTPUT) const;
   // Synonyms that map to the pynitf names 
 %pythoncode {
@@ -81,7 +82,22 @@ def t0_ephem(self):
 @property
 def reserved_len(self):
     return 0
+
+@property
+def num_ephem(self):
+    return self.position_data.shape[0]
+
+@property
+def ephem_x(self):
+    return self.position_data[:,0]
+
+@property
+def ephem_y(self):
+    return self.position_data[:,1]
   
+@property
+def ephem_z(self):
+    return self.position_data[:,2]
 }  
   void des_write(std::ostream& Os) const;
   static boost::shared_ptr<PosCsephb> des_read(std::istream& In);

@@ -103,8 +103,14 @@ public:
 /// Maximum time we have data for.
 //-----------------------------------------------------------------------
 
-  Time max_time() const { return min_time_ + (pos.size() - 1) * time_step(); }
+  Time max_time() const { return min_time_ + (pos.rows() - 1) * time_step(); }
   virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Raw data
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 2>& position_data() const { return pos; }
 
   void des_write(std::ostream& Os) const;
   static boost::shared_ptr<PosCsephb> des_read(std::istream& In);
@@ -116,7 +122,7 @@ private:
   LagrangeOrder lagrange_order_;
   EphemerisDataQuality e_quality_;
   EphemerisSource e_source_;
-  std::vector<blitz::Array<double, 1> > pos;
+  blitz::Array<double, 2> pos;
   PosCsephb() {}
   friend class boost::serialization::access;
   template<class Archive>

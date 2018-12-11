@@ -377,6 +377,20 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
       self._v_lagrange_order(value)
 
 
+    def _v_position_data(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::PosCsephb::position_data() const
+        Raw data. 
+        """
+        return _orbit_des.PosCsephb__v_position_data(self)
+
+
+    @property
+    def position_data(self):
+        return self._v_position_data()
+
+
     def min_time_split(self):
         """
 
@@ -422,6 +436,21 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
     def reserved_len(self):
         return 0
 
+    @property
+    def num_ephem(self):
+        return self.position_data.shape[0]
+
+    @property
+    def ephem_x(self):
+        return self.position_data[:,0]
+
+    @property
+    def ephem_y(self):
+        return self.position_data[:,1]
+
+    @property
+    def ephem_z(self):
+        return self.position_data[:,2]
 
 
     def des_write(self, Os):
@@ -456,6 +485,7 @@ PosCsephb._v_interpolation_type = new_instancemethod(_orbit_des.PosCsephb__v_int
 PosCsephb._v_ephemeris_data_quality = new_instancemethod(_orbit_des.PosCsephb__v_ephemeris_data_quality, None, PosCsephb)
 PosCsephb._v_ephemeris_source = new_instancemethod(_orbit_des.PosCsephb__v_ephemeris_source, None, PosCsephb)
 PosCsephb._v_lagrange_order = new_instancemethod(_orbit_des.PosCsephb__v_lagrange_order, None, PosCsephb)
+PosCsephb._v_position_data = new_instancemethod(_orbit_des.PosCsephb__v_position_data, None, PosCsephb)
 PosCsephb.min_time_split = new_instancemethod(_orbit_des.PosCsephb_min_time_split, None, PosCsephb)
 PosCsephb.des_write = new_instancemethod(_orbit_des.PosCsephb_des_write, None, PosCsephb)
 PosCsephb.__str__ = new_instancemethod(_orbit_des.PosCsephb___str__, None, PosCsephb)

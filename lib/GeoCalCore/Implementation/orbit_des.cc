@@ -52,16 +52,21 @@ PosCsephb::PosCsephb
     e_quality_(E_quality), e_source_(E_source)
 {
   is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
-  blitz::Array<double, 1> p(3);
-  for(Time t = min_time_; t <= Orb.max_time(); t += tstep_) {
+  int sz = (int) floor((Orb.max_time() - min_time_) / tstep_) + 1;
+  if((min_time_ + sz * tstep_) <= Orb.max_time())
+    sz += 1;
+  pos.resize(sz, 3);
+  for(int i = 0; i < sz; ++i) {
+    Time t = min_time_ + i * tstep_;
     if(is_cf_) {
       boost::shared_ptr<CartesianFixed> cf = Orb.position_cf(t);
-      p = cf->position[0], cf->position[1], cf->position[2];
+      pos(i, blitz::Range::all()) =
+	cf->position[0], cf->position[1], cf->position[2];
     } else {
       boost::shared_ptr<CartesianInertial> ci = Orb.position_ci(t);
-      p = ci->position[0], ci->position[1], ci->position[2];
+      pos(i, blitz::Range::all()) =
+	ci->position[0], ci->position[1], ci->position[2];
     }
-    pos.push_back(p.copy());
   }
 }
 
@@ -83,16 +88,21 @@ PosCsephb::PosCsephb
     e_quality_(E_quality), e_source_(E_source)
 {
   is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
-  blitz::Array<double, 1> p(3);
-  for(Time t = min_time_; t <= Max_time; t += tstep_) {
+  int sz = (int) floor((Max_time - min_time_) / tstep_) + 1;
+  if((min_time_ + sz * tstep_) <= Max_time)
+    sz += 1;
+  pos.resize(sz, 3);
+  for(int i = 0; i < sz; ++i) {
+    Time t = min_time_ + i * tstep_;
     if(is_cf_) {
       boost::shared_ptr<CartesianFixed> cf = Orb.position_cf(t);
-      p = cf->position[0], cf->position[1], cf->position[2];
+      pos(i, blitz::Range::all()) =
+	cf->position[0], cf->position[1], cf->position[2];
     } else {
       boost::shared_ptr<CartesianInertial> ci = Orb.position_ci(t);
-      p = ci->position[0], ci->position[1], ci->position[2];
+      pos(i, blitz::Range::all()) =
+	ci->position[0], ci->position[1], ci->position[2];
     }
-    pos.push_back(p.copy());
   }
 }
 
@@ -122,18 +132,19 @@ void PosCsephb::print(std::ostream& Os) const
 
 blitz::Array<double, 1> PosCsephb::pos_vel(const Time& T) const
 {
+  blitz::Range ra = blitz::Range::all();
   range_check_inclusive(T, min_time_, max_time());
   // Just linear interpolation for now. We'll do more complicated
   // interpolation shortly.
   if(itype_ != LINEAR)
     throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T - min_time_) / tstep_);
-  if(i >= (int) pos.size() - 1)
+  if(i >= pos.rows() - 1)
     --i;
   double f = (T - min_time_) / tstep_ - i;
   blitz::Array<double, 1> res(6);
-  res(blitz::Range(0,2)) = f * pos[i+1] + (1 - f) * pos[i];
-  res(blitz::Range(3,5)) = (pos[i+1] - pos[i]) / tstep_;
+  res(blitz::Range(0,2)) = f * pos(i+1, ra) + (1 - f) * pos(i, ra);
+  res(blitz::Range(3,5)) = (pos(i+1, ra) - pos(i, ra)) / tstep_;
   return res;
 }
 
@@ -144,18 +155,19 @@ blitz::Array<double, 1> PosCsephb::pos_vel(const Time& T) const
 blitz::Array<AutoDerivative<double>, 1> PosCsephb::pos_vel
 (const TimeWithDerivative& T) const
 {
+  blitz::Range ra = blitz::Range::all();
   range_check_inclusive(T.value(), min_time_, max_time());
   // Just linear interpolation for now. We'll do more complicated
   // interpolation shortly.
   if(itype_ != LINEAR)
     throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T.value() - min_time_) / tstep_);
-  if(i >= (int) pos.size())
+  if(i >= pos.rows())
     --i;
   AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
   blitz::Array<AutoDerivative<double>, 1> res(6);
-  res(blitz::Range(0,2)) = f * pos[i+1] + (1 - f) * pos[i];
-  res(blitz::Range(3,5)) = (pos[i+1] - pos[i]) / tstep_;
+  res(blitz::Range(0,2)) = f * pos(i+1, ra) + (1 - f) * pos(i, ra);
+  res(blitz::Range(3,5)) = (pos(i+1,ra) - pos(i,ra)) / tstep_;
   return res;
 }
 
@@ -202,12 +214,11 @@ void PosCsephb::des_write(std::ostream& Os) const
   std::string d_mtime, t_mtime;
   min_time_split(d_mtime, t_mtime);
   Os << str_check_size(nextpart % e_source_ % coor_frame % tstep_ % d_mtime %
-		       t_mtime % (int) pos.size(), 1 + 1 + 13 + 8 + 16 + 5);
-  typedef blitz::Array<double, 1> atype;
-  BOOST_FOREACH(const atype& v, pos)
-    Os << str_check_size(numformat % v(0), 12)
-       << str_check_size(numformat % v(1), 12)
-       << str_check_size(numformat % v(2), 12);
+		       t_mtime % pos.rows(), 1 + 1 + 13 + 8 + 16 + 5);
+  for(int i = 0; i < pos.rows(); ++i)
+    Os << str_check_size(numformat % pos(i,0), 12)
+       << str_check_size(numformat % pos(i,1), 12)
+       << str_check_size(numformat % pos(i,2), 12);
   Os << str_check_size(resformat % 0, 5);
 }
 
@@ -236,13 +247,11 @@ boost::shared_ptr<PosCsephb> PosCsephb::des_read(std::istream& In)
   t_mtime.insert(2, ":");
   res->min_time_ = Time::parse_time(d_mtime + "T" + t_mtime + "Z");
   int sz = read_size<int>(In, 5);
-  res->pos.reserve(sz);
+  res->pos.resize(sz, 3);
   for(int i = 0; i < sz; ++i) {
-    blitz::Array<double, 1> v(3);
-    v(0) = read_size<double>(In, 12);
-    v(1) = read_size<double>(In, 12);
-    v(2) = read_size<double>(In, 12);
-    res->pos.push_back(v);
+    res->pos(i,0) = read_size<double>(In, 12);
+    res->pos(i,1) = read_size<double>(In, 12);
+    res->pos(i,2) = read_size<double>(In, 12);
   }
   int reserved_len = read_size<int>(In, 5);
   if(reserved_len > 0)

@@ -91,6 +91,8 @@ public:
 
   const Time& min_time() const { return min_time_; }
 
+  void min_time_split(std::string& d_mtime, std::string& t_mtime) const;
+  
 //-----------------------------------------------------------------------
 /// Time step between position data, in seconds.
 //-----------------------------------------------------------------------

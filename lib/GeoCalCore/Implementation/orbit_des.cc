@@ -166,6 +166,29 @@ static boost::format numformat("%|1$+012.2f|");
 static boost::format resformat("%|1$05d|");
 
 //-----------------------------------------------------------------------
+/// Return min_time split into the component pieces the DES requires.
+//-----------------------------------------------------------------------
+
+void PosCsephb::min_time_split(std::string& d_mtime, std::string& t_mtime) const
+{
+  std::string mtime = min_time_.to_string();
+  // Split into date and time parts
+  // The time string is something like "1998-06-30T10:51:28.32Z"
+  std::size_t t = mtime.find("T");
+  d_mtime = mtime.substr(0, t);
+  t_mtime = mtime.substr(t+1, -1);
+  // Chop off trailing "Z" in time part"
+  t_mtime = t_mtime.substr(0, t_mtime.size() - 1);
+  // Remove the "-" in the date.
+  d_mtime = boost::regex_replace(d_mtime, boost::regex("-"), "");
+  // Remove the ":" in the time.
+  t_mtime = boost::regex_replace(t_mtime, boost::regex(":"), "");
+  // Pad with trailing "0" to full size"
+  while(t_mtime.size() < 16)
+    t_mtime += "0";
+}
+
+//-----------------------------------------------------------------------
 /// Write out the DES data to the given stream.
 //-----------------------------------------------------------------------
 
@@ -176,21 +199,8 @@ void PosCsephb::des_write(std::ostream& Os) const
     Os << str_check_size(largangeorder % lagrange_order_, 1);
   // Indicate 1 for ECF, 0 for ECI
   int coor_frame = (is_cf_ ? 1 : 0);
-  std::string mtime = min_time_.to_string();
-  // Split into date and time parts
-  // The time string is something like "1998-06-30T10:51:28.32Z"
-  std::size_t t = mtime.find("T");
-  std::string d_mtime = mtime.substr(0, t);
-  std::string t_mtime = mtime.substr(t+1, -1);
-  // Chop off trailing "Z" in time part"
-  t_mtime = t_mtime.substr(0, t_mtime.size() - 1);
-  // Remove the "-" in the date.
-  d_mtime = boost::regex_replace(d_mtime, boost::regex("-"), "");
-  // Remove the ":" in the time.
-  t_mtime = boost::regex_replace(t_mtime, boost::regex(":"), "");
-  // Pad with trailing "0" to full size"
-  while(t_mtime.size() < 16)
-    t_mtime += "0";
+  std::string d_mtime, t_mtime;
+  min_time_split(d_mtime, t_mtime);
   Os << str_check_size(nextpart % e_source_ % coor_frame % tstep_ % d_mtime %
 		       t_mtime % (int) pos.size(), 1 + 1 + 13 + 8 + 16 + 5);
   typedef blitz::Array<double, 1> atype;

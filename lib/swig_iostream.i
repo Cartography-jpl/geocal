@@ -14,6 +14,11 @@
 
 %typemap(in) std::istream& (boost::iostreams::filtering_istream v) %{
     if($input != Py_None)
-      v.push(python_fh_inserter($input, &v), 1);
+      // Don't hold any characters in buffer. We don't have an easy
+      // way to put the buffer back into the python stream. May
+      // revisit this if there is a performance reason, we are doing a
+      // python call now for each read. But for now, just have a
+      // simpler interface of not buffering.
+      v.push(python_fh_inserter($input), 1);
     $1 = &v;
 %}

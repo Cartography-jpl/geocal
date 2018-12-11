@@ -55,6 +55,7 @@ else
 export NO_VICAR_GDALPLUGIN=t
 endif
 EXTRA_DIST+=@srcpythonlib@/air_mspi_igc_test.py
+EXTRA_DIST+=@srcpythonlib@/iostream_swig_test.py
 EXTRA_DIST+=@srcpythonlib@/dem_generate_test.py
 EXTRA_DIST+=@srcpythonlib@/docopt_simple_test.py
 EXTRA_DIST+=@srcpythonlib@/feature_detector_extension_test.py

@@ -8,6 +8,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_swig_boost_array)(void);
   INIT_TYPE INIT_FUNC(_swig_quaternion)(void);
   INIT_TYPE INIT_FUNC(_constant)(void);
+  INIT_TYPE INIT_FUNC(_iostream_swig_test)(void);
   INIT_TYPE INIT_FUNC(_generic_object)(void);
   INIT_TYPE INIT_FUNC(_auto_derivative)(void);
   INIT_TYPE INIT_FUNC(_array_ad)(void);
@@ -228,6 +229,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_swig_boost_array", INIT_FUNC(_swig_boost_array));
   INIT_MODULE(module, "_swig_quaternion", INIT_FUNC(_swig_quaternion));
   INIT_MODULE(module, "_constant", INIT_FUNC(_constant));
+  INIT_MODULE(module, "_iostream_swig_test", INIT_FUNC(_iostream_swig_test));
   INIT_MODULE(module, "_generic_object", INIT_FUNC(_generic_object));
   INIT_MODULE(module, "_auto_derivative", INIT_FUNC(_auto_derivative));
   INIT_MODULE(module, "_array_ad", INIT_FUNC(_array_ad));

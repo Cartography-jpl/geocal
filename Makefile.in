@@ -367,6 +367,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/swig_boost_array_wrap.cc \
 	@swigsrc@/swig_quaternion_wrap.cc @swigsrc@/constant_wrap.cc \
+	@swigsrc@/iostream_swig_test_wrap.cc \
 	@swigsrc@/generic_object_wrap.cc \
 	@swigsrc@/auto_derivative_wrap.cc @swigsrc@/array_ad_wrap.cc \
 	@swigsrc@/observer_wrap.cc @swigsrc@/geocal_quaternion_wrap.cc \
@@ -526,6 +527,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-swig_boost_array_wrap.lo \
 	@swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-constant_wrap.lo \
+	@swigsrc@/_swig_wrap_la-iostream_swig_test_wrap.lo \
 	@swigsrc@/_swig_wrap_la-generic_object_wrap.lo \
 	@swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo \
 	@swigsrc@/_swig_wrap_la-array_ad_wrap.lo \
@@ -1937,6 +1939,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_matcher_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_point_display_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_to_image_match_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-iostream_swig_test_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_image_ground_connection_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-jia_sample_wrap.Plo \
@@ -3271,6 +3274,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/swig_boost_array_wrap.cc \
 	@swigsrc@/swig_quaternion_wrap.cc @swigsrc@/constant_wrap.cc \
+	@swigsrc@/iostream_swig_test_wrap.cc \
 	@swigsrc@/generic_object_wrap.cc \
 	@swigsrc@/auto_derivative_wrap.cc @swigsrc@/array_ad_wrap.cc \
 	@swigsrc@/observer_wrap.cc @swigsrc@/geocal_quaternion_wrap.cc \
@@ -3646,12 +3650,12 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@libgeocal@/swig_pickle.i @libgeocal@/swig_print.i \
 	@libgeocal@/swig_python_attribute.i \
 	@libgeocal@/swig_quaternion.i @libgeocal@/swig_std.i \
-	@srcsupport@/constant.i @srcsupport@/generic_object.i \
-	@srcsupport@/auto_derivative.i @srcsupport@/array_ad.i \
-	@srcsupport@/observer.i @srcsupport@/geocal_quaternion.i \
-	@srcsupport@/covariance.i @srcsupport@/wgs84_constant.i \
-	@srcsupport@/geocal_exception.i @srcsupport@/functor.i \
-	@srcsupport@/vfunctor_with_derivative.i \
+	@srcsupport@/constant.i @srcsupport@/iostream_swig_test.i \
+	@srcsupport@/generic_object.i @srcsupport@/auto_derivative.i \
+	@srcsupport@/array_ad.i @srcsupport@/observer.i \
+	@srcsupport@/geocal_quaternion.i @srcsupport@/covariance.i \
+	@srcsupport@/wgs84_constant.i @srcsupport@/geocal_exception.i \
+	@srcsupport@/functor.i @srcsupport@/vfunctor_with_derivative.i \
 	@srcsupport@/dfunctor_with_derivative.i \
 	@srcsupport@/statistic.i @srcsupport@/geocal_gsl_fit.i \
 	@srcsupport@/geocal_gsl_root.i @srcsupport@/geocal_time.i \
@@ -4398,6 +4402,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-constant_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-iostream_swig_test_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-generic_object_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-auto_derivative_wrap.lo:  \
@@ -6478,6 +6484,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_matcher_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_point_display_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-image_to_image_match_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-iostream_swig_test_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_image_ground_connection_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-jia_sample_wrap.Plo@am__quote@ # am--include-marker
@@ -6654,6 +6661,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/constant_wrap.cc' object='@swigsrc@/_swig_wrap_la-constant_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-constant_wrap.lo `test -f '@swigsrc@/constant_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/constant_wrap.cc
+
+@swigsrc@/_swig_wrap_la-iostream_swig_test_wrap.lo: @swigsrc@/iostream_swig_test_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-iostream_swig_test_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-iostream_swig_test_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-iostream_swig_test_wrap.lo `test -f '@swigsrc@/iostream_swig_test_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/iostream_swig_test_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-iostream_swig_test_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-iostream_swig_test_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/iostream_swig_test_wrap.cc' object='@swigsrc@/_swig_wrap_la-iostream_swig_test_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-iostream_swig_test_wrap.lo `test -f '@swigsrc@/iostream_swig_test_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/iostream_swig_test_wrap.cc
 
 @swigsrc@/_swig_wrap_la-generic_object_wrap.lo: @swigsrc@/generic_object_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-generic_object_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-generic_object_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-generic_object_wrap.lo `test -f '@swigsrc@/generic_object_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/generic_object_wrap.cc
@@ -13032,6 +13046,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-image_matcher_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-image_point_display_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-image_to_image_match_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-iostream_swig_test_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_image_ground_connection_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-jia_sample_wrap.Plo
@@ -13654,6 +13669,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-image_matcher_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-image_point_display_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-image_to_image_match_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-iostream_swig_test_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_image_ground_connection_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ipi_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-jia_sample_wrap.Plo

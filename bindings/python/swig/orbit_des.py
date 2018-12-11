@@ -377,17 +377,51 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
       self._v_lagrange_order(value)
 
 
+    def min_time_split(self):
+        """
+
+        void PosCsephb::min_time_split(std::string &d_mtime, std::string &t_mtime) const
+        Return min_time split into the component pieces the DES requires. 
+        """
+        return _orbit_des.PosCsephb_min_time_split(self)
+
+
     @property
     def qual_flag_eph(self):
-        return self._v_ephemeris_data_quality()
+        return self.ephemeris_data_quality
 
     @property
     def interp_type_eph(self):
-        return self._v_interpolation_type()
+        return self.interpolation_type
 
     @property
     def interp_order_eph(self):
-        return self._v_lagrange_order()
+        return self.lagrange_order
+
+    @property
+    def ephem_flag(self):  
+        return self.ephemeris_source
+
+    @property
+    def eci_ecf_ephem(self):
+        return (1 if self.is_cf else 0)
+
+    @property
+    def dt_ephem(self):
+        return self.time_step
+
+    @property
+    def date_ephem(self):
+        return int(self.min_time_split()[0])
+
+    @property
+    def t0_ephem(self):
+        return float(self.min_time_split()[1])
+
+    @property
+    def reserved_len(self):
+        return 0
+
 
 
     def des_write(self, Os):
@@ -422,6 +456,7 @@ PosCsephb._v_interpolation_type = new_instancemethod(_orbit_des.PosCsephb__v_int
 PosCsephb._v_ephemeris_data_quality = new_instancemethod(_orbit_des.PosCsephb__v_ephemeris_data_quality, None, PosCsephb)
 PosCsephb._v_ephemeris_source = new_instancemethod(_orbit_des.PosCsephb__v_ephemeris_source, None, PosCsephb)
 PosCsephb._v_lagrange_order = new_instancemethod(_orbit_des.PosCsephb__v_lagrange_order, None, PosCsephb)
+PosCsephb.min_time_split = new_instancemethod(_orbit_des.PosCsephb_min_time_split, None, PosCsephb)
 PosCsephb.des_write = new_instancemethod(_orbit_des.PosCsephb_des_write, None, PosCsephb)
 PosCsephb.__str__ = new_instancemethod(_orbit_des.PosCsephb___str__, None, PosCsephb)
 PosCsephb_swigregister = _orbit_des.PosCsephb_swigregister

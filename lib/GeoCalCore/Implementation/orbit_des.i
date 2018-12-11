@@ -43,19 +43,45 @@ public:
   %python_attribute_with_set(ephemeris_data_quality, EphemerisDataQuality);
   %python_attribute_with_set(ephemeris_source, EphemerisSource);
   %python_attribute_with_set(lagrange_order, LagrangeOrder);
+  void min_time_split(std::string& OUTPUT, std::string& OUTPUT) const;
   // Synonyms that map to the pynitf names 
 %pythoncode {
 @property
 def qual_flag_eph(self):
-    return self._v_ephemeris_data_quality()
+    return self.ephemeris_data_quality
 
 @property
 def interp_type_eph(self):
-    return self._v_interpolation_type()
+    return self.interpolation_type
 
 @property
 def interp_order_eph(self):
-    return self._v_lagrange_order()
+    return self.lagrange_order
+
+@property
+def ephem_flag(self):  
+    return self.ephemeris_source
+
+@property
+def eci_ecf_ephem(self):
+    return (1 if self.is_cf else 0)
+
+@property
+def dt_ephem(self):
+    return self.time_step
+
+@property
+def date_ephem(self):
+    return int(self.min_time_split()[0])
+
+@property
+def t0_ephem(self):
+    return float(self.min_time_split()[1])
+
+@property
+def reserved_len(self):
+    return 0
+  
 }  
   void des_write(std::ostream& Os) const;
   static boost::shared_ptr<PosCsephb> des_read(std::istream& In);

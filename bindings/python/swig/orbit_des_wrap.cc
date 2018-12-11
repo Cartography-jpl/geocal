@@ -3626,11 +3626,12 @@ namespace Swig {
 #define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[171]
 #define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[172]
 #define SWIGTYPE_p_std__invalid_argument swig_types[173]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[174]
-#define SWIGTYPE_p_traits_type swig_types[175]
-#define SWIGTYPE_p_value_type swig_types[176]
-static swig_type_info *swig_types[178];
-static swig_module_info swig_module = {swig_types, 177, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__string swig_types[174]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[175]
+#define SWIGTYPE_p_traits_type swig_types[176]
+#define SWIGTYPE_p_value_type swig_types[177]
+static swig_type_info *swig_types[179];
+static swig_module_info swig_module = {swig_types, 178, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5581,6 +5582,7 @@ template<class T, int D> inline boost::array<T, D>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/categories.hpp>
 
+// Not actually used right now
 struct closable_seekable_device_tag :
   virtual boost::iostreams::device_tag, boost::iostreams::seekable,
   boost::iostreams::closable_tag { };
@@ -5589,7 +5591,8 @@ struct closable_seekable_device_tag :
 class python_fh_device {
 public:
   typedef char  char_type;
-  typedef closable_seekable_device_tag category;
+  //typedef closable_seekable_device_tag category;
+  typedef boost::iostreams::seekable_device_tag category;
   python_fh_device(PyObject* Fh, boost::iostreams::filtering_istream* Fis = 0) :
     fh(Fh), fis(Fis) {}
   std::streamsize read(char* s, std::streamsize n)
@@ -5619,6 +5622,13 @@ public:
   }
   void close()
   {
+    // Not being used right now, because the category  doesn't include
+    // closable. Leave in place in case we come back to this. Would be
+    // nice is we could buffer the input, and put stuff back into the
+    // python file handle on close. But can't figure out how to get
+    // this to work. In the short run, just work unbuffered on
+    // input. Note that output is buffered, we don't have the same
+    // issue for that.
     std::cerr << "Close is being called\n";
     if(fis)
       std::cerr << "File handle tell: " << fis->tellg() << "\n";
@@ -8569,6 +8579,68 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_PosCsephb_min_time_split(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::PosCsephb *arg1 = (GeoCal::PosCsephb *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PosCsephb const > tempshared1 ;
+  boost::shared_ptr< GeoCal::PosCsephb const > *smartarg1 = 0 ;
+  std::string temp2 ;
+  int res2 = SWIG_TMPOBJ ;
+  std::string temp3 ;
+  int res3 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[1] ;
+  
+  arg2 = &temp2;
+  arg3 = &temp3;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PosCsephb_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PosCsephb_min_time_split" "', argument " "1"" of type '" "GeoCal::PosCsephb const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PosCsephb > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::PosCsephb > * >(argp1);
+      arg1 = const_cast< GeoCal::PosCsephb * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::PosCsephb > * >(argp1);
+      arg1 = const_cast< GeoCal::PosCsephb * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      ((GeoCal::PosCsephb const *)arg1)->min_time_split(*arg2,*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res2)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_std_string((*arg2)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res2) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg2), SWIGTYPE_p_std__string, new_flags));
+  }
+  if (SWIG_IsTmpObj(res3)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_std_string((*arg3)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res3) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg3), SWIGTYPE_p_std__string, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_PosCsephb_des_write(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PosCsephb *arg1 = (GeoCal::PosCsephb *) 0 ;
@@ -8628,7 +8700,12 @@ SWIGINTERN PyObject *_wrap_PosCsephb_des_read(PyObject *SWIGUNUSEDPARM(self), Py
   swig_obj[0] = args;
   
   if(swig_obj[0] != Py_None)
-  v1.push(python_fh_inserter(swig_obj[0], &v1), 1);
+  // Don't hold any characters in buffer. We don't have an easy
+  // way to put the buffer back into the python stream. May
+  // revisit this if there is a performance reason, we are doing a
+  // python call now for each read. But for now, just have a
+  // simpler interface of not buffering.
+  v1.push(python_fh_inserter(swig_obj[0]), 1);
   arg1 = &v1;
   
   {
@@ -9140,6 +9217,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"void GeoCal::PosCsephb::lagrange_order(LagrangeOrder Lagrange_order)\n"
 		"\n"
+		""},
+	 { (char *)"PosCsephb_min_time_split", (PyCFunction)_wrap_PosCsephb_min_time_split, METH_O, (char *)"\n"
+		"\n"
+		"void PosCsephb::min_time_split(std::string &d_mtime, std::string &t_mtime) const\n"
+		"Return min_time split into the component pieces the DES requires. \n"
 		""},
 	 { (char *)"PosCsephb_des_write", _wrap_PosCsephb_des_write, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -9810,6 +9892,7 @@ static swig_type_info _swigt__p_std__basic_iostreamT_char_std__char_traitsT_char
 static swig_type_info _swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_istreamT_char_std__char_traitsT_char_t_t", "std::basic_istream< char,std::char_traits< char > > *|std::istream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t", "std::basic_ostream< char,std::char_traits< char > > *|std::ostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
@@ -9989,6 +10072,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__invalid_argument,
+  &_swigt__p_std__string,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_traits_type,
   &_swigt__p_value_type,
@@ -10168,6 +10252,7 @@ static swig_cast_info _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char
 static swig_cast_info _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -10347,6 +10432,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__invalid_argument,
+  _swigc__p_std__string,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_traits_type,
   _swigc__p_value_type,

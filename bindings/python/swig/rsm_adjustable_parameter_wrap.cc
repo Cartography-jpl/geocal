@@ -5561,6 +5561,7 @@ template<class T, int D> inline boost::array<T, D>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/categories.hpp>
 
+// Not actually used right now
 struct closable_seekable_device_tag :
   virtual boost::iostreams::device_tag, boost::iostreams::seekable,
   boost::iostreams::closable_tag { };
@@ -5569,7 +5570,8 @@ struct closable_seekable_device_tag :
 class python_fh_device {
 public:
   typedef char  char_type;
-  typedef closable_seekable_device_tag category;
+  //typedef closable_seekable_device_tag category;
+  typedef boost::iostreams::seekable_device_tag category;
   python_fh_device(PyObject* Fh, boost::iostreams::filtering_istream* Fis = 0) :
     fh(Fh), fis(Fis) {}
   std::streamsize read(char* s, std::streamsize n)
@@ -5599,6 +5601,13 @@ public:
   }
   void close()
   {
+    // Not being used right now, because the category  doesn't include
+    // closable. Leave in place in case we come back to this. Would be
+    // nice is we could buffer the input, and put stuff back into the
+    // python file handle on close. But can't figure out how to get
+    // this to work. In the short run, just work unbuffered on
+    // input. Note that output is buffered, we don't have the same
+    // issue for that.
     std::cerr << "Close is being called\n";
     if(fis)
       std::cerr << "File handle tell: " << fis->tellg() << "\n";
@@ -7025,7 +7034,12 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter_base_read_tre_string(PyObject 
   }
   
   if(swig_obj[1] != Py_None)
-  v2.push(python_fh_inserter(swig_obj[1], &v2), 1);
+  // Don't hold any characters in buffer. We don't have an easy
+  // way to put the buffer back into the python stream. May
+  // revisit this if there is a performance reason, we are doing a
+  // python call now for each read. But for now, just have a
+  // simpler interface of not buffering.
+  v2.push(python_fh_inserter(swig_obj[1]), 1);
   arg2 = &v2;
   
   {

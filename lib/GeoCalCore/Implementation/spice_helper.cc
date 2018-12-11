@@ -650,7 +650,7 @@ std::string SpiceHelper::to_string(const Time& T)
 #ifdef HAVE_SPICE
   spice_setup();
   char temp[28];
-  timout_c(T.et(), "YYYY-MM-DDTHR:MN:SC.######Z", 28, temp);
+  timout_c(T.et(), "YYYY-MM-DDTHR:MN:SC.######::RNDZ", 28, temp);
   spice_error_check();
   return temp;
 #else

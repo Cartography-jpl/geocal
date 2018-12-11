@@ -5,6 +5,7 @@
 
 %{
 #include <iostream>
+#include <boost/iostreams/filtering_stream.hpp>
 #include <string>
 #include "printable.h"
 namespace GeoCal {
@@ -20,7 +21,7 @@ public:
   void write(std::ostream& Os) const
   { Os << to_write; }
   std::string read(std::istream& In)
-  { 
+  {
     std::string res = "";
     for(int i = 0; i < word_to_read; ++i) {
       std::string t;

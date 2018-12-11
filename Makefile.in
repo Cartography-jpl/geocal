@@ -3013,6 +3013,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonbin@/tp_collect_test.py \
 	@srcpythonbin@/write_image_test.py \
 	@srcpythonlib@/air_mspi_igc_test.py \
+	@srcpythonlib@/iostream_swig_test.py \
 	@srcpythonlib@/dem_generate_test.py \
 	@srcpythonlib@/docopt_simple_test.py \
 	@srcpythonlib@/feature_detector_extension_test.py \

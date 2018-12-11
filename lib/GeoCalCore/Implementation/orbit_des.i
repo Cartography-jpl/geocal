@@ -43,6 +43,20 @@ public:
   %python_attribute_with_set(ephemeris_data_quality, EphemerisDataQuality);
   %python_attribute_with_set(ephemeris_source, EphemerisSource);
   %python_attribute_with_set(lagrange_order, LagrangeOrder);
+  // Synonyms that map to the pynitf names 
+%pythoncode {
+@property
+def qual_flag_eph(self):
+    return self._v_ephemeris_data_quality()
+
+@property
+def interp_type_eph(self):
+    return self._v_interpolation_type()
+
+@property
+def interp_order_eph(self):
+    return self._v_lagrange_order()
+}  
   void des_write(std::ostream& Os) const;
   static boost::shared_ptr<PosCsephb> des_read(std::istream& In);
   std::string print_to_string() const;

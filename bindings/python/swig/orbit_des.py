@@ -377,6 +377,19 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
       self._v_lagrange_order(value)
 
 
+    @property
+    def qual_flag_eph(self):
+        return self._v_ephemeris_data_quality()
+
+    @property
+    def interp_type_eph(self):
+        return self._v_interpolation_type()
+
+    @property
+    def interp_order_eph(self):
+        return self._v_lagrange_order()
+
+
     def des_write(self, Os):
         """
 

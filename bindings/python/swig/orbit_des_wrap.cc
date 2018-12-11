@@ -5581,12 +5581,17 @@ template<class T, int D> inline boost::array<T, D>
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/categories.hpp>
 
+struct closable_seekable_device_tag :
+  virtual boost::iostreams::device_tag, boost::iostreams::seekable,
+  boost::iostreams::closable_tag { };
+ 
 // Make a python FileHandle look like a device
 class python_fh_device {
 public:
   typedef char  char_type;
-  typedef boost::iostreams::seekable_device_tag category;
-  python_fh_device(PyObject* Fh) : fh(Fh) {}
+  typedef closable_seekable_device_tag category;
+  python_fh_device(PyObject* Fh, boost::iostreams::filtering_istream* Fis = 0) :
+    fh(Fh), fis(Fis) {}
   std::streamsize read(char* s, std::streamsize n)
   {
     PyObject* res = PyObject_CallMethod(fh, "read", "(i)", (int) n);
@@ -5612,12 +5617,19 @@ public:
     }
     return n;
   }
+  void close()
+  {
+    std::cerr << "Close is being called\n";
+    if(fis)
+      std::cerr << "File handle tell: " << fis->tellg() << "\n";
+  }
   PyObject* fh;
+  boost::iostreams::filtering_istream* fis;
 };
 
-inline python_fh_device python_fh_inserter(PyObject* Fh)
+ inline python_fh_device python_fh_inserter(PyObject* Fh, boost::iostreams::filtering_istream* Fis = 0)
 {
-  return python_fh_device(Fh);
+  return python_fh_device(Fh, Fis);
 }
  
 
@@ -8616,7 +8628,7 @@ SWIGINTERN PyObject *_wrap_PosCsephb_des_read(PyObject *SWIGUNUSEDPARM(self), Py
   swig_obj[0] = args;
   
   if(swig_obj[0] != Py_None)
-  v1.push(python_fh_inserter(swig_obj[0]));
+  v1.push(python_fh_inserter(swig_obj[0], &v1), 1);
   arg1 = &v1;
   
   {

@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %base_import(orbit)
 %geocal_shared_ptr(GeoCal::PosCsephb);
+%geocal_shared_ptr(GeoCal::AttCsattb);
 %geocal_shared_ptr(GeoCal::OrbitDes);
 namespace GeoCal {
 class PosCsephb : public GenericObject {
@@ -105,6 +106,102 @@ def ephem_z(self):
   %pickle_serialization();
 };
 
+class AttCsattb : public GenericObject {
+public:
+  enum AttitudeDataQuality {ATTITUDE_QUALITY_SUSPECT = 0,
+			     ATTITUDE_QUALITY_GOOD = 1};
+  enum InterpolationType { NEAREST_NEIGHBOR = 0,
+			   LINEAR = 1,
+			   LAGRANGE = 2 };
+  enum LagrangeOrder { NO_LAGRANGE = 0, LAGRANGE_1 = 1, LAGRANGE_3 = 3,
+		       LAGRANGE_5 = 5,
+		       LAGRANGE_7 = 7};
+  enum AttitudeSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
+  AttCsattb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    AttitudeDataQuality E_quality = ATTITUDE_QUALITY_GOOD,
+	    AttitudeSource E_source = ACTUAL);
+  AttCsattb(const Orbit& Orb, const Time& Min_time, const Time& Max_time,
+	    double Tstep,
+	    InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    AttitudeDataQuality E_quality = ATTITUDE_QUALITY_GOOD,
+	    AttitudeSource E_source = ACTUAL);
+  %python_attribute(is_cf, bool);
+  %python_attribute(min_time, Time);
+  %python_attribute(max_time, Time);
+  %python_attribute(time_step, double);
+  %python_attribute_with_set(interpolation_type, InterpolationType);
+  %python_attribute_with_set(attitude_data_quality, AttitudeDataQuality);
+  %python_attribute_with_set(attitude_source, AttitudeSource);
+  %python_attribute_with_set(lagrange_order, LagrangeOrder);
+  %python_attribute(attitude_data, blitz::Array<double, 2>);
+  void min_time_split(std::string& OUTPUT, std::string& OUTPUT) const;
+  // Synonyms that map to the pynitf names 
+%pythoncode {
+@property
+def qual_flag_att(self):
+    return self.attitude_data_quality
+
+@property
+def interp_type_att(self):
+    return self.interpolation_type
+
+@property
+def interp_order_att(self):
+    return self.lagrange_order
+
+@property
+def att_type(self):  
+    return self.attitude_source
+
+@property
+def eci_ecf_att(self):
+    return (1 if self.is_cf else 0)
+
+@property
+def dt_att(self):
+    return self.time_step
+
+@property
+def date_att(self):
+    return int(self.min_time_split()[0])
+
+@property
+def t0_att(self):
+    return float(self.min_time_split()[1])
+
+@property
+def reserved_len(self):
+    return 0
+
+@property
+def num_att(self):
+    return self.attitude_data.shape[0]
+
+@property
+def q1(self):
+    return self.attitude_data[:,0]
+
+@property
+def q2(self):
+    return self.attitude_data[:,1]
+  
+@property
+def q3(self):
+    return self.attitude_data[:,2]
+  
+@property
+def q4(self):
+    return self.attitude_data[:,3]
+  
+}  
+  void des_write(std::ostream& Os) const;
+  static boost::shared_ptr<AttCsattb> des_read(std::istream& In);
+  std::string print_to_string() const;
+  %pickle_serialization();
+};
+
 class OrbitDes: public Orbit {
 public:
   OrbitDes(const boost::shared_ptr<PosCsephb>& Pos);
@@ -117,4 +214,4 @@ public:
  
 }
 // List of things "import *" will include
-%python_export("PosCsephb", "OrbitDes")
+%python_export("PosCsephb", "AttCsattb", "OrbitDes")

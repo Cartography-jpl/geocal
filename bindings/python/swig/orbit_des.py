@@ -500,6 +500,314 @@ def PosCsephb_des_read(In):
     """
     return _orbit_des.PosCsephb_des_read(In)
 
+class AttCsattb(geocal_swig.generic_object.GenericObject):
+    """
+
+    This handles attitude reading, writing, and interpolation.
+
+    This uses the NITF DES CSEATTB (See the SNIP documentation).
+
+    Note that this class doesn't read and write the full DES, only the
+    data portion. It works with the python code found in
+    geocal_des_extension.py.
+
+    Note that the the CSATTB data is like a NITF TRE. But because it is a
+    DES, it is potentially much larger. For efficiency, we read and write
+    the data as istream and ostream rather than return strings as we
+    typically do for TREs. On the python side, this can be mapped from a
+    io object like FileHandle or BytesIO.
+
+    C++ includes: orbit_des.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    ATTITUDE_QUALITY_SUSPECT = _orbit_des.AttCsattb_ATTITUDE_QUALITY_SUSPECT
+    ATTITUDE_QUALITY_GOOD = _orbit_des.AttCsattb_ATTITUDE_QUALITY_GOOD
+    NEAREST_NEIGHBOR = _orbit_des.AttCsattb_NEAREST_NEIGHBOR
+    LINEAR = _orbit_des.AttCsattb_LINEAR
+    LAGRANGE = _orbit_des.AttCsattb_LAGRANGE
+    NO_LAGRANGE = _orbit_des.AttCsattb_NO_LAGRANGE
+    LAGRANGE_1 = _orbit_des.AttCsattb_LAGRANGE_1
+    LAGRANGE_3 = _orbit_des.AttCsattb_LAGRANGE_3
+    LAGRANGE_5 = _orbit_des.AttCsattb_LAGRANGE_5
+    LAGRANGE_7 = _orbit_des.AttCsattb_LAGRANGE_7
+    PREDICTED = _orbit_des.AttCsattb_PREDICTED
+    ACTUAL = _orbit_des.AttCsattb_ACTUAL
+    REFINED = _orbit_des.AttCsattb_REFINED
+
+    def __init__(self, *args):
+        """
+
+        AttCsattb::AttCsattb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
+        Tstep, InterpolationType Itype=LINEAR, LagrangeOrder
+        Lagrange_order=NO_LAGRANGE, AttitudeDataQuality
+        A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL)
+        Constructor.
+
+        We sample the attitude of the given Orbit at fixed spaces times. This
+        version goes from the Min_time, up to Max_time (or more accurately,
+        the largest time Min_time i * Tstep that is <= Max_time).w 
+        """
+        _orbit_des.AttCsattb_swiginit(self, _orbit_des.new_AttCsattb(*args))
+
+    def _v_is_cf(self):
+        """
+
+        bool GeoCal::AttCsattb::is_cf() const
+        True if data is CartesianFixed.
+
+        If false, then data is CartesianInertial. 
+        """
+        return _orbit_des.AttCsattb__v_is_cf(self)
+
+
+    @property
+    def is_cf(self):
+        return self._v_is_cf()
+
+
+    def _v_min_time(self):
+        """
+
+        const Time& GeoCal::AttCsattb::min_time() const
+        Minimum time we have data for. 
+        """
+        return _orbit_des.AttCsattb__v_min_time(self)
+
+
+    @property
+    def min_time(self):
+        return self._v_min_time()
+
+
+    def _v_max_time(self):
+        """
+
+        Time GeoCal::AttCsattb::max_time() const
+        Maximum time we have data for. 
+        """
+        return _orbit_des.AttCsattb__v_max_time(self)
+
+
+    @property
+    def max_time(self):
+        return self._v_max_time()
+
+
+    def _v_time_step(self):
+        """
+
+        double GeoCal::AttCsattb::time_step() const
+        Time step between attitude data, in seconds. 
+        """
+        return _orbit_des.AttCsattb__v_time_step(self)
+
+
+    @property
+    def time_step(self):
+        return self._v_time_step()
+
+
+    def _v_interpolation_type(self, *args):
+        """
+
+        void GeoCal::AttCsattb::interpolation_type(InterpolationType Itype)
+
+        """
+        return _orbit_des.AttCsattb__v_interpolation_type(self, *args)
+
+
+    @property
+    def interpolation_type(self):
+        return self._v_interpolation_type()
+
+    @interpolation_type.setter
+    def interpolation_type(self, value):
+      self._v_interpolation_type(value)
+
+
+    def _v_attitude_data_quality(self, *args):
+        """
+
+        void GeoCal::AttCsattb::attitude_data_quality(AttitudeDataQuality A_quality)
+
+        """
+        return _orbit_des.AttCsattb__v_attitude_data_quality(self, *args)
+
+
+    @property
+    def attitude_data_quality(self):
+        return self._v_attitude_data_quality()
+
+    @attitude_data_quality.setter
+    def attitude_data_quality(self, value):
+      self._v_attitude_data_quality(value)
+
+
+    def _v_attitude_source(self, *args):
+        """
+
+        void GeoCal::AttCsattb::attitude_source(AttitudeSource A_source)
+
+        """
+        return _orbit_des.AttCsattb__v_attitude_source(self, *args)
+
+
+    @property
+    def attitude_source(self):
+        return self._v_attitude_source()
+
+    @attitude_source.setter
+    def attitude_source(self, value):
+      self._v_attitude_source(value)
+
+
+    def _v_lagrange_order(self, *args):
+        """
+
+        void GeoCal::AttCsattb::lagrange_order(LagrangeOrder Lagrange_order)
+
+        """
+        return _orbit_des.AttCsattb__v_lagrange_order(self, *args)
+
+
+    @property
+    def lagrange_order(self):
+        return self._v_lagrange_order()
+
+    @lagrange_order.setter
+    def lagrange_order(self, value):
+      self._v_lagrange_order(value)
+
+
+    def _v_attitude_data(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::AttCsattb::attitude_data() const
+        Raw data. 
+        """
+        return _orbit_des.AttCsattb__v_attitude_data(self)
+
+
+    @property
+    def attitude_data(self):
+        return self._v_attitude_data()
+
+
+    def min_time_split(self):
+        """
+
+        void AttCsattb::min_time_split(std::string &d_mtime, std::string &t_mtime) const
+        Return min_time split into the component pieces the DES requires. 
+        """
+        return _orbit_des.AttCsattb_min_time_split(self)
+
+
+    @property
+    def qual_flag_att(self):
+        return self.attitude_data_quality
+
+    @property
+    def interp_type_att(self):
+        return self.interpolation_type
+
+    @property
+    def interp_order_att(self):
+        return self.lagrange_order
+
+    @property
+    def att_type(self):  
+        return self.attitude_source
+
+    @property
+    def eci_ecf_att(self):
+        return (1 if self.is_cf else 0)
+
+    @property
+    def dt_att(self):
+        return self.time_step
+
+    @property
+    def date_att(self):
+        return int(self.min_time_split()[0])
+
+    @property
+    def t0_att(self):
+        return float(self.min_time_split()[1])
+
+    @property
+    def reserved_len(self):
+        return 0
+
+    @property
+    def num_att(self):
+        return self.attitude_data.shape[0]
+
+    @property
+    def q1(self):
+        return self.attitude_data[:,0]
+
+    @property
+    def q2(self):
+        return self.attitude_data[:,1]
+
+    @property
+    def q3(self):
+        return self.attitude_data[:,2]
+
+    @property
+    def q4(self):
+        return self.attitude_data[:,3]
+
+
+
+    def des_write(self, Os):
+        """
+
+        void AttCsattb::des_write(std::ostream &Os) const
+        Write out the DES data to the given stream. 
+        """
+        return _orbit_des.AttCsattb_des_write(self, Os)
+
+
+    def des_read(In):
+        """
+
+        boost::shared_ptr< AttCsattb > AttCsattb::des_read(std::istream &In)
+        Read the DES data the given stream. 
+        """
+        return _orbit_des.AttCsattb_des_read(In)
+
+    des_read = staticmethod(des_read)
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _orbit_des.delete_AttCsattb
+AttCsattb._v_is_cf = new_instancemethod(_orbit_des.AttCsattb__v_is_cf, None, AttCsattb)
+AttCsattb._v_min_time = new_instancemethod(_orbit_des.AttCsattb__v_min_time, None, AttCsattb)
+AttCsattb._v_max_time = new_instancemethod(_orbit_des.AttCsattb__v_max_time, None, AttCsattb)
+AttCsattb._v_time_step = new_instancemethod(_orbit_des.AttCsattb__v_time_step, None, AttCsattb)
+AttCsattb._v_interpolation_type = new_instancemethod(_orbit_des.AttCsattb__v_interpolation_type, None, AttCsattb)
+AttCsattb._v_attitude_data_quality = new_instancemethod(_orbit_des.AttCsattb__v_attitude_data_quality, None, AttCsattb)
+AttCsattb._v_attitude_source = new_instancemethod(_orbit_des.AttCsattb__v_attitude_source, None, AttCsattb)
+AttCsattb._v_lagrange_order = new_instancemethod(_orbit_des.AttCsattb__v_lagrange_order, None, AttCsattb)
+AttCsattb._v_attitude_data = new_instancemethod(_orbit_des.AttCsattb__v_attitude_data, None, AttCsattb)
+AttCsattb.min_time_split = new_instancemethod(_orbit_des.AttCsattb_min_time_split, None, AttCsattb)
+AttCsattb.des_write = new_instancemethod(_orbit_des.AttCsattb_des_write, None, AttCsattb)
+AttCsattb.__str__ = new_instancemethod(_orbit_des.AttCsattb___str__, None, AttCsattb)
+AttCsattb_swigregister = _orbit_des.AttCsattb_swigregister
+AttCsattb_swigregister(AttCsattb)
+
+def AttCsattb_des_read(In):
+    """
+
+    boost::shared_ptr< AttCsattb > AttCsattb::des_read(std::istream &In)
+    Read the DES data the given stream. 
+    """
+    return _orbit_des.AttCsattb_des_read(In)
+
 class OrbitDes(geocal_swig.orbit.Orbit):
     """
 
@@ -556,7 +864,7 @@ OrbitDes_swigregister = _orbit_des.OrbitDes_swigregister
 OrbitDes_swigregister(OrbitDes)
 
 
-__all__ = ["PosCsephb","OrbitDes"]
+__all__ = ["PosCsephb","AttCsattb","OrbitDes"]
 
 
 

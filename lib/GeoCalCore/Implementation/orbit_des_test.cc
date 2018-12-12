@@ -35,6 +35,28 @@ BOOST_AUTO_TEST_CASE(pos_csephb)
 	      << *p2 << "\n";
 }
 
+BOOST_AUTO_TEST_CASE(att_csattb)
+{
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  KeplerOrbit korb(t, t + 100.0);
+  AttCsattb att(korb, 1.0);
+  BOOST_CHECK_CLOSE(att.min_time() - t, 0.0, 1e-4);
+  BOOST_CHECK_CLOSE(att.max_time() - t, 100.0, 1e-4);
+  std::ostringstream os;
+  att.des_write(os);
+  if(false)
+    std::cerr << os.str() << "\n";
+  std::istringstream is(os.str());
+  boost::shared_ptr<AttCsattb> att2 = AttCsattb::des_read(is);
+  BOOST_CHECK(fabs(att2->min_time() - t) < 1e-6);
+  BOOST_CHECK_CLOSE(att2->max_time() - t, 100.0, 1e-4);
+  BOOST_CHECK_EQUAL(att2->is_cf(), att.is_cf());
+  BOOST_CHECK_CLOSE(att2->time_step(), att.time_step(), 1e-4);
+  if(false)
+    std::cerr << att << "\n"
+	      << *att2 << "\n";
+}
+
 BOOST_AUTO_TEST_CASE(orbit_des)
 {
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
@@ -61,6 +83,22 @@ BOOST_AUTO_TEST_CASE(serialization_pos_csephb)
   BOOST_CHECK_CLOSE(pr->pos_vel(t)(0), -1788501.0, 1e-4);
   BOOST_CHECK_CLOSE(pr->pos_vel(t)(1), -6854177.0, 1e-4);
   BOOST_CHECK_CLOSE(pr->pos_vel(t)(2), -16811.0, 1e-3);
+}
+
+BOOST_AUTO_TEST_CASE(serialization_att_csattb)
+{
+  if(!have_serialize_supported())
+    return;
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  KeplerOrbit korb(t, t + 100.0);
+  boost::shared_ptr<AttCsattb> att = boost::make_shared<AttCsattb>(korb, 1.0);
+  std::string d = serialize_write_string(att);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<AttCsattb> attr = 
+    serialize_read_string<AttCsattb>(d);
+  BOOST_CHECK_CLOSE(attr->min_time() - t, 0.0, 1e-4);
+  BOOST_CHECK_CLOSE(attr->max_time() - t, 100.0, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_orbit_des)

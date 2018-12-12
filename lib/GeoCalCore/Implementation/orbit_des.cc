@@ -24,6 +24,18 @@ void PosCsephb::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
+void AttCsattb::serialize(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(AttCsattb);
+  ar & GEOCAL_NVP_(min_time) & GEOCAL_NVP_(tstep)
+    & GEOCAL_NVP_(is_cf) & GEOCAL_NVP_(itype)
+    & GEOCAL_NVP_(a_quality)
+    & GEOCAL_NVP_(a_source)
+    & GEOCAL_NVP_(lagrange_order)
+    & GEOCAL_NVP(att);
+}
+
+template<class Archive>
 void OrbitDes::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
@@ -31,6 +43,7 @@ void OrbitDes::serialize(Archive & ar, const unsigned int version)
 }
 
 GEOCAL_IMPLEMENT(PosCsephb);
+GEOCAL_IMPLEMENT(AttCsattb);
 GEOCAL_IMPLEMENT(OrbitDes);
 #endif
 
@@ -175,6 +188,7 @@ static boost::format frontpart("%|1$01d|%|2$01d|");
 static boost::format largangeorder("%|1$01d|");
 static boost::format nextpart("%|1$01d|%|2$01d|%|3$013.9f|%|4$8s|%|5$16s|%|6$05d|");
 static boost::format numformat("%|1$+012.2f|");
+static boost::format attnumformat("%|1$+18.15f|");
 static boost::format resformat("%|1$05d|");
 
 //-----------------------------------------------------------------------
@@ -252,6 +266,198 @@ boost::shared_ptr<PosCsephb> PosCsephb::des_read(std::istream& In)
     res->pos(i,0) = read_size<double>(In, 12);
     res->pos(i,1) = read_size<double>(In, 12);
     res->pos(i,2) = read_size<double>(In, 12);
+  }
+  int reserved_len = read_size<int>(In, 5);
+  if(reserved_len > 0)
+    std::string skipped = read_size<std::string>(In, reserved_len);
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Constructor. We sample the attitude of the given Orbit at fixed
+/// spaces times. This version goes from the min_time() of the Orbit,
+/// up to max_time() (or more accurately, the largest time min_time()
+/// + i * Tstep that is <= max_time()).
+//-----------------------------------------------------------------------
+
+AttCsattb::AttCsattb
+(const Orbit& Orb, double Tstep,
+ InterpolationType Itype,
+ LagrangeOrder Lagrange_order,
+ AttitudeDataQuality A_quality,
+ AttitudeSource A_source)
+  : min_time_(Orb.min_time()), tstep_(Tstep),
+    itype_(Itype), lagrange_order_(Lagrange_order),
+    a_quality_(A_quality), a_source_(A_source)
+{
+  is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  int sz = (int) floor((Orb.max_time() - min_time_) / tstep_) + 1;
+  if((min_time_ + sz * tstep_) <= Orb.max_time())
+    sz += 1;
+  att.resize(sz, 4);
+  for(int i = 0; i < sz; ++i) {
+    Time t = min_time_ + i * tstep_;
+    boost::shared_ptr<QuaternionOrbitData> od =
+      boost::dynamic_pointer_cast<QuaternionOrbitData>(Orb.orbit_data(t));
+    if(!od)
+      throw Exception("AttCsattb only works with orbits that return a QuaternionOrbitData");
+    if(is_cf_) {
+      att(i, blitz::Range::all()) =
+	od->sc_to_cf().R_component_1(),
+	od->sc_to_cf().R_component_2(),
+	od->sc_to_cf().R_component_3(),
+	od->sc_to_cf().R_component_4();
+    } else {
+      att(i, blitz::Range::all()) =
+	od->sc_to_ci().R_component_1(),
+	od->sc_to_ci().R_component_2(),
+	od->sc_to_ci().R_component_3(),
+	od->sc_to_ci().R_component_4();
+    }
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Constructor. We sample the attitude of the given Orbit at fixed
+/// spaces times. This version goes from the Min_time,
+/// up to Max_time (or more accurately, the largest time Min_time
+/// + i * Tstep that is <= Max_time).w
+//-----------------------------------------------------------------------
+
+AttCsattb::AttCsattb
+(const Orbit& Orb, const Time& Min_time, const Time& Max_time, double Tstep,
+ InterpolationType Itype,
+ LagrangeOrder Lagrange_order,
+ AttitudeDataQuality A_quality,
+ AttitudeSource A_source)
+  : min_time_(Min_time), tstep_(Tstep),
+    itype_(Itype), lagrange_order_(Lagrange_order),
+    a_quality_(A_quality), a_source_(A_source)
+{
+  is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  int sz = (int) floor((Max_time - min_time_) / tstep_) + 1;
+  if((min_time_ + sz * tstep_) <= Max_time)
+    sz += 1;
+  att.resize(sz, 4);
+  for(int i = 0; i < sz; ++i) {
+    Time t = min_time_ + i * tstep_;
+    boost::shared_ptr<QuaternionOrbitData> od =
+      boost::dynamic_pointer_cast<QuaternionOrbitData>(Orb.orbit_data(t));
+    if(!od)
+      throw Exception("AttCsattb only works with orbits that return a QuaternionOrbitData");
+    if(is_cf_) {
+      att(i, blitz::Range::all()) =
+	od->sc_to_cf().R_component_1(),
+	od->sc_to_cf().R_component_2(),
+	od->sc_to_cf().R_component_3(),
+	od->sc_to_cf().R_component_4();
+    } else {
+      att(i, blitz::Range::all()) =
+	od->sc_to_ci().R_component_1(),
+	od->sc_to_ci().R_component_2(),
+	od->sc_to_ci().R_component_3(),
+	od->sc_to_ci().R_component_4();
+    }
+  }
+}
+
+void AttCsattb::print(std::ostream& Os) const
+{
+  Os << "AttCsattb\n"
+     << "  Min time:           " << min_time_ << "\n"
+     << "  Max time:           " << max_time() << "\n"
+     << "  Tstep:              " << tstep_ << "\n"
+     << "  Is_cf:              " << is_cf_ << "\n"
+     << "  Interpolation type: "
+     << (itype_ == NEAREST_NEIGHBOR ? "Nearest Neighbor" :
+	 (itype_ == LINEAR ? "Linear" : "Lagrange")) << "\n"
+     << "  Lagrange order:     " << (int) lagrange_order_ << "\n"
+     << "  Attitude quality:  " << (a_quality_ == ATTITUDE_QUALITY_SUSPECT ?
+				     "Suspect" : "Good") << "\n"
+     << "  Attitude source:   " << (a_source_ == PREDICTED ?
+				     "Predicted" :
+				     (a_source_ == ACTUAL ?
+				      "Actual, time of collection" :
+				      "Refined")) << "\n";
+}
+
+//-----------------------------------------------------------------------
+/// Return min_time split into the component pieces the DES requires.
+//-----------------------------------------------------------------------
+
+void AttCsattb::min_time_split(std::string& d_mtime, std::string& t_mtime) const
+{
+  std::string mtime = min_time_.to_string();
+  // Split into date and time parts
+  // The time string is something like "1998-06-30T10:51:28.32Z"
+  std::size_t t = mtime.find("T");
+  d_mtime = mtime.substr(0, t);
+  t_mtime = mtime.substr(t+1, -1);
+  // Chop off trailing "Z" in time part"
+  t_mtime = t_mtime.substr(0, t_mtime.size() - 1);
+  // Remove the "-" in the date.
+  d_mtime = boost::regex_replace(d_mtime, boost::regex("-"), "");
+  // Remove the ":" in the time.
+  t_mtime = boost::regex_replace(t_mtime, boost::regex(":"), "");
+  // Pad with trailing "0" to full size"
+  while(t_mtime.size() < 16)
+    t_mtime += "0";
+}
+
+//-----------------------------------------------------------------------
+/// Write out the DES data to the given stream.
+//-----------------------------------------------------------------------
+
+void AttCsattb::des_write(std::ostream& Os) const
+{
+  Os << str_check_size(frontpart % a_quality_ % itype_, 2);
+  if(itype_ == LAGRANGE)
+    Os << str_check_size(largangeorder % lagrange_order_, 1);
+  // Indicate 1 for ECF, 0 for ECI
+  int coor_frame = (is_cf_ ? 1 : 0);
+  std::string d_mtime, t_mtime;
+  min_time_split(d_mtime, t_mtime);
+  Os << str_check_size(nextpart % a_source_ % coor_frame % tstep_ % d_mtime %
+		       t_mtime % att.rows(), 1 + 1 + 13 + 8 + 16 + 5);
+  for(int i = 0; i < att.rows(); ++i)
+    Os << str_check_size(attnumformat % att(i,0), 18)
+       << str_check_size(attnumformat % att(i,1), 18)
+       << str_check_size(attnumformat % att(i,2), 18)
+       << str_check_size(attnumformat % att(i,3), 18);
+  Os << str_check_size(resformat % 0, 5);
+}
+
+//-----------------------------------------------------------------------
+/// Read the DES data  the given stream.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<AttCsattb> AttCsattb::des_read(std::istream& In)
+{
+  boost::shared_ptr<AttCsattb> res(new AttCsattb());
+  res->a_quality_ = AttitudeDataQuality(read_size<int>(In, 1));
+  res->itype_ = InterpolationType(read_size<int>(In, 1));
+  res->lagrange_order_ = NO_LAGRANGE;	
+  if(res->itype_ == LAGRANGE)
+    res->lagrange_order_ = LagrangeOrder(read_size<int> (In, 1));
+  res->a_source_ = AttitudeSource(read_size<int>(In, 1));
+  int coor_frame = read_size<int>(In, 1);
+  res->is_cf_ = (coor_frame == 1);
+  res->tstep_ = read_size<double>(In,13);
+  std::string d_mtime = read_size<std::string>(In, 8);
+  std::string t_mtime = read_size<std::string>(In, 16);
+  // Add "-" and ":"
+  d_mtime.insert(6, "-");
+  d_mtime.insert(4, "-");
+  t_mtime.insert(4, ":");
+  t_mtime.insert(2, ":");
+  res->min_time_ = Time::parse_time(d_mtime + "T" + t_mtime + "Z");
+  int sz = read_size<int>(In, 5);
+  res->att.resize(sz, 4);
+  for(int i = 0; i < sz; ++i) {
+    res->att(i,0) = read_size<double>(In, 18);
+    res->att(i,1) = read_size<double>(In, 18);
+    res->att(i,2) = read_size<double>(In, 18);
+    res->att(i,3) = read_size<double>(In, 18);
   }
   int reserved_len = read_size<int>(In, 5);
   if(reserved_len > 0)

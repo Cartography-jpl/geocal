@@ -130,6 +130,128 @@ private:
 };
 
 /****************************************************************//**
+  This handles attitude reading, writing, and interpolation. This
+  uses the NITF DES CSEATTB (See the SNIP documentation).
+
+  Note that this class doesn't read and write the full DES, only the
+  data portion. It works with the python code found in
+  geocal_des_extension.py.
+
+  Note that the the CSATTB data is like a NITF TRE. But because it
+  is a DES, it is potentially much larger. For efficiency, we read and
+  write the data as istream and ostream rather than return strings as
+  we typically do for TREs. On the python side, this can be mapped
+  from a io object like FileHandle or BytesIO.
+*******************************************************************/
+class AttCsattb : public Printable<AttCsattb>, boost::noncopyable {
+public:
+  enum AttitudeDataQuality {ATTITUDE_QUALITY_SUSPECT = 0,
+			     ATTITUDE_QUALITY_GOOD = 1};
+  enum InterpolationType { NEAREST_NEIGHBOR = 0,
+			   LINEAR = 1,
+			   LAGRANGE = 2 };
+  enum LagrangeOrder { NO_LAGRANGE = 0, LAGRANGE_1 = 1, LAGRANGE_3 = 3,
+		       LAGRANGE_5 = 5,
+		       LAGRANGE_7 = 7};
+  enum AttitudeSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
+  AttCsattb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    AttitudeDataQuality A_quality = ATTITUDE_QUALITY_GOOD,
+	    AttitudeSource A_source = ACTUAL);
+  AttCsattb(const Orbit& Orb, const Time& Min_time, const Time& Max_time,
+	    double Tstep,
+	    InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    AttitudeDataQuality A_quality = ATTITUDE_QUALITY_GOOD,
+	    AttitudeSource A_source = ACTUAL);
+  virtual ~AttCsattb() {}
+  // blitz::Array<double, 1> pos_vel(const Time& T) const;
+  // blitz::Array<AutoDerivative<double>, 1>
+  // pos_vel(const TimeWithDerivative& T) const;
+
+//-----------------------------------------------------------------------
+/// Interpolation type.
+//-----------------------------------------------------------------------
+
+  InterpolationType interpolation_type() const { return itype_; }
+  void interpolation_type(InterpolationType Itype) { itype_ = Itype; }
+
+//-----------------------------------------------------------------------
+/// Attitude data quality
+//-----------------------------------------------------------------------
+
+  AttitudeDataQuality attitude_data_quality() const { return a_quality_; }
+  void attitude_data_quality(AttitudeDataQuality A_quality)
+  { a_quality_ = A_quality; }
+
+//-----------------------------------------------------------------------
+/// Attitude data source
+//-----------------------------------------------------------------------
+
+  AttitudeSource attitude_source() const { return a_source_; }
+  void attitude_source(AttitudeSource A_source)
+  { a_source_ = A_source; }
+
+//-----------------------------------------------------------------------
+/// Lagrange polynomial order
+//-----------------------------------------------------------------------
+
+  LagrangeOrder lagrange_order() const { return lagrange_order_; }
+  void lagrange_order(LagrangeOrder Lagrange_order)
+  { lagrange_order_ = Lagrange_order; }
+  
+//-----------------------------------------------------------------------
+/// True if data is CartesianFixed. If false, then data is
+/// CartesianInertial. 
+//-----------------------------------------------------------------------
+
+  bool is_cf() const { return is_cf_; }
+
+//-----------------------------------------------------------------------
+/// Minimum time we have data for.
+//-----------------------------------------------------------------------
+
+  const Time& min_time() const { return min_time_; }
+
+  void min_time_split(std::string& d_mtime, std::string& t_mtime) const;
+  
+//-----------------------------------------------------------------------
+/// Time step between attitude data, in seconds.
+//-----------------------------------------------------------------------
+
+  double time_step() const { return tstep_; }
+
+//-----------------------------------------------------------------------
+/// Maximum time we have data for.
+//-----------------------------------------------------------------------
+
+  Time max_time() const { return min_time_ + (att.rows() - 1) * time_step(); }
+  virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Raw data
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 2>& attitude_data() const { return att; }
+
+  void des_write(std::ostream& Os) const;
+  static boost::shared_ptr<AttCsattb> des_read(std::istream& In);
+private:
+  Time min_time_;
+  double tstep_;
+  bool is_cf_;
+  InterpolationType itype_;
+  LagrangeOrder lagrange_order_;
+  AttitudeDataQuality a_quality_;
+  AttitudeSource a_source_;
+  blitz::Array<double, 2> att;
+  AttCsattb() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+  
+/****************************************************************//**
   This combines a PosCsephb and AttCsattb into an Orbit. Note that
   we calculate things for every time point. If you are using this
   a bit you may want to create a OrbitQuaternionList from this Orbit
@@ -155,5 +277,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(PosCsephb);
+GEOCAL_EXPORT_KEY(AttCsattb);
 GEOCAL_EXPORT_KEY(OrbitDes);
 #endif

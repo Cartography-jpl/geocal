@@ -181,31 +181,34 @@ RsmId::read_tre_string(const std::string& Tre_in)
     res->image_acquistion_time_ = boost::make_shared<Time>(Time::parse_time(t));
   } else
     read_size<std::string>(in, 2 * 4 + 9);
-  boost::optional<int> t1 = read_size<boost::optional<int> >(in, 8);
-  boost::optional<int> t2 = read_size<boost::optional<int> >(in, 8);
-  boost::optional<double> t3 = read_size<boost::optional<double> >(in, 21);
-  boost::optional<double> t4 = read_size<boost::optional<double> >(in, 21);
+  // We have input data (the sample SNIP file) where there is trailing
+  // space for the double. Not clear if this is actually valid or not,
+  // but we do want to be able to read this.
+  boost::optional<int> t1 = read_size<boost::optional<int> >(in, 8, true);
+  boost::optional<int> t2 = read_size<boost::optional<int> >(in, 8, true);
+  boost::optional<double> t3 = read_size<boost::optional<double> >(in, 21, true);
+  boost::optional<double> t4 = read_size<boost::optional<double> >(in, 21, true);
   if(t1)
     res->timing_ = boost::make_shared<RsmIdTiming>(*t1, *t2, *t3, *t4);
   std::string conv_type = read_size<std::string>(in, 1);
   if(conv_type == "G") {
     res->cconv = boost::make_shared<GeodeticRadianConverter>();
     for(int i = 0; i < 12; ++i)
-      read_size<boost::optional<double> >(in, 21);
+      read_size<boost::optional<double> >(in, 21, true);
   } else if (conv_type == "H") {
     res->cconv = boost::make_shared<GeodeticRadian2piConverter>();
     for(int i = 0; i < 12; ++i)
-      read_size<boost::optional<double> >(in, 21);
+      read_size<boost::optional<double> >(in, 21, true);
   } else if (conv_type == "R") {
     boost::shared_ptr<LocalRcParameter> lp =
       boost::make_shared<LocalRcParameter>();
     lp->cf_prototype = boost::make_shared<Ecr>(0,0,0);
     for(int i = 0; i < 3; ++i)
-      lp->cf_offset[i] = read_size<double>(in, 21);
+      lp->cf_offset[i] = read_size<double>(in, 21, true);
     // Column major order
     for(int j = 0; j < 3; ++j)
       for(int i = 0; i < 3; ++i)
-	lp->cf_to_rc[i][j] = read_size<double>(in, 21);
+	lp->cf_to_rc[i][j] = read_size<double>(in, 21, true);
     res->cconv = boost::make_shared<LocalRcConverter>(lp);
   } else {
     Exception e;
@@ -214,28 +217,28 @@ RsmId::read_tre_string(const std::string& Tre_in)
   }
   res->ground_domain_vertex_.resize(8);
   for(int i = 0; i < 8; ++i) {
-    double x = read_size<double>(in, 21);
-    double y = read_size<double>(in, 21);
-    double z = read_size<double>(in, 21);
+    double x = read_size<double>(in, 21, true);
+    double y = read_size<double>(in, 21, true);
+    double z = read_size<double>(in, 21, true);
     res->ground_domain_vertex_[i] =
       res->cconv->convert_from_coordinate(x, y, z);
   }
-  boost::optional<double> x = read_size<boost::optional<double> >(in, 21);
-  boost::optional<double> y = read_size<boost::optional<double> >(in, 21);
-  boost::optional<double> z = read_size<boost::optional<double> >(in, 21);
+  boost::optional<double> x = read_size<boost::optional<double> >(in, 21, true);
+  boost::optional<double> y = read_size<boost::optional<double> >(in, 21, true);
+  boost::optional<double> z = read_size<boost::optional<double> >(in, 21, true);
   if(x)
     res->ground_reference_point_ = res->cconv->convert_from_coordinate(*x, *y, *z);
-  res->full_number_line_ = read_size<boost::optional<int> >(in, 8);
-  res->full_number_sample_ = read_size<boost::optional<int> >(in, 8);
-  res->min_line_ = read_size<int>(in, 8);
-  res->max_line_ = read_size<int>(in, 8);
-  res->min_sample_ = read_size<int>(in, 8);
-  res->max_sample_ = read_size<int>(in, 8);
+  res->full_number_line_ = read_size<boost::optional<int> >(in, 8, true);
+  res->full_number_sample_ = read_size<boost::optional<int> >(in, 8, true);
+  res->min_line_ = read_size<int>(in, 8, true);
+  res->max_line_ = read_size<int>(in, 8, true);
+  res->min_sample_ = read_size<int>(in, 8, true);
+  res->max_sample_ = read_size<int>(in, 8, true);
 
   // This is the illumination and sensor position. We don't currently
   // have this in place, we'll need to add this in.
   for(int i = 0; i < 21; ++i)
-    boost::optional<double> x = read_size<boost::optional<double> >(in, 21);
+    boost::optional<double> x = read_size<boost::optional<double> >(in, 21, true);
   check_end_of_stream(in);
   return res;
 }

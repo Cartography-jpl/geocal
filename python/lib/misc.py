@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import division, print_function
 from future import standard_library
 standard_library.install_aliases()
 from past.utils import old_div
@@ -9,7 +9,11 @@ import re
 import geocal_swig
 import pickle
 import subprocess
-import osgeo.gdal as gdal
+try:
+    import osgeo.gdal as gdal
+    have_osgeo = True
+except ImportError:
+    have_osgeo = False
 
 # This contains miscellenous routines that don't really belong anywhere else.
 
@@ -146,6 +150,8 @@ def mars_fix_projection(fin, fout, band, hirise_correction=False):
     comment for details). Since this could potentially corrupt good data,
     we only include this correction of hirise_correction is set to True.
     '''
+    if(not have_osgeo):
+        raise RuntimeError("mars_fix_projection requires that the GDAL python library osgeo.gdal be installed")
     cmd = ["gdal_translate", "-of", "VRT", "-b", str(band), fin, fout]
     subprocess.run(cmd, check=True)
     f = gdal.Open(fout, gdal.GA_Update)

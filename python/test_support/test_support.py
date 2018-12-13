@@ -16,6 +16,10 @@ except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
 
+# In any case, for python < 3 we can't use pynitf
+if sys.version_info < (3,):
+    have_pynitf = False
+    
 # Location of test data that is part of source
 unit_test_data = os.path.abspath(os.path.dirname(__file__) + "/../../unit_test_data/") + "/"
 stereo_unit_test_data = unit_test_data + "Stereo/"

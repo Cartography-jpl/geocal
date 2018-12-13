@@ -5528,7 +5528,12 @@ public:
   }
   std::streamsize write(const char* s, std::streamsize n)
   {
+    // Different format strings for python 2 vs 3.
+#if PY_MAJOR_VERSION > 2
     PyObject* res = PyObject_CallMethod(fh, "write", "(y#)", s, (int) n);
+#else
+    PyObject* res = PyObject_CallMethod(fh, "write", "(s#)", s, (int) n);
+#endif    
     if(res == NULL) {
       throw GeoCal::Exception("Call to FileHandle write failed");
     } else {

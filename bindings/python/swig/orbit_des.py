@@ -833,13 +833,14 @@ class OrbitDes(geocal_swig.orbit.Orbit):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Pos):
+    def __init__(self, Pos, Att):
         """
 
-        OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos)
+        OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos, const boost::shared_ptr<
+        AttCsattb > &Att)
         Constructor. 
         """
-        _orbit_des.OrbitDes_swiginit(self, _orbit_des.new_OrbitDes(Pos))
+        _orbit_des.OrbitDes_swiginit(self, _orbit_des.new_OrbitDes(Pos, Att))
 
     def orbit_data(self, *args):
         """
@@ -864,12 +865,27 @@ class OrbitDes(geocal_swig.orbit.Orbit):
         return self._v_pos_csephb()
 
 
+    def _v_att_csattb(self):
+        """
+
+        const boost::shared_ptr<AttCsattb>& GeoCal::OrbitDes::att_csattb() const
+
+        """
+        return _orbit_des.OrbitDes__v_att_csattb(self)
+
+
+    @property
+    def att_csattb(self):
+        return self._v_att_csattb()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_des.delete_OrbitDes
 OrbitDes.orbit_data = new_instancemethod(_orbit_des.OrbitDes_orbit_data, None, OrbitDes)
 OrbitDes._v_pos_csephb = new_instancemethod(_orbit_des.OrbitDes__v_pos_csephb, None, OrbitDes)
+OrbitDes._v_att_csattb = new_instancemethod(_orbit_des.OrbitDes__v_att_csattb, None, OrbitDes)
 OrbitDes_swigregister = _orbit_des.OrbitDes_swigregister
 OrbitDes_swigregister(OrbitDes)
 

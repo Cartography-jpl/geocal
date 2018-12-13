@@ -12569,15 +12569,19 @@ SWIGINTERN PyObject *AttCsattb_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject
 SWIGINTERN PyObject *_wrap_new_OrbitDes(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::PosCsephb > *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::AttCsattb > *arg2 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::PosCsephb > tempshared1 ;
   boost::shared_ptr< GeoCal::PosCsephb > temp2shared1 ;
-  PyObject *swig_obj[1] ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AttCsattb > tempshared2 ;
+  boost::shared_ptr< GeoCal::AttCsattb > temp2shared2 ;
+  PyObject *swig_obj[2] ;
   GeoCal::OrbitDes *result = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"new_OrbitDes",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PosCsephb_t,  0 , &newmem);
@@ -12604,8 +12608,33 @@ SWIGINTERN PyObject *_wrap_new_OrbitDes(PyObject *SWIGUNUSEDPARM(self), PyObject
     }
   }
   {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AttCsattb_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_OrbitDes" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::AttCsattb > const &""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::AttCsattb > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::AttCsattb > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::AttCsattb > * >(argp2) : &tempshared2;
+    }
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
     try {
-      result = (GeoCal::OrbitDes *)new GeoCal::OrbitDes((boost::shared_ptr< GeoCal::PosCsephb > const &)*arg1);
+      result = (GeoCal::OrbitDes *)new GeoCal::OrbitDes((boost::shared_ptr< GeoCal::PosCsephb > const &)*arg1,(boost::shared_ptr< GeoCal::AttCsattb > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -12815,6 +12844,51 @@ SWIGINTERN PyObject *_wrap_OrbitDes__v_pos_csephb(PyObject *SWIGUNUSEDPARM(self)
   {
     try {
       result = ((GeoCal::OrbitDes const *)arg1)->pos_csephb();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitDes__v_att_csattb(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitDes *arg1 = (GeoCal::OrbitDes *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDes const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDes const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::AttCsattb > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDes_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDes__v_att_csattb" "', argument " "1"" of type '" "GeoCal::OrbitDes const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDes > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OrbitDes const *)arg1)->att_csattb();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -13077,9 +13151,10 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"AttCsattb_swigregister", AttCsattb_swigregister, METH_VARARGS, NULL},
 	 { (char *)"AttCsattb_swiginit", AttCsattb_swiginit, METH_VARARGS, NULL},
-	 { (char *)"new_OrbitDes", (PyCFunction)_wrap_new_OrbitDes, METH_O, (char *)"\n"
+	 { (char *)"new_OrbitDes", _wrap_new_OrbitDes, METH_VARARGS, (char *)"\n"
 		"\n"
-		"OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos)\n"
+		"OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos, const boost::shared_ptr<\n"
+		"AttCsattb > &Att)\n"
 		"Constructor. \n"
 		""},
 	 { (char *)"OrbitDes_orbit_data", _wrap_OrbitDes_orbit_data, METH_VARARGS, (char *)"\n"
@@ -13090,6 +13165,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitDes__v_pos_csephb", (PyCFunction)_wrap_OrbitDes__v_pos_csephb, METH_O, (char *)"\n"
 		"\n"
 		"const boost::shared_ptr<PosCsephb>& GeoCal::OrbitDes::pos_csephb() const\n"
+		"\n"
+		""},
+	 { (char *)"OrbitDes__v_att_csattb", (PyCFunction)_wrap_OrbitDes__v_att_csattb, METH_O, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr<AttCsattb>& GeoCal::OrbitDes::att_csattb() const\n"
 		"\n"
 		""},
 	 { (char *)"delete_OrbitDes", (PyCFunction)_wrap_delete_OrbitDes, METH_O, (char *)"\n"

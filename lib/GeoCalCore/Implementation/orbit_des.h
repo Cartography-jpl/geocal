@@ -272,15 +272,18 @@ private:
 
 class OrbitDes: public Orbit {
 public:
-  OrbitDes(const boost::shared_ptr<PosCsephb>& Pos);
+  OrbitDes(const boost::shared_ptr<PosCsephb>& Pos,
+	   const boost::shared_ptr<AttCsattb>& Att);
   virtual ~OrbitDes() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> 
   orbit_data(const TimeWithDerivative& T) const;
   virtual void print(std::ostream& Os) const;
   const boost::shared_ptr<PosCsephb>& pos_csephb() const {return pos_;}
+  const boost::shared_ptr<AttCsattb>& att_csattb() const {return att_;}
 private:
   boost::shared_ptr<PosCsephb> pos_;
+  boost::shared_ptr<AttCsattb> att_;
   OrbitDes() {}
   friend class boost::serialization::access;
   template<class Archive>

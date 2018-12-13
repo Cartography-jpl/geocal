@@ -400,7 +400,7 @@ inline boost::math::quaternion<double> interpolate_quaternion_rotation
 //-----------------------------------------------------------------------
 /// Normalize a quaternion
 //-----------------------------------------------------------------------
-inline void normalize(boost::math::quaternion<double>& Q)
+template<class T> inline void normalize(boost::math::quaternion<T>& Q)
 {
   Q /= abs(Q);
 }

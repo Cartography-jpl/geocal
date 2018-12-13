@@ -310,7 +310,7 @@ def determine_quat_rot(V1, V2):
 def quat_normalize(Q):
     """
 
-    void GeoCal::normalize(boost::math::quaternion< double > &Q)
+    void GeoCal::normalize(boost::math::quaternion< T > &Q)
     Normalize a quaternion. 
     """
     return _geocal_quaternion.quat_normalize(Q)

@@ -219,11 +219,13 @@ def q4(self):
 
 class OrbitDes: public Orbit {
 public:
-  OrbitDes(const boost::shared_ptr<PosCsephb>& Pos);
+  OrbitDes(const boost::shared_ptr<PosCsephb>& Pos,
+	   const boost::shared_ptr<AttCsattb>& Att);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;
   %python_attribute(pos_csephb, boost::shared_ptr<PosCsephb>);
+  %python_attribute(att_csattb, boost::shared_ptr<AttCsattb>);
   %pickle_serialization();
 };
  

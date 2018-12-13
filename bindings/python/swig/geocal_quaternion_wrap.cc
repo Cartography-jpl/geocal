@@ -10067,7 +10067,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"quat_normalize", (PyCFunction)_wrap_quat_normalize, METH_O, (char *)"\n"
 		"\n"
-		"void GeoCal::normalize(boost::math::quaternion< double > &Q)\n"
+		"void GeoCal::normalize(boost::math::quaternion< T > &Q)\n"
 		"Normalize a quaternion. \n"
 		""},
 	 { (char *)"quat_rot_x", _wrap_quat_rot_x, METH_VARARGS, (char *)"\n"

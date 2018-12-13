@@ -39,7 +39,7 @@ template<class Archive>
 void OrbitDes::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP_(pos);
+    & GEOCAL_NVP_(pos) & GEOCAL_NVP_(att);
 }
 
 GEOCAL_IMPLEMENT(PosCsephb);
@@ -176,7 +176,9 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
   double f = (T - min_time_) / tstep_ - i;
   blitz::Array<double, 1> res(4);
   res = f * att(i+1, ra) + (1 - f) * att(i, ra);
-  return array_to_quaternion(res);
+  boost::math::quaternion<double> resq = array_to_quaternion(res);
+  normalize(resq);
+  return resq;
 }
 
 //-----------------------------------------------------------------------
@@ -243,7 +245,10 @@ boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
   AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
   blitz::Array<AutoDerivative<double>, 1> res(4);
   res = f * att(i+1, ra) + (1 - f) * att(i, ra);
-  return array_to_quaternion(res);
+  boost::math::quaternion<AutoDerivative<double> > resq =
+    array_to_quaternion(res);
+  normalize(resq);
+  return resq;
 }
 
 static boost::format frontpart("%|1$01d|%|2$01d|");
@@ -548,33 +553,38 @@ boost::shared_ptr<AttCsattb> AttCsattb::des_read(std::istream& In)
 /// Constructor.
 //-----------------------------------------------------------------------
 
-OrbitDes::OrbitDes(const boost::shared_ptr<PosCsephb>& Pos)
-  : Orbit(Pos->min_time(), Pos->max_time()),
-    pos_(Pos)
+OrbitDes::OrbitDes(const boost::shared_ptr<PosCsephb>& Pos,
+		   const boost::shared_ptr<AttCsattb>& Att)
+  : Orbit(std::max(Pos->min_time(), Att->min_time()),
+	  std::min(Pos->max_time(), Att->max_time())),
+    pos_(Pos), att_(Att)
 {
 }
 
 boost::shared_ptr<OrbitData> OrbitDes::orbit_data(Time T) const
 {
-  // Temporary
-  boost::math::quaternion<double> q(0,0,0,1);
+  boost::math::quaternion<double> att_q = att_->att_q(T);
   blitz::Array<double, 1> posvel = pos_->pos_vel(T);
   boost::array<double, 3> vel;
   vel[0] = posvel(3);
   vel[1] = posvel(4);
   vel[2] = posvel(5);
+  if(!(pos_->is_cf() && att_->is_cf()) &&
+     !(!pos_->is_cf() && !att_->is_cf()))
+    throw Exception("pos_ and att_ need to either both be for cartesian fixed or both for cartesian inertial");
   if(pos_->is_cf())
     return boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Ecr>(posvel(0), posvel(1), posvel(2)), vel, q);
+	   boost::make_shared<Ecr>(posvel(0), posvel(1), posvel(2)), vel,
+						   att_q);
   return boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Eci>(posvel(0), posvel(1), posvel(2)), vel, q);
+	   boost::make_shared<Eci>(posvel(0), posvel(1), posvel(2)), vel,
+						 att_q);
 }
 
 boost::shared_ptr<OrbitData> OrbitDes::orbit_data
 (const TimeWithDerivative& T) const
 {
-  // Temporary
-  boost::math::quaternion<AutoDerivative<double> > q(0,0,0,1);
+  boost::math::quaternion<AutoDerivative<double> > att_q = att_->att_q(T);
   blitz::Array<AutoDerivative<double>, 1> posvel = pos_->pos_vel(T);
   boost::array<AutoDerivative<double>, 3> pos;
   boost::array<AutoDerivative<double>, 3> vel;
@@ -584,15 +594,18 @@ boost::shared_ptr<OrbitData> OrbitDes::orbit_data
   vel[0] = posvel(3);
   vel[1] = posvel(4);
   vel[2] = posvel(5);
+  if(!(pos_->is_cf() && att_->is_cf()) &&
+     !(!pos_->is_cf() && !att_->is_cf()))
+    throw Exception("pos_ and att_ need to either both be for cartesian fixed or both for cartesian inertial");
   if(pos_->is_cf())
     return boost::make_shared<QuaternionOrbitData>(T,
 	   boost::make_shared<Ecr>(posvel(0).value(), posvel(1).value(),
 				   posvel(2).value()),
-	   pos, vel, q);
+	   pos, vel, att_q);
   return boost::make_shared<QuaternionOrbitData>(T,
 	   boost::make_shared<Eci>(posvel(0).value(), posvel(1).value(),
 				   posvel(2).value()),
-	   pos, vel, q);
+	   pos, vel, att_q);
 }
 
 void OrbitDes::print(std::ostream& Os) const
@@ -601,5 +614,8 @@ void OrbitDes::print(std::ostream& Os) const
   Os << "OrbitDes:\n"
      << "  pos_csephb:\n";
   opad << *pos_csephb() << "\n";
+  opad.strict_sync();
+  Os << "  att_csattb:\n"; 
+  opad << *att_csattb() << "\n";
   opad.strict_sync();
 }

@@ -1,5 +1,9 @@
 #include "unit_test_support.h"
 #include "orbit_des.h"
+#include "orbit_data_image_ground_connection.h"
+#include "simple_dem.h"
+#include "memory_raster_image.h"
+#include "constant_raster_image.h"
 #include <sstream>
 
 using namespace GeoCal;
@@ -61,9 +65,24 @@ BOOST_AUTO_TEST_CASE(orbit_des)
 {
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   KeplerOrbit korb(t, t + 100.0);
-  OrbitDes orb(boost::make_shared<PosCsephb>(korb, 1.0));
-  for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5)
+  OrbitDes orb(boost::make_shared<PosCsephb>(korb, 1.0),
+	       boost::make_shared<AttCsattb>(korb, 1.0));
+  boost::shared_ptr<Camera> cam(new SimpleCamera);
+  boost::shared_ptr<Dem> dem(new SimpleDem(100));
+  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
+				     cam->number_sample(0), 10));
+  ImageCoordinate ic(1.0, 1504 / 2);
+  for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
     BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1.0);
+    OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
+    OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
+    if(false)
+      std::cerr << ti << ": "
+		<< GeoCal::distance(*igc.ground_coordinate(ic),
+				    *kigc.ground_coordinate(ic)) << "\n";
+    BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
+     				 *kigc.ground_coordinate(ic)) < 3.0);
+  }
 }
 
 BOOST_AUTO_TEST_CASE(serialization_pos_csephb)
@@ -108,7 +127,8 @@ BOOST_AUTO_TEST_CASE(serialization_orbit_des)
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   KeplerOrbit korb(t, t + 100.0);
   boost::shared_ptr<Orbit> orb =
-    boost::make_shared<OrbitDes>(boost::make_shared<PosCsephb>(korb, 1.0));
+    boost::make_shared<OrbitDes>(boost::make_shared<PosCsephb>(korb, 1.0),
+				 boost::make_shared<AttCsattb>(korb, 1.0));
   std::string d = serialize_write_string(orb);
   if(false)
     std::cerr << d;

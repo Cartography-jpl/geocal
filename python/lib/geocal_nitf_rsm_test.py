@@ -27,8 +27,10 @@ def test_rsm_rp(isolated_dir, rsm):
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
+    
 @require_pynitf
 @require_vicar
+@require_serialize
 def test_vicar_rsm(isolated_dir, rsm):
     '''Test that we can read and write RSM attached to a VicarRasterImage
     and VicarLiteRasterImage. This requires everything to be installed, so

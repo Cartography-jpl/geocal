@@ -82,6 +82,8 @@ BOOST_FIXTURE_TEST_CASE(vicar_rsm, RsmFixture)
 {
   if(!VicarFile::vicar_available())
     return;
+  if(!have_serialize_supported())
+    return;
   {
     VicarRasterImage out("test_out/vicar_rsm_out.img", "BYTE", 10, 11, 1);
     int val = 0;
@@ -101,6 +103,8 @@ BOOST_FIXTURE_TEST_CASE(vicar_rsm_nitf, RsmFixtureRadian)
   // desired.
   return;
   if(!VicarFile::vicar_available())
+    return;
+  if(!have_serialize_supported())
     return;
   {
     VicarRasterImage out("test_out/vicar_rsm_nitf_out.img", "BYTE", 10, 11, 1);

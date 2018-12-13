@@ -24932,9 +24932,18 @@ $as_echo "yes" >&6; }
   install_pynitf="no"
 fi
 else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+
+  # Regardless, only install if we have python 3.
+  ac_python3=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:$LD_LIBRARY_PATH $PYTHON -c "import sys; print(sys.version_info > (3,))"`
+  if test "$ac_python3" != "True"; then
+     install_pynitf="no"
+     { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+  else
+     { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
- install_pynitf="yes"
+     install_pynitf="yes"
+  fi
 
 
 fi

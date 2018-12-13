@@ -197,8 +197,16 @@ AS_HELP_STRING([--disable-pynitf],[Do not install pynitf]),
   AC_MSG_RESULT([yes])
   install_pynitf="no"
 fi],
-[AC_MSG_RESULT([no])
- install_pynitf="yes"
+[
+  # Regardless, only install if we have python 3.
+  ac_python3=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:$LD_LIBRARY_PATH $PYTHON -c "import sys; print(sys.version_info > (3,))"`
+  if test "$ac_python3" != "True"; then
+     install_pynitf="no"
+     AC_MSG_RESULT([yes])
+  else
+     AC_MSG_RESULT([no])
+     install_pynitf="yes"
+  fi
 ]
 )
 AM_CONDITIONAL([INSTALL_PYNITF], [test "$install_pynitf" = "yes"])

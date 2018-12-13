@@ -13,6 +13,7 @@ def test_poscsephb(isolated_dir):
     f = pynitf.NitfFile()
     t = Time.parse_time("1998-06-30T10:51:28.32Z")
     p = PosCsephb(KeplerOrbit(t, t + 100.0), 1.0)
+    att = AttCsattb(KeplerOrbit(t, t + 100.0), 1.0)
     des = DesCSEPHB_geocal()
     des.pos_csephb = p
     f.des_segment.append(pynitf.NitfDesSegment(des=des))
@@ -34,8 +35,8 @@ def test_poscsephb(isolated_dir):
     assert p.ephemeris_data_quality == p2.ephemeris_data_quality
     assert p.ephemeris_source == p2.ephemeris_source
     assert p.lagrange_order == p2.lagrange_order
-    orb1 = OrbitDes(p)
-    orb2 = OrbitDes(p2)
+    orb1 = OrbitDes(p, att)
+    orb2 = OrbitDes(p2, att)
     for t in np.linspace(0, 100.0, 200):
         assert distance(orb1.position_cf(orb1.min_time+t),
                         orb2.position_cf(orb2.min_time+t)) < 0.01

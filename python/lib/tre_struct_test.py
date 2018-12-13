@@ -48,7 +48,7 @@ def test_nitf_use00a_create(isolated_dir):
     assert tre.n_ref == 0
     assert tre.rev_num == 0
     assert tre.n_seg == 0
-    assert tre.max_lp_seg == 0
+    assert tre.max_lp_seg == None
     assert tre.sun_el == 62.5
     assert tre.sun_az == 129.6
     subprocess.check_call(["nitf_to_vicar", "-q",

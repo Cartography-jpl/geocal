@@ -47,6 +47,25 @@ GEOCAL_IMPLEMENT(AttCsattb);
 GEOCAL_IMPLEMENT(OrbitDes);
 #endif
 
+
+//-----------------------------------------------------------------------
+/// Constructor
+//-----------------------------------------------------------------------
+
+PosCsephb::PosCsephb
+(const blitz::Array<double, 2>& Pos, const Time& Tmin, double Tstep,
+ bool Is_cf,
+ InterpolationType Itype,
+ LagrangeOrder Lagrange_order,
+ EphemerisDataQuality E_quality,
+ EphemerisSource E_source)
+: min_time_(Tmin), tstep_(Tstep), is_cf_(Is_cf), 
+  itype_(Itype), lagrange_order_(Lagrange_order),
+  e_quality_(E_quality), e_source_(E_source),
+  pos(Pos.copy())
+{
+}
+
 //-----------------------------------------------------------------------
 /// Constructor. We sample the position of the given Orbit at fixed
 /// spaces times. This version goes from the min_time() of the Orbit,
@@ -140,6 +159,27 @@ void PosCsephb::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
+/// Return attitude quaternion for the given time.
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
+{
+  blitz::Range ra = blitz::Range::all();
+  range_check_inclusive(T, min_time_, max_time());
+  // Just linear interpolation for now. We'll do more complicated
+  // interpolation shortly.
+  if(itype_ != LINEAR)
+    throw Exception("Only do linear interpolation for now");
+  int i = (int) floor((T - min_time_) / tstep_);
+  if(i >= att.rows() - 1)
+    --i;
+  double f = (T - min_time_) / tstep_ - i;
+  blitz::Array<double, 1> res(4);
+  res = f * att(i+1, ra) + (1 - f) * att(i, ra);
+  return array_to_quaternion(res);
+}
+
+//-----------------------------------------------------------------------
 /// Return position and velocity for the given time.
 //-----------------------------------------------------------------------
 
@@ -182,6 +222,28 @@ blitz::Array<AutoDerivative<double>, 1> PosCsephb::pos_vel
   res(blitz::Range(0,2)) = f * pos(i+1, ra) + (1 - f) * pos(i, ra);
   res(blitz::Range(3,5)) = (pos(i+1,ra) - pos(i,ra)) / tstep_;
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Return attitude quaternion for the given time.
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
+(const TimeWithDerivative& T) const
+{
+  blitz::Range ra = blitz::Range::all();
+  range_check_inclusive(T.value(), min_time_, max_time());
+  // Just linear interpolation for now. We'll do more complicated
+  // interpolation shortly.
+  if(itype_ != LINEAR)
+    throw Exception("Only do linear interpolation for now");
+  int i = (int) floor((T.value() - min_time_) / tstep_);
+  if(i >= att.rows() - 1)
+    --i;
+  AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
+  blitz::Array<AutoDerivative<double>, 1> res(4);
+  res = f * att(i+1, ra) + (1 - f) * att(i, ra);
+  return array_to_quaternion(res);
 }
 
 static boost::format frontpart("%|1$01d|%|2$01d|");
@@ -271,6 +333,23 @@ boost::shared_ptr<PosCsephb> PosCsephb::des_read(std::istream& In)
   if(reserved_len > 0)
     std::string skipped = read_size<std::string>(In, reserved_len);
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Constructor
+//-----------------------------------------------------------------------
+
+AttCsattb::AttCsattb
+(const blitz::Array<double, 2>& Att, const Time& Tmin, double Tstep,
+ bool Is_cf,
+ InterpolationType Itype,
+ LagrangeOrder Lagrange_order,
+ AttitudeDataQuality A_quality,
+ AttitudeSource A_source)
+  : min_time_(Tmin), tstep_(Tstep), is_cf_(Is_cf),
+    itype_(Itype), lagrange_order_(Lagrange_order),
+    a_quality_(A_quality), a_source_(A_source), att(Att.copy())
+{
 }
 
 //-----------------------------------------------------------------------

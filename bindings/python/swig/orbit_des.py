@@ -695,6 +695,15 @@ class AttCsattb(geocal_swig.generic_object.GenericObject):
         return self._v_attitude_data()
 
 
+    def att_q(self, *args):
+        """
+
+        boost::math::quaternion< AutoDerivative< double > > AttCsattb::att_q(const TimeWithDerivative &T) const
+        Return attitude quaternion for the given time. 
+        """
+        return _orbit_des.AttCsattb_att_q(self, *args)
+
+
     def min_time_split(self):
         """
 
@@ -794,6 +803,7 @@ AttCsattb._v_attitude_data_quality = new_instancemethod(_orbit_des.AttCsattb__v_
 AttCsattb._v_attitude_source = new_instancemethod(_orbit_des.AttCsattb__v_attitude_source, None, AttCsattb)
 AttCsattb._v_lagrange_order = new_instancemethod(_orbit_des.AttCsattb__v_lagrange_order, None, AttCsattb)
 AttCsattb._v_attitude_data = new_instancemethod(_orbit_des.AttCsattb__v_attitude_data, None, AttCsattb)
+AttCsattb.att_q = new_instancemethod(_orbit_des.AttCsattb_att_q, None, AttCsattb)
 AttCsattb.min_time_split = new_instancemethod(_orbit_des.AttCsattb_min_time_split, None, AttCsattb)
 AttCsattb.des_write = new_instancemethod(_orbit_des.AttCsattb_des_write, None, AttCsattb)
 AttCsattb.__str__ = new_instancemethod(_orbit_des.AttCsattb___str__, None, AttCsattb)

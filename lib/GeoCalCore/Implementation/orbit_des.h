@@ -32,6 +32,12 @@ public:
 		       LAGRANGE_5 = 5,
 		       LAGRANGE_7 = 7};
   enum EphemerisSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
+  PosCsephb(const blitz::Array<double, 2>& Pos, const Time& Tmin, double Tstep,
+	    bool Is_cf,
+	    InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    EphemerisDataQuality E_quality = EPHEMERIS_QUALITY_GOOD,
+	    EphemerisSource E_source = ACTUAL);
   PosCsephb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    EphemerisDataQuality E_quality = EPHEMERIS_QUALITY_GOOD,
@@ -154,6 +160,12 @@ public:
 		       LAGRANGE_5 = 5,
 		       LAGRANGE_7 = 7};
   enum AttitudeSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
+  AttCsattb(const blitz::Array<double, 2>& Att, const Time& Tmin, double Tstep,
+	    bool Is_cf,
+	    InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    AttitudeDataQuality A_quality = ATTITUDE_QUALITY_GOOD,
+	    AttitudeSource A_source = ACTUAL);
   AttCsattb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    AttitudeDataQuality A_quality = ATTITUDE_QUALITY_GOOD,
@@ -165,9 +177,9 @@ public:
 	    AttitudeDataQuality A_quality = ATTITUDE_QUALITY_GOOD,
 	    AttitudeSource A_source = ACTUAL);
   virtual ~AttCsattb() {}
-  // blitz::Array<double, 1> pos_vel(const Time& T) const;
-  // blitz::Array<AutoDerivative<double>, 1>
-  // pos_vel(const TimeWithDerivative& T) const;
+  boost::math::quaternion<double> att_q(const Time& T) const;
+  boost::math::quaternion<AutoDerivative<double> > 
+  att_q(const TimeWithDerivative& T) const;
 
 //-----------------------------------------------------------------------
 /// Interpolation type.

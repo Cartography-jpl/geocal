@@ -23,6 +23,12 @@ public:
 		       LAGRANGE_5 = 5,
 		       LAGRANGE_7 = 7};
   enum EphemerisSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
+  PosCsephb(const blitz::Array<double, 2>& Pos, const Time& Tmin, double Tstep,
+	    bool Is_cf,
+	    InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    EphemerisDataQuality E_quality = EPHEMERIS_QUALITY_GOOD,
+	    EphemerisSource E_source = ACTUAL);
   PosCsephb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    EphemerisDataQuality E_quality = EPHEMERIS_QUALITY_GOOD,
@@ -117,6 +123,12 @@ public:
 		       LAGRANGE_5 = 5,
 		       LAGRANGE_7 = 7};
   enum AttitudeSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
+  AttCsattb(const blitz::Array<double, 2>& Att, const Time& Tmin, double Tstep,
+	    bool Is_cf,
+	    InterpolationType Itype = LINEAR,
+	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
+	    AttitudeDataQuality A_quality = ATTITUDE_QUALITY_GOOD,
+	    AttitudeSource A_source = ACTUAL);
   AttCsattb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    AttitudeDataQuality E_quality = ATTITUDE_QUALITY_GOOD,
@@ -136,6 +148,9 @@ public:
   %python_attribute_with_set(attitude_source, AttitudeSource);
   %python_attribute_with_set(lagrange_order, LagrangeOrder);
   %python_attribute(attitude_data, blitz::Array<double, 2>);
+  boost::math::quaternion<double> att_q(const Time& T) const;
+  boost::math::quaternion<AutoDerivative<double> > 
+  att_q(const TimeWithDerivative& T) const;
   void min_time_split(std::string& OUTPUT, std::string& OUTPUT) const;
   // Synonyms that map to the pynitf names 
 %pythoncode {

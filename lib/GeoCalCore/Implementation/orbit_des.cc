@@ -256,7 +256,7 @@ static boost::format largangeorder("%|1$01d|");
 static boost::format nextpart("%|1$01d|%|2$01d|%|3$013.9f|%|4$8s|%|5$16s|%|6$05d|");
 static boost::format numformat("%|1$+012.2f|");
 static boost::format attnumformat("%|1$+18.15f|");
-static boost::format resformat("%|1$05d|");
+static boost::format resformat("%|1$09d|");
 
 //-----------------------------------------------------------------------
 /// Return min_time split into the component pieces the DES requires.
@@ -300,7 +300,7 @@ void PosCsephb::des_write(std::ostream& Os) const
     Os << str_check_size(numformat % pos(i,0), 12)
        << str_check_size(numformat % pos(i,1), 12)
        << str_check_size(numformat % pos(i,2), 12);
-  Os << str_check_size(resformat % 0, 5);
+  Os << str_check_size(resformat % 0, 9);
 }
 
 //-----------------------------------------------------------------------
@@ -334,7 +334,7 @@ boost::shared_ptr<PosCsephb> PosCsephb::des_read(std::istream& In)
     res->pos(i,1) = read_size<double>(In, 12);
     res->pos(i,2) = read_size<double>(In, 12);
   }
-  int reserved_len = read_size<int>(In, 5);
+  int reserved_len = read_size<int>(In, 9);
   if(reserved_len > 0)
     std::string skipped = read_size<std::string>(In, reserved_len);
   return res;
@@ -508,7 +508,7 @@ void AttCsattb::des_write(std::ostream& Os) const
        << str_check_size(attnumformat % att(i,1), 18)
        << str_check_size(attnumformat % att(i,2), 18)
        << str_check_size(attnumformat % att(i,3), 18);
-  Os << str_check_size(resformat % 0, 5);
+  Os << str_check_size(resformat % 0, 9);
 }
 
 //-----------------------------------------------------------------------
@@ -543,7 +543,7 @@ boost::shared_ptr<AttCsattb> AttCsattb::des_read(std::istream& In)
     res->att(i,2) = read_size<double>(In, 18);
     res->att(i,3) = read_size<double>(In, 18);
   }
-  int reserved_len = read_size<int>(In, 5);
+  int reserved_len = read_size<int>(In, 9);
   if(reserved_len > 0)
     std::string skipped = read_size<std::string>(In, reserved_len);
   return res;

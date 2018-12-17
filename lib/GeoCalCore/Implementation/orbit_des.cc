@@ -201,17 +201,44 @@ blitz::Array<double, 1> PosCsephb::pos_vel(const Time& T) const
 {
   blitz::Range ra = blitz::Range::all();
   range_check_inclusive(T, min_time_, max_time());
-  // Just linear interpolation for now. We'll do more complicated
-  // interpolation shortly.
-  if(itype_ != LINEAR)
-    throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T - min_time_) / tstep_);
   if(i >= pos.rows() - 1)
     --i;
-  double f = (T - min_time_) / tstep_ - i;
   blitz::Array<double, 1> res(6);
-  res(blitz::Range(0,2)) = f * pos(i+1, ra) + (1 - f) * pos(i, ra);
-  res(blitz::Range(3,5)) = (pos(i+1, ra) - pos(i, ra)) / tstep_;
+  if(itype_ == NEAREST_NEIGHBOR) {
+    res(blitz::Range(0,2)) = pos(i, ra);
+    // Use linear interpolation for velocity, otherwise this will
+    // always be zero.
+    res(blitz::Range(3,5)) = (pos(i+1, ra) - pos(i, ra)) / tstep_;
+  }
+  if(itype_ == LINEAR) {
+    double f = (T - min_time_) / tstep_ - i;
+    res(blitz::Range(0,2)) = f * pos(i+1, ra) + (1 - f) * pos(i, ra);
+    res(blitz::Range(3,5)) = (pos(i+1, ra) - pos(i, ra)) / tstep_;
+  }
+  if(itype_ == LAGRANGE) {
+    int d = (lagrange_order_ - 1) / 2;
+    int istart = std::max(0, i - d);
+    int iend = std::min(i + d + 1, pos.rows());
+    std::vector<Time> tm;
+    std::vector<blitz::Array<double, 1> > p;
+    for(int j = istart; j < iend; ++j) {
+      tm.push_back(min_time_ + j * tstep_);
+      p.push_back(pos(j,ra));
+    }
+    AutoDerivative<double> twd(T.pgs(), 0, 1);
+    TimeWithDerivative t2 = TimeWithDerivative::time_pgs(twd);
+    blitz::Array<AutoDerivative<double>, 1> pres =
+      Orbit::lagrangian_interpolation(tm.begin(), tm.end(), t2, p.begin(),
+				      p.end());
+    res(0) = pres(0).value();
+    res(1) = pres(1).value();
+    res(2) = pres(2).value();
+    res(3) = pres(0).gradient()(0);
+    res(4) = pres(1).gradient()(0);
+    res(5) = pres(2).gradient()(0);
+  }
+  
   return res;
 }
 
@@ -224,17 +251,46 @@ blitz::Array<AutoDerivative<double>, 1> PosCsephb::pos_vel
 {
   blitz::Range ra = blitz::Range::all();
   range_check_inclusive(T.value(), min_time_, max_time());
-  // Just linear interpolation for now. We'll do more complicated
-  // interpolation shortly.
-  if(itype_ != LINEAR)
-    throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T.value() - min_time_) / tstep_);
   if(i >= pos.rows())
     --i;
-  AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
   blitz::Array<AutoDerivative<double>, 1> res(6);
-  res(blitz::Range(0,2)) = f * pos(i+1, ra) + (1 - f) * pos(i, ra);
-  res(blitz::Range(3,5)) = (pos(i+1,ra) - pos(i,ra)) / tstep_;
+  if(itype_ == NEAREST_NEIGHBOR) {
+    res(blitz::Range(0,2)) = pos(i, ra);
+    // Use linear interpolation for velocity, otherwise this will
+    // always be zero.
+    res(blitz::Range(3,5)) = (pos(i+1, ra) - pos(i, ra)) / tstep_;
+  }
+  if(itype_ == LINEAR) {
+    AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
+    res(blitz::Range(0,2)) = f * pos(i+1, ra) + (1 - f) * pos(i, ra);
+    res(blitz::Range(3,5)) = (pos(i+1,ra) - pos(i,ra)) / tstep_;
+  }
+  if(itype_ == LAGRANGE) {
+    int d = (lagrange_order_ - 1) / 2;
+    int istart = std::max(0, i - d);
+    int iend = std::min(i + d + 1, pos.rows());
+    std::vector<Time> tm;
+    std::vector<blitz::Array<double, 1> > p;
+    for(int j = istart; j < iend; ++j) {
+      tm.push_back(min_time_ + j * tstep_);
+      p.push_back(pos(j,ra));
+    }
+    AutoDerivative<double> twd(T.pgs().value(), 0, 1);
+    TimeWithDerivative t2 = TimeWithDerivative::time_pgs(twd);
+    blitz::Array<AutoDerivative<double>, 1> pres =
+      Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, p.begin(),
+				      p.end());
+    blitz::Array<AutoDerivative<double>, 1> pres2 =
+      Orbit::lagrangian_interpolation(tm.begin(), tm.end(), t2, p.begin(),
+				      p.end());
+    res(0) = pres(0);
+    res(1) = pres(1);
+    res(2) = pres(2);
+    res(3) = pres2(0).gradient()(0);
+    res(4) = pres2(1).gradient()(0);
+    res(5) = pres2(2).gradient()(0);
+  }
   return res;
 }
 

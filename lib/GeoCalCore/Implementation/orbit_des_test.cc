@@ -65,15 +65,17 @@ BOOST_AUTO_TEST_CASE(orbit_des)
 {
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   KeplerOrbit korb(t, t + 100.0);
-  OrbitDes orb(boost::make_shared<PosCsephb>(korb, 1.0),
-	       boost::make_shared<AttCsattb>(korb, 1.0, AttCsattb::LAGRANGE, AttCsattb::LAGRANGE_5));
+  OrbitDes orb(boost::make_shared<PosCsephb>(korb, 1.0, PosCsephb::LAGRANGE,
+					     PosCsephb::LAGRANGE_5),
+	       boost::make_shared<AttCsattb>(korb, 1.0, AttCsattb::LAGRANGE,
+					     AttCsattb::LAGRANGE_3));
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
   boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
 				     cam->number_sample(0), 10));
   ImageCoordinate ic(1.0, 1504 / 2);
   for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
-    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1.0);
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
     OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
     OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
     if(false)
@@ -81,7 +83,7 @@ BOOST_AUTO_TEST_CASE(orbit_des)
 		<< GeoCal::distance(*igc.ground_coordinate(ic),
 				    *kigc.ground_coordinate(ic)) << "\n";
     BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
-     				 *kigc.ground_coordinate(ic)) < 3.0);
+     				 *kigc.ground_coordinate(ic)) < 1e-2);
   }
 }
 

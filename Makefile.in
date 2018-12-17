@@ -14073,6 +14073,9 @@ install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpytho
 # the PYTHONPATH set, and an install complains. This is actually ok, because
 # we really do just have a single version externally managed here.
 # Chmod is needed to reinstall after doing an uninstall
+# 
+# Note that to install pynitf with changes, you usually need to
+# uninstall-pynitf first
 @INSTALL_PYNITF_TRUE@install-pynitf:
 @INSTALL_PYNITF_TRUE@	-chmod +w -R @geocalpkgpythondir@/../pynitf*
 @INSTALL_PYNITF_TRUE@	cd $(srcdir)/@srcpython@/pynitf && \

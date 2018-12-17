@@ -166,16 +166,28 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
 {
   blitz::Range ra = blitz::Range::all();
   range_check_inclusive(T, min_time_, max_time());
-  // Just linear interpolation for now. We'll do more complicated
-  // interpolation shortly.
-  if(itype_ != LINEAR)
-    throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T - min_time_) / tstep_);
   if(i >= att.rows() - 1)
     --i;
-  double f = (T - min_time_) / tstep_ - i;
   blitz::Array<double, 1> res(4);
-  res = f * att(i+1, ra) + (1 - f) * att(i, ra);
+  if(itype_ == NEAREST_NEIGHBOR)
+    res = att(i, ra);
+  if(itype_ == LINEAR) {
+    double f = (T - min_time_) / tstep_ - i;
+    res = f * att(i+1, ra) + (1 - f) * att(i, ra);
+  }
+  if(itype_ == LAGRANGE) {
+    int d = (lagrange_order_ - 1) / 2;
+    int istart = std::max(0, i - d);
+    int iend = std::min(i + d + 1, att.rows());
+    std::vector<Time> tm;
+    std::vector<blitz::Array<double, 1> > a;
+    for(int j = istart; j < iend; ++j) {
+      tm.push_back(min_time_ + j * tstep_);
+      a.push_back(att(j,ra));
+    }
+    res = Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, a.begin(), a.end());
+  }
   boost::math::quaternion<double> resq = array_to_quaternion(res);
   normalize(resq);
   return resq;
@@ -235,16 +247,29 @@ boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
 {
   blitz::Range ra = blitz::Range::all();
   range_check_inclusive(T.value(), min_time_, max_time());
-  // Just linear interpolation for now. We'll do more complicated
-  // interpolation shortly.
-  if(itype_ != LINEAR)
-    throw Exception("Only do linear interpolation for now");
   int i = (int) floor((T.value() - min_time_) / tstep_);
   if(i >= att.rows() - 1)
     --i;
-  AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
   blitz::Array<AutoDerivative<double>, 1> res(4);
-  res = f * att(i+1, ra) + (1 - f) * att(i, ra);
+  if(itype_ == NEAREST_NEIGHBOR)
+    res = att(i, ra);
+  if(itype_ == LINEAR) {
+    AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
+    res = f * att(i+1, ra) + (1 - f) * att(i, ra);
+  }
+  if(itype_ == LAGRANGE) {
+    int d = (lagrange_order_ - 1) / 2;
+    int istart = std::max(0, i - d);
+    int iend = std::min(i + d + 1, att.rows());
+    std::vector<Time> tm;
+    std::vector<blitz::Array<double, 1> > a;
+    for(int j = istart; j < iend; ++j) {
+      tm.push_back(min_time_ + j * tstep_);
+      a.push_back(att(j,ra));
+    }
+    res = Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, a.begin(),
+					  a.end());
+  }
   boost::math::quaternion<AutoDerivative<double> > resq =
     array_to_quaternion(res);
   normalize(resq);

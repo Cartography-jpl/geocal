@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(orbit_des)
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   KeplerOrbit korb(t, t + 100.0);
   OrbitDes orb(boost::make_shared<PosCsephb>(korb, 1.0),
-	       boost::make_shared<AttCsattb>(korb, 1.0));
+	       boost::make_shared<AttCsattb>(korb, 1.0, AttCsattb::LAGRANGE, AttCsattb::LAGRANGE_5));
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
   boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),

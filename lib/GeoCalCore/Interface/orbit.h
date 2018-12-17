@@ -719,6 +719,24 @@ public:
     return res;
   }
 
+  template<class iterator> std::vector<AutoDerivative<double> > 
+  static lagrangian_interpolation_factor(iterator tstart, 
+			    iterator tend, TimeWithDerivative t) 
+  {
+    std::vector<AutoDerivative<double> > res;
+    for(iterator j = tstart; j != tend; ++j) {
+      AutoDerivative<double> tf = 1.0;
+      double bf = 1.0;
+      for(iterator i = tstart; i != tend; ++i)
+	if(i != j) {
+	  tf *= (t - *i);
+	  bf *= (*j - *i);
+	}
+      res.push_back(tf / bf);
+    }
+    return res;
+  }
+  
 //-----------------------------------------------------------------------
 /// This calculates a Lagrangian interpolation of the given set of
 /// blitz::Array<double, 1> with the given time intervals.
@@ -734,6 +752,24 @@ public:
     std::vector<double> fac = lagrangian_interpolation_factor(tstart, tend, tm);
     std::vector<double>::iterator ifac = fac.begin();
     blitz::Array<double, 1> res((*vstart).shape());
+    res = 0.0;
+    for(iterator2 v = vstart; v != vend && ifac != fac.end(); ++v, ++ifac)
+      res += (*ifac) * (*v);
+    return res;
+  }
+
+  template<class iterator, class iterator2> 
+  static blitz::Array<AutoDerivative<double>, 1>
+  lagrangian_interpolation(iterator tstart, 
+			   iterator tend,
+			   TimeWithDerivative tm,
+			   iterator2 vstart,
+			   iterator2 vend) 
+  {
+    std::vector<AutoDerivative<double> > fac =
+      lagrangian_interpolation_factor(tstart, tend, tm);
+    std::vector<AutoDerivative<double> >::iterator ifac = fac.begin();
+    blitz::Array<AutoDerivative<double>, 1> res((*vstart).shape());
     res = 0.0;
     for(iterator2 v = vstart; v != vend && ifac != fac.end(); ++v, ++ifac)
       res += (*ifac) * (*v);

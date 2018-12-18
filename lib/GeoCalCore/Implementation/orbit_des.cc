@@ -179,7 +179,7 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
   if(itype_ == LAGRANGE) {
     int d = (lagrange_order_ - 1) / 2;
     int istart = std::max(0, i - d);
-    int iend = std::min(i + d + 1, att.rows());
+    int iend = std::min(i + d + 2, att.rows());
     std::vector<Time> tm;
     std::vector<blitz::Array<double, 1> > a;
     for(int j = istart; j < iend; ++j) {
@@ -219,7 +219,7 @@ blitz::Array<double, 1> PosCsephb::pos_vel(const Time& T) const
   if(itype_ == LAGRANGE) {
     int d = (lagrange_order_ - 1) / 2;
     int istart = std::max(0, i - d);
-    int iend = std::min(i + d + 1, pos.rows());
+    int iend = std::min(i + d + 2, pos.rows());
     std::vector<Time> tm;
     std::vector<blitz::Array<double, 1> > p;
     for(int j = istart; j < iend; ++j) {
@@ -269,7 +269,7 @@ blitz::Array<AutoDerivative<double>, 1> PosCsephb::pos_vel
   if(itype_ == LAGRANGE) {
     int d = (lagrange_order_ - 1) / 2;
     int istart = std::max(0, i - d);
-    int iend = std::min(i + d + 1, pos.rows());
+    int iend = std::min(i + d + 2, pos.rows());
     std::vector<Time> tm;
     std::vector<blitz::Array<double, 1> > p;
     for(int j = istart; j < iend; ++j) {
@@ -316,7 +316,7 @@ boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
   if(itype_ == LAGRANGE) {
     int d = (lagrange_order_ - 1) / 2;
     int istart = std::max(0, i - d);
-    int iend = std::min(i + d + 1, att.rows());
+    int iend = std::min(i + d + 2, att.rows());
     std::vector<Time> tm;
     std::vector<blitz::Array<double, 1> > a;
     for(int j = istart; j < iend; ++j) {

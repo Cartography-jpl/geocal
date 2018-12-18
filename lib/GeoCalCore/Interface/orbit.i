@@ -140,6 +140,10 @@ public:
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
 		      const boost::math::quaternion<AutoDerivative<double> >&
 		      Sc_to_sc_corr);
+  QuaternionOrbitData(const QuaternionOrbitData& Start,
+		      const boost::array<double, 3>& Pos_off,
+		      const boost::math::quaternion<double>&
+		      Sc_to_sc_corr);
   QuaternionOrbitData(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
 		      const boost::array<double, 3>& vel_fixed,
 		      const boost::math::quaternion<double>& sc_to_cf_q);

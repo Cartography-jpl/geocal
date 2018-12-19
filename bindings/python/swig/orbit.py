@@ -190,6 +190,16 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     CartesianInertialLookVector and CartesianFixedLookVector to and from
     each other at a given time.
 
+    Note that there are different conventions for the definition of the
+    ScLookVector.
+
+    The original MISR convention used +z in the down direction, +x in the
+    generally velocity (along track) direction, and +y finished the right
+    hand coordinate system.
+
+    Another convention used (by for example sc2rpc) is +x goes in the
+    sample direction, +y goes in the line direction, and +z points down.
+
     C++ includes: orbit.h 
     """
 

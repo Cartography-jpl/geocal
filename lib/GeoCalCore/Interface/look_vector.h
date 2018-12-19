@@ -89,6 +89,18 @@ protected:
 
 /****************************************************************//**
   This is a look vector in an spacecraft coordinates.
+
+  Note that there are different conventions used for the ScLookVector,
+  you generally need to know what the convention used by the OrbitData
+  is.
+
+  The original MISR convention used +z in the down direction, +x in 
+  the generally velocity (along track) direction, and +y finished the
+  right hand coordinate system.
+
+  Another convention used (by for example sc2rpc) is +x goes in 
+  the sample direction, +y goes in the line direction, and +z points
+  down.
 *******************************************************************/
 
 class ScLookVector : public LookVector<double> {

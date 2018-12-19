@@ -103,6 +103,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_aircraft_orbit_data)(void);
   INIT_TYPE INIT_FUNC(_orbit_quaternion_list)(void);
   INIT_TYPE INIT_FUNC(_orbit_des)(void);
+  INIT_TYPE INIT_FUNC(_nitf_support)(void);
   INIT_TYPE INIT_FUNC(_pan_sharpen)(void);
   INIT_TYPE INIT_FUNC(_scale_image)(void);
   INIT_TYPE INIT_FUNC(_apply_mask)(void);
@@ -324,6 +325,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_aircraft_orbit_data", INIT_FUNC(_aircraft_orbit_data));
   INIT_MODULE(module, "_orbit_quaternion_list", INIT_FUNC(_orbit_quaternion_list));
   INIT_MODULE(module, "_orbit_des", INIT_FUNC(_orbit_des));
+  INIT_MODULE(module, "_nitf_support", INIT_FUNC(_nitf_support));
   INIT_MODULE(module, "_pan_sharpen", INIT_FUNC(_pan_sharpen));
   INIT_MODULE(module, "_scale_image", INIT_FUNC(_scale_image));
   INIT_MODULE(module, "_apply_mask", INIT_FUNC(_apply_mask));

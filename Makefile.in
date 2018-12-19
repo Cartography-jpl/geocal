@@ -439,8 +439,9 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/raw_raster_image_wrap.cc \
 	@swigsrc@/aircraft_orbit_data_wrap.cc \
 	@swigsrc@/orbit_quaternion_list_wrap.cc \
-	@swigsrc@/orbit_des_wrap.cc @swigsrc@/pan_sharpen_wrap.cc \
-	@swigsrc@/scale_image_wrap.cc @swigsrc@/apply_mask_wrap.cc \
+	@swigsrc@/orbit_des_wrap.cc @swigsrc@/nitf_support_wrap.cc \
+	@swigsrc@/pan_sharpen_wrap.cc @swigsrc@/scale_image_wrap.cc \
+	@swigsrc@/apply_mask_wrap.cc \
 	@swigsrc@/rpc_image_ground_connection_wrap.cc \
 	@swigsrc@/ipi_image_ground_connection_wrap.cc \
 	@swigsrc@/eci_tod_wrap.cc @swigsrc@/quaternion_camera_wrap.cc \
@@ -622,6 +623,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_des_wrap.lo \
+	@swigsrc@/_swig_wrap_la-nitf_support_wrap.lo \
 	@swigsrc@/_swig_wrap_la-pan_sharpen_wrap.lo \
 	@swigsrc@/_swig_wrap_la-scale_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-apply_mask_wrap.lo \
@@ -1963,6 +1965,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_config_file_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_gimbal_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_paraxial_transform_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_correction_wrap.Plo \
@@ -2208,6 +2211,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/raw_raster_image.h \
 	@srcimplementation@/aircraft_orbit_data.h \
 	@srcimplementation@/orbit_quaternion_list.h \
+	@srcimplementation@/nitf_support.h \
 	@srcimplementation@/orbit_des.h \
 	@srcimplementation@/memory_multi_band.h \
 	@srcimplementation@/pan_sharpen.h \
@@ -3348,8 +3352,9 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/raw_raster_image_wrap.cc \
 	@swigsrc@/aircraft_orbit_data_wrap.cc \
 	@swigsrc@/orbit_quaternion_list_wrap.cc \
-	@swigsrc@/orbit_des_wrap.cc @swigsrc@/pan_sharpen_wrap.cc \
-	@swigsrc@/scale_image_wrap.cc @swigsrc@/apply_mask_wrap.cc \
+	@swigsrc@/orbit_des_wrap.cc @swigsrc@/nitf_support_wrap.cc \
+	@swigsrc@/pan_sharpen_wrap.cc @swigsrc@/scale_image_wrap.cc \
+	@swigsrc@/apply_mask_wrap.cc \
 	@swigsrc@/rpc_image_ground_connection_wrap.cc \
 	@swigsrc@/ipi_image_ground_connection_wrap.cc \
 	@swigsrc@/eci_tod_wrap.cc @swigsrc@/quaternion_camera_wrap.cc \
@@ -3562,6 +3567,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/raw_raster_image.h \
 	@srcimplementation@/aircraft_orbit_data.h \
 	@srcimplementation@/orbit_quaternion_list.h \
+	@srcimplementation@/nitf_support.h \
 	@srcimplementation@/orbit_des.h \
 	@srcimplementation@/memory_multi_band.h \
 	@srcimplementation@/pan_sharpen.h \
@@ -3738,6 +3744,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/aircraft_orbit_data.i \
 	@srcimplementation@/orbit_quaternion_list.i \
 	@srcimplementation@/orbit_des.i \
+	@srcimplementation@/nitf_support.i \
 	@srcimplementation@/pan_sharpen.i \
 	@srcimplementation@/scale_image.i \
 	@srcimplementation@/apply_mask.i \
@@ -4595,6 +4602,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_des_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-nitf_support_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-pan_sharpen_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-scale_image_wrap.lo:  \
@@ -6511,6 +6520,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_config_file_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_gimbal_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_paraxial_transform_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_correction_wrap.Plo@am__quote@ # am--include-marker
@@ -7329,6 +7339,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_des_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_des_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_des_wrap.lo `test -f '@swigsrc@/orbit_des_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_des_wrap.cc
+
+@swigsrc@/_swig_wrap_la-nitf_support_wrap.lo: @swigsrc@/nitf_support_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-nitf_support_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-nitf_support_wrap.lo `test -f '@swigsrc@/nitf_support_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/nitf_support_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/nitf_support_wrap.cc' object='@swigsrc@/_swig_wrap_la-nitf_support_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-nitf_support_wrap.lo `test -f '@swigsrc@/nitf_support_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/nitf_support_wrap.cc
 
 @swigsrc@/_swig_wrap_la-pan_sharpen_wrap.lo: @swigsrc@/pan_sharpen_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-pan_sharpen_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-pan_sharpen_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-pan_sharpen_wrap.lo `test -f '@swigsrc@/pan_sharpen_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/pan_sharpen_wrap.cc
@@ -13073,6 +13090,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_config_file_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_gimbal_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_paraxial_transform_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_correction_wrap.Plo
@@ -13696,6 +13714,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_config_file_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_gimbal_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-mspi_paraxial_transform_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_correction_wrap.Plo

@@ -143,5 +143,18 @@ BOOST_AUTO_TEST_CASE(serialization_orbit_des)
   BOOST_CHECK_CLOSE(orbr->position_ci(t)->position[2], -16811.0, 1e-3);
 }
 
+BOOST_AUTO_TEST_CASE(snip_example)
+{
+  // Skip normally, depends on hardcoded path to data that isn't
+  // generally available. This is really just to sort out NITF
+  // conventions, we'll likely remove this test when we are done with it.
+  return;
+  // Test to sort out orientation etc.
+  boost::shared_ptr<OrbitDes> orb_des = 
+    serialize_read<OrbitDes>("/home/smyth/Local/SNIP NITF Example/orb_des.xml");
+  Time tm = Time::parse_time("2005-04-07T07:24:10Z");
+  std::cerr << *orb_des->orbit_data(tm);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

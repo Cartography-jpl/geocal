@@ -148,6 +148,11 @@ private:
   write the data as istream and ostream rather than return strings as
   we typically do for TREs. On the python side, this can be mapped
   from a io object like FileHandle or BytesIO.
+
+  Note that NITF has different convention for quaternions than we use
+  internally with OrbitData. We use the functions nitf_to_quaternion
+  and quaternion_to_nitf to map back and forth, look at the
+  documentation of those functions to see what the mapping does.
 *******************************************************************/
 class AttCsattb : public Printable<AttCsattb>, boost::noncopyable {
 public:
@@ -268,6 +273,13 @@ private:
   we calculate things for every time point. If you are using this
   a bit you may want to create a OrbitQuaternionList from this Orbit
   to speed things up.
+
+  Note that this orbit uses a different convention for the
+  ScLookVector coordinates than we use in for example KeplerOrbit
+  based on the EOS/MISR convention. We have +y in the line/along track
+  direction and +x in the sample/cross track direction. The other
+  convention we use in other orbits (e.g., MISR) has +x in the line
+  direction and +y in the sample direction.
 *******************************************************************/
 
 class OrbitDes: public Orbit {

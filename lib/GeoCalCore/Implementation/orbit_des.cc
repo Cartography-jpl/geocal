@@ -4,6 +4,7 @@
 #include "eci.h"
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
+#include "nitf_support.h"
 #include <boost/make_shared.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
@@ -188,7 +189,7 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
     }
     res = Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, a.begin(), a.end());
   }
-  boost::math::quaternion<double> resq = array_to_quaternion(res);
+  boost::math::quaternion<double> resq = nitf_to_quaternion(res);
   normalize(resq);
   return resq;
 }
@@ -222,7 +223,15 @@ blitz::Array<double, 1> PosCsephb::pos_vel(const Time& T) const
     int iend = std::min(i + d + 2, pos.rows());
     std::vector<Time> tm;
     std::vector<blitz::Array<double, 1> > p;
+    if(false)
+      std::cerr << "i:      " << i << "\n"
+		<< "istart: " << istart << "\n"
+		<< "iend:   " << iend << "\n"
+		<< "Time: " << T << "\n"
+		<< "Points: " << "\n";
     for(int j = istart; j < iend; ++j) {
+      if(false)
+	std::cerr << min_time_ + j * tstep_ << "\n";
       tm.push_back(min_time_ + j * tstep_);
       p.push_back(pos(j,ra));
     }
@@ -327,7 +336,7 @@ boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
 					  a.end());
   }
   boost::math::quaternion<AutoDerivative<double> > resq =
-    array_to_quaternion(res);
+    nitf_to_quaternion(res);
   normalize(resq);
   return resq;
 }
@@ -466,19 +475,10 @@ AttCsattb::AttCsattb
       boost::dynamic_pointer_cast<QuaternionOrbitData>(Orb.orbit_data(t));
     if(!od)
       throw Exception("AttCsattb only works with orbits that return a QuaternionOrbitData");
-    if(is_cf_) {
-      att(i, blitz::Range::all()) =
-	od->sc_to_cf().R_component_1(),
-	od->sc_to_cf().R_component_2(),
-	od->sc_to_cf().R_component_3(),
-	od->sc_to_cf().R_component_4();
-    } else {
-      att(i, blitz::Range::all()) =
-	od->sc_to_ci().R_component_1(),
-	od->sc_to_ci().R_component_2(),
-	od->sc_to_ci().R_component_3(),
-	od->sc_to_ci().R_component_4();
-    }
+    if(is_cf_)
+      att(i, blitz::Range::all()) = quaternion_to_nitf(od->sc_to_cf());
+    else 
+      att(i, blitz::Range::all()) = quaternion_to_nitf(od->sc_to_ci());
   }
 }
 
@@ -510,19 +510,10 @@ AttCsattb::AttCsattb
       boost::dynamic_pointer_cast<QuaternionOrbitData>(Orb.orbit_data(t));
     if(!od)
       throw Exception("AttCsattb only works with orbits that return a QuaternionOrbitData");
-    if(is_cf_) {
-      att(i, blitz::Range::all()) =
-	od->sc_to_cf().R_component_1(),
-	od->sc_to_cf().R_component_2(),
-	od->sc_to_cf().R_component_3(),
-	od->sc_to_cf().R_component_4();
-    } else {
-      att(i, blitz::Range::all()) =
-	od->sc_to_ci().R_component_1(),
-	od->sc_to_ci().R_component_2(),
-	od->sc_to_ci().R_component_3(),
-	od->sc_to_ci().R_component_4();
-    }
+    if(is_cf_)
+      att(i, blitz::Range::all()) = quaternion_to_nitf(od->sc_to_cf());
+    else
+      att(i, blitz::Range::all()) = quaternion_to_nitf(od->sc_to_ci());
   }
 }
 
@@ -653,13 +644,16 @@ boost::shared_ptr<OrbitData> OrbitDes::orbit_data(Time T) const
   if(!(pos_->is_cf() && att_->is_cf()) &&
      !(!pos_->is_cf() && !att_->is_cf()))
     throw Exception("pos_ and att_ need to either both be for cartesian fixed or both for cartesian inertial");
+  boost::shared_ptr<QuaternionOrbitData> od;
   if(pos_->is_cf())
-    return boost::make_shared<QuaternionOrbitData>(T,
+    od = boost::make_shared<QuaternionOrbitData>(T,
 	   boost::make_shared<Ecr>(posvel(0), posvel(1), posvel(2)), vel,
 						   att_q);
-  return boost::make_shared<QuaternionOrbitData>(T,
+  else
+    od = boost::make_shared<QuaternionOrbitData>(T,
 	   boost::make_shared<Eci>(posvel(0), posvel(1), posvel(2)), vel,
 						 att_q);
+  return od;
 }
 
 boost::shared_ptr<OrbitData> OrbitDes::orbit_data
@@ -678,15 +672,18 @@ boost::shared_ptr<OrbitData> OrbitDes::orbit_data
   if(!(pos_->is_cf() && att_->is_cf()) &&
      !(!pos_->is_cf() && !att_->is_cf()))
     throw Exception("pos_ and att_ need to either both be for cartesian fixed or both for cartesian inertial");
+  boost::shared_ptr<QuaternionOrbitData> od;
   if(pos_->is_cf())
-    return boost::make_shared<QuaternionOrbitData>(T,
+    od = boost::make_shared<QuaternionOrbitData>(T,
 	   boost::make_shared<Ecr>(posvel(0).value(), posvel(1).value(),
 				   posvel(2).value()),
 	   pos, vel, att_q);
-  return boost::make_shared<QuaternionOrbitData>(T,
+  else
+    od = boost::make_shared<QuaternionOrbitData>(T,
 	   boost::make_shared<Eci>(posvel(0).value(), posvel(1).value(),
 				   posvel(2).value()),
 	   pos, vel, att_q);
+  return od;
 }
 
 void OrbitDes::print(std::ostream& Os) const

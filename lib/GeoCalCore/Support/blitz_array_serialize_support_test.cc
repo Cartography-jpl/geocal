@@ -17,8 +17,10 @@ BOOST_AUTO_TEST_CASE(serialization)
   d = 1, 2, 3;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   std::ostringstream os;
-  boost::archive::polymorphic_xml_oarchive oa(os);
-  oa << GEOCAL_NVP(d);
+  {
+    boost::archive::polymorphic_xml_oarchive oa(os);
+    oa << GEOCAL_NVP(d);
+  }
   if(false)
     std::cerr << os.str();
 

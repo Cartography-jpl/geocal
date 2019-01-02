@@ -71,8 +71,10 @@ std::string GeoCal::serialize_write_string
 {
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   std::ostringstream os;
-  boost::archive::polymorphic_xml_oarchive oa(os);
-  oa << boost::serialization::make_nvp("geocal_object", Obj);
+  {
+    boost::archive::polymorphic_xml_oarchive oa(os);
+    oa << boost::serialization::make_nvp("geocal_object", Obj);
+  }
   return os.str();
 #else
   throw Exception("GeoCal was not built with boost::serialization support");
@@ -89,8 +91,10 @@ std::string GeoCal::serialize_write_binary
 {
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   std::ostringstream os;
-  boost::archive::polymorphic_binary_oarchive oa(os);
-  oa << boost::serialization::make_nvp("geocal_object", Obj);
+  {
+    boost::archive::polymorphic_binary_oarchive oa(os);
+    oa << boost::serialization::make_nvp("geocal_object", Obj);
+  }
   return os.str();
 #else
   throw Exception("GeoCal was not built with boost::serialization support");

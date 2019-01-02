@@ -112,14 +112,16 @@ BOOST_AUTO_TEST_CASE(serialization2)
 {
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
   std::ostringstream os;
-  boost::archive::polymorphic_xml_oarchive oa(os);
 
   ImageCoordinate ic(1, 2);
   ImageCoordinate ic2(2, 3);
   boost::shared_ptr<ImageCoordinate> ic3(new ImageCoordinate(4, 5));
   boost::shared_ptr<GenericObject> ic4(new ImageCoordinate(6, 7));
-  oa << GEOCAL_NVP(ic) << GEOCAL_NVP(ic2)
-     << GEOCAL_NVP(ic3) << GEOCAL_NVP(ic4);
+  {
+    boost::archive::polymorphic_xml_oarchive oa(os);
+    oa << GEOCAL_NVP(ic) << GEOCAL_NVP(ic2)
+       << GEOCAL_NVP(ic3) << GEOCAL_NVP(ic4);
+  }
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << os.str();

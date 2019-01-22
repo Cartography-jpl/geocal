@@ -409,16 +409,19 @@ class TiePointCollectFM(object):
     def __init__(self, igc_collection, max_ground_covariance = 20 * 20,
                  ref_image = None,
                  number_feature = 500, number_octave_levels = 4,
-                 number_ref_feature = 1000):
+                 number_ref_feature = 1000,
+                 skip_ray_intersect = False):
         if(not have_cv2):
             raise RuntimeError("This class requires the openCV python library cv2, which is not available.")
         self.raster_image = [igc_collection.image(i) for i in range(igc_collection.number_image)]
-        if(igc_collection.number_image > 1):
+        if(igc_collection.number_image > 1 and not skip_ray_intersect):
             self.ri = RayIntersect3(igc_collection,
                                 max_ground_covariance = max_ground_covariance)
+        else:
+            self.ri = None
         self.max_ground_covariance = max_ground_covariance
-        self.sift = cv2.SIFT(number_feature, number_octave_levels)
-        self.sift_ref = cv2.SIFT(number_ref_feature, number_octave_levels)
+        self.sift = cv2.xfeatures2d.SIFT_create(number_feature, number_octave_levels)
+        self.sift_ref = cv2.xfeatures2d.SIFT_create(number_ref_feature, number_octave_levels)
         if(ref_image is not None):
             mi = ref_image.map_info
             mi_ref = None
@@ -532,7 +535,7 @@ class TiePointCollectFM(object):
         for i in range(len(self.raster_image)):
             tpl = self.tp_list(kp_and_desc, kp_and_desc_ref, i)
             for tp in tpl.values():
-                if(not tp.is_gcp):
+                if(not tp.is_gcp and self.ri is not None):
                     tp2 = self.ri.ray_intersect(tp)
                     if(tp2 is not None):
                         res.append(tp2)

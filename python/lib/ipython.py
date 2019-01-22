@@ -13,7 +13,8 @@ import geocal
 # turn off. 
 import warnings
 warnings.simplefilter(action = "ignore", category = FutureWarning)
-from IPython.html.widgets import interact, interact_manual
+from ipywidgets import interact, interact_manual
+import matplotlib.pyplot as plt
 try:
     # Use prettier plots, if available
     import seaborn as sns

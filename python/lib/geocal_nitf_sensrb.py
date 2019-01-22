@@ -9,7 +9,14 @@ except ImportError:
 
 # ---------------------------------------------------------
 # Add functions to sensrb TRE to read and write higher level
-# objects
+# objects.
+#
+# Note we often have the orbit data and camera attitudes
+# separate. SENSRB doesn't actually support this, instead
+# the "orbit data" should include both the platform attitude
+# and the orientation of the camera relative to the platform.
+#
+# Note
 # ---------------------------------------------------------
 if(have_pynitf):
     def _orbit_data_sensrb_get(self):

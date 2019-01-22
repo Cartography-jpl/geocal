@@ -67,6 +67,8 @@ geocalinc_HEADERS+= @srcimplementation@/pan_sharpen.h
 libgeocal_la_SOURCES+= @srcimplementation@/pan_sharpen.cc
 geocalinc_HEADERS+= @srcimplementation@/scale_image.h
 libgeocal_la_SOURCES+= @srcimplementation@/scale_image.cc
+geocalinc_HEADERS+= @srcimplementation@/sensrb_camera.h
+libgeocal_la_SOURCES+= @srcimplementation@/sensrb_camera.cc
 geocalinc_HEADERS+= @srcimplementation@/apply_mask.h
 geocalinc_HEADERS+= @srcimplementation@/rpc_image_ground_connection.h
 libgeocal_la_SOURCES+= @srcimplementation@/rpc_image_ground_connection.cc
@@ -320,6 +322,8 @@ SWIG_SRC += @swigsrc@/pan_sharpen_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/pan_sharpen.i
 SWIG_SRC += @swigsrc@/scale_image_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/scale_image.i
+SWIG_SRC += @swigsrc@/sensrb_camera_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/sensrb_camera.i
 SWIG_SRC += @swigsrc@/apply_mask_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/apply_mask.i
 SWIG_SRC += @swigsrc@/rpc_image_ground_connection_wrap.cc
@@ -489,6 +493,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/local_rectangular_coordinate_test.
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/mola_dem_file_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/context_sqrt_decode_image_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/sensrb_camera_test.cc
 
 EXTRA_DIST += @srcimplementation@/rsm_fixture.h
 

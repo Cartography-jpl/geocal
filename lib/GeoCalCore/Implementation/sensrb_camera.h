@@ -34,6 +34,8 @@ public:
 	       double Line_pitch, double Sample_pitch,
 	       double Focal_length, 
 	       const FrameCoordinate& Principal_point,
+	       const std::string& Detection_type = "Placeholder",
+	       const std::string& Calibration_date = "20000101",
 	       QuaternionCamera::FrameConvention Frame_convention =
 	       QuaternionCamera::LINE_IS_X,
 	       QuaternionCamera::FrameDirection Line_direction =
@@ -43,6 +45,8 @@ public:
   : QuaternionCamera(Frame_to_sc_q, Number_line, Number_sample, Line_pitch,
 		     Sample_pitch, Focal_length, Principal_point,
 		     Frame_convention, Line_direction, Sample_direction),
+    calibration_date_(Calibration_date),
+    detection_type_(Detection_type),
     p_distort_(7),
     max_r2_filled_in(false)
   {
@@ -99,8 +103,8 @@ public:
 /// Parameter describing nonlinearity.
 //-----------------------------------------------------------------------
 
-  double k2() const { return p_distort_(4);}
-  void k2(double V) { p_distort_(4) = V; }
+  double p2() const { return p_distort_(4);}
+  void p2(double V) { p_distort_(4) = V; }
 
 //-----------------------------------------------------------------------
 /// Parameter describing nonlinearity.
@@ -115,7 +119,22 @@ public:
 
   double b2() const { return p_distort_(6);}
   void b2(double V) { p_distort_(6) = V; }
+
+//-----------------------------------------------------------------------
+/// Calibration date. This is metadata used in the SENSRB TRE. This
+/// should be in "YYYYMMDD" format, e.g. "20000102" for January 2, 2000.
+//-----------------------------------------------------------------------
+  const std::string& calibration_date() const { return calibration_date_; }
+  void calibration_date(const std::string& V) { calibration_date_ = V; }
+
+//-----------------------------------------------------------------------
+/// Detection type. Specifies the detection spectrum. This is metadata
+/// used in the SENSRB TRE.
+//-----------------------------------------------------------------------
+  const std::string& detection_type() const { return detection_type_; }
+  void detection_type(const std::string& V) { detection_type_ = V; }
 private:
+  std::string calibration_date_, detection_type_;
   blitz::Array<double, 1> p_distort_;
   mutable bool max_r2_filled_in;
   mutable double max_rp2;

@@ -214,7 +214,9 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         K2, double K3, double P1, double P2, double B1, double B2, int
         Number_line, int Number_sample, double Line_pitch, double
         Sample_pitch, double Focal_length, const FrameCoordinate
-        &Principal_point, QuaternionCamera::FrameConvention
+        &Principal_point, const std::string &Detection_type="Placeholder",
+        const std::string &Calibration_date="20000101",
+        QuaternionCamera::FrameConvention
         Frame_convention=QuaternionCamera::LINE_IS_X,
         QuaternionCamera::FrameDirection
         Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
@@ -314,6 +316,15 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
       self._v_p1(value)
 
 
+    def _v_p2(self, *args):
+        """
+
+        void GeoCal::SensrbCamera::p2(double V)
+
+        """
+        return _sensrb_camera.SensrbCamera__v_p2(self, *args)
+
+
     @property
     def p2(self):
         return self._v_p2()
@@ -359,6 +370,42 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
       self._v_b2(value)
 
 
+    def _v_calibration_date(self, *args):
+        """
+
+        void GeoCal::SensrbCamera::calibration_date(const std::string &V)
+
+        """
+        return _sensrb_camera.SensrbCamera__v_calibration_date(self, *args)
+
+
+    @property
+    def calibration_date(self):
+        return self._v_calibration_date()
+
+    @calibration_date.setter
+    def calibration_date(self, value):
+      self._v_calibration_date(value)
+
+
+    def _v_detection_type(self, *args):
+        """
+
+        void GeoCal::SensrbCamera::detection_type(const std::string &V)
+
+        """
+        return _sensrb_camera.SensrbCamera__v_detection_type(self, *args)
+
+
+    @property
+    def detection_type(self):
+        return self._v_detection_type()
+
+    @detection_type.setter
+    def detection_type(self, value):
+      self._v_detection_type(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -371,6 +418,8 @@ SensrbCamera._v_p1 = new_instancemethod(_sensrb_camera.SensrbCamera__v_p1, None,
 SensrbCamera._v_p2 = new_instancemethod(_sensrb_camera.SensrbCamera__v_p2, None, SensrbCamera)
 SensrbCamera._v_b1 = new_instancemethod(_sensrb_camera.SensrbCamera__v_b1, None, SensrbCamera)
 SensrbCamera._v_b2 = new_instancemethod(_sensrb_camera.SensrbCamera__v_b2, None, SensrbCamera)
+SensrbCamera._v_calibration_date = new_instancemethod(_sensrb_camera.SensrbCamera__v_calibration_date, None, SensrbCamera)
+SensrbCamera._v_detection_type = new_instancemethod(_sensrb_camera.SensrbCamera__v_detection_type, None, SensrbCamera)
 SensrbCamera_swigregister = _sensrb_camera.SensrbCamera_swigregister
 SensrbCamera_swigregister(SensrbCamera)
 

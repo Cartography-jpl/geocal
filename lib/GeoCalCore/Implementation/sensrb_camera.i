@@ -21,6 +21,8 @@ public:
 	       double Line_pitch, double Sample_pitch,
 	       double Focal_length, 
 	       const FrameCoordinate& Principal_point,
+	       const std::string& Detection_type = "Placeholder",
+	       const std::string& Calibration_date = "20000101",
 	       QuaternionCamera::FrameConvention Frame_convention =
 	       QuaternionCamera::LINE_IS_X,
 	       QuaternionCamera::FrameDirection Line_direction =
@@ -35,6 +37,8 @@ public:
   %python_attribute_with_set(p2, double);
   %python_attribute_with_set(b1, double);
   %python_attribute_with_set(b2, double);
+  %python_attribute_with_set(calibration_date, std::string);
+  %python_attribute_with_set(detection_type, std::string);
   %pickle_serialization();
 };
 }

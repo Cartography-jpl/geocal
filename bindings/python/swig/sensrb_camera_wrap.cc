@@ -5703,6 +5703,163 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
+{
+#if PY_VERSION_HEX>=0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+  if (PyBytes_Check(obj))
+#else
+  if (PyUnicode_Check(obj))
+#endif
+#else  
+  if (PyString_Check(obj))
+#endif
+  {
+    char *cstr; Py_ssize_t len;
+#if PY_VERSION_HEX>=0x03000000
+#if !defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+    if (!alloc && cptr) {
+        /* We can't allow converting without allocation, since the internal
+           representation of string in Python 3 is UCS-2/UCS-4 but we require
+           a UTF-8 representation.
+           TODO(bhy) More detailed explanation */
+        return SWIG_RuntimeError;
+    }
+    obj = PyUnicode_AsUTF8String(obj);
+    if(alloc) *alloc = SWIG_NEWOBJ;
+#endif
+    PyBytes_AsStringAndSize(obj, &cstr, &len);
+#else
+    PyString_AsStringAndSize(obj, &cstr, &len);
+#endif
+    if (cptr) {
+      if (alloc) {
+	/* 
+	   In python the user should not be able to modify the inner
+	   string representation. To warranty that, if you define
+	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
+	   buffer is always returned.
+
+	   The default behavior is just to return the pointer value,
+	   so, be careful.
+	*/ 
+#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
+	if (*alloc != SWIG_OLDOBJ) 
+#else
+	if (*alloc == SWIG_NEWOBJ) 
+#endif
+	{
+	  *cptr = reinterpret_cast< char* >(memcpy(new char[len + 1], cstr, sizeof(char)*(len + 1)));
+	  *alloc = SWIG_NEWOBJ;
+	} else {
+	  *cptr = cstr;
+	  *alloc = SWIG_OLDOBJ;
+	}
+      } else {
+#if PY_VERSION_HEX>=0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+	*cptr = PyBytes_AsString(obj);
+#else
+	assert(0); /* Should never reach here with Unicode strings in Python 3 */
+#endif
+#else
+	*cptr = SWIG_Python_str_AsChar(obj);
+#endif
+      }
+    }
+    if (psize) *psize = len + 1;
+#if PY_VERSION_HEX>=0x03000000 && !defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+    Py_XDECREF(obj);
+#endif
+    return SWIG_OK;
+  } else {
+#if defined(SWIG_PYTHON_2_UNICODE)
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+#error "Cannot use both SWIG_PYTHON_2_UNICODE and SWIG_PYTHON_STRICT_BYTE_CHAR at once"
+#endif
+#if PY_VERSION_HEX<0x03000000
+    if (PyUnicode_Check(obj)) {
+      char *cstr; Py_ssize_t len;
+      if (!alloc && cptr) {
+        return SWIG_RuntimeError;
+      }
+      obj = PyUnicode_AsUTF8String(obj);
+      if (PyString_AsStringAndSize(obj, &cstr, &len) != -1) {
+        if (cptr) {
+          if (alloc) *alloc = SWIG_NEWOBJ;
+          *cptr = reinterpret_cast< char* >(memcpy(new char[len + 1], cstr, sizeof(char)*(len + 1)));
+        }
+        if (psize) *psize = len + 1;
+
+        Py_XDECREF(obj);
+        return SWIG_OK;
+      } else {
+        Py_XDECREF(obj);
+      }
+    }
+#endif
+#endif
+
+    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+    if (pchar_descriptor) {
+      void* vptr = 0;
+      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
+	if (cptr) *cptr = (char *) vptr;
+	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
+	if (alloc) *alloc = SWIG_OLDOBJ;
+	return SWIG_OK;
+      }
+    }
+  }
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
+{
+  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
+  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
+    if (buf) {
+      if (val) *val = new std::string(buf, size - 1);
+      if (alloc == SWIG_NEWOBJ) delete[] buf;
+      return SWIG_NEWOBJ;
+    } else {
+      if (val) *val = 0;
+      return SWIG_OLDOBJ;
+    }
+  } else {
+    static int init = 0;
+    static swig_type_info* descriptor = 0;
+    if (!init) {
+      descriptor = SWIG_TypeQuery("std::string" " *");
+      init = 1;
+    }
+    if (descriptor) {
+      std::string *vptr;
+      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
+      if (SWIG_IsOK(res) && val) *val = vptr;
+      return res;
+    }
+  }
+  return SWIG_ERROR;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -5717,6 +5874,42 @@ struct SWIG_null_deleter {
 
 
   #define SWIG_From_double   PyFloat_FromDouble 
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+      return PyBytes_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#else
+#if PY_VERSION_HEX >= 0x03010000
+      return PyUnicode_DecodeUTF8(carray, static_cast< Py_ssize_t >(size), "surrogateescape");
+#else
+      return PyUnicode_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#endif
+#endif
+#else
+      return PyString_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
 
 
 
@@ -6521,9 +6714,11 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   double arg12 ;
   double arg13 ;
   GeoCal::FrameCoordinate *arg14 = 0 ;
-  GeoCal::QuaternionCamera::FrameConvention arg15 ;
-  GeoCal::QuaternionCamera::FrameDirection arg16 ;
-  GeoCal::QuaternionCamera::FrameDirection arg17 ;
+  std::string *arg15 = 0 ;
+  std::string *arg16 = 0 ;
+  GeoCal::QuaternionCamera::FrameConvention arg17 ;
+  GeoCal::QuaternionCamera::FrameDirection arg18 ;
+  GeoCal::QuaternionCamera::FrameDirection arg19 ;
   void *argp1 ;
   int res1 = 0 ;
   double val2 ;
@@ -6553,10 +6748,436 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   void *argp14 = 0 ;
   int res14 = 0 ;
   boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared14 ;
-  int val15 ;
-  int ecode15 = 0 ;
-  int val16 ;
-  int ecode16 = 0 ;
+  int res15 = SWIG_OLDOBJ ;
+  int res16 = SWIG_OLDOBJ ;
+  int val17 ;
+  int ecode17 = 0 ;
+  int val18 ;
+  int ecode18 = 0 ;
+  int val19 ;
+  int ecode19 = 0 ;
+  GeoCal::SensrbCamera *result = 0 ;
+  
+  if ((nobjs < 19) || (nobjs > 19)) SWIG_fail;
+  {
+    res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SensrbCamera" "', argument " "1"" of type '" "boost::math::quaternion< double >""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "1"" of type '" "boost::math::quaternion< double >""'");
+    } else {
+      boost::math::quaternion< double > * temp = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SensrbCamera" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SensrbCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SensrbCamera" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SensrbCamera" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_SensrbCamera" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_SensrbCamera" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  ecode8 = SWIG_AsVal_double(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_SensrbCamera" "', argument " "8"" of type '" "double""'");
+  } 
+  arg8 = static_cast< double >(val8);
+  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_SensrbCamera" "', argument " "9"" of type '" "int""'");
+  } 
+  arg9 = static_cast< int >(val9);
+  ecode10 = SWIG_AsVal_int(swig_obj[9], &val10);
+  if (!SWIG_IsOK(ecode10)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_SensrbCamera" "', argument " "10"" of type '" "int""'");
+  } 
+  arg10 = static_cast< int >(val10);
+  ecode11 = SWIG_AsVal_double(swig_obj[10], &val11);
+  if (!SWIG_IsOK(ecode11)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "new_SensrbCamera" "', argument " "11"" of type '" "double""'");
+  } 
+  arg11 = static_cast< double >(val11);
+  ecode12 = SWIG_AsVal_double(swig_obj[11], &val12);
+  if (!SWIG_IsOK(ecode12)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode12), "in method '" "new_SensrbCamera" "', argument " "12"" of type '" "double""'");
+  } 
+  arg12 = static_cast< double >(val12);
+  ecode13 = SWIG_AsVal_double(swig_obj[12], &val13);
+  if (!SWIG_IsOK(ecode13)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode13), "in method '" "new_SensrbCamera" "', argument " "13"" of type '" "double""'");
+  } 
+  arg13 = static_cast< double >(val13);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res14 = SWIG_ConvertPtrAndOwn(swig_obj[13], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res14)) {
+      arg14 = ptr;
+    } else {
+      res14 = SWIG_ConvertPtrAndOwn(swig_obj[13], &argp14, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res14)) {
+        SWIG_exception_fail(SWIG_ArgError(res14), "in method '" "new_SensrbCamera" "', argument " "14"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (!argp14) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "14"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared14 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp14);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp14);
+        arg14 = const_cast< GeoCal::FrameCoordinate * >(tempshared14.get());
+      } else {
+        arg14 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp14)->get());
+      }
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res15 = SWIG_AsPtr_std_string(swig_obj[14], &ptr);
+    if (!SWIG_IsOK(res15)) {
+      SWIG_exception_fail(SWIG_ArgError(res15), "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    arg15 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res16 = SWIG_AsPtr_std_string(swig_obj[15], &ptr);
+    if (!SWIG_IsOK(res16)) {
+      SWIG_exception_fail(SWIG_ArgError(res16), "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "std::string const &""'"); 
+    }
+    arg16 = ptr;
+  }
+  ecode17 = SWIG_AsVal_int(swig_obj[16], &val17);
+  if (!SWIG_IsOK(ecode17)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode17), "in method '" "new_SensrbCamera" "', argument " "17"" of type '" "GeoCal::QuaternionCamera::FrameConvention""'");
+  } 
+  arg17 = static_cast< GeoCal::QuaternionCamera::FrameConvention >(val17);
+  ecode18 = SWIG_AsVal_int(swig_obj[17], &val18);
+  if (!SWIG_IsOK(ecode18)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode18), "in method '" "new_SensrbCamera" "', argument " "18"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
+  } 
+  arg18 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val18);
+  ecode19 = SWIG_AsVal_int(swig_obj[18], &val19);
+  if (!SWIG_IsOK(ecode19)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode19), "in method '" "new_SensrbCamera" "', argument " "19"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
+  } 
+  arg19 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val19);
+  {
+    try {
+      result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,(GeoCal::FrameCoordinate const &)*arg14,(std::string const &)*arg15,(std::string const &)*arg16,arg17,arg18,arg19);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SensrbCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SensrbCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res15)) delete arg15;
+  if (SWIG_IsNewObj(res16)) delete arg16;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res15)) delete arg15;
+  if (SWIG_IsNewObj(res16)) delete arg16;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  double arg5 ;
+  double arg6 ;
+  double arg7 ;
+  double arg8 ;
+  int arg9 ;
+  int arg10 ;
+  double arg11 ;
+  double arg12 ;
+  double arg13 ;
+  GeoCal::FrameCoordinate *arg14 = 0 ;
+  std::string *arg15 = 0 ;
+  std::string *arg16 = 0 ;
+  GeoCal::QuaternionCamera::FrameConvention arg17 ;
+  GeoCal::QuaternionCamera::FrameDirection arg18 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  double val8 ;
+  int ecode8 = 0 ;
+  int val9 ;
+  int ecode9 = 0 ;
+  int val10 ;
+  int ecode10 = 0 ;
+  double val11 ;
+  int ecode11 = 0 ;
+  double val12 ;
+  int ecode12 = 0 ;
+  double val13 ;
+  int ecode13 = 0 ;
+  void *argp14 = 0 ;
+  int res14 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared14 ;
+  int res15 = SWIG_OLDOBJ ;
+  int res16 = SWIG_OLDOBJ ;
+  int val17 ;
+  int ecode17 = 0 ;
+  int val18 ;
+  int ecode18 = 0 ;
+  GeoCal::SensrbCamera *result = 0 ;
+  
+  if ((nobjs < 18) || (nobjs > 18)) SWIG_fail;
+  {
+    res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SensrbCamera" "', argument " "1"" of type '" "boost::math::quaternion< double >""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "1"" of type '" "boost::math::quaternion< double >""'");
+    } else {
+      boost::math::quaternion< double > * temp = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SensrbCamera" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SensrbCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SensrbCamera" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_SensrbCamera" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_SensrbCamera" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_SensrbCamera" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  ecode8 = SWIG_AsVal_double(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_SensrbCamera" "', argument " "8"" of type '" "double""'");
+  } 
+  arg8 = static_cast< double >(val8);
+  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_SensrbCamera" "', argument " "9"" of type '" "int""'");
+  } 
+  arg9 = static_cast< int >(val9);
+  ecode10 = SWIG_AsVal_int(swig_obj[9], &val10);
+  if (!SWIG_IsOK(ecode10)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_SensrbCamera" "', argument " "10"" of type '" "int""'");
+  } 
+  arg10 = static_cast< int >(val10);
+  ecode11 = SWIG_AsVal_double(swig_obj[10], &val11);
+  if (!SWIG_IsOK(ecode11)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "new_SensrbCamera" "', argument " "11"" of type '" "double""'");
+  } 
+  arg11 = static_cast< double >(val11);
+  ecode12 = SWIG_AsVal_double(swig_obj[11], &val12);
+  if (!SWIG_IsOK(ecode12)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode12), "in method '" "new_SensrbCamera" "', argument " "12"" of type '" "double""'");
+  } 
+  arg12 = static_cast< double >(val12);
+  ecode13 = SWIG_AsVal_double(swig_obj[12], &val13);
+  if (!SWIG_IsOK(ecode13)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode13), "in method '" "new_SensrbCamera" "', argument " "13"" of type '" "double""'");
+  } 
+  arg13 = static_cast< double >(val13);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res14 = SWIG_ConvertPtrAndOwn(swig_obj[13], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res14)) {
+      arg14 = ptr;
+    } else {
+      res14 = SWIG_ConvertPtrAndOwn(swig_obj[13], &argp14, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res14)) {
+        SWIG_exception_fail(SWIG_ArgError(res14), "in method '" "new_SensrbCamera" "', argument " "14"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (!argp14) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "14"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared14 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp14);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp14);
+        arg14 = const_cast< GeoCal::FrameCoordinate * >(tempshared14.get());
+      } else {
+        arg14 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp14)->get());
+      }
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res15 = SWIG_AsPtr_std_string(swig_obj[14], &ptr);
+    if (!SWIG_IsOK(res15)) {
+      SWIG_exception_fail(SWIG_ArgError(res15), "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    arg15 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res16 = SWIG_AsPtr_std_string(swig_obj[15], &ptr);
+    if (!SWIG_IsOK(res16)) {
+      SWIG_exception_fail(SWIG_ArgError(res16), "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "std::string const &""'"); 
+    }
+    arg16 = ptr;
+  }
+  ecode17 = SWIG_AsVal_int(swig_obj[16], &val17);
+  if (!SWIG_IsOK(ecode17)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode17), "in method '" "new_SensrbCamera" "', argument " "17"" of type '" "GeoCal::QuaternionCamera::FrameConvention""'");
+  } 
+  arg17 = static_cast< GeoCal::QuaternionCamera::FrameConvention >(val17);
+  ecode18 = SWIG_AsVal_int(swig_obj[17], &val18);
+  if (!SWIG_IsOK(ecode18)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode18), "in method '" "new_SensrbCamera" "', argument " "18"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
+  } 
+  arg18 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val18);
+  {
+    try {
+      result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,(GeoCal::FrameCoordinate const &)*arg14,(std::string const &)*arg15,(std::string const &)*arg16,arg17,arg18);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SensrbCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SensrbCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res15)) delete arg15;
+  if (SWIG_IsNewObj(res16)) delete arg16;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res15)) delete arg15;
+  if (SWIG_IsNewObj(res16)) delete arg16;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  double arg5 ;
+  double arg6 ;
+  double arg7 ;
+  double arg8 ;
+  int arg9 ;
+  int arg10 ;
+  double arg11 ;
+  double arg12 ;
+  double arg13 ;
+  GeoCal::FrameCoordinate *arg14 = 0 ;
+  std::string *arg15 = 0 ;
+  std::string *arg16 = 0 ;
+  GeoCal::QuaternionCamera::FrameConvention arg17 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  double val8 ;
+  int ecode8 = 0 ;
+  int val9 ;
+  int ecode9 = 0 ;
+  int val10 ;
+  int ecode10 = 0 ;
+  double val11 ;
+  int ecode11 = 0 ;
+  double val12 ;
+  int ecode12 = 0 ;
+  double val13 ;
+  int ecode13 = 0 ;
+  void *argp14 = 0 ;
+  int res14 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared14 ;
+  int res15 = SWIG_OLDOBJ ;
+  int res16 = SWIG_OLDOBJ ;
   int val17 ;
   int ecode17 = 0 ;
   GeoCal::SensrbCamera *result = 0 ;
@@ -6660,24 +7281,36 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
       }
     }
   }
-  ecode15 = SWIG_AsVal_int(swig_obj[14], &val15);
-  if (!SWIG_IsOK(ecode15)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode15), "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "GeoCal::QuaternionCamera::FrameConvention""'");
-  } 
-  arg15 = static_cast< GeoCal::QuaternionCamera::FrameConvention >(val15);
-  ecode16 = SWIG_AsVal_int(swig_obj[15], &val16);
-  if (!SWIG_IsOK(ecode16)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode16), "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
-  } 
-  arg16 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val16);
+  {
+    std::string *ptr = (std::string *)0;
+    res15 = SWIG_AsPtr_std_string(swig_obj[14], &ptr);
+    if (!SWIG_IsOK(res15)) {
+      SWIG_exception_fail(SWIG_ArgError(res15), "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    arg15 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res16 = SWIG_AsPtr_std_string(swig_obj[15], &ptr);
+    if (!SWIG_IsOK(res16)) {
+      SWIG_exception_fail(SWIG_ArgError(res16), "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "std::string const &""'"); 
+    }
+    arg16 = ptr;
+  }
   ecode17 = SWIG_AsVal_int(swig_obj[16], &val17);
   if (!SWIG_IsOK(ecode17)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode17), "in method '" "new_SensrbCamera" "', argument " "17"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode17), "in method '" "new_SensrbCamera" "', argument " "17"" of type '" "GeoCal::QuaternionCamera::FrameConvention""'");
   } 
-  arg17 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val17);
+  arg17 = static_cast< GeoCal::QuaternionCamera::FrameConvention >(val17);
   {
     try {
-      result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,(GeoCal::FrameCoordinate const &)*arg14,arg15,arg16,arg17);
+      result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,(GeoCal::FrameCoordinate const &)*arg14,(std::string const &)*arg15,(std::string const &)*arg16,arg17);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6688,13 +7321,17 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     boost::shared_ptr<  GeoCal::SensrbCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SensrbCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
+  if (SWIG_IsNewObj(res15)) delete arg15;
+  if (SWIG_IsNewObj(res16)) delete arg16;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res15)) delete arg15;
+  if (SWIG_IsNewObj(res16)) delete arg16;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
   double arg2 ;
@@ -6710,8 +7347,8 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   double arg12 ;
   double arg13 ;
   GeoCal::FrameCoordinate *arg14 = 0 ;
-  GeoCal::QuaternionCamera::FrameConvention arg15 ;
-  GeoCal::QuaternionCamera::FrameDirection arg16 ;
+  std::string *arg15 = 0 ;
+  std::string *arg16 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   double val2 ;
@@ -6741,10 +7378,8 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   void *argp14 = 0 ;
   int res14 = 0 ;
   boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared14 ;
-  int val15 ;
-  int ecode15 = 0 ;
-  int val16 ;
-  int ecode16 = 0 ;
+  int res15 = SWIG_OLDOBJ ;
+  int res16 = SWIG_OLDOBJ ;
   GeoCal::SensrbCamera *result = 0 ;
   
   if ((nobjs < 16) || (nobjs > 16)) SWIG_fail;
@@ -6846,19 +7481,31 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
       }
     }
   }
-  ecode15 = SWIG_AsVal_int(swig_obj[14], &val15);
-  if (!SWIG_IsOK(ecode15)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode15), "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "GeoCal::QuaternionCamera::FrameConvention""'");
-  } 
-  arg15 = static_cast< GeoCal::QuaternionCamera::FrameConvention >(val15);
-  ecode16 = SWIG_AsVal_int(swig_obj[15], &val16);
-  if (!SWIG_IsOK(ecode16)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode16), "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
-  } 
-  arg16 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val16);
+  {
+    std::string *ptr = (std::string *)0;
+    res15 = SWIG_AsPtr_std_string(swig_obj[14], &ptr);
+    if (!SWIG_IsOK(res15)) {
+      SWIG_exception_fail(SWIG_ArgError(res15), "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    arg15 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res16 = SWIG_AsPtr_std_string(swig_obj[15], &ptr);
+    if (!SWIG_IsOK(res16)) {
+      SWIG_exception_fail(SWIG_ArgError(res16), "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "16"" of type '" "std::string const &""'"); 
+    }
+    arg16 = ptr;
+  }
   {
     try {
-      result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,(GeoCal::FrameCoordinate const &)*arg14,arg15,arg16);
+      result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,(GeoCal::FrameCoordinate const &)*arg14,(std::string const &)*arg15,(std::string const &)*arg16);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6869,13 +7516,17 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     boost::shared_ptr<  GeoCal::SensrbCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SensrbCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
+  if (SWIG_IsNewObj(res15)) delete arg15;
+  if (SWIG_IsNewObj(res16)) delete arg16;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res15)) delete arg15;
+  if (SWIG_IsNewObj(res16)) delete arg16;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
   double arg2 ;
@@ -6891,7 +7542,7 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
   double arg12 ;
   double arg13 ;
   GeoCal::FrameCoordinate *arg14 = 0 ;
-  GeoCal::QuaternionCamera::FrameConvention arg15 ;
+  std::string *arg15 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   double val2 ;
@@ -6921,8 +7572,7 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
   void *argp14 = 0 ;
   int res14 = 0 ;
   boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared14 ;
-  int val15 ;
-  int ecode15 = 0 ;
+  int res15 = SWIG_OLDOBJ ;
   GeoCal::SensrbCamera *result = 0 ;
   
   if ((nobjs < 15) || (nobjs > 15)) SWIG_fail;
@@ -7024,14 +7674,20 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
       }
     }
   }
-  ecode15 = SWIG_AsVal_int(swig_obj[14], &val15);
-  if (!SWIG_IsOK(ecode15)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode15), "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "GeoCal::QuaternionCamera::FrameConvention""'");
-  } 
-  arg15 = static_cast< GeoCal::QuaternionCamera::FrameConvention >(val15);
+  {
+    std::string *ptr = (std::string *)0;
+    res15 = SWIG_AsPtr_std_string(swig_obj[14], &ptr);
+    if (!SWIG_IsOK(res15)) {
+      SWIG_exception_fail(SWIG_ArgError(res15), "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SensrbCamera" "', argument " "15"" of type '" "std::string const &""'"); 
+    }
+    arg15 = ptr;
+  }
   {
     try {
-      result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,(GeoCal::FrameCoordinate const &)*arg14,arg15);
+      result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,(GeoCal::FrameCoordinate const &)*arg14,(std::string const &)*arg15);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7042,13 +7698,15 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
     boost::shared_ptr<  GeoCal::SensrbCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::SensrbCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
+  if (SWIG_IsNewObj(res15)) delete arg15;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res15)) delete arg15;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
   double arg2 ;
@@ -7215,31 +7873,39 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_SensrbCamera(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[18] = {
+  PyObject *argv[20] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_SensrbCamera",0,17,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_SensrbCamera",0,19,argv))) SWIG_fail;
   --argc;
   if (argc == 14) {
-    return _wrap_new_SensrbCamera__SWIG_3(self, argc, argv);
+    return _wrap_new_SensrbCamera__SWIG_5(self, argc, argv);
   }
   if (argc == 15) {
-    return _wrap_new_SensrbCamera__SWIG_2(self, argc, argv);
+    return _wrap_new_SensrbCamera__SWIG_4(self, argc, argv);
   }
   if (argc == 16) {
-    return _wrap_new_SensrbCamera__SWIG_1(self, argc, argv);
+    return _wrap_new_SensrbCamera__SWIG_3(self, argc, argv);
   }
   if (argc == 17) {
+    return _wrap_new_SensrbCamera__SWIG_2(self, argc, argv);
+  }
+  if (argc == 18) {
+    return _wrap_new_SensrbCamera__SWIG_1(self, argc, argv);
+  }
+  if (argc == 19) {
     return _wrap_new_SensrbCamera__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_SensrbCamera'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection,GeoCal::QuaternionCamera::FrameDirection)\n"
-    "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection)\n"
-    "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention)\n"
+    "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &,std::string const &,std::string const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection,GeoCal::QuaternionCamera::FrameDirection)\n"
+    "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &,std::string const &,std::string const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection)\n"
+    "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &,std::string const &,std::string const &,GeoCal::QuaternionCamera::FrameConvention)\n"
+    "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &,std::string const &,std::string const &)\n"
+    "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &,std::string const &)\n"
     "    GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double >,double,double,double,double,double,double,double,int,int,double,double,double,GeoCal::FrameCoordinate const &)\n");
   return 0;
 }
@@ -8107,6 +8773,246 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SensrbCamera__v_calibration_date__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SensrbCamera *arg1 = (GeoCal::SensrbCamera *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SensrbCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SensrbCamera const > *smartarg1 = 0 ;
+  std::string result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensrbCamera__v_calibration_date" "', argument " "1"" of type '" "GeoCal::SensrbCamera const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SensrbCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SensrbCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SensrbCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SensrbCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SensrbCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::SensrbCamera const *)arg1)->calibration_date();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SensrbCamera__v_calibration_date__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SensrbCamera *arg1 = (GeoCal::SensrbCamera *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SensrbCamera > tempshared1 ;
+  boost::shared_ptr< GeoCal::SensrbCamera > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensrbCamera__v_calibration_date" "', argument " "1"" of type '" "GeoCal::SensrbCamera *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::SensrbCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::SensrbCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SensrbCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::SensrbCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SensrbCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SensrbCamera__v_calibration_date" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensrbCamera__v_calibration_date" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      (arg1)->calibration_date((std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SensrbCamera__v_calibration_date(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"SensrbCamera__v_calibration_date",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_SensrbCamera__v_calibration_date__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_SensrbCamera__v_calibration_date__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SensrbCamera__v_calibration_date'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SensrbCamera::calibration_date() const\n"
+    "    GeoCal::SensrbCamera::calibration_date(std::string const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_SensrbCamera__v_detection_type__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SensrbCamera *arg1 = (GeoCal::SensrbCamera *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SensrbCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SensrbCamera const > *smartarg1 = 0 ;
+  std::string result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensrbCamera__v_detection_type" "', argument " "1"" of type '" "GeoCal::SensrbCamera const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SensrbCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SensrbCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SensrbCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SensrbCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SensrbCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::SensrbCamera const *)arg1)->detection_type();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SensrbCamera__v_detection_type__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SensrbCamera *arg1 = (GeoCal::SensrbCamera *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SensrbCamera > tempshared1 ;
+  boost::shared_ptr< GeoCal::SensrbCamera > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SensrbCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensrbCamera__v_detection_type" "', argument " "1"" of type '" "GeoCal::SensrbCamera *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::SensrbCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::SensrbCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SensrbCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::SensrbCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::SensrbCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SensrbCamera__v_detection_type" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SensrbCamera__v_detection_type" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      (arg1)->detection_type((std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SensrbCamera__v_detection_type(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"SensrbCamera__v_detection_type",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_SensrbCamera__v_detection_type__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_SensrbCamera__v_detection_type__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SensrbCamera__v_detection_type'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SensrbCamera::detection_type() const\n"
+    "    GeoCal::SensrbCamera::detection_type(std::string const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_SensrbCamera(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::SensrbCamera *arg1 = (GeoCal::SensrbCamera *) 0 ;
@@ -8186,7 +9092,9 @@ static PyMethodDef SwigMethods[] = {
 		"K2, double K3, double P1, double P2, double B1, double B2, int\n"
 		"Number_line, int Number_sample, double Line_pitch, double\n"
 		"Sample_pitch, double Focal_length, const FrameCoordinate\n"
-		"&Principal_point, QuaternionCamera::FrameConvention\n"
+		"&Principal_point, const std::string &Detection_type=\"Placeholder\",\n"
+		"const std::string &Calibration_date=\"20000101\",\n"
+		"QuaternionCamera::FrameConvention\n"
 		"Frame_convention=QuaternionCamera::LINE_IS_X,\n"
 		"QuaternionCamera::FrameDirection\n"
 		"Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,\n"
@@ -8223,7 +9131,11 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::SensrbCamera::p1(double V)\n"
 		"\n"
 		""},
-	 { (char *)"SensrbCamera__v_p2", _wrap_SensrbCamera__v_p2, METH_VARARGS, NULL},
+	 { (char *)"SensrbCamera__v_p2", _wrap_SensrbCamera__v_p2, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::SensrbCamera::p2(double V)\n"
+		"\n"
+		""},
 	 { (char *)"SensrbCamera__v_b1", _wrap_SensrbCamera__v_b1, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::SensrbCamera::b1(double V)\n"
@@ -8232,6 +9144,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SensrbCamera__v_b2", _wrap_SensrbCamera__v_b2, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::SensrbCamera::b2(double V)\n"
+		"\n"
+		""},
+	 { (char *)"SensrbCamera__v_calibration_date", _wrap_SensrbCamera__v_calibration_date, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::SensrbCamera::calibration_date(const std::string &V)\n"
+		"\n"
+		""},
+	 { (char *)"SensrbCamera__v_detection_type", _wrap_SensrbCamera__v_detection_type, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::SensrbCamera::detection_type(const std::string &V)\n"
 		"\n"
 		""},
 	 { (char *)"delete_SensrbCamera", (PyCFunction)_wrap_delete_SensrbCamera, METH_O, NULL},

@@ -11,7 +11,8 @@ template<class Archive>
 void SensrbCamera::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
-  ar & GEOCAL_NVP_(p_distort);
+  ar & GEOCAL_NVP_(calibration_date) & GEOCAL_NVP_(detection_type)
+    & GEOCAL_NVP_(p_distort);
 }
 
 
@@ -22,12 +23,14 @@ void SensrbCamera::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
   Os << "SensrbCamera:\n"
-     << "   Number line:     " << number_line(0) << "\n"
-     << "   Number sample:   " << number_sample(0) << "\n"
-     << "   Focal length:    " << focal_length() << " mm\n"
-     << "   Line pitch:      " << line_pitch() << " mm\n"
-     << "   Sample pitch:    " << sample_pitch() << " mm\n"
-     << "   Principal point: " << principal_point(0) << "\n"
+     << "   Calibration date: " << calibration_date() << "\n"
+     << "   Detection type:   " << detection_type() << "\n"
+     << "   Number line:      " << number_line(0) << "\n"
+     << "   Number sample:    " << number_sample(0) << "\n"
+     << "   Focal length:     " << focal_length() << " mm\n"
+     << "   Line pitch:       " << line_pitch() << " mm\n"
+     << "   Sample pitch:     " << sample_pitch() << " mm\n"
+     << "   Principal point:  " << principal_point(0) << "\n"
      << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
 				    "LINE_IS_X\n" : "LINE_IS_Y\n")
      << "   Frame to spacecraft: " << frame_to_sc() << "\n"

@@ -23,6 +23,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_statistic)(void);
   INIT_TYPE INIT_FUNC(_geocal_gsl_fit)(void);
   INIT_TYPE INIT_FUNC(_geocal_gsl_root)(void);
+  INIT_TYPE INIT_FUNC(_msp_support)(void);
   INIT_TYPE INIT_FUNC(_geocal_time)(void);
   INIT_TYPE INIT_FUNC(_tiled_file)(void);
   INIT_TYPE INIT_FUNC(_geocal_serialize_function)(void);
@@ -246,6 +247,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_statistic", INIT_FUNC(_statistic));
   INIT_MODULE(module, "_geocal_gsl_fit", INIT_FUNC(_geocal_gsl_fit));
   INIT_MODULE(module, "_geocal_gsl_root", INIT_FUNC(_geocal_gsl_root));
+  INIT_MODULE(module, "_msp_support", INIT_FUNC(_msp_support));
   INIT_MODULE(module, "_geocal_time", INIT_FUNC(_geocal_time));
   INIT_MODULE(module, "_tiled_file", INIT_FUNC(_tiled_file));
   INIT_MODULE(module, "_geocal_serialize_function", INIT_FUNC(_geocal_serialize_function));

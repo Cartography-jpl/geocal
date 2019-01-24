@@ -41,6 +41,11 @@ AC_HDFEOS5(optional, cannot_build, default_search)
 AC_MSPI_SHARED(optional, cannot_build, default_search)
 
 #=================================================================
+# Mensuration Service Program (MSP) from BAE. Used only for
+# test validation.
+AC_MSP(optional, cannot_build, default_search)
+
+#=================================================================
 # Various thirdparty libraries.
 
 # There is a a series of bugs in older version of the boost serialization
@@ -238,6 +243,7 @@ LOC_MSG([  Have FFTW:                     ${have_fftw}])
 LOC_MSG([  Have HDF5:                     ${have_hdf5}])
 LOC_MSG([  Have HDFEOS5:                  ${have_hdfeos5}])
 LOC_MSG([  Have MSPI-Shared:              ${have_mspi_shared}])
+LOC_MSG([  Have MSP:                      ${have_msp}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])
 LOC_MSG([  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}])
 LOC_MSG([  Have VICAR Run Time Library:   ${have_vicar_rtl}])

@@ -14,3 +14,8 @@ if [ -n "$PATH" ]; then
 else
   export PATH=${AFIDSPYTHONTOP}/bin
 fi
+if [ "@have_msp@" = "yes" ]; then
+    export MSP_DATA_DIR=@MSP_PREFIX@/data
+    export MSPCCS_DATA=@MSP_PREFIX@/data
+    export CSM_PLUGIN_DIR=@MSP_PREFIX@/plugins/
+fi

@@ -52,6 +52,9 @@
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
+/* Defined if we have MSP */
+#undef HAVE_MSP
+
 /* Defined if we have MSPI-Shared */
 #undef HAVE_MSPI_SHARED
 

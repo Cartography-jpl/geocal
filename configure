@@ -807,6 +807,14 @@ BOOST_FILESYSTEM_LIB
 BOOST_REGEX_LIB
 BOOST_LIBDIR
 BOOST_CPPFLAGS
+BUILD_MSP_FALSE
+BUILD_MSP_TRUE
+HAVE_MSP_FALSE
+HAVE_MSP_TRUE
+have_msp
+MSP_PREFIX
+MSP_LIBS
+MSP_CFLAGS
 BUILD_MSPI_SHARED_FALSE
 BUILD_MSPI_SHARED_TRUE
 HAVE_MSPI_SHARED_FALSE
@@ -1022,6 +1030,7 @@ with_afids_data
 with_hdfeos5
 with_hdf5
 with_mspi_shared
+with_msp
 with_boost
 with_blitz
 with_gsl
@@ -1759,6 +1768,8 @@ Optional Packages:
                           use MSPI-Shared (default is yes if found) - it is
                           possible to specify the root directory for
                           MSPI-Shared (optional).
+  --with-msp[=DIR]        use MSP (default is yes if found) - it is possible
+                          to specify the root directory for MSP (optional).
   --with-boost[=DIR]      use BOOST (default is yes if found) - it is possible
                           to specify the root directory for BOOST (optional).
                           You can also specify "build" if you want to build
@@ -19447,6 +19458,129 @@ fi
 
 
 #=================================================================
+# Mensuration Service Program (MSP) from BAE. Used only for
+# test validation.
+
+# Guard against running twice
+if test "x$done_msp" = "x"; then
+
+have_msp="no"
+build_msp="no"
+build_neededmsp="no"
+want_msp="no"
+if test "optional" != "do_not_use"; then
+
+# Check whether --with-msp was given.
+if test "${with_msp+set}" = set; then :
+  withval=$with_msp;
+    if test "$withval" = "no"; then
+        want_msp="no"
+    elif test "$withval" = "yes"; then
+        want_msp="yes"
+        ac_msp_path=""
+    elif test "$withval" = "build"; then
+        if test "cannot_build" != "can_build"; then
+            as_fn_error $? "The \"build\" option is not supported in this particular package for --with-msp" "$LINENO" 5
+        fi
+        want_msp="yes"
+        build_msp="yes"
+        ac_msp_path="\${prefix}"
+    else
+        want_msp="yes"
+        ac_msp_path="$withval"
+    fi
+
+else
+
+    want_msp="yes"
+    if test "cannot_build" = "can_build"; then
+      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
+        want_msp="yes"
+        build_msp="yes"
+        ac_msp_path="\${prefix}"
+      elif test "$THIRDPARTY" = "build_needed"; then
+        want_msp="yes"
+        build_needed_msp="yes"
+      fi
+    fi
+
+fi
+
+fi
+
+have_msp="no"
+if test "x$want_msp" = "xyes"; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for MSP library" >&5
+$as_echo_n "checking for MSP library... " >&6; }
+        succeeded=no
+        if test "$ac_msp_path" != ""; then
+            MSP_LIBS="-L$ac_msp_path/lib -R$ac_msp_path/lib -ldl -lMSPCoordinateConversionService -lMSPCovarianceService -lMSPImagingGeometryService -lMSPMensurationService -lMSPMensurationSessionRecordService -lMSPPointExtractionService -lMSPOutputMethodService -lMSPSensorModelService -lMSPSensorSpecificService -lMSPSupportDataService -lMSPTerrainService -lMSPasdetre -lMSPCCSUtils -lMSPcoordconverter -lMSPcsisd -lMSPcsm -lMSPcsmutil -lMSPDEIUtil -lMSPgeometry -lMSPjson -lMSPlas -lMSPmath -lMSPnitf -lMSPntmtre -lMSPrage -lMSPRageServiceUtils -lMSPrageutilities -lMSPSScovmodel -lMSPSSrutil -lMSPutilities -lMSPmiisd -lCSM_PCAPI"
+            MSP_CFLAGS="-I$ac_msp_path/include -I$ac_msp_path/CCSUtils -I$ac_msp_path/CoordinateConversion -I$ac_msp_path/Covariance -I$ac_msp_path/PointExtraction -I$ac_msp_path/ImagingGeometry -I$ac_msp_path/Mensuration -I$ac_msp_path/MensurationSessionRecord -I$ac_msp_path/OutputMethod -I$ac_msp_path/SensorModel -I$ac_msp_path/SupportData -I$ac_msp_path/Terrain -I$ac_msp_path/common -I$ac_msp_path/common/csm -I$ac_msp_path/common/csmutil -I$ac_msp_path/common/dtcc -I$ac_msp_path/common/geometry -I$ac_msp_path/common/math -I$ac_msp_path/common/ntmtre -I$ac_msp_path/common/utilities"
+	    MSP_PREFIX=$ac_msp_path
+            succeeded=yes
+        else
+          for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /data/smyth/MSP/install ; do
+             if test -e "$ac_path_tmp/lib/libMSPnitf.so" && test -r "$ac_path_tmp/lib/libMSPnitf.so"; then
+ 	     	MSP_LIBS="-L$ac_path_tmp/lib -R$ac_path_tmp/lib -ldl -lMSPCoordinateConversionService -lMSPCovarianceService -lMSPImagingGeometryService -lMSPMensurationService -lMSPMensurationSessionRecordService -lMSPPointExtractionService -lMSPOutputMethodService -lMSPSensorModelService -lMSPSensorSpecificService -lMSPSupportDataService -lMSPTerrainService -lMSPasdetre -lMSPCCSUtils -lMSPcoordconverter -lMSPcsisd -lMSPcsm -lMSPcsmutil -lMSPDEIUtil -lMSPgeometry -lMSPjson -lMSPlas -lMSPmath -lMSPnitf -lMSPntmtre -lMSPrage -lMSPRageServiceUtils -lMSPrageutilities -lMSPSScovmodel -lMSPSSrutil -lMSPutilities -lMSPmiisd -lCSM_PCAPI"
+		MSP_CFLAGS="-I$ac_path_tmp/include -I$ac_path_tmp/CCSUtils -I$ac_path_tmp/CoordinateConversion -I$ac_path_tmp/Covariance -I$ac_path_tmp/PointExtraction -I$ac_path_tmp/ImagingGeometry -I$ac_path_tmp/Mensuration -I$ac_path_tmp/MensurationSessionRecord -I$ac_path_tmp/OutputMethod -I$ac_path_tmp/SensorModel -I$ac_path_tmp/SupportData -I$ac_path_tmp/Terrain -I$ac_path_tmp/common -I$ac_path_tmp/common/csm -I$ac_path_tmp/common/csmutil -I$ac_path_tmp/common/dtcc -I$ac_path_tmp/common/geometry -I$ac_path_tmp/common/math -I$ac_path_tmp/common/ntmtre -I$ac_path_tmp/common/utilities"
+		MSP_PREFIX=$ac_path_tmp
+                succeeded=yes
+                break
+             fi
+           done
+        fi
+        if test "$succeeded" != "yes" ; then
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+		MSP_CFLAGS=""
+		MSP_LIBS=""
+		have_msp="no"
+        else
+                { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+
+
+
+$as_echo "#define HAVE_MSP /**/" >>confdefs.h
+
+                have_msp="yes"
+        fi
+fi
+
+ if test "$have_msp" = "yes"; then
+  HAVE_MSP_TRUE=
+  HAVE_MSP_FALSE='#'
+else
+  HAVE_MSP_TRUE='#'
+  HAVE_MSP_FALSE=
+fi
+
+ if test "$build_msp" = "yes"; then
+  BUILD_MSP_TRUE=
+  BUILD_MSP_FALSE='#'
+else
+  BUILD_MSP_TRUE='#'
+  BUILD_MSP_FALSE=
+fi
+
+
+
+if test "optional" = "required"; then
+  if test "$have_msp" = "no"; then
+     as_fn_error $? "
+The MSP library is required by GeoCal. Try specifying
+location using --with-msp if configure could't find the
+library. " "$LINENO" 5
+  fi
+fi
+
+
+done_msp="yes"
+fi
+
+
+#=================================================================
 # Various thirdparty libraries.
 
 # There is a a series of bugs in older version of the boost serialization
@@ -25156,6 +25290,14 @@ if test -z "${BUILD_MSPI_SHARED_TRUE}" && test -z "${BUILD_MSPI_SHARED_FALSE}"; 
   as_fn_error $? "conditional \"BUILD_MSPI_SHARED\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${HAVE_MSP_TRUE}" && test -z "${HAVE_MSP_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_MSP\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${BUILD_MSP_TRUE}" && test -z "${BUILD_MSP_FALSE}"; then
+  as_fn_error $? "conditional \"BUILD_MSP\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${HAVE_BOOST_TRUE}" && test -z "${HAVE_BOOST_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_BOOST\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -27874,6 +28016,9 @@ echo "  Have HDFEOS5:                  ${have_hdfeos5}"
 
 
 echo "  Have MSPI-Shared:              ${have_mspi_shared}"
+
+
+echo "  Have MSP:                      ${have_msp}"
 
 
 echo "  Have SPICE:                    ${have_spice}"

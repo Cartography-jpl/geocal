@@ -48,6 +48,11 @@ libgeocal_la_LDFLAGS+= $(MSPI_SHARED_LIBS)
 libgeocal_la_CPPFLAGS+= $(MSPI_SHARED_CFLAGS)
 endif
 
+if HAVE_MSP
+libgeocal_la_LDFLAGS+= $(MSP_LIBS)
+libgeocal_la_CPPFLAGS+= $(MSP_CFLAGS)
+endif
+
 if HAVE_HDFEOS5
 libgeocal_la_LDFLAGS+= $(HDFEOS5_LIB)
 libgeocal_la_CPPFLAGS+= $(HDFEOS5_CFLAGS)

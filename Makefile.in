@@ -154,48 +154,50 @@ afidspythonvdev_PROGRAMS = $(am__EXEEXT_1)
 @HAVE_GDAL_TRUE@am__append_2 = $(GDAL_CFLAGS)
 @HAVE_MSPI_SHARED_TRUE@am__append_3 = $(MSPI_SHARED_LIBS)
 @HAVE_MSPI_SHARED_TRUE@am__append_4 = $(MSPI_SHARED_CFLAGS)
-@HAVE_HDFEOS5_TRUE@am__append_5 = $(HDFEOS5_LIB)
-@HAVE_HDFEOS5_TRUE@am__append_6 = $(HDFEOS5_CFLAGS)
-@HAVE_HDF5_TRUE@am__append_7 = $(HDF5_LIBS)
-@HAVE_HDF5_TRUE@am__append_8 = $(HDF5_CFLAGS)
-@BUILD_LIBRAW_TRUE@am__append_9 = libraw.la
+@HAVE_MSP_TRUE@am__append_5 = $(MSP_LIBS)
+@HAVE_MSP_TRUE@am__append_6 = $(MSP_CFLAGS)
+@HAVE_HDFEOS5_TRUE@am__append_7 = $(HDFEOS5_LIB)
+@HAVE_HDFEOS5_TRUE@am__append_8 = $(HDFEOS5_CFLAGS)
+@HAVE_HDF5_TRUE@am__append_9 = $(HDF5_LIBS)
+@HAVE_HDF5_TRUE@am__append_10 = $(HDF5_CFLAGS)
+@BUILD_LIBRAW_TRUE@am__append_11 = libraw.la
 check_PROGRAMS = geocal_test_all$(EXEEXT)
-@BUILD_LIBRAW_TRUE@am__append_10 = libraw.la
+@BUILD_LIBRAW_TRUE@am__append_12 = libraw.la
 
 #=================================================================
 # Generate doxygen documentation
-@WITH_DOCUMENTATION_TRUE@am__append_11 = config/doxygen.cfg \
+@WITH_DOCUMENTATION_TRUE@am__append_13 = config/doxygen.cfg \
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py README.developer \
 @WITH_DOCUMENTATION_TRUE@	INSTALL
-@WITH_DOCUMENTATION_TRUE@am__append_12 = install_doxygen_doc
-@WITH_DOCUMENTATION_TRUE@am__append_13 = clean_doxygen_doc
-@WITH_DOCUMENTATION_TRUE@am__append_14 = clean_doxygen_generate
-@BUILD_LIBRAW_TRUE@am__append_15 = libraw.la
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_16 = picmtch5
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_17 = $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
-@HAVE_FFTW_TRUE@am__append_18 = @srcsupport@/geocal_fftw.h
-@HAVE_FFTW_TRUE@am__append_19 = @srcsupport@/geocal_fftw.cc
-@HAVE_HDF5_TRUE@am__append_20 = @srcsupport@/hdf_file.h
-@HAVE_HDF5_TRUE@am__append_21 = @srcsupport@/hdf_file.cc
-@HAVE_FFTW_TRUE@am__append_22 = @srcsupport@/geocal_fftw_test.cc 
-@HAVE_HDF5_TRUE@am__append_23 = @srcsupport@/hdf_file_test.cc 
-@HAVE_CARTO_TRUE@am__append_24 = @srcimplementation@/eci_tod_burl.h
-@HAVE_CARTO_TRUE@am__append_25 = @srcimplementation@/eci_tod_burl.cc
-@HAVE_FFTW_TRUE@am__append_26 = @srcimplementation@/phase_correlation_matcher.h
-@HAVE_FFTW_TRUE@am__append_27 = @srcimplementation@/phase_correlation_matcher.cc
-@HAVE_HDF5_TRUE@am__append_28 = @srcimplementation@/hdf_orbit.h
-@HAVE_HDF5_TRUE@am__append_29 = @srcimplementation@/hdf_orbit.cc
+@WITH_DOCUMENTATION_TRUE@am__append_14 = install_doxygen_doc
+@WITH_DOCUMENTATION_TRUE@am__append_15 = clean_doxygen_doc
+@WITH_DOCUMENTATION_TRUE@am__append_16 = clean_doxygen_generate
+@BUILD_LIBRAW_TRUE@am__append_17 = libraw.la
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_18 = picmtch5
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_19 = $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
+@HAVE_FFTW_TRUE@am__append_20 = @srcsupport@/geocal_fftw.h
+@HAVE_FFTW_TRUE@am__append_21 = @srcsupport@/geocal_fftw.cc
+@HAVE_HDF5_TRUE@am__append_22 = @srcsupport@/hdf_file.h
+@HAVE_HDF5_TRUE@am__append_23 = @srcsupport@/hdf_file.cc
+@HAVE_FFTW_TRUE@am__append_24 = @srcsupport@/geocal_fftw_test.cc 
+@HAVE_HDF5_TRUE@am__append_25 = @srcsupport@/hdf_file_test.cc 
+@HAVE_CARTO_TRUE@am__append_26 = @srcimplementation@/eci_tod_burl.h
+@HAVE_CARTO_TRUE@am__append_27 = @srcimplementation@/eci_tod_burl.cc
+@HAVE_FFTW_TRUE@am__append_28 = @srcimplementation@/phase_correlation_matcher.h
+@HAVE_FFTW_TRUE@am__append_29 = @srcimplementation@/phase_correlation_matcher.cc
+@HAVE_HDF5_TRUE@am__append_30 = @srcimplementation@/hdf_orbit.h
+@HAVE_HDF5_TRUE@am__append_31 = @srcimplementation@/hdf_orbit.cc
 
 # File only included if we have GDAL library
-@HAVE_GDAL_TRUE@am__append_30 = @srcimplementation@/gdal_datum.h \
+@HAVE_GDAL_TRUE@am__append_32 = @srcimplementation@/gdal_datum.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_multi_band.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.h
-@HAVE_GDAL_TRUE@am__append_31 = @srcimplementation@/gdal_datum.cc \
+@HAVE_GDAL_TRUE@am__append_33 = @srcimplementation@/gdal_datum.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.cc \
@@ -204,7 +206,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.cc
 #  geocalinc_HEADERS+= @srcimplementation@/gdal_multi_file.h
 #  libgeocal_la_SOURCES+= @srcimplementation@/gdal_multi_file.cc
-@HAVE_GDAL_TRUE@am__append_32 =  \
+@HAVE_GDAL_TRUE@am__append_34 =  \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_datum_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem_test.cc \
@@ -215,36 +217,36 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_simulated_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_simulated_ray_caster_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
-@HAVE_HDF5_TRUE@am__append_33 = @srcimplementation@/hdf_orbit_test.cc \
+@HAVE_HDF5_TRUE@am__append_35 = @srcimplementation@/hdf_orbit_test.cc \
 @HAVE_HDF5_TRUE@	@srcimplementation@/orbit_quaternion_list_offset_test.cc
-@HAVE_CARTO_TRUE@am__append_34 = @srcimplementation@/eci_tod_burl_test.cc
-@HAVE_FFTW_TRUE@am__append_35 = @srcimplementation@/phase_correlation_matcher_test.cc
-@HAVE_GDAL_TRUE@am__append_36 = @srccartlab@/vicar_ogr.h
-@HAVE_GDAL_TRUE@am__append_37 = @srccartlab@/vicar_ogr.cc
-@HAVE_GDAL_TRUE@am__append_38 = @srccartlab@/vicar_ogr_test.cc
-@HAVE_CARTO_TRUE@am__append_39 = $(SWIG_SRC_CARTO)
-@HAVE_FFTW_TRUE@am__append_40 = $(SWIG_SRC_FFTW)
-@HAVE_HDF5_TRUE@am__append_41 = $(SWIG_SRC_HDF5)
-@HAVE_CARTO_TRUE@@HAVE_HDF5_TRUE@am__append_42 = $(SWIG_SRC_HDF5_CARTO)
-@HAVE_GDAL_TRUE@am__append_43 = $(SWIG_SRC_GDAL)
-@HAVE_VICAR_RTL_TRUE@am__append_44 = $(SWIG_SRC_VICAR_RTL)
-@HAVE_GDAL_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_45 = $(SWIG_SRC_GDAL_VICAR_RTL)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_46 = $(addprefix \
+@HAVE_CARTO_TRUE@am__append_36 = @srcimplementation@/eci_tod_burl_test.cc
+@HAVE_FFTW_TRUE@am__append_37 = @srcimplementation@/phase_correlation_matcher_test.cc
+@HAVE_GDAL_TRUE@am__append_38 = @srccartlab@/vicar_ogr.h
+@HAVE_GDAL_TRUE@am__append_39 = @srccartlab@/vicar_ogr.cc
+@HAVE_GDAL_TRUE@am__append_40 = @srccartlab@/vicar_ogr_test.cc
+@HAVE_CARTO_TRUE@am__append_41 = $(SWIG_SRC_CARTO)
+@HAVE_FFTW_TRUE@am__append_42 = $(SWIG_SRC_FFTW)
+@HAVE_HDF5_TRUE@am__append_43 = $(SWIG_SRC_HDF5)
+@HAVE_CARTO_TRUE@@HAVE_HDF5_TRUE@am__append_44 = $(SWIG_SRC_HDF5_CARTO)
+@HAVE_GDAL_TRUE@am__append_45 = $(SWIG_SRC_GDAL)
+@HAVE_VICAR_RTL_TRUE@am__append_46 = $(SWIG_SRC_VICAR_RTL)
+@HAVE_GDAL_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_47 = $(SWIG_SRC_GDAL_VICAR_RTL)
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_48 = $(addprefix \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(INCLUDE_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@BUILD_AFIDS_FALSE@am__append_47 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_48 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_49 = @srcpythonscript@/vicarb
-@INSTALL_PYNITF_TRUE@am__append_50 = install-pynitf
-@INSTALL_PYNITF_TRUE@am__append_51 = uninstall-pynitf
-@INSTALL_PYNITF_TRUE@am__append_52 = clean-pynitf
-@CODE_COVERAGE_ENABLED_TRUE@am__append_53 = --cov-report term \
+@BUILD_AFIDS_FALSE@am__append_49 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_50 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_51 = @srcpythonscript@/vicarb
+@INSTALL_PYNITF_TRUE@am__append_52 = install-pynitf
+@INSTALL_PYNITF_TRUE@am__append_53 = uninstall-pynitf
+@INSTALL_PYNITF_TRUE@am__append_54 = clean-pynitf
+@CODE_COVERAGE_ENABLED_TRUE@am__append_55 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_54 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_55 = install_python_doc
+@HAVE_VICAR_RTL_TRUE@am__append_56 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_57 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -265,6 +267,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ac_hdf5.m4 \
 	$(top_srcdir)/config/m4/ac_hdfeos5.m4 \
 	$(top_srcdir)/config/m4/ac_is_mac.m4 \
+	$(top_srcdir)/config/m4/ac_msp.m4 \
 	$(top_srcdir)/config/m4/ac_mspi_shared.m4 \
 	$(top_srcdir)/config/m4/ac_ogdi.m4 \
 	$(top_srcdir)/config/m4/ac_openjpeg.m4 \
@@ -751,7 +754,7 @@ _swig_wrap_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(LDFLAGS) -o $@
 am__DEPENDENCIES_1 =
 libgeocal_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__append_9) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__append_11) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcsupport@/auto_derivative.cc @srcsupport@/array_ad.cc \
@@ -1456,7 +1459,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcoco3@/geocal_test_all-jia_sample_test.$(OBJEXT)
 geocal_test_all_OBJECTS = $(am_geocal_test_all_OBJECTS)
 geocal_test_all_DEPENDENCIES = libgeocal.la $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) $(am__append_10) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) $(am__append_12) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 geocal_test_all_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
@@ -2677,6 +2680,9 @@ MKDIR_P = @MKDIR_P@
 MSPI_SHARED_BUILD_DEPEND = @MSPI_SHARED_BUILD_DEPEND@
 MSPI_SHARED_CFLAGS = @MSPI_SHARED_CFLAGS@
 MSPI_SHARED_LIBS = @MSPI_SHARED_LIBS@
+MSP_CFLAGS = @MSP_CFLAGS@
+MSP_LIBS = @MSP_LIBS@
+MSP_PREFIX = @MSP_PREFIX@
 NM = @NM@
 NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
@@ -2764,6 +2770,7 @@ geocalpkgpythondir = @geocalpkgpythondir@
 geocalsupportdir = @geocalsupportdir@
 geocalswigincdir = @geocalswigincdir@
 geocalunittestdata = @geocalunittestdata@
+have_msp = @have_msp@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -2835,8 +2842,8 @@ noop =
 #=================================================================
 # libgeocal: The main library
 lib_LTLIBRARIES = libgeocal.la
-noinst_LTLIBRARIES = $(am__append_15)
-bin_SCRIPTS = $(am__append_49)
+noinst_LTLIBRARIES = $(am__append_17)
+bin_SCRIPTS = $(am__append_51)
 dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_dir \
 	$(srcdir)/$(srcpythonbin)/shelve_show \
@@ -2881,13 +2888,13 @@ AM_LDFLAGS =
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
 BUILT_SOURCES = complain_if_afids dummy.pdf test_out/vicar_copy.img \
-	$(am__append_46)
+	$(am__append_48)
 include_HEADERS = 
 # Test files
 
 # Test files
 EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
-	$(am__append_11) @srcsdbx@/README \
+	$(am__append_13) @srcsdbx@/README \
 	@srcsdbx@/StorageConcepts.txt @libgeocal@/dummy.pdf \
 	@libgeocal@/geocal_doxygen.h @srcsupport@/unit_test_support.h \
 	@srcsupport@/global_fixture.h @srcinterface@/matcher_fixture.h \
@@ -3104,10 +3111,10 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_12) $(am__append_50) $(am__append_55)
-UNINSTALL_HOOK = $(am__append_13) $(am__append_51) \
+INSTALL_DATA_HOOK = $(am__append_14) $(am__append_52) $(am__append_57)
+UNINSTALL_HOOK = $(am__append_15) $(am__append_53) \
 	clean_install_python_doc
-CLEAN_HOOK = clean_unit_test $(am__append_14) $(am__append_52)
+CLEAN_HOOK = clean_unit_test $(am__append_16) $(am__append_54)
 INSTALLCHECK_HOOK = python_check
 
 # Make sure we don't have any pyc or pycache files floating around
@@ -3140,8 +3147,8 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcsupport@/geocal_gsl_root.cc @srcsupport@/geocal_time.cc \
 	@srcsupport@/covariance.cc @srcsupport@/statistic.cc \
 	@srcsupport@/geocal_serialize_function.cc \
-	@srcsupport@/blitz_array_serialize_support.cc $(am__append_19) \
-	$(am__append_21) @srcinterface@/raster_image.cc \
+	@srcsupport@/blitz_array_serialize_support.cc $(am__append_21) \
+	$(am__append_23) @srcinterface@/raster_image.cc \
 	@srcinterface@/with_parameter.cc \
 	@srcinterface@/raster_image_variable.cc \
 	@srcinterface@/sub_raster_image.cc \
@@ -3206,7 +3213,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/rpc_image_ground_connection.cc \
 	@srcimplementation@/ipi_image_ground_connection.cc \
 	@srcimplementation@/eci_tod.cc \
-	@srcimplementation@/planet_coordinate.cc $(am__append_25) \
+	@srcimplementation@/planet_coordinate.cc $(am__append_27) \
 	@srcimplementation@/quaternion_camera.cc \
 	@srcimplementation@/camera_rational_polynomial.cc \
 	@srcimplementation@/camera_radial_distortion.cc \
@@ -3221,9 +3228,9 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/igc_collection_rolling_shutter.cc \
 	@srcimplementation@/igc_collection_orbit_data.cc \
 	@srcimplementation@/rolling_shutter_constant_time_table.cc \
-	@srcimplementation@/piecewise_linear.cc $(am__append_27) \
+	@srcimplementation@/piecewise_linear.cc $(am__append_29) \
 	@srcimplementation@/quadratic_geometric_model.cc \
-	@srcimplementation@/geometric_model_image.cc $(am__append_29) \
+	@srcimplementation@/geometric_model_image.cc $(am__append_31) \
 	@srcimplementation@/orbit_quaternion_list_offset.cc \
 	@srcimplementation@/orbit_correction.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
@@ -3252,7 +3259,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/rsm_image_ground_connection.cc \
 	@srcimplementation@/mola_dem_file.cc \
 	@srcimplementation@/context_sqrt_decode_image.cc \
-	$(am__append_31) @srcimplementation@/spice_helper.cc \
+	$(am__append_33) @srcimplementation@/spice_helper.cc \
 	@srcimplementation@/sdp_helper.cc @srccartlab@/argus_camera.cc \
 	@srccartlab@/argus_orbit.cc @srccartlab@/quickbird_camera.cc \
 	@srccartlab@/spot_camera.cc @srccartlab@/spot_orbit.cc \
@@ -3269,7 +3276,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srccartlab@/vicar_argument.cc @srccartlab@/vicar_dem.cc \
 	@srccartlab@/vicar_file.cc @srccartlab@/vicar_raster_image.cc \
 	@srccartlab@/datum_geoid96.cc @srccartlab@/srtm_dem.cc \
-	$(am__append_37) @srcmspi@/ifstream_cs.cc \
+	$(am__append_39) @srcmspi@/ifstream_cs.cc \
 	@srcmspi@/air_mspi_file.cc @srcmspi@/mspi_config_file.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/mspi_gimbal.cc @srcmspi@/air_mspi_orbit.cc \
@@ -3462,8 +3469,8 @@ libgeocal_la_LDFLAGS = $(am__append_1) -R $(BOOST_LIBDIR) \
 	-L$(BOOST_LIBDIR) $(BOOST_REGEX_LIB) $(BOOST_DATETIME_LIB) \
 	$(BOOST_IOSTREAMS_LIB) $(BOOST_FILESYSTEM_LIB) \
 	$(BOOST_SERIALIZATION_LIB) $(BLITZ_LIBS) $(am__append_3) \
-	$(am__append_5) $(am__append_7) $(GSL_LIBS) $(FFTW_LIBS) \
-	$(SDP_LDFLAGS) $(CODE_COVERAGE_LIBS)
+	$(am__append_5) $(am__append_7) $(am__append_9) $(GSL_LIBS) \
+	$(FFTW_LIBS) $(SDP_LDFLAGS) $(CODE_COVERAGE_LIBS)
 dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
@@ -3473,8 +3480,8 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_54)
-dist_afidspythonvdev_DATA = $(am__append_17) \
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_56)
+dist_afidspythonvdev_DATA = $(am__append_19) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
@@ -3516,8 +3523,8 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	@srcsupport@/geocal_serialize_function.h \
 	@srcsupport@/geocal_serialize_support.h \
-	@srcsupport@/blitz_array_serialize_support.h $(am__append_18) \
-	$(am__append_20) @srcsupport@/tre_support.h \
+	@srcsupport@/blitz_array_serialize_support.h $(am__append_20) \
+	$(am__append_22) @srcsupport@/tre_support.h \
 	@srcinterface@/raster_image.h @srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
 	@srcinterface@/sub_raster_image.h \
@@ -3588,7 +3595,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/rpc_image_ground_connection.h \
 	@srcimplementation@/ipi_image_ground_connection.h \
 	@srcimplementation@/eci_tod.h \
-	@srcimplementation@/planet_coordinate.h $(am__append_24) \
+	@srcimplementation@/planet_coordinate.h $(am__append_26) \
 	@srcimplementation@/quaternion_camera.h \
 	@srcimplementation@/camera_rational_polynomial.h \
 	@srcimplementation@/camera_radial_distortion.h \
@@ -3603,9 +3610,9 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/igc_collection_rolling_shutter.h \
 	@srcimplementation@/igc_collection_orbit_data.h \
 	@srcimplementation@/rolling_shutter_constant_time_table.h \
-	@srcimplementation@/piecewise_linear.h $(am__append_26) \
+	@srcimplementation@/piecewise_linear.h $(am__append_28) \
 	@srcimplementation@/quadratic_geometric_model.h \
-	@srcimplementation@/geometric_model_image.h $(am__append_28) \
+	@srcimplementation@/geometric_model_image.h $(am__append_30) \
 	@srcimplementation@/orbit_quaternion_list_offset.h \
 	@srcimplementation@/orbit_correction.h \
 	@srcimplementation@/orbit_offset_correction.h \
@@ -3633,7 +3640,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/rsm_image_ground_connection.h \
 	@srcimplementation@/mola_dem_file.h \
 	@srcimplementation@/context_sqrt_decode_image.h \
-	$(am__append_30) @srcimplementation@/spice_helper.h \
+	$(am__append_32) @srcimplementation@/spice_helper.h \
 	@srcimplementation@/sdp_helper.h @srccartlab@/argus_camera.h \
 	@srccartlab@/argus_orbit.h @srccartlab@/quickbird_camera.h \
 	@srccartlab@/spot_camera.h @srccartlab@/spot_orbit.h \
@@ -3649,7 +3656,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srccartlab@/vicar_dem.h @srccartlab@/vicar_file.h \
 	@srccartlab@/vicar_tiled_file.h \
 	@srccartlab@/vicar_raster_image.h @srccartlab@/datum_geoid96.h \
-	@srccartlab@/srtm_dem.h $(am__append_36) \
+	@srccartlab@/srtm_dem.h $(am__append_38) \
 	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h \
 	@srcmspi@/air_mspi_file.h @srcmspi@/mspi_config_file.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
@@ -3850,7 +3857,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/geocal_gsl_root_test.cc \
 	@srcsupport@/covariance_test.cc @srcsupport@/statistic_test.cc \
 	@srcsupport@/blitz_array_serialize_support_test.cc \
-	$(am__append_22) $(am__append_23) \
+	$(am__append_24) $(am__append_25) \
 	@srcinterface@/constant_raster_image_test.cc \
 	@srcinterface@/memory_raster_image_test.cc \
 	@srcinterface@/sub_raster_image_test.cc \
@@ -3874,7 +3881,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcinterface@/ccorr_lsm_matcher_test.cc \
 	@srcinterface@/orbit_test.cc @srcinterface@/geocal_rpc_test.cc \
 	@srcinterface@/rpc_image_test.cc @srcinterface@/ipi_test.cc \
-	$(am__append_32) $(am__append_33) \
+	$(am__append_34) $(am__append_35) \
 	@srcimplementation@/spice_helper_test.cc \
 	@srcimplementation@/sdp_helper_test.cc \
 	@srcimplementation@/did_datum_test.cc \
@@ -3897,7 +3904,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/rpc_image_ground_connection_test.cc \
 	@srcimplementation@/ipi_image_ground_connection_test.cc \
 	@srcimplementation@/eci_tod_test.cc \
-	@srcimplementation@/planet_coordinate_test.cc $(am__append_34) \
+	@srcimplementation@/planet_coordinate_test.cc $(am__append_36) \
 	@srcimplementation@/quaternion_camera_test.cc \
 	@srcimplementation@/camera_rational_polynomial_test.cc \
 	@srcimplementation@/camera_radial_distortion_test.cc \
@@ -3907,7 +3914,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/ray_intersect_test.cc \
 	@srcimplementation@/igc_image_to_image_match_test.cc \
 	@srcimplementation@/surface_image_to_image_match_test.cc \
-	@srcimplementation@/dem_match_test.cc $(am__append_35) \
+	@srcimplementation@/dem_match_test.cc $(am__append_37) \
 	@srcimplementation@/quadratic_geometric_model_test.cc \
 	@srcimplementation@/geometric_model_image_test.cc \
 	@srcimplementation@/igc_ray_caster_test.cc \
@@ -3939,7 +3946,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/rsm_image_ground_connection_test.cc \
 	@srcimplementation@/mola_dem_file_test.cc \
 	@srcimplementation@/context_sqrt_decode_image_test.cc \
-	@srcimplementation@/sensrb_camera_test.cc $(am__append_38) \
+	@srcimplementation@/sensrb_camera_test.cc $(am__append_40) \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
 	@srccartlab@/quickbird_camera_test.cc \
@@ -3976,18 +3983,18 @@ libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
 	$(CODE_COVERAGE_CPPFLAGS) $(am__append_2) $(am__append_4) \
-	$(am__append_6) $(am__append_8)
+	$(am__append_6) $(am__append_8) $(am__append_10)
 EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND) \
 	$(CARTO_BUILD_DEPEND)
 libgeocal_la_LIBADD = $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(FLIBS) \
-	$(am__append_9) $(SPICE_LIBS) $(MSPI_SHARED_LIBS)
+	$(am__append_11) $(SPICE_LIBS) $(MSPI_SHARED_LIBS)
 
 #=================================================================
 # Unit test
 norm_raw = $(shell cd $(abs_srcdir)/@srcraw@; pwd)
 norm_sdbx = $(shell cd $(abs_srcdir)/@srcsdbx@; pwd)
 geocal_test_all_LDADD = libgeocal.la $(CARTO_LIBS) $(VICAR_RTL_LIBS) \
-	$(SPICE_LIBS) $(am__append_10) $(GDAL_LIBS) \
+	$(SPICE_LIBS) $(am__append_12) $(GDAL_LIBS) \
 	$(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install 
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS) \
@@ -4059,9 +4066,9 @@ sdbx_HEADERS = @srcsdbx@/sdbx/BTree.h @srcsdbx@/sdbx/DiskTreeBackend.h \
 pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py $(patsubst \
 	%_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
-INCLUDE_SWIG_SRC = $(SWIG_SRC) $(am__append_39) $(am__append_40) \
-	$(am__append_41) $(am__append_42) $(am__append_43) \
-	$(am__append_44) $(am__append_45)
+INCLUDE_SWIG_SRC = $(SWIG_SRC) $(am__append_41) $(am__append_42) \
+	$(am__append_43) $(am__append_44) $(am__append_45) \
+	$(am__append_46) $(am__append_47)
 FULL_SWIG_SRC = $(SWIG_SRC) $(SWIG_SRC_CARTO) $(SWIG_SRC_FFTW) \
 	$(SWIG_SRC_HDF5) $(SWIG_SRC_HDF5_CARTO) $(SWIG_SRC_GDAL) \
 	$(SWIG_SRC_VICAR_RTL) $(SWIG_SRC_GDAL_VICAR_RTL)
@@ -4075,7 +4082,7 @@ _swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
 _swig_wrap_la_LDFLAGS = -module -avoid-version
 _swig_wrap_la_LIBADD = libgeocal.la
 _swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC) @swigsrc@/swig_wrap.cc
-installafidspython_DATA = $(am__append_47) $(am__append_48)
+installafidspython_DATA = $(am__append_49) $(am__append_50)
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py @srcpythonlib@/output_cache.py \
@@ -4141,7 +4148,7 @@ PYTEST_NJOB = 10
 # Note useful flags to use here might be PYTEST_EXTRAFLAGS="--instafail" or
 # PYTEST_EXTRAFLAGS="--timeout=20"
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_53)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_55)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am

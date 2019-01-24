@@ -14,4 +14,10 @@ if ($?PATH) then
 else
   setenv PATH ${AFIDSPYTHONTOP}/bin
 endif
+if("@have_msp@" == "yes") then
+    setenv MSP_DATA_DIR @MSP_PREFIX@/data
+    setenv MSPCCS_DATA @MSP_PREFIX@/data
+    setenv CSM_PLUGIN_DIR @MSP_PREFIX@/plugins/
+endif
+
 

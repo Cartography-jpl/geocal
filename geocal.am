@@ -124,6 +124,11 @@ if HAVE_AFIDS_DATA
 export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
 export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
 endif
+if HAVE_MSP
+export MSP_DATA_DIR=$(MSP_PREFIX)/data
+export MSPCCS_DATA=$(MSP_PREFIX)/data
+export CSM_PLUGIN_DIR=$(MSP_PREFIX)/plugins/
+endif
 export VICAR_GDALPLUGIN_HOME
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
 

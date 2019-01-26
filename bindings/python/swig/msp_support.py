@@ -187,7 +187,7 @@ def have_msp_supported():
     """
 
     bool GeoCal::have_msp_supported()
-
+    Return true if we were built with MSP support, false otherwise. 
     """
     return _msp_support.have_msp_supported()
 

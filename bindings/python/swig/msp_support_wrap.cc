@@ -6733,7 +6733,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"have_msp_supported", (PyCFunction)_wrap_have_msp_supported, METH_NOARGS, (char *)"\n"
 		"\n"
 		"bool GeoCal::have_msp_supported()\n"
-		"\n"
+		"Return true if we were built with MSP support, false otherwise. \n"
 		""},
 	 { (char *)"msp_terrain_point", _wrap_msp_terrain_point, METH_VARARGS, (char *)"\n"
 		"\n"

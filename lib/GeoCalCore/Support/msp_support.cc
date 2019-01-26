@@ -17,7 +17,7 @@ using namespace GeoCal;
 /// otherwise. 
 //-----------------------------------------------------------------------
 
-bool GeoCal::have_serialize_supported()
+bool GeoCal::have_msp_supported()
 {
 #ifdef HAVE_MSP
   return true;

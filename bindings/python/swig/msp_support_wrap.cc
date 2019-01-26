@@ -6620,6 +6620,27 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_have_msp_supported(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"have_msp_supported",0,0,0)) SWIG_fail;
+  {
+    try {
+      result = (bool)GeoCal::have_msp_supported();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_msp_terrain_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
@@ -6709,6 +6730,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
+	 { (char *)"have_msp_supported", (PyCFunction)_wrap_have_msp_supported, METH_NOARGS, (char *)"\n"
+		"\n"
+		"bool GeoCal::have_msp_supported()\n"
+		"\n"
+		""},
 	 { (char *)"msp_terrain_point", _wrap_msp_terrain_point, METH_VARARGS, (char *)"\n"
 		"\n"
 		"Ecr GeoCal::msp_terrain_point(const std::string &Fname, const ImageCoordinate &Ic)\n"

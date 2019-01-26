@@ -183,6 +183,14 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.ground_coordinate
 
+def have_msp_supported():
+    """
+
+    bool GeoCal::have_msp_supported()
+
+    """
+    return _msp_support.have_msp_supported()
+
 def msp_terrain_point(Fname, Ic):
     """
 
@@ -196,7 +204,7 @@ def msp_terrain_point(Fname, Ic):
     """
     return _msp_support.msp_terrain_point(Fname, Ic)
 
-__all__ = ["msp_terrain_point"]
+__all__ = ["have_msp_supported","msp_terrain_point"]
 
 
 

@@ -13,6 +13,20 @@
 using namespace GeoCal;
 
 //-----------------------------------------------------------------------
+/// Return true if we were built with MSP support, false
+/// otherwise. 
+//-----------------------------------------------------------------------
+
+bool GeoCal::have_serialize_supported()
+{
+#ifdef HAVE_MSP
+  return true;
+#else
+  return false;
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// This uses an image in a NITF file and the sensor attached to it
 /// (e.g. RPC, RSM, SENSRB) to find the ground location for a
 /// particular image point. This is meant for comparison with our own

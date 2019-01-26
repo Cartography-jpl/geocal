@@ -9,6 +9,9 @@ BOOST_FIXTURE_TEST_SUITE(msp_support, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(msp_terrain_point_test)
 {
+  if(!have_msp_supported())
+    return;
+  
   // Verify that we calculate the same value using a RPC and MSP. This
   // is the simplest test case, the RPC is well tested so this should
   // agree pretty close to exactly.

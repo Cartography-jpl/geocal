@@ -56,7 +56,8 @@ This should be used to set and read the DES values.
             raise RuntimeError("Need to have nitf_file set for image segment level %d" % lv)
         possible = [d for d in f.des_segment if
                     d.subheader.desid == "CSEPHB" and
-                    lv in d.des.user_subheader.aisdlvl]
+                    (d.des.user_subheader.numais == "ALL" or
+                     lv in d.des.user_subheader.aisdlvl)]
         if(len(possible) == 0):
             return None
         if(len(possible) > 1):
@@ -70,7 +71,8 @@ This should be used to set and read the DES values.
             raise RuntimeError("Need to have nitf_file set for image segment level %d" % lv)
         possible = [d for d in f.des_segment if
                     d.subheader.desid == "CSATTB" and
-                    lv in d.des.user_subheader.aisdlvl]
+                    (d.des.user_subheader.numais == "ALL" or
+                     lv in d.des.user_subheader.aisdlvl)]
         if(len(possible) == 0):
             return None
         if(len(possible) > 1):

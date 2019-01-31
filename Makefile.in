@@ -1475,7 +1475,8 @@ geocal_test_all_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 am__picmtch5_SOURCES_DIST = @srcgeocalbin@/picmtch5.cc
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am_picmtch5_OBJECTS = @srcgeocalbin@/picmtch5-picmtch5.$(OBJEXT)
 picmtch5_OBJECTS = $(am_picmtch5_OBJECTS)
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_DEPENDENCIES = libgeocal.la
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_DEPENDENCIES = libgeocal.la \
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(am__DEPENDENCIES_1)
 am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
@@ -4068,7 +4069,7 @@ sdbx_HEADERS = @srcsdbx@/sdbx/BTree.h @srcsdbx@/sdbx/DiskTreeBackend.h \
 @BUILD_LIBRAW_TRUE@libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_SOURCES = @srcgeocalbin@/picmtch5.cc
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf $(CARTO_BUILD_DEPEND)
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_LDADD = libgeocal.la
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_LDADD = libgeocal.la $(MSP_LIBS)
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_CPPFLAGS = $(AM_CPPFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(VICAR_RTL_CFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(BOOST_CPPFLAGS) \

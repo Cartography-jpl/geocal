@@ -9,6 +9,12 @@ try:
 except ImportError:
     pass
 import geocal
+have_pynitf = False
+try:
+    import pynitf
+    have_pynitf = True
+except ImportError:
+    pass
 from tempfile import NamedTemporaryFile
 import subprocess
 import os
@@ -87,6 +93,11 @@ with NamedTemporaryFile() as tmp:
     except (NameError, AttributeError) as exc:
         pass
 
+    # Check for RSM
+    rsm = None
+    if(have_pynitf):
+        rsm = pynitf.NitfFile(args.input_file).image_segment[args.image - 1].rsm
+    
     # Sometimes have a rpc value in a NITF file is actually invalid. We
     # identify this by trying to use the RPC
     rpc_is_valid = fin.has_rpc
@@ -96,7 +107,7 @@ with NamedTemporaryFile() as tmp:
                                       geocal.SimpleDem())
         except:
             rpc_is_valid = False
-    if(rpc_is_valid and args.dem):
+    if((rpc_is_valid or rsm) and args.dem):
         dem = geocal.GdalDem(args.dem)
         for i,ic in enumerate([geocal.ImageCoordinate(0.5,0.5),
                                geocal.ImageCoordinate(0.5,
@@ -105,7 +116,10 @@ with NamedTemporaryFile() as tmp:
                                                fin.number_sample - 0.5),
                                geocal.ImageCoordinate(fin.number_line - 0.5,
                                                       0.5)]):
-            pt = fin.rpc.ground_coordinate(ic, dem)
+            if(rsm):
+                pt = rsm.ground_coordinate(ic, dem)
+            else:
+                pt = fin.rpc.ground_coordinate(ic, dem)
             fvrt["NITF_CORNERLON%d" % (i + 1)] = str(pt.longitude)
             fvrt["NITF_CORNERLAT%d" % (i + 1)] = str(pt.latitude)
         mi = fvrt.map_info_from_nitf_corner(True)
@@ -125,6 +139,18 @@ with NamedTemporaryFile() as tmp:
         except OSError:
             # Ok if file doesn't exist
             pass
+
+    # Add RSM if we find one. GDAL doesn't handle this on its own.
+    if(rsm):
+        f = geocal.VicarFile(args.output_vicar, geocal.VicarFile.UPDATE)
+        f.rsm = rsm
+        # Might also have RPC, if we find both only use the RSM
+        for lb in f.label_list():
+            if(re.match("GEOTIFF RPC", lb)):
+                prop, lbnm = re.split(' ', lb)
+                f.label_delete(lbnm, prop)
+        f.close()
+            
     # GDAL will always convert the RPC to format B. If the underlying NITF is format
     # A we want to update the VICAR file to also be A format.
     if(rpc_is_valid):

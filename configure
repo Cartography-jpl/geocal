@@ -1768,8 +1768,8 @@ Optional Packages:
                           use MSPI-Shared (default is yes if found) - it is
                           possible to specify the root directory for
                           MSPI-Shared (optional).
-  --with-msp[=DIR]        use MSP (default is yes if found) - it is possible
-                          to specify the root directory for MSP (optional).
+  --with-msp[=DIR]        use MSP (default is no) - it is possible to specify
+                          the root directory for MSP (optional).
   --with-boost[=DIR]      use BOOST (default is yes if found) - it is possible
                           to specify the root directory for BOOST (optional).
                           You can also specify "build" if you want to build
@@ -19492,18 +19492,7 @@ if test "${with_msp+set}" = set; then :
 
 else
 
-    want_msp="yes"
-    if test "cannot_build" = "can_build"; then
-      if test "default_search" = "default_build" -o "$THIRDPARTY" = "build"; then
-        want_msp="yes"
-        build_msp="yes"
-        ac_msp_path="\${prefix}"
-      elif test "$THIRDPARTY" = "build_needed"; then
-        want_msp="yes"
-        build_needed_msp="yes"
-      fi
-    fi
-
+    want_msp="no"
 fi
 
 fi

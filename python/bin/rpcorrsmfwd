@@ -1,0 +1,35 @@
+#! /usr/bin/env python
+#
+# This implements the rpcorrsmfwd routine. This is a replacement for rpcfwd
+# which adds support for images with RSM rather than RPC
+
+import geocal
+import sys
+
+t = geocal.VicarArgument(sys.argv)
+
+ibisfname, fname = t["inp"]
+loncolind, latcolind, elvcolind, lincolind, smpcolind = t["cols"]
+
+rpcorrsm = geocal.VicarRasterImage(fname).rsm
+if(rpcorrsm is None):
+    rpcorrsm = geocal.VicarRasterImage(fname).rpc
+    
+ifile = geocal.IbisFile(ibisfname, geocal.IbisFile.UPDATE)
+latcol = ifile.column(latcolind-1)
+loncol = ifile.column(loncolind-1)
+elvcol = ifile.column(elvcolind-1)
+lincol = ifile.column(lincolind-1)
+smpcol = ifile.column(smpcolind-1)
+for i in range(ifile.shape[0]):
+    ic = rpcorrsm.image_coordinate(geocal.Geodetic(latcol[i],loncol[i],
+                                                   elvcol[i]))
+    # Convert to 1 based VICAR coordinates. Note I'm fairly certain the RPC
+    # and RSM use our normal ImageCoordinate convention of (0,0) being the
+    # center of the upper left pixel. VICAR calls this (1,1) so we need to
+    # convert. This is 1/2 a pixel different than what the old rpcfwd
+    # calculated, but I believe we are correct here and the rpcfwd program
+    # was wrong.
+    ic = geocal.VicarImageCoordinate(ic)
+    lincol[i] = ic.line
+    smpcol[i] = ic.sample

@@ -195,8 +195,10 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
     This is the top level class which provides access to mapping from
     GroundCoordinate to ImageCoordinate and vice versa.
 
-    Note that this class will likely be changed/updated in the future,
-    this is mostly a placeholder for now.
+    Note that the same ambiguity mentioned in the Rpc comments exist here,
+    it isn't clear the exact definition of row/sample in the standard. For
+    the Rpc, I'm fairly sure that it matches our ImageCoordinate
+    convention - (0,0) is the center of the upper left corner pixel.
 
     C++ includes: rsm.h 
     """

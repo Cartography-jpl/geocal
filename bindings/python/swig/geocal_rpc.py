@@ -215,6 +215,16 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     whole numbers. This limitation is not present in the VICAR file
     format.
 
+    It has never been 100% clear what "line and sample" means according
+    to the standard. The best I can determine, the RPC is set up so
+    integer values are the center of a pixel, e.g., (0,0) is the center of
+    the upper left pixel. This seems to be the convention used by WV-2,
+    seehttps://trac.osgeo.org/gdal/ticket/5993. Note that GDAL uses a
+    convention where the upper left corner of the bounding box is (0,0)
+    (so the center of the pixel is (0.5,0.5)). This is not the convention
+    used by ImageCoordinate, so while the referenced ticket mentions a 0.5
+    offset being needed we don't actually need to do that in our code.
+
     C++ includes: geocal_rpc.h 
     """
 

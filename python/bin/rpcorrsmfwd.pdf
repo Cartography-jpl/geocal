@@ -1,0 +1,53 @@
+PROCESS       HELP=*
+PARM INP      TYPE=(STRING,99) COUNT=2
+PARM COLS     TYPE=INT COUNT=5 DEFAULT=(1,2,3,4,5)
+END-PROC
+.TITLE
+VICAR Program rpcorrsmfwd
+.HELP
+PURPOSE
+
+     This is like RPCFWD, but works with file that either has a RPC
+     or a RSM. Otherwise, this should be a drop in replacement.
+
+.PAGE
+TAE COMMAND LINE FORMAT
+
+     rpcorrsmfwd INP=(A,B) COLS=(C1,C2,C3,C4,C5)
+     
+     where
+
+     A           is an IBIS file 
+     B		 is a VICAR image with a GeoTIFF label with RPC or a
+                      standalone ascii GeoTIFF label with RPC
+     COLS        are the IBIS file columns (integers) contain-
+                      ing the (lon,lat,elev) and to contain the
+                      (line,sample) 
+.PAGE
+OPERATION
+   The GeoTIFF label is accessed and the RPC or RSM is read.  The (lon,lat,elv)
+   columns of the ibis file are read, then plugged into the RPC or RSM to yield
+   the (line,samp) columns.
+
+   Note the original rpcfwd add 0.5 pixels to the line and sample calculated
+   by the RPC. It isn't really clear why this done, I don't think this is
+   actually the correct behavior. Not sure if we should duplicate this for
+   some obscure reason, or if we should just return the actual line/sample.
+   We are currently doing what I think is "right", so this will be 0.5 pixels
+   off from the old rpc program.
+
+.PAGE
+WRITTEN BY:            Mike Smyth, 01 Feb 2019
+
+COGNIZANT PROGRAMMER:  Mike Smyth
+
+REVISIONS: 
+
+.LEVEL1
+.VARIABLE INP
+Input/output IBIS table and
+GeoTIFF reference with RPC's
+.VARIABLE COLS
+Map columns in IBIS file for
+(lon,lat,elev,line,sample)
+.END

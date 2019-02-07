@@ -11,8 +11,10 @@ t = geocal.VicarArgument(sys.argv)
 ibisfname, fname = t["inp"]
 loncolind, latcolind, elvcolind, lincolind, smpcolind = t["cols"]
 
-rpcorrsm = geocal.VicarRasterImage(fname).rsm
-if(rpcorrsm is None):
+f = geocal.VicarRasterImage(fname)
+if(f.has_rsm):
+    rpcorrsm = geocal.VicarRasterImage(fname).rsm
+else:
     rpcorrsm = geocal.VicarRasterImage(fname).rpc
     
 ifile = geocal.IbisFile(ibisfname, geocal.IbisFile.UPDATE)

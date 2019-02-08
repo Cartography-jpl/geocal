@@ -70,6 +70,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_geometric_model)(void);
   INIT_TYPE INIT_FUNC(_raster_multifile)(void);
   INIT_TYPE INIT_FUNC(_did_datum)(void);
+  INIT_TYPE INIT_FUNC(_misc_array_function)(void);
   INIT_TYPE INIT_FUNC(_dem_map_info_offset)(void);
   INIT_TYPE INIT_FUNC(_map_info_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_geotiff_file)(void);
@@ -294,6 +295,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_geometric_model", INIT_FUNC(_geometric_model));
   INIT_MODULE(module, "_raster_multifile", INIT_FUNC(_raster_multifile));
   INIT_MODULE(module, "_did_datum", INIT_FUNC(_did_datum));
+  INIT_MODULE(module, "_misc_array_function", INIT_FUNC(_misc_array_function));
   INIT_MODULE(module, "_dem_map_info_offset", INIT_FUNC(_dem_map_info_offset));
   INIT_MODULE(module, "_map_info_image_ground_connection", INIT_FUNC(_map_info_image_ground_connection));
   INIT_MODULE(module, "_geotiff_file", INIT_FUNC(_geotiff_file));

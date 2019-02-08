@@ -7,6 +7,8 @@
 # Source files for library
 libgeocal_la_SOURCES+= @srcimplementation@/did_datum.cc
 geocalinc_HEADERS+= @srcimplementation@/did_datum.h
+libgeocal_la_SOURCES+= @srcimplementation@/misc_array_function.cc
+geocalinc_HEADERS+= @srcimplementation@/misc_array_function.h
 geocalinc_HEADERS+= @srcimplementation@/dem_map_info_offset.h
 libgeocal_la_SOURCES+= @srcimplementation@/dem_map_info_offset.cc
 geocalinc_HEADERS+= @srcimplementation@/map_info_image_ground_connection.h
@@ -230,6 +232,8 @@ geocal_test_all_SOURCES+= @srcimplementation@/sdp_helper_test.cc
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/did_datum_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/did_datum.i
+SWIG_SRC += @swigsrc@/misc_array_function_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/misc_array_function.i
 SWIG_SRC += @swigsrc@/dem_map_info_offset_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/dem_map_info_offset.i
 SWIG_SRC += @swigsrc@/map_info_image_ground_connection_wrap.cc
@@ -426,6 +430,7 @@ SWIG_SRC += @swigsrc@/context_sqrt_decode_image_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/context_sqrt_decode_image.i
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/misc_array_function_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_map_info_offset_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/geotiff_file_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/ground_mask_image_test.cc

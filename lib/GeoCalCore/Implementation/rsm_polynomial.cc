@@ -253,7 +253,7 @@ blitz::Array<double, 1> RsmPolynomial::jacobian
     zpow(i) = zpow(i-1) * Z;
   for(int i = 0; i < coefficient_.rows(); ++i)
     for(int j = 0; j < coefficient_.cols(); ++j)
-      for(int k = 0; k < coefficient_.cols(); ++k) {
+      for(int k = 0; k < coefficient_.depth(); ++k) {
 	if(i > 0)
 	  res(0) += coefficient_(i,j,k) * i * xpow(i-1) * ypow(j) * zpow(k);
 	if(j > 0)

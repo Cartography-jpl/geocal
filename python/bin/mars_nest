@@ -12,7 +12,7 @@ import re
 import geocal
 import os
 
-version = "September 27,2018"
+version = "February 26, 2019"
 usage='''Usage:
   mars_nest [options] <ref_image> <ref_base_name> 
             <ref_image_resolution_name> <image> <image_base_name> 
@@ -161,6 +161,15 @@ Options:
        Tolerance used to reject matched points as blunders.
        [default: 1.5]
 
+  --use-map-info=f
+       Like --use-projection, specifies an image with a projection 
+       georeference to be used for the output registered products instead of 
+       the projection of the input Reference or Second images.
+       In addition, the ref_image_resolution_name version of files will
+       exactly match the pixel size and extent of the given image (e.g.,
+       you can load them both in xvd). This is useful when bringing a set
+       of images into one overall common set.
+
   --use-projection=f
        Specifies an image with a projection georeference to be used
        for the output registered products instead of the pro-
@@ -188,6 +197,7 @@ long_name_to_vicar = { "ref_image" : "refimg",
                        "band_image" : "bandimg",
                        "border" : "border",
                        "hirise_correction" : "hirisecorr",
+                       "use_map_info" : "usemap",
                        "use_projection" : "useproj",
                        "use_ref_image_projection" : "userefproj"}
 
@@ -333,6 +343,10 @@ if(args.use_projection):
     use_projection_fixed = "%s_proj.vrt" % (args.image_base_name)
     geocal.mars_fix_projection(args.use_projection, use_projection_fixed,1,
                                hirise_correction=args.hirise_correction)
+if(args.use_map_info):
+    use_projection_fixed = "%s_proj.vrt" % (args.image_base_name)
+    geocal.mars_fix_projection(args.use_map_info, use_projection_fixed,1,
+                               hirise_correction=args.hirise_correction)
 if(not check_intersection(refimg_fixed, img_fixed)):
     raise RuntimeError("The two images have no area of intersection")
 if(args.scale_image != 1.0):
@@ -343,7 +357,7 @@ if(args.use_ref_image_projection):
     img_fixed_reproj = "%s_reproj.img" % (args.image_base_name)
     resample_proj(img_fixed, refimg_fixed, img_fixed_reproj, fit_fref=False)
     img_fixed = img_fixed_reproj
-if(args.use_projection):
+if(args.use_projection or args.use_map_info):
     img_fixed_reproj = "%s_reproj.img" % (args.image_base_name)
     resample_proj(img_fixed, use_projection_fixed, img_fixed_reproj,
                   fit_fref=False)
@@ -394,6 +408,9 @@ else:
         ic_current = current_img.coordinate(original_img.ground_coordinate(ic_original))
         tp.image_coordinate(0,ic_current)
 run_warp_image(img_res2, refimg_res2, tpcol, cimg_res2)
+if(args.use_map_info):
+    resample_proj(refimg_fixed, use_projection_fixed, refimg_res1, resize=True)
+    resample_proj(img_res2, use_projection_fixed, img_res1, resize=True)
 if(args.ref_image_resolution_name != args.image_resolution_name):
     resample_proj(cimg_res2, refimg_res1, cimg_res1, resize=True)
 if(not args.tiepoint_name or args.tiepoint_name == ""):    

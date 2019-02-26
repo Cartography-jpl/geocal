@@ -24,6 +24,7 @@ parm scl type=real count=1 default=1.0
 parm seed type=int default=562
 parm thr_res type=real count=1 default=10.0
 parm toler type=real count=1 default=1.5 valid=(0.0:20.0)
+parm usemap type=(string,99) count=1 default="" 
 parm useproj type=(string,99) count=1 default="" 
 parm userefproj type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC
@@ -194,7 +195,23 @@ the (lower) resolution of the
 Reference image.
 .variable toler
 Tolerance used to reject matched
-points as blunders. 
+points as blunders.
+.variable usemap
+Like useproj, specifies an
+image with a projection
+georeference to be used for the
+output registered products
+instead of the projection of
+the input Reference or Second
+images. In addition, the
+ref_image_resolution_name 
+version of files will exactly
+match the pixel size and extent
+of the given image (e.g., you
+can load them both in xvd).
+This is useful when bringing
+a set of images into one
+overall common set.
 .variable useproj
 Specifies an image with a
 projection georeference to be

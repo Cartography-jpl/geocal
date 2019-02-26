@@ -80,6 +80,8 @@ geocalinc_HEADERS+= @srcimplementation@/eci_tod.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod.cc
 geocalinc_HEADERS+= @srcimplementation@/planet_coordinate.h
 libgeocal_la_SOURCES+= @srcimplementation@/planet_coordinate.cc
+geocalinc_HEADERS+= @srcimplementation@/iterative_morphological_dilation.h
+libgeocal_la_SOURCES+= @srcimplementation@/iterative_morphological_dilation.cc
 if HAVE_CARTO
 geocalinc_HEADERS+= @srcimplementation@/eci_tod_burl.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod_burl.cc
@@ -352,6 +354,8 @@ SWIG_SRC += @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/orbit_data_image_ground_connection.i
 SWIG_SRC += @swigsrc@/planet_coordinate_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/planet_coordinate.i
+SWIG_SRC += @swigsrc@/iterative_morphological_dilation_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/iterative_morphological_dilation.i
 SWIG_SRC += @swigsrc@/igc_ray_caster_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/igc_ray_caster.i
 SWIG_SRC += @swigsrc@/igc_rolling_shutter_wrap.cc
@@ -451,6 +455,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/rpc_image_ground_connection_test.c
 geocal_test_all_SOURCES+= @srcimplementation@/ipi_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/planet_coordinate_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/iterative_morphological_dilation_test.cc
 if HAVE_CARTO
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_burl_test.cc
 endif

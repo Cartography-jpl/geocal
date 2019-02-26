@@ -12,7 +12,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
 		   1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0,
 		   2048, 1024, 18e-6, 21e-6,
 		   123.8e-3, FrameCoordinate(2048/2, 1024/2));
-  std::cerr << cam << "\n";
+  //std::cerr << cam << "\n";
+  
   // blitz::Array<double, 2> kappa(3,3);
   // kappa = 1, 0, 0,
   //         0, 1, 0,

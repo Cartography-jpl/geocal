@@ -2,13 +2,16 @@
 #include "geocal_serialize_support.h"
 
 using namespace GeoCal;
+using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void IterativeMorphologicalDilation::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IterativeMorphologicalDilation);
-  //ar & GEOCAL_NVP(min_tm) & GEOCAL_NVP(max_tm);
+  ar & GEOCAL_NVP_(filled_image) & GEOCAL_NVP_(filled_mask)
+    & GEOCAL_NVP_(kernel) & GEOCAL_NVP_(fill_order)
+    & GEOCAL_NVP_(iteration_count);
 }
 
 GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
@@ -18,7 +21,10 @@ GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
 /// Constructor.
 ///
 /// The Mask is "true" where we don't have Image data and wish to fill
-/// in data (i.e., this is the same sense as ImageMask)
+/// in data (i.e., this is the same sense as ImageMask).
+///
+/// The Kernel to use to fill in the missing data values should have
+/// an odd extent.
 ///
 /// Right now, this just works with blitz arrays. We could extend this
 /// to work with RasterImage and ImageMask. But this is often called
@@ -28,9 +34,126 @@ GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
 
 IterativeMorphologicalDilation::IterativeMorphologicalDilation
 (const blitz::Array<double, 2>& Image,
- const blitz::Array<bool, 2>& Mask)
+ const blitz::Array<bool, 2>& Mask,
+ const blitz::Array<double, 2>& Kernel, FillOrder Fill_order)
+: filled_image_(Image.copy()),
+  filled_mask_(Mask.copy()),
+  kernel_(Kernel.copy()),
+  fill_order_(Fill_order),
+  iteration_count_(0)
 {
   if(Image.rows() != Mask.rows() ||
      Image.cols() != Mask.cols())
     throw Exception("Image and Mask need to be the same size");
+  if(Kernel.rows() % 2 != 1 || Kernel.cols() % 2 != 1)
+    throw Exception("The Kernel needs to be an odd size");
+}
+
+//-----------------------------------------------------------------------
+/// Dilate the mask with a simple 3x3 kernel of all 1's. Subtract the
+/// original mask - so this returns nonzero for all the new "edge"
+/// pixels. Because it is useful, fill the nonzero values with a count
+/// of neighbors in the original mask (this can be useful to fill in
+/// points with the most neighbors first in an iteration). So this
+/// returns all masked pixels that have at least one immediate neighbor.
+//-----------------------------------------------------------------------
+
+blitz::Array<unsigned short int, 2>
+IterativeMorphologicalDilation::masked_neighbor_count() const
+{
+  Array<unsigned short int, 2> res(filled_mask_.shape());
+  for(int i = 0; i < res.rows(); ++i)
+    for(int j = 0; j < res.cols(); ++j)
+      if(filled_mask_(i,j)) {
+	Range r1(std::max(i-1,0), std::min(i+1,res.rows()-1));
+	Range r2(std::max(j-1,0), std::min(j+1,res.cols()-1));
+	res(i, j) = blitz::count(!filled_mask_(r1,r2));
+      } else
+	res(i,j) = 0;
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// Do an iteration of filling in the data. Return true if there was
+/// data to modify, false otherwise (e.g., we have completed filling
+/// in the data).
+//-----------------------------------------------------------------------
+
+bool IterativeMorphologicalDilation::fill_iteration()
+{
+  blitz::Array<unsigned short int, 2>  mcount = masked_neighbor_count();
+  bool any_change = false;
+  if(fill_order_ == C_ORDER)
+    any_change = fill_iteration_c_order(mcount);
+  if(any_change)
+    ++iteration_count_;
+  return any_change;
+}
+
+//-----------------------------------------------------------------------
+/// Iteratively fill in missing data until everything is filled. This
+/// just runs fill_iteration() until there is nothing left.
+//-----------------------------------------------------------------------
+
+void IterativeMorphologicalDilation::fill_missing_data()
+{
+  while(fill_iteration())
+    ;
+}
+
+//-----------------------------------------------------------------------
+/// Do fill_iteration in C order.
+//-----------------------------------------------------------------------
+  
+bool IterativeMorphologicalDilation::fill_iteration_c_order
+(const blitz::Array<unsigned short int, 2>& mcount)
+{
+  bool any_change = false;
+  for(int i = 0; i < mcount.rows(); ++i)
+    for(int j = 0; j < mcount.cols(); ++j)
+      if(mcount(i,j) > 0) {
+	filled_image_(i,j) = neighborhood_average(i,j);
+	filled_mask_(i,j) = false;
+	any_change = true;
+      }
+  return any_change;
+}
+  
+//-----------------------------------------------------------------------
+/// Neighborhood average for the given pixel. We only include data
+/// that as filled_mask_ false, and we normalize by the portion of the
+/// kernel included.
+//-----------------------------------------------------------------------
+
+double IterativeMorphologicalDilation::neighborhood_average(int i, int j) const
+{
+  int krhs = (kernel_.rows() - 1) / 2;
+  int kchs = (kernel_.cols() - 1) / 2;
+  double sum = 0;
+  double ksum = 0;
+  int count = 0;
+  for(int ii = -krhs; ii <= krhs; ++ii)
+    if(i + ii > 0 && i + ii < filled_mask_.rows())
+      for(int jj = -kchs; jj <= kchs; ++jj)
+	if(j + jj > 0 && j + jj < filled_mask_.cols() &&
+	   !filled_mask_(i+ii,j+jj)) {
+	  ++count;
+	  sum += kernel_(ii+krhs,jj+kchs) * filled_image_(i+ii,j+jj);
+	  ksum += kernel_(ii+krhs,jj+kchs);
+	}
+  if(count == 0)
+    throw Exception("No data found in neighborhood");
+  return sum / ksum;
+}
+
+void IterativeMorphologicalDilation::print(std::ostream& Os) const
+{
+  Os << "IterativeMorphologicalDilation:\n"
+     << "  image:          " << filled_image_.rows() << " x "
+     << filled_image_.cols() << "\n"
+     <<  " kernel:          " << kernel_.rows() << " x "
+     << kernel_.cols() << "\n"
+     <<  " fill_order:      "
+     << (fill_order_ == C_ORDER ? "C_ORDER" : "Unknown") << "\n"
+     <<  " iteration_count: " << iteration_count_ << "\n";
 }

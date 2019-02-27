@@ -195,15 +195,151 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
+    C_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_C_ORDER
+
+    def __init__(self, *args):
+        """
+
+        IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >
+        &Mask, const blitz::Array< double, 2 > &Kernel, FillOrder
+        Fill_order=C_ORDER)
+        Constructor.
+
+        The Mask is "true" where we don't have Image data and wish to fill
+        in data (i.e., this is the same sense as ImageMask).
+
+        The Kernel to use to fill in the missing data values should have an
+        odd extent.
+
+        Right now, this just works with blitz arrays. We could extend this to
+        work with RasterImage and ImageMask. But this is often called from
+        python, which interacts better with blitz arrays (which map to numpy
+        arrays in python). 
+        """
+        _iterative_morphological_dilation.IterativeMorphologicalDilation_swiginit(self, _iterative_morphological_dilation.new_IterativeMorphologicalDilation(*args))
+
+    def _v_filled_image(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::IterativeMorphologicalDilation::filled_image() const
+        Image that has been filled in for missing data. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_filled_image(self)
+
+
+    @property
+    def filled_image(self):
+        return self._v_filled_image()
+
+
+    def _v_filled_mask(self):
+        """
+
+        const blitz::Array<bool, 2>& GeoCal::IterativeMorphologicalDilation::filled_mask() const
+        Mask for filled_image. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_filled_mask(self)
+
+
+    @property
+    def filled_mask(self):
+        return self._v_filled_mask()
+
+
+    def _v_kernel(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::IterativeMorphologicalDilation::kernel() const
+        Kernel used for neighborhood averaging to fill in missing data. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_kernel(self)
+
+
+    @property
+    def kernel(self):
+        return self._v_kernel()
+
+
+    def _v_fill_order(self):
+        """
+
+        FillOrder GeoCal::IterativeMorphologicalDilation::fill_order() const
+        Order that we fill in values for a iteration of the fill. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_fill_order(self)
+
+
+    @property
+    def fill_order(self):
+        return self._v_fill_order()
+
+
+    def _v_iteration_count(self):
+        """
+
+        int GeoCal::IterativeMorphologicalDilation::iteration_count() const
+        The iteration count for filling in the data. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_iteration_count(self)
+
+
+    @property
+    def iteration_count(self):
+        return self._v_iteration_count()
+
+
+    def fill_missing_data(self):
+        """
+
+        void IterativeMorphologicalDilation::fill_missing_data()
+        Iteratively fill in missing data until everything is filled.
+
+        This just runs fill_iteration() until there is nothing left. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation_fill_missing_data(self)
+
+
+    def neighborhood_average(self, i, j):
+        """
+
+        double IterativeMorphologicalDilation::neighborhood_average(int i, int j) const
+        Neighborhood average for the given pixel.
+
+        We only include data that as filled_mask_ false, and we normalize by
+        the portion of the kernel included. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation_neighborhood_average(self, i, j)
+
+
+    def masked_neighbor_count(self):
+        """
+
+        blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::masked_neighbor_count() const
+        Dilate the mask with a simple 3x3 kernel of all 1's.
+
+        Subtract the original mask - so this returns nonzero for all the new
+        "edge" pixels. Because it is useful, fill the nonzero values with a
+        count of neighbors in the original mask (this can be useful to fill in
+        points with the most neighbors first in an iteration). So this returns
+        all masked pixels that have at least one immediate neighbor. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation_masked_neighbor_count(self)
+
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _iterative_morphological_dilation.delete_IterativeMorphologicalDilation
+IterativeMorphologicalDilation.__str__ = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation___str__, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_filled_image = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_filled_image, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_filled_mask = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_filled_mask, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_kernel = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_kernel, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_fill_order = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_fill_order, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_iteration_count = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_iteration_count, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation.fill_missing_data = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_fill_missing_data, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation.neighborhood_average = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_neighborhood_average, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation.masked_neighbor_count = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_masked_neighbor_count, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation_swigregister = _iterative_morphological_dilation.IterativeMorphologicalDilation_swigregister
 IterativeMorphologicalDilation_swigregister(IterativeMorphologicalDilation)
 

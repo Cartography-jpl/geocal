@@ -4,6 +4,7 @@ import scipy
 import scipy.ndimage
 import matplotlib.pyplot as plt
 import geocal
+import math
 
 # Fill in missing/bad pixels
 
@@ -83,3 +84,35 @@ def test_outlier():
              (left_diff_local_med > left_thresh).astype(int))
     is_bad = nfail >= nfail_thresh
     print(np.argwhere(nfail >= nfail_thresh))
+
+def test_fill():
+    '''Fill in data after we detect bad pixels'''
+    sz = 100
+    original_data = np.empty((sz,sz))
+    fill_data = np.linspace(0.0,10.0, sz)
+    for i in range(original_data.shape[0]):
+        original_data[i, :] = fill_data + fill_data[i]
+    mask = np.empty((sz,sz))
+    mask[:,:] = False
+    original_data[10:16,20:31] = -9999
+    mask[10:16,20:31] = True
+    kernel = np.empty((5,5))
+    krhs = 2
+    kchs = 2
+    sigma = 1.0
+    for i in range(-krhs, krhs+1):
+        for j in range(-kchs, kchs+1):
+            kernel[i+krhs,j+kchs] = math.exp(-(i*i + j*j) / (2*sigma*sigma))
+    if(False):
+        plt.imshow(original_data, cmap=plt.cm.gray, vmin=0.0,
+                   vmax=20.0)
+        plt.show()
+    m = geocal.IterativeMorphologicalDilation(original_data, mask, kernel)
+    m.fill_missing_data()
+    print(m.filled_image[10:16,20:31])
+    if(False):
+        plt.imshow(m.filled_image, cmap=plt.cm.gray, vmin=0.0,
+                   vmax=20.0)
+        plt.show()
+    
+

@@ -6505,7 +6505,7 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_0(PyObject *
   blitz::Array< double,2 > *arg1 = 0 ;
   blitz::Array< bool,2 > *arg2 = 0 ;
   blitz::Array< double,2 > *arg3 = 0 ;
-  GeoCal::IterativeMorphologicalDilation::FillOrder arg4 ;
+  GeoCal::IterativeMorphologicalDilation::FrontierFillOrder arg4 ;
   blitz::Array< double,2 > a1 ;
   PythonObject numpy1 ;
   blitz::Array< bool,2 > a2 ;
@@ -6570,9 +6570,9 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_0(PyObject *
   }
   ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IterativeMorphologicalDilation" "', argument " "4"" of type '" "GeoCal::IterativeMorphologicalDilation::FillOrder""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IterativeMorphologicalDilation" "', argument " "4"" of type '" "GeoCal::IterativeMorphologicalDilation::FrontierFillOrder""'");
   } 
-  arg4 = static_cast< GeoCal::IterativeMorphologicalDilation::FillOrder >(val4);
+  arg4 = static_cast< GeoCal::IterativeMorphologicalDilation::FrontierFillOrder >(val4);
   {
     try {
       result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,arg4);
@@ -6694,7 +6694,7 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation(PyObject *self, Py
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IterativeMorphologicalDilation'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,blitz::Array< double,2 > const &,GeoCal::IterativeMorphologicalDilation::FillOrder)\n"
+    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,blitz::Array< double,2 > const &,GeoCal::IterativeMorphologicalDilation::FrontierFillOrder)\n"
     "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,blitz::Array< double,2 > const &)\n");
   return 0;
 }
@@ -6914,7 +6914,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_fill_order(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_frontier_fill_order(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
   void *argp1 = 0 ;
@@ -6922,7 +6922,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_fill_order(PyObject
   boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > tempshared1 ;
   boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  GeoCal::IterativeMorphologicalDilation::FillOrder result;
+  GeoCal::IterativeMorphologicalDilation::FrontierFillOrder result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -6930,7 +6930,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_fill_order(PyObject
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation__v_fill_order" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation__v_frontier_fill_order" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
@@ -6943,7 +6943,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_fill_order(PyObject
   }
   {
     try {
-      result = (GeoCal::IterativeMorphologicalDilation::FillOrder)((GeoCal::IterativeMorphologicalDilation const *)arg1)->fill_order();
+      result = (GeoCal::IterativeMorphologicalDilation::FrontierFillOrder)((GeoCal::IterativeMorphologicalDilation const *)arg1)->frontier_fill_order();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7042,7 +7042,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_neighborhood_average(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_predicted_value(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
   int arg2 ;
@@ -7058,12 +7058,12 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_neighborhood_average(P
   PyObject *swig_obj[3] ;
   double result;
   
-  if (!SWIG_Python_UnpackTuple(args,"IterativeMorphologicalDilation_neighborhood_average",3,3,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"IterativeMorphologicalDilation_predicted_value",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation_neighborhood_average" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation_predicted_value" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
@@ -7076,17 +7076,17 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_neighborhood_average(P
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IterativeMorphologicalDilation_neighborhood_average" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IterativeMorphologicalDilation_predicted_value" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "IterativeMorphologicalDilation_neighborhood_average" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "IterativeMorphologicalDilation_predicted_value" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
   {
     try {
-      result = (double)((GeoCal::IterativeMorphologicalDilation const *)arg1)->neighborhood_average(arg2,arg3);
+      result = (double)((GeoCal::IterativeMorphologicalDilation const *)arg1)->predicted_value(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7100,7 +7100,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_masked_neighbor_count(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbor_count(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
   void *argp1 = 0 ;
@@ -7116,7 +7116,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_masked_neighbor_count(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation_masked_neighbor_count" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation_frontier_pixel_neighbor_count" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
@@ -7129,7 +7129,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_masked_neighbor_count(
   }
   {
     try {
-      result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->masked_neighbor_count();
+      result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->frontier_pixel_neighbor_count();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7233,8 +7233,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_IterativeMorphologicalDilation", _wrap_new_IterativeMorphologicalDilation, METH_VARARGS, (char *)"\n"
 		"\n"
 		"IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >\n"
-		"&Mask, const blitz::Array< double, 2 > &Kernel, FillOrder\n"
-		"Fill_order=C_ORDER)\n"
+		"&Mask, const blitz::Array< double, 2 > &Kernel, FrontierFillOrder\n"
+		"Frontier_fill_order=C_ORDER)\n"
 		"Constructor.\n"
 		"\n"
 		"The Mask is \"true\" where we don't have Image data and wish to fill\n"
@@ -7264,10 +7264,10 @@ static PyMethodDef SwigMethods[] = {
 		"const blitz::Array<double, 2>& GeoCal::IterativeMorphologicalDilation::kernel() const\n"
 		"Kernel used for neighborhood averaging to fill in missing data. \n"
 		""},
-	 { (char *)"IterativeMorphologicalDilation__v_fill_order", (PyCFunction)_wrap_IterativeMorphologicalDilation__v_fill_order, METH_O, (char *)"\n"
+	 { (char *)"IterativeMorphologicalDilation__v_frontier_fill_order", (PyCFunction)_wrap_IterativeMorphologicalDilation__v_frontier_fill_order, METH_O, (char *)"\n"
 		"\n"
-		"FillOrder GeoCal::IterativeMorphologicalDilation::fill_order() const\n"
-		"Order that we fill in values for a iteration of the fill. \n"
+		"FrontierFillOrder GeoCal::IterativeMorphologicalDilation::frontier_fill_order() const\n"
+		"Order that we fill the frontier pixels in an iteration. \n"
 		""},
 	 { (char *)"IterativeMorphologicalDilation__v_iteration_count", (PyCFunction)_wrap_IterativeMorphologicalDilation__v_iteration_count, METH_O, (char *)"\n"
 		"\n"
@@ -7281,24 +7281,25 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This just runs fill_iteration() until there is nothing left. \n"
 		""},
-	 { (char *)"IterativeMorphologicalDilation_neighborhood_average", _wrap_IterativeMorphologicalDilation_neighborhood_average, METH_VARARGS, (char *)"\n"
+	 { (char *)"IterativeMorphologicalDilation_predicted_value", _wrap_IterativeMorphologicalDilation_predicted_value, METH_VARARGS, (char *)"\n"
 		"\n"
-		"double IterativeMorphologicalDilation::neighborhood_average(int i, int j) const\n"
-		"Neighborhood average for the given pixel.\n"
+		"double IterativeMorphologicalDilation::predicted_value(int i, int j) const\n"
+		"Predicted value for the given pixel.\n"
 		"\n"
 		"We only include data that as filled_mask_ false, and we normalize by\n"
 		"the portion of the kernel included. \n"
 		""},
-	 { (char *)"IterativeMorphologicalDilation_masked_neighbor_count", (PyCFunction)_wrap_IterativeMorphologicalDilation_masked_neighbor_count, METH_O, (char *)"\n"
+	 { (char *)"IterativeMorphologicalDilation_frontier_pixel_neighbor_count", (PyCFunction)_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbor_count, METH_O, (char *)"\n"
 		"\n"
-		"blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::masked_neighbor_count() const\n"
+		"blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::frontier_pixel_neighbor_count() const\n"
 		"Dilate the mask with a simple 3x3 kernel of all 1's.\n"
 		"\n"
 		"Subtract the original mask - so this returns nonzero for all the new\n"
-		"\"edge\" pixels. Because it is useful, fill the nonzero values with a\n"
-		"count of neighbors in the original mask (this can be useful to fill in\n"
-		"points with the most neighbors first in an iteration). So this returns\n"
-		"all masked pixels that have at least one immediate neighbor. \n"
+		"\"frontier\" pixels. Because it is useful, fill the nonzero values\n"
+		"with a count of neighbors in the original mask (this can be useful to\n"
+		"fill in points with the most neighbors first in an iteration). So this\n"
+		"returns all masked pixels that have at least one immediate neighbor.\n"
+		"\n"
 		""},
 	 { (char *)"delete_IterativeMorphologicalDilation", (PyCFunction)_wrap_delete_IterativeMorphologicalDilation, METH_O, (char *)"\n"
 		"\n"

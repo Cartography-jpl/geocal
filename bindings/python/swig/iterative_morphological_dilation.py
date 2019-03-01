@@ -202,8 +202,8 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
         """
 
         IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >
-        &Mask, const blitz::Array< double, 2 > &Kernel, FillOrder
-        Fill_order=C_ORDER)
+        &Mask, const blitz::Array< double, 2 > &Kernel, FrontierFillOrder
+        Frontier_fill_order=C_ORDER)
         Constructor.
 
         The Mask is "true" where we don't have Image data and wish to fill
@@ -261,18 +261,18 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
         return self._v_kernel()
 
 
-    def _v_fill_order(self):
+    def _v_frontier_fill_order(self):
         """
 
-        FillOrder GeoCal::IterativeMorphologicalDilation::fill_order() const
-        Order that we fill in values for a iteration of the fill. 
+        FrontierFillOrder GeoCal::IterativeMorphologicalDilation::frontier_fill_order() const
+        Order that we fill the frontier pixels in an iteration. 
         """
-        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_fill_order(self)
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_frontier_fill_order(self)
 
 
     @property
-    def fill_order(self):
-        return self._v_fill_order()
+    def frontier_fill_order(self):
+        return self._v_frontier_fill_order()
 
 
     def _v_iteration_count(self):
@@ -300,31 +300,32 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
         return _iterative_morphological_dilation.IterativeMorphologicalDilation_fill_missing_data(self)
 
 
-    def neighborhood_average(self, i, j):
+    def predicted_value(self, i, j):
         """
 
-        double IterativeMorphologicalDilation::neighborhood_average(int i, int j) const
-        Neighborhood average for the given pixel.
+        double IterativeMorphologicalDilation::predicted_value(int i, int j) const
+        Predicted value for the given pixel.
 
         We only include data that as filled_mask_ false, and we normalize by
         the portion of the kernel included. 
         """
-        return _iterative_morphological_dilation.IterativeMorphologicalDilation_neighborhood_average(self, i, j)
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation_predicted_value(self, i, j)
 
 
-    def masked_neighbor_count(self):
+    def frontier_pixel_neighbor_count(self):
         """
 
-        blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::masked_neighbor_count() const
+        blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::frontier_pixel_neighbor_count() const
         Dilate the mask with a simple 3x3 kernel of all 1's.
 
         Subtract the original mask - so this returns nonzero for all the new
-        "edge" pixels. Because it is useful, fill the nonzero values with a
-        count of neighbors in the original mask (this can be useful to fill in
-        points with the most neighbors first in an iteration). So this returns
-        all masked pixels that have at least one immediate neighbor. 
+        "frontier" pixels. Because it is useful, fill the nonzero values
+        with a count of neighbors in the original mask (this can be useful to
+        fill in points with the most neighbors first in an iteration). So this
+        returns all masked pixels that have at least one immediate neighbor.
+
         """
-        return _iterative_morphological_dilation.IterativeMorphologicalDilation_masked_neighbor_count(self)
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation_frontier_pixel_neighbor_count(self)
 
 
     def __reduce__(self):
@@ -335,11 +336,11 @@ IterativeMorphologicalDilation.__str__ = new_instancemethod(_iterative_morpholog
 IterativeMorphologicalDilation._v_filled_image = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_filled_image, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation._v_filled_mask = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_filled_mask, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation._v_kernel = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_kernel, None, IterativeMorphologicalDilation)
-IterativeMorphologicalDilation._v_fill_order = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_fill_order, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_frontier_fill_order = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_frontier_fill_order, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation._v_iteration_count = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_iteration_count, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation.fill_missing_data = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_fill_missing_data, None, IterativeMorphologicalDilation)
-IterativeMorphologicalDilation.neighborhood_average = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_neighborhood_average, None, IterativeMorphologicalDilation)
-IterativeMorphologicalDilation.masked_neighbor_count = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_masked_neighbor_count, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation.predicted_value = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_predicted_value, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation.frontier_pixel_neighbor_count = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_frontier_pixel_neighbor_count, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation_swigregister = _iterative_morphological_dilation.IterativeMorphologicalDilation_swigregister
 IterativeMorphologicalDilation_swigregister(IterativeMorphologicalDilation)
 

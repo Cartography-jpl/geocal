@@ -39,10 +39,10 @@ BOOST_FIXTURE_TEST_SUITE(iterative_morphological_dilation, MissingDataFixture)
 BOOST_AUTO_TEST_CASE(basic)
 {
   IterativeMorphologicalDilation m(data, mask, kernel);
-  // Check masked_neighbor_count. Should only be nonzero in our data
+  // Check frontier_pixel_neighbor_count. Should only be nonzero in our data
   // hole, and should have a count of 5 neighbors at the corners, 3 at
   // the edges, and zero elsewhere.
-  blitz::Array<unsigned short int, 2> ncount = m.masked_neighbor_count();
+  blitz::Array<unsigned short int, 2> ncount = m.frontier_pixel_neighbor_count();
   for(int i = 0; i < mask.rows(); ++i)
     for(int j = 0; j < mask.cols(); ++j)
       if(!mask(i,j))
@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE(basic)
       else 
 	BOOST_CHECK_EQUAL(hole_count(i,j), 0);
     }
-  BOOST_CHECK_CLOSE(m.neighborhood_average(10,20), 2.931835, 1e-2);
+  BOOST_CHECK_CLOSE(m.predicted_value(10,20), 2.931835, 1e-2);
   BOOST_CHECK(m.fill_iteration());
   BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.931835, 1e-2);
   BOOST_CHECK(m.filled_mask()(10,20) == false);

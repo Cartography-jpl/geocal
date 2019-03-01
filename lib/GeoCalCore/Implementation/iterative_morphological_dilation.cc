@@ -10,7 +10,7 @@ void IterativeMorphologicalDilation::serialize(Archive & ar, const unsigned int 
 {
   GEOCAL_GENERIC_BASE(IterativeMorphologicalDilation);
   ar & GEOCAL_NVP_(filled_image) & GEOCAL_NVP_(filled_mask)
-    & GEOCAL_NVP_(kernel) & GEOCAL_NVP_(fill_order)
+    & GEOCAL_NVP_(kernel) & GEOCAL_NVP_(frontier_fill_order)
     & GEOCAL_NVP_(iteration_count);
 }
 
@@ -35,11 +35,11 @@ GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
 IterativeMorphologicalDilation::IterativeMorphologicalDilation
 (const blitz::Array<double, 2>& Image,
  const blitz::Array<bool, 2>& Mask,
- const blitz::Array<double, 2>& Kernel, FillOrder Fill_order)
+ const blitz::Array<double, 2>& Kernel, FrontierFillOrder Frontier_fill_order)
 : filled_image_(Image.copy()),
   filled_mask_(Mask.copy()),
   kernel_(Kernel.copy()),
-  fill_order_(Fill_order),
+  frontier_fill_order_(Frontier_fill_order),
   iteration_count_(0)
 {
   if(Image.rows() != Mask.rows() ||
@@ -51,7 +51,7 @@ IterativeMorphologicalDilation::IterativeMorphologicalDilation
 
 //-----------------------------------------------------------------------
 /// Dilate the mask with a simple 3x3 kernel of all 1's. Subtract the
-/// original mask - so this returns nonzero for all the new "edge"
+/// original mask - so this returns nonzero for all the new "frontier"
 /// pixels. Because it is useful, fill the nonzero values with a count
 /// of neighbors in the original mask (this can be useful to fill in
 /// points with the most neighbors first in an iteration). So this
@@ -59,7 +59,7 @@ IterativeMorphologicalDilation::IterativeMorphologicalDilation
 //-----------------------------------------------------------------------
 
 blitz::Array<unsigned short int, 2>
-IterativeMorphologicalDilation::masked_neighbor_count() const
+IterativeMorphologicalDilation::frontier_pixel_neighbor_count() const
 {
   Array<unsigned short int, 2> res(filled_mask_.shape());
   for(int i = 0; i < res.rows(); ++i)
@@ -81,9 +81,9 @@ IterativeMorphologicalDilation::masked_neighbor_count() const
 
 bool IterativeMorphologicalDilation::fill_iteration()
 {
-  blitz::Array<unsigned short int, 2>  mcount = masked_neighbor_count();
+  blitz::Array<unsigned short int, 2>  mcount = frontier_pixel_neighbor_count();
   bool any_change = false;
-  if(fill_order_ == C_ORDER)
+  if(frontier_fill_order_ == C_ORDER)
     any_change = fill_iteration_c_order(mcount);
   if(any_change)
     ++iteration_count_;
@@ -112,7 +112,7 @@ bool IterativeMorphologicalDilation::fill_iteration_c_order
   for(int i = 0; i < mcount.rows(); ++i)
     for(int j = 0; j < mcount.cols(); ++j)
       if(mcount(i,j) > 0) {
-	filled_image_(i,j) = neighborhood_average(i,j);
+	filled_image_(i,j) = predicted_value(i,j);
 	filled_mask_(i,j) = false;
 	any_change = true;
       }
@@ -120,12 +120,12 @@ bool IterativeMorphologicalDilation::fill_iteration_c_order
 }
   
 //-----------------------------------------------------------------------
-/// Neighborhood average for the given pixel. We only include data
+/// Predicted value for the given pixel. We only include data
 /// that as filled_mask_ false, and we normalize by the portion of the
 /// kernel included.
 //-----------------------------------------------------------------------
 
-double IterativeMorphologicalDilation::neighborhood_average(int i, int j) const
+double IterativeMorphologicalDilation::predicted_value(int i, int j) const
 {
   int krhs = (kernel_.rows() - 1) / 2;
   int kchs = (kernel_.cols() - 1) / 2;
@@ -153,7 +153,7 @@ void IterativeMorphologicalDilation::print(std::ostream& Os) const
      << filled_image_.cols() << "\n"
      <<  " kernel:          " << kernel_.rows() << " x "
      << kernel_.cols() << "\n"
-     <<  " fill_order:      "
-     << (fill_order_ == C_ORDER ? "C_ORDER" : "Unknown") << "\n"
+     <<  " frontier_fill_order:      "
+     << (frontier_fill_order_ == C_ORDER ? "C_ORDER" : "Unknown") << "\n"
      <<  " iteration_count: " << iteration_count_ << "\n";
 }

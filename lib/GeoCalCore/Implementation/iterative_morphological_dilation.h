@@ -13,11 +13,11 @@ namespace GeoCal {
 *******************************************************************/
 class IterativeMorphologicalDilation : public Printable<IterativeMorphologicalDilation> {
 public:
-  enum FillOrder {C_ORDER=0};
+  enum FrontierFillOrder {C_ORDER=0};
   IterativeMorphologicalDilation(const blitz::Array<double, 2>& Image,
 				 const blitz::Array<bool, 2>& Mask,
 				 const blitz::Array<double, 2>& Kernel,
-				 FillOrder Fill_order = C_ORDER);
+				 FrontierFillOrder Frontier_fill_order = C_ORDER);
   virtual ~IterativeMorphologicalDilation() {}
 
 //-----------------------------------------------------------------------
@@ -40,10 +40,10 @@ public:
   const blitz::Array<double, 2>& kernel() const { return kernel_; }
 
 //-----------------------------------------------------------------------
-/// Order that we fill in values for a iteration of the fill.
+/// Order that we fill the frontier pixels in an iteration.
 //-----------------------------------------------------------------------
 
-  FillOrder fill_order() const { return fill_order_;}
+  FrontierFillOrder frontier_fill_order() const { return frontier_fill_order_;}
 
 //-----------------------------------------------------------------------
 /// The iteration count for filling in the data.
@@ -52,16 +52,16 @@ public:
 
   bool fill_iteration();
   void fill_missing_data();
-  double neighborhood_average(int i, int j) const;
+  double predicted_value(int i, int j) const;
   
-  blitz::Array<unsigned short int, 2> masked_neighbor_count() const;
+  blitz::Array<unsigned short int, 2> frontier_pixel_neighbor_count() const;
   virtual void print(std::ostream& Os) const;
 private:
   bool fill_iteration_c_order(const blitz::Array<unsigned short int, 2>& mcount);
   blitz::Array<double, 2> filled_image_;
   blitz::Array<bool, 2> filled_mask_;
   blitz::Array<double, 2> kernel_;
-  FillOrder fill_order_;
+  FrontierFillOrder frontier_fill_order_;
   int iteration_count_;
   IterativeMorphologicalDilation() {}
   friend class boost::serialization::access;

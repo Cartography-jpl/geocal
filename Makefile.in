@@ -285,6 +285,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/afids_python.m4 \
 	$(top_srcdir)/config/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/config/m4/ax_compare_version.m4 \
+	$(top_srcdir)/config/m4/ax_cxx_compile_stdcxx.m4 \
 	$(top_srcdir)/config/m4/geocal_source_directory.m4 \
 	$(top_srcdir)/config/m4/libtool.m4 \
 	$(top_srcdir)/config/m4/loc_msg.m4 \
@@ -2681,6 +2682,7 @@ GSL_CFLAGS = @GSL_CFLAGS@
 GSL_LIBS = @GSL_LIBS@
 HAVE_CSH = @HAVE_CSH@
 HAVE_CXX = @HAVE_CXX@
+HAVE_CXX11 = @HAVE_CXX11@
 HAVE_M4 = @HAVE_M4@
 HAVE_PATCH = @HAVE_PATCH@
 HAVE_PERL = @HAVE_PERL@

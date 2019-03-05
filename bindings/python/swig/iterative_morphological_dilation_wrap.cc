@@ -7646,7 +7646,7 @@ static PyMethodDef SwigMethods[] = {
 		"IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >\n"
 		"&Mask, int Window_size=3, double Sigma=-1, PredictionType\n"
 		"Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, FrontierFillOrder\n"
-		"Frontier_fill_order=C_ORDER)\n"
+		"Frontier_fill_order=RANDOM_ORDER)\n"
 		"Constructor.\n"
 		"\n"
 		"The Mask is \"true\" where we don't have Image data and wish to fill\n"

@@ -27,7 +27,7 @@ public:
 		 int Window_size = 3,
 		 double Sigma = -1,	 
 		 PredictionType Prediction_type = GAUSSIAN_WEIGHTED_AVERAGE,
-		 FrontierFillOrder Frontier_fill_order = C_ORDER);
+		 FrontierFillOrder Frontier_fill_order = RANDOM_ORDER);
   virtual ~IterativeMorphologicalDilation() {}
 
 //-----------------------------------------------------------------------

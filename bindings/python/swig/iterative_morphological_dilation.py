@@ -209,7 +209,7 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
         IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >
         &Mask, int Window_size=3, double Sigma=-1, PredictionType
         Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, FrontierFillOrder
-        Frontier_fill_order=C_ORDER)
+        Frontier_fill_order=RANDOM_ORDER)
         Constructor.
 
         The Mask is "true" where we don't have Image data and wish to fill

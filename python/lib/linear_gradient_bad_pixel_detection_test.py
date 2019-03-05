@@ -19,10 +19,13 @@ def test_linear_gradient_bad_pixel_detection():
     # Add a couple bad pixels
     original_data[100,200] = 40.0
     original_data[300,400] = -40.0
+    original_data[0,100] = -80
+    original_data[-1,-1] = 80
 
     bpixdetect = LinearGradientBadPixelDetection()
     is_bad = bpixdetect.bad_pixel_detection(original_data)
-    assert (np.argwhere(is_bad == True) == [[100, 200], [300, 400]]).all()
+    assert (np.argwhere(is_bad == True) == [[0,100], [100, 200], [300, 400],
+                                            [2047,2047]]).all()
     
 def test_bad_pixel_fill():
     '''Test bad pixel fill with IterativeMorphologicalDilation. 
@@ -53,7 +56,7 @@ def test_bad_pixel_fill():
         plt.imshow(data_with_bad_pixel, cmap=plt.cm.gray, vmin=0.0,
                    vmax=20.0)
         plt.show()
-    m = IterativeMorphologicalDilation(data_with_bad_pixel, mask, kernel)
+    m = IterativeMorphologicalDilation(data_with_bad_pixel, mask)
     m.fill_missing_data()
     if(False):
         print(m.filled_image[10:16,20:31])

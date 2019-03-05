@@ -30,7 +30,9 @@ BOOST_FIXTURE_TEST_SUITE(iterative_morphological_dilation, MissingDataFixture)
 
 BOOST_AUTO_TEST_CASE(basic)
 {
-  IterativeMorphologicalDilation m(data, mask);
+  IterativeMorphologicalDilation m(data, mask, 3, -1,
+     IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE,
+    IterativeMorphologicalDilation::C_ORDER);
   // Check frontier_pixel_neighbor_count. Should only be nonzero in our data
   // hole, and should have a count of 5 neighbors at the corners, 3 at
   // the edges, and zero elsewhere.
@@ -58,7 +60,9 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK(m.filled_mask()(10,20) == false);
   BOOST_CHECK_EQUAL(m.iteration_count(), 1);
 
-  IterativeMorphologicalDilation m2(data, mask);
+  IterativeMorphologicalDilation m2(data, mask, 3, -1,
+     IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE,
+    IterativeMorphologicalDilation::C_ORDER);
   m2.fill_missing_data();
   int nmask = count(m2.filled_mask() == true);
   BOOST_CHECK_EQUAL(nmask, 0);
@@ -81,7 +85,8 @@ BOOST_AUTO_TEST_CASE(most_neighbors_first)
 BOOST_AUTO_TEST_CASE(flat_average)
 {
   IterativeMorphologicalDilation m(data, mask, 3, -1,
-		   IterativeMorphologicalDilation::FLAT_WEIGHTED_AVERAGE);
+		   IterativeMorphologicalDilation::FLAT_WEIGHTED_AVERAGE,
+  	           IterativeMorphologicalDilation::C_ORDER);
   BOOST_CHECK_CLOSE(m.predicted_value(10,20), 2.949494, 1e-2);
   BOOST_CHECK(m.fill_iteration());
   BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.949494, 1e-2);
@@ -89,7 +94,8 @@ BOOST_AUTO_TEST_CASE(flat_average)
   BOOST_CHECK_EQUAL(m.iteration_count(), 1);
 
   IterativeMorphologicalDilation m2(data, mask, 3, -1,
-		   IterativeMorphologicalDilation::FLAT_WEIGHTED_AVERAGE);
+	    IterativeMorphologicalDilation::FLAT_WEIGHTED_AVERAGE,
+            IterativeMorphologicalDilation::C_ORDER);
   m2.fill_missing_data();
   int nmask = count(m2.filled_mask() == true);
   BOOST_CHECK_EQUAL(nmask, 0);
@@ -100,7 +106,8 @@ BOOST_AUTO_TEST_CASE(flat_average)
 BOOST_AUTO_TEST_CASE(median)
 {
   IterativeMorphologicalDilation m(data, mask, 3, -1,
-		   IterativeMorphologicalDilation::NEIGBORHOOD_MEDIAN);
+		   IterativeMorphologicalDilation::NEIGBORHOOD_MEDIAN,
+  	           IterativeMorphologicalDilation::C_ORDER);
   BOOST_CHECK_CLOSE(m.predicted_value(10,20), 2.92929, 1e-2);
   BOOST_CHECK(m.fill_iteration());
   BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.92929, 1e-2);
@@ -108,7 +115,8 @@ BOOST_AUTO_TEST_CASE(median)
   BOOST_CHECK_EQUAL(m.iteration_count(), 1);
 
   IterativeMorphologicalDilation m2(data, mask, 3, -1,
-		   IterativeMorphologicalDilation::NEIGBORHOOD_MEDIAN);
+	    IterativeMorphologicalDilation::NEIGBORHOOD_MEDIAN,
+            IterativeMorphologicalDilation::C_ORDER);
   m2.fill_missing_data();
   int nmask = count(m2.filled_mask() == true);
   BOOST_CHECK_EQUAL(nmask, 0);

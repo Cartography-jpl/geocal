@@ -25,12 +25,6 @@ class LinearGradientBadPixelDetection(object):
     make neighboring pixels look bad because they are different than 
     the neighbors.
 
-    Note that this algorithm will not find bad pixels that at the
-    corner of the image (or depending on the nfail_thresh, possibly
-    the edges) - there isn't enough information to distinguish a bad
-    pixel from the first pixel of the edge of a object that is past
-    the image.
-
     We use the following algorithm:
 
     1. Calculate the gradient in each of 4 directions (left,right,up,down).
@@ -43,16 +37,18 @@ class LinearGradientBadPixelDetection(object):
     5. A pixel "fails" the test for a particular direction if the 
        abs(gradient - local median) > threshold
     6. Count the number of failures out of the 4 directions. Compare to
-       a threshold (e.g., 3), and if we are >= nfail_thresh the pixel
-       is marked as bad.
+       a threshold percentage (e.g., 75.0), and if we are >= nfail_thresh 
+       the pixel is marked as bad. Note for edges and corners we only have 
+       3 and 2 directions, so the percentage is calculated using the number
+       of directions.
 
     '''
     def __init__(self, window_size = 7, percentile = 90.0, thresh_fact = 2,
-                 nfail_thresh = 3):
+                 nfail_thresh_percentage = 75.0):
         self.window_size = window_size
         self.percentile = percentile
         self.thresh_fact = thresh_fact
-        self.nfail_thresh = nfail_thresh
+        self.nfail_thresh_percentage = nfail_thresh_percentage
 
     def bad_pixel_detection(self, img):
         '''Take the given image as a 2d numpy array. Return a boolean array
@@ -107,9 +103,21 @@ class LinearGradientBadPixelDetection(object):
                  (up_diff_local_med > up_thresh).astype(int) +
                  (right_diff_local_med > right_thresh).astype(int) +
                  (left_diff_local_med > left_thresh).astype(int))
+        # Convert to percentage
+        npix = np.empty(nfail.shape)
+        npix[:,:]=4
+        npix[0,:]=3
+        npix[-1,:]=3
+        npix[:,0]=3
+        npix[:,-1]=3
+        npix[0,0]=2
+        npix[0,-1]=2
+        npix[-1,0]=2
+        npix[-1,-1]=2
+        nfail = nfail / npix * 100.0
 
         # Compare to threshold and return results as bad pixel mask
-        is_bad = nfail >= self.nfail_thresh
+        is_bad = nfail >= self.nfail_thresh_percentage
         return is_bad
 
 __all__ = ["LinearGradientBadPixelDetection",]

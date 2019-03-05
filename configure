@@ -19417,7 +19417,7 @@ $as_echo_n "checking for Hdfeos5 library... " >&6; }
         succeeded=no
         if test "$build_hdfeos5" == "yes"; then
             HDFEOS5_LIBS="libhe5_hdfeos.la"
-            HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.15/include"
+            HDFEOS5_CFLAGS="-I$srcdir/hdfeos/external/HDF-EOS/v5.1.16/include"
             succeeded=yes
         elif test "$ac_hdfeos5_path" != ""; then
             HDFEOS5_LIBS="-R$ac_hdfeos5_path/lib -L$ac_hdfeos5_path/lib -lhe5_hdfeos -lGctp"

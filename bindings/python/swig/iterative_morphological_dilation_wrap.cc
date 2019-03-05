@@ -5714,6 +5714,22 @@ SWIG_From_std_string  (const std::string& s)
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
+SWIGINTERN int
+SWIG_AsVal_unsigned_SS_int (PyObject * obj, unsigned int *val)
+{
+  unsigned long v;
+  int res = SWIG_AsVal_unsigned_SS_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v > UINT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< unsigned int >(v);
+    }
+  }  
+  return res;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -7365,6 +7381,36 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_set_random_seed(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  unsigned int arg1 ;
+  unsigned int val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_unsigned_SS_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "IterativeMorphologicalDilation_set_random_seed" "', argument " "1"" of type '" "unsigned int""'");
+  } 
+  arg1 = static_cast< unsigned int >(val1);
+  {
+    try {
+      GeoCal::IterativeMorphologicalDilation::set_random_seed(arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_fill_missing_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
@@ -7651,6 +7697,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"PredictionType GeoCal::IterativeMorphologicalDilation::prediction_type() const\n"
 		"Type of prediction to use. \n"
+		""},
+	 { (char *)"IterativeMorphologicalDilation_set_random_seed", (PyCFunction)_wrap_IterativeMorphologicalDilation_set_random_seed, METH_O, (char *)"\n"
+		"\n"
+		"static void GeoCal::IterativeMorphologicalDilation::set_random_seed(unsigned int S)\n"
+		"\n"
 		""},
 	 { (char *)"IterativeMorphologicalDilation_fill_missing_data", (PyCFunction)_wrap_IterativeMorphologicalDilation_fill_missing_data, METH_O, (char *)"\n"
 		"\n"
@@ -8808,6 +8859,7 @@ SWIG_init(void) {
   
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_C_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::C_ORDER)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::MOST_NEIGHBORS_FIRST)));
+  SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_RANDOM_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::RANDOM_ORDER)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::FLAT_WEIGHTED_AVERAGE)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::NEIGBORHOOD_MEDIAN)));

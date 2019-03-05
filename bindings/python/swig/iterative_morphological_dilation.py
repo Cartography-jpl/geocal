@@ -198,6 +198,7 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
     __repr__ = _swig_repr
     C_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_C_ORDER
     MOST_NEIGHBORS_FIRST = _iterative_morphological_dilation.IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST
+    RANDOM_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_RANDOM_ORDER
     FLAT_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE
     GAUSSIAN_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE
     NEIGBORHOOD_MEDIAN = _iterative_morphological_dilation.IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN
@@ -333,6 +334,16 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
         return self._v_prediction_type()
 
 
+    def set_random_seed(S):
+        """
+
+        static void GeoCal::IterativeMorphologicalDilation::set_random_seed(unsigned int S)
+
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation_set_random_seed(S)
+
+    set_random_seed = staticmethod(set_random_seed)
+
     def fill_missing_data(self):
         """
 
@@ -390,6 +401,14 @@ IterativeMorphologicalDilation.predicted_value = new_instancemethod(_iterative_m
 IterativeMorphologicalDilation.frontier_pixel_neighbor_count = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_frontier_pixel_neighbor_count, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation_swigregister = _iterative_morphological_dilation.IterativeMorphologicalDilation_swigregister
 IterativeMorphologicalDilation_swigregister(IterativeMorphologicalDilation)
+
+def IterativeMorphologicalDilation_set_random_seed(S):
+    """
+
+    static void GeoCal::IterativeMorphologicalDilation::set_random_seed(unsigned int S)
+
+    """
+    return _iterative_morphological_dilation.IterativeMorphologicalDilation_set_random_seed(S)
 
 
 __all__ = ["IterativeMorphologicalDilation"]

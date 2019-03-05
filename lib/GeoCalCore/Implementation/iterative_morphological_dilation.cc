@@ -1,4 +1,6 @@
 #include "iterative_morphological_dilation.h"
+#include "geocal_config.h"
+#include <algorithm>
 #include <boost/foreach.hpp>
 #include "geocal_serialize_support.h"
 
@@ -106,6 +108,9 @@ bool IterativeMorphologicalDilation::fill_iteration()
   case MOST_NEIGHBORS_FIRST:
     any_change = fill_iteration_most_neighbors_first(mcount);
     break;
+  case RANDOM_ORDER:
+    any_change = fill_iteration_random(mcount);
+    break;
   default:
     throw Exception("Unrecognized frontier_fill_order");
   }
@@ -179,6 +184,32 @@ bool IterativeMorphologicalDilation::fill_iteration_most_neighbors_first
       if(mcount(i,j) > 0)
 	fp.push_back(FrontierPixel(i, j, mcount(i,j)));
   std::sort(fp.begin(), fp.end(), neighbor_count_compare());
+  BOOST_FOREACH(const FrontierPixel& p, fp) {
+    filled_image_(p.i,p.j) = predicted_value(p.i,p.j);
+    filled_mask_(p.i,p.j) = false;
+    any_change = true;
+  }
+  return any_change;
+}
+
+//-----------------------------------------------------------------------
+/// Do fill_iteration in random order.
+//-----------------------------------------------------------------------
+  
+bool IterativeMorphologicalDilation::fill_iteration_random
+(const blitz::Array<unsigned short int, 2>& mcount)
+{
+  bool any_change = false;
+  std::vector<FrontierPixel> fp;
+  for(int i = 0; i < mcount.rows(); ++i)
+    for(int j = 0; j < mcount.cols(); ++j)
+      if(mcount(i,j) > 0)
+	fp.push_back(FrontierPixel(i, j, mcount(i,j)));
+#ifdef HAVE_CXX11
+  std::shuffle(fp.begin(), fp.end(), rand_gen);
+#else
+  throw Exception("Random order requires C++ 11 features, which this compilation doesn't support.");
+#endif  
   BOOST_FOREACH(const FrontierPixel& p, fp) {
     filled_image_(p.i,p.j) = predicted_value(p.i,p.j);
     filled_mask_(p.i,p.j) = false;

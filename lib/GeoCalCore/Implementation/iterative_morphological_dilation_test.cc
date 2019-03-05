@@ -1,10 +1,6 @@
 #include "iterative_morphological_dilation.h"
 #include "unit_test_support.h"
-#include <random>
-#include <algorithm>
-#include <vector> 
-#include <math.h>
-#include <boost/random/mersenne_twister.hpp>
+#include "geocal_config.h"
 using namespace GeoCal;
 using namespace blitz;
 
@@ -122,15 +118,20 @@ BOOST_AUTO_TEST_CASE(median)
 
 BOOST_AUTO_TEST_CASE(random)
 {
-  std::vector<int> data;
-  for(int i = 0; i < 100; ++i)
-    data.push_back(i);
-  //std::mt19937 r;
-  boost::random::mt19937 r;
-  r.seed(100u);
-  std::shuffle(data.begin(), data.end(), r);
-  for(int i = 0; i < 100; ++i)
-    std::cerr << data[i] << "\n";
+#ifdef HAVE_CXX11  
+  IterativeMorphologicalDilation m(data, mask, 3, -1,
+	   IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE,
+	   IterativeMorphologicalDilation::RANDOM_ORDER);
+  IterativeMorphologicalDilation::set_random_seed(100u);
+  m.fill_missing_data();
+  int nmask = count(m.filled_mask() == true);
+  BOOST_CHECK_EQUAL(nmask, 0);
+  BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.988751, 1e-2);
+  BOOST_CHECK_EQUAL(m.iteration_count(), 3);
+#else
+  // Skip if we don't have C++ 11 support.
+  return;
+#endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

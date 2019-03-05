@@ -11,7 +11,7 @@
 namespace GeoCal {
 class IterativeMorphologicalDilation : public GenericObject {
 public:
-  enum FrontierFillOrder {C_ORDER=0, MOST_NEIGHBORS_FIRST=1};
+  enum FrontierFillOrder {C_ORDER=0, MOST_NEIGHBORS_FIRST=1, RANDOM_ORDER=2};
   enum PredictionType { FLAT_WEIGHTED_AVERAGE=0,
 			GAUSSIAN_WEIGHTED_AVERAGE=1,
 			NEIGBORHOOD_MEDIAN=2 };
@@ -30,6 +30,7 @@ public:
   %python_attribute(window_size, int);
   %python_attribute(sigma, double);
   %python_attribute(prediction_type, PredictionType);
+  static void set_random_seed(unsigned int S);
   void fill_missing_data();
   double predicted_value(int i, int j) const;
   blitz::Array<unsigned short int, 2> frontier_pixel_neighbor_count() const;

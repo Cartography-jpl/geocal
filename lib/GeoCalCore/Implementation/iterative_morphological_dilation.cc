@@ -19,6 +19,8 @@ void IterativeMorphologicalDilation::serialize(Archive & ar, const unsigned int 
 GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
 #endif
 
+boost::random::mt19937 IterativeMorphologicalDilation::rand_gen;
+
 //-----------------------------------------------------------------------
 /// Constructor.
 ///

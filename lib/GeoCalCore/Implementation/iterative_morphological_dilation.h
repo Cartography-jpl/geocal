@@ -2,6 +2,11 @@
 #define ITERATIVE_MORPHOLOGICAL_DILATION
 #include <blitz/array.h>
 #include "printable.h"
+// We use boost here instead of std library so we can compile this
+// code even if we don't have C++ 11 support. Can perhaps relax this
+// in the future if we require C++ 11 support, they are pretty
+// interchangeable.
+#include <boost/random/mersenne_twister.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -76,6 +81,7 @@ public:
   
   blitz::Array<unsigned short int, 2> frontier_pixel_neighbor_count() const;
   virtual void print(std::ostream& Os) const;
+  static boost::random::mt19937 rand_gen;
 private:
   bool fill_iteration_c_order(const blitz::Array<unsigned short int, 2>& mcount);
   bool fill_iteration_most_neighbors_first(const blitz::Array<unsigned short int, 2>& mcount);

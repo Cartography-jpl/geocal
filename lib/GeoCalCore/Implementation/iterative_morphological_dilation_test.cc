@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <vector> 
 #include <math.h>
+#include <boost/random/mersenne_twister.hpp>
 using namespace GeoCal;
 using namespace blitz;
 
@@ -124,7 +125,8 @@ BOOST_AUTO_TEST_CASE(random)
   std::vector<int> data;
   for(int i = 0; i < 100; ++i)
     data.push_back(i);
-  std::mt19937 r;
+  //std::mt19937 r;
+  boost::random::mt19937 r;
   r.seed(100u);
   std::shuffle(data.begin(), data.end(), r);
   for(int i = 0; i < 100; ++i)

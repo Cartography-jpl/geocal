@@ -11,7 +11,8 @@ void IterativeMorphologicalDilation::serialize(Archive & ar, const unsigned int 
   GEOCAL_GENERIC_BASE(IterativeMorphologicalDilation);
   ar & GEOCAL_NVP_(filled_image) & GEOCAL_NVP_(filled_mask)
     & GEOCAL_NVP_(kernel) & GEOCAL_NVP_(frontier_fill_order)
-    & GEOCAL_NVP_(iteration_count);
+    & GEOCAL_NVP_(prediction_type) & GEOCAL_NVP_(iteration_count)
+    & GEOCAL_NVP_(sigma);
 }
 
 GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
@@ -23,9 +24,6 @@ GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
 /// The Mask is "true" where we don't have Image data and wish to fill
 /// in data (i.e., this is the same sense as ImageMask).
 ///
-/// The Kernel to use to fill in the missing data values should have
-/// an odd extent.
-///
 /// Right now, this just works with blitz arrays. We could extend this
 /// to work with RasterImage and ImageMask. But this is often called
 /// from python, which interacts better with blitz arrays (which map
@@ -35,18 +33,33 @@ GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
 IterativeMorphologicalDilation::IterativeMorphologicalDilation
 (const blitz::Array<double, 2>& Image,
  const blitz::Array<bool, 2>& Mask,
- const blitz::Array<double, 2>& Kernel, FrontierFillOrder Frontier_fill_order)
+ int Window_size, double Sigma, PredictionType Prediction_type,
+ FrontierFillOrder Frontier_fill_order)
 : filled_image_(Image.copy()),
   filled_mask_(Mask.copy()),
-  kernel_(Kernel.copy()),
+  kernel_(Window_size, Window_size),
   frontier_fill_order_(Frontier_fill_order),
-  iteration_count_(0)
+  prediction_type_(Prediction_type),
+  iteration_count_(0),
+  sigma_(Sigma)
 {
   if(Image.rows() != Mask.rows() ||
      Image.cols() != Mask.cols())
     throw Exception("Image and Mask need to be the same size");
-  if(Kernel.rows() % 2 != 1 || Kernel.cols() % 2 != 1)
-    throw Exception("The Kernel needs to be an odd size");
+  if(kernel_.rows() % 2 != 1 || kernel_.cols() % 2 != 1)
+    throw Exception("The Window_size needs to be an odd size");
+  if(sigma_ < 0)
+    sigma_ = window_size() / 6.4;
+  if(prediction_type_ == FLAT_WEIGHTED_AVERAGE ||
+     prediction_type_ == NEIGBORHOOD_MEDIAN)
+    kernel_ = 1.0;
+  else if(prediction_type_ == GAUSSIAN_WEIGHTED_AVERAGE) {
+    int whs = (window_size() - 1) / 2;
+    for(int i = -whs; i <= whs; ++i)
+      for(int j = -whs; j <= whs; ++j)
+	kernel_(i+whs,j+whs) = exp(-(i*i + j*j) / (2*sigma_*sigma_));
+  } else
+    throw Exception("Unrecognized prediction_type_");
 }
 
 //-----------------------------------------------------------------------
@@ -129,6 +142,7 @@ double IterativeMorphologicalDilation::predicted_value(int i, int j) const
 {
   int krhs = (kernel_.rows() - 1) / 2;
   int kchs = (kernel_.cols() - 1) / 2;
+  std::vector<double> data;
   double sum = 0;
   double ksum = 0;
   int count = 0;
@@ -138,11 +152,21 @@ double IterativeMorphologicalDilation::predicted_value(int i, int j) const
 	if(j + jj > 0 && j + jj < filled_mask_.cols() &&
 	   !filled_mask_(i+ii,j+jj)) {
 	  ++count;
-	  sum += kernel_(ii+krhs,jj+kchs) * filled_image_(i+ii,j+jj);
-	  ksum += kernel_(ii+krhs,jj+kchs);
+	  if(prediction_type_ == NEIGBORHOOD_MEDIAN) {
+	    data.push_back(filled_image_(i+ii,j+jj));
+	  } else {
+	    sum += kernel_(ii+krhs,jj+kchs) * filled_image_(i+ii,j+jj);
+	    ksum += kernel_(ii+krhs,jj+kchs);
+	  }
 	}
   if(count == 0)
     throw Exception("No data found in neighborhood");
+  if(prediction_type_ == NEIGBORHOOD_MEDIAN) {
+    std::sort(data.begin(), data.end());
+    if(count % 2 == 0)
+      return (data[count / 2 - 1] + data[count / 2]) / 2.0;
+    return data[count / 2];
+  }
   return sum / ksum;
 }
 

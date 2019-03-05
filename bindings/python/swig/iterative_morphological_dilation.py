@@ -197,20 +197,21 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     C_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_C_ORDER
+    FLAT_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE
+    GAUSSIAN_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE
+    NEIGBORHOOD_MEDIAN = _iterative_morphological_dilation.IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN
 
     def __init__(self, *args):
         """
 
         IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >
-        &Mask, const blitz::Array< double, 2 > &Kernel, FrontierFillOrder
+        &Mask, int Window_size=3, double Sigma=-1, PredictionType
+        Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, FrontierFillOrder
         Frontier_fill_order=C_ORDER)
         Constructor.
 
         The Mask is "true" where we don't have Image data and wish to fill
         in data (i.e., this is the same sense as ImageMask).
-
-        The Kernel to use to fill in the missing data values should have an
-        odd extent.
 
         Right now, this just works with blitz arrays. We could extend this to
         work with RasterImage and ImageMask. But this is often called from
@@ -289,6 +290,48 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
         return self._v_iteration_count()
 
 
+    def _v_window_size(self):
+        """
+
+        int GeoCal::IterativeMorphologicalDilation::window_size() const
+        Size of kernel to use. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_window_size(self)
+
+
+    @property
+    def window_size(self):
+        return self._v_window_size()
+
+
+    def _v_sigma(self):
+        """
+
+        double GeoCal::IterativeMorphologicalDilation::sigma() const
+        Gaussian sigma to use. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_sigma(self)
+
+
+    @property
+    def sigma(self):
+        return self._v_sigma()
+
+
+    def _v_prediction_type(self):
+        """
+
+        PredictionType GeoCal::IterativeMorphologicalDilation::prediction_type() const
+        Type of prediction to use. 
+        """
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation__v_prediction_type(self)
+
+
+    @property
+    def prediction_type(self):
+        return self._v_prediction_type()
+
+
     def fill_missing_data(self):
         """
 
@@ -338,6 +381,9 @@ IterativeMorphologicalDilation._v_filled_mask = new_instancemethod(_iterative_mo
 IterativeMorphologicalDilation._v_kernel = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_kernel, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation._v_frontier_fill_order = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_frontier_fill_order, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation._v_iteration_count = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_iteration_count, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_window_size = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_window_size, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_sigma = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_sigma, None, IterativeMorphologicalDilation)
+IterativeMorphologicalDilation._v_prediction_type = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation__v_prediction_type, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation.fill_missing_data = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_fill_missing_data, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation.predicted_value = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_predicted_value, None, IterativeMorphologicalDilation)
 IterativeMorphologicalDilation.frontier_pixel_neighbor_count = new_instancemethod(_iterative_morphological_dilation.IterativeMorphologicalDilation_frontier_pixel_neighbor_count, None, IterativeMorphologicalDilation)

@@ -14,10 +14,15 @@ namespace GeoCal {
 class IterativeMorphologicalDilation : public Printable<IterativeMorphologicalDilation> {
 public:
   enum FrontierFillOrder {C_ORDER=0};
+  enum PredictionType { FLAT_WEIGHTED_AVERAGE=0,
+			GAUSSIAN_WEIGHTED_AVERAGE=1,
+			NEIGBORHOOD_MEDIAN=2 };
   IterativeMorphologicalDilation(const blitz::Array<double, 2>& Image,
-				 const blitz::Array<bool, 2>& Mask,
-				 const blitz::Array<double, 2>& Kernel,
-				 FrontierFillOrder Frontier_fill_order = C_ORDER);
+		 const blitz::Array<bool, 2>& Mask,
+		 int Window_size = 3,
+		 double Sigma = -1,	 
+		 PredictionType Prediction_type = GAUSSIAN_WEIGHTED_AVERAGE,
+		 FrontierFillOrder Frontier_fill_order = C_ORDER);
   virtual ~IterativeMorphologicalDilation() {}
 
 //-----------------------------------------------------------------------
@@ -50,6 +55,21 @@ public:
 //-----------------------------------------------------------------------
   int iteration_count() const {return iteration_count_;}
 
+//-----------------------------------------------------------------------
+/// Size of kernel to use
+//-----------------------------------------------------------------------
+  int window_size() const {return kernel_.rows(); }
+
+//-----------------------------------------------------------------------
+/// Gaussian sigma to use.  
+//-----------------------------------------------------------------------
+  double sigma() const { return sigma_;}
+
+//-----------------------------------------------------------------------
+/// Type of prediction to use
+//-----------------------------------------------------------------------
+  PredictionType prediction_type() const {return prediction_type_; }
+  
   bool fill_iteration();
   void fill_missing_data();
   double predicted_value(int i, int j) const;
@@ -62,7 +82,9 @@ private:
   blitz::Array<bool, 2> filled_mask_;
   blitz::Array<double, 2> kernel_;
   FrontierFillOrder frontier_fill_order_;
+  PredictionType prediction_type_;
   int iteration_count_;
+  double sigma_;
   IterativeMorphologicalDilation() {}
   friend class boost::serialization::access;
   template<class Archive>

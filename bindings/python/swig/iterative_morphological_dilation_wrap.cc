@@ -6504,15 +6504,199 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_0(PyObject *
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   blitz::Array< bool,2 > *arg2 = 0 ;
-  blitz::Array< double,2 > *arg3 = 0 ;
-  GeoCal::IterativeMorphologicalDilation::FrontierFillOrder arg4 ;
+  int arg3 ;
+  double arg4 ;
+  GeoCal::IterativeMorphologicalDilation::PredictionType arg5 ;
+  GeoCal::IterativeMorphologicalDilation::FrontierFillOrder arg6 ;
   blitz::Array< double,2 > a1 ;
   PythonObject numpy1 ;
   blitz::Array< bool,2 > a2 ;
   PythonObject numpy2 ;
-  blitz::Array< double,2 > a3 ;
-  PythonObject numpy3 ;
-  int val4 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::IterativeMorphologicalDilation *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_bool_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<bool >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<bool,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<bool,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<bool, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IterativeMorphologicalDilation" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IterativeMorphologicalDilation" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IterativeMorphologicalDilation" "', argument " "5"" of type '" "GeoCal::IterativeMorphologicalDilation::PredictionType""'");
+  } 
+  arg5 = static_cast< GeoCal::IterativeMorphologicalDilation::PredictionType >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IterativeMorphologicalDilation" "', argument " "6"" of type '" "GeoCal::IterativeMorphologicalDilation::FrontierFillOrder""'");
+  } 
+  arg6 = static_cast< GeoCal::IterativeMorphologicalDilation::FrontierFillOrder >(val6);
+  {
+    try {
+      result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,arg3,arg4,arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::IterativeMorphologicalDilation > *smartresult = result ? new boost::shared_ptr<  GeoCal::IterativeMorphologicalDilation >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< bool,2 > *arg2 = 0 ;
+  int arg3 ;
+  double arg4 ;
+  GeoCal::IterativeMorphologicalDilation::PredictionType arg5 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< bool,2 > a2 ;
+  PythonObject numpy2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  GeoCal::IterativeMorphologicalDilation *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_bool_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<bool >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<bool,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<bool,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<bool, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IterativeMorphologicalDilation" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IterativeMorphologicalDilation" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IterativeMorphologicalDilation" "', argument " "5"" of type '" "GeoCal::IterativeMorphologicalDilation::PredictionType""'");
+  } 
+  arg5 = static_cast< GeoCal::IterativeMorphologicalDilation::PredictionType >(val5);
+  {
+    try {
+      result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::IterativeMorphologicalDilation > *smartresult = result ? new boost::shared_ptr<  GeoCal::IterativeMorphologicalDilation >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< bool,2 > *arg2 = 0 ;
+  int arg3 ;
+  double arg4 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< bool,2 > a2 ;
+  PythonObject numpy2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
   int ecode4 = 0 ;
   GeoCal::IterativeMorphologicalDilation *result = 0 ;
   
@@ -6551,31 +6735,19 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_0(PyObject *
       arg2 = &a2;
     }
   }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<double,2>");
-        return NULL;
-      }
-      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
-        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<double,2>");
-        return NULL;
-      }
-      a3.reference(to_blitz_array<double, 2>(numpy3));
-      arg3 = &a3;
-    }
-  }
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IterativeMorphologicalDilation" "', argument " "4"" of type '" "GeoCal::IterativeMorphologicalDilation::FrontierFillOrder""'");
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IterativeMorphologicalDilation" "', argument " "3"" of type '" "int""'");
   } 
-  arg4 = static_cast< GeoCal::IterativeMorphologicalDilation::FrontierFillOrder >(val4);
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IterativeMorphologicalDilation" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
   {
     try {
-      result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,arg4);
+      result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6592,17 +6764,17 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   blitz::Array< bool,2 > *arg2 = 0 ;
-  blitz::Array< double,2 > *arg3 = 0 ;
+  int arg3 ;
   blitz::Array< double,2 > a1 ;
   PythonObject numpy1 ;
   blitz::Array< bool,2 > a2 ;
   PythonObject numpy2 ;
-  blitz::Array< double,2 > a3 ;
-  PythonObject numpy3 ;
+  int val3 ;
+  int ecode3 = 0 ;
   GeoCal::IterativeMorphologicalDilation *result = 0 ;
   
   if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
@@ -6640,26 +6812,78 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_1(PyObject *
       arg2 = &a2;
     }
   }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IterativeMorphologicalDilation" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
   {
-    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+    try {
+      result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::IterativeMorphologicalDilation > *smartresult = result ? new boost::shared_ptr<  GeoCal::IterativeMorphologicalDilation >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< bool,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< bool,2 > a2 ;
+  PythonObject numpy2 ;
+  GeoCal::IterativeMorphologicalDilation *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
       0 );
     if(!SWIG_IsOK(res)) {
-      numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
         SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<double,2>");
         return NULL;
       }
-      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
         SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<double,2>");
         return NULL;
       }
-      a3.reference(to_blitz_array<double, 2>(numpy3));
-      arg3 = &a3;
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_bool_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<bool >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<bool,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_IterativeMorphologicalDilation', expecting type  Array<bool,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<bool, 2>(numpy2));
+      arg2 = &a2;
     }
   }
   {
     try {
-      result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3);
+      result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6678,24 +6902,36 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[5] = {
+  PyObject *argv[7] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IterativeMorphologicalDilation",0,4,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IterativeMorphologicalDilation",0,6,argv))) SWIG_fail;
   --argc;
+  if (argc == 2) {
+    return _wrap_new_IterativeMorphologicalDilation__SWIG_4(self, argc, argv);
+  }
   if (argc == 3) {
-    return _wrap_new_IterativeMorphologicalDilation__SWIG_1(self, argc, argv);
+    return _wrap_new_IterativeMorphologicalDilation__SWIG_3(self, argc, argv);
   }
   if (argc == 4) {
+    return _wrap_new_IterativeMorphologicalDilation__SWIG_2(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_new_IterativeMorphologicalDilation__SWIG_1(self, argc, argv);
+  }
+  if (argc == 6) {
     return _wrap_new_IterativeMorphologicalDilation__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IterativeMorphologicalDilation'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,blitz::Array< double,2 > const &,GeoCal::IterativeMorphologicalDilation::FrontierFillOrder)\n"
-    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,blitz::Array< double,2 > const &)\n");
+    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,int,double,GeoCal::IterativeMorphologicalDilation::PredictionType,GeoCal::IterativeMorphologicalDilation::FrontierFillOrder)\n"
+    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,int,double,GeoCal::IterativeMorphologicalDilation::PredictionType)\n"
+    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,int,double)\n"
+    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &,int)\n"
+    "    GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation(blitz::Array< double,2 > const &,blitz::Array< bool,2 > const &)\n");
   return 0;
 }
 
@@ -7000,6 +7236,135 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_window_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation__v_window_size" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      arg1 = const_cast< GeoCal::IterativeMorphologicalDilation * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      arg1 = const_cast< GeoCal::IterativeMorphologicalDilation * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::IterativeMorphologicalDilation const *)arg1)->window_size();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_sigma(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation__v_sigma" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      arg1 = const_cast< GeoCal::IterativeMorphologicalDilation * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      arg1 = const_cast< GeoCal::IterativeMorphologicalDilation * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::IterativeMorphologicalDilation const *)arg1)->sigma();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_prediction_type(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  GeoCal::IterativeMorphologicalDilation::PredictionType result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation__v_prediction_type" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      arg1 = const_cast< GeoCal::IterativeMorphologicalDilation * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
+      arg1 = const_cast< GeoCal::IterativeMorphologicalDilation * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (GeoCal::IterativeMorphologicalDilation::PredictionType)((GeoCal::IterativeMorphologicalDilation const *)arg1)->prediction_type();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_fill_missing_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
@@ -7233,15 +7598,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_IterativeMorphologicalDilation", _wrap_new_IterativeMorphologicalDilation, METH_VARARGS, (char *)"\n"
 		"\n"
 		"IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >\n"
-		"&Mask, const blitz::Array< double, 2 > &Kernel, FrontierFillOrder\n"
+		"&Mask, int Window_size=3, double Sigma=-1, PredictionType\n"
+		"Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, FrontierFillOrder\n"
 		"Frontier_fill_order=C_ORDER)\n"
 		"Constructor.\n"
 		"\n"
 		"The Mask is \"true\" where we don't have Image data and wish to fill\n"
 		"in data (i.e., this is the same sense as ImageMask).\n"
-		"\n"
-		"The Kernel to use to fill in the missing data values should have an\n"
-		"odd extent.\n"
 		"\n"
 		"Right now, this just works with blitz arrays. We could extend this to\n"
 		"work with RasterImage and ImageMask. But this is often called from\n"
@@ -7273,6 +7636,21 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"int GeoCal::IterativeMorphologicalDilation::iteration_count() const\n"
 		"The iteration count for filling in the data. \n"
+		""},
+	 { (char *)"IterativeMorphologicalDilation__v_window_size", (PyCFunction)_wrap_IterativeMorphologicalDilation__v_window_size, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::IterativeMorphologicalDilation::window_size() const\n"
+		"Size of kernel to use. \n"
+		""},
+	 { (char *)"IterativeMorphologicalDilation__v_sigma", (PyCFunction)_wrap_IterativeMorphologicalDilation__v_sigma, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::IterativeMorphologicalDilation::sigma() const\n"
+		"Gaussian sigma to use. \n"
+		""},
+	 { (char *)"IterativeMorphologicalDilation__v_prediction_type", (PyCFunction)_wrap_IterativeMorphologicalDilation__v_prediction_type, METH_O, (char *)"\n"
+		"\n"
+		"PredictionType GeoCal::IterativeMorphologicalDilation::prediction_type() const\n"
+		"Type of prediction to use. \n"
 		""},
 	 { (char *)"IterativeMorphologicalDilation_fill_missing_data", (PyCFunction)_wrap_IterativeMorphologicalDilation_fill_missing_data, METH_O, (char *)"\n"
 		"\n"
@@ -8429,6 +8807,9 @@ SWIG_init(void) {
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IterativeMorphologicalDilation), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IterativeMorphologicalDilation > > ("boost::shared_ptr< GeoCal::IterativeMorphologicalDilation > *"));
   
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_C_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::C_ORDER)));
+  SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::FLAT_WEIGHTED_AVERAGE)));
+  SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE)));
+  SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::NEIGBORHOOD_MEDIAN)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

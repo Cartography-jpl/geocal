@@ -13,7 +13,7 @@ namespace GeoCal {
 *******************************************************************/
 class IterativeMorphologicalDilation : public Printable<IterativeMorphologicalDilation> {
 public:
-  enum FrontierFillOrder {C_ORDER=0};
+  enum FrontierFillOrder {C_ORDER=0, MOST_NEIGHBORS_FIRST=1};
   enum PredictionType { FLAT_WEIGHTED_AVERAGE=0,
 			GAUSSIAN_WEIGHTED_AVERAGE=1,
 			NEIGBORHOOD_MEDIAN=2 };
@@ -78,6 +78,7 @@ public:
   virtual void print(std::ostream& Os) const;
 private:
   bool fill_iteration_c_order(const blitz::Array<unsigned short int, 2>& mcount);
+  bool fill_iteration_most_neighbors_first(const blitz::Array<unsigned short int, 2>& mcount);
   blitz::Array<double, 2> filled_image_;
   blitz::Array<bool, 2> filled_mask_;
   blitz::Array<double, 2> kernel_;

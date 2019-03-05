@@ -69,6 +69,18 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_EQUAL(m2.iteration_count(), 3);
 }
 
+BOOST_AUTO_TEST_CASE(most_neighbors_first)
+{
+  IterativeMorphologicalDilation m(data, mask, 3, -1,
+	   IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE,
+	   IterativeMorphologicalDilation::MOST_NEIGHBORS_FIRST);
+  m.fill_missing_data();
+  int nmask = count(m.filled_mask() == true);
+  BOOST_CHECK_EQUAL(nmask, 0);
+  BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.9785935, 1e-2);
+  BOOST_CHECK_EQUAL(m.iteration_count(), 3);
+}
+
 BOOST_AUTO_TEST_CASE(flat_average)
 {
   IterativeMorphologicalDilation m(data, mask, 3, -1,

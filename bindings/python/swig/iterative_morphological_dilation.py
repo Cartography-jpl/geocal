@@ -197,6 +197,7 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     C_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_C_ORDER
+    MOST_NEIGHBORS_FIRST = _iterative_morphological_dilation.IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST
     FLAT_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE
     GAUSSIAN_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE
     NEIGBORHOOD_MEDIAN = _iterative_morphological_dilation.IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN

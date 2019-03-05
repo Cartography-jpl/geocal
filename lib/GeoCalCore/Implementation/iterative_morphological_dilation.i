@@ -11,7 +11,7 @@
 namespace GeoCal {
 class IterativeMorphologicalDilation : public GenericObject {
 public:
-  enum FrontierFillOrder {C_ORDER=0};
+  enum FrontierFillOrder {C_ORDER=0, MOST_NEIGHBORS_FIRST=1};
   enum PredictionType { FLAT_WEIGHTED_AVERAGE=0,
 			GAUSSIAN_WEIGHTED_AVERAGE=1,
 			NEIGBORHOOD_MEDIAN=2 };

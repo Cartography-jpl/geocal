@@ -8807,6 +8807,7 @@ SWIG_init(void) {
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IterativeMorphologicalDilation), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IterativeMorphologicalDilation > > ("boost::shared_ptr< GeoCal::IterativeMorphologicalDilation > *"));
   
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_C_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::C_ORDER)));
+  SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::MOST_NEIGHBORS_FIRST)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::FLAT_WEIGHTED_AVERAGE)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::NEIGBORHOOD_MEDIAN)));

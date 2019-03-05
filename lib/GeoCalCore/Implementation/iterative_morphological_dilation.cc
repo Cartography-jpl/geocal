@@ -1,4 +1,5 @@
 #include "iterative_morphological_dilation.h"
+#include <boost/foreach.hpp>
 #include "geocal_serialize_support.h"
 
 using namespace GeoCal;
@@ -96,8 +97,16 @@ bool IterativeMorphologicalDilation::fill_iteration()
 {
   blitz::Array<unsigned short int, 2>  mcount = frontier_pixel_neighbor_count();
   bool any_change = false;
-  if(frontier_fill_order_ == C_ORDER)
+  switch(frontier_fill_order_) {
+  case C_ORDER:
     any_change = fill_iteration_c_order(mcount);
+    break;
+  case MOST_NEIGHBORS_FIRST:
+    any_change = fill_iteration_most_neighbors_first(mcount);
+    break;
+  default:
+    throw Exception("Unrecognized frontier_fill_order");
+  }
   if(any_change)
     ++iteration_count_;
   return any_change;
@@ -131,7 +140,51 @@ bool IterativeMorphologicalDilation::fill_iteration_c_order
       }
   return any_change;
 }
+
+struct FrontierPixel {
+  FrontierPixel(int I, int J, int Count) : i(I), j(J), count(Count) {}
+  int i, j, count;
+};
+
+struct neighbor_count_compare {
+  bool operator() (const FrontierPixel& P1, const FrontierPixel& P2) {
+    // Sort by neighbor count, and then in C order (if count is the same)
+    if(P1.count < P2.count)
+      return true;
+    if(P1.count > P2.count)
+      return false;
+    if(P1.i < P2.i)
+      return true;
+    if(P1.i > P2.i)
+      return false;
+    if(P1.j < P2.j)
+      return true;
+    return false;
+  }
+};
+
+//-----------------------------------------------------------------------
+/// Do fill_iteration in most neighbors first.
+//-----------------------------------------------------------------------
   
+bool IterativeMorphologicalDilation::fill_iteration_most_neighbors_first
+(const blitz::Array<unsigned short int, 2>& mcount)
+{
+  bool any_change = false;
+  std::vector<FrontierPixel> fp;
+  for(int i = 0; i < mcount.rows(); ++i)
+    for(int j = 0; j < mcount.cols(); ++j)
+      if(mcount(i,j) > 0)
+	fp.push_back(FrontierPixel(i, j, mcount(i,j)));
+  std::sort(fp.begin(), fp.end(), neighbor_count_compare());
+  BOOST_FOREACH(const FrontierPixel& p, fp) {
+    filled_image_(p.i,p.j) = predicted_value(p.i,p.j);
+    filled_mask_(p.i,p.j) = false;
+    any_change = true;
+  }
+  return any_change;
+}
+
 //-----------------------------------------------------------------------
 /// Predicted value for the given pixel. We only include data
 /// that as filled_mask_ false, and we normalize by the portion of the

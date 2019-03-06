@@ -4194,7 +4194,7 @@ am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYT
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :
-@HAVE_SPICE_TRUE@setup_spice = export SPICEDATA=$(abs_top_srcdir)/@geocalunittestdata@/spice && export MARS_KERNEL=$(abs_top_srcdir)/@geocalunittestdata@/mars_kernel
+@HAVE_SPICE_TRUE@setup_spice = export SPICEDATA="$(abs_top_srcdir)/@geocalunittestdata@/spice" && export MARS_KERNEL="$(abs_top_srcdir)/@geocalunittestdata@/mars_kernel"
 @BUILD_AFIDS_FALSE@setup_geocal = $(setup_afids_data) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
 @BUILD_AFIDS_TRUE@setup_geocal = source $(DESTDIR)$(prefix)/setup_afids_env.sh
 # Number of jobs to run at once. Default is to automatically determine this,
@@ -14359,7 +14359,7 @@ install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpytho
 @INSTALL_PYNITF_TRUE@install-pynitf:
 @INSTALL_PYNITF_TRUE@	-chmod +w -R @geocalpkgpythondir@/../pynitf*
 @INSTALL_PYNITF_TRUE@	cd $(srcdir)/@srcpython@/pynitf && \
-@INSTALL_PYNITF_TRUE@        export LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) && \
+@INSTALL_PYNITF_TRUE@        export LD_LIBRARY_PATH="$(PYTHON_LDPATH)$(LD_LIBRARY_PATH)" && \
 @INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build egg_info --egg-base=@abs_builddir@/pynitf install --prefix=$(DESTDIR)$(prefix) --single-version-externally-managed --record @abs_builddir@/pynitf/files.txt
 
 @INSTALL_PYNITF_TRUE@uninstall-pynitf:
@@ -14380,8 +14380,8 @@ dist-clean-up-python:
 python_check: python-check
 
 python-check:
-	export PATH=$(PYTHON_CHECK_PATH) && \
-        export PYTHONPATH=$(abs_srcdir)/$(srcpython):${PYTHONPATH} && \
+	export PATH="$(PYTHON_CHECK_PATH)" && \
+        export PYTHONPATH="$(abs_srcdir)/$(srcpython):${PYTHONPATH}" && \
         $(setup_geocal) && \
         $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@ $(EXTRA_PYTHON_TEST)
 

@@ -36,6 +36,30 @@ now, we are just removing them.
 We are not currently including camera nonlinearities (e.g., HRSC), this 
 is something we could add in the future.
 
+One of the required inputs is the various SPICE kernels need to calculate
+ephemeris and attitude. There are two components to this - a fixed set of
+kernels that is used for any run, and a set of kernels that are time based.
+We get the fixed set of kernels from a parent kernel file (kernel files can
+list other files to include), and we get the time based kernels from a JSON
+file that describes a mapping from time to a the kernel to use. This JSON
+file is created by a separate program that looks at all the kernels in
+a directory, see the "create_kernel_json" file.
+
+To simplify the input, we default to files in the directory pointed to
+by the environment variable MARS_KERNEL. This is filled in with the normal
+AFIDS setup_afids_env.sh script. The fixed kernel defaults to 
+mro_kernel/mro.ker or mex_kernel/mex.ker depending on the instrument used
+(mro.ker for CTX images, mex.ker for HRSC images).
+
+You may have instances where you want to use different set of kernels, e.g.
+you have newer improved versions of the kernels than in the standard
+MARS_KERNEL directory, or you need to process times not found in the 
+MARS_KERNEL directory. You can override the kernels used by using the
+command line arguments --kernel-file and --kernel-json. There is also the
+additional option --kernel-file-post for loading kernels after the others.
+This is used by example MEX where there is a CK/ATNM_RECONSTITUTED_00004.BC
+file that fixes some of the data in the MEX kernels.
+
 Example:
     mars_generate_rsm /raid26/tllogan/mars/mawrth_vallis/source/unmapped/P16_007388_2049_XI_24N020W.IMG ctx1
     rsm_project --grid-spacing=10 --map-info=ctx1_ref_img.xml --number-process=20 --verbose --process-number-line=1000 --process-number-sample=1000 ctx1.img ctx1_proj.img
@@ -48,6 +72,20 @@ Options:
        For diagnostic purposes, it can be useful to have the full IGC (i.e.,
        the one with the camera model, spice kernel, etc.). This is what we
        are approximating with the RSM.
+
+  --kernel-file=f
+       If supplied, override the kernel file used. If not specified we 
+       use mro_kernel/mro.ker or mex_kernel/mex.ker in the directory given
+       by the environment variable MARS_KERNEL.
+
+  --kernel-file-post=f
+       If supplied, override the kernel file to include after all the others.
+       Defaults to "mex_kernel/mex_reconstituted.ker" for HRSC, none for
+       CTX.
+
+  --kernel-json=f
+       If supplied, override the time based JSON file mapping to kernels.
+       Defaults to "mro_kernel/kernel.json" or "mex_kernel/kernel.json".
 
   --min-height=d
        Minimum DEM height we create RSM for. Note this doesn't need to be
@@ -81,7 +119,10 @@ long_name_to_vicar = { "pds_image" : "pdsimg",
                        "min_height" : "minh",
                        "max_height" : "maxh",
                        "subset" : "subset",
-                       "plot_cross_section" : "plot" }
+                       "plot_cross_section" : "plot",
+                       "kernel_file" : "kfile",
+                       "kernel_file_post": "kpfile",
+                       "kernel_json" : "kjson"}
 
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
@@ -132,12 +173,26 @@ def igc_for_context(lbl, fname):
     '''Process for context camera'''
     tstart = geocal.Time.parse_time(lbl["START_TIME"])
     bdir = os.environ["MARS_KERNEL"] + "/mro_kernel/"
-    kdat = geocal.read_shelve(bdir + "kernel.json")
+    if(args.kernel_file):
+        kfile = args.kernel_file
+    else:
+        kfile = bdir + "mro.ker"
+    if(args.kernel_file_post):
+        kpfile = args.kernel_file_post
+    else:
+        kpfile = None
+    if(args.kernel_json):
+        kjson = args.kernel_json
+    else:
+        kjson = bdir + "kernel.json"
+    kdat = geocal.read_shelve(kjson)
     # We need better logic here, but for now just set up the kernels we
     # handed
-    klist = [bdir + "mro.ker",
+    klist = [kfile,
              kdat["ck_kernel"].kernel(tstart),
              kdat["spk_kernel"].kernel(tstart)]
+    if(kpfile):
+        klist.append(kpfile)
     orb = geocal.SpicePlanetOrbit("MRO", "MRO_CTX", klist,
                            geocal.PlanetConstant.MARS_NAIF_CODE)
     img = geocal.GdalRasterImage(fname)
@@ -203,13 +258,26 @@ def igc_for_hrsc(lbl, fname):
     if(lbl["DETECTOR_ID"] != "MEX_HRSC_NADIR"):
         raise RuntimeError("Right now we only work with MEX_HRSC_NADIR")
     bdir = os.environ["MARS_KERNEL"] + "/mex_kernel/"
-    kdat = geocal.read_shelve(bdir + "kernel.json")
+    if(args.kernel_file):
+        kfile = args.kernel_file
+    else:
+        kfile = bdir + "mex.ker"
+    if(args.kernel_file_post):
+        kpfile = args.kernel_file_post
+    else:
+        kpfile = bdir + "mex_reconstituted.ker"
+    if(args.kernel_json):
+        kjson = args.kernel_json
+    else:
+        kjson = bdir + "kernel.json"
+    kdat = geocal.read_shelve(kjson)
     # We need better logic here, but for now just set up the kernels we
     # handed
-    klist = [bdir + "mex.ker",
+    klist = [kfile,
              kdat["ck_kernel"].kernel(tstart),
-             kdat["spk_kernel"].kernel(tstart),
-             bdir + "mex_reconstituted.ker"]
+             kdat["spk_kernel"].kernel(tstart)]
+    if(kpfile):
+        klist.append(kpfile)
     orb = geocal.SpicePlanetOrbit("MEX", "MEX_HRSC_HEAD", klist,
                            geocal.PlanetConstant.MARS_NAIF_CODE)
     img = geocal.GdalRasterImage(fname)

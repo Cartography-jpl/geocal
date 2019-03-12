@@ -13,6 +13,9 @@
 #   CXXCPP to enable support.  VERSION may be '11' (for the C++11 standard)
 #   or '14' (for the C++14 standard).
 #
+#   MMS - Changed macro to put flags in CXXFLAGS instead of CXX. Changing
+#   CXX breaks some things like cmake builds.
+#
 #   The second argument, if specified, indicates whether you insist on an
 #   extended mode (e.g. -std=gnu++11) or a strict conformance mode (e.g.
 #   -std=c++11).  If neither is specified, you get whatever works, with
@@ -76,7 +79,7 @@ AC_DEFUN([AX_CXX_COMPILE_STDCXX], [dnl
           [eval $cachevar=no])
          CXX="$ac_save_CXX"])
       if eval test x\$$cachevar = xyes; then
-        CXX="$CXX $switch"
+	CXXFLAGS="$CXXFLAGS $switch"
         if test -n "$CXXCPP" ; then
           CXXCPP="$CXXCPP $switch"
         fi
@@ -103,7 +106,7 @@ AC_DEFUN([AX_CXX_COMPILE_STDCXX], [dnl
             [eval $cachevar=no])
            CXX="$ac_save_CXX"])
         if eval test x\$$cachevar = xyes; then
-          CXX="$CXX $switch"
+	  CXXFLAGS="$CXXFLAGS $switch"
           if test -n "$CXXCPP" ; then
             CXXCPP="$CXXCPP $switch"
           fi

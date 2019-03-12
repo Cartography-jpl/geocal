@@ -1,7 +1,9 @@
 #include "geocal_internal_config.h"
 #include "msp_support.h"
 #include <boost/make_shared.hpp>
+#include <boost/foreach.hpp>
 #ifdef HAVE_MSP
+#include "Plugin.h"
 #include "GroundPoint.h"
 #include "ImagePoint.h"
 #include "PointExtractionService.h"
@@ -32,6 +34,29 @@ bool GeoCal::have_msp_supported()
 /// particular image point. This is meant for comparison with our own
 /// GeoCal calculation, to make sure we are meeting whatever
 /// assumptions BAE has in in MSP software.
+///
+/// An important note for using this in Python. The
+/// SensorModelService code automatically loads all the plugins found
+/// at CSM_PLUGIN_DIR. However, it will silently fail when it tries to
+/// load them. You can see this by running with LD_DEBUG=files to get
+/// debugging information from ld.so. This does not happen in C++.
+///
+/// Turns out that the plugins depend on the library libMSPcsm.so,
+/// although they don't list this as a dependency. The plugins
+/// probably should, but since we don't have the source we can't fix
+/// this. For C++, the library get loaded as a dependency of
+/// geocal. The same happens in python, but the difference is that
+/// geocal loads this with RTLD_GLOBAL and python with RTD_LOCAL (see
+/// man page on dlopen for description of these). This means in C++
+/// the symbols can be resolved when SensorModelService loads a
+/// plugin. For python, this can't be used.
+///
+/// The solution is to preload the library. You can either define
+/// LD_PRELOAD=/data/smyth/MSP/install/lib/libMSPcsm.so when starting
+/// python, or alternatively explicitly load the library in python
+/// with RTLD_GLOBAL:
+///    ctypes.CDLL(os.environ["CSM_PLUGIN_DIR"] + "../lib/libMSPcsm.so",
+///                ctypes.RTLD_GLOBAL)
 //-----------------------------------------------------------------------
 
 Ecr GeoCal::msp_terrain_point(const std::string& Fname,
@@ -45,8 +70,13 @@ try {
   boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(Fname.c_str()));
   if(sds.getNumImages(*isd) > 1)
     throw Exception("Only handle 1 image for now");
+  MSP::WarningListType msg;
   boost::shared_ptr<csm::Model>
-    model_raw(sms->createModelFromFile(Fname.c_str()));
+    model_raw(sms->createModelFromFile(Fname.c_str(),0,0,&msg));
+  BOOST_FOREACH(const MSP::Warning& w, msg) {
+    std::cout << "Warning:\n" << w.getMessage() << "\n"
+	      << w.getFunction() << "\n";
+  }
   boost::shared_ptr<csm::RasterGM> model =
     boost::dynamic_pointer_cast<csm::RasterGM>(model_raw);
   if(!model)
@@ -88,3 +118,66 @@ try {
   throw MspNotAvailableException();
 #endif
 }
+
+//-----------------------------------------------------------------------
+/// Print a list of all plugins.
+//-----------------------------------------------------------------------
+
+void GeoCal::msp_print_plugin_list()
+{
+#ifdef HAVE_MSP
+try {
+  MSP::SDS::SupportDataService sds;
+  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+    boost::make_shared<MSP::SMS::SensorModelService>();
+  MSP::SMS::NameList plugin_list;
+  sms->getAllRegisteredPlugins(plugin_list);
+  std::cout << "MSP Plugin list:\n";
+  BOOST_FOREACH(const std::string& n, plugin_list)
+    std::cout<< "  " << n << "\n";
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Register the given plugin. Note that we already register all the
+/// plugins at CSM_PLUGIN_DIR, so you don't usually need to use this
+/// function.
+//-----------------------------------------------------------------------
+
+void GeoCal::msp_register_plugin(const std::string& Plugin_name)
+{
+#ifdef HAVE_MSP
+try {
+  std::cerr << "Step 1\n";
+  MSP::SDS::SupportDataService sds;
+  std::cerr << "Step 2\n";
+  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+    boost::make_shared<MSP::SMS::SensorModelService>();
+  std::cerr << "Step 3\n";
+  sms->registerPlugin(Plugin_name);
+  std::cerr << "Step 4\n";
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+#else
+  throw MspNotAvailableException();
+#endif
+}
+

@@ -31,4 +31,11 @@ BOOST_AUTO_TEST_CASE(msp_terrain_point_test)
     }
 }
 
+BOOST_AUTO_TEST_CASE(test_msp_print_plugin_list)
+{
+  if(!have_msp_supported())
+    return;
+  msp_print_plugin_list();
+}
+
 BOOST_AUTO_TEST_SUITE_END()

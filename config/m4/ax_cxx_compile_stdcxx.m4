@@ -73,11 +73,21 @@ AC_DEFUN([AX_CXX_COMPILE_STDCXX], [dnl
       AC_CACHE_CHECK(whether $CXX supports C++$1 features with $switch,
                      $cachevar,
         [ac_save_CXX="$CXX"
-         CXX="$CXX $switch"
+	 # Try existings flags first
+         CXX="$ac_save_CXX $CXXFLAGS"
          AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_testbody_$1])],
-          [eval $cachevar=yes],
-          [eval $cachevar=no])
+          [eval $cachevar=yescxxflags],
+          [
+	   CXX="$ac_save_CXX $switch"
+	   AC_COMPILE_IFELSE([AC_LANG_SOURCE([_AX_CXX_COMPILE_STDCXX_testbody_$1])],
+           [eval $cachevar=yes],
+           [eval $cachevar=no])
+	  ])
          CXX="$ac_save_CXX"])
+      if eval test x\$$cachevar = xyescxxflags; then
+        ac_success=yes
+        break
+      fi
       if eval test x\$$cachevar = xyes; then
 	CXXFLAGS="$CXXFLAGS $switch"
         if test -n "$CXXCPP" ; then

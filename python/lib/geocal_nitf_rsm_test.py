@@ -11,6 +11,7 @@ import numpy as np
 
 def create_image_seg(f):
     img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8)
+    img.image_subheader.idlvl = 1
     for i in range(9):
         for j in range(10):
             img[0,i,j] = i + j
@@ -27,6 +28,33 @@ def test_rsm_rp(isolated_dir, rsm):
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
+@require_msp
+@require_pynitf
+def test_rsm_rp_with_msp(isolated_dir, rsm, msp_init):
+    '''Compare the RSM we write to a NITF file with what the MSP library 
+    calculates. This verifies both the validity of our NITF and our RSM 
+    code'''    
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    #f.image_segment[0].rsm = rsm
+    # Temp copy RSMDCA
+    f2 = pynitf.NitfFile(rsm_sample_data + "i_6130a.ntf")
+    t = f2.image_segment[0].find_exactly_one_tre("RSMDCA")
+    f.image_segment[0].tre_list.append(t)
+    t = f2.image_segment[0].find_exactly_one_tre("RSMECA")
+    f.image_segment[0].tre_list.append(t)
+    f.image_segment[0].rsm = f2.image_segment[0].rsm
+    #rsm.rsm_id.image_identifier = "2_8"
+    #rsm.rsm_id.rsm_suport_data_edition = "1101222272-2"
+    #rsm.rsm_id.sensor_type = "FRAME"
+    #f.image_segment[0].rsm = rsm
+    print(rsm)
+    print(rsm.rsm_id.coordinate_converter)
+    print(f2.image_segment[0].rsm)
+    print(f2.image_segment[0].rsm.rsm_id.coordinate_converter)
+    f.write("nitf_rsm.ntf")
+    #msp_print_plugin_list()
+    print(msp_terrain_point("nitf_rsm.ntf", ImageCoordinate(10,20)))
     
 @require_pynitf
 @require_vicar

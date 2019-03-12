@@ -6710,6 +6710,63 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_msp_print_plugin_list(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  
+  if (!SWIG_Python_UnpackTuple(args,"msp_print_plugin_list",0,0,0)) SWIG_fail;
+  {
+    try {
+      GeoCal::msp_print_plugin_list();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_msp_register_plugin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "msp_register_plugin" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "msp_register_plugin" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      GeoCal::msp_register_plugin((std::string const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -6743,7 +6800,41 @@ static PyMethodDef SwigMethods[] = {
 		"RPC, RSM, SENSRB) to find the ground location for a particular image\n"
 		"point. This is meant for comparison with our own GeoCal calculation,\n"
 		"to make sure we are meeting whatever assumptions BAE has in in MSP\n"
-		"software. \n"
+		"software.\n"
+		"\n"
+		"An important note for using this in Python. The SensorModelService\n"
+		"code automatically loads all the plugins found at CSM_PLUGIN_DIR.\n"
+		"However, it will silently fail when it tries to load them. You can see\n"
+		"this by running with LD_DEBUG=files to get debugging information from\n"
+		"ld.so. This does not happen in C++.\n"
+		"\n"
+		"Turns out that the plugins depend on the library libMSPcsm.so,\n"
+		"although they don't list this as a dependency. The plugins probably\n"
+		"should, but since we don't have the source we can't fix this. For C++,\n"
+		"the library get loaded as a dependency of geocal. The same happens in\n"
+		"python, but the difference is that geocal loads this with RTLD_GLOBAL\n"
+		"and python with RTD_LOCAL (see man page on dlopen for description of\n"
+		"these). This means in C++ the symbols can be resolved when\n"
+		"SensorModelService loads a plugin. For python, this can't be used.\n"
+		"\n"
+		"The solution is to preload the library. You can either define\n"
+		"LD_PRELOAD=/data/smyth/MSP/install/lib/libMSPcsm.so when starting\n"
+		"python, or alternatively explicitly load the library in python with\n"
+		"RTLD_GLOBAL: ctypes.CDLL(os.environ[\"CSM_PLUGIN_DIR\"] +\n"
+		"\"../lib/libMSPcsm.so\", ctypes.RTLD_GLOBAL) \n"
+		""},
+	 { (char *)"msp_print_plugin_list", (PyCFunction)_wrap_msp_print_plugin_list, METH_NOARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::msp_print_plugin_list()\n"
+		"Print a list of all plugins. \n"
+		""},
+	 { (char *)"msp_register_plugin", (PyCFunction)_wrap_msp_register_plugin, METH_O, (char *)"\n"
+		"\n"
+		"void GeoCal::msp_register_plugin(const std::string &Plugin_name)\n"
+		"Register the given plugin.\n"
+		"\n"
+		"Note that we already register all the plugins at CSM_PLUGIN_DIR, so\n"
+		"you don't usually need to use this function. \n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

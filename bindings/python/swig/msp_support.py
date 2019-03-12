@@ -200,11 +200,51 @@ def msp_terrain_point(Fname, Ic):
     RPC, RSM, SENSRB) to find the ground location for a particular image
     point. This is meant for comparison with our own GeoCal calculation,
     to make sure we are meeting whatever assumptions BAE has in in MSP
-    software. 
+    software.
+
+    An important note for using this in Python. The SensorModelService
+    code automatically loads all the plugins found at CSM_PLUGIN_DIR.
+    However, it will silently fail when it tries to load them. You can see
+    this by running with LD_DEBUG=files to get debugging information from
+    ld.so. This does not happen in C++.
+
+    Turns out that the plugins depend on the library libMSPcsm.so,
+    although they don't list this as a dependency. The plugins probably
+    should, but since we don't have the source we can't fix this. For C++,
+    the library get loaded as a dependency of geocal. The same happens in
+    python, but the difference is that geocal loads this with RTLD_GLOBAL
+    and python with RTD_LOCAL (see man page on dlopen for description of
+    these). This means in C++ the symbols can be resolved when
+    SensorModelService loads a plugin. For python, this can't be used.
+
+    The solution is to preload the library. You can either define
+    LD_PRELOAD=/data/smyth/MSP/install/lib/libMSPcsm.so when starting
+    python, or alternatively explicitly load the library in python with
+    RTLD_GLOBAL: ctypes.CDLL(os.environ["CSM_PLUGIN_DIR"] +
+    "../lib/libMSPcsm.so", ctypes.RTLD_GLOBAL) 
     """
     return _msp_support.msp_terrain_point(Fname, Ic)
 
-__all__ = ["have_msp_supported","msp_terrain_point"]
+def msp_print_plugin_list():
+    """
+
+    void GeoCal::msp_print_plugin_list()
+    Print a list of all plugins. 
+    """
+    return _msp_support.msp_print_plugin_list()
+
+def msp_register_plugin(Plugin_name):
+    """
+
+    void GeoCal::msp_register_plugin(const std::string &Plugin_name)
+    Register the given plugin.
+
+    Note that we already register all the plugins at CSM_PLUGIN_DIR, so
+    you don't usually need to use this function. 
+    """
+    return _msp_support.msp_register_plugin(Plugin_name)
+
+__all__ = ["have_msp_supported","msp_terrain_point","msp_print_plugin_list","msp_register_plugin"]
 
 
 

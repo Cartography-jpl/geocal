@@ -149,9 +149,13 @@ rsm_rsm_adjustable_parameter and wish to access the raw fields.
 if(have_pynitf):
     class RsmImageSegementHook(NitfSegmentHook):
         def __init__(self):
-            self.rsm_tre_tag_list =  ['RSMIDA', 'RSMPIA','RSMPCA', 'RSMDCA',
-                                      'RSMDCB',
-                                      'RSMAPA', 'RSMAPB', 'RSMECA', 'RSMECB',
+            # Temporarily take out the direct and indirect error covariances
+            #self.rsm_tre_tag_list =  ['RSMIDA', 'RSMPIA','RSMPCA', 'RSMDCA',
+            #                          'RSMDCB',
+            #                          'RSMAPA', 'RSMAPB', 'RSMECA', 'RSMECB',
+            #                          'RSMGIA', 'RSMGGA']
+            self.rsm_tre_tag_list =  ['RSMIDA', 'RSMPIA','RSMPCA', 
+                                      'RSMAPA', 'RSMAPB', 
                                       'RSMGIA', 'RSMGGA']
         def init_hook(self, seg):
             seg.rsm = None

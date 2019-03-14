@@ -245,6 +245,16 @@ def rsm_rational_polynomial(igc_rpc):
     return r
 
 @pytest.fixture(scope="function")
+def rsm_rational_polynomial_lc(igc_rpc):
+    '''Create a RsmRationalPolynomial that matches our rpc test fixture'''
+    r = RsmRationalPolynomial(3,3,3,3,3,3,3,3)
+    hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
+    hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
+    r.fit(igc_rpc, LocalRcConverter(LocalRcParameter(igc_rpc)), hmin, hmax, 0,
+          igc_rpc.number_line, 0, igc_rpc.number_sample)
+    return r
+
+@pytest.fixture(scope="function")
 def rsm_grid(igc_rpc):
     '''Create a RsmGrid that matches our rpc test fixture'''
     r = RsmGrid(40,40,2)
@@ -281,6 +291,13 @@ def rsm_ms_grid(igc_rpc):
 @pytest.fixture(scope="function")
 def rsm(rsm_rational_polynomial):
     res = Rsm(rsm_rational_polynomial, GeodeticRadianConverter())
+    res.fill_in_ground_domain_vertex(500, 1500)
+    return res
+
+@pytest.fixture(scope="function")
+def rsm_lc(rsm_rational_polynomial_lc, igc_rpc):
+    res = Rsm(rsm_rational_polynomial_lc,
+              LocalRcConverter(LocalRcParameter(igc_rpc)))
     res.fill_in_ground_domain_vertex(500, 1500)
     return res
 

@@ -30,7 +30,7 @@ def test_rsm_rp(isolated_dir, rsm):
 
 @require_msp
 @require_pynitf
-def test_rsm_rp_with_msp(isolated_dir, rsm, msp_init):
+def test_rsm_rp_with_msp(isolated_dir, rsm_lc, msp_init):
     '''Compare the RSM we write to a NITF file with what the MSP library 
     calculates. This verifies both the validity of our NITF and our RSM 
     code'''    
@@ -47,15 +47,15 @@ def test_rsm_rp_with_msp(isolated_dir, rsm, msp_init):
     #rsm.rsm_id.image_identifier = "2_8"
     #rsm.rsm_id.rsm_suport_data_edition = "1101222272-2"
     #rsm.rsm_id.sensor_type = "FRAME"
-    #f.image_segment[0].rsm = rsm
-    print(rsm)
-    print(rsm.rsm_id.coordinate_converter)
+    f.image_segment[0].rsm = rsm_lc
+    print(rsm_lc)
+    print(rsm_lc.rsm_id.coordinate_converter)
     print(f2.image_segment[0].rsm)
     print(f2.image_segment[0].rsm.rsm_id.coordinate_converter)
     f.write("nitf_rsm.ntf")
     #msp_print_plugin_list()
     print(msp_terrain_point("nitf_rsm.ntf", ImageCoordinate(10,20)))
-    
+
 @require_pynitf
 @require_vicar
 @require_serialize

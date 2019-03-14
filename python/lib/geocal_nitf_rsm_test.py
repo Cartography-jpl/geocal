@@ -5,9 +5,13 @@ except ImportError:
 from test_support import *
 import geocal.geocal_nitf_rsm
 from geocal.geocal_nitf_rsm import *
-from geocal_swig import GdalRasterImage, VicarRasterImage, VicarLiteRasterImage
+from geocal_swig import (GdalRasterImage, VicarRasterImage,
+                         VicarLiteRasterImage, RsmId, RsmRationalPolynomial,
+                         Rsm, ImageCoordinate)
+import geocal_swig
 import six
 import numpy as np
+import os, subprocess
 
 def create_image_seg(f):
     img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8)
@@ -28,6 +32,94 @@ def test_rsm_rp(isolated_dir, rsm):
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
+@require_msp
+@require_pynitf
+def test_rsm_generate_with_msp(isolated_dir, igc_rpc, msp_init):
+    '''This uses the MSP toolkit to generate a RSM file, and makes sure
+    MSP is happy with it.
+
+    The RSM generation has a API, but for this we are just using the sample
+    code. 
+    
+    We could extend this, but we have our own RSM generation code and probably
+    using MSP will be for occasional testing and/or comparison. We wrap this
+    up in a test to document how we do this.
+    '''
+
+    # --------------------------------
+    # 1. Start with an existing NITF file that we can create a sensor model for.
+    #    In this case we use an RPC, but this could be anything that MSP
+    #    supports (e.g, a GFM model)
+    # --------------------------------
+    
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    f.image_segment[0].rpc = igc_rpc.rpc
+    f.write("nitf_input_rpc.ntf")
+    msp_base = os.path.dirname(os.environ["MSP_DATA_DIR"])
+    rsm_gen = msp_base + "/sampleCode/RsmGeneratorSample/testRsmGeneratorSample"
+
+    # --------------------------------
+    # 2. Run generation process.
+    #
+    #    Note the file extensions are required, it is how rsm_gen knows which
+    #    each file is.
+    # --------------------------------
+
+    r = subprocess.run([rsm_gen,
+                    os.environ["MSP_DATA_DIR"] + "/rsm/database_settings.strat",
+                    "rsm_generate_report.rep",
+                    "nitf_input_rpc.ntf",
+                    "nitf_rsm_generate_out.tre"], stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE)
+    with open("rsm_generate.log", "w") as fh:
+        print(r.stdout, file=fh)
+
+
+    # --------------------------------
+    # 3. Tool doesn't directly create NITF, instead it write out a file
+    #    with the TREs as strings. Parse this, and use to create a RSM.
+    #    Note that we assume an order to the TREs, we could generalize
+    #    this code if it proves useful.
+    # --------------------------------
+
+    with open("nitf_rsm_generate_out.tre") as fh:
+        for ln in fh:
+            if(ln == "RSM_TRE_DATA\n"):
+                break
+        # Could generalize this probably, but for now have an assumed form
+        # for the RSM
+        ln = fh.readline().rstrip("\n")
+        if(ln[:6] != "RSMIDA"):
+            raise RuntimeError("Didn't find the expected TRE")
+        rsm_id = RsmId.read_tre_string(ln[11:])
+        ln = fh.readline().rstrip("\n")
+        if(ln[:6] != "RSMPCA"):
+            raise RuntimeError("Didn't find the expected TRE")
+        rsm_rp = RsmRationalPolynomial.read_tre_string(ln[11:])
+    rsm = Rsm(rsm_id)
+    rsm.rsm_base = rsm_rp
+
+    # --------------------------------
+    # 4. Generate a NITF file with the RSM in it.
+    # --------------------------------
+
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    f.image_segment[0].rsm = rsm
+    f.write("nitf_rsm.ntf")
+    
+    # --------------------------------
+    # 5. Run the MSP code to compare the RSM to our initial RPC.
+    # --------------------------------
+
+    for i in range(10):
+        for j in range(10):
+            ic = ImageCoordinate(i,j)
+            p1 = msp_terrain_point("nitf_rsm.ntf", ic)
+            p2 = igc_rpc.ground_coordinate(ic)
+            assert(geocal_swig.distance(p1, p2) < 0.01)
+    
 @require_msp
 @require_pynitf
 def test_rsm_rp_with_msp(isolated_dir, rsm_lc, msp_init):

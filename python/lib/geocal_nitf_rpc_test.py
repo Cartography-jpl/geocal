@@ -5,7 +5,7 @@ except ImportError:
 from test_support import *
 from geocal.geocal_nitf_rpc import *
 import geocal_swig
-from geocal_swig import ImageCoordinate
+from geocal_swig import ImageCoordinate, IgcMsp
 
 def create_image_seg(f):
     img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8)
@@ -56,10 +56,11 @@ def test_rpc_with_msp(isolated_dir, igc_rpc, msp_init):
     create_image_seg(f)
     f.image_segment[0].rpc = igc_rpc.rpc
     f.write("nitf_rpc.ntf")
+    igc = IgcMsp("nitf_rpc.ntf")
     for i in range(10):
         for j in range(10):
             ic = ImageCoordinate(i,j)
-            p1 = msp_terrain_point("nitf_rpc.ntf", ic)
+            p1 = igc.ground_coordinate(ic)
             p2 = igc_rpc.ground_coordinate(ic)
             assert(geocal_swig.distance(p1, p2) < 0.01)
 

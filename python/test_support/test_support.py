@@ -350,6 +350,12 @@ def msp_init():
     LD_PRELOAD=/data/smyth/MSP/install/lib/libMSPcsm.so when starting
     python, or alternatively explicitly load the library in python
     with RTLD_GLOBAL. This fixture does the later.
+
+    Note __init__ handles this for the full library, we just do this 
+    explicitly for test support because we aren't loading the full library
+    generally.
+    
+    We may move this to the C++ layer, which means this can then go away.
     '''
     ctypes.CDLL(os.environ["CSM_PLUGIN_DIR"] +
                 "../lib/libMSPcsm.so", ctypes.RTLD_GLOBAL)

@@ -214,6 +214,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_map_projected_test.cc \
+@HAVE_GDAL_TRUE@	@srcimplementation@/igc_msp_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_simulated_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_simulated_ray_caster_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
@@ -432,7 +433,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/map_reprojected_image_wrap.cc \
 	@swigsrc@/pyramid_image_matcher_wrap.cc \
 	@swigsrc@/igc_map_projected_wrap.cc \
-	@swigsrc@/igc_simulated_wrap.cc \
+	@swigsrc@/igc_simulated_wrap.cc @swigsrc@/igc_msp_wrap.cc \
 	@swigsrc@/igc_simulated_ray_caster_wrap.cc \
 	@swigsrc@/igc_image_to_image_match_wrap.cc \
 	@swigsrc@/surface_image_to_image_match_wrap.cc \
@@ -618,6 +619,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-pyramid_image_matcher_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_map_projected_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_simulated_wrap.lo \
+	@swigsrc@/_swig_wrap_la-igc_msp_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_simulated_ray_caster_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_image_to_image_match_wrap.lo \
 	@swigsrc@/_swig_wrap_la-surface_image_to_image_match_wrap.lo \
@@ -829,6 +831,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/map_reprojected_image.cc \
 	@srcimplementation@/igc_map_projected.cc \
 	@srcimplementation@/igc_simulated.cc \
+	@srcimplementation@/igc_msp.cc \
 	@srcimplementation@/igc_simulated_ray_caster.cc \
 	@srcimplementation@/igc_image_to_image_match.cc \
 	@srcimplementation@/surface_image_to_image_match.cc \
@@ -1026,6 +1029,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-map_reprojected_image.lo \
 	@srcimplementation@/libgeocal_la-igc_map_projected.lo \
 	@srcimplementation@/libgeocal_la-igc_simulated.lo \
+	@srcimplementation@/libgeocal_la-igc_msp.lo \
 	@srcimplementation@/libgeocal_la-igc_simulated_ray_caster.lo \
 	@srcimplementation@/libgeocal_la-igc_image_to_image_match.lo \
 	@srcimplementation@/libgeocal_la-surface_image_to_image_match.lo \
@@ -1201,6 +1205,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/image_point_display_test.cc \
 	@srcimplementation@/ogr_coordinate_test.cc \
 	@srcimplementation@/igc_map_projected_test.cc \
+	@srcimplementation@/igc_msp_test.cc \
 	@srcimplementation@/igc_simulated_test.cc \
 	@srcimplementation@/igc_simulated_ray_caster_test.cc \
 	@srcimplementation@/hdf_orbit_test.cc \
@@ -1314,6 +1319,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-image_point_display_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-ogr_coordinate_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_map_projected_test.$(OBJEXT) \
+@HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_msp_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_simulated_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_simulated_ray_caster_test.$(OBJEXT)
 @HAVE_HDF5_TRUE@am__objects_26 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT) \
@@ -1589,6 +1595,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_multiple_pass_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Po \
@@ -1674,6 +1681,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_collection_rolling_shutter.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_image_to_image_match.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_map_projected.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_msp.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_multiple_pass.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_rolling_shutter.Plo \
@@ -1967,6 +1975,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_image_to_image_match_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_map_projected_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_msp_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_multiple_pass_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_ray_caster_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Plo \
@@ -2248,6 +2257,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/map_reprojected_image.h \
 	@srcimplementation@/igc_map_projected.h \
 	@srcimplementation@/igc_simulated.h \
+	@srcimplementation@/igc_msp.h \
 	@srcimplementation@/igc_simulated_ray_caster.h \
 	@srcimplementation@/igc_image_to_image_match.h \
 	@srcimplementation@/surface_image_to_image_match.h \
@@ -3239,6 +3249,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/map_reprojected_image.cc \
 	@srcimplementation@/igc_map_projected.cc \
 	@srcimplementation@/igc_simulated.cc \
+	@srcimplementation@/igc_msp.cc \
 	@srcimplementation@/igc_simulated_ray_caster.cc \
 	@srcimplementation@/igc_image_to_image_match.cc \
 	@srcimplementation@/surface_image_to_image_match.cc \
@@ -3401,7 +3412,7 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/map_reprojected_image_wrap.cc \
 	@swigsrc@/pyramid_image_matcher_wrap.cc \
 	@swigsrc@/igc_map_projected_wrap.cc \
-	@swigsrc@/igc_simulated_wrap.cc \
+	@swigsrc@/igc_simulated_wrap.cc @swigsrc@/igc_msp_wrap.cc \
 	@swigsrc@/igc_simulated_ray_caster_wrap.cc \
 	@swigsrc@/igc_image_to_image_match_wrap.cc \
 	@swigsrc@/surface_image_to_image_match_wrap.cc \
@@ -3626,6 +3637,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/map_reprojected_image.h \
 	@srcimplementation@/igc_map_projected.h \
 	@srcimplementation@/igc_simulated.h \
+	@srcimplementation@/igc_msp.h \
 	@srcimplementation@/igc_simulated_ray_caster.h \
 	@srcimplementation@/igc_image_to_image_match.h \
 	@srcimplementation@/surface_image_to_image_match.h \
@@ -3792,6 +3804,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/pyramid_image_matcher.i \
 	@srcimplementation@/igc_map_projected.i \
 	@srcimplementation@/igc_simulated.i \
+	@srcimplementation@/igc_msp.i \
 	@srcimplementation@/igc_simulated_ray_caster.i \
 	@srcimplementation@/igc_image_to_image_match.i \
 	@srcimplementation@/surface_image_to_image_match.i \
@@ -4658,6 +4671,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-igc_simulated_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-igc_msp_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-igc_simulated_ray_caster_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-igc_image_to_image_match_wrap.lo:  \
@@ -5158,6 +5173,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-igc_simulated.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-igc_msp.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-igc_simulated_ray_caster.lo:  \
@@ -5697,6 +5715,9 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcimplementation@/geocal_test_all-igc_map_projected_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-igc_msp_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-igc_simulated_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -6226,6 +6247,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_multiple_pass_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Po@am__quote@ # am--include-marker
@@ -6311,6 +6333,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_collection_rolling_shutter.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_image_to_image_match.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_map_projected.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_msp.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_multiple_pass.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-igc_rolling_shutter.Plo@am__quote@ # am--include-marker
@@ -6604,6 +6627,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_image_to_image_match_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_map_projected_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_msp_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_multiple_pass_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_ray_caster_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Plo@am__quote@ # am--include-marker
@@ -7379,6 +7403,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/igc_simulated_wrap.cc' object='@swigsrc@/_swig_wrap_la-igc_simulated_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-igc_simulated_wrap.lo `test -f '@swigsrc@/igc_simulated_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_simulated_wrap.cc
+
+@swigsrc@/_swig_wrap_la-igc_msp_wrap.lo: @swigsrc@/igc_msp_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-igc_msp_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_msp_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-igc_msp_wrap.lo `test -f '@swigsrc@/igc_msp_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_msp_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_msp_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_msp_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/igc_msp_wrap.cc' object='@swigsrc@/_swig_wrap_la-igc_msp_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-igc_msp_wrap.lo `test -f '@swigsrc@/igc_msp_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_msp_wrap.cc
 
 @swigsrc@/_swig_wrap_la-igc_simulated_ray_caster_wrap.lo: @swigsrc@/igc_simulated_ray_caster_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-igc_simulated_ray_caster_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_simulated_ray_caster_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-igc_simulated_ray_caster_wrap.lo `test -f '@swigsrc@/igc_simulated_ray_caster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_simulated_ray_caster_wrap.cc
@@ -8793,6 +8824,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_simulated.cc' object='@srcimplementation@/libgeocal_la-igc_simulated.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-igc_simulated.lo `test -f '@srcimplementation@/igc_simulated.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_simulated.cc
+
+@srcimplementation@/libgeocal_la-igc_msp.lo: @srcimplementation@/igc_msp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-igc_msp.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_msp.Tpo -c -o @srcimplementation@/libgeocal_la-igc_msp.lo `test -f '@srcimplementation@/igc_msp.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_msp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_msp.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_msp.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_msp.cc' object='@srcimplementation@/libgeocal_la-igc_msp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-igc_msp.lo `test -f '@srcimplementation@/igc_msp.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_msp.cc
 
 @srcimplementation@/libgeocal_la-igc_simulated_ray_caster.lo: @srcimplementation@/igc_simulated_ray_caster.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-igc_simulated_ray_caster.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_simulated_ray_caster.Tpo -c -o @srcimplementation@/libgeocal_la-igc_simulated_ray_caster.lo `test -f '@srcimplementation@/igc_simulated_ray_caster.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_simulated_ray_caster.cc
@@ -10417,6 +10455,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_map_projected_test.cc' object='@srcimplementation@/geocal_test_all-igc_map_projected_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_map_projected_test.obj `if test -f '@srcimplementation@/igc_map_projected_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_map_projected_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_map_projected_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-igc_msp_test.o: @srcimplementation@/igc_msp_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_msp_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_msp_test.o `test -f '@srcimplementation@/igc_msp_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_msp_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_msp_test.cc' object='@srcimplementation@/geocal_test_all-igc_msp_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_msp_test.o `test -f '@srcimplementation@/igc_msp_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_msp_test.cc
+
+@srcimplementation@/geocal_test_all-igc_msp_test.obj: @srcimplementation@/igc_msp_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_msp_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_msp_test.obj `if test -f '@srcimplementation@/igc_msp_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_msp_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_msp_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_msp_test.cc' object='@srcimplementation@/geocal_test_all-igc_msp_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-igc_msp_test.obj `if test -f '@srcimplementation@/igc_msp_test.cc'; then $(CYGPATH_W) '@srcimplementation@/igc_msp_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/igc_msp_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-igc_simulated_test.o: @srcimplementation@/igc_simulated_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-igc_simulated_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_simulated_test.Tpo -c -o @srcimplementation@/geocal_test_all-igc_simulated_test.o `test -f '@srcimplementation@/igc_simulated_test.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_simulated_test.cc
@@ -12920,6 +12972,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_multiple_pass_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Po
@@ -13005,6 +13058,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_collection_rolling_shutter.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_image_to_image_match.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_map_projected.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_msp.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_multiple_pass.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_rolling_shutter.Plo
@@ -13298,6 +13352,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_image_to_image_match_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_map_projected_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_msp_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_multiple_pass_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_ray_caster_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Plo
@@ -13556,6 +13611,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_collection_rolling_shutter_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_image_to_image_match_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_map_projected_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_msp_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_multiple_pass_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_ray_caster_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-igc_rolling_shutter_test.Po
@@ -13641,6 +13697,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_collection_rolling_shutter.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_image_to_image_match.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_map_projected.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_msp.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_multiple_pass.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_ray_caster.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-igc_rolling_shutter.Plo
@@ -13934,6 +13991,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_collection_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_image_to_image_match_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_map_projected_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_msp_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_multiple_pass_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_ray_caster_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Plo

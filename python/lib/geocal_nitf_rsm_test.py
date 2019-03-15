@@ -7,7 +7,7 @@ import geocal.geocal_nitf_rsm
 from geocal.geocal_nitf_rsm import *
 from geocal_swig import (GdalRasterImage, VicarRasterImage,
                          VicarLiteRasterImage, RsmId, RsmRationalPolynomial,
-                         Rsm, ImageCoordinate)
+                         Rsm, ImageCoordinate, IgcMsp)
 import geocal_swig
 import six
 import numpy as np
@@ -113,10 +113,11 @@ def test_rsm_generate_with_msp(isolated_dir, igc_rpc, msp_init):
     # 5. Run the MSP code to compare the RSM to our initial RPC.
     # --------------------------------
 
+    igc_rsm = IgcMsp("nitf_rsm.ntf")
     for i in range(10):
         for j in range(10):
             ic = ImageCoordinate(i,j)
-            p1 = msp_terrain_point("nitf_rsm.ntf", ic)
+            p1 = igc_rsm.ground_coordinate(ic)
             p2 = igc_rpc.ground_coordinate(ic)
             p3 = rsm.ground_coordinate(ic, igc_rpc.dem)
             assert(geocal_swig.distance(p1, p2) < 0.01)
@@ -130,32 +131,10 @@ def test_rsm_rp_with_msp(isolated_dir, rsm, msp_init):
     code'''    
     f = pynitf.NitfFile()
     create_image_seg(f)
-    rid1 = rsm.rsm_id
-    f2 = pynitf.NitfFile("/home/smyth/Local/geocal-repo/python/nitf_rsm1.ntf")
-    rid2 = f2.image_segment[0].rsm.rsm_id
-    #rid1.coordinate_converter = rid2.coordinate_converter
-    #rid1.full_number_line = rid2.full_number_line
-    #rid1.full_number_sample = rid2.full_number_sample
-    #rid1.min_line = rid2.min_line
-    #rid1.max_line = rid2.max_line
-    #rid1.min_sample = rid2.min_sample
-    #rid1.max_sample = rid2.max_sample
-    print([str(v) for v in rid1.ground_domain_vertex])
-    print([str(v) for v in rid2.ground_domain_vertex])
-    for v in rid1.ground_domain_vertex:
-        print(v)
-        print(rid1.coordinate_converter.convert_to_coordinate(v))
-    print([rid2.coordinate_converter.convert_to_coordinate(v) for v in rid2.ground_domain_vertex])
-    rid1.ground_domain_vertex = rid2.ground_domain_vertex
-    #rid1.ground_reference_point = rid2.ground_reference_point
-    rsm2 = Rsm(rid1)
-    rsm2.rsm_base = rsm.rsm_base
-    f.image_segment[0].rsm = rsm2
-    print(f.image_segment[0].rsm)
-    print(f2.image_segment[0].rsm)
+    f.image_segment[0].rsm = rsm
     f.write("nitf_rsm.ntf")
-    #msp_print_plugin_list()
-    print(msp_terrain_point("nitf_rsm.ntf", ImageCoordinate(10,20)))
+    igc_msp = IgcMsp("nitf_rsm.ntf")
+    print(igc_msp.ground_coordinate(ImageCoordinate(10,20)))
 
 @require_pynitf
 @require_vicar

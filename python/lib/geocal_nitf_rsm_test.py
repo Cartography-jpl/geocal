@@ -118,32 +118,41 @@ def test_rsm_generate_with_msp(isolated_dir, igc_rpc, msp_init):
             ic = ImageCoordinate(i,j)
             p1 = msp_terrain_point("nitf_rsm.ntf", ic)
             p2 = igc_rpc.ground_coordinate(ic)
+            p3 = rsm.ground_coordinate(ic, igc_rpc.dem)
             assert(geocal_swig.distance(p1, p2) < 0.01)
+            assert(geocal_swig.distance(p1, p3) < 0.01)
     
 @require_msp
 @require_pynitf
-def test_rsm_rp_with_msp(isolated_dir, rsm_lc, msp_init):
+def test_rsm_rp_with_msp(isolated_dir, rsm, msp_init):
     '''Compare the RSM we write to a NITF file with what the MSP library 
     calculates. This verifies both the validity of our NITF and our RSM 
     code'''    
     f = pynitf.NitfFile()
     create_image_seg(f)
-    #f.image_segment[0].rsm = rsm
-    # Temp copy RSMDCA
-    f2 = pynitf.NitfFile(rsm_sample_data + "i_6130a.ntf")
-    t = f2.image_segment[0].find_exactly_one_tre("RSMDCA")
-    f.image_segment[0].tre_list.append(t)
-    t = f2.image_segment[0].find_exactly_one_tre("RSMECA")
-    f.image_segment[0].tre_list.append(t)
-    f.image_segment[0].rsm = f2.image_segment[0].rsm
-    #rsm.rsm_id.image_identifier = "2_8"
-    #rsm.rsm_id.rsm_suport_data_edition = "1101222272-2"
-    #rsm.rsm_id.sensor_type = "FRAME"
-    f.image_segment[0].rsm = rsm_lc
-    print(rsm_lc)
-    print(rsm_lc.rsm_id.coordinate_converter)
+    rid1 = rsm.rsm_id
+    f2 = pynitf.NitfFile("/home/smyth/Local/geocal-repo/python/nitf_rsm1.ntf")
+    rid2 = f2.image_segment[0].rsm.rsm_id
+    #rid1.coordinate_converter = rid2.coordinate_converter
+    #rid1.full_number_line = rid2.full_number_line
+    #rid1.full_number_sample = rid2.full_number_sample
+    #rid1.min_line = rid2.min_line
+    #rid1.max_line = rid2.max_line
+    #rid1.min_sample = rid2.min_sample
+    #rid1.max_sample = rid2.max_sample
+    print([str(v) for v in rid1.ground_domain_vertex])
+    print([str(v) for v in rid2.ground_domain_vertex])
+    for v in rid1.ground_domain_vertex:
+        print(v)
+        print(rid1.coordinate_converter.convert_to_coordinate(v))
+    print([rid2.coordinate_converter.convert_to_coordinate(v) for v in rid2.ground_domain_vertex])
+    rid1.ground_domain_vertex = rid2.ground_domain_vertex
+    #rid1.ground_reference_point = rid2.ground_reference_point
+    rsm2 = Rsm(rid1)
+    rsm2.rsm_base = rsm.rsm_base
+    f.image_segment[0].rsm = rsm2
+    print(f.image_segment[0].rsm)
     print(f2.image_segment[0].rsm)
-    print(f2.image_segment[0].rsm.rsm_id.coordinate_converter)
     f.write("nitf_rsm.ntf")
     #msp_print_plugin_list()
     print(msp_terrain_point("nitf_rsm.ntf", ImageCoordinate(10,20)))

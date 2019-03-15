@@ -3115,6 +3115,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/world_view2_reflectance_test.py \
 	@srcpythonlib@/pds_label_test.py \
 	@srcpythonlib@/compare_burl_matlab_test.py \
+	@srcpythonlib@/geocal_nitf_rpc_test.py \
 	@srcpythonlib@/geocal_nitf_rsm_test.py \
 	@srcpythonlib@/geocal_nitf_des_test.py \
 	@srcpythonlib@/geocal_nitf_image_test.py \
@@ -4152,6 +4153,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/image_to_image_connection.py \
 	@srcpythonlib@/doc_inherit.py @srcpythonlib@/tre_struct.py \
 	@srcpythonlib@/dem_generate.py \
+	@srcpythonlib@/geocal_nitf_rpc.py \
 	@srcpythonlib@/geocal_nitf_rsm.py \
 	@srcpythonlib@/geocal_nitf_des.py \
 	@srcpythonlib@/geocal_nitf_image.py \

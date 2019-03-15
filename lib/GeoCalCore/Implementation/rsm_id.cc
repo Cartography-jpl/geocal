@@ -117,14 +117,19 @@ std::string RsmId::tre_string() const
     throw Exception("Writing a RSMIDA TRE only supports GeodeticRadianConverter, GeodeticRadian2piConverter and LocalRcConverter. This is a limitation of the NITF TRE format. Note boost serialization works fine with any CoordinateConverter, just not the NITF TRE");
   if(ground_domain_vertex_.size() != 8)
       throw Exception("Ground domain vertex needs to be exactly 8 points");
+  double x[8], y[8], z[8];
   for(int i = 0; i < 8; ++i) {
     if(!ground_domain_vertex_[i])
       throw Exception("ground_domain_vertex needs to be filled in");
-    double x, y, z;
-    cconv->convert_to_coordinate(*ground_domain_vertex_[i], x, y, z);
-    res += str_check_size(num % x, 21);
-    res += str_check_size(num % y, 21);
-    res += str_check_size(num % z, 21);
+    cconv->convert_to_coordinate(*ground_domain_vertex_[i], x[i], y[i], z[i]);
+  }
+  // Check the vertex constraint
+  if(!(x[0] < x[1] && y[0] < y[2] && z[0] < z[4]))
+    throw Exception("ground_domain_vertex needs to obey the vertex order constraint V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based numbering)");
+  for(int i = 0; i < 8; ++i) {
+    res += str_check_size(num % x[i], 21);
+    res += str_check_size(num % y[i], 21);
+    res += str_check_size(num % z[i], 21);
   }
   if(ground_reference_point_) {
     double x, y, z;
@@ -147,6 +152,7 @@ std::string RsmId::tre_string() const
     res += str_check_size(num_missing % "", 21);
   return res;
 }
+
 
 //-----------------------------------------------------------------------
 /// Read a TRE string. 

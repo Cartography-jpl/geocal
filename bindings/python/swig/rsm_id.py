@@ -461,7 +461,15 @@ class RsmId(geocal_swig.generic_object.GenericObject):
         """
 
         void GeoCal::RsmId::ground_domain_vertex(const std::vector< boost::shared_ptr< GroundCoordinate > > &V)
+        Set the ground domain vertex values.
 
+        This should be exactly 8 points, and the vertexes need to be ordered
+        at specified in the NITF standard. Because the coordinate_converter
+        might not be set or might be changed, we can only check that in when
+        generating the TRE.
+
+        The constraint is V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based
+        numbering). 
         """
         return _rsm_id.RsmId__v_ground_domain_vertex(self, *args)
 

@@ -6,6 +6,8 @@
 #include "rsm_indirect_covariance.h"
 #include "rsm_adjustable_parameter.h"
 #include "coordinate_converter.h"
+#include <deque>
+#include <boost/array.hpp>
 
 namespace GeoCal {
   class ImageGroundConnection; // Forward declaration.

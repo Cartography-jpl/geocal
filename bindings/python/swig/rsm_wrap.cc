@@ -9125,7 +9125,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"Note that you don't normally need to call this directly, the \"fit\"\n"
 		"function already does this. But it can be useful in unit testing and\n"
-		"perhaps other contexts to directly calculate this. \n"
+		"perhaps other contexts to directly calculate this.\n"
+		"\n"
+		"There is specific requirements about the ordering the vertices (see\n"
+		"the RSM documentation). We make sure the data is given in this order.\n"
+		"\n"
 		""},
 	 { (char *)"Rsm_compare_igc", _wrap_Rsm_compare_igc, METH_VARARGS, (char *)"\n"
 		"\n"

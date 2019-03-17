@@ -1,4 +1,5 @@
 #include "rsm.h"
+#include "geocal_matrix.h"
 #include "local_rectangular_coordinate.h"
 #include "ostream_pad.h"
 #include "geocal_gsl_root.h"
@@ -7,6 +8,7 @@
 #include "planet_coordinate.h"
 #include "image_ground_connection.h"
 #include <boost/make_shared.hpp>
+#include <algorithm>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -298,26 +300,90 @@ void Rsm::fit(const ImageGroundConnection& Igc, double Min_height,
 /// normally need to call this directly, the "fit" function already
 /// does this. But it can be useful in unit testing and perhaps other
 /// contexts to directly calculate this.
+///
+/// There is specific requirements about the ordering the vertices (see
+/// the RSM documentation). We make sure the data is given in this order.
 //-----------------------------------------------------------------------
 
 void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)
 {
-  int ind = 0;
-  for(int hind = 0; hind < 2; ++hind)
-    for(int lind = 0; lind < 2; ++lind)
-      for(int sind = 0; sind < 2; ++sind, ++ind) {
-	// Temporary, we'll need to fix this
-	try {
-	  rid->ground_domain_vertex()[ind] = ground_coordinate_approx_height
-	    (ImageCoordinate((lind == 0 ? rp->min_line() : rp->max_line()),
-			     (sind == 0 ? rp->min_sample() : rp->max_sample())),
-	     (hind == 0 ? Min_height : Max_height));
-	} catch(const std::exception& E) {
-	  // Temporary, we'll need to fix this
-	  std::cerr << "Warning, ground_coordinate_approx_height failed. Skipping error for now, and filling in with default data.\n";
-	  rid->ground_domain_vertex()[ind] = coordinate_converter()->convert_from_coordinate((rp->min_x() + rp->min_x())/2, (rp->min_y() + rp->min_y())/2, (rp->min_z() + rp->min_z())/2);
-	}
-      }
+  for(int hind = 0; hind < 2; ++hind) {
+    std::deque<boost::array<double, 3> > pts;
+    // Temporary, we'll need to fix this
+    try {
+      boost::shared_ptr<GroundCoordinate> gc;
+      boost::array<double,3> p;
+      gc = ground_coordinate_approx_height(
+		   ImageCoordinate(rp->min_line(), rp->min_sample()),
+		   (hind == 0 ? Min_height : Max_height));
+      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+      pts.push_back(p);
+      gc = ground_coordinate_approx_height(
+		   ImageCoordinate(rp->max_line(), rp->min_sample()),
+		   (hind == 0 ? Min_height : Max_height));
+      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+      pts.push_back(p);
+      gc = ground_coordinate_approx_height(
+		   ImageCoordinate(rp->max_line(), rp->max_sample()),
+		   (hind == 0 ? Min_height : Max_height));
+      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+      pts.push_back(p);
+      gc = ground_coordinate_approx_height(
+		   ImageCoordinate(rp->min_line(), rp->max_sample()),
+		   (hind == 0 ? Min_height : Max_height));
+      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+      pts.push_back(p);
+    } catch(const std::exception& E) {
+      // Temporary, we'll need to fix this
+      std::cerr << "Warning, ground_coordinate_approx_height failed. Skipping error for now, and filling in with default data.\n";
+      pts.clear();
+      double h = (hind == 0 ? Min_height : Max_height);
+      boost::array<double,3> p;
+      p[2] = h;
+      p[0] = rp->min_x(); p[1] = rp->min_y();
+      pts.push_back(p);
+      p[0] = rp->min_x(); p[1] = rp->max_y();
+      pts.push_back(p);
+      p[0] = rp->max_x(); p[1] = rp->max_y();
+      pts.push_back(p);
+      p[0] = rp->max_x(); p[1] = rp->min_y();
+      pts.push_back(p);
+    }
+    // Check if linear ring is in a clockwise direction
+    boost::array<double, 3> t;
+    boost::array<double, 3> x1,x2;
+    for(int i = 0; i < 3; ++i) {
+      x1[i] = pts[1][i]-pts[0][i];
+      x2[i] = pts[3][i]-pts[0][i];
+    }
+    cross(x1,x2,t);
+    bool is_clockwise = (t[2] < 0);
+    // If not clockwise, swap corners so it is
+    if(!is_clockwise)
+      std::swap(pts[1], pts[3]);
+    // Shift the linear ring until the first element is the lower left corner.
+    int i = 0;
+    while(pts[0][1] > pts[1][1] || pts[0][0] > pts[3][0]) {
+      pts.push_back(pts[0]);
+      pts.pop_front();
+      // Might be some weird pathological case where condition never met
+      // (e.g., we have NaN or something like that.
+      if(++i > 4)
+	throw Exception("This shouldn't be able to happen");
+    }
+    // Save points. Note that these don't go in a linear ring order, just
+    // by convention 0 is lower left corner, 1 is lower right, 2 upper left,
+    // 3 is upper right.
+    int b = (hind == 0 ? 0 : 4);
+    rid->ground_domain_vertex()[b + 0] = coordinate_converter()->
+      convert_from_coordinate(pts[0][0],pts[0][1],pts[0][2]);
+    rid->ground_domain_vertex()[b + 1] = coordinate_converter()->
+      convert_from_coordinate(pts[3][0],pts[3][1],pts[3][2]);
+    rid->ground_domain_vertex()[b + 2] = coordinate_converter()->
+      convert_from_coordinate(pts[1][0],pts[1][1],pts[1][2]);
+    rid->ground_domain_vertex()[b + 3] = coordinate_converter()->
+      convert_from_coordinate(pts[2][0],pts[2][1],pts[2][2]);
+  }
   rid->min_line(rp->min_line());
   rid->max_line(rp->max_line());
   rid->min_sample(rp->min_sample());

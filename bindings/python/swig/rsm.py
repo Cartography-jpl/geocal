@@ -290,7 +290,11 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
 
         Note that you don't normally need to call this directly, the "fit"
         function already does this. But it can be useful in unit testing and
-        perhaps other contexts to directly calculate this. 
+        perhaps other contexts to directly calculate this.
+
+        There is specific requirements about the ordering the vertices (see
+        the RSM documentation). We make sure the data is given in this order.
+
         """
         return _rsm.Rsm_fill_in_ground_domain_vertex(self, Min_height, Max_height)
 

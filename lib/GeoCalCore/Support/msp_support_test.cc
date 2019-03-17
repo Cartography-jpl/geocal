@@ -35,6 +35,8 @@ BOOST_AUTO_TEST_CASE(test_msp_print_plugin_list)
 {
   if(!have_msp_supported())
     return;
+  // Don't normally run.
+  return;
   msp_print_plugin_list();
 }
 

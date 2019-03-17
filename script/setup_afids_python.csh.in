@@ -18,6 +18,11 @@ if("@have_msp@" == "yes") then
     setenv MSP_DATA_DIR @MSP_PREFIX@/data
     setenv MSPCCS_DATA @MSP_PREFIX@/data
     setenv CSM_PLUGIN_DIR @MSP_PREFIX@/plugins/
+    if($?LD_LIBRARY_PATH) then
+       setenv LD_LIBRARY_PATH @MSP_PREFIX@/lib:${LD_LIBRARY_PATH}
+    else
+       setenv LD_LIBRARY_PATH @MSP_PREFIX@/lib
+    endif
 endif
 
 

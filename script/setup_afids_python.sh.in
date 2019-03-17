@@ -18,4 +18,9 @@ if [ "@have_msp@" = "yes" ]; then
     export MSP_DATA_DIR=@MSP_PREFIX@/data
     export MSPCCS_DATA=@MSP_PREFIX@/data
     export CSM_PLUGIN_DIR=@MSP_PREFIX@/plugins/
+    if [ -n "$LD_LIBRARY_PATH" ]; then
+	export LD_LIBRARY_PATH=@MSP_PREFIX@/lib:${LD_LIBRARY_PATH}
+    else
+	export LD_LIBRARY_PATH=@MSP_PREFIX@/lib
+    fi
 fi

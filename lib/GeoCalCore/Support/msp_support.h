@@ -25,10 +25,7 @@ public:
   virtual ~MspNotAvailableException() throw() {}
 };
 
-bool have_msp_supported();
 Ecr msp_terrain_point(const std::string& Fname, const ImageCoordinate& Ic);
-void msp_print_plugin_list();
-void msp_register_plugin(const std::string& Plugin_name);  
 }
 #endif
 

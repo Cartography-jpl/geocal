@@ -6709,6 +6709,27 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_have_msp_supported(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"have_msp_supported",0,0,0)) SWIG_fail;
+  {
+    try {
+      result = (bool)GeoCal::have_msp_supported();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_IgcMsp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
@@ -6742,6 +6763,63 @@ SWIGINTERN PyObject *_wrap_new_IgcMsp(PyObject *SWIGUNUSEDPARM(self), PyObject *
     boost::shared_ptr<  GeoCal::IgcMsp > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcMsp >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp_msp_print_plugin_list(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  
+  if (!SWIG_Python_UnpackTuple(args,"IgcMsp_msp_print_plugin_list",0,0,0)) SWIG_fail;
+  {
+    try {
+      GeoCal::IgcMsp::msp_print_plugin_list();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp_msp_register_plugin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp_msp_register_plugin" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcMsp_msp_register_plugin" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      GeoCal::IgcMsp::msp_register_plugin((std::string const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
@@ -6823,6 +6901,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
+	 { (char *)"have_msp_supported", (PyCFunction)_wrap_have_msp_supported, METH_NOARGS, (char *)"\n"
+		"\n"
+		"bool GeoCal::have_msp_supported()\n"
+		"Return true if we were built with MSP support, false otherwise. \n"
+		""},
 	 { (char *)"new_IgcMsp", (PyCFunction)_wrap_new_IgcMsp, METH_O, (char *)"\n"
 		"\n"
 		"IgcMsp::IgcMsp(const std::string &Fname)\n"
@@ -6833,6 +6916,19 @@ static PyMethodDef SwigMethods[] = {
 		"setup, but the variables are MSP_DATA_DIR, MSPCCS_DATA, and\n"
 		"CSM_PLUGIN_DIR. Note the directory should end in \"/\", just as a\n"
 		"convention - so /foo/bar/plugins/. \n"
+		""},
+	 { (char *)"IgcMsp_msp_print_plugin_list", (PyCFunction)_wrap_IgcMsp_msp_print_plugin_list, METH_NOARGS, (char *)"\n"
+		"\n"
+		"void IgcMsp::msp_print_plugin_list()\n"
+		"Print a list of all plugins. \n"
+		""},
+	 { (char *)"IgcMsp_msp_register_plugin", (PyCFunction)_wrap_IgcMsp_msp_register_plugin, METH_O, (char *)"\n"
+		"\n"
+		"void IgcMsp::msp_register_plugin(const std::string &Plugin_name)\n"
+		"Register the given plugin.\n"
+		"\n"
+		"Note that we already register all the plugins at CSM_PLUGIN_DIR, so\n"
+		"you don't usually need to use this function. \n"
 		""},
 	 { (char *)"delete_IgcMsp", (PyCFunction)_wrap_delete_IgcMsp, METH_O, (char *)"\n"
 		"\n"

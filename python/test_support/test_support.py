@@ -305,9 +305,9 @@ def rsm_lc(rsm_rational_polynomial_lc, igc_rpc):
 def rsm_g(rsm_grid):
     res = Rsm(rsm_grid, GeodeticRadianConverter())
     # This fails. We'll have to figure out what the problem is and fix it,
-    # but in the mean time put dummy data in so we can bypass this problem
-    # res.fill_in_ground_domain_vertex(500, 1500)
-    res.rsm_id.ground_domain_vertex = [Geodetic(10,20)] * 8
+    # but in the mean time we put dummy data in so we can bypass this problem
+    # A warning will get printed out
+    res.fill_in_ground_domain_vertex(500, 1500)
     res.rsm_id.min_line = rsm_grid.min_line
     res.rsm_id.max_line = rsm_grid.max_line
     res.rsm_id.min_sample = rsm_grid.min_sample

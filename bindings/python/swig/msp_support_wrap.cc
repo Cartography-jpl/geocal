@@ -6620,27 +6620,6 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_have_msp_supported(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  bool result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"have_msp_supported",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (bool)GeoCal::have_msp_supported();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_msp_terrain_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
@@ -6710,63 +6689,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_msp_print_plugin_list(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  
-  if (!SWIG_Python_UnpackTuple(args,"msp_print_plugin_list",0,0,0)) SWIG_fail;
-  {
-    try {
-      GeoCal::msp_print_plugin_list();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_msp_register_plugin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "msp_register_plugin" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "msp_register_plugin" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    try {
-      GeoCal::msp_register_plugin((std::string const &)*arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return NULL;
-}
-
-
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -6787,11 +6709,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"have_msp_supported", (PyCFunction)_wrap_have_msp_supported, METH_NOARGS, (char *)"\n"
-		"\n"
-		"bool GeoCal::have_msp_supported()\n"
-		"Return true if we were built with MSP support, false otherwise. \n"
-		""},
 	 { (char *)"msp_terrain_point", _wrap_msp_terrain_point, METH_VARARGS, (char *)"\n"
 		"\n"
 		"Ecr GeoCal::msp_terrain_point(const std::string &Fname, const ImageCoordinate &Ic)\n"
@@ -6822,19 +6739,6 @@ static PyMethodDef SwigMethods[] = {
 		"python, or alternatively explicitly load the library in python with\n"
 		"RTLD_GLOBAL: ctypes.CDLL(os.environ[\"CSM_PLUGIN_DIR\"] +\n"
 		"\"../lib/libMSPcsm.so\", ctypes.RTLD_GLOBAL) \n"
-		""},
-	 { (char *)"msp_print_plugin_list", (PyCFunction)_wrap_msp_print_plugin_list, METH_NOARGS, (char *)"\n"
-		"\n"
-		"void GeoCal::msp_print_plugin_list()\n"
-		"Print a list of all plugins. \n"
-		""},
-	 { (char *)"msp_register_plugin", (PyCFunction)_wrap_msp_register_plugin, METH_O, (char *)"\n"
-		"\n"
-		"void GeoCal::msp_register_plugin(const std::string &Plugin_name)\n"
-		"Register the given plugin.\n"
-		"\n"
-		"Note that we already register all the plugins at CSM_PLUGIN_DIR, so\n"
-		"you don't usually need to use this function. \n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

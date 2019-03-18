@@ -4,6 +4,8 @@
 #include "msp_support.h"
 
 namespace GeoCal {
+bool have_msp_supported();
+  
 /****************************************************************//**
   This is an ImageGroundConnection that uses the MSP (Mensuration
   Service Program) library to implement an ImageGroundConnection. This
@@ -53,6 +55,8 @@ class IgcMsp: public virtual ImageGroundConnectionCopy {
 public:
   IgcMsp(const std::string& Fname);
   virtual ~IgcMsp() {}
+  static void msp_print_plugin_list();
+  static void msp_register_plugin(const std::string& Plugin_name);
 private:
   IgcMsp() {}
   friend class boost::serialization::access;

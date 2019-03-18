@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "msp_support.h"
+#include "igc_msp.h"
 #include "geodetic.h"
 #include "gdal_raster_image.h"
 
@@ -37,7 +38,7 @@ BOOST_AUTO_TEST_CASE(test_msp_print_plugin_list)
     return;
   // Don't normally run.
   return;
-  msp_print_plugin_list();
+  IgcMsp::msp_print_plugin_list();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

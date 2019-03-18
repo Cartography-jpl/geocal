@@ -184,6 +184,14 @@ import geocal_swig.image_ground_connection
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
+
+def have_msp_supported():
+    """
+
+    bool GeoCal::have_msp_supported()
+    Return true if we were built with MSP support, false otherwise. 
+    """
+    return _igc_msp.have_msp_supported()
 class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
     """
 
@@ -246,6 +254,29 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
         """
         _igc_msp.IgcMsp_swiginit(self, _igc_msp.new_IgcMsp(Fname))
 
+    def msp_print_plugin_list():
+        """
+
+        void IgcMsp::msp_print_plugin_list()
+        Print a list of all plugins. 
+        """
+        return _igc_msp.IgcMsp_msp_print_plugin_list()
+
+    msp_print_plugin_list = staticmethod(msp_print_plugin_list)
+
+    def msp_register_plugin(Plugin_name):
+        """
+
+        void IgcMsp::msp_register_plugin(const std::string &Plugin_name)
+        Register the given plugin.
+
+        Note that we already register all the plugins at CSM_PLUGIN_DIR, so
+        you don't usually need to use this function. 
+        """
+        return _igc_msp.IgcMsp_msp_register_plugin(Plugin_name)
+
+    msp_register_plugin = staticmethod(msp_register_plugin)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -253,8 +284,27 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
 IgcMsp_swigregister = _igc_msp.IgcMsp_swigregister
 IgcMsp_swigregister(IgcMsp)
 
+def IgcMsp_msp_print_plugin_list():
+    """
 
-__all__ = ["IgcMsp"]
+    void IgcMsp::msp_print_plugin_list()
+    Print a list of all plugins. 
+    """
+    return _igc_msp.IgcMsp_msp_print_plugin_list()
+
+def IgcMsp_msp_register_plugin(Plugin_name):
+    """
+
+    void IgcMsp::msp_register_plugin(const std::string &Plugin_name)
+    Register the given plugin.
+
+    Note that we already register all the plugins at CSM_PLUGIN_DIR, so
+    you don't usually need to use this function. 
+    """
+    return _igc_msp.IgcMsp_msp_register_plugin(Plugin_name)
+
+
+__all__ = ["IgcMsp","have_msp_supported"]
 
 
 

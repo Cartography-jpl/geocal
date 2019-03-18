@@ -95,6 +95,20 @@ GEOCAL_IMPLEMENT(IgcMspImp);
 
 #endif // HAVE_MSP
 //-----------------------------------------------------------------------
+/// Return true if we were built with MSP support, false
+/// otherwise. 
+//-----------------------------------------------------------------------
+
+bool GeoCal::have_msp_supported()
+{
+#ifdef HAVE_MSP
+  return true;
+#else
+  return false;
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Constructor.
 ///
 /// Note to use the MSP library, you should make sure the proper
@@ -116,5 +130,64 @@ IgcMsp::IgcMsp(const std::string& Fname)
 #endif
 }
 
+//-----------------------------------------------------------------------
+/// Print a list of all plugins.
+//-----------------------------------------------------------------------
 
+void IgcMsp::msp_print_plugin_list()
+{
+#ifdef HAVE_MSP
+try {
+  MSP::SDS::SupportDataService sds;
+  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+    boost::make_shared<MSP::SMS::SensorModelService>();
+  MSP::SMS::NameList plugin_list;
+  sms->getAllRegisteredPlugins(plugin_list);
+  std::cout << "MSP Plugin list:\n";
+  BOOST_FOREACH(const std::string& n, plugin_list)
+    std::cout<< "  " << n << "\n";
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+#else
+  throw MspNotAvailableException();
+#endif
+}
 
+//-----------------------------------------------------------------------
+/// Register the given plugin. Note that we already register all the
+/// plugins at CSM_PLUGIN_DIR, so you don't usually need to use this
+/// function.
+//-----------------------------------------------------------------------
+
+void IgcMsp::msp_register_plugin(const std::string& Plugin_name)
+{
+#ifdef HAVE_MSP
+try {
+  std::cerr << "Step 1\n";
+  MSP::SDS::SupportDataService sds;
+  std::cerr << "Step 2\n";
+  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+    boost::make_shared<MSP::SMS::SensorModelService>();
+  std::cerr << "Step 3\n";
+  sms->registerPlugin(Plugin_name);
+  std::cerr << "Step 4\n";
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+#else
+  throw MspNotAvailableException();
+#endif
+}

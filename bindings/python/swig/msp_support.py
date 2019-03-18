@@ -183,14 +183,6 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.ground_coordinate
 
-def have_msp_supported():
-    """
-
-    bool GeoCal::have_msp_supported()
-    Return true if we were built with MSP support, false otherwise. 
-    """
-    return _msp_support.have_msp_supported()
-
 def msp_terrain_point(Fname, Ic):
     """
 
@@ -225,26 +217,7 @@ def msp_terrain_point(Fname, Ic):
     """
     return _msp_support.msp_terrain_point(Fname, Ic)
 
-def msp_print_plugin_list():
-    """
-
-    void GeoCal::msp_print_plugin_list()
-    Print a list of all plugins. 
-    """
-    return _msp_support.msp_print_plugin_list()
-
-def msp_register_plugin(Plugin_name):
-    """
-
-    void GeoCal::msp_register_plugin(const std::string &Plugin_name)
-    Register the given plugin.
-
-    Note that we already register all the plugins at CSM_PLUGIN_DIR, so
-    you don't usually need to use this function. 
-    """
-    return _msp_support.msp_register_plugin(Plugin_name)
-
-__all__ = ["have_msp_supported","msp_terrain_point","msp_print_plugin_list","msp_register_plugin"]
+__all__ = ["msp_terrain_point"]
 
 
 

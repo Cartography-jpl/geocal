@@ -1,9 +1,8 @@
 #include "igc_msp.h"
-// This will probably go away and get sucked into this class
-#include "msp_support.h"
 #include "geocal_internal_config.h"
 #include "geocal_serialize_support.h"
 #include "simple_dem.h"
+#include "ecr.h"
 #include <cstdlib>
 #include <dlfcn.h>
 #ifdef HAVE_MSP
@@ -36,28 +35,22 @@ GEOCAL_IMPLEMENT(IgcMsp);
 namespace GeoCal {
 class IgcMspImp: public virtual ImageGroundConnection {
 public:
-  IgcMspImp(const std::string& Fname) : fname_(Fname) { init(); }
+  IgcMspImp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem)
+    : fname_(Fname) { dem_ = Dem; init(); }
   virtual ~IgcMspImp() {}
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, 
-			const Dem& D) const
-  { // Temporary, we should have a more efficient version of this that
-    // doesn't parse the file for every request.
-    // Note this doesn't actually make use the DEM, we'll need to put
-    // that in somehow.
-    const SimpleDem* sd = dynamic_cast<const SimpleDem*>(&D);
-    if(!sd)
-      throw Exception("Right now, IgcMsp only works with constant DEMs of SimpleDem");
-    if(sd->h() != 0.0)
-      throw Exception("Right now, IgcMsp only works with height of 0");
-    return boost::make_shared<Ecr>(msp_terrain_point(fname_, Ic));
-  }
+			const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const
   { throw Exception("Not Implemented"); }
 private:
   std::string fname_;
-  void init() { IgcMsp::msp_init(); }
+  boost::shared_ptr<MSP::SMS::SensorModelService> sms;
+  boost::shared_ptr<csm::RasterGM> model;
+  boost::shared_ptr<MSP::TS::TerrainModel> terrain_model;
+  mutable MSP::PES::PointExtractionService pes;
+  void init();
   IgcMspImp() {}
   friend class boost::serialization::access;
   template<class Archive>
@@ -95,6 +88,82 @@ void IgcMspImp::load(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(IgcMspImp);
 #endif
 
+void IgcMspImp::init()
+{
+try {
+  IgcMsp::msp_init();
+  MSP::SDS::SupportDataService sds;
+  sms = boost::make_shared<MSP::SMS::SensorModelService>();
+  boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(fname_.c_str()));
+  if(sds.getNumImages(*isd) > 1)
+    throw Exception("Only handle 1 image for now");
+  MSP::WarningListType msg;
+  boost::shared_ptr<csm::Model>
+   model_raw(sms->createModelFromFile(fname_.c_str(),0,0,&msg));
+  // We may want to turn this off, but for now it is useful to get all
+  // the warning messages when we create the model.
+  BOOST_FOREACH(const MSP::Warning& w, msg) {
+    std::cout << "Warning:\n" << w.getMessage() << "\n"
+	      << w.getFunction() << "\n";
+  }
+  model = boost::dynamic_pointer_cast<csm::RasterGM>(model_raw);
+  if(!model)
+    throw Exception("Model needs to be a RasterGM model");
+  // Create constant height terrain. Not sure if this is the same as
+  // our SimpleDem or not.
+  MSP::TS::TerrainService terrain_service;
+  MSP::IntersectionUncertainty uncertainty;
+  MSP::TS::TerrainModel *tm;
+  boost::shared_ptr<SimpleDem> sd = boost::dynamic_pointer_cast<SimpleDem>(dem_);
+  if(!sd)
+    throw Exception("Right now, IgcMsp only works with constant DEMs of SimpleDem");
+  terrain_service.createConstantHeightTerrainModel(sd->h(), uncertainty, tm);
+  terrain_model.reset(tm);
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+}
+
+boost::shared_ptr<GroundCoordinate> IgcMspImp::ground_coordinate_dem
+(const ImageCoordinate& Ic, const Dem& D) const
+{
+try { 
+  const SimpleDem* sd = dynamic_cast<const SimpleDem*>(&D);
+  if(!sd)
+    throw Exception("Right now, IgcMsp only works with constant DEMs of SimpleDem");
+  boost::shared_ptr<MSP::TS::TerrainModel> tm_to_use = terrain_model;
+  boost::shared_ptr<SimpleDem> curr_dem = boost::dynamic_pointer_cast<SimpleDem>(dem_);
+  if(sd->h() != curr_dem->h()) {
+    MSP::TS::TerrainService terrain_service;
+    MSP::IntersectionUncertainty uncertainty;
+    MSP::TS::TerrainModel *tm;
+    terrain_service.createConstantHeightTerrainModel(sd->h(), uncertainty, tm);
+    tm_to_use.reset(tm);
+  }
+  MSP::GroundPoint gp;
+  std::string terrain_type_used;
+  MSP::ImagePoint ipoint(Ic.line,Ic.sample);
+  ipoint.setImageID(model->getImageIdentifier());
+  pes.intersectTerrain(model.get(), ipoint, *tm_to_use, gp,
+		       terrain_type_used);
+  return boost::make_shared<Ecr>(gp.getX(), gp.getY(), gp.getZ());
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+}
+
 #endif // HAVE_MSP
 //-----------------------------------------------------------------------
 /// Return true if we were built with MSP support, false
@@ -120,11 +189,11 @@ bool GeoCal::have_msp_supported()
 /// convention - so /foo/bar/plugins/.
 //-----------------------------------------------------------------------
 
-IgcMsp::IgcMsp(const std::string& Fname)
+IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem)
 {
 #ifdef HAVE_MSP
-  igc = boost::make_shared<IgcMspImp>(Fname);
-  initialize(boost::make_shared<SimpleDem>(),
+  igc = boost::make_shared<IgcMspImp>(Fname, Dem);
+  initialize(igc->dem_ptr(),
 	     igc->image(), igc->image_multi_band(),
 	     igc->title(), igc->image_mask(), igc->ground_mask());
 #else

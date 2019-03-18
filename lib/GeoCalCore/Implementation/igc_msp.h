@@ -1,7 +1,7 @@
 #ifndef IGC_MSP_H
 #define IGC_MSP_H
 #include "image_ground_connection.h"
-#include "msp_support.h"
+#include "simple_dem.h"
 
 namespace GeoCal {
 bool have_msp_supported();
@@ -22,7 +22,8 @@ bool have_msp_supported();
 
 class IgcMsp: public virtual ImageGroundConnectionCopy {
 public:
-  IgcMsp(const std::string& Fname);
+  IgcMsp(const std::string& Fname,
+   const boost::shared_ptr<Dem>& Dem = boost::shared_ptr<Dem>(new SimpleDem()));
   virtual ~IgcMsp() {}
   static void msp_print_plugin_list();
   static void msp_register_plugin(const std::string& Plugin_name);

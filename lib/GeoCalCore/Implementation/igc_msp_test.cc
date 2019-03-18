@@ -30,6 +30,20 @@ BOOST_AUTO_TEST_CASE(basic)
 		  << GeoCal::distance(*gp1, *gp2) << "\n" << "\n";
       BOOST_CHECK(GeoCal::distance(*gp1, *gp2) < 0.01);
     }
+  for(int i = 0; i < 10; ++i)
+    for(int j = 0; j < 10; ++j) {
+      ImageCoordinate ic(i, j);
+      boost::shared_ptr<GroundCoordinate> gp1 =
+	igc.ground_coordinate_approx_height(ic, 100);
+      boost::shared_ptr<GroundCoordinate> gp2 =
+	img.rpc().ground_coordinate(ic, 100);
+      if(false)
+	std::cerr << ic << "\n"
+		  << Geodetic(*gp1) << "\n"
+		  << Geodetic(*gp2) << "\n"
+		  << GeoCal::distance(*gp1, *gp2) << "\n" << "\n";
+      BOOST_CHECK(GeoCal::distance(*gp1, *gp2) < 0.01);
+    }
 }
 
 BOOST_AUTO_TEST_CASE(serialize)

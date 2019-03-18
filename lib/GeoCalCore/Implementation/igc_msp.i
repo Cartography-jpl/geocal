@@ -15,6 +15,7 @@ bool have_msp_supported();
 class IgcMsp : public ImageGroundConnectionCopy {
 public:
   IgcMsp(const std::string& Fname);
+  IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem);
   static void msp_print_plugin_list();
   static void msp_register_plugin(const std::string& Plugin_name);
   %pickle_serialization;

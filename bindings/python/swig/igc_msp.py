@@ -214,10 +214,11 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Fname):
+    def __init__(self, *args):
         """
 
-        IgcMsp::IgcMsp(const std::string &Fname)
+        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem >
+        &Dem=boost::shared_ptr< Dem >(new SimpleDem()))
         Constructor.
 
         Note to use the MSP library, you should make sure the proper
@@ -226,7 +227,7 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
         CSM_PLUGIN_DIR. Note the directory should end in "/", just as a
         convention - so /foo/bar/plugins/. 
         """
-        _igc_msp.IgcMsp_swiginit(self, _igc_msp.new_IgcMsp(Fname))
+        _igc_msp.IgcMsp_swiginit(self, _igc_msp.new_IgcMsp(*args))
 
     def msp_print_plugin_list():
         """

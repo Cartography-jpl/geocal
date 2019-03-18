@@ -34,7 +34,7 @@ def test_rsm_rp(isolated_dir, rsm):
 
 @require_msp
 @require_pynitf
-def test_rsm_generate_with_msp(isolated_dir, igc_rpc, msp_init):
+def test_rsm_generate_with_msp(isolated_dir, igc_rpc):
     '''This uses the MSP toolkit to generate a RSM file, and makes sure
     MSP is happy with it.
 
@@ -125,7 +125,7 @@ def test_rsm_generate_with_msp(isolated_dir, igc_rpc, msp_init):
     
 @require_msp
 @require_pynitf
-def test_rsm_rp_with_msp(isolated_dir, rsm, msp_init):
+def test_rsm_rp_with_msp(isolated_dir, rsm):
     '''Compare the RSM we write to a NITF file with what the MSP library 
     calculates. This verifies both the validity of our NITF and our RSM 
     code'''    

@@ -48,7 +48,7 @@ def test_rpc(isolated_dir, rpc):
 
 @require_msp
 @require_pynitf
-def test_rpc_with_msp(isolated_dir, igc_rpc, msp_init):
+def test_rpc_with_msp(isolated_dir, igc_rpc):
     '''Compare the RSM we write to a NITF file with what the MSP library 
     calculates. This verifies both the validity of our NITF and our RSM 
     code'''    

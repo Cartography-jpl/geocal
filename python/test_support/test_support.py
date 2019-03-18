@@ -6,7 +6,6 @@ from geocal_swig import *
 import geocal_swig
 import os.path
 import os
-import ctypes
 import sys
 import subprocess
 import pytest
@@ -325,40 +324,6 @@ def rsm_ms_g(rsm_ms_grid):
     res = Rsm(rsm_ms_grid, GeodeticRadianConverter())
     res.fill_in_ground_domain_vertex(500, 1500)
     return res
-
-@pytest.fixture(scope="session")
-def msp_init():
-    '''Extra code that needs to be run so plugins are properly loaded.
-    
-    The SensorModelService code automatically loads all the plugins
-    found at CSM_PLUGIN_DIR. However, it will silently fail when it
-    tries to load them. You can see this by running with
-    LD_DEBUG=files to get debugging information from ld.so. This does
-    not happen in C++.
-
-    Turns out that the plugins depend on the library libMSPcsm.so,
-    although they don't list this as a dependency. The plugins
-    probably should, but since we don't have the source we can't fix
-    this. For C++, the library get loaded as a dependency of
-    geocal. The same happens in python, but the difference is that
-    geocal loads this with RTLD_GLOBAL and python with RTD_LOCAL (see
-    man page on dlopen for description of these). This means in C++
-    the symbols can be resolved when SensorModelService loads a
-    plugin. For python, this can't be used.
-
-    The solution is to preload the library. You can either define
-    LD_PRELOAD=/data/smyth/MSP/install/lib/libMSPcsm.so when starting
-    python, or alternatively explicitly load the library in python
-    with RTLD_GLOBAL. This fixture does the later.
-
-    Note __init__ handles this for the full library, we just do this 
-    explicitly for test support because we aren't loading the full library
-    generally.
-    
-    We may move this to the C++ layer, which means this can then go away.
-    '''
-    ctypes.CDLL(os.environ["CSM_PLUGIN_DIR"] +
-                "../lib/libMSPcsm.so", ctypes.RTLD_GLOBAL)
 
 @pytest.fixture(scope="module")
 def mars_kernel():

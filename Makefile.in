@@ -154,7 +154,8 @@ afidspythonvdev_PROGRAMS = $(am__EXEEXT_1)
 @HAVE_GDAL_TRUE@am__append_2 = $(GDAL_CFLAGS)
 @HAVE_MSPI_SHARED_TRUE@am__append_3 = $(MSPI_SHARED_LIBS)
 @HAVE_MSPI_SHARED_TRUE@am__append_4 = $(MSPI_SHARED_CFLAGS)
-@HAVE_MSP_TRUE@am__append_5 = $(MSP_LIBS)
+# Also need dlopen
+@HAVE_MSP_TRUE@am__append_5 = $(MSP_LIBS) -ldl
 @HAVE_MSP_TRUE@am__append_6 = $(MSP_CFLAGS)
 @HAVE_HDFEOS5_TRUE@am__append_7 = $(HDFEOS5_LIB)
 @HAVE_HDFEOS5_TRUE@am__append_8 = $(HDFEOS5_CFLAGS)

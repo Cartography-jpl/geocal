@@ -4,6 +4,8 @@
 #include "geocal_internal_config.h"
 #include "geocal_serialize_support.h"
 #include "simple_dem.h"
+#include <cstdlib>
+#include <dlfcn.h>
 #ifdef HAVE_MSP
 #include "Plugin.h"
 #include "GroundPoint.h"
@@ -55,7 +57,7 @@ public:
   { throw Exception("Not Implemented"); }
 private:
   std::string fname_;
-  void init() {}
+  void init() { IgcMsp::msp_init(); }
   IgcMspImp() {}
   friend class boost::serialization::access;
   template<class Archive>
@@ -138,6 +140,7 @@ void IgcMsp::msp_print_plugin_list()
 {
 #ifdef HAVE_MSP
 try {
+  msp_init();
   MSP::SDS::SupportDataService sds;
   boost::shared_ptr<MSP::SMS::SensorModelService> sms =
     boost::make_shared<MSP::SMS::SensorModelService>();
@@ -170,14 +173,11 @@ void IgcMsp::msp_register_plugin(const std::string& Plugin_name)
 {
 #ifdef HAVE_MSP
 try {
-  std::cerr << "Step 1\n";
+  msp_init();
   MSP::SDS::SupportDataService sds;
-  std::cerr << "Step 2\n";
   boost::shared_ptr<MSP::SMS::SensorModelService> sms =
     boost::make_shared<MSP::SMS::SensorModelService>();
-  std::cerr << "Step 3\n";
   sms->registerPlugin(Plugin_name);
-  std::cerr << "Step 4\n";
 } catch(const MSP::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
@@ -189,5 +189,61 @@ try {
 }
 #else
   throw MspNotAvailableException();
+#endif
+}
+
+void* IgcMsp::lib_ptr = 0;
+
+//-----------------------------------------------------------------------
+///  An important note for using this in Python. The SensorModelService
+///  code automatically loads all the plugins found at
+///  CSM_PLUGIN_DIR. However, it will silently fail when it tries to
+///  load them. You can see this by running with LD_DEBUG=files to get
+///  debugging information from ld.so. This does not happen in C++.
+///
+///  Turns out that the plugins depend on the library libMSPcsm.so,
+///  although they don't list this as a dependency. The plugins probably
+///  should, but since we don't have the source we can't fix this. For
+///  C++, the library get loaded as a dependency of geocal. The same
+///  happens in python, but the difference is that geocal loads this
+///  with RTLD_GLOBAL and python with RTD_LOCAL (see man page on dlopen
+///  for description of these). This means in C++ the symbols can be
+///  resolved when SensorModelService loads a plugin. For python, this
+///  can't be used.
+///
+///  The solution is to preload the library. You can either define
+///  LD_PRELOAD=/data/smyth/MSP/install/lib/libMSPcsm.so when starting
+///  python, or alternatively explicitly load the library in python with
+///  RTLD_GLOBAL: 
+///
+///      ctypes.CDLL(os.environ["CSM_PLUGIN_DIR"] +
+///         "../lib/libMSPcsm.so", ctypes.RTLD_GLOBAL)
+///
+/// The C++ code is set up to do this automatically when you use
+/// IgcMsp. But this is a fairly obscure thing that took a good
+/// while to track down initially, so we want to document this.
+/// Also, this might change in
+/// a future version of the MSP library (either adding or remove
+/// libraries 
+//-----------------------------------------------------------------------
+
+void IgcMsp::msp_init()
+{
+#ifdef HAVE_MSP
+  if(lib_ptr)
+    return;
+  char* t = getenv("CSM_PLUGIN_DIR");
+  if(!t)
+    throw Exception("You need to set the environment variable CSM_PLUGIN_DIR to use the MSP plugins");
+  std::string lib = std::string(t) + "/../lib/libMSPcsm.so";
+  lib_ptr = dlopen(lib.c_str(), RTLD_NOW | RTLD_GLOBAL);
+  if(!lib_ptr) {
+    Exception e;
+    e << "Trouble loading the library " << lib << "\n"
+      << "  Error: " << dlerror() << "\n";
+    throw e;
+  }
+#else
+  // Nothing to do if don't have MSP
 #endif
 }

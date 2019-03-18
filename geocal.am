@@ -51,6 +51,8 @@ endif
 if HAVE_MSP
 libgeocal_la_LDFLAGS+= $(MSP_LIBS)
 libgeocal_la_CPPFLAGS+= $(MSP_CFLAGS)
+# Also need dlopen
+libgeocal_la_LDFLAGS+= -ldl
 endif
 
 if HAVE_HDFEOS5

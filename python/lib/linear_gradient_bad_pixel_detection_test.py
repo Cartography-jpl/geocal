@@ -2,7 +2,7 @@ from geocal.linear_gradient_bad_pixel_detection import *
 from geocal_swig import IterativeMorphologicalDilation
 import matplotlib.pyplot as plt
 from test_support import *
-import math
+import math, re
 
 def test_linear_gradient_bad_pixel_detection():
     '''Test detection of bad/outlier pixels'''
@@ -56,8 +56,15 @@ def test_bad_pixel_fill():
         plt.imshow(data_with_bad_pixel, cmap=plt.cm.gray, vmin=0.0,
                    vmax=20.0)
         plt.show()
-    m = IterativeMorphologicalDilation(data_with_bad_pixel, mask)
-    m.fill_missing_data()
+    try:
+        m = IterativeMorphologicalDilation(data_with_bad_pixel, mask)
+        m.fill_missing_data()
+    except RuntimeError as e:
+        if(not re.search("requires C\+\+ 11 features", str(e))):
+            raise e
+        # Test will fail if compiler doesn't have C++11. This is true on
+        # centos 6 systems
+        pytest.skip("fill_missing_data failed, likely because we don't have C++11")
     if(False):
         print(m.filled_image[10:16,20:31])
         print(original_data[10:16,20:31])

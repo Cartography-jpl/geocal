@@ -80,18 +80,18 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
   const GeodeticRadianConverter* gconv2 = dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
   const GeodeticRadian2piConverter* gconv3 = dynamic_cast<const GeodeticRadian2piConverter*>(coordinate_converter().get());
   if(sdem && (gconv || gconv2 || gconv3))
-    return ground_coordinate(Ic, sdem->h());
+    return ground_coordinate_z(Ic, sdem->h());
   const PlanetSimpleDem* pdem = dynamic_cast<const PlanetSimpleDem*>(&D);
   const PlanetocentricConverter* pconv = dynamic_cast<const PlanetocentricConverter*>(coordinate_converter().get());
   if(pdem && pconv)
-    return ground_coordinate(Ic, sdem->h());
+    return ground_coordinate_z(Ic, sdem->h());
 
   // We now have more general case.
   const double delta_z = 10.0;
   double z0 = rp->initial_guess_z(Ic.line, Ic.sample);
-  boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate(Ic, z0);
+  boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate_z(Ic, z0);
   boost::shared_ptr<GroundCoordinate> gc2 =
-    ground_coordinate(Ic, z0 + delta_z);
+    ground_coordinate_z(Ic, z0 + delta_z);
   boost::shared_ptr<CartesianFixed> p = gc1->convert_to_cf();
   boost::shared_ptr<CartesianFixed> p2 = gc2->convert_to_cf();
   CartesianFixedLookVector lv;
@@ -113,7 +113,7 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
 /// ConvergenceFailure exception will be thrown.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
+boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate_z
 (const ImageCoordinate& Ic, double Z) const
 {
 //-----------------------------------------------------------------------
@@ -176,7 +176,7 @@ Rsm::ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
   const GeodeticRadian2piConverter* gconv3 = dynamic_cast<const GeodeticRadian2piConverter*>(coordinate_converter().get());
   const PlanetocentricConverter* pconv = dynamic_cast<const PlanetocentricConverter*>(coordinate_converter().get());
   if(gconv || gconv2 || gconv3 || pconv)
-    return ground_coordinate(Ic, H);
+    return ground_coordinate_z(Ic, H);
   if(coordinate_converter()->naif_code() == CoordinateConverter::EARTH_NAIF_CODE) {
     SimpleDem d(H);
     return ground_coordinate(Ic, d);
@@ -384,6 +384,8 @@ void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)
     rid->ground_domain_vertex()[b + 3] = coordinate_converter()->
       convert_from_coordinate(pts[2][0],pts[2][1],pts[2][2]);
   }
+  rid->full_number_line(rp->max_line());
+  rid->full_number_sample(rp->max_sample());
   rid->min_line(rp->min_line());
   rid->max_line(rp->max_line());
   rid->min_sample(rp->min_sample());

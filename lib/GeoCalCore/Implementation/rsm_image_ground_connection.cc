@@ -39,10 +39,10 @@ RsmImageGroundConnection::cf_look_vector
 {
   double z = rsm_->rsm_base()->initial_guess_z(Ic.line, Ic.sample);
   boost::shared_ptr<GroundCoordinate> gc1 =
-    rsm_->ground_coordinate(Ic, z);
+    rsm_->ground_coordinate_z(Ic, z);
   double delta_h = 10;
   boost::shared_ptr<GroundCoordinate> gc2 =
-    rsm_->ground_coordinate(Ic, z + delta_h);
+    rsm_->ground_coordinate_z(Ic, z + delta_h);
   P = gc1->convert_to_cf();
   boost::shared_ptr<CartesianFixed> ec2 = gc2->convert_to_cf();
   Lv.look_vector[0] = ec2->position[0] - P->position[0];

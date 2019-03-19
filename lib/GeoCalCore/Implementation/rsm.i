@@ -28,7 +28,7 @@ public:
   std::string print_to_string() const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate
     (const ImageCoordinate& Ic, const Dem& D) const;
-  boost::shared_ptr<GroundCoordinate> ground_coordinate
+  boost::shared_ptr<GroundCoordinate> ground_coordinate_z
     (const ImageCoordinate& Ic, double Z) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate_approx_height
     (const ImageCoordinate& Ic, double H) const;

@@ -21,7 +21,8 @@ namespace GeoCal {
 class LocalRcParameter : public GenericObject {
 public:
   LocalRcParameter();
-  LocalRcParameter(const ImageGroundConnection& Igc, double Height = 0);
+  LocalRcParameter(const ImageGroundConnection& Igc, double Height = 0,
+		   double Line = -1, double Sample = -1);
   static void check_rc_assumption
   (const ImageGroundConnection& Igc, double Height = 0);
   std::string print_to_string() const;

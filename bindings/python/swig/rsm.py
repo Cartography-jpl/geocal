@@ -215,10 +215,23 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         """
         _rsm.Rsm_swiginit(self, _rsm.new_Rsm(*args))
 
-    def ground_coordinate(self, *args):
+    def ground_coordinate(self, Ic, D):
         """
 
-        boost::shared_ptr< GroundCoordinate > Rsm::ground_coordinate(const ImageCoordinate &Ic, double Z) const
+        boost::shared_ptr< GroundCoordinate > Rsm::ground_coordinate(const ImageCoordinate &Ic, const Dem &D) const
+        Invert the image_coordinate function to find the ground coordinate
+        that maps to a given ImageCoordinate.
+
+        This routine may fail to find a solution, in which case a
+        ConvergenceFailure exception will be thrown. 
+        """
+        return _rsm.Rsm_ground_coordinate(self, Ic, D)
+
+
+    def ground_coordinate_z(self, Ic, Z):
+        """
+
+        boost::shared_ptr< GroundCoordinate > Rsm::ground_coordinate_z(const ImageCoordinate &Ic, double Z) const
         Invert the image_coordinate function to find the ground coordinates at
         a particular Z value.
 
@@ -228,7 +241,7 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         This routine may fail to find a solution, in which case a
         ConvergenceFailure exception will be thrown. 
         """
-        return _rsm.Rsm_ground_coordinate(self, *args)
+        return _rsm.Rsm_ground_coordinate_z(self, Ic, Z)
 
 
     def ground_coordinate_approx_height(self, Ic, H):
@@ -498,6 +511,7 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
     __swig_destroy__ = _rsm.delete_Rsm
 Rsm.__str__ = new_instancemethod(_rsm.Rsm___str__, None, Rsm)
 Rsm.ground_coordinate = new_instancemethod(_rsm.Rsm_ground_coordinate, None, Rsm)
+Rsm.ground_coordinate_z = new_instancemethod(_rsm.Rsm_ground_coordinate_z, None, Rsm)
 Rsm.ground_coordinate_approx_height = new_instancemethod(_rsm.Rsm_ground_coordinate_approx_height, None, Rsm)
 Rsm.image_coordinate = new_instancemethod(_rsm.Rsm_image_coordinate, None, Rsm)
 Rsm.image_coordinate_jacobian = new_instancemethod(_rsm.Rsm_image_coordinate_jacobian, None, Rsm)

@@ -60,12 +60,20 @@ template<class T> inline blitz::Array<T, 1> cross2
 //-----------------------------------------------------------------------
 /// Constructor. This sets up coordinates so the origin is at the
 /// given height on the surface for the center pixel of the Igc.
+///
+/// You can optionally override the line/sample used for the
+/// origin. Most of the time you don't want to do this, but this can
+/// be useful when generating testing data.
 //-----------------------------------------------------------------------
 
 LocalRcParameter::LocalRcParameter
-(const ImageGroundConnection& Igc, double Height)
+(const ImageGroundConnection& Igc, double Height, double Line, double Sample)
 {
   ImageCoordinate ic(Igc.number_line() / 2, Igc.number_sample() / 2);
+  if(Line >= 0)
+    ic.line = Line;
+  if(Sample >= 0)
+    ic.sample = Sample;
   ImageCoordinate ic_p1(ic.line, ic.sample + 1);
   cf_prototype =
     Igc.ground_coordinate_approx_height(ic, Height)->convert_to_cf();

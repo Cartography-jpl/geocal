@@ -6965,7 +6965,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
   GeoCal::ImageCoordinate *arg2 = 0 ;
@@ -6980,9 +6980,10 @@ SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate__SWIG_0(PyObject *SWIGUNUSEDPAR
   void *argp3 = 0 ;
   int res3 = 0 ;
   boost::shared_ptr< GeoCal::Dem const > tempshared3 ;
+  PyObject *swig_obj[3] ;
   boost::shared_ptr< GeoCal::GroundCoordinate > result;
   
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"Rsm_ground_coordinate",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
@@ -7066,7 +7067,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate_z(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
   GeoCal::ImageCoordinate *arg2 = 0 ;
@@ -7080,14 +7081,15 @@ SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate__SWIG_1(PyObject *SWIGUNUSEDPAR
   boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
   double val3 ;
   int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
   boost::shared_ptr< GeoCal::GroundCoordinate > result;
   
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"Rsm_ground_coordinate_z",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_ground_coordinate" "', argument " "1"" of type '" "GeoCal::Rsm const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_ground_coordinate_z" "', argument " "1"" of type '" "GeoCal::Rsm const *""'"); 
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
@@ -7109,10 +7111,10 @@ SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate__SWIG_1(PyObject *SWIGUNUSEDPAR
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_ground_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_ground_coordinate_z" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
       }
       if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_ground_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_ground_coordinate_z" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
         tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
@@ -7125,12 +7127,12 @@ SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate__SWIG_1(PyObject *SWIGUNUSEDPAR
   }
   ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_ground_coordinate" "', argument " "3"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_ground_coordinate_z" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
   {
     try {
-      result = ((GeoCal::Rsm const *)arg1)->ground_coordinate((GeoCal::ImageCoordinate const &)*arg2,arg3);
+      result = ((GeoCal::Rsm const *)arg1)->ground_coordinate_z((GeoCal::ImageCoordinate const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7143,38 +7145,6 @@ SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate__SWIG_1(PyObject *SWIGUNUSEDPAR
   return resultobj;
 fail:
   return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[4] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Rsm_ground_coordinate",0,3,argv))) SWIG_fail;
-  --argc;
-  if (argc == 3) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_1;
-    return _wrap_Rsm_ground_coordinate__SWIG_0(self, argc, argv);
-  }
-check_1:
-  
-  if (argc == 3) {
-    return _wrap_Rsm_ground_coordinate__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Rsm_ground_coordinate'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Rsm::ground_coordinate(GeoCal::ImageCoordinate const &,GeoCal::Dem const &) const\n"
-    "    GeoCal::Rsm::ground_coordinate(GeoCal::ImageCoordinate const &,double) const\n");
-  return 0;
 }
 
 
@@ -9077,7 +9047,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Rsm___str__", (PyCFunction)_wrap_Rsm___str__, METH_O, NULL},
 	 { (char *)"Rsm_ground_coordinate", _wrap_Rsm_ground_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< GroundCoordinate > Rsm::ground_coordinate(const ImageCoordinate &Ic, double Z) const\n"
+		"boost::shared_ptr< GroundCoordinate > Rsm::ground_coordinate(const ImageCoordinate &Ic, const Dem &D) const\n"
+		"Invert the image_coordinate function to find the ground coordinate\n"
+		"that maps to a given ImageCoordinate.\n"
+		"\n"
+		"This routine may fail to find a solution, in which case a\n"
+		"ConvergenceFailure exception will be thrown. \n"
+		""},
+	 { (char *)"Rsm_ground_coordinate_z", _wrap_Rsm_ground_coordinate_z, METH_VARARGS, (char *)"\n"
+		"\n"
+		"boost::shared_ptr< GroundCoordinate > Rsm::ground_coordinate_z(const ImageCoordinate &Ic, double Z) const\n"
 		"Invert the image_coordinate function to find the ground coordinates at\n"
 		"a particular Z value.\n"
 		"\n"

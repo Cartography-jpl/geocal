@@ -6636,6 +6636,152 @@ SWIGINTERN PyObject *_wrap_new_LocalRcParameter__SWIG_1(PyObject *SWIGUNUSEDPARM
   PyObject *resultobj = 0;
   GeoCal::ImageGroundConnection *arg1 = 0 ;
   double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  GeoCal::LocalRcParameter *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LocalRcParameter" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LocalRcParameter" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+        arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_LocalRcParameter" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_LocalRcParameter" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_LocalRcParameter" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      result = (GeoCal::LocalRcParameter *)new GeoCal::LocalRcParameter((GeoCal::ImageGroundConnection const &)*arg1,arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::LocalRcParameter > *smartresult = result ? new boost::shared_ptr<  GeoCal::LocalRcParameter >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__LocalRcParameter_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_LocalRcParameter__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  GeoCal::LocalRcParameter *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LocalRcParameter" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LocalRcParameter" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+        arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_LocalRcParameter" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_LocalRcParameter" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = (GeoCal::LocalRcParameter *)new GeoCal::LocalRcParameter((GeoCal::ImageGroundConnection const &)*arg1,arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::LocalRcParameter > *smartresult = result ? new boost::shared_ptr<  GeoCal::LocalRcParameter >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__LocalRcParameter_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_LocalRcParameter__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = 0 ;
+  double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
@@ -6693,7 +6839,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_LocalRcParameter__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_LocalRcParameter__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::ImageGroundConnection *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -6748,19 +6894,25 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_LocalRcParameter(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[3] = {
+  PyObject *argv[5] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_LocalRcParameter",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_LocalRcParameter",0,4,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
     return _wrap_new_LocalRcParameter__SWIG_0(self, argc, argv);
   }
   if (argc == 1) {
-    return _wrap_new_LocalRcParameter__SWIG_2(self, argc, argv);
+    return _wrap_new_LocalRcParameter__SWIG_4(self, argc, argv);
   }
   if (argc == 2) {
+    return _wrap_new_LocalRcParameter__SWIG_3(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_new_LocalRcParameter__SWIG_2(self, argc, argv);
+  }
+  if (argc == 4) {
     return _wrap_new_LocalRcParameter__SWIG_1(self, argc, argv);
   }
   
@@ -6768,6 +6920,8 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_LocalRcParameter'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::LocalRcParameter::LocalRcParameter()\n"
+    "    GeoCal::LocalRcParameter::LocalRcParameter(GeoCal::ImageGroundConnection const &,double,double,double)\n"
+    "    GeoCal::LocalRcParameter::LocalRcParameter(GeoCal::ImageGroundConnection const &,double,double)\n"
     "    GeoCal::LocalRcParameter::LocalRcParameter(GeoCal::ImageGroundConnection const &,double)\n"
     "    GeoCal::LocalRcParameter::LocalRcParameter(GeoCal::ImageGroundConnection const &)\n");
   return 0;
@@ -8066,11 +8220,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_LocalRcParameter", _wrap_new_LocalRcParameter, METH_VARARGS, (char *)"\n"
 		"\n"
-		"LocalRcParameter::LocalRcParameter(const ImageGroundConnection &Igc, double Height=0)\n"
+		"LocalRcParameter::LocalRcParameter(const ImageGroundConnection &Igc, double Height=0, double Line=-1,\n"
+		"double Sample=-1)\n"
 		"Constructor.\n"
 		"\n"
 		"This sets up coordinates so the origin is at the given height on the\n"
-		"surface for the center pixel of the Igc. \n"
+		"surface for the center pixel of the Igc.\n"
+		"\n"
+		"You can optionally override the line/sample used for the origin. Most\n"
+		"of the time you don't want to do this, but this can be useful when\n"
+		"generating testing data. \n"
 		""},
 	 { (char *)"LocalRcParameter_check_rc_assumption", _wrap_LocalRcParameter_check_rc_assumption, METH_VARARGS, (char *)"\n"
 		"\n"

@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
   boost::shared_ptr<GroundCoordinate> gpcalc =
-    r.ground_coordinate(ic_expect, gp.height_reference_surface());
+    r.ground_coordinate_z(ic_expect, gp.height_reference_surface());
   BOOST_CHECK(distance(gp, *gpcalc) < 1.0);
 }
 
@@ -36,7 +36,7 @@ BOOST_AUTO_TEST_CASE(fit_test)
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
   boost::shared_ptr<GroundCoordinate> gpcalc =
-    r.ground_coordinate(ic_expect, gp.height_reference_surface());
+    r.ground_coordinate_z(ic_expect, gp.height_reference_surface());
   BOOST_CHECK(distance(gp, *gpcalc) < 1.0);
 }
 

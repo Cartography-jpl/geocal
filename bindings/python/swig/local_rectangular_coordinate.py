@@ -200,11 +200,16 @@ class LocalRcParameter(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        LocalRcParameter::LocalRcParameter(const ImageGroundConnection &Igc, double Height=0)
+        LocalRcParameter::LocalRcParameter(const ImageGroundConnection &Igc, double Height=0, double Line=-1,
+        double Sample=-1)
         Constructor.
 
         This sets up coordinates so the origin is at the given height on the
-        surface for the center pixel of the Igc. 
+        surface for the center pixel of the Igc.
+
+        You can optionally override the line/sample used for the origin. Most
+        of the time you don't want to do this, but this can be useful when
+        generating testing data. 
         """
         _local_rectangular_coordinate.LocalRcParameter_swiginit(self, _local_rectangular_coordinate.new_LocalRcParameter(*args))
 

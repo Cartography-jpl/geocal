@@ -100,7 +100,52 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
   lv.look_vector[2] = p->position[2] - p2->position[2];
   double resolution = 1.0;
   boost::shared_ptr<CartesianFixed> surfp = D.intersect(*p, lv, resolution);
-  return coordinate_converter()->create(*surfp);
+  return polish_intersection(Ic, D, *surfp);
+}
+
+//-----------------------------------------------------------------------
+/// The look vectors in a RSM projection are not strictly lines. Once
+/// we have a solution for the intersection with a DEM, we can
+/// "polish" this to account for the small nonlinearities in the
+/// RSM. The surface point should be pretty close to the intersection,
+/// we don't account for obscuration in this function. 
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GroundCoordinate> Rsm::polish_intersection
+(const ImageCoordinate& Ic, const Dem& D,
+ const GroundCoordinate& Surfp, double Z_accuracy) const
+{
+  class Zeq: public DFunctor {
+  public:
+    Zeq(const Rsm& R, const ImageCoordinate& Ic, const Dem& D)
+      : r(R), ic(Ic), d(D)
+    {}
+    virtual ~Zeq() {}
+    virtual double operator()(const double& Z) const
+    {
+      return d.distance_to_surface(*r.ground_coordinate_z(ic, Z));
+    }
+    const Rsm& r;
+    const ImageCoordinate& ic;
+    const Dem& d;
+  };
+  double x, y, z_guess;
+  coordinate_converter()->convert_to_coordinate(Surfp, x, y, z_guess);
+  Zeq eq(*this, Ic, D);
+  double zmin = z_guess;
+  double zmax = z_guess;
+  double step = 1.0;
+  while(eq(zmin) > 0) {
+    zmin -= step;
+    step *= 2;
+  }
+  step = 1.0;
+  while(eq(zmax) < 0) {
+    zmax += step;
+    step *= 2;
+  };
+  double z = root(eq, zmin, zmax, 1e-8, Z_accuracy);
+  return ground_coordinate_z(Ic, z);
 }
 
 //-----------------------------------------------------------------------

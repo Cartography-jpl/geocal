@@ -228,6 +228,21 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         return _rsm.Rsm_ground_coordinate(self, Ic, D)
 
 
+    def polish_intersection(self, Ic, D, Surfp, Z_accuracy=1e-2):
+        """
+
+        boost::shared_ptr< GroundCoordinate > Rsm::polish_intersection(const ImageCoordinate &Ic, const Dem &D, const GroundCoordinate
+        &Surfp, double Z_accuracy=1e-2) const
+        The look vectors in a RSM projection are not strictly lines.
+
+        Once we have a solution for the intersection with a DEM, we can
+        "polish" this to account for the small nonlinearities in the RSM.
+        The surface point should be pretty close to the intersection, we don't
+        account for obscuration in this function. 
+        """
+        return _rsm.Rsm_polish_intersection(self, Ic, D, Surfp, Z_accuracy)
+
+
     def ground_coordinate_z(self, Ic, Z):
         """
 
@@ -511,6 +526,7 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
     __swig_destroy__ = _rsm.delete_Rsm
 Rsm.__str__ = new_instancemethod(_rsm.Rsm___str__, None, Rsm)
 Rsm.ground_coordinate = new_instancemethod(_rsm.Rsm_ground_coordinate, None, Rsm)
+Rsm.polish_intersection = new_instancemethod(_rsm.Rsm_polish_intersection, None, Rsm)
 Rsm.ground_coordinate_z = new_instancemethod(_rsm.Rsm_ground_coordinate_z, None, Rsm)
 Rsm.ground_coordinate_approx_height = new_instancemethod(_rsm.Rsm_ground_coordinate_approx_height, None, Rsm)
 Rsm.image_coordinate = new_instancemethod(_rsm.Rsm_image_coordinate, None, Rsm)

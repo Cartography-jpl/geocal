@@ -161,6 +161,7 @@ def test_rsm_lc_rp_with_msp(isolated_dir, rsm_lc):
                 ic = ImageCoordinate(ln,smp)
                 p1 = igc_msp.ground_coordinate_approx_height(ic, h)
                 p2 = rsm_lc.ground_coordinate_approx_height(ic, h)
+                p3 = rsm_lc.ground_coordinate_z(ic, -5294.140559317827)
                 assert(geocal_swig.distance(p1, p2) < 0.01)
                 
 @require_pynitf

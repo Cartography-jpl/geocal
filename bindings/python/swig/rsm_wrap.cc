@@ -7067,6 +7067,298 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Rsm_polish_intersection__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  GeoCal::Dem *arg3 = 0 ;
+  GeoCal::GroundCoordinate *arg4 = 0 ;
+  double arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared4 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_polish_intersection" "', argument " "1"" of type '" "GeoCal::Rsm const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_polish_intersection" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_polish_intersection" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Dem *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Dem,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Rsm_polish_intersection" "', argument " "3"" of type '" "GeoCal::Dem const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_polish_intersection" "', argument " "3"" of type '" "GeoCal::Dem const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3);
+        arg3 = const_cast< GeoCal::Dem * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::Dem * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Rsm_polish_intersection" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_polish_intersection" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4)->get());
+      }
+    }
+  }
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_polish_intersection" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    try {
+      result = ((GeoCal::Rsm const *)arg1)->polish_intersection((GeoCal::ImageCoordinate const &)*arg2,(GeoCal::Dem const &)*arg3,(GeoCal::GroundCoordinate const &)*arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_polish_intersection__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  GeoCal::Dem *arg3 = 0 ;
+  GeoCal::GroundCoordinate *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared4 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_polish_intersection" "', argument " "1"" of type '" "GeoCal::Rsm const *""'"); 
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_polish_intersection" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_polish_intersection" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Dem *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Dem,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Rsm_polish_intersection" "', argument " "3"" of type '" "GeoCal::Dem const &""'"); 
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_polish_intersection" "', argument " "3"" of type '" "GeoCal::Dem const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3);
+        arg3 = const_cast< GeoCal::Dem * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::Dem * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Rsm_polish_intersection" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_polish_intersection" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::Rsm const *)arg1)->polish_intersection((GeoCal::ImageCoordinate const &)*arg2,(GeoCal::Dem const &)*arg3,(GeoCal::GroundCoordinate const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_polish_intersection(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Rsm_polish_intersection",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    return _wrap_Rsm_polish_intersection__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_Rsm_polish_intersection__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Rsm_polish_intersection'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Rsm::polish_intersection(GeoCal::ImageCoordinate const &,GeoCal::Dem const &,GeoCal::GroundCoordinate const &,double) const\n"
+    "    GeoCal::Rsm::polish_intersection(GeoCal::ImageCoordinate const &,GeoCal::Dem const &,GeoCal::GroundCoordinate const &) const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_Rsm_ground_coordinate_z(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
@@ -9053,6 +9345,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This routine may fail to find a solution, in which case a\n"
 		"ConvergenceFailure exception will be thrown. \n"
+		""},
+	 { (char *)"Rsm_polish_intersection", _wrap_Rsm_polish_intersection, METH_VARARGS, (char *)"\n"
+		"\n"
+		"boost::shared_ptr< GroundCoordinate > Rsm::polish_intersection(const ImageCoordinate &Ic, const Dem &D, const GroundCoordinate\n"
+		"&Surfp, double Z_accuracy=1e-2) const\n"
+		"The look vectors in a RSM projection are not strictly lines.\n"
+		"\n"
+		"Once we have a solution for the intersection with a DEM, we can\n"
+		"\"polish\" this to account for the small nonlinearities in the RSM.\n"
+		"The surface point should be pretty close to the intersection, we don't\n"
+		"account for obscuration in this function. \n"
 		""},
 	 { (char *)"Rsm_ground_coordinate_z", _wrap_Rsm_ground_coordinate_z, METH_VARARGS, (char *)"\n"
 		"\n"

@@ -7,6 +7,26 @@ namespace GeoCal {
 bool have_msp_supported();
   
 /****************************************************************//**
+  Exception thrown if MSP isn't available.
+*******************************************************************/
+
+class MspNotAvailableException : public Exception {
+public:
+//-----------------------------------------------------------------------
+/// Constructor
+//-----------------------------------------------------------------------
+
+  MspNotAvailableException() : Exception("Geocal library wasn't configured to use MSP library during installation, so can't call MSP functions.")
+  { }
+
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~MspNotAvailableException() throw() {}
+};
+
+/****************************************************************//**
   This is an ImageGroundConnection that uses the MSP (Mensuration
   Service Program) library to implement an ImageGroundConnection. This
   uses a set of plugins for the CSM (Community Sensor Model, see 

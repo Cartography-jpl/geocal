@@ -1,3 +1,4 @@
+from __future__ import print_function
 try:
     import pynitf
 except ImportError:
@@ -161,7 +162,6 @@ def test_rsm_lc_rp_with_msp(isolated_dir, rsm_lc):
                 ic = ImageCoordinate(ln,smp)
                 p1 = igc_msp.ground_coordinate_approx_height(ic, h)
                 p2 = rsm_lc.ground_coordinate_approx_height(ic, h)
-                p3 = rsm_lc.ground_coordinate_z(ic, -5294.140559317827)
                 assert(geocal_swig.distance(p1, p2) < 0.01)
                 
 @require_pynitf
@@ -193,6 +193,30 @@ def test_rsm_grid(isolated_dir, rsm_g):
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
+# Not working yet, we'll come back to this    
+@skip    
+@require_msp
+@require_pynitf
+def test_rsm_grid_with_msp(isolated_dir, rsm_g):
+    '''Compare the RSM we write to a NITF file with what the MSP library 
+    calculates. This verifies both the validity of our NITF and our RSM 
+    code'''    
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    f.image_segment[0].rsm = rsm_g
+    f.write("nitf_rsm.ntf")
+    igc_msp = IgcMsp("nitf_rsm.ntf")
+    for h in (rsm_g.rsm_id.ground_domain_vertex[0].height_reference_surface + 10.0,
+              rsm_g.rsm_id.ground_domain_vertex[7].height_reference_surface - 10.0):
+        for ln in np.linspace(0, rsm_g.rsm_id.max_line, 10):
+            for smp in np.linspace(0, rsm_g.rsm_id.max_sample, 10):
+                ic = ImageCoordinate(ln+10,smp+10)
+                print(ic)
+                print(h)
+                p1 = igc_msp.ground_coordinate_approx_height(ic, h)
+                p2 = rsm_g.ground_coordinate_approx_height(ic, h)
+                assert(geocal_swig.distance(p1, p2) < 0.01)
+                
 @require_pynitf
 def test_rsm_ms_rp(isolated_dir, rsm_ms_rp):
     '''Create a file, and write out a RSM. This has a multi section
@@ -203,6 +227,29 @@ def test_rsm_ms_rp(isolated_dir, rsm_ms_rp):
     f.write("nitf_rsm.ntf")
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
+
+
+# Not working yet, we'll come back to this
+@skip
+@require_msp
+@require_pynitf
+def test_rsm_ms_rp_with_msp(isolated_dir, rsm_ms_rp):
+    '''Compare the RSM we write to a NITF file with what the MSP library 
+    calculates. This verifies both the validity of our NITF and our RSM 
+    code'''    
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    f.image_segment[0].rsm = rsm_ms_rp
+    f.write("nitf_rsm.ntf")
+    igc_msp = IgcMsp("nitf_rsm.ntf")
+    for h in (rsm_ms_rp.rsm_id.ground_domain_vertex[0].height_reference_surface + 10.0,
+              rsm_ms_rp.rsm_id.ground_domain_vertex[7].height_reference_surface - 10.0):
+        for ln in np.linspace(0, rsm_ms_rp.rsm_id.max_line, 10):
+            for smp in np.linspace(0, rsm_ms_rp.rsm_id.max_sample, 10):
+                ic = ImageCoordinate(ln,smp)
+                p1 = igc_msp.ground_coordinate_approx_height(ic, h)
+                p2 = rsm_ms_rp.ground_coordinate_approx_height(ic, h)
+                assert(geocal_swig.distance(p1, p2) < 0.01)
 
 @require_pynitf
 def test_rsm_ms_g(isolated_dir, rsm_ms_g):

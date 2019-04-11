@@ -9,7 +9,14 @@ try:
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
+import os
 
+# Backdoor to suppress putting Rsm in place. Useful for example with
+# nitfinfo where we might want to look at the raw nitf values.
+suppress_rsm = False
+if("NITF_USE_RAW_RSM" in os.environ):
+    suppress_rsm = True
+    
 # ****************************************************************************
 # Note the RSM is a bit complicated, because it spans multiple TREs. 
 # We handle the RSM as a special field, you can access it as iseg.rsm, or
@@ -25,7 +32,7 @@ except ImportError:
 # ---------------------------------------------------------
 # Override various TREs to use the geocal objects instead
 # ---------------------------------------------------------
-if(have_pynitf):
+if(have_pynitf and not suppress_rsm):
     if(TreRSMGGA.__doc__ is not None):
         hlp_rsmgga = TreRSMGGA.__doc__ + \
 ''' 
@@ -146,7 +153,7 @@ rsm_rsm_adjustable_parameter and wish to access the raw fields.
 # to read and write the full set of TREs.
 # ---------------------------------------------------------
 
-if(have_pynitf):
+if(have_pynitf and not suppress_rsm):
     class RsmImageSegementHook(NitfSegmentHook):
         def __init__(self):
             # Temporarily take out the direct and indirect error covariances

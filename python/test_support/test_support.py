@@ -275,6 +275,25 @@ def rsm_ms_polynomial(igc_rpc):
 	    igc_rpc.number_sample)
     return res
 
+# Note the polynomial here tends to have a few poles, since there are zeros
+# in the denominator. Our code works fine with this, but the MSP code fails.
+# This is in some sense not a "real" failure, so we use a different polynomial
+# for this. The down side is that this is slow (taking a minute or so),
+# so we cache the results. If the read here fails, just regenerate the data.
+@pytest.fixture(scope="function")
+def rsm_ms_polynomial_np(igc_rpc):
+    fname = unit_test_data + "rsm_ms_polynomial_np.xml"
+    if(False):
+        rp = RsmRationalPolynomial(5,5,3,1,1,1)
+        res = RsmMultiSection(igc_rpc.number_line, igc_rpc.number_sample,
+                              3, 2, rp)
+        hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
+        hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
+        res.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0,
+                igc_rpc.number_line, 0, igc_rpc.number_sample)
+        geocal_swig.serialize_write(fname, res)
+    return geocal_swig.serialize_read_generic(fname)
+
 @pytest.fixture(scope="function")
 def rsm_ms_grid(igc_rpc):
     rg = RsmGrid(10,10,2)
@@ -316,6 +335,12 @@ def rsm_g(rsm_grid):
 @pytest.fixture(scope="function")
 def rsm_ms_rp(rsm_ms_polynomial):
     res = Rsm(rsm_ms_polynomial, GeodeticRadianConverter())
+    res.fill_in_ground_domain_vertex(500, 1500)
+    return res
+
+@pytest.fixture(scope="function")
+def rsm_ms_rp_np(rsm_ms_polynomial_np):
+    res = Rsm(rsm_ms_polynomial_np, GeodeticRadianConverter())
     res.fill_in_ground_domain_vertex(500, 1500)
     return res
 

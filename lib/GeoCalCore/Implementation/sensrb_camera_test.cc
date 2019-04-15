@@ -41,6 +41,50 @@ BOOST_AUTO_TEST_CASE(basic_test)
   // BOOST_CHECK_CLOSE(fc2.sample, 50.0, 1e-3);
 }
 
+BOOST_AUTO_TEST_CASE(simple_camera_test)
+{
+  // Comare with SimpleCamera
+  SensrbCamera cam(boost::math::quaternion<double>(1,0,0,0),
+		   0,0,0,0,0,0,0,
+		   10, 1504, 18e-6, 21e-6,
+		   123.8e-3, FrameCoordinate(10.0/2, 1504.0/2));
+  SimpleCamera cam2(0,0,0,123.8e-3, 18e-6, 21e-6, 10, 1504);
+  BOOST_CHECK_EQUAL(cam.number_band(), 1);
+  BOOST_CHECK_EQUAL(cam.number_line(0), 10);
+  BOOST_CHECK_EQUAL(cam.number_sample(0), 1504);
+  FrameCoordinate f1(1, 2);
+  ScLookVector sl = cam.sc_look_vector(f1, 0);
+  FrameCoordinate f2 = cam.frame_coordinate(sl, 0);
+  BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
+  BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
+  BOOST_CHECK_CLOSE(cam.frame_line_coordinate(sl, 0), f1.line, 1e-4);
+  FrameCoordinateWithDerivative f1d(AutoDerivative<double>(1, 0, 2), 
+				    AutoDerivative<double>(2, 1, 2));
+  ScLookVectorWithDerivative sld = cam.sc_look_vector_with_derivative(f1d, 0);
+  FrameCoordinateWithDerivative f2d = 
+    cam.frame_coordinate_with_derivative(sld, 0);
+  BOOST_CHECK_CLOSE(sld.look_vector[0].value(), sl.look_vector[0], 1e-4);
+  BOOST_CHECK_CLOSE(sld.look_vector[1].value(), sl.look_vector[1], 1e-4);
+  BOOST_CHECK_CLOSE(sld.look_vector[2].value(), sl.look_vector[2], 1e-4);
+  double eps = 0.01;
+  ScLookVector slv2 = cam.sc_look_vector(FrameCoordinate(1 + eps, 2), 0);
+  BOOST_CHECK_CLOSE(sld.look_vector[0].gradient()(0), 
+		    (slv2.look_vector[0] - sl.look_vector[0]) / eps, 1e-4);
+
+  // Compare with simple camera
+  for(int l = 0; l < 10; ++l)
+    for(int s = 1; s < 1504; ++s) {
+      FrameCoordinate fc1(l, s);
+      ScLookVector sl = cam.sc_look_vector(fc1, 0);
+      FrameCoordinate fc2 = cam2.frame_coordinate(sl, 0);
+      BOOST_CHECK_CLOSE(fc2.line, fc1.line, 1e-4);
+      BOOST_CHECK_CLOSE(fc2.sample, fc1.sample, 1e-4);
+      ScLookVector sl2 = cam2.sc_look_vector(fc1, 0);
+      FrameCoordinate fc3 = cam.frame_coordinate(sl, 0);
+      BOOST_CHECK_CLOSE(fc3.line, fc1.line, 1e-4);
+      BOOST_CHECK_CLOSE(fc3.sample, fc1.sample, 1e-4);
+    }
+}
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())

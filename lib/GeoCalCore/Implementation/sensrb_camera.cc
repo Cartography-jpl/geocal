@@ -75,7 +75,12 @@ void SensrbCamera::dcs_to_focal_plane
 (int Band, const boost::math::quaternion<double>& Dcs,
  double& Xfp, double& Yfp) const
 {
-  throw Exception("Not implemented yet");
+  for(int i = 0; i < p_distort_.rows(); ++i)
+    if(fabs(p_distort_(i)) > 1e-20)
+      throw Exception("We don't currently support nonzero distortions");
+  // Skip distortions
+  Xfp = focal_length() * (Dcs.R_component_2() / Dcs.R_component_4());
+  Yfp = focal_length() * (Dcs.R_component_3() / Dcs.R_component_4());
   // fill_in_max();
   // double x, y;
   // QuaternionCamera::dcs_to_focal_plane(Band, Dcs, x, y);
@@ -99,7 +104,15 @@ void SensrbCamera::dcs_to_focal_plane
 (int Band, const boost::math::quaternion<AutoDerivative<double> >& Dcs,
  AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
 {
-  throw Exception("Not implemented yet");
+  for(int i = 0; i < p_distort_.rows(); ++i)
+    if(fabs(p_distort_(i)) > 1e-20)
+      throw Exception("We don't currently support nonzero distortions");
+  // Skip distortions
+  Xfp = focal_length_with_derivative() * 
+    (Dcs.R_component_2() / Dcs.R_component_4());
+  Yfp = focal_length_with_derivative() * 
+    (Dcs.R_component_3() / Dcs.R_component_4());
+
   // fill_in_max();
   // AutoDerivative<double> x, y;
   // QuaternionCamera::dcs_to_focal_plane(Band, Dcs, x, y);
@@ -115,7 +128,12 @@ void SensrbCamera::dcs_to_focal_plane
 boost::math::quaternion<double> SensrbCamera::focal_plane_to_dcs
 (int Band, double Xfp, double Yfp) const
 {
-  throw Exception("Not implemented yet");
+  for(int i = 0; i < p_distort_.rows(); ++i)
+    if(fabs(p_distort_(i)) > 1e-20)
+      throw Exception("We don't currently support nonzero distortions");
+  // Skip distortions
+  return boost::math::quaternion<double>(0, Xfp, Yfp, focal_length());
+
   // fill_in_max();
   // double rp2 = (Xfp *Xfp + Yfp * Yfp);
   // double dr_over_r;
@@ -140,7 +158,13 @@ SensrbCamera::focal_plane_to_dcs
 (int Band, const AutoDerivative<double>& Xfp, 
  const AutoDerivative<double>& Yfp) const
 {
-  throw Exception("Not implemented yet");
+  for(int i = 0; i < p_distort_.rows(); ++i)
+    if(fabs(p_distort_(i)) > 1e-20)
+      throw Exception("We don't currently support nonzero distortions");
+  // Skip distortions
+  return boost::math::quaternion<AutoDerivative<double> >(0, Xfp, Yfp, 
+				  focal_length_with_derivative());
+
   // fill_in_max();
   // double rp2 = (Xfp.value() *Xfp.value() + Yfp.value() * Yfp.value());
   // double dr_over_r;

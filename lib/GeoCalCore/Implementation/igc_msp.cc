@@ -35,8 +35,11 @@ GEOCAL_IMPLEMENT(IgcMsp);
 namespace GeoCal {
 class IgcMspImp: public virtual ImageGroundConnection {
 public:
-  IgcMspImp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem)
-    : fname_(Fname) { dem_ = Dem; init(); }
+  IgcMspImp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem,
+	    const std::string& Plugin_name = "",
+	    const std::string& Model_name = "")
+    : fname_(Fname), plugin_name_(Plugin_name), model_name_(Model_name)
+  { dem_ = Dem; init(); }
   virtual ~IgcMspImp() {}
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, 
@@ -45,7 +48,7 @@ public:
     const
   { throw Exception("Not Implemented"); }
 private:
-  std::string fname_;
+  std::string fname_, plugin_name_, model_name_;
   boost::shared_ptr<MSP::SMS::SensorModelService> sms;
   boost::shared_ptr<csm::RasterGM> model;
   boost::shared_ptr<MSP::TS::TerrainModel> terrain_model;
@@ -69,7 +72,8 @@ template<class Archive>
 void IgcMspImp::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection)
-    & GEOCAL_NVP_(fname);
+    & GEOCAL_NVP_(fname) & GEOCAL_NVP_(plugin_name)
+    & GEOCAL_NVP_(model_name);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -98,8 +102,20 @@ try {
   if(sds.getNumImages(*isd) > 1)
     throw Exception("Only handle 1 image for now");
   MSP::WarningListType msg;
-  boost::shared_ptr<csm::Model>
-   model_raw(sms->createModelFromFile(fname_.c_str(),0,0,&msg));
+  boost::shared_ptr<csm::Model> model_raw;
+  if(plugin_name_ == "")
+    model_raw.reset(sms->createModelFromFile(fname_.c_str(),0,0,&msg));
+  else {
+    const csm::Plugin* t = csm::Plugin::findPlugin(plugin_name_);
+    std::list<csm::Warning> msg2;
+    bool can_do = t->canISDBeConvertedToModelState(*isd, model_name_, &msg2);
+    if(can_do)
+      model_raw.reset(t->constructModelFromISD(*isd, model_name_, &msg2));
+    BOOST_FOREACH(const csm::Warning& w, msg2) {
+      std::cout << "Warning:\n" << w.getMessage() << "\n"
+		<< w.getFunction() << "\n";
+  }
+  }
   // We may want to turn this off, but for now it is useful to get all
   // the warning messages when we create the model.
   BOOST_FOREACH(const MSP::Warning& w, msg) {
@@ -202,6 +218,28 @@ IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem)
 }
 
 //-----------------------------------------------------------------------
+/// Constructor.
+///
+/// This version forces the use of the given model name form the given
+/// plugin. This can be useful when diagnosing problems where you
+/// expect a particular plugin to handle a file, but it doesn't - or
+/// if the wrong plugin in is processing the file.
+//-----------------------------------------------------------------------
+
+IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem,
+	       const std::string& Plugin_name, const std::string& Model_name)
+{
+#ifdef HAVE_MSP
+  igc = boost::make_shared<IgcMspImp>(Fname, Dem, Plugin_name, Model_name);
+  initialize(igc->dem_ptr(),
+	     igc->image(), igc->image_multi_band(),
+	     igc->title(), igc->image_mask(), igc->ground_mask());
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Print a list of all plugins.
 //-----------------------------------------------------------------------
 
@@ -218,6 +256,72 @@ try {
   std::cout << "MSP Plugin list:\n";
   BOOST_FOREACH(const std::string& n, plugin_list)
     std::cout<< "  " << n << "\n";
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Return list of registered plugins
+//-----------------------------------------------------------------------
+
+std::vector<std::string> IgcMsp::msp_plugin_list()
+{
+#ifdef HAVE_MSP
+try {
+  msp_init();
+  MSP::SDS::SupportDataService sds;
+  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+    boost::make_shared<MSP::SMS::SensorModelService>();
+  MSP::SMS::NameList plugin_list;
+  sms->getAllRegisteredPlugins(plugin_list);
+  std::vector<std::string> res;
+  BOOST_FOREACH(const std::string& n, plugin_list)
+    res.push_back(n);
+  return res;
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Fro a given plugin, return the list of models it supports. Some
+/// plugins may support more than one sensor model.
+//-----------------------------------------------------------------------
+
+std::vector<std::string> IgcMsp::msp_model_list(const std::string& Plugin)
+{
+#ifdef HAVE_MSP
+try {
+  msp_init();
+  // This registers stuff
+  MSP::SDS::SupportDataService sds;
+  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+    boost::make_shared<MSP::SMS::SensorModelService>();
+
+  const csm::Plugin* t = csm::Plugin::findPlugin(Plugin);
+  std::vector<std::string> res;
+  for(int i = 0; i < (int) t->getNumModels(); ++i)
+    res.push_back(t->getModelName(i));
+  return res;
 } catch(const MSP::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this

@@ -217,15 +217,14 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
     def __init__(self, *args):
         """
 
-        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem >
-        &Dem=boost::shared_ptr< Dem >(new SimpleDem()))
+        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &Dem, const
+        std::string &Plugin_name, const std::string &Model_name)
         Constructor.
 
-        Note to use the MSP library, you should make sure the proper
-        environment variables are set. This happens in the normal GeoCal
-        setup, but the variables are MSP_DATA_DIR, MSPCCS_DATA, and
-        CSM_PLUGIN_DIR. Note the directory should end in "/", just as a
-        convention - so /foo/bar/plugins/. 
+        This version forces the use of the given model name form the given
+        plugin. This can be useful when diagnosing problems where you expect a
+        particular plugin to handle a file, but it doesn't - or if the wrong
+        plugin in is processing the file. 
         """
         _igc_msp.IgcMsp_swiginit(self, _igc_msp.new_IgcMsp(*args))
 
@@ -252,6 +251,28 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
 
     msp_register_plugin = staticmethod(msp_register_plugin)
 
+    def msp_plugin_list():
+        """
+
+        std::vector< std::string > IgcMsp::msp_plugin_list()
+        Return list of registered plugins. 
+        """
+        return _igc_msp.IgcMsp_msp_plugin_list()
+
+    msp_plugin_list = staticmethod(msp_plugin_list)
+
+    def msp_model_list(Plugin):
+        """
+
+        std::vector< std::string > IgcMsp::msp_model_list(const std::string &Plugin)
+        Fro a given plugin, return the list of models it supports.
+
+        Some plugins may support more than one sensor model. 
+        """
+        return _igc_msp.IgcMsp_msp_model_list(Plugin)
+
+    msp_model_list = staticmethod(msp_model_list)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -277,6 +298,24 @@ def IgcMsp_msp_register_plugin(Plugin_name):
     you don't usually need to use this function. 
     """
     return _igc_msp.IgcMsp_msp_register_plugin(Plugin_name)
+
+def IgcMsp_msp_plugin_list():
+    """
+
+    std::vector< std::string > IgcMsp::msp_plugin_list()
+    Return list of registered plugins. 
+    """
+    return _igc_msp.IgcMsp_msp_plugin_list()
+
+def IgcMsp_msp_model_list(Plugin):
+    """
+
+    std::vector< std::string > IgcMsp::msp_model_list(const std::string &Plugin)
+    Fro a given plugin, return the list of models it supports.
+
+    Some plugins may support more than one sensor model. 
+    """
+    return _igc_msp.IgcMsp_msp_model_list(Plugin)
 
 
 __all__ = ["IgcMsp","have_msp_supported"]

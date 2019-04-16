@@ -16,8 +16,12 @@ class IgcMsp : public ImageGroundConnectionCopy {
 public:
   IgcMsp(const std::string& Fname);
   IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem);
+  IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem,
+	 const std::string& Plugin_name, const std::string& Model_name);
   static void msp_print_plugin_list();
   static void msp_register_plugin(const std::string& Plugin_name);
+  static std::vector<std::string> msp_plugin_list();
+  static std::vector<std::string> msp_model_list(const std::string& Plugin);
   %pickle_serialization;
 };
 

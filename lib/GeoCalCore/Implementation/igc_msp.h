@@ -44,10 +44,14 @@ class IgcMsp: public virtual ImageGroundConnectionCopy {
 public:
   IgcMsp(const std::string& Fname,
    const boost::shared_ptr<Dem>& Dem = boost::shared_ptr<Dem>(new SimpleDem()));
+  IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem,
+	 const std::string& Plugin_name, const std::string& Model_name);
   virtual ~IgcMsp() {}
   static void msp_print_plugin_list();
+  static std::vector<std::string> msp_plugin_list();
   static void msp_register_plugin(const std::string& Plugin_name);
   static void msp_init();
+  static std::vector<std::string> msp_model_list(const std::string& Plugin);
 private:
   static void* lib_ptr;
   IgcMsp() {}

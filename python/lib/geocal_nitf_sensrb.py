@@ -123,9 +123,9 @@ if(have_pynitf):
         t.row_metric = cam.line_pitch * 10.0
         t.column_metric = cam.sample_pitch * 10.0
         t.focal_length = cam.focal_length * 10.0
-        # Need to fill this in
-        t.row_fov = -1
-        t.column_fov = -1
+        # Need to fill this in. Can perhaps have unspecified value
+        t.row_fov = 10.0
+        t.column_fov = 10.0
         t.principal_point_offset_x = cam.principal_point(0).line - cam.number_line(0) / 2.0
         t.principal_point_offset_y = cam.principal_point(0).sample - cam.number_sample(0) / 2.0
         t.radial_distort_1 = cam.k1
@@ -136,7 +136,7 @@ if(have_pynitf):
         t.affinity_distort_1 = cam.b1
         t.affinity_distort_2 = cam.b2
         # Need to fill this in
-        t.radial_distort_limit = -1
+        t.radial_distort_limit = 10
         t.calibration_date = cam.calibration_date
         # Need to add handling of quaterion
         

@@ -211,12 +211,12 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         """
 
         GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double > Frame_to_sc_q, double K1, double
-        K2, double K3, double P1, double P2, double B1, double B2, int
-        Number_line, int Number_sample, double Line_pitch, double
-        Sample_pitch, double Focal_length, const FrameCoordinate
-        &Principal_point, const std::string &Detection_type="VIS", const
-        std::string &Calibration_date="20000101",
-        QuaternionCamera::FrameConvention
+        K2, double K3, double P1, double P2, double B1, double B2, double
+        Radial_distort_limit, int Number_line, int Number_sample, double
+        Line_pitch, double Sample_pitch, double Focal_length, const
+        FrameCoordinate &Principal_point, const std::string
+        &Detection_type="VIS", const std::string
+        &Calibration_date="20000101", QuaternionCamera::FrameConvention
         Frame_convention=QuaternionCamera::LINE_IS_X,
         QuaternionCamera::FrameDirection
         Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
@@ -370,6 +370,24 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
       self._v_b2(value)
 
 
+    def _v_radial_distort_limit(self, *args):
+        """
+
+        void GeoCal::SensrbCamera::radial_distort_limit(double V)
+
+        """
+        return _sensrb_camera.SensrbCamera__v_radial_distort_limit(self, *args)
+
+
+    @property
+    def radial_distort_limit(self):
+        return self._v_radial_distort_limit()
+
+    @radial_distort_limit.setter
+    def radial_distort_limit(self, value):
+      self._v_radial_distort_limit(value)
+
+
     def _v_calibration_date(self, *args):
         """
 
@@ -418,6 +436,7 @@ SensrbCamera._v_p1 = new_instancemethod(_sensrb_camera.SensrbCamera__v_p1, None,
 SensrbCamera._v_p2 = new_instancemethod(_sensrb_camera.SensrbCamera__v_p2, None, SensrbCamera)
 SensrbCamera._v_b1 = new_instancemethod(_sensrb_camera.SensrbCamera__v_b1, None, SensrbCamera)
 SensrbCamera._v_b2 = new_instancemethod(_sensrb_camera.SensrbCamera__v_b2, None, SensrbCamera)
+SensrbCamera._v_radial_distort_limit = new_instancemethod(_sensrb_camera.SensrbCamera__v_radial_distort_limit, None, SensrbCamera)
 SensrbCamera._v_calibration_date = new_instancemethod(_sensrb_camera.SensrbCamera__v_calibration_date, None, SensrbCamera)
 SensrbCamera._v_detection_type = new_instancemethod(_sensrb_camera.SensrbCamera__v_detection_type, None, SensrbCamera)
 SensrbCamera_swigregister = _sensrb_camera.SensrbCamera_swigregister

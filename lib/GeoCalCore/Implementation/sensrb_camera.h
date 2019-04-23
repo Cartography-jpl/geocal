@@ -29,7 +29,7 @@ public:
   
   SensrbCamera(boost::math::quaternion<double> Frame_to_sc_q,
 	       double K1, double K2, double K3, double P1, double P2,
-	       double B1, double B2,
+	       double B1, double B2, double Radial_distort_limit,
 	       int Number_line, int Number_sample,
 	       double Line_pitch, double Sample_pitch,
 	       double Focal_length, 
@@ -48,6 +48,7 @@ public:
     calibration_date_(Calibration_date),
     detection_type_(Detection_type),
     p_distort_(7),
+    radial_distort_limit_(Radial_distort_limit),
     max_r2_filled_in(false)
   {
     p_distort_ = K1, K2, K3, P1, P2, B1, B2;
@@ -121,6 +122,13 @@ public:
   void b2(double V) { p_distort_(6) = V; }
 
 //-----------------------------------------------------------------------
+/// Limit that radial distortion is valid for.
+//-----------------------------------------------------------------------
+
+  double radial_distort_limit() const { return radial_distort_limit_;}
+  void radial_distort_limit(double V) { radial_distort_limit_ = V; }
+
+//-----------------------------------------------------------------------
 /// Calibration date. This is metadata used in the SENSRB TRE. This
 /// should be in "YYYYMMDD" format, e.g. "20000102" for January 2, 2000.
 //-----------------------------------------------------------------------
@@ -136,6 +144,7 @@ public:
 private:
   std::string calibration_date_, detection_type_;
   blitz::Array<double, 1> p_distort_;
+  double radial_distort_limit_;
   mutable bool max_r2_filled_in;
   mutable double max_rp2;
   mutable double max_r2;

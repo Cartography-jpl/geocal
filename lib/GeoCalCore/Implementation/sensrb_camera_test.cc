@@ -9,7 +9,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 {
   // Dummy Test
   SensrbCamera cam(boost::math::quaternion<double>(1,0,0,0),
-		   1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0,
+		   1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 3000.0,
 		   2048, 1024, 18e-6, 21e-6,
 		   123.8e-3, FrameCoordinate(2048/2, 1024/2));
   //std::cerr << cam << "\n";
@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(simple_camera_test)
 {
   // Comare with SimpleCamera
   SensrbCamera cam(boost::math::quaternion<double>(1,0,0,0),
-		   0,0,0,0,0,0,0,
+		   0,0,0,0,0,0,0, 3000,
 		   10, 1504, 18e-6, 21e-6,
 		   123.8e-3, FrameCoordinate(10.0/2, 1504.0/2));
   SimpleCamera cam2(0,0,0,123.8e-3, 18e-6, 21e-6, 10, 1504);
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(serialization)
     return;
   boost::shared_ptr<Camera> cam(new SensrbCamera
 		(boost::math::quaternion<double>(1,0,0,0),
-		 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0,
+		 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 3000,
 		 2048, 1024, 18e-6, 21e-6,
 		 123.8e-3, FrameCoordinate(2048/2, 1024/2)));
   std::string d = serialize_write_string(cam);

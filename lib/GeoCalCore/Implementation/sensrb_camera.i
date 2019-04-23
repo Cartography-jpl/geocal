@@ -16,7 +16,7 @@ class SensrbCamera : public QuaternionCamera {
 public:
   SensrbCamera(boost::math::quaternion<double> Frame_to_sc_q,
 	       double K1, double K2, double K3, double P1, double P2,
-	       double B1, double B2,
+	       double B1, double B2, double Radial_distort_limit,
 	       int Number_line, int Number_sample,
 	       double Line_pitch, double Sample_pitch,
 	       double Focal_length, 
@@ -37,6 +37,7 @@ public:
   %python_attribute_with_set(p2, double);
   %python_attribute_with_set(b1, double);
   %python_attribute_with_set(b2, double);
+  %python_attribute_with_set(radial_distort_limit, double);
   %python_attribute_with_set(calibration_date, std::string);
   %python_attribute_with_set(detection_type, std::string);
   %pickle_serialization();

@@ -12,7 +12,7 @@ void SensrbCamera::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
   ar & GEOCAL_NVP_(calibration_date) & GEOCAL_NVP_(detection_type)
-    & GEOCAL_NVP_(p_distort);
+    & GEOCAL_NVP_(p_distort) & GEOCAL_NVP_(radial_distort_limit);
 }
 
 

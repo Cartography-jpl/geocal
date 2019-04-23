@@ -214,8 +214,8 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         K2, double K3, double P1, double P2, double B1, double B2, int
         Number_line, int Number_sample, double Line_pitch, double
         Sample_pitch, double Focal_length, const FrameCoordinate
-        &Principal_point, const std::string &Detection_type="Placeholder",
-        const std::string &Calibration_date="20000101",
+        &Principal_point, const std::string &Detection_type="VIS", const
+        std::string &Calibration_date="20000101",
         QuaternionCamera::FrameConvention
         Frame_convention=QuaternionCamera::LINE_IS_X,
         QuaternionCamera::FrameDirection

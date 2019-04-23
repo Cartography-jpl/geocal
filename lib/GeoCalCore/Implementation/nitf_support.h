@@ -35,8 +35,10 @@ namespace GeoCal {
 template<class T> inline  boost::math::quaternion<T>
 nitf_to_quaternion(const blitz::Array<T, 1>& Data)
 {
-  // Until we test this out, short circuit the transformation
-  return array_to_quaternion(Data);
+  if(Data.rows() != 4)
+    throw GeoCal::Exception("Array must be size 4");
+  // Move real part, but until we test this don't change active/passive
+  return boost::math::quaternion<T>(Data(3), Data(0), Data(1), Data(2));
 }
 
 //-----------------------------------------------------------------------
@@ -47,8 +49,11 @@ nitf_to_quaternion(const blitz::Array<T, 1>& Data)
 template<class T> inline blitz::Array<T, 1>
 quaternion_to_nitf(const boost::math::quaternion<T>& Q)
 {
-  // Until we test this out, short circuit the transformation
-  return quaternion_to_array(Q);
+  blitz::Array<T, 1> res(4);
+  // Move real part, but until we test this don't change active/passive
+  res = Q.R_component_2(), Q.R_component_3(),
+    Q.R_component_4(), Q.R_component_1();
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -59,8 +64,12 @@ quaternion_to_nitf(const boost::math::quaternion<T>& Q)
 template<class T> inline blitz::Array<T, 1>
 quaternion_to_nitf(const blitz::Array<T, 1>& Q)
 {
-  // Until we test this out, short circuit the transformation
-  return Q;
+  if(Q.rows() != 4)
+    throw GeoCal::Exception("Array must be size 4");
+  blitz::Array<T, 1> res(4);
+  // Move real part, but until we test this don't change active/passive
+  res = Q(1), Q(2), Q(3), Q(0);
+  return res;
 }
 
 //-----------------------------------------------------------------------
@@ -71,8 +80,17 @@ quaternion_to_nitf(const blitz::Array<T, 1>& Q)
 template<class T> inline blitz::Array<T, 2>
 quaternion_to_nitf(const blitz::Array<T, 2>& Q)
 {
-  // Until we test this out, short circuit the transformation
-  return Q;
+  blitz::Range ra = blitz::Range::all();
+  if(Q.cols() != 4)
+    throw GeoCal::Exception("Array must be size 4");
+  blitz::Array<T, 2> res(Q.rows(), 4);
+  // Move real part, but until we test this don't change
+  // active/passive
+  res(ra,0) = Q(1,ra);
+  res(ra,1) = Q(2,ra);
+  res(ra,2) = Q(3,ra);
+  res(ra,3) = Q(0,ra);
+  return res;
 }
   
 }

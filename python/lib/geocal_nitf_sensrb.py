@@ -57,6 +57,8 @@ if(have_pynitf):
         t.start_date = str(tm).split("T")[0].replace("-", "")
         tm_day_start = Time.parse_time(str(tm).split("T")[0] + "T00:00:00Z")
         t.start_time = tm - tm_day_start
+        t.end_date = t.start_date
+        t.end_time = t.start_time
         # Note that SENSRB can only have position as ECR, there is
         # no way to specify this as ECI
         p = od.position_cf.position
@@ -95,7 +97,7 @@ if(have_pynitf):
 		            t.radial_distort_1, t.radial_distort_2,
                             t.radial_distort_3, t.decent_distort_1,
                             t.decent_distort_2, t.affinity_distort_1,
-                            t.affinity_distort_2, 
+                            t.affinity_distort_2, t.radial_distort_limit,
 		            t.row_detectors, t.column_detectors,
                             t.row_metric / 10.0, t.column_metric / 10.0,
 		            t.focal_length / 10.0,
@@ -123,9 +125,8 @@ if(have_pynitf):
         t.row_metric = cam.line_pitch * 10.0
         t.column_metric = cam.sample_pitch * 10.0
         t.focal_length = cam.focal_length * 10.0
-        # Need to fill this in. Can perhaps have unspecified value
-        t.row_fov = 10.0
-        t.column_fov = 10.0
+        t.row_fov = None
+        t.column_fov = None
         t.principal_point_offset_x = cam.principal_point(0).line - cam.number_line(0) / 2.0
         t.principal_point_offset_y = cam.principal_point(0).sample - cam.number_sample(0) / 2.0
         t.radial_distort_1 = cam.k1
@@ -135,8 +136,7 @@ if(have_pynitf):
         t.decent_distort_2 = cam.p2
         t.affinity_distort_1 = cam.b1
         t.affinity_distort_2 = cam.b2
-        # Need to fill this in
-        t.radial_distort_limit = 10
+        t.radial_distort_limit = cam.radial_distort_limit
         t.calibration_date = cam.calibration_date
         # Need to add handling of quaterion
         

@@ -18,7 +18,8 @@ if(have_pynitf):
             NitfImageWithSubset.__init__(self,image_subheader, header_size,
                                          data_size)
             self.data_start = None
-        
+            self.fh_in_name = None
+            
         def __str__(self):
             return "Gdal image"
 
@@ -45,11 +46,31 @@ if(have_pynitf):
                 print("failure 2")
                 raise NitfImageCannotHandle("Can't read using GdalMultiBand: %s" % e)
             self.data_start = fh.tell()
+            self.fh_in_name = fh.name
             fh.seek(self.data_size, 1)
 
         def write_to_file(self, fh):
             '''Write an image to a file.'''
-            raise NotImplementedError("Can't write a NitfImageGdal")
+            # Useful to be able to copy from an input file to a output file.
+            # So, for the special case of having read an input file
+            # we allow writing. Otherwise, we don't currently support
+            # writing.
+            if(self.fh_in_name is None):
+                raise NotImplementedError("Can't write a NitfImageGdal")
+            bytes_left = self.data_size
+            buffer_size = 1024*1024
+            with open(self.fh_in_name, 'rb') as fh_in:
+                fh_in.seek(self.data_start)
+                while(bytes_left > 0):
+                    if bytes_left < buffer_size:
+                        d = fh_in.read(bytes_left)
+                    else:
+                        d = fh_in.read(buffer_size)
+                    fh.write(d)
+
+                    #This may go negative on the last loop but that's fine
+                    bytes_left = bytes_left - buffer_size
+            
 
     # Try this after the classes in pynitf have been tried.
     register_image_class(NitfImageGdal, priority_order=1)

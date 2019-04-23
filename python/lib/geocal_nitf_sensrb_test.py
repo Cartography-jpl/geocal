@@ -48,7 +48,7 @@ def test_sensrb_cam(isolated_dir):
     od = korb.orbit_data(t + 5)
     f.image_segment[0].orbit_data_sensrb = od
     cam = SensrbCamera(Quaternion_double(1,0,0,0),
-		       1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0,
+		       1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 3000,
 		       2048, 1024, 18e-6, 21e-6,
 		       123.8e-3, FrameCoordinate(2048/2, 1024/2))
     f.image_segment[0].camera_sensrb = cam
@@ -72,8 +72,6 @@ def test_sensrb_cam(isolated_dir):
 # 10 Fill in
 # 11, 12, 13, 14 not filled in. Don't think needed
 
-# Temp, skip for now since not working. We'll continue working on this but don't
-# want unit tests failing
 @skip
 @require_msp    
 @require_pynitf
@@ -86,14 +84,17 @@ def test_sensrb_msp(isolated_dir):
     od = korb.orbit_data(t + 5)
     f.image_segment[0].orbit_data_sensrb = od
     cam = SensrbCamera(Quaternion_double(1,0,0,0),
-		       0,0,0,0,0,0,0,
+		       0,0,0,0,0,0,0, 3000,
 		       2048, 1024, 18e-6, 21e-6,
-		       123.8e-3, FrameCoordinate(2048/2, 1024/2))
+		       123.8e-3, FrameCoordinate(2048/2, 1024/2),
+                       "VIS")
     f.image_segment[0].camera_sensrb = cam
     t = f.image_segment[0].find_exactly_one_tre("SENSRB")
-    t.sensor = "fake_sensor"
+    t.sensor = "TEST"
     t.platform = "fake_platform"
     t.operation_domain = "Spaceborne"
+    t.generation_date = 20000101
+    t.generation_time = 0
     t.image_formation_data = "Y"
     t.method = "Single Frame"
     t.mode = "003"
@@ -107,7 +108,18 @@ def test_sensrb_msp(isolated_dir):
     t.first_pixel_col = 1
     t.transform_params = 0
     t.attitude_euler_angles = "Y"
-    #t.attitude_unit_vectors = "Y"
+    t.sensor_angle_model = 1
+    t.sensor_angle_1 = 0
+    t.sensor_angle_2 = 0
+    t.sensor_angle_3 = 0
+    t.platform_relative = "Y"
+    t.platform_heading = 0
+    t.platform_pitch = 0
+    t.platform_roll = 0
+    t.row_fov = 16.93658629935865
+    t.col_fov = 8.514793599982974
+    # Temp
+    t.attitude_quaternion = "N"
     f.write("sensrb_test.ntf")
     igc = OrbitDataImageGroundConnection(od, cam, SimpleDem(), None)
     # For now, force the plugin/model handler. Reduces the noise when

@@ -410,7 +410,9 @@ class TiePointCollectFM(object):
                  ref_image = None,
                  number_feature = 500, number_octave_levels = 4,
                  number_ref_feature = 1000,
-                 skip_ray_intersect = False):
+                 skip_ray_intersect = False,
+                 norm_type = None,
+                 fdetect = None, fdetect_ref = None):
         if(not have_cv2):
             raise RuntimeError("This class requires the openCV python library cv2, which is not available.")
         self.raster_image = [igc_collection.image(i) for i in range(igc_collection.number_image)]
@@ -420,8 +422,16 @@ class TiePointCollectFM(object):
         else:
             self.ri = None
         self.max_ground_covariance = max_ground_covariance
-        self.sift = cv2.xfeatures2d.SIFT_create(number_feature, number_octave_levels)
-        self.sift_ref = cv2.xfeatures2d.SIFT_create(number_ref_feature, number_octave_levels)
+        if(fdetect is not None):
+            self.fdetect = fdetect 
+        else:
+            self.fdetect = cv2.xfeatures2d.SIFT_create(number_feature,
+                                                       number_octave_levels)
+        if(fdetect_ref is not None):
+            self.fdetect_ref = fdetect_ref
+        else:
+            self.fdetect_ref = cv2.xfeatures2d.SIFT_create(number_ref_feature,
+                                                           number_octave_levels)
         if(ref_image is not None):
             mi = ref_image.map_info
             mi_ref = None
@@ -434,20 +444,23 @@ class TiePointCollectFM(object):
             self.ref_image = SubRasterImage(ref_image, mi_ref)
         else:
             self.ref_image = None
-        self.bf = cv2.BFMatcher()
+        if(norm_type is None):
+            self.bf = cv2.BFMatcher()
+        else:
+            self.bf = cv2.BFMatcher(norm_type)
 
     def detect_and_compute(self, ind, log):
         '''Detect keypoints and compute descriptor the given raster image.'''
         log.info("Detecting features for image %d " % ind)
         d = self.raster_image[ind].read_all_byte_scale()
-        kp, des = self.sift.detectAndCompute(d, None)
+        kp, des = self.fdetect.detectAndCompute(d, None)
         return [kp, des]
 
     def detect_and_compute_ref(self, log):
         '''Detect keypoints and compute descriptor in the reference image.'''
         log.info("Detecting features for reference image")
         d = self.ref_image.read_all_byte_scale()
-        kp, des = self.sift_ref.detectAndCompute(d, None)
+        kp, des = self.fdetect_ref.detectAndCompute(d, None)
         return [kp, des]
 
     def match_feature(self, kp_and_desc, ind1, ind2):

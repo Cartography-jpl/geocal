@@ -3125,6 +3125,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/tie_point_collect_picmtch_test.py \
 	@srcpythonlib@/warp_image_test.py \
 	@srcpythonlib@/linear_gradient_bad_pixel_detection_test.py \
+	@srcpythonlib@/tie_point_feature_matching_test.py \
 	@docpythonsrc@ @testsupportsrc@/__init__.py \
 	@testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \

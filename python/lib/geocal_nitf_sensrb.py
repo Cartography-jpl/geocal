@@ -99,7 +99,8 @@ if(have_pynitf):
                             t.decent_distort_2, t.affinity_distort_1,
                             t.affinity_distort_2, t.radial_distort_limit,
 		            t.row_detectors, t.column_detectors,
-                            t.row_metric / 10.0, t.column_metric / 10.0,
+                            t.row_metric / 10.0 / t.row_detectors,
+                            t.column_metric / 10.0 / t.column_detectors,
 		            t.focal_length / 10.0,
                             FrameCoordinate(t.principal_point_offset_x +
                                             t.row_detectors / 2.0,
@@ -121,9 +122,10 @@ if(have_pynitf):
         t.row_detectors = cam.number_line(0)
         t.column_detectors = cam.number_sample(0)
         # 10.0 is because camera has line pitch in mm, but sensrb
-        # records this in cm.
-        t.row_metric = cam.line_pitch * 10.0
-        t.column_metric = cam.sample_pitch * 10.0
+        # records this in cm. "metric" is the entire size of the row/col
+        # CCD, so it includes the number of line/samples
+        t.row_metric = cam.line_pitch * 10.0 * t.row_detectors
+        t.column_metric = cam.sample_pitch * 10.0 * t.column_detectors
         t.focal_length = cam.focal_length * 10.0
         t.row_fov = None
         t.column_fov = None

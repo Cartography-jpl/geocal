@@ -35,10 +35,6 @@ void QuaternionCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(line_direction)
     & GEOCAL_NVP_(sample_direction)
     & GEOCAL_NVP_(parameter_mask);
-  // Older version didn't have optical_axis_direction
-  if(version > 0) {
-    ar & GEOCAL_NVP_(optical_axis_direction);
-  }
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -88,8 +84,7 @@ void QuaternionCamera::dcs_to_focal_plane
 boost::math::quaternion<double> 
 QuaternionCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
 {
-  return boost::math::quaternion<double>(0, Xfp, Yfp,
-			 optical_axis_dir() * focal_length());
+  return boost::math::quaternion<double>(0, Xfp, Yfp, focal_length());
 }
 
 boost::math::quaternion<AutoDerivative<double>  >
@@ -98,7 +93,7 @@ QuaternionCamera::focal_plane_to_dcs
  const AutoDerivative<double>& Yfp) const
 {
   return boost::math::quaternion<AutoDerivative<double> >(0, Xfp, Yfp, 
-		  optical_axis_dir() * focal_length_with_derivative());
+				  focal_length_with_derivative());
 }
 
 //-----------------------------------------------------------------------
@@ -294,16 +289,6 @@ void QuaternionCamera::print(std::ostream& Os) const
      << "   Principal point: " << principal_point(0) << "\n"
      << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
 				    "LINE_IS_X\n" : "LINE_IS_Y\n")
-     << "   Line direction:   " << (line_direction() == INCREASE_IS_POSITIVE ?
-				    "INCREASE_IS_POSITIVE\n" :
-				    "INCREASE_IS_NEGATIVE\n")
-     << "   Sample direction:  " << (sample_direction() == INCREASE_IS_POSITIVE ?
-				    "INCREASE_IS_POSITIVE\n" :
-				    "INCREASE_IS_NEGATIVE\n")
-     << "   Optical axis dir:  " << (optical_axis_direction() ==
-				     OPTICAL_AXIS_IS_POSITIVE ?
-				     "OPTICAL_AXIS_IS_POSITIVE\n" :
-				     "OPTICAL_AXIS_IS_NEGATIVE\n")
      << "   Frame to spacecraft: " << frame_to_sc() << "\n";
 }
 

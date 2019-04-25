@@ -203,11 +203,7 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
     The convention used by SENSRB is that line is in the +y direction,
     sample is the +x direction (so different than the default for
-    QuaternionCamera class). Oddly, the boresight direction is -z (not +z
-    like we often use). This makes some sense, since this is a right
-    handed coordinate system. This is for it's image coordinate system
-    (there is a closely related sensor coordinate system, which is
-    actually a left handed coordinate system).
+    QuaternionCamera class).
 
     C++ includes: sensrb_camera.h 
     """
@@ -229,9 +225,7 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         QuaternionCamera::FrameDirection
         Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
         QuaternionCamera::FrameDirection
-        Sample_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
-        QuaternionCamera::OpticalAxisDirection
-        Optical_axis_direction=QuaternionCamera::OPTICAL_AXIS_IS_POSITIVE)
+        Sample_direction=QuaternionCamera::INCREASE_IS_POSITIVE)
         Create a QuaternionCamera with a radial distortion model given by
         kdistort.
 

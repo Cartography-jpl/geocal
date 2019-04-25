@@ -31,11 +31,6 @@ namespace GeoCal {
   We support both conventions, depending on the setting of the
   frame_convention.
 
-  In yet another variation, the optical axis/boresight can either be
-  in the +z direction or the -z direction. Many cameras use the +z
-  direction, but the -z direction can be used for some variations of 
-  line/sample x/y to make sure the coordinate system is right handed.
-
   In addition to either x or y direction for line, we can have
   increasing line go in the positive direction or negative direction.
   Likewise for sample.
@@ -56,8 +51,6 @@ class QuaternionCamera : public Camera {
 public:
   enum FrameConvention { LINE_IS_X, LINE_IS_Y};
   enum FrameDirection { INCREASE_IS_POSITIVE, INCREASE_IS_NEGATIVE};
-  enum OpticalAxisDirection {OPTICAL_AXIS_IS_POSITIVE,
-			     OPTICAL_AXIS_IS_NEGATIVE};
 
 //-----------------------------------------------------------------------
 /// Create a QuaternionCamera. The orientation of the camera to the
@@ -75,9 +68,7 @@ public:
 		   const FrameCoordinate& Principal_point,
 		   FrameConvention Frame_convention = LINE_IS_X,
 		   FrameDirection Line_direction = INCREASE_IS_POSITIVE,
-		   FrameDirection Sample_direction = INCREASE_IS_POSITIVE,
-		   OpticalAxisDirection Optical_axis_direction =
-		   OPTICAL_AXIS_IS_POSITIVE)
+		   FrameDirection Sample_direction = INCREASE_IS_POSITIVE)
     : focal_length_(Focal_length),
       nband_(1),
       nline_(Number_line),
@@ -88,8 +79,7 @@ public:
       frame_to_sc_nd_(Frame_to_sc_q),
       frame_convention_(Frame_convention),
       line_direction_(Line_direction),
-      sample_direction_(Sample_direction),
-      optical_axis_direction_(Optical_axis_direction)
+      sample_direction_(Sample_direction)
   { 
     principal_point_.push_back(Principal_point);
     parameter_mask_.resize(6 + 2 * number_band());
@@ -104,7 +94,6 @@ public:
 		   FrameConvention Frame_convention,
 		   FrameDirection Line_direction,
 		   FrameDirection Sample_direction,
-		   OpticalAxisDirection Optical_axis_direction,
 		   const blitz::Array<bool, 1>& Parameter_mask)
     : focal_length_(Focal_length),
       nband_(1),
@@ -117,7 +106,6 @@ public:
       frame_convention_(Frame_convention),
       line_direction_(Line_direction),
       sample_direction_(Sample_direction),
-      optical_axis_direction_(Optical_axis_direction),
       parameter_mask_(Parameter_mask.copy())
   { 
     principal_point_.push_back(Principal_point);
@@ -456,21 +444,6 @@ public:
   void sample_direction(FrameDirection Sample_direction)
   { sample_direction_ = Sample_direction; notify_update(); }
 
-//-----------------------------------------------------------------------
-/// Optical axis direction, indicates if increasing optical axis is in
-//  positive or negative direction z direction.
-//-----------------------------------------------------------------------
-
-  OpticalAxisDirection optical_axis_direction() const
-  { return optical_axis_direction_; }
-
-//-----------------------------------------------------------------------
-/// Set optical direction.
-//-----------------------------------------------------------------------
-
-  void optical_axis_direction(OpticalAxisDirection Optical_axis_direction)
-  { optical_axis_direction_ = Optical_axis_direction; notify_update(); }
-  
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
   virtual FrameCoordinateWithDerivative 
@@ -618,7 +591,7 @@ protected:
 // about frame_to_sc_, you need to fill in *both* frame_to_sc_ and
 // frame_to_sc_nd_.
 //-----------------------------------------------------------------------
-  QuaternionCamera() : optical_axis_direction_(OPTICAL_AXIS_IS_POSITIVE) {}
+  QuaternionCamera() {}
   AutoDerivative<double> focal_length_;	
 				// Focal length, in mm.
   int nband_;			// Number of bands in camera.
@@ -644,17 +617,12 @@ protected:
 				// Indicate if increasing line or
 				// sample goes in positive or negative 
 				// direction.
-  OpticalAxisDirection optical_axis_direction_;
-				// Indicate if optical axis in +z or
-				// -z direction.
   blitz::Array<bool, 1> parameter_mask_;
 				// Mask of parameters we are fitting for.
   int line_dir() const 
   {return (line_direction_ == INCREASE_IS_POSITIVE ? 1 : -1);}
   int samp_dir() const 
   {return (sample_direction_ == INCREASE_IS_POSITIVE ? 1 : -1);}
-  int optical_axis_dir() const 
-  {return (optical_axis_direction_ == OPTICAL_AXIS_IS_POSITIVE ? 1 : -1);}
 
   virtual void notify_update()
   {
@@ -671,6 +639,5 @@ protected:
 }
 
 GEOCAL_EXPORT_KEY(QuaternionCamera);
-GEOCAL_CLASS_VERSION(QuaternionCamera, 1);
 #endif
 

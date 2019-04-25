@@ -39,14 +39,10 @@ public:
 			  QuaternionCamera::FrameDirection Line_direction =
 			  QuaternionCamera::INCREASE_IS_POSITIVE,
 			  QuaternionCamera::FrameDirection Sample_direction =
-			 QuaternionCamera::INCREASE_IS_POSITIVE,
-			 QuaternionCamera::OpticalAxisDirection
-			 Optical_axis_direction =
-			 QuaternionCamera::OPTICAL_AXIS_IS_POSITIVE)
+			  QuaternionCamera::INCREASE_IS_POSITIVE)
   : QuaternionCamera(Frame_to_sc_q, Number_line, Number_sample, Line_pitch,
 		     Sample_pitch, Focal_length, Principal_point,
-		     Frame_convention, Line_direction, Sample_direction,
-		     Optical_axis_direction),
+		     Frame_convention, Line_direction, Sample_direction),
     k_distort_(K_distort.copy()),
     max_r2_filled_in(false)
   {
@@ -54,20 +50,18 @@ public:
       throw Exception("Right now, only support k_distort.rows <= 3");
   }
   CameraRadialDistortion(boost::math::quaternion<double> Frame_to_sc_q, 
-			 const blitz::Array<double, 1>& K_distort,
-			 double Number_line, double Number_sample,
-			 double Line_pitch, double Sample_pitch,
-			 double Focal_length, 
-			 const FrameCoordinate& Principal_point,
-			 QuaternionCamera::FrameConvention Frame_convention,
-			 QuaternionCamera::FrameDirection Line_direction,
-			 QuaternionCamera::FrameDirection Sample_direction,
-			 QuaternionCamera::OpticalAxisDirection Optical_axis_direction,
-			 const blitz::Array<bool, 1>& Parameter_mask)
+			  const blitz::Array<double, 1>& K_distort,
+			  double Number_line, double Number_sample,
+			  double Line_pitch, double Sample_pitch,
+			  double Focal_length, 
+			  const FrameCoordinate& Principal_point,
+			  QuaternionCamera::FrameConvention Frame_convention,
+			  QuaternionCamera::FrameDirection Line_direction,
+			  QuaternionCamera::FrameDirection Sample_direction,
+			  const blitz::Array<bool, 1>& Parameter_mask)
   : QuaternionCamera(Frame_to_sc_q, Number_line, Number_sample, Line_pitch,
 		     Sample_pitch, Focal_length, Principal_point,
 		     Frame_convention, Line_direction, Sample_direction,
-		     Optical_axis_direction,
 		     Parameter_mask),
     k_distort_(K_distort.copy()),
     max_r2_filled_in(false)

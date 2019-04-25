@@ -25,10 +25,7 @@ public:
 			  QuaternionCamera::FrameDirection Line_direction =
 			  QuaternionCamera::INCREASE_IS_POSITIVE,
 			  QuaternionCamera::FrameDirection Sample_direction =
-			 QuaternionCamera::INCREASE_IS_POSITIVE,
-			 QuaternionCamera::OpticalAxisDirection
-			 Optical_axis_direction =
-			 QuaternionCamera::OPTICAL_AXIS_IS_POSITIVE);
+			  QuaternionCamera::INCREASE_IS_POSITIVE);
   CameraRadialDistortion(boost::math::quaternion<double> Frame_to_sc_q, 
 			  const blitz::Array<double, 1>& K_distort,
 			  double Number_line, double Number_sample,
@@ -38,7 +35,6 @@ public:
 			  QuaternionCamera::FrameConvention Frame_convention,
 			  QuaternionCamera::FrameDirection Line_direction,
 			  QuaternionCamera::FrameDirection Sample_direction,
-			 QuaternionCamera::OpticalAxisDirection Optical_axis_direction,
 			  const blitz::Array<bool, 1>& Parameter_mask);
   %python_attribute(k_distort, const blitz::Array<double, 1>&);
   %pickle_serialization();

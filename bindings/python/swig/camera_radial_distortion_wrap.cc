@@ -6515,167 +6515,6 @@ SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_0(PyObject *SWIGUNUS
   GeoCal::QuaternionCamera::FrameConvention arg9 ;
   GeoCal::QuaternionCamera::FrameDirection arg10 ;
   GeoCal::QuaternionCamera::FrameDirection arg11 ;
-  GeoCal::QuaternionCamera::OpticalAxisDirection arg12 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  blitz::Array< double,1 > a2 ;
-  PythonObject numpy2 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  double val5 ;
-  int ecode5 = 0 ;
-  double val6 ;
-  int ecode6 = 0 ;
-  double val7 ;
-  int ecode7 = 0 ;
-  void *argp8 = 0 ;
-  int res8 = 0 ;
-  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared8 ;
-  int val9 ;
-  int ecode9 = 0 ;
-  int val10 ;
-  int ecode10 = 0 ;
-  int val11 ;
-  int ecode11 = 0 ;
-  int val12 ;
-  int ecode12 = 0 ;
-  GeoCal::CameraRadialDistortion *result = 0 ;
-  
-  if ((nobjs < 12) || (nobjs > 12)) SWIG_fail;
-  {
-    res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CameraRadialDistortion" "', argument " "1"" of type '" "boost::math::quaternion< double >""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CameraRadialDistortion" "', argument " "1"" of type '" "boost::math::quaternion< double >""'");
-    } else {
-      boost::math::quaternion< double > * temp = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
-      arg1 = *temp;
-      if (SWIG_IsNewObj(res1)) delete temp;
-    }
-  }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'new_CameraRadialDistortion', expecting type  Array<double,1>");
-        return NULL;
-      }
-      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'new_CameraRadialDistortion', expecting type  Array<double,1>");
-        return NULL;
-      }
-      a2.reference(to_blitz_array<double, 1>(numpy2));
-      arg2 = &a2;
-    }
-  }
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CameraRadialDistortion" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CameraRadialDistortion" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CameraRadialDistortion" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_CameraRadialDistortion" "', argument " "6"" of type '" "double""'");
-  } 
-  arg6 = static_cast< double >(val6);
-  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_CameraRadialDistortion" "', argument " "7"" of type '" "double""'");
-  } 
-  arg7 = static_cast< double >(val7);
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::FrameCoordinate *ptr;
-    res8 = SWIG_ConvertPtrAndOwn(swig_obj[7], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res8)) {
-      arg8 = ptr;
-    } else {
-      res8 = SWIG_ConvertPtrAndOwn(swig_obj[7], &argp8, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res8)) {
-        SWIG_exception_fail(SWIG_ArgError(res8), "in method '" "new_CameraRadialDistortion" "', argument " "8"" of type '" "GeoCal::FrameCoordinate const &""'"); 
-      }
-      if (!argp8) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CameraRadialDistortion" "', argument " "8"" of type '" "GeoCal::FrameCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared8 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp8);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp8);
-        arg8 = const_cast< GeoCal::FrameCoordinate * >(tempshared8.get());
-      } else {
-        arg8 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp8)->get());
-      }
-    }
-  }
-  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
-  if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_CameraRadialDistortion" "', argument " "9"" of type '" "GeoCal::QuaternionCamera::FrameConvention""'");
-  } 
-  arg9 = static_cast< GeoCal::QuaternionCamera::FrameConvention >(val9);
-  ecode10 = SWIG_AsVal_int(swig_obj[9], &val10);
-  if (!SWIG_IsOK(ecode10)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_CameraRadialDistortion" "', argument " "10"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
-  } 
-  arg10 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val10);
-  ecode11 = SWIG_AsVal_int(swig_obj[10], &val11);
-  if (!SWIG_IsOK(ecode11)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "new_CameraRadialDistortion" "', argument " "11"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
-  } 
-  arg11 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val11);
-  ecode12 = SWIG_AsVal_int(swig_obj[11], &val12);
-  if (!SWIG_IsOK(ecode12)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode12), "in method '" "new_CameraRadialDistortion" "', argument " "12"" of type '" "GeoCal::QuaternionCamera::OpticalAxisDirection""'");
-  } 
-  arg12 = static_cast< GeoCal::QuaternionCamera::OpticalAxisDirection >(val12);
-  {
-    try {
-      result = (GeoCal::CameraRadialDistortion *)new GeoCal::CameraRadialDistortion(arg1,(blitz::Array< double,1 > const &)*arg2,arg3,arg4,arg5,arg6,arg7,(GeoCal::FrameCoordinate const &)*arg8,arg9,arg10,arg11,arg12);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::CameraRadialDistortion > *smartresult = result ? new boost::shared_ptr<  GeoCal::CameraRadialDistortion >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CameraRadialDistortion_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
-  blitz::Array< double,1 > *arg2 = 0 ;
-  double arg3 ;
-  double arg4 ;
-  double arg5 ;
-  double arg6 ;
-  double arg7 ;
-  GeoCal::FrameCoordinate *arg8 = 0 ;
-  GeoCal::QuaternionCamera::FrameConvention arg9 ;
-  GeoCal::QuaternionCamera::FrameDirection arg10 ;
-  GeoCal::QuaternionCamera::FrameDirection arg11 ;
   void *argp1 ;
   int res1 = 0 ;
   blitz::Array< double,1 > a2 ;
@@ -6816,7 +6655,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -6961,7 +6800,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -7098,7 +6937,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -7227,7 +7066,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   SwigValueWrapper< boost::math::quaternion< double > > arg1 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -7240,8 +7079,7 @@ SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_5(PyObject *SWIGUNUS
   GeoCal::QuaternionCamera::FrameConvention arg9 ;
   GeoCal::QuaternionCamera::FrameDirection arg10 ;
   GeoCal::QuaternionCamera::FrameDirection arg11 ;
-  GeoCal::QuaternionCamera::OpticalAxisDirection arg12 ;
-  blitz::Array< bool,1 > *arg13 = 0 ;
+  blitz::Array< bool,1 > *arg12 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   blitz::Array< double,1 > a2 ;
@@ -7265,13 +7103,11 @@ SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_5(PyObject *SWIGUNUS
   int ecode10 = 0 ;
   int val11 ;
   int ecode11 = 0 ;
-  int val12 ;
-  int ecode12 = 0 ;
-  blitz::Array< bool,1 > a13 ;
-  PythonObject numpy13 ;
+  blitz::Array< bool,1 > a12 ;
+  PythonObject numpy12 ;
   GeoCal::CameraRadialDistortion *result = 0 ;
   
-  if ((nobjs < 13) || (nobjs > 13)) SWIG_fail;
+  if ((nobjs < 12) || (nobjs > 12)) SWIG_fail;
   {
     res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
     if (!SWIG_IsOK(res1)) {
@@ -7367,31 +7203,26 @@ SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion__SWIG_5(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(ecode11), "in method '" "new_CameraRadialDistortion" "', argument " "11"" of type '" "GeoCal::QuaternionCamera::FrameDirection""'");
   } 
   arg11 = static_cast< GeoCal::QuaternionCamera::FrameDirection >(val11);
-  ecode12 = SWIG_AsVal_int(swig_obj[11], &val12);
-  if (!SWIG_IsOK(ecode12)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode12), "in method '" "new_CameraRadialDistortion" "', argument " "12"" of type '" "GeoCal::QuaternionCamera::OpticalAxisDirection""'");
-  } 
-  arg12 = static_cast< GeoCal::QuaternionCamera::OpticalAxisDirection >(val12);
   {
-    int res = SWIG_ConvertPtr(swig_obj[12], (void**)(&arg13), SWIGTYPE_p_blitz__ArrayT_bool_1_t, 
+    int res = SWIG_ConvertPtr(swig_obj[11], (void**)(&arg12), SWIGTYPE_p_blitz__ArrayT_bool_1_t, 
       0 );
     if(!SWIG_IsOK(res)) {
-      numpy13.obj = to_numpy<bool >(swig_obj[12]);
-      if(!numpy13.obj) {
+      numpy12.obj = to_numpy<bool >(swig_obj[11]);
+      if(!numpy12.obj) {
         SWIG_Error(SWIG_TypeError, "in method 'new_CameraRadialDistortion', expecting type  Array<bool,1>");
         return NULL;
       }
-      if(PyArray_NDIM((PyArrayObject*)numpy13.obj) !=1) {
+      if(PyArray_NDIM((PyArrayObject*)numpy12.obj) !=1) {
         SWIG_Error(SWIG_TypeError, "in method 'new_CameraRadialDistortion', expecting type  Array<bool,1>");
         return NULL;
       }
-      a13.reference(to_blitz_array<bool, 1>(numpy13));
-      arg13 = &a13;
+      a12.reference(to_blitz_array<bool, 1>(numpy12));
+      arg12 = &a12;
     }
   }
   {
     try {
-      result = (GeoCal::CameraRadialDistortion *)new GeoCal::CameraRadialDistortion(arg1,(blitz::Array< double,1 > const &)*arg2,arg3,arg4,arg5,arg6,arg7,(GeoCal::FrameCoordinate const &)*arg8,arg9,arg10,arg11,arg12,(blitz::Array< bool,1 > const &)*arg13);
+      result = (GeoCal::CameraRadialDistortion *)new GeoCal::CameraRadialDistortion(arg1,(blitz::Array< double,1 > const &)*arg2,arg3,arg4,arg5,arg6,arg7,(GeoCal::FrameCoordinate const &)*arg8,arg9,arg10,arg11,(blitz::Array< bool,1 > const &)*arg12);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7410,40 +7241,36 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_CameraRadialDistortion(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[14] = {
+  PyObject *argv[13] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_CameraRadialDistortion",0,13,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_CameraRadialDistortion",0,12,argv))) SWIG_fail;
   --argc;
   if (argc == 8) {
-    return _wrap_new_CameraRadialDistortion__SWIG_4(self, argc, argv);
-  }
-  if (argc == 9) {
     return _wrap_new_CameraRadialDistortion__SWIG_3(self, argc, argv);
   }
-  if (argc == 10) {
+  if (argc == 9) {
     return _wrap_new_CameraRadialDistortion__SWIG_2(self, argc, argv);
   }
-  if (argc == 11) {
+  if (argc == 10) {
     return _wrap_new_CameraRadialDistortion__SWIG_1(self, argc, argv);
   }
-  if (argc == 12) {
+  if (argc == 11) {
     return _wrap_new_CameraRadialDistortion__SWIG_0(self, argc, argv);
   }
-  if (argc == 13) {
-    return _wrap_new_CameraRadialDistortion__SWIG_5(self, argc, argv);
+  if (argc == 12) {
+    return _wrap_new_CameraRadialDistortion__SWIG_4(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CameraRadialDistortion'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::CameraRadialDistortion::CameraRadialDistortion(boost::math::quaternion< double >,blitz::Array< double,1 > const &,double,double,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection,GeoCal::QuaternionCamera::FrameDirection,GeoCal::QuaternionCamera::OpticalAxisDirection)\n"
     "    GeoCal::CameraRadialDistortion::CameraRadialDistortion(boost::math::quaternion< double >,blitz::Array< double,1 > const &,double,double,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection,GeoCal::QuaternionCamera::FrameDirection)\n"
     "    GeoCal::CameraRadialDistortion::CameraRadialDistortion(boost::math::quaternion< double >,blitz::Array< double,1 > const &,double,double,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection)\n"
     "    GeoCal::CameraRadialDistortion::CameraRadialDistortion(boost::math::quaternion< double >,blitz::Array< double,1 > const &,double,double,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention)\n"
     "    GeoCal::CameraRadialDistortion::CameraRadialDistortion(boost::math::quaternion< double >,blitz::Array< double,1 > const &,double,double,double,double,double,GeoCal::FrameCoordinate const &)\n"
-    "    GeoCal::CameraRadialDistortion::CameraRadialDistortion(boost::math::quaternion< double >,blitz::Array< double,1 > const &,double,double,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection,GeoCal::QuaternionCamera::FrameDirection,GeoCal::QuaternionCamera::OpticalAxisDirection,blitz::Array< bool,1 > const &)\n");
+    "    GeoCal::CameraRadialDistortion::CameraRadialDistortion(boost::math::quaternion< double >,blitz::Array< double,1 > const &,double,double,double,double,double,GeoCal::FrameCoordinate const &,GeoCal::QuaternionCamera::FrameConvention,GeoCal::QuaternionCamera::FrameDirection,GeoCal::QuaternionCamera::FrameDirection,blitz::Array< bool,1 > const &)\n");
   return 0;
 }
 
@@ -7585,9 +7412,8 @@ static PyMethodDef SwigMethods[] = {
 		"double Line_pitch, double Sample_pitch, double Focal_length, const\n"
 		"FrameCoordinate &Principal_point, QuaternionCamera::FrameConvention\n"
 		"Frame_convention, QuaternionCamera::FrameDirection Line_direction,\n"
-		"QuaternionCamera::FrameDirection Sample_direction,\n"
-		"QuaternionCamera::OpticalAxisDirection Optical_axis_direction, const\n"
-		"blitz::Array< bool, 1 > &Parameter_mask)\n"
+		"QuaternionCamera::FrameDirection Sample_direction, const blitz::Array<\n"
+		"bool, 1 > &Parameter_mask)\n"
 		"\n"
 		""},
 	 { (char *)"CameraRadialDistortion__v_k_distort", (PyCFunction)_wrap_CameraRadialDistortion__v_k_distort, METH_O, (char *)"\n"

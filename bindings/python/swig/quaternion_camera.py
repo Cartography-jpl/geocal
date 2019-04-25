@@ -210,6 +210,11 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     We support both conventions, depending on the setting of the
     frame_convention.
 
+    In yet another variation, the optical axis/boresight can either be in
+    the +z direction or the -z direction. Many cameras use the +z
+    direction, but the -z direction can be used for some variations of
+    line/sample x/y to make sure the coordinate system is right handed.
+
     In addition to either x or y direction for line, we can have
     increasing line go in the positive direction or negative direction.
     Likewise for sample.
@@ -235,6 +240,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     LINE_IS_Y = _quaternion_camera.QuaternionCamera_LINE_IS_Y
     INCREASE_IS_POSITIVE = _quaternion_camera.QuaternionCamera_INCREASE_IS_POSITIVE
     INCREASE_IS_NEGATIVE = _quaternion_camera.QuaternionCamera_INCREASE_IS_NEGATIVE
+    OPTICAL_AXIS_IS_POSITIVE = _quaternion_camera.QuaternionCamera_OPTICAL_AXIS_IS_POSITIVE
+    OPTICAL_AXIS_IS_NEGATIVE = _quaternion_camera.QuaternionCamera_OPTICAL_AXIS_IS_NEGATIVE
 
     def _v_focal_length(self, *args):
         """
@@ -414,6 +421,24 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     @sample_direction.setter
     def sample_direction(self, value):
       self._v_sample_direction(value)
+
+
+    def _v_optical_axis_direction(self, *args):
+        """
+
+        void GeoCal::QuaternionCamera::optical_axis_direction(OpticalAxisDirection Optical_axis_direction)
+        Set optical direction. 
+        """
+        return _quaternion_camera.QuaternionCamera__v_optical_axis_direction(self, *args)
+
+
+    @property
+    def optical_axis_direction(self):
+        return self._v_optical_axis_direction()
+
+    @optical_axis_direction.setter
+    def optical_axis_direction(self, value):
+      self._v_optical_axis_direction(value)
 
 
     def _v_frame_to_sc(self, *args):
@@ -724,7 +749,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
         double Number_sample, double Line_pitch, double Sample_pitch, double
         Focal_length, const FrameCoordinate &Principal_point, FrameConvention
         Frame_convention, FrameDirection Line_direction, FrameDirection
-        Sample_direction, const blitz::Array< bool, 1 > &Parameter_mask)
+        Sample_direction, OpticalAxisDirection Optical_axis_direction, const
+        blitz::Array< bool, 1 > &Parameter_mask)
 
         """
         _quaternion_camera.QuaternionCamera_swiginit(self, _quaternion_camera.new_QuaternionCamera(*args))
@@ -740,6 +766,7 @@ QuaternionCamera._v_sample_pitch_with_derivative = new_instancemethod(_quaternio
 QuaternionCamera._v_frame_convention = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_convention, None, QuaternionCamera)
 QuaternionCamera._v_line_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_line_direction, None, QuaternionCamera)
 QuaternionCamera._v_sample_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_sample_direction, None, QuaternionCamera)
+QuaternionCamera._v_optical_axis_direction = new_instancemethod(_quaternion_camera.QuaternionCamera__v_optical_axis_direction, None, QuaternionCamera)
 QuaternionCamera._v_frame_to_sc = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_to_sc, None, QuaternionCamera)
 QuaternionCamera._v_frame_to_sc_with_derivative = new_instancemethod(_quaternion_camera.QuaternionCamera__v_frame_to_sc_with_derivative, None, QuaternionCamera)
 QuaternionCamera._v_ypr = new_instancemethod(_quaternion_camera.QuaternionCamera__v_ypr, None, QuaternionCamera)

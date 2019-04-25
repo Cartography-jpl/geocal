@@ -46,6 +46,7 @@ QuickBirdCamera::QuickBirdCamera()
   frame_convention_ = QuaternionCamera::LINE_IS_X;
   line_direction_ = QuaternionCamera::INCREASE_IS_POSITIVE;
   sample_direction_ = QuaternionCamera::INCREASE_IS_NEGATIVE;
+  optical_axis_direction_ = QuaternionCamera::OPTICAL_AXIS_IS_POSITIVE;
 
   // Note that there are a few different conventions about the
   // ordering of the quaternion coefficients. The boost library places

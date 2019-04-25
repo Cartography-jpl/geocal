@@ -44,7 +44,8 @@ def hrsc_camera():
                                 principal_point,
                                 QuaternionCamera.LINE_IS_Y,
                                 QuaternionCamera.INCREASE_IS_NEGATIVE,
-                                QuaternionCamera.INCREASE_IS_NEGATIVE)
+                                QuaternionCamera.INCREASE_IS_NEGATIVE,
+                                QuaternionCamera.OPTICAL_AXIS_IS_POSITIVE)
     return hrsc_cam
 
 def ctx_camera():

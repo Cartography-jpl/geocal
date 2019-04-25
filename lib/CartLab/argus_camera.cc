@@ -39,6 +39,7 @@ ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll,
 					     nsamp_ / 2.0));
   line_direction_ = QuaternionCamera::INCREASE_IS_NEGATIVE;
   sample_direction_ = QuaternionCamera::INCREASE_IS_POSITIVE;
+  optical_axis_direction_ = QuaternionCamera::OPTICAL_AXIS_IS_POSITIVE;
 
   // For now, hardwire this to fit a sensor size of 36.0 x 24.0 mm.
   // This is the actual image sensor size according to canon, and may

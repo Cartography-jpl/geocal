@@ -21,14 +21,16 @@ public:
 	       double Line_pitch, double Sample_pitch,
 	       double Focal_length, 
 	       const FrameCoordinate& Principal_point,
-	       const std::string& Detection_type = "Placeholder",
+	       const std::string& Detection_type = "VIS",
 	       const std::string& Calibration_date = "20000101",
 	       QuaternionCamera::FrameConvention Frame_convention =
 	       QuaternionCamera::LINE_IS_Y,
 	       QuaternionCamera::FrameDirection Line_direction =
 	       QuaternionCamera::INCREASE_IS_POSITIVE,
 	       QuaternionCamera::FrameDirection Sample_direction =
-	       QuaternionCamera::INCREASE_IS_POSITIVE);
+	       QuaternionCamera::INCREASE_IS_POSITIVE,
+	       QuaternionCamera::OpticalAxisDirection Optical_axis_direction =
+	       QuaternionCamera::OPTICAL_AXIS_IS_POSITIVE);
   %python_attribute(p_distort, const blitz::Array<double, 1>&);
   %python_attribute_with_set(k1, double);
   %python_attribute_with_set(k2, double);

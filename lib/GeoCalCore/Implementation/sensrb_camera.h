@@ -20,7 +20,11 @@ namespace GeoCal {
 
   The convention used by SENSRB is that line is in the +y direction,
   sample is the +x direction (so different than the default for
-  QuaternionCamera class).
+  QuaternionCamera class).  Oddly, the boresight direction is -z (not
+  +z like we often use). This makes some sense, since this is a right
+  handed coordinate system. This is for it's image coordinate system
+  (there is a closely related sensor coordinate system, which is
+  actually a left handed coordinate system).
 *******************************************************************/
 class SensrbCamera : public QuaternionCamera {
 public:
@@ -44,10 +48,13 @@ public:
 	       QuaternionCamera::FrameDirection Line_direction =
 	       QuaternionCamera::INCREASE_IS_POSITIVE,
 	       QuaternionCamera::FrameDirection Sample_direction =
-	       QuaternionCamera::INCREASE_IS_POSITIVE)
+	       QuaternionCamera::INCREASE_IS_POSITIVE,
+	       QuaternionCamera::OpticalAxisDirection Optical_axis_direction =
+	       QuaternionCamera::OPTICAL_AXIS_IS_POSITIVE)
   : QuaternionCamera(Frame_to_sc_q, Number_line, Number_sample, Line_pitch,
 		     Sample_pitch, Focal_length, Principal_point,
-		     Frame_convention, Line_direction, Sample_direction),
+		     Frame_convention, Line_direction, Sample_direction,
+		     Optical_axis_direction),
     calibration_date_(Calibration_date),
     detection_type_(Detection_type),
     p_distort_(7),

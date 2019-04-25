@@ -216,8 +216,9 @@ class CameraRadialDistortion(geocal_swig.quaternion_camera.QuaternionCamera):
         double Line_pitch, double Sample_pitch, double Focal_length, const
         FrameCoordinate &Principal_point, QuaternionCamera::FrameConvention
         Frame_convention, QuaternionCamera::FrameDirection Line_direction,
-        QuaternionCamera::FrameDirection Sample_direction, const blitz::Array<
-        bool, 1 > &Parameter_mask)
+        QuaternionCamera::FrameDirection Sample_direction,
+        QuaternionCamera::OpticalAxisDirection Optical_axis_direction, const
+        blitz::Array< bool, 1 > &Parameter_mask)
 
         """
         _camera_radial_distortion.CameraRadialDistortion_swiginit(self, _camera_radial_distortion.new_CameraRadialDistortion(*args))

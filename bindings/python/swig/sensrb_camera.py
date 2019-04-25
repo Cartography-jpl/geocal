@@ -201,6 +201,10 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
     This is the camera model used by the SENSRB TRE in NITF files
 
+    The convention used by SENSRB is that line is in the +y direction,
+    sample is the +x direction (so different than the default for
+    QuaternionCamera class).
+
     C++ includes: sensrb_camera.h 
     """
 
@@ -217,7 +221,7 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         FrameCoordinate &Principal_point, const std::string
         &Detection_type="VIS", const std::string
         &Calibration_date="20000101", QuaternionCamera::FrameConvention
-        Frame_convention=QuaternionCamera::LINE_IS_X,
+        Frame_convention=QuaternionCamera::LINE_IS_Y,
         QuaternionCamera::FrameDirection
         Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
         QuaternionCamera::FrameDirection

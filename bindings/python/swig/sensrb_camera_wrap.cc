@@ -9258,7 +9258,7 @@ static PyMethodDef SwigMethods[] = {
 		"FrameCoordinate &Principal_point, const std::string\n"
 		"&Detection_type=\"VIS\", const std::string\n"
 		"&Calibration_date=\"20000101\", QuaternionCamera::FrameConvention\n"
-		"Frame_convention=QuaternionCamera::LINE_IS_X,\n"
+		"Frame_convention=QuaternionCamera::LINE_IS_Y,\n"
 		"QuaternionCamera::FrameDirection\n"
 		"Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,\n"
 		"QuaternionCamera::FrameDirection\n"

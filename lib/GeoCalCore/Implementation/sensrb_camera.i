@@ -24,7 +24,7 @@ public:
 	       const std::string& Detection_type = "Placeholder",
 	       const std::string& Calibration_date = "20000101",
 	       QuaternionCamera::FrameConvention Frame_convention =
-	       QuaternionCamera::LINE_IS_X,
+	       QuaternionCamera::LINE_IS_Y,
 	       QuaternionCamera::FrameDirection Line_direction =
 	       QuaternionCamera::INCREASE_IS_POSITIVE,
 	       QuaternionCamera::FrameDirection Sample_direction =

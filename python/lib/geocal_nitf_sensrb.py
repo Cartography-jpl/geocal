@@ -12,12 +12,9 @@ except ImportError:
 # Add functions to sensrb TRE to read and write higher level
 # objects.
 #
-# Note we often have the orbit data and camera attitudes
-# separate. SENSRB doesn't actually support this, instead
-# the "orbit data" should include both the platform attitude
-# and the orientation of the camera relative to the platform.
-#
-# Note
+# Note that we are are currently assuming a framing camera
+# with all the data taken at the same time. We can extend
+# this if needed.
 # ---------------------------------------------------------
 if(have_pynitf):
     def _orbit_data_sensrb_get(self):
@@ -59,6 +56,9 @@ if(have_pynitf):
         t.start_time = tm - tm_day_start
         t.end_date = t.start_date
         t.end_time = t.start_time
+        t.reference_time = 0
+        t.reference_row = 1
+        t.reference_column = 1
         # Note that SENSRB can only have position as ECR, there is
         # no way to specify this as ECI
         p = od.position_cf.position
@@ -118,6 +118,9 @@ if(have_pynitf):
         t.length_unit = "SI"
         t.angular_unit = "DEG"
         t.calibration_unit = "px"
+        t.generation_count = 0
+        t.generation_date = None
+        t.generation_time = None
         t.detection = cam.detection_type
         t.row_detectors = cam.number_line(0)
         t.column_detectors = cam.number_sample(0)
@@ -140,6 +143,20 @@ if(have_pynitf):
         t.affinity_distort_2 = cam.b2
         t.radial_distort_limit = cam.radial_distort_limit
         t.calibration_date = cam.calibration_date
+        t.image_formation_data = "Y"
+        t.method = "Single Frame"
+        t.mode = "003"
+        t.row_count = cam.number_line(0)
+        t.column_count = cam.number_sample(0)
+        t.row_set = cam.number_line(0)
+        t.column_set = cam.number_sample(0)
+        t.row_rate = 0
+        t.column_rate = 0
+        # This is 1 based, I'm pretty sure
+        t.first_pixel_row = 1
+        t.first_pixel_column = 1
+        t.transform_params = 0
+        
         # Need to add handling of quaterion
         
     NitfImageSegment.camera_sensrb = property(_camera_sensrb_get,

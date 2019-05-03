@@ -35,11 +35,11 @@ GEOCAL_IMPLEMENT(IgcMsp);
 namespace GeoCal {
 class IgcMspImp: public virtual ImageGroundConnection {
 public:
-  IgcMspImp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem,
+  IgcMspImp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
 	    const std::string& Plugin_name = "",
 	    const std::string& Model_name = "")
     : fname_(Fname), plugin_name_(Plugin_name), model_name_(Model_name)
-  { dem_ = Dem; init(); }
+  { dem_ = D; init(); }
   virtual ~IgcMspImp() {}
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, 
@@ -205,10 +205,10 @@ bool GeoCal::have_msp_supported()
 /// convention - so /foo/bar/plugins/.
 //-----------------------------------------------------------------------
 
-IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem)
+IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D)
 {
 #ifdef HAVE_MSP
-  igc = boost::make_shared<IgcMspImp>(Fname, Dem);
+  igc = boost::make_shared<IgcMspImp>(Fname, D);
   initialize(igc->dem_ptr(),
 	     igc->image(), igc->image_multi_band(),
 	     igc->title(), igc->image_mask(), igc->ground_mask());
@@ -226,11 +226,11 @@ IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem)
 /// if the wrong plugin in is processing the file.
 //-----------------------------------------------------------------------
 
-IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& Dem,
+IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
 	       const std::string& Plugin_name, const std::string& Model_name)
 {
 #ifdef HAVE_MSP
-  igc = boost::make_shared<IgcMspImp>(Fname, Dem, Plugin_name, Model_name);
+  igc = boost::make_shared<IgcMspImp>(Fname, D, Plugin_name, Model_name);
   initialize(igc->dem_ptr(),
 	     igc->image(), igc->image_multi_band(),
 	     igc->title(), igc->image_mask(), igc->ground_mask());

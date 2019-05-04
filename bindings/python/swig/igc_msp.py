@@ -217,7 +217,7 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
     def __init__(self, *args):
         """
 
-        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &Dem, const
+        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &D, const
         std::string &Plugin_name, const std::string &Model_name)
         Constructor.
 

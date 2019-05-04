@@ -7349,7 +7349,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"new_IgcMsp", _wrap_new_IgcMsp, METH_VARARGS, (char *)"\n"
 		"\n"
-		"IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &Dem, const\n"
+		"IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &D, const\n"
 		"std::string &Plugin_name, const std::string &Model_name)\n"
 		"Constructor.\n"
 		"\n"

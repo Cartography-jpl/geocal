@@ -2,8 +2,8 @@ from builtins import range
 try:
     # Depending of the build options, this might be missing. Just skip 
     # ShapeFile if we don't have this.
-    import ogr
-    import osr
+    import osgeo.ogr as ogr
+    import osgeo.osr as osr
     have_shape_file = True
 except ImportError:
     have_shape_file = False

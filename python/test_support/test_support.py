@@ -172,17 +172,7 @@ def isolated_dir(tmpdir):
     finally:
         os.chdir(curdir)
 
-run_matlab = False
-try:
-    run_matlab = pytest.config.getoption("--run-matlab")
-except ValueError:
-    # Might be missing if we execute something without conftest.py
-    # Might be a cleaner way to make sure run-matlab is always present,
-    # but I don't know how
-    pass
-
-matlab = pytest.mark.skipif(not run_matlab,
-                            reason="need --run-matlab option to run")
+matlab = pytest.mark.matlab
         
 @pytest.fixture(scope="function")
 def rpc():

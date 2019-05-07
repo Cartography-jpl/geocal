@@ -6,3 +6,11 @@ import pytest
 def pytest_addoption(parser):
     parser.addoption("--run-matlab", action="store_true",
                      help="run matlab tests")
+
+def pytest_collection_modifyitems(config, items):
+    if config.getoption("--run-matlab"):
+        return
+    skip_matlab = pytest.mark.skip(reason="need --run-matlab option to run")
+    for item in items:
+        if "matlab" in item.keywords:
+            item.add_marker(skip_matlab)    

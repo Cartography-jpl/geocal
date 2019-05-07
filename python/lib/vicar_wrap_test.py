@@ -4,6 +4,7 @@ from geocal.vicar_wrap import *
 import math
 from test_support import *
 
+@require_vicarb
 @require_vicar
 @require_carto
 def test_scinterp():
@@ -29,6 +30,7 @@ def test_scinterp():
     assert_almost_equal(res.sc_to_ci.R_component_4, att.R_component_4, 
                         6)
 
+@require_vicarb
 @require_vicar
 @require_carto
 def test_sc2rpc():
@@ -46,6 +48,7 @@ def test_sc2rpc():
     expected = Geodetic(-60.3268510235, 47.235039309, 0)
     assert distance(res, expected) < 0.1
 
+@require_vicarb
 @require_vicar
 @require_carto
 def test_compare_sc2rpc():

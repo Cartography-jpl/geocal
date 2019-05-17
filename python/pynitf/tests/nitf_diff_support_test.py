@@ -4,7 +4,7 @@ from pynitf.nitf_tre_csepha import *
 from pynitf.nitf_tre_piae import *
 from pynitf.nitf_tre_rpc import *
 from pynitf.nitf_tre_geosde import *
-from pynitf.nitf_des_csatta import *
+from pynitf.nitf_des_csattb import *
 from pynitf.nitf_image import *
 from pynitf.nitf_image_subheader import *
 from pynitf.nitf_tre import *
@@ -59,33 +59,37 @@ def create_tre2(f):
     t.sun_az = 131.3
     f.tre_list.append(t)
     
-def create_text_segment(f):
+def create_text_segment(f, first_name = 'Guido', textid = 'ID12345'):
     d = {
-        'first_name': 'Guido',
+        'first_name': first_name,
         'second_name': 'Rossum',
         'titles': ['BDFL', 'Developer'],
     }
     ts = NitfTextSegment(txt = json.dumps(d))
-    ts.subheader.textid = 'ID12345'
+    ts.subheader.textid = textid
     ts.subheader.txtalvl = 0
     ts.subheader.txtitl = 'sample title'
     f.text_segment.append(ts)
 
-def create_des(f):
-    des = DesCSATTA()
-    des.dsclas = 'U'
-    des.att_type = 'ORIGINAL'
-    des.dt_att = '900.5000000000'
+def create_des(f, date_att = 20170501, desid = 'ID424242', q = 0.1):
+    des = DesCSATTB()
+    des.qual_flag_att = 1
+    des.interp_type_att = 1
+    des.att_type = 1
+    des.eci_ecf_att = 0
+    des.dt_att = 900.5
     des.date_att = 20170501
-    des.t0_att = '235959.100001'
+    des.t0_att = 235959.100001000
     des.num_att = 5
     for n in range(des.num_att):
-        des.att_q1[n] = 10.1
-        des.att_q2[n] = 10.1
-        des.att_q3[n] = 10.1
-        des.att_q4[n] = 10.1
+        des.q1[n] = q
+        des.q2[n] = q
+        des.q3[n] = q
+        des.q4[n] = q
+    des.reserved_len = 0
 
     de = NitfDesSegment(des=des)
+    de.subheader.desid = desid
     f.des_segment.append(de)
     
 def test_nitf_diff(isolated_dir):
@@ -105,18 +109,20 @@ def test_nitf_diff(isolated_dir):
     # tre is written as part of the xhd. Incidentally, USE00A is an
     # image TRE, but it works fine here for testing file TRE
     # differencing.
-    #create_tre(f, 42)
+    #create_tre(f, atn = 42)
     create_tre(f)
 
     create_tre2(f)
 
-    iseg = create_image_seg(f, 'An IID1')
-    #create_tre(iseg, 43)
+    iseg = create_image_seg(f, iid1 = 'An IID1')
+    #create_tre(iseg, atn = 43)
     create_tre(iseg)
 
     create_text_segment(f)
 
-    create_des(f)
+    # Using the alternate desid of to break the diff, as it should.
+    create_des(f, q = 9.9)
+    #create_des(f)
 
     f2 = NitfFile()
     create_tre(f2)
@@ -131,8 +137,15 @@ def test_nitf_diff(isolated_dir):
 
     f.write("basic_nitf.ntf")
     f2.write("basic2_nitf.ntf")
+
     logger=logging.getLogger("nitf_diff")
     # This doesn't seem to have the desired effect, so I created
     # pytest.ini to set the logging level - wlb
     logging.basicConfig(level=logging.DEBUG)
-    assert nitf_file_diff("basic_nitf.ntf", "basic2_nitf.ntf")
+
+    assert nitf_file_diff("basic_nitf.ntf", "basic2_nitf.ntf")# == False
+
+    # This excludes image header field iid1 from comparison
+    #assert nitf_file_diff("basic_nitf.ntf", "basic2_nitf.ntf", exclude=['image.iid1'])
+    # This compares only image header field iid1
+    #assert nitf_file_diff("basic_nitf.ntf", "basic2_nitf.ntf", include=['image.iid1'])

@@ -11,6 +11,25 @@ class DiffHandle(object):
     def __init__(self, logger=logging.getLogger('nitf_diff')):
         self.logger = logger
 
+    exclude = None
+    include = None
+
+    @classmethod
+    def set_exclude(cls, exclude):
+        cls.exclude = exclude
+
+    @classmethod
+    def get_exclude(cls):
+        return cls.exclude
+
+    @classmethod
+    def set_include(cls, include):
+        cls.include = include
+
+    @classmethod
+    def get_include(cls):
+        return cls.include
+
     def handle_diff(self, obj1, obj2):
         '''Handle the difference between 2 objects. Note that many of
         the handles can't handle a particular object. We use a chain of
@@ -24,6 +43,51 @@ class DiffHandle(object):
         object.'''
         raise NotImplementedError()
 
+    def process_field_value_list(self, type, list1, parent1, list2, parent2):
+        is_same = True
+
+        for index, field in enumerate(list1):
+            if (not isinstance(field, _FieldLoopStruct)):
+                if (field.field_name is not None):
+
+                    if hasattr(field, 'name') and field.name != None:
+                        exclude = DiffHandle.get_exclude()
+                        if exclude != None:
+                            if field.name in exclude:
+                                self.logger.debug('excluding ' + field.field_name)
+                                continue
+
+                    include = DiffHandle.get_include()
+                    if include != None:
+                        if not hasattr(field, 'name') or \
+                           field.name == None or not field.name in include:
+                            self.logger.debug('not including ' + field.field_name)
+                            continue
+
+                    if hasattr(field, 'eq_fun') and field.eq_fun != None:
+                        this_is_same = field.eq_fun[0](field.value(parent1)[()], 
+                                                       list2[index].value(parent2)[()], 
+                                                       *field.eq_fun[1:])
+                    else:
+                        this_is_same = field.value(parent1) == list2[index].value(parent2)
+
+                    if not this_is_same:
+                        self.logger.error("%s 1 has field %s as %s while %s 2 has %s" %
+                                          (type, field.field_name, field.get_print(parent1, ()),
+                                           type, list2[index].get_print(parent2, ())))
+                        is_same = False
+            else:
+                is_same = self.process_field_value_list(type, field.field_value_list, parent1,
+                                                        list2[index].field_value_list, parent2) \
+                          and is_same
+
+        self.logger.debug("process_field_value_list(%s) returning>>> %s" % (type, is_same))
+        return is_same
+
+    def compare_tres(self, tre1, tre2):
+        return self.process_field_value_list('TRE', tre1.field_value_list, 
+                                             tre1, tre2.field_value_list, tre2)
+
 class DefaultHandle(DiffHandle):
     def __init__(self, logger=logging.getLogger('nitf_diff')):
         super().__init__(logger)
@@ -34,53 +98,39 @@ class DefaultHandle(DiffHandle):
         self.logger.debug("obj2: %s" % obj2.summary())
         return (True, True)
 
+class TREFileHeadHandle(DiffHandle):
+    '''Handler for TRE and file headers.'''
+    
+    def __init__(self, TRE_file_head_type, logger=logging.getLogger('nitf_diff')):
+        super().__init__(logger)
+        assert TRE_file_head_type == 'TRE' or TRE_file_head_type == 'FileHead'
+        self.obj_type = TRE_file_head_type
+
+    def handle_diff(self, obj1, obj2):
+        self.logger.debug("Using %s Handler" % self.obj_type)
+        self.logger.debug("obj1: %s" % obj1.summary())
+        self.logger.debug("obj2: %s" % obj2.summary())
+
+        # Compare the fields of the two objects
+        is_same = self.process_field_value_list(self.obj_type, 
+                                                obj1.field_value_list, obj1, 
+                                                obj2.field_value_list, obj2)
+
+        self.logger.debug("TREFileHeadHandle(%s) returning>>> %s" % (self.obj_type, is_same))
+        return (True, is_same)
 
 class ISegHandle(DiffHandle):
+    '''Handler for image segments.'''
+    
     def __init__(self, logger=logging.getLogger('nitf_diff')):
         super().__init__(logger)
 
-    def process_field_value_list(self, type, list1, parent1, list2, parent2):
-        is_same = True
-
-        for index, field in enumerate(list1):
-            if (not isinstance(field, _FieldLoopStruct)):
-                if (field.field_name is not None):
-                    if hasattr(field, 'eq_fun') and field.eq_fun != None:
-                        this_is_same = field.eq_fun[0](field.value(parent1)[()], 
-                                                       list2[index].value(parent2)[()], 
-                                                       *field.eq_fun[1:])
-                    else:
-                        this_is_same = field.value(parent1) == list2[index].value(parent2)
-
-                    if not this_is_same:
-                        self.logger.error("%s 1 has field %s as %s while %s 2 has %s" %
-                                          (type, field.field_name, 
-                                           field.get_print(parent1, ()), type,  
-                                           list2[index].get_print(parent2, ())))
-                        is_same = False
-            else:
-                is_same = self.process_field_value_list(type,
-                                                        field.field_value_list,
-                                                        parent1,
-                                                        list2[index].field_value_list,
-                                                        parent2) \
-                          and is_same
-
-        return is_same
-
-    def compare_tres(self, tre1, tre2):
-
-        return self.process_field_value_list('TRE', tre1.field_value_list, 
-                                             tre1, tre2.field_value_list, tre2)
-
     def handle_diff(self, obj1, obj2):
-        is_same = True
         self.logger.debug("Using Image Segment Handler")
         self.logger.debug("obj1: %s" % obj1.summary())
         self.logger.debug("obj2: %s" % obj2.summary())
 
-        #Check the subheader of the two Image Segments
-
+        # Compare the subheader of the two Image Segments
         is_same = self.process_field_value_list('Image',
                                                 obj1.subheader.field_value_list, 
                                                 obj1.subheader,
@@ -89,74 +139,85 @@ class ISegHandle(DiffHandle):
         
         # Although the TREs are technically part of the image
         # subheader, _handle_type() checks all segments for tre_lists,
-        # so this checking doesn't need to be factored in to each
-        # specific handler.
-        # #TRE list check
-        # if (len(obj1.tre_list) != len(obj2.tre_list)):
-        #     self.logger.error("Image 1 has %d TREs while file 2 has %d" %
-        #                  (len(obj1.tre_list), len(obj2.tre_list)))
-        #     is_same = False
-        # else:
-        #     for index, tre in enumerate(obj1.tre_list):
-        #         #also_same = self.compare_tres(tre, obj2.tre_list[index])
-        #         is_same = self.compare_tres(tre, obj2.tre_list[index]) \
-        #                   and is_same
+        # so we don't need to do it here.
 
         # Compare the pixels using default atol and rtol (see numpy allclose doc)
         is_same = is_same and np.allclose(obj1.data[:,:,:], obj2.data[:,:,:])
 
+        self.logger.debug("ISegHandle returning>>> %s" % is_same)
         return (True, is_same)
 
-class TREFileHeadHandle(DiffHandle):
-    '''This is used for comparing both TRE and file header field value lists.
-    '''
-    def __init__(self, TRE_file_head_type='TRE', logger=logging.getLogger('nitf_diff')):
+class TSegHandle(DiffHandle):
+    '''Handler for text segments.'''
+
+    def __init__(self, logger=logging.getLogger('nitf_diff')):
         super().__init__(logger)
-        self.obj_type = TRE_file_head_type
-
-    def process_field_value_list(self, type, list1, parent1, list2, parent2):
-        is_same = True
-
-        for index, field in enumerate(list1):
-            if (not isinstance(field, _FieldLoopStruct)):
-                if (field.field_name is not None):
-                    #self.logger.debug('comparing tre/file header field %s' % field.field_name)
-                    if hasattr(field, 'eq_fun') and field.eq_fun != None:
-                        this_is_same = field.eq_fun[0](field.value(parent1)[()], 
-                                                       list2[index].value(parent2)[()], 
-                                                       *field.eq_fun[1:])
-                    else:
-                        if field.field_name == 'angle_to_north':
-
-                            self.logger.debug('comparing ATN values %s %s' % 
-                                              (field.value(parent1)[()], 
-                                               list2[index].value(parent2)[()]))
-
-                        this_is_same = field.value(parent1) == list2[index].value(parent2)
-
-                    if not this_is_same:
-                        self.logger.error("%s 1 has field %s as %s while %s 2 has %s" %
-                                          (type, field.field_name, field.get_print(parent1, ()),
-                                           type,  list2[index].get_print(parent2, ())))
-                        is_same = False
-            else:
-                is_same = self.process_field_value_list(type, field.field_value_list, parent1, 
-                                                        list2[index].field_value_list, parent2) \
-                          and is_same
-
-        return is_same
 
     def handle_diff(self, obj1, obj2):
-        is_same = True
-        self.logger.debug("Using " + self.obj_type + " Handler")
+        self.logger.debug("Using Text Handler")
         self.logger.debug("obj1: %s" % obj1.summary())
         self.logger.debug("obj2: %s" % obj2.summary())
 
-        #Check the fields of the two file headers
-        is_same = self.process_field_value_list(self.obj_type, 
-                                                obj1.field_value_list, obj1, 
-                                                obj2.field_value_list, obj2)
+        # Compare the subheaders of the two Text Segments
+        is_same = self.process_field_value_list('Text',
+                                                obj1.subheader.field_value_list, 
+                                                obj1.subheader,
+                                                obj2.subheader.field_value_list, 
+                                                obj2.subheader)
+        
+        # Although the TREs are technically part of the subheaders,
+        # _handle_type() checks all segments for tre_lists, so we
+        # don't need to do it here.
 
+        # Compare the object data
+        is_same = is_same and obj1.data_as_str == obj2.data_as_str
+
+        self.logger.debug("TSegHandle returning>>> %s" % is_same)
+        return (True, is_same)
+
+class DSegHandle(DiffHandle):
+    '''Handler for data extension segments.'''
+
+    def __init__(self, logger=logging.getLogger('nitf_diff')):
+        super().__init__(logger)
+
+    def handle_diff(self, obj1, obj2):
+        self.logger.debug("Using DES Handler")
+        self.logger.debug("obj1: %s" % obj1.summary())
+        self.logger.debug("obj2: %s" % obj2.summary())
+
+        # Compare the subheaders of the two DES Segments
+        is_same = self.process_field_value_list("DES_SH",
+                                                obj1.subheader.field_value_list, 
+                                                obj1.subheader,
+                                                obj2.subheader.field_value_list, 
+                                                obj2.subheader)
+        
+        # Although the TREs are technically part of the subheaders,
+        # _handle_type() checks all segments for tre_lists, so we
+        # don't need to do it here.
+
+
+        #Compare User-Defined Subheaders
+        # Compare the subheaders of the two DES Segments
+        #self.logger.debug(str(dir(obj1.des)))
+        #self.logger.debug(str(dir(obj1.des.user_subheader)))
+        #is_same = self.process_field_value_list("DES_UH",
+        #                                        obj1.des.user_subheader,
+        #                                        obj1.des,
+        #                                        obj2.des.user_subheader,
+        #                                        obj2.des)
+
+        # TODO: compare DES payloads
+        #is_same = False
+        #self.logger.debug(str(dir(obj1.data)))
+        #is_same = self.process_field_value_list("DES_DATA",
+        #                                        obj1.des.field_value_list,
+        #                                        obj1.des,
+        #                                        obj2.des.field_value_list,
+        #                                        obj2.des)
+
+        self.logger.debug("DSegHandle returning>>> %s" % is_same)
         return (True, is_same)
 
 class DiffHandleList(object):
@@ -205,11 +266,11 @@ def register_tseg_handle(handle, priority_order=0):
 def register_dseg_handle(handle, priority_order=0):
     dseg_handle.add_handle(handle, priority_order)
 
-register_file_header_handle(TREFileHeadHandle("FHead"), priority_order=1000)    
+register_file_header_handle(TREFileHeadHandle("FileHead"), priority_order=1000)    
 register_iseg_handle(ISegHandle(), priority_order=1000)
 register_tre_handle(TREFileHeadHandle("TRE"), priority_order=1000)    
-register_tseg_handle(DefaultHandle(), priority_order=1000)    
-register_dseg_handle(DefaultHandle(), priority_order=1000)    
+register_tseg_handle(TSegHandle(), priority_order=1000)    
+register_dseg_handle(DSegHandle(), priority_order=1000)    
 
 def _handle_type(lis1, lis2, nm, handler, logger):
     is_same = True
@@ -237,12 +298,20 @@ def _handle_type(lis1, lis2, nm, handler, logger):
                 is_same = is_same and status
     return is_same
     
-def nitf_file_diff(f1_name, f2_name):
+def nitf_file_diff(f1_name, f2_name, exclude = None, include = None):
     '''Compare 2 NITF files. This returns an overall status of True
-    if the files compare the same, false otherwise.
+    if the files compare the same, false otherwise. The exclude and
+    include lists of names like 'image.iid1' are used to control
+    which items are compared. The names are defined in, e.g.
+    image.iid1 in nitf_image_subheader.desc. See also
+    nitf_field.create_nitf_field_structure.
 
     We print out messages to the logger 'nitf_diff'.
     '''
+
+    DiffHandle.set_exclude(exclude)
+    DiffHandle.set_include(include)
+
     logger=logging.getLogger('nitf_diff')
     f1 = NitfFile(f1_name)
     f2 = NitfFile(f2_name)
@@ -252,7 +321,7 @@ def nitf_file_diff(f1_name, f2_name):
 
     # We should probably have a more intelligent matching of TRE, image
     # segment, etc. Files shouldn't different just because the order is
-    # different. But for now, this fails
+    # different. But for now, this fails.
 
     logger.debug("Comparing %d file-level TREs" % min(len(f1.tre_list),
                                                  len(f2.tre_list)))

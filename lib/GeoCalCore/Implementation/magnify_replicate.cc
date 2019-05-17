@@ -8,8 +8,8 @@ using namespace blitz;
 
 MagnifyReplicate::MagnifyReplicate(const boost::shared_ptr<RasterImage>& Data,
 				   int Magfactor, int Number_tile)
-  : CalcRaster((Data->number_line() - 1) * Magfactor,
-	       (Data->number_sample() - 1) * Magfactor,
+  : CalcRaster(Data->number_line() * Magfactor,
+	       Data->number_sample() * Magfactor,
 	       Data->number_tile_line() * Magfactor,
 	       Data->number_tile_sample() * Magfactor, Number_tile),
     raw_data(Data), magfactor_(Magfactor)
@@ -40,14 +40,12 @@ MagnifyReplicate::MagnifyReplicate(const boost::shared_ptr<RasterImage>& Data,
 
 void MagnifyReplicate::calc(int Lstart, int Sstart) const
 {
-  int data_lstart = (int) floor(Lstart / magfactor_);
-  int data_sstart = (int) floor(Sstart / magfactor_);
-  int nl = (int) ceil(data.rows() / magfactor_) + 1;
-  int ns = (int) ceil(data.cols() / magfactor_) + 1;
-  if((data_lstart + nl) < raw_data->number_line())
-    nl += 1;
-  if((data_sstart + ns) < raw_data->number_sample())
-    ns += 1;
+  int data_lstart = (int) floor(Lstart / (double) magfactor_);
+  int data_sstart = (int) floor(Sstart / (double) magfactor_);
+  int res_lstart = Lstart - data_lstart * magfactor_;
+  int res_sstart = Sstart - data_sstart * magfactor_;
+  int nl = (int) ceil((data.rows() + res_lstart) / (double) magfactor_);
+  int ns = (int) ceil((data.cols() + res_sstart) / (double) magfactor_);
   Array<double, 2> d = raw_data->read_double(data_lstart, data_sstart, nl, ns);
   Array<double, 2> res(d.rows() * magfactor_, d.cols() * magfactor_);
   for(int i = 0; i < magfactor_; ++i) {
@@ -57,8 +55,6 @@ void MagnifyReplicate::calc(int Lstart, int Sstart) const
       res(r1, r2) = d;
     }
   }
-  int res_lstart = Lstart - data_lstart * magfactor_;
-  int res_sstart = Sstart - data_sstart * magfactor_;
   Range r1(res_lstart, res_lstart + data.rows() - 1);
   Range r2(res_sstart, res_sstart + data.cols() - 1);
   data = res(r1, r2);

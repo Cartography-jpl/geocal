@@ -289,6 +289,12 @@ void QuaternionCamera::print(std::ostream& Os) const
      << "   Principal point: " << principal_point(0) << "\n"
      << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
 				    "LINE_IS_X\n" : "LINE_IS_Y\n")
+     << "   Line direction:   " << (line_direction() == INCREASE_IS_POSITIVE ?
+				    "INCREASE_IS_POSITIVE\n" :
+				    "INCREASE_IS_NEGATIVE\n")
+     << "   Sample direction:  " << (sample_direction() == INCREASE_IS_POSITIVE ?
+				    "INCREASE_IS_POSITIVE\n" :
+				    "INCREASE_IS_NEGATIVE\n")
      << "   Frame to spacecraft: " << frame_to_sc() << "\n";
 }
 

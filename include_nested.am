@@ -12,6 +12,7 @@ include geocal/geocal.am
 include geocal/thirdparty/thirdparty.am
 include geocal/thirdparty/libsdbx/sdbx.am
 include geocal/thirdparty/libraw/libraw.am
+include geocal/swig_rules/swig_rules.am
 include geocal/lib/lib.am
 include geocal/bin/bin.am
 include geocal/lib/GeoCalCore/geocal_core.am

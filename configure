@@ -662,6 +662,7 @@ etcafidspythondir
 installafidspythondir
 afidspythonvdevdir
 geocalpkgpythondir
+swigincdir
 geocalswigincdir
 pythondocdir
 srcraw
@@ -684,6 +685,7 @@ srcpythonbin
 srcpythonlib
 srcpython
 srcgeocalbin
+swigrules
 libgeocal
 BUILD_LIBRAW_FALSE
 BUILD_LIBRAW_TRUE
@@ -25224,6 +25226,8 @@ fi
 
 libgeocal=${geocal_topdir}/lib
 
+swigrules=${geocal_topdir}/swig_rules
+
 srcgeocalbin=${geocal_topdir}/bin
 
 srcpython=${geocal_topdir}/python
@@ -25267,6 +25271,8 @@ srcraw=${geocal_topdir}/thirdparty/libraw
 pythondocdir=\${prefix}/share/doc/geocal/python
 
 geocalswigincdir=\${prefix}/share/geocal/swig
+
+swigincdir=\${prefix}/share/geocal/swig
 
 geocalpkgpythondir=\${prefix}/\${pythondir}/geocal
 

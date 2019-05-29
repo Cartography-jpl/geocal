@@ -1,0 +1,14 @@
+# You can include this automake file to add the swig rules stuff. Should
+# define the variables swigincdir for where these should be installed to
+# (e.g., ${prefix}/share/geocal/swig) and swigrules for where the
+# source is located (e.g., ${geocal_topdir}/swig_rules)
+
+swiginc_HEADERS = 
+swiginc_HEADERS += @swigrules@/include/swig_python_attribute.i
+
+# Allow files to be include in other directories
+AM_CPPFLAGS+= -I$(srcdir)/@swigrules@/include
+
+# Allow searchs for .i in this directory
+vpath %.i $(srcdir)/@swigrules@/include
+

@@ -40,6 +40,11 @@
 # If you change include.am, make sure to change include_nested.am and
 # vice versa.
 
+# You can include this automake file to add the swig rules stuff. Should
+# define the variables swigincdir for where these should be installed to
+# (e.g., ${prefix}/share/geocal/swig) and swigrules for where the
+# source is located (e.g., ${geocal_topdir}/swig_rules)
+
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
 
@@ -309,7 +314,7 @@ DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
 	$(am__geocalinc_HEADERS_DIST) $(geocalswiginc_HEADERS) \
 	$(include_HEADERS) $(am__libraw_HEADERS_DIST) $(sdbx_HEADERS) \
 	$(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
-	$(sdbxsupport_HEADERS) $(am__DIST_COMMON)
+	$(sdbxsupport_HEADERS) $(swiginc_HEADERS) $(am__DIST_COMMON)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
@@ -337,7 +342,7 @@ am__installdirs = "$(DESTDIR)$(afidspythonvdevdir)" \
 	"$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" \
 	"$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" \
 	"$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" \
-	"$(DESTDIR)$(sdbxsupportdir)"
+	"$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"
 PROGRAMS = $(afidspythonvdev_PROGRAMS) $(bin_PROGRAMS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -2356,7 +2361,7 @@ am__libraw_HEADERS_DIST = @srcraw@/libraw.h @srcraw@/libraw_alloc.h \
 HEADERS = $(geocalinc_HEADERS) $(geocalswiginc_HEADERS) \
 	$(include_HEADERS) $(libraw_HEADERS) $(sdbx_HEADERS) \
 	$(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
-	$(sdbxsupport_HEADERS)
+	$(sdbxsupport_HEADERS) $(swiginc_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -2567,7 +2572,7 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(srcdir)/python/doc/doc_python.am $(srcdir)/python/lib/lib.am \
 	$(srcdir)/python/python.am \
 	$(srcdir)/python/test_support/test_support.am \
-	$(srcdir)/script/script.am \
+	$(srcdir)/script/script.am $(srcdir)/swig_rules/swig_rules.am \
 	$(srcdir)/thirdparty/libraw/libraw.am \
 	$(srcdir)/thirdparty/libsdbx/sdbx.am \
 	$(srcdir)/thirdparty/thirdparty.am \
@@ -2856,6 +2861,8 @@ srcraw = @srcraw@
 srcsdbx = @srcsdbx@
 srcserialize = @srcserialize@
 srcsupport = @srcsupport@
+swigincdir = @swigincdir@
+swigrules = @swigrules@
 swigsrc = @swigsrc@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
@@ -3134,12 +3141,15 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 pkgconfig_DATA = @libgeocal@/../geocal.pc
 
 # Allow files to be include in other directories
+
+# Allow files to be include in other directories
 # To pick up generated geocal_config.h file
-AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@libgeocal@ \
-	-I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost \
-	-I@srcsupport@ -I$(srcdir)/@srcinterface@ \
-	-I$(srcdir)/@srcimplementation@ -I$(srcdir)/@srccartlab@ \
-	-I$(srcdir)/@srcmspi@ -I$(srcdir)/@srcoco3@
+AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
+	-I$(srcdir)/@libgeocal@ -I$(srcdir)/@srcsupport@ \
+	-I$(srcdir)/@srcsupport@/boost -I@srcsupport@ \
+	-I$(srcdir)/@srcinterface@ -I$(srcdir)/@srcimplementation@ \
+	-I$(srcdir)/@srccartlab@ -I$(srcdir)/@srcmspi@ \
+	-I$(srcdir)/@srcoco3@
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -3726,7 +3736,6 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@libgeocal@/swig_boost_optional.i @libgeocal@/swig_exception.i \
 	@libgeocal@/swig_iostream.i @libgeocal@/swig_iostream_inc.i \
 	@libgeocal@/swig_pickle.i @libgeocal@/swig_print.i \
-	@libgeocal@/swig_python_attribute.i \
 	@libgeocal@/swig_quaternion.i @libgeocal@/swig_std.i \
 	@srcsupport@/constant.i @srcsupport@/iostream_swig_test.i \
 	@srcsupport@/generic_object.i @srcsupport@/auto_derivative.i \
@@ -4106,6 +4115,7 @@ sdbx_HEADERS = @srcsdbx@/sdbx/BTree.h @srcsdbx@/sdbx/DiskTreeBackend.h \
 @BUILD_LIBRAW_TRUE@	@srcraw@/libraw_defines.h \
 @BUILD_LIBRAW_TRUE@	@srcraw@/var_defines.h
 @BUILD_LIBRAW_TRUE@libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
+swiginc_HEADERS = @swigrules@/include/swig_python_attribute.i
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_SOURCES = @srcgeocalbin@/picmtch5.cc
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf $(CARTO_BUILD_DEPEND)
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_LDADD = libgeocal.la $(MSP_LIBS)
@@ -4215,7 +4225,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -4237,7 +4247,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__empty):
+$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -12379,6 +12389,27 @@ uninstall-sdbxsupportHEADERS:
 	@list='$(sdbxsupport_HEADERS)'; test -n "$(sdbxsupportdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(sdbxsupportdir)'; $(am__uninstall_files_from_dir)
+install-swigincHEADERS: $(swiginc_HEADERS)
+	@$(NORMAL_INSTALL)
+	@list='$(swiginc_HEADERS)'; test -n "$(swigincdir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(swigincdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(swigincdir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(swigincdir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(swigincdir)" || exit $$?; \
+	done
+
+uninstall-swigincHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(swiginc_HEADERS)'; test -n "$(swigincdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(swigincdir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -12781,7 +12812,7 @@ all-am: Makefile $(PROGRAMS) $(LTLIBRARIES) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)"; do \
+	for dir in "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -13453,7 +13484,8 @@ install-data-am: install-afidspythonvdevPROGRAMS \
 	install-librawHEADERS install-pkgconfigDATA \
 	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
 	install-sdbxHEADERS install-sdbxbtreeHEADERS \
-	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS
+	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS \
+	install-swigincHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 install-dvi: install-dvi-am
@@ -14091,7 +14123,7 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-pkgpythonswigLTLIBRARIES \
 	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
 	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
-	uninstall-sdbxsupportHEADERS
+	uninstall-sdbxsupportHEADERS uninstall-swigincHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
 .MAKE: all check check-am install install-am install-data-am \
@@ -14124,11 +14156,12 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	install-pkgpythonswigPYTHON install-ps install-ps-am \
 	install-sdbxHEADERS install-sdbxbtreeHEADERS \
 	install-sdbxrtreeHEADERS install-sdbxsupportHEADERS \
-	install-strip installcheck installcheck-am installcheck-local \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am recheck tags tags-am \
-	uninstall uninstall-afidspythonvdevPROGRAMS uninstall-am \
+	install-strip install-swigincHEADERS installcheck \
+	installcheck-am installcheck-local installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am recheck tags tags-am uninstall \
+	uninstall-afidspythonvdevPROGRAMS uninstall-am \
 	uninstall-binPROGRAMS uninstall-binSCRIPTS \
 	uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
@@ -14141,7 +14174,7 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-pkgconfigDATA uninstall-pkgpythonswigLTLIBRARIES \
 	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
 	uninstall-sdbxbtreeHEADERS uninstall-sdbxrtreeHEADERS \
-	uninstall-sdbxsupportHEADERS
+	uninstall-sdbxsupportHEADERS uninstall-swigincHEADERS
 
 .PRECIOUS: Makefile
 
@@ -14251,6 +14284,9 @@ clean_unit_test:
 #dcraw_SOURCES = @srcraw@/simple_dcraw.cpp
 #dcraw_LDADD = libraw.la
 #AM_CPPFLAGS += -I$(srcdir)/@srcraw@
+
+# Allow searchs for .i in this directory
+vpath %.i $(srcdir)/@swigrules@/include
 
 # Allow searchs for .i in this directory
 vpath %.i $(srcdir)/@libgeocal@

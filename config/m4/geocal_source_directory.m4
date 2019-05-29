@@ -4,6 +4,7 @@
 
 AC_DEFUN([GEOCAL_SOURCE_DIRECTORY],[
 AC_SUBST([libgeocal], [${geocal_topdir}/lib])
+AC_SUBST([swigrules], [${geocal_topdir}/swig_rules])
 AC_SUBST([srcgeocalbin], [${geocal_topdir}/bin])
 AC_SUBST([srcpython], [${geocal_topdir}/python])
 AC_SUBST([srcpythonlib], [${srcpython}/lib])
@@ -26,6 +27,7 @@ AC_SUBST([srcsdbx], [${geocal_topdir}/thirdparty/libsdbx])
 AC_SUBST([srcraw], [${geocal_topdir}/thirdparty/libraw])
 AC_SUBST([pythondocdir], [\${prefix}/share/doc/geocal/python])
 AC_SUBST([geocalswigincdir], [\${prefix}/share/geocal/swig])
+AC_SUBST([swigincdir], [\${prefix}/share/geocal/swig])
 AC_SUBST([geocalpkgpythondir],[\${prefix}/\${pythondir}/geocal])
 AC_SUBST([afidspythonvdevdir], [\${prefix}/afids/vdev])
 AC_SUBST([installafidspythondir], [\${prefix}])

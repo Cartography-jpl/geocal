@@ -19,7 +19,6 @@ geocalswiginc_HEADERS += @libgeocal@/swig_iostream.i
 geocalswiginc_HEADERS += @libgeocal@/swig_iostream_inc.i
 geocalswiginc_HEADERS += @libgeocal@/swig_pickle.i
 geocalswiginc_HEADERS += @libgeocal@/swig_print.i
-geocalswiginc_HEADERS += @libgeocal@/swig_python_attribute.i
 geocalswiginc_HEADERS += @libgeocal@/swig_quaternion.i
 geocalswiginc_HEADERS += @libgeocal@/swig_std.i
 

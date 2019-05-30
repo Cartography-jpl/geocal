@@ -2,10 +2,7 @@
 libgeocal_la_SOURCES = 
 SWIG_SRC=
 SWIG_SRC_HDF5=
-SWIG_SRC_HDF5_CARTO=
 SWIG_SRC_GDAL=
-SWIG_SRC_VICAR_RTL=
-SWIG_SRC_GDAL_VICAR_RTL=
 libgeocal_la_LDFLAGS =
 afidspythonvdev_PROGRAMS = 
 dist_afidspythonvdev_SCRIPTS = 

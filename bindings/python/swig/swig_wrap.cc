@@ -201,11 +201,7 @@ extern "C" {
 #ifdef HAVE_HDF5
   INIT_TYPE INIT_FUNC(_hdf_file)(void);
   INIT_TYPE INIT_FUNC(_hdf_orbit)(void);
-#endif
-#ifdef HAVE_HDF5
-#ifdef HAVE_CARTO
   INIT_TYPE INIT_FUNC(_hdf_orbit_carto)(void);
-#endif
 #endif
 #ifdef HAVE_GDAL
   INIT_TYPE INIT_FUNC(_geocal_gdal)(void);
@@ -216,10 +212,6 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_image_point_display)(void);
   INIT_TYPE INIT_FUNC(_ogr_coordinate)(void);
   INIT_TYPE INIT_FUNC(_vicar_ogr)(void);
-#endif
-#ifdef HAVE_VICAR_RTL
-#endif
-#ifdef HAVE_GDAL_VICAR_RTL
 #endif
 }
 
@@ -423,11 +415,7 @@ static void module_init(PyObject* module)
 #ifdef HAVE_HDF5
   INIT_MODULE(module, "_hdf_file", INIT_FUNC(_hdf_file));
   INIT_MODULE(module, "_hdf_orbit", INIT_FUNC(_hdf_orbit));
-#endif
-#ifdef HAVE_HDF5
-#ifdef HAVE_CARTO
   INIT_MODULE(module, "_hdf_orbit_carto", INIT_FUNC(_hdf_orbit_carto));
-#endif
 #endif
 #ifdef HAVE_GDAL
   INIT_MODULE(module, "_geocal_gdal", INIT_FUNC(_geocal_gdal));
@@ -438,10 +426,6 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_image_point_display", INIT_FUNC(_image_point_display));
   INIT_MODULE(module, "_ogr_coordinate", INIT_FUNC(_ogr_coordinate));
   INIT_MODULE(module, "_vicar_ogr", INIT_FUNC(_vicar_ogr));
-#endif
-#ifdef HAVE_VICAR_RTL
-#endif
-#ifdef HAVE_GDAL_VICAR_RTL
 #endif
 }
 

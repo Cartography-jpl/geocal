@@ -1,109 +1,32 @@
-SWIG_FLAG += -O
 pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
-pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
-INCLUDE_SWIG_SRC = $(SWIG_SRC)
+COMPILE_SWIG_SRC = $(SWIG_SRC)
 FULL_SWIG_SRC = $(SWIG_SRC)
+CONDITIONAL_SWIG_SRC = $(SWIG_SRC)
 if HAVE_HDF5
-INCLUDE_SWIG_SRC += $(SWIG_SRC_HDF5)
-if HAVE_CARTO
-INCLUDE_SWIG_SRC += $(SWIG_SRC_HDF5_CARTO)
-endif
+COMPILE_SWIG_SRC += $(SWIG_SRC_HDF5)
 endif
 FULL_SWIG_SRC += $(SWIG_SRC_HDF5)
-FULL_SWIG_SRC += $(SWIG_SRC_HDF5_CARTO)
+CONDITIONAL_SWIG_SRC += HAVE_HDF5 $(SWIG_SRC_HDF5)
 if HAVE_GDAL
-INCLUDE_SWIG_SRC += $(SWIG_SRC_GDAL)
+COMPILE_SWIG_SRC += $(SWIG_SRC_GDAL)
 endif
 FULL_SWIG_SRC += $(SWIG_SRC_GDAL)
-if HAVE_VICAR_RTL
-INCLUDE_SWIG_SRC += $(SWIG_SRC_VICAR_RTL)
-endif
-FULL_SWIG_SRC += $(SWIG_SRC_VICAR_RTL)
-if HAVE_GDAL
-if HAVE_VICAR_RTL
-INCLUDE_SWIG_SRC += $(SWIG_SRC_GDAL_VICAR_RTL)
-endif
-endif
-FULL_SWIG_SRC += $(SWIG_SRC_GDAL_VICAR_RTL)
-EXTRA_DIST+= $(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC))
-pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
-pkgpythonswig_LTLIBRARIES = _swig_wrap.la
+CONDITIONAL_SWIG_SRC += HAVE_GDAL $(SWIG_SRC_GDAL)
 
-_swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) 
-_swig_wrap_la_CPPFLAGS+= $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) 
-_swig_wrap_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) 
-_swig_wrap_la_CPPFLAGS+= -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) 
-_swig_wrap_la_CPPFLAGS+= $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) 
-_swig_wrap_la_CPPFLAGS+= $(AM_CPPFLAGS)
-_swig_wrap_la_CPPFLAGS+= -DSWIG_TYPE_TABLE=geocal
-_swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
-_swig_wrap_la_LDFLAGS = -module -avoid-version
-_swig_wrap_la_LIBADD = libgeocal.la
-_swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC)
-_swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
+SWIG_CPPFLAGS = $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS)
+SWIG_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CPPFLAGS) 
+SWIG_CPPFLAGS+= -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) 
+SWIG_CPPFLAGS+= $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) 
+SWIG_CPPFLAGS+= $(AM_CPPFLAGS)
+SWIG_TYPE_TABLE_NAME = geocal
+SWIG_LIBADD = libgeocal.la
 
-EXTRA_DIST+= $(FULL_SWIG_SRC)
-EXTRA_DIST+= $(srcdir)/$(swigsrc)/*_wrap.h
-
+# Shortcut for building just python
 install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)
 
 install-python: all
 	$(MAKE) -j 1 install-python-2 
 
-# Only generate these files in maintainer mode, otherwise consider them
-# as input.
-if MAINTAINER_MODE
-if HAVE_SWIG
+SWIG_MODULE_NAME = geocal
 
-$(swigsrc)/%_wrap.Pcc : %.i %.cc %.h $(SWIG_TARGET)
-	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
-	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
-	rm $@.tmp
-	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.cc" >> $@
-	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
-
-$(swigsrc)/%_wrap.Pcc : %.i %.h $(SWIG_TARGET)
-	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
-	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
-	rm $@.tmp
-	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
-
-$(swigsrc)/%_wrap.Pcc : %.i $(SWIG_TARGET)
-	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
-	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
-	rm $@.tmp
-
-$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl config/create_python_init.py Makefile $(PYTHON_TARGET)
-	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-        $(PYTHON) $(srcdir)/config/create_python_init.py $< $@ swig geocal $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL))) HAVE_GDAL_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL_VICAR_RTL)))
-
-$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET) $(SWIG_TARGET)
-	mkdir -p $*_doc
-	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
-	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
-	rm -r $*_doc
-	echo "%include \"$*.i\"" >> $*_doc.i
-	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
-	rm $*_doc.i
-
-$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h $(DOXYGEN_TARGET) $(SWIG_TARGET)
-	mkdir -p $*_doc
-	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
-	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
-	rm -r $*_doc
-	echo "%include \"$*.i\"" >> $*_doc.i
-	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
-	rm $*_doc.i
-
-$(srcdir)/$(swigsrc)/%_wrap.cc: %.i $(SWIG_TARGET)
-	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
-
-BUILT_SOURCES+= $(addprefix $(srcdir)/, $(INCLUDE_SWIG_SRC))
-BUILT_SOURCES+= $(srcdir)/$(swigsrc)/swig_wrap.cc
-
--include $(patsubst %.cc, %.Pcc, $(INCLUDE_SWIG_SRC))
-endif HAVE_SWIG
-endif MAINTAINER_MODE

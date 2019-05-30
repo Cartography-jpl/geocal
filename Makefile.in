@@ -41,9 +41,31 @@
 # vice versa.
 
 # You can include this automake file to add the swig rules stuff. Should
-# define the variables swigincdir for where these should be installed to
-# (e.g., ${prefix}/share/geocal/swig) and swigrules for where the
-# source is located (e.g., ${geocal_topdir}/swig_rules)
+# define the variables:
+#
+# swigincdir for where these should be installed to
+#       (e.g., ${prefix}/share/geocal/swig)
+# swigrules for where the source is located
+#       (e.g., ${geocal_topdir}/swig_rules)
+# swigsrc where we are putting the swig files we generate
+#       (e.g., ${geocal_topdir}/bindings/python/swig)
+# pkgpythonswigdir for where we are installing swig
+#       (e.g., $(prefix)/@pythondir@/geocal_swig)
+# FULL_SWIG_SRC list of all swig source files, including some we
+#       might not compile (e.g., require HDF5 library without this being
+#       present)
+# COMPILE_SWIG_SRC list of all swig source files that we are compiling,
+#       so subset of FULL_SWIG_SRC
+# CONDITIONAL_SWIG_SRC list of swig source files, with conditionals included
+#       so for example $(SWIG_SRC) HAVE_HDF5 $(SWIG_SRC_HDF5). If you
+#       don't have any conditional code, this can just be set to FULL_SWIG_SRC
+# SWIG_CPPFLAGS the flags we should use when compiling swig code,
+#       so a list of -I options.
+# PYTHON_CPPFLAGS flags needed to compile against python
+# PYTHON_NUMPY_CPPFLAGS flags needs to compile against numpy
+# SWIG_TYPE_TABLE_NAME the swig table name (e.g., geocal)
+# SWIG_MODULE_NAME the swig model name (e.g., geocal)
+# SWIG_LIBADD the libraries to link swig against (e.g., libgeocal.la)
 
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
@@ -180,23 +202,27 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @WITH_DOCUMENTATION_TRUE@am__append_15 = clean_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_16 = clean_doxygen_generate
 @BUILD_LIBRAW_TRUE@am__append_17 = libraw.la
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_18 = picmtch5
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_19 = $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
-@HAVE_HDF5_TRUE@am__append_20 = @srcsupport@/hdf_file.h
-@HAVE_HDF5_TRUE@am__append_21 = @srcsupport@/hdf_file.cc
-@HAVE_HDF5_TRUE@am__append_22 = @srcsupport@/hdf_file_test.cc 
-@HAVE_HDF5_TRUE@am__append_23 = @srcimplementation@/hdf_orbit.h
-@HAVE_HDF5_TRUE@am__append_24 = @srcimplementation@/hdf_orbit.cc
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_18 = $(addprefix \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(COMPILE_SWIG_SRC)) \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_19 = picmtch5
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_20 = $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
+@HAVE_HDF5_TRUE@am__append_21 = @srcsupport@/hdf_file.h
+@HAVE_HDF5_TRUE@am__append_22 = @srcsupport@/hdf_file.cc
+@HAVE_HDF5_TRUE@am__append_23 = @srcsupport@/hdf_file_test.cc 
+@HAVE_HDF5_TRUE@am__append_24 = @srcimplementation@/hdf_orbit.h
+@HAVE_HDF5_TRUE@am__append_25 = @srcimplementation@/hdf_orbit.cc
 
 # File only included if we have GDAL library
-@HAVE_GDAL_TRUE@am__append_25 = @srcimplementation@/gdal_datum.h \
+@HAVE_GDAL_TRUE@am__append_26 = @srcimplementation@/gdal_datum.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_multi_band.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.h
-@HAVE_GDAL_TRUE@am__append_26 = @srcimplementation@/gdal_datum.cc \
+@HAVE_GDAL_TRUE@am__append_27 = @srcimplementation@/gdal_datum.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.cc \
@@ -205,7 +231,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.cc
 #  geocalinc_HEADERS+= @srcimplementation@/gdal_multi_file.h
 #  libgeocal_la_SOURCES+= @srcimplementation@/gdal_multi_file.cc
-@HAVE_GDAL_TRUE@am__append_27 =  \
+@HAVE_GDAL_TRUE@am__append_28 =  \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_datum_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem_test.cc \
@@ -217,32 +243,25 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_simulated_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_simulated_ray_caster_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
-@HAVE_HDF5_TRUE@am__append_28 = @srcimplementation@/hdf_orbit_test.cc \
+@HAVE_HDF5_TRUE@am__append_29 = @srcimplementation@/hdf_orbit_test.cc \
 @HAVE_HDF5_TRUE@	@srcimplementation@/orbit_quaternion_list_offset_test.cc
-@HAVE_GDAL_TRUE@am__append_29 = @srccartlab@/vicar_ogr.h
-@HAVE_GDAL_TRUE@am__append_30 = @srccartlab@/vicar_ogr.cc
-@HAVE_GDAL_TRUE@am__append_31 = @srccartlab@/vicar_ogr_test.cc
-@HAVE_HDF5_TRUE@am__append_32 = $(SWIG_SRC_HDF5)
-@HAVE_CARTO_TRUE@@HAVE_HDF5_TRUE@am__append_33 = $(SWIG_SRC_HDF5_CARTO)
+@HAVE_GDAL_TRUE@am__append_30 = @srccartlab@/vicar_ogr.h
+@HAVE_GDAL_TRUE@am__append_31 = @srccartlab@/vicar_ogr.cc
+@HAVE_GDAL_TRUE@am__append_32 = @srccartlab@/vicar_ogr_test.cc
+@HAVE_HDF5_TRUE@am__append_33 = $(SWIG_SRC_HDF5)
 @HAVE_GDAL_TRUE@am__append_34 = $(SWIG_SRC_GDAL)
-@HAVE_VICAR_RTL_TRUE@am__append_35 = $(SWIG_SRC_VICAR_RTL)
-@HAVE_GDAL_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_36 = $(SWIG_SRC_GDAL_VICAR_RTL)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_37 = $(addprefix \
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(INCLUDE_SWIG_SRC)) \
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@BUILD_AFIDS_FALSE@am__append_38 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_39 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_40 = @srcpythonscript@/vicarb
-@INSTALL_PYNITF_TRUE@am__append_41 = install-pynitf
-@INSTALL_PYNITF_TRUE@am__append_42 = uninstall-pynitf
-@INSTALL_PYNITF_TRUE@am__append_43 = clean-pynitf
-@CODE_COVERAGE_ENABLED_TRUE@am__append_44 = --cov-report term \
+@BUILD_AFIDS_FALSE@am__append_35 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_36 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_37 = @srcpythonscript@/vicarb
+@INSTALL_PYNITF_TRUE@am__append_38 = install-pynitf
+@INSTALL_PYNITF_TRUE@am__append_39 = uninstall-pynitf
+@INSTALL_PYNITF_TRUE@am__append_40 = clean-pynitf
+@CODE_COVERAGE_ENABLED_TRUE@am__append_41 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_45 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_46 = install_python_doc
+@HAVE_VICAR_RTL_TRUE@am__append_42 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_43 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
@@ -362,7 +381,7 @@ am__uninstall_files_from_dir = { \
   }
 LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES) \
 	$(pkgpythonswig_LTLIBRARIES)
-_swig_wrap_la_DEPENDENCIES = libgeocal.la
+_swig_wrap_la_DEPENDENCIES = $(SWIG_LIBADD)
 am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_std_wrap.cc \
 	@swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/swig_boost_array_wrap.cc \
@@ -721,11 +740,10 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_std_wrap.lo \
 	@swigsrc@/_swig_wrap_la-air_mspi_igc_collection_wrap.lo \
 	@swigsrc@/_swig_wrap_la-jia_sample_wrap.lo
 am__objects_2 = @swigsrc@/_swig_wrap_la-hdf_file_wrap.lo \
-	@swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo
+	@swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo \
+	@swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo
 @HAVE_HDF5_TRUE@am__objects_3 = $(am__objects_2)
-am__objects_4 = @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo
-@HAVE_CARTO_TRUE@@HAVE_HDF5_TRUE@am__objects_5 = $(am__objects_4)
-am__objects_6 = @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo \
+am__objects_4 = @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo \
 	@swigsrc@/_swig_wrap_la-gdal_raster_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-gdal_datum_wrap.lo \
 	@swigsrc@/_swig_wrap_la-gdal_dem_wrap.lo \
@@ -733,14 +751,9 @@ am__objects_6 = @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo \
 	@swigsrc@/_swig_wrap_la-image_point_display_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ogr_coordinate_wrap.lo \
 	@swigsrc@/_swig_wrap_la-vicar_ogr_wrap.lo
-@HAVE_GDAL_TRUE@am__objects_7 = $(am__objects_6)
-am__objects_8 =
-@HAVE_VICAR_RTL_TRUE@am__objects_9 = $(am__objects_8)
-@HAVE_GDAL_TRUE@@HAVE_VICAR_RTL_TRUE@am__objects_10 =  \
-@HAVE_GDAL_TRUE@@HAVE_VICAR_RTL_TRUE@	$(am__objects_8)
-am__objects_11 = $(am__objects_1) $(am__objects_3) $(am__objects_5) \
-	$(am__objects_7) $(am__objects_9) $(am__objects_10)
-am__swig_wrap_la_OBJECTS = $(am__objects_11) \
+@HAVE_GDAL_TRUE@am__objects_5 = $(am__objects_4)
+am__objects_6 = $(am__objects_1) $(am__objects_3) $(am__objects_5)
+am__swig_wrap_la_OBJECTS = $(am__objects_6) \
 	@swigsrc@/_swig_wrap_la-swig_wrap.lo
 _swig_wrap_la_OBJECTS = $(am__swig_wrap_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -919,18 +932,17 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcmspi@/air_mspi_time_table.cc @srcmspi@/air_mspi_l1b1.cc \
 	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc \
 	@srcoco3@/jia_sample.cc
-@HAVE_HDF5_TRUE@am__objects_12 =  \
-@HAVE_HDF5_TRUE@	@srcsupport@/libgeocal_la-hdf_file.lo
-@HAVE_HDF5_TRUE@am__objects_13 =  \
+@HAVE_HDF5_TRUE@am__objects_7 = @srcsupport@/libgeocal_la-hdf_file.lo
+@HAVE_HDF5_TRUE@am__objects_8 =  \
 @HAVE_HDF5_TRUE@	@srcimplementation@/libgeocal_la-hdf_orbit.lo
-@HAVE_GDAL_TRUE@am__objects_14 = @srcimplementation@/libgeocal_la-gdal_datum.lo \
+@HAVE_GDAL_TRUE@am__objects_9 = @srcimplementation@/libgeocal_la-gdal_datum.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-geocal_gdal.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_dem.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_raster_image.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-gdal_multi_band.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-image_point_display.lo \
 @HAVE_GDAL_TRUE@	@srcimplementation@/libgeocal_la-ogr_coordinate.lo
-@HAVE_GDAL_TRUE@am__objects_15 =  \
+@HAVE_GDAL_TRUE@am__objects_10 =  \
 @HAVE_GDAL_TRUE@	@srccartlab@/libgeocal_la-vicar_ogr.lo
 am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcsupport@/libgeocal_la-auto_derivative.lo \
@@ -950,7 +962,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcsupport@/libgeocal_la-statistic.lo \
 	@srcsupport@/libgeocal_la-geocal_serialize_function.lo \
 	@srcsupport@/libgeocal_la-blitz_array_serialize_support.lo \
-	@srcsupport@/libgeocal_la-geocal_fftw.lo $(am__objects_12) \
+	@srcsupport@/libgeocal_la-geocal_fftw.lo $(am__objects_7) \
 	@srcinterface@/libgeocal_la-raster_image.lo \
 	@srcinterface@/libgeocal_la-with_parameter.lo \
 	@srcinterface@/libgeocal_la-raster_image_variable.lo \
@@ -1050,7 +1062,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-phase_correlation_matcher.lo \
 	@srcimplementation@/libgeocal_la-quadratic_geometric_model.lo \
 	@srcimplementation@/libgeocal_la-geometric_model_image.lo \
-	$(am__objects_13) \
+	$(am__objects_8) \
 	@srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo \
 	@srcimplementation@/libgeocal_la-orbit_correction.lo \
 	@srcimplementation@/libgeocal_la-orbit_offset_correction.lo \
@@ -1080,7 +1092,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-rsm_image_ground_connection.lo \
 	@srcimplementation@/libgeocal_la-mola_dem_file.lo \
 	@srcimplementation@/libgeocal_la-context_sqrt_decode_image.lo \
-	$(am__objects_14) \
+	$(am__objects_9) \
 	@srcimplementation@/libgeocal_la-spice_helper.lo \
 	@srcimplementation@/libgeocal_la-sdp_helper.lo \
 	@srccartlab@/libgeocal_la-argus_camera.lo \
@@ -1105,7 +1117,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srccartlab@/libgeocal_la-vicar_file.lo \
 	@srccartlab@/libgeocal_la-vicar_raster_image.lo \
 	@srccartlab@/libgeocal_la-datum_geoid96.lo \
-	@srccartlab@/libgeocal_la-srtm_dem.lo $(am__objects_15) \
+	@srccartlab@/libgeocal_la-srtm_dem.lo $(am__objects_10) \
 	@srcmspi@/libgeocal_la-ifstream_cs.lo \
 	@srcmspi@/libgeocal_la-air_mspi_file.lo \
 	@srcmspi@/libgeocal_la-mspi_config_file.lo \
@@ -1293,8 +1305,8 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcmspi@/air_mspi_l1b1_test.cc @srcmspi@/air_mspi_igc_test.cc \
 	@srcmspi@/air_mspi_igc_collection_test.cc \
 	@srcoco3@/jia_sample_test.cc
-@HAVE_HDF5_TRUE@am__objects_16 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
-@HAVE_GDAL_TRUE@am__objects_17 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
+@HAVE_HDF5_TRUE@am__objects_11 = @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT)
+@HAVE_GDAL_TRUE@am__objects_12 = @srcimplementation@/geocal_test_all-gdal_datum_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-geocal_gdal_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_dem_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-gdal_raster_image_test.$(OBJEXT) \
@@ -1304,9 +1316,9 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_msp_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_simulated_test.$(OBJEXT) \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_test_all-igc_simulated_ray_caster_test.$(OBJEXT)
-@HAVE_HDF5_TRUE@am__objects_18 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT) \
+@HAVE_HDF5_TRUE@am__objects_13 = @srcimplementation@/geocal_test_all-hdf_orbit_test.$(OBJEXT) \
 @HAVE_HDF5_TRUE@	@srcimplementation@/geocal_test_all-orbit_quaternion_list_offset_test.$(OBJEXT)
-@HAVE_GDAL_TRUE@am__objects_19 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
+@HAVE_GDAL_TRUE@am__objects_14 = @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT)
 am_geocal_test_all_OBJECTS =  \
 	@libgeocal@/geocal_test_all-test_all.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
@@ -1330,7 +1342,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcsupport@/geocal_test_all-statistic_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-blitz_array_serialize_support_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT) \
-	$(am__objects_16) \
+	$(am__objects_11) \
 	@srcinterface@/geocal_test_all-constant_raster_image_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-memory_raster_image_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-sub_raster_image_test.$(OBJEXT) \
@@ -1356,7 +1368,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcinterface@/geocal_test_all-geocal_rpc_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-rpc_image_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-ipi_test.$(OBJEXT) \
-	$(am__objects_17) $(am__objects_18) \
+	$(am__objects_12) $(am__objects_13) \
 	@srcimplementation@/geocal_test_all-spice_helper_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-sdp_helper_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-did_datum_test.$(OBJEXT) \
@@ -1426,7 +1438,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-mola_dem_file_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-context_sqrt_decode_image_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-sensrb_camera_test.$(OBJEXT) \
-	$(am__objects_19) \
+	$(am__objects_14) \
 	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-quickbird_camera_test.$(OBJEXT) \
@@ -2867,7 +2879,7 @@ noop =
 # libgeocal: The main library
 lib_LTLIBRARIES = libgeocal.la
 noinst_LTLIBRARIES = $(am__append_17)
-bin_SCRIPTS = $(am__append_40)
+bin_SCRIPTS = $(am__append_37)
 dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_dir \
 	$(srcdir)/$(srcpythonbin)/shelve_show \
@@ -2912,19 +2924,19 @@ AM_LDFLAGS =
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
 BUILT_SOURCES = complain_if_afids dummy.pdf test_out/vicar_copy.img \
-	$(am__append_37)
+	$(am__append_18)
 include_HEADERS = 
 # Test files
 
 # Test files
 EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	$(am__append_13) @srcsdbx@/README \
-	@srcsdbx@/StorageConcepts.txt @libgeocal@/dummy.pdf \
+	@srcsdbx@/StorageConcepts.txt $(patsubst %_wrap.cc, %.py, \
+	$(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
+	$(srcdir)/$(swigsrc)/*_wrap.h @libgeocal@/dummy.pdf \
 	@libgeocal@/geocal_doxygen.h @srcsupport@/unit_test_support.h \
 	@srcsupport@/global_fixture.h @srcinterface@/matcher_fixture.h \
 	@srcinterface@/rpc_fixture.h @srcimplementation@/rsm_fixture.h \
-	$(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC)) $(FULL_SWIG_SRC) \
-	$(srcdir)/$(swigsrc)/*_wrap.h \
 	@geocalunittestdata@/RPC_PHR1B_P_201307191703469_SEN_646065101-001.XML \
 	@geocalunittestdata@/mspi_config_file_test.txt \
 	@geocalunittestdata@/mspi_config_file_test2.txt \
@@ -3142,10 +3154,10 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_14) $(am__append_41) $(am__append_46)
-UNINSTALL_HOOK = $(am__append_15) $(am__append_42) \
+INSTALL_DATA_HOOK = $(am__append_14) $(am__append_38) $(am__append_43)
+UNINSTALL_HOOK = $(am__append_15) $(am__append_39) \
 	clean_install_python_doc
-CLEAN_HOOK = clean_unit_test $(am__append_16) $(am__append_43)
+CLEAN_HOOK = clean_unit_test $(am__append_16) $(am__append_40)
 INSTALLCHECK_HOOK = python_check
 
 # Make sure we don't have any pyc or pycache files floating around
@@ -3179,7 +3191,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcsupport@/covariance.cc @srcsupport@/statistic.cc \
 	@srcsupport@/geocal_serialize_function.cc \
 	@srcsupport@/blitz_array_serialize_support.cc \
-	@srcsupport@/geocal_fftw.cc $(am__append_21) \
+	@srcsupport@/geocal_fftw.cc $(am__append_22) \
 	@srcinterface@/raster_image.cc \
 	@srcinterface@/with_parameter.cc \
 	@srcinterface@/raster_image_variable.cc \
@@ -3267,7 +3279,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/piecewise_linear.cc \
 	@srcimplementation@/phase_correlation_matcher.cc \
 	@srcimplementation@/quadratic_geometric_model.cc \
-	@srcimplementation@/geometric_model_image.cc $(am__append_24) \
+	@srcimplementation@/geometric_model_image.cc $(am__append_25) \
 	@srcimplementation@/orbit_quaternion_list_offset.cc \
 	@srcimplementation@/orbit_correction.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
@@ -3296,7 +3308,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/rsm_image_ground_connection.cc \
 	@srcimplementation@/mola_dem_file.cc \
 	@srcimplementation@/context_sqrt_decode_image.cc \
-	$(am__append_26) @srcimplementation@/spice_helper.cc \
+	$(am__append_27) @srcimplementation@/spice_helper.cc \
 	@srcimplementation@/sdp_helper.cc @srccartlab@/argus_camera.cc \
 	@srccartlab@/argus_orbit.cc @srccartlab@/quickbird_camera.cc \
 	@srccartlab@/spot_camera.cc @srccartlab@/spot_orbit.cc \
@@ -3313,7 +3325,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srccartlab@/vicar_argument.cc @srccartlab@/vicar_dem.cc \
 	@srccartlab@/vicar_file.cc @srccartlab@/vicar_raster_image.cc \
 	@srccartlab@/datum_geoid96.cc @srccartlab@/srtm_dem.cc \
-	$(am__append_30) @srcmspi@/ifstream_cs.cc \
+	$(am__append_31) @srcmspi@/ifstream_cs.cc \
 	@srcmspi@/air_mspi_file.cc @srcmspi@/mspi_config_file.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/mspi_gimbal.cc @srcmspi@/air_mspi_orbit.cc \
@@ -3484,16 +3496,14 @@ SWIG_SRC = @swigsrc@/swig_std_wrap.cc @swigsrc@/swig_array_wrap.cc \
 	@swigsrc@/air_mspi_l1b1_wrap.cc @swigsrc@/air_mspi_igc_wrap.cc \
 	@swigsrc@/air_mspi_igc_collection_wrap.cc \
 	@swigsrc@/jia_sample_wrap.cc
-SWIG_SRC_HDF5 = @swigsrc@/hdf_file_wrap.cc @swigsrc@/hdf_orbit_wrap.cc
-SWIG_SRC_HDF5_CARTO = @swigsrc@/hdf_orbit_carto_wrap.cc
+SWIG_SRC_HDF5 = @swigsrc@/hdf_file_wrap.cc @swigsrc@/hdf_orbit_wrap.cc \
+	@swigsrc@/hdf_orbit_carto_wrap.cc
 SWIG_SRC_GDAL = @swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/gdal_raster_image_wrap.cc \
 	@swigsrc@/gdal_datum_wrap.cc @swigsrc@/gdal_dem_wrap.cc \
 	@swigsrc@/gdal_multi_band_wrap.cc \
 	@swigsrc@/image_point_display_wrap.cc \
 	@swigsrc@/ogr_coordinate_wrap.cc @swigsrc@/vicar_ogr_wrap.cc
-SWIG_SRC_VICAR_RTL = 
-SWIG_SRC_GDAL_VICAR_RTL = 
 
 # Include boost in builds
 
@@ -3520,8 +3530,8 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_45)
-dist_afidspythonvdev_DATA = $(am__append_19) \
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_42)
+dist_afidspythonvdev_DATA = $(am__append_20) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
@@ -3565,7 +3575,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/geocal_serialize_function.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/blitz_array_serialize_support.h \
-	@srcsupport@/geocal_fftw.h $(am__append_20) \
+	@srcsupport@/geocal_fftw.h $(am__append_21) \
 	@srcsupport@/tre_support.h @srcinterface@/raster_image.h \
 	@srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
@@ -3659,7 +3669,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/piecewise_linear.h \
 	@srcimplementation@/phase_correlation_matcher.h \
 	@srcimplementation@/quadratic_geometric_model.h \
-	@srcimplementation@/geometric_model_image.h $(am__append_23) \
+	@srcimplementation@/geometric_model_image.h $(am__append_24) \
 	@srcimplementation@/orbit_quaternion_list_offset.h \
 	@srcimplementation@/orbit_correction.h \
 	@srcimplementation@/orbit_offset_correction.h \
@@ -3687,7 +3697,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/rsm_image_ground_connection.h \
 	@srcimplementation@/mola_dem_file.h \
 	@srcimplementation@/context_sqrt_decode_image.h \
-	$(am__append_25) @srcimplementation@/spice_helper.h \
+	$(am__append_26) @srcimplementation@/spice_helper.h \
 	@srcimplementation@/sdp_helper.h @srccartlab@/argus_camera.h \
 	@srccartlab@/argus_orbit.h @srccartlab@/quickbird_camera.h \
 	@srccartlab@/spot_camera.h @srccartlab@/spot_orbit.h \
@@ -3703,7 +3713,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srccartlab@/vicar_dem.h @srccartlab@/vicar_file.h \
 	@srccartlab@/vicar_tiled_file.h \
 	@srccartlab@/vicar_raster_image.h @srccartlab@/datum_geoid96.h \
-	@srccartlab@/srtm_dem.h $(am__append_29) \
+	@srccartlab@/srtm_dem.h $(am__append_30) \
 	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h \
 	@srcmspi@/air_mspi_file.h @srcmspi@/mspi_config_file.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
@@ -3906,7 +3916,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/geocal_gsl_root_test.cc \
 	@srcsupport@/covariance_test.cc @srcsupport@/statistic_test.cc \
 	@srcsupport@/blitz_array_serialize_support_test.cc \
-	@srcsupport@/geocal_fftw_test.cc $(am__append_22) \
+	@srcsupport@/geocal_fftw_test.cc $(am__append_23) \
 	@srcinterface@/constant_raster_image_test.cc \
 	@srcinterface@/memory_raster_image_test.cc \
 	@srcinterface@/sub_raster_image_test.cc \
@@ -3930,7 +3940,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcinterface@/ccorr_lsm_matcher_test.cc \
 	@srcinterface@/orbit_test.cc @srcinterface@/geocal_rpc_test.cc \
 	@srcinterface@/rpc_image_test.cc @srcinterface@/ipi_test.cc \
-	$(am__append_27) $(am__append_28) \
+	$(am__append_28) $(am__append_29) \
 	@srcimplementation@/spice_helper_test.cc \
 	@srcimplementation@/sdp_helper_test.cc \
 	@srcimplementation@/did_datum_test.cc \
@@ -3999,7 +4009,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/rsm_image_ground_connection_test.cc \
 	@srcimplementation@/mola_dem_file_test.cc \
 	@srcimplementation@/context_sqrt_decode_image_test.cc \
-	@srcimplementation@/sensrb_camera_test.cc $(am__append_31) \
+	@srcimplementation@/sensrb_camera_test.cc $(am__append_32) \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
 	@srccartlab@/quickbird_camera_test.cc \
@@ -4104,6 +4114,15 @@ sdbx_HEADERS = @srcsdbx@/sdbx/BTree.h @srcsdbx@/sdbx/DiskTreeBackend.h \
 @BUILD_LIBRAW_TRUE@	@srcraw@/var_defines.h
 @BUILD_LIBRAW_TRUE@libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
 swiginc_HEADERS = @swigrules@/include/swig_python_attribute.i
+pkgpythonswig_PYTHON = @swigrules@/bindings/python/__init__.py \
+	$(patsubst %_wrap.cc, %.py, $(COMPILE_SWIG_SRC))
+pkgpythonswig_LTLIBRARIES = _swig_wrap.la
+_swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) \
+	$(SWIG_CPPFLAGS) -DSWIG_TYPE_TABLE=$(SWIG_TYPE_TABLE_NAME)
+_swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
+_swig_wrap_la_LDFLAGS = -module -avoid-version
+_swig_wrap_la_LIBADD = $(SWIG_LIBADD)
+_swig_wrap_la_SOURCES = $(COMPILE_SWIG_SRC) @swigsrc@/swig_wrap.cc
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_SOURCES = @srcgeocalbin@/picmtch5.cc
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf $(CARTO_BUILD_DEPEND)
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_LDADD = libgeocal.la $(MSP_LIBS)
@@ -4118,24 +4137,17 @@ swiginc_HEADERS = @swigrules@/include/swig_python_attribute.i
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(GDAL_CFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(HDF5_CFLAGS)
 pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
-pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py $(patsubst \
-	%_wrap.cc, %.py, $(INCLUDE_SWIG_SRC))
-INCLUDE_SWIG_SRC = $(SWIG_SRC) $(am__append_32) $(am__append_33) \
-	$(am__append_34) $(am__append_35) $(am__append_36)
-FULL_SWIG_SRC = $(SWIG_SRC) $(SWIG_SRC_HDF5) $(SWIG_SRC_HDF5_CARTO) \
-	$(SWIG_SRC_GDAL) $(SWIG_SRC_VICAR_RTL) \
-	$(SWIG_SRC_GDAL_VICAR_RTL)
-pkgpythonswig_LTLIBRARIES = _swig_wrap.la
-_swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) \
-	$(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) \
+COMPILE_SWIG_SRC = $(SWIG_SRC) $(am__append_33) $(am__append_34)
+FULL_SWIG_SRC = $(SWIG_SRC) $(SWIG_SRC_HDF5) $(SWIG_SRC_GDAL)
+CONDITIONAL_SWIG_SRC = $(SWIG_SRC) HAVE_HDF5 $(SWIG_SRC_HDF5) \
+	HAVE_GDAL $(SWIG_SRC_GDAL)
+SWIG_CPPFLAGS = $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) \
 	$(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) \
-	$(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) $(AM_CPPFLAGS) \
-	-DSWIG_TYPE_TABLE=geocal
-_swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
-_swig_wrap_la_LDFLAGS = -module -avoid-version
-_swig_wrap_la_LIBADD = libgeocal.la
-_swig_wrap_la_SOURCES = $(INCLUDE_SWIG_SRC) @swigsrc@/swig_wrap.cc
-installafidspython_DATA = $(am__append_38) $(am__append_39)
+	$(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) $(AM_CPPFLAGS)
+SWIG_TYPE_TABLE_NAME = geocal
+SWIG_LIBADD = libgeocal.la
+SWIG_MODULE_NAME = geocal
+installafidspython_DATA = $(am__append_35) $(am__append_36)
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py @srcpythonlib@/output_cache.py \
@@ -4203,7 +4215,7 @@ PYTEST_NJOB = 10
 # Note useful flags to use here might be PYTEST_EXTRAFLAGS="--instafail" or
 # PYTEST_EXTRAFLAGS="--timeout=20"
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_44)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_41)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -14275,6 +14287,56 @@ clean_unit_test:
 # Allow searchs for .i in this directory
 vpath %.i $(srcdir)/@swigrules@/include
 
+# Only generate these files in maintainer mode, otherwise consider them
+# as input.
+
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i %.cc %.h $(SWIG_TARGET)
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.cc" >> $@
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
+
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i %.h $(SWIG_TARGET)
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
+
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i $(SWIG_TARGET)
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
+
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl config/create_python_init.py Makefile $(PYTHON_TARGET)
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/config/create_python_init.py $< $@ swig $(SWIG_MODULE_NAME) $(patsubst %_wrap.cc,%,$(notdir $(CONDITIONAL_SWIG_SRC)))
+
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET) $(SWIG_TARGET)
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm -r $*_doc
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "%include \"$*.i\"" >> $*_doc.i
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $*_doc.i
+
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h $(DOXYGEN_TARGET) $(SWIG_TARGET)
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm -r $*_doc
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "%include \"$*.i\"" >> $*_doc.i
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $*_doc.i
+
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i $(SWIG_TARGET)
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
+
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@-include $(patsubst %.cc, %.Pcc, $(COMPILE_SWIG_SRC))
+
 # Allow searchs for .i in this directory
 vpath %.i $(srcdir)/@libgeocal@
 
@@ -14316,61 +14378,12 @@ vpath %.cc $(srcdir)/@srcoco3@
 vpath %.h $(srcdir)/@srcoco3@
 vpath %.i $(srcdir)/@srcoco3@
 
+# Shortcut for building just python
 install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON
 	$(noop)
 
 install-python: all
 	$(MAKE) -j 1 install-python-2 
-
-# Only generate these files in maintainer mode, otherwise consider them
-# as input.
-
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i %.cc %.h $(SWIG_TARGET)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.cc" >> $@
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
-
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i %.h $(SWIG_TARGET)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "$(swigsrc)/$*_wrap.cc: $(<D)/$*.h" >> $@
-
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(swigsrc)/%_wrap.Pcc : %.i $(SWIG_TARGET)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -MM -MF $(builddir)/$@.tmp -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $@.tmp
-
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl config/create_python_init.py Makefile $(PYTHON_TARGET)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/config/create_python_init.py $< $@ swig geocal $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL))) HAVE_GDAL_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL_VICAR_RTL)))
-
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET) $(SWIG_TARGET)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm -r $*_doc
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "%include \"$*.i\"" >> $*_doc.i
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $*_doc.i
-
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h $(DOXYGEN_TARGET) $(SWIG_TARGET)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	mkdir -p $*_doc
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm -r $*_doc
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	echo "%include \"$*.i\"" >> $*_doc.i
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	rm $*_doc.i
-
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigsrc)/%_wrap.cc: %.i $(SWIG_TARGET)
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $<
-
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@-include $(patsubst %.cc, %.Pcc, $(INCLUDE_SWIG_SRC))
 # Backdoor rule to do a quick install when we are just varying python
 install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS install-pynitf
 

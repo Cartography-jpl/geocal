@@ -19,6 +19,7 @@ SWIG_CPPFLAGS+= -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS)
 SWIG_CPPFLAGS+= $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) 
 SWIG_CPPFLAGS+= $(AM_CPPFLAGS)
 SWIG_TYPE_TABLE_NAME = geocal
+SWIG_MODULE_NAME = geocal
 SWIG_LIBADD = libgeocal.la
 
 # Shortcut for building just python
@@ -28,5 +29,4 @@ install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpython
 install-python: all
 	$(MAKE) -j 1 install-python-2 
 
-SWIG_MODULE_NAME = geocal
 

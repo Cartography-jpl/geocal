@@ -24,6 +24,7 @@
 # SWIG_TYPE_TABLE_NAME the swig table name (e.g., geocal)
 # SWIG_MODULE_NAME the swig model name (e.g., geocal)
 # SWIG_LIBADD the libraries to link swig against (e.g., libgeocal.la)
+# DOXYGEN the program doxygen
 
 swiginc_HEADERS = 
 swiginc_HEADERS += @swigrules@/include/swig_python_attribute.i
@@ -36,7 +37,7 @@ vpath %.i $(srcdir)/@swigrules@/include
 
 SWIG_FLAG += -O
 
-pkgpythonswig_PYTHON = @swigrules@/bindings/python/__init__.py
+pkgpythonswig_PYTHON = @swigrules@/__init__.py
 
 EXTRA_DIST+= $(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC))
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(COMPILE_SWIG_SRC))
@@ -77,15 +78,15 @@ $(swigsrc)/%_wrap.Pcc : %.i $(SWIG_TARGET)
 	sed 's,\($*_wrap\)\.cc[ :]*,\1.cc $@ : ,g' < $@.tmp > $@
 	rm $@.tmp
 
-$(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl config/create_python_init.py Makefile $(PYTHON_TARGET)
+$(srcdir)/$(swigsrc)/swig_wrap.cc: @swigrules@/swig_wrap.tmpl @swigrules@/create_python_init.py Makefile $(PYTHON_TARGET)
 	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-        $(PYTHON) $(srcdir)/config/create_python_init.py $< $@ swig $(SWIG_MODULE_NAME) $(patsubst %_wrap.cc,%,$(notdir $(CONDITIONAL_SWIG_SRC)))
+        $(PYTHON) $(srcdir)/$(swigrules)/create_python_init.py $< $@ swig $(SWIG_MODULE_NAME) $(patsubst %_wrap.cc,%,$(notdir $(CONDITIONAL_SWIG_SRC)))
 
 $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET) $(SWIG_TARGET)
 	mkdir -p $*_doc
-	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
+	OUTDIR=$*_doc INPUT="$(<D)/$*.h $(<D)/$*.cc" $(DOXYGEN) $(srcdir)/$(swigrules)/doxygen_single.cfg
 	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+        $(PYTHON) $(srcdir)/$(swigrules)/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
 	rm -r $*_doc
 	echo "%include \"$*.i\"" >> $*_doc.i
 	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 
@@ -93,9 +94,9 @@ $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET) $(SWIG_TARGET)
 
 $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h $(DOXYGEN_TARGET) $(SWIG_TARGET)
 	mkdir -p $*_doc
-	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/config/doxygen_single.cfg
+	OUTDIR=$*_doc INPUT="$(<D)/$*.h" $(DOXYGEN) $(srcdir)/$(swigrules)/doxygen_single.cfg
 	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-        $(PYTHON) $(srcdir)/config/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
+        $(PYTHON) $(srcdir)/$(swigrules)/doxy2swig.py $*_doc/xml/index.xml $*_doc.i
 	rm -r $*_doc
 	echo "%include \"$*.i\"" >> $*_doc.i
 	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -module $* -o $(srcdir)/$(swigsrc)/$*_wrap.cc $*_doc.i 

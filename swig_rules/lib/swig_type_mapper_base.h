@@ -1,13 +1,63 @@
 #ifndef SWIG_TYPE_MAPPER_BASE_H
 #define SWIG_TYPE_MAPPER_BASE_H
-#include <boost/shared_ptr.hpp>
 #include <map>
-#include <iostream>
+#include <exception>
+#include <cstring>
+#include <typeinfo>
+#include <boost/shared_ptr.hpp>
+#include <boost/operators.hpp>
 #include "generic_object.h"
-#include "geocal_type_index.h"
-#include "geocal_exception.h"
 
-namespace GeoCal {
+namespace SWIG_MAPPER_NAMESPACE {
+  /// Dummy class to use as a nice default for type_index
+class null_type {
+};
+
+/****************************************************************//**
+  This is a wrapper around std::type_info that allows it to be used
+  as an index in a associative container.
+
+  This is actually in cxx11, but we don't want to depend on using a
+  cxx11 compiler. When these become more the standard compiler, we
+  can replace this class with std::type_info.
+*******************************************************************/
+class type_index : public boost::totally_ordered<type_index> {
+public:
+
+//-----------------------------------------------------------------------
+/// Default constructor.
+//-----------------------------------------------------------------------
+
+  type_index() : id(&typeid(null_type)) {}
+
+//-----------------------------------------------------------------------
+/// Constructor
+//-----------------------------------------------------------------------
+
+  type_index(std::type_info const& id) : id(&id) {}
+
+//-----------------------------------------------------------------------
+/// Comparison operator
+//-----------------------------------------------------------------------
+
+  bool operator==(type_index const& other) const 
+  { return std::strcmp(id->name(), other.id->name()) == 0;}
+
+//-----------------------------------------------------------------------
+/// Comparison operator
+//-----------------------------------------------------------------------
+
+  bool operator<(type_index const& other) const 
+  {return std::strcmp(id->name(), other.id->name()) < 0;}
+
+//-----------------------------------------------------------------------
+/// Return type name.
+//-----------------------------------------------------------------------
+
+  std::string name() const {return id->name();}
+private:
+  std::type_info const* id;
+};
 
 /****************************************************************//**
   One of the limitations of SWIG is that you can "lose" type
@@ -21,7 +71,7 @@ namespace GeoCal {
   be the typeid for DerivedType. The only problem is mapping this same
   type information back into python.
 
-  We have set up special rules for geocal_shared_ptr.i to convert this
+  We have set up special rules for shared_ptr_type_mapper.i to convert this
   back to boost::shared_ptr<DerivedType>. This depends on being able
   to map typeid of the C++ object into the python type.
   
@@ -33,7 +83,7 @@ namespace GeoCal {
 *******************************************************************/
 class SwigTypeMapperBase {
 public:
-  virtual void* to_python(const boost::shared_ptr<GeoCal::GenericObject>& V) = 0;
+  virtual void* to_python(const boost::shared_ptr<GenericObject>& V) = 0;
   virtual ~SwigTypeMapperBase() {}
 
 //-----------------------------------------------------------------------
@@ -71,7 +121,7 @@ public:
     type_index tid(id);
     if(swig_type_map.count(tid) != 0)
       return swig_type_map[tid]->to_python(V);
-    throw Exception("Unknown type");
+    throw std::runtime_error("Unknown type");
   }
 private:
 //-----------------------------------------------------------------------

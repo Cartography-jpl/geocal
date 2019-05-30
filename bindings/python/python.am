@@ -29,4 +29,11 @@ install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpython
 install-python: all
 	$(MAKE) -j 1 install-python-2 
 
+geocalinc_HEADERS+= @swigrules@/lib/swig_type_mapper_base.h
+geocalinc_HEADERS+= @swigrules@/lib/python_lib_init.h
+geocalinc_HEADERS+= @swigrules@/lib/swig_type_mapper.h
+geocalinc_HEADERS+= @swigrules@/lib/swig_to_python.h
+libgeocal_la_SOURCES+= @swigrules@/lib/swig_type_mapper_base.cc
+AM_CPPFLAGS+= -DSWIG_MAPPER_NAMESPACE=GeoCal
+
 

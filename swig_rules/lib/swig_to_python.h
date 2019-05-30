@@ -2,7 +2,7 @@
 #define SWIG_TO_PYTHON_H
 #include "swig_type_mapper_base.h"
 
-namespace GeoCal {
+namespace SWIG_MAPPER_NAMESPACE {
 /****************************************************************//**
   Important - you can only include this header file if you have
   included the swig header stuff, e.g. normally only if you are using

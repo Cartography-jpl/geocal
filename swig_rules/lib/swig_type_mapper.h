@@ -3,7 +3,7 @@
 #include "swig_type_mapper_base.h"
 #include "swig_to_python.h"
 
-namespace GeoCal {
+namespace SWIG_MAPPER_NAMESPACE {
 
 /****************************************************************//**
   This is the implementation of SwigTypeMapperBase.

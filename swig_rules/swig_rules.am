@@ -32,6 +32,7 @@ swiginc_HEADERS += @swigrules@/include/my_shared_ptr.i
 
 # Allow files to be include in other directories
 AM_CPPFLAGS+= -I$(srcdir)/@swigrules@/include
+AM_CPPFLAGS+= -I$(srcdir)/@swigrules@/lib
 
 # Allow searchs for .i in this directory
 vpath %.i $(srcdir)/@swigrules@/include

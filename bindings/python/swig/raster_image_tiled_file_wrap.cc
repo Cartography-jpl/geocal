@@ -6588,6 +6588,7 @@ SWIGINTERN PyObject *_wrap_new_RasterImageTiledFile__SWIG_0(PyObject *SWIGUNUSED
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::TiledFileBase< 2 > > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6646,6 +6647,7 @@ SWIGINTERN PyObject *_wrap_new_RasterImageTiledFile__SWIG_1(PyObject *SWIGUNUSED
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::TiledFileBase< 2 > > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

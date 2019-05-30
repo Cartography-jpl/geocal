@@ -7371,6 +7371,7 @@ SWIGINTERN PyObject *_wrap_new_LocalRectangularCoordinate__SWIG_1(PyObject *SWIG
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::LocalRcParameter > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7459,6 +7460,7 @@ SWIGINTERN PyObject *_wrap_new_LocalRectangularCoordinate__SWIG_2(PyObject *SWIG
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::LocalRcParameter > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7576,6 +7578,7 @@ SWIGINTERN PyObject *_wrap_LocalRectangularCoordinate_parameter_set(PyObject *SW
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::LocalRcParameter > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7787,6 +7790,7 @@ SWIGINTERN PyObject *_wrap_new_LocalRcConverter(PyObject *SWIGUNUSEDPARM(self), 
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::LocalRcParameter > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

@@ -3726,9 +3726,8 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcoco3@/jia_sample.h
 #  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
 geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
-	@libgeocal@/geocal_shared_ptr.i @libgeocal@/my_shared_ptr.i \
-	@libgeocal@/swig_array.i @libgeocal@/swig_array_inc.i \
-	@libgeocal@/swig_boost_array.i \
+	@libgeocal@/geocal_shared_ptr.i @libgeocal@/swig_array.i \
+	@libgeocal@/swig_array_inc.i @libgeocal@/swig_boost_array.i \
 	@libgeocal@/swig_boost_array_inc.i \
 	@libgeocal@/swig_boost_optional.i @libgeocal@/swig_exception.i \
 	@libgeocal@/swig_iostream.i @libgeocal@/swig_iostream_inc.i \
@@ -4114,7 +4113,8 @@ sdbx_HEADERS = @srcsdbx@/sdbx/BTree.h @srcsdbx@/sdbx/DiskTreeBackend.h \
 @BUILD_LIBRAW_TRUE@	@srcraw@/libraw_defines.h \
 @BUILD_LIBRAW_TRUE@	@srcraw@/var_defines.h
 @BUILD_LIBRAW_TRUE@libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
-swiginc_HEADERS = @swigrules@/include/swig_python_attribute.i
+swiginc_HEADERS = @swigrules@/include/swig_python_attribute.i \
+	@swigrules@/include/my_shared_ptr.i
 pkgpythonswig_PYTHON = @swigrules@/__init__.py $(patsubst %_wrap.cc, \
 	%.py, $(COMPILE_SWIG_SRC))
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la

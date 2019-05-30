@@ -8294,6 +8294,7 @@ SWIGINTERN PyObject *_wrap_WithParameterNested_add_object(PyObject *SWIGUNUSEDPA
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::WithParameter > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

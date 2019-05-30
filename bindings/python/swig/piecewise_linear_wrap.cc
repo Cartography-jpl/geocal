@@ -9879,6 +9879,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time2___setitem____SWIG_2(PyObject *SWIGUNUSED
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10025,6 +10026,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time2_append(PyObject *SWIGUNUSEDPARM(self), P
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10653,6 +10655,7 @@ SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_3(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10754,6 +10757,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time2_push_back(PyObject *SWIGUNUSEDPARM(self)
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10887,6 +10891,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time2_assign(PyObject *SWIGUNUSEDPARM(self), P
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10953,6 +10958,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time2_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -11050,6 +11056,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time2_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -11131,6 +11138,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time2_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(
     } else {
       arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Time > >::value_type * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

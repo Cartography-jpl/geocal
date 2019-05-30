@@ -6672,6 +6672,7 @@ SWIGINTERN PyObject *_wrap_new_DemMatch(PyObject *SWIGUNUSEDPARM(self), PyObject
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageToImageMatch > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6697,6 +6698,7 @@ SWIGINTERN PyObject *_wrap_new_DemMatch(PyObject *SWIGUNUSEDPARM(self), PyObject
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RayIntersect > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

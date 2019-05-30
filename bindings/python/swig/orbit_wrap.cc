@@ -12012,6 +12012,7 @@ SWIGINTERN PyObject *_wrap_new_QuaternionOrbitData__SWIG_2(PyObject *SWIGUNUSEDP
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -12119,6 +12120,7 @@ SWIGINTERN PyObject *_wrap_new_QuaternionOrbitData__SWIG_3(PyObject *SWIGUNUSEDP
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -12219,6 +12221,7 @@ SWIGINTERN PyObject *_wrap_new_QuaternionOrbitData__SWIG_4(PyObject *SWIGUNUSEDP
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -12326,6 +12329,7 @@ SWIGINTERN PyObject *_wrap_new_QuaternionOrbitData__SWIG_5(PyObject *SWIGUNUSEDP
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -14406,6 +14410,7 @@ SWIGINTERN PyObject *_wrap_ObservableOrbit_add_observer_and_keep_reference(PyObj
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Observer< GeoCal::Orbit > > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -21922,6 +21927,7 @@ SWIGINTERN PyObject *_wrap_Vector_QuaternionOrbitData___setitem____SWIG_2(PyObje
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -22068,6 +22074,7 @@ SWIGINTERN PyObject *_wrap_Vector_QuaternionOrbitData_append(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -22696,6 +22703,7 @@ SWIGINTERN PyObject *_wrap_new_Vector_QuaternionOrbitData__SWIG_3(PyObject *SWIG
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -22797,6 +22805,7 @@ SWIGINTERN PyObject *_wrap_Vector_QuaternionOrbitData_push_back(PyObject *SWIGUN
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -22930,6 +22939,7 @@ SWIGINTERN PyObject *_wrap_Vector_QuaternionOrbitData_assign(PyObject *SWIGUNUSE
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -22996,6 +23006,7 @@ SWIGINTERN PyObject *_wrap_Vector_QuaternionOrbitData_resize__SWIG_1(PyObject *S
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -23093,6 +23104,7 @@ SWIGINTERN PyObject *_wrap_Vector_QuaternionOrbitData_insert__SWIG_0(PyObject *S
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -23174,6 +23186,7 @@ SWIGINTERN PyObject *_wrap_Vector_QuaternionOrbitData_insert__SWIG_1(PyObject *S
     } else {
       arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

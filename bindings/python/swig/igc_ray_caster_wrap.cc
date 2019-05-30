@@ -6631,6 +6631,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6746,6 +6747,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6853,6 +6855,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6952,6 +6955,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_3(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7043,6 +7047,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_4(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7126,6 +7131,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_5(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7201,6 +7207,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_6(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7268,6 +7275,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_7(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7327,6 +7335,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_8(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

@@ -6622,6 +6622,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_0(PyObject *SWIGUNUSE
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6647,6 +6648,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_0(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6751,6 +6753,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_1(PyObject *SWIGUNUSE
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6776,6 +6779,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_1(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6872,6 +6876,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_2(PyObject *SWIGUNUSE
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6897,6 +6902,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_2(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6985,6 +6991,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_3(PyObject *SWIGUNUSE
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7010,6 +7017,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_3(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7090,6 +7098,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_4(PyObject *SWIGUNUSE
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7115,6 +7124,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_4(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7187,6 +7197,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_5(PyObject *SWIGUNUSE
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7212,6 +7223,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_5(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7276,6 +7288,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_6(PyObject *SWIGUNUSE
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7301,6 +7314,7 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_6(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

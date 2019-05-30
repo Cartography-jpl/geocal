@@ -7585,6 +7585,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiOrbit__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7662,6 +7663,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiOrbit__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7687,6 +7689,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiOrbit__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Datum > * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7766,6 +7769,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiOrbit__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MspiGimbal > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7791,6 +7795,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiOrbit__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Datum > * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

@@ -8483,6 +8483,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiL1b1__SWIG_5(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8558,6 +8559,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiL1b1__SWIG_6(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8625,6 +8627,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiL1b1__SWIG_7(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8684,6 +8687,7 @@ SWIGINTERN PyObject *_wrap_new_AirMspiL1b1__SWIG_8(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::AirMspiL1b1File > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

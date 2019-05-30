@@ -6601,6 +6601,7 @@ SWIGINTERN PyObject *_wrap_new_RasterSubSample(PyObject *SWIGUNUSEDPARM(self), P
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

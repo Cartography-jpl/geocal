@@ -7529,6 +7529,7 @@ SWIGINTERN PyObject *_wrap_new_RsmId(PyObject *SWIGUNUSEDPARM(self), PyObject *a
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RsmBase > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7554,6 +7555,7 @@ SWIGINTERN PyObject *_wrap_new_RsmId(PyObject *SWIGUNUSEDPARM(self), PyObject *a
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::CoordinateConverter > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7713,6 +7715,7 @@ SWIGINTERN PyObject *_wrap_RsmId__v_coordinate_converter__SWIG_1(PyObject *SWIGU
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::CoordinateConverter > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8450,6 +8453,7 @@ SWIGINTERN PyObject *_wrap_RsmId__v_image_acquistion_time__SWIG_1(PyObject *SWIG
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Time > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8587,6 +8591,7 @@ SWIGINTERN PyObject *_wrap_RsmId__v_timing__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RsmIdTiming > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8844,6 +8849,7 @@ SWIGINTERN PyObject *_wrap_RsmId__v_ground_reference_point__SWIG_1(PyObject *SWI
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

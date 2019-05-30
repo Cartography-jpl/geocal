@@ -11052,6 +11052,7 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___setitem____SWIG_2(PyObjec
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -11198,6 +11199,7 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_append(PyObject *SWIGUNUSED
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -11826,6 +11828,7 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinatePtr__SWIG_3(PyObject *SWIGU
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -11927,6 +11930,7 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_push_back(PyObject *SWIGUNU
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -12060,6 +12064,7 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_assign(PyObject *SWIGUNUSED
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -12126,6 +12131,7 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_resize__SWIG_1(PyObject *SW
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -12223,6 +12229,7 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_insert__SWIG_0(PyObject *SW
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -12304,6 +12311,7 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_insert__SWIG_1(PyObject *SW
     } else {
       arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

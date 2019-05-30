@@ -6605,6 +6605,7 @@ SWIGINTERN PyObject *_wrap_new_SubRasterImageMultiBand(PyObject *SWIGUNUSEDPARM(
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

@@ -6602,6 +6602,7 @@ SWIGINTERN PyObject *_wrap_new_SmoothImage__SWIG_0(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6669,6 +6670,7 @@ SWIGINTERN PyObject *_wrap_new_SmoothImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6728,6 +6730,7 @@ SWIGINTERN PyObject *_wrap_new_SmoothImage__SWIG_2(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

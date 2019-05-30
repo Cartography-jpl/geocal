@@ -8012,6 +8012,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___setitem____SWIG_2(PyObject *SWIGU
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8158,6 +8159,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_append(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8786,6 +8788,7 @@ SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_3(PyObject *SWIGUNUSEDPAR
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8887,6 +8890,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_push_back(PyObject *SWIGUNUSEDPARM(
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -9020,6 +9024,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_assign(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -9086,6 +9091,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_resize__SWIG_1(PyObject *SWIGUNUSED
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -9183,6 +9189,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_insert__SWIG_0(PyObject *SWIGUNUSED
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -9264,6 +9271,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_insert__SWIG_1(PyObject *SWIGUNUSED
     } else {
       arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

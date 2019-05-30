@@ -7034,6 +7034,7 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionRollingShutter__SWIG_0(PyObject *SWI
     } else {
       arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7059,6 +7060,7 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionRollingShutter__SWIG_0(PyObject *SWI
     } else {
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp5) : &tempshared5;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7084,6 +7086,7 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionRollingShutter__SWIG_0(PyObject *SWI
     } else {
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp6) : &tempshared6;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7152,6 +7155,7 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionRollingShutter__SWIG_1(PyObject *SWI
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7177,6 +7181,7 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionRollingShutter__SWIG_1(PyObject *SWI
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7202,6 +7207,7 @@ SWIGINTERN PyObject *_wrap_new_IgcCollectionRollingShutter__SWIG_1(PyObject *SWI
     } else {
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7307,6 +7313,7 @@ SWIGINTERN PyObject *_wrap_IgcCollectionRollingShutter_add_image(PyObject *SWIGU
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7332,6 +7339,7 @@ SWIGINTERN PyObject *_wrap_IgcCollectionRollingShutter_add_image(PyObject *SWIGU
     } else {
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::TimeTable > * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7458,6 +7466,7 @@ SWIGINTERN PyObject *_wrap_IgcCollectionRollingShutter__v_orbit__SWIG_1(PyObject
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7595,6 +7604,7 @@ SWIGINTERN PyObject *_wrap_IgcCollectionRollingShutter__v_camera__SWIG_1(PyObjec
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Camera > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

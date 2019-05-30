@@ -6690,6 +6690,7 @@ SWIGINTERN PyObject *_wrap_IgcMultiplePass_add_igc(PyObject *SWIGUNUSEDPARM(self
     }
     if (argp2) arg2 = *(reinterpret_cast< boost::shared_ptr< GeoCal::IgcCollection > * >(argp2));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::IgcCollection > * >(argp2);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

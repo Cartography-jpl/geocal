@@ -7020,6 +7020,7 @@ SWIGINTERN PyObject *_wrap_new_VicarDem__SWIG_4(PyObject *SWIGUNUSEDPARM(self), 
     } else {
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::Datum > * >(argp5) : &tempshared5;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7368,6 +7369,7 @@ SWIGINTERN PyObject *_wrap_new_VicarDem__SWIG_10(PyObject *SWIGUNUSEDPARM(self),
     } else {
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::Datum > * >(argp6) : &tempshared6;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

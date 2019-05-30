@@ -9148,6 +9148,7 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_rsm__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Rsm > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

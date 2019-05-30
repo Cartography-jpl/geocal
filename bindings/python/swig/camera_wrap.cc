@@ -6884,6 +6884,7 @@ SWIGINTERN PyObject *_wrap_ObservableCamera_add_observer_and_keep_reference(PyOb
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Observer< GeoCal::Camera > > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -9671,6 +9672,7 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___setitem____SWIG_2(PyObject *SWIGUNUSE
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -9817,6 +9819,7 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_append(PyObject *SWIGUNUSEDPARM(self), 
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10445,6 +10448,7 @@ SWIGINTERN PyObject *_wrap_new_Vector_Camera__SWIG_3(PyObject *SWIGUNUSEDPARM(se
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10546,6 +10550,7 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_push_back(PyObject *SWIGUNUSEDPARM(self
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10679,6 +10684,7 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_assign(PyObject *SWIGUNUSEDPARM(self), 
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10745,6 +10751,7 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_resize__SWIG_1(PyObject *SWIGUNUSEDPARM
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10842,6 +10849,7 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_insert__SWIG_0(PyObject *SWIGUNUSEDPARM
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10923,6 +10931,7 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_insert__SWIG_1(PyObject *SWIGUNUSEDPARM
     } else {
       arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

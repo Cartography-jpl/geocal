@@ -6984,6 +6984,7 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file__SWIG_0(PyObje
     } else {
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::MapInfo > * >(argp5) : &tempshared5;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7142,6 +7143,7 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file__SWIG_1(PyObje
     } else {
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::MapInfo > * >(argp5) : &tempshared5;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7292,6 +7294,7 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file__SWIG_2(PyObje
     } else {
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::MapInfo > * >(argp5) : &tempshared5;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7435,6 +7438,7 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file__SWIG_3(PyObje
     } else {
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::MapInfo > * >(argp5) : &tempshared5;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7563,6 +7567,7 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile__v_create_subset_file__SWIG_4(PyObje
     } else {
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::MapInfo > * >(argp5) : &tempshared5;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

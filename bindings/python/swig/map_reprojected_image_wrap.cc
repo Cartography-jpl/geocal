@@ -6576,6 +6576,7 @@ SWIGINTERN PyObject *_wrap_new_MapReprojectedImage(PyObject *SWIGUNUSEDPARM(self
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

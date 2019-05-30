@@ -7819,6 +7819,7 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_add_ortho_to_image__SWIG_0(PyObject *S
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7844,6 +7845,7 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_add_ortho_to_image__SWIG_0(PyObject *S
     } else {
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7869,6 +7871,7 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_add_ortho_to_image__SWIG_0(PyObject *S
     } else {
       arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8012,6 +8015,7 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_add_ortho_to_image__SWIG_1(PyObject *S
     } else {
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8037,6 +8041,7 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_add_ortho_to_image__SWIG_1(PyObject *S
     } else {
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -8062,6 +8067,7 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_add_ortho_to_image__SWIG_1(PyObject *S
     } else {
       arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -9777,6 +9783,7 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___setitem____SWIG_2(PyObject *S
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -9923,6 +9930,7 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_append(PyObject *SWIGUNUSEDPARM
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10551,6 +10559,7 @@ SWIGINTERN PyObject *_wrap_new_Vector_ArgusOrbitData__SWIG_3(PyObject *SWIGUNUSE
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10652,6 +10661,7 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_push_back(PyObject *SWIGUNUSEDP
     } else {
       arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type * >(argp2) : &tempshared2;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10785,6 +10795,7 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_assign(PyObject *SWIGUNUSEDPARM
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10851,6 +10862,7 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_resize__SWIG_1(PyObject *SWIGUN
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -10948,6 +10960,7 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_insert__SWIG_0(PyObject *SWIGUN
     } else {
       arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type * >(argp3) : &tempshared3;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -11029,6 +11042,7 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_insert__SWIG_1(PyObject *SWIGUN
     } else {
       arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type * >(argp4) : &tempshared4;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

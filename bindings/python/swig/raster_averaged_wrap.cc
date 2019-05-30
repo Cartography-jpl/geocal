@@ -6627,6 +6627,7 @@ SWIGINTERN PyObject *_wrap_new_RasterAveraged__SWIG_0(PyObject *SWIGUNUSEDPARM(s
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6702,6 +6703,7 @@ SWIGINTERN PyObject *_wrap_new_RasterAveraged__SWIG_1(PyObject *SWIGUNUSEDPARM(s
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7026,6 +7028,7 @@ SWIGINTERN PyObject *_wrap_new_RasterAveragedMultiBand__SWIG_0(PyObject *SWIGUNU
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7101,6 +7104,7 @@ SWIGINTERN PyObject *_wrap_new_RasterAveragedMultiBand__SWIG_1(PyObject *SWIGUNU
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7423,6 +7427,7 @@ SWIGINTERN PyObject *_wrap_new_ImageMaskAveraged(PyObject *SWIGUNUSEDPARM(self),
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7676,6 +7681,7 @@ SWIGINTERN PyObject *_wrap_new_AveragedImageGroundConnection__SWIG_0(PyObject *S
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7751,6 +7757,7 @@ SWIGINTERN PyObject *_wrap_new_AveragedImageGroundConnection__SWIG_1(PyObject *S
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7818,6 +7825,7 @@ SWIGINTERN PyObject *_wrap_new_AveragedImageGroundConnection__SWIG_2(PyObject *S
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

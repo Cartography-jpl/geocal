@@ -6631,6 +6631,7 @@ SWIGINTERN PyObject *_wrap_new_DoughnutAverage__SWIG_0(PyObject *SWIGUNUSEDPARM(
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6722,6 +6723,7 @@ SWIGINTERN PyObject *_wrap_new_DoughnutAverage__SWIG_1(PyObject *SWIGUNUSEDPARM(
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6805,6 +6807,7 @@ SWIGINTERN PyObject *_wrap_new_DoughnutAverage__SWIG_2(PyObject *SWIGUNUSEDPARM(
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6880,6 +6883,7 @@ SWIGINTERN PyObject *_wrap_new_DoughnutAverage__SWIG_3(PyObject *SWIGUNUSEDPARM(
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6947,6 +6951,7 @@ SWIGINTERN PyObject *_wrap_new_DoughnutAverage__SWIG_4(PyObject *SWIGUNUSEDPARM(
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7006,6 +7011,7 @@ SWIGINTERN PyObject *_wrap_new_DoughnutAverage__SWIG_5(PyObject *SWIGUNUSEDPARM(
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7515,6 +7521,7 @@ SWIGINTERN PyObject *_wrap_new_RasterImageWrapCvdNorm(PyObject *SWIGUNUSEDPARM(s
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::DoughnutAverage > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7717,6 +7724,7 @@ SWIGINTERN PyObject *_wrap_new_RasterImageWrapPandif(PyObject *SWIGUNUSEDPARM(se
     } else {
       arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::DoughnutAverage > * >(argp1) : &tempshared1;
     }
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

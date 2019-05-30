@@ -6704,6 +6704,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_0(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6811,6 +6812,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_1(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -6910,6 +6912,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_2(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7001,6 +7004,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_3(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7084,6 +7088,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_4(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7159,6 +7164,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_5(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7226,6 +7232,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_6(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7285,6 +7292,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_7(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and
@@ -7336,6 +7344,7 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_8(PyObject *SWIGUNUSE
     }
     if (argp1) arg1 = *(reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1));
     if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Orbit > * >(argp1);
+    // Added mms
     // Special handling if this is a director class. In that case, we
     // don't own the underlying python object. Instead,
     // we tell python we have a reference to the underlying object, and

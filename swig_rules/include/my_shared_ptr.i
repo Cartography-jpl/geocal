@@ -1,6 +1,6 @@
 // There appears to be a bug in the shared_ptr handler of SWIG, as of
-// version 2.0.4. This is "boost_shared_ptr.i" from
-// share/swig/2.0.4/python/, with some fixes
+// version 3.0.12. This is "boost_shared_ptr.i" from
+// share/swig/3.0.12/python/, with some fixes
 //
 // The fixes are related to proper handling of shared_ptr returned by
 // directors.
@@ -72,7 +72,7 @@
     %variable_fail(res, "$type", "$name");
   }
   if (!argp) {
-    %argument_nullref("$type", $symname, $argnum);
+    %variable_nullref("$type", "$name");
   } else {
     $1 = *(%reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *)->get());
     if (newmem & SWIG_CAST_NEW_MEMORY) delete %reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *);
@@ -139,18 +139,18 @@
   if (SWIG_IsOK(res)) {
     $1 = ptr;
   } else {
-    res = SWIG_ConvertPtrAndOwn($input, &argp, $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< TYPE > *), %convertptr_flags, &newmem);
-    if (!SWIG_IsOK(res)) {
-      %argument_fail(res, "$type", $symname, $argnum); 
-    }
-    if (!argp) { %argument_nullref("$type", $symname, $argnum); }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared = *%reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *);
-      delete %reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *);
-      $1 = %const_cast(tempshared.get(), $1_ltype);
-    } else {
-      $1 = %const_cast(%reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *)->get(), $1_ltype);
-    }
+  res = SWIG_ConvertPtrAndOwn($input, &argp, $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< TYPE > *), %convertptr_flags, &newmem);
+  if (!SWIG_IsOK(res)) {
+    %argument_fail(res, "$type", $symname, $argnum); 
+  }
+  if (!argp) { %argument_nullref("$type", $symname, $argnum); }
+  if (newmem & SWIG_CAST_NEW_MEMORY) {
+    tempshared = *%reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *);
+    delete %reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *);
+    $1 = %const_cast(tempshared.get(), $1_ltype);
+  } else {
+    $1 = %const_cast(%reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *)->get(), $1_ltype);
+  }
   }
 }
 %typemap(out, fragment="SWIG_null_deleter_python") CONST TYPE & {
@@ -166,7 +166,9 @@
     %variable_fail(res, "$type", "$name");
   }
   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > tempshared;
-  if (!argp) { %argument_nullref("$type", $symname, $argnum); }
+  if (!argp) {
+    %variable_nullref("$type", "$name");
+  }
   if (newmem & SWIG_CAST_NEW_MEMORY) {
     tempshared = *%reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *);
     delete %reinterpret_cast(argp, SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *);
@@ -218,6 +220,7 @@
   }
   if (argp) $1 = *(%reinterpret_cast(argp, $&ltype));
   if (newmem & SWIG_CAST_NEW_MEMORY) delete %reinterpret_cast(argp, $&ltype);
+  // Added mms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -234,6 +237,7 @@
   %set_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< TYPE > *), SWIG_POINTER_OWN));
 }
 
+// Added mms
 %typemap(directorout,noblock=1,implicitconv=1) SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > (void * swig_argp, int swig_res = 0) {
   int newmem = 0;
   swig_res = SWIG_ConvertPtrAndOwn($input,&swig_argp,$&descriptor, %convertptr_flags | %implicitconv_flag, &newmem);
@@ -303,6 +307,7 @@
   } else {
     $1 = (argp) ? %reinterpret_cast(argp, $ltype) : &tempshared;
   }
+  // Added mms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -405,7 +410,6 @@
   SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE > *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< CONST TYPE >(*$1);
   %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr< TYPE > *), SWIG_POINTER_OWN));
 }
-
 
 // various missing typemaps - If ever used (unlikely) ensure compilation error rather than runtime bug
 %typemap(in) CONST TYPE[], CONST TYPE[ANY], CONST TYPE (CLASS::*) %{

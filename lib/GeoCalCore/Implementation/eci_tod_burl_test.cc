@@ -4,6 +4,7 @@
 #include "geodetic.h"
 #include "ecr.h"
 #include "wgs84_constant.h"
+#include "geocal_config.h"
 #include <cmath>
 
 using namespace GeoCal;
@@ -12,6 +13,9 @@ BOOST_FIXTURE_TEST_SUITE(eci_tod_burl, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(basic)
 {
+#ifndef HAVE_CARTO
+  return;
+#endif
   boost::array<double, 3> p = {{10, 20, 30}};
   EciTodBurl e1(p);
   EciTodBurl e2(10, 20, 30);

@@ -3,14 +3,6 @@ pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
 pkgpythonswig_PYTHON = @pythonswigsrc@/__init__.py
 INCLUDE_SWIG_SRC = $(SWIG_SRC)
 FULL_SWIG_SRC = $(SWIG_SRC)
-if HAVE_CARTO
-INCLUDE_SWIG_SRC += $(SWIG_SRC_CARTO)
-endif
-FULL_SWIG_SRC += $(SWIG_SRC_CARTO)
-if HAVE_FFTW
-INCLUDE_SWIG_SRC += $(SWIG_SRC_FFTW)
-endif
-FULL_SWIG_SRC += $(SWIG_SRC_FFTW)
 if HAVE_HDF5
 INCLUDE_SWIG_SRC += $(SWIG_SRC_HDF5)
 if HAVE_CARTO
@@ -84,7 +76,7 @@ $(swigsrc)/%_wrap.Pcc : %.i $(SWIG_TARGET)
 
 $(srcdir)/$(swigsrc)/swig_wrap.cc: $(pythonswigsrc)/swig_wrap.tmpl config/create_python_init.py Makefile $(PYTHON_TARGET)
 	export LD_LIBRARY_PATH="${PYTHON_LDPATH}${LD_LIBRARY_PATH}" && \
-        $(PYTHON) $(srcdir)/config/create_python_init.py $< $@ swig geocal $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_CARTO $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_CARTO))) HAVE_FFTW $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_FFTW))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL))) HAVE_GDAL_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL_VICAR_RTL)))
+        $(PYTHON) $(srcdir)/config/create_python_init.py $< $@ swig geocal $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC))) HAVE_HDF5 $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5))) "HAVE_HDF5 HAVE_CARTO" $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_HDF5_CARTO))) HAVE_GDAL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL))) HAVE_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_VICAR_RTL))) HAVE_GDAL_VICAR_RTL $(patsubst %_wrap.cc,%,$(notdir $(SWIG_SRC_GDAL_VICAR_RTL)))
 
 $(srcdir)/$(swigsrc)/%_wrap.cc: %.i %.h %.cc $(DOXYGEN_TARGET) $(SWIG_TARGET)
 	mkdir -p $*_doc

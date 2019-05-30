@@ -1,7 +1,10 @@
 #include "phase_correlation_matcher.h"
 #include "geocal_serialize_support.h"
+#include "geocal_config.h"
 #include <blitz/array.h>
-
+#ifdef HAVE_FFTW
+#include <fftw3.h>
+#endif
 using namespace GeoCal;
 using namespace blitz;
 
@@ -26,16 +29,22 @@ void PhaseCorrelationMatcher::load(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(search)
     & GEOCAL_NVP(nohpf)
     & GEOCAL_NVP(subpix);
+#ifdef HAVE_FFTW  
   // Default constructor stet this up, presumably the wrong size. Free
   // and then recreate
   fftw_free(afftin);
   fftw_free(afftout);
   fftw_free(bfftin);
   fftw_free(bfftout);
-  afftin = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
-  afftout = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
-  bfftin = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
-  bfftout = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
+  afftin = (std::complex<double>*)
+    fftw_malloc(sizeof(std::complex<double>) * search*search);
+  afftout = (std::complex<double>*)
+    fftw_malloc(sizeof(std::complex<double>) * search*search);
+  bfftin = (std::complex<double>*)
+    fftw_malloc(sizeof(std::complex<double>) * search*search);
+  bfftout = (std::complex<double>*)
+    fftw_malloc(sizeof(std::complex<double>) * search*search);
+#endif  
 }
 
 
@@ -65,18 +74,28 @@ int Search_size
   if(Template_size % 2 != 0 ||
      Search_size % 2 != 0)
     throw Exception("Template and search size need to be even");
-  afftin = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
-  afftout = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
-  bfftin = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
-  bfftout = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * search*search);
+#ifdef HAVE_FFTW  
+  afftin = (std::complex<double>*)
+    fftw_malloc(sizeof(std::complex<double>) * search*search);
+  afftout = (std::complex<double>*)
+    fftw_malloc(sizeof(std::complex<double>) * search*search);
+  bfftin = (std::complex<double>*)
+    fftw_malloc(sizeof(std::complex<double>) * search*search);
+  bfftout = (std::complex<double>*)
+    fftw_malloc(sizeof(std::complex<double>) * search*search);
+#else
+  throw Exception("Require FFTW library to use PhaseCorrelationMatcher");
+#endif
 }
 
 PhaseCorrelationMatcher::~PhaseCorrelationMatcher() 
 {
+#ifdef HAVE_FFTW  
   fftw_free(afftin);
   fftw_free(afftout);
   fftw_free(bfftin);
   fftw_free(bfftout);
+#endif  
 }
 
 // See base class for description
@@ -194,6 +213,7 @@ void PhaseCorrelationMatcher::rfit
  const blitz::Array<double, 2>& chip1, 
  const blitz::Array<double, 2>& asrch) const
 {
+#ifdef HAVE_FFTW  
   int srchdim = asrch.rows();
   int quadmark = srchdim/2;
   int mincor = fftsize/6-1;
@@ -203,50 +223,50 @@ void PhaseCorrelationMatcher::rfit
 
   for(int i=0;i<srchdim;i++)
     for(int j=0;j<srchdim;j++) {
-      bfftin[j*srchdim+i][0] = asrch(j,i);
-      bfftin[j*srchdim+i][1] = 0.0;
-      afftin[j*srchdim+i][0] = avg;
-      afftin[j*srchdim+i][1] = 0.0;
+      bfftin[j*srchdim+i]= std::complex<double>(asrch(j,i),0);
+      afftin[j*srchdim+i] = std::complex<double>(avg, 0);
     }
   int koff = (srchdim-fftsize)/2;
   for(int i=0;i<fftsize;i++)
     for(int j=0;j<fftsize;j++)
-      afftin[(j+koff)*srchdim+i+koff][0] = chip1(j, i);
+      afftin[(j+koff)*srchdim+i+koff].real(chip1(j, i));
    
-  fftw_plan p = fftw_plan_dft_2d(srchdim,srchdim,afftin,afftout,FFTW_FORWARD,
-				 FFTW_ESTIMATE);
+  fftw_plan p = fftw_plan_dft_2d(srchdim,srchdim,
+				 reinterpret_cast<fftw_complex*>(afftin),
+				 reinterpret_cast<fftw_complex*>(afftout),
+				 FFTW_FORWARD, FFTW_ESTIMATE);
   fftw_execute(p);
   fftw_destroy_plan(p);
    
-  p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_FORWARD,
-		       FFTW_ESTIMATE);
+  p = fftw_plan_dft_2d(srchdim,srchdim,
+		       reinterpret_cast<fftw_complex*>(bfftin),
+		       reinterpret_cast<fftw_complex*>(bfftout),
+		       FFTW_FORWARD, FFTW_ESTIMATE);
   fftw_execute(p);
   fftw_destroy_plan(p);
       
-  afftout[0][0] = 0.;
-  afftout[0][1] = 0.;
+  afftout[0] = std::complex<double>(0,0);
   if(!nohpf) 
     for(int i=1;i<srchdim;i++) {
-      afftout[i][0] = 0.;
-      afftout[i][1] = 0.;
-      afftout[i*srchdim][0] = 0.;
-      afftout[i*srchdim][1] = 0.;
+      afftout[i] = std::complex<double>(0,0);
+      afftout[i*srchdim] = std::complex<double>(0,0);
     }
    
   for(int i=0;i<srchdim;i++)
     for(int j=0;j<srchdim;j++) {
-      double bij = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][0]+
-	afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][1];
-      double bij1 = afftout[j*srchdim+i][0]*bfftout[j*srchdim+i][1]-
-	afftout[j*srchdim+i][1]*bfftout[j*srchdim+i][0];
+      double bij = afftout[j*srchdim+i].real()*bfftout[j*srchdim+i].real()+
+	afftout[j*srchdim+i].imag()*bfftout[j*srchdim+i].imag();
+      double bij1 = afftout[j*srchdim+i].real()*bfftout[j*srchdim+i].imag()-
+	afftout[j*srchdim+i].imag()*bfftout[j*srchdim+i].real();
       double v = sqrt(bij*bij+bij1*bij1);
       if(v<1.e-6) 
 	v = 1.e-6;
-      bfftin[j*srchdim+i][0] = bij/v;
-      bfftin[j*srchdim+i][1] = bij1/v;
+      bfftin[j*srchdim+i]= std::complex<double>(bij/v, bij1/v);
     }
-  p = fftw_plan_dft_2d(srchdim,srchdim,bfftin,bfftout,FFTW_BACKWARD,
-		       FFTW_ESTIMATE);
+  p = fftw_plan_dft_2d(srchdim,srchdim,
+		       reinterpret_cast<fftw_complex*>(bfftin),
+		       reinterpret_cast<fftw_complex*>(bfftout),
+		       FFTW_BACKWARD, FFTW_ESTIMATE);
   fftw_execute(p);
   fftw_destroy_plan(p);
 
@@ -254,12 +274,12 @@ void PhaseCorrelationMatcher::rfit
    
   for(int i=0;i<quadmark;i++)
     for(int j=0;j<quadmark;j++) {
-      double t = bfftout[i*srchdim+j][0];
-      bfftout[i*srchdim+j][0] = bfftout[(i+quadmark)*srchdim+j+quadmark][0];
-      bfftout[(i+quadmark)*srchdim+j+quadmark][0] = t;
-      t = bfftout[(i+quadmark)*srchdim+j][0];
-      bfftout[(i+quadmark)*srchdim+j][0] = bfftout[i*srchdim+j+quadmark][0];
-      bfftout[i*srchdim+j+quadmark][0] = t;
+      double t = bfftout[i*srchdim+j].real();
+      bfftout[i*srchdim+j].real(bfftout[(i+quadmark)*srchdim+j+quadmark].real());
+      bfftout[(i+quadmark)*srchdim+j+quadmark].real(t);
+      t = bfftout[(i+quadmark)*srchdim+j].real();
+      bfftout[(i+quadmark)*srchdim+j].real(bfftout[i*srchdim+j+quadmark].real());
+      bfftout[i*srchdim+j+quadmark].real(t);
     }
 
    double tvmax = -1.e20;
@@ -267,7 +287,7 @@ void PhaseCorrelationMatcher::rfit
    int jxmax = mincor;
    for(int i=mincor;i<maxcor;i++)
       for(int j=mincor;j<maxcor;j++) {
-	double rv = bfftout[j*srchdim+i][0];
+	double rv = bfftout[j*srchdim+i].real();
 	if(rv>tvmax) { 
 	  tvmax = rv; 
 	  ixmax = i; 
@@ -285,8 +305,11 @@ void PhaseCorrelationMatcher::rfit
    *vsoff = ixmax-quadmark;
    for(int i=0;i<3;i++)
      for(int j=0;j<3;j++)
-       corr[j][i] = bfftout[(jxmax+j-1)*srchdim+ixmax+i-1][0];
+       corr[j][i] = bfftout[(jxmax+j-1)*srchdim+ixmax+i-1].real();
    return;
+#else
+   throw Exception("Need FFTW library to use PhaseCorrelationMatcher");
+#endif   
 }
 
 //-----------------------------------------------------------------------

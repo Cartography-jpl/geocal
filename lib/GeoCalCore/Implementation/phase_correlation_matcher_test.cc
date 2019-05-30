@@ -2,6 +2,7 @@
 #include "phase_correlation_matcher.h"
 #include "geometric_model_image.h"
 #include "quadratic_geometric_model.h"
+#include "geocal_config.h"
 #include "vicar_lite_file.h"
 using namespace GeoCal;
 
@@ -9,6 +10,9 @@ BOOST_FIXTURE_TEST_SUITE(phase_correlation_matcher, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(picmtch4_test)
 {
+#ifndef HAVE_FFTW
+  return;
+#endif    
   // This test matches the picmtch4 tests. The data used here was
   // extracted for that test.
   boost::shared_ptr<RasterImage> img1(new VicarLiteRasterImage(test_data_dir() + "phase_correlation/xxim1"));
@@ -61,6 +65,9 @@ BOOST_AUTO_TEST_CASE(picmtch4_test)
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
+#ifndef HAVE_FFTW
+  return;
+#endif    
   if(!have_serialize_supported())
     return;
   boost::shared_ptr<ImageMatcher> m(new PhaseCorrelationMatcher(32,96));

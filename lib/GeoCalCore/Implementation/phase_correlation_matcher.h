@@ -2,7 +2,7 @@
 #define PHASE_CORRELATION_MATCHER_H
 #include "image_matcher.h"
 #include <boost/utility.hpp>
-#include <fftw3.h>
+#include <complex>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -72,7 +72,7 @@ public:
   // we'll move this back to private shortly.
   //private:
   int fftsize, search;
-  fftw_complex *afftin,*afftout,*bfftin,*bfftout;
+  std::complex<double> *afftin,*afftout,*bfftin,*bfftout;
   bool nohpf; // If true, shut off high pass filter.
   bool subpix; // If true, then get subpixel accuracy.
   mutable double vmax;

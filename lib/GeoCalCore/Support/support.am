@@ -61,10 +61,8 @@ libgeocal_la_SOURCES+= @srcsupport@/geocal_serialize_function.cc
 geocalinc_HEADERS+=@srcsupport@/geocal_serialize_support.h
 libgeocal_la_SOURCES+= @srcsupport@/blitz_array_serialize_support.cc
 geocalinc_HEADERS+=@srcsupport@/blitz_array_serialize_support.h
-if HAVE_FFTW
 geocalinc_HEADERS+= @srcsupport@/geocal_fftw.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_fftw.cc
-endif
 if HAVE_HDF5
 geocalinc_HEADERS+= @srcsupport@/hdf_file.h
 libgeocal_la_SOURCES+= @srcsupport@/hdf_file.cc
@@ -111,7 +109,7 @@ SWIG_SRC += @swigsrc@/tiled_file_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/tiled_file.i
 SWIG_SRC += @swigsrc@/geocal_serialize_function_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/geocal_serialize_function.i
-SWIG_SRC_FFTW += @swigsrc@/geocal_fftw_wrap.cc
+SWIG_SRC += @swigsrc@/geocal_fftw_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/geocal_fftw.i
 SWIG_SRC_HDF5 += @swigsrc@/hdf_file_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/hdf_file.i
@@ -138,9 +136,7 @@ geocal_test_all_SOURCES+= @srcsupport@/geocal_gsl_root_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/covariance_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/statistic_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/blitz_array_serialize_support_test.cc
-if HAVE_FFTW
 geocal_test_all_SOURCES+= @srcsupport@/geocal_fftw_test.cc 
-endif
 if HAVE_HDF5
 geocal_test_all_SOURCES+= @srcsupport@/hdf_file_test.cc 
 endif

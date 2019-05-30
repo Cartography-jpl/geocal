@@ -26,6 +26,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_geocal_time)(void);
   INIT_TYPE INIT_FUNC(_tiled_file)(void);
   INIT_TYPE INIT_FUNC(_geocal_serialize_function)(void);
+  INIT_TYPE INIT_FUNC(_geocal_fftw)(void);
   INIT_TYPE INIT_FUNC(_image_coordinate)(void);
   INIT_TYPE INIT_FUNC(_tie_point)(void);
   INIT_TYPE INIT_FUNC(_with_parameter)(void);
@@ -97,6 +98,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_location_to_file)(void);
   INIT_TYPE INIT_FUNC(_ray_intersect)(void);
   INIT_TYPE INIT_FUNC(_dem_match)(void);
+  INIT_TYPE INIT_FUNC(_phase_correlation_matcher)(void);
   INIT_TYPE INIT_FUNC(_quadratic_geometric_model)(void);
   INIT_TYPE INIT_FUNC(_geometric_model_image)(void);
   INIT_TYPE INIT_FUNC(_memory_multi_band)(void);
@@ -113,6 +115,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_rpc_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_ipi_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_eci_tod)(void);
+  INIT_TYPE INIT_FUNC(_eci_tod_burl)(void);
   INIT_TYPE INIT_FUNC(_quaternion_camera)(void);
   INIT_TYPE INIT_FUNC(_camera_rational_polynomial)(void);
   INIT_TYPE INIT_FUNC(_camera_radial_distortion)(void);
@@ -195,13 +198,6 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_air_mspi_igc)(void);
   INIT_TYPE INIT_FUNC(_air_mspi_igc_collection)(void);
   INIT_TYPE INIT_FUNC(_jia_sample)(void);
-#ifdef HAVE_CARTO
-  INIT_TYPE INIT_FUNC(_eci_tod_burl)(void);
-#endif
-#ifdef HAVE_FFTW
-  INIT_TYPE INIT_FUNC(_geocal_fftw)(void);
-  INIT_TYPE INIT_FUNC(_phase_correlation_matcher)(void);
-#endif
 #ifdef HAVE_HDF5
   INIT_TYPE INIT_FUNC(_hdf_file)(void);
   INIT_TYPE INIT_FUNC(_hdf_orbit)(void);
@@ -252,6 +248,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_geocal_time", INIT_FUNC(_geocal_time));
   INIT_MODULE(module, "_tiled_file", INIT_FUNC(_tiled_file));
   INIT_MODULE(module, "_geocal_serialize_function", INIT_FUNC(_geocal_serialize_function));
+  INIT_MODULE(module, "_geocal_fftw", INIT_FUNC(_geocal_fftw));
   INIT_MODULE(module, "_image_coordinate", INIT_FUNC(_image_coordinate));
   INIT_MODULE(module, "_tie_point", INIT_FUNC(_tie_point));
   INIT_MODULE(module, "_with_parameter", INIT_FUNC(_with_parameter));
@@ -323,6 +320,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_location_to_file", INIT_FUNC(_location_to_file));
   INIT_MODULE(module, "_ray_intersect", INIT_FUNC(_ray_intersect));
   INIT_MODULE(module, "_dem_match", INIT_FUNC(_dem_match));
+  INIT_MODULE(module, "_phase_correlation_matcher", INIT_FUNC(_phase_correlation_matcher));
   INIT_MODULE(module, "_quadratic_geometric_model", INIT_FUNC(_quadratic_geometric_model));
   INIT_MODULE(module, "_geometric_model_image", INIT_FUNC(_geometric_model_image));
   INIT_MODULE(module, "_memory_multi_band", INIT_FUNC(_memory_multi_band));
@@ -339,6 +337,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_rpc_image_ground_connection", INIT_FUNC(_rpc_image_ground_connection));
   INIT_MODULE(module, "_ipi_image_ground_connection", INIT_FUNC(_ipi_image_ground_connection));
   INIT_MODULE(module, "_eci_tod", INIT_FUNC(_eci_tod));
+  INIT_MODULE(module, "_eci_tod_burl", INIT_FUNC(_eci_tod_burl));
   INIT_MODULE(module, "_quaternion_camera", INIT_FUNC(_quaternion_camera));
   INIT_MODULE(module, "_camera_rational_polynomial", INIT_FUNC(_camera_rational_polynomial));
   INIT_MODULE(module, "_camera_radial_distortion", INIT_FUNC(_camera_radial_distortion));
@@ -421,13 +420,6 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_air_mspi_igc", INIT_FUNC(_air_mspi_igc));
   INIT_MODULE(module, "_air_mspi_igc_collection", INIT_FUNC(_air_mspi_igc_collection));
   INIT_MODULE(module, "_jia_sample", INIT_FUNC(_jia_sample));
-#ifdef HAVE_CARTO
-  INIT_MODULE(module, "_eci_tod_burl", INIT_FUNC(_eci_tod_burl));
-#endif
-#ifdef HAVE_FFTW
-  INIT_MODULE(module, "_geocal_fftw", INIT_FUNC(_geocal_fftw));
-  INIT_MODULE(module, "_phase_correlation_matcher", INIT_FUNC(_phase_correlation_matcher));
-#endif
 #ifdef HAVE_HDF5
   INIT_MODULE(module, "_hdf_file", INIT_FUNC(_hdf_file));
   INIT_MODULE(module, "_hdf_orbit", INIT_FUNC(_hdf_orbit));

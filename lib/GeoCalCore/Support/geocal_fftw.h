@@ -2,8 +2,8 @@
 #define GEOCAL_FFTW_H
 #include "printable.h"
 #include <blitz/array.h>
+#include <boost/utility.hpp>
 #include <complex>
-#include <fftw3.h>
 
 namespace GeoCal {
 
@@ -13,7 +13,8 @@ namespace GeoCal {
   a complex results.
 *******************************************************************/
 
-class Fftw2dForward : public Printable<Fftw2dForward> {
+class Fftw2dForward : public Printable<Fftw2dForward>,
+		      public boost::noncopyable {
 public:
   Fftw2dForward(int Nrow, int Ncol);
   virtual ~Fftw2dForward();
@@ -31,13 +32,7 @@ public:
 //-----------------------------------------------------------------------
 
   blitz::Array<std::complex<double>, 2> data_out;
-
-//-----------------------------------------------------------------------
-/// Run the FFT on the data in data_in, with the results going to
-/// data_out. Note that data_in may possibly be destroyed.
-//-----------------------------------------------------------------------
-
-  void run_fft() { fftw_execute(plan); }
+  void run_fft();
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -48,7 +43,10 @@ public:
        << data_in.cols();
   }
 private:
-  fftw_plan plan;
+  // Use void *, just so we don't depend on having fftw available in
+  // header file.
+  //fftw_plan plan;
+  void* plan;
 };
 
 /****************************************************************//**
@@ -62,7 +60,8 @@ private:
   data. 
 *******************************************************************/
 
-class Fftw2dBackward : public Printable<Fftw2dBackward> {
+class Fftw2dBackward : public Printable<Fftw2dBackward>,
+		       public boost::noncopyable {
 public:
   Fftw2dBackward(int Nrow, int Ncol);
   virtual ~Fftw2dBackward();
@@ -80,13 +79,7 @@ public:
 //-----------------------------------------------------------------------
 
   blitz::Array<double, 2> data_out;
-
-//-----------------------------------------------------------------------
-/// Run the FFT on the data in data_in, with the results going to
-/// data_out. Note that data_in may possibly be destroyed.
-//-----------------------------------------------------------------------
-
-  void run_fft() { fftw_execute(plan); }
+  void run_fft();
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -97,7 +90,10 @@ public:
        << data_in.cols();
   }
 private:
-  fftw_plan plan;
+  // Use void *, just so we don't depend on having fftw available in
+  // header file.
+  //fftw_plan plan;
+  void* plan;
 };
 }
 #endif

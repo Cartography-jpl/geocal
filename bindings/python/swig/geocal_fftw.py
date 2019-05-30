@@ -208,7 +208,7 @@ class Fftw2dForward(geocal_swig.generic_object.GenericObject):
     def run_fft(self):
         """
 
-        void GeoCal::Fftw2dForward::run_fft()
+        void Fftw2dForward::run_fft()
         Run the FFT on the data in data_in, with the results going to
         data_out.
 
@@ -253,7 +253,7 @@ class Fftw2dBackward(geocal_swig.generic_object.GenericObject):
     def run_fft(self):
         """
 
-        void GeoCal::Fftw2dBackward::run_fft()
+        void Fftw2dBackward::run_fft()
         Run the FFT on the data in data_in, with the results going to
         data_out.
 

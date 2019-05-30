@@ -84,10 +84,8 @@ geocalinc_HEADERS+= @srcimplementation@/planet_coordinate.h
 libgeocal_la_SOURCES+= @srcimplementation@/planet_coordinate.cc
 geocalinc_HEADERS+= @srcimplementation@/iterative_morphological_dilation.h
 libgeocal_la_SOURCES+= @srcimplementation@/iterative_morphological_dilation.cc
-if HAVE_CARTO
 geocalinc_HEADERS+= @srcimplementation@/eci_tod_burl.h
 libgeocal_la_SOURCES+= @srcimplementation@/eci_tod_burl.cc
-endif
 geocalinc_HEADERS+= @srcimplementation@/quaternion_camera.h
 libgeocal_la_SOURCES+= @srcimplementation@/quaternion_camera.cc
 geocalinc_HEADERS+= @srcimplementation@/camera_rational_polynomial.h
@@ -118,10 +116,8 @@ geocalinc_HEADERS+= @srcimplementation@/rolling_shutter_constant_time_table.h
 libgeocal_la_SOURCES+= @srcimplementation@/rolling_shutter_constant_time_table.cc
 geocalinc_HEADERS+= @srcimplementation@/piecewise_linear.h
 libgeocal_la_SOURCES+= @srcimplementation@/piecewise_linear.cc
-if HAVE_FFTW
 geocalinc_HEADERS+= @srcimplementation@/phase_correlation_matcher.h
 libgeocal_la_SOURCES+= @srcimplementation@/phase_correlation_matcher.cc
-endif
 geocalinc_HEADERS+= @srcimplementation@/quadratic_geometric_model.h
 libgeocal_la_SOURCES+= @srcimplementation@/quadratic_geometric_model.cc
 geocalinc_HEADERS+= @srcimplementation@/geometric_model_image.h
@@ -293,7 +289,7 @@ SWIG_SRC += @swigsrc@/ray_intersect_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/ray_intersect.i
 SWIG_SRC += @swigsrc@/dem_match_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/dem_match.i
-SWIG_SRC_FFTW += @swigsrc@/phase_correlation_matcher_wrap.cc
+SWIG_SRC += @swigsrc@/phase_correlation_matcher_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/phase_correlation_matcher.i
 SWIG_SRC += @swigsrc@/quadratic_geometric_model_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/quadratic_geometric_model.i
@@ -343,7 +339,7 @@ SWIG_SRC += @swigsrc@/ipi_image_ground_connection_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/ipi_image_ground_connection.i
 SWIG_SRC += @swigsrc@/eci_tod_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/eci_tod.i
-SWIG_SRC_CARTO += @swigsrc@/eci_tod_burl_wrap.cc
+SWIG_SRC += @swigsrc@/eci_tod_burl_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/eci_tod_burl.i
 SWIG_SRC += @swigsrc@/quaternion_camera_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/quaternion_camera.i
@@ -461,9 +457,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/ipi_image_ground_connection_test.c
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/planet_coordinate_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/iterative_morphological_dilation_test.cc
-if HAVE_CARTO
 geocal_test_all_SOURCES+= @srcimplementation@/eci_tod_burl_test.cc
-endif
 geocal_test_all_SOURCES+= @srcimplementation@/quaternion_camera_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/camera_rational_polynomial_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/camera_radial_distortion_test.cc
@@ -474,9 +468,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/ray_intersect_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_image_to_image_match_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/surface_image_to_image_match_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/dem_match_test.cc
-if HAVE_FFTW
 geocal_test_all_SOURCES+= @srcimplementation@/phase_correlation_matcher_test.cc
-endif
 geocal_test_all_SOURCES+= @srcimplementation@/quadratic_geometric_model_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/geometric_model_image_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/igc_ray_caster_test.cc

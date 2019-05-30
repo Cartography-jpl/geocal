@@ -7193,7 +7193,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Fftw2dForward_data_out_get", (PyCFunction)_wrap_Fftw2dForward_data_out_get, METH_O, NULL},
 	 { (char *)"Fftw2dForward_run_fft", (PyCFunction)_wrap_Fftw2dForward_run_fft, METH_O, (char *)"\n"
 		"\n"
-		"void GeoCal::Fftw2dForward::run_fft()\n"
+		"void Fftw2dForward::run_fft()\n"
 		"Run the FFT on the data in data_in, with the results going to\n"
 		"data_out.\n"
 		"\n"
@@ -7218,7 +7218,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Fftw2dBackward_data_out_get", (PyCFunction)_wrap_Fftw2dBackward_data_out_get, METH_O, NULL},
 	 { (char *)"Fftw2dBackward_run_fft", (PyCFunction)_wrap_Fftw2dBackward_run_fft, METH_O, (char *)"\n"
 		"\n"
-		"void GeoCal::Fftw2dBackward::run_fft()\n"
+		"void Fftw2dBackward::run_fft()\n"
 		"Run the FFT on the data in data_in, with the results going to\n"
 		"data_out.\n"
 		"\n"

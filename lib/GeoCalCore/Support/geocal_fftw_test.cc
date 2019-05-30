@@ -1,5 +1,6 @@
 #include "unit_test_support.h"
 #include "geocal_fftw.h"
+#include "geocal_config.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -7,6 +8,9 @@ BOOST_FIXTURE_TEST_SUITE(geocal_fftw, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(set_of_point)
 {
+#ifndef HAVE_FFTW
+  return;
+#endif  
 // Create a simple lattice and then take the FFT of it
   Fftw2dForward fft(256, 256);
   fft.data_in = 0;

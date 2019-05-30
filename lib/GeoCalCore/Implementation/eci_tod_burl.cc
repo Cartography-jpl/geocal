@@ -3,9 +3,12 @@
 #include "wgs84_constant.h"
 #include "geocal_matrix.h"
 #include "geocal_serialize_support.h"
+#include "geocal_config.h"
+#ifdef HAVE_CARTO
 extern "C" {
 #include "carto/eos_coords.h"
 }
+#endif
 
 using namespace GeoCal;
 
@@ -40,9 +43,13 @@ boost::shared_ptr<CartesianFixed> EciTodBurl::convert_to_cf(const Time& T) const
 //-----------------------------------------------------------------------
 
 void EciTodBurl::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
-{ 
+{
+#ifdef HAVE_CARTO
   double ci_to_j2000[9];
   eos_coords(T.et(), T.acs() + delta_ut1, ci_to_j2000, &Ci_to_cf[0][0]);
+#else
+  throw Exception("Need to compile with carto library to use EciTodBurl");
+#endif    
 }
 
 //-----------------------------------------------------------------------

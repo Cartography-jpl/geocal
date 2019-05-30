@@ -3142,8 +3142,7 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
 	-I$(srcdir)/@srcsupport@ -I$(srcdir)/@srcsupport@/boost \
 	-I@srcsupport@ -I$(srcdir)/@srcinterface@ \
 	-I$(srcdir)/@srcimplementation@ -I$(srcdir)/@srccartlab@ \
-	-I$(srcdir)/@srcmspi@ -I$(srcdir)/@srcoco3@ \
-	-DSWIG_MAPPER_NAMESPACE=GeoCal
+	-I$(srcdir)/@srcmspi@ -I$(srcdir)/@srcoco3@
 
 #=================================================================
 # Some flags needed for GCC compilers.
@@ -4047,7 +4046,8 @@ libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
 	$(CODE_COVERAGE_CPPFLAGS) $(am__append_2) $(am__append_4) \
-	$(am__append_6) $(am__append_8) $(am__append_10)
+	$(am__append_6) $(am__append_8) $(am__append_10) \
+	-DSWIG_MAPPER_NAMESPACE=GeoCal
 EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND) \
 	$(CARTO_BUILD_DEPEND)
 libgeocal_la_LIBADD = $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(FLIBS) \
@@ -4115,7 +4115,8 @@ sdbx_HEADERS = @srcsdbx@/sdbx/BTree.h @srcsdbx@/sdbx/DiskTreeBackend.h \
 @BUILD_LIBRAW_TRUE@	@srcraw@/var_defines.h
 @BUILD_LIBRAW_TRUE@libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
 swiginc_HEADERS = @swigrules@/include/swig_python_attribute.i \
-	@swigrules@/include/my_shared_ptr.i
+	@swigrules@/include/my_shared_ptr.i \
+	@swigrules@/include/shared_ptr_type_mapper.i
 pkgpythonswig_PYTHON = @swigrules@/__init__.py $(patsubst %_wrap.cc, \
 	%.py, $(COMPILE_SWIG_SRC))
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la

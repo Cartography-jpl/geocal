@@ -4322,6 +4322,9 @@ public:
 };
 
 
+#define SWIG_MAPPER_NAMESPACE GeoCal
+
+
 // If the object passed in actually a python director, we don't own
 // it. Instead, when the reference count goes to 0 we just decrement
 // our reference to it.

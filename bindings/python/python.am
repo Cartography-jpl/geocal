@@ -34,6 +34,6 @@ geocalinc_HEADERS+= @swigrules@/lib/python_lib_init.h
 geocalinc_HEADERS+= @swigrules@/lib/swig_type_mapper.h
 geocalinc_HEADERS+= @swigrules@/lib/swig_to_python.h
 libgeocal_la_SOURCES+= @swigrules@/lib/swig_type_mapper_base.cc
-AM_CPPFLAGS+= -DSWIG_MAPPER_NAMESPACE=GeoCal
+libgeocal_la_CPPFLAGS+= -DSWIG_MAPPER_NAMESPACE=GeoCal
 
 

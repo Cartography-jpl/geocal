@@ -29,6 +29,7 @@
 swiginc_HEADERS = 
 swiginc_HEADERS += @swigrules@/include/swig_python_attribute.i
 swiginc_HEADERS += @swigrules@/include/my_shared_ptr.i
+swiginc_HEADERS += @swigrules@/include/shared_ptr_type_mapper.i
 
 # Allow files to be include in other directories
 AM_CPPFLAGS+= -I$(srcdir)/@swigrules@/include

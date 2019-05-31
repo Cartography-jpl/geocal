@@ -15,7 +15,7 @@ template<class T, int D> inline boost::array<T, D>
 {
   blitz::Array<T, 1> b = to_blitz_array<T, 1>(numpy);
   if(b.rows() != D)
-     throw GeoCal::Exception("Array not expeced size");
+    throw std::runtime_error("Array not expeced size");
   boost::array<T, D> res;
   for(int i = 0; i < D; ++i)
     res[i]= b(i);

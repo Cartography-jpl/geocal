@@ -2,6 +2,7 @@
 // (Not really c++, but closest emacs mode)
 
 %include "swig_boost_array_inc.i"
+%include "swig_array_inc.i"
 
 namespace boost {
 template<class T, int D> class array {
@@ -85,7 +86,7 @@ public:
     }
     void _ ## NAME(const blitz::Array<TYPE, 1>& V) {
       if(V.rows() != LEN)
-	throw GeoCal::Exception("Array not expeced size");
+	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < LEN; ++i)
         $self->NAME[i] = V(i);
     }

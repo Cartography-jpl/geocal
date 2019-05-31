@@ -3712,19 +3712,6 @@ namespace swig {
 #include <boost/shared_ptr.hpp>
 #include <boost/rational.hpp>
 
-//--------------------------------------------------------------
-// Helper class for python that holds an object and when deleted
-// decrements the reference to it.
-//--------------------------------------------------------------
-
-class PythonObject {
-public:
-  PythonObject(PyObject* Obj = 0) : obj(Obj) {}
-  ~PythonObject() { Py_XDECREF(obj); }
-  PyObject* obj;
-  operator PyObject*() {return obj;}
-};
-
 
 #include <iostream>
 
@@ -5363,8 +5350,20 @@ namespace swig
 // We'll have to update this as the numpy API increases
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
-#include "geocal_exception.h"
 
+//--------------------------------------------------------------
+// Helper class for python that holds an object and when deleted
+// decrements the reference to it.
+//--------------------------------------------------------------
+
+class PythonObject {
+public:
+  PythonObject(PyObject* Obj = 0) : obj(Obj) {}
+  ~PythonObject() { Py_XDECREF(obj); }
+  PyObject* obj;
+  operator PyObject*() {return obj;}
+};
+  
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
 PyObject* numpy_dot_float32();
@@ -5502,11 +5501,11 @@ template<class T, int D> inline blitz::Array<T, D>
     std::cerr << PyArray_NDIM(numpy) << "\n"
 	      << D << "\n";
     throw 
-      GeoCal::Exception("Dimension of array is not the expected size");
+      std::runtime_error("Dimension of array is not the expected size");
   }
   if(PyArray_TYPE(numpy) != type_to_npy<T>()) {
     throw 
-      GeoCal::Exception("Type of array not the expected type");
+      std::runtime_error("Type of array not the expected type");
   }
   blitz::TinyVector<int, D> shape, stride;
   for(int i = 0; i < D; ++i) {
@@ -5516,7 +5515,7 @@ template<class T, int D> inline blitz::Array<T, D>
     stride(i) = PyArray_STRIDE(numpy, i) / sizeof(T);
     if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE(numpy, i)) {
       throw 
-	GeoCal::Exception("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
+	std::runtime_error("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
     }
   }
   return blitz::Array<T, D>((T*)PyArray_DATA(numpy), shape, stride, 
@@ -5533,7 +5532,7 @@ template<class T, int D> inline boost::array<T, D>
 {
   blitz::Array<T, 1> b = to_blitz_array<T, 1>(numpy);
   if(b.rows() != D)
-     throw GeoCal::Exception("Array not expeced size");
+    throw std::runtime_error("Array not expeced size");
   boost::array<T, D> res;
   for(int i = 0; i < D; ++i)
     res[i]= b(i);

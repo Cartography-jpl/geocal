@@ -15,19 +15,6 @@
 %{
 #include <boost/shared_ptr.hpp>
 #include <boost/rational.hpp>
-
-//--------------------------------------------------------------
-// Helper class for python that holds an object and when deleted
-// decrements the reference to it.
-//--------------------------------------------------------------
-
-class PythonObject {
-public:
-  PythonObject(PyObject* Obj = 0) : obj(Obj) {}
-  ~PythonObject() { Py_XDECREF(obj); }
-  PyObject* obj;
-  operator PyObject*() {return obj;}
-};
 %}
 
 // Short cut for ingesting a base class

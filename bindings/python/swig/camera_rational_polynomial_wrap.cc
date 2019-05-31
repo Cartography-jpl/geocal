@@ -6674,7 +6674,7 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial__v_kappa(PyObject *SWIGUNUSED
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -6731,7 +6731,7 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial__v_kappa_inverse(PyObject *SW
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -6827,7 +6827,7 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial_apply_rational(PyObject *SWIG
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -6911,7 +6911,7 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial_construct_chi_matrix(PyObject
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:

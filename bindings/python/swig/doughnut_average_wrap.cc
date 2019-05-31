@@ -7173,7 +7173,7 @@ SWIGINTERN PyObject *_wrap_DoughnutAverage_cvdnorm(PyObject *SWIGUNUSEDPARM(self
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -7261,7 +7261,7 @@ SWIGINTERN PyObject *_wrap_DoughnutAverage_pandif(PyObject *SWIGUNUSEDPARM(self)
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:

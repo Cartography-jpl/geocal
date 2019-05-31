@@ -6570,7 +6570,7 @@ void SwigDirector_Orbit::parameter(blitz::Array< double,1 > const &V) {
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(V);
     PyArray_SetBaseObject((PyArrayObject*)res, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
     obj0 = res;
   }
   if (!swig_get_self()) {
@@ -6765,7 +6765,7 @@ void SwigDirector_Orbit::parameter_subset(blitz::Array< double,1 > const &V) {
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(V);
     PyArray_SetBaseObject((PyArrayObject*)res, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
     obj0 = res;
   }
   if (!swig_get_self()) {
@@ -11447,7 +11447,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__velocity_ci(PyObject *SWIGUNUSEDPARM(self)
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -14220,7 +14220,7 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData__velocity_cf(PyObject *SWIGUNUSED
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -17881,7 +17881,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter__SWIG_0(PyObject *SWIGUNUSEDPARM(s
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -18260,7 +18260,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter_subset__SWIG_0(PyObject *SWIGUNUSE
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -18641,7 +18641,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter_mask(PyObject *SWIGUNUSEDPARM(self
     blitz::Array<bool, 1>* t = new blitz::Array<bool, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_bool_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_bool_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:
@@ -18782,7 +18782,7 @@ SWIGINTERN PyObject *_wrap_Orbit_interpolate__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*arg7);
     PyArray_SetBaseObject((PyArrayObject*)res, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
     resultobj = SWIG_Python_AppendOutput(resultobj, res);
   }
   {
@@ -18798,7 +18798,7 @@ SWIGINTERN PyObject *_wrap_Orbit_interpolate__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*arg8);
     PyArray_SetBaseObject((PyArrayObject*)res, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
     resultobj = SWIG_Python_AppendOutput(resultobj, res);
   }
   return resultobj;

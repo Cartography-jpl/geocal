@@ -8941,7 +8941,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg3);
     PyArray_SetBaseObject((PyArrayObject*)res, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
     resultobj = SWIG_Python_AppendOutput(resultobj, res);
   }
   if (SWIG_IsTmpObj(res4)) {
@@ -8963,7 +8963,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg5);
     PyArray_SetBaseObject((PyArrayObject*)res, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
     resultobj = SWIG_Python_AppendOutput(resultobj, res);
   }
   return resultobj;

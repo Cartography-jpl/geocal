@@ -11485,7 +11485,7 @@ SWIGINTERN PyObject *_wrap_PiecewiseLinear__v_parameter_mask__SWIG_0(PyObject *S
     blitz::Array<bool, 1>* t = new blitz::Array<bool, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_bool_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_bool_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:

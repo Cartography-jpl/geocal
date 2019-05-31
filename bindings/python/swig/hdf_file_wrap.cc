@@ -6988,7 +6988,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_1d(PyObject *SWIGUNUSEDPARM(self)
     blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -7059,7 +7059,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_2d(PyObject *SWIGUNUSEDPARM(self)
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -7130,7 +7130,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_3d(PyObject *SWIGUNUSEDPARM(self)
     blitz::Array<double, 3>* t = new blitz::Array<double, 3>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -7201,7 +7201,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_4d(PyObject *SWIGUNUSEDPARM(self)
     blitz::Array<double, 4>* t = new blitz::Array<double, 4>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_4_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_4_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -7272,7 +7272,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_1d(PyObject *SWIGUNUSEDPARM(self), P
     blitz::Array<int, 1>* t = new blitz::Array<int, 1>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_1_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_int_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -7343,7 +7343,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_2d(PyObject *SWIGUNUSEDPARM(self), P
     blitz::Array<int, 2>* t = new blitz::Array<int, 2>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_2_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_int_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -7414,7 +7414,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_3d(PyObject *SWIGUNUSEDPARM(self), P
     blitz::Array<int, 3>* t = new blitz::Array<int, 3>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_3_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_int_3_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -7485,7 +7485,7 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_4d(PyObject *SWIGUNUSEDPARM(self), P
     blitz::Array<int, 4>* t = new blitz::Array<int, 4>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_4_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_int_4_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;

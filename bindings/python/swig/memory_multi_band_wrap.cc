@@ -6659,7 +6659,7 @@ SWIGINTERN PyObject *_wrap_MemoryMultiBand__v_data(PyObject *SWIGUNUSEDPARM(self
     blitz::Array<int, 3>* t = new blitz::Array<int, 3>(result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_3_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_int_3_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:

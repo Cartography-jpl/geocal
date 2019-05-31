@@ -214,7 +214,7 @@ public:
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>($1);
   PyArray_SetBaseObject((PyArrayObject*)$result, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
 }
 
 //--------------------------------------------------------------
@@ -234,7 +234,7 @@ public:
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
   PyArray_SetBaseObject((PyArrayObject*)$result, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
 }
 
 %typemap(out) blitz::Array<TYPE, DIM>& {
@@ -251,7 +251,7 @@ public:
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
   PyArray_SetBaseObject((PyArrayObject*)$result, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
 }
 
 //--------------------------------------------------------------
@@ -284,7 +284,7 @@ public:
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
   PyArray_SetBaseObject((PyArrayObject*)res, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   $result = SWIG_AppendOutput($result, res);
 }
 
@@ -301,7 +301,7 @@ public:
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
   PyArray_SetBaseObject((PyArrayObject*)res, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   $result = SWIG_AppendOutput($result, res);
 }
 
@@ -318,7 +318,7 @@ public:
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>(*$1);
   PyArray_SetBaseObject((PyArrayObject*)res, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   $result = SWIG_AppendOutput($result, res);
 }
 
@@ -416,7 +416,7 @@ public:
   blitz::Array<TYPE, DIM>* t = new blitz::Array<TYPE, DIM>($1);
   PyArray_SetBaseObject((PyArrayObject*)res, 
 			SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | 0 ));
+				   $descriptor(blitz::Array<TYPE, DIM>*), 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   $input = res;
 }
 

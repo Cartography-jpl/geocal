@@ -6802,7 +6802,7 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand__v_data(PyObject *SWIGUNUSEDPARM(
     blitz::Array<double, 3>* t = new blitz::Array<double, 3>(*result);
     PyArray_SetBaseObject((PyArrayObject*)resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | 0 ));
+        SWIGTYPE_p_blitz__ArrayT_double_3_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
   }
   return resultobj;
 fail:

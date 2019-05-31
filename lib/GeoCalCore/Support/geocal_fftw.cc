@@ -1,4 +1,5 @@
 #include "geocal_fftw.h"
+#include "geocal_exception.h"
 #include "geocal_config.h"
 #ifdef HAVE_FFTW
 #include <fftw3.h>

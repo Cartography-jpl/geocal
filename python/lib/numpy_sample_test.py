@@ -1,5 +1,6 @@
 from test_support import *
 from geocal_swig import NumpySample
+import numpy as np
 
 # Note that these tests should be run with valgrind, otherwise we don't know
 # if the lifetimes are correct or not.
@@ -30,6 +31,69 @@ def test_lifetime_return_array():
     t = None
     print(a[0,0])
     assert a[0,0] == 1
-    print("Deleting last sample of numpy")
+    print("Deleting numpy array")
     a = None
     print("End of find me in valgrind")
+
+def test_lifetime_passed_array():
+    '''Send a numpy array to C++, and make sure it is still a valid 
+    blitz::array when the numpy object goes away.'''
+    print("Find me in valgrind")
+    a = np.array([[1.0,2],[3,4]])
+    t = NumpySample(a)
+    print("Deleting numpy array")
+    a = None
+    # Note, python doesn't actually free small objects, but keeps a pool
+    # to reuse it. See
+    # http://deeplearning.net/software/theano/tutorial/python-memory-management.html#internal-memory-management
+    # Not really sure how this interacts with numpy, but if you monitor
+    # a run of this (at least with the particular python/numpy version I
+    # tested with) the array never actually goes away. As a work around,
+    # reallocate a array of the same size. This seems to reuse the memory,
+    # so we can indirectly test if t has an old bad reference.
+    a = np.array([[4.0,5],[6,7]])
+    print(t.data[0,0])
+    assert t.data[0,0] == 1
+    print("Deleting NumpySample")
+    t = None
+    print("End of find me in valgrind")
+
+def test_lifetime_round_trip_array():
+    '''Send a numpy array to C++, and back out. Send a blitz::Array from
+    C++ to python, and then back to C++'''
+    a = np.array([[1.0,2],[3,4]])
+    t = NumpySample(a)
+    print("Deleting numpy array")
+    a = None
+    # Note, python doesn't actually free small objects, but keeps a pool
+    # to reuse it. See
+    # http://deeplearning.net/software/theano/tutorial/python-memory-management.html#internal-memory-management
+    # Not really sure how this interacts with numpy, but if you monitor
+    # a run of this (at least with the particular python/numpy version I
+    # tested with) the array never actually goes away. As a work around,
+    # reallocate a array of the same size. This seems to reuse the memory,
+    # so we can indirectly test if t has an old bad reference.
+    a = np.array([[4.0,5],[6,7]])
+    print(t.data[0,0])
+    assert t.data[0,0] == 1
+    b = t.data
+    print("Deleting NumpySample array")
+    t = None
+    print(b[0,0])
+    assert b[0,0] == 1
+    print("Deleting numpy array")
+    b = None
+    
+    t = NumpySample()
+    a = t.data
+    print("Deleting NumpySample")
+    t = NumpySample(a)
+    print("Deleting numpy array")
+    a = None
+    print(t.data[0,0])
+    assert t.data[0,0] == 1
+    
+    
+    
+    
+    

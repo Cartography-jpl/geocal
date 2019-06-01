@@ -3132,6 +3132,19 @@ namespace swig {
 
 // Don't want to use threads with ruby
 //#undef _REENTRANT
+
+// Forward declaration
+template<typename P_type> class PythonMemoryBlockReference;
+// This is a very evil kludge. We use one of the function names in
+// MemoryBlockReference
+// to sneak in a friend declaration so we can access the internal block_
+// variable. This is because we don't want to edit the actual blitz header.
+#define blockLength() _fake() {return 0;}	 \
+  friend class PythonMemoryBlockReference<T_type>; \
+  sizeType blockLength()
+#include <blitz/memblock.h>
+#undef blockLength
+  
 #include <blitz/array.h>
 #include <blitz/range.h>
 #define PY_ARRAY_UNIQUE_SYMBOL geocal_ARRAY_API
@@ -3156,7 +3169,71 @@ public:
   PyObject* obj;
   operator PyObject*() {return obj;}
 };
-  
+
+//--------------------------------------------------------------
+/// Special memory block for blitz. This doesn't actually own
+/// the data, rather it owns a reference to a PythonObject that
+/// keeps a reference to the numpy PythonObject so it doesn't
+/// go away on the python side while we are using it on the
+/// C++ side. 
+//--------------------------------------------------------------
+
+template<typename P_type>
+class PythonMemoryBlock : public blitz::MemoryBlock<P_type> {
+public:
+  typedef P_type T_type;
+  PythonMemoryBlock(PyObject* numpy_obj)
+    : blitz::MemoryBlock<P_type>(PyArray_NBYTES((PyArrayObject*) numpy_obj),
+		 (T_type *) PyArray_DATA((PyArrayObject*) numpy_obj)),
+      python_obj(numpy_obj)
+  {
+    Py_XINCREF(python_obj); 
+#ifdef BZ_DEBUG_LOG_ALLOCATIONS
+    std::cout << "PythonMemoryBlock: have reference to numpy object data at" << blitz::MemoryBlock<P_type>::data() << "\n"
+	      << "   numpy python object " << python_obj << "\n"
+	      << "   numpy python object ref count " << Py_REFCNT(python_obj) <<"\n";
+#endif    
+  }
+  virtual ~PythonMemoryBlock()
+  {
+    // Don't actually want to free real data. Instead, we just
+    // have the python_obj go out of scope to clean up our reference
+    // to it.
+    blitz::MemoryBlock<P_type>::dataBlockAddress() = 0;
+    Py_XDECREF(python_obj);
+#ifdef BZ_DEBUG_LOG_ALLOCATIONS
+    std::cout << "PythonMemoryBlock: removing reference to numpy object data at" << blitz::MemoryBlock<P_type>::data() << "\n"
+	      << "   numpy python object " << python_obj << "\n"
+	      << "   numpy python object ref count " << Py_REFCNT(python_obj) <<"\n";
+#endif    
+  }
+private:
+  PyObject* python_obj;
+};
+
+//--------------------------------------------------------------
+/// Don't actually need a special MemoryBlockReference, except
+/// that this is the only way to change the block of an existing
+/// MemoryBlockReference (e.g., a blitz::Array). So this briefly
+/// exists, uses itself to change the block, and then disappears.
+//--------------------------------------------------------------
+
+template<typename P_type>
+class PythonMemoryBlockReference : public blitz::MemoryBlockReference<P_type> {
+public:
+  typedef P_type T_type;
+  template<int N_rank>
+  PythonMemoryBlockReference(blitz::Array<T_type, N_rank>& a,
+			   PyObject* numpy_obj)
+    : blitz::MemoryBlockReference<T_type>(0, a.data(),
+					  blitz::neverDeleteData)
+  {
+    blitz::MemoryBlockReference<T_type>::block_ =
+      new PythonMemoryBlock<T_type>(numpy_obj);
+    a.changeBlock(*this);
+  }
+};
+ 
 PyObject* numpy_module();
 PyObject* numpy_dot_float64();
 PyObject* numpy_dot_float32();
@@ -3311,8 +3388,12 @@ template<class T, int D> inline blitz::Array<T, D>
 	std::runtime_error("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
     }
   }
-  return blitz::Array<T, D>((T*)PyArray_DATA(numpy), shape, stride, 
-			    blitz::neverDeleteData);
+  blitz::Array<T, D> a((T*)PyArray_DATA(numpy), shape, stride, 
+		       blitz::neverDeleteData);
+  // Stash a reference to numpy_obj in array, so it doesn't disappear
+  // while the blitz::Array still exists
+  PythonMemoryBlockReference<T> br(a, numpy_obj);
+  return a;
 }
 
 

@@ -44,6 +44,18 @@ namespace blitz {
 GeoCal::AutoDerivative<double> 
 pow2(const GeoCal::AutoDerivative<double>& x);
 }
+// This is from swig_array_inc.i. Because we need to alter the order
+// of inclusion, we need to copy this over. Only used if we are
+// compiling this is SWIG.
+#ifdef IN_SWIG
+template<typename P_type> class PythonMemoryBlockReference;
+#define blockLength() _fake() {return 0;}	 \
+  friend class PythonMemoryBlockReference<T_type>; \
+  sizeType blockLength()
+#include <blitz/memblock.h>
+#undef blockLength
+#endif
+
 #include <blitz/array.h>
 
 namespace GeoCal {

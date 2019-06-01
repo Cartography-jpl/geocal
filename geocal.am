@@ -185,7 +185,6 @@ if WITH_DOCUMENTATION
 
 EXTRA_DIST+= config/doxygen.cfg
 EXTRA_DIST+= config/doc_footer.html
-EXTRA_DIST+= config/doxy2swig.py
 EXTRA_DIST+= README.developer INSTALL
 doc/geocal.tag: $(geocalinc_HEADERS) $(libgeocal_la_SOURCES) config/doxygen.cfg $(DOXYGEN_TARGET)
 	$(MKDIR_P) doc/geocal

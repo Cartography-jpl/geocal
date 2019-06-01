@@ -197,8 +197,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 # Generate doxygen documentation
 @WITH_DOCUMENTATION_TRUE@am__append_13 = config/doxygen.cfg \
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
-@WITH_DOCUMENTATION_TRUE@	config/doxy2swig.py README.developer \
-@WITH_DOCUMENTATION_TRUE@	INSTALL
+@WITH_DOCUMENTATION_TRUE@	README.developer INSTALL
 @WITH_DOCUMENTATION_TRUE@am__append_14 = install_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_15 = clean_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_16 = clean_doxygen_generate
@@ -2938,7 +2937,9 @@ include_HEADERS =
 # Test files
 EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	$(am__append_13) @srcsdbx@/README \
-	@srcsdbx@/StorageConcepts.txt $(patsubst %_wrap.cc, %.py, \
+	@srcsdbx@/StorageConcepts.txt @swigrules@/doxy2swig.py \
+	@swigrules@/doxygen_single.cfg @swigrules@/README.md \
+	@swigrules@/swig_wrap.tmpl $(patsubst %_wrap.cc, %.py, \
 	$(FULL_SWIG_SRC)) $(patsubst %_wrap.cc, %.py, \
 	$(ADDITONAL_SWIG_SRC)) $(FULL_SWIG_SRC) $(ADDITONAL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h @libgeocal@/dummy.pdf \

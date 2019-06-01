@@ -37,6 +37,10 @@ swiginc_HEADERS += @swigrules@/include/swig_boost_array_inc.i
 
 ADDITONAL_SWIG_SRC = @swigsrc@/swig_array_wrap.cc
 ADDITONAL_SWIG_SRC += @swigsrc@/swig_boost_array_wrap.cc
+EXTRA_DIST+= @swigrules@/doxy2swig.py
+EXTRA_DIST+= @swigrules@/doxygen_single.cfg
+EXTRA_DIST+= @swigrules@/README.md
+EXTRA_DIST+= @swigrules@/swig_wrap.tmpl
 
 # Allow files to be include in other directories
 AM_CPPFLAGS+= -I$(srcdir)/@swigrules@/include

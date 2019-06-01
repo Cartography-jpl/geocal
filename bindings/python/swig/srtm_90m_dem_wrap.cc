@@ -5494,9 +5494,9 @@ public:
   {
     Py_XINCREF(python_obj); 
 #ifdef BZ_DEBUG_LOG_ALLOCATIONS
-    std::cout << "PythonMemoryBlock: have reference to numpy object data at" << blitz::MemoryBlock<P_type>::data() << "\n"
+    std::cout << "PythonMemoryBlock: have reference to numpy object data at " << blitz::MemoryBlock<P_type>::data() << "\n"
 	      << "   numpy python object " << python_obj << "\n"
-	      << "   numpy python object ref count " << Py_REFCNT(python_obj) <<"\n";
+	      << "   numpy python object ref count (after incrementing) " << Py_REFCNT(python_obj) <<"\n";
 #endif    
   }
   virtual ~PythonMemoryBlock()
@@ -5505,12 +5505,12 @@ public:
     // have the python_obj go out of scope to clean up our reference
     // to it.
     blitz::MemoryBlock<P_type>::dataBlockAddress() = 0;
-    Py_XDECREF(python_obj);
 #ifdef BZ_DEBUG_LOG_ALLOCATIONS
-    std::cout << "PythonMemoryBlock: removing reference to numpy object data at" << blitz::MemoryBlock<P_type>::data() << "\n"
+    std::cout << "PythonMemoryBlock: removing reference to numpy object data at " << blitz::MemoryBlock<P_type>::data() << "\n"
 	      << "   numpy python object " << python_obj << "\n"
-	      << "   numpy python object ref count " << Py_REFCNT(python_obj) <<"\n";
+	      << "   numpy python object ref count (before decrementing) " << Py_REFCNT(python_obj) <<"\n";
 #endif    
+    Py_XDECREF(python_obj);
   }
 private:
   PyObject* python_obj;

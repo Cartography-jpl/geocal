@@ -1,69 +1,10 @@
-// Forward declaration
-template<typename P_type> class TestMemoryBlockReference;
-// Very evil kludge. We use one of the function names in MemoryBlockReference
-// to sneak in a friend declaration so we can access the internal block_
-// variable. This is because we don't want to edit the actual blitz header.
-#define blockLength() _fake() {return 0;}	 \
-  friend class TestMemoryBlockReference<T_type>; \
-  sizeType blockLength()
-#include <blitz/memblock.h>
-#undef blockLength
 #include "unit_test_support.h"
 #include "time_table.h"
 #include <cmath>
-#include <blitz/array.h>
 
 using namespace GeoCal;
 
-template<typename P_type>
-class TestMemoryBlock : public blitz::MemoryBlock<P_type> {
-public:
-  typedef P_type T_type;
-  TestMemoryBlock(blitz::sizeType length, T_type* data)
-    : blitz::MemoryBlock<P_type>(length, data)
-  {
-    std::cerr << "Hi, in TestMemoryBlock\n";
-  }
-  virtual ~TestMemoryBlock()
-  {
-    blitz::MemoryBlock<P_type>::dataBlockAddress() = 0;
-    std::cerr << "Hi, in ~TestMemoryBlock\n";
-  }
-};
-
-
-template<typename P_type>
-class TestMemoryBlockReference : public blitz::MemoryBlockReference<P_type> {
-public:
-  typedef P_type T_type;
-  template<int N_rank>
-  TestMemoryBlockReference(blitz::Array<T_type, N_rank>& a)
-    : blitz::MemoryBlockReference<T_type>(0, a.data(),
-					  blitz::neverDeleteData)
-  {
-    blitz::MemoryBlockReference<T_type>::block_ =
-      new TestMemoryBlock<T_type>(0, a.data());
-    a.changeBlock(*this);
-  }
-};
-
-// Perhaps use https://bloglitb.blogspot.com/2010/07/access-to-private-members-thats-easy.html
-
 BOOST_FIXTURE_TEST_SUITE(time_table, GlobalFixture)
-
-BOOST_AUTO_TEST_CASE(temp)
-{
-  blitz::Array<double, 1> raw_data(5);
-  raw_data = 1, 2, 3, 4, 5;
-  {
-    blitz::Array<double, 1> a(raw_data.data(), blitz::shape(5),
-			      blitz::neverDeleteData);
-    TestMemoryBlockReference<double> br(a);
-    std::cerr << a << "\n";
-    std::cerr << "Going out of scope for a\n";
-  }
-  std::cerr << "Going out of scope for raw_data\n";
-}
 
 BOOST_AUTO_TEST_CASE(constant_spacing_time_table)
 {

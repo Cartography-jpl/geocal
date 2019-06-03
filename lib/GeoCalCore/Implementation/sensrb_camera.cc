@@ -33,6 +33,12 @@ void SensrbCamera::print(std::ostream& Os) const
      << "   Principal point:  " << principal_point(0) << "\n"
      << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
 				    "LINE_IS_X\n" : "LINE_IS_Y\n")
+     << "   Line direction:   " << (line_direction() == INCREASE_IS_POSITIVE ?
+				    "INCREASE_IS_POSITIVE\n" :
+				    "INCREASE_IS_NEGATIVE\n")
+     << "   Sample direction:  " << (sample_direction() == INCREASE_IS_POSITIVE ?
+				    "INCREASE_IS_POSITIVE\n" :
+				    "INCREASE_IS_NEGATIVE\n")
      << "   Frame to spacecraft: " << frame_to_sc() << "\n"
      << "   P_distort:\n";
   opad << p_distort() << "\n";
@@ -162,8 +168,8 @@ SensrbCamera::focal_plane_to_dcs
     if(fabs(p_distort_(i)) > 1e-20)
       throw Exception("We don't currently support nonzero distortions");
   // Skip distortions
-  return boost::math::quaternion<AutoDerivative<double> >(0, Xfp, Yfp, 
-				  focal_length_with_derivative());
+  return boost::math::quaternion<AutoDerivative<double> >
+    (0, Xfp, Yfp, focal_length_with_derivative());
 
   // fill_in_max();
   // double rp2 = (Xfp.value() *Xfp.value() + Yfp.value() * Yfp.value());

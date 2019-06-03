@@ -203,7 +203,18 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
     The convention used by SENSRB is that line is in the +y direction,
     sample is the +x direction (so different than the default for
-    QuaternionCamera class).
+    QuaternionCamera class). The sensor coordinate system has +z in the
+    boresight direction, which actually means that this is a left handed
+    coordinate system. There is also a "image" coordinate system, which
+    just reverses z (so -z points in boresight direction).
+
+    The coordinate system is "SENSOR_ANGLE_MODEL" which actually has a
+    bit of a odd orientation. It appears to be something like the pilot
+    holding the camera in front of his face. This means that the identity
+    quaternion actually doesn't point the camera towards the ground (most
+    of our models have had nadir pointing camera have an identity
+    quaternion). Nadir pointing requires a quaternion with a pitch of 90
+    degrees.
 
     C++ includes: sensrb_camera.h 
     """

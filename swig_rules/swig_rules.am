@@ -131,7 +131,3 @@ BUILT_SOURCES+= $(srcdir)/$(swigsrc)/swig_wrap.cc
 -include $(patsubst %.cc, %.Pcc, $(ADDITONAL_SWIG_SRC))
 endif HAVE_SWIG
 endif MAINTAINER_MODE
-
-
-
-

@@ -422,7 +422,7 @@ BoostArrayAutoDerivativeDouble_3_swigregister(BoostArrayAutoDerivativeDouble_3)
 def sqrt(x):
     """
 
-    GeoCal::AutoDerivative< double > std::sqrt(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::sqrt(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.sqrt(x)
@@ -430,7 +430,7 @@ def sqrt(x):
 def log(x):
     """
 
-    GeoCal::AutoDerivative< double > std::log(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::log(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.log(x)
@@ -438,7 +438,7 @@ def log(x):
 def log10(x):
     """
 
-    GeoCal::AutoDerivative< double > std::log10(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::log10(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.log10(x)
@@ -446,7 +446,7 @@ def log10(x):
 def exp(x):
     """
 
-    GeoCal::AutoDerivative< double > std::exp(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::exp(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.exp(x)
@@ -454,7 +454,7 @@ def exp(x):
 def sin(x):
     """
 
-    GeoCal::AutoDerivative< double > std::sin(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::sin(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.sin(x)
@@ -462,7 +462,7 @@ def sin(x):
 def asin(x):
     """
 
-    GeoCal::AutoDerivative< double > std::asin(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::asin(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.asin(x)
@@ -470,7 +470,7 @@ def asin(x):
 def cos(x):
     """
 
-    GeoCal::AutoDerivative< double > std::cos(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::cos(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.cos(x)
@@ -478,7 +478,7 @@ def cos(x):
 def acos(x):
     """
 
-    GeoCal::AutoDerivative< double > std::acos(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::acos(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.acos(x)
@@ -486,7 +486,7 @@ def acos(x):
 def tan(x):
     """
 
-    GeoCal::AutoDerivative< double > std::tan(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::tan(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.tan(x)
@@ -494,7 +494,7 @@ def tan(x):
 def atan(x):
     """
 
-    GeoCal::AutoDerivative< double > std::atan(const GeoCal::AutoDerivative< double > &x)
+    GeoCal::AutoDerivative<double> std::atan(const GeoCal::AutoDerivative< double > &x)
 
     """
     return _auto_derivative.atan(x)

@@ -2171,6 +2171,7 @@ DATA = $(dist_afidspythonvdev_DATA) $(dist_geocalpkgpython_DATA) \
 	$(installafidspython_DATA) $(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcsupport@/constant.h @srcsupport@/generic_object.h \
+	@srcsupport@/auto_derivative_before_blitz.h \
 	@srcsupport@/auto_derivative.h \
 	@srcsupport@/auto_derivative_quaternion.h \
 	@srcsupport@/array_ad.h @srcsupport@/observer.h \
@@ -3562,6 +3563,7 @@ geocalincdir = @includedir@/geocal
 # Source files for library
 geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/constant.h @srcsupport@/generic_object.h \
+	@srcsupport@/auto_derivative_before_blitz.h \
 	@srcsupport@/auto_derivative.h \
 	@srcsupport@/auto_derivative_quaternion.h \
 	@srcsupport@/array_ad.h @srcsupport@/observer.h \

@@ -13973,52 +13973,52 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"BoostArrayAutoDerivativeDouble_3_swiginit", BoostArrayAutoDerivativeDouble_3_swiginit, METH_VARARGS, NULL},
 	 { (char *)"sqrt", (PyCFunction)_wrap_sqrt, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::sqrt(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::sqrt(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"log", (PyCFunction)_wrap_log, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::log(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::log(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"log10", (PyCFunction)_wrap_log10, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::log10(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::log10(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"exp", (PyCFunction)_wrap_exp, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::exp(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::exp(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"sin", (PyCFunction)_wrap_sin, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::sin(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::sin(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"asin", (PyCFunction)_wrap_asin, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::asin(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::asin(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"cos", (PyCFunction)_wrap_cos, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::cos(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::cos(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"acos", (PyCFunction)_wrap_acos, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::acos(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::acos(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"tan", (PyCFunction)_wrap_tan, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::tan(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::tan(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"atan", (PyCFunction)_wrap_atan, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::atan(const GeoCal::AutoDerivative< double > &x)\n"
+		"GeoCal::AutoDerivative<double> std::atan(const GeoCal::AutoDerivative< double > &x)\n"
 		"\n"
 		""},
 	 { (char *)"vector_auto_derivative_iterator", (PyCFunction)_wrap_vector_auto_derivative_iterator, METH_O, NULL},

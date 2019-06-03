@@ -3677,8 +3677,7 @@ namespace swig {
 
 
 // Need this before blitz gets included.
-#define IN_SWIG 1  
-#include "auto_derivative.h"
+#include "auto_derivative_before_blitz.h"
 
 
 #include <iostream>

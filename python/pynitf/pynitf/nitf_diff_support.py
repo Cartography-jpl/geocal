@@ -49,18 +49,19 @@ class DiffHandle(object):
         for index, field in enumerate(list1):
             if (not isinstance(field, _FieldLoopStruct)):
                 if (field.field_name is not None):
-
+                    compare_name = field.field_name
                     if hasattr(field, 'name') and field.name != None:
-                        exclude = DiffHandle.get_exclude()
-                        if exclude != None:
-                            if field.name in exclude:
-                                self.logger.debug('excluding ' + field.field_name)
-                                continue
+                        compare_name = field.name
+                        
+                    exclude = DiffHandle.get_exclude()
+                    if exclude != None:
+                        if compare_name in exclude:
+                            self.logger.debug('excluding ' + field.field_name)
+                            continue
 
                     include = DiffHandle.get_include()
                     if include != None:
-                        if not hasattr(field, 'name') or \
-                           field.name == None or not field.name in include:
+                        if not compare_name in include:
                             self.logger.debug('not including ' + field.field_name)
                             continue
 
@@ -73,8 +74,8 @@ class DiffHandle(object):
 
                     if not this_is_same:
                         self.logger.error("%s 1 has field %s as %s while %s 2 has %s" %
-                                          (type, field.field_name, field.get_print(parent1, ()),
-                                           type, list2[index].get_print(parent2, ())))
+                                          (type, field.field_name, str(field),
+                                           type, str(list2[index])))
                         is_same = False
             else:
                 is_same = self.process_field_value_list(type, field.field_value_list, parent1,
@@ -202,20 +203,19 @@ class DSegHandle(DiffHandle):
         # Compare the subheaders of the two DES Segments
         #self.logger.debug(str(dir(obj1.des)))
         #self.logger.debug(str(dir(obj1.des.user_subheader)))
-        #is_same = self.process_field_value_list("DES_UH",
-        #                                        obj1.des.user_subheader,
-        #                                        obj1.des,
-        #                                        obj2.des.user_subheader,
-        #                                        obj2.des)
+        is_same = self.process_field_value_list("DES_UH",
+                                                obj1.des.user_subheader.field_value_list,
+                                                obj1.des.user_subheader,
+                                                obj2.des.user_subheader.field_value_list,
+                                                obj2.des.user_subheader) and is_same
 
         # TODO: compare DES payloads
-        #is_same = False
         #self.logger.debug(str(dir(obj1.data)))
-        #is_same = self.process_field_value_list("DES_DATA",
-        #                                        obj1.des.field_value_list,
-        #                                        obj1.des,
-        #                                        obj2.des.field_value_list,
-        #                                        obj2.des)
+        is_same = self.process_field_value_list("DES_DATA",
+                                                obj1.des.field_value_list,
+                                                obj1.des,
+                                                obj2.des.field_value_list,
+                                                obj2.des) and is_same
 
         self.logger.debug("DSegHandle returning>>> %s" % is_same)
         return (True, is_same)

@@ -199,22 +199,31 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     distortion model,
     seehttps://en.wikipedia.org/wiki/Distortion_(optics).
 
-    This is the camera model used by the SENSRB TRE in NITF files
+    This is the camera model used by the SENSRB TRE in NITF files.
 
     The convention used by SENSRB is that line is in the +y direction,
-    sample is the +x direction (so different than the default for
-    QuaternionCamera class). The sensor coordinate system has +z in the
-    boresight direction, which actually means that this is a left handed
-    coordinate system. There is also a "image" coordinate system, which
-    just reverses z (so -z points in boresight direction).
+    sample is the -x direction (so different than the default for
+    QuaternionCamera class). This is the "Camera" coordinates, there is
+    another (and different) coordinate system called "Sensor". See
+    "SENSRB Profile Frame Image-To-Ground Transformation Description" by
+    Michael J. Lenihan.
 
-    The coordinate system is "SENSOR_ANGLE_MODEL" which actually has a
-    bit of a odd orientation. It appears to be something like the pilot
-    holding the camera in front of his face. This means that the identity
-    quaternion actually doesn't point the camera towards the ground (most
-    of our models have had nadir pointing camera have an identity
-    quaternion). Nadir pointing requires a quaternion with a pitch of 90
-    degrees.
+    The coordinate system for the angles is "SENSOR_ANGLE_MODEL = 1"
+    which actually has a bit of a odd orientation. It appears to be
+    something like the pilot holding the camera in front of his face. This
+    means that all angles 0 actually doesn't point the camera towards the
+    ground (most of our models have had nadir pointing camera have an
+    identity quaternion).
+
+    There are other SENSOR_ANGLE_MODEL (2 and 3), but the MSP library
+    doesn't support these. We could add support for these in the future if
+    useful (e.g., change quaternion_to_sensor_angle to take the model
+    number).
+
+    The actual camera model just as a normal frame_to_sc() like other
+    QuaternionCamera. We handle mapping this too and from the sensor
+    angles used NITF through the various static functions (e.g.,
+    quaternion_to_sensor_angle).
 
     C++ includes: sensrb_camera.h 
     """
@@ -225,10 +234,10 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def __init__(self, *args):
         """
 
-        GeoCal::SensrbCamera::SensrbCamera(boost::math::quaternion< double > Frame_to_sc_q, double K1, double
-        K2, double K3, double P1, double P2, double B1, double B2, double
-        Radial_distort_limit, int Number_line, int Number_sample, double
-        Line_pitch, double Sample_pitch, double Focal_length, const
+        GeoCal::SensrbCamera::SensrbCamera(const boost::math::quaternion< double > &Frame_to_sc_q, double K1,
+        double K2, double K3, double P1, double P2, double B1, double B2,
+        double Radial_distort_limit, int Number_line, int Number_sample,
+        double Line_pitch, double Sample_pitch, double Focal_length, const
         FrameCoordinate &Principal_point, const std::string
         &Detection_type="VIS", const std::string
         &Calibration_date="20000101", QuaternionCamera::FrameConvention
@@ -236,7 +245,7 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         QuaternionCamera::FrameDirection
         Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
         QuaternionCamera::FrameDirection
-        Sample_direction=QuaternionCamera::INCREASE_IS_POSITIVE)
+        Sample_direction=QuaternionCamera::INCREASE_IS_NEGATIVE)
         Create a QuaternionCamera with a radial distortion model given by
         kdistort.
 
@@ -439,6 +448,44 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
       self._v_detection_type(value)
 
 
+    def quaternion_to_sensor_angle(Frame_to_sc_or_ned):
+        """
+
+        void SensrbCamera::quaternion_to_sensor_angle(const boost::math::quaternion< double > &Frame_to_sc_or_ned, double
+        &Sensor_angle_1, double &Sensor_angle_2, double &Sensor_angle_3)
+        Convert a quaternion to sensor angles 1 through 3.
+
+        Depending on the values in SENSRB, the angles either describe the
+        angles relative to the platform coordinate system or relative the
+        local NED coordinate system. In the first case, the quaternion would
+        be the normal frame_to_sc() quaternion found in a SensrbCamera, or the
+        combination of the frame_to_sc() and the body_to_local_north() found
+        in AircraftOrbitData.
+
+        Note that the angles are in degrees. They are also passive rotation
+        angles rather than active (so negative of the angles we normally use
+        in our quaternion calculations). 
+        """
+        return _sensrb_camera.SensrbCamera_quaternion_to_sensor_angle(Frame_to_sc_or_ned)
+
+    quaternion_to_sensor_angle = staticmethod(quaternion_to_sensor_angle)
+
+    def sensor_angle_to_quaternion(Sensor_angle_1, Sensor_angle_2, Sensor_angle_3):
+        """
+
+        boost::math::quaternion< double > SensrbCamera::sensor_angle_to_quaternion(double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3)
+        Convert sensor angles 1 through 3 to a frame_to_sc() quaternion.
+
+        This version is for when this is relative to the platform.
+
+        Note that the angles are in degrees. They are also passive rotation
+        angles rather than active (so negative of the angles we normally use
+        in our quaternion calculations). 
+        """
+        return _sensrb_camera.SensrbCamera_sensor_angle_to_quaternion(Sensor_angle_1, Sensor_angle_2, Sensor_angle_3)
+
+    sensor_angle_to_quaternion = staticmethod(sensor_angle_to_quaternion)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -456,6 +503,40 @@ SensrbCamera._v_calibration_date = new_instancemethod(_sensrb_camera.SensrbCamer
 SensrbCamera._v_detection_type = new_instancemethod(_sensrb_camera.SensrbCamera__v_detection_type, None, SensrbCamera)
 SensrbCamera_swigregister = _sensrb_camera.SensrbCamera_swigregister
 SensrbCamera_swigregister(SensrbCamera)
+
+def SensrbCamera_quaternion_to_sensor_angle(Frame_to_sc_or_ned):
+    """
+
+    void SensrbCamera::quaternion_to_sensor_angle(const boost::math::quaternion< double > &Frame_to_sc_or_ned, double
+    &Sensor_angle_1, double &Sensor_angle_2, double &Sensor_angle_3)
+    Convert a quaternion to sensor angles 1 through 3.
+
+    Depending on the values in SENSRB, the angles either describe the
+    angles relative to the platform coordinate system or relative the
+    local NED coordinate system. In the first case, the quaternion would
+    be the normal frame_to_sc() quaternion found in a SensrbCamera, or the
+    combination of the frame_to_sc() and the body_to_local_north() found
+    in AircraftOrbitData.
+
+    Note that the angles are in degrees. They are also passive rotation
+    angles rather than active (so negative of the angles we normally use
+    in our quaternion calculations). 
+    """
+    return _sensrb_camera.SensrbCamera_quaternion_to_sensor_angle(Frame_to_sc_or_ned)
+
+def SensrbCamera_sensor_angle_to_quaternion(Sensor_angle_1, Sensor_angle_2, Sensor_angle_3):
+    """
+
+    boost::math::quaternion< double > SensrbCamera::sensor_angle_to_quaternion(double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3)
+    Convert sensor angles 1 through 3 to a frame_to_sc() quaternion.
+
+    This version is for when this is relative to the platform.
+
+    Note that the angles are in degrees. They are also passive rotation
+    angles rather than active (so negative of the angles we normally use
+    in our quaternion calculations). 
+    """
+    return _sensrb_camera.SensrbCamera_sensor_angle_to_quaternion(Sensor_angle_1, Sensor_angle_2, Sensor_angle_3)
 
 
 __all__ = ["SensrbCamera"]

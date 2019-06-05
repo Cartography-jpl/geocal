@@ -1,6 +1,7 @@
 from geocal_swig import (nitf_to_quaternion, quaternion_to_nitf, Ecr,
                          QuaternionOrbitData, Time, SensrbCamera,
-                         Quaternion_double, FrameCoordinate)
+                         Quaternion_double, FrameCoordinate,
+                         AircraftOrbitData)
 try:
     from pynitf import TreSENSRB, NitfImageSegment
     have_pynitf = True
@@ -24,20 +25,31 @@ if(have_pynitf):
                t.geodetic_type == "C" and
                t.length_unit == "SI" and
                t.sensor_velocity_data == "Y" and
-               t.attitude_quaternion == "Y")):
+               t.attitude_euler_angles == "Y" and
+               t.sensor_angle_model == 1)):
             raise RuntimeError("Don't know how to interpret TRE to get OrbitData")
         p = Ecr(t.latitude_or_x + t.sensor_x_offset,
                 t.longitude_or_y + t.sensor_y_offset,
                 t.altitude_or_z + t.sensor_z_offset)
         v = [t.velocity_north_or_x, t.velocity_east_or_y,
              t.velocity_down_or_z]
-        q = nitf_to_quaternion([t.attitude_q1, t.attitude_q2, t.attitude_q3,
-                                t.attitude_q4])
         tms = str(t.start_date)
         tm_day_start = Time.parse_time("%s-%s-%sT00:00:00Z" %
                                        (tms[0:4], tms[4:6], tms[6:8]))
         tm = tm_day_start + t.start_time
-        return QuaternionOrbitData(tm, p, v, q)
+        if(t.platform_relative == "Y"):
+            # We must have angles if platform_relative is "Y"
+            return AircraftOrbitData(tm, p, v, t.platform_roll,
+                                     t.platform_pitch, t.platform_heading)
+        # Otherwise, they may or may not be present. If not present,
+        # arbitrarily set the ypr to all zeros, and we catch all the pointing
+        # in the camera. Otherwise, take the supplied data.
+        if(t.platform_roll is not None and
+           t.platform_pitch is not None and
+           t.platform_heading is not None):
+            return AircraftOrbitData(tm, p, v, t.platform_roll,
+                                     t.platform_pitch, t.platform_heading)
+        return AircraftOrbitData(tm, p, v, 0, 0, 0)
 
     def _orbit_data_sensrb_set(self, od):
         t = self.find_one_tre("SENSRB")
@@ -73,14 +85,25 @@ if(have_pynitf):
         t.velocity_north_or_x = v[0]
         t.velocity_east_or_y = v[1]
         t.velocity_down_or_z = v[2]
-        t.attitude_euler_angles = "N"
+        t.attitude_euler_angles = "Y"
+        t.sensor_angle_model = 1
         t.attitude_unit_vectors = "N"
-        t.attitude_quaternion = "Y"
-        att = quaternion_to_nitf(od.sc_to_cf)
-        t.attitude_q1 = att[0]
-        t.attitude_q2 = att[1]
-        t.attitude_q3 = att[2]
-        t.attitude_q4 = att[3]
+        t.attitude_quaternion = "N"
+        od2 = AircraftOrbitData(od)
+        # The MSP library ignored the platform_relative and always treats
+        # this as "N". So we'll write out our data with the "N" to have
+        # data that is compatible. But we still write out the platform
+        # relative values, which we can combine with the sensor angles to
+        # get separation between camera and orbit.
+        t.platform_relative = "N"
+        # Angle for heading needs to 0 to 360, while we usually use -180 to 180.
+        # Convert if necessary
+        if(od2.heading >= 0):
+            t.platform_heading = od2.heading
+        else:
+            t.platform_heading = od2.heading + 360
+        t.platform_pitch = od2.pitch
+        t.platform_roll = od2.roll
 
     NitfImageSegment.orbit_data_sensrb = property(_orbit_data_sensrb_get,
                                                   _orbit_data_sensrb_set)
@@ -91,9 +114,13 @@ if(have_pynitf):
                t.sensor_calibration_data == "Y" and
                t.length_unit == "SI" and
                t.calibration_unit == "px" and
-               t.angular_unit == "DEG")):
+               t.angular_unit == "DEG" and
+               t.attitude_euler_angles == "Y" and
+               t.sensor_angle_model == 1)):
             raise RuntimeError("Don't know how to interpret TRE to get Camera")
-        return SensrbCamera(Quaternion_double(1,0,0,0),
+        return SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(
+                              t.sensor_angle_1, t.sensor_angle_2,
+                              t.sensor_angle_3),
 		            t.radial_distort_1, t.radial_distort_2,
                             t.radial_distort_3, t.decent_distort_1,
                             t.decent_distort_2, t.affinity_distort_1,
@@ -105,7 +132,9 @@ if(have_pynitf):
                             FrameCoordinate(t.principal_point_offset_x +
                                             t.row_detectors / 2.0,
                                             t.principal_point_offset_y +
-                                            t.column_detectors / 2.0))
+                                            t.column_detectors / 2.0),
+                            t.detection,
+                            t.calibration_date)
 
     def _camera_sensrb_set(self, cam):
         t = self.find_one_tre("SENSRB")
@@ -124,6 +153,7 @@ if(have_pynitf):
         t.detection = cam.detection_type
         t.row_detectors = cam.number_line(0)
         t.column_detectors = cam.number_sample(0)
+        t.sensor_angle_1, t.sensor_angle_2, t.sensor_angle_3 = SensrbCamera.quaternion_to_sensor_angle(cam.frame_to_sc)
         # 10.0 is because camera has line pitch in mm, but sensrb
         # records this in cm. "metric" is the entire size of the row/col
         # CCD, so it includes the number of line/samples

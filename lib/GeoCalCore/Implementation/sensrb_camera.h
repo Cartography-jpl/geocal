@@ -16,32 +16,40 @@ namespace GeoCal {
   distortion model, see
   https://en.wikipedia.org/wiki/Distortion_(optics). 
 
-  This is the camera model used by the SENSRB TRE in NITF files
+  This is the camera model used by the SENSRB TRE in NITF files.
 
   The convention used by SENSRB is that line is in the +y direction,
-  sample is the +x direction (so different than the default for
-  QuaternionCamera class). The sensor coordinate system has +z in the
-  boresight direction, which actually means that this is a left handed
-  coordinate system. There is also a "image" coordinate system, which
-  just reverses z (so -z points in boresight direction).
+  sample is the -x direction (so different than the default for
+  QuaternionCamera class). This is the "Camera" coordinates, there is
+  another (and different) coordinate system called "Sensor". See
+  "SENSRB Profile Frame Image-To-Ground Transformation Description" by 
+  Michael J. Lenihan.
 
-  The coordinate system is "SENSOR_ANGLE_MODEL" which actually has
-  a bit of a odd orientation. It appears to be something like the
-  pilot holding the camera in front of his face. This means that
-  the identity quaternion actually doesn't point the camera towards
-  the ground (most of our models have had nadir pointing camera have
-  an identity quaternion). Nadir pointing requires a quaternion with a pitch
-  of 90 degrees.
+  The coordinate system for the angles is "SENSOR_ANGLE_MODEL = 1"
+  which actually has a bit of a odd orientation. It appears to be
+  something like the pilot holding the camera in front of his
+  face. This means that all angles 0 actually doesn't point the camera
+  towards the ground (most of our models have had nadir pointing
+  camera have an identity quaternion). 
+
+  There are other SENSOR_ANGLE_MODEL (2 and 3), but the MSP library
+  doesn't support these. We could add support for these in the
+  future if useful (e.g., change quaternion_to_sensor_angle to take
+  the model number).
+
+  The actual camera model just as a normal frame_to_sc() like other
+  QuaternionCamera. We handle mapping this too and from the sensor
+  angles used NITF through the various static functions (e.g.,
+  quaternion_to_sensor_angle). 
 *******************************************************************/
 class SensrbCamera : public QuaternionCamera {
 public:
 //-----------------------------------------------------------------------
 /// Create a QuaternionCamera with a radial distortion model given
 /// by kdistort. We currently limit kdistort.rows() <= 3, although we
-/// could relax that if it ends up being useful.  
+/// could relax that if it ends up being useful.
 //-----------------------------------------------------------------------
-  
-  SensrbCamera(boost::math::quaternion<double> Frame_to_sc_q,
+  SensrbCamera(const boost::math::quaternion<double>& Frame_to_sc_q,
 	       double K1, double K2, double K3, double P1, double P2,
 	       double B1, double B2, double Radial_distort_limit,
 	       int Number_line, int Number_sample,
@@ -55,8 +63,9 @@ public:
 	       QuaternionCamera::FrameDirection Line_direction =
 	       QuaternionCamera::INCREASE_IS_POSITIVE,
 	       QuaternionCamera::FrameDirection Sample_direction =
-	       QuaternionCamera::INCREASE_IS_POSITIVE)
-  : QuaternionCamera(Frame_to_sc_q, Number_line, Number_sample, Line_pitch,
+	       QuaternionCamera::INCREASE_IS_NEGATIVE)
+  : QuaternionCamera(Frame_to_sc_q,
+		     Number_line, Number_sample, Line_pitch,
 		     Sample_pitch, Focal_length, Principal_point,
 		     Frame_convention, Line_direction, Sample_direction),
     calibration_date_(Calibration_date),
@@ -66,7 +75,7 @@ public:
     max_r2_filled_in(false)
   {
     p_distort_ = K1, K2, K3, P1, P2, B1, B2;
-  }
+  }  
   virtual void print(std::ostream& Os) const;
   void dcs_to_focal_plane
   (int Band, const boost::math::quaternion<double>& Dcs,
@@ -155,6 +164,12 @@ public:
 //-----------------------------------------------------------------------
   const std::string& detection_type() const { return detection_type_; }
   void detection_type(const std::string& V) { detection_type_ = V; }
+
+  static void quaternion_to_sensor_angle
+  (const boost::math::quaternion<double>& Frame_to_sc_or_ned,
+   double& Sensor_angle_1, double& Sensor_angle_2, double& Sensor_angle_3);
+  static boost::math::quaternion<double> sensor_angle_to_quaternion
+  (double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3);
 private:
   std::string calibration_date_, detection_type_;
   blitz::Array<double, 1> p_distort_;

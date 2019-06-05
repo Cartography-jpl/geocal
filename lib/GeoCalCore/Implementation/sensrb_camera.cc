@@ -19,6 +19,7 @@ void SensrbCamera::serialize(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(SensrbCamera);
 #endif
 
+  
 void SensrbCamera::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
@@ -182,6 +183,71 @@ SensrbCamera::focal_plane_to_dcs
   // AutoDerivative<double> y = Yfp * (1-dr_over_r);
   // return QuaternionCamera::focal_plane_to_dcs(Band, x, y);
 }
+
+//-----------------------------------------------------------------------
+/// Convert a quaternion to sensor angles 1 through 3. Depending on
+/// the values in SENSRB, the angles either describe the angles
+/// relative to the platform coordinate system or relative the local
+/// NED coordinate system. In the first case, the quaternion would be
+/// the normal frame_to_sc() quaternion found in a SensrbCamera, or
+/// the combination of the frame_to_sc() and the body_to_local_north()
+/// found in AircraftOrbitData.
+///
+/// Note that the angles are in degrees. They are also passive
+/// rotation angles rather than active (so negative of the angles we
+/// normally use in our quaternion calculations).
+//-----------------------------------------------------------------------
+
+void SensrbCamera::quaternion_to_sensor_angle
+(const boost::math::quaternion<double>& Frame_to_sc_or_ned,
+ double& Sensor_angle_1, double& Sensor_angle_2, double& Sensor_angle_3
+ )
+{
+  boost::math::quaternion<double> m_ins_to_cam = conj(Frame_to_sc_or_ned);
+  // This is equation 6, with the matrix
+  // [[ 0, 1,  0],
+  //  [ 0, 0, -1],
+  //  [-1, 0,  0]]
+  // as a quaternion
+  boost::math::quaternion<double> m_sen_to_cam(0.5, 0.5, 0.5, -0.5);
+  boost::math::quaternion<double> m_ins_to_sen =
+    conj(m_sen_to_cam) * m_ins_to_cam;
+  double y, p, r;
+  quat_to_ypr(m_ins_to_sen, y, p, r);
+  Sensor_angle_1 = -y * Constant::rad_to_deg;
+  Sensor_angle_2 = -r * Constant::rad_to_deg;
+  Sensor_angle_3 = -p * Constant::rad_to_deg;
+}
+
+//-----------------------------------------------------------------------
+/// Convert sensor angles 1 through 3 to a frame_to_sc()
+/// quaternion. This version is for when this is relative to the
+/// platform.
+///
+/// Note that the angles are in degrees. They are also passive
+/// rotation angles rather than active (so negative of the angles we
+/// normally use in our quaternion calculations).
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<double> SensrbCamera::sensor_angle_to_quaternion
+(double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3)
+{
+  // This is equation 6, with the matrix
+  // [[ 0, 1,  0],
+  //  [ 0, 0, -1],
+  //  [-1, 0,  0]]
+  // as a quaternion
+  boost::math::quaternion<double> m_sen_to_cam(0.5, 0.5, 0.5, -0.5);
+  // The angle rotations are passive rather than active. Our code
+  // generates active, so we change the sign for a passive rotation.
+  boost::math::quaternion<double> m_ins_to_sen =
+    quat_rot("XYZ", -Sensor_angle_3 * Constant::deg_to_rad,
+	     -Sensor_angle_2 * Constant::deg_to_rad,
+	     -Sensor_angle_1 * Constant::deg_to_rad);
+  boost::math::quaternion<double> m_ins_to_cam = m_sen_to_cam * m_ins_to_sen;
+  return conj(m_ins_to_cam);
+}
+
 
 
 

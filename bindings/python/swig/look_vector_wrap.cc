@@ -12991,16 +12991,16 @@ SWIGINTERN PyObject *_wrap_new_CartesianInertialLookVector(PyObject *self, PyObj
   if (argc == 1) {
     int _v = 0;
     {
-      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__arrayT_double_3_t, 0);
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__math__quaternionT_double_t, 0);
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_2;
-    return _wrap_new_CartesianInertialLookVector__SWIG_1(self, argc, argv);
+    return _wrap_new_CartesianInertialLookVector__SWIG_3(self, argc, argv);
   }
 check_2:
   
   if (argc == 1) {
-    return _wrap_new_CartesianInertialLookVector__SWIG_3(self, argc, argv);
+    return _wrap_new_CartesianInertialLookVector__SWIG_1(self, argc, argv);
   }
   if (argc == 3) {
     return _wrap_new_CartesianInertialLookVector__SWIG_2(self, argc, argv);

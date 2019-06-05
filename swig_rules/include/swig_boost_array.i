@@ -54,7 +54,17 @@ public:
 
 #ifdef SWIGPYTHON
 
-%define %boost_array_template(NAME,TYPE, LEN)
+//--------------------------------------------------------------
+// Swig doesn't have typemap templates, so we define a macro to
+// do this for each type and length, and then call the macro
+// below to set this up for a range of types and sizes.
+// The PRECEDENCE is the order that we check for a match with
+// overloaded functions. The actual value doesn't matter too much,
+// just make sure it is different from any of the type check
+// in swig, and that it is different for different array types
+//--------------------------------------------------------------
+  
+%define %boost_array_template(NAME,TYPE, LEN, PRECEDENCE)
 %template(NAME) boost::array<TYPE, LEN>;
 
 %typemap(in) const boost::array<TYPE, LEN>& (boost::array<TYPE, LEN> a, PythonObject numpy) 
@@ -74,6 +84,14 @@ public:
   $1 = to_boost_array<TYPE, LEN>(numpy);
 }
 
+%typecheck(PRECEDENCE) boost::array<TYPE, LEN>, const boost::array<TYPE, LEN>& {
+  PythonObject t(to_numpy<TYPE >($input));
+  if(!t.obj || PyArray_NDIM((PyArrayObject*) t.obj) != 1)
+    return 0;
+  blitz::Array<T, 1> b = to_blitz_array<TYPE, 1>(t.obj);
+  return (b.rows() == LEN ? 1 : 0);
+}
+  
 %enddef
 
 %define %python_attribute_boost_array(NAME, TYPE, LEN)
@@ -104,10 +122,10 @@ def NAME(self, value):
 
 #endif
 }
-%boost_array_template(Array_double_20, double, 20)
-%boost_array_template(Array_double_12, double, 12)
-%boost_array_template(Array_double_14, double, 14)
-%boost_array_template(Array_double_3, double, 3)
-%boost_array_template(Array_bool_20, bool, 20)
+%boost_array_template(Array_double_20, double, 20, 1241)
+%boost_array_template(Array_double_12, double, 12, 1242)
+%boost_array_template(Array_double_14, double, 14, 1243)
+%boost_array_template(Array_double_3, double, 3, 1244)
+%boost_array_template(Array_bool_20, bool, 20, 1245)
 
 

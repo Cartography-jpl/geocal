@@ -50,7 +50,10 @@ BOOST_AUTO_TEST_CASE(simple_camera_test)
 		   0,0,0,0,0,0,0, 3000,
 		   10, 1504, 18e-6, 21e-6,
 		   123.8e-3, FrameCoordinate(10.0/2, 1504.0/2),
-		   "VIS", "20000101", QuaternionCamera::LINE_IS_X);
+		   "VIS", "20000101", QuaternionCamera::LINE_IS_X,
+		   QuaternionCamera::INCREASE_IS_POSITIVE,
+		   QuaternionCamera::INCREASE_IS_POSITIVE);
+  cam.frame_to_sc(boost::math::quaternion<double>(1,0,0,0));
   SimpleCamera cam2(0,0,0,123.8e-3, 18e-6, 21e-6, 10, 1504);
   BOOST_CHECK_EQUAL(cam.number_band(), 1);
   BOOST_CHECK_EQUAL(cam.number_line(0), 10);

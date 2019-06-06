@@ -6,6 +6,7 @@ try:
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
+import numpy as np
 
 # ---------------------------------------------------------
 # Override various DESs to use the geocal objects instead
@@ -23,6 +24,18 @@ This should be used to set and read the DES values.
     (DesCSEPHB_geocal, DesCSEPHB_UH_geocal) = create_nitf_des_structure("DesCSEPHB", DesCSEPHB._desc_data, DesCSEPHB._desc_uh, hlp=hlp_csephb, des_implementation_field="pos_csephb", des_implementation_class=PosCsephb)
     DesCSEPHB_geocal.desid = DesCSEPHB.desid
     DesCSEPHB_geocal.desver = DesCSEPHB.desver
+    def _descsephb_handle_diff(self, t):
+        '''Handle difference checking between 2 DesCSEPHB_geocal'''
+        return (self.interpolation_type == t.interpolation_type and
+                self.ephemeris_data_quality == t.ephemeris_data_quality and
+                self.ephemeris_source == t.ephemeris_source and
+                self.lagrange_order == t.lagrange_order and
+                self.is_cf == t.is_cf and
+                self.min_time == self.min_time and
+                abs(self.time_step - t.time_step) < 1e-6 and
+                np.all_class(self.position_data, t.position_data))
+    
+    DesCSEPHB_geocal.handle_diff = _descsephb_handle_diff
 
     # Register this geocal class ahead of the pynitf DesCSEPHB class, so this
     # gets used to read the data instead of DesCSEPHB
@@ -41,6 +54,22 @@ This should be used to set and read the DES values.
     (DesCSATTB_geocal, DesCSATTB_UH_geocal) = create_nitf_des_structure("DesCSATTB", DesCSATTB._desc_data, DesCSATTB._desc_uh, hlp=hlp_csattb, des_implementation_field="att_csattb", des_implementation_class=AttCsattb)
     DesCSATTB_geocal.desid = DesCSATTB.desid
     DesCSATTB_geocal.desver = DesCSATTB.desver
+    def _descsattb_handle_diff(self, t):
+        '''Handle difference checking between 2 DesCSATTB_geocal'''
+        d1 = self.att_csattb
+        d2 = t.att_csattb
+        print(d1)
+        print(d2)
+        return (d1.interpolation_type == d2.interpolation_type and
+                d1.attitude_data_quality == d2.attitude_data_quality and
+                d1.attitude_source == d2.attitude_source and
+                d1.lagrange_order == d2.lagrange_order and
+                d1.is_cf == d2.is_cf and
+                d1.min_time == d2.min_time and
+                abs(d1.time_step - d2.time_step) < 1e-6 and
+                np.allclose(d1.attitude_data, d2.attitude_data))
+    
+    DesCSATTB_geocal.handle_diff = _descsattb_handle_diff
 
     # Register this geocal class ahead of the pynitf DesCSATTB class, so this
     # gets used to read the data instead of DesCSATTB

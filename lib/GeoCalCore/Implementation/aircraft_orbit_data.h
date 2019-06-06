@@ -81,6 +81,9 @@ public:
 
   double heading() const {return heading_;}
 
+  boost::math::quaternion<double> local_north_to_ecr() const;
+  boost::math::quaternion<double> body_to_local_north() const;
+  
 //-----------------------------------------------------------------------
 /// Vertical direction yaw, pitch, and heading are defined relative
 /// to.
@@ -101,7 +104,6 @@ private:
   double roll_, pitch_, heading_;
   VerticalDefinition vertical_definition_;
   Geodetic position_geodetic_;
-  boost::math::quaternion<double> local_north_to_ecr() const;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

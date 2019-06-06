@@ -221,6 +221,34 @@ class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
         """
         _aircraft_orbit_data.AircraftOrbitData_swiginit(self, _aircraft_orbit_data.new_AircraftOrbitData(*args))
 
+    def _v_local_north_to_ecr(self):
+        """
+
+        boost::math::quaternion< double > AircraftOrbitData::local_north_to_ecr() const
+        The local north to ECR quaternion. 
+        """
+        return _aircraft_orbit_data.AircraftOrbitData__v_local_north_to_ecr(self)
+
+
+    @property
+    def local_north_to_ecr(self):
+        return self._v_local_north_to_ecr()
+
+
+    def _v_body_to_local_north(self):
+        """
+
+        boost::math::quaternion< double > AircraftOrbitData::body_to_local_north() const
+        The body to local north quaternion. 
+        """
+        return _aircraft_orbit_data.AircraftOrbitData__v_body_to_local_north(self)
+
+
+    @property
+    def body_to_local_north(self):
+        return self._v_body_to_local_north()
+
+
     def _v_position_geodetic(self):
         """
 
@@ -298,6 +326,8 @@ class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _aircraft_orbit_data.delete_AircraftOrbitData
+AircraftOrbitData._v_local_north_to_ecr = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_local_north_to_ecr, None, AircraftOrbitData)
+AircraftOrbitData._v_body_to_local_north = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_body_to_local_north, None, AircraftOrbitData)
 AircraftOrbitData._v_position_geodetic = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_position_geodetic, None, AircraftOrbitData)
 AircraftOrbitData._v_roll = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_roll, None, AircraftOrbitData)
 AircraftOrbitData._v_pitch = new_instancemethod(_aircraft_orbit_data.AircraftOrbitData__v_pitch, None, AircraftOrbitData)

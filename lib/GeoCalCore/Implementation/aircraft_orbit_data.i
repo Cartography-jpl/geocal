@@ -28,6 +28,8 @@ public:
 		    VerticalDefinition V = GEODETIC_VERTICAL);
   AircraftOrbitData(const QuaternionOrbitData& Od,
 		    VerticalDefinition V = GEODETIC_VERTICAL);
+  %python_attribute(local_north_to_ecr, boost::math::quaternion<double>);
+  %python_attribute(body_to_local_north, boost::math::quaternion<double>);
   %python_attribute(position_geodetic, Geodetic)
   %python_attribute(roll, double)
   %python_attribute(pitch, double)

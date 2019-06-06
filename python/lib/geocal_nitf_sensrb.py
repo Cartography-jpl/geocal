@@ -1,7 +1,7 @@
 from geocal_swig import (nitf_to_quaternion, quaternion_to_nitf, Ecr,
                          QuaternionOrbitData, Time, SensrbCamera,
                          Quaternion_double, FrameCoordinate,
-                         AircraftOrbitData)
+                         AircraftOrbitData, quat_rot, deg_to_rad)
 try:
     from pynitf import TreSENSRB, NitfImageSegment
     have_pynitf = True
@@ -50,6 +50,46 @@ if(have_pynitf):
             return AircraftOrbitData(tm, p, v, t.platform_roll,
                                      t.platform_pitch, t.platform_heading)
         return AircraftOrbitData(tm, p, v, 0, 0, 0)
+
+    NitfImageSegment.orbit_data_sensrb = property(_orbit_data_sensrb_get)
+
+    def _camera_sensrb_get(self):
+        t = self.find_exactly_one_tre("SENSRB")
+        if(not(t.sensor_array_data == "Y" and
+               t.sensor_calibration_data == "Y" and
+               t.length_unit == "SI" and
+               t.calibration_unit == "px" and
+               t.angular_unit == "DEG" and
+               t.attitude_euler_angles == "Y" and
+               t.sensor_angle_model == 1)):
+            raise RuntimeError("Don't know how to interpret TRE to get Camera")
+        q = SensrbCamera.sensor_angle_to_quaternion(t.sensor_angle_1,
+                                                    t.sensor_angle_2,
+                                                    t.sensor_angle_3)
+        if(t.platform_relative == "N"):
+            # If platform_relative == "N", then the quaternion has
+            # the orbit data body_to_local_north buried in it. Take thi
+            # out so we get just the camera frame_to_sc part.
+            q = self.orbit_data_sensrb.body_to_local_north.conj() * q
+
+        return SensrbCamera(q,
+		            t.radial_distort_1, t.radial_distort_2,
+                            t.radial_distort_3, t.decent_distort_1,
+                            t.decent_distort_2, t.affinity_distort_1,
+                            t.affinity_distort_2, t.radial_distort_limit,
+		            t.row_detectors, t.column_detectors,
+                            t.row_metric / 10.0 / t.row_detectors,
+                            t.column_metric / 10.0 / t.column_detectors,
+		            t.focal_length / 10.0,
+                            FrameCoordinate(t.principal_point_offset_x +
+                                            t.row_detectors / 2.0,
+                                            t.principal_point_offset_y +
+                                            t.column_detectors / 2.0),
+                            t.detection,
+                            t.calibration_date)
+
+        
+    NitfImageSegment.camera_sensrb = property(_camera_sensrb_get)
 
     def _orbit_data_and_cam_sensrb_set(self, od, cam):
         '''Set orbit data and camera. We need to do this at the
@@ -120,7 +160,7 @@ if(have_pynitf):
         t.detection = cam.detection_type
         t.row_detectors = cam.number_line(0)
         t.column_detectors = cam.number_sample(0)
-        t.sensor_angle_1, t.sensor_angle_2, t.sensor_angle_3 = SensrbCamera.quaternion_to_sensor_angle(cam.frame_to_sc)
+        t.sensor_angle_1, t.sensor_angle_2, t.sensor_angle_3 = SensrbCamera.quaternion_to_sensor_angle(od2.body_to_local_north * cam.frame_to_sc)
         # 10.0 is because camera has line pitch in mm, but sensrb
         # records this in cm. "metric" is the entire size of the row/col
         # CCD, so it includes the number of line/samples
@@ -154,38 +194,6 @@ if(have_pynitf):
         t.first_pixel_column = 1
         t.transform_params = 0
         
-    NitfImageSegment.orbit_data_sensrb = property(_orbit_data_sensrb_get)
-
-    def _camera_sensrb_get(self):
-        t = self.find_exactly_one_tre("SENSRB")
-        if(not(t.sensor_array_data == "Y" and
-               t.sensor_calibration_data == "Y" and
-               t.length_unit == "SI" and
-               t.calibration_unit == "px" and
-               t.angular_unit == "DEG" and
-               t.attitude_euler_angles == "Y" and
-               t.sensor_angle_model == 1)):
-            raise RuntimeError("Don't know how to interpret TRE to get Camera")
-        return SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(
-                              t.sensor_angle_1, t.sensor_angle_2,
-                              t.sensor_angle_3),
-		            t.radial_distort_1, t.radial_distort_2,
-                            t.radial_distort_3, t.decent_distort_1,
-                            t.decent_distort_2, t.affinity_distort_1,
-                            t.affinity_distort_2, t.radial_distort_limit,
-		            t.row_detectors, t.column_detectors,
-                            t.row_metric / 10.0 / t.row_detectors,
-                            t.column_metric / 10.0 / t.column_detectors,
-		            t.focal_length / 10.0,
-                            FrameCoordinate(t.principal_point_offset_x +
-                                            t.row_detectors / 2.0,
-                                            t.principal_point_offset_y +
-                                            t.column_detectors / 2.0),
-                            t.detection,
-                            t.calibration_date)
-
-        
-    NitfImageSegment.camera_sensrb = property(_camera_sensrb_get)
     NitfImageSegment.orbit_data_and_camera = _orbit_data_and_cam_sensrb_set
     
 

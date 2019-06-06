@@ -71,10 +71,10 @@ def test_sensrb_msp(isolated_dir):
     od_ac = AircraftOrbitData(od)
     # Don't think sensrb does abberation of light correction, so to match
     # it we need to fake a 0 velocity.
-    od2 = AircraftOrbitData(od.time, od.position_cf, [0,0,0], 0, 0,
+    od2 = AircraftOrbitData(od.time, od.position_cf, [0,0,0], 10, 20,
                             AircraftOrbitData(od).heading)
-    od2 = AircraftOrbitData(od.time, od.position_cf, [0,0,0], 0, 0,
-                            0)
+    #od2 = AircraftOrbitData(od.time, od.position_cf, [0,0,0], 0, 0,
+    #                        0)
     nline = 2048
     nsamp = 1024
     cam = SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(10, 70, 20),

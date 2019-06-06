@@ -62,15 +62,27 @@ void AircraftOrbitData::initialize(const Time& Tm,
 // Pretty sure about the order here, this seems to be the standard
 // order used by aircrafts.
 
-  boost::math::quaternion<double> body_to_local_north = 
-    quat_rot("ZYX", Heading * Constant::deg_to_rad, 
-	     Pitch * Constant::deg_to_rad, Roll * Constant::deg_to_rad);
   boost::math::quaternion<double> body_to_ecr =
-    local_north_to_ecr() * body_to_local_north;
+    local_north_to_ecr() * body_to_local_north();
   
   QuaternionOrbitData::initialize(Tm, Position.convert_to_cf(), 
 				  Vel_fixed, body_to_ecr);
 }
+
+//-----------------------------------------------------------------------
+/// The body to local north quaternion
+//-----------------------------------------------------------------------
+
+boost::math::quaternion<double> AircraftOrbitData::body_to_local_north() const
+{
+  return quat_rot("ZYX", heading() * Constant::deg_to_rad,
+		  pitch() * Constant::deg_to_rad,
+		  roll() * Constant::deg_to_rad);
+}
+
+//-----------------------------------------------------------------------
+/// The local north to ECR quaternion.
+//-----------------------------------------------------------------------
 
 boost::math::quaternion<double> AircraftOrbitData::local_north_to_ecr() const
 {
@@ -163,9 +175,9 @@ AircraftOrbitData::AircraftOrbitData
 {
   boost::math::quaternion<double> body_to_ecr = Od.sc_to_cf();
   position_geodetic_ = *Od.position_cf();
-  boost::math::quaternion<double> body_to_local_north =
+  boost::math::quaternion<double> body_to_local_north_q =
     conj(local_north_to_ecr()) * body_to_ecr;
-  quat_to_euler(body_to_local_north, heading_, pitch_, roll_);
+  quat_to_euler(body_to_local_north_q, heading_, pitch_, roll_);
   heading_ *= Constant::rad_to_deg;
   pitch_ *= Constant::rad_to_deg;
   roll_ *= Constant::rad_to_deg;

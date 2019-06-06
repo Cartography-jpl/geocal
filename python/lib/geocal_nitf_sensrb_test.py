@@ -34,7 +34,11 @@ def igc_compare(od, cam):
     t.generation_date = 20000101
     t.generation_time = 0
     f.write("sensrb_test.ntf")
-    igc = OrbitDataImageGroundConnection(od, cam, SimpleDem(), None)
+    # MSP doesn't do aberration of light correction, so to match
+    # it we need to fake a 0 velocity to directly compare
+    od2 = AircraftOrbitData(od.time, od.position_cf, [0,0,0],
+                            od.roll, od.pitch, od.heading)
+    igc = OrbitDataImageGroundConnection(od2, cam, SimpleDem(), None)
     igc_msp = IgcMsp("sensrb_test.ntf", SimpleDem())
     return igc, igc_msp
 
@@ -69,49 +73,53 @@ def test_sensrb_msp(isolated_dir):
     korb = KeplerOrbit(t, t + 100.0)
     od = korb.orbit_data(t + 5)
     od_ac = AircraftOrbitData(od)
-    # Don't think sensrb does abberation of light correction, so to match
-    # it we need to fake a 0 velocity.
-    od2 = AircraftOrbitData(od.time, od.position_cf, [0,0,0], 10, 20,
-                            AircraftOrbitData(od).heading)
-    #od2 = AircraftOrbitData(od.time, od.position_cf, [0,0,0], 0, 0,
-    #                        0)
+    # Add some roll and pitch to make sure this gets accounted for correctly.
+    od = AircraftOrbitData(od_ac.time, od_ac.position_cf, [0,0,0], 10, 20,
+                           od_ac.heading)
+    
     nline = 2048
     nsamp = 1024
     cam = SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(10, 70, 20),
 		       0,0,0,0,0,0,0, 3000,
 		       nline, nsamp, 18e-6, 21e-6,
 		       123.8e-3, FrameCoordinate(nline/2, nsamp/2))
-    igc, igc_msp = igc_compare(od2, cam)
+    igc, igc_msp = igc_compare(od, cam)
+    # Compare also with igc we directly read from pynitf. Should be
+    # the same as igc, up to round off, but we want to check that.
     f = pynitf.NitfFile("sensrb_test.ntf")
-    print(f.image_segment[0].find_exactly_one_tre("SENSRB"))
-    h = 0
-    igc = OrbitDataImageGroundConnection(od2, cam, SimpleDem(), None)
-    ic = ImageCoordinate(cam.number_line(0)/2,cam.number_sample(0)/2)
-    ic.line -= 100
-    ic = ImageCoordinate(0,0)
-    p2 = igc.ground_coordinate_approx_height(ic, h)
-    print(Geodetic(od.position_cf))
-    print(Geodetic(p2))
-    od3 = f.image_segment[0].orbit_data_sensrb
-    igc2 = OrbitDataImageGroundConnection(f.image_segment[0].orbit_data_sensrb,
+    # MSP doesn't do aberration of light correction, so to match
+    # it we need to fake a 0 velocity to directly compare
+    od2 = f.image_segment[0].orbit_data_sensrb
+    od2 = AircraftOrbitData(od2.time, od2.position_cf, [0,0,0],
+                            od2.roll, od2.pitch, od2.heading)
+    igc2 = OrbitDataImageGroundConnection(od2,
                                           f.image_segment[0].camera_sensrb,
                                           SimpleDem(), None)
-    p1 = igc_msp.ground_coordinate_approx_height(ic, h)
-    p3 = igc2.ground_coordinate_approx_height(ic, h)
-    print(Geodetic(p1))
-    print(geocal_swig.distance(p1, p2))
-    print(geocal_swig.distance(p1, p3))
-    print(igc.resolution_meter())
-    print(igc.image_coordinate(p1))
-    print(igc2.image_coordinate(p1))
+    h = 0
+    if(False):
+        p1 = igc_msp.ground_coordinate_approx_height(ic, h)
+        p2 = igc.ground_coordinate_approx_height(ic, h)
+        p3 = igc2.ground_coordinate_approx_height(ic, h)
+        ic = ImageCoordinate(0,0)
+        print(f.image_segment[0].find_exactly_one_tre("SENSRB"))
+        print(Geodetic(od.position_cf))
+        print(Geodetic(p2))
+        print(Geodetic(p1))
+        print(geocal_swig.distance(p1, p2))
+        print(geocal_swig.distance(p1, p3))
+        print(igc.resolution_meter())
+        print(igc.image_coordinate(p1))
+        print(igc2.image_coordinate(p1))
     if True:
         for ln in np.linspace(0, 2048, 10):
             for smp in np.linspace(0, 1024, 10):
                 ic = ImageCoordinate(ln,smp)
                 p1 = igc_msp.ground_coordinate_approx_height(ic, h)
                 p2 = igc.ground_coordinate_approx_height(ic, h)
+                p3 = igc2.ground_coordinate_approx_height(ic, h)
                 # Pixel size is about 100m, so difference here is small
                 assert(geocal_swig.distance(p1, p2) < 5.0)
+                assert(geocal_swig.distance(p2, p3) < 5.0)
 
 
 # Need to come back to this. want to be able to generate unit vector and
@@ -142,8 +150,8 @@ def test_compare_module(isolated_dir):
     quat = [0,0,0,1]
 
     tm = Time.parse_time("2000-01-01T00:00:00.00Z")
-    # MSP doesn't include abberation of light, so we fake a zero velocity
-    # so we are comparing things more directly
+    # MSP doesn't include aberration of light coorection, so we fake a
+    # zero velocity so we are comparing things more directly
     #od = AircraftOrbitData(tm, Geodetic(0,0,700e3), [0,0,0], 0, 0, 0)
     #q = unit_to_quat([0,1,0],[0,0,1],[1,0,0])
     q = unit_to_quat([0,1,0], [0.173648178, 0, 0.984807753],

@@ -5,11 +5,12 @@
 import geocal
 import subprocess
 
-version = "February 4, 2013"
+version = "June 6, 2019"
 usage='''Usage: 
   shelve_dem [options] <dem_file> <output>
   shelve_dem [options] <dem_file> <datum_file> <output>
   shelve_dem --srtm <output>
+  shelve_dem --usgs <output>
   shelve_dem --constant-dem=h <output>
   shelve_dem -h | --help
   shelve_dem -v | --version
@@ -46,6 +47,9 @@ Options:
   --srtm
        Use the SRTM rather than supplying a DEM file.
 
+  --usgs
+       Use the USGS DEM (10 meter data over US)
+
   -v --version      
        Print program version
 '''
@@ -60,7 +64,8 @@ long_name_to_vicar = {
     "dem_band" : "banddem",
     "datum_band" : "banddatum",
     "constant_datum" : "cdatum",
-    "srtm" : "srtm"}
+    "srtm" : "srtm",
+    "usgs": "usgs"}
 
 args = geocal.docopt_simple(usage, version=version,
                             long_name_to_vicar=long_name_to_vicar)
@@ -68,6 +73,8 @@ args = geocal.docopt_simple(usage, version=version,
 dem = None
 if(args.srtm):
     dem = geocal.SrtmDem()
+elif(args.usgs):
+    dem = geocal.UsgsDem("", not args.outside_dem_not_error)
 elif(args.constant_dem is not None and args.constant_dem > -99999):
     dem = geocal.SimpleDem(args.constant_dem)
 else:

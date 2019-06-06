@@ -10,7 +10,7 @@ import subprocess
 import os
 import sys
 
-version="%prog March 8, 2017"
+version="%prog June 6, 2019"
 usage="""Usage: 
   nitfinfo [options] <input_file>
   nitfinfo -h | --help
@@ -26,6 +26,9 @@ much more complete information, but it can be a fairly long summary.
 Options:
   -h --help         
        Print this message
+
+  --debug
+       Turn on debugging statements in pynitf
 
   --full
        Print out much more complete information about the NITF file
@@ -55,5 +58,8 @@ if(not args.full):
     print(t2.decode('utf-8'),end='')
     print(t3.decode('utf-8'))
 else:
+    if(args.debug):
+        pynitf.nitf_field.DEBUG = True
+        pynitf.nitf_des.DEBUG = True
     f = pynitf.NitfFile(args.input_file)
     print(f)

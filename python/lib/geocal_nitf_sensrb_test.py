@@ -23,164 +23,48 @@ def create_image_seg(f):
 
 def igc_compare(od, cam):
     '''Given orbit data and camera, create a normal igc and a MSP igc. We
-    can then compare between them. This may go away at some point, but for
-    now useful to be able to switch between these as we develop things.'''
+    can then compare between them.'''
     f = pynitf.NitfFile()
     create_image_seg(f)
-    f.image_segment[0].orbit_data_sensrb = od
-    f.image_segment[0].camera_sensrb = cam
+    f.image_segment[0].orbit_data_and_camera(od, cam)
     t = f.image_segment[0].find_exactly_one_tre("SENSRB")
     t.sensor = "TEST"
     t.platform = "fake_platform"
     t.operation_domain = "Spaceborne"
-
-    # Temp place holder
-    t.attitude_euler_angles = "Y"
-    t.sensor_angle_model = 1
-    #t.sensor_angle_1, t.sensor_angle_2, t.sensor_angle_3 = quat_to_sensor_angle_1(cam.frame_to_sc)
-    t.sensor_angle_1, t.sensor_angle_2, t.sensor_angle_3 = 0,-80,0
-    t.platform_relative = "Y"
-    t.platform_heading = 0
-    t.platform_pitch = 0
-    t.platform_roll = 0
-    t.attitude_unit_vectors = "Y"
-    t.icx_north_or_x = 0
-    t.icx_east_or_y = 1
-    t.icx_down_or_z = 0
-    t.icy_north_or_x = .173648178
-    t.icy_east_or_y = 0
-    t.icy_down_or_z = .984807753
-    t.icz_north_or_x = .984807753
-    t.icz_east_or_y = 0
-    t.icz_down_or_z = -.173648178
-    # Temp
-    t.attitude_quaternion = "N"
-    print(t)
-
+    t.generation_date = 20000101
+    t.generation_time = 0
     f.write("sensrb_test.ntf")
     igc = OrbitDataImageGroundConnection(od, cam, SimpleDem(), None)
-    # For now, force the plugin/model handler. Reduces the noise when
-    # we diagnose problems. Should be able to remove this later.
-    igc_msp = IgcMsp("sensrb_test.ntf", SimpleDem(), "SENSRB_FrameProfile",
-                     "SENSRB_FrameProfile")
+    igc_msp = IgcMsp("sensrb_test.ntf", SimpleDem())
     return igc, igc_msp
 
-def m_ecf_to_ned(lat, lon):
-    '''Equation 3 in document "SENSRB Profile Frame Image-To-Ground 
-    Transformation Description" by Michale h. Lenihan'''
-    lat_rad = lat * deg_to_rad
-    lon_rad = lon * deg_to_rad
-    m1 = np.matrix([[0,0,1],
-                    [1,0,0],
-                    [0,1,0]])
-    m2 = np.matrix([[1, 0, 0],
-                    [0,math.cos(lat_rad),-math.sin(lat_rad)],
-                    [0,math.sin(lat_rad),math.cos(lat_rad)]])
-    m3 = np.matrix([[math.cos(lon_rad),math.sin(lon_rad),0],
-                     [-math.sin(lon_rad),math.cos(lon_rad),0],
-                     [0,0,1]])
-    m4 = np.matrix([[0,1,0],
-                    [-1,0,0],
-                    [0,0,1]])
-    return m1*m2*m3*m4
-
-def m_ned_to_ins(roll, pitch, heading):
-    '''Equation 4 in document "SENSRB Profile Frame Image-To-Ground 
-    Transformation Description" by Michale h. Lenihan'''
-    roll_rad = roll * deg_to_rad
-    pitch_rad = pitch * deg_to_rad
-    heading_rad = heading * deg_to_rad
-    m1 = np.matrix([[1,0,0],
-                    [0,math.cos(roll_rad), math.sin(roll_rad)],
-                    [0,-math.sin(roll_rad), math.cos(roll_rad)]])
-    m2 = np.matrix([[math.cos(pitch_rad), 0, -math.sin(pitch_rad)],
-                    [0,1,0],
-                    [math.sin(pitch_rad),0,math.cos(pitch_rad)]])
-    m3 = np.matrix([[math.cos(heading_rad), math.sin(heading_rad), 0],
-                    [-math.sin(heading_rad), math.cos(heading_rad), 0],
-                    [0,0,1]])
-    return m1*m2*m3
-
-# This may go into the sensorb camera model
-def q_ins_to_sen(sensor_angle_1, sensor_angle_2, sensor_angle_3):
-    '''Equation 5 in document "SENSRB Profile Frame Image-To-Ground 
-    Transformation Description" by Michale h. Lenihan'''
-    # The rotation angle seems to be "passive" rather than active,
-    # so we reverse the sign of the angles.
-    return quat_rot("XYZ", -sensor_angle_1, -sensor_angle_2, -sensor_angle_3)
-
-def q_sen_to_cam():
-    '''Equation 6 in document "SENSRB Profile Frame Image-To-Ground 
-    Transformation Description" by Michale h. Lenihan'''
-    m_sen_to_cam = np.matrix([[0,1,0],
-                              [0,0,-1],
-                              [-1,0,0]])
-    return(matrix_to_quaternion(m_sen_to_cam))
-
-def test_ecf_to_ned():
-    '''Compare our calculation of ECF to NED with
-    equation 3 in document "SENSRB Profile Frame Image-To-Ground 
-    Transformation Description" by Michale h. Lenihan'''
-    tm = Time.parse_time("2000-01-01T00:00:00.00Z")
-    od = AircraftOrbitData(tm, Geodetic(30,50,700e3), [0,0,0], 0, 0, 0)
-    npt.assert_almost_equal(m_ecf_to_ned(30,50),
-                            quaternion_to_matrix(od.sc_to_cf.conj()))
-
-def test_ecf_to_ins():
-    '''Compare our calculation of ECF to INS with equation 3 and 4'''
-    tm = Time.parse_time("2000-01-01T00:00:00.00Z")
-    od = AircraftOrbitData(tm, Geodetic(30,50,700e3), [0,0,0], 10, 20, 30)
-    npt.assert_almost_equal(m_ned_to_ins(10,20,30) * m_ecf_to_ned(30,50),
-                            quaternion_to_matrix(od.sc_to_cf.conj()))
-    
-
 @require_pynitf
-def test_sensrb_od(isolated_dir):
+def test_sensrb_cam_od(isolated_dir):
     '''Create a file, and write out a SENSRB, then make sure we can read it.'''
     f = pynitf.NitfFile()
     create_image_seg(f)
     t = Time.parse_time("1998-06-30T10:51:28.32Z")
     korb = KeplerOrbit(t, t + 100.0)
     od = korb.orbit_data(t + 5)
-    f.image_segment[0].orbit_data_sensrb = od
-    f.image_segment[0].orbit_data_sensrb = od
+    cam = SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(10, 70, 20),
+		       0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3000,
+		       2048, 1024, 18e-6, 21e-6,
+		       123.8e-3, FrameCoordinate(2048/2, 1024/2))
+    f.image_segment[0].orbit_data_and_camera(od, cam)
     f.write("sensrb_test.ntf")
     f2 = pynitf.NitfFile("sensrb_test.ntf")
     od2 = f2.image_segment[0].orbit_data_sensrb
-    print(od)
-    print(od2)
-    cam = SimpleCamera()
+    cam2 = f2.image_segment[0].camera_sensrb
     fc = FrameCoordinate(0,752)
     dem = SimpleDem()
     assert(distance(od.surface_intersect(cam, fc, dem),
-                    od2.surface_intersect(cam, fc, dem)) < 1.0)
+                    od2.surface_intersect(cam2, fc, dem)) < 1.0)
 
-@require_pynitf
-def test_sensrb_cam(isolated_dir):
-    '''Create a file, and write out a SENSRB, then make sure we can read it.'''
-    f = pynitf.NitfFile()
-    create_image_seg(f)
-    t = Time.parse_time("1998-06-30T10:51:28.32Z")
-    korb = KeplerOrbit(t, t + 100.0)
-    od = korb.orbit_data(t + 5)
-    f.image_segment[0].orbit_data_sensrb = od
-    cam = SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(10, 20, 30),
-		       1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 3000,
-		       2048, 1024, 18e-6, 21e-6,
-		       123.8e-3, FrameCoordinate(2048/2, 1024/2))
-    f.image_segment[0].camera_sensrb = cam
-    f.write("sensrb_test.ntf")
-    f2 = pynitf.NitfFile("sensrb_test.ntf")
-    cam2 = f2.image_segment[0].camera_sensrb
-    print(cam)
-    print(cam2)
 
 @require_msp    
 @require_pynitf
 def test_sensrb_msp(isolated_dir):
     '''Compare SENSRB computionation with MSP library'''
-    f = pynitf.NitfFile()
-    create_image_seg(f)
     t = Time.parse_time("1998-06-30T10:51:28.32Z")
     korb = KeplerOrbit(t, t + 100.0)
     od = korb.orbit_data(t + 5)
@@ -191,22 +75,15 @@ def test_sensrb_msp(isolated_dir):
                             AircraftOrbitData(od).heading)
     od2 = AircraftOrbitData(od.time, od.position_cf, [0,0,0], 0, 0,
                             0)
-    f.image_segment[0].orbit_data_sensrb = od2
     nline = 2048
     nsamp = 1024
     cam = SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(10, 70, 20),
 		       0,0,0,0,0,0,0, 3000,
 		       nline, nsamp, 18e-6, 21e-6,
 		       123.8e-3, FrameCoordinate(nline/2, nsamp/2))
-    f.image_segment[0].camera_sensrb = cam
-    t = f.image_segment[0].find_exactly_one_tre("SENSRB")
-    t.sensor = "TEST"
-    t.platform = "fake_platform"
-    t.operation_domain = "Spaceborne"
-    t.generation_date = 20000101
-    t.generation_time = 0
-    print(t)
-    f.write("sensrb_test.ntf")
+    igc, igc_msp = igc_compare(od2, cam)
+    f = pynitf.NitfFile("sensrb_test.ntf")
+    print(f.image_segment[0].find_exactly_one_tre("SENSRB"))
     h = 0
     igc = OrbitDataImageGroundConnection(od2, cam, SimpleDem(), None)
     ic = ImageCoordinate(cam.number_line(0)/2,cam.number_sample(0)/2)
@@ -215,11 +92,9 @@ def test_sensrb_msp(isolated_dir):
     p2 = igc.ground_coordinate_approx_height(ic, h)
     print(Geodetic(od.position_cf))
     print(Geodetic(p2))
-    igc_msp = IgcMsp("sensrb_test.ntf", SimpleDem())
-    f2 = pynitf.NitfFile("sensrb_test.ntf")
-    od3 = f2.image_segment[0].orbit_data_sensrb
-    igc2 = OrbitDataImageGroundConnection(f2.image_segment[0].orbit_data_sensrb,
-                                          f2.image_segment[0].camera_sensrb,
+    od3 = f.image_segment[0].orbit_data_sensrb
+    igc2 = OrbitDataImageGroundConnection(f.image_segment[0].orbit_data_sensrb,
+                                          f.image_segment[0].camera_sensrb,
                                           SimpleDem(), None)
     p1 = igc_msp.ground_coordinate_approx_height(ic, h)
     p3 = igc2.ground_coordinate_approx_height(ic, h)

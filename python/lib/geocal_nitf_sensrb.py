@@ -51,7 +51,9 @@ if(have_pynitf):
                                      t.platform_pitch, t.platform_heading)
         return AircraftOrbitData(tm, p, v, 0, 0, 0)
 
-    def _orbit_data_sensrb_set(self, od):
+    def _orbit_data_and_cam_sensrb_set(self, od, cam):
+        '''Set orbit data and camera. We need to do this at the
+        same time because they are tied together.'''
         t = self.find_one_tre("SENSRB")
         if(t is None):
             t = TreSENSRB()
@@ -105,42 +107,7 @@ if(have_pynitf):
         t.platform_pitch = od2.pitch
         t.platform_roll = od2.roll
 
-    NitfImageSegment.orbit_data_sensrb = property(_orbit_data_sensrb_get,
-                                                  _orbit_data_sensrb_set)
-
-    def _camera_sensrb_get(self):
-        t = self.find_exactly_one_tre("SENSRB")
-        if(not(t.sensor_array_data == "Y" and
-               t.sensor_calibration_data == "Y" and
-               t.length_unit == "SI" and
-               t.calibration_unit == "px" and
-               t.angular_unit == "DEG" and
-               t.attitude_euler_angles == "Y" and
-               t.sensor_angle_model == 1)):
-            raise RuntimeError("Don't know how to interpret TRE to get Camera")
-        return SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(
-                              t.sensor_angle_1, t.sensor_angle_2,
-                              t.sensor_angle_3),
-		            t.radial_distort_1, t.radial_distort_2,
-                            t.radial_distort_3, t.decent_distort_1,
-                            t.decent_distort_2, t.affinity_distort_1,
-                            t.affinity_distort_2, t.radial_distort_limit,
-		            t.row_detectors, t.column_detectors,
-                            t.row_metric / 10.0 / t.row_detectors,
-                            t.column_metric / 10.0 / t.column_detectors,
-		            t.focal_length / 10.0,
-                            FrameCoordinate(t.principal_point_offset_x +
-                                            t.row_detectors / 2.0,
-                                            t.principal_point_offset_y +
-                                            t.column_detectors / 2.0),
-                            t.detection,
-                            t.calibration_date)
-
-    def _camera_sensrb_set(self, cam):
-        t = self.find_one_tre("SENSRB")
-        if(t is None):
-            t = TreSENSRB()
-            self.tre_list.append(t)
+        # Now do the camera part
         t.sensor_array_data = "Y"
         t.calibrated = "Y"
         t.sensor_calibration_data = "Y"
@@ -187,10 +154,39 @@ if(have_pynitf):
         t.first_pixel_column = 1
         t.transform_params = 0
         
-        # Need to add handling of quaterion
+    NitfImageSegment.orbit_data_sensrb = property(_orbit_data_sensrb_get)
+
+    def _camera_sensrb_get(self):
+        t = self.find_exactly_one_tre("SENSRB")
+        if(not(t.sensor_array_data == "Y" and
+               t.sensor_calibration_data == "Y" and
+               t.length_unit == "SI" and
+               t.calibration_unit == "px" and
+               t.angular_unit == "DEG" and
+               t.attitude_euler_angles == "Y" and
+               t.sensor_angle_model == 1)):
+            raise RuntimeError("Don't know how to interpret TRE to get Camera")
+        return SensrbCamera(SensrbCamera.sensor_angle_to_quaternion(
+                              t.sensor_angle_1, t.sensor_angle_2,
+                              t.sensor_angle_3),
+		            t.radial_distort_1, t.radial_distort_2,
+                            t.radial_distort_3, t.decent_distort_1,
+                            t.decent_distort_2, t.affinity_distort_1,
+                            t.affinity_distort_2, t.radial_distort_limit,
+		            t.row_detectors, t.column_detectors,
+                            t.row_metric / 10.0 / t.row_detectors,
+                            t.column_metric / 10.0 / t.column_detectors,
+		            t.focal_length / 10.0,
+                            FrameCoordinate(t.principal_point_offset_x +
+                                            t.row_detectors / 2.0,
+                                            t.principal_point_offset_y +
+                                            t.column_detectors / 2.0),
+                            t.detection,
+                            t.calibration_date)
+
         
-    NitfImageSegment.camera_sensrb = property(_camera_sensrb_get,
-                                              _camera_sensrb_set)
+    NitfImageSegment.camera_sensrb = property(_camera_sensrb_get)
+    NitfImageSegment.orbit_data_and_camera = _orbit_data_and_cam_sensrb_set
     
 
 if(have_pynitf):

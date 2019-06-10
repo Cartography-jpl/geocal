@@ -1,7 +1,8 @@
 from geocal_swig import (nitf_to_quaternion, quaternion_to_nitf, Ecr,
                          QuaternionOrbitData, Time, SensrbCamera,
                          Quaternion_double, FrameCoordinate,
-                         AircraftOrbitData, quat_rot, deg_to_rad)
+                         AircraftOrbitData, quat_rot, deg_to_rad,
+                         quaternion_to_array)
 try:
     from pynitf import TreSENSRB, NitfImageSegment
     have_pynitf = True
@@ -53,12 +54,21 @@ if(have_pynitf):
 
     NitfImageSegment.orbit_data_sensrb = property(_orbit_data_sensrb_get)
 
+    def _attitude_quaternion_sensrb_get(self):
+        t = self.find_exactly_one_tre("SENSRB")
+        if(t.attitude_quaternion == "N"):
+            return None
+        return nitf_to_quaternion([t.attitude_q1, t.attitude_q2, t.attitude_q3,
+                                   t.attitude_q4])
+
+    NitfImageSegment.attitude_quaternion_sensrb = property(_attitude_quaternion_sensrb_get)
+
     def _camera_sensrb_get(self):
         t = self.find_exactly_one_tre("SENSRB")
         if(not(t.sensor_array_data == "Y" and
                t.sensor_calibration_data == "Y" and
                t.length_unit == "SI" and
-               t.calibration_unit == "px" and
+               t.calibration_unit == "mm" and
                t.angular_unit == "DEG" and
                t.attitude_euler_angles == "Y" and
                t.sensor_angle_model == 1)):
@@ -72,18 +82,20 @@ if(have_pynitf):
             # out so we get just the camera frame_to_sc part.
             q = self.orbit_data_sensrb.body_to_local_north.conj() * q
 
+        line_pitch = t.row_metric / 10.0 / t.row_detectors
+        sample_pitch = t.column_metric / 10.0 / t.column_detectors
         return SensrbCamera(q,
 		            t.radial_distort_1, t.radial_distort_2,
                             t.radial_distort_3, t.decent_distort_1,
                             t.decent_distort_2, t.affinity_distort_1,
                             t.affinity_distort_2, t.radial_distort_limit,
 		            t.row_detectors, t.column_detectors,
-                            t.row_metric / 10.0 / t.row_detectors,
-                            t.column_metric / 10.0 / t.column_detectors,
-		            t.focal_length / 10.0,
-                            FrameCoordinate(t.principal_point_offset_x +
+                            line_pitch, sample_pitch, t.focal_length / 10.0,
+                            FrameCoordinate(t.principal_point_offset_y /
+                                            line_pitch +
                                             t.row_detectors / 2.0,
-                                            t.principal_point_offset_y +
+                                            t.principal_point_offset_x /
+                                            sample_pitch +
                                             t.column_detectors / 2.0),
                             t.detection,
                             t.calibration_date)
@@ -99,6 +111,7 @@ if(have_pynitf):
             t = TreSENSRB()
             self.tre_list.append(t)
         t.general_data = "Y"
+        t.content_level = 4
         t.geodetic_system = "WGS84"
         t.geodetic_type = "C"
         t.elevation_datum = "HAE"
@@ -129,8 +142,6 @@ if(have_pynitf):
         t.velocity_down_or_z = v[2]
         t.attitude_euler_angles = "Y"
         t.sensor_angle_model = 1
-        t.attitude_unit_vectors = "N"
-        t.attitude_quaternion = "N"
         od2 = AircraftOrbitData(od)
         # The MSP library ignored the platform_relative and always treats
         # this as "N". So we'll write out our data with the "N" to have
@@ -153,7 +164,7 @@ if(have_pynitf):
         t.sensor_calibration_data = "Y"
         t.length_unit = "SI"
         t.angular_unit = "DEG"
-        t.calibration_unit = "px"
+        t.calibration_unit = "mm"
         t.generation_count = 0
         t.generation_date = None
         t.generation_time = None
@@ -169,8 +180,8 @@ if(have_pynitf):
         t.focal_length = cam.focal_length * 10.0
         t.row_fov = None
         t.column_fov = None
-        t.principal_point_offset_x = cam.principal_point(0).line - cam.number_line(0) / 2.0
-        t.principal_point_offset_y = cam.principal_point(0).sample - cam.number_sample(0) / 2.0
+        t.principal_point_offset_y = (cam.principal_point(0).line - cam.number_line(0) / 2.0) * cam.line_pitch
+        t.principal_point_offset_x = (cam.principal_point(0).sample - cam.number_sample(0) / 2.0) * cam.sample_pitch
         t.radial_distort_1 = cam.k1
         t.radial_distort_2 = cam.k2
         t.radial_distort_3 = cam.k3
@@ -193,6 +204,18 @@ if(have_pynitf):
         t.first_pixel_row = 1
         t.first_pixel_column = 1
         t.transform_params = 0
+        # Quaternion version of rotation. This is redundant with Euler angles
+        t.attitude_quaternion = "Y"
+        # Equation 6
+        m_sen_to_cam = Quaternion_double(0.5, 0.5, 0.5, -0.5) 
+        t.attitude_q1, t.attitude_q2, t.attitude_q3, t.attitude_q4 = quaternion_to_nitf(od2.sc_to_cf * cam.frame_to_sc * m_sen_to_cam)
+        # Unit vector version of rotation. This is redundant with Euler angles
+        t.attitude_unit_vectors = "Y"
+        q = od2.sc_to_cf * cam.frame_to_sc
+        t.icx_north_or_x, t.icy_north_or_x, t.icz_north_or_x = quaternion_to_array(q.conj() * Quaternion_double(0,1,0,0) * q)[1:4]
+        t.icx_east_or_y, t.icy_east_or_y, t.icz_east_or_y = quaternion_to_array(q.conj() * Quaternion_double(0,0,1,0) * q)[1:4]
+        t.icx_down_or_z, t.icy_down_or_z, t.icz_down_or_z = quaternion_to_array(q.conj() * Quaternion_double(0,0,0,1) * q)[1:4]
+        
         
     NitfImageSegment.orbit_data_and_camera = _orbit_data_and_cam_sensrb_set
     

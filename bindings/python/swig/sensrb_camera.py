@@ -199,6 +199,10 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     distortion model,
     seehttps://en.wikipedia.org/wiki/Distortion_(optics).
 
+    Note, I think we need to have the various constants in mm rather than
+    pixel - I think this is required by MSP library and normally we do
+    this in x,y space - not line/sample space.
+
     This is the camera model used by the SENSRB TRE in NITF files.
 
     The convention used by SENSRB is that line is in the +y direction,

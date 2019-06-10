@@ -33,6 +33,9 @@ def igc_compare(od, cam):
     t.operation_domain = "Spaceborne"
     t.generation_date = 20000101
     t.generation_time = 0
+    # Temp
+    #t.principal_point_offset_x = 1.8e-5
+    #t.principal_point_offset_x = 21e-6 * 1e3
     f.write("sensrb_test.ntf")
     # MSP doesn't do aberration of light correction, so to match
     # it we need to fake a 0 velocity to directly compare
@@ -87,6 +90,12 @@ def test_sensrb_msp(isolated_dir):
     # Compare also with igc we directly read from pynitf. Should be
     # the same as igc, up to round off, but we want to check that.
     f = pynitf.NitfFile("sensrb_test.ntf")
+    # Write out tre as string
+    fh2 = six.BytesIO()
+    t = f.image_segment[0].find_one_tre("SENSRB")
+    t.write_to_file(fh2)
+    print(fh2.getvalue())
+    print(f.image_segment[0].attitude_quaternion_sensrb)
     # MSP doesn't do aberration of light correction, so to match
     # it we need to fake a 0 velocity to directly compare
     od2 = f.image_segment[0].orbit_data_sensrb
@@ -96,20 +105,20 @@ def test_sensrb_msp(isolated_dir):
                                           f.image_segment[0].camera_sensrb,
                                           SimpleDem(), None)
     h = 0
-    if(False):
+    if(True):
+        ic = ImageCoordinate(0,0)
         p1 = igc_msp.ground_coordinate_approx_height(ic, h)
         p2 = igc.ground_coordinate_approx_height(ic, h)
-        p3 = igc2.ground_coordinate_approx_height(ic, h)
-        ic = ImageCoordinate(0,0)
+        #p3 = igc2.ground_coordinate_approx_height(ic, h)
         print(f.image_segment[0].find_exactly_one_tre("SENSRB"))
         print(Geodetic(od.position_cf))
         print(Geodetic(p2))
         print(Geodetic(p1))
         print(geocal_swig.distance(p1, p2))
-        print(geocal_swig.distance(p1, p3))
+        #print(geocal_swig.distance(p1, p3))
         print(igc.resolution_meter())
         print(igc.image_coordinate(p1))
-        print(igc2.image_coordinate(p1))
+        #print(igc2.image_coordinate(p1))
     if True:
         for ln in np.linspace(0, 2048, 10):
             for smp in np.linspace(0, 1024, 10):

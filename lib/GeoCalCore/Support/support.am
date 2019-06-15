@@ -69,8 +69,6 @@ SWIG_SRC += @swigsrc@/numpy_sample_wrap.cc
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/constant_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/constant.i
-SWIG_SRC += @swigsrc@/iostream_swig_test_wrap.cc
-geocalswiginc_HEADERS += @srcsupport@/iostream_swig_test.i
 SWIG_SRC += @swigsrc@/generic_object_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/generic_object.i
 SWIG_SRC += @swigsrc@/auto_derivative_wrap.cc

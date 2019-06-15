@@ -2,9 +2,8 @@
 // (Not really c++, but closest emacs mode)
 
 %include "geocal_common.i"
-
 %{
-#include "geocal_serialize_function.h"
+#include "serialize_function.h"
 %}
 %import "generic_object.i"
 

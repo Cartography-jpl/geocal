@@ -3,7 +3,8 @@
 #include <boost/tokenizer.hpp>
 #include <boost/foreach.hpp>
 #include "geocal_serialize_support.h"
-#include "geocal_serialize_function.h"
+#define SWIG_MAPPER_NAMESPACE GeoCal
+#include "serialize_function.h"
 #include "rsm_nitf.h"
 #include <boost/filesystem.hpp>
 #define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE

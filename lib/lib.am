@@ -1,19 +1,13 @@
 # This gets included in the top makefile. This list files here that are
 # used to make up libgeocal.la.
 
-SWIG_SRC += @swigsrc@/swig_std_wrap.cc
 SWIG_SRC += @swigsrc@/swig_quaternion_wrap.cc
+SWIG_SRC += @swigsrc@/serialize_function_wrap.cc
 
 geocalswiginc_HEADERS += @libgeocal@/geocal_common.i
 geocalswiginc_HEADERS += @libgeocal@/geocal_shared_ptr.i
-geocalswiginc_HEADERS += @libgeocal@/swig_boost_optional.i
-geocalswiginc_HEADERS += @libgeocal@/swig_exception.i
-geocalswiginc_HEADERS += @libgeocal@/swig_iostream.i
-geocalswiginc_HEADERS += @libgeocal@/swig_iostream_inc.i
-geocalswiginc_HEADERS += @libgeocal@/swig_pickle.i
-geocalswiginc_HEADERS += @libgeocal@/swig_print.i
 geocalswiginc_HEADERS += @libgeocal@/swig_quaternion.i
-geocalswiginc_HEADERS += @libgeocal@/swig_std.i
+geocalswiginc_HEADERS += @libgeocal@/serialize_function.i
 
 EXTRA_DIST += @libgeocal@/dummy.pdf
 EXTRA_DIST += @libgeocal@/geocal_doxygen.h

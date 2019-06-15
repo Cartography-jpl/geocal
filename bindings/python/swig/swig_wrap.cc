@@ -1,12 +1,13 @@
 #define PYTHON_MODULE_NAME _swig_wrap
 #include "python_lib_init.h"
-#include "geocal_config.h"
 
 extern "C" {
+#include "geocal_config.h"
   INIT_TYPE INIT_FUNC(_swig_array)(void);
   INIT_TYPE INIT_FUNC(_swig_boost_array)(void);
   INIT_TYPE INIT_FUNC(_swig_std)(void);
   INIT_TYPE INIT_FUNC(_swig_quaternion)(void);
+  INIT_TYPE INIT_FUNC(_serialize_function)(void);
   INIT_TYPE INIT_FUNC(_numpy_sample)(void);
   INIT_TYPE INIT_FUNC(_constant)(void);
   INIT_TYPE INIT_FUNC(_iostream_swig_test)(void);
@@ -26,7 +27,6 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_geocal_gsl_root)(void);
   INIT_TYPE INIT_FUNC(_geocal_time)(void);
   INIT_TYPE INIT_FUNC(_tiled_file)(void);
-  INIT_TYPE INIT_FUNC(_geocal_serialize_function)(void);
   INIT_TYPE INIT_FUNC(_geocal_fftw)(void);
   INIT_TYPE INIT_FUNC(_image_coordinate)(void);
   INIT_TYPE INIT_FUNC(_tie_point)(void);
@@ -222,6 +222,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_swig_boost_array", INIT_FUNC(_swig_boost_array));
   INIT_MODULE(module, "_swig_std", INIT_FUNC(_swig_std));
   INIT_MODULE(module, "_swig_quaternion", INIT_FUNC(_swig_quaternion));
+  INIT_MODULE(module, "_serialize_function", INIT_FUNC(_serialize_function));
   INIT_MODULE(module, "_numpy_sample", INIT_FUNC(_numpy_sample));
   INIT_MODULE(module, "_constant", INIT_FUNC(_constant));
   INIT_MODULE(module, "_iostream_swig_test", INIT_FUNC(_iostream_swig_test));
@@ -241,7 +242,6 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_geocal_gsl_root", INIT_FUNC(_geocal_gsl_root));
   INIT_MODULE(module, "_geocal_time", INIT_FUNC(_geocal_time));
   INIT_MODULE(module, "_tiled_file", INIT_FUNC(_tiled_file));
-  INIT_MODULE(module, "_geocal_serialize_function", INIT_FUNC(_geocal_serialize_function));
   INIT_MODULE(module, "_geocal_fftw", INIT_FUNC(_geocal_fftw));
   INIT_MODULE(module, "_image_coordinate", INIT_FUNC(_image_coordinate));
   INIT_MODULE(module, "_tie_point", INIT_FUNC(_tie_point));

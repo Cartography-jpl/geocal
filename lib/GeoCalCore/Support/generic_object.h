@@ -1,5 +1,5 @@
-#ifndef GENERIC_OBJECT_H
-#define GENERIC_OBJECT_H
+#ifndef GEOCAL_GENERIC_OBJECT_H
+#define GEOCAL_GENERIC_OBJECT_H
 // These get defined in geocal_config.h. Undef them to stop warnings
 // if we change these.
 #undef PACKAGE

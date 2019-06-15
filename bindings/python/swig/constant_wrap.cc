@@ -4210,8 +4210,8 @@ SWIGINTERNINLINE PyObject*
   std::string parse_python_exception();
 
 
-#include "geocal_serialize_function.h"
-#include "geocal_exception.h"
+#include "serialize_function.h"
+#include <stdexcept>
 // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
 std::string parse_python_exception();
 
@@ -4234,10 +4234,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    GeoCal::Exception e;
-    e << "Python error occurred:\n"
-      << parse_python_exception();
-    throw e;
+    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
   }
   return std::string(PyString_AsString(res));
 }
@@ -4249,10 +4246,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyString_FromString(S.c_str()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    GeoCal::Exception e;
-    e << "Python error occurred:\n"
-      << parse_python_exception();
-    throw e;
+    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
   }
   return res;
 }
@@ -5578,6 +5572,7 @@ template<class T, int D> inline boost::array<T, D>
 
 
 #include <ios>
+#include <stdexcept>  
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/categories.hpp>
 
@@ -5598,7 +5593,7 @@ public:
   {
     PyObject* res = PyObject_CallMethod(fh, "read", "(i)", (int) n);
     if(res == NULL) {
-      throw GeoCal::Exception("Call to FileHandle read failed");
+      throw std::runtime_error("Call to FileHandle read failed");
     }
     char *rescp = PyBytes_AsString(res);
     std::copy(rescp, rescp + n, s);
@@ -5607,7 +5602,7 @@ public:
   }
   std::streamoff seek(std::streamoff off, std::ios_base::seekdir way)
   {
-    throw GeoCal::Exception("Not implemented");
+    throw std::runtime_error("Not implemented");
   }
   std::streamsize write(const char* s, std::streamsize n)
   {
@@ -5618,7 +5613,7 @@ public:
     PyObject* res = PyObject_CallMethod(fh, "write", "(s#)", s, (int) n);
 #endif    
     if(res == NULL) {
-      throw GeoCal::Exception("Call to FileHandle write failed");
+      throw std::runtime_error("Call to FileHandle write failed");
     } else {
       Py_DECREF(res);
     }

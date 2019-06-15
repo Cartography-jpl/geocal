@@ -643,6 +643,8 @@ BUILD_AFIDS_FALSE
 BUILD_AFIDS_TRUE
 WITH_DOCUMENTATION_FALSE
 WITH_DOCUMENTATION_TRUE
+HAVE_BOOST_SERIALIZATION_FALSE
+HAVE_BOOST_SERIALIZATION_TRUE
 LIBM
 IS_MAC64_FALSE
 IS_MAC64_TRUE
@@ -25656,6 +25658,14 @@ if test "$with_boost_serialization" = "yes"; then
 $as_echo "#define GEOCAL_HAVE_BOOST_SERIALIZATION /**/" >>confdefs.h
 
 fi
+ if  test "$with_boost_serialization" = "yes" ; then
+  HAVE_BOOST_SERIALIZATION_TRUE=
+  HAVE_BOOST_SERIALIZATION_FALSE='#'
+else
+  HAVE_BOOST_SERIALIZATION_TRUE='#'
+  HAVE_BOOST_SERIALIZATION_FALSE=
+fi
+
 
 #=================================================================
 # Option to bypass running doxygen to update documentation. This is useful
@@ -26180,6 +26190,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${IS_MAC64_TRUE}" && test -z "${IS_MAC64_FALSE}"; then
   as_fn_error $? "conditional \"IS_MAC64\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_BOOST_SERIALIZATION_TRUE}" && test -z "${HAVE_BOOST_SERIALIZATION_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_BOOST_SERIALIZATION\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${WITH_DOCUMENTATION_TRUE}" && test -z "${WITH_DOCUMENTATION_FALSE}"; then

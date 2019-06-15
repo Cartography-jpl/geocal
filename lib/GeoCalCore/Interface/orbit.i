@@ -5,14 +5,6 @@
 
 %{
 #include "orbit.h"
-// #include "geocal_serialize_function.h"
-// #include "geocal_serialize_support.h"
-// #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-// #include <boost/archive/polymorphic_xml_iarchive.hpp>
-// #include <boost/archive/polymorphic_xml_oarchive.hpp>
-// #include <boost/archive/polymorphic_binary_iarchive.hpp>
-// #include <boost/archive/polymorphic_binary_oarchive.hpp>
-// #endif
 %}
 %base_import(generic_object)
 %base_import(observer)

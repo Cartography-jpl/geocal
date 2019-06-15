@@ -1,5 +1,5 @@
-#ifndef PRINTABLE_H
-#define PRINTABLE_H
+#ifndef GEOCAL_PRINTABLE_H
+#define GEOCAL_PRINTABLE_H
 #include "generic_object.h"
 #include <sstream>
 

@@ -4295,8 +4295,8 @@ SWIGINTERNINLINE PyObject*
   std::string parse_python_exception();
 
 
-#include "geocal_serialize_function.h"
-#include "geocal_exception.h"
+#include "serialize_function.h"
+#include <stdexcept>
 // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
 std::string parse_python_exception();
 
@@ -4319,10 +4319,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    GeoCal::Exception e;
-    e << "Python error occurred:\n"
-      << parse_python_exception();
-    throw e;
+    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
   }
   return std::string(PyString_AsString(res));
 }
@@ -4334,10 +4331,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyString_FromString(S.c_str()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    GeoCal::Exception e;
-    e << "Python error occurred:\n"
-      << parse_python_exception();
-    throw e;
+    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
   }
   return res;
 }
@@ -5663,6 +5657,7 @@ template<class T, int D> inline boost::array<T, D>
 
 
 #include <ios>
+#include <stdexcept>  
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/iostreams/categories.hpp>
 
@@ -5683,7 +5678,7 @@ public:
   {
     PyObject* res = PyObject_CallMethod(fh, "read", "(i)", (int) n);
     if(res == NULL) {
-      throw GeoCal::Exception("Call to FileHandle read failed");
+      throw std::runtime_error("Call to FileHandle read failed");
     }
     char *rescp = PyBytes_AsString(res);
     std::copy(rescp, rescp + n, s);
@@ -5692,7 +5687,7 @@ public:
   }
   std::streamoff seek(std::streamoff off, std::ios_base::seekdir way)
   {
-    throw GeoCal::Exception("Not implemented");
+    throw std::runtime_error("Not implemented");
   }
   std::streamsize write(const char* s, std::streamsize n)
   {
@@ -5703,7 +5698,7 @@ public:
     PyObject* res = PyObject_CallMethod(fh, "write", "(s#)", s, (int) n);
 #endif    
     if(res == NULL) {
-      throw GeoCal::Exception("Call to FileHandle write failed");
+      throw std::runtime_error("Call to FileHandle write failed");
     } else {
       Py_DECREF(res);
     }
@@ -5795,14 +5790,6 @@ namespace swig {
 
 
 #include "orbit.h"
-// #include "geocal_serialize_function.h"
-// #include "geocal_serialize_support.h"
-// #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-// #include <boost/archive/polymorphic_xml_iarchive.hpp>
-// #include <boost/archive/polymorphic_xml_oarchive.hpp>
-// #include <boost/archive/polymorphic_binary_iarchive.hpp>
-// #include <boost/archive/polymorphic_binary_oarchive.hpp>
-// #endif
 
 
 SWIGINTERN int
@@ -6551,10 +6538,7 @@ void SwigDirector_Orbit::add_observer(GeoCal::Observer< GeoCal::Orbit > &Obs) {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6583,10 +6567,7 @@ void SwigDirector_Orbit::remove_observer(GeoCal::Observer< GeoCal::Orbit > &Obs)
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6614,10 +6595,7 @@ blitz::Array< double,1 > SwigDirector_Orbit::parameter() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6669,10 +6647,7 @@ void SwigDirector_Orbit::parameter(blitz::Array< double,1 > const &V) {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6701,10 +6676,7 @@ GeoCal::ArrayAd< double,1 > SwigDirector_Orbit::parameter_with_derivative() cons
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6741,10 +6713,7 @@ void SwigDirector_Orbit::parameter_with_derivative(GeoCal::ArrayAd< double,1 > c
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6770,10 +6739,7 @@ std::vector< std::string,std::allocator< std::string > > SwigDirector_Orbit::par
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6809,10 +6775,7 @@ blitz::Array< double,1 > SwigDirector_Orbit::parameter_subset() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6864,10 +6827,7 @@ void SwigDirector_Orbit::parameter_subset(blitz::Array< double,1 > const &V) {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6896,10 +6856,7 @@ GeoCal::ArrayAd< double,1 > SwigDirector_Orbit::parameter_with_derivative_subset
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6936,10 +6893,7 @@ void SwigDirector_Orbit::parameter_with_derivative_subset(GeoCal::ArrayAd< doubl
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -6965,10 +6919,7 @@ std::vector< std::string,std::allocator< std::string > > SwigDirector_Orbit::par
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7004,10 +6955,7 @@ blitz::Array< bool,1 > SwigDirector_Orbit::parameter_mask() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7056,10 +7004,7 @@ GeoCal::CartesianInertialLookVector SwigDirector_Orbit::ci_look_vector(GeoCal::T
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7105,10 +7050,7 @@ GeoCal::CartesianInertialLookVectorWithDerivative SwigDirector_Orbit::ci_look_ve
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7154,10 +7096,7 @@ GeoCal::CartesianFixedLookVector SwigDirector_Orbit::cf_look_vector(GeoCal::Time
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7203,10 +7142,7 @@ GeoCal::CartesianFixedLookVectorWithDerivative SwigDirector_Orbit::cf_look_vecto
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7252,10 +7188,7 @@ GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T, GeoCal::
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7301,10 +7234,7 @@ GeoCal::ScLookVectorWithDerivative SwigDirector_Orbit::sc_look_vector(GeoCal::Ti
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7350,10 +7280,7 @@ GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T, GeoCal::
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7399,10 +7326,7 @@ GeoCal::ScLookVectorWithDerivative SwigDirector_Orbit::sc_look_vector(GeoCal::Ti
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7448,10 +7372,7 @@ GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T, GeoCal::
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7492,10 +7413,7 @@ boost::shared_ptr< GeoCal::CartesianInertial > SwigDirector_Orbit::position_ci(G
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7546,10 +7464,7 @@ boost::shared_ptr< GeoCal::CartesianFixed > SwigDirector_Orbit::position_cf(GeoC
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7600,10 +7515,7 @@ boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::Ti
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7654,10 +7566,7 @@ boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::Ti
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }
@@ -7701,10 +7610,7 @@ std::string SwigDirector_Orbit::print_to_string() {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        GeoCal::Exception e;
-        e << "Python error occured:\n"
-        << parse_python_exception();
-        throw e;
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
       }
     }
   }

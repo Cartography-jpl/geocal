@@ -3127,8 +3127,11 @@ namespace swig {
 }
 
 
-#include "geocal_serialize_function.h"
-#include "geocal_exception.h"
+#define SWIG_MAPPER_NAMESPACE GeoCal
+
+
+#include "serialize_function.h"
+#include <stdexcept>
 // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
 std::string parse_python_exception();
 
@@ -3151,10 +3154,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    GeoCal::Exception e;
-    e << "Python error occurred:\n"
-      << parse_python_exception();
-    throw e;
+    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
   }
   return std::string(PyString_AsString(res));
 }
@@ -3166,10 +3166,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyString_FromString(S.c_str()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    GeoCal::Exception e;
-    e << "Python error occurred:\n"
-      << parse_python_exception();
-    throw e;
+    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
   }
   return res;
 }

@@ -1,5 +1,8 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+%{
+#define SWIG_MAPPER_NAMESPACE GeoCal
+%}
 %include "swig_pickle.i"
 %include "swig_python_attribute.i"
 %{

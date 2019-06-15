@@ -5,7 +5,8 @@
 #endif
 #include "geocal_exception.h"
 #include "geocal_serialize_support.h"
-#include "geocal_serialize_function.h"
+#define SWIG_MAPPER_NAMESPACE GeoCal
+#include "serialize_function.h"
 #include "simple_dem.h"
 #include "rsm_nitf.h"
 #include <string>

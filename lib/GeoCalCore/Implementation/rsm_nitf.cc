@@ -1,5 +1,6 @@
 #include "rsm_nitf.h"
-#include "geocal_serialize_function.h"
+#define SWIG_MAPPER_NAMESPACE GeoCal
+#include "serialize_function.h"
 #include <cstdio>
 using namespace GeoCal;
 

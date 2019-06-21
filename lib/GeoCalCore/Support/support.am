@@ -61,11 +61,6 @@ libgeocal_la_SOURCES+= @srcsupport@/hdf_file.cc
 endif
 geocalinc_HEADERS+= @srcsupport@/tre_support.h
 
-# Don't actually install this, it is for unit testing only
-EXTRA_DIST+= @srcsupport@/numpy_sample.h
-EXTRA_DIST+= @srcsupport@/numpy_sample.i
-SWIG_SRC += @swigsrc@/numpy_sample_wrap.cc
-
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/constant_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/constant.i

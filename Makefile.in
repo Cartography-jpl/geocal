@@ -2943,7 +2943,9 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@swigrules@/lib/serialize_support.h.sample \
 	@swigrules@/lib/blitz_array_serialize_support.h.sample \
 	@swigrules@/lib/blitz_array_serialize_support.cc.sample \
-	@swigrules@/lib/serialize_function.i.sample $(patsubst \
+	@swigrules@/lib/serialize_function.i.sample \
+	@swigrules@/python/swig_shelve.py.sample \
+	@swigrules@/python/swig_shelve_test.py.sample $(patsubst \
 	%_wrap.cc, %.py, $(FULL_SWIG_SRC)) $(patsubst %_wrap.cc, %.py, \
 	$(ADDITONAL_SWIG_SRC)) $(FULL_SWIG_SRC) $(ADDITONAL_SWIG_SRC) \
 	$(srcdir)/$(swigsrc)/*_wrap.h @libgeocal@/dummy.pdf \

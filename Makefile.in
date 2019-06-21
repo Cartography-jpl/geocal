@@ -2587,10 +2587,9 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(top_srcdir)/script/setup_geocal.csh.in \
 	$(top_srcdir)/script/setup_geocal.sh.in \
 	$(top_srcdir)/script/vicarb.in AUTHORS COPYING ChangeLog \
-	INSTALL NEWS README config/README config/compile \
-	config/config.guess config/config.sub config/depcomp \
-	config/install-sh config/ltmain.sh config/missing \
-	config/py-compile
+	INSTALL NEWS README config/compile config/config.guess \
+	config/config.sub config/depcomp config/install-sh \
+	config/ltmain.sh config/missing config/py-compile
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)

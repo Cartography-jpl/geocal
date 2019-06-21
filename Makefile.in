@@ -267,7 +267,9 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @WITH_DOCUMENTATION_TRUE@am__append_44 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
+am__aclocal_m4_deps =  \
+	$(top_srcdir)/config/m4_local/geocal_source_directory.m4 \
+	$(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ac_afids_data.m4 \
 	$(top_srcdir)/config/m4/ac_blitz.m4 \
 	$(top_srcdir)/config/m4/ac_boost.m4 \
@@ -304,7 +306,6 @@ am__aclocal_m4_deps = $(top_srcdir)/config/m4/ac_afids.m4 \
 	$(top_srcdir)/config/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/config/m4/ax_compare_version.m4 \
 	$(top_srcdir)/config/m4/ax_cxx_compile_stdcxx.m4 \
-	$(top_srcdir)/config/m4/geocal_source_directory.m4 \
 	$(top_srcdir)/config/m4/libtool.m4 \
 	$(top_srcdir)/config/m4/loc_msg.m4 \
 	$(top_srcdir)/config/m4/ltoptions.m4 \
@@ -2586,9 +2587,10 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(top_srcdir)/script/setup_geocal.csh.in \
 	$(top_srcdir)/script/setup_geocal.sh.in \
 	$(top_srcdir)/script/vicarb.in AUTHORS COPYING ChangeLog \
-	INSTALL NEWS README config/compile config/config.guess \
-	config/config.sub config/depcomp config/install-sh \
-	config/ltmain.sh config/missing config/py-compile
+	INSTALL NEWS README config/README config/compile \
+	config/config.guess config/config.sub config/depcomp \
+	config/install-sh config/ltmain.sh config/missing \
+	config/py-compile
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -2939,6 +2941,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@swigrules@/create_python_init.py \
 	@swigrules@/doxygen_single.cfg @swigrules@/README.md \
 	@swigrules@/swig_wrap.tmpl \
+	@swigrules@/lib/generic_object.cc.sample \
 	@swigrules@/lib/generic_object.h.sample \
 	@swigrules@/lib/generic_object.i.sample \
 	@swigrules@/lib/common.i.sample \

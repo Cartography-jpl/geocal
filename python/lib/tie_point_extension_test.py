@@ -64,6 +64,7 @@ def test_tie_point():
     print(tp.ic_diff(igccol))
     print(tpcol.data_frame(igccol, 0))
     print(tpcol.panel(igccol))
+    print(tpcol.table_format())
 
 def generate_tie_point_collection():
     '''This creates a "simulated" version of the igccol_rolling_shutter.xml.

@@ -1,0 +1,22 @@
+PROCESS       HELP=*
+parm tpcol type=(string,99) count=1
+parm out type=(string,99) count=1
+parm refimg type=(string,99) count=1, default=""
+END-PROC
+.TITLE
+tpcol_to_table
+.HELP
+Short utility to write a tie-point collection out in an ASCII table format.
+You can either supply a reference image, or leave this off. If supplied, we
+give the ground location both as longitude/latitude/height and as reference
+image line/sample Without the reference image we leave off the reference line
+and sample.
+.LEVEL1
+.variable tpcol
+Input tie-point collection
+.variable out
+Output ASCII file
+.variable refimg
+Optional reference image
+.END
+

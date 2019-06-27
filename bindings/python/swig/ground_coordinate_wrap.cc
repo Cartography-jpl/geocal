@@ -3547,55 +3547,56 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[92]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[93]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[94]
-#define SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t swig_types[95]
-#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[96]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[97]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[98]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[99]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[100]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[101]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[102]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[103]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[104]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[105]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[106]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[107]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[108]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[109]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[110]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[111]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[112]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[113]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[114]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[115]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[116]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[117]
-#define SWIGTYPE_p_char swig_types[118]
-#define SWIGTYPE_p_char_type swig_types[119]
-#define SWIGTYPE_p_difference_type swig_types[120]
-#define SWIGTYPE_p_fmtflags swig_types[121]
-#define SWIGTYPE_p_int_type swig_types[122]
-#define SWIGTYPE_p_iostate swig_types[123]
-#define SWIGTYPE_p_off_type swig_types[124]
-#define SWIGTYPE_p_openmode swig_types[125]
-#define SWIGTYPE_p_p_PyObject swig_types[126]
-#define SWIGTYPE_p_pos_type swig_types[127]
-#define SWIGTYPE_p_seekdir swig_types[128]
-#define SWIGTYPE_p_size_t swig_types[129]
-#define SWIGTYPE_p_size_type swig_types[130]
-#define SWIGTYPE_p_state_type swig_types[131]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t swig_types[132]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[133]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[134]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[135]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[136]
-#define SWIGTYPE_p_std__invalid_argument swig_types[137]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t_t swig_types[138]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[139]
-#define SWIGTYPE_p_traits_type swig_types[140]
-#define SWIGTYPE_p_value_type swig_types[141]
-static swig_type_info *swig_types[143];
-static swig_module_info swig_module = {swig_types, 142, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__Range swig_types[95]
+#define SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t swig_types[96]
+#define SWIGTYPE_p_boost__arrayT_double_3_t swig_types[97]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[98]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[99]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[100]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[101]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[102]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[103]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[104]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[105]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[106]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[107]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[108]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[109]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[110]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[111]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[112]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[113]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[114]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[115]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[116]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[117]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[118]
+#define SWIGTYPE_p_char swig_types[119]
+#define SWIGTYPE_p_char_type swig_types[120]
+#define SWIGTYPE_p_difference_type swig_types[121]
+#define SWIGTYPE_p_fmtflags swig_types[122]
+#define SWIGTYPE_p_int_type swig_types[123]
+#define SWIGTYPE_p_iostate swig_types[124]
+#define SWIGTYPE_p_off_type swig_types[125]
+#define SWIGTYPE_p_openmode swig_types[126]
+#define SWIGTYPE_p_p_PyObject swig_types[127]
+#define SWIGTYPE_p_pos_type swig_types[128]
+#define SWIGTYPE_p_seekdir swig_types[129]
+#define SWIGTYPE_p_size_t swig_types[130]
+#define SWIGTYPE_p_size_type swig_types[131]
+#define SWIGTYPE_p_state_type swig_types[132]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t swig_types[133]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[134]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[135]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[136]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[137]
+#define SWIGTYPE_p_std__invalid_argument swig_types[138]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_std__allocatorT_boost__shared_ptrT_GeoCal__GroundCoordinate_t_t_t swig_types[139]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[140]
+#define SWIGTYPE_p_traits_type swig_types[141]
+#define SWIGTYPE_p_value_type swig_types[142]
+static swig_type_info *swig_types[144];
+static swig_module_info swig_module = {swig_types, 143, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6893,7 +6894,7 @@ SWIGINTERN PyObject *_wrap_GroundCoordinate__v_latitude(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate__v_latitude" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate__v_latitude" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
@@ -6936,7 +6937,7 @@ SWIGINTERN PyObject *_wrap_GroundCoordinate__v_longitude(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate__v_longitude" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate__v_longitude" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
@@ -6979,7 +6980,7 @@ SWIGINTERN PyObject *_wrap_GroundCoordinate__v_height_reference_surface(PyObject
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate__v_height_reference_surface" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate__v_height_reference_surface" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
@@ -7022,7 +7023,7 @@ SWIGINTERN PyObject *_wrap_GroundCoordinate_convert_to_cf(PyObject *SWIGUNUSEDPA
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate_convert_to_cf" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate_convert_to_cf" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
@@ -7067,7 +7068,7 @@ SWIGINTERN PyObject *_wrap_GroundCoordinate___str__(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate___str__" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate___str__" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
@@ -7110,7 +7111,7 @@ SWIGINTERN PyObject *_wrap_GroundCoordinate_naif_code(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate_naif_code" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GroundCoordinate_naif_code" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp1);
@@ -7152,7 +7153,7 @@ SWIGINTERN PyObject *_wrap_delete_GroundCoordinate(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GroundCoordinate" "', argument " "1"" of type '" "GeoCal::GroundCoordinate *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GroundCoordinate" "', argument " "1"" of type '" "GeoCal::GroundCoordinate *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GroundCoordinate > * >(argp1);
@@ -7205,7 +7206,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_convert_to_cf(PyObject *SWIGUNUSEDP
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_convert_to_cf" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_convert_to_cf" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7227,7 +7228,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_convert_to_cf(PyObject *SWIGUNUSEDP
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_convert_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_convert_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianInertial_convert_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
@@ -7280,7 +7281,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_ci_to_cf" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_ci_to_cf" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7302,7 +7303,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf(PyObject *SWIGUNUSEDPARM(s
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_ci_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_ci_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianInertial_ci_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
@@ -7358,7 +7359,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf_with_vel(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7380,7 +7381,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf_with_vel(PyObject *SWIGUNU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianInertial_ci_to_cf_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
@@ -7431,7 +7432,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_naif_code(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_naif_code" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_naif_code" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7477,7 +7478,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf_quat(PyObject *SWIGUNUSEDP
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_ci_to_cf_quat" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_ci_to_cf_quat" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7499,7 +7500,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_ci_to_cf_quat(PyObject *SWIGUNUSEDP
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_ci_to_cf_quat" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_ci_to_cf_quat" "', argument " "2"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianInertial_ci_to_cf_quat" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
@@ -7546,7 +7547,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_create(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_create" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_create" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7602,7 +7603,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_reference_surface_intersect_approxi
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7624,7 +7625,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_reference_surface_intersect_approxi
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'"); 
@@ -7679,7 +7680,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_reference_surface_intersect_approxi
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7701,7 +7702,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial_reference_surface_intersect_approxi
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianInertial_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'"); 
@@ -7773,7 +7774,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial___str__(PyObject *SWIGUNUSEDPARM(se
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial___str__" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial___str__" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7814,7 +7815,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_0(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial__position" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial__position" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -7835,6 +7836,9 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_0(PyObject *SWIGUNU
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
       dims[i] = (&result)->extent(i);
@@ -7842,12 +7846,16 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_0(PyObject *SWIGUNU
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -7871,7 +7879,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_1(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial__position" "', argument " "1"" of type '" "GeoCal::CartesianInertial *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial__position" "', argument " "1"" of type '" "GeoCal::CartesianInertial *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertial > * >(argp1);
@@ -7954,7 +7962,7 @@ SWIGINTERN PyObject *_wrap_delete_CartesianInertial(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CartesianInertial" "', argument " "1"" of type '" "GeoCal::CartesianInertial *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CartesianInertial" "', argument " "1"" of type '" "GeoCal::CartesianInertial *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertial > * >(argp1);
@@ -8007,7 +8015,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_convert_to_ci(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_convert_to_ci" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_convert_to_ci" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8029,7 +8037,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_convert_to_ci(PyObject *SWIGUNUSEDPARM
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_convert_to_ci" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_convert_to_ci" "', argument " "2"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_convert_to_ci" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
@@ -8078,7 +8086,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_create(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_create" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_create" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8134,7 +8142,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_ci_to_cf" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_ci_to_cf" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8156,7 +8164,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf(PyObject *SWIGUNUSEDPARM(self
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_ci_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_ci_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_ci_to_cf" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
@@ -8212,7 +8220,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_cf_to_ci_with_vel(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8234,7 +8242,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_cf_to_ci_with_vel(PyObject *SWIGUNUSED
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_cf_to_ci_with_vel" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
@@ -8288,7 +8296,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf_quat(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_ci_to_cf_quat" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_ci_to_cf_quat" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8310,7 +8318,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_ci_to_cf_quat(PyObject *SWIGUNUSEDPARM
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_ci_to_cf_quat" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_ci_to_cf_quat" "', argument " "2"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_ci_to_cf_quat" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
@@ -8361,7 +8369,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_reference_surface_intersect_approximat
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8383,7 +8391,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_reference_surface_intersect_approximat
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
@@ -8438,7 +8446,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_reference_surface_intersect_approximat
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8460,7 +8468,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed_reference_surface_intersect_approximat
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixed_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
@@ -8532,7 +8540,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__v_min_radius_reference_surface(PyObje
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__v_min_radius_reference_surface" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__v_min_radius_reference_surface" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8573,7 +8581,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_0(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__position" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__position" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8594,6 +8602,9 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_0(PyObject *SWIGUNUSED
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
       dims[i] = (&result)->extent(i);
@@ -8601,12 +8612,16 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_0(PyObject *SWIGUNUSED
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -8630,7 +8645,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_1(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__position" "', argument " "1"" of type '" "GeoCal::CartesianFixed *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__position" "', argument " "1"" of type '" "GeoCal::CartesianFixed *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixed > * >(argp1);
@@ -8713,7 +8728,7 @@ SWIGINTERN PyObject *_wrap_delete_CartesianFixed(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CartesianFixed" "', argument " "1"" of type '" "GeoCal::CartesianFixed *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CartesianFixed" "', argument " "1"" of type '" "GeoCal::CartesianFixed *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixed > * >(argp1);
@@ -8795,7 +8810,7 @@ SWIGINTERN PyObject *_wrap_new_LnLookVector__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LnLookVector" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LnLookVector" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LnLookVector" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
@@ -8820,7 +8835,7 @@ SWIGINTERN PyObject *_wrap_new_LnLookVector__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_LnLookVector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_LnLookVector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LnLookVector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -8986,7 +9001,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector_to_cf(PyObject *SWIGUNUSEDPARM(self), Py
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector_to_cf" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector_to_cf" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
@@ -9008,7 +9023,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector_to_cf(PyObject *SWIGUNUSEDPARM(self), Py
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LnLookVector_to_cf" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LnLookVector_to_cf" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LnLookVector_to_cf" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -9057,7 +9072,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector___str__(PyObject *SWIGUNUSEDPARM(self), 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector___str__" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector___str__" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
@@ -9106,7 +9121,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector_cf_to_enu(PyObject *SWIGUNUSEDPARM(self)
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector_cf_to_enu" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector_cf_to_enu" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LnLookVector_cf_to_enu" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -9158,7 +9173,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector_enu_to_cf(PyObject *SWIGUNUSEDPARM(self)
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector_enu_to_cf" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector_enu_to_cf" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LnLookVector_enu_to_cf" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -9213,7 +9228,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector_solar_look_vector(PyObject *SWIGUNUSEDPA
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector_solar_look_vector" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector_solar_look_vector" "', argument " "1"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LnLookVector_solar_look_vector" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
@@ -9238,7 +9253,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector_solar_look_vector(PyObject *SWIGUNUSEDPA
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LnLookVector_solar_look_vector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LnLookVector_solar_look_vector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LnLookVector_solar_look_vector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -9287,7 +9302,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector__v_view_azimuth(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector__v_view_azimuth" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector__v_view_azimuth" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
@@ -9330,7 +9345,7 @@ SWIGINTERN PyObject *_wrap_LnLookVector__v_view_zenith(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector__v_view_zenith" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVector__v_view_zenith" "', argument " "1"" of type '" "GeoCal::LnLookVector const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVector > * >(argp1);
@@ -9372,7 +9387,7 @@ SWIGINTERN PyObject *_wrap_delete_LnLookVector(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_LnLookVector" "', argument " "1"" of type '" "GeoCal::LnLookVector *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_LnLookVector" "', argument " "1"" of type '" "GeoCal::LnLookVector *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::LnLookVector > * >(argp1);
@@ -9458,7 +9473,7 @@ SWIGINTERN PyObject *_wrap_new_LnLookVectorWithDerivative__SWIG_1(PyObject *SWIG
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LnLookVectorWithDerivative" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVectorWithDerivative const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LnLookVectorWithDerivative" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVectorWithDerivative const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LnLookVectorWithDerivative" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVectorWithDerivative const &""'"); 
@@ -9483,7 +9498,7 @@ SWIGINTERN PyObject *_wrap_new_LnLookVectorWithDerivative__SWIG_1(PyObject *SWIG
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_LnLookVectorWithDerivative" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_LnLookVectorWithDerivative" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LnLookVectorWithDerivative" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -9544,7 +9559,7 @@ SWIGINTERN PyObject *_wrap_new_LnLookVectorWithDerivative__SWIG_2(PyObject *SWIG
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LnLookVectorWithDerivative" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_LnLookVectorWithDerivative" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LnLookVectorWithDerivative" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -9569,7 +9584,7 @@ SWIGINTERN PyObject *_wrap_new_LnLookVectorWithDerivative__SWIG_2(PyObject *SWIG
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_LnLookVectorWithDerivative" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_LnLookVectorWithDerivative" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LnLookVectorWithDerivative" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -9594,7 +9609,7 @@ SWIGINTERN PyObject *_wrap_new_LnLookVectorWithDerivative__SWIG_2(PyObject *SWIG
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_LnLookVectorWithDerivative" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_LnLookVectorWithDerivative" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_LnLookVectorWithDerivative" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -9713,7 +9728,7 @@ SWIGINTERN PyObject *_wrap_LnLookVectorWithDerivative_to_cf(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVectorWithDerivative_to_cf" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVectorWithDerivative_to_cf" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVectorWithDerivative > * >(argp1);
@@ -9735,7 +9750,7 @@ SWIGINTERN PyObject *_wrap_LnLookVectorWithDerivative_to_cf(PyObject *SWIGUNUSED
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LnLookVectorWithDerivative_to_cf" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LnLookVectorWithDerivative_to_cf" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LnLookVectorWithDerivative_to_cf" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -9784,7 +9799,7 @@ SWIGINTERN PyObject *_wrap_LnLookVectorWithDerivative___str__(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVectorWithDerivative___str__" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVectorWithDerivative___str__" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVectorWithDerivative > * >(argp1);
@@ -9827,7 +9842,7 @@ SWIGINTERN PyObject *_wrap_LnLookVectorWithDerivative__v_view_azimuth(PyObject *
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVectorWithDerivative__v_view_azimuth" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVectorWithDerivative__v_view_azimuth" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVectorWithDerivative > * >(argp1);
@@ -9873,7 +9888,7 @@ SWIGINTERN PyObject *_wrap_LnLookVectorWithDerivative__v_view_zenith(PyObject *S
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVectorWithDerivative__v_view_zenith" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LnLookVectorWithDerivative__v_view_zenith" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LnLookVectorWithDerivative > * >(argp1);
@@ -9918,7 +9933,7 @@ SWIGINTERN PyObject *_wrap_delete_LnLookVectorWithDerivative(PyObject *SWIGUNUSE
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_LnLookVectorWithDerivative" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_LnLookVectorWithDerivative" "', argument " "1"" of type '" "GeoCal::LnLookVectorWithDerivative *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::LnLookVectorWithDerivative > * >(argp1);
@@ -10086,7 +10101,7 @@ SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector__SWIG_3(PyObject *SWIGUN
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CartesianFixedLookVector" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CartesianFixedLookVector" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CartesianFixedLookVector" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -10111,7 +10126,7 @@ SWIGINTERN PyObject *_wrap_new_CartesianFixedLookVector__SWIG_3(PyObject *SWIGUN
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CartesianFixedLookVector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_CartesianFixedLookVector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CartesianFixedLookVector" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -10192,7 +10207,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixedLookVector___str__(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixedLookVector___str__" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixedLookVector___str__" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp1);
@@ -10241,7 +10256,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixedLookVector_solar_look_vector(PyObject *
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixedLookVector_solar_look_vector" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixedLookVector_solar_look_vector" "', argument " "1"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixedLookVector_solar_look_vector" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
@@ -10289,7 +10304,7 @@ SWIGINTERN PyObject *_wrap_delete_CartesianFixedLookVector(PyObject *SWIGUNUSEDP
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CartesianFixedLookVector" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CartesianFixedLookVector" "', argument " "1"" of type '" "GeoCal::CartesianFixedLookVector *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVector > * >(argp1);
@@ -10352,7 +10367,7 @@ SWIGINTERN PyObject *_wrap_distance(PyObject *SWIGUNUSEDPARM(self), PyObject *ar
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "distance" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "distance" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "distance" "', argument " "1"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -10377,7 +10392,7 @@ SWIGINTERN PyObject *_wrap_distance(PyObject *SWIGUNUSEDPARM(self), PyObject *ar
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "distance" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "distance" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "distance" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -10441,7 +10456,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_0(PyObject *SWIGU
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
@@ -10466,7 +10481,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_0(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
@@ -10491,7 +10506,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_0(PyObject *SWIGU
     int newmem = 0;
     res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::CartesianInertial > &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::CartesianInertial > &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp4);
@@ -10577,7 +10592,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_1(PyObject *SWIGU
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
@@ -10602,7 +10617,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_1(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianFixed const &""'"); 
@@ -10636,7 +10651,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_1(PyObject *SWIGU
     int newmem = 0;
     res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::shared_ptr< GeoCal::CartesianInertial > &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::shared_ptr< GeoCal::CartesianInertial > &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp5) tempshared5 = *reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(argp5);
@@ -10724,7 +10739,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_2(PyObject *SWIGU
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
@@ -10749,7 +10764,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_2(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'"); 
@@ -10774,7 +10789,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_2(PyObject *SWIGU
     int newmem = 0;
     res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::CartesianFixed > &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "convert_position_and_velocity" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::CartesianFixed > &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp4);
@@ -10860,7 +10875,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_3(PyObject *SWIGU
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "1"" of type '" "GeoCal::TimeWithDerivative const &""'"); 
@@ -10885,7 +10900,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_3(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "convert_position_and_velocity" "', argument " "2"" of type '" "GeoCal::CartesianInertial const &""'"); 
@@ -10919,7 +10934,7 @@ SWIGINTERN PyObject *_wrap_convert_position_and_velocity__SWIG_3(PyObject *SWIGU
     int newmem = 0;
     res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::shared_ptr< GeoCal::CartesianFixed > &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "convert_position_and_velocity" "', argument " "5"" of type '" "boost::shared_ptr< GeoCal::CartesianFixed > &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp5) tempshared5 = *reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(argp5);
@@ -11788,7 +11803,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundCoordinate___setitem____SWIG_2(PyObject 
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundCoordinate___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundCoordinate___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type * >(argp3);
@@ -11935,7 +11950,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundCoordinate_append(PyObject *SWIGUNUSEDPA
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_GroundCoordinate_append" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_GroundCoordinate_append" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type * >(argp2);
@@ -12564,7 +12579,7 @@ SWIGINTERN PyObject *_wrap_new_Vector_GroundCoordinate__SWIG_3(PyObject *SWIGUNU
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Vector_GroundCoordinate" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Vector_GroundCoordinate" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type * >(argp2);
@@ -12666,7 +12681,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundCoordinate_push_back(PyObject *SWIGUNUSE
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_GroundCoordinate_push_back" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_GroundCoordinate_push_back" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type * >(argp2);
@@ -12800,7 +12815,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundCoordinate_assign(PyObject *SWIGUNUSEDPA
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundCoordinate_assign" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundCoordinate_assign" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type * >(argp3);
@@ -12867,7 +12882,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundCoordinate_resize__SWIG_1(PyObject *SWIG
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundCoordinate_resize" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundCoordinate_resize" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type * >(argp3);
@@ -12965,7 +12980,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundCoordinate_insert__SWIG_0(PyObject *SWIG
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundCoordinate_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_GroundCoordinate_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type * >(argp3);
@@ -13047,7 +13062,7 @@ SWIGINTERN PyObject *_wrap_Vector_GroundCoordinate_insert__SWIG_1(PyObject *SWIG
     int newmem = 0;
     res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_GroundCoordinate_insert" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_GroundCoordinate_insert" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp4) tempshared4 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type * >(argp4);
@@ -13809,6 +13824,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_5_t = {"_p_blitz__A
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_6_t = {"_p_blitz__ArrayT_unsigned_short_6_t", "blitz::Array< unsigned short,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__ArrayT_unsigned_short_7_t", "blitz::Array< unsigned short,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t = {"_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t", "boost::array< GeoCal::AutoDerivative< double >,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__arrayT_double_3_t = {"_p_boost__arrayT_double_3_t", "boost::array< double,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_double_t = {"_p_boost__math__quaternionT_double_t", "boost::math::quaternion< double > *", 0, 0, (void*)0, 0};
@@ -13953,6 +13969,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_unsigned_short_6_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_7_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
+  &_swigt__p_blitz__Range,
   &_swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,
   &_swigt__p_boost__arrayT_double_3_t,
   &_swigt__p_boost__math__quaternionT_double_t,
@@ -14097,6 +14114,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_5_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t[] = {  {&_swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__arrayT_double_3_t[] = {  {&_swigt__p_boost__arrayT_double_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_double_t[] = {  {&_swigt__p_boost__math__quaternionT_double_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -14241,6 +14259,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_unsigned_short_6_t,
   _swigc__p_blitz__ArrayT_unsigned_short_7_t,
   _swigc__p_blitz__ArrayT_unsigned_short_8_t,
+  _swigc__p_blitz__Range,
   _swigc__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,
   _swigc__p_boost__arrayT_double_3_t,
   _swigc__p_boost__math__quaternionT_double_t,

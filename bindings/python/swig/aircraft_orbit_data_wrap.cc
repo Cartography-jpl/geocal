@@ -3567,72 +3567,73 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[112]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[113]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[114]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[115]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t swig_types[116]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[117]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[118]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[119]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[120]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[121]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[122]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[123]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[124]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[125]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[126]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[127]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[128]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[129]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[130]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[131]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[132]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[133]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[134]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[135]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geocentric_t swig_types[136]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t swig_types[137]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[138]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t swig_types[139]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[140]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[141]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[142]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[143]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t swig_types[144]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t swig_types[145]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t swig_types[146]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t swig_types[147]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t swig_types[148]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t swig_types[149]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t swig_types[150]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[151]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[152]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[153]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[154]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[155]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[156]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[157]
-#define SWIGTYPE_p_char swig_types[158]
-#define SWIGTYPE_p_char_type swig_types[159]
-#define SWIGTYPE_p_difference_type swig_types[160]
-#define SWIGTYPE_p_fmtflags swig_types[161]
-#define SWIGTYPE_p_int_type swig_types[162]
-#define SWIGTYPE_p_iostate swig_types[163]
-#define SWIGTYPE_p_off_type swig_types[164]
-#define SWIGTYPE_p_openmode swig_types[165]
-#define SWIGTYPE_p_pos_type swig_types[166]
-#define SWIGTYPE_p_seekdir swig_types[167]
-#define SWIGTYPE_p_size_t swig_types[168]
-#define SWIGTYPE_p_size_type swig_types[169]
-#define SWIGTYPE_p_state_type swig_types[170]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[171]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[172]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[173]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[174]
-#define SWIGTYPE_p_std__invalid_argument swig_types[175]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[176]
-#define SWIGTYPE_p_traits_type swig_types[177]
-#define SWIGTYPE_p_value_type swig_types[178]
-static swig_type_info *swig_types[180];
-static swig_module_info swig_module = {swig_types, 179, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__Range swig_types[115]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[116]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t swig_types[117]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[118]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[119]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[120]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[121]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[122]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[123]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[124]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[125]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[126]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[127]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[128]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[129]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[130]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[131]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[132]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[133]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[134]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[135]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[136]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geocentric_t swig_types[137]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t swig_types[138]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[139]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t swig_types[140]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[141]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[142]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[143]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[144]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t swig_types[145]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t swig_types[146]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t swig_types[147]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t swig_types[148]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t swig_types[149]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t swig_types[150]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t swig_types[151]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[152]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[153]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[154]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[155]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[156]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[157]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[158]
+#define SWIGTYPE_p_char swig_types[159]
+#define SWIGTYPE_p_char_type swig_types[160]
+#define SWIGTYPE_p_difference_type swig_types[161]
+#define SWIGTYPE_p_fmtflags swig_types[162]
+#define SWIGTYPE_p_int_type swig_types[163]
+#define SWIGTYPE_p_iostate swig_types[164]
+#define SWIGTYPE_p_off_type swig_types[165]
+#define SWIGTYPE_p_openmode swig_types[166]
+#define SWIGTYPE_p_pos_type swig_types[167]
+#define SWIGTYPE_p_seekdir swig_types[168]
+#define SWIGTYPE_p_size_t swig_types[169]
+#define SWIGTYPE_p_size_type swig_types[170]
+#define SWIGTYPE_p_state_type swig_types[171]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[172]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[173]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[174]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[175]
+#define SWIGTYPE_p_std__invalid_argument swig_types[176]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[177]
+#define SWIGTYPE_p_traits_type swig_types[178]
+#define SWIGTYPE_p_value_type swig_types[179]
+static swig_type_info *swig_types[181];
+static swig_module_info swig_module = {swig_types, 180, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6649,7 +6650,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_0(PyObject *SWIGUNUSEDPAR
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
@@ -6674,7 +6675,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_0(PyObject *SWIGUNUSEDPAR
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -6770,7 +6771,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_1(PyObject *SWIGUNUSEDPAR
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
@@ -6795,7 +6796,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_1(PyObject *SWIGUNUSEDPAR
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -6894,7 +6895,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_2(PyObject *SWIGUNUSEDPAR
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
@@ -6919,7 +6920,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_2(PyObject *SWIGUNUSEDPAR
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -6944,7 +6945,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_2(PyObject *SWIGUNUSEDPAR
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AircraftOrbitData" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AircraftOrbitData" "', argument " "3"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
@@ -6969,7 +6970,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_2(PyObject *SWIGUNUSEDPAR
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -7063,7 +7064,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_3(PyObject *SWIGUNUSEDPAR
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::Time const &""'"); 
@@ -7088,7 +7089,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_3(PyObject *SWIGUNUSEDPAR
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -7113,7 +7114,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_3(PyObject *SWIGUNUSEDPAR
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AircraftOrbitData" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AircraftOrbitData" "', argument " "3"" of type '" "GeoCal::Time const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
@@ -7138,7 +7139,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_3(PyObject *SWIGUNUSEDPAR
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
@@ -7209,7 +7210,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_4(PyObject *SWIGUNUSEDPAR
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const &""'"); 
@@ -7267,7 +7268,7 @@ SWIGINTERN PyObject *_wrap_new_AircraftOrbitData__SWIG_5(PyObject *SWIGUNUSEDPAR
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const &""'"); 
@@ -7376,7 +7377,7 @@ SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_local_north_to_ecr(PyObject *SWI
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_local_north_to_ecr" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_local_north_to_ecr" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
@@ -7419,7 +7420,7 @@ SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_body_to_local_north(PyObject *SW
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_body_to_local_north" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_body_to_local_north" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
@@ -7462,7 +7463,7 @@ SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_position_geodetic(PyObject *SWIG
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_position_geodetic" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_position_geodetic" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
@@ -7508,7 +7509,7 @@ SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_roll(PyObject *SWIGUNUSEDPARM(se
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_roll" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_roll" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
@@ -7551,7 +7552,7 @@ SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_pitch(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_pitch" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_pitch" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
@@ -7594,7 +7595,7 @@ SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_heading(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_heading" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_heading" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
@@ -7637,7 +7638,7 @@ SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_vertical_definition(PyObject *SW
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_vertical_definition" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AircraftOrbitData__v_vertical_definition" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AircraftOrbitData > * >(argp1);
@@ -7679,7 +7680,7 @@ SWIGINTERN PyObject *_wrap_delete_AircraftOrbitData(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_AircraftOrbitData" "', argument " "1"" of type '" "GeoCal::AircraftOrbitData *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AircraftOrbitData > * >(argp1);
@@ -8376,6 +8377,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_5_t = {"_p_blitz__A
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_6_t = {"_p_blitz__ArrayT_unsigned_short_6_t", "blitz::Array< unsigned short,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__ArrayT_unsigned_short_7_t", "blitz::Array< unsigned short,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_double_t = {"_p_boost__math__quaternionT_double_t", "boost::math::quaternion< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t = {"_p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t", "boost::shared_ptr< GeoCal::AircraftOrbitData > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,1 > > *", 0, 0, (void*)0, 0};
@@ -8557,6 +8559,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_unsigned_short_6_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_7_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
+  &_swigt__p_blitz__Range,
   &_swigt__p_boost__math__quaternionT_double_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
@@ -8738,6 +8741,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_5_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_double_t[] = {  {&_swigt__p_boost__math__quaternionT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -8919,6 +8923,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_unsigned_short_6_t,
   _swigc__p_blitz__ArrayT_unsigned_short_7_t,
   _swigc__p_blitz__ArrayT_unsigned_short_8_t,
+  _swigc__p_blitz__Range,
   _swigc__p_boost__math__quaternionT_double_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AircraftOrbitData_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,

@@ -3527,37 +3527,38 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[72]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[73]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[74]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[75]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t swig_types[76]
-#define SWIGTYPE_p_char swig_types[77]
-#define SWIGTYPE_p_char_type swig_types[78]
-#define SWIGTYPE_p_difference_type swig_types[79]
-#define SWIGTYPE_p_fmtflags swig_types[80]
-#define SWIGTYPE_p_geocode_t swig_types[81]
-#define SWIGTYPE_p_geokey_t swig_types[82]
-#define SWIGTYPE_p_int_type swig_types[83]
-#define SWIGTYPE_p_iostate swig_types[84]
-#define SWIGTYPE_p_off_type swig_types[85]
-#define SWIGTYPE_p_openmode swig_types[86]
-#define SWIGTYPE_p_pos_type swig_types[87]
-#define SWIGTYPE_p_seekdir swig_types[88]
-#define SWIGTYPE_p_size_t swig_types[89]
-#define SWIGTYPE_p_size_type swig_types[90]
-#define SWIGTYPE_p_state_type swig_types[91]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[92]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[93]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[94]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[95]
-#define SWIGTYPE_p_std__invalid_argument swig_types[96]
-#define SWIGTYPE_p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t swig_types[97]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[98]
-#define SWIGTYPE_p_tagtype_t swig_types[99]
-#define SWIGTYPE_p_tiftag_t swig_types[100]
-#define SWIGTYPE_p_traits_type swig_types[101]
-#define SWIGTYPE_p_ttag_t swig_types[102]
-#define SWIGTYPE_p_value_type swig_types[103]
-static swig_type_info *swig_types[105];
-static swig_module_info swig_module = {swig_types, 104, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__Range swig_types[75]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[76]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t swig_types[77]
+#define SWIGTYPE_p_char swig_types[78]
+#define SWIGTYPE_p_char_type swig_types[79]
+#define SWIGTYPE_p_difference_type swig_types[80]
+#define SWIGTYPE_p_fmtflags swig_types[81]
+#define SWIGTYPE_p_geocode_t swig_types[82]
+#define SWIGTYPE_p_geokey_t swig_types[83]
+#define SWIGTYPE_p_int_type swig_types[84]
+#define SWIGTYPE_p_iostate swig_types[85]
+#define SWIGTYPE_p_off_type swig_types[86]
+#define SWIGTYPE_p_openmode swig_types[87]
+#define SWIGTYPE_p_pos_type swig_types[88]
+#define SWIGTYPE_p_seekdir swig_types[89]
+#define SWIGTYPE_p_size_t swig_types[90]
+#define SWIGTYPE_p_size_type swig_types[91]
+#define SWIGTYPE_p_state_type swig_types[92]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[93]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[94]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[95]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[96]
+#define SWIGTYPE_p_std__invalid_argument swig_types[97]
+#define SWIGTYPE_p_std__vectorT_GeoCal__GeotiffFile__geokey_t_std__allocatorT_GeoCal__GeotiffFile__geokey_t_t_t swig_types[98]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[99]
+#define SWIGTYPE_p_tagtype_t swig_types[100]
+#define SWIGTYPE_p_tiftag_t swig_types[101]
+#define SWIGTYPE_p_traits_type swig_types[102]
+#define SWIGTYPE_p_ttag_t swig_types[103]
+#define SWIGTYPE_p_value_type swig_types[104]
+static swig_type_info *swig_types[106];
+static swig_module_info swig_module = {swig_types, 105, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6812,7 +6813,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile__v_file_name(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile__v_file_name" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile__v_file_name" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
@@ -6855,7 +6856,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile__v_mode(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile__v_mode" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile__v_mode" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
@@ -6901,7 +6902,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_tiftag__SWIG_0(PyObject *SWIGUNUSEDPA
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_tiftag" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_tiftag" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
@@ -6957,7 +6958,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_tiftag__SWIG_1(PyObject *SWIGUNUSEDPA
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_tiftag" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_tiftag" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
@@ -7059,7 +7060,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_key__SWIG_0(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
@@ -7115,7 +7116,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_key__SWIG_1(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
@@ -7170,7 +7171,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_key__SWIG_2(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_set_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
@@ -7278,7 +7279,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_write_key(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_write_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_write_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
@@ -7321,7 +7322,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile___str__(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile___str__" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile___str__" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
@@ -7366,7 +7367,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_has_key(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_has_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_has_key" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
@@ -7416,7 +7417,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_has_tiftag(PyObject *SWIGUNUSEDPARM(self)
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_has_tiftag" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_has_tiftag" "', argument " "1"" of type '" "GeoCal::GeotiffFile const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GeotiffFile > * >(argp1);
@@ -7657,7 +7658,7 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_write_1x1_file(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_write_1x1_file" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GeotiffFile_write_1x1_file" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
@@ -7699,7 +7700,7 @@ SWIGINTERN PyObject *_wrap_delete_GeotiffFile(PyObject *SWIGUNUSEDPARM(self), Py
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GeotiffFile" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GeotiffFile" "', argument " "1"" of type '" "GeoCal::GeotiffFile *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GeotiffFile > * >(argp1);
@@ -7959,6 +7960,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_5_t = {"_p_blitz__A
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_6_t = {"_p_blitz__ArrayT_unsigned_short_6_t", "blitz::Array< unsigned short,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__ArrayT_unsigned_short_7_t", "blitz::Array< unsigned short,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GeotiffFile_t = {"_p_boost__shared_ptrT_GeoCal__GeotiffFile_t", "boost::shared_ptr< GeoCal::GeotiffFile > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
@@ -8065,6 +8067,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_unsigned_short_6_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_7_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
+  &_swigt__p_blitz__Range,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GeotiffFile_t,
   &_swigt__p_char,
@@ -8171,6 +8174,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_5_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeotiffFile_t, _p_boost__shared_ptrT_GeoCal__GeotiffFile_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GeotiffFile_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeotiffFile_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
@@ -8277,6 +8281,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_unsigned_short_6_t,
   _swigc__p_blitz__ArrayT_unsigned_short_7_t,
   _swigc__p_blitz__ArrayT_unsigned_short_8_t,
+  _swigc__p_blitz__Range,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GeotiffFile_t,
   _swigc__p_char,

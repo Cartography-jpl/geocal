@@ -3589,97 +3589,98 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[134]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[135]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[136]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[137]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[138]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[139]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[140]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t swig_types[141]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[142]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[143]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[144]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[145]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[146]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[147]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[148]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[149]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[150]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[151]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[152]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[153]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[154]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[155]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[156]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[157]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[158]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[159]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t swig_types[160]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t swig_types[161]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[162]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[163]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t swig_types[164]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[165]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[166]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[167]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[168]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[169]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[170]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[171]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[172]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[173]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[174]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[175]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[176]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[177]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[178]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[179]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[180]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[181]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[182]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[183]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t swig_types[184]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t swig_types[185]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t swig_types[186]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIdTiming_t swig_types[187]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t swig_types[188]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t swig_types[189]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t swig_types[190]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[191]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[192]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePointCollection_t swig_types[193]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t swig_types[194]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[195]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[196]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[197]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[198]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[199]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[200]
-#define SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t swig_types[201]
-#define SWIGTYPE_p_char swig_types[202]
-#define SWIGTYPE_p_char_type swig_types[203]
-#define SWIGTYPE_p_difference_type swig_types[204]
-#define SWIGTYPE_p_fmtflags swig_types[205]
-#define SWIGTYPE_p_int_type swig_types[206]
-#define SWIGTYPE_p_iostate swig_types[207]
-#define SWIGTYPE_p_off_type swig_types[208]
-#define SWIGTYPE_p_openmode swig_types[209]
-#define SWIGTYPE_p_p_PyObject swig_types[210]
-#define SWIGTYPE_p_pos_type swig_types[211]
-#define SWIGTYPE_p_seekdir swig_types[212]
-#define SWIGTYPE_p_size_t swig_types[213]
-#define SWIGTYPE_p_size_type swig_types[214]
-#define SWIGTYPE_p_state_type swig_types[215]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t swig_types[216]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[217]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[218]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[219]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[220]
-#define SWIGTYPE_p_std__invalid_argument swig_types[221]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t swig_types[222]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[223]
-#define SWIGTYPE_p_traits_type swig_types[224]
-#define SWIGTYPE_p_value_type swig_types[225]
-static swig_type_info *swig_types[227];
-static swig_module_info swig_module = {swig_types, 226, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__Range swig_types[137]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[138]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[139]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[140]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[141]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t swig_types[142]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[143]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[144]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[145]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[146]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[147]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[148]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[149]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[150]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[151]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[152]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[153]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[154]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[155]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[156]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[157]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[158]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[159]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[160]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t swig_types[161]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t swig_types[162]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[163]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[164]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t swig_types[165]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[166]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[167]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[168]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[169]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[170]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[171]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[172]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[173]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[174]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[175]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[176]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[177]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[178]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[179]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[180]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[181]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[182]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[183]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[184]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t swig_types[185]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t swig_types[186]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t swig_types[187]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIdTiming_t swig_types[188]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t swig_types[189]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t swig_types[190]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t swig_types[191]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[192]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[193]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePointCollection_t swig_types[194]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t swig_types[195]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[196]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[197]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[198]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[199]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[200]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[201]
+#define SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t swig_types[202]
+#define SWIGTYPE_p_char swig_types[203]
+#define SWIGTYPE_p_char_type swig_types[204]
+#define SWIGTYPE_p_difference_type swig_types[205]
+#define SWIGTYPE_p_fmtflags swig_types[206]
+#define SWIGTYPE_p_int_type swig_types[207]
+#define SWIGTYPE_p_iostate swig_types[208]
+#define SWIGTYPE_p_off_type swig_types[209]
+#define SWIGTYPE_p_openmode swig_types[210]
+#define SWIGTYPE_p_p_PyObject swig_types[211]
+#define SWIGTYPE_p_pos_type swig_types[212]
+#define SWIGTYPE_p_seekdir swig_types[213]
+#define SWIGTYPE_p_size_t swig_types[214]
+#define SWIGTYPE_p_size_type swig_types[215]
+#define SWIGTYPE_p_state_type swig_types[216]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t swig_types[217]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[218]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[219]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[220]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[221]
+#define SWIGTYPE_p_std__invalid_argument swig_types[222]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t swig_types[223]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[224]
+#define SWIGTYPE_p_traits_type swig_types[225]
+#define SWIGTYPE_p_value_type swig_types[226]
+static swig_type_info *swig_types[228];
+static swig_module_info swig_module = {swig_types, 227, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -7043,7 +7044,7 @@ SWIGINTERN PyObject *_wrap_new_TiePoint__SWIG_2(PyObject *SWIGUNUSEDPARM(self), 
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_TiePoint" "', argument " "1"" of type '" "GeoCal::TiePoint const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_TiePoint" "', argument " "1"" of type '" "GeoCal::TiePoint const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_TiePoint" "', argument " "1"" of type '" "GeoCal::TiePoint const &""'"); 
@@ -7126,7 +7127,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_id__SWIG_0(PyObject *SWIGUNUSEDPARM(self)
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_id" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_id" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -7170,7 +7171,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_id__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_id" "', argument " "1"" of type '" "GeoCal::TiePoint *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_id" "', argument " "1"" of type '" "GeoCal::TiePoint *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePoint > * >(argp1);
@@ -7241,7 +7242,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_is_gcp__SWIG_0(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_is_gcp" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_is_gcp" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -7285,7 +7286,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_is_gcp__SWIG_1(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_is_gcp" "', argument " "1"" of type '" "GeoCal::TiePoint *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_is_gcp" "', argument " "1"" of type '" "GeoCal::TiePoint *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePoint > * >(argp1);
@@ -7356,7 +7357,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ground_location__SWIG_0(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_ground_location" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_ground_location" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -7403,7 +7404,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ground_location__SWIG_1(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_ground_location" "', argument " "1"" of type '" "GeoCal::TiePoint *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_ground_location" "', argument " "1"" of type '" "GeoCal::TiePoint *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePoint > * >(argp1);
@@ -7418,7 +7419,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ground_location__SWIG_1(PyObject *SWIGUNU
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePoint__v_ground_location" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::GroundCoordinate > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePoint__v_ground_location" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::GroundCoordinate > const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(argp2);
@@ -7496,7 +7497,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_number_image(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_number_image" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_number_image" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -7539,7 +7540,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_number_image_location(PyObject *SWIGUNUSE
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_number_image_location" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_number_image_location" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -7583,7 +7584,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_0(PyObject *SWIGUNUSE
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_image_coordinate" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_image_coordinate" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -7644,7 +7645,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_1(PyObject *SWIGUNUSE
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_image_coordinate" "', argument " "1"" of type '" "GeoCal::TiePoint *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_image_coordinate" "', argument " "1"" of type '" "GeoCal::TiePoint *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePoint > * >(argp1);
@@ -7664,7 +7665,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_1(PyObject *SWIGUNUSE
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePoint_image_coordinate" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::ImageCoordinate > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePoint_image_coordinate" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::ImageCoordinate > const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageCoordinate > * >(argp3);
@@ -7736,7 +7737,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_2(PyObject *SWIGUNUSE
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_image_coordinate" "', argument " "1"" of type '" "GeoCal::TiePoint *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_image_coordinate" "', argument " "1"" of type '" "GeoCal::TiePoint *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePoint > * >(argp1);
@@ -7756,7 +7757,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_2(PyObject *SWIGUNUSE
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePoint_image_coordinate" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::ImageCoordinate > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePoint_image_coordinate" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::ImageCoordinate > const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageCoordinate > * >(argp3);
@@ -7820,7 +7821,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_3(PyObject *SWIGUNUSE
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_image_coordinate" "', argument " "1"" of type '" "GeoCal::TiePoint *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_image_coordinate" "', argument " "1"" of type '" "GeoCal::TiePoint *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePoint > * >(argp1);
@@ -7840,7 +7841,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_3(PyObject *SWIGUNUSE
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePoint_image_coordinate" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::ImageCoordinate > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePoint_image_coordinate" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::ImageCoordinate > const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageCoordinate > * >(argp3);
@@ -7928,7 +7929,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_line_sigma(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_line_sigma" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_line_sigma" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -7978,7 +7979,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_sample_sigma(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_sample_sigma" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_sample_sigma" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -8026,7 +8027,7 @@ SWIGINTERN PyObject *_wrap_TiePoint___str__(PyObject *SWIGUNUSEDPARM(self), PyOb
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint___str__" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint___str__" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -8069,7 +8070,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic(PyObject *SWIGUNUSEDPARM(self), PyObje
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_ic" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_ic" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -8090,6 +8091,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic(PyObject *SWIGUNUSEDPARM(self), PyObje
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
       dims[i] = (&result)->extent(i);
@@ -8097,12 +8101,16 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic(PyObject *SWIGUNUSEDPARM(self), PyObje
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -8126,7 +8134,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic_sigma(PyObject *SWIGUNUSEDPARM(self), 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_ic_sigma" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint__v_ic_sigma" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -8147,6 +8155,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic_sigma(PyObject *SWIGUNUSEDPARM(self), 
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
       dims[i] = (&result)->extent(i);
@@ -8154,12 +8165,16 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic_sigma(PyObject *SWIGUNUSEDPARM(self), 
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -8186,7 +8201,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_pred(PyObject *SWIGUNUSEDPARM(self), PyOb
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_ic_pred" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_ic_pred" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -8208,7 +8223,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_pred(PyObject *SWIGUNUSEDPARM(self), PyOb
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePoint_ic_pred" "', argument " "2"" of type '" "GeoCal::IgcCollection const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePoint_ic_pred" "', argument " "2"" of type '" "GeoCal::IgcCollection const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TiePoint_ic_pred" "', argument " "2"" of type '" "GeoCal::IgcCollection const &""'"); 
@@ -8232,6 +8247,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_pred(PyObject *SWIGUNUSEDPARM(self), PyOb
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
       dims[i] = (&result)->extent(i);
@@ -8239,12 +8257,16 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_pred(PyObject *SWIGUNUSEDPARM(self), PyOb
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -8271,7 +8293,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_diff(PyObject *SWIGUNUSEDPARM(self), PyOb
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_ic_diff" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePoint_ic_diff" "', argument " "1"" of type '" "GeoCal::TiePoint const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePoint > * >(argp1);
@@ -8293,7 +8315,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_diff(PyObject *SWIGUNUSEDPARM(self), PyOb
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePoint_ic_diff" "', argument " "2"" of type '" "GeoCal::IgcCollection const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePoint_ic_diff" "', argument " "2"" of type '" "GeoCal::IgcCollection const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TiePoint_ic_diff" "', argument " "2"" of type '" "GeoCal::IgcCollection const &""'"); 
@@ -8317,6 +8339,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_diff(PyObject *SWIGUNUSEDPARM(self), PyOb
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
       dims[i] = (&result)->extent(i);
@@ -8324,12 +8349,16 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_diff(PyObject *SWIGUNUSEDPARM(self), PyOb
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -8352,7 +8381,7 @@ SWIGINTERN PyObject *_wrap_delete_TiePoint(PyObject *SWIGUNUSEDPARM(self), PyObj
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TiePoint" "', argument " "1"" of type '" "GeoCal::TiePoint *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TiePoint" "', argument " "1"" of type '" "GeoCal::TiePoint *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePoint > * >(argp1);
@@ -8408,7 +8437,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_iterator(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_iterator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_iterator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8451,7 +8480,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___nonzero__(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___nonzero__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___nonzero__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8494,7 +8523,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___bool__(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___bool__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___bool__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8537,7 +8566,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___len__(PyObject *SWIGUNUSEDPARM(self)
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___len__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___len__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8585,7 +8614,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___getslice__(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___getslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___getslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8653,7 +8682,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setslice____SWIG_0(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8720,7 +8749,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setslice____SWIG_1(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8823,7 +8852,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___delslice__(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___delslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___delslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8885,7 +8914,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___delitem____SWIG_0(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -8941,7 +8970,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___getitem____SWIG_0(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9002,7 +9031,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setitem____SWIG_0(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9071,7 +9100,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setitem____SWIG_1(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9127,7 +9156,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___delitem____SWIG_1(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9219,7 +9248,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___getitem____SWIG_1(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9319,7 +9348,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setitem____SWIG_2(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9339,7 +9368,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setitem____SWIG_2(PyObject *SWIGUNUS
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointVector___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointVector___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type * >(argp3);
@@ -9441,7 +9470,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_pop(PyObject *SWIGUNUSEDPARM(self), Py
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_pop" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_pop" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9495,7 +9524,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_append(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_append" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_append" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9510,7 +9539,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_append(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePointVector_append" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePointVector_append" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type * >(argp2);
@@ -9627,7 +9656,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_empty(PyObject *SWIGUNUSEDPARM(self), 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_empty" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_empty" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9670,7 +9699,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_size(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_size" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_size" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9715,7 +9744,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_swap(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_swap" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_swap" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9737,7 +9766,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_swap(PyObject *SWIGUNUSEDPARM(self), P
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePointVector_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePointVector_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TiePointVector_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > &""'"); 
@@ -9783,7 +9812,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_begin(PyObject *SWIGUNUSEDPARM(self), 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_begin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_begin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9827,7 +9856,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_end(PyObject *SWIGUNUSEDPARM(self), Py
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_end" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_end" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9871,7 +9900,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_rbegin(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_rbegin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_rbegin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9915,7 +9944,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_rend(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_rend" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_rend" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -9958,7 +9987,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_clear(PyObject *SWIGUNUSEDPARM(self), 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_clear" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_clear" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10001,7 +10030,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_get_allocator(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_get_allocator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_get_allocator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10075,7 +10104,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_pop_back(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_pop_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_pop_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10118,7 +10147,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_resize__SWIG_0(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10167,7 +10196,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_erase__SWIG_0(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10226,7 +10255,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_erase__SWIG_1(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10322,7 +10351,7 @@ SWIGINTERN PyObject *_wrap_new_TiePointVector__SWIG_3(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_TiePointVector" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_TiePointVector" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type * >(argp2);
@@ -10424,7 +10453,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_push_back(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_push_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_push_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10439,7 +10468,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_push_back(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePointVector_push_back" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePointVector_push_back" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type * >(argp2);
@@ -10493,7 +10522,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_front(PyObject *SWIGUNUSEDPARM(self), 
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_front" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_front" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10538,7 +10567,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_back(PyObject *SWIGUNUSEDPARM(self), P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10589,7 +10618,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_assign(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_assign" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_assign" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10609,7 +10638,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_assign(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointVector_assign" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointVector_assign" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type * >(argp3);
@@ -10668,7 +10697,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_resize__SWIG_1(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10688,7 +10717,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_resize__SWIG_1(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointVector_resize" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointVector_resize" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type * >(argp3);
@@ -10772,7 +10801,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_insert__SWIG_0(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10798,7 +10827,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_insert__SWIG_0(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointVector_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointVector_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type * >(argp3);
@@ -10861,7 +10890,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_insert__SWIG_1(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -10892,7 +10921,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_insert__SWIG_1(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePoint_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "TiePointVector_insert" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "TiePointVector_insert" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp4) tempshared4 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type * >(argp4);
@@ -10971,7 +11000,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_reserve(PyObject *SWIGUNUSEDPARM(self)
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_reserve" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_reserve" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -11019,7 +11048,7 @@ SWIGINTERN PyObject *_wrap_TiePointVector_capacity(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_capacity" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointVector_capacity" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -11061,7 +11090,7 @@ SWIGINTERN PyObject *_wrap_delete_TiePointVector(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_std__vectorT_boost__shared_ptrT_GeoCal__TiePoint_t_std__allocatorT_boost__shared_ptrT_GeoCal__TiePoint_t_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TiePointVector" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TiePointVector" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::TiePoint > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  std::vector<boost::shared_ptr<GeoCal::TiePoint> > > * >(argp1);
@@ -11202,7 +11231,7 @@ SWIGINTERN PyObject *_wrap_TiePointCollection__v_number_gcp(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePointCollection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointCollection__v_number_gcp" "', argument " "1"" of type '" "GeoCal::TiePointCollection const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointCollection__v_number_gcp" "', argument " "1"" of type '" "GeoCal::TiePointCollection const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePointCollection > * >(argp1);
@@ -11245,7 +11274,7 @@ SWIGINTERN PyObject *_wrap_TiePointCollection___str__(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePointCollection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointCollection___str__" "', argument " "1"" of type '" "GeoCal::TiePointCollection const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointCollection___str__" "', argument " "1"" of type '" "GeoCal::TiePointCollection const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePointCollection > * >(argp1);
@@ -11287,7 +11316,7 @@ SWIGINTERN PyObject *_wrap_delete_TiePointCollection(PyObject *SWIGUNUSEDPARM(se
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePointCollection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TiePointCollection" "', argument " "1"" of type '" "GeoCal::TiePointCollection *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TiePointCollection" "', argument " "1"" of type '" "GeoCal::TiePointCollection *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePointCollection > * >(argp1);
@@ -12290,6 +12319,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_5_t = {"_p_blitz__A
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_6_t = {"_p_blitz__ArrayT_unsigned_short_6_t", "blitz::Array< unsigned short,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__ArrayT_unsigned_short_7_t", "blitz::Array< unsigned short,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,1 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,2 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,3 > > *", 0, 0, (void*)0, 0};
@@ -12518,6 +12548,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_unsigned_short_6_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_7_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
+  &_swigt__p_blitz__Range,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t,
@@ -12746,6 +12777,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_5_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -12974,6 +13006,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_unsigned_short_6_t,
   _swigc__p_blitz__ArrayT_unsigned_short_7_t,
   _swigc__p_blitz__ArrayT_unsigned_short_8_t,
+  _swigc__p_blitz__Range,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t,

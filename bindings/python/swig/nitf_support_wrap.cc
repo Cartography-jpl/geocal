@@ -3528,33 +3528,34 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[73]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[74]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[75]
-#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[76]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[77]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[78]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[79]
-#define SWIGTYPE_p_char swig_types[80]
-#define SWIGTYPE_p_char_type swig_types[81]
-#define SWIGTYPE_p_difference_type swig_types[82]
-#define SWIGTYPE_p_fmtflags swig_types[83]
-#define SWIGTYPE_p_int_type swig_types[84]
-#define SWIGTYPE_p_iostate swig_types[85]
-#define SWIGTYPE_p_off_type swig_types[86]
-#define SWIGTYPE_p_openmode swig_types[87]
-#define SWIGTYPE_p_pos_type swig_types[88]
-#define SWIGTYPE_p_seekdir swig_types[89]
-#define SWIGTYPE_p_size_t swig_types[90]
-#define SWIGTYPE_p_size_type swig_types[91]
-#define SWIGTYPE_p_state_type swig_types[92]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[93]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[94]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[95]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[96]
-#define SWIGTYPE_p_std__invalid_argument swig_types[97]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[98]
-#define SWIGTYPE_p_traits_type swig_types[99]
-#define SWIGTYPE_p_value_type swig_types[100]
-static swig_type_info *swig_types[102];
-static swig_module_info swig_module = {swig_types, 101, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__Range swig_types[76]
+#define SWIGTYPE_p_boost__math__quaternionT_double_t swig_types[77]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[78]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[79]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[80]
+#define SWIGTYPE_p_char swig_types[81]
+#define SWIGTYPE_p_char_type swig_types[82]
+#define SWIGTYPE_p_difference_type swig_types[83]
+#define SWIGTYPE_p_fmtflags swig_types[84]
+#define SWIGTYPE_p_int_type swig_types[85]
+#define SWIGTYPE_p_iostate swig_types[86]
+#define SWIGTYPE_p_off_type swig_types[87]
+#define SWIGTYPE_p_openmode swig_types[88]
+#define SWIGTYPE_p_pos_type swig_types[89]
+#define SWIGTYPE_p_seekdir swig_types[90]
+#define SWIGTYPE_p_size_t swig_types[91]
+#define SWIGTYPE_p_size_type swig_types[92]
+#define SWIGTYPE_p_state_type swig_types[93]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[94]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[95]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[96]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[97]
+#define SWIGTYPE_p_std__invalid_argument swig_types[98]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[99]
+#define SWIGTYPE_p_traits_type swig_types[100]
+#define SWIGTYPE_p_value_type swig_types[101]
+static swig_type_info *swig_types[103];
+static swig_module_info swig_module = {swig_types, 102, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6570,6 +6571,9 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_0(PyObject *SWIGUNUSEDPARM(s
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
       dims[i] = (&result)->extent(i);
@@ -6577,12 +6581,16 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_0(PyObject *SWIGUNUSEDPARM(s
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -6625,6 +6633,9 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_1(PyObject *SWIGUNUSEDPARM(s
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
       dims[i] = (&result)->extent(i);
@@ -6632,12 +6643,16 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_1(PyObject *SWIGUNUSEDPARM(s
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -6680,6 +6695,9 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_2(PyObject *SWIGUNUSEDPARM(s
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
       dims[i] = (&result)->extent(i);
@@ -6687,12 +6705,16 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_2(PyObject *SWIGUNUSEDPARM(s
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -6909,6 +6931,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_5_t = {"_p_blitz__A
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_6_t = {"_p_blitz__ArrayT_unsigned_short_6_t", "blitz::Array< unsigned short,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__ArrayT_unsigned_short_7_t", "blitz::Array< unsigned short,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__math__quaternionT_double_t = {"_p_boost__math__quaternionT_double_t", "boost::math::quaternion< double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
@@ -7012,6 +7035,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_unsigned_short_6_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_7_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
+  &_swigt__p_blitz__Range,
   &_swigt__p_boost__math__quaternionT_double_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
@@ -7115,6 +7139,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_5_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__math__quaternionT_double_t[] = {  {&_swigt__p_boost__math__quaternionT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7218,6 +7243,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_unsigned_short_6_t,
   _swigc__p_blitz__ArrayT_unsigned_short_7_t,
   _swigc__p_blitz__ArrayT_unsigned_short_8_t,
+  _swigc__p_blitz__Range,
   _swigc__p_boost__math__quaternionT_double_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,

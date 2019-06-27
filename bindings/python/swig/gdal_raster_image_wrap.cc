@@ -3593,105 +3593,106 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[138]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[139]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[140]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[141]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[142]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[143]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[144]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t swig_types[145]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[146]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[147]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[148]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[149]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[150]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[151]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[152]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[153]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[154]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[155]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[156]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[157]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[158]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[159]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[160]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ecr_t swig_types[161]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[162]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalBase_t swig_types[163]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t swig_types[164]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GByte_t_t swig_types[165]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GInt16_t_t swig_types[166]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GInt32_t_t swig_types[167]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GUInt16_t_t swig_types[168]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GUInt32_t_t swig_types[169]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_double_t_t swig_types[170]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_float_t_t swig_types[171]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[172]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[173]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t swig_types[174]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t swig_types[175]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[176]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[177]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[178]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[179]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[180]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[181]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[182]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[183]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[184]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[185]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[186]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[187]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[188]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[189]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[190]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[191]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[192]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[193]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[194]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[195]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTiledFile_t swig_types[196]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t swig_types[197]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[198]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t swig_types[199]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t swig_types[200]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t swig_types[201]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t swig_types[202]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIdTiming_t swig_types[203]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t swig_types[204]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t swig_types[205]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t swig_types[206]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[207]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[208]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiledFileBaseT_2_t_t swig_types[209]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[210]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[211]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[212]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[213]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[214]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[215]
-#define SWIGTYPE_p_char swig_types[216]
-#define SWIGTYPE_p_char_type swig_types[217]
-#define SWIGTYPE_p_difference_type swig_types[218]
-#define SWIGTYPE_p_fmtflags swig_types[219]
-#define SWIGTYPE_p_index swig_types[220]
-#define SWIGTYPE_p_int_type swig_types[221]
-#define SWIGTYPE_p_iostate swig_types[222]
-#define SWIGTYPE_p_off_type swig_types[223]
-#define SWIGTYPE_p_openmode swig_types[224]
-#define SWIGTYPE_p_pos_type swig_types[225]
-#define SWIGTYPE_p_seekdir swig_types[226]
-#define SWIGTYPE_p_size_t swig_types[227]
-#define SWIGTYPE_p_size_type swig_types[228]
-#define SWIGTYPE_p_state_type swig_types[229]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[230]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[231]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[232]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[233]
-#define SWIGTYPE_p_std__invalid_argument swig_types[234]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[235]
-#define SWIGTYPE_p_traits_type swig_types[236]
-#define SWIGTYPE_p_value_type swig_types[237]
-static swig_type_info *swig_types[239];
-static swig_module_info swig_module = {swig_types, 238, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__Range swig_types[141]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[142]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[143]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[144]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[145]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t swig_types[146]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[147]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[148]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[149]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[150]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[151]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[152]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[153]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[154]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[155]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[156]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[157]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[158]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[159]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[160]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[161]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ecr_t swig_types[162]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[163]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalBase_t swig_types[164]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t swig_types[165]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GByte_t_t swig_types[166]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GInt16_t_t swig_types[167]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GInt32_t_t swig_types[168]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GUInt16_t_t swig_types[169]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_GUInt32_t_t swig_types[170]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_double_t_t swig_types[171]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalT_float_t_t swig_types[172]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[173]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[174]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t swig_types[175]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t swig_types[176]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[177]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[178]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[179]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[180]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[181]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[182]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[183]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[184]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[185]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[186]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[187]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[188]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[189]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[190]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[191]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[192]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[193]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[194]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[195]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[196]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTiledFile_t swig_types[197]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageVariable_t swig_types[198]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[199]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t swig_types[200]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t swig_types[201]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t swig_types[202]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t swig_types[203]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIdTiming_t swig_types[204]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t swig_types[205]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t swig_types[206]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t swig_types[207]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[208]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[209]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiledFileBaseT_2_t_t swig_types[210]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[211]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[212]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[213]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[214]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[215]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[216]
+#define SWIGTYPE_p_char swig_types[217]
+#define SWIGTYPE_p_char_type swig_types[218]
+#define SWIGTYPE_p_difference_type swig_types[219]
+#define SWIGTYPE_p_fmtflags swig_types[220]
+#define SWIGTYPE_p_index swig_types[221]
+#define SWIGTYPE_p_int_type swig_types[222]
+#define SWIGTYPE_p_iostate swig_types[223]
+#define SWIGTYPE_p_off_type swig_types[224]
+#define SWIGTYPE_p_openmode swig_types[225]
+#define SWIGTYPE_p_pos_type swig_types[226]
+#define SWIGTYPE_p_seekdir swig_types[227]
+#define SWIGTYPE_p_size_t swig_types[228]
+#define SWIGTYPE_p_size_type swig_types[229]
+#define SWIGTYPE_p_state_type swig_types[230]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[231]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[232]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[233]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[234]
+#define SWIGTYPE_p_std__invalid_argument swig_types[235]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[236]
+#define SWIGTYPE_p_traits_type swig_types[237]
+#define SWIGTYPE_p_value_type swig_types[238]
+static swig_type_info *swig_types[240];
+static swig_module_info swig_module = {swig_types, 239, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -7683,7 +7684,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_5(PyObject *SWIGUNUSEDPARM(
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
@@ -7818,7 +7819,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_6(PyObject *SWIGUNUSEDPARM(
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
@@ -7945,7 +7946,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_7(PyObject *SWIGUNUSEDPARM(
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
@@ -8064,7 +8065,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_8(PyObject *SWIGUNUSEDPARM(
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
@@ -8176,7 +8177,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_9(PyObject *SWIGUNUSEDPARM(
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
@@ -8885,7 +8886,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_23(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
@@ -9020,7 +9021,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_24(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
@@ -9147,7 +9148,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_25(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
@@ -9266,7 +9267,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_26(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
@@ -9377,7 +9378,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_27(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
@@ -9480,7 +9481,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_28(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
@@ -9576,7 +9577,7 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_29(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "GeoCal::GdalRasterImage const &""'"); 
@@ -10200,7 +10201,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_gdal_data_base(PyObject *SWIGUNUSE
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_gdal_data_base" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_gdal_data_base" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -10244,7 +10245,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_flush(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_flush" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_flush" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -10286,7 +10287,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_close(PyObject *SWIGUNUSEDPARM(self),
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_close" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_close" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GdalRasterImage > * >(argp1);
@@ -10329,7 +10330,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_is_closed(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_is_closed" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_is_closed" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -10374,7 +10375,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_map_info(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_set_map_info" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_set_map_info" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GdalRasterImage > * >(argp1);
@@ -10396,7 +10397,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_map_info(PyObject *SWIGUNUSEDPARM
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_set_map_info" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_set_map_info" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_set_map_info" "', argument " "2"" of type '" "GeoCal::MapInfo const &""'"); 
@@ -10444,7 +10445,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_rpc(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_set_rpc" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_set_rpc" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GdalRasterImage > * >(argp1);
@@ -10466,7 +10467,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_rpc(PyObject *SWIGUNUSEDPARM(self
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_set_rpc" "', argument " "2"" of type '" "GeoCal::Rpc const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_set_rpc" "', argument " "2"" of type '" "GeoCal::Rpc const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_set_rpc" "', argument " "2"" of type '" "GeoCal::Rpc const &""'"); 
@@ -10512,7 +10513,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata_list__SWIG_0(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_metadata_list" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_metadata_list" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -10566,7 +10567,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata_list__SWIG_1(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_metadata_list" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_metadata_list" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -10635,7 +10636,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_has_metadata__SWIG_0(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_has_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_has_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GdalRasterImage > * >(argp1);
@@ -10704,7 +10705,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_has_metadata__SWIG_1(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_has_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_has_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GdalRasterImage > * >(argp1);
@@ -10787,7 +10788,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_metadata__SWIG_0(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_set_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_set_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GdalRasterImage > * >(argp1);
@@ -10870,7 +10871,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_metadata__SWIG_1(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_set_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_set_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GdalRasterImage > * >(argp1);
@@ -10963,7 +10964,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_file_names(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_file_names" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_file_names" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11007,7 +11008,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_map_info_from_nitf_corner__SWIG_0(PyO
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_map_info_from_nitf_corner" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_map_info_from_nitf_corner" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11055,7 +11056,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_map_info_from_nitf_corner__SWIG_1(PyO
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_map_info_from_nitf_corner" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_map_info_from_nitf_corner" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11124,7 +11125,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_band_id(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_band_id" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_band_id" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11167,7 +11168,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_offset(PyObject *SWIGUNUSEDPARM(se
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_offset" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_offset" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11210,7 +11211,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_scale(PyObject *SWIGUNUSEDPARM(sel
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_scale" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_scale" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11253,7 +11254,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_unit_type(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_unit_type" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_unit_type" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11296,7 +11297,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_raster_data_type(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_raster_data_type" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_raster_data_type" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11339,7 +11340,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_update(PyObject *SWIGUNUSEDPARM(se
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_update" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_update" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11382,7 +11383,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_rpc(PyObject *SWIGUNUSEDPARM(self)
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_rpc" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_rpc" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11428,7 +11429,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_map_info(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_map_info" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_map_info" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11474,7 +11475,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_has_gcps(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_has_gcps" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_has_gcps" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11517,7 +11518,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_gcps(PyObject *SWIGUNUSEDPARM(self
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_gcps" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage__v_gcps" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11538,6 +11539,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_gcps(PyObject *SWIGUNUSEDPARM(self
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
       dims[i] = (&result)->extent(i);
@@ -11545,12 +11549,16 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_gcps(PyObject *SWIGUNUSEDPARM(self
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -11574,7 +11582,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata__SWIG_0(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11632,7 +11640,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata__SWIG_1(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GdalRasterImage_metadata" "', argument " "1"" of type '" "GeoCal::GdalRasterImage const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GdalRasterImage > * >(argp1);
@@ -11744,7 +11752,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_file__SWIG_0(PyObject *SWIGUN
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_file" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_file" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_file" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -11820,7 +11828,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_file__SWIG_1(PyObject *SWIGUN
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_file" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_file" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_file" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -11921,7 +11929,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_0(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -11998,7 +12006,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_1(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12067,7 +12075,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_2(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12145,7 +12153,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_3(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12170,7 +12178,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_3(PyObject *SWIGU
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12195,7 +12203,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_3(PyObject *SWIGU
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12280,7 +12288,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_4(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12305,7 +12313,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_4(PyObject *SWIGU
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12330,7 +12338,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_4(PyObject *SWIGU
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12407,7 +12415,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_5(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12432,7 +12440,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_5(PyObject *SWIGU
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12457,7 +12465,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_5(PyObject *SWIGU
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12539,7 +12547,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_6(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12564,7 +12572,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_6(PyObject *SWIGU
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12589,7 +12597,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_6(PyObject *SWIGU
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12614,7 +12622,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_6(PyObject *SWIGU
     } else {
       res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res5)) {
-        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp5) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12703,7 +12711,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_7(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12728,7 +12736,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_7(PyObject *SWIGU
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12753,7 +12761,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_7(PyObject *SWIGU
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12778,7 +12786,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_7(PyObject *SWIGU
     } else {
       res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res5)) {
-        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp5) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12859,7 +12867,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_8(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12884,7 +12892,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_8(PyObject *SWIGU
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12909,7 +12917,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_8(PyObject *SWIGU
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "4"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -12934,7 +12942,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_8(PyObject *SWIGU
     } else {
       res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res5)) {
-        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp5) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "5"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -13178,7 +13186,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_12(PyObject *SWIG
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
@@ -13255,7 +13263,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_13(PyObject *SWIG
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
@@ -13324,7 +13332,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_14(PyObject *SWIG
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save_to_erdas" "', argument " "2"" of type '" "GeoCal::RasterImageMultiBand const &""'"); 
@@ -13570,7 +13578,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_0(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -13685,7 +13693,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_1(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -13792,7 +13800,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_2(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -13892,7 +13900,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_3(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -13976,7 +13984,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_4(PyObject *SWIGUNUSEDPARM
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GdalRasterImage_save" "', argument " "3"" of type '" "GeoCal::RasterImage const &""'"); 
@@ -14061,7 +14069,7 @@ SWIGINTERN PyObject *_wrap_delete_GdalRasterImage(PyObject *SWIGUNUSEDPARM(self)
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GdalRasterImage" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_GdalRasterImage" "', argument " "1"" of type '" "GeoCal::GdalRasterImage *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GdalRasterImage > * >(argp1);
@@ -15174,6 +15182,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_5_t = {"_p_blitz__A
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_6_t = {"_p_blitz__ArrayT_unsigned_short_6_t", "blitz::Array< unsigned short,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__ArrayT_unsigned_short_7_t", "blitz::Array< unsigned short,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,1 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,2 > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t = {"_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t", "boost::shared_ptr< GeoCal::ArrayAd< double,3 > > *", 0, 0, (void*)0, 0};
@@ -15414,6 +15423,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_unsigned_short_6_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_7_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
+  &_swigt__p_blitz__Range,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t,
@@ -15654,6 +15664,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_5_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_6_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -15894,6 +15905,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_unsigned_short_6_t,
   _swigc__p_blitz__ArrayT_unsigned_short_7_t,
   _swigc__p_blitz__ArrayT_unsigned_short_8_t,
+  _swigc__p_blitz__Range,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t,

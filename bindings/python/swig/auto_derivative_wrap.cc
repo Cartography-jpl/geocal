@@ -3530,38 +3530,39 @@ namespace Swig {
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[75]
 #define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[76]
 #define SWIGTYPE_p_blitz__GeneralArrayStorageT_1_t swig_types[77]
-#define SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t swig_types[78]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[79]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[80]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[81]
-#define SWIGTYPE_p_char swig_types[82]
-#define SWIGTYPE_p_char_type swig_types[83]
-#define SWIGTYPE_p_difference_type swig_types[84]
-#define SWIGTYPE_p_double swig_types[85]
-#define SWIGTYPE_p_fmtflags swig_types[86]
-#define SWIGTYPE_p_int_type swig_types[87]
-#define SWIGTYPE_p_iostate swig_types[88]
-#define SWIGTYPE_p_off_type swig_types[89]
-#define SWIGTYPE_p_openmode swig_types[90]
-#define SWIGTYPE_p_p_PyObject swig_types[91]
-#define SWIGTYPE_p_pos_type swig_types[92]
-#define SWIGTYPE_p_seekdir swig_types[93]
-#define SWIGTYPE_p_size_t swig_types[94]
-#define SWIGTYPE_p_size_type swig_types[95]
-#define SWIGTYPE_p_state_type swig_types[96]
-#define SWIGTYPE_p_std__allocatorT_GeoCal__AutoDerivativeT_double_t_t swig_types[97]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[98]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[99]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[100]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[101]
-#define SWIGTYPE_p_std__invalid_argument swig_types[102]
-#define SWIGTYPE_p_std__vectorT_GeoCal__AutoDerivativeT_double_t_std__allocatorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[103]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[104]
-#define SWIGTYPE_p_traits_type swig_types[105]
-#define SWIGTYPE_p_value_type swig_types[106]
-#define SWIGTYPE_p_void swig_types[107]
-static swig_type_info *swig_types[109];
-static swig_module_info swig_module = {swig_types, 108, 0, 0, 0, 0};
+#define SWIGTYPE_p_blitz__Range swig_types[78]
+#define SWIGTYPE_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t swig_types[79]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[80]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[81]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[82]
+#define SWIGTYPE_p_char swig_types[83]
+#define SWIGTYPE_p_char_type swig_types[84]
+#define SWIGTYPE_p_difference_type swig_types[85]
+#define SWIGTYPE_p_double swig_types[86]
+#define SWIGTYPE_p_fmtflags swig_types[87]
+#define SWIGTYPE_p_int_type swig_types[88]
+#define SWIGTYPE_p_iostate swig_types[89]
+#define SWIGTYPE_p_off_type swig_types[90]
+#define SWIGTYPE_p_openmode swig_types[91]
+#define SWIGTYPE_p_p_PyObject swig_types[92]
+#define SWIGTYPE_p_pos_type swig_types[93]
+#define SWIGTYPE_p_seekdir swig_types[94]
+#define SWIGTYPE_p_size_t swig_types[95]
+#define SWIGTYPE_p_size_type swig_types[96]
+#define SWIGTYPE_p_state_type swig_types[97]
+#define SWIGTYPE_p_std__allocatorT_GeoCal__AutoDerivativeT_double_t_t swig_types[98]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[99]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[100]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[101]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[102]
+#define SWIGTYPE_p_std__invalid_argument swig_types[103]
+#define SWIGTYPE_p_std__vectorT_GeoCal__AutoDerivativeT_double_t_std__allocatorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[104]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[105]
+#define SWIGTYPE_p_traits_type swig_types[106]
+#define SWIGTYPE_p_value_type swig_types[107]
+#define SWIGTYPE_p_void swig_types[108]
+static swig_type_info *swig_types[110];
+static swig_module_info swig_module = {swig_types, 109, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -7057,7 +7058,7 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_4(PyObject *SWIGUNUSED
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AutoDerivativeDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AutoDerivativeDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AutoDerivativeDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -7110,7 +7111,7 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_5(PyObject *SWIGUNUSED
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AutoDerivativeDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AutoDerivativeDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AutoDerivativeDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const &""'"); 
@@ -7215,7 +7216,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__v_number_variable(PyObject *SWI
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__v_number_variable" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__v_number_variable" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7258,7 +7259,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__v_is_constant(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__v_is_constant" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__v_is_constant" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7303,7 +7304,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___lt____SWIG_0(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___lt__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___lt__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7325,7 +7326,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___lt____SWIG_0(PyObject *SWIGUNU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___lt__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___lt__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___lt__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -7373,7 +7374,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___lt____SWIG_1(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___lt__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___lt__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7453,7 +7454,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___eq____SWIG_0(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___eq__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___eq__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7475,7 +7476,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___eq____SWIG_0(PyObject *SWIGUNU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___eq__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___eq__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___eq__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -7523,7 +7524,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___eq____SWIG_1(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___eq__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___eq__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7603,7 +7604,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___iadd____SWIG_0(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___iadd__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___iadd__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7625,7 +7626,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___iadd____SWIG_0(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___iadd__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___iadd__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___iadd__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -7676,7 +7677,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___iadd____SWIG_1(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___iadd__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___iadd__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7762,7 +7763,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___isub____SWIG_0(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___isub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___isub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7784,7 +7785,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___isub____SWIG_0(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___isub__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___isub__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___isub__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -7835,7 +7836,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___isub____SWIG_1(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___isub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___isub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7921,7 +7922,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___imul____SWIG_0(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___imul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___imul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -7943,7 +7944,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___imul____SWIG_0(PyObject *SWIGU
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___imul__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___imul__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___imul__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -7994,7 +7995,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___imul____SWIG_1(PyObject *SWIGU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___imul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___imul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8080,7 +8081,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___itruediv____SWIG_0(PyObject *S
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___itruediv__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___itruediv__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8102,7 +8103,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___itruediv____SWIG_0(PyObject *S
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___itruediv__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___itruediv__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___itruediv__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -8153,7 +8154,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___itruediv____SWIG_1(PyObject *S
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___itruediv__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___itruediv__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8237,7 +8238,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___str__(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___str__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___str__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8280,7 +8281,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__value(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__value" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__value" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8324,7 +8325,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__value_set(PyObject *SWIGUNUSEDP
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__value_set" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__value_set" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8372,7 +8373,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__gradient(PyObject *SWIGUNUSEDPA
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__gradient" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__gradient" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8393,6 +8394,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__gradient(PyObject *SWIGUNUSEDPA
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
       dims[i] = (&result)->extent(i);
@@ -8400,12 +8404,16 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__gradient(PyObject *SWIGUNUSEDPA
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -8430,7 +8438,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__gradient_set(PyObject *SWIGUNUS
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__gradient_set" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble__gradient_set" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8483,7 +8491,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___add____SWIG_0(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___add__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___add__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8505,7 +8513,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___add____SWIG_0(PyObject *SWIGUN
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___add__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___add__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___add__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -8556,7 +8564,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___add____SWIG_1(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___add__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___add__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8640,7 +8648,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___radd__(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___radd__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___radd__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8694,7 +8702,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___sub____SWIG_0(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___sub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___sub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8716,7 +8724,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___sub____SWIG_0(PyObject *SWIGUN
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___sub__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___sub__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___sub__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -8767,7 +8775,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___sub____SWIG_1(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___sub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___sub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8851,7 +8859,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rsub__(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___rsub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___rsub__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8905,7 +8913,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___mul____SWIG_0(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___mul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___mul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -8927,7 +8935,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___mul____SWIG_0(PyObject *SWIGUN
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___mul__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___mul__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___mul__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -8978,7 +8986,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___mul____SWIG_1(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___mul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___mul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -9062,7 +9070,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rmul__(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___rmul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___rmul__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -9116,7 +9124,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___div____SWIG_0(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___div__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___div__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -9138,7 +9146,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___div____SWIG_0(PyObject *SWIGUN
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___div__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "AutoDerivativeDouble___div__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "AutoDerivativeDouble___div__" "', argument " "2"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -9189,7 +9197,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___div____SWIG_1(PyObject *SWIGUN
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___div__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___div__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -9273,7 +9281,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rdiv__(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___rdiv__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___rdiv__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -9328,7 +9336,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___pow__(PyObject *SWIGUNUSEDPARM
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___pow__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___pow__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -9383,7 +9391,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rpow__(PyObject *SWIGUNUSEDPAR
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___rpow__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeDouble___rpow__" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -9434,7 +9442,7 @@ SWIGINTERN PyObject *_wrap_delete_AutoDerivativeDouble(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_AutoDerivativeDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_AutoDerivativeDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivative<double> > * >(argp1);
@@ -9535,7 +9543,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble__v_value(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeRefDouble__v_value" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeRefDouble__v_value" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivativeRef<double> > * >(argp1);
@@ -9578,7 +9586,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble__v_gradient(PyObject *SWIGUNU
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeRefDouble__v_gradient" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeRefDouble__v_gradient" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivativeRef<double> > * >(argp1);
@@ -9599,6 +9607,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble__v_gradient(PyObject *SWIGUNU
     }
   }
   {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
       dims[i] = (&result)->extent(i);
@@ -9606,12 +9617,16 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble__v_gradient(PyObject *SWIGUNU
       // of type T.
       stride[i] = (&result)->stride(i) * sizeof(double);
     }
+    
+    // Create new numpy object using Numpy C API
     resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
       stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(result);
-    PyArray_SetBaseObject((PyArrayObject*)resultobj, 
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
         SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
   }
   return resultobj;
 fail:
@@ -9635,7 +9650,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble___str__(PyObject *SWIGUNUSEDP
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeRefDouble___str__" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "AutoDerivativeRefDouble___str__" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::AutoDerivativeRef<double> > * >(argp1);
@@ -9677,7 +9692,7 @@ SWIGINTERN PyObject *_wrap_delete_AutoDerivativeRefDouble(PyObject *SWIGUNUSEDPA
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_AutoDerivativeRefDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > *""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_AutoDerivativeRefDouble" "', argument " "1"" of type '" "GeoCal::AutoDerivativeRef< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::AutoDerivativeRef<double> > * >(argp1);
@@ -10454,7 +10469,7 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_write__SWIG_0(PyObject *S
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double >""'");
     }
     if (!argp3) {
       SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double >""'");
@@ -10514,7 +10529,7 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_write__SWIG_1(PyObject *S
     int newmem = 0;
     res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double >""'");
     }
     if (!argp4) {
       SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "4"" of type '" "GeoCal::AutoDerivative< double >""'");
@@ -10582,7 +10597,7 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_write__SWIG_2(PyObject *S
     int newmem = 0;
     res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
     if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double >""'");
     }
     if (!argp5) {
       SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "5"" of type '" "GeoCal::AutoDerivative< double >""'");
@@ -10658,7 +10673,7 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_write__SWIG_3(PyObject *S
     int newmem = 0;
     res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
     if (!SWIG_IsOK(res6)) {
-      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double >""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double >""'");
     }
     if (!argp6) {
       SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ArrayAutoDerivativeDouble_1_write" "', argument " "6"" of type '" "GeoCal::AutoDerivative< double >""'");
@@ -11019,7 +11034,7 @@ SWIGINTERN PyObject *_wrap_BoostArrayAutoDerivativeDouble_3___setitem__(PyObject
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BoostArrayAutoDerivativeDouble_3___setitem__" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BoostArrayAutoDerivativeDouble_3___setitem__" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "BoostArrayAutoDerivativeDouble_3___setitem__" "', argument " "3"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11164,7 +11179,7 @@ SWIGINTERN PyObject *_wrap_sqrt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) 
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sqrt" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sqrt" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sqrt" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11219,7 +11234,7 @@ SWIGINTERN PyObject *_wrap_log(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "log" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "log" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "log" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11274,7 +11289,7 @@ SWIGINTERN PyObject *_wrap_log10(PyObject *SWIGUNUSEDPARM(self), PyObject *args)
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "log10" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "log10" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "log10" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11329,7 +11344,7 @@ SWIGINTERN PyObject *_wrap_exp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "exp" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "exp" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "exp" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11384,7 +11399,7 @@ SWIGINTERN PyObject *_wrap_sin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sin" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sin" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "sin" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11439,7 +11454,7 @@ SWIGINTERN PyObject *_wrap_asin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) 
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "asin" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "asin" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "asin" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11494,7 +11509,7 @@ SWIGINTERN PyObject *_wrap_cos(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cos" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cos" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cos" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11549,7 +11564,7 @@ SWIGINTERN PyObject *_wrap_acos(PyObject *SWIGUNUSEDPARM(self), PyObject *args) 
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "acos" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "acos" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "acos" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11604,7 +11619,7 @@ SWIGINTERN PyObject *_wrap_tan(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "tan" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "tan" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "tan" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -11659,7 +11674,7 @@ SWIGINTERN PyObject *_wrap_atan(PyObject *SWIGUNUSEDPARM(self), PyObject *args) 
     } else {
       res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "atan" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "atan" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'");
       }
       if (!argp1) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "atan" "', argument " "1"" of type '" "GeoCal::AutoDerivative< double > const &""'"); 
@@ -12456,7 +12471,7 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___setitem____SWIG_2(PyObject *
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "vector_auto_derivative___setitem__" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "vector_auto_derivative___setitem__" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "vector_auto_derivative___setitem__" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
@@ -12602,7 +12617,7 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_append(PyObject *SWIGUNUSEDPAR
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "vector_auto_derivative_append" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "vector_auto_derivative_append" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "vector_auto_derivative_append" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
@@ -13229,7 +13244,7 @@ SWIGINTERN PyObject *_wrap_new_vector_auto_derivative__SWIG_3(PyObject *SWIGUNUS
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_vector_auto_derivative" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_vector_auto_derivative" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_vector_auto_derivative" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
@@ -13329,7 +13344,7 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_push_back(PyObject *SWIGUNUSED
     } else {
       res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "vector_auto_derivative_push_back" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "vector_auto_derivative_push_back" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'");
       }
       if (!argp2) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "vector_auto_derivative_push_back" "', argument " "2"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
@@ -13463,7 +13478,7 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_assign(PyObject *SWIGUNUSEDPAR
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "vector_auto_derivative_assign" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "vector_auto_derivative_assign" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "vector_auto_derivative_assign" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
@@ -13528,7 +13543,7 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_resize__SWIG_1(PyObject *SWIGU
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "vector_auto_derivative_resize" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "vector_auto_derivative_resize" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "vector_auto_derivative_resize" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
@@ -13624,7 +13639,7 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_insert__SWIG_0(PyObject *SWIGU
     } else {
       res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "vector_auto_derivative_insert" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "vector_auto_derivative_insert" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'");
       }
       if (!argp3) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "vector_auto_derivative_insert" "', argument " "3"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
@@ -13704,7 +13719,7 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_insert__SWIG_1(PyObject *SWIGU
     } else {
       res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,  0 , &newmem);
       if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "vector_auto_derivative_insert" "', argument " "4"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "vector_auto_derivative_insert" "', argument " "4"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'");
       }
       if (!argp4) {
         SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "vector_auto_derivative_insert" "', argument " "4"" of type '" "std::vector< GeoCal::AutoDerivative< double > >::value_type const &""'"); 
@@ -14164,6 +14179,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_6_t = {"_p_blitz__A
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__ArrayT_unsigned_short_7_t", "blitz::Array< unsigned short,7 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__GeneralArrayStorageT_1_t = {"_p_blitz__GeneralArrayStorageT_1_t", "blitz::GeneralArrayStorage< 1 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t = {"_p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t", "boost::array< GeoCal::AutoDerivative< double >,3 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivativeRef< double > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t = {"_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t", "boost::shared_ptr< GeoCal::AutoDerivative< double > > *", 0, 0, (void*)0, 0};
@@ -14274,6 +14290,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_unsigned_short_7_t,
   &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
   &_swigt__p_blitz__GeneralArrayStorageT_1_t,
+  &_swigt__p_blitz__Range,
   &_swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,
@@ -14384,6 +14401,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_6_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_7_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__GeneralArrayStorageT_1_t[] = {  {&_swigt__p_blitz__GeneralArrayStorageT_1_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t[] = {  {&_swigt__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -14494,6 +14512,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_unsigned_short_7_t,
   _swigc__p_blitz__ArrayT_unsigned_short_8_t,
   _swigc__p_blitz__GeneralArrayStorageT_1_t,
+  _swigc__p_blitz__Range,
   _swigc__p_boost__arrayT_GeoCal__AutoDerivativeT_double_t_3_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t,

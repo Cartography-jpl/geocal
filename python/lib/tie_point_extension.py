@@ -386,7 +386,7 @@ def _tpcol_table_format(self, ref_image = None):
                tp.ground_location.latitude,
                tp.ground_location.height_reference_surface]
         if(ref_image is not None):
-            row.append([ref_image.coordinate(tp.ground_location).line,
+            row.extend([ref_image.coordinate(tp.ground_location).line,
                         ref_image.coordinate(tp.ground_location).sample])
         for i in range(tp.number_image):
             if(tp.image_coordinate(i) is None):

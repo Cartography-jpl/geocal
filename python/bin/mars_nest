@@ -307,10 +307,11 @@ def tie_point_collect(fin, fref):
                                      eval(str(args.fftgrid))[1])
     return tpcol
 
-def run_warp_image(fin, fref_res, tpcol, fout):
+def run_warp_image(fin, fref_res, tpcol, fout, tpgrid_out):
     '''Run warp_image to generate output.'''
     geocal.warp_image(fin, fout, fref_res, tpcol, nav=args.nav, nah=args.nah,
                       polyfit=args.polyfit,interp="bilin",
+                      tpgrid_out=tpgrid_out,
                       quiet=False)
 
 def accck(fin,fref):
@@ -329,6 +330,7 @@ refimg_res2 = "%s_%s.img" % (args.ref_base_name, args.image_resolution_name)
 img_fixed = "%s.vrt" % (args.image_base_name)
 img_res1 = "%s_%s.img" % (args.image_base_name, args.ref_image_resolution_name)
 tpcol_fname = "%s_%s_tpcol.xml" % (args.image_base_name, args.image_resolution_name)
+tpgrid_fname = "%s_%s_tpgrid.xml" % (args.image_base_name, args.image_resolution_name)
 img_res2 = "%s_%s.img" % (args.image_base_name, args.image_resolution_name)
 cimg_res1 = "%s_corr_%s.img" % (args.image_base_name, 
                                 args.ref_image_resolution_name)
@@ -407,7 +409,8 @@ else:
         ic_original = tp.image_coordinate(0)
         ic_current = current_img.coordinate(original_img.ground_coordinate(ic_original))
         tp.image_coordinate(0,ic_current)
-run_warp_image(img_res2, refimg_res2, tpcol, cimg_res2)
+run_warp_image(img_res2, refimg_res2, tpcol, cimg_res2,
+               tpgrid_out=tpgrid_fname)
 if(args.use_map_info):
     resample_proj(refimg_fixed, use_projection_fixed, refimg_res1, resize=True)
     resample_proj(img_res2, use_projection_fixed, img_res1, resize=True)

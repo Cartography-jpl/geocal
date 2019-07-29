@@ -4,11 +4,13 @@ from geocal_swig import (IbisFile, ImageCoordinate, VicarImageCoordinate,
                          TiePointCollection, VicarLiteRasterImage)
 import os
 import numpy as np
+import shutil
 
 class _warp(VicarInterface):
     '''Call gtwarpxd'''
     def __init__(self, img_in, img_out, ref_img, tpcol, image_index=0,
                  nah=100, nav=100, polyfit=None,
+                 tpgrid_out=None,
                  interp="bilin",
                  log_file=None, run_dir_name=None, quiet = True):
         VicarInterface.__init__(self)
@@ -17,6 +19,10 @@ class _warp(VicarInterface):
         self.run_dir_name = run_dir_name
         self.tpcol = tpcol
         self.image_index= image_index
+        if(tpgrid_out):
+            self.tpgrid_out = os.path.abspath(tpgrid_out)
+        else:
+            self.tpgrid_out = None
         self.ref_img = os.path.abspath(ref_img)
         self.input = [img_in, ref_img]
         self.output = [img_out,]
@@ -30,6 +36,7 @@ local nav int
 local polyfit string
 local interp string
 local distort string
+local gridout string
 '''
         self.cmd = "let img_in=\"%s\"\n" % os.path.basename(img_in)
         self.cmd += "let ref_img=\"%s\"\n" % os.path.basename(ref_img)
@@ -39,9 +46,10 @@ local distort string
         self.cmd += "let nav=%d\n" % nav
         self.cmd += "let polyfit=\"%s\"\n" % (polyfit if polyfit else "")
         self.cmd += "let interp=\"%s\"\n" % interp
+        self.cmd += "let gridout=\"gridout\"\n"
         self.cmd += '''
 gtwarpxd inp=&img_in out=&img_out ref=&ref_img 'coverref interp=&interp +
-        nah=&nah nav=&nav  +
+        nah=&nah nav=&nav gridout=&gridout +
         distort=(&distort,,,,) dcols=(1,2,3,4) polyfit=("&polyfit",,,,) +
         echo="yes"
 '''
@@ -49,6 +57,11 @@ gtwarpxd inp=&img_in out=&img_out ref=&ref_img 'coverref interp=&interp +
         if(self.run_dir_name is not None):
             self.keep_run_dir = True
         self.vicar_run()
+
+    def post_run(self):
+        if(self.tpgrid_out):
+            # Temp, just copy ibis file. We'll come back to this shortly
+            shutil.move("gridout1", self.tpgrid_out)
 
     def pre_run(self):
         npts = np.count_nonzero([tp.image_coordinate(self.image_index) for tp in self.tpcol])
@@ -69,6 +82,7 @@ gtwarpxd inp=&img_in out=&img_out ref=&ref_img 'coverref interp=&interp +
         
 def warp_image(img_in, img_out, ref_img, tpcol, image_index=0,
                nah=100, nav=100, polyfit=None,
+               tpgrid_out=None,
                interp="bilin",
                log_file=None, run_dir_name=None, quiet = True):
                
@@ -88,6 +102,7 @@ def warp_image(img_in, img_out, ref_img, tpcol, image_index=0,
     '''
     w = _warp(img_in, img_out, ref_img, tpcol, image_index=image_index,
               nah=nah, nav=nav,polyfit=polyfit,interp=interp,
+              tpgrid_out=tpgrid_out,
               log_file=log_file,run_dir_name=run_dir_name,quiet=quiet)
         
 __all__ = ["warp_image"]    

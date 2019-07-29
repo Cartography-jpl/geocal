@@ -134,6 +134,7 @@ def _tp_display(self, igc_coll, sz = 500, ref_image = None, number_row = None,
             d = np.zeros((sz, sz))
             plt.imshow(d, cmap=plt.cm.gray,vmin=-1,vmax=0,
                        extent = [0,sz,0,sz])
+    plt.tight_layout()
 
 TiePoint.display = _tp_display
 

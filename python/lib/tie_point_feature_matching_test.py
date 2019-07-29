@@ -48,6 +48,7 @@ def ppt_save(ppt_file):
     blank_slide_layout = ppt_file.slide_layouts[6]
     slide = ppt_file.slides.add_slide(blank_slide_layout)
     img = BytesIO()
+    plt.tight_layout()
     plt.savefig(img, dpi=300)
     pic = slide.shapes.add_picture(img, Inches(0), Inches(0), height=Inches(7.5))
     

@@ -224,3 +224,56 @@ void TiePointCollection::add_ibis_file
     push_back(tp);
   }
 }
+
+//-----------------------------------------------------------------------
+/// Write out data as a blitz::Array that can be ingested by pandas
+/// dataframe. Can do this all in python, but the C++ is much faster.
+///
+/// This returns "ID", "Is_GCP", "Longitude (deg)", "Latitude (deg)",
+/// "Height (m)". If Ref_image is not null, then returns
+/// "Reference Line", "Reference Sample". Then we return "Line Image %d"
+/// "Sample Image %d" "Line Sigma Image %d" "Sample Sigma Image %d"
+/// for each image in the tiepoints.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> TiePointCollection::data_array
+(const boost::shared_ptr<RasterImage>& Ref_image) const
+{
+  double nanv = nan("");
+  int numimg = (*this)[0]->number_image();
+  int numcol = 5 +  numimg * 4;
+  if(Ref_image)
+    numcol += 2;
+  blitz::Array<double, 2> res(size(), numcol);
+  for(int i = 0; i < res.rows(); ++i) {
+    boost::shared_ptr<TiePoint> tp = (*this)[i];
+    res(i,0) = tp->id();
+    res(i, 1) = (tp->is_gcp() ? 1 : 0);
+    res(i, 2) = tp->ground_location()->longitude();
+    res(i, 3) = tp->ground_location()->latitude();
+    res(i, 4) = tp->ground_location()->height_reference_surface();
+    int j = 5;
+    if(Ref_image) {
+      ImageCoordinate ic = Ref_image->coordinate(*tp->ground_location());
+      res(i,5) = ic.line;
+      res(i,6) = ic.sample;
+      j += 2;
+    }
+    for(int ii = 0; ii < numimg; ++ii) {
+      boost::shared_ptr<ImageCoordinate> ic = tp->image_coordinate(ii);
+      if(ic) {
+	res(i, j) = ic->line;
+	res(i, j+1) = ic->sample;
+	res(i, j+2) = tp->line_sigma(ii);
+	res(i, j+3) = tp->sample_sigma(ii);
+      } else {
+	res(i, j) = nanv;
+	res(i, j+1) = nanv;
+	res(i, j+2) = nanv;
+	res(i, j+3) = nanv;
+      }
+      j += 4;
+    }
+  }
+  return res;
+}

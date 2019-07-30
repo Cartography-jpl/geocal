@@ -11477,6 +11477,100 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TiePointCollection_data_array(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TiePointCollection *arg1 = (GeoCal::TiePointCollection *) 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TiePointCollection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TiePointCollection const > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared2 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared2 ;
+  PyObject *swig_obj[2] ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"TiePointCollection_data_array",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePointCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointCollection_data_array" "', argument " "1"" of type '" "GeoCal::TiePointCollection const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TiePointCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TiePointCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::TiePointCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TiePointCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::TiePointCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePointCollection_data_array" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::TiePointCollection const *)arg1)->data_array((boost::shared_ptr< GeoCal::RasterImage > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TiePointCollection__v_number_gcp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::TiePointCollection *arg1 = (GeoCal::TiePointCollection *) 0 ;
@@ -11774,6 +11868,20 @@ static PyMethodDef SwigMethods[] = {
 		"ground location, and oldline,oldsamp are the image coordinates. So\n"
 		"this gives a tiepoint in the old image that can we used to map it to\n"
 		"the new image. \n"
+		""},
+	 { (char *)"TiePointCollection_data_array", _wrap_TiePointCollection_data_array, METH_VARARGS, (char *)"\n"
+		"\n"
+		"blitz::Array< double, 2 > TiePointCollection::data_array(const boost::shared_ptr< RasterImage > &Ref_image) const\n"
+		"Write out data as a blitz::Array that can be ingested by pandas\n"
+		"dataframe.\n"
+		"\n"
+		"Can do this all in python, but the C++ is much faster.\n"
+		"\n"
+		"This returns \"ID\", \"Is_GCP\", \"Longitude (deg)\", \"Latitude\n"
+		"(deg)\", \"Height (m)\". If Ref_image is not null, then returns\n"
+		"\"Reference Line\", \"Reference Sample\". Then we return \"Line Image\n"
+		"%d\" \"Sample Image %d\" \"Line Sigma Image %d\" \"Sample Sigma Image\n"
+		"%d\" for each image in the tiepoints. \n"
 		""},
 	 { (char *)"TiePointCollection__v_number_gcp", (PyCFunction)_wrap_TiePointCollection__v_number_gcp, METH_O, (char *)"\n"
 		"\n"

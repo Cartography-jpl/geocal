@@ -485,6 +485,24 @@ class TiePointCollection(geocal_swig.generic_object.GenericObject, TiePointVecto
         return _tie_point.TiePointCollection_add_ibis_file(self, Ibis_fname, New_image, D)
 
 
+    def data_array(self, Ref_image):
+        """
+
+        blitz::Array< double, 2 > TiePointCollection::data_array(const boost::shared_ptr< RasterImage > &Ref_image) const
+        Write out data as a blitz::Array that can be ingested by pandas
+        dataframe.
+
+        Can do this all in python, but the C++ is much faster.
+
+        This returns "ID", "Is_GCP", "Longitude (deg)", "Latitude
+        (deg)", "Height (m)". If Ref_image is not null, then returns
+        "Reference Line", "Reference Sample". Then we return "Line Image
+        %d" "Sample Image %d" "Line Sigma Image %d" "Sample Sigma Image
+        %d" for each image in the tiepoints. 
+        """
+        return _tie_point.TiePointCollection_data_array(self, Ref_image)
+
+
     def _v_number_gcp(self):
         """
 
@@ -504,6 +522,7 @@ class TiePointCollection(geocal_swig.generic_object.GenericObject, TiePointVecto
 
     __swig_destroy__ = _tie_point.delete_TiePointCollection
 TiePointCollection.add_ibis_file = new_instancemethod(_tie_point.TiePointCollection_add_ibis_file, None, TiePointCollection)
+TiePointCollection.data_array = new_instancemethod(_tie_point.TiePointCollection_data_array, None, TiePointCollection)
 TiePointCollection._v_number_gcp = new_instancemethod(_tie_point.TiePointCollection__v_number_gcp, None, TiePointCollection)
 TiePointCollection.__str__ = new_instancemethod(_tie_point.TiePointCollection___str__, None, TiePointCollection)
 TiePointCollection_swigregister = _tie_point.TiePointCollection_swigregister

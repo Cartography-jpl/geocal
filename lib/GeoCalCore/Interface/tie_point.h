@@ -184,6 +184,7 @@ public:
   void add_ibis_file(const std::string& Ibis_fname,
 		     const boost::shared_ptr<RasterImage>& New_image,
 		     const boost::shared_ptr<Dem>& D);
+  blitz::Array<double, 2> data_array(const boost::shared_ptr<RasterImage>& Ref_image) const;
   
 //-----------------------------------------------------------------------
 /// Number of gcps.

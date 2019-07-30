@@ -9,7 +9,6 @@ from .raster_image_extension import *
 from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 from .misc import makedirs_p
-from tabulate import tabulate
 from geocal_swig import IgcMapProjected, CartesianFixedLookVector, \
     LnLookVector, Ecr, ImageCoordinate, distance, TiePoint, TiePointCollection, \
     distance, SimpleDem
@@ -364,15 +363,18 @@ def _tpcol_extend(self, tparr):
         
 TiePointCollection.extend = _tpcol_extend
 
-def _tpcol_table_format(self, ref_image = None):
-    '''Write the tie-point collection in a simple table format. This is
+def _tpcol_data_frame2(self, ref_image = None):
+    '''Write the tie-point collection in a pandas table format. This is
     the sort of thing that can be written to a file and read by gnuplot or
     other programs. Missing data is written as NaN.
 
     Can pass in a reference image to get reference line and sample the
-    same as image. This is redundant with the ground location.'''
-    # We'll put the header in shortly
-    table = []
+    same as image. This is redundant with the ground location.
+
+    This is more like a data dump, vs the other data_frame function which
+    is more looking at the residuals of tie-points. Perhaps at some point
+    we can merge these two and just have an option to select the kind of
+    data_frame, but for now we just have separate functions.'''
     header = ["ID", "Is_GCP", "Longitude (deg)", "Latitude (deg)",
               "Height (m)"]
     if(ref_image is not None):
@@ -382,25 +384,9 @@ def _tpcol_table_format(self, ref_image = None):
                        "Sample Image %d" % (i+1),
                        "Line Sigma Image %d" % (i+1),                       
                        "Sample Sigma Image %d" % (i+1)])
-    for tp in self:
-        row = [tp.id, 1 if tp.is_gcp else 0, tp.ground_location.longitude,
-               tp.ground_location.latitude,
-               tp.ground_location.height_reference_surface]
-        if(ref_image is not None):
-            row.extend([ref_image.coordinate(tp.ground_location).line,
-                        ref_image.coordinate(tp.ground_location).sample])
-        for i in range(tp.number_image):
-            if(tp.image_coordinate(i) is None):
-                row.extend([np.nan,] * 4)
-            else:
-                row.extend([tp.image_coordinate(i).line,
-                            tp.image_coordinate(i).sample,
-                            tp.line_sigma(i), tp.sample_sigma(i)])
-        table.append(row)
-    res = "# Missing data (e.g., image without a location) is given as nan\n"
-    res += tabulate(table, headers=header)
-    return res
+    return pd.DataFrame(data=self.data_array(ref_image),
+                        columns=header)
 
-TiePointCollection.table_format = _tpcol_table_format
+TiePointCollection.data_frame2 = _tpcol_data_frame2
 
 __all__ = []

@@ -50,6 +50,7 @@ public:
   void add_ibis_file(const std::string& Ibis_fname,
 		     const boost::shared_ptr<RasterImage>& New_image,
 		     const boost::shared_ptr<Dem>& D);
+  blitz::Array<double, 2> data_array(const boost::shared_ptr<RasterImage>& Ref_image) const;
   %python_attribute(number_gcp, int);
   std::string print_to_string() const;
   %pickle_serialization();

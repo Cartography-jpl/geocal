@@ -4,6 +4,7 @@
 # image to the first.
 
 import geocal
+from tabulate import tabulate
 
 version = "June 24, 2019"
 usage='''Usage:
@@ -12,11 +13,15 @@ usage='''Usage:
   tpcol_to_table -h | --help
   tpcol_to_table -v | --version
 
-Short utility to write a tie-point collection out in an ASCII table format.
+Short utility to write a tie-point collection out in an ASCII CSV table format.
 You can either supply a reference image, or leave this off. If supplied, we
 give the ground location both as longitude/latitude/height and as reference
 image line/sample Without the reference image we leave off the reference line
 and sample.
+
+For larger tie-point collections, you can automatically generate the data
+compressed by just adding a standard compression extension (e.g., foo.csv.bz2).
+The extensions '.gz', '.bz2', '.zip' and '.xz' are supported.
 
 Options:
   -h --help         
@@ -42,8 +47,6 @@ if(args.ref_image):
         ref_image = geocal.GdalRasterImage(args.ref_image)
 else:
     ref_image = None
-with open(args.output_name, "w") as fh:
-    if(args.ref_image):
-        print("# Reference image: %s" % args.ref_image, file=fh)
-    print(tpcol.table_format(ref_image=ref_image), file=fh)
+df = tpcol.data_frame2(ref_image=ref_image)
+df.to_csv(args.output_name,index=False)
     

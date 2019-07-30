@@ -265,8 +265,11 @@ class TiePointCollectPicmtch(object):
             dem2 = self.igc_collection.dem(self.image_index2)
         else:
             dem2 = self.ref_dem
+        id = 1
         for sic1, sic2 in tpcollect.res:
             tp = TiePoint(self.igc_collection.number_image)
+            tp.id = id
+            id += 1
             gp1 = img1.ground_coordinate(sic1, dem1)
             ic1 = self.igc_collection.image_coordinate(self.image_index1, gp1)
             tp.image_coordinate(self.image_index1, ic1)

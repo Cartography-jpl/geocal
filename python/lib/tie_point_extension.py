@@ -384,8 +384,10 @@ def _tpcol_data_frame2(self, ref_image = None):
                        "Sample Image %d" % (i+1),
                        "Line Sigma Image %d" % (i+1),                       
                        "Sample Sigma Image %d" % (i+1)])
-    return pd.DataFrame(data=self.data_array(ref_image),
-                        columns=header)
+    df = pd.DataFrame(data=self.data_array(ref_image),
+                      columns=header)
+    df = df.astype({'ID': 'int32', 'Is_GCP' : 'int32'})
+    return df
 
 TiePointCollection.data_frame2 = _tpcol_data_frame2
 

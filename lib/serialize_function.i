@@ -39,10 +39,14 @@ serialize_read_generic_string(const std::string& Data);
 
 namespace GeoCal {
 std::string serialize_write_binary(const boost::shared_ptr<GenericObject>& Obj);
+void serialize_write_binary(const std::string& Fname, 
+		     const boost::shared_ptr<GenericObject>& Obj);
 
 boost::shared_ptr<GenericObject> 
 serialize_read_binary(const std::string& Data);
+boost::shared_ptr<GenericObject> 
+serialize_read_binary_generic(const std::string& Fname);
 }
 
 // List of things "import *" will include
-%python_export("have_serialize_supported","serialize_write","serialize_write_string","serialize_read_generic","serialize_read_generic_string","serialize_write_binary","serialize_read_binary")
+%python_export("have_serialize_supported","serialize_write","serialize_write_string","serialize_read_generic","serialize_read_generic_string","serialize_write_binary","serialize_read_binary", "serialize_read_binary_generic")

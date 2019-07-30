@@ -1,6 +1,7 @@
 #include "tie_point.h"
 #include "geocal_quaternion.h"
 #include "geocal_serialize_support.h"
+#include "ibis_file.h"
 #include <boost/make_shared.hpp>
 #include <cmath>
 
@@ -190,3 +191,36 @@ void TiePointCollection::print(std::ostream& Os) const
      << "  Number GCPs:     " << number_gcp() << "\n";
 }
 
+//-----------------------------------------------------------------------
+/// Add tiepoints from a IBIS file like one passed to geomv. This is a
+/// bit of a specific function, but it can be useful to treat the grid
+/// geomv uses (usually created with tieconv) as a set of tiepoints.
+///
+/// We assume that the 4 columns in (newline,newsamp,oldline,oldsamp)
+/// order. We take in the New_image to translate newline,newsamp to
+/// a ground location, and oldline,oldsamp are the image
+/// coordinates. So this gives a tiepoint in the old image that can we
+/// used to map it to the new image.
+//-----------------------------------------------------------------------
+
+void TiePointCollection::add_ibis_file
+(const std::string& Ibis_fname,
+ const boost::shared_ptr<RasterImage>& New_image,
+ const boost::shared_ptr<Dem>& D)
+{
+  IbisFile f(Ibis_fname);
+  for(int i = 0; i < f.number_row(); ++i) {
+    boost::shared_ptr<GroundCoordinate> gc;
+    if(D)
+      gc = New_image->ground_coordinate(VicarImageCoordinate(f.data<double>(i,0), f.data<double>(i,1)), *D);
+    else
+      gc = New_image->ground_coordinate(VicarImageCoordinate(f.data<double>(i,0), f.data<double>(i,1)));
+    boost::shared_ptr<TiePoint> tp = boost::make_shared<TiePoint>(1);
+    tp->id(i+1);
+    tp->is_gcp(true);
+    tp->ground_location(gc->convert_to_cf());
+    VicarImageCoordinate ic(f.data<double>(i,2), f.data<double>(i,3));
+    tp->image_coordinate(0, boost::make_shared<ImageCoordinate>(ic));
+    push_back(tp);
+  }
+}

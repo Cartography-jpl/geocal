@@ -330,7 +330,7 @@ refimg_res2 = "%s_%s.img" % (args.ref_base_name, args.image_resolution_name)
 img_fixed = "%s.vrt" % (args.image_base_name)
 img_res1 = "%s_%s.img" % (args.image_base_name, args.ref_image_resolution_name)
 tpcol_fname = "%s_%s_tpcol.xml" % (args.image_base_name, args.image_resolution_name)
-tpgrid_fname = "%s_%s_tpgrid.xml" % (args.image_base_name, args.image_resolution_name)
+tpgrid_fname = "%s_%s_tpgrid.bin" % (args.image_base_name, args.image_resolution_name)
 img_res2 = "%s_%s.img" % (args.image_base_name, args.image_resolution_name)
 cimg_res1 = "%s_corr_%s.img" % (args.image_base_name, 
                                 args.ref_image_resolution_name)

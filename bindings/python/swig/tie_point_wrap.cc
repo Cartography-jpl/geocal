@@ -6182,6 +6182,150 @@ SWIGINTERN std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator std_ve
 SWIGINTERN std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg__insert__SWIG_0(std::vector< boost::shared_ptr< GeoCal::TiePoint > > *self,std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg__insert__SWIG_1(std::vector< boost::shared_ptr< GeoCal::TiePoint > > *self,std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type n,std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &x){ self->insert(pos, n, x); }
 
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
+{
+#if PY_VERSION_HEX>=0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+  if (PyBytes_Check(obj))
+#else
+  if (PyUnicode_Check(obj))
+#endif
+#else  
+  if (PyString_Check(obj))
+#endif
+  {
+    char *cstr; Py_ssize_t len;
+#if PY_VERSION_HEX>=0x03000000
+#if !defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+    if (!alloc && cptr) {
+        /* We can't allow converting without allocation, since the internal
+           representation of string in Python 3 is UCS-2/UCS-4 but we require
+           a UTF-8 representation.
+           TODO(bhy) More detailed explanation */
+        return SWIG_RuntimeError;
+    }
+    obj = PyUnicode_AsUTF8String(obj);
+    if(alloc) *alloc = SWIG_NEWOBJ;
+#endif
+    PyBytes_AsStringAndSize(obj, &cstr, &len);
+#else
+    PyString_AsStringAndSize(obj, &cstr, &len);
+#endif
+    if (cptr) {
+      if (alloc) {
+	/* 
+	   In python the user should not be able to modify the inner
+	   string representation. To warranty that, if you define
+	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
+	   buffer is always returned.
+
+	   The default behavior is just to return the pointer value,
+	   so, be careful.
+	*/ 
+#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
+	if (*alloc != SWIG_OLDOBJ) 
+#else
+	if (*alloc == SWIG_NEWOBJ) 
+#endif
+	{
+	  *cptr = reinterpret_cast< char* >(memcpy(new char[len + 1], cstr, sizeof(char)*(len + 1)));
+	  *alloc = SWIG_NEWOBJ;
+	} else {
+	  *cptr = cstr;
+	  *alloc = SWIG_OLDOBJ;
+	}
+      } else {
+#if PY_VERSION_HEX>=0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+	*cptr = PyBytes_AsString(obj);
+#else
+	assert(0); /* Should never reach here with Unicode strings in Python 3 */
+#endif
+#else
+	*cptr = SWIG_Python_str_AsChar(obj);
+#endif
+      }
+    }
+    if (psize) *psize = len + 1;
+#if PY_VERSION_HEX>=0x03000000 && !defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+    Py_XDECREF(obj);
+#endif
+    return SWIG_OK;
+  } else {
+#if defined(SWIG_PYTHON_2_UNICODE)
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+#error "Cannot use both SWIG_PYTHON_2_UNICODE and SWIG_PYTHON_STRICT_BYTE_CHAR at once"
+#endif
+#if PY_VERSION_HEX<0x03000000
+    if (PyUnicode_Check(obj)) {
+      char *cstr; Py_ssize_t len;
+      if (!alloc && cptr) {
+        return SWIG_RuntimeError;
+      }
+      obj = PyUnicode_AsUTF8String(obj);
+      if (PyString_AsStringAndSize(obj, &cstr, &len) != -1) {
+        if (cptr) {
+          if (alloc) *alloc = SWIG_NEWOBJ;
+          *cptr = reinterpret_cast< char* >(memcpy(new char[len + 1], cstr, sizeof(char)*(len + 1)));
+        }
+        if (psize) *psize = len + 1;
+
+        Py_XDECREF(obj);
+        return SWIG_OK;
+      } else {
+        Py_XDECREF(obj);
+      }
+    }
+#endif
+#endif
+
+    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+    if (pchar_descriptor) {
+      void* vptr = 0;
+      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
+	if (cptr) *cptr = (char *) vptr;
+	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
+	if (alloc) *alloc = SWIG_OLDOBJ;
+	return SWIG_OK;
+      }
+    }
+  }
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
+{
+  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
+  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
+    if (buf) {
+      if (val) *val = new std::string(buf, size - 1);
+      if (alloc == SWIG_NEWOBJ) delete[] buf;
+      return SWIG_NEWOBJ;
+    } else {
+      if (val) *val = 0;
+      return SWIG_OLDOBJ;
+    }
+  } else {
+    static int init = 0;
+    static swig_type_info* descriptor = 0;
+    if (!init) {
+      descriptor = SWIG_TypeQuery("std::string" " *");
+      init = 1;
+    }
+    if (descriptor) {
+      std::string *vptr;
+      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
+      if (SWIG_IsOK(res) && val) *val = vptr;
+      return res;
+    }
+  }
+  return SWIG_ERROR;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -11215,6 +11359,124 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TiePointCollection_add_ibis_file(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TiePointCollection *arg1 = (GeoCal::TiePointCollection *) 0 ;
+  std::string *arg2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TiePointCollection > tempshared1 ;
+  boost::shared_ptr< GeoCal::TiePointCollection > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  void *argp3 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared4 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared4 ;
+  PyObject *swig_obj[4] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"TiePointCollection_add_ibis_file",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TiePointCollection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TiePointCollection_add_ibis_file" "', argument " "1"" of type '" "GeoCal::TiePointCollection *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::TiePointCollection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::TiePointCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::TiePointCollection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::TiePointCollection > * >(argp1);
+      arg1 = const_cast< GeoCal::TiePointCollection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TiePointCollection_add_ibis_file" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TiePointCollection_add_ibis_file" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TiePointCollection_add_ibis_file" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
+      arg3 = &tempshared3;
+    } else {
+      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg3 = &temp2shared3;
+    }
+  }
+  {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "TiePointCollection_add_ibis_file" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp4) : &tempshared4;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
+    try {
+      (arg1)->add_ibis_file((std::string const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TiePointCollection__v_number_gcp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::TiePointCollection *arg1 = (GeoCal::TiePointCollection *) 0 ;
@@ -11496,6 +11758,22 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"GeoCal::TiePointCollection::TiePointCollection(const TiePointVector &Tlist)\n"
 		"Constructor with an initial list of TiePoints. \n"
+		""},
+	 { (char *)"TiePointCollection_add_ibis_file", _wrap_TiePointCollection_add_ibis_file, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void TiePointCollection::add_ibis_file(const std::string &Ibis_fname, const boost::shared_ptr< RasterImage >\n"
+		"&New_image, const boost::shared_ptr< Dem > &D)\n"
+		"Add tiepoints from a IBIS file like one passed to geomv.\n"
+		"\n"
+		"This is a bit of a specific function, but it can be useful to treat\n"
+		"the grid geomv uses (usually created with tieconv) as a set of\n"
+		"tiepoints.\n"
+		"\n"
+		"We assume that the 4 columns in (newline,newsamp,oldline,oldsamp)\n"
+		"order. We take in the New_image to translate newline,newsamp to a\n"
+		"ground location, and oldline,oldsamp are the image coordinates. So\n"
+		"this gives a tiepoint in the old image that can we used to map it to\n"
+		"the new image. \n"
 		""},
 	 { (char *)"TiePointCollection__v_number_gcp", (PyCFunction)_wrap_TiePointCollection__v_number_gcp, METH_O, (char *)"\n"
 		"\n"

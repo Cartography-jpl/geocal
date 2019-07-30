@@ -181,6 +181,10 @@ public:
 //-----------------------------------------------------------------------
   virtual ~TiePointCollection() {}
 
+  void add_ibis_file(const std::string& Ibis_fname,
+		     const boost::shared_ptr<RasterImage>& New_image,
+		     const boost::shared_ptr<Dem>& D);
+  
 //-----------------------------------------------------------------------
 /// Number of gcps.
 //-----------------------------------------------------------------------

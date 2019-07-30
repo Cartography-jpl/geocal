@@ -201,15 +201,19 @@ def serialize_read_generic_string(Data):
     return _serialize_function.serialize_read_generic_string(Data)
 serialize_read_generic_string = _serialize_function.serialize_read_generic_string
 
-def serialize_write_binary(Obj):
-    return _serialize_function.serialize_write_binary(Obj)
+def serialize_write_binary(*args):
+    return _serialize_function.serialize_write_binary(*args)
 serialize_write_binary = _serialize_function.serialize_write_binary
 
 def serialize_read_binary(Data):
     return _serialize_function.serialize_read_binary(Data)
 serialize_read_binary = _serialize_function.serialize_read_binary
 
-__all__ = ["have_serialize_supported","serialize_write","serialize_write_string","serialize_read_generic","serialize_read_generic_string","serialize_write_binary","serialize_read_binary"]
+def serialize_read_binary_generic(Fname):
+    return _serialize_function.serialize_read_binary_generic(Fname)
+serialize_read_binary_generic = _serialize_function.serialize_read_binary_generic
+
+__all__ = ["have_serialize_supported","serialize_write","serialize_write_string","serialize_read_generic","serialize_read_generic_string","serialize_write_binary","serialize_read_binary","serialize_read_binary_generic"]
 
 
 

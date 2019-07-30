@@ -465,6 +465,26 @@ class TiePointCollection(geocal_swig.generic_object.GenericObject, TiePointVecto
         """
         _tie_point.TiePointCollection_swiginit(self, _tie_point.new_TiePointCollection(*args))
 
+    def add_ibis_file(self, Ibis_fname, New_image, D):
+        """
+
+        void TiePointCollection::add_ibis_file(const std::string &Ibis_fname, const boost::shared_ptr< RasterImage >
+        &New_image, const boost::shared_ptr< Dem > &D)
+        Add tiepoints from a IBIS file like one passed to geomv.
+
+        This is a bit of a specific function, but it can be useful to treat
+        the grid geomv uses (usually created with tieconv) as a set of
+        tiepoints.
+
+        We assume that the 4 columns in (newline,newsamp,oldline,oldsamp)
+        order. We take in the New_image to translate newline,newsamp to a
+        ground location, and oldline,oldsamp are the image coordinates. So
+        this gives a tiepoint in the old image that can we used to map it to
+        the new image. 
+        """
+        return _tie_point.TiePointCollection_add_ibis_file(self, Ibis_fname, New_image, D)
+
+
     def _v_number_gcp(self):
         """
 
@@ -483,6 +503,7 @@ class TiePointCollection(geocal_swig.generic_object.GenericObject, TiePointVecto
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _tie_point.delete_TiePointCollection
+TiePointCollection.add_ibis_file = new_instancemethod(_tie_point.TiePointCollection_add_ibis_file, None, TiePointCollection)
 TiePointCollection._v_number_gcp = new_instancemethod(_tie_point.TiePointCollection__v_number_gcp, None, TiePointCollection)
 TiePointCollection.__str__ = new_instancemethod(_tie_point.TiePointCollection___str__, None, TiePointCollection)
 TiePointCollection_swigregister = _tie_point.TiePointCollection_swigregister

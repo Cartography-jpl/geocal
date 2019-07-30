@@ -1,4 +1,5 @@
 from geocal.vicar_interface import VicarInterface
+from geocal.sqlite_shelf import write_shelve
 from geocal_swig import (IbisFile, ImageCoordinate, VicarImageCoordinate,
                          TiePoint,
                          TiePointCollection, VicarLiteRasterImage)
@@ -26,6 +27,7 @@ class _warp(VicarInterface):
         self.ref_img = os.path.abspath(ref_img)
         self.input = [img_in, ref_img]
         self.output = [img_out,]
+        self.img_out = os.path.abspath(img_out)
         self.print_output = not quiet
         self.before_body = '''
 local img_in string
@@ -60,8 +62,10 @@ gtwarpxd inp=&img_in out=&img_out ref=&ref_img 'coverref interp=&interp +
 
     def post_run(self):
         if(self.tpgrid_out):
-            # Temp, just copy ibis file. We'll come back to this shortly
-            shutil.move("gridout1", self.tpgrid_out)
+            tpcol = TiePointCollection()
+            f = VicarLiteRasterImage(self.img_out)
+            tpcol.add_ibis_file("gridout1", f, None)
+            write_shelve(self.tpgrid_out, tpcol)
 
     def pre_run(self):
         npts = np.count_nonzero([tp.image_coordinate(self.image_index) for tp in self.tpcol])

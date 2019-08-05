@@ -2,6 +2,7 @@
 #include "geocal_internal_config.h"
 #include "geocal_serialize_support.h"
 #include "simple_dem.h"
+#include "ostream_pad.h"
 #include "ecr.h"
 #include <cstdlib>
 #include <dlfcn.h>
@@ -36,9 +37,11 @@ namespace GeoCal {
 class IgcMspImp: public virtual ImageGroundConnection {
 public:
   IgcMspImp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
+	    int Image_index = 0,
 	    const std::string& Plugin_name = "",
 	    const std::string& Model_name = "")
-    : fname_(Fname), plugin_name_(Plugin_name), model_name_(Model_name)
+    : fname_(Fname), plugin_name_(Plugin_name), model_name_(Model_name),
+      image_index_(Image_index)
   { dem_ = D; init(); }
   virtual ~IgcMspImp() {}
   virtual boost::shared_ptr<GroundCoordinate> 
@@ -47,8 +50,23 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const
   { throw Exception("Not Implemented"); }
+  std::string family() const { return model->getFamily(); }
+  std::string version() const { return model->getVersion().version(); }
+  std::string model_name() const { return model->getModelName(); }
+  std::string pedigree() const { return model->getPedigree(); }
+  std::string image_identifer() const { return model->getImageIdentifier(); }
+  std::string sensor_identifer() const { return model->getSensorIdentifier(); }
+  std::string platform_identifer() const { return model->getPlatformIdentifier(); }
+  std::string collection_identifer() const { return model->getCollectionIdentifier(); }
+  std::string trajectory_identifer() const { return model->getTrajectoryIdentifier(); }
+  std::string sensor_type() const { return model->getSensorType(); }
+  std::string sensor_mode() const { return model->getSensorMode(); }
+  std::string reference_date_time() const { return model->getReferenceDateAndTime(); }
+  std::string file_name() const { return fname_;}
+  int image_index() const { return image_index_;}
 private:
   std::string fname_, plugin_name_, model_name_;
+  int image_index_;
   boost::shared_ptr<MSP::SMS::SensorModelService> sms;
   boost::shared_ptr<csm::RasterGM> model;
   boost::shared_ptr<MSP::TS::TerrainModel> terrain_model;
@@ -73,7 +91,8 @@ void IgcMspImp::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection)
     & GEOCAL_NVP_(fname) & GEOCAL_NVP_(plugin_name)
-    & GEOCAL_NVP_(model_name);
+    & GEOCAL_NVP_(model_name)
+    & GEOCAL_NVP_(image_index);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -99,8 +118,7 @@ try {
   MSP::SDS::SupportDataService sds;
   sms = boost::make_shared<MSP::SMS::SensorModelService>();
   boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(fname_.c_str()));
-  if(sds.getNumImages(*isd) > 1)
-    throw Exception("Only handle 1 image for now");
+  sds.setImageInIsd(image_index_, *isd);
   MSP::WarningListType msg;
   boost::shared_ptr<csm::Model> model_raw;
   if(plugin_name_ == "")
@@ -205,10 +223,11 @@ bool GeoCal::have_msp_supported()
 /// convention - so /foo/bar/plugins/.
 //-----------------------------------------------------------------------
 
-IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D)
+IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
+	       int Image_index)
 {
 #ifdef HAVE_MSP
-  igc = boost::make_shared<IgcMspImp>(Fname, D);
+  igc = boost::make_shared<IgcMspImp>(Fname, D, Image_index);
   initialize(igc->dem_ptr(),
 	     igc->image(), igc->image_multi_band(),
 	     igc->title(), igc->image_mask(), igc->ground_mask());
@@ -223,14 +242,16 @@ IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D)
 /// This version forces the use of the given model name form the given
 /// plugin. This can be useful when diagnosing problems where you
 /// expect a particular plugin to handle a file, but it doesn't - or
-/// if the wrong plugin in is processing the file.
+/// if the wrong plugin is processing the file.
 //-----------------------------------------------------------------------
 
 IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
+	       int Image_index,
 	       const std::string& Plugin_name, const std::string& Model_name)
 {
 #ifdef HAVE_MSP
-  igc = boost::make_shared<IgcMspImp>(Fname, D, Plugin_name, Model_name);
+  igc = boost::make_shared<IgcMspImp>(Fname, D, Image_index, Plugin_name,
+				      Model_name);
   initialize(igc->dem_ptr(),
 	     igc->image(), igc->image_multi_band(),
 	     igc->title(), igc->image_mask(), igc->ground_mask());
@@ -238,6 +259,7 @@ IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
   throw MspNotAvailableException();
 #endif
 }
+
 
 //-----------------------------------------------------------------------
 /// Print a list of all plugins.
@@ -303,7 +325,7 @@ try {
 }
 
 //-----------------------------------------------------------------------
-/// Fro a given plugin, return the list of models it supports. Some
+/// For a given plugin, return the list of models it supports. Some
 /// plugins may support more than one sensor model.
 //-----------------------------------------------------------------------
 
@@ -321,6 +343,38 @@ try {
   std::vector<std::string> res;
   for(int i = 0; i < (int) t->getNumModels(); ++i)
     res.push_back(t->getModelName(i));
+  return res;
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Return the list of image IDS for the given NITF file. If the file
+/// has only one 
+//-----------------------------------------------------------------------
+
+std::vector<std::string> IgcMsp::image_ids(const std::string& Fname)
+{
+#ifdef HAVE_MSP
+try {
+  msp_init();
+  // This registers stuff
+  MSP::SDS::SupportDataService sds;
+  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+    boost::make_shared<MSP::SMS::SensorModelService>();
+  boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(Fname.c_str()));
+  std::vector<std::string> res;
+  sds.getImageIds(*isd, res);
   return res;
 } catch(const MSP::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
@@ -419,4 +473,170 @@ void IgcMsp::msp_init()
 #else
   // Nothing to do if don't have MSP
 #endif
+}
+
+std::string IgcMsp::family() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->family();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+std::string IgcMsp::version() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->version();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+std::string IgcMsp::pedigree() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->pedigree();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+std::string IgcMsp::model_name() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->model_name();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+std::string IgcMsp::image_identifer() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->image_identifer();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+  
+std::string IgcMsp::sensor_identifer() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->sensor_identifer();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+  
+std::string IgcMsp::platform_identifer() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->platform_identifer();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+  
+std::string IgcMsp::collection_identifer() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->collection_identifer();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+  
+std::string IgcMsp::trajectory_identifer() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->trajectory_identifer();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+  
+std::string IgcMsp::sensor_type() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->sensor_type();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+  
+std::string IgcMsp::sensor_mode() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->sensor_mode();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+  
+std::string IgcMsp::reference_date_time() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->reference_date_time();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+std::string IgcMsp::file_name() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->file_name();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+int IgcMsp::image_index() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->image_index();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+void IgcMsp::print(std::ostream& Os) const
+{
+  OstreamPad opad(Os, "    ");
+  Os << "IgcMsp:\n"
+     << "  File name:             " << file_name() << "\n"
+     << "  Image index:           " << image_index() << "\n"
+     << "  Image identifier:      " << image_identifer() << "\n"
+     << "  Trajectory identifier: " << trajectory_identifer() << "\n"
+     << "  MSP model name:        " << model_name() << "\n"
+     << "  MSP family:            " << family() << "\n"
+     << "  MSP version:           " << version() << "\n"
+     << "  MSP Pedigree:          " << pedigree() << "\n"
+     << "  Sensor type:           " << sensor_type() << "\n"
+     << "  Sensor mode:           " << sensor_mode() << "\n"
+     << "  Platform identifier:   " << platform_identifer() << "\n"
+     << "  Sensor identifier:     " << sensor_identifer() << "\n"
+     << "  Collection:            " << collection_identifer() << "\n";
+  opad.strict_sync();
+  Os << "  Dem:\n";
+  opad << dem() << "\n";
+  opad.strict_sync();
+  if(image()) {
+    Os << "  Image:\n";
+    opad << *image() << "\n";
+    opad.strict_sync();
+  }
+  if(image_multi_band()) {
+    Os << "  Image multi-band:\n";
+    opad << *image_multi_band() << "\n";
+    opad.strict_sync();
+  }
+  Os << "  Title: " << title() << "\n"
+     << "  Image mask:\n";
+  opad << *image_mask() << "\n";
+  opad.strict_sync();
+  Os << "  Ground mask:\n";
+  opad << *ground_mask() << "\n";
+  opad.strict_sync();
 }

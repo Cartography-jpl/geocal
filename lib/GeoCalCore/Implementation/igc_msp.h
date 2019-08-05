@@ -43,8 +43,10 @@ public:
 class IgcMsp: public virtual ImageGroundConnectionCopy {
 public:
   IgcMsp(const std::string& Fname,
-   const boost::shared_ptr<Dem>& D = boost::shared_ptr<Dem>(new SimpleDem()));
+     const boost::shared_ptr<Dem>& D = boost::shared_ptr<Dem>(new SimpleDem()),
+	 int Image_index = 0);
   IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
+	 int Image_index,
 	 const std::string& Plugin_name, const std::string& Model_name);
   virtual ~IgcMsp() {}
   static void msp_print_plugin_list();
@@ -52,6 +54,22 @@ public:
   static void msp_register_plugin(const std::string& Plugin_name);
   static void msp_init();
   static std::vector<std::string> msp_model_list(const std::string& Plugin);
+  static std::vector<std::string> image_ids(const std::string& Fname);
+  std::string family() const;
+  std::string version() const;
+  std::string pedigree() const;
+  std::string model_name() const;
+  std::string image_identifer() const;
+  std::string sensor_identifer() const;
+  std::string platform_identifer() const;
+  std::string collection_identifer() const;
+  std::string trajectory_identifer() const;
+  std::string sensor_type() const;
+  std::string sensor_mode() const;
+  std::string reference_date_time() const;
+  std::string file_name() const;
+  int image_index() const;
+  virtual void print(std::ostream& Os) const;
 private:
   static void* lib_ptr;
   IgcMsp() {}

@@ -3138,6 +3138,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/geocal_nitf_des_test.py \
 	@srcpythonlib@/geocal_nitf_image_test.py \
 	@srcpythonlib@/geocal_nitf_sensrb_test.py \
+	@srcpythonlib@/geocal_nitf_snip_test.py \
 	@srcpythonlib@/spice_camera_test.py \
 	@srcpythonlib@/tie_point_collect_picmtch_test.py \
 	@srcpythonlib@/warp_image_test.py \

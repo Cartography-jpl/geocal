@@ -217,14 +217,15 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
     def __init__(self, *args):
         """
 
-        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &D, const
-        std::string &Plugin_name, const std::string &Model_name)
+        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &D, int
+        Image_index, const std::string &Plugin_name, const std::string
+        &Model_name)
         Constructor.
 
         This version forces the use of the given model name form the given
         plugin. This can be useful when diagnosing problems where you expect a
         particular plugin to handle a file, but it doesn't - or if the wrong
-        plugin in is processing the file. 
+        plugin is processing the file. 
         """
         _igc_msp.IgcMsp_swiginit(self, _igc_msp.new_IgcMsp(*args))
 
@@ -265,7 +266,7 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
         """
 
         std::vector< std::string > IgcMsp::msp_model_list(const std::string &Plugin)
-        Fro a given plugin, return the list of models it supports.
+        For a given plugin, return the list of models it supports.
 
         Some plugins may support more than one sensor model. 
         """
@@ -273,10 +274,232 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
 
     msp_model_list = staticmethod(msp_model_list)
 
+    def image_ids(Fname):
+        """
+
+        std::vector< std::string > IgcMsp::image_ids(const std::string &Fname)
+        Return the list of image IDS for the given NITF file.
+
+        If the file has only one 
+        """
+        return _igc_msp.IgcMsp_image_ids(Fname)
+
+    image_ids = staticmethod(image_ids)
+
+    def _v_family(self):
+        """
+
+        std::string IgcMsp::family() const
+
+        """
+        return _igc_msp.IgcMsp__v_family(self)
+
+
+    @property
+    def family(self):
+        return self._v_family()
+
+
+    def _v_version(self):
+        """
+
+        std::string IgcMsp::version() const
+
+        """
+        return _igc_msp.IgcMsp__v_version(self)
+
+
+    @property
+    def version(self):
+        return self._v_version()
+
+
+    def _v_model_name(self):
+        """
+
+        std::string IgcMsp::model_name() const
+
+        """
+        return _igc_msp.IgcMsp__v_model_name(self)
+
+
+    @property
+    def model_name(self):
+        return self._v_model_name()
+
+
+    def _v_file_name(self):
+        """
+
+        std::string IgcMsp::file_name() const
+
+        """
+        return _igc_msp.IgcMsp__v_file_name(self)
+
+
+    @property
+    def file_name(self):
+        return self._v_file_name()
+
+
+    def _v_image_index(self):
+        """
+
+        int IgcMsp::image_index() const
+
+        """
+        return _igc_msp.IgcMsp__v_image_index(self)
+
+
+    @property
+    def image_index(self):
+        return self._v_image_index()
+
+
+    def _v_pedigree(self):
+        """
+
+        std::string IgcMsp::pedigree() const
+
+        """
+        return _igc_msp.IgcMsp__v_pedigree(self)
+
+
+    @property
+    def pedigree(self):
+        return self._v_pedigree()
+
+
+    def _v_image_identifer(self):
+        """
+
+        std::string IgcMsp::image_identifer() const
+
+        """
+        return _igc_msp.IgcMsp__v_image_identifer(self)
+
+
+    @property
+    def image_identifer(self):
+        return self._v_image_identifer()
+
+
+    def _v_sensor_identifer(self):
+        """
+
+        std::string IgcMsp::sensor_identifer() const
+
+        """
+        return _igc_msp.IgcMsp__v_sensor_identifer(self)
+
+
+    @property
+    def sensor_identifer(self):
+        return self._v_sensor_identifer()
+
+
+    def _v_platform_identifer(self):
+        """
+
+        std::string IgcMsp::platform_identifer() const
+
+        """
+        return _igc_msp.IgcMsp__v_platform_identifer(self)
+
+
+    @property
+    def platform_identifer(self):
+        return self._v_platform_identifer()
+
+
+    def _v_collection_identifer(self):
+        """
+
+        std::string IgcMsp::collection_identifer() const
+
+        """
+        return _igc_msp.IgcMsp__v_collection_identifer(self)
+
+
+    @property
+    def collection_identifer(self):
+        return self._v_collection_identifer()
+
+
+    def _v_trajectory_identifer(self):
+        """
+
+        std::string IgcMsp::trajectory_identifer() const
+
+        """
+        return _igc_msp.IgcMsp__v_trajectory_identifer(self)
+
+
+    @property
+    def trajectory_identifer(self):
+        return self._v_trajectory_identifer()
+
+
+    def _v_sensor_type(self):
+        """
+
+        std::string IgcMsp::sensor_type() const
+
+        """
+        return _igc_msp.IgcMsp__v_sensor_type(self)
+
+
+    @property
+    def sensor_type(self):
+        return self._v_sensor_type()
+
+
+    def _v_sensor_mode(self):
+        """
+
+        std::string IgcMsp::sensor_mode() const
+
+        """
+        return _igc_msp.IgcMsp__v_sensor_mode(self)
+
+
+    @property
+    def sensor_mode(self):
+        return self._v_sensor_mode()
+
+
+    def _v_reference_date_time(self):
+        """
+
+        std::string IgcMsp::reference_date_time() const
+
+        """
+        return _igc_msp.IgcMsp__v_reference_date_time(self)
+
+
+    @property
+    def reference_date_time(self):
+        return self._v_reference_date_time()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _igc_msp.delete_IgcMsp
+IgcMsp._v_family = new_instancemethod(_igc_msp.IgcMsp__v_family, None, IgcMsp)
+IgcMsp._v_version = new_instancemethod(_igc_msp.IgcMsp__v_version, None, IgcMsp)
+IgcMsp._v_model_name = new_instancemethod(_igc_msp.IgcMsp__v_model_name, None, IgcMsp)
+IgcMsp._v_file_name = new_instancemethod(_igc_msp.IgcMsp__v_file_name, None, IgcMsp)
+IgcMsp._v_image_index = new_instancemethod(_igc_msp.IgcMsp__v_image_index, None, IgcMsp)
+IgcMsp._v_pedigree = new_instancemethod(_igc_msp.IgcMsp__v_pedigree, None, IgcMsp)
+IgcMsp._v_image_identifer = new_instancemethod(_igc_msp.IgcMsp__v_image_identifer, None, IgcMsp)
+IgcMsp._v_sensor_identifer = new_instancemethod(_igc_msp.IgcMsp__v_sensor_identifer, None, IgcMsp)
+IgcMsp._v_platform_identifer = new_instancemethod(_igc_msp.IgcMsp__v_platform_identifer, None, IgcMsp)
+IgcMsp._v_collection_identifer = new_instancemethod(_igc_msp.IgcMsp__v_collection_identifer, None, IgcMsp)
+IgcMsp._v_trajectory_identifer = new_instancemethod(_igc_msp.IgcMsp__v_trajectory_identifer, None, IgcMsp)
+IgcMsp._v_sensor_type = new_instancemethod(_igc_msp.IgcMsp__v_sensor_type, None, IgcMsp)
+IgcMsp._v_sensor_mode = new_instancemethod(_igc_msp.IgcMsp__v_sensor_mode, None, IgcMsp)
+IgcMsp._v_reference_date_time = new_instancemethod(_igc_msp.IgcMsp__v_reference_date_time, None, IgcMsp)
 IgcMsp_swigregister = _igc_msp.IgcMsp_swigregister
 IgcMsp_swigregister(IgcMsp)
 
@@ -311,11 +534,21 @@ def IgcMsp_msp_model_list(Plugin):
     """
 
     std::vector< std::string > IgcMsp::msp_model_list(const std::string &Plugin)
-    Fro a given plugin, return the list of models it supports.
+    For a given plugin, return the list of models it supports.
 
     Some plugins may support more than one sensor model. 
     """
     return _igc_msp.IgcMsp_msp_model_list(Plugin)
+
+def IgcMsp_image_ids(Fname):
+    """
+
+    std::vector< std::string > IgcMsp::image_ids(const std::string &Fname)
+    Return the list of image IDS for the given NITF file.
+
+    If the file has only one 
+    """
+    return _igc_msp.IgcMsp_image_ids(Fname)
 
 
 __all__ = ["IgcMsp","have_msp_supported"]

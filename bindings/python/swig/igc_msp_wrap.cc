@@ -6003,6 +6003,22 @@ struct SWIG_null_deleter {
 
 
 SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
+SWIGINTERN int
 SWIG_AsVal_std_string (PyObject * obj, std::string *val)
 {
   std::string* v = (std::string *) 0;
@@ -7040,6 +7056,84 @@ SWIGINTERN PyObject *_wrap_new_IgcMsp__SWIG_1(PyObject *SWIGUNUSEDPARM(self), in
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
+  int arg3 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > tempshared2 ;
+  boost::shared_ptr< GeoCal::Dem > temp2shared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::IgcMsp *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcMsp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcMsp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_IgcMsp" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::Dem > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IgcMsp" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (GeoCal::IgcMsp *)new GeoCal::IgcMsp((std::string const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::IgcMsp > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcMsp >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IgcMsp__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   void *argp2 ;
   int res2 = 0 ;
@@ -7106,22 +7200,25 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcMsp__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcMsp__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   boost::shared_ptr< GeoCal::Dem > *arg2 = 0 ;
-  std::string *arg3 = 0 ;
+  int arg3 ;
   std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   void *argp2 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::Dem > tempshared2 ;
   boost::shared_ptr< GeoCal::Dem > temp2shared2 ;
-  int res3 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
   int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
   GeoCal::IgcMsp *result = 0 ;
   
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -7159,17 +7256,11 @@ SWIGINTERN PyObject *_wrap_new_IgcMsp__SWIG_2(PyObject *SWIGUNUSEDPARM(self), in
       arg2 = &temp2shared2;
     }
   }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_IgcMsp" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcMsp" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IgcMsp" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
   {
     std::string *ptr = (std::string *)0;
     res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
@@ -7182,8 +7273,19 @@ SWIGINTERN PyObject *_wrap_new_IgcMsp__SWIG_2(PyObject *SWIGUNUSEDPARM(self), in
     arg4 = ptr;
   }
   {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_IgcMsp" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_IgcMsp" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
     try {
-      result = (GeoCal::IgcMsp *)new GeoCal::IgcMsp((std::string const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
+      result = (GeoCal::IgcMsp *)new GeoCal::IgcMsp((std::string const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,arg3,(std::string const &)*arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7195,41 +7297,45 @@ SWIGINTERN PyObject *_wrap_new_IgcMsp__SWIG_2(PyObject *SWIGUNUSEDPARM(self), in
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res3)) delete arg3;
   if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res3)) delete arg3;
   if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_new_IgcMsp(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[5] = {
+  PyObject *argv[6] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcMsp",0,4,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcMsp",0,5,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
     return _wrap_new_IgcMsp__SWIG_0(self, argc, argv);
   }
   if (argc == 2) {
+    return _wrap_new_IgcMsp__SWIG_2(self, argc, argv);
+  }
+  if (argc == 3) {
     return _wrap_new_IgcMsp__SWIG_1(self, argc, argv);
   }
-  if (argc == 4) {
-    return _wrap_new_IgcMsp__SWIG_2(self, argc, argv);
+  if (argc == 5) {
+    return _wrap_new_IgcMsp__SWIG_3(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IgcMsp'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::IgcMsp::IgcMsp(std::string const &)\n"
+    "    GeoCal::IgcMsp::IgcMsp(std::string const &,boost::shared_ptr< GeoCal::Dem > const &,int)\n"
     "    GeoCal::IgcMsp::IgcMsp(std::string const &,boost::shared_ptr< GeoCal::Dem > const &)\n"
-    "    GeoCal::IgcMsp::IgcMsp(std::string const &,boost::shared_ptr< GeoCal::Dem > const &,std::string const &,std::string const &)\n");
+    "    GeoCal::IgcMsp::IgcMsp(std::string const &,boost::shared_ptr< GeoCal::Dem > const &,int,std::string const &,std::string const &)\n");
   return 0;
 }
 
@@ -7350,6 +7456,646 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IgcMsp_image_ids(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  std::vector< std::string,std::allocator< std::string > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp_image_ids" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcMsp_image_ids" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = GeoCal::IgcMsp::image_ids((std::string const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< std::string,std::allocator< std::string > > >(result));
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_family(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_family" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->family();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_version(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_version" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->version();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_model_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_model_name" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->model_name();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_file_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_file_name" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->file_name();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_image_index(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_image_index" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::IgcMsp const *)arg1)->image_index();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_pedigree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_pedigree" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->pedigree();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_image_identifer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_image_identifer" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->image_identifer();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_sensor_identifer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_sensor_identifer" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->sensor_identifer();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_platform_identifer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_platform_identifer" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->platform_identifer();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_collection_identifer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_collection_identifer" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->collection_identifer();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_trajectory_identifer(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_trajectory_identifer" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->trajectory_identifer();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_sensor_type(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_sensor_type" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->sensor_type();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_sensor_mode(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_sensor_mode" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->sensor_mode();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp__v_reference_date_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp__v_reference_date_time" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->reference_date_time();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_IgcMsp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
@@ -7430,14 +8176,15 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"new_IgcMsp", _wrap_new_IgcMsp, METH_VARARGS, (char *)"\n"
 		"\n"
-		"IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &D, const\n"
-		"std::string &Plugin_name, const std::string &Model_name)\n"
+		"IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &D, int\n"
+		"Image_index, const std::string &Plugin_name, const std::string\n"
+		"&Model_name)\n"
 		"Constructor.\n"
 		"\n"
 		"This version forces the use of the given model name form the given\n"
 		"plugin. This can be useful when diagnosing problems where you expect a\n"
 		"particular plugin to handle a file, but it doesn't - or if the wrong\n"
-		"plugin in is processing the file. \n"
+		"plugin is processing the file. \n"
 		""},
 	 { (char *)"IgcMsp_msp_print_plugin_list", (PyCFunction)_wrap_IgcMsp_msp_print_plugin_list, METH_NOARGS, (char *)"\n"
 		"\n"
@@ -7460,9 +8207,86 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"IgcMsp_msp_model_list", (PyCFunction)_wrap_IgcMsp_msp_model_list, METH_O, (char *)"\n"
 		"\n"
 		"std::vector< std::string > IgcMsp::msp_model_list(const std::string &Plugin)\n"
-		"Fro a given plugin, return the list of models it supports.\n"
+		"For a given plugin, return the list of models it supports.\n"
 		"\n"
 		"Some plugins may support more than one sensor model. \n"
+		""},
+	 { (char *)"IgcMsp_image_ids", (PyCFunction)_wrap_IgcMsp_image_ids, METH_O, (char *)"\n"
+		"\n"
+		"std::vector< std::string > IgcMsp::image_ids(const std::string &Fname)\n"
+		"Return the list of image IDS for the given NITF file.\n"
+		"\n"
+		"If the file has only one \n"
+		""},
+	 { (char *)"IgcMsp__v_family", (PyCFunction)_wrap_IgcMsp__v_family, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::family() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_version", (PyCFunction)_wrap_IgcMsp__v_version, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::version() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_model_name", (PyCFunction)_wrap_IgcMsp__v_model_name, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::model_name() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_file_name", (PyCFunction)_wrap_IgcMsp__v_file_name, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::file_name() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_image_index", (PyCFunction)_wrap_IgcMsp__v_image_index, METH_O, (char *)"\n"
+		"\n"
+		"int IgcMsp::image_index() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_pedigree", (PyCFunction)_wrap_IgcMsp__v_pedigree, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::pedigree() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_image_identifer", (PyCFunction)_wrap_IgcMsp__v_image_identifer, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::image_identifer() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_sensor_identifer", (PyCFunction)_wrap_IgcMsp__v_sensor_identifer, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::sensor_identifer() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_platform_identifer", (PyCFunction)_wrap_IgcMsp__v_platform_identifer, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::platform_identifer() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_collection_identifer", (PyCFunction)_wrap_IgcMsp__v_collection_identifer, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::collection_identifer() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_trajectory_identifer", (PyCFunction)_wrap_IgcMsp__v_trajectory_identifer, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::trajectory_identifer() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_sensor_type", (PyCFunction)_wrap_IgcMsp__v_sensor_type, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::sensor_type() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_sensor_mode", (PyCFunction)_wrap_IgcMsp__v_sensor_mode, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::sensor_mode() const\n"
+		"\n"
+		""},
+	 { (char *)"IgcMsp__v_reference_date_time", (PyCFunction)_wrap_IgcMsp__v_reference_date_time, METH_O, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::reference_date_time() const\n"
+		"\n"
 		""},
 	 { (char *)"delete_IgcMsp", (PyCFunction)_wrap_delete_IgcMsp, METH_O, (char *)"\n"
 		"\n"

@@ -111,6 +111,7 @@ EXTRA_DIST+=@srcpythonlib@/geocal_nitf_rsm_test.py
 EXTRA_DIST+=@srcpythonlib@/geocal_nitf_des_test.py
 EXTRA_DIST+=@srcpythonlib@/geocal_nitf_image_test.py
 EXTRA_DIST+=@srcpythonlib@/geocal_nitf_sensrb_test.py
+EXTRA_DIST+=@srcpythonlib@/geocal_nitf_snip_test.py
 EXTRA_DIST+=@srcpythonlib@/spice_camera_test.py
 EXTRA_DIST+=@srcpythonlib@/tie_point_collect_picmtch_test.py
 EXTRA_DIST+=@srcpythonlib@/warp_image_test.py

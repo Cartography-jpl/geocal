@@ -2,6 +2,7 @@ PROCESS       HELP=*
 parm tpcol type=(string,99) count=1
 parm out type=(string,99) count=1
 parm refimg type=(string,99) count=1, default=""
+parm useorigimg type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC
 .TITLE
 tpcol_to_table
@@ -22,5 +23,20 @@ Input tie-point collection
 Output ASCII file
 .variable refimg
 Optional reference image
+.variable useorigimg
+Special note for using with mars_nest.
+The tie-points are relative to the
+image that has matched. This is the
+same as the input images *except* in
+the case you have used the one of the
+options like "userefproj" or "useproj".
+In that case, the input image is
+reprojected before we do the image
+matching. The tie-points are then
+relative to the reprojected image.  If
+instead you want the CSV file generated
+by this program to be relative to the
+original (not reprojected) image,
+specify the "useorigimg" option.
 .END
 

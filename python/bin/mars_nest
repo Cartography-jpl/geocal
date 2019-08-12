@@ -11,8 +11,9 @@ import sys
 import re
 import geocal
 import os
+import pickle
 
-version = "February 26, 2019"
+version = "August 12, 2019"
 usage='''Usage:
   mars_nest [options] <ref_image> <ref_base_name> 
             <ref_image_resolution_name> <image> <image_base_name> 
@@ -66,6 +67,40 @@ mars_nest   refimg=&input1 refbase=hrsc1154 refres=50m +
             fftsize=256 fftgrid=(42,42) magnify=4 magmin=2 +
             userefpr="y"
 xvd (hrsc1154_50m.img,hrsc3663_corr_50m.img,hrsc3663_corr_50m.img)
+
+There are a number of files generated. A sample run like:
+
+mars_nest --band-image=100 --scale-image=1000 --use-ref-image-projection --magmin=4.0 --fftgrid='(64,64)' ${CTX_REF} ctx_t1 6m ${CRISM1} crism_b100 18m 
+
+would have output files:
+
+crism_b100.vrt       - CRISM1 data with projection fixed, single band 
+                       100 pulled out. Original projection and resolution
+ctx_t1.vrt           - CTX_REF data with projection fixed
+crism_b100_scale.tif - CRISM1 data with radiance scaled. Original projection
+                       and resolution.
+crism_b100_scale.img - CRISM1 data with radiance scaled. Original projection
+                       and resolution.
+crism_b100_reproj.img - CRISM data projected to output projection (CTX_REF
+                        projection in this case). In original resolution.
+crism_b100_18m.img    - CRISM data in output projection, original resolution
+ctx_t1_6m.img         - Reference data in output projection, original resolution
+ctx_t1_18m.img        - Reference data in CRISM resolution
+crism_b100_6m.img     - CRISM data in output projection, reference image 
+                        resolution
+crism_b100_18m_tpcol.xml
+                      - Tie points in crism_b100_18m.img. These are the
+                        locations we matched.
+crism_b100_18m_tpgrid.bin
+                      - Tie points in crism_b100_18m.img. These are a
+                        regular grid that is used to warp the 
+                        crism_b100_18m.img to the corrected image
+crism_b100_corr_18m.img
+                      - CRISM data corrected. This is in the output projection,
+                        original resolution.
+crism_b100_corr_6m.img
+                      - CRISM data corrected. This is in the output projection,
+                        reference data resolution.
 
 Options:
   -h --help         
@@ -337,10 +372,12 @@ cimg_res1 = "%s_corr_%s.img" % (args.image_base_name,
 cimg_res2 = "%s_corr_%s.img" % (args.image_base_name, 
                                 args.image_resolution_name)
 
+extra_tp_stuff = {}
 geocal.mars_fix_projection(args.ref_image, refimg_fixed, args.band_ref,
                            hirise_correction=args.hirise_correction)
 geocal.mars_fix_projection(args.image, img_fixed, args.band_image,
                            hirise_correction=args.hirise_correction)
+extra_tp_stuff["img_fixed"] = os.path.abspath(img_fixed)
 if(args.use_projection):
     use_projection_fixed = "%s_proj.vrt" % (args.image_base_name)
     geocal.mars_fix_projection(args.use_projection, use_projection_fixed,1,
@@ -369,6 +406,8 @@ if(args.border == 0):
     import_file(img_fixed, img_res2)
 else:
     resample_proj(img_fixed, img_fixed, img_res2, border=args.border)
+
+extra_tp_stuff["img_res2"] = os.path.abspath(img_res2)
     
 # If resolutions are different, then don't resize when we reproject the
 # reference data. If on the other hand these are the same, then do resize
@@ -398,12 +437,17 @@ if(not args.tiepoint_name or args.tiepoint_name == ""):
     accck(img_res1, refimg_res1)
     tpcol = tie_point_collect(img_res2, refimg_res1)
     geocal.write_shelve(tpcol_fname, tpcol)
+    with open(tpcol_fname + ".aux", "wb") as fh:
+        pickle.dump(extra_tp_stuff, fh)
 else:
     tpcol = geocal.read_shelve(args.tiepoint_name)
     # Translate tpcol to the current image. Not needed if current image
     # is same resolution and origin as orginal_img, but in general these
     # can be different.
-    original_img = geocal.VicarLiteRasterImage(re.sub(r'_tpcol.xml$', ".img", args.tiepoint_name))
+    with open(args.tiepoint_name + ".aux", "rb") as fh:
+        original_extra_tp_stuff = pickle.load(fh)
+    
+    original_img = geocal.VicarLiteRasterImage(original_extra_tp_stuff["img_res2"])
     current_img = geocal.VicarLiteRasterImage(img_res2)
     for tp in tpcol:
         ic_original = tp.image_coordinate(0)
@@ -411,6 +455,8 @@ else:
         tp.image_coordinate(0,ic_current)
 run_warp_image(img_res2, refimg_res2, tpcol, cimg_res2,
                tpgrid_out=tpgrid_fname)
+with open(tpgrid_fname + ".aux", "wb") as fh:
+    pickle.dump(extra_tp_stuff, fh)
 if(args.use_map_info):
     resample_proj(refimg_fixed, use_projection_fixed, refimg_res1, resize=True)
     resample_proj(img_res2, use_projection_fixed, img_res1, resize=True)

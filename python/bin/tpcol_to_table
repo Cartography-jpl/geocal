@@ -48,7 +48,7 @@ Options:
 # Mapping between long name and shorter vicar name
 long_name_to_vicar = { "ref_image" : "refimg",
                        "output_name" : "out",
-                       "use_original_image" : "uorigimg",
+                       "use_original_image" : "useorigimg",
 		       "tpcol": "tpcol" }
 
 args = geocal.docopt_simple(usage, version=version,

@@ -1,13 +1,18 @@
 from pynitf.nitf_tre import *
-from pynitf.nitf_tre_csdida import *
+from pynitf.nitf_tre_csexrb import *
 from pynitf_test_support import *
 import io, six
 
-def test_tre_csdida():
+def test_tre_csexrb():
+    t = TreCSEXRB()
 
-    t = TreCSDIDA()
+    # Skip testing for now. We check reading in nitf_file_test.py by reading
+    # the reference SNIP file. We'll want to come back and test this at some
+    # point
+    return
 
-    # Set some values
+    # Invalid data, but leave as a sample
+    # Set some values 
     t.day = 12
     t.month = 'MAY'
     t.year = 2019
@@ -27,7 +32,7 @@ def test_tre_csdida():
     assert fh.getvalue() == b'CSDIDA0007012MAY2019AB1103341CDEF000020190709231159201907092312590001NN1.0.0     '
 
     fh2 = six.BytesIO(fh.getvalue())
-    t2 = TreCSDIDA()
+    t2 = TreCSEXRB()
     t2.read_from_file(fh2)
     assert t.day == 12
     assert t.month == 'MAY'

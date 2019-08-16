@@ -48,27 +48,24 @@ def test_snip_create(isolated_dir):
         raise SkipTest
     f = NitfFile(fname)
     tcsexrb = f.image_segment[1].find_exactly_one_tre("CSEXRB")
-#    f2 = NitfFile(f)
-#    create_image_seg(f2)
-#    f2.tre_list.append(f.find_exactly_one_tre("CSDIDA"))
-#    f2.tre_list.append(f.find_exactly_one_tre("MATESA"))
-#    f2.image_segment[0].tre_list.append(tcsexrb)
-#    csattb = [d for d in f.des_segment if d.subheader.desid == "CSATTB"][0]
-#    f2.des_segment.append(csattb)
-#    csephb = [d for d in f.des_segment if d.subheader.desid == "CSEPHB"][0]
-#    f2.des_segment.append(csephb)
-#    cssfab = [d for d in f.des_segment if d.subheader.desid == "CSSFAB"][0]
-#    f2.des_segment.append(cssfab)
-#    cscsdb = [d for d in f.des_segment if d.subheader.desid == "CSCSDB"][0]
-#    print(csattb.des.user_subheader)
-#    print(csephb.des.user_subheader)
-#    print(cssfab.des.user_subheader)
-#    print(cscsdb.des.user_subheader)
-#    f2.des_segment.append(cscsdb)
-    f.write("test.ntf")
+    f2 = NitfFile()
+    create_image_seg(f2)
+    f2.image_segment[0].tre_list.append(tcsexrb)
+    # All 4 of these seem to be needed. Not clear if this is just because
+    # they are all listed in the associated tre stuff. We might be able
+    # to remove the covariance if it is not listed, or perhaps this really
+    # is needed.
+    csattb = [d for d in f.des_segment if d.subheader.desid == "CSATTB"][0]
+    f2.des_segment.append(csattb)
+    csephb = [d for d in f.des_segment if d.subheader.desid == "CSEPHB"][0]
+    f2.des_segment.append(csephb)
+    cssfab = [d for d in f.des_segment if d.subheader.desid == "CSSFAB"][0]
+    f2.des_segment.append(cssfab)
+    cscsdb = [d for d in f.des_segment if d.subheader.desid == "CSCSDB"][0]
+    f2.des_segment.append(cscsdb)
+    f2.write("test.ntf")
     igc1 = IgcMsp(fname, SimpleDem(), 1, "GLAS", "GLAS")
-#    igc2 = IgcMsp("test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
-    igc2 = IgcMsp("test.ntf", SimpleDem(), 1, "GLAS", "GLAS")
+    igc2 = IgcMsp("test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
     pt1 = igc1.ground_coordinate_approx_height(ImageCoordinate(100,100), 0)
     pt2 = igc2.ground_coordinate_approx_height(ImageCoordinate(100,100), 0)
     print(distance(pt1, pt2))

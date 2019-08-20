@@ -1,4 +1,5 @@
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_handle.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/glas_gfm.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/output_cache.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/target.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/local_target.py
@@ -62,6 +63,7 @@ EXTRA_DIST+=@srcpythonlib@/air_mspi_igc_test.py
 EXTRA_DIST+=@srcpythonlib@/dem_generate_test.py
 EXTRA_DIST+=@srcpythonlib@/docopt_simple_test.py
 EXTRA_DIST+=@srcpythonlib@/feature_detector_extension_test.py
+EXTRA_DIST+=@srcpythonlib@/glas_gfm_test.py
 EXTRA_DIST+=@srcpythonlib@/geocal_test.py
 EXTRA_DIST+=@srcpythonlib@/geoeye1_reflectance_test.py
 EXTRA_DIST+=@srcpythonlib@/hdf_orbit_test.py

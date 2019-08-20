@@ -3091,7 +3091,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/dem_generate_test.py \
 	@srcpythonlib@/docopt_simple_test.py \
 	@srcpythonlib@/feature_detector_extension_test.py \
-	@srcpythonlib@/geocal_test.py \
+	@srcpythonlib@/glas_gfm_test.py @srcpythonlib@/geocal_test.py \
 	@srcpythonlib@/geoeye1_reflectance_test.py \
 	@srcpythonlib@/hdf_orbit_test.py \
 	@srcpythonlib@/ibis_file_extension_test.py \
@@ -4182,9 +4182,10 @@ SWIG_LIBADD = libgeocal.la
 installafidspython_DATA = $(am__append_36) $(am__append_37)
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
-	@srcpythonlib@/job_handle.py @srcpythonlib@/output_cache.py \
-	@srcpythonlib@/target.py @srcpythonlib@/local_target.py \
-	@srcpythonlib@/task.py @srcpythonlib@/ipython.py \
+	@srcpythonlib@/job_handle.py @srcpythonlib@/glas_gfm.py \
+	@srcpythonlib@/output_cache.py @srcpythonlib@/target.py \
+	@srcpythonlib@/local_target.py @srcpythonlib@/task.py \
+	@srcpythonlib@/ipython.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \

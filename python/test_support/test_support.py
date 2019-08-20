@@ -39,6 +39,26 @@ geocal_test_tpcol = geocal_test_data + "tpcol.xml"
 # This comes from http://www.gwg.nga.mil/ntb/baseline/software/testfile/rsm/samples.htm
 rsm_sample_data = "/data/smyth/SampleRsm/"
 
+# Have tests that require NITF sample files be available. We skip these if not
+# available, tests are nice to make sure things don't break but not essential.
+# Things that really matter have small test data sets put into unit_test_data,
+# but we do want the option of running larger tests when available
+
+@pytest.yield_fixture(scope="function")
+def nitf_sample_files(isolated_dir):
+    if(os.path.exists("/raid1/smyth/NitfSamples/")):
+        return "/raid1/smyth/NitfSamples/"
+    elif(os.path.exists("/opt/nitf_files/NitfSamples/")):
+        return "/opt/nitf_files/NitfSamples/"
+    pytest.skip("Require NitfSamples test data to run")
+
+@pytest.yield_fixture(scope="function")
+def nitf_sample_rip(nitf_sample_files):
+    fname = nitf_sample_files + "rip/07APR2005_Hyperion_331405N0442002E_SWIR172_001_L1R.ntf"
+    if(os.path.exists(fname)):
+        return fname
+    pytest.skip("Required file %s not found, so skipping test" % fname)
+    
 def cmd_exists(cmd):
     '''Check if a cmd exists by using type, which returns a nonzero status if
     the program isn't found'''

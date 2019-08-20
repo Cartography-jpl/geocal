@@ -1,13 +1,13 @@
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes)
 try:
     from pynitf import (DesCSEPHB, DesCSATTB, create_nitf_des_structure,
-                        register_des_class, NitfImageSegment)
+                        register_des_class, NitfImageSegment,
+                        add_uuid_des_function)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
 import numpy as np
-
 # ---------------------------------------------------------
 # Override various DESs to use the geocal objects instead
 # ---------------------------------------------------------
@@ -40,6 +40,7 @@ This should be used to set and read the DES values.
     # Register this geocal class ahead of the pynitf DesCSEPHB class, so this
     # gets used to read the data instead of DesCSEPHB
 
+    add_uuid_des_function(DesCSEPHB_geocal)    
     register_des_class(DesCSEPHB_geocal, priority_order=-1)
 
     if(DesCSATTB.__doc__ is not None):
@@ -74,6 +75,7 @@ This should be used to set and read the DES values.
     # Register this geocal class ahead of the pynitf DesCSATTB class, so this
     # gets used to read the data instead of DesCSATTB
 
+    add_uuid_des_function(DesCSATTB_geocal)    
     register_des_class(DesCSATTB_geocal, priority_order=-1)
 
     # Have search to find the pos_csephb and att_csattb that goes with a

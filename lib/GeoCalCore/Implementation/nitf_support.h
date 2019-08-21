@@ -33,7 +33,7 @@ nitf_to_quaternion(const blitz::Array<T, 1>& Data)
 {
   if(Data.rows() != 4)
     throw GeoCal::Exception("Array must be size 4");
-  return boost::math::quaternion<T>(Data(3), Data(0), Data(1), Data(2));
+  return boost::math::quaternion<T>(Data(3), -Data(0), -Data(1), -Data(2));
 }
 
 //-----------------------------------------------------------------------
@@ -45,8 +45,8 @@ template<class T> inline blitz::Array<T, 1>
 quaternion_to_nitf(const boost::math::quaternion<T>& Q)
 {
   blitz::Array<T, 1> res(4);
-  res = Q.R_component_2(), Q.R_component_3(),
-    Q.R_component_4(), Q.R_component_1();
+  res = -Q.R_component_2(), -Q.R_component_3(),
+    -Q.R_component_4(), Q.R_component_1();
   return res;
 }
 
@@ -61,7 +61,7 @@ quaternion_to_nitf(const blitz::Array<T, 1>& Q)
   if(Q.rows() != 4)
     throw GeoCal::Exception("Array must be size 4");
   blitz::Array<T, 1> res(4);
-  res = Q(1), Q(2), Q(3), Q(0);
+  res = -Q(1), -Q(2), -Q(3), Q(0);
   return res;
 }
 
@@ -78,9 +78,9 @@ quaternion_to_nitf(const blitz::Array<T, 2>& Q)
     throw GeoCal::Exception("Array must be size 4");
   blitz::Array<T, 2> res(Q.rows(), 4);
   // Move real part
-  res(ra,0) = Q(1,ra);
-  res(ra,1) = Q(2,ra);
-  res(ra,2) = Q(3,ra);
+  res(ra,0) = -Q(1,ra);
+  res(ra,1) = -Q(2,ra);
+  res(ra,2) = -Q(3,ra);
   res(ra,3) = Q(0,ra);
   return res;
 }

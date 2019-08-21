@@ -19,7 +19,9 @@ def test_rip_glas(nitf_sample_rip):
     f = pynitf.NitfFile(nitf_sample_rip)
     glas = f.image_segment[iseg_index].glas_gfm
     igc2 = glas.igc()
-    ic = ImageCoordinate(0,256/2)
+    ic = ImageCoordinate(0.5,256/2)
+    print(igc2.ipi.camera.sc_look_vector(FrameCoordinate(0.5,256/2), 0))
+    print(igc2.ipi.camera.sc_look_vector(FrameCoordinate(0.5,256/2+1), 0))
     print(Geodetic(igc1.ground_coordinate(ic)))
     print(Geodetic(igc2.ground_coordinate(ic)))
     print(igc1.resolution_meter())
@@ -28,3 +30,7 @@ def test_rip_glas(nitf_sample_rip):
     ic = ImageCoordinate(1000, 256/2)
     print(distance(igc1.ground_coordinate(ic), igc2.ground_coordinate(ic)))
     print(igc2.image_coordinate(igc1.ground_coordinate(ic)))
+    ic = ImageCoordinate(1000.5,100)
+    print(distance(igc1.ground_coordinate(ic), igc2.ground_coordinate(ic)))
+    print(igc2.image_coordinate(igc1.ground_coordinate(ic)))
+    

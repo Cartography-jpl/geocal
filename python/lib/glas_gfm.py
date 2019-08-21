@@ -1,6 +1,8 @@
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          ConstantSpacingTimeTable, SimpleCamera,
-                         SimpleDem, IpiImageGroundConnection, Ipi)
+                         QuaternionCamera, FrameCoordinate,
+                         SimpleDem, IpiImageGroundConnection, Ipi,
+                         Quaternion_double)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
                                geocal_time_to_nitf_date_second_field)
 try:
@@ -37,9 +39,18 @@ if(have_pynitf):
             cam_des = self.cssfab
             if(cam_des.num_fl_pts != 1):
                 raise RuntimeError("We don't currently support time dependent flocal lengths")
-            return SimpleCamera(0,0,0, cam_des.foc_length[0], -0.00765 / 128,
-                                -0.00765 / 128, 1,
-                                self.tre_csexrb.num_samples)
+
+            if False:
+                return SimpleCamera(0,0,0, cam_des.foc_length[0], -0.00765 / 128,
+                                    -0.00765 / 128, 1,
+                                    self.tre_csexrb.num_samples)
+            return QuaternionCamera(Quaternion_double(1,0,0,0),
+                                    1, 256, 0.00765 / 128, 0.00765 / 128,
+                                    cam_des.foc_length[0],
+                                    FrameCoordinate(0.5, 128),
+                                    QuaternionCamera.LINE_IS_Y,
+                                    QuaternionCamera.INCREASE_IS_NEGATIVE,
+                                    QuaternionCamera.INCREASE_IS_POSITIVE)
 
         @property
         def time_table(self):
@@ -51,7 +62,7 @@ if(have_pynitf):
             tend = tstart + self.tre_csexrb.time_image_duration
             nline = self.tre_csexrb.num_lines
             # May need a +- 1 in here, we'll want to carefully check this
-            return ConstantSpacingTimeTable(tstart, tend, (tend - tstart) / nline)
+            return ConstantSpacingTimeTable(tstart, tend, (tend - tstart) / (nline-1))
 
         def find_one_des(self, desid):
             res = [d for d in self.des if d.desid() == desid]

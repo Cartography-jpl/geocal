@@ -13,24 +13,27 @@ from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance, Geodetic)
 def test_rip_glas(nitf_sample_rip):
     '''Test reading GLAS data from the NITF RIP sample'''
     # Index for the image segment that has GLAS data.
-    print(nitf_sample_rip)
     iseg_index = 1 
     igc1 = IgcMsp(nitf_sample_rip, SimpleDem(), iseg_index, "GLAS", "GLAS")
     f = pynitf.NitfFile(nitf_sample_rip)
     glas = f.image_segment[iseg_index].glas_gfm
     igc2 = glas.igc()
-    ic = ImageCoordinate(0.5,256/2)
-    print(igc2.ipi.camera.sc_look_vector(FrameCoordinate(0.5,256/2), 0))
-    print(igc2.ipi.camera.sc_look_vector(FrameCoordinate(0.5,256/2+1), 0))
-    print(Geodetic(igc1.ground_coordinate(ic)))
-    print(Geodetic(igc2.ground_coordinate(ic)))
-    print(igc1.resolution_meter())
-    print(igc2.resolution_meter())
-    print(distance(igc1.ground_coordinate(ic), igc2.ground_coordinate(ic)))
-    ic = ImageCoordinate(1000, 256/2)
-    print(distance(igc1.ground_coordinate(ic), igc2.ground_coordinate(ic)))
-    print(igc2.image_coordinate(igc1.ground_coordinate(ic)))
-    ic = ImageCoordinate(1000.5,100)
-    print(distance(igc1.ground_coordinate(ic), igc2.ground_coordinate(ic)))
-    print(igc2.image_coordinate(igc1.ground_coordinate(ic)))
-    
+    igc3 = IgcMsp(nitf_sample_rip, SimpleDem(), iseg_index, "RSM", "RSM")
+    print("Resolution %f m" % igc1.resolution_meter())
+    print("Resolution %f m" % igc2.resolution_meter())
+    print("Resolution %f m" % igc3.resolution_meter())
+    max_diff1 = -1e8
+    max_diff2 = -1e8
+    for i in range(0, igc2.number_line, 20):
+        for j in range (0, igc2.number_sample, 20):
+            ic = ImageCoordinate(i, j)
+            d1 = distance(igc1.ground_coordinate(ic),
+                          igc2.ground_coordinate(ic))
+            d2 = distance(igc3.ground_coordinate(ic),
+                          igc2.ground_coordinate(ic))
+            max_diff1 = max(d1, max_diff1)
+            max_diff2 = max(d2, max_diff2)
+    print(max_diff1)
+    print(max_diff2)
+    # We'll want to beat this down, but for now we need to be within a pixel
+    assert max_diff1 < 20.0

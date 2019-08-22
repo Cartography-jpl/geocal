@@ -50,6 +50,7 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const
   { throw Exception("Not Implemented"); }
+  virtual Time pixel_time(const ImageCoordinate& Ic) const;
   std::string family() const { return model->getFamily(); }
   std::string version() const { return model->getVersion().version(); }
   std::string model_name() const { return model->getModelName(); }
@@ -187,6 +188,25 @@ try {
   pes.intersectTerrain(model.get(), ipoint, *tm_to_use, gp,
 		       terrain_type_used);
   return boost::make_shared<Ecr>(gp.getX(), gp.getY(), gp.getZ());
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+}
+
+Time IgcMspImp::pixel_time(const ImageCoordinate& Ic) const
+{
+try { 
+  csm::ImageCoord ipoint(Ic.line,Ic.sample);
+  double t = model->getImageTime(ipoint);
+  // Not sure yet what time is relative to. Return as j2000 time
+  // This is from start of image
+  return Time::time_j2000(t);
 } catch(const MSP::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this

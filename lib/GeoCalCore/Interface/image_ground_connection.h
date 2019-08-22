@@ -714,6 +714,8 @@ public:
   { return igc->parameter_name(); }
   virtual blitz::Array<bool, 1> parameter_mask() const
   { return igc->parameter_mask(); }
+  virtual Time pixel_time(const ImageCoordinate& Ic) const
+  { return igc->pixel_time(Ic); }
   virtual void print(std::ostream& Os) const;
 protected:
   ImageGroundConnectionCopy() {}

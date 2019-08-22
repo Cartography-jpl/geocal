@@ -21,6 +21,27 @@ namespace GeoCal {
   orbit_data_create. This function should be overriden by a derived
   class to supply the calculation of a QuaternionOrbitData for a
   particular time on demand.
+
+  A note about AutoDerivative in the underlying Orbit. For the orbit
+  creation (orbit_data_create) we use a constant time only. This is
+  really just what we mean by doing a time interpolation. We select
+  points at a specific, exact time - t0, t1, t2, etc.  No derivatives,
+  the times are exact constants. However, when we interpolate to time
+  t using orbit data at t0 and t1, that is where the derivative enters
+  in. So we propagate time gradients through the linear interpolation
+  in orbit_data.  Note that this *is* the time behavior of
+  OrbitQuaterntionList, even if it isn’t the derivative of the
+  underlying orbit.  This is one differences in using a
+  OrbitQuaternionList vs. some other Orbit - the time behavior is by
+  design linear.
+
+  So you should calculate your quaternions in orbit_data_create using
+  AutoDerivative (if the orbit supports it and has parameters), but
+  hold time constant (either don’t include as one of the gradient
+  variables, or give it a gradient of zero).  The OrbitQuaternionList
+  will then given the correct gradients of how *it* behaves, even if
+  this isn’t the same gradient you would have gotten from the
+  underlying Orbit.
 *******************************************************************/
 
 class OrbitQuaternionList : public Orbit {

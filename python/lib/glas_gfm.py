@@ -47,7 +47,7 @@ if(have_pynitf):
             return QuaternionCamera(Quaternion_double(1,0,0,0),
                                     1, 256, 0.00765 / 128, 0.00765 / 128,
                                     cam_des.foc_length[0],
-                                    FrameCoordinate(0.5, 128),
+                                    FrameCoordinate(0, 128),
                                     QuaternionCamera.LINE_IS_Y,
                                     QuaternionCamera.INCREASE_IS_NEGATIVE,
                                     QuaternionCamera.INCREASE_IS_POSITIVE)

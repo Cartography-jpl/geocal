@@ -63,7 +63,16 @@ if(have_pynitf):
             # ground_ref_point
             res.tre_csexrb = t
             iseg.tre_list.append(res.tre_csexrb)
-            f = iseg.nitf_file            
+            f = iseg.nitf_file
+
+            # Briefly, fake camera stuff just so we can check everything.
+            # We'll fix this shortly.
+            d1 = igc.cam_des
+            d = GlasGfm._find_des(f, d1.id)
+            if(d is None):
+                d = d1
+                f.des_segment.append(pynitf.NitfDesSegment(des=d))
+            res.des.append(d)
 
             # Get position and attitude DES if already in file, or create
             pos_csephb = igc.ipi.orbit.pos_csephb

@@ -59,11 +59,17 @@ def test_create_glas(nitf_sample_rip):
     fin = pynitf.NitfFile(nitf_sample_rip)
     iseg_index = 1
     igc = fin.image_segment[iseg_index].glas_gfm.igc()
+    # Temporary
+    igc.cam_des = fin.des_segment[2].des
+    igc.cam_des.id = ""
+    igc.cam_des.numais = "0"
+    igc.cam_des.num_assoc_elem = 0
     f.image_segment[0].create_glas_gfm(igc)
     f.image_segment[1].create_glas_gfm(igc)
     f.write("glas_test.ntf")
     f2 = NitfFile("glas_test.ntf")
     print(f2)
+    igc2 = IgcMsp("glas_test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
     
     
     

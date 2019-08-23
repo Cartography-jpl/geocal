@@ -120,7 +120,16 @@ public:
 
   void des_write(std::ostream& Os) const;
   static boost::shared_ptr<PosCsephb> des_read(std::istream& In);
+
+//-----------------------------------------------------------------------
+/// The UUID for the DES that contains this object, if any. This is an
+/// empty string we don't have a actual DES we are part of.
+//-----------------------------------------------------------------------
+
+  std::string id() const { return id_;}
+  void id(const std::string& V) { id_ = V;}
 private:
+  std::string id_;
   Time min_time_;
   double tstep_;
   bool is_cf_;
@@ -253,7 +262,16 @@ public:
 
   void des_write(std::ostream& Os) const;
   static boost::shared_ptr<AttCsattb> des_read(std::istream& In);
+
+//-----------------------------------------------------------------------
+/// The UUID for the DES that contains this object, if any. This is an
+/// empty string we don't have a actual DES we are part of.
+//-----------------------------------------------------------------------
+
+  std::string id() const { return id_;}
+  void id(const std::string& V) { id_ = V;}
 private:
+  std::string id_;
   Time min_time_;
   double tstep_;
   bool is_cf_;

@@ -33,6 +33,10 @@ def test_rsm_rp(isolated_dir, rsm):
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
+# This test program went away with MSP 1.6. Not sure if we can locate it again,
+# it is at least listed in the documentation. May also be able to do this
+# as a program/function, but currently this doesn't work.
+@skip    
 @require_msp
 @require_pynitf
 def test_rsm_generate_with_msp(isolated_dir, igc_rpc):

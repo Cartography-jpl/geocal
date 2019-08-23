@@ -377,6 +377,24 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
       self._v_lagrange_order(value)
 
 
+    def _v_id(self, *args):
+        """
+
+        void GeoCal::PosCsephb::id(const std::string &V)
+
+        """
+        return _orbit_des.PosCsephb__v_id(self, *args)
+
+
+    @property
+    def id(self):
+        return self._v_id()
+
+    @id.setter
+    def id(self, value):
+      self._v_id(value)
+
+
     def _v_position_data(self):
         """
 
@@ -485,6 +503,7 @@ PosCsephb._v_interpolation_type = new_instancemethod(_orbit_des.PosCsephb__v_int
 PosCsephb._v_ephemeris_data_quality = new_instancemethod(_orbit_des.PosCsephb__v_ephemeris_data_quality, None, PosCsephb)
 PosCsephb._v_ephemeris_source = new_instancemethod(_orbit_des.PosCsephb__v_ephemeris_source, None, PosCsephb)
 PosCsephb._v_lagrange_order = new_instancemethod(_orbit_des.PosCsephb__v_lagrange_order, None, PosCsephb)
+PosCsephb._v_id = new_instancemethod(_orbit_des.PosCsephb__v_id, None, PosCsephb)
 PosCsephb._v_position_data = new_instancemethod(_orbit_des.PosCsephb__v_position_data, None, PosCsephb)
 PosCsephb.min_time_split = new_instancemethod(_orbit_des.PosCsephb_min_time_split, None, PosCsephb)
 PosCsephb.des_write = new_instancemethod(_orbit_des.PosCsephb_des_write, None, PosCsephb)
@@ -555,6 +574,24 @@ class AttCsattb(geocal_swig.generic_object.GenericObject):
         the largest time Min_time i * Tstep that is <= Max_time).w 
         """
         _orbit_des.AttCsattb_swiginit(self, _orbit_des.new_AttCsattb(*args))
+
+    def _v_id(self, *args):
+        """
+
+        void GeoCal::AttCsattb::id(const std::string &V)
+
+        """
+        return _orbit_des.AttCsattb__v_id(self, *args)
+
+
+    @property
+    def id(self):
+        return self._v_id()
+
+    @id.setter
+    def id(self, value):
+      self._v_id(value)
+
 
     def _v_is_cf(self):
         """
@@ -799,6 +836,7 @@ class AttCsattb(geocal_swig.generic_object.GenericObject):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_des.delete_AttCsattb
+AttCsattb._v_id = new_instancemethod(_orbit_des.AttCsattb__v_id, None, AttCsattb)
 AttCsattb._v_is_cf = new_instancemethod(_orbit_des.AttCsattb__v_is_cf, None, AttCsattb)
 AttCsattb._v_min_time = new_instancemethod(_orbit_des.AttCsattb__v_min_time, None, AttCsattb)
 AttCsattb._v_max_time = new_instancemethod(_orbit_des.AttCsattb__v_max_time, None, AttCsattb)

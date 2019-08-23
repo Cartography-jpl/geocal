@@ -50,6 +50,7 @@ public:
   %python_attribute_with_set(ephemeris_data_quality, EphemerisDataQuality);
   %python_attribute_with_set(ephemeris_source, EphemerisSource);
   %python_attribute_with_set(lagrange_order, LagrangeOrder);
+  %python_attribute_with_set(id, std::string);
   %python_attribute(position_data, blitz::Array<double, 2>);
   void min_time_split(std::string& OUTPUT, std::string& OUTPUT) const;
   // Synonyms that map to the pynitf names 
@@ -139,6 +140,7 @@ public:
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    AttitudeDataQuality E_quality = ATTITUDE_QUALITY_GOOD,
 	    AttitudeSource E_source = ACTUAL);
+  %python_attribute_with_set(id, std::string);
   %python_attribute(is_cf, bool);
   %python_attribute(min_time, Time);
   %python_attribute(max_time, Time);

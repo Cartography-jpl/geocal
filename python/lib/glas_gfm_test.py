@@ -37,3 +37,33 @@ def test_rip_glas(nitf_sample_rip):
     print(max_diff2)
     # We'll want to beat this down, but for now we need to be within a pixel
     assert max_diff1 < 20.0
+
+@require_msp    
+@require_pynitf
+def test_create_glas(nitf_sample_rip):
+    '''Create a NITF file with GLAS in it, and make sure MSP can read this'''
+    f = pynitf.NitfFile()
+    # Create two images, so we can make sure the DESs aren't duplicated
+    # w/o reason.
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+    for i in range(9):
+        for j in range(10):
+            img[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+    img2 = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=3)
+    for i in range(9):
+        for j in range(10):
+            img2[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img2))
+
+    fin = pynitf.NitfFile(nitf_sample_rip)
+    iseg_index = 1
+    igc = fin.image_segment[iseg_index].glas_gfm.igc()
+    f.image_segment[0].create_glas_gfm(igc)
+    f.image_segment[1].create_glas_gfm(igc)
+    f.write("glas_test.ntf")
+    f2 = NitfFile("glas_test.ntf")
+    print(f2)
+    
+    
+    

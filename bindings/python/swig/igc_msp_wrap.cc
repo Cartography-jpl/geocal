@@ -7494,6 +7494,98 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IgcMsp_sensor_velocity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"IgcMsp_sensor_velocity",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp_sensor_velocity" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "IgcMsp_sensor_velocity" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcMsp_sensor_velocity" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->sensor_velocity((GeoCal::ImageCoordinate const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_IgcMsp__v_family(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
@@ -8217,6 +8309,11 @@ static PyMethodDef SwigMethods[] = {
 		"Return the list of image IDS for the given NITF file.\n"
 		"\n"
 		"If the file has only one \n"
+		""},
+	 { (char *)"IgcMsp_sensor_velocity", _wrap_IgcMsp_sensor_velocity, METH_VARARGS, (char *)"\n"
+		"\n"
+		"blitz::Array< double, 1 > IgcMsp::sensor_velocity(const ImageCoordinate &Ic) const\n"
+		"\n"
 		""},
 	 { (char *)"IgcMsp__v_family", (PyCFunction)_wrap_IgcMsp__v_family, METH_O, (char *)"\n"
 		"\n"

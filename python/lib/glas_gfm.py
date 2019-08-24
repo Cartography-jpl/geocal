@@ -61,6 +61,13 @@ if(have_pynitf):
             else:
                 raise RuntimeError("Unrecognized ImageGroundConnection type")
             # ground_ref_point
+            ttable = igc.ipi.time_table
+            t.day_first_line_image, t.time_first_line_image = geocal_time_to_nitf_date_second_field(ttable.min_time)
+            t.time_image_duration = ttable.max_time - ttable.min_time
+            t.num_lines = igc.number_line
+            t.num_samples = igc.number_sample
+            t.atm_refr_flag = 1
+            t.vel_aber_flag = 1
             res.tre_csexrb = t
             iseg.tre_list.append(res.tre_csexrb)
             f = iseg.nitf_file

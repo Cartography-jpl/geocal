@@ -6,6 +6,7 @@
 #include "ecr.h"
 #include <cstdlib>
 #include <dlfcn.h>
+#include "boost/date_time/posix_time/posix_time.hpp"
 #ifdef HAVE_MSP
 #include "Plugin.h"
 #include "GroundPoint.h"
@@ -13,8 +14,8 @@
 #include "PointExtractionService.h"
 #include "SensorModelService.h"
 #include "SupportDataService.h"
-#include "TerrainService.h"
-#include "TerrainModel.h"
+#include "ImagingGeometryService.h"
+#include "MSPTime.h"
 #endif
 using namespace GeoCal;
 using namespace blitz;
@@ -47,9 +48,15 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, 
 			const Dem& D) const;
+  virtual boost::shared_ptr<GroundCoordinate> 
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, 
+				  double H) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
-    const
-  { throw Exception("Not Implemented"); }
+    const;
+  virtual void cf_look_vector(const ImageCoordinate& Ic, 
+			      CartesianFixedLookVector& Lv,
+			      boost::shared_ptr<CartesianFixed>& P) const;
+  virtual bool has_time() const { return true; }
   virtual Time pixel_time(const ImageCoordinate& Ic) const;
   std::string family() const { return model->getFamily(); }
   std::string version() const { return model->getVersion().version(); }
@@ -65,12 +72,12 @@ public:
   std::string reference_date_time() const { return model->getReferenceDateAndTime(); }
   std::string file_name() const { return fname_;}
   int image_index() const { return image_index_;}
+  blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
 private:
   std::string fname_, plugin_name_, model_name_;
   int image_index_;
   boost::shared_ptr<MSP::SMS::SensorModelService> sms;
   boost::shared_ptr<csm::RasterGM> model;
-  boost::shared_ptr<MSP::TS::TerrainModel> terrain_model;
   mutable MSP::PES::PointExtractionService pes;
   void init();
   IgcMspImp() {}
@@ -144,16 +151,86 @@ try {
   model = boost::dynamic_pointer_cast<csm::RasterGM>(model_raw);
   if(!model)
     throw Exception("Model needs to be a RasterGM model");
-  // Create constant height terrain. Not sure if this is the same as
-  // our SimpleDem or not.
-  MSP::TS::TerrainService terrain_service;
-  MSP::IntersectionUncertainty uncertainty;
-  MSP::TS::TerrainModel *tm;
-  boost::shared_ptr<SimpleDem> sd = boost::dynamic_pointer_cast<SimpleDem>(dem_);
-  if(!sd)
-    throw Exception("Right now, IgcMsp only works with constant DEMs of SimpleDem");
-  terrain_service.createConstantHeightTerrainModel(sd->h(), uncertainty, tm);
-  terrain_model.reset(tm);
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+}
+
+blitz::Array<double, 1> IgcMspImp::sensor_velocity(const ImageCoordinate& Ic)
+  const
+{
+try {
+  csm::EcefVector v = model->getSensorVelocity(csm::ImageCoord(Ic.line,
+							       Ic.sample));
+  blitz::Array<double, 1> res(3);
+  res = v.x, v.y, v.z;
+  return res;
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+}
+
+ImageCoordinate IgcMspImp::image_coordinate(const GroundCoordinate& Gc) const
+{
+try {
+  boost::shared_ptr<CartesianFixed> cf = Gc.convert_to_cf();
+  csm::ImageCoord ic = model->groundToImage(csm::EcefCoord(cf->position[0],
+			cf->position[1], cf->position[2]));
+  return ImageCoordinate(ic.line, ic.samp);
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+}
+
+void IgcMspImp::cf_look_vector(const ImageCoordinate& Ic, 
+			       CartesianFixedLookVector& Lv,
+			       boost::shared_ptr<CartesianFixed>& P) const
+{
+try {
+  csm::EcefLocus lc = model->imageToRemoteImagingLocus(csm::ImageCoord(Ic.line, Ic.sample));
+  P = boost::make_shared<Ecr>(lc.point.x, lc.point.y, lc.point.z);
+  Lv.look_vector[0] = lc.direction.x;
+  Lv.look_vector[1] = lc.direction.y;
+  Lv.look_vector[2] = lc.direction.z;
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+  
+}
+
+
+boost::shared_ptr<GroundCoordinate> 
+IgcMspImp::ground_coordinate_approx_height(const ImageCoordinate& Ic, 
+					double H) const
+{
+try {
+  csm::EcefCoord gp = model->imageToGround(csm::ImageCoord(Ic.line, Ic.sample),
+					    H);
+  return boost::make_shared<Ecr>(gp.x, gp.y, gp.z);
 } catch(const MSP::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
@@ -168,45 +245,27 @@ try {
 boost::shared_ptr<GroundCoordinate> IgcMspImp::ground_coordinate_dem
 (const ImageCoordinate& Ic, const Dem& D) const
 {
-try { 
   const SimpleDem* sd = dynamic_cast<const SimpleDem*>(&D);
   if(!sd)
     throw Exception("Right now, IgcMsp only works with constant DEMs of SimpleDem");
-  boost::shared_ptr<MSP::TS::TerrainModel> tm_to_use = terrain_model;
-  boost::shared_ptr<SimpleDem> curr_dem = boost::dynamic_pointer_cast<SimpleDem>(dem_);
-  if(sd->h() != curr_dem->h()) {
-    MSP::TS::TerrainService terrain_service;
-    MSP::IntersectionUncertainty uncertainty;
-    MSP::TS::TerrainModel *tm;
-    terrain_service.createConstantHeightTerrainModel(sd->h(), uncertainty, tm);
-    tm_to_use.reset(tm);
-  }
-  MSP::GroundPoint gp;
-  std::string terrain_type_used;
-  MSP::ImagePoint ipoint(Ic.line,Ic.sample);
-  ipoint.setImageID(model->getImageIdentifier());
-  pes.intersectTerrain(model.get(), ipoint, *tm_to_use, gp,
-		       terrain_type_used);
-  return boost::make_shared<Ecr>(gp.getX(), gp.getY(), gp.getZ());
-} catch(const MSP::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  return ground_coordinate_approx_height(Ic, sd->h());
 }
 
 Time IgcMspImp::pixel_time(const ImageCoordinate& Ic) const
 {
-try { 
-  csm::ImageCoord ipoint(Ic.line,Ic.sample);
-  double t = model->getImageTime(ipoint);
-  // Not sure yet what time is relative to. Return as j2000 time
-  // This is from start of image
-  return Time::time_j2000(t);
+  using namespace boost::posix_time;
+  using namespace boost::gregorian;
+try {
+  MSP::IGS::ImagingGeometryService is;
+  MSP::Time tm;
+  double second_from_midnight, second_from_start_of_imaging;
+  is.getImageTime(model.get(), MSP::ImagePoint(Ic.line, Ic.sample),
+		  tm, second_from_midnight, second_from_start_of_imaging);
+  date d(tm.getYear(), Jan, 1);
+  d += date_duration(tm.getDate()-1);
+  Time t = Time::parse_time(to_iso_extended_string(d) + "T00:00:00Z") +
+    second_from_midnight;
+  return t;
 } catch(const MSP::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
@@ -607,6 +666,16 @@ std::string IgcMsp::file_name() const
 {
 #ifdef HAVE_MSP
   return boost::dynamic_pointer_cast<IgcMspImp>(igc)->file_name();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+blitz::Array<double, 1> IgcMsp::sensor_velocity(const ImageCoordinate& Ic)
+  const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->sensor_velocity(Ic);
 #else
   throw MspNotAvailableException();
 #endif

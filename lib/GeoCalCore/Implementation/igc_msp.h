@@ -70,6 +70,7 @@ public:
   std::string file_name() const;
   int image_index() const;
   virtual void print(std::ostream& Os) const;
+  blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
 private:
   static void* lib_ptr;
   IgcMsp() {}

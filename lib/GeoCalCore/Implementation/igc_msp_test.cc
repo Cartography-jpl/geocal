@@ -44,6 +44,16 @@ BOOST_AUTO_TEST_CASE(basic)
 		  << GeoCal::distance(*gp1, *gp2) << "\n" << "\n";
       BOOST_CHECK(GeoCal::distance(*gp1, *gp2) < 0.01);
     }
+  for(int i = 0; i < 10; ++i)
+    for(int j = 0; j < 10; ++j) {
+      ImageCoordinate ic(i, j);
+      boost::shared_ptr<GroundCoordinate> gp1 = igc.ground_coordinate(ic);
+      ImageCoordinate ic2 = igc.image_coordinate(*gp1);
+      BOOST_CHECK(fabs(ic.line - ic2.line) < 0.01);
+      BOOST_CHECK(fabs(ic.sample - ic2.sample) < 0.01);
+    }
+  Time texpect = Time::parse_time("2002-12-16T15:16:29.000000Z");
+  BOOST_CHECK(fabs(igc.pixel_time(ImageCoordinate(10,10)) - texpect) < 1e-6);
 }
 
 BOOST_AUTO_TEST_CASE(serialize)

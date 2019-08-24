@@ -25,6 +25,7 @@ public:
   static std::vector<std::string> msp_plugin_list();
   static std::vector<std::string> msp_model_list(const std::string& Plugin);
   static std::vector<std::string> image_ids(const std::string& Fname);
+  blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
   %python_attribute(family, std::string);
   %python_attribute(version, std::string);
   %python_attribute(model_name, std::string);

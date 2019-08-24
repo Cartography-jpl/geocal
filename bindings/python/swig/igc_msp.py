@@ -286,6 +286,15 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
 
     image_ids = staticmethod(image_ids)
 
+    def sensor_velocity(self, Ic):
+        """
+
+        blitz::Array< double, 1 > IgcMsp::sensor_velocity(const ImageCoordinate &Ic) const
+
+        """
+        return _igc_msp.IgcMsp_sensor_velocity(self, Ic)
+
+
     def _v_family(self):
         """
 
@@ -486,6 +495,7 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _igc_msp.delete_IgcMsp
+IgcMsp.sensor_velocity = new_instancemethod(_igc_msp.IgcMsp_sensor_velocity, None, IgcMsp)
 IgcMsp._v_family = new_instancemethod(_igc_msp.IgcMsp__v_family, None, IgcMsp)
 IgcMsp._v_version = new_instancemethod(_igc_msp.IgcMsp__v_version, None, IgcMsp)
 IgcMsp._v_model_name = new_instancemethod(_igc_msp.IgcMsp__v_model_name, None, IgcMsp)

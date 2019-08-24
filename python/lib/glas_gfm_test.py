@@ -17,6 +17,8 @@ def test_rip_glas(nitf_sample_rip):
     igc1 = IgcMsp(nitf_sample_rip, SimpleDem(), iseg_index, "GLAS", "GLAS")
     f = pynitf.NitfFile(nitf_sample_rip)
     glas = f.image_segment[iseg_index].glas_gfm
+    print("Refraction flag: %d" % glas.tre_csexrb.atm_refr_flag)
+    print("Velocity flag: %d" % glas.tre_csexrb.vel_aber_flag)
     igc2 = glas.igc()
     igc3 = IgcMsp(nitf_sample_rip, SimpleDem(), iseg_index, "RSM", "RSM")
     print("Resolution %f m" % igc1.resolution_meter())
@@ -35,7 +37,10 @@ def test_rip_glas(nitf_sample_rip):
             max_diff2 = max(d2, max_diff2)
     print(max_diff1)
     print(max_diff2)
-    # We'll want to beat this down, but for now we need to be within a pixel
+    # Difference here is because the RIP has velocity and refraction turned
+    # off. Our calculation can't easily turn off velocity aberration. We have
+    # other tests that agree submeter when we have files with velocity
+    # aberration.
     assert max_diff1 < 20.0
 
 @require_msp    
@@ -57,19 +62,39 @@ def test_create_glas(nitf_sample_rip):
     f.image_segment.append(pynitf.NitfImageSegment(img2))
 
     fin = pynitf.NitfFile(nitf_sample_rip)
+    with open("fin.txt", "w") as fh:
+        print(fin,file=fh)
     iseg_index = 1
-    igc = fin.image_segment[iseg_index].glas_gfm.igc()
+    igc1 = fin.image_segment[iseg_index].glas_gfm.igc()
     # Temporary
-    igc.cam_des = fin.des_segment[2].des
-    igc.cam_des.id = ""
-    igc.cam_des.numais = "0"
-    igc.cam_des.num_assoc_elem = 0
-    f.image_segment[0].create_glas_gfm(igc)
-    f.image_segment[1].create_glas_gfm(igc)
+    igc1.cam_des = fin.des_segment[2].des
+    igc1.cam_des.id = ""
+    igc1.cam_des.numais = "0"
+    igc1.cam_des.num_assoc_elem = 0
+    f.image_segment[0].create_glas_gfm(igc1)
+    f.image_segment[1].create_glas_gfm(igc1)
     f.write("glas_test.ntf")
     f2 = NitfFile("glas_test.ntf")
-    print(f2)
+    with open("f2.txt", "w") as fh:
+        print(f2,file=fh)
     igc2 = IgcMsp("glas_test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
+    igc3 = f2.image_segment[0].glas_gfm.igc()
+    print("Resolution %f m" % igc1.resolution_meter())
+    print("Resolution %f m" % igc2.resolution_meter())
+    max_diff1 = -1e8
+    max_diff2 = -1e8
+    for i in range(0, igc1.number_line, 20):
+        for j in range (0, igc1.number_sample, 20):
+            ic = ImageCoordinate(i, j)
+            d1 = distance(igc1.ground_coordinate(ic),
+                          igc2.ground_coordinate(ic))
+            d2 = distance(igc1.ground_coordinate(ic),
+                          igc3.ground_coordinate(ic))
+            max_diff1 = max(d1, max_diff1)
+            max_diff2 = max(d2, max_diff2)
+    print(max_diff1)
+    print(max_diff2)
+    assert max_diff1 < 1.0
     
     
     

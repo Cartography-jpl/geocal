@@ -1,9 +1,12 @@
-from geocal_swig import (PosCsephb, AttCsattb, OrbitDes)
+from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, QuaternionCamera,
+                         Quaternion_double, FrameCoordinate)
 try:
     from pynitf import (DesCSEPHB, DesCSATTB, create_nitf_des_structure,
                         register_des_class, NitfImageSegment,
                         add_uuid_des_function)
     have_pynitf = True
+    from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
+                                   geocal_time_to_nitf_date_second_field)
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
@@ -110,6 +113,46 @@ This should be used to set and read the DES values.
             raise RuntimeError("Found more than one possible pos_csephb for image esegment level %d" % lv)
         return possible[0].des.att_csattb
 
+    def _cam_glas_gfm(iseg):
+        lv = iseg.idlvl
+        f = iseg.nitf_file
+        if f is None:
+            raise RuntimeError("Need to have nitf_file set for image segment level %d" % lv)
+        possible = [d for d in f.des_segment if
+                    d.subheader.desid == "CSSFAB" and
+                    (d.des.user_subheader.numais == "ALL" or
+                     lv in d.des.user_subheader.aisdlvl)]
+        if(len(possible) == 0):
+            return None
+        if(len(possible) > 1):
+            raise RuntimeError("Found more than one possible cam_glas_gfm for image segment level %d" % lv)
+        # Need to fill this out
+        d = possible[0].des
+        if(d.num_fl_pts != 1):
+            raise RuntimeError("We don't currently support multiple focal lengths")
+        cam = QuaternionCamera(Quaternion_double(1,0,0,0),
+                               1, 256, 0.00765 / 128, 0.00765 / 128,
+                               d.foc_length[0],
+                               FrameCoordinate(0, 128),
+                               QuaternionCamera.LINE_IS_Y,
+                               QuaternionCamera.INCREASE_IS_NEGATIVE,
+                               QuaternionCamera.INCREASE_IS_POSITIVE)
+        # This is extra metadata that we don't normally have in camera.
+        # If we create a GlasGfm camera, we may put this into there.
+        cam.band_type = d.band_type
+        cam.band_wavelength = d.band_wavelength
+        cam.band_index = list(d.band_index)
+        cam.irepband = list(d.irepband)
+        cam.isubcat = list(d.isubcat)
+        cam.foc_length_time = nitf_date_second_field_to_geocal_time(d.foc_length_date, d.foc_length_time[0])
+        cam.id = ""
+        print(d)
+        return cam
+
+    def _cam_glas_gfm_set(iseg, cam):
+        pass
+    
+    
     def _orbit_des(iseg):
         if(iseg.pos_csephb is None or iseg.att_csattb is None):
             return None
@@ -118,6 +161,7 @@ This should be used to set and read the DES values.
     NitfImageSegment.pos_csephb = property(_pos_csephb)
     NitfImageSegment.att_csattb = property(_att_csattb)
     NitfImageSegment.orbit_des = property(_orbit_des)
+    NitfImageSegment.cam_glas_gfm = property(_cam_glas_gfm, _cam_glas_gfm)
     
 if(have_pynitf):
     __all__ = ["DesCSEPHB_geocal","DesCSATTB_geocal",]

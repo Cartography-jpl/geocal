@@ -75,3 +75,10 @@ def test_attcsattb(isolated_dir):
     #                    orb2.position_cf(orb2.min_time+t)) < 0.01
         
     
+@require_pynitf
+def test_cam_glass_gfm(nitf_sample_rip):
+    # Index for the image segment that has GLAS data.
+    iseg_index = 1 
+    f = pynitf.NitfFile(nitf_sample_rip)
+    cam = f.image_segment[iseg_index].cam_glas_gfm
+    print(cam)

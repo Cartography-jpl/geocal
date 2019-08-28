@@ -27,16 +27,6 @@ if(have_pynitf):
             else:
                 self.des = []
 
-        def _find_des(f, id):
-            if(id == ""):
-                return None
-            for dseg in f.des_segment:
-                if(hasattr(dseg.des, "id") and
-                   dseg.des.id == id):
-                    return dseg.des
-            return None
-            
-
         def create(iseg, igc):
             '''Create a GlasGfm from a igc, and put into the given
             NitfImageSegment. We add DES data to the file f as needed.
@@ -72,34 +62,13 @@ if(have_pynitf):
             iseg.tre_list.append(res.tre_csexrb)
             f = iseg.nitf_file
 
-            # Briefly, fake camera stuff just so we can check everything.
-            # We'll fix this shortly.
-            d1 = igc.cam_des
-            d = GlasGfm._find_des(f, d1.id)
-            if(d is None):
-                d = d1
-                f.des_segment.append(pynitf.NitfDesSegment(des=d))
-            res.des.append(d)
-
-            # Get position and attitude DES if already in file, or create
-            pos_csephb = igc.ipi.orbit.pos_csephb
-            att_csattb = igc.ipi.orbit.att_csattb
-            d = GlasGfm._find_des(f, pos_csephb.id)
-            if(d is None):
-                d = DesCSEPHB_geocal()
-                d.pos_csephb = pos_csephb
-                d.generate_uuid_if_needed()
-                pos_csephb.id = d.id
-                f.des_segment.append(pynitf.NitfDesSegment(des=d))
-            res.des.append(d)
-            d = GlasGfm._find_des(f, att_csattb.id)
-            if(d is None):
-                d = DesCSATTB_geocal()
-                d.att_csattb = att_csattb
-                d.generate_uuid_if_needed()
-                att_csattb.id = d.id
-                f.des_segment.append(pynitf.NitfDesSegment(des=d))
-            res.des.append(d)
+            # Get position, attitude and camera DES if already in file,
+            # or create 
+            iseg.orbit_des = igc.ipi.orbit
+            iseg.camera_glas_gfm = igc.ipi.camera
+            res.des.append(f.find_des_by_uuid(igc.ipi.orbit.pos_csephb.id))
+            res.des.append(f.find_des_by_uuid(igc.ipi.orbit.att_csattb.id))
+            res.des.append(f.find_des_by_uuid(igc.ipi.camera.id))
             
             # Fake CSCSDB. We copy over one we got from the RIP. This will
             # be replaced with real covariance. I have no idea what most of
@@ -216,17 +185,15 @@ if(have_pynitf):
             cscsdb.data_to_copy = b'07010101.0001.0000000.00000000.000000+1.00000000000000E+03020101.0001.0000000.00000000.000000+5.00000000000000E+02030101.0001.0000000.00000000.000000+5.00000000000000E+02040101.0001.0000000.00000000.000000+5.00000000000000E+02050101.0001.0000000.00000000.000000+5.00000000000000E+02060101.0001.0000000.00000000.000000+5.00000000000000E+02070101.0001.0000000.00000000.000000+1.00000000000000E+020000000000'
             # Use fixed ID for being able to fake this.
             cscsdb.id = "756a9c88-c536-11e9-b453-782bcb6d0983"
-            d = GlasGfm._find_des(f, cscsdb.id)
+            d = f.find_des_by_uuid(cscsdb.id)
             if(d is None):
                 f.des_segment.append(pynitf.NitfDesSegment(des=cscsdb))
                 d = cscsdb
             res.des.append(d)
 
             # Connect the various pieces together with associations
-            print(res.des)
             for d in res.des:
                 d.add_display_level(iseg.idlvl)
-                print(d)
                 d.add_assoc_elem(res.tre_csexrb)
                 res.tre_csexrb.add_assoc_elem(d)
                 for d2 in res.des:
@@ -252,22 +219,10 @@ if(have_pynitf):
         @property
         def camera(self):
             '''Return the camera'''
-            # Placeholder
-            cam_des = self.cssfab
-            if(cam_des.num_fl_pts != 1):
-                raise RuntimeError("We don't currently support time dependent flocal lengths")
-
-            if False:
-                return SimpleCamera(0,0,0, cam_des.foc_length[0], -0.00765 / 128,
-                                    -0.00765 / 128, 1,
-                                    self.tre_csexrb.num_samples)
-            return QuaternionCamera(Quaternion_double(1,0,0,0),
-                                    1, 256, 0.00765 / 128, 0.00765 / 128,
-                                    cam_des.foc_length[0],
-                                    FrameCoordinate(0, 128),
-                                    QuaternionCamera.LINE_IS_Y,
-                                    QuaternionCamera.INCREASE_IS_NEGATIVE,
-                                    QuaternionCamera.INCREASE_IS_POSITIVE)
+            d = self.find_one_des("CSSFAB")
+            if(d is None):
+                return None
+            return d.camera
 
         @property
         def time_table(self):
@@ -298,12 +253,6 @@ if(have_pynitf):
                 return None
             return d.pos_csephb
 
-        @property
-        def cssfab(self):
-            '''Return CSSFAB or None. Will trigger an error if we
-            have more than one DES that matches.'''
-            return self.find_one_des("CSSFAB")
-        
         @property
         def att_csattb(self):
             '''Return AttCsattb or None. Will trigger an error if we

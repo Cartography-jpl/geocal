@@ -66,13 +66,9 @@ def test_create_glas(nitf_sample_rip):
         print(fin,file=fh)
     iseg_index = 1
     igc1 = fin.image_segment[iseg_index].glas_gfm.igc()
-    # Temporary
-    igc1.cam_des = fin.des_segment[2].des
-    igc1.cam_des.id = ""
-    igc1.cam_des.numais = "0"
-    igc1.cam_des.num_assoc_elem = 0
     f.image_segment[0].create_glas_gfm(igc1)
     f.image_segment[1].create_glas_gfm(igc1)
+    print(f)
     f.write("glas_test.ntf")
     f2 = NitfFile("glas_test.ntf")
     with open("f2.txt", "w") as fh:

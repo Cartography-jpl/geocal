@@ -1,9 +1,10 @@
-from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, QuaternionCamera,
+from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
                          Quaternion_double, FrameCoordinate)
 try:
     from pynitf import (DesCSEPHB, DesCSATTB, create_nitf_des_structure,
+                        DesCSSFAB,
                         register_des_class, NitfImageSegment,
-                        add_uuid_des_function)
+                        add_uuid_des_function, NitfFile, NitfDesSegment)
     have_pynitf = True
     from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
                                    geocal_time_to_nitf_date_second_field)
@@ -98,6 +99,19 @@ This should be used to set and read the DES values.
             raise RuntimeError("Found more than one possible pos_csephb for image esegment level %d" % lv)
         return possible[0].des.pos_csephb
 
+    def _pos_csephb_set(iseg, pos_csephb):
+        f = iseg.nitf_file
+        if(f is None):
+            raise RuntimeError("Need to add NitfImageSegment to a NitfFile before we can add a pos_csephb to it")
+        d = f.find_des_by_uuid(pos_csephb.id)
+        if(d is None):
+            d = DesCSEPHB_geocal()
+            d.pos_csephb = pos_csephb
+            d.generate_uuid_if_needed()
+            pos_csephb.id = d.id
+            f.des_segment.append(NitfDesSegment(des=d))
+        d.add_display_level(iseg.idlvl)
+            
     def _att_csattb(iseg):
         lv = iseg.idlvl
         f = iseg.nitf_file
@@ -113,7 +127,62 @@ This should be used to set and read the DES values.
             raise RuntimeError("Found more than one possible pos_csephb for image esegment level %d" % lv)
         return possible[0].des.att_csattb
 
-    def _cam_glas_gfm(iseg):
+    def _att_csattb_set(iseg, att_csattb):
+        f = iseg.nitf_file
+        if(f is None):
+            raise RuntimeError("Need to add NitfImageSegment to a NitfFile before we can add a att_csattb to it")
+        d = f.find_des_by_uuid(att_csattb.id)
+        if(d is None):
+            d = DesCSATTB_geocal()
+            d.att_csattb = att_csattb
+            d.generate_uuid_if_needed()
+            att_csattb.id = d.id
+            f.des_segment.append(NitfDesSegment(des=d))
+        d.add_display_level(iseg.idlvl)
+
+    def _camera_cssfab(d):
+        if(d.num_fl_pts != 1):
+            raise RuntimeError("We don't currently support multiple focal lengths")
+        cam = GlasGfmCamera()
+        cam.band_type = d.band_type
+        cam.band_wavelength = d.band_wavelength
+        cam.band_index = list(d.band_index)
+        cam.irepband = list(d.irepband)
+        cam.isubcat = list(d.isubcat)
+        cam.focal_length_time = nitf_date_second_field_to_geocal_time(d.foc_length_date, d.foc_length_time[0])
+        cam.delta_sample_pair = d.delta_smpl_pair
+        cam.id = ""
+        return cam
+
+    def _camera_cssfab_set(d, cam):
+        d.sensor_type = cam.sensor_type
+        d.band_type = cam.band_type
+        d.band_wavelength = cam.band_wavelength
+        d.n_bands = len(cam.band_index)
+        for i in range(d.n_bands):
+            d.band_index[i] = cam.band_index[i]
+            d.irepband[i] =  cam.irepband[i]
+            d.isubcat[i] = cam.isubcat[i]
+        d.num_fl_pts = 1
+        d.fl_interp = 1
+        d.foc_length[0] = cam.focal_length
+        d.ppoff_x = cam.ppoff[0]
+        d.ppoff_y = cam.ppoff[1]
+        d.ppoff_z = cam.ppoff[2]
+        d.angoff_x = cam.angoff[0]
+        d.angoff_y = cam.angoff[1]
+        d.angoff_z = cam.angoff[2]
+        d.smpl_num_first = cam.sample_number_first
+        d.delta_smpl_pair = cam.delta_sample_pair
+        d.num_fa_pairs = cam.field_alignment.shape[0]
+        for i in range(d.num_fa_pairs):
+            d.start_falign_x[i] = cam.field_alignment[i, 0]
+            d.start_falign_y[i] = cam.field_alignment[i, 1]
+            d.end_falign_x[i] = cam.field_alignment[i, 2]
+            d.end_falign_y[i] = cam.field_alignment[i, 3]
+        d.foc_length_date, d.foc_length_time[0] = geocal_time_to_nitf_date_second_field(cam.focal_length_time)
+
+    def _camera_glas_gfm(iseg):
         lv = iseg.idlvl
         f = iseg.nitf_file
         if f is None:
@@ -125,43 +194,52 @@ This should be used to set and read the DES values.
         if(len(possible) == 0):
             return None
         if(len(possible) > 1):
-            raise RuntimeError("Found more than one possible cam_glas_gfm for image segment level %d" % lv)
-        # Need to fill this out
+            raise RuntimeError("Found more than one possible camera_glas_gfm for image segment level %d" % lv)
         d = possible[0].des
-        if(d.num_fl_pts != 1):
-            raise RuntimeError("We don't currently support multiple focal lengths")
-        cam = QuaternionCamera(Quaternion_double(1,0,0,0),
-                               1, 256, 0.00765 / 128, 0.00765 / 128,
-                               d.foc_length[0],
-                               FrameCoordinate(0, 128),
-                               QuaternionCamera.LINE_IS_Y,
-                               QuaternionCamera.INCREASE_IS_NEGATIVE,
-                               QuaternionCamera.INCREASE_IS_POSITIVE)
-        # This is extra metadata that we don't normally have in camera.
-        # If we create a GlasGfm camera, we may put this into there.
-        cam.band_type = d.band_type
-        cam.band_wavelength = d.band_wavelength
-        cam.band_index = list(d.band_index)
-        cam.irepband = list(d.irepband)
-        cam.isubcat = list(d.isubcat)
-        cam.foc_length_time = nitf_date_second_field_to_geocal_time(d.foc_length_date, d.foc_length_time[0])
-        cam.id = ""
-        print(d)
-        return cam
+        return d.camera
 
-    def _cam_glas_gfm_set(iseg, cam):
-        pass
-    
+    def _camera_glas_gfm_set(iseg, cam):
+        f = iseg.nitf_file
+        if(f is None):
+            raise RuntimeError("Need to add NitfImageSegment to a NitfFile before we can add a camera_glas_gfm to it")
+        d = f.find_des_by_uuid(cam.id)
+        if(d is None):
+            d = DesCSSFAB()
+            d.camera = cam
+            d.generate_uuid_if_needed()
+            cam.id = d.id
+            f.des_segment.append(NitfDesSegment(des=d))
+        d.add_display_level(iseg.idlvl)
     
     def _orbit_des(iseg):
         if(iseg.pos_csephb is None or iseg.att_csattb is None):
             return None
         return OrbitDes(iseg.pos_csephb, iseg.att_csattb)
+
+    def _orbit_des_set(iseg, orb):
+        iseg.pos_csephb = orb.pos_csephb
+        iseg.att_csattb = orb.att_csattb
     
-    NitfImageSegment.pos_csephb = property(_pos_csephb)
-    NitfImageSegment.att_csattb = property(_att_csattb)
-    NitfImageSegment.orbit_des = property(_orbit_des)
-    NitfImageSegment.cam_glas_gfm = property(_cam_glas_gfm, _cam_glas_gfm)
+    def _find_des_by_uuid(f, id):
+        '''Find the DES that has a ID with the given value. This should be a
+        unique value, so we should have at most one. Return None if we
+        don't find it.
+        '''
+        
+        if(id == ""):
+            return None
+        for dseg in f.des_segment:
+            if(hasattr(dseg.des, "id") and
+               dseg.des.id == id):
+                return dseg.des
+        return None
+    
+    NitfFile.find_des_by_uuid = _find_des_by_uuid
+    NitfImageSegment.pos_csephb = property(_pos_csephb, _pos_csephb_set)
+    NitfImageSegment.att_csattb = property(_att_csattb, _att_csattb_set)
+    NitfImageSegment.orbit_des = property(_orbit_des, _orbit_des_set)
+    NitfImageSegment.camera_glas_gfm = property(_camera_glas_gfm, _camera_glas_gfm_set)
+    DesCSSFAB.camera = property(_camera_cssfab, _camera_cssfab_set)
     
 if(have_pynitf):
     __all__ = ["DesCSEPHB_geocal","DesCSATTB_geocal",]

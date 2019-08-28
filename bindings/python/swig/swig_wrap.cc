@@ -110,6 +110,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_pan_sharpen)(void);
   INIT_TYPE INIT_FUNC(_scale_image)(void);
   INIT_TYPE INIT_FUNC(_sensrb_camera)(void);
+  INIT_TYPE INIT_FUNC(_glas_gfm_camera)(void);
   INIT_TYPE INIT_FUNC(_apply_mask)(void);
   INIT_TYPE INIT_FUNC(_rpc_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_ipi_image_ground_connection)(void);
@@ -323,6 +324,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_pan_sharpen", INIT_FUNC(_pan_sharpen));
   INIT_MODULE(module, "_scale_image", INIT_FUNC(_scale_image));
   INIT_MODULE(module, "_sensrb_camera", INIT_FUNC(_sensrb_camera));
+  INIT_MODULE(module, "_glas_gfm_camera", INIT_FUNC(_glas_gfm_camera));
   INIT_MODULE(module, "_apply_mask", INIT_FUNC(_apply_mask));
   INIT_MODULE(module, "_rpc_image_ground_connection", INIT_FUNC(_rpc_image_ground_connection));
   INIT_MODULE(module, "_ipi_image_ground_connection", INIT_FUNC(_ipi_image_ground_connection));

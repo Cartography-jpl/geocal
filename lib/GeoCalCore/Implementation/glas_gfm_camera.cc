@@ -118,3 +118,23 @@ ScLookVectorWithDerivative GlasGfmCamera::sc_look_vector_with_derivative
   return ScLookVectorWithDerivative(frame_to_sc_with_derivative() * lv *
 				    conj(frame_to_sc_with_derivative()));
 }
+
+//-----------------------------------------------------------------------
+/// Angular sensor frame offset. This is in radians, and is the order
+/// "xyz".
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 1> GlasGfmCamera::angoff() const
+{
+  blitz::Array<double, 1> res(3);
+  quat_to_euler(frame_to_sc(), res(2), res(1), res(0));
+  return res;
+}
+
+void GlasGfmCamera::angoff(const blitz::Array<double, 1>& V)
+{
+  if(V.rows() != 3)
+    throw Exception("angoff must be size 3");
+  frame_to_sc(quat_rot("zyx", V(2), V(1), V(0)));
+  notify_update();
+}

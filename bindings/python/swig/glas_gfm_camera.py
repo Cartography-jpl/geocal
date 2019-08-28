@@ -407,18 +407,22 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
         return self._v_ppoff()
 
 
-    def _v_angoff(self):
+    def _v_angoff(self, *args):
         """
 
-        blitz::Array<double, 1> GeoCal::GlasGfmCamera::angoff() const
-        Angular sensor frame offset. 
+        void GlasGfmCamera::angoff(const blitz::Array< double, 1 > &V)
+
         """
-        return _glas_gfm_camera.GlasGfmCamera__v_angoff(self)
+        return _glas_gfm_camera.GlasGfmCamera__v_angoff(self, *args)
 
 
     @property
     def angoff(self):
         return self._v_angoff()
+
+    @angoff.setter
+    def angoff(self, value):
+      self._v_angoff(value)
 
 
     def _v_sample_number_first(self, *args):

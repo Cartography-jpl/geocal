@@ -8191,18 +8191,16 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::GlasGfmCamera *arg1 = (GeoCal::GlasGfmCamera *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::GlasGfmCamera const > tempshared1 ;
   boost::shared_ptr< GeoCal::GlasGfmCamera const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
   SwigValueWrapper< blitz::Array< double,1 > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, 0 |  0 , &newmem);
@@ -8252,6 +8250,90 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff(PyObject *SWIGUNUSEDPARM(self
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::GlasGfmCamera *arg1 = (GeoCal::GlasGfmCamera *) 0 ;
+  blitz::Array< double,1 > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GlasGfmCamera > tempshared1 ;
+  boost::shared_ptr< GeoCal::GlasGfmCamera > *smartarg1 = 0 ;
+  blitz::Array< double,1 > a2 ;
+  PythonObject numpy2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GlasGfmCamera__v_angoff" "', argument " "1"" of type '" "GeoCal::GlasGfmCamera *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::GlasGfmCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::GlasGfmCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'GlasGfmCamera__v_angoff', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'GlasGfmCamera__v_angoff', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 1>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    try {
+      (arg1)->angoff((blitz::Array< double,1 > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"GlasGfmCamera__v_angoff",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_GlasGfmCamera__v_angoff__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_GlasGfmCamera__v_angoff__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'GlasGfmCamera__v_angoff'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::GlasGfmCamera::angoff() const\n"
+    "    GeoCal::GlasGfmCamera::angoff(blitz::Array< double,1 > const &)\n");
+  return 0;
 }
 
 
@@ -8767,10 +8849,10 @@ static PyMethodDef SwigMethods[] = {
 		"In meters. Not sure about the coordinate system, we'll need to track\n"
 		"this down if we add support for nonzero values here. \n"
 		""},
-	 { (char *)"GlasGfmCamera__v_angoff", (PyCFunction)_wrap_GlasGfmCamera__v_angoff, METH_O, (char *)"\n"
+	 { (char *)"GlasGfmCamera__v_angoff", _wrap_GlasGfmCamera__v_angoff, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array<double, 1> GeoCal::GlasGfmCamera::angoff() const\n"
-		"Angular sensor frame offset. \n"
+		"void GlasGfmCamera::angoff(const blitz::Array< double, 1 > &V)\n"
+		"\n"
 		""},
 	 { (char *)"GlasGfmCamera__v_sample_number_first", _wrap_GlasGfmCamera__v_sample_number_first, METH_VARARGS, (char *)"\n"
 		"\n"

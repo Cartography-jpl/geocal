@@ -150,8 +150,21 @@ This should be used to set and read the DES values.
         cam.irepband = list(d.irepband)
         cam.isubcat = list(d.isubcat)
         cam.focal_length_time = nitf_date_second_field_to_geocal_time(d.foc_length_date, d.foc_length_time[0])
+        cam.focal_length = d.foc_length[0]
+        # We currently can't set position offset. We could add this if
+        # this becomes an issue, but the current geocal code doesn't
+        # support a position offset in a camera model
+        #cam.ppoff = [d.ppoff_x, d.ppoff_y, d.ppoff_z]
+        cam.angoff = [d.angoff_x, d.angoff_y, d.angoff_z]
         cam.sample_number_first = d.smpl_num_first
         cam.delta_sample_pair = d.delta_smpl_pair
+        fa = np.empty((d.num_fa_pairs, 4))
+        for i in range(d.num_fa_pairs):
+            fa[i,0] = d.start_falign_x[i]
+            fa[i,1] = d.start_falign_y[i]
+            fa[i,2] = d.end_falign_x[i]
+            fa[i,3] = d.end_falign_y[i]
+        cam.field_alignment = fa
         cam.id = ""
         return cam
 
@@ -164,8 +177,9 @@ This should be used to set and read the DES values.
             d.band_index[i] = cam.band_index[i]
             d.irepband[i] =  cam.irepband[i]
             d.isubcat[i] = cam.isubcat[i]
-        d.num_fl_pts = 1
         d.fl_interp = 1
+        d.num_fl_pts = 1
+        d.foc_length_date, d.foc_length_time[0] = geocal_time_to_nitf_date_second_field(cam.focal_length_time)
         d.foc_length[0] = cam.focal_length
         d.ppoff_x = cam.ppoff[0]
         d.ppoff_y = cam.ppoff[1]
@@ -181,7 +195,6 @@ This should be used to set and read the DES values.
             d.start_falign_y[i] = cam.field_alignment[i, 1]
             d.end_falign_x[i] = cam.field_alignment[i, 2]
             d.end_falign_y[i] = cam.field_alignment[i, 3]
-        d.foc_length_date, d.foc_length_time[0] = geocal_time_to_nitf_date_second_field(cam.focal_length_time)
 
     def _camera_glas_gfm(iseg):
         lv = iseg.idlvl

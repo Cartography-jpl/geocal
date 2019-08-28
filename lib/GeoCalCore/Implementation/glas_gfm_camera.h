@@ -108,10 +108,12 @@ public:
 /// Set frame to spacecraft quaternion.
 //-----------------------------------------------------------------------
 
-  void frame_to_sc_with_derivative(const boost::math::quaternion<AutoDerivative<double> >& frame_to_sc_q) 
+  void frame_to_sc_with_derivative
+  (const boost::math::quaternion<AutoDerivative<double> >& frame_to_sc_q) 
   { frame_to_sc_ = frame_to_sc_q;
     frame_to_sc_nd_ = value(frame_to_sc_);
-    notify_update(); }
+    notify_update();
+  }
 
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
@@ -140,37 +142,45 @@ public:
 //-----------------------------------------------------------------------
 
   std::string band_type() const { return band_type_;}
-  void band_type(const std::string& V) { band_type_ = V; }
+  void band_type(const std::string& V) { band_type_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Band wavelength. This is in micrometers
 //-----------------------------------------------------------------------
+
   double band_wavelength() const { return band_wavelength_;}
-  void band_wavelength(double V) {band_wavelength_ = V;}
+  void band_wavelength(double V) {band_wavelength_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Band index
 //-----------------------------------------------------------------------
+
   const std::vector<int>& band_index() const {return band_index_;}
-  void band_index(const std::vector<int>& V) {band_index_ = V;}
+  void band_index(const std::vector<int>& V) {band_index_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Band-Specific Representation of the nth Band
 //-----------------------------------------------------------------------
+
   const std::vector<std::string>& irepband() const {return irepband_;}
-  void irepband(const std::vector<std::string>& V) {irepband_ = V;}
+  void irepband(const std::vector<std::string>& V)
+  {irepband_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Band-Specific Representation of the nth Band
 //-----------------------------------------------------------------------
+
   const std::vector<std::string>& isubcat() const {return isubcat_;}
-  void isubcat(const std::vector<std::string>& V) {isubcat_ = V;}
+  void isubcat(const std::vector<std::string>& V)
+  {isubcat_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Focal length time.
 //-----------------------------------------------------------------------
+
   const Time& focal_length_time() const { return focal_length_time_;}
-  void focal_length_time(const Time& V) {focal_length_time_ = V; }
+  void focal_length_time(const Time& V)
+  {focal_length_time_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Primary mirror offset. In meters. Not sure about the coordinate
@@ -185,37 +195,34 @@ public:
     return res;
   }
 
-//-----------------------------------------------------------------------
-/// Angular sensor frame offset
-//-----------------------------------------------------------------------
-
-  blitz::Array<double, 1> angoff() const
-  {
-    blitz::Array<double, 1> res(3);
-    res = 0;
-    return res;
-  }
+  blitz::Array<double, 1> angoff() const;
+  void angoff(const blitz::Array<double, 1>& V);
 
 //-----------------------------------------------------------------------
 /// Sample Number first
 //-----------------------------------------------------------------------
+
   double sample_number_first() const {return sample_number_first_; }
-  void sample_number_first(double V) {sample_number_first_ = V;}
+  void sample_number_first(double V)
+  { sample_number_first_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Delta Sample Pair
 //-----------------------------------------------------------------------
+
   double delta_sample_pair() const {return delta_sample_pair_; }
-  void delta_sample_pair(double V) {delta_sample_pair_ = V; }
+  void delta_sample_pair(double V)
+  {delta_sample_pair_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Field Alignment. This is n x 4. The columns are start_x, start_y,
 /// end_x, end_y.
 //-----------------------------------------------------------------------
+
   const blitz::Array<double, 2>& field_alignment() const
   {return field_alignment_;}
   void field_alignment(const blitz::Array<double, 2>& V)
-  { field_alignment_ = V;}
+  { field_alignment_ = V; notify_update();}
   
 //-----------------------------------------------------------------------
 /// The UUID for the DES that contains this object, if any. This is an
@@ -223,7 +230,7 @@ public:
 //-----------------------------------------------------------------------
 
   std::string id() const { return id_;}
-  void id(const std::string& V) { id_ = V;}
+  void id(const std::string& V) { id_ = V; notify_update();}
 private:
   AutoDerivative<double> focal_length_;	
 				// Focal length, in mm.

@@ -150,6 +150,7 @@ This should be used to set and read the DES values.
         cam.irepband = list(d.irepband)
         cam.isubcat = list(d.isubcat)
         cam.focal_length_time = nitf_date_second_field_to_geocal_time(d.foc_length_date, d.foc_length_time[0])
+        cam.sample_number_first = d.smpl_num_first
         cam.delta_sample_pair = d.delta_smpl_pair
         cam.id = ""
         return cam

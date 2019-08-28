@@ -180,21 +180,17 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.quaternion_camera
+import geocal_swig.camera
 import geocal_swig.generic_object
 import geocal_swig.observer
-import geocal_swig.camera
 import geocal_swig.with_parameter
-class GlasGfmCamera(geocal_swig.quaternion_camera.QuaternionCamera):
+class GlasGfmCamera(geocal_swig.camera.Camera):
     """
 
-    This is a QuaternionCamera with some extra metadata the pointing
-    described by a field angle map.
+    This is a Camera with some extra metadata the pointing described by a
+    field angle map.
 
     This is represented by the NITF DES CSSFAB.
-
-    We may want to make this a different class than QuaternionCamera,
-    there are a number of differences here.
 
     For some of these lower level objects we have directly read the TRE or
     DES (see for example PosCsephb). We haven't currently done this with
@@ -217,6 +213,42 @@ class GlasGfmCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
         """
         _glas_gfm_camera.GlasGfmCamera_swiginit(self, _glas_gfm_camera.new_GlasGfmCamera())
+
+    def _v_focal_length(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::focal_length(double V)
+        Set focal length, in meters (so not mm like QuaternionCamera) 
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_focal_length(self, *args)
+
+
+    @property
+    def focal_length(self):
+        return self._v_focal_length()
+
+    @focal_length.setter
+    def focal_length(self, value):
+      self._v_focal_length(value)
+
+
+    def _v_focal_length_with_derivative(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::focal_length_with_derivative(const AutoDerivative< double > &V)
+        Set focal length, in meters (so not mm like QuaternionCamera) 
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_focal_length_with_derivative(self, *args)
+
+
+    @property
+    def focal_length_with_derivative(self):
+        return self._v_focal_length_with_derivative()
+
+    @focal_length_with_derivative.setter
+    def focal_length_with_derivative(self, value):
+      self._v_focal_length_with_derivative(value)
+
 
     def _v_id(self, *args):
         """
@@ -362,7 +394,10 @@ class GlasGfmCamera(geocal_swig.quaternion_camera.QuaternionCamera):
         """
 
         blitz::Array<double, 1> GeoCal::GlasGfmCamera::ppoff() const
-        Primary mirror offset. 
+        Primary mirror offset.
+
+        In meters. Not sure about the coordinate system, we'll need to track
+        this down if we add support for nonzero values here. 
         """
         return _glas_gfm_camera.GlasGfmCamera__v_ppoff(self)
 
@@ -444,6 +479,8 @@ class GlasGfmCamera(geocal_swig.quaternion_camera.QuaternionCamera):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _glas_gfm_camera.delete_GlasGfmCamera
+GlasGfmCamera._v_focal_length = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_focal_length, None, GlasGfmCamera)
+GlasGfmCamera._v_focal_length_with_derivative = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_focal_length_with_derivative, None, GlasGfmCamera)
 GlasGfmCamera._v_id = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_id, None, GlasGfmCamera)
 GlasGfmCamera._v_sensor_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_sensor_type, None, GlasGfmCamera)
 GlasGfmCamera._v_band_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_band_type, None, GlasGfmCamera)

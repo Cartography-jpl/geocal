@@ -68,6 +68,46 @@ BOOST_AUTO_TEST_CASE(basic_test)
         (qcam.sc_look_vector_with_derivative(fc4, 0),0).sample.value()
 		     - fc4.sample.value()) < 1e-6);
   }
+
+  // Test handling of extended camera for image coordinates outside of
+  // the actual camera range.
+  FrameCoordinate fext(-5, 128);
+  BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fext, 0),0).line
+		   - fext.line) < 1e-6);
+  BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fext, 0),0).sample
+		   - fext.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fext, 0),0).line
+		   - fext.line) < 1e-6);
+  BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fext, 0),0).sample
+		   - fext.sample) < 1e-6);
+  fext = FrameCoordinate(5, 128);
+  BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fext, 0),0).line
+		   - fext.line) < 1e-6);
+  BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fext, 0),0).sample
+		   - fext.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fext, 0),0).line
+		   - fext.line) < 1e-6);
+  BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fext, 0),0).sample
+		   - fext.sample) < 1e-6);
+  fext = FrameCoordinate(0, -10);
+  BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fext, 0),0).line
+		   - fext.line) < 1e-6);
+  BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fext, 0),0).sample
+		   - fext.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fext, 0),0).line
+		   - fext.line) < 1e-6);
+  BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fext, 0),0).sample
+		   - fext.sample) < 1e-6);
+  fext = FrameCoordinate(0, 256 + 10);
+  BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fext, 0),0).line
+		   - fext.line) < 1e-6);
+  BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fext, 0),0).sample
+		   - fext.sample) < 1e-6);
+  BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fext, 0),0).line
+		   - fext.line) < 1e-6);
+  BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fext, 0),0).sample
+		   - fext.sample) < 1e-6);
+  
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

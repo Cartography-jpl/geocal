@@ -9,6 +9,8 @@
 #include <blitz/array.h>
 
 namespace GeoCal {
+  // Forward declaration, used internally by GlasGfmCamera
+  class GlasGfmCameraModelImp;
 /****************************************************************//**
   This is a Camera with some extra metadata the pointing described by
   a field angle map. This is represented by the NITF DES CSSFAB.
@@ -232,6 +234,8 @@ public:
   std::string id() const { return id_;}
   void id(const std::string& V) { id_ = V; notify_update();}
 private:
+  boost::shared_ptr<GlasGfmCameraModelImp> model_;
+  void init_model();
   AutoDerivative<double> focal_length_;	
 				// Focal length, in mm.
   int nline_;			// Number of lines in camera.

@@ -17,6 +17,7 @@ template<class Archive>
 void GlasGfmCamera::load(Archive& Ar, const unsigned int version)
 {
   frame_to_sc_nd_ = value(frame_to_sc_);
+  init_model();
 }
 
 template<class Archive>
@@ -41,7 +42,95 @@ void GlasGfmCamera::serialize(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(GlasGfmCamera);
 #endif
 
-  
+// We have three different ways of modeling a camera in GlasGfm.
+// The differences are just in how we go from FrameCoordinate to xp,
+// yp and back. Abstract this out so we can cleanly separate the three
+// models
+namespace GeoCal {
+
+class GlasGfmCameraModelImp : public Observer<Camera> {
+public:
+  GlasGfmCameraModelImp(GlasGfmCamera& Cam)
+    : cam(Cam), cache_stale(true)
+  { Cam.add_observer(*this); }
+  virtual ~GlasGfmCameraModelImp() {}
+  virtual void fc_to_xy(const FrameCoordinate& F, double &X, double& Y)
+    const = 0;
+  virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
+ 			AutoDerivative<double> &X,
+ 			AutoDerivative<double>& Y) const = 0;
+  virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const = 0;
+  virtual void xy_to_fc(const AutoDerivative<double>& X,
+ 			const AutoDerivative<double>& Y,
+ 			FrameCoordinateWithDerivative& F) const = 0;
+  virtual void notify_update(const Camera& Observed_object)
+  { cache_stale = true; }
+  const GlasGfmCamera& cam;
+  mutable bool cache_stale;
+};
+
+/// Implementation that use the field_alignment array.
+class GlasFa : public GlasGfmCameraModelImp {
+public:
+  GlasFa(GlasGfmCamera& Cam) : GlasGfmCameraModelImp(Cam) {}
+  virtual ~GlasFa() {}
+  virtual void fc_to_xy(const FrameCoordinate& F, double &X, double& Y)
+    const
+  {
+    fill_cache();
+    X = (F.sample - 128) * 0.00765 / 128;
+    // GLAS doesn't actually support line numbers being anything other
+    // than 0. But it is very useful to be able to have a "extended"
+    // camera, so we just give it a pitch of the average of all the
+    // sample data as a "reasonable" thing.
+    Y = -(F.line - 0) * x_space;
+  }
+  virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
+			AutoDerivative<double>& X,
+			AutoDerivative<double>& Y) const
+  {
+    fill_cache();
+    X = (F.sample - 128) * 0.00765 / 128;
+    Y = -(F.line - 0) * x_space;
+  }
+  virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const
+  {
+    fill_cache();
+    F.sample = X / (0.00765 / 128) + 128;;
+    F.line = -Y / x_space + 0;;
+  }
+  virtual void xy_to_fc(const AutoDerivative<double>& X,
+			const AutoDerivative<double>& Y,
+			FrameCoordinateWithDerivative& F) const
+  {
+    fill_cache();
+    F.sample = X / (0.00765 / 128) + 128;;
+    F.line = -Y / x_space + 0;;
+  }
+  void fill_cache() const
+  {
+    if(!cache_stale)
+      return;
+    nsamp = cam.number_sample(0);
+    fa.reference(cam.field_alignment());
+    x_0 = fa(0,0);
+    x_end = fa(fa.rows() - 1, 2);
+    x_space = (x_end - x_0)/nsamp;
+    cache_stale = false;
+  }
+  mutable double x_0, x_end, x_space;
+  mutable int nsamp;
+  mutable blitz::Array<double, 2> fa;
+};
+
+}
+
+void GlasGfmCamera::init_model()
+{
+  // For now, just always use the GlasFa
+  model_ = boost::make_shared<GlasFa>(*this);
+}
+
 GlasGfmCamera::GlasGfmCamera()
 {
   // These default values come from the RIP sample NITF file for Hyperion.
@@ -60,6 +149,7 @@ GlasGfmCamera::GlasGfmCamera()
     26649.88899999857;
   sample_number_first_ = 0;
   delta_sample_pair_ = 256;
+  init_model();
 }
 
 FrameCoordinate GlasGfmCamera::frame_coordinate(const ScLookVector& Sl, 
@@ -70,11 +160,10 @@ FrameCoordinate GlasGfmCamera::frame_coordinate(const ScLookVector& Sl,
   // Just reverse of sc_look_vector.
   boost::math::quaternion<double> dcs = 
     conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
-  double xfp = focal_length() * (-dcs.R_component_3() / dcs.R_component_4());
-  double yfp = focal_length() * (dcs.R_component_2() / dcs.R_component_4());
+  double xfp = focal_length() * (dcs.R_component_2() / dcs.R_component_4());
+  double yfp = focal_length() * (dcs.R_component_3() / dcs.R_component_4());
   FrameCoordinate res;
-  res.line = xfp / (0.00765 / 128) + 0;;
-  res.sample = yfp / (0.00765 / 128) + 128;;
+  model_->xy_to_fc(xfp, yfp, res);
   return res;
 }
 
@@ -87,12 +176,11 @@ FrameCoordinateWithDerivative GlasGfmCamera::frame_coordinate_with_derivative
     conj(frame_to_sc_with_derivative()) * Sl.look_quaternion() * 
     frame_to_sc_with_derivative();
   AutoDerivative<double> xfp = focal_length_with_derivative() *
-    (-dcs.R_component_3() / dcs.R_component_4());
-  AutoDerivative<double> yfp = focal_length_with_derivative() *
     (dcs.R_component_2() / dcs.R_component_4());
+  AutoDerivative<double> yfp = focal_length_with_derivative() *
+    (dcs.R_component_3() / dcs.R_component_4());
   FrameCoordinateWithDerivative res;
-  res.line = xfp / (0.00765 / 128) + 0;;
-  res.sample = yfp / (0.00765 / 128) + 128;;
+  model_->xy_to_fc(xfp, yfp, res);
   return res;
 }
 
@@ -100,10 +188,9 @@ ScLookVector GlasGfmCamera::sc_look_vector
 (const FrameCoordinate& F, int Band) const
 {
   range_check(Band, 0, number_band());
-  double xfp = (F.line - 0) * 0.00765 / 128;
-  double yfp = (F.sample - 128) * 0.00765 / 128;
-  // Coordinate system is rotated relative to GlasGfm
-  boost::math::quaternion<double> lv(0, yfp, -xfp, focal_length());  
+  double xfp, yfp;
+  model_->fc_to_xy(F, xfp, yfp);
+  boost::math::quaternion<double> lv(0, xfp, yfp, focal_length());  
   return ScLookVector(frame_to_sc() * lv * conj(frame_to_sc()));
 }
 
@@ -111,10 +198,10 @@ ScLookVectorWithDerivative GlasGfmCamera::sc_look_vector_with_derivative
 (const FrameCoordinateWithDerivative& F, int Band) const
 {
   range_check(Band, 0, number_band());
-  AutoDerivative<double> xfp = (F.line - 0) * 0.00765 / 128;
-  AutoDerivative<double> yfp = (F.sample - 128) * 0.00765 / 128;
+  AutoDerivative<double> xfp, yfp;
+  model_->fc_to_xy(F, xfp, yfp);
   boost::math::quaternion<AutoDerivative<double> >
-    lv(0, yfp, -xfp, focal_length_with_derivative());  
+    lv(0, xfp, yfp, focal_length_with_derivative());  
   return ScLookVectorWithDerivative(frame_to_sc_with_derivative() * lv *
 				    conj(frame_to_sc_with_derivative()));
 }

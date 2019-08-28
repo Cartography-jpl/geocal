@@ -9,6 +9,12 @@ BOOST_FIXTURE_TEST_SUITE(glas_gfm_camera, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   GlasGfmCamera cam;
+  // Temp
+  cam.delta_sample_pair(128);
+  blitz::Array<double, 2> fa(2, 4);
+  fa = -0.00765, 0, 0, 0,
+    0, 0, 0.00765, 0;
+  cam.field_alignment(fa);
   // GlasGfmCamera should have the same values as this QuaternionCamera.
   QuaternionCamera qcam(boost::math::quaternion<double>(1,0,0,0),
 			1, 256, 0.00765 / 128, 0.00765 / 128,
@@ -22,6 +28,12 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_EQUAL(cam.number_sample(0), 256);
   BOOST_CHECK_CLOSE(cam.focal_length(), 1.41009182, 1e-4);
   BOOST_CHECK_EQUAL(cam.sensor_type(), "S");
+  if(false) {
+    FrameCoordinate fc(-0.5, 0);
+    std::cerr << qcam.frame_coordinate(cam.sc_look_vector(fc, 0),0) << "\n"
+	      << cam.frame_coordinate(qcam.sc_look_vector(fc, 0),0) << "\n";
+    return;
+  }
   for(int i = 0; i < 256; ++i) {
     FrameCoordinate fc1(-0.5, i);
     BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fc1, 0),0).line

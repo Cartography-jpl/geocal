@@ -224,7 +224,7 @@ public:
   const blitz::Array<double, 2>& field_alignment() const
   {return field_alignment_;}
   void field_alignment(const blitz::Array<double, 2>& V)
-  { field_alignment_ = V; notify_update();}
+  { field_alignment_.reference(V.copy()); notify_update();}
   
 //-----------------------------------------------------------------------
 /// The UUID for the DES that contains this object, if any. This is an

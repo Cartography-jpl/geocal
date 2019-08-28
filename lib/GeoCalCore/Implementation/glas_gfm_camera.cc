@@ -78,48 +78,87 @@ public:
     const
   {
     fill_cache();
-    X = (F.sample - 128) * 0.00765 / 128;
+    int i = F.sample / dsamp;
+    if(i < 0)
+      i = 0;
+    if(i >= fa.rows())
+      i = fa.rows() - 1;
+    int ibase = i * dsamp;
+    X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0);
     // GLAS doesn't actually support line numbers being anything other
     // than 0. But it is very useful to be able to have a "extended"
     // camera, so we just give it a pitch of the average of all the
     // sample data as a "reasonable" thing.
-    Y = -(F.line - 0) * x_space;
+    Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1) -
+      (F.line - 0) * x_space;
   }
   virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
 			AutoDerivative<double>& X,
 			AutoDerivative<double>& Y) const
   {
     fill_cache();
-    X = (F.sample - 128) * 0.00765 / 128;
-    Y = -(F.line - 0) * x_space;
+    int i = F.sample.value() / dsamp;
+    if(i < 0)
+      i = 0;
+    if(i >= fa.rows())
+      i = fa.rows() - 1;
+    int ibase = i * dsamp;
+    X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0);
+    // GLAS doesn't actually support line numbers being anything other
+    // than 0. But it is very useful to be able to have a "extended"
+    // camera, so we just give it a pitch of the average of all the
+    // sample data as a "reasonable" thing.
+    Y = (F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1) -
+      (F.line - 0) * x_space;
   }
   virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const
   {
     fill_cache();
-    F.sample = X / (0.00765 / 128) + 128;;
-    F.line = -Y / x_space + 0;;
+    int i = index_from_x(X);
+    int ibase = i * dsamp;
+    F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
+    F.line = -(Y - (F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1)) / x_space;
   }
   virtual void xy_to_fc(const AutoDerivative<double>& X,
 			const AutoDerivative<double>& Y,
 			FrameCoordinateWithDerivative& F) const
   {
     fill_cache();
-    F.sample = X / (0.00765 / 128) + 128;;
-    F.line = -Y / x_space + 0;;
+    int i = index_from_x(X.value());
+    int ibase = i * dsamp;
+    F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
+    F.line = -(Y - (F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1)) / x_space;
+  }
+  int index_from_x(double X) const
+  {
+    if(x_space > 0) {
+      for(int i = 0; i < fa.rows(); ++i)
+	if(X < fa(i,3))
+	  return i;
+      return fa.rows() - 1;
+    }
+    for(int i = 0; i < fa.rows(); ++i)
+      if(X > fa(i,3))
+	return i;
+    return fa.rows() - 1;
   }
   void fill_cache() const
   {
     if(!cache_stale)
       return;
     nsamp = cam.number_sample(0);
+    dsamp = cam.delta_sample_pair();
     fa.reference(cam.field_alignment());
     x_0 = fa(0,0);
+    y_0 = fa(0,1);
     x_end = fa(fa.rows() - 1, 2);
+    y_end = fa(fa.rows() - 1, 3);
     x_space = (x_end - x_0)/nsamp;
     cache_stale = false;
   }
-  mutable double x_0, x_end, x_space;
+  mutable double x_0, x_end, x_space, y_0, y_end;
   mutable int nsamp;
+  mutable int dsamp;
   mutable blitz::Array<double, 2> fa;
 };
 

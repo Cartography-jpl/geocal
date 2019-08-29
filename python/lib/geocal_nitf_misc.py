@@ -26,9 +26,23 @@ if(have_pynitf):
         second = t - nitf_date_second_field_to_geocal_time(date)
         return date, second
 
+    def geocal_time_to_timestamp(t):
+        '''Convert time to base timestamp string of YYYYMMDDhhmmss.nnnnnnnnn'''
+        # Note we don't actually keep time accurate to the nearest nanosecond.
+        # If this actually matters, we would need to modify our geocal time
+        # class (e.g., use a long double, or something like that)
+        ts = str(t)
+        return "%s%s%s%s%s%s000" % (ts[0:4], ts[5:7], ts[8:10], ts[11:13],
+                                    ts[14:16], ts[17:26])
+
+    def timestamp_to_geocal_time(t):
+        '''Reverse of geocal_time_to_timestamp'''
+        return Time.parse_time("%s-%s-%sT%s:%s:%sZ" % (t[0:4],t[4:6],t[6:8],t[8:10],t[10:12],t[12:]))
+    
 if(have_pynitf):
     __all__ = ["nitf_date_second_field_to_geocal_time",
-               "geocal_time_to_nitf_date_second_field"]
+               "geocal_time_to_nitf_date_second_field",
+               "geocal_time_to_timestamp", "timestamp_to_geocal_time"]
 else:
     __all__ = []
 

@@ -154,17 +154,69 @@ This should be used to set and read the DES values.
         # We currently can't set position offset. We could add this if
         # this becomes an issue, but the current geocal code doesn't
         # support a position offset in a camera model
+        if(d.ppoff_x != 0 or d.ppoff_y != 0 or d.ppoff_z != 0):
+            raise RuntimeError("We don't support a nonzero position offset")
         #cam.ppoff = [d.ppoff_x, d.ppoff_y, d.ppoff_z]
         cam.angoff = [d.angoff_x, d.angoff_y, d.angoff_z]
-        cam.sample_number_first = d.smpl_num_first
-        cam.delta_sample_pair = d.delta_smpl_pair
-        fa = np.empty((d.num_fa_pairs, 4))
-        for i in range(d.num_fa_pairs):
-            fa[i,0] = d.start_falign_x[i]
-            fa[i,1] = d.start_falign_y[i]
-            fa[i,2] = d.end_falign_x[i]
-            fa[i,3] = d.end_falign_y[i]
-        cam.field_alignment = fa
+        if(d.sensor_type == "S"):
+            cam.set_number_line(1)
+            cam.set_number_sample(d.num_fa_pairs * d.delta_smpl_pair)
+            cam.sample_number_first = d.smpl_num_first
+            cam.delta_sample_pair = d.delta_smpl_pair
+            fa = np.empty((d.num_fa_pairs, 4))
+            for i in range(d.num_fa_pairs):
+                fa[i,0] = d.start_falign_x[i]
+                fa[i,1] = d.start_falign_y[i]
+                fa[i,2] = d.end_falign_x[i]
+                fa[i,3] = d.end_falign_y[i]
+            cam.field_alignment = fa
+        elif(d.sensor_type == "F"):
+            cam.field_angle_type = d.field_angle_type
+            ndset = d.num_sets_fa_data
+            cam.field_angle_interpolation_type = d.fa_interp
+            if(d.field_angle_type == 0):
+                # Currently only work with one focal length
+                for i in range(ndset):
+                    if(d.fl_cal[i] != d.foc_length[0]):
+                        raise RuntimeError("Currently we only work with one focal length, so they all need to be the same.")
+                cam.first_line_block = [d.number_fir_line[i]
+                                        for i in range(ndset)]
+                cam.delta_line_block = [d.delta_line[i]
+                                        for i in range(ndset)]
+                cam.first_sample_block = [d.number_fir_samp[i]
+                                         for i in range(ndset)]
+                cam.delta_sample_block = [d.delta_samp[i]
+                                         for i in range(ndset)]
+                maxln = 0
+                maxsmp = 0
+                for i1 in range(ndset):
+                    fa = np.empty((d.num_fa_blocks_line[i1],
+                                   d.num_fa_blocks_samp[i1], 2, 2, 2))
+                    maxln = max(cam.first_line_block[i1] +
+                                fa.shape[0] * cam.delta_line_block[i1], maxln)
+                    maxsmp = max(cam.first_sample_block[i1] +
+                                 fa.shape[1] * cam.delta_sample_block[i1],
+                                 maxsmp)
+                    for i2 in range(fa.shape[0]):
+                        for i3 in range(fa.shape[1]):
+                            fa[i2,i3,0,0,0] = d.fa_x1[i1,i2,i3]
+                            fa[i2,i3,0,0,1] = d.fa_y1[i1,i2,i3]
+                            fa[i2,i3,0,1,0] = d.fa_x2[i1,i2,i3]
+                            fa[i2,i3,0,1,1] = d.fa_y2[i1,i2,i3]
+                            fa[i2,i3,1,1,0] = d.fa_x3[i1,i2,i3]
+                            fa[i2,i3,1,1,1] = d.fa_y3[i1,i2,i3]
+                            fa[i2,i3,1,0,0] = d.fa_x4[i1,i2,i3]
+                            fa[i2,i3,1,0,1] = d.fa_y4[i1,i2,i3]
+                    cam.field_alignment_block(i1, fa)
+                cam.set_number_line(int(maxln))
+                cam.set_number_sample(int(maxsmp))
+            else:
+                raise RuntimeError("Unknown field angle type %d" % d.field_angle_type)
+            if(d.telescope_optics_flag != 0):
+                # We could perhaps add this if needed in the future
+                raise RuntimeError("We don't support telescope optics correction")
+        else:
+            raise RuntimeError("Unknown sensor type %s" % d.sensor_type)
         cam.id = ""
         return cam
 
@@ -187,15 +239,47 @@ This should be used to set and read the DES values.
         d.angoff_x = cam.angoff[0]
         d.angoff_y = cam.angoff[1]
         d.angoff_z = cam.angoff[2]
-        d.smpl_num_first = cam.sample_number_first
-        d.delta_smpl_pair = cam.delta_sample_pair
-        d.num_fa_pairs = cam.field_alignment.shape[0]
-        for i in range(d.num_fa_pairs):
-            d.start_falign_x[i] = cam.field_alignment[i, 0]
-            d.start_falign_y[i] = cam.field_alignment[i, 1]
-            d.end_falign_x[i] = cam.field_alignment[i, 2]
-            d.end_falign_y[i] = cam.field_alignment[i, 3]
-
+        if(cam.sensor_type == "S"):
+            d.smpl_num_first = cam.sample_number_first
+            d.delta_smpl_pair = cam.delta_sample_pair
+            d.num_fa_pairs = cam.field_alignment.shape[0]
+            for i in range(d.num_fa_pairs):
+                d.start_falign_x[i] = cam.field_alignment[i, 0]
+                d.start_falign_y[i] = cam.field_alignment[i, 1]
+                d.end_falign_x[i] = cam.field_alignment[i, 2]
+                d.end_falign_y[i] = cam.field_alignment[i, 3]
+        elif(cam.sensor_type == "F"):
+            d.field_angle_type = cam.field_angle_type
+            d.fa_interp = cam.field_angle_interpolation_type
+            if(cam.field_angle_type == 0):
+                d.num_sets_fa_data = cam.first_line_block.shape[0]
+                for i1 in range(d.num_sets_fa_data):
+                    d.fl_cal[i1] = cam.focal_length
+                    d.number_fir_line[i1] = cam.first_line_block[i1]
+                    d.delta_line[i1] = cam.delta_line_block[i1]
+                    fa = cam.field_alignment_block(i1)
+                    d.num_fa_blocks_line[i1] = fa.shape[0]
+                    d.number_fir_samp[i1] = cam.first_sample_block[i1]
+                    d.delta_samp[i1] = cam.delta_sample_block[i1]
+                    d.num_fa_blocks_samp[i1] = fa.shape[1]
+                    for i2 in range(fa.shape[0]):
+                        for i3 in range(fa.shape[1]):
+                            d.fa_x1[i1,i2,i3] = fa[i2,i3,0,0,0]
+                            d.fa_y1[i1,i2,i3] = fa[i2,i3,0,0,1]
+                            d.fa_x2[i1,i2,i3] = fa[i2,i3,0,1,0]
+                            d.fa_y2[i1,i2,i3] = fa[i2,i3,0,1,1]
+                            d.fa_x3[i1,i2,i3] = fa[i2,i3,1,1,0]
+                            d.fa_y3[i1,i2,i3] = fa[i2,i3,1,1,1]
+                            d.fa_x4[i1,i2,i3] = fa[i2,i3,1,0,0]
+                            d.fa_y4[i1,i2,i3] = fa[i2,i3,1,0,1]
+                pass
+            else:
+                raise RuntimeError("Unknown field angle type %d" % cam.field_angle_type)
+            # We don't support the telescope optics correction. We could
+            # perhaps add this in the future
+            d.telescope_optics_flag = 0
+        else:
+            raise RuntimeError("Unknown sensor type %s" % cam.sensor_type)
     def _camera_glas_gfm(iseg):
         lv = iseg.idlvl
         f = iseg.nitf_file

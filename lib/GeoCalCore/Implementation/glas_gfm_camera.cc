@@ -34,7 +34,14 @@ void GlasGfmCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(band_type) & GEOCAL_NVP_(band_wavelength)
     & GEOCAL_NVP_(band_index) & GEOCAL_NVP_(irepband)
     & GEOCAL_NVP_(isubcat) & GEOCAL_NVP_(sample_number_first)
-    & GEOCAL_NVP_(delta_sample_pair) & GEOCAL_NVP_(field_alignment);
+    & GEOCAL_NVP_(delta_sample_pair) & GEOCAL_NVP_(field_alignment)
+    & GEOCAL_NVP_(field_angle_type)
+    & GEOCAL_NVP_(field_angle_interpolation_type)
+    & GEOCAL_NVP_(first_line_block)
+    & GEOCAL_NVP_(first_sample_block)
+    & GEOCAL_NVP_(delta_line_block)
+    & GEOCAL_NVP_(delta_sample_block)
+    & GEOCAL_NVP_(field_alignment_block);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -117,7 +124,7 @@ public:
     int i = index_from_x(X);
     int ibase = i * dsamp;
     F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
-    F.line = -(Y - (F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1)) / x_space;
+    F.line = -(Y - ((F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1))) / x_space;
   }
   virtual void xy_to_fc(const AutoDerivative<double>& X,
 			const AutoDerivative<double>& Y,
@@ -127,7 +134,7 @@ public:
     int i = index_from_x(X.value());
     int ibase = i * dsamp;
     F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
-    F.line = -(Y - (F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1)) / x_space;
+    F.line = -(Y - ((F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1))) / x_space;
   }
   int index_from_x(double X) const
   {
@@ -170,12 +177,13 @@ void GlasGfmCamera::init_model()
   model_ = boost::make_shared<GlasFa>(*this);
 }
 
-GlasGfmCamera::GlasGfmCamera()
+GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
+: nline_(Number_line),
+  nsamp_(Number_sample),
+  field_alignment_block_(9)
 {
   // These default values come from the RIP sample NITF file for Hyperion.
   focal_length_ = 1.41009182;
-  nline_ = 1;
-  nsamp_ = 256;
   frame_to_sc_ = boost::math::quaternion<double>(1,0,0,0);
   frame_to_sc_nd_ = value(frame_to_sc_);
   field_alignment_.resize(1, 4);
@@ -188,6 +196,10 @@ GlasGfmCamera::GlasGfmCamera()
     26649.88899999857;
   sample_number_first_ = 0;
   delta_sample_pair_ = 256;
+
+  // Not used for sensor "S", but set a value so this isn't undefined
+  field_angle_type_ = 0;
+  field_angle_interpolation_type_ = 1;
   init_model();
 }
 

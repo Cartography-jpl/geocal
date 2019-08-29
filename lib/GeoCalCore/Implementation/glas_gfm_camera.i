@@ -14,9 +14,11 @@
 namespace GeoCal {
 class GlasGfmCamera : public Camera {
 public:
-  GlasGfmCamera();
+  GlasGfmCamera(int Number_line = 1, int Number_sample = 256);
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
+  void set_number_line(int V);
+  void set_number_sample(int V);
   %python_attribute_with_set(focal_length, double);
   %python_attribute_with_set(focal_length_with_derivative, 
 			     AutoDerivative<double>);
@@ -45,6 +47,14 @@ public:
   %python_attribute_with_set(sample_number_first, double);
   %python_attribute_with_set(delta_sample_pair, double);
   %python_attribute_with_set(field_alignment, blitz::Array<double, 2>);
+  %python_attribute_with_set(field_angle_type, int);
+  %python_attribute_with_set(field_angle_interpolation_type, int);
+  %python_attribute_with_set(first_line_block, blitz::Array<double, 1>);
+  %python_attribute_with_set(first_sample_block, blitz::Array<double, 1>);
+  %python_attribute_with_set(delta_line_block, blitz::Array<double, 1>);
+  %python_attribute_with_set(delta_sample_block, blitz::Array<double, 1>);
+  const blitz::Array<double, 5>& field_alignment_block(int i) const;
+  void field_alignment_block(int i, const blitz::Array<double, 5>& V);
   %pickle_serialization();
 };
 }

@@ -2,9 +2,11 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          ConstantSpacingTimeTable, SimpleCamera,
                          QuaternionCamera, FrameCoordinate,
                          SimpleDem, IpiImageGroundConnection, Ipi,
-                         Quaternion_double)
+                         Quaternion_double, OrbitDataImageGroundConnection)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
-                               geocal_time_to_nitf_date_second_field)
+                               geocal_time_to_nitf_date_second_field,
+                               geocal_time_to_timestamp,
+                               timestamp_to_geocal_time)
 from .geocal_nitf_des import(DesCSEPHB_geocal, DesCSATTB_geocal)
 try:
     import pynitf
@@ -48,12 +50,27 @@ if(have_pynitf):
             t.sensor_id = igc.sensor_id
             if(isinstance(igc, IpiImageGroundConnection)):
                 t.sensor_type = "S"
+                orb = igc.ipi.orbit
+                cam = igc.ipi.camera
+                ttable = igc.ipi.time_table
+                t.day_first_line_image, t.time_first_line_image = geocal_time_to_nitf_date_second_field(ttable.min_time)
+                t.time_image_duration = ttable.max_time - ttable.min_time
+            elif(isinstance(igc, OrbitDataImageGroundConnection)):
+                 t.sensor_type = "F"
+                 orb = igc.orbit
+                 cam = igc.camera
+                 t.time_stamp_loc = 0
+                 t.reference_frame_num = 1
+                 # Only 1 frame. We may need to modify this
+                 t.base_timestamp = geocal_time_to_timestamp(igc.orbit_data.time)
+                 t.dt_multiplier = 1
+                 t.dt_size = 1
+                 t.number_frames = 1
+                 t.number_dt = 1
+                 t.dt[0] = 0
             else:
                 raise RuntimeError("Unrecognized ImageGroundConnection type")
             # ground_ref_point
-            ttable = igc.ipi.time_table
-            t.day_first_line_image, t.time_first_line_image = geocal_time_to_nitf_date_second_field(ttable.min_time)
-            t.time_image_duration = ttable.max_time - ttable.min_time
             t.num_lines = igc.number_line
             t.num_samples = igc.number_sample
             t.atm_refr_flag = 1
@@ -64,11 +81,11 @@ if(have_pynitf):
 
             # Get position, attitude and camera DES if already in file,
             # or create 
-            iseg.orbit_des = igc.ipi.orbit
-            iseg.camera_glas_gfm = igc.ipi.camera
-            res.des.append(f.find_des_by_uuid(igc.ipi.orbit.pos_csephb.id))
-            res.des.append(f.find_des_by_uuid(igc.ipi.orbit.att_csattb.id))
-            res.des.append(f.find_des_by_uuid(igc.ipi.camera.id))
+            iseg.orbit_des = orb
+            iseg.camera_glas_gfm = cam
+            res.des.append(f.find_des_by_uuid(orb.pos_csephb.id))
+            res.des.append(f.find_des_by_uuid(orb.att_csattb.id))
+            res.des.append(f.find_des_by_uuid(cam.id))
             
             # Fake CSCSDB. We copy over one we got from the RIP. This will
             # be replaced with real covariance. I have no idea what most of
@@ -203,12 +220,21 @@ if(have_pynitf):
 
         def igc(self, dem = SimpleDem()):
             '''Return ImageGroundConnection for GLAS/GFM'''
-            tt = self.time_table
             orb = self.orbit
             cam = self.camera
-            ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
-            igc = IpiImageGroundConnection(ipi, dem, None,
-                                           self.iseg.iid1)
+            if(cam.sensor_type == "S"):
+                tt = self.time_table
+                ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
+                igc = IpiImageGroundConnection(ipi, dem, None,
+                                               self.iseg.iid1)
+            elif(cam.sensor_type == "F"):
+                if(self.tre_csexrb.time_stamp_loc != 0):
+                    raise RuntimeError("We don't handle having the time stamps in a MTIMSA TRE")
+                t = timestamp_to_geocal_time(self.tre_csexrb.base_timestamp) + self.tre_csexrb.dt_multiplier * 1e-9 * self.tre_csexrb.dt[0]
+                igc = OrbitDataImageGroundConnection(orb, t, cam, dem, None,
+                                                     self.iseg.iid1)
+            else:
+                raise RuntimeError("Unrecognized camera sensor type")
             # Add some useful metadata
             igc.platform_id = self.tre_csexrb.platform_id
             igc.payload_id = self.tre_csexrb.payload_id

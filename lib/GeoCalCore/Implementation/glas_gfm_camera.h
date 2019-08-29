@@ -26,8 +26,8 @@ namespace GeoCal {
 class GlasGfmCamera : public Camera {
 public:
   // Not clear what if any arguments we want to constructor. So for
-  // now, just leave off.
-  GlasGfmCamera();
+  // now, just leave most everything off.
+  GlasGfmCamera(int Number_line = 1, int Number_sample = 256);
   virtual ~GlasGfmCamera() {}
   void print(std::ostream& Os) const
   { Os << "GlasGfmCamera"; }
@@ -44,13 +44,17 @@ public:
 
   virtual int number_line(int Band) const
   { range_check(Band, 0, number_band()); return nline_; }
-
+  void set_number_line(int V)
+  { nline_ = V; init_model(); notify_update(); }
+  
 //-----------------------------------------------------------------------
 /// Number of samples in camera for given band.
 //-----------------------------------------------------------------------
 
   virtual int number_sample(int Band) const
   { range_check(Band, 0, number_band()); return nsamp_; }
+  void set_number_sample(int V)
+  { nsamp_ = V; notify_update(); }
 
 //-----------------------------------------------------------------------
 /// Focal length, in meters (so not mm like QuaternionCamera)
@@ -201,7 +205,7 @@ public:
   void angoff(const blitz::Array<double, 1>& V);
 
 //-----------------------------------------------------------------------
-/// Sample Number first
+/// Sample Number first. This is applicable for sensor type "S" only.
 //-----------------------------------------------------------------------
 
   double sample_number_first() const {return sample_number_first_; }
@@ -209,7 +213,7 @@ public:
   { sample_number_first_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
-/// Delta Sample Pair
+/// Delta Sample Pair. This is applicable for sensor type "S" only.
 //-----------------------------------------------------------------------
 
   double delta_sample_pair() const {return delta_sample_pair_; }
@@ -218,13 +222,100 @@ public:
 
 //-----------------------------------------------------------------------
 /// Field Alignment. This is n x 4. The columns are start_x, start_y,
-/// end_x, end_y.
+/// end_x, end_y. This is applicable for sensor type "S" only.
 //-----------------------------------------------------------------------
 
   const blitz::Array<double, 2>& field_alignment() const
   {return field_alignment_;}
   void field_alignment(const blitz::Array<double, 2>& V)
   { field_alignment_.reference(V.copy()); notify_update();}
+
+//-----------------------------------------------------------------------
+/// Field angle type. 0 for direct alignment grid, 1 for calibration
+/// parameters. Only applicable for sensor type "F".
+//-----------------------------------------------------------------------
+
+  int field_angle_type() const { return field_angle_type_; }
+  void field_angle_type(int V) 
+  {
+    field_angle_type_ = V;
+    init_model();
+    notify_update();
+  }
+
+//-----------------------------------------------------------------------
+/// Field angle interplation type. 0 for nearest neighbor, 1 for
+/// linear. Only applicable for sensor type "F".
+//-----------------------------------------------------------------------
+
+  int field_angle_interpolation_type() const { return field_angle_interpolation_type_; }
+  void field_angle_interpolation_type(int V)
+  { field_angle_interpolation_type_ = V; notify_update(); }
+  
+//-----------------------------------------------------------------------
+/// Starting line for first block in field_alignment_block.
+/// Only applicable for sensor type "F" and field_angle_type 0.  
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 1>& first_line_block() const
+  { return first_line_block_; }
+  void first_line_block(const blitz::Array<double, 1>& V)
+  { first_line_block_.reference(V.copy()); notify_update(); }
+
+//-----------------------------------------------------------------------
+/// Starting sample for first block in field_alignment_block.
+/// Only applicable for sensor type "F" and field_angle_type 0.  
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 1>& first_sample_block() const
+  { return first_sample_block_; }
+  void first_sample_block(const blitz::Array<double, 1>& V)
+  { first_sample_block_.reference(V.copy()); notify_update(); }
+
+//-----------------------------------------------------------------------
+/// Delta line for blocks in field_alignment_block.
+/// Only applicable for sensor type "F" and field_angle_type 0.  
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 1>& delta_line_block() const
+  { return delta_line_block_; }
+  void delta_line_block(const blitz::Array<double, 1>& V)
+  { delta_line_block_.reference(V.copy()); notify_update(); }
+
+//-----------------------------------------------------------------------
+/// Delta sample for blocks in field_alignment_block.
+/// Only applicable for sensor type "F" and field_angle_type 0.  
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 1>& delta_sample_block() const
+  { return delta_sample_block_; }
+  void delta_sample_block(const blitz::Array<double, 1>& V)
+  { delta_sample_block_.reference(V.copy()); notify_update(); }
+
+//-----------------------------------------------------------------------
+/// field_alignment_block.
+/// Only applicable for sensor type "F" and field_angle_type 0.  
+//-----------------------------------------------------------------------
+
+  const blitz::Array<double, 5>& field_alignment_block(int i) const
+  {
+    range_check(i, 0, (int) first_line_block_.size());
+    // This should always be true since we size field_alignment_block_
+    // to the maximum number of field angle datasets. But check
+    // anyways, in case something weird has happened.
+    range_check(i, 0, (int) field_alignment_block_.size());
+    return field_alignment_block_[i];
+  }
+  void field_alignment_block(int i, const blitz::Array<double, 5>& V)
+  {
+    range_check(i, 0, (int) first_line_block_.size());
+    // This should always be true since we size field_alignment_block_
+    // to the maximum number of field angle datasets. But check
+    // anyways, in case something weird has happened.
+    range_check(i, 0, (int) field_alignment_block_.size());
+    field_alignment_block_[i].reference(V.copy());
+    notify_update();
+  }
   
 //-----------------------------------------------------------------------
 /// The UUID for the DES that contains this object, if any. This is an
@@ -257,6 +348,10 @@ private:
   Time focal_length_time_;
   double sample_number_first_, delta_sample_pair_;
   blitz::Array<double, 2> field_alignment_;
+  int field_angle_type_, field_angle_interpolation_type_;
+  blitz::Array<double, 1> first_line_block_, first_sample_block_,
+	  delta_line_block_, delta_sample_block_;
+  std::vector<blitz::Array<double, 5> > field_alignment_block_;
   virtual void notify_update()
   {
     notify_update_do(*this);

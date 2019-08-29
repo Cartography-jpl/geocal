@@ -206,13 +206,31 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self):
+    def __init__(self, Number_line=1, Number_sample=256):
         """
 
-        GlasGfmCamera::GlasGfmCamera()
+        GlasGfmCamera::GlasGfmCamera(int Number_line=1, int Number_sample=256)
 
         """
-        _glas_gfm_camera.GlasGfmCamera_swiginit(self, _glas_gfm_camera.new_GlasGfmCamera())
+        _glas_gfm_camera.GlasGfmCamera_swiginit(self, _glas_gfm_camera.new_GlasGfmCamera(Number_line, Number_sample))
+
+    def set_number_line(self, V):
+        """
+
+        void GeoCal::GlasGfmCamera::set_number_line(int V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera_set_number_line(self, V)
+
+
+    def set_number_sample(self, V):
+        """
+
+        void GeoCal::GlasGfmCamera::set_number_sample(int V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera_set_number_sample(self, V)
+
 
     def _v_focal_length(self, *args):
         """
@@ -479,10 +497,129 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
       self._v_field_alignment(value)
 
 
+    def _v_field_angle_type(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::field_angle_type(int V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_field_angle_type(self, *args)
+
+
+    @property
+    def field_angle_type(self):
+        return self._v_field_angle_type()
+
+    @field_angle_type.setter
+    def field_angle_type(self, value):
+      self._v_field_angle_type(value)
+
+
+    def _v_field_angle_interpolation_type(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::field_angle_interpolation_type(int V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_field_angle_interpolation_type(self, *args)
+
+
+    @property
+    def field_angle_interpolation_type(self):
+        return self._v_field_angle_interpolation_type()
+
+    @field_angle_interpolation_type.setter
+    def field_angle_interpolation_type(self, value):
+      self._v_field_angle_interpolation_type(value)
+
+
+    def _v_first_line_block(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::first_line_block(const blitz::Array< double, 1 > &V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_first_line_block(self, *args)
+
+
+    @property
+    def first_line_block(self):
+        return self._v_first_line_block()
+
+    @first_line_block.setter
+    def first_line_block(self, value):
+      self._v_first_line_block(value)
+
+
+    def _v_first_sample_block(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::first_sample_block(const blitz::Array< double, 1 > &V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_first_sample_block(self, *args)
+
+
+    @property
+    def first_sample_block(self):
+        return self._v_first_sample_block()
+
+    @first_sample_block.setter
+    def first_sample_block(self, value):
+      self._v_first_sample_block(value)
+
+
+    def _v_delta_line_block(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::delta_line_block(const blitz::Array< double, 1 > &V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_delta_line_block(self, *args)
+
+
+    @property
+    def delta_line_block(self):
+        return self._v_delta_line_block()
+
+    @delta_line_block.setter
+    def delta_line_block(self, value):
+      self._v_delta_line_block(value)
+
+
+    def _v_delta_sample_block(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::delta_sample_block(const blitz::Array< double, 1 > &V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_delta_sample_block(self, *args)
+
+
+    @property
+    def delta_sample_block(self):
+        return self._v_delta_sample_block()
+
+    @delta_sample_block.setter
+    def delta_sample_block(self, value):
+      self._v_delta_sample_block(value)
+
+
+    def field_alignment_block(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera_field_alignment_block(self, *args)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _glas_gfm_camera.delete_GlasGfmCamera
+GlasGfmCamera.set_number_line = new_instancemethod(_glas_gfm_camera.GlasGfmCamera_set_number_line, None, GlasGfmCamera)
+GlasGfmCamera.set_number_sample = new_instancemethod(_glas_gfm_camera.GlasGfmCamera_set_number_sample, None, GlasGfmCamera)
 GlasGfmCamera._v_focal_length = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_focal_length, None, GlasGfmCamera)
 GlasGfmCamera._v_focal_length_with_derivative = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_focal_length_with_derivative, None, GlasGfmCamera)
 GlasGfmCamera._v_id = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_id, None, GlasGfmCamera)
@@ -498,6 +635,13 @@ GlasGfmCamera._v_angoff = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_a
 GlasGfmCamera._v_sample_number_first = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_sample_number_first, None, GlasGfmCamera)
 GlasGfmCamera._v_delta_sample_pair = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_delta_sample_pair, None, GlasGfmCamera)
 GlasGfmCamera._v_field_alignment = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_field_alignment, None, GlasGfmCamera)
+GlasGfmCamera._v_field_angle_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_field_angle_type, None, GlasGfmCamera)
+GlasGfmCamera._v_field_angle_interpolation_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_field_angle_interpolation_type, None, GlasGfmCamera)
+GlasGfmCamera._v_first_line_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_first_line_block, None, GlasGfmCamera)
+GlasGfmCamera._v_first_sample_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_first_sample_block, None, GlasGfmCamera)
+GlasGfmCamera._v_delta_line_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_delta_line_block, None, GlasGfmCamera)
+GlasGfmCamera._v_delta_sample_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_delta_sample_block, None, GlasGfmCamera)
+GlasGfmCamera.field_alignment_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera_field_alignment_block, None, GlasGfmCamera)
 GlasGfmCamera_swigregister = _glas_gfm_camera.GlasGfmCamera_swigregister
 GlasGfmCamera_swigregister(GlasGfmCamera)
 

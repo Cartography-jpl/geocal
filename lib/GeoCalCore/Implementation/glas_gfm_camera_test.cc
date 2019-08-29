@@ -9,7 +9,8 @@ BOOST_FIXTURE_TEST_SUITE(glas_gfm_camera, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   GlasGfmCamera cam;
-  // Temp
+  // Have two FA pairs, even though they are redundant. This tests the
+  // handling of this in the code.
   cam.delta_sample_pair(128);
   blitz::Array<double, 2> fa(2, 4);
   fa = -0.00765, 0, 0, 0,

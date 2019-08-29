@@ -3,7 +3,8 @@ try:
 except ImportError:
     pass
 from test_support import *
-from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, Time, KeplerOrbit)
+from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, Time, KeplerOrbit,
+                         GlasGfmCamera)
 from geocal.geocal_nitf_des import *
 import numpy as np
 
@@ -76,9 +77,43 @@ def test_attcsattb(isolated_dir):
         
     
 @require_pynitf
-def test_camera_glass_gfm(nitf_sample_rip):
+def test_camera_glass_gfm_read(nitf_sample_rip):
     # Index for the image segment that has GLAS data.
     iseg_index = 1 
     f = pynitf.NitfFile(nitf_sample_rip)
     cam = f.image_segment[iseg_index].camera_glas_gfm
     print(cam)
+
+@require_pynitf
+def test_camera_gfm(isolated_dir):
+    '''Test of reading a writing a frame camera'''
+    tdata = Time.parse_time("2003-01-01T11:11:00Z")
+    orb = KeplerOrbit()
+    porb = PosCsephb(orb, tdata-10.0,tdata+10.0, 0.5, PosCsephb.LAGRANGE,
+                     PosCsephb.LAGRANGE_7)
+    aorb = AttCsattb(orb, tdata-10.0,tdata+10.0, 0.5, AttCsattb.LAGRANGE,
+                     AttCsattb.LAGRANGE_7)
+    orb = OrbitDes(porb,aorb)
+    cam = GlasGfmCamera(2048, 2048)
+    cam.focal_length = 123.8e-3
+    cam.focal_length_time = orb.min_time
+    cam.first_line_block = [0]
+    cam.first_sample_block = [0]
+    cam.delta_line_block = [2048]
+    cam.delta_sample_block = [2048]
+    fa = np.empty((1,1,2,2,2))
+    fa[0,0,:,0,0] = -1024 * 21e-6
+    fa[0,0,:,1,0] = 1024 * 21e-6
+    fa[0,0,0,:,1] = 1024 * 21e-6
+    fa[0,0,1,:,1] = -1024 * 21e-6
+    cam.field_alignment_block(0,fa)
+    des = pynitf.DesCSSFAB()
+    des.camera = cam
+    f = NitfFile()
+    f.des_segment.append(pynitf.NitfDesSegment(des=des))
+    f.write("nitf_des.ntf")
+    f2 = pynitf.NitfFile("nitf_des.ntf")
+    print(f2)
+    cam = f2.des_segment[0].des.camera
+    
+    

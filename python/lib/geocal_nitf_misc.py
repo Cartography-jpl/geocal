@@ -37,7 +37,7 @@ if(have_pynitf):
 
     def timestamp_to_geocal_time(t):
         '''Reverse of geocal_time_to_timestamp'''
-        return Time.parse_time("%s-%s-%sT%s:%s:%sZ" % (t[0:4],t[4:6],t[6:8],t[8:10],t[10:12],t[12:]))
+        return geocal_swig.Time.parse_time("%s-%s-%sT%s:%s:%sZ" % (t[0:4],t[4:6],t[6:8],t[8:10],t[10:12],t[12:]))
     
 if(have_pynitf):
     __all__ = ["nitf_date_second_field_to_geocal_time",

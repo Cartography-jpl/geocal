@@ -79,12 +79,18 @@ PosCsephb::PosCsephb
  InterpolationType Itype,
  LagrangeOrder Lagrange_order,
  EphemerisDataQuality E_quality,
- EphemerisSource E_source)
+ EphemerisSource E_source,
+ PositionType P_type)
   : min_time_(Orb.min_time()), tstep_(Tstep),
     itype_(Itype), lagrange_order_(Lagrange_order),
     e_quality_(E_quality), e_source_(E_source)
 {
-  is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  if(P_type == SAME_AS_ORBIT)
+    is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  else if(P_type == CARTESIAN_FIXED)
+    is_cf_ = true;
+  else
+    is_cf_ = false;
   int sz = (int) floor((Orb.max_time() - min_time_) / tstep_) + 1;
   if((min_time_ + sz * tstep_) <= Orb.max_time())
     sz += 1;
@@ -115,12 +121,18 @@ PosCsephb::PosCsephb
  InterpolationType Itype,
  LagrangeOrder Lagrange_order,
  EphemerisDataQuality E_quality,
- EphemerisSource E_source)
+ EphemerisSource E_source,
+ PositionType P_type)
   : min_time_(Min_time), tstep_(Tstep),
     itype_(Itype), lagrange_order_(Lagrange_order),
     e_quality_(E_quality), e_source_(E_source)
 {
-  is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  if(P_type == SAME_AS_ORBIT)
+    is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  else if(P_type == CARTESIAN_FIXED)
+    is_cf_ = true;
+  else
+    is_cf_ = false;
   int sz = (int) floor((Max_time - min_time_) / tstep_) + 1;
   if((min_time_ + sz * tstep_) <= Max_time)
     sz += 1;
@@ -459,12 +471,18 @@ AttCsattb::AttCsattb
  InterpolationType Itype,
  LagrangeOrder Lagrange_order,
  AttitudeDataQuality A_quality,
- AttitudeSource A_source)
+ AttitudeSource A_source,
+ AttitudeType A_type)
   : min_time_(Orb.min_time()), tstep_(Tstep),
     itype_(Itype), lagrange_order_(Lagrange_order),
     a_quality_(A_quality), a_source_(A_source)
 {
-  is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  if(A_type == SAME_AS_ORBIT)
+    is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  else if(A_type == CARTESIAN_FIXED)
+    is_cf_ = true;
+  else
+    is_cf_ = false;
   int sz = (int) floor((Orb.max_time() - min_time_) / tstep_) + 1;
   if((min_time_ + sz * tstep_) <= Orb.max_time())
     sz += 1;
@@ -494,12 +512,18 @@ AttCsattb::AttCsattb
  InterpolationType Itype,
  LagrangeOrder Lagrange_order,
  AttitudeDataQuality A_quality,
- AttitudeSource A_source)
+ AttitudeSource A_source,
+ AttitudeType A_type)
   : min_time_(Min_time), tstep_(Tstep),
     itype_(Itype), lagrange_order_(Lagrange_order),
     a_quality_(A_quality), a_source_(A_source)
 {
-  is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  if(A_type == SAME_AS_ORBIT)
+    is_cf_ = Orb.orbit_data(min_time_)->prefer_cf();
+  else if(A_type == CARTESIAN_FIXED)
+    is_cf_ = true;
+  else
+    is_cf_ = false;
   int sz = (int) floor((Max_time - min_time_) / tstep_) + 1;
   if((min_time_ + sz * tstep_) <= Max_time)
     sz += 1;

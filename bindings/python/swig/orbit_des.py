@@ -219,6 +219,9 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
     LAGRANGE_3 = _orbit_des.PosCsephb_LAGRANGE_3
     LAGRANGE_5 = _orbit_des.PosCsephb_LAGRANGE_5
     LAGRANGE_7 = _orbit_des.PosCsephb_LAGRANGE_7
+    SAME_AS_ORBIT = _orbit_des.PosCsephb_SAME_AS_ORBIT
+    CARTESIAN_FIXED = _orbit_des.PosCsephb_CARTESIAN_FIXED
+    CARTESIAN_INERTIAL = _orbit_des.PosCsephb_CARTESIAN_INERTIAL
     PREDICTED = _orbit_des.PosCsephb_PREDICTED
     ACTUAL = _orbit_des.PosCsephb_ACTUAL
     REFINED = _orbit_des.PosCsephb_REFINED
@@ -229,7 +232,8 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
         PosCsephb::PosCsephb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
         Tstep, InterpolationType Itype=LINEAR, LagrangeOrder
         Lagrange_order=NO_LAGRANGE, EphemerisDataQuality
-        E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL)
+        E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,
+        PositionType P_type=SAME_AS_ORBIT)
         Constructor.
 
         We sample the position of the given Orbit at fixed spaces times. This
@@ -556,6 +560,9 @@ class AttCsattb(geocal_swig.generic_object.GenericObject):
     LAGRANGE_3 = _orbit_des.AttCsattb_LAGRANGE_3
     LAGRANGE_5 = _orbit_des.AttCsattb_LAGRANGE_5
     LAGRANGE_7 = _orbit_des.AttCsattb_LAGRANGE_7
+    SAME_AS_ORBIT = _orbit_des.AttCsattb_SAME_AS_ORBIT
+    CARTESIAN_FIXED = _orbit_des.AttCsattb_CARTESIAN_FIXED
+    CARTESIAN_INERTIAL = _orbit_des.AttCsattb_CARTESIAN_INERTIAL
     PREDICTED = _orbit_des.AttCsattb_PREDICTED
     ACTUAL = _orbit_des.AttCsattb_ACTUAL
     REFINED = _orbit_des.AttCsattb_REFINED
@@ -566,7 +573,8 @@ class AttCsattb(geocal_swig.generic_object.GenericObject):
         AttCsattb::AttCsattb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
         Tstep, InterpolationType Itype=LINEAR, LagrangeOrder
         Lagrange_order=NO_LAGRANGE, AttitudeDataQuality
-        A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL)
+        A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,
+        AttitudeType A_type=SAME_AS_ORBIT)
         Constructor.
 
         We sample the attitude of the given Orbit at fixed spaces times. This

@@ -8,7 +8,7 @@ from geocal.geocal_nitf_des import *
 from geocal.glas_gfm import *
 from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance, Geodetic,
                          OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
-                         KeplerOrbit, Time, OrbitDes)
+                         KeplerOrbit, Time, OrbitDes, Ecr)
 
 @require_msp    
 @require_pynitf
@@ -19,6 +19,11 @@ def test_rip_glas(nitf_sample_rip):
     igc1 = IgcMsp(nitf_sample_rip, SimpleDem(), iseg_index, "GLAS", "GLAS")
     f = pynitf.NitfFile(nitf_sample_rip)
     glas = f.image_segment[iseg_index].glas_gfm
+    ref_pt = Ecr(glas.tre_csexrb.ground_ref_point_x,
+                 glas.tre_csexrb.ground_ref_point_y,
+                 glas.tre_csexrb.ground_ref_point_z)
+    print("Reference Point:", Geodetic(ref_pt))
+    print(igc1.image_coordinate(ref_pt))
     print("Refraction flag: %d" % glas.tre_csexrb.atm_refr_flag)
     print("Velocity flag: %d" % glas.tre_csexrb.vel_aber_flag)
     igc2 = glas.igc()
@@ -206,10 +211,18 @@ def test_create_gfm(isolated_dir):
 
     tdata = Time.parse_time("2003-01-01T11:11:00Z")
     orb = KeplerOrbit()
-    porb = PosCsephb(orb, tdata-10.0,tdata+10.0, 0.5, PosCsephb.LAGRANGE,
-                     PosCsephb.LAGRANGE_7)
-    aorb = AttCsattb(orb, tdata-10.0,tdata+10.0, 0.5, AttCsattb.LAGRANGE,
-                     AttCsattb.LAGRANGE_7)
+    #porb = PosCsephb(orb, tdata-10.0,tdata+10.0, 0.5, PosCsephb.LAGRANGE,
+    #                 PosCsephb.LAGRANGE_7, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+    #                 PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    #aorb = AttCsattb(orb, tdata-10.0,tdata+10.0, 0.5, AttCsattb.LAGRANGE,
+    #                 AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+    #                 AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+    porb = PosCsephb(orb, tdata-10.0,tdata+10.0, 0.5, PosCsephb.LINEAR,
+                     PosCsephb.NO_LAGRANGE, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    aorb = AttCsattb(orb, tdata-10.0,tdata+10.0, 0.5, AttCsattb.LINEAR,
+                     AttCsattb.NO_LAGRANGE, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
     orb = OrbitDes(porb,aorb)
     cam = GlasGfmCamera(2048, 2048)
     cam.focal_length = 123.8e-3
@@ -218,6 +231,13 @@ def test_create_gfm(isolated_dir):
     cam.first_sample_block = [0]
     cam.delta_line_block = [2048]
     cam.delta_sample_block = [2048]
+
+    #cam = GlasGfmCamera(1, 2048)
+    #cam.focal_length = 123.8e-3
+    #cam.focal_length_time = orb.min_time
+    #cam.delta_sample_pair = 2048
+    #cam.field_alignment = [[-1024 * 21e-6, 0, +1024 * 21e-6, 0],]
+    
     fa = np.empty((1,1,2,2,2))
     fa[0,0,:,0,0] = -1024 * 21e-6
     fa[0,0,:,1,0] = 1024 * 21e-6
@@ -227,10 +247,20 @@ def test_create_gfm(isolated_dir):
     
     igc1 = OrbitDataImageGroundConnection(orb, tdata, cam, SimpleDem(),
                                           None)
+    #tt = ConstantSpacingTimeTable(tdata, tdata + 2048 * 1e-3, 1e-3)
+    #igc1 = IpiImageGroundConnection(Ipi(orb, cam, 0, tt.min_time, tt.max_time,
+    #                                    tt), SimpleDem(), None)
     igc1.platform_id = "FAKEPL"
     igc1.payload_id = "FAKEPY"
     igc1.sensor_id = "FAKESN"
     f.image_segment[0].create_glas_gfm(igc1)
+    t = f.image_segment[0].glas_gfm.tre_csexrb
+    pt = igc1.ground_coordinate(ImageCoordinate(1024, 1024))
+    t.ground_ref_point_x = pt.position[0]
+    t.ground_ref_point_y = pt.position[1]
+    t.ground_ref_point_z = pt.position[2]
+    t.atm_refr_flag = 0
+    #t.vel_aber_flag = 0
     print(f)
     f.write("gfm_test.ntf")
     f2 = NitfFile("gfm_test.ntf")
@@ -238,8 +268,6 @@ def test_create_gfm(isolated_dir):
         print(f2,file=fh)
     igc2 = IgcMsp("gfm_test.ntf", SimpleDem(), 0, "GFM", "GFM")
     igc3 = f2.image_segment[0].glas_gfm.igc()
-    # This doesn't work yet, we'll come back to this
-    return
 
     print("Resolution %f m" % igc1.resolution_meter())
     print("Resolution %f m" % igc2.resolution_meter())

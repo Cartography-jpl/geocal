@@ -160,7 +160,7 @@ This should be used to set and read the DES values.
         cam.angoff = [d.angoff_x, d.angoff_y, d.angoff_z]
         if(d.sensor_type == "S"):
             cam.set_number_line(1)
-            cam.set_number_sample(d.num_fa_pairs * d.delta_smpl_pair)
+            cam.set_number_sample(int(d.num_fa_pairs * d.delta_smpl_pair))
             cam.sample_number_first = d.smpl_num_first
             cam.delta_sample_pair = d.delta_smpl_pair
             fa = np.empty((d.num_fa_pairs, 4))

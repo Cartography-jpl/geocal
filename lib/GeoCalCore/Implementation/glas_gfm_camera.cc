@@ -169,12 +169,73 @@ public:
   mutable blitz::Array<double, 2> fa;
 };
 
+/// Implementation that use the field_alignment array.
+class GfmFa : public GlasGfmCameraModelImp {
+public:
+  GfmFa(GlasGfmCamera& Cam) : GlasGfmCameraModelImp(Cam) {}
+  virtual ~GfmFa() {}
+  virtual void fc_to_xy(const FrameCoordinate& F, double &X, double& Y)
+    const
+  {
+    fill_cache();
+    // Right now, just have one fa plane and set of blocks
+    double l = (F.line - cam.first_line_block()(0)) / cam.delta_line_block()(0);
+    double s = (F.sample - cam.first_sample_block()(0)) / cam.delta_sample_block()(0);
+    double x0 = l * (fa(0,0,1,0,0) - fa(0,0,0,0,0)) + fa(0,0,0,0,0);
+    double x1 = l * (fa(0,0,1,1,0) - fa(0,0,0,1,0)) + fa(0,0,0,1,0);
+    double y0 = l * (fa(0,0,1,0,1) - fa(0,0,0,0,1)) + fa(0,0,0,0,1);
+    double y1 = l * (fa(0,0,1,1,1) - fa(0,0,0,1,1)) + fa(0,0,0,1,1);
+    X = s * (x1 - x0) + x0;
+    Y = s * (y1 - y0) + y0;
+  }
+  virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
+			AutoDerivative<double>& X,
+			AutoDerivative<double>& Y) const
+  {
+    fill_cache();
+    // Right now, just have one fa plane and set of blocks
+    AutoDerivative<double> l = (F.line - cam.first_line_block()(0)) / cam.delta_line_block()(0);
+    AutoDerivative<double> s = (F.sample - cam.first_sample_block()(0)) / cam.delta_sample_block()(0);
+    AutoDerivative<double> x0 = l * (fa(0,0,1,0,0) - fa(0,0,0,0,0)) + fa(0,0,0,0,0);
+    AutoDerivative<double> x1 = l * (fa(0,0,1,1,0) - fa(0,0,0,1,0)) + fa(0,0,0,1,0);
+    AutoDerivative<double> y0 = l * (fa(0,0,1,0,1) - fa(0,0,0,0,1)) + fa(0,0,0,0,1);
+    AutoDerivative<double> y1 = l * (fa(0,0,1,1,1) - fa(0,0,0,1,1)) + fa(0,0,0,1,1);
+    X = s * (x1 - x0) + x0;
+    Y = s * (y1 - y0) + y0;
+  }
+  virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const
+  {
+    fill_cache();
+    throw Exception("Not implemented yet");
+  }
+  virtual void xy_to_fc(const AutoDerivative<double>& X,
+			const AutoDerivative<double>& Y,
+			FrameCoordinateWithDerivative& F) const
+  {
+    fill_cache();
+    throw Exception("Not implemented yet");
+  }
+  void fill_cache() const
+  {
+    if(!cache_stale)
+      return;
+    fa.reference(cam.field_alignment_block(0));
+    cache_stale = false;
+  }
+  mutable blitz::Array<double, 5> fa;
+};
+
+  
 }
 
 void GlasGfmCamera::init_model()
 {
-  // For now, just always use the GlasFa
-  model_ = boost::make_shared<GlasFa>(*this);
+  if(sensor_type() == "S")
+    model_ = boost::make_shared<GlasFa>(*this);
+  else if(field_angle_type() == 0)
+    model_ = boost::make_shared<GfmFa>(*this);
+  else
+    throw Exception("Don't support GFM with calibration parameters yet");
 }
 
 GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)

@@ -22,6 +22,8 @@ public:
   enum LagrangeOrder { NO_LAGRANGE = 0, LAGRANGE_1 = 1, LAGRANGE_3 = 3,
 		       LAGRANGE_5 = 5,
 		       LAGRANGE_7 = 7};
+  enum PositionType { SAME_AS_ORBIT = 0, CARTESIAN_FIXED = 1,
+		      CARTESIAN_INERTIAL = 2 };
   enum EphemerisSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
   PosCsephb(const blitz::Array<double, 2>& Pos, const Time& Tmin, double Tstep,
 	    bool Is_cf,
@@ -32,13 +34,15 @@ public:
   PosCsephb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    EphemerisDataQuality E_quality = EPHEMERIS_QUALITY_GOOD,
-	    EphemerisSource E_source = ACTUAL);
+	    EphemerisSource E_source = ACTUAL,
+	    PositionType P_type = SAME_AS_ORBIT);
   PosCsephb(const Orbit& Orb, const Time& Min_time, const Time& Max_time,
 	    double Tstep,
 	    InterpolationType Itype = LINEAR,
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    EphemerisDataQuality E_quality = EPHEMERIS_QUALITY_GOOD,
-	    EphemerisSource E_source = ACTUAL);
+	    EphemerisSource E_source = ACTUAL,
+	    PositionType P_type = SAME_AS_ORBIT);
   blitz::Array<double, 1> pos_vel(const Time& T) const;
   blitz::Array<AutoDerivative<double>, 1>
     pos_vel(const TimeWithDerivative& T) const;
@@ -123,6 +127,8 @@ public:
   enum LagrangeOrder { NO_LAGRANGE = 0, LAGRANGE_1 = 1, LAGRANGE_3 = 3,
 		       LAGRANGE_5 = 5,
 		       LAGRANGE_7 = 7};
+  enum AttitudeType { SAME_AS_ORBIT = 0, CARTESIAN_FIXED = 1,
+		      CARTESIAN_INERTIAL = 2 };
   enum AttitudeSource { PREDICTED = 0, ACTUAL = 1, REFINED = 2 };
   AttCsattb(const blitz::Array<double, 2>& Att, const Time& Tmin, double Tstep,
 	    bool Is_cf,
@@ -133,13 +139,15 @@ public:
   AttCsattb(const Orbit& Orb, double Tstep, InterpolationType Itype = LINEAR,
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    AttitudeDataQuality E_quality = ATTITUDE_QUALITY_GOOD,
-	    AttitudeSource E_source = ACTUAL);
+	    AttitudeSource E_source = ACTUAL,
+	    AttitudeType A_type = SAME_AS_ORBIT);
   AttCsattb(const Orbit& Orb, const Time& Min_time, const Time& Max_time,
 	    double Tstep,
 	    InterpolationType Itype = LINEAR,
 	    LagrangeOrder Lagrange_order = NO_LAGRANGE,
 	    AttitudeDataQuality E_quality = ATTITUDE_QUALITY_GOOD,
-	    AttitudeSource E_source = ACTUAL);
+	    AttitudeSource E_source = ACTUAL,
+	    AttitudeType A_type = SAME_AS_ORBIT);
   %python_attribute_with_set(id, std::string);
   %python_attribute(is_cf, bool);
   %python_attribute(min_time, Time);

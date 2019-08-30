@@ -90,9 +90,11 @@ def test_camera_gfm(isolated_dir):
     tdata = Time.parse_time("2003-01-01T11:11:00Z")
     orb = KeplerOrbit()
     porb = PosCsephb(orb, tdata-10.0,tdata+10.0, 0.5, PosCsephb.LAGRANGE,
-                     PosCsephb.LAGRANGE_7)
+                     PosCsephb.LAGRANGE_7, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
     aorb = AttCsattb(orb, tdata-10.0,tdata+10.0, 0.5, AttCsattb.LAGRANGE,
-                     AttCsattb.LAGRANGE_7)
+                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
     orb = OrbitDes(porb,aorb)
     cam = GlasGfmCamera(2048, 2048)
     cam.focal_length = 123.8e-3

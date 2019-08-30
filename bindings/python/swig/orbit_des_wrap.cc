@@ -7354,6 +7354,107 @@ SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_5(PyObject *SWIGUNUSEDPARM(self),
   GeoCal::PosCsephb::LagrangeOrder arg4 ;
   GeoCal::PosCsephb::EphemerisDataQuality arg5 ;
   GeoCal::PosCsephb::EphemerisSource arg6 ;
+  GeoCal::PosCsephb::PositionType arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  GeoCal::PosCsephb *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Orbit *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PosCsephb" "', argument " "1"" of type '" "GeoCal::Orbit const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PosCsephb" "', argument " "1"" of type '" "GeoCal::Orbit const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_PosCsephb" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_PosCsephb" "', argument " "3"" of type '" "GeoCal::PosCsephb::InterpolationType""'");
+  } 
+  arg3 = static_cast< GeoCal::PosCsephb::InterpolationType >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_PosCsephb" "', argument " "4"" of type '" "GeoCal::PosCsephb::LagrangeOrder""'");
+  } 
+  arg4 = static_cast< GeoCal::PosCsephb::LagrangeOrder >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_PosCsephb" "', argument " "5"" of type '" "GeoCal::PosCsephb::EphemerisDataQuality""'");
+  } 
+  arg5 = static_cast< GeoCal::PosCsephb::EphemerisDataQuality >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_PosCsephb" "', argument " "6"" of type '" "GeoCal::PosCsephb::EphemerisSource""'");
+  } 
+  arg6 = static_cast< GeoCal::PosCsephb::EphemerisSource >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_PosCsephb" "', argument " "7"" of type '" "GeoCal::PosCsephb::PositionType""'");
+  } 
+  arg7 = static_cast< GeoCal::PosCsephb::PositionType >(val7);
+  {
+    try {
+      result = (GeoCal::PosCsephb *)new GeoCal::PosCsephb((GeoCal::Orbit const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::PosCsephb > *smartresult = result ? new boost::shared_ptr<  GeoCal::PosCsephb >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PosCsephb_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Orbit *arg1 = 0 ;
+  double arg2 ;
+  GeoCal::PosCsephb::InterpolationType arg3 ;
+  GeoCal::PosCsephb::LagrangeOrder arg4 ;
+  GeoCal::PosCsephb::EphemerisDataQuality arg5 ;
+  GeoCal::PosCsephb::EphemerisSource arg6 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
@@ -7439,7 +7540,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   double arg2 ;
@@ -7524,7 +7625,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   double arg2 ;
@@ -7601,7 +7702,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   double arg2 ;
@@ -7670,7 +7771,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   double arg2 ;
@@ -7731,7 +7832,166 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Orbit *arg1 = 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  GeoCal::Time *arg3 = 0 ;
+  double arg4 ;
+  GeoCal::PosCsephb::InterpolationType arg5 ;
+  GeoCal::PosCsephb::LagrangeOrder arg6 ;
+  GeoCal::PosCsephb::EphemerisDataQuality arg7 ;
+  GeoCal::PosCsephb::EphemerisSource arg8 ;
+  GeoCal::PosCsephb::PositionType arg9 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  int val9 ;
+  int ecode9 = 0 ;
+  GeoCal::PosCsephb *result = 0 ;
+  
+  if ((nobjs < 9) || (nobjs > 9)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Orbit *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_PosCsephb" "', argument " "1"" of type '" "GeoCal::Orbit const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PosCsephb" "', argument " "1"" of type '" "GeoCal::Orbit const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_PosCsephb" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PosCsephb" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_PosCsephb" "', argument " "3"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_PosCsephb" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< GeoCal::Time * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_PosCsephb" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_PosCsephb" "', argument " "5"" of type '" "GeoCal::PosCsephb::InterpolationType""'");
+  } 
+  arg5 = static_cast< GeoCal::PosCsephb::InterpolationType >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_PosCsephb" "', argument " "6"" of type '" "GeoCal::PosCsephb::LagrangeOrder""'");
+  } 
+  arg6 = static_cast< GeoCal::PosCsephb::LagrangeOrder >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_PosCsephb" "', argument " "7"" of type '" "GeoCal::PosCsephb::EphemerisDataQuality""'");
+  } 
+  arg7 = static_cast< GeoCal::PosCsephb::EphemerisDataQuality >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_PosCsephb" "', argument " "8"" of type '" "GeoCal::PosCsephb::EphemerisSource""'");
+  } 
+  arg8 = static_cast< GeoCal::PosCsephb::EphemerisSource >(val8);
+  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_PosCsephb" "', argument " "9"" of type '" "GeoCal::PosCsephb::PositionType""'");
+  } 
+  arg9 = static_cast< GeoCal::PosCsephb::PositionType >(val9);
+  {
+    try {
+      result = (GeoCal::PosCsephb *)new GeoCal::PosCsephb((GeoCal::Orbit const &)*arg1,(GeoCal::Time const &)*arg2,(GeoCal::Time const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::PosCsephb > *smartresult = result ? new boost::shared_ptr<  GeoCal::PosCsephb >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PosCsephb_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -7882,7 +8142,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_13(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -8025,7 +8285,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_14(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -8160,7 +8420,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_13(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_15(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -8287,7 +8547,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_14(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_PosCsephb__SWIG_16(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -8408,17 +8668,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_PosCsephb(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[9] = {
+  PyObject *argv[10] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_PosCsephb",0,8,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_PosCsephb",0,9,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_new_PosCsephb__SWIG_9(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_10(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_PosCsephb__SWIG_8(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_9(self, argc, argv);
   }
   if (argc == 4) {
     int _v = 0;
@@ -8444,7 +8704,7 @@ SWIGINTERN PyObject *_wrap_new_PosCsephb(PyObject *self, PyObject *args) {
       }
     }
     if (!_v) goto check_3;
-    return _wrap_new_PosCsephb__SWIG_14(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_16(self, argc, argv);
   }
 check_3:
   
@@ -8476,7 +8736,7 @@ check_3:
       }
     }
     if (!_v) goto check_4;
-    return _wrap_new_PosCsephb__SWIG_7(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_8(self, argc, argv);
   }
 check_4:
   
@@ -8507,7 +8767,7 @@ check_4:
       }
     }
     if (!_v) goto check_6;
-    return _wrap_new_PosCsephb__SWIG_13(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_15(self, argc, argv);
   }
 check_6:
   
@@ -8539,7 +8799,7 @@ check_6:
       }
     }
     if (!_v) goto check_7;
-    return _wrap_new_PosCsephb__SWIG_6(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_7(self, argc, argv);
   }
 check_7:
   
@@ -8570,7 +8830,7 @@ check_7:
       }
     }
     if (!_v) goto check_9;
-    return _wrap_new_PosCsephb__SWIG_12(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_14(self, argc, argv);
   }
 check_9:
   
@@ -8602,7 +8862,7 @@ check_9:
       }
     }
     if (!_v) goto check_10;
-    return _wrap_new_PosCsephb__SWIG_5(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_6(self, argc, argv);
   }
 check_10:
   
@@ -8617,6 +8877,11 @@ check_10:
     }
     if (!_v) goto check_12;
     {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_12;
+    {
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0);
       _v = SWIG_CheckState(res);
     }
@@ -8628,9 +8893,41 @@ check_10:
       }
     }
     if (!_v) goto check_12;
-    return _wrap_new_PosCsephb__SWIG_11(self, argc, argv);
+    return _wrap_new_PosCsephb__SWIG_13(self, argc, argv);
   }
 check_12:
+  
+  if (argc == 7) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_13;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_13;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_13;
+    return _wrap_new_PosCsephb__SWIG_5(self, argc, argv);
+  }
+check_13:
   
   if (argc == 7) {
     return _wrap_new_PosCsephb__SWIG_1(self, argc, argv);
@@ -8641,25 +8938,28 @@ check_12:
       int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_14;
+    if (!_v) goto check_15;
     {
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_14;
+    if (!_v) goto check_15;
     {
       {
         int res = SWIG_AsVal_double(argv[3], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_14;
-    return _wrap_new_PosCsephb__SWIG_10(self, argc, argv);
+    if (!_v) goto check_15;
+    return _wrap_new_PosCsephb__SWIG_12(self, argc, argv);
   }
-check_14:
+check_15:
   
   if (argc == 8) {
     return _wrap_new_PosCsephb__SWIG_0(self, argc, argv);
+  }
+  if (argc == 9) {
+    return _wrap_new_PosCsephb__SWIG_11(self, argc, argv);
   }
   
 fail:
@@ -8670,11 +8970,13 @@ fail:
     "    GeoCal::PosCsephb::PosCsephb(blitz::Array< double,2 > const &,GeoCal::Time const &,double,bool,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder)\n"
     "    GeoCal::PosCsephb::PosCsephb(blitz::Array< double,2 > const &,GeoCal::Time const &,double,bool,GeoCal::PosCsephb::InterpolationType)\n"
     "    GeoCal::PosCsephb::PosCsephb(blitz::Array< double,2 > const &,GeoCal::Time const &,double,bool)\n"
+    "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,double,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder,GeoCal::PosCsephb::EphemerisDataQuality,GeoCal::PosCsephb::EphemerisSource,GeoCal::PosCsephb::PositionType)\n"
     "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,double,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder,GeoCal::PosCsephb::EphemerisDataQuality,GeoCal::PosCsephb::EphemerisSource)\n"
     "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,double,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder,GeoCal::PosCsephb::EphemerisDataQuality)\n"
     "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,double,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder)\n"
     "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,double,GeoCal::PosCsephb::InterpolationType)\n"
     "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,double)\n"
+    "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,GeoCal::Time const &,GeoCal::Time const &,double,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder,GeoCal::PosCsephb::EphemerisDataQuality,GeoCal::PosCsephb::EphemerisSource,GeoCal::PosCsephb::PositionType)\n"
     "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,GeoCal::Time const &,GeoCal::Time const &,double,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder,GeoCal::PosCsephb::EphemerisDataQuality,GeoCal::PosCsephb::EphemerisSource)\n"
     "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,GeoCal::Time const &,GeoCal::Time const &,double,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder,GeoCal::PosCsephb::EphemerisDataQuality)\n"
     "    GeoCal::PosCsephb::PosCsephb(GeoCal::Orbit const &,GeoCal::Time const &,GeoCal::Time const &,double,GeoCal::PosCsephb::InterpolationType,GeoCal::PosCsephb::LagrangeOrder)\n"
@@ -10479,6 +10781,107 @@ SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_5(PyObject *SWIGUNUSEDPARM(self),
   GeoCal::AttCsattb::LagrangeOrder arg4 ;
   GeoCal::AttCsattb::AttitudeDataQuality arg5 ;
   GeoCal::AttCsattb::AttitudeSource arg6 ;
+  GeoCal::AttCsattb::AttitudeType arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  GeoCal::AttCsattb *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Orbit *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AttCsattb" "', argument " "1"" of type '" "GeoCal::Orbit const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AttCsattb" "', argument " "1"" of type '" "GeoCal::Orbit const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_AttCsattb" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_AttCsattb" "', argument " "3"" of type '" "GeoCal::AttCsattb::InterpolationType""'");
+  } 
+  arg3 = static_cast< GeoCal::AttCsattb::InterpolationType >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_AttCsattb" "', argument " "4"" of type '" "GeoCal::AttCsattb::LagrangeOrder""'");
+  } 
+  arg4 = static_cast< GeoCal::AttCsattb::LagrangeOrder >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_AttCsattb" "', argument " "5"" of type '" "GeoCal::AttCsattb::AttitudeDataQuality""'");
+  } 
+  arg5 = static_cast< GeoCal::AttCsattb::AttitudeDataQuality >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AttCsattb" "', argument " "6"" of type '" "GeoCal::AttCsattb::AttitudeSource""'");
+  } 
+  arg6 = static_cast< GeoCal::AttCsattb::AttitudeSource >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AttCsattb" "', argument " "7"" of type '" "GeoCal::AttCsattb::AttitudeType""'");
+  } 
+  arg7 = static_cast< GeoCal::AttCsattb::AttitudeType >(val7);
+  {
+    try {
+      result = (GeoCal::AttCsattb *)new GeoCal::AttCsattb((GeoCal::Orbit const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AttCsattb > *smartresult = result ? new boost::shared_ptr<  GeoCal::AttCsattb >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AttCsattb_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Orbit *arg1 = 0 ;
+  double arg2 ;
+  GeoCal::AttCsattb::InterpolationType arg3 ;
+  GeoCal::AttCsattb::LagrangeOrder arg4 ;
+  GeoCal::AttCsattb::AttitudeDataQuality arg5 ;
+  GeoCal::AttCsattb::AttitudeSource arg6 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
@@ -10564,7 +10967,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   double arg2 ;
@@ -10649,7 +11052,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   double arg2 ;
@@ -10726,7 +11129,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   double arg2 ;
@@ -10795,7 +11198,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   double arg2 ;
@@ -10856,7 +11259,166 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Orbit *arg1 = 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  GeoCal::Time *arg3 = 0 ;
+  double arg4 ;
+  GeoCal::AttCsattb::InterpolationType arg5 ;
+  GeoCal::AttCsattb::LagrangeOrder arg6 ;
+  GeoCal::AttCsattb::AttitudeDataQuality arg7 ;
+  GeoCal::AttCsattb::AttitudeSource arg8 ;
+  GeoCal::AttCsattb::AttitudeType arg9 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  int val9 ;
+  int ecode9 = 0 ;
+  GeoCal::AttCsattb *result = 0 ;
+  
+  if ((nobjs < 9) || (nobjs > 9)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Orbit *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Orbit,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AttCsattb" "', argument " "1"" of type '" "GeoCal::Orbit const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AttCsattb" "', argument " "1"" of type '" "GeoCal::Orbit const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+        arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Orbit * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_AttCsattb" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AttCsattb" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_AttCsattb" "', argument " "3"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_AttCsattb" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< GeoCal::Time * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_AttCsattb" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_AttCsattb" "', argument " "5"" of type '" "GeoCal::AttCsattb::InterpolationType""'");
+  } 
+  arg5 = static_cast< GeoCal::AttCsattb::InterpolationType >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_AttCsattb" "', argument " "6"" of type '" "GeoCal::AttCsattb::LagrangeOrder""'");
+  } 
+  arg6 = static_cast< GeoCal::AttCsattb::LagrangeOrder >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_AttCsattb" "', argument " "7"" of type '" "GeoCal::AttCsattb::AttitudeDataQuality""'");
+  } 
+  arg7 = static_cast< GeoCal::AttCsattb::AttitudeDataQuality >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_AttCsattb" "', argument " "8"" of type '" "GeoCal::AttCsattb::AttitudeSource""'");
+  } 
+  arg8 = static_cast< GeoCal::AttCsattb::AttitudeSource >(val8);
+  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_AttCsattb" "', argument " "9"" of type '" "GeoCal::AttCsattb::AttitudeType""'");
+  } 
+  arg9 = static_cast< GeoCal::AttCsattb::AttitudeType >(val9);
+  {
+    try {
+      result = (GeoCal::AttCsattb *)new GeoCal::AttCsattb((GeoCal::Orbit const &)*arg1,(GeoCal::Time const &)*arg2,(GeoCal::Time const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::AttCsattb > *smartresult = result ? new boost::shared_ptr<  GeoCal::AttCsattb >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AttCsattb_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -11007,7 +11569,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_13(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -11150,7 +11712,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_14(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -11285,7 +11847,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_13(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_15(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -11412,7 +11974,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_14(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_AttCsattb__SWIG_16(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Orbit *arg1 = 0 ;
   GeoCal::Time *arg2 = 0 ;
@@ -11533,17 +12095,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_AttCsattb(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[9] = {
+  PyObject *argv[10] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AttCsattb",0,8,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_AttCsattb",0,9,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
-    return _wrap_new_AttCsattb__SWIG_9(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_10(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_AttCsattb__SWIG_8(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_9(self, argc, argv);
   }
   if (argc == 4) {
     int _v = 0;
@@ -11569,7 +12131,7 @@ SWIGINTERN PyObject *_wrap_new_AttCsattb(PyObject *self, PyObject *args) {
       }
     }
     if (!_v) goto check_3;
-    return _wrap_new_AttCsattb__SWIG_14(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_16(self, argc, argv);
   }
 check_3:
   
@@ -11601,7 +12163,7 @@ check_3:
       }
     }
     if (!_v) goto check_4;
-    return _wrap_new_AttCsattb__SWIG_7(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_8(self, argc, argv);
   }
 check_4:
   
@@ -11632,7 +12194,7 @@ check_4:
       }
     }
     if (!_v) goto check_6;
-    return _wrap_new_AttCsattb__SWIG_13(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_15(self, argc, argv);
   }
 check_6:
   
@@ -11664,7 +12226,7 @@ check_6:
       }
     }
     if (!_v) goto check_7;
-    return _wrap_new_AttCsattb__SWIG_6(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_7(self, argc, argv);
   }
 check_7:
   
@@ -11695,7 +12257,7 @@ check_7:
       }
     }
     if (!_v) goto check_9;
-    return _wrap_new_AttCsattb__SWIG_12(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_14(self, argc, argv);
   }
 check_9:
   
@@ -11727,7 +12289,7 @@ check_9:
       }
     }
     if (!_v) goto check_10;
-    return _wrap_new_AttCsattb__SWIG_5(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_6(self, argc, argv);
   }
 check_10:
   
@@ -11742,6 +12304,11 @@ check_10:
     }
     if (!_v) goto check_12;
     {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_12;
+    {
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0);
       _v = SWIG_CheckState(res);
     }
@@ -11753,9 +12320,41 @@ check_10:
       }
     }
     if (!_v) goto check_12;
-    return _wrap_new_AttCsattb__SWIG_11(self, argc, argv);
+    return _wrap_new_AttCsattb__SWIG_13(self, argc, argv);
   }
 check_12:
+  
+  if (argc == 7) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_13;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_13;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_13;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_13;
+    return _wrap_new_AttCsattb__SWIG_5(self, argc, argv);
+  }
+check_13:
   
   if (argc == 7) {
     return _wrap_new_AttCsattb__SWIG_1(self, argc, argv);
@@ -11766,25 +12365,28 @@ check_12:
       int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_14;
+    if (!_v) goto check_15;
     {
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_14;
+    if (!_v) goto check_15;
     {
       {
         int res = SWIG_AsVal_double(argv[3], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_14;
-    return _wrap_new_AttCsattb__SWIG_10(self, argc, argv);
+    if (!_v) goto check_15;
+    return _wrap_new_AttCsattb__SWIG_12(self, argc, argv);
   }
-check_14:
+check_15:
   
   if (argc == 8) {
     return _wrap_new_AttCsattb__SWIG_0(self, argc, argv);
+  }
+  if (argc == 9) {
+    return _wrap_new_AttCsattb__SWIG_11(self, argc, argv);
   }
   
 fail:
@@ -11795,11 +12397,13 @@ fail:
     "    GeoCal::AttCsattb::AttCsattb(blitz::Array< double,2 > const &,GeoCal::Time const &,double,bool,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder)\n"
     "    GeoCal::AttCsattb::AttCsattb(blitz::Array< double,2 > const &,GeoCal::Time const &,double,bool,GeoCal::AttCsattb::InterpolationType)\n"
     "    GeoCal::AttCsattb::AttCsattb(blitz::Array< double,2 > const &,GeoCal::Time const &,double,bool)\n"
+    "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,double,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder,GeoCal::AttCsattb::AttitudeDataQuality,GeoCal::AttCsattb::AttitudeSource,GeoCal::AttCsattb::AttitudeType)\n"
     "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,double,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder,GeoCal::AttCsattb::AttitudeDataQuality,GeoCal::AttCsattb::AttitudeSource)\n"
     "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,double,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder,GeoCal::AttCsattb::AttitudeDataQuality)\n"
     "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,double,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder)\n"
     "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,double,GeoCal::AttCsattb::InterpolationType)\n"
     "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,double)\n"
+    "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,GeoCal::Time const &,GeoCal::Time const &,double,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder,GeoCal::AttCsattb::AttitudeDataQuality,GeoCal::AttCsattb::AttitudeSource,GeoCal::AttCsattb::AttitudeType)\n"
     "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,GeoCal::Time const &,GeoCal::Time const &,double,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder,GeoCal::AttCsattb::AttitudeDataQuality,GeoCal::AttCsattb::AttitudeSource)\n"
     "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,GeoCal::Time const &,GeoCal::Time const &,double,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder,GeoCal::AttCsattb::AttitudeDataQuality)\n"
     "    GeoCal::AttCsattb::AttCsattb(GeoCal::Orbit const &,GeoCal::Time const &,GeoCal::Time const &,double,GeoCal::AttCsattb::InterpolationType,GeoCal::AttCsattb::LagrangeOrder)\n"
@@ -13468,7 +14072,8 @@ static PyMethodDef SwigMethods[] = {
 		"PosCsephb::PosCsephb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double\n"
 		"Tstep, InterpolationType Itype=LINEAR, LagrangeOrder\n"
 		"Lagrange_order=NO_LAGRANGE, EphemerisDataQuality\n"
-		"E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL)\n"
+		"E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,\n"
+		"PositionType P_type=SAME_AS_ORBIT)\n"
 		"Constructor.\n"
 		"\n"
 		"We sample the position of the given Orbit at fixed spaces times. This\n"
@@ -13560,7 +14165,8 @@ static PyMethodDef SwigMethods[] = {
 		"AttCsattb::AttCsattb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double\n"
 		"Tstep, InterpolationType Itype=LINEAR, LagrangeOrder\n"
 		"Lagrange_order=NO_LAGRANGE, AttitudeDataQuality\n"
-		"A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL)\n"
+		"A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,\n"
+		"AttitudeType A_type=SAME_AS_ORBIT)\n"
 		"Constructor.\n"
 		"\n"
 		"We sample the attitude of the given Orbit at fixed spaces times. This\n"
@@ -15585,6 +16191,9 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "PosCsephb_LAGRANGE_3",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::LAGRANGE_3)));
   SWIG_Python_SetConstant(d, "PosCsephb_LAGRANGE_5",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::LAGRANGE_5)));
   SWIG_Python_SetConstant(d, "PosCsephb_LAGRANGE_7",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::LAGRANGE_7)));
+  SWIG_Python_SetConstant(d, "PosCsephb_SAME_AS_ORBIT",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::SAME_AS_ORBIT)));
+  SWIG_Python_SetConstant(d, "PosCsephb_CARTESIAN_FIXED",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::CARTESIAN_FIXED)));
+  SWIG_Python_SetConstant(d, "PosCsephb_CARTESIAN_INERTIAL",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::CARTESIAN_INERTIAL)));
   SWIG_Python_SetConstant(d, "PosCsephb_PREDICTED",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::PREDICTED)));
   SWIG_Python_SetConstant(d, "PosCsephb_ACTUAL",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::ACTUAL)));
   SWIG_Python_SetConstant(d, "PosCsephb_REFINED",SWIG_From_int(static_cast< int >(GeoCal::PosCsephb::REFINED)));
@@ -15598,6 +16207,9 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "AttCsattb_LAGRANGE_3",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::LAGRANGE_3)));
   SWIG_Python_SetConstant(d, "AttCsattb_LAGRANGE_5",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::LAGRANGE_5)));
   SWIG_Python_SetConstant(d, "AttCsattb_LAGRANGE_7",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::LAGRANGE_7)));
+  SWIG_Python_SetConstant(d, "AttCsattb_SAME_AS_ORBIT",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::SAME_AS_ORBIT)));
+  SWIG_Python_SetConstant(d, "AttCsattb_CARTESIAN_FIXED",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::CARTESIAN_FIXED)));
+  SWIG_Python_SetConstant(d, "AttCsattb_CARTESIAN_INERTIAL",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::CARTESIAN_INERTIAL)));
   SWIG_Python_SetConstant(d, "AttCsattb_PREDICTED",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::PREDICTED)));
   SWIG_Python_SetConstant(d, "AttCsattb_ACTUAL",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::ACTUAL)));
   SWIG_Python_SetConstant(d, "AttCsattb_REFINED",SWIG_From_int(static_cast< int >(GeoCal::AttCsattb::REFINED)));

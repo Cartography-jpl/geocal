@@ -123,6 +123,63 @@ BOOST_AUTO_TEST_CASE(basic_test)
   
 }
 
+BOOST_AUTO_TEST_CASE(gfm_test)
+{
+  blitz::Range ra = blitz::Range::all();
+  GlasGfmCamera cam(2048, 2048);
+  cam.focal_length(123.8e-3);
+  // Have two FA pairs, even though they are redundant. This tests the
+  // handling of this in the code.
+  blitz::Array<double, 1> t(1);
+  t(0) = 0;
+  cam.first_line_block(t);
+  cam.first_sample_block(t);
+  t(0) = 2048;
+  cam.delta_line_block(t);
+  cam.delta_sample_block(t);
+  blitz::Array<double, 5> fa(1,1,2,2,2);
+  fa(0,0,ra, 0, 0) = -1024 * 21e-6;
+  fa(0,0,ra, 1, 0) = 1024 * 21e-6;
+  fa(0,0,0, ra, 1) = 1024 * 21e-6;
+  fa(0,0,1, ra, 1) = -1024 * 21e-6;
+  cam.field_alignment_block(0, fa);
+  // GlasGfmCamera should have the same values as this QuaternionCamera.
+  QuaternionCamera qcam(boost::math::quaternion<double>(1,0,0,0),
+			2048, 2048, 21e-6, 21e-6,
+			123.8e-3,
+			FrameCoordinate(1024, 1024),
+			QuaternionCamera::LINE_IS_Y,
+			QuaternionCamera::INCREASE_IS_NEGATIVE,
+			QuaternionCamera::INCREASE_IS_POSITIVE);  
+  BOOST_CHECK_EQUAL(cam.number_band(), 1);
+  BOOST_CHECK_EQUAL(cam.number_line(0), 2048);
+  BOOST_CHECK_EQUAL(cam.number_sample(0), 2048);
+  BOOST_CHECK_CLOSE(cam.focal_length(), 123.8e-3, 1e-4);
+  BOOST_CHECK_EQUAL(cam.sensor_type(), "F");
+  for(int i = 0; i < 2048; i += 20) 
+    for(int j = 0; j < 2048; j += 20) {    
+      FrameCoordinate fc(i,j);
+      BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fc, 0),0).line
+		     - fc.line) < 1e-3);
+      BOOST_CHECK(fabs(qcam.frame_coordinate(cam.sc_look_vector(fc, 0),0).sample
+		     - fc.sample) < 1e-3);
+      BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fc, 0),0).line
+		     - fc.line) < 1e-3);
+      BOOST_CHECK(fabs(cam.frame_coordinate(qcam.sc_look_vector(fc, 0),0).sample
+		     - fc.sample) < 1e-3);
+      FrameCoordinateWithDerivative fc2(AutoDerivative<double>(i, 0, 2),
+					AutoDerivative<double>(j, 1, 2));
+      BOOST_CHECK(fabs(qcam.frame_coordinate_with_derivative(cam.sc_look_vector_with_derivative(fc2, 0),0).line.value()
+		       - fc2.line.value()) < 1e-3);
+      BOOST_CHECK(fabs(qcam.frame_coordinate_with_derivative(cam.sc_look_vector_with_derivative(fc2, 0),0).sample.value()
+		       - fc2.sample.value()) < 1e-3);
+      BOOST_CHECK(fabs(cam.frame_coordinate_with_derivative(qcam.sc_look_vector_with_derivative(fc2, 0),0).line.value()
+		       - fc2.line.value()) < 1e-3);
+      BOOST_CHECK(fabs(cam.frame_coordinate_with_derivative(qcam.sc_look_vector_with_derivative(fc2, 0),0).sample.value()
+		       - fc2.sample.value()) < 1e-3);
+    }
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())

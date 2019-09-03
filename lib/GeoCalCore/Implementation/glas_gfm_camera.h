@@ -313,6 +313,8 @@ public:
     // to the maximum number of field angle datasets. But check
     // anyways, in case something weird has happened.
     range_check(i, 0, (int) field_alignment_block_.size());
+    if(V.extent(2) != 2 || V.extent(3) != 2 || V.extent(4) != 2)
+      throw Exception("Field alignment data should be n x m x 2 x 2 x 2");
     field_alignment_block_[i].reference(V.copy());
     notify_update();
   }

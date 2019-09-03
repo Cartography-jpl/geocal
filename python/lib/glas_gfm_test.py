@@ -280,6 +280,7 @@ def test_create_gfm(isolated_dir):
                           igc2.ground_coordinate(ic))
             d2 = distance(igc1.ground_coordinate(ic),
                           igc3.ground_coordinate(ic))
+            print(igc1.image_coordinate(igc1.ground_coordinate(ic)))
             max_diff1 = max(d1, max_diff1)
             max_diff2 = max(d2, max_diff2)
     print(max_diff1)

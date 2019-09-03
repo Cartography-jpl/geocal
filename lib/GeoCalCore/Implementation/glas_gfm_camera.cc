@@ -1,5 +1,6 @@
 #include "glas_gfm_camera.h"
 #include "geocal_serialize_support.h"
+#include "geocal_gsl_root.h"
 #include "ostream_pad.h"
 #include <cmath>
 
@@ -169,6 +170,17 @@ public:
   mutable blitz::Array<double, 2> fa;
 };
 
+class GfmFa;
+  
+class GfmFaEqu: public VFunctor {
+public:
+  GfmFaEqu(const GfmFa& F, double X, double Y)
+    : f(F), x(X), y(Y) {}
+  virtual ~GfmFaEqu() {}
+  virtual blitz::Array<double, 1> operator()(const blitz::Array<double, 1>& X) const;
+  const GfmFa& f;
+  double x, y;
+};
 /// Implementation that use the field_alignment array.
 class GfmFa : public GlasGfmCameraModelImp {
 public:
@@ -206,27 +218,74 @@ public:
   virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const
   {
     fill_cache();
-    throw Exception("Not implemented yet");
+    // For now, we just brute force this. We can try doing something
+    // more refined if this ends up being a bottle neck.
+    GfmFaEqu eq(*this, X, Y);
+    blitz::Array<double, 1> initial(2);
+    initial = cam.number_line(0) / 2, cam.number_sample(0) / 2;
+    blitz::Array<double, 1> res = gsl_root(eq, initial, root_residual_needed);
+    F.line = res(0);
+    F.sample = res(1);
   }
   virtual void xy_to_fc(const AutoDerivative<double>& X,
 			const AutoDerivative<double>& Y,
 			FrameCoordinateWithDerivative& F) const
   {
     fill_cache();
-    throw Exception("Not implemented yet");
+    FrameCoordinate fc, fc_dx, fc_dy;
+    xy_to_fc(X.value(), Y.value(), fc);
+    xy_to_fc(X.value() + 0.1 * max_pitch, Y.value(), fc_dx);
+    xy_to_fc(X.value(), Y.value() + 0.1 * max_pitch, fc_dy);
+    double l_dx = (fc_dx.line - fc.line) / (0.1 * max_pitch);
+    double l_dy = (fc_dy.line - fc.line) / (0.1 * max_pitch);
+    double s_dx = (fc_dx.sample - fc.sample) / (0.1 * max_pitch);
+    double s_dy = (fc_dy.sample - fc.sample) / (0.1 * max_pitch);
+    if(X.is_constant() && Y.is_constant()) {
+      F.line = fc.line;
+      F.sample = fc.sample;
+      return;
+    }
+    int nvar = std::max(X.number_variable(), Y.number_variable());
+    Array<double, 1> l_grad(nvar), s_grad(nvar);
+    l_grad = l_dx * X.gradient() + l_dy * Y.gradient();
+    s_grad = s_dx * X.gradient() + s_dy * Y.gradient();
+    F.line = AutoDerivative<double>(fc.line, l_grad);
+    F.sample = AutoDerivative<double>(fc.sample, s_grad);
   }
   void fill_cache() const
   {
     if(!cache_stale)
       return;
+    blitz::Range ra = blitz::Range::all();
     fa.reference(cam.field_alignment_block(0));
+    // This is just a rough estimate of pitch, but it should be
+    // sufficient to determine a reasonable tolerance for root
+    // finding.
+    double spitch = max(fabs(fa(ra,ra,ra,1,ra) - fa(ra,ra,ra,0,ra)) / cam.delta_sample_block()(0));
+    double lpitch = max(fabs(fa(ra,ra,1,ra,ra) - fa(ra,ra,0,ra,ra)) / cam.delta_sample_block()(0));
+    max_pitch = std::max(spitch, lpitch);
+    // Want solution to 0.001 pixels.
+    root_residual_needed = 1e-3 * max_pitch;
     cache_stale = false;
   }
   mutable blitz::Array<double, 5> fa;
+  mutable double max_pitch;
+  mutable double root_residual_needed;
 };
 
+blitz::Array<double, 1> GfmFaEqu::operator()(const blitz::Array<double, 1>& X) const
+{
+  FrameCoordinate fc(X(0), X(1));
+  blitz::Array<double, 1> res(2);
+  f.fc_to_xy(fc, res(0), res(1));
+  res(0) -= x;
+  res(1) -= y;
+  return res;
+}
+  
   
 }
+
 
 void GlasGfmCamera::init_model()
 {

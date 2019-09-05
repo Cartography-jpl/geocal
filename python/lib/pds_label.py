@@ -19,7 +19,7 @@ def pds_label_text(fname):
             # Strip off /r. Shows up in python 2, but not 3. Not sure why
             # the difference, but in any case we don't want them
             res += line.replace(b'\r',b'')
-            if line.strip() == b'END' or line == b'':
+            if line.strip().upper() == b'END' or line == b'':
                 break
     return res
         

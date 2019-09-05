@@ -105,7 +105,7 @@ require_mars_spice = pytest.mark.skipif(not SpiceHelper.have_spice() or
        not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") or
        not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker"),
        reason="need a geocal build with spice support, and the mars spice kernels available to run")
-                                       
+
                                        
 # Marker that tests if we have HdfFile available.
 require_hdf5 = pytest.mark.skipif(not hasattr(geocal_swig, "HdfFile"),
@@ -386,3 +386,17 @@ def mars_kernel():
        os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")):
        SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker")
        SpiceHelper.add_kernel(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")
+
+@pytest.fixture(scope="function")
+def mars_test_data():
+    if(not SpiceHelper.have_spice() or
+       not "MARS_KERNEL" in os.environ or
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") or
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")):
+        raise SkipTest
+    res = "/raid27/smyth/MiplMarsTest/"
+    if(not os.path.exists(res)):
+        raise SkipTest
+    return res
+                                       
+       

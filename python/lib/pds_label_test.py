@@ -50,5 +50,16 @@ def test_spice_kernel_by_time():
     kdata = SpiceKernelByTime(glob.glob(bdir + "mro_*_ssd_mro110c.lbl"))
     tstart = Time.parse_time("2008-02-23T03:36:10.894Z")
     assert kdata.kernel(tstart) == bdir + "mro_psp6_ssd_mro110c.bsp"
+
+# Depends on data we don't want to assume is available    
+def test_pds_label_isis():
+    '''ISIS is almost the same as PDS, test this on a file'''
+    fname = "/data/smyth/MarsHirise/Gale/esp_025012_1745_red2.norm.cub"
+    lbl = pds_label(fname)
+    print(lbl["SpacecraftClockStartCount"])
+    print(lbl["StartTime"])
+    print(lbl["InstrumentId"])
+    
+    
     
     

@@ -19,6 +19,8 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     '''
     if(lbl is None):
         lbl = pds_label(fname)
+    if(lbl['INSTRUMENT_NAME'] != 'CONTEXT CAMERA'):
+        raise RuntimeError("igc_mro_context called for file %s which is actually INSTRUMENT_NAME %s" % (fname, lbl['INSTRUMENT_NAME']))
     tstart = Time.parse_time(lbl["START_TIME"])
     bdir = os.environ["MARS_KERNEL"] + "/mro_kernel/"
     if(kernel_file):
@@ -81,6 +83,8 @@ def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
     '''
     if(lbl is None):
         lbl = pds_label(fname)
+    if(lbl['INSTRUMENT_NAME'] != 'HIGH RESOLUTION STEREO CAMERA'):
+        raise RuntimeError("igc_mex_hrsc called for file %s which is actually INSTRUMENT_NAME %s" % (fname, lbl['INSTRUMENT_NAME']))
     tstart = Time.parse_time(lbl["START_TIME"])
     tend = Time.parse_time(lbl["STOP_TIME"])
     if(lbl["DETECTOR_ID"] != "MEX_HRSC_NADIR"):
@@ -131,5 +135,90 @@ def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
     igc = IpiImageGroundConnection(ipi, dem, img)
     return igc
 
+def igc_mro_hirise(fname, lbl = None, kernel_file = None,
+                    kernel_file_post = None, kernel_json = None):
+    '''Process for HIRISE camera. 
 
-__all__ = ["igc_mro_context", "igc_mex_hrsc"]
+    Right now, we are using ISIS as input. We will try to move this
+    to PDS, but there are a number of preprocessing steps that we 
+    leveraging off of for now. The data should go through:
+
+    1. hi2isis from=blah_0.img to=blah_0.cub
+    2. spiceinit from=blah_0.cub
+    3. hical from=blah_0.cub to=blah_0.cal.cub
+    4. Also do "_1"
+    5. histitch from1=blah_0 from2=blah_1 to=blah
+    6. Normalize if desired cubenorm from=blah to=blah.norm.cub
+
+    Because we have often already processed the PDS labels, you can
+    optionally pass that if available. If we don't have this, then we
+    go ahead and read the labels. You can pass in a specific kernel file to
+    read, a kernel JSON file, and/or a post kernel file to read.
+
+    This includes reading the spice kernels that we need.
+    '''
+    if(lbl is None):
+        lbl = pds_label(fname)
+    if(lbl['InstrumentId'] != 'HIRISE'):
+        raise RuntimeError("igc_mro_hirise called for file %s which is actually INSTRUMENT_NAME %s" % (fname, lbl['InstrumentId']))
+    tstart = Time.parse_time(lbl["StartTime"])
+    bdir = os.environ["MARS_KERNEL"] + "/mro_kernel/"
+    if(kernel_file):
+        kfile = kernel_file
+    else:
+        kfile = bdir + "mro.ker"
+    if(kernel_file_post):
+        kpfile = kernel_file_post
+    else:
+        kpfile = None
+    if(kernel_json):
+        kjson = kernel_json
+    else:
+        kjson = bdir + "kernel.json"
+    kdat = read_shelve(kjson)
+    # We need better logic here, but for now just set up the kernels we
+    # handed
+    klist = [kfile,
+             kdat["ck_kernel"].kernel(tstart),
+             kdat["spk_kernel"].kernel(tstart)]
+    if(kpfile):
+        klist.append(kpfile)
+    orb = SpicePlanetOrbit("MRO", "MRO_HIRISE", klist,
+                           PlanetConstant.MARS_NAIF_CODE)
+    img = GdalRasterImage(fname)
+    # There are two kinds of spacecraft clocks. The normal resolution is "MRO",
+    # the high resolution is for NAIF ID -74999. We have high resolution for
+    # HIRISE
+    tstart = Time.time_sclk(lbl["SpacecraftClockStartCount"], "-74999")
+    # Hirise does a TDI, which means it collects a line multiple times
+    # and sums it to reduce noise. We have to adjust the start times for this.
+    # Not sure of the source of this equation, I got this from the ISIS code
+    unbinned_rate = (74.0 + float(lbl["DeltaLineTimerCount"]) / 16) / 1e6
+    tspace = unbinned_rate * float(lbl["Summing"])
+    tstart -= unbinned_rate * (float(lbl["Tdi"]) / 2 - 0.5)
+    tstart += unbinned_rate * (float(lbl["Summing"]) / 2 - 0.5)
+    # Effective CCD Line number for the given TDI mode
+    ccd_line = -64.0 + float(lbl["Tdi"]) / 2
+    # Channel number is right and left, they get combined when we
+    # put the channels together. Somewhat confusing name, this is *not*
+    # the CCD number (e.g., red0 through red9). The offset is for the
+    # right vs left. We might be off by 1, I got this from ISIS and they
+    # use a different convention. We'll want to verify this at some point.
+    if(int(lbl["ChannelNumber"]) == 0):
+        ccd_start_sample = 1025
+    # This is the CCD number. This comes through the "CCD Processing and
+    # Memory Modules (CPMM) IDS". Mapping is found in mro_hirise_v12.ti,
+    # we don't bother reading this from the SPICE kernels since this is
+    # just a fixed mapping.
+    ccd_number = [0, 1, 2, 3, 12, 4, 10, 11,
+                  5, 13, 6, 7, 8, 9][int(lbl["CpmmNumber"])]
+    # Should be able to look at HiriseCamera.cpp in ISIS to figure out
+    # camera
+    tt = ConstantSpacingTimeTable(tstart, tstart + tspace * (img.number_line-1),
+                                  tspace)
+    dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
+    orb_cache = OrbitListCache(orb, tt)
+    return tt
+
+
+__all__ = ["igc_mro_context", "igc_mex_hrsc", "igc_mro_hirise"]

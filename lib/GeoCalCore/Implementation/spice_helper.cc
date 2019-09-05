@@ -486,6 +486,18 @@ int SpiceHelper::name_to_body(const std::string& Name)
   SpiceBoolean found;
   bodn2c_c(Name.c_str(), &res, &found);
   spice_error_check();
+  // We sometimes have bodies that don't have a name. Useful to just
+  // pass a string with an int value in it (so we don't otherwise need
+  // special handling). Check for this case if we didn't otherwise
+  // find the body.
+  if(!found) {
+    try {
+      res = boost::lexical_cast<int>(Name);
+      return res;
+    } catch (const boost::bad_lexical_cast& e) {
+      // Ignore error, we'll drop through to the next error report
+    }
+  }
   if(!found) {
     Exception e;
     e << "Could not find NAIF Code for " << Name;

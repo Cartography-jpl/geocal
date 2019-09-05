@@ -12,6 +12,12 @@ def test_igc_mro_context(mars_test_data):
 def test_igc_mex_hrsc(mars_test_data):
     igc = igc_mex_hrsc(mars_test_data + "h1326_0000_nd2.img")
     print(igc)
+
+@require_spice
+@require_mars_spice
+def test_igc_mro_hirise(mars_test_data):
+    igc = igc_mro_hirise(mars_test_data + "esp_025012_1745_red2.norm.cub")
+    print(igc)
     
     
     

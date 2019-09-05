@@ -318,7 +318,10 @@ public:
     field_alignment_block_[i].reference(V.copy());
     notify_update();
   }
-  
+
+  void field_alignment_block(const Camera& Cam, double Delta_line,
+			     double Delta_sample);
+    
 //-----------------------------------------------------------------------
 /// The UUID for the DES that contains this object, if any. This is an
 /// empty string we don't have a actual DES we are part of.

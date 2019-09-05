@@ -190,30 +190,54 @@ public:
     const
   {
     fill_cache();
-    // Right now, just have one fa plane and set of blocks
+    // Right now, just have one block.
     double l = (F.line - cam.first_line_block()(0)) / cam.delta_line_block()(0);
     double s = (F.sample - cam.first_sample_block()(0)) / cam.delta_sample_block()(0);
-    double x0 = l * (fa(0,0,1,0,0) - fa(0,0,0,0,0)) + fa(0,0,0,0,0);
-    double x1 = l * (fa(0,0,1,1,0) - fa(0,0,0,1,0)) + fa(0,0,0,1,0);
-    double y0 = l * (fa(0,0,1,0,1) - fa(0,0,0,0,1)) + fa(0,0,0,0,1);
-    double y1 = l * (fa(0,0,1,1,1) - fa(0,0,0,1,1)) + fa(0,0,0,1,1);
-    X = s * (x1 - x0) + x0;
-    Y = s * (y1 - y0) + y0;
+    int i = (int) floor(l);
+    int j = (int) floor(s);
+    if(i < 0)
+      i = 0;
+    if(i > fa.rows() - 1)
+      i = fa.rows() -1;
+    if(j < 0)
+      j = 0;
+    if(j > fa.cols() - 1)
+      j = fa.cols() - 1;
+    double x0 = (l - i) * (fa(i,j,1,0,0) - fa(i,j,0,0,0)) + fa(i,j,0,0,0);
+    double x1 = (l - i) * (fa(i,j,1,1,0) - fa(i,j,0,1,0)) + fa(i,j,0,1,0);
+    double y0 = (l - i) * (fa(i,j,1,0,1) - fa(i,j,0,0,1)) + fa(i,j,0,0,1);
+    double y1 = (l - i) * (fa(i,j,1,1,1) - fa(i,j,0,1,1)) + fa(i,j,0,1,1);
+    X = (s - j) * (x1 - x0) + x0;
+    Y = (s - j) * (y1 - y0) + y0;
   }
   virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
 			AutoDerivative<double>& X,
 			AutoDerivative<double>& Y) const
   {
     fill_cache();
-    // Right now, just have one fa plane and set of blocks
+    // Right now, just have one block
     AutoDerivative<double> l = (F.line - cam.first_line_block()(0)) / cam.delta_line_block()(0);
     AutoDerivative<double> s = (F.sample - cam.first_sample_block()(0)) / cam.delta_sample_block()(0);
-    AutoDerivative<double> x0 = l * (fa(0,0,1,0,0) - fa(0,0,0,0,0)) + fa(0,0,0,0,0);
-    AutoDerivative<double> x1 = l * (fa(0,0,1,1,0) - fa(0,0,0,1,0)) + fa(0,0,0,1,0);
-    AutoDerivative<double> y0 = l * (fa(0,0,1,0,1) - fa(0,0,0,0,1)) + fa(0,0,0,0,1);
-    AutoDerivative<double> y1 = l * (fa(0,0,1,1,1) - fa(0,0,0,1,1)) + fa(0,0,0,1,1);
-    X = s * (x1 - x0) + x0;
-    Y = s * (y1 - y0) + y0;
+    int i = (int) floor(l.value());
+    int j = (int) floor(s.value());
+    if(i < 0)
+      i = 0;
+    if(i > fa.rows() - 1)
+      i = fa.rows() -1;
+    if(j < 0)
+      j = 0;
+    if(j > fa.cols() - 1)
+      j = fa.cols() - 1;
+    AutoDerivative<double> x0 =
+      (l - i) * (fa(i,j,1,0,0) - fa(i,j,0,0,0)) + fa(i,j,0,0,0);
+    AutoDerivative<double> x1 =
+      (l - i) * (fa(i,j,1,1,0) - fa(i,j,0,1,0)) + fa(i,j,0,1,0);
+    AutoDerivative<double> y0 =
+      (l - i) * (fa(i,j,1,0,1) - fa(i,j,0,0,1)) + fa(i,j,0,0,1);
+    AutoDerivative<double> y1 =
+      (l - i) * (fa(i,j,1,1,1) - fa(i,j,0,1,1)) + fa(i,j,0,1,1);
+    X = (s - j) * (x1 - x0) + x0;
+    Y = (s - j) * (y1 - y0) + y0;
   }
   virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const
   {
@@ -257,6 +281,8 @@ public:
     if(!cache_stale)
       return;
     blitz::Range ra = blitz::Range::all();
+    if(cam.first_line_block().rows() != 1)
+      throw Exception("Currently only support one block");
     fa.reference(cam.field_alignment_block(0));
     // This is just a rough estimate of pitch, but it should be
     // sufficient to determine a reasonable tolerance for root
@@ -396,3 +422,61 @@ void GlasGfmCamera::angoff(const blitz::Array<double, 1>& V)
   frame_to_sc(quat_rot("zyx", V(2), V(1), V(0)));
   notify_update();
 }
+
+//-----------------------------------------------------------------------
+/// Populate the field_alignment, first_line_block,
+/// first_sample_block, delta_line and delta_sample to match the given
+/// camera. This creates only one block - we currently don't support
+/// multiple blocks
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::field_alignment_block
+(const Camera& Cam, double Delta_line, double Delta_sample)
+{
+  if(field_angle_type_ != 0) {
+    field_angle_type_ = 0;
+    init_model();
+  }
+  field_angle_interpolation_type_ = 0;
+  first_line_block_.resize(1);
+  first_sample_block_.resize(1);
+  delta_line_block_.resize(1);
+  delta_sample_block_.resize(1);
+  first_line_block_(0) = 0;
+  first_sample_block_(0) = 0;
+  delta_line_block_(0) = Delta_line;
+  delta_sample_block_(0) = Delta_sample;
+  int nlblock = (int) floor(number_line(0) / Delta_line);
+  int nsblock = (int) floor(number_sample(0) / Delta_sample);
+  blitz::Array<double, 5>& fa = field_alignment_block_[0];
+  fa.resize(nlblock, nsblock, 2, 2, 2);
+  for(int i = 0; i < fa.rows(); ++i)
+    for(int j = 0; j < fa.cols(); ++j) {
+      FrameCoordinate fc1(i * Delta_line, j * Delta_sample);
+      FrameCoordinate fc2(fc1.line, fc1.sample + Delta_sample);
+      FrameCoordinate fc3(fc1.line + Delta_line, fc1.sample + Delta_sample);
+      FrameCoordinate fc4(fc1.line + Delta_line, fc1.sample);
+      ScLookVector slv1 = Cam.sc_look_vector(fc1, 0);
+      ScLookVector slv2 = Cam.sc_look_vector(fc2, 0);
+      ScLookVector slv3 = Cam.sc_look_vector(fc3, 0);
+      ScLookVector slv4 = Cam.sc_look_vector(fc4, 0);
+      fa(i,j,0,0,0) = slv1.look_vector[0] /
+	(slv1.look_vector[2] / focal_length());
+      fa(i,j,0,0,1) = slv1.look_vector[1] /
+	(slv1.look_vector[2] / focal_length());
+      fa(i,j,0,1,0) = slv2.look_vector[0] /
+	(slv2.look_vector[2] / focal_length());
+      fa(i,j,0,1,1) = slv2.look_vector[1] /
+	(slv2.look_vector[2] / focal_length());
+      fa(i,j,1,1,0) = slv3.look_vector[0] /
+	(slv3.look_vector[2] / focal_length());
+      fa(i,j,1,1,1) = slv3.look_vector[1] /
+	(slv3.look_vector[2] / focal_length());
+      fa(i,j,1,0,0) = slv4.look_vector[0] /
+	(slv4.look_vector[2] / focal_length());
+      fa(i,j,1,0,1) = slv4.look_vector[1] /
+	(slv4.look_vector[2] / focal_length());
+    }
+  notify_update();
+}
+

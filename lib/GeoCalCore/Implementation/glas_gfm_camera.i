@@ -55,6 +55,8 @@ public:
   %python_attribute_with_set(delta_sample_block, blitz::Array<double, 1>);
   const blitz::Array<double, 5>& field_alignment_block(int i) const;
   void field_alignment_block(int i, const blitz::Array<double, 5>& V);
+  void field_alignment_block(const Camera& cam, double Delta_line,
+			     double Delta_sample);
   %pickle_serialization();
 };
 }

@@ -9862,13 +9862,98 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GlasGfmCamera_field_alignment_block__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::GlasGfmCamera *arg1 = (GeoCal::GlasGfmCamera *) 0 ;
+  GeoCal::Camera *arg2 = 0 ;
+  double arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GlasGfmCamera > tempshared1 ;
+  boost::shared_ptr< GeoCal::GlasGfmCamera > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GlasGfmCamera_field_alignment_block" "', argument " "1"" of type '" "GeoCal::GlasGfmCamera *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::GlasGfmCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::GlasGfmCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GlasGfmCamera_field_alignment_block" "', argument " "2"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GlasGfmCamera_field_alignment_block" "', argument " "2"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2);
+        arg2 = const_cast< GeoCal::Camera * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "GlasGfmCamera_field_alignment_block" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "GlasGfmCamera_field_alignment_block" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      (arg1)->field_alignment_block((GeoCal::Camera const &)*arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GlasGfmCamera_field_alignment_block(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[4] = {
+  PyObject *argv[5] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"GlasGfmCamera_field_alignment_block",0,3,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"GlasGfmCamera_field_alignment_block",0,4,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
     return _wrap_GlasGfmCamera_field_alignment_block__SWIG_0(self, argc, argv);
@@ -9876,12 +9961,16 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera_field_alignment_block(PyObject *self, P
   if (argc == 3) {
     return _wrap_GlasGfmCamera_field_alignment_block__SWIG_1(self, argc, argv);
   }
+  if (argc == 4) {
+    return _wrap_GlasGfmCamera_field_alignment_block__SWIG_2(self, argc, argv);
+  }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'GlasGfmCamera_field_alignment_block'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GeoCal::GlasGfmCamera::field_alignment_block(int) const\n"
-    "    GeoCal::GlasGfmCamera::field_alignment_block(int,blitz::Array< double,5 > const &)\n");
+    "    GeoCal::GlasGfmCamera::field_alignment_block(int,blitz::Array< double,5 > const &)\n"
+    "    GeoCal::GlasGfmCamera::field_alignment_block(GeoCal::Camera const &,double,double)\n");
   return 0;
 }
 
@@ -10084,8 +10173,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GlasGfmCamera_field_alignment_block", _wrap_GlasGfmCamera_field_alignment_block, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)\n"
+		"void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample)\n"
+		"Populate the field_alignment, first_line_block, first_sample_block,\n"
+		"delta_line and delta_sample to match the given camera.\n"
 		"\n"
+		"This creates only one block - we currently don't support multiple\n"
+		"blocks \n"
 		""},
 	 { (char *)"delete_GlasGfmCamera", (PyCFunction)_wrap_delete_GlasGfmCamera, METH_O, (char *)"\n"
 		"\n"

@@ -163,7 +163,7 @@ def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
 
 def igc_mro_hirise(fname, lbl = None, kernel_file = None,
                    kernel_file_post = None, kernel_json = None,
-                   subset = None):
+                   subset = None, rad_scale=10000):
     '''Process for HIRISE camera. 
 
     Right now, we are using ISIS as input. We will try to move this
@@ -215,7 +215,7 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
         klist.append(kpfile)
     orb = SpicePlanetOrbit("MRO", "MRO_HIRISE_OPTICAL_AXIS", klist,
                            PlanetConstant.MARS_NAIF_CODE)
-    img = GdalRasterImage(fname)
+    img = ScaleImage(GdalRasterImage(fname), rad_scale)
     # There are two kinds of spacecraft clocks. The normal resolution is "MRO",
     # the high resolution is for NAIF ID -74999. We have high resolution for
     # HIRISE

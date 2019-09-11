@@ -6,7 +6,8 @@
 import geocal
 import os
 import subprocess
-import struct
+import shutil
+import tempfile
 
 version = "Sept 11, 2019"
 usage='''Usage:
@@ -136,7 +137,7 @@ def write_vicar_file(igc, r, fin_name, output_base_name):
     for k in fin.metadata_list():
         if(not fin[k] == "") :
             f[k] = fin[k]
-    geocal.copy_raster(igc.image, f, True)
+    geocal.copy_raster(igc.image, f, True, -1, igc.number_sample)
     # We have a bug in the RSM NITF code. We'll need to fix that, but for
     # now just use XML instead
     f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
@@ -169,6 +170,31 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
     if(args.pds_image_2 is None or args.pds_image_2 == ""):
         raise RuntimeError("Need to supply both channels of the HiRISE image")
     # For right now, we use ISIS for creating the input data
+    f1 = os.path.abspath(args.pds_image)
+    f2 = os.path.abspath(args.pds_image_2)
+    fout_base_name = os.path.abspath(args.output_base_name)
+    try:
+        d = tempfile.mkdtemp(dir='./')
+        curdir = os.getcwd()
+        os.chdir(d)
+        setup_isis = "export ISISROOT=/data/smyth/Isis/isis; source /data/smyth/Isis/isis/scripts/isis3Startup.sh; "
+        subprocess.run(setup_isis + "hi2isis from=%s to=f1.cub && spiceinit from=f1.cub && hical from=f1.cub to=f1.cal.cub" % f1,
+                       shell=True, check=True)
+        subprocess.run(setup_isis + "hi2isis from=%s to=f2.cub && spiceinit from=f2.cub && hical from=f2.cub to=f2.cal.cub" % f2,
+                       shell=True, check=True)
+        subprocess.run(setup_isis + "histitch from1=f1.cal.cub from2=f2.cal.cub to=hirise.cub",
+                       shell=True, check=True)
+        fin_fname = "hirise.cub"
+        igc = geocal.igc_mro_hirise(fin_fname,
+                                    kernel_file=args.kernel_file,
+                                    kernel_file_post=args.kernel_file_post,
+                                    kernel_json=args.kernel_json, subset=subset)
+        r = geocal.rsm_hirise(igc)
+        write_vicar_file(igc, r, fin_fname, fout_base_name)
+    finally:
+        if(curdir):
+            os.chdir(curdir)
+        shutil.rmtree(d)
 else:
     raise RuntimeError("Not a recognized instrument name %s" %
                        lbl['INSTRUMENT_NAME'])

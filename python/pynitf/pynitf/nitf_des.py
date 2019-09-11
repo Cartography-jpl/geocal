@@ -11,6 +11,7 @@ from __future__ import print_function
 from .nitf_field import FieldData, _FieldStruct, _FieldLoopStruct, \
     _FieldValueArrayAccess, _create_nitf_field_structure, create_nitf_field_structure
 from .nitf_des_subheader import NitfDesSubheader
+from .nitf_security import security_unclassified
 import copy
 import io,six
 import abc
@@ -52,7 +53,8 @@ class NitfDes(object):
     def __init__(self, des_id=None,
                  des_subheader=None, header_size=None, data_size=None,
                  user_subheader=None,
-                 user_subheader_class=None):
+                 user_subheader_class=None,
+                 security = security_unclassified):
         if(des_subheader is not None):
             self.des_subheader = des_subheader
         else:
@@ -60,7 +62,7 @@ class NitfDes(object):
             if(des_id is not None):
                 h.desid = des_id
             h.dsver = 1
-            h.dsclas = "U"
+            h.security = security
             self.des_subheader = h
         self.header_size = header_size
         self.data_size = data_size
@@ -131,6 +133,17 @@ class NitfDes(object):
     def write_to_file(self, fh):
         '''Write an DES to a file.'''
         raise NotImplementedError()
+
+    @property
+    def security(self):
+        '''NitfSecurity for DES.'''
+        return self.des_subheader.security
+
+    @security.setter
+    def security(self, v):
+        '''Set NitfSecurity for DES.'''
+        self.des_subheader.security = v
+
     
 class NitfDesFieldStruct(NitfDes, _FieldStruct):
     '''There is a class of DES that are essentially like big TREs. The data
@@ -149,6 +162,7 @@ class NitfDesFieldStruct(NitfDes, _FieldStruct):
     uh_class = None
     des_tag = None
     data_after_allowed = None
+    data_copy = None
     def __init__(self, des_subheader=None, header_size=None,
                  user_subheader=None, data_size=None):
         NitfDes.__init__(self, self.__class__.des_tag,
@@ -160,6 +174,7 @@ class NitfDesFieldStruct(NitfDes, _FieldStruct):
             raise NitfDesCannotHandle()
         self.data_start = None
         self.data_after_tre_size = None
+        self.data_to_copy = None
         
     def read_from_file(self, fh, nitf_literal = False):
         self.read_user_subheader()
@@ -170,10 +185,15 @@ class NitfDesFieldStruct(NitfDes, _FieldStruct):
         if(self.data_after_tre_size != 0):
             if(not self.data_after_allowed):
                 raise RuntimeError("DES %s TRE length was expected to be %d but was actually %d" % (self.des_tag, self.data_size, (self.data_start - t)))
-            fh.seek(self.data_after_tre_size, 1)
+            if(self.data_copy):
+                self.data_to_copy = fh.read(self.data_after_tre_size)
+            else:
+                fh.seek(self.data_after_tre_size, 1)
         
     def write_to_file(self, fh):
         _FieldStruct.write_to_file(self, fh)
+        if(self.data_to_copy):
+            fh.write(self.data_to_copy)
     def str_hook(self, file):
         '''Convenient to have a place to add stuff in __str__ for derived
         classes. This gets called after the DES name is written, but before
@@ -202,6 +222,9 @@ class NitfDesFieldStruct(NitfDes, _FieldStruct):
                           file=res)
             else:
                 print(f.desc(self), file=res, end='')
+        if(self.data_after_tre_size and self.data_after_tre_size != 0):
+            print("Extra data of length %d" % self.data_after_tre_size,
+                  file=res)
         return res.getvalue()
 
     def summary(self):
@@ -348,7 +371,8 @@ def _create_attribute_forward_to_implementation_object(fname):
 def create_nitf_des_structure(name, desc_data, desc_uh = None, hlp = None,
                               des_implementation_field=None,
                               des_implementation_class=None,
-                              data_after_allowed=False):
+                              data_after_allowed=False,
+                              data_copy=False):
     '''This is like create_nitf_field_structure, but adds a little
     extra structure for DESs.
 
@@ -389,6 +413,7 @@ def create_nitf_des_structure(name, desc_data, desc_uh = None, hlp = None,
     else:
         res = type(name, (NitfDesFieldStruct,), t.process(d))
         res.data_after_allowed = data_after_allowed
+        res.data_copy = data_copy
     res.des_tag = des_tag
 
     # Stash description, to make available if we want to later override a DES

@@ -12,8 +12,19 @@ from .nitf_image import nitf_image_read
 from .nitf_des import nitf_des_read
 from .nitf_tre import read_tre, prepare_tre_write, add_find_tre_function
 from .nitf_tre_engrda import add_engrda_function
+from .nitf_security import security_unclassified
 import io,six,copy,weakref
 
+class ListNitfFileReference(list):
+    '''Useful to add nitf_file to various NitfSegment as they get added
+    to a NitfFile, so we override append'''
+    def __init__(self, f):
+        list.__init__(self)
+        self.nitf_file = weakref.ref(f)
+    def append(self, v):
+        list.append(self, v)
+        v._nitf_file = self.nitf_file
+        
 class NitfFile(object):
     # List of hook objects to extend the handling in the various types of
     # segments. Right now we only do this for image_segment and text_segment,
@@ -21,23 +32,25 @@ class NitfFile(object):
     image_segment_hook_obj = []
     des_segment_hook_obj = []
     text_segment_hook_obj = []
-    def __init__(self, file_name = None):
+    def __init__(self, file_name = None, security = security_unclassified):
         '''Create a NitfFile for reading or writing. Because it is common, if
         you give a file_name we read from that file to populate the Nitf 
         structure. Otherwise we start with a default file (a file header, but
         no segments) - which you can then populate before calling write'''
         self.file_header = NitfFileHeader()
         # This is the order things appear in the file
-        self.image_segment = []
-        self.graphic_segment = []
-        self.text_segment = []
-        self.des_segment = []
-        self.res_segment = []
+        self.image_segment = ListNitfFileReference(self)
+        self.graphic_segment = ListNitfFileReference(self)
+        self.text_segment = ListNitfFileReference(self)
+        self.des_segment = ListNitfFileReference(self)
+        self.res_segment = ListNitfFileReference(self)
         # These are the file level TREs. There can also be TREs at the
         # image segment level
         self.tre_list = []
         if(file_name is not None):
             self.read(file_name)
+        if(file_name is None):
+            self.security = security
 
             # TODO: Perhaps the above line should be in debug mode and the below block in normal
             # TODO: That way we can skip over any parsing errors and still show rest of NITF in normal mode
@@ -165,6 +178,9 @@ class NitfFile(object):
 
     def write(self, file_name):
         '''Write to the given file'''
+        self.des_segment = [dseg for dseg in self.des_segment
+                            if(dseg.subheader.desid.encode("utf-8") !=
+                               b'TRE_OVERFLOW')]
         with open(file_name, 'wb') as fh:
             h = self.file_header
             prepare_tre_write(self.tre_list, h, self.des_segment,
@@ -197,6 +213,12 @@ class NitfFile(object):
                     h.update_field(fh, fds, ds, (i,))
             # Now we have to update the file length
             h.update_field(fh, "fl", fh.tell())
+        # Special handling for the TRE overflow DES. We create these as
+        # needed for the TREs that we already have stored various places.
+        # Clear out any that generated during our write
+        self.des_segment = [dseg for dseg in self.des_segment
+                            if(dseg.subheader.desid.encode("utf-8") !=
+                               b'TRE_OVERFLOW')]
             
     def iseg_by_idlvl(self, idlvl):
         '''Return the image segment with a idlvl matching the given id'''
@@ -219,6 +241,16 @@ class NitfFile(object):
         if(len(t) > 1):
             raise RuntimeError("More than one match found to iid1='%s'" % iid1)
         return t[0]
+
+    @property
+    def security(self):
+        '''NitfSecurity for file.'''
+        return self.file_header.security
+
+    @security.setter
+    def security(self, v):
+        '''Set NitfSecurity for file.'''
+        self.file_header.security = v
 
 class NitfSegmentHook(object):
     '''To allow special handling of TREs etc. we allow a hook_list of
@@ -390,6 +422,16 @@ class NitfImageSegment(NitfSegment):
         for ho in self.hook_obj:
             ho.read_tre_hook(self, des_list)
 
+    @property
+    def security(self):
+        '''NitfSecurity for Image.'''
+        return self.subheader.security
+
+    @security.setter
+    def security(self, v):
+        '''Set NitfSecurity for Image.'''
+        self.subheader.security = v
+
     def __str__(self):
         '''Text description of structure, e.g., something you can print out'''
         fh = six.StringIO()
@@ -417,6 +459,10 @@ class NitfImageSegment(NitfSegment):
     def idlvl(self):
         return self.subheader.idlvl
 
+    @idlvl.setter
+    def idlvl(self, lvl):
+        self.subheader.idlvl = lvl
+
     @property
     def iid1(self):
         return self.subheader.iid1
@@ -433,7 +479,8 @@ class NitfTextSegment(NitfSegment):
     for you. We encode/decode using utf-8 as needed. You can access the data
     as one or the other using data_as_bytes and data_as_str.'''
     def __init__(self, txt='', header_size=None, data_size=None,
-                 hook_obj = None, nitf_file=None):
+                 hook_obj = None, nitf_file=None,
+                 security=security_unclassified):
         h = NitfTextSubheader()
         self.header_size = header_size
         self.data_size = data_size
@@ -442,6 +489,8 @@ class NitfTextSegment(NitfSegment):
         NitfSegment.__init__(self, h, copy.copy(txt), hook_obj = hook_obj,
                              nitf_file = nitf_file)
         self.tre_list = []
+        self.security = security
+        
     def read_from_file(self, fh, segindex=None):
         '''Read from a file'''
         self.subheader.read_from_file(fh)
@@ -501,7 +550,18 @@ class NitfTextSegment(NitfSegment):
         header_pos = fh.tell()
         fh.write(self.data_as_bytes)
         return (header_pos - start_pos, fh.tell() - header_pos)
-   
+
+    @property
+    def security(self):
+        '''NitfSecurity for Text.'''
+        return self.subheader.security
+
+    @security.setter
+    def security(self, v):
+        '''Set NitfSecurity for Text.'''
+        self.subheader.security = v
+
+    
 class NitfDesSegment(NitfSegment):
     '''Data extension segment (DES), allows for the addition of different data 
     types with each type encapsulated in its own DES'''
@@ -519,6 +579,16 @@ class NitfDesSegment(NitfSegment):
         NitfSegment.__init__(self, h, des, hook_obj = hook_obj,
                              nitf_file = nitf_file)
 
+    @property
+    def security(self):
+        '''NitfSecurity for DES.'''
+        return self.subheader.security
+
+    @security.setter
+    def security(self, v):
+        '''Set NitfSecurity for DES.'''
+        self.subheader.security = v
+        
     # Alternative name for data, the des is stored in data attribute
     @property
     def des(self):

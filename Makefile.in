@@ -4265,7 +4265,9 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 # isn't identical
 @INSTALL_PYNITF_TRUE@EXTRA_PYTHON_TEST = $(srcdir)/@srcpython@/pynitf \
 @INSTALL_PYNITF_TRUE@	-k "not test_copy_quickbird and not \
-@INSTALL_PYNITF_TRUE@	test_copy_ikonos"
+@INSTALL_PYNITF_TRUE@	test_copy_ikonos and not \
+@INSTALL_PYNITF_TRUE@	test_des_csattb_uuid_func and not \
+@INSTALL_PYNITF_TRUE@	test_copy_rip"
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed

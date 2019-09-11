@@ -20,7 +20,7 @@ EXTRA_PYTHON_TEST=$(srcdir)/@srcpython@/pynitf
 # Skip a couple of tests. We just reorder the TREs in the file so RPC comes
 # last, don't actually fail the test but the comparision fails because it
 # isn't identical
-EXTRA_PYTHON_TEST+= -k "not test_copy_quickbird and not test_copy_ikonos"
+EXTRA_PYTHON_TEST+= -k "not test_copy_quickbird and not test_copy_ikonos and not test_des_csattb_uuid_func and not test_copy_rip"
 INSTALL_DATA_HOOK += install-pynitf
 
 uninstall-pynitf:

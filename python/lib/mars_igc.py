@@ -3,7 +3,7 @@
 from geocal_swig import *
 from .pds_label import pds_label
 from .sqlite_shelf import read_shelve
-from .spice_camera import ctx_camera, hrsc_camera
+from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
 import struct
 
 def igc_mro_context(fname, lbl = None, kernel_file = None,
@@ -183,7 +183,7 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
              kdat["spk_kernel"].kernel(tstart)]
     if(kpfile):
         klist.append(kpfile)
-    orb = SpicePlanetOrbit("MRO", "MRO_HIRISE", klist,
+    orb = SpicePlanetOrbit("MRO", "MRO_HIRISE_OPTICAL_AXIS", klist,
                            PlanetConstant.MARS_NAIF_CODE)
     img = GdalRasterImage(fname)
     # There are two kinds of spacecraft clocks. The normal resolution is "MRO",
@@ -212,13 +212,14 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
     # just a fixed mapping.
     ccd_number = [0, 1, 2, 3, 12, 4, 10, 11,
                   5, 13, 6, 7, 8, 9][int(lbl["CpmmNumber"])]
+    cam = hirise_camera(ccd_number)
     # Should be able to look at HiriseCamera.cpp in ISIS to figure out
     # camera
     tt = ConstantSpacingTimeTable(tstart, tstart + tspace * (img.number_line-1),
                                   tspace)
     dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
     orb_cache = OrbitListCache(orb, tt)
-    return tt
+    return cam,tt,orb_cache
 
 
 __all__ = ["igc_mro_context", "igc_mex_hrsc", "igc_mro_hirise"]

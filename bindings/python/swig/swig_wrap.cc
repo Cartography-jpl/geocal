@@ -119,6 +119,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_quaternion_camera)(void);
   INIT_TYPE INIT_FUNC(_camera_rational_polynomial)(void);
   INIT_TYPE INIT_FUNC(_camera_radial_distortion)(void);
+  INIT_TYPE INIT_FUNC(_camera_radial_distortion_and_transform)(void);
   INIT_TYPE INIT_FUNC(_galileo_camera)(void);
   INIT_TYPE INIT_FUNC(_refraction)(void);
   INIT_TYPE INIT_FUNC(_orbit_data_image_ground_connection)(void);
@@ -333,6 +334,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_quaternion_camera", INIT_FUNC(_quaternion_camera));
   INIT_MODULE(module, "_camera_rational_polynomial", INIT_FUNC(_camera_rational_polynomial));
   INIT_MODULE(module, "_camera_radial_distortion", INIT_FUNC(_camera_radial_distortion));
+  INIT_MODULE(module, "_camera_radial_distortion_and_transform", INIT_FUNC(_camera_radial_distortion_and_transform));
   INIT_MODULE(module, "_galileo_camera", INIT_FUNC(_galileo_camera));
   INIT_MODULE(module, "_refraction", INIT_FUNC(_refraction));
   INIT_MODULE(module, "_orbit_data_image_ground_connection", INIT_FUNC(_orbit_data_image_ground_connection));

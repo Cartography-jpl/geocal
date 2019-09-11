@@ -471,6 +471,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/quaternion_camera_wrap.cc \
 	@swigsrc@/camera_rational_polynomial_wrap.cc \
 	@swigsrc@/camera_radial_distortion_wrap.cc \
+	@swigsrc@/camera_radial_distortion_and_transform_wrap.cc \
 	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
@@ -660,6 +661,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-quaternion_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-camera_rational_polynomial_wrap.lo \
 	@swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo \
+	@swigsrc@/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.lo \
 	@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-refraction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo \
@@ -857,6 +859,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/quaternion_camera.cc \
 	@srcimplementation@/camera_rational_polynomial.cc \
 	@srcimplementation@/camera_radial_distortion.cc \
+	@srcimplementation@/camera_radial_distortion_and_transform.cc \
 	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
@@ -1050,6 +1053,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-quaternion_camera.lo \
 	@srcimplementation@/libgeocal_la-camera_rational_polynomial.lo \
 	@srcimplementation@/libgeocal_la-camera_radial_distortion.lo \
+	@srcimplementation@/libgeocal_la-camera_radial_distortion_and_transform.lo \
 	@srcimplementation@/libgeocal_la-galileo_camera.lo \
 	@srcimplementation@/libgeocal_la-refraction.lo \
 	@srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo \
@@ -1658,6 +1662,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion_and_transform.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-context_sqrt_decode_image.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo \
@@ -1911,6 +1916,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo \
@@ -2279,6 +2285,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/quaternion_camera.h \
 	@srcimplementation@/camera_rational_polynomial.h \
 	@srcimplementation@/camera_radial_distortion.h \
+	@srcimplementation@/camera_radial_distortion_and_transform.h \
 	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
@@ -3296,6 +3303,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/quaternion_camera.cc \
 	@srcimplementation@/camera_rational_polynomial.cc \
 	@srcimplementation@/camera_radial_distortion.cc \
+	@srcimplementation@/camera_radial_distortion_and_transform.cc \
 	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
@@ -3462,6 +3470,7 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/quaternion_camera_wrap.cc \
 	@swigsrc@/camera_rational_polynomial_wrap.cc \
 	@swigsrc@/camera_radial_distortion_wrap.cc \
+	@swigsrc@/camera_radial_distortion_and_transform_wrap.cc \
 	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
@@ -3686,6 +3695,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/quaternion_camera.h \
 	@srcimplementation@/camera_rational_polynomial.h \
 	@srcimplementation@/camera_radial_distortion.h \
+	@srcimplementation@/camera_radial_distortion_and_transform.h \
 	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
@@ -3861,6 +3871,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/quaternion_camera.i \
 	@srcimplementation@/camera_rational_polynomial.i \
 	@srcimplementation@/camera_radial_distortion.i \
+	@srcimplementation@/camera_radial_distortion_and_transform.i \
 	@srcimplementation@/galileo_camera.i \
 	@srcimplementation@/refraction.i \
 	@srcimplementation@/orbit_data_image_ground_connection.i \
@@ -4774,6 +4785,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-refraction_wrap.lo: @swigsrc@/$(am__dirstamp) \
@@ -5284,6 +5297,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-camera_radial_distortion.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-camera_radial_distortion_and_transform.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-galileo_camera.lo:  \
@@ -6369,6 +6385,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion_and_transform.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-context_sqrt_decode_image.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo@am__quote@ # am--include-marker
@@ -6622,6 +6639,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo@am__quote@ # am--include-marker
@@ -7636,6 +7654,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/camera_radial_distortion_wrap.cc' object='@swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo `test -f '@swigsrc@/camera_radial_distortion_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_radial_distortion_wrap.cc
+
+@swigsrc@/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.lo: @swigsrc@/camera_radial_distortion_and_transform_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.lo `test -f '@swigsrc@/camera_radial_distortion_and_transform_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_radial_distortion_and_transform_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/camera_radial_distortion_and_transform_wrap.cc' object='@swigsrc@/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.lo `test -f '@swigsrc@/camera_radial_distortion_and_transform_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/camera_radial_distortion_and_transform_wrap.cc
 
 @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo: @swigsrc@/galileo_camera_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-galileo_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo `test -f '@swigsrc@/galileo_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/galileo_camera_wrap.cc
@@ -9015,6 +9040,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_radial_distortion.cc' object='@srcimplementation@/libgeocal_la-camera_radial_distortion.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-camera_radial_distortion.lo `test -f '@srcimplementation@/camera_radial_distortion.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_radial_distortion.cc
+
+@srcimplementation@/libgeocal_la-camera_radial_distortion_and_transform.lo: @srcimplementation@/camera_radial_distortion_and_transform.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-camera_radial_distortion_and_transform.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion_and_transform.Tpo -c -o @srcimplementation@/libgeocal_la-camera_radial_distortion_and_transform.lo `test -f '@srcimplementation@/camera_radial_distortion_and_transform.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_radial_distortion_and_transform.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion_and_transform.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion_and_transform.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/camera_radial_distortion_and_transform.cc' object='@srcimplementation@/libgeocal_la-camera_radial_distortion_and_transform.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-camera_radial_distortion_and_transform.lo `test -f '@srcimplementation@/camera_radial_distortion_and_transform.cc' || echo '$(srcdir)/'`@srcimplementation@/camera_radial_distortion_and_transform.cc
 
 @srcimplementation@/libgeocal_la-galileo_camera.lo: @srcimplementation@/galileo_camera.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-galileo_camera.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-galileo_camera.Tpo -c -o @srcimplementation@/libgeocal_la-galileo_camera.lo `test -f '@srcimplementation@/galileo_camera.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera.cc
@@ -13110,6 +13142,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion_and_transform.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-context_sqrt_decode_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo
@@ -13363,6 +13396,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo
@@ -13749,6 +13783,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_radial_distortion_and_transform.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-camera_rational_polynomial.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-context_sqrt_decode_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-dem_map_info_offset.Plo
@@ -14002,6 +14037,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-auto_derivative_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_multi_band_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-calc_raster_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_radial_distortion_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_rational_polynomial_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-camera_wrap.Plo

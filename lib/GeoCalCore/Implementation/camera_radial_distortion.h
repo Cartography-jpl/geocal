@@ -88,6 +88,8 @@ public:
 
   const blitz::Array<double, 1>& k_distort() const {return k_distort_;}
 
+protected:
+  CameraRadialDistortion() : max_r2_filled_in(false) {}
 private:
   blitz::Array<double, 1> k_distort_;
   double dr_over_r_calc(double r2) const
@@ -98,7 +100,6 @@ private:
   mutable double max_r2;
   mutable double max_dr_over_r;
   void fill_in_max() const;
-  CameraRadialDistortion() : max_r2_filled_in(false) {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

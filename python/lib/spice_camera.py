@@ -4,6 +4,7 @@
 # somehow at some point.
 
 from geocal_swig import *
+import numpy as np
 
 def hrsc_camera():
     '''Return the HRSC camera. Note you should have loaded the instrument
@@ -47,6 +48,41 @@ def hrsc_camera():
                                 QuaternionCamera.INCREASE_IS_NEGATIVE)
     return hrsc_cam
 
+def hirise_camera(ccd_number, bin_mode = 1, tdi_mode = 128):
+    '''Return the HIRSISE camera. Note you should have loaded the instrument
+    kernel already (e.g., os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker").
+    We purposely don't load this, so you can direct to a different kernel
+    if desired.
+
+    Note that there are multiple focal planes, indexed by CCD number. We 
+    pass in the CCD number that we want the camera for.
+    '''
+    # focal_length and pitch are in mm
+    focal_length = SpiceHelper.kernel_data_double("INS-74699_FOCAL_LENGTH")
+    pitch = SpiceHelper.kernel_data_double("INS-74699_PIXEL_PITCH")
+    ik_code = -74600 - ccd_number
+    nsamp = SpiceHelper.kernel_data_double("INS%d_PIXEL_SAMPLES" % ik_code)
+    od_k = SpiceHelper.kernel_data_array_double("INS-74699_OD_K");
+    trans_x = SpiceHelper.kernel_data_array_double("INS%d_TRANSX" % ik_code)
+    trans_y = SpiceHelper.kernel_data_array_double("INS%d_TRANSY" % ik_code)
+    ccd_cen = SpiceHelper.kernel_data_array_double("INS%d_CCD_CENTER" % ik_code)
+    # Extra 0.5 pixel is because the convention in the SPICE kernels is to
+    # have (0,0) be the upper left hand corner of first pixel, while we
+    # use (0,0) for the center of the pixel.
+    ccd_off = [0.5,0.5 + tdi_mode / 2.0]
+    #t_off = np.array([trans_x[0],trans_y[0]])
+    t_off = np.array([trans_x[0],60.0469])
+    t_m = np.array([[trans_x[1], trans_x[2]],[trans_y[1],trans_y[2]]])
+    # We calculate the inverse rather than reading it. Limitations on the
+    # precision gives an inverse that round trips with an error of ~0.01
+    # pixel. Doesn't matter in practice, but it better if our inverse really
+    # reverses our forward calculation
+    tinv_m = np.linalg.inv(t_m)
+    tinv_off = np.dot(tinv_m, -t_off)
+    return CameraRadialDistortionAndTransform(Quaternion_double(1,0,0,0), od_k,
+        1, nsamp, pitch, pitch, focal_length, bin_mode, ccd_off, ccd_cen,
+        t_off, t_m, tinv_off, tinv_m)
+                                              
 def ctx_camera():
     '''Return the CTX camera. Note you should have loaded the instrument
     kernel already (e.g., os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker").
@@ -66,4 +102,4 @@ def ctx_camera():
                                      principal_point)
     return ctx_cam
 
-__all__ = ["hrsc_camera", "ctx_camera"]
+__all__ = ["hrsc_camera", "ctx_camera", "hirise_camera"]

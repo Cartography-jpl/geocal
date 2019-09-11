@@ -6,8 +6,21 @@ from .sqlite_shelf import read_shelve
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
 import struct
 
+# Note, when adding a new instrument there are a few good sanity things to
+# check:
+# 1. Check check_rc_assumption, this verifies that we have line, sample, and
+#    look directions nearly orthogonal. If you have the camera rotated wrong,
+#    you can catch that because the dot products won't be close to 0.
+# 2. Compare spice calculation of boresight with the full Igc calculation. This
+#    makes sure you have things lined up right.
+# 3. It is also worth comparing data projected by our code vs. data that
+#    has gone through ISIS. We won't line up exactly, but it should be pretty
+#    close. This helps find gross errors in our models, etc.
+
+
 def igc_mro_context(fname, lbl = None, kernel_file = None,
-                    kernel_file_post = None, kernel_json = None):
+                    kernel_file_post = None, kernel_json = None,
+                    subset=None):
     '''Process for context camera. 
 
     Because we have often already processed the PDS labels, you can
@@ -16,6 +29,9 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     read, a kernel JSON file, and/or a post kernel file to read.
 
     This includes reading the spice kernels that we need.
+
+    You can supply a subset if desired, this should be an array of
+    [Lstart, Sstart, Number_line, Number_sample].
     '''
     if(lbl is None):
         lbl = pds_label(fname)
@@ -68,10 +84,14 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     orb_cache = OrbitListCache(orb, tt)
     ipi = Ipi(orb_cache, ctx_camera(), 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
+    if(subset is not None):
+        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
+                                          subset[2], subset[3])
     return igc
 
 def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
-                 kernel_file_post = None, kernel_json = None):
+                 kernel_file_post = None, kernel_json = None,
+                 subset = None):
     '''Process for HRSC camera
 
     Because we have often already processed the PDS labels, you can
@@ -80,6 +100,9 @@ def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
     read, a kernel JSON file, and/or a post kernel file to read.
 
     This includes reading the spice kernels that we need.
+
+    You can supply a subset if desired, this should be an array of
+    [Lstart, Sstart, Number_line, Number_sample].
     '''
     if(lbl is None):
         lbl = pds_label(fname)
@@ -133,10 +156,14 @@ def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
     orb_cache = OrbitListCache(orb, tt)
     ipi = Ipi(orb_cache, hrsc_camera(), 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
+    if(subset is not None):
+        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
+                                          subset[2], subset[3])
     return igc
 
 def igc_mro_hirise(fname, lbl = None, kernel_file = None,
-                    kernel_file_post = None, kernel_json = None):
+                   kernel_file_post = None, kernel_json = None,
+                   subset = None):
     '''Process for HIRISE camera. 
 
     Right now, we are using ISIS as input. We will try to move this
@@ -156,6 +183,9 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
     read, a kernel JSON file, and/or a post kernel file to read.
 
     This includes reading the spice kernels that we need.
+
+    You can supply a subset if desired, this should be an array of
+    [Lstart, Sstart, Number_line, Number_sample].
     '''
     if(lbl is None):
         lbl = pds_label(fname)
@@ -219,7 +249,12 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
                                   tspace)
     dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
     orb_cache = OrbitListCache(orb, tt)
-    return cam,tt,orb_cache
+    ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
+    igc = IpiImageGroundConnection(ipi, dem, img)
+    if(subset is not None):
+        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
+                                          subset[2], subset[3])
+    return igc
 
 
 __all__ = ["igc_mro_context", "igc_mex_hrsc", "igc_mro_hirise"]

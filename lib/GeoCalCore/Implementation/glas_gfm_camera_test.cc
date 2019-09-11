@@ -147,10 +147,13 @@ BOOST_AUTO_TEST_CASE(gfm_test)
   BOOST_CHECK_EQUAL(cam.number_sample(0), 2048);
   BOOST_CHECK_CLOSE(cam.focal_length(), focal_length * 1e-3, 1e-4);
   BOOST_CHECK_EQUAL(cam.sensor_type(), "F");
-  for(int i = 0; i < cam.number_line(0); i += 1) 
-    for(int j = 0; j < cam.number_sample(0); j += 1) {
-      if(j == 0 && i % 10 == 0)
-	std::cerr << "Starting line " << i << "\n";
+  //int step = 1;
+  int test_step = 20;
+  for(int i = 0; i < cam.number_line(0); i += test_step) 
+    for(int j = 0; j < cam.number_sample(0); j += test_step) {
+      if(false)
+	if(j == 0 && i % 10 == 0)
+	  std::cerr << "Starting line " << i << "\n";
       FrameCoordinate fc(i,j);
       BOOST_CHECK(fabs(rcam.frame_coordinate(cam.sc_look_vector(fc, 0),0).line
 		     - fc.line) < 1e-3);

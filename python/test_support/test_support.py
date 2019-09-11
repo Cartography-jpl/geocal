@@ -193,6 +193,7 @@ def isolated_dir(tmpdir):
         os.chdir(curdir)
 
 matlab = pytest.mark.matlab
+long_test = pytest.mark.long_test
         
 @pytest.fixture(scope="function")
 def rpc():
@@ -392,7 +393,10 @@ def mars_test_data():
     if(not SpiceHelper.have_spice() or
        not "MARS_KERNEL" in os.environ or
        not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") or
-       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker")):
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/kernel.json") or
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker") or
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mes_kernel/kernel.json")
+    ):
         raise SkipTest
     res = "/raid27/smyth/MiplMarsTest/"
     if(not os.path.exists(res)):

@@ -6,14 +6,9 @@
 import geocal
 import os
 import subprocess
-import matplotlib.pylab as plt
-import matplotlib as mpl
-import seaborn as sns
-from matplotlib.backends.backend_pdf import PdfPages
-import numpy as np
 import struct
 
-version = "May 16, 2017"
+version = "Sept 11, 2019"
 usage='''Usage:
   mars_generate_rsm [options] <pds_image> <output_base_name>
   mars_generate_rsm -h | --help
@@ -57,7 +52,7 @@ MARS_KERNEL directory, or you need to process times not found in the
 MARS_KERNEL directory. You can override the kernels used by using the
 command line arguments --kernel-file and --kernel-json. There is also the
 additional option --kernel-file-post for loading kernels after the others.
-This is used by example MEX where there is a CK/ATNM_RECONSTITUTED_00004.BC
+This is used by for example MEX where there is a CK/ATNM_RECONSTITUTED_00004.BC
 file that fixes some of the data in the MEX kernels.
 
 Example:
@@ -127,227 +122,24 @@ long_name_to_vicar = { "pds_image" : "pdsimg",
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
-def plot_diff(r, igc, fname):
-    pdf = PdfPages(fname)
-    dem_nominal = (args.max_height + args.min_height) / 2.0
-    ln, smp, lncalc, smpcalc = r.compare_igc(igc, igc.number_line, 5,
-                                             dem_nominal)
-    print("Max line diff:   ", np.nanmax(abs(ln-lncalc)), " at ",
-          np.unravel_index(np.nanargmax(abs(ln-lncalc)), ln.shape))
-    print("Max sample diff: ", np.nanmax(abs(smp-smpcalc)), " at ",
-          np.unravel_index(np.nanargmax(abs(smp-smpcalc)), smp.shape))
-
-    cmap = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
-    plt.clf()
-    for i in range(smp.shape[1]):
-        plt.plot(ln[:,i], lncalc[:,i] - ln[:,i], label="Sample %d" % smp[0,i])
-    plt.legend()
-    plt.title("Line diff")
-    plt.xlabel("Line")
-    plt.ylabel("Diff")
-    pdf.savefig()
-    plt.clf()
-    for i in range(smp.shape[1]):
-        plt.plot(ln[:,i], smpcalc[:,i] - smp[:,i], label="Sample %d" % smp[0,i])
-    plt.legend()
-    plt.title("Sample diff")
-    plt.xlabel("Line")
-    plt.ylabel("Diff")
-    pdf.savefig()
-    plt.clf()
     
-    pdf.close()
-
-# Note, when adding a new instrument there are a few good sanity things to
-# check:
-# 1. Check check_rc_assumption, this verifies that we have line, sample, and
-#    look directions nearly orthogonal. If you have the camera rotated wrong,
-#    you can catch that because the dot products won't be close to 0.
-# 2. Compare spice calculation of boresight with the full Igc calculation. This
-#    makes sure you have things lined up right.
-# 3. It is also worth comparing data projected by our code vs. data that
-#    has gone through ISIS. We won't line up exactly, but it should be pretty
-#    close. This helps find gross errors in our models, etc.
-
-def igc_for_context(lbl, fname):
-    '''Process for context camera'''
-    tstart = geocal.Time.parse_time(lbl["START_TIME"])
-    bdir = os.environ["MARS_KERNEL"] + "/mro_kernel/"
-    if(args.kernel_file):
-        kfile = args.kernel_file
-    else:
-        kfile = bdir + "mro.ker"
-    if(args.kernel_file_post):
-        kpfile = args.kernel_file_post
-    else:
-        kpfile = None
-    if(args.kernel_json):
-        kjson = args.kernel_json
-    else:
-        kjson = bdir + "kernel.json"
-    kdat = geocal.read_shelve(kjson)
-    # We need better logic here, but for now just set up the kernels we
-    # handed
-    klist = [kfile,
-             kdat["ck_kernel"].kernel(tstart),
-             kdat["spk_kernel"].kernel(tstart)]
-    if(kpfile):
-        klist.append(kpfile)
-    orb = geocal.SpicePlanetOrbit("MRO", "MRO_CTX", klist,
-                           geocal.PlanetConstant.MARS_NAIF_CODE)
-    img = geocal.GdalRasterImage(fname)
-    # We have masked pixels in the L1 data, which we want to chop out
-    left_masked = 38
-    right_masked = 18
-    img = geocal.SubRasterImage(img, 0, left_masked, img.number_line, 5000)
-    if(lbl["SAMPLE_BIT_MODE_ID"] == "SQROOT"):
-        img = geocal.ContextSqrtDecodeImage(img)
-    # The START_TIME is the commanded start time, the actual start time
-    # might be different. According to the CTX SIS (available at
-    # https://pdsimage2.wr.usgs.gov/archive/mro-m-ctx-2-edr-l0-v1.0/mrox_0452/document/
-    #), we should use the SPACECRAFT_CLOCK_START_COUNT instead. Should be
-    # pretty close to START_TIME. Note that we use START_TIME first because
-    # we need to read the spice kernels before being able to convert SCLK to
-    # time.
-    tstart = geocal.Time.time_sclk(lbl["SPACECRAFT_CLOCK_START_COUNT"], "MRO")
-    # 1e-3 is because LINE_EXPOSURE_DURATION is in milliseconds.
-    tspace = float(lbl["LINE_EXPOSURE_DURATION"].split(" ")[0]) * 1e-3
-    tt = geocal.ConstantSpacingTimeTable(tstart, tstart + tspace * (img.number_line-1),
-                                  tspace)
-    dem = geocal.PlanetSimpleDem(geocal.PlanetConstant.MARS_NAIF_CODE)
-    orb_cache = geocal.OrbitListCache(orb, tt)
-    ipi = geocal.Ipi(orb_cache, geocal.ctx_camera(), 0, tt.min_time, tt.max_time, tt)
-    igc = geocal.IpiImageGroundConnection(ipi, dem, img)
-    return igc
-
-def rsm_for_context(lbl, fname, subset=None):
-    '''This generates a RSM for a MRO Context image. We return the Rsm, 
-    and the original igc. This strips off the masked pixels. Not sure if this
-    is what we ultimately want or not, but it is what we do here.'''
-    igc = igc_for_context(lbl, fname)
-    if(subset is not None):
-        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
-                                              subset[2], subset[3])
-    # In order for LocalRcParameter to be useful, the look, sample, and line
-    # directions need to be mostly orthogonal. So dot product of unit vectors
-    # should be close to 0
-    if(False):
-        geocal.LocalRcParameter.check_rc_assumption(igc)
-
-    # Verify that we calculate nearly the same boresight at SPICE.
-    if(False):
-        ic = geocal.ImageCoordinate(200, igc.number_sample / 2)
-        pts = geocal.SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
-                                         geocal.PlanetConstant.MARS_NAIF_CODE,
-                                         "MRO", "MRO_CTX")
-        print("Distance spice boresight and IGC: ",
-              distance(pts[0], igc.ground_coordinate(ic)))
-        print(igc.image_coordinate(pts[0]))
-
-    r = geocal.Rsm(geocal.RsmRpPlusGrid(geocal.RsmRationalPolynomial(5,5,3,1,1,1,5,1,
-                                                40, 40, 20, 40),
-                          geocal.RsmGrid(3, 1000, 50)),
-            geocal.LocalRcConverter(geocal.LocalRcParameter(igc)))
-    r.fit(igc, args.min_height, args.max_height)
-    return r, igc
-    
-def igc_for_hrsc(lbl, fname):
-    '''Process for HRSC camera'''
-    tstart = geocal.Time.parse_time(lbl["START_TIME"])
-    tend = geocal.Time.parse_time(lbl["STOP_TIME"])
-    if(lbl["DETECTOR_ID"] != "MEX_HRSC_NADIR"):
-        raise RuntimeError("Right now we only work with MEX_HRSC_NADIR")
-    bdir = os.environ["MARS_KERNEL"] + "/mex_kernel/"
-    if(args.kernel_file):
-        kfile = args.kernel_file
-    else:
-        kfile = bdir + "mex.ker"
-    if(args.kernel_file_post):
-        kpfile = args.kernel_file_post
-    else:
-        kpfile = bdir + "mex_reconstituted.ker"
-    if(args.kernel_json):
-        kjson = args.kernel_json
-    else:
-        kjson = bdir + "kernel.json"
-    kdat = geocal.read_shelve(kjson)
-    # We need better logic here, but for now just set up the kernels we
-    # handed
-    klist = [kfile,
-             kdat["ck_kernel"].kernel(tstart),
-             kdat["spk_kernel"].kernel(tstart)]
-    if(kpfile):
-        klist.append(kpfile)
-    orb = geocal.SpicePlanetOrbit("MEX", "MEX_HRSC_HEAD", klist,
-                           geocal.PlanetConstant.MARS_NAIF_CODE)
-    img = geocal.GdalRasterImage(fname)
-    # The PDS image has a byte label in the front of each line. GDAL
-    # doesn't read this (it just skips it), but we can read it directly.
-    # The byte label is described in HRSC_LABEL_HEADER.PDF
-    # (at ftp://psa.esac.esa.int/pub/mirror/MARS-EXPRESS/HRSC/MEX-M-HRSC-3-RDR-V3.0/DOCUMENT),
-    # but basically the first 8 bytes are just a double that gives the J2000
-    # time for that line (and we don't care about anything else in the binary
-    # label). We read through the data to create our TimeTable.
-    record_bytes = int(lbl['RECORD_BYTES'])
-    # This is 1 based, convert to 0 based with -1
-    istart = int(lbl['^IMAGE']) - 1
-    tlist = geocal.Vector_Time()
-    with open(fname, "rb") as f:
-        for i in range(istart, istart + img.number_line):
-            f.seek(i * record_bytes, 0)
-            tlist.push_back(geocal.Time.time_et(struct.unpack("d", f.read(8))[0]))
-    tt = geocal.MeasuredTimeTable(tlist)
-    dem = geocal.PlanetSimpleDem(geocal.PlanetConstant.MARS_NAIF_CODE)
-    orb_cache = geocal.OrbitListCache(orb, tt)
-    ipi = geocal.Ipi(orb_cache, geocal.hrsc_camera(), 0, tt.min_time, tt.max_time, tt)
-    igc = geocal.IpiImageGroundConnection(ipi, dem, img)
-    return igc
-
-def rsm_for_hrsc(lbl, fname, subset=None):
-    '''This generates a RSM for a MRO Context image. We return the Rsm, 
-    and the original igc. This strips off the masked pixels. Not sure if this
-    is what we ultimately want or not, but it is what we do here.
-    '''
-    igc = igc_for_hrsc(lbl, fname)
-    if(subset is not None):
-        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
-                                          subset[2], subset[3])
-    # In order for LocalRcParameter to be useful, the look, sample, and line
-    # directions need to be mostly orthogonal. So dot product of unit vectors
-    # should be close to 0
-    if(False):
-        geocal.LocalRcParameter.check_rc_assumption(igc)
-
-    # Verify that we calculate nearly the same boresight at SPICE.
-    if(False):
-        ic = geocal.ImageCoordinate(200, igc.number_sample / 2.0)
-        pts = geocal.SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
-                                                  geocal.PlanetConstant.MARS_NAIF_CODE,
-                                                  "MEX", "MEX_HRSC_NADIR")
-        print("Distance spice boresight and IGC: ",
-              distance(pts[0], igc.ground_coordinate(ic)))
-        print(igc.image_coordinate(pts[0]))
-    
-    # Really big image, so break up into a few sections. We should perhaps have
-    # a dynamic way to determine this.
-    r = geocal.Rsm(geocal.RsmRpPlusGrid(geocal.RsmMultiSection(igc.number_line,
-                                          igc.number_sample, 3, 1,
-                                geocal.RsmRationalPolynomial(5,5,3,1,1,1,5,1,
-                                                      40, 40, 20, 40, False)),
-                          geocal.RsmGrid(3, 5000, 50, False)),
-            geocal.LocalRcConverter(geocal.LocalRcParameter(igc)))
-    r.fit(igc, args.min_height, args.max_height)
-    return r, igc
-
 # Determine the image type
 lbl = geocal.pds_label(args.pds_image)
 subset = None
 if args.subset:
     subset = eval(args.subset)
 if(lbl['INSTRUMENT_NAME'] == 'CONTEXT CAMERA'):
-    r, igc = rsm_for_context(lbl,args.pds_image, subset)
+    igc = geocal.igc_mro_context(args.pds_image, lbl=lbl, 
+                                 kernel_file=args.kernel_file,
+                                 kernel_file_post=args.kernel_file_post,
+                                 kernel_json=args.kernel_json, subset=subset)
+    r = geocal.rsm_context(igc)
 elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION STEREO CAMERA'):
-    r, igc = rsm_for_hrsc(lbl,args.pds_image, subset)
+    igc = geocal.igc_mex_hrsc(args.pds_image, lbl=lbl, 
+                              kernel_file=args.kernel_file,
+                              kernel_file_post=args.kernel_file_post,
+                              kernel_json=args.kernel_json, subset=subset)
+    r, igc = geocal.rsm_hrsc(lbl,args.pds_image, subset)
 else:
     raise RuntimeError("Not a recognized instrument name %s" %
                        lbl['INSTRUMENT_NAME'])
@@ -369,6 +161,6 @@ geocal.copy_raster(igc.image, f, True)
 f.close()
 geocal.write_shelve(args.output_base_name + ".rsm.xml", r)
 if(args.plot_cross_section):
-    plot_diff(r, igc, args.plot_cross_section)
+    geocal.rsm_plot_diff(r, igc, args.plot_cross_section)
     
 

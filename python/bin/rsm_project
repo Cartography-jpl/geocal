@@ -172,12 +172,11 @@ def create_igc_map(igc, args):
     return igc_map
         
 dem = geocal.read_shelve(args.dem_file)
-rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
     img = geocal.VicarLiteRasterImage(args.image)
 else:
     img = geocal.GdalRasterImage(args.image)
-igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
+igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
 igc_map = create_igc_map(igc, args)
 
 if(args.verbose):

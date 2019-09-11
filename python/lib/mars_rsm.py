@@ -27,6 +27,7 @@ def rsm_plot_diff(r, igc, fname=None, min_height = -5000,
     pdf = PdfPages(fname)
     cmap = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
     plt.clf()
+    plt.ylim(-2,2)
     for i in range(smp.shape[1]):
         plt.plot(ln[:,i], lncalc[:,i] - ln[:,i], label="Sample %d" % smp[0,i])
     plt.legend()
@@ -35,6 +36,7 @@ def rsm_plot_diff(r, igc, fname=None, min_height = -5000,
     plt.ylabel("Diff")
     pdf.savefig()
     plt.clf()
+    plt.ylim(-2,2)
     for i in range(smp.shape[1]):
         plt.plot(ln[:,i], smpcalc[:,i] - smp[:,i], label="Sample %d" % smp[0,i])
     plt.legend()
@@ -110,4 +112,29 @@ def rsm_hrsc(igc, diagnostic=False, min_height = -5000,
     r.fit(igc, min_height, max_height)
     return r
 
-__all__ = ["rsm_plot_diff", "rsm_context", "rsm_hrsc"]
+def rsm_hirise(igc, diagnostic=False, min_height = -5000,
+                    max_height = -1500):
+    '''Generate a RSM for MRO HiRISE. The igc should come from something
+    like igc_mro_hirise.
+
+    There are a few checks we can do to make sure that various assumptions
+    we make are true.
+    '''
+    if(diagnostic):
+        # In order for LocalRcParameter to be useful, the look,
+        # sample, and line directions need to be mostly orthogonal. So
+        # dot product of unit vectors should be close to 0.
+        LocalRcParameter.check_rc_assumption(igc)
+        
+    # Really big image, so break up into a few sections. We should perhaps have
+    # a dynamic way to determine this.
+    r = Rsm(RsmRpPlusGrid(RsmMultiSection(igc.number_line,
+                                          igc.number_sample, 3, 1,
+                                RsmRationalPolynomial(5,5,3,1,1,1,5,1,
+                                                      40, 40, 20, 40, False)),
+                          RsmGrid(3, 5000, 50, False)),
+            LocalRcConverter(LocalRcParameter(igc)))
+    r.fit(igc, min_height, max_height)
+    return r
+
+__all__ = ["rsm_plot_diff", "rsm_context", "rsm_hrsc", "rsm_hirise"]

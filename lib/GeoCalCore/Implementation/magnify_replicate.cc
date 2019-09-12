@@ -34,8 +34,9 @@ MagnifyReplicate::MagnifyReplicate(const boost::shared_ptr<RasterImage>& Data,
     rpc_->line_offset = (rpc_->line_offset + 0.5) * Magfactor - 0.5;
     rpc_->sample_offset = (rpc_->sample_offset + 0.5) * Magfactor - 0.5;
   }
-  if(Data->has_rsm())
-    throw Exception("Don't support RSM yet");
+  // Just leave RSM off, we don't have a way to magnify
+  //if(Data->has_rsm())
+  //  throw Exception("Don't support RSM yet");
 }
 
 void MagnifyReplicate::calc(int Lstart, int Sstart) const

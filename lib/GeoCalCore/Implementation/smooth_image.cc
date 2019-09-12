@@ -33,8 +33,9 @@ SmoothImage::SmoothImage(const boost::shared_ptr<RasterImage>& Data,
     rpc_->line_offset -= Nhs;
     rpc_->sample_offset -= Nhs;
   }
-  if(Data->has_rsm())
-    throw Exception("Don't support RSM yet");
+  // Just leave RSM off, we don't have a way to reduce size
+  //if(Data->has_rsm())
+  //  throw Exception("Don't support RSM yet");
 }
 
 BZ_DECLARE_STENCIL2(smooth3,A,B)

@@ -97,8 +97,9 @@ RasterAveraged::RasterAveraged(const boost::shared_ptr<RasterImage>& Data,
     rpc_->line_scale /= Number_line_per_pixel;
     rpc_->sample_scale /= Number_sample_per_pixel;
   }
-  if(Data->has_rsm())
-    throw Exception("Don't support RSM yet");
+  // Just leave RSM off, we don't have a way to reduce size
+  // if(Data->has_rsm())
+  //   throw Exception("Don't support RSM yet");
 }
 
 //-----------------------------------------------------------------------

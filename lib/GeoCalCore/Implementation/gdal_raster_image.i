@@ -142,8 +142,11 @@ def __contains__(self, key):
 	  out_img.set_map_info(Ri.map_info());
 	if(Ri.has_rpc())
 	  out_img.set_rpc(Ri.rpc());
-	if(Ri.has_rsm())
-	  throw GeoCal::Exception("Don't support RSM yet");
+	// Just leave RSM off, we don't have to write out. This
+	// should perhaps be treated as an error, but for now just
+	// drop RSM
+	// if(Ri.has_rsm())
+	//   throw GeoCal::Exception("Don't support RSM yet");
         copy(Ri, out_img);
      }
   }

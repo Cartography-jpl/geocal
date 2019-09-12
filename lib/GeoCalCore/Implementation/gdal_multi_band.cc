@@ -114,8 +114,11 @@ void GdalMultiBand::save(const std::string& Oname,
     m.set_map_info(d.raster_image(0).map_info());
   if(d.raster_image(0).has_rpc())
     m.set_rpc(d.raster_image(0).rpc());
-  if(d.raster_image(0).has_rsm())
-    throw Exception("Don't support RSM yet");
+  // Just leave RSM off, we don't have to write out. This
+  // should perhaps be treated as an error, but for now just
+  // drop RSM
+  // if(d.raster_image(0).has_rsm())
+  //   throw Exception("Don't support RSM yet");
   copy(d, m, Log_progress);
 }
 

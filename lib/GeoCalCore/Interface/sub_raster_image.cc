@@ -42,8 +42,9 @@ SubRasterImage::SubRasterImage(const boost::shared_ptr<RasterImage>&
     rpc_->line_offset -= Start_line;
     rpc_->sample_offset -= Start_sample;
   }
-  if(Raster_image->has_rsm())
-    throw Exception("Don't support RSM yet");
+  // Just leave RSM off, we don't have a way to subset
+  // if(Raster_image->has_rsm())
+  //   throw Exception("Don't support RSM yet");
 }
 
 //-----------------------------------------------------------------------
@@ -86,8 +87,9 @@ int boundary)
     rpc_->line_offset -= start_line_;
     rpc_->sample_offset -= start_sample_;
   }
-  if(Raster_image->has_rsm())
-    throw Exception("Don't support RSM yet");
+  // Just leave RSM off, we don't have a way to subset
+  // if(Raster_image->has_rsm())
+  //   throw Exception("Don't support RSM yet");
 }
 
 //-----------------------------------------------------------------------
@@ -136,8 +138,9 @@ int boundary)
     rpc_->line_offset -= start_line_;
     rpc_->sample_offset -= start_sample_;
   }
-  if(Raster_image->has_rsm())
-    throw Exception("Don't support RSM yet");
+  // Just leave RSM off, we don't have a way to subset
+  // if(Raster_image->has_rsm())
+  //   throw Exception("Don't support RSM yet");
 }
 
 //-----------------------------------------------------------------------

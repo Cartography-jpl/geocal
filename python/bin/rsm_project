@@ -154,11 +154,11 @@ def create_igc_map(igc, args):
         mi = mp.map_info
         mp = None
     else:
-        naif_code = rsm.coordinate_converter.naif_code
+        naif_code = igc.rsm.coordinate_converter.naif_code
         if(naif_code == geocal.Ecr.EARTH_NAIF_CODE):
             mibase = geocal.cib01_mapinfo(desired_resolution = resolution)
         elif(naif_code == geocal.PlanetConstant.MARS_NAIF_CODE):
-            mibase = geocal.mars_default_mi(desired_resolution = resolution)
+            mibase = mars_default_mi(desired_resolution = resolution)
         else:
             raise RuntimeError("Don't currently support NAIF code %d" %
                                naif_code)

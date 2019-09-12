@@ -71,6 +71,13 @@ Options:
        the one with the camera model, spice kernel, etc.). This is what we
        are approximating with the RSM.
 
+  --keep-temp-dir
+       For some instrument types we create a temporary directory for
+       initial processing (e.g., HiRISE using ISIS code). Normally we
+       delete this directory. For debugging, it can be useful to skip the
+       clean up and leave the directory in place so we can look at the
+       intermediate files
+
   --kernel-file=f
        If supplied, override the kernel file used. If not specified we 
        use mro_kernel/mro.ker or mex_kernel/mex.ker in the directory given
@@ -191,10 +198,14 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
                                     kernel_json=args.kernel_json, subset=subset)
         r = geocal.rsm_hirise(igc)
         write_vicar_file(igc, r, fin_fname, fout_base_name)
+        # Since fin_fname will go away, we set igc.image to None before
+        # optionally saving it out
+        igc.image = None
     finally:
         if(curdir):
             os.chdir(curdir)
-        shutil.rmtree(d)
+        if(not args.keep_temp_dir):
+            shutil.rmtree(d)
 else:
     raise RuntimeError("Not a recognized instrument name %s" %
                        lbl['INSTRUMENT_NAME'])

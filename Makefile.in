@@ -508,7 +508,8 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/rsm_image_ground_connection_wrap.cc \
 	@swigsrc@/mola_dem_file_wrap.cc \
 	@swigsrc@/context_sqrt_decode_image_wrap.cc \
-	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
+	@swigsrc@/quick_mosaic_wrap.cc @swigsrc@/argus_camera_wrap.cc \
+	@swigsrc@/argus_orbit_wrap.cc \
 	@swigsrc@/quickbird_camera_wrap.cc \
 	@swigsrc@/spot_camera_wrap.cc @swigsrc@/spot_orbit_wrap.cc \
 	@swigsrc@/quickbird_orbit_wrap.cc \
@@ -703,6 +704,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-rsm_image_ground_connection_wrap.lo \
 	@swigsrc@/_swig_wrap_la-mola_dem_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-context_sqrt_decode_image_wrap.lo \
+	@swigsrc@/_swig_wrap_la-quick_mosaic_wrap.lo \
 	@swigsrc@/_swig_wrap_la-argus_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-quickbird_camera_wrap.lo \
@@ -904,6 +906,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/rsm_image_ground_connection.cc \
 	@srcimplementation@/mola_dem_file.cc \
 	@srcimplementation@/context_sqrt_decode_image.cc \
+	@srcimplementation@/quick_mosaic.cc \
 	@srcimplementation@/gdal_datum.cc \
 	@srcimplementation@/geocal_gdal.cc \
 	@srcimplementation@/gdal_dem.cc \
@@ -1099,6 +1102,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-rsm_image_ground_connection.lo \
 	@srcimplementation@/libgeocal_la-mola_dem_file.lo \
 	@srcimplementation@/libgeocal_la-context_sqrt_decode_image.lo \
+	@srcimplementation@/libgeocal_la-quick_mosaic.lo \
 	$(am__objects_10) \
 	@srcimplementation@/libgeocal_la-spice_helper.lo \
 	@srcimplementation@/libgeocal_la-sdp_helper.lo \
@@ -1282,6 +1286,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/rsm_image_ground_connection_test.cc \
 	@srcimplementation@/mola_dem_file_test.cc \
 	@srcimplementation@/context_sqrt_decode_image_test.cc \
+	@srcimplementation@/quick_mosaic_test.cc \
 	@srcimplementation@/sensrb_camera_test.cc \
 	@srcimplementation@/glas_gfm_camera_test.cc \
 	@srccartlab@/vicar_ogr_test.cc \
@@ -1447,6 +1452,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-rsm_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-mola_dem_file_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-context_sqrt_decode_image_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-quick_mosaic_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-sensrb_camera_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-glas_gfm_camera_test.$(OBJEXT) \
 	$(am__objects_15) \
@@ -1631,6 +1637,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-quadratic_geometric_model_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-quaternion_camera_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po \
@@ -1721,6 +1728,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-pyramid_image_matcher.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-quadratic_geometric_model.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-quaternion_camera.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-quick_mosaic.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo \
@@ -2040,6 +2048,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-pyramid_image_matcher_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-quadratic_geometric_model_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-quaternion_camera_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-quick_mosaic_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_camera_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_orbit_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_time_table_wrap.Plo \
@@ -2329,6 +2338,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/rsm_image_ground_connection.h \
 	@srcimplementation@/mola_dem_file.h \
 	@srcimplementation@/context_sqrt_decode_image.h \
+	@srcimplementation@/quick_mosaic.h \
 	@srcimplementation@/gdal_datum.h \
 	@srcimplementation@/geocal_gdal.h \
 	@srcimplementation@/gdal_dem.h \
@@ -3348,7 +3358,8 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/rsm_image_ground_connection.cc \
 	@srcimplementation@/mola_dem_file.cc \
 	@srcimplementation@/context_sqrt_decode_image.cc \
-	$(am__append_27) @srcimplementation@/spice_helper.cc \
+	@srcimplementation@/quick_mosaic.cc $(am__append_27) \
+	@srcimplementation@/spice_helper.cc \
 	@srcimplementation@/sdp_helper.cc @srccartlab@/argus_camera.cc \
 	@srccartlab@/argus_orbit.cc @srccartlab@/quickbird_camera.cc \
 	@srccartlab@/spot_camera.cc @srccartlab@/spot_orbit.cc \
@@ -3508,7 +3519,8 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/rsm_image_ground_connection_wrap.cc \
 	@swigsrc@/mola_dem_file_wrap.cc \
 	@swigsrc@/context_sqrt_decode_image_wrap.cc \
-	@swigsrc@/argus_camera_wrap.cc @swigsrc@/argus_orbit_wrap.cc \
+	@swigsrc@/quick_mosaic_wrap.cc @swigsrc@/argus_camera_wrap.cc \
+	@swigsrc@/argus_orbit_wrap.cc \
 	@swigsrc@/quickbird_camera_wrap.cc \
 	@swigsrc@/spot_camera_wrap.cc @swigsrc@/spot_orbit_wrap.cc \
 	@swigsrc@/quickbird_orbit_wrap.cc \
@@ -3739,7 +3751,8 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/rsm_image_ground_connection.h \
 	@srcimplementation@/mola_dem_file.h \
 	@srcimplementation@/context_sqrt_decode_image.h \
-	$(am__append_26) @srcimplementation@/spice_helper.h \
+	@srcimplementation@/quick_mosaic.h $(am__append_26) \
+	@srcimplementation@/spice_helper.h \
 	@srcimplementation@/sdp_helper.h @srccartlab@/argus_camera.h \
 	@srccartlab@/argus_orbit.h @srccartlab@/quickbird_camera.h \
 	@srccartlab@/spot_camera.h @srccartlab@/spot_orbit.h \
@@ -3914,9 +3927,10 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/rsm_image_ground_connection.i \
 	@srcimplementation@/mola_dem_file.i \
 	@srcimplementation@/context_sqrt_decode_image.i \
-	@srccartlab@/argus_camera.i @srccartlab@/argus_orbit.i \
-	@srccartlab@/quickbird_camera.i @srccartlab@/spot_camera.i \
-	@srccartlab@/spot_orbit.i @srccartlab@/quickbird_orbit.i \
+	@srcimplementation@/quick_mosaic.i @srccartlab@/argus_camera.i \
+	@srccartlab@/argus_orbit.i @srccartlab@/quickbird_camera.i \
+	@srccartlab@/spot_camera.i @srccartlab@/spot_orbit.i \
+	@srccartlab@/quickbird_orbit.i \
 	@srccartlab@/quickbird_time_table.i \
 	@srccartlab@/pos_export_orbit.i \
 	@srccartlab@/worldview2_cloudmask.i \
@@ -4049,6 +4063,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/rsm_image_ground_connection_test.cc \
 	@srcimplementation@/mola_dem_file_test.cc \
 	@srcimplementation@/context_sqrt_decode_image_test.cc \
+	@srcimplementation@/quick_mosaic_test.cc \
 	@srcimplementation@/sensrb_camera_test.cc \
 	@srcimplementation@/glas_gfm_camera_test.cc $(am__append_32) \
 	@srccartlab@/argus_camera_test.cc \
@@ -4873,6 +4888,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-context_sqrt_decode_image_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-quick_mosaic_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-argus_orbit_wrap.lo:  \
@@ -5439,6 +5456,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-context_sqrt_decode_image.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-quick_mosaic.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-gdal_datum.lo:  \
@@ -6008,6 +6028,9 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcimplementation@/geocal_test_all-context_sqrt_decode_image_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-quick_mosaic_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-sensrb_camera_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -6358,6 +6381,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quadratic_geometric_model_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quaternion_camera_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po@am__quote@ # am--include-marker
@@ -6448,6 +6472,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-pyramid_image_matcher.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quadratic_geometric_model.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quaternion_camera.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-quick_mosaic.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo@am__quote@ # am--include-marker
@@ -6767,6 +6792,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-pyramid_image_matcher_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quadratic_geometric_model_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quaternion_camera_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quick_mosaic_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_camera_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_orbit_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_time_table_wrap.Plo@am__quote@ # am--include-marker
@@ -7952,6 +7978,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/context_sqrt_decode_image_wrap.cc' object='@swigsrc@/_swig_wrap_la-context_sqrt_decode_image_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-context_sqrt_decode_image_wrap.lo `test -f '@swigsrc@/context_sqrt_decode_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/context_sqrt_decode_image_wrap.cc
+
+@swigsrc@/_swig_wrap_la-quick_mosaic_wrap.lo: @swigsrc@/quick_mosaic_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-quick_mosaic_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-quick_mosaic_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-quick_mosaic_wrap.lo `test -f '@swigsrc@/quick_mosaic_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quick_mosaic_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-quick_mosaic_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-quick_mosaic_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/quick_mosaic_wrap.cc' object='@swigsrc@/_swig_wrap_la-quick_mosaic_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-quick_mosaic_wrap.lo `test -f '@swigsrc@/quick_mosaic_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/quick_mosaic_wrap.cc
 
 @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo: @swigsrc@/argus_camera_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-argus_camera_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-argus_camera_wrap.lo `test -f '@swigsrc@/argus_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/argus_camera_wrap.cc
@@ -9366,6 +9399,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/context_sqrt_decode_image.cc' object='@srcimplementation@/libgeocal_la-context_sqrt_decode_image.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-context_sqrt_decode_image.lo `test -f '@srcimplementation@/context_sqrt_decode_image.cc' || echo '$(srcdir)/'`@srcimplementation@/context_sqrt_decode_image.cc
+
+@srcimplementation@/libgeocal_la-quick_mosaic.lo: @srcimplementation@/quick_mosaic.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-quick_mosaic.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-quick_mosaic.Tpo -c -o @srcimplementation@/libgeocal_la-quick_mosaic.lo `test -f '@srcimplementation@/quick_mosaic.cc' || echo '$(srcdir)/'`@srcimplementation@/quick_mosaic.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-quick_mosaic.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-quick_mosaic.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quick_mosaic.cc' object='@srcimplementation@/libgeocal_la-quick_mosaic.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-quick_mosaic.lo `test -f '@srcimplementation@/quick_mosaic.cc' || echo '$(srcdir)/'`@srcimplementation@/quick_mosaic.cc
 
 @srcimplementation@/libgeocal_la-gdal_datum.lo: @srcimplementation@/gdal_datum.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-gdal_datum.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-gdal_datum.Tpo -c -o @srcimplementation@/libgeocal_la-gdal_datum.lo `test -f '@srcimplementation@/gdal_datum.cc' || echo '$(srcdir)/'`@srcimplementation@/gdal_datum.cc
@@ -11551,6 +11591,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-context_sqrt_decode_image_test.obj `if test -f '@srcimplementation@/context_sqrt_decode_image_test.cc'; then $(CYGPATH_W) '@srcimplementation@/context_sqrt_decode_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/context_sqrt_decode_image_test.cc'; fi`
 
+@srcimplementation@/geocal_test_all-quick_mosaic_test.o: @srcimplementation@/quick_mosaic_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-quick_mosaic_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Tpo -c -o @srcimplementation@/geocal_test_all-quick_mosaic_test.o `test -f '@srcimplementation@/quick_mosaic_test.cc' || echo '$(srcdir)/'`@srcimplementation@/quick_mosaic_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quick_mosaic_test.cc' object='@srcimplementation@/geocal_test_all-quick_mosaic_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-quick_mosaic_test.o `test -f '@srcimplementation@/quick_mosaic_test.cc' || echo '$(srcdir)/'`@srcimplementation@/quick_mosaic_test.cc
+
+@srcimplementation@/geocal_test_all-quick_mosaic_test.obj: @srcimplementation@/quick_mosaic_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-quick_mosaic_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Tpo -c -o @srcimplementation@/geocal_test_all-quick_mosaic_test.obj `if test -f '@srcimplementation@/quick_mosaic_test.cc'; then $(CYGPATH_W) '@srcimplementation@/quick_mosaic_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/quick_mosaic_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/quick_mosaic_test.cc' object='@srcimplementation@/geocal_test_all-quick_mosaic_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-quick_mosaic_test.obj `if test -f '@srcimplementation@/quick_mosaic_test.cc'; then $(CYGPATH_W) '@srcimplementation@/quick_mosaic_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/quick_mosaic_test.cc'; fi`
+
 @srcimplementation@/geocal_test_all-sensrb_camera_test.o: @srcimplementation@/sensrb_camera_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-sensrb_camera_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-sensrb_camera_test.Tpo -c -o @srcimplementation@/geocal_test_all-sensrb_camera_test.o `test -f '@srcimplementation@/sensrb_camera_test.cc' || echo '$(srcdir)/'`@srcimplementation@/sensrb_camera_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-sensrb_camera_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-sensrb_camera_test.Po
@@ -13115,6 +13169,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-quadratic_geometric_model_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-quaternion_camera_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po
@@ -13205,6 +13260,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-pyramid_image_matcher.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-quadratic_geometric_model.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-quaternion_camera.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-quick_mosaic.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo
@@ -13524,6 +13580,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-pyramid_image_matcher_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quadratic_geometric_model_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quaternion_camera_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quick_mosaic_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_camera_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_orbit_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_time_table_wrap.Plo
@@ -13756,6 +13813,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-planet_coordinate_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-quadratic_geometric_model_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-quaternion_camera_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po
@@ -13846,6 +13904,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-pyramid_image_matcher.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-quadratic_geometric_model.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-quaternion_camera.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-quick_mosaic.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo
@@ -14165,6 +14224,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-pyramid_image_matcher_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quadratic_geometric_model_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quaternion_camera_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quick_mosaic_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_camera_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_orbit_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-quickbird_time_table_wrap.Plo

@@ -188,6 +188,8 @@ libgeocal_la_SOURCES+= @srcimplementation@/mola_dem_file.cc
 geocalinc_HEADERS+= @srcimplementation@/mola_dem_file.h
 libgeocal_la_SOURCES+= @srcimplementation@/context_sqrt_decode_image.cc
 geocalinc_HEADERS+= @srcimplementation@/context_sqrt_decode_image.h
+libgeocal_la_SOURCES+= @srcimplementation@/quick_mosaic.cc
+geocalinc_HEADERS+= @srcimplementation@/quick_mosaic.h
 
 # File only included if we have GDAL library
 if HAVE_GDAL
@@ -441,6 +443,8 @@ SWIG_SRC += @swigsrc@/mola_dem_file_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/mola_dem_file.i
 SWIG_SRC += @swigsrc@/context_sqrt_decode_image_wrap.cc
 geocalswiginc_HEADERS += @srcimplementation@/context_sqrt_decode_image.i
+SWIG_SRC += @swigsrc@/quick_mosaic_wrap.cc
+geocalswiginc_HEADERS += @srcimplementation@/quick_mosaic.i
 # Test files
 geocal_test_all_SOURCES+= @srcimplementation@/did_datum_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/misc_array_function_test.cc
@@ -508,6 +512,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/local_rectangular_coordinate_test.
 geocal_test_all_SOURCES+= @srcimplementation@/rsm_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/mola_dem_file_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/context_sqrt_decode_image_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/quick_mosaic_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/sensrb_camera_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/glas_gfm_camera_test.cc
 

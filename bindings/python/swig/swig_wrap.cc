@@ -161,6 +161,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_rsm_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_mola_dem_file)(void);
   INIT_TYPE INIT_FUNC(_context_sqrt_decode_image)(void);
+  INIT_TYPE INIT_FUNC(_quick_mosaic)(void);
   INIT_TYPE INIT_FUNC(_argus_camera)(void);
   INIT_TYPE INIT_FUNC(_argus_orbit)(void);
   INIT_TYPE INIT_FUNC(_quickbird_camera)(void);
@@ -376,6 +377,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_rsm_image_ground_connection", INIT_FUNC(_rsm_image_ground_connection));
   INIT_MODULE(module, "_mola_dem_file", INIT_FUNC(_mola_dem_file));
   INIT_MODULE(module, "_context_sqrt_decode_image", INIT_FUNC(_context_sqrt_decode_image));
+  INIT_MODULE(module, "_quick_mosaic", INIT_FUNC(_quick_mosaic));
   INIT_MODULE(module, "_argus_camera", INIT_FUNC(_argus_camera));
   INIT_MODULE(module, "_argus_orbit", INIT_FUNC(_argus_orbit));
   INIT_MODULE(module, "_quickbird_camera", INIT_FUNC(_quickbird_camera));

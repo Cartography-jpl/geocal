@@ -70,8 +70,7 @@ def hirise_camera(ccd_number, bin_mode = 1, tdi_mode = 128):
     # have (0,0) be the upper left hand corner of first pixel, while we
     # use (0,0) for the center of the pixel.
     ccd_off = [0.5,0.5 + tdi_mode / 2.0]
-    #t_off = np.array([trans_x[0],trans_y[0]])
-    t_off = np.array([trans_x[0],60.0469])
+    t_off = np.array([trans_x[0],trans_y[0]])
     t_m = np.array([[trans_x[1], trans_x[2]],[trans_y[1],trans_y[2]]])
     # We calculate the inverse rather than reading it. Limitations on the
     # precision gives an inverse that round trips with an error of ~0.01

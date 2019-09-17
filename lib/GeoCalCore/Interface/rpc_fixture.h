@@ -54,7 +54,7 @@ public:
 	1.1059e-07, 4.10217e-08, -1.69482e-07, 1.08104e-06,
 	1e-9, -2.33038e-07, 1.86413e-08, -1.35637e-08}};
     rpc.sample_denominator = t4;
-    gp = Geodetic(35.8399968, 45.0770183, 1017);
+    gp = Geodetic(35.8750924856, 44.8388258608, 1017);
   }
   virtual ~RpcFixture() {}
   /// Reasonable RPC

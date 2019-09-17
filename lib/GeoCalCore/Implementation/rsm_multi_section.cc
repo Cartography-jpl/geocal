@@ -202,6 +202,54 @@ void RsmMultiSection::print(std::ostream& Os) const
      << "  Number cols: " << sec.cols() << "\n";
 }
 
+// int RsmMultiSection::min_line() const
+// {
+//   int res = 0;
+//   for(int i = 0; i < sec.rows(); ++i)
+//     for(int j = 0; j < sec.cols(); ++j)
+//       if(i == 0 && j == 0)
+// 	res = sec(i,j)->min_line();
+//       else
+// 	res = std::min(res, sec(i,j)->min_line());
+//   return res;
+// }
+
+// int RsmMultiSection::max_line() const
+// {
+//   int res = 0;
+//   for(int i = 0; i < sec.rows(); ++i)
+//     for(int j = 0; j < sec.cols(); ++j)
+//       if(i == 0 && j == 0)
+// 	res = sec(i,j)->max_line();
+//       else
+// 	res = std::max(res, sec(i,j)->max_line());
+//   return res;
+// }
+
+// int RsmMultiSection::min_sample() const
+// {
+//   int res = 0;
+//   for(int i = 0; i < sec.rows(); ++i)
+//     for(int j = 0; j < sec.cols(); ++j)
+//       if(i == 0 && j == 0)
+// 	res = sec(i,j)->min_sample();
+//       else
+// 	res = std::min(res, sec(i,j)->min_sample());
+//   return res;
+// }
+
+// int RsmMultiSection::max_sample() const
+// {
+//   int res = 0;
+//   for(int i = 0; i < sec.rows(); ++i)
+//     for(int j = 0; j < sec.cols(); ++j)
+//       if(i == 0 && j == 0)
+// 	res = sec(i,j)->max_sample();
+//       else
+// 	res = std::max(res, sec(i,j)->max_sample());
+//   return res;
+// }
+
 double RsmMultiSection::min_x() const
 {
   double res = 0;

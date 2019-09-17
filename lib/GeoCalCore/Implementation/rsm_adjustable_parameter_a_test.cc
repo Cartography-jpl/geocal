@@ -17,7 +17,10 @@ BOOST_AUTO_TEST_CASE(basic_test)
   if(false)
     std::cerr << r << "\n";
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
-  ImageCoordinate ic = r.image_coordinate(gp);
+  ImageCoordinate ic;
+  bool in_valid_range;
+  r.image_coordinate(gp, ic, in_valid_range);
+  BOOST_CHECK(in_valid_range);
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
   boost::shared_ptr<GroundCoordinate> gpcalc =
@@ -55,7 +58,9 @@ BOOST_AUTO_TEST_CASE(ground_rotation_jac_test)
      boost::make_shared<LocalRcConverter>(boost::make_shared<LocalRcParameter>(*igc)));
   r->fit(*igc, hmin, hmax);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
-  ImageCoordinate ic = r->image_coordinate(gp);
+  ImageCoordinate ic;
+  bool in_valid_range;
+  r->image_coordinate(gp, ic, in_valid_range);
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
 
@@ -82,7 +87,9 @@ BOOST_AUTO_TEST_CASE(ground_correction_jac_test)
      boost::make_shared<LocalRcConverter>(boost::make_shared<LocalRcParameter>(*igc)));
   r->fit(*igc, hmin, hmax);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
-  ImageCoordinate ic = r->image_coordinate(gp);
+  ImageCoordinate ic;
+  bool in_valid_range;
+  r->image_coordinate(gp, ic, in_valid_range);
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
 

@@ -13,9 +13,9 @@ BOOST_AUTO_TEST_CASE(basic)
   boost::shared_ptr<RasterImage> ri(new MemoryRasterImage(100, 300));
   RpcImageGroundConnection ig(rpc, dem, ri);
   ig.fit_height_offset(true);
-  ImageCoordinate ic_expect(5729.22, 27561.36);
+  ImageCoordinate ic_expect(1000,1000);
   BOOST_CHECK_EQUAL(ig.image_coordinate(gp), ic_expect);
-  BOOST_CHECK_CLOSE(ig.resolution_meter(ic_expect), 0.7923528069944753, 1e-4);
+  BOOST_CHECK_CLOSE(ig.resolution_meter(ic_expect), 0.82966225957899198, 1e-4);
   boost::shared_ptr<GroundCoordinate> gcalc = 
     ig.ground_coordinate(ic_expect);
   BOOST_CHECK(distance(*gcalc, gp) < 0.1);

@@ -175,7 +175,9 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate_z
     virtual ~RsmEq() {}
     virtual blitz::Array<double, 1> operator()(const 
       blitz::Array<double, 1>& X) const {
-      ImageCoordinate icres = r_.image_coordinate(X(0), X(1), z_);
+      ImageCoordinate icres;
+      bool in_valid_range;
+      r_.image_coordinate(X(0), X(1), z_, icres, in_valid_range);
       blitz::Array<double, 1> res(2);
       res(0) = icres.line - ic_.line;
       res(1) = icres.sample - ic_.sample;
@@ -234,21 +236,36 @@ Rsm::ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
 /// Return the image coordinates for the given Gc. This can return Nan
 /// if we are outside the range of a RsmGrid, indicating we can't
 /// calculate the ImageCoordinate.
+///
+/// Note that the RSM is really only valid for Gc that fall in the
+/// range min_x, max_x, min_y, max_y, min_z, max_z in
+/// rsm_base. Numerically we can often calculate a value outside of
+/// this range, and that can be useful (e.g., points just a little
+/// outside of the valid range).
+///
+/// This function will always calculate image coordinates if it
+/// can. But depending on the application, callers of this function
+/// should check the value of In_valid_range returned. If false, the
+/// user may want to treat this as invalid data (e..g, Nan).
 //-----------------------------------------------------------------------
 
-ImageCoordinate Rsm::image_coordinate(const GroundCoordinate& Gc) const
+void Rsm::image_coordinate(const GroundCoordinate& Gc, ImageCoordinate& Res, bool& In_valid_range) const
 {
   double x, y, z;
   coordinate_converter()->convert_to_coordinate(Gc, x, y, z);
-  return image_coordinate(x, y, z);
+  image_coordinate(x, y, z, Res, In_valid_range);
 }
 
 //-----------------------------------------------------------------------
 /// Variation where the Gc is already in our native coordinate system.
 //-----------------------------------------------------------------------
 
-ImageCoordinate Rsm::image_coordinate(double X, double Y, double Z) const
+void Rsm::image_coordinate(double X, double Y, double Z, ImageCoordinate& Res,
+			   bool& In_valid_range) const
 {
+  // Allow a little slop in the line/sample calculated, so value like
+  // -0.0001 don't get called out of range.
+  const double tol = 0.01;
   if(rparm) {
     boost::shared_ptr<GroundCoordinate> gc =
       coordinate_converter()->convert_from_coordinate(X, Y, Z);
@@ -257,12 +274,38 @@ ImageCoordinate Rsm::image_coordinate(double X, double Y, double Z) const
     rparm->adjustment(*gc, gcadj, lndelta, smpdelta);
     double xadj, yadj, zadj;
     coordinate_converter()->convert_to_coordinate(*gcadj, xadj, yadj, zadj);
-    ImageCoordinate ic = rp->image_coordinate(xadj, yadj, zadj);
-    ic.line += lndelta;
-    ic.sample += smpdelta;
-    return ic;
-  } 
-  return rp->image_coordinate(X, Y, Z);
+    Res = rp->image_coordinate(xadj, yadj, zadj);
+    // Think we want to skip checking line/sample range. Seems to
+    // cause failures that aren't really real, so we'll just check the
+    // X,Y,Z range. We may want to come back to this at some point.
+    // In_valid_range = (xadj >= rp->min_x() && xadj <= rp->max_x() &&
+    // 		      yadj >= rp->min_y() && yadj <= rp->max_y() &&
+    // 		      zadj >= rp->min_z() && zadj <= rp->max_z() &&
+    // 		      Res.line >= rp->min_line() - tol &&
+    // 		      Res.line <= rp->max_line() + tol &&
+    // 		      Res.sample >= rp->min_sample() - tol &&
+    // 		      Res.sample <= rp->max_sample() + tol);
+    In_valid_range = (xadj >= rp->min_x() && xadj <= rp->max_x() &&
+		      yadj >= rp->min_y() && yadj <= rp->max_y() &&
+		      zadj >= rp->min_z() && zadj <= rp->max_z());
+    Res.line += lndelta;
+    Res.sample += smpdelta;
+  } else {
+    Res = rp->image_coordinate(X, Y, Z);
+    // Think we want to skip checking line/sample range. Seems to
+    // cause failures that aren't really real, so we'll just check the
+    // X,Y,Z range. We may want to come back to this at some point.
+    // In_valid_range = (X >= rp->min_x() && X <= rp->max_x() &&
+    // 		      Y >= rp->min_y() && Y <= rp->max_y() &&
+    // 		      Z >= rp->min_z() && Z <= rp->max_z() &&
+    // 		      Res.line >= rp->min_line() - tol &&
+    // 		      Res.line <= rp->max_line() + tol &&
+    // 		      Res.sample >= rp->min_sample() - tol &&
+    // 		      Res.sample <= rp->max_sample() + tol);
+    In_valid_range = (X >= rp->min_x() && X <= rp->max_x() &&
+		      Y >= rp->min_y() && Y <= rp->max_y() &&
+		      Z >= rp->min_z() && Z <= rp->max_z());
+  }
 }
 
 //-----------------------------------------------------------------------
@@ -496,10 +539,16 @@ void Rsm::compare_igc
       True_line(i,j) = ln;
       True_sample(i,j) = smp;
       try {
-	ImageCoordinate iccalc = 
-	  image_coordinate(*Igc.ground_coordinate_approx_height(ImageCoordinate(ln,smp), Height));
-	Calc_line(i,j) = iccalc.line;
-	Calc_sample(i, j) = iccalc.sample;
+	ImageCoordinate iccalc;
+	bool in_valid_range;
+	image_coordinate(*Igc.ground_coordinate_approx_height(ImageCoordinate(ln,smp), Height), iccalc, in_valid_range);
+	if(in_valid_range) {
+	  Calc_line(i,j) = iccalc.line;
+	  Calc_sample(i, j) = iccalc.sample;
+	} else {
+	  Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
+	  Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
+	}
       } catch(const ImageGroundConnectionFailed&) {
 	Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
 	Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();

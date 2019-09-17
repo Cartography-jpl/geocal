@@ -272,7 +272,8 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
     def image_coordinate(self, *args):
         """
 
-        ImageCoordinate Rsm::image_coordinate(double X, double Y, double Z) const
+        void Rsm::image_coordinate(double X, double Y, double Z, ImageCoordinate &Res, bool
+        &In_valid_range) const
         Variation where the Gc is already in our native coordinate system. 
         """
         return _rsm.Rsm_image_coordinate(self, *args)

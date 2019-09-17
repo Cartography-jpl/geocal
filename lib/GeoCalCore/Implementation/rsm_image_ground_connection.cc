@@ -52,8 +52,10 @@ RsmImageGroundConnection::cf_look_vector
 
 ImageCoordinate RsmImageGroundConnection::image_coordinate(const GroundCoordinate& Gc) const
 {
-  ImageCoordinate res = rsm_->image_coordinate(Gc);
-  if(std::isnan(res.line) || std::isnan(res.sample))
+  ImageCoordinate res;
+  bool in_valid_range;
+  rsm_->image_coordinate(Gc, res, in_valid_range);
+  if(!in_valid_range || std::isnan(res.line) || std::isnan(res.sample))
     throw ImageGroundConnectionFailed();
   return res;
 }
@@ -61,8 +63,9 @@ ImageCoordinate RsmImageGroundConnection::image_coordinate(const GroundCoordinat
 void RsmImageGroundConnection::image_coordinate_with_status
 (const GroundCoordinate& Gc, ImageCoordinate& Res, bool& Success) const
 {
-  Res = rsm_->image_coordinate(Gc);
-  if(std::isnan(Res.line) || std::isnan(Res.sample))
+  bool in_valid_range;
+  rsm_->image_coordinate(Gc, Res, in_valid_range);
+  if(!in_valid_range || std::isnan(Res.line) || std::isnan(Res.sample))
     Success = false;
   else
     Success = true;

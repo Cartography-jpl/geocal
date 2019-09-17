@@ -63,18 +63,18 @@ BOOST_AUTO_TEST_CASE(basic_test)
 				// just make sure call returns
 				// something.
 
-  ImageCoordinate ic_expect(5729.22, 27561.36);
+  ImageCoordinate ic_expect(1000, 1000);
   BOOST_CHECK_EQUAL(rpc.image_coordinate(gp), ic_expect);
   blitz::Array<double, 2> ic_jac = 
     rpc.image_coordinate_jac(gp.latitude(),
 			     gp.longitude(),
 			     gp.height_reference_surface());
   ImageCoordinate ic2;
-  double eps = 1e-4;
+  double eps = 1e-3;
   ic2 = rpc.image_coordinate(gp.latitude() + eps, gp.longitude(),
 			     gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_jac(0, 0), (ic2.line - ic_expect.line) / eps, 1.0);
-  BOOST_CHECK_CLOSE(ic_jac(1, 0), (ic2.sample - ic_expect.sample) / eps, 1.5);
+  BOOST_CHECK_CLOSE(ic_jac(1, 0), (ic2.sample - ic_expect.sample) / eps, 4.0);
   ic2 = rpc.image_coordinate(gp.latitude(), gp.longitude() + eps,
 			     gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_jac(0, 1), (ic2.line - ic_expect.line) / eps, 1.5);
@@ -84,10 +84,10 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(ic_jac(0, 2), (ic2.line - ic_expect.line) / 10, 1.0);
   BOOST_CHECK_CLOSE(ic_jac(1, 2), (ic2.sample - ic_expect.sample) / 10, 1.0);
   blitz::Array<double, 1> lat(1), lon(1), height(1);
-  lat = 35.8399968; lon = 45.0770183; height = 1017;
+  lat = 35.8750924856; lon = 44.8388258608; height = 1017;
   blitz::Array<double, 2> r = rpc.image_coordinate(lat, lon, height);
   BOOST_CHECK_CLOSE(r(0, 0), ic_expect.line, 1e-4);
-  BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 1e-4);
+  BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 2e-3);
   boost::shared_ptr<GroundCoordinate> gcalc =
     rpc.ground_coordinate(ic_expect, 1017);
   BOOST_CHECK(distance(*gcalc, gp) < 0.1);
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   Rpc rpc4 = rpc.rpc_type_a();
   r = rpc4.image_coordinate(lat, lon, height);
   BOOST_CHECK_CLOSE(r(0, 0), ic_expect.line, 1e-4);
-  BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 1e-4);
+  BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 2e-3);
   Rpc rpc5 = rpc4.rpc_type_b();
   for(int i = 0; i < 20; ++i) {
     BOOST_CHECK_CLOSE(rpc5.line_numerator[i], rpc.line_numerator[i], 1e-4);

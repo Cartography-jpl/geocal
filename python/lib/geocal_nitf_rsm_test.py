@@ -858,9 +858,24 @@ def test_rsm_sample(isolated_dir):
         f = pynitf.NitfFile(rsm_sample_data + fname)
         print(f.image_segment[0].rsm)
         r = f.image_segment[0].rsm
+        
         for ln, smp, h, lat, lon in pcalc[fname]:
             ic_expect = ImageCoordinate(ln, smp)
-            ic_calc = r.image_coordinate(Geodetic(lat, lon, h))
+            ic_calc, in_valid_range = r.image_coordinate(Geodetic(lat, lon, h))
+            if(not in_valid_range):
+                print(fname)
+                print(ic_calc)
+                print(r.coordinate_converter.convert_to_coordinate(Geodetic(lat, lon, h)))
+                print(r.rsm_base.min_line)
+                print(r.rsm_base.max_line)
+                print(r.rsm_base.min_sample)
+                print(r.rsm_base.max_sample)
+                print(r.rsm_base.min_x)
+                print(r.rsm_base.max_x)
+                print(r.rsm_base.min_y)
+                print(r.rsm_base.max_y)
+                print(r.rsm_base.min_z)
+                print(r.rsm_base.max_z)
             if(abs(ic_expect.line - ic_calc.line) >= 0.2 or
                abs(ic_expect.sample - ic_calc.sample) >= 0.2):
                 print(fname)
@@ -871,6 +886,7 @@ def test_rsm_sample(isolated_dir):
             # no greater than 0.05. But it appears the lat/lon is lower
             # resolution than some of the other data, so this gives closer to
             # 0.2 pixel
+            assert(in_valid_range)
             assert(abs(ic_expect.line - ic_calc.line) < 0.2)
             assert(abs(ic_expect.sample - ic_calc.sample) < 0.2)
         # Should add tests to check against the expected value spreadsheet

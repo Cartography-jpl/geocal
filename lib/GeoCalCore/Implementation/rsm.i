@@ -33,8 +33,10 @@ public:
     (const ImageCoordinate& Ic, double Z) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate_approx_height
     (const ImageCoordinate& Ic, double H) const;
-  ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const;
-  ImageCoordinate image_coordinate(double X, double Y, double Z) const;
+  void image_coordinate(const GroundCoordinate& Gc, ImageCoordinate& OUTPUT,
+			bool& OUTPUT) const;
+  void image_coordinate(double X, double Y, double Z, ImageCoordinate& OUTPUT,
+			bool& OUTPUT) const;
   blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const;
   blitz::Array<double, 2> 

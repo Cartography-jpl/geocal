@@ -17,7 +17,10 @@ BOOST_AUTO_TEST_CASE(basic_test)
 {
   Rsm r(rp_from_rpc, cconv);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
-  ImageCoordinate ic = r.image_coordinate(gp);
+  ImageCoordinate ic;
+  bool in_valid_range;
+  r.image_coordinate(gp, ic, in_valid_range);
+  BOOST_CHECK(in_valid_range);
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
   boost::shared_ptr<GroundCoordinate> gpcalc =
@@ -31,8 +34,22 @@ BOOST_AUTO_TEST_CASE(fit_test)
   double hmax = rpc.height_offset + rpc.height_scale;
   Rsm r(boost::make_shared<RsmRationalPolynomial>(3,3,3,3,3,3,3,3), cconv);
   r.fit(*igc, hmin, hmax);
+  boost::shared_ptr<GroundCoordinate> gc = rpc.ground_coordinate(ImageCoordinate(1000, 1000), 1017);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
-  ImageCoordinate ic = r.image_coordinate(gp);
+  ImageCoordinate ic;
+  bool in_valid_range;
+  r.image_coordinate(gp, ic, in_valid_range);
+  // std::cerr << r.rsm_base()->min_line() << "\n"
+  // 	    << r.rsm_base()->max_line() << "\n"
+  // 	    << r.rsm_base()->min_sample() << "\n"
+  // 	    << r.rsm_base()->max_sample() << "\n"
+  // 	    << r.rsm_base()->min_x() << "\n"
+  // 	    << r.rsm_base()->max_x() << "\n"
+  // 	    << r.rsm_base()->min_y() << "\n"
+  // 	    << r.rsm_base()->max_y() << "\n"
+  // 	    << r.rsm_base()->min_z() << "\n"
+  // 	    << r.rsm_base()->max_z() << "\n";
+  BOOST_CHECK(in_valid_range);
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
   boost::shared_ptr<GroundCoordinate> gpcalc =
@@ -49,7 +66,10 @@ BOOST_AUTO_TEST_CASE(ground_coordinate_dem)
   try {
     SrtmDem d;
     boost::shared_ptr<GroundCoordinate> gpsurf = d.surface_point(gp);
-    ImageCoordinate ic = r.image_coordinate(*gpsurf);
+    ImageCoordinate ic;
+    bool in_valid_range;
+    r.image_coordinate(*gpsurf, ic, in_valid_range);
+    BOOST_CHECK(in_valid_range);
     boost::shared_ptr<GroundCoordinate> gpcalc =
       r.ground_coordinate(ic, d);
     BOOST_CHECK(GeoCal::distance(*gpsurf, *gpcalc) < 1.0);
@@ -73,7 +93,10 @@ BOOST_AUTO_TEST_CASE(serialize)
   boost::shared_ptr<Rsm> rr = 
     serialize_read_string<Rsm>(d);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
-  ImageCoordinate ic = rr->image_coordinate(gp);
+  ImageCoordinate ic;
+  bool in_valid_range;
+  rr->image_coordinate(gp, ic, in_valid_range);
+  BOOST_CHECK(in_valid_range);
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-4);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-4);
 }

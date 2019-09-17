@@ -50,7 +50,7 @@ void QuickMosaic::print(std::ostream& Os) const
   opad.strict_sync();
   Os << "  Image list:\n";
   BOOST_FOREACH(const boost::shared_ptr<RasterImage>& img, img_list_) {
-    opad << img << "\n";
+    opad << *img << "\n";
     opad.strict_sync();
   }
 }

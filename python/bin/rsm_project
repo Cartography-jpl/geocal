@@ -11,6 +11,7 @@ import logging
 version = "October 2, 2017"
 usage='''Usage:
   rsm_project [options] <image> <dem_file> <output>
+  rsm_project [options] --mosaic <dem_file> <output> <image_list>...
   rsm_project -h | --help
   rsm_project -v | --version
 
@@ -57,6 +58,12 @@ Options:
        Rather than generating a image to cover the full area, match exactly
        the supplied shelve image or MapInfo. This is useful to when 
        comparing against an existing image/DEM.
+
+  --mosaic
+       If supplied, this does a quick mosaic of multiple images (e.g. multiple
+       CCDs of HiRISE). The mosaic is done just by overlaying the map projected
+       images over each other. If two images overlap, the one that appears 
+       first in the list will be on top.
 
   --resolution=r
        Resolution in meters of output. If negative, then we use the center
@@ -133,7 +140,7 @@ def create_igc_map(igc, args):
     if(args.map_info):
         mi = geocal.GdalRasterImage(args.map_info).map_info
         if(args.bounding_box or args.cover_image):
-            raise RuntimeError("Can only specify one of --map-info, --bounding-box and --cover-mage")
+            raise RuntimeError("Can only specify one of --map-info, --bounding-box and --cover-image")
     elif(args.bounding_box):
         mibase = geocal.GdalRasterImage(args.bounding_box).map_info
         resbase = mibase.resolution_meter
@@ -143,7 +150,7 @@ def create_igc_map(igc, args):
         mi = mp.map_info
         mp = None
         if(args.cover_image):
-            raise RuntimeError("Can only specify one of --map-info, --bounding-box and --cover-mage")
+            raise RuntimeError("Can only specify one of --map-info, --bounding-box and --cover-image")
     elif(args.cover_image):
         mibase = geocal.GdalRasterImage(args.cover_image).map_info
         resbase = mibase.resolution_meter
@@ -168,16 +175,48 @@ def create_igc_map(igc, args):
         mp = None
     igc_map = geocal.IgcMapProjected(mi, igc, args.grid_spacing, args.avg_factor,
                               False)
-        
+    return igc_map
+
+def create_igc_map_mosaic(igclist, args):
+    if(args.resolution < 0):
+        args.resolution = igclist[0].resolution_meter()
+    igc_map_list = [create_igc_map(igc, args) for igc in igclist]
+    if(args.map_info or args.bounding_box):
+        mi = igc_map_list[0].map_info
+        # Crop all the map images, so we only calculate where there might
+        # be data.
+        igc_map_list_new = []
+        for igc_map in igc_map_list:
+            igc = igc_map.image_ground_connection
+            igc_map_new = geocal.IgcMapProjected(igc.cover(mi),
+                              igc, args.grid_spacing, args.avg_factor,
+                              False)
+            igc_map_list_new.append(igc_map_new)
+        igc_map_list = igc_map_list_new
+    else:
+        mi = igc_map_list[0].map_info
+        for igc_map in igc_map_list:
+            mi = mi.map_union(igc_map.map_info)
+    igc_map = geocal.QuickMosaic(mi, igc_map_list)
     return igc_map
         
 dem = geocal.read_shelve(args.dem_file)
-if(geocal.VicarLiteFile.is_vicar_file(args.image)):
-    img = geocal.VicarLiteRasterImage(args.image)
+if(args.mosaic):
+    igclist = []
+    for imgfname in args.image_list:
+        if(geocal.VicarLiteFile.is_vicar_file(imgfname)):
+            img = geocal.VicarLiteRasterImage(imgfname)
+        else:
+            img = geocal.GdalRasterImage(imgfname)
+        igclist.append(geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image"))
+    igc_map = create_igc_map_mosaic(igclist, args)
 else:
-    img = geocal.GdalRasterImage(args.image)
-igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
-igc_map = create_igc_map(igc, args)
+    if(geocal.VicarLiteFile.is_vicar_file(args.image)):
+        img = geocal.VicarLiteRasterImage(args.image)
+    else:
+        img = geocal.GdalRasterImage(args.image)
+    igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
+    igc_map = create_igc_map(igc, args)
 
 if(args.verbose):
     logging.basicConfig(level = logging.INFO)
@@ -194,6 +233,7 @@ elif(args.vicar_type == "FULL"):
     dtype = np.int32
 else:
     raise RuntimeError("Unknown vicar type %s" % args.vicar_type)
+geocal.write_shelve("igc_map.xml", igc_map)
 out = geocal.mmap_file(args.output, igc_map.map_info, dtype=dtype)
 geocal.parallel_process_image(igc_map, out, args.process_number_line,
                        args.process_number_sample, args.number_process)

@@ -14,6 +14,9 @@ def parallel_process_tile(img_in, lstart, sstart, nline, nsamp, out):
     log = logging.getLogger("geocal-python.parallel_process")
     log.info("Processing (%d, %d) to (%d, %d)" % \
                  (lstart, sstart, lstart + nline, sstart + nsamp))
+    # Initialize to 0 in case an error occurs. Better to have a blank
+    # block in an image than a block with mangled data
+    out[lstart:(lstart + nline), sstart:(sstart + nsamp)] = 0
     for h in logging.getLogger("geocal-python").handlers:
         h.flush()
     if(out.dtype == np.float32 or out.dtype == np.float64):

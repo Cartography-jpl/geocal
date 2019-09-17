@@ -18,6 +18,13 @@ def test_igc_mex_hrsc(mars_test_data):
 def test_igc_mro_hirise(mars_test_data):
     igc = igc_mro_hirise(mars_test_data + "esp_025012_1745_red2.norm.cub")
     print(igc)
+    d = igc.ipi.camera.sc_look_vector(FrameCoordinate(0,0),0).direction
+    print([d[0], d[1], d[2]])
+    d = igc.cf_look_vector_lv(ImageCoordinate(100,0)).direction
+    print([d[0], d[1], d[2]])
+    print(igc.ground_coordinate(ImageCoordinate(100,0)).convert_to_cf())
+    print(igc.dem)
+    print(Planetocentric(igc.ground_coordinate(ImageCoordinate(100,0))))
     
 @require_spice
 @require_mars_spice

@@ -130,7 +130,7 @@ def mars_default_mi(desired_resolution = 1):
      UNIT["metre",1,
          AUTHORITY["EPSG","9001"]]]''')
     cconv = geocal.OgrCoordinateConverter(owrap)
-    mi = geocal.MapInfo(cconv, 0, 0, 10000, 10000, 10000, 10000)
+    mi = geocal.MapInfo(cconv, 0, 10000, 10000, 0, 10000, 10000)
     return mi.scale(desired_resolution, desired_resolution)
 
 def create_igc_map(igc, args):
@@ -187,7 +187,7 @@ def create_igc_map_mosaic(igclist, args):
         # be data.
         igc_map_list_new = []
         for igc_map in igc_map_list:
-            igc = igc_map.image_ground_connection
+            igc = igc_map.igc_original
             igc_map_new = geocal.IgcMapProjected(igc.cover(mi),
                               igc, args.grid_spacing, args.avg_factor,
                               False)

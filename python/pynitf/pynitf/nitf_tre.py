@@ -164,10 +164,18 @@ def read_tre(header, des_list, field_list = []):
         if(getattr(header, h_len) > 0):
             des_index = getattr(header, h_ofl)
             if(des_index > 0):
-                # des_index is 1 based, so subtract 1 to get the des
-                desseg = des_list[getattr(header, h_ofl)-1]
-                tre_list.extend(read_tre_data(desseg.des.data))
-            tre_list.extend(read_tre_data(getattr(header, h_data)))
+                try:
+                    # des_index is 1 based, so subtract 1 to get the des
+                    desseg = des_list[getattr(header, h_ofl)-1]
+                    t = read_tre_data(desseg.des.data)
+                    tre_list.extend(t)
+                except Exception as e:
+                    print("Warning: ", e)
+            try:
+                t = read_tre_data(getattr(header, h_data))
+                tre_list.extend(t)
+            except Exception as e:
+                print("Warning: ", e)
     return tre_list
 
 def prepare_tre_write(tre_list, header, des_list, field_list = [],
@@ -229,8 +237,8 @@ def read_tre_data(data):
             t = tre_object(tre_name)
             t.read_from_file(fh)
             res.append(t)
-        except:
-            raise Exception("Error while reading TRE " + str(tre_name))
+        except Exception as e:
+            raise Exception("Error while reading TRE " + str(tre_name), str(e))
     return res
     
 def create_nitf_tre_structure(name, description, hlp = None,

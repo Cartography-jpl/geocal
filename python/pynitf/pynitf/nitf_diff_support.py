@@ -50,6 +50,10 @@ class DiffHandle(object):
             if (not isinstance(field, _FieldLoopStruct)):
                 if (field.field_name is not None):
                     compare_name = field.field_name
+
+                    val1 = None
+                    val2 = None
+
                     if hasattr(field, 'name') and field.name != None:
                         compare_name = field.name
                         
@@ -66,16 +70,29 @@ class DiffHandle(object):
                             continue
 
                     if hasattr(field, 'eq_fun') and field.eq_fun != None:
-                        this_is_same = field.eq_fun[0](field.value(parent1)[()], 
-                                                       list2[index].value(parent2)[()], 
+                        val1 = field.value(parent1)[()]
+                        val2 = list2[index].value(parent2)[()]
+                        this_is_same = field.eq_fun[0](val1,
+                                                       val2,
                                                        *field.eq_fun[1:])
                     else:
-                        this_is_same = field.value(parent1) == list2[index].value(parent2)
+                        val1 = field.value(parent1)
+                        val2 = list2[index].value(parent2)
+                        this_is_same = val1 == val2
 
                     if not this_is_same:
+
+                        # Convert values into strings and truncate so that it's easier to print out the result
+                        val1 = str(val1)
+                        val2 = str(val2)
+                        if len(val1) > 100:
+                            val1 = val1[:200] + "..."
+                        if len(val2) > 100:
+                            val2 = val2[:200] + "..."
+
                         self.logger.error("%s 1 has field %s as %s while %s 2 has %s" %
-                                          (type, field.field_name, str(field),
-                                           type, str(list2[index])))
+                                          (type, field.field_name, val1,
+                                           type, val2))
                         is_same = False
             else:
                 is_same = self.process_field_value_list(type, field.field_value_list, parent1,
@@ -112,10 +129,17 @@ class TREFileHeadHandle(DiffHandle):
         self.logger.debug("obj1: %s" % obj1.summary())
         self.logger.debug("obj2: %s" % obj2.summary())
 
-        # Compare the fields of the two objects
-        is_same = self.process_field_value_list(self.obj_type, 
+        is_same = False
+        try:
+            # Compare the fields of the two objects
+            is_same = self.process_field_value_list(self.obj_type,
                                                 obj1.field_value_list, obj1, 
                                                 obj2.field_value_list, obj2)
+        except Exception as e:
+            compared = "FileHead"
+            if (self.obj_type == 'TRE'):
+                compared = obj1.tre_tag
+            self.logger.warning("Error while comparing " + compared +": "+ str(e))
 
         self.logger.debug("TREFileHeadHandle(%s) returning>>> %s" % (self.obj_type, is_same))
         return (True, is_same)
@@ -216,10 +240,11 @@ class DSegHandle(DiffHandle):
                                                 obj2.des.user_subheader.field_value_list,
                                                 obj2.des.user_subheader) and is_same
 
-        # TODO: compare DES payloads
-        #self.logger.debug(str(dir(obj1.data)))
+        # Compare DES payloads
         if hasattr(obj1.des, 'handle_diff'):
             is_same = obj1.des.handle_diff(obj2.des) and is_same
+        elif hasattr(obj1.des, 'data'):
+            is_same = np.array_equal(obj1.des.data, obj2.des.data)
         else:
             is_same = self.process_field_value_list("DES_DATA",
                                                     obj1.des.field_value_list,

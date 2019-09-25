@@ -96,6 +96,7 @@ Options:
 # Mapping between long name and shorter vicar name
 long_name_to_vicar = { "image" : "img",
                        "output" : "out",
+                       "image_list" : "ilist",
                        "dem_file" : "dem",
                        "avg_factor" : "avgfactor",
                        "bounding_box" : "bbox",
@@ -107,6 +108,7 @@ long_name_to_vicar = { "image" : "img",
                        "process_number_line" : "pline",
                        "process_number_sample" : "psamp",
                        "vicar_type" : "vtype",
+                       "mosaic" : "mosaic",
                        "verbose" : "verbose"
                        }
 

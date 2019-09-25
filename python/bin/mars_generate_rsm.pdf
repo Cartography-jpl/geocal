@@ -1,7 +1,7 @@
 PROCESS       HELP=*
 parm pdsimg type=(string,99) count=1
 parm outbase type=(string,99) count=1
-parm pdsimg type=(string,99) count=1 default=""
+parm pdsimg2 type=(string,99) count=1 default=""
 parm fulligc type=(string,99) count=1 default=""
 parm minh type=real count=1 default=-5000.0
 parm maxh type=real count=1 default=-1500.0

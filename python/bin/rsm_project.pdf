@@ -1,6 +1,7 @@
 PROCESS       HELP=*
-parm img type=(string,99) count=1
-parm out type=(string,99) count=1
+parm img type=(string,99) count=1 default=""
+parm out type=(string,99) count=1 default="out.img"
+parm ilist type=(string,99) count=(0:99) default=""
 parm dem type=(string,99) count=1 default=""
 parm avgfactor type=int count=1 default=-1
 parm bbox type=(string,99) count=1 default=""
@@ -12,6 +13,7 @@ parm nproc type=int count=1 default=1
 parm pline type=int count=1 default=1000
 parm psamp type=int count=1 default=1000
 parm vtype type=(string,99) count=1 valid=(BYTE,HALF,FULL,REAL,DOUB) default=HALF
+parm mosaic type=(string,4) count=(0:1) valid=(n,y) default=n
 parm verbose type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC
 .TITLE
@@ -104,6 +106,8 @@ parallel job takes to run.
 Type of file to generate. This
 should by BYTE, HALF, FULL,
 REAL, or DOUB. Default is HALF
+.variable mosaic
+Take in more than one image, and create a mosaic
 .variable verbose
 Print more information as we run.
 .END

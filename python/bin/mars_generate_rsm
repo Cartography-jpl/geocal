@@ -184,7 +184,12 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
         d = tempfile.mkdtemp(dir='./')
         curdir = os.getcwd()
         os.chdir(d)
-        setup_isis = "export ISISROOT=/data/smyth/Isis/isis; source /data/smyth/Isis/isis/scripts/isis3Startup.sh; "
+        # If ISIS is already set up, use the ISIS installation. Otherwise,
+        # default to the location on pistol.
+        if("ISISROOT" not in os.environ):
+            setup_isis = "export ISISROOT=/data/smyth/Isis/isis; source /data/smyth/Isis/isis/scripts/isis3Startup.sh; "
+        else:
+            setup_isis = ""
         subprocess.run(setup_isis + "hi2isis from=%s to=f1.cub && spiceinit from=f1.cub && hical from=f1.cub to=f1.cal.cub" % f1,
                        shell=True, check=True)
         subprocess.run(setup_isis + "hi2isis from=%s to=f2.cub && spiceinit from=f2.cub && hical from=f2.cub to=f2.cal.cub" % f2,

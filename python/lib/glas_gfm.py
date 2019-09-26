@@ -7,9 +7,9 @@ from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
                                geocal_time_to_nitf_date_second_field,
                                geocal_time_to_timestamp,
                                timestamp_to_geocal_time)
-from .geocal_nitf_des import(DesCSEPHB_geocal, DesCSATTB_geocal)
 try:
     import pynitf
+    from .geocal_nitf_des import(DesCSEPHB_geocal, DesCSATTB_geocal)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code

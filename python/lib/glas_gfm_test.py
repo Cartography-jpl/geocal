@@ -198,7 +198,8 @@ def test_create_multiple_fa_glas(nitf_sample_rip):
     assert max_diff1 < 1.0
     
     
-    
+
+@require_msp    
 @require_pynitf
 def test_create_gfm(isolated_dir):
     '''Create a NITF file with GFM in it, and make sure MSP can read this'''

@@ -145,11 +145,12 @@ subprocess.run(cmd, check=True)
 
 
 dem = geocal.read_shelve(args.dem_file)
-rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
     img = geocal.VicarLiteRasterImage(args.image)
+    rsm = img.rsm
 else:
     img = geocal.GdalRasterImage(args.image)
+    rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
 igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
 igccol = geocal.IgcArray([igc,])
 tpcollect = geocal.TiePointCollectPicmtch(igccol, [proj_fname,],

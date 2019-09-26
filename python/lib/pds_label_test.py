@@ -51,7 +51,8 @@ def test_spice_kernel_by_time():
     tstart = Time.parse_time("2008-02-23T03:36:10.894Z")
     assert kdata.kernel(tstart) == bdir + "mro_psp6_ssd_mro110c.bsp"
 
-# Depends on data we don't want to assume is available    
+# Depends on data we don't want to assume is available
+@skip
 def test_pds_label_isis():
     '''ISIS is almost the same as PDS, test this on a file'''
     fname = "/data/smyth/MarsHirise/Gale/esp_025012_1745_red2.norm.cub"

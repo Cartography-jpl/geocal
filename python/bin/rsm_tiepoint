@@ -9,7 +9,7 @@ import subprocess
 import os
 import logging
 
-version = "September 25, 2018"
+version = "September 26, 2019"
 usage='''Usage:
   rsm_tiepoint [options] <image> <dem_file> <reference_image> <output>
   rsm_tiepoint -h | --help

@@ -7,7 +7,7 @@ import geocal
 import subprocess
 import os
 
-version = "September 27, 2018"
+version = "September 26, 2019"
 usage='''Usage:
   rsm_improve [options] <image> <dem_file> <tiepoint_file> <output>
   rsm_improve -h | --help
@@ -62,11 +62,12 @@ args = geocal.docopt_simple(usage, version=version,
 
 dem = geocal.read_shelve(args.dem_file)
 tpcol = geocal.read_shelve(args.tiepoint_file)
-rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
     img = geocal.VicarLiteRasterImage(args.image)
+    rsm = img.rsm
 else:
     img = geocal.GdalRasterImage(args.image)
+    rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
 igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
 igccol = geocal.IgcArray([igc,])
 icorr = args.image_correction
@@ -86,7 +87,6 @@ outbase = os.path.splitext(args.output)[0]
 initial_igcfname = outbase + "_igccol_initial.xml"
 sba_igcfname = outbase + "_igccol_sba.xml"
 tp_igcfname = outbase + "_tp_sba.xml"
-rsmfname = outbase + ".rsm.xml"
 geocal.write_shelve(initial_igcfname, igccol)
 subprocess.run(["sba", "--hold-gcp-fixed", "--verbose",
                 initial_igcfname, args.tiepoint_file, sba_igcfname,
@@ -96,8 +96,11 @@ try:
     os.remove(args.output)
 except FileNotFoundError:
     pass
-subprocess.run(["ln", "-s", args.image, args.output], check=True)
-geocal.write_shelve(rsmfname, igccol_sba.image_ground_connection(0).rsm)
+subprocess.run(["cp", args.image, args.output], check=True)
+f = geocal.VicarRasterImage(args.output, 1, geocal.VicarFile.UPDATE)
+# NITF file doesn't work yet, so use XML file
+f.set_rsm(igccol_sba.image_ground_connection(0).rsm,
+          geocal.VicarFile.RSM_XML_FILE)
 print("Improved data:")
 print("----------------------------------")
 print(igccol_sba)

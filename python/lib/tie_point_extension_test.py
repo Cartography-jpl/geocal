@@ -1,4 +1,3 @@
-from __future__ import print_function
 from builtins import range
 from geocal.tie_point_extension import *
 from geocal.image_ground_connection import *
@@ -63,7 +62,6 @@ def test_tie_point():
     print(tp.ic_pred(igccol))
     print(tp.ic_diff(igccol))
     print(tpcol.data_frame(igccol, 0))
-    print(tpcol.panel(igccol))
     print(tpcol.data_frame2())
 
 def generate_tie_point_collection():

@@ -1,4 +1,3 @@
-from __future__ import print_function
 try:
     import pynitf
 except ImportError:
@@ -10,7 +9,7 @@ from geocal_swig import (GdalRasterImage, VicarRasterImage,
                          VicarLiteRasterImage, RsmId, RsmRationalPolynomial,
                          Rsm, ImageCoordinate, IgcMsp)
 import geocal_swig
-import six
+import io
 import numpy as np
 import os, subprocess
 
@@ -298,10 +297,10 @@ def test_tre_rsmpca(rsm_rational_polynomial):
     t = geocal.geocal_nitf_rsm.TreRSMPCA_geocal()
     t.rsm_rational_polynomial = rsm_rational_polynomial
     t.update_raw_field()
-    fh = six.BytesIO()
+    fh = io.BytesIO()
     t.write_to_file(fh)
     print(fh.getvalue())
-    fh2 = six.BytesIO(fh.getvalue())
+    fh2 = io.BytesIO(fh.getvalue())
     t2 = geocal.geocal_nitf_rsm.TreRSMPCA_geocal()
     t2.read_from_file(fh2)
     print(t2)
@@ -329,11 +328,11 @@ def test_tre_rsmgga(rsm_grid):
     t = geocal.geocal_nitf_rsm.TreRSMGGA_geocal()
     t.rsm_grid = rsm_grid
     t.update_raw_field()
-    fh = six.BytesIO()
+    fh = io.BytesIO()
     t.write_to_file(fh)
     # This is way too large to check, so skip this
     #assert fh.getvalue() == b'blah'
-    fh2 = six.BytesIO(fh.getvalue())
+    fh2 = io.BytesIO(fh.getvalue())
     t2 = geocal.geocal_nitf_rsm.TreRSMGGA_geocal()
     t2.read_from_file(fh2)
     print(t2)
@@ -351,11 +350,11 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     t = geocal.geocal_nitf_rsm.TreRSMGIA_geocal()
     t.rsm_multi_section = rsm_ms_polynomial
     t.update_raw_field()
-    fh = six.BytesIO()
+    fh = io.BytesIO()
     t.write_to_file(fh)
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
-    fh2 = six.BytesIO(fh.getvalue())
+    fh2 = io.BytesIO(fh.getvalue())
     t2 = geocal.geocal_nitf_rsm.TreRSMGIA_geocal()
     t2.read_from_file(fh2)
     print(t2)
@@ -368,11 +367,11 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     t = geocal.geocal_nitf_rsm.TreRSMPIA_geocal()
     t.rsm_multi_section = rsm_ms_polynomial
     t.update_raw_field()
-    fh = six.BytesIO()
+    fh = io.BytesIO()
     t.write_to_file(fh)
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
-    fh2 = six.BytesIO(fh.getvalue())
+    fh2 = io.BytesIO(fh.getvalue())
     t2 = geocal.geocal_nitf_rsm.TreRSMPIA_geocal()
     t2.read_from_file(fh2)
     print(t2)
@@ -385,11 +384,11 @@ def test_tre_rsmida(rsm):
     t = geocal.geocal_nitf_rsm.TreRSMIDA_geocal()
     t.rsm_id = rsm.rsm_id
     t.update_raw_field()
-    fh = six.BytesIO()
+    fh = io.BytesIO()
     t.write_to_file(fh)
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
-    fh2 = six.BytesIO(fh.getvalue())
+    fh2 = io.BytesIO(fh.getvalue())
     t2 = geocal.geocal_nitf_rsm.TreRSMIDA_geocal()
     t2.read_from_file(fh2)
     print(t2)

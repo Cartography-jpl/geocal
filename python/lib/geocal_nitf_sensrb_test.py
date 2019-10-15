@@ -10,7 +10,7 @@ from geocal_swig import (Time, KeplerOrbit, SimpleCamera,
 from geocal.geocal_nitf_sensrb import *
 import numpy as np
 import numpy.testing as npt
-import six
+import io
 import math
 
 def create_image_seg(f):
@@ -91,7 +91,7 @@ def test_sensrb_msp(isolated_dir):
     # the same as igc, up to round off, but we want to check that.
     f = pynitf.NitfFile("sensrb_test.ntf")
     # Write out tre as string
-    fh2 = six.BytesIO()
+    fh2 = io.BytesIO()
     t = f.image_segment[0].find_one_tre("SENSRB")
     t.write_to_file(fh2)
     print(fh2.getvalue())

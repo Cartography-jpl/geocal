@@ -1,6 +1,4 @@
-from __future__ import division
 from builtins import range
-from past.utils import old_div
 from test_support import *
 
 try:
@@ -15,8 +13,8 @@ require_orb_uncorr = pytest.mark.skipif(not orb_uncorr,
 
 cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                        3375, 3648,
-                       old_div(1.0, 2500000),
-                       old_div(1.0, 2500000),
+                       1.0 / 2500000,
+                       1.0 / 2500000,
                        1.0,
                        FrameCoordinate(1688.0, 1824.5),
                        QuaternionCamera.LINE_IS_Y)
@@ -195,8 +193,8 @@ def test_frame_coordinate_with_der():
         pdelta[i] = eps[i]
         cam.parameter = p0 + pdelta
         ic = orb.frame_coordinate(t1 + 5, gp, cam)
-        jac_fd[0, i] = old_div((ic.line - ic0.line.value), eps[i])
-        jac_fd[1, i] = old_div((ic.sample - ic0.sample.value), eps[i])
+        jac_fd[0, i] = (ic.line - ic0.line.value) / eps[i]
+        jac_fd[1, i] = (ic.sample - ic0.sample.value) / eps[i]
     cam.parameter = p0
     eps = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1]
     p0 = orb.parameter.copy()
@@ -205,12 +203,12 @@ def test_frame_coordinate_with_der():
         pdelta[i] = eps[i]
         orb.parameter = p0 + pdelta
         ic = orb.frame_coordinate(t1 + 5, gp, cam)
-        jac_fd[0, 8 + i] = old_div((ic.line - ic0.line.value), eps[i])
-        jac_fd[1, 8 + i] = old_div((ic.sample - ic0.sample.value), eps[i])
+        jac_fd[0, 8 + i] = (ic.line - ic0.line.value) / eps[i]
+        jac_fd[1, 8 + i] = (ic.sample - ic0.sample.value) / eps[i]
     # Finite difference and real jacobian won't be the same, something
     # like 1% would be a good value. So we check the scaled difference, 
     # being careful not to divide by zero
     scl = jac.copy()
-    scl[jac != 0] = old_div(1, jac[jac != 0])
+    scl[jac != 0] = 1 / jac[jac != 0]
     assert abs((jac - jac_fd) * scl).max() < 1e-2
 

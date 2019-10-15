@@ -1,5 +1,3 @@
-from __future__ import print_function
-from __future__ import absolute_import
 from builtins import str
 from builtins import object
 import os
@@ -9,7 +7,6 @@ import subprocess
 import time
 import geocal_swig
 from .misc import makedirs_p, run_tee
-import six
 
 class VicarInterface(object):
     '''This provides a basic interface for calling a vicar routine 
@@ -62,7 +59,7 @@ class VicarInterface(object):
         '''This build up a single argument, handling quotes and processing
         arrays'''
         if(getattr(self.__dict__[arg], '__iter__', False)):
-            if(isinstance(self.__dict__[arg], six.string_types)):
+            if(isinstance(self.__dict__[arg], str)):
                 arg2 = [self.__dict__[arg]]
             else:
                 arg2 = [str(x) for x in self.__dict__[arg]]

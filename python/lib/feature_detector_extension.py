@@ -8,8 +8,8 @@ import time
 
 class InterestPointGridRawWrap(object):
     '''Wrapper around _interest_point_grid_raw that can be pickled. 
-    We can\'t directly use pool.map on _interest_point_grid_raw because
-    python can\`t pickle a instance function'''
+    We can't directly use pool.map on _interest_point_grid_raw because
+    python can't pickle a instance function'''
     def __init__(self, fd, img, mask, number_grid_line, 
                  number_grid_sample, border):
         self.fd = fd

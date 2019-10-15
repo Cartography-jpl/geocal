@@ -1,5 +1,3 @@
-from future import standard_library
-standard_library.install_aliases()
 from test_support import *
 from geocal.air_mspi_igc import *
 import pickle

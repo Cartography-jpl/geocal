@@ -1,8 +1,4 @@
-from __future__ import division
-from future import standard_library
-standard_library.install_aliases()
 from builtins import range
-from past.utils import old_div
 import h5py
 from test_support import *
 import pickle
@@ -60,8 +56,8 @@ def test_sc2rpc():
     orb = HdfOrbit_EciTod_TimeAcs(unit_test_data + "sample_orbit.h5")
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
-                           old_div(1.0, 2500000),
-                           old_div(1.0, 2500000),
+                           1.0 / 2500000,
+                           1.0 / 2500000,
                            1.0,
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
@@ -80,8 +76,8 @@ def test_pickle():
     orb2 = pickle.loads(t)
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
-                           old_div(1.0, 2500000),
-                           old_div(1.0, 2500000),
+                           1.0 / 2500000,
+                           1.0 / 2500000,
                            1.0,
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)

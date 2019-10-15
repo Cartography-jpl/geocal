@@ -1,9 +1,6 @@
-from __future__ import division
-from __future__ import absolute_import
 from builtins import str
 from builtins import range
 from builtins import object
-from past.utils import old_div
 import math
 from .raster_image_extension import *
 from .safe_matplotlib_import import *
@@ -40,7 +37,7 @@ def _tp_read_old_mspi_format(self, filename):
     examples of how this works.'''
     with open(filename, 'r') as f:
         ln = f.readline()
-        m = re.search('ground_loc(\d+)', ln)
+        m = re.search(r'ground_loc(\d+)', ln)
         id = int(m.group(1))
         x, y, z, c11, c12, c13, c21, c22, c23, c31, c32, c33, \
             is_gcp, numcam, trash = ln.split(" ", 14)
@@ -101,7 +98,7 @@ def _tp_display(self, igc_coll, sz = 500, ref_image = None, number_row = None,
         nimg = nimg + 1
     if(not number_row):
         number_row = int(math.ceil(math.sqrt(nimg)))
-    number_col = int(math.ceil(old_div(nimg, float(number_row))))
+    number_col = int(math.ceil(nimg / float(number_row)))
     plt.clf()
     for i in range(self.number_image):
         if(self.image_coordinate(i) is None):
@@ -318,15 +315,6 @@ def _tpcol_data_frame(self, igccol, image_index):
                         index=ind)
 
 TiePointCollection.data_frame = _tpcol_data_frame
-
-def _tpcol_panel(self, igccol):
-    '''Return a pandas Panel for all the image indexes'''
-    d = {}
-    for i in range(self[0].number_image):
-        d["image_%d" % i] = self.data_frame(igccol, i)
-    return pd.Panel(d)
-
-TiePointCollection.panel = _tpcol_panel
 
 @classmethod
 def _tpcol_read_old_mspi_format(self, directory):

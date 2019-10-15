@@ -2,18 +2,24 @@ from builtins import range
 try:
     # Depending of the build options, this might be missing. Just skip 
     # ShapeFile if we don't have this.
-    import osgeo.ogr as ogr
-    import osgeo.osr as osr
+    # This has a deprecation warning for python 3.7 and GDAL 2.4.2. We can't do
+    # anything about this, so silence the warning
+    import warnings
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore",category=DeprecationWarning)
+        import osgeo.ogr as ogr
+        import osgeo.osr as osr
     have_shape_file = True
 except ImportError:
     have_shape_file = False
 
 import os.path
 import collections
+import collections.abc
 import weakref
 
 if(have_shape_file):
-  class ShapeFile(collections.Mapping):
+  class ShapeFile(collections.abc.Mapping):
     '''library OGR. You can see supported formats at 
     http://gdal.org/ogr/ogr_formats.html. This only supports a subset of the
     available functions, but it gives a simpler interface. You can also just
@@ -95,7 +101,7 @@ if(have_shape_file):
         self.layers[lay.name] = lay
         return lay
 
-  class ShapeLayer(collections.Sequence):
+  class ShapeLayer(collections.abc.Sequence):
     '''This class handles access to a single layers in a Shapefile.'''
     def __init__(self, shape_file, index):
         '''Create ShapeLayer for given ShapeFile and index. This isn't 
@@ -207,7 +213,7 @@ if(have_shape_file):
         return self.layer.GetFeatureCount()
     
 
-class ShapeFeature(collections.Mapping):
+class ShapeFeature(collections.abc.Mapping):
     '''This handles a Feature in a Layer.'''
     def __init__(self, shape_layer, ogr_feature):
         self.layer = weakref.proxy(shape_layer)

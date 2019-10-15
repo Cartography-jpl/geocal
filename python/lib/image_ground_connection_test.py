@@ -1,7 +1,3 @@
-from __future__ import division
-from future import standard_library
-standard_library.install_aliases()
-from past.utils import old_div
 from geocal.image_ground_connection import *
 from geocal.shape_file import have_shape_file
 import pickle
@@ -51,8 +47,8 @@ def test_gdal_image_ground_connection():
 def test_view_angle():
     igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
                                       dem)
-    ic = ImageCoordinate(old_div(igc1.image.number_line, 2.0),
-                         old_div(igc1.image.number_sample, 2.0))
+    ic = ImageCoordinate(igc1.image.number_line / 2.0,
+                         igc1.image.number_sample / 2.0)
     zen, azm = igc1.view_angle(ic)
     assert_almost_equal(zen, 33.2911, 2)
     assert_almost_equal(azm, 7.2390, 2)

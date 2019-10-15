@@ -1,8 +1,4 @@
-from __future__ import division
-from future import standard_library
-standard_library.install_aliases()
 from builtins import range
-from past.utils import old_div
 from geocal.mmap_file import *
 from test_support import *
 import pickle
@@ -29,14 +25,14 @@ def test_read_write(isolated_dir):
     assert f.shape[1] == 100
     for i in range(200):
         for j in range(100):
-            f[i,j] = old_div((i * 200 + j * 100), 4.0)
+            f[i,j] = (i * 200 + j * 100) / 4.0
     f = None
     f2 = mmap_file("mmap_file_test.img")
     assert f2.shape[0] == 200
     assert f2.shape[1] == 100
     for i in range(200):
         for j in range(100):
-            assert_almost_equal(f2[i,j], old_div((i * 200 + j * 100), 4.0))
+            assert_almost_equal(f2[i,j], (i * 200 + j * 100) /  4.0)
     t = pickle.dumps(f2, pickle.HIGHEST_PROTOCOL)
     # Make sure we aren't just dumping all the data
     assert len(t) < 200
@@ -45,4 +41,4 @@ def test_read_write(isolated_dir):
     assert f3.shape[1] == 100
     for i in range(200):
         for j in range(100):
-            assert_almost_equal(f3[i,j], old_div((i * 200 + j * 100), 4.0))
+            assert_almost_equal(f3[i,j], (i * 200 + j * 100) /  4.0)

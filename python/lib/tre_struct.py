@@ -1,4 +1,3 @@
-from __future__ import print_function
 from builtins import range
 from builtins import object
 from geocal_swig import *
@@ -8,7 +7,6 @@ try:
 except ImportError:
     have_pynitf = False
 import re
-import six
 import sys
 
 # This bit of code may go away. It was an older way of handling TREs before

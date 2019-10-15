@@ -1,7 +1,5 @@
-from __future__ import division
 from builtins import str
 from builtins import range
-from past.utils import old_div
 from builtins import object
 import numpy as np
 from geocal_swig import *
@@ -311,14 +309,14 @@ class SimultaneousBundleAdjustment(object):
         i = 0
         for tp_index, tp in enumerate(self.tpcol):
             if(tp.is_gcp and not self.hold_gcp_fixed):
-                res[i:(i+3)] = (old_div(self.index_to_tp_offset(tp_index), 
-                                self.gcp_sigma))
+                res[i:(i+3)] = (self.index_to_tp_offset(tp_index) /
+                                self.gcp_sigma)
                 i += 3
             elif(tp.is_gcp and self.hold_gcp_fixed):
                 pass
             elif(self.tp_sigma is not None):
-                res[i:(i+3)] = (old_div(self.index_to_tp_offset(tp_index), 
-                                self.tp_sigma))
+                res[i:(i+3)] = (self.index_to_tp_offset(tp_index) /
+                                self.tp_sigma)
                 i += 3
         return res
 
@@ -330,14 +328,14 @@ class SimultaneousBundleAdjustment(object):
             if(tp.is_gcp and not self.hold_gcp_fixed):
                 pind = self.tp_index_to_parameter_index(tp_index)
                 for j in range(3):
-                    res[self.row_index + j, pind + j] = old_div(1.0, self.gcp_sigma)
+                    res[self.row_index + j, pind + j] = 1.0 / self.gcp_sigma
                 self.row_index += 3
             elif(tp.is_gcp and self.hold_gcp_fixed):
                 pass
             elif(self.tp_sigma is not None):
                 pind = self.tp_index_to_parameter_index(tp_index)
                 for j in range(3):
-                    res[self.row_index + j, pind + j] = old_div(1.0, self.tp_sigma)
+                    res[self.row_index + j, pind + j] = 1.0 / self.tp_sigma
                 self.row_index += 3
 
     def surface_constraint(self):
@@ -361,14 +359,14 @@ class SimultaneousBundleAdjustment(object):
             if(not self.hold_gcp_fixed or not tp.is_gcp):
                 gp = self.ground_location(i)
                 pind = self.tp_index_to_parameter_index(i)
-                x0 = old_div(self.dem.distance_to_surface(gp), self.dem_sigma)
+                x0 = self.dem.distance_to_surface(gp) / self.dem_sigma
                 p0 = gp.position
                 for j in range(3):
                     p = p0.copy()
                     p[j] += self.tp_epsilon
                     gp.position = p
-                    x = old_div(self.dem.distance_to_surface(gp), self.dem_sigma)
-                    res[self.row_index, pind + j] = old_div((x - x0), self.tp_epsilon)
+                    x = self.dem.distance_to_surface(gp) / self.dem_sigma
+                    res[self.row_index, pind + j] = (x - x0) / self.tp_epsilon
                 gp.position = p0
                 self.row_index += 1
         
@@ -386,7 +384,7 @@ class SimultaneousBundleAdjustment(object):
                         ictp = tp.image_coordinate(j)
                         lsigma = tp.line_sigma(j)
                         ssigma = tp.sample_sigma(j)
-                        weight = [old_div(1.0,lsigma), old_div(1.0,ssigma)]
+                        weight = [1.0 /lsigma, 1.0 /ssigma]
                         cres = self.igc_coll.collinearity_residual(j, gp, ictp)
                         rs = slice(ind, ind + 2)
                         res[rs] = cres * weight
@@ -409,7 +407,7 @@ class SimultaneousBundleAdjustment(object):
                     ictp = tp.image_coordinate(j)
                     lsigma = tp.line_sigma(j)
                     ssigma = tp.sample_sigma(j)
-                    weight = [[old_div(1.0,lsigma)], [old_div(1.0,ssigma)]]
+                    weight = [[1.0 /lsigma], [1.0 / ssigma]]
                     try:
                         jac = self.igc_coll.collinearity_residual_jacobian(j, 
                                                                 gp, ictp)
@@ -432,12 +430,12 @@ class SimultaneousBundleAdjustment(object):
         '''Calculate the parameter constraint. This is the penalty for
         moving a particular parameter from its initial value.'''
         # This needs to be scaled, but for now just do this
-        return old_div((self.igc_coll.parameter_subset - self.p0), self.psigma)
+        return (self.igc_coll.parameter_subset - self.p0) / self.psigma
     
     def __parameter_constraint_jacobian(self, res):
         istart = self.parameter_constraint_slice.start
         jstart = self.igc_coll_param_slice.start
         for i in range(self.igc_coll.parameter_subset.shape[0]):
-            res[istart + i, jstart + i] = old_div(1, self.psigma[i])
+            res[istart + i, jstart + i] = 1.0 / self.psigma[i]
 
 __all__ = ["SimultaneousBundleAdjustment"]            

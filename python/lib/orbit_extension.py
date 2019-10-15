@@ -1,5 +1,3 @@
-from __future__ import division
-from past.utils import old_div
 from geocal_swig import *
 import math
 
@@ -29,7 +27,7 @@ def _kepler_orbit_from_tle(self, tle):
     ma = float(tle_arr[15])
     n = float(tle_arr[16][0:11])
     orb_num = int(tle_arr[16][11:-1])
-    a = pow(old_div(mu, pow(n * 2 * math.pi / (24 * 3600), 2)), old_div(1.0, 3))
+    a = pow(mu / pow(n * 2 * math.pi / (24 * 3600), 2), 1.0 / 3)
     return KeplerOrbit(Time.min_valid_time, Time.max_valid_time, epoch, a, 
                        ecc, inc, ra, ap, ma)
 

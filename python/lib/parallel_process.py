@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from builtins import map
 from builtins import range
 # This contains support for doing parallel processing.

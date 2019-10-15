@@ -1,4 +1,3 @@
-from past.builtins import basestring
 import sys
 # The Shelve package is a very useful way to easily implement persistence.
 # But it has the disadvantage that depending on the system we are on different
@@ -15,7 +14,7 @@ import sys
 try:
     from UserDict import DictMixin
 except ImportError:
-    from collections import MutableMapping as DictMixin
+    from collections.abc import MutableMapping as DictMixin
 
 import pickle
 import sqlite3
@@ -34,8 +33,7 @@ except ImportError:
 def to_db_type(value):
     """If value's type is supported natively in SQLite, return value.
     Otherwise, return a pickled representation. """
-    if value is None or isinstance(value, (int, int, float,
-                                           basestring)):
+    if value is None or isinstance(value, (int, int, float, bytes, str)):
         return value
     else:
         # Note the types really are different for python 2 vs. 3. This is 

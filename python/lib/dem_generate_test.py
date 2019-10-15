@@ -1,6 +1,3 @@
-from __future__ import print_function
-from future import standard_library
-standard_library.install_aliases()
 from test_support import *
 from geocal.dem_generate import *
 from geocal.image_ground_connection import *

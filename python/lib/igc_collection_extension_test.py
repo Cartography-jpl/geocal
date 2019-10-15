@@ -1,7 +1,4 @@
-from __future__ import print_function
-from __future__ import division
 from builtins import range
-from past.utils import old_div
 from test_support import *
 from geocal.image_ground_connection import *
 from geocal.igc_collection_extension import *
@@ -160,11 +157,11 @@ def kepler_orbit_over_point(pt, cam ,fc):
         return orb.reference_surface_intersect_approximate(orb.epoch + t, cam, fc).latitude - pt.latitude
     def f2(ra):
         orb.right_ascension = ra
-        tpass = scipy.optimize.brentq(f, old_div(orb.period, 4), orb.period * 3 / 4)
+        tpass = scipy.optimize.brentq(f, orb.period / 4.0, orb.period * 3 / 4)
         return orb.reference_surface_intersect_approximate(orb.epoch + tpass, cam, fc).longitude - pt.longitude
     ra = scipy.optimize.brentq(f2, 90, 180)
     orb.right_ascension = ra
-    tpass = scipy.optimize.brentq(f, old_div(orb.period, 4), orb.period * 3 / 4)
+    tpass = scipy.optimize.brentq(f, orb.period / 4.0, orb.period * 3 / 4)
     return orb, tpass + orb.epoch
 
 def create_image_data(index):
@@ -187,7 +184,7 @@ def create_igc_collection_rolling_shutter():
     processors'''
     dem = SimpleDem()
     cam = QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
-                           3375, 3648, old_div(1.0, 2500000), old_div(1.0, 2500000),
+                           3375, 3648, 1.0 / 2500000, 1.0/  2500000,
                            1.0, FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
     cam.fit_epsilon = False
@@ -198,17 +195,18 @@ def create_igc_collection_rolling_shutter():
     cam.fit_focal_length = False
     cam.fit_principal_point_line(False, 0)
     cam.fit_principal_point_sample(False, 0)
-    orb, tnadir = kepler_orbit_over_point(raster_aoi_pt, cam, FrameCoordinate(old_div(cam.number_line(0), 2), old_div(cam.number_sample(0), 2)))
+    orb, tnadir = kepler_orbit_over_point(raster_aoi_pt, cam, FrameCoordinate(cam.number_line(0) / 2.0, cam.number_sample(0) / 2.0))
     tmin = tnadir - 10 * 10 - 0.5
     igccol = IgcCollectionRollingShutter(orb, cam, dem)
     for i in range(20):
         t = tmin + 10 * i
-        tspace = old_div(1.0, cam.number_line(0));
+        tspace = 1.0 / cam.number_line(0);
         tt = RollingShutterConstantTimeTable(t, 
            t + cam.number_line(0) * tspace, tspace);
         title = "Image %d" % (i+1)
         igccol.add_image(None, tt, title)
-    ic = ImageCoordinate(old_div(cam.number_line(0), 2), old_div(cam.number_sample(0), 2))
+    ic = ImageCoordinate(cam.number_line(0) / 2.0,
+                         cam.number_sample(0) / 2.0)
     igccol.determine_orbit_to_match(ic, 10)
     orb = OrbitOffsetCorrection(igccol.orbit)
     for i in range(10):
@@ -232,20 +230,22 @@ def test_igc_collection_rolling_shutter():
     '''Test IgcCollectionRollingShutter.'''
     dem = SimpleDem()
     cam = QuaternionCamera(quat_rot("zyx", 0.1, 0.2, 0.3),
-                           3375, 3648, old_div(1.0, 2500000), old_div(1.0, 2500000),
+                           3375, 3648, 1.0 / 2500000, 1.0 / 2500000,
                            1.0, FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
-    orb, tnadir = kepler_orbit_over_point(raster_aoi_pt, cam, FrameCoordinate(old_div(cam.number_line(0), 2), old_div(cam.number_sample(0), 2)))
+    orb, tnadir = kepler_orbit_over_point(raster_aoi_pt, cam,
+                             FrameCoordinate(cam.number_line(0) / 2.0,
+                                             cam.number_sample(0) / 2.0))
     tmin = tnadir - 10 * 10 - 0.5
     igccol = IgcCollectionRollingShutter(orb, cam, dem)
     for i in range(10):
         t = tmin + 10 * i
-        tspace = old_div(1.0, cam.number_line(0));
+        tspace = 1.0 /  cam.number_line(0);
         tt = RollingShutterConstantTimeTable(t, 
            t + cam.number_line(0) * tspace, tspace);
         title = "Image %d" % (i+1)
         igccol.add_image(None, tt, title)
-    ic = ImageCoordinate(old_div(cam.number_line(0), 2), old_div(cam.number_sample(0), 2))
+    ic = ImageCoordinate(cam.number_line(0) / 2.0, cam.number_sample(0) / 2.0)
     igccol.determine_orbit_to_match(ic, 4)
     gp = igccol.ground_coordinate(4, ic)
     for i in range(10):

@@ -1,8 +1,4 @@
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
 from builtins import range
-from past.utils import old_div
 from .instrument_reflectance import *
 import math
 
@@ -48,7 +44,7 @@ class QuickBirdReflectance(InstrumentReflectance):
    def dn2TOARadiance_factor(self, band):
       '''Scale factor to convert DN to TOA radiance factor'''
       self.checkInstrumentPreconditions(band)
-      return old_div(self.absCalFactors[band],self.effectiveBandwidths[band])
+      return self.absCalFactors[band] / self.effectiveBandwidths[band]
 
    def readMetaData(self, filename):
       '''Read metadata needed to set up the instrument'''
@@ -111,11 +107,11 @@ class QuickBirdReflectance(InstrumentReflectance):
             if isPanMetafile:
                self.pan_solarElevation = float(solarElevation)
                self.pan_solarZenithAngle = 90. - self.pan_solarElevation
-               self.pan_solarZenithAngleInRadians = self.pan_solarZenithAngle*(old_div(math.pi,180.))
+               self.pan_solarZenithAngleInRadians = self.pan_solarZenithAngle*(math.pi /180.0)
             else:
                self.solarElevation = float(solarElevation)
                self.solarZenithAngle = 90. - self.solarElevation
-               self.solarZenithAngleInRadians = self.solarZenithAngle*(old_div(math.pi,180.))
+               self.solarZenithAngleInRadians = self.solarZenithAngle*(math.pi/180.0)
             continue
 
    def calculatePanSolarDistance(self):
@@ -124,18 +120,18 @@ class QuickBirdReflectance(InstrumentReflectance):
       if self.pan_year == -999 or self.pan_month == -999 or self.pan_day == -999 or \
              self.pan_hh == -999 or self.pan_mm == -999 or self.pan_ssdd == -999:
          raise ValueError("Metadata for pan band date time is not set")
-      ut = self.pan_hh + old_div(self.pan_mm,60.0) + old_div(self.pan_ssdd,3600.0)
+      ut = self.pan_hh + self.pan_mm/60.0 + self.pan_ssdd/3600.0
       if self.pan_month == 1.0 or self.pan_month == 2.0:
          self.pan_year = self.pan_year - 1;
          self.pan_month = self.pan_month + 12;
 
-      A = int(old_div(self.pan_year,100));
-      B = 2 - A + int(old_div(A,4));
+      A = int(self.pan_year /100);
+      B = 2 - A + int(A/4);
       JD = int(365.25*(self.pan_year + 4716)) + int(30.6001*(self.pan_month + 1)) + \
-           self.pan_day + old_div(ut,24.0) + B - 1524.5
+           self.pan_day + ut/24.0 + B - 1524.5
       D = JD - 2451545.0
       g = 357.529 + 0.98560028*D
-      radg = g*(old_div(math.pi,180.))
+      radg = g*(math.pi/180.0)
       self.pan_solarDist = 1.00014 - 0.01671*math.cos(radg) - 0.00014*math.cos(2*radg)
 
       if self.pan_solarDist < 0.983 or self.pan_solarDist > 1.017:
@@ -150,8 +146,8 @@ class QuickBirdReflectance(InstrumentReflectance):
       if self.pan_solarDist == -999. or self.pan_solarZenithAngleInRadians == -999.:
          raise ValueError("Pan solar distance and/or solar angle not set.")
       
-      return old_div((self.dn2TOARadiance_factor(band) *
-              math.pow(self.pan_solarDist, 2.)*math.pi),\
+      return ((self.dn2TOARadiance_factor(band) *
+              math.pow(self.pan_solarDist, 2.)*math.pi) /
               (self.esun[band]*math.cos(self.pan_solarZenithAngleInRadians)))
 
    def printMetadata(self):

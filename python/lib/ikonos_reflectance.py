@@ -1,8 +1,4 @@
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
 from builtins import range
-from past.utils import old_div
 from .instrument_reflectance import *
 import math
 
@@ -29,7 +25,7 @@ class IkonosReflectance(InstrumentReflectance):
    def dn2TOARadiance_factor(self, band):
       '''Scale factor to convert DN to TOA radiance factor'''
       self.checkInstrumentPreconditions(band)
-      return old_div(1.0,(self.absCalFactors[band]*self.effectiveBandwidths[band]))
+      return 1.0 / (self.absCalFactors[band]*self.effectiveBandwidths[band])
 
    def readMetaData(self, filename):
       '''Read metadata needed to set up the instrument'''
@@ -56,7 +52,7 @@ class IkonosReflectance(InstrumentReflectance):
             tokens = line.split()
             self.solarElevation = float(tokens[3])
             self.solarZenithAngle = 90. - self.solarElevation
-            self.solarZenithAngleInRadians = self.solarZenithAngle*(old_div(math.pi,180.))
+            self.solarZenithAngleInRadians = self.solarZenithAngle*(math.pi /180.0)
             angleSet = True
             continue         
 

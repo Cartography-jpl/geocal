@@ -388,7 +388,7 @@ class XmlLocalTarget(Target):
                 # path in the XML file. This looks for strings that start
                 # with a "./" or "../"
             possible_fname = [t.text for t in doc.getroot().iter()
-                  if t.text is not None and re.match('\.?\./',t.text)]
+                  if t.text is not None and re.match(r'\.?\./',t.text)]
             # Check that file exists (e.g., not just a string that looks
             # like a file name), and that it is a file 
             fname = [os.path.abspath(f) for f in possible_fname

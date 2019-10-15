@@ -1,9 +1,5 @@
-from __future__ import division
-from future import standard_library
-standard_library.install_aliases()
 from builtins import str
 from builtins import range
-from past.utils import old_div
 # This contains various tests to make sure pickling of low level GeoCal objects
 # work correctly.
 import pickle
@@ -60,16 +56,16 @@ def test_quaternion_camera_pickle():
     '''Test pickling of QuaternionCamera'''
     cam = QuaternionCamera(Quaternion_double(1,0,0,0),
                            3375, 3648,
-                           old_div(1.0, 2500000),
-                           old_div(1.0, 2500000),
+                           1.0 / 2500000,
+                           1.0 / 2500000,
                            1.0,
                            FrameCoordinate(1688.0, 1824.5),
                            QuaternionCamera.LINE_IS_Y)
     t = pickle.dumps(cam, pickle.HIGHEST_PROTOCOL)
     cam2 = pickle.loads(t)
     assert_almost_equal(cam.focal_length, 1.0, 4)
-    assert_almost_equal(cam.line_pitch,   old_div(1.0, 2500000), 4)
-    assert_almost_equal(cam.sample_pitch,   old_div(1.0, 2500000), 4)
+    assert_almost_equal(cam.line_pitch, 1.0 / 2500000, 4)
+    assert_almost_equal(cam.sample_pitch, 1.0 / 2500000, 4)
     assert_almost_equal(cam.principal_point(0).line, 1688, 4)
     assert_almost_equal(cam.principal_point(0).sample, 1824.5, 4)
     assert cam.number_line(0) == 3375

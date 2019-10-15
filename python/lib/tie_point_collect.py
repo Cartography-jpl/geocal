@@ -1,9 +1,5 @@
-from __future__ import division
-from __future__ import absolute_import
-from __future__ import print_function
 from builtins import map
 from builtins import range
-from past.utils import old_div
 from builtins import object
 from geocal_swig import *
 from .igc_collection_extension import *
@@ -290,8 +286,8 @@ class TiePointCollect(object):
         if(aoi):
             nline = aoi.number_y_pixel
             nsamp = aoi.number_x_pixel
-            step_line = max(int(math.floor(old_div((nline - 2 * border), num_y))), 1)
-            step_samp = max(int(math.floor(old_div((nsamp - 2 * border), num_x))), 1)
+            step_line = max(int(math.floor((nline - 2 * border) / num_y)), 1)
+            step_samp = max(int(math.floor((nsamp - 2 * border) / num_x)), 1)
             iplist = []
             for ln in range(border, nline - border, step_line):
                 for smp in range(border, nsamp - border, step_samp):
@@ -317,7 +313,7 @@ class TiePointCollect(object):
         func = TiePointWrap(self)
         if(pool):
             res = pool.map(func, iplist, 
-               old_div(len(iplist), multiprocessing.cpu_count()))
+                           len(iplist) // multiprocessing.cpu_count())
         else:
             res = list(map(func, iplist))
         log.info("Done with matching")

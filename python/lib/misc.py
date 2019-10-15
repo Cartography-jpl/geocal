@@ -1,7 +1,3 @@
-from __future__ import division, print_function
-from future import standard_library
-standard_library.install_aliases()
-from past.utils import old_div
 import os
 import errno
 import sys
@@ -10,7 +6,13 @@ import geocal_swig
 import pickle
 import subprocess
 try:
-    import osgeo.gdal as gdal
+    # This has a deprecation warning for python 3.7 and GDAL 2.4.2. We can't do
+    # anything about this, so silence the warning
+    import warnings
+
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore",category=DeprecationWarning)
+        import osgeo.gdal as gdal
     have_osgeo = True
 except ImportError:
     have_osgeo = False
@@ -48,8 +50,8 @@ def cib01_mapinfo(desired_resolution = None):
                                              "/cib01_mapinfo.xml")
     if(desired_resolution):
         resbase = res.resolution_meter
-        res = res.scale(old_div(desired_resolution, resbase),
-                        old_div(desired_resolution, resbase))
+        res = res.scale(desired_resolution / resbase,
+                        desired_resolution / resbase)
     return res
 
 def planet_mapinfo(naif_code, desired_resolution = 1):
@@ -162,7 +164,7 @@ def mars_fix_projection(fin, fout, band, hirise_correction=False):
     # See https://trac.osgeo.org/gdal/ticket/4499. Fix this if this is the 
     # projection. 
     if(re.search("Polar_Stereographic", p)):
-        p = re.sub('PARAMETER\["scale_factor",0\]', 
+        p = re.sub(r'PARAMETER\["scale_factor",0\]', 
                    'PARAMETER["scale_factor",1]', p)
         f.SetProjection(p)
     # The standard_parallel_1 and latitude_of_origin are sometimes swapped for
@@ -182,16 +184,16 @@ def mars_fix_projection(fin, fout, band, hirise_correction=False):
     # user selected the --hirise-correction option
     if(hirise_correction and
        re.search("Equirectangular[_ ]MARS", p)):
-        m1 = re.search('PARAMETER\["latitude_of_origin",([\\d\\.]+)\]', p)
-        m2 = re.search('PARAMETER\["standard_parallel_1",([\\d\\.]+)\]', p)
+        m1 = re.search(r'PARAMETER\["latitude_of_origin",([\\d\\.]+)\]', p)
+        m2 = re.search(r'PARAMETER\["standard_parallel_1",([\\d\\.]+)\]', p)
         if(m1 and m2 and m1.group(1) != m2.group(1)):
             print("MSG:----------------------------------------------------\n")
             print("MSG: Doing HiRISE correction of swapping latitude_of_origin and standard_parallel_1 for the Equirectangular projection")
             sys.stdout.flush()
-            p = re.sub('PARAMETER\["latitude_of_origin",[\\d\\.]+\]',
+            p = re.sub(r'PARAMETER\["latitude_of_origin",[\\d\\.]+\]',
                        'PARAMETER["latitude_of_origin",' + m2.group(1) + ']',
                        p)
-            p = re.sub('PARAMETER\["standard_parallel_1",[\\d\\.]+\]',
+            p = re.sub(r'PARAMETER\["standard_parallel_1",[\\d\\.]+\]',
                        'PARAMETER["standard_parallel_1",' + m1.group(1) + ']',
                        p)
             f.SetProjection(p)

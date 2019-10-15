@@ -1,6 +1,4 @@
-from __future__ import division
 from builtins import str
-from past.utils import old_div
 from geocal_swig import *
 import subprocess
 
@@ -19,8 +17,8 @@ def gdal_to_erdas_file(infname, outfname):
     i = 2
     # We want to make image pyramids down to a single block
     infile = GdalRasterImage(infname)
-    while(old_div(infile.number_line, i) > blocksize and
-          old_div(infile.number_sample, i) > blocksize):
+    while(infile.number_line // i > blocksize and
+          infile.number_sample // i > blocksize):
         i *= 2
         cmd.append(str(i))
     subprocess.check_call(cmd)

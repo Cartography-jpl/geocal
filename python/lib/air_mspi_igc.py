@@ -1,6 +1,4 @@
-from __future__ import division
 from builtins import range
-from past.utils import old_div
 from geocal_swig import *
 from math import *
 import numpy as np
@@ -161,8 +159,8 @@ class AirMspiIgc(ImageGroundConnection):
             gc2 = self.ground_coordinate_dem(ic, 
                           SimpleDem(gc.height_reference_surface))
             return [gc.latitude - gc2.latitude, gc.longitude - gc2.longitude]
-        xsol = scipy.optimize.root(func, [old_div(self.number_line, 2.0),
-                                          old_div(self.number_sample, 2.0)],
+        xsol = scipy.optimize.root(func, [self.number_line / 2.0,
+                                          self.number_sample /  2.0],
                                    args=(self, gc), tol = 0.01)
         if(not xsol['success']):
             raise RuntimeError("Couldn't find solution")

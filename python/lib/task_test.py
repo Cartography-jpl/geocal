@@ -1,4 +1,3 @@
-from __future__ import print_function
 from geocal.task import *
 from geocal.local_target import *
 from test_support import *

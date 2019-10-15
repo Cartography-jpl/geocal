@@ -1,6 +1,3 @@
-from __future__ import division
-from __future__ import absolute_import
-from past.utils import old_div
 import geocal_swig
 import numpy as np
 from .safe_matplotlib_import import *
@@ -19,8 +16,8 @@ def _display(self, ic, sz, cross_hair = True):
 
     nline = sz
     nsamp = sz
-    ln = int(round(ic.line)) - old_div(nline, 2)
-    smp = int(round(ic.sample)) - old_div(nsamp, 2)
+    ln = int(round(ic.line)) - nline // 2
+    smp = int(round(ic.sample)) - nsamp // 2
     d = self.read_with_pad(ln, smp, nline, nsamp)
     max = np.max(d)
     if(max > 0):

@@ -1,9 +1,4 @@
-from __future__ import print_function
-from __future__ import division
-from future import standard_library
-standard_library.install_aliases()
 from builtins import object
-from past.utils import old_div
 from geocal.tie_point_collect import *
 from geocal.image_ground_connection import *
 from geocal.simultaneous_bundle_adjustment import *
@@ -131,13 +126,13 @@ class TestClass(object):
         log_optimize.setLevel(logging.INFO)
         try:
             v = sba.sba_eq(sba.parameter)
-            chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+            chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
             assert chisq > 50
             print("Chisq", chisq)
             parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
             sba.parameter = parm
             v = sba.sba_eq(sba.parameter)
-            chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+            chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
             print("Chisq", chisq)
             assert chisq < 2
         finally:
@@ -150,7 +145,7 @@ class TestClass(object):
         log_optimize.setLevel(logging.INFO)
         try:
             v = sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)
-            chisq = old_div(np.inner(v, v), (len(v) - len(sba_constant_gcp.parameter)))
+            chisq = np.inner(v, v) / (len(v) - len(sba_constant_gcp.parameter))
             assert chisq > 50
             print("Chisq", chisq)
             parm = lm_optimize(sba_constant_gcp.sba_eq, 
@@ -158,7 +153,7 @@ class TestClass(object):
                                sba_constant_gcp.sba_jacobian)
             sba_constant_gcp.parameter = parm
             v = sba_constant_gcp.sba_eq(sba_constant_gcp.parameter)
-            chisq = old_div(np.inner(v, v), (len(v) - len(sba_constant_gcp.parameter)))
+            chisq = np.inner(v, v) / (len(v) - len(sba_constant_gcp.parameter))
             print("Chisq", chisq)
             assert chisq < 2
         finally:
@@ -170,14 +165,14 @@ class TestClass(object):
     @skip
     def test_solve(self):
         v = sba.sba_eq(sba.parameter)
-        chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+        chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
         print("Chisq", chisq)
         assert chisq > 50
         parm, res = scipy.optimize.leastsq(sba.sba_eq, sba.parameter,
                                            Dfun = lambda x: sba.sba_jacobian(x).todense())
         sba.parameter = parm
         v = sba.sba_eq(sba.parameter)
-        chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+        chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
         print("Chisq", chisq)
         assert chisq < 2
         out = open(stereo_unit_test_data + "rpc_sba.pkl", "wb")

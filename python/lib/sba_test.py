@@ -1,7 +1,4 @@
-from __future__ import print_function
-from __future__ import division
 from builtins import range
-from past.utils import old_div
 from geocal.tie_point_collect import *
 from geocal.image_ground_connection import *
 from geocal.simultaneous_bundle_adjustment import *
@@ -27,7 +24,7 @@ test_data = "/data/smyth/MSPI-Ground/scripts_test/2013-01-31/sba/AirMSPI_ER2_CA-
 
 def sol_iteration(sba, parm, lam):
     residual = sba.sba_eq(parm)
-    chisq = old_div(np.inner(residual, residual), (len(residual) - len(sba.parameter)))
+    chisq = np.inner(residual, residual) / (len(residual) - len(sba.parameter))
     print("Chisq", chisq)
     j = sba.sba_jacobian(parm).tocsr()
     jtj = j.transpose() * j
@@ -36,7 +33,7 @@ def sol_iteration(sba, parm, lam):
     jtres = j.transpose() * residual
     pnew = parm - sp.linalg.spsolve(c, jtres, use_umfpack=True)
     residual = sba.sba_eq(pnew)
-    chisq = old_div(np.inner(residual, residual), (len(residual) - len(sba.parameter)))
+    chisq = np.inner(residual, residual) / (len(residual) - len(sba.parameter))
     print("Chisq", chisq)
     print(pnew)
     print(sba.gcp_constraint())
@@ -83,7 +80,7 @@ def test_jac():
         p = p0.copy()
         p[i] += eps[i]
         y = sba.sba_eq(p)
-        jac_calc[:,i] = old_div((y - y0), eps[i])
+        jac_calc[:,i] = (y - y0) / eps[i]
 
     t = jac - jac_calc
     assert np.max(np.abs(t)) < 0.02
@@ -140,13 +137,13 @@ def test_mspi_old_sba():
     dem = igccol.dem(0)
     sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
     v = sba.sba_eq(sba.parameter)
-    chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print("Chisq", chisq)
     #sol_iteration(sba, sba.parameter, 0.1)
     #return
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
-    chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print("Chisq", chisq)
     print(igccol.parameter_subset)
     print(igccol.orbit(0))
@@ -284,7 +281,7 @@ def test_mspi_sba():
     sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
     print(sba.parameter)
     v = sba.sba_eq(sba.parameter)
-    chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print("Chisq", chisq)
     print("Change position: ", distance(tpcol[10].ground_location,
                                         sba.ground_location(10)))
@@ -293,7 +290,7 @@ def test_mspi_sba():
     #return
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
-    chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print("Chisq", chisq)
     print("Change position: ", distance(tpcol[10].ground_location,
                                         sba.ground_location(10)))
@@ -366,13 +363,13 @@ def test_mspi_sba_subset():
     sba = SimultaneousBundleAdjustment(igccol, tpcol, dem, gcp_sigma = 5)
     print(igccol.parameter_subset)
     v = sba.sba_eq(sba.parameter)
-    chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print("Chisq", chisq)
     print("Change position: ", distance(tpcol[10].ground_location,
                                         sba.ground_location(10)))
     parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     v = sba.sba_eq(sba.parameter)
-    chisq = old_div(np.inner(v, v), (len(v) - len(sba.parameter)))
+    chisq = np.inner(v, v) / (len(v) - len(sba.parameter))
     print("Chisq", chisq)
     print("Change position: ", distance(tpcol[10].ground_location,
                                         sba.ground_location(10)))

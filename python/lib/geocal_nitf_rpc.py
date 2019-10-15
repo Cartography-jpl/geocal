@@ -1,4 +1,3 @@
-from __future__ import print_function
 from geocal_swig import Rpc
 from .tre_struct import *
 try:

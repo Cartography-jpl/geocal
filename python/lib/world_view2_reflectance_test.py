@@ -1,4 +1,3 @@
-from __future__ import print_function
 from builtins import range
 from geocal.world_view2_reflectance import *
 from test_support import *

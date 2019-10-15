@@ -1,5 +1,3 @@
-from future import standard_library
-standard_library.install_aliases()
 from geocal.image_to_image_connection import *
 import pickle
 from test_support import *

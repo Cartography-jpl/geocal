@@ -22901,7 +22901,7 @@ $as_echo_n "checking for openjpeg library... " >&6; }
         succeeded=no
         if test "$ac_openjpeg_path" != ""; then
             OPENJPEG_LIBS="-L$ac_openjpeg_path/lib -lopenjp2"
-            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.1"
+            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.3"
 	    OPENJPEG_PREFIX="$ac_openjpeg_path"
             succeeded=yes
         else
@@ -22915,12 +22915,12 @@ if test -n "$OPENJPEG_CFLAGS"; then
     pkg_cv_OPENJPEG_CFLAGS="$OPENJPEG_CFLAGS"
  elif test -n "$PKG_CONFIG"; then
     if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"openjpeg\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "openjpeg") 2>&5
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libopenjp2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libopenjp2") 2>&5
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_OPENJPEG_CFLAGS=`$PKG_CONFIG --cflags "openjpeg" 2>/dev/null`
+  pkg_cv_OPENJPEG_CFLAGS=`$PKG_CONFIG --cflags "libopenjp2" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
@@ -22932,12 +22932,12 @@ if test -n "$OPENJPEG_LIBS"; then
     pkg_cv_OPENJPEG_LIBS="$OPENJPEG_LIBS"
  elif test -n "$PKG_CONFIG"; then
     if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"openjpeg\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "openjpeg") 2>&5
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libopenjp2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libopenjp2") 2>&5
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_OPENJPEG_LIBS=`$PKG_CONFIG --libs "openjpeg" 2>/dev/null`
+  pkg_cv_OPENJPEG_LIBS=`$PKG_CONFIG --libs "libopenjp2" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
@@ -22958,9 +22958,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "openjpeg" 2>&1`
+	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libopenjp2" 2>&1`
         else
-	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "openjpeg" 2>&1`
+	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libopenjp2" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$OPENJPEG_PKG_ERRORS" >&5
@@ -22979,14 +22979,14 @@ $as_echo "yes" >&6; }
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$OPENJPEG_PREFIX"; then
-        OPENJPEG_PREFIX=`$PKG_CONFIG --variable=prefix "openjpeg" 2>/dev/null`
+        OPENJPEG_PREFIX=`$PKG_CONFIG --variable=prefix "libopenjp2" 2>/dev/null`
      fi
   fi
   if test "$succeeded" = "no"; then
      for ac_path_tmp in $prefix $CONDA_PREFIX $THIRDPARTY /opt/afids_support /opt/afids /usr /usr/local /opt /opt/local /opt/local/lib/hdfeos5 /sw ; do
-       if test -e "$ac_path_tmp/include/openjpeg-2.1/openjpeg.h" && test -r "$ac_path_tmp/include/openjpeg-2.1/openjpeg.h"; then
+       if test -e "$ac_path_tmp/include/openjpeg-2.3/openjpeg.h" && test -r "$ac_path_tmp/include/openjpeg-2.3/openjpeg.h"; then
           OPENJPEG_PREFIX=$ac_path_tmp
-          OPENJPEG_CFLAGS="-I$ac_path_tmp/include/openjpeg-2.1/"
+          OPENJPEG_CFLAGS="-I$ac_path_tmp/include/openjpeg-2.3/"
           if test -e "$ac_path_tmp/lib/libopenjp2.so"; then
              OPENJPEG_LIBS="-R$ac_path_tmp/lib/ -L$ac_path_tmp/lib/ -openjp2"
              succeeded=yes
@@ -23013,7 +23013,7 @@ fi
             build_openjpeg="yes"
             ac_openjpeg_path="\${prefix}"
             OPENJPEG_LIBS="-L$ac_openjpeg_path/lib -lopenjp2"
-            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.1"
+            OPENJPEG_CFLAGS="-I$ac_openjpeg_path/include/openjeg-2.3"
 	    OPENJPEG_PREFIX="$ac_openjpeg_path"
             succeeded=yes
         fi
@@ -23922,8 +23922,8 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
 
 
      # Will need to update this if we change the version we are building
-     python_inc_path=python3.5m
-     python_lib_path=python3.5
+     python_inc_path=python3.7m
+     python_lib_path=python3.7
      PYTHON=`pwd`"/external/python_wrap.sh"
      PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
      PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"
@@ -25145,8 +25145,8 @@ $as_echo "$am_cv_python_pyexecdir" >&6; }
 
 
      # Will need to update this if we change the version we are building
-     python_inc_path=python3.5m
-     python_lib_path=python3.5
+     python_inc_path=python3.7m
+     python_lib_path=python3.7
      PYTHON=`pwd`"/external/python_wrap.sh"
      PYTHON_CPPFLAGS="-I\${prefix}/include/${python_inc_path}"
      PYTHON_NUMPY_CPPFLAGS="-I\${prefix}/lib/${python_lib_path}/site-packages/numpy/core/include"

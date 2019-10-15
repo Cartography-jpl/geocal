@@ -3,6 +3,7 @@
 #include "geocal_gsl_root.h"
 #include "ostream_pad.h"
 #include <cmath>
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 using namespace blitz;

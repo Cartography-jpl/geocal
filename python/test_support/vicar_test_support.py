@@ -11,7 +11,7 @@ def check_for_proc(proc):
     cmd2 = re.sub(r'"',"\\\"", cmd2)
     res = subprocess.run("vicarb \"%s\"" % cmd2, shell=True,
                          stdout = subprocess.PIPE)
-    if re.search(b"\[TAE-NOPROC\]", res.stdout):
+    if re.search(br"\[TAE-NOPROC\]", res.stdout):
         return False
     return True
 

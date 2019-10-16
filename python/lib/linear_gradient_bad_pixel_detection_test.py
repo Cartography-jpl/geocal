@@ -60,7 +60,7 @@ def test_bad_pixel_fill():
         m = IterativeMorphologicalDilation(data_with_bad_pixel, mask)
         m.fill_missing_data()
     except RuntimeError as e:
-        if(not re.search("requires C\+\+ 11 features", str(e))):
+        if(not re.search(r"requires C\+\+ 11 features", str(e))):
             raise e
         # Test will fail if compiler doesn't have C++11. This is true on
         # centos 6 systems

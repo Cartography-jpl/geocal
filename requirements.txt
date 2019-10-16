@@ -32,8 +32,6 @@ pandas
 numpydoc
 jsonpickle
 tabulate
-# Needed while we support both python 2 and 3
-six
 #
 # For uploading doxygen documentation to github, we need ghp-import.
 # I don't list this as an actual requirement since this is only needed

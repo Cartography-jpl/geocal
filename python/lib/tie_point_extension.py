@@ -16,7 +16,12 @@ import os
 
 # Optional support for pandas
 try:
-    import pandas as pd
+    # The default full build of python in afids doesn't have lzma support. We
+    # don't actually care, so suppress the warning about this.
+    import warnings
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore",category=UserWarning)
+        import pandas as pd
     have_pandas = True
 except ImportError:
     have_pandas = False

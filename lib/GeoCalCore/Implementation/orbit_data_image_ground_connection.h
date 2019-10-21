@@ -193,7 +193,10 @@ public:
     opad << dem();
     opad.strict_sync();
     Os << "  Image: \n";
-    opad << *image();
+    if(!image())
+      opad << "No image\n";
+    else
+      opad << *image();
     opad.strict_sync();
     Os << "  Refraction\n";
     if(!refraction())

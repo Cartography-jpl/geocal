@@ -225,6 +225,12 @@ public:
 
   void orbit_data(const boost::shared_ptr<OrbitData>& Od) { od = Od; }
 
+  virtual bool has_time() const {return true;}
+  virtual Time pixel_time(const ImageCoordinate& Ic) const
+  {
+    return od->time();
+  }
+
 //-----------------------------------------------------------------------
 /// Camera that we are using
 //-----------------------------------------------------------------------

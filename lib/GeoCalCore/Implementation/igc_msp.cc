@@ -16,6 +16,7 @@
 #include "SupportDataService.h"
 #include "ImagingGeometryService.h"
 #include "MSPTime.h"
+#include "IWS_WarningTracker.h"
 // Note these two include files were *not* part of MSP 1.6, although
 // the RsmGeneratorService library still is present. I'm assuming they
 // have just dropped the headers for now. We copied this over from MSP
@@ -161,7 +162,7 @@ try {
   model = boost::dynamic_pointer_cast<csm::RasterGM>(model_raw);
   if(!model)
     throw Exception("Model needs to be a RasterGM model");
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -181,7 +182,7 @@ try {
   blitz::Array<double, 1> res(3);
   res = v.x, v.y, v.z;
   return res;
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -199,7 +200,7 @@ try {
   csm::ImageCoord ic = model->groundToImage(csm::EcefCoord(cf->position[0],
 			cf->position[1], cf->position[2]));
   return ImageCoordinate(ic.line, ic.samp);
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -220,7 +221,7 @@ try {
   Lv.look_vector[0] = lc.direction.x;
   Lv.look_vector[1] = lc.direction.y;
   Lv.look_vector[2] = lc.direction.z;
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -241,7 +242,7 @@ try {
   csm::EcefCoord gp = model->imageToGround(csm::ImageCoord(Ic.line, Ic.sample),
 					    H);
   return boost::make_shared<Ecr>(gp.x, gp.y, gp.z);
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -276,7 +277,7 @@ try {
   Time t = Time::parse_time(to_iso_extended_string(d) + "T00:00:00Z") +
     second_from_midnight;
   return t;
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -302,8 +303,27 @@ try {
   MSP::RGS::RGSConfig config;
   config.read_config_file(cfname);
   MSP::RGS::RsmGeneratorService generator(&config);
-  return "hi there";
-} catch(const MSP::Error& error) {
+  std::vector<csm::RasterGM *> mlist;
+  mlist.push_back(model.get());
+  int n_orig_params = 0;
+  double *orig_covariance = NULL;
+  std::vector<std::string> image_ids;
+  std::vector<std::vector<int> > orig_param_numbers_by_image;
+  std::vector<csm::Isd *> isd;
+  IWS_WarningTracker warning;
+  warning = generator.generateRsmWithJointCov(mlist, n_orig_params,
+	      orig_covariance, image_ids, orig_param_numbers_by_image,
+	      isd, Report);
+  warning.printAllWarnings();
+  // Not sure if we should change this or not
+  const char* sensor_model_type = "IWS_UNKNOWN_SENSOR_MODEL";
+  boost::shared_ptr<csm::RasterGM>
+    rsm_sm((csm::RasterGM *) sms->createModelFromISD(*isd[0],
+						     sensor_model_type));
+  if(!rsm_sm)
+    throw Exception("Trouble creating rsm_sm");
+  return rsm_sm->getModelState();
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -394,7 +414,7 @@ try {
   std::cout << "MSP Plugin list:\n";
   BOOST_FOREACH(const std::string& n, plugin_list)
     std::cout<< "  " << n << "\n";
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -426,7 +446,7 @@ try {
   BOOST_FOREACH(const std::string& n, plugin_list)
     res.push_back(n);
   return res;
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -460,7 +480,7 @@ try {
   for(int i = 0; i < (int) t->getNumModels(); ++i)
     res.push_back(t->getModelName(i));
   return res;
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -492,7 +512,7 @@ try {
   std::vector<std::string> res;
   sds.getImageIds(*isd, res);
   return res;
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;
@@ -521,7 +541,7 @@ try {
   boost::shared_ptr<MSP::SMS::SensorModelService> sms =
     boost::make_shared<MSP::SMS::SensorModelService>();
   sms->registerPlugin(Plugin_name);
-} catch(const MSP::Error& error) {
+} catch(const csm::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
   Exception e;

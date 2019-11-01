@@ -295,6 +295,21 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
         return _igc_msp.IgcMsp_sensor_velocity(self, Ic)
 
 
+    def generate_rsm_tre(self, *args):
+        """
+
+        std::string IgcMsp::generate_rsm_tre(const std::string &Report="", const std::string &Rsm_config="")
+        const
+        Use the MSP RSM generation code to create a TRE string (it doesn't
+        directly create a NITF file).
+
+        You can optionally supply a report file to write to and/or specify the
+        RSM configuration file to use. The default is
+        "$MSP_DATA_DIR/rsm/database_settings.strat". 
+        """
+        return _igc_msp.IgcMsp_generate_rsm_tre(self, *args)
+
+
     def _v_family(self):
         """
 
@@ -496,6 +511,7 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
 
     __swig_destroy__ = _igc_msp.delete_IgcMsp
 IgcMsp.sensor_velocity = new_instancemethod(_igc_msp.IgcMsp_sensor_velocity, None, IgcMsp)
+IgcMsp.generate_rsm_tre = new_instancemethod(_igc_msp.IgcMsp_generate_rsm_tre, None, IgcMsp)
 IgcMsp._v_family = new_instancemethod(_igc_msp.IgcMsp__v_family, None, IgcMsp)
 IgcMsp._v_version = new_instancemethod(_igc_msp.IgcMsp__v_version, None, IgcMsp)
 IgcMsp._v_model_name = new_instancemethod(_igc_msp.IgcMsp__v_model_name, None, IgcMsp)

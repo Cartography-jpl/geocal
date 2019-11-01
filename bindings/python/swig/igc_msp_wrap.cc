@@ -7586,6 +7586,202 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IgcMsp_generate_rsm_tre__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  std::string result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp_generate_rsm_tre" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "IgcMsp_generate_rsm_tre" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcMsp_generate_rsm_tre" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "IgcMsp_generate_rsm_tre" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcMsp_generate_rsm_tre" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->generate_rsm_tre((std::string const &)*arg2,(std::string const &)*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp_generate_rsm_tre__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  std::string result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp_generate_rsm_tre" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "IgcMsp_generate_rsm_tre" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcMsp_generate_rsm_tre" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->generate_rsm_tre((std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp_generate_rsm_tre__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  std::string result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp_generate_rsm_tre" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::IgcMsp const *)arg1)->generate_rsm_tre();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp_generate_rsm_tre(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"IgcMsp_generate_rsm_tre",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_IgcMsp_generate_rsm_tre__SWIG_2(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_IgcMsp_generate_rsm_tre__SWIG_1(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_IgcMsp_generate_rsm_tre__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'IgcMsp_generate_rsm_tre'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::IgcMsp::generate_rsm_tre(std::string const &,std::string const &) const\n"
+    "    GeoCal::IgcMsp::generate_rsm_tre(std::string const &) const\n"
+    "    GeoCal::IgcMsp::generate_rsm_tre() const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_IgcMsp__v_family(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
@@ -8314,6 +8510,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"blitz::Array< double, 1 > IgcMsp::sensor_velocity(const ImageCoordinate &Ic) const\n"
 		"\n"
+		""},
+	 { (char *)"IgcMsp_generate_rsm_tre", _wrap_IgcMsp_generate_rsm_tre, METH_VARARGS, (char *)"\n"
+		"\n"
+		"std::string IgcMsp::generate_rsm_tre(const std::string &Report=\"\", const std::string &Rsm_config=\"\")\n"
+		"const\n"
+		"Use the MSP RSM generation code to create a TRE string (it doesn't\n"
+		"directly create a NITF file).\n"
+		"\n"
+		"You can optionally supply a report file to write to and/or specify the\n"
+		"RSM configuration file to use. The default is\n"
+		"\"$MSP_DATA_DIR/rsm/database_settings.strat\". \n"
 		""},
 	 { (char *)"IgcMsp__v_family", (PyCFunction)_wrap_IgcMsp__v_family, METH_O, (char *)"\n"
 		"\n"

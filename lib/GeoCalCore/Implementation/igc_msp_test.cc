@@ -56,6 +56,15 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK(fabs(igc.pixel_time(ImageCoordinate(10,10)) - texpect) < 1e-6);
 }
 
+BOOST_AUTO_TEST_CASE(generate_rsm_tre_test)
+{
+  if(!have_msp_supported())
+    return;
+  GdalRasterImage img(test_data_dir() + "rpc.ntf");
+  IgcMsp igc(test_data_dir() + "rpc.ntf");
+  std::cerr << igc.generate_rsm_tre("msp_rsm_generate_report.txt");
+}
+
 BOOST_AUTO_TEST_CASE(serialize)
 {
   if(!have_serialize_supported())

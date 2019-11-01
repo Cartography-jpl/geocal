@@ -71,6 +71,8 @@ public:
   int image_index() const;
   virtual void print(std::ostream& Os) const;
   blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
+  std::string generate_rsm_tre(const std::string& Report = "",
+			       const std::string& Rsm_config = "") const;
 private:
   static void* lib_ptr;
   IgcMsp() {}

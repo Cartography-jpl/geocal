@@ -16,6 +16,14 @@
 #include "SupportDataService.h"
 #include "ImagingGeometryService.h"
 #include "MSPTime.h"
+// Note these two include files were *not* part of MSP 1.6, although
+// the RsmGeneratorService library still is present. I'm assuming they
+// have just dropped the headers for now. We copied this over from MSP
+// 1.5. We can come back to this if the RSM service gets completely
+// dropped in the future, but for now just include the header files
+// and assume they have been copied into place.
+#include "RsmGeneratorService.h"
+#include "RGSConfig.h"
 #endif
 using namespace GeoCal;
 using namespace blitz;
@@ -73,6 +81,8 @@ public:
   std::string file_name() const { return fname_;}
   int image_index() const { return image_index_;}
   blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
+  std::string generate_rsm_tre(const std::string& Report = "",
+			       const std::string& Rsm_config = "") const;
 private:
   std::string fname_, plugin_name_, model_name_;
   int image_index_;
@@ -266,6 +276,33 @@ try {
   Time t = Time::parse_time(to_iso_extended_string(d) + "T00:00:00Z") +
     second_from_midnight;
   return t;
+} catch(const MSP::Error& error) {
+  // Translate MSP error to Geocal error, just so we don't need
+  // additional logic to handle this
+  Exception e;
+  e << "MSP error:\n"
+    << "Message: " << error.getMessage() << "\n"
+    << "Function: " << error.getFunction() << "\n";
+  throw e;
+}
+}
+
+std::string IgcMspImp::generate_rsm_tre
+(const std::string& Report,
+ const std::string& Rsm_config) const
+{
+try {
+  std::string cfname(Rsm_config);
+  if(cfname == "") {
+    char *t = getenv("MSP_DATA_DIR");
+    if(!t)
+      throw Exception("Need to either pass in the RSM configuration file, or set the environment variable MSP_DATA_DIR");
+    cfname = std::string(t) + "/rsm/database_settings.strat";
+  }
+  MSP::RGS::RGSConfig config;
+  config.read_config_file(cfname);
+  MSP::RGS::RsmGeneratorService generator(&config);
+  return "hi there";
 } catch(const MSP::Error& error) {
   // Translate MSP error to Geocal error, just so we don't need
   // additional logic to handle this
@@ -685,6 +722,27 @@ int IgcMsp::image_index() const
 {
 #ifdef HAVE_MSP
   return boost::dynamic_pointer_cast<IgcMspImp>(igc)->image_index();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+
+//-----------------------------------------------------------------------
+/// Use the MSP RSM generation code to create a TRE string (it doesn't
+/// directly create a NITF file).
+///
+/// You can optionally supply a report file to write to and/or specify
+/// the RSM configuration file to use. The default is
+/// "$MSP_DATA_DIR/rsm/database_settings.strat".
+//-----------------------------------------------------------------------
+
+std::string IgcMsp::generate_rsm_tre
+(const std::string& Report,
+ const std::string& Rsm_config) const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->generate_rsm_tre(Report, Rsm_config);
 #else
   throw MspNotAvailableException();
 #endif

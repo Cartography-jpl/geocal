@@ -8520,7 +8520,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"You can optionally supply a report file to write to and/or specify the\n"
 		"RSM configuration file to use. The default is\n"
-		"\"$MSP_DATA_DIR/rsm/database_settings.strat\". \n"
+		"\"$MSP_DATA_DIR/rsm/database_settings.strat\".\n"
+		"\n"
+		"Note the TRE string can be converted to an actual RSM. We add this\n"
+		"functionality in the python interface, it isn't all that easy to do in\n"
+		"C++ and we really only need this at the python level anyways. \n"
 		""},
 	 { (char *)"IgcMsp__v_family", (PyCFunction)_wrap_IgcMsp__v_family, METH_O, (char *)"\n"
 		"\n"

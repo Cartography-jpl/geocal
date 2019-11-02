@@ -32,90 +32,37 @@ def test_rsm_rp(isolated_dir, rsm):
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
-# This test program went away with MSP 1.6. Not sure if we can locate it again,
-# it is at least listed in the documentation. May also be able to do this
-# as a program/function, but currently this doesn't work.
-@skip    
 @require_msp
 @require_pynitf
 def test_rsm_generate_with_msp(isolated_dir, igc_rpc):
     '''This uses the MSP toolkit to generate a RSM file, and makes sure
     MSP is happy with it.
-
-    The RSM generation has a API, but for this we are just using the sample
-    code. 
-    
-    We could extend this, but we have our own RSM generation code and probably
-    using MSP will be for occasional testing and/or comparison. We wrap this
-    up in a test to document how we do this.
     '''
 
-    # --------------------------------
-    # 1. Start with an existing NITF file that we can create a sensor model for.
-    #    In this case we use an RPC, but this could be anything that MSP
-    #    supports (e.g, a GFM model)
-    # --------------------------------
+    # Start with an existing NITF file that we can create a sensor model for.
+    # In this case we use an RPC, but this could be anything that MSP
+    # supports (e.g, a GFM model)
     
     f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rpc = igc_rpc.rpc
     f.write("nitf_input_rpc.ntf")
-    msp_base = os.path.dirname(os.environ["MSP_DATA_DIR"])
-    rsm_gen = msp_base + "/sampleCode/RsmGeneratorSample/testRsmGeneratorSample"
+    igc = IgcMsp("nitf_input_rpc.ntf")
 
-    # --------------------------------
-    # 2. Run generation process.
-    #
-    #    Note the file extensions are required, it is how rsm_gen knows which
-    #    each file is.
-    # --------------------------------
+    # Run generation process.
 
-    r = subprocess.run([rsm_gen,
-                    os.environ["MSP_DATA_DIR"] + "/rsm/database_settings.strat",
-                    "rsm_generate_report.rep",
-                    "nitf_input_rpc.ntf",
-                    "nitf_rsm_generate_out.tre"], stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE)
-    with open("rsm_generate.log", "w") as fh:
-        print(r.stdout, file=fh)
+    rsm = igc.generate_rsm("rsm_generate_report.txt")
 
-
-    # --------------------------------
-    # 3. Tool doesn't directly create NITF, instead it write out a file
-    #    with the TREs as strings. Parse this, and use to create a RSM.
-    #    Note that we assume an order to the TREs, we could generalize
-    #    this code if it proves useful.
-    # --------------------------------
-
-    with open("nitf_rsm_generate_out.tre") as fh:
-        for ln in fh:
-            if(ln == "RSM_TRE_DATA\n"):
-                break
-        # Could generalize this probably, but for now have an assumed form
-        # for the RSM
-        ln = fh.readline().rstrip("\n")
-        if(ln[:6] != "RSMIDA"):
-            raise RuntimeError("Didn't find the expected TRE")
-        rsm_id = RsmId.read_tre_string(ln[11:])
-        ln = fh.readline().rstrip("\n")
-        if(ln[:6] != "RSMPCA"):
-            raise RuntimeError("Didn't find the expected TRE")
-        rsm_rp = RsmRationalPolynomial.read_tre_string(ln[11:])
-    rsm = Rsm(rsm_id)
-    rsm.rsm_base = rsm_rp
-
-    # --------------------------------
-    # 4. Generate a NITF file with the RSM in it.
-    # --------------------------------
+    # Generate a NITF file with the RSM in it. This is just
+    # so we can use the MSP software with the RSM.
 
     f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = rsm
     f.write("nitf_rsm.ntf")
     
-    # --------------------------------
-    # 5. Run the MSP code to compare the RSM to our initial RPC.
-    # --------------------------------
+    # Run the MSP code to compare the RSM to our initial RPC, and
+    # also our calculation using the supplied rsm.
 
     igc_rsm = IgcMsp("nitf_rsm.ntf")
     for i in range(10):

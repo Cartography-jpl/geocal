@@ -755,6 +755,10 @@ int IgcMsp::image_index() const
 /// You can optionally supply a report file to write to and/or specify
 /// the RSM configuration file to use. The default is
 /// "$MSP_DATA_DIR/rsm/database_settings.strat".
+///
+/// Note the TRE string can be converted to an actual RSM. We add this
+/// functionality in the python interface, it isn't all that easy to
+/// do in C++ and we really only need this at the python level anyways.
 //-----------------------------------------------------------------------
 
 std::string IgcMsp::generate_rsm_tre

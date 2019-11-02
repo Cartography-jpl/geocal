@@ -1,9 +1,11 @@
 from geocal_swig import (Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial,
-                         RsmGrid, RsmRpPlusGrid, RsmAdjustableParameterA)
+                         RsmGrid, RsmRpPlusGrid, RsmAdjustableParameterA,
+                         have_msp_supported)
+import re
 try:
     from pynitf import (create_nitf_tre_structure, NitfSegmentHook, NitfFile,
                         TreRSMIDA, TreRSMGGA, TreRSMGIA, TreRSMPCA,
-                        TreRSMPIA, TreRSMAPA)
+                        TreRSMPIA, TreRSMAPA, read_tre_data)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
@@ -302,5 +304,31 @@ if(have_pynitf and not suppress_rsm):
             
     NitfFile.image_segment_hook_obj.append(RsmImageSegementHook())
 
-        
-__all__ = []
+    def tre_str_to_rsm(t):
+        '''MSP dumps a RSM it generates out as a string that is a set of TREs.
+        This function interprets this string.'''
+        # Wrap up as an image segment, just to reuse code we already have. This
+        # just provides a tre_list and a place to stick rsm.
+        class FakeSeg:
+            pass
+        fseg = FakeSeg()
+        fseg.tre_list = read_tre_data(re.sub(r'\n','',t).encode('utf8'))
+        isegh = RsmImageSegementHook()
+        isegh.read_tre_hook(fseg, None)
+        return fseg.rsm
+
+    if(have_msp_supported()):
+        from geocal_swig import IgcMsp
+
+        def _generate_rsm(self, report = "", rsm_config = ""):
+            t = self.generate_rsm_tre(report, rsm_config)
+            t = re.split(r'^RSM_TRE_DATA$', t, flags=re.MULTILINE)[1]
+            return tre_str_to_rsm(t)
+
+        IgcMsp.generate_rsm = _generate_rsm
+            
+
+if(have_pynitf and not suppress_rsm):
+    __all__ = ["tre_str_to_rsm", ]
+else:
+    __all__ = []

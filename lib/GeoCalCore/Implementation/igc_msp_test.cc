@@ -62,7 +62,8 @@ BOOST_AUTO_TEST_CASE(generate_rsm_tre_test)
     return;
   GdalRasterImage img(test_data_dir() + "rpc.ntf");
   IgcMsp igc(test_data_dir() + "rpc.ntf");
-  std::cerr << igc.generate_rsm_tre("msp_rsm_generate_report.txt");
+  if(false)
+    std::cerr << igc.generate_rsm_tre("msp_rsm_generate_report.txt");
 }
 
 BOOST_AUTO_TEST_CASE(serialize)

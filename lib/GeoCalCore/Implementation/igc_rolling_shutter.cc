@@ -398,6 +398,9 @@ void IgcRollingShutter::footprint_resolution
   Time t;
   FrameCoordinate f;
   time_table_->time(ImageCoordinate(Line, Sample), t, f);
+  // Go to edge of pixel
+  f.line -= 0.5;
+  f.sample -= 0.5;
   boost::shared_ptr<GroundCoordinate> gc = orbit_data(t)->
     reference_surface_intersect_approximate(*cam, f, b);
   f.line += 1;

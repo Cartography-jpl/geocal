@@ -28,6 +28,9 @@ void IpiImageGroundConnection::footprint_resolution
   Time t;
   FrameCoordinate f;
   ipi_->time_table().time(ImageCoordinate(Line, Sample), t, f);
+  // Go to edge of pixel
+  f.line -= 0.5;
+  f.sample -= 0.5;
   boost::shared_ptr<GroundCoordinate> gc = ipi_->orbit().orbit_data(t)->
     reference_surface_intersect_approximate(ipi_->camera(), f, ipi_->band());
   f.line += 1;

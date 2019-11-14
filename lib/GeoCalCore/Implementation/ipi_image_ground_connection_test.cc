@@ -41,8 +41,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(gc2->height_reference_surface(), 100.0, 1e-2);
   double line_res, samp_res;
   igc.footprint_resolution(0, 0, line_res, samp_res);
-  BOOST_CHECK_CLOSE(line_res, 708.36177816238671, 1e-2);
-  BOOST_CHECK_CLOSE(samp_res, 275.98094050780151, 1e-2);
+  BOOST_CHECK_CLOSE(line_res, 707.97523894017218, 1e-2);
+  BOOST_CHECK_CLOSE(samp_res, 275.9268228817025, 1e-2);
 }
 
 BOOST_AUTO_TEST_CASE(timing_test)

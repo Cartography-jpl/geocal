@@ -58,11 +58,15 @@ IpiImageGroundConnection::cf_look_vector_arr
     sc_look_vector_cache.resize
       (boost::extents[ipi_->camera().number_sample(ipi_->band())]
        [nsubpixel_line][nsubpixel_sample]);
+    double fline_space = 1.0 / nsubpixel_line;
+    double fsamp_space = 1.0 / nsubpixel_sample;
+    double fline_start = fline_space / 2.0 - 0.5;
+    double fsamp_start = fsamp_space / 2.0 - 0.5;
     for(int j = 0; j < (int) sc_look_vector_cache.shape()[0]; ++j)
       for(int i2 = 0; i2 < (int) sc_look_vector_cache.shape()[1]; ++i2)
 	for(int j2 = 0; j2 < (int) sc_look_vector_cache.shape()[2]; ++j2) {
-	  FrameCoordinate fc(((double) i2 / nsubpixel_line),
-			     j + ((double) j2 / nsubpixel_sample));
+	  FrameCoordinate fc(fline_start + i2 * fline_space,
+			     j + fsamp_start + j2 * fsamp_space);
 	  sc_look_vector_cache[j][i2][j2] = 
 	    ipi_->camera().sc_look_vector(fc, ipi_->band());
 	}

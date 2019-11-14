@@ -367,11 +367,15 @@ blitz::Array<double, 7> IgcRollingShutter::cf_look_vector_arr
       od.push_back(orbit_data(t + tint));
       pos.push_back(position_cf(t + tint));
     }
+    double fline_space = 1.0 / nsubpixel_line;
+    double fsamp_space = 1.0 / nsubpixel_sample;
+    double fline_start = fline_space / 2.0 - 0.5;
+    double fsamp_start = fsamp_space / 2.0 - 0.5;
     for(int j = 0; j < nsamp; ++j) 
       for(int i2 = 0; i2 < nsubpixel_line; ++i2)
 	for(int j2 = 0; j2 < nsubpixel_sample; ++j2) {
-	  FrameCoordinate fc(i + ln_start + ((double) i2 / nsubpixel_line),
-			     j + smp_start + ((double) j2 / nsubpixel_sample));
+	  FrameCoordinate fc(i + ln_start + fline_start + i2 * fline_space,
+			     j + smp_start + fsamp_start + j2 * fsamp_space);
 	  ScLookVector slv = cam->sc_look_vector(fc, b);
 	  for(int k = 0; k < nintegration_step; ++k) {
 	    lv = od[k]->cf_look_vector(slv);

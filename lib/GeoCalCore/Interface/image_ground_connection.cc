@@ -83,12 +83,16 @@ blitz::Array<double, 7> ImageGroundConnection::cf_look_vector_arr
   boost::shared_ptr<CartesianFixed> pos;
   blitz::Array<double, 7>  res(nline, nsamp, nsubpixel_line, 
 			       nsubpixel_sample, nintegration_step, 2, 3);
+  double fline_space = 1.0 / nsubpixel_line;
+  double fsamp_space = 1.0 / nsubpixel_sample;
+  double fline_start = fline_space / 2.0 - 0.5;
+  double fsamp_start = fsamp_space / 2.0 - 0.5;
   for(int i = 0; i < nline; ++i)
     for(int j = 0; j < nsamp; ++j) 
       for(int i2 = 0; i2 < nsubpixel_line; ++i2)
 	for(int j2 = 0; j2 < nsubpixel_sample; ++j2) {
-	  ImageCoordinate ic(i + ln_start + ((double) i2 / nsubpixel_line),
-			     j + smp_start + ((double) j2 / nsubpixel_sample));
+	  ImageCoordinate ic(i + ln_start + fline_start + i2 * fline_space,
+			     j + smp_start + fsamp_start + j2 * fsamp_space);
 	  cf_look_vector(ic, lv, pos);
 	  for(int k = 0; k < nintegration_step; ++k)
 	    for(int k2 = 0; k2 < 3; ++k2) {

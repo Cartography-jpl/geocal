@@ -7,6 +7,10 @@ namespace GeoCal {
 
 /****************************************************************//**
   This is the coordinates of a frame camera.
+
+  We use the same convention that we do for ImageCoordinate, the
+  center of a pixel in the frame camera is at an integer value. So the 
+  first pixel goes from frame coordinate (-0.5, -0.5) to (0.5, 0.5).
 *******************************************************************/
 
 class FrameCoordinate : public Printable<FrameCoordinate> {

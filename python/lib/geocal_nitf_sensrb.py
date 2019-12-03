@@ -103,9 +103,15 @@ if(have_pynitf):
         
     NitfImageSegment.camera_sensrb = property(_camera_sensrb_get)
 
-    def _orbit_data_and_cam_sensrb_set(self, od, cam):
+    def _orbit_data_set(self, od, integration_time = 0.0):
+        '''Set orbit data only, do don't include camera information'''
+        _orbit_data_and_cam_sensrb_set(self, od, None, integration_time)
+        
+    def _orbit_data_and_cam_sensrb_set(self, od, cam, integration_time = 0.0):
         '''Set orbit data and camera. We need to do this at the
-        same time because they are tied together.'''
+        same time because they are tied together.  Camera can be none if you
+        want to set just the orbit data (also have a separate function since
+        this is a bit obscure)'''
         t = self.find_one_tre("SENSRB")
         if(t is None):
             t = TreSENSRB()
@@ -117,12 +123,15 @@ if(have_pynitf):
         t.elevation_datum = "HAE"
         t.length_unit = "SI"
         t.angular_unit = "DEG"
+
         tm = od.time
         t.start_date = str(tm).split("T")[0].replace("-", "")
         tm_day_start = Time.parse_time(str(tm).split("T")[0] + "T00:00:00Z")
         t.start_time = tm - tm_day_start
-        t.end_date = t.start_date
-        t.end_time = t.start_time
+        tm = od.time + integration_time
+        t.end_date = str(tm).split("T")[0].replace("-", "")
+        tm_day_start = Time.parse_time(str(tm).split("T")[0] + "T00:00:00Z")
+        t.end_time = tm - tm_day_start
         t.reference_time = 0
         t.reference_row = 1
         t.reference_column = 1
@@ -158,66 +167,78 @@ if(have_pynitf):
         t.platform_pitch = od2.pitch
         t.platform_roll = od2.roll
 
-        # Now do the camera part
-        t.sensor_array_data = "Y"
-        t.calibrated = "Y"
-        t.sensor_calibration_data = "Y"
-        t.length_unit = "SI"
-        t.angular_unit = "DEG"
-        t.calibration_unit = "mm"
-        t.generation_count = 0
-        t.generation_date = None
-        t.generation_time = None
-        t.detection = cam.detection_type
-        t.row_detectors = cam.number_line(0)
-        t.column_detectors = cam.number_sample(0)
-        t.sensor_angle_1, t.sensor_angle_2, t.sensor_angle_3 = SensrbCamera.quaternion_to_sensor_angle(od2.body_to_local_north * cam.frame_to_sc)
-        # 10.0 is because camera has line pitch in mm, but sensrb
-        # records this in cm. "metric" is the entire size of the row/col
-        # CCD, so it includes the number of line/samples
-        t.row_metric = cam.line_pitch * 10.0 * t.row_detectors
-        t.column_metric = cam.sample_pitch * 10.0 * t.column_detectors
-        t.focal_length = cam.focal_length * 10.0
-        t.row_fov = None
-        t.column_fov = None
-        t.principal_point_offset_y = (cam.principal_point(0).line - cam.number_line(0) / 2.0) * cam.line_pitch
-        t.principal_point_offset_x = (cam.principal_point(0).sample - cam.number_sample(0) / 2.0) * cam.sample_pitch
-        t.radial_distort_1 = cam.k1
-        t.radial_distort_2 = cam.k2
-        t.radial_distort_3 = cam.k3
-        t.decent_distort_1 = cam.p1
-        t.decent_distort_2 = cam.p2
-        t.affinity_distort_1 = cam.b1
-        t.affinity_distort_2 = cam.b2
-        t.radial_distort_limit = cam.radial_distort_limit
-        t.calibration_date = cam.calibration_date
-        t.image_formation_data = "Y"
-        t.method = "Single Frame"
-        t.mode = "003"
-        t.row_count = cam.number_line(0)
-        t.column_count = cam.number_sample(0)
-        t.row_set = cam.number_line(0)
-        t.column_set = cam.number_sample(0)
-        t.row_rate = 0
-        t.column_rate = 0
-        # This is 1 based, I'm pretty sure
-        t.first_pixel_row = 1
-        t.first_pixel_column = 1
-        t.transform_params = 0
+        if(cam is None):
+            t.sensor_array_data = "N"
+            t.sensor_calibration_data = "N"
+            t.image_formation_data = "N"
+        else:
+            # Now do the camera part
+            t.sensor_array_data = "Y"
+            t.calibrated = "Y"
+            t.sensor_calibration_data = "Y"
+            t.length_unit = "SI"
+            t.angular_unit = "DEG"
+            t.calibration_unit = "mm"
+            t.generation_count = 0
+            t.generation_date = None
+            t.generation_time = None
+            t.detection = cam.detection_type
+            t.row_detectors = cam.number_line(0)
+            t.column_detectors = cam.number_sample(0)
+            t.sensor_angle_1, t.sensor_angle_2, t.sensor_angle_3 = SensrbCamera.quaternion_to_sensor_angle(od2.body_to_local_north * cam.frame_to_sc)
+            # 10.0 is because camera has line pitch in mm, but sensrb
+            # records this in cm. "metric" is the entire size of the row/col
+            # CCD, so it includes the number of line/samples
+            t.row_metric = cam.line_pitch * 10.0 * t.row_detectors
+            t.column_metric = cam.sample_pitch * 10.0 * t.column_detectors
+            t.focal_length = cam.focal_length * 10.0
+            t.row_fov = None
+            t.column_fov = None
+            t.principal_point_offset_y = (cam.principal_point(0).line - cam.number_line(0) / 2.0) * cam.line_pitch
+            t.principal_point_offset_x = (cam.principal_point(0).sample - cam.number_sample(0) / 2.0) * cam.sample_pitch
+            t.radial_distort_1 = cam.k1
+            t.radial_distort_2 = cam.k2
+            t.radial_distort_3 = cam.k3
+            t.decent_distort_1 = cam.p1
+            t.decent_distort_2 = cam.p2
+            t.affinity_distort_1 = cam.b1
+            t.affinity_distort_2 = cam.b2
+            t.radial_distort_limit = cam.radial_distort_limit
+            t.calibration_date = cam.calibration_date
+            t.image_formation_data = "Y"
+            t.method = "Single Frame"
+            t.mode = "003"
+            t.row_count = cam.number_line(0)
+            t.column_count = cam.number_sample(0)
+            t.row_set = cam.number_line(0)
+            t.column_set = cam.number_sample(0)
+            t.row_rate = 0
+            t.column_rate = 0
+            # This is 1 based, I'm pretty sure
+            t.first_pixel_row = 1
+            t.first_pixel_column = 1
+            t.transform_params = 0
+        if(cam):
+            # If we have a camera, include in our quaternions
+            cam_frame_to_sc = cam.frame_to_sc
+        else:
+            # Otherwise, just have attitude data
+            cam_frame_to_sc = Quaternion_double(1,0,0,0)
         # Quaternion version of rotation. This is redundant with Euler angles
         t.attitude_quaternion = "Y"
         # Equation 6
         m_sen_to_cam = Quaternion_double(0.5, 0.5, 0.5, -0.5) 
-        t.attitude_q1, t.attitude_q2, t.attitude_q3, t.attitude_q4 = quaternion_to_nitf(od2.sc_to_cf * cam.frame_to_sc * m_sen_to_cam)
+        t.attitude_q1, t.attitude_q2, t.attitude_q3, t.attitude_q4 = quaternion_to_nitf(od2.sc_to_cf * cam_frame_to_sc * m_sen_to_cam)
         # Unit vector version of rotation. This is redundant with Euler angles
         t.attitude_unit_vectors = "Y"
-        q = od2.sc_to_cf * cam.frame_to_sc
+        q = od2.sc_to_cf * cam_frame_to_sc
         t.icx_north_or_x, t.icy_north_or_x, t.icz_north_or_x = quaternion_to_array(q.conj() * Quaternion_double(0,1,0,0) * q)[1:4]
         t.icx_east_or_y, t.icy_east_or_y, t.icz_east_or_y = quaternion_to_array(q.conj() * Quaternion_double(0,0,1,0) * q)[1:4]
         t.icx_down_or_z, t.icy_down_or_z, t.icz_down_or_z = quaternion_to_array(q.conj() * Quaternion_double(0,0,0,1) * q)[1:4]
         
         
     NitfImageSegment.orbit_data_and_camera = _orbit_data_and_cam_sensrb_set
+    NitfImageSegment.orbit_data_only = _orbit_data_set
     
 
 if(have_pynitf):

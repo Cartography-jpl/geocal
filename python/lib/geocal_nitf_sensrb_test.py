@@ -50,6 +50,7 @@ def test_sensrb_cam_od(isolated_dir):
     '''Create a file, and write out a SENSRB, then make sure we can read it.'''
     f = pynitf.NitfFile()
     create_image_seg(f)
+    create_image_seg(f)
     t = Time.parse_time("1998-06-30T10:51:28.32Z")
     korb = KeplerOrbit(t, t + 100.0)
     od = korb.orbit_data(t + 5)
@@ -58,14 +59,18 @@ def test_sensrb_cam_od(isolated_dir):
 		       2048, 1024, 18e-6, 21e-6,
 		       123.8e-3, FrameCoordinate(2048/2, 1024/2))
     f.image_segment[0].orbit_data_and_camera(od, cam)
+    f.image_segment[1].orbit_data_only(od, integration_time=1.0)
     f.write("sensrb_test.ntf")
     f2 = pynitf.NitfFile("sensrb_test.ntf")
     od2 = f2.image_segment[0].orbit_data_sensrb
+    od3 = f2.image_segment[1].orbit_data_sensrb
     cam2 = f2.image_segment[0].camera_sensrb
     fc = FrameCoordinate(0,752)
     dem = SimpleDem()
     assert(distance(od.surface_intersect(cam, fc, dem),
                     od2.surface_intersect(cam2, fc, dem)) < 1.0)
+    assert(distance(od.surface_intersect(cam, fc, dem),
+                    od3.surface_intersect(cam, fc, dem)) < 1.0)
 
 
 @require_msp    

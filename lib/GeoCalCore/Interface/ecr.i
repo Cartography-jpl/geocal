@@ -30,7 +30,7 @@ class Geodetic;
 
 class Ecr : public CartesianFixed {
 public:
-  enum { EARTH_NAIF_CODE = 399 };
+  enum { EARTH_NAIF_CODE = 399, MOON_NAIF_CODE = 301, SUN_NAIF_CODE = 10 };
   Ecr(const GroundCoordinate& Gc);
   Ecr(double X, double Y, double Z);
   Ecr(const boost::array<double, 3>& Pos);
@@ -52,6 +52,8 @@ public:
   const;
   static Ecr sub_solar_point(const Time& T);
   static double solar_distance(const Time& T);
+  static Ecr sub_body_point(int Body_id, const Time& T);
+  static double body_distance(int Body_id, const Time& T);
   %pickle_serialization();
 };
 

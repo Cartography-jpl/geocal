@@ -5845,6 +5845,22 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
   namespace swig {
     template <>  struct traits< boost::shared_ptr< GeoCal::GroundCoordinate > > {
       typedef pointer_category category;
@@ -9286,6 +9302,97 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_LnLookVector_body_look_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  GeoCal::Time *arg2 = 0 ;
+  GeoCal::GroundCoordinate *arg3 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
+  PyObject *swig_obj[3] ;
+  GeoCal::LnLookVector result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"LnLookVector_body_look_vector",3,3,swig_obj)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "LnLookVector_body_look_vector" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LnLookVector_body_look_vector" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LnLookVector_body_look_vector" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "LnLookVector_body_look_vector" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LnLookVector_body_look_vector" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::LnLookVector::body_look_vector(arg1,(GeoCal::Time const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::LnLookVector > *smartresult = new boost::shared_ptr<  GeoCal::LnLookVector >(new GeoCal::LnLookVector((GeoCal::LnLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_LnLookVector__v_view_azimuth(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::LnLookVector *arg1 = (GeoCal::LnLookVector *) 0 ;
@@ -10273,6 +10380,68 @@ SWIGINTERN PyObject *_wrap_CartesianFixedLookVector_solar_look_vector(PyObject *
   {
     try {
       result = GeoCal::CartesianFixedLookVector::solar_look_vector((GeoCal::Time const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CartesianFixedLookVector_body_look_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  GeoCal::Time *arg2 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  GeoCal::CartesianFixedLookVector result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"CartesianFixedLookVector_body_look_vector",2,2,swig_obj)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CartesianFixedLookVector_body_look_vector" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartesianFixedLookVector_body_look_vector" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartesianFixedLookVector_body_look_vector" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::CartesianFixedLookVector::body_look_vector(arg1,(GeoCal::Time const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -13426,6 +13595,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"LnLookVector_cf_to_enu", (PyCFunction)_wrap_LnLookVector_cf_to_enu, METH_O, NULL},
 	 { (char *)"LnLookVector_enu_to_cf", (PyCFunction)_wrap_LnLookVector_enu_to_cf, METH_O, NULL},
 	 { (char *)"LnLookVector_solar_look_vector", _wrap_LnLookVector_solar_look_vector, METH_VARARGS, NULL},
+	 { (char *)"LnLookVector_body_look_vector", _wrap_LnLookVector_body_look_vector, METH_VARARGS, NULL},
 	 { (char *)"LnLookVector__v_view_azimuth", (PyCFunction)_wrap_LnLookVector__v_view_azimuth, METH_O, NULL},
 	 { (char *)"LnLookVector__v_view_zenith", (PyCFunction)_wrap_LnLookVector__v_view_zenith, METH_O, NULL},
 	 { (char *)"delete_LnLookVector", (PyCFunction)_wrap_delete_LnLookVector, METH_O, NULL},
@@ -13442,6 +13612,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_CartesianFixedLookVector", _wrap_new_CartesianFixedLookVector, METH_VARARGS, NULL},
 	 { (char *)"CartesianFixedLookVector___str__", (PyCFunction)_wrap_CartesianFixedLookVector___str__, METH_O, NULL},
 	 { (char *)"CartesianFixedLookVector_solar_look_vector", (PyCFunction)_wrap_CartesianFixedLookVector_solar_look_vector, METH_O, NULL},
+	 { (char *)"CartesianFixedLookVector_body_look_vector", _wrap_CartesianFixedLookVector_body_look_vector, METH_VARARGS, NULL},
 	 { (char *)"delete_CartesianFixedLookVector", (PyCFunction)_wrap_delete_CartesianFixedLookVector, METH_O, NULL},
 	 { (char *)"CartesianFixedLookVector_swigregister", CartesianFixedLookVector_swigregister, METH_VARARGS, NULL},
 	 { (char *)"CartesianFixedLookVector_swiginit", CartesianFixedLookVector_swiginit, METH_VARARGS, NULL},

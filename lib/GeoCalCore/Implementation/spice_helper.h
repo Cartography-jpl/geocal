@@ -108,6 +108,12 @@ public:
 				   const Time& T,
 				   boost::array<double, 3>& pout,
 				   boost::array<double, 3>& pout2);
+  static void sub_body_point_calc(const std::string& Body,
+				  const std::string& Body2,
+				  const std::string& Ref_frame,
+				  const Time& T,
+				  boost::array<double, 3>& pout,
+				  boost::array<double, 3>& pout2);
   static void state_vector(int Body_id, const std::string& Target_name,
 			   const Time& T, boost::array<double, 3>& Pos,
 			   boost::array<double, 3>& Vel);
@@ -152,6 +158,9 @@ public:
   virtual void
   sub_solar_point(int Body_id, const Time& T, CartesianFixed& P);
   virtual double solar_distance(int Body_id, const Time& T);
+  virtual void
+  sub_body_point(int Body_id, int Body2_id, const Time& T, CartesianFixed& P);
+  virtual double body_distance(int Body_id, int Body2_id, const Time& T);
 };
 
 /****************************************************************//**

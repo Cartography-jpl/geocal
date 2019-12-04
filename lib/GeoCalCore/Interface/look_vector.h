@@ -296,6 +296,7 @@ public:
   virtual void print(std::ostream& Os) const;
 
   static CartesianFixedLookVector solar_look_vector(const Time& T);
+  static CartesianFixedLookVector body_look_vector(int Body_id, const Time& T);
 private:
   friend class boost::serialization::access;
   template<class Archive>
@@ -433,6 +434,8 @@ public:
   
   static LnLookVector solar_look_vector(const Time& T, 
 					const GroundCoordinate& Ref_pt);
+  static LnLookVector body_look_vector(int Body_id, const Time& T, 
+				       const GroundCoordinate& Ref_pt);
 private:
   friend class boost::serialization::access;
   template<class Archive>

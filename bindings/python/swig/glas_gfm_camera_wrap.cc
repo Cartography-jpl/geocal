@@ -10173,8 +10173,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GlasGfmCamera_field_alignment_block", _wrap_GlasGfmCamera_field_alignment_block, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)\n"
+		"void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample)\n"
+		"Populate the field_alignment, first_line_block, first_sample_block,\n"
+		"delta_line and delta_sample to match the given camera.\n"
 		"\n"
+		"This creates only one block - we currently don't support multiple\n"
+		"blocks \n"
 		""},
 	 { (char *)"delete_GlasGfmCamera", (PyCFunction)_wrap_delete_GlasGfmCamera, METH_O, (char *)"\n"
 		"\n"

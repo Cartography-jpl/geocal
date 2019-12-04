@@ -5769,6 +5769,22 @@ SWIGINTERN boost::shared_ptr< GeoCal::Geodetic > GeoCal_Ecr_convert_to_geodetic(
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -7080,6 +7096,127 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Ecr_sub_body_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  GeoCal::Time *arg2 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  GeoCal::Ecr result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Ecr_sub_body_point",2,2,swig_obj)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Ecr_sub_body_point" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Ecr_sub_body_point" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Ecr_sub_body_point" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::Ecr::sub_body_point(arg1,(GeoCal::Time const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::Ecr > *smartresult = new boost::shared_ptr<  GeoCal::Ecr >(new GeoCal::Ecr((GeoCal::Ecr &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ecr_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Ecr_body_distance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  GeoCal::Time *arg2 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"Ecr_body_distance",2,2,swig_obj)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Ecr_body_distance" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Ecr_body_distance" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Ecr_body_distance" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (double)GeoCal::Ecr::body_distance(arg1,(GeoCal::Time const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_Ecr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Ecr *arg1 = (GeoCal::Ecr *) 0 ;
@@ -7189,6 +7326,21 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"double Ecr::solar_distance(const Time &T)\n"
 		"Solar distance at given time.\n"
+		"\n"
+		"This is AU (which is defined to be exactly 149597870700 meter). \n"
+		""},
+	 { (char *)"Ecr_sub_body_point", _wrap_Ecr_sub_body_point, METH_VARARGS, (char *)"\n"
+		"\n"
+		"Ecr Ecr::sub_body_point(int Body_id, const Time &T)\n"
+		"Return the subbody point for the given time.\n"
+		"\n"
+		"This is the point on the surface of the reference ellipsoid that lies\n"
+		"on the line from the center of the earth to the sun. \n"
+		""},
+	 { (char *)"Ecr_body_distance", _wrap_Ecr_body_distance, METH_VARARGS, (char *)"\n"
+		"\n"
+		"double Ecr::body_distance(int Body_id, const Time &T)\n"
+		"Body distance at given time.\n"
 		"\n"
 		"This is AU (which is defined to be exactly 149597870700 meter). \n"
 		""},
@@ -8704,6 +8856,8 @@ SWIG_init(void) {
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Ecr), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Ecr > > ("boost::shared_ptr< GeoCal::Ecr > *"));
   
   SWIG_Python_SetConstant(d, "Ecr_EARTH_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::Ecr::EARTH_NAIF_CODE)));
+  SWIG_Python_SetConstant(d, "Ecr_MOON_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::Ecr::MOON_NAIF_CODE)));
+  SWIG_Python_SetConstant(d, "Ecr_SUN_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::Ecr::SUN_NAIF_CODE)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

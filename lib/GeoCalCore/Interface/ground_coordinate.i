@@ -86,6 +86,8 @@ public:
       enu_to_cf(const GroundCoordinate& Ref_pt);
   static LnLookVector solar_look_vector(const Time& T, 
 					const GroundCoordinate& Ref_pt);
+  static LnLookVector body_look_vector(int Body_id, const Time& T, 
+				       const GroundCoordinate& Ref_pt);
   %python_attribute(view_azimuth, double)
   %python_attribute(view_zenith, double)
   %pickle_serialization();
@@ -145,6 +147,7 @@ public:
   // CartesianFixedLookVector(const boost::math::quaternion<double>& V);
   std::string print_to_string() const;
   static CartesianFixedLookVector solar_look_vector(const Time& T);
+  static CartesianFixedLookVector body_look_vector(int Body_id, const Time& T);
   %pickle_serialization();
 };
 

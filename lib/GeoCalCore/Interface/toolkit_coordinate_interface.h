@@ -92,11 +92,25 @@ public:
   sub_solar_point(int Body_id, const Time& T, CartesianFixed& P) = 0;
 
 //-----------------------------------------------------------------------
+/// Return the sub body2 point on the given body2 for the give time.
+//-----------------------------------------------------------------------
+
+  virtual void 
+  sub_body_point(int Body_id, int Body2_id, const Time& T, CartesianFixed& P) = 0;
+  
+//-----------------------------------------------------------------------
 /// Return distance from body to the sun, at the given time. Results
 /// in meters.
 //-----------------------------------------------------------------------
 
   virtual double solar_distance(int Body_id, const Time& T) = 0;
+
+//-----------------------------------------------------------------------
+/// Return distance from body to the body2, at the given time. Results
+/// in meters.
+//-----------------------------------------------------------------------
+
+  virtual double body_distance(int Body_id, int Body2_id, const Time& T) = 0;
 };
 
 }

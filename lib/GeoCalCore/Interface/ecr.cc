@@ -248,6 +248,20 @@ Ecr Ecr::sub_solar_point(const Time& T)
 }
 
 //-----------------------------------------------------------------------
+/// Return the subbody point for the given time. This is the point on
+/// the surface of the reference ellipsoid that lies on the line
+/// from the center of the earth to the sun.
+//-----------------------------------------------------------------------
+
+Ecr Ecr::sub_body_point(int Body_id, const Time& T)
+{
+  Ecr res;
+  CartesianFixed::toolkit_coordinate_interface->
+    sub_body_point((int) EARTH_NAIF_CODE, Body_id, T, res);
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Solar distance at given time. This is AU (which is defined to be
 /// exactly 149597870700 meter).
 //-----------------------------------------------------------------------
@@ -257,4 +271,18 @@ double Ecr::solar_distance(const Time& T)
   const double one_au = 149597870700;
   return CartesianFixed::toolkit_coordinate_interface->
     solar_distance((int) EARTH_NAIF_CODE, T) / one_au;
+}
+
+//-----------------------------------------------------------------------
+/// Body distance at given time. This is AU (which is defined to be
+/// exactly 149597870700 meter).
+//-----------------------------------------------------------------------
+
+double Ecr::body_distance(int Body_id, const Time& T)
+{
+  // Not really clear if we actually want this in AU, but for now do
+  // that to match the solar_distance.
+  const double one_au = 149597870700;
+  return CartesianFixed::toolkit_coordinate_interface->
+    body_distance((int) EARTH_NAIF_CODE, Body_id, T) / one_au;
 }

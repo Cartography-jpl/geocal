@@ -608,8 +608,12 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
     def field_alignment_block(self, *args):
         """
 
-        void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)
+        void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample)
+        Populate the field_alignment, first_line_block, first_sample_block,
+        delta_line and delta_sample to match the given camera.
 
+        This creates only one block - we currently don't support multiple
+        blocks 
         """
         return _glas_gfm_camera.GlasGfmCamera_field_alignment_block(self, *args)
 

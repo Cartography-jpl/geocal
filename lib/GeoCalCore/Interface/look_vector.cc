@@ -228,6 +228,17 @@ CartesianFixedLookVector CartesianFixedLookVector::solar_look_vector
 }
 
 //-----------------------------------------------------------------------
+/// Return the body look vector, which points from the center of the
+/// the earth to the body.
+//-----------------------------------------------------------------------
+
+CartesianFixedLookVector CartesianFixedLookVector::body_look_vector
+(int Body_id, const Time& T)
+{
+  return CartesianFixedLookVector(Ecr::sub_body_point(Body_id, T).position);
+}
+
+//-----------------------------------------------------------------------
 /// Return the solar look vector, which points from the given
 /// reference point to the sun in the local north coordinates. Can
 /// calculate solar zenith and azimuth from this.
@@ -238,6 +249,20 @@ LnLookVector LnLookVector::solar_look_vector
  const GroundCoordinate& Ref_pt)
 {
   return LnLookVector(CartesianFixedLookVector::solar_look_vector(T), Ref_pt);
+}
+
+//-----------------------------------------------------------------------
+/// Return the body look vector, which points from the given
+/// reference point to the body in the local north coordinates. Can
+/// calculate body zenith and azimuth from this.
+//-----------------------------------------------------------------------
+
+LnLookVector LnLookVector::body_look_vector
+(int Body_id, const Time& T, 
+ const GroundCoordinate& Ref_pt)
+{
+  return LnLookVector(CartesianFixedLookVector::body_look_vector(Body_id, T),
+		      Ref_pt);
 }
 
 //-----------------------------------------------------------------------

@@ -9,6 +9,7 @@ from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance,
                          OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
                          KeplerOrbit, Time, OrbitDes)
 import os
+import math
 
 def create_image_seg(f):
     img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8,
@@ -164,6 +165,21 @@ def test_illumb(isolated_dir):
     t.sun_elev[0] = 90.0 - slv.view_zenith
     t.sun_azimuth[0] = slv.view_azimuth
 
+    # Moon angles
+    mlv = LnLookVector.body_look_vector(Ecr.MOON_NAIF_CODE, igc.pixel_time(ic_center), gc_center)
+    t.existence_mask |= 0x200000
+    # We happen to have zenith angle in geocal, not elevation. Convert since
+    # tre wants the elevation
+    t.moon_elev[0] = 90.0 - mlv.view_zenith
+    t.moon_azimuth[0] = mlv.view_azimuth
+
+    # Phase angle, I'm pretty sure this is right but should verify if it
+    # matters
+    t1 = np.array([*slv.direction])
+    t2 = np.array([*mlv.direction])
+    t.existence_mask |= 0x100000
+    t.moon_phase_angle[0] = math.degrees(math.acos(np.dot(t1, t2)))
+    
     # View angles
     vlv = LnLookVector(igc.cf_look_vector_lv(ic_center), gc_center)
     t.existence_mask |= 0x020000

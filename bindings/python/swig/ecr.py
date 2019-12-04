@@ -193,6 +193,8 @@ class Ecr(geocal_swig.ground_coordinate.CartesianFixed):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     EARTH_NAIF_CODE = _ecr.Ecr_EARTH_NAIF_CODE
+    MOON_NAIF_CODE = _ecr.Ecr_MOON_NAIF_CODE
+    SUN_NAIF_CODE = _ecr.Ecr_SUN_NAIF_CODE
 
     def __init__(self, *args):
         """
@@ -254,6 +256,31 @@ class Ecr(geocal_swig.ground_coordinate.CartesianFixed):
 
     solar_distance = staticmethod(solar_distance)
 
+    def sub_body_point(Body_id, T):
+        """
+
+        Ecr Ecr::sub_body_point(int Body_id, const Time &T)
+        Return the subbody point for the given time.
+
+        This is the point on the surface of the reference ellipsoid that lies
+        on the line from the center of the earth to the sun. 
+        """
+        return _ecr.Ecr_sub_body_point(Body_id, T)
+
+    sub_body_point = staticmethod(sub_body_point)
+
+    def body_distance(Body_id, T):
+        """
+
+        double Ecr::body_distance(int Body_id, const Time &T)
+        Body distance at given time.
+
+        This is AU (which is defined to be exactly 149597870700 meter). 
+        """
+        return _ecr.Ecr_body_distance(Body_id, T)
+
+    body_distance = staticmethod(body_distance)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -283,6 +310,27 @@ def Ecr_solar_distance(T):
     This is AU (which is defined to be exactly 149597870700 meter). 
     """
     return _ecr.Ecr_solar_distance(T)
+
+def Ecr_sub_body_point(Body_id, T):
+    """
+
+    Ecr Ecr::sub_body_point(int Body_id, const Time &T)
+    Return the subbody point for the given time.
+
+    This is the point on the surface of the reference ellipsoid that lies
+    on the line from the center of the earth to the sun. 
+    """
+    return _ecr.Ecr_sub_body_point(Body_id, T)
+
+def Ecr_body_distance(Body_id, T):
+    """
+
+    double Ecr::body_distance(int Body_id, const Time &T)
+    Body distance at given time.
+
+    This is AU (which is defined to be exactly 149597870700 meter). 
+    """
+    return _ecr.Ecr_body_distance(Body_id, T)
 
 
 __all__ = ["Ecr"]

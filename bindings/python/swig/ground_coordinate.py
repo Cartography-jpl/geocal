@@ -557,6 +557,7 @@ class LnLookVector(geocal_swig.look_vector.LookVectorDouble):
     cf_to_enu = staticmethod(_ground_coordinate.LnLookVector_cf_to_enu)
     enu_to_cf = staticmethod(_ground_coordinate.LnLookVector_enu_to_cf)
     solar_look_vector = staticmethod(_ground_coordinate.LnLookVector_solar_look_vector)
+    body_look_vector = staticmethod(_ground_coordinate.LnLookVector_body_look_vector)
 
     @property
     def view_azimuth(self):
@@ -590,6 +591,10 @@ LnLookVector_enu_to_cf = _ground_coordinate.LnLookVector_enu_to_cf
 def LnLookVector_solar_look_vector(T, Ref_pt):
     return _ground_coordinate.LnLookVector_solar_look_vector(T, Ref_pt)
 LnLookVector_solar_look_vector = _ground_coordinate.LnLookVector_solar_look_vector
+
+def LnLookVector_body_look_vector(Body_id, T, Ref_pt):
+    return _ground_coordinate.LnLookVector_body_look_vector(Body_id, T, Ref_pt)
+LnLookVector_body_look_vector = _ground_coordinate.LnLookVector_body_look_vector
 
 class LnLookVectorWithDerivative(geocal_swig.look_vector.LookVectorAutoDerivativeDouble):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -626,6 +631,7 @@ class CartesianFixedLookVector(geocal_swig.look_vector.LookVectorDouble):
     def __init__(self, *args):
         _ground_coordinate.CartesianFixedLookVector_swiginit(self, _ground_coordinate.new_CartesianFixedLookVector(*args))
     solar_look_vector = staticmethod(_ground_coordinate.CartesianFixedLookVector_solar_look_vector)
+    body_look_vector = staticmethod(_ground_coordinate.CartesianFixedLookVector_body_look_vector)
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
@@ -638,6 +644,10 @@ CartesianFixedLookVector_swigregister(CartesianFixedLookVector)
 def CartesianFixedLookVector_solar_look_vector(T):
     return _ground_coordinate.CartesianFixedLookVector_solar_look_vector(T)
 CartesianFixedLookVector_solar_look_vector = _ground_coordinate.CartesianFixedLookVector_solar_look_vector
+
+def CartesianFixedLookVector_body_look_vector(Body_id, T):
+    return _ground_coordinate.CartesianFixedLookVector_body_look_vector(Body_id, T)
+CartesianFixedLookVector_body_look_vector = _ground_coordinate.CartesianFixedLookVector_body_look_vector
 
 
 def distance(G1, G2):

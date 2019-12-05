@@ -15,7 +15,7 @@ import os
 # Backdoor to suppress putting Rsm in place. Useful for example with
 # nitfinfo where we might want to look at the raw nitf values.
 suppress_rsm = False
-if("NITF_USE_RAW_RSM" in os.environ):
+if("NITF_USE_RAW" in os.environ):
     suppress_rsm = True
     
 # ****************************************************************************

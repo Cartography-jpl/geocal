@@ -24,5 +24,10 @@ if("@have_msp@" == "yes") then
        setenv LD_LIBRARY_PATH @MSP_PREFIX@/lib
     endif
 endif
+if ($?NITF_PLUGIN) then
+  setenv NITF_PLUGIN geocal:${NITF_PLUGIN}
+else
+  setenv NITF_PLUGIN geocal
+endif
 
 

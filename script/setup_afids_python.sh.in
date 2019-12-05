@@ -24,3 +24,8 @@ if [ "@have_msp@" = "yes" ]; then
 	export LD_LIBRARY_PATH=@MSP_PREFIX@/lib
     fi
 fi
+if [ -n "$NITF_PLUGIN" ]; then
+  export NITF_PLUGIN=geocal:${NITF_PLUGIN}
+else
+  export NITF_PLUGIN=geocal
+fi

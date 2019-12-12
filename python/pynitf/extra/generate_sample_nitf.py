@@ -1,23 +1,5 @@
-#======================================================================
-# Example of creating a simple nitf file
-#======================================================================
+#! /usr/bin/env python
 
-from pynitf.nitf_file import *
-from pynitf.nitf_image import *
-from pynitf.nitf_tre_csde import *
-from pynitf.nitf_tre_csepha import *
-from pynitf.nitf_tre_piae import *
-from pynitf.nitf_tre_rpc import *
-from pynitf.nitf_tre_geosde import *
-from pynitf.nitf_tre_histoa import *
-from pynitf.nitf_tre_bandsb import *
-from pynitf.nitf_tre_engrda import *
-from pynitf.nitf_des import *
-from pynitf.nitf_des_csatta import *
-from pynitf.nitf_des_csattb import *
-from pynitf.nitf_des_csephb import *
-from pynitf.nitf_des_ext_def_content import *
-from pynitf_test_support import *
 import copy
 import json
 import six
@@ -25,6 +7,9 @@ import numpy as np
 import hashlib
 import h5py
 import time
+import os
+
+from pynitf import *
 
 def createHISTOA():
 
@@ -88,6 +73,26 @@ def createBANDSB():
 
     return t
 
+def createILLUMB():
+    t = TreILLUMB()
+
+    # Set some values
+    t.num_bands = 1
+    t.band_unit = "Some band unit of measure"
+    t.lbound[0] = 17.0
+    t.ubound[0] = 42.0
+    t.num_others = 0
+    t.num_coms = 1
+    t.comment[0] = "Blah blah blah"
+    t.existence_mask = 0x000000
+    t.num_illum_sets = 1
+    t.datetime[0] = "Today"
+    t.target_lat[0] = 35.0
+    t.target_lon[0] = -130.0
+    t.target_hgt[0] = 1000.0
+
+    return t
+
 def createENGRDA():
 
     t = TreENGRDA()
@@ -115,29 +120,32 @@ def write_by_row_p(d, bstart, lstart, sstart):
             #print(a*20+b*30)
             d[a, b] = a*20+b*30
 
-def test_main(isolated_dir):
+if __name__ ==  "__main__":
     # Create the file. We don't supply a name yet, that comes when we actually
     # write
 
-    nitf_1 = 'basic_nitf.ntf'
-    nitf_2 = 'basic_nitf2.ntf'
-    nitf_3 = 'basic_nitf3.ntf'
+    nitf_1 = 'sample_nitf.ntf'
 
     f = NitfFile()
 
-    # Create a NitfImage source. The particular one we have here just puts all
-    # the data into a numpy array, which is nice for testing. We'll probably
-    # need to write other image sources (although most things can go to a
-    # numpy array, so maybe not).
-    img = NitfImageWriteNumpy(10, 10, np.uint8)
-    for i in range(10):
-        for j in range(10):
-            img[0,i,j] = i + j
+    #Let's generate 50 images
 
-    # We just directly add this to the NitfFile. We need to wrap this as a
-    # NitfImageSegment (which adds the subheader). f.image_segment here is
-    # just a normal python array.
-    f.image_segment.append(NitfImageSegment(img))
+    for t in range(50):
+        # Create a NitfImage source. The particular one we have here just puts all
+        # the data into a numpy array, which is nice for testing. We'll probably
+        # need to write other image sources (although most things can go to a
+        # numpy array, so maybe not).
+        img = NitfImageWriteNumpy(1000, 1000, np.uint16)
+        for i in range(1000):
+            for j in range(1000):
+                img[0,i,j] = t*(i + j)
+
+        # We just directly add this to the NitfFile. We need to wrap this as a
+        # NitfImageSegment (which adds the subheader). f.image_segment here is
+        # just a normal python array.
+        seg = NitfImageSegment(img)
+        seg.tre_list.append(createILLUMB())
+        f.image_segment.append(seg)
 
     # Create a larger img segment
     img2 = NitfImageWriteDataOnDemand(nrow=30, ncol=30, data_type=np.uint8,
@@ -217,7 +225,7 @@ def test_main(isolated_dir):
     d.dt_att = 900.5
     d.date_att = 20170501
     d.t0_att = 235959.100001000
-    d.num_att = 5
+    d.num_att = 5000
     for n in range(d.num_att):
         d.q1[n] = -0.11111
         d.q2[n] = -0.11111
@@ -237,7 +245,7 @@ def test_main(isolated_dir):
         ds3.aisdlvl[i] = 5 + i
     ds3.reservedsubh_len = 0
 
-    r = 100
+    r = 1000
     offset1 = 1000
     offset2 = 2000
     d = DesCSEPHB(user_subheader=ds3)
@@ -289,75 +297,4 @@ def test_main(isolated_dir):
     # Now we write out to a nitf file
     f.write(nitf_1)
 
-    print(os.getcwd())
 
-    # We can also read this back in
-    f2 = NitfFile(nitf_1)
-
-    # And the actual data (not normally done since most images are too large to
-    # print the values
-    print("Image Data:")
-    print(f2.image_segment[0].data.data)
-
-    if False:
-        bandsb = f2.image_segment[2].tre_list[1]
-        assert bandsb.count == 5
-        assert bandsb.existence_mask == 0x00000001
-
-    print("Text Data:")
-    print(f2.text_segment[0].data)
-
-    assert f2.des_segment[0].subheader.desid == 'CSATTB'
-    csattb = f2.des_segment[0].des
-    assert csattb.dt_att == 900.5
-    assert csattb.date_att == 20170501
-    assert csattb.t0_att == 235959.100001000
-    csattb_uh = f2.des_segment[0].des.user_subheader
-    assert csattb_uh.id == '4385ab47-f3ba-40b7-9520-13d6b7a7f311'
-    assert csattb_uh.numais == '010'
-    print(f2.des_segment[0])
-    print(csattb)
-
-    assert f2.des_segment[1].subheader.desid == 'CSEPHB'
-    csephb = f2.des_segment[1].des
-    assert csephb.dt_ephem == 900.5
-    assert csephb.date_ephem == 20170501
-    assert csephb.t0_ephem == 235959.100001000
-    csephb_uh = f2.des_segment[1].des.user_subheader
-    assert csephb_uh.id == '4385ab47-f3ba-40b7-9520-13d6b7a7f31b'
-    assert csephb_uh.numais == '011'
-
-    
-    assert f2.des_segment[2].subheader.desid == 'EXT_DEF_CONTENT'
-    # Come back to this, doesn't currently work
-    if(False):
-        ext_uh = f2.des_segment[2].des.user_subheader
-        assert ext_uh.content_headers_len == 3
-        assert ext_uh.content_headers == b'1:2'
-
-    print (f2.image_segment[2].tre_list)
-    assert f2.image_segment[2].find_one_tre("HISTOA") is not None
-    assert f2.image_segment[2].find_one_tre("BANDSB") is not None
-    assert f2.image_segment[2].find_one_tre("FAKE") is None
-    
-    # We can't really use NitfImageReadNumpy for blocked data. This special
-    # case of writing by row does work, but general blocking doesn't. We'll
-    # probably add blocking support with some more direct code (e.g.,
-    # GdalMultiBand in GeoCal).
-    if(False):
-        reshaped_data = f2.image_segment[2].data.data.reshape(300, 400, 50)
-        print(reshaped_data[50,:,:])
-
-    # We then print out a description of the file
-    #print(f2.summary())
-    #print(f2)
-
-    # Write back the file. Two files should be identical
-    f2.write("basic_nitf2.ntf")
-    md5_1 = hashlib.md5(open(nitf_1,'rb').read()).hexdigest()
-    md5_2 = hashlib.md5(open(nitf_2,'rb').read()).hexdigest()
-    assert md5_1 == md5_2
-
-    # Write back the file that we just read in after removing an image
-    f2.image_segment.remove(f2.image_segment[1])
-    f2.write(nitf_3)

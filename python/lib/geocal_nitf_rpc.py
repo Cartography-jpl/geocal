@@ -46,9 +46,10 @@ if(have_pynitf):
             # Currently only handle one RPC TRE.
             t1 = seg.find_one_tre('RPC00A')
             t2 = seg.find_one_tre('RPC00B')
-            if(t1 and t2):
-                raise RuntimeError("Found more than one RPC TRE")
-            t = t1 or t2
+            # Sometimes a file has both an A and a B. We follow
+            # what GDAL does, and prefer the B, only using A if
+            # there is no B.
+            t = t2 if t2 else t1
             if(t):
                 seg.rpc = t.rpc
             else:

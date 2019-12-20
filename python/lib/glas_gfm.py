@@ -150,8 +150,11 @@ if(have_pynitf):
                         d.add_assoc_elem(d2)
             return res
 
-        def igc(self, dem = SimpleDem()):
-            '''Return ImageGroundConnection for GLAS/GFM'''
+        def igc(self, include_image = False, dem = SimpleDem()):
+            '''Return ImageGroundConnection for GLAS/GFM.
+            You can either have the raster_image or raster_image_multi_band
+            from the NitfFile included in the igc or not, based on the 
+            include_image.'''
             orb = self.orbit
             cam = self.camera
             if(cam.sensor_type == "S"):
@@ -172,6 +175,12 @@ if(have_pynitf):
             igc.payload_id = self.tre_csexrb.payload_id
             igc.sensor_id = self.tre_csexrb.sensor_id
             igc.dyanmic_range = self.tre_csexrb.dynamic_range
+            if(include_image):
+                mb = self.iseg.raster_image_multi_band
+                if(mb.number_band == 1):
+                    igc.image = self.iseg.raster_image
+                else:
+                    igc.image_multi_band = mb
             return igc
 
         @property

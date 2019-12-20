@@ -9,6 +9,7 @@ import os
 import sys
 import subprocess
 import pytest
+import warnings
 try:
     from pynitf import NitfFile
     have_pynitf = True
@@ -54,10 +55,17 @@ def nitf_sample_files(isolated_dir):
 
 @pytest.yield_fixture(scope="function")
 def nitf_sample_rip(nitf_sample_files):
+    # Older version, but newer version of file doesn't work with MSP software
     fname = nitf_sample_files + "rip/07APR2005_Hyperion_331405N0442002E_SWIR172_001_L1R.ntf"
-    if(os.path.exists(fname)):
-        return fname
-    pytest.skip("Required file %s not found, so skipping test" % fname)
+    # Suppress warnings messages about MATESA. This has changed, but since
+    # we can't use the newer version of the RIP we just suppress the warning
+    with warnings.catch_warnings():
+        warnings.filterwarnings(action="ignore",
+                                message=".*Error while reading TRE b'MATESA'.*")
+        if(os.path.exists(fname)):
+            yield fname
+        else:
+            pytest.skip("Required file %s not found, so skipping test" % fname)
     
 def cmd_exists(cmd):
     '''Check if a cmd exists by using type, which returns a nonzero status if
@@ -402,5 +410,38 @@ def mars_test_data():
     if(not os.path.exists(res)):
         raise SkipTest
     return res
-                                       
+
+@pytest.fixture(scope="function")
+def igc_gfm():
+    '''Sample GFM IGC'''
+    tdata = Time.parse_time("2003-01-01T11:11:00Z")
+    orb = KeplerOrbit()
+    porb = PosCsephb(orb, tdata-10.0,tdata+10.0, 0.5, PosCsephb.LINEAR,
+                     PosCsephb.NO_LAGRANGE, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    aorb = AttCsattb(orb, tdata-10.0,tdata+10.0, 0.5, AttCsattb.LINEAR,
+                     AttCsattb.NO_LAGRANGE, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+    orb = OrbitDes(porb,aorb)
+    cam = GlasGfmCamera(2048, 2048)
+    cam.focal_length = 123.8e-3
+    cam.focal_length_time = orb.min_time
+    cam.first_line_block = [0]
+    cam.first_sample_block = [0]
+    cam.delta_line_block = [2048]
+    cam.delta_sample_block = [2048]
+    fa = np.empty((1,1,2,2,2))
+    fa[0,0,:,0,0] = -1024 * 21e-6
+    fa[0,0,:,1,0] = 1024 * 21e-6
+    fa[0,0,0,:,1] = 1024 * 21e-6
+    fa[0,0,1,:,1] = -1024 * 21e-6
+    cam.field_alignment_block(0,fa)
+    
+    igc = OrbitDataImageGroundConnection(orb, tdata, cam, SimpleDem(),
+                                          None)
+    igc.platform_id = "FAKEPL"
+    igc.payload_id = "FAKEPY"
+    igc.sensor_id = "FAKESN"
+    return igc
+
        

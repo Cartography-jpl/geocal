@@ -1,7 +1,7 @@
-from geocal_swig import (GdalMultiBand)
+from geocal_swig import (GdalMultiBand, GdalRasterImage)
 try:
     from pynitf import(register_image_class, NitfImageCannotHandle,
-                       NitfImageWithSubset)
+                       NitfImageWithSubset, NitfImageSegment)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
@@ -74,6 +74,25 @@ if(have_pynitf):
 
     # Try this after the classes in pynitf have been tried.
     register_image_class(NitfImageGdal, priority_order=1)
+
+    # Alternative interface, access a nitf image segment as a GdalRasterImage
+    def _gdal_multi_band(self):
+        '''Access a NITF image as a GdalMultiBand.'''
+        if self.nitf_file is None:
+            raise RuntimeError("Need nitf_file to get gdal_multi_band")
+        if self.nitf_file.file_name is None:
+            raise RuntimeError("Need nitf_file.file_name to get gdal_multi_band")
+        segindex = [t for t, iseg in enumerate(self.nitf_file.image_segment)
+                    if iseg is self][0]
+        return GdalMultiBand("NITF_IM:%d:%s" % (segindex, self.nitf_file.file_name))
+
+    def _gdal_raster_image(self):
+        '''Because it is pretty common to have a 1 band image, return
+        the data as a raster image.'''
+        return _gdal_multi_band(self).gdal_raster_image(0)
+
+    NitfImageSegment.raster_image_multi_band = property(_gdal_multi_band)
+    NitfImageSegment.raster_image = property(_gdal_raster_image)
 
 if(have_pynitf):
     __all__ = ["NitfImageGdal",]

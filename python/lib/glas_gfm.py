@@ -89,7 +89,14 @@ if(have_pynitf):
             # we are then force a new object to be created.
             for t1 in (orb.pos_csephb, orb.att_csattb, cam):
                 t2 = f.find_des_by_uuid(t1.id)
-                if(t2 and t2.user_subheader_size > 9500):
+                # We has originally checked t2.user_subheader_size > 9500,
+                # but this turns out to be a bit slow. Sufficient just to
+                # look at num_assoc_elem, the cuttoff here is about the same
+                # as the user_subheader_size. We can switch back if needed
+                # for some reason, we are just trying to make sure
+                # t2.user_subheader_size fits into 9999, which is the size
+                # of the desshl in the nitf DES subheader.
+                if(t2 and t2.user_subheader.num_assoc_elem > 240):
                     t1.id = ""
             iseg.orbit_des = orb
             iseg.camera_glas_gfm = cam
@@ -151,7 +158,7 @@ if(have_pynitf):
                 time.sleep(0.01)
             cscsdb.id = f.fake_cscsdb_uuid
             d = f.find_des_by_uuid(cscsdb.id)
-            if(d and d.user_subheader_size > 9500):
+            if(d and d.user_subheader.num_assoc_elem > 240):
                 d = None
                 f.fake_cscsdb_uuid = str(uuid.uuid1())
                 time.sleep(0.01)

@@ -7,6 +7,9 @@ from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
                                geocal_time_to_nitf_date_second_field,
                                geocal_time_to_timestamp,
                                timestamp_to_geocal_time)
+import time
+import uuid
+import io
 try:
     import pynitf
     from .geocal_nitf_des import(DesCSEPHB_geocal, DesCSATTB_geocal)
@@ -80,7 +83,14 @@ if(have_pynitf):
             f = iseg.nitf_file
 
             # Get position, attitude and camera DES if already in file,
-            # or create 
+            # or create.
+
+            # Check if we are too close to the maximum user header size, if
+            # we are then force a new object to be created.
+            for t1 in (orb.pos_csephb, orb.att_csattb, cam):
+                t2 = f.find_des_by_uuid(t1.id)
+                if(t2 and t2.user_subheader_size > 9500):
+                    t1.id = ""
             iseg.orbit_des = orb
             iseg.camera_glas_gfm = cam
             res.des.append(f.find_des_by_uuid(orb.pos_csephb.id))
@@ -132,9 +142,20 @@ if(have_pynitf):
             #cscsdb.sample_spdcf     = 10
             cscsdb.spdcf_flag       = 0
             cscsdb.direct_covariance_flag = 0
-            # Use fixed ID for being able to fake this.
-            cscsdb.id = "756a9c88-c536-11e9-b453-782bcb6d0983"
+            # Use uuid. Stash in file since we don't really have another
+            # place for this.
+            if(not hasattr(f, "fake_cscsdb_uuid")):
+                f.fake_cscsdb_uuid = None
+            if(f.fake_cscsdb_uuid is None):
+                f.fake_cscsdb_uuid = str(uuid.uuid1())
+                time.sleep(0.01)
+            cscsdb.id = f.fake_cscsdb_uuid
             d = f.find_des_by_uuid(cscsdb.id)
+            if(d and d.user_subheader_size > 9500):
+                d = None
+                f.fake_cscsdb_uuid = str(uuid.uuid1())
+                time.sleep(0.01)
+                cscsdb.id = f.fake_cscsdb_uuid
             if(d is None):
                 f.des_segment.append(pynitf.NitfDesSegment(des=cscsdb))
                 d = cscsdb

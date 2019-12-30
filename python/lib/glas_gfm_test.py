@@ -259,7 +259,7 @@ def test_create_gfm(isolated_dir, igc_gfm):
     print(max_diff2)
     assert max_diff1 < 1.0
 
-@skip    
+@long_test
 @require_msp    
 @require_pynitf
 def test_create_many_gfm(isolated_dir, igc_gfm):
@@ -289,7 +289,7 @@ def test_create_many_gfm(isolated_dir, igc_gfm):
         print(f2,file=fh)
     for iseg in f2.image_segment:
         igc2 = iseg.glas_gfm.igc()
-        ic = ImageCoordinate(i, j)
+        ic = ImageCoordinate(10, 20)
         assert distance(igc_gfm.ground_coordinate(ic),
                         igc2.ground_coordinate(ic)) < 1e-2
     

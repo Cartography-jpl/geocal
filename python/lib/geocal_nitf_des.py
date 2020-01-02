@@ -29,15 +29,16 @@ This should be used to set and read the DES values.
     DesCSEPHB_geocal.desid = DesCSEPHB.desid
     DesCSEPHB_geocal.desver = DesCSEPHB.desver
     def _descsephb_handle_diff(self, t):
-        '''Handle difference checking between 2 DesCSEPHB_geocal'''
-        return (self.interpolation_type == t.interpolation_type and
-                self.ephemeris_data_quality == t.ephemeris_data_quality and
-                self.ephemeris_source == t.ephemeris_source and
-                self.lagrange_order == t.lagrange_order and
-                self.is_cf == t.is_cf and
-                self.min_time == self.min_time and
-                abs(self.time_step - t.time_step) < 1e-6 and
-                np.all_class(self.position_data, t.position_data))
+        p1 = self.pos_csephb
+        p2 = t.pos_csephb
+        return (p1.interpolation_type == p2.interpolation_type and
+                p1.ephemeris_data_quality == p2.ephemeris_data_quality and
+                p1.ephemeris_source == p2.ephemeris_source and
+                p1.lagrange_order == p2.lagrange_order and
+                p1.is_cf == p2.is_cf and
+                p1.min_time == p1.min_time and
+                abs(p1.time_step - p2.time_step) < 1e-6 and
+                np.allclose(p1.position_data, p2.position_data))
     
     DesCSEPHB_geocal.handle_diff = _descsephb_handle_diff
 
@@ -63,8 +64,6 @@ This should be used to set and read the DES values.
         '''Handle difference checking between 2 DesCSATTB_geocal'''
         d1 = self.att_csattb
         d2 = t.att_csattb
-        print(d1)
-        print(d2)
         return (d1.interpolation_type == d2.interpolation_type and
                 d1.attitude_data_quality == d2.attitude_data_quality and
                 d1.attitude_source == d2.attitude_source and

@@ -2,7 +2,7 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
                          Quaternion_double, FrameCoordinate)
 try:
     from pynitf import (DesCSEPHB, DesCSATTB, create_nitf_des_structure,
-                        DesCSSFAB,
+                        DesCSSFAB, 
                         register_des_class, NitfImageSegment,
                         add_uuid_des_function, NitfFile, NitfDesSegment)
     have_pynitf = True
@@ -28,6 +28,7 @@ This should be used to set and read the DES values.
     (DesCSEPHB_geocal, DesCSEPHB_UH_geocal) = create_nitf_des_structure("DesCSEPHB", DesCSEPHB._desc_data, DesCSEPHB._desc_uh, hlp=hlp_csephb, des_implementation_field="pos_csephb", des_implementation_class=PosCsephb)
     DesCSEPHB_geocal.desid = DesCSEPHB.desid
     DesCSEPHB_geocal.desver = DesCSEPHB.desver
+    DesCSEPHB_geocal.uh_class = DesCSEPHB.uh_class
     def _descsephb_handle_diff(self, t):
         p1 = self.pos_csephb
         p2 = t.pos_csephb
@@ -46,7 +47,7 @@ This should be used to set and read the DES values.
     # gets used to read the data instead of DesCSEPHB
 
     add_uuid_des_function(DesCSEPHB_geocal)    
-    register_des_class(DesCSEPHB_geocal, priority_order=-1)
+    register_des_class(DesCSEPHB_geocal, priority_order=1)
 
     if(DesCSATTB.__doc__ is not None):
         hlp_csattb = DesCSATTB.__doc__ + \
@@ -60,6 +61,7 @@ This should be used to set and read the DES values.
     (DesCSATTB_geocal, DesCSATTB_UH_geocal) = create_nitf_des_structure("DesCSATTB", DesCSATTB._desc_data, DesCSATTB._desc_uh, hlp=hlp_csattb, des_implementation_field="att_csattb", des_implementation_class=AttCsattb)
     DesCSATTB_geocal.desid = DesCSATTB.desid
     DesCSATTB_geocal.desver = DesCSATTB.desver
+    DesCSATTB_geocal.uh_class = DesCSATTB.uh_class
     def _descsattb_handle_diff(self, t):
         '''Handle difference checking between 2 DesCSATTB_geocal'''
         d1 = self.att_csattb
@@ -78,8 +80,8 @@ This should be used to set and read the DES values.
     # Register this geocal class ahead of the pynitf DesCSATTB class, so this
     # gets used to read the data instead of DesCSATTB
 
-    add_uuid_des_function(DesCSATTB_geocal)    
-    register_des_class(DesCSATTB_geocal, priority_order=-1)
+    add_uuid_des_function(DesCSATTB_geocal)
+    register_des_class(DesCSATTB_geocal, priority_order=1)
 
     # Have search to find the pos_csephb and att_csattb that goes with a
     # image segment. We may extend this.

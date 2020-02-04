@@ -8,6 +8,8 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, Time, KeplerOrbit,
 from geocal.geocal_nitf_des import *
 import numpy as np
 
+pynitf.nitf_des.DEBUG = True
+
 @require_pynitf
 def test_poscsephb(isolated_dir):
     '''Create a file, and write out a DesCSEPHB.'''
@@ -24,7 +26,7 @@ def test_poscsephb(isolated_dir):
     f2 = pynitf.NitfFile("nitf_des.ntf")
     print(f2)
     # Now put back
-    pynitf.register_des_class(DesCSEPHB_geocal, priority_order=-1)
+    pynitf.register_des_class(DesCSEPHB_geocal, priority_order=1)
     f2 = pynitf.NitfFile("nitf_des.ntf")
     print(f2)
     p2 = f2.des_segment[0].des.pos_csephb
@@ -57,7 +59,7 @@ def test_attcsattb(isolated_dir):
     f2 = pynitf.NitfFile("nitf_des.ntf")
     print(f2)
     # Now put back
-    pynitf.register_des_class(DesCSATTB_geocal, priority_order=-1)
+    pynitf.register_des_class(DesCSATTB_geocal, priority_order=1)
     f2 = pynitf.NitfFile("nitf_des.ntf")
     print(f2)
     att2 = f2.des_segment[0].des.att_csattb

@@ -9,6 +9,7 @@ from geocal.glas_gfm import *
 from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance, Geodetic,
                          OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
                          KeplerOrbit, Time, OrbitDes, Ecr)
+import subprocess
 
 @require_msp    
 @require_pynitf
@@ -293,3 +294,40 @@ def test_create_many_gfm(isolated_dir, igc_gfm):
         assert distance(igc_gfm.ground_coordinate(ic),
                         igc2.ground_coordinate(ic)) < 1e-2
     
+@require_pynitf
+def test_gfm_nitfdiff(isolated_dir, igc_gfm):
+    '''Create two NITF file with GFMs in them it, and make sure we can run nitfdiff on these'''
+    f = pynitf.NitfFile()
+    f.file_header.fdt = "dt1"
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+    for i in range(9):
+        for j in range(10):
+            img[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+
+    f.image_segment[0].create_glas_gfm(igc_gfm)
+    t = f.image_segment[0].glas_gfm.tre_csexrb
+    pt = igc_gfm.ground_coordinate(ImageCoordinate(1024, 1024))
+    t.ground_ref_point_x = pt.position[0]
+    t.ground_ref_point_y = pt.position[1]
+    t.ground_ref_point_z = pt.position[2]
+    t.atm_refr_flag = 0
+    f.write("gfm_test1.ntf")
+    f = pynitf.NitfFile()
+    f.file_header.fdt = "dt2"
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+    for i in range(9):
+        for j in range(10):
+            img[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+
+    f.image_segment[0].create_glas_gfm(igc_gfm)
+    t = f.image_segment[0].glas_gfm.tre_csexrb
+    pt = igc_gfm.ground_coordinate(ImageCoordinate(1024, 1024))
+    t.ground_ref_point_x = pt.position[0]
+    t.ground_ref_point_y = pt.position[1]
+    t.ground_ref_point_z = pt.position[2]
+    t.atm_refr_flag = 0
+    f.write("gfm_test2.ntf")
+    subprocess.run("NITF_PLUGIN=geocal nitf_diff gfm_test1.ntf gfm_test2.ntf",
+                   shell=True)

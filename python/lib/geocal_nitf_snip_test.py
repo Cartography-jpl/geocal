@@ -79,7 +79,7 @@ def test_snip_example(isolated_dir):
 @require_pynitf
 def test_snip_create(isolated_dir):
     '''Basic creation test. Right now, we just copy things'''
-    pynitf.register_des_class(pynitf.NitfDesCopy, priority_order=999)
+    pynitf.register_des_class(pynitf.NitfDesCopy, priority_order=-999)
     fname = "/home/smyth/Local/SNIP NITF Example/07APR2005_Hyperion_331405N0442002E_SWIR172_001_L1R.ntf"
     # Ok if data isn't available. We can only run test if we have the
     # test data.

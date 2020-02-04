@@ -1,11 +1,14 @@
 from geocal_swig import (GdalMultiBand, GdalRasterImage)
 try:
     from pynitf import(register_image_class, NitfImageCannotHandle,
-                       NitfImageWithSubset, NitfImageSegment)
+                       NitfImageWithSubset, NitfImageSegment, NitfDiffHandle,
+                       NitfDiffHandleSet)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
+import logging
+import numpy as np
 
 # ---------------------------------------------------------
 # Add classes to handles images
@@ -73,8 +76,26 @@ if(have_pynitf):
             
 
     # Try this after the classes in pynitf have been tried.
-    register_image_class(NitfImageGdal, priority_order=1)
+    register_image_class(NitfImageGdal, priority_order=-1)
 
+    logger = logging.getLogger('nitf_diff')
+    class ImageGdalDiff(NitfDiffHandle):
+        def handle_diff(self, d1, d2, nitf_diff):
+            if(not isinstance(d1, NitfImageGdal) or
+               not isinstance(d2, NitfImageGdal)):
+                return (False, None)
+            is_same = True
+            t1 = d1[:,:,:]
+            t2 = d2[:,:,:]
+            # TODO Expose tolerance as configuration parameters
+            if(not np.allclose(t1, t2)):
+                logger.difference("Image '%s is different",
+                                  d1.image_subheader.iid1)
+                is_same = False
+            return (True, is_same)
+
+    NitfDiffHandleSet.add_default_handle(ImageGdalDiff())
+    
     # Alternative interface, access a nitf image segment as a GdalRasterImage
     def _gdal_multi_band(self):
         '''Access a NITF image as a GdalMultiBand.'''

@@ -1,7 +1,8 @@
 from geocal_swig import Rpc
 from .tre_struct import *
 try:
-    from pynitf import(NitfSegmentHook, NitfFile, TreRPC00B, TreRPC00A)
+    from pynitf import(NitfSegmentHook, NitfSegmentHookSet, TreRPC00B,
+                       TreRPC00A)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
@@ -19,10 +20,14 @@ if(have_pynitf):
         def __init__(self):
             self.rpc_tre_tag_list = ['RPC00A', 'RPC00B']
 
-        def init_hook(self, seg):
+        def after_init_hook(self, seg, nitf_file):
             seg.rpc = None
             
-        def prepare_tre_write_hook(self, seg, des_list, seg_list):
+        def after_append_hook(self, seg, nitf_file):
+            if(not hasattr(seg, "rpc")):
+                seg.rpc = None
+            
+        def before_write_hook(self, seg, nitf_file):
             '''Remove all the existing RPC TREs (if any), and add the TREs 
             to store seg.rpc'''
             seg.tre_list = [t for t in seg.tre_list if t.tre_tag not in
@@ -40,7 +45,7 @@ if(have_pynitf):
                 tre.rpc = seg.rpc
                 seg.tre_list.append(tre)
                 
-        def read_tre_hook(self, seg, des_list):
+        def after_read_hook(self, seg, nitf_file):
             '''Read all the RPC TREs to fill in seg.rpc. If there are 
             no RPC TREs, then set seg.rpc to None.'''
             # Currently only handle one RPC TRE.
@@ -54,14 +59,14 @@ if(have_pynitf):
                 seg.rpc = t.rpc
             else:
                 seg.rpc = None
-        def str_hook(self, seg, fh):
+        def before_str_hook(self, seg, nitf_file, fh):
             '''Called at the start of NitfSegment.__str__'''
             if(seg.rpc):
                 print(seg.rpc, file=fh)
             else:
                 print("Rpc: None", file=fh)
     
-        def str_tre_handle_hook(self, seg, tre, fh):
+        def before_str_tre_hook(self, seg, tre, nitf_file, fh):
             '''Called before printing a TRE. If this returns true we assume
             that this class has handled the TRE printing. Otherwise, we
             call print on the tre'''
@@ -70,7 +75,7 @@ if(have_pynitf):
                 return True
             return False
             
-    NitfFile.image_segment_hook_obj.append(RpcImageSegementHook())
+    NitfSegmentHookSet.add_default_hook(RpcImageSegementHook())
 
 __all__ = []
     

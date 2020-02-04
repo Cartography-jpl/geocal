@@ -1,8 +1,8 @@
-from __future__ import print_function
 from .nitf_field import *
 from .nitf_des import *
 from .nitf_des_csattb import udsh, add_uuid_des_function
-import six
+from .nitf_diff_handle import NitfDiffHandle, NitfDiffHandleSet
+import io
 
 hlp = '''This is a NITF CSEPHB DES. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
@@ -42,7 +42,7 @@ DesCSEPHB.desid = hardcoded_value("CSEPHB")
 DesCSEPHB.desver = hardcoded_value("01")
 
 def _summary(self):
-    res = six.StringIO()
+    res = io.StringIO()
     print("CSEPHB %s:  %d points" % (self.ephem_flag, self.num_ephem), file=res)
     return res.getvalue()
 
@@ -50,5 +50,42 @@ DesCSEPHB.summary = _summary
 
 add_uuid_des_function(DesCSEPHB)    
 register_des_class(DesCSEPHB)
+
+class CsephbDiff(FieldStructDiff):
+    '''Compare two DesCSEPHB.'''
+    def configuration(self, nitf_diff):
+        return nitf_diff.config.get("DesCSEPHB", {})
+
+    def handle_diff(self, h1, h2, nitf_diff):
+        with nitf_diff.diff_context("DesCSEPHB"):
+            if(not isinstance(h1, DesCSEPHB) or
+               not isinstance(h2, DesCSEPHB)):
+                return (False, None)
+            return (True, self.compare_obj(h1, h2, nitf_diff))
+
+NitfDiffHandleSet.add_default_handle(CsephbDiff())
+# No default configuration
+_default_config = {}
+NitfDiffHandleSet.default_config["DesCSEPHB"] = _default_config
+
+class CsephbUserheaderDiff(FieldStructDiff):
+    '''Compare two user headers.'''
+    def configuration(self, nitf_diff):
+        return nitf_diff.config.get("DesCSEPHB_UH", {})
+
+    def handle_diff(self, h1, h2, nitf_diff):
+        with nitf_diff.diff_context("DesCSEPHB_UH"):
+            if(not isinstance(h1, DesCSEPHB_UH) or
+               not isinstance(h2, DesCSEPHB_UH)):
+                return (False, None)
+            return (True, self.compare_obj(h1, h2, nitf_diff))
+
+NitfDiffHandleSet.add_default_handle(CsephbUserheaderDiff())
+_default_config = {}
+# UUID change each time they are generated, so don't include in
+# check
+_default_config["exclude"] = ['id', 'assoc_elem_id']
+ 
+NitfDiffHandleSet.default_config["DesCSEPHB_UH"] = _default_config
 
 __all__ = ["DesCSEPHB", "DesCSEPHB_UH"]

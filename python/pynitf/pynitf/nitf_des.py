@@ -7,17 +7,23 @@
 # To do this, cut and paste the table into *Word*, and then cut and paste
 # from word to Excel. For some reason, you can't go directly to Excel. You
 # can then cut and paste from excel to emacs
-from __future__ import print_function
-from .nitf_field import FieldData, _FieldStruct, _FieldLoopStruct, \
-    _FieldValueArrayAccess, _create_nitf_field_structure, create_nitf_field_structure
+from .nitf_field import (FieldData, _FieldStruct, _FieldLoopStruct, 
+                         _create_nitf_field_structure,
+                         create_nitf_field_structure)
 from .nitf_des_subheader import NitfDesSubheader
+from .nitf_diff_handle import (NitfDiffHandle, NitfDiffHandleSet,
+                               DiffContextFilter)
+from .priority_handle_set import PriorityHandleSet
 from .nitf_security import security_unclassified
 import copy
-import io,six
+import io
 import abc
 import collections
+import logging
 
 DEBUG = False
+
+logger = logging.getLogger('nitf_diff')
 
 class NitfDesCannotHandle(RuntimeError):
     '''Exception that indicates we can't read a particular Des. Note that
@@ -26,8 +32,7 @@ class NitfDesCannotHandle(RuntimeError):
     def __init__(self, msg = "Can't handle this type of des"):
         RuntimeError.__init__(self, msg)
 
-@six.add_metaclass(abc.ABCMeta)
-class NitfDes(object):
+class NitfDes(object, metaclass=abc.ABCMeta):
     '''This contains a DES that we want to read or write from NITF.
     
     This class supplies a basic interface, a specific type of DES can
@@ -84,7 +89,7 @@ class NitfDes(object):
     # Derived classes may want to override this to give a more detailed
     # description of what kind of image this is.
     def __str__(self):
-        fh = six.StringIO()
+        fh = io.StringIO()
         self.str_hook(fh)
         if(self.user_subheader):
             print("User-Defined Subheader: ", file=fh)
@@ -99,7 +104,7 @@ class NitfDes(object):
            self.user_subheader_class is not None):
             raise RuntimeError("The expected user defined subheader was not found")
         if(self.des_subheader.desshl > 0):
-            fh = six.BytesIO(self.des_subheader.desshf)
+            fh = io.BytesIO(self.des_subheader.desshf)
             self.user_subheader.read_from_file(fh)
 
     @property
@@ -107,7 +112,7 @@ class NitfDes(object):
         '''Return the size of the user subheader. This can be used to
         make sure we aren't exceeding the size supported by desshl'''
         if(self.user_subheader_class):
-            fh = six.BytesIO()
+            fh = io.BytesIO()
             self.user_subheader.write_to_file(fh)
             return len(fh.getvalue())
         else:
@@ -120,7 +125,7 @@ class NitfDes(object):
         in that function (unlike read_from_file). Instead, the NitfDesSegment
         class calls this function.'''
         if(self.user_subheader_class):
-            fh = six.BytesIO()
+            fh = io.BytesIO()
             self.user_subheader.write_to_file(fh)
             sh.desshf = fh.getvalue()
         else:
@@ -221,7 +226,7 @@ class NitfDesFieldStruct(NitfDes, _FieldStruct):
         except ValueError:
             # We have no _FieldValue, so just set maxlen to a fixed value
             maxlen = 10
-        res = six.StringIO()
+        res = io.StringIO()
         self.str_hook(res)
         if(self.user_subheader):
             print("User-Defined Subheader: ", file=res)
@@ -239,7 +244,7 @@ class NitfDesFieldStruct(NitfDes, _FieldStruct):
         return res.getvalue()
 
     def summary(self):
-        res = six.StringIO()
+        res = io.StringIO()
         #print("TRE - %s" % self.tre_tag, file=res)
 
 class NitfDesObjectHandle(NitfDes):
@@ -286,7 +291,7 @@ class NitfDesObjectHandle(NitfDes):
     def __str__(self):
         '''Text description of structure, e.g., something you can print
         out.'''
-        res = six.StringIO()
+        res = io.StringIO()
         self.str_hook(res)
         if(self.user_subheader):
             print("User-Defined Subheader: ", file=res)
@@ -296,9 +301,22 @@ class NitfDesObjectHandle(NitfDes):
         return res.getvalue()
 
     def summary(self):
-        res = six.StringIO()
+        res = io.StringIO()
         #print("TRE - %s" % self.tre_tag, file=res)
-        
+
+# TODO May want to rework this, not sure if having handle_diff in the
+# object is the right way to handle this.
+
+class DesObjectDiff(NitfDiffHandle):
+    '''Compare two NitfDesObjectHandle.'''
+    def handle_diff(self, des1, des2, nitf_diff):
+        if(not isinstance(des1, NitfDesObjectHandle) or
+           not isinstance(des2, NitfDesObjectHandle)):
+            return (False, None)
+        return (True, des1.handle_diff(des2))
+
+NitfDiffHandleSet.add_default_handle(DesObjectDiff())
+    
 class NitfDesPlaceHolder(NitfDes):
     '''Implementation that doesn't actually read any data, useful as a
     final place holder if none of our other NitfDes classes can handle
@@ -318,6 +336,18 @@ class NitfDesPlaceHolder(NitfDes):
         '''Write an DES to a file.'''
         raise NotImplementedError("Can't write a NitfDesPlaceHolder")
 
+class DesPlaceHolderDiff(NitfDiffHandle):
+    '''Compare two NitfDesPlaceHolder.'''
+    def handle_diff(self, des1, des2, nitf_diff):
+        if(not isinstance(des1, NitfDesPlaceHolder) or
+           not isinstance(des2, NitfDesPlaceHolder)):
+            return (False, None)
+        logger.warning("Skipping DES %s, don't know how to read it.",
+                       des1.des_subheader.desid)
+        return (True, True)
+
+NitfDiffHandleSet.add_default_handle(DesPlaceHolderDiff())
+    
 class NitfDesCopy(NitfDes):
     '''Implementation that reads from one file and just copies to the other.
     Not normally registered, but can be useful to use for some test cases (e.g.
@@ -349,13 +379,16 @@ class TreOverflow(NitfDes):
     '''DES used to handle TRE overflow.'''
     def __init__(self, des_subheader=None, header_size=None, data_size=None,
                  seg_index=None, overflow=None):
+        '''Note that seg_index should be the normal 0 based index python
+        uses elsewhere. Internal to the DES we translate this to the 1 based
+        index that NITF uses.'''
         NitfDes.__init__(self, "TRE_OVERFLOW", des_subheader,
                          header_size, data_size)
         if(self.des_subheader.desid.encode("utf-8") != b'TRE_OVERFLOW'):
             raise NitfDesCannotHandle()
         if(des_subheader is None):
             self.des_subheader.desoflw = str.upper(overflow)
-            self.des_subheader.desitem = seg_index
+            self.des_subheader.desitem = seg_index+1
         self.data = None
 
     def read_from_file(self, fh):
@@ -450,63 +483,33 @@ def create_nitf_des_structure(name, desc_data, desc_uh = None, hlp = None,
 
     return (res, res2)
 
-class NitfDesHandleList(object):
-    '''Small class to handle to list of DES objects. This is little more
-    complicated than just a list of handlers. The extra piece is allowing
-    a priority_order to be assigned to the handlers, we look for 
-    lower number first. So for example we can put NitfDesPlaceHolder as the
-    highest number, and it will be tried after all the other handlers have
-    been tried.
-
-    This is a chain-of-responsibility pattern, with the addition of an
-    ordering based on a priority_order. 
-    '''
-    def __init__(self):
-        self.handle_list = collections.defaultdict(lambda : set())
-
-    def add_handle(self, cls, priority_order=0):
-        self.handle_list[priority_order].add(cls)
-
-    def discard_handle(self, cls):
-        '''Discard any handle of the given class. Ok if this isn't actually
-        in the list of handles.'''
-        for k in sorted(self.handle_list.keys()):
-            self.handle_list[k].discard(cls)
-
-    def des_handle(self, subheader, header_size, data_size, fh):
-        for k in sorted(self.handle_list.keys()):
-            for cls in self.handle_list[k]:
-                try:
-                    t = cls(des_subheader=subheader,
-                            header_size=header_size,
-                            data_size=data_size)
-                    t.read_from_file(fh)
-                    return t
-                except NitfDesCannotHandle:
-                    pass
-        raise NitfDesCannotHandle("No handle found for data.")
-
-_hlist = NitfDesHandleList()
-
-
-def nitf_des_read(subheader, header_size, data_size, fh):
-    return _hlist.des_handle(subheader, header_size, data_size, fh)
+class NitfDesHandleSet(PriorityHandleSet):
+    '''Set of handlers for reading a DES.'''
+    def handle_h(self, cls, subheader, header_size, data_size, fh):
+        try:
+            t = cls(des_subheader=subheader,
+                    header_size=header_size,
+                    data_size=data_size)
+            t.read_from_file(fh)
+        except NitfDesCannotHandle:
+            return (False, None)
+        return (True, t)
 
 def register_des_class(cls, priority_order=0):
-    _hlist.add_handle(cls, priority_order)
+    NitfDesHandleSet.add_default_handle(cls, priority_order)
 
 def unregister_des_class(cls):
     '''Remove a handler from the list. This isn't used all that often,
     but it can be useful in testing.'''
-    _hlist.discard_handle(cls)
+    NitfDesHandleSet.discard_default_handle(cls)
     
 register_des_class(TreOverflow)
-register_des_class(NitfDesPlaceHolder, priority_order=1000)
+register_des_class(NitfDesPlaceHolder, priority_order=-1000)
 # Don't normally use, but you can add this if desired
-#register_des_class(NitfDesCopy, priority_order=999)
+#register_des_class(NitfDesCopy, priority_order=-999)
 
 __all__ = [ "NitfDesCannotHandle", "NitfDes", "NitfDesPlaceHolder",
             "NitfDesCopy",
             "TreOverflow", "create_nitf_des_structure",
-            "nitf_des_read", "register_des_class", "unregister_des_class"]
+            "NitfDesHandleSet", "register_des_class", "unregister_des_class"]
 

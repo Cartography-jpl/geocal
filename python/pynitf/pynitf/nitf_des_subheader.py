@@ -1,7 +1,7 @@
-from __future__ import print_function
 from .nitf_field import *
 from .nitf_security import NitfSecurity
-import six
+from .nitf_diff_handle import NitfDiffHandle, NitfDiffHandleSet
+import io
 
 hlp = '''This is a NITF DES subheader. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
@@ -38,7 +38,7 @@ NitfDesSubheader = create_nitf_field_structure("NitfDesSubheader", des_desc, hlp
 NitfDesSubheader.de_value = hardcoded_value("DE")
 
 def summary(self):
-    res = six.StringIO()
+    res = io.StringIO()
     print("%s %s %s " % (self.de, self.desid, self.dsver), file=res)
     return res.getvalue()
 
@@ -51,5 +51,35 @@ def _set_security(self, s):
     s.set_security(self, "d")
 
 NitfDesSubheader.security = property(_get_security, _set_security)
+
+class DesSubheaderDiff(FieldStructDiff):
+    '''Compare two des subheaders.'''
+    def configuration(self, nitf_diff):
+        return nitf_diff.config.get("Des Subheader", {})
+
+    def handle_diff(self, h1, h2, nitf_diff):
+        with nitf_diff.diff_context("Subheader", add_text = True):
+            if(not isinstance(h1, NitfDesSubheader) or
+               not isinstance(h2, NitfDesSubheader)):
+                return (False, None)
+            if(h1.desid == "TRE_OVERFLOW" and
+               h2.desid == "TRE_OVERFLOW"):
+                # Skip checking this DES, we already check this when
+                # we compare TREs
+                return (True, True)
+            return (True, self.compare_obj(h1, h2, nitf_diff))
+
+NitfDiffHandleSet.add_default_handle(DesSubheaderDiff())
+_default_config = {}
+# Ignore all the structural differences about the file. We compare all
+# the individual pieces, so this will get reported as we go through each
+# element. But it is not useful to also report that udhd varies if we are
+# already saying the TREs are different.
+_default_config["exclude"] = ['desoflw', 'desitem', 'desshl', 
+                              'desshf'] 
+ 
+
+NitfDiffHandleSet.default_config["Des Subheader"] = _default_config
+
 
 __all__ = ["NitfDesSubheader"]

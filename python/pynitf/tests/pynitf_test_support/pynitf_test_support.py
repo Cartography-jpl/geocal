@@ -2,19 +2,30 @@
 import numpy as np
 from numpy.testing import assert_almost_equal, assert_approx_equal
 from pynitf.nitf_security import NitfSecurity
+from pynitf.nitf_image import NitfImageWriteNumpy
+from pynitf.nitf_file import (NitfImageSegment, NitfTextSegment,
+                              NitfDesSegment)
+from pynitf.nitf_des_csattb import (DesCSATTB_UH, DesCSATTB)
+from pynitf.nitf_tre_csde import TreUSE00A
+from pynitf.nitf_diff_handle import DifferenceFormatter
 from unittest import SkipTest
 import os
 import sys
 import subprocess
 import re
-import pytest
 import math
 from distutils import dir_util
+import json
+import pytest
+import logging
+import warnings
 
 # Some unit tests require h5py. This is not an overall requirement, so if
 # not found we just skip those tests
 try:
-    import h5py
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        import h5py
     have_h5py = True
 except ImportError:
     # Ok if we don't have h5py, we just can't execute this code
@@ -22,6 +33,8 @@ except ImportError:
 
 # Location of test data that is part of source
 unit_test_data = os.path.abspath(os.path.dirname(__file__) + "/unit_test_data/") + "/"
+# Locate of programs
+program_dir = os.path.abspath(os.path.dirname(__file__) + "../../../extra/") + "/"
 
 # Fake security object, just so we can test setting and reading
 security_fake = NitfSecurity()
@@ -63,6 +76,80 @@ def cmd_exists(cmd):
     return subprocess.call("type " + cmd, shell=True, 
                            stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
+def create_image_seg(f, security = None, iid1 = '', row_offset = 10, bias = 0,
+                     adjust = None, nrow = 9, ncol = 10):
+    '''Create a small image segment. The security setting can be passed in,
+    otherwise the default unclassified version is used. The IID can be passed.
+    The values filled in can be controlled by row_offset, bias, and adjust.'''
+    img = NitfImageWriteNumpy(nrow, ncol, np.uint8)
+    for i in range(nrow):
+        for j in range(ncol):
+            img[0, i, j] = i * row_offset + j
+    iseg = NitfImageSegment(img, security=security)
+    iseg.iid1 = iid1
+    f.image_segment.append(iseg)
+    return iseg
+
+def create_tre(f, angle_to_north = 270):
+    '''Create a sample TRE. We use TreUSE00A because it is a simple TRE. You
+    can pass in different values to angle_to_north to get "different" TREs.
+    '''
+    t = TreUSE00A()
+    t.angle_to_north = angle_to_north
+    t.mean_gsd = 105.2
+    t.dynamic_range = 2047
+    t.obl_ang = 34.12
+    t.roll_ang = -21.15
+    t.n_ref = 0
+    t.rev_num = 3317
+    t.n_seg = 1
+    t.max_lp_seg = 6287
+    t.sun_el = 68.5
+    t.sun_az = 131.3
+    f.tre_list.append(t)
+
+def create_text_segment(f, first_name = 'Guido', textid = 'ID12345'):
+    '''Create a text segment'''
+    d = {
+        'first_name': first_name,
+        'second_name': 'Rossum',
+        'titles': ['BDFL', 'Developer'],
+    }
+    ts = NitfTextSegment(txt = json.dumps(d))
+    ts.subheader.textid = textid
+    ts.subheader.txtalvl = 0
+    ts.subheader.txtitl = 'sample title'
+    f.text_segment.append(ts)
+
+def create_des(f, date_att = 20170501, q = 0.1):
+    '''Create a DES segment'''
+    ds = DesCSATTB_UH()
+    ds.id = '4385ab47-f3ba-40b7-9520-13d6b7a7f311'
+    ds.numais = '010'
+    for i in range(int(ds.numais)):
+        ds.aisdlvl[i] = 5 + i
+    ds.reservedsubh_len = 0
+
+    des = DesCSATTB(user_subheader=ds)
+    des.qual_flag_att = 1
+    des.interp_type_att = 1
+    des.att_type = 1
+    des.eci_ecf_att = 0
+    des.dt_att = 900.5
+    des.date_att = 20170501
+    des.t0_att = 235959.100001000
+    des.num_att = 5
+    for n in range(des.num_att):
+        des.q1[n] = q
+        des.q2[n] = q
+        des.q3[n] = q
+        des.q4[n] = q
+    des.reserved_len = 0
+
+    de = NitfDesSegment(des=des)
+    f.des_segment.append(de)
+    
+    
 # Some tests are python 3 only. Don't want the python 2 tests to fail for
 # python code that we know can't be run
 require_python3 = pytest.mark.skipif(not sys.version_info > (3,),
@@ -87,6 +174,32 @@ require_gdal_value = pytest.mark.skipif(not sys.version_info > (3,) or
                    not cmd_exists("gdallocationinfo"),
                    reason="Require python 3 and gdallocationinfo")
 
+@pytest.yield_fixture(scope="function")
+def print_logging(isolated_dir):
+    '''Direct logging to a local "run.log" file.
+
+    Also print the logger to the console. Normally this only shows up for
+    failed tasks, but with -s we print this out for each job that runs.
+    '''
+    h = logging.FileHandler('run.log')
+    h.setLevel(logging.INFO)
+    h.setFormatter(DifferenceFormatter())
+    logger = logging.getLogger('nitf_diff')
+    original_lv = logger.getEffectiveLevel()
+    try:
+        logger.setLevel(logging.INFO)
+        logger.addHandler(h)
+        yield
+    finally:
+        logger.setLevel(original_lv)
+        logger.removeHandler(h)
+    # We output the run.log file rather than just attaching the logger to
+    # the console so we can avoid the "Logger output:" part if there is no
+    # actual output.
+    t = open("run.log").read()
+    if(len(t) > 0):
+        print("\nLogger output:")
+        print(t)
 
 @pytest.yield_fixture(scope="function")
 def config_dir(tmpdir, request):
@@ -139,6 +252,8 @@ def nitf_sample_files(isolated_dir):
         return "/raid1/smyth/NitfSamples/"
     elif(os.path.exists("/opt/nitf_files/NitfSamples/")):
         return "/opt/nitf_files/NitfSamples/"
+    elif(os.path.exists("/data2/smythdata/NitfSamples/")):
+        return "/data2/smythdata/NitfSamples/"
     pytest.skip("Require NitfSamples test data to run")
 
 @pytest.yield_fixture(scope="function")

@@ -1,13 +1,14 @@
 #! /usr/bin/env python
-from __future__ import print_function
 import pynitf
 import importlib.util
 import sys
 import logging
 import json
 import os
+import collections.abc
 
-version="%prog Dec 4, 2019"
+version="January 17, 2020"
+
 usage="""Usage: 
   nitf_diff [options] <file1> <file2>
   nitf_diff -h | --help
@@ -18,26 +19,46 @@ This compares two nitf files, and determines if they are the same are not.
 In general, there can be all kinds of special cases you want in a compare.
 For example, you might want a particular image segment compared with a 
 tolerance rather than exactly. You might want a TRE compared, but ignore
-certain fields. So we take a python configuration file that can be used
-to specify any special comparison functions. See nitf_diff_support.py for
-information on how to set this up.
+certain fields for example, or use a special way to compare images. We
+take configuration information to control this.
+
+There are two forms of configuration data. For simpler configuration, 
+a JSON file can be supplied. This provides a configuration hash that is
+merged in with the default configuration set up in pynitf and other 
+modules listed on NITF_PLUGIN environment variable list.
+
+If you need to supply special handlers, you can load arbitrary python code.
+The code should have the general format:
+
+   import __main__
+   __main__.nitf_info.handle_set.add_handle(my_handle)
+   __main__.nitf_info.config["My key"] = "My value"
 
 Options:
   -h --help         
        Print this message
 
-  --config-file=f
-       Give a python configuration file to load to set up special 
-       comparisons.
+  --config-file-json=f
+       Give a json file to supply configuration parameters. This is merged
+       in with the default configuration set up by pynitf.
+
+   --config-file-python=f
+       Load arbitrary python code from the given file.
+
+  --debug
+       Turn debugging information on
        
   --log-file=f
        Give a path for the logs to be written to
+
+  --no-color
+       Don't colorize output
 
   --quiet
        Don't print any messages, just return an overall status code.
 
   --verbose
-       Give more verbose messages
+       Give more verbose messages (turn debugging on
 
   -v --version      
        Print program version
@@ -49,33 +70,75 @@ args = pynitf.docopt_simple.docopt_simple(usage, version=version)
 if "NITF_PLUGIN" in os.environ:
     for m in os.environ["NITF_PLUGIN"].split(":"):
         exec("import %s" % m)
+        
+# TODO Remove this
+# Temporary kludge, some extra pieces for geocal that will get
+# added in the next geocal update
+try:
+    geocal.DesCSEPHB_geocal.uh_class = pynitf.DesCSEPHB.uh_class
+    geocal.DesCSATTB_geocal.uh_class = pynitf.DesCSATTB.uh_class
 
-configData = None
-if(args.config_file):
-    # Old python version, leave in place in case we go back to this
-    #spec = importlib.util.spec_from_file_location("config_file",
-    #                                              args.config_file)
-    #module = importlib.util.module_from_spec(spec)
-    #nspec.loader.exec_module(module)
-    #sys.modules["config_file"] = module    
-    with open(args.config_file) as json_file:
-        configData = json.load(json_file)
+    import logging
+    import numpy as np
+    logger = logging.getLogger('nitf_diff')
+    class ImageGdalDiff(pynitf.NitfDiffHandle):
+        def handle_diff(self, d1, d2, nitf_diff):
+            if(not isinstance(d1, geocal.NitfImageGdal) or
+               not isinstance(d2, geocal.NitfImageGdal)):
+                return (False, None)
+            is_same = True
+            t1 = d1[:,:,:]
+            t2 = d2[:,:,:]
+            # TODO Expose tolerance as configuration parameters
+            if(not np.allclose(t1, t2)):
+                logger.difference("Image '%s is different",
+                                  d1.image_subheader.iid1)
+                is_same = False
+            return (True, is_same)
 
-if(args.verbose):
-    logging.basicConfig(level=logging.DEBUG)
+    pynitf.NitfDiffHandleSet.add_default_handle(ImageGdalDiff())
+    
+except NameError:
+    pass
+    
+
+nitf_diff = pynitf.NitfDiff()
+
+if(args.config_file_json):
+    with open(args.config_file_json) as json_file:
+        nitf_diff.update_config(json.load(json_file))
+if(args.config_file_python):
+    spec = importlib.util.spec_from_file_location("config_file",
+                                                  args.config_file_python)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    sys.modules["config_file"] = module
+
+logger = logging.getLogger('nitf_diff')
+h = logging.StreamHandler()
+dformat = pynitf.DifferenceFormatter(add_color = not args.no_color)
+h.setFormatter(dformat)
+logger.addHandler(h)
+if(args.debug):
+    h.setLevel(logging.DEBUG)
+    logger.setLevel(logging.DEBUG)
+elif(args.verbose):
+    h.setLevel(logging.INFO)
+    logger.setLevel(logging.INFO)
 elif(args.quiet):
-    logging.basicConfig(level=1000)
+    h.setLevel(1000)
+    logger.setLevel(1000)
 else:    
-    logging.basicConfig(level=logging.INFO)
+    h.setLevel(logging.WARNING)
+    logger.setLevel(logging.WARNING)
 
-if (args.log_file):
-    hdlr = logging.FileHandler(args.log_file)
-    logging.getLogger("nitf_diff").addHandler(hdlr)
-
-is_same = pynitf.nitf_file_diff(args.file1, args.file2, config=configData)
+is_same = nitf_diff.compare(args.file1, args.file2)
 
 if(not is_same):
-    logging.getLogger("nitf_diff").error("Files differ")
+    if(not args.quiet):
+        print(dformat.color_text("Files are the different", logging.ERROR))
     sys.exit(1)
-logging.getLogger("nitf_diff").info("Files are the same")
+    
+if(not args.quiet):
+    print(dformat.color_text("Files are the same", pynitf.DIFFERENCE_DETAIL))
     

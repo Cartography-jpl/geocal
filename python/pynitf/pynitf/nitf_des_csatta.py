@@ -1,7 +1,7 @@
-from __future__ import print_function
 from .nitf_field import *
 from .nitf_des import *
-import six
+from .nitf_diff_handle import NitfDiffHandle, NitfDiffHandleSet
+import io
 
 '''WARNING!!! Do NOT use CSATTA. It's been deprecated and it hasn't kept up with the new DES design
 It will be fixed eventually and we can use it if we need to for legacy applications'''
@@ -36,12 +36,29 @@ desc2 =["CSATTA",
 DesCSATTA.desver = hardcoded_value("01")
 
 def summary(self):
-    res = six.StringIO()
+    res = io.StringIO()
     print("CSATTA %s:  %d points" % (self.att_type, self.num_att), file=res)
     return res.getvalue()
 
 DesCSATTA.summary = summary
 
 register_des_class(DesCSATTA)
+
+class CsattaDiff(FieldStructDiff):
+    '''Compare two DesCSATTA.'''
+    def configuration(self, nitf_diff):
+        return nitf_diff.config.get("DesCSATTA", {})
+
+    def handle_diff(self, h1, h2, nitf_diff):
+        with nitf_diff.diff_context("DesCSATTB"):
+            if(not isinstance(h1, DesCSATTA) or
+               not isinstance(h2, DesCSATTA)):
+                return (False, None)
+            return (True, self.compare_obj(h1, h2, nitf_diff))
+
+NitfDiffHandleSet.add_default_handle(CsattaDiff())
+# No default configuration
+_default_config = {}
+NitfDiffHandleSet.default_config["DesCSATTB"] = _default_config
 
 __all__ = ["DesCSATTA"]

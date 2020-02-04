@@ -1,17 +1,19 @@
-from __future__ import print_function
 from .nitf_field import *
 from .nitf_des import *
-import six
+import io
 import os
 import datetime
 import shutil
 import tempfile
 import numpy as np
+import warnings
 
 # DesEXT_h5 depends on h5py being available. Ok if it isn't, we just can't
 # use this particular class.
 try:
-    import h5py
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        import h5py
 except ImportError:
     pass
 
@@ -74,7 +76,7 @@ class DesEXTContentHeader(object):
             self._set_snippet(k, v)
 
     def __str__(self):
-        fh = six.StringIO()
+        fh = io.StringIO()
         print("Content Header:", file=fh)
         for (nm, var) in DesEXTContentHeader.hlist:
             t = self._snippet(nm, var)
@@ -104,7 +106,7 @@ class DesEXT_DEF_CONTENT(NitfDes):
         print("DesEXT_DEF_CONTENT", file=file)
 
     def __str__(self):
-        fh = six.StringIO()
+        fh = io.StringIO()
         self.str_hook(fh)
         print(self.content_header, file=fh)
         return fh.getvalue()
@@ -137,7 +139,7 @@ class DesEXT_DEF_CONTENT(NitfDes):
         super().write_user_subheader(sh)
         
     def summary(self):
-        res = six.StringIO()
+        res = io.StringIO()
         print("DesEXT_DEF_CONTENT", file=res)
         return res.getvalue()
         
@@ -194,7 +196,7 @@ class DesEXT_h5(DesEXT_DEF_CONTENT):
         print("DesEXT_h5", file=file)
 
     def summary(self):
-        res = six.StringIO()
+        res = io.StringIO()
         print("DesEXT_h5", file=res)
         return res.getvalue()
 
@@ -206,8 +208,9 @@ class DesEXT_h5(DesEXT_DEF_CONTENT):
                 shutil.copyfileobj(fhin, fh)
         elif (self.data is not None):
             fh.write(self.data)
-    
-register_des_class(DesEXT_DEF_CONTENT, priority_order=500)
+
+# Try DesEXT_h5 before falling back to more generic DesEXT_DEF_CONTENT
+register_des_class(DesEXT_DEF_CONTENT, priority_order=-1)
 register_des_class(DesEXT_h5)
 
 __all__ = ["DesEXT_DEF_CONTENT", "DesEXT_DEF_CONTENT_UH",

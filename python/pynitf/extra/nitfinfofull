@@ -1,11 +1,10 @@
 #! /usr/bin/env python
-from __future__ import print_function
 import pynitf
 import subprocess
 import os
 import sys
 
-version="%prog June 6, 2019"
+version="June 6, 2019"
 usage="""Usage: 
   nitfinfofull [options] <input_file>
   nitfinfofull -h | --help
@@ -43,5 +42,6 @@ if "NITF_PLUGIN" in os.environ:
 if(args.debug):
     pynitf.nitf_field.DEBUG = True
     pynitf.nitf_des.DEBUG = True
-f = pynitf.NitfFile(args.input_file, use_raw=args.report_raw)
+f = pynitf.NitfFile(args.input_file)
+f.report_raw = args.report_raw
 print(f)

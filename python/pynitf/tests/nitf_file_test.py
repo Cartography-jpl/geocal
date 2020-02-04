@@ -1,3 +1,4 @@
+import cProfile
 from pynitf.nitf_file import *
 from pynitf.nitf_tre_csde import *
 from pynitf.nitf_tre_csepha import *
@@ -15,23 +16,12 @@ import pynitf.nitf_des
 import subprocess
 import os
 import json
-import six
 import numpy as np
 import filecmp
 
 # Turn on debug messages
 #pynitf.nitf_field.DEBUG = True
 #pynitf.nitf_des.DEBUG = True
-
-# Do these in a few places, so collect in one spot.
-def create_image_seg(f, security = None):
-    img = NitfImageWriteNumpy(9, 10, np.uint8)
-    if(security):
-        img.security = security
-    for i in range(9):
-        for j in range(10):
-            img[0, i,j] = i * 10 + j
-    f.image_segment.append(NitfImageSegment(img))
 
 def create_tre(f):
     t = TreUSE00A()
@@ -418,4 +408,27 @@ def test_full_file_security(isolated_dir):
 
     print("Text Data:")
     print(f2.text_segment[0].data)        
+
+# May expand this to check a large file, or we might just separately
+# profile reading large files we already have. Can also do
+# "python -m cProfile script.py" to test a standalone script
+# Can spit into out using:
+# python -m cProfile -o prof.dat script.py
+# Then things like:
+# import pstats
+# from pstats import SortKey
+# p = pstats.Stats("prof.dat")
+# p.sort_stats(SortKey.CUMULATIVE).print_stats(10)
+# p.sort_stats(SortKey.TIME).print_stats(10)
+# Interactive version with "python -m pstats prof.dat"
+@skip
+def test_profile(isolated_dir):
+    f = NitfFile()
+    create_image_seg(f)
+    create_tre(f)
+    create_tre2(f)
+    create_text_segment(f)
+    create_des(f)
+    f.write("basic_nitf.ntf")
+    cProfile.run('import pynitf; pynitf.NitfFile("basic_nitf.ntf")')
     

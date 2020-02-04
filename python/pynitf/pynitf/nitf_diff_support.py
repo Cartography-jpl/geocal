@@ -1,13 +1,18 @@
 from .nitf_file import *
 from .nitf_field import _FieldLoopStruct
 import logging
-import six, abc, collections
+import abc, collections
 import numpy as np
 from .nitf_image import NitfImagePlaceHolder
 from .nitf_tre import TreUnknown
 
-@six.add_metaclass(abc.ABCMeta)
-class DiffHandle(object):
+#********************************************************
+# NOTE! This code is all being replaced with a reorganization
+# of NitfDiff. Left in place here until we get all the
+# functionality moved over
+#********************************************************
+
+class DiffHandle(object, metaclass=abc.ABCMeta):
     '''Base class of handlers for looking at differences. We can have
     specialized classes that handle the differences.'''
     def __init__(self, logger=logging.getLogger('nitf_diff')):

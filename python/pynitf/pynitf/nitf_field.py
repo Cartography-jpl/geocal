@@ -25,18 +25,33 @@
 # is if we have one object for all _FieldStruct objects, or if the objects
 # are per _FieldStruct.
 
-from __future__ import print_function
 import copy
-import io,six
+import io
 from collections import defaultdict
 import sys
 from struct import *
+import logging
+import itertools
+import operator
+import functools
+import math
+from .nitf_diff_handle import NitfDiffHandle
 
 # Add a bunch of debugging if you are diagnosing a problem
 DEBUG = False
-class _FieldValueArrayAccess(object):
+class FieldValueArray(object):
     '''Provides an array access to a _FieldValue that is part of a loop 
-    structure'''
+    structure.
+
+    This provides an array like interface, so you can get an set values
+    with things like a[0,1]. We do *not* support slices. The arrays in NITF
+    are in general "ragged" arrays, so for example it might be something
+    like [[1,2], [3,4,5]] where the first row has 2 columns, the second row
+    has three columns. It isn't exactly clear how to handle slices, so we
+    just don't do that.
+
+    In addition, you can use "to_list()" to convert an array to a nested list
+    of values.'''
     # The __dict__ is at object level
     def __init__(self, fv, parent_obj):
         self.fv=fv
@@ -51,6 +66,57 @@ class _FieldValueArrayAccess(object):
             self.fv.set(self.parent_obj, ind,v)
         else:
             self.fv.set(self.parent_obj, (ind,),v)
+    def to_list(self, lead=()):
+        '''Return the data as a nested list.'''
+        if(len(lead) == self.dim_size() - 1):
+            return [self[(*lead, i)] for i in range(self.shape(lead))]
+        return [self.to_list(lead=(*lead, i)) for i in range(self.shape(lead))]
+    def dim_size(self):
+        '''Shortcut for getting the length of the looping size (i.e., is
+        this a 1d, 2d or 3d object).'''
+        return len(self.fv.loop.size)
+    def shape(self, lead=()):
+        '''Shortcut for calling shape in the looping structure for this
+        array'''
+        return self.fv.loop.shape(self.parent_obj, lead)
+    def type(self):
+        return self.fv.ty
+    def values(self, lead=()):
+        '''Iterate through values. This uses the 'C' like order, where we
+        vary the last. This is like doing a flatten on the results of 
+        to_list'''
+        if(self.shape(lead=lead) is not None):
+            if(len(lead) == self.dim_size() - 1):
+                for i in range(self.shape(lead=lead)):
+                    yield self[(*lead,i)]
+            else:
+                for i in range(self.shape(lead=lead)):
+                    for j in self.values(lead=(*lead,i)):
+                        yield j
+    def items(self,lead=()):
+        '''Likes values(), but iterator through a tuple of the (index,value)
+        instead of just values.'''
+        if(self.shape(lead=lead) is not None):
+            if(len(lead) == self.dim_size() - 1):
+                for i in range(self.shape(lead=lead)):
+                    yield ((*lead,i), self[(*lead,i)])
+            else:
+                for i in range(self.shape(lead=lead)):
+                    for j in self.items(lead=(*lead,i)):
+                        yield j
+    @classmethod
+    def is_shape_equal(cls, arr1, arr2, lead=()):
+        '''Return True if the shape of arr1 and arr2 are the same,
+        False otherwise'''
+        if(arr1.dim_size() != arr2.dim_size()):
+            return False
+        if(len(lead) == arr1.dim_size() - 1):
+            return arr1.shape(lead=lead) == arr2.shape(lead=lead)
+        if(arr1.shape(lead=lead) is not None):
+            for i in range(arr1.shape(lead=lead)):
+                if not cls.is_shape_equal(arr1, arr2, lead=(*lead,i)):
+                    return False
+        return True
 
 class _FieldValueAccess(object):
     '''Python descriptor to provide access for getting and setting a
@@ -60,7 +126,7 @@ class _FieldValueAccess(object):
         self.fv = fv
     def __get__(self, parent_obj, cls):
         if(self.fv.loop is not None):
-            return _FieldValueArrayAccess(self.fv, parent_obj)
+            return FieldValueArray(self.fv, parent_obj)
         return self.fv.get(parent_obj, ())
     def __set__(self, parent_obj, v):
         if(self.fv.loop is not None):
@@ -116,8 +182,6 @@ class _FieldValue(object):
         self.condition = options.get("condition", None)
         self.optional = options.get("optional", False)
         self.optional_char = options.get("optional_char", " ")
-        self.eq_fun = options.get("eq_fun", None)
-        self.name = options.get("name", None)
 
     def value(self,parent_obj):
         if(self.field_name is None):
@@ -327,6 +391,17 @@ class _FieldLoopStruct(object):
         for i in range(maxi):
             for f in self.field_value_list:
                 f.read_from_file(parent_object, lead + (i,), fh, nitf_literal)
+    def field_names(self):
+        '''Return a iterator of all field names in this structure (or loops
+        nested in this structure).
+        '''
+        for f in self.field_value_list:
+            if(not isinstance(f, _FieldLoopStruct)):
+                if(f.field_name is not None):
+                    yield f.field_name
+            else:
+                for fname in f.field_names():
+                    yield fname
     def desc(self, parent_object):
         '''Text description of structure, e.g., something you can print
         out.'''
@@ -339,7 +414,7 @@ class _FieldLoopStruct(object):
             maxlen = 10
         maxi1 = self.shape(parent_object)
         maxlen += 2 + len(str(maxi1))
-        res = six.StringIO()
+        res = io.StringIO()
         lead = "  " * (len(self.size) - 1)
         print(lead + "Loop - " + self.size[-1], file=res)
         for f in self.field_value_list:
@@ -418,6 +493,36 @@ class _FieldStruct(object):
         '''Create a NITF field structure structure.'''
         self.value = {}
         self.fh_loc = defaultdict(lambda: dict())
+    def items(self, array_as_list = True):
+        '''Return an iterator that gives returns tuples with the field name
+        and value of that field. 
+
+        By default, for arrays/looped data we convert the data to a
+        possible nested list (e.g., [1,2,3] for a field in a loop of
+        size 3, [[1,2,3], [1,2]] for a field with an outer loop of
+        size 2, and inner loop of (3,2).
+
+        Note that some fields in a FieldStruct might be conditional. In all
+        cases the field name is returned, even if it is conditional with
+        the condition false. In the case that the conditional field isn't 
+        present, its value is returned as None.
+
+        Depending on the application, converting arrays to lists might not
+        be desirable. If the array_as_list keyword is set to False we instead
+        return a FieldValueArray. Note that FieldValueArray has its own 
+        iterate function which can be used to step through the array (e.g.,
+        in comparing 2 arrays).
+        '''
+        for f in self.field_value_list:
+            if(not isinstance(f, _FieldLoopStruct)):
+                if(f.field_name is not None):
+                    yield (f.field_name, f.get(self, ()))
+            else:
+                for fname in f.field_names():
+                    if(array_as_list):
+                        yield (fname, getattr(self, fname).to_list())
+                    else:
+                        yield (fname, getattr(self, fname))
     def write_to_file(self, fh):
         '''Write to a file stream.'''
         for f in self.field_value_list:
@@ -449,7 +554,7 @@ class _FieldStruct(object):
         except ValueError:
             # We have no _FieldValue, so just set maxlen to a fixed value
             maxlen = 10
-        res = six.StringIO()
+        res = io.StringIO()
         for f in self.field_value_list:
             if(not isinstance(f, _FieldLoopStruct) and f.field_name is not None):
                 print(f.field_name.ljust(maxlen) + ": " + f.get_print(self,()),
@@ -493,6 +598,7 @@ class FieldData(object):
         self.condition = options.get("condition", None)
         self.size_offset = options.get("size_offset", 0)
         self.size_not_updated = options.get("size_not_updated", False)
+        self.ty = ty
         # This isn't exactly the size. Rather it is the expression that
         # we either use to read or set the size, e.g., "ixshdl". Note
         # that in standard NITF bizarreness this isn't actually the size,
@@ -727,7 +833,118 @@ class FloatFieldData(NumFieldData):
         if(t is None):
             return "Not used"
         return "%f" % t
-        
+
+logger = logging.getLogger('nitf_diff')
+class FieldStructDiff(NitfDiffHandle):
+    '''Base class for comparing the various NITF Field Structure objects
+    (e.g., NitfFileHeader).
+
+    While we could just create new NitfDiffHandle objects for each
+    structure (e.g., each of the TREs in the file), we instead try to
+    provide a good deal of functionality through "configuration". The
+    configuration is a dictionary type object that derived class get
+    from the nitf_diff object.  This then contains keyword/value pairs
+    for controlling things. While derived classes can others, these
+    are things that can be defined:
+
+    exclude           - list of fields to exclude from comparing
+    exclude_but_warn  - list of fields to exclude from comparing, but warn if 
+                        different
+    include           - if nonempty, only include the given fields
+    eq_fun            - a dictionary going from field name to a function
+                        to compare
+    rel_tol           - a dictionary going from field name to a relative
+                        tolerance. Only used for fields with float type.
+    abs_tol           - a dictionary going from field name to absolute
+                        tolerance. Only used for fields with float type.
+
+    If a function isn't otherwise defined in eq_fun, we use operator.eq, 
+    except for floating point numbers. For floating point numbers we use
+    math.isclose. The rel_tol and/or abs_tol can be supplied. The default
+    values are used for math.isclose if not supplied (so 1e-9 and 0.0).
+    
+    For array/loop fields we compare the shape, and if the same we compare
+    each element in the array.
+    '''
+    def configuration(self, nitf_diff):
+        '''Derived class should extract out the appropriate configuration
+        from the supplied NitfDiff object.'''
+        # Default is no configuration
+        return {}
+    def _is_diff_ignored(self, s, *args):
+        logger.difference_ignored(s, *args)
+    def _is_diff(self, s, *args):
+        logger.difference(s, *args)
+        self.is_same = False
+
+    def handle_diff(self, obj1, obj2, nitf_diff):
+        '''Derived class will likely override this to check for their
+        specific types'''
+        if(not isinstance(obj1, _FieldStruct) or
+           not isinstance(obj2, _FieldStruct)):
+            return (False, None)
+        return (True, self.compare_obj(obj1, obj2, nitf_diff))
+    
+    def compare_obj(self, obj1, obj2, nitf_diff):
+        c = self.configuration(nitf_diff)
+        exclude = c.get('exclude', [])
+        exclude_but_warn = c.get('exclude_but_warn', [])
+        include = c.get('include', [])
+        eq_fun = c.get('eq_fun', {})
+        rel_tol = c.get('rel_tol', {})
+        abs_tol = c.get('abs_tol', {})
+        self.is_same = True
+        for (fn1, v1), (fn2, v2) in \
+            itertools.zip_longest(obj1.items(array_as_list=False),
+                                  obj2.items(array_as_list=False),
+                                  fillvalue=("No_field", None)):
+            if(fn1 != fn2):
+                logger.difference("different fields found. Field in object 1 is %s and object 2 is %s. Stopping comparison." % (fn1, fn2))
+                return False
+            if fn1 in exclude:
+                continue
+            if len(include) > 0 and fn1 not in include:
+                continue
+            if fn1 in exclude_but_warn:
+                rep_diff = self._is_diff_ignored
+            else:
+                rep_diff = self._is_diff
+            if(isinstance(v1, float) or (isinstance(v1, FieldValueArray) and
+                                         v1.type() == float)):
+                def _f(a,b):
+                    if(a is None and b is None):
+                        return True
+                    if(a is None or b is None):
+                        return False
+                    return math.isclose(a,b,rel_tol = rel_tol.get(fn1, 1e-9),
+                                        abs_tol = abs_tol.get(fn1, 0.0))
+                def_eq_fun = _f
+            else:
+                def_eq_fun = operator.eq
+            cmp_fun = eq_fun.get(fn1, def_eq_fun) 
+            if(isinstance(v1, FieldValueArray)):
+                if(not FieldValueArray.is_shape_equal(v1, v2)):
+                    rep_diff("%s: array shapes are different", fn1)
+                    continue
+                diff_count = 0
+                total_count = 0
+                if(v1.shape() is not None):
+                    for (ind, av1), av2 in itertools.zip_longest(v1.items(),
+                                                                 v2.values()):
+                        total_count += 1
+                        if(not cmp_fun(av1, av2)):
+                            ind_str = ", ".join(str(i) for i in ind)
+                            logger.difference_detail("%s[%s]: %s != %s",
+                                                     fn1, ind_str, av1, av2)
+                            diff_count += 1
+                if(diff_count > 0):
+                    rep_diff("%s: array had %d of %d different", fn1, 
+                             diff_count, total_count)
+                continue
+            if not cmp_fun(v1, v2):
+                rep_diff("%s: %s != %s", fn1, v1, v2)
+        return self.is_same
+
 class _create_nitf_field_structure(object):
     # The __dict__ is at class level
     def __init__(self):
@@ -835,27 +1052,10 @@ def create_nitf_field_structure(name, description, hlp = None):
               class. However there are some special cases (e.g., IXSHD used
               for image segment level TREs). If we need to change this,
               we can supply the class to use here. This class should supply
-              a fieldname, get, set, loop, write_to_file, read_from_file, 
+              a field_name, get, set, loop, write_to_file, read_from_file, 
               and get_print function because these are the things we call. 
               Note that we have a generic FieldData class here, which might 
               be sufficient.
-    eq_fun  - Function used for testing equality. This is assumed to take at
-              least two values for comparison, but may accept other values,
-              for example a floating-point comparison tolerance. This was
-              added so that nitf_diff_support could use equality definitions
-              provided by particular subheader and TRE fields. An example is
-              the NitfImageSubheader field iid1 that uses a case-ignoring
-              string comparing function. This causes the nitf_diff_support
-              ISegHandle class to ignore case while comparing iid1 fields.
-              The value of eq_fun should be a tuple with the first element
-              being the name of the function, and any remaining elements
-              being extra parms passed to the function, after the two items
-              begin compared.
-    name    - Name used to identify the field for include/exclude lists
-              optionally used by nitf_diff_support.nitf_file_diff.
-              If name is not provided, field_name is used instead. This 
-              alternate name is available to solve any possible name 
-              collisions among various segment headers and TRE fields.
 
     The 'frmt' can be a format string (e.g., "%03d" for a 3 digit integer),
     or it can be a function that takes a value and returns a string - useful
@@ -882,5 +1082,7 @@ def create_nitf_field_structure(name, description, hlp = None):
             pass
     return res
 
-__all__ = ["FieldData", "StringFieldData", "IntFieldData", "FloatFieldData", "hardcoded_value", "NitfLiteral",
+__all__ = ["FieldValueArray", "FieldData", "StringFieldData", "IntFieldData",
+           "FloatFieldData", "hardcoded_value", "NitfLiteral",
+           "FieldStructDiff",
            "create_nitf_field_structure", "float_to_fixed_width"]

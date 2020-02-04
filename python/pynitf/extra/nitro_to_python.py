@@ -8,7 +8,7 @@
 
 import docopt_simple
 import re
-version="%prog April 4, 2017"
+version="April 4, 2017"
 usage="""Usage:
   nitro_to_python.py [options] <nitro_source_file>
   nitro_to_python.py -h | --help
@@ -66,7 +66,7 @@ desc = ["%s",
 t_out = '''from pynitf.nitf_tre import *
 from pynitf.nitf_tre_%s import *
 from pynitf_test_support import *
-import io, six
+import io
 
 def test_tre_%s_basic():
 
@@ -135,12 +135,12 @@ print(' ' * 80)
 t_out += t_assign_text
 
 t_out += '''
-    fh = six.BytesIO()
+    fh = io.BytesIO()
     t.write_to_file(fh)
     print(fh.getvalue())
     assert fh.getvalue() == b''
 
-    fh2 = six.BytesIO(fh.getvalue())
+    fh2 = io.BytesIO(fh.getvalue())
     t2 = Tre%s()
     t2.read_from_file(fh2)\n\n''' % tre_name
 

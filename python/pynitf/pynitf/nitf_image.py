@@ -1,9 +1,12 @@
 from .nitf_image_subheader import (NitfImageSubheader,
                                    set_default_image_subheader)
+from .priority_handle_set import PriorityHandleSet
 from .nitf_security import security_unclassified
-import abc, six
+from .nitf_diff_handle import (NitfDiffHandle, NitfDiffHandleSet)
+import abc
 import numpy as np
 import collections
+import logging
 
 class NitfImageCannotHandle(RuntimeError):
     '''Exception that indicates we can't read a particular image. Note that
@@ -12,8 +15,7 @@ class NitfImageCannotHandle(RuntimeError):
     def __init__(self, msg = "Can't handle this type of image"):
         RuntimeError.__init__(self, msg)
         
-@six.add_metaclass(abc.ABCMeta)
-class NitfImage(object):
+class NitfImage(object, metaclass=abc.ABCMeta):
     '''This contains a image that we want to read or write from NITF.
 
     This class supplies a basic interface, a specific type of image can
@@ -178,6 +180,18 @@ class NitfImagePlaceHolder(NitfImage):
                 #This may go negative on the last loop but that's fine
                 bytes_left = bytes_left - buffer_size
 
+logger = logging.getLogger('nitf_diff')
+class ImagePlaceHolderDiff(NitfDiffHandle):
+    def handle_diff(self, d1, d2, nitf_diff):
+        if(not isinstance(d1, NitfImagePlaceHolder) or
+           not isinstance(d2, NitfImagePlaceHolder)):
+            return (False, None)
+        logger.warn("Skipping image '%s', don't know how to read it.",
+                    d1.image_subheader.iid1)
+        return (True, True)
+
+NitfDiffHandleSet.add_default_handle(ImagePlaceHolderDiff())
+    
 class NitfImageReadNumpy(NitfImageWithSubset):
     '''Implementation of NitfImage that reads data into a numpy array. We 
     can either read the data into memory, or do a memory map.
@@ -247,6 +261,30 @@ class NitfImageReadNumpy(NitfImageWithSubset):
 
                 #This may go negative on the last loop but that's fine
                 bytes_left = bytes_left - buffer_size
+
+class ImageReadNumpyDiff(NitfDiffHandle):
+    def handle_diff(self, d1, d2, nitf_diff):
+        if(not isinstance(d1, NitfImageReadNumpy) or
+           not isinstance(d2, NitfImageReadNumpy)):
+            return (False, None)
+        is_same = True
+        t1 = d1[:,:,:]
+        t2 = d2[:,:,:]
+        # TODO Expose tolerance as configuration parameters
+        if(t1.shape != t2.shape):
+            logger.difference("Image '%s' shape different: %s != %s",
+                              d1.image_subheader.iid1, t1.shape, t2.shape)
+            is_same = False
+        elif(not np.allclose(t1, t2)):
+            logger.difference("Image '%s' is different",
+                              d1.image_subheader.iid1)
+            is_same = False
+        # TODO Copy over other work by Derek, currently in
+        # nitf_diff_support
+        return (True, is_same)
+
+NitfDiffHandleSet.add_default_handle(ImageReadNumpyDiff())
+                
 
 class NitfImageWriteDataOnDemand(NitfImageWithSubset):
 
@@ -387,62 +425,33 @@ class NitfRadCalc(object):
         ss = slice(sstart, sstart + d.shape[2])
         d[:,:,:] = self.dn[bs,ls,ss] * self.gain[bs,ls,ss] + self.offset[bs,ls,ss]
 
-class NitfImageHandleList(object):
-    '''Small class to handle to list of image objects. This is little more
-    complicated than just a list of handlers. The extra piece is allowing
-    a priority_order to be assigned to the handlers, we look for 
-    lower number first. So for example we can put NitfImagePlaceHolder as the
-    highest number, and it will be tried after all the other handlers have
-    been tried.
-
-    This is a chain-of-responsibility pattern, with the addition of an
-    ordering based on a priority_order. 
-    '''
-    def __init__(self):
-        self.handle_list = collections.defaultdict(lambda : set())
-
-    def add_handle(self, cls, priority_order=0):
-        self.handle_list[priority_order].add(cls)
-
-    def discard_handle(self, cls):
-        '''Discard any handle of the given class. Ok if this isn't actually
-        in the list of handles.'''
-        for k in sorted(self.handle_list.keys()):
-            self.handle_list[k].discard(cls)
-
-    def image_handle(self, subheader, header_size, data_size, fh, segindex):
-        for k in sorted(self.handle_list.keys()):
-            for cls in self.handle_list[k]:
-                try:
-                    t = cls(image_subheader=subheader,
-                            header_size=header_size,
-                            data_size=data_size)
-                    t.read_from_file(fh, segindex)
-                    return t
-                except NitfImageCannotHandle:
-                    pass
-        raise NitfImageCannotHandle("No handle found for data.")
-
-_hlist = NitfImageHandleList()
-
-
-def nitf_image_read(subheader, header_size, data_size, fh, segindex):
-    return _hlist.image_handle(subheader, header_size, data_size, fh, segindex)
-
+class NitfImageHandleSet(PriorityHandleSet):
+    '''Set of handlers for reading an image.'''
+    def handle_h(self, cls, subheader, header_size, data_size, fh, segindex):
+        try:
+            t = cls(image_subheader=subheader,
+                    header_size=header_size,
+                    data_size=data_size)
+            t.read_from_file(fh, segindex)
+        except NitfImageCannotHandle:
+            return (False, None)
+        return (True, t)
+        
 def register_image_class(cls, priority_order=0):
-    _hlist.add_handle(cls, priority_order)
+    NitfImageHandleSet.add_default_handle(cls, priority_order)
 
 def unregister_image_class(cls):
     '''Remove a handler from the list. This isn't used all that often,
     but it can be useful in testing.'''
-    _hlist.discard_handle(cls)
+    NitfImageHandleSet.discard_default_handle(cls)
     
 register_image_class(NitfImageReadNumpy)
-register_image_class(NitfImagePlaceHolder, priority_order=1000)
+register_image_class(NitfImagePlaceHolder, priority_order=-1000)
         
 __all__ = ["NitfImageCannotHandle", "NitfImage", "NitfImageWithSubset",
            "NitfImagePlaceHolder",
            "NitfImageReadNumpy", "NitfImageWriteDataOnDemand",
            "NitfImageWriteNumpy", "NitfRadCalc", 
-           "nitf_image_read", "register_image_class", "unregister_image_class"]
+           "NitfImageHandleSet", "register_image_class",
+           "unregister_image_class"]
 

@@ -1,8 +1,8 @@
-from __future__ import print_function
 from .nitf_field import *
 from .nitf_security import NitfSecurity
+from .nitf_diff_handle import NitfDiffHandle, NitfDiffHandleSet
 
-import six
+import io
 
 hlp = '''This is a NITF File header. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
@@ -86,7 +86,7 @@ def _set_security(self, s):
 NitfFileHeader.security = property(_get_security, _set_security)
 
 def summary(self):
-    res = six.StringIO()
+    res = io.StringIO()
     print("%s %s %s MD5: " % (self.fhdr, self.fver, self.ftitle), file=res)
     print("%d Image Segments, %d Graphic Segments, %d Text Segments, %d DESs"
           % (self.numi, self.nums, self.numt, self.numdes), file=res)
@@ -94,5 +94,38 @@ def summary(self):
 
 NitfFileHeader.summary = summary
 
-__all__ = ["NitfFileHeader"]
+class FileHeaderDiff(FieldStructDiff):
+    '''Compare two file headers.'''
+    def configuration(self, nitf_diff):
+        return nitf_diff.config.get("File Header", {})
+
+    def handle_diff(self, h1, h2, nitf_diff):
+        with nitf_diff.diff_context("NITF File Header"):
+            if(not isinstance(h1, NitfFileHeader) or
+               not isinstance(h2, NitfFileHeader)):
+                return (False, None)
+            return (True, self.compare_obj(h1, h2, nitf_diff))
+
+NitfDiffHandleSet.add_default_handle(FileHeaderDiff())
+_default_config = {}
+# A user might not care at all about the fdt changing, but by default
+# give a warning since they might care. The user can change the configuration
+# of nitf_diff to completely ignore this if desired.
+_default_config["exclude_but_warn"] = ["fdt"]
+# Ignore all the structural differences about the file. We compare all
+# the individual pieces, so this will get reported as we go through each
+# element. But it is not useful to also report that udhd varies if we are
+# already saying the TREs are different.
+_default_config["exclude"] = ['fl', 'hl',
+                              'numi', 'lish', 'li',
+                              'nums', 'lssh', 'ls',
+                              'numx',
+                              'numt', 'ltsh', 'lt', 
+                              'numdes', 'ldsh', 'ld',
+                              'numres', 'lresh', 'lre',
+                              'udhdl', 'udhofl', 'udhd', 
+                              'xhdl', 'xhdlofl', 'xhd']
+
+NitfDiffHandleSet.default_config["File Header"] = _default_config
+__all__ = ["NitfFileHeader", "FileHeaderDiff"]
 

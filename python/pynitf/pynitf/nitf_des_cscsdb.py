@@ -1,8 +1,8 @@
-from __future__ import print_function
 from .nitf_field import *
 from .nitf_des import *
 from .nitf_des_csattb import udsh, add_uuid_des_function
-import six
+from .nitf_diff_handle import NitfDiffHandle, NitfDiffHandleSet
+import io
 
 hlp = '''This is a NITF CSCSDB DES. The field names can be pretty
 cryptic, but these are documented in detail in the NITF 2.10 documentation
@@ -203,7 +203,7 @@ DesCSCSDB.desid = hardcoded_value("CSCSDB")
 DesCSCSDB.desver = hardcoded_value("01")
 
 def _summary(self):
-    res = six.StringIO()
+    res = io.StringIO()
     print("CSCSDB", file=res)
     return res.getvalue()
 
@@ -211,4 +211,43 @@ DesCSCSDB.summary = _summary
 
 add_uuid_des_function(DesCSCSDB)    
 register_des_class(DesCSCSDB)
+
+
+class CsscdbDiff(FieldStructDiff):
+    '''Compare two DesCSCSDB.'''
+    def configuration(self, nitf_diff):
+        return nitf_diff.config.get("DesCSCSDB", {})
+
+    def handle_diff(self, h1, h2, nitf_diff):
+        with nitf_diff.diff_context("DesCSCSDB"):
+            if(not isinstance(h1, DesCSCSDB) or
+               not isinstance(h2, DesCSCSDB)):
+                return (False, None)
+            return (True, self.compare_obj(h1, h2, nitf_diff))
+
+NitfDiffHandleSet.add_default_handle(CsscdbDiff())
+# No default configuration
+_default_config = {}
+NitfDiffHandleSet.default_config["DesCSCSDB"] = _default_config
+
+class CsscdbUserheaderDiff(FieldStructDiff):
+    '''Compare two user headers.'''
+    def configuration(self, nitf_diff):
+        return nitf_diff.config.get("DesCSCSDB_UH", {})
+
+    def handle_diff(self, h1, h2, nitf_diff):
+        with nitf_diff.diff_context("DesCSCSDB_UH"):
+            if(not isinstance(h1, DesCSCSDB_UH) or
+               not isinstance(h2, DesCSCSDB_UH)):
+                return (False, None)
+            return (True, self.compare_obj(h1, h2, nitf_diff))
+
+NitfDiffHandleSet.add_default_handle(CsscdbUserheaderDiff())
+_default_config = {}
+# UUID change each time they are generated, so don't include in
+# check
+_default_config["exclude"] = ['id', 'assoc_elem_id']
+ 
+NitfDiffHandleSet.default_config["DesCSCSDB_UH"] = _default_config
+
 __all__ = ["DesCSCSDB", "DesCSCSDB_UH"]

@@ -370,7 +370,7 @@ ArrayAd<double, 1>
 OffsetImageGroundConnection::parameter_with_derivative() const 
 { 
   ArrayAd<double, 1> rest = ig_->parameter_with_derivative(); 
-  ArrayAd<double, 1> res(2 + rest.rows(), res.number_variable());
+  ArrayAd<double, 1> res(2 + rest.rows(), rest.number_variable());
   res(0) = line_offset_;
   res(1) = sample_offset_;
   if(res.rows() > 2)

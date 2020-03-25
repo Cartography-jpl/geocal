@@ -78,8 +78,6 @@ void throwout(GeometricTiePoints& Tpset)
 int main(int Argc, char *Argv[])
 {
 try {
-  int   minsrch;
-
   int chop,picout,srchdim;
   int retry,refinerr;
   double vloff, vsoff;
@@ -116,7 +114,7 @@ try {
   int zerothr = va.arg<int>("zerothr");
   // Make sure numbers are even.
   if (search%2==1) search++;
-  if (minsrch%2==1) minsrch++;
+  if (msrc%2==1) msrc++;
   if (fftsize%2==1) fftsize++;
   bool predfunc = va.has_keyword("QUAD");
   int nredo = va.arg<int>("redo");

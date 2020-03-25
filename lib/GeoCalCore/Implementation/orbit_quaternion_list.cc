@@ -165,7 +165,7 @@ void OrbitListCache::print(std::ostream& Os) const
 }
 
 
-void OrbitListCache::notify_update(const Orbit& Orb)
+void OrbitListCache::notify_update()
 {
   boost::shared_ptr<QuaternionOrbitData> null;
   // Throw away all cached values if underlying orbit changes.

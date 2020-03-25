@@ -479,7 +479,6 @@ public:
 private:
   const RasterImage& ri;
   int istart_, jstart_, iend_, jend_, ntl, nts;
-  bool end_;
 };
 
 }

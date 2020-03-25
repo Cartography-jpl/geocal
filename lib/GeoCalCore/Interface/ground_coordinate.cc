@@ -54,7 +54,13 @@ public:
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
   }
   virtual void to_inertial(int Body_id, const Time& T, 
-			   double Cf_to_ci[3][3])
+     const CartesianFixed& From, CartesianInertial& To)
+  {
+    throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
+  }
+  virtual void to_inertial(int Body_id, const Time& T, 
+   const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
+   CartesianInertial& To, boost::array<double, 3>& Vel_ci)
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
   }

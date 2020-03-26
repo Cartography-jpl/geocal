@@ -385,7 +385,7 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > AirMspiOrbit::orbit_data(const TimeWithDerivative &T) const
+        boost::shared_ptr< OrbitData > AirMspiOrbit::orbit_data(Time T) const
 
         """
         return _air_mspi_orbit.AirMspiOrbit_orbit_data(self, *args)

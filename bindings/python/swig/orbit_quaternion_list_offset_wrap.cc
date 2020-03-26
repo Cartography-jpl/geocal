@@ -6764,7 +6764,7 @@ SWIGINTERN PyObject *_wrap_OrbitQuaternionListOffset__v_position_offset_sc_coord
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7165,7 +7165,7 @@ SWIGINTERN PyObject *_wrap_OrbitScCoorOffset__v_position_offset_sc_coordinate(Py
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7302,7 +7302,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitScCoorOffset_orbit_data", _wrap_OrbitScCoorOffset_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<OrbitData> GeoCal::OrbitScCoorOffset::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > OrbitScCoorOffset::orbit_data(Time T) const\n"
 		"\n"
 		""},
 	 { (char *)"OrbitScCoorOffset__v_orbit_underlying", (PyCFunction)_wrap_OrbitScCoorOffset__v_orbit_underlying, METH_O, (char *)"\n"

@@ -8395,7 +8395,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__gradient(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9608,7 +9608,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble__v_gradient(PyObject *SWIGUNU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -13904,8 +13904,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_AutoDerivativeDouble", _wrap_new_AutoDerivativeDouble, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivative< T >::AutoDerivative(const AutoDerivative< T > &D)\n"
-		"Copy constructor. This does a deep copy. \n"
+		"GeoCal::AutoDerivative< T >::AutoDerivative(const T &Val, int i_th, int nvars)\n"
+		"Constructor for a value of the i_th independent variable (0 based).\n"
+		"\n"
+		"We create a gradient that is all 0, except for \"1\" in the i_th\n"
+		"location. \n"
 		""},
 	 { (char *)"AutoDerivativeDouble__v_number_variable", (PyCFunction)_wrap_AutoDerivativeDouble__v_number_variable, METH_O, (char *)"\n"
 		"\n"
@@ -13943,7 +13946,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AutoDerivativeDouble_swiginit", AutoDerivativeDouble_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_AutoDerivativeRefDouble", _wrap_new_AutoDerivativeRefDouble, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V)\n"
+		"GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V, const blitz::Array< T, 1 > &G)\n"
 		"\n"
 		""},
 	 { (char *)"AutoDerivativeRefDouble__v_value", (PyCFunction)_wrap_AutoDerivativeRefDouble__v_value, METH_O, (char *)"\n"

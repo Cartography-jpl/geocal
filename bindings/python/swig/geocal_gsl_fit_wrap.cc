@@ -6707,10 +6707,8 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::gsl_fit(const GslMatrix &X, const GslVector &Y, GslVector &C, GslMatrix &Cov,\n"
 		"double &Chisq)\n"
 		"This does a linear fit to solve the system Y = X * C (in the least\n"
-		"squares sense).\n"
-		"\n"
-		"The data Y is given equal weight for each point. We return the Cov and\n"
-		"chisqr in addition to the solution. \n"
+		"squares sense). The data Y is given equal weight for each point. We\n"
+		"return the Cov and chisqr in addition to the solution. \n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

@@ -7876,8 +7876,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_IgcCollectionOrbitData", _wrap_new_IgcCollectionOrbitData, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<\n"
-		"Camera > &Cam, const boost::shared_ptr< Dem > &D)\n"
+		"GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData(const std::vector< boost::shared_ptr< RasterImage > > &Img_list,\n"
+		"const std::vector< Time > &Tm_list, const std::vector< std::string >\n"
+		"&Title_list, const boost::shared_ptr< Orbit > &Orb, const\n"
+		"boost::shared_ptr< Camera > &Cam, const boost::shared_ptr< Dem > &D)\n"
 		"\n"
 		""},
 	 { (char *)"IgcCollectionOrbitData_add_image", _wrap_IgcCollectionOrbitData_add_image, METH_VARARGS, (char *)"\n"

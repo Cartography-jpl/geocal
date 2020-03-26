@@ -7653,9 +7653,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"GroundMspiIgc::GroundMspiIgc(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,\n"
 		"double Azimuth, double Start_elevation_angle, double Rotation_rate,\n"
-		"const std::vector< Time > &Time_tag, const boost::shared_ptr<\n"
-		"QuaternionCamera > &Cam, int Band)\n"
+		"const std::vector< Time > &Time_tag, const std::string &Camera_config,\n"
+		"int Band)\n"
+		"Constructor.\n"
 		"\n"
+		"The angles are in degrees, and the rate is in degress per second. \n"
 		""},
 	 { (char *)"GroundMspiIgc_solar_look", _wrap_GroundMspiIgc_solar_look, METH_VARARGS, (char *)"\n"
 		"\n"

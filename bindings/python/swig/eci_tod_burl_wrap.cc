@@ -6962,8 +6962,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_EciTodBurl", _wrap_new_EciTodBurl, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::EciTodBurl::EciTodBurl(const boost::array< double, 3 > &Pos)\n"
-		"Create an Eci with the given position in meters. \n"
+		"GeoCal::EciTodBurl::EciTodBurl(double X, double Y, double Z)\n"
+		"Make an EciTod with the given position, in meters. \n"
 		""},
 	 { (char *)"EciTodBurl_reference_surface_intersect_approximate", _wrap_EciTodBurl_reference_surface_intersect_approximate, METH_VARARGS, (char *)"\n"
 		"\n"

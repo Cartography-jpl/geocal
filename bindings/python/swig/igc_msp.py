@@ -217,15 +217,15 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
     def __init__(self, *args):
         """
 
-        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &D, int
-        Image_index, const std::string &Plugin_name, const std::string
-        &Model_name)
+        IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem >
+        &D=boost::shared_ptr< Dem >(new SimpleDem()), int Image_index=0)
         Constructor.
 
-        This version forces the use of the given model name form the given
-        plugin. This can be useful when diagnosing problems where you expect a
-        particular plugin to handle a file, but it doesn't - or if the wrong
-        plugin is processing the file. 
+        Note to use the MSP library, you should make sure the proper
+        environment variables are set. This happens in the normal GeoCal
+        setup, but the variables are MSP_DATA_DIR, MSPCCS_DATA, and
+        CSM_PLUGIN_DIR. Note the directory should end in "/", just as a
+        convention - so /foo/bar/plugins/. 
         """
         _igc_msp.IgcMsp_swiginit(self, _igc_msp.new_IgcMsp(*args))
 

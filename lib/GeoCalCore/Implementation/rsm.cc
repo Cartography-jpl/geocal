@@ -265,7 +265,7 @@ void Rsm::image_coordinate(double X, double Y, double Z, ImageCoordinate& Res,
 {
   // Allow a little slop in the line/sample calculated, so value like
   // -0.0001 don't get called out of range.
-  const double tol = 0.01;
+  //const double tol = 0.01;
   if(rparm) {
     boost::shared_ptr<GroundCoordinate> gc =
       coordinate_converter()->convert_from_coordinate(X, Y, Z);

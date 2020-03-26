@@ -48,11 +48,6 @@ inline double sqr(double x) { return x * x; }
 class DummyToolkitCoordinateInterface : public ToolkitCoordinateInterface {
 public:
   virtual ~DummyToolkitCoordinateInterface() {}
-  virtual void to_inertial(int Body_id, const Time& T,
-    const CartesianFixed& From, CartesianInertial& To)
-  {
-    throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
-  }
   virtual void to_inertial(int Body_id, const Time& T, 
      const CartesianFixed& From, CartesianInertial& To)
   {

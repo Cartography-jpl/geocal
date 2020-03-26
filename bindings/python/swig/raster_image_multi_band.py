@@ -247,8 +247,10 @@ class RasterImageMultiBand(geocal_swig.generic_object.GenericObject):
     def write(self, Lstart, Sstart, Data):
         """
 
-        void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< double, 3 > &Data)
+        void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< int, 3 > &Data)
+        Write the data to the same location in each image.
 
+        Data should be number_band() x nline x nsamp. 
         """
         return _raster_image_multi_band.RasterImageMultiBand_write(self, Lstart, Sstart, Data)
 
@@ -284,10 +286,8 @@ def copy_raster(*args):
 
     void GeoCal::copy(const RasterImageMultiBand &Img_in, RasterImageMultiBand &Img_out,
     bool Log_progress=false)
-    This copies one multiband image to another.
-
-    The images should be the same size. We also assume that all the bands
-    are the same size.
+    This copies one multiband image to another. The images should be the
+    same size. We also assume that all the bands are the same size.
 
     Setting Diagnostic to true causes messages to be printed as we do the
     copying. 

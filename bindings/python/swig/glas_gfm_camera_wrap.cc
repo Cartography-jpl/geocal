@@ -8363,7 +8363,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_ppoff(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8425,7 +8425,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff__SWIG_0(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8801,7 +8801,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_field_alignment__SWIG_0(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9177,7 +9177,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_first_line_block__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9323,7 +9323,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_first_sample_block__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9469,7 +9469,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_delta_line_block__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9615,7 +9615,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_delta_sample_block__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9768,7 +9768,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera_field_alignment_block__SWIG_0(PyObject 
     }
   }
   {
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[5], stride[5];
     for(int i = 0; i < 5; ++i) {
@@ -10173,12 +10173,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GlasGfmCamera_field_alignment_block", _wrap_GlasGfmCamera_field_alignment_block, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample)\n"
-		"Populate the field_alignment, first_line_block, first_sample_block,\n"
-		"delta_line and delta_sample to match the given camera.\n"
+		"void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)\n"
 		"\n"
-		"This creates only one block - we currently don't support multiple\n"
-		"blocks \n"
 		""},
 	 { (char *)"delete_GlasGfmCamera", (PyCFunction)_wrap_delete_GlasGfmCamera, METH_O, (char *)"\n"
 		"\n"

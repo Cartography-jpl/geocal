@@ -72,7 +72,7 @@ OgrWrapper::OgrWrapper(const std::string& Wkt)
 void OgrWrapper::init(const std::string& Wkt)
 {
   boost::shared_ptr<OGRSpatialReference> ogr_create(new OGRSpatialReference);
-  char* wkt_str = const_cast<char*>(Wkt.c_str());
+  const char* wkt_str = Wkt.c_str();
   OGRErr status = ogr_create->importFromWkt(&wkt_str);
   if(status != OGRERR_NONE) {
     Exception e;
@@ -121,8 +121,7 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
         SPHEROID[\"Mars_2000_IAU_IAG\",3396190.0,169.89444722361179]],\
     PRIMEM[\"Greenwich\",0],\
     UNIT[\"Decimal_Degree\",0.0174532925199433]]";
-    char * wkt_str = const_cast<char*>(wkt);
-    OGRErr status = ogr_mars_pc->importFromWkt(&wkt_str);
+    OGRErr status = ogr_mars_pc->importFromWkt(&wkt);
     if(status != OGRERR_NONE) {
       Exception e;
       e << "Create of OGRSpatialReference failed. "
@@ -138,8 +137,7 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
         SPHEROID[\"CERES\",487300,0.0668992407141]],\
     PRIMEM[\"Reference_Meridian\",0],\
     UNIT[\"Decimal_Degree\",0.0174532925199433]]";
-    char * wkt_str = const_cast<char*>(wkt);
-    OGRErr status = ogr_ceres_pc->importFromWkt(&wkt_str);
+    OGRErr status = ogr_ceres_pc->importFromWkt(&wkt);
     if(status != OGRERR_NONE) {
       Exception e;
       e << "Create of OGRSpatialReference failed. "

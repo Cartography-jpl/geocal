@@ -290,7 +290,7 @@ class OrbitScCoorOffset(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        virtual boost::shared_ptr<OrbitData> GeoCal::OrbitScCoorOffset::orbit_data(const TimeWithDerivative &T) const
+        boost::shared_ptr< OrbitData > OrbitScCoorOffset::orbit_data(Time T) const
 
         """
         return _orbit_quaternion_list_offset.OrbitScCoorOffset_orbit_data(self, *args)

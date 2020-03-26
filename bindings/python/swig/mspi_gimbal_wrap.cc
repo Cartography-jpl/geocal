@@ -7898,7 +7898,7 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_parameter_mask__SWIG_0(PyObject *SWIGUN
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8259,10 +8259,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ObserverMspiGimbal_swiginit", ObserverMspiGimbal_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_MspiGimbal", _wrap_new_MspiGimbal, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::MspiGimbal::MspiGimbal(const std::string &File_name, const std::string\n"
-		"&Extra_config_file=\"\")\n"
-		"Constructor, which creates a MspiGimbal from the given configuration\n"
-		"file. \n"
+		"GeoCal::MspiGimbal::MspiGimbal(double Epsilon, double Psi, double Theta)\n"
+		"Constructor. The angles should be in degrees. \n"
 		""},
 	 { (char *)"MspiGimbal_read_config_file", _wrap_MspiGimbal_read_config_file, METH_VARARGS, (char *)"\n"
 		"\n"

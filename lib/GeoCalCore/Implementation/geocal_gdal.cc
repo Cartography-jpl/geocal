@@ -71,7 +71,7 @@ std::string GdalBase::linear_unit_name() const
   if(!has_map_info())
     throw Exception("Attempt to read map_info() data from a GDAL file without map_info()");
   OGRSpatialReference ogr(data_set_->GetProjectionRef());
-  char* nm;
+  const char* nm;
   ogr.GetLinearUnits(&nm);
   return nm;
 }

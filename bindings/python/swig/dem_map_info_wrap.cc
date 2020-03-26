@@ -6884,8 +6884,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"DemMapInfo_height_datum", _wrap_DemMapInfo_height_datum, METH_VARARGS, (char *)"\n"
 		"\n"
-		"double DemMapInfo::height_datum(const Geodetic &Gp) const\n"
-		"\n"
+		"double DemMapInfo::height_datum(const GroundCoordinate &Gp) const\n"
+		"Height relative to datum. \n"
 		""},
 	 { (char *)"DemMapInfo__v_outside_dem_is_error", (PyCFunction)_wrap_DemMapInfo__v_outside_dem_is_error, METH_O, (char *)"\n"
 		"\n"

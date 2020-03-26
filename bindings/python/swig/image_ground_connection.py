@@ -610,9 +610,13 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def resolution_meter(self, *args):
         """
 
-        double ImageGroundConnection::resolution_meter() const
-        Variation of resolution_meter that find the resolution of the center
-        pixel. 
+        double ImageGroundConnection::resolution_meter(const ImageCoordinate &Ic) const
+        Calculate the approximate resolution on the ground of a given
+        ImageCoordinate.
+
+        This finds the intersection with the reference surface for the given
+        pixel, + 1 in the line and sample direction. We find the difference in
+        meters between these points, and select the maximum value. 
         """
         return _image_ground_connection.ImageGroundConnection_resolution_meter(self, *args)
 
@@ -766,8 +770,8 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def __dem(self, D):
         """
 
-        const Dem& GeoCal::ImageGroundConnection::dem() const
-        Dem used by ground_coordinate. 
+        void GeoCal::ImageGroundConnection::dem(const boost::shared_ptr< Dem > &D)
+        Set the DEM to use in ground_coordinate. 
         """
         return _image_ground_connection.ImageGroundConnection___dem(self, D)
 

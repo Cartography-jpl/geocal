@@ -201,8 +201,11 @@ class IgcCollectionRollingShutter(geocal_swig.igc_collection.IgcCollection):
     def __init__(self, *args):
         """
 
-        GeoCal::IgcCollectionRollingShutter::IgcCollectionRollingShutter(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        Camera > &Cam, const boost::shared_ptr< Dem > &D)
+        GeoCal::IgcCollectionRollingShutter::IgcCollectionRollingShutter(const std::vector< boost::shared_ptr< RasterImage > > &Img_list,
+        const std::vector< boost::shared_ptr< TimeTable > > &Tt_list, const
+        std::vector< std::string > &Title_list, const boost::shared_ptr< Orbit
+        > &Orb, const boost::shared_ptr< Camera > &Cam, const
+        boost::shared_ptr< Dem > &D)
 
         """
         _igc_collection_rolling_shutter.IgcCollectionRollingShutter_swiginit(self, _igc_collection_rolling_shutter.new_IgcCollectionRollingShutter(*args))

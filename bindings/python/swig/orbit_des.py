@@ -229,16 +229,16 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        PosCsephb::PosCsephb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
-        Tstep, InterpolationType Itype=LINEAR, LagrangeOrder
-        Lagrange_order=NO_LAGRANGE, EphemerisDataQuality
+        PosCsephb::PosCsephb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,
+        LagrangeOrder Lagrange_order=NO_LAGRANGE, EphemerisDataQuality
         E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,
         PositionType P_type=SAME_AS_ORBIT)
         Constructor.
 
         We sample the position of the given Orbit at fixed spaces times. This
-        version goes from the Min_time, up to Max_time (or more accurately,
-        the largest time Min_time i * Tstep that is <= Max_time).w 
+        version goes from the min_time() of the Orbit, up to max_time() (or
+        more accurately, the largest time min_time() i * Tstep that is <=
+        max_time()). 
         """
         _orbit_des.PosCsephb_swiginit(self, _orbit_des.new_PosCsephb(*args))
 
@@ -570,16 +570,16 @@ class AttCsattb(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        AttCsattb::AttCsattb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
-        Tstep, InterpolationType Itype=LINEAR, LagrangeOrder
-        Lagrange_order=NO_LAGRANGE, AttitudeDataQuality
+        AttCsattb::AttCsattb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,
+        LagrangeOrder Lagrange_order=NO_LAGRANGE, AttitudeDataQuality
         A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,
         AttitudeType A_type=SAME_AS_ORBIT)
         Constructor.
 
         We sample the attitude of the given Orbit at fixed spaces times. This
-        version goes from the Min_time, up to Max_time (or more accurately,
-        the largest time Min_time i * Tstep that is <= Max_time).w 
+        version goes from the min_time() of the Orbit, up to max_time() (or
+        more accurately, the largest time min_time() i * Tstep that is <=
+        max_time()). 
         """
         _orbit_des.AttCsattb_swiginit(self, _orbit_des.new_AttCsattb(*args))
 
@@ -903,7 +903,7 @@ class OrbitDes(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > OrbitDes::orbit_data(const TimeWithDerivative &T) const
+        boost::shared_ptr< OrbitData > OrbitDes::orbit_data(Time T) const
 
         """
         return _orbit_des.OrbitDes_orbit_data(self, *args)

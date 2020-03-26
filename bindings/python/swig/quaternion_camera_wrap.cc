@@ -8914,7 +8914,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_ypr__SWIG_0(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9176,7 +9176,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_euler__SWIG_0(PyObject *SWIGUNUSE
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -12072,14 +12072,14 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"QuaternionCamera__v_euler_with_derivative", _wrap_QuaternionCamera__v_euler_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::QuaternionCamera::euler_with_derivative(const ArrayAd< double, 1 > &Euler)\n"
-		"\n"
+		"void GeoCal::QuaternionCamera::euler_with_derivative(const blitz::Array< AutoDerivative< double >, 1 > &Euler)\n"
+		"Update the frame_to_sc using the given Euler angles epsilon, beta,\n"
+		"data in radians. \n"
 		""},
 	 { (char *)"QuaternionCamera_focal_plane_to_fc", _wrap_QuaternionCamera_focal_plane_to_fc, METH_VARARGS, (char *)"\n"
 		"\n"
-		"FrameCoordinateWithDerivative QuaternionCamera::focal_plane_to_fc(int Band, const AutoDerivative< double > &Xfp, const AutoDerivative<\n"
-		"double > &Yfp) const\n"
-		"Convert focal plane coordinates to FrameCoordinateWithDerivative. \n"
+		"FrameCoordinate QuaternionCamera::focal_plane_to_fc(int Band, double Xfp, double Yfp) const\n"
+		"Convert focal plane coordinates to FrameCoordinate. \n"
 		""},
 	 { (char *)"QuaternionCamera_fc_to_focal_plane", _wrap_QuaternionCamera_fc_to_focal_plane, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -12089,12 +12089,17 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"QuaternionCamera_sc_look_vector", _wrap_QuaternionCamera_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVector GeoCal::QuaternionCamera::sc_look_vector(const DcsLookVector &Dlv) const\n"
+		"ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate &F, int Band) const\n"
+		"Convert from FrameCoordinate to ScLookVector.\n"
 		"\n"
+		"It is perfectly allowable for F.line to be outside the range (0,\n"
+		"number_line(band) 1) or for F.sample to be outside the range (0,\n"
+		"number_sample(band) - 1). The conversion will just act as if the\n"
+		"camera has infinite extent. \n"
 		""},
 	 { (char *)"QuaternionCamera_dcs_look_vector", _wrap_QuaternionCamera_dcs_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"DcsLookVectorWithDerivative QuaternionCamera::dcs_look_vector(const FrameCoordinateWithDerivative &F, int Band) const\n"
+		"virtual DcsLookVectorWithDerivative GeoCal::QuaternionCamera::dcs_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
 		"\n"
 		""},
 	 { (char *)"QuaternionCamera__v_fit_epsilon", _wrap_QuaternionCamera__v_fit_epsilon, METH_VARARGS, (char *)"\n"
@@ -12129,35 +12134,56 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"QuaternionCamera_fit_principal_point_line", _wrap_QuaternionCamera_fit_principal_point_line, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::QuaternionCamera::fit_principal_point_line(bool V, int Band=0)\n"
-		"\n"
+		"bool GeoCal::QuaternionCamera::fit_principal_point_line(int Band=0) const\n"
+		"Indicate if we fit for camera principal point line. \n"
 		""},
 	 { (char *)"QuaternionCamera_fit_principal_point_sample", _wrap_QuaternionCamera_fit_principal_point_sample, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::QuaternionCamera::fit_principal_point_sample(bool V, int Band=0)\n"
-		"\n"
+		"bool GeoCal::QuaternionCamera::fit_principal_point_sample(int Band=0) const\n"
+		"Indicate if we fit for camera principal point sample. \n"
 		""},
 	 { (char *)"QuaternionCamera_dcs_to_focal_plane", _wrap_QuaternionCamera_dcs_to_focal_plane, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void QuaternionCamera::dcs_to_focal_plane(int Band, const boost::math::quaternion< AutoDerivative< double > >\n"
-		"&Dcs, AutoDerivative< double > &Xfp, AutoDerivative< double > &Yfp)\n"
-		"const\n"
+		"void QuaternionCamera::dcs_to_focal_plane(int Band, const boost::math::quaternion< double > &Dcs, double &Xfp,\n"
+		"double &Yfp) const\n"
+		"Go from a look vector in the detector coordinate system to X and Y\n"
+		"coordinates in the focal plane.\n"
 		"\n"
+		"X and Y should be given in millimeters.\n"
+		"\n"
+		"Note that the look vector is not necessarily normalized (since some\n"
+		"implementation don't depend on this being normalized). If you need it\n"
+		"normalized, you need to do that yourself.\n"
+		"\n"
+		"The default implementation is a pinhole camera, derived classed can\n"
+		"override this to add any non-linearity correction. \n"
 		""},
 	 { (char *)"QuaternionCamera_focal_plane_to_dcs", _wrap_QuaternionCamera_focal_plane_to_dcs, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::math::quaternion< AutoDerivative< double > > QuaternionCamera::focal_plane_to_dcs(int Band, const AutoDerivative< double > &Xfp, const AutoDerivative<\n"
-		"double > &Yfp) const\n"
+		"boost::math::quaternion< double > QuaternionCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const\n"
+		"Go from X and Y coordinates in the focal plane to a look vector in the\n"
+		"detector coordinate system to.\n"
 		"\n"
+		"X and Y are given in millimeters.\n"
+		"\n"
+		"The default implementation is a pinhole camera, derived classed can\n"
+		"override this to add any non-linearity correction. \n"
 		""},
 	 { (char *)"new_QuaternionCamera", _wrap_new_QuaternionCamera, METH_VARARGS, (char *)"\n"
 		"\n"
 		"GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > Frame_to_sc_q, double Number_line,\n"
 		"double Number_sample, double Line_pitch, double Sample_pitch, double\n"
 		"Focal_length, const FrameCoordinate &Principal_point, FrameConvention\n"
-		"Frame_convention, FrameDirection Line_direction, FrameDirection\n"
-		"Sample_direction, const blitz::Array< bool, 1 > &Parameter_mask)\n"
+		"Frame_convention=LINE_IS_X, FrameDirection\n"
+		"Line_direction=INCREASE_IS_POSITIVE, FrameDirection\n"
+		"Sample_direction=INCREASE_IS_POSITIVE)\n"
+		"Create a QuaternionCamera.\n"
 		"\n"
+		"The orientation of the camera to the spacecraft to given by the\n"
+		"quaternion that takes frame coordinates to spacecraft coordinates. The\n"
+		"size of the camera and the line pitch, sample pitch, and focal length\n"
+		"are given. By convention, these are given in mm. Finally the\n"
+		"Principal_point (coordinates at center) are given. \n"
 		""},
 	 { (char *)"delete_QuaternionCamera", (PyCFunction)_wrap_delete_QuaternionCamera, METH_O, (char *)"\n"
 		"\n"

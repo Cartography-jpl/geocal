@@ -200,8 +200,8 @@ class ConstantRasterImage(geocal_swig.raster_image_variable.RasterImageVariable)
     def __init__(self, *args):
         """
 
-        GeoCal::ConstantRasterImage::ConstantRasterImage(const MapInfo &Mi, int Value)
-        Construct a MemoryRasterImage of the given MapInfo. 
+        GeoCal::ConstantRasterImage::ConstantRasterImage(int Number_line, int Number_sample, int Value)
+        Construct a ConstantRasterImage of the given size. 
         """
         _constant_raster_image.ConstantRasterImage_swiginit(self, _constant_raster_image.new_ConstantRasterImage(*args))
 

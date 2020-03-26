@@ -229,9 +229,15 @@ RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
 
 class TempFile {
 public:
-  TempFile() {temp_fname = tmpnam(0);}
-  ~TempFile() {unlink(temp_fname);}
-  char* temp_fname;
+  TempFile()
+  {
+    char fname[] = "TemporaryXXXXXX";
+    int fd = mkstemp(fname);
+    close(fd);
+    temp_fname = std::string(fname);
+  }
+  ~TempFile() {unlink(temp_fname.c_str());}
+  std::string temp_fname;
 };
 
 //-----------------------------------------------------------------------

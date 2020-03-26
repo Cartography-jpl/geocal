@@ -508,8 +508,7 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
     def label_set(self, *args):
         """
 
-        void VicarFile::label_set(const std::string &F, const std::string &Val, const std::string
-        &Property="")
+        void VicarFile::label_set(const std::string &F, int Val, const std::string &Property="")
         Set the value of a label.
 
         If the label is already in the file, is is deleted and replaced with

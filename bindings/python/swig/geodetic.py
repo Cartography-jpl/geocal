@@ -196,8 +196,11 @@ class Geodetic(geocal_swig.ground_coordinate.GroundCoordinate):
     def __init__(self, *args):
         """
 
-        GeoCal::Geodetic::Geodetic()
-        Default constructor. 
+        GeoCal::Geodetic::Geodetic(double Latitude, double Longitude, double Height_ellipsoid=0)
+        Make an Geodetic with the given latitude, longitude, and height.
+
+        Latitude and longitude are in degrees, height is in meters. Longitude
+        should be between -180 and 180 and latitude -90 and 90. 
         """
         _geodetic.Geodetic_swiginit(self, _geodetic.new_Geodetic(*args))
 
@@ -222,8 +225,11 @@ class Geocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     def __init__(self, *args):
         """
 
-        GeoCal::Geocentric::Geocentric()
-        Default constructor. 
+        GeoCal::Geocentric::Geocentric(double Latitude, double Longitude, double Height_ellipsoid=0)
+        Make an Geocentric with the given latitude, longitude, and height.
+
+        Latitude and longitude are in degrees, height is in meters. Longitude
+        should be between -180 and 180 and latitude -90 and 90. 
         """
         _geodetic.Geocentric_swiginit(self, _geodetic.new_Geocentric(*args))
 

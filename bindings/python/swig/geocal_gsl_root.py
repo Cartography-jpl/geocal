@@ -188,10 +188,8 @@ def gsl_root(F, Initial, Residual=1e-6):
     blitz::Array< double, 1 > GeoCal::gsl_root(const VFunctorWithDerivative &F, const blitz::Array< double, 1 >
     &Initial, double Residual=1e-6)
     This finds the root of a Vector -> Vector function, with a Jacobian
-    available.
-
-    The size of the input and output Vector should be the same (i.e., same
-    number of equations as we have variables).
+    available. The size of the input and output Vector should be the same
+    (i.e., same number of equations as we have variables).
 
     If we can't find a solution, we throw a ConvergenceFailure exception.
 

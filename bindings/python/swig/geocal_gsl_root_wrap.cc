@@ -6716,7 +6716,7 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -6807,7 +6807,7 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7571,10 +7571,8 @@ static PyMethodDef SwigMethods[] = {
 		"blitz::Array< double, 1 > GeoCal::gsl_root(const VFunctorWithDerivative &F, const blitz::Array< double, 1 >\n"
 		"&Initial, double Residual=1e-6)\n"
 		"This finds the root of a Vector -> Vector function, with a Jacobian\n"
-		"available.\n"
-		"\n"
-		"The size of the input and output Vector should be the same (i.e., same\n"
-		"number of equations as we have variables).\n"
+		"available. The size of the input and output Vector should be the same\n"
+		"(i.e., same number of equations as we have variables).\n"
 		"\n"
 		"If we can't find a solution, we throw a ConvergenceFailure exception.\n"
 		"\n"

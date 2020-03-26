@@ -6858,7 +6858,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitCorrection_orbit_data", _wrap_OrbitCorrection_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > OrbitCorrection::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > OrbitCorrection::orbit_data(Time T) const\n"
 		"\n"
 		""},
 	 { (char *)"delete_OrbitCorrection", (PyCFunction)_wrap_delete_OrbitCorrection, METH_O, (char *)"\n"

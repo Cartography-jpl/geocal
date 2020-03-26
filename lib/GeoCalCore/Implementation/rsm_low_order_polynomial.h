@@ -127,7 +127,7 @@ public:
 private:
   double pline[10], psamp[10];
   int min_line_, max_line_, min_sample_, max_sample_;
-  int nline_fit_, nsample_fit_, nheight_fit_, nsecond_pass_fit_;
+  int nline_fit_, nsample_fit_, nheight_fit_;
   bool ignore_igc_error_in_fit_;
   friend class boost::serialization::access;
   template<class Archive>

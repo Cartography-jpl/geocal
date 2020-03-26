@@ -201,14 +201,15 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
     def __init__(self, *args):
         """
 
-        AirMspiIgcCollection::AirMspiIgcCollection(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        MspiCamera > &Cam, const boost::shared_ptr< MspiGimbal > &Gim, const
-        boost::shared_ptr< Dem > &D, const std::string &Master_config_file,
-        const std::vector< std::string > &L1b1_file_name, const std::string
-        &Swath_to_use="660-I", int Dem_resolution=10, const std::string
-        &Base_directory=".")
-        This create a AirMspiIgcCollection by directly giving the various
-        pieces needed to construct it. 
+        AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string
+        &Orbit_file_name, const std::string &L1b1_table, const std::string
+        &Swath_to_use="660-I", const std::string &Base_directory=".")
+        This creates a AirMspiIgcCollection by reading the given master config
+        file.
+
+        Various files found in the input files can have relative paths. You
+        can specify the base directory these paths are relative to, the
+        default is the current directory. 
         """
         _air_mspi_igc_collection.AirMspiIgcCollection_swiginit(self, _air_mspi_igc_collection.new_AirMspiIgcCollection(*args))
 

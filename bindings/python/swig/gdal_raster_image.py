@@ -210,8 +210,9 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     def __init__(self, *args):
         """
 
-        GeoCal::GdalRasterImage::GdalRasterImage(const boost::shared_ptr< Gdal< T > > &Data)
-        Constructor. 
+        GdalRasterImage::GdalRasterImage(const std::string &Fname, int Band_id=1, int Number_tile=4, bool
+        Update=false, int Tile_number_line=-1, int Tile_number_sample=-1)
+        Constructor to read and/or update an existing file. 
         """
         _gdal_raster_image.GdalRasterImage_swiginit(self, _gdal_raster_image.new_GdalRasterImage(*args))
 
@@ -540,8 +541,8 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     def save_to_erdas(*args):
         """
 
-        void GdalRasterImage::save_to_erdas(const std::string &Oname, const RasterImageMultiBand &d, int
-        Dt=GDT_Byte, int Fill_value=0)
+        void GdalRasterImage::save_to_erdas(const std::string &Oname, const std::vector< boost::shared_ptr<
+        RasterImage > > &d, int Dt=GDT_Byte, int Fill_value=0)
         Copy the given RasterImages into a new Erdas file.
 
         This calculates the statistics and image pyramid needed by Erdas also.
@@ -624,8 +625,8 @@ GdalRasterImage_save_to_file = _gdal_raster_image.GdalRasterImage_save_to_file
 def GdalRasterImage_save_to_erdas(*args):
     """
 
-    void GdalRasterImage::save_to_erdas(const std::string &Oname, const RasterImageMultiBand &d, int
-    Dt=GDT_Byte, int Fill_value=0)
+    void GdalRasterImage::save_to_erdas(const std::string &Oname, const std::vector< boost::shared_ptr<
+    RasterImage > > &d, int Dt=GDT_Byte, int Fill_value=0)
     Copy the given RasterImages into a new Erdas file.
 
     This calculates the statistics and image pyramid needed by Erdas also.

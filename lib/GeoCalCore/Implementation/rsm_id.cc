@@ -243,8 +243,10 @@ RsmId::read_tre_string(const std::string& Tre_in)
 
   // This is the illumination and sensor position. We don't currently
   // have this in place, we'll need to add this in.
-  for(int i = 0; i < 21; ++i)
+  for(int i = 0; i < 21; ++i) {
     boost::optional<double> x = read_size<boost::optional<double> >(in, 21, true);
+    (void) x;			// Suppress unused variable warning
+  }
   check_end_of_stream(in);
   return res;
 }

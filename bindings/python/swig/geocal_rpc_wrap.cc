@@ -8024,7 +8024,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_0(PyObject *SWIGUNUSEDPAR
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8170,7 +8170,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_0(PyObject *SWIGUNUSEDPARM(
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8316,7 +8316,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_0(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8462,7 +8462,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_0(PyObject *SWIGUNUSEDPAR
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8608,7 +8608,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_0(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8754,7 +8754,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_0(PyObject *SWIGUNUSE
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10835,7 +10835,7 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_2(PyObject *SWIGUNUSEDPARM
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10957,7 +10957,7 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_3(PyObject *SWIGUNUSEDPARM
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -11079,7 +11079,7 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_4(PyObject *SWIGUNUSEDPARM
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[4], stride[4];
     for(int i = 0; i < 4; ++i) {
@@ -11278,7 +11278,7 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate_jac_parm__SWIG_0(PyObject *SWIGU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11364,7 +11364,7 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate_jac_parm__SWIG_1(PyObject *SWIGU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11475,7 +11475,7 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate_jac(PyObject *SWIGUNUSEDPARM(sel
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -12336,22 +12336,16 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Rpc_image_coordinate", _wrap_Rpc_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array<double, N + 1> GeoCal::Rpc::image_coordinate(const blitz::Array< double, N > &Latitude, const blitz::Array<\n"
-		"double, N > &Longitude, const blitz::Array< double, N >\n"
-		"&Height_ellipsoid) const\n"
+		"ImageCoordinate GeoCal::Rpc::image_coordinate(double Latitude, double Longitude, double Height_ellipsoid) const\n"
 		"Convert from object space to image space (i.e., calculate RPC).\n"
 		"\n"
 		"The longitude and latitude are given in degrees (this is the geodetic\n"
 		"latitude). The height is in meters, relative to the reference\n"
-		"ellipsoid (e.g., WGS-84).\n"
-		"\n"
-		"This converts a whole block of latitude, longitude and height points\n"
-		"at once. The results returned have a first dimension of 2, the first\n"
-		"value is line and the second sample. \n"
+		"ellipsoid (e.g., WGS-84). \n"
 		""},
 	 { (char *)"Rpc_image_coordinate_jac_parm", _wrap_Rpc_image_coordinate_jac_parm, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array<double, 2> GeoCal::Rpc::image_coordinate_jac_parm(const GroundCoordinate &Gc) const\n"
+		"Array< double, 2 > Rpc::image_coordinate_jac_parm(double Latitude, double Longitude, double Height_ellipsoid) const\n"
 		"Jacobian of image_coordinate with respect to the parameters that are\n"
 		"marked as ones we are fitting.\n"
 		"\n"

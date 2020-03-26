@@ -6935,7 +6935,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_Covariance", (PyCFunction)_wrap_new_Covariance, METH_NOARGS, (char *)"\n"
 		"\n"
 		"GeoCal::Covariance::Covariance()\n"
-		"Constructor. \n"
+		"Constructor \n"
 		""},
 	 { (char *)"Covariance_add", _wrap_Covariance_add, METH_VARARGS, (char *)"\n"
 		"\n"

@@ -13,9 +13,15 @@ namespace GeoCal {
 namespace VicarOgrNsp {
 class TempFile {
 public:
-  TempFile() {temp_fname = tmpnam(0);}
-  ~TempFile() {unlink(temp_fname);}
-  char* temp_fname;
+  TempFile()
+  {
+    char fname[] = "TemporaryXXXXXX";
+    int fd = mkstemp(fname);
+    close(fd);
+    temp_fname = std::string(fname);
+  }
+  ~TempFile() {unlink(temp_fname.c_str());}
+  std::string temp_fname;
 };
 
 }
@@ -158,7 +164,7 @@ template<class T> MapInfo VicarOgr::from_vicar_template(const T& F)
 {
   using namespace VicarOgrNsp;
   TempFile f;
-  vicar_to_gtiff_template(F, f.temp_fname);
+  vicar_to_gtiff_template(F, f.temp_fname.c_str());
 
   GdalRasterImage gd(f.temp_fname);
   MapInfo m = gd.map_info();

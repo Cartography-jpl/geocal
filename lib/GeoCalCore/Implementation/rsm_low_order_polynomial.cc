@@ -241,7 +241,7 @@ std::string RsmLowOrderPolynomial::tre_string() const
 /// these values to, we set min_line, max_line, min_sample, max_sample
 /// all to 0 (the RsmMultiSection will fill this in with other TRE
 /// information), and nline_fit, nsample_fit, nheight_fit,
-/// nsecond_pass_fit, ignore_igc_error_in_fit to the default values of
+/// ignore_igc_error_in_fit to the default values of
 /// the constructor 
 //-----------------------------------------------------------------------
 

@@ -7221,7 +7221,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"SpiceOrbit_orbit_data", _wrap_SpiceOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<OrbitData> GeoCal::SpiceOrbit::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > SpiceOrbit::orbit_data(Time T) const\n"
 		"\n"
 		""},
 	 { (char *)"SpiceOrbit__v_satellite_id", (PyCFunction)_wrap_SpiceOrbit__v_satellite_id, METH_O, (char *)"\n"

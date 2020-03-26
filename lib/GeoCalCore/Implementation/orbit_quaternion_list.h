@@ -174,6 +174,7 @@ public:
   { init(); }
 
   virtual ~OrbitListCache() {};
+  virtual void notify_update(const Orbit& Orb) { notify_update(); }
   virtual void notify_update();
   virtual void print(std::ostream& Os) const;
 

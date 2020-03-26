@@ -9051,7 +9051,7 @@ SWIGINTERN PyObject *_wrap_PosCsephb_pos_vel__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9979,7 +9979,7 @@ SWIGINTERN PyObject *_wrap_PosCsephb__v_position_data(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -13213,7 +13213,7 @@ SWIGINTERN PyObject *_wrap_AttCsattb__v_attitude_data(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -14069,16 +14069,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_PosCsephb", _wrap_new_PosCsephb, METH_VARARGS, (char *)"\n"
 		"\n"
-		"PosCsephb::PosCsephb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double\n"
-		"Tstep, InterpolationType Itype=LINEAR, LagrangeOrder\n"
-		"Lagrange_order=NO_LAGRANGE, EphemerisDataQuality\n"
+		"PosCsephb::PosCsephb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,\n"
+		"LagrangeOrder Lagrange_order=NO_LAGRANGE, EphemerisDataQuality\n"
 		"E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,\n"
 		"PositionType P_type=SAME_AS_ORBIT)\n"
 		"Constructor.\n"
 		"\n"
 		"We sample the position of the given Orbit at fixed spaces times. This\n"
-		"version goes from the Min_time, up to Max_time (or more accurately,\n"
-		"the largest time Min_time i * Tstep that is <= Max_time).w \n"
+		"version goes from the min_time() of the Orbit, up to max_time() (or\n"
+		"more accurately, the largest time min_time() i * Tstep that is <=\n"
+		"max_time()). \n"
 		""},
 	 { (char *)"PosCsephb_pos_vel", _wrap_PosCsephb_pos_vel, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -14162,16 +14162,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"PosCsephb_swiginit", PosCsephb_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_AttCsattb", _wrap_new_AttCsattb, METH_VARARGS, (char *)"\n"
 		"\n"
-		"AttCsattb::AttCsattb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double\n"
-		"Tstep, InterpolationType Itype=LINEAR, LagrangeOrder\n"
-		"Lagrange_order=NO_LAGRANGE, AttitudeDataQuality\n"
+		"AttCsattb::AttCsattb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,\n"
+		"LagrangeOrder Lagrange_order=NO_LAGRANGE, AttitudeDataQuality\n"
 		"A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,\n"
 		"AttitudeType A_type=SAME_AS_ORBIT)\n"
 		"Constructor.\n"
 		"\n"
 		"We sample the attitude of the given Orbit at fixed spaces times. This\n"
-		"version goes from the Min_time, up to Max_time (or more accurately,\n"
-		"the largest time Min_time i * Tstep that is <= Max_time).w \n"
+		"version goes from the min_time() of the Orbit, up to max_time() (or\n"
+		"more accurately, the largest time min_time() i * Tstep that is <=\n"
+		"max_time()). \n"
 		""},
 	 { (char *)"AttCsattb__v_id", _wrap_AttCsattb__v_id, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -14261,7 +14261,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitDes_orbit_data", _wrap_OrbitDes_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > OrbitDes::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > OrbitDes::orbit_data(Time T) const\n"
 		"\n"
 		""},
 	 { (char *)"OrbitDes__v_pos_csephb", (PyCFunction)_wrap_OrbitDes__v_pos_csephb, METH_O, (char *)"\n"

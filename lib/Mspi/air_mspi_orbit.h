@@ -126,6 +126,8 @@ public:
   virtual void print(std::ostream& Os) const;
 
   virtual void notify_update(const MspiGimbal& G) 
+  { notify_update(); };
+  virtual void notify_update() 
   { empty_cache(); };
 private:
   blitz::Array<double, 1> raw_data(int Index) const;

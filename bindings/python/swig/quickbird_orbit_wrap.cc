@@ -7907,8 +7907,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"QuickBirdAttitude_swiginit", QuickBirdAttitude_swiginit, METH_VARARGS, NULL},
 	 { (char *)"QuickBirdOrbit_orbit_data", _wrap_QuickBirdOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > QuickBirdOrbit::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > QuickBirdOrbit::orbit_data(Time T) const\n"
+		"Return OrbitData for the given time.\n"
 		"\n"
+		"We should have min_time() <= T < max_time(). \n"
 		""},
 	 { (char *)"QuickBirdOrbit__v_ephemeris_file_name", (PyCFunction)_wrap_QuickBirdOrbit__v_ephemeris_file_name, METH_O, (char *)"\n"
 		"\n"

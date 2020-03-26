@@ -238,8 +238,8 @@ class VicarArgument(geocal_swig.generic_object.GenericObject):
     def write_out(self, *args):
         """
 
-        void VicarArgument::write_out(const std::string &Keyword, const std::string &Val, int Max_len=250)
-
+        void VicarArgument::write_out(const std::string &Keyword, int Val)
+        Write a value to a TCL variable. 
         """
         return _vicar_argument.VicarArgument_write_out(self, *args)
 

@@ -11423,7 +11423,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__velocity_ci(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -14203,7 +14203,7 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData__velocity_cf(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -17871,7 +17871,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter__SWIG_0(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -18257,7 +18257,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter_subset__SWIG_0(PyObject *SWIGUNUSE
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -18645,7 +18645,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter_mask(PyObject *SWIGUNUSEDPARM(self
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -18793,7 +18793,7 @@ SWIGINTERN PyObject *_wrap_Orbit_interpolate__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   resultobj = SWIG_Py_Void();
   {
     PyObject *res;
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -18816,7 +18816,7 @@ SWIGINTERN PyObject *_wrap_Orbit_interpolate__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   }
   {
     PyObject *res;
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -23408,29 +23408,29 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"OrbitData_resolution_meter", _wrap_OrbitData_resolution_meter, METH_VARARGS, (char *)"\n"
 		"\n"
-		"double OrbitData::resolution_meter(const Camera &C, const FrameCoordinate &Fc, int Band=0) const\n"
+		"double OrbitData::resolution_meter(const Camera &C, int Band=0) const\n"
 		"Calculate the approximate resolution on the ground of a given Camera\n"
 		"for this OrbitData.\n"
 		"\n"
-		"This finds the intersection with the reference surface for the given\n"
+		"This finds the intersection with the reference surface for the center\n"
 		"pixel of the camera, + 1 in the line and sample direction. We find the\n"
 		"difference in meters between these points, and select the maximum\n"
 		"value. \n"
 		""},
 	 { (char *)"OrbitData_ci_look_vector", _wrap_OrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianInertialLookVector GeoCal::OrbitData::ci_look_vector(const ScLookVector &Sl) const =0\n"
+		"virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const =0\n"
 		"Convert from ScLookVector to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"OrbitData_cf_look_vector", _wrap_OrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::OrbitData::cf_look_vector(const ScLookVector &Sl) const =0\n"
+		"virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const =0\n"
 		"Convert from ScLookVector to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"OrbitData_sc_look_vector", _wrap_OrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const =0\n"
-		"Convert from CartesianFixedLookVector to ScLookVector. \n"
+		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative &Ci) const =0\n"
+		"Convert from CartesianInertialLookVector to ScLookVector. \n"
 		""},
 	 { (char *)"OrbitData_frame_coordinate", _wrap_OrbitData_frame_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23515,30 +23515,34 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitData_swigregister", OrbitData_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_QuaternionOrbitData", _wrap_new_QuaternionOrbitData, METH_VARARGS, (char *)"\n"
 		"\n"
-		"QuaternionOrbitData::QuaternionOrbitData(const QuaternionOrbitData &V)\n"
-		"Copy constructor. \n"
+		"QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const\n"
+		"boost::array< double, 3 > &vel_inertial, const\n"
+		"boost::math::quaternion< double > &sc_to_ci_q)\n"
+		"Construct QuaternionOrbitData.\n"
+		"\n"
+		"This takes data in a CartesianInertial coordinate system (e.g., Eci\n"
+		"coordinates). \n"
 		""},
 	 { (char *)"QuaternionOrbitData_ci_look_vector", _wrap_QuaternionOrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const\n"
+		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
 		"Convert to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_cf_look_vector", _wrap_QuaternionOrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const\n"
+		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
 		"Convert to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_sc_look_vector", _wrap_QuaternionOrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const\n"
+		"ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative &Ci) const\n"
 		"Convert to ScLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_interpolate", _wrap_QuaternionOrbitData_interpolate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const\n"
-		"Time &tm, bool Extrapolation_ok=false)\n"
-		"Interpolate between two QuaternionOrbitData for the given time,\n"
-		"without interpolating the derivative stuff. \n"
+		"TimeWithDerivative &tm, bool Extrapolation_ok=false)\n"
+		"Interpolate between two QuaternionOrbitData for the given time. \n"
 		""},
 	 { (char *)"QuaternionOrbitData__v_sc_to_ci", _wrap_QuaternionOrbitData__v_sc_to_ci, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23616,15 +23620,19 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit_ci_look_vector", _wrap_Orbit_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianInertialLookVectorWithDerivative GeoCal::Orbit::ci_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)\n"
-		"const\n"
+		"virtual CartesianInertialLookVector GeoCal::Orbit::ci_look_vector(Time T, const ScLookVector &Sl) const\n"
+		"Convert from ScLookVector to CartesianInertialLookVector for the given\n"
+		"time.\n"
 		"\n"
+		"We should have min_time() <= T < max_time(). \n"
 		""},
 	 { (char *)"Orbit_cf_look_vector", _wrap_Orbit_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianFixedLookVectorWithDerivative GeoCal::Orbit::cf_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)\n"
-		"const\n"
+		"virtual CartesianFixedLookVector GeoCal::Orbit::cf_look_vector(Time T, const ScLookVector &Sl) const\n"
+		"Convert from ScLookVector to CartesianFixedLookVector for the given\n"
+		"time.\n"
 		"\n"
+		"We should have min_time() <= T < max_time(). \n"
 		""},
 	 { (char *)"Orbit_frame_coordinate", _wrap_Orbit_frame_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23652,8 +23660,11 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit_sc_look_vector", _wrap_Orbit_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixed &Pt) const\n"
-		"Return ScLookVector that sees a given point. \n"
+		"virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianInertialLookVector &Ci) const\n"
+		"Convert from CartesianInertialLookVector to ScLookVector for the given\n"
+		"time.\n"
+		"\n"
+		"We should have min_time() <= T < max_time(). \n"
 		""},
 	 { (char *)"Orbit_position_ci", _wrap_Orbit_position_ci, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23681,12 +23692,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit_orbit_data", _wrap_Orbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0\n"
+		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(Time T) const =0\n"
 		"Return OrbitData for the given time.\n"
 		"\n"
-		"We should have min_time() <= T < max_time(). This version should\n"
-		"include any AutoDerivative information if the orbit model has\n"
-		"parameters. \n"
+		"We should have min_time() <= T < max_time(). Note for orbit models\n"
+		"that you do not need to include the derivative information for this\n"
+		"version of orbit_data (which can be a great speed up). Users that want\n"
+		"that information should call the TimeWithDerivative version. \n"
 		""},
 	 { (char *)"Orbit___str__", (PyCFunction)_wrap_Orbit___str__, METH_O, NULL},
 	 { (char *)"Orbit__v_parameter", _wrap_Orbit__v_parameter, METH_VARARGS, NULL},
@@ -23698,10 +23710,17 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Orbit__v_parameter_mask", (PyCFunction)_wrap_Orbit__v_parameter_mask, METH_O, NULL},
 	 { (char *)"Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::math::quaternion< AutoDerivative< double > > Orbit::interpolate(const boost::math::quaternion< AutoDerivative< double > > &Q1, const\n"
-		"boost::math::quaternion< AutoDerivative< double > > &Q2, const\n"
-		"AutoDerivative< double > &toffset, double tspace)\n"
+		"boost::math::quaternion< double > Orbit::interpolate(const boost::math::quaternion< double > &Q1, const\n"
+		"boost::math::quaternion< double > &Q2, double toffset, double tspace)\n"
+		"This is a utility function for use by derived classes.\n"
 		"\n"
+		"A common way of getting orbit data is to have discrete measurements of\n"
+		"the quaternion describing the rotation of the spacecraft. For a time t\n"
+		"between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the\n"
+		"quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This\n"
+		"function then returns Qres. We calculate this by determining the axis\n"
+		"and angle rotation that takes use from Q1 to Q2, and then do a linear\n"
+		"interpolation of that angle for the given time. \n"
 		""},
 	 { (char *)"Orbit_notify_update_do", _wrap_Orbit_notify_update_do, METH_VARARGS, NULL},
 	 { (char *)"disown_Orbit", (PyCFunction)_wrap_disown_Orbit, METH_O, NULL},
@@ -23724,12 +23743,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"KeplerOrbit_orbit_data", _wrap_KeplerOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(Time T) const\n"
 		"Return OrbitData for the given time.\n"
 		"\n"
-		"We should have min_time() <= T < max_time(). This version should\n"
-		"include any AutoDerivative information if the orbit model has\n"
-		"parameters. \n"
+		"We should have min_time() <= T < max_time(). Note for orbit models\n"
+		"that you do not need to include the derivative information for this\n"
+		"version of orbit_data (which can be a great speed up). Users that want\n"
+		"that information should call the TimeWithDerivative version. \n"
 		""},
 	 { (char *)"KeplerOrbit__v_epoch", _wrap_KeplerOrbit__v_epoch, METH_VARARGS, (char *)"\n"
 		"\n"

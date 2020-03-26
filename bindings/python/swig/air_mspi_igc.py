@@ -203,18 +203,18 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
     def __init__(self, *args):
         """
 
-        AirMspiIgc::AirMspiIgc(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        MspiCamera > &Cam, const boost::shared_ptr< MspiGimbal > &Gim, const
-        boost::shared_ptr< Dem > &Dem, const std::string &L1b1_file_name, int
-        Min_l1b1_line, int Max_l1b1_line, const std::string
-        &Swath_to_use="660-I", const std::string &Title="Image", int
-        Dem_resolution=10, int Tile_number_line=-1, int Tile_number_sample=-1,
-        unsigned int Number_tile=4)
+        AirMspiIgc::AirMspiIgc(const std::string &Master_config_file, const std::string
+        &Orbit_file_name, const std::string &L1b1_file_name, const std::string
+        &Swath_to_use="660-I", const std::string &Base_directory=".",
+        const std::string &Title="Image", int Tile_number_line=-1, int
+        Tile_number_sample=-1, unsigned int Number_tile=4)
         Constructor.
 
-        This variation of the constructor directly takes the information
-        needed to construct the object, rather than reading this from the
-        master configuration file. 
+        This takes the master config file and uses it to create a AirMspiIgc.
+
+        You can optionally add the base directory that file names in the
+        Master_config_file are relative to. The default is the current
+        directory. 
         """
         _air_mspi_igc.AirMspiIgc_swiginit(self, _air_mspi_igc.new_AirMspiIgc(*args))
 

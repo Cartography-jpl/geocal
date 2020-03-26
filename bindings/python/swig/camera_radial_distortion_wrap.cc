@@ -7391,7 +7391,7 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortion__v_k_distort(PyObject *SWIGUNU
     }
   }
   {
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7496,10 +7496,16 @@ static PyMethodDef SwigMethods[] = {
 		"double, 1 > &K_distort, double Number_line, double Number_sample,\n"
 		"double Line_pitch, double Sample_pitch, double Focal_length, const\n"
 		"FrameCoordinate &Principal_point, QuaternionCamera::FrameConvention\n"
-		"Frame_convention, QuaternionCamera::FrameDirection Line_direction,\n"
-		"QuaternionCamera::FrameDirection Sample_direction, const blitz::Array<\n"
-		"bool, 1 > &Parameter_mask)\n"
+		"Frame_convention=QuaternionCamera::LINE_IS_X,\n"
+		"QuaternionCamera::FrameDirection\n"
+		"Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,\n"
+		"QuaternionCamera::FrameDirection\n"
+		"Sample_direction=QuaternionCamera::INCREASE_IS_POSITIVE)\n"
+		"Create a QuaternionCamera with a radial distortion model given by\n"
+		"kdistort.\n"
 		"\n"
+		"We currently limit kdistort.rows() <= 3, although we could relax that\n"
+		"if it ends up being useful. \n"
 		""},
 	 { (char *)"CameraRadialDistortion__v_k_distort", (PyCFunction)_wrap_CameraRadialDistortion__v_k_distort, METH_O, (char *)"\n"
 		"\n"

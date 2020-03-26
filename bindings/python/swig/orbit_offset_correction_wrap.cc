@@ -9007,7 +9007,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
   }
   {
     PyObject *res;
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9036,7 +9036,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
   }
   {
     PyObject *res;
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {

@@ -8191,8 +8191,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MspiConfigFile_swiginit", MspiConfigFile_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_MspiConfigTable", _wrap_new_MspiConfigTable, METH_VARARGS, (char *)"\n"
 		"\n"
-		"MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)\n"
-		"Create a MspiConfigTable for the given table name in the given file.\n"
+		"GeoCal::MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)\n"
 		"\n"
 		""},
 	 { (char *)"MspiConfigTable__v_number_row", (PyCFunction)_wrap_MspiConfigTable__v_number_row, METH_O, (char *)"\n"

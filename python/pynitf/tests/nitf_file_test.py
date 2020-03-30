@@ -1,15 +1,6 @@
 import cProfile
-from pynitf.nitf_file import *
-from pynitf.nitf_tre_csde import *
-from pynitf.nitf_tre_csepha import *
-from pynitf.nitf_tre_csexrb import *
-from pynitf.nitf_tre_piae import *
-from pynitf.nitf_tre_rpc import *
-from pynitf.nitf_tre_geosde import *
-from pynitf.nitf_des_csatta import *
-from pynitf.nitf_des_cssfab import *
-from pynitf.nitf_image import *
-from pynitf.nitf_tre import *
+from pynitf.nitf_file import NitfFile
+from pynitf.nitf_tre import Tre, tre_tag_to_cls
 from pynitf_test_support import *
 import pynitf.nitf_field
 import pynitf.nitf_des
@@ -18,44 +9,15 @@ import os
 import json
 import numpy as np
 import filecmp
+import gc
 
 # Turn on debug messages
 #pynitf.nitf_field.DEBUG = True
 #pynitf.nitf_des.DEBUG = True
-
-def create_tre(f):
-    t = TreUSE00A()
-    t.angle_to_north = 270
-    t.mean_gsd = 105.2
-    t.dynamic_range = 2047
-    t.obl_ang = 34.12
-    t.roll_ang = -21.15
-    t.n_ref = 0
-    t.rev_num = 3317
-    t.n_seg = 1
-    t.max_lp_seg = 6287
-    t.sun_el = 68.5
-    t.sun_az = 131.3
-    f.tre_list.append(t)
-
-def create_tre2(f):
-    t = TreUSE00A()
-    t.angle_to_north = 290
-    t.mean_gsd = 105.2
-    t.dynamic_range = 2047
-    t.obl_ang = 34.12
-    t.roll_ang = -21.15
-    t.n_ref = 0
-    t.rev_num = 3317
-    t.n_seg = 1
-    t.max_lp_seg = 6287
-    t.sun_el = 68.5
-    t.sun_az = 131.3
-    f.tre_list.append(t)
     
-def check_tre(t):    
+def check_tre(t, angle_to_north = 270):    
     assert t.tre_tag == "USE00A"
-    assert t.angle_to_north == 270
+    assert t.angle_to_north == angle_to_north
     assert_almost_equal(t.mean_gsd, 105.2)
     assert t.dynamic_range == 2047
     assert_almost_equal(t.obl_ang, 34.12)
@@ -67,52 +29,6 @@ def check_tre(t):
     assert_almost_equal(t.sun_el, 68.5)
     assert_almost_equal(t.sun_az, 131.3)
 
-def check_tre2(t):    
-    assert t.tre_tag == "USE00A"
-    assert t.angle_to_north == 290
-    assert_almost_equal(t.mean_gsd, 105.2)
-    assert t.dynamic_range == 2047
-    assert_almost_equal(t.obl_ang, 34.12)
-    assert_almost_equal(t.roll_ang, -21.15)
-    assert t.n_ref == 0
-    assert t.rev_num == 3317
-    assert t.n_seg == 1
-    assert t.max_lp_seg == 6287
-    assert_almost_equal(t.sun_el, 68.5)
-    assert_almost_equal(t.sun_az, 131.3)
-
-def create_text_segment(f, security = None):
-    d = {
-        'first_name': 'Guido',
-        'second_name': 'Rossum',
-        'titles': ['BDFL', 'Developer'],
-    }
-    ts = NitfTextSegment(txt = json.dumps(d))
-    ts.subheader.textid = 'ID12345'
-    ts.subheader.txtalvl = 0
-    ts.subheader.txtitl = 'sample title'
-    if(security):
-        ts.security = security
-    f.text_segment.append(ts)
-
-def create_des(f, security = None):
-    des = DesCSATTA()
-    if(security):
-        des.security = security
-    des.att_type = 'ORIGINAL'
-    des.dt_att = '900.5000000000'
-    des.date_att = 20170501
-    des.t0_att = '235959.100001'
-    des.num_att = 5
-    for n in range(des.num_att):
-        des.att_q1[n] = 10.1
-        des.att_q2[n] = 10.1
-        des.att_q3[n] = 10.1
-        des.att_q4[n] = 10.1
-
-    de = NitfDesSegment(des=des)
-    f.des_segment.append(de)
-    
 def print_diag(f):
     '''Print out diagnostic information, useful to make sure the file
     we generate is valid.'''
@@ -162,7 +78,7 @@ def test_basic_write(isolated_dir):
     f = NitfFile()
     create_image_seg(f)
     create_tre(f)
-    create_tre2(f.image_segment[0])
+    create_tre(f.image_segment[0], 290)
     f.write("z.ntf")
     f2 = NitfFile("z.ntf")
     assert len(f2.image_segment) == 1
@@ -174,22 +90,22 @@ def test_basic_write(isolated_dir):
     assert len(f2.tre_list) == 1
     assert len(f2.image_segment[0].tre_list) == 1
     check_tre(f2.tre_list[0])
-    check_tre2(f2.image_segment[0].tre_list[0])
+    check_tre(f2.image_segment[0].tre_list[0], 290)
     print_diag(f2)
 
 def test_large_tre_write(isolated_dir):
     '''Repeat of test_basic_write, but also include a really big TRE that
     forces the use of the second place in the header for TREs'''
-    desc = ["BIGTRE",
-            ["big_field", "", 99999-20, str]
-            ]
-    TreBig = create_nitf_tre_structure("TreBig", desc)
+    class TreBig(Tre):
+        desc = [["big_field", "", 99999-20, str],]
+        tre_tag = "BIGTRE"
+    tre_tag_to_cls.add_cls(TreBig)    
     f = NitfFile()
     create_image_seg(f)
     f.tre_list.append(TreBig())
     f.image_segment[0].tre_list.append(TreBig())
     create_tre(f)
-    create_tre2(f.image_segment[0])
+    create_tre(f.image_segment[0], 290)
     f.write("z.ntf")
     # Write a second time. We had a bug where the tre would appear twice,
     # once when we write the tre_list and once when the old tre overflow des
@@ -214,8 +130,8 @@ def test_large_tre_write(isolated_dir):
     assert len(f3.image_segment[0].tre_list) == 2
     check_tre([tre for tre in f2.tre_list if tre.tre_tag == "USE00A"][0])
     check_tre([tre for tre in f3.tre_list if tre.tre_tag == "USE00A"][0])
-    check_tre2([tre for tre in f2.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0])
-    check_tre2([tre for tre in f3.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0])
+    check_tre([tre for tre in f2.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0], 290)
+    check_tre([tre for tre in f3.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0], 290)
     print_diag(f2)
     print_diag(f3)
     assert filecmp.cmp("z.ntf", "z2.ntf", shallow=False)
@@ -223,10 +139,10 @@ def test_large_tre_write(isolated_dir):
 def test_tre_overflow_write(isolated_dir):
     '''Repeat of test_basic_write, but also include two really big TREs that
     forces the use of the DES TRE overflow for TREs'''
-    desc = ["BIGTRE",
-            ["big_field", "", 99999-20, str]
-            ]
-    TreBig = create_nitf_tre_structure("TreBig", desc)
+    class TreBig(Tre):
+        desc = [["big_field", "", 99999-20, str]]
+        tre_tag = "BIGTRE"
+    tre_tag_to_cls.add_cls(TreBig)    
     f = NitfFile()
     create_image_seg(f)
     f.tre_list.append(TreBig())
@@ -234,7 +150,7 @@ def test_tre_overflow_write(isolated_dir):
     f.image_segment[0].tre_list.append(TreBig())
     f.image_segment[0].tre_list.append(TreBig())
     create_tre(f)
-    create_tre2(f.image_segment[0])
+    create_tre(f.image_segment[0], 290)
     f.write("z.ntf")
     # Write a second time. We had a bug where the tre would appear twice,
     # once when we write the tre_list and once when the old tre overflow des
@@ -259,8 +175,8 @@ def test_tre_overflow_write(isolated_dir):
     assert len(f3.image_segment[0].tre_list) == 3
     check_tre([tre for tre in f2.tre_list if tre.tre_tag == "USE00A"][0])
     check_tre([tre for tre in f3.tre_list if tre.tre_tag == "USE00A"][0])
-    check_tre2([tre for tre in f2.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0])
-    check_tre2([tre for tre in f3.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0])
+    check_tre([tre for tre in f2.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0], 290)
+    check_tre([tre for tre in f3.image_segment[0].tre_list if tre.tre_tag == "USE00A"][0], 290)
     with open("f.txt", "w") as fh:
         print(str(f), file=fh)
     with open("f2.txt", "w") as fh:
@@ -314,27 +230,27 @@ def test_copy_worldview(nitf_sample_wv2):
     '''
     # Some of the DESs aren't implemented yet. Just copy these over for
     # now, so we can test everything we do have.
-    try:
-        pynitf.register_des_class(pynitf.NitfDesCopy, priority_order=999)
-        f = NitfFile(nitf_sample_wv2)
-        original_output = str(f)
-        fname_copy = "worldview_copy.ntf"
-        f.write(fname_copy)
-        copy_output = str(NitfFile(fname_copy))
-        with open("f1.txt", "w") as fh:
-            print(original_output, file=fh)
-        with open("f2.txt", "w") as fh:
-            print(copy_output, file=fh)
-        # This is different, but just because the original worldview file put
-        # some of the TREs in the TRE_OVERFLOW DES, when they actually fit
-        # in the normal TRE header. So we have the same content, just a
-        # different arrangement. Don't have a easy way to test this, so we
-        # just skip the actual check. Can compare f1.txt and f2.txt manually
-        # if you want to verify the content.
-        #assert original_output == copy_output
-    finally:
-        # Remove, so this doesn't affect other tests
-        pynitf.unregister_des_class(pynitf.NitfDesCopy)
+    f = NitfFile()
+    f.data_handle_set.add_handle(pynitf.NitfDesCopy, priority_order=-999)
+    f.read(nitf_sample_wv2)
+    original_output = str(f)
+    fname_copy = "worldview_copy.ntf"
+    f.write(fname_copy)
+    f2 = NitfFile()
+    f2.data_handle_set.add_handle(pynitf.NitfDesCopy, priority_order=-999)
+    f2.read(fname_copy)
+    copy_output = str(f2)
+    with open("f1.txt", "w") as fh:
+        print(original_output, file=fh)
+    with open("f2.txt", "w") as fh:
+        print(copy_output, file=fh)
+    # This is different, but just because the original worldview file put
+    # some of the TREs in the TRE_OVERFLOW DES, when they actually fit
+    # in the normal TRE header. So we have the same content, just a
+    # different arrangement. Don't have a easy way to test this, so we
+    # just skip the actual check. Can compare f1.txt and f2.txt manually
+    # if you want to verify the content.
+    #assert original_output == copy_output
 
 def test_copy_ikonos(nitf_sample_ikonos):
     '''Test copying a ikonos NITF file. It creates a copy of the file and
@@ -349,7 +265,7 @@ def test_copy_ikonos(nitf_sample_ikonos):
     assert original_output == copy_output
 
 def test_copy_rip(nitf_sample_rip):
-    '''Test copying a ikonos NITF file. It creates a copy of the file and
+    '''Test copying a RIP NITF file. It creates a copy of the file and
     then reads it back and compares the str() result to that of the
     original file
     '''
@@ -370,12 +286,17 @@ def test_full_file(isolated_dir):
     f = NitfFile()
     create_image_seg(f)
     create_tre(f)
-    create_tre2(f)
+    create_tre(f, 290)
     create_text_segment(f)
     create_des(f)
+    create_graphic_segment(f)
+    create_res_segment(f)
     print(f)
     f.write("basic_nitf.ntf")
-    f2 = NitfFile("basic_nitf.ntf")
+    f2 = NitfFile()
+    f2.data_handle_set.add_handle(NitfGraphicRaw)
+    f2.data_handle_set.add_handle(NitfResRaw)
+    f2.read("basic_nitf.ntf")
     print(f2)
     print("Image Data:")
     print(f2.image_segment[0].data.data)
@@ -383,6 +304,12 @@ def test_full_file(isolated_dir):
     print("Text Data:")
     print(f2.text_segment[0].data)        
 
+    print("Graphic Data:")
+    print(f2.graphic_segment[0].data)        
+
+    print("Res Data:")
+    print(f2.res_segment[0].data)        
+    
 def test_full_file_security(isolated_dir):
     '''This create an end to end NITF file, this was at least initially the
     same as basic_nitf_example.py but as a unit test.
@@ -396,19 +323,69 @@ def test_full_file_security(isolated_dir):
     f = NitfFile(security=security_fake)
     create_image_seg(f, security=security_fake)
     create_tre(f)
-    create_tre2(f)
+    create_tre(f, 290)
     create_text_segment(f, security=security_fake)
     create_des(f, security=security_fake)
+    create_graphic_segment(f, security=security_fake)
+    create_res_segment(f, security=security_fake)
     print(f)
     f.write("basic_nitf.ntf")
-    f2 = NitfFile("basic_nitf.ntf")
-    print(f2)
+    f2 = NitfFile()
+    f2.data_handle_set.add_handle(NitfGraphicRaw)
+    f2.data_handle_set.add_handle(NitfResRaw)
+    f2.read("basic_nitf.ntf")
     print("Image Data:")
     print(f2.image_segment[0].data.data)
 
     print("Text Data:")
     print(f2.text_segment[0].data)        
 
+    print("Graphic Data:")
+    print(f2.graphic_segment[0].data)        
+
+    print("Res Data:")
+    print(f2.res_segment[0].data)        
+    
+# This is a set of sample NITF files found at
+# https://gwg.nga.mil/ntb/baseline/software/testfile/Nitfv2_1/scen_2_1.html.
+# Go through an make sure we can read them all (as a minimum check)
+flist = ["i_3001a.ntf", "i_3004g.ntf", "i_3008a.ntf", "i_3015a.ntf",
+         "i_3018a.ntf", "i_3025b.ntf", "i_3034c.ntf", "i_3034f.ntf",
+         "i_3041a.ntf", "i_3051e.ntf", "i_3052a.ntf", "i_3060a.ntf",
+         "i_3063f.ntf", "i_3068a.ntf", "i_3076a.ntf", "i_3090m.ntf",
+         "i_3090u.ntf", "i_3113g.ntf", "i_3114e.ntf", "i_3117ax.ntf",
+         "i_3128b.ntf", "i_3201c.ntf", "i_3228c.ntf", "i_3228e.ntf",
+         "i_3301a.ntf", "i_3301c.ntf", "i_3301h.ntf", "i_3301k.ntf",
+         "i_3303a.ntf", "i_3309a.ntf", "i_3311a.ntf", "i_3405a.ntf",
+         "i_3430a.ntf", "i_3450c.ntf", "i_5012c.ntf", "ns3004f.nsf",
+         "ns3005b.nsf", "ns3010a.nsf", "ns3017a.nsf", "ns3022b.nsf",
+         "ns3033b.nsf", "ns3034d.nsf", "ns3038a.nsf", "ns3050a.nsf",
+         "ns3051v.nsf", "ns3059a.nsf", "ns3061a.nsf", "ns3063h.nsf",
+         "ns3073a.nsf", "ns3090i.nsf", "ns3090q.nsf", "ns3101b.nsf",
+         "ns3114a.nsf", "ns3114i.nsf", "ns3118b.nsf", "ns3119b.nsf",
+         "ns3201a.nsf", "ns3228b.nsf", "ns3228d.nsf", "ns3229b.nsf",
+         "ns3301b.nsf", "ns3301e.nsf", "ns3301j.nsf", "ns3302a.nsf",
+         "ns3304a.nsf", "ns3310a.nsf", "ns3361c.nsf",
+         "ns3417c.nsf", "ns3437a.nsf", "ns3450e.nsf", "ns5600a.nsf"]
+
+
+def test_nitf_sample_nitf(nitf_sample_files):
+    for fname in flist:
+        f = NitfFile(nitf_sample_files + "/SampleFiles/" + fname)
+        print(fname + ":")
+        print(f.summary())
+
+# This is a streaming file, which we don't currently support
+flist2 = ["ns3321a.nsf",]
+
+# TODO Add support for this
+@skip(reason="don't support NITF streaming yet")        
+def test_nitf_sample_nitf_streaming(nitf_sample_files):
+    for fname in flist2:
+        f = NitfFile(nitf_sample_files + "/SampleFiles/" + fname)
+        print(fname + ":")
+        print(f.summary())
+        
 # May expand this to check a large file, or we might just separately
 # profile reading large files we already have. Can also do
 # "python -m cProfile script.py" to test a standalone script
@@ -421,14 +398,62 @@ def test_full_file_security(isolated_dir):
 # p.sort_stats(SortKey.CUMULATIVE).print_stats(10)
 # p.sort_stats(SortKey.TIME).print_stats(10)
 # Interactive version with "python -m pstats prof.dat"
-@skip
+@skip(reason="skip profiling by default")
 def test_profile(isolated_dir):
     f = NitfFile()
     create_image_seg(f)
     create_tre(f)
-    create_tre2(f)
+    create_tre(f, 290)
     create_text_segment(f)
     create_des(f)
     f.write("basic_nitf.ntf")
     cProfile.run('import pynitf; pynitf.NitfFile("basic_nitf.ntf")')
+
+def test_too_many_file(isolated_dir):
+    '''
+    Because of how we used np.memmap for images before, we could
+    run into "too many files" error if we have a couple of files open
+    using large number of images (so more than 1024 images across a 
+    few files). 
+
+    We've fixed this by using a single mmap for the entire file.
+    This unit test checks this fix by having enough image segments to
+    trigger this using the old method.
+    '''
+    f = NitfFile()
+    for i in range(600):
+        create_image_seg(f)
+    f.write("large_nitf.ntf")
+    f1 = NitfFile("large_nitf.ntf")
+    f2 = NitfFile("large_nitf.ntf")
+
+def test_gc(isolated_dir):
+    '''We have various pieces that reference each other. This can prevent
+    reference counting from cleaning up data. The garbage collector will 
+    eventually find all these cycles, but it is desirable to just set things 
+    up if possible so things get cleaned up right away (since potentially 
+    the NitfFile object can be large).'''
+
+    # Create the file. We don't supply a name yet, that comes when we actually
+    # write
     
+    f = NitfFile()
+    create_image_seg(f)
+    create_tre(f)
+    create_tre(f, 290)
+    create_text_segment(f)
+    create_des(f)
+    f.write("basic_nitf.ntf")
+    f2 = NitfFile("basic_nitf.ntf")
+    # Clean up whatever happens to be there before this test
+    gc.collect()
+    # Remove reference to files. Ideally they will then get
+    # cleaned up
+    f = None
+    f2 = None
+    # Run gc again with debugging turned on, to see if it finds
+    # anything. Ideally there should be nothing
+    old_flags = gc.get_debug()
+    gc.set_debug(gc.DEBUG_STATS | gc.DEBUG_COLLECTABLE)
+    gc.collect()
+    gc.set_debug(old_flags)

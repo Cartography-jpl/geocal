@@ -1,5 +1,4 @@
-from .nitf_file import *
-from .nitf_field import _FieldLoopStruct
+from .nitf_file import NitfFile
 import logging
 import abc, collections
 import numpy as np
@@ -263,7 +262,7 @@ class TSegHandle(DiffHandle):
         # don't need to do it here.
 
         # Compare the object data
-        is_same = is_same and obj1.data_as_str == obj2.data_as_str
+        is_same = is_same and obj1.data.string == obj2.data.string
 
         self.logger.debug("TSegHandle returning>>> %s" % is_same)
         return (True, is_same)

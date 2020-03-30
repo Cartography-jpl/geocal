@@ -1,7 +1,10 @@
-from .nitf_field import *
-from .nitf_des import *
-from .nitf_des_csattb import udsh, add_uuid_des_function
+from .nitf_field import BytesFieldData, FieldStructDiff
+from .nitf_des import NitfDesFieldStruct
+from .nitf_segment_data_handle import NitfSegmentDataHandleSet
 from .nitf_diff_handle import NitfDiffHandle, NitfDiffHandleSet
+from .nitf_des_associated_user_subheader import (add_uuid_des_function,
+                                                 DesAssociatedUserSubheader)
+from .nitf_segment_user_subheader_handle import desid_to_user_subheader_handle
 import io
 
 hlp = '''This is a NITF CSEPHB DES. The field names can be pretty
@@ -13,8 +16,7 @@ The NITF DES subheader is described in a separate DRAFT document for the SNIP st
 
 _eph_format = "%+012.2lf"
 
-desc2 =["CSEPHB",
-        ['qual_flag_eph', 'Ephemeris Data Quality Flag', 1, int],
+desc =[['qual_flag_eph', 'Ephemeris Data Quality Flag', 1, int],
         ['interp_type_eph', 'Interpolation Type', 1, int],
         ['interp_order_eph', 'Order of Lagrange Interpolation Polynomials', 1, int, {'condition': 'f.interp_type_eph==2'}],
         ['ephem_flag', "Ephemeris Source Type", 1, int],
@@ -29,27 +31,25 @@ desc2 =["CSEPHB",
          ["ephem_z", "Z-Coordinate", 12, float, {"frmt": _eph_format}],
         ], #end loop
         ["reserved_len", "Size of the Reserved Field", 9, int],
-        ["reserved", "Reserved Data Field", "f.reserved_len", None, {'field_value_class' : FieldData}]
+        ["reserved", "Reserved Data Field", "f.reserved_len", None, {'field_value_class' : BytesFieldData}]
        ]
 
-#print (desc2)
+class DesCSEPHB(NitfDesFieldStruct):
+    __doc__ = hlp
+    desc = desc
+    des_tag = "CSEPHB"
+    des_ver = 1
+    uh_class = DesAssociatedUserSubheader
+    def summary(self):
+        res = io.StringIO()
+        print("CSEPHB %s:  %d points" % (self.ephem_flag, self.num_ephem),
+              file=res)
+        return res.getvalue()
 
-# udsh here is a from nitf_des_csattb, since the same user defined subheader
-# is used for both
-(DesCSEPHB, DesCSEPHB_UH) = create_nitf_des_structure("DesCSEPHB", desc2, udsh, hlp=hlp)
-
-DesCSEPHB.desid = hardcoded_value("CSEPHB")
-DesCSEPHB.desver = hardcoded_value("01")
-
-def _summary(self):
-    res = io.StringIO()
-    print("CSEPHB %s:  %d points" % (self.ephem_flag, self.num_ephem), file=res)
-    return res.getvalue()
-
-DesCSEPHB.summary = _summary
-
+desid_to_user_subheader_handle.add_des_user_subheader("CSEPHB",
+                      DesAssociatedUserSubheader)
 add_uuid_des_function(DesCSEPHB)    
-register_des_class(DesCSEPHB)
+NitfSegmentDataHandleSet.add_default_handle(DesCSEPHB)
 
 class CsephbDiff(FieldStructDiff):
     '''Compare two DesCSEPHB.'''
@@ -64,28 +64,10 @@ class CsephbDiff(FieldStructDiff):
             return (True, self.compare_obj(h1, h2, nitf_diff))
 
 NitfDiffHandleSet.add_default_handle(CsephbDiff())
+
 # No default configuration
+
 _default_config = {}
 NitfDiffHandleSet.default_config["DesCSEPHB"] = _default_config
 
-class CsephbUserheaderDiff(FieldStructDiff):
-    '''Compare two user headers.'''
-    def configuration(self, nitf_diff):
-        return nitf_diff.config.get("DesCSEPHB_UH", {})
-
-    def handle_diff(self, h1, h2, nitf_diff):
-        with nitf_diff.diff_context("DesCSEPHB_UH"):
-            if(not isinstance(h1, DesCSEPHB_UH) or
-               not isinstance(h2, DesCSEPHB_UH)):
-                return (False, None)
-            return (True, self.compare_obj(h1, h2, nitf_diff))
-
-NitfDiffHandleSet.add_default_handle(CsephbUserheaderDiff())
-_default_config = {}
-# UUID change each time they are generated, so don't include in
-# check
-_default_config["exclude"] = ['id', 'assoc_elem_id']
- 
-NitfDiffHandleSet.default_config["DesCSEPHB_UH"] = _default_config
-
-__all__ = ["DesCSEPHB", "DesCSEPHB_UH"]
+__all__ = ["DesCSEPHB", ]

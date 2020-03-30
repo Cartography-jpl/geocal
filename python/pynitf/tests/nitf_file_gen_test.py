@@ -2,21 +2,16 @@
 # Example of creating a simple nitf file
 #======================================================================
 
-from pynitf.nitf_file import *
-from pynitf.nitf_image import *
-from pynitf.nitf_tre_csde import *
-from pynitf.nitf_tre_csepha import *
-from pynitf.nitf_tre_piae import *
-from pynitf.nitf_tre_rpc import *
-from pynitf.nitf_tre_geosde import *
-from pynitf.nitf_tre_histoa import *
-from pynitf.nitf_tre_bandsb import *
-from pynitf.nitf_tre_engrda import *
-from pynitf.nitf_des import *
-from pynitf.nitf_des_csatta import *
-from pynitf.nitf_des_csattb import *
-from pynitf.nitf_des_csephb import *
-from pynitf.nitf_des_ext_def_content import *
+from pynitf.nitf_file import NitfFile
+from pynitf.nitf_image import NitfImageWriteNumpy, NitfImageWriteDataOnDemand
+from pynitf.nitf_tre_csde import TreUSE00A
+from pynitf.nitf_tre_histoa import TreHISTOA
+from pynitf.nitf_tre_bandsb import TreBANDSB
+from pynitf.nitf_tre_engrda import TreENGRDA
+from pynitf.nitf_text import NitfTextStr
+from pynitf.nitf_des_csattb import DesCSATTB
+from pynitf.nitf_des_csephb import DesCSEPHB
+from pynitf.nitf_des_ext_def_content import DesEXT_h5
 from pynitf_test_support import *
 import copy
 import json
@@ -96,10 +91,8 @@ def createENGRDA():
     t.englbl[0] = b"TEMP1"
     t.engmtxc[0] = 1
     t.engmtxr[0] = 1
-    t.engtyp[0] = "I"
-    t.engdts[0] = 2
     t.engdatu[0] = "tC"
-    t.engdata[0] = b'\x01\x25'
+    t.engdata[0] = np.array([[277]], dtype = np.uint16)
 
     return t
 
@@ -150,7 +143,7 @@ def test_main(isolated_dir):
     img3 = NitfImageWriteDataOnDemand(nrow=400, ncol=300, data_type=np.dtype('>i2'),
                                       numbands=50, data_callback=write_by_row_p,
                                       image_gen_mode=NitfImageWriteDataOnDemand.IMAGE_GEN_MODE_ROW_P)
-    ih = img3.image_subheader
+    ih = img3.subheader
     ih.nbpr = 300
     ih.nbpc = 1
     ih.nppbh = 1
@@ -189,7 +182,7 @@ def test_main(isolated_dir):
         'titles': ['BDFL', 'Developer'],
     }
 
-    ts = NitfTextSegment(txt = (json.dumps(d)))
+    ts = NitfTextSegment(NitfTextStr(json.dumps(d)))
 
     ts.subheader.textid = 'ID12345'
     ts.subheader.txtalvl = 0
@@ -200,14 +193,14 @@ def test_main(isolated_dir):
     #DES ------------------------------------------------------------------------------
 
     # -- CSATTB --
-    ds = DesCSATTB_UH()
+    d = DesCSATTB()
+    ds = d.user_subheader
     ds.id = '4385ab47-f3ba-40b7-9520-13d6b7a7f311'
     ds.numais = '010'
     for i in range(int(ds.numais)):
         ds.aisdlvl[i] = 5 + i
     ds.reservedsubh_len = 0
 
-    d = DesCSATTB(user_subheader=ds)
     d.qual_flag_att = 1
     d.interp_type_att = 1
     d.att_type = 1
@@ -223,12 +216,13 @@ def test_main(isolated_dir):
         d.q4[n] = 0.11111
     d.reserved_len = 0
 
-    de2 = NitfDesSegment(des = d)
+    de2 = NitfDesSegment(d)
     f.des_segment.append(de2)
 
     # -- CSEPHB --
 
-    ds3 = DesCSEPHB_UH()
+    d = DesCSEPHB()
+    ds3 = d.user_subheader
     ds3.id = '4385ab47-f3ba-40b7-9520-13d6b7a7f31b'
     ds3.numais = '011'
     for i in range(int(ds3.numais)):
@@ -238,7 +232,6 @@ def test_main(isolated_dir):
     r = 100
     offset1 = 1000
     offset2 = 2000
-    d = DesCSEPHB(user_subheader=ds3)
     d.qual_flag_eph = 1
     d.interp_type_eph = 1
     d.ephem_flag = 1
@@ -253,7 +246,7 @@ def test_main(isolated_dir):
         d.ephem_z[n] = n * n + offset2
     d.reserved_len = 0
 
-    de3 = NitfDesSegment(des=d)
+    de3 = NitfDesSegment(d)
     f.des_segment.append(de3)
 
     # -- EXT_DEF_CONTENT --
@@ -279,7 +272,7 @@ def test_main(isolated_dir):
     h_f.close()
     d_ext.attach_file("mytestfile.hdf5")
 
-    de3 = NitfDesSegment(des=d_ext)
+    de3 = NitfDesSegment(d_ext)
     f.des_segment.append(de3)
 
     #print (f)
@@ -310,7 +303,7 @@ def test_main(isolated_dir):
     assert csattb.dt_att == 900.5
     assert csattb.date_att == 20170501
     assert csattb.t0_att == 235959.100001000
-    csattb_uh = f2.des_segment[0].des.user_subheader
+    csattb_uh = f2.des_segment[0].user_subheader
     assert csattb_uh.id == '4385ab47-f3ba-40b7-9520-13d6b7a7f311'
     assert csattb_uh.numais == '010'
     print(f2.des_segment[0])
@@ -321,15 +314,15 @@ def test_main(isolated_dir):
     assert csephb.dt_ephem == 900.5
     assert csephb.date_ephem == 20170501
     assert csephb.t0_ephem == 235959.100001000
-    csephb_uh = f2.des_segment[1].des.user_subheader
+    csephb_uh = f2.des_segment[1].user_subheader
     assert csephb_uh.id == '4385ab47-f3ba-40b7-9520-13d6b7a7f31b'
     assert csephb_uh.numais == '011'
 
     
     assert f2.des_segment[2].subheader.desid == 'EXT_DEF_CONTENT'
-    # Come back to this, doesn't currently work
+    # TODO Come back to this, doesn't currently work
     if(False):
-        ext_uh = f2.des_segment[2].des.user_subheader
+        ext_uh = f2.des_segment[2].user_subheader
         assert ext_uh.content_headers_len == 3
         assert ext_uh.content_headers == b'1:2'
 

@@ -4,9 +4,13 @@ from numpy.testing import assert_almost_equal, assert_approx_equal
 from pynitf.nitf_security import NitfSecurity
 from pynitf.nitf_image import NitfImageWriteNumpy
 from pynitf.nitf_file import (NitfImageSegment, NitfTextSegment,
-                              NitfDesSegment)
-from pynitf.nitf_des_csattb import (DesCSATTB_UH, DesCSATTB)
+                              NitfDesSegment, NitfGraphicSegment,
+                              NitfResSegment)
+from pynitf.nitf_text import NitfTextStr
+from pynitf.nitf_segment_data_handle import NitfGraphicRaw, NitfResRaw
+from pynitf.nitf_des_csattb import DesCSATTB
 from pynitf.nitf_tre_csde import TreUSE00A
+from pynitf.nitf_tre import TreWarning
 from pynitf.nitf_diff_handle import DifferenceFormatter
 from unittest import SkipTest
 import os
@@ -31,10 +35,22 @@ except ImportError:
     # Ok if we don't have h5py, we just can't execute this code
     have_h5py = False
 
+# All warnings about TREs are treated as errors.
+#
+# With the exception:
+# The MATESA TRE changed between v 0.1 and 1.0 of the SNIP. The RIP
+# data uses the old format. We can't do anything about this, so just
+# ignore warning messages about this TRE. But treat other warnings as
+# errors
+
+pytestmark = [pytest.mark.filterwarnings("error::pynitf.TreWarning"),
+              pytest.mark.filterwarnings("ignore:Trouble reading TRE MATESA:pynitf.TreWarning")]
+
 # Location of test data that is part of source
-unit_test_data = os.path.abspath(os.path.dirname(__file__) + "/unit_test_data/") + "/"
+unit_test_data = os.path.abspath(os.path.expandvars(os.path.dirname(__file__)) + "/unit_test_data/") + "/"
 # Locate of programs
-program_dir = os.path.abspath(os.path.dirname(__file__) + "../../../extra/") + "/"
+program_dir = os.path.abspath(os.path.expandvars(os.path.dirname(__file__)) + "../../../bin/") + "/"
+os.environ["PATH"] = program_dir + ":" + os.environ["PATH"]
 
 # Fake security object, just so we can test setting and reading
 security_fake = NitfSecurity()
@@ -108,29 +124,47 @@ def create_tre(f, angle_to_north = 270):
     t.sun_az = 131.3
     f.tre_list.append(t)
 
-def create_text_segment(f, first_name = 'Guido', textid = 'ID12345'):
+def create_text_segment(f, first_name = 'Guido', textid = 'ID12345',
+                        security = None):
     '''Create a text segment'''
     d = {
         'first_name': first_name,
         'second_name': 'Rossum',
         'titles': ['BDFL', 'Developer'],
     }
-    ts = NitfTextSegment(txt = json.dumps(d))
+    ts = NitfTextSegment(NitfTextStr(json.dumps(d)), security=security)
     ts.subheader.textid = textid
     ts.subheader.txtalvl = 0
     ts.subheader.txtitl = 'sample title'
     f.text_segment.append(ts)
 
-def create_des(f, date_att = 20170501, q = 0.1):
+def create_graphic_segment(f, graphic_data=b'fake graph data',
+                           graphicid = 'GID12345', security = None):
+    '''Create a graphic segment'''
+    gs = NitfGraphicSegment(NitfGraphicRaw(graphic_data),
+                            security=security)
+    gs.subheader.sid = graphicid
+    gs.subheader.sname = "Fake graphic"
+    gs.subheader.salvl = 0
+    f.graphic_segment.append(gs)
+
+def create_res_segment(f, res_data=b'fake res data',
+                       resid = 'GID12345', security = None):
+    '''Create a res segment'''
+    rs = NitfResSegment(NitfResRaw(res_data), security=security)
+    rs.subheader.resid = resid
+    f.res_segment.append(rs)
+    
+def create_des(f, date_att = 20170501, q = 0.1, security=None):
     '''Create a DES segment'''
-    ds = DesCSATTB_UH()
+    des = DesCSATTB()
+    ds = des.user_subheader
     ds.id = '4385ab47-f3ba-40b7-9520-13d6b7a7f311'
     ds.numais = '010'
     for i in range(int(ds.numais)):
         ds.aisdlvl[i] = 5 + i
     ds.reservedsubh_len = 0
 
-    des = DesCSATTB(user_subheader=ds)
     des.qual_flag_att = 1
     des.interp_type_att = 1
     des.att_type = 1
@@ -146,7 +180,7 @@ def create_des(f, date_att = 20170501, q = 0.1):
         des.q4[n] = q
     des.reserved_len = 0
 
-    de = NitfDesSegment(des=des)
+    de = NitfDesSegment(des, security=security)
     f.des_segment.append(de)
     
     
@@ -248,12 +282,16 @@ def isolated_dir(tmpdir):
 
 @pytest.yield_fixture(scope="function")
 def nitf_sample_files(isolated_dir):
-    if(os.path.exists("/raid1/smyth/NitfSamples/")):
-        return "/raid1/smyth/NitfSamples/"
+    if(os.path.exists("/bigdata/smyth/NitfSamples/")):
+        return "/bigdata/smyth/NitfSamples/"
     elif(os.path.exists("/opt/nitf_files/NitfSamples/")):
         return "/opt/nitf_files/NitfSamples/"
     elif(os.path.exists("/data2/smythdata/NitfSamples/")):
         return "/data2/smythdata/NitfSamples/"
+    elif(os.path.exists("/data2/smythdata/NitfSamples/")):
+        return "/data2/smythdata/NitfSamples/"
+    elif(os.path.exists("/Users/smyth/NitfSamples/")):
+        return "/Users/smyth/NitfSamples/"
     pytest.skip("Require NitfSamples test data to run")
 
 @pytest.yield_fixture(scope="function")

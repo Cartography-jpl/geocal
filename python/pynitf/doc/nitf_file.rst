@@ -15,18 +15,18 @@ The NitfFile class structure is shown in :numref:`nitf_file`.
    :caption: NitfFile class structure
 
    class NitfFile {
-      NitfFile(file_name=None,\n         security = security_unclassified,\n         use_raw=False)
-      read(file_name, use_raw=False)
-      write(file_name)
-      NitfFileHeader file_header
-      file_name
-      NitfImageSegment image_segment[]
-      NitfGraphicSegment graphic_segment[]
-      NitfTextSegment text_segment[]
-      NitfDesSegment des_segment[]
-      NitfResSegment res_segment[]
-      Tre tre_list[]
-      security
+      +NitfFile(file_name=None,\n         security = security_unclassified)
+      +read(file_name)
+      +write(file_name)
+      +NitfFileHeader file_header
+      +file_name
+      +NitfImageSegment image_segment[]
+      +NitfGraphicSegment graphic_segment[]
+      +NitfTextSegment text_segment[]
+      +NitfDesSegment des_segment[]
+      +NitfResSegment res_segment[]
+      +Tre tre_list[]
+      +security
    }
    note top
       The NITF file class, used for reading
@@ -34,17 +34,27 @@ The NitfFile class structure is shown in :numref:`nitf_file`.
    end note
 
    abstract class NitfSegment {
-      +NitfFile nitf_file
-      +subheader
-      +user_subheader
+      {static} sh_class
+      {static} _update_file_header_field
+      {static} _type_support_tre
+      {static} _tre_field_list
+      {property} nitf_file
+      {property} subheader
+      {property} user_subheader
+      {property} security
+      +summary()
+      +read_from_file(fh, seg_index=None)
+      +write_to_file(fh, seg_index)
       +Tre tre_list[]
       +data
+      +header_size
+      +data_size
    }
    note top
       Base class of NITF segments.
 
       Note not all segment types can have
-      user_header or TREs. Just to prevent needing
+      user_subheaders or TREs. Just to prevent needing
       special handling for each segment type, we
       include this in all segment types but set to
       None (for user_subheader) or an empty list (for
@@ -53,23 +63,25 @@ The NitfFile class structure is shown in :numref:`nitf_file`.
    end note
 
    class NitfImageSegment {
-      +Tre tre_list[]
+      {property} image
+      {property} idlvl
+      {property} iid1
    }
 
    class NitfGraphicSegment {
-      +Tre tre_list[]
+      {property} graphic
    }
 
    class NitfTextSegment {
-      +Tre tre_list[]
+      {property} text
    }
 
    class NitfDesSegment {
-       +user_subheader
+      {property} des
    }
 
    class NitfResSegment {
-       +user_subheader
+      {property} res
    }
 
    class Tre
@@ -95,6 +107,38 @@ However, NitfResSegment
 and NitfDesSegment can have a "user_subheader" supplied. The particular fields
 in a user_subheader are determined by the desid or resid type identifier.
 
+TRE Errors
+----------
+
+It is not infrequent to run into a file that has a TRE that doesn't conform
+to the documentation that we code from. A required field might be left blank
+for example, or a format might have changed (e.g. MATESA changed from version
+0.1 to 1.0 of the SNIP).
+
+Depending on what you are trying to do you may want:
+
+1. The difference to be completely ignored, and the TRE replaced with
+   TreUnknown.
+2. The difference reported as a warning, and the TRE replaced with TreUnknown.
+3. The difference to be treated as an error and an exception thrown.
+
+To accommodate this range of possibilities. the TRE reading code reports using
+python `warnings <https://docs.python.org/3/library/warnings.html>`_ module.
+We introduce a new warning "TreWarning" derived from  the standard UserWarning
+exception.
+
+You can use the standard warnings filterwarnings function to control the
+behavior. For example, to treat all TreWarnings as an error you can use the
+code snippet::
+
+  warnings.filterwarnings("error", category=pynitf.TreWarning)
+
+To ignore just the MATESA format change, you can use::
+  
+  warnings.filterwarnings("ignore", "Trouble reading TRE MATESA",
+                          category=pynitf.TreWarning)
+
+
 NitfFile Handles and Hooks
 --------------------------
 
@@ -106,9 +150,9 @@ shown in :numref:`nitf_file_hook`.
    :caption: NitfFile class Handles and Hooks
 
    class NitfFile {
-      NitfSegmentHookSet segment_hook_set
-      NitfSegmentUserSubheaderHandleSet user_subheader_handle_set
-      NitfSegmentDataHandleSet data_handle_set
+      +NitfSegmentHookSet segment_hook_set
+      +NitfSegmentUserSubheaderHandleSet user_subheader_handle_set
+      +NitfSegmentDataHandleSet data_handle_set
    }
 
    class NitfSegmentHookSet {
@@ -126,8 +170,7 @@ shown in :numref:`nitf_file_hook`.
    end note
 
    class NitfSegmentUserSubheaderHandleSet {
-      +DesUserSubheaderHandleSet des_set
-      +ResUserSubheaderHandleSet res_set
+      +user_subheader_cls(seg)
    }
    note bottom
       Handle reading and writing User 
@@ -135,11 +178,7 @@ shown in :numref:`nitf_file_hook`.
    end note
 
    class NitfSegmentDataHandleSet {
-     +NitfImageHandleSet image_handle_set
-     +NitfDesHandleSet des_handle_set
-     +NitfTextHandleSet text_handle_set
-     +NitfGraphicHandleSet graphic_handle_set
-     +NitfResHandleSet res_handle_set
+     +read_from_file(seg, fh, seg_index=None)
    }
    note top
       Handle reading and writing the
@@ -188,11 +227,12 @@ See :numref:`nitf_segment_hook`.
    :caption: NitfSegmentHookSet
 
    class NitfFile {
-      NitfSegmentHookSet segment_hook_set
+      +NitfSegmentHookSet segment_hook_set
    }
 
    class NitfSegmentHookSet {
       +after_init_hook(seg, nitf_file)
+      +after_append_hook(seg, nitf_file)
       +before_write_hook(seg, nitf_file)
       +after_read_hook(seg, nitf_file)
       +before_str_hook(seg, nitf_file, fh)
@@ -210,11 +250,12 @@ See :numref:`nitf_segment_hook`.
 
    class NitfSegmentHook {
       +after_init_hook(seg, nitf_file)
+      +after_append_hook(seg, nitf_file)
       +before_write_hook(seg, nitf_file)
       +after_read_hook(seg, nitf_file)
       +before_str_hook(seg, nitf_file, fh)
       +before_str_tre_hook(seg, tre, nitf_file, fh)
-      +remove_for_raw_print()
+      +remove_for_report_raw()
    }
    note bottom
       Hook object to extend handling of
@@ -245,196 +286,163 @@ Note that when printing out a NitfSegment, most of the time we want the higher
 level objects printed. However, there may be instances where we want the "raw"
 data (e.g., nitfinfofull reporting raw TRE data). NitfSegmentHookSet will
 skip calling before_str_hook and before_tre_str_hook if
-"remove_for_raw_print" is True for the NitfSegmentHook.
+"remove_for_report_raw" is True for the NitfSegmentHook.
 
 NitfSegmentUserSubheaderHandleSet
 ---------------------------------
 
 The NitfSegmentUserSubheaderHandleSet is used to handle reading and writing
 the user subheaders found in the NitfDesSegment and NitfResSegment. This
-contains a PriorityHandleSet (see :ref:`priority-handle-set-section`) for
-handling each of these segment types. See :numref:`nitf_user_subheader_handle`.
+is a :ref:`priority-handle-set-section` for
+handling each of these segment types. The handle returns the user subheader
+class type, which is then used by NitfSegment for reading and writing the
+user subheader. See :numref:`nitf_user_subheader_handle`.
 
 .. _nitf_user_subheader_handle:
 .. uml::
    :caption: NitfSegmentUserSubheaderHandleSet
 
    class NitfFile {
-      NitfSegmentHookSet segment_hook_set
-      NitfSegmentUserSubheaderHandleSet user_subheader_handle_set
-      NitfSegmentDataHandleSet data_handle_set
+      +NitfSegmentUserSubheaderHandleSet user_subheader_handle_set
    }
 
-   class NitfSegmentHookSet {
-      +add_hook(h)
-      +discard_hook(h)
-      {static} add_default_hook(cls, h)
-      {static} discard_default_hook(cls, h)
-      {static} default_hook_set()
-      }
-   note top
-     Hook objects to extend the handling
-     of various attributes of a segments
-     (e.g., add higher level classes Rpc
-     or RSM).
-   end note
-
-   class NitfSegmentHook
-   
    class NitfSegmentUserSubheaderHandleSet {
-      +DesUserSubheaderHandleSet des_set
-      +ResUserSubheaderHandleSet res_set
+      +user_subheader_cls(seg)
    }
    note bottom
-      Handle reading and writing User 
-      Subheaders for various segments.
+     Return the Class to use for
+     the user subheader for the 
+     given segment (or None for 
+     no user subheader)
    end note
 
-   class PriorityHandleSet
-
-   class DesUserSubheaderHandleSet
-   
-   class ResUserSubheaderHandleSet
-   
-   class NitfSegmentDataHandleSet {
-     +NitfImageHandleSet image_handle_set
-     +NitfDesHandleSet des_handle_set
-     +NitfTextHandleSet text_handle_set
-     +NitfGraphicHandleSet graphic_handle_set
-     +NitfResHandleSet res_handle_set
+   abstract class PriorityHandleSet {
+      +add_handle(h, priority_order=0)
+      +discard_handle(h)
+      {static} add_default_handle(cls, h, priority_order=0)
+      {static} discard_default_handle(cls, h, priority_order=0)
+      {static} default_handle_set()
+      +handle(*args, **keywords)
    }
-   note top
-      Handle reading and writing the
-      data in a segment (e.g, a image)
+   
+   abstract class UserSubheaderHandle {
+      {static} seg_class
+      +user_subheader_cls(seg)
+   }
+
+   class DesIdToUSHHandle {
+      +add_des_user_subheader(desid, des_user_subheader_cls)
+   }
+   note bottom
+      Often we just need the DES ID to
+      map to the class for the DES User Subheader.
+      This class is a simple dict going from
+      the id to the class that handles the
+      user subheader.
    end note
 
-   class NitfImageHandleSet
-   class NitfDesHandleSet
-   class NitfTextHandleSet
-   class NitfGraphicHandleSet
-   class NitfResHandleSet 
-   
-   NitfFile o--  NitfSegmentHookSet
+   class ResIdToUSHHandle {
+      +add_res_user_subheader(resid, res_user_subheader_cls)
+   }
+	     
    NitfFile o--  NitfSegmentUserSubheaderHandleSet
-   NitfFile o--  NitfSegmentDataHandleSet
-   NitfSegmentHookSet o-- "many" NitfSegmentHook
-   NitfSegmentUserSubheaderHandleSet o-- "many" DesUserSubheaderHandleSet
-   NitfSegmentUserSubheaderHandleSet o-- "many" ResUserSubheaderHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfImageHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfDesHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfTextHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfGraphicHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfResHandleSet
-   NitfSegmentUserSubheaderHandleSet -[hidden]- PriorityHandleSet
-   NitfSegmentDataHandleSet -[hidden]- PriorityHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfImageHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfDesHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfTextHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfGraphicHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfResHandleSet
-   PriorityHandleSet <|-- DesUserSubheaderHandleSet
-   PriorityHandleSet <|-- ResUserSubheaderHandleSet
-   PriorityHandleSet <|-- NitfImageHandleSet
-   PriorityHandleSet <|-- NitfDesHandleSet
-   PriorityHandleSet <|-- NitfTextHandleSet
-   PriorityHandleSet <|-- NitfGraphicHandleSet
-   PriorityHandleSet <|-- NitfResHandleSet
+   NitfSegmentUserSubheaderHandleSet o-- "many" UserSubheaderHandle
+   UserSubheaderHandle <|-- DesIdToUSHHandle
+   UserSubheaderHandle <|-- ResIdToUSHHandle
+   PriorityHandleSet <|-- NitfSegmentUserSubheaderHandleSet
 
 NitfSegmentDataHandleSet
 ---------------------------------
 
 The NitfSegmentDataHandleSet is used to handle reading and writing
 the data field of each of the NitfSegment types. This
-contains a PriorityHandleSet (see :ref:`priority-handle-set-section`) for
-handling
-each of these segment types. See :numref:`nitf_data_handle`.
+is a :ref:`priority-handle-set-section` for
+handling each of these segment types. See :numref:`nitf_data_handle`.
 
 .. _nitf_data_handle:
 .. uml::
    :caption: NitfSegmentDataHandleSet
 
    class NitfFile {
-      NitfSegmentHookSet segment_hook_set
-      NitfSegmentUserSubheaderHandleSet user_subheader_handle_set
-      NitfSegmentDataHandleSet data_handle_set
+      +NitfSegmentDataHandleSet data_handle_set
    }
 
-   class NitfSegmentHookSet {
-      +add_hook(h)
-      +discard_hook(h)
-      {static} add_default_hook(cls, h)
-      {static} discard_default_hook(cls, h)
-      {static} default_hook_set()
-      }
-   note top
-     Hook objects to extend the handling
-     of various attributes of a segments
-     (e.g., add higher level classes Rpc
-     or RSM).
-   end note
-
-   class NitfSegmentHook
-   
-   class NitfSegmentUserSubheaderHandleSet {
-      +DesUserSubheaderHandleSet des_set
-      +ResUserSubheaderHandleSet res_set
-   }
-   note bottom
-      Handle reading and writing User 
-      Subheaders for various segments.
-   end note
-
-   class PriorityHandleSet
-
-   class DesUserSubheaderHandleSet
-   
-   class ResUserSubheaderHandleSet
-   
    class NitfSegmentDataHandleSet {
-     +NitfImageHandleSet image_handle_set
-     +NitfDesHandleSet des_handle_set
-     +NitfTextHandleSet text_handle_set
-     +NitfGraphicHandleSet graphic_handle_set
-     +NitfResHandleSet res_handle_set
+     +read_from_file(seg, fh, seg_index=None)
+     +handle_h(cls, seg, fh, seg_index)
    }
    note top
-      Handle reading and writing the
-      data in a segment (e.g, a image)
+      Handle reading the data in
+      a segment (e.g, a image)
    end note
 
-   class NitfImageHandleSet
-   class NitfDesHandleSet
-   class NitfTextHandleSet
-   class NitfGraphicHandleSet
-   class NitfResHandleSet 
-   
-   NitfFile o--  NitfSegmentHookSet
-   NitfFile o--  NitfSegmentUserSubheaderHandleSet
-   NitfFile o--  NitfSegmentDataHandleSet
-   NitfSegmentHookSet o-- "many" NitfSegmentHook
-   NitfSegmentUserSubheaderHandleSet o-- "many" DesUserSubheaderHandleSet
-   NitfSegmentUserSubheaderHandleSet o-- "many" ResUserSubheaderHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfImageHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfDesHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfTextHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfGraphicHandleSet
-   NitfSegmentDataHandleSet o-- "many" NitfResHandleSet
-   NitfSegmentUserSubheaderHandleSet -[hidden]- PriorityHandleSet
-   NitfSegmentDataHandleSet -[hidden]- PriorityHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfImageHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfDesHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfTextHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfGraphicHandleSet
-   DesUserSubheaderHandleSet -[hidden]- NitfResHandleSet
-   PriorityHandleSet <|-- DesUserSubheaderHandleSet
-   PriorityHandleSet <|-- ResUserSubheaderHandleSet
-   PriorityHandleSet <|-- NitfImageHandleSet
-   PriorityHandleSet <|-- NitfDesHandleSet
-   PriorityHandleSet <|-- NitfTextHandleSet
-   PriorityHandleSet <|-- NitfGraphicHandleSet
-   PriorityHandleSet <|-- NitfResHandleSet
-   
+   abstract class PriorityHandleSet {
+      +add_handle(h, priority_order=0)
+      +discard_handle(h)
+      {static} add_default_handle(cls, h, priority_order=0)
+      {static} discard_default_handle(cls, h, priority_order=0)
+      {static} default_handle_set()
+      +handle(*args, **keywords)
+   }
 
+   abstract class NitfData {
+      {static} seg_class
+      {static} sh_class
+      {static} uh_class
+      {property} subheader
+      {property} user_subheader
+      {property} user_subheader_size
+      +__init__(seg=None)
+      {abstract} read_from_file(fh, seg_index = None)
+      {abstract} write_to_file(fh):
+      {property} security
+   }
+   note left 
+      Handle reading and writing
+      the data in a segment (e.g,
+      a image). read_from_file should
+      return True if this class can
+      handle the type, and False
+      otherwise.
+   end note
+
+   abstract class NitfImage {
+      {property} shape
+      {property} dtype
+      {property} idlvl
+      {property} iid1
+   }
+   abstract class NitfDes
+   abstract class NitfText
+   abstract class NitfGraphic
+   abstract class NitfRes
+
+   class NitfDataPlaceHolder {
+      +read_from_file(fh, seg_index = None)
+      +write_to_file(fh):
+   }
+   note top
+     Implementation that doesn't actually
+     read data, instead it skips it.
+     Useful as a final place holder of none
+     of our other NitfData classes can
+     handle a particular segment.
+   end note
+
+   NitfFile o--  NitfSegmentDataHandleSet
+   NitfSegmentDataHandleSet o-- "many" NitfData
+   PriorityHandleSet <|-- NitfSegmentDataHandleSet
+   NitfData <|-- NitfImage
+   NitfData <|-- NitfDes
+   NitfData <|-- NitfText
+   NitfData <|-- NitfGraphic
+   NitfData <|-- NitfRes
+   NitfData <|-- NitfDataPlaceHolder
+   NitfImage -[hidden]down- NitfDes
+   NitfImage -[hidden]down- NitfText
+   NitfImage -[hidden]down- NitfGraphic
+   NitfImage -[hidden]down- NitfRes
+      
 
 NitfFile convenience functions
 ------------------------------

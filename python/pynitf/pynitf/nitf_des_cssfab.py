@@ -1,7 +1,10 @@
-from .nitf_field import *
-from .nitf_des import *
-from .nitf_des_csattb import udsh, add_uuid_des_function
+from .nitf_field import IntFieldData, BytesFieldData, FieldStructDiff
+from .nitf_des import NitfDesFieldStruct
+from .nitf_segment_data_handle import NitfSegmentDataHandleSet
 from .nitf_diff_handle import NitfDiffHandle, NitfDiffHandleSet
+from .nitf_des_associated_user_subheader import (add_uuid_des_function,
+                                                 DesAssociatedUserSubheader)
+from .nitf_segment_user_subheader_handle import desid_to_user_subheader_handle
 import io
 
 hlp = '''This is a NITF CSSFAB DES. The field names can be pretty
@@ -13,8 +16,7 @@ The NITF DES subheader is described in a separate DRAFT document for the SNIP st
 
 _quat_format = "%+18.15lf"
 
-desc2 =["CSSFAB",
-        ['sensor_type', 'Sensor Type', 1, str],
+desc =[['sensor_type', 'Sensor Type', 1, str],
         ['band_type', 'Spectral Band Category', 1, str],
         ['band_wavelength', 'Reference wavelength', 11, float,
          {'frmt': '%02.8lf'}],
@@ -139,28 +141,26 @@ desc2 =["CSSFAB",
          ["radius_of_validity_tele", "Radius from the Principal Point to the Outermost Region where Radial Distortion Coefficients are Valid", 21, float, {"frmt" : "%+21.14E"}],
          ],
         ["reserved_len", "Size of the Reserved Field", 9, int, {"default" : 0}],
-        ["reserved", "Reserved Data Field", "f.reserved_len", None, {'field_value_class' : FieldData}],
+        ["reserved", "Reserved Data Field", "f.reserved_len", None,
+         {'field_value_class' : BytesFieldData}],
 ]
         
+class DesCSSFAB(NitfDesFieldStruct):
+    __doc__ = hlp
+    desc = desc
+    des_tag = "CSSFAB"
+    des_ver = 1
+    uh_class = DesAssociatedUserSubheader
+    def summary(self):
+        res = io.StringIO()
+        print("CSSFAB", file=res)
+        return res.getvalue()
 
-#print (desc2)
 
-# udsh here is a from nitf_des_csattb, since the same user defined subheader
-# is used for both
-(DesCSSFAB, DesCSSFAB_UH) = create_nitf_des_structure("DesCSSFAB", desc2, udsh, hlp=hlp)
-
-DesCSSFAB.desid = hardcoded_value("CSSFAB")
-DesCSSFAB.desver = hardcoded_value("01")
-
-def _summary(self):
-    res = io.StringIO()
-    print("CSSFAB", file=res)
-    return res.getvalue()
-
-DesCSSFAB.summary = _summary
-
+desid_to_user_subheader_handle.add_des_user_subheader("CSSFAB",
+                      DesAssociatedUserSubheader)
 add_uuid_des_function(DesCSSFAB)    
-register_des_class(DesCSSFAB)
+NitfSegmentDataHandleSet.add_default_handle(DesCSSFAB)
 
 class CssfabDiff(FieldStructDiff):
     '''Compare two DesCSSFAB.'''
@@ -175,28 +175,10 @@ class CssfabDiff(FieldStructDiff):
             return (True, self.compare_obj(h1, h2, nitf_diff))
 
 NitfDiffHandleSet.add_default_handle(CssfabDiff())
+
 # No default configuration
+
 _default_config = {}
 NitfDiffHandleSet.default_config["DesCSSFAB"] = _default_config
 
-class CssfabUserheaderDiff(FieldStructDiff):
-    '''Compare two user headers.'''
-    def configuration(self, nitf_diff):
-        return nitf_diff.config.get("DesCSSFAB_UH", {})
-
-    def handle_diff(self, h1, h2, nitf_diff):
-        with nitf_diff.diff_context("DesCSSFAB_UH"):
-            if(not isinstance(h1, DesCSSFAB_UH) or
-               not isinstance(h2, DesCSSFAB_UH)):
-                return (False, None)
-            return (True, self.compare_obj(h1, h2, nitf_diff))
-
-NitfDiffHandleSet.add_default_handle(CssfabUserheaderDiff())
-_default_config = {}
-# UUID change each time they are generated, so don't include in
-# check
-_default_config["exclude"] = ['id', 'assoc_elem_id']
- 
-NitfDiffHandleSet.default_config["DesCSSFAB_UH"] = _default_config
-
-__all__ = ["DesCSSFAB", "DesCSSFAB_UH"]
+__all__ = ["DesCSSFAB", ]

@@ -1,5 +1,5 @@
-from .nitf_field import *
-from .nitf_tre import *
+from .nitf_field import FloatFieldData, IntFieldData, BytesFieldData
+from .nitf_tre import Tre, tre_tag_to_cls
 
 hlp = '''This is the BANDSB TRE. 
 
@@ -19,8 +19,7 @@ we lose one digit of float for a lot of these fields. We may not need that digit
 Example fields are: caldrk, calibration_sensitiviy, etc.
 
 '''
-desc = ["BANDSB",
-        ["count", "Number of Bands", 5, int],
+desc = [["count", "Number of Bands", 5, int],
         ["radiometric_quantity", "Data Representation", 24, str],
         ["radiometric_quantity_unit", "Data Representation Unit", 1, str],
         ["cube_scale_factor", "Cube Scale Factor", 4, None, {'field_value_class' : FloatFieldData, 'size_not_updated' : True}],
@@ -35,14 +34,14 @@ desc = ["BANDSB",
         ["spt_resp_unit_row_nom", "Units of Spatial Response Function (Rows)", 1, str],
         ["spt_resp_col_nom", "Spatial Response Function (Cols)", 7, str], #Same weirdness as row_gsd
         ["spt_resp_unit_col_nom", "Units of Spatial Response Function (Cols)", 1, str],
-        ["data_fld_1", "Field reserved for future use", 48, None, {'field_value_class' : FieldData, 'size_not_updated' : True}],
+        ["data_fld_1", "Field reserved for future use", 48, None, {'field_value_class' : BytesFieldData, 'size_not_updated' : True}],
         ["existence_mask", "Bit-wise existence mask field", 4, None, {'field_value_class' : IntFieldData, 'size_not_updated' : True}],
         ["radiometric_adjustment_surface", "Adjustment Surface", 24, str, {'condition': "f.existence_mask & 0x80000000"}],
         ["atmospheric_adjustment_altitude", "Adjustment altitude above WGS84 Ellipsoid", 4, None,
          {'field_value_class' : FloatFieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x80000000"}],
         ["diameter", "Diameter of the lens", 7, float, {'condition': "f.existence_mask & 0x40000000", "frmt" : "%07.2f"}],
         ["data_fld_2", "Field reserved for future use", 32, None,
-         {'field_value_class' : FieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x20000000"}],
+         {'field_value_class' : BytesFieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x20000000"}],
         ["wave_length_unit", "Wave Length Units", 1, str, {'condition': "f.existence_mask & 0x01F80000"}],
         [
             ["loop", "f.count"],
@@ -94,13 +93,13 @@ desc = ["BANDSB",
             ["spt_resp_unit_col", "Unit of Spatial Response (Col)", 1, str,
             {'condition': "f.existence_mask & 0x00000800"}],
             ["data_fld_3", "Field reserved for future use", 16, None,
-             {'field_value_class': FieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x00000200"}],
+             {'field_value_class': BytesFieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x00000200"}],
             ["data_fld_4", "Field reserved for future use", 24, None,
-             {'field_value_class': FieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x00000100"}],
+             {'field_value_class': BytesFieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x00000100"}],
             ["data_fld_5", "Field reserved for future use", 32, None,
-             {'field_value_class': FieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x00000080"}],
+             {'field_value_class': BytesFieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x00000080"}],
             ["data_fld_6", "Field reserved for future use", 48, None,
-             {'field_value_class': FieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x00000040"}],
+             {'field_value_class': BytesFieldData, 'size_not_updated' : True, 'condition': "f.existence_mask & 0x00000040"}],
         ],
         ["num_aux_b", "Number of Auxiliary Band Level Parameters (m)", 2, int, {'condition': "f.existence_mask & 0x00000001"}],
         ["num_aux_c", "Number of Auxiliary Cube Level Parameters (k)", 2, int, {'condition': "f.existence_mask & 0x00000001"}],
@@ -123,5 +122,12 @@ desc = ["BANDSB",
          ],
         ]
 
-TreBANDSB = create_nitf_tre_structure("TreBANDSB",desc,hlp=hlp)
+class TreBANDSB(Tre):
+    __doc__ = hlp
+    desc = desc
+    tre_tag = "BANDSB"
+
+tre_tag_to_cls.add_cls(TreBANDSB)
+
+__all__ = [ "TreBANDSB", ]
 

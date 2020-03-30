@@ -6,7 +6,7 @@ import io
 
 def test_des_snip_user_header():
 
-    ds = DesCSATTB_UH()
+    ds = DesCSATTB.uh_class()
     ds.id = '4385ab47-f3ba-40b7-9520-13d6b7a7f311'
     ds.numais = '010'
     for i in range(int(ds.numais)):
@@ -19,7 +19,7 @@ def test_des_snip_user_header():
     assert fh_ds.getvalue() == b'4385ab47-f3ba-40b7-9520-13d6b7a7f3110100050060070080090100110120130140000000'
 
     fh2_ds = io.BytesIO(fh_ds.getvalue())
-    d2_ds = DesCSATTB_UH()
+    d2_ds = DesCSATTB.uh_class()
     d2_ds.read_from_file(fh2_ds)
 
     assert d2_ds.id == '4385ab47-f3ba-40b7-9520-13d6b7a7f311'
@@ -48,8 +48,8 @@ def test_des_csattb_basic():
     assert d.user_subheader_size == 46 
 
     fh = io.BytesIO()
-    dseg = NitfDesSegment(des=d);
-    hs, ds = dseg.write_to_file(fh, 0, None)
+    dseg = NitfDesSegment(d);
+    hs, ds = dseg.write_to_file(fh, 0)
     print(fh.getvalue())
     assert fh.getvalue() == b'DECSATTB                   01U                                                                                                                                                                      0046                                    0  00000001110900.50000000020170501235959.10000100000005-0.111110000000000-0.111110000000000+0.111110000000000+0.111110000000000-0.111110000000000-0.111110000000000+0.111110000000000+0.111110000000000-0.111110000000000-0.111110000000000+0.111110000000000+0.111110000000000-0.111110000000000-0.111110000000000+0.111110000000000+0.111110000000000-0.111110000000000-0.111110000000000+0.111110000000000+0.111110000000000000000000'
 
@@ -76,11 +76,11 @@ def test_des_csattb_basic():
 
 def test_des_csattb_uuid_func(isolated_dir):
     d1 = DesCSATTB()
-    dseg1 = NitfDesSegment(des=d1);
+    dseg1 = NitfDesSegment(d1);
     d2 = DesCSATTB()
-    dseg2 = NitfDesSegment(des=d2);
+    dseg2 = NitfDesSegment(d2);
     d3 = DesCSATTB()
-    dseg3 = NitfDesSegment(des=d3);
+    dseg3 = NitfDesSegment(d3);
     dseg1.des.generate_uuid_if_needed()
     dseg2.des.generate_uuid_if_needed()
     dseg3.des.generate_uuid_if_needed()

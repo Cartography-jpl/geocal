@@ -413,7 +413,7 @@ void GeotiffFile::write_1x1_file()
 
 bool GeotiffFile::has_tiftag(tiftag_t K) const
 {
-  uint16_t count;
+  uint32_t count;
   void *data;
   int status = TIFFGetField(tif, K, &count, &data);
   return status == 1;
@@ -439,7 +439,7 @@ template<> int GeotiffFile::get_tiftag(tiftag_t K) const
 
 template<> blitz::Array<double, 1> GeotiffFile::get_tiftag(tiftag_t K) const
 {
-  uint16_t count;
+  uint32_t count;
   double *data;
   int status = TIFFGetField(tif, K, &count, &data);
   if(status != 1)

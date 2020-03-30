@@ -207,9 +207,8 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        OgrWrapper::OgrWrapper(const std::string &Wkt)
-        Constructor that creates a OGRSpatialReference from a WKT (Well Known
-        Text) string. 
+        OgrWrapper::OgrWrapper(const boost::shared_ptr< OGRSpatialReference > &Ogr)
+        Constructor, from an existing OGRSpatialReference. 
         """
         _ogr_coordinate.OgrWrapper_swiginit(self, _ogr_coordinate.new_OgrWrapper(*args))
 
@@ -469,9 +468,10 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     def __init__(self, *args):
         """
 
-        GeoCal::OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, double x, double y,
-        double z)
-        Constructor. X, Y, and Z are in whatever coordinates Ogr are in. 
+        OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const GroundCoordinate
+        &G)
+        Convert from GroundCoordinate to the coordinate system given by Ogr.
+
         """
         _ogr_coordinate.OgrCoordinate_swiginit(self, _ogr_coordinate.new_OgrCoordinate(*args))
 

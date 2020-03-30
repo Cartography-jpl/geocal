@@ -7853,7 +7853,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_0(PyObject *SWIGUNU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8619,7 +8619,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_0(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -13619,9 +13619,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"distance", _wrap_distance, METH_VARARGS, (char *)"\n"
 		"\n"
 		"double GeoCal::distance(const GroundCoordinate &G1, const GroundCoordinate &G2)\n"
-		"Distance in meters between ground coordinates. This is the distance of\n"
-		"the points in 3 space, i.e. it is not distance along a geodesic or\n"
-		"anything like that. \n"
+		"Distance in meters between ground coordinates.\n"
+		"\n"
+		"This is the distance of the points in 3 space, i.e. it is not distance\n"
+		"along a geodesic or anything like that. \n"
 		""},
 	 { (char *)"convert_position_and_velocity", _wrap_convert_position_and_velocity, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -13630,8 +13631,7 @@ static PyMethodDef SwigMethods[] = {
 		"boost::array< AutoDerivative< double >, 3 > &Vel_ci,\n"
 		"boost::shared_ptr< CartesianFixed > &Cf, boost::array< AutoDerivative<\n"
 		"double >, 3 > &Cf_with_der, boost::array< AutoDerivative< double >, 3\n"
-		"> &Vel_cf, boost::math::quaternion< AutoDerivative< double > >\n"
-		"&Ci_to_cf_q)\n"
+		"> &Vel_cf)\n"
 		"Convert including velocity. \n"
 		""},
 	 { (char *)"Vector_GroundCoordinate_iterator", (PyCFunction)_wrap_Vector_GroundCoordinate_iterator, METH_O, NULL},

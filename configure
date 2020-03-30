@@ -18932,8 +18932,8 @@ fi
    CURSES_LIBS=""
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for ncurses" >&5
-$as_echo_n "checking for ncurses... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for CURSES" >&5
+$as_echo_n "checking for CURSES... " >&6; }
 
 if test -n "$CURSES_CFLAGS"; then
     pkg_cv_CURSES_CFLAGS="$CURSES_CFLAGS"
@@ -18973,7 +18973,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -18991,7 +18991,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -19171,8 +19171,8 @@ $as_echo_n "checking for VICAR RTL library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for vicar-rtl" >&5
-$as_echo_n "checking for vicar-rtl... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for VICAR_RTL" >&5
+$as_echo_n "checking for VICAR_RTL... " >&6; }
 
 if test -n "$VICAR_RTL_CFLAGS"; then
     pkg_cv_VICAR_RTL_CFLAGS="$VICAR_RTL_CFLAGS"
@@ -19212,7 +19212,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -19230,7 +19230,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -19582,8 +19582,8 @@ $as_echo_n "checking for HDF5 library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for hdf5" >&5
-$as_echo_n "checking for hdf5... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF5" >&5
+$as_echo_n "checking for HDF5... " >&6; }
 
 if test -n "$HDF5_CFLAGS"; then
     pkg_cv_HDF5_CFLAGS="$HDF5_CFLAGS"
@@ -19623,7 +19623,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -19641,7 +19641,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -19780,8 +19780,8 @@ $as_echo_n "checking for Hdfeos5 library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for hdfeos5" >&5
-$as_echo_n "checking for hdfeos5... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS5" >&5
+$as_echo_n "checking for HDFEOS5... " >&6; }
 
 if test -n "$HDFEOS5_CFLAGS"; then
     pkg_cv_HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS"
@@ -19821,7 +19821,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -19839,7 +19839,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -19885,8 +19885,8 @@ fi
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for hdfeos5" >&5
-$as_echo_n "checking for hdfeos5... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDFEOS5" >&5
+$as_echo_n "checking for HDFEOS5... " >&6; }
 
 if test -n "$HDFEOS5_CFLAGS"; then
     pkg_cv_HDFEOS5_CFLAGS="$HDFEOS5_CFLAGS"
@@ -19926,7 +19926,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -19944,7 +19944,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -20106,8 +20106,8 @@ $as_echo_n "checking for MSPI-Shared library... " >&6; }
         else
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for MSPI-Shared" >&5
-$as_echo_n "checking for MSPI-Shared... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for MSPI_SHARED" >&5
+$as_echo_n "checking for MSPI_SHARED... " >&6; }
 
 if test -n "$MSPI_SHARED_CFLAGS"; then
     pkg_cv_MSPI_SHARED_CFLAGS="$MSPI_SHARED_CFLAGS"
@@ -20147,7 +20147,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -20165,7 +20165,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -20789,8 +20789,8 @@ $as_echo_n "checking for Blitz library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for blitz" >&5
-$as_echo_n "checking for blitz... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for BLITZ" >&5
+$as_echo_n "checking for BLITZ... " >&6; }
 
 if test -n "$BLITZ_CFLAGS"; then
     pkg_cv_BLITZ_CFLAGS="$BLITZ_CFLAGS"
@@ -20830,7 +20830,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -20848,7 +20848,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -21002,8 +21002,8 @@ $as_echo_n "checking for GSL library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for gsl" >&5
-$as_echo_n "checking for gsl... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GSL" >&5
+$as_echo_n "checking for GSL... " >&6; }
 
 if test -n "$GSL_CFLAGS"; then
     pkg_cv_GSL_CFLAGS="$GSL_CFLAGS"
@@ -21043,7 +21043,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -21061,7 +21061,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -21222,8 +21222,8 @@ $as_echo_n "checking for SPICE library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for spice" >&5
-$as_echo_n "checking for spice... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for SPICE" >&5
+$as_echo_n "checking for SPICE... " >&6; }
 
 if test -n "$SPICE_CFLAGS"; then
     pkg_cv_SPICE_CFLAGS="$SPICE_CFLAGS"
@@ -21263,7 +21263,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -21281,7 +21281,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -21437,8 +21437,8 @@ $as_echo_n "checking for HDF5 library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for hdf5" >&5
-$as_echo_n "checking for hdf5... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for HDF5" >&5
+$as_echo_n "checking for HDF5... " >&6; }
 
 if test -n "$HDF5_CFLAGS"; then
     pkg_cv_HDF5_CFLAGS="$HDF5_CFLAGS"
@@ -21478,7 +21478,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -21496,7 +21496,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -21825,8 +21825,8 @@ $as_echo_n "checking for Fftw library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for fftw3" >&5
-$as_echo_n "checking for fftw3... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for FFTW" >&5
+$as_echo_n "checking for FFTW... " >&6; }
 
 if test -n "$FFTW_CFLAGS"; then
     pkg_cv_FFTW_CFLAGS="$FFTW_CFLAGS"
@@ -21866,7 +21866,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -21884,7 +21884,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -22078,8 +22078,8 @@ $as_echo_n "checking for GDAL library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for gdal" >&5
-$as_echo_n "checking for gdal... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GDAL" >&5
+$as_echo_n "checking for GDAL... " >&6; }
 
 if test -n "$GDAL_CFLAGS"; then
     pkg_cv_GDAL_CFLAGS="$GDAL_CFLAGS"
@@ -22119,7 +22119,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -22137,7 +22137,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -22368,8 +22368,8 @@ $as_echo_n "checking for GEOS library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for geos" >&5
-$as_echo_n "checking for geos... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GEOS" >&5
+$as_echo_n "checking for GEOS... " >&6; }
 
 if test -n "$GEOS_CFLAGS"; then
     pkg_cv_GEOS_CFLAGS="$GEOS_CFLAGS"
@@ -22409,7 +22409,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -22427,7 +22427,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -22582,8 +22582,8 @@ $as_echo_n "checking for Ogdi library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for ogdi" >&5
-$as_echo_n "checking for ogdi... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OGDI" >&5
+$as_echo_n "checking for OGDI... " >&6; }
 
 if test -n "$OGDI_CFLAGS"; then
     pkg_cv_OGDI_CFLAGS="$OGDI_CFLAGS"
@@ -22623,7 +22623,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -22641,7 +22641,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -22798,8 +22798,8 @@ $as_echo_n "checking for expat library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for expat" >&5
-$as_echo_n "checking for expat... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for EXPAT" >&5
+$as_echo_n "checking for EXPAT... " >&6; }
 
 if test -n "$EXPAT_CFLAGS"; then
     pkg_cv_EXPAT_CFLAGS="$EXPAT_CFLAGS"
@@ -22839,7 +22839,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -22857,7 +22857,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -23014,8 +23014,8 @@ $as_echo_n "checking for openjpeg library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libopenjp2" >&5
-$as_echo_n "checking for libopenjp2... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OPENJPEG" >&5
+$as_echo_n "checking for OPENJPEG... " >&6; }
 
 if test -n "$OPENJPEG_CFLAGS"; then
     pkg_cv_OPENJPEG_CFLAGS="$OPENJPEG_CFLAGS"
@@ -23055,7 +23055,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -23073,7 +23073,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else
@@ -23596,8 +23596,8 @@ $as_echo_n "checking for Carto library... " >&6; }
 
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for carto" >&5
-$as_echo_n "checking for carto... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for CARTO" >&5
+$as_echo_n "checking for CARTO... " >&6; }
 
 if test -n "$CARTO_CFLAGS"; then
     pkg_cv_CARTO_CFLAGS="$CARTO_CFLAGS"
@@ -23637,7 +23637,7 @@ fi
 
 
 if test $pkg_failed = yes; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -23655,7 +23655,7 @@ fi
 
 	succeeded=no
 elif test $pkg_failed = untried; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 	succeeded=no
 else

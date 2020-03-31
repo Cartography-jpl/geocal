@@ -120,4 +120,9 @@ def test_camera_gfm(isolated_dir):
     print(f2)
     cam = f2.des_segment[0].des.camera
     
+@require_pynitf
+def test_poscsepha(nitf_sample_wv2):
+    f = pynitf.NitfFile(nitf_sample_wv2)
+    print(f.image_segment[0].pos_csepha)
+    
     

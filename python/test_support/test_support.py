@@ -47,10 +47,16 @@ rsm_sample_data = "/data/smyth/SampleRsm/"
 
 @pytest.yield_fixture(scope="function")
 def nitf_sample_files(isolated_dir):
-    if(os.path.exists("/raid1/smyth/NitfSamples/")):
-        return "/raid1/smyth/NitfSamples/"
+    if(os.path.exists("/bigdata/smyth/NitfSamples/")):
+        return "/bigdata/smyth/NitfSamples/"
     elif(os.path.exists("/opt/nitf_files/NitfSamples/")):
         return "/opt/nitf_files/NitfSamples/"
+    elif(os.path.exists("/data2/smythdata/NitfSamples/")):
+        return "/data2/smythdata/NitfSamples/"
+    elif(os.path.exists("/data2/smythdata/NitfSamples/")):
+        return "/data2/smythdata/NitfSamples/"
+    elif(os.path.exists("/Users/smyth/NitfSamples/")):
+        return "/Users/smyth/NitfSamples/"
     pytest.skip("Require NitfSamples test data to run")
 
 @pytest.yield_fixture(scope="function")
@@ -66,7 +72,14 @@ def nitf_sample_rip(nitf_sample_files):
             yield fname
         else:
             pytest.skip("Required file %s not found, so skipping test" % fname)
-    
+
+@pytest.yield_fixture(scope="function")
+def nitf_sample_wv2(nitf_sample_files):
+    fname = nitf_sample_files + "wv2/12JAN23015358-P1BS-052654848010_01_P003.NTF"
+    if(os.path.exists(fname)):
+        return fname
+    pytest.skip("Required file %s not found, so skipping test" % fname)
+            
 def cmd_exists(cmd):
     '''Check if a cmd exists by using type, which returns a nonzero status if
     the program isn't found'''

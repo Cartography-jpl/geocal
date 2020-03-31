@@ -2,13 +2,14 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
                          Quaternion_double, FrameCoordinate)
 try:
     from pynitf import (DesCSEPHB, DesCSATTB, create_nitf_des_structure,
-                        DesCSSFAB, 
+                        DesCSSFAB, TreCSEPHA,
                         register_des_class, NitfImageSegment,
                         add_uuid_des_function, NitfFile, NitfDesSegment)
     have_pynitf = True
     from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
                                    geocal_time_to_nitf_date_second_field)
 except ImportError:
+#except NotImplementedError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
 import numpy as np
@@ -332,9 +333,22 @@ This should be used to set and read the DES values.
                dseg.des.id == id):
                 return dseg.des
         return None
+
+    def _pos_csepha(iseg):
+        '''Older TRE version of ephemeris. This is used by WV-2, so we
+        want to support reading this'''
+        t = iseg.find_one_tre("CSEPHA")
+        if t is None:
+            return None
+        return "hi there"
+
+    def _pos_csepha_set(iseg, pos_csepha):
+        raise NotImplementedError("Older TRE, we don't currently support writing this.")
+        
     
     NitfFile.find_des_by_uuid = _find_des_by_uuid
     NitfImageSegment.pos_csephb = property(_pos_csephb, _pos_csephb_set)
+    NitfImageSegment.pos_csepha = property(_pos_csepha, _pos_csepha_set)
     NitfImageSegment.att_csattb = property(_att_csattb, _att_csattb_set)
     NitfImageSegment.orbit_des = property(_orbit_des, _orbit_des_set)
     NitfImageSegment.camera_glas_gfm = property(_camera_glas_gfm, _camera_glas_gfm_set)

@@ -15,7 +15,7 @@ import os, subprocess
 
 def create_image_seg(f):
     img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8)
-    img.image_subheader.idlvl = 1
+    img.subheader.idlvl = 1
     for i in range(9):
         for j in range(10):
             img[0,i,j] = i + j
@@ -241,14 +241,14 @@ def test_rsm_ms_g(isolated_dir, rsm_ms_g):
 # Test the raw TREs
 @require_pynitf
 def test_tre_rsmpca(rsm_rational_polynomial):
-    t = geocal.geocal_nitf_rsm.TreRSMPCA_geocal()
+    t = geocal.geocal_nitf_rsm.TreRSMPCA()
     t.rsm_rational_polynomial = rsm_rational_polynomial
     t.update_raw_field()
     fh = io.BytesIO()
     t.write_to_file(fh)
     print(fh.getvalue())
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMPCA_geocal()
+    t2 = geocal.geocal_nitf_rsm.TreRSMPCA()
     t2.read_from_file(fh2)
     print(t2)
     # Check that we can't the field values.
@@ -272,7 +272,7 @@ def test_tre_rsmpca(rsm_rational_polynomial):
 
 @require_pynitf
 def test_tre_rsmgga(rsm_grid):
-    t = geocal.geocal_nitf_rsm.TreRSMGGA_geocal()
+    t = geocal.geocal_nitf_rsm.TreRSMGGA()
     t.rsm_grid = rsm_grid
     t.update_raw_field()
     fh = io.BytesIO()
@@ -280,7 +280,7 @@ def test_tre_rsmgga(rsm_grid):
     # This is way too large to check, so skip this
     #assert fh.getvalue() == b'blah'
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMGGA_geocal()
+    t2 = geocal.geocal_nitf_rsm.TreRSMGGA()
     t2.read_from_file(fh2)
     print(t2)
     # Check that we can't the field values.
@@ -294,7 +294,7 @@ def test_tre_rsmgga(rsm_grid):
     
 @require_pynitf
 def test_tre_rsmpia(rsm_ms_polynomial):
-    t = geocal.geocal_nitf_rsm.TreRSMGIA_geocal()
+    t = geocal.geocal_nitf_rsm.TreRSMGIA()
     t.rsm_multi_section = rsm_ms_polynomial
     t.update_raw_field()
     fh = io.BytesIO()
@@ -302,7 +302,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMGIA_geocal()
+    t2 = geocal.geocal_nitf_rsm.TreRSMGIA()
     t2.read_from_file(fh2)
     print(t2)
     assert t2.rsm_multi_section.number_row_section == 3
@@ -311,7 +311,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
 
 @require_pynitf
 def test_tre_rsmpia(rsm_ms_polynomial):
-    t = geocal.geocal_nitf_rsm.TreRSMPIA_geocal()
+    t = geocal.geocal_nitf_rsm.TreRSMPIA()
     t.rsm_multi_section = rsm_ms_polynomial
     t.update_raw_field()
     fh = io.BytesIO()
@@ -319,7 +319,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMPIA_geocal()
+    t2 = geocal.geocal_nitf_rsm.TreRSMPIA()
     t2.read_from_file(fh2)
     print(t2)
     assert t2.rsm_multi_section.number_row_section == 3
@@ -328,7 +328,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
 
 @require_pynitf
 def test_tre_rsmida(rsm):
-    t = geocal.geocal_nitf_rsm.TreRSMIDA_geocal()
+    t = geocal.geocal_nitf_rsm.TreRSMIDA()
     t.rsm_id = rsm.rsm_id
     t.update_raw_field()
     fh = io.BytesIO()
@@ -336,7 +336,7 @@ def test_tre_rsmida(rsm):
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMIDA_geocal()
+    t2 = geocal.geocal_nitf_rsm.TreRSMIDA()
     t2.read_from_file(fh2)
     print(t2)
     assert t2.rsm_id.rsm_suport_data_edition == "fake-1"

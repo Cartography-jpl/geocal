@@ -3,7 +3,7 @@ from geocal_swig import (Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial,
                          have_msp_supported)
 import re
 try:
-    from pynitf import (create_nitf_tre_structure, NitfSegmentHook,
+    from pynitf import (NitfSegmentHook,
                         NitfSegmentHookSet,
                         TreRSMIDA, TreRSMGGA, TreRSMGIA, TreRSMPCA,
                         TreRSMPIA, TreRSMAPA, read_tre_data)
@@ -13,12 +13,9 @@ except ImportError:
     have_pynitf = False
 import os
 
-# Backdoor to suppress putting Rsm in place. Useful for example with
-# nitfinfo where we might want to look at the raw nitf values.
+# Backdoor to suppress putting Rsm in place. Useful mostly for testing.
 suppress_rsm = False
-if("NITF_USE_RAW" in os.environ):
-    suppress_rsm = True
-    
+
 # ****************************************************************************
 # Note the RSM is a bit complicated, because it spans multiple TREs. 
 # We handle the RSM as a special field, you can access it as iseg.rsm, or
@@ -35,118 +32,18 @@ if("NITF_USE_RAW" in os.environ):
 # Override various TREs to use the geocal objects instead
 # ---------------------------------------------------------
 if(have_pynitf and not suppress_rsm):
-    if(TreRSMGGA.__doc__ is not None):
-        hlp_rsmgga = TreRSMGGA.__doc__ + \
-''' 
-This TRE is mostly implemented by the RsmGrid available as
-rsm_grid. This should be used to set the TRE values, and to use the
-TRE values. This is handled mostly transparently, except that if you
-update rsm_grid the raw fields in the TRE might not be updated. Call
-update_raw_field() if you have modified rsm_grid and wish to access
-the raw fields.'''
-    else:
-        hlp_rsmgga = None
-
-    TreRSMGGA_geocal = create_nitf_tre_structure("TreRSMGGA",
-                          TreRSMGGA._description,hlp=hlp_rsmgga,
-                          tre_implementation_field="rsm_grid",
-                          tre_implementation_class=RsmGrid)
-    TreRSMGGA_geocal.row_section_number = TreRSMGGA.row_section_number
-    TreRSMGGA_geocal.col_section_number = TreRSMGGA.col_section_number
-    
-    # This doesn't work in python 2.7, we can't write to the
-    # doc. Rather than try to do something clever, just punt and
-    # skip adding help for python 2.7. This works find with python 3
-    if(TreRSMPCA.__doc__ is not None):
-        hlp_rsmpca = TreRSMPCA.__doc__ + \
-'''
-This TRE is mostly implemented by the RsmRationalPolynomial available as
-rsm_rational_polynomial. This should be used to set the TRE values, and to
-use the TRE values. This is handled mostly transparently, except that if you
-update rsm_rational_polynomial the raw fields in the TRE might not be
-updated. Call update_raw_field() if you have modified rsm_rational_polynomial 
-and wish to access the raw fields.
-'''     
-    else:
-        hlp_rsmpca = None
-
-    TreRSMPCA_geocal = create_nitf_tre_structure("TreRSMPCA",
-                          TreRSMPCA._description,hlp=hlp_rsmpca,
-                          tre_implementation_field="rsm_rational_polynomial",
-                          tre_implementation_class=RsmRationalPolynomial)
-    TreRSMPCA_geocal.row_section_number = TreRSMPCA.row_section_number
-    TreRSMPCA_geocal.col_section_number = TreRSMPCA.col_section_number
-
-    if(TreRSMGIA.__doc__ is not None):
-        hlp_rsmgia = TreRSMGIA.__doc__ + \
-'''
-This TRE is mostly implemented by the RsmMultiSection available as
-rsm_multi_section. This should be used to set the TRE values, and to
-use the TRE values. This is handled mostly transparently, except that if you
-update rsm_multi_section the raw fields in the TRE might not be
-updated. Call update_raw_field() if you have modified rsm_multi_section
-and wish to access the raw fields.
-'''             
-    else:
-        hlp_rsmgia = None
-
-    TreRSMGIA_geocal = create_nitf_tre_structure("TreRSMGIA",
-                          TreRSMGIA._description,hlp=hlp_rsmgia,
-                          tre_implementation_field="rsm_multi_section",
-                          tre_implementation_class=RsmMultiSection)
-    if(TreRSMPIA.__doc__ is not None):
-        hlp_rsmpia = TreRSMPIA.__doc__ + \
-'''
-This TRE is mostly implemented by the RsmMultiSection available as
-rsm_multi_section. This should be used to set the TRE values, and to
-use the TRE values. This is handled mostly transparently, except that if you
-update rsm_multi_section the raw fields in the TRE might not be
-updated. Call update_raw_field() if you have modified rsm_multi_section
-and wish to access the raw fields.
-'''             
-    else:
-        hlp_rsmpia = None
-
-    TreRSMPIA_geocal = create_nitf_tre_structure("TreRSMPIA",
-                          TreRSMPIA._description,hlp=hlp_rsmpia,
-                          tre_implementation_field="rsm_multi_section",
-                          tre_implementation_class=RsmMultiSection)
-    
-    if(TreRSMIDA.__doc__ is not None):
-        hlp_rsmida = TreRSMIDA.__doc__ + \
-'''
-This TRE is mostly implemented by the RsmId available as
-rsm_id. This should be used to set the TRE values, and to
-use the TRE values. This is handled mostly transparently, except that if you
-update rsm_id the raw fields in the TRE might not be
-updated. Call update_raw_field() if you have modified rsm_id
-and wish to access the raw fields.
-'''             
-    else:
-        hlp_rsmida = None
-
-    TreRSMIDA_geocal = create_nitf_tre_structure("TreRSMIDA",
-                          TreRSMIDA._description,hlp=hlp_rsmida,
-                          tre_implementation_field="rsm_id",
-                          tre_implementation_class=RsmId)
-
-    if(TreRSMAPA.__doc__ is not None):
-        hlp_rsmapa = TreRSMAPA.__doc__ + \
-'''
-This TRE is mostly implemented by the RsmAdjustableParameterA available as
-rsm_adjustable_parameter. This should be used to set the TRE values, and to
-use the TRE values. This is handled mostly transparently, except that if you
-update rsm_rsm_adjustable_parameter the raw fields in the TRE might not be
-updated. Call update_raw_field() if you have modified 
-rsm_rsm_adjustable_parameter and wish to access the raw fields.
-'''             
-    else:
-        hlp_rsmapa = None
-
-    TreRSMAPA_geocal = create_nitf_tre_structure("TreRSMAPA",
-                          TreRSMAPA._description,hlp=hlp_rsmapa,
-                          tre_implementation_field="rsm_adjustable_parameter",
-                          tre_implementation_class=RsmAdjustableParameterA)
+    TreRSMGGA.tre_implementation_field = "rsm_grid"
+    TreRSMGGA.tre_implementation_class = RsmGrid
+    TreRSMPCA.tre_implementation_field = "rsm_rational_polynomial"
+    TreRSMPCA.tre_implementation_class = RsmRationalPolynomial
+    TreRSMGIA.tre_implementation_field = "rsm_multi_section"
+    TreRSMGIA.tre_implementation_class = RsmMultiSection
+    TreRSMPIA.tre_implementation_field = "rsm_multi_section"
+    TreRSMPIA.tre_implementation_class = RsmMultiSection
+    TreRSMIDA.tre_implementation_field = "rsm_id"
+    TreRSMIDA.tre_implementation_class = RsmId
+    TreRSMAPA.tre_implementation_field = "rsm_adjustable_parameter"
+    TreRSMAPA.tre_implementation_class = RsmAdjustableParameterA
     
 
 # ---------------------------------------------------------
@@ -176,23 +73,23 @@ if(have_pynitf and not suppress_rsm):
                 self._rsm_add_rec(seg, v.rational_polynomial)
                 self._rsm_add_rec(seg, v.correction_grid)
             elif(isinstance(v, RsmRationalPolynomial)):
-                t = TreRSMPCA_geocal()
+                t = TreRSMPCA()
                 t.rsm_rational_polynomial = v
                 t.update_raw_field()
                 seg.tre_list.append(t)
             elif(isinstance(v, RsmGrid)):
-                t = TreRSMGGA_geocal()
+                t = TreRSMGGA()
                 t.rsm_grid = v
                 t.update_raw_field()
                 seg.tre_list.append(t)
             elif(isinstance(v, RsmMultiSection)):
                 if(isinstance(v.section(0,0), RsmRationalPolynomial)):
-                    t = TreRSMPIA_geocal()
+                    t = TreRSMPIA()
                     t.rsm_multi_section = v
                     t.update_raw_field()
                     seg.tre_list.append(t)
                 elif(isinstance(v.section(0,0), RsmGrid)):
-                    t = TreRSMGIA_geocal()
+                    t = TreRSMGIA()
                     t.rsm_multi_section = v
                     t.update_raw_field()
                     seg.tre_list.append(t)
@@ -212,11 +109,11 @@ if(have_pynitf and not suppress_rsm):
                             self.rsm_tre_tag_list]
             # Currently only handle one RSM TRE set. We could extend this if needed.
             if(seg.rsm):
-                t = TreRSMIDA_geocal()
+                t = TreRSMIDA()
                 t.rsm_id = seg.rsm.rsm_id
                 seg.tre_list.append(t)
                 if(seg.rsm.rsm_adjustable_parameter):
-                    t = TreRSMAPA_geocal()
+                    t = TreRSMAPA()
                     t.rsm_adjustable_parameter = seg.rsm_adjustable_parameter
                     seg.tre_list.append(t)
                 self._rsm_add_rec(seg, seg.rsm.rsm_base)

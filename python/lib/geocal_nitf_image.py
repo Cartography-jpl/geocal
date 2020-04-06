@@ -1,6 +1,6 @@
 from geocal_swig import (GdalMultiBand, GdalRasterImage)
 try:
-    from pynitf import(register_image_class, NitfImageCannotHandle,
+    from pynitf import(NitfSegmentDataHandleSet, 
                        NitfImageWithSubset, NitfImageSegment, NitfDiffHandle,
                        NitfDiffHandleSet)
     have_pynitf = True
@@ -16,10 +16,8 @@ import numpy as np
 if(have_pynitf):
     class NitfImageGdal(NitfImageWithSubset):
         '''Implementation that used GDAL to read the data.'''
-        def __init__(self, image_subheader = None, header_size = None,
-                     data_size = None):
-            NitfImageWithSubset.__init__(self,image_subheader, header_size,
-                                         data_size)
+        def __init__(self, seg=None):
+            super().__init__(seg)
             self.data_start = None
             self.fh_in_name = None
             
@@ -41,16 +39,15 @@ if(have_pynitf):
         def read_from_file(self, fh, segindex):
             '''Read an image from a file.'''
             if(segindex is None):
-                raise NitfImageCannotHandle("Need segindex")
-                print("failure 1")
+                return False
             try:
                 self.data = GdalMultiBand("NITF_IM:%d:%s" % (segindex, fh.name))
             except RuntimeError as e:
-                print("failure 2")
-                raise NitfImageCannotHandle("Can't read using GdalMultiBand: %s" % e)
+                return False
             self.data_start = fh.tell()
             self.fh_in_name = fh.name
-            fh.seek(self.data_size, 1)
+            fh.seek(self._seg().data_size, 1)
+            return True
 
         def write_to_file(self, fh):
             '''Write an image to a file.'''
@@ -76,7 +73,8 @@ if(have_pynitf):
             
 
     # Try this after the classes in pynitf have been tried.
-    register_image_class(NitfImageGdal, priority_order=-1)
+    NitfSegmentDataHandleSet.add_default_handle(NitfImageGdal,
+                                                priority_order=-1)
 
     logger = logging.getLogger('nitf_diff')
     class ImageGdalDiff(NitfDiffHandle):
@@ -90,7 +88,7 @@ if(have_pynitf):
             # TODO Expose tolerance as configuration parameters
             if(not np.allclose(t1, t2)):
                 logger.difference("Image '%s is different",
-                                  d1.image_subheader.iid1)
+                                  d1.subheader.iid1)
                 is_same = False
             return (True, is_same)
 

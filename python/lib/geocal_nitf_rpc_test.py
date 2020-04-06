@@ -9,7 +9,7 @@ from geocal_swig import ImageCoordinate, IgcMsp
 
 def create_image_seg(f):
     img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8)
-    img.image_subheader.idlvl = 1
+    img.subheader.idlvl = 1
     for i in range(9):
         for j in range(10):
             img[0,i,j] = i + j

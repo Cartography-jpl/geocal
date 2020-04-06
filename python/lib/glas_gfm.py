@@ -12,7 +12,7 @@ import uuid
 import io
 try:
     import pynitf
-    from .geocal_nitf_des import(DesCSEPHB_geocal, DesCSATTB_geocal)
+    from .geocal_nitf_des import(DesCSEPHB, DesCSATTB)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
@@ -164,7 +164,7 @@ if(have_pynitf):
                 time.sleep(0.01)
                 cscsdb.id = f.fake_cscsdb_uuid
             if(d is None):
-                f.des_segment.append(pynitf.NitfDesSegment(des=cscsdb))
+                f.des_segment.append(pynitf.NitfDesSegment(cscsdb))
                 d = cscsdb
             res.des.append(d)
 
@@ -232,7 +232,7 @@ if(have_pynitf):
             return ConstantSpacingTimeTable(tstart, tend, (tend - tstart) / (nline-1))
 
         def find_one_des(self, desid):
-            res = [d for d in self.des if d.desid() == desid]
+            res = [d for d in self.des if d.desid == desid]
             if(len(res) == 0):
                 return None
             if(len(res) > 1):

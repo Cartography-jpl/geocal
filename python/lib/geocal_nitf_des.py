@@ -75,7 +75,7 @@ if(have_pynitf):
             d.pos_csephb = pos_csephb
             d.generate_uuid_if_needed()
             pos_csephb.id = d.id
-            f.des_segment.append(NitfDesSegment(des=d))
+            f.des_segment.append(NitfDesSegment(d))
         d.add_display_level(iseg.idlvl)
             
     def _att_csattb(iseg):
@@ -103,7 +103,7 @@ if(have_pynitf):
             d.att_csattb = att_csattb
             d.generate_uuid_if_needed()
             att_csattb.id = d.id
-            f.des_segment.append(NitfDesSegment(des=d))
+            f.des_segment.append(NitfDesSegment(d))
         d.add_display_level(iseg.idlvl)
 
     def _camera_cssfab(d):
@@ -272,7 +272,7 @@ if(have_pynitf):
             d.camera = cam
             d.generate_uuid_if_needed()
             cam.id = d.id
-            f.des_segment.append(NitfDesSegment(des=d))
+            f.des_segment.append(NitfDesSegment(d))
         d.add_display_level(iseg.idlvl)
     
     def _orbit_des(iseg):

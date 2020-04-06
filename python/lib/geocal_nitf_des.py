@@ -1,15 +1,12 @@
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
                          Quaternion_double, FrameCoordinate)
 try:
-    from pynitf import (DesCSEPHB, DesCSATTB, create_nitf_des_structure,
-                        DesCSSFAB, TreCSEPHA,
-                        register_des_class, NitfImageSegment,
-                        add_uuid_des_function, NitfFile, NitfDesSegment)
+    from pynitf import (DesCSEPHB, DesCSATTB, DesCSSFAB, TreCSEPHA,
+                        NitfImageSegment, NitfFile, NitfDesSegment)
     have_pynitf = True
     from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
                                    geocal_time_to_nitf_date_second_field)
 except ImportError:
-#except NotImplementedError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
 import numpy as np
@@ -17,19 +14,9 @@ import numpy as np
 # Override various DESs to use the geocal objects instead
 # ---------------------------------------------------------
 if(have_pynitf):
-    if(DesCSEPHB.__doc__ is not None):
-        hlp_csephb = DesCSEPHB.__doc__ + \
-'''
-This DES is implemented in the PosCsephb object available as pos_csephb.
-This should be used to set and read the DES values.
-'''
-    else:
-        hlp_csephb = None
+    DesCSEPHB.des_implementation_field = "pos_csephb"
+    DesCSEPHB.des_implementation_class = PosCsephb
 
-    (DesCSEPHB_geocal, DesCSEPHB_UH_geocal) = create_nitf_des_structure("DesCSEPHB", DesCSEPHB._desc_data, DesCSEPHB._desc_uh, hlp=hlp_csephb, des_implementation_field="pos_csephb", des_implementation_class=PosCsephb)
-    DesCSEPHB_geocal.desid = DesCSEPHB.desid
-    DesCSEPHB_geocal.desver = DesCSEPHB.desver
-    DesCSEPHB_geocal.uh_class = DesCSEPHB.uh_class
     def _descsephb_handle_diff(self, t):
         p1 = self.pos_csephb
         p2 = t.pos_csephb
@@ -42,29 +29,12 @@ This should be used to set and read the DES values.
                 abs(p1.time_step - p2.time_step) < 1e-6 and
                 np.allclose(p1.position_data, p2.position_data))
     
-    DesCSEPHB_geocal.handle_diff = _descsephb_handle_diff
-
-    # Register this geocal class ahead of the pynitf DesCSEPHB class, so this
-    # gets used to read the data instead of DesCSEPHB
-
-    add_uuid_des_function(DesCSEPHB_geocal)    
-    register_des_class(DesCSEPHB_geocal, priority_order=1)
-
-    if(DesCSATTB.__doc__ is not None):
-        hlp_csattb = DesCSATTB.__doc__ + \
-'''
-This DES is implemented in the AttCsattb object available as pos_csattb.
-This should be used to set and read the DES values.
-'''
-    else:
-        hlp_csattb = None
-
-    (DesCSATTB_geocal, DesCSATTB_UH_geocal) = create_nitf_des_structure("DesCSATTB", DesCSATTB._desc_data, DesCSATTB._desc_uh, hlp=hlp_csattb, des_implementation_field="att_csattb", des_implementation_class=AttCsattb)
-    DesCSATTB_geocal.desid = DesCSATTB.desid
-    DesCSATTB_geocal.desver = DesCSATTB.desver
-    DesCSATTB_geocal.uh_class = DesCSATTB.uh_class
+    DesCSEPHB.handle_diff = _descsephb_handle_diff
+    DesCSATTB.des_implementation_field = "att_csattb"
+    DesCSATTB.des_implementation_class = AttCsattb
+    
     def _descsattb_handle_diff(self, t):
-        '''Handle difference checking between 2 DesCSATTB_geocal'''
+        '''Handle difference checking between 2 DesCSATTB'''
         d1 = self.att_csattb
         d2 = t.att_csattb
         return (d1.interpolation_type == d2.interpolation_type and
@@ -76,13 +46,7 @@ This should be used to set and read the DES values.
                 abs(d1.time_step - d2.time_step) < 1e-6 and
                 np.allclose(d1.attitude_data, d2.attitude_data))
     
-    DesCSATTB_geocal.handle_diff = _descsattb_handle_diff
-
-    # Register this geocal class ahead of the pynitf DesCSATTB class, so this
-    # gets used to read the data instead of DesCSATTB
-
-    add_uuid_des_function(DesCSATTB_geocal)
-    register_des_class(DesCSATTB_geocal, priority_order=1)
+    DesCSATTB.handle_diff = _descsattb_handle_diff
 
     # Have search to find the pos_csephb and att_csattb that goes with a
     # image segment. We may extend this.
@@ -107,7 +71,7 @@ This should be used to set and read the DES values.
             raise RuntimeError("Need to add NitfImageSegment to a NitfFile before we can add a pos_csephb to it")
         d = f.find_des_by_uuid(pos_csephb.id)
         if(d is None):
-            d = DesCSEPHB_geocal()
+            d = DesCSEPHB()
             d.pos_csephb = pos_csephb
             d.generate_uuid_if_needed()
             pos_csephb.id = d.id
@@ -135,7 +99,7 @@ This should be used to set and read the DES values.
             raise RuntimeError("Need to add NitfImageSegment to a NitfFile before we can add a att_csattb to it")
         d = f.find_des_by_uuid(att_csattb.id)
         if(d is None):
-            d = DesCSATTB_geocal()
+            d = DesCSATTB()
             d.att_csattb = att_csattb
             d.generate_uuid_if_needed()
             att_csattb.id = d.id
@@ -354,7 +318,4 @@ This should be used to set and read the DES values.
     NitfImageSegment.camera_glas_gfm = property(_camera_glas_gfm, _camera_glas_gfm_set)
     DesCSSFAB.camera = property(_camera_cssfab, _camera_cssfab_set)
     
-if(have_pynitf):
-    __all__ = ["DesCSEPHB_geocal","DesCSATTB_geocal",]
-else:
-    __all__ = []
+__all__ = []

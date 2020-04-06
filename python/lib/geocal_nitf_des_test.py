@@ -6,9 +6,16 @@ from test_support import *
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, Time, KeplerOrbit,
                          GlasGfmCamera)
 from geocal.geocal_nitf_des import *
+try:
+    import pynitf
+    have_pynitf = True
+except ImportError:
+    # Ok if we don't have pynitf, we just can't execute this code
+    have_pynitf = False
 import numpy as np
 
-pynitf.nitf_des.DEBUG = True
+if(have_pynitf):
+    pynitf.nitf_des.DEBUG = True
 
 @require_pynitf
 def test_poscsephb(isolated_dir):
@@ -17,17 +24,15 @@ def test_poscsephb(isolated_dir):
     t = Time.parse_time("1998-06-30T10:51:28.32Z")
     p = PosCsephb(KeplerOrbit(t, t + 100.0), 1.0)
     att = AttCsattb(KeplerOrbit(t, t + 100.0), 1.0)
-    des = DesCSEPHB_geocal()
+    des = pynitf.DesCSEPHB()
     des.pos_csephb = p
-    f.des_segment.append(pynitf.NitfDesSegment(des=des))
+    f.des_segment.append(pynitf.NitfDesSegment(des))
     f.write("nitf_des.ntf")
-    # Use the raw field class here
-    pynitf.unregister_des_class(DesCSEPHB_geocal)
+    # Report raw data, and also the class data
     f2 = pynitf.NitfFile("nitf_des.ntf")
+    f2.report_raw = True
     print(f2)
-    # Now put back
-    pynitf.register_des_class(DesCSEPHB_geocal, priority_order=1)
-    f2 = pynitf.NitfFile("nitf_des.ntf")
+    f2.report_raw = False
     print(f2)
     p2 = f2.des_segment[0].des.pos_csephb
     assert p.is_cf == p2.is_cf
@@ -50,17 +55,15 @@ def test_attcsattb(isolated_dir):
     f = pynitf.NitfFile()
     t = Time.parse_time("1998-06-30T10:51:28.32Z")
     att = AttCsattb(KeplerOrbit(t, t + 100.0), 1.0)
-    des = DesCSATTB_geocal()
+    des = pynitf.DesCSATTB()
     des.att_csattb = att
-    f.des_segment.append(pynitf.NitfDesSegment(des=des))
+    f.des_segment.append(pynitf.NitfDesSegment(des))
     f.write("nitf_des.ntf")
-    # Use the raw field class here
-    pynitf.unregister_des_class(DesCSATTB_geocal)
+    # Report raw data, and also the class data
     f2 = pynitf.NitfFile("nitf_des.ntf")
+    f2.report_raw = True
     print(f2)
-    # Now put back
-    pynitf.register_des_class(DesCSATTB_geocal, priority_order=1)
-    f2 = pynitf.NitfFile("nitf_des.ntf")
+    f2.report_raw = False
     print(f2)
     att2 = f2.des_segment[0].des.att_csattb
     assert att.is_cf == att2.is_cf
@@ -114,7 +117,7 @@ def test_camera_gfm(isolated_dir):
     des = pynitf.DesCSSFAB()
     des.camera = cam
     f = NitfFile()
-    f.des_segment.append(pynitf.NitfDesSegment(des=des))
+    f.des_segment.append(pynitf.NitfDesSegment(des))
     f.write("nitf_des.ntf")
     f2 = pynitf.NitfFile("nitf_des.ntf")
     print(f2)

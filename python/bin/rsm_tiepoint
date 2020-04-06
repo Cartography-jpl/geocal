@@ -83,11 +83,18 @@ Options:
        points will be redone.
        [default: 36]   
 
+  --search=d
+       Search window to use in matching. [default: -1]
+
   --seed=d
        Number that controls the positions of the first FFT match
        points. Use a different number if the first image matching
        points result in poor registration accuracy.
        [default: 562]
+
+  --skip-projection
+       Assume the _proj file is already present. Useful for running 
+       rsm_tiepoint repeatedly with different fitting parameters.
    
   --thr-res=f
        Prevent offset correlations further than this value from the
@@ -141,8 +148,8 @@ proj_fname = os.path.splitext(os.path.basename(args.image))[0] + "_proj.img"
 if(args.proj_file_name):
     proj_fname = args.proj_file_name
 cmd.append(proj_fname)
-subprocess.run(cmd, check=True)
-
+if(not args.skip_projection):
+    subprocess.run(cmd, check=True)
 
 dem = geocal.read_shelve(args.dem_file)
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
@@ -158,6 +165,7 @@ tpcollect = geocal.TiePointCollectPicmtch(igccol, [proj_fname,],
                             fftsize=args.fftsize, magnify=args.magnify,
                             magmin=args.magmin, toler=args.toler,
                             redo=args.redo,
+                            search = None if args.search < 0 else args.search,
                             ffthalf=2, seed=args.seed, autofit=args.autofit,
                             thr_res=args.thr_res, quiet = not args.verbose)
 tpcol = tpcollect.tie_point_grid(eval(str(args.fftgrid))[0],

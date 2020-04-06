@@ -12,6 +12,7 @@ class _tpcol(VicarInterface):
     '''
     def __init__(self, img1_fname, img2_fname, fftgrid=(42, 42),
                  fftsize=256, magnify=4.0, magmin=2.0, toler=1.5, redo=36,
+                 search=None,
                  ffthalf=2, seed=562, autofit=14, thr_res=10.0,
                  log_file=None, run_dir_name=None, quiet = True):
         VicarInterface.__init__(self)
@@ -39,6 +40,7 @@ local fftgrid2 int
 local ffthalf int
 local seed int
 local fftsize int
+local search int
 local autofit int
 local inp string
 local ref string
@@ -78,6 +80,7 @@ local ref_resf string
         self.cmd+= "let magmin = %f\n" % magmin
         self.cmd+= "let magnify = %f\n" % magnify
         self.cmd+= "let fftsize = %d\n" % fftsize
+        self.cmd+= "let search = %d\n" % (fftsize if search is None else search)
         self.cmd+= "let autofit = %d\n" % autofit
         self.cmd+= "let redo = %d\n" % redo
         self.cmd+= "let ffthalf = %d\n" % ffthalf
@@ -117,7 +120,7 @@ else
    let magshrk="n"
 end-if
 
-picmtch5 (&img1,&img2,&xqxqgrid1) fftsize=&fftsize search=&fftsize +
+picmtch5 (&img1,&img2,&xqxqgrid1) fftsize=&fftsize search=&search +
      minsrch=&fftsize magnify=(&magnify,&magnify) +
      pred=linear autofit=&autofit redo=&redo magmin=(&magmin,&magmin) +
      magshrk=&magshrk ffthalf=&ffthalf thr_res=&thr_res
@@ -178,6 +181,7 @@ class TiePointCollectPicmtch(object):
                  ref_image_fname = None, ref_dem = None,
                  fftsize=256, magnify=4.0, magmin=2.0, toler=1.5, redo=36,
                  ffthalf=2, seed=562, autofit=14, thr_res=10.0,
+                 search=None,
                  log_file = None,
                  run_dir_name = None, quiet = True):
         '''This sets up for doing a tie point collection, using pictmtch5.
@@ -198,6 +202,7 @@ class TiePointCollectPicmtch(object):
         options.
 
         fftsize - The size of the FFT window (default 256)
+        search - The search area (default is fftsize)
         magnify - Enlarge footprint of fft window by this factor.
         magmin - Minimum magnifier as correlation proceeds
         toler - Tolerance for accepting tiepoints
@@ -221,6 +226,7 @@ class TiePointCollectPicmtch(object):
         else:
             self.ref_dem = ref_dem
         self.fftsize = fftsize
+        self.search = search
         self.magnify = magnify
         self.magmin = magmin
         self.toler = toler
@@ -249,7 +255,8 @@ class TiePointCollectPicmtch(object):
         else:
             img2_fname = self.ref_image_fname
         tpcollect = _tpcol(img1_fname, img2_fname, fftgrid=(num_y, num_x),
-                           fftsize = self.fftsize, magnify = self.magnify,
+                           fftsize = self.fftsize, search=self.search,
+                           magnify = self.magnify,
                            magmin = self.magmin, toler = self.toler,
                            redo = self.redo, ffthalf = self.ffthalf,
                            seed = self.seed, autofit=self.autofit,

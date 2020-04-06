@@ -66,8 +66,29 @@ def test_mars_tp_picmtch(isolated_dir):
                nah=1000, nav=1000,quiet=False)
     subprocess.run([bdir + "../mygdalcompare.py", "ctx1_full_corr_6m.img",
                     bdir + "ctx1_full_corr_6m.img"])
-    
-    
-    
 
+# This was a particular test case we added search for. Turns out this
+# doesn't actually work for this case because the image is too small for
+# a large search. But go ahead and save the test case here for a record.
+@skip    
+def test_mars_search(isolated_dir):
+    dem = read_shelve("/home/smyth/Local/MarsRsmProblem/dem_gale.xml")
+    img = VicarLiteRasterImage("/home/smyth/Local/MarsRsmProblem/hirise_gale_red0.img")
+    reference_image = "/raid26/tllogan/mars_map/hirise_gale/5degfix/ESP_025012_1745_RED.hlf"
+    rsm = img.rsm
+    igc = RsmImageGroundConnection(rsm, dem, img, "RSM Image")
+    igccol = IgcArray([igc,])
+    proj_fname = "/home/smyth/Local/MarsRsmProblem/hirise_gale_red0_proj.img"
+    tpcollect = TiePointCollectPicmtch(igccol, [proj_fname,],
+                            ref_image_fname=reference_image,
+                            fftsize=256, magnify=6,
+                            magmin=3, toler=0.5,
+                            redo=50,
+                            search=700,
+                            ffthalf=2, seed=562, autofit=20,
+                            thr_res=10.0, quiet = False)
+    tpcol = tpcollect.tie_point_grid(42, 42)
+    #tpcol = tpcollect.tie_point_grid(10, 10)
+    print(tpcol)
 
+    

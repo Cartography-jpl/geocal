@@ -14,6 +14,7 @@ parm pname type=(string,99) count=1 default=""
 parm pline type=int count=1 default=1000
 parm psamp type=int count=1 default=1000
 parm redo type=int default=36 valid=(0:999)
+parm search type=int default=-1
 parm seed type=int default=562
 parm thr_res type=real count=1 default=10.0
 parm toler type=real count=1 default=1.5 valid=(0.0:20.0)
@@ -96,6 +97,8 @@ parallel job takes to run.
 At the end of processing, this
 number of the first FFT match
 points will be redone.
+.variable search
+Search windo to use in matching
 .variable seed
 Number that controls the
 positions of the first FFT

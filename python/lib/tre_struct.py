@@ -47,33 +47,27 @@ if(have_pynitf):
 def _use00a_from_gdal(self, f):
     '''Fill in TRE based on GDAL parameters. These are the metadata field
     starting with "NITF_USE00A", for example "NITF_USE00A_SUN_EL"'''
-    for field in self.field_map.keys():
+    for field in self.field_names():
         # The use00a stuff can appear either as NITF_USE00A_<blah>
         # or as NITF_<blah>. Support both ways.
         # We might not have all the tags in an particular VICAR file.
         # If not, then default to a blank value.
         if(f.has_metadata("NITF_USE00A_" + field.upper())):
-            self.field_map[field].set(self,(),self.field_map[field].ty(f["NITF_USE00A_" + field.upper()]))
+            setattr(self,field,f["NITF_USE00A_" + field.upper()])
         elif(f.has_metadata("NITF_" + field.upper())):
-            self.field_map[field].set(self,(),self.field_map[field].ty(f["NITF_" + field.upper()]))
+            setattr(self,field,f["NITF_" + field.upper()])
 
 def _use00a_to_vicar(self, f):
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
-    for field in self.field_map.keys():
-        if sys.version_info > (3,):
-            f["GEOTIFF", "NITF_" + field.upper()] = self.field_map[field].bytes(self).decode('utf-8')
-        else:
-            f["GEOTIFF", "NITF_" + field.upper()] = self.field_map[field].bytes(self)
+    for field in self.field_names():
+        f["GEOTIFF", "NITF_" + field.upper()] = self.get_raw_bytes(field).decode('utf-8')
 
 def _use00a_to_gdal(self, f):
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
-    for field in self.field_map.keys():
-        if sys.version_info > (3,):
-            f["TRE_NITF_" + field.upper()] =  self.field_map[field].bytes(self).decode('utf-8')
-        else:
-            f["TRE_NITF_" + field.upper()] =  self.field_map[field].bytes(self)
+    for field in self.field_names():
+        f["TRE_NITF_" + field.upper()] =  self.get_raw_bytes(field).decode('utf-8')
 
 if(have_pynitf):
     TreUSE00A.from_gdal = _use00a_from_gdal

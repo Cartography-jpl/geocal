@@ -230,12 +230,14 @@ def q4(self):
 class OrbitDes: public Orbit {
 public:
   OrbitDes(const boost::shared_ptr<PosCsephb>& Pos,
-	   const boost::shared_ptr<AttCsattb>& Att);
+	   const boost::shared_ptr<AttCsattb>& Att,
+	   int Naif_code = Ecr::EARTH_NAIF_CODE);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;
   %python_attribute(pos_csephb, boost::shared_ptr<PosCsephb>);
   %python_attribute(att_csattb, boost::shared_ptr<AttCsattb>);
+  %python_attribute_with_set(naif_code, int);
   %pickle_serialization();
 };
  

@@ -2,6 +2,7 @@
 #include "ostream_pad.h"
 #include "ecr.h"
 #include "eci.h"
+#include "planet_coordinate.h"
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
 #include "nitf_support.h"
@@ -40,7 +41,8 @@ template<class Archive>
 void OrbitDes::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP_(pos) & GEOCAL_NVP_(att);
+    & GEOCAL_NVP_(pos) & GEOCAL_NVP_(att)
+    & GEOCAL_NVP_(naif_code);
 }
 
 GEOCAL_IMPLEMENT(PosCsephb);
@@ -650,10 +652,11 @@ boost::shared_ptr<AttCsattb> AttCsattb::des_read(std::istream& In)
 //-----------------------------------------------------------------------
 
 OrbitDes::OrbitDes(const boost::shared_ptr<PosCsephb>& Pos,
-		   const boost::shared_ptr<AttCsattb>& Att)
+		   const boost::shared_ptr<AttCsattb>& Att,
+		   int Naif_code)
   : Orbit(std::max(Pos->min_time(), Att->min_time()),
 	  std::min(Pos->max_time(), Att->max_time())),
-    pos_(Pos), att_(Att)
+    pos_(Pos), att_(Att), naif_code_(Naif_code)
 {
 }
 
@@ -669,14 +672,23 @@ boost::shared_ptr<OrbitData> OrbitDes::orbit_data(Time T) const
      !(!pos_->is_cf() && !att_->is_cf()))
     throw Exception("pos_ and att_ need to either both be for cartesian fixed or both for cartesian inertial");
   boost::shared_ptr<QuaternionOrbitData> od;
-  if(pos_->is_cf())
-    od = boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Ecr>(posvel(0), posvel(1), posvel(2)), vel,
-						   att_q);
-  else
-    od = boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Eci>(posvel(0), posvel(1), posvel(2)), vel,
-						 att_q);
+  if(pos_->is_cf()) {
+    boost::shared_ptr<CartesianFixed> cf;
+    if(naif_code_ == Ecr::EARTH_NAIF_CODE)
+      cf = boost::make_shared<Ecr>(posvel(0), posvel(1), posvel(2));
+    else
+      cf = boost::make_shared<PlanetFixed>(posvel(0), posvel(1), posvel(2),
+					   naif_code_);
+    od = boost::make_shared<QuaternionOrbitData>(T, cf, vel, att_q);
+  } else {
+    boost::shared_ptr<CartesianInertial> ci;
+    if(naif_code_ == Ecr::EARTH_NAIF_CODE)
+      ci = boost::make_shared<Eci>(posvel(0), posvel(1), posvel(2));
+    else
+      ci = boost::make_shared<PlanetInertial>(posvel(0), posvel(1), posvel(2),
+					      naif_code_);
+    od = boost::make_shared<QuaternionOrbitData>(T, ci, vel, att_q);
+  }
   return od;
 }
 
@@ -697,16 +709,26 @@ boost::shared_ptr<OrbitData> OrbitDes::orbit_data
      !(!pos_->is_cf() && !att_->is_cf()))
     throw Exception("pos_ and att_ need to either both be for cartesian fixed or both for cartesian inertial");
   boost::shared_ptr<QuaternionOrbitData> od;
-  if(pos_->is_cf())
-    od = boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Ecr>(posvel(0).value(), posvel(1).value(),
-				   posvel(2).value()),
-	   pos, vel, att_q);
-  else
-    od = boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Eci>(posvel(0).value(), posvel(1).value(),
-				   posvel(2).value()),
-	   pos, vel, att_q);
+  if(pos_->is_cf()) {
+    boost::shared_ptr<CartesianFixed> cf;
+    if(naif_code_ == Ecr::EARTH_NAIF_CODE)
+      cf = boost::make_shared<Ecr>(posvel(0).value(), posvel(1).value(),
+				   posvel(2).value());
+    else
+      cf = boost::make_shared<PlanetFixed>(posvel(0).value(), posvel(1).value(),
+					   posvel(2).value(), naif_code_);
+    od = boost::make_shared<QuaternionOrbitData>(T, cf, pos, vel, att_q);
+  } else {
+    boost::shared_ptr<CartesianInertial> ci;
+    if(naif_code_ == Ecr::EARTH_NAIF_CODE)
+      ci = boost::make_shared<Eci>(posvel(0).value(), posvel(1).value(),
+				   posvel(2).value());
+    else
+      ci = boost::make_shared<PlanetInertial>(posvel(0).value(),
+					      posvel(1).value(),
+					      posvel(2).value(), naif_code_);
+    od = boost::make_shared<QuaternionOrbitData>(T, ci, pos, vel, att_q);
+  }
   return od;
 }
 
@@ -714,6 +736,7 @@ void OrbitDes::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
   Os << "OrbitDes:\n"
+     << "  naif_code: " << naif_code() << "\n"
      << "  pos_csephb:\n";
   opad << *pos_csephb() << "\n";
   opad.strict_sync();

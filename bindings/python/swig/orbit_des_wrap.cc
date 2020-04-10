@@ -9051,7 +9051,7 @@ SWIGINTERN PyObject *_wrap_PosCsephb_pos_vel__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9979,7 +9979,7 @@ SWIGINTERN PyObject *_wrap_PosCsephb__v_position_data(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -13213,7 +13213,7 @@ SWIGINTERN PyObject *_wrap_AttCsattb__v_attitude_data(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -13654,7 +13654,101 @@ SWIGINTERN PyObject *AttCsattb_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN PyObject *_wrap_new_OrbitDes(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_OrbitDes__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::PosCsephb > *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::AttCsattb > *arg2 = 0 ;
+  int arg3 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PosCsephb > tempshared1 ;
+  boost::shared_ptr< GeoCal::PosCsephb > temp2shared1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::AttCsattb > tempshared2 ;
+  boost::shared_ptr< GeoCal::AttCsattb > temp2shared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  GeoCal::OrbitDes *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PosCsephb_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OrbitDes" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::PosCsephb > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::PosCsephb > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::PosCsephb > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::PosCsephb > * >(argp1) : &tempshared1;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__AttCsattb_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_OrbitDes" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::AttCsattb > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::AttCsattb > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::AttCsattb > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::AttCsattb > * >(argp2) : &tempshared2;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_OrbitDes" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (GeoCal::OrbitDes *)new GeoCal::OrbitDes((boost::shared_ptr< GeoCal::PosCsephb > const &)*arg1,(boost::shared_ptr< GeoCal::AttCsattb > const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitDes > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitDes >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDes_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitDes__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::PosCsephb > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::AttCsattb > *arg2 = 0 ;
@@ -13666,10 +13760,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitDes(PyObject *SWIGUNUSEDPARM(self), PyObject
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::AttCsattb > tempshared2 ;
   boost::shared_ptr< GeoCal::AttCsattb > temp2shared2 ;
-  PyObject *swig_obj[2] ;
   GeoCal::OrbitDes *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_OrbitDes",2,2,swig_obj)) SWIG_fail;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PosCsephb_t,  0 , &newmem);
@@ -13738,6 +13831,30 @@ SWIGINTERN PyObject *_wrap_new_OrbitDes(PyObject *SWIGUNUSEDPARM(self), PyObject
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitDes(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OrbitDes",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_new_OrbitDes__SWIG_1(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_new_OrbitDes__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_OrbitDes'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitDes::OrbitDes(boost::shared_ptr< GeoCal::PosCsephb > const &,boost::shared_ptr< GeoCal::AttCsattb > const &,int)\n"
+    "    GeoCal::OrbitDes::OrbitDes(boost::shared_ptr< GeoCal::PosCsephb > const &,boost::shared_ptr< GeoCal::AttCsattb > const &)\n");
+  return 0;
 }
 
 
@@ -13994,6 +14111,121 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OrbitDes__v_naif_code__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitDes *arg1 = (GeoCal::OrbitDes *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDes const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDes const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDes_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDes__v_naif_code" "', argument " "1"" of type '" "GeoCal::OrbitDes const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDes > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::OrbitDes const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitDes__v_naif_code__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitDes *arg1 = (GeoCal::OrbitDes *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDes > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDes > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDes_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDes__v_naif_code" "', argument " "1"" of type '" "GeoCal::OrbitDes *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OrbitDes__v_naif_code" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->naif_code((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitDes__v_naif_code(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitDes__v_naif_code",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_OrbitDes__v_naif_code__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_OrbitDes__v_naif_code__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitDes__v_naif_code'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitDes::naif_code() const\n"
+    "    GeoCal::OrbitDes::naif_code(int const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_OrbitDes(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitDes *arg1 = (GeoCal::OrbitDes *) 0 ;
@@ -14069,16 +14301,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_PosCsephb", _wrap_new_PosCsephb, METH_VARARGS, (char *)"\n"
 		"\n"
-		"PosCsephb::PosCsephb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,\n"
-		"LagrangeOrder Lagrange_order=NO_LAGRANGE, EphemerisDataQuality\n"
+		"PosCsephb::PosCsephb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double\n"
+		"Tstep, InterpolationType Itype=LINEAR, LagrangeOrder\n"
+		"Lagrange_order=NO_LAGRANGE, EphemerisDataQuality\n"
 		"E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,\n"
 		"PositionType P_type=SAME_AS_ORBIT)\n"
 		"Constructor.\n"
 		"\n"
 		"We sample the position of the given Orbit at fixed spaces times. This\n"
-		"version goes from the min_time() of the Orbit, up to max_time() (or\n"
-		"more accurately, the largest time min_time() i * Tstep that is <=\n"
-		"max_time()). \n"
+		"version goes from the Min_time, up to Max_time (or more accurately,\n"
+		"the largest time Min_time i * Tstep that is <= Max_time).w \n"
 		""},
 	 { (char *)"PosCsephb_pos_vel", _wrap_PosCsephb_pos_vel, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -14162,16 +14394,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"PosCsephb_swiginit", PosCsephb_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_AttCsattb", _wrap_new_AttCsattb, METH_VARARGS, (char *)"\n"
 		"\n"
-		"AttCsattb::AttCsattb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,\n"
-		"LagrangeOrder Lagrange_order=NO_LAGRANGE, AttitudeDataQuality\n"
+		"AttCsattb::AttCsattb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double\n"
+		"Tstep, InterpolationType Itype=LINEAR, LagrangeOrder\n"
+		"Lagrange_order=NO_LAGRANGE, AttitudeDataQuality\n"
 		"A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,\n"
 		"AttitudeType A_type=SAME_AS_ORBIT)\n"
 		"Constructor.\n"
 		"\n"
 		"We sample the attitude of the given Orbit at fixed spaces times. This\n"
-		"version goes from the min_time() of the Orbit, up to max_time() (or\n"
-		"more accurately, the largest time min_time() i * Tstep that is <=\n"
-		"max_time()). \n"
+		"version goes from the Min_time, up to Max_time (or more accurately,\n"
+		"the largest time Min_time i * Tstep that is <= Max_time).w \n"
 		""},
 	 { (char *)"AttCsattb__v_id", _wrap_AttCsattb__v_id, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -14256,12 +14488,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_OrbitDes", _wrap_new_OrbitDes, METH_VARARGS, (char *)"\n"
 		"\n"
 		"OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos, const boost::shared_ptr<\n"
-		"AttCsattb > &Att)\n"
+		"AttCsattb > &Att, int Naif_code=Ecr::EARTH_NAIF_CODE)\n"
 		"Constructor. \n"
 		""},
 	 { (char *)"OrbitDes_orbit_data", _wrap_OrbitDes_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > OrbitDes::orbit_data(Time T) const\n"
+		"boost::shared_ptr< OrbitData > OrbitDes::orbit_data(const TimeWithDerivative &T) const\n"
 		"\n"
 		""},
 	 { (char *)"OrbitDes__v_pos_csephb", (PyCFunction)_wrap_OrbitDes__v_pos_csephb, METH_O, (char *)"\n"
@@ -14272,6 +14504,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitDes__v_att_csattb", (PyCFunction)_wrap_OrbitDes__v_att_csattb, METH_O, (char *)"\n"
 		"\n"
 		"const boost::shared_ptr<AttCsattb>& GeoCal::OrbitDes::att_csattb() const\n"
+		"\n"
+		""},
+	 { (char *)"OrbitDes__v_naif_code", _wrap_OrbitDes__v_naif_code, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::OrbitDes::naif_code(int V)\n"
 		"\n"
 		""},
 	 { (char *)"delete_OrbitDes", (PyCFunction)_wrap_delete_OrbitDes, METH_O, (char *)"\n"

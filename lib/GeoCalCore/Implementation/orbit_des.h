@@ -1,6 +1,7 @@
 #ifndef ORBIT_DES_H
 #define ORBIT_DES_H
 #include "orbit.h"
+#include "ecr.h"
 #include <boost/utility.hpp>
 
 namespace GeoCal {
@@ -312,7 +313,8 @@ private:
 class OrbitDes: public Orbit {
 public:
   OrbitDes(const boost::shared_ptr<PosCsephb>& Pos,
-	   const boost::shared_ptr<AttCsattb>& Att);
+	   const boost::shared_ptr<AttCsattb>& Att,
+	   int Naif_code = Ecr::EARTH_NAIF_CODE);
   virtual ~OrbitDes() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> 
@@ -320,9 +322,12 @@ public:
   virtual void print(std::ostream& Os) const;
   const boost::shared_ptr<PosCsephb>& pos_csephb() const {return pos_;}
   const boost::shared_ptr<AttCsattb>& att_csattb() const {return att_;}
+  int naif_code() const { return naif_code_; }
+  void naif_code(int V) { naif_code_ = V; }
 private:
   boost::shared_ptr<PosCsephb> pos_;
   boost::shared_ptr<AttCsattb> att_;
+  int naif_code_;
   OrbitDes() {}
   friend class boost::serialization::access;
   template<class Archive>

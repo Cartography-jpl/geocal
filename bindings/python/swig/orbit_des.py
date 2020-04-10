@@ -229,16 +229,16 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        PosCsephb::PosCsephb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,
-        LagrangeOrder Lagrange_order=NO_LAGRANGE, EphemerisDataQuality
+        PosCsephb::PosCsephb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
+        Tstep, InterpolationType Itype=LINEAR, LagrangeOrder
+        Lagrange_order=NO_LAGRANGE, EphemerisDataQuality
         E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,
         PositionType P_type=SAME_AS_ORBIT)
         Constructor.
 
         We sample the position of the given Orbit at fixed spaces times. This
-        version goes from the min_time() of the Orbit, up to max_time() (or
-        more accurately, the largest time min_time() i * Tstep that is <=
-        max_time()). 
+        version goes from the Min_time, up to Max_time (or more accurately,
+        the largest time Min_time i * Tstep that is <= Max_time).w 
         """
         _orbit_des.PosCsephb_swiginit(self, _orbit_des.new_PosCsephb(*args))
 
@@ -570,16 +570,16 @@ class AttCsattb(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        AttCsattb::AttCsattb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,
-        LagrangeOrder Lagrange_order=NO_LAGRANGE, AttitudeDataQuality
+        AttCsattb::AttCsattb(const Orbit &Orb, const Time &Min_time, const Time &Max_time, double
+        Tstep, InterpolationType Itype=LINEAR, LagrangeOrder
+        Lagrange_order=NO_LAGRANGE, AttitudeDataQuality
         A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,
         AttitudeType A_type=SAME_AS_ORBIT)
         Constructor.
 
         We sample the attitude of the given Orbit at fixed spaces times. This
-        version goes from the min_time() of the Orbit, up to max_time() (or
-        more accurately, the largest time min_time() i * Tstep that is <=
-        max_time()). 
+        version goes from the Min_time, up to Max_time (or more accurately,
+        the largest time Min_time i * Tstep that is <= Max_time).w 
         """
         _orbit_des.AttCsattb_swiginit(self, _orbit_des.new_AttCsattb(*args))
 
@@ -891,19 +891,19 @@ class OrbitDes(geocal_swig.orbit.Orbit):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Pos, Att):
+    def __init__(self, *args):
         """
 
         OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos, const boost::shared_ptr<
-        AttCsattb > &Att)
+        AttCsattb > &Att, int Naif_code=Ecr::EARTH_NAIF_CODE)
         Constructor. 
         """
-        _orbit_des.OrbitDes_swiginit(self, _orbit_des.new_OrbitDes(Pos, Att))
+        _orbit_des.OrbitDes_swiginit(self, _orbit_des.new_OrbitDes(*args))
 
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > OrbitDes::orbit_data(Time T) const
+        boost::shared_ptr< OrbitData > OrbitDes::orbit_data(const TimeWithDerivative &T) const
 
         """
         return _orbit_des.OrbitDes_orbit_data(self, *args)
@@ -937,6 +937,24 @@ class OrbitDes(geocal_swig.orbit.Orbit):
         return self._v_att_csattb()
 
 
+    def _v_naif_code(self, *args):
+        """
+
+        void GeoCal::OrbitDes::naif_code(int V)
+
+        """
+        return _orbit_des.OrbitDes__v_naif_code(self, *args)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+    @naif_code.setter
+    def naif_code(self, value):
+      self._v_naif_code(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -944,6 +962,7 @@ class OrbitDes(geocal_swig.orbit.Orbit):
 OrbitDes.orbit_data = new_instancemethod(_orbit_des.OrbitDes_orbit_data, None, OrbitDes)
 OrbitDes._v_pos_csephb = new_instancemethod(_orbit_des.OrbitDes__v_pos_csephb, None, OrbitDes)
 OrbitDes._v_att_csattb = new_instancemethod(_orbit_des.OrbitDes__v_att_csattb, None, OrbitDes)
+OrbitDes._v_naif_code = new_instancemethod(_orbit_des.OrbitDes__v_naif_code, None, OrbitDes)
 OrbitDes_swigregister = _orbit_des.OrbitDes_swigregister
 OrbitDes_swigregister(OrbitDes)
 

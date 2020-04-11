@@ -7324,9 +7324,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_GdalDatum", _wrap_new_GdalDatum, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::GdalDatum::GdalDatum(const std::string &Fname, int Band_id=1, int Number_tile=4, int\n"
-		"Tile_number_line=-1, int Tile_number_sample=-1)\n"
-		"Constructor. \n"
+		"GeoCal::GdalDatum::GdalDatum(const boost::shared_ptr< GdalRasterImage > &Map_file)\n"
+		"\n"
 		""},
 	 { (char *)"GdalDatum__v_map_file", (PyCFunction)_wrap_GdalDatum__v_map_file, METH_O, (char *)"\n"
 		"\n"

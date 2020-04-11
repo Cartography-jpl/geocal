@@ -160,6 +160,14 @@ public:
   virtual blitz::Array<double, 2> 
   collinearity_residual_jacobian(const GroundCoordinate& Gc,
 			const ImageCoordinate& Ic_actual) const;
+  void compare_igc(const ImageGroundConnection& Igc_true,
+		   int Number_line_spacing,
+		   int Number_sample_spacing, double Height,
+		   blitz::Array<double, 2>& True_line,
+		   blitz::Array<double, 2>& True_sample,
+		   blitz::Array<double, 2>& Calc_line,
+		   blitz::Array<double, 2>& Calc_sample)
+    const;
   
     
 //-----------------------------------------------------------------------

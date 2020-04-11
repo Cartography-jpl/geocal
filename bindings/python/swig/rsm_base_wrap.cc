@@ -7083,7 +7083,7 @@ SWIGINTERN PyObject *_wrap_RsmBase_image_coordinate__SWIG_1(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7205,7 +7205,7 @@ SWIGINTERN PyObject *_wrap_RsmBase_image_coordinate__SWIG_2(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -7327,7 +7327,7 @@ SWIGINTERN PyObject *_wrap_RsmBase_image_coordinate__SWIG_3(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[4], stride[4];
     for(int i = 0; i < 4; ++i) {
@@ -7518,7 +7518,7 @@ SWIGINTERN PyObject *_wrap_RsmBase_image_coordinate_jacobian(PyObject *SWIGUNUSE
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7983,7 +7983,7 @@ SWIGINTERN PyObject *_wrap_RsmBase_generate_data(PyObject *SWIGUNUSEDPARM(self),
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[4], stride[4];
     for(int i = 0; i < 4; ++i) {
@@ -8986,7 +8986,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RsmBase_image_coordinate", _wrap_RsmBase_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::RsmBase::image_coordinate(double X, double Y, double Z) const =0\n"
+		"virtual blitz::Array<double, 4> GeoCal::RsmBase::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >\n"
+		"&Y, const blitz::Array< double, 3 > &Z) const =0\n"
 		"\n"
 		""},
 	 { (char *)"RsmBase_image_coordinate_jacobian", _wrap_RsmBase_image_coordinate_jacobian, METH_VARARGS, (char *)"\n"

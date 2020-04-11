@@ -9995,9 +9995,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_GdalMultiBand", _wrap_new_GdalMultiBand, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GdalMultiBand::GdalMultiBand(const std::string &Fname, int Number_tile=4, int Tile_number_line=-1,\n"
+		"GdalMultiBand::GdalMultiBand(const std::string &Fname, const std::string &Driver_name, int\n"
+		"Number_line, int Number_sample, int Number_band, int Dt, const\n"
+		"std::string &Options=\"\", int Number_tile=4, int Tile_number_line=-1,\n"
 		"int Tile_number_sample=-1)\n"
-		"Constructor. \n"
+		"Create a new file.\n"
+		"\n"
+		"All the arguments here are the same as for GdalRasterImage. \n"
 		""},
 	 { (char *)"GdalMultiBand_set_rpc", _wrap_GdalMultiBand_set_rpc, METH_VARARGS, (char *)"\n"
 		"\n"

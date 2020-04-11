@@ -437,12 +437,18 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     def image_coordinate(self, *args):
         """
 
-        ImageCoordinate GeoCal::Rpc::image_coordinate(double Latitude, double Longitude, double Height_ellipsoid) const
+        blitz::Array<double, N + 1> GeoCal::Rpc::image_coordinate(const blitz::Array< double, N > &Latitude, const blitz::Array<
+        double, N > &Longitude, const blitz::Array< double, N >
+        &Height_ellipsoid) const
         Convert from object space to image space (i.e., calculate RPC).
 
         The longitude and latitude are given in degrees (this is the geodetic
         latitude). The height is in meters, relative to the reference
-        ellipsoid (e.g., WGS-84). 
+        ellipsoid (e.g., WGS-84).
+
+        This converts a whole block of latitude, longitude and height points
+        at once. The results returned have a first dimension of 2, the first
+        value is line and the second sample. 
         """
         return _geocal_rpc.Rpc_image_coordinate(self, *args)
 
@@ -450,7 +456,7 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     def image_coordinate_jac_parm(self, *args):
         """
 
-        Array< double, 2 > Rpc::image_coordinate_jac_parm(double Latitude, double Longitude, double Height_ellipsoid) const
+        blitz::Array<double, 2> GeoCal::Rpc::image_coordinate_jac_parm(const GroundCoordinate &Gc) const
         Jacobian of image_coordinate with respect to the parameters that are
         marked as ones we are fitting.
 

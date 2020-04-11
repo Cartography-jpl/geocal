@@ -213,8 +213,8 @@ class TiePoint(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::TiePoint::TiePoint(int Number_image)
-        Constructor. 
+        TiePoint::TiePoint(const TiePoint &Tp)
+        Copy constructor. We make a deep copy of everything. 
         """
         _tie_point.TiePoint_swiginit(self, _tie_point.new_TiePoint(*args))
 

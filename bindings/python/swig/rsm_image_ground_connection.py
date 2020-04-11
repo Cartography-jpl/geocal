@@ -199,10 +199,12 @@ class RsmImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
         """
 
         GeoCal::RsmImageGroundConnection::RsmImageGroundConnection(const boost::shared_ptr< Rsm > &R, const boost::shared_ptr< Dem > &D,
-        const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const
-        std::string &Title="Image", const boost::shared_ptr< ImageMask >
-        &Img_mask=boost::shared_ptr< ImageMask >(), const boost::shared_ptr<
-        GroundMask > &Ground_mask=boost::shared_ptr< GroundMask >())
+        const boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<
+        RasterImageMultiBand > &Img_mb, const std::string &Title="Image",
+        const boost::shared_ptr< ImageMask > &Img_mask=boost::shared_ptr<
+        ImageMask >(), const boost::shared_ptr< GroundMask >
+        &Ground_mask=boost::shared_ptr< GroundMask >(), bool
+        Fit_height_offset=false)
 
         """
         _rsm_image_ground_connection.RsmImageGroundConnection_swiginit(self, _rsm_image_ground_connection.new_RsmImageGroundConnection(*args))

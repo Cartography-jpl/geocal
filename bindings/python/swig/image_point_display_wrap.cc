@@ -8423,7 +8423,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ImagePointDisplay_image_point", _wrap_ImagePointDisplay_image_point, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void ImagePointDisplay::image_point(const ImageCoordinate &Ic, int Cindex)\n"
+		"void GeoCal::ImagePointDisplay::image_point(const GroundCoordinate &Gc, int Cindex)\n"
 		"Display Point with the given color index. \n"
 		""},
 	 { (char *)"delete_ImagePointDisplay", (PyCFunction)_wrap_delete_ImagePointDisplay, METH_O, (char *)"\n"

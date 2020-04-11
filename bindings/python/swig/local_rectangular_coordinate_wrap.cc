@@ -8345,8 +8345,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"LocalRcParameter_swiginit", LocalRcParameter_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_LocalRectangularCoordinate", _wrap_new_LocalRectangularCoordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::LocalRectangularCoordinate::LocalRectangularCoordinate(const boost::shared_ptr< LocalRcParameter > &P, double X, double Y,\n"
-		"double Z)\n"
+		"LocalRectangularCoordinate::LocalRectangularCoordinate(const boost::shared_ptr< LocalRcParameter > &P, const\n"
+		"GroundCoordinate &Gc)\n"
 		"\n"
 		""},
 	 { (char *)"LocalRectangularCoordinate_parameter_set", _wrap_LocalRectangularCoordinate_parameter_set, METH_VARARGS, NULL},

@@ -7656,8 +7656,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MapInfoImageGroundConnection", _wrap_new_MapInfoImageGroundConnection, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::MapInfoImageGroundConnection::MapInfoImageGroundConnection(const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const\n"
-		"boost::shared_ptr< Dem > &D, const std::string &Title=\"Image\")\n"
+		"GeoCal::MapInfoImageGroundConnection::MapInfoImageGroundConnection(const boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<\n"
+		"RasterImageMultiBand > &Img_mb, const boost::shared_ptr< Dem > &D,\n"
+		"const std::string &Title=\"Image\")\n"
 		"Constructor. \n"
 		""},
 	 { (char *)"MapInfoImageGroundConnection_cf_look_vector", _wrap_MapInfoImageGroundConnection_cf_look_vector, METH_VARARGS, (char *)"\n"

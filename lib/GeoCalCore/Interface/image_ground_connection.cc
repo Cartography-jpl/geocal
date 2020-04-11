@@ -159,6 +159,60 @@ ImageGroundConnection::collinearity_residual_jacobian
 }
 
 //-----------------------------------------------------------------------
+/// After fitting an Igc, it is good to see how accurate the Igc
+/// captures another Igc. This function take an Igc, and fixed height,
+/// and generates a regular grid of the "True" line and sample. We
+/// then project this to the surface using the Igc, and then use the
+/// this Igc to calculate the line sample. If the Igc is perfect, it would
+/// give the same values as "True".
+///
+/// This returns Nan where we can't calculate this (e.g., Igc fails)
+///
+/// This function could just be done in python, but we have it in C++
+/// for performance. We may want to adjust what we calculate as we get
+/// a better feel for how to characterize a Rsm. But this is our
+/// initial version of this.
+//-----------------------------------------------------------------------
+void ImageGroundConnection::compare_igc
+(const ImageGroundConnection& Igc_true, int Number_line_spacing,
+ int Number_sample_spacing, double Height,
+ blitz::Array<double, 2>& True_line,
+ blitz::Array<double, 2>& True_sample,
+ blitz::Array<double, 2>& Calc_line,
+ blitz::Array<double, 2>& Calc_sample)
+  const
+{
+  True_line.resize(Number_line_spacing, Number_sample_spacing);
+  True_sample.resize(Number_line_spacing, Number_sample_spacing);
+  Calc_line.resize(Number_line_spacing, Number_sample_spacing);
+  Calc_sample.resize(Number_line_spacing, Number_sample_spacing);
+  for(int i = 0; i < Number_line_spacing; ++i) {
+    int ln = (int) floor(number_line() / double(Number_line_spacing) * i);
+    for(int j = 0; j < Number_sample_spacing; ++j) {
+      int smp = (int) floor(number_sample() / double(Number_sample_spacing)
+			    * j);
+      True_line(i,j) = ln;
+      True_sample(i,j) = smp;
+      try {
+	ImageCoordinate iccalc;
+	bool success;
+	image_coordinate_with_status(*Igc_true.ground_coordinate_approx_height(ImageCoordinate(ln,smp), Height), iccalc, success);
+	if(success) {
+	  Calc_line(i,j) = iccalc.line;
+	  Calc_sample(i, j) = iccalc.sample;
+	} else {
+	  Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
+	  Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
+	}
+      } catch(const ImageGroundConnectionFailed&) {
+	Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
+	Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
+      }
+    }
+  }
+}
+
+//-----------------------------------------------------------------------
 /// Find a MapInfo that covers the ground coordinate of this 
 /// ImageGroundConnection. We calculate the ground coordinate of the
 /// four corners, then find the MapInfo that covers those corners,

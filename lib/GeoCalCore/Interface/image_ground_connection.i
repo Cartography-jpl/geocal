@@ -100,6 +100,13 @@ public:
   virtual blitz::Array<double, 2> 
   collinearity_residual_jacobian(const GroundCoordinate& Gc,
 			const ImageCoordinate& Ic_actual) const;
+  void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
+		   int Number_sample_spacing, double Height,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT)
+    const;
   virtual boost::shared_ptr<GroundCoordinate> 
     ground_coordinate(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 

@@ -6861,7 +6861,7 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_read(PyObject *SWIGUNUSEDPARM(se
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -6956,7 +6956,7 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_read_double(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -7839,10 +7839,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImageMultiBand_write", _wrap_RasterImageMultiBand_write, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< int, 3 > &Data)\n"
-		"Write the data to the same location in each image.\n"
+		"void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< double, 3 > &Data)\n"
 		"\n"
-		"Data should be number_band() x nline x nsamp. \n"
 		""},
 	 { (char *)"RasterImageMultiBand___str__", (PyCFunction)_wrap_RasterImageMultiBand___str__, METH_O, NULL},
 	 { (char *)"RasterImageMultiBand_overview", _wrap_RasterImageMultiBand_overview, METH_VARARGS, (char *)"\n"
@@ -7866,8 +7864,10 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"void GeoCal::copy(const RasterImageMultiBand &Img_in, RasterImageMultiBand &Img_out,\n"
 		"bool Log_progress=false)\n"
-		"This copies one multiband image to another. The images should be the\n"
-		"same size. We also assume that all the bands are the same size.\n"
+		"This copies one multiband image to another.\n"
+		"\n"
+		"The images should be the same size. We also assume that all the bands\n"
+		"are the same size.\n"
 		"\n"
 		"Setting Diagnostic to true causes messages to be printed as we do the\n"
 		"copying. \n"

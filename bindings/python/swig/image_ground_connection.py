@@ -312,6 +312,32 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         return _image_ground_connection.ImageGroundConnection_collinearity_residual_jacobian(self, Gc, Ic_actual)
 
 
+    def compare_igc(self, Igc, Number_line_spacing, Number_sample_spacing, Height):
+        """
+
+        void ImageGroundConnection::compare_igc(const ImageGroundConnection &Igc_true, int Number_line_spacing, int
+        Number_sample_spacing, double Height, blitz::Array< double, 2 >
+        &True_line, blitz::Array< double, 2 > &True_sample, blitz::Array<
+        double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample) const
+        After fitting an Igc, it is good to see how accurate the Igc captures
+        another Igc.
+
+        This function take an Igc, and fixed height, and generates a regular
+        grid of the "True" line and sample. We then project this to the
+        surface using the Igc, and then use the this Igc to calculate the line
+        sample. If the Igc is perfect, it would give the same values as
+        "True".
+
+        This returns Nan where we can't calculate this (e.g., Igc fails)
+
+        This function could just be done in python, but we have it in C++ for
+        performance. We may want to adjust what we calculate as we get a
+        better feel for how to characterize a Rsm. But this is our initial
+        version of this. 
+        """
+        return _image_ground_connection.ImageGroundConnection_compare_igc(self, Igc, Number_line_spacing, Number_sample_spacing, Height)
+
+
     def __ground_coordinate(self, Ic):
         """
 
@@ -610,13 +636,9 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def resolution_meter(self, *args):
         """
 
-        double ImageGroundConnection::resolution_meter(const ImageCoordinate &Ic) const
-        Calculate the approximate resolution on the ground of a given
-        ImageCoordinate.
-
-        This finds the intersection with the reference surface for the given
-        pixel, + 1 in the line and sample direction. We find the difference in
-        meters between these points, and select the maximum value. 
+        double ImageGroundConnection::resolution_meter() const
+        Variation of resolution_meter that find the resolution of the center
+        pixel. 
         """
         return _image_ground_connection.ImageGroundConnection_resolution_meter(self, *args)
 
@@ -770,8 +792,8 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def __dem(self, D):
         """
 
-        void GeoCal::ImageGroundConnection::dem(const boost::shared_ptr< Dem > &D)
-        Set the DEM to use in ground_coordinate. 
+        const Dem& GeoCal::ImageGroundConnection::dem() const
+        Dem used by ground_coordinate. 
         """
         return _image_ground_connection.ImageGroundConnection___dem(self, D)
 
@@ -804,6 +826,7 @@ ImageGroundConnection.cf_look_vector_lv = new_instancemethod(_image_ground_conne
 ImageGroundConnection.cf_look_vector_pos = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_pos, None, ImageGroundConnection)
 ImageGroundConnection.collinearity_residual = new_instancemethod(_image_ground_connection.ImageGroundConnection_collinearity_residual, None, ImageGroundConnection)
 ImageGroundConnection.collinearity_residual_jacobian = new_instancemethod(_image_ground_connection.ImageGroundConnection_collinearity_residual_jacobian, None, ImageGroundConnection)
+ImageGroundConnection.compare_igc = new_instancemethod(_image_ground_connection.ImageGroundConnection_compare_igc, None, ImageGroundConnection)
 ImageGroundConnection.__ground_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection___ground_coordinate, None, ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem, None, ImageGroundConnection)
 ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height, None, ImageGroundConnection)

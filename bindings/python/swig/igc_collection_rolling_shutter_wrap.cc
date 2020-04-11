@@ -7863,11 +7863,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_IgcCollectionRollingShutter", _wrap_new_IgcCollectionRollingShutter, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::IgcCollectionRollingShutter::IgcCollectionRollingShutter(const std::vector< boost::shared_ptr< RasterImage > > &Img_list,\n"
-		"const std::vector< boost::shared_ptr< TimeTable > > &Tt_list, const\n"
-		"std::vector< std::string > &Title_list, const boost::shared_ptr< Orbit\n"
-		"> &Orb, const boost::shared_ptr< Camera > &Cam, const\n"
-		"boost::shared_ptr< Dem > &D)\n"
+		"GeoCal::IgcCollectionRollingShutter::IgcCollectionRollingShutter(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<\n"
+		"Camera > &Cam, const boost::shared_ptr< Dem > &D)\n"
 		"\n"
 		""},
 	 { (char *)"IgcCollectionRollingShutter_add_image", _wrap_IgcCollectionRollingShutter_add_image, METH_VARARGS, (char *)"\n"

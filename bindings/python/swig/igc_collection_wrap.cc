@@ -8362,7 +8362,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_collinearity_residual(PyObject *SWIGUNU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8503,7 +8503,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_collinearity_residual_jacobian(PyObject
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8988,7 +8988,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_parm(PyObject *SWI
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9120,7 +9120,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_parm_fd(PyObject *
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9232,7 +9232,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_cf(PyObject *SWIGU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9352,7 +9352,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate_jac_cf_fd(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9730,7 +9730,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection__v_parameter__SWIG_0(PyObject *SWIGUNUS
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10116,7 +10116,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection__v_parameter_subset__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10504,7 +10504,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection__v_parameter_mask(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10694,12 +10694,7 @@ static PyMethodDef SwigMethods[] = {
 		"the image_coordinate. Callers can catch this exception if they have\n"
 		"some way of handling no image coordinate data. \n"
 		""},
-	 { (char *)"IgcCollection_image_coordinate_jac_parm", _wrap_IgcCollection_image_coordinate_jac_parm, METH_VARARGS, (char *)"\n"
-		"\n"
-		"virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_parm(int Image_index, const CartesianFixed &Gc) const\n"
-		"Return the Jacobian of the image coordinates with respect to the\n"
-		"parameters. \n"
-		""},
+	 { (char *)"IgcCollection_image_coordinate_jac_parm", _wrap_IgcCollection_image_coordinate_jac_parm, METH_VARARGS, NULL},
 	 { (char *)"IgcCollection_image_coordinate_jac_parm_fd", _wrap_IgcCollection_image_coordinate_jac_parm_fd, METH_VARARGS, (char *)"\n"
 		"\n"
 		"blitz::Array< double, 2 > IgcCollection::image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed &Gc, const blitz::Array<\n"
@@ -10707,12 +10702,7 @@ static PyMethodDef SwigMethods[] = {
 		"Return the Jacobian of the image coordinates with respect to the\n"
 		"parameters, calculated by taking a finite difference. \n"
 		""},
-	 { (char *)"IgcCollection_image_coordinate_jac_cf", _wrap_IgcCollection_image_coordinate_jac_cf, METH_VARARGS, (char *)"\n"
-		"\n"
-		"virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_cf(int Image_index, const CartesianFixed &Gc) const\n"
-		"Return the Jacobian of the image coordinates with respect to the X, Y,\n"
-		"and Z components of the CartesianFixed ground location. \n"
-		""},
+	 { (char *)"IgcCollection_image_coordinate_jac_cf", _wrap_IgcCollection_image_coordinate_jac_cf, METH_VARARGS, NULL},
 	 { (char *)"IgcCollection_image_coordinate_jac_cf_fd", _wrap_IgcCollection_image_coordinate_jac_cf_fd, METH_VARARGS, (char *)"\n"
 		"\n"
 		"virtual blitz::Array<double, 2> GeoCal::IgcCollection::image_coordinate_jac_cf_fd(int Image_index, const CartesianFixed &Gc, double Step_size) const\n"

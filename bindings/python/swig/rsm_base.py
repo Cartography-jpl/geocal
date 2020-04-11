@@ -212,7 +212,8 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
     def image_coordinate(self, *args):
         """
 
-        virtual ImageCoordinate GeoCal::RsmBase::image_coordinate(double X, double Y, double Z) const =0
+        virtual blitz::Array<double, 4> GeoCal::RsmBase::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >
+        &Y, const blitz::Array< double, 3 > &Z) const =0
 
         """
         return _rsm_base.RsmBase_image_coordinate(self, *args)

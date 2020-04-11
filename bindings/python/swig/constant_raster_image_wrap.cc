@@ -6858,8 +6858,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ConstantRasterImage", _wrap_new_ConstantRasterImage, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ConstantRasterImage::ConstantRasterImage(int Number_line, int Number_sample, int Value)\n"
-		"Construct a ConstantRasterImage of the given size. \n"
+		"GeoCal::ConstantRasterImage::ConstantRasterImage(const MapInfo &Mi, int Value)\n"
+		"Construct a MemoryRasterImage of the given MapInfo. \n"
 		""},
 	 { (char *)"delete_ConstantRasterImage", (PyCFunction)_wrap_delete_ConstantRasterImage, METH_O, (char *)"\n"
 		"\n"

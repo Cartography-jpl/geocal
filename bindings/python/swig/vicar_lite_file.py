@@ -514,17 +514,13 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     def __init__(self, *args):
         """
 
-        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, int Band_id=1, access_type
-        Access=VicarLiteFile::READ, int Number_tile_line=-1, int
+        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, const MapInfo &Mi, int Band_id=1,
+        access_type Access=VicarLiteFile::READ, int Number_tile_line=-1, int
         Number_tile_sample=-1, bool Force_area_pixel=false)
         Constructor.
 
-        The Force_area_pixel forces the file to be treated as "pixel as
-        area" rather than "pixel as point". This is really just meant as a
-        work around for the SRTM data, which incorrectly labels the data as
-        "point" rather than "area". Since this is a 15 meter difference,
-        it matters for many applications. Most users should just ignore this
-        value. 
+        We force the given map info to apply to the image. This is a
+        workaround for pickling mapinfo that VICAR doesn't support yet. 
         """
         _vicar_lite_file.VicarLiteRasterImage_swiginit(self, _vicar_lite_file.new_VicarLiteRasterImage(*args))
 

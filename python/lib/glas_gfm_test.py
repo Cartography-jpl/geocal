@@ -9,7 +9,55 @@ from geocal.glas_gfm import *
 from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance, Geodetic,
                          OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
                          KeplerOrbit, Time, OrbitDes, Ecr)
+import matplotlib.pylab as plt
+import matplotlib as mpl
+import seaborn as sns
+from matplotlib.backends.backend_pdf import PdfPages
+import numpy as np
 import subprocess
+
+# This also works with an igc.
+def rsm_plot_diff(r, igc, fname=None, min_height = -5000,
+                  max_height = -1500):
+    '''This provides a quick plot/summary of the differences between the RSM
+    we calculate and the underlying igc.
+
+    If a file is supplied, we also write out the cross section plots.'''
+    
+    dem_nominal = (max_height + min_height) / 2.0
+    ln, smp, lncalc, smpcalc = r.compare_igc(igc, 1000, 5,
+                                             dem_nominal)
+    print(ln)
+    print(lncalc)
+    print("Max line diff:   ", np.nanmax(abs(ln-lncalc)), " at ",
+          np.unravel_index(np.nanargmax(abs(ln-lncalc)), ln.shape))
+    print("Max sample diff: ", np.nanmax(abs(smp-smpcalc)), " at ",
+          np.unravel_index(np.nanargmax(abs(smp-smpcalc)), smp.shape))
+    if(fname is None):
+        return
+    pdf = PdfPages(fname)
+    cmap = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
+    plt.clf()
+    plt.ylim(-0.1,0.1)
+    for i in range(smp.shape[1]):
+        plt.plot(ln[:,i], lncalc[:,i] - ln[:,i], label="Sample %d" % smp[0,i])
+    plt.legend()
+    plt.title("Line diff")
+    plt.xlabel("Line")
+    plt.ylabel("Diff")
+    pdf.savefig()
+    plt.clf()
+    plt.ylim(-0.2,0.2)
+    for i in range(smp.shape[1]):
+        plt.plot(ln[:,i], smpcalc[:,i] - smp[:,i], label="Sample %d" % smp[0,i])
+    plt.legend()
+    plt.title("Sample diff")
+    plt.xlabel("Line")
+    plt.ylabel("Diff")
+    pdf.savefig()
+    plt.clf()
+    
+    pdf.close()
 
 @require_msp    
 @require_pynitf
@@ -97,6 +145,7 @@ def test_create_glas(nitf_sample_rip):
     with open("f2.txt", "w") as fh:
         print(f2,file=fh)
     igc2 = IgcMsp("glas_test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
+    rsm_plot_diff(igc1, igc2, "diff.pdf")
     igc3 = f2.image_segment[0].glas_gfm.igc()
     print("Resolution %f m" % igc1.resolution_meter())
     print("Resolution %f m" % igc2.resolution_meter())
@@ -240,6 +289,7 @@ def test_create_gfm(isolated_dir, igc_gfm):
     with open("f2.txt", "w") as fh:
         print(f2,file=fh)
     igc2 = IgcMsp("gfm_test.ntf", SimpleDem(), 0, "GFM", "GFM")
+    rsm_plot_diff(igc_gfm, igc2, "diff.pdf")
     igc3 = f2.image_segment[0].glas_gfm.igc()
 
     print("Resolution %f m" % igc_gfm.resolution_meter())

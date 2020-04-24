@@ -26,7 +26,21 @@ void OrbitListCache::serialize(Archive & ar, const unsigned int version)
   boost::serialization::split_member(ar, *this, version);
 }
 
+// Note, derived classes likely do *not* want to call this
+// serialization method. However, it is useful to have this defined
+// since quick and dirty python code may want to use a
+// OrbitQuaternionList to generate an orbit from some other data
+// source (e.g., CSV file), and then be able to save it.
+
+template<class Archive>
+void OrbitQuaternionList::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(orbit_data_map);
+}
+
 GEOCAL_IMPLEMENT(OrbitListCache);
+GEOCAL_IMPLEMENT(OrbitQuaternionList);
 #endif
 
 //-----------------------------------------------------------------------

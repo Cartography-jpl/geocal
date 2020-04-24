@@ -149,6 +149,9 @@ protected:
       orbit_data_map[(*i)->time()] = *i;
     initialize();
   }
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -215,5 +218,6 @@ private:
 };
 }
 
+GEOCAL_EXPORT_KEY(OrbitQuaternionList);
 GEOCAL_EXPORT_KEY(OrbitListCache);
 #endif

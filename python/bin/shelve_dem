@@ -44,6 +44,9 @@ Options:
        Use a datum with a constant undulation. This is useful as a quick
        way to add an offset to  DEM file. [default: 0.0]
 
+  --egm96-datum
+       Use the EGM 96 geoid datum (from EGM96_20_x100.HLF)
+
   --srtm
        Use the SRTM rather than supplying a DEM file.
 
@@ -80,6 +83,8 @@ elif(args.constant_dem is not None and args.constant_dem > -99999):
 else:
     if(args.datum_file):
         datum = geocal.GdalDatum(args.datum_file, args.datum_band)
+    elif(args.egm96_datum):
+        datum = geocal.DatumGeoid96()
     else:
         datum = geocal.SimpleDatum(args.constant_datum)
     if geocal.VicarLiteFile.is_vicar_file(args.dem_file):

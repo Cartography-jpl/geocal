@@ -6,6 +6,8 @@
 import geocal
 from functools import partial
 from multiprocessing import Pool
+import tempfile
+import subprocess
 
 version = "October 8, 2013"
 usage='''Usage: 
@@ -19,6 +21,12 @@ a map projected image. The igc_collection should be in the normal
 "file:key" format. The index number for which image to use is supplied,
 this is -0-based. The output is also "file:key". To actually generate
 a file, use "write_image" program.
+
+Note that it is very common to create a igc_project xml object, run 
+write_image immediately, and then throw away the xml object. To 
+support this, we have the optional --write-image option. This is entirely
+equivalent to running the two steps separately, it is just a convenience 
+run in one step.
 
 Options:
   -h --help         
@@ -59,6 +67,19 @@ Options:
 
   --resolution=r
        Resolution in meters of output. [default: 1.0]
+
+  --write-image-args=f
+       Any arguments to pass to write_image. [default: ""]
+
+  --write-image
+       It is very common to create a igc_project xml object, run 
+       write_image immediately, and then throw away the xml object. To 
+       support this, we have this  option. This is entirely equivalent 
+       to running the two steps separately, it is just a convenience 
+       run in one step. See also --write-image-args to pass arguments
+       to write-image.  Note that output refers to the output file name
+       if this option is used, the xml is created as a temporary and 
+       deleted.
 
   -v --version      
        Print program version
@@ -117,5 +138,12 @@ if(igc.image):
 else:
     igc = geocal.IgcMapProjectedMultiBand(mi, igc, args.grid_spacing, 
                                    args.avg_factor, False)
-    
-geocal.write_shelve(args.output, igc)
+
+if(args.write_image):
+    with tempfile.NamedTemporaryFile(dir="./", suffix=".xml") as tf:
+        geocal.write_shelve(tf.name, igc)
+        subprocess.run("write_image %s %s %s" %
+                       (args.write_image_args, tf.name, args.output),
+                       shell = True)
+else:
+    geocal.write_shelve(args.output, igc)

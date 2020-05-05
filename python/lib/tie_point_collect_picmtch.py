@@ -1,7 +1,9 @@
 from geocal.vicar_interface import VicarInterface
+from geocal.mmap_file import mmap_file
 from geocal_swig import (IbisFile, ImageCoordinate, VicarImageCoordinate,
-                         TiePoint,
+                         TiePoint, IgcMapProjected, VicarRasterImage,
                          TiePointCollection, VicarLiteRasterImage)
+import tempfile
 import time
 import os
 import numpy as np
@@ -181,6 +183,7 @@ class TiePointCollectPicmtch(object):
                  ref_image_fname = None, ref_dem = None,
                  fftsize=256, magnify=4.0, magmin=2.0, toler=1.5, redo=36,
                  ffthalf=2, seed=562, autofit=14, thr_res=10.0,
+                 map_info=None, grid_spacing=10,
                  search=None,
                  log_file = None,
                  run_dir_name = None, quiet = True):
@@ -193,6 +196,20 @@ class TiePointCollectPicmtch(object):
         
         Rather than passing in the surface and reference image as RasterImage
         objects, an explicit VICAR file name needs to be supplied.
+
+        It is not uncommon to need to create the VICAR surface image just for
+        the purpose of doing the tie-point. If desired, this class can create
+        these images as part of the temporary run directory (or the 
+        run_dir_name if passed in). If this is a temporary directory, it
+        will be removed when we are done with this object. The mapinfo to
+        use can be passed in, the default is to use the first image we find
+        to supply the mapinfo. We extend the mapinfo as needed to cover the
+        projected image.  The grid spacing to use can also be passed in.
+        You don't generally need this to be a fine as you'd have for a final
+        ortho product, so the default is every 10th pixel.  
+
+        To have the surface data generated, pass in the surface_image_fname 
+        as None.
         
         The second image can other be a second igc from the igc_collection, or
         a reference image. The difference is for the reference image that we 
@@ -216,7 +233,7 @@ class TiePointCollectPicmtch(object):
         process. This can be useful to view the status as we process.
         '''
         self.igc_collection = igc_collection
-        self.surface_image_fname = surface_image_fname
+        self.surface_image_fname = list(surface_image_fname)
         self.image_index1 = image_index1
         self.image_index2 = image_index2
         self.ref_image_fname = ref_image_fname
@@ -240,7 +257,39 @@ class TiePointCollectPicmtch(object):
         if((self.image_index2 >= 0 and self.ref_image_fname is not None) or
            (self.image_index2 < 0 and self.ref_image_fname is None)):
             raise RuntimeError("Need to either supply a ref_image_fname or an image_index2, but not both")
-
+        # Generate surface image if needed
+        if(surface_image_fname[0] is None or
+           (image_index2 >= 0 and surface_image_fname[1] is None)):
+            if(self.run_dir_name is not None):
+                makedirs_p(self.run_dir_name)
+            else:
+                self.tempdir = tempfile.TemporaryDirectory(dir='./')
+                self.run_dir_name = self.tempdir.name
+        if(surface_image_fname[0] is None):
+            if(map_info is not None):
+                mi = map_info
+            elif(image_index2 >= 0):
+                if(surface_image_fname[1] is None):
+                    raise RuntimeError("Need to either supply one of the surface_image_fname or a map_info to generate surface image")
+                mi = VicarLiteRasterImage(self.surface_image_fname[1]).map_info
+                self._proj_img(0, mi, grid_spacing)
+        if(image_index2 >= 0 and surface_image_fname[1] is None):
+            mi = VicarLiteRasterImage(self.surface_image_fname[0]).map_info
+            self._proj_img(1, mi, grid_spacing)
+            
+    def _proj_img(self, index, mi, grid_spacing):
+        igc = self.igc_collection.image_ground_connection(index) 
+        mi = igc.cover(mi)
+        igc_proj = IgcMapProjected(mi, igc, grid_spacing, -1, False)
+        self.surface_image_fname[index] = self.run_dir_name + \
+            "/img%d_surf.img" % index
+        out = VicarRasterImage(self.surface_image_fname[index],
+                               igc_proj.map_info, "HALF")
+        out.close()
+        m = mmap_file(self.surface_image_fname[index], mode="r+")
+        m[:,:] = igc_proj.read(0,0,igc_proj.number_line,
+                               igc_proj.number_sample)
+            
     @property
     def number_image(self):
         return self.igc_collection.number_image

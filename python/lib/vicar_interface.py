@@ -152,7 +152,14 @@ class VicarInterface(object):
             else:
                 d = tempfile.mkdtemp(dir='./')
             for i in self.input:
-                os.symlink(os.path.abspath(i), d + "/" + os.path.basename(i))
+                try:
+                    os.symlink(os.path.abspath(i), d + "/" +
+                               os.path.basename(i))
+                except FileExistsError:
+                    # Ok if file already exists, we sometimes create input
+                    # data in run_dir_name before calling VicarInterface,
+                    # cf. TiePointCollectPicmtch
+                    pass
             outabs = [os.path.abspath(x) for x in self.output]
             if(self.log_file): 
                 self.log_file = os.path.abspath(self.log_file)

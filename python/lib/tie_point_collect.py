@@ -409,6 +409,10 @@ class TiePointCollectFM(object):
                  skip_ray_intersect = False,
                  norm_type = None,
                  fdetect = None, fdetect_ref = None):
+        '''Note if you have a reference image, make sure fdetect and
+        fdetect_ref are the same type (e.g., both SURF). They can have 
+        different parameters, but need to be the same time so the matching
+        can be done.'''
         if(not have_cv2):
             raise RuntimeError("This class requires the openCV python library cv2, which is not available.")
         self.raster_image = [igc_collection.image(i) for i in range(igc_collection.number_image)]
@@ -567,7 +571,7 @@ def _point_list(ind1, ind2_or_ref_image, tpcol):
             else:
                 ic2 = None
         else:
-            ic2 = tp.image_location[ind2_or_ref_image]
+            ic2 = tp.image_coordinate(ind2_or_ref_image)
         if(ic1 is not None and
            ic2 is not None):
             pt1.append([ic1.line, ic1.sample])

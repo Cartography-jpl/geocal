@@ -69,7 +69,7 @@ Options:
        Resolution in meters of output. [default: 1.0]
 
   --write-image-args=f
-       Any arguments to pass to write_image. [default: ""]
+       Any arguments to pass to write_image.
 
   --write-image
        It is very common to create a igc_project xml object, run 
@@ -142,8 +142,11 @@ else:
 if(args.write_image):
     with tempfile.NamedTemporaryFile(dir="./", suffix=".xml") as tf:
         geocal.write_shelve(tf.name, igc)
-        subprocess.run("write_image %s %s %s" %
-                       (args.write_image_args, tf.name, args.output),
-                       shell = True)
+        if(args.write_image_args):
+            subprocess.run("write_image %s %s %s" %
+                           (args.write_image_args, tf.name, args.output),
+                           shell = True)
+        else:
+            subprocess.run(["write_image", tf.name, args.output])
 else:
     geocal.write_shelve(args.output, igc)

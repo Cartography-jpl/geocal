@@ -156,6 +156,8 @@ public:
   }
   std::string linear_unit_name() const;
   double linear_unit_scale() const;
+  double no_data_value() const {return raster_band_->GetNoDataValue();}
+  
 //-----------------------------------------------------------------------
 /// The underlying GDALRasterBand object.
 //-----------------------------------------------------------------------

@@ -268,18 +268,18 @@ class TiePointCollectPicmtch(object):
         if(surface_image_fname[0] is None):
             if(map_info is not None):
                 mi = map_info
+                mi = self.igc_collection.image_ground_connection(image_index1).cover(mi)
             elif(image_index2 >= 0):
                 if(surface_image_fname[1] is None):
                     raise RuntimeError("Need to either supply one of the surface_image_fname or a map_info to generate surface image")
-                mi = VicarLiteRasterImage(self.surface_image_fname[1]).map_info
-                self._proj_img(0, mi, grid_spacing)
+                mi = VicarLiteRasterImage(self.surface_image_fname[image_index2]).map_info
+            self._proj_img(image_index1, mi, grid_spacing)
         if(image_index2 >= 0 and surface_image_fname[1] is None):
-            mi = VicarLiteRasterImage(self.surface_image_fname[0]).map_info
-            self._proj_img(1, mi, grid_spacing)
+            mi = VicarLiteRasterImage(self.surface_image_fname[image_index1]).map_info
+            self._proj_img(image_index2, mi, grid_spacing)
             
     def _proj_img(self, index, mi, grid_spacing):
         igc = self.igc_collection.image_ground_connection(index) 
-        mi = igc.cover(mi)
         igc_proj = IgcMapProjected(mi, igc, grid_spacing, -1, False)
         self.surface_image_fname[index] = self.run_dir_name + \
             "/img%d_surf.img" % index

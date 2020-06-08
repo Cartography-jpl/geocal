@@ -441,4 +441,10 @@ def test_create_from_scratch_glas(isolated_dir):
     f2 = NitfFile("glas_test.ntf")
     with open("f2.txt", "w") as fh:
         print(f2,file=fh)
-    
+    igc_g2 = f2.image_segment[0].glas_gfm.igc()
+    # Slightly larger tolerance here because there is truncation of floats when
+    # we write the out.
+    for i in range(0,2048,100):
+        for j in range(0,2048,100):
+            assert distance(igc_r.ground_coordinate(ImageCoordinate(i,j)),
+                            igc_g2.ground_coordinate(ImageCoordinate(i,j))) < 0.05 

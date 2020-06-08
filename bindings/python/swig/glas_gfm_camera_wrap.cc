@@ -8363,7 +8363,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_ppoff(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8425,7 +8425,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff__SWIG_0(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8801,7 +8801,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_field_alignment__SWIG_0(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8908,6 +8908,84 @@ fail:
     "    GeoCal::GlasGfmCamera::field_alignment() const\n"
     "    GeoCal::GlasGfmCamera::field_alignment(blitz::Array< double,2 > const &)\n");
   return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_GlasGfmCamera_field_alignment_fit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::GlasGfmCamera *arg1 = (GeoCal::GlasGfmCamera *) 0 ;
+  GeoCal::Camera *arg2 = 0 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::GlasGfmCamera > tempshared1 ;
+  boost::shared_ptr< GeoCal::GlasGfmCamera > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"GlasGfmCamera_field_alignment_fit",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GlasGfmCamera_field_alignment_fit" "', argument " "1"" of type '" "GeoCal::GlasGfmCamera *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::GlasGfmCamera * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::GlasGfmCamera > * >(argp1);
+      arg1 = const_cast< GeoCal::GlasGfmCamera * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GlasGfmCamera_field_alignment_fit" "', argument " "2"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "GlasGfmCamera_field_alignment_fit" "', argument " "2"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2);
+        arg2 = const_cast< GeoCal::Camera * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "GlasGfmCamera_field_alignment_fit" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      (arg1)->field_alignment_fit((GeoCal::Camera const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
 }
 
 
@@ -9177,7 +9255,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_first_line_block__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9323,7 +9401,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_first_sample_block__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9469,7 +9547,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_delta_line_block__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9615,7 +9693,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_delta_sample_block__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9768,7 +9846,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera_field_alignment_block__SWIG_0(PyObject 
     }
   }
   {
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[5], stride[5];
     for(int i = 0; i < 5; ++i) {
@@ -10141,6 +10219,14 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::GlasGfmCamera::field_alignment(const blitz::Array< double, 2 > &V)\n"
 		"\n"
 		""},
+	 { (char *)"GlasGfmCamera_field_alignment_fit", _wrap_GlasGfmCamera_field_alignment_fit, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GlasGfmCamera::field_alignment_fit(const Camera &Cam, double Delta_sample)\n"
+		"Populate the field_alignment, sample_number_first_, delta_sample_pair_\n"
+		"to match the given camera.\n"
+		"\n"
+		"Only applicable for sensor type \"S\". \n"
+		""},
 	 { (char *)"GlasGfmCamera__v_field_angle_type", _wrap_GlasGfmCamera__v_field_angle_type, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::GlasGfmCamera::field_angle_type(int V)\n"
@@ -10173,8 +10259,14 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GlasGfmCamera_field_alignment_block", _wrap_GlasGfmCamera_field_alignment_block, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)\n"
+		"void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample)\n"
+		"Populate the field_alignment, first_line_block, first_sample_block,\n"
+		"delta_line and delta_sample to match the given camera.\n"
 		"\n"
+		"This creates only one block - we currently don't support multiple\n"
+		"blocks.\n"
+		"\n"
+		"Only applicable for sensor type \"F\" and field_angle_type 0. \n"
 		""},
 	 { (char *)"delete_GlasGfmCamera", (PyCFunction)_wrap_delete_GlasGfmCamera, METH_O, (char *)"\n"
 		"\n"

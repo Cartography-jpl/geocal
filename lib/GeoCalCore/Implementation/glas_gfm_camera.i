@@ -47,6 +47,7 @@ public:
   %python_attribute_with_set(sample_number_first, double);
   %python_attribute_with_set(delta_sample_pair, double);
   %python_attribute_with_set(field_alignment, blitz::Array<double, 2>);
+  void field_alignment_fit(const Camera& Cam, double Delta_sample);
   %python_attribute_with_set(field_angle_type, int);
   %python_attribute_with_set(field_angle_interpolation_type, int);
   %python_attribute_with_set(first_line_block, blitz::Array<double, 1>);

@@ -497,6 +497,18 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
       self._v_field_alignment(value)
 
 
+    def field_alignment_fit(self, Cam, Delta_sample):
+        """
+
+        void GlasGfmCamera::field_alignment_fit(const Camera &Cam, double Delta_sample)
+        Populate the field_alignment, sample_number_first_, delta_sample_pair_
+        to match the given camera.
+
+        Only applicable for sensor type "S". 
+        """
+        return _glas_gfm_camera.GlasGfmCamera_field_alignment_fit(self, Cam, Delta_sample)
+
+
     def _v_field_angle_type(self, *args):
         """
 
@@ -608,8 +620,14 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
     def field_alignment_block(self, *args):
         """
 
-        void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)
+        void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample)
+        Populate the field_alignment, first_line_block, first_sample_block,
+        delta_line and delta_sample to match the given camera.
 
+        This creates only one block - we currently don't support multiple
+        blocks.
+
+        Only applicable for sensor type "F" and field_angle_type 0. 
         """
         return _glas_gfm_camera.GlasGfmCamera_field_alignment_block(self, *args)
 
@@ -635,6 +653,7 @@ GlasGfmCamera._v_angoff = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_a
 GlasGfmCamera._v_sample_number_first = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_sample_number_first, None, GlasGfmCamera)
 GlasGfmCamera._v_delta_sample_pair = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_delta_sample_pair, None, GlasGfmCamera)
 GlasGfmCamera._v_field_alignment = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_field_alignment, None, GlasGfmCamera)
+GlasGfmCamera.field_alignment_fit = new_instancemethod(_glas_gfm_camera.GlasGfmCamera_field_alignment_fit, None, GlasGfmCamera)
 GlasGfmCamera._v_field_angle_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_field_angle_type, None, GlasGfmCamera)
 GlasGfmCamera._v_field_angle_interpolation_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_field_angle_interpolation_type, None, GlasGfmCamera)
 GlasGfmCamera._v_first_line_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_first_line_block, None, GlasGfmCamera)

@@ -229,6 +229,7 @@ public:
   {return field_alignment_;}
   void field_alignment(const blitz::Array<double, 2>& V)
   { field_alignment_.reference(V.copy()); notify_update();}
+  void field_alignment_fit(const Camera& Cam, double Delta_sample);
 
 //-----------------------------------------------------------------------
 /// Field angle type. 0 for direct alignment grid, 1 for calibration

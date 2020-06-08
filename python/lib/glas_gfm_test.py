@@ -381,3 +381,64 @@ def test_gfm_nitfdiff(isolated_dir, igc_gfm):
     f.write("gfm_test2.ntf")
     subprocess.run("NITF_PLUGIN=geocal nitf_diff gfm_test1.ntf gfm_test2.ntf",
                    shell=True)
+
+@require_msp    
+@require_pynitf
+def test_create_from_scratch_glas(isolated_dir):
+    '''Create a NITF file with GLAS in it. This is completely from scratch,
+    we don't use the RIP at all for this.'''
+    orb = KeplerOrbit()
+    tm = Time.parse_time("2019-02-03T10:00:00Z")
+    # Camera that has a roughly 0.5 meter resolution nadir looking, i.e.,
+    # about the resolution of WV-2
+    cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, 2048, 20e-9,
+                           20-9, 1.6e7, FrameCoordinate(0,1024))
+    # Time delta that is roughly 0.5 meter apart
+    tdelta = 7.5e-5
+    dem = SimpleDem()
+    tt = ConstantSpacingTimeTable(tm, tm + tdelta * 2048, tdelta)
+    # "Real" igc
+    ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
+    igc_r = IpiImageGroundConnection(ipi, dem, None)
+    # Now, implement with stuff needed for GLAS
+    porb = PosCsephb(orb,
+                     tt.min_time - 10 * tdelta,
+                     tt.max_time + 10 * tdelta,
+                     1e-3,
+                     PosCsephb.LAGRANGE,
+                     PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    aorb = AttCsattb(orb,
+                     tt.min_time - 10 * tdelta,
+                     tt.max_time + 10 * tdelta,
+                     1e-3,
+                     AttCsattb.LAGRANGE,
+                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+    orb_g = OrbitDes(porb,aorb)
+    cam_g = GlasGfmCamera(1, cam.number_sample(0))
+    # 1e-3 converts from mm for QuaternionCamera to meter of GlasGfmCamera
+    cam_g.focal_length = cam.focal_length * 1e-3
+    cam_g.field_alignment_fit(cam, cam.number_sample(0))
+    ipi_g = Ipi(orb_g, cam_g, 0, tt.min_time, tt.max_time, tt)
+    igc_g = IpiImageGroundConnection(ipi_g, dem, None)
+    igc_g.platform_id = "FAKEPL"
+    igc_g.payload_id = "FAKEPY"
+    igc_g.sensor_id = "FAKESN"
+    for i in range(0,2048,100):
+        for j in range(0,2048,100):
+            assert distance(igc_r.ground_coordinate(ImageCoordinate(i,j)),
+                            igc_g.ground_coordinate(ImageCoordinate(i,j))) < 0.01
+    f = pynitf.NitfFile()
+    # Should put in 3d data
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+    for i in range(9):
+        for j in range(10):
+            img[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+    f.image_segment[0].create_glas_gfm(igc_g)
+    f.write("glas_test.ntf")
+    f2 = NitfFile("glas_test.ntf")
+    with open("f2.txt", "w") as fh:
+        print(f2,file=fh)
+    

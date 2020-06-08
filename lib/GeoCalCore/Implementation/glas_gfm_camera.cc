@@ -428,12 +428,16 @@ void GlasGfmCamera::angoff(const blitz::Array<double, 1>& V)
 /// Populate the field_alignment, first_line_block,
 /// first_sample_block, delta_line and delta_sample to match the given
 /// camera. This creates only one block - we currently don't support
-/// multiple blocks
+/// multiple blocks.
+///
+/// Only applicable for sensor type "F" and field_angle_type 0.  
 //-----------------------------------------------------------------------
 
 void GlasGfmCamera::field_alignment_block
 (const Camera& Cam, double Delta_line, double Delta_sample)
 {
+  if(sensor_type() != "F")
+    throw Exception("field_alignment_block only applies to sensor type 'F'");
   if(field_angle_type_ != 0) {
     field_angle_type_ = 0;
     init_model();
@@ -481,3 +485,34 @@ void GlasGfmCamera::field_alignment_block
   notify_update();
 }
 
+//-----------------------------------------------------------------------
+/// Populate the field_alignment, sample_number_first_, delta_sample_pair_
+/// to match the given camera.
+///
+/// Only applicable for sensor type "S".
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::field_alignment_fit(const Camera& Cam, double Delta_sample)
+{
+  if(sensor_type() != "S")
+    throw Exception("field_alignment only applies to sensor type 'S'");
+  init_model();
+  // Right now only support sample number first of 0. We can extend
+  // this if needed.
+  sample_number_first_ = 0;
+  delta_sample_pair_ = Delta_sample;
+  int npair = (int) floor(Cam.number_sample(0) / delta_sample_pair_  + 0.5);
+  field_alignment_.resize(npair, 4);
+  blitz::Array<double, 2>& fa = field_alignment_;
+  for(int i = 0; i < fa.rows(); ++i) {
+    FrameCoordinate fc1(0, i * Delta_sample);
+    FrameCoordinate fc2(fc1.line, fc1.sample + Delta_sample);
+    ScLookVector slv1 = Cam.sc_look_vector(fc1, 0);
+    ScLookVector slv2 = Cam.sc_look_vector(fc2, 0);
+    fa(i,0) = slv1.look_vector[0] / (slv1.look_vector[2] / focal_length());
+    fa(i,1) = slv1.look_vector[1] / (slv1.look_vector[2] / focal_length());
+    fa(i,2) = slv2.look_vector[0] / (slv2.look_vector[2] / focal_length());
+    fa(i,3) = slv2.look_vector[1] / (slv2.look_vector[2] / focal_length());
+  }
+  notify_update();
+}

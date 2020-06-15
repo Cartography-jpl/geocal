@@ -14,3 +14,23 @@ def test_orbit_from_tle():
                     Geodetic(-51.77286358544813, 20.073929772655067,
                              420921.42725819454)) < 1.0
 
+def test_quat_from_principal_point():
+    # Arbitrary orbit, but simple for us to generate
+    orb = KeplerOrbit()
+    tm = Time.parse_time("2014-02-03T10:00:00Z")
+    # Camera that has a roughly 0.5 meter resolution nadir looking, i.e.,
+    # about the resolution of WV-2
+    cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, 2048, 20e-9,
+                           20-9, 1.6e7, FrameCoordinate(0,1024))
+    # Original point
+    gp = orb.orbit_data(tm).reference_surface_intersect_approximate(cam,FrameCoordinate(0,1024))
+    # Get a point a little earlier and point to the same location
+    od = orb.orbit_data(tm-100)
+    # Rotate to fit original point
+    twist = 10
+    od.quat_from_principal_gp(gp, twist=twist)
+    # Should be close to the point we are fitting
+    assert distance(gp, od.reference_surface_intersect_approximate(cam, FrameCoordinate(0, 1024))) < 0.01
+    gp2, twist2 = od.principal_gp(SimpleDem())
+    assert distance(gp, gp2) < 0.01
+    assert twist == pytest.approx(twist2)

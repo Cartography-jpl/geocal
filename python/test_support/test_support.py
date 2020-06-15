@@ -4,6 +4,9 @@ from numpy.testing import assert_almost_equal, assert_approx_equal
 from unittest import SkipTest
 from geocal_swig import *
 import geocal_swig
+from geocal.orbit_extension import *
+from geocal.map_info_extension import *
+from geocal.misc import cib01_mapinfo
 import os.path
 import os
 import sys
@@ -45,7 +48,7 @@ rsm_sample_data = "/data/smyth/SampleRsm/"
 # Things that really matter have small test data sets put into unit_test_data,
 # but we do want the option of running larger tests when available
 
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def nitf_sample_files(isolated_dir):
     if(os.path.exists("/bigdata/smyth/NitfSamples/")):
         return "/bigdata/smyth/NitfSamples/"
@@ -59,7 +62,7 @@ def nitf_sample_files(isolated_dir):
         return "/Users/smyth/NitfSamples/"
     pytest.skip("Require NitfSamples test data to run")
 
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def nitf_sample_rip(nitf_sample_files):
     # Older version, but newer version of file doesn't work with MSP software
     fname = nitf_sample_files + "rip/07APR2005_Hyperion_331405N0442002E_SWIR172_001_L1R.ntf"
@@ -73,7 +76,7 @@ def nitf_sample_rip(nitf_sample_files):
         else:
             pytest.skip("Required file %s not found, so skipping test" % fname)
 
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def nitf_sample_wv2(nitf_sample_files):
     fname = nitf_sample_files + "wv2/12JAN23015358-P1BS-052654848010_01_P003.NTF"
     if(os.path.exists(fname)):
@@ -192,7 +195,7 @@ require_python3 = pytest.mark.skipif(not sys.version_info > (3,),
 require_raid = pytest.mark.skipif(True,
                                   reason = "require /raid* test data to run")
 
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def isolated_dir(tmpdir):
     '''This is a fixture that creates a temporary directory, and uses this
     while running a unit tests. Useful for tests that write out a test file
@@ -457,4 +460,61 @@ def igc_gfm():
     igc.sensor_id = "FAKESN"
     return igc
 
+@pytest.fixture(scope="function")
+def igc_half_meter_pushbroom():
+    '''Pushbroom camera with a resolution of 0.5 m (i.e., approximately
+    WV-2). This is 2048 x 2048 sized image'''
+    orb = KeplerOrbit()
+    tm = Time.parse_time("2015-02-03T10:00:00Z")
+    # Camera that has a roughly 0.5 meter resolution nadir looking, i.e.,
+    # about the resolution of WV-2
+    cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, 2048, 20e-9,
+                           20-9, 1.6e7, FrameCoordinate(0,1024))
+    # Time delta that is roughly 0.5 meter apart
+    tdelta = 7.5e-5
+    dem = SimpleDem()
+    tt = ConstantSpacingTimeTable(tm, tm + tdelta * 2048, tdelta)
+    # "Real" igc
+    ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
+    return IpiImageGroundConnection(ipi, dem, None)
+
+def _zenith_angle(orb, tm, pt):
+    '''Zenith angle, 180 degrees looks straight up'''
+    clv = CartesianFixedLookVector(orb.position_cf(tm), pt)
+    llv = LnLookVector(clv, pt)
+    return llv.view_zenith
+
+@pytest.fixture(scope="function")
+def igc_staring(igc_half_meter_pushbroom):
+    '''This is a pushbroom camera where we adjust the gimbal angle that we view
+    at to stare near a fixed point (i.e., like Freebird)'''
+    igc = igc_half_meter_pushbroom
+    mi = cib01_mapinfo(0.5)
+    mi = mi.rotated_map(igc)
+    img = MemoryRasterImage(mi)
+    center = ImageCoordinate(img.number_line / 2, img.number_sample / 2)
+    uedge = ImageCoordinate(center.line - 2048 / 2, center.sample)
+    ledge = ImageCoordinate(center.line + 2048 / 2, center.sample)
+    orb = igc.ipi.orbit
+    # 90 seconds goes from roughly +- 45 degree angle with surface, double
+    # this to go from about +- 66 degrees, This gives a pretty extreme
+    # bowtie, which is good for testing create a RSM to handle this
+    tstart = igc.ipi.min_time - 90*2
+    tend = igc.ipi.max_time + 90*2
+    if False:
+        print(180 - zenith_angle(orb, tstart, img.ground_coordinate(uedge)))
+        print(180 - zenith_angle(orb, tend, img.ground_coordinate(ledge)))
+    tt = ConstantSpacingTimeTable(tstart, tend, (tend - tstart) / 2047)
+    odlist = []
+    # Little extra at ends, so orbit it larger than needed
+    for i in range(-10, 2048 + 10):
+        tm = tstart + (tend - tstart) / 2047 * i
+        ic = ImageCoordinate(uedge.line + i, uedge.sample)
+        od = orb.orbit_data(tm)
+        od.quat_from_principal_gic(ic, img, igc.dem)
+        odlist.append(od)
+    orb2 = OrbitQuaternionList(odlist)
+    ipi = Ipi(orb2, igc.ipi.camera, 0, tt.min_time, tt.max_time, tt)
+    igc2 = IpiImageGroundConnection(ipi, igc.dem, None)
+    return igc2
        

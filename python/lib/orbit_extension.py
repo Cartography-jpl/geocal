@@ -1,5 +1,6 @@
 from geocal_swig import *
 import math
+import numpy as np
 
 @classmethod
 def _kepler_orbit_from_tle(self, tle):
@@ -32,5 +33,53 @@ def _kepler_orbit_from_tle(self, tle):
                        ecc, inc, ra, ap, ma)
 
 KeplerOrbit.orbit_from_tle =_kepler_orbit_from_tle
+
+def _quat_from_principal_gp(self, gp, twist = 0):
+    '''Find a quaternion that maps the principal point to the given
+    ground location. This isn't unique, so we also take a "twist" and
+    an angle in degrees to rotate about the camera z axis.'''
+    v1 = [0,0,1]
+    v2 = gp.convert_to_cf().position - self.position_cf.position
+    # Inverse of aberration correction
+    v2 += np.linalg.norm(v2) / speed_of_light * self.velocity_cf
+    self.sc_to_cf = determine_quat_rot(v1, v2) * quat_rot_z(twist * deg_to_rad)
+    quat_normalize(self.sc_to_cf)
+
+QuaternionOrbitData.quat_from_principal_gp = _quat_from_principal_gp
+
+def _quat_from_principal_gic(self, ic, image, dem, twist = 0):
+    '''Find a quaternion that maps the principal point to the given
+    ground location. This isn't unique, so we also take a "twist" 
+    an angle in degrees to rotate about the camera z axis.
+
+    This variation takes the gp determined by the image coordinate in the
+    given image'''
+    gp = image.ground_coordinate(ic, dem)
+    self.quat_from_principal_gp(gp, twist=twist)
+
+QuaternionOrbitData.quat_from_principal_gic = _quat_from_principal_gic
+
+def _principal_gp(self, dem, resolution=1, max_height=9000):
+    '''Inverse of quat_from_principal_gp, returns gp and twist'''
+    cflv = self.cf_look_vector(ScLookVector(0,0,1))
+    gp = dem.intersect(self.position_cf, cflv, resolution, max_height)
+    v1 = [0,0,1]
+    v2 = gp.convert_to_cf().position - self.position_cf.position
+    # Inverse of aberration correction
+    v2 += np.linalg.norm(v2) / speed_of_light * self.velocity_cf
+    q = determine_quat_rot(v1, v2)
+    q2 = q.conj() * self.sc_to_cf
+    twist = math.atan2(q2.R_component_4, q2.R_component_1) * rad_to_deg * 2
+    return gp, twist
+
+QuaternionOrbitData.principal_gp = _principal_gp
+
+def _principal_gic(self, image, dem, resolution=1, max_height=9000):
+    '''Inverse of quat_from_principal_gic, returns ic and twist'''
+    gp, twist = self.principal_gp(dem,resolution=resolution,
+                                  max_height=max_height)
+    return image.coordinate(gp), twist
+
+QuaternionOrbitData.principal_gic = _principal_gic
 
 __all__ = []

@@ -1,4 +1,12 @@
 # This contains support routines for unit tests.
+import os
+# Sometimes have a DISPLAY environment variable set that can cause
+# problems (e.g., we are in a screen session). We never want to display
+# to the screen in a unit test, so make sure this is empty
+if "DISPLAY" in os.environ:
+    del os.environ["DISPLAY"]
+import matplotlib
+matplotlib.use('agg')
 import numpy as np
 from numpy.testing import assert_almost_equal, assert_approx_equal
 from unittest import SkipTest
@@ -7,8 +15,6 @@ import geocal_swig
 from geocal.orbit_extension import *
 from geocal.map_info_extension import *
 from geocal.misc import cib01_mapinfo
-import os.path
-import os
 import sys
 import subprocess
 import pytest

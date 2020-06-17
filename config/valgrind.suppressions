@@ -1,3 +1,35 @@
+# New version of geotiff library has some uninitialized memory in the
+# tiff tag stuff. This doesn't seem like a real issue, so add suppression
+{
+   geotiff_unitialized_memory
+   Memcheck:Cond
+   ...
+   fun:_ZNK6GeoCal11GeotiffFile10get_tiftagIN5blitz5ArrayIdLi1EEEEET_NS0_8tiftag_tE
+}
+{
+   geotiff_unitialized_memory2
+   Memcheck:Cond
+   ...
+   fun:_ZN12geotiff_file5basic11test_methodEv
+}
+{
+   geotiff_unitialized_memory3
+   Memcheck:Cond
+   ...
+   fun:_ZN9vicar_ogr5basic11test_methodEv
+}
+{
+   geotiff_unitialized_memory4
+   Memcheck:Cond
+   ...
+   fun:_ZN18vicar_raster_imageL19vicar_label_invokerEv
+}
+{
+   geotiff_unitialized_memory5
+   Memcheck:Cond
+   ...
+   fun:_ZN18vicar_raster_imageL28write_pixel_is_point_invokerEv
+}
 {
    harmless_looking_hdf_error
    Memcheck:Addr4

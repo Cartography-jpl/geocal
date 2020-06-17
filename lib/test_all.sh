@@ -18,7 +18,7 @@ echo ""
 echo "==========================================================="
 
 if [ ${valgrind} ] ; then
-    tool_command="valgrind --max-stackframe=5000000 --error-exitcode=1 --track-origins=yes --suppressions=$(dirname $0)/../config/valgrind.suppressions --gen-suppressions=yes"
+    tool_command="valgrind --max-stackframe=5000000 --error-exitcode=1 --track-origins=yes --suppressions=$(dirname $0)/../config/valgrind.suppressions --gen-suppressions=all"
 elif [ ${gdb} ]; then
     tool_command="gdb --args"
 else

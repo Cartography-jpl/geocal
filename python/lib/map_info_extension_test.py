@@ -2,6 +2,7 @@ from map_info_extension import *
 from misc import cib01_mapinfo
 from test_support import *
 
+@require_serialize
 def test_rotated_map(igc_half_meter_pushbroom):
     igc = igc_half_meter_pushbroom
     mi = cib01_mapinfo(0.5)

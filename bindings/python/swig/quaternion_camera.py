@@ -513,9 +513,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def _v_euler_with_derivative(self, *args):
         """
 
-        void GeoCal::QuaternionCamera::euler_with_derivative(const blitz::Array< AutoDerivative< double >, 1 > &Euler)
-        Update the frame_to_sc using the given Euler angles epsilon, beta,
-        data in radians. 
+        void GeoCal::QuaternionCamera::euler_with_derivative(const ArrayAd< double, 1 > &Euler)
+
         """
         return _quaternion_camera.QuaternionCamera__v_euler_with_derivative(self, *args)
 
@@ -532,8 +531,9 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def focal_plane_to_fc(self, *args):
         """
 
-        FrameCoordinate QuaternionCamera::focal_plane_to_fc(int Band, double Xfp, double Yfp) const
-        Convert focal plane coordinates to FrameCoordinate. 
+        FrameCoordinateWithDerivative QuaternionCamera::focal_plane_to_fc(int Band, const AutoDerivative< double > &Xfp, const AutoDerivative<
+        double > &Yfp) const
+        Convert focal plane coordinates to FrameCoordinateWithDerivative. 
         """
         return _quaternion_camera.QuaternionCamera_focal_plane_to_fc(self, *args)
 
@@ -551,13 +551,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def sc_look_vector(self, *args):
         """
 
-        ScLookVector QuaternionCamera::sc_look_vector(const FrameCoordinate &F, int Band) const
-        Convert from FrameCoordinate to ScLookVector.
+        virtual ScLookVector GeoCal::QuaternionCamera::sc_look_vector(const DcsLookVector &Dlv) const
 
-        It is perfectly allowable for F.line to be outside the range (0,
-        number_line(band) 1) or for F.sample to be outside the range (0,
-        number_sample(band) - 1). The conversion will just act as if the
-        camera has infinite extent. 
         """
         return _quaternion_camera.QuaternionCamera_sc_look_vector(self, *args)
 
@@ -565,7 +560,7 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def dcs_look_vector(self, *args):
         """
 
-        virtual DcsLookVectorWithDerivative GeoCal::QuaternionCamera::dcs_look_vector(const ScLookVectorWithDerivative &Sl) const
+        DcsLookVectorWithDerivative QuaternionCamera::dcs_look_vector(const FrameCoordinateWithDerivative &F, int Band) const
 
         """
         return _quaternion_camera.QuaternionCamera_dcs_look_vector(self, *args)
@@ -682,8 +677,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def fit_principal_point_line(self, *args):
         """
 
-        bool GeoCal::QuaternionCamera::fit_principal_point_line(int Band=0) const
-        Indicate if we fit for camera principal point line. 
+        void GeoCal::QuaternionCamera::fit_principal_point_line(bool V, int Band=0)
+
         """
         return _quaternion_camera.QuaternionCamera_fit_principal_point_line(self, *args)
 
@@ -691,8 +686,8 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def fit_principal_point_sample(self, *args):
         """
 
-        bool GeoCal::QuaternionCamera::fit_principal_point_sample(int Band=0) const
-        Indicate if we fit for camera principal point sample. 
+        void GeoCal::QuaternionCamera::fit_principal_point_sample(bool V, int Band=0)
+
         """
         return _quaternion_camera.QuaternionCamera_fit_principal_point_sample(self, *args)
 
@@ -700,19 +695,10 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def dcs_to_focal_plane(self, *args):
         """
 
-        void QuaternionCamera::dcs_to_focal_plane(int Band, const boost::math::quaternion< double > &Dcs, double &Xfp,
-        double &Yfp) const
-        Go from a look vector in the detector coordinate system to X and Y
-        coordinates in the focal plane.
+        void QuaternionCamera::dcs_to_focal_plane(int Band, const boost::math::quaternion< AutoDerivative< double > >
+        &Dcs, AutoDerivative< double > &Xfp, AutoDerivative< double > &Yfp)
+        const
 
-        X and Y should be given in millimeters.
-
-        Note that the look vector is not necessarily normalized (since some
-        implementation don't depend on this being normalized). If you need it
-        normalized, you need to do that yourself.
-
-        The default implementation is a pinhole camera, derived classed can
-        override this to add any non-linearity correction. 
         """
         return _quaternion_camera.QuaternionCamera_dcs_to_focal_plane(self, *args)
 
@@ -720,14 +706,9 @@ class QuaternionCamera(geocal_swig.camera.Camera):
     def focal_plane_to_dcs(self, *args):
         """
 
-        boost::math::quaternion< double > QuaternionCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
-        Go from X and Y coordinates in the focal plane to a look vector in the
-        detector coordinate system to.
+        boost::math::quaternion< AutoDerivative< double > > QuaternionCamera::focal_plane_to_dcs(int Band, const AutoDerivative< double > &Xfp, const AutoDerivative<
+        double > &Yfp) const
 
-        X and Y are given in millimeters.
-
-        The default implementation is a pinhole camera, derived classed can
-        override this to add any non-linearity correction. 
         """
         return _quaternion_camera.QuaternionCamera_focal_plane_to_dcs(self, *args)
 
@@ -742,16 +723,9 @@ class QuaternionCamera(geocal_swig.camera.Camera):
         GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > Frame_to_sc_q, double Number_line,
         double Number_sample, double Line_pitch, double Sample_pitch, double
         Focal_length, const FrameCoordinate &Principal_point, FrameConvention
-        Frame_convention=LINE_IS_X, FrameDirection
-        Line_direction=INCREASE_IS_POSITIVE, FrameDirection
-        Sample_direction=INCREASE_IS_POSITIVE)
-        Create a QuaternionCamera.
+        Frame_convention, FrameDirection Line_direction, FrameDirection
+        Sample_direction, const blitz::Array< bool, 1 > &Parameter_mask)
 
-        The orientation of the camera to the spacecraft to given by the
-        quaternion that takes frame coordinates to spacecraft coordinates. The
-        size of the camera and the line pitch, sample pitch, and focal length
-        are given. By convention, these are given in mm. Finally the
-        Principal_point (coordinates at center) are given. 
         """
         _quaternion_camera.QuaternionCamera_swiginit(self, _quaternion_camera.new_QuaternionCamera(*args))
     __swig_destroy__ = _quaternion_camera.delete_QuaternionCamera

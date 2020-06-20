@@ -219,7 +219,7 @@ class OrbitCorrection(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > OrbitCorrection::orbit_data(Time T) const
+        boost::shared_ptr< OrbitData > OrbitCorrection::orbit_data(const TimeWithDerivative &T) const
 
         """
         return _orbit_correction.OrbitCorrection_orbit_data(self, *args)

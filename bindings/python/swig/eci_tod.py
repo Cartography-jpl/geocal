@@ -200,8 +200,8 @@ class EciTod(geocal_swig.ground_coordinate.CartesianInertial):
     def __init__(self, *args):
         """
 
-        GeoCal::EciTod::EciTod(double X, double Y, double Z)
-        Make an EciTod with the given position, in meters. 
+        GeoCal::EciTod::EciTod(const boost::array< double, 3 > &Pos)
+        Create an Eci with the given position in meters. 
         """
         _eci_tod.EciTod_swiginit(self, _eci_tod.new_EciTod(*args))
 

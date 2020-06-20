@@ -199,7 +199,7 @@ class SpiceKernelList(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::SpiceKernelList::SpiceKernelList(const std::vector< std::string > &Kernel_list)
+        GeoCal::SpiceKernelList::SpiceKernelList()
 
         """
         _spice_kernel_list.SpiceKernelList_swiginit(self, _spice_kernel_list.new_SpiceKernelList(*args))

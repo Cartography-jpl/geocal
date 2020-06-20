@@ -213,7 +213,7 @@ def nitf_to_quaternion(Data):
 def quaternion_to_nitf(*args):
     """
 
-    blitz::Array<T, 1> GeoCal::quaternion_to_nitf(const boost::math::quaternion< T > &Q)
+    blitz::Array<T, 2> GeoCal::quaternion_to_nitf(const blitz::Array< T, 2 > &Q)
     Reverse nitf_to_quaternion.
 
     See nitf_to_quaternion for documentation on what this does. 

@@ -254,7 +254,7 @@ class CameraRadialDistortionAndTransform(geocal_swig.camera_radial_distortion.Ca
     def _v_ccd_cen(self, *args):
         """
 
-        void GeoCal::CameraRadialDistortionAndTransform::ccd_cen(const blitz::Array< double, 1 > &V)
+        const blitz::Array<double, 1>& GeoCal::CameraRadialDistortionAndTransform::ccd_cen() const
 
         """
         return _camera_radial_distortion_and_transform.CameraRadialDistortionAndTransform__v_ccd_cen(self, *args)

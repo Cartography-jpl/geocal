@@ -187,8 +187,10 @@ def gsl_fit(*args):
     void GeoCal::gsl_fit(const GslMatrix &X, const GslVector &Y, GslVector &C, GslMatrix &Cov,
     double &Chisq)
     This does a linear fit to solve the system Y = X * C (in the least
-    squares sense). The data Y is given equal weight for each point. We
-    return the Cov and chisqr in addition to the solution. 
+    squares sense).
+
+    The data Y is given equal weight for each point. We return the Cov and
+    chisqr in addition to the solution. 
     """
     return _geocal_gsl_fit.gsl_fit(*args)
 

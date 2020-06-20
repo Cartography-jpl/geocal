@@ -213,7 +213,7 @@ class TleOrbit(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > TleOrbit::orbit_data(Time T) const
+        virtual boost::shared_ptr<OrbitData> GeoCal::TleOrbit::orbit_data(const TimeWithDerivative &T) const
 
         """
         return _tle_orbit.TleOrbit_orbit_data(self, *args)

@@ -5382,7 +5382,7 @@ template<typename P_type> class PythonMemoryBlockReference;
 // MemoryBlockReference
 // to sneak in a friend declaration so we can access the internal block_
 // variable. This is because we don't want to edit the actual blitz header.
-#define blockLength() _fake() {return 0;}	 \
+#define blockLength() _fake() {return 0;}         \
   friend class PythonMemoryBlockReference<T_type>; \
   sizeType blockLength()
 #include <blitz/memblock.h>
@@ -5399,6 +5399,8 @@ template<typename P_type> class PythonMemoryBlockReference;
 // We'll have to update this as the numpy API increases
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
+#include <exception>
+#include <vector>
 
 //--------------------------------------------------------------
 // Helper class for python that holds an object and when deleted
@@ -5427,14 +5429,14 @@ public:
   typedef P_type T_type;
   PythonMemoryBlock(PyObject* numpy_obj)
     : blitz::MemoryBlock<P_type>(PyArray_NBYTES((PyArrayObject*) numpy_obj),
-		 (T_type *) PyArray_DATA((PyArrayObject*) numpy_obj)),
+                 (T_type *) PyArray_DATA((PyArrayObject*) numpy_obj)),
       python_obj(numpy_obj)
   {
     Py_XINCREF(python_obj); 
 #ifdef BZ_DEBUG_LOG_ALLOCATIONS
     std::cout << "PythonMemoryBlock: have reference to numpy object data at " << blitz::MemoryBlock<P_type>::data() << "\n"
-	      << "   numpy python object " << python_obj << "\n"
-	      << "   numpy python object ref count (after incrementing) " << Py_REFCNT(python_obj) <<"\n";
+              << "   numpy python object " << python_obj << "\n"
+              << "   numpy python object ref count (after incrementing) " << Py_REFCNT(python_obj) <<"\n";
 #endif    
   }
   virtual ~PythonMemoryBlock()
@@ -5445,8 +5447,8 @@ public:
     blitz::MemoryBlock<P_type>::dataBlockAddress() = 0;
 #ifdef BZ_DEBUG_LOG_ALLOCATIONS
     std::cout << "PythonMemoryBlock: removing reference to numpy object data at " << blitz::MemoryBlock<P_type>::data() << "\n"
-	      << "   numpy python object " << python_obj << "\n"
-	      << "   numpy python object ref count (before decrementing) " << Py_REFCNT(python_obj) <<"\n";
+              << "   numpy python object " << python_obj << "\n"
+              << "   numpy python object ref count (before decrementing) " << Py_REFCNT(python_obj) <<"\n";
 #endif    
     Py_XDECREF(python_obj);
   }
@@ -5467,9 +5469,9 @@ public:
   typedef P_type T_type;
   template<int N_rank>
   PythonMemoryBlockReference(blitz::Array<T_type, N_rank>& a,
-			   PyObject* numpy_obj)
+                           PyObject* numpy_obj)
     : blitz::MemoryBlockReference<T_type>(0, a.data(),
-					  blitz::neverDeleteData)
+                                          blitz::neverDeleteData)
   {
     blitz::MemoryBlockReference<T_type>::block_ =
       new PythonMemoryBlock<T_type>(numpy_obj);
@@ -5505,6 +5507,24 @@ template<> inline int type_to_npy<unsigned char>() {return NPY_UBYTE;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
 
 //--------------------------------------------------------------
+// Custom exception for throwing errors we encounter when
+// converting values that can be caught by typemaps and used
+// to output the actual error message
+//--------------------------------------------------------------
+
+struct ArrayConversionException : public std::exception
+{
+  ArrayConversionException(const std::string& msg) : message(msg) {}
+  virtual ~ArrayConversionException() throw() {}
+  const char * what () const throw ()
+  {
+    return message.c_str();
+  }
+
+  std::string message;
+};
+
+//--------------------------------------------------------------
 // Use the numpy command "asarray" to convert various python 
 // objects to a numpy object. This may return null, if the 
 // "asarray" fails. 
@@ -5515,8 +5535,8 @@ template<class T> PyObject* to_numpy(PyObject* obj);
 template<> inline PyObject* to_numpy<double>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-					     PyString_FromString("asarray"), 
-					     obj, numpy_dot_float64(), NULL);
+                                             PyString_FromString("asarray"), 
+                                             obj, numpy_dot_float64(), NULL);
   // Don't worry about errors , since we just return a null
   PyErr_Clear();
   return res;
@@ -5525,8 +5545,8 @@ template<> inline PyObject* to_numpy<double>(PyObject* obj)
 template<> inline PyObject* to_numpy<float>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-					     PyString_FromString("asarray"), 
-					     obj, numpy_dot_float32(), NULL);
+                                             PyString_FromString("asarray"), 
+                                             obj, numpy_dot_float32(), NULL);
   // Don't worry about errors , since we just return a null
   PyErr_Clear();
   return res;
@@ -5535,8 +5555,8 @@ template<> inline PyObject* to_numpy<float>(PyObject* obj)
 template<> inline PyObject* to_numpy<bool>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_bool(), NULL);
+                                    PyString_FromString("asarray"), 
+                                    obj, numpy_dot_bool(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5544,8 +5564,8 @@ template<> inline PyObject* to_numpy<bool>(PyObject* obj)
 template<> inline PyObject* to_numpy<int>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_int32(), NULL);
+                                    PyString_FromString("asarray"), 
+                                    obj, numpy_dot_int32(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5553,8 +5573,8 @@ template<> inline PyObject* to_numpy<int>(PyObject* obj)
 template<> inline PyObject* to_numpy<unsigned int>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_uint32(), NULL);
+                                    PyString_FromString("asarray"), 
+                                    obj, numpy_dot_uint32(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5562,8 +5582,8 @@ template<> inline PyObject* to_numpy<unsigned int>(PyObject* obj)
 template<> inline PyObject* to_numpy<short int>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_int16(), NULL);
+                                    PyString_FromString("asarray"), 
+                                    obj, numpy_dot_int16(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5571,8 +5591,8 @@ template<> inline PyObject* to_numpy<short int>(PyObject* obj)
 template<> inline PyObject* to_numpy<unsigned short int>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_uint16(), NULL);
+                                    PyString_FromString("asarray"), 
+                                    obj, numpy_dot_uint16(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5580,8 +5600,8 @@ template<> inline PyObject* to_numpy<unsigned short int>(PyObject* obj)
 template<> inline PyObject* to_numpy<char>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_int8(), NULL);
+                                    PyString_FromString("asarray"), 
+                                    obj, numpy_dot_int8(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5589,8 +5609,8 @@ template<> inline PyObject* to_numpy<char>(PyObject* obj)
 template<> inline PyObject* to_numpy<unsigned char>(PyObject* obj)
 {
   PyObject* res = PyObject_CallMethodObjArgs(numpy_module(), 
-				    PyString_FromString("asarray"), 
-				    obj, numpy_dot_uint8(), NULL);
+                                    PyString_FromString("asarray"), 
+                                    obj, numpy_dot_uint8(), NULL);
   PyErr_Clear();
   return res;
 }
@@ -5606,19 +5626,17 @@ template<> inline PyObject* to_numpy<unsigned char>(PyObject* obj)
 // If this fails, we throw an exception.
 //--------------------------------------------------------------
 
-template<class T, int D> inline blitz::Array<T, D> 
-  to_blitz_array(PyObject* numpy_obj)
+template<class T, int D> 
+inline blitz::Array<T, D> to_blitz_array(PyObject* numpy_obj)
 {
   PyArrayObject* numpy = (PyArrayObject*) numpy_obj;
   if(PyArray_NDIM(numpy) != D) {
     std::cerr << PyArray_NDIM(numpy) << "\n"
-	      << D << "\n";
-    throw 
-      std::runtime_error("Dimension of array is not the expected size");
+              << D << "\n";
+    throw std::runtime_error("Dimension of array is not the expected size");
   }
   if(PyArray_TYPE(numpy) != type_to_npy<T>()) {
-    throw 
-      std::runtime_error("Type of array not the expected type");
+    throw std::runtime_error("Type of array not the expected type");
   }
   blitz::TinyVector<int, D> shape, stride;
   for(int i = 0; i < D; ++i) {
@@ -5627,16 +5645,59 @@ template<class T, int D> inline blitz::Array<T, D>
     // of type T.
     stride(i) = PyArray_STRIDE(numpy, i) / sizeof(T);
     if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE(numpy, i)) {
-      throw 
-	std::runtime_error("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
+      throw std::runtime_error("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
     }
   }
   blitz::Array<T, D> a((T*)PyArray_DATA(numpy), shape, stride, 
-		       blitz::neverDeleteData);
+                       blitz::neverDeleteData);
   // Stash a reference to numpy_obj in array, so it doesn't disappear
   // while the blitz::Array still exists
   PythonMemoryBlockReference<T> br(a, numpy_obj);
   return a;
+}
+
+template<class TYPE, int DIM> 
+inline void iter_to_vector_of_arrays(PyObject *sequence, std::vector<blitz::Array<TYPE, DIM> >& arr_vec)
+{
+
+  if (PyUnicode_Check(sequence)) {
+    throw ArrayConversionException("iter_to_vector_of_arrays: unicode objects are not supported");
+  }
+
+  PyObject *iterator = PyObject_GetIter(sequence);
+  PyObject *item;
+
+  if (iterator == NULL) {
+    throw ArrayConversionException("iter_to_vector_of_arrays: passed object is not iterable");
+  }
+
+  int iter_index = 0;
+  while ((item = PyIter_Next(iterator))) {
+    PythonObject numpy;
+    numpy.obj = to_numpy<TYPE>(item);
+    if(!numpy.obj) {
+      std::stringstream err_msg;
+      err_msg << "iter_to_vector_of_arrays: object is not a numpy object at index: " << iter_index;
+      throw ArrayConversionException(err_msg.str());
+    }
+    if(PyArray_NDIM((PyArrayObject*) numpy.obj) != DIM) {
+      std::stringstream err_msg;
+      err_msg << "iter_to_vector_of_arrays: incorrect dimension of numpy object at index: " << iter_index << ", expected dimension: " << DIM;
+      throw ArrayConversionException(err_msg.str());
+    }
+
+    blitz::Array<TYPE, DIM> item_arr(to_blitz_array<TYPE, DIM>(numpy));
+    arr_vec.push_back(item_arr);
+
+    Py_DECREF(item);
+    iter_index++;
+  }
+
+  Py_DECREF(iterator);
+
+  if (PyErr_Occurred()) {
+     throw ArrayConversionException("iter_to_vector_of_arrays: an error occured iterating over input object");
+  }
 }
 
 
@@ -5755,7 +5816,8 @@ namespace swig {
 	  if (vec) {
 	    vtype *pseq = new vtype();
 	    PyObject *iterator = PyObject_GetIter(obj);
-	    while(PyObject *item = PyIter_Next(iterator)) {
+	    PyObject *item;
+	    while((item = PyIter_Next(iterator))) {
 	      boost::shared_ptr<T> *itemp;
 	      int newmem = 0;
 	      int res = SWIG_ConvertPtrAndOwn(item, (void**) &itemp, 
@@ -11423,7 +11485,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__velocity_ci(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -14203,7 +14265,7 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData__velocity_cf(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -17871,7 +17933,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter__SWIG_0(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -18257,7 +18319,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter_subset__SWIG_0(PyObject *SWIGUNUSE
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -18645,7 +18707,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter_mask(PyObject *SWIGUNUSEDPARM(self
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -18793,7 +18855,7 @@ SWIGINTERN PyObject *_wrap_Orbit_interpolate__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   resultobj = SWIG_Py_Void();
   {
     PyObject *res;
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -18816,7 +18878,7 @@ SWIGINTERN PyObject *_wrap_Orbit_interpolate__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   }
   {
     PyObject *res;
-    /*@SWIG:../../GeoCal/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -23408,29 +23470,29 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"OrbitData_resolution_meter", _wrap_OrbitData_resolution_meter, METH_VARARGS, (char *)"\n"
 		"\n"
-		"double OrbitData::resolution_meter(const Camera &C, int Band=0) const\n"
+		"double OrbitData::resolution_meter(const Camera &C, const FrameCoordinate &Fc, int Band=0) const\n"
 		"Calculate the approximate resolution on the ground of a given Camera\n"
 		"for this OrbitData.\n"
 		"\n"
-		"This finds the intersection with the reference surface for the center\n"
+		"This finds the intersection with the reference surface for the given\n"
 		"pixel of the camera, + 1 in the line and sample direction. We find the\n"
 		"difference in meters between these points, and select the maximum\n"
 		"value. \n"
 		""},
 	 { (char *)"OrbitData_ci_look_vector", _wrap_OrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const =0\n"
+		"virtual CartesianInertialLookVector GeoCal::OrbitData::ci_look_vector(const ScLookVector &Sl) const =0\n"
 		"Convert from ScLookVector to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"OrbitData_cf_look_vector", _wrap_OrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const =0\n"
+		"virtual CartesianFixedLookVector GeoCal::OrbitData::cf_look_vector(const ScLookVector &Sl) const =0\n"
 		"Convert from ScLookVector to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"OrbitData_sc_look_vector", _wrap_OrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative &Ci) const =0\n"
-		"Convert from CartesianInertialLookVector to ScLookVector. \n"
+		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const =0\n"
+		"Convert from CartesianFixedLookVector to ScLookVector. \n"
 		""},
 	 { (char *)"OrbitData_frame_coordinate", _wrap_OrbitData_frame_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23515,34 +23577,30 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitData_swigregister", OrbitData_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_QuaternionOrbitData", _wrap_new_QuaternionOrbitData, METH_VARARGS, (char *)"\n"
 		"\n"
-		"QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const\n"
-		"boost::array< double, 3 > &vel_inertial, const\n"
-		"boost::math::quaternion< double > &sc_to_ci_q)\n"
-		"Construct QuaternionOrbitData.\n"
-		"\n"
-		"This takes data in a CartesianInertial coordinate system (e.g., Eci\n"
-		"coordinates). \n"
+		"QuaternionOrbitData::QuaternionOrbitData(const QuaternionOrbitData &V)\n"
+		"Copy constructor. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_ci_look_vector", _wrap_QuaternionOrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
+		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const\n"
 		"Convert to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_cf_look_vector", _wrap_QuaternionOrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl) const\n"
+		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const\n"
 		"Convert to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_sc_look_vector", _wrap_QuaternionOrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative &Ci) const\n"
+		"ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const\n"
 		"Convert to ScLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_interpolate", _wrap_QuaternionOrbitData_interpolate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const\n"
-		"TimeWithDerivative &tm, bool Extrapolation_ok=false)\n"
-		"Interpolate between two QuaternionOrbitData for the given time. \n"
+		"Time &tm, bool Extrapolation_ok=false)\n"
+		"Interpolate between two QuaternionOrbitData for the given time,\n"
+		"without interpolating the derivative stuff. \n"
 		""},
 	 { (char *)"QuaternionOrbitData__v_sc_to_ci", _wrap_QuaternionOrbitData__v_sc_to_ci, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23620,19 +23678,15 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit_ci_look_vector", _wrap_Orbit_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianInertialLookVector GeoCal::Orbit::ci_look_vector(Time T, const ScLookVector &Sl) const\n"
-		"Convert from ScLookVector to CartesianInertialLookVector for the given\n"
-		"time.\n"
+		"virtual CartesianInertialLookVectorWithDerivative GeoCal::Orbit::ci_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)\n"
+		"const\n"
 		"\n"
-		"We should have min_time() <= T < max_time(). \n"
 		""},
 	 { (char *)"Orbit_cf_look_vector", _wrap_Orbit_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::Orbit::cf_look_vector(Time T, const ScLookVector &Sl) const\n"
-		"Convert from ScLookVector to CartesianFixedLookVector for the given\n"
-		"time.\n"
+		"virtual CartesianFixedLookVectorWithDerivative GeoCal::Orbit::cf_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)\n"
+		"const\n"
 		"\n"
-		"We should have min_time() <= T < max_time(). \n"
 		""},
 	 { (char *)"Orbit_frame_coordinate", _wrap_Orbit_frame_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23660,11 +23714,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit_sc_look_vector", _wrap_Orbit_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianInertialLookVector &Ci) const\n"
-		"Convert from CartesianInertialLookVector to ScLookVector for the given\n"
-		"time.\n"
-		"\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixed &Pt) const\n"
+		"Return ScLookVector that sees a given point. \n"
 		""},
 	 { (char *)"Orbit_position_ci", _wrap_Orbit_position_ci, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23692,13 +23743,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Orbit_orbit_data", _wrap_Orbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(Time T) const =0\n"
+		"virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0\n"
 		"Return OrbitData for the given time.\n"
 		"\n"
-		"We should have min_time() <= T < max_time(). Note for orbit models\n"
-		"that you do not need to include the derivative information for this\n"
-		"version of orbit_data (which can be a great speed up). Users that want\n"
-		"that information should call the TimeWithDerivative version. \n"
+		"We should have min_time() <= T < max_time(). This version should\n"
+		"include any AutoDerivative information if the orbit model has\n"
+		"parameters. \n"
 		""},
 	 { (char *)"Orbit___str__", (PyCFunction)_wrap_Orbit___str__, METH_O, NULL},
 	 { (char *)"Orbit__v_parameter", _wrap_Orbit__v_parameter, METH_VARARGS, NULL},
@@ -23710,17 +23760,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Orbit__v_parameter_mask", (PyCFunction)_wrap_Orbit__v_parameter_mask, METH_O, NULL},
 	 { (char *)"Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::math::quaternion< double > Orbit::interpolate(const boost::math::quaternion< double > &Q1, const\n"
-		"boost::math::quaternion< double > &Q2, double toffset, double tspace)\n"
-		"This is a utility function for use by derived classes.\n"
+		"boost::math::quaternion< AutoDerivative< double > > Orbit::interpolate(const boost::math::quaternion< AutoDerivative< double > > &Q1, const\n"
+		"boost::math::quaternion< AutoDerivative< double > > &Q2, const\n"
+		"AutoDerivative< double > &toffset, double tspace)\n"
 		"\n"
-		"A common way of getting orbit data is to have discrete measurements of\n"
-		"the quaternion describing the rotation of the spacecraft. For a time t\n"
-		"between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the\n"
-		"quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This\n"
-		"function then returns Qres. We calculate this by determining the axis\n"
-		"and angle rotation that takes use from Q1 to Q2, and then do a linear\n"
-		"interpolation of that angle for the given time. \n"
 		""},
 	 { (char *)"Orbit_notify_update_do", _wrap_Orbit_notify_update_do, METH_VARARGS, NULL},
 	 { (char *)"disown_Orbit", (PyCFunction)_wrap_disown_Orbit, METH_O, NULL},
@@ -23743,13 +23786,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"KeplerOrbit_orbit_data", _wrap_KeplerOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(Time T) const\n"
+		"boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(const TimeWithDerivative &T) const\n"
 		"Return OrbitData for the given time.\n"
 		"\n"
-		"We should have min_time() <= T < max_time(). Note for orbit models\n"
-		"that you do not need to include the derivative information for this\n"
-		"version of orbit_data (which can be a great speed up). Users that want\n"
-		"that information should call the TimeWithDerivative version. \n"
+		"We should have min_time() <= T < max_time(). This version should\n"
+		"include any AutoDerivative information if the orbit model has\n"
+		"parameters. \n"
 		""},
 	 { (char *)"KeplerOrbit__v_epoch", _wrap_KeplerOrbit__v_epoch, METH_VARARGS, (char *)"\n"
 		"\n"

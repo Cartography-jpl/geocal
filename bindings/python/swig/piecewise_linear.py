@@ -290,7 +290,7 @@ class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
     def __init__(self, X, T):
         """
 
-        PiecewiseLinear::PiecewiseLinear(const std::vector< Time > &X, const blitz::Array< int, 1 > &T)
+        GeoCal::PiecewiseLinear::PiecewiseLinear()
 
         """
         _piecewise_linear.PiecewiseLinear_swiginit(self, _piecewise_linear.new_PiecewiseLinear(X, T))

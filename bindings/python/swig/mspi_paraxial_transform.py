@@ -233,9 +233,10 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
     def paraxial_to_real(self, *args):
         """
 
-        void MspiParaxialTransform::paraxial_to_real(int Row_number, double Paraxial_x, double Paraxial_y, double &Real_x,
-        double &Real_y) const
-        Convert from paraxial to real coordinates. 
+        void MspiParaxialTransform::paraxial_to_real(int Row_number, const AutoDerivative< double > &Paraxial_x, const
+        AutoDerivative< double > &Paraxial_y, AutoDerivative< double >
+        &Real_x, AutoDerivative< double > &Real_y) const
+
         """
         return _mspi_paraxial_transform.MspiParaxialTransform_paraxial_to_real(self, *args)
 
@@ -243,9 +244,10 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
     def real_to_paraxial(self, *args):
         """
 
-        void MspiParaxialTransform::real_to_paraxial(int Row_number, double Real_x, double Real_y, double &Paraxial_x,
-        double &Paraxial_y) const
-        Convert from real coordinates to paraxial. 
+        void MspiParaxialTransform::real_to_paraxial(int Row_number, const AutoDerivative< double > &Real_x, const
+        AutoDerivative< double > &Real_y, AutoDerivative< double >
+        &Paraxial_x, AutoDerivative< double > &Paraxial_y) const
+
         """
         return _mspi_paraxial_transform.MspiParaxialTransform_real_to_paraxial(self, *args)
 

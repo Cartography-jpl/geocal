@@ -506,7 +506,7 @@ def test_create_staring_glas(isolated_dir, igc_staring):
         print(f2,file=fh)
     igc_g2 = f2.image_segment[0].glas_gfm.igc()
 
-    if True:
+    if False:
         rsm = igc_msp2.generate_rsm("rsm_generate_report.txt")
         return
     

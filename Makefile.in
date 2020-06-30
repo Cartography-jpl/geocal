@@ -946,7 +946,8 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc \
 	@srcoco3@/jia_sample.cc \
 	@swigrules@/lib/swig_type_mapper_base.cc \
-	@swigrules@/lib/serialize_function.cc
+	@swigrules@/lib/serialize_function.cc \
+	@swigrules@/lib/weak_ptr_serialize_support.cc
 @HAVE_HDF5_TRUE@am__objects_8 = @srcsupport@/libgeocal_la-hdf_file.lo
 @HAVE_HDF5_TRUE@am__objects_9 =  \
 @HAVE_HDF5_TRUE@	@srcimplementation@/libgeocal_la-hdf_orbit.lo
@@ -1151,7 +1152,8 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcmspi@/libgeocal_la-air_mspi_igc_collection.lo \
 	@srcoco3@/libgeocal_la-jia_sample.lo \
 	@swigrules@/lib/libgeocal_la-swig_type_mapper_base.lo \
-	@swigrules@/lib/libgeocal_la-serialize_function.lo
+	@swigrules@/lib/libgeocal_la-serialize_function.lo \
+	@swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo
 libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
 libgeocal_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(libgeocal_la_CXXFLAGS) \
@@ -1915,6 +1917,7 @@ am__depfiles_remade =  \
 	@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo \
 	@swigrules@/lib/$(DEPDIR)/libgeocal_la-serialize_function.Plo \
 	@swigrules@/lib/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo \
+	@swigrules@/lib/$(DEPDIR)/libgeocal_la-weak_ptr_serialize_support.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_file_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_collection_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_wrap.Plo \
@@ -2380,7 +2383,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@swigrules@/lib/python_lib_init.h \
 	@swigrules@/lib/swig_type_mapper.h \
 	@swigrules@/lib/swig_to_python.h \
-	@swigrules@/lib/serialize_function.h
+	@swigrules@/lib/serialize_function.h \
+	@swigrules@/lib/weak_ptr_serialize_support.h
 am__libraw_HEADERS_DIST = @srcraw@/libraw.h @srcraw@/libraw_alloc.h \
 	@srcraw@/libraw_const.h @srcraw@/libraw_datastream.h \
 	@srcraw@/libraw_internal.h @srcraw@/libraw_internal_funcs.h \
@@ -2974,6 +2978,9 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@swigrules@/lib/generic_object.cc.sample \
 	@swigrules@/lib/generic_object.h.sample \
 	@swigrules@/lib/generic_object.i.sample \
+	@swigrules@/lib/generic_object_map.cc.sample \
+	@swigrules@/lib/generic_object_map.h.sample \
+	@swigrules@/lib/generic_object_map.i.sample \
 	@swigrules@/lib/common.i.sample \
 	@swigrules@/lib/printable.h.sample \
 	@swigrules@/lib/serialize_support.h.sample \
@@ -3392,7 +3399,8 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcmspi@/air_mspi_igc.cc @srcmspi@/air_mspi_igc_collection.cc \
 	@srcoco3@/jia_sample.cc \
 	@swigrules@/lib/swig_type_mapper_base.cc \
-	@swigrules@/lib/serialize_function.cc
+	@swigrules@/lib/serialize_function.cc \
+	@swigrules@/lib/weak_ptr_serialize_support.cc
 
 # Files that contain SWIG wrapper information.
 
@@ -3787,7 +3795,8 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@swigrules@/lib/python_lib_init.h \
 	@swigrules@/lib/swig_type_mapper.h \
 	@swigrules@/lib/swig_to_python.h \
-	@swigrules@/lib/serialize_function.h
+	@swigrules@/lib/serialize_function.h \
+	@swigrules@/lib/weak_ptr_serialize_support.h
 #  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
 geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@libgeocal@/geocal_shared_ptr.i @libgeocal@/swig_quaternion.i \
@@ -5620,6 +5629,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @swigrules@/lib/libgeocal_la-serialize_function.lo:  \
 	@swigrules@/lib/$(am__dirstamp) \
 	@swigrules@/lib/$(DEPDIR)/$(am__dirstamp)
+@swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo:  \
+	@swigrules@/lib/$(am__dirstamp) \
+	@swigrules@/lib/$(DEPDIR)/$(am__dirstamp)
 
 libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libgeocal_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libgeocal_la_LINK) -rpath $(libdir) $(libgeocal_la_OBJECTS) $(libgeocal_la_LIBADD) $(LIBS)
@@ -6658,6 +6670,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigrules@/lib/$(DEPDIR)/libgeocal_la-serialize_function.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigrules@/lib/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigrules@/lib/$(DEPDIR)/libgeocal_la-weak_ptr_serialize_support.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_file_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_collection_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_wrap.Plo@am__quote@ # am--include-marker
@@ -9767,6 +9780,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigrules@/lib/serialize_function.cc' object='@swigrules@/lib/libgeocal_la-serialize_function.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigrules@/lib/libgeocal_la-serialize_function.lo `test -f '@swigrules@/lib/serialize_function.cc' || echo '$(srcdir)/'`@swigrules@/lib/serialize_function.cc
+
+@swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo: @swigrules@/lib/weak_ptr_serialize_support.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo -MD -MP -MF @swigrules@/lib/$(DEPDIR)/libgeocal_la-weak_ptr_serialize_support.Tpo -c -o @swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo `test -f '@swigrules@/lib/weak_ptr_serialize_support.cc' || echo '$(srcdir)/'`@swigrules@/lib/weak_ptr_serialize_support.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigrules@/lib/$(DEPDIR)/libgeocal_la-weak_ptr_serialize_support.Tpo @swigrules@/lib/$(DEPDIR)/libgeocal_la-weak_ptr_serialize_support.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigrules@/lib/weak_ptr_serialize_support.cc' object='@swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo `test -f '@swigrules@/lib/weak_ptr_serialize_support.cc' || echo '$(srcdir)/'`@swigrules@/lib/weak_ptr_serialize_support.cc
 
 @srcraw@/libraw_la-dcraw_common.lo: @srcraw@/dcraw_common.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-dcraw_common.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Tpo -c -o @srcraw@/libraw_la-dcraw_common.lo `test -f '@srcraw@/dcraw_common.cpp' || echo '$(srcdir)/'`@srcraw@/dcraw_common.cpp
@@ -13446,6 +13466,7 @@ distclean: distclean-am
 	-rm -f @srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo
 	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-serialize_function.Plo
 	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo
+	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-weak_ptr_serialize_support.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_file_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_collection_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_wrap.Plo
@@ -14090,6 +14111,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo
 	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-serialize_function.Plo
 	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo
+	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-weak_ptr_serialize_support.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_file_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_collection_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-air_mspi_igc_wrap.Plo

@@ -4254,7 +4254,7 @@ inline PyObject* cpickle_module()
 {
   static PyObject* mod = 0;
   if(!mod)
-    mod = PyImport_ImportModule("cPickle");
+    mod = PyImport_ImportModule("pickle");
   return mod;
 }
 

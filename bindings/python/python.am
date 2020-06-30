@@ -34,8 +34,10 @@ geocalinc_HEADERS+= @swigrules@/lib/python_lib_init.h
 geocalinc_HEADERS+= @swigrules@/lib/swig_type_mapper.h
 geocalinc_HEADERS+= @swigrules@/lib/swig_to_python.h
 geocalinc_HEADERS+= @swigrules@/lib/serialize_function.h
+geocalinc_HEADERS+= @swigrules@/lib/weak_ptr_serialize_support.h
 libgeocal_la_SOURCES+= @swigrules@/lib/swig_type_mapper_base.cc
 libgeocal_la_SOURCES+= @swigrules@/lib/serialize_function.cc
+libgeocal_la_SOURCES+= @swigrules@/lib/weak_ptr_serialize_support.cc
 libgeocal_la_CPPFLAGS+= -DSWIG_MAPPER_NAMESPACE=GeoCal
 SWIG_CPPFLAGS+= -DSWIG_MAPPER_NAMESPACE=GeoCal 
 if HAVE_BOOST_SERIALIZATION

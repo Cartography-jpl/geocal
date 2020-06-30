@@ -474,15 +474,23 @@ def igc_half_meter_pushbroom():
     tm = Time.parse_time("2015-02-03T10:00:00Z")
     # Camera that has a roughly 0.5 meter resolution nadir looking, i.e.,
     # about the resolution of WV-2
-    cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, 2048, 20e-9,
-                           20-9, 1.6e7, FrameCoordinate(0,1024))
+    cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, 2048, 2e-3,
+                           2e-3, 2.85e3, FrameCoordinate(0,1024))
     # Time delta that is roughly 0.5 meter apart
     tdelta = 7.5e-5
     dem = SimpleDem()
     tt = ConstantSpacingTimeTable(tm, tm + tdelta * 2048, tdelta)
     # "Real" igc
     ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
-    return IpiImageGroundConnection(ipi, dem, None)
+    igc = IpiImageGroundConnection(ipi, dem, None)
+    if False:
+        ic = ImageCoordinate(igc.number_line / 2, igc.number_sample / 2)
+        gc1 = igc.ground_coordinate(ic)
+        gc2 = igc.ground_coordinate(ImageCoordinate(ic.line + 1, ic.sample))
+        gc3 = igc.ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1))
+        print("resolution line dir: ", distance(gc1, gc2))
+        print("resolution sample dir: ", distance(gc1, gc3))
+    return igc
 
 def _zenith_angle(orb, tm, pt):
     '''Zenith angle, 180 degrees looks straight up'''
@@ -522,5 +530,24 @@ def igc_staring(igc_half_meter_pushbroom):
     orb2 = OrbitQuaternionList(odlist)
     ipi = Ipi(orb2, igc.ipi.camera, 0, tt.min_time, tt.max_time, tt)
     igc2 = IpiImageGroundConnection(ipi, igc.dem, None)
+    if False:
+        ic = ImageCoordinate(0, igc2.number_sample / 2)
+        gc1 = igc2.ground_coordinate(ic)
+        gc2 = igc2.ground_coordinate(ImageCoordinate(ic.line + 1, ic.sample))
+        gc3 = igc2.ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1))
+        print("resolution upper edge line dir: ", distance(gc1, gc2))
+        print("resolution upper edge sample dir: ", distance(gc1, gc3))
+        ic = ImageCoordinate(igc2.number_line / 2, igc2.number_sample / 2)
+        gc1 = igc2.ground_coordinate(ic)
+        gc2 = igc2.ground_coordinate(ImageCoordinate(ic.line + 1, ic.sample))
+        gc3 = igc2.ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1))
+        print("resolution middle line dir: ", distance(gc1, gc2))
+        print("resolution middle sample dir: ", distance(gc1, gc3))
+        ic = ImageCoordinate(igc2.number_line - 1, igc2.number_sample / 2)
+        gc1 = igc2.ground_coordinate(ic)
+        gc2 = igc2.ground_coordinate(ImageCoordinate(ic.line - 1, ic.sample))
+        gc3 = igc2.ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1))
+        print("resolution bottom edge line dir: ", distance(gc1, gc2))
+        print("resolution bottom edge sample dir: ", distance(gc1, gc3))
     return igc2
        

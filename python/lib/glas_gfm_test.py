@@ -472,6 +472,8 @@ def test_create_staring_glas(isolated_dir, igc_staring):
     cam_g = GlasGfmCamera(1, igc_r.ipi.camera.number_sample(0))
     # 1e-3 converts from mm for QuaternionCamera to meter of GlasGfmCamera
     cam_g.focal_length = igc_r.ipi.camera.focal_length * 1e-3
+    # MSP requires focal length to be from 0 100. Not clear why it would
+    # restrict this
     cam_g.field_alignment_fit(igc_r.ipi.camera,
                               igc_r.ipi.camera.number_sample(0))
     ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
@@ -492,15 +494,45 @@ def test_create_staring_glas(isolated_dir, igc_staring):
             img[0, i,j] = i * 10 + j
     f.image_segment.append(pynitf.NitfImageSegment(img))
     f.image_segment[0].create_glas_gfm(igc_g)
+    # Turn off refraction in MSP calculation. Normally we want this on,
+    # but we turn it off so we can get better agreement with our Igc.
+    # We'll probably want to investigate this and include refraction in
+    # our calculation, but punt on this for now.
+    f.image_segment[0].glas_gfm.tre_csexrb.atm_refr_flag = 0
     f.write("glas_test.ntf")
     f2 = NitfFile("glas_test.ntf")
+    igc_msp2 = IgcMsp("glas_test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
     with open("f2.txt", "w") as fh:
         print(f2,file=fh)
     igc_g2 = f2.image_segment[0].glas_gfm.igc()
+
+    if True:
+        rsm = igc_msp2.generate_rsm("rsm_generate_report.txt")
+        return
+    
     # Slightly larger tolerance here because there is truncation of floats when
     # we write the out.
+    diff = []
+    diff2 = []
+    h = []
+    h2 = []
     for i in range(0,2048,100):
         for j in range(0,2048,100):
-            assert distance(igc_r.ground_coordinate(ImageCoordinate(i,j)),
-                            igc_g2.ground_coordinate(ImageCoordinate(i,j))) < 0.05 
-            
+            gc1 = igc_r.ground_coordinate(ImageCoordinate(i,j))
+            gc2 = igc_g2.ground_coordinate(ImageCoordinate(i,j))
+            gc3 = igc_msp2.ground_coordinate(ImageCoordinate(i,j))
+            assert distance(gc1, gc2) < 0.05
+            diff.append(distance(gc3, gc2))
+            diff2.append(distance(gc3, gc1))
+            h.append(gc3.height_reference_surface)
+            h2.append(gc2.height_reference_surface)
+    # Small differences, not clear what this is from. Maybe aberration of light?
+    # Refraction is a much bigger effect here with the larger angles
+    print("max diff: ", max(diff))
+    print("max diff: ", max(diff2))
+    print("max h: ", max(h))
+    print("max h: ", max(h2))
+    print(diff)
+    print(diff2)
+    print(h)
+    print(h2)

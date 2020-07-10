@@ -206,13 +206,20 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Number_line=1, Number_sample=256):
+    def __init__(self, *args):
         """
 
-        GlasGfmCamera::GlasGfmCamera(int Number_line=1, int Number_sample=256)
+        GlasGfmCamera::GlasGfmCamera(const QuaternionCamera &Cam, int Band, double Delta_line, double
+        Delta_sample, const std::string &Band_type="N", double
+        Band_wavelength=1.45, const Time
+        &Focal_length_time=Time::time_j2000(0))
+        It is common to create a GlasGfmCamera by fitting it to another
+        camera.
 
+        This does that in one step, taking a QuaternionCamera and fitting for
+        the given Band. This version is for Frame "F" type sensor. 
         """
-        _glas_gfm_camera.GlasGfmCamera_swiginit(self, _glas_gfm_camera.new_GlasGfmCamera(Number_line, Number_sample))
+        _glas_gfm_camera.GlasGfmCamera_swiginit(self, _glas_gfm_camera.new_GlasGfmCamera(*args))
 
     def set_number_line(self, V):
         """
@@ -497,16 +504,19 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
       self._v_field_alignment(value)
 
 
-    def field_alignment_fit(self, Cam, Delta_sample):
+    def field_alignment_fit(self, Cam, Delta_sample, Band=0):
         """
 
-        void GlasGfmCamera::field_alignment_fit(const Camera &Cam, double Delta_sample)
+        void GlasGfmCamera::field_alignment_fit(const Camera &Cam, double Delta_sample, int Band=0)
         Populate the field_alignment, sample_number_first_, delta_sample_pair_
         to match the given camera.
 
-        Only applicable for sensor type "S". 
+        Only applicable for sensor type "S".
+
+        You may want to call compare_camera to check how accurate the
+        approximation is. 
         """
-        return _glas_gfm_camera.GlasGfmCamera_field_alignment_fit(self, Cam, Delta_sample)
+        return _glas_gfm_camera.GlasGfmCamera_field_alignment_fit(self, Cam, Delta_sample, Band)
 
 
     def _v_field_angle_type(self, *args):
@@ -620,16 +630,34 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
     def field_alignment_block(self, *args):
         """
 
-        void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample)
+        void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample, int
+        Band=0)
         Populate the field_alignment, first_line_block, first_sample_block,
         delta_line and delta_sample to match the given camera.
 
         This creates only one block - we currently don't support multiple
         blocks.
 
-        Only applicable for sensor type "F" and field_angle_type 0. 
+        Only applicable for sensor type "F" and field_angle_type 0.
+
+        You may want to call compare_camera to check how accurate the
+        approximation is. 
         """
         return _glas_gfm_camera.GlasGfmCamera_field_alignment_block(self, *args)
+
+
+    def compare_camera(self, Cam, Band=0):
+        """
+
+        void GlasGfmCamera::compare_camera(const Camera &Cam, double &max_line_diff, double &max_sample_diff,
+        int Band=0) const
+        Return the maximum difference in frame coordinate line and sample
+        between this camera and another camera.
+
+        You may want to call this after doing field_alignment_block or
+        field_alignment_fit. 
+        """
+        return _glas_gfm_camera.GlasGfmCamera_compare_camera(self, Cam, Band)
 
 
     def __reduce__(self):
@@ -661,6 +689,7 @@ GlasGfmCamera._v_first_sample_block = new_instancemethod(_glas_gfm_camera.GlasGf
 GlasGfmCamera._v_delta_line_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_delta_line_block, None, GlasGfmCamera)
 GlasGfmCamera._v_delta_sample_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_delta_sample_block, None, GlasGfmCamera)
 GlasGfmCamera.field_alignment_block = new_instancemethod(_glas_gfm_camera.GlasGfmCamera_field_alignment_block, None, GlasGfmCamera)
+GlasGfmCamera.compare_camera = new_instancemethod(_glas_gfm_camera.GlasGfmCamera_compare_camera, None, GlasGfmCamera)
 GlasGfmCamera_swigregister = _glas_gfm_camera.GlasGfmCamera_swigregister
 GlasGfmCamera_swigregister(GlasGfmCamera)
 

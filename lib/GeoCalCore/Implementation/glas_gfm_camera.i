@@ -9,12 +9,22 @@
 %}
 
 %base_import(camera)
+%import "quaternion_camera.i"
 
 %geocal_shared_ptr(GeoCal::GlasGfmCamera);
 namespace GeoCal {
 class GlasGfmCamera : public Camera {
 public:
   GlasGfmCamera(int Number_line = 1, int Number_sample = 256);
+  GlasGfmCamera(const QuaternionCamera& Cam, int Band, double Delta_sample,
+		const std::string& Band_type = "N",
+		double Band_wavelength = 1.45,
+		const Time& Focal_length_time = Time::time_j2000(0));
+  GlasGfmCamera(const QuaternionCamera& Cam, int Band, double Delta_line,
+		double Delta_sample,
+		const std::string& Band_type = "N",
+		double Band_wavelength = 1.45,
+		const Time& Focal_length_time = Time::time_j2000(0));
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;
   void set_number_line(int V);
@@ -47,7 +57,8 @@ public:
   %python_attribute_with_set(sample_number_first, double);
   %python_attribute_with_set(delta_sample_pair, double);
   %python_attribute_with_set(field_alignment, blitz::Array<double, 2>);
-  void field_alignment_fit(const Camera& Cam, double Delta_sample);
+  void field_alignment_fit(const Camera& Cam, double Delta_sample,
+			   int Band=0);
   %python_attribute_with_set(field_angle_type, int);
   %python_attribute_with_set(field_angle_interpolation_type, int);
   %python_attribute_with_set(first_line_block, blitz::Array<double, 1>);
@@ -57,7 +68,9 @@ public:
   const blitz::Array<double, 5>& field_alignment_block(int i) const;
   void field_alignment_block(int i, const blitz::Array<double, 5>& V);
   void field_alignment_block(const Camera& cam, double Delta_line,
-			     double Delta_sample);
+			     double Delta_sample, int Band = 0);
+  void compare_camera(const Camera& Cam, double& OUTPUT,
+		      double& OUTPUT, int Band = 0) const;
   %pickle_serialization();
 };
 }

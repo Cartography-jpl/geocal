@@ -1,6 +1,7 @@
 #ifndef GLAS_GFM_CAMERA_H
 #define GLAS_GFM_CAMERA_H
 #include "camera.h"
+#include "quaternion_camera.h"
 #include "geocal_exception.h"
 #include "geocal_quaternion.h"
 #include "geocal_autoderivative_quaternion.h"
@@ -28,6 +29,15 @@ public:
   // Not clear what if any arguments we want to constructor. So for
   // now, just leave most everything off.
   GlasGfmCamera(int Number_line = 1, int Number_sample = 256);
+  GlasGfmCamera(const QuaternionCamera& Cam, int Band, double Delta_sample,
+		const std::string& Band_type = "N",
+		double Band_wavelength = 1.45,
+		const Time& Focal_length_time = Time::time_j2000(0));
+  GlasGfmCamera(const QuaternionCamera& Cam, int Band, double Delta_line,
+		double Delta_sample,
+		const std::string& Band_type = "N",
+		double Band_wavelength = 1.45,
+		const Time& Focal_length_time = Time::time_j2000(0));
   virtual ~GlasGfmCamera() {}
   void print(std::ostream& Os) const
   { Os << "GlasGfmCamera"; }
@@ -229,7 +239,8 @@ public:
   {return field_alignment_;}
   void field_alignment(const blitz::Array<double, 2>& V)
   { field_alignment_.reference(V.copy()); notify_update();}
-  void field_alignment_fit(const Camera& Cam, double Delta_sample);
+  void field_alignment_fit(const Camera& Cam, double Delta_sample,
+			   int Band = 0);
 
 //-----------------------------------------------------------------------
 /// Field angle type. 0 for direct alignment grid, 1 for calibration
@@ -321,7 +332,10 @@ public:
   }
 
   void field_alignment_block(const Camera& Cam, double Delta_line,
-			     double Delta_sample);
+			     double Delta_sample, int Band = 0);
+
+  void compare_camera(const Camera& Cam, double& max_line_diff,
+		      double& max_sample_diff, int Band = 0) const;
     
 //-----------------------------------------------------------------------
 /// The UUID for the DES that contains this object, if any. This is an

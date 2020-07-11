@@ -513,6 +513,17 @@ bool VicarLiteFile::has_rsm() const
 }
 
 //-----------------------------------------------------------------------
+/// Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE label
+/// in it, indicating it has GLAS/GFM information.
+//-----------------------------------------------------------------------
+
+bool VicarLiteFile::has_igc_glas_gfm() const
+{
+  return (has_label("GEOTIFF GLAS_GFM_NITF_FILE") ||
+	  has_label("GEOTIFF GLAS_GFM_XML_FILE"));
+}
+
+//-----------------------------------------------------------------------
 /// Read metadata for Rpc.
 //-----------------------------------------------------------------------
 
@@ -573,7 +584,37 @@ boost::shared_ptr<Rsm> VicarLiteFile::rsm() const
     fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
   boost::filesystem::path p(file_name());
   boost::filesystem::path dir = p.parent_path();
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(has_label("GEOTIFF NAIF_CODE"))
+    naif_code = label<int>("NAIF_CODE", "GEOTIFF");
   if(has_label("GEOTIFF RSM_NITF_FILE"))
-    return rsm_read_nitf((dir / fname).string());
+    return rsm_read_nitf((dir / fname).string(), naif_code);
+  // Boost already stores naif code, so we don't need to set it
   return serialize_read<Rsm>((dir / fname).string());
+}
+
+//-----------------------------------------------------------------------
+/// Read metadata for GLAS/GFM. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<ImageGroundConnection> VicarLiteFile::igc_glas_gfm() const
+{
+  std::string fname;
+  if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
+    fname = label<std::string>("GLAS_GFM_NITF_FILE", "GEOTIFF");
+  else
+    fname = label<std::string>("GLAS_GFM_XML_FILE", "GEOTIFF");
+  boost::filesystem::path p(file_name());
+  boost::filesystem::path dir = p.parent_path();
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(has_label("GEOTIFF NAIF_CODE"))
+    naif_code = label<int>("NAIF_CODE", "GEOTIFF");
+  if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
+    return glas_gfm_read_nitf((dir / fname).string(), naif_code);
+  // Boost already stores naif code, so we don't need to set it
+  return serialize_read<ImageGroundConnection>((dir / fname).string());
 }

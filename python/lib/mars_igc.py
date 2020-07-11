@@ -114,7 +114,7 @@ def igc_mro_context_to_glas(igc_r):
                      AttCsattb.LAGRANGE,
                      AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
                      AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
-    orb_g = OrbitDes(porb,aorb)
+    orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
     band = 0
     delta_sample = 100
     cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)

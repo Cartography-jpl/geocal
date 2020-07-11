@@ -1,5 +1,5 @@
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
-                         ConstantSpacingTimeTable, SimpleCamera,
+                         ConstantSpacingTimeTable, SimpleCamera, Ecr,
                          QuaternionCamera, FrameCoordinate,
                          SimpleDem, IpiImageGroundConnection, Ipi,
                          Quaternion_double, OrbitDataImageGroundConnection)
@@ -27,6 +27,7 @@ if(have_pynitf):
         def __init__(self, iseg, tre_csexrb):
             self.iseg = iseg
             self.tre_csexrb = tre_csexrb
+            self.naif_code = Ecr.EARTH_NAIF_CODE
             if(self.tre_csexrb is not None and self.iseg.nitf_file is not None):
                 self.des = self.tre_csexrb.assoc_elem(self.iseg.nitf_file)
             else:
@@ -178,11 +179,14 @@ if(have_pynitf):
                         d.add_assoc_elem(d2)
             return res
 
-        def igc(self, include_image = False, dem = SimpleDem()):
+        def igc(self, include_image = False, dem = SimpleDem(),
+                naif_code = None):
             '''Return ImageGroundConnection for GLAS/GFM.
             You can either have the raster_image or raster_image_multi_band
             from the NitfFile included in the igc or not, based on the 
             include_image.'''
+            if(naif_code is not None):
+                self.naif_code = naif_code
             orb = self.orbit
             cam = self.camera
             if(cam.sensor_type == "S"):
@@ -262,7 +266,7 @@ if(have_pynitf):
             '''Return OrbitDes for GLAS/GFM'''
             if(self.pos_csephb is None or self.att_csattb is None):
                 return None
-            return OrbitDes(self.pos_csephb, self.att_csattb)
+            return OrbitDes(self.pos_csephb, self.att_csattb, self.naif_code)
         
     def _glas_gfm(self):
         '''Return GlasGfm if we find it, otherwise None'''

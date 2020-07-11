@@ -11,7 +11,7 @@ import numpy as np
 
 version = "July 10, 2020"
 usage='''Usage:
-  boost_nitf_glas_gfm [options] from_nitf <nitf_file>
+  boost_nitf_glas_gfm [options] from_nitf <nitf_file> <naif_code>
   boost_nitf_glas_gfm [options] to_nitf <nitf_file>
   boost_nitf_glas_gfm -h | --help
   boost_nitf_glas_gfm -v | --version
@@ -44,5 +44,10 @@ if(args.to_nitf):
     f.write(args.nitf_file)
 elif(args.from_nitf):
     f = pynitf.NitfFile(args.nitf_file)
-    igc_g = f.image_segment[0].glas_gfm.igc()
+    if(args.naif_code == geocal.Ecr.EARTH_NAIF_CODE):
+        dem = geocal.SimpleDem()
+    else:
+        dem = geocal.PlanetSimpleDem(args.naif_code)
+    igc_g = f.image_segment[0].glas_gfm.igc(dem = dem,
+                                            naif_code = args.naif_code)
     sys.stdout.buffer.write(geocal.serialize_write_binary(igc_g))

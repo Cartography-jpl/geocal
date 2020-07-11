@@ -6050,6 +6050,22 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6906,12 +6922,14 @@ fail:
 SWIGINTERN PyObject *_wrap_rsm_read_nitf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
+  int arg2 ;
   int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
   boost::shared_ptr< GeoCal::Rsm > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"rsm_read_nitf",2,2,swig_obj)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -6923,9 +6941,128 @@ SWIGINTERN PyObject *_wrap_rsm_read_nitf(PyObject *SWIGUNUSEDPARM(self), PyObjec
     }
     arg1 = ptr;
   }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "rsm_read_nitf" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
   {
     try {
-      result = GeoCal::rsm_read_nitf((std::string const &)*arg1);
+      result = GeoCal::rsm_read_nitf((std::string const &)*arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_glas_gfm_write_nitf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared2 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"glas_gfm_write_nitf",2,2,swig_obj)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "glas_gfm_write_nitf" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "glas_gfm_write_nitf" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "glas_gfm_write_nitf" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2) : &tempshared2;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      GeoCal::glas_gfm_write_nitf((std::string const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_glas_gfm_read_nitf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"glas_gfm_read_nitf",2,2,swig_obj)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "glas_gfm_read_nitf" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "glas_gfm_read_nitf" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "glas_gfm_read_nitf" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = GeoCal::glas_gfm_read_nitf((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6985,9 +7122,9 @@ static PyMethodDef SwigMethods[] = {
 		"file has a single image segment in it with a size of 1x1, and the TREs\n"
 		"attached to the image segment supply the RSM. \n"
 		""},
-	 { (char *)"rsm_read_nitf", (PyCFunction)_wrap_rsm_read_nitf, METH_O, (char *)"\n"
+	 { (char *)"rsm_read_nitf", _wrap_rsm_read_nitf, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< Rsm > GeoCal::rsm_read_nitf(const std::string &Fname)\n"
+		"boost::shared_ptr< Rsm > GeoCal::rsm_read_nitf(const std::string &Fname, int Naif_code)\n"
 		"We have support for saving RSMs as boost XML serialization objects.\n"
 		"\n"
 		"This works well, but this is not an official standard. It is useful to\n"
@@ -7005,7 +7142,21 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This reads a NITF file generated by rsm_write_nitf. We just take the\n"
 		"first image segment found in the file, and RSM defined by that image\n"
-		"segments TREs. \n"
+		"segments TREs.\n"
+		"\n"
+		"The NITF doesn't keep the Naif_code, so we pass that in. This gets\n"
+		"store in the VICAR file. \n"
+		""},
+	 { (char *)"glas_gfm_write_nitf", _wrap_glas_gfm_write_nitf, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::glas_gfm_write_nitf(const std::string &Fname, const boost::shared_ptr<\n"
+		"ImageGroundConnection > &Igc)\n"
+		"Like rsm_write_nitf, but for GLAS/GFM ImageGroundConnection. \n"
+		""},
+	 { (char *)"glas_gfm_read_nitf", _wrap_glas_gfm_read_nitf, METH_VARARGS, (char *)"\n"
+		"\n"
+		"boost::shared_ptr< ImageGroundConnection > GeoCal::glas_gfm_read_nitf(const std::string &Fname, int Naif_code)\n"
+		"Same as rsm_read_nitf, but for GLAS/GFM ImageGroundConnection. \n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

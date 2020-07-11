@@ -778,10 +778,8 @@ void VicarFile::rpc(const Rpc& V)
   else 
     throw Exception("Unrecognized rpc type");
   int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
-  if(V.coordinate_converter) {
-    std::cerr << "Setting naif_code\n";
+  if(V.coordinate_converter)
     naif_code = V.coordinate_converter->naif_code();
-  }
   if(naif_code != CoordinateConverter::EARTH_NAIF_CODE)
     label_set("NAIF_CODE", naif_code, "GEOTIFF");
   label_set("RPC_FIELD1", "1", "GEOTIFF");
@@ -847,8 +845,12 @@ boost::shared_ptr<Rsm> VicarFile::rsm() const
     fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
   boost::filesystem::path p(file_name());
   boost::filesystem::path dir = p.parent_path();
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(has_label("GEOTIFF NAIF_CODE"))
+    naif_code = label<int>("NAIF_CODE", "GEOTIFF");
   if(has_label("GEOTIFF RSM_NITF_FILE"))
-    return rsm_read_nitf((dir / fname).string());
+    return rsm_read_nitf((dir / fname).string(), naif_code);
+  // Boost already stores naif code, so we don't need to set it
   return serialize_read<Rsm>((dir / fname).string());
 }
 
@@ -869,8 +871,12 @@ boost::shared_ptr<ImageGroundConnection> VicarFile::igc_glas_gfm() const
     fname = label<std::string>("GLAS_GFM_XML_FILE", "GEOTIFF");
   boost::filesystem::path p(file_name());
   boost::filesystem::path dir = p.parent_path();
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(has_label("GEOTIFF NAIF_CODE"))
+    naif_code = label<int>("NAIF_CODE", "GEOTIFF");
   if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
-    return glas_gfm_read_nitf((dir / fname).string());
+    return glas_gfm_read_nitf((dir / fname).string(), naif_code);
+  // Boost already stores naif code, so we don't need to set it
   return serialize_read<ImageGroundConnection>((dir / fname).string());
 }
 
@@ -917,6 +923,8 @@ void VicarFile::rsm(const boost::shared_ptr<Rsm>& V, rsm_file_type File_type)
   std::string fname = p.stem().string() + ext;
   if(File_type == RSM_NITF_FILE) {
     label_set("RSM_NITF_FILE", fname, "GEOTIFF");
+    if(V->naif_code() != CoordinateConverter::EARTH_NAIF_CODE)
+      label_set("NAIF_CODE", V->naif_code(), "GEOTIFF");
     rsm_write_nitf((dir / fname).string(), V);
   } else {
     label_set("RSM_XML_FILE", fname, "GEOTIFF");
@@ -968,6 +976,8 @@ void VicarFile::igc_glas_gfm(const boost::shared_ptr<ImageGroundConnection>& Igc
   std::string fname = p.stem().string() + ext;
   if(File_type == GLAS_GFM_NITF_FILE) {
     label_set("GLAS_GFM_NITF_FILE", fname, "GEOTIFF");
+    if(Igc->naif_code() != CoordinateConverter::EARTH_NAIF_CODE)
+      label_set("NAIF_CODE", Igc->naif_code(), "GEOTIFF");
     glas_gfm_write_nitf((dir / fname).string(), Igc);
   } else {
     label_set("GLAS_GFM_XML_FILE", fname, "GEOTIFF");

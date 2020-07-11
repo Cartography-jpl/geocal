@@ -11,7 +11,7 @@ import numpy as np
 
 version = "July 10, 2020"
 usage='''Usage:
-  boost_nitf_rsm [options] from_nitf <nitf_file>
+  boost_nitf_rsm [options] from_nitf <nitf_file> <naif_code>
   boost_nitf_rsm [options] to_nitf <nitf_file>
   boost_nitf_rsm -h | --help
   boost_nitf_rsm -v | --version
@@ -41,4 +41,5 @@ if(args.to_nitf):
 elif(args.from_nitf):
     f = pynitf.NitfFile(args.nitf_file)
     rsm = f.image_segment[0].rsm
+    rsm.naif_code = args.naif_code
     sys.stdout.buffer.write(geocal.serialize_write_binary(rsm))

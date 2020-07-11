@@ -473,6 +473,20 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         return _image_ground_connection.ImageGroundConnection_cover(self, Mi, boundary)
 
 
+    def _v_naif_code(self):
+        """
+
+        virtual int GeoCal::ImageGroundConnection::naif_code() const
+        Naif code for ImageGroundConnection (e.g., what planet is this for) 
+        """
+        return _image_ground_connection.ImageGroundConnection__v_naif_code(self)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+
     def _v_image(self, *args):
         """
 
@@ -837,6 +851,7 @@ ImageGroundConnection.image_coordinate_jac_cf_fd = new_instancemethod(_image_gro
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm, None, ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm_fd = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm_fd, None, ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover, None, ImageGroundConnection)
+ImageGroundConnection._v_naif_code = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_naif_code, None, ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image, None, ImageGroundConnection)
 ImageGroundConnection._v_image_multi_band = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image_multi_band, None, ImageGroundConnection)
 ImageGroundConnection._v_image_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image_mask, None, ImageGroundConnection)

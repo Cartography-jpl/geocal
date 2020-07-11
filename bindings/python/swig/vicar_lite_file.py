@@ -300,6 +300,40 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
 
     is_vicar_file = staticmethod(is_vicar_file)
 
+    def _v_has_igc_glas_gfm(self):
+        """
+
+        bool VicarLiteFile::has_igc_glas_gfm() const
+        Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE
+        label in it, indicating it has GLAS/GFM information. 
+        """
+        return _vicar_lite_file.VicarLiteFile__v_has_igc_glas_gfm(self)
+
+
+    @property
+    def has_igc_glas_gfm(self):
+        return self._v_has_igc_glas_gfm()
+
+
+    def _v_igc_glas_gfm(self):
+        """
+
+        boost::shared_ptr< ImageGroundConnection > VicarLiteFile::igc_glas_gfm() const
+        Read metadata for GLAS/GFM.
+
+        Note we store this as a separate detached file in either NITF or boost
+        serialization XML format. The VICAR file then has a pointer to the
+        file. The pointer just has a file name, it is assumed the file is in
+        the same directory as the VICAR file. 
+        """
+        return _vicar_lite_file.VicarLiteFile__v_igc_glas_gfm(self)
+
+
+    @property
+    def igc_glas_gfm(self):
+        return self._v_igc_glas_gfm()
+
+
     def _v_number_line(self):
         """
 
@@ -471,6 +505,8 @@ VicarLiteFile._v_access = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_a
 VicarLiteFile._v_force_area_pixel = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_force_area_pixel, None, VicarLiteFile)
 VicarLiteFile._v_data_offset = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_data_offset, None, VicarLiteFile)
 VicarLiteFile._v_file_name = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_file_name, None, VicarLiteFile)
+VicarLiteFile._v_has_igc_glas_gfm = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_has_igc_glas_gfm, None, VicarLiteFile)
+VicarLiteFile._v_igc_glas_gfm = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_igc_glas_gfm, None, VicarLiteFile)
 VicarLiteFile._v_number_line = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_number_line, None, VicarLiteFile)
 VicarLiteFile._v_number_sample = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_number_sample, None, VicarLiteFile)
 VicarLiteFile._v_number_band = new_instancemethod(_vicar_lite_file.VicarLiteFile__v_number_band, None, VicarLiteFile)
@@ -586,6 +622,34 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
         return self._v_force_map_info()
 
 
+    def _v_has_igc_glas_gfm(self):
+        """
+
+        bool GeoCal::VicarLiteRasterImage::has_igc_glas_gfm() const
+
+        """
+        return _vicar_lite_file.VicarLiteRasterImage__v_has_igc_glas_gfm(self)
+
+
+    @property
+    def has_igc_glas_gfm(self):
+        return self._v_has_igc_glas_gfm()
+
+
+    def _v_igc_glas_gfm(self):
+        """
+
+        boost::shared_ptr<ImageGroundConnection> GeoCal::VicarLiteRasterImage::igc_glas_gfm() const
+
+        """
+        return _vicar_lite_file.VicarLiteRasterImage__v_igc_glas_gfm(self)
+
+
+    @property
+    def igc_glas_gfm(self):
+        return self._v_igc_glas_gfm()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -594,6 +658,8 @@ VicarLiteRasterImage._v_file = new_instancemethod(_vicar_lite_file.VicarLiteRast
 VicarLiteRasterImage._v_is_compressed = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_is_compressed, None, VicarLiteRasterImage)
 VicarLiteRasterImage._v_band_id = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_band_id, None, VicarLiteRasterImage)
 VicarLiteRasterImage._v_force_map_info = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_force_map_info, None, VicarLiteRasterImage)
+VicarLiteRasterImage._v_has_igc_glas_gfm = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_has_igc_glas_gfm, None, VicarLiteRasterImage)
+VicarLiteRasterImage._v_igc_glas_gfm = new_instancemethod(_vicar_lite_file.VicarLiteRasterImage__v_igc_glas_gfm, None, VicarLiteRasterImage)
 VicarLiteRasterImage_swigregister = _vicar_lite_file.VicarLiteRasterImage_swigregister
 VicarLiteRasterImage_swigregister(VicarLiteRasterImage)
 

@@ -193,6 +193,12 @@ public:
 				  double H) const;
 
 //-----------------------------------------------------------------------
+/// Naif code for ImageGroundConnection (e.g., what planet is this for)
+//-----------------------------------------------------------------------
+  virtual int naif_code() const
+  { return ground_coordinate_approx_height(ImageCoordinate(0,0),0)->naif_code(); }
+  
+//-----------------------------------------------------------------------
 /// Underlying image (if present)
 //-----------------------------------------------------------------------
 

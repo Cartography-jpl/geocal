@@ -7,12 +7,18 @@
 #include "image_ground_connection.h"
 %}
 %import "rsm.i"
+%import "image_ground_connection.i"
 
 namespace GeoCal {
 void rsm_write_nitf(const std::string& Fname,
 		    const boost::shared_ptr<Rsm>& R);
-boost::shared_ptr<Rsm> rsm_read_nitf(const std::string& Fname);
+boost::shared_ptr<Rsm> rsm_read_nitf(const std::string& Fname, int Naif_code);
+void glas_gfm_write_nitf(const std::string& Fname,
+			 const boost::shared_ptr<ImageGroundConnection>& Igc);
+boost::shared_ptr<ImageGroundConnection>
+glas_gfm_read_nitf(const std::string& Fname, int Naif_code);
 }
 
 // List of things "import *" will include
-%python_export("rsm_write_nitf", "rsm_read_nitf")
+%python_export("rsm_write_nitf", "rsm_read_nitf",
+	       "glas_gfm_write_nitf", "glas_gfm_read_nitf")

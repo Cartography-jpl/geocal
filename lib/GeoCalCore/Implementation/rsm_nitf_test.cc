@@ -1,6 +1,7 @@
 #include "unit_test_support.h"
 #include "rsm_nitf.h"
 #include "rsm_fixture.h"
+#include "ecr.h"
 #include <boost/make_shared.hpp>
 using namespace GeoCal;
 
@@ -13,7 +14,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   // desired.
   return;
   rsm_write_nitf("test_out/rsm_out.ntf", rsm);
-  boost::shared_ptr<Rsm> rsmr = rsm_read_nitf("test_out/rsm_out.ntf");
+  boost::shared_ptr<Rsm> rsmr = rsm_read_nitf("test_out/rsm_out.ntf",
+					      Ecr::EARTH_NAIF_CODE);
   std::cerr << *rsmr << "\n";
 }
 

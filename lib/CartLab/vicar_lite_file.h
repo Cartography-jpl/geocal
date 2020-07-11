@@ -6,6 +6,7 @@
 #include "rsm.h"
 #include "memory_map_array.h"
 #include "raster_image_variable.h"
+#include "image_ground_connection.h"
 #include "dem_map_info.h"
 #include "ostream_pad.h"
 #include "printable.h"
@@ -180,12 +181,14 @@ public:
   bool has_map_info() const;
   bool has_rpc() const;
   bool has_rsm() const;
+  bool has_igc_glas_gfm() const;
   MapInfo map_info() const;
   void map_info(const MapInfo& M);
   Rpc rpc() const;
   void rpc(const Rpc& R) { throw Exception("Not yet implemented"); }
   boost::shared_ptr<Rsm> rsm() const;
   void rsm(const boost::shared_ptr<Rsm>& R) { throw Exception("Not yet implemented"); }
+  boost::shared_ptr<ImageGroundConnection> igc_glas_gfm() const;
   int read_int(int B, int L, int S) const;
   double read_double(int B, int L, int S) const;
   void read_int(int B, int L, int S, int Nb, int Nl, int Ns, int* Res) const;
@@ -814,6 +817,10 @@ public:
   }
   virtual ~VicarLiteRasterImage() {}
 
+  bool has_igc_glas_gfm() const { return f_->has_igc_glas_gfm(); }
+  boost::shared_ptr<ImageGroundConnection> igc_glas_gfm() const
+  { return f_->igc_glas_gfm(); }
+  
   virtual bool copy_needs_double() const
   { return (file().type() == VicarLiteFile::VICAR_FLOAT ||
 	    file().type() == VicarLiteFile::VICAR_DOUBLE); }
@@ -910,10 +917,17 @@ public:
       opad.strict_sync();
     } else
       Os << "None\n";
-    Os << "  RPC:           ";
+    Os << "  RSM:           ";
     if(has_rsm()) {
       Os << "\n";
       opad << *rsm();
+      opad.strict_sync();
+    } else
+      Os << "None\n";
+    Os << "  GLAS/GFM:      ";
+    if(has_igc_glas_gfm()) {
+      Os << "\n";
+      opad << *igc_glas_gfm();
       opad.strict_sync();
     } else
       Os << "None\n";

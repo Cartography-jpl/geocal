@@ -28,7 +28,7 @@ using namespace GeoCal;
 void GeoCal::rsm_write_nitf(const std::string& Fname,
 		    const boost::shared_ptr<Rsm>& R)
 {
-  std::string data = serialize_write_string(R);
+  std::string data = serialize_write_binary(R);
   std::string cmd = "boost_nitf_rsm to_nitf " + Fname;
   FILE* f = popen(cmd.c_str(), "w");
   if(!f)
@@ -37,6 +37,24 @@ void GeoCal::rsm_write_nitf(const std::string& Fname,
   int status = pclose(f);
   if(status)
     throw Exception("Trouble calling boost_nitf_rsm in rsm_write_nitf");
+}
+
+//-----------------------------------------------------------------------
+/// Like rsm_write_nitf, but for GLAS/GFM ImageGroundConnection
+//-----------------------------------------------------------------------
+
+void GeoCal::glas_gfm_write_nitf(const std::string& Fname,
+		 const boost::shared_ptr<ImageGroundConnection>& Igc)
+{
+  std::string data = serialize_write_binary(Igc);
+  std::string cmd = "boost_nitf_glas_gfm to_nitf " + Fname;
+  FILE* f = popen(cmd.c_str(), "w");
+  if(!f)
+    throw Exception("Trouble calling boost_nitf_glas_gfm in glas_gfm_write_nitf");
+  fwrite(data.c_str(), sizeof(char), data.size(), f);
+  int status = pclose(f);
+  if(status)
+    throw Exception("Trouble calling boost_nitf_glas_gfm in glas_gfm_write_nitf");
 }
 
 //-----------------------------------------------------------------------
@@ -77,5 +95,30 @@ boost::shared_ptr<Rsm> GeoCal::rsm_read_nitf(const std::string& Fname)
   int status = pclose(f);
   if(status)
     throw Exception("Trouble calling boost_nitf_rsm in rsm_read_nitf");
-  return serialize_read_string<Rsm>(data);
+  return serialize_read_binary_string<Rsm>(data);
+}
+
+//-----------------------------------------------------------------------
+/// Same as rsm_read_nitf, but for GLAS/GFM ImageGroundConnection
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<ImageGroundConnection>
+GeoCal::glas_gfm_read_nitf(const std::string& Fname)
+{
+  std::string cmd = "boost_nitf_glas_gfm from_nitf " + Fname;
+  FILE* f = popen(cmd.c_str(), "r");
+  if(!f)
+    throw Exception("Trouble calling boost_nitf_glas_gfm in glas_gfm_read_nitf");
+  std::string data;
+  data.reserve(1000);		// We'll need some space, so go ahead
+				// at set it aside.
+  int c = fgetc(f);
+  while(!feof(f)) {
+    data.push_back((char) c);
+    c = getc(f);
+  }
+  int status = pclose(f);
+  if(status)
+    throw Exception("Trouble calling boost_nitf_glas_gfm in glas_gfm_read_nitf");
+  return serialize_read_binary_string<ImageGroundConnection>(data);
 }

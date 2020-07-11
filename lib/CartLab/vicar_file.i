@@ -22,6 +22,7 @@ public:
   enum access_type {READ, WRITE, UPDATE};
   enum compression {NONE, BASIC, BASIC2};
   enum rsm_file_type {RSM_XML_FILE, RSM_NITF_FILE};
+  enum glas_gfm_file_type {GLAS_GFM_XML_FILE, GLAS_GFM_NITF_FILE};
   VicarFile(const std::string& Fname, access_type Access = READ);
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
 	    const std::string& Type = "BYTE");
@@ -52,9 +53,14 @@ public:
   %python_attribute_with_set(map_info, MapInfo)
   %python_attribute_with_set(rpc, Rpc)
   %python_attribute_with_set(rsm, boost::shared_ptr<Rsm>)
+  %python_attribute_with_set(igc_glas_gfm, boost::shared_ptr<ImageGroundConnection>)
 %pythoncode {
 def rsm_save_xml(self, value):
   self._v_rsm(value, self.RSM_XML_FILE)
+}
+%pythoncode {
+def igc_glas_gfm_save_xml(self, value):
+  self._v_igc_glas_gfm(value, self.GLAS_GFM_XML_FILE)
 }
 
   void close();

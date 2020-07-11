@@ -11378,6 +11378,180 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VicarRasterImage_set_igc_glas_gfm__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarRasterImage *arg1 = (GeoCal::VicarRasterImage *) 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
+  GeoCal::VicarFile::glas_gfm_file_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared2 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarRasterImage_set_igc_glas_gfm" "', argument " "1"" of type '" "GeoCal::VicarRasterImage *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VicarRasterImage_set_igc_glas_gfm" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2) : &tempshared2;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "VicarRasterImage_set_igc_glas_gfm" "', argument " "3"" of type '" "GeoCal::VicarFile::glas_gfm_file_type""'");
+  } 
+  arg3 = static_cast< GeoCal::VicarFile::glas_gfm_file_type >(val3);
+  {
+    try {
+      (arg1)->set_igc_glas_gfm((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarRasterImage_set_igc_glas_gfm__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarRasterImage *arg1 = (GeoCal::VicarRasterImage *) 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage > *smartarg1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared2 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarRasterImage_set_igc_glas_gfm" "', argument " "1"" of type '" "GeoCal::VicarRasterImage *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VicarRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VicarRasterImage_set_igc_glas_gfm" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp2) : &tempshared2;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      (arg1)->set_igc_glas_gfm((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarRasterImage_set_igc_glas_gfm(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"VicarRasterImage_set_igc_glas_gfm",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_VicarRasterImage_set_igc_glas_gfm__SWIG_1(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_VicarRasterImage_set_igc_glas_gfm__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'VicarRasterImage_set_igc_glas_gfm'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::VicarRasterImage::set_igc_glas_gfm(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,GeoCal::VicarFile::glas_gfm_file_type)\n"
+    "    GeoCal::VicarRasterImage::set_igc_glas_gfm(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_VicarRasterImage_set_map_info(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::VicarRasterImage *arg1 = (GeoCal::VicarRasterImage *) 0 ;
@@ -11442,6 +11616,94 @@ SWIGINTERN PyObject *_wrap_VicarRasterImage_set_map_info(PyObject *SWIGUNUSEDPAR
     }
   }
   resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarRasterImage__v_has_igc_glas_gfm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarRasterImage *arg1 = (GeoCal::VicarRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarRasterImage__v_has_igc_glas_gfm" "', argument " "1"" of type '" "GeoCal::VicarRasterImage const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::VicarRasterImage const *)arg1)->has_igc_glas_gfm();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VicarRasterImage__v_igc_glas_gfm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::VicarRasterImage *arg1 = (GeoCal::VicarRasterImage *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VicarRasterImage const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarRasterImage_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VicarRasterImage__v_igc_glas_gfm" "', argument " "1"" of type '" "GeoCal::VicarRasterImage const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VicarRasterImage > * >(argp1);
+      arg1 = const_cast< GeoCal::VicarRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::VicarRasterImage const *)arg1)->igc_glas_gfm();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
   return resultobj;
 fail:
   return NULL;
@@ -12217,10 +12479,26 @@ static PyMethodDef SwigMethods[] = {
 		"File_type=VicarFile::RSM_NITF_FILE)\n"
 		"Set the RSM. \n"
 		""},
+	 { (char *)"VicarRasterImage_set_igc_glas_gfm", _wrap_VicarRasterImage_set_igc_glas_gfm, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::VicarRasterImage::set_igc_glas_gfm(const boost::shared_ptr< ImageGroundConnection > &Igc,\n"
+		"VicarFile::glas_gfm_file_type File_type=VicarFile::GLAS_GFM_NITF_FILE)\n"
+		"Set the GLAS/GFM. \n"
+		""},
 	 { (char *)"VicarRasterImage_set_map_info", _wrap_VicarRasterImage_set_map_info, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::VicarRasterImage::set_map_info(const MapInfo &Mi)\n"
 		"Set the Map Info. \n"
+		""},
+	 { (char *)"VicarRasterImage__v_has_igc_glas_gfm", (PyCFunction)_wrap_VicarRasterImage__v_has_igc_glas_gfm, METH_O, (char *)"\n"
+		"\n"
+		"virtual bool GeoCal::VicarRasterImage::has_igc_glas_gfm() const\n"
+		"Indicate if we have GLAS/GFM. \n"
+		""},
+	 { (char *)"VicarRasterImage__v_igc_glas_gfm", (PyCFunction)_wrap_VicarRasterImage__v_igc_glas_gfm, METH_O, (char *)"\n"
+		"\n"
+		"virtual boost::shared_ptr<ImageGroundConnection> GeoCal::VicarRasterImage::igc_glas_gfm() const\n"
+		"Indicate if we have GLAS/GFM. \n"
 		""},
 	 { (char *)"VicarRasterImage__v_number_band", (PyCFunction)_wrap_VicarRasterImage__v_number_band, METH_O, (char *)"\n"
 		"\n"

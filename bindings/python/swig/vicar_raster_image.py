@@ -268,6 +268,16 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
         return _vicar_raster_image.VicarRasterImage_set_rsm(self, *args)
 
 
+    def set_igc_glas_gfm(self, *args):
+        """
+
+        void GeoCal::VicarRasterImage::set_igc_glas_gfm(const boost::shared_ptr< ImageGroundConnection > &Igc,
+        VicarFile::glas_gfm_file_type File_type=VicarFile::GLAS_GFM_NITF_FILE)
+        Set the GLAS/GFM. 
+        """
+        return _vicar_raster_image.VicarRasterImage_set_igc_glas_gfm(self, *args)
+
+
     def set_map_info(self, Mi):
         """
 
@@ -275,6 +285,34 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
         Set the Map Info. 
         """
         return _vicar_raster_image.VicarRasterImage_set_map_info(self, Mi)
+
+
+    def _v_has_igc_glas_gfm(self):
+        """
+
+        virtual bool GeoCal::VicarRasterImage::has_igc_glas_gfm() const
+        Indicate if we have GLAS/GFM. 
+        """
+        return _vicar_raster_image.VicarRasterImage__v_has_igc_glas_gfm(self)
+
+
+    @property
+    def has_igc_glas_gfm(self):
+        return self._v_has_igc_glas_gfm()
+
+
+    def _v_igc_glas_gfm(self):
+        """
+
+        virtual boost::shared_ptr<ImageGroundConnection> GeoCal::VicarRasterImage::igc_glas_gfm() const
+        Indicate if we have GLAS/GFM. 
+        """
+        return _vicar_raster_image.VicarRasterImage__v_igc_glas_gfm(self)
+
+
+    @property
+    def igc_glas_gfm(self):
+        return self._v_igc_glas_gfm()
 
 
     def _v_number_band(self):
@@ -342,7 +380,10 @@ VicarRasterImage.flush = new_instancemethod(_vicar_raster_image.VicarRasterImage
 VicarRasterImage.close = new_instancemethod(_vicar_raster_image.VicarRasterImage_close, None, VicarRasterImage)
 VicarRasterImage.set_rpc = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_rpc, None, VicarRasterImage)
 VicarRasterImage.set_rsm = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_rsm, None, VicarRasterImage)
+VicarRasterImage.set_igc_glas_gfm = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_igc_glas_gfm, None, VicarRasterImage)
 VicarRasterImage.set_map_info = new_instancemethod(_vicar_raster_image.VicarRasterImage_set_map_info, None, VicarRasterImage)
+VicarRasterImage._v_has_igc_glas_gfm = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_has_igc_glas_gfm, None, VicarRasterImage)
+VicarRasterImage._v_igc_glas_gfm = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_igc_glas_gfm, None, VicarRasterImage)
 VicarRasterImage._v_number_band = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_number_band, None, VicarRasterImage)
 VicarRasterImage._v_band_id = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_band_id, None, VicarRasterImage)
 VicarRasterImage._v_rpc = new_instancemethod(_vicar_raster_image.VicarRasterImage__v_rpc, None, VicarRasterImage)

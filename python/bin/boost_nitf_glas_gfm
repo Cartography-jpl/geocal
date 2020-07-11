@@ -11,10 +11,10 @@ import numpy as np
 
 version = "July 10, 2020"
 usage='''Usage:
-  boost_nitf_rsm [options] from_nitf <nitf_file>
-  boost_nitf_rsm [options] to_nitf <nitf_file>
-  boost_nitf_rsm -h | --help
-  boost_nitf_rsm -v | --version
+  boost_nitf_glas_gfm [options] from_nitf <nitf_file>
+  boost_nitf_glas_gfm [options] to_nitf <nitf_file>
+  boost_nitf_glas_gfm -h | --help
+  boost_nitf_glas_gfm -v | --version
 
 This is a utility program that converts the boost binary format to and from
 a NITF file. This is really meant for use by geocal library, this is likely
@@ -31,14 +31,18 @@ Options:
 args = geocal.docopt_simple(usage, version=version)
 if(args.to_nitf):
     # "buffer" here is used to read stdin as bytes rather than a str
-    rsm = geocal.serialize_read_binary(sys.stdin.buffer.read())
+    igc_g = geocal.serialize_read_binary(sys.stdin.buffer.read())
+    # Perhaps we should add this to igc, but for now just fake it
+    igc_g.platform_id = "FAKEPL"
+    igc_g.payload_id = "FAKEPY"
+    igc_g.sensor_id = "FAKESN"
     f = pynitf.NitfFile()
     img = pynitf.NitfImageWriteNumpy(1, 1, np.uint8)
     img[0,0,0] = 0
     f.image_segment.append(pynitf.NitfImageSegment(img))
-    f.image_segment[0].rsm = rsm
+    f.image_segment[0].create_glas_gfm(igc_g)
     f.write(args.nitf_file)
 elif(args.from_nitf):
     f = pynitf.NitfFile(args.nitf_file)
-    rsm = f.image_segment[0].rsm
-    sys.stdout.buffer.write(geocal.serialize_write_binary(rsm))
+    igc_g = f.image_segment[0].glas_gfm.igc()
+    sys.stdout.buffer.write(geocal.serialize_write_binary(igc_g))

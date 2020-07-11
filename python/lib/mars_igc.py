@@ -78,6 +78,13 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     tstart = Time.time_sclk(lbl["SPACECRAFT_CLOCK_START_COUNT"], "MRO")
     # 1e-3 is because LINE_EXPOSURE_DURATION is in milliseconds.
     tspace = float(lbl["LINE_EXPOSURE_DURATION"].split(" ")[0]) * 1e-3
+    # The data can be averaged on board. I don't think this would be
+    # hard to support, the line exposure should get multiplied (since
+    # it is a single line time) and the camera modified. But we should
+    # really test this out with some test data first though. For now, just
+    # notice that the data has on board averaging and trigger an error
+    if int(lbl["SAMPLING_FACTOR"]) != 1:
+        raise RuntimeError("We currently only support a sampling factor of 1")
     tt = ConstantSpacingTimeTable(tstart, tstart + tspace * (img.number_line-1),
                                   tspace)
     dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
@@ -88,6 +95,36 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
         igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
                                           subset[2], subset[3])
     return igc
+
+def igc_mro_context_to_glas(igc_r):
+    '''Create a igc that can be used with GLAS from the results of 
+    igc_mro_context'''
+    tspace = igc_r.ipi.time_table.time_space
+    porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
+                     igc_r.ipi.time_table.min_time - 10 * tspace,
+                     igc_r.ipi.time_table.max_time + 10 * tspace,
+                     tspace,
+                     PosCsephb.LAGRANGE,
+                     PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
+                     igc_r.ipi.time_table.min_time - 10 * tspace,
+                     igc_r.ipi.time_table.max_time + 10 * tspace,
+                     tspace,
+                     AttCsattb.LAGRANGE,
+                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+    orb_g = OrbitDes(porb,aorb)
+    band = 0
+    delta_sample = 100
+    cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
+    ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+    igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
+    igc_g.platform_id = "MRO"
+    igc_g.payload_id = "MRO"
+    igc_g.sensor_id = "CTX"
+    return igc_g
 
 def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
                  kernel_file_post = None, kernel_json = None,
@@ -257,4 +294,5 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
     return igc
 
 
-__all__ = ["igc_mro_context", "igc_mex_hrsc", "igc_mro_hirise"]
+__all__ = ["igc_mro_context", "igc_mro_context_to_glas", "igc_mex_hrsc",
+           "igc_mro_hirise"]

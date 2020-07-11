@@ -18,19 +18,30 @@ serialize_read_generic(const std::string& Fname);
 
 boost::shared_ptr<GenericObject> 
 serialize_read_generic_string(const std::string& Data);
+
+void serialize_write_binary(const std::string& Fname, 
+			    const boost::shared_ptr<GenericObject>& Obj);
+boost::shared_ptr<GenericObject> 
+serialize_read_binary_generic(const std::string& Fname);
 }
 
+// For binary data, we need to go to a python byte array rather than
+// a python string
 %typemap(out) std::string {
-  $result = PyByteArray_FromStringAndSize($1.data(), $1.size());
+  $result = PyBytes_FromStringAndSize($1.data(), $1.size());
 }
 
 %typemap(in) const std::string& {
-  if(!PyByteArray_Check($input)) {
+ if(PyBytes_Check($input))
+     $1 = new std::string(PyBytes_AS_STRING($input), PyBytes_GET_SIZE($input));
+ else
+   if(PyByteArray_Check($input))
+     $1 = new std::string(PyByteArray_AS_STRING($input), PyByteArray_GET_SIZE($input));
+   else {
     PyErr_Clear();
-    PyErr_SetString(PyExc_TypeError,"not a bytearray");
+    PyErr_SetString(PyExc_TypeError,"not a bytes or bytearray");
     return NULL;
-  }
-  $1 = new std::string(PyByteArray_AS_STRING($input), PyByteArray_GET_SIZE($input));
+   }
 }
 
 %typemap(freearg) const std::string& {
@@ -39,13 +50,9 @@ serialize_read_generic_string(const std::string& Data);
 
 namespace GeoCal {
 std::string serialize_write_binary(const boost::shared_ptr<GenericObject>& Obj);
-void serialize_write_binary(const std::string& Fname, 
-		     const boost::shared_ptr<GenericObject>& Obj);
 
 boost::shared_ptr<GenericObject> 
 serialize_read_binary(const std::string& Data);
-boost::shared_ptr<GenericObject> 
-serialize_read_binary_generic(const std::string& Fname);
 }
 
 // List of things "import *" will include

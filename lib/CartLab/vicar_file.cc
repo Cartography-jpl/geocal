@@ -465,6 +465,17 @@ bool VicarFile::has_rsm() const
 }
 
 //-----------------------------------------------------------------------
+/// Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE label
+/// in it, indicating it has GLAS/GFM information.
+//-----------------------------------------------------------------------
+
+bool VicarFile::has_igc_glas_gfm() const
+{
+  return (has_label("GEOTIFF GLAS_GFM_NITF_FILE") ||
+	  has_label("GEOTIFF GLAS_GFM_XML_FILE"));
+}
+
+//-----------------------------------------------------------------------
 /// Read metadata for MapInfo.
 //-----------------------------------------------------------------------
 
@@ -842,6 +853,28 @@ boost::shared_ptr<Rsm> VicarFile::rsm() const
 }
 
 //-----------------------------------------------------------------------
+/// Read metadata for GLAS/GFM. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<ImageGroundConnection> VicarFile::igc_glas_gfm() const
+{
+  std::string fname;
+  if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
+    fname = label<std::string>("GLAS_GFM_NITF_FILE", "GEOTIFF");
+  else
+    fname = label<std::string>("GLAS_GFM_XML_FILE", "GEOTIFF");
+  boost::filesystem::path p(file_name());
+  boost::filesystem::path dir = p.parent_path();
+  if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
+    return glas_gfm_read_nitf((dir / fname).string());
+  return serialize_read<ImageGroundConnection>((dir / fname).string());
+}
+
+//-----------------------------------------------------------------------
 /// Set metadata for Rsm. Note we store this as a separate detached
 /// file in either NITF or boost serialization XML format. The VICAR
 /// file then has a pointer to the file. The pointer just has a file
@@ -888,6 +921,57 @@ void VicarFile::rsm(const boost::shared_ptr<Rsm>& V, rsm_file_type File_type)
   } else {
     label_set("RSM_XML_FILE", fname, "GEOTIFF");
     serialize_write((dir / fname).string(), V);
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Set metadata for GLAS/GFM. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+void VicarFile::igc_glas_gfm(const boost::shared_ptr<ImageGroundConnection>& Igc,
+			     glas_gfm_file_type File_type)
+{
+  std::string ext = ".xml";
+  if(File_type == GLAS_GFM_NITF_FILE) {
+    ext = ".ntf";
+#ifdef HAVE_VICAR_RTL
+    int status = zldel(unit(), const_cast<char*>("PROPERTY"),
+		       const_cast<char*>("GEOTIFF"), 
+		       const_cast<char*>("PROPERTY"), "GLAS_GFM_XML_FILE", NULL);
+    if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
+      throw VicarException(status, "Call to zldel failed");
+#else
+    throw VicarNotAvailableException();
+#endif
+  } else {
+    ext = ".xml";
+#ifdef HAVE_VICAR_RTL
+    int status = zldel(unit(), const_cast<char*>("PROPERTY"),
+		       const_cast<char*>("GEOTIFF"), 
+		       const_cast<char*>("PROPERTY"), "GLAS_GFM_NITF_FILE", NULL);
+    if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
+      throw VicarException(status, "Call to zldel failed");
+#else
+    throw VicarNotAvailableException();
+#endif
+  }
+  boost::filesystem::path p(file_name());
+  // Don't think VICAR file will every end with ".xml", but handle this
+  // since it is at least possible.
+  if(p.extension().string() == ext)
+    ext = ext + "2";
+  boost::filesystem::path dir = p.parent_path();
+  std::string fname = p.stem().string() + ext;
+  if(File_type == GLAS_GFM_NITF_FILE) {
+    label_set("GLAS_GFM_NITF_FILE", fname, "GEOTIFF");
+    glas_gfm_write_nitf((dir / fname).string(), Igc);
+  } else {
+    label_set("GLAS_GFM_XML_FILE", fname, "GEOTIFF");
+    serialize_write((dir / fname).string(), Igc);
   }
 }
 

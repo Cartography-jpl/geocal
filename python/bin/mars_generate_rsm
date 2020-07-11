@@ -9,7 +9,7 @@ import subprocess
 import shutil
 import tempfile
 
-version = "Sept 11, 2019"
+version = "July 10, 2020"
 usage='''Usage:
   mars_generate_rsm [options] <pds_image> <output_base_name>
   mars_generate_rsm [options] <pds_image> <pds_image_2> <output_base_name>
@@ -17,7 +17,7 @@ usage='''Usage:
   mars_generate_rsm -v | --version
 
 mars_generate_rsm takes an unprojected PDS image, imports it to VICAR, 
-and adds a RSM.
+and adds a RSM or GLAS/GFM.
 
 The HiRISE instrument has 14 different CCDs, and each comes as 2 "channels"
 which is the left and right portion of the CCD image. You should supply
@@ -70,6 +70,9 @@ Options:
        For diagnostic purposes, it can be useful to have the full IGC (i.e.,
        the one with the camera model, spice kernel, etc.). This is what we
        are approximating with the RSM.
+
+  --glas-gfm
+       Create a GLAS/GFM instead of a RSM.
 
   --keep-temp-dir
        For some instrument types we create a temporary directory for
@@ -134,7 +137,8 @@ args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
 
-def write_vicar_file(igc, r, fin_name, output_base_name):
+def write_vicar_file(igc, fin_name, output_base_name, rsm=None,
+                     igc_glas_gfm=None):
     # Write out the PDS label, in case there is something we need from it
     with open(output_base_name + ".lbl", "wb") as fh:
         fh.write(geocal.pds_label_text(fin_name))
@@ -147,7 +151,12 @@ def write_vicar_file(igc, r, fin_name, output_base_name):
     geocal.copy_raster(igc.image, f, True, -1, igc.number_sample)
     # We have a bug in the RSM NITF code. We'll need to fix that, but for
     # now just use XML instead
-    f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
+    # I believe this is fixed, so we'll try the NITF version for now
+    #f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
+    if(rsm):
+        f.set_rsm(rsm)
+    if(igc_glas_gfm):
+        f.set_igc_glas_gfm(igc_glas_gfm)
     f.close()
     
 # Determine the image type
@@ -162,8 +171,15 @@ if(lbl['INSTRUMENT_NAME'] == 'CONTEXT CAMERA'):
                                  kernel_file=args.kernel_file,
                                  kernel_file_post=args.kernel_file_post,
                                  kernel_json=args.kernel_json, subset=subset)
-    r = geocal.rsm_context(igc, min_height=args.min_height, max_height=args.max_height)
-    write_vicar_file(igc, r, args.pds_image, args.output_base_name)    
+    r = None
+    igc_glas_gfm = None
+    if(args.glas_gfm):
+        igc_glas_gfm = geocal.igc_mro_context_to_glas(igc)
+    else:
+        r = geocal.rsm_context(igc, min_height=args.min_height,
+                               max_height=args.max_height)
+    write_vicar_file(igc, args.pds_image, args.output_base_name, rsm=r,
+                     igc_glas_gfm=igc_glas_gfm)    
 elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION STEREO CAMERA'):
     if(args.pds_image_2 is not None and args.pds_image_2 != ""):
         raise RuntimeError("Only supply one image for HRSC images")
@@ -172,7 +188,7 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION STEREO CAMERA'):
                               kernel_file_post=args.kernel_file_post,
                               kernel_json=args.kernel_json, subset=subset)
     r = geocal.rsm_hrsc(igc, min_height=args.min_height, max_height=args.max_height)
-    write_vicar_file(igc, r, args.pds_image, args.output_base_name)    
+    write_vicar_file(igc, args.pds_image, args.output_base_name, rsm=r)    
 elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
     if(args.pds_image_2 is None or args.pds_image_2 == ""):
         raise RuntimeError("Need to supply both channels of the HiRISE image")
@@ -202,7 +218,7 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
                                     kernel_file_post=args.kernel_file_post,
                                     kernel_json=args.kernel_json, subset=subset)
         r = geocal.rsm_hirise(igc, min_height=args.min_height, max_height=args.max_height)
-        write_vicar_file(igc, r, fin_fname, fout_base_name)
+        write_vicar_file(igc, fin_fname, fout_base_name, rsm=r)
         # Since fin_fname will go away, we set igc.image to None before
         # optionally saving it out
         igc.image = None

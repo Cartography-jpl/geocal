@@ -245,6 +245,8 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
     BASIC2 = _vicar_file.VicarFile_BASIC2
     RSM_XML_FILE = _vicar_file.VicarFile_RSM_XML_FILE
     RSM_NITF_FILE = _vicar_file.VicarFile_RSM_NITF_FILE
+    GLAS_GFM_XML_FILE = _vicar_file.VicarFile_GLAS_GFM_XML_FILE
+    GLAS_GFM_NITF_FILE = _vicar_file.VicarFile_GLAS_GFM_NITF_FILE
 
     def __init__(self, *args):
         """
@@ -474,8 +476,36 @@ class VicarFile(geocal_swig.generic_object.GenericObject):
       self._v_rsm(value)
 
 
+    def _v_igc_glas_gfm(self, *args):
+        """
+
+        void VicarFile::igc_glas_gfm(const boost::shared_ptr< ImageGroundConnection > &Igc,
+        glas_gfm_file_type File_type=GLAS_GFM_NITF_FILE)
+        Set metadata for GLAS/GFM.
+
+        Note we store this as a separate detached file in either NITF or boost
+        serialization XML format. The VICAR file then has a pointer to the
+        file. The pointer just has a file name, it is assumed the file is in
+        the same directory as the VICAR file. 
+        """
+        return _vicar_file.VicarFile__v_igc_glas_gfm(self, *args)
+
+
+    @property
+    def igc_glas_gfm(self):
+        return self._v_igc_glas_gfm()
+
+    @igc_glas_gfm.setter
+    def igc_glas_gfm(self, value):
+      self._v_igc_glas_gfm(value)
+
+
     def rsm_save_xml(self, value):
       self._v_rsm(value, self.RSM_XML_FILE)
+
+
+    def igc_glas_gfm_save_xml(self, value):
+      self._v_igc_glas_gfm(value, self.GLAS_GFM_XML_FILE)
 
 
     def close(self):
@@ -573,6 +603,7 @@ VicarFile._v_unit = new_instancemethod(_vicar_file.VicarFile__v_unit, None, Vica
 VicarFile._v_map_info = new_instancemethod(_vicar_file.VicarFile__v_map_info, None, VicarFile)
 VicarFile._v_rpc = new_instancemethod(_vicar_file.VicarFile__v_rpc, None, VicarFile)
 VicarFile._v_rsm = new_instancemethod(_vicar_file.VicarFile__v_rsm, None, VicarFile)
+VicarFile._v_igc_glas_gfm = new_instancemethod(_vicar_file.VicarFile__v_igc_glas_gfm, None, VicarFile)
 VicarFile.close = new_instancemethod(_vicar_file.VicarFile_close, None, VicarFile)
 VicarFile.flush = new_instancemethod(_vicar_file.VicarFile_flush, None, VicarFile)
 VicarFile.__str__ = new_instancemethod(_vicar_file.VicarFile___str__, None, VicarFile)

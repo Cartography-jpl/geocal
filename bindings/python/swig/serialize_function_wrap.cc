@@ -6975,6 +6975,112 @@ fail:
 
 SWIGINTERN PyObject *_wrap_serialize_write_binary__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  boost::shared_ptr< GeoCal::GenericObject > *arg2 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  void *argp2 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GenericObject > tempshared2 ;
+  boost::shared_ptr< GeoCal::GenericObject > temp2shared2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "serialize_write_binary" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "serialize_write_binary" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "serialize_write_binary" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::GenericObject > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp2);
+      arg2 = &tempshared2;
+    } else {
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp2) : &tempshared2;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg2 = &temp2shared2;
+    }
+  }
+  {
+    try {
+      GeoCal::serialize_write_binary((std::string const &)*arg1,(boost::shared_ptr< GeoCal::GenericObject > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_serialize_read_binary_generic(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::GenericObject > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "serialize_read_binary_generic" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "serialize_read_binary_generic" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = GeoCal::serialize_read_binary_generic((std::string const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python_or_none(result);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_serialize_write_binary__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::GenericObject > *arg1 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
@@ -7019,76 +7125,10 @@ SWIGINTERN PyObject *_wrap_serialize_write_binary__SWIG_0(PyObject *SWIGUNUSEDPA
     }
   }
   {
-    resultobj = PyByteArray_FromStringAndSize((&result)->data(), (&result)->size());
+    resultobj = PyBytes_FromStringAndSize((&result)->data(), (&result)->size());
   }
   return resultobj;
 fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_serialize_write_binary__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::GenericObject > *arg2 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::GenericObject > tempshared2 ;
-  boost::shared_ptr< GeoCal::GenericObject > temp2shared2 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    if(!PyByteArray_Check(swig_obj[0])) {
-      PyErr_Clear();
-      PyErr_SetString(PyExc_TypeError,"not a bytearray");
-      return NULL;
-    }
-    arg1 = new std::string(PyByteArray_AS_STRING(swig_obj[0]), PyByteArray_GET_SIZE(swig_obj[0]));
-  }
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "serialize_write_binary" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::GenericObject > const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::GenericObject > * >(argp2) : &tempshared2;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    try {
-      GeoCal::serialize_write_binary((std::string const &)*arg1,(boost::shared_ptr< GeoCal::GenericObject > const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  {
-    delete arg1;
-  }
-  return resultobj;
-fail:
-  {
-    delete arg1;
-  }
   return NULL;
 }
 
@@ -7102,17 +7142,17 @@ SWIGINTERN PyObject *_wrap_serialize_write_binary(PyObject *self, PyObject *args
   if (!(argc = SWIG_Python_UnpackTuple(args,"serialize_write_binary",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_serialize_write_binary__SWIG_0(self, argc, argv);
+    return _wrap_serialize_write_binary__SWIG_1(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_serialize_write_binary__SWIG_1(self, argc, argv);
+    return _wrap_serialize_write_binary__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'serialize_write_binary'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::serialize_write_binary(boost::shared_ptr< GeoCal::GenericObject > const &)\n"
-    "    GeoCal::serialize_write_binary(std::string const &,boost::shared_ptr< GeoCal::GenericObject > const &)\n");
+    "    GeoCal::serialize_write_binary(std::string const &,boost::shared_ptr< GeoCal::GenericObject > const &)\n"
+    "    GeoCal::serialize_write_binary(boost::shared_ptr< GeoCal::GenericObject > const &)\n");
   return 0;
 }
 
@@ -7126,56 +7166,20 @@ SWIGINTERN PyObject *_wrap_serialize_read_binary(PyObject *SWIGUNUSEDPARM(self),
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
-    if(!PyByteArray_Check(swig_obj[0])) {
+    if(PyBytes_Check(swig_obj[0]))
+    arg1 = new std::string(PyBytes_AS_STRING(swig_obj[0]), PyBytes_GET_SIZE(swig_obj[0]));
+    else
+    if(PyByteArray_Check(swig_obj[0]))
+    arg1 = new std::string(PyByteArray_AS_STRING(swig_obj[0]), PyByteArray_GET_SIZE(swig_obj[0]));
+    else {
       PyErr_Clear();
-      PyErr_SetString(PyExc_TypeError,"not a bytearray");
+      PyErr_SetString(PyExc_TypeError,"not a bytes or bytearray");
       return NULL;
     }
-    arg1 = new std::string(PyByteArray_AS_STRING(swig_obj[0]), PyByteArray_GET_SIZE(swig_obj[0]));
   }
   {
     try {
       result = GeoCal::serialize_read_binary((std::string const &)*arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python_or_none(result);
-  }
-  {
-    delete arg1;
-  }
-  return resultobj;
-fail:
-  {
-    delete arg1;
-  }
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_serialize_read_binary_generic(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::GenericObject > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    if(!PyByteArray_Check(swig_obj[0])) {
-      PyErr_Clear();
-      PyErr_SetString(PyExc_TypeError,"not a bytearray");
-      return NULL;
-    }
-    arg1 = new std::string(PyByteArray_AS_STRING(swig_obj[0]), PyByteArray_GET_SIZE(swig_obj[0]));
-  }
-  {
-    try {
-      result = GeoCal::serialize_read_binary_generic((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7222,9 +7226,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"serialize_write_string", (PyCFunction)_wrap_serialize_write_string, METH_O, NULL},
 	 { (char *)"serialize_read_generic", (PyCFunction)_wrap_serialize_read_generic, METH_O, NULL},
 	 { (char *)"serialize_read_generic_string", (PyCFunction)_wrap_serialize_read_generic_string, METH_O, NULL},
+	 { (char *)"serialize_read_binary_generic", (PyCFunction)_wrap_serialize_read_binary_generic, METH_O, NULL},
 	 { (char *)"serialize_write_binary", _wrap_serialize_write_binary, METH_VARARGS, NULL},
 	 { (char *)"serialize_read_binary", (PyCFunction)_wrap_serialize_read_binary, METH_O, NULL},
-	 { (char *)"serialize_read_binary_generic", (PyCFunction)_wrap_serialize_read_binary_generic, METH_O, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

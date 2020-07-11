@@ -428,7 +428,7 @@ def mars_test_data():
        not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/kernel.json")
     ):
         raise SkipTest
-    res = "/raid27/smyth/MiplMarsTest/"
+    res = "/bigdata/smyth/MiplMarsTest/"
     if(not os.path.exists(res)):
         raise SkipTest
     return res

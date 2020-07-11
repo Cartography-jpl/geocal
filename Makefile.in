@@ -2948,6 +2948,7 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/doughnut_diff \
 	$(srcdir)/$(srcpythonbin)/abachd \
 	$(srcdir)/$(srcpythonbin)/boost_nitf_rsm \
+	$(srcdir)/$(srcpythonbin)/boost_nitf_glas_gfm \
 	$(srcdir)/$(srcpythonbin)/height_to_color \
 	$(srcdir)/$(srcpythonbin)/shelve_airmspi_igc \
 	$(srcdir)/$(srcpythonbin)/igc_to_rpc \

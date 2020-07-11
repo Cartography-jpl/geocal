@@ -1,3 +1,7 @@
+try:
+    import pynitf
+except ImportError:
+    pass
 from test_support import *
 from geocal.mars_igc import *
 
@@ -7,6 +11,26 @@ def test_igc_mro_context(mars_test_data):
     igc = igc_mro_context(mars_test_data + "P16_007388_2049_XI_24N020W.IMG")
     print(igc)
 
+@require_spice
+@require_mars_spice
+@require_pynitf
+def test_glas_mro_context(isolated_dir, mars_test_data):
+    igc_r = igc_mro_context(mars_test_data + "P16_007388_2049_XI_24N020W.IMG")
+    igc_g = igc_mro_context_to_glas(igc_r)
+    f = pynitf.NitfFile()
+    img = pynitf.NitfImageWriteNumpy(1,1,np.uint8)
+    img[0,0] = 0
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+    f.image_segment[0].create_glas_gfm(igc_g)
+    f.write("glas_test.ntf")
+    f2 = NitfFile("glas_test.ntf")
+    print(f2)
+    with open("glas_test.bin", "wb") as fh:
+        fh.write(serialize_write_binary(igc_g))
+    with open("glas_test.bin", "rb") as fh:
+        igc_gr = serialize_read_binary(fh.read())
+    print(igc_gr)
+    
 @require_spice
 @require_mars_spice
 def test_igc_mex_hrsc(mars_test_data):

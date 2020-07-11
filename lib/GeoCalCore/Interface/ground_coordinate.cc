@@ -95,6 +95,13 @@ ToolkitCoordinateInterface* CartesianFixed::toolkit_coordinate_interface =
 
 double GeoCal::distance(const GroundCoordinate& G1, const GroundCoordinate& G2)
 {
+  if(G1.naif_code() != G2.naif_code()) {
+    Exception e;
+    e << "NAIF codes in distance function don't match\n"
+      << "  G1 NAIF code: " << G1.naif_code() << "\n"
+      << "  G2 NAIF code: " << G2.naif_code() << "\n";
+    throw e;
+  }
   boost::array<double, 3> t1 = G1.convert_to_cf()->position;
   boost::array<double, 3> t2 = G2.convert_to_cf()->position;
   return sqrt(sqr(t1[0] - t2[0]) + sqr(t1[1] - t2[1]) + sqr(t1[2] - t2[2]));

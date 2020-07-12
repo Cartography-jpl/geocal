@@ -203,7 +203,7 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
         # If ISIS is already set up, use the ISIS installation. Otherwise,
         # default to the location on pistol.
         if("ISISROOT" not in os.environ):
-            setup_isis = "export ISISROOT=/data/smyth/Isis/isis; source /data/smyth/Isis/isis/scripts/isis3Startup.sh; "
+            setup_isis = "export ISISROOT=/bigdata/smyth/Isis/isis; source /bigdata/smyth/Isis/isis/scripts/isis3Startup.sh; "
         else:
             setup_isis = ""
         subprocess.run(setup_isis + "hi2isis from=%s to=f1.cub && spiceinit from=f1.cub && hical from=f1.cub to=f1.cal.cub" % f1,

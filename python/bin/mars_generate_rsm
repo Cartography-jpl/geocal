@@ -217,8 +217,15 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
                                     kernel_file=args.kernel_file,
                                     kernel_file_post=args.kernel_file_post,
                                     kernel_json=args.kernel_json, subset=subset)
-        r = geocal.rsm_hirise(igc, min_height=args.min_height, max_height=args.max_height)
-        write_vicar_file(igc, fin_fname, fout_base_name, rsm=r)
+        r = None
+        igc_glas_gfm = None
+        if(args.glas_gfm):
+            igc_glas_gfm = geocal.igc_mro_hirise_to_glas(igc)
+        else:
+            r = geocal.rsm_hirise(igc, min_height=args.min_height,
+                                  max_height=args.max_height)
+        write_vicar_file(igc, fin_fname, fout_base_name, rsm=r,
+                         igc_glas_gfm=igc_glas_gfm)
         # Since fin_fname will go away, we set igc.image to None before
         # optionally saving it out
         igc.image = None

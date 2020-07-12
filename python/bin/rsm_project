@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 #
-# This takes a VICAR file with a RSM and projects it to the surface.
+# This takes a VICAR file with a RSM or GLAS/GFM and projects it to the surface.
 
 import geocal
 import numpy as np
@@ -8,14 +8,15 @@ import subprocess
 import os
 import logging
 
-version = "October 2, 2017"
+version = "July 10, 2020"
 usage='''Usage:
   rsm_project [options] <image> <dem_file> <output>
   rsm_project [options] --mosaic <dem_file> <output> <image_list>...
   rsm_project -h | --help
   rsm_project -v | --version
 
-rsm_project takes a VICAR file with a RSM and projects it to the surface.
+rsm_project takes a VICAR file with a RSM or GLAS/GFM and projects it 
+to the surface.
 
 The dem_file should be the output of shelve_dem (e.g., a ".xml" file)
 
@@ -163,7 +164,7 @@ def create_igc_map(igc, args):
         mi = mp.map_info
         mp = None
     else:
-        naif_code = igc.rsm.coordinate_converter.naif_code
+        naif_code = igc.naif_code
         if(naif_code == geocal.Ecr.EARTH_NAIF_CODE):
             mibase = geocal.cib01_mapinfo(desired_resolution = resolution)
         elif(naif_code == geocal.PlanetConstant.MARS_NAIF_CODE):
@@ -210,14 +211,28 @@ if(args.mosaic):
             img = geocal.VicarLiteRasterImage(imgfname)
         else:
             img = geocal.GdalRasterImage(imgfname)
-        igclist.append(geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image"))
+        if(img.has_igc_glas_gfm):
+            igc = img.igc_glas_gfm
+            igc.image = img
+            igclist.append(igc)
+        elif(img.has_rsm):
+            igclist.append(geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image"))
+        else:
+            raise RuntimeError("Image %s doesn't have GLAS or RSM" % imgfname)
     igc_map = create_igc_map_mosaic(igclist, args)
 else:
     if(geocal.VicarLiteFile.is_vicar_file(args.image)):
         img = geocal.VicarLiteRasterImage(args.image)
     else:
         img = geocal.GdalRasterImage(args.image)
-    igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
+    if(img.has_igc_glas_gfm):
+        igc = img.igc_glas_gfm
+        igc.image = img
+    elif(img.has_rsm):
+        igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
+    else:
+        raise RuntimeError("Image %s doesn't have GLAS or RSM" % args.image)
+        
     igc_map = create_igc_map(igc, args)
 
 if(args.verbose):

@@ -65,7 +65,12 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     # We have masked pixels in the L1 data, which we want to chop out
     left_masked = 38
     right_masked = 18
-    img = SubRasterImage(img, 0, left_masked, img.number_line, 5000)
+    sline = 0
+    nline = img.number_line
+    if(subset is not None):
+        sline = subset[0]
+        nline = subset[2]
+    img = SubRasterImage(img, sline, left_masked, nline, 5000)
     if(lbl["SAMPLE_BIT_MODE_ID"] == "SQROOT"):
         img = ContextSqrtDecodeImage(img)
     # The START_TIME is the commanded start time, the actual start time
@@ -78,6 +83,8 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     tstart = Time.time_sclk(lbl["SPACECRAFT_CLOCK_START_COUNT"], "MRO")
     # 1e-3 is because LINE_EXPOSURE_DURATION is in milliseconds.
     tspace = float(lbl["LINE_EXPOSURE_DURATION"].split(" ")[0]) * 1e-3
+    if(subset is not None):
+        tstart += sline * tspace
     # The data can be averaged on board. I don't think this would be
     # hard to support, the line exposure should get multiplied (since
     # it is a single line time) and the camera modified. But we should
@@ -91,9 +98,6 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     orb_cache = OrbitListCache(orb, tt)
     ipi = Ipi(orb_cache, ctx_camera(), 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
-    if(subset is not None):
-        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
-                                          subset[2], subset[3])
     return igc
 
 def igc_mro_context_to_glas(igc_r):
@@ -194,7 +198,7 @@ def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
     ipi = Ipi(orb_cache, hrsc_camera(), 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
     if(subset is not None):
-        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
+        igc = OffsetImageGroundConnection(igc, subset[0], subset[1],
                                           subset[2], subset[3])
     return igc
 
@@ -253,6 +257,12 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
     orb = SpicePlanetOrbit("MRO", "MRO_HIRISE_OPTICAL_AXIS", klist,
                            PlanetConstant.MARS_NAIF_CODE)
     img = ScaleImage(GdalRasterImage(fname), rad_scale)
+    sline = 0
+    nline = img.number_line
+    if(subset is not None):
+        sline = subset[0]
+        nline = subset[2]
+        img = SubRasterImage(img, sline, 0, nline, img.number_sample)
     # There are two kinds of spacecraft clocks. The normal resolution is "MRO",
     # the high resolution is for NAIF ID -74999. We have high resolution for
     # HIRISE
@@ -264,6 +274,7 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
     tspace = unbinned_rate * float(lbl["Summing"])
     tstart -= unbinned_rate * (float(lbl["Tdi"]) / 2 - 0.5)
     tstart += unbinned_rate * (float(lbl["Summing"]) / 2 - 0.5)
+    tstart += tspace * sline
     # Effective CCD Line number for the given TDI mode
     ccd_line = -64.0 + float(lbl["Tdi"]) / 2
     # Channel number is right and left, they get combined when we
@@ -288,11 +299,38 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
     orb_cache = OrbitListCache(orb, tt)
     ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
-    if(subset is not None):
-        igc = geocal.OffsetImageGroundConnection(igc, subset[0], subset[1],
-                                          subset[2], subset[3])
     return igc
+
+def igc_mro_hirise_to_glas(igc_r):
+    '''Create a igc that can be used with GLAS from the results of 
+    igc_mro_hirise'''
+    tspace = igc_r.ipi.time_table.time_space
+    porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
+                     igc_r.ipi.time_table.min_time - 10 * tspace,
+                     igc_r.ipi.time_table.max_time + 10 * tspace,
+                     tspace,
+                     PosCsephb.LAGRANGE,
+                     PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
+                     igc_r.ipi.time_table.min_time - 10 * tspace,
+                     igc_r.ipi.time_table.max_time + 10 * tspace,
+                     tspace,
+                     AttCsattb.LAGRANGE,
+                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+    orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
+    band = 0
+    delta_sample = 2048 / 16
+    cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
+    ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+    igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
+    igc_g.platform_id = "MRO"
+    igc_g.payload_id = "MRO"
+    igc_g.sensor_id = "HiRISE"
+    return igc_g
 
 
 __all__ = ["igc_mro_context", "igc_mro_context_to_glas", "igc_mex_hrsc",
-           "igc_mro_hirise"]
+           "igc_mro_hirise", "igc_mro_hirise_to_glas"]

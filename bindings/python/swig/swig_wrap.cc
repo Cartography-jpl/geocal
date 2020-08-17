@@ -126,6 +126,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_planet_coordinate)(void);
   INIT_TYPE INIT_FUNC(_iterative_morphological_dilation)(void);
   INIT_TYPE INIT_FUNC(_igc_ray_caster)(void);
+  INIT_TYPE INIT_FUNC(_ray_caster_resampler)(void);
   INIT_TYPE INIT_FUNC(_igc_rolling_shutter)(void);
   INIT_TYPE INIT_FUNC(_igc_array)(void);
   INIT_TYPE INIT_FUNC(_igc_multiple_pass)(void);
@@ -342,6 +343,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_planet_coordinate", INIT_FUNC(_planet_coordinate));
   INIT_MODULE(module, "_iterative_morphological_dilation", INIT_FUNC(_iterative_morphological_dilation));
   INIT_MODULE(module, "_igc_ray_caster", INIT_FUNC(_igc_ray_caster));
+  INIT_MODULE(module, "_ray_caster_resampler", INIT_FUNC(_ray_caster_resampler));
   INIT_MODULE(module, "_igc_rolling_shutter", INIT_FUNC(_igc_rolling_shutter));
   INIT_MODULE(module, "_igc_array", INIT_FUNC(_igc_array));
   INIT_MODULE(module, "_igc_multiple_pass", INIT_FUNC(_igc_multiple_pass));

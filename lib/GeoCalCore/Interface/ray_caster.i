@@ -17,6 +17,7 @@
 namespace GeoCal {
 class RayCaster: public GenericObject {
 public:
+  %python_attribute(cartesian_fixed, boost::shared_ptr<CartesianFixed>);
   %python_attribute(start_position, int);
   %python_attribute(number_position, int);
   %python_attribute(last_position, bool);

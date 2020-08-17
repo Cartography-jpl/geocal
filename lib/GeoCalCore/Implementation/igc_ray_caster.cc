@@ -1,6 +1,5 @@
 #include "igc_ray_caster.h"
 #include "simple_dem.h"
-#include "ecr.h"
 #include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
@@ -22,9 +21,8 @@ void IgcRayCaster::load(Archive & ar, const unsigned int version)
 template<class Archive>
 void IgcRayCaster::serialize(Archive & ar, const unsigned int version)
 {
-  GEOCAL_GENERIC_BASE(RayCaster);
-  GEOCAL_BASE(IgcRayCaster, RayCaster);
-  ar & GEOCAL_NVP(igc)
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RayCaster)
+    & GEOCAL_NVP(igc)
     & GEOCAL_NVP_(start_position) & GEOCAL_NVP_(npos) & GEOCAL_NVP(ind)
     & GEOCAL_NVP(nintegration_step) & GEOCAL_NVP(nsub_line)
     & GEOCAL_NVP(nsub_sample) & GEOCAL_NVP_(start_sample)
@@ -142,8 +140,11 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
     for(int i1 = 0; i1 < result_cache.shape()[1]; ++i1)
       for(int i3 = 0; i3 < result_cache.shape()[3]; ++i3)
 	for(int i4 = 0; i4 < result_cache.shape()[4]; ++i4) {
-	  Ecr cf(cf_lv(0,i1,i2,i3,i4,0,0), cf_lv(0,i1,i2,i3,i4,0,1),
-		 cf_lv(0,i1,i2,i3,i4,0,2));
+	  boost::array<double, 3> pv;
+	  pv[0] = cf_lv(0,i1,i2,i3,i4,0,0);
+	  pv[1] = cf_lv(0,i1,i2,i3,i4,0,1);
+	  pv[2] = cf_lv(0,i1,i2,i3,i4,0,2);
+	  boost::shared_ptr<CartesianFixed> cf_p = cf->create(pv);
 	  CartesianFixedLookVector lv(cf_lv(0,i1,i2,i3,i4,1,0), 
 				      cf_lv(0,i1,i2,i3,i4,1,1),
 				      cf_lv(0,i1,i2,i3,i4,1,2));
@@ -154,26 +155,26 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
 	      start_dist = std::min(start_dist, dist(i1-1, i2, i3, i4));
 	    if(i1+1 < result_cache.shape()[1])
 	      start_dist = std::min(start_dist, dist(i1+1, i2, i3, i4));
-	    pt = igc->dem().intersect_start_length(cf, lv, resolution, 
+	    pt = igc->dem().intersect_start_length(*cf_p, lv, resolution, 
 						   start_dist);
 	  } else {
 	    if(i2_ind == 0)
 	      // First subline, we need to start at max height
-	      pt = igc->dem().intersect(cf, lv, resolution, max_height);
+	      pt = igc->dem().intersect(*cf_p, lv, resolution, max_height);
 	    else {
 	      double start_dist = dist(i1, i2_last, i3, i4);
 	      if(i1-1 >= 0)
 		start_dist = std::min(start_dist, dist(i1-1, i2_last, i3, i4));
 	      if(i1+1 < result_cache.shape()[1])
 		start_dist = std::min(start_dist, dist(i1+1, i2_last, i3, i4));
-	      pt = igc->dem().intersect_start_length(cf, lv, resolution, 
+	      pt = igc->dem().intersect_start_length(*cf_p, lv, resolution, 
 						     start_dist);
 	    }
 	    // Store distance for use in next subline.
 	    dist(i1, i2, i3, i4) =
-	      sqrt(sqr(pt->position[0] - cf.position[0]) +
-		   sqr(pt->position[1] - cf.position[1]) +
-		   sqr(pt->position[2] - cf.position[2]));
+	      sqrt(sqr(pt->position[0] - cf_p->position[0]) +
+		   sqr(pt->position[1] - cf_p->position[1]) +
+		   sqr(pt->position[2] - cf_p->position[2]));
 	  }
 	  result_cache(0,i1,i2,i3,i4, 0) = pt->position[0];
 	  result_cache(0,i1,i2,i3,i4, 1) = pt->position[1];

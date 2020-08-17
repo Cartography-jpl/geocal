@@ -342,6 +342,40 @@ void GeoCal::copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out,
 
 //-----------------------------------------------------------------------
 /// \ingroup Miscellaneous
+/// This fills an image with a given value (often 0).
+//-----------------------------------------------------------------------
+
+void GeoCal::fill_image
+(RasterImage& Img, int Fill_value,
+ bool Diagnostic, int Tile_nline, int Tile_nsamp)
+{
+  int tnl = Img.number_tile_line();
+  int tns = Img.number_tile_sample();
+  if(Tile_nline > 0)
+    tnl = Tile_nline;
+  if(Tile_nsamp > 0)
+    tns = Tile_nsamp;
+  int ntile = int(ceil(double(Img.number_line()) / tnl) *
+		  ceil(double(Img.number_sample()) / tns));
+  boost::shared_ptr<boost::progress_display> dp;
+  if(Diagnostic)
+    dp = boost::make_shared<boost::progress_display>(ntile);
+  for(int istart = 0; istart < Img.number_line();
+      istart += tnl)
+    for(int jstart = 0; jstart < Img.number_sample();
+	jstart += tns) {
+      if(dp)
+	++(*dp);
+      for(int i = istart; i < Img.number_line() && i < istart + tnl; ++i)
+	for(int j = jstart; j < Img.number_sample() && j < jstart + tns; 
+	    ++j) {
+	  Img.write(i, j, Fill_value);
+	}
+    }
+}
+
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
 /// This copies one image to another. The images should be the same
 /// size. Setting Diagnostic to true causes messages to be printed as
 /// we do the copying.

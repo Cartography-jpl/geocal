@@ -482,6 +482,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
 	@swigsrc@/iterative_morphological_dilation_wrap.cc \
 	@swigsrc@/igc_ray_caster_wrap.cc \
+	@swigsrc@/ray_caster_resampler_wrap.cc \
 	@swigsrc@/igc_rolling_shutter_wrap.cc \
 	@swigsrc@/igc_array_wrap.cc \
 	@swigsrc@/igc_multiple_pass_wrap.cc \
@@ -674,6 +675,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo \
 	@swigsrc@/_swig_wrap_la-iterative_morphological_dilation_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo \
+	@swigsrc@/_swig_wrap_la-ray_caster_resampler_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_array_wrap.lo \
 	@swigsrc@/_swig_wrap_la-igc_multiple_pass_wrap.lo \
@@ -889,6 +891,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/orbit_piecewise_correction.cc \
 	@srcimplementation@/orbit_time_shift.cc \
 	@srcimplementation@/igc_ray_caster.cc \
+	@srcimplementation@/ray_caster_resampler.cc \
 	@srcimplementation@/tle_orbit.cc \
 	@srcimplementation@/spice_orbit.cc \
 	@srcimplementation@/spice_planet_orbit.cc \
@@ -1085,6 +1088,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-orbit_piecewise_correction.lo \
 	@srcimplementation@/libgeocal_la-orbit_time_shift.lo \
 	@srcimplementation@/libgeocal_la-igc_ray_caster.lo \
+	@srcimplementation@/libgeocal_la-ray_caster_resampler.lo \
 	@srcimplementation@/libgeocal_la-tle_orbit.lo \
 	@srcimplementation@/libgeocal_la-spice_orbit.lo \
 	@srcimplementation@/libgeocal_la-spice_planet_orbit.lo \
@@ -1740,6 +1744,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Plo \
@@ -2069,6 +2074,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo \
@@ -2325,6 +2331,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/orbit_piecewise_correction.h \
 	@srcimplementation@/orbit_time_shift.h \
 	@srcimplementation@/igc_ray_caster.h \
+	@srcimplementation@/ray_caster_resampler.h \
 	@srcimplementation@/tle_orbit.h \
 	@srcimplementation@/spice_orbit.h \
 	@srcimplementation@/spice_planet_orbit.h \
@@ -3350,6 +3357,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/orbit_piecewise_correction.cc \
 	@srcimplementation@/orbit_time_shift.cc \
 	@srcimplementation@/igc_ray_caster.cc \
+	@srcimplementation@/ray_caster_resampler.cc \
 	@srcimplementation@/tle_orbit.cc \
 	@srcimplementation@/spice_orbit.cc \
 	@srcimplementation@/spice_planet_orbit.cc \
@@ -3503,6 +3511,7 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
 	@swigsrc@/iterative_morphological_dilation_wrap.cc \
 	@swigsrc@/igc_ray_caster_wrap.cc \
+	@swigsrc@/ray_caster_resampler_wrap.cc \
 	@swigsrc@/igc_rolling_shutter_wrap.cc \
 	@swigsrc@/igc_array_wrap.cc \
 	@swigsrc@/igc_multiple_pass_wrap.cc \
@@ -3745,6 +3754,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/orbit_piecewise_correction.h \
 	@srcimplementation@/orbit_time_shift.h \
 	@srcimplementation@/igc_ray_caster.h \
+	@srcimplementation@/ray_caster_resampler.h \
 	@srcimplementation@/tle_orbit.h \
 	@srcimplementation@/spice_orbit.h \
 	@srcimplementation@/spice_planet_orbit.h \
@@ -3908,6 +3918,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/planet_coordinate.i \
 	@srcimplementation@/iterative_morphological_dilation.i \
 	@srcimplementation@/igc_ray_caster.i \
+	@srcimplementation@/ray_caster_resampler.i \
 	@srcimplementation@/igc_rolling_shutter.i \
 	@srcimplementation@/igc_array.i \
 	@srcimplementation@/igc_multiple_pass.i \
@@ -4832,6 +4843,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-ray_caster_resampler_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-igc_array_wrap.lo: @swigsrc@/$(am__dirstamp) \
@@ -5401,6 +5414,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-igc_ray_caster.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-ray_caster_resampler.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-tle_orbit.lo:  \
@@ -6494,6 +6510,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Plo@am__quote@ # am--include-marker
@@ -6823,6 +6840,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo@am__quote@ # am--include-marker
@@ -7751,6 +7769,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/igc_ray_caster_wrap.cc' object='@swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-igc_ray_caster_wrap.lo `test -f '@swigsrc@/igc_ray_caster_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_ray_caster_wrap.cc
+
+@swigsrc@/_swig_wrap_la-ray_caster_resampler_wrap.lo: @swigsrc@/ray_caster_resampler_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-ray_caster_resampler_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-ray_caster_resampler_wrap.lo `test -f '@swigsrc@/ray_caster_resampler_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ray_caster_resampler_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/ray_caster_resampler_wrap.cc' object='@swigsrc@/_swig_wrap_la-ray_caster_resampler_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-ray_caster_resampler_wrap.lo `test -f '@swigsrc@/ray_caster_resampler_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ray_caster_resampler_wrap.cc
 
 @swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo: @swigsrc@/igc_rolling_shutter_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-igc_rolling_shutter_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-igc_rolling_shutter_wrap.lo `test -f '@swigsrc@/igc_rolling_shutter_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/igc_rolling_shutter_wrap.cc
@@ -9256,6 +9281,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/igc_ray_caster.cc' object='@srcimplementation@/libgeocal_la-igc_ray_caster.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-igc_ray_caster.lo `test -f '@srcimplementation@/igc_ray_caster.cc' || echo '$(srcdir)/'`@srcimplementation@/igc_ray_caster.cc
+
+@srcimplementation@/libgeocal_la-ray_caster_resampler.lo: @srcimplementation@/ray_caster_resampler.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-ray_caster_resampler.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Tpo -c -o @srcimplementation@/libgeocal_la-ray_caster_resampler.lo `test -f '@srcimplementation@/ray_caster_resampler.cc' || echo '$(srcdir)/'`@srcimplementation@/ray_caster_resampler.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/ray_caster_resampler.cc' object='@srcimplementation@/libgeocal_la-ray_caster_resampler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-ray_caster_resampler.lo `test -f '@srcimplementation@/ray_caster_resampler.cc' || echo '$(srcdir)/'`@srcimplementation@/ray_caster_resampler.cc
 
 @srcimplementation@/libgeocal_la-tle_orbit.lo: @srcimplementation@/tle_orbit.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-tle_orbit.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Tpo -c -o @srcimplementation@/libgeocal_la-tle_orbit.lo `test -f '@srcimplementation@/tle_orbit.cc' || echo '$(srcdir)/'`@srcimplementation@/tle_orbit.cc
@@ -13290,6 +13322,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Plo
@@ -13619,6 +13652,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo
@@ -13935,6 +13969,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Plo
@@ -14264,6 +14299,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo

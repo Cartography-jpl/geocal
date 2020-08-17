@@ -6731,6 +6731,51 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_RayCaster__v_cartesian_fixed(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RayCaster *arg1 = (GeoCal::RayCaster *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCaster const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCaster const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::CartesianFixed > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCaster_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCaster__v_cartesian_fixed" "', argument " "1"" of type '" "GeoCal::RayCaster const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCaster * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCaster * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RayCaster const *)arg1)->cartesian_fixed();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RayCaster__v_start_position(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RayCaster *arg1 = (GeoCal::RayCaster *) 0 ;
@@ -7293,6 +7338,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
+	 { (char *)"RayCaster__v_cartesian_fixed", (PyCFunction)_wrap_RayCaster__v_cartesian_fixed, METH_O, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr<CartesianFixed>& GeoCal::RayCaster::cartesian_fixed() const\n"
+		"The CartesianFixed object that we are using for the RayCaster, for\n"
+		"example Ecr for the earth. \n"
+		""},
 	 { (char *)"RayCaster__v_start_position", (PyCFunction)_wrap_RayCaster__v_start_position, METH_O, (char *)"\n"
 		"\n"
 		"virtual int GeoCal::RayCaster::start_position() const =0\n"

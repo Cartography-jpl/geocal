@@ -793,6 +793,15 @@ def copy_no_fill(Img_in, Img_out, Fill_value=0, diagnostic=False):
     to a common image. 
     """
     return _raster_image.copy_no_fill(Img_in, Img_out, Fill_value, diagnostic)
+
+def fill_image(Img, Fill_value=0, diagnostic=False, Tile_nline=-1, Tile_nsamp=-1):
+    """
+
+    void GeoCal::fill_image(RasterImage &Img, int Fill_value=0, bool diagnostic=false, int
+    Tile_nline=-1, int Tile_nsamp=-1)
+    This fills an image with a given value (often 0). 
+    """
+    return _raster_image.fill_image(Img, Fill_value, diagnostic, Tile_nline, Tile_nsamp)
 class Vector_RasterImage(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr

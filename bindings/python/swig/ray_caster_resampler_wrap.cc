@@ -3498,178 +3498,178 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__RasterImageMultiBand swig_types[43]
 #define SWIGTYPE_p_GeoCal__RasterImageMultiBandVariable swig_types[44]
 #define SWIGTYPE_p_GeoCal__RasterImageTileIterator swig_types[45]
-#define SWIGTYPE_p_GeoCal__Rsm swig_types[46]
-#define SWIGTYPE_p_GeoCal__RsmAdjustableParameter swig_types[47]
-#define SWIGTYPE_p_GeoCal__RsmBase swig_types[48]
-#define SWIGTYPE_p_GeoCal__RsmDirectCovariance swig_types[49]
-#define SWIGTYPE_p_GeoCal__RsmId swig_types[50]
-#define SWIGTYPE_p_GeoCal__RsmIdTiming swig_types[51]
-#define SWIGTYPE_p_GeoCal__RsmIndirectCovariance swig_types[52]
-#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[53]
-#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[54]
-#define SWIGTYPE_p_GeoCal__Time swig_types[55]
-#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[56]
-#define SWIGTYPE_p_GeoCal__VicarException swig_types[57]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[58]
-#define SWIGTYPE_p_GeoCal__WithParameter swig_types[59]
-#define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[60]
-#define SWIGTYPE_p_allocator_type swig_types[61]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[62]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[63]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[64]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[65]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[66]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[67]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[68]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[69]
-#define SWIGTYPE_p_blitz__ArrayT_char_1_t swig_types[70]
-#define SWIGTYPE_p_blitz__ArrayT_char_2_t swig_types[71]
-#define SWIGTYPE_p_blitz__ArrayT_char_3_t swig_types[72]
-#define SWIGTYPE_p_blitz__ArrayT_char_4_t swig_types[73]
-#define SWIGTYPE_p_blitz__ArrayT_char_5_t swig_types[74]
-#define SWIGTYPE_p_blitz__ArrayT_char_6_t swig_types[75]
-#define SWIGTYPE_p_blitz__ArrayT_char_7_t swig_types[76]
-#define SWIGTYPE_p_blitz__ArrayT_char_8_t swig_types[77]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[78]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[79]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[80]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[81]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[82]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[83]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[84]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[85]
-#define SWIGTYPE_p_blitz__ArrayT_float_1_t swig_types[86]
-#define SWIGTYPE_p_blitz__ArrayT_float_2_t swig_types[87]
-#define SWIGTYPE_p_blitz__ArrayT_float_3_t swig_types[88]
-#define SWIGTYPE_p_blitz__ArrayT_float_4_t swig_types[89]
-#define SWIGTYPE_p_blitz__ArrayT_float_5_t swig_types[90]
-#define SWIGTYPE_p_blitz__ArrayT_float_6_t swig_types[91]
-#define SWIGTYPE_p_blitz__ArrayT_float_7_t swig_types[92]
-#define SWIGTYPE_p_blitz__ArrayT_float_8_t swig_types[93]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[94]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[95]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[96]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[97]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[98]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[99]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[100]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[101]
-#define SWIGTYPE_p_blitz__ArrayT_short_1_t swig_types[102]
-#define SWIGTYPE_p_blitz__ArrayT_short_2_t swig_types[103]
-#define SWIGTYPE_p_blitz__ArrayT_short_3_t swig_types[104]
-#define SWIGTYPE_p_blitz__ArrayT_short_4_t swig_types[105]
-#define SWIGTYPE_p_blitz__ArrayT_short_5_t swig_types[106]
-#define SWIGTYPE_p_blitz__ArrayT_short_6_t swig_types[107]
-#define SWIGTYPE_p_blitz__ArrayT_short_7_t swig_types[108]
-#define SWIGTYPE_p_blitz__ArrayT_short_8_t swig_types[109]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_1_t swig_types[110]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_2_t swig_types[111]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_3_t swig_types[112]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_4_t swig_types[113]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_5_t swig_types[114]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_6_t swig_types[115]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_7_t swig_types[116]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_8_t swig_types[117]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_1_t swig_types[118]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_2_t swig_types[119]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_3_t swig_types[120]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_4_t swig_types[121]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_5_t swig_types[122]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_6_t swig_types[123]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_7_t swig_types[124]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_8_t swig_types[125]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_1_t swig_types[126]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_2_t swig_types[127]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_3_t swig_types[128]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_4_t swig_types[129]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_5_t swig_types[130]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[131]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[132]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[133]
-#define SWIGTYPE_p_blitz__Range swig_types[134]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[135]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[136]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[137]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[138]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t swig_types[139]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[140]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[141]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[142]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[143]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[144]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[145]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[146]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[147]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[148]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[149]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[150]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[151]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[152]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[153]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[154]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[155]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[156]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[157]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t swig_types[158]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t swig_types[159]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[160]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[161]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[162]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[163]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[164]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[165]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[166]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[167]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[168]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[169]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[170]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[171]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[172]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[173]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[174]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[175]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[176]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[177]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[178]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[179]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[180]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t swig_types[181]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t swig_types[182]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t swig_types[183]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t swig_types[184]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIdTiming_t swig_types[185]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t swig_types[186]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t swig_types[187]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t swig_types[188]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[189]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[190]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[191]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[192]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[193]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[194]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[195]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[196]
-#define SWIGTYPE_p_char swig_types[197]
-#define SWIGTYPE_p_char_type swig_types[198]
-#define SWIGTYPE_p_difference_type swig_types[199]
-#define SWIGTYPE_p_fmtflags swig_types[200]
-#define SWIGTYPE_p_int_type swig_types[201]
-#define SWIGTYPE_p_iostate swig_types[202]
-#define SWIGTYPE_p_off_type swig_types[203]
-#define SWIGTYPE_p_openmode swig_types[204]
-#define SWIGTYPE_p_p_PyObject swig_types[205]
-#define SWIGTYPE_p_pos_type swig_types[206]
-#define SWIGTYPE_p_seekdir swig_types[207]
-#define SWIGTYPE_p_size_t swig_types[208]
-#define SWIGTYPE_p_size_type swig_types[209]
-#define SWIGTYPE_p_state_type swig_types[210]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t swig_types[211]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[212]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[213]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[214]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[215]
-#define SWIGTYPE_p_std__invalid_argument swig_types[216]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t swig_types[217]
+#define SWIGTYPE_p_GeoCal__RayCaster swig_types[46]
+#define SWIGTYPE_p_GeoCal__RayCasterResampler swig_types[47]
+#define SWIGTYPE_p_GeoCal__Rsm swig_types[48]
+#define SWIGTYPE_p_GeoCal__RsmAdjustableParameter swig_types[49]
+#define SWIGTYPE_p_GeoCal__RsmBase swig_types[50]
+#define SWIGTYPE_p_GeoCal__RsmDirectCovariance swig_types[51]
+#define SWIGTYPE_p_GeoCal__RsmId swig_types[52]
+#define SWIGTYPE_p_GeoCal__RsmIdTiming swig_types[53]
+#define SWIGTYPE_p_GeoCal__RsmIndirectCovariance swig_types[54]
+#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[55]
+#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[56]
+#define SWIGTYPE_p_GeoCal__Time swig_types[57]
+#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[58]
+#define SWIGTYPE_p_GeoCal__VicarException swig_types[59]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[60]
+#define SWIGTYPE_p_GeoCal__WithParameter swig_types[61]
+#define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[62]
+#define SWIGTYPE_p_allocator_type swig_types[63]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[64]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[65]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[66]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[67]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[68]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[69]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[70]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[71]
+#define SWIGTYPE_p_blitz__ArrayT_char_1_t swig_types[72]
+#define SWIGTYPE_p_blitz__ArrayT_char_2_t swig_types[73]
+#define SWIGTYPE_p_blitz__ArrayT_char_3_t swig_types[74]
+#define SWIGTYPE_p_blitz__ArrayT_char_4_t swig_types[75]
+#define SWIGTYPE_p_blitz__ArrayT_char_5_t swig_types[76]
+#define SWIGTYPE_p_blitz__ArrayT_char_6_t swig_types[77]
+#define SWIGTYPE_p_blitz__ArrayT_char_7_t swig_types[78]
+#define SWIGTYPE_p_blitz__ArrayT_char_8_t swig_types[79]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[80]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[81]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[82]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[83]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[84]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[85]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[86]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[87]
+#define SWIGTYPE_p_blitz__ArrayT_float_1_t swig_types[88]
+#define SWIGTYPE_p_blitz__ArrayT_float_2_t swig_types[89]
+#define SWIGTYPE_p_blitz__ArrayT_float_3_t swig_types[90]
+#define SWIGTYPE_p_blitz__ArrayT_float_4_t swig_types[91]
+#define SWIGTYPE_p_blitz__ArrayT_float_5_t swig_types[92]
+#define SWIGTYPE_p_blitz__ArrayT_float_6_t swig_types[93]
+#define SWIGTYPE_p_blitz__ArrayT_float_7_t swig_types[94]
+#define SWIGTYPE_p_blitz__ArrayT_float_8_t swig_types[95]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[96]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[97]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[98]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[99]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[100]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[101]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[102]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[103]
+#define SWIGTYPE_p_blitz__ArrayT_short_1_t swig_types[104]
+#define SWIGTYPE_p_blitz__ArrayT_short_2_t swig_types[105]
+#define SWIGTYPE_p_blitz__ArrayT_short_3_t swig_types[106]
+#define SWIGTYPE_p_blitz__ArrayT_short_4_t swig_types[107]
+#define SWIGTYPE_p_blitz__ArrayT_short_5_t swig_types[108]
+#define SWIGTYPE_p_blitz__ArrayT_short_6_t swig_types[109]
+#define SWIGTYPE_p_blitz__ArrayT_short_7_t swig_types[110]
+#define SWIGTYPE_p_blitz__ArrayT_short_8_t swig_types[111]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_1_t swig_types[112]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_2_t swig_types[113]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_3_t swig_types[114]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_4_t swig_types[115]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_5_t swig_types[116]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_6_t swig_types[117]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_7_t swig_types[118]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_8_t swig_types[119]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_1_t swig_types[120]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_2_t swig_types[121]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_3_t swig_types[122]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_4_t swig_types[123]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_5_t swig_types[124]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_6_t swig_types[125]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_7_t swig_types[126]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_8_t swig_types[127]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_1_t swig_types[128]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_2_t swig_types[129]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_3_t swig_types[130]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_4_t swig_types[131]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_5_t swig_types[132]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[133]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[134]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[135]
+#define SWIGTYPE_p_blitz__Range swig_types[136]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[137]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[138]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[139]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[140]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t swig_types[141]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[142]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[143]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[144]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[145]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[146]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[147]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[148]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[149]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t swig_types[150]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CombinedImageMask_t swig_types[151]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t swig_types[152]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t swig_types[153]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[154]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[155]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[156]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Exception_t swig_types[157]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[158]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticConverter_t swig_types[159]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t swig_types[160]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t swig_types[161]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[162]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundMask_t swig_types[163]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[164]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[165]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t swig_types[166]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t swig_types[167]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t swig_types[168]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageMask_t swig_types[169]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[170]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[171]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[172]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[173]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t swig_types[174]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MetadataMissing_t swig_types[175]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__NoCoverage_t swig_types[176]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t swig_types[177]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OffsetImageMask_t swig_types[178]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t swig_types[179]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t swig_types[180]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t swig_types[181]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t swig_types[182]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t swig_types[183]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCaster_t swig_types[184]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t swig_types[185]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t swig_types[186]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t swig_types[187]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIdTiming_t swig_types[188]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t swig_types[189]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t swig_types[190]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t swig_types[191]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[192]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[193]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[194]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[195]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarException_t swig_types[196]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[197]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[198]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[199]
+#define SWIGTYPE_p_char swig_types[200]
+#define SWIGTYPE_p_char_type swig_types[201]
+#define SWIGTYPE_p_difference_type swig_types[202]
+#define SWIGTYPE_p_fmtflags swig_types[203]
+#define SWIGTYPE_p_int_type swig_types[204]
+#define SWIGTYPE_p_iostate swig_types[205]
+#define SWIGTYPE_p_off_type swig_types[206]
+#define SWIGTYPE_p_openmode swig_types[207]
+#define SWIGTYPE_p_pos_type swig_types[208]
+#define SWIGTYPE_p_seekdir swig_types[209]
+#define SWIGTYPE_p_size_t swig_types[210]
+#define SWIGTYPE_p_size_type swig_types[211]
+#define SWIGTYPE_p_state_type swig_types[212]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[213]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[214]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[215]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[216]
+#define SWIGTYPE_p_std__invalid_argument swig_types[217]
 #define SWIGTYPE_p_swig__SwigPyIterator swig_types[218]
 #define SWIGTYPE_p_traits_type swig_types[219]
 #define SWIGTYPE_p_value_type swig_types[220]
@@ -3700,16 +3700,16 @@ static swig_module_info swig_module = {swig_types, 221, 0, 0, 0, 0};
 #define SWIG_TypeQuery SWIG_Python_TypeQuery
 
 /*-----------------------------------------------
-              @(target):= _raster_image.so
+              @(target):= _ray_caster_resampler.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__raster_image
+#  define SWIG_init    PyInit__ray_caster_resampler
 
 #else
-#  define SWIG_init    init_raster_image
+#  define SWIG_init    init_ray_caster_resampler
 
 #endif
-#define SWIG_name    "_raster_image"
+#define SWIG_name    "_ray_caster_resampler"
 
 #define SWIGVERSION 0x030012 
 #define SWIG_VERSION SWIGVERSION
@@ -5893,7 +5893,7 @@ namespace swig {
 }
 
 
-#include "raster_image.h"
+#include "ray_caster_resampler.h"
 #include "image_ground_connection.h"
 
 
@@ -5908,58 +5908,6 @@ struct SWIG_null_deleter {
 
 
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
-
-
-SWIGINTERN swig_type_info*
-SWIG_pchar_descriptor(void)
-{
-  static int init = 0;
-  static swig_type_info* info = 0;
-  if (!init) {
-    info = SWIG_TypeQuery("_p_char");
-    init = 1;
-  }
-  return info;
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_FromCharPtrAndSize(const char* carray, size_t size)
-{
-  if (carray) {
-    if (size > INT_MAX) {
-      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-      return pchar_descriptor ? 
-	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
-    } else {
-#if PY_VERSION_HEX >= 0x03000000
-#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-      return PyBytes_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#else
-#if PY_VERSION_HEX >= 0x03010000
-      return PyUnicode_DecodeUTF8(carray, static_cast< Py_ssize_t >(size), "surrogateescape");
-#else
-      return PyUnicode_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#endif
-#endif
-#else
-      return PyString_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#endif
-    }
-  } else {
-    return SWIG_Py_Void();
-  }
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_std_string  (const std::string& s)
-{
-  return SWIG_FromCharPtrAndSize(s.data(), s.size());
-}
-
-
-  #define SWIG_From_double   PyFloat_FromDouble 
 
 
 SWIGINTERN int
@@ -5977,276 +5925,13 @@ SWIG_AsVal_int (PyObject * obj, int *val)
   return res;
 }
 
-SWIGINTERN boost::shared_ptr< GeoCal::RasterImage > GeoCal_ArrayRasterImage_get(GeoCal::ArrayRasterImage const *self,int i){ return (*self)(i); }
-SWIGINTERN void GeoCal_ArrayRasterImage_set(GeoCal::ArrayRasterImage *self,int i,boost::shared_ptr< GeoCal::RasterImage > const &V){ (*self)(i) = V; }
-
-SWIGINTERN int
-SWIG_AsVal_bool (PyObject *obj, bool *val)
-{
-  int r;
-  if (!PyBool_Check(obj))
-    return SWIG_ERROR;
-  r = PyObject_IsTrue(obj);
-  if (r == -1)
-    return SWIG_ERROR;
-  if (val) *val = r ? true : false;
-  return SWIG_OK;
-}
-
-
-  namespace swig {
-    template <>  struct traits< boost::shared_ptr< GeoCal::RasterImage > > {
-      typedef pointer_category category;
-      static const char* type_name() { return"boost::shared_ptr< GeoCal::RasterImage >"; }
-    };
-  }
-
-
-namespace swig {
-  template <class SwigPySeq, class Seq>
-  inline void
-  assign(const SwigPySeq& swigpyseq, Seq* seq) {
-    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
-    typedef typename SwigPySeq::value_type value_type;
-    typename SwigPySeq::const_iterator it = swigpyseq.begin();
-    for (;it != swigpyseq.end(); ++it) {
-      seq->insert(seq->end(),(value_type)(*it));
-    }
-  }
-
-  template <class Seq, class T = typename Seq::value_type >
-  struct traits_asptr_stdseq {
-    typedef Seq sequence;
-    typedef T value_type;
-
-    static int asptr(PyObject *obj, sequence **seq) {
-      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
-	sequence *p;
-	swig_type_info *descriptor = swig::type_info<sequence>();
-	if (descriptor && SWIG_IsOK(::SWIG_ConvertPtr(obj, (void **)&p, descriptor, 0))) {
-	  if (seq) *seq = p;
-	  return SWIG_OLDOBJ;
-	}
-      } else if (PySequence_Check(obj)) {
-	try {
-	  SwigPySequence_Cont<value_type> swigpyseq(obj);
-	  if (seq) {
-	    sequence *pseq = new sequence();
-	    assign(swigpyseq, pseq);
-	    *seq = pseq;
-	    return SWIG_NEWOBJ;
-	  } else {
-	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
-	  }
-	} catch (std::exception& e) {
-	  if (seq) {
-	    if (!PyErr_Occurred()) {
-	      PyErr_SetString(PyExc_TypeError, e.what());
-	    }
-	  }
-	  return SWIG_ERROR;
-	}
-      }
-      return SWIG_ERROR;
-    }
-  };
-
-  template <class Seq, class T = typename Seq::value_type >
-  struct traits_from_stdseq {
-    typedef Seq sequence;
-    typedef T value_type;
-    typedef typename Seq::size_type size_type;
-    typedef typename sequence::const_iterator const_iterator;
-
-    static PyObject *from(const sequence& seq) {
-#ifdef SWIG_PYTHON_EXTRA_NATIVE_CONTAINERS
-      swig_type_info *desc = swig::type_info<sequence>();
-      if (desc && desc->clientdata) {
-	return SWIG_InternalNewPointerObj(new sequence(seq), desc, SWIG_POINTER_OWN);
-      }
-#endif
-      size_type size = seq.size();
-      if (size <= (size_type)INT_MAX) {
-	PyObject *obj = PyTuple_New((Py_ssize_t)size);
-	Py_ssize_t i = 0;
-	for (const_iterator it = seq.begin(); it != seq.end(); ++it, ++i) {
-	  PyTuple_SetItem(obj,i,swig::from<value_type>(*it));
-	}
-	return obj;
-      } else {
-	PyErr_SetString(PyExc_OverflowError,"sequence size not valid in python");
-	return NULL;
-      }
-    }
-  };
-}
-
-
-  namespace swig {
-    template <class T>
-    struct traits_reserve<std::vector<T> > {
-      static void reserve(std::vector<T> &seq, typename std::vector<T>::size_type n) {
-        seq.reserve(n);
-      }
-    };
-
-    template <class T>
-    struct traits_asptr<std::vector<T> >  {
-      static int asptr(PyObject *obj, std::vector<T> **vec) {
-	return traits_asptr_stdseq<std::vector<T> >::asptr(obj, vec);
-      }
-    };
-    
-    template <class T>
-    struct traits_from<std::vector<T> > {
-      static PyObject *from(const std::vector<T>& vec) {
-	return traits_from_stdseq<std::vector<T> >::from(vec);
-      }
-    };
-  }
-
-
-      namespace swig {
-	template <>  struct traits<std::vector< boost::shared_ptr< GeoCal::RasterImage >, std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > > {
-	  typedef pointer_category category;
-	  static const char* type_name() {
-	    return "std::vector<" "boost::shared_ptr< GeoCal::RasterImage >" "," "std::allocator< boost::shared_ptr< GeoCal::RasterImage > >" " >";
-	  }
-	};
-      }
-    
-SWIGINTERN swig::SwigPyIterator *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__iterator(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,PyObject **PYTHON_SELF){
-      return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
-    }
-SWIGINTERN bool std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____nonzero__(std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *self){
-      return !(self->empty());
-    }
-SWIGINTERN bool std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____bool__(std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *self){
-      return !(self->empty());
-    }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____len__(std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *self){
-      return self->size();
-    }
-
-SWIGINTERNINLINE PyObject* 
-SWIG_From_unsigned_SS_long  (unsigned long value)
-{
-  return (value > LONG_MAX) ?
-    PyLong_FromUnsignedLong(value) : PyInt_FromLong(static_cast< long >(value));
-}
-
-
-#ifdef SWIG_LONG_LONG_AVAILABLE
-SWIGINTERNINLINE PyObject* 
-SWIG_From_unsigned_SS_long_SS_long  (unsigned long long value)
-{
-  return (value > LONG_MAX) ?
-    PyLong_FromUnsignedLongLong(value) : PyInt_FromLong(static_cast< long >(value));
-}
-#endif
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_size_t  (size_t value)
-{    
-#ifdef SWIG_LONG_LONG_AVAILABLE
-  if (sizeof(size_t) <= sizeof(unsigned long)) {
-#endif
-    return SWIG_From_unsigned_SS_long  (static_cast< unsigned long >(value));
-#ifdef SWIG_LONG_LONG_AVAILABLE
-  } else {
-    /* assume sizeof(size_t) <= sizeof(unsigned long long) */
-    return SWIG_From_unsigned_SS_long_SS_long  (static_cast< unsigned long long >(value));
-  }
-#endif
-}
-
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____getslice__(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j){
-      return swig::getslice(self, i, j, 1);
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setslice____SWIG_0(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j){
-      swig::setslice(self, i, j, 1, std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >());
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setslice____SWIG_1(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j,std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &v){
-      swig::setslice(self, i, j, 1, v);
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____delslice__(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j){
-      swig::delslice(self, i, j, 1);
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____delitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i){
-      swig::erase(self, swig::getpos(self, i));
-    }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____getitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,PySliceObject *slice){
-      Py_ssize_t i, j, step;
-      if( !PySlice_Check(slice) ) {
-        SWIG_Error(SWIG_TypeError, "Slice object expected.");
-        return NULL;
-      }
-      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::difference_type id = i;
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::difference_type jd = j;
-      return swig::getslice(self, id, jd, step);
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setitem____SWIG_0(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,PySliceObject *slice,std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &v){
-      Py_ssize_t i, j, step;
-      if( !PySlice_Check(slice) ) {
-        SWIG_Error(SWIG_TypeError, "Slice object expected.");
-        return;
-      }
-      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::difference_type id = i;
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::difference_type jd = j;
-      swig::setslice(self, id, jd, step, v);
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,PySliceObject *slice){
-      Py_ssize_t i, j, step;
-      if( !PySlice_Check(slice) ) {
-        SWIG_Error(SWIG_TypeError, "Slice object expected.");
-        return;
-      }
-      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::difference_type id = i;
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::difference_type jd = j;
-      swig::delslice(self, id, jd, step);
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____delitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,PySliceObject *slice){
-      Py_ssize_t i, j, step;
-      if( !PySlice_Check(slice) ) {
-        SWIG_Error(SWIG_TypeError, "Slice object expected.");
-        return;
-      }
-      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::difference_type id = i;
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::difference_type jd = j;
-      swig::delslice(self, id, jd, step);
-    }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____getitem____SWIG_1(std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i){
-      return *(swig::cgetpos(self, i));
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setitem____SWIG_2(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &x){
-      *(swig::getpos(self,i)) = x;
-    }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__pop(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self){
-      if (self->size() == 0)
-	throw std::out_of_range("pop from empty container");
-      std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >::value_type x = self->back();
-      self->pop_back();
-      return x;
-    }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__append(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &x){
-      self->push_back(x);
-    }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__erase__SWIG_0(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos){ return self->erase(pos); }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__erase__SWIG_1(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator first,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator last){ return self->erase(first, last); }
-SWIGINTERN std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__insert__SWIG_0(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &x){ return self->insert(pos, x); }
-SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__insert__SWIG_1(std::vector< boost::shared_ptr< GeoCal::RasterImage > > *self,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type n,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &x){ self->insert(pos, n, x); }
 
 
 /* ---------------------------------------------------
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "raster_image_wrap.h"
+#include "ray_caster_resampler_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -7027,3023 +6712,63 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_RasterImageTileIterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_RayCasterResampler(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  PyObject *swig_obj[1] ;
-  GeoCal::RasterImageTileIterator *result = 0 ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_RasterImageTileIterator" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_RasterImageTileIterator" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = (GeoCal::RasterImageTileIterator *)new GeoCal::RasterImageTileIterator((GeoCal::RasterImage const &)*arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::RasterImageTileIterator > *smartresult = result ? new boost::shared_ptr<  GeoCal::RasterImageTileIterator >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_istart(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator__v_istart" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->istart();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_jstart(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator__v_jstart" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->jstart();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_iend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator__v_iend" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->iend();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_jend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator__v_jend" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->jend();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_number_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator__v_number_line" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->number_line();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_number_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator__v_number_sample" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->number_sample();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator__v_end" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)((GeoCal::RasterImageTileIterator const *)arg1)->end();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator_next(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  GeoCal::RasterImageTileIterator *result = 0 ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator_next" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (GeoCal::RasterImageTileIterator *) &(arg1)->operator ++();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::RasterImageTileIterator > *smartresult = new boost::shared_ptr<  GeoCal::RasterImageTileIterator >(result SWIG_NO_NULL_DELETER_0);
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImageTileIterator___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageTileIterator___str__" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImageTileIterator const *)arg1)->print_to_string();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_RasterImageTileIterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImageTileIterator *arg1 = (GeoCal::RasterImageTileIterator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_RasterImageTileIterator" "', argument " "1"" of type '" "GeoCal::RasterImageTileIterator *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageTileIterator > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageTileIterator > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImageTileIterator * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      (void)arg1; delete smartarg1;
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *RasterImageTileIterator_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!SWIG_Python_UnpackTuple(args,(char *)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *RasterImageTileIterator_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  return SWIG_Python_InitShadowInstance(args);
-}
-
-SWIGINTERN PyObject *_wrap_RasterImage_interpolate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_interpolate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_interpolate" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_interpolate" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    try {
-      result = (double)((GeoCal::RasterImage const *)arg1)->interpolate(arg2,arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_overview(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
-  boost::shared_ptr< GeoCal::RasterImage > result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"RasterImage_overview",2,2,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_overview" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_overview" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->overview(arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_interpolate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  GeoCal::ImageCoordinate *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
-  double result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_interpolate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageCoordinate *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RasterImage_interpolate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RasterImage_interpolate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = (double)((GeoCal::RasterImage const *)arg1)->interpolate((GeoCal::ImageCoordinate const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_interpolate(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[4] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RasterImage_interpolate",0,3,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_RasterImage_interpolate__SWIG_1(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_RasterImage_interpolate__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RasterImage_interpolate'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RasterImage::interpolate(double,double) const\n"
-    "    GeoCal::RasterImage::interpolate(GeoCal::ImageCoordinate const &) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_copy_needs_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_copy_needs_double" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)((GeoCal::RasterImage const *)arg1)->copy_needs_double();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_number_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_number_line" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImage const *)arg1)->number_line();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_number_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_number_sample" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImage const *)arg1)->number_sample();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_number_tile_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_number_tile_line" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImage const *)arg1)->number_tile_line();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_number_tile_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_number_tile_sample" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::RasterImage const *)arg1)->number_tile_sample();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_read" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_read" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_read" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  {
-    try {
-      result = (int)((GeoCal::RasterImage const *)arg1)->read(arg2,arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_unchecked_read_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject *swig_obj[3] ;
-  double result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"RasterImage_unchecked_read_double",3,3,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_unchecked_read_double" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_unchecked_read_double" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_unchecked_read_double" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  {
-    try {
-      result = (double)((GeoCal::RasterImage const *)arg1)->unchecked_read_double(arg2,arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  SwigValueWrapper< blitz::Array< int,2 > > result;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_read" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_read" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_read" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterImage_read" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RasterImage_read" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->read(arg2,arg3,arg4,arg5);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(int);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<int >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<int, 2>* t = new blitz::Array<int, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read_with_pad__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  int arg6 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  int val6 ;
-  int ecode6 = 0 ;
-  SwigValueWrapper< blitz::Array< int,2 > > result;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_read_with_pad" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_read_with_pad" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_read_with_pad" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterImage_read_with_pad" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RasterImage_read_with_pad" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RasterImage_read_with_pad" "', argument " "6"" of type '" "int""'");
-  } 
-  arg6 = static_cast< int >(val6);
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->read_with_pad(arg2,arg3,arg4,arg5,arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(int);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<int >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<int, 2>* t = new blitz::Array<int, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read_with_pad__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  SwigValueWrapper< blitz::Array< int,2 > > result;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_read_with_pad" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_read_with_pad" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_read_with_pad" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterImage_read_with_pad" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RasterImage_read_with_pad" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->read_with_pad(arg2,arg3,arg4,arg5);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(int);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<int >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<int, 2>* t = new blitz::Array<int, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read_with_pad(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[7] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RasterImage_read_with_pad",0,6,argv))) SWIG_fail;
-  --argc;
-  if (argc == 5) {
-    return _wrap_RasterImage_read_with_pad__SWIG_1(self, argc, argv);
-  }
-  if (argc == 6) {
-    return _wrap_RasterImage_read_with_pad__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RasterImage_read_with_pad'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RasterImage::read_with_pad(int,int,int,int,int) const\n"
-    "    GeoCal::RasterImage::read_with_pad(int,int,int,int) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read_double(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  PyObject *swig_obj[5] ;
-  SwigValueWrapper< blitz::Array< double,2 > > result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"RasterImage_read_double",5,5,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_read_double" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_read_double" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_read_double" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterImage_read_double" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RasterImage_read_double" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->read_double(arg2,arg3,arg4,arg5);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read_double_with_pad__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  double arg6 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  double val6 ;
-  int ecode6 = 0 ;
-  SwigValueWrapper< blitz::Array< double,2 > > result;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_read_double_with_pad" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_read_double_with_pad" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_read_double_with_pad" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterImage_read_double_with_pad" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RasterImage_read_double_with_pad" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RasterImage_read_double_with_pad" "', argument " "6"" of type '" "double""'");
-  } 
-  arg6 = static_cast< double >(val6);
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->read_double_with_pad(arg2,arg3,arg4,arg5,arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read_double_with_pad__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  int arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  SwigValueWrapper< blitz::Array< double,2 > > result;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_read_double_with_pad" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_read_double_with_pad" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_read_double_with_pad" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterImage_read_double_with_pad" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RasterImage_read_double_with_pad" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->read_double_with_pad(arg2,arg3,arg4,arg5);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read_double_with_pad(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[7] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RasterImage_read_double_with_pad",0,6,argv))) SWIG_fail;
-  --argc;
-  if (argc == 5) {
-    return _wrap_RasterImage_read_double_with_pad__SWIG_1(self, argc, argv);
-  }
-  if (argc == 6) {
-    return _wrap_RasterImage_read_double_with_pad__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RasterImage_read_double_with_pad'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RasterImage::read_double_with_pad(int,int,int,int,double) const\n"
-    "    GeoCal::RasterImage::read_double_with_pad(int,int,int,int) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  GeoCal::RasterImageTileIterator *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageTileIterator const > tempshared2 ;
-  SwigValueWrapper< blitz::Array< int,2 > > result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_read" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImageTileIterator *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImageTileIterator,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RasterImage_read" "', argument " "2"" of type '" "GeoCal::RasterImageTileIterator const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RasterImage_read" "', argument " "2"" of type '" "GeoCal::RasterImageTileIterator const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp2);
-        arg2 = const_cast< GeoCal::RasterImageTileIterator * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::RasterImageTileIterator * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageTileIterator > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->read((GeoCal::RasterImageTileIterator const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(int);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<int >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<int, 2>* t = new blitz::Array<int, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_int_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_read(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[6] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RasterImage_read",0,5,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_RasterImage_read__SWIG_2(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_RasterImage_read__SWIG_0(self, argc, argv);
-  }
-  if (argc == 5) {
-    return _wrap_RasterImage_read__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RasterImage_read'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RasterImage::read(int,int) const\n"
-    "    GeoCal::RasterImage::read(int,int,int,int) const\n"
-    "    GeoCal::RasterImage::read(GeoCal::RasterImageTileIterator const &) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_write__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  int arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_write" "', argument " "1"" of type '" "GeoCal::RasterImage *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_write" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_write" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RasterImage_write" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  {
-    try {
-      (arg1)->write(arg2,arg3,arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_write__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  blitz::Array< int,2 > *arg4 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  blitz::Array< int,2 > a4 ;
-  PythonObject numpy4 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_write" "', argument " "1"" of type '" "GeoCal::RasterImage *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_write" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_write" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  {
-    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_int_2_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy4.obj = to_numpy<int >(swig_obj[3]);
-      if(!numpy4.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_write', expecting type  Array<int,2>");
-        return NULL;
-      }
-      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
-        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_write', expecting type  Array<int,2>");
-        return NULL;
-      }
-      a4.reference(to_blitz_array<int, 2>(numpy4));
-      arg4 = &a4;
-    }
-  }
-  {
-    try {
-      (arg1)->write(arg2,arg3,(blitz::Array< int,2 > const &)*arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_write(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[5] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RasterImage_write",0,4,argv))) SWIG_fail;
-  --argc;
-  if (argc == 4) {
-    int _v = 0;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[3], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_1;
-    return _wrap_RasterImage_write__SWIG_0(self, argc, argv);
-  }
-check_1:
-  
-  if (argc == 4) {
-    return _wrap_RasterImage_write__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RasterImage_write'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RasterImage::write(int,int,int)\n"
-    "    GeoCal::RasterImage::write(int,int,blitz::Array< int,2 > const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage___str__" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->print_to_string();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_has_map_info(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_has_map_info" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)((GeoCal::RasterImage const *)arg1)->has_map_info();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_map_info(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  GeoCal::MapInfo result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_map_info" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->map_info();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::MapInfo > *smartresult = new boost::shared_ptr<  GeoCal::MapInfo >(new GeoCal::MapInfo((GeoCal::MapInfo &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  GeoCal::ImageCoordinate *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate > result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_ground_coordinate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageCoordinate *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RasterImage_ground_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RasterImage_ground_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->ground_coordinate((GeoCal::ImageCoordinate const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  GeoCal::ImageCoordinate *arg2 = 0 ;
-  GeoCal::Dem *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::Dem const > tempshared3 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate > result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_ground_coordinate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ImageCoordinate *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RasterImage_ground_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RasterImage_ground_coordinate" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
-        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Dem *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Dem,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RasterImage_ground_coordinate" "', argument " "3"" of type '" "GeoCal::Dem const &""'");
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RasterImage_ground_coordinate" "', argument " "3"" of type '" "GeoCal::Dem const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3);
-        arg3 = const_cast< GeoCal::Dem * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::Dem * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp3)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->ground_coordinate((GeoCal::ImageCoordinate const &)*arg2,(GeoCal::Dem const &)*arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate > result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_ground_coordinate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_ground_coordinate" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_ground_coordinate" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->ground_coordinate(arg2,arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  GeoCal::Dem *arg4 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
-  boost::shared_ptr< GeoCal::Dem const > tempshared4 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate > result;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_ground_coordinate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RasterImage_ground_coordinate" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RasterImage_ground_coordinate" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Dem *ptr;
-    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__Dem,  0 , &newmem);
-    if (SWIG_IsOK(res4)) {
-      arg4 = ptr;
-    } else {
-      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
-      if (!SWIG_IsOK(res4)) {
-        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "RasterImage_ground_coordinate" "', argument " "4"" of type '" "GeoCal::Dem const &""'");
-      }
-      if (!argp4) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RasterImage_ground_coordinate" "', argument " "4"" of type '" "GeoCal::Dem const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp4);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp4);
-        arg4 = const_cast< GeoCal::Dem * >(tempshared4.get());
-      } else {
-        arg4 = const_cast< GeoCal::Dem * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp4)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->ground_coordinate(arg2,arg3,(GeoCal::Dem const &)*arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[5] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RasterImage_ground_coordinate",0,4,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_RasterImage_ground_coordinate__SWIG_0(self, argc, argv);
-  }
-  if (argc == 3) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    return _wrap_RasterImage_ground_coordinate__SWIG_1(self, argc, argv);
-  }
-check_2:
-  
-  if (argc == 3) {
-    return _wrap_RasterImage_ground_coordinate__SWIG_2(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_RasterImage_ground_coordinate__SWIG_3(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RasterImage_ground_coordinate'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RasterImage::ground_coordinate(GeoCal::ImageCoordinate const &) const\n"
-    "    GeoCal::RasterImage::ground_coordinate(GeoCal::ImageCoordinate const &,GeoCal::Dem const &) const\n"
-    "    GeoCal::RasterImage::ground_coordinate(double,double) const\n"
-    "    GeoCal::RasterImage::ground_coordinate(double,double,GeoCal::Dem const &) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  GeoCal::GroundCoordinate *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
-  GeoCal::ImageCoordinate result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_coordinate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::GroundCoordinate *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RasterImage_coordinate" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RasterImage_coordinate" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
-        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->coordinate((GeoCal::GroundCoordinate const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  blitz::Array< double,1 > *arg2 = 0 ;
-  blitz::Array< double,1 > *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  blitz::Array< double,1 > a2 ;
-  PythonObject numpy2 ;
-  blitz::Array< double,1 > a3 ;
-  PythonObject numpy3 ;
-  SwigValueWrapper< blitz::Array< double,2 > > result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage_coordinate" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy2.obj = to_numpy<double >(swig_obj[1]);
-      if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_coordinate', expecting type  Array<double,1>");
-        return NULL;
-      }
-      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_coordinate', expecting type  Array<double,1>");
-        return NULL;
-      }
-      a2.reference(to_blitz_array<double, 1>(numpy2));
-      arg2 = &a2;
-    }
-  }
-  {
-    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
-      0 );
-    if(!SWIG_IsOK(res)) {
-      numpy3.obj = to_numpy<double >(swig_obj[2]);
-      if(!numpy3.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_coordinate', expecting type  Array<double,1>");
-        return NULL;
-      }
-      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'RasterImage_coordinate', expecting type  Array<double,1>");
-        return NULL;
-      }
-      a3.reference(to_blitz_array<double, 1>(numpy3));
-      arg3 = &a3;
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage_coordinate(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[4] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RasterImage_coordinate",0,3,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_RasterImage_coordinate__SWIG_0(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_RasterImage_coordinate__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RasterImage_coordinate'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RasterImage::coordinate(GeoCal::GroundCoordinate const &) const\n"
-    "    GeoCal::RasterImage::coordinate(blitz::Array< double,1 > const &,blitz::Array< double,1 > const &) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_grid_center_line_resolution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  double result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_grid_center_line_resolution" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (double)((GeoCal::RasterImage const *)arg1)->grid_center_line_resolution();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_grid_center_sample_resolution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  double result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_grid_center_sample_resolution" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (double)((GeoCal::RasterImage const *)arg1)->grid_center_sample_resolution();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_has_rpc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_has_rpc" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)((GeoCal::RasterImage const *)arg1)->has_rpc();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_rpc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  SwigValueWrapper< boost::shared_ptr< GeoCal::Rpc > > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_rpc" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->rpc_ptr();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj((new boost::shared_ptr< GeoCal::Rpc >(static_cast< const boost::shared_ptr< GeoCal::Rpc >& >(result))), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_has_rsm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_has_rsm" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (bool)((GeoCal::RasterImage const *)arg1)->has_rsm();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RasterImage__v_rsm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::Rsm > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImage__v_rsm" "', argument " "1"" of type '" "GeoCal::RasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RasterImage const *)arg1)->rsm();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_RasterImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = (GeoCal::RasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImage > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_RasterImage" "', argument " "1"" of type '" "GeoCal::RasterImage *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::RasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      (void)arg1; delete smartarg1;
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *RasterImage_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!SWIG_Python_UnpackTuple(args,(char *)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *_wrap_new_ArrayRasterImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::ArrayRasterImage *result = 0 ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"new_ArrayRasterImage",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (GeoCal::ArrayRasterImage *)new GeoCal::ArrayRasterImage();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::ArrayRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::ArrayRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ArrayRasterImage_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::ArrayRasterImage *arg1 = (GeoCal::ArrayRasterImage *) 0 ;
+  boost::shared_ptr< GeoCal::RayCaster > *arg1 = 0 ;
   boost::shared_ptr< GeoCal::RasterImage > *arg2 = 0 ;
-  void *argp1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > *arg4 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCaster > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCaster > temp2shared1 ;
   void *argp2 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::RasterImage > tempshared2 ;
   boost::shared_ptr< GeoCal::RasterImage > temp2shared2 ;
-  PyObject *swig_obj[2] ;
+  void *argp3 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage > tempshared4 ;
+  boost::shared_ptr< GeoCal::RasterImage > temp2shared4 ;
+  PyObject *swig_obj[4] ;
+  GeoCal::RayCasterResampler *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"ArrayRasterImage_append",2,2,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"new_RayCasterResampler",4,4,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCaster_t,  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayRasterImage_append" "', argument " "1"" of type '" "GeoCal::ArrayRasterImage *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_RayCasterResampler" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::RayCaster > const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >(tempshared1.get());
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::RayCaster > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RayCaster > * >(argp1);
+      arg1 = &tempshared1;
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::RayCaster > * >(argp1) : &tempshared1;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
     }
   }
   {
     int newmem = 0;
     res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ArrayRasterImage_append" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_RayCasterResampler" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2);
@@ -10066,159 +6791,10 @@ SWIGINTERN PyObject *_wrap_ArrayRasterImage_append(PyObject *SWIGUNUSEDPARM(self
     }
   }
   {
-    try {
-      (arg1)->push_back((boost::shared_ptr< GeoCal::RasterImage > const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ArrayRasterImage_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::ArrayRasterImage *arg1 = (GeoCal::ArrayRasterImage *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayRasterImage_size" "', argument " "1"" of type '" "GeoCal::ArrayRasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (int)((GeoCal::ArrayRasterImage const *)arg1)->size();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ArrayRasterImage_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::ArrayRasterImage *arg1 = (GeoCal::ArrayRasterImage *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage const > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
-  boost::shared_ptr< GeoCal::RasterImage > result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"ArrayRasterImage_get",2,2,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayRasterImage_get" "', argument " "1"" of type '" "GeoCal::ArrayRasterImage const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ArrayRasterImage_get" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  {
-    try {
-      result = GeoCal_ArrayRasterImage_get((GeoCal::ArrayRasterImage const *)arg1,arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_ArrayRasterImage_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::ArrayRasterImage *arg1 = (GeoCal::ArrayRasterImage *) 0 ;
-  int arg2 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
-  PyObject *swig_obj[3] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"ArrayRasterImage_set",3,3,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayRasterImage_set" "', argument " "1"" of type '" "GeoCal::ArrayRasterImage *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ArrayRasterImage_set" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  {
     int newmem = 0;
     res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ArrayRasterImage_set" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_RayCasterResampler" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
@@ -10241,8 +6817,79 @@ SWIGINTERN PyObject *_wrap_ArrayRasterImage_set(PyObject *SWIGUNUSEDPARM(self), 
     }
   }
   {
+    int newmem = 0;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_RayCasterResampler" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp4);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp4);
+      arg4 = &tempshared4;
+    } else {
+      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp4) : &tempshared4;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg4 = &temp2shared4;
+    }
+  }
+  {
     try {
-      GeoCal_ArrayRasterImage_set(arg1,arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3);
+      result = (GeoCal::RayCasterResampler *)new GeoCal::RayCasterResampler((boost::shared_ptr< GeoCal::RayCaster > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::RayCasterResampler > *smartresult = result ? new boost::shared_ptr<  GeoCal::RayCasterResampler >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RayCasterResampler_ray_cast_step(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler_ray_cast_step" "', argument " "1"" of type '" "GeoCal::RayCasterResampler *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->ray_cast_step();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -10256,73 +6903,267 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_ArrayRasterImage___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RayCasterResampler_final_rad_step(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::ArrayRasterImage *arg1 = (GeoCal::ArrayRasterImage *) 0 ;
+  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
+  int arg2 ;
+  int arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage const > tempshared1 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
+  boost::shared_ptr< GeoCal::RayCasterResampler > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"RayCasterResampler_final_rad_step",3,3,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ArrayRasterImage___str__" "', argument " "1"" of type '" "GeoCal::ArrayRasterImage const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler_final_rad_step" "', argument " "1"" of type '" "GeoCal::RayCasterResampler *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RayCasterResampler_final_rad_step" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RayCasterResampler_final_rad_step" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
   {
     try {
-      result = ((GeoCal::ArrayRasterImage const *)arg1)->print_to_string();
+      (arg1)->final_rad_step(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_ArrayRasterImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RayCasterResampler__v_ray_caster(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::ArrayRasterImage *arg1 = (GeoCal::ArrayRasterImage *) 0 ;
+  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage > tempshared1 ;
-  boost::shared_ptr< GeoCal::ArrayRasterImage > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::RayCaster > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler__v_ray_caster" "', argument " "1"" of type '" "GeoCal::RayCasterResampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RayCasterResampler const *)arg1)->ray_caster();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RayCasterResampler__v_image(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::RasterImage > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler__v_image" "', argument " "1"" of type '" "GeoCal::RayCasterResampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RayCasterResampler const *)arg1)->image();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RayCasterResampler__v_res(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::RasterImage > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler__v_res" "', argument " "1"" of type '" "GeoCal::RayCasterResampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RayCasterResampler const *)arg1)->res();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RayCasterResampler__v_count_scratch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::RasterImage > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler__v_count_scratch" "', argument " "1"" of type '" "GeoCal::RayCasterResampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RayCasterResampler const *)arg1)->count_scratch();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_RayCasterResampler(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ArrayRasterImage" "', argument " "1"" of type '" "GeoCal::ArrayRasterImage *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_RayCasterResampler" "', argument " "1"" of type '" "GeoCal::RayCasterResampler *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayRasterImage > * >(argp1);
-      arg1 = const_cast< GeoCal::ArrayRasterImage * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -10341,2848 +7182,14 @@ fail:
 }
 
 
-SWIGINTERN PyObject *ArrayRasterImage_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *RayCasterResampler_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char *)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *ArrayRasterImage_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  return SWIG_Python_InitShadowInstance(args);
-}
-
-SWIGINTERN PyObject *_wrap_copy_no_fill__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  GeoCal::RasterImage *arg2 = 0 ;
-  int arg3 ;
-  bool arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared2 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  bool val4 ;
-  int ecode4 = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_no_fill" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_no_fill" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_no_fill" "', argument " "2"" of type '" "GeoCal::RasterImage &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_no_fill" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
-        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2)->get());
-      }
-    }
-  }
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy_no_fill" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "copy_no_fill" "', argument " "4"" of type '" "bool""'");
-  } 
-  arg4 = static_cast< bool >(val4);
-  {
-    try {
-      GeoCal::copy_no_fill((GeoCal::RasterImage const &)*arg1,*arg2,arg3,arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_copy_no_fill__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  GeoCal::RasterImage *arg2 = 0 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared2 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_no_fill" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_no_fill" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_no_fill" "', argument " "2"" of type '" "GeoCal::RasterImage &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_no_fill" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
-        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2)->get());
-      }
-    }
-  }
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "copy_no_fill" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  {
-    try {
-      GeoCal::copy_no_fill((GeoCal::RasterImage const &)*arg1,*arg2,arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_copy_no_fill__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  GeoCal::RasterImage *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage const > tempshared1 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared2 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "copy_no_fill" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_no_fill" "', argument " "1"" of type '" "GeoCal::RasterImage const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "copy_no_fill" "', argument " "2"" of type '" "GeoCal::RasterImage &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "copy_no_fill" "', argument " "2"" of type '" "GeoCal::RasterImage &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2);
-        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      GeoCal::copy_no_fill((GeoCal::RasterImage const &)*arg1,*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_copy_no_fill(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[5] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"copy_no_fill",0,4,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_copy_no_fill__SWIG_2(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_copy_no_fill__SWIG_1(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_copy_no_fill__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'copy_no_fill'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::copy_no_fill(GeoCal::RasterImage const &,GeoCal::RasterImage &,int,bool)\n"
-    "    GeoCal::copy_no_fill(GeoCal::RasterImage const &,GeoCal::RasterImage &,int)\n"
-    "    GeoCal::copy_no_fill(GeoCal::RasterImage const &,GeoCal::RasterImage &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_fill_image__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  int arg2 ;
-  bool arg3 ;
-  int arg4 ;
-  int arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  bool val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  int val5 ;
-  int ecode5 = 0 ;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "fill_image" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "fill_image" "', argument " "3"" of type '" "bool""'");
-  } 
-  arg3 = static_cast< bool >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "fill_image" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "fill_image" "', argument " "5"" of type '" "int""'");
-  } 
-  arg5 = static_cast< int >(val5);
-  {
-    try {
-      GeoCal::fill_image(*arg1,arg2,arg3,arg4,arg5);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_fill_image__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  int arg2 ;
-  bool arg3 ;
-  int arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  bool val3 ;
-  int ecode3 = 0 ;
-  int val4 ;
-  int ecode4 = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "fill_image" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "fill_image" "', argument " "3"" of type '" "bool""'");
-  } 
-  arg3 = static_cast< bool >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "fill_image" "', argument " "4"" of type '" "int""'");
-  } 
-  arg4 = static_cast< int >(val4);
-  {
-    try {
-      GeoCal::fill_image(*arg1,arg2,arg3,arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_fill_image__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  int arg2 ;
-  bool arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  bool val3 ;
-  int ecode3 = 0 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "fill_image" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "fill_image" "', argument " "3"" of type '" "bool""'");
-  } 
-  arg3 = static_cast< bool >(val3);
-  {
-    try {
-      GeoCal::fill_image(*arg1,arg2,arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_fill_image__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "fill_image" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  {
-    try {
-      GeoCal::fill_image(*arg1,arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_fill_image__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::RasterImage *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared1 ;
-  
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::RasterImage *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "fill_image" "', argument " "1"" of type '" "GeoCal::RasterImage &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1);
-        arg1 = const_cast< GeoCal::RasterImage * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImage > * >(argp1)->get());
-      }
-    }
-  }
-  {
-    try {
-      GeoCal::fill_image(*arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_fill_image(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[6] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"fill_image",0,5,argv))) SWIG_fail;
-  --argc;
-  if (argc == 1) {
-    return _wrap_fill_image__SWIG_4(self, argc, argv);
-  }
-  if (argc == 2) {
-    return _wrap_fill_image__SWIG_3(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_fill_image__SWIG_2(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_fill_image__SWIG_1(self, argc, argv);
-  }
-  if (argc == 5) {
-    return _wrap_fill_image__SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'fill_image'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::fill_image(GeoCal::RasterImage &,int,bool,int,int)\n"
-    "    GeoCal::fill_image(GeoCal::RasterImage &,int,bool,int)\n"
-    "    GeoCal::fill_image(GeoCal::RasterImage &,int,bool)\n"
-    "    GeoCal::fill_image(GeoCal::RasterImage &,int)\n"
-    "    GeoCal::fill_image(GeoCal::RasterImage &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  PyObject **arg2 = (PyObject **) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  swig::SwigPyIterator *result = 0 ;
-  
-  arg2 = &swig_obj[0];
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_iterator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__iterator(arg1,arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___nonzero__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___bool__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___len__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  ptrdiff_t val2 ;
-  int ecode2 = 0 ;
-  ptrdiff_t val3 ;
-  int ecode3 = 0 ;
-  PyObject *swig_obj[3] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *result = 0 ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"Vector_RasterImage___getslice__",3,3,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___getslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage___getslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val2);
-  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_RasterImage___getslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val3);
-  {
-    try {
-      try {
-        result = (std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____getslice__(arg1,arg2,arg3);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  ptrdiff_t val2 ;
-  int ecode2 = 0 ;
-  ptrdiff_t val3 ;
-  int ecode3 = 0 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage___setslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val2);
-  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_RasterImage___setslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val3);
-  {
-    try {
-      try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setslice____SWIG_0(arg1,arg2,arg3);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg3 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *arg4 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  ptrdiff_t val2 ;
-  int ecode2 = 0 ;
-  ptrdiff_t val3 ;
-  int ecode3 = 0 ;
-  int res4 = SWIG_OLDOBJ ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___setslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage___setslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val2);
-  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_RasterImage___setslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val3);
-  {
-    std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *ptr = (std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *)0;
-    res4 = swig::asptr(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_RasterImage___setslice__" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_RasterImage___setslice__" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  {
-    try {
-      try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setslice____SWIG_1(arg1,arg2,arg3,(std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)*arg4);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___setslice__(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[5] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_RasterImage___setslice__",0,4,argv))) SWIG_fail;
-  --argc;
-  if (argc == 3) {
-    return _wrap_Vector_RasterImage___setslice____SWIG_0(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_Vector_RasterImage___setslice____SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_RasterImage___setslice__'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__setslice__(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__setslice__(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type,std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  ptrdiff_t val2 ;
-  int ecode2 = 0 ;
-  ptrdiff_t val3 ;
-  int ecode3 = 0 ;
-  PyObject *swig_obj[3] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"Vector_RasterImage___delslice__",3,3,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___delslice__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage___delslice__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val2);
-  ecode3 = SWIG_AsVal_ptrdiff_t(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_RasterImage___delslice__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val3);
-  {
-    try {
-      try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____delslice__(arg1,arg2,arg3);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  ptrdiff_t val2 ;
-  int ecode2 = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage___delitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val2);
-  {
-    try {
-      try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____delitem____SWIG_0(arg1,arg2);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  PySliceObject *arg2 = (PySliceObject *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *result = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    if (!PySlice_Check(swig_obj[1])) {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
-    }
-    arg2 = (PySliceObject *) swig_obj[1];
-  }
-  {
-    try {
-      try {
-        result = (std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____getitem____SWIG_0(arg1,arg2);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  PySliceObject *arg2 = (PySliceObject *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int res3 = SWIG_OLDOBJ ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    if (!PySlice_Check(swig_obj[1])) {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
-    }
-    arg2 = (PySliceObject *) swig_obj[1];
-  }
-  {
-    std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *ptr = (std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *)0;
-    res3 = swig::asptr(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_RasterImage___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_RasterImage___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  {
-    try {
-      try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setitem____SWIG_0(arg1,arg2,(std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)*arg3);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  PySliceObject *arg2 = (PySliceObject *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    if (!PySlice_Check(swig_obj[1])) {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
-    }
-    arg2 = (PySliceObject *) swig_obj[1];
-  }
-  {
-    try {
-      try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setitem____SWIG_1(arg1,arg2);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  PySliceObject *arg2 = (PySliceObject *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___delitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    if (!PySlice_Check(swig_obj[1])) {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
-    }
-    arg2 = (PySliceObject *) swig_obj[1];
-  }
-  {
-    try {
-      try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____delitem____SWIG_1(arg1,arg2);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      catch(std::invalid_argument &_e) {
-        SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___delitem__(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[3] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_RasterImage___delitem__",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    int _v = 0;
-    {
-      {
-        _v = PySlice_Check(argv[1]);
-      }
-    }
-    if (!_v) goto check_1;
-    return _wrap_Vector_RasterImage___delitem____SWIG_1(self, argc, argv);
-  }
-check_1:
-  
-  if (argc == 2) {
-    return _wrap_Vector_RasterImage___delitem____SWIG_0(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_RasterImage___delitem__'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__delitem__(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__delitem__(PySliceObject *)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  ptrdiff_t val2 ;
-  int ecode2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *result = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___getitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage___getitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val2);
-  {
-    try {
-      try {
-        result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *) &std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____getitem____SWIG_1((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1,arg2);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___getitem__(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[3] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_RasterImage___getitem__",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    int _v = 0;
-    {
-      {
-        _v = PySlice_Check(argv[1]);
-      }
-    }
-    if (!_v) goto check_1;
-    return _wrap_Vector_RasterImage___getitem____SWIG_0(self, argc, argv);
-  }
-check_1:
-  
-  if (argc == 2) {
-    return _wrap_Vector_RasterImage___getitem____SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_RasterImage___getitem__'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__getitem__(PySliceObject *)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__getitem__(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  ptrdiff_t val2 ;
-  int ecode2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type tempshared3 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type temp2shared3 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage___setitem__" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_ptrdiff_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage___setitem__" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type >(val2);
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_RasterImage___setitem__" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3) : &tempshared3;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    try {
-      try {
-        std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____setitem____SWIG_2(arg1,arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage___setitem__(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[4] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_RasterImage___setitem__",0,3,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_Vector_RasterImage___setitem____SWIG_1(self, argc, argv);
-  }
-  if (argc == 3) {
-    int _v = 0;
-    {
-      {
-        _v = PySlice_Check(argv[1]);
-      }
-    }
-    if (!_v) goto check_2;
-    {
-      int res = swig::asptr(argv[2], (std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > >**)(0));
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    return _wrap_Vector_RasterImage___setitem____SWIG_0(self, argc, argv);
-  }
-check_2:
-  
-  if (argc == 3) {
-    return _wrap_Vector_RasterImage___setitem____SWIG_2(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_RasterImage___setitem__'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__setitem__(PySliceObject *,std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__setitem__(PySliceObject *)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::__setitem__(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_pop" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      try {
-        result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__pop(arg1);
-      }
-      catch(std::out_of_range &_e) {
-        SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
-      }
-      
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type tempshared2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type temp2shared2 ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"Vector_RasterImage_append",2,2,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_append" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_RasterImage_append" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2) : &tempshared2;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    try {
-      std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Vector_RasterImage__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *result = 0 ;
-  
-  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
-  {
-    try {
-      result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *)new std::vector< boost::shared_ptr< GeoCal::RasterImage > >();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Vector_RasterImage__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *result = 0 ;
-  
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  {
-    std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *ptr = (std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *)0;
-    res1 = swig::asptr(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Vector_RasterImage" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Vector_RasterImage" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    try {
-      result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *)new std::vector< boost::shared_ptr< GeoCal::RasterImage > >((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const &)*arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, SWIG_POINTER_NEW |  0 );
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  bool result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_empty" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (bool)((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->empty();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_size" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = ((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->size();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"Vector_RasterImage_swap",2,2,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_swap" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_RasterImage_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Vector_RasterImage_swap" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > &""'"); 
-  }
-  arg2 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp2);
-  {
-    try {
-      (arg1)->swap(*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_begin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (arg1)->begin();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator & >(result)),
-    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_end" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (arg1)->end();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator & >(result)),
-    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::reverse_iterator result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_rbegin" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (arg1)->rbegin();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::RasterImage > >::reverse_iterator & >(result)),
-    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::reverse_iterator result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_rend" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (arg1)->rend();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::RasterImage > >::reverse_iterator & >(result)),
-    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_clear" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      (arg1)->clear();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  SwigValueWrapper< std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_get_allocator" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = ((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->get_allocator();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj((new std::vector< boost::shared_ptr< GeoCal::RasterImage > >::allocator_type(static_cast< const std::vector< boost::shared_ptr< GeoCal::RasterImage > >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Vector_RasterImage__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type arg1 ;
-  size_t val1 ;
-  int ecode1 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *result = 0 ;
-  
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_RasterImage" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type""'");
-  } 
-  arg1 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type >(val1);
-  {
-    try {
-      result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *)new std::vector< boost::shared_ptr< GeoCal::RasterImage > >(arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_pop_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      (arg1)->pop_back();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  size_t val2 ;
-  int ecode2 = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage_resize" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type >(val2);
-  {
-    try {
-      (arg1)->resize(arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  swig::SwigPyIterator *iter2 = 0 ;
-  int res2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
-  if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-  } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *>(iter2);
-    if (iter_t) {
-      arg2 = iter_t->get_current();
-    } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-    }
-  }
-  {
-    try {
-      result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__erase__SWIG_0(arg1,arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator & >(result)),
-    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  swig::SwigPyIterator *iter2 = 0 ;
-  int res2 ;
-  swig::SwigPyIterator *iter3 = 0 ;
-  int res3 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_erase" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
-  if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-  } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *>(iter2);
-    if (iter_t) {
-      arg2 = iter_t->get_current();
-    } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_erase" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-    }
-  }
-  res3 = SWIG_ConvertPtr(swig_obj[2], SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
-  if (!SWIG_IsOK(res3) || !iter3) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_erase" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-  } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *>(iter3);
-    if (iter_t) {
-      arg3 = iter_t->get_current();
-    } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_erase" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-    }
-  }
-  {
-    try {
-      result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__erase__SWIG_1(arg1,arg2,arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator & >(result)),
-    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_erase(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[4] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_RasterImage_erase",0,3,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_Vector_RasterImage_erase__SWIG_0(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_Vector_RasterImage_erase__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_RasterImage_erase'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::erase(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::erase(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Vector_RasterImage__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type arg1 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *arg2 = 0 ;
-  size_t val1 ;
-  int ecode1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type tempshared2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type temp2shared2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *result = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Vector_RasterImage" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type""'");
-  } 
-  arg1 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type >(val1);
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Vector_RasterImage" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2) : &tempshared2;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    try {
-      result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *)new std::vector< boost::shared_ptr< GeoCal::RasterImage > >(arg1,(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Vector_RasterImage(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[3] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_Vector_RasterImage",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 0) {
-    return _wrap_new_Vector_RasterImage__SWIG_0(self, argc, argv);
-  }
-  if (argc == 1) {
-    int _v = 0;
-    {
-      {
-        int res = SWIG_AsVal_size_t(argv[0], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_2;
-    return _wrap_new_Vector_RasterImage__SWIG_2(self, argc, argv);
-  }
-check_2:
-  
-  if (argc == 1) {
-    return _wrap_new_Vector_RasterImage__SWIG_1(self, argc, argv);
-  }
-  if (argc == 2) {
-    return _wrap_new_Vector_RasterImage__SWIG_3(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Vector_RasterImage'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::vector()\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::vector(std::vector< boost::shared_ptr< GeoCal::RasterImage > > const &)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::vector(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::vector(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type tempshared2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type temp2shared2 ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"Vector_RasterImage_push_back",2,2,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_push_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vector_RasterImage_push_back" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2);
-      arg2 = &tempshared2;
-    } else {
-      arg2 = (argp2) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp2) : &tempshared2;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg2 = &temp2shared2;
-    }
-  }
-  {
-    try {
-      (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *result = 0 ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_front" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->front();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *result = 0 ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_back" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->back();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  size_t val2 ;
-  int ecode2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type tempshared3 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type temp2shared3 ;
-  PyObject *swig_obj[3] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"Vector_RasterImage_assign",3,3,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_assign" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage_assign" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type >(val2);
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_RasterImage_assign" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3) : &tempshared3;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    try {
-      (arg1)->assign(arg2,(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)*arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  size_t val2 ;
-  int ecode2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type tempshared3 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type temp2shared3 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_resize" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage_resize" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type >(val2);
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_RasterImage_resize" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3) : &tempshared3;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    try {
-      (arg1)->resize(arg2,(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)*arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_resize(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[4] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_RasterImage_resize",0,3,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    return _wrap_Vector_RasterImage_resize__SWIG_0(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_Vector_RasterImage_resize__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_RasterImage_resize'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::resize(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::resize(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  swig::SwigPyIterator *iter2 = 0 ;
-  int res2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type tempshared3 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type temp2shared3 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
-  if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-  } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *>(iter2);
-    if (iter_t) {
-      arg2 = iter_t->get_current();
-    } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-    }
-  }
-  {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Vector_RasterImage_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp3) : &tempshared3;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    try {
-      result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__insert__SWIG_0(arg1,arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator & >(result)),
-    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator arg2 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type arg3 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *arg4 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  swig::SwigPyIterator *iter2 = 0 ;
-  int res2 ;
-  size_t val3 ;
-  int ecode3 = 0 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type tempshared4 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type temp2shared4 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_insert" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  res2 = SWIG_ConvertPtr(swig_obj[1], SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
-  if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-  } else {
-    swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator > *>(iter2);
-    if (iter_t) {
-      arg2 = iter_t->get_current();
-    } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "Vector_RasterImage_insert" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator""'");
-    }
-  }
-  ecode3 = SWIG_AsVal_size_t(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Vector_RasterImage_insert" "', argument " "3"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type""'");
-  } 
-  arg3 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type >(val3);
-  {
-    int newmem = 0;
-    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Vector_RasterImage_insert" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp4) tempshared4 = *reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp4);
-      delete reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp4);
-      arg4 = &tempshared4;
-    } else {
-      arg4 = (argp4) ? reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type * >(argp4) : &tempshared4;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg4 = &temp2shared4;
-    }
-  }
-  {
-    try {
-      std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__insert__SWIG_1(arg1,arg2,arg3,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_insert(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[5] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"Vector_RasterImage_insert",0,4,argv))) SWIG_fail;
-  --argc;
-  if (argc == 3) {
-    return _wrap_Vector_RasterImage_insert__SWIG_0(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_Vector_RasterImage_insert__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Vector_RasterImage_insert'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::insert(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)\n"
-    "    std::vector< boost::shared_ptr< GeoCal::RasterImage > >::insert(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type,std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_reserve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  size_t val2 ;
-  int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"Vector_RasterImage_reserve",2,2,swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_reserve" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  ecode2 = SWIG_AsVal_size_t(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vector_RasterImage_reserve" "', argument " "2"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type""'");
-  } 
-  arg2 = static_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type >(val2);
-  {
-    try {
-      (arg1)->reserve(arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vector_RasterImage_capacity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vector_RasterImage_capacity" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      result = ((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->capacity();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_Vector_RasterImage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  std::vector< boost::shared_ptr< GeoCal::RasterImage > > *arg1 = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Vector_RasterImage" "', argument " "1"" of type '" "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *""'"); 
-  }
-  arg1 = reinterpret_cast< std::vector< boost::shared_ptr< GeoCal::RasterImage > > * >(argp1);
-  {
-    try {
-      delete arg1;
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *Vector_RasterImage_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!SWIG_Python_UnpackTuple(args,(char *)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *Vector_RasterImage_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *RayCasterResampler_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -13206,310 +7213,52 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_RasterImageTileIterator", (PyCFunction)_wrap_new_RasterImageTileIterator, METH_O, (char *)"\n"
+	 { (char *)"new_RayCasterResampler", _wrap_new_RayCasterResampler, METH_VARARGS, (char *)"\n"
 		"\n"
-		"RasterImageTileIterator::RasterImageTileIterator(const RasterImage &Ri, int Number_tile_line, int Number_tile_sample)\n"
-		"Constructor, where we supply a tile size to use (which may be\n"
-		"different than Ri's tile size). \n"
+		"RayCasterResampler::RayCasterResampler(const boost::shared_ptr< RayCaster > &Ray_caster, const\n"
+		"boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<\n"
+		"RasterImage > &Res, const boost::shared_ptr< RasterImage >\n"
+		"&Count_scratch)\n"
+		"Constructor. \n"
 		""},
-	 { (char *)"RasterImageTileIterator__v_istart", (PyCFunction)_wrap_RasterImageTileIterator__v_istart, METH_O, (char *)"\n"
+	 { (char *)"RayCasterResampler_ray_cast_step", (PyCFunction)_wrap_RayCasterResampler_ray_cast_step, METH_O, (char *)"\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::istart() const\n"
-		"\n"
+		"void RayCasterResampler::ray_cast_step()\n"
+		"Do ray cast step. \n"
 		""},
-	 { (char *)"RasterImageTileIterator__v_jstart", (PyCFunction)_wrap_RasterImageTileIterator__v_jstart, METH_O, (char *)"\n"
+	 { (char *)"RayCasterResampler_final_rad_step", _wrap_RayCasterResampler_final_rad_step, METH_VARARGS, (char *)"\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::jstart() const\n"
-		"\n"
+		"void RayCasterResampler::final_rad_step(int start_line, int end_line)\n"
+		"Do final radiance calculation step (scaling by count) This is in res()\n"
+		"space. \n"
 		""},
-	 { (char *)"RasterImageTileIterator__v_iend", (PyCFunction)_wrap_RasterImageTileIterator__v_iend, METH_O, (char *)"\n"
+	 { (char *)"RayCasterResampler__v_ray_caster", (PyCFunction)_wrap_RayCasterResampler__v_ray_caster, METH_O, (char *)"\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::iend() const\n"
-		"\n"
-		""},
-	 { (char *)"RasterImageTileIterator__v_jend", (PyCFunction)_wrap_RasterImageTileIterator__v_jend, METH_O, (char *)"\n"
-		"\n"
-		"int GeoCal::RasterImageTileIterator::jend() const\n"
+		"const boost::shared_ptr<RayCaster>& GeoCal::RayCasterResampler::ray_caster() const\n"
 		"\n"
 		""},
-	 { (char *)"RasterImageTileIterator__v_number_line", (PyCFunction)_wrap_RasterImageTileIterator__v_number_line, METH_O, (char *)"\n"
+	 { (char *)"RayCasterResampler__v_image", (PyCFunction)_wrap_RayCasterResampler__v_image, METH_O, (char *)"\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::number_line() const\n"
-		"\n"
-		""},
-	 { (char *)"RasterImageTileIterator__v_number_sample", (PyCFunction)_wrap_RasterImageTileIterator__v_number_sample, METH_O, (char *)"\n"
-		"\n"
-		"int GeoCal::RasterImageTileIterator::number_sample() const\n"
+		"const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::image() const\n"
 		"\n"
 		""},
-	 { (char *)"RasterImageTileIterator__v_end", (PyCFunction)_wrap_RasterImageTileIterator__v_end, METH_O, (char *)"\n"
+	 { (char *)"RayCasterResampler__v_res", (PyCFunction)_wrap_RayCasterResampler__v_res, METH_O, (char *)"\n"
 		"\n"
-		"bool GeoCal::RasterImageTileIterator::end() const\n"
-		"\n"
-		""},
-	 { (char *)"RasterImageTileIterator_next", (PyCFunction)_wrap_RasterImageTileIterator_next, METH_O, NULL},
-	 { (char *)"RasterImageTileIterator___str__", (PyCFunction)_wrap_RasterImageTileIterator___str__, METH_O, NULL},
-	 { (char *)"delete_RasterImageTileIterator", (PyCFunction)_wrap_delete_RasterImageTileIterator, METH_O, NULL},
-	 { (char *)"RasterImageTileIterator_swigregister", RasterImageTileIterator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"RasterImageTileIterator_swiginit", RasterImageTileIterator_swiginit, METH_VARARGS, NULL},
-	 { (char *)"RasterImage_overview", _wrap_RasterImage_overview, METH_VARARGS, (char *)"\n"
-		"\n"
-		"virtual boost::shared_ptr<RasterImage> GeoCal::RasterImage::overview(int Min_number_sample) const\n"
-		"Some RasterImage may have overviews which are lower resolution images.\n"
-		"\n"
-		"If we do have these, then this will return the lower resolution\n"
-		"RasterImage that has at least the given number of samples. If we don't\n"
-		"have an overview, this returns a null - which the calling routine\n"
-		"needs to be ready to handle. \n"
-		""},
-	 { (char *)"RasterImage_interpolate", _wrap_RasterImage_interpolate, METH_VARARGS, (char *)"\n"
-		"\n"
-		"double GeoCal::RasterImage::interpolate(const ImageCoordinate &Ic) const\n"
-		"This does a bilinear interpolation of the data for fractional Line and\n"
-		"Sample. \n"
-		""},
-	 { (char *)"RasterImage__v_copy_needs_double", (PyCFunction)_wrap_RasterImage__v_copy_needs_double, METH_O, (char *)"\n"
-		"\n"
-		"virtual bool GeoCal::RasterImage::copy_needs_double() const\n"
-		"As an optimization, we assume when copying that data can be\n"
-		"represented as a int.\n"
-		"\n"
-		"That is true of many images. But we actually need to use double, then\n"
-		"we need to know that in the copy command. This function indicates if\n"
-		"we need a double or not. \n"
-		""},
-	 { (char *)"RasterImage__v_number_line", (PyCFunction)_wrap_RasterImage__v_number_line, METH_O, (char *)"\n"
-		"\n"
-		"virtual int GeoCal::RasterImage::number_line() const =0\n"
-		"Return number of lines in the image. \n"
-		""},
-	 { (char *)"RasterImage__v_number_sample", (PyCFunction)_wrap_RasterImage__v_number_sample, METH_O, (char *)"\n"
-		"\n"
-		"virtual int GeoCal::RasterImage::number_sample() const =0\n"
-		"Return number of samples in the image. \n"
-		""},
-	 { (char *)"RasterImage__v_number_tile_line", (PyCFunction)_wrap_RasterImage__v_number_tile_line, METH_O, (char *)"\n"
-		"\n"
-		"virtual int GeoCal::RasterImage::number_tile_line() const\n"
-		"Number of lines in the preferred tile size.\n"
-		"\n"
-		"Default is the entire image. \n"
-		""},
-	 { (char *)"RasterImage__v_number_tile_sample", (PyCFunction)_wrap_RasterImage__v_number_tile_sample, METH_O, (char *)"\n"
-		"\n"
-		"virtual int GeoCal::RasterImage::number_tile_sample() const\n"
-		"Number of samples in the preferred tile size.\n"
-		"\n"
-		"Default is the entire image. \n"
-		""},
-	 { (char *)"RasterImage_unchecked_read_double", _wrap_RasterImage_unchecked_read_double, METH_VARARGS, (char *)"\n"
-		"\n"
-		"virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const =0\n"
+		"const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::res() const\n"
 		"\n"
 		""},
-	 { (char *)"RasterImage_read_with_pad", _wrap_RasterImage_read_with_pad, METH_VARARGS, (char *)"\n"
+	 { (char *)"RayCasterResampler__v_count_scratch", (PyCFunction)_wrap_RayCasterResampler__v_count_scratch, METH_O, (char *)"\n"
 		"\n"
-		"blitz::Array< int, 2 > RasterImage::read_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample, int\n"
-		"Fill_value=0) const\n"
-		"Return a subset of the image.\n"
-		"\n"
-		"This variation of read allows the data read to extend past the actual\n"
-		"RasterImage (e.g., negative start line). In this case, we return the\n"
-		"given fill value for the outside area. \n"
-		""},
-	 { (char *)"RasterImage_read_double", _wrap_RasterImage_read_double, METH_VARARGS, (char *)"\n"
-		"\n"
-		"blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
-		"Some raster images actually are floating point values (e.g., a\n"
-		"CalcRaster).\n"
-		"\n"
-		"This function gives access to the underlying floating point numbers.\n"
-		"The default function here just returns the result of read as a double,\n"
-		"but derived classes can override this. \n"
-		""},
-	 { (char *)"RasterImage_read_double_with_pad", _wrap_RasterImage_read_double_with_pad, METH_VARARGS, (char *)"\n"
-		"\n"
-		"blitz::Array< double, 2 > RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample, double\n"
-		"Fill_value=0.0) const\n"
-		"Return a subset of the image.\n"
-		"\n"
-		"This variation of read allows the data read to extend past the actual\n"
-		"RasterImage (e.g., negative start line). In this case, we return the\n"
-		"given fill value for the outside area. \n"
-		""},
-	 { (char *)"RasterImage_read", _wrap_RasterImage_read, METH_VARARGS, (char *)"\n"
-		"\n"
-		"blitz::Array< int, 2 > RasterImage::read(const RasterImageTileIterator &Ti) const\n"
-		"Return a subset of the image. \n"
-		""},
-	 { (char *)"RasterImage_write", _wrap_RasterImage_write, METH_VARARGS, (char *)"\n"
-		"\n"
-		"void RasterImage::write(int Lstart, int Sstart, const blitz::Array< double, 2 > &A)\n"
+		"const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::count_scratch() const\n"
 		"\n"
 		""},
-	 { (char *)"RasterImage___str__", (PyCFunction)_wrap_RasterImage___str__, METH_O, NULL},
-	 { (char *)"RasterImage__v_has_map_info", (PyCFunction)_wrap_RasterImage__v_has_map_info, METH_O, (char *)"\n"
+	 { (char *)"delete_RayCasterResampler", (PyCFunction)_wrap_delete_RayCasterResampler, METH_O, (char *)"\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::has_map_info() const\n"
-		"Functions available if we have MapInfo data.\n"
-		"\n"
-		"Indicate if we have MapInfo. The default is false, but derived classes\n"
-		"can override this. \n"
-		""},
-	 { (char *)"RasterImage__v_map_info", (PyCFunction)_wrap_RasterImage__v_map_info, METH_O, (char *)"\n"
-		"\n"
-		"virtual const MapInfo& GeoCal::RasterImage::map_info() const\n"
-		"MapInfo for image. \n"
-		""},
-	 { (char *)"RasterImage_ground_coordinate", _wrap_RasterImage_ground_coordinate, METH_VARARGS, (char *)"\n"
-		"\n"
-		"boost::shared_ptr<GroundCoordinate> GeoCal::RasterImage::ground_coordinate(double Line, double Sample, const Dem &D) const\n"
-		"Shortcut to calling mapinfo().ground_coordinate. \n"
-		""},
-	 { (char *)"RasterImage_coordinate", _wrap_RasterImage_coordinate, METH_VARARGS, (char *)"\n"
-		"\n"
-		"blitz::Array< double, 2 > RasterImage::coordinate(const blitz::Array< double, 1 > &Lat, const blitz::Array< double, 1 >\n"
-		"&Lon) const\n"
-		"Translate a number of points at once.\n"
-		"\n"
-		"This is really meant for use with python, where this is faster than\n"
-		"the normal interface. \n"
-		""},
-	 { (char *)"RasterImage__v_grid_center_line_resolution", (PyCFunction)_wrap_RasterImage__v_grid_center_line_resolution, METH_O, (char *)"\n"
-		"\n"
-		"double RasterImage::grid_center_line_resolution() const\n"
-		"This calculates the grid resolution in meters for the center of the\n"
-		"grid in the line direction.\n"
-		"\n"
-		"This is just the distance between The center pixel number_line() / 2,\n"
-		"number_sample() / 2 and the pixel number_line() / 2 + 1,\n"
-		"number_sample() / 2. \n"
-		""},
-	 { (char *)"RasterImage__v_grid_center_sample_resolution", (PyCFunction)_wrap_RasterImage__v_grid_center_sample_resolution, METH_O, (char *)"\n"
-		"\n"
-		"double RasterImage::grid_center_sample_resolution() const\n"
-		"This calculates the grid resolution in meters for the center of the\n"
-		"grid in the sample direction.\n"
-		"\n"
-		"This is just the distance between The center pixel number_line() / 2,\n"
-		"number_sample() / 2 and the pixel number_line() / 2, number_sample() /\n"
-		"2 + 1. \n"
-		""},
-	 { (char *)"RasterImage__v_has_rpc", (PyCFunction)_wrap_RasterImage__v_has_rpc, METH_O, (char *)"\n"
-		"\n"
-		"virtual bool GeoCal::RasterImage::has_rpc() const\n"
-		"Functions available if we have RPC\n"
-		"\n"
-		"Indicate if we have Rpc. The default is false, but derived classes can\n"
-		"override this. \n"
-		""},
-	 { (char *)"RasterImage__v_rpc", (PyCFunction)_wrap_RasterImage__v_rpc, METH_O, (char *)"\n"
-		"\n"
-		"boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const\n"
-		"Pointer version of rpc().\n"
-		"\n"
-		"This makes python happier. \n"
-		""},
-	 { (char *)"RasterImage__v_has_rsm", (PyCFunction)_wrap_RasterImage__v_has_rsm, METH_O, (char *)"\n"
-		"\n"
-		"virtual bool GeoCal::RasterImage::has_rsm() const\n"
-		"Functions available if we have RSM\n"
-		"\n"
-		"Indicate if we have Rsm. The default is false, but derived classes can\n"
-		"override this. \n"
-		""},
-	 { (char *)"RasterImage__v_rsm", (PyCFunction)_wrap_RasterImage__v_rsm, METH_O, (char *)"\n"
-		"\n"
-		"virtual boost::shared_ptr<Rsm> GeoCal::RasterImage::rsm() const\n"
-		"Rsm for image. \n"
-		""},
-	 { (char *)"delete_RasterImage", (PyCFunction)_wrap_delete_RasterImage, METH_O, (char *)"\n"
-		"\n"
-		"virtual GeoCal::RasterImage::~RasterImage()\n"
+		"virtual GeoCal::RayCasterResampler::~RayCasterResampler()\n"
 		"\n"
 		""},
-	 { (char *)"RasterImage_swigregister", RasterImage_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_ArrayRasterImage", (PyCFunction)_wrap_new_ArrayRasterImage, METH_NOARGS, (char *)"\n"
-		"\n"
-		"GeoCal::ArrayRasterImage::ArrayRasterImage()\n"
-		"Create an empty array. \n"
-		""},
-	 { (char *)"ArrayRasterImage_append", _wrap_ArrayRasterImage_append, METH_VARARGS, (char *)"\n"
-		"\n"
-		"void GeoCal::ArrayRasterImage::push_back(const boost::shared_ptr< RasterImage > &Img)\n"
-		"Add to the array. \n"
-		""},
-	 { (char *)"ArrayRasterImage_size", (PyCFunction)_wrap_ArrayRasterImage_size, METH_O, (char *)"\n"
-		"\n"
-		"int GeoCal::ArrayRasterImage::size() const\n"
-		"Return size. \n"
-		""},
-	 { (char *)"ArrayRasterImage_get", _wrap_ArrayRasterImage_get, METH_VARARGS, NULL},
-	 { (char *)"ArrayRasterImage_set", _wrap_ArrayRasterImage_set, METH_VARARGS, NULL},
-	 { (char *)"ArrayRasterImage___str__", (PyCFunction)_wrap_ArrayRasterImage___str__, METH_O, NULL},
-	 { (char *)"delete_ArrayRasterImage", (PyCFunction)_wrap_delete_ArrayRasterImage, METH_O, (char *)"\n"
-		"\n"
-		"virtual GeoCal::ArrayRasterImage::~ArrayRasterImage()\n"
-		"\n"
-		""},
-	 { (char *)"ArrayRasterImage_swigregister", ArrayRasterImage_swigregister, METH_VARARGS, NULL},
-	 { (char *)"ArrayRasterImage_swiginit", ArrayRasterImage_swiginit, METH_VARARGS, NULL},
-	 { (char *)"copy_no_fill", _wrap_copy_no_fill, METH_VARARGS, (char *)"\n"
-		"\n"
-		"void GeoCal::copy_no_fill(const RasterImage &Img_in, RasterImage &Img_out, int Fill_value=0,\n"
-		"bool diagnostic=false)\n"
-		"This copies one image to another.\n"
-		"\n"
-		"The images should be the same size. Setting Diagnostic to true causes\n"
-		"messages to be printed as we do the copying.\n"
-		"\n"
-		"This differs from copy by skipping copying all values that are equal\n"
-		"to the Fill_value.\n"
-		"\n"
-		"This can be used to create a simple mosaic by copying multiple images\n"
-		"to a common image. \n"
-		""},
-	 { (char *)"fill_image", _wrap_fill_image, METH_VARARGS, (char *)"\n"
-		"\n"
-		"void GeoCal::fill_image(RasterImage &Img, int Fill_value=0, bool diagnostic=false, int\n"
-		"Tile_nline=-1, int Tile_nsamp=-1)\n"
-		"This fills an image with a given value (often 0). \n"
-		""},
-	 { (char *)"Vector_RasterImage_iterator", (PyCFunction)_wrap_Vector_RasterImage_iterator, METH_O, NULL},
-	 { (char *)"Vector_RasterImage___nonzero__", (PyCFunction)_wrap_Vector_RasterImage___nonzero__, METH_O, NULL},
-	 { (char *)"Vector_RasterImage___bool__", (PyCFunction)_wrap_Vector_RasterImage___bool__, METH_O, NULL},
-	 { (char *)"Vector_RasterImage___len__", (PyCFunction)_wrap_Vector_RasterImage___len__, METH_O, NULL},
-	 { (char *)"Vector_RasterImage___getslice__", _wrap_Vector_RasterImage___getslice__, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage___setslice__", _wrap_Vector_RasterImage___setslice__, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage___delslice__", _wrap_Vector_RasterImage___delslice__, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage___delitem__", _wrap_Vector_RasterImage___delitem__, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage___getitem__", _wrap_Vector_RasterImage___getitem__, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage___setitem__", _wrap_Vector_RasterImage___setitem__, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_pop", (PyCFunction)_wrap_Vector_RasterImage_pop, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_append", _wrap_Vector_RasterImage_append, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_empty", (PyCFunction)_wrap_Vector_RasterImage_empty, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_size", (PyCFunction)_wrap_Vector_RasterImage_size, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_swap", _wrap_Vector_RasterImage_swap, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_begin", (PyCFunction)_wrap_Vector_RasterImage_begin, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_end", (PyCFunction)_wrap_Vector_RasterImage_end, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_rbegin", (PyCFunction)_wrap_Vector_RasterImage_rbegin, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_rend", (PyCFunction)_wrap_Vector_RasterImage_rend, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_clear", (PyCFunction)_wrap_Vector_RasterImage_clear, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_get_allocator", (PyCFunction)_wrap_Vector_RasterImage_get_allocator, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_pop_back", (PyCFunction)_wrap_Vector_RasterImage_pop_back, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_erase", _wrap_Vector_RasterImage_erase, METH_VARARGS, NULL},
-	 { (char *)"new_Vector_RasterImage", _wrap_new_Vector_RasterImage, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_push_back", _wrap_Vector_RasterImage_push_back, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_front", (PyCFunction)_wrap_Vector_RasterImage_front, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_back", (PyCFunction)_wrap_Vector_RasterImage_back, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_assign", _wrap_Vector_RasterImage_assign, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_resize", _wrap_Vector_RasterImage_resize, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_insert", _wrap_Vector_RasterImage_insert, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_reserve", _wrap_Vector_RasterImage_reserve, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_capacity", (PyCFunction)_wrap_Vector_RasterImage_capacity, METH_O, NULL},
-	 { (char *)"delete_Vector_RasterImage", (PyCFunction)_wrap_delete_Vector_RasterImage, METH_O, NULL},
-	 { (char *)"Vector_RasterImage_swigregister", Vector_RasterImage_swigregister, METH_VARARGS, NULL},
-	 { (char *)"Vector_RasterImage_swiginit", Vector_RasterImage_swiginit, METH_VARARGS, NULL},
+	 { (char *)"RayCasterResampler_swigregister", RayCasterResampler_swigregister, METH_VARARGS, NULL},
+	 { (char *)"RayCasterResampler_swiginit", RayCasterResampler_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -13747,8 +7496,14 @@ static void *_p_GeoCal__WithParameterTo_p_GeoCal__GenericObject(void *x, int *SW
 static void *_p_GeoCal__RsmAdjustableParameterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::WithParameter *) ((GeoCal::RsmAdjustableParameter *) x));
 }
+static void *_p_GeoCal__RayCasterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::RayCaster *) x));
+}
 static void *_p_GeoCal__MetadataMissingTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::Exception *) ((GeoCal::MetadataMissing *) x));
+}
+static void *_p_GeoCal__RayCasterResamplerTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::RayCasterResampler *) x));
 }
 static void *_p_GeoCal__GeodeticRadian2piConverterTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::CoordinateConverter *) ((GeoCal::GeodeticRadian2piConverter *) x));
@@ -13931,6 +7686,10 @@ static void *_p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_pt
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::CartesianFixed > *)x);
 }
+static void *_p_boost__shared_ptrT_GeoCal__RayCaster_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::RayCaster > *)x);
+}
 static void *_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::LnLookVectorWithDerivative > *)x);
@@ -13986,6 +7745,10 @@ static void *_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDeriva
 static void *_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::ImageGroundConnection > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__RayCasterResampler_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::RayCasterResampler > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -14193,6 +7956,8 @@ static swig_type_info _swigt__p_GeoCal__RasterImage = {"_p_GeoCal__RasterImage",
 static swig_type_info _swigt__p_GeoCal__RasterImageMultiBand = {"_p_GeoCal__RasterImageMultiBand", "GeoCal::RasterImageMultiBand *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__RasterImageMultiBandVariable = {"_p_GeoCal__RasterImageMultiBandVariable", "GeoCal::RasterImageMultiBandVariable *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__RasterImageTileIterator = {"_p_GeoCal__RasterImageTileIterator", "GeoCal::RasterImageTileIterator *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__RayCaster = {"_p_GeoCal__RayCaster", "GeoCal::RayCaster *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__RayCasterResampler = {"_p_GeoCal__RayCasterResampler", "GeoCal::RayCasterResampler *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__Rsm = {"_p_GeoCal__Rsm", "GeoCal::Rsm *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__RsmAdjustableParameter = {"_p_GeoCal__RsmAdjustableParameter", "GeoCal::RsmAdjustableParameter *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__RsmBase = {"_p_GeoCal__RsmBase", "GeoCal::RsmBase *", 0, 0, (void*)0, 0};
@@ -14328,7 +8093,8 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBandV
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t = {"_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t", "boost::shared_ptr< GeoCal::RasterImageMultiBand > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t = {"_p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t", "boost::shared_ptr< GeoCal::RasterImageTileIterator > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t = {"_p_boost__shared_ptrT_GeoCal__RasterImage_t", "boost::shared_ptr< GeoCal::RasterImage > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Rpc_t = {"_p_boost__shared_ptrT_GeoCal__Rpc_t", "boost::shared_ptr< GeoCal::Rpc > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RayCasterResampler_t = {"_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t", "boost::shared_ptr< GeoCal::RayCasterResampler > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RayCaster_t = {"_p_boost__shared_ptrT_GeoCal__RayCaster_t", "boost::shared_ptr< GeoCal::RayCaster > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t = {"_p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t", "boost::shared_ptr< GeoCal::RsmAdjustableParameter > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RsmBase_t = {"_p_boost__shared_ptrT_GeoCal__RsmBase_t", "boost::shared_ptr< GeoCal::RsmBase > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t = {"_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t", "boost::shared_ptr< GeoCal::RsmDirectCovariance > *", 0, 0, (void*)0, 0};
@@ -14352,19 +8118,16 @@ static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_off_type = {"_p_off_type", "off_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_openmode = {"_p_openmode", "openmode *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_p_PyObject = {"_p_p_PyObject", "PyObject **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_pos_type = {"_p_pos_type", "pos_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_seekdir = {"_p_seekdir", "seekdir *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_t = {"_p_size_t", "std::streamsize *|size_t *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_state_type = {"_p_state_type", "state_type *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t = {"_p_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t", "std::allocator< boost::shared_ptr< GeoCal::RasterImage > > *|std::vector< boost::shared_ptr< GeoCal::RasterImage > >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_iosT_char_std__char_traitsT_char_t_t = {"_p_std__basic_iosT_char_std__char_traitsT_char_t_t", "std::basic_ios< char,std::char_traits< char > > *|std::ios *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t", "std::basic_iostream< char,std::char_traits< char > > *|std::iostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_istreamT_char_std__char_traitsT_char_t_t", "std::basic_istream< char,std::char_traits< char > > *|std::istream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t", "std::basic_ostream< char,std::char_traits< char > > *|std::ostream *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t = {"_p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t", "std::vector< boost::shared_ptr< GeoCal::RasterImage > > *|std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
@@ -14416,6 +8179,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__RasterImageMultiBand,
   &_swigt__p_GeoCal__RasterImageMultiBandVariable,
   &_swigt__p_GeoCal__RasterImageTileIterator,
+  &_swigt__p_GeoCal__RayCaster,
+  &_swigt__p_GeoCal__RayCasterResampler,
   &_swigt__p_GeoCal__Rsm,
   &_swigt__p_GeoCal__RsmAdjustableParameter,
   &_swigt__p_GeoCal__RsmBase,
@@ -14551,7 +8316,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__Rpc_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__RayCasterResampler_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__RayCaster_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RsmBase_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t,
@@ -14575,19 +8341,16 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_iostate,
   &_swigt__p_off_type,
   &_swigt__p_openmode,
-  &_swigt__p_p_PyObject,
   &_swigt__p_pos_type,
   &_swigt__p_seekdir,
   &_swigt__p_size_t,
   &_swigt__p_size_type,
   &_swigt__p_state_type,
-  &_swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t,
   &_swigt__p_std__basic_iosT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__invalid_argument,
-  &_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_traits_type,
   &_swigt__p_value_type,
@@ -14614,7 +8377,7 @@ static swig_cast_info _swigc__p_GeoCal__DcsLookVector[] = {  {&_swigt__p_GeoCal_
 static swig_cast_info _swigc__p_GeoCal__DcsLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Dem[] = {  {&_swigt__p_GeoCal__Dem, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Exception[] = {  {&_swigt__p_GeoCal__ImageGroundConnectionFailed, _p_GeoCal__ImageGroundConnectionFailedTo_p_GeoCal__Exception, 0, 0},  {&_swigt__p_GeoCal__Exception, 0, 0, 0},  {&_swigt__p_GeoCal__VicarException, _p_GeoCal__VicarExceptionTo_p_GeoCal__Exception, 0, 0},  {&_swigt__p_GeoCal__NoCoverage, _p_GeoCal__NoCoverageTo_p_GeoCal__Exception, 0, 0},  {&_swigt__p_GeoCal__MetadataMissing, _p_GeoCal__MetadataMissingTo_p_GeoCal__Exception, 0, 0},  {&_swigt__p_GeoCal__ConvergenceFailure, _p_GeoCal__ConvergenceFailureTo_p_GeoCal__Exception, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ConvergenceFailure, _p_GeoCal__ConvergenceFailureTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionCopy, _p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBandVariable, _p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionFailed, _p_GeoCal__ImageGroundConnectionFailedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmIdTiming, _p_GeoCal__RsmIdTimingTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Rsm, _p_GeoCal__RsmTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBand, _p_GeoCal__RasterImageMultiBandTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__NoCoverage, _p_GeoCal__NoCoverageTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnection, _p_GeoCal__ImageGroundConnectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OffsetImageGroundConnection, _p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MapInfo, _p_GeoCal__MapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmDirectCovariance, _p_GeoCal__RsmDirectCovarianceTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmIndirectCovariance, _p_GeoCal__RsmIndirectCovarianceTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageTileIterator, _p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundMask, _p_GeoCal__GroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedGroundMask, _p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmBase, _p_GeoCal__RsmBaseTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmId, _p_GeoCal__RsmIdTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Exception, _p_GeoCal__ExceptionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarException, _p_GeoCal__VicarExceptionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageMask, _p_GeoCal__ImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OffsetImageMask, _p_GeoCal__OffsetImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameter, _p_GeoCal__WithParameterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmAdjustableParameter, _p_GeoCal__RsmAdjustableParameterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MetadataMissing, _p_GeoCal__MetadataMissingTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticRadian2piConverter, _p_GeoCal__GeodeticRadian2piConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticRadianConverter, _p_GeoCal__GeodeticRadianConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticConverter, _p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CoordinateConverter, _p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImage, _p_GeoCal__RasterImageTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ArrayRasterImage, _p_GeoCal__ArrayRasterImageTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__ConvergenceFailure, _p_GeoCal__ConvergenceFailureTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionCopy, _p_GeoCal__ImageGroundConnectionCopyTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBandVariable, _p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnectionFailed, _p_GeoCal__ImageGroundConnectionFailedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmIdTiming, _p_GeoCal__RsmIdTimingTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Rsm, _p_GeoCal__RsmTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBand, _p_GeoCal__RasterImageMultiBandTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__NoCoverage, _p_GeoCal__NoCoverageTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageGroundConnection, _p_GeoCal__ImageGroundConnectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OffsetImageGroundConnection, _p_GeoCal__OffsetImageGroundConnectionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MapInfo, _p_GeoCal__MapInfoTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmDirectCovariance, _p_GeoCal__RsmDirectCovarianceTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmIndirectCovariance, _p_GeoCal__RsmIndirectCovarianceTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImageTileIterator, _p_GeoCal__RasterImageTileIteratorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundMask, _p_GeoCal__GroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedGroundMask, _p_GeoCal__CombinedGroundMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmBase, _p_GeoCal__RsmBaseTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmId, _p_GeoCal__RsmIdTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Exception, _p_GeoCal__ExceptionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarException, _p_GeoCal__VicarExceptionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageMask, _p_GeoCal__ImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OffsetImageMask, _p_GeoCal__OffsetImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CombinedImageMask, _p_GeoCal__CombinedImageMaskTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameter, _p_GeoCal__WithParameterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RsmAdjustableParameter, _p_GeoCal__RsmAdjustableParameterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RayCaster, _p_GeoCal__RayCasterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MetadataMissing, _p_GeoCal__MetadataMissingTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RayCasterResampler, _p_GeoCal__RayCasterResamplerTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticRadian2piConverter, _p_GeoCal__GeodeticRadian2piConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticRadianConverter, _p_GeoCal__GeodeticRadianConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GeodeticConverter, _p_GeoCal__GeodeticConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CoordinateConverter, _p_GeoCal__CoordinateConverterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RasterImage, _p_GeoCal__RasterImageTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ArrayRasterImage, _p_GeoCal__ArrayRasterImageTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GeodeticConverter[] = {  {&_swigt__p_GeoCal__GeodeticConverter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GeodeticRadian2piConverter[] = {  {&_swigt__p_GeoCal__GeodeticRadian2piConverter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GeodeticRadianConverter[] = {  {&_swigt__p_GeoCal__GeodeticRadianConverter, 0, 0, 0},{0, 0, 0, 0}};
@@ -14639,6 +8402,8 @@ static swig_cast_info _swigc__p_GeoCal__RasterImage[] = {  {&_swigt__p_GeoCal__R
 static swig_cast_info _swigc__p_GeoCal__RasterImageMultiBand[] = {  {&_swigt__p_GeoCal__RasterImageMultiBand, 0, 0, 0},  {&_swigt__p_GeoCal__RasterImageMultiBandVariable, _p_GeoCal__RasterImageMultiBandVariableTo_p_GeoCal__RasterImageMultiBand, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__RasterImageMultiBandVariable[] = {  {&_swigt__p_GeoCal__RasterImageMultiBandVariable, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__RasterImageTileIterator[] = {  {&_swigt__p_GeoCal__RasterImageTileIterator, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__RayCaster[] = {  {&_swigt__p_GeoCal__RayCaster, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__RayCasterResampler[] = {  {&_swigt__p_GeoCal__RayCasterResampler, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Rsm[] = {  {&_swigt__p_GeoCal__Rsm, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__RsmAdjustableParameter[] = {  {&_swigt__p_GeoCal__RsmAdjustableParameter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__RsmBase[] = {  {&_swigt__p_GeoCal__RsmBase, 0, 0, 0},{0, 0, 0, 0}};
@@ -14749,7 +8514,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDeri
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Dem_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Exception_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t, _p_boost__shared_ptrT_GeoCal__NoCoverage_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarException_t, _p_boost__shared_ptrT_GeoCal__VicarException_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t, _p_boost__shared_ptrT_GeoCal__ConvergenceFailure_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t, _p_boost__shared_ptrT_GeoCal__MetadataMissing_tTo_p_boost__shared_ptrT_GeoCal__Exception_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmId_t, _p_boost__shared_ptrT_GeoCal__RsmId_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Rsm_t, _p_boost__shared_ptrT_GeoCal__Rsm_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, _p_boost__shared_ptrT_GeoCal__RasterImage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, _p_boost__shared_ptrT_GeoCal__ArrayRasterImage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, _p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t, _p_boost__shared_ptrT_GeoCal__MetadataMissing_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CoordinateConverter_t, _p_boost__shared_ptrT_GeoCal__CoordinateConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t, _p_boost__shared_ptrT_GeoCal__ConvergenceFailure_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, _p_boost__shared_ptrT_GeoCal__WithParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Exception_t, _p_boost__shared_ptrT_GeoCal__Exception_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarException_t, _p_boost__shared_ptrT_GeoCal__VicarException_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, _p_boost__shared_ptrT_GeoCal__CombinedGroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundMask_t, _p_boost__shared_ptrT_GeoCal__GroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, _p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, _p_boost__shared_ptrT_GeoCal__MapInfo_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t, _p_boost__shared_ptrT_GeoCal__NoCoverage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, _p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t, _p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, _p_boost__shared_ptrT_GeoCal__ImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, _p_boost__shared_ptrT_GeoCal__OffsetImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmBase_t, _p_boost__shared_ptrT_GeoCal__RsmBase_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t, _p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmIdTiming_t, _p_boost__shared_ptrT_GeoCal__RsmIdTiming_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmId_t, _p_boost__shared_ptrT_GeoCal__RsmId_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Rsm_t, _p_boost__shared_ptrT_GeoCal__Rsm_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, _p_boost__shared_ptrT_GeoCal__RayCasterResampler_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, _p_boost__shared_ptrT_GeoCal__RasterImage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ArrayRasterImage_t, _p_boost__shared_ptrT_GeoCal__ArrayRasterImage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, _p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MetadataMissing_t, _p_boost__shared_ptrT_GeoCal__MetadataMissing_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CoordinateConverter_t, _p_boost__shared_ptrT_GeoCal__CoordinateConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConvergenceFailure_t, _p_boost__shared_ptrT_GeoCal__ConvergenceFailure_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, _p_boost__shared_ptrT_GeoCal__WithParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Exception_t, _p_boost__shared_ptrT_GeoCal__Exception_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarException_t, _p_boost__shared_ptrT_GeoCal__VicarException_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t, _p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedGroundMask_t, _p_boost__shared_ptrT_GeoCal__CombinedGroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundMask_t, _p_boost__shared_ptrT_GeoCal__GroundMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionFailed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_t, _p_boost__shared_ptrT_GeoCal__ImageGroundConnectionCopy_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, _p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MapInfo_t, _p_boost__shared_ptrT_GeoCal__MapInfo_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__NoCoverage_t, _p_boost__shared_ptrT_GeoCal__NoCoverage_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, _p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RayCaster_t, _p_boost__shared_ptrT_GeoCal__RayCaster_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_t, _p_boost__shared_ptrT_GeoCal__OffsetImageGroundConnection_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t, _p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageMask_t, _p_boost__shared_ptrT_GeoCal__ImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OffsetImageMask_t, _p_boost__shared_ptrT_GeoCal__OffsetImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CombinedImageMask_t, _p_boost__shared_ptrT_GeoCal__CombinedImageMask_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmBase_t, _p_boost__shared_ptrT_GeoCal__RsmBase_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t, _p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmIdTiming_t, _p_boost__shared_ptrT_GeoCal__RsmIdTiming_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticConverter_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticRadian2piConverter_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GeodeticRadianConverter_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -14774,7 +8539,8 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageMultiBandV
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_t, _p_boost__shared_ptrT_GeoCal__RasterImageMultiBandVariable_tTo_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RasterImage_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RasterImage_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Rpc_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Rpc_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RayCasterResampler_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RayCaster_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RayCaster_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RsmBase_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmBase_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -14798,19 +8564,16 @@ static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_off_type[] = {  {&_swigt__p_off_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_openmode[] = {  {&_swigt__p_openmode, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_p_PyObject[] = {  {&_swigt__p_p_PyObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_pos_type[] = {  {&_swigt__p_pos_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_seekdir[] = {  {&_swigt__p_seekdir, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_t[] = {  {&_swigt__p_size_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_state_type[] = {  {&_swigt__p_state_type, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t[] = {  {&_swigt__p_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_iosT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_iosT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_ostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_iosT_char_std__char_traitsT_char_t_t, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_iosT_char_std__char_traitsT_char_t_t, 0, 0},  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, _p_std__basic_istreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_iosT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t[] = {  {&_swigt__p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -14862,6 +8625,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__RasterImageMultiBand,
   _swigc__p_GeoCal__RasterImageMultiBandVariable,
   _swigc__p_GeoCal__RasterImageTileIterator,
+  _swigc__p_GeoCal__RayCaster,
+  _swigc__p_GeoCal__RayCasterResampler,
   _swigc__p_GeoCal__Rsm,
   _swigc__p_GeoCal__RsmAdjustableParameter,
   _swigc__p_GeoCal__RsmBase,
@@ -14997,7 +8762,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RasterImageTileIterator_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RasterImage_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__Rpc_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__RayCasterResampler_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__RayCaster_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RsmAdjustableParameter_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RsmBase_t,
   _swigc__p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t,
@@ -15021,19 +8787,16 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_iostate,
   _swigc__p_off_type,
   _swigc__p_openmode,
-  _swigc__p_p_PyObject,
   _swigc__p_pos_type,
   _swigc__p_seekdir,
   _swigc__p_size_t,
   _swigc__p_size_type,
   _swigc__p_state_type,
-  _swigc__p_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t,
   _swigc__p_std__basic_iosT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__invalid_argument,
-  _swigc__p_std__vectorT_boost__shared_ptrT_GeoCal__RasterImage_t_std__allocatorT_boost__shared_ptrT_GeoCal__RasterImage_t_t_t,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_traits_type,
   _swigc__p_value_type,
@@ -15729,13 +9492,7 @@ SWIG_init(void) {
   
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
   
-  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::RasterImage), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::RasterImage > > ("boost::shared_ptr< GeoCal::RasterImage > *"));
-  
-  
-  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::ArrayRasterImage), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::ArrayRasterImage > > ("boost::shared_ptr< GeoCal::ArrayRasterImage > *"));
-  
-  
-  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::RasterImageTileIterator), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::RasterImageTileIterator > > ("boost::shared_ptr< GeoCal::RasterImageTileIterator > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::RayCasterResampler), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::RayCasterResampler > > ("boost::shared_ptr< GeoCal::RayCasterResampler > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

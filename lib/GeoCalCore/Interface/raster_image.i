@@ -127,6 +127,8 @@ def __len__(self):
 //void copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
 void copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
 
+void fill_image(RasterImage& Img, int Fill_value = 0, bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
+
 }
 
 %template(Vector_RasterImage) std::vector<boost::shared_ptr<GeoCal::RasterImage> >;

@@ -440,7 +440,9 @@ private:
 void copy(const RasterImage& Img_in, RasterImage& Img_out, bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
 void copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
 void copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
+void fill_image(RasterImage& Img, int Fill_value = 0, bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
 
+  
 /// Loop through all data, going by tiles.
 
 #define RASTER_FOREACH(IMG, IND1, IND2) \

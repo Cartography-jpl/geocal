@@ -10,6 +10,7 @@ template<class Archive>
 void RayCaster::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RayCaster);
+  ar & GEOCAL_NVP(cf);
 }
 
 GEOCAL_IMPLEMENT(RayCaster);

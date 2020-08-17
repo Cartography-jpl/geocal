@@ -211,6 +211,21 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
 
+    def _v_cartesian_fixed(self):
+        """
+
+        const boost::shared_ptr<CartesianFixed>& GeoCal::RayCaster::cartesian_fixed() const
+        The CartesianFixed object that we are using for the RayCaster, for
+        example Ecr for the earth. 
+        """
+        return _ray_caster.RayCaster__v_cartesian_fixed(self)
+
+
+    @property
+    def cartesian_fixed(self):
+        return self._v_cartesian_fixed()
+
+
     def _v_start_position(self):
         """
 
@@ -304,6 +319,7 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
         return _ray_caster.RayCaster_next_radiance(self, Surface_rad, Fill_value)
 
     __swig_destroy__ = _ray_caster.delete_RayCaster
+RayCaster._v_cartesian_fixed = new_instancemethod(_ray_caster.RayCaster__v_cartesian_fixed, None, RayCaster)
 RayCaster._v_start_position = new_instancemethod(_ray_caster.RayCaster__v_start_position, None, RayCaster)
 RayCaster._v_number_position = new_instancemethod(_ray_caster.RayCaster__v_number_position, None, RayCaster)
 RayCaster._v_last_position = new_instancemethod(_ray_caster.RayCaster__v_last_position, None, RayCaster)

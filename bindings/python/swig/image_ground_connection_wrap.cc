@@ -11659,6 +11659,51 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_cartesian_fixed(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::CartesianFixed > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ImageGroundConnection__v_cartesian_fixed" "', argument " "1"" of type '" "GeoCal::ImageGroundConnection const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = const_cast< GeoCal::ImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::ImageGroundConnection const *)arg1)->cartesian_fixed();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_image__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::ImageGroundConnection *arg1 = (GeoCal::ImageGroundConnection *) 0 ;
@@ -17650,6 +17695,12 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"virtual int GeoCal::ImageGroundConnection::naif_code() const\n"
 		"Naif code for ImageGroundConnection (e.g., what planet is this for) \n"
+		""},
+	 { (char *)"ImageGroundConnection__v_cartesian_fixed", (PyCFunction)_wrap_ImageGroundConnection__v_cartesian_fixed, METH_O, (char *)"\n"
+		"\n"
+		"virtual boost::shared_ptr<CartesianFixed> GeoCal::ImageGroundConnection::cartesian_fixed() const\n"
+		"CartesianFixed for ImageGroundConnection (e.g., depends on what planet\n"
+		"this is this for). \n"
 		""},
 	 { (char *)"ImageGroundConnection__v_image", _wrap_ImageGroundConnection__v_image, METH_VARARGS, (char *)"\n"
 		"\n"

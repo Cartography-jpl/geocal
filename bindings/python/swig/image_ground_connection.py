@@ -487,6 +487,21 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         return self._v_naif_code()
 
 
+    def _v_cartesian_fixed(self):
+        """
+
+        virtual boost::shared_ptr<CartesianFixed> GeoCal::ImageGroundConnection::cartesian_fixed() const
+        CartesianFixed for ImageGroundConnection (e.g., depends on what planet
+        this is this for). 
+        """
+        return _image_ground_connection.ImageGroundConnection__v_cartesian_fixed(self)
+
+
+    @property
+    def cartesian_fixed(self):
+        return self._v_cartesian_fixed()
+
+
     def _v_image(self, *args):
         """
 
@@ -852,6 +867,7 @@ ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_grou
 ImageGroundConnection.image_coordinate_jac_parm_fd = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm_fd, None, ImageGroundConnection)
 ImageGroundConnection.cover = new_instancemethod(_image_ground_connection.ImageGroundConnection_cover, None, ImageGroundConnection)
 ImageGroundConnection._v_naif_code = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_naif_code, None, ImageGroundConnection)
+ImageGroundConnection._v_cartesian_fixed = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_cartesian_fixed, None, ImageGroundConnection)
 ImageGroundConnection._v_image = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image, None, ImageGroundConnection)
 ImageGroundConnection._v_image_multi_band = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image_multi_band, None, ImageGroundConnection)
 ImageGroundConnection._v_image_mask = new_instancemethod(_image_ground_connection.ImageGroundConnection__v_image_mask, None, ImageGroundConnection)

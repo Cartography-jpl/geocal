@@ -129,6 +129,7 @@ public:
 			       const blitz::Array<double, 1>& Eps) const;
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
   %python_attribute(naif_code, int);
+  %python_attribute(cartesian_fixed, boost::shared_ptr<CartesianFixed>);
   %python_attribute_with_set(image, boost::shared_ptr<RasterImage>)
   %python_attribute_with_set(image_multi_band, 
 			     boost::shared_ptr<RasterImageMultiBand>)

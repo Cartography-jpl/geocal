@@ -1,5 +1,6 @@
 #include "igc_ray_caster.h"
 #include "simple_dem.h"
+#include "planet_coordinate.h"
 #include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
@@ -64,24 +65,29 @@ IgcRayCaster::IgcRayCaster
  int Number_sample,
  bool Include_path_distance
 )
-  : igc(Igc),
-    start_position_(Start_line),
-    npos_(Number_line > 0 ? Number_line : Igc->number_line() - Start_line),
-    ind(-1),
-    nintegration_step(Number_integration_step),
-    start_sample_(Start_sample),
-    number_sample_(Number_sample > 0 ? Number_sample : 
-		   Igc->number_sample() - Start_sample),
-    include_path_distance(Include_path_distance),
+: RayCaster(Igc->cartesian_fixed()),
+  igc(Igc),
+  start_position_(Start_line),
+  npos_(Number_line > 0 ? Number_line : Igc->number_line() - Start_line),
+  ind(-1),
+  nintegration_step(Number_integration_step),
+  start_sample_(Start_sample),
+  number_sample_(Number_sample > 0 ? Number_sample : 
+		 Igc->number_sample() - Start_sample),
+  include_path_distance(Include_path_distance),
     resolution(Resolution),
-    max_height(Max_height)
+  max_height(Max_height)
 {
   // Determine if we are using a forward or aftward direction
-  SimpleDem d;
+  boost::shared_ptr<Dem> d;
+  if(igc->naif_code() == Ecr::EARTH_NAIF_CODE)
+    d = boost::make_shared<SimpleDem>();
+  else
+    d = boost::make_shared<PlanetSimpleDem>(0, igc->naif_code());
   boost::shared_ptr<GroundCoordinate> gc1 = 
-    igc->ground_coordinate_dem(ImageCoordinate(0,0), d);
+    igc->ground_coordinate_dem(ImageCoordinate(0,0), *d);
   boost::shared_ptr<GroundCoordinate> gc2 = 
-    igc->ground_coordinate_dem(ImageCoordinate(1,0), d);
+    igc->ground_coordinate_dem(ImageCoordinate(1,0), *d);
   boost::shared_ptr<CartesianFixed> p1 =
     igc->cf_look_vector_pos(ImageCoordinate(0,0));
   is_forward = (distance(*p1, *gc2) > distance(*p1, *gc1));

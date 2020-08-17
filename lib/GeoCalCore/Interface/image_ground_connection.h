@@ -197,6 +197,14 @@ public:
 //-----------------------------------------------------------------------
   virtual int naif_code() const
   { return ground_coordinate_approx_height(ImageCoordinate(0,0),0)->naif_code(); }
+
+//-----------------------------------------------------------------------
+/// CartesianFixed for ImageGroundConnection (e.g., depends on what
+/// planet this is this for).
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianFixed> cartesian_fixed() const
+  { return ground_coordinate_approx_height(ImageCoordinate(0,0),0)->convert_to_cf(); }
   
 //-----------------------------------------------------------------------
 /// Underlying image (if present)

@@ -5896,6 +5896,22 @@ namespace swig {
 #include "image_ground_connection.h"
 
 
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -7012,6 +7028,56 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RayCaster_shape(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RayCaster *arg1 = (GeoCal::RayCaster *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCaster const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCaster const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  int result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RayCaster_shape",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCaster_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCaster_shape" "', argument " "1"" of type '" "GeoCal::RayCaster const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCaster * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCaster > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCaster * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RayCaster_shape" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (int)((GeoCal::RayCaster const *)arg1)->shape(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RayCaster_next_radiance__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RayCaster *arg1 = (GeoCal::RayCaster *) 0 ;
@@ -7377,6 +7443,11 @@ static PyMethodDef SwigMethods[] = {
 		"Note that this array should be considered \"owned\" by this class,\n"
 		"code calling this class should copy this data if it wants to make any\n"
 		"modifications to the underlying data. \n"
+		""},
+	 { (char *)"RayCaster_shape", _wrap_RayCaster_shape, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual int GeoCal::RayCaster::shape(int I) const =0\n"
+		"Shape that will be returned by next_position. \n"
 		""},
 	 { (char *)"RayCaster_next_radiance", _wrap_RayCaster_next_radiance, METH_VARARGS, (char *)"\n"
 		"\n"

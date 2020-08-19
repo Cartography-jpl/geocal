@@ -5910,22 +5910,6 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
-
-
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6715,29 +6699,19 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
 SWIGINTERN PyObject *_wrap_new_RayCasterResampler(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::RayCaster > *arg1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg3 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > *arg4 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo > *arg2 = 0 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::RayCaster > tempshared1 ;
   boost::shared_ptr< GeoCal::RayCaster > temp2shared1 ;
   void *argp2 ;
   int res2 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared2 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared3 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared3 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImage > tempshared4 ;
-  boost::shared_ptr< GeoCal::RasterImage > temp2shared4 ;
-  PyObject *swig_obj[4] ;
+  boost::shared_ptr< GeoCal::MapInfo > tempshared2 ;
+  boost::shared_ptr< GeoCal::MapInfo > temp2shared2 ;
+  PyObject *swig_obj[2] ;
   GeoCal::RayCasterResampler *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"new_RayCasterResampler",4,4,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"new_RayCasterResampler",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCaster_t,  0 , &newmem);
@@ -6766,16 +6740,16 @@ SWIGINTERN PyObject *_wrap_new_RayCasterResampler(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     int newmem = 0;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_RayCasterResampler" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_RayCasterResampler" "', argument " "2"" of type '" "boost::shared_ptr< GeoCal::MapInfo > const &""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2);
+      if (argp2) tempshared2 = *reinterpret_cast< boost::shared_ptr< GeoCal::MapInfo > * >(argp2);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::MapInfo > * >(argp2);
       arg2 = &tempshared2;
     } else {
-      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp2) : &tempshared2;
+      arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::MapInfo > * >(argp2) : &tempshared2;
     }
     // Added mms
     // Special handling if this is a director class. In that case, we
@@ -6791,60 +6765,8 @@ SWIGINTERN PyObject *_wrap_new_RayCasterResampler(PyObject *SWIGUNUSEDPARM(self)
     }
   }
   {
-    int newmem = 0;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_RayCasterResampler" "', argument " "3"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp3) tempshared3 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3);
-      arg3 = &tempshared3;
-    } else {
-      arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg3 = &temp2shared3;
-    }
-  }
-  {
-    int newmem = 0;
-    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_RayCasterResampler" "', argument " "4"" of type '" "boost::shared_ptr< GeoCal::RasterImage > const &""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      if (argp4) tempshared4 = *reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp4);
-      delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp4);
-      arg4 = &tempshared4;
-    } else {
-      arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp4) : &tempshared4;
-    }
-    // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
-    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
-    if(dp) {
-      Py_INCREF(dp->swig_get_self());
-      temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      arg4 = &temp2shared4;
-    }
-  }
-  {
     try {
-      result = (GeoCal::RayCasterResampler *)new GeoCal::RayCasterResampler((boost::shared_ptr< GeoCal::RayCaster > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg4);
+      result = (GeoCal::RayCasterResampler *)new GeoCal::RayCasterResampler((boost::shared_ptr< GeoCal::RayCaster > const &)*arg1,(boost::shared_ptr< GeoCal::MapInfo > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6864,14 +6786,15 @@ fail:
 SWIGINTERN PyObject *_wrap_RayCasterResampler_ray_cast_step(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
+  SwigValueWrapper< blitz::Array< int,6 > > arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::RayCasterResampler > tempshared1 ;
   boost::shared_ptr< GeoCal::RayCasterResampler > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
+  PythonObject numpy2 ;
+  PyObject *swig_obj[2] ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"RayCasterResampler_ray_cast_step",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
@@ -6888,65 +6811,18 @@ SWIGINTERN PyObject *_wrap_RayCasterResampler_ray_cast_step(PyObject *SWIGUNUSED
     }
   }
   {
-    try {
-      (arg1)->ray_cast_step();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
+    numpy2.obj = to_numpy<int >(swig_obj[1]);
+    if(!numpy2.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'RayCasterResampler_ray_cast_step', expecting type  Array<int,6>");
     }
+    if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=6) {
+      SWIG_Error(SWIG_TypeError, "in method 'RayCasterResampler_ray_cast_step', expecting type  Array<int,6>");
+    }
+    arg2 = to_blitz_array<int, 6>(numpy2);
   }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RayCasterResampler_final_rad_step(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
-  int arg2 ;
-  int arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RayCasterResampler > tempshared1 ;
-  boost::shared_ptr< GeoCal::RayCasterResampler > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  PyObject *swig_obj[3] ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"RayCasterResampler_final_rad_step",3,3,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler_final_rad_step" "', argument " "1"" of type '" "GeoCal::RayCasterResampler *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
-      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
-      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RayCasterResampler_final_rad_step" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RayCasterResampler_final_rad_step" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
   {
     try {
-      (arg1)->final_rad_step(arg2,arg3);
+      (arg1)->ray_cast_step(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7005,7 +6881,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RayCasterResampler__v_image(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RayCasterResampler__v_map_info(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
   void *argp1 = 0 ;
@@ -7013,7 +6889,7 @@ SWIGINTERN PyObject *_wrap_RayCasterResampler__v_image(PyObject *SWIGUNUSEDPARM(
   boost::shared_ptr< GeoCal::RayCasterResampler const > tempshared1 ;
   boost::shared_ptr< GeoCal::RayCasterResampler const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::RasterImage > result;
+  boost::shared_ptr< GeoCal::MapInfo > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -7021,7 +6897,7 @@ SWIGINTERN PyObject *_wrap_RayCasterResampler__v_image(PyObject *SWIGUNUSEDPARM(
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler__v_image" "', argument " "1"" of type '" "GeoCal::RayCasterResampler const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler__v_map_info" "', argument " "1"" of type '" "GeoCal::RayCasterResampler const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
@@ -7034,97 +6910,7 @@ SWIGINTERN PyObject *_wrap_RayCasterResampler__v_image(PyObject *SWIGUNUSEDPARM(
   }
   {
     try {
-      result = ((GeoCal::RayCasterResampler const *)arg1)->image();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RayCasterResampler__v_res(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RayCasterResampler const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RayCasterResampler const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::RasterImage > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler__v_res" "', argument " "1"" of type '" "GeoCal::RayCasterResampler const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
-      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
-      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RayCasterResampler const *)arg1)->res();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RayCasterResampler__v_count_scratch(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RayCasterResampler const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RayCasterResampler const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::RasterImage > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler__v_count_scratch" "', argument " "1"" of type '" "GeoCal::RayCasterResampler const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
-      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RayCasterResampler > * >(argp1);
-      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::RayCasterResampler const *)arg1)->count_scratch();
+      result = ((GeoCal::RayCasterResampler const *)arg1)->map_info();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7216,40 +7002,39 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_RayCasterResampler", _wrap_new_RayCasterResampler, METH_VARARGS, (char *)"\n"
 		"\n"
 		"RayCasterResampler::RayCasterResampler(const boost::shared_ptr< RayCaster > &Ray_caster, const\n"
-		"boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<\n"
-		"RasterImage > &Res, const boost::shared_ptr< RasterImage >\n"
-		"&Count_scratch)\n"
+		"boost::shared_ptr< MapInfo > &Map_info)\n"
 		"Constructor. \n"
 		""},
-	 { (char *)"RayCasterResampler_ray_cast_step", (PyCFunction)_wrap_RayCasterResampler_ray_cast_step, METH_O, (char *)"\n"
+	 { (char *)"RayCasterResampler_ray_cast_step", _wrap_RayCasterResampler_ray_cast_step, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RayCasterResampler::ray_cast_step()\n"
-		"Do ray cast step. \n"
-		""},
-	 { (char *)"RayCasterResampler_final_rad_step", _wrap_RayCasterResampler_final_rad_step, METH_VARARGS, (char *)"\n"
+		"void RayCasterResampler::ray_cast_step(blitz::Array< int, 6 > Res)\n"
+		"Do ray cast step.\n"
 		"\n"
-		"void RayCasterResampler::final_rad_step(int start_line, int end_line)\n"
-		"Do final radiance calculation step (scaling by count) This is in res()\n"
-		"space. \n"
+		"We fill in Res, which should be number_line x number_sample x\n"
+		"nsub_line x nsub_sample x nintegration_step. This gets filled with the\n"
+		"image line/sample in the map_info that each pixel goes. We only fill\n"
+		"in the portion covered by our ray_caster().\n"
+		"\n"
+		"The Res will often be a mmap array created in python (to handle large\n"
+		"images).\n"
+		"\n"
+		"This is a clumsy function, but this should be looked at as a low level\n"
+		"step used by the python wrapper.\n"
+		"\n"
+		"Note the argument Res being passed as an Array rather than a reference\n"
+		"is actually correct. Normally we pass things in that shouldn't change\n"
+		"from python. In this case, we really do want to change. But we don't\n"
+		"want a nonconst version of Array& in SWIG because this is almost\n"
+		"always an error (just in this case it isn't). \n"
 		""},
 	 { (char *)"RayCasterResampler__v_ray_caster", (PyCFunction)_wrap_RayCasterResampler__v_ray_caster, METH_O, (char *)"\n"
 		"\n"
 		"const boost::shared_ptr<RayCaster>& GeoCal::RayCasterResampler::ray_caster() const\n"
 		"\n"
 		""},
-	 { (char *)"RayCasterResampler__v_image", (PyCFunction)_wrap_RayCasterResampler__v_image, METH_O, (char *)"\n"
+	 { (char *)"RayCasterResampler__v_map_info", (PyCFunction)_wrap_RayCasterResampler__v_map_info, METH_O, (char *)"\n"
 		"\n"
-		"const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::image() const\n"
-		"\n"
-		""},
-	 { (char *)"RayCasterResampler__v_res", (PyCFunction)_wrap_RayCasterResampler__v_res, METH_O, (char *)"\n"
-		"\n"
-		"const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::res() const\n"
-		"\n"
-		""},
-	 { (char *)"RayCasterResampler__v_count_scratch", (PyCFunction)_wrap_RayCasterResampler__v_count_scratch, METH_O, (char *)"\n"
-		"\n"
-		"const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::count_scratch() const\n"
+		"const boost::shared_ptr<MapInfo>& GeoCal::RayCasterResampler::map_info() const\n"
 		"\n"
 		""},
 	 { (char *)"delete_RayCasterResampler", (PyCFunction)_wrap_delete_RayCasterResampler, METH_O, (char *)"\n"

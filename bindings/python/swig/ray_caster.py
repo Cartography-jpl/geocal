@@ -300,6 +300,15 @@ class RayCaster(geocal_swig.generic_object.GenericObject):
         return _ray_caster.RayCaster_next_position(self)
 
 
+    def shape(self, I):
+        """
+
+        virtual int GeoCal::RayCaster::shape(int I) const =0
+        Shape that will be returned by next_position. 
+        """
+        return _ray_caster.RayCaster_shape(self, I)
+
+
     def next_radiance(self, Surface_rad, Fill_value=0.0):
         """
 
@@ -325,6 +334,7 @@ RayCaster._v_number_position = new_instancemethod(_ray_caster.RayCaster__v_numbe
 RayCaster._v_last_position = new_instancemethod(_ray_caster.RayCaster__v_last_position, None, RayCaster)
 RayCaster._v_current_position = new_instancemethod(_ray_caster.RayCaster__v_current_position, None, RayCaster)
 RayCaster.next_position = new_instancemethod(_ray_caster.RayCaster_next_position, None, RayCaster)
+RayCaster.shape = new_instancemethod(_ray_caster.RayCaster_shape, None, RayCaster)
 RayCaster.next_radiance = new_instancemethod(_ray_caster.RayCaster_next_radiance, None, RayCaster)
 RayCaster.__str__ = new_instancemethod(_ray_caster.RayCaster___str__, None, RayCaster)
 RayCaster_swigregister = _ray_caster.RayCaster_swigregister

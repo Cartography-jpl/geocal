@@ -193,33 +193,25 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
     the type of ImageGroundConnection we are using, one or the other
     direction can be much faster.
 
-    Important* Res and Count_scratch should be initialized to 0 (e.g., use
-    fill_image). This class does not do this, because we may be called in
-    parallel. It is just assumed by this class that these images have been
-    initialized.
-
-    Because the data may be large, we make use of a second raster image to
-    maintain the counts. Note also that the primary raster image will
-    possibly have multiple pixels placed in it, so it should have a large
-    enough range to include this (so for example a int 8 imake may want to
-    allow int 16 during the calculation). You might need to copy the data
-    to a final image of a smaller size afterwards - but since we would
-    then need a scratch intermediate image there doesn't seem much of a
-    downside to using this image.
+    This class is really designed to be wrapped in python. Although it
+    could be used from C++, it would probably be a bit awkward. We can
+    always rework this if needed, but I expect the primary use of this
+    will be programs like igc_project.
 
     There are two steps involved:
 
-    The initial ray casting
+    The initial ray casting, determining where each pixel goes in the
+    final map.
 
-    Scaling the results with the count
+    Resampling the data to create the final radiance data.
 
-    To support parallelization these two steps can be called to use a
-    subset of the data. If you do this, you'll want to make sure the
-    RasterImage you supply can support parallel writing - e.g.,
-    VicarLiteRasterImage with memory mapping.
+    Step 1 can be done in parallel to speed things up. We currently have
+    step 2 needing to be done serially, I'm not sure that it could be done
+    in parallel.
 
-    The subsetting should be done on Ray_caster (so like IgcRayCaster
-    where we specify the start and number of lines).
+    For step 1, The subsetting should be done on Ray_caster (so like
+    IgcRayCaster where we specify the start and number of lines).
+    ray_cast_step() steps through all the positions in the ray caster.
 
     C++ includes: ray_caster_resampler.h 
     """
@@ -227,34 +219,39 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Ray_caster, Img, Res, Count_scratch):
+    def __init__(self, Ray_caster, Map_info):
         """
 
         RayCasterResampler::RayCasterResampler(const boost::shared_ptr< RayCaster > &Ray_caster, const
-        boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<
-        RasterImage > &Res, const boost::shared_ptr< RasterImage >
-        &Count_scratch)
+        boost::shared_ptr< MapInfo > &Map_info)
         Constructor. 
         """
-        _ray_caster_resampler.RayCasterResampler_swiginit(self, _ray_caster_resampler.new_RayCasterResampler(Ray_caster, Img, Res, Count_scratch))
+        _ray_caster_resampler.RayCasterResampler_swiginit(self, _ray_caster_resampler.new_RayCasterResampler(Ray_caster, Map_info))
 
-    def ray_cast_step(self):
+    def ray_cast_step(self, Res):
         """
 
-        void RayCasterResampler::ray_cast_step()
-        Do ray cast step. 
-        """
-        return _ray_caster_resampler.RayCasterResampler_ray_cast_step(self)
+        void RayCasterResampler::ray_cast_step(blitz::Array< int, 6 > Res)
+        Do ray cast step.
 
+        We fill in Res, which should be number_line x number_sample x
+        nsub_line x nsub_sample x nintegration_step. This gets filled with the
+        image line/sample in the map_info that each pixel goes. We only fill
+        in the portion covered by our ray_caster().
 
-    def final_rad_step(self, start_line, end_line):
-        """
+        The Res will often be a mmap array created in python (to handle large
+        images).
 
-        void RayCasterResampler::final_rad_step(int start_line, int end_line)
-        Do final radiance calculation step (scaling by count) This is in res()
-        space. 
+        This is a clumsy function, but this should be looked at as a low level
+        step used by the python wrapper.
+
+        Note the argument Res being passed as an Array rather than a reference
+        is actually correct. Normally we pass things in that shouldn't change
+        from python. In this case, we really do want to change. But we don't
+        want a nonconst version of Array& in SWIG because this is almost
+        always an error (just in this case it isn't). 
         """
-        return _ray_caster_resampler.RayCasterResampler_final_rad_step(self, start_line, end_line)
+        return _ray_caster_resampler.RayCasterResampler_ray_cast_step(self, Res)
 
 
     def _v_ray_caster(self):
@@ -271,46 +268,18 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
         return self._v_ray_caster()
 
 
-    def _v_image(self):
+    def _v_map_info(self):
         """
 
-        const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::image() const
+        const boost::shared_ptr<MapInfo>& GeoCal::RayCasterResampler::map_info() const
 
         """
-        return _ray_caster_resampler.RayCasterResampler__v_image(self)
+        return _ray_caster_resampler.RayCasterResampler__v_map_info(self)
 
 
     @property
-    def image(self):
-        return self._v_image()
-
-
-    def _v_res(self):
-        """
-
-        const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::res() const
-
-        """
-        return _ray_caster_resampler.RayCasterResampler__v_res(self)
-
-
-    @property
-    def res(self):
-        return self._v_res()
-
-
-    def _v_count_scratch(self):
-        """
-
-        const boost::shared_ptr<RasterImage>& GeoCal::RayCasterResampler::count_scratch() const
-
-        """
-        return _ray_caster_resampler.RayCasterResampler__v_count_scratch(self)
-
-
-    @property
-    def count_scratch(self):
-        return self._v_count_scratch()
+    def map_info(self):
+        return self._v_map_info()
 
 
     def __reduce__(self):
@@ -318,11 +287,8 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _ray_caster_resampler.delete_RayCasterResampler
 RayCasterResampler.ray_cast_step = new_instancemethod(_ray_caster_resampler.RayCasterResampler_ray_cast_step, None, RayCasterResampler)
-RayCasterResampler.final_rad_step = new_instancemethod(_ray_caster_resampler.RayCasterResampler_final_rad_step, None, RayCasterResampler)
 RayCasterResampler._v_ray_caster = new_instancemethod(_ray_caster_resampler.RayCasterResampler__v_ray_caster, None, RayCasterResampler)
-RayCasterResampler._v_image = new_instancemethod(_ray_caster_resampler.RayCasterResampler__v_image, None, RayCasterResampler)
-RayCasterResampler._v_res = new_instancemethod(_ray_caster_resampler.RayCasterResampler__v_res, None, RayCasterResampler)
-RayCasterResampler._v_count_scratch = new_instancemethod(_ray_caster_resampler.RayCasterResampler__v_count_scratch, None, RayCasterResampler)
+RayCasterResampler._v_map_info = new_instancemethod(_ray_caster_resampler.RayCasterResampler__v_map_info, None, RayCasterResampler)
 RayCasterResampler_swigregister = _ray_caster_resampler.RayCasterResampler_swigregister
 RayCasterResampler_swigregister(RayCasterResampler)
 

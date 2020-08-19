@@ -72,6 +72,7 @@ public:
   virtual int current_position() const = 0;
 
 //-----------------------------------------------------------------------
+
 /// Return the ground locations seen at the next position. This is
 /// This is nline x nsamp x nsub_line x nsub_sample x
 /// nintegration_step x 3 in size, where we give the ground location
@@ -92,6 +93,12 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
+
+//-----------------------------------------------------------------------
+/// Shape that will be returned by next_position.
+//-----------------------------------------------------------------------
+
+  virtual int shape(int I) const = 0;
 protected:
   boost::shared_ptr<CartesianFixed> cf;
 private:

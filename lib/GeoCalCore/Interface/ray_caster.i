@@ -23,6 +23,7 @@ public:
   %python_attribute(last_position, bool);
   %python_attribute(current_position, int);
   virtual blitz::Array<double, 6> next_position() = 0;
+  virtual int shape(int I) const;
   blitz::Array<double, 2> next_radiance(const RasterImage& Surface_rad,
 					double Fill_value = 0.0);
   std::string print_to_string() const;

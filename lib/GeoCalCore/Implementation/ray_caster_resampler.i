@@ -16,15 +16,10 @@ namespace GeoCal {
 class RayCasterResampler: public GenericObject {
 public:
   RayCasterResampler(const boost::shared_ptr<RayCaster>& Ray_caster,
-		     const boost::shared_ptr<RasterImage>& Img,
-		     const boost::shared_ptr<RasterImage>& Res,
-		     const boost::shared_ptr<RasterImage>& Count_scratch);
-  void ray_cast_step();
-  void final_rad_step(int start_line, int end_line);
+		     const boost::shared_ptr<MapInfo>& Map_info);
+  void ray_cast_step(blitz::Array<int, 6> Res);
   %python_attribute(ray_caster, boost::shared_ptr<RayCaster>);
-  %python_attribute(image, boost::shared_ptr<RasterImage>);
-  %python_attribute(res, boost::shared_ptr<RasterImage>);
-  %python_attribute(count_scratch, boost::shared_ptr<RasterImage>);
+  %python_attribute(map_info, boost::shared_ptr<MapInfo>);
   %pickle_serialization();
 };
 }

@@ -108,6 +108,8 @@ public:
   }
   int start_sample() const {return start_sample_;}
   int number_sample() const {return number_sample_;}
+  virtual int shape(int I) const
+  { range_check(I, 0, 6); return result_cache.extent(I); }
 protected:
   IgcRayCaster() {}
 private:

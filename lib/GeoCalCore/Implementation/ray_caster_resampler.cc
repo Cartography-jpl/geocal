@@ -9,8 +9,7 @@ void RayCasterResampler::serialize(Archive & ar,
 {
   GEOCAL_GENERIC_BASE(RayCasterResampler);
   ar & GEOCAL_NVP_(ray_caster)
-    & GEOCAL_NVP_(res)
-    & GEOCAL_NVP_(count_scratch);
+    & GEOCAL_NVP_(mi);
 }
 
 GEOCAL_IMPLEMENT(RayCasterResampler);
@@ -22,21 +21,43 @@ GEOCAL_IMPLEMENT(RayCasterResampler);
 
 RayCasterResampler::RayCasterResampler
 (const boost::shared_ptr<RayCaster>& Ray_caster,
- const boost::shared_ptr<RasterImage>& Img,
- const boost::shared_ptr<RasterImage>& Res,
- const boost::shared_ptr<RasterImage>& Count_scratch)
+ const boost::shared_ptr<MapInfo>& Map_info)
 : ray_caster_(Ray_caster),
-  img_(Img), res_(Res),
-  count_scratch_(Count_scratch)
+  mi_(Map_info)
 {
 }
 
 //-----------------------------------------------------------------------
 /// Do ray cast step.
+///
+/// We fill in Res, which should be number_line x number_sample x
+/// nsub_line x nsub_sample x nintegration_step. This gets filled with
+/// the image line/sample in the map_info that each pixel goes. We
+/// only fill in the portion covered by our ray_caster().
+///
+/// The Res will often be a mmap array created in python (to handle
+/// large images).
+///
+/// This is a clumsy function, but this should be looked at as a low
+/// level step used by the python wrapper.
+///
+/// Note the argument Res being passed as an Array rather than a
+/// reference is actually correct. Normally we pass things in that
+/// shouldn't change from python. In this case, we really do want to
+/// change. But we don't want a nonconst version of Array& in SWIG
+/// because this is almost always an error (just in this case it isn't).
 //-----------------------------------------------------------------------
 
-void RayCasterResampler::ray_cast_step()
+void RayCasterResampler::ray_cast_step(blitz::Array<int, 6> Res)
 {
+  if(ray_caster_->start_position() + ray_caster_->number_position() > Res.extent(0))
+    throw Exception("Res isn't large enough to hold results");
+  if(ray_caster_->shape(1) != Res.extent(1) ||
+     ray_caster_->shape(2) != Res.extent(2) ||
+     ray_caster_->shape(3) != Res.extent(3) ||
+     ray_caster_->shape(4) != Res.extent(4) ||
+     Res.extent(5) != 2)
+    throw Exception("Res isn't the size needed by ray_cast_step");
   while(!ray_caster_->last_position()) {
     blitz::Array<double, 6> t = ray_caster_->next_position();
     boost::array<double, 3> pv;
@@ -50,32 +71,13 @@ void RayCasterResampler::ray_cast_step()
 	      pv[2] = t(i,j,k1,k2,k3,2);
 	      boost::shared_ptr<CartesianFixed> p =
 		ray_caster_->cartesian_fixed()->create(pv);
-	      ImageCoordinate ic = res_->coordinate(*p);
-	      int ln = round(ic.line);
-	      int smp = round(ic.sample);
-	      if(ln >= 0 && ln < res_->number_line() &&
-		 smp >= 0 && smp < res_->number_sample()) {
-		int v1 = (*res_)(ln,smp) +
-		  (*img_)(i + ray_caster_->current_position(), j);
-		int v2 = (*count_scratch_)(ln,smp) + 1;
-		res_->write(ln,smp,v1);
-		count_scratch_->write(ln,smp,v2);
-	      }
+	      ImageCoordinate ic;
+	      mi_->coordinate(*p, ic.sample, ic.line);
+	      Res(i + ray_caster_->current_position(), j, k1, k2, k3, 0) =
+	       	round(ic.line);
+	      Res(i + ray_caster_->current_position(), j, k1, k2, k3, 1) =
+	       	round(ic.sample);
 	    }
   }
 }
 
-//-----------------------------------------------------------------------
-/// Do final radiance calculation step (scaling by count) This is in
-/// res() space.
-//-----------------------------------------------------------------------
-
-void RayCasterResampler::final_rad_step(int start_line, int end_line)
-{
-  for(int i = start_line; i < end_line && i < res_->number_line(); ++i)
-    for(int j = 0; j < res_->number_sample(); ++j)
-      if((*count_scratch_)(i, j) > 0) {
-	int value = (*res_)(i, j) / (*count_scratch_)(i, j);
-	res_->write(i, j, value);
-      }
-}

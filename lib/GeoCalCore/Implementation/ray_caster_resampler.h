@@ -10,54 +10,41 @@ namespace GeoCal {
   ground to the image we go from the image to the ground. Depending on
   the type of ImageGroundConnection we are using, one or the other
   direction can be much faster.
+
+  This class is really designed to be wrapped in python. Although it
+  could be used from C++, it would probably be a bit awkward. We can
+  always rework this if needed, but I expect the primary use of this
+  will be programs like igc_project.
   
-  *Important* Res and Count_scratch should be initialized to 0 (e.g.,
-  use fill_image). This class *does* not do this, because we may be
-  called in parallel. It is just assumed by this class that these
-  images have been initialized.
-
-  Because the data may be large, we make use of a second raster image
-  to maintain the counts. Note also that the primary raster image will
-  possibly have multiple pixels placed in it, so it should have a
-  large enough range to include this (so for example a int 8 imake may
-  want to allow int 16 during the calculation).  You might need to
-  copy the data to a final image of a smaller size afterwards - but
-  since we would then need a scratch intermediate image there doesn't
-  seem much of a downside to using this image.
-
   There are two steps involved:
 
-  1. The initial ray casting
-  2. Scaling the results with the count
+  1. The initial ray casting, determining where each pixel goes in
+     the final map.
+  2. Resampling the data to create the final radiance data.
 
-  To support parallelization these two steps can be called to use a
-  subset of the data. If you do this, you'll want to make sure the 
-  RasterImage you supply can support parallel writing - e.g., 
-  VicarLiteRasterImage with memory mapping.
+  Step 1 can be done in parallel to speed things up. We currently have
+  step 2 needing to be done serially, I'm not sure that it could be
+  done in parallel.
 
-  The subsetting should be done on Ray_caster (so like IgcRayCaster
-  where we specify the start and number of lines).
+  For step 1, The subsetting should be done on Ray_caster (so like
+  IgcRayCaster where we specify the start and number of
+  lines). ray_cast_step() steps through all the positions in the ray
+  caster.
 *******************************************************************/
 
 class RayCasterResampler: public Printable<RayCasterResampler> {
 public:
   RayCasterResampler(const boost::shared_ptr<RayCaster>& Ray_caster,
-		     const boost::shared_ptr<RasterImage>& Img,
-		     const boost::shared_ptr<RasterImage>& Res,
-		     const boost::shared_ptr<RasterImage>& Count_scratch);
+		     const boost::shared_ptr<MapInfo>& Map_info);
   virtual ~RayCasterResampler() {}
-  void ray_cast_step();
-  void final_rad_step(int start_line, int end_line);
+  void ray_cast_step(blitz::Array<int, 6> Res);
   const boost::shared_ptr<RayCaster>& ray_caster() const  { return ray_caster_;}
-  const boost::shared_ptr<RasterImage>& image() const  { return img_;}
-  const boost::shared_ptr<RasterImage>& res() const  { return res_;}
-  const boost::shared_ptr<RasterImage>& count_scratch() const
-  { return count_scratch_;}
+  const boost::shared_ptr<MapInfo>& map_info() const  { return mi_;}
   virtual void print(std::ostream& Os) const
   { Os << "RayCasterResampler"; }
 private:
   boost::shared_ptr<RayCaster> ray_caster_;
-  boost::shared_ptr<RasterImage> img_, res_, count_scratch_;
+  boost::shared_ptr<MapInfo> mi_;
   RayCasterResampler() {}
   friend class boost::serialization::access;
   template<class Archive>

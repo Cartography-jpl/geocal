@@ -73,15 +73,23 @@ public:
 
 //-----------------------------------------------------------------------
 /// Minimum time table is valid for.
+///  
+/// *Note* often padding is added, so this is not necessarily the time
+/// of the minimum line.
 //-----------------------------------------------------------------------
 
   virtual Time min_time() const = 0;
 
 //-----------------------------------------------------------------------
 /// Maximum time table is valid for.
+///
+/// *Note* often padding is added, so this is not necessarily the time
+/// of the maximum line.
 //-----------------------------------------------------------------------
 
   virtual Time max_time() const = 0;
+
+  
 
   virtual void print(std::ostream& Os) const = 0;
 private:
@@ -126,15 +134,23 @@ public:
 
 //-----------------------------------------------------------------------
 /// Minimum time table is valid for.
+///
+/// Note we often have trouble with boundary cases, so something like
+/// like a time 1ms before the end edge of this time table. We add
+/// a border of -tspace to the min_time.  
 //-----------------------------------------------------------------------
 
-  virtual Time min_time() const {return min_t;}
+  virtual Time min_time() const {return min_t - tspace;}
 
 //-----------------------------------------------------------------------
 /// Maximum time table is valid for.
+///
+/// Note we often have trouble with boundary cases, so something like
+/// like a time 1ms before the end edge of this time table. We add
+/// a border of -tspace to the min_time.  
 //-----------------------------------------------------------------------
 
-  virtual Time max_time() const {return min_t + tspace * max_l;}
+  virtual Time max_time() const {return min_t + tspace * max_l + tspace;}
 
   double time_space() const {return tspace;}
 private:
@@ -179,16 +195,20 @@ public:
 /// Maximum line table is valid for.
 //-----------------------------------------------------------------------
 
-  virtual int max_line() const {return min_line_ + (int) tlist.size() - 1;}
+  virtual int max_line() const {return min_line_ + (int) tlist.size() - 3;}
 
 //-----------------------------------------------------------------------
 /// Minimum time table is valid for.
+///
+/// Note padding has been added, this is *not* the time of min_line.
 //-----------------------------------------------------------------------
 
   virtual Time min_time() const {return tlist.front();}
 
 //-----------------------------------------------------------------------
 /// Maximum time table is valid for.
+///
+/// Note padding has been added, this is *not* the time of max_line.
 //-----------------------------------------------------------------------
 
   virtual Time max_time() const {return tlist.back();}

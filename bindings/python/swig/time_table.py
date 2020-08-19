@@ -362,7 +362,10 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
         """
 
         virtual Time GeoCal::TimeTable::min_time() const =0
-        Minimum time table is valid for. 
+        Minimum time table is valid for.
+
+        Note often padding is added, so this is not necessarily the time of
+        the minimum line. 
         """
         return _time_table.TimeTable__v_min_time(self)
 
@@ -376,7 +379,10 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
         """
 
         virtual Time GeoCal::TimeTable::max_time() const =0
-        Maximum time table is valid for. 
+        Maximum time table is valid for.
+
+        Note often padding is added, so this is not necessarily the time of
+        the maximum line. 
         """
         return _time_table.TimeTable__v_max_time(self)
 
@@ -516,7 +522,10 @@ class MeasuredTimeTable(TimeTable):
         Constructor.
 
         This gives the time for every line. This list should be strictly
-        ordered. The first time is for the given Min_line (default of 0). 
+        ordered. The first time is for the given Min_line (default of 0).
+
+        We often have trouble with edge cases (so time 1 ms before start of
+        table). We pad the table with a single line extrapolation. 
         """
         _time_table.MeasuredTimeTable_swiginit(self, _time_table.new_MeasuredTimeTable(Time_list, Min_line))
 

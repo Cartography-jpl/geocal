@@ -13271,12 +13271,18 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TimeTable__v_min_time", (PyCFunction)_wrap_TimeTable__v_min_time, METH_O, (char *)"\n"
 		"\n"
 		"virtual Time GeoCal::TimeTable::min_time() const =0\n"
-		"Minimum time table is valid for. \n"
+		"Minimum time table is valid for.\n"
+		"\n"
+		"Note often padding is added, so this is not necessarily the time of\n"
+		"the minimum line. \n"
 		""},
 	 { (char *)"TimeTable__v_max_time", (PyCFunction)_wrap_TimeTable__v_max_time, METH_O, (char *)"\n"
 		"\n"
 		"virtual Time GeoCal::TimeTable::max_time() const =0\n"
-		"Maximum time table is valid for. \n"
+		"Maximum time table is valid for.\n"
+		"\n"
+		"Note often padding is added, so this is not necessarily the time of\n"
+		"the maximum line. \n"
 		""},
 	 { (char *)"TimeTable__v_parameter", _wrap_TimeTable__v_parameter, METH_VARARGS, NULL},
 	 { (char *)"TimeTable__v_parameter_with_derivative", _wrap_TimeTable__v_parameter_with_derivative, METH_VARARGS, NULL},
@@ -13316,7 +13322,10 @@ static PyMethodDef SwigMethods[] = {
 		"Constructor.\n"
 		"\n"
 		"This gives the time for every line. This list should be strictly\n"
-		"ordered. The first time is for the given Min_line (default of 0). \n"
+		"ordered. The first time is for the given Min_line (default of 0).\n"
+		"\n"
+		"We often have trouble with edge cases (so time 1 ms before start of\n"
+		"table). We pad the table with a single line extrapolation. \n"
 		""},
 	 { (char *)"MeasuredTimeTable__v_size_time_list", (PyCFunction)_wrap_MeasuredTimeTable__v_size_time_list, METH_O, (char *)"\n"
 		"\n"

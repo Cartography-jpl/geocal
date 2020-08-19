@@ -200,7 +200,7 @@ boost::shared_ptr<QuaternionOrbitData> OrbitListCache::orbit_data_create
 void OrbitListCache::init()
 {
   boost::shared_ptr<QuaternionOrbitData> null;
-  for(int i = tt->min_line(); i <= tt->max_line(); ++i) {
+  for(int i = tt->min_line() - 1; i <= tt->max_line() + 1; ++i) {
     Time t;
     FrameCoordinate fc;
     tt->time(ImageCoordinate(i, sample_), t, fc);

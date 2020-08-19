@@ -62,7 +62,7 @@ ImageCoordinate ConstantSpacingTimeTable::image_coordinate(Time T,
 const FrameCoordinate& F) const
 {
   range_check_inclusive(T, min_time(), max_time());
-  double line = (T  - min_time()) / tspace + F.line;
+  double line = (T  - min_t) / tspace + F.line;
   return ImageCoordinate(line, F.sample);
 }
 
@@ -77,7 +77,7 @@ ConstantSpacingTimeTable::image_coordinate_with_derivative
  const FrameCoordinateWithDerivative& F) const
 {
   range_check_inclusive(T.value(), min_time(), max_time());
-  AutoDerivative<double> line = (T  - min_time()) / tspace + F.line;
+  AutoDerivative<double> line = (T  - min_t) / tspace + F.line;
   return ImageCoordinateWithDerivative(line, F.sample);
 }
 
@@ -88,8 +88,10 @@ ConstantSpacingTimeTable::image_coordinate_with_derivative
 void ConstantSpacingTimeTable::time(const ImageCoordinate& Ic, Time& T, 
 				    FrameCoordinate& F) const
 {
-  range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
-  T = min_time() + Ic.line * tspace;
+  // We add a border of 1 line to handle edge cases.
+  range_check_inclusive(Ic.line, (double) min_line() - 1.0,
+			(double) max_line() + 1.0);
+  T = min_t + Ic.line * tspace;
   F = FrameCoordinate(0, Ic.sample);
 }
 
@@ -103,8 +105,9 @@ void ConstantSpacingTimeTable::time_with_derivative
 (const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
  FrameCoordinateWithDerivative& F) const
 {
-  range_check(Ic.line.value(), (double) min_line(), (double) max_line() + 1.0);
-  T = TimeWithDerivative(min_time()) + Ic.line * tspace;
+  range_check_inclusive(Ic.line.value(), (double) min_line() - 1.0,
+			(double) max_line() + 1.0);
+  T = TimeWithDerivative(min_t) + Ic.line * tspace;
   F = FrameCoordinateWithDerivative(0, Ic.sample);
 }
 
@@ -127,6 +130,9 @@ void ConstantSpacingTimeTable::print(std::ostream& Os) const
 /// Constructor.
 /// This gives the time for every line. This list should be strictly
 /// ordered. The first time is for the given Min_line (default of 0).
+///
+/// We often have trouble with edge cases (so time 1 ms before start
+/// of table). We pad the table with a single line extrapolation.
 //-----------------------------------------------------------------------
 
 MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
@@ -138,6 +144,12 @@ MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
     if(tlist[i + 1] <= tlist[i])
       throw Exception("Time_list needs to be strictly ordered");
   }
+  // Add padding to table.
+  Time tlist_pad = tlist[0] - (tlist[1] - tlist[0]);
+  tlist.insert(tlist.begin(), tlist_pad);
+  auto i = tlist.size() - 1;
+  Time tlist_pad2 = tlist[i] + (tlist[i] - tlist[i-1]);
+  tlist.push_back(tlist_pad2);
 }
 
 //-----------------------------------------------------------------------
@@ -152,10 +164,10 @@ const FrameCoordinate& F) const
 		- tlist.begin());
   double line;
   if(i == 0)
-    line = min_line_;
+    line = min_line_ - 1;
   else {
     line = (T - tlist[i - 1]) / (tlist[i] - tlist[i - 1]) + (i - 1) + 
-      min_line_;
+      min_line_ - 1;
   }
   return ImageCoordinate(line, F.sample);
 }
@@ -175,10 +187,10 @@ const FrameCoordinateWithDerivative& F) const
 		- tlist.begin());
   AutoDerivative<double> line;
   if(i == 0)
-    line = min_line_;
+    line = min_line_ - 1;
   else {
     line = (T - tlist[i - 1]) / (tlist[i] - tlist[i - 1]) + (i - 1) + 
-      min_line_;
+      min_line_ - 1;
   }
   return ImageCoordinateWithDerivative(line, F.sample);
 }
@@ -190,16 +202,10 @@ const FrameCoordinateWithDerivative& F) const
 void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T, 
 			     FrameCoordinate& F) const
 {
-  range_check(Ic.line, (double) min_line(), (double) max_line() + 1.0);
+  range_check_inclusive(Ic.line, (double) min_line() - 1.0,
+			(double) max_line() + 1.0);
   int i = (int) floor(Ic.line);
-  int j = i - min_line_;
-  // Allow extrapolation by 1 line.
-  while(j + 1 >= (int) tlist.size()) {
-    j = j - 1;
-    i = i - 1;
-  }
-  if(j < 0)
-    throw Exception("MeasuredTimeTable must have at least 2 lines");
+  int j = i - (min_line_ - 1);
   T = tlist[j] + (tlist[j + 1] - tlist[j]) * (Ic.line - i);
   F = FrameCoordinate(0, Ic.sample);
 }
@@ -213,16 +219,10 @@ void MeasuredTimeTable::time_with_derivative
 (const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
  FrameCoordinateWithDerivative& F) const
 {
-  range_check(Ic.line.value(), (double) min_line(), (double) max_line() + 1.0);
+  range_check_inclusive(Ic.line.value(), (double) min_line() - 1.0,
+			(double) max_line() + 1.0);
   int i = (int) floor(Ic.line.value());
-  int j = i - min_line_;
-  // Allow extrapolation by 1 line.
-  while(j + 1 >= (int) tlist.size()) {
-    j = j - 1;
-    i = i - 1;
-  }
-  if(j < 0)
-    throw Exception("MeasuredTimeTable must have at least 2 lines");
+  int j = i - (min_line_ - 1);
   T = TimeWithDerivative(tlist[j]) + (tlist[j + 1] - tlist[j]) * (Ic.line - i);
   F = FrameCoordinateWithDerivative(0, Ic.sample);
 }

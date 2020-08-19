@@ -1,6 +1,7 @@
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          ConstantSpacingTimeTable, SimpleCamera, Ecr,
                          QuaternionCamera, FrameCoordinate,
+                         ImageCoordinate,
                          SimpleDem, IpiImageGroundConnection, Ipi,
                          Quaternion_double, OrbitDataImageGroundConnection)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
@@ -57,8 +58,10 @@ if(have_pynitf):
                 orb = igc.ipi.orbit
                 cam = igc.ipi.camera
                 ttable = igc.ipi.time_table
-                t.day_first_line_image, t.time_first_line_image = geocal_time_to_nitf_date_second_field(ttable.min_time)
-                t.time_image_duration = ttable.max_time - ttable.min_time
+                min_time = ttable.time(ImageCoordinate(0,0))[0]
+                max_time = ttable.time(ImageCoordinate(ttable.max_line, 0))[0]
+                t.day_first_line_image, t.time_first_line_image = geocal_time_to_nitf_date_second_field(min_time)
+                t.time_image_duration = max_time - min_time
             elif(isinstance(igc, OrbitDataImageGroundConnection)):
                  t.sensor_type = "F"
                  orb = igc.orbit

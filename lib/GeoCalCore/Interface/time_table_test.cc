@@ -11,8 +11,8 @@ BOOST_AUTO_TEST_CASE(constant_spacing_time_table)
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
   Time t2 = t + 100.4 * 40.8e-3;
   ConstantSpacingTimeTable tt(t, t2);
-  BOOST_CHECK(fabs(tt.min_time() - t) < 1e-4);
-  BOOST_CHECK(fabs(tt.max_time() - ( t + 100 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(tt.min_time() - (t - 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(tt.max_time() - ( t + 101 * 40.8e-3)) < 1e-4);
   BOOST_CHECK_EQUAL(tt.min_line(), 0);
   BOOST_CHECK_EQUAL(tt.max_line(), 100);
   Time t_expect = t + 40.5 * 40.8e-3;
@@ -37,8 +37,8 @@ BOOST_AUTO_TEST_CASE(measured_time_table)
   for(int i = 10; i <= 100; ++i)
     tlist.push_back(t + 40.8e-3 * i);
   MeasuredTimeTable tt(tlist, 10);
-  BOOST_CHECK(fabs(tt.min_time() - (t + 10 * 40.8e-3)) < 1e-4);
-  BOOST_CHECK(fabs(tt.max_time() - ( t + 100 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(tt.min_time() - (t + 9 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(tt.max_time() - ( t + 101 * 40.8e-3)) < 1e-4);
   BOOST_CHECK_EQUAL(tt.min_line(), 10);
   BOOST_CHECK_EQUAL(tt.max_line(), 100);
   Time t_expect = t + 40.5 * 40.8e-3;
@@ -68,8 +68,8 @@ BOOST_AUTO_TEST_CASE(serialization_constant_time_table)
   boost::shared_ptr<ConstantSpacingTimeTable> ttr = 
     serialize_read_string<ConstantSpacingTimeTable>(d);
 
-  BOOST_CHECK(fabs(ttr->min_time() - t) < 1e-4);
-  BOOST_CHECK(fabs(ttr->max_time() - ( t + 100 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(ttr->min_time() - (t - 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(ttr->max_time() - ( t + 101 * 40.8e-3)) < 1e-4);
   BOOST_CHECK_EQUAL(ttr->min_line(), 0);
   BOOST_CHECK_EQUAL(ttr->max_line(), 100);
 
@@ -90,8 +90,8 @@ BOOST_AUTO_TEST_CASE(serialization_measured_time_table)
     std::cerr << d;
   boost::shared_ptr<MeasuredTimeTable> ttr = 
     serialize_read_string<MeasuredTimeTable>(d);
-  BOOST_CHECK(fabs(ttr->min_time() - (t + 10 * 40.8e-3)) < 1e-4);
-  BOOST_CHECK(fabs(ttr->max_time() - ( t + 100 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(ttr->min_time() - (t + 9 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(ttr->max_time() - ( t + 101 * 40.8e-3)) < 1e-4);
   BOOST_CHECK_EQUAL(ttr->min_line(), 10);
   BOOST_CHECK_EQUAL(ttr->max_line(), 100);
 }

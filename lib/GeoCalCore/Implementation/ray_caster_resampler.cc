@@ -39,12 +39,29 @@ void RayCasterResampler::ray_cast_step()
 {
   while(!ray_caster_->last_position()) {
     blitz::Array<double, 6> t = ray_caster_->next_position();
+    boost::array<double, 3> pv;
     for(int i = 0; i < t.shape()[0]; ++i)
       for(int j = 0; j < t.shape()[1]; ++j)
 	for(int k1 = 0; k1 < t.shape()[2]; ++k1)
 	  for(int k2 = 0; k2 < t.shape()[3]; ++k2)
-	    for(int k3 = 0; k3 < t.shape()[4]; ++k3)
-	      ;
+	    for(int k3 = 0; k3 < t.shape()[4]; ++k3) {
+	      pv[0] = t(i,j,k1,k2,k3,0);
+	      pv[1] = t(i,j,k1,k2,k3,1);
+	      pv[2] = t(i,j,k1,k2,k3,2);
+	      boost::shared_ptr<CartesianFixed> p =
+		ray_caster_->cartesian_fixed()->create(pv);
+	      ImageCoordinate ic = res_->coordinate(*p);
+	      int ln = round(ic.line);
+	      int smp = round(ic.sample);
+	      if(ln >= 0 && ln < res_->number_line() &&
+		 smp >= 0 && smp < res_->number_sample()) {
+		int v1 = (*res_)(ln,smp) +
+		  (*img_)(i + ray_caster_->current_position(), j);
+		int v2 = (*count_scratch_)(ln,smp) + 1;
+		res_->write(ln,smp,v1);
+		count_scratch_->write(ln,smp,v2);
+	      }
+	    }
   }
 }
 
